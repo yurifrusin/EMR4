@@ -1,0 +1,1339 @@
+{
+  "schema_version": "lc4.holdout.corpus.v1",
+  "holdout_version": "lc4-holdout-v1",
+  "group_id": "lc4_sol_holdout_group_021",
+  "group_hash": "sha256:187094336b7677ac7ccecadc3a5eec1dbe58f2a7d20d0f1f0eba35fbb4ff5d7a",
+  "provenance": "gold",
+  "adjudication": "adjudicated",
+  "author_identity": "protected-gpt-sol",
+  "generator_identity": null,
+  "reference_date": "2026-07-14",
+  "clinic_clock": "2026-07-14T09:00:00+10:00",
+  "spec": {
+    "group_index": 21,
+    "intended_action": "explain_schedule",
+    "temporal_relation": "approximate",
+    "diary_state": "break",
+    "entity_state": "corrected",
+    "patient_semantics": "omitted",
+    "practitioner_semantics": "exact",
+    "location_semantics": "omitted",
+    "appointment_type_semantics": "omitted",
+    "duration_semantics": "exact",
+    "dialogue_form": "ellipsis",
+    "language_form": "typo",
+    "gap_targets": [
+      "interpretation_replay_tool_selection",
+      "entity_ambiguity_omission_correction"
+    ],
+    "patient_name": "Mei Lin",
+    "practitioner_name": "Dr Kovacs"
+  },
+  "variant_hashes": {
+    "surface": [
+      "sha256:1f20c33011bc6c63243e70fe41873c580137c138829133f69be9cda30c5a53a7",
+      "sha256:dd09323cc19d3576fa945ed9b96248e85f1b55690a2156f7ac3a39b6e0909aba",
+      "sha256:d411f7f8acbe3be36adc2539530caf322a329c43e73ae6d0111e5676d65fa3f5",
+      "sha256:1cdbee2652bc32ff2bb13eebd614512c4679712285e68f0dfd188d541287bee1",
+      "sha256:672cabfbfce9b2832a790193d15e699f404b1b5914f2c6f70f17c02e277e2ca9",
+      "sha256:014c7c303fceb54d7449e7cb53050c02cdac089f71a1e11fc43783536ea3f5ce",
+      "sha256:72dcec31b54e1675abd279f1ddb929931a1a1bc9ef3632740d696f292b3499bb",
+      "sha256:3e53adaddc0777f68011af735bab459dbb73b147127e2a3506ce1725b6bd483f",
+      "sha256:0574800392e978cf087339f9d6468aca0460b1a7a98959f10fc3a24327e85a06"
+    ],
+    "multi_turn": [
+      "sha256:8a460ce02f67d1899fe17517464024687995ce1c635e41a5c7c9ab2449352df4",
+      "sha256:4a0ee25b03a7b8dfdd53cfaa2b595b62486b8a8d963b29559dbef800766d1e74",
+      "sha256:ec404e23ac90a8066e2665186ef6d23e2bc1aa124e22284db393da65253d6dc9"
+    ]
+  },
+  "surface_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_021_01",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_021",
+      "description": "authored holdout surface 021/01",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please summarise Dr Kovacs's diary Wednesday around 2pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 35,
+            "end": 44,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 52,
+            "end": 55,
+            "text": "2pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 52,
+            "end": 55,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 52,
+            "end": 55,
+            "text": "2pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 17,
+            "end": 26,
+            "text": "Dr Kovacs"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "corrected",
+      "dialogue_form": "one_shot",
+      "language_form": "abbreviation",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:1f20c33011bc6c63243e70fe41873c580137c138829133f69be9cda30c5a53a7"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_021_02",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_021",
+      "description": "authored holdout surface 021/02",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Could you summarise Dr Kovacs's diary Wednesday around 2pm, please?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 38,
+            "end": 47,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 55,
+            "end": 58,
+            "text": "2pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 55,
+            "end": 58,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 55,
+            "end": 58,
+            "text": "2pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 20,
+            "end": 29,
+            "text": "Dr Kovacs"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "corrected",
+      "dialogue_form": "one_shot",
+      "language_form": "typo",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:dd09323cc19d3576fa945ed9b96248e85f1b55690a2156f7ac3a39b6e0909aba"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_021_03",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_021",
+      "description": "authored holdout surface 021/03",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Reception note \u2014 summarise Dr Kovacs's diary Wednesday around 2pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 45,
+            "end": 54,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 62,
+            "end": 65,
+            "text": "2pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 62,
+            "end": 65,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 62,
+            "end": 65,
+            "text": "2pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 27,
+            "end": 36,
+            "text": "Dr Kovacs"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "corrected",
+      "dialogue_form": "one_shot",
+      "language_form": "speech_like",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:d411f7f8acbe3be36adc2539530caf322a329c43e73ae6d0111e5676d65fa3f5"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_021_04",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_021",
+      "description": "authored holdout surface 021/04",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "When you have a moment, summarise Dr Kovacs's diary Wednesday around 2pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 52,
+            "end": 61,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 69,
+            "end": 72,
+            "text": "2pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 69,
+            "end": 72,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 69,
+            "end": 72,
+            "text": "2pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 34,
+            "end": 43,
+            "text": "Dr Kovacs"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "corrected",
+      "dialogue_form": "one_shot",
+      "language_form": "punctuation_variant",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:1cdbee2652bc32ff2bb13eebd614512c4679712285e68f0dfd188d541287bee1"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_021_05",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_021",
+      "description": "authored holdout surface 021/05",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Quick diary job: summarise Dr Kovacs's diary Wednesday around 2pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 45,
+            "end": 54,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 62,
+            "end": 65,
+            "text": "2pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 62,
+            "end": 65,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 62,
+            "end": 65,
+            "text": "2pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 27,
+            "end": 36,
+            "text": "Dr Kovacs"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "corrected",
+      "dialogue_form": "one_shot",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:672cabfbfce9b2832a790193d15e699f404b1b5914f2c6f70f17c02e277e2ca9"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_021_06",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_021",
+      "description": "authored holdout surface 021/06",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Um, i need the diary updated to summarise Dr Kovacs's diary Wednesday around 2pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 60,
+            "end": 69,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 77,
+            "end": 80,
+            "text": "2pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 77,
+            "end": 80,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 77,
+            "end": 80,
+            "text": "2pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 42,
+            "end": 51,
+            "text": "Dr Kovacs"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "corrected",
+      "dialogue_form": "one_shot",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:014c7c303fceb54d7449e7cb53050c02cdac089f71a1e11fc43783536ea3f5ce"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_021_07",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_021",
+      "description": "authored holdout surface 021/07",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "For the front desk list, summarise Dr Kovacs's diary Wednesday around 2pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 53,
+            "end": 62,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 70,
+            "end": 73,
+            "text": "2pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 70,
+            "end": 73,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 70,
+            "end": 73,
+            "text": "2pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 35,
+            "end": 44,
+            "text": "Dr Kovacs"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "corrected",
+      "dialogue_form": "one_shot",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:72dcec31b54e1675abd279f1ddb929931a1a1bc9ef3632740d696f292b3499bb"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_021_08",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_021",
+      "description": "authored holdout surface 021/08",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Can we summarise Dr Kovacs's diary Wednesday around 2pm?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 35,
+            "end": 44,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 52,
+            "end": 55,
+            "text": "2pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 52,
+            "end": 55,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 52,
+            "end": 55,
+            "text": "2pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 17,
+            "end": 26,
+            "text": "Dr Kovacs"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "corrected",
+      "dialogue_form": "one_shot",
+      "language_form": "filler",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:3e53adaddc0777f68011af735bab459dbb73b147127e2a3506ce1725b6bd483f"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_021_09",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_021",
+      "description": "authored holdout surface 021/09",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Instruction: summarise Dr Kovacs's diary Wednesday around 2pm. Do not bypass staff confirmation."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 41,
+            "end": 50,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 58,
+            "end": 61,
+            "text": "2pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 58,
+            "end": 61,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 58,
+            "end": 61,
+            "text": "2pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 23,
+            "end": 32,
+            "text": "Dr Kovacs"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "corrected",
+      "dialogue_form": "one_shot",
+      "language_form": "abbreviation",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:0574800392e978cf087339f9d6468aca0460b1a7a98959f10fc3a24327e85a06"
+    }
+  ],
+  "multi_turn_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_021_01",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_021",
+      "description": "authored holdout trajectory 021/01",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "I need help with Dr Kovacs's diary."
+        },
+        {
+          "turn": 2,
+          "utterance": "Specifically, please summarise Dr Kovacs's diary Wednesday around 2pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 17,
+            "end": 26,
+            "text": "Dr Kovacs"
+          },
+          {
+            "turn_index": 1,
+            "start": 31,
+            "end": 40,
+            "text": "Dr Kovacs"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 49,
+            "end": 58,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 1,
+            "start": 66,
+            "end": 69,
+            "text": "2pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 66,
+            "end": 69,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 1,
+            "start": 66,
+            "end": 69,
+            "text": "2pm"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "corrected",
+      "dialogue_form": "clarification",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": "Please clarify the final diary instruction.",
+      "clarification_choices": [
+        "confirm the date",
+        "confirm the time",
+        "confirm the person"
+      ],
+      "variant_hash": "sha256:8a460ce02f67d1899fe17517464024687995ce1c635e41a5c7c9ab2449352df4"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_021_02",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_021",
+      "description": "authored holdout trajectory 021/02",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please handle Dr Kovacs's diary Tuesday at 9am."
+        },
+        {
+          "turn": 2,
+          "utterance": "Correction: summarise Dr Kovacs's diary Wednesday around 2pm, not the earlier detail."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 32,
+            "end": 39,
+            "text": "Tuesday"
+          },
+          {
+            "turn_index": 1,
+            "start": 40,
+            "end": 49,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 43,
+            "end": 46,
+            "text": "9am"
+          },
+          {
+            "turn_index": 1,
+            "start": 57,
+            "end": 60,
+            "text": "2pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 14,
+            "end": 23,
+            "text": "Dr Kovacs"
+          },
+          {
+            "turn_index": 1,
+            "start": 22,
+            "end": 31,
+            "text": "Dr Kovacs"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 57,
+            "end": 60,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 1,
+            "start": 57,
+            "end": 60,
+            "text": "2pm"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "corrected",
+      "dialogue_form": "correction",
+      "language_form": "abbreviation",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:4a0ee25b03a7b8dfdd53cfaa2b595b62486b8a8d963b29559dbef800766d1e74"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_021_03",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_021",
+      "description": "authored holdout trajectory 021/03",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "For Dr Kovacs's diary, I have a diary request."
+        },
+        {
+          "turn": 2,
+          "utterance": "That one: summarise Dr Kovacs's diary Wednesday around 2pm."
+        },
+        {
+          "turn": 3,
+          "utterance": "Keep it as a proposal for staff review; do not claim it is completed."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 4,
+            "end": 13,
+            "text": "Dr Kovacs"
+          },
+          {
+            "turn_index": 1,
+            "start": 20,
+            "end": 29,
+            "text": "Dr Kovacs"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 38,
+            "end": 47,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 1,
+            "start": 55,
+            "end": 58,
+            "text": "2pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 55,
+            "end": 58,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 1,
+            "start": 55,
+            "end": 58,
+            "text": "2pm"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "corrected",
+      "dialogue_form": "anaphora",
+      "language_form": "punctuation_variant",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:ec404e23ac90a8066e2665186ef6d23e2bc1aa124e22284db393da65253d6dc9"
+    }
+  ]
+}

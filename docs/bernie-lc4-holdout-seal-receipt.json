@@ -1,0 +1,13 @@
+{
+  "schema_version": "lc4.holdout.seal.v1",
+  "holdout_version": "lc4-holdout-v1",
+  "manifest_hash": "sha256:cd4a806e47f2a1ce802dcb88aa7eddefeae0f69f2a1bc6963d81245dd8e71f01",
+  "purpose": "sealed_baseline_evaluation",
+  "evaluator_identity": "protected-gpt-sol",
+  "evaluation_id": "lc4-holdout-v1-baseline-001",
+  "is_sealed": true,
+  "consumed": true,
+  "created_on": "2026-07-14",
+  "consumed_on": "2026-07-14",
+  "report_hash": "sha256:17f7c3f8c894b06e47069a94236c8180e76d3eb667aaea0c95174de27e98d083"
+}

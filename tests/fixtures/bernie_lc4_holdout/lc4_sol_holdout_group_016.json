@@ -1,0 +1,1793 @@
+{
+  "schema_version": "lc4.holdout.corpus.v1",
+  "holdout_version": "lc4-holdout-v1",
+  "group_id": "lc4_sol_holdout_group_016",
+  "group_hash": "sha256:e476e291178a0efdb97a89d1d4ad17f8d03efe1bb57e68aba843b7aca2782ab6",
+  "provenance": "gold",
+  "adjudication": "adjudicated",
+  "author_identity": "protected-gpt-sol",
+  "generator_identity": null,
+  "reference_date": "2026-07-14",
+  "clinic_clock": "2026-07-14T09:00:00+10:00",
+  "spec": {
+    "group_index": 16,
+    "intended_action": "cancel",
+    "temporal_relation": "interval",
+    "diary_state": "concurrent",
+    "entity_state": "negated",
+    "patient_semantics": "exact",
+    "practitioner_semantics": "negated",
+    "location_semantics": "omitted",
+    "appointment_type_semantics": "omitted",
+    "duration_semantics": "exact",
+    "dialogue_form": "anaphora",
+    "language_form": "abbreviation",
+    "gap_targets": [
+      "interpretation_replay_tool_selection",
+      "interval_unspecified_temporal"
+    ],
+    "patient_name": "Noah Williams",
+    "practitioner_name": "Dr Iqbal"
+  },
+  "variant_hashes": {
+    "surface": [
+      "sha256:ea65223b9245c197aefbc7dd71f0ea807c4711333f0f0814b8e1c846a448ad49",
+      "sha256:30f870de47686dd92cf71ac329d7a13dcf9c1f8dede1ae812105ec49392fa713",
+      "sha256:0575c3a514ec4c2584be1f71af4042577097a09e0a4dcf513941724fcee3cea2",
+      "sha256:73458d255f32121595abd9247d68a8a2006ebe07e48d86f631530f4e906ac2dc",
+      "sha256:d4c50b86ed6c5bd0f491523b35e2f9c4c984a7b6396621418d3e146ac5a90513",
+      "sha256:65ca38914df52680a7346dc1dc4180f23fc3489d0cdec1f248cb3d85f83d1f07",
+      "sha256:d0a38da6dab8a672465dc94ae2884fcc78586f56ffbe573659b79eadfd376aff",
+      "sha256:f84b0c7248d4d575efae08cb562a3a1d7a0f51725d4a8ab641eb5ec8792dde32",
+      "sha256:60424aa438b4f6e1f166cef3c1b86e838fb34b14d067b503df414c65a0f4c5af"
+    ],
+    "multi_turn": [
+      "sha256:7d382df1e1127daab2b4038a6a3bce5c7d61ffa3c53f375ec68d99fc66cf5d02",
+      "sha256:c703ca4cb83f58416cc7cf54335aa99bd2423097759d9ea8e42b4a456072b4a6",
+      "sha256:393d2fde97dc86cd1985c3227680ffb34ad0a061b915c4aceb3c61bfc0775499"
+    ]
+  },
+  "surface_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_016_01",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_016",
+      "description": "authored holdout surface 016/01",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please remove Noah Williams's 15 minutes booking with not Dr Iqbal Wednesday between 10am and 1pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 67,
+            "end": 76,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 85,
+            "end": 89,
+            "text": "10am"
+          },
+          {
+            "turn_index": 0,
+            "start": 94,
+            "end": 97,
+            "text": "1pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 85,
+            "end": 89,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 94,
+            "end": 97,
+            "text": "1pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 14,
+            "end": 27,
+            "text": "Noah Williams"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 58,
+            "end": 66,
+            "text": "Dr Iqbal"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 30,
+            "end": 40,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "concurrent",
+      "entity_state": "negated",
+      "dialogue_form": "one_shot",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "10:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:ea65223b9245c197aefbc7dd71f0ea807c4711333f0f0814b8e1c846a448ad49"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_016_02",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_016",
+      "description": "authored holdout surface 016/02",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Could you remove Noah Williams's 15 minutes booking with not Dr Iqbal Wednesday between 10am and 1pm, please?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 70,
+            "end": 79,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 88,
+            "end": 92,
+            "text": "10am"
+          },
+          {
+            "turn_index": 0,
+            "start": 97,
+            "end": 100,
+            "text": "1pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 88,
+            "end": 92,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 97,
+            "end": 100,
+            "text": "1pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 17,
+            "end": 30,
+            "text": "Noah Williams"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 61,
+            "end": 69,
+            "text": "Dr Iqbal"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 33,
+            "end": 43,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "concurrent",
+      "entity_state": "negated",
+      "dialogue_form": "one_shot",
+      "language_form": "filler",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "10:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:30f870de47686dd92cf71ac329d7a13dcf9c1f8dede1ae812105ec49392fa713"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_016_03",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_016",
+      "description": "authored holdout surface 016/03",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Reception note \u2014 remove Noah Williams's 15 minutes booking with not Dr Iqbal Wednesday between 10am and 1pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 77,
+            "end": 86,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 95,
+            "end": 99,
+            "text": "10am"
+          },
+          {
+            "turn_index": 0,
+            "start": 104,
+            "end": 107,
+            "text": "1pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 95,
+            "end": 99,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 104,
+            "end": 107,
+            "text": "1pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 24,
+            "end": 37,
+            "text": "Noah Williams"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 68,
+            "end": 76,
+            "text": "Dr Iqbal"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 40,
+            "end": 50,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "concurrent",
+      "entity_state": "negated",
+      "dialogue_form": "one_shot",
+      "language_form": "abbreviation",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "10:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:0575c3a514ec4c2584be1f71af4042577097a09e0a4dcf513941724fcee3cea2"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_016_04",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_016",
+      "description": "authored holdout surface 016/04",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "When you have a moment, remove Noah Williams's 15 minutes booking with not Dr Iqbal Wednesday between 10am and 1pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 84,
+            "end": 93,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 102,
+            "end": 106,
+            "text": "10am"
+          },
+          {
+            "turn_index": 0,
+            "start": 111,
+            "end": 114,
+            "text": "1pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 102,
+            "end": 106,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 111,
+            "end": 114,
+            "text": "1pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 31,
+            "end": 44,
+            "text": "Noah Williams"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 75,
+            "end": 83,
+            "text": "Dr Iqbal"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 47,
+            "end": 57,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "concurrent",
+      "entity_state": "negated",
+      "dialogue_form": "one_shot",
+      "language_form": "typo",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "10:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:73458d255f32121595abd9247d68a8a2006ebe07e48d86f631530f4e906ac2dc"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_016_05",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_016",
+      "description": "authored holdout surface 016/05",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Quick diary job: remove Noah Williams's 15 mins booking with not Dr Iqbal Wednesday between 10am and 1pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 74,
+            "end": 83,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 92,
+            "end": 96,
+            "text": "10am"
+          },
+          {
+            "turn_index": 0,
+            "start": 101,
+            "end": 104,
+            "text": "1pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 92,
+            "end": 96,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 101,
+            "end": 104,
+            "text": "1pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 24,
+            "end": 37,
+            "text": "Noah Williams"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 73,
+            "text": "Dr Iqbal"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "concurrent",
+      "entity_state": "negated",
+      "dialogue_form": "one_shot",
+      "language_form": "speech_like",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "10:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:d4c50b86ed6c5bd0f491523b35e2f9c4c984a7b6396621418d3e146ac5a90513"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_016_06",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_016",
+      "description": "authored holdout surface 016/06",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Um, i need the diary updated to remove Noah Williams's 15 minutes booking with not Dr Iqbal Wednesday between 10am and 1pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 92,
+            "end": 101,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 110,
+            "end": 114,
+            "text": "10am"
+          },
+          {
+            "turn_index": 0,
+            "start": 119,
+            "end": 122,
+            "text": "1pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 110,
+            "end": 114,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 119,
+            "end": 122,
+            "text": "1pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 39,
+            "end": 52,
+            "text": "Noah Williams"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 83,
+            "end": 91,
+            "text": "Dr Iqbal"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 55,
+            "end": 65,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "concurrent",
+      "entity_state": "negated",
+      "dialogue_form": "one_shot",
+      "language_form": "punctuation_variant",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "10:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:65ca38914df52680a7346dc1dc4180f23fc3489d0cdec1f248cb3d85f83d1f07"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_016_07",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_016",
+      "description": "authored holdout surface 016/07",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "For the front desk list, remove Noah Williams's 15 minutes booking with not Dr Iqbal Wednesday between 10am and 1pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 85,
+            "end": 94,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 103,
+            "end": 107,
+            "text": "10am"
+          },
+          {
+            "turn_index": 0,
+            "start": 112,
+            "end": 115,
+            "text": "1pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 103,
+            "end": 107,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 112,
+            "end": 115,
+            "text": "1pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 32,
+            "end": 45,
+            "text": "Noah Williams"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 76,
+            "end": 84,
+            "text": "Dr Iqbal"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 48,
+            "end": 58,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "concurrent",
+      "entity_state": "negated",
+      "dialogue_form": "one_shot",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "10:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:d0a38da6dab8a672465dc94ae2884fcc78586f56ffbe573659b79eadfd376aff"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_016_08",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_016",
+      "description": "authored holdout surface 016/08",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Can we remove Noah Williams's 15 minutes booking with not Dr Iqbal Wednesday between 10am and 1pm?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 67,
+            "end": 76,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 85,
+            "end": 89,
+            "text": "10am"
+          },
+          {
+            "turn_index": 0,
+            "start": 94,
+            "end": 97,
+            "text": "1pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 85,
+            "end": 89,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 94,
+            "end": 97,
+            "text": "1pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 14,
+            "end": 27,
+            "text": "Noah Williams"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 58,
+            "end": 66,
+            "text": "Dr Iqbal"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 30,
+            "end": 40,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "concurrent",
+      "entity_state": "negated",
+      "dialogue_form": "one_shot",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "10:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:f84b0c7248d4d575efae08cb562a3a1d7a0f51725d4a8ab641eb5ec8792dde32"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_016_09",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_016",
+      "description": "authored holdout surface 016/09",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Instruction: remove Noah Williams's 15 minutes booking with not Dr Iqbal Wednesday between 10am and 1pm. Do not bypass staff confirmation."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 73,
+            "end": 82,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 91,
+            "end": 95,
+            "text": "10am"
+          },
+          {
+            "turn_index": 0,
+            "start": 100,
+            "end": 103,
+            "text": "1pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 91,
+            "end": 95,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 100,
+            "end": 103,
+            "text": "1pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 20,
+            "end": 33,
+            "text": "Noah Williams"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 64,
+            "end": 72,
+            "text": "Dr Iqbal"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 36,
+            "end": 46,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "concurrent",
+      "entity_state": "negated",
+      "dialogue_form": "one_shot",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "10:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:60424aa438b4f6e1f166cef3c1b86e838fb34b14d067b503df414c65a0f4c5af"
+    }
+  ],
+  "multi_turn_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_016_01",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_016",
+      "description": "authored holdout trajectory 016/01",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "I need help with Noah Williams's booking with not Dr Iqbal."
+        },
+        {
+          "turn": 2,
+          "utterance": "Specifically, please remove Noah Williams's 15 minutes booking with not Dr Iqbal Wednesday between 10am and 1pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 17,
+            "end": 30,
+            "text": "Noah Williams"
+          },
+          {
+            "turn_index": 1,
+            "start": 28,
+            "end": 41,
+            "text": "Noah Williams"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 50,
+            "end": 58,
+            "text": "Dr Iqbal"
+          },
+          {
+            "turn_index": 1,
+            "start": 72,
+            "end": 80,
+            "text": "Dr Iqbal"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 81,
+            "end": 90,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 1,
+            "start": 99,
+            "end": 103,
+            "text": "10am"
+          },
+          {
+            "turn_index": 1,
+            "start": 108,
+            "end": 111,
+            "text": "1pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 99,
+            "end": 103,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 1,
+            "start": 108,
+            "end": 111,
+            "text": "1pm"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 44,
+            "end": 54,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "concurrent",
+      "entity_state": "negated",
+      "dialogue_form": "clarification",
+      "language_form": "abbreviation",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "10:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": "Please clarify the final diary instruction.",
+      "clarification_choices": [
+        "confirm the date",
+        "confirm the time",
+        "confirm the person"
+      ],
+      "variant_hash": "sha256:7d382df1e1127daab2b4038a6a3bce5c7d61ffa3c53f375ec68d99fc66cf5d02"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_016_02",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_016",
+      "description": "authored holdout trajectory 016/02",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please handle Noah Williams's booking with not Dr Iqbal Tuesday at 9am."
+        },
+        {
+          "turn": 2,
+          "utterance": "Correction: remove Noah Williams's 15 minutes booking with not Dr Iqbal Wednesday between 10am and 1pm, not the earlier detail."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 56,
+            "end": 63,
+            "text": "Tuesday"
+          },
+          {
+            "turn_index": 1,
+            "start": 72,
+            "end": 81,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 67,
+            "end": 70,
+            "text": "9am"
+          },
+          {
+            "turn_index": 1,
+            "start": 90,
+            "end": 94,
+            "text": "10am"
+          },
+          {
+            "turn_index": 1,
+            "start": 99,
+            "end": 102,
+            "text": "1pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 14,
+            "end": 27,
+            "text": "Noah Williams"
+          },
+          {
+            "turn_index": 1,
+            "start": 19,
+            "end": 32,
+            "text": "Noah Williams"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 47,
+            "end": 55,
+            "text": "Dr Iqbal"
+          },
+          {
+            "turn_index": 1,
+            "start": 63,
+            "end": 71,
+            "text": "Dr Iqbal"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 90,
+            "end": 94,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 1,
+            "start": 99,
+            "end": 102,
+            "text": "1pm"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 35,
+            "end": 45,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "concurrent",
+      "entity_state": "negated",
+      "dialogue_form": "correction",
+      "language_form": "punctuation_variant",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "10:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:c703ca4cb83f58416cc7cf54335aa99bd2423097759d9ea8e42b4a456072b4a6"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_016_03",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_016",
+      "description": "authored holdout trajectory 016/03",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "For Noah Williams's booking with not Dr Iqbal, I have a diary request."
+        },
+        {
+          "turn": 2,
+          "utterance": "That one: remove Noah Williams's 15 minutes booking with not Dr Iqbal Wednesday between 10am and 1pm."
+        },
+        {
+          "turn": 3,
+          "utterance": "Keep it as a proposal for staff review; do not claim it is completed."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 4,
+            "end": 17,
+            "text": "Noah Williams"
+          },
+          {
+            "turn_index": 1,
+            "start": 17,
+            "end": 30,
+            "text": "Noah Williams"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 37,
+            "end": 45,
+            "text": "Dr Iqbal"
+          },
+          {
+            "turn_index": 1,
+            "start": 61,
+            "end": 69,
+            "text": "Dr Iqbal"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 70,
+            "end": 79,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 1,
+            "start": 88,
+            "end": 92,
+            "text": "10am"
+          },
+          {
+            "turn_index": 1,
+            "start": 97,
+            "end": 100,
+            "text": "1pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 88,
+            "end": 92,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 1,
+            "start": 97,
+            "end": 100,
+            "text": "1pm"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 33,
+            "end": 43,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "concurrent",
+      "entity_state": "negated",
+      "dialogue_form": "anaphora",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "10:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:393d2fde97dc86cd1985c3227680ffb34ad0a061b915c4aceb3c61bfc0775499"
+    }
+  ]
+}

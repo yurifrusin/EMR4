@@ -633,16 +633,12 @@ class TestFailClosed:
         with pytest.raises(FileNotFoundError):
             loader.load_group(missing_path)
 
-    def test_development_loader_rejects_holdout(self) -> None:
+    def test_development_loader_rejects_holdout(self, tmp_path: pathlib.Path) -> None:
         """Development loader refuses to access holdout paths."""
-        fake_holdout_dir = _FIXTURE_DIR.parent / "bernie_lc4_holdout"
-        fake_holdout_dir.mkdir(exist_ok=True)
-        try:
-            with pytest.raises(ValueError, match="holdout"):
-                DevelopmentOnlyLoader(fake_holdout_dir)
-        finally:
-            if fake_holdout_dir.exists():
-                fake_holdout_dir.rmdir()
+        fake_holdout_dir = tmp_path / "bernie_lc4_holdout"
+        fake_holdout_dir.mkdir()
+        with pytest.raises(ValueError, match="holdout"):
+            DevelopmentOnlyLoader(fake_holdout_dir)
 
 
 # ===================================================================

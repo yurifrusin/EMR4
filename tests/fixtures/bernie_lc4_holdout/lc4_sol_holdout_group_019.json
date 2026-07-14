@@ -1,0 +1,1720 @@
+{
+  "schema_version": "lc4.holdout.corpus.v1",
+  "holdout_version": "lc4-holdout-v1",
+  "group_id": "lc4_sol_holdout_group_019",
+  "group_hash": "sha256:074e56a1163c3282305d98a664abced31f559b70b7d74b1a97cc417852283318",
+  "provenance": "gold",
+  "adjudication": "adjudicated",
+  "author_identity": "protected-gpt-sol",
+  "generator_identity": null,
+  "reference_date": "2026-07-14",
+  "clinic_clock": "2026-07-14T09:00:00+10:00",
+  "spec": {
+    "group_index": 19,
+    "intended_action": "status_change",
+    "temporal_relation": "exact",
+    "diary_state": "stale",
+    "entity_state": "exact",
+    "patient_semantics": "exact",
+    "practitioner_semantics": "exact",
+    "location_semantics": "omitted",
+    "appointment_type_semantics": "omitted",
+    "duration_semantics": "exact",
+    "dialogue_form": "repeated",
+    "language_form": "filler",
+    "gap_targets": [
+      "interpretation_replay_tool_selection"
+    ],
+    "patient_name": "Aisha Rahman",
+    "practitioner_name": "Dr Nguyen"
+  },
+  "variant_hashes": {
+    "surface": [
+      "sha256:8b43e094adb573deaadb337723737746ac418e99ad82bbeeac831f6fbe093be9",
+      "sha256:526e4d85893bb2640667e441b08f2881cbf01650405e87ae9808f1e04193fc0d",
+      "sha256:93884d109c56015970faea3e57cb698feb08d3854331ea4adcafbb85622d1d18",
+      "sha256:a5f7833b2147ab9960c8227f26b229d0e3202eab522189852af55ccafe64208a",
+      "sha256:8d96aedda85e1d79113fc307d16e89f70844ad1b557f7774b1054dccf4ad7e1a",
+      "sha256:7a238239d82a0dd8c1b77f654191d8f32c5d26965b74c60bc72edd7edf8979a2",
+      "sha256:d40552e6d966bbc97cb136dba4da3c2e28125e71dc03b4508bf1b3e7227e48fc",
+      "sha256:fb774c992cce6abe2769bc69254a3a7582de05acb9e330c7bd93f7de99ef2d0d",
+      "sha256:863392e3eb530cf6e00681ebb8b6a1240c4374c3f7c29e3ed5102870780210da"
+    ],
+    "multi_turn": [
+      "sha256:c597d91f248ba32fb9aa96b98fbf35cf888fe8a6c23dfab4f3c4534093f3ed43",
+      "sha256:77546cbfb501969dc47c9d673d38dec0fdd8e08daab06d839370e49990450e96",
+      "sha256:58838d3e8baaf0e47a97707384d22ed70ffbe098c138cf526188e36f76f1e315"
+    ]
+  },
+  "surface_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_019_01",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_019",
+      "description": "authored holdout surface 019/01",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please record Aisha Rahman as arrived for the 15 minutes visit with Dr Nguyen Wednesday at 11am."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "11:00",
+      "latest_time": "11:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00",
+        "latest_time": "11:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 78,
+            "end": 87,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 91,
+            "end": 95,
+            "text": "11am"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 91,
+            "end": 95,
+            "text": "11am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 91,
+            "end": 95,
+            "text": "11am"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 14,
+            "end": 26,
+            "text": "Aisha Rahman"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 68,
+            "end": 77,
+            "text": "Dr Nguyen"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 46,
+            "end": 56,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "stale",
+      "entity_state": "exact",
+      "dialogue_form": "one_shot",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "search_patients",
+        "change_appointment_status"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:8b43e094adb573deaadb337723737746ac418e99ad82bbeeac831f6fbe093be9"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_019_02",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_019",
+      "description": "authored holdout surface 019/02",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Could you record Aisha Rahman as arrived for the 15 minutes visit with Dr Nguyen Wednesday at 11am, please?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "11:00",
+      "latest_time": "11:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00",
+        "latest_time": "11:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 81,
+            "end": 90,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 94,
+            "end": 98,
+            "text": "11am"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 94,
+            "end": 98,
+            "text": "11am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 94,
+            "end": 98,
+            "text": "11am"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 17,
+            "end": 29,
+            "text": "Aisha Rahman"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 71,
+            "end": 80,
+            "text": "Dr Nguyen"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 49,
+            "end": 59,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "stale",
+      "entity_state": "exact",
+      "dialogue_form": "one_shot",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "search_patients",
+        "change_appointment_status"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:526e4d85893bb2640667e441b08f2881cbf01650405e87ae9808f1e04193fc0d"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_019_03",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_019",
+      "description": "authored holdout surface 019/03",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Reception note \u2014 record Aisha Rahman as arrived for the 15 minutes visit with Dr Nguyen Wednesday at 11am."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "11:00",
+      "latest_time": "11:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00",
+        "latest_time": "11:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 88,
+            "end": 97,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 101,
+            "end": 105,
+            "text": "11am"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 101,
+            "end": 105,
+            "text": "11am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 101,
+            "end": 105,
+            "text": "11am"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 24,
+            "end": 36,
+            "text": "Aisha Rahman"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 78,
+            "end": 87,
+            "text": "Dr Nguyen"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 56,
+            "end": 66,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "stale",
+      "entity_state": "exact",
+      "dialogue_form": "one_shot",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "search_patients",
+        "change_appointment_status"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:93884d109c56015970faea3e57cb698feb08d3854331ea4adcafbb85622d1d18"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_019_04",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_019",
+      "description": "authored holdout surface 019/04",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "When you have a moment, record Aisha Rahman as arrived for the 15 minutes visit with Dr Nguyen Wednesday at 11am."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "11:00",
+      "latest_time": "11:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00",
+        "latest_time": "11:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 95,
+            "end": 104,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 108,
+            "end": 112,
+            "text": "11am"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 108,
+            "end": 112,
+            "text": "11am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 108,
+            "end": 112,
+            "text": "11am"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 31,
+            "end": 43,
+            "text": "Aisha Rahman"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 85,
+            "end": 94,
+            "text": "Dr Nguyen"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 63,
+            "end": 73,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "stale",
+      "entity_state": "exact",
+      "dialogue_form": "one_shot",
+      "language_form": "filler",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "search_patients",
+        "change_appointment_status"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:a5f7833b2147ab9960c8227f26b229d0e3202eab522189852af55ccafe64208a"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_019_05",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_019",
+      "description": "authored holdout surface 019/05",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Quick diary job: record Aisha Rahman as arrived for the 15 mins visit with Dr Nguyen Wednesday at 11am."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "11:00",
+      "latest_time": "11:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00",
+        "latest_time": "11:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 85,
+            "end": 94,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 98,
+            "end": 102,
+            "text": "11am"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 98,
+            "end": 102,
+            "text": "11am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 98,
+            "end": 102,
+            "text": "11am"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 24,
+            "end": 36,
+            "text": "Aisha Rahman"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 75,
+            "end": 84,
+            "text": "Dr Nguyen"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "stale",
+      "entity_state": "exact",
+      "dialogue_form": "one_shot",
+      "language_form": "abbreviation",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "search_patients",
+        "change_appointment_status"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:8d96aedda85e1d79113fc307d16e89f70844ad1b557f7774b1054dccf4ad7e1a"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_019_06",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_019",
+      "description": "authored holdout surface 019/06",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Um, i need the diary updated to record Aisha Rahman as arrived for the 15 minutes visit with Dr Nguyen Wednesday at 11am."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "11:00",
+      "latest_time": "11:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00",
+        "latest_time": "11:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 103,
+            "end": 112,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 116,
+            "end": 120,
+            "text": "11am"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 116,
+            "end": 120,
+            "text": "11am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 116,
+            "end": 120,
+            "text": "11am"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 39,
+            "end": 51,
+            "text": "Aisha Rahman"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 93,
+            "end": 102,
+            "text": "Dr Nguyen"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 71,
+            "end": 81,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "stale",
+      "entity_state": "exact",
+      "dialogue_form": "one_shot",
+      "language_form": "typo",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "search_patients",
+        "change_appointment_status"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:7a238239d82a0dd8c1b77f654191d8f32c5d26965b74c60bc72edd7edf8979a2"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_019_07",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_019",
+      "description": "authored holdout surface 019/07",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "For the front desk list, record Aisha Rahman as arrived for the 15 minutes visit with Dr Nguyen Wednesday at 11am."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "11:00",
+      "latest_time": "11:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00",
+        "latest_time": "11:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 96,
+            "end": 105,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 109,
+            "end": 113,
+            "text": "11am"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 109,
+            "end": 113,
+            "text": "11am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 109,
+            "end": 113,
+            "text": "11am"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 32,
+            "end": 44,
+            "text": "Aisha Rahman"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 86,
+            "end": 95,
+            "text": "Dr Nguyen"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 64,
+            "end": 74,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "stale",
+      "entity_state": "exact",
+      "dialogue_form": "one_shot",
+      "language_form": "speech_like",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "search_patients",
+        "change_appointment_status"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:d40552e6d966bbc97cb136dba4da3c2e28125e71dc03b4508bf1b3e7227e48fc"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_019_08",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_019",
+      "description": "authored holdout surface 019/08",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Can we record Aisha Rahman as arrived for the 15 minutes visit with Dr Nguyen Wednesday at 11am?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "11:00",
+      "latest_time": "11:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00",
+        "latest_time": "11:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 78,
+            "end": 87,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 91,
+            "end": 95,
+            "text": "11am"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 91,
+            "end": 95,
+            "text": "11am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 91,
+            "end": 95,
+            "text": "11am"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 14,
+            "end": 26,
+            "text": "Aisha Rahman"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 68,
+            "end": 77,
+            "text": "Dr Nguyen"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 46,
+            "end": 56,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "stale",
+      "entity_state": "exact",
+      "dialogue_form": "one_shot",
+      "language_form": "punctuation_variant",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "search_patients",
+        "change_appointment_status"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:fb774c992cce6abe2769bc69254a3a7582de05acb9e330c7bd93f7de99ef2d0d"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_019_09",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_019",
+      "description": "authored holdout surface 019/09",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Instruction: record Aisha Rahman as arrived for the 15 minutes visit with Dr Nguyen Wednesday at 11am. Do not bypass staff confirmation."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "11:00",
+      "latest_time": "11:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00",
+        "latest_time": "11:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 84,
+            "end": 93,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 97,
+            "end": 101,
+            "text": "11am"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 97,
+            "end": 101,
+            "text": "11am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 97,
+            "end": 101,
+            "text": "11am"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 20,
+            "end": 32,
+            "text": "Aisha Rahman"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 74,
+            "end": 83,
+            "text": "Dr Nguyen"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 52,
+            "end": 62,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "stale",
+      "entity_state": "exact",
+      "dialogue_form": "one_shot",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "search_patients",
+        "change_appointment_status"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:863392e3eb530cf6e00681ebb8b6a1240c4374c3f7c29e3ed5102870780210da"
+    }
+  ],
+  "multi_turn_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_019_01",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_019",
+      "description": "authored holdout trajectory 019/01",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "I need help with Aisha Rahman's booking with Dr Nguyen."
+        },
+        {
+          "turn": 2,
+          "utterance": "Specifically, please record Aisha Rahman as arrived for the 15 minutes visit with Dr Nguyen Wednesday at 11am."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "11:00",
+      "latest_time": "11:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00",
+        "latest_time": "11:00"
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 17,
+            "end": 29,
+            "text": "Aisha Rahman"
+          },
+          {
+            "turn_index": 1,
+            "start": 28,
+            "end": 40,
+            "text": "Aisha Rahman"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 45,
+            "end": 54,
+            "text": "Dr Nguyen"
+          },
+          {
+            "turn_index": 1,
+            "start": 82,
+            "end": 91,
+            "text": "Dr Nguyen"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 92,
+            "end": 101,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 1,
+            "start": 105,
+            "end": 109,
+            "text": "11am"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 105,
+            "end": 109,
+            "text": "11am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 1,
+            "start": 105,
+            "end": 109,
+            "text": "11am"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 60,
+            "end": 70,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "stale",
+      "entity_state": "exact",
+      "dialogue_form": "clarification",
+      "language_form": "punctuation_variant",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": "Please clarify the final diary instruction.",
+      "clarification_choices": [
+        "confirm the date",
+        "confirm the time",
+        "confirm the person"
+      ],
+      "variant_hash": "sha256:c597d91f248ba32fb9aa96b98fbf35cf888fe8a6c23dfab4f3c4534093f3ed43"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_019_02",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_019",
+      "description": "authored holdout trajectory 019/02",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please handle Aisha Rahman's booking with Dr Nguyen Tuesday at 9am."
+        },
+        {
+          "turn": 2,
+          "utterance": "Correction: record Aisha Rahman as arrived for the 15 minutes visit with Dr Nguyen Wednesday at 11am, not the earlier detail."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "11:00",
+      "latest_time": "11:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00",
+        "latest_time": "11:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 52,
+            "end": 59,
+            "text": "Tuesday"
+          },
+          {
+            "turn_index": 1,
+            "start": 83,
+            "end": 92,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 63,
+            "end": 66,
+            "text": "9am"
+          },
+          {
+            "turn_index": 1,
+            "start": 96,
+            "end": 100,
+            "text": "11am"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 14,
+            "end": 26,
+            "text": "Aisha Rahman"
+          },
+          {
+            "turn_index": 1,
+            "start": 19,
+            "end": 31,
+            "text": "Aisha Rahman"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 42,
+            "end": 51,
+            "text": "Dr Nguyen"
+          },
+          {
+            "turn_index": 1,
+            "start": 73,
+            "end": 82,
+            "text": "Dr Nguyen"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 96,
+            "end": 100,
+            "text": "11am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 1,
+            "start": 96,
+            "end": 100,
+            "text": "11am"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 51,
+            "end": 61,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "stale",
+      "entity_state": "exact",
+      "dialogue_form": "correction",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "search_patients",
+        "change_appointment_status"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:77546cbfb501969dc47c9d673d38dec0fdd8e08daab06d839370e49990450e96"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_019_03",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_019",
+      "description": "authored holdout trajectory 019/03",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "For Aisha Rahman's booking with Dr Nguyen, I have a diary request."
+        },
+        {
+          "turn": 2,
+          "utterance": "That one: record Aisha Rahman as arrived for the 15 minutes visit with Dr Nguyen Wednesday at 11am."
+        },
+        {
+          "turn": 3,
+          "utterance": "Keep it as a proposal for staff review; do not claim it is completed."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "11:00",
+      "latest_time": "11:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00",
+        "latest_time": "11:00"
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 4,
+            "end": 16,
+            "text": "Aisha Rahman"
+          },
+          {
+            "turn_index": 1,
+            "start": 17,
+            "end": 29,
+            "text": "Aisha Rahman"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 32,
+            "end": 41,
+            "text": "Dr Nguyen"
+          },
+          {
+            "turn_index": 1,
+            "start": 71,
+            "end": 80,
+            "text": "Dr Nguyen"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 81,
+            "end": 90,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 1,
+            "start": 94,
+            "end": 98,
+            "text": "11am"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 94,
+            "end": 98,
+            "text": "11am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 1,
+            "start": 94,
+            "end": 98,
+            "text": "11am"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 49,
+            "end": 59,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "stale",
+      "entity_state": "exact",
+      "dialogue_form": "anaphora",
+      "language_form": "typo",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "search_patients",
+        "change_appointment_status"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:58838d3e8baaf0e47a97707384d22ed70ffbe098c138cf526188e36f76f1e315"
+    }
+  ]
+}

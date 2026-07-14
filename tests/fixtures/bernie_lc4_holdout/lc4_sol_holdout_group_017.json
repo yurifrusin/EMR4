@@ -1,0 +1,1488 @@
+{
+  "schema_version": "lc4.holdout.corpus.v1",
+  "holdout_version": "lc4-holdout-v1",
+  "group_id": "lc4_sol_holdout_group_017",
+  "group_hash": "sha256:656888a702fd155edb2e3c80cae8617711169882b13e6b8ce94ed013c441f016",
+  "provenance": "gold",
+  "adjudication": "adjudicated",
+  "author_identity": "protected-gpt-sol",
+  "generator_identity": null,
+  "reference_date": "2026-07-14",
+  "clinic_clock": "2026-07-14T09:00:00+10:00",
+  "spec": {
+    "group_index": 17,
+    "intended_action": "status_change",
+    "temporal_relation": "not_after",
+    "diary_state": "overlap",
+    "entity_state": "omitted",
+    "patient_semantics": "omitted",
+    "practitioner_semantics": "exact",
+    "location_semantics": "omitted",
+    "appointment_type_semantics": "omitted",
+    "duration_semantics": "exact",
+    "dialogue_form": "one_shot",
+    "language_form": "plain",
+    "gap_targets": [
+      "interpretation_replay_tool_selection",
+      "entity_ambiguity_omission_correction"
+    ],
+    "patient_name": "Priya Nair",
+    "practitioner_name": "Dr Mensah"
+  },
+  "variant_hashes": {
+    "surface": [
+      "sha256:265ebdf145b09871301a02fb8e304a7df55d406b09c3790b0d6908191a7de4af",
+      "sha256:247e73cd60b6726700caf66dcadc9e920f11f81efc103024f1899c0ae2de5340",
+      "sha256:53fe7cb64a31eaaa8cb23a44fb3096227d90c0c8133239095136d88a3748175e",
+      "sha256:a8ccaae28ab9ab34f56569f631e331cf58905cd1066ac57239cd4937c25cfa3c",
+      "sha256:823e8dc116a163060b325f1f8b17e1349d0649fbf63c1521aa41856b75285203",
+      "sha256:1c8b37659276336127cdbb7f2e5c7a6b63d1d908de8e797cdb991bfd44aa02bb",
+      "sha256:f8755df079266a24ba60521e99dae5b8bb81d09891efe4ccbbc946cd8aa77898",
+      "sha256:034a5ddb0888f865d1dab608ee90340a5678de4a969a4d5940b1b5f2497b8003",
+      "sha256:8c8461bbb8f8604aa6de73da89b88dfa22a6838b4193b3aff741cae06bd92da9"
+    ],
+    "multi_turn": [
+      "sha256:4933e5eabc5d4097bb291f7224392665639e94feb453397d5896c77142fa8a14",
+      "sha256:b83d16b4f682b304506bf11e2c92469c0ff7bc9f47821b9f0ede225cbd2c9de1",
+      "sha256:3c69a3808cb87631ef3fade6b3fe17b8d5d631129cb6e20a840c57ca4645e397"
+    ]
+  },
+  "surface_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_017_01",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_017",
+      "description": "authored holdout surface 017/01",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please record a patient as arrived for the 15 minutes visit with Dr Mensah Wednesday by 5pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_after",
+      "earliest_time": null,
+      "latest_time": "17:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "latest_time": "17:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 75,
+            "end": 84,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 88,
+            "end": 91,
+            "text": "5pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 88,
+            "end": 91,
+            "text": "5pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 74,
+            "text": "Dr Mensah"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 43,
+            "end": 53,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "overlap",
+      "entity_state": "omitted",
+      "dialogue_form": "one_shot",
+      "language_form": "abbreviation",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:265ebdf145b09871301a02fb8e304a7df55d406b09c3790b0d6908191a7de4af"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_017_02",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_017",
+      "description": "authored holdout surface 017/02",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Could you record a patient as arrived for the 15 minutes visit with Dr Mensah Wednesday by 5pm, please?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_after",
+      "earliest_time": null,
+      "latest_time": "17:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "latest_time": "17:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 78,
+            "end": 87,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 91,
+            "end": 94,
+            "text": "5pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 91,
+            "end": 94,
+            "text": "5pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 68,
+            "end": 77,
+            "text": "Dr Mensah"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 46,
+            "end": 56,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "overlap",
+      "entity_state": "omitted",
+      "dialogue_form": "one_shot",
+      "language_form": "typo",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:247e73cd60b6726700caf66dcadc9e920f11f81efc103024f1899c0ae2de5340"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_017_03",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_017",
+      "description": "authored holdout surface 017/03",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Reception note \u2014 record a patient as arrived for the 15 minutes visit with Dr Mensah Wednesday by 5pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_after",
+      "earliest_time": null,
+      "latest_time": "17:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "latest_time": "17:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 85,
+            "end": 94,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 98,
+            "end": 101,
+            "text": "5pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 98,
+            "end": 101,
+            "text": "5pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 75,
+            "end": 84,
+            "text": "Dr Mensah"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 53,
+            "end": 63,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "overlap",
+      "entity_state": "omitted",
+      "dialogue_form": "one_shot",
+      "language_form": "speech_like",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:53fe7cb64a31eaaa8cb23a44fb3096227d90c0c8133239095136d88a3748175e"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_017_04",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_017",
+      "description": "authored holdout surface 017/04",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "When you have a moment, record a patient as arrived for the 15 minutes visit with Dr Mensah Wednesday by 5pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_after",
+      "earliest_time": null,
+      "latest_time": "17:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "latest_time": "17:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 92,
+            "end": 101,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 105,
+            "end": 108,
+            "text": "5pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 105,
+            "end": 108,
+            "text": "5pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 82,
+            "end": 91,
+            "text": "Dr Mensah"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 60,
+            "end": 70,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "overlap",
+      "entity_state": "omitted",
+      "dialogue_form": "one_shot",
+      "language_form": "punctuation_variant",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:a8ccaae28ab9ab34f56569f631e331cf58905cd1066ac57239cd4937c25cfa3c"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_017_05",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_017",
+      "description": "authored holdout surface 017/05",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Quick diary job: record a patient as arrived for the 15 mins visit with Dr Mensah Wednesday by 5pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_after",
+      "earliest_time": null,
+      "latest_time": "17:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "latest_time": "17:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 82,
+            "end": 91,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 95,
+            "end": 98,
+            "text": "5pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 95,
+            "end": 98,
+            "text": "5pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 72,
+            "end": 81,
+            "text": "Dr Mensah"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "overlap",
+      "entity_state": "omitted",
+      "dialogue_form": "one_shot",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:823e8dc116a163060b325f1f8b17e1349d0649fbf63c1521aa41856b75285203"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_017_06",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_017",
+      "description": "authored holdout surface 017/06",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Um, i need the diary updated to record a patient as arrived for the 15 minutes visit with Dr Mensah Wednesday by 5pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_after",
+      "earliest_time": null,
+      "latest_time": "17:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "latest_time": "17:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 100,
+            "end": 109,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 113,
+            "end": 116,
+            "text": "5pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 113,
+            "end": 116,
+            "text": "5pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 90,
+            "end": 99,
+            "text": "Dr Mensah"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 68,
+            "end": 78,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "overlap",
+      "entity_state": "omitted",
+      "dialogue_form": "one_shot",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:1c8b37659276336127cdbb7f2e5c7a6b63d1d908de8e797cdb991bfd44aa02bb"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_017_07",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_017",
+      "description": "authored holdout surface 017/07",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "For the front desk list, record a patient as arrived for the 15 minutes visit with Dr Mensah Wednesday by 5pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_after",
+      "earliest_time": null,
+      "latest_time": "17:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "latest_time": "17:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 93,
+            "end": 102,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 106,
+            "end": 109,
+            "text": "5pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 106,
+            "end": 109,
+            "text": "5pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 83,
+            "end": 92,
+            "text": "Dr Mensah"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 61,
+            "end": 71,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "overlap",
+      "entity_state": "omitted",
+      "dialogue_form": "one_shot",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:f8755df079266a24ba60521e99dae5b8bb81d09891efe4ccbbc946cd8aa77898"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_017_08",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_017",
+      "description": "authored holdout surface 017/08",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Can we record a patient as arrived for the 15 minutes visit with Dr Mensah Wednesday by 5pm?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_after",
+      "earliest_time": null,
+      "latest_time": "17:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "latest_time": "17:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 75,
+            "end": 84,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 88,
+            "end": 91,
+            "text": "5pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 88,
+            "end": 91,
+            "text": "5pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 74,
+            "text": "Dr Mensah"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 43,
+            "end": 53,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "overlap",
+      "entity_state": "omitted",
+      "dialogue_form": "one_shot",
+      "language_form": "filler",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:034a5ddb0888f865d1dab608ee90340a5678de4a969a4d5940b1b5f2497b8003"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_017_09",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_017",
+      "description": "authored holdout surface 017/09",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Instruction: record a patient as arrived for the 15 minutes visit with Dr Mensah Wednesday by 5pm. Do not bypass staff confirmation."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_after",
+      "earliest_time": null,
+      "latest_time": "17:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "latest_time": "17:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 81,
+            "end": 90,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 94,
+            "end": 97,
+            "text": "5pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 94,
+            "end": 97,
+            "text": "5pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 71,
+            "end": 80,
+            "text": "Dr Mensah"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 49,
+            "end": 59,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "overlap",
+      "entity_state": "omitted",
+      "dialogue_form": "one_shot",
+      "language_form": "abbreviation",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:8c8461bbb8f8604aa6de73da89b88dfa22a6838b4193b3aff741cae06bd92da9"
+    }
+  ],
+  "multi_turn_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_017_01",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_017",
+      "description": "authored holdout trajectory 017/01",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "I need help with a patient's booking with Dr Mensah."
+        },
+        {
+          "turn": 2,
+          "utterance": "Specifically, please record a patient as arrived for the 15 minutes visit with Dr Mensah Wednesday by 5pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_after",
+      "earliest_time": null,
+      "latest_time": "17:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "latest_time": "17:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 42,
+            "end": 51,
+            "text": "Dr Mensah"
+          },
+          {
+            "turn_index": 1,
+            "start": 79,
+            "end": 88,
+            "text": "Dr Mensah"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 89,
+            "end": 98,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 1,
+            "start": 102,
+            "end": 105,
+            "text": "5pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 1,
+            "start": 102,
+            "end": 105,
+            "text": "5pm"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 57,
+            "end": 67,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "overlap",
+      "entity_state": "omitted",
+      "dialogue_form": "clarification",
+      "language_form": "typo",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": "Please clarify the final diary instruction.",
+      "clarification_choices": [
+        "confirm the date",
+        "confirm the time",
+        "confirm the person"
+      ],
+      "variant_hash": "sha256:4933e5eabc5d4097bb291f7224392665639e94feb453397d5896c77142fa8a14"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_017_02",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_017",
+      "description": "authored holdout trajectory 017/02",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please handle a patient's booking with Dr Mensah Tuesday at 9am."
+        },
+        {
+          "turn": 2,
+          "utterance": "Correction: record a patient as arrived for the 15 minutes visit with Dr Mensah Wednesday by 5pm, not the earlier detail."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_after",
+      "earliest_time": null,
+      "latest_time": "17:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "latest_time": "17:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 49,
+            "end": 56,
+            "text": "Tuesday"
+          },
+          {
+            "turn_index": 1,
+            "start": 80,
+            "end": 89,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 60,
+            "end": 63,
+            "text": "9am"
+          },
+          {
+            "turn_index": 1,
+            "start": 93,
+            "end": 96,
+            "text": "5pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 39,
+            "end": 48,
+            "text": "Dr Mensah"
+          },
+          {
+            "turn_index": 1,
+            "start": 70,
+            "end": 79,
+            "text": "Dr Mensah"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 1,
+            "start": 93,
+            "end": 96,
+            "text": "5pm"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 48,
+            "end": 58,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "overlap",
+      "entity_state": "omitted",
+      "dialogue_form": "correction",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:b83d16b4f682b304506bf11e2c92469c0ff7bc9f47821b9f0ede225cbd2c9de1"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_017_03",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_017",
+      "description": "authored holdout trajectory 017/03",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "For a patient's booking with Dr Mensah, I have a diary request."
+        },
+        {
+          "turn": 2,
+          "utterance": "That one: record a patient as arrived for the 15 minutes visit with Dr Mensah Wednesday by 5pm."
+        },
+        {
+          "turn": 3,
+          "utterance": "Keep it as a proposal for staff review; do not claim it is completed."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_after",
+      "earliest_time": null,
+      "latest_time": "17:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "latest_time": "17:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 29,
+            "end": 38,
+            "text": "Dr Mensah"
+          },
+          {
+            "turn_index": 1,
+            "start": 68,
+            "end": 77,
+            "text": "Dr Mensah"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 78,
+            "end": 87,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 1,
+            "start": 91,
+            "end": 94,
+            "text": "5pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 1,
+            "start": 91,
+            "end": 94,
+            "text": "5pm"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 46,
+            "end": 56,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "overlap",
+      "entity_state": "omitted",
+      "dialogue_form": "anaphora",
+      "language_form": "filler",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:3c69a3808cb87631ef3fade6b3fe17b8d5d631129cb6e20a840c57ca4645e397"
+    }
+  ]
+}

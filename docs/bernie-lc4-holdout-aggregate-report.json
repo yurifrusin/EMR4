@@ -1,0 +1,509 @@
+{
+  "schema_version": "lc4.holdout.aggregate.v1",
+  "sealed_receipt": {
+    "manifest_hash": "sha256:cd4a806e47f2a1ce802dcb88aa7eddefeae0f69f2a1bc6963d81245dd8e71f01",
+    "purpose": "sealed_baseline_evaluation",
+    "evaluator_identity": "protected-gpt-sol",
+    "evaluation_id": "lc4-holdout-v1-baseline-001",
+    "is_sealed": true
+  },
+  "partition": "holdout",
+  "corpus_hash": "sha256:bf6a8c9255da7055b01b1e4abd7d3289b287f120e90b6ce8e94780d3458f8b84",
+  "manifest_hash": "sha256:cd4a806e47f2a1ce802dcb88aa7eddefeae0f69f2a1bc6963d81245dd8e71f01",
+  "total_groups": 24,
+  "total_variants": 288,
+  "total_trajectories": 72,
+  "total_samples": 576,
+  "repeat_count": 2,
+  "aggregate": {
+    "passed": 0,
+    "failed": 576,
+    "total": 576
+  },
+  "per_dimension": {
+    "scenario_count": 288,
+    "sample_count": 576,
+    "repeats_per_scenario": 2,
+    "aggregate": {
+      "passed": 0,
+      "failed": 576,
+      "total": 576
+    },
+    "semantic_fields": {
+      "intended_action": {
+        "passed": 72,
+        "failed": 504,
+        "total": 576
+      },
+      "action_semantics": {
+        "passed": 86,
+        "failed": 490,
+        "total": 576
+      },
+      "temporal_relation": {
+        "passed": 312,
+        "failed": 264,
+        "total": 576
+      },
+      "normalized_values": {
+        "passed": 0,
+        "failed": 576,
+        "total": 576
+      },
+      "entity_semantics": {
+        "passed": 64,
+        "failed": 512,
+        "total": 576
+      },
+      "requires_clarification": {
+        "passed": 166,
+        "failed": 410,
+        "total": 576
+      }
+    },
+    "downstream_outcome": {
+      "passed": 0,
+      "failed": 576,
+      "total": 576
+    },
+    "interpretation_tools": {
+      "passed": 158,
+      "failed": 418,
+      "total": 576
+    },
+    "replay_tool_sequence": {
+      "passed": 158,
+      "failed": 418,
+      "total": 576
+    },
+    "clarification": {
+      "passed": 126,
+      "failed": 450,
+      "total": 576
+    },
+    "authority": {
+      "passed": 118,
+      "failed": 458,
+      "total": 576,
+      "authority_correct": 118,
+      "authority_incorrect": 458,
+      "safety_violations": 8
+    },
+    "appointment_deltas": {
+      "passed": 88,
+      "failed": 488,
+      "total": 576
+    },
+    "audit_deltas": {
+      "passed": 88,
+      "failed": 488,
+      "total": 576
+    },
+    "safety": {
+      "passed": 568,
+      "failed": 8,
+      "total": 576
+    },
+    "interpretation_failures": 576,
+    "policy_failures": 576,
+    "integration_failures": 538,
+    "safety_failures": 8,
+    "simultaneous_layers": {
+      "safety_only": 0,
+      "interpretation_only": 0,
+      "policy_only": 0,
+      "integration_only": 0,
+      "interpretation_and_policy": 576,
+      "interpretation_and_integration": 538,
+      "multiple_layers": 576
+    }
+  },
+  "critical_slices": {
+    "worst_slice": {
+      "dimension": "language_form",
+      "slice_key": "abbreviation",
+      "total": 78,
+      "passed": 0,
+      "failed": 78,
+      "pass_fraction": 0.0
+    },
+    "by_action": [
+      {
+        "slice_key": "cancel",
+        "total": 96,
+        "passed": 0,
+        "failed": 96,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "create",
+        "total": 96,
+        "passed": 0,
+        "failed": 96,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "explain_schedule",
+        "total": 96,
+        "passed": 0,
+        "failed": 96,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "move",
+        "total": 96,
+        "passed": 0,
+        "failed": 96,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "resize",
+        "total": 96,
+        "passed": 0,
+        "failed": 96,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "status_change",
+        "total": 96,
+        "passed": 0,
+        "failed": 96,
+        "pass_fraction": 0.0
+      }
+    ],
+    "by_temporal_relation": [
+      {
+        "slice_key": "approximate",
+        "total": 96,
+        "passed": 0,
+        "failed": 96,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "exact",
+        "total": 96,
+        "passed": 0,
+        "failed": 96,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "interval",
+        "total": 96,
+        "passed": 0,
+        "failed": 96,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "not_after",
+        "total": 96,
+        "passed": 0,
+        "failed": 96,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "not_before",
+        "total": 96,
+        "passed": 0,
+        "failed": 96,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "unspecified",
+        "total": 96,
+        "passed": 0,
+        "failed": 96,
+        "pass_fraction": 0.0
+      }
+    ],
+    "by_diary_state": [
+      {
+        "slice_key": "break",
+        "total": 48,
+        "passed": 0,
+        "failed": 48,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "concurrent",
+        "total": 48,
+        "passed": 0,
+        "failed": 48,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "elapsed_window",
+        "total": 48,
+        "passed": 0,
+        "failed": 48,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "empty",
+        "total": 72,
+        "passed": 0,
+        "failed": 72,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "exact_duplicate",
+        "total": 48,
+        "passed": 0,
+        "failed": 48,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "no_slots",
+        "total": 48,
+        "passed": 0,
+        "failed": 48,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "overlap",
+        "total": 48,
+        "passed": 0,
+        "failed": 48,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "roster_absent",
+        "total": 72,
+        "passed": 0,
+        "failed": 72,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "same_day_distinct",
+        "total": 48,
+        "passed": 0,
+        "failed": 48,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "stale",
+        "total": 48,
+        "passed": 0,
+        "failed": 48,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "terminal",
+        "total": 48,
+        "passed": 0,
+        "failed": 48,
+        "pass_fraction": 0.0
+      }
+    ],
+    "by_entity_state": [
+      {
+        "slice_key": "ambiguous",
+        "total": 96,
+        "passed": 0,
+        "failed": 96,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "corrected",
+        "total": 96,
+        "passed": 0,
+        "failed": 96,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "exact",
+        "total": 96,
+        "passed": 0,
+        "failed": 96,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "mismatched",
+        "total": 96,
+        "passed": 0,
+        "failed": 96,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "negated",
+        "total": 96,
+        "passed": 0,
+        "failed": 96,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "omitted",
+        "total": 96,
+        "passed": 0,
+        "failed": 96,
+        "pass_fraction": 0.0
+      }
+    ],
+    "by_dialogue_form": [
+      {
+        "slice_key": "anaphora",
+        "total": 48,
+        "passed": 0,
+        "failed": 48,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "clarification",
+        "total": 48,
+        "passed": 0,
+        "failed": 48,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "correction",
+        "total": 48,
+        "passed": 0,
+        "failed": 48,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "one_shot",
+        "total": 432,
+        "passed": 0,
+        "failed": 432,
+        "pass_fraction": 0.0
+      }
+    ],
+    "by_language_form": [
+      {
+        "slice_key": "abbreviation",
+        "total": 78,
+        "passed": 0,
+        "failed": 78,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "adversarial",
+        "total": 78,
+        "passed": 0,
+        "failed": 78,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "filler",
+        "total": 66,
+        "passed": 0,
+        "failed": 66,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "paraphrase",
+        "total": 78,
+        "passed": 0,
+        "failed": 78,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "plain",
+        "total": 66,
+        "passed": 0,
+        "failed": 66,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "punctuation_variant",
+        "total": 66,
+        "passed": 0,
+        "failed": 66,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "speech_like",
+        "total": 78,
+        "passed": 0,
+        "failed": 78,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "typo",
+        "total": 66,
+        "passed": 0,
+        "failed": 66,
+        "pass_fraction": 0.0
+      }
+    ],
+    "by_tier": [
+      {
+        "slice_key": "gold",
+        "total": 576,
+        "passed": 0,
+        "failed": 576,
+        "pass_fraction": 0.0
+      }
+    ],
+    "by_adjudication": [
+      {
+        "slice_key": "adjudicated",
+        "total": 576,
+        "passed": 0,
+        "failed": 576,
+        "pass_fraction": 0.0
+      }
+    ],
+    "by_trajectory_type": [
+      {
+        "slice_key": "single_turn",
+        "total": 432,
+        "passed": 0,
+        "failed": 432,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "trajectory",
+        "total": 144,
+        "passed": 0,
+        "failed": 144,
+        "pass_fraction": 0.0
+      }
+    ],
+    "by_gap_target": [
+      {
+        "slice_key": "clarification_dialogue",
+        "total": 48,
+        "passed": 0,
+        "failed": 48,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "entity_ambiguity_omission_correction",
+        "total": 288,
+        "passed": 0,
+        "failed": 288,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "interpretation_replay_tool_selection",
+        "total": 288,
+        "passed": 0,
+        "failed": 288,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "interval_unspecified_temporal",
+        "total": 192,
+        "passed": 0,
+        "failed": 192,
+        "pass_fraction": 0.0
+      }
+    ]
+  },
+  "variance": {
+    "variant_scenario_count": 0,
+    "variant_sample_count": 0,
+    "total_repeats": 2,
+    "all_samples_deterministic": true
+  },
+  "coverage_lattice": {
+    "total_lattice_cells": 152064,
+    "prior_adjudicated_covered_cell_count": 3,
+    "holdout_covered_cell_count": 264,
+    "holdout_new_cell_count": 264,
+    "combined_adjudicated_covered_cell_count": 267,
+    "combined_adjudicated_empty_cell_count": 151797
+  },
+  "report_hash": "sha256:17f7c3f8c894b06e47069a94236c8180e76d3eb667aaea0c95174de27e98d083"
+}

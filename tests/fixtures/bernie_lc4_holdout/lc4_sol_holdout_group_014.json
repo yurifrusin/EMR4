@@ -1,0 +1,1297 @@
+{
+  "schema_version": "lc4.holdout.corpus.v1",
+  "holdout_version": "lc4-holdout-v1",
+  "group_id": "lc4_sol_holdout_group_014",
+  "group_hash": "sha256:f17c227573625b003eaa6b3ddd6c45bdd9b468367c225ae14ce15099d7c23a1c",
+  "provenance": "gold",
+  "adjudication": "adjudicated",
+  "author_identity": "protected-gpt-sol",
+  "generator_identity": null,
+  "reference_date": "2026-07-14",
+  "clinic_clock": "2026-07-14T09:00:00+10:00",
+  "spec": {
+    "group_index": 14,
+    "intended_action": "cancel",
+    "temporal_relation": "unspecified",
+    "diary_state": "same_day_distinct",
+    "entity_state": "mismatched",
+    "patient_semantics": "mismatched",
+    "practitioner_semantics": "exact",
+    "location_semantics": "omitted",
+    "appointment_type_semantics": "omitted",
+    "duration_semantics": "exact",
+    "dialogue_form": "session_restart",
+    "language_form": "paraphrase",
+    "gap_targets": [
+      "interpretation_replay_tool_selection",
+      "interval_unspecified_temporal"
+    ],
+    "patient_name": "Leo Bennett",
+    "practitioner_name": "Dr Okafor"
+  },
+  "variant_hashes": {
+    "surface": [
+      "sha256:b82ac722f5780067eead9b87082bae38c93f1b8baf5ca8a36da44e86254d493d",
+      "sha256:8e246267f082166587e40b8f8e94c928afe6fca85f24c1855e5fa2fe721c3319",
+      "sha256:ca7df0d2cc1c8edaca78ec82a9a755d9ba69c7722a3e5f65a4d89a0552438885",
+      "sha256:7ae8f2afe21a1c909d43e2141b76ba173e411610713d8a2a53b73f7e20995d54",
+      "sha256:0530b733fbe9d2f2b29aa15addf29906f757ba29342a4e3fd208573f702ccf68",
+      "sha256:79d986df2aec1b50e143d0ad33abf89e43fdb3091a7d1bf8df837d8f2c7430d0",
+      "sha256:5c10f016a7120f4495354b913e01ef6c4708a5b0d8a20872041c6c141eb9ca84",
+      "sha256:fc96715295002414b96efe47d4c3df7b9744f8acf4daef210c94b7cc488bde2c",
+      "sha256:cdf44fd423c15c589cf5ec8111faebf8d7f4e0afa288966480c675f957a5d89e"
+    ],
+    "multi_turn": [
+      "sha256:b11c0180ba8bae1f38a2852c57ffe30390c6bdb0794af88c873a5eb32aaea8ce",
+      "sha256:cf2ff9192c2bca5584d87cd39ab71398711caac35b681981e85d36f07a115a56",
+      "sha256:1b32162e25eb4db9285eca3a369c12f7e0f70e41e733641dbf879f04524d20d0"
+    ]
+  },
+  "surface_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_014_01",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_014",
+      "description": "authored holdout surface 014/01",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please remove Robert Johnson's 15 minutes booking with Dr Okafor sometime Wednesday."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 74,
+            "end": 83,
+            "text": "Wednesday"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 55,
+            "end": 64,
+            "text": "Dr Okafor"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 31,
+            "end": 41,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "mismatched",
+      "dialogue_form": "one_shot",
+      "language_form": "speech_like",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:b82ac722f5780067eead9b87082bae38c93f1b8baf5ca8a36da44e86254d493d"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_014_02",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_014",
+      "description": "authored holdout surface 014/02",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Could you remove Robert Johnson's 15 minutes booking with Dr Okafor sometime Wednesday, please?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 77,
+            "end": 86,
+            "text": "Wednesday"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 58,
+            "end": 67,
+            "text": "Dr Okafor"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 34,
+            "end": 44,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "mismatched",
+      "dialogue_form": "one_shot",
+      "language_form": "punctuation_variant",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:8e246267f082166587e40b8f8e94c928afe6fca85f24c1855e5fa2fe721c3319"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_014_03",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_014",
+      "description": "authored holdout surface 014/03",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Reception note \u2014 remove Robert Johnson's 15 minutes booking with Dr Okafor sometime Wednesday."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 84,
+            "end": 93,
+            "text": "Wednesday"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 74,
+            "text": "Dr Okafor"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 41,
+            "end": 51,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "mismatched",
+      "dialogue_form": "one_shot",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:ca7df0d2cc1c8edaca78ec82a9a755d9ba69c7722a3e5f65a4d89a0552438885"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_014_04",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_014",
+      "description": "authored holdout surface 014/04",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "When you have a moment, remove Robert Johnson's 15 minutes booking with Dr Okafor sometime Wednesday."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 91,
+            "end": 100,
+            "text": "Wednesday"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 72,
+            "end": 81,
+            "text": "Dr Okafor"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 48,
+            "end": 58,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "mismatched",
+      "dialogue_form": "one_shot",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:7ae8f2afe21a1c909d43e2141b76ba173e411610713d8a2a53b73f7e20995d54"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_014_05",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_014",
+      "description": "authored holdout surface 014/05",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Quick diary job: remove Robert Johnson's 15 mins booking with Dr Okafor sometime Wednesday."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 81,
+            "end": 90,
+            "text": "Wednesday"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 62,
+            "end": 71,
+            "text": "Dr Okafor"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "mismatched",
+      "dialogue_form": "one_shot",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:0530b733fbe9d2f2b29aa15addf29906f757ba29342a4e3fd208573f702ccf68"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_014_06",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_014",
+      "description": "authored holdout surface 014/06",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Um, i need the diary updated to remove Robert Johnson's 15 minutes booking with Dr Okafor sometime Wednesday."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 99,
+            "end": 108,
+            "text": "Wednesday"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 80,
+            "end": 89,
+            "text": "Dr Okafor"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 56,
+            "end": 66,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "mismatched",
+      "dialogue_form": "one_shot",
+      "language_form": "filler",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:79d986df2aec1b50e143d0ad33abf89e43fdb3091a7d1bf8df837d8f2c7430d0"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_014_07",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_014",
+      "description": "authored holdout surface 014/07",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "For the front desk list, remove Robert Johnson's 15 minutes booking with Dr Okafor sometime Wednesday."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 92,
+            "end": 101,
+            "text": "Wednesday"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 73,
+            "end": 82,
+            "text": "Dr Okafor"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 49,
+            "end": 59,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "mismatched",
+      "dialogue_form": "one_shot",
+      "language_form": "abbreviation",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:5c10f016a7120f4495354b913e01ef6c4708a5b0d8a20872041c6c141eb9ca84"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_014_08",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_014",
+      "description": "authored holdout surface 014/08",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Can we remove Robert Johnson's 15 minutes booking with Dr Okafor sometime Wednesday?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 74,
+            "end": 83,
+            "text": "Wednesday"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 55,
+            "end": 64,
+            "text": "Dr Okafor"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 31,
+            "end": 41,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "mismatched",
+      "dialogue_form": "one_shot",
+      "language_form": "typo",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:fc96715295002414b96efe47d4c3df7b9744f8acf4daef210c94b7cc488bde2c"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_014_09",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_014",
+      "description": "authored holdout surface 014/09",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Instruction: remove Robert Johnson's 15 minutes booking with Dr Okafor sometime Wednesday. Do not bypass staff confirmation."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 80,
+            "end": 89,
+            "text": "Wednesday"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 61,
+            "end": 70,
+            "text": "Dr Okafor"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 37,
+            "end": 47,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "mismatched",
+      "dialogue_form": "one_shot",
+      "language_form": "speech_like",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:cdf44fd423c15c589cf5ec8111faebf8d7f4e0afa288966480c675f957a5d89e"
+    }
+  ],
+  "multi_turn_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_014_01",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_014",
+      "description": "authored holdout trajectory 014/01",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "I need help with Robert Johnson's booking with Dr Okafor."
+        },
+        {
+          "turn": 2,
+          "utterance": "Specifically, please remove Robert Johnson's 15 minutes booking with Dr Okafor sometime Wednesday."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 47,
+            "end": 56,
+            "text": "Dr Okafor"
+          },
+          {
+            "turn_index": 1,
+            "start": 69,
+            "end": 78,
+            "text": "Dr Okafor"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 88,
+            "end": 97,
+            "text": "Wednesday"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 45,
+            "end": 55,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "mismatched",
+      "dialogue_form": "clarification",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": "Please clarify the final diary instruction.",
+      "clarification_choices": [
+        "confirm the date",
+        "confirm the time",
+        "confirm the person"
+      ],
+      "variant_hash": "sha256:b11c0180ba8bae1f38a2852c57ffe30390c6bdb0794af88c873a5eb32aaea8ce"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_014_02",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_014",
+      "description": "authored holdout trajectory 014/02",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please handle Robert Johnson's booking with Dr Okafor Tuesday at 9am."
+        },
+        {
+          "turn": 2,
+          "utterance": "Correction: remove Robert Johnson's 15 minutes booking with Dr Okafor sometime Wednesday, not the earlier detail."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 54,
+            "end": 61,
+            "text": "Tuesday"
+          },
+          {
+            "turn_index": 1,
+            "start": 79,
+            "end": 88,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 68,
+            "text": "9am"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 44,
+            "end": 53,
+            "text": "Dr Okafor"
+          },
+          {
+            "turn_index": 1,
+            "start": 60,
+            "end": 69,
+            "text": "Dr Okafor"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 36,
+            "end": 46,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "mismatched",
+      "dialogue_form": "correction",
+      "language_form": "typo",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:cf2ff9192c2bca5584d87cd39ab71398711caac35b681981e85d36f07a115a56"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_014_03",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_014",
+      "description": "authored holdout trajectory 014/03",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "For Robert Johnson's booking with Dr Okafor, I have a diary request."
+        },
+        {
+          "turn": 2,
+          "utterance": "That one: remove Robert Johnson's 15 minutes booking with Dr Okafor sometime Wednesday."
+        },
+        {
+          "turn": 3,
+          "utterance": "Keep it as a proposal for staff review; do not claim it is completed."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 34,
+            "end": 43,
+            "text": "Dr Okafor"
+          },
+          {
+            "turn_index": 1,
+            "start": 58,
+            "end": 67,
+            "text": "Dr Okafor"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 77,
+            "end": 86,
+            "text": "Wednesday"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 34,
+            "end": 44,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "mismatched",
+      "dialogue_form": "anaphora",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:1b32162e25eb4db9285eca3a369c12f7e0f70e41e733641dbf879f04524d20d0"
+    }
+  ]
+}

@@ -1,0 +1,1311 @@
+{
+  "schema_version": "lc4.holdout.corpus.v1",
+  "holdout_version": "lc4-holdout-v1",
+  "group_id": "lc4_sol_holdout_group_020",
+  "group_hash": "sha256:095a3073399689cbdb2c7e829e625e1d3fff73e3e977cc606bcc73a77d1ab599",
+  "provenance": "gold",
+  "adjudication": "adjudicated",
+  "author_identity": "protected-gpt-sol",
+  "generator_identity": null,
+  "reference_date": "2026-07-14",
+  "clinic_clock": "2026-07-14T09:00:00+10:00",
+  "spec": {
+    "group_index": 20,
+    "intended_action": "status_change",
+    "temporal_relation": "unspecified",
+    "diary_state": "exact_duplicate",
+    "entity_state": "mismatched",
+    "patient_semantics": "mismatched",
+    "practitioner_semantics": "exact",
+    "location_semantics": "omitted",
+    "appointment_type_semantics": "omitted",
+    "duration_semantics": "exact",
+    "dialogue_form": "clarification",
+    "language_form": "adversarial",
+    "gap_targets": [
+      "interpretation_replay_tool_selection",
+      "clarification_dialogue",
+      "interval_unspecified_temporal"
+    ],
+    "patient_name": "Leo Bennett",
+    "practitioner_name": "Dr Okafor"
+  },
+  "variant_hashes": {
+    "surface": [
+      "sha256:cfb2f276bcc37ae9c3bee29fd6457cdace82f00261a94fe6b4fa43c5bbe45f7f",
+      "sha256:c879adb12beba3a74f7790a26b4bd609f8265dc329671afb24aafce46d7a16a4",
+      "sha256:8cbcddd462bfcb6752b0bc29f8780f9e6e3eb78a70cbd86ffd7ab8875b00073d",
+      "sha256:1f5b3b78191418d87ad089586452cbc49308d39f9bb068ea6ea6a670d4f979c2",
+      "sha256:68a721e5e824dde295ab4f1fb4133f7d8764c1d2abd974e0aa6fa1026471138a",
+      "sha256:435186361c932f58aa1af53af1ede137d1ecc3f1f76676d624fd57194864cd6a",
+      "sha256:18bb238dce665ed6cba41e76a33730decc86c80df03a9db83733a1906d486ab5",
+      "sha256:f1c1a2b169683de7c9a5007ba6a98b46e511b2ab0fb3258846e6d2e510dfef19",
+      "sha256:0c882fc7a0ca17c4409663cd49889250334f87f811877ca508ab062df3b1841a"
+    ],
+    "multi_turn": [
+      "sha256:eb09c3bc62f713bfd75f79d4541ced812386214b69a6f2e0072d490478bac2d5",
+      "sha256:d27f9b57e08e13405c8e1342b1910f9ff9e8126d1cff303902fbad4ddcaa2f26",
+      "sha256:0a5a95f5818eaf33d9235803efe02bfb041419bd63bf714e9bb13273dc6bee09"
+    ]
+  },
+  "surface_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_020_01",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_020",
+      "description": "authored holdout surface 020/01",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please record Robert Johnson as arrived for the 15 minutes visit with Dr Okafor sometime Wednesday."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 89,
+            "end": 98,
+            "text": "Wednesday"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 70,
+            "end": 79,
+            "text": "Dr Okafor"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 48,
+            "end": 58,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "mismatched",
+      "dialogue_form": "one_shot",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:cfb2f276bcc37ae9c3bee29fd6457cdace82f00261a94fe6b4fa43c5bbe45f7f"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_020_02",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_020",
+      "description": "authored holdout surface 020/02",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Could you record Robert Johnson as arrived for the 15 minutes visit with Dr Okafor sometime Wednesday, please?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 92,
+            "end": 101,
+            "text": "Wednesday"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 73,
+            "end": 82,
+            "text": "Dr Okafor"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 51,
+            "end": 61,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "mismatched",
+      "dialogue_form": "one_shot",
+      "language_form": "filler",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:c879adb12beba3a74f7790a26b4bd609f8265dc329671afb24aafce46d7a16a4"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_020_03",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_020",
+      "description": "authored holdout surface 020/03",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Reception note \u2014 record Robert Johnson as arrived for the 15 minutes visit with Dr Okafor sometime Wednesday."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 99,
+            "end": 108,
+            "text": "Wednesday"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 80,
+            "end": 89,
+            "text": "Dr Okafor"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 58,
+            "end": 68,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "mismatched",
+      "dialogue_form": "one_shot",
+      "language_form": "abbreviation",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:8cbcddd462bfcb6752b0bc29f8780f9e6e3eb78a70cbd86ffd7ab8875b00073d"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_020_04",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_020",
+      "description": "authored holdout surface 020/04",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "When you have a moment, record Robert Johnson as arrived for the 15 minutes visit with Dr Okafor sometime Wednesday."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 106,
+            "end": 115,
+            "text": "Wednesday"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 87,
+            "end": 96,
+            "text": "Dr Okafor"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 75,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "mismatched",
+      "dialogue_form": "one_shot",
+      "language_form": "typo",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:1f5b3b78191418d87ad089586452cbc49308d39f9bb068ea6ea6a670d4f979c2"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_020_05",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_020",
+      "description": "authored holdout surface 020/05",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Quick diary job: record Robert Johnson as arrived for the 15 mins visit with Dr Okafor sometime Wednesday."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 96,
+            "end": 105,
+            "text": "Wednesday"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 77,
+            "end": 86,
+            "text": "Dr Okafor"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "mismatched",
+      "dialogue_form": "one_shot",
+      "language_form": "speech_like",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:68a721e5e824dde295ab4f1fb4133f7d8764c1d2abd974e0aa6fa1026471138a"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_020_06",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_020",
+      "description": "authored holdout surface 020/06",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Um, i need the diary updated to record Robert Johnson as arrived for the 15 minutes visit with Dr Okafor sometime Wednesday."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 114,
+            "end": 123,
+            "text": "Wednesday"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 95,
+            "end": 104,
+            "text": "Dr Okafor"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 73,
+            "end": 83,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "mismatched",
+      "dialogue_form": "one_shot",
+      "language_form": "punctuation_variant",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:435186361c932f58aa1af53af1ede137d1ecc3f1f76676d624fd57194864cd6a"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_020_07",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_020",
+      "description": "authored holdout surface 020/07",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "For the front desk list, record Robert Johnson as arrived for the 15 minutes visit with Dr Okafor sometime Wednesday."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 107,
+            "end": 116,
+            "text": "Wednesday"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 88,
+            "end": 97,
+            "text": "Dr Okafor"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 66,
+            "end": 76,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "mismatched",
+      "dialogue_form": "one_shot",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:18bb238dce665ed6cba41e76a33730decc86c80df03a9db83733a1906d486ab5"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_020_08",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_020",
+      "description": "authored holdout surface 020/08",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Can we record Robert Johnson as arrived for the 15 minutes visit with Dr Okafor sometime Wednesday?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 89,
+            "end": 98,
+            "text": "Wednesday"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 70,
+            "end": 79,
+            "text": "Dr Okafor"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 48,
+            "end": 58,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "mismatched",
+      "dialogue_form": "one_shot",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:f1c1a2b169683de7c9a5007ba6a98b46e511b2ab0fb3258846e6d2e510dfef19"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_020_09",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_020",
+      "description": "authored holdout surface 020/09",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Instruction: record Robert Johnson as arrived for the 15 minutes visit with Dr Okafor sometime Wednesday. Do not bypass staff confirmation."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 95,
+            "end": 104,
+            "text": "Wednesday"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 76,
+            "end": 85,
+            "text": "Dr Okafor"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 54,
+            "end": 64,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "mismatched",
+      "dialogue_form": "one_shot",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:0c882fc7a0ca17c4409663cd49889250334f87f811877ca508ab062df3b1841a"
+    }
+  ],
+  "multi_turn_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_020_01",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_020",
+      "description": "authored holdout trajectory 020/01",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "I need help with Robert Johnson's booking with Dr Okafor."
+        },
+        {
+          "turn": 2,
+          "utterance": "Specifically, please record Robert Johnson as arrived for the 15 minutes visit with Dr Okafor sometime Wednesday."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 47,
+            "end": 56,
+            "text": "Dr Okafor"
+          },
+          {
+            "turn_index": 1,
+            "start": 84,
+            "end": 93,
+            "text": "Dr Okafor"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 103,
+            "end": 112,
+            "text": "Wednesday"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 62,
+            "end": 72,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "mismatched",
+      "dialogue_form": "clarification",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": "Please clarify the final diary instruction.",
+      "clarification_choices": [
+        "confirm the date",
+        "confirm the time",
+        "confirm the person"
+      ],
+      "variant_hash": "sha256:eb09c3bc62f713bfd75f79d4541ced812386214b69a6f2e0072d490478bac2d5"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_020_02",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_020",
+      "description": "authored holdout trajectory 020/02",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please handle Robert Johnson's booking with Dr Okafor Tuesday at 9am."
+        },
+        {
+          "turn": 2,
+          "utterance": "Correction: record Robert Johnson as arrived for the 15 minutes visit with Dr Okafor sometime Wednesday, not the earlier detail."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 54,
+            "end": 61,
+            "text": "Tuesday"
+          },
+          {
+            "turn_index": 1,
+            "start": 94,
+            "end": 103,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 68,
+            "text": "9am"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 44,
+            "end": 53,
+            "text": "Dr Okafor"
+          },
+          {
+            "turn_index": 1,
+            "start": 75,
+            "end": 84,
+            "text": "Dr Okafor"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 53,
+            "end": 63,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "mismatched",
+      "dialogue_form": "correction",
+      "language_form": "filler",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:d27f9b57e08e13405c8e1342b1910f9ff9e8126d1cff303902fbad4ddcaa2f26"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_020_03",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_020",
+      "description": "authored holdout trajectory 020/03",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "For Robert Johnson's booking with Dr Okafor, I have a diary request."
+        },
+        {
+          "turn": 2,
+          "utterance": "That one: record Robert Johnson as arrived for the 15 minutes visit with Dr Okafor sometime Wednesday."
+        },
+        {
+          "turn": 3,
+          "utterance": "Keep it as a proposal for staff review; do not claim it is completed."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 34,
+            "end": 43,
+            "text": "Dr Okafor"
+          },
+          {
+            "turn_index": 1,
+            "start": 73,
+            "end": 82,
+            "text": "Dr Okafor"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 92,
+            "end": 101,
+            "text": "Wednesday"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 51,
+            "end": 61,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "mismatched",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "mismatched",
+      "dialogue_form": "anaphora",
+      "language_form": "speech_like",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:0a5a95f5818eaf33d9235803efe02bfb041419bd63bf714e9bb13273dc6bee09"
+    }
+  ]
+}

@@ -1,0 +1,216 @@
+{
+  "schema_version": "lc4.holdout.corpus.v1",
+  "holdout_version": "lc4-holdout-v1",
+  "partition": "holdout",
+  "provenance": "gold",
+  "adjudication": "adjudicated",
+  "author_identity": "protected-gpt-sol",
+  "generator_identity": null,
+  "authority_grant": {
+    "provider_write": false,
+    "diary_write": false,
+    "confirmation": false,
+    "override_authority": false
+  },
+  "total_groups": 24,
+  "surface_variants_per_group": 9,
+  "multi_turn_per_group": 3,
+  "total_variants": 288,
+  "total_trajectories": 72,
+  "corpus_hash": "sha256:bf6a8c9255da7055b01b1e4abd7d3289b287f120e90b6ce8e94780d3458f8b84",
+  "groups": [
+    {
+      "group_index": 1,
+      "group_id": "lc4_sol_holdout_group_001",
+      "filename": "lc4_sol_holdout_group_001.json",
+      "group_hash": "sha256:f4383468a355cdb0aae47200a1d15f4286def937a00f719ee3f4cdeb991803b3",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 2,
+      "group_id": "lc4_sol_holdout_group_002",
+      "filename": "lc4_sol_holdout_group_002.json",
+      "group_hash": "sha256:214c50315508c1bd3238855ae727ea82e20d1424253e7c41665e0ef0cd803c4c",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 3,
+      "group_id": "lc4_sol_holdout_group_003",
+      "filename": "lc4_sol_holdout_group_003.json",
+      "group_hash": "sha256:0ac1b86c3e957b3939851458ae2a86e0bd853153690bce49c286766292cf0a64",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 4,
+      "group_id": "lc4_sol_holdout_group_004",
+      "filename": "lc4_sol_holdout_group_004.json",
+      "group_hash": "sha256:c97cae518792a4e131f962a3e32e4ab966a15268e39ec21f89ed2d5a6e02bc2b",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 5,
+      "group_id": "lc4_sol_holdout_group_005",
+      "filename": "lc4_sol_holdout_group_005.json",
+      "group_hash": "sha256:af07859f05ea6fe449768c5c3c8752624a7a6a6b8f1ecbbea9a90e1cb2861229",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 6,
+      "group_id": "lc4_sol_holdout_group_006",
+      "filename": "lc4_sol_holdout_group_006.json",
+      "group_hash": "sha256:cc6544379161938b4601681b4f05da2434b9fa817d14bdf1e9096b3d6e31c587",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 7,
+      "group_id": "lc4_sol_holdout_group_007",
+      "filename": "lc4_sol_holdout_group_007.json",
+      "group_hash": "sha256:9594d42cc5655d661955a8b22a26f3a8fc8827f563df815b8f6e2c7835801c70",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 8,
+      "group_id": "lc4_sol_holdout_group_008",
+      "filename": "lc4_sol_holdout_group_008.json",
+      "group_hash": "sha256:2f7468711b0d5ac738392096adb9492d66650e5fd974a887b7d37551699e64d5",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 9,
+      "group_id": "lc4_sol_holdout_group_009",
+      "filename": "lc4_sol_holdout_group_009.json",
+      "group_hash": "sha256:a424f90f0788bf3a51341ff3c2c58d7a5f72b1abdc5d9ffc898492f627297829",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 10,
+      "group_id": "lc4_sol_holdout_group_010",
+      "filename": "lc4_sol_holdout_group_010.json",
+      "group_hash": "sha256:7e0ccd2b2fed022abfaa0e7f187a863faf6535520192c3655dbad09bc3733eb9",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 11,
+      "group_id": "lc4_sol_holdout_group_011",
+      "filename": "lc4_sol_holdout_group_011.json",
+      "group_hash": "sha256:793b89b5358aad7cdd979606112a9053fba5b6f8e95e961fd057d607a5cfe881",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 12,
+      "group_id": "lc4_sol_holdout_group_012",
+      "filename": "lc4_sol_holdout_group_012.json",
+      "group_hash": "sha256:354c246d73eb9417efb9144b3bbd63bfc76144ffc3f602c5dc3945e18bac8223",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 13,
+      "group_id": "lc4_sol_holdout_group_013",
+      "filename": "lc4_sol_holdout_group_013.json",
+      "group_hash": "sha256:68cdb3e5a3674f94b95acd2183dc357c2ed195e7da8d41a786c5f1c585238206",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 14,
+      "group_id": "lc4_sol_holdout_group_014",
+      "filename": "lc4_sol_holdout_group_014.json",
+      "group_hash": "sha256:f17c227573625b003eaa6b3ddd6c45bdd9b468367c225ae14ce15099d7c23a1c",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 15,
+      "group_id": "lc4_sol_holdout_group_015",
+      "filename": "lc4_sol_holdout_group_015.json",
+      "group_hash": "sha256:309ba92af273ff8b255e92074c8228327362e780bc1796fe6359835e3c537c7b",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 16,
+      "group_id": "lc4_sol_holdout_group_016",
+      "filename": "lc4_sol_holdout_group_016.json",
+      "group_hash": "sha256:e476e291178a0efdb97a89d1d4ad17f8d03efe1bb57e68aba843b7aca2782ab6",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 17,
+      "group_id": "lc4_sol_holdout_group_017",
+      "filename": "lc4_sol_holdout_group_017.json",
+      "group_hash": "sha256:656888a702fd155edb2e3c80cae8617711169882b13e6b8ce94ed013c441f016",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 18,
+      "group_id": "lc4_sol_holdout_group_018",
+      "filename": "lc4_sol_holdout_group_018.json",
+      "group_hash": "sha256:9589cc74ffdeff3b0da6281809c92ce64d8768c1a8715a0ea8fcadfce198e47a",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 19,
+      "group_id": "lc4_sol_holdout_group_019",
+      "filename": "lc4_sol_holdout_group_019.json",
+      "group_hash": "sha256:074e56a1163c3282305d98a664abced31f559b70b7d74b1a97cc417852283318",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 20,
+      "group_id": "lc4_sol_holdout_group_020",
+      "filename": "lc4_sol_holdout_group_020.json",
+      "group_hash": "sha256:095a3073399689cbdb2c7e829e625e1d3fff73e3e977cc606bcc73a77d1ab599",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 21,
+      "group_id": "lc4_sol_holdout_group_021",
+      "filename": "lc4_sol_holdout_group_021.json",
+      "group_hash": "sha256:187094336b7677ac7ccecadc3a5eec1dbe58f2a7d20d0f1f0eba35fbb4ff5d7a",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 22,
+      "group_id": "lc4_sol_holdout_group_022",
+      "filename": "lc4_sol_holdout_group_022.json",
+      "group_hash": "sha256:9cfd5ee575ff0a79bf1ea524fb00eb438e531efb910bc590c004ef6a3a7410ac",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 23,
+      "group_id": "lc4_sol_holdout_group_023",
+      "filename": "lc4_sol_holdout_group_023.json",
+      "group_hash": "sha256:8f2de0f7df5476470dfe24eb611f1e433f5504a773b692ad0033a185766c06df",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 24,
+      "group_id": "lc4_sol_holdout_group_024",
+      "filename": "lc4_sol_holdout_group_024.json",
+      "group_hash": "sha256:0037aec6448bfb799587ec78a2a82115bc71f5cfa15ea06a6fbf2d4b4092b434",
+      "surface_variant_count": 9,
+      "multi_turn_count": 3
+    }
+  ],
+  "manifest_hash": "sha256:cd4a806e47f2a1ce802dcb88aa7eddefeae0f69f2a1bc6963d81245dd8e71f01"
+}

@@ -1,0 +1,1726 @@
+{
+  "schema_version": "lc4.holdout.corpus.v1",
+  "holdout_version": "lc4-holdout-v1",
+  "group_id": "lc4_sol_holdout_group_003",
+  "group_hash": "sha256:0ac1b86c3e957b3939851458ae2a86e0bd853153690bce49c286766292cf0a64",
+  "provenance": "gold",
+  "adjudication": "adjudicated",
+  "author_identity": "protected-gpt-sol",
+  "generator_identity": null,
+  "reference_date": "2026-07-14",
+  "clinic_clock": "2026-07-14T09:00:00+10:00",
+  "spec": {
+    "group_index": 3,
+    "intended_action": "create",
+    "temporal_relation": "approximate",
+    "diary_state": "same_day_distinct",
+    "entity_state": "corrected",
+    "patient_semantics": "corrected",
+    "practitioner_semantics": "exact",
+    "location_semantics": "omitted",
+    "appointment_type_semantics": "omitted",
+    "duration_semantics": "exact",
+    "dialogue_form": "repeated",
+    "language_form": "filler",
+    "gap_targets": [
+      "interpretation_replay_tool_selection",
+      "entity_ambiguity_omission_correction"
+    ],
+    "patient_name": "Mei Lin",
+    "practitioner_name": "Dr Kovacs"
+  },
+  "variant_hashes": {
+    "surface": [
+      "sha256:a32fa21ea4e1995c710f4ff5ac1946beac1731cba33e95fa2943b93fb4281dce",
+      "sha256:a80dd3c00e6f2e0dd1e9f3c9fb3fe9511eaa97f5c3b8d2e0956e703481399318",
+      "sha256:9789bb6b7b5db62f8edc10b68eb58a8ab83bad19c2d3d7fadced36cef8275e85",
+      "sha256:b06f57d5cda8e4cd9145ded890746b5e5adf410dfe47d670cec0151a7b736357",
+      "sha256:c374d147d1ab119bec5b7193af4ac8cbfd6369a33baedca89a666b31fe67a32e",
+      "sha256:c9bd351c22179d2af1e1ff9f9e934ffa08b4f6713d5febdfb7e1f9bd8ed9c72b",
+      "sha256:3d4e431bc983ff13447fca31efd8ffedc0bac2eabb79ffa1868888fb95acb27d",
+      "sha256:64a64e4ee6b2d282342d769211f69b9946ebe22115b04561541be26dbfff713e",
+      "sha256:de2c8302f62589a8572294df7f8cec28dfaf01a65f0d07025ec01a015fd54cd9"
+    ],
+    "multi_turn": [
+      "sha256:ba9a1b0b1a259389604bd9c1a53f2128c0201c9af3c4e1a941d22993a5a6f938",
+      "sha256:06f88ab05189ad3f196a96adf408096fb290091f117c8ba5083a2deae4841006",
+      "sha256:2860a02c8af56d89d521083109df0311ca805a71bf844bbc1cb394ba2e4330a9"
+    ]
+  },
+  "surface_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_003_01",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_003",
+      "description": "authored holdout surface 003/01",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please Correction noted: use arrange a 15 minutes visit for Mei Lin with Dr Kovacs Wednesday around 2pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 83,
+            "end": 92,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 100,
+            "end": 103,
+            "text": "2pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 100,
+            "end": 103,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 100,
+            "end": 103,
+            "text": "2pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 60,
+            "end": 67,
+            "text": "Mei Lin"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 73,
+            "end": 82,
+            "text": "Dr Kovacs"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 39,
+            "end": 49,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "corrected",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "corrected",
+      "dialogue_form": "one_shot",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_created",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots",
+        "create_booking"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "created",
+          "start_time": "14:00",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "create_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:a32fa21ea4e1995c710f4ff5ac1946beac1731cba33e95fa2943b93fb4281dce"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_003_02",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_003",
+      "description": "authored holdout surface 003/02",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Could you Correction noted: use arrange a 15 minutes visit for Mei Lin with Dr Kovacs Wednesday around 2pm, please?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 86,
+            "end": 95,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 103,
+            "end": 106,
+            "text": "2pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 103,
+            "end": 106,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 103,
+            "end": 106,
+            "text": "2pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 63,
+            "end": 70,
+            "text": "Mei Lin"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 76,
+            "end": 85,
+            "text": "Dr Kovacs"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 42,
+            "end": 52,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "corrected",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "corrected",
+      "dialogue_form": "one_shot",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_created",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots",
+        "create_booking"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "created",
+          "start_time": "14:00",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "create_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:a80dd3c00e6f2e0dd1e9f3c9fb3fe9511eaa97f5c3b8d2e0956e703481399318"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_003_03",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_003",
+      "description": "authored holdout surface 003/03",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Reception note \u2014 Correction noted: use arrange a 15 minutes visit for Mei Lin with Dr Kovacs Wednesday around 2pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 93,
+            "end": 102,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 110,
+            "end": 113,
+            "text": "2pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 110,
+            "end": 113,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 110,
+            "end": 113,
+            "text": "2pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 70,
+            "end": 77,
+            "text": "Mei Lin"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 83,
+            "end": 92,
+            "text": "Dr Kovacs"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 49,
+            "end": 59,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "corrected",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "corrected",
+      "dialogue_form": "one_shot",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_created",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots",
+        "create_booking"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "created",
+          "start_time": "14:00",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "create_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:9789bb6b7b5db62f8edc10b68eb58a8ab83bad19c2d3d7fadced36cef8275e85"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_003_04",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_003",
+      "description": "authored holdout surface 003/04",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "When you have a moment, Correction noted: use arrange a 15 minutes visit for Mei Lin with Dr Kovacs Wednesday around 2pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 100,
+            "end": 109,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 117,
+            "end": 120,
+            "text": "2pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 117,
+            "end": 120,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 117,
+            "end": 120,
+            "text": "2pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 77,
+            "end": 84,
+            "text": "Mei Lin"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 90,
+            "end": 99,
+            "text": "Dr Kovacs"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 56,
+            "end": 66,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "corrected",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "corrected",
+      "dialogue_form": "one_shot",
+      "language_form": "filler",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_created",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots",
+        "create_booking"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "created",
+          "start_time": "14:00",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "create_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:b06f57d5cda8e4cd9145ded890746b5e5adf410dfe47d670cec0151a7b736357"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_003_05",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_003",
+      "description": "authored holdout surface 003/05",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Quick diary job: Correction noted: use arrange a 15 mins visit for Mei Lin with Dr Kovacs Wednesday around 2pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 90,
+            "end": 99,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 107,
+            "end": 110,
+            "text": "2pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 107,
+            "end": 110,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 107,
+            "end": 110,
+            "text": "2pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 67,
+            "end": 74,
+            "text": "Mei Lin"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 80,
+            "end": 89,
+            "text": "Dr Kovacs"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "corrected",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "corrected",
+      "dialogue_form": "one_shot",
+      "language_form": "abbreviation",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_created",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots",
+        "create_booking"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "created",
+          "start_time": "14:00",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "create_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:c374d147d1ab119bec5b7193af4ac8cbfd6369a33baedca89a666b31fe67a32e"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_003_06",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_003",
+      "description": "authored holdout surface 003/06",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Um, i need the diary updated to Correction noted: use arrange a 15 minutes visit for Mei Lin with Dr Kovacs Wednesday around 2pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 108,
+            "end": 117,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 125,
+            "end": 128,
+            "text": "2pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 125,
+            "end": 128,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 125,
+            "end": 128,
+            "text": "2pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 85,
+            "end": 92,
+            "text": "Mei Lin"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 98,
+            "end": 107,
+            "text": "Dr Kovacs"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 64,
+            "end": 74,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "corrected",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "corrected",
+      "dialogue_form": "one_shot",
+      "language_form": "typo",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_created",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots",
+        "create_booking"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "created",
+          "start_time": "14:00",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "create_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:c9bd351c22179d2af1e1ff9f9e934ffa08b4f6713d5febdfb7e1f9bd8ed9c72b"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_003_07",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_003",
+      "description": "authored holdout surface 003/07",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "For the front desk list, Correction noted: use arrange a 15 minutes visit for Mei Lin with Dr Kovacs Wednesday around 2pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 101,
+            "end": 110,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 118,
+            "end": 121,
+            "text": "2pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 118,
+            "end": 121,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 118,
+            "end": 121,
+            "text": "2pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 78,
+            "end": 85,
+            "text": "Mei Lin"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 91,
+            "end": 100,
+            "text": "Dr Kovacs"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 57,
+            "end": 67,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "corrected",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "corrected",
+      "dialogue_form": "one_shot",
+      "language_form": "speech_like",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_created",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots",
+        "create_booking"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "created",
+          "start_time": "14:00",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "create_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:3d4e431bc983ff13447fca31efd8ffedc0bac2eabb79ffa1868888fb95acb27d"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_003_08",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_003",
+      "description": "authored holdout surface 003/08",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Can we Correction noted: use arrange a 15 minutes visit for Mei Lin with Dr Kovacs Wednesday around 2pm?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 83,
+            "end": 92,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 100,
+            "end": 103,
+            "text": "2pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 100,
+            "end": 103,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 100,
+            "end": 103,
+            "text": "2pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 60,
+            "end": 67,
+            "text": "Mei Lin"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 73,
+            "end": 82,
+            "text": "Dr Kovacs"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 39,
+            "end": 49,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "corrected",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "corrected",
+      "dialogue_form": "one_shot",
+      "language_form": "punctuation_variant",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_created",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots",
+        "create_booking"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "created",
+          "start_time": "14:00",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "create_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:64a64e4ee6b2d282342d769211f69b9946ebe22115b04561541be26dbfff713e"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_003_09",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_003",
+      "description": "authored holdout surface 003/09",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Instruction: Correction noted: use arrange a 15 minutes visit for Mei Lin with Dr Kovacs Wednesday around 2pm. Do not bypass staff confirmation."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 89,
+            "end": 98,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 106,
+            "end": 109,
+            "text": "2pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 106,
+            "end": 109,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 106,
+            "end": 109,
+            "text": "2pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 66,
+            "end": 73,
+            "text": "Mei Lin"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 79,
+            "end": 88,
+            "text": "Dr Kovacs"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 45,
+            "end": 55,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "corrected",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "corrected",
+      "dialogue_form": "one_shot",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_created",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots",
+        "create_booking"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "created",
+          "start_time": "14:00",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "create_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:de2c8302f62589a8572294df7f8cec28dfaf01a65f0d07025ec01a015fd54cd9"
+    }
+  ],
+  "multi_turn_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_003_01",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_003",
+      "description": "authored holdout trajectory 003/01",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "I need help with Robert Johnson's booking with Dr Kovacs."
+        },
+        {
+          "turn": 2,
+          "utterance": "Specifically, please Correction noted: use arrange a 15 minutes visit for Mei Lin with Dr Kovacs Wednesday around 2pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 47,
+            "end": 56,
+            "text": "Dr Kovacs"
+          },
+          {
+            "turn_index": 1,
+            "start": 87,
+            "end": 96,
+            "text": "Dr Kovacs"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 97,
+            "end": 106,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 1,
+            "start": 114,
+            "end": 117,
+            "text": "2pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 114,
+            "end": 117,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 1,
+            "start": 114,
+            "end": 117,
+            "text": "2pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 1,
+            "start": 74,
+            "end": 81,
+            "text": "Mei Lin"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 53,
+            "end": 63,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "corrected",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "corrected",
+      "dialogue_form": "clarification",
+      "language_form": "punctuation_variant",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_created",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "created",
+          "start_time": "14:00",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "create_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": "Please clarify the final diary instruction.",
+      "clarification_choices": [
+        "confirm the date",
+        "confirm the time",
+        "confirm the person"
+      ],
+      "variant_hash": "sha256:ba9a1b0b1a259389604bd9c1a53f2128c0201c9af3c4e1a941d22993a5a6f938"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_003_02",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_003",
+      "description": "authored holdout trajectory 003/02",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please handle Robert Johnson's booking with Dr Kovacs Tuesday at 9am."
+        },
+        {
+          "turn": 2,
+          "utterance": "Correction: Correction noted: use arrange a 15 minutes visit for Mei Lin with Dr Kovacs Wednesday around 2pm, not the earlier detail."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 54,
+            "end": 61,
+            "text": "Tuesday"
+          },
+          {
+            "turn_index": 1,
+            "start": 88,
+            "end": 97,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 68,
+            "text": "9am"
+          },
+          {
+            "turn_index": 1,
+            "start": 105,
+            "end": 108,
+            "text": "2pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 44,
+            "end": 53,
+            "text": "Dr Kovacs"
+          },
+          {
+            "turn_index": 1,
+            "start": 78,
+            "end": 87,
+            "text": "Dr Kovacs"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 105,
+            "end": 108,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 1,
+            "start": 105,
+            "end": 108,
+            "text": "2pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 1,
+            "start": 65,
+            "end": 72,
+            "text": "Mei Lin"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 44,
+            "end": 54,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "corrected",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "corrected",
+      "dialogue_form": "correction",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_created",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots",
+        "create_booking"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "created",
+          "start_time": "14:00",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "create_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:06f88ab05189ad3f196a96adf408096fb290091f117c8ba5083a2deae4841006"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_003_03",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_003",
+      "description": "authored holdout trajectory 003/03",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "For Robert Johnson's booking with Dr Kovacs, I have a diary request."
+        },
+        {
+          "turn": 2,
+          "utterance": "That one: Correction noted: use arrange a 15 minutes visit for Mei Lin with Dr Kovacs Wednesday around 2pm."
+        },
+        {
+          "turn": 3,
+          "utterance": "Keep it as a proposal for staff review; do not claim it is completed."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:00",
+      "latest_time": "14:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "14:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 34,
+            "end": 43,
+            "text": "Dr Kovacs"
+          },
+          {
+            "turn_index": 1,
+            "start": 76,
+            "end": 85,
+            "text": "Dr Kovacs"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 86,
+            "end": 95,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 1,
+            "start": 103,
+            "end": 106,
+            "text": "2pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 103,
+            "end": 106,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 1,
+            "start": 103,
+            "end": 106,
+            "text": "2pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 1,
+            "start": 63,
+            "end": 70,
+            "text": "Mei Lin"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 42,
+            "end": 52,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "corrected",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "same_day_distinct",
+      "entity_state": "corrected",
+      "dialogue_form": "anaphora",
+      "language_form": "typo",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_created",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots",
+        "create_booking"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "created",
+          "start_time": "14:00",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "create_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:2860a02c8af56d89d521083109df0311ca805a71bf844bbc1cb394ba2e4330a9"
+    }
+  ]
+}

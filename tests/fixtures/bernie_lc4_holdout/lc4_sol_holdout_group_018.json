@@ -1,0 +1,1488 @@
+{
+  "schema_version": "lc4.holdout.corpus.v1",
+  "holdout_version": "lc4-holdout-v1",
+  "group_id": "lc4_sol_holdout_group_018",
+  "group_hash": "sha256:9589cc74ffdeff3b0da6281809c92ce64d8768c1a8715a0ea8fcadfce198e47a",
+  "provenance": "gold",
+  "adjudication": "adjudicated",
+  "author_identity": "protected-gpt-sol",
+  "generator_identity": null,
+  "reference_date": "2026-07-14",
+  "clinic_clock": "2026-07-14T09:00:00+10:00",
+  "spec": {
+    "group_index": 18,
+    "intended_action": "status_change",
+    "temporal_relation": "not_before",
+    "diary_state": "no_slots",
+    "entity_state": "ambiguous",
+    "patient_semantics": "ambiguous",
+    "practitioner_semantics": "exact",
+    "location_semantics": "omitted",
+    "appointment_type_semantics": "omitted",
+    "duration_semantics": "exact",
+    "dialogue_form": "reversal",
+    "language_form": "speech_like",
+    "gap_targets": [
+      "interpretation_replay_tool_selection",
+      "entity_ambiguity_omission_correction"
+    ],
+    "patient_name": "Tom Alvarez",
+    "practitioner_name": "Dr Chen"
+  },
+  "variant_hashes": {
+    "surface": [
+      "sha256:4899268d1cc04442660a741ddcb38d4a55aa423ae252344663ec19603003ec39",
+      "sha256:f229dadce9456a28b8033182bbf4d835540386aaac2f7c7a03f400d31c03ac35",
+      "sha256:fe52b7d7a55d292625ce6e0fc8448792a667f865c28d3042bfc7e6056000f88d",
+      "sha256:bf1b26de5e7dbd34999637f627615738db1076d442675c614edb4799e75ce7b5",
+      "sha256:b31e3a3d002ed5c8415934bc8276bf933f73e0c72b1a30fe51915ef5104e6539",
+      "sha256:f6b990d8a37745b2ebe1a25576921c1865ec1a4a1892dfd2c112be50e11bb785",
+      "sha256:1f2b94fac43622eedd6d8484d35ded75832ceccbd39c975d9d4edc2fe73d6c73",
+      "sha256:b85960c131326f8b204806255cb578b7ce6d6db618909a8bbd8b1fc203829836",
+      "sha256:1b310d27198cbffe14078b6d1b127d2dea68d0380dd9322e11694c771a46b6de"
+    ],
+    "multi_turn": [
+      "sha256:12170718b761c44330995e2c54a202b56ce412701237d2042cc6c41cdac51b7d",
+      "sha256:c123fac8e4d50816f599734c4577fecb420d1e906436cd1427ec0fe794a50f6a",
+      "sha256:95f8ecd137a851fd125a2e386938508e027e3892162ba3ef25850a056c71c045"
+    ]
+  },
+  "surface_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_018_01",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_018",
+      "description": "authored holdout surface 018/01",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please record someone as arrived for the 15 minutes visit with Dr Chen Wednesday no earlier than 11am."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "11:00",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 71,
+            "end": 80,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 97,
+            "end": 101,
+            "text": "11am"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 97,
+            "end": 101,
+            "text": "11am"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 63,
+            "end": 70,
+            "text": "Dr Chen"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 41,
+            "end": 51,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "ambiguous",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "no_slots",
+      "entity_state": "ambiguous",
+      "dialogue_form": "one_shot",
+      "language_form": "speech_like",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:4899268d1cc04442660a741ddcb38d4a55aa423ae252344663ec19603003ec39"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_018_02",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_018",
+      "description": "authored holdout surface 018/02",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Could you record someone as arrived for the 15 minutes visit with Dr Chen Wednesday no earlier than 11am, please?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "11:00",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 74,
+            "end": 83,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 100,
+            "end": 104,
+            "text": "11am"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 100,
+            "end": 104,
+            "text": "11am"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 66,
+            "end": 73,
+            "text": "Dr Chen"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 44,
+            "end": 54,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "ambiguous",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "no_slots",
+      "entity_state": "ambiguous",
+      "dialogue_form": "one_shot",
+      "language_form": "punctuation_variant",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:f229dadce9456a28b8033182bbf4d835540386aaac2f7c7a03f400d31c03ac35"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_018_03",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_018",
+      "description": "authored holdout surface 018/03",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Reception note \u2014 record someone as arrived for the 15 minutes visit with Dr Chen Wednesday no earlier than 11am."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "11:00",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 81,
+            "end": 90,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 107,
+            "end": 111,
+            "text": "11am"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 107,
+            "end": 111,
+            "text": "11am"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 73,
+            "end": 80,
+            "text": "Dr Chen"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 51,
+            "end": 61,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "ambiguous",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "no_slots",
+      "entity_state": "ambiguous",
+      "dialogue_form": "one_shot",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:fe52b7d7a55d292625ce6e0fc8448792a667f865c28d3042bfc7e6056000f88d"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_018_04",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_018",
+      "description": "authored holdout surface 018/04",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "When you have a moment, record someone as arrived for the 15 minutes visit with Dr Chen Wednesday no earlier than 11am."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "11:00",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 88,
+            "end": 97,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 114,
+            "end": 118,
+            "text": "11am"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 114,
+            "end": 118,
+            "text": "11am"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 80,
+            "end": 87,
+            "text": "Dr Chen"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 58,
+            "end": 68,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "ambiguous",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "no_slots",
+      "entity_state": "ambiguous",
+      "dialogue_form": "one_shot",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:bf1b26de5e7dbd34999637f627615738db1076d442675c614edb4799e75ce7b5"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_018_05",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_018",
+      "description": "authored holdout surface 018/05",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Quick diary job: record someone as arrived for the 15 mins visit with Dr Chen Wednesday no earlier than 11am."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "11:00",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 78,
+            "end": 87,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 104,
+            "end": 108,
+            "text": "11am"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 104,
+            "end": 108,
+            "text": "11am"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 70,
+            "end": 77,
+            "text": "Dr Chen"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "ambiguous",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "no_slots",
+      "entity_state": "ambiguous",
+      "dialogue_form": "one_shot",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:b31e3a3d002ed5c8415934bc8276bf933f73e0c72b1a30fe51915ef5104e6539"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_018_06",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_018",
+      "description": "authored holdout surface 018/06",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Um, i need the diary updated to record someone as arrived for the 15 minutes visit with Dr Chen Wednesday no earlier than 11am."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "11:00",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 96,
+            "end": 105,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 122,
+            "end": 126,
+            "text": "11am"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 122,
+            "end": 126,
+            "text": "11am"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 88,
+            "end": 95,
+            "text": "Dr Chen"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 66,
+            "end": 76,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "ambiguous",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "no_slots",
+      "entity_state": "ambiguous",
+      "dialogue_form": "one_shot",
+      "language_form": "filler",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:f6b990d8a37745b2ebe1a25576921c1865ec1a4a1892dfd2c112be50e11bb785"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_018_07",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_018",
+      "description": "authored holdout surface 018/07",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "For the front desk list, record someone as arrived for the 15 minutes visit with Dr Chen Wednesday no earlier than 11am."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "11:00",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 89,
+            "end": 98,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 115,
+            "end": 119,
+            "text": "11am"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 115,
+            "end": 119,
+            "text": "11am"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 81,
+            "end": 88,
+            "text": "Dr Chen"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 59,
+            "end": 69,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "ambiguous",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "no_slots",
+      "entity_state": "ambiguous",
+      "dialogue_form": "one_shot",
+      "language_form": "abbreviation",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:1f2b94fac43622eedd6d8484d35ded75832ceccbd39c975d9d4edc2fe73d6c73"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_018_08",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_018",
+      "description": "authored holdout surface 018/08",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Can we record someone as arrived for the 15 minutes visit with Dr Chen Wednesday no earlier than 11am?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "11:00",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 71,
+            "end": 80,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 97,
+            "end": 101,
+            "text": "11am"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 97,
+            "end": 101,
+            "text": "11am"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 63,
+            "end": 70,
+            "text": "Dr Chen"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 41,
+            "end": 51,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "ambiguous",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "no_slots",
+      "entity_state": "ambiguous",
+      "dialogue_form": "one_shot",
+      "language_form": "typo",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:b85960c131326f8b204806255cb578b7ce6d6db618909a8bbd8b1fc203829836"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_018_09",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_018",
+      "description": "authored holdout surface 018/09",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Instruction: record someone as arrived for the 15 minutes visit with Dr Chen Wednesday no earlier than 11am. Do not bypass staff confirmation."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "11:00",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 77,
+            "end": 86,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 103,
+            "end": 107,
+            "text": "11am"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 103,
+            "end": 107,
+            "text": "11am"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 69,
+            "end": 76,
+            "text": "Dr Chen"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 47,
+            "end": 57,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "ambiguous",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "no_slots",
+      "entity_state": "ambiguous",
+      "dialogue_form": "one_shot",
+      "language_form": "speech_like",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:1b310d27198cbffe14078b6d1b127d2dea68d0380dd9322e11694c771a46b6de"
+    }
+  ],
+  "multi_turn_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_018_01",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_018",
+      "description": "authored holdout trajectory 018/01",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "I need help with someone's booking with Dr Chen."
+        },
+        {
+          "turn": 2,
+          "utterance": "Specifically, please record someone as arrived for the 15 minutes visit with Dr Chen Wednesday no earlier than 11am."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "11:00",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 40,
+            "end": 47,
+            "text": "Dr Chen"
+          },
+          {
+            "turn_index": 1,
+            "start": 77,
+            "end": 84,
+            "text": "Dr Chen"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 85,
+            "end": 94,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 1,
+            "start": 111,
+            "end": 115,
+            "text": "11am"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 111,
+            "end": 115,
+            "text": "11am"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 55,
+            "end": 65,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "ambiguous",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "no_slots",
+      "entity_state": "ambiguous",
+      "dialogue_form": "clarification",
+      "language_form": "speech_like",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": "Please clarify the final diary instruction.",
+      "clarification_choices": [
+        "confirm the date",
+        "confirm the time",
+        "confirm the person"
+      ],
+      "variant_hash": "sha256:12170718b761c44330995e2c54a202b56ce412701237d2042cc6c41cdac51b7d"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_018_02",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_018",
+      "description": "authored holdout trajectory 018/02",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please handle someone's booking with Dr Chen Tuesday at 9am."
+        },
+        {
+          "turn": 2,
+          "utterance": "Correction: record someone as arrived for the 15 minutes visit with Dr Chen Wednesday no earlier than 11am, not the earlier detail."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "11:00",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 45,
+            "end": 52,
+            "text": "Tuesday"
+          },
+          {
+            "turn_index": 1,
+            "start": 76,
+            "end": 85,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 56,
+            "end": 59,
+            "text": "9am"
+          },
+          {
+            "turn_index": 1,
+            "start": 102,
+            "end": 106,
+            "text": "11am"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 37,
+            "end": 44,
+            "text": "Dr Chen"
+          },
+          {
+            "turn_index": 1,
+            "start": 68,
+            "end": 75,
+            "text": "Dr Chen"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 102,
+            "end": 106,
+            "text": "11am"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 46,
+            "end": 56,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "ambiguous",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "no_slots",
+      "entity_state": "ambiguous",
+      "dialogue_form": "correction",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:c123fac8e4d50816f599734c4577fecb420d1e906436cd1427ec0fe794a50f6a"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_018_03",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_018",
+      "description": "authored holdout trajectory 018/03",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "For someone's booking with Dr Chen, I have a diary request."
+        },
+        {
+          "turn": 2,
+          "utterance": "That one: record someone as arrived for the 15 minutes visit with Dr Chen Wednesday no earlier than 11am."
+        },
+        {
+          "turn": 3,
+          "utterance": "Keep it as a proposal for staff review; do not claim it is completed."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "11:00",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "11:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 27,
+            "end": 34,
+            "text": "Dr Chen"
+          },
+          {
+            "turn_index": 1,
+            "start": 66,
+            "end": 73,
+            "text": "Dr Chen"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 74,
+            "end": 83,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 1,
+            "start": 100,
+            "end": 104,
+            "text": "11am"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 100,
+            "end": 104,
+            "text": "11am"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 44,
+            "end": 54,
+            "text": "15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "ambiguous",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "no_slots",
+      "entity_state": "ambiguous",
+      "dialogue_form": "anaphora",
+      "language_form": "abbreviation",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-15",
+          "change_type": "status_changed",
+          "new_status": "arrived"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_change_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:95f8ecd137a851fd125a2e386938508e027e3892162ba3ef25850a056c71c045"
+    }
+  ]
+}

@@ -1,0 +1,1411 @@
+{
+  "schema_version": "lc4.holdout.corpus.v1",
+  "holdout_version": "lc4-holdout-v1",
+  "group_id": "lc4_sol_holdout_group_022",
+  "group_hash": "sha256:9cfd5ee575ff0a79bf1ea524fb00eb438e531efb910bc590c004ef6a3a7410ac",
+  "provenance": "gold",
+  "adjudication": "adjudicated",
+  "author_identity": "protected-gpt-sol",
+  "generator_identity": null,
+  "reference_date": "2026-07-14",
+  "clinic_clock": "2026-07-14T09:00:00+10:00",
+  "spec": {
+    "group_index": 22,
+    "intended_action": "explain_schedule",
+    "temporal_relation": "interval",
+    "diary_state": "terminal",
+    "entity_state": "negated",
+    "patient_semantics": "omitted",
+    "practitioner_semantics": "negated",
+    "location_semantics": "omitted",
+    "appointment_type_semantics": "omitted",
+    "duration_semantics": "exact",
+    "dialogue_form": "session_restart",
+    "language_form": "paraphrase",
+    "gap_targets": [
+      "interpretation_replay_tool_selection",
+      "interval_unspecified_temporal"
+    ],
+    "patient_name": "Noah Williams",
+    "practitioner_name": "Dr Iqbal"
+  },
+  "variant_hashes": {
+    "surface": [
+      "sha256:474ecb856d96e2663757e5c86dc2e145d2ff3b90153b5e76795212fcff429601",
+      "sha256:e89e2c8145dfe9f554cc605e2a4f04c4fb8d880f034dbab399a766d21e2a310a",
+      "sha256:1b8c3823e90ae0b13c01ee13d8fa51495202b7d288a842cbbd5608e29cbfd21d",
+      "sha256:4997fe2b8edff902d8c9fd340632be1947d46a410c578985a9cbeb8ea075aa88",
+      "sha256:f78fd0634bf32763f1caaa7b364189e0ad385d2350b6a89a43bc5cb465e9a1ee",
+      "sha256:a1f5238860c020e0e9c4a2b8af15e5864bb08279f67dc598460d166e81d6b230",
+      "sha256:cdf7cd364b9d561e840e8dc68e1e7cd230c434d2cb87b28bf0ec212f9416df3b",
+      "sha256:7fa414c6b4a775b1b2dcf3cd1a86a2d5fc7629367788dc6f2b167976240f5e23",
+      "sha256:07645238fb3dd132b9524fe0e733a422a8535b8e07d185922f610e23456c75b4"
+    ],
+    "multi_turn": [
+      "sha256:c1c2af744873bf19e44fbe37186517fd3454b26321ca18f9343f9b96c88d5b5d",
+      "sha256:32f31307071a08f720a139227d050224bad927e20727ac1d9a9fbf4a5556ce1b",
+      "sha256:3e1633e38f0b08e3347f9bfea1c1ab1374d29de9f90cfdf440ea2bf29db9d440"
+    ]
+  },
+  "surface_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_022_01",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_022",
+      "description": "authored holdout surface 022/01",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please summarise not Dr Iqbal's diary Wednesday between 10am and 1pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 38,
+            "end": 47,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 56,
+            "end": 60,
+            "text": "10am"
+          },
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 68,
+            "text": "1pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 56,
+            "end": 60,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 68,
+            "text": "1pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 21,
+            "end": 29,
+            "text": "Dr Iqbal"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "terminal",
+      "entity_state": "negated",
+      "dialogue_form": "one_shot",
+      "language_form": "speech_like",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:474ecb856d96e2663757e5c86dc2e145d2ff3b90153b5e76795212fcff429601"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_022_02",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_022",
+      "description": "authored holdout surface 022/02",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Could you summarise not Dr Iqbal's diary Wednesday between 10am and 1pm, please?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 41,
+            "end": 50,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 59,
+            "end": 63,
+            "text": "10am"
+          },
+          {
+            "turn_index": 0,
+            "start": 68,
+            "end": 71,
+            "text": "1pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 59,
+            "end": 63,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 68,
+            "end": 71,
+            "text": "1pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 24,
+            "end": 32,
+            "text": "Dr Iqbal"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "terminal",
+      "entity_state": "negated",
+      "dialogue_form": "one_shot",
+      "language_form": "punctuation_variant",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:e89e2c8145dfe9f554cc605e2a4f04c4fb8d880f034dbab399a766d21e2a310a"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_022_03",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_022",
+      "description": "authored holdout surface 022/03",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Reception note \u2014 summarise not Dr Iqbal's diary Wednesday between 10am and 1pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 48,
+            "end": 57,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 66,
+            "end": 70,
+            "text": "10am"
+          },
+          {
+            "turn_index": 0,
+            "start": 75,
+            "end": 78,
+            "text": "1pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 66,
+            "end": 70,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 75,
+            "end": 78,
+            "text": "1pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 31,
+            "end": 39,
+            "text": "Dr Iqbal"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "terminal",
+      "entity_state": "negated",
+      "dialogue_form": "one_shot",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:1b8c3823e90ae0b13c01ee13d8fa51495202b7d288a842cbbd5608e29cbfd21d"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_022_04",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_022",
+      "description": "authored holdout surface 022/04",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "When you have a moment, summarise not Dr Iqbal's diary Wednesday between 10am and 1pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 55,
+            "end": 64,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 73,
+            "end": 77,
+            "text": "10am"
+          },
+          {
+            "turn_index": 0,
+            "start": 82,
+            "end": 85,
+            "text": "1pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 73,
+            "end": 77,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 82,
+            "end": 85,
+            "text": "1pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 38,
+            "end": 46,
+            "text": "Dr Iqbal"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "terminal",
+      "entity_state": "negated",
+      "dialogue_form": "one_shot",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:4997fe2b8edff902d8c9fd340632be1947d46a410c578985a9cbeb8ea075aa88"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_022_05",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_022",
+      "description": "authored holdout surface 022/05",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Quick diary job: summarise not Dr Iqbal's diary Wednesday between 10am and 1pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 48,
+            "end": 57,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 66,
+            "end": 70,
+            "text": "10am"
+          },
+          {
+            "turn_index": 0,
+            "start": 75,
+            "end": 78,
+            "text": "1pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 66,
+            "end": 70,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 75,
+            "end": 78,
+            "text": "1pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 31,
+            "end": 39,
+            "text": "Dr Iqbal"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "terminal",
+      "entity_state": "negated",
+      "dialogue_form": "one_shot",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:f78fd0634bf32763f1caaa7b364189e0ad385d2350b6a89a43bc5cb465e9a1ee"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_022_06",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_022",
+      "description": "authored holdout surface 022/06",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Um, i need the diary updated to summarise not Dr Iqbal's diary Wednesday between 10am and 1pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 63,
+            "end": 72,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 81,
+            "end": 85,
+            "text": "10am"
+          },
+          {
+            "turn_index": 0,
+            "start": 90,
+            "end": 93,
+            "text": "1pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 81,
+            "end": 85,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 90,
+            "end": 93,
+            "text": "1pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 46,
+            "end": 54,
+            "text": "Dr Iqbal"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "terminal",
+      "entity_state": "negated",
+      "dialogue_form": "one_shot",
+      "language_form": "filler",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:a1f5238860c020e0e9c4a2b8af15e5864bb08279f67dc598460d166e81d6b230"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_022_07",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_022",
+      "description": "authored holdout surface 022/07",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "For the front desk list, summarise not Dr Iqbal's diary Wednesday between 10am and 1pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 56,
+            "end": 65,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 74,
+            "end": 78,
+            "text": "10am"
+          },
+          {
+            "turn_index": 0,
+            "start": 83,
+            "end": 86,
+            "text": "1pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 74,
+            "end": 78,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 83,
+            "end": 86,
+            "text": "1pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 39,
+            "end": 47,
+            "text": "Dr Iqbal"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "terminal",
+      "entity_state": "negated",
+      "dialogue_form": "one_shot",
+      "language_form": "abbreviation",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:cdf7cd364b9d561e840e8dc68e1e7cd230c434d2cb87b28bf0ec212f9416df3b"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_022_08",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_022",
+      "description": "authored holdout surface 022/08",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Can we summarise not Dr Iqbal's diary Wednesday between 10am and 1pm?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 38,
+            "end": 47,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 56,
+            "end": 60,
+            "text": "10am"
+          },
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 68,
+            "text": "1pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 56,
+            "end": 60,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 68,
+            "text": "1pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 21,
+            "end": 29,
+            "text": "Dr Iqbal"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "terminal",
+      "entity_state": "negated",
+      "dialogue_form": "one_shot",
+      "language_form": "typo",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:7fa414c6b4a775b1b2dcf3cd1a86a2d5fc7629367788dc6f2b167976240f5e23"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_var_022_09",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_022",
+      "description": "authored holdout surface 022/09",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Instruction: summarise not Dr Iqbal's diary Wednesday between 10am and 1pm. Do not bypass staff confirmation."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 44,
+            "end": 53,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 62,
+            "end": 66,
+            "text": "10am"
+          },
+          {
+            "turn_index": 0,
+            "start": 71,
+            "end": 74,
+            "text": "1pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 62,
+            "end": 66,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 71,
+            "end": 74,
+            "text": "1pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 27,
+            "end": 35,
+            "text": "Dr Iqbal"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "terminal",
+      "entity_state": "negated",
+      "dialogue_form": "one_shot",
+      "language_form": "speech_like",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:07645238fb3dd132b9524fe0e733a422a8535b8e07d185922f610e23456c75b4"
+    }
+  ],
+  "multi_turn_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_022_01",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_022",
+      "description": "authored holdout trajectory 022/01",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "I need help with Dr Iqbal's diary."
+        },
+        {
+          "turn": 2,
+          "utterance": "Specifically, please summarise not Dr Iqbal's diary Wednesday between 10am and 1pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 17,
+            "end": 25,
+            "text": "Dr Iqbal"
+          },
+          {
+            "turn_index": 1,
+            "start": 35,
+            "end": 43,
+            "text": "Dr Iqbal"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 52,
+            "end": 61,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 1,
+            "start": 70,
+            "end": 74,
+            "text": "10am"
+          },
+          {
+            "turn_index": 1,
+            "start": 79,
+            "end": 82,
+            "text": "1pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 70,
+            "end": 74,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 1,
+            "start": 79,
+            "end": 82,
+            "text": "1pm"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "terminal",
+      "entity_state": "negated",
+      "dialogue_form": "clarification",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": "Please clarify the final diary instruction.",
+      "clarification_choices": [
+        "confirm the date",
+        "confirm the time",
+        "confirm the person"
+      ],
+      "variant_hash": "sha256:c1c2af744873bf19e44fbe37186517fd3454b26321ca18f9343f9b96c88d5b5d"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_022_02",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_022",
+      "description": "authored holdout trajectory 022/02",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please handle Dr Iqbal's diary Tuesday at 9am."
+        },
+        {
+          "turn": 2,
+          "utterance": "Correction: summarise not Dr Iqbal's diary Wednesday between 10am and 1pm, not the earlier detail."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 31,
+            "end": 38,
+            "text": "Tuesday"
+          },
+          {
+            "turn_index": 1,
+            "start": 43,
+            "end": 52,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 42,
+            "end": 45,
+            "text": "9am"
+          },
+          {
+            "turn_index": 1,
+            "start": 61,
+            "end": 65,
+            "text": "10am"
+          },
+          {
+            "turn_index": 1,
+            "start": 70,
+            "end": 73,
+            "text": "1pm"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 14,
+            "end": 22,
+            "text": "Dr Iqbal"
+          },
+          {
+            "turn_index": 1,
+            "start": 26,
+            "end": 34,
+            "text": "Dr Iqbal"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 61,
+            "end": 65,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 1,
+            "start": 70,
+            "end": 73,
+            "text": "1pm"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "terminal",
+      "entity_state": "negated",
+      "dialogue_form": "correction",
+      "language_form": "typo",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:32f31307071a08f720a139227d050224bad927e20727ac1d9a9fbf4a5556ce1b"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_sol_holdout_mt_022_03",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4_sol_holdout_group_022",
+      "description": "authored holdout trajectory 022/03",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "For Dr Iqbal's diary, I have a diary request."
+        },
+        {
+          "turn": 2,
+          "utterance": "That one: summarise not Dr Iqbal's diary Wednesday between 10am and 1pm."
+        },
+        {
+          "turn": 3,
+          "utterance": "Keep it as a proposal for staff review; do not claim it is completed."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "10:00",
+      "latest_time": "13:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "10:00",
+        "latest_time": "13:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 4,
+            "end": 12,
+            "text": "Dr Iqbal"
+          },
+          {
+            "turn_index": 1,
+            "start": 24,
+            "end": 32,
+            "text": "Dr Iqbal"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 41,
+            "end": 50,
+            "text": "Wednesday"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 1,
+            "start": 59,
+            "end": 63,
+            "text": "10am"
+          },
+          {
+            "turn_index": 1,
+            "start": 68,
+            "end": 71,
+            "text": "1pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 59,
+            "end": 63,
+            "text": "10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 1,
+            "start": 68,
+            "end": 71,
+            "text": "1pm"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "negated",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "terminal",
+      "entity_state": "negated",
+      "dialogue_form": "anaphora",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:3e1633e38f0b08e3347f9bfea1c1ab1374d29de9f90cfdf440ea2bf29db9d440"
+    }
+  ]
+}
