@@ -100,7 +100,16 @@ def build_orchestrator_receipt(
         reasons.append("context_health_missing")
 
     planned_action = runtime_state.get("planned_action")
-    hard_event = runtime_state.get("continuation_event") in context_policy.get("hard_rehydration_events", [])
+    continuation_event = runtime_state.get("continuation_event")
+    hard_event = continuation_event in context_policy.get("hard_rehydration_events", [])
+    required_sources_by_event = context_policy.get(
+        "required_rehydration_sources_by_event", {}
+    )
+    required_rehydration_sources = (
+        required_sources_by_event.get(continuation_event, [])
+        if isinstance(required_sources_by_event, dict)
+        else []
+    )
     high_authority = planned_action in context_policy.get("high_authority_actions", [])
     mandatory_ratio = context_policy.get("provider_meter", {}).get("mandatory_rehydration_ratio")
     for agent_id in context_policy.get("required_agent_ids", []):
@@ -110,6 +119,15 @@ def build_orchestrator_receipt(
             continue
         if hard_event and context.get("rehydrated_from_receipt") is not True:
             reasons.append(f"context_rehydration_required:{agent_id}")
+        if required_rehydration_sources:
+            observed_sources = context.get("rehydration_sources")
+            if not isinstance(observed_sources, list):
+                observed_sources = []
+            for required_source in required_rehydration_sources:
+                if required_source not in observed_sources:
+                    reasons.append(
+                        f"rehydration_source_missing:{agent_id}:{required_source}"
+                    )
         source = context.get("measurement_source")
         if source == "provider_reported":
             input_tokens = context.get("input_tokens")

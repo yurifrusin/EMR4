@@ -28,6 +28,7 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
+| **Current authority allocation (authoritative override)** | GPT Sol is the Conductor, sprint planner, architecture/acceptance owner, recovery owner, and protected integrator. DeepSeek V4 Flash through Claude Code `--bare` is an economical implementation/test worker. Gemini 3.5 Flash through Antigravity is an economical worker and independent reviewer. DeepSeek Pro is **not** the Conductor and must not be launched for planning, acceptance revision, or sprint allocation unless Yuri explicitly re-authorizes that role in a later user instruction. This row overrides conflicting historical/default allocation text anywhere else in this handover or linked Ariadne documents. |
 | **Current active track** | LC1-LC4 are complete. LC4 now provides exactly 120 semantic groups, 1,440 variants, and 360 multi-turn trajectories: 96 DeepSeek Silver/pending development groups plus a 24-group, 288-variant, 72-trajectory Sol-authored Gold/adjudicated protected holdout. The development baseline has 0/2,304 complete passes but 2,304/2,304 safety passes; its 444 candidate-only cells remain separate from the three Gold cells and do not reduce the 152,061 adjudicated gaps. Gemini 3.5 Flash independently returned `DECISION: pass` before the holdout existed. Sol then sealed and consumed `lc4-holdout-v1` once: 0/576 complete passes, 576 interpretation and policy attributions, 538 integration attributions, eight safety failures, zero repeat variance, and 264 new adjudicated cells, leaving 151,797 empty. The holdout report is aggregate-only and version v1 cannot be re-evaluated or tuned against without an explicit reuse/new-version policy. T3.1-T3.4 remain intact and blocked by default; T3.5 provider adapters and all live/write authority remain deferred. |
 | **Next recommended work** | Do not proceed directly to LC5/T3.5: LC4 proves the language bridge is not credible at scale, especially for normalized values, entity semantics, downstream outcomes, clarification, and tool/authority selection. Begin an LC4R deterministic semantic-gap repair tranche against the Silver/pending development partition only. Prioritize the non-intercepted interpretation path, lossless normalization, explicit negation (including the holdout-observed but non-case-specific completion-negation safety class), entity resolution, clarification state, and interpretation/replay tool selection. Do not inspect or rerun protected holdout cases; define a new holdout version or reviewed reuse policy before any future certification evaluation. Treat typed text and future ASR transcripts as surface channels into the same canonical scenario contract; do not add a separate voice semantic stack. Preserve T3.1-T3.4 and the T3.5/live-provider/write deferral. Continue without user pause for ordinary development-only repair, but pause before live-provider calls, holdout reuse, historical-trove expansion, sensitive-data transmission, material licence/cost acceptance, or write-authority change. Dependabot alert 5 remains open; do not force overrides. |
 
@@ -93,6 +94,14 @@ new-continuation policy defaults; unknown context cannot proceed to planning,
 dispatch, verification acceptance, integration, commit, or push without a
 fresh receipt. This replaces any expectation that the orchestrator will simply
 remember critical facts through automatic compaction.
+After compaction, `rehydrated_from_receipt: true` is not sufficient by itself.
+The fresh receipt must name evidence that the live Current Baton, current
+authority allocation, active plan/acceptance artifacts, protected-evidence
+boundaries, and Git refs/worktree were reread or verified. Missing any source
+returns `revision_required` and forbids planning or dispatch. A compacted
+conversation summary is a continuity aid only and is never authoritative for
+model allocation, provider transport, holdout/protected evidence, or user
+decision boundaries.
 DeepSeek's preferred EMR4 transport is Claude Code `--bare` print mode through
 the DeepSeek Anthropic-compatible API, registered as
 `deepseek_via_claude_code_bare` and launched by
@@ -137,18 +146,26 @@ and run the risk-class verification gate. Low-risk docs/tests/harness recovery
 uses deterministic tests plus diff review; runtime/security/database/deployment/
 release recovery also requires independent verification. See
 `docs/ariadne-orchestrator-recovery-lease.md`.
-Yuri's 2026-07-14 routine-planning decision supersedes the older default
-Conductor cycle: protected GPT Sol directly plans and allocates ordinary bounded
-sprints. DeepSeek 4 Pro/high through Claude Code bare mode is now an optional
-compact consultant only for architecture/programme boundaries, material
-allocation complexity, or repeated failure where the extra round trip has
-clear leverage. DeepSeek Flash remains the preferred bounded implementation
-and test worker; Gemini 3.5 Flash through the Antigravity CLI remains the
-economical peer worker for independent generation, adversarial review, and
-separable implementation/test surfaces. Fable/Opus remain availability-gated
-escalation options. No external Conductor has integration authority. Direction collaboration remains
-optional and bounded when Sol explicitly selects it; independent LLM
-verification stays risk-triggered. See `docs/ariadne-operating-model-v2.md`,
+Yuri's 2026-07-14 authority decision supersedes the older default Conductor
+cycle and is the current rule for ordinary and material sprint boundaries:
+protected GPT Sol is the Conductor and directly owns sprint planning,
+architecture, allocation, acceptance changes, recovery decisions, and protected
+integration. An acceptance failure or material plan change does **not** by
+itself trigger an external Conductor round trip; Sol makes that decision and may
+request bounded consultation only when it has clear leverage.
+
+DeepSeek V4 Flash/high through Claude Code `--bare` is the preferred economical
+implementation and test worker. Gemini 3.5 Flash through the Antigravity CLI is
+the economical peer worker for independent generation, adversarial review, and
+separable implementation/test surfaces. DeepSeek Pro is not a routine or
+fallback Conductor and must not be launched for planning, sprint allocation, or
+acceptance revision without a new explicit instruction from Yuri. Fable/Opus
+remain availability-gated consultation options, not automatic Conductors. No
+external worker or consultant has integration authority or may certify its own
+corpus. Direction collaboration is optional and begins only when Sol explicitly
+selects it; independent LLM verification stays risk-triggered. This paragraph
+overrides conflicting historical/default allocation language later in this file
+and in linked Ariadne documents. See `docs/ariadne-operating-model-v2.md`,
 `docs/ariadne-direction-collaboration.md`, and
 `docs/ariadne-autonomous-continuation.md`.
 Cost controls are retained but inactive for the current subscription profile.

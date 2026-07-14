@@ -12,6 +12,13 @@ workspace_receipts:
 context_health:
   required_agent_ids: [orchestrator]
   hard_rehydration_events: [new_session, post_compaction, model_or_provider_change, restored_conversation]
+  required_rehydration_sources_by_event:
+    post_compaction:
+      - live_handover_current_baton
+      - current_authority_allocation
+      - active_plan_and_acceptance
+      - protected_evidence_boundaries
+      - git_refs_and_worktree
   provider_meter:
     soft_checkpoint_ratio: 0.70
     mandatory_rehydration_ratio: 0.85

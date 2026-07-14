@@ -92,3 +92,41 @@ def test_context_health_requires_a_new_continuation_when_provider_meter_is_criti
 
     assert receipt["status"] == "revision_required"
     assert "context_mandatory_rehydration_threshold:orchestrator" in receipt["reasons"]
+
+
+def test_post_compaction_requires_named_live_rehydration_sources(tmp_path: Path):
+    runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
+    runtime_state["context_health"]["agent_contexts"][0]["rehydration_sources"] = [
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree",
+    ]
+    path = tmp_path / "runtime-state.json"
+    path.write_text(json.dumps(runtime_state), encoding="utf-8")
+
+    receipt = build_receipt(runtime_state_path=path)
+
+    assert receipt["status"] == "revision_required"
+    assert receipt["worker_dispatch_permitted"] is False
+    assert (
+        "rehydration_source_missing:orchestrator:live_handover_current_baton"
+        in receipt["reasons"]
+    )
+    assert (
+        "rehydration_source_missing:orchestrator:current_authority_allocation"
+        in receipt["reasons"]
+    )
+
+
+def test_named_rehydration_sources_are_specific_to_the_configured_event(tmp_path: Path):
+    runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
+    runtime_state["continuation_event"] = "pre_sprint_planning"
+    runtime_state["context_health"]["agent_contexts"][0].pop(
+        "rehydration_sources", None
+    )
+    path = tmp_path / "runtime-state.json"
+    path.write_text(json.dumps(runtime_state), encoding="utf-8")
+
+    receipt = build_receipt(runtime_state_path=path)
+
+    assert receipt["status"] == "passed"

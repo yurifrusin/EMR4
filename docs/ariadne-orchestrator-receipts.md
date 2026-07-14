@@ -33,6 +33,26 @@ inventory, stale instances without recorded reuse/closure, invalid adapter
 evidence, or stale worker worktrees block dispatch. This moves critical facts from a long handover
 document into a repeatable, project-portable gate.
 
+For EMR4, a post-compaction receipt is not satisfied by the boolean
+`rehydrated_from_receipt` alone. The orchestrator context must record all five
+named live sources in `rehydration_sources`:
+
+- `live_handover_current_baton` — reread the current `AGENTS.md` baton rather
+  than relying on a compacted conversation summary;
+- `current_authority_allocation` — reread the authoritative Sol/worker/model
+  allocation override;
+- `active_plan_and_acceptance` — reread the current sprint contract, plan, and
+  latest durable worker/review decisions;
+- `protected_evidence_boundaries` — restore holdout, sensitive-data, provider,
+  and write-authority constraints; and
+- `git_refs_and_worktree` — verify branch, HEAD, cleanliness, protected refs,
+  and the target worktree.
+
+Missing any named source returns `revision_required` and forbids planning or
+worker dispatch. Compacted summaries are continuity aids only; they are not
+authoritative for agent allocation, provider transport, protected evidence, or
+user decision boundaries.
+
 ## Context Health
 
 The same receipt carries context health. Platform lifecycle events such as a

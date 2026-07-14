@@ -4,7 +4,18 @@
   "planned_action": "sprint_planning",
   "context_health": {
     "agent_contexts": [
-      {"agent_id": "orchestrator", "measurement_source": "platform_compaction_event", "rehydrated_from_receipt": true}
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "platform_compaction_event",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
     ]
   },
   "adapter_observations": [
