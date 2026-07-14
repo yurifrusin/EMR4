@@ -189,4 +189,3 @@ focused and proportional LC1-LC4R plus T1/T2/T3.1-T3.4 checks, clean diff,
 and Gemini `DECISION: pass` on the exact recovered head.
 
 Sprint engine state: continuing.
-

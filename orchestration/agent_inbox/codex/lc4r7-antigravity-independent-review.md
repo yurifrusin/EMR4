@@ -1,9 +1,9 @@
 # LC4R7 Gemini Independent Veto Review
 
-**Reviewer:** Gemini 3.5 Flash (Medium)  
-**Date:** 2026-07-15  
-**Reviewed Head:** `8c0a9131f136b8fe98cb5b211e0827301cb6bfa8`  
-**Base Revision:** `0c5a51199605600b612a8364972c71e4289016cd` (accepted LC4R6 base)  
+**Reviewer:** Gemini 3.5 Flash (Medium)
+**Date:** 2026-07-15
+**Reviewed Head:** `8c0a9131f136b8fe98cb5b211e0827301cb6bfa8`
+**Base Revision:** `0c5a51199605600b612a8364972c71e4289016cd` (accepted LC4R6 base)
 
 ---
 
