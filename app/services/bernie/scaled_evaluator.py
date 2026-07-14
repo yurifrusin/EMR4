@@ -215,7 +215,7 @@ _PROHIBITED_HOLDOUT_KEYS: frozenset[str] = frozenset({
     # source spans
     "source_span", "source_spans", "span", "span_text",
     # normalized values
-    "normalized_value", "normalized_values", "normalized",
+    "normalized_value", "normalized",
     # case findings / per-case results
     "case_finding", "case_findings", "finding", "findings",
     "per_case_result", "per_case", "result", "per_sample",
@@ -245,7 +245,8 @@ def sanitize_holdout_report(report: dict[str, Any]) -> dict[str, Any]:
         "corpus_hash", "manifest_hash", "report_hash",
         "total_groups", "total_variants", "total_trajectories",
         "total_samples", "repeat_count",
-        "aggregate", "critical_slices", "per_dimension",
+        "aggregate", "critical_slices", "per_dimension", "variance",
+        "coverage_lattice",
     }
 
     # Enforce top-level structure
@@ -491,6 +492,38 @@ def _check_holdout_top_level_values(report: dict[str, Any]) -> None:
             raise ValueError("Holdout sealed_receipt evaluation_id is invalid")
         if receipt["is_sealed"] is not True:
             raise ValueError("Holdout sealed_receipt must be sealed")
+
+    if "variance" in report:
+        variance = report["variance"]
+        if not isinstance(variance, dict):
+            raise ValueError("Holdout variance must be a dict")
+        allowed_variance = {
+            "variant_scenario_count", "variant_sample_count",
+            "total_repeats", "all_samples_deterministic",
+        }
+        _reject_unknown_keys(variance, allowed_variance, "variance")
+        for key in {
+            "variant_scenario_count", "variant_sample_count", "total_repeats",
+        } & variance.keys():
+            _require_nonnegative_int(variance[key], f"variance.{key}")
+        if "all_samples_deterministic" in variance and not isinstance(
+            variance["all_samples_deterministic"], bool
+        ):
+            raise ValueError("Holdout variance determinism flag must be boolean")
+
+    if "coverage_lattice" in report:
+        lattice = report["coverage_lattice"]
+        if not isinstance(lattice, dict):
+            raise ValueError("Holdout coverage_lattice must be a dict")
+        allowed_lattice = {
+            "total_lattice_cells", "prior_adjudicated_covered_cell_count",
+            "holdout_covered_cell_count", "holdout_new_cell_count",
+            "combined_adjudicated_covered_cell_count",
+            "combined_adjudicated_empty_cell_count",
+        }
+        _reject_unknown_keys(lattice, allowed_lattice, "coverage_lattice")
+        for key, value in lattice.items():
+            _require_nonnegative_int(value, f"coverage_lattice.{key}")
 
 
 def _reject_unknown_keys(obj: dict[str, Any], allowed: set[str], path: str) -> None:
