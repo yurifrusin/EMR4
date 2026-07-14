@@ -5,13 +5,16 @@ Covers:
   2. --check passes against the committed report.
   3. Deterministic order-invariance (shuffled scenarios give same taxonomy).
   4. Fail-closed when taxonomy/report/selection/corpus drift is simulated.
+     Every drift test exercises ``run_check`` and asserts ``False``.
   5. Aggregate-only output (no full scenario payloads).
   6. No protected holdout/provider boundary breach.
-  7. LC4R5 baseline: semantic counts unchanged, safety 1152/1152, zero variance.
+  7. Pre-LC4R5 and LC4R5 baselines: semantic counts unchanged, safety 1152/1152,
+     zero variance.
 """
 
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
 import pathlib
@@ -27,6 +30,20 @@ from scripts.bernie_lc4r6_temporal_evidence_report import (
     EXPECTED_INSUFFICIENT_SUBTYPES,
     EXPECTED_TEMPORAL_AF_COUNT,
     EXPECTED_TEMPORAL_AF_HASH,
+    LC4R5_BASELINE_ACTION_SEMANTICS,
+    LC4R5_BASELINE_CLARIFICATION,
+    LC4R5_BASELINE_ENTITY_SEMANTICS,
+    LC4R5_BASELINE_INTENDED_ACTION,
+    LC4R5_BASELINE_NORMALIZED_VALUES,
+    LC4R5_BASELINE_SAFETY,
+    LC4R5_BASELINE_TEMPORAL_RELATION,
+    PRE_LC4R5_ACTION_SEMANTICS,
+    PRE_LC4R5_CLARIFICATION,
+    PRE_LC4R5_ENTITY_SEMANTICS,
+    PRE_LC4R5_INTENDED_ACTION,
+    PRE_LC4R5_NORMALIZED_VALUES,
+    PRE_LC4R5_SAFETY,
+    PRE_LC4R5_TEMPORAL_RELATION,
     REPORT_PATH,
     _compute_report_hash,
     _extract_surface_temporal,
@@ -37,7 +54,7 @@ from scripts.bernie_lc4r6_temporal_evidence_report import (
 
 HERE = pathlib.Path(__file__).resolve().parent
 PROJECT_ROOT = HERE.parent
-PYTHON = r"C:\Users\sarashera\emr4\.venv\Scripts\python.exe"
+PYTHON = sys.executable
 
 
 # =============================================================================
@@ -130,20 +147,67 @@ class TestOrderInvariance:
     """Taxonomy is invariant to input scenario ordering."""
 
     def test_shuffled_input_produces_same_taxonomy(self) -> None:
-        """Running the report on shuffled variants produces same taxonomy."""
-        # Build report normally
-        report1 = build_report()
-        tax1 = report1["temporal_taxonomy"]
+        """Classifying variants in original and shuffled order gives identical
+        aggregate taxonomy."""
+        # Build report in original order to get reference taxonomy
+        report_original = build_report()
+        original_tax = report_original["temporal_taxonomy"]
+        original_pairs = report_original["conflict_pair_counts"]
+        original_subtypes = report_original["insufficient_subtypes"]
 
-        # The report helper doesn't expose shuffled variants directly,
-        # but the classification is based on deterministic extraction and
-        # set operations on scenario IDs, which are inherently order-invariant.
-        # Verify by checking that selection hash is deterministic.
-        assert report1["temporal_selection"]["hash"] == EXPECTED_TEMPORAL_AF_HASH
+        # Now load variants and run classification with shuffled order.
+        # We need direct access to the loading + classification pipeline
+        # without the full report build (to avoid regenerating the evaluation
+        # report inside the test).
+        from scripts.bernie_lc4r6_temporal_evidence_report import (
+            _classify_temporal_aligned_failures,
+            _load_corpus,
+        )
 
-        # Also verify bucket hashes are deterministic.
+        corpus = _load_corpus()
+        variants = list(corpus.all_variants())
+
+        # Create a deterministic shuffle (reversed order is also a valid test)
+        shuffled = list(variants)
+        random.seed(42)
+        random.shuffle(shuffled)
+
+        taxonomy_shuffled = _classify_temporal_aligned_failures(shuffled)
+
+        # Compare every measurable field
         for name in EXPECTED_BUCKETS:
-            assert report1["temporal_taxonomy"][name]["hash"] == EXPECTED_BUCKETS[name]["hash"]
+            assert taxonomy_shuffled["buckets"][name]["count"] == original_tax[name]["count"], (
+                f"Bucket {name} count differs after shuffle: "
+                f"{taxonomy_shuffled['buckets'][name]['count']} != {original_tax[name]['count']}"
+            )
+            assert taxonomy_shuffled["buckets"][name]["hash"] == original_tax[name]["hash"], (
+                f"Bucket {name} hash differs after shuffle: "
+                f"{taxonomy_shuffled['buckets'][name]['hash']} != {original_tax[name]['hash']}"
+            )
+
+    def test_reversed_input_produces_same_taxonomy(self) -> None:
+        """Classifying variants in reversed order gives identical taxonomy."""
+        from scripts.bernie_lc4r6_temporal_evidence_report import (
+            _classify_temporal_aligned_failures,
+            _load_corpus,
+        )
+
+        corpus = _load_corpus()
+        variants = list(corpus.all_variants())
+
+        # Reference in original order
+        tax_original = _classify_temporal_aligned_failures(variants)
+
+        # Reverse order
+        reversed_variants = list(reversed(variants))
+        tax_reversed = _classify_temporal_aligned_failures(reversed_variants)
+
+        for name in EXPECTED_BUCKETS:
+            assert tax_reversed["buckets"][name]["count"] == tax_original["buckets"][name]["count"]
+            assert tax_reversed["buckets"][name]["hash"] == tax_original["buckets"][name]["hash"]
+
+        assert tax_reversed["selection"]["hash"] == tax_original["selection"]["hash"]
+        assert tax_reversed["selection"]["count"] == tax_original["selection"]["count"]
 
 
 # =============================================================================
@@ -152,22 +216,35 @@ class TestOrderInvariance:
 
 
 class TestFailClosed:
-    """Report fails closed on taxonomy/report/selection drift."""
+    """Report fails closed on taxonomy/report/selection drift.
 
-    def test_run_check_on_altered_report_fails(self) -> None:
-        """run_check rejects a report with altered bucket count."""
+    Every test builds a report, introduces a specific drift, and asserts
+    that ``run_check`` returns ``False``.
+    """
+
+    def test_altered_bucket_count_fails_check(self) -> None:
+        """run_check rejects a report with altered insufficient count."""
         report = build_report()
-        # Mutate a bucket count
         report["temporal_taxonomy"]["insufficient_surface_evidence"]["count"] = 99
-        # run_check compares against frozen, should fail
-        # (But run_check needs frozen to exist; it loads the committed report)
         if not REPORT_PATH.exists():
             pytest.skip("No frozen report to compare against")
-        # We expect run_check to return False since our in-memory count differs
-        from scripts.bernie_lc4r6_temporal_evidence_report import _load_frozen_report
-        frozen = _load_frozen_report()
-        # Verify frozen has the expected count
-        assert frozen["temporal_taxonomy"]["insufficient_surface_evidence"]["count"] == 84
+        passed = run_check(report)
+        assert not passed, "run_check must fail on altered bucket count"
+
+    def test_unexpected_taxonomy_bucket_fails_check(self) -> None:
+        """A report with an unexpected taxonomy bucket must fail closed."""
+        report = build_report()
+        # Add a bucket that does not exist in the frozen report
+        report["temporal_taxonomy"]["unexpected_bucket"] = {
+            "count": 1,
+            "hash": "aaaaaaaaaaaaaaaa",
+            "expected_count": 0,
+            "expected_hash": "bbbbbbbbbbbbbbbb",
+        }
+        if not REPORT_PATH.exists():
+            pytest.skip("No frozen report to compare against")
+        passed = run_check(report)
+        assert not passed, "run_check must fail on unexpected taxonomy bucket"
 
     def test_drift_detected_in_selection_hash(self) -> None:
         """A wrong selection hash must fail closed."""
@@ -176,7 +253,6 @@ class TestFailClosed:
         report["temporal_selection"]["hash_match"] = False
         if not REPORT_PATH.exists():
             pytest.skip("No frozen report")
-        # run_check should flag the mismatch
         passed = run_check(report)
         assert not passed, "run_check must fail on hash drift"
 
@@ -188,6 +264,30 @@ class TestFailClosed:
             pytest.skip("No frozen report")
         passed = run_check(report)
         assert not passed, "run_check must fail on bucket hash drift"
+
+    def test_drift_detected_in_corpus_hash(self) -> None:
+        """A wrong corpus hash must fail closed."""
+        report = build_report()
+        report["corpus_hash"] = "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+        if not REPORT_PATH.exists():
+            pytest.skip("No frozen report")
+        passed = run_check(report)
+        assert not passed, "run_check must fail on corpus hash drift"
+
+    def test_drift_detected_in_report_hash(self) -> None:
+        """A wrong report hash must fail closed via run_check."""
+        report = build_report()
+        # run_check recomputes the report hash internally, so we need to
+        # corrupt a field that affects the report hash but is checked elsewhere.
+        # The simplest approach: corrupt the report hash itself (which run_check
+        # recomputes and compares against frozen).
+        # Actually run_check ignores the embedded report_hash and recomputes it.
+        # So we corrupt a baseline value instead to trigger mismatch.
+        report["pre_lc4r5_baseline"]["action_semantics"] = 0
+        if not REPORT_PATH.exists():
+            pytest.skip("No frozen report")
+        passed = run_check(report)
+        assert not passed, "run_check must fail on drifts that affect hash"
 
 
 # =============================================================================
@@ -203,9 +303,6 @@ class TestAggregateOnly:
         report = build_report()
         report_str = json.dumps(report, default=str)
 
-        # The report may contain hashes but not raw scenario ID lists
-        # in the report payload itself (the selection hash is derived
-        # from IDs but the IDs are not stored in the report).
         assert "lc4_dw1_dev_" not in report_str, (
             "Report must not contain individual scenario IDs"
         )
@@ -213,8 +310,6 @@ class TestAggregateOnly:
     def test_no_utterance_text_in_report(self) -> None:
         """Report contains no full utterance or payload text."""
         report = build_report()
-        report_str = json.dumps(report, default=str)
-        # Check that no long text strings appear (utterances would be long)
         for val in _all_string_values(report):
             if len(val) > 50 and any(c in val for c in ("appointment", "booking", "schedule", "today", "tomorrow")):
                 pytest.fail(f"Report contains utterance-like text: {val[:80]}...")
@@ -265,24 +360,36 @@ class TestProtectedBoundary:
 
 
 # =============================================================================
-# 7.  LC4R5 baseline — unchanged
+# 7.  Pre-LC4R5 and LC4R5 baselines — frozen
 # =============================================================================
 
 
-class TestLc4r5BaselineUnchanged:
-    """LC4R5 semantic baseline, safety, and variance remain unchanged."""
+class TestBaselinesFrozen:
+    """Pre-LC4R5 and LC4R5 baseline values are frozen and unchanged."""
 
-    def test_baseline_counts(self) -> None:
-        """LC4R5 baseline values are frozen and unchanged."""
+    def test_pre_lc4r5_baseline_counts(self) -> None:
+        """Pre-LC4R5 baseline values are the historical frozen values."""
+        report = build_report()
+        pre = report["pre_lc4r5_baseline"]
+        assert pre["intended_action"] == PRE_LC4R5_INTENDED_ACTION == 880
+        assert pre["action_semantics"] == PRE_LC4R5_ACTION_SEMANTICS == 730
+        assert pre["temporal_relation"] == PRE_LC4R5_TEMPORAL_RELATION == 628
+        assert pre["normalized_values"] == PRE_LC4R5_NORMALIZED_VALUES == 101
+        assert pre["entity_semantics"] == PRE_LC4R5_ENTITY_SEMANTICS == 300
+        assert pre["clarification"] == PRE_LC4R5_CLARIFICATION == 698
+        assert pre["safety"] == PRE_LC4R5_SAFETY == 1152
+
+    def test_lc4r5_baseline_counts(self) -> None:
+        """LC4R5 baseline values are the authoritative current values."""
         report = build_report()
         base = report["lc4r5_baseline"]
-        assert base["intended_action"] == 880
-        assert base["action_semantics"] == 730
-        assert base["temporal_relation"] == 628
-        assert base["normalized_values"] == 101
-        assert base["entity_semantics"] == 300
-        assert base["clarification"] == 698
-        assert base["safety"] == 1152
+        assert base["intended_action"] == LC4R5_BASELINE_INTENDED_ACTION == 880
+        assert base["action_semantics"] == LC4R5_BASELINE_ACTION_SEMANTICS == 814
+        assert base["temporal_relation"] == LC4R5_BASELINE_TEMPORAL_RELATION == 628
+        assert base["normalized_values"] == LC4R5_BASELINE_NORMALIZED_VALUES == 101
+        assert base["entity_semantics"] == LC4R5_BASELINE_ENTITY_SEMANTICS == 300
+        assert base["clarification"] == LC4R5_BASELINE_CLARIFICATION == 782
+        assert base["safety"] == LC4R5_BASELINE_SAFETY == 1152
 
     def test_post_lc4r5_semantic_fields(self) -> None:
         """Post-LC4R5 semantic field counts are frozen."""

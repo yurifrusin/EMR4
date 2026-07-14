@@ -3,13 +3,22 @@
   "development_only": true,
   "silver_pending_only": true,
   "corpus_hash": "sha256:aa2d946b60694eab96846ed77e885273c807e127f8998981a8cf8ff20ebae647",
-  "lc4r5_baseline": {
+  "pre_lc4r5_baseline": {
     "intended_action": 880,
     "action_semantics": 730,
     "temporal_relation": 628,
     "normalized_values": 101,
     "entity_semantics": 300,
     "clarification": 698,
+    "safety": 1152
+  },
+  "lc4r5_baseline": {
+    "intended_action": 880,
+    "action_semantics": 814,
+    "temporal_relation": 628,
+    "normalized_values": 101,
+    "entity_semantics": 300,
+    "clarification": 782,
     "safety": 1152
   },
   "lc4r5_post_semantic_fields_one_repeat": {
@@ -101,5 +110,5 @@
     "safety_exact_1152_of_1152": true,
     "repeat_variance_zero": true
   },
-  "report_hash": "sha256:f894f1c2a695567bb38722f3379eeefcc0500bb2543a9805905afc9a10f0e404"
+  "report_hash": "sha256:511904a5cdba27845e73a384e6654f1310ae1d590b1c032c410ace2b3e24e286"
 }

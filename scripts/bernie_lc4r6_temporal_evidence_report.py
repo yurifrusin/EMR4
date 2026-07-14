@@ -82,21 +82,27 @@ EXPECTED_CONFLICT_PAIRS: dict[tuple[str, str], int] = {
     ("unspecified", "exact"): 9,
 }
 
-# LC4R5 semantic baseline (unchanged)
-BASELINE_INTENDED_ACTION = 880
-BASELINE_ACTION_SEMANTICS = 730
-BASELINE_TEMPORAL_RELATION = 628
-BASELINE_NORMALIZED_VALUES = 101
-BASELINE_ENTITY_SEMANTICS = 300
-BASELINE_CLARIFICATION = 698
-BASELINE_SAFETY = 1152
+# Pre-LC4R5 baseline (historical — before LC4R5 action/classification repairs)
+PRE_LC4R5_INTENDED_ACTION = 880
+PRE_LC4R5_ACTION_SEMANTICS = 730
+PRE_LC4R5_TEMPORAL_RELATION = 628
+PRE_LC4R5_NORMALIZED_VALUES = 101
+PRE_LC4R5_ENTITY_SEMANTICS = 300
+PRE_LC4R5_CLARIFICATION = 698
+PRE_LC4R5_SAFETY = 1152
+
+# LC4R5 semantic baseline (authoritative current)
+LC4R5_BASELINE_INTENDED_ACTION = 880
+LC4R5_BASELINE_ACTION_SEMANTICS = 814
+LC4R5_BASELINE_TEMPORAL_RELATION = 628
+LC4R5_BASELINE_NORMALIZED_VALUES = 101
+LC4R5_BASELINE_ENTITY_SEMANTICS = 300
+LC4R5_BASELINE_CLARIFICATION = 782
+LC4R5_BASELINE_SAFETY = 1152
+
 TOTAL_SCENARIOS = 1152
 TOTAL_SAMPLES = 2304
 REPEATS = 2
-
-# Post-LC4R5 expected values (unchanged)
-EXPECTED_POST_ACTION_SEMANTICS = 814
-EXPECTED_POST_CLARIFICATION = 782
 
 
 # ---------------------------------------------------------------------------
@@ -153,95 +159,6 @@ def _extract_utterances_from_scenario(v) -> list[str]:
     ]
 
 
-def _compute_temporal_category(
-    v,
-) -> tuple[bool, str]:
-    """Compute the audit category for a single scenario at repeat index 0.
-
-    Returns (is_aligned_failure, category_label).
-    """
-    sys.path.insert(0, str(PROJECT_ROOT))
-    from app.services.bernie.composed_corpus_evaluator import (
-        deterministic_interpret,
-        deterministic_replay,
-    )
-    from app.services.bernie.composed_evaluator import (
-        InterpretationObservation,
-        score_interpretation_replay_pair,
-    )
-    from app.services.bernie.development_gap_audit import (
-        ConflictRecord,
-        RULE_NEGATION_MISMATCH,
-        _check_action_conflict,
-        _check_ambiguous_surface,
-        _check_authority_conflict,
-        _check_clarification_conflict,
-        _check_duration_conflict,
-        _check_entity_conflict,
-        _check_temporal_conflict,
-        _detect_surface_negation,
-        _safe_excerpt,
-    )
-
-    utterances = _extract_utterances_from_scenario(v)
-    interp = deterministic_interpret(v)
-    interp_obj = InterpretationObservation(
-        scenario_id=interp.scenario_id,
-        sample_index=0,
-        intended_action=interp.intended_action,
-        action_semantics=interp.action_semantics,
-        temporal_relation=interp.temporal_relation,
-        normalized_values=dict(interp.normalized_values),
-        entity_semantics=dict(interp.entity_semantics),
-        requires_clarification=interp.requires_clarification,
-        clarification_choices=interp.clarification_choices,
-        selected_tool_sequence=interp.selected_tool_sequence,
-        authority_claim=interp.authority_claim,
-        claims_action_completed=interp.claims_action_completed,
-        action_negated=interp.action_negated,
-    )
-    replay = deterministic_replay(v, interp_obj)
-    result = score_interpretation_replay_pair(v, interp_obj, replay)
-
-    # Replicate audit_candidates conflict detection order
-    detected = None
-    surface_negated = _detect_surface_negation(utterances)
-    if surface_negated and not interp_obj.action_negated:
-        detected = ConflictRecord(
-            rule_id=RULE_NEGATION_MISMATCH,
-            candidate_id=v.scenario_id,
-            category="surface_contract_conflict",
-            observed_value="surface_detected_negation",
-            expected_value="parser_no_negation",
-            evidence_excerpt=_safe_excerpt(utterances[0] if utterances else ""),
-        )
-    if detected is None:
-        detected = _check_action_conflict(v, interp_obj, utterances)
-    if detected is None:
-        detected = _check_temporal_conflict(v, interp_obj, utterances)
-    if detected is None:
-        detected = _check_duration_conflict(v, interp_obj, utterances)
-    if detected is None:
-        detected = _check_entity_conflict(v, interp_obj, utterances)
-    if detected is None:
-        detected = _check_clarification_conflict(v, interp_obj, utterances)
-    if detected is None:
-        detected = _check_authority_conflict(v, interp_obj)
-    if detected is None:
-        detected = _check_ambiguous_surface(v, interp_obj, utterances)
-
-    if detected is not None:
-        cat = detected.category
-    elif result.all_passed:
-        cat = "aligned_pass"
-    else:
-        cat = "aligned_failure"
-
-    is_af = cat == "aligned_failure"
-    temporal_fails = not result.semantic_fields.temporal_relation.passed
-    return is_af and temporal_fails, cat
-
-
 def _extract_surface_temporal(utterances: list[str]) -> str:
     """Derive the surface temporal relation from dialogue turns.
 
@@ -262,16 +179,72 @@ def _extract_surface_temporal(utterances: list[str]) -> str:
 def _classify_temporal_aligned_failures(
     variants,
 ) -> dict[str, Any]:
-    """Classify the 159 temporal aligned-failure scenarios into three buckets."""
-    from app.services.bernie.semantic_extraction import _extract_temporal
+    """Classify the 159 temporal aligned-failure scenarios into three buckets.
+
+    Uses the authoritative public ``audit_candidates`` path to select
+    aligned_failure scenarios, then independently applies the composed temporal
+    score and oracle-free temporal extractor for the LC4R6 taxonomy.
+    """
+    from app.services.bernie.development_gap_audit import audit_candidates
 
     scenarios_by_id = {v.scenario_id: v for v in variants}
 
-    # First, identify aligned-failure + temporal failing scenarios
+    # --- Run the authoritative audit once to get per-scenario categories ---
+    # Use a high max_conflict_examples to capture all conflict/ambiguous records.
+    audit_result = audit_candidates(variants, max_conflict_examples=len(variants))
+
+    # Build sets of scenario IDs whose audit category is NOT aligned_failure
+    # (i.e. surface_contract_conflict or unsupported_or_ambiguous_surface).
+    conflict_or_ambiguous_ids: set[str] = set()
+    for rec in audit_result.conflict_records:
+        if rec.category in ("surface_contract_conflict", "unsupported_or_ambiguous_surface"):
+            conflict_or_ambiguous_ids.add(rec.candidate_id)
+
+    # --- Independently identify aligned_failure + temporal_fail scenarios ---
+    # Re-run interpret/replay/score just for the temporal-relation check.
+    # This does NOT duplicate the private conflict-detection ordering.
+    sys.path.insert(0, str(PROJECT_ROOT))
+    from app.services.bernie.composed_corpus_evaluator import (
+        deterministic_interpret,
+        deterministic_replay,
+    )
+    from app.services.bernie.composed_evaluator import (
+        InterpretationObservation,
+        score_interpretation_replay_pair,
+    )
+
     af_temporal_ids: list[str] = []
     for v in variants:
-        is_af_temporal, _cat = _compute_temporal_category(v)
-        if is_af_temporal:
+        interp = deterministic_interpret(v)
+        interp_obj = InterpretationObservation(
+            scenario_id=interp.scenario_id,
+            sample_index=0,
+            intended_action=interp.intended_action,
+            action_semantics=interp.action_semantics,
+            temporal_relation=interp.temporal_relation,
+            normalized_values=dict(interp.normalized_values),
+            entity_semantics=dict(interp.entity_semantics),
+            requires_clarification=interp.requires_clarification,
+            clarification_choices=interp.clarification_choices,
+            selected_tool_sequence=interp.selected_tool_sequence,
+            authority_claim=interp.authority_claim,
+            claims_action_completed=interp.claims_action_completed,
+            action_negated=interp.action_negated,
+        )
+        replay = deterministic_replay(v, interp_obj)
+        result = score_interpretation_replay_pair(v, interp_obj, replay)
+
+        # Skip if all dimensions pass
+        if result.all_passed:
+            continue
+
+        # Skip if the authoritative audit says it's conflict/ambiguous
+        if v.scenario_id in conflict_or_ambiguous_ids:
+            continue
+
+        # Otherwise it is aligned_failure — check temporal_relation
+        temporal_fails = not result.semantic_fields.temporal_relation.passed
+        if temporal_fails:
             af_temporal_ids.append(v.scenario_id)
 
     # Hash and count verification
@@ -398,14 +371,23 @@ def build_report() -> dict[str, Any]:
         "development_only": True,
         "silver_pending_only": True,
         "corpus_hash": evaluation_report.get("corpus_hash", ""),
+        "pre_lc4r5_baseline": {
+            "intended_action": PRE_LC4R5_INTENDED_ACTION,
+            "action_semantics": PRE_LC4R5_ACTION_SEMANTICS,
+            "temporal_relation": PRE_LC4R5_TEMPORAL_RELATION,
+            "normalized_values": PRE_LC4R5_NORMALIZED_VALUES,
+            "entity_semantics": PRE_LC4R5_ENTITY_SEMANTICS,
+            "clarification": PRE_LC4R5_CLARIFICATION,
+            "safety": PRE_LC4R5_SAFETY,
+        },
         "lc4r5_baseline": {
-            "intended_action": BASELINE_INTENDED_ACTION,
-            "action_semantics": BASELINE_ACTION_SEMANTICS,
-            "temporal_relation": BASELINE_TEMPORAL_RELATION,
-            "normalized_values": BASELINE_NORMALIZED_VALUES,
-            "entity_semantics": BASELINE_ENTITY_SEMANTICS,
-            "clarification": BASELINE_CLARIFICATION,
-            "safety": BASELINE_SAFETY,
+            "intended_action": LC4R5_BASELINE_INTENDED_ACTION,
+            "action_semantics": LC4R5_BASELINE_ACTION_SEMANTICS,
+            "temporal_relation": LC4R5_BASELINE_TEMPORAL_RELATION,
+            "normalized_values": LC4R5_BASELINE_NORMALIZED_VALUES,
+            "entity_semantics": LC4R5_BASELINE_ENTITY_SEMANTICS,
+            "clarification": LC4R5_BASELINE_CLARIFICATION,
+            "safety": LC4R5_BASELINE_SAFETY,
         },
         "lc4r5_post_semantic_fields_one_repeat": {
             "intended_action": f"{per_scenario(sf['intended_action']['passed'])}/{TOTAL_SCENARIOS}",
@@ -481,27 +463,27 @@ def build_report() -> dict[str, Any]:
             "intended_action_no_regression": per_scenario(
                 sf["intended_action"]["passed"]
             )
-            >= BASELINE_INTENDED_ACTION,
+            >= PRE_LC4R5_INTENDED_ACTION,
             "action_semantics_exactly_814": per_scenario(
                 sf["action_semantics"]["passed"]
             )
-            == EXPECTED_POST_ACTION_SEMANTICS,
+            == LC4R5_BASELINE_ACTION_SEMANTICS,
             "clarification_exactly_782": per_scenario(
                 sf["requires_clarification"]["passed"]
             )
-            == EXPECTED_POST_CLARIFICATION,
+            == LC4R5_BASELINE_CLARIFICATION,
             "temporal_relation_no_regression": per_scenario(
                 sf["temporal_relation"]["passed"]
             )
-            >= BASELINE_TEMPORAL_RELATION,
+            >= PRE_LC4R5_TEMPORAL_RELATION,
             "normalized_values_no_regression": per_scenario(
                 sf["normalized_values"]["passed"]
             )
-            >= BASELINE_NORMALIZED_VALUES,
+            >= PRE_LC4R5_NORMALIZED_VALUES,
             "entity_semantics_no_regression": per_scenario(
                 sf["entity_semantics"]["passed"]
             )
-            >= BASELINE_ENTITY_SEMANTICS,
+            >= PRE_LC4R5_ENTITY_SEMANTICS,
             "safety_exact_1152_of_1152": evaluation_report["per_dimension"][
                 "safety"
             ]["passed"]
@@ -630,7 +612,22 @@ def run_check(report: dict[str, Any]) -> bool:
     if r_var.get("variant_scenario_count") != f_var.get("variant_scenario_count"):
         issues.append("variant_scenario_count mismatch")
 
-    # --- 10. Baseline ---
+    # --- 10. Pre-LC4R5 baseline ---
+    r_pre = report.get("pre_lc4r5_baseline", {})
+    f_pre = frozen.get("pre_lc4r5_baseline", {})
+    for dim in (
+        "intended_action",
+        "action_semantics",
+        "temporal_relation",
+        "normalized_values",
+        "entity_semantics",
+        "clarification",
+        "safety",
+    ):
+        if r_pre.get(dim) != f_pre.get(dim):
+            issues.append(f"pre_lc4r5_baseline.{dim} mismatch: {r_pre.get(dim)} != {f_pre.get(dim)}")
+
+    # --- 11. LC4R5 baseline ---
     r_base = report.get("lc4r5_baseline", {})
     f_base = frozen.get("lc4r5_baseline", {})
     for dim in (
@@ -645,7 +642,7 @@ def run_check(report: dict[str, Any]) -> bool:
         if r_base.get(dim) != f_base.get(dim):
             issues.append(f"lc4r5_baseline.{dim} mismatch: {r_base.get(dim)} != {f_base.get(dim)}")
 
-    # --- 11. Assertions ---
+    # --- 12. Assertions ---
     r_assert = report.get("assertions", {})
     f_assert = frozen.get("assertions", {})
     all_assertion_names = set(r_assert.keys()) | set(f_assert.keys())

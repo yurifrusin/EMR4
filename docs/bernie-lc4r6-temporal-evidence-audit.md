@@ -52,7 +52,21 @@ every dialogue turn and retaining the last non-`unspecified` relation.
 | unspecified → exact | 9 |
 | **Total** | **75** |
 
-## LC4R5 baseline (unchanged)
+## Baselines
+
+### Pre-LC4R5 baseline (historical — before LC4R5 action/classification repairs)
+
+| Dimension | Value |
+|---|---|
+| intended action | 880 |
+| action semantics | 730 |
+| temporal relation | 628 |
+| normalized values | 101 |
+| entity semantics | 300 |
+| clarification | 698 |
+| safety | 1152 |
+
+### LC4R5 baseline (authoritative current)
 
 | Dimension | Value |
 |---|---|
