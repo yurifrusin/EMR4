@@ -626,7 +626,11 @@ def _determine_clarification(
         return False, ()
 
     if intended_action == "explain_schedule":
-        # Explain: needs some patient identification
+        # Explain: a resolved practitioner (exact or corrected) is sufficient
+        # read-only context for a practitioner schedule question.  Patient
+        # identity is only required when no practitioner is resolved.
+        if practitioner_semantics in ("exact", "corrected"):
+            return False, ()
         if patient_semantics in ("omitted", "ambiguous"):
             return True, ()
         return False, ()
