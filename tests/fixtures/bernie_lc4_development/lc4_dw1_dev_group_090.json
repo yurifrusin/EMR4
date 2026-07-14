@@ -1,0 +1,1120 @@
+{
+  "schema_version": "lc4.scale_corpus.v1",
+  "group_id": "lc4_dw1_dev_group_090",
+  "group_hash": "sha256:6243ac29e2f773902e834eedfcbc984ac4e615148606e9ff5501fdae746b3487",
+  "provenance": "silver",
+  "adjudication": "pending",
+  "reference_date": "2026-07-14",
+  "clinic_clock": "2026-07-14T09:00:00+10:00",
+  "spec": {
+    "group_index": 90,
+    "intended_action": "explain_schedule",
+    "temporal_relation": "interval",
+    "diary_state": "exact_duplicate",
+    "entity_state": "mismatched",
+    "patient_semantics": "exact",
+    "practitioner_semantics": "exact",
+    "location_semantics": "omitted",
+    "appointment_type_semantics": "omitted",
+    "duration_semantics": "exact",
+    "dialogue_form": "clarification",
+    "language_form": "paraphrase",
+    "gap_targets": [
+      "clarification_dialogue",
+      "interval_unspecified_temporal",
+      "interpretation_replay_tool_selection"
+    ]
+  },
+  "surface_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_090_01",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_090",
+      "description": "explain_schedule:interval:clarification:paraphrase - Can you explain what Dr Shera's schedule looks like tomorrow between?",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Can you explain what Dr Shera's schedule looks like tomorrow between?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "14:00",
+      "latest_time": "16:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 21,
+            "end": 29,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "omitted",
+      "dialogue_form": "clarification",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_090_02",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_090",
+      "description": "explain_schedule:interval:clarification:paraphrase - Could I see Dr Shera's availability for tomorrow between please?",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Could I see Dr Shera's availability for tomorrow between please?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "14:00",
+      "latest_time": "16:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 12,
+            "end": 20,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "exact",
+      "dialogue_form": "clarification",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_090_03",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_090",
+      "description": "explain_schedule:interval:clarification:paraphrase - What appointments does Dr Shera have tomorrow between?",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "What appointments does Dr Shera have tomorrow between?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "14:00",
+      "latest_time": "16:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 23,
+            "end": 31,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "omitted",
+      "dialogue_form": "clarification",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_090_04",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_090",
+      "description": "explain_schedule:interval:clarification:paraphrase - Hi, I need to know what Dr Shera's day looks like tomorrow between.",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Hi, I need to know what Dr Shera's day looks like tomorrow between."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "14:00",
+      "latest_time": "16:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 24,
+            "end": 32,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "omitted",
+      "dialogue_form": "clarification",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_090_05",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_090",
+      "description": "explain_schedule:interval:clarification:paraphrase - Show me Dr Shera's schedule for tomorrow between.",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Show me Dr Shera's schedule for tomorrow between."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "14:00",
+      "latest_time": "16:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 8,
+            "end": 16,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "exact",
+      "dialogue_form": "clarification",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_090_06",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_090",
+      "description": "explain_schedule:interval:clarification:paraphrase - Can you tell me when Dr Shera has free slots tomorrow between?",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Can you tell me when Dr Shera has free slots tomorrow between?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "14:00",
+      "latest_time": "16:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 21,
+            "end": 29,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "omitted",
+      "dialogue_form": "clarification",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_090_07",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_090",
+      "description": "explain_schedule:interval:clarification:paraphrase - yeah what's Dr Shera's diary look like tomorrow between any gaps?",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "yeah what's Dr Shera's diary look like tomorrow between any gaps?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "14:00",
+      "latest_time": "16:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 12,
+            "end": 20,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "omitted",
+      "dialogue_form": "clarification",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_090_08",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_090",
+      "description": "explain_schedule:interval:clarification:paraphrase - Schedule: Dr Shera \u2014 tomorrow between \u2014 availability?",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Schedule: Dr Shera \u2014 tomorrow between \u2014 availability?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "14:00",
+      "latest_time": "16:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 10,
+            "end": 18,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "omitted",
+      "dialogue_form": "clarification",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_090_09",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_090",
+      "description": "explain_schedule:interval:clarification:paraphrase - Please show me Dr Shera's available times for tomorrow between.",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please show me Dr Shera's available times for tomorrow between."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "14:00",
+      "latest_time": "16:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 15,
+            "end": 23,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "exact",
+      "dialogue_form": "clarification",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_090_10",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_090",
+      "description": "explain_schedule:interval:clarification:paraphrase - What times does Dr Shera have open tomorrow between?",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "What times does Dr Shera have open tomorrow between?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "14:00",
+      "latest_time": "16:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 16,
+            "end": 24,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "omitted",
+      "dialogue_form": "clarification",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_090_11",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_090",
+      "description": "explain_schedule:interval:clarification:paraphrase - I need to check Dr Shera's rosters for tomorrow between.",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "I need to check Dr Shera's rosters for tomorrow between."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "14:00",
+      "latest_time": "16:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 16,
+            "end": 24,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "exact",
+      "dialogue_form": "clarification",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_090_12",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_090",
+      "description": "explain_schedule:interval:clarification:paraphrase - Could you pull up Dr Shera's schedule for tomorrow between so I can see the gaps",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Could you pull up Dr Shera's schedule for tomorrow between so I can see the gaps?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "14:00",
+      "latest_time": "16:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 18,
+            "end": 26,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "exact",
+      "dialogue_form": "clarification",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    }
+  ],
+  "multi_turn_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_mt_090_01",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_090",
+      "description": "explain_schedule:interval:clarification:plain - Can you check the schedule for me? I need to know what Dr Shera's day looks like",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Can you check the schedule for me?"
+        },
+        {
+          "turn": 2,
+          "utterance": "I need to know what Dr Shera's day looks like tomorrow."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "14:00",
+      "latest_time": "16:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 1,
+            "start": 20,
+            "end": 28,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "exact",
+      "dialogue_form": "clarification",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": "Please clarify: which time works?",
+      "clarification_choices": [
+        "10am",
+        "2pm",
+        "3pm",
+        "4pm"
+      ]
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_mt_090_02",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_090",
+      "description": "explain_schedule:interval:correction:plain - What does Dr Patel's schedule look like tomorrow? Actually, I need Dr Shera's sc",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "What does Dr Patel's schedule look like tomorrow?"
+        },
+        {
+          "turn": 2,
+          "utterance": "Actually, I need Dr Shera's schedule instead."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "14:00",
+      "latest_time": "16:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 10,
+            "end": 18,
+            "text": "Dr Patel"
+          },
+          {
+            "turn_index": 1,
+            "start": 17,
+            "end": 25,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "omitted",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "omitted",
+      "dialogue_form": "correction",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_mt_090_03",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_090",
+      "description": "explain_schedule:interval:reversal:plain - Show me Dr Shera's schedule for tomorrow. Actually, I need today's schedule inst",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Show me Dr Shera's schedule for tomorrow."
+        },
+        {
+          "turn": 2,
+          "utterance": "Actually, I need today's schedule instead."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "14:00",
+      "latest_time": "16:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "source_spans": {
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 8,
+            "end": 16,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "exact",
+      "dialogue_form": "reversal",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    }
+  ]
+}

@@ -1,0 +1,1434 @@
+{
+  "schema_version": "lc4.scale_corpus.v1",
+  "group_id": "lc4_dw1_dev_group_064",
+  "group_hash": "sha256:0e3ee168f051cdde02277fa6f254dcc6fe86a26b487fa54baf8d558ba06ba585",
+  "provenance": "silver",
+  "adjudication": "pending",
+  "reference_date": "2026-07-14",
+  "clinic_clock": "2026-07-14T09:00:00+10:00",
+  "spec": {
+    "group_index": 64,
+    "intended_action": "cancel",
+    "temporal_relation": "unspecified",
+    "diary_state": "break",
+    "entity_state": "negated",
+    "patient_semantics": "exact",
+    "practitioner_semantics": "exact",
+    "location_semantics": "omitted",
+    "appointment_type_semantics": "omitted",
+    "duration_semantics": "exact",
+    "dialogue_form": "session_restart",
+    "language_form": "adversarial",
+    "gap_targets": [
+      "interval_unspecified_temporal",
+      "interpretation_replay_tool_selection"
+    ]
+  },
+  "surface_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_064_01",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_064",
+      "description": "cancel:unspecified:session_restart:adversarial - Cancel Margaret Thompson's appointment with Dr Shera sometime tomorrow at some t",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Cancel Margaret Thompson's appointment with Dr Shera sometime tomorrow at some time."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 7,
+            "end": 24,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 44,
+            "end": 52,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "exact",
+      "dialogue_form": "session_restart",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_064_02",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_064",
+      "description": "cancel:unspecified:session_restart:adversarial - I need to remove Margaret Thompson's booking with Dr Shera for sometime tomorrow",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "I need to remove Margaret Thompson's booking with Dr Shera for sometime tomorrow at some time."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 17,
+            "end": 34,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 50,
+            "end": 58,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "exact",
+      "dialogue_form": "session_restart",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_064_03",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_064",
+      "description": "cancel:unspecified:session_restart:adversarial - Cancel: Margaret Thompson, Dr Shera, sometime tomorrow some time.",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Cancel: Margaret Thompson, Dr Shera, sometime tomorrow some time."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 8,
+            "end": 25,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 27,
+            "end": 35,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "exact",
+      "dialogue_form": "session_restart",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_064_04",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_064",
+      "description": "cancel:unspecified:session_restart:adversarial - Hi, would you please cancel Margaret Thompson's appointment with Dr Shera for so",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Hi, would you please cancel Margaret Thompson's appointment with Dr Shera for sometime tomorrow?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 28,
+            "end": 45,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 73,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "exact",
+      "dialogue_form": "session_restart",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_064_05",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_064",
+      "description": "cancel:unspecified:session_restart:adversarial - Please cancel Margaret Thompson's apt w/ Dr Shera on sometime tomorrow @ some ti",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please cancel Margaret Thompson's apt w/ Dr Shera on sometime tomorrow @ some time."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 14,
+            "end": 31,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 41,
+            "end": 49,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "exact",
+      "dialogue_form": "session_restart",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_064_06",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_064",
+      "description": "cancel:unspecified:session_restart:adversarial - We need to call off Margaret Thompson's booking with Dr Shera for sometime tomor",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "We need to call off Margaret Thompson's booking with Dr Shera for sometime tomorrow at some time."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 20,
+            "end": 37,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 53,
+            "end": 61,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "exact",
+      "dialogue_form": "session_restart",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_064_07",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_064",
+      "description": "cancel:unspecified:session_restart:adversarial - yeah can we um delete Margaret Thompson's appointment with Dr Shera for sometime",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "yeah can we um delete Margaret Thompson's appointment with Dr Shera for sometime tomorrow"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 22,
+            "end": 39,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 59,
+            "end": 67,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "exact",
+      "dialogue_form": "session_restart",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_064_08",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_064",
+      "description": "cancel:unspecified:session_restart:adversarial - Remove: Margaret Thompson \u2014 Dr Shera \u2014 sometime tomorrow some time.",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Remove: Margaret Thompson \u2014 Dr Shera \u2014 sometime tomorrow some time."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 8,
+            "end": 25,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 28,
+            "end": 36,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "exact",
+      "dialogue_form": "session_restart",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_064_09",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_064",
+      "description": "cancel:unspecified:session_restart:adversarial - Please delete Margaret Thompson's appointment with Dr Shera on sometime tomorrow",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please delete Margaret Thompson's appointment with Dr Shera on sometime tomorrow at some time."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 14,
+            "end": 31,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 51,
+            "end": 59,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "exact",
+      "dialogue_form": "session_restart",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_064_10",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_064",
+      "description": "cancel:unspecified:session_restart:adversarial - Cancel the booking for Margaret Thompson with Dr Shera on sometime tomorrow.",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Cancel the booking for Margaret Thompson with Dr Shera on sometime tomorrow."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 23,
+            "end": 40,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 46,
+            "end": 54,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "exact",
+      "dialogue_form": "session_restart",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_064_11",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_064",
+      "description": "cancel:unspecified:session_restart:adversarial - Margaret Thompson's appointment with Dr Shera on sometime tomorrow \u2014 please canc",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Margaret Thompson's appointment with Dr Shera on sometime tomorrow \u2014 please cancel it."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 0,
+            "end": 17,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 37,
+            "end": 45,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "exact",
+      "dialogue_form": "session_restart",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_064_12",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_064",
+      "description": "cancel:unspecified:session_restart:adversarial - Could I cancel Margaret Thompson's booking with Dr Shera for sometime tomorrow a",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Could I cancel Margaret Thompson's booking with Dr Shera for sometime tomorrow at some time?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 15,
+            "end": 32,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 48,
+            "end": 56,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "exact",
+      "dialogue_form": "session_restart",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    }
+  ],
+  "multi_turn_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_mt_064_01",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_064",
+      "description": "cancel:unspecified:clarification:plain - I need to cancel an appointment. It's Margaret Thompson with Dr Shera tomorrow a",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "I need to cancel an appointment."
+        },
+        {
+          "turn": 2,
+          "utterance": "It's Margaret Thompson with Dr Shera tomorrow at 3pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 1,
+            "start": 5,
+            "end": 22,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 1,
+            "start": 28,
+            "end": 36,
+            "text": "Dr Shera"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 1,
+            "start": 49,
+            "end": 52,
+            "text": "3pm"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "exact",
+      "dialogue_form": "clarification",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": "Please clarify: which time works?",
+      "clarification_choices": [
+        "10am",
+        "2pm",
+        "3pm",
+        "4pm"
+      ]
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_mt_064_02",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_064",
+      "description": "cancel:unspecified:correction:plain - Cancel Margaret Thompson's appointment with Dr Patel. Sorry, it's with Dr Shera ",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Cancel Margaret Thompson's appointment with Dr Patel."
+        },
+        {
+          "turn": 2,
+          "utterance": "Sorry, it's with Dr Shera \u2014 cancel that one tomorrow at 3pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 7,
+            "end": 24,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 44,
+            "end": 52,
+            "text": "Dr Patel"
+          },
+          {
+            "turn_index": 1,
+            "start": 17,
+            "end": 25,
+            "text": "Dr Shera"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 1,
+            "start": 56,
+            "end": 59,
+            "text": "3pm"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "exact",
+      "dialogue_form": "correction",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_mt_064_03",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_064",
+      "description": "cancel:unspecified:reversal:plain - Cancel Margaret Thompson's appointment tomorrow at 3pm. Oh wait, don't cancel \u2014 ",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Cancel Margaret Thompson's appointment tomorrow at 3pm."
+        },
+        {
+          "turn": 2,
+          "utterance": "Oh wait, don't cancel \u2014 I misunderstood."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 7,
+            "end": 24,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 51,
+            "end": 54,
+            "text": "3pm"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "omitted",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "break",
+      "entity_state": "omitted",
+      "dialogue_form": "reversal",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "cancelled",
+          "start_time": "15:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancel_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    }
+  ]
+}

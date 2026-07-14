@@ -1,0 +1,172 @@
+{
+  "schema_version": "lc4.development_report.v1",
+  "generated_at": null,
+  "corpus_manifest": {
+    "development_group_count": 96,
+    "surface_variant_count": 1152,
+    "multi_turn_trajectory_count": 288,
+    "total_individual_records": 1440,
+    "corpus_hash": "sha256:7f4196b3fecc4bd2bcf361618b72ee0cea867bee43caa079fa66c7e06834d91a",
+    "provenance": "silver",
+    "adjudication": "pending",
+    "generator_identity": {
+      "provider_id": "deepseek",
+      "model_id": "deepseek-v4-flash",
+      "instance_id": "lc4-dw1"
+    }
+  },
+  "coverage": {
+    "action": {
+      "create": 16,
+      "move": 16,
+      "resize": 16,
+      "cancel": 16,
+      "status_change": 16,
+      "explain_schedule": 16
+    },
+    "temporal_relation": {
+      "exact": 18,
+      "not_before": 18,
+      "not_after": 18,
+      "interval": 18,
+      "approximate": 12,
+      "unspecified": 12
+    },
+    "diary_state": {
+      "empty": 9,
+      "exact_duplicate": 9,
+      "overlap": 9,
+      "same_day_distinct": 9,
+      "terminal": 9,
+      "stale": 9,
+      "concurrent": 9,
+      "roster_absent": 9,
+      "break": 8,
+      "no_slots": 8,
+      "elapsed_window": 8
+    },
+    "entity_semantics": {
+      "exact": 16,
+      "ambiguous": 16,
+      "omitted": 16,
+      "negated": 16,
+      "corrected": 16,
+      "mismatched": 16
+    },
+    "dialogue_form": {
+      "one_shot": 12,
+      "clarification": 12,
+      "correction": 12,
+      "reversal": 12,
+      "ellipsis": 12,
+      "anaphora": 12,
+      "repeated": 12,
+      "session_restart": 12
+    },
+    "language_form": {
+      "plain": 12,
+      "paraphrase": 12,
+      "filler": 12,
+      "abbreviation": 12,
+      "typo": 12,
+      "speech_like": 12,
+      "punctuation_variant": 12,
+      "adversarial": 12
+    },
+    "gap_targets": {
+      "clarification_dialogue": 12,
+      "entity_ambiguity_omission_correction": 48,
+      "interpretation_replay_tool_selection": 84,
+      "interval_unspecified_temporal": 30
+    }
+  },
+  "dimensions_covered": {
+    "actions": {
+      "create": true,
+      "move": true,
+      "resize": true,
+      "cancel": true,
+      "status_change": true,
+      "explain_schedule": true
+    },
+    "temporal_relations": {
+      "exact": true,
+      "not_before": true,
+      "not_after": true,
+      "interval": true,
+      "approximate": true,
+      "unspecified": true
+    },
+    "diary_states": {
+      "empty": true,
+      "exact_duplicate": true,
+      "overlap": true,
+      "same_day_distinct": true,
+      "terminal": true,
+      "stale": true,
+      "concurrent": true,
+      "roster_absent": true,
+      "break": true,
+      "no_slots": true,
+      "elapsed_window": true
+    },
+    "entity_semantics": {
+      "exact": true,
+      "ambiguous": true,
+      "omitted": true,
+      "negated": true,
+      "corrected": true,
+      "mismatched": true
+    },
+    "dialogue_forms": {
+      "one_shot": true,
+      "clarification": true,
+      "correction": true,
+      "reversal": true,
+      "ellipsis": true,
+      "anaphora": true,
+      "repeated": true,
+      "session_restart": true
+    },
+    "language_forms": {
+      "plain": true,
+      "paraphrase": true,
+      "filler": true,
+      "abbreviation": true,
+      "typo": true,
+      "speech_like": true,
+      "punctuation_variant": true,
+      "adversarial": true
+    }
+  },
+  "gap_priority": {
+    "minimum_required": 58,
+    "actual_gap_priority_groups": 92,
+    "met": true
+  },
+  "action_min_12": {
+    "required_per_action": 12,
+    "met": true,
+    "actual": {
+      "create": 16,
+      "move": 16,
+      "resize": 16,
+      "cancel": 16,
+      "status_change": 16,
+      "explain_schedule": 16
+    }
+  },
+  "temporal_min_12": {
+    "required_per_temporal": 12,
+    "met": true,
+    "actual": {
+      "exact": 18,
+      "not_before": 18,
+      "not_after": 18,
+      "interval": 18,
+      "approximate": 12,
+      "unspecified": 12
+    }
+  },
+  "validation_errors": []
+}

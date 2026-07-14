@@ -1,0 +1,1346 @@
+{
+  "schema_version": "lc4.scale_corpus.v1",
+  "corpus": "lc4-development",
+  "provenance": "silver",
+  "adjudication": "pending",
+  "total_groups": 96,
+  "total_variants": 1152,
+  "total_trajectories": 288,
+  "reference_date": "2026-07-14",
+  "generator_identity": {
+    "provider_id": "deepseek",
+    "model_id": "deepseek-v4-flash",
+    "instance_id": "lc4-dw1"
+  },
+  "authority_grant": {
+    "provider_write": false,
+    "diary_write": false,
+    "confirmation": false,
+    "override_authority": false
+  },
+  "corpus_hash": "sha256:7f4196b3fecc4bd2bcf361618b72ee0cea867bee43caa079fa66c7e06834d91a",
+  "groups": [
+    {
+      "group_index": 1,
+      "group_id": "lc4_dw1_dev_group_001",
+      "filename": "lc4_dw1_dev_group_001.json",
+      "group_hash": "sha256:1a4ac9613951219cfeaae59e55784368eaedaf476b74664b713a1caa58a1c532",
+      "action": "create",
+      "temporal_relation": "exact",
+      "gap_targets": [],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 2,
+      "group_id": "lc4_dw1_dev_group_002",
+      "filename": "lc4_dw1_dev_group_002.json",
+      "group_hash": "sha256:d2cb80fc867cc6cf281f86b55a2722970c536974da107259c9d1062fc7779803",
+      "action": "create",
+      "temporal_relation": "exact",
+      "gap_targets": [
+        "clarification_dialogue",
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 3,
+      "group_id": "lc4_dw1_dev_group_003",
+      "filename": "lc4_dw1_dev_group_003.json",
+      "group_hash": "sha256:3ed671c3ed9bf4fa43d8fa5d376a979d1dd7b8460d74f2ff2f34e258c7ecf201",
+      "action": "create",
+      "temporal_relation": "exact",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 4,
+      "group_id": "lc4_dw1_dev_group_004",
+      "filename": "lc4_dw1_dev_group_004.json",
+      "group_hash": "sha256:30ef6954c86af877b004335d1d57d73ceeb707a45003974368e34708338663fa",
+      "action": "create",
+      "temporal_relation": "not_before",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 5,
+      "group_id": "lc4_dw1_dev_group_005",
+      "filename": "lc4_dw1_dev_group_005.json",
+      "group_hash": "sha256:e24a062afd50e60184531d83696708166245eee3d7bda3c5fe698aa7505a4bce",
+      "action": "create",
+      "temporal_relation": "not_before",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 6,
+      "group_id": "lc4_dw1_dev_group_006",
+      "filename": "lc4_dw1_dev_group_006.json",
+      "group_hash": "sha256:6ee118f15c0d6728692fa280809b2721e7a5fcfef91949f9733f824e98db3178",
+      "action": "create",
+      "temporal_relation": "not_before",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 7,
+      "group_id": "lc4_dw1_dev_group_007",
+      "filename": "lc4_dw1_dev_group_007.json",
+      "group_hash": "sha256:1e8d2af39f298c55feed6b36daca33acf7f2c231be3dd2dda2f90e6b66cec4bd",
+      "action": "create",
+      "temporal_relation": "not_after",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 8,
+      "group_id": "lc4_dw1_dev_group_008",
+      "filename": "lc4_dw1_dev_group_008.json",
+      "group_hash": "sha256:f0e6634a9543cf756b18d97e6b9016002d96b3b5dceab5b127dc91a975559eee",
+      "action": "create",
+      "temporal_relation": "not_after",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 9,
+      "group_id": "lc4_dw1_dev_group_009",
+      "filename": "lc4_dw1_dev_group_009.json",
+      "group_hash": "sha256:34773938b69156f863784bd374c67991434ffd2726a5d60d5fb5eddd32db2995",
+      "action": "create",
+      "temporal_relation": "not_after",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 10,
+      "group_id": "lc4_dw1_dev_group_010",
+      "filename": "lc4_dw1_dev_group_010.json",
+      "group_hash": "sha256:5589a2d4ae03990221cd08e488c3730a958e8ed600de90f5269d15358d48cfd6",
+      "action": "create",
+      "temporal_relation": "interval",
+      "gap_targets": [
+        "clarification_dialogue",
+        "interval_unspecified_temporal",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 11,
+      "group_id": "lc4_dw1_dev_group_011",
+      "filename": "lc4_dw1_dev_group_011.json",
+      "group_hash": "sha256:73818b43b2c96b1d68027a65d3388930d26ebb166510fb1540f7567604ad76af",
+      "action": "create",
+      "temporal_relation": "interval",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 12,
+      "group_id": "lc4_dw1_dev_group_012",
+      "filename": "lc4_dw1_dev_group_012.json",
+      "group_hash": "sha256:88ad35827e20c3515d038a6c3f5ce229b36c9004746829af5e36df4296db25d5",
+      "action": "create",
+      "temporal_relation": "interval",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 13,
+      "group_id": "lc4_dw1_dev_group_013",
+      "filename": "lc4_dw1_dev_group_013.json",
+      "group_hash": "sha256:ecc55375e13c30d0b93728d21e7e33e92f5690b6cc45fc39d6f4116c32ffcff9",
+      "action": "create",
+      "temporal_relation": "approximate",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 14,
+      "group_id": "lc4_dw1_dev_group_014",
+      "filename": "lc4_dw1_dev_group_014.json",
+      "group_hash": "sha256:1d182d67588362519961a008ce8c99faf71cbeefb9f87426d76061b7a57ef837",
+      "action": "create",
+      "temporal_relation": "approximate",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 15,
+      "group_id": "lc4_dw1_dev_group_015",
+      "filename": "lc4_dw1_dev_group_015.json",
+      "group_hash": "sha256:184634f7943367d2459f636a32995e8a58c248ccdf3b0826a783721cf53b95c8",
+      "action": "create",
+      "temporal_relation": "unspecified",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 16,
+      "group_id": "lc4_dw1_dev_group_016",
+      "filename": "lc4_dw1_dev_group_016.json",
+      "group_hash": "sha256:f95094f7fa6ffe3a7c8c50d4280f2f805fd73d43d863c37f72c671861584d0d9",
+      "action": "create",
+      "temporal_relation": "unspecified",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 17,
+      "group_id": "lc4_dw1_dev_group_017",
+      "filename": "lc4_dw1_dev_group_017.json",
+      "group_hash": "sha256:8594909799b11d1a4421fbc2d6e6cff72715aa95a6ee649ece801a8721e7b2e6",
+      "action": "move",
+      "temporal_relation": "exact",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 18,
+      "group_id": "lc4_dw1_dev_group_018",
+      "filename": "lc4_dw1_dev_group_018.json",
+      "group_hash": "sha256:ca54cf387291f8ffacfc13d66b972241c000ea15dff8c0a0aab5b9c0428e65a8",
+      "action": "move",
+      "temporal_relation": "exact",
+      "gap_targets": [
+        "clarification_dialogue",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 19,
+      "group_id": "lc4_dw1_dev_group_019",
+      "filename": "lc4_dw1_dev_group_019.json",
+      "group_hash": "sha256:0cb351113b9419ceebdc3b0bb90b11781673ce09b31b64541ae7584367072600",
+      "action": "move",
+      "temporal_relation": "exact",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 20,
+      "group_id": "lc4_dw1_dev_group_020",
+      "filename": "lc4_dw1_dev_group_020.json",
+      "group_hash": "sha256:4de796fe40b2ace0bbdea6474ea7fbcd58e2c3d095410f4507b88e9cfa996d46",
+      "action": "move",
+      "temporal_relation": "not_before",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 21,
+      "group_id": "lc4_dw1_dev_group_021",
+      "filename": "lc4_dw1_dev_group_021.json",
+      "group_hash": "sha256:e8c6f6dd90e3bccbbf2263d10a696cb751055492a837171256f24862fe037f46",
+      "action": "move",
+      "temporal_relation": "not_before",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 22,
+      "group_id": "lc4_dw1_dev_group_022",
+      "filename": "lc4_dw1_dev_group_022.json",
+      "group_hash": "sha256:93b2d003a9d859bd37d846e379f64181b17c6b94e5c7ceefd586e834b6273539",
+      "action": "move",
+      "temporal_relation": "not_before",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 23,
+      "group_id": "lc4_dw1_dev_group_023",
+      "filename": "lc4_dw1_dev_group_023.json",
+      "group_hash": "sha256:3f46967821ad2739ee93a7efe9a8ffbd6174161e0e5fb667cfc668033e621bfe",
+      "action": "move",
+      "temporal_relation": "not_after",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 24,
+      "group_id": "lc4_dw1_dev_group_024",
+      "filename": "lc4_dw1_dev_group_024.json",
+      "group_hash": "sha256:1989c0838ff0a451ef6ea2cf6ee1930f458cbc48c0cc743303c6d0d634958fd4",
+      "action": "move",
+      "temporal_relation": "not_after",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 25,
+      "group_id": "lc4_dw1_dev_group_025",
+      "filename": "lc4_dw1_dev_group_025.json",
+      "group_hash": "sha256:b524f005d4d55a862c75123554cd7e68fb91b327f2e9eff15bfea4d539e33a6d",
+      "action": "move",
+      "temporal_relation": "not_after",
+      "gap_targets": [],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 26,
+      "group_id": "lc4_dw1_dev_group_026",
+      "filename": "lc4_dw1_dev_group_026.json",
+      "group_hash": "sha256:11ef3c024c3cecbd02e736707fc95c781e19aa29405821907d73c7e3128ee4e4",
+      "action": "move",
+      "temporal_relation": "interval",
+      "gap_targets": [
+        "clarification_dialogue",
+        "interval_unspecified_temporal",
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 27,
+      "group_id": "lc4_dw1_dev_group_027",
+      "filename": "lc4_dw1_dev_group_027.json",
+      "group_hash": "sha256:96322f08ac27add790b3a888a8b3af576607da6306485a0a398de85e142d0af6",
+      "action": "move",
+      "temporal_relation": "interval",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 28,
+      "group_id": "lc4_dw1_dev_group_028",
+      "filename": "lc4_dw1_dev_group_028.json",
+      "group_hash": "sha256:045a1aa71ad3023aea96bccd5df9b1bfe9a84e67f1dc3a4ce086b66966b969db",
+      "action": "move",
+      "temporal_relation": "interval",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 29,
+      "group_id": "lc4_dw1_dev_group_029",
+      "filename": "lc4_dw1_dev_group_029.json",
+      "group_hash": "sha256:019ceebc8504722d368010702f8f1941ef71bfb7b2a8e92b25e49efc27baaea1",
+      "action": "move",
+      "temporal_relation": "approximate",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 30,
+      "group_id": "lc4_dw1_dev_group_030",
+      "filename": "lc4_dw1_dev_group_030.json",
+      "group_hash": "sha256:162e9354e69c771669771c0f2d2cd97c65fdd9855ed2d92046a09d6601e03c93",
+      "action": "move",
+      "temporal_relation": "approximate",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 31,
+      "group_id": "lc4_dw1_dev_group_031",
+      "filename": "lc4_dw1_dev_group_031.json",
+      "group_hash": "sha256:ae8724409100fba653ff6e3d8f9eb274d19b43fcaf21027907b33556496e2ab5",
+      "action": "move",
+      "temporal_relation": "unspecified",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 32,
+      "group_id": "lc4_dw1_dev_group_032",
+      "filename": "lc4_dw1_dev_group_032.json",
+      "group_hash": "sha256:428d39c5c69b2fc19d667a070fb2d9261c3eb4634315819c2b5b20b513648347",
+      "action": "move",
+      "temporal_relation": "unspecified",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 33,
+      "group_id": "lc4_dw1_dev_group_033",
+      "filename": "lc4_dw1_dev_group_033.json",
+      "group_hash": "sha256:bcf1925baa78d185031b0fb066fac16f49beea8e1a29d8366fefa54a62fef00e",
+      "action": "resize",
+      "temporal_relation": "exact",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 34,
+      "group_id": "lc4_dw1_dev_group_034",
+      "filename": "lc4_dw1_dev_group_034.json",
+      "group_hash": "sha256:638e5509f032d1e4e2d8472bc17c8990e492a5bb8bdb8298dda2e15fcfce55bc",
+      "action": "resize",
+      "temporal_relation": "exact",
+      "gap_targets": [
+        "clarification_dialogue",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 35,
+      "group_id": "lc4_dw1_dev_group_035",
+      "filename": "lc4_dw1_dev_group_035.json",
+      "group_hash": "sha256:51ba2dcc677ea96d5e570148ac12725d7a148dba9c3ed5e49c4ffb7b4ec03a81",
+      "action": "resize",
+      "temporal_relation": "exact",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 36,
+      "group_id": "lc4_dw1_dev_group_036",
+      "filename": "lc4_dw1_dev_group_036.json",
+      "group_hash": "sha256:8c1d6e6549abedd7c70950093c890e7b1280696e529e5932152e9b87221c2301",
+      "action": "resize",
+      "temporal_relation": "not_before",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 37,
+      "group_id": "lc4_dw1_dev_group_037",
+      "filename": "lc4_dw1_dev_group_037.json",
+      "group_hash": "sha256:3557b5517f4f5f97346d51abfab25f0008bd9a920e89eafc7c6fe8ae5102170b",
+      "action": "resize",
+      "temporal_relation": "not_before",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 38,
+      "group_id": "lc4_dw1_dev_group_038",
+      "filename": "lc4_dw1_dev_group_038.json",
+      "group_hash": "sha256:ac4be00f02c7a7e1f4bbd160224c38562dbaab38b4675372927519c7c79d813d",
+      "action": "resize",
+      "temporal_relation": "not_before",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 39,
+      "group_id": "lc4_dw1_dev_group_039",
+      "filename": "lc4_dw1_dev_group_039.json",
+      "group_hash": "sha256:38baa2558d770120a874ac65632d2be66ba3f3d0f3fb7c64beb401bed10c85b8",
+      "action": "resize",
+      "temporal_relation": "not_after",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 40,
+      "group_id": "lc4_dw1_dev_group_040",
+      "filename": "lc4_dw1_dev_group_040.json",
+      "group_hash": "sha256:42ac661ced448ce3732e72ec458060e10bd1e3469b0b6ee5510f6ad62ad60331",
+      "action": "resize",
+      "temporal_relation": "not_after",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 41,
+      "group_id": "lc4_dw1_dev_group_041",
+      "filename": "lc4_dw1_dev_group_041.json",
+      "group_hash": "sha256:d503a6709d872eff63d6df0ea3bced8690b09f7c03edea1d9cefec8af75fa273",
+      "action": "resize",
+      "temporal_relation": "not_after",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 42,
+      "group_id": "lc4_dw1_dev_group_042",
+      "filename": "lc4_dw1_dev_group_042.json",
+      "group_hash": "sha256:13bfad315badbd2bdc6a7786c4312a735930c8eac6090de314cf646519fd086d",
+      "action": "resize",
+      "temporal_relation": "interval",
+      "gap_targets": [
+        "clarification_dialogue",
+        "interval_unspecified_temporal",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 43,
+      "group_id": "lc4_dw1_dev_group_043",
+      "filename": "lc4_dw1_dev_group_043.json",
+      "group_hash": "sha256:86241983b30e8bf841a10912bf0970df7c86a4ff92984c7103bedba54b92e932",
+      "action": "resize",
+      "temporal_relation": "interval",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 44,
+      "group_id": "lc4_dw1_dev_group_044",
+      "filename": "lc4_dw1_dev_group_044.json",
+      "group_hash": "sha256:ecef1903ac3077d44ac11c3709393752f0f1a5dce0889b668f95ec16ce9bd4ff",
+      "action": "resize",
+      "temporal_relation": "interval",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 45,
+      "group_id": "lc4_dw1_dev_group_045",
+      "filename": "lc4_dw1_dev_group_045.json",
+      "group_hash": "sha256:1c5bb45e32b91d5cb40837b2e4c48b431d75498e8ac00f94770ab1108a083063",
+      "action": "resize",
+      "temporal_relation": "approximate",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 46,
+      "group_id": "lc4_dw1_dev_group_046",
+      "filename": "lc4_dw1_dev_group_046.json",
+      "group_hash": "sha256:557d0182b1d5bb9d9e4b90869ca12067b2392f55075afe239824974042f8caf9",
+      "action": "resize",
+      "temporal_relation": "approximate",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 47,
+      "group_id": "lc4_dw1_dev_group_047",
+      "filename": "lc4_dw1_dev_group_047.json",
+      "group_hash": "sha256:e960d6142167e85bb43190acf4be7d20b19cab0c4ada027cf054f6ba7a379439",
+      "action": "resize",
+      "temporal_relation": "unspecified",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 48,
+      "group_id": "lc4_dw1_dev_group_048",
+      "filename": "lc4_dw1_dev_group_048.json",
+      "group_hash": "sha256:4727fdbef0ebbef31b2c10ac54e9c5219fbba9629dcd0a34f3151ec97f36e43b",
+      "action": "resize",
+      "temporal_relation": "unspecified",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 49,
+      "group_id": "lc4_dw1_dev_group_049",
+      "filename": "lc4_dw1_dev_group_049.json",
+      "group_hash": "sha256:deb403118e9e65b0cc829a3b35e6d40a05149131dab4a24fb04894879baa5a7a",
+      "action": "cancel",
+      "temporal_relation": "exact",
+      "gap_targets": [],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 50,
+      "group_id": "lc4_dw1_dev_group_050",
+      "filename": "lc4_dw1_dev_group_050.json",
+      "group_hash": "sha256:a8221707015f5a453ec9ddb554cd17adea08f1742fb8040383717159faffecc4",
+      "action": "cancel",
+      "temporal_relation": "exact",
+      "gap_targets": [
+        "clarification_dialogue",
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 51,
+      "group_id": "lc4_dw1_dev_group_051",
+      "filename": "lc4_dw1_dev_group_051.json",
+      "group_hash": "sha256:b12e4f780e7a2bd4676371943d2574a276fee05030a5a379bf2805da1b4b372e",
+      "action": "cancel",
+      "temporal_relation": "exact",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 52,
+      "group_id": "lc4_dw1_dev_group_052",
+      "filename": "lc4_dw1_dev_group_052.json",
+      "group_hash": "sha256:667666a828a526bf842c753d1595035d02e34030d3ba7abffaa196ddf8465d1a",
+      "action": "cancel",
+      "temporal_relation": "not_before",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 53,
+      "group_id": "lc4_dw1_dev_group_053",
+      "filename": "lc4_dw1_dev_group_053.json",
+      "group_hash": "sha256:c58a882efd0820ad94e7f051270dd08dacc4f0085098668c0087ac4fea20d699",
+      "action": "cancel",
+      "temporal_relation": "not_before",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 54,
+      "group_id": "lc4_dw1_dev_group_054",
+      "filename": "lc4_dw1_dev_group_054.json",
+      "group_hash": "sha256:00b80255c0b09711dd03635f6ca59cc52d4e42a33c36d007b5399a7bfb842677",
+      "action": "cancel",
+      "temporal_relation": "not_before",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 55,
+      "group_id": "lc4_dw1_dev_group_055",
+      "filename": "lc4_dw1_dev_group_055.json",
+      "group_hash": "sha256:bfc3440893dc7ecfdbf1bb628541565d5847d950f679306e8e5331168895c2ca",
+      "action": "cancel",
+      "temporal_relation": "not_after",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 56,
+      "group_id": "lc4_dw1_dev_group_056",
+      "filename": "lc4_dw1_dev_group_056.json",
+      "group_hash": "sha256:5dbf7e83baef15dd2e5769925e8d48f3d6e260fe1e521612b7182758724f8f7b",
+      "action": "cancel",
+      "temporal_relation": "not_after",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 57,
+      "group_id": "lc4_dw1_dev_group_057",
+      "filename": "lc4_dw1_dev_group_057.json",
+      "group_hash": "sha256:a895162ac1e8d1f07ee59e7cbdab0f231aee1f6d6b8c4c2ddeae1123db18a60f",
+      "action": "cancel",
+      "temporal_relation": "not_after",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 58,
+      "group_id": "lc4_dw1_dev_group_058",
+      "filename": "lc4_dw1_dev_group_058.json",
+      "group_hash": "sha256:03bbbc11e9dd6ba4074c9b8bcfb869126025b073e0bb33112b0eba9fcbaddf64",
+      "action": "cancel",
+      "temporal_relation": "interval",
+      "gap_targets": [
+        "clarification_dialogue",
+        "interval_unspecified_temporal",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 59,
+      "group_id": "lc4_dw1_dev_group_059",
+      "filename": "lc4_dw1_dev_group_059.json",
+      "group_hash": "sha256:0fdd70bde7432cb7b700bfc6657c31cf4fccd97ec80fbdf518c6ec172e6179e0",
+      "action": "cancel",
+      "temporal_relation": "interval",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 60,
+      "group_id": "lc4_dw1_dev_group_060",
+      "filename": "lc4_dw1_dev_group_060.json",
+      "group_hash": "sha256:2a5781b4d360bbe27f424a8e256601df86ac7955d482c17d057a50a3533e2a76",
+      "action": "cancel",
+      "temporal_relation": "interval",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 61,
+      "group_id": "lc4_dw1_dev_group_061",
+      "filename": "lc4_dw1_dev_group_061.json",
+      "group_hash": "sha256:eb6626d1a9b1b0ab986000483f0b340a4cde209ff78ba363996f2dc86da454b1",
+      "action": "cancel",
+      "temporal_relation": "approximate",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 62,
+      "group_id": "lc4_dw1_dev_group_062",
+      "filename": "lc4_dw1_dev_group_062.json",
+      "group_hash": "sha256:336c184cf703771d59fa9eab65371f46f4b2a8890fe1f0041b5ef10745871a84",
+      "action": "cancel",
+      "temporal_relation": "approximate",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 63,
+      "group_id": "lc4_dw1_dev_group_063",
+      "filename": "lc4_dw1_dev_group_063.json",
+      "group_hash": "sha256:51e218c7986ae0ff6f1d4dbea7967d28e0b3390f0f36553f6ccc5377e2e69ef2",
+      "action": "cancel",
+      "temporal_relation": "unspecified",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 64,
+      "group_id": "lc4_dw1_dev_group_064",
+      "filename": "lc4_dw1_dev_group_064.json",
+      "group_hash": "sha256:0e3ee168f051cdde02277fa6f254dcc6fe86a26b487fa54baf8d558ba06ba585",
+      "action": "cancel",
+      "temporal_relation": "unspecified",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 65,
+      "group_id": "lc4_dw1_dev_group_065",
+      "filename": "lc4_dw1_dev_group_065.json",
+      "group_hash": "sha256:3911a9fb174d01dbe983b50522e22d5bdb6d5c4f68f0127e0f15821ec749f339",
+      "action": "status_change",
+      "temporal_relation": "exact",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 66,
+      "group_id": "lc4_dw1_dev_group_066",
+      "filename": "lc4_dw1_dev_group_066.json",
+      "group_hash": "sha256:5478769a6241b88dc75933927b5b0eb98b9241244352ae4b2dc756b10966890f",
+      "action": "status_change",
+      "temporal_relation": "exact",
+      "gap_targets": [
+        "clarification_dialogue",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 67,
+      "group_id": "lc4_dw1_dev_group_067",
+      "filename": "lc4_dw1_dev_group_067.json",
+      "group_hash": "sha256:ee28153df920cb0cd21898eb349c40e109542480889c32123959457495e49fc4",
+      "action": "status_change",
+      "temporal_relation": "exact",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 68,
+      "group_id": "lc4_dw1_dev_group_068",
+      "filename": "lc4_dw1_dev_group_068.json",
+      "group_hash": "sha256:73ee551145612ebf6a011407d22c239ec269b5e04b0ec358a60a3a85740b756d",
+      "action": "status_change",
+      "temporal_relation": "not_before",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 69,
+      "group_id": "lc4_dw1_dev_group_069",
+      "filename": "lc4_dw1_dev_group_069.json",
+      "group_hash": "sha256:0cc32c811c20e582206fc87baef08ae8826a8d9b47ed9aaa34e78432c93042f5",
+      "action": "status_change",
+      "temporal_relation": "not_before",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 70,
+      "group_id": "lc4_dw1_dev_group_070",
+      "filename": "lc4_dw1_dev_group_070.json",
+      "group_hash": "sha256:7679c6ee62d9d7e43a3db90cc286f3969d8fee23344e8f40da3bf3fddda11a0e",
+      "action": "status_change",
+      "temporal_relation": "not_before",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 71,
+      "group_id": "lc4_dw1_dev_group_071",
+      "filename": "lc4_dw1_dev_group_071.json",
+      "group_hash": "sha256:f8c5444fbaeea3d61eeb5d5c2854b99f14162fa7f5e61c047f413233cc774a9a",
+      "action": "status_change",
+      "temporal_relation": "not_after",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 72,
+      "group_id": "lc4_dw1_dev_group_072",
+      "filename": "lc4_dw1_dev_group_072.json",
+      "group_hash": "sha256:01cca032746ca2bd67650a2a81b0ca47436ee731e890a181f81aeacd9dec45f9",
+      "action": "status_change",
+      "temporal_relation": "not_after",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 73,
+      "group_id": "lc4_dw1_dev_group_073",
+      "filename": "lc4_dw1_dev_group_073.json",
+      "group_hash": "sha256:fcfc9899754484d2cb8875e9f6d3204bb83d6f6573889486c2f697d7f4d4cb85",
+      "action": "status_change",
+      "temporal_relation": "not_after",
+      "gap_targets": [],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 74,
+      "group_id": "lc4_dw1_dev_group_074",
+      "filename": "lc4_dw1_dev_group_074.json",
+      "group_hash": "sha256:9ab1b514c308c6a02b3908074d9df631e7ca738185a6f3c635f7e5e8cdb6e939",
+      "action": "status_change",
+      "temporal_relation": "interval",
+      "gap_targets": [
+        "clarification_dialogue",
+        "interval_unspecified_temporal",
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 75,
+      "group_id": "lc4_dw1_dev_group_075",
+      "filename": "lc4_dw1_dev_group_075.json",
+      "group_hash": "sha256:301f4c0275cbeb9d3c95a14b698526398f994460f1c32661d803b82a967bd926",
+      "action": "status_change",
+      "temporal_relation": "interval",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 76,
+      "group_id": "lc4_dw1_dev_group_076",
+      "filename": "lc4_dw1_dev_group_076.json",
+      "group_hash": "sha256:ab2d77cb7c447056f74c11948ea69468c3b4873d5fc3b4d7f52f727772505049",
+      "action": "status_change",
+      "temporal_relation": "interval",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 77,
+      "group_id": "lc4_dw1_dev_group_077",
+      "filename": "lc4_dw1_dev_group_077.json",
+      "group_hash": "sha256:45a93e702972a353311f610ed7fe4d7e1e559d86a61609b76d659c273172ed04",
+      "action": "status_change",
+      "temporal_relation": "approximate",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 78,
+      "group_id": "lc4_dw1_dev_group_078",
+      "filename": "lc4_dw1_dev_group_078.json",
+      "group_hash": "sha256:ddd82608abe0792993acdfd661f7e2b5574f7215d06abc656cf9fd152b418901",
+      "action": "status_change",
+      "temporal_relation": "approximate",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 79,
+      "group_id": "lc4_dw1_dev_group_079",
+      "filename": "lc4_dw1_dev_group_079.json",
+      "group_hash": "sha256:a675cf13c0533db3886bf6fd3e15131cd6500419e04419ddd8421845158367b4",
+      "action": "status_change",
+      "temporal_relation": "unspecified",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 80,
+      "group_id": "lc4_dw1_dev_group_080",
+      "filename": "lc4_dw1_dev_group_080.json",
+      "group_hash": "sha256:c5d82f2801c157edfb57c1c2d95e57d9c0b43f8a09765b67ced7385dce3f37d0",
+      "action": "status_change",
+      "temporal_relation": "unspecified",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 81,
+      "group_id": "lc4_dw1_dev_group_081",
+      "filename": "lc4_dw1_dev_group_081.json",
+      "group_hash": "sha256:d997c20324a99ca8ca0ea68c9a876a54924ae332159e86cc0b979ea22fc96dfd",
+      "action": "explain_schedule",
+      "temporal_relation": "exact",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 82,
+      "group_id": "lc4_dw1_dev_group_082",
+      "filename": "lc4_dw1_dev_group_082.json",
+      "group_hash": "sha256:48c74982fff7f12554eb2bf10fca426e2ff59e5cc9f3ce4985fb4f9769720512",
+      "action": "explain_schedule",
+      "temporal_relation": "exact",
+      "gap_targets": [
+        "clarification_dialogue",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 83,
+      "group_id": "lc4_dw1_dev_group_083",
+      "filename": "lc4_dw1_dev_group_083.json",
+      "group_hash": "sha256:5501432c84c6fa53a343541e04169d9a7dec88e636f8f0e35ae1fe3641c59013",
+      "action": "explain_schedule",
+      "temporal_relation": "exact",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 84,
+      "group_id": "lc4_dw1_dev_group_084",
+      "filename": "lc4_dw1_dev_group_084.json",
+      "group_hash": "sha256:ce50a6a704f640ddcdefa596eda1f64b42dd0964471247c5d2fd85149faeb4bb",
+      "action": "explain_schedule",
+      "temporal_relation": "not_before",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 85,
+      "group_id": "lc4_dw1_dev_group_085",
+      "filename": "lc4_dw1_dev_group_085.json",
+      "group_hash": "sha256:1584cc622c352e2d21701688e7d9563f8c9346b3fd7a91636693567f6ed3ee69",
+      "action": "explain_schedule",
+      "temporal_relation": "not_before",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 86,
+      "group_id": "lc4_dw1_dev_group_086",
+      "filename": "lc4_dw1_dev_group_086.json",
+      "group_hash": "sha256:3446be4212a187aac2e16d695325b14b39ba94f55cdd9df155564fd2733e4958",
+      "action": "explain_schedule",
+      "temporal_relation": "not_before",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 87,
+      "group_id": "lc4_dw1_dev_group_087",
+      "filename": "lc4_dw1_dev_group_087.json",
+      "group_hash": "sha256:10bab10c7e5e6b78bfe59aa7b8b13e75c1438ede0f2a8fb0a4d218dd3b9dfbc5",
+      "action": "explain_schedule",
+      "temporal_relation": "not_after",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 88,
+      "group_id": "lc4_dw1_dev_group_088",
+      "filename": "lc4_dw1_dev_group_088.json",
+      "group_hash": "sha256:16853ebbe21be51fd430b8b125add240b90cfac68542d9de2f79bd95c8f4f07e",
+      "action": "explain_schedule",
+      "temporal_relation": "not_after",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 89,
+      "group_id": "lc4_dw1_dev_group_089",
+      "filename": "lc4_dw1_dev_group_089.json",
+      "group_hash": "sha256:1ef7a360e95d5243d96557f9442b08df592271a5838c6dfc66ade00ca2309570",
+      "action": "explain_schedule",
+      "temporal_relation": "not_after",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 90,
+      "group_id": "lc4_dw1_dev_group_090",
+      "filename": "lc4_dw1_dev_group_090.json",
+      "group_hash": "sha256:6243ac29e2f773902e834eedfcbc984ac4e615148606e9ff5501fdae746b3487",
+      "action": "explain_schedule",
+      "temporal_relation": "interval",
+      "gap_targets": [
+        "clarification_dialogue",
+        "interval_unspecified_temporal",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 91,
+      "group_id": "lc4_dw1_dev_group_091",
+      "filename": "lc4_dw1_dev_group_091.json",
+      "group_hash": "sha256:1e6e5e30835e5d4c0941768af3ba5d1fe5a023c7085eedb5ee9e78bdc03e5c6c",
+      "action": "explain_schedule",
+      "temporal_relation": "interval",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 92,
+      "group_id": "lc4_dw1_dev_group_092",
+      "filename": "lc4_dw1_dev_group_092.json",
+      "group_hash": "sha256:64556b623832b27ee2826f9a52cba1786bc5467a33b88728e4cb83894e8e625a",
+      "action": "explain_schedule",
+      "temporal_relation": "interval",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 93,
+      "group_id": "lc4_dw1_dev_group_093",
+      "filename": "lc4_dw1_dev_group_093.json",
+      "group_hash": "sha256:6b4704bfd9e95c4cc142a434cca68d2156601e00f52719a760a17b2f30f9907d",
+      "action": "explain_schedule",
+      "temporal_relation": "approximate",
+      "gap_targets": [
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 94,
+      "group_id": "lc4_dw1_dev_group_094",
+      "filename": "lc4_dw1_dev_group_094.json",
+      "group_hash": "sha256:d4b5850e5c387d3746fe58a288a298d6c0574c57ba01525deef5350cd461174c",
+      "action": "explain_schedule",
+      "temporal_relation": "approximate",
+      "gap_targets": [
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 95,
+      "group_id": "lc4_dw1_dev_group_095",
+      "filename": "lc4_dw1_dev_group_095.json",
+      "group_hash": "sha256:70d31003524e4940c9d8146ecc5d3c5d65eef17225c6e843dd25b9263b6e67ed",
+      "action": "explain_schedule",
+      "temporal_relation": "unspecified",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "entity_ambiguity_omission_correction",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    },
+    {
+      "group_index": 96,
+      "group_id": "lc4_dw1_dev_group_096",
+      "filename": "lc4_dw1_dev_group_096.json",
+      "group_hash": "sha256:040922ab2f6ab1e5687282bca878544e88f6fb0b4b84b39c28cf1940c306224c",
+      "action": "explain_schedule",
+      "temporal_relation": "unspecified",
+      "gap_targets": [
+        "interval_unspecified_temporal",
+        "interpretation_replay_tool_selection"
+      ],
+      "variant_count": 12,
+      "multi_turn_count": 3
+    }
+  ]
+}
