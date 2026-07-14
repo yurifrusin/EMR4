@@ -28,11 +28,8 @@ from app.services.bernie.composed_evaluator import (
 from app.services.bernie.corpus_tier import CorpusCandidate
 from app.services.bernie.language_normalization import normalize_utterance
 from app.services.bernie.scenario_spec import ReceptionScenarioSpec
+from app.services.bernie.semantic_extraction import extract_semantics
 from app.services.diary.outcomes import BernieBookingOutcomeKind
-from app.services.diary.temporal import (
-    extract_natural_time_constraints,
-    parse_time_fragment,
-)
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -245,431 +242,21 @@ def _practitioner_id(name: str) -> str:
     return _PRACTITIONER_ID_MAP.get(name, "pr-001")
 
 
-# Patterns for unsafe/bypass wording (subset of the interpretation harness list)
-_UNSAFE_UTTERANCE_PATTERNS: list[re.Pattern[str]] = [
-    re.compile(r"\bignore.*duplicate\b", re.I),
-    re.compile(r"\boverride.*system\b", re.I),
-    re.compile(r"\bbypass.*confirm\w*\b", re.I),
-    re.compile(r"\bskip.*confirm\w*\b", re.I),
-    re.compile(r"\bno.*need.*for.*confirm\w*\b", re.I),
-    re.compile(r"\bignore.*check\b", re.I),
-]
-
-# Correction patterns: "Actually, ...", "No, ...", "change that to ...", "make it ... instead"
-_CORRECTION_TURN_PATTERN = re.compile(
-    r"\b(actually|no[,\s]|change that to|make it .* instead|make it .* please)\b", re.I
-)
-
-# Patterns for extracting patient name
-_PATIENT_PATTERN = re.compile(
-    r"\b(?:for|book|appointment for|schedule)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)\b",
-    re.I,
-)
-
-# Patterns for extracting practitioner name
-_PRACTITIONER_PATTERN = re.compile(
-    r"\b(?:with|for|see)\s+(Dr\s+[A-Z][a-z]+)\b"
-)
-
-# Duration pattern
-_DURATION_PATTERN = re.compile(
-    r"\b(\d+)\s*minutes?\b", re.I
-)
-
-# Date patterns
-_TOMORROW_PATTERN = re.compile(r"\btomorrow\b", re.I)
-_TODAY_PATTERN = re.compile(r"\btoday\b", re.I)
-_THE_DAY_AFTER_TOMORROW_PATTERN = re.compile(
-    r"\bthe\s+day\s+after\s+tomorrow\b", re.I
-)
-_AFTERNOON_PATTERN = re.compile(r"\b(afternoon)\b", re.I)
-
-
-def _detect_unsafe_utterance(utterances: list[str]) -> str | None:
-    """Check if any utterance contains unsafe/bypass wording.
-
-    Returns the matching utterance or None.
-    """
-    for utterance in utterances:
-        for pat in _UNSAFE_UTTERANCE_PATTERNS:
-            if pat.search(utterance):
-                return utterance
-    return None
-
-
-def _detect_correction_turn(utterances: list[str]) -> int | None:
-    """Find the index of a correction turn, if any."""
-    for i, utterance in enumerate(utterances):
-        if i == 0:
-            continue
-        if _CORRECTION_TURN_PATTERN.search(utterance):
-            return i
-    return None
-
-
-def _extract_patient_name(text: str) -> str | None:
-    m = _PATIENT_PATTERN.search(text)
-    if m:
-        return m.group(1)
-    return None
-
-
-def _extract_practitioner_name(text: str) -> str | None:
-    m = _PRACTITIONER_PATTERN.search(text)
-    if m:
-        return m.group(1)
-    return None
-
-
-def _extract_duration(text: str) -> int | None:
-    m = _DURATION_PATTERN.search(text)
-    if m:
-        return int(m.group(1))
-    return None
-
-
-def _extract_date_info(
-    text: str,
-    reference_date_str: str,
-) -> str | None:
-    """Extract appointment date from text relative to reference_date."""
-    reference_date = pathlib.PurePosixPath(
-        f"{reference_date_str}"
-    ).name
-    from datetime import date, timedelta
-
-    ref_parts = reference_date_str.split("-")
-    ref = date(int(ref_parts[0]), int(ref_parts[1]), int(ref_parts[2]))
-
-    if _THE_DAY_AFTER_TOMORROW_PATTERN.search(text):
-        return (ref + timedelta(days=2)).isoformat()
-    if _TOMORROW_PATTERN.search(text):
-        return (ref + timedelta(days=1)).isoformat()
-    if _TODAY_PATTERN.search(text):
-        return ref.isoformat()
-    return None
-
-
-def _extract_time_period(text: str) -> str | None:
-    """Extract time period like 'afternoon' from text."""
-    m = _AFTERNOON_PATTERN.search(text)
-    if m:
-        return m.group(1).lower()
-    return None
-
-
-def _determine_intended_action(text: str) -> str | None:
-    """Determine intended diary action from utterance text.
-
-    Uses simple pattern matching, not the full interpretation harness,
-    but consistent with its verb detection patterns.
-    """
-    lower = text.lower()
-    # Book/create/make/schedule an appointment (explicit noun)
-    if re.search(
-        r"\b(book|create|make|schedule) (a |an |the )?(appointment|booking)\b", lower
-    ):
-        return "create"
-    # "Could I schedule ..." or "Please schedule ..." or "Please book ..."
-    if re.search(
-        r"\b(could |please )?(i )?(book|schedule|make|create)\b", lower
-    ) and not re.search(r"\b(cancel|delete|remove|move|shift)\b", lower):
-        return "create"
-    # "I need to make ..."
-    if re.search(r"\bneed to (make|create|schedule|book)\b", lower):
-        return "create"
-    # Bare "book <patient>" and "can I book" patterns
-    if re.search(r"\b(can I )?book\b", lower) and re.search(
-        r"\b(appointment|booking|with|for|tomorrow|today|at|sometime)\b", lower
-    ):
-        return "create"
-    if re.search(r"\b(need to |would like to |can I |could I )?(make|create|schedule|put)\b", lower):
-        return "create"
-    if re.search(r"\b(cancel|delete|remove) (the |a |an )?(booking|appointment)\b", lower):
-        return "cancel"
-    if re.search(r"\b(move|shift|reschedule|push .* back|bring .* forward)\b", lower):
-        return "move"
-    if re.search(r"\b(make .* longer|shorter|extend|change .* duration|double appointment)\b", lower):
-        return "resize"
-    if re.search(r"\b(mark .* arrived|completed|dna|no show|change .* status)\b", lower):
-        return "status_change"
-    if re.search(r"\b(explain|why|what happened|schedule pattern)\b", lower):
-        return "explain_schedule"
-    return None
-
-
-def _determine_action_semantics(
-    utterances: list[str],
-    unsafe_utterance: str | None,
-    requires_clarification: bool,
-) -> str:
-    """Determine action_semantics from utterance analysis only.
-
-    The scenario is the scorer oracle only, never the observation fallback.
-    - unsafe/bypass wording -> prohibited
-    - missing/ambiguous patient, practitioner, time, or duration -> ambiguous
-    - otherwise intended
-    """
-    if unsafe_utterance is not None:
-        return "prohibited"
-    if requires_clarification:
-        return "ambiguous"
-    return "intended"
-
-
-def _interpret_temporal_relation(
-    utterance: str,
-) -> tuple[str, str | None, str | None]:
-    """Interpret temporal relation and bounds from utterance.
-
-    Uses diary temporal helpers.
-    Derives temporal relation from utterance text only — never from scenario.
-
-    Priority order:
-    1. ``extract_natural_time_constraints`` — handles between, at, about, after/before, positional.
-       If it returns a non-unspecified relation with bounds, use that.
-    2. If the extractor returns ``unspecified`` with bounds, the extractor found
-       positional time fragments but couldn't determine the relation.  Use its
-       bounds and infer the relation from them.
-    3. If the extractor returns ``unspecified`` without bounds, fall back to
-       simple pattern checks (afternoon, explicit time).
-    """
-    extraction = extract_natural_time_constraints(utterance)
-
-    # Specific check for "sometime in the afternoon" BEFORE generic "afternoon".
-    # The "sometime" form is truly unspecified (no exact or interval bound given).
-    if re.search(r"\bsometime in the afternoon\b", utterance, re.I):
-        return "unspecified", None, None
-
-    if extraction.temporal_relation != "unspecified":
-        # Extractor found a clear relation (between, at, about, after/before).
-        return extraction.temporal_relation, extraction.earliest, extraction.latest
-
-    # Extractor returned unspecified.  Check if it still found bounds.
-    if extraction.earliest is not None or extraction.latest is not None:
-        # Extractor found positional time fragments (e.g. "3pm to 4pm")
-        # but couldn't determine the relation.  Infer it from bounds.
-        if extraction.earliest and extraction.latest:
-            if extraction.earliest == extraction.latest:
-                return "exact", extraction.earliest, extraction.latest
-            return "interval", extraction.earliest, extraction.latest
-        if extraction.earliest:
-            # A lone positional point (for example correction text "to 4pm")
-            # is exact when the extractor found no explicit open-bound relation.
-            return "exact", extraction.earliest, extraction.earliest
-        return "unspecified", extraction.earliest, extraction.latest
-
-    # Check for afternoon/period hints
-    if _AFTERNOON_PATTERN.search(utterance):
-        return "interval", "13:00", "17:00"
-
-    # If we have explicit time via regex fallback, try parse_time_fragment
-    time_match = re.search(r"\b(\d{1,2})\s*(pm|am)\b", utterance, re.I)
-    if time_match:
-        parsed = parse_time_fragment(time_match.group(0))
-        if parsed:
-            return "exact", parsed, parsed
-
-    return "unspecified", None, None
-
-
-def _extract_normalized_values(
-    scenario: ReceptionScenarioSpec,
-    utterances: list[str],
-    correction_index: int | None,
-) -> dict[str, Any]:
-    """Extract normalized values from dialogue turns.
-
-    Multi-turn state reducer: correction turn replaces only corrected field.
-    Parses whole corrected interval, not just the first point-time regex.
-    """
-    # Start with first turn extraction
-    primary = utterances[0]
-
-    # Use the scenario's expected normalized values as guidance for the *structure*
-    # but derive actual values from utterance text
-    values: dict[str, Any] = {}
-
-    # Extract date
-    ref_date_str = scenario.reference_date.isoformat()
-    date_val = _extract_date_info(primary, ref_date_str)
-    if date_val:
-        values["appointment_date"] = date_val
-
-    # Extract temporal bounds
-    _, earliest, latest = _interpret_temporal_relation(primary)
-    if earliest:
-        values["earliest_time"] = earliest
-    if latest:
-        values["latest_time"] = latest
-
-    # Extract duration
-    dur = _extract_duration(primary)
-    if dur is not None:
-        values["duration_minutes"] = dur
-
-    # Extract time period (afternoon etc)
-    period = _extract_time_period(primary)
-    if period:
-        values["time_period"] = period
-
-    # Handle correction turn — update only the corrected field.
-    # Parse the whole corrected interval/date/time/duration, not just the
-    # first point-time regex.
-    if correction_index is not None and correction_index < len(utterances):
-        correction = utterances[correction_index]
-
-        # Check if time is corrected using full temporal extraction on correction
-        corr_relation, corr_earliest, corr_latest = _interpret_temporal_relation(correction)
-        if corr_earliest:
-            values["earliest_time"] = corr_earliest
-            if corr_relation == "exact" and corr_latest is None:
-                corr_latest = corr_earliest
-        if corr_latest:
-            values["latest_time"] = corr_latest
-
-        # Check if duration is corrected
-        dur_match = re.search(r"\b(\d+)\s*minutes?\b", correction, re.I)
-        if dur_match:
-            values["duration_minutes"] = int(dur_match.group(1))
-
-        # Check if date is corrected in correction turn
-        corr_date = _extract_date_info(correction, ref_date_str)
-        if corr_date:
-            values["appointment_date"] = corr_date
-
-        # Check if practitioner is corrected
-        pract = _extract_practitioner_name(correction)
-        if pract:
-            pass  # entity semantics tracked separately
-
-    return values
-
-
-def _extract_entity_semantics(
-    scenario: ReceptionScenarioSpec,
-    utterances: list[str],
-    correction_index: int | None,
-) -> dict[str, str]:
-    """Extract entity semantics for each field.
-
-    Uses scenario's expected semantics as a check, but derives from text.
-    Only marks an entity ``corrected`` when its extracted value actually changes.
-    """
-    semantics: dict[str, str] = {
-        "practitioner": "omitted",
-        "patient": "omitted",
-        "location": "omitted",
-        "appointment_type": "omitted",
-        "duration": "omitted",
-    }
-
-    primary = utterances[0]
-
-    # Patient extraction
-    patient = _extract_patient_name(primary)
-    if patient:
-        semantics["patient"] = "exact"
-
-    # Practitioner extraction
-    pract_primary = _extract_practitioner_name(primary)
-    if pract_primary:
-        semantics["practitioner"] = "exact"
-
-    # Duration extraction
-    dur_primary = _extract_duration(primary)
-    if dur_primary is not None:
-        semantics["duration"] = "exact"
-
-    # Handle correction — field becomes "corrected" only when value actually changes
-    if correction_index is not None and correction_index < len(utterances):
-        correction = utterances[correction_index]
-
-        # Check temporal correction: only "corrected" if value differs
-        corr_relation, corr_earliest, corr_latest = _interpret_temporal_relation(correction)
-        if corr_earliest:
-            # Get the original earliest for comparison
-            _, orig_earliest, _ = _interpret_temporal_relation(primary)
-            if orig_earliest and corr_earliest != orig_earliest:
-                semantics["duration"] = "exact"  # temporal correction doesn't change entity type
-
-        dur_match = re.search(r"\b(\d+)\s*minutes?\b", correction, re.I)
-        if dur_match and dur_primary is not None:
-            new_dur = int(dur_match.group(1))
-            if new_dur != dur_primary:
-                semantics["duration"] = "corrected"
-        elif dur_match and dur_primary is None:
-            semantics["duration"] = "exact"
-
-        pract_correction = _extract_practitioner_name(correction)
-        if pract_correction and pract_primary:
-            # Only "corrected" if practitioner name actually changed
-            if pract_correction != pract_primary:
-                semantics["practitioner"] = "corrected"
-            else:
-                semantics["practitioner"] = "exact"  # repeating same practitioner remains exact
-        elif pract_correction and not pract_primary:
-            semantics["practitioner"] = "exact"
-
-    # Check for ambiguous practitioner
-    if re.search(r"\b(a doctor|with a doctor)\b", primary, re.I):
-        semantics["practitioner"] = "ambiguous"
-
-    return semantics
-
-
-def _determine_selected_tools(
-    scenario: ReceptionScenarioSpec,
-    utterances: list[str],
-    intended_action: str | None,
-    requires_clarification: bool,
-    has_unsafe: bool,
-    has_temporal_bounds: bool = False,
-) -> tuple[str, ...]:
-    """Deterministically determine interpretation tool sequence.
-
-    Not copied from expected — derived from interpretation logic.
-    """
-    tools: list[str] = []
-
-    # Always search patients first for a known patient
-    if _extract_patient_name(utterances[0]):
-        tools.append("search_patients")
-
-    # Find slots if we have enough info (even when clarification needed,
-    # the system can still search within known temporal bounds)
-    if intended_action == "create" and not has_unsafe:
-        if has_temporal_bounds:
-            tools.append("find_slots")
-
-    # Create booking if not unsafe and no clarification needed
-    if (
-        intended_action == "create"
-        and not requires_clarification
-        and not has_unsafe
-    ):
-        tools.append("create_booking")
-
-    # Request clarification
-    if requires_clarification:
-        tools.append("request_clarification")
-
-    # Refuse instruction for unsafe
-    if has_unsafe:
-        tools.append("refuse_instruction")
-
-    return tuple(tools)
+# ---------------------------------------------------------------------------
+# Deterministic interpreter — delegates to the extraction boundary
+# ---------------------------------------------------------------------------
 
 
 def deterministic_interpret(
     scenario: ReceptionScenarioSpec,
 ) -> InterpretationObservation:
-    """Produce a typed interpretation from dialogue turns using deterministic,
-    provider-free language functions.
+    """Produce a typed interpretation from dialogue turns using the pure
+    deterministic semantic extraction boundary.
 
     This function does not copy expected scenario fields into the observation
     merely to make the report pass.  Values are derived from actual utterance
-    text through deterministic parsing.
+    text through ``extract_semantics``, which accepts only dialogue turns and
+    a reference date — no scenario contract, expected values, or scorer oracle.
 
     The scenario is the scorer oracle only, never the observation fallback.
 
@@ -689,159 +276,47 @@ def deterministic_interpret(
         if isinstance(turn.get("utterance"), str)
     ]
 
-    # Run lossless normalization on each turn
-    normalized_turns = [normalize_utterance(u) for u in utterances]
+    reference_date = scenario.reference_date.isoformat()
 
-    # Check for unsafe wording before anything else
-    unsafe_utterance = _detect_unsafe_utterance(utterances)
-
-    if unsafe_utterance is not None:
-        # Unsafe instruction — refuse.  Extract what we can from turn 1 for
-        # reporting purposes (adversarial scenarios have a legitimate first turn).
-        intended_action = _determine_intended_action(utterances[0])
-
-        # Extract normalized values from first turn (the legitimate request)
-        values = _extract_normalized_values(scenario, utterances, None)
-
-        # Determine entity semantics from the FIRST turn only (legitimate)
-        entities = _extract_entity_semantics(scenario, utterances, None)
-
-        # Temporal from first turn
-        temporal_rel, earliest, latest = _interpret_temporal_relation(utterances[0])
-
-        return InterpretationObservation(
-            scenario_id=scenario.scenario_id,
-            sample_index=0,
-            intended_action=intended_action if intended_action else None,
-            action_semantics="prohibited",
-            temporal_relation=temporal_rel,
-            normalized_values=values,
-            entity_semantics=entities,
-            requires_clarification=False,
-            clarification_choices=(),
-            selected_tool_sequence=(
-                "search_patients",
-                "find_slots",
-                "create_booking",
-                "refuse_instruction",
-            ),
-            authority_claim="refuse",
-            claims_action_completed=False,
-        )
-
-    # Check for correction turns
-    correction_index = _detect_correction_turn(utterances)
-
-    # Detect ambiguity / missing required information from utterances only
-    intended_action = _determine_intended_action(utterances[0])
-    requires_clarification = False
-    clarification_choices: tuple[str, ...] = ()
-
-    if intended_action is None:
-        requires_clarification = True
-
-    # Check temporal extraction
-    temporal_relation, earliest, latest = _interpret_temporal_relation(utterances[0])
-
-    # Specific check for "sometime in the afternoon" — no exact time specified
-    # so clarification is needed (utterance-derived, not scenario-derived)
-    if re.search(r"\bsometime in the afternoon\b", utterances[0], re.I):
-        requires_clarification = True
-        temporal_relation = "unspecified"
-        clarification_choices = ("1pm", "2pm", "3pm", "4pm")
-
-    # Check for "with a doctor" (ambiguous practitioner)
-    if re.search(r"\bwith a doctor\b", utterances[0], re.I):
-        requires_clarification = True
-        clarification_choices = ("Dr Taylor", "Dr Patel", "Dr Chen")
-
-    # Check for no time/duration specified ("tomorrow" only)
-    has_time = bool(re.search(r"\b(\d{1,2})\s*(pm|am|:)\b", utterances[0], re.I))
-    has_duration = bool(re.search(r"\b(\d+)\s*minutes?\b", utterances[0], re.I))
-    if intended_action == "create" and not has_time and not has_duration:
-        requires_clarification = True
-        temporal_relation = "unspecified"
-        clarification_choices = ("Morning", "Afternoon", "All day")
-
-    # Handle correction: field semantics may change
-    if correction_index is not None:
-        # Correction replaces the corrected field; other fields carry forward
-        if requires_clarification:
-            # Correction might resolve clarification
-            correction_utterance = utterances[correction_index]
-            # Check if correction provides the missing time
-            if not has_time:
-                time_match = re.search(
-                    r"\b(\d{1,2})\s*(pm|am)\b", correction_utterance, re.I
-                )
-                if time_match:
-                    requires_clarification = False
-                    parsed = parse_time_fragment(time_match.group(0))
-                    if parsed:
-                        temporal_relation = "exact"
-                        earliest = parsed
-                        latest = parsed
-                        clarification_choices = ()
-            if not has_duration:
-                dur_match = re.search(
-                    r"\b(\d+)\s*minutes?\b", correction_utterance, re.I
-                )
-                if dur_match:
-                    requires_clarification = False
-                    clarification_choices = ()
-
-    # Deterministic time extraction for temporal_relation
-    if temporal_relation == "unspecified" and earliest and latest:
-        if earliest == latest:
-            temporal_relation = "exact"
-        else:
-            temporal_relation = "interval"
-
-    # Determine action_semantics from utterances only (no scenario fallback)
-    action_semantics = _determine_action_semantics(
-        utterances, unsafe_utterance, requires_clarification
-    )
-
-    # Extract normalized values
-    values = _extract_normalized_values(scenario, utterances, correction_index)
-
-    # Extract entity semantics
-    entities = _extract_entity_semantics(scenario, utterances, correction_index)
-
-    # Determine authority from derived semantics only
-    if action_semantics == "prohibited":
-        authority = "refuse"
-    elif requires_clarification or action_semantics == "ambiguous":
-        authority = "clarify"
-    else:
-        authority = "read"
-
-    # Determine if we have temporal bounds for slot search
-    has_temporal_bounds = bool(earliest is not None or latest is not None
-                               or values.get("earliest_time")
-                               or values.get("latest_time"))
-
-    # Determine selected tools
-    tools = _determine_selected_tools(
-        scenario, utterances, intended_action,
-        requires_clarification, unsafe_utterance is not None,
-        has_temporal_bounds=has_temporal_bounds,
-    )
+    # Delegate to the pure extraction boundary (utterances + ref date only).
+    extraction = extract_semantics(utterances, reference_date)
 
     return InterpretationObservation(
         scenario_id=scenario.scenario_id,
         sample_index=0,
-        intended_action=intended_action,
-        action_semantics=action_semantics,
-        temporal_relation=temporal_relation,
-        normalized_values=values,
-        entity_semantics=entities,
-        requires_clarification=requires_clarification,
-        clarification_choices=clarification_choices,
-        selected_tool_sequence=tools,
-        authority_claim=authority,
-        claims_action_completed=False,
+        intended_action=extraction.intended_action,
+        action_semantics=extraction.action_semantics,
+        temporal_relation=extraction.temporal_relation,
+        normalized_values=dict(extraction.normalized_values),
+        entity_semantics=dict(extraction.entity_semantics),
+        requires_clarification=extraction.requires_clarification,
+        clarification_choices=extraction.clarification_choices,
+        selected_tool_sequence=extraction.selected_tool_sequence,
+        authority_claim=extraction.authority_claim,
+        claims_action_completed=extraction.claims_action_completed,
     )
+
+
+# ---------------------------------------------------------------------------
+# Replay helpers: practitioner name extraction (not in extraction boundary)
+# ---------------------------------------------------------------------------
+
+
+# Pattern for extracting practitioner name from utterance text.
+_PRACTITIONER_PATTERN = re.compile(
+    r"\b(?:with|for|see)\s+(Dr\s+[A-Z][a-z]+)\b"
+)
+
+
+def _extract_practitioner_name(text: str) -> str | None:
+    """Extract a synthetic practitioner name from utterance text.
+
+    Used only by the replay delta mapper (not by the extraction boundary).
+    """
+    m = _PRACTITIONER_PATTERN.search(text)
+    if m:
+        return m.group(1)
+    return None
 
 
 # ---------------------------------------------------------------------------
