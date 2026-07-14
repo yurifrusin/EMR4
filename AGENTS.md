@@ -29,8 +29,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
 | **Current authority allocation (authoritative override)** | GPT Sol is the Conductor, sprint planner, architecture/acceptance owner, recovery owner, and protected integrator. DeepSeek V4 Flash through Claude Code `--bare` is an economical implementation/test worker. Gemini 3.5 Flash through Antigravity is an economical worker and independent reviewer. DeepSeek Pro is **not** the Conductor and must not be launched for planning, acceptance revision, or sprint allocation unless Yuri explicitly re-authorizes that role in a later user instruction. This row overrides conflicting historical/default allocation text anywhere else in this handover or linked Ariadne documents. |
-| **Current active track** | LC1-LC4 are complete. LC4 now provides exactly 120 semantic groups, 1,440 variants, and 360 multi-turn trajectories: 96 DeepSeek Silver/pending development groups plus a 24-group, 288-variant, 72-trajectory Sol-authored Gold/adjudicated protected holdout. The development baseline has 0/2,304 complete passes but 2,304/2,304 safety passes; its 444 candidate-only cells remain separate from the three Gold cells and do not reduce the 152,061 adjudicated gaps. Gemini 3.5 Flash independently returned `DECISION: pass` before the holdout existed. Sol then sealed and consumed `lc4-holdout-v1` once: 0/576 complete passes, 576 interpretation and policy attributions, 538 integration attributions, eight safety failures, zero repeat variance, and 264 new adjudicated cells, leaving 151,797 empty. The holdout report is aggregate-only and version v1 cannot be re-evaluated or tuned against without an explicit reuse/new-version policy. T3.1-T3.4 remain intact and blocked by default; T3.5 provider adapters and all live/write authority remain deferred. |
-| **Next recommended work** | Do not proceed directly to LC5/T3.5: LC4 proves the language bridge is not credible at scale, especially for normalized values, entity semantics, downstream outcomes, clarification, and tool/authority selection. Begin an LC4R deterministic semantic-gap repair tranche against the Silver/pending development partition only. Prioritize the non-intercepted interpretation path, lossless normalization, explicit negation (including the holdout-observed but non-case-specific completion-negation safety class), entity resolution, clarification state, and interpretation/replay tool selection. Do not inspect or rerun protected holdout cases; define a new holdout version or reviewed reuse policy before any future certification evaluation. Treat typed text and future ASR transcripts as surface channels into the same canonical scenario contract; do not add a separate voice semantic stack. Preserve T3.1-T3.4 and the T3.5/live-provider/write deferral. Continue without user pause for ordinary development-only repair, but pause before live-provider calls, holdout reuse, historical-trove expansion, sensitive-data transmission, material licence/cost acceptance, or write-authority change. Dependabot alert 5 remains open; do not force overrides. |
+| **Current active track** | LC1-LC4 and repair tranches LC4R1-LC4R3 are complete. LC4R1 established the oracle-free semantic extraction boundary, explicit temporal relations, lossless normalized turns, and the real non-intercepted `tomorrow at 3pm` regression. LC4R2 made replay consequences action-specific and oracle-free while exposing Silver/pending contract conflicts. LC4R3 closed 154/154 aligned explicit action-surface misses and improved full-development intended-action passes from 720/1,152 to 880/1,152 while preserving 1,152/1,152 safety and zero per-scenario repeat variance over 2,304 samples. Gemini 3.5 Flash independently returned `DECISION: pass` on exact accepted candidate head `b5b15e6e`. Protected holdout v1 remains sealed and must not be rerun or tuned against; T3.1-T3.4 remain intact and blocked by default; T3.5 provider adapters and all live/write authority remain deferred. |
+| **Next recommended work** | Begin a bounded Sol-planned LC4R4 normalization/entity tranche against aligned Silver/pending development surfaces only. Post-LC4R3 profiling leaves 584 aligned-failure records: 489 normalized-value failures, 485 entity-semantics failures, 241 clarification failures, 201 action-semantics failures, 159 temporal failures, and only 26 intended-action misses. First separate genuine surface-supported entity/value gaps from remaining Silver label conflicts; repair small independently authored slices without editing generated fixtures or copying expected fields into interpretation. Preserve `check_in` as planned-not-implemented, keep typed text and future ASR transcripts as channels into the same semantic contract, and retain T3.1-T3.4 plus the T3.5/live-provider/write deferral. Do not enumerate, inspect, rerun, regenerate, or tune against protected holdout v1. Continue without user pause for ordinary development-only repair, but pause before live-provider calls, holdout reuse/new-version policy, historical-trove expansion, sensitive-data transmission, material licence/cost acceptance, API/write-authority change, deployment, or release. Dependabot alert 5 remains open; do not force overrides. |
 
 LC2 execution used DeepSeek V4 Flash/high through Claude Code bare mode for the
 two implementation lanes and Gemini 3.5 Flash/medium through a fresh
@@ -60,6 +60,23 @@ real holdout only after all external work ended, and retained sole seal and
 evaluation authority. The serial LC1-LC4 plus T1/T2/T3.1-T3.4 gate collected
 682 tests and completed with 681 passes and one expected xfail. The exact LC4
 closeout is `docs/bernie-lc4-scale-and-holdout-closeout.md`.
+
+LC4R1-LC4R3 used DeepSeek V4 Flash/high through Claude Code `--bare` only as
+bounded implementation/test worker, GPT Sol as Conductor/acceptance/recovery
+owner and protected integrator, and Gemini 3.5 Flash through fresh Antigravity
+worktrees for independent veto review. LC4R3's first worker evidence draft
+over-broadened explanation patterns and regenerated an earlier report; the
+revision then substituted equal-size evidence subsets. Sol rejected both as
+acceptance evidence, preserved their artifacts, and used the recovery lease to
+correct only the frozen selection, per-scenario variance measurement,
+baseline assertions, and disclosure. Final LC4R3 evidence is
+`docs/bernie-lc4r3-report.json`, the Sol acceptance is
+`orchestration/agent_inbox/codex/lc4r3-sol-acceptance.md`, and Gemini's exact-head
+review is `orchestration/agent_inbox/codex/lc4r3-antigravity-independent-review.md`.
+During Sol's post-compaction orientation, a broad filename command enumerated
+protected fixture path names. No protected file content or label was opened,
+read, evaluated, or tuned against. The metadata-only process incident is
+recorded in the LC4R3 report and does not authorize protected holdout reuse.
 
 2026-07-13 task-branch work extends the DeepCode PTY harness with bounded,
 redacted terminal-event transcripts and a non-destructive multi-signal liveness
@@ -1816,4 +1833,4 @@ The user can say **"update the handover doc"** at any time to trigger a refresh 
 
 ---
 
-*Last updated: 2026-07-14 - LC1-LC4 are complete; the one-shot protected holdout exposes broad semantic gaps, so development-only LC4R repair is next while T3.5 and write authority remain deferred.*
+*Last updated: 2026-07-14 - LC4R1-LC4R3 are complete; aligned action-surface recognition improved safely, LC4R4 normalization/entity repair is next, protected holdout v1 remains sealed, and T3.5/write authority remain deferred.*
