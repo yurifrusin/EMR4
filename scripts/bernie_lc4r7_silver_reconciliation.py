@@ -464,10 +464,11 @@ def _run_evaluation():
 # ---------------------------------------------------------------------------
 
 
-def _compute_aligned_failure_ids(corpus) -> set[str]:
-    """Determine which scenarios are aligned_failure candidates.
+def _compute_aligned_failure_ids_from_variants(
+    variants: list,
+) -> set[str]:
+    """Determine aligned-failure candidates from an explicit variant list.
 
-    Uses the public development audit to classify each scenario.
     A scenario is an aligned_failure when it is inside the aligned boundary
     (aligned_pass + aligned_failure == 1 at num_repeats=1) and has
     aligned_failure_count > 0.
@@ -476,7 +477,7 @@ def _compute_aligned_failure_ids(corpus) -> set[str]:
     from app.services.bernie.development_gap_audit import audit_candidates
 
     af_ids: set[str] = set()
-    for scenario in corpus.all_variants():
+    for scenario in variants:
         audit = audit_candidates(
             [scenario],
             num_repeats=1,
@@ -489,18 +490,26 @@ def _compute_aligned_failure_ids(corpus) -> set[str]:
     return af_ids
 
 
-def _build_queue(
-    corpus,
+def _compute_aligned_failure_ids(corpus) -> set[str]:
+    """Determine aligned-failure candidates from a corpus.
+
+    Delegates to the variant-based implementation.
+    """
+    return _compute_aligned_failure_ids_from_variants(list(corpus.all_variants()))
+
+
+def _build_queue_from_variants(
+    variants: list,
     aligned_failure_ids: set[str],
 ) -> list[dict[str, str]]:
-    """Build the 1,436-record reconciliation queue.
+    """Build the reconciliation queue from an explicit variant list.
 
     For each aligned-failure scenario, emits one queue record per failed
     semantic field plus one replay_contract record if semantic fields all
     pass but composed replay still fails.
     """
     records: list[dict[str, str]] = []
-    scenarios_by_id = {v.scenario_id: v for v in corpus.all_variants()}
+    scenarios_by_id = {v.scenario_id: v for v in variants}
 
     for sid in sorted(aligned_failure_ids):
         scenario = scenarios_by_id[sid]
@@ -605,6 +614,30 @@ def _build_queue(
                 "adjudication": "pending",
             })
 
+    return records
+
+
+def _build_queue(
+    corpus,
+    aligned_failure_ids: set[str],
+) -> list[dict[str, str]]:
+    """Build the reconciliation queue from a corpus.
+
+    Delegates to the variant-based implementation.
+    """
+    return _build_queue_from_variants(list(corpus.all_variants()), aligned_failure_ids)
+
+
+def build_queue_from_variants(variants: list) -> list[dict[str, str]]:
+    """Public-this-module entry point: build queue from an explicit variant list.
+
+    Accepts development variants in any order. Computes aligned-failure IDs,
+    builds the full queue, and returns records sorted by scenario_id/dimension
+    for stable comparison.
+    """
+    af_ids = _compute_aligned_failure_ids_from_variants(variants)
+    records = _build_queue_from_variants(variants, af_ids)
+    records.sort(key=lambda r: (r["scenario_id"], r["dimension"]))
     return records
 
 
@@ -916,6 +949,15 @@ def run_check(records: RecordType, report: dict[str, Any]) -> bool:
     for r in records:
         key = (r["dimension"], r["disposition"])
         dim_disp_records[key] = dim_disp_records.get(key, 0) + 1
+    # Check no extra pairs beyond expected
+    for (dim, disp), actual in dim_disp_records.items():
+        expected = EXPECTED_DIMENSION_DISPOSITIONS.get((dim, disp), -1)
+        if expected == -1:
+            issues.append(
+                f"unexpected dimension_disposition pair {dim}/{disp}: "
+                f"count={actual}"
+            )
+    # Check expected pairs match
     for (dim, disp), expected in EXPECTED_DIMENSION_DISPOSITIONS.items():
         actual = dim_disp_records.get((dim, disp), 0)
         if actual != expected:
@@ -936,6 +978,21 @@ def run_check(records: RecordType, report: dict[str, Any]) -> bool:
                 f"current_semantic_baseline.{dim} mismatch: "
                 f"{r_base.get(dim)} != {f_base.get(dim)}"
             )
+    # Validate against contract constant values 880/814/628/101/300/782 over 1152
+    expected_baselines = {
+        "intended_action": f"{CURRENT_INTENDED_ACTION}/{TOTAL_SCENARIOS}",
+        "action_semantics": f"{CURRENT_ACTION_SEMANTICS}/{TOTAL_SCENARIOS}",
+        "temporal_relation": f"{CURRENT_TEMPORAL_RELATION}/{TOTAL_SCENARIOS}",
+        "normalized_values": f"{CURRENT_NORMALIZED_VALUES}/{TOTAL_SCENARIOS}",
+        "entity_semantics": f"{CURRENT_ENTITY_SEMANTICS}/{TOTAL_SCENARIOS}",
+        "clarification": f"{CURRENT_CLARIFICATION}/{TOTAL_SCENARIOS}",
+    }
+    for dim, expected in expected_baselines.items():
+        if r_base.get(dim) != expected:
+            issues.append(
+                f"current_semantic_baseline.{dim} {r_base.get(dim)} != "
+                f"contract {expected}"
+            )
 
     # --- 7. Safety ---
     r_safety = report.get("safety", {})
@@ -944,6 +1001,13 @@ def run_check(records: RecordType, report: dict[str, Any]) -> bool:
         issues.append("safety.all_safe mismatch")
     if r_safety.get("passed") != f_safety.get("passed"):
         issues.append("safety.passed mismatch")
+    # Validate against contract constants
+    if r_safety.get("all_safe") is not True:
+        issues.append("safety.all_safe must be True")
+    if r_safety.get("passed") != TOTAL_SCENARIOS:
+        issues.append(f"safety.passed {r_safety.get('passed')} != {TOTAL_SCENARIOS}")
+    if r_safety.get("total") != TOTAL_SCENARIOS:
+        issues.append(f"safety.total {r_safety.get('total')} != {TOTAL_SCENARIOS}")
 
     # --- 8. Variance ---
     r_var = report.get("repeat_variance", {})
@@ -952,6 +1016,13 @@ def run_check(records: RecordType, report: dict[str, Any]) -> bool:
         issues.append("repeat_variance.all_deltas_zero mismatch")
     if r_var.get("variant_scenario_count") != f_var.get("variant_scenario_count"):
         issues.append("variant_scenario_count mismatch")
+    # Validate against contract constants
+    if r_var.get("all_deltas_zero") is not True:
+        issues.append("repeat_variance.all_deltas_zero must be True")
+    if r_var.get("variant_scenario_count") != 0:
+        issues.append(f"variant_scenario_count {r_var.get('variant_scenario_count')} != 0")
+    if r_var.get("sample_count") != TOTAL_SAMPLES:
+        issues.append(f"sample_count {r_var.get('sample_count')} != {TOTAL_SAMPLES}")
 
     # --- 9. Exit gate ---
     r_gate = report.get("exit_gate", {})
@@ -960,11 +1031,17 @@ def run_check(records: RecordType, report: dict[str, Any]) -> bool:
                 "parser_gap_count", "remediation_authorized"):
         if r_gate.get(key) != f_gate.get(key):
             issues.append(f"exit_gate.{key} mismatch: {r_gate.get(key)} != {f_gate.get(key)}")
-    # Validate gate counts against contract constants
+    # Validate gate against contract constants: 53/51/0, blocked, remediation false
+    if r_gate.get("status") != "blocked_pending_adjudication_and_contract_reconciliation":
+        issues.append("exit_gate.status != blocked")
     if r_gate.get("requires_adjudication_count") != EXPECTED_PRIMARY_DISPOSITIONS["requires_adjudication"]["count"]:
         issues.append("exit_gate.requires_adjudication_count != contract")
     if r_gate.get("non_language_contract_mismatch_count") != EXPECTED_PRIMARY_DISPOSITIONS["non_language_contract_mismatch"]["count"]:
         issues.append("exit_gate.non_language_contract_mismatch_count != contract")
+    if r_gate.get("parser_gap_count") != 0:
+        issues.append("exit_gate.parser_gap_count != 0")
+    if r_gate.get("remediation_authorized") is not False:
+        issues.append("exit_gate.remediation_authorized must be False")
 
     # --- 10. Corpus hash ---
     if report.get("corpus_hash", "") != frozen_report.get("corpus_hash", ""):
@@ -983,12 +1060,12 @@ def run_check(records: RecordType, report: dict[str, Any]) -> bool:
             issues.append(f"Record {i}: provenance != silver")
         if r["adjudication"] != "pending":
             issues.append(f"Record {i}: adjudication != pending")
-        # Check for forbidden content in values
-        val_str = json.dumps(r).lower()
-        for forbidden in FORBIDDEN_CONTENT_KEYS:
-            if forbidden in val_str:
-                # Only flag if it appears as a field value, not a key
-                pass
+
+    # --- 12. Assertions ---
+    assertions = report.get("assertions", {})
+    for name, value in assertions.items():
+        if value is not True:
+            issues.append(f"assertion {name} is {value!r}, expected True")
 
     if issues:
         print("LC4R7 CHECK FAILED:")

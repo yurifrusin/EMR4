@@ -10,7 +10,7 @@ Six owned files implemented:
 | File | Description |
 |---|---|
 | `scripts/bernie_lc4r7_silver_reconciliation.py` | Reconciliation helper with `--check` |
-| `tests/test_bernie_lc4r7_silver_reconciliation.py` | 24 focused tests |
+| `tests/test_bernie_lc4r7_silver_reconciliation.py` | 58 focused tests |
 | `docs/bernie-lc4r7-adjudication-queue.json` | 1,436-record redacted queue |
 | `docs/bernie-lc4r7-silver-reconciliation-report.json` | Aggregate report with frozen assertions |
 | `docs/bernie-lc4r7-silver-reconciliation.md` | Implementation note |
@@ -32,8 +32,8 @@ Six owned files implemented:
 - **Current baselines:** 880/814/628/101/300/782, safety 1152/1152, zero variance ✓
 - **Reason codes:** All 17 exact frozen codes used ✓
 - **Duplicate `_classify_clarification_failure` removed** ✓
-- **Order-invariance tests** with original, shuffled, reversed order ✓
-- **Fail-closed mutation tests** for queue/selection/primary/corpus/safety drift ✓
+- **Order-invariance tests** with original, shuffled, reversed order via `build_queue_from_variants` entry point ✓
+- **Fail-closed mutation tests** for queue/selection/primary/corpus/safety/report hash/dimension pair/variance/gate/baseline drift ✓
 - **`run_check` validates against contract constants AND committed artifacts** ✓
 
 ## Boundaries
@@ -52,6 +52,17 @@ All queue classification uses only the public `development_gap_audit` API,
 the `composed_corpus_evaluator` (interpret/replay/score), and
 `semantic_extraction._extract_temporal`. No expected values, source-span
 field names, or scenario oracle fields feed into interpretation.
+
+## Revision history
+
+| Event | Evidence |
+|---|---|
+| Initial outer launcher timeout, then resumed receipt | Initial test run timed out; resumed on reconnection |
+| Initial denied PowerShell attempt | PowerShell access denied in don't-ask mode |
+| Rejected first commit `61d3362b` | First commit provided queue without full contract validation |
+| Rejected first revision `30af9d2f` | Acceptance revision did not exercise alternate input orders, contained forbidden-content no-op loop, lacked strengthened contract-constant checks, omitted real fail-closed tests, and recorded wrong test count in completion artifact |
+| This revision (`HEAD`) | All five defects corrected; 58 tests pass; `--check` exits zero; no push |
+| This revision's denied-attempt evidence (if any) | None — all tools succeeded on final attempt |
 
 ## Candidate commit
 

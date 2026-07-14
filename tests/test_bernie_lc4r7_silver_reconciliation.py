@@ -453,7 +453,7 @@ class TestReport:
 
 
 class TestOrderInvariance:
-    """Prove the recomputed queue is invariant to input order."""
+    """Prove the recomputed queue is invariant to input order using explicit variants."""
 
     def _get_module(self):
         """Import the reconciliation module."""
@@ -471,63 +471,44 @@ class TestOrderInvariance:
         )
 
     def test_shuffled_order(self):
-        """Queue hash is invariant when scenarios are processed in shuffled order."""
+        """Queue from shuffled variants uses build_queue_from_variants entry point."""
         mod = self._get_module()
-
-        # Build once normally
-        records1, _ = mod.build_queue_and_report()
-
-        # Monkey-patch corpus.all_variants() to return shuffled order
         corpus = mod._load_corpus()
-        variants = corpus.all_variants()
-        shuffled = list(variants)
+        variants = list(corpus.all_variants())
+
+        # Assert shuffled order actually differs from original
         rng = random.Random(42)
+        shuffled = list(variants)
         rng.shuffle(shuffled)
-
-        class ShuffledCorpus:
-            def all_variants(self):
-                return shuffled
-            groups = corpus.groups
-
-        # Recompute aligned_failure_ids with shuffled input
-        af_ids = mod._compute_aligned_failure_ids(corpus)
-        records2 = mod._build_queue(corpus, af_ids)
-        records2.sort(key=lambda r: (r["scenario_id"], r["dimension"]))
-
-        h1 = _queue_hash(records1)
-        h2 = _queue_hash(records2)
-        assert h1 == h2, (
-            f"Queue hash differs after shuffle: {h1} vs {h2}"
+        shuffled_ids = [v.scenario_id for v in shuffled]
+        orig_ids = [v.scenario_id for v in variants]
+        assert shuffled_ids != orig_ids, (
+            "Shuffle did not change scenario ID order"
         )
-        assert h2 == EXPECTED_QUEUE_HASH, (
-            f"Shuffled queue hash {h2} != contract {EXPECTED_QUEUE_HASH}"
+
+        records = mod.build_queue_from_variants(shuffled)
+        h = _queue_hash(records)
+        assert h == EXPECTED_QUEUE_HASH, (
+            f"Shuffled queue hash {h} != contract {EXPECTED_QUEUE_HASH}"
         )
 
     def test_reversed_order(self):
-        """Queue hash is invariant when scenarios are processed in reverse order."""
+        """Queue from reversed variants uses build_queue_from_variants entry point."""
         mod = self._get_module()
-        records1, _ = mod.build_queue_and_report()
-
         corpus = mod._load_corpus()
-        variants = corpus.all_variants()
+        variants = list(corpus.all_variants())
+
         reversed_variants = list(reversed(variants))
-
-        class ReversedCorpus:
-            def all_variants(self):
-                return reversed_variants
-            groups = corpus.groups
-
-        af_ids = mod._compute_aligned_failure_ids(corpus)
-        records2 = mod._build_queue(corpus, af_ids)
-        records2.sort(key=lambda r: (r["scenario_id"], r["dimension"]))
-
-        h1 = _queue_hash(records1)
-        h2 = _queue_hash(records2)
-        assert h1 == h2, (
-            f"Queue hash differs after reverse: {h1} vs {h2}"
+        reversed_ids = [v.scenario_id for v in reversed_variants]
+        orig_ids = [v.scenario_id for v in variants]
+        assert reversed_ids != orig_ids, (
+            "Reverse did not change scenario ID order"
         )
-        assert h2 == EXPECTED_QUEUE_HASH, (
-            f"Reversed queue hash {h2} != contract {EXPECTED_QUEUE_HASH}"
+
+        records = mod.build_queue_from_variants(reversed_variants)
+        h = _queue_hash(records)
+        assert h == EXPECTED_QUEUE_HASH, (
+            f"Reversed queue hash {h} != contract {EXPECTED_QUEUE_HASH}"
         )
 
     def test_three_orders_identical_taxonomy(self):
@@ -538,18 +519,27 @@ class TestOrderInvariance:
             dim_disp = Counter((r["dimension"], r["disposition"]) for r in records)
             return sorted(dim_disp.items())
 
-        # Original
-        records_orig, _ = mod.build_queue_and_report()
+        corpus = mod._load_corpus()
+        variants = list(corpus.all_variants())
+
+        # Original (sorted) via entry point
+        records_orig = mod.build_queue_from_variants(variants)
         tax_orig = taxonomy(records_orig)
 
-        # Shuffled
-        corpus = mod._load_corpus()
-        af_ids = mod._compute_aligned_failure_ids(corpus)
-        records_shuf = mod._build_queue(corpus, af_ids)
-        records_shuf.sort(key=lambda r: (r["scenario_id"], r["dimension"]))
+        # Shuffled via entry point
+        rng = random.Random(42)
+        shuffled = list(variants)
+        rng.shuffle(shuffled)
+        records_shuf = mod.build_queue_from_variants(shuffled)
         tax_shuf = taxonomy(records_shuf)
 
+        # Reversed via entry point
+        reversed_variants = list(reversed(variants))
+        records_rev = mod.build_queue_from_variants(reversed_variants)
+        tax_rev = taxonomy(records_rev)
+
         assert tax_orig == tax_shuf, "Shuffled taxonomy differs from original"
+        assert tax_orig == tax_rev, "Reversed taxonomy differs from original"
 
 
 # ---------------------------------------------------------------------------
@@ -716,6 +706,247 @@ class TestFailClosed:
 
         records, report = build_queue_and_report()
         assert run_check(records, report), "Recomputed queue/report should pass run_check"
+
+    def test_run_check_fails_on_extra_dimension_pair(self):
+        """run_check returns False when report has an extra dimension/disposition pair."""
+        sys.path.insert(0, str(PROJECT_ROOT))
+        from scripts.bernie_lc4r7_silver_reconciliation import (
+            build_queue_and_report, run_check,
+        )
+
+        records, report = build_queue_and_report()
+        bad_report = dict(report)
+        # Add an extra dimension_disposition count not present in expected
+        bad_ddc = dict(report.get("dimension_disposition_counts", {}))
+        bad_ddc["intended_action|incomplete"] = 1
+        bad_report["dimension_disposition_counts"] = bad_ddc
+        assert not run_check(records, bad_report), "run_check should reject extra dimension pair"
+
+    def test_run_check_fails_on_report_hash_drift(self):
+        """run_check returns False when report content causes hash mismatch."""
+        sys.path.insert(0, str(PROJECT_ROOT))
+        from scripts.bernie_lc4r7_silver_reconciliation import (
+            build_queue_and_report, run_check,
+        )
+
+        records, report = build_queue_and_report()
+        bad_report = dict(report)
+        # Mutate report content so recomputed hash differs from frozen
+        bad_report["schema_version"] = "drifted.v2"
+        assert not run_check(records, bad_report), "run_check should reject report hash drift"
+
+    def test_run_check_fails_on_safety_total_drift(self):
+        """run_check returns False when safety.total is wrong."""
+        sys.path.insert(0, str(PROJECT_ROOT))
+        from scripts.bernie_lc4r7_silver_reconciliation import (
+            build_queue_and_report, run_check,
+        )
+
+        records, report = build_queue_and_report()
+        bad_report = dict(report)
+        bad_safety = dict(report.get("safety", {}))
+        bad_safety["total"] = 0
+        bad_report["safety"] = bad_safety
+        assert not run_check(records, bad_report), "run_check should reject safety.total drift"
+
+    def test_run_check_fails_on_safety_boolean_drift(self):
+        """run_check returns False when safety.all_safe is false."""
+        sys.path.insert(0, str(PROJECT_ROOT))
+        from scripts.bernie_lc4r7_silver_reconciliation import (
+            build_queue_and_report, run_check,
+        )
+
+        records, report = build_queue_and_report()
+        bad_report = dict(report)
+        bad_safety = dict(report.get("safety", {}))
+        bad_safety["all_safe"] = False
+        bad_report["safety"] = bad_safety
+        assert not run_check(records, bad_report), "run_check should reject safety.all_safe drift"
+
+    def test_run_check_fails_on_variance_all_deltas_drift(self):
+        """run_check returns False when variance.all_deltas_zero is false."""
+        sys.path.insert(0, str(PROJECT_ROOT))
+        from scripts.bernie_lc4r7_silver_reconciliation import (
+            build_queue_and_report, run_check,
+        )
+
+        records, report = build_queue_and_report()
+        bad_report = dict(report)
+        bad_var = dict(report.get("repeat_variance", {}))
+        bad_var["all_deltas_zero"] = False
+        bad_report["repeat_variance"] = bad_var
+        assert not run_check(records, bad_report), "run_check should reject variance all_deltas_zero drift"
+
+    def test_run_check_fails_on_variance_count_drift(self):
+        """run_check returns False when variance.variant_scenario_count != 0."""
+        sys.path.insert(0, str(PROJECT_ROOT))
+        from scripts.bernie_lc4r7_silver_reconciliation import (
+            build_queue_and_report, run_check,
+        )
+
+        records, report = build_queue_and_report()
+        bad_report = dict(report)
+        bad_var = dict(report.get("repeat_variance", {}))
+        bad_var["variant_scenario_count"] = 5
+        bad_report["repeat_variance"] = bad_var
+        assert not run_check(records, bad_report), "run_check should reject variance count drift"
+
+    def test_run_check_fails_on_variance_sample_count_drift(self):
+        """run_check returns False when variance.sample_count != 2304."""
+        sys.path.insert(0, str(PROJECT_ROOT))
+        from scripts.bernie_lc4r7_silver_reconciliation import (
+            build_queue_and_report, run_check,
+        )
+
+        records, report = build_queue_and_report()
+        bad_report = dict(report)
+        bad_var = dict(report.get("repeat_variance", {}))
+        bad_var["sample_count"] = 0
+        bad_report["repeat_variance"] = bad_var
+        assert not run_check(records, bad_report), "run_check should reject variance sample_count drift"
+
+    def test_run_check_fails_on_gate_status_drift(self):
+        """run_check returns False when exit_gate.status is wrong."""
+        sys.path.insert(0, str(PROJECT_ROOT))
+        from scripts.bernie_lc4r7_silver_reconciliation import (
+            build_queue_and_report, run_check,
+        )
+
+        records, report = build_queue_and_report()
+        bad_report = dict(report)
+        bad_gate = dict(report.get("exit_gate", {}))
+        bad_gate["status"] = "passed"
+        bad_report["exit_gate"] = bad_gate
+        assert not run_check(records, bad_report), "run_check should reject gate status drift"
+
+    def test_run_check_fails_on_gate_count_drift(self):
+        """run_check returns False when exit_gate count is wrong."""
+        sys.path.insert(0, str(PROJECT_ROOT))
+        from scripts.bernie_lc4r7_silver_reconciliation import (
+            build_queue_and_report, run_check,
+        )
+
+        records, report = build_queue_and_report()
+        bad_report = dict(report)
+        bad_gate = dict(report.get("exit_gate", {}))
+        bad_gate["requires_adjudication_count"] = 99
+        bad_report["exit_gate"] = bad_gate
+        assert not run_check(records, bad_report), "run_check should reject gate count drift"
+
+    def test_run_check_fails_on_gate_authorization_drift(self):
+        """run_check returns False when remediation_authorized is true."""
+        sys.path.insert(0, str(PROJECT_ROOT))
+        from scripts.bernie_lc4r7_silver_reconciliation import (
+            build_queue_and_report, run_check,
+        )
+
+        records, report = build_queue_and_report()
+        bad_report = dict(report)
+        bad_gate = dict(report.get("exit_gate", {}))
+        bad_gate["remediation_authorized"] = True
+        bad_report["exit_gate"] = bad_gate
+        assert not run_check(records, bad_report), "run_check should reject authorization drift"
+
+    def test_run_check_fails_on_baseline_intended_action_drift(self):
+        """run_check returns False when baseline intended_action drifts."""
+        sys.path.insert(0, str(PROJECT_ROOT))
+        from scripts.bernie_lc4r7_silver_reconciliation import (
+            build_queue_and_report, run_check,
+        )
+
+        records, report = build_queue_and_report()
+        bad_report = dict(report)
+        bad_base = dict(report.get("current_semantic_baseline", {}))
+        bad_base["intended_action"] = "0/1152"
+        bad_report["current_semantic_baseline"] = bad_base
+        assert not run_check(records, bad_report), "run_check should reject baseline intended_action drift"
+
+    def test_run_check_fails_on_baseline_action_semantics_drift(self):
+        """run_check returns False when baseline action_semantics drifts."""
+        sys.path.insert(0, str(PROJECT_ROOT))
+        from scripts.bernie_lc4r7_silver_reconciliation import (
+            build_queue_and_report, run_check,
+        )
+
+        records, report = build_queue_and_report()
+        bad_report = dict(report)
+        bad_base = dict(report.get("current_semantic_baseline", {}))
+        bad_base["action_semantics"] = "0/1152"
+        bad_report["current_semantic_baseline"] = bad_base
+        assert not run_check(records, bad_report), "run_check should reject baseline action_semantics drift"
+
+    def test_run_check_fails_on_baseline_temporal_relation_drift(self):
+        """run_check returns False when baseline temporal_relation drifts."""
+        sys.path.insert(0, str(PROJECT_ROOT))
+        from scripts.bernie_lc4r7_silver_reconciliation import (
+            build_queue_and_report, run_check,
+        )
+
+        records, report = build_queue_and_report()
+        bad_report = dict(report)
+        bad_base = dict(report.get("current_semantic_baseline", {}))
+        bad_base["temporal_relation"] = "0/1152"
+        bad_report["current_semantic_baseline"] = bad_base
+        assert not run_check(records, bad_report), "run_check should reject baseline temporal_relation drift"
+
+    def test_run_check_fails_on_baseline_normalized_values_drift(self):
+        """run_check returns False when baseline normalized_values drifts."""
+        sys.path.insert(0, str(PROJECT_ROOT))
+        from scripts.bernie_lc4r7_silver_reconciliation import (
+            build_queue_and_report, run_check,
+        )
+
+        records, report = build_queue_and_report()
+        bad_report = dict(report)
+        bad_base = dict(report.get("current_semantic_baseline", {}))
+        bad_base["normalized_values"] = "0/1152"
+        bad_report["current_semantic_baseline"] = bad_base
+        assert not run_check(records, bad_report), "run_check should reject baseline normalized_values drift"
+
+    def test_run_check_fails_on_baseline_entity_semantics_drift(self):
+        """run_check returns False when baseline entity_semantics drifts."""
+        sys.path.insert(0, str(PROJECT_ROOT))
+        from scripts.bernie_lc4r7_silver_reconciliation import (
+            build_queue_and_report, run_check,
+        )
+
+        records, report = build_queue_and_report()
+        bad_report = dict(report)
+        bad_base = dict(report.get("current_semantic_baseline", {}))
+        bad_base["entity_semantics"] = "0/1152"
+        bad_report["current_semantic_baseline"] = bad_base
+        assert not run_check(records, bad_report), "run_check should reject baseline entity_semantics drift"
+
+    def test_run_check_fails_on_baseline_clarification_drift(self):
+        """run_check returns False when baseline clarification drifts."""
+        sys.path.insert(0, str(PROJECT_ROOT))
+        from scripts.bernie_lc4r7_silver_reconciliation import (
+            build_queue_and_report, run_check,
+        )
+
+        records, report = build_queue_and_report()
+        bad_report = dict(report)
+        bad_base = dict(report.get("current_semantic_baseline", {}))
+        bad_base["clarification"] = "0/1152"
+        bad_report["current_semantic_baseline"] = bad_base
+        assert not run_check(records, bad_report), "run_check should reject baseline clarification drift"
+
+    def test_run_check_fails_on_primary_hash_drift(self):
+        """run_check returns False when primary disposition hash is wrong."""
+        sys.path.insert(0, str(PROJECT_ROOT))
+        from scripts.bernie_lc4r7_silver_reconciliation import (
+            build_queue_and_report, run_check,
+        )
+
+        records, report = build_queue_and_report()
+        bad_report = dict(report)
+        bad_primary = dict(report.get("primary_dispositions", {}))
+        for disp in bad_primary:
+            bad_primary[disp] = dict(bad_primary[disp])
+        if "contradictory" in bad_primary:
+            bad_primary["contradictory"]["hash"] = "0000000000000000"
+        bad_report["primary_dispositions"] = bad_primary
+        assert not run_check(records, bad_report), "run_check should reject primary hash drift"
 
 
 # ---------------------------------------------------------------------------
