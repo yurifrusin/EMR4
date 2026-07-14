@@ -293,6 +293,8 @@ reproducing the focused tests and lattice arithmetic. No candidate was promoted.
 
 ### LC4 - Scale And Holdout Evaluation
 
+Status: complete and independently reviewed on 2026-07-14.
+
 - Grow to roughly 100-150 meaningful semantic scenarios with 10-30 linguistic
   variants each, plus several hundred multi-turn trajectories.
 - Keep a protected holdout sourced or generated independently from the models
@@ -301,6 +303,43 @@ reproducing the focused tests and lattice arithmetic. No candidate was promoted.
   than raw case count.
 
 These are operational starting targets, not proof of completeness.
+
+LC4 met the bounded target with exactly 120 semantic groups, 1,440 variants,
+and 360 multi-turn trajectories. The 96-group development partition remains
+Silver/pending and produced 0/2,304 complete passes, zero safety failures, and
+zero repeat variance. Its 444 candidate-only cells do not reduce the 152,061
+adjudicated gaps. Gemini 3.5 Flash independently passed the framework before
+the actual holdout existed.
+
+Sol then authored and sealed the 24-group Gold/adjudicated protected holdout.
+The first and only `lc4-holdout-v1` baseline produced 0/576 complete passes,
+576 interpretation and policy attributions, 538 integration attributions,
+eight safety failures, and zero repeat variance. It adds 264 new adjudicated
+cells, leaving 151,797 empty. The committed report is aggregate-only; v1 must
+not be rerun or tuned against without an explicit reviewed reuse policy or a
+new holdout version.
+
+### LC4R - Deterministic Semantic Gap Repair
+
+LC4R is the next credibility tranche before live-model comparison. It uses only
+the development partition and ordinary authored regression fixtures. It must
+not read, re-evaluate, regenerate, or tune against protected holdout labels.
+
+- Repair lossless normalized-value extraction, entity semantics, explicit
+  temporal relations, clarification state reduction, and interpretation/replay
+  tool selection through the non-intercepted deterministic path.
+- Preserve the honest layer attribution exposed by LC4 rather than optimizing
+  only the all-pass aggregate.
+- Add development regressions for safe negated completion/bypass language
+  without disclosing the protected cases that exposed the class.
+- Keep Silver/pending discovery separate from Gold/adjudicated evidence.
+- Define a new holdout version or explicit reviewed reuse policy before another
+  certification evaluation.
+
+Exit: the deterministic language bridge has credible development evidence
+across critical slices and no unresolved safety regression, sufficient to make
+provider-shadow comparison informative rather than merely confirm universal
+semantic failure.
 
 ### LC5 - Live-Model Shadow And Continuous Learning
 
@@ -332,26 +371,26 @@ variance, not average accuracy or persuasive output.
 
 ## Immediate Direction
 
-The next EMR4 product tranche is LC4, not T3.5. Preserve T3.1-T3.4, defer live
-or static provider-adapter work, and expand the corpus from LC3's measured gaps.
-Prioritize clarification, interval/unspecified temporal relations, entity
-ambiguity, and interpretation/replay tool selection. Establish an independently
-sourced or generated protected holdout before using any model against it; do
-not promote the fifteen Silver/pending LC2 candidates merely because LC3 can
-execute them.
+The next EMR4 product tranche is LC4R, not T3.5. LC4's one-shot protected
+baseline proves that the deterministic language bridge is not credible at
+scale. Repair the development path without inspecting or reusing holdout v1,
+then make an explicit new-version/reuse decision before another certification
+evaluation. Do not promote Silver/pending candidates merely because the
+evaluator can execute them.
 
-No user decision is required for ordinary LC4 implementation. Pause only if
-work would broaden historical-trove access, send sensitive data to a provider,
-accept material licensing/cost terms, open live-provider execution, or change
-diary write authority.
+No user decision is required for ordinary development-only LC4R work. Pause if
+work would reuse/re-evaluate protected holdout v1, broaden historical-trove
+access, send sensitive data to a provider, accept material licensing/cost
+terms, open live-provider execution, or change diary write authority.
 
 ## Restart Rehydration
 
 After restarting the app, a new orchestrator should read `AGENTS.md`, this plan,
 the T1/T2 closeouts, and the T3 shadow-evaluation status before changing code.
-It should verify `master` and `origin/master`, confirm the LC1-LC3 closeout and
-the blocked T3 gates, and begin LC4 through the normal Ariadne workflow without
-reopening T3.5 or asking for routine permission.
+It should verify `master` and `origin/master`, confirm the LC1-LC4 closeout,
+the consumed holdout-v1 seal, and the blocked T3 gates, then begin LC4R through
+the normal Ariadne workflow without reopening T3.5 or asking for routine
+development-only permission.
 
 Recommended new-task prompt:
 
@@ -361,12 +400,13 @@ AGENTS.md and read docs/bernie-language-coverage-implementation-plan.md,
 docs/bernie-t1-stateful-scenario-laboratory.md,
 docs/bernie-t2-deterministic-behaviour-matrix.md, and
 docs/bernie-t3-shadow-evaluation.md. Verify the worktree and origin/master,
-then begin LC4 Scale and Holdout Evaluation through the normal Ariadne workflow.
-Grow the corpus from LC3's measured clarification, temporal, entity, and tool
-selection gaps; establish an independent protected holdout; preserve corpus
-provenance and no-self-certification; and keep candidate-aware adjudicated gaps
-separate from pending evidence. Preserve T3.1-T3.4 and defer T3.5 provider
-adapters. Continue
+then begin LC4R Deterministic Semantic Gap Repair through the normal Ariadne
+workflow. Use only the development partition and ordinary authored regressions;
+do not read, rerun, regenerate, or tune against `lc4-holdout-v1`. Prioritize
+lossless normalization, explicit temporal/negation semantics, entity resolution,
+clarification state, and interpretation/replay tool selection. Preserve corpus
+provenance and keep candidate evidence separate from adjudicated gaps. Preserve
+T3.1-T3.4 and defer T3.5 provider adapters. Continue
 through ordinary implementation, tests, review, commit, and push without
 pausing unless a documented user decision boundary is reached.
 ```

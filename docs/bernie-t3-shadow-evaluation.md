@@ -2,8 +2,9 @@
 
 Status: T3.1 contract/scorer, T3.2 source-safe corpus projection, T3.3
 default-disabled repeat runner, and T3.4 live-replay gate implemented; no
-live-provider replay is enabled. T3.5 is deferred pending the language-coverage
-programme in `docs/bernie-language-coverage-implementation-plan.md`.
+live-provider replay is enabled. T3.5 remains deferred after LC4 because the
+scaled deterministic language bridge is not yet credible. See
+`docs/bernie-language-coverage-implementation-plan.md`.
 
 ## Purpose
 
@@ -91,10 +92,16 @@ diary replay. The approved direction is recorded in
 
 ## Next Slice
 
-Do not proceed directly to T3.5. LC1 Semantic Foundation, LC2 Corpus Factory,
-and LC3 Composed T2/T3 Evaluator are complete. LC3 now exposes field, outcome,
-tool, authority, clarification, delta, safety, failure-layer, mutation,
-metamorphic, and repeat-variance evidence across the adjudicated seed and
-Silver/pending corpus. Begin LC4 Scale and Holdout Evaluation from the measured
-clarification, temporal, entity, and tool-selection gaps. Preserve the T3.1-T3.4
-infrastructure while external calls remain blocked.
+Do not proceed directly to T3.5. LC1-LC4 are complete. LC4 scaled the corpus to
+120 semantic groups and 1,440 variants, then consumed one protected aggregate
+baseline over `lc4-holdout-v1`. Development produced 0/2,304 complete passes;
+the holdout produced 0/576, including eight safety failures and zero repeat
+variance. Those results make live-provider comparison premature because the
+deterministic language bridge would dominate the outcome.
+
+Begin LC4R deterministic semantic-gap repair against the Silver/pending
+development partition only. Do not inspect, rerun, regenerate, or tune against
+holdout v1. Preserve T3.1-T3.4 and the blocked external-call gate. Before any
+later certification evaluation, define a new holdout version or an explicit
+reviewed reuse policy; opening live provider execution remains a documented
+user decision boundary.

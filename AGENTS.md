@@ -28,8 +28,8 @@ true parallel Codex + Claude Code + Antigravity work later.
 | **Codex worktree** | `...\EMR4-worktrees\codex` on `codex/current` |
 | **Claude worktree** | `...\EMR4-worktrees\claude` on `claude/current` |
 | **Antigravity worktree** | `...\EMR4-worktrees\antigravity` on `antigravity/current` |
-| **Current active track** | LC1-LC3 are complete on the staging handoff. LC1 fixes the real non-intercepted `tomorrow at 3pm` regression and introduces the canonical scenario contract, explicit temporal relations, lossless normalization/source spans, and the 152,064-cell coverage lattice. LC2 adds strict Gold/Silver/Bronze provenance, promotion/quarantine rules, complete independent evidence, and exactly 15 reproducible DeepSeek Silver/pending candidates; none were promoted or self-certified. LC3 composes the three adjudicated seeds and fifteen pending candidates through deterministic interpretation and T2-style replay for 36 samples. The committed report has 26 passes and 10 deliberately visible failures (10 interpretation and 10 integration attributions, with simultaneous layers preserved), 7/7 metamorphic relations, 9/9 mutation detections, zero policy/safety/variance failures, and seven distinct candidate-only cells without reducing the 152,061 adjudicated gaps. Sol hardened correction, clarification, strict-loading, mutation/metamorphic, variance, and exact-report evidence; Gemini 3.5 Flash independently returned `DECISION: pass`. T3.1-T3.4 remain intact and blocked by default; T3.5 provider adapters and all live/write authority remain deferred. |
-| **Next recommended work** | Begin LC4 Scale and Holdout Evaluation through the normal Ariadne workflow. Grow toward the plan's operational corpus targets from LC3's measured clarification, interval/unspecified temporal, entity, and interpretation/replay-tool gaps; establish an independently sourced or generated protected holdout before model evaluation; retain provenance, quarantine, and no-self-certification; and keep pending candidate coverage separate from adjudicated gaps. Treat typed text and future ASR transcripts as surface channels into the same canonical scenario contract; do not add a separate voice semantic stack yet. Preserve T3.1-T3.4, the blocked interpretation/live-provider gates, and the T3.5 deferral. Continue without user pause unless work broadens historical-trove access, sends sensitive data externally, accepts material licence/cost terms, opens live-provider calls, or changes write authority. Dependabot alert 5 remains open; do not force overrides. |
+| **Current active track** | LC1-LC4 are complete. LC4 now provides exactly 120 semantic groups, 1,440 variants, and 360 multi-turn trajectories: 96 DeepSeek Silver/pending development groups plus a 24-group, 288-variant, 72-trajectory Sol-authored Gold/adjudicated protected holdout. The development baseline has 0/2,304 complete passes but 2,304/2,304 safety passes; its 444 candidate-only cells remain separate from the three Gold cells and do not reduce the 152,061 adjudicated gaps. Gemini 3.5 Flash independently returned `DECISION: pass` before the holdout existed. Sol then sealed and consumed `lc4-holdout-v1` once: 0/576 complete passes, 576 interpretation and policy attributions, 538 integration attributions, eight safety failures, zero repeat variance, and 264 new adjudicated cells, leaving 151,797 empty. The holdout report is aggregate-only and version v1 cannot be re-evaluated or tuned against without an explicit reuse/new-version policy. T3.1-T3.4 remain intact and blocked by default; T3.5 provider adapters and all live/write authority remain deferred. |
+| **Next recommended work** | Do not proceed directly to LC5/T3.5: LC4 proves the language bridge is not credible at scale, especially for normalized values, entity semantics, downstream outcomes, clarification, and tool/authority selection. Begin an LC4R deterministic semantic-gap repair tranche against the Silver/pending development partition only. Prioritize the non-intercepted interpretation path, lossless normalization, explicit negation (including the holdout-observed but non-case-specific completion-negation safety class), entity resolution, clarification state, and interpretation/replay tool selection. Do not inspect or rerun protected holdout cases; define a new holdout version or reviewed reuse policy before any future certification evaluation. Treat typed text and future ASR transcripts as surface channels into the same canonical scenario contract; do not add a separate voice semantic stack. Preserve T3.1-T3.4 and the T3.5/live-provider/write deferral. Continue without user pause for ordinary development-only repair, but pause before live-provider calls, holdout reuse, historical-trove expansion, sensitive-data transmission, material licence/cost acceptance, or write-authority change. Dependabot alert 5 remains open; do not force overrides. |
 
 LC2 execution used DeepSeek V4 Flash/high through Claude Code bare mode for the
 two implementation lanes and Gemini 3.5 Flash/medium through a fresh
@@ -48,6 +48,17 @@ independent veto through a fresh Antigravity worktree. The combined serial gate
 completed 548 passes with one expected xfail and one skip. No provider adapter,
 external patient/practice data, route, database, historical-trove, or runtime
 write surface was opened.
+
+LC4 used two DeepSeek V4 Flash/high implementation lanes and a Gemini 3.5
+Flash/high pre-holdout veto. DW2's initial and bounded-correction work completed
+through Deep Code because the in-flight lane inherited stale transport wording;
+Yuri explicitly confirmed that Claude Code `--bare` remains the preferred
+DeepSeek transport. No later DeepSeek lane was opened. Sol independently found
+and closed optional-credential and nested aggregate-schema gaps, authored the
+real holdout only after all external work ended, and retained sole seal and
+evaluation authority. The serial LC1-LC4 plus T1/T2/T3.1-T3.4 gate collected
+682 tests and completed with 681 passes and one expected xfail. The exact LC4
+closeout is `docs/bernie-lc4-scale-and-holdout-closeout.md`.
 
 2026-07-13 task-branch work extends the DeepCode PTY harness with bounded,
 redacted terminal-event transcripts and a non-destructive multi-signal liveness
@@ -1788,4 +1799,4 @@ The user can say **"update the handover doc"** at any time to trigger a refresh 
 
 ---
 
-*Last updated: 2026-07-14 - LC1-LC3 are complete and independently reviewed on the staging handoff; LC4 scale and holdout evaluation is next, with T3.5 and write authority still deferred.*
+*Last updated: 2026-07-14 - LC1-LC4 are complete; the one-shot protected holdout exposes broad semantic gaps, so development-only LC4R repair is next while T3.5 and write authority remain deferred.*
