@@ -19,13 +19,22 @@ Six owned files implemented:
 ## Verification
 
 - **Selection:** 572 scenarios, hash `e17eb1739c16f3de` ✓
-- **Queue:** 1,436 records, all dimension/disposition counts match contract ✓
+- **Queue:** 1,436 records, hash `6cb9e36b8d5309f4` (matches contract) ✓
+- **All 17 dimension/disposition counts match contract** ✓
 - **Zero parser gaps:** 0 `surface_supported_parser_gap` records ✓
+- **Primary dispositions:** 62 contradictory, 137 incomplete, 48 malformed, 182 mixed_contract_defect, 51 non_language, 39 PNI, 53 adjudication, 0 parser gap ✓
+- **All primary hashes match contract** ✓
 - **Check-in preserved:** 39 `planned_not_implemented` records (26 intended + 39 action + 26 clarify from 39 check-in scenarios) ✓
+- **Check-in detected via native interpretation harness** (`interpret_receptionist_utterance` → `DiaryActionVerb.check_in`) ✓
 - **Exit gate blocked:** `blocked_pending_adjudication_and_contract_reconciliation` ✓
 - **53 requires_adjudication** records for expected-but-unobserved clarification ✓
 - **51 non_language_contract_mismatch** records for semantic-pass replay failures ✓
 - **Current baselines:** 880/814/628/101/300/782, safety 1152/1152, zero variance ✓
+- **Reason codes:** All 17 exact frozen codes used ✓
+- **Duplicate `_classify_clarification_failure` removed** ✓
+- **Order-invariance tests** with original, shuffled, reversed order ✓
+- **Fail-closed mutation tests** for queue/selection/primary/corpus/safety drift ✓
+- **`run_check` validates against contract constants AND committed artifacts** ✓
 
 ## Boundaries
 

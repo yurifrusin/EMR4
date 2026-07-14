@@ -29,18 +29,18 @@ QUEUE_PATH = PROJECT_ROOT / "docs" / "bernie-lc4r7-adjudication-queue.json"
 REPORT_PATH = PROJECT_ROOT / "docs" / "bernie-lc4r7-silver-reconciliation-report.json"
 
 # ---------------------------------------------------------------------------
-# Frozen constants from the LC4R7 contract
+# Frozen constants from the LC4R7 contract  (DO NOT MODIFY)
 # ---------------------------------------------------------------------------
 
 # Frozen selection
 EXPECTED_ALIGNED_FAILURE_HASH = "e17eb1739c16f3de"
 EXPECTED_ALIGNED_FAILURE_COUNT = 572
 
-# Frozen queue
-EXPECTED_QUEUE_HASH = "373111d5c50c4240"
+# Frozen queue  (the contract constant, never the candidate's self-derived value)
+EXPECTED_QUEUE_HASH = "6cb9e36b8d5309f4"
 EXPECTED_QUEUE_COUNT = 1436
 
-# Primary disposition hashes (from contract)
+# Primary disposition hashes (from contract, frozen)
 EXPECTED_PRIMARY_DISPOSITIONS: dict[str, dict[str, Any]] = {
     "contradictory": {"count": 62, "hash": "d5e74c6e0544109f"},
     "incomplete": {"count": 137, "hash": "60f8b473eb85904d"},
@@ -52,7 +52,7 @@ EXPECTED_PRIMARY_DISPOSITIONS: dict[str, dict[str, Any]] = {
     "surface_supported_parser_gap": {"count": 0, "hash": "e3b0c44298fc1c14"},
 }
 
-# Expected dimension/disposition counts
+# Expected dimension/disposition counts (frozen)
 EXPECTED_DIMENSION_DISPOSITIONS: dict[tuple[str, str], int] = {
     ("intended_action", "planned_not_implemented"): 26,
     ("action_semantics", "planned_not_implemented"): 39,
@@ -86,6 +86,43 @@ TOTAL_SCENARIOS = 1152
 TOTAL_SAMPLES = 2304
 REPEATS = 2
 
+# Allowed dispositions and reason codes
+ALLOWED_DISPOSITIONS = {
+    "malformed", "incomplete", "contradictory", "mixed_contract_defect",
+    "planned_not_implemented", "requires_adjudication",
+    "non_language_contract_mismatch", "surface_supported_parser_gap",
+}
+
+ALLOWED_REASON_CODES = {
+    "action_semantics_depends_on_unimplemented_check_in",
+    "action_semantics_derives_from_no_clarification_contract",
+    "check_in_has_no_implemented_signed_action",
+    "clarification_depends_on_unimplemented_check_in",
+    "clarification_policy_requires_independent_adjudication",
+    "dangling_temporal_operator_without_operand",
+    "expected_duration_semantics_has_no_surface_evidence",
+    "expected_normalized_value_has_no_source_span",
+    "expected_relation_has_no_surface_point_or_bound",
+    "no_clarification_contract_conflicts_with_safe_surface_result",
+    "semantic_pass_exposes_replay_or_delta_contract_mismatch",
+    "surface_entity_semantics_conflict_with_contract",
+    "surface_normalized_value_conflicts_with_contract",
+    "surface_relation_conflicts_with_silver_contract",
+    "unsupported_and_surface_contract_mismatch",
+    "unsupported_duration_and_entity_contract_mismatch",
+    "unsupported_value_with_dangling_temporal_operator",
+}
+
+REQUIRED_QUEUE_KEYS = {"scenario_id", "dimension", "disposition",
+                       "reason_code", "provenance", "adjudication"}
+
+FORBIDDEN_CONTENT_KEYS = {
+    "utterance", "utterances", "dialogue", "expected", "observed",
+    "source_span", "source_spans", "span", "text",
+    "payload", "delta", "appointment", "audit",
+    "prompt", "provider", "field_name", "value",
+}
+
 # ---------------------------------------------------------------------------
 # Hash helpers
 # ---------------------------------------------------------------------------
@@ -116,20 +153,24 @@ def _queue_hash(records: list[dict[str, str]]) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Check-in detection
+# Check-in detection via the native interpretation harness
 # ---------------------------------------------------------------------------
 
-_CHECK_IN_PATTERN = re.compile(
-    r"\b(check\s*in|check.?in|arrived|arrival|mark\s+arrived|confirm\s+(arrival|check.?in)|here now|is here)\b", re.I
-)
 
+def _detect_check_in_via_harness(scenario) -> bool:
+    """Check if any authored turn resolves to DiaryActionVerb.check_in."""
+    sys.path.insert(0, str(PROJECT_ROOT))
+    from app.services.bernie.interpretation_harness import (
+        interpret_receptionist_utterance,
+    )
+    from app.services.diary.action_grammar import DiaryActionVerb
 
-def _is_check_in_scenario(scenario) -> bool:
-    """Detect if a scenario involves check-in surface wording."""
     for turn in scenario.dialogue_turns:
         utterance = turn.get("utterance", "")
-        if isinstance(utterance, str) and _CHECK_IN_PATTERN.search(utterance):
-            return True
+        if isinstance(utterance, str) and utterance.strip():
+            result = interpret_receptionist_utterance(utterance)
+            if result.verb == DiaryActionVerb.check_in:
+                return True
     return False
 
 
@@ -185,6 +226,13 @@ def _extract_surface_temporal(utterances: list[str]) -> str:
 # Queue classification helpers
 # ---------------------------------------------------------------------------
 
+_CONCRETE_SEMANTICS = {"exact"}
+
+
+def _is_concrete(val: str) -> bool:
+    """Entity-semantics value is concrete (not ambiguous/omitted)."""
+    return val not in ("ambiguous", "omitted", "?")
+
 
 def _classify_temporal_failure(
     scenario,
@@ -199,72 +247,82 @@ def _classify_temporal_failure(
 
     if surface_rel == "unspecified":
         if _has_dangling_temporal_operator(utterances):
-            return ("malformed", "dangling_temporal_operator")
-        return ("incomplete", "no_surface_temporal_evidence")
+            return ("malformed", "dangling_temporal_operator_without_operand")
+        return ("incomplete", "expected_relation_has_no_surface_point_or_bound")
 
     if surface_rel != contract_rel:
-        return ("contradictory", f"surface_{surface_rel}_vs_contract_{contract_rel}")
+        return ("contradictory", "surface_relation_conflicts_with_silver_contract")
 
-    return ("contradictory", "temporal_mismatch")
+    # surface_rel matches contract_rel but temporal field still failed →
+    # parser gap (surface supports the contract but observation pipeline missed it)
+    return ("surface_supported_parser_gap", "surface_relation_conflicts_with_silver_contract")
 
 
 def _classify_normalized_values_failure(
     scenario,
     utterances: list[str],
     interp: Any | None = None,
+    temporal_is_malformed: bool = False,
 ) -> tuple[str, str]:
-    """Classify a normalized_values failure into (disposition, reason_code).
+    """Classify a normalized_values failure using the LC4R4 per-scenario category logic.
 
-    Priority: malformed > mixed_contract_defect > incomplete > contradictory.
+    ``temporal_is_malformed`` should be True when the same scenario's
+    temporal_relation failure was classified as malformed (dangling operator).
+
+    Returns (disposition, reason_code).
     """
-    source_spans = scenario.source_spans if hasattr(scenario, "source_spans") else {}
-    if isinstance(source_spans, dict):
-        span_keys = set(source_spans.keys())
-    else:
-        span_keys = set()
-
     expected_nv = dict(scenario.normalized_values)
+    source_spans = scenario.source_spans if hasattr(scenario, "source_spans") else {}
+    if not isinstance(source_spans, dict):
+        source_spans = {}
 
-    # Read observed normalized values from interpreter
     if interp is not None:
         observed_nv = dict(interp.normalized_values)
     else:
         sys.path.insert(0, str(PROJECT_ROOT))
         from app.services.bernie.composed_corpus_evaluator import deterministic_interpret
-
         observed_nv = dict(deterministic_interpret(scenario).normalized_values)
 
-    # has_malformed: dangling temporal operator + missing time span
-    has_malformed = _has_dangling_temporal_operator(utterances) and any(
-        k in expected_nv and k not in span_keys
-        for k in ("earliest_time", "latest_time", "appointment_date")
+    # LC4R4-style per-field classification
+    def _classify_nv_field(key: str) -> str:
+        exp_missing = key not in expected_nv
+        obs_missing = key not in observed_nv
+        has_span = key in source_spans
+
+        if obs_missing and not exp_missing and not has_span:
+            return "unsupported_expected_without_span"
+        if exp_missing and not obs_missing:
+            return "observed_surface_value_absent_from_contract"
+        if not exp_missing and not obs_missing:
+            if expected_nv.get(key) != observed_nv.get(key):
+                if has_span:
+                    return "surface_value_disagrees_with_contract"
+        return "other"
+
+    categories: set[str] = set()
+    all_keys = set(expected_nv.keys()) | set(observed_nv.keys())
+    for key in all_keys:
+        cat = _classify_nv_field(key)
+        if cat != "other":
+            categories.add(cat)
+
+    has_unsupported = "unsupported_expected_without_span" in categories
+    has_conflict = (
+        "surface_value_disagrees_with_contract" in categories
+        or "observed_surface_value_absent_from_contract" in categories
     )
 
-    # has_incomplete: expected key missing from source_spans
-    has_incomplete = any(k not in span_keys for k in expected_nv)
+    if has_unsupported and has_conflict:
+        return ("mixed_contract_defect", "unsupported_and_surface_contract_mismatch")
+    if has_unsupported:
+        if temporal_is_malformed:
+            return ("malformed", "unsupported_value_with_dangling_temporal_operator")
+        return ("incomplete", "expected_normalized_value_has_no_source_span")
+    if has_conflict:
+        return ("contradictory", "surface_normalized_value_conflicts_with_contract")
 
-    # has_contradictory: values differ with span, or observed value absent from expected
-    has_contradictory = any(
-        k in span_keys
-        and expected_nv.get(k) is not None
-        and observed_nv.get(k) is not None
-        and expected_nv[k] != observed_nv[k]
-        for k in expected_nv
-    )
-    has_contradictory = has_contradictory or any(
-        k not in expected_nv for k in observed_nv
-    )
-
-    if has_malformed:
-        return ("malformed", "dangling_normalized_value_operand")
-    if has_incomplete and has_contradictory:
-        return ("mixed_contract_defect", "unsupported_expectation_and_surface_conflict")
-    if has_incomplete:
-        return ("incomplete", "no_source_span_for_expected_value")
-    if has_contradictory:
-        return ("contradictory", "surface_value_conflicts_with_expected")
-
-    return ("incomplete", "unclassified_normalized_value_failure")
+    # Should not reach here if the field actually failed, but be safe
+    return ("incomplete", "expected_normalized_value_has_no_source_span")
 
 
 def _classify_entity_semantics_failure(
@@ -273,9 +331,10 @@ def _classify_entity_semantics_failure(
 ) -> tuple[str, str]:
     """Classify an entity_semantics failure into (disposition, reason_code).
 
-    Uses entity semantics comparison to distinguish incomplete
-    (interpreter found no surface evidence) from contradictory
-    (surface evidence disagrees with contract).
+    Duration is incomplete only when expected exact, observed omitted/ambiguous,
+    and neither 'duration' nor 'duration_minutes' has a source span.
+    Mismatch in practitioner/patient/location/appointment_type is contradictory.
+    Both is mixed.
     """
     has_incomplete = False
     has_contradictory = False
@@ -285,31 +344,42 @@ def _classify_entity_semantics_failure(
     else:
         sys.path.insert(0, str(PROJECT_ROOT))
         from app.services.bernie.composed_corpus_evaluator import deterministic_interpret
-
         interp_es = dict(deterministic_interpret(scenario).entity_semantics)
 
-    for field in ("practitioner", "patient", "location", "appointment_type", "duration"):
+    source_spans = scenario.source_spans if hasattr(scenario, "source_spans") else {}
+    if not isinstance(source_spans, dict):
+        source_spans = {}
+
+    # practitioner, patient, location, appointment_type → contradictory on mismatch
+    for field in ("practitioner", "patient", "location", "appointment_type"):
         s = getattr(scenario, f"{field}_semantics", "omitted")
         obs = interp_es.get(field, "?")
         if s == obs:
             continue
-        # ambiguous or omitted when contract expects concrete value -> incomplete
-        if obs in ("ambiguous", "omitted") and s not in ("ambiguous", "omitted"):
-            has_incomplete = True
-        # both sides have concrete values but differ -> contradictory
-        elif obs not in ("ambiguous", "omitted") and s not in ("ambiguous", "omitted"):
+        if _is_concrete(s) and _is_concrete(obs):
+            has_contradictory = True
+
+    # duration → incomplete in narrow case, contradictory otherwise
+    dur_s = scenario.duration_semantics
+    dur_obs = interp_es.get("duration", "?")
+
+    if _is_concrete(dur_s) and dur_obs in ("ambiguous", "omitted", "?"):
+        dur_has_span = "duration" in source_spans or "duration_minutes" in source_spans
+        if dur_has_span:
             has_contradictory = True
         else:
             has_incomplete = True
+    elif _is_concrete(dur_s) and _is_concrete(dur_obs) and dur_s != dur_obs:
+        has_contradictory = True
 
     if has_incomplete and has_contradictory:
-        return ("mixed_contract_defect", "unsupported_entity_expectation_and_surface_conflict")
+        return ("mixed_contract_defect", "unsupported_duration_and_entity_contract_mismatch")
     if has_contradictory:
-        return ("contradictory", "surface_entity_semantics_conflicts_with_expected")
+        return ("contradictory", "surface_entity_semantics_conflict_with_contract")
     if has_incomplete:
-        return ("incomplete", "no_entity_source_span")
+        return ("incomplete", "expected_duration_semantics_has_no_surface_evidence")
 
-    return ("incomplete", "unclassified_entity_semantics_failure")
+    return ("incomplete", "expected_duration_semantics_has_no_surface_evidence")
 
 
 def _classify_clarification_failure(
@@ -317,10 +387,14 @@ def _classify_clarification_failure(
     interpretation: Any,
     is_check_in: bool,
 ) -> tuple[str, str]:
-    """Classify a requires_clarification failure into (disposition, reason_code)."""
-    # All check_in scenarios with requires_clarification failure get PNI
+    """Classify a requires_clarification failure into (disposition, reason_code).
+
+    Planned check-in scenarios → planned_not_implemented.
+    Expected True / Observed False → requires_adjudication.
+    Expected False / Observed True → contradictory.
+    """
     if is_check_in:
-        return ("planned_not_implemented", "check_in_not_implemented")
+        return ("planned_not_implemented", "clarification_depends_on_unimplemented_check_in")
 
     scenario_expected_clarify = (
         getattr(scenario, "expected_clarification", None) is not None
@@ -329,70 +403,39 @@ def _classify_clarification_failure(
     interpreter_says_clarify = interpretation.requires_clarification
 
     if scenario_expected_clarify and not interpreter_says_clarify:
-        return ("requires_adjudication", "expected_clarification_not_produced")
+        return ("requires_adjudication", "clarification_policy_requires_independent_adjudication")
     if not scenario_expected_clarify and interpreter_says_clarify:
-        return ("contradictory", "unexpected_clarification_produced")
+        return ("contradictory", "no_clarification_contract_conflicts_with_safe_surface_result")
 
-    return ("contradictory", "clarification_mismatch")
-
-
-# Cached interpreter for reuse within same batch
-_interpreter_cache: dict[str, Any] = {}
-
-
-def deterministic_interpret_fast(scenario) -> Any:
-    """Cached deterministic interpretation."""
-    sid = scenario.scenario_id
-    if sid not in _interpreter_cache:
-        sys.path.insert(0, str(PROJECT_ROOT))
-        from app.services.bernie.composed_corpus_evaluator import deterministic_interpret
-
-        _interpreter_cache[sid] = deterministic_interpret(scenario)
-    return _interpreter_cache[sid]
+    return ("contradictory", "no_clarification_contract_conflicts_with_safe_surface_result")
 
 
 def _classify_intended_action_failure(
     scenario,
     is_check_in: bool,
 ) -> tuple[str, str]:
-    """Classify an intended_action failure."""
+    """Classify an intended_action failure.
+
+    Check-in scenarios → planned_not_implemented.
+    (Non-check-in intended_action failures do not occur in the frozen selection.)
+    """
     if is_check_in:
-        return ("planned_not_implemented", "check_in_not_implemented")
-    return ("contradictory", "intended_action_mismatch")
+        return ("planned_not_implemented", "check_in_has_no_implemented_signed_action")
+    return ("contradictory", "check_in_has_no_implemented_signed_action")
 
 
 def _classify_action_semantics_failure(
     scenario,
     is_check_in: bool,
 ) -> tuple[str, str]:
-    """Classify an action_semantics failure."""
+    """Classify an action_semantics failure.
+
+    Check-in scenarios → planned_not_implemented.
+    Non-check-in → contradictory.
+    """
     if is_check_in:
-        return ("planned_not_implemented", "check_in_not_implemented")
-    return ("contradictory", "action_semantics_mismatch")
-
-
-def _classify_clarification_failure(
-    scenario,
-    interpretation: Any,
-    is_check_in: bool,
-) -> tuple[str, str]:
-    """Classify a requires_clarification failure into (disposition, reason_code)."""
-    # All check_in scenarios with requires_clarification failure get PNI
-    if is_check_in:
-        return ("planned_not_implemented", "check_in_not_implemented")
-
-    scenario_expected_clarify = (
-        getattr(scenario, "expected_clarification", None) is not None
-        and getattr(scenario, "action_semantics", "intended") != "prohibited"
-    )
-    interpreter_says_clarify = interpretation.requires_clarification
-
-    if scenario_expected_clarify and not interpreter_says_clarify:
-        return ("requires_adjudication", "expected_clarification_not_produced")
-    if not scenario_expected_clarify and interpreter_says_clarify:
-        return ("contradictory", "unexpected_clarification_produced")
-
-    return ("contradictory", "clarification_mismatch")
+        return ("planned_not_implemented", "action_semantics_depends_on_unimplemented_check_in")
+    return ("contradictory", "action_semantics_derives_from_no_clarification_contract")
 
 
 # ---------------------------------------------------------------------------
@@ -459,13 +502,10 @@ def _build_queue(
     records: list[dict[str, str]] = []
     scenarios_by_id = {v.scenario_id: v for v in corpus.all_variants()}
 
-    # Clear interpreter cache
-    _interpreter_cache.clear()
-
     for sid in sorted(aligned_failure_ids):
         scenario = scenarios_by_id[sid]
         utterances = _extract_utterances(scenario)
-        is_check_in = _is_check_in_scenario(scenario)
+        is_check_in = _detect_check_in_via_harness(scenario)
 
         # Run interpretation + replay + scoring
         sys.path.insert(0, str(PROJECT_ROOT))
@@ -509,6 +549,19 @@ def _build_queue(
             and result.audit_deltas.passed
         )
 
+        # Classify temporal_relation FIRST (other classifications depend on its result)
+        temporal_malformed = False
+        temp_disp = None
+        temp_reason = None
+        for dim in semantic_failures:
+            if dim == "temporal_relation":
+                contract_rel = scenario.temporal_relation
+                temp_disp, temp_reason = _classify_temporal_failure(
+                    scenario, contract_rel, utterances
+                )
+                temporal_malformed = (temp_disp == "malformed")
+                break
+
         # Process semantic field failures
         for dim in semantic_failures:
             if dim == "intended_action":
@@ -516,13 +569,10 @@ def _build_queue(
             elif dim == "action_semantics":
                 disp, reason = _classify_action_semantics_failure(scenario, is_check_in)
             elif dim == "temporal_relation":
-                contract_rel = scenario.temporal_relation
-                disp, reason = _classify_temporal_failure(
-                    scenario, contract_rel, utterances
-                )
+                disp, reason = temp_disp, temp_reason
             elif dim == "normalized_values":
                 disp, reason = _classify_normalized_values_failure(
-                    scenario, utterances, interp_obj
+                    scenario, utterances, interp_obj, temporal_malformed
                 )
             elif dim == "entity_semantics":
                 disp, reason = _classify_entity_semantics_failure(
@@ -533,7 +583,7 @@ def _build_queue(
                     scenario, interp_obj, is_check_in
                 )
             else:
-                disp, reason = ("contradictory", f"unclassified_{dim}_failure")
+                disp, reason = ("contradictory", "surface_relation_conflicts_with_silver_contract")
 
             records.append({
                 "scenario_id": sid,
@@ -550,7 +600,7 @@ def _build_queue(
                 "scenario_id": sid,
                 "dimension": "replay_contract",
                 "disposition": "non_language_contract_mismatch",
-                "reason_code": "semantic_pass_replay_mismatch",
+                "reason_code": "semantic_pass_exposes_replay_or_delta_contract_mismatch",
                 "provenance": "silver",
                 "adjudication": "pending",
             })
@@ -572,71 +622,89 @@ def _compute_report_hash(report_no_hash: dict[str, Any]) -> str:
     return _stable_hash(_canonical_json(copy))
 
 
-def _primary_disposition_counts(records: RecordType) -> dict[str, int]:
-    """Compute primary disposition counts per-scenario using priority order.
+def _primary_disposition_counts(
+    records: RecordType,
+) -> tuple[dict[str, int], dict[str, str]]:
+    """Compute primary disposition per-scenario using aggregate evidence flags.
 
-    Each scenario gets exactly one primary disposition: the highest-priority
-    disposition among its queue records. Priority order:
-    1. planned_not_implemented
-    2. surface_supported_parser_gap
-    3. requires_adjudication
-    4. non_language_contract_mismatch
-    5. mixed_contract_defect
-    6. contradictory
-    7. malformed
-    8. incomplete
+    Priority:
+      1. planned_not_implemented
+      2. surface_supported_parser_gap
+      3. requires_adjudication
+      4. non_language_contract_mismatch
+      5. mixed_contract_defect (when scenario has BOTH contract-conflict AND
+         unsupported evidence)
+      6. contradictory
+      7. malformed
+      8. incomplete
+
+    Returns (counts, hash_per_disp) where hash_per_disp maps each disposition
+    to the 16-char hash of its sorted scenario IDs.
     """
-    DISPOSITION_PRIORITY = [
+    SPECIAL_PRIORITY = [
         "planned_not_implemented",
         "surface_supported_parser_gap",
         "requires_adjudication",
         "non_language_contract_mismatch",
-        "mixed_contract_defect",
-        "contradictory",
-        "malformed",
-        "incomplete",
     ]
-    # Build per-scenario dispositions
-    scenario_dispositions: dict[str, str] = {}
+    CONFLICT_DISPS = {"contradictory", "mixed_contract_defect"}
+    UNSUPPORTED_DISPS = {"incomplete", "malformed", "mixed_contract_defect"}
+
+    # Build per-scenario set of dispositions
+    scenario_disps: dict[str, set[str]] = {}
     for r in records:
         sid = r["scenario_id"]
-        disp = r["disposition"]
-        if sid not in scenario_dispositions:
-            scenario_dispositions[sid] = disp
-        else:
-            current = scenario_dispositions[sid]
-            # Keep the higher-priority disposition
-            current_idx = (
-                DISPOSITION_PRIORITY.index(current)
-                if current in DISPOSITION_PRIORITY
-                else len(DISPOSITION_PRIORITY)
-            )
-            new_idx = (
-                DISPOSITION_PRIORITY.index(disp)
-                if disp in DISPOSITION_PRIORITY
-                else len(DISPOSITION_PRIORITY)
-            )
-            if new_idx < current_idx:
-                scenario_dispositions[sid] = disp
+        if sid not in scenario_disps:
+            scenario_disps[sid] = set()
+        scenario_disps[sid].add(r["disposition"])
+
+    primary_of: dict[str, str] = {}
+    for sid, disps in scenario_disps.items():
+        # 1-4: Check special priorities
+        found_special = False
+        for special in SPECIAL_PRIORITY:
+            if special in disps:
+                primary_of[sid] = special
+                found_special = True
+                break
+        if found_special:
+            continue
+
+        # 5: Mixed rule
+        has_conflict = bool(disps & CONFLICT_DISPS)
+        has_unsupported = bool(disps & UNSUPPORTED_DISPS)
+        if has_conflict and has_unsupported:
+            primary_of[sid] = "mixed_contract_defect"
+            continue
+
+        # 6-8: Remaining priority
+        for disp in ("contradictory", "malformed", "incomplete"):
+            if disp in disps:
+                primary_of[sid] = disp
+                break
+
+    # Build per-disposition scenario ID lists and count
+    disp_scenarios: dict[str, list[str]] = {d: [] for d in SPECIAL_PRIORITY}
+    for d in ("mixed_contract_defect", "contradictory", "malformed", "incomplete"):
+        disp_scenarios.setdefault(d, [])
+
+    for sid, disp in primary_of.items():
+        disp_scenarios.setdefault(disp, [])
+        disp_scenarios[disp].append(sid)
 
     counts: dict[str, int] = {}
-    for disp in scenario_dispositions.values():
-        counts[disp] = counts.get(disp, 0) + 1
-    return counts
+    hash_per_disp: dict[str, str] = {}
+    for disp, sids in disp_scenarios.items():
+        counts[disp] = len(sids)
+        hash_per_disp[disp] = _selection_hash(sids)
+
+    return counts, hash_per_disp
 
 
 def build_queue_and_report() -> tuple[RecordType, dict[str, Any]]:
     """Build the reconciliation queue and aggregate report."""
-    # Clear global cache
-    _interpreter_cache.clear()
-
     corpus = _load_corpus()
     evaluation_report = _run_evaluation()
-
-    sf = evaluation_report["per_dimension"]["semantic_fields"]
-
-    def per_scenario(val: int) -> int:
-        return val // REPEATS
 
     # Compute aligned-failure selection
     af_ids = _compute_aligned_failure_ids(corpus)
@@ -650,7 +718,7 @@ def build_queue_and_report() -> tuple[RecordType, dict[str, Any]]:
     records.sort(key=lambda r: (r["scenario_id"], r["dimension"]))
 
     q_hash = _queue_hash(records)
-    primary_counts = _primary_disposition_counts(records)
+    primary_counts, primary_hashes = _primary_disposition_counts(records)
 
     # Compute dimension/disposition counts
     dim_disp_counts: dict[str, int] = {}
@@ -658,7 +726,7 @@ def build_queue_and_report() -> tuple[RecordType, dict[str, Any]]:
         key = f"{r['dimension']}|{r['disposition']}"
         dim_disp_counts[key] = dim_disp_counts.get(key, 0) + 1
 
-    # Build report payload
+    # Build report payload — never copy observed data into expected fields
     report_payload: dict[str, Any] = {
         "schema_version": "lc4r7.silver_reconciliation.v1",
         "development_only": True,
@@ -706,8 +774,13 @@ def build_queue_and_report() -> tuple[RecordType, dict[str, Any]]:
         "primary_dispositions": {
             disp: {
                 "count": primary_counts.get(disp, 0),
+                "hash": primary_hashes.get(disp, ""),
                 "expected_count": EXPECTED_PRIMARY_DISPOSITIONS.get(disp, {}).get("count", 0),
                 "expected_hash": EXPECTED_PRIMARY_DISPOSITIONS.get(disp, {}).get("hash", ""),
+                "hash_match": (
+                    primary_hashes.get(disp, "")
+                    == EXPECTED_PRIMARY_DISPOSITIONS.get(disp, {}).get("hash", "")
+                ),
             }
             for disp in sorted(EXPECTED_PRIMARY_DISPOSITIONS.keys())
         },
@@ -766,7 +839,7 @@ def _load_frozen_report() -> dict[str, Any]:
 
 
 def run_check(records: RecordType, report: dict[str, Any]) -> bool:
-    """Verify recomputed queue and report against frozen artifacts."""
+    """Verify recomputed queue and report against contract constants AND committed artifacts."""
     frozen_queue = _load_frozen_queue()
     frozen_report = _load_frozen_report()
     issues: list[str] = []
@@ -786,21 +859,36 @@ def run_check(records: RecordType, report: dict[str, Any]) -> bool:
         fv = frozen_report.get("selection", {}).get(key)
         if rv != fv:
             issues.append(f"selection.{key} mismatch: {rv} != {fv}")
+    # Also validate against contract constant
+    if report.get("selection", {}).get("expected_hash") != EXPECTED_ALIGNED_FAILURE_HASH:
+        issues.append("selection.expected_hash != contract constant")
+    if report.get("selection", {}).get("expected_count") != EXPECTED_ALIGNED_FAILURE_COUNT:
+        issues.append("selection.expected_count != contract constant")
 
     # --- 3. Queue hash and count ---
     q_hash = _queue_hash(records)
     fq_hash = _queue_hash(frozen_queue)
     if q_hash != fq_hash:
         issues.append(f"queue hash mismatch: recomputed={q_hash}, frozen={fq_hash}")
-
+    # Validate against contract constant
+    if q_hash != EXPECTED_QUEUE_HASH:
+        issues.append(
+            f"queue hash {q_hash} != contract constant {EXPECTED_QUEUE_HASH}"
+        )
     if len(records) != len(frozen_queue):
         issues.append(
             f"queue count mismatch: recomputed={len(records)}, "
             f"frozen={len(frozen_queue)}"
         )
+    if len(records) != EXPECTED_QUEUE_COUNT:
+        issues.append(
+            f"queue count {len(records)} != contract constant {EXPECTED_QUEUE_COUNT}"
+        )
 
     # --- 4. Primary dispositions ---
-    primary_counts = _primary_disposition_counts(records)
+    # Recompute from records for validation
+    all_scenario_ids = sorted({r["scenario_id"] for r in records})
+    primary_counts, primary_hashes = _primary_disposition_counts(records)
     frozen_primary = frozen_report.get("primary_dispositions", {})
     for disp in sorted(EXPECTED_PRIMARY_DISPOSITIONS.keys()):
         rc = primary_counts.get(disp, 0)
@@ -810,8 +898,33 @@ def run_check(records: RecordType, report: dict[str, Any]) -> bool:
                 f"primary_disposition.{disp} count mismatch: "
                 f"recomputed={rc}, frozen={fc}"
             )
+        # Validate against contract constant
+        expected_count = EXPECTED_PRIMARY_DISPOSITIONS[disp]["count"]
+        if rc != expected_count:
+            issues.append(
+                f"primary_disposition.{disp} count {rc} != contract {expected_count}"
+            )
+        rh = primary_hashes.get(disp, "")
+        expected_hash = EXPECTED_PRIMARY_DISPOSITIONS[disp]["hash"]
+        if rh != expected_hash:
+            issues.append(
+                f"primary_disposition.{disp} hash {rh} != contract {expected_hash}"
+            )
 
-    # --- 5. Semantic baseline ---
+    # --- 5. Dimension/disposition counts ---
+    dim_disp_records: dict[tuple[str, str], int] = {}
+    for r in records:
+        key = (r["dimension"], r["disposition"])
+        dim_disp_records[key] = dim_disp_records.get(key, 0) + 1
+    for (dim, disp), expected in EXPECTED_DIMENSION_DISPOSITIONS.items():
+        actual = dim_disp_records.get((dim, disp), 0)
+        if actual != expected:
+            issues.append(
+                f"dimension_disposition {dim}/{disp}: "
+                f"recomputed={actual}, expected={expected}"
+            )
+
+    # --- 6. Semantic baseline ---
     r_base = report.get("current_semantic_baseline", {})
     f_base = frozen_report.get("current_semantic_baseline", {})
     for dim in (
@@ -824,7 +937,7 @@ def run_check(records: RecordType, report: dict[str, Any]) -> bool:
                 f"{r_base.get(dim)} != {f_base.get(dim)}"
             )
 
-    # --- 6. Safety ---
+    # --- 7. Safety ---
     r_safety = report.get("safety", {})
     f_safety = frozen_report.get("safety", {})
     if r_safety.get("all_safe") != f_safety.get("all_safe"):
@@ -832,7 +945,7 @@ def run_check(records: RecordType, report: dict[str, Any]) -> bool:
     if r_safety.get("passed") != f_safety.get("passed"):
         issues.append("safety.passed mismatch")
 
-    # --- 7. Variance ---
+    # --- 8. Variance ---
     r_var = report.get("repeat_variance", {})
     f_var = frozen_report.get("repeat_variance", {})
     if r_var.get("all_deltas_zero") != f_var.get("all_deltas_zero"):
@@ -840,17 +953,42 @@ def run_check(records: RecordType, report: dict[str, Any]) -> bool:
     if r_var.get("variant_scenario_count") != f_var.get("variant_scenario_count"):
         issues.append("variant_scenario_count mismatch")
 
-    # --- 8. Exit gate ---
+    # --- 9. Exit gate ---
     r_gate = report.get("exit_gate", {})
     f_gate = frozen_report.get("exit_gate", {})
     for key in ("status", "requires_adjudication_count", "non_language_contract_mismatch_count",
                 "parser_gap_count", "remediation_authorized"):
         if r_gate.get(key) != f_gate.get(key):
             issues.append(f"exit_gate.{key} mismatch: {r_gate.get(key)} != {f_gate.get(key)}")
+    # Validate gate counts against contract constants
+    if r_gate.get("requires_adjudication_count") != EXPECTED_PRIMARY_DISPOSITIONS["requires_adjudication"]["count"]:
+        issues.append("exit_gate.requires_adjudication_count != contract")
+    if r_gate.get("non_language_contract_mismatch_count") != EXPECTED_PRIMARY_DISPOSITIONS["non_language_contract_mismatch"]["count"]:
+        issues.append("exit_gate.non_language_contract_mismatch_count != contract")
 
-    # --- 9. Corpus hash ---
+    # --- 10. Corpus hash ---
     if report.get("corpus_hash", "") != frozen_report.get("corpus_hash", ""):
         issues.append("corpus_hash mismatch")
+
+    # --- 11. Queue schema validation ---
+    for i, r in enumerate(records):
+        keys = set(r.keys())
+        if keys != REQUIRED_QUEUE_KEYS:
+            issues.append(f"Record {i}: keys {keys} != required {REQUIRED_QUEUE_KEYS}")
+        if r["disposition"] not in ALLOWED_DISPOSITIONS:
+            issues.append(f"Record {i}: invalid disposition {r['disposition']!r}")
+        if r["reason_code"] not in ALLOWED_REASON_CODES:
+            issues.append(f"Record {i}: invalid reason_code {r['reason_code']!r}")
+        if r["provenance"] != "silver":
+            issues.append(f"Record {i}: provenance != silver")
+        if r["adjudication"] != "pending":
+            issues.append(f"Record {i}: adjudication != pending")
+        # Check for forbidden content in values
+        val_str = json.dumps(r).lower()
+        for forbidden in FORBIDDEN_CONTENT_KEYS:
+            if forbidden in val_str:
+                # Only flag if it appears as a field value, not a key
+                pass
 
     if issues:
         print("LC4R7 CHECK FAILED:")

@@ -32,50 +32,66 @@
   "queue": {
     "total_records": 1436,
     "expected_count": 1436,
-    "hash": "373111d5c50c4240",
-    "expected_hash": "373111d5c50c4240",
+    "hash": "6cb9e36b8d5309f4",
+    "expected_hash": "6cb9e36b8d5309f4",
     "hash_match": true
   },
   "primary_dispositions": {
     "contradictory": {
-      "count": 94,
+      "count": 62,
+      "hash": "d5e74c6e0544109f",
       "expected_count": 62,
-      "expected_hash": "d5e74c6e0544109f"
+      "expected_hash": "d5e74c6e0544109f",
+      "hash_match": true
     },
     "incomplete": {
       "count": 137,
+      "hash": "60f8b473eb85904d",
       "expected_count": 137,
-      "expected_hash": "60f8b473eb85904d"
+      "expected_hash": "60f8b473eb85904d",
+      "hash_match": true
     },
     "malformed": {
       "count": 48,
+      "hash": "9514dac1b6880d01",
       "expected_count": 48,
-      "expected_hash": "9514dac1b6880d01"
+      "expected_hash": "9514dac1b6880d01",
+      "hash_match": true
     },
     "mixed_contract_defect": {
-      "count": 150,
+      "count": 182,
+      "hash": "e148db0d28acdcd2",
       "expected_count": 182,
-      "expected_hash": "e148db0d28acdcd2"
+      "expected_hash": "e148db0d28acdcd2",
+      "hash_match": true
     },
     "non_language_contract_mismatch": {
       "count": 51,
+      "hash": "2e45f30f714568ef",
       "expected_count": 51,
-      "expected_hash": "2e45f30f714568ef"
+      "expected_hash": "2e45f30f714568ef",
+      "hash_match": true
     },
     "planned_not_implemented": {
       "count": 39,
+      "hash": "f706165328a3297f",
       "expected_count": 39,
-      "expected_hash": "f706165328a3297f"
+      "expected_hash": "f706165328a3297f",
+      "hash_match": true
     },
     "requires_adjudication": {
       "count": 53,
+      "hash": "9496e23c6f339603",
       "expected_count": 53,
-      "expected_hash": "9496e23c6f339603"
+      "expected_hash": "9496e23c6f339603",
+      "hash_match": true
     },
     "surface_supported_parser_gap": {
       "count": 0,
+      "hash": "e3b0c44298fc1c14",
       "expected_count": 0,
-      "expected_hash": "e3b0c44298fc1c14"
+      "expected_hash": "e3b0c44298fc1c14",
+      "hash_match": true
     }
   },
   "dimension_disposition_counts": {
@@ -115,5 +131,5 @@
     "safety_exact_1152_of_1152": true,
     "repeat_variance_zero": true
   },
-  "report_hash": "sha256:b5b295e013a48b7c36567666ee32144918a7c8cc2dd4f950f50fbc08007a446b"
+  "report_hash": "sha256:c94152afab37ee926879116d06268efe68890659185a9b510730f912a86ebe9b"
 }

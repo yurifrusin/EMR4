@@ -60,21 +60,20 @@ Each dimension failure is classified using deterministic rules:
 - **incomplete (18):** No extractable temporal relation or operator.
 - **contradictory (75):** Extracted surface relation differs from contract.
 
-### Normalized values
-- **malformed (66):** Dangling temporal operator + missing time source span.
-- **incomplete (220):** Expected normalized value has no source span.
-- **contradictory (45):** Value has source span but differs from contract, or
-  interpreter produces value absent from contract.
-- **mixed_contract_defect (146):** Both incomplete and contradictory fields
-  in the same scenario.
+### Normalized values (using LC4R4 `_per_scenario_nv_categories`)
+- **malformed (66):** Unsupported expected value only, same scenario has a
+  dangling failed temporal relation.
+- **incomplete (220):** Unsupported expected value only, no dangling temporal.
+- **contradictory (45):** Surface value conflicts with contract only.
+- **mixed_contract_defect (146):** Both unsupported and conflict evidence.
 
 ### Entity semantics
-- **incomplete (374):** Interpreter cannot determine an entity value (returns
-  `omitted` or `ambiguous`) when the contract expects a concrete value.
-- **contradictory (17):** Both interpreter and contract have concrete but
-  differing entity values.
-- **mixed_contract_defect (58):** Both incomplete and contradictory entity
-  fields in the same scenario.
+- **incomplete (374):** Duration expected exact, observed omitted/ambiguous,
+  and neither `duration` nor `duration_minutes` has a source span.
+- **contradictory (17):** Practitioner/patient/location/appointment_type
+  mismatch between interpreter and contract.
+- **mixed_contract_defect (58):** Both incomplete (duration) and contradictory
+  (entity mismatch) in the same scenario.
 
 ### Intended action / action semantics
 - **planned_not_implemented (26/39):** Scenario is a `check_in` surface.
@@ -94,12 +93,34 @@ Each dimension failure is classified using deterministic rules:
 
 ## Check-in preservation
 
+Check-in scenarios are detected through the native interpretation harness
+(`interpret_receptionist_utterance` returning `DiaryActionVerb.check_in`).
 All 39 native `check_in` surfaces are classified as `planned_not_implemented`:
 
 - **26** fail `intended_action` (the extractor cannot map `check_in` to any
   known action).
 - **13** are near-matches where `intended_action` is correctly detected as
   `status_change` but `action_semantics` still fails.
+
+## Primary dispositions (per-scenario)
+
+Each scenario receives exactly one primary disposition from aggregate evidence:
+
+| Disposition | Count |
+|---|---|
+| contradictory | 62 |
+| incomplete | 137 |
+| malformed | 48 |
+| mixed_contract_defect | 182 |
+| non_language_contract_mismatch | 51 |
+| planned_not_implemented | 39 |
+| requires_adjudication | 53 |
+| surface_supported_parser_gap | 0 |
+
+A scenario is `mixed_contract_defect` when it contains both contract-conflict
+evidence (contradictory or mixed_contract_defect) and unsupported evidence
+(incomplete, malformed, or mixed_contract_defect) after planned/parser/
+adjudication/non-language priority is applied.
 
 ## Exit gate
 
