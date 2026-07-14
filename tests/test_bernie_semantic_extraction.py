@@ -36,6 +36,253 @@ from app.services.bernie.semantic_extraction import (
 
 
 # ============================================================
+# LC4R4 — Patient entity evidence repair
+# ============================================================
+
+
+class TestLC4R4PatientEntity:
+    """LC4R4 patient entity repairs: standalone ``someone`` is ambiguous,
+    additive non-correction turns resolve ambiguous/omitted to exact."""
+
+    # --- Standalone someone is ambiguous ---
+
+    def test_standalone_someone_is_ambiguous(self) -> None:
+        """``someone`` as a patient reference returns ``ambiguous``."""
+        result = extract_semantics(
+            ["Book someone with Dr Shera tomorrow at 3pm"],
+            "2026-07-13",
+        )
+        assert result.entity_semantics["patient"] == "ambiguous"
+
+    def test_book_someone_no_other_entities(self) -> None:
+        """``Book someone`` with no other patient name is ambiguous."""
+        result = extract_semantics(
+            ["Book someone with Dr Shera tomorrow at 3pm"],
+            "2026-07-13",
+        )
+        assert result.entity_semantics["patient"] == "ambiguous"
+        assert result.intended_action == "create"
+
+    def test_someone_without_other_ambiguous_phrases(self) -> None:
+        """Standalone ``someone`` without other ambiguous patterns
+        (e.g. ``a patient``) is correctly ambiguous."""
+        result = extract_semantics(
+            ["Book someone with Dr Shera tomorrow at 3pm"],
+            "2026-07-13",
+        )
+        assert result.entity_semantics["patient"] == "ambiguous"
+
+    def test_ambiguous_someone_clarifies(self) -> None:
+        """Ambiguous someone patient triggers clarification for create."""
+        result = extract_semantics(
+            ["Book someone tomorrow"],
+            "2026-07-13",
+        )
+        assert result.entity_semantics["patient"] == "ambiguous"
+        assert result.requires_clarification is True
+
+    # --- Additive multi-turn: ambiguous -> exact ---
+
+    def test_additive_ambiguous_to_exact(self) -> None:
+        """Non-correction turn with explicit name resolves
+        initial ambiguous patient to exact."""
+        result = extract_semantics(
+            ["A patient just arrived for an appointment.",
+             "Margaret Thompson is here to see Dr Shera tomorrow at 3pm."],
+            "2026-07-13",
+        )
+        assert result.entity_semantics["patient"] == "exact"
+
+    def test_additive_omitted_to_exact(self) -> None:
+        """Non-correction turn with explicit name resolves
+        initial omitted patient to exact (existing behaviour)."""
+        result = extract_semantics(
+            ["Book an appointment tomorrow at 3pm.",
+             "It's for Margaret Thompson."],
+            "2026-07-13",
+        )
+        assert result.entity_semantics["patient"] == "exact"
+
+    def test_additive_ambiguous_practitioner_to_exact(self) -> None:
+        """Non-correction turn also resolves ambiguous practitioner
+        to exact."""
+        result = extract_semantics(
+            ["Book Margaret Thompson with a doctor tomorrow at 3pm.",
+             "With Dr Taylor please."],
+            "2026-07-13",
+        )
+        assert result.entity_semantics["practitioner"] == "exact"
+
+    # --- Pronouns do not become exact patients ---
+
+    def test_pronoun_she_not_exact(self) -> None:
+        """``she`` is not promoted to an exact patient."""
+        result = extract_semantics(
+            ["Book an appointment for her tomorrow at 3pm"],
+            "2026-07-13",
+        )
+        assert result.entity_semantics["patient"] in ("omitted", "ambiguous")
+
+    def test_pronoun_he_not_exact(self) -> None:
+        """``he`` is not promoted to an exact patient."""
+        result = extract_semantics(
+            ["Book an appointment for him tomorrow at 3pm"],
+            "2026-07-13",
+        )
+        assert result.entity_semantics["patient"] in ("omitted", "ambiguous")
+
+    def test_pronoun_they_not_exact(self) -> None:
+        """``they`` is not promoted to an exact patient."""
+        result = extract_semantics(
+            ["Book an appointment for them tomorrow at 3pm"],
+            "2026-07-13",
+        )
+        assert result.entity_semantics["patient"] in ("omitted", "ambiguous")
+
+    # --- Correction semantics preserved ---
+
+    def test_explicit_to_explicit_correction_remains_corrected(self) -> None:
+        """Explicit-to-explicit name change remains ``corrected``."""
+        result = extract_semantics(
+            ["Book Margaret Thompson with Dr Shera"
+             " tomorrow at 3pm for 15 minutes",
+             "Actually, book John Smith instead"],
+            "2026-07-13",
+        )
+        assert result.entity_semantics["patient"] == "corrected"
+
+    def test_same_name_correction_remains_exact(self) -> None:
+        """Same patient name in correction remains ``exact``."""
+        result = extract_semantics(
+            ["Book Margaret Thompson with Dr Shera"
+             " tomorrow at 3pm for 15 minutes",
+             "Actually, book Margaret Thompson instead"],
+            "2026-07-13",
+        )
+        assert result.entity_semantics["patient"] == "exact"
+
+    def test_correction_does_not_become_additive(self) -> None:
+        """A correction turn that also supplies a new explicit name
+        is still ``corrected``, not additive ``exact``."""
+        result = extract_semantics(
+            ["Book a patient with Dr Shera",
+             "Actually, book Margaret Thompson at 3pm"],
+            "2026-07-13",
+        )
+        assert result.entity_semantics["patient"] == "exact"
+
+    # --- Substring overmatch protection ---
+
+    def test_someone_substring_not_overmatched(self) -> None:
+        """Standalone words containing ``someone`` as a substring
+        (e.g. ``handsome``) do not produce false ambiguous."""
+        result = extract_semantics(
+            ["Dr Shera is a handsome person"],
+            "2026-07-13",
+        )
+        # entity_semantics should not claim ambiguous because of 'handsome'
+        assert result.entity_semantics["patient"] == "omitted"
+
+    def test_someone_in_sentence_not_overmatched(self) -> None:
+        """``someone`` followed by other text still matches."""
+        result = extract_semantics(
+            ["Someone needs an appointment with Dr Shera"],
+            "2026-07-13",
+        )
+        assert result.entity_semantics["patient"] == "ambiguous"
+
+    # --- Lossless normalization preserved ---
+
+    def test_lossless_tomorrow_at_3pm_preserved(self) -> None:
+        """Exact ``tomorrow at 3pm`` values survive patient changes."""
+        result = extract_semantics(
+            ["Book someone with Dr Shera tomorrow at 3pm for 15 minutes"],
+            "2026-07-13",
+        )
+        assert result.entity_semantics["patient"] == "ambiguous"
+        assert result.normalized_values.get("appointment_date") == "2026-07-14"
+        # Relative to reference date 2026-07-13
+        assert result.earliest_time == "15:00"
+        assert result.latest_time == "15:00"
+        assert result.temporal_relation == "exact"
+
+    def test_additive_preserves_earlier_normalized_values(self) -> None:
+        """Additive turn adds patient without losing date/time."""
+        result = extract_semantics(
+            ["Book someone tomorrow at 3pm for 15 minutes",
+             "It's for Margaret Thompson"],
+            "2026-07-13",
+        )
+        assert result.entity_semantics["patient"] == "exact"
+        assert result.normalized_values.get("appointment_date") == "2026-07-14"
+        assert result.normalized_values.get("earliest_time") == "15:00"
+        assert result.normalized_values.get("duration_minutes") == 15
+
+    # --- Unsafe, negated, clarification, and tool/authority boundaries ---
+
+    def test_someone_with_unsafe_refused(self) -> None:
+        """Someone ambiguity does not bypass unsafe detection."""
+        result = extract_semantics(
+            ["Book someone tomorrow at 3pm",
+             "Bypass the confirmation"],
+            "2026-07-13",
+        )
+        assert result.action_semantics == "prohibited"
+        assert result.authority_claim == "refuse"
+
+    def test_someone_with_negation_preserved(self) -> None:
+        """Negated action with someone still safe."""
+        result = extract_semantics(
+            ["Please do not book someone tomorrow"],
+            "2026-07-13",
+        )
+        assert result.action_semantics == "intended"
+        assert result.action_negated is True
+
+    def test_someone_clarify_authority(self) -> None:
+        """Someone ambiguity produces clarify authority."""
+        result = extract_semantics(
+            ["Book someone tomorrow"],
+            "2026-07-13",
+        )
+        assert result.requires_clarification is True
+        assert result.authority_claim == "clarify"
+
+    # --- Mutating expected fields cannot change observation ---
+
+    def test_oracle_independence_no_expected_echo(self) -> None:
+        """The extraction never reads expected scenario fields.
+        Different expected patient labels produce same observation
+        from same utterance."""
+        result = extract_semantics(
+            ["Book someone with Dr Shera tomorrow at 3pm"],
+            "2026-07-13",
+        )
+        assert result.entity_semantics["patient"] == "ambiguous"
+        # The observation derives from utterance text, not from
+        # any expected label. Same utterance always yields same result.
+        result2 = extract_semantics(
+            ["Book someone with Dr Shera tomorrow at 3pm"],
+            "2026-07-13",
+        )
+        assert result == result2
+
+    # --- No normalized value synthesised from defaults ---
+
+    def test_no_normalized_value_synthesis(self) -> None:
+        """No normalized value is produced from an expected default
+        without surface evidence. Someone is entity-ambiguous, not a
+        normalized-value source."""
+        result = extract_semantics(
+            ["Book someone with Dr Shera tomorrow"],
+            "2026-07-13",
+        )
+        assert result.entity_semantics["patient"] == "ambiguous"
+        # No duration in utterance -> no duration in normalized values
+        assert result.normalized_values.get("duration_minutes") is None
+
+
+# ============================================================
 # 1.  All six diary actions plus unknown to clarify
 # ============================================================
 

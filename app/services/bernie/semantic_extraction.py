@@ -319,10 +319,12 @@ _PATIENT_PATTERN = re.compile(
     r"([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)\b",
 )
 
-# Ambiguous patient references
+# Ambiguous patient references — includes standalone ``someone`` which
+# references an unspecified person rather than omitting the entity entirely.
 _AMBIGUOUS_PATIENT = re.compile(
     r"\b(another patient|the patient|my patient|which patient|"
-    r"multiple patients|two patients|same name|a patient|this patient)\b",
+    r"multiple patients|two patients|same name|a patient|this patient|"
+    r"someone)\b",
     re.I,
 )
 
@@ -789,17 +791,17 @@ def _extract_entity_semantics(
                 elif dur_val is not None and corr_dur_val != dur_val:
                     semantics["duration"] = "corrected"
         else:
-            # Additive turn: may add info for previously omitted
+            # Additive turn: may add info for previously omitted or ambiguous
             add_pat_name, add_pat_sem = _extract_patient(utterance)
-            if add_pat_sem == "exact" and semantics["patient"] == "omitted":
+            if add_pat_sem == "exact" and semantics["patient"] in ("omitted", "ambiguous"):
                 semantics["patient"] = "exact"
 
             add_prac_name, add_prac_sem = _extract_practitioner(utterance)
-            if add_prac_sem == "exact" and semantics["practitioner"] == "omitted":
+            if add_prac_sem == "exact" and semantics["practitioner"] in ("omitted", "ambiguous"):
                 semantics["practitioner"] = "exact"
 
             add_dur_val, add_dur_sem = _extract_duration(utterance)
-            if add_dur_sem == "exact" and semantics["duration"] == "omitted":
+            if add_dur_sem == "exact" and semantics["duration"] in ("omitted", "ambiguous"):
                 semantics["duration"] = "exact"
 
     return semantics

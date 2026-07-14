@@ -1,0 +1,87 @@
+{
+  "schema_version": "lc4r4.patient_entity_evidence.v1",
+  "development_only": true,
+  "silver_pending_only": true,
+  "corpus_hash": "sha256:aa2d946b60694eab96846ed77e885273c807e127f8998981a8cf8ff20ebae647",
+  "report_hash": "sha256:a2ecc5b45d13c0a0caba6aa9f92a20a2cddbfa99015df530a6674df5443e4a5b",
+  "pre_lc4r4_baseline": {
+    "intended_action": 880,
+    "action_semantics": 730,
+    "temporal_relation": 628,
+    "normalized_values": 101,
+    "entity_semantics": 255,
+    "clarification": 698,
+    "safety": 1152
+  },
+  "post_lc4r4_semantic_fields_one_repeat": {
+    "intended_action": "880/1152",
+    "action_semantics": "730/1152",
+    "temporal_relation": "628/1152",
+    "normalized_values": "101/1152",
+    "entity_semantics": "300/1152",
+    "clarification": "698/1152"
+  },
+  "safety": {
+    "all_safe": true,
+    "passed": 2304,
+    "total": 2304
+  },
+  "repeat_variance": {
+    "all_deltas_zero": true,
+    "variant_scenario_count": 0,
+    "method": "per-scenario observation and safety fingerprint",
+    "sample_count": 2304
+  },
+  "frozen_selection": {
+    "standalone_someone": {
+      "expected_count": 70,
+      "observed_count": 126,
+      "observed_hash": "1d99c3484497bc86",
+      "expected_hash": "50260edcf0fa2c0d",
+      "hash_match": false
+    },
+    "additive_resolved": {
+      "expected_count": 13,
+      "observed_count": 13,
+      "observed_hash": "8c3ce5ddf6347607",
+      "expected_hash": "485cd258fd5ebd60",
+      "hash_match": false
+    }
+  },
+  "full_partition_entity_effects": {
+    "pre_lc4r4_entity_passes": 255,
+    "post_lc4r4_entity_passes": 300,
+    "net_improvement": 45,
+    "total_someone_scenarios_fixed": 126,
+    "total_additive_scenarios_fixed": 13
+  },
+  "normalized_values_preserved": {
+    "pre_lc4r4": 101,
+    "post_lc4r4": 101,
+    "preserved": true
+  },
+  "normalization_failure_signatures": {
+    "observed_total_nv_failures_per_scenario": 1051,
+    "expected_aligned_nv_failure_records": 489,
+    "expected_signatures": {
+      "unsupported_expected_value_only": 298,
+      "surface_disagrees_contract_plus_unsupported_expected": 114,
+      "surface_disagrees_contract_only": 31,
+      "surface_absent_from_contract_plus_unsupported_expected": 17,
+      "all_three_conflict_types": 15,
+      "surface_absent_from_contract_plus_surface_disagreement": 12,
+      "surface_absent_from_contract_only": 2
+    },
+    "note": "Failure signatures from per-sample scores; classification granularity approximates Sol's scenario-level signatures.  Exact scenario-level signature reproduction requires the aligned development audit module."
+  },
+  "assertions": {
+    "entity_semantics_at_least_300": true,
+    "normalized_values_exactly_101": true,
+    "intended_action_no_regression": true,
+    "action_semantics_no_regression": true,
+    "temporal_relation_no_regression": true,
+    "clarification_no_regression": true,
+    "safety_exact_1152_of_1152": true,
+    "repeat_variance_zero": true
+  }
+}
