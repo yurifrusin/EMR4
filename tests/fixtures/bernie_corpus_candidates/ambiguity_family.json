@@ -1,0 +1,382 @@
+[
+  {
+    "provenance": "silver",
+    "adjudication": "pending",
+    "family": "clarify_temporal",
+    "origin": "model_generated",
+    "generator_identity": {
+      "provider_id": "deepseek",
+      "model_id": "deepseek-v4-flash",
+      "instance_id": "lc2-dw2"
+    },
+    "judge_identity": null,
+    "generation_timestamp": "2026-07-14T10:00:00Z",
+    "source_scenario_id": "interpret_time_window_date_change_preserves_upper",
+    "source_scenario_hash": "sha256:72f4420cb547f72fb6d6f225cabd843ae13e400e3703cb68fc864200b9fb7ab0",
+    "derivation_id": "sha256:093775072f8d54b708e0e4737eafe0b6391f5b7196250cdf4e6617f348c00e5a",
+    "transformation_parameters": {
+      "seed": "ambiguity-v1",
+      "removed_field": "specific_time"
+    },
+    "authority_grant": {
+      "provider_write": false,
+      "diary_write": false,
+      "confirmation": false,
+      "override_authority": false
+    },
+    "adjudication_record": null,
+    "promotion_history": [],
+    "scenario": {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc2_dw2_ambiguity_001",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "clarify_temporal",
+      "description": "Ambiguity: specific time omitted, 'sometime in the afternoon' — clarification required.",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Can I book Margaret Thompson with Dr Shera sometime in the afternoon"
+        }
+      ],
+      "reference_date": "2026-07-13",
+      "clinic_clock": "2026-07-13T09:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "ambiguous",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "time_period": "afternoon"
+      },
+      "source_spans": {
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 43,
+            "end": 68,
+            "text": "sometime in the afternoon"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 43,
+            "end": 68,
+            "text": "sometime in the afternoon"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 43,
+            "end": 68,
+            "text": "sometime in the afternoon"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 11,
+            "end": 28,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 29,
+            "end": 42,
+            "text": "with Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "dialogue_form": "clarification",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-13",
+        "diary_page_date": "2026-07-14",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "clarification_required",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots",
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "appointment_created",
+        "existing_booking_found"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": "What time in the afternoon would you prefer? For example, 1pm, 2pm, 3pm, or 4pm.",
+      "clarification_choices": [
+        "1pm",
+        "2pm",
+        "3pm",
+        "4pm"
+      ]
+    }
+  },
+  {
+    "provenance": "silver",
+    "adjudication": "pending",
+    "family": "clarify_temporal",
+    "origin": "model_generated",
+    "generator_identity": {
+      "provider_id": "deepseek",
+      "model_id": "deepseek-v4-flash",
+      "instance_id": "lc2-dw2"
+    },
+    "judge_identity": null,
+    "generation_timestamp": "2026-07-14T10:00:00Z",
+    "source_scenario_id": "interpret_time_window_date_change_preserves_upper",
+    "source_scenario_hash": "sha256:72f4420cb547f72fb6d6f225cabd843ae13e400e3703cb68fc864200b9fb7ab0",
+    "derivation_id": "sha256:3f05884e4742b0674708f071164f10d7e2f7a7a3a5e1ee5e658a83a31fafba32",
+    "transformation_parameters": {
+      "seed": "ambiguity-v2",
+      "removed_field": "practitioner_name"
+    },
+    "authority_grant": {
+      "provider_write": false,
+      "diary_write": false,
+      "confirmation": false,
+      "override_authority": false
+    },
+    "adjudication_record": null,
+    "promotion_history": [],
+    "scenario": {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc2_dw2_ambiguity_002",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "clarify_temporal",
+      "description": "Ambiguity: practitioner unspecified — clarification required.",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Can I book Margaret Thompson with a doctor sometime in the afternoon"
+        }
+      ],
+      "reference_date": "2026-07-13",
+      "clinic_clock": "2026-07-13T09:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "ambiguous",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "time_period": "afternoon"
+      },
+      "source_spans": {
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 43,
+            "end": 68,
+            "text": "sometime in the afternoon"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 43,
+            "end": 68,
+            "text": "sometime in the afternoon"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 43,
+            "end": 68,
+            "text": "sometime in the afternoon"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 11,
+            "end": 28,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 29,
+            "end": 42,
+            "text": "with a doctor"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "empty",
+      "entity_state": "ambiguous",
+      "dialogue_form": "clarification",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-13",
+        "diary_page_date": "2026-07-14",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "clarification_required",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots",
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "appointment_created",
+        "existing_booking_found"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": "Which practitioner would you like to book with? We have Dr Taylor, Dr Patel, and Dr Chen available.",
+      "clarification_choices": [
+        "Dr Taylor",
+        "Dr Patel",
+        "Dr Chen"
+      ]
+    }
+  },
+  {
+    "provenance": "silver",
+    "adjudication": "pending",
+    "family": "clarify_temporal",
+    "origin": "model_generated",
+    "generator_identity": {
+      "provider_id": "deepseek",
+      "model_id": "deepseek-v4-flash",
+      "instance_id": "lc2-dw2"
+    },
+    "judge_identity": null,
+    "generation_timestamp": "2026-07-14T10:00:00Z",
+    "source_scenario_id": "interpret_time_window_date_change_preserves_upper",
+    "source_scenario_hash": "sha256:72f4420cb547f72fb6d6f225cabd843ae13e400e3703cb68fc864200b9fb7ab0",
+    "derivation_id": "sha256:216b27f65ae0d8785e989f5f9744cdbf02c8db3ffd860bbef122a5662f1d8ad3",
+    "transformation_parameters": {
+      "seed": "ambiguity-v3",
+      "removed_field": "time_and_duration"
+    },
+    "authority_grant": {
+      "provider_write": false,
+      "diary_write": false,
+      "confirmation": false,
+      "override_authority": false
+    },
+    "adjudication_record": null,
+    "promotion_history": [],
+    "scenario": {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc2_dw2_ambiguity_003",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "clarify_temporal",
+      "description": "Ambiguity: no time or duration specified — clarification required.",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Can I book Margaret Thompson with Dr Shera tomorrow"
+        }
+      ],
+      "reference_date": "2026-07-13",
+      "clinic_clock": "2026-07-13T09:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "ambiguous",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {},
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 11,
+            "end": 28,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 29,
+            "end": 42,
+            "text": "with Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": null,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "omitted",
+      "diary_state": "empty",
+      "entity_state": "omitted",
+      "dialogue_form": "clarification",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-13",
+        "diary_page_date": "2026-07-14",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "clarification_required",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots",
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "appointment_created",
+        "existing_booking_found"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": "What time and duration would you like for the appointment?",
+      "clarification_choices": [
+        "Morning",
+        "Afternoon",
+        "All day"
+      ]
+    }
+  }
+]

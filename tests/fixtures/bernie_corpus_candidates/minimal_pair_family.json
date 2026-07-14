@@ -1,0 +1,479 @@
+[
+  {
+    "provenance": "silver",
+    "adjudication": "pending",
+    "family": "booking_create",
+    "origin": "model_generated",
+    "generator_identity": {
+      "provider_id": "deepseek",
+      "model_id": "deepseek-v4-flash",
+      "instance_id": "lc2-dw2"
+    },
+    "judge_identity": null,
+    "generation_timestamp": "2026-07-14T10:00:00Z",
+    "source_scenario_id": "booking_create_then_exact_duplicate",
+    "source_scenario_hash": "sha256:a7003f91f1d3ed17f5f6496595a02e714b08afdc03cad328ccb3bf0701f0c22e",
+    "derivation_id": "sha256:873159183a2b5d96aea4185ce51b878f0efdea0dfd70937f18ff989ad13ec92b",
+    "transformation_parameters": {
+      "seed": "minimal-pair-v1",
+      "changed_field": "practitioner",
+      "old_value": "Dr Shera",
+      "new_value": "Dr Taylor"
+    },
+    "authority_grant": {
+      "provider_write": false,
+      "diary_write": false,
+      "confirmation": false,
+      "override_authority": false
+    },
+    "adjudication_record": null,
+    "promotion_history": [],
+    "scenario": {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc2_dw2_minimal_pair_001",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "booking_create",
+      "description": "Minimal pair: practitioner changed from Dr Shera to Dr Taylor.",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Make an appointment for Margaret Thompson with Dr Taylor tomorrow at 3pm for 15 minutes"
+        }
+      ],
+      "reference_date": "2026-07-13",
+      "clinic_clock": "2026-07-13T09:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "15:00",
+      "latest_time": "15:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-14",
+        "earliest_time": "15:00",
+        "latest_time": "15:00",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 66,
+            "end": 72,
+            "text": "at 3pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 66,
+            "end": 72,
+            "text": "at 3pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 66,
+            "end": 72,
+            "text": "at 3pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 24,
+            "end": 41,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 42,
+            "end": 56,
+            "text": "with Dr Taylor"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 73,
+            "end": 87,
+            "text": "for 15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "dialogue_form": "one_shot",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-13",
+        "diary_page_date": "2026-07-14",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "existing_booking_found",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots",
+        "create_booking"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "created",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-002",
+          "date": "2026-07-14",
+          "start_time": "15:00",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "created",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    }
+  },
+  {
+    "provenance": "silver",
+    "adjudication": "pending",
+    "family": "booking_create",
+    "origin": "model_generated",
+    "generator_identity": {
+      "provider_id": "deepseek",
+      "model_id": "deepseek-v4-flash",
+      "instance_id": "lc2-dw2"
+    },
+    "judge_identity": null,
+    "generation_timestamp": "2026-07-14T10:00:00Z",
+    "source_scenario_id": "booking_create_then_exact_duplicate",
+    "source_scenario_hash": "sha256:a7003f91f1d3ed17f5f6496595a02e714b08afdc03cad328ccb3bf0701f0c22e",
+    "derivation_id": "sha256:3be280653cb90e2beea9216dd4500c5b0f986a9c4d6a86d534c61e0b0ffe1b09",
+    "transformation_parameters": {
+      "seed": "minimal-pair-v2",
+      "changed_field": "time",
+      "old_value": "15:00",
+      "new_value": "10:00"
+    },
+    "authority_grant": {
+      "provider_write": false,
+      "diary_write": false,
+      "confirmation": false,
+      "override_authority": false
+    },
+    "adjudication_record": null,
+    "promotion_history": [],
+    "scenario": {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc2_dw2_minimal_pair_002",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "booking_create",
+      "description": "Minimal pair: time changed from 3pm to 10am.",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Make an appointment for Margaret Thompson with Dr Shera tomorrow at 10am for 15 minutes"
+        }
+      ],
+      "reference_date": "2026-07-13",
+      "clinic_clock": "2026-07-13T09:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "10:00",
+      "latest_time": "10:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-14",
+        "earliest_time": "10:00",
+        "latest_time": "10:00",
+        "duration_minutes": 15
+      },
+      "source_spans": {
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 72,
+            "text": "at 10am"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 72,
+            "text": "at 10am"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 72,
+            "text": "at 10am"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 24,
+            "end": 41,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 42,
+            "end": 55,
+            "text": "with Dr Shera"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 73,
+            "end": 87,
+            "text": "for 15 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "dialogue_form": "one_shot",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-13",
+        "diary_page_date": "2026-07-14",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "existing_booking_found",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots",
+        "create_booking"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "created",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-14",
+          "start_time": "10:00",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "created",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    }
+  },
+  {
+    "provenance": "silver",
+    "adjudication": "pending",
+    "family": "booking_create",
+    "origin": "model_generated",
+    "generator_identity": {
+      "provider_id": "deepseek",
+      "model_id": "deepseek-v4-flash",
+      "instance_id": "lc2-dw2"
+    },
+    "judge_identity": null,
+    "generation_timestamp": "2026-07-14T10:00:00Z",
+    "source_scenario_id": "booking_create_then_exact_duplicate",
+    "source_scenario_hash": "sha256:a7003f91f1d3ed17f5f6496595a02e714b08afdc03cad328ccb3bf0701f0c22e",
+    "derivation_id": "sha256:786b9598bab46f26b13ae389a2d4edde615902915470ed3bd5986b7896d50294",
+    "transformation_parameters": {
+      "seed": "minimal-pair-v3",
+      "changed_field": "duration_minutes",
+      "old_value": 15,
+      "new_value": 30
+    },
+    "authority_grant": {
+      "provider_write": false,
+      "diary_write": false,
+      "confirmation": false,
+      "override_authority": false
+    },
+    "adjudication_record": null,
+    "promotion_history": [],
+    "scenario": {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc2_dw2_minimal_pair_003",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "booking_create",
+      "description": "Minimal pair: duration changed from 15 to 30 minutes.",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Make an appointment for Margaret Thompson with Dr Shera tomorrow at 3pm for 30 minutes"
+        }
+      ],
+      "reference_date": "2026-07-13",
+      "clinic_clock": "2026-07-13T09:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "15:00",
+      "latest_time": "15:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-14",
+        "earliest_time": "15:00",
+        "latest_time": "15:00",
+        "duration_minutes": 30
+      },
+      "source_spans": {
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 71,
+            "text": "at 3pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 71,
+            "text": "at 3pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 71,
+            "text": "at 3pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 24,
+            "end": 41,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 42,
+            "end": 55,
+            "text": "with Dr Shera"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 72,
+            "end": 86,
+            "text": "for 30 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 30,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "dialogue_form": "one_shot",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "reference_date": "2026-07-13",
+        "diary_page_date": "2026-07-14",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "existing_booking_found",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots",
+        "create_booking"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "created",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-14",
+          "start_time": "15:00",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "created",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    }
+  }
+]
