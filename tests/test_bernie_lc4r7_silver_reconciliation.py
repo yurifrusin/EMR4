@@ -598,12 +598,12 @@ class TestFailClosed:
         records, report = build_queue_and_report()
         mutated = [dict(r) for r in records]
         if mutated:
-            mutated[0]["reason_code"] = "dangling_temporal_operator_without_operand"
-            # Flip to a different valid code
-            for rc in ALLOWED_REASON_CODES:
-                if rc != mutated[0]["reason_code"]:
-                    mutated[0]["reason_code"] = rc
-                    break
+            original_reason = mutated[0]["reason_code"]
+            mutated[0]["reason_code"] = next(
+                reason
+                for reason in sorted(ALLOWED_REASON_CODES)
+                if reason != original_reason
+            )
         assert not run_check(mutated, report), "run_check should reject reason drift"
 
     def test_run_check_fails_on_unexpected_disposition(self):

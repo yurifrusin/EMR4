@@ -19,7 +19,11 @@ Sol owns the amendments that add exact canonical queue equality, explicit
 selection/queue/primary/dimension/assertion report checks, frozen-report hash
 validation, pre-hash record schema/type validation, full alternate-order
 equality assertions, a malformed-record fail-closed test, and corrected worker
-provenance. No classifier, corpus, fixture, interpreter, replay, generator,
+provenance. The first broad serial gate also exposed a process-hash-seed defect
+in the reason-drift test: iteration over an unordered allowed-reason set could
+select the record's original reason and therefore fail to mutate it. Sol owns
+the deterministic sorted selection of a reason unequal to the original. No
+classifier, corpus, fixture, interpreter, replay, generator,
 provider, route, database, UI, historical-diary, holdout, or write surface was
 changed.
 
