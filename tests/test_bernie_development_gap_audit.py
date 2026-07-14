@@ -612,16 +612,16 @@ class TestDeterministicReportHash:
     def test_report_hash_deterministic(self) -> None:
         """Two consecutive report computations produce the same hash."""
         import subprocess
-        import json
-        script = r"C:\Users\sarashera\EMR4-worktrees\lc4r2-dw1\scripts\bernie_lc4r_development_gap_report.py"
+        repo_root = HERE.parent
+        script = repo_root / "scripts" / "bernie_lc4r_development_gap_report.py"
         # Run report --check which compares in-memory with stored
         result1 = subprocess.run(
             [_python(), script, "--check"],
-            capture_output=True, text=True, cwd=r"C:\Users\sarashera\EMR4-worktrees\lc4r2-dw1"
+            capture_output=True, text=True, cwd=repo_root
         )
         result2 = subprocess.run(
             [_python(), script, "--check"],
-            capture_output=True, text=True, cwd=r"C:\Users\sarashera\EMR4-worktrees\lc4r2-dw1"
+            capture_output=True, text=True, cwd=repo_root
         )
         assert result1.returncode == 0, f"First check failed: {result1.stderr}"
         assert result2.returncode == 0, f"Second check failed: {result2.stderr}"
