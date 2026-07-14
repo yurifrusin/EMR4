@@ -51,20 +51,23 @@ at utterance start.
 Report script now uses explicit frozen group ranges for the 154 original
 aligned failures:
 - create: 16 (suffix 03, surface, groups 001-016)
-- cancel: 13 (suffix 06, surface, groups 049-061)
+- cancel: 13 (suffix 06, surface, groups 049-057 and 061-064)
 - explain: 80 (suffixes 02/03/04/06/08, surface, groups 081-096)
-- explicit status: 45 (suffix 03 groups 065-077 + suffix 06 groups 065-080
-  + suffix 07 groups 065-080)
-- deferred check-in: 13 (suffix 04, surface, groups 065-077)
-- deferred bare arrival: 13 (mt suffix 01, groups 065-077)
+- explicit status: 45 (suffix 03/07 groups 065-080 plus suffix 06 groups
+  065-073 and 077-080)
+- deferred check-in: 13 (suffix 04, groups 065-073 and 077-080)
+- deferred bare arrival: 13 (multi-turn suffix 01, groups 065-067, 069-073,
+  075-079)
 
-All counts asserted exactly. Selection hash included for reproducibility.
-Case IDs not emitted in report.
+All counts and exact group memberships are tested so an equal-size case
+substitution cannot pass. Separate target/deferred selection hashes are
+included for reproducibility. Case IDs are not emitted in the report.
 
 ### Measured Repeat Variance
-The deterministic audit runs twice over all 1,152 development variants. Measured
-variance is zero (all deltas zero between pass 1 and pass 2). No longer claimed
-"by construction" — actually measured.
+The candidate-quality audit fingerprints each of the 1,152 development
+variants on two repeats (2,304 samples). Measured per-scenario observation and
+safety variance is zero. This is stronger than comparing aggregate totals,
+which could conceal equal and opposite per-case changes.
 
 ### Protected-Evidence Disclosure
 During Sol's post-compaction orientation, a broad filename command enumerated
@@ -109,17 +112,19 @@ prove removed patterns cannot return.
 ### Note on intended_action Count (880 vs 874)
 The revision achieves 880/1152 intended_action passes (exceeding the 874 floor).
 The extra 6 above 874 come from non-frozen surface variants that match the same
-patterns as the frozen targets: 3 cancel suffix-06 variants (groups 062-064,
-textually identical to frozen groups 049-061) and 3 status suffix-03 variants
-(groups 078-080, textually identical to frozen 065-077). The frozen report
-family definition correctly limits target counts to 13 and 45 respectively.
+patterns as the frozen targets: cancel suffix-06 groups 058-060 and status
+suffix-06 groups 074-076. Their action surfaces are textually explicit, but
+other contract dimensions kept them outside the original aligned-failure
+subset. The frozen report definition correctly limits target evidence to 13
+and 45 respectively without suppressing those six legitimate recognitions.
 
 ## Report Hashes
 
-- LC4R3 report (revision): `f0c87df0b483208d` (see `docs/bernie-lc4r3-report.json`)
+- LC4R3 report: regenerated after Sol's evidence-only recovery amendment (see
+  `docs/bernie-lc4r3-report.json`)
 - LC4R2 report (restored): `cba97acd3f23d2ec` (see `docs/bernie-lc4r-development-gap-report.json`)
 - Corpus hash: `f73a35b8843beb66`
-- Selection hash: `bb4fa0e16761c2a0`
+- Target/deferred selection hashes: recorded separately in the report
 
 ## Files Changed
 
@@ -127,7 +132,8 @@ family definition correctly limits target counts to 13 and 45 respectively.
 |---|---|
 | `app/services/bernie/semantic_extraction.py` | Narrowed explain patterns to practitioner-required; anchored Status: |
 | `tests/test_bernie_lc4r3_action_surface.py` | Fixed anti-overmatch, added 14 negative cases, updated explain tests |
-| `scripts/bernie_lc4r3_report.py` | Frozen 154 selection, measured variance, exact assertions |
+| `scripts/bernie_lc4r3_report.py` | Exact aligned/deferred selections, per-scenario measured variance, baseline assertions |
+| `tests/test_bernie_lc4r3_report.py` | Sol recovery regressions for exact case membership and evidence disclosure |
 | `docs/bernie-lc4r3-report.json` | Revised deterministic report |
 | `docs/bernie-lc4r3-implementation-note.md` | This note |
-| `docs/bernie-lc4r-development-gap-report.json` | Restored exactly from base (`643cdaa9`) |
+| `docs/bernie-lc4r-development-gap-report.json` | Preserved exactly from base (`643cdaa9`) |

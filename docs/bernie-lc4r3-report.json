@@ -1,16 +1,21 @@
 {
   "assertions": {
+    "action_semantics_at_least_674": true,
     "cancel_exact_13": true,
+    "clarification_at_least_642": true,
     "create_exact_16": true,
     "deferred_bare_arrival_exact_13_not_promoted": true,
     "deferred_checkin_exact_13_not_promoted": true,
+    "entity_semantics_at_least_255": true,
     "explain_exact_80": true,
-    "intended_action_exact_computed": 880,
-    "intended_action_exact_ge_874_of_1152": true,
+    "intended_action_at_least_874_of_1152": true,
+    "intended_action_computed": 880,
+    "normalized_values_at_least_101": true,
     "repeat_variance_measured_zero": true,
     "safety_exact_1152_of_1152": true,
     "status_change_exact_45": true,
-    "target_families_exact_154_of_154": true
+    "target_families_exact_154_of_154": true,
+    "temporal_relation_at_least_628": true
   },
   "corpus_manifest": {
     "adjudication": "pending",
@@ -59,12 +64,19 @@
     "temporal_relation": 628
   },
   "pre_lc4r3_report_hash": "cba97acd3f23d2ec",
+  "protected_evidence": {
+    "content_opened_or_read": false,
+    "evaluated_or_tuned_against": false,
+    "incident_scope": "Sol orientation command enumerated protected fixture path names; no semantic content or labels were exposed",
+    "metadata_enumeration_incident": true
+  },
   "repeat_variance": {
     "all_deltas_zero": true,
     "measured": 0,
-    "measured_fully": "verified by two-run deterministic audit"
+    "method": "per-scenario observation and safety fingerprint",
+    "sample_count": 2304
   },
-  "report_hash": "f0c87df0b483208d",
+  "report_hash": "9ebfcc4a00c8e432",
   "safety": {
     "all_safe": true,
     "failures": 0,
@@ -72,7 +84,10 @@
     "total": 1152
   },
   "schema_version": "lc4r3.aligned_action_surface.v1",
-  "selection_hash": "bb4fa0e16761c2a0",
+  "selection_hashes": {
+    "deferred_26": "cd75b93a58875abf",
+    "target_154": "cc23574c8b946bea"
+  },
   "semantic_fields_one_repeat": {
     "action_semantics": "730/1152",
     "clarification": "698/1152",

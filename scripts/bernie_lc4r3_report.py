@@ -31,6 +31,7 @@ from app.services.bernie.composed_evaluator import (
     InterpretationObservation,
     score_interpretation_replay_pair,
 )
+from app.services.bernie.development_gap_audit import audit_candidates
 from app.services.bernie.scale_corpus import DevelopmentOnlyLoader
 from app.services.bernie.scenario_spec import ReceptionScenarioSpec
 
@@ -42,24 +43,23 @@ LC4_TOTAL = 1152
 #
 # Families:
 #   create:              16  (suffix 03, surface, groups 001-016)
-#   cancel:              13  (suffix 06, surface, groups 049-061)
+#   cancel:              13  (suffix 06, original aligned groups)
 #   explain_schedule:    80  (suffixes 02/03/04/06/08, surface, groups 081-096)
-#   explicit status:     45  (suffix 03 groups 065-077 = 13,
-#                              suffix 06 groups 065-080 = 16,
-#                              suffix 07 groups 065-080 = 16)
+#   explicit status:     45  (suffix 03/07 groups 065-080 = 32,
+#                              suffix 06 original aligned groups = 13)
 # Deferred:
-#   check-in:            13  (suffix 04, surface, groups 065-077)
-#   bare arrival:        13  (mt suffix 01, groups 065-077, arrival narrative)
+#   check-in:            13  (suffix 04, original aligned groups)
+#   bare arrival:        13  (mt suffix 01, original aligned groups)
 
 # Frozen group ranges
 _CREATE_GROUPS = frozenset(range(1, 17))      # 001-016
-_CANCEL_GROUPS = frozenset(range(49, 62))      # 049-061
+_CANCEL_GROUPS = frozenset({49, 50, 51, 52, 53, 54, 55, 56, 57, 61, 62, 63, 64})
 _EXPLAIN_GROUPS = frozenset(range(81, 97))     # 081-096
 _STATUS_GROUPS_FULL = frozenset(range(65, 81))  # 065-080
-_STATUS_GROUPS_PARTIAL = frozenset(range(65, 78))  # 065-077 (for suffix 03 only)
+_STATUS_SUFFIX_06_GROUPS = frozenset({65, 66, 67, 68, 69, 70, 71, 72, 73, 77, 78, 79, 80})
 
-_DEFERRED_CHECKIN_GROUPS = frozenset(range(65, 78))  # 065-077
-_DEFERRED_BARE_GROUPS = frozenset(range(65, 78))    # 065-077
+_DEFERRED_CHECKIN_GROUPS = _STATUS_SUFFIX_06_GROUPS
+_DEFERRED_BARE_GROUPS = frozenset({65, 66, 67, 69, 70, 71, 72, 73, 75, 76, 77, 78, 79})
 
 
 def _stable_hash(content: str) -> str:
@@ -113,7 +113,7 @@ def _is_target_create(v):
 
 
 def _is_target_cancel(v):
-    """Suffix 06, surface, groups 049-061."""
+    """Suffix 06 in the thirteen original aligned cancel failures."""
     return (v.intended_action == "cancel"
             and _is_surface_variant(v.scenario_id)
             and _get_variant_suffix(v.scenario_id) == "06"
@@ -132,7 +132,7 @@ def _is_target_explain(v):
 
 
 def _is_target_status(v):
-    """Explicit status: suffix 03 groups 065-077, suffix 06 groups 065-080, suffix 07 groups 065-080."""
+    """Explicit status in the forty-five original aligned failures."""
     if v.intended_action != "status_change":
         return False
     if not _is_surface_variant(v.scenario_id):
@@ -141,13 +141,13 @@ def _is_target_status(v):
     if g not in _STATUS_GROUPS_FULL:
         return False
     s = _get_variant_suffix(v.scenario_id)
-    if s == "03":
-        return g in _STATUS_GROUPS_PARTIAL
-    return s in {"06", "07"}
+    if s in {"03", "07"}:
+        return True
+    return s == "06" and g in _STATUS_SUFFIX_06_GROUPS
 
 
 def _is_deferred_checkin(v):
-    """Suffix 04, surface, groups 065-077."""
+    """Suffix 04 in the thirteen original aligned check-in failures."""
     return (v.intended_action == "status_change"
             and _is_surface_variant(v.scenario_id)
             and _get_variant_suffix(v.scenario_id) == "04"
@@ -155,7 +155,7 @@ def _is_deferred_checkin(v):
 
 
 def _is_deferred_bare_arrival(v):
-    """Multi-turn suffix 01, groups 065-077, arrival narrative utterance."""
+    """Multi-turn suffix 01 in the thirteen original aligned narratives."""
     if _is_surface_variant(v.scenario_id):
         return False
     if _get_variant_suffix(v.scenario_id) != "01":
@@ -167,9 +167,14 @@ def _is_deferred_bare_arrival(v):
 
 
 def _is_frozen_target(v) -> bool:
-    """Check if variant is in any of the frozen 154 target or deferred families."""
-    return (_is_target_create(v) or _is_target_cancel(v) or _is_target_explain(v)
-            or _is_target_status(v) or _is_deferred_checkin(v) or _is_deferred_bare_arrival(v))
+    """Check if a variant is in one of the frozen 154 repair targets."""
+    return (_is_target_create(v) or _is_target_cancel(v)
+            or _is_target_explain(v) or _is_target_status(v))
+
+
+def _is_frozen_deferred(v) -> bool:
+    """Check if a variant is in one of the 26 protected adjacent families."""
+    return _is_deferred_checkin(v) or _is_deferred_bare_arrival(v)
 
 
 def _compute_report() -> dict:
@@ -186,11 +191,16 @@ def _compute_report() -> dict:
 
     corpus_hash = _compute_corpus_hash(variants)
 
-    # Build frozen selection set for selection hash
-    frozen_ids: list[str] = [
+    # Freeze target and deferred selections separately so equal aggregate
+    # counts cannot hide substitution of different development cases.
+    target_ids: list[str] = [
         v.scenario_id for v in variants if _is_frozen_target(v)
     ]
-    selection_hash = _compute_selection_hash(frozen_ids)
+    deferred_ids: list[str] = [
+        v.scenario_id for v in variants if _is_frozen_deferred(v)
+    ]
+    target_selection_hash = _compute_selection_hash(target_ids)
+    deferred_selection_hash = _compute_selection_hash(deferred_ids)
 
     # Verify frozen counts
     create_count = sum(1 for v in variants if _is_target_create(v))
@@ -207,7 +217,7 @@ def _compute_report() -> dict:
     assert checkin_count == 13, f"Expected 13 check-in deferred, got {checkin_count}"
     assert bare_count == 13, f"Expected 13 bare arrival deferred, got {bare_count}"
 
-    # ---------- 2. Run interpretation twice (measured repeat variance) ----------
+    # ---------- 2. Run interpretation and a measured two-repeat audit ----------
 
     def _run_pass(var_list):
         """Run one full pass over variants, return counts."""
@@ -295,29 +305,15 @@ def _compute_report() -> dict:
 
         return target_passes, sf, oc, safety_fails, deferred_ci_pass, deferred_ci_total, deferred_ba_pass, deferred_ba_total
 
-    # Pass 1
+    # One pass supplies the report metrics.
     (tp1, sf1, oc1, saf1, ci_pass1, ci_total1, ba_pass1, ba_total1) = _run_pass(variants)
 
-    # Pass 2
-    (tp2, sf2, oc2, saf2, ci_pass2, ci_total2, ba_pass2, ba_total2) = _run_pass(variants)
-
-    # Measure variance between passes
-    variance_fields = {}
-    for k in sf1:
-        variance_fields[f"repeat_delta_{k}"] = sf2[k] - sf1[k]
-    for k in ["downstream_outcome", "interpretation_tools", "replay_tools",
-              "clarification", "authority", "appointment_deltas", "audit_deltas", "safety"]:
-        variance_fields[f"repeat_delta_{k}"] = oc2[k] - oc1[k]
-    variance_fields["repeat_delta_safety_failures"] = saf2 - saf1
-    variance_fields["repeat_delta_target_create"] = tp2["create_new_booking"]["pass"] - tp1["create_new_booking"]["pass"]
-    variance_fields["repeat_delta_target_cancel"] = tp2["cancel_call_off"]["pass"] - tp1["cancel_call_off"]["pass"]
-    variance_fields["repeat_delta_target_explain"] = tp2["explain_schedule_query"]["pass"] - tp1["explain_schedule_query"]["pass"]
-    variance_fields["repeat_delta_target_status"] = tp2["status_change_label"]["pass"] - tp1["status_change_label"]["pass"]
-    variance_fields["repeat_delta_deferred_ci"] = ci_pass2 - ci_pass1
-    variance_fields["repeat_delta_deferred_ba"] = ba_pass2 - ba_pass1
-
-    measured_variance = any(v != 0 for v in variance_fields.values())
-    nonzero_deltas = {k: v for k, v in variance_fields.items() if v != 0}
+    # The candidate-quality audit fingerprints every scenario on each repeat.
+    # This catches per-case swaps that equal aggregate counts would conceal.
+    repeat_audit = audit_candidates(
+        variants, num_repeats=2, max_conflict_examples=0
+    )
+    measured_variance = repeat_audit.variance_count
 
     # Use pass 1 results for report
     target_passes = tp1
@@ -361,7 +357,10 @@ def _compute_report() -> dict:
             "adjudication": "pending",
         },
 
-        "selection_hash": selection_hash,
+        "selection_hashes": {
+            "target_154": target_selection_hash,
+            "deferred_26": deferred_selection_hash,
+        },
         "frozen_selection": {
             "create": 16,
             "cancel": 13,
@@ -427,15 +426,31 @@ def _compute_report() -> dict:
 
         "pre_lc4r3_report_hash": "cba97acd3f23d2ec",
         "repeat_variance": {
-            "measured": 0 if not measured_variance else len(nonzero_deltas),
-            "all_deltas_zero": not measured_variance,
-            "measured_fully": "verified by two-run deterministic audit",
+            "measured": measured_variance,
+            "all_deltas_zero": measured_variance == 0,
+            "sample_count": repeat_audit.total_samples,
+            "method": "per-scenario observation and safety fingerprint",
+        },
+
+        "protected_evidence": {
+            "content_opened_or_read": False,
+            "evaluated_or_tuned_against": False,
+            "metadata_enumeration_incident": True,
+            "incident_scope": (
+                "Sol orientation command enumerated protected fixture path names; "
+                "no semantic content or labels were exposed"
+            ),
         },
 
         "assertions": {
             "target_families_exact_154_of_154": total_target_pass == 154,
-            "intended_action_exact_ge_874_of_1152": semantic_passes["intended_action"] >= 874,
-            "intended_action_exact_computed": semantic_passes["intended_action"],
+            "intended_action_at_least_874_of_1152": semantic_passes["intended_action"] >= 874,
+            "intended_action_computed": semantic_passes["intended_action"],
+            "action_semantics_at_least_674": semantic_passes["action_semantics"] >= 674,
+            "temporal_relation_at_least_628": semantic_passes["temporal_relation"] >= 628,
+            "normalized_values_at_least_101": semantic_passes["normalized_values"] >= 101,
+            "entity_semantics_at_least_255": semantic_passes["entity_semantics"] >= 255,
+            "clarification_at_least_642": semantic_passes["clarification"] >= 642,
             "safety_exact_1152_of_1152": safety_failures == 0,
             "deferred_checkin_exact_13_not_promoted": (
                 deferred_ci["pass"] == 13 and deferred_ci["total"] == 13
@@ -443,7 +458,7 @@ def _compute_report() -> dict:
             "deferred_bare_arrival_exact_13_not_promoted": (
                 deferred_ba["pass"] == 13 and deferred_ba["total"] == 13
             ),
-            "repeat_variance_measured_zero": not measured_variance,
+            "repeat_variance_measured_zero": measured_variance == 0,
             "create_exact_16": target_passes["create_new_booking"]["pass"] == 16,
             "cancel_exact_13": target_passes["cancel_call_off"]["pass"] == 13,
             "explain_exact_80": target_passes["explain_schedule_query"]["pass"] == 80,
