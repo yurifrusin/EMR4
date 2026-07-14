@@ -647,84 +647,92 @@ class TestMutationDetection:
 class TestHoldoutAccess:
     """Holdout access with wrong credentials fails closed."""
 
+    _HASH = "sha256:" + "a" * 64
+
     def test_wrong_hash_rejected(self) -> None:
         cap = SealedHoldoutReceipt(
-            manifest_hash="real_hash",
+            manifest_hash=self._HASH,
             evaluator_identity="sol_evaluator",
             evaluation_id="eval_001",
             is_sealed=True,
         )
         assert not cap.validate_access(
-            "wrong_hash", "sealed_baseline_evaluation"
+            "sha256:" + "b" * 64, "sealed_baseline_evaluation",
+            evaluator_identity="sol_evaluator", evaluation_id="eval_001",
         )
 
     def test_wrong_purpose_rejected(self) -> None:
         cap = SealedHoldoutReceipt(
-            manifest_hash="real_hash",
+            manifest_hash=self._HASH,
             evaluator_identity="sol_evaluator",
             evaluation_id="eval_001",
             is_sealed=True,
         )
-        assert not cap.validate_access("real_hash", "training")
+        assert not cap.validate_access(
+            self._HASH, "training",
+            evaluator_identity="sol_evaluator", evaluation_id="eval_001",
+        )
 
     def test_unsealed_rejected(self) -> None:
         cap = SealedHoldoutReceipt(
-            manifest_hash="real_hash",
+            manifest_hash=self._HASH,
             evaluator_identity="sol_evaluator",
             evaluation_id="eval_001",
             is_sealed=False,
         )
         assert not cap.validate_access(
-            "real_hash", "sealed_baseline_evaluation"
+            self._HASH, "sealed_baseline_evaluation",
+            evaluator_identity="sol_evaluator", evaluation_id="eval_001",
         )
 
     def test_correct_access_granted(self) -> None:
         cap = SealedHoldoutReceipt(
-            manifest_hash="real_hash",
+            manifest_hash=self._HASH,
             evaluator_identity="sol_evaluator",
             evaluation_id="eval_001",
             is_sealed=True,
         )
         assert cap.validate_access(
-            "real_hash", "sealed_baseline_evaluation"
+            self._HASH, "sealed_baseline_evaluation",
+            evaluator_identity="sol_evaluator", evaluation_id="eval_001",
         )
 
     def test_correct_access_with_identity(self) -> None:
         """Full credential check includes evaluator_identity and evaluation_id."""
         cap = SealedHoldoutReceipt(
-            manifest_hash="real_hash",
+            manifest_hash=self._HASH,
             evaluator_identity="sol_evaluator",
             evaluation_id="eval_001",
             is_sealed=True,
         )
         assert cap.validate_access(
-            "real_hash", "sealed_baseline_evaluation",
+            self._HASH, "sealed_baseline_evaluation",
             evaluator_identity="sol_evaluator",
             evaluation_id="eval_001",
         )
 
     def test_wrong_evaluator_identity_rejected(self) -> None:
         cap = SealedHoldoutReceipt(
-            manifest_hash="real_hash",
+            manifest_hash=self._HASH,
             evaluator_identity="sol_evaluator",
             evaluation_id="eval_001",
             is_sealed=True,
         )
         assert not cap.validate_access(
-            "real_hash", "sealed_baseline_evaluation",
-            evaluator_identity="wrong_evaluator",
+            self._HASH, "sealed_baseline_evaluation",
+            evaluator_identity="wrong_evaluator", evaluation_id="eval_001",
         )
 
     def test_wrong_evaluation_id_rejected(self) -> None:
         cap = SealedHoldoutReceipt(
-            manifest_hash="real_hash",
+            manifest_hash=self._HASH,
             evaluator_identity="sol_evaluator",
             evaluation_id="eval_001",
             is_sealed=True,
         )
         assert not cap.validate_access(
-            "real_hash", "sealed_baseline_evaluation",
-            evaluation_id="wrong_id",
+            self._HASH, "sealed_baseline_evaluation",
+            evaluator_identity="sol_evaluator", evaluation_id="wrong_id",
         )
 
     def test_blank_manifest_hash_raises(self) -> None:
@@ -735,10 +743,28 @@ class TestHoldoutAccess:
                 evaluation_id="id",
             )
 
+    def test_malformed_manifest_hash_raises(self) -> None:
+        with pytest.raises(ValueError, match="manifest_hash"):
+            SealedHoldoutReceipt(
+                manifest_hash="not-a-digest",
+                evaluator_identity="e",
+                evaluation_id="id",
+            )
+
+    def test_access_requires_identity_and_evaluation_id(self) -> None:
+        cap = SealedHoldoutReceipt(
+            manifest_hash=self._HASH,
+            evaluator_identity="sol_evaluator",
+            evaluation_id="eval_001",
+            is_sealed=True,
+        )
+        with pytest.raises(TypeError):
+            cap.validate_access(self._HASH, "sealed_baseline_evaluation")
+
     def test_blank_evaluator_identity_raises(self) -> None:
         with pytest.raises(ValueError, match="evaluator_identity"):
             SealedHoldoutReceipt(
-                manifest_hash="h",
+                manifest_hash=self._HASH,
                 evaluator_identity="",
                 evaluation_id="id",
             )
@@ -746,7 +772,7 @@ class TestHoldoutAccess:
     def test_blank_evaluation_id_raises(self) -> None:
         with pytest.raises(ValueError, match="evaluation_id"):
             SealedHoldoutReceipt(
-                manifest_hash="h",
+                manifest_hash=self._HASH,
                 evaluator_identity="e",
                 evaluation_id="",
             )
@@ -754,7 +780,7 @@ class TestHoldoutAccess:
     def test_malformed_purpose_raises(self) -> None:
         with pytest.raises(ValueError, match="purpose"):
             SealedHoldoutReceipt(
-                manifest_hash="h",
+                manifest_hash=self._HASH,
                 evaluator_identity="e",
                 evaluation_id="id",
                 purpose="training",
@@ -764,44 +790,61 @@ class TestHoldoutAccess:
 class TestSingleUseLedger:
     """Single-use ledger prevents reuse."""
 
+    _HASH = "sha256:" + "c" * 64
+
     def test_first_use_succeeds(self) -> None:
         cap = SealedHoldoutReceipt(
-            manifest_hash="h",
-            evaluator_identity="e", evaluation_id="id", is_sealed=True,
-        )
-        ledger = SingleUseLedger(capability=cap)
-        assert ledger.consume("h", "sealed_baseline_evaluation") is True
-        assert ledger.is_consumed is True
-
-    def test_reuse_fails(self) -> None:
-        cap = SealedHoldoutReceipt(
-            manifest_hash="h",
-            evaluator_identity="e", evaluation_id="id", is_sealed=True,
-        )
-        ledger = SingleUseLedger(capability=cap)
-        ledger.consume("h", "sealed_baseline_evaluation")
-        assert ledger.consume("h", "sealed_baseline_evaluation") is False
-
-    def test_wrong_credential_first_use(self) -> None:
-        cap = SealedHoldoutReceipt(
-            manifest_hash="h",
-            evaluator_identity="e", evaluation_id="id", is_sealed=True,
-        )
-        ledger = SingleUseLedger(capability=cap)
-        assert ledger.consume("wrong", "sealed_baseline_evaluation") is False
-        assert ledger.is_consumed is False  # Not consumed
-        # Correct credentials still work
-        assert ledger.consume("h", "sealed_baseline_evaluation") is True
-
-    def test_consume_with_identity_checks(self) -> None:
-        """Full credential check before consume."""
-        cap = SealedHoldoutReceipt(
-            manifest_hash="h",
+            manifest_hash=self._HASH,
             evaluator_identity="e", evaluation_id="id", is_sealed=True,
         )
         ledger = SingleUseLedger(capability=cap)
         assert ledger.consume(
-            "h", "sealed_baseline_evaluation",
+            self._HASH, "sealed_baseline_evaluation",
+            evaluator_identity="e", evaluation_id="id",
+        ) is True
+        assert ledger.is_consumed is True
+
+    def test_reuse_fails(self) -> None:
+        cap = SealedHoldoutReceipt(
+            manifest_hash=self._HASH,
+            evaluator_identity="e", evaluation_id="id", is_sealed=True,
+        )
+        ledger = SingleUseLedger(capability=cap)
+        ledger.consume(
+            self._HASH, "sealed_baseline_evaluation",
+            evaluator_identity="e", evaluation_id="id",
+        )
+        assert ledger.consume(
+            self._HASH, "sealed_baseline_evaluation",
+            evaluator_identity="e", evaluation_id="id",
+        ) is False
+
+    def test_wrong_credential_first_use(self) -> None:
+        cap = SealedHoldoutReceipt(
+            manifest_hash=self._HASH,
+            evaluator_identity="e", evaluation_id="id", is_sealed=True,
+        )
+        ledger = SingleUseLedger(capability=cap)
+        assert ledger.consume(
+            "sha256:" + "d" * 64, "sealed_baseline_evaluation",
+            evaluator_identity="e", evaluation_id="id",
+        ) is False
+        assert ledger.is_consumed is False  # Not consumed
+        # Correct credentials still work
+        assert ledger.consume(
+            self._HASH, "sealed_baseline_evaluation",
+            evaluator_identity="e", evaluation_id="id",
+        ) is True
+
+    def test_consume_with_identity_checks(self) -> None:
+        """Full credential check before consume."""
+        cap = SealedHoldoutReceipt(
+            manifest_hash=self._HASH,
+            evaluator_identity="e", evaluation_id="id", is_sealed=True,
+        )
+        ledger = SingleUseLedger(capability=cap)
+        assert ledger.consume(
+            self._HASH, "sealed_baseline_evaluation",
             evaluator_identity="e", evaluation_id="id",
         ) is True
         assert ledger.is_consumed is True
@@ -809,14 +852,24 @@ class TestSingleUseLedger:
     def test_wrong_identity_does_not_consume(self) -> None:
         """Wrong identity must not consume the single use."""
         cap = SealedHoldoutReceipt(
-            manifest_hash="h",
+            manifest_hash=self._HASH,
             evaluator_identity="e", evaluation_id="id", is_sealed=True,
         )
         ledger = SingleUseLedger(capability=cap)
         assert ledger.consume(
-            "h", "sealed_baseline_evaluation",
-            evaluator_identity="wrong",
+            self._HASH, "sealed_baseline_evaluation",
+            evaluator_identity="wrong", evaluation_id="id",
         ) is False
+        assert ledger.is_consumed is False
+
+    def test_consume_requires_identity_and_evaluation_id(self) -> None:
+        cap = SealedHoldoutReceipt(
+            manifest_hash=self._HASH,
+            evaluator_identity="e", evaluation_id="id", is_sealed=True,
+        )
+        ledger = SingleUseLedger(capability=cap)
+        with pytest.raises(TypeError):
+            ledger.consume(self._HASH, "sealed_baseline_evaluation")
         assert ledger.is_consumed is False
 
 
@@ -927,6 +980,54 @@ class TestHoldoutReportSanitizer:
         report = {"aggregate": [1, 2, 3]}
         with pytest.raises(ValueError, match="aggregate"):
             sanitize_holdout_report(report)
+
+    def test_rejects_unknown_nested_dimension_key(self) -> None:
+        report = {
+            "per_dimension": {
+                "semantic_fields": {
+                    "intended_action": {"passed": 1, "total": 1, "leak": 7},
+                },
+            },
+        }
+        with pytest.raises(ValueError, match="unknown keys"):
+            sanitize_holdout_report(report)
+
+    def test_rejects_unknown_nested_slice_key(self) -> None:
+        report = {
+            "critical_slices": {
+                "by_action": [{
+                    "slice_key": "create", "passed": 1, "failed": 0,
+                    "total": 1, "pass_fraction": 1.0, "payload": 2,
+                }],
+            },
+        }
+        with pytest.raises(ValueError, match="unknown keys"):
+            sanitize_holdout_report(report)
+
+    def test_accepts_strict_nested_aggregate_schema(self) -> None:
+        report = {
+            "schema_version": "lc4.holdout.aggregate.v1",
+            "partition": "holdout",
+            "aggregate": {"passed": 1, "failed": 1, "total": 2},
+            "per_dimension": {
+                "scenario_count": 1,
+                "sample_count": 2,
+                "repeats_per_scenario": 2,
+                "semantic_fields": {
+                    "intended_action": {"passed": 1, "failed": 1, "total": 2},
+                },
+                "simultaneous_layers": {"multiple_layers": 1},
+            },
+            "critical_slices": {
+                "worst_slice": {
+                    "dimension": "action", "slice_key": "create",
+                    "passed": 0, "failed": 2, "total": 2,
+                    "pass_fraction": 0.0,
+                },
+                "by_action": [],
+            },
+        }
+        sanitize_holdout_report(report)
 
     def test_holdout_hash_validation(self) -> None:
         """Sanitized holdout hash must be stable."""

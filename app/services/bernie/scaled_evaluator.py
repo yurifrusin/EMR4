@@ -90,6 +90,8 @@ def _canonical_json(obj: Any) -> str:
 
 # The only permitted purpose for a sealed holdout evaluation
 _SEALED_HOLDOUT_PURPOSE = "sealed_baseline_evaluation"
+_SHA256_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
+_IDENTITY_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$")
 
 
 @dataclass(frozen=True)
@@ -113,12 +115,12 @@ class SealedHoldoutReceipt:
 
     def __post_init__(self) -> None:
         """Validate that no field is blank or malformed."""
-        if not self.manifest_hash or not self.manifest_hash.strip():
-            raise ValueError("manifest_hash must not be blank")
-        if not self.evaluator_identity or not self.evaluator_identity.strip():
-            raise ValueError("evaluator_identity must not be blank")
-        if not self.evaluation_id or not self.evaluation_id.strip():
-            raise ValueError("evaluation_id must not be blank")
+        if not isinstance(self.manifest_hash, str) or not _SHA256_RE.fullmatch(self.manifest_hash):
+            raise ValueError("manifest_hash must be a lowercase sha256 digest")
+        if not isinstance(self.evaluator_identity, str) or not _IDENTITY_RE.fullmatch(self.evaluator_identity):
+            raise ValueError("evaluator_identity must be a non-blank stable identifier")
+        if not isinstance(self.evaluation_id, str) or not _IDENTITY_RE.fullmatch(self.evaluation_id):
+            raise ValueError("evaluation_id must be a non-blank stable identifier")
         if self.purpose != _SEALED_HOLDOUT_PURPOSE:
             raise ValueError(
                 f"purpose must be {_SEALED_HOLDOUT_PURPOSE!r}, "
@@ -130,8 +132,8 @@ class SealedHoldoutReceipt:
         manifest_hash: str,
         purpose: str,
         *,
-        evaluator_identity: str = "",
-        evaluation_id: str = "",
+        evaluator_identity: str,
+        evaluation_id: str,
     ) -> bool:
         """Fail-closed: wrong or reused credentials are rejected.
 
@@ -144,9 +146,9 @@ class SealedHoldoutReceipt:
             return False
         if purpose != self.purpose:
             return False
-        if evaluator_identity and evaluator_identity != self.evaluator_identity:
+        if evaluator_identity != self.evaluator_identity:
             return False
-        if evaluation_id and evaluation_id != self.evaluation_id:
+        if evaluation_id != self.evaluation_id:
             return False
         return True
 
@@ -165,8 +167,8 @@ class SingleUseLedger:
         manifest_hash: str,
         purpose: str,
         *,
-        evaluator_identity: str = "",
-        evaluation_id: str = "",
+        evaluator_identity: str,
+        evaluation_id: str,
     ) -> bool:
         """Attempt to consume the capability once.
 
@@ -253,6 +255,8 @@ def sanitize_holdout_report(report: dict[str, Any]) -> dict[str, Any]:
                 f"Holdout report contains prohibited top-level key: {key!r}"
             )
 
+    _check_holdout_top_level_values(report)
+
     # Check aggregate section
     if "aggregate" in report:
         agg = report["aggregate"]
@@ -293,7 +297,7 @@ def _check_holdout_structure(obj: Any, path: str = "") -> None:
         for key, value in obj.items():
             key_lower = key.lower()
             for prohibited in _PROHIBITED_HOLDOUT_KEYS:
-                if prohibited in key_lower:
+                if prohibited == key_lower:
                     raise ValueError(
                         f"Holdout report contains prohibited key {key!r}"
                         f" at {path}"
@@ -349,12 +353,65 @@ def _check_dimension_section(dim: dict[str, Any]) -> None:
         "authority", "appointment_deltas", "audit_deltas", "safety",
         "interpretation_failures", "policy_failures",
         "integration_failures", "safety_failures",
+        "simultaneous_layers",
     }
     for key in dim:
         if key not in allowed_dim_keys:
             raise ValueError(
                 f"Holdout per_dimension contains prohibited key: {key!r}"
             )
+
+    count_keys = {
+        "scenario_count", "sample_count", "repeats_per_scenario",
+        "interpretation_failures", "policy_failures",
+        "integration_failures", "safety_failures",
+    }
+    score_keys = {
+        "aggregate", "downstream_outcome", "interpretation_tools",
+        "replay_tool_sequence", "clarification", "appointment_deltas",
+        "audit_deltas", "safety",
+    }
+    for key in count_keys & dim.keys():
+        _require_nonnegative_int(dim[key], f"per_dimension.{key}")
+    for key in score_keys & dim.keys():
+        _check_score_counts(dim[key], f"per_dimension.{key}")
+
+    if "semantic_fields" in dim:
+        fields = dim["semantic_fields"]
+        if not isinstance(fields, dict):
+            raise ValueError("Holdout semantic_fields must be a dict")
+        allowed_fields = {
+            "intended_action", "action_semantics", "temporal_relation",
+            "normalized_values", "entity_semantics", "requires_clarification",
+        }
+        _reject_unknown_keys(fields, allowed_fields, "per_dimension.semantic_fields")
+        for key, value in fields.items():
+            _check_score_counts(value, f"per_dimension.semantic_fields.{key}")
+
+    if "authority" in dim:
+        authority = dim["authority"]
+        if not isinstance(authority, dict):
+            raise ValueError("Holdout authority must be a dict")
+        allowed_authority = {
+            "passed", "failed", "total", "authority_correct",
+            "authority_incorrect", "safety_violations",
+        }
+        _reject_unknown_keys(authority, allowed_authority, "per_dimension.authority")
+        for key, value in authority.items():
+            _require_nonnegative_int(value, f"per_dimension.authority.{key}")
+
+    if "simultaneous_layers" in dim:
+        layers = dim["simultaneous_layers"]
+        if not isinstance(layers, dict):
+            raise ValueError("Holdout simultaneous_layers must be a dict")
+        allowed_layers = {
+            "safety_only", "interpretation_only", "policy_only",
+            "integration_only", "interpretation_and_policy",
+            "interpretation_and_integration", "multiple_layers",
+        }
+        _reject_unknown_keys(layers, allowed_layers, "per_dimension.simultaneous_layers")
+        for key, value in layers.items():
+            _require_nonnegative_int(value, f"per_dimension.simultaneous_layers.{key}")
 
 
 def compute_sanitized_holdout_hash(report: dict[str, Any]) -> str:
@@ -374,6 +431,8 @@ def compute_sanitized_holdout_hash(report: dict[str, Any]) -> str:
 
 def _check_slice_section(slices: dict[str, Any]) -> None:
     """Check critical_slices section."""
+    if not isinstance(slices, dict):
+        raise ValueError("Holdout critical_slices must be a dict")
     allowed_slice_keys = {
         "worst_slice", "by_action", "by_temporal_relation",
         "by_dialogue_form", "by_language_form", "by_diary_state",
@@ -385,6 +444,93 @@ def _check_slice_section(slices: dict[str, Any]) -> None:
             raise ValueError(
                 f"Holdout critical_slices contains prohibited key: {key!r}"
             )
+        value = slices[key]
+        if key == "worst_slice":
+            if value is not None:
+                _check_slice_entry(value, f"critical_slices.{key}")
+        else:
+            if not isinstance(value, list):
+                raise ValueError(f"Holdout critical_slices.{key} must be a list")
+            for index, entry in enumerate(value):
+                _check_slice_entry(entry, f"critical_slices.{key}[{index}]")
+
+
+def _check_holdout_top_level_values(report: dict[str, Any]) -> None:
+    """Validate every allowed top-level value using an explicit schema."""
+    string_keys = {"schema_version", "partition"}
+    for key in string_keys & report.keys():
+        if not isinstance(report[key], str) or not report[key].strip():
+            raise ValueError(f"Holdout {key} must be a non-blank string")
+    for key in {"corpus_hash", "manifest_hash", "report_hash"} & report.keys():
+        if not isinstance(report[key], str) or not _SHA256_RE.fullmatch(report[key]):
+            raise ValueError(f"Holdout {key} must be a lowercase sha256 digest")
+    for key in {
+        "total_groups", "total_variants", "total_trajectories",
+        "total_samples", "repeat_count",
+    } & report.keys():
+        _require_nonnegative_int(report[key], key)
+
+    if "sealed_receipt" in report:
+        receipt = report["sealed_receipt"]
+        if not isinstance(receipt, dict):
+            raise ValueError("Holdout sealed_receipt must be a dict")
+        allowed_receipt = {
+            "manifest_hash", "purpose", "evaluator_identity",
+            "evaluation_id", "is_sealed",
+        }
+        _reject_unknown_keys(receipt, allowed_receipt, "sealed_receipt")
+        if set(receipt) != allowed_receipt:
+            raise ValueError("Holdout sealed_receipt is missing required metadata")
+        if not isinstance(receipt["manifest_hash"], str) or not _SHA256_RE.fullmatch(receipt["manifest_hash"]):
+            raise ValueError("Holdout sealed_receipt.manifest_hash is malformed")
+        if receipt["purpose"] != _SEALED_HOLDOUT_PURPOSE:
+            raise ValueError("Holdout sealed_receipt purpose is invalid")
+        if not isinstance(receipt["evaluator_identity"], str) or not _IDENTITY_RE.fullmatch(receipt["evaluator_identity"]):
+            raise ValueError("Holdout sealed_receipt evaluator_identity is invalid")
+        if not isinstance(receipt["evaluation_id"], str) or not _IDENTITY_RE.fullmatch(receipt["evaluation_id"]):
+            raise ValueError("Holdout sealed_receipt evaluation_id is invalid")
+        if receipt["is_sealed"] is not True:
+            raise ValueError("Holdout sealed_receipt must be sealed")
+
+
+def _reject_unknown_keys(obj: dict[str, Any], allowed: set[str], path: str) -> None:
+    unknown = set(obj) - allowed
+    if unknown:
+        raise ValueError(f"Holdout {path} contains unknown keys: {sorted(unknown)!r}")
+
+
+def _require_nonnegative_int(value: Any, path: str) -> None:
+    if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+        raise ValueError(f"Holdout {path} must be a non-negative integer")
+
+
+def _check_score_counts(score: Any, path: str) -> None:
+    if not isinstance(score, dict):
+        raise ValueError(f"Holdout {path} must be a score dict")
+    allowed = {"passed", "failed", "total", "pass_fraction"}
+    _reject_unknown_keys(score, allowed, path)
+    for key in {"passed", "failed", "total"} & score.keys():
+        _require_nonnegative_int(score[key], f"{path}.{key}")
+    if "pass_fraction" in score:
+        value = score["pass_fraction"]
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
+            raise ValueError(f"Holdout {path}.pass_fraction must be numeric")
+        if not 0 <= value <= 1:
+            raise ValueError(f"Holdout {path}.pass_fraction must be between 0 and 1")
+
+
+def _check_slice_entry(entry: Any, path: str) -> None:
+    if not isinstance(entry, dict):
+        raise ValueError(f"Holdout {path} must be a dict")
+    allowed = {"dimension", "slice_key", "total", "passed", "failed", "pass_fraction"}
+    _reject_unknown_keys(entry, allowed, path)
+    for key in {"dimension", "slice_key"} & entry.keys():
+        if not isinstance(entry[key], str) or not entry[key].strip():
+            raise ValueError(f"Holdout {path}.{key} must be a non-blank string")
+    _check_score_counts(
+        {key: value for key, value in entry.items() if key not in {"dimension", "slice_key"}},
+        path,
+    )
 
 
 # ---------------------------------------------------------------------------
