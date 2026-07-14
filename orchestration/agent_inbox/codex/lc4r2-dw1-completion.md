@@ -6,8 +6,7 @@
 **Base SHA:** `e6ab2969` (parent of original candidate)
 **Original candidate SHA:** `f57affcc8aba324be623c397cd4c4c3386d5a7d4`
 **Revised candidate SHA:** `e66c0db941ae5638761712e201b41d3f6bf1c16a`
-**Final evidence revision SHA:**
-`c8562981`
+**Final evidence revision SHA:** `13a8605a`
 
 ## DECISION: revision_required
 
@@ -140,7 +139,7 @@ provenance is corrected without rewriting earlier commits.
 
 ```powershell
 git log --oneline -4
-# c8562981 docs: final evidence revision for LC4R2 replay quality
+# 13a8605a docs: final evidence revision for LC4R2 replay quality
 # 25862a3b docs: update completion artifact with SHA and report hash
 # e66c0db9 fix(bernie): address Sol revision findings 1-5 for LC4R2 replay quality
 # f57affcc feat(bernie): LC4R2 Oracle-free replay and candidate-quality firewall
