@@ -10,6 +10,31 @@
   "quarantine_reasons": [
     "adjudication_rejected"
   ],
+  "attempted_adjudication_record": {
+    "decision": "rejected",
+    "judge": {
+      "actor_kind": "human",
+      "actor_id": "hypothetical-independent-reviewer",
+      "provider_id": null,
+      "model_id": null,
+      "instance_id": null
+    },
+    "timestamp": "2026-07-14T12:00:00+00:00",
+    "checked_semantic_scope": [
+      "action",
+      "temporal",
+      "entity",
+      "expected_outcome",
+      "authority"
+    ],
+    "checked_evidence_scope": [
+      "dialogue_turns",
+      "source_spans",
+      "normalized_values",
+      "expected_outcomes"
+    ],
+    "evidence_ref": "lc2-ag-semantic-drift-review"
+  },
   "candidate_payload": {
     "provenance": "silver",
     "adjudication": "pending",
