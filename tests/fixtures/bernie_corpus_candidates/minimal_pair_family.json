@@ -13,12 +13,12 @@
     "generation_timestamp": "2026-07-14T10:00:00Z",
     "source_scenario_id": "booking_create_then_exact_duplicate",
     "source_scenario_hash": "sha256:a7003f91f1d3ed17f5f6496595a02e714b08afdc03cad328ccb3bf0701f0c22e",
-    "derivation_id": "sha256:873159183a2b5d96aea4185ce51b878f0efdea0dfd70937f18ff989ad13ec92b",
+    "derivation_id": "sha256:6c950508af203ff565a3f31e3659eb7be79c37152d861497f664dc911b40d195",
     "transformation_parameters": {
       "seed": "minimal-pair-v1",
-      "changed_field": "practitioner",
-      "old_value": "Dr Shera",
-      "new_value": "Dr Taylor"
+      "changed_field": "appointment_date",
+      "old_value": "2026-07-14",
+      "new_value": "2026-07-15"
     },
     "authority_grant": {
       "provider_write": false,
@@ -34,11 +34,15 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "booking_create",
-      "description": "Minimal pair: practitioner changed from Dr Shera to Dr Taylor.",
+      "description": "Minimal pair: appointment date changed from 2026-07-14 to 2026-07-15 (day after tomorrow).",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Make an appointment for Margaret Thompson with Dr Taylor tomorrow at 3pm for 15 minutes"
+          "utterance": "Make an appointment for Margaret Thompson with Dr Shera the day after tomorrow at 3pm for 15 minutes"
+        },
+        {
+          "turn": 2,
+          "utterance": "Make an appointment for Margaret Thompson with Dr Shera the day after tomorrow at 3pm for 15 minutes"
         }
       ],
       "reference_date": "2026-07-13",
@@ -49,7 +53,7 @@
       "earliest_time": "15:00",
       "latest_time": "15:00",
       "normalized_values": {
-        "appointment_date": "2026-07-14",
+        "appointment_date": "2026-07-15",
         "earliest_time": "15:00",
         "latest_time": "15:00",
         "duration_minutes": 15
@@ -58,24 +62,24 @@
         "temporal_relation": [
           {
             "turn_index": 0,
-            "start": 66,
-            "end": 72,
+            "start": 79,
+            "end": 85,
             "text": "at 3pm"
           }
         ],
         "earliest_time": [
           {
             "turn_index": 0,
-            "start": 66,
-            "end": 72,
+            "start": 79,
+            "end": 85,
             "text": "at 3pm"
           }
         ],
         "latest_time": [
           {
             "turn_index": 0,
-            "start": 66,
-            "end": 72,
+            "start": 79,
+            "end": 85,
             "text": "at 3pm"
           }
         ],
@@ -91,15 +95,15 @@
           {
             "turn_index": 0,
             "start": 42,
-            "end": 56,
-            "text": "with Dr Taylor"
+            "end": 55,
+            "text": "with Dr Shera"
           }
         ],
         "duration_minutes": [
           {
             "turn_index": 0,
-            "start": 73,
-            "end": 87,
+            "start": 86,
+            "end": 100,
             "text": "for 15 minutes"
           }
         ]
@@ -110,13 +114,13 @@
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
-      "diary_state": "empty",
+      "diary_state": "exact_duplicate",
       "entity_state": "exact",
-      "dialogue_form": "one_shot",
+      "dialogue_form": "repeated",
       "language_form": "plain",
       "initial_diary_state": {
         "reference_date": "2026-07-13",
-        "diary_page_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
         "seeded_appointments": [],
         "practitioners_available": [
           "pr-001"
@@ -134,8 +138,8 @@
           "appointment_id": "apt-001",
           "change_type": "created",
           "patient_id": "p-001",
-          "practitioner_id": "pr-002",
-          "date": "2026-07-14",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
           "start_time": "15:00",
           "duration_minutes": 15
         }
@@ -197,6 +201,10 @@
       "dialogue_turns": [
         {
           "turn": 1,
+          "utterance": "Make an appointment for Margaret Thompson with Dr Shera tomorrow at 10am for 15 minutes"
+        },
+        {
+          "turn": 2,
           "utterance": "Make an appointment for Margaret Thompson with Dr Shera tomorrow at 10am for 15 minutes"
         }
       ],
@@ -269,9 +277,9 @@
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
-      "diary_state": "empty",
+      "diary_state": "exact_duplicate",
       "entity_state": "exact",
-      "dialogue_form": "one_shot",
+      "dialogue_form": "repeated",
       "language_form": "plain",
       "initial_diary_state": {
         "reference_date": "2026-07-13",
@@ -357,6 +365,10 @@
         {
           "turn": 1,
           "utterance": "Make an appointment for Margaret Thompson with Dr Shera tomorrow at 3pm for 30 minutes"
+        },
+        {
+          "turn": 2,
+          "utterance": "Make an appointment for Margaret Thompson with Dr Shera tomorrow at 3pm for 30 minutes"
         }
       ],
       "reference_date": "2026-07-13",
@@ -428,9 +440,9 @@
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
-      "diary_state": "empty",
+      "diary_state": "exact_duplicate",
       "entity_state": "exact",
-      "dialogue_form": "one_shot",
+      "dialogue_form": "repeated",
       "language_form": "plain",
       "initial_diary_state": {
         "reference_date": "2026-07-13",
@@ -455,7 +467,7 @@
           "practitioner_id": "pr-001",
           "date": "2026-07-14",
           "start_time": "15:00",
-          "duration_minutes": 15
+          "duration_minutes": 30
         }
       ],
       "expected_audit_deltas": [

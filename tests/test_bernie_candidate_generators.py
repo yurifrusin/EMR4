@@ -19,6 +19,7 @@ from app.services.bernie.candidate_generators import (
     SYNTHETIC_LOCATIONS,
     SYNTHETIC_PATIENTS,
     SYNTHETIC_PRACTITIONERS,
+    _build_source_spans,
     generate_adversarial_candidates,
     generate_all_candidates,
     generate_ambiguity_candidates,
@@ -93,6 +94,85 @@ def test_synthetic_allowlist_no_phi():
         assert isinstance(name, str) and len(name) > 0
     for name in SYNTHETIC_LOCATIONS:
         assert isinstance(name, str) and len(name) > 0
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+#  _build_source_spans fail-closed behaviour
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+def test_build_source_spans_exact_match():
+    """_build_source_spans returns correct spans for a valid utterance."""
+    u = "Book Margaret Thompson with Dr Shera at 3pm for 15 minutes"
+    spans = _build_source_spans(
+        u,
+        time_text="at 3pm",
+        patient_text="Margaret Thompson",
+        practitioner_text="with Dr Shera",
+        duration_text="for 15 minutes",
+        turn_index=0,
+    )
+    assert "temporal_relation" in spans
+    assert spans["patient"][0]["text"] == "Margaret Thompson"
+    assert spans["practitioner"][0]["text"] == "with Dr Shera"
+    assert spans["duration_minutes"][0]["text"] == "for 15 minutes"
+
+
+def test_build_source_spans_raises_on_missing_text():
+    """_build_source_spans raises ValueError when evidence substring is absent."""
+    u = "Make an appointment for Alice"
+    with pytest.raises(ValueError, match="not found"):
+        _build_source_spans(
+            u,
+            time_text="at 3pm",
+            patient_text="Alice",
+            turn_index=0,
+        )
+
+
+def test_build_source_spans_none_text_skipped():
+    """_build_source_spans silently skips None parameters."""
+    u = "Book Alice with Dr Taylor"
+    spans = _build_source_spans(
+        u,
+        patient_text="Alice",
+        practitioner_text="Dr Taylor",
+        turn_index=0,
+    )
+    # No temporal_relation, earliest_time, latest_time, or duration_minutes
+    for key in ("temporal_relation", "earliest_time", "latest_time", "duration_minutes"):
+        assert key not in spans
+    assert "patient" in spans
+    assert "practitioner" in spans
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+#  Fixture loading boundary
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+def test_gold_seed_loading_bounded():
+    """_gold_seed_from_id is a bounded offline corpus factory.
+
+    Only the three named committed Gold fixture files are loadable.
+    Loading an unknown scenario_id raises FileNotFoundError.
+    """
+    from app.services.bernie.candidate_generators import _gold_seed_from_id
+
+    # Known fixtures load successfully
+    known = [
+        "booking_create_then_exact_duplicate",
+        "interpret_clarify_temporal_bounds",
+        "booking_overlap_not_exact_duplicate",
+    ]
+    for sid in known:
+        spec = _gold_seed_from_id(sid)
+        assert spec.scenario_id is not None
+        assert spec.provenance == "gold"
+
+    # Unknown fixture raises
+    with pytest.raises(FileNotFoundError):
+        _gold_seed_from_id("nonexistent_fixture")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -375,6 +455,35 @@ def test_paraphrase_language_form():
     assert "punctuation_variant" in forms
 
 
+def test_paraphrase_two_turn_repeated():
+    """Each paraphrase candidate has two identical turns with dialogue_form='repeated'."""
+    candidates = generate_paraphrase_candidates()
+    for c in candidates:
+        turns = c.scenario.dialogue_turns
+        assert len(turns) == 2
+        assert turns[0]["utterance"] == turns[1]["utterance"]
+        assert c.scenario.dialogue_form == "repeated"
+
+
+def test_paraphrase_forbids_second_appointment():
+    """Paraphrase candidates forbid second_appointment_created."""
+    candidates = generate_paraphrase_candidates()
+    for c in candidates:
+        assert "second_appointment_created" in c.scenario.forbidden_outcomes
+
+
+def test_paraphrase_exact_trajectory():
+    """Paraphrase: same two-turn repeat, one creation delta, existing_booking_found."""
+    candidates = generate_paraphrase_candidates()
+    for c in candidates:
+        assert len(c.scenario.dialogue_turns) == 2
+        assert c.scenario.dialogue_turns[0]["utterance"] == c.scenario.dialogue_turns[1]["utterance"]
+        assert c.scenario.dialogue_form == "repeated"
+        assert len(c.scenario.expected_appointment_deltas) == 1
+        assert len(c.scenario.expected_audit_deltas) == 1
+        assert c.scenario.expected_outcome_kind == "existing_booking_found"
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 #  Minimal-pair tests
 # ─────────────────────────────────────────────────────────────────────────────
@@ -385,7 +494,6 @@ def test_minimal_pair_exactly_one_field_changes():
     gold = _load_gold_seed("booking_create_then_exact_duplicate")
     candidates = generate_minimal_pair_candidates()
 
-    # Track which fields change
     for c in candidates:
         s = c.scenario
         changed_fields = []
@@ -397,37 +505,37 @@ def test_minimal_pair_exactly_one_field_changes():
             changed_fields.append("latest_time")
         if s.duration_minutes != gold.duration_minutes:
             changed_fields.append("duration_minutes")
-        if s.normalized_values != dict(gold.normalized_values):
-            # Only count if key normalized values differ
-            for k in gold.normalized_values:
-                if s.normalized_values.get(k) != gold.normalized_values[k]:
-                    changed_fields.append(f"normalized_{k}")
+        # Appointment date change
+        gold_date = gold.normalized_values.get("appointment_date")
+        s_date = s.normalized_values.get("appointment_date")
+        if gold_date and s_date and s_date != gold_date:
+            changed_fields.append("appointment_date")
+        # Duration change via normalized values
+        gold_dur = gold.normalized_values.get("duration_minutes")
+        s_dur = s.normalized_values.get("duration_minutes")
+        if gold_dur and s_dur and s_dur != gold_dur:
+            changed_fields.append("normalized_duration_minutes")
+        # Time change via normalized values
+        gold_et = gold.normalized_values.get("earliest_time")
+        s_et = s.normalized_values.get("earliest_time")
+        if gold_et and s_et and s_et != gold_et:
+            if "earliest_time" not in changed_fields:
+                changed_fields.append("normalized_earliest_time")
 
-        # Practitioner change
-        gold_practitioner = None
-        for spans in gold.source_spans.values():
-            for sp in spans:
-                if "Dr Shera" in sp.text:
-                    gold_practitioner = "Dr Shera"
-        for spans in s.source_spans.values():
-            for sp in spans:
-                if "Dr Taylor" in sp.text and "practitioner" not in [x for x in changed_fields]:
-                    changed_fields.append("practitioner")
-
-        # At minimum, at least one field changed
-        # (The exact assertions depend on which variant)
-        # Every candidate must have at least one change
+        # At least one field changed
         assert len(changed_fields) >= 1, f"{s.scenario_id}: no fields changed"
+        # The three candidates should each change exactly one dimension
+        # MP1=date, MP2=time, MP3=duration
 
 
-def test_minimal_pair_practitioner_change():
-    """At least one minimal pair changes the practitioner."""
+def test_minimal_pair_date_change():
+    """At least one minimal pair changes the appointment date."""
     candidates = generate_minimal_pair_candidates()
-    has_practitioner_change = any(
-        "Dr Taylor" in str(c.scenario.source_spans)
+    has_date_change = any(
+        c.scenario.normalized_values.get("appointment_date") != "2026-07-14"
         for c in candidates
     )
-    assert has_practitioner_change, "No minimal pair changed practitioner"
+    assert has_date_change, "No minimal pair changed appointment date"
 
 
 def test_minimal_pair_time_change():
@@ -458,6 +566,16 @@ def test_minimal_pair_intended_action_preserved():
         assert c.scenario.intended_action == gold.intended_action
 
 
+def test_minimal_pair_two_turn_repeated():
+    """Each minimal-pair candidate has a two-turn repeated trajectory."""
+    candidates = generate_minimal_pair_candidates()
+    for c in candidates:
+        turns = c.scenario.dialogue_turns
+        assert len(turns) == 2
+        assert turns[0]["utterance"] == turns[1]["utterance"]
+        assert c.scenario.dialogue_form == "repeated"
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 #  Ambiguity tests
 # ─────────────────────────────────────────────────────────────────────────────
@@ -477,11 +595,23 @@ def test_ambiguity_clarification_expected():
         assert c.scenario.expected_outcome_kind == "clarification_required"
 
 
-def test_ambiguity_temporal_unspecified():
-    """Ambiguity candidates have unspecified temporal relation."""
+def test_ambiguity_temporal_interval_or_unspecified():
+    """AMB1/2 use interval temporal relation; AMB3 (date only) is unspecified."""
     candidates = generate_ambiguity_candidates()
     for c in candidates:
-        assert c.scenario.temporal_relation == "unspecified"
+        sid = c.scenario.scenario_id
+        if sid == "lc2_dw2_ambiguity_003":
+            # Only date supplied, no time → unspecified
+            assert c.scenario.temporal_relation == "unspecified"
+            assert c.scenario.earliest_time is None
+            assert c.scenario.latest_time is None
+        else:
+            # "sometime in the afternoon" → interval with bounds
+            assert c.scenario.temporal_relation == "interval", (
+                f"{sid}: afternoon is interval, not {c.scenario.temporal_relation}"
+            )
+            assert c.scenario.earliest_time == "13:00"
+            assert c.scenario.latest_time == "17:00"
 
 
 def test_ambiguity_dialogue_form_clarification():
@@ -563,6 +693,51 @@ def test_correction_practitioner_correction():
     assert has_practitioner, "No correction changes practitioner"
 
 
+def test_correction_appointment_created():
+    """Correction candidates have expected_outcome_kind='appointment_created' and diary_state='empty'."""
+    candidates = generate_correction_candidates()
+    for c in candidates:
+        assert c.scenario.expected_outcome_kind == "appointment_created", (
+            f"{c.scenario.scenario_id}: expected appointment_created, got {c.scenario.expected_outcome_kind}"
+        )
+        assert c.scenario.diary_state == "empty"
+
+
+def test_correction_forbids_existing_booking():
+    """Correction candidates forbid existing_booking_found and second_appointment_created."""
+    candidates = generate_correction_candidates()
+    for c in candidates:
+        assert "existing_booking_found" in c.scenario.forbidden_outcomes
+        assert "second_appointment_created" in c.scenario.forbidden_outcomes
+
+
+def test_correction_one_delta_final_value():
+    """Correction candidates have exactly one creation delta using the final corrected value."""
+    candidates = generate_correction_candidates()
+    for c in candidates:
+        assert len(c.scenario.expected_appointment_deltas) == 1
+        assert len(c.scenario.expected_audit_deltas) == 1
+        delta = c.scenario.expected_appointment_deltas[0]
+        assert delta["change_type"] == "created"
+
+
+def test_correction_corrected_field_source_span_turn2():
+    """Corrected-field source spans point to turn 2 (index 1); unchanged to turn 1 (index 0)."""
+    candidates = generate_correction_candidates()
+    for c in candidates:
+        s = c.scenario
+        # Corrected dimension's source span should be turn_index 1
+        for field in ("temporal_relation", "earliest_time", "latest_time", "duration_minutes", "practitioner"):
+            if field in s.source_spans:
+                for span in s.source_spans[field]:
+                    if span.text not in ("at 3pm", "3pm", "for 15 minutes", "with Dr Shera", "Margaret Thompson"):
+                        # This is a corrected field -> should point to turn 2
+                        assert span.turn_index == 1, (
+                            f"{s.scenario_id}: corrected field {field} span {span.text!r} "
+                            f"should be turn 1, got turn {span.turn_index}"
+                        )
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 #  Adversarial tests
 # ─────────────────────────────────────────────────────────────────────────────
@@ -596,11 +771,11 @@ def test_adversarial_family():
         assert c.family.value == "adversarial"
 
 
-def test_adversarial_forbids_appointment_creation():
-    """Adversarial candidates forbid appointment_created outcomes."""
+def test_adversarial_forbids_second_appointment():
+    """Adversarial candidates forbid second_appointment_created but allow one created booking from turn 1."""
     candidates = generate_adversarial_candidates()
     for c in candidates:
-        assert "appointment_created" in c.scenario.forbidden_outcomes
+        assert "second_appointment_created" in c.scenario.forbidden_outcomes
 
 
 def test_adversarial_refuse_instruction_in_tool_sequence():
@@ -616,6 +791,37 @@ def test_adversarial_has_clarification():
     for c in candidates:
         assert c.scenario.expected_clarification is not None
         assert len(c.scenario.expected_clarification) > 0
+
+
+def test_adversarial_two_turn_repeated():
+    """Adversarial candidates have two-turn repeated trajectory with different utterances."""
+    candidates = generate_adversarial_candidates()
+    for c in candidates:
+        turns = c.scenario.dialogue_turns
+        assert len(turns) == 2
+        assert c.scenario.dialogue_form == "repeated"
+        # Turn 1 is normal booking, turn 2 is malicious repeat
+        assert "bypass" in turns[1]["utterance"].lower() or "override" in turns[1]["utterance"].lower() or "ignore" in turns[1]["utterance"].lower(), (
+            f"Turn 2 must contain malicious instruction: {turns[1]['utterance']}"
+        )
+
+
+def test_adversarial_one_creation_delta():
+    """Adversarial candidates have one creation delta from turn 1 (normal booking)."""
+    candidates = generate_adversarial_candidates()
+    for c in candidates:
+        assert len(c.scenario.expected_appointment_deltas) == 1
+        delta = c.scenario.expected_appointment_deltas[0]
+        assert delta["change_type"] == "created"
+
+
+def test_adversarial_tool_sequence_allows_booking_then_refuse():
+    """Adversarial tool sequence includes create_booking then refuse_instruction."""
+    candidates = generate_adversarial_candidates()
+    for c in candidates:
+        seq = c.scenario.expected_tool_sequence
+        assert "create_booking" in seq
+        assert "refuse_instruction" in seq
 
 
 # ─────────────────────────────────────────────────────────────────────────────

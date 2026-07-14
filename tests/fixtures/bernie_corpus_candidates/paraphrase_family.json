@@ -32,10 +32,14 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "booking_create",
-      "description": "Polite paraphrase: receptionist requests appointment for Margaret Thompson with Dr Shera at 3pm for 15 minutes.",
+      "description": "Polite paraphrase: two-turn repeated, receptionist requests appointment for Margaret Thompson with Dr Shera at 3pm for 15 minutes.",
       "dialogue_turns": [
         {
           "turn": 1,
+          "utterance": "Could I schedule Margaret Thompson with Dr Shera tomorrow at 3pm for 15 minutes, please?"
+        },
+        {
+          "turn": 2,
           "utterance": "Could I schedule Margaret Thompson with Dr Shera tomorrow at 3pm for 15 minutes, please?"
         }
       ],
@@ -110,7 +114,7 @@
       "duration_semantics": "exact",
       "diary_state": "exact_duplicate",
       "entity_state": "exact",
-      "dialogue_form": "one_shot",
+      "dialogue_form": "repeated",
       "language_form": "paraphrase",
       "initial_diary_state": {
         "reference_date": "2026-07-13",
@@ -189,10 +193,14 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "booking_create",
-      "description": "Casual paraphrase: receptionist states need for Margaret Thompson with Dr Shera at 3pm for 15 minutes.",
+      "description": "Casual paraphrase: two-turn repeated, receptionist states need for Margaret Thompson with Dr Shera at 3pm for 15 minutes.",
       "dialogue_turns": [
         {
           "turn": 1,
+          "utterance": "I need to make an appointment for Margaret Thompson with Dr Shera tomorrow at 3pm, 15 minutes should be enough."
+        },
+        {
+          "turn": 2,
           "utterance": "I need to make an appointment for Margaret Thompson with Dr Shera tomorrow at 3pm, 15 minutes should be enough."
         }
       ],
@@ -267,7 +275,7 @@
       "duration_semantics": "exact",
       "diary_state": "exact_duplicate",
       "entity_state": "exact",
-      "dialogue_form": "one_shot",
+      "dialogue_form": "repeated",
       "language_form": "paraphrase",
       "initial_diary_state": {
         "reference_date": "2026-07-13",
@@ -346,10 +354,14 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "booking_create",
-      "description": "Punctuation variant: receptionist requests booking for Margaret Thompson with Dr Shera at 3pm for 15 minutes.",
+      "description": "Punctuation variant: two-turn repeated, receptionist requests booking for Margaret Thompson with Dr Shera at 3pm for 15 minutes.",
       "dialogue_turns": [
         {
           "turn": 1,
+          "utterance": "Please book Margaret Thompson for an appointment with Dr Shera tomorrow at 3pm for 15 minutes."
+        },
+        {
+          "turn": 2,
           "utterance": "Please book Margaret Thompson for an appointment with Dr Shera tomorrow at 3pm for 15 minutes."
         }
       ],
@@ -424,7 +436,7 @@
       "duration_semantics": "exact",
       "diary_state": "exact_duplicate",
       "entity_state": "exact",
-      "dialogue_form": "one_shot",
+      "dialogue_form": "repeated",
       "language_form": "punctuation_variant",
       "initial_diary_state": {
         "reference_date": "2026-07-13",

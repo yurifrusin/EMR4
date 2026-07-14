@@ -32,7 +32,7 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "clarify_temporal",
-      "description": "Ambiguity: specific time omitted, 'sometime in the afternoon' — clarification required.",
+      "description": "Ambiguity: 'sometime in the afternoon' is an interval (13:00-17:00) requiring exact time clarification.",
       "dialogue_turns": [
         {
           "turn": 1,
@@ -43,11 +43,13 @@
       "clinic_clock": "2026-07-13T09:00:00+10:00",
       "intended_action": "create",
       "action_semantics": "ambiguous",
-      "temporal_relation": "unspecified",
-      "earliest_time": null,
-      "latest_time": null,
+      "temporal_relation": "interval",
+      "earliest_time": "13:00",
+      "latest_time": "17:00",
       "normalized_values": {
-        "time_period": "afternoon"
+        "time_period": "afternoon",
+        "earliest_time": "13:00",
+        "latest_time": "17:00"
       },
       "source_spans": {
         "temporal_relation": [
@@ -168,7 +170,7 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "clarify_temporal",
-      "description": "Ambiguity: practitioner unspecified — clarification required.",
+      "description": "Ambiguity: practitioner unspecified, interval temporal relation retained — clarification required for practitioner.",
       "dialogue_turns": [
         {
           "turn": 1,
@@ -179,11 +181,13 @@
       "clinic_clock": "2026-07-13T09:00:00+10:00",
       "intended_action": "create",
       "action_semantics": "ambiguous",
-      "temporal_relation": "unspecified",
-      "earliest_time": null,
-      "latest_time": null,
+      "temporal_relation": "interval",
+      "earliest_time": "13:00",
+      "latest_time": "17:00",
       "normalized_values": {
-        "time_period": "afternoon"
+        "time_period": "afternoon",
+        "earliest_time": "13:00",
+        "latest_time": "17:00"
       },
       "source_spans": {
         "temporal_relation": [
@@ -303,7 +307,7 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "clarify_temporal",
-      "description": "Ambiguity: no time or duration specified — clarification required.",
+      "description": "Ambiguity: only date supplied, no time or duration — clarification required for time/duration.",
       "dialogue_turns": [
         {
           "turn": 1,
