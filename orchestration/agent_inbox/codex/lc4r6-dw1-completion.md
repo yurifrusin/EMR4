@@ -24,21 +24,13 @@ Implemented the bounded LC4R6 temporal source-evidence audit as specified in
 This completion artifact records exact implementation commit provenance in a
 non-circular way:
 
-1. **Implementation commit:** The five files listed above were committed as
-   implementation commit `<LC4R6_IMPL_COMMIT>` on branch
-   `codex/lc4r6-dw1-temporal-audit`.
-2. **Evidence commit:** This completion artifact was updated (if necessary)
-   in a final evidence commit `<LC4R6_EVIDENCE_COMMIT>` that records the
-   implementation commit hash above.
+1. **Implementation commit:** `645d35f3` — the five owned files committed on
+   branch `codex/lc4r6-dw1-temporal-audit`.
+2. **Evidence commit:** `<LC4R6_EVIDENCE_COMMIT>` — this completion artifact
+   updated to record `645d35f3` as the implementation commit.
 
-After both commits, the implementation commit hash is known and recorded here.
-The evidence commit does not modify any implementation file — only this
-completion artifact.
-
-> **Note to future workers:** Replace `<LC4R6_IMPL_COMMIT>` with the SHA of
-> the implementation commit (the commit containing the five owned files) and
-> `<LC4R6_EVIDENCE_COMMIT>` with the SHA of this completion commit.  These
-> placeholders are used because the hashes are not known until after commit.
+The evidence commit modifies only this completion artifact.  No implementation
+file was changed after the implementation commit.
 
 ## Verification
 
