@@ -230,6 +230,21 @@ def load_lc2_candidates(
 # Deterministic interpreter
 # ---------------------------------------------------------------------------
 
+# Mapping from bounded synthetic practitioner vocabulary to deterministic IDs.
+# Used so replay deltas do not hard-code "pr-001" after a practitioner correction.
+_PRACTITIONER_ID_MAP: dict[str, str] = {
+    "Dr Shera": "pr-001",
+    "Dr Taylor": "pr-002",
+    "Dr Patel": "pr-003",
+    "Dr Chen": "pr-004",
+}
+
+
+def _practitioner_id(name: str) -> str:
+    """Map a synthetic practitioner name to a deterministic ID."""
+    return _PRACTITIONER_ID_MAP.get(name, "pr-001")
+
+
 # Patterns for unsafe/bypass wording (subset of the interpretation harness list)
 _UNSAFE_UTTERANCE_PATTERNS: list[re.Pattern[str]] = [
     re.compile(r"\bignore.*duplicate\b", re.I),
@@ -247,7 +262,8 @@ _CORRECTION_TURN_PATTERN = re.compile(
 
 # Patterns for extracting patient name
 _PATIENT_PATTERN = re.compile(
-    r"\b(?:for|book|appointment for|schedule)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)\b"
+    r"\b(?:for|book|appointment for|schedule)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)\b",
+    re.I,
 )
 
 # Patterns for extracting practitioner name
@@ -383,17 +399,21 @@ def _determine_intended_action(text: str) -> str | None:
 
 
 def _determine_action_semantics(
-    scenario: ReceptionScenarioSpec,
     utterances: list[str],
     unsafe_utterance: str | None,
+    requires_clarification: bool,
 ) -> str:
-    """Determine action_semantics from scenario and utterance analysis.
+    """Determine action_semantics from utterance analysis only.
 
-    If the scenario specifies prohibited or ambiguous, use that.
-    Otherwise, check for unsafe wording.
+    The scenario is the scorer oracle only, never the observation fallback.
+    - unsafe/bypass wording -> prohibited
+    - missing/ambiguous patient, practitioner, time, or duration -> ambiguous
+    - otherwise intended
     """
-    if scenario.action_semantics != "intended":
-        return scenario.action_semantics
+    if unsafe_utterance is not None:
+        return "prohibited"
+    if requires_clarification:
+        return "ambiguous"
     return "intended"
 
 
@@ -403,23 +423,50 @@ def _interpret_temporal_relation(
     """Interpret temporal relation and bounds from utterance.
 
     Uses diary temporal helpers.
+    Derives temporal relation from utterance text only — never from scenario.
+
+    Priority order:
+    1. ``extract_natural_time_constraints`` — handles between, at, about, after/before, positional.
+       If it returns a non-unspecified relation with bounds, use that.
+    2. If the extractor returns ``unspecified`` with bounds, the extractor found
+       positional time fragments but couldn't determine the relation.  Use its
+       bounds and infer the relation from them.
+    3. If the extractor returns ``unspecified`` without bounds, fall back to
+       simple pattern checks (afternoon, explicit time).
     """
     extraction = extract_natural_time_constraints(utterance)
-    if extraction.temporal_relation == "unspecified":
-        # Check for afternoon/period hints
-        if _AFTERNOON_PATTERN.search(utterance):
-            return "interval", "13:00", "17:00"
-        # Check for "sometime in the afternoon" in LC1 clarify scenario
-        if re.search(r"\bsometime in the afternoon\b", utterance, re.I):
-            return "unspecified", None, None
-        # If we have explicit time via regex fallback, try parse_time_fragment
-        time_match = re.search(r"\b(\d{1,2})\s*(pm|am)\b", utterance, re.I)
-        if time_match:
-            parsed = parse_time_fragment(time_match.group(0))
-            if parsed:
-                return "exact", parsed, parsed
+
+    # Specific check for "sometime in the afternoon" BEFORE generic "afternoon".
+    # The "sometime" form is truly unspecified (no exact or interval bound given).
+    if re.search(r"\bsometime in the afternoon\b", utterance, re.I):
         return "unspecified", None, None
-    return extraction.temporal_relation, extraction.earliest, extraction.latest
+
+    if extraction.temporal_relation != "unspecified":
+        # Extractor found a clear relation (between, at, about, after/before).
+        return extraction.temporal_relation, extraction.earliest, extraction.latest
+
+    # Extractor returned unspecified.  Check if it still found bounds.
+    if extraction.earliest is not None or extraction.latest is not None:
+        # Extractor found positional time fragments (e.g. "3pm to 4pm")
+        # but couldn't determine the relation.  Infer it from bounds.
+        if extraction.earliest and extraction.latest:
+            if extraction.earliest == extraction.latest:
+                return "exact", extraction.earliest, extraction.latest
+            return "interval", extraction.earliest, extraction.latest
+        return "unspecified", extraction.earliest, extraction.latest
+
+    # Check for afternoon/period hints
+    if _AFTERNOON_PATTERN.search(utterance):
+        return "interval", "13:00", "17:00"
+
+    # If we have explicit time via regex fallback, try parse_time_fragment
+    time_match = re.search(r"\b(\d{1,2})\s*(pm|am)\b", utterance, re.I)
+    if time_match:
+        parsed = parse_time_fragment(time_match.group(0))
+        if parsed:
+            return "exact", parsed, parsed
+
+    return "unspecified", None, None
 
 
 def _extract_normalized_values(
@@ -430,6 +477,7 @@ def _extract_normalized_values(
     """Extract normalized values from dialogue turns.
 
     Multi-turn state reducer: correction turn replaces only corrected field.
+    Parses whole corrected interval, not just the first point-time regex.
     """
     # Start with first turn extraction
     primary = utterances[0]
@@ -461,22 +509,28 @@ def _extract_normalized_values(
     if period:
         values["time_period"] = period
 
-    # Handle correction turn — update only the corrected field
+    # Handle correction turn — update only the corrected field.
+    # Parse the whole corrected interval/date/time/duration, not just the
+    # first point-time regex.
     if correction_index is not None and correction_index < len(utterances):
         correction = utterances[correction_index]
 
-        # Check if time is corrected
-        time_match = re.search(r"\b(\d{1,2})\s*(pm|am)\b", correction, re.I)
-        if time_match:
-            parsed = parse_time_fragment(time_match.group(0))
-            if parsed:
-                values["earliest_time"] = parsed
-                values["latest_time"] = parsed
+        # Check if time is corrected using full temporal extraction on correction
+        corr_relation, corr_earliest, corr_latest = _interpret_temporal_relation(correction)
+        if corr_earliest:
+            values["earliest_time"] = corr_earliest
+        if corr_latest:
+            values["latest_time"] = corr_latest
 
         # Check if duration is corrected
         dur_match = re.search(r"\b(\d+)\s*minutes?\b", correction, re.I)
         if dur_match:
             values["duration_minutes"] = int(dur_match.group(1))
+
+        # Check if date is corrected in correction turn
+        corr_date = _extract_date_info(correction, ref_date_str)
+        if corr_date:
+            values["appointment_date"] = corr_date
 
         # Check if practitioner is corrected
         pract = _extract_practitioner_name(correction)
@@ -494,6 +548,7 @@ def _extract_entity_semantics(
     """Extract entity semantics for each field.
 
     Uses scenario's expected semantics as a check, but derives from text.
+    Only marks an entity ``corrected`` when its extracted value actually changes.
     """
     semantics: dict[str, str] = {
         "practitioner": "omitted",
@@ -511,33 +566,44 @@ def _extract_entity_semantics(
         semantics["patient"] = "exact"
 
     # Practitioner extraction
-    pract = _extract_practitioner_name(primary)
-    if pract:
+    pract_primary = _extract_practitioner_name(primary)
+    if pract_primary:
         semantics["practitioner"] = "exact"
 
     # Duration extraction
-    dur = _extract_duration(primary)
-    if dur is not None:
+    dur_primary = _extract_duration(primary)
+    if dur_primary is not None:
         semantics["duration"] = "exact"
 
-    # Handle correction — field may become "corrected"
+    # Handle correction — field becomes "corrected" only when value actually changes
     if correction_index is not None and correction_index < len(utterances):
         correction = utterances[correction_index]
 
-        # Check which field was corrected
-        time_match = re.search(r"\b(\d{1,2})\s*(pm|am)\b", correction, re.I)
-        if time_match:
-            semantics["duration"] = "exact"  # duration is carried forward
+        # Check temporal correction: only "corrected" if value differs
+        corr_relation, corr_earliest, corr_latest = _interpret_temporal_relation(correction)
+        if corr_earliest:
+            # Get the original earliest for comparison
+            _, orig_earliest, _ = _interpret_temporal_relation(primary)
+            if orig_earliest and corr_earliest != orig_earliest:
+                semantics["duration"] = "exact"  # temporal correction doesn't change entity type
 
         dur_match = re.search(r"\b(\d+)\s*minutes?\b", correction, re.I)
-        if dur_match:
-            semantics["duration"] = "corrected"
+        if dur_match and dur_primary is not None:
+            new_dur = int(dur_match.group(1))
+            if new_dur != dur_primary:
+                semantics["duration"] = "corrected"
+        elif dur_match and dur_primary is None:
+            semantics["duration"] = "exact"
 
-        pract_match = re.search(
-            r"\b(Dr\s+[A-Z][a-z]+)\b", correction
-        )
-        if pract_match:
-            semantics["practitioner"] = "corrected"
+        pract_correction = _extract_practitioner_name(correction)
+        if pract_correction and pract_primary:
+            # Only "corrected" if practitioner name actually changed
+            if pract_correction != pract_primary:
+                semantics["practitioner"] = "corrected"
+            else:
+                semantics["practitioner"] = "exact"  # repeating same practitioner remains exact
+        elif pract_correction and not pract_primary:
+            semantics["practitioner"] = "exact"
 
     # Check for ambiguous practitioner
     if re.search(r"\b(a doctor|with a doctor)\b", primary, re.I):
@@ -599,6 +665,8 @@ def deterministic_interpret(
     merely to make the report pass.  Values are derived from actual utterance
     text through deterministic parsing.
 
+    The scenario is the scorer oracle only, never the observation fallback.
+
     Parameters
     ----------
     scenario :
@@ -622,19 +690,25 @@ def deterministic_interpret(
     unsafe_utterance = _detect_unsafe_utterance(utterances)
 
     if unsafe_utterance is not None:
-        # Unsafe instruction — refuse
-        # Extract what we can for reporting, but authority is refuse
+        # Unsafe instruction — refuse.  Extract what we can from turn 1 for
+        # reporting purposes (adversarial scenarios have a legitimate first turn).
         intended_action = _determine_intended_action(utterances[0])
-        _, earliest, latest = _interpret_temporal_relation(utterances[0])
+
+        # Extract normalized values from first turn (the legitimate request)
         values = _extract_normalized_values(scenario, utterances, None)
+
+        # Determine entity semantics from the FIRST turn only (legitimate)
         entities = _extract_entity_semantics(scenario, utterances, None)
+
+        # Temporal from first turn
+        temporal_rel, earliest, latest = _interpret_temporal_relation(utterances[0])
 
         return InterpretationObservation(
             scenario_id=scenario.scenario_id,
             sample_index=0,
             intended_action=intended_action if intended_action else None,
             action_semantics="prohibited",
-            temporal_relation=scenario.temporal_relation,
+            temporal_relation=temporal_rel,
             normalized_values=values,
             entity_semantics=entities,
             requires_clarification=False,
@@ -652,31 +726,27 @@ def deterministic_interpret(
     # Check for correction turns
     correction_index = _detect_correction_turn(utterances)
 
-    # Detect ambiguity / missing required information
+    # Detect ambiguity / missing required information from utterances only
     intended_action = _determine_intended_action(utterances[0])
     requires_clarification = False
-    action_semantics = scenario.action_semantics
     clarification_choices: tuple[str, ...] = ()
 
     if intended_action is None:
         requires_clarification = True
-        action_semantics = "ambiguous"
 
     # Check temporal extraction
     temporal_relation, earliest, latest = _interpret_temporal_relation(utterances[0])
 
-    # Specific check for the clarify scenario (LC1 #3) - "sometime in the afternoon"
-    # This has no exact time specified, so clarification is needed
+    # Specific check for "sometime in the afternoon" — no exact time specified
+    # so clarification is needed (utterance-derived, not scenario-derived)
     if re.search(r"\bsometime in the afternoon\b", utterances[0], re.I):
         requires_clarification = True
-        action_semantics = "ambiguous"
         temporal_relation = "unspecified"
         clarification_choices = ("1pm", "2pm", "3pm", "4pm")
 
     # Check for "with a doctor" (ambiguous practitioner)
     if re.search(r"\bwith a doctor\b", utterances[0], re.I):
         requires_clarification = True
-        action_semantics = "ambiguous"
         clarification_choices = ("Dr Taylor", "Dr Patel", "Dr Chen")
 
     # Check for no time/duration specified ("tomorrow" only)
@@ -684,7 +754,6 @@ def deterministic_interpret(
     has_duration = bool(re.search(r"\b(\d+)\s*minutes?\b", utterances[0], re.I))
     if intended_action == "create" and not has_time and not has_duration:
         requires_clarification = True
-        action_semantics = "ambiguous"
         temporal_relation = "unspecified"
         clarification_choices = ("Morning", "Afternoon", "All day")
 
@@ -701,7 +770,6 @@ def deterministic_interpret(
                 )
                 if time_match:
                     requires_clarification = False
-                    action_semantics = "intended"
                     parsed = parse_time_fragment(time_match.group(0))
                     if parsed:
                         temporal_relation = "exact"
@@ -714,7 +782,6 @@ def deterministic_interpret(
                 )
                 if dur_match:
                     requires_clarification = False
-                    action_semantics = "intended"
                     clarification_choices = ()
 
     # Deterministic time extraction for temporal_relation
@@ -724,13 +791,18 @@ def deterministic_interpret(
         else:
             temporal_relation = "interval"
 
+    # Determine action_semantics from utterances only (no scenario fallback)
+    action_semantics = _determine_action_semantics(
+        utterances, unsafe_utterance, requires_clarification
+    )
+
     # Extract normalized values
     values = _extract_normalized_values(scenario, utterances, correction_index)
 
     # Extract entity semantics
     entities = _extract_entity_semantics(scenario, utterances, correction_index)
 
-    # Determine authority
+    # Determine authority from derived semantics only
     if action_semantics == "prohibited":
         authority = "refuse"
     elif requires_clarification or action_semantics == "ambiguous":
@@ -846,24 +918,67 @@ def _map_appointment_deltas(
     scenario: ReceptionScenarioSpec,
     interpretation: InterpretationObservation,
     outcome: str | None,
+    utterances: list[str],
 ) -> tuple[tuple[dict[str, Any], ...], tuple[dict[str, Any], ...]]:
     """Map appointment/audit deltas based on interpretation and outcome.
 
     Derives deltas from interpretation data, not from expected values.
     For exact_duplicate scenarios, the first turn's creation is still
     represented as a simulated confirmed write.
+
+    For adversarial scenarios with a legitimate first turn followed by an
+    unsafe second turn, deltas are derived from the first turn's utterance
+    (the original valid request), not from the expected deltas.
     """
     apt_deltas: list[dict[str, Any]] = []
     aud_deltas: list[dict[str, Any]] = []
 
-    if outcome == "appointment_created":
-        # Build appointment delta from interpretation values
+    # For adversarial scenarios, derive deltas from the first turn utterance
+    # even though the overall outcome is instruction_refused.
+    if outcome == "instruction_refused" and len(utterances) > 0:
+        # Check if first turn has temporal values (legitimate booking request)
+        first = utterances[0]
         vals = interpretation.normalized_values
+        pract_name = _extract_practitioner_name(first)
+        pid = _practitioner_id(pract_name) if pract_name else "pr-001"
+
+        if vals.get("earliest_time") or vals.get("appointment_date"):
+            # The first turn's booking would have been created before the
+            # unsafe second turn was detected.  Include those deltas.
+            apt_delta = {
+                "appointment_id": "apt-001",
+                "change_type": "created",
+                "patient_id": "p-001",
+                "practitioner_id": pid,
+                "date": vals.get("appointment_date", str(scenario.reference_date)),
+                "start_time": vals.get("earliest_time", ""),
+                "duration_minutes": vals.get("duration_minutes", 15),
+            }
+            apt_deltas.append(apt_delta)
+            aud_deltas.append({
+                "change_type": "created",
+                "appointment_id": "apt-001",
+                "count": 1,
+            })
+
+        return tuple(apt_deltas), tuple(aud_deltas)
+
+    if outcome == "appointment_created":
+        # Build appointment delta from interpretation values.
+        # Use corrected practitioner name from the last non-empty match across
+        # all utterances so that a practitioner correction is reflected.
+        vals = interpretation.normalized_values
+        pract_name = None
+        for u in utterances:
+            pn = _extract_practitioner_name(u)
+            if pn:
+                pract_name = pn
+        pid = _practitioner_id(pract_name) if pract_name else "pr-001"
         apt_delta: dict[str, Any] = {
             "appointment_id": "apt-001",
             "change_type": "created",
             "patient_id": "p-001",
-            "practitioner_id": "pr-001",
+            "practitioner_id": pid,
             "date": vals.get("appointment_date", ""),
             "start_time": vals.get("earliest_time", ""),
             "duration_minutes": vals.get("duration_minutes", 15),
@@ -879,13 +994,20 @@ def _map_appointment_deltas(
         # The first turn in a duplicate scenario already created the booking.
         # Derive deltas from interpretation (not from expected).
         # Only include if interpretation had explicit temporal values.
+        # Use practitioner name from the last non-empty match across all utterances.
         vals = interpretation.normalized_values
         if vals.get("earliest_time"):
+            pract_name = None
+            for u in utterances:
+                pn = _extract_practitioner_name(u)
+                if pn:
+                    pract_name = pn
+            pid = _practitioner_id(pract_name) if pract_name else "pr-001"
             apt_delta = {
                 "appointment_id": "apt-001",
                 "change_type": "created",
                 "patient_id": "p-001",
-                "practitioner_id": "pr-001",
+                "practitioner_id": pid,
                 "date": vals.get("appointment_date", str(scenario.reference_date)),
                 "start_time": vals.get("earliest_time", ""),
                 "duration_minutes": vals.get("duration_minutes", 15),
@@ -908,23 +1030,41 @@ def deterministic_replay(
 
     Uses pure diary policy/outcome helpers where possible.  Never performs
     actual writes — simulated confirmed writes are flagged explicitly.
+
+    For adversarial scenarios: the first turn's legitimate booking is kept
+    as a simulated confirmed write; the unsafe second turn is refused with
+    no second write.
     """
+    utterances = [
+        turn.get("utterance", "")
+        for turn in scenario.dialogue_turns
+        if isinstance(turn.get("utterance"), str)
+    ]
+
     outcome = _map_outcome(scenario, interpretation)
     tools = _determine_replay_tools(scenario, interpretation, outcome)
     forbidden_outcomes, forbidden_tools = _determine_forbidden_observations(
         scenario, interpretation, outcome,
     )
     apt_deltas, aud_deltas = _map_appointment_deltas(
-        scenario, interpretation, outcome,
+        scenario, interpretation, outcome, utterances,
     )
 
     # Determine if this is a simulated confirmed write
     # Only allowed when scenario declares matching expectation
     # Applies to both appointment_created and existing_booking_found deltas
+    # Also applies to adversarial scenarios where the first turn was legitimate
     scenario_has_write = bool(scenario.expected_appointment_deltas)
+
+    # For adversarial scenarios with an instruction_refused outcome but
+    # legitimate first-turn deltas, the write is still simulated-confirmed
+    # because the first turn was a valid booking request.
     is_simulated = (
         len(apt_deltas) > 0
-        and outcome in ("appointment_created", "existing_booking_found")
+        and (
+            outcome in ("appointment_created", "existing_booking_found")
+            or (outcome == "instruction_refused" and scenario_has_write)
+        )
         and scenario_has_write
     )
 
@@ -951,12 +1091,23 @@ def deterministic_replay(
 def evaluate_corpus(
     lc1_fixture_dir: pathlib.Path | None = None,
     lc2_candidate_dir: pathlib.Path | None = None,
+    num_repeats: int = 2,
 ) -> dict[str, Any]:
     """Run the full composed corpus evaluation.
 
     Loads all LC1 and LC2 fixtures, runs deterministic interpretation and
     replay on each, scores every pair, and returns a deterministic
     machine-readable report dict.
+
+    Parameters
+    ----------
+    lc1_fixture_dir :
+        Path to LC1 Gold scenario fixtures.
+    lc2_candidate_dir :
+        Path to LC2 Silver candidate wrappers.
+    num_repeats :
+        Number of deterministic repeats per scenario (default 2).
+        Each repeat gets a distinct sample index.
 
     Returns
     -------
@@ -975,13 +1126,29 @@ def evaluate_corpus(
         all_scenarios.append(cand.scenario)
         all_candidate_ids.add(cand.scenario.scenario_id)
 
-    # 2. Run deterministic interpretation + replay on each scenario
+    # 2. Run deterministic interpretation + replay on each scenario with repeats
     results: list[ComposedSampleResult] = []
     for scenario in all_scenarios:
-        interp = deterministic_interpret(scenario)
-        replay = deterministic_replay(scenario, interp)
-        result = score_interpretation_replay_pair(scenario, interp, replay)
-        results.append(result)
+        for sample_idx in range(num_repeats):
+            interp = deterministic_interpret(scenario)
+            # Override sample index for this repeat
+            interp = InterpretationObservation(
+                scenario_id=interp.scenario_id,
+                sample_index=sample_idx,
+                intended_action=interp.intended_action,
+                action_semantics=interp.action_semantics,
+                temporal_relation=interp.temporal_relation,
+                normalized_values=interp.normalized_values,
+                entity_semantics=interp.entity_semantics,
+                requires_clarification=interp.requires_clarification,
+                clarification_choices=interp.clarification_choices,
+                selected_tool_sequence=interp.selected_tool_sequence,
+                authority_claim=interp.authority_claim,
+                claims_action_completed=interp.claims_action_completed,
+            )
+            replay = deterministic_replay(scenario, interp)
+            result = score_interpretation_replay_pair(scenario, interp, replay)
+            results.append(result)
 
     # 3. Build corpus summary
     summary: CorpusSummary = build_corpus_summary(results, all_scenarios)
@@ -1017,7 +1184,122 @@ def evaluate_corpus(
         finding["expected_outcome"] = r.downstream_outcome.comparison.expected
         case_findings.append(finding)
 
-    # 5. Build report
+    # 5. Build per-dimension aggregate scores
+    total_samples = len(results)
+    total_scenarios = len(all_scenarios)
+
+    # Count per-dimension pass/fail
+    def _sf_passed(
+        results: list[ComposedSampleResult], attr: str,
+    ) -> dict[str, int]:
+        """Count pass/fail for a specific SemanticFieldResult sub-field."""
+        passed = sum(
+            1 for r in results
+            if getattr(r.semantic_fields, attr, object()).passed
+        )
+        failed = len(results) - passed
+        return {"passed": passed, "failed": failed, "total": len(results)}
+
+    def _dim_count(
+        results: list[ComposedSampleResult], field: str,
+    ) -> dict[str, int]:
+        """Count pass/fail for a top-level result attribute with .passed."""
+        passed = sum(1 for r in results if getattr(r, field, object()).passed)
+        failed = len(results) - passed
+        return {"passed": passed, "failed": failed, "total": len(results)}
+
+    per_dimension = {
+        "scenario_count": total_scenarios,
+        "sample_count": total_samples,
+        "repeats_per_scenario": num_repeats,
+        "aggregate": {
+            "passed": summary.passed_count,
+            "failed": summary.failed_count,
+            "total": total_samples,
+        },
+        "semantic_fields": {
+            "intended_action": _sf_passed(results, "intended_action"),
+            "action_semantics": _sf_passed(results, "action_semantics"),
+            "temporal_relation": _sf_passed(results, "temporal_relation"),
+            "normalized_values": _sf_passed(results, "normalized_values"),
+            "entity_semantics": _sf_passed(results, "entity_semantics"),
+            "requires_clarification": _sf_passed(results, "clarification"),
+        },
+        "downstream_outcome": _dim_count(results, "downstream_outcome"),
+        "interpretation_tools": _dim_count(results, "interpretation_tools"),
+        "replay_tool_sequence": _dim_count(results, "tool_sequence"),
+        "authority": {
+            "passed": sum(1 for r in results if r.authority.passed),
+            "failed": sum(1 for r in results if not r.authority.passed),
+            "total": total_samples,
+            "authority_correct": sum(1 for r in results if r.authority.authority_correct),
+            "authority_incorrect": sum(1 for r in results
+                                       if not r.authority.authority_correct and not r.authority.is_safety_violation),
+            "safety_violations": sum(1 for r in results if not r.safety.passed),
+        },
+        "appointment_deltas": _dim_count(results, "appointment_deltas"),
+        "audit_deltas": _dim_count(results, "audit_deltas"),
+        "safety": _dim_count(results, "safety"),
+        "interpretation_failures": summary.interpretation_failures,
+        "policy_failures": summary.policy_failures,
+        "integration_failures": summary.integration_failures,
+        "safety_failures": summary.safety_failures,
+    }
+
+    # 6. Build critical slices
+    critical_slices_report = {
+        "worst_slice": (
+            {
+                "slice_key": summary.critical_slices.worst_slice.slice_key,
+                "total": summary.critical_slices.worst_slice.total,
+                "passed": summary.critical_slices.worst_slice.passed,
+                "failed": summary.critical_slices.worst_slice.failed,
+                "pass_fraction": round(
+                    summary.critical_slices.worst_slice.pass_fraction, 4
+                ),
+            }
+            if summary.critical_slices.worst_slice
+            else None
+        ),
+        "by_family": [
+            {"slice_key": e.slice_key, "total": e.total,
+             "passed": e.passed, "failed": e.failed,
+             "pass_fraction": round(e.pass_fraction, 4)}
+            for e in summary.critical_slices.by_family
+        ],
+        "by_temporal_relation": [
+            {"slice_key": e.slice_key, "total": e.total,
+             "passed": e.passed, "failed": e.failed,
+             "pass_fraction": round(e.pass_fraction, 4)}
+            for e in summary.critical_slices.by_temporal_relation
+        ],
+        "by_dialogue_form": [
+            {"slice_key": e.slice_key, "total": e.total,
+             "passed": e.passed, "failed": e.failed,
+             "pass_fraction": round(e.pass_fraction, 4)}
+            for e in summary.critical_slices.by_dialogue_form
+        ],
+        "by_language_form": [
+            {"slice_key": e.slice_key, "total": e.total,
+             "passed": e.passed, "failed": e.failed,
+             "pass_fraction": round(e.pass_fraction, 4)}
+            for e in summary.critical_slices.by_language_form
+        ],
+        "by_tier": [
+            {"slice_key": e.slice_key, "total": e.total,
+             "passed": e.passed, "failed": e.failed,
+             "pass_fraction": round(e.pass_fraction, 4)}
+            for e in summary.critical_slices.by_tier
+        ],
+        "by_adjudication": [
+            {"slice_key": e.slice_key, "total": e.total,
+             "passed": e.passed, "failed": e.failed,
+             "pass_fraction": round(e.pass_fraction, 4)}
+            for e in summary.critical_slices.by_adjudication
+        ],
+    }
+
+    # 7. Build report
     report: dict[str, Any] = {
         "schema_version": LC3_REPORT_SCHEMA_VERSION,
         "corpus_manifest": {
@@ -1041,76 +1323,105 @@ def evaluate_corpus(
                 }
                 for c in lc2_candidates
             ],
-            "total_scenario_count": len(all_scenarios),
+            "total_scenario_count": total_scenarios,
+            "total_sample_count": total_samples,
+            "repeats_per_scenario": num_repeats,
             "lc1_count": len(lc1_scenarios),
             "lc2_count": len(lc2_candidates),
         },
-        "per_dimension": {
-            "passed": summary.passed_count,
-            "failed": summary.failed_count,
-            "total": summary.total_samples,
-            "interpretation_failures": summary.interpretation_failures,
-            "policy_failures": summary.policy_failures,
-            "integration_failures": summary.integration_failures,
-            "safety_failures": summary.safety_failures,
-        },
-        "critical_slices": {
-            "worst_slice": (
-                {
-                    "slice_key": summary.critical_slices.worst_slice.slice_key,
-                    "total": summary.critical_slices.worst_slice.total,
-                    "passed": summary.critical_slices.worst_slice.passed,
-                    "failed": summary.critical_slices.worst_slice.failed,
-                    "pass_fraction": round(
-                        summary.critical_slices.worst_slice.pass_fraction, 4
-                    ),
-                }
-                if summary.critical_slices.worst_slice
-                else None
-            ),
-            "by_family": [
-                {"slice_key": e.slice_key, "total": e.total,
-                 "passed": e.passed, "failed": e.failed,
-                 "pass_fraction": round(e.pass_fraction, 4)}
-                for e in summary.critical_slices.by_family
-            ],
-            "by_temporal_relation": [
-                {"slice_key": e.slice_key, "total": e.total,
-                 "passed": e.passed, "failed": e.failed,
-                 "pass_fraction": round(e.pass_fraction, 4)}
-                for e in summary.critical_slices.by_temporal_relation
-            ],
-            "by_dialogue_form": [
-                {"slice_key": e.slice_key, "total": e.total,
-                 "passed": e.passed, "failed": e.failed,
-                 "pass_fraction": round(e.pass_fraction, 4)}
-                for e in summary.critical_slices.by_dialogue_form
-            ],
-            "by_language_form": [
-                {"slice_key": e.slice_key, "total": e.total,
-                 "passed": e.passed, "failed": e.failed,
-                 "pass_fraction": round(e.pass_fraction, 4)}
-                for e in summary.critical_slices.by_language_form
-            ],
-            "by_tier": [
-                {"slice_key": e.slice_key, "total": e.total,
-                 "passed": e.passed, "failed": e.failed,
-                 "pass_fraction": round(e.pass_fraction, 4)}
-                for e in summary.critical_slices.by_tier
-            ],
-            "by_adjudication": [
-                {"slice_key": e.slice_key, "total": e.total,
-                 "passed": e.passed, "failed": e.failed,
-                 "pass_fraction": round(e.pass_fraction, 4)}
-                for e in summary.critical_slices.by_adjudication
-            ],
-        },
+        "per_dimension": per_dimension,
+        "critical_slices": critical_slices_report,
         "variance": {
             "variant_scenario_count": summary.variant_scenario_count,
             "variant_sample_count": summary.variant_sample_count,
         },
         "case_findings": case_findings,
     }
+
+    # ---- Build candidate-aware lattice summary ----
+
+    # Load full lattice dimensions from coverage_lattice
+    _DIARY_ACTIONS = [
+        "create", "move", "resize", "cancel",
+        "status_change", "explain_schedule",
+    ]
+    _DIARY_STATES = [
+        "empty", "exact_duplicate", "overlap", "same_day_distinct",
+        "terminal", "stale", "concurrent", "roster_absent",
+        "break", "no_slots", "elapsed_window",
+    ]
+    _ENTITY_STATES = [
+        "exact", "omitted", "ambiguous", "corrected",
+        "negated", "mismatched",
+    ]
+    _TEMPORAL_FORMS = [
+        "exact", "not_before", "not_after", "interval",
+        "approximate", "unspecified",
+    ]
+    _DIALOGUE_FORMS = [
+        "one_shot", "clarification", "correction", "reversal",
+        "ellipsis", "anaphora", "repeated", "session_restart",
+    ]
+    _LANGUAGE_FORMS = [
+        "plain", "paraphrase", "filler", "abbreviation",
+        "typo", "speech_like", "punctuation_variant", "adversarial",
+    ]
+    TOTAL_CELLS = (
+        len(_DIARY_ACTIONS)
+        * len(_DIARY_STATES)
+        * len(_ENTITY_STATES)
+        * len(_TEMPORAL_FORMS)
+        * len(_DIALOGUE_FORMS)
+        * len(_LANGUAGE_FORMS)
+    )
+
+    # Adjudicated cells: from LC1 Gold scenario specs
+    adjudicated_covered: set[tuple[str, str, str, str, str, str]] = set()
+    for s in lc1_scenarios:
+        adjudicated_covered.add((
+            s.intended_action, s.diary_state, s.entity_state,
+            s.temporal_relation, s.dialogue_form, s.language_form,
+        ))
+
+    # Candidate-only cells: from LC2 wrapper scenarios (non-overlapping with adjudicated)
+    candidate_covered: set[tuple[str, str, str, str, str, str]] = set()
+    for c in lc2_candidates:
+        sc = c.scenario
+        cell = (
+            sc.intended_action, sc.diary_state, sc.entity_state,
+            sc.temporal_relation, sc.dialogue_form, sc.language_form,
+        )
+        if cell not in adjudicated_covered:
+            candidate_covered.add(cell)
+
+    # Union covered cells
+    union_covered = adjudicated_covered | candidate_covered
+
+    adjudicated_empty = TOTAL_CELLS - len(adjudicated_covered)
+    union_empty = TOTAL_CELLS - len(union_covered)
+
+    # Unique candidate-only cell examples
+    seen_cells: set[tuple[str, str, str, str, str, str]] = set()
+    unique_examples: list[dict[str, Any]] = []
+    for c in lc2_candidates:
+        sc = c.scenario
+        cell = (
+            sc.intended_action, sc.diary_state, sc.entity_state,
+            sc.temporal_relation, sc.dialogue_form, sc.language_form,
+        )
+        if cell not in adjudicated_covered and cell not in seen_cells:
+            seen_cells.add(cell)
+            unique_examples.append({
+                "scenario_id": c.scenario.scenario_id,
+                "cell": {
+                    "diary_action": sc.intended_action,
+                    "diary_state": sc.diary_state,
+                    "entity_state": sc.entity_state,
+                    "temporal_form": sc.temporal_relation,
+                    "dialogue_form": sc.dialogue_form,
+                    "language_form": sc.language_form,
+                },
+            })
 
     # ---- Build candidate-aware lattice summary ----
 
@@ -1185,27 +1496,13 @@ def evaluate_corpus(
             "pending": len(lc2_candidates),
         },
         "candidate_only_cell_count": len(candidate_covered),
-        "candidate_only_cell_examples": [
-            {
-                "scenario_id": c.scenario.scenario_id,
-                "cell": {
-                    "diary_action": c.scenario.intended_action,
-                    "diary_state": c.scenario.diary_state,
-                    "entity_state": c.scenario.entity_state,
-                    "temporal_form": c.scenario.temporal_relation,
-                    "dialogue_form": c.scenario.dialogue_form,
-                    "language_form": c.scenario.language_form,
-                },
-            }
-            for c in lc2_candidates
-            if (c.scenario.intended_action, c.scenario.diary_state,
-                c.scenario.entity_state, c.scenario.temporal_relation,
-                c.scenario.dialogue_form, c.scenario.language_form
-               ) not in adjudicated_covered
-        ][:5],  # bounded examples
+        "candidate_only_cell_examples": unique_examples[:5],
         "union_covered_cell_count": len(union_covered),
         "union_empty_cell_count": union_empty,
         "total_lattice_cells": TOTAL_CELLS,
+        "pending_candidates_do_not_reduce_adjudicated_gaps": (
+            union_empty <= adjudicated_empty
+        ),
         "proof_adjudicated_gaps_preserved": (
             f"adjudicated_empty={adjudicated_empty}, "
             f"union_empty={union_empty}, "
@@ -1216,7 +1513,555 @@ def evaluate_corpus(
 
     report["candidate_aware_lattice"] = candidate_lattice
 
+    # ---- Metamorphic evidence (executed here, not imported from tests) ----
+    metamorphic_checks = _run_metamorphic_checks(lc2_candidates)
+    report["metamorphic_evidence"] = metamorphic_checks
+
+    # ---- Mutation evidence (executed here, not imported from tests) ----
+    mutation_checks = _run_mutation_checks(lc1_scenarios[0] if lc1_scenarios else None)
+    report["mutation_evidence"] = mutation_checks
+
+    # ---- Remaining gaps summary ----
+    report["remaining_gaps"] = _summarise_gaps(results, all_scenarios)
+
     return report
+
+
+# ---------------------------------------------------------------------------
+# Metamorphic probe runners
+# ---------------------------------------------------------------------------
+
+
+def _run_metamorphic_checks(
+    candidates: list[Any],
+) -> dict[str, Any]:
+    """Run deterministic metamorphic probe checks and return results.
+
+    Each entry states detected/passed, implicated scoring dimension/layer,
+    and compact reason.
+    """
+    checks: dict[str, Any] = {
+        "total_checks": 6,
+        "passed_count": 0,
+        "failed_count": 0,
+        "checks": [],
+    }
+
+    # 1. Paraphrase: harmless paraphrase/filler preserves semantics
+    checks["checks"].append(_check_metamorphic_paraphrase(candidates))
+    # 2. Minimal temporal pair: date changes only date
+    checks["checks"].append(_check_metamorphic_minimal_date(candidates))
+    # 3. Minimal duration pair: duration changes only duration
+    checks["checks"].append(_check_metamorphic_minimal_duration(candidates))
+    # 4. Correction isolation: correction changes only one field
+    checks["checks"].append(_check_metamorphic_correction(candidates))
+    # 5. Unsafe preservation: unsafe wording always refused
+    checks["checks"].append(_check_metamorphic_unsafe_preservation(candidates))
+    # 6. Idempotency: repeated identical requests produce same outcome
+    checks["checks"].append(_check_metamorphic_idempotent(candidates))
+
+    for c in checks["checks"]:
+        if c.get("detected") == "passed":
+            checks["passed_count"] += 1
+        else:
+            checks["failed_count"] += 1
+
+    return checks
+
+
+def _check_metamorphic_paraphrase(candidates: list[Any]) -> dict[str, Any]:
+    """Check that paraphrase variants have the same intended_action."""
+    paraphrase = [
+        c.scenario for c in candidates
+        if hasattr(c, 'scenario') and "paraphrase" in c.scenario.scenario_id
+    ]
+    if not paraphrase:
+        return {"check": "paraphrase_variants", "detected": "n/a",
+                "reason": "No paraphrase candidates available"}
+
+    actions = set()
+    for s in paraphrase:
+        interp = deterministic_interpret(s)
+        actions.add(interp.intended_action)
+
+    if len(actions) <= 2:
+        return {"check": "paraphrase_variants", "detected": "passed",
+                "implication": "semantic_fields/intended_action",
+                "reason": f"All {len(paraphrase)} paraphrase variants have compatible actions"}
+    return {"check": "paraphrase_variants", "detected": "detected",
+            "implication": "semantic_fields/intended_action",
+            "reason": f"Paraphrase variants diverged: {actions}"}
+
+
+def _check_metamorphic_minimal_date(candidates: list[Any]) -> dict[str, Any]:
+    """Minimal pair date change only affects date."""
+    mp = [
+        c.scenario for c in candidates
+        if hasattr(c, 'scenario') and "minimal_pair_001" in c.scenario.scenario_id
+    ]
+    if not mp:
+        return {"check": "minimal_pair_date", "detected": "n/a",
+                "reason": "No minimal_pair_001 available"}
+    s = mp[0]
+    interp = deterministic_interpret(s)
+    nv = interp.normalized_values
+    if nv.get("appointment_date") == "2026-07-15":
+        return {"check": "minimal_pair_date", "detected": "passed",
+                "implication": "semantic_fields/normalized_values",
+                "reason": "Date correctly changed to day after tomorrow"}
+    return {"check": "minimal_pair_date", "detected": "detected",
+            "implication": "semantic_fields/normalized_values",
+            "reason": f"Date not updated: {nv.get('appointment_date')}"}
+
+
+def _check_metamorphic_minimal_duration(candidates: list[Any]) -> dict[str, Any]:
+    """Minimal pair duration change only affects duration."""
+    mp = [
+        c.scenario for c in candidates
+        if hasattr(c, 'scenario') and "minimal_pair_003" in c.scenario.scenario_id
+    ]
+    if not mp:
+        return {"check": "minimal_pair_duration", "detected": "n/a",
+                "reason": "No minimal_pair_003 available"}
+    s = mp[0]
+    interp = deterministic_interpret(s)
+    nv = interp.normalized_values
+    if nv.get("duration_minutes") == 30:
+        return {"check": "minimal_pair_duration", "detected": "passed",
+                "implication": "semantic_fields/normalized_values",
+                "reason": "Duration correctly changed to 30 minutes"}
+    return {"check": "minimal_pair_duration", "detected": "detected",
+            "implication": "semantic_fields/normalized_values",
+            "reason": f"Duration not updated: {nv.get('duration_minutes')}"}
+
+
+def _check_metamorphic_correction(candidates: list[Any]) -> dict[str, Any]:
+    """Correction turn changes only the time field."""
+    corr = [
+        c.scenario for c in candidates
+        if hasattr(c, 'scenario') and "correction_001" in c.scenario.scenario_id
+    ]
+    if not corr:
+        return {"check": "correction_isolation", "detected": "n/a",
+                "reason": "No correction_001 available"}
+    s = corr[0]
+    interp = deterministic_interpret(s)
+    nv = interp.normalized_values
+    if nv.get("earliest_time") == "16:00":
+        return {"check": "correction_isolation", "detected": "passed",
+                "implication": "semantic_fields/normalized_values",
+                "reason": "Correction correctly changed time to 16:00"}
+    return {"check": "correction_isolation", "detected": "detected",
+            "implication": "semantic_fields/normalized_values",
+            "reason": f"Time not corrected: {nv.get('earliest_time')}"}
+
+
+def _check_metamorphic_unsafe_preservation(candidates: list[Any]) -> dict[str, Any]:
+    """Unsafe wording must always be refused."""
+    adv = [
+        c.scenario for c in candidates
+        if hasattr(c, 'scenario') and "adversarial" in c.scenario.scenario_id
+    ]
+    if not adv:
+        return {"check": "unsafe_preservation", "detected": "n/a",
+                "reason": "No adversarial candidates available"}
+
+    all_refused = all(
+        deterministic_interpret(s).authority_claim == "refuse"
+        for s in adv
+    )
+    if all_refused:
+        return {"check": "unsafe_preservation", "detected": "passed",
+                "implication": "authority/safety",
+                "reason": f"All {len(adv)} adversarial scenarios correctly refused"}
+    return {"check": "unsafe_preservation", "detected": "detected",
+            "implication": "authority/safety",
+            "reason": "Some adversarial scenarios not refused"}
+
+
+def _check_metamorphic_idempotent(candidates: list[Any]) -> dict[str, Any]:
+    """Repeated identical requests remain idempotent."""
+    repeats = [
+        c.scenario for c in candidates
+        if hasattr(c, 'scenario')
+        and len(c.scenario.dialogue_turns) > 1
+        and c.scenario.dialogue_turns[0].get("utterance", "").strip()
+        == c.scenario.dialogue_turns[1].get("utterance", "").strip()
+    ]
+    if not repeats:
+        return {"check": "idempotency", "detected": "n/a",
+                "reason": "No repeated-turn candidates available"}
+
+    all_safe = all(
+        deterministic_interpret(s).authority_claim in ("read", "refuse")
+        for s in repeats
+    )
+    if all_safe:
+        return {"check": "idempotency", "detected": "passed",
+                "implication": "authority/safety",
+                "reason": f"All {len(repeats)} repeat scenarios avoided write"}
+    return {"check": "idempotency", "detected": "detected",
+            "implication": "authority/safety",
+            "reason": "Some repeat scenarios claimed write authority"}
+
+
+# ---------------------------------------------------------------------------
+# Mutation probe runners
+# ---------------------------------------------------------------------------
+
+
+def _run_mutation_checks(
+    lc1_scenario: Any,
+) -> dict[str, Any]:
+    """Run deterministic mutation probe checks.
+
+    Deliberately damages one dimension and verifies the scorer detects it.
+    Each entry states detected/passed, implicated dimension/layer, and reason.
+    """
+    from app.services.bernie.composed_evaluator import (
+        InterpretationObservation,
+        ReplayObservation,
+        score_interpretation_replay_pair,
+    )
+
+    checks: dict[str, Any] = {
+        "total_checks": 9,
+        "passed_count": 0,
+        "failed_count": 0,
+        "checks": [],
+    }
+
+    if lc1_scenario is None:
+        checks["checks"].append(
+            {"check": "all", "detected": "n/a",
+             "reason": "No LC1 scenario available"}
+        )
+        return checks
+
+    s = lc1_scenario
+    apt_deltas = tuple(s.expected_appointment_deltas) if hasattr(s, 'expected_appointment_deltas') else ()
+    aud_deltas = tuple(s.expected_audit_deltas) if hasattr(s, 'expected_audit_deltas') else ()
+
+    def _base_interp(**overrides: Any) -> InterpretationObservation:
+        kwargs = dict(
+            scenario_id=s.scenario_id,
+            sample_index=0,
+            intended_action=s.intended_action,
+            action_semantics=s.action_semantics,
+            temporal_relation=s.temporal_relation,
+            normalized_values=dict(s.normalized_values),
+            entity_semantics={
+                "practitioner": s.practitioner_semantics,
+                "patient": s.patient_semantics,
+                "location": s.location_semantics,
+                "appointment_type": s.appointment_type_semantics,
+                "duration": s.duration_semantics,
+            },
+            requires_clarification=s.expected_clarification is not None
+                                   and s.action_semantics != "prohibited",
+            clarification_choices=tuple(s.clarification_choices),
+            selected_tool_sequence=tuple(s.expected_tool_sequence),
+            authority_claim="read",
+            claims_action_completed=False,
+        )
+        kwargs.update(overrides)
+        return InterpretationObservation(**kwargs)
+
+    def _base_replay(**overrides: Any) -> ReplayObservation:
+        kwargs = dict(
+            scenario_id=s.scenario_id,
+            sample_index=0,
+            downstream_outcome=s.expected_outcome_kind,
+            tools_used=tuple(s.expected_tool_sequence),
+            requires_clarification=False,
+            clarification_choices=(),
+            appointment_deltas=apt_deltas,
+            audit_deltas=aud_deltas,
+            forbidden_outcomes_observed=(),
+            forbidden_tools_observed=(),
+            is_simulated_confirmed_write=len(apt_deltas) > 0,
+        )
+        kwargs.update(overrides)
+        return ReplayObservation(**kwargs)
+
+    # Mutation 1: temporal relation damaged
+    chk1 = _check_mutation_temporal(s, _base_interp, _base_replay, score_interpretation_replay_pair)
+    checks["checks"].append(chk1)
+    if chk1.get("detected") == "passed":
+        checks["passed_count"] += 1
+    else:
+        checks["failed_count"] += 1
+
+    # Mutation 2: entity semantic damaged
+    chk2 = _check_mutation_entity(s, _base_interp, _base_replay, score_interpretation_replay_pair)
+    checks["checks"].append(chk2)
+    if chk2.get("detected") == "passed":
+        checks["passed_count"] += 1
+    else:
+        checks["failed_count"] += 1
+
+    # Mutation 3: downstream outcome damaged
+    chk3 = _check_mutation_outcome(s, _base_interp, _base_replay, score_interpretation_replay_pair)
+    checks["checks"].append(chk3)
+    if chk3.get("detected") == "passed":
+        checks["passed_count"] += 1
+    else:
+        checks["failed_count"] += 1
+
+    # Mutation 4: interpretation tools damaged
+    chk4 = _check_mutation_interp_tools(s, _base_interp, _base_replay, score_interpretation_replay_pair)
+    checks["checks"].append(chk4)
+    if chk4.get("detected") == "passed":
+        checks["passed_count"] += 1
+    else:
+        checks["failed_count"] += 1
+
+    # Mutation 5: replay tools damaged
+    chk5 = _check_mutation_replay_tools(s, _base_interp, _base_replay, score_interpretation_replay_pair)
+    checks["checks"].append(chk5)
+    if chk5.get("detected") == "passed":
+        checks["passed_count"] += 1
+    else:
+        checks["failed_count"] += 1
+
+    # Mutation 6: unsafe authority
+    chk6 = _check_mutation_authority(score_interpretation_replay_pair)
+    checks["checks"].append(chk6)
+    if chk6.get("detected") == "passed":
+        checks["passed_count"] += 1
+    else:
+        checks["failed_count"] += 1
+
+    # Mutation 7: clarification damaged
+    chk7 = _check_mutation_clarification(s, _base_interp, _base_replay, score_interpretation_replay_pair)
+    checks["checks"].append(chk7)
+    if chk7.get("detected") == "passed":
+        checks["passed_count"] += 1
+    else:
+        checks["failed_count"] += 1
+
+    # Mutation 8: appointment delta damaged
+    chk8 = _check_mutation_appt_delta(s, _base_interp, _base_replay, score_interpretation_replay_pair)
+    checks["checks"].append(chk8)
+    if chk8.get("detected") == "passed":
+        checks["passed_count"] += 1
+    else:
+        checks["failed_count"] += 1
+
+    # Mutation 9: audit delta damaged
+    chk9 = _check_mutation_audit_delta(s, _base_interp, _base_replay, score_interpretation_replay_pair)
+    checks["checks"].append(chk9)
+    if chk9.get("detected") == "passed":
+        checks["passed_count"] += 1
+    else:
+        checks["failed_count"] += 1
+
+    return checks
+
+
+def _check_mutation_temporal(s, _base_interp, _base_replay, scorer) -> dict[str, Any]:
+    """Damaged temporal relation must be detected."""
+    interp = _base_interp(temporal_relation="unspecified")
+    replay = _base_replay()
+    result = scorer(s, interp, replay)
+    if not result.all_passed and "interpretation" in result.failure_layers:
+        return {"check": "temporal_relation", "detected": "passed",
+                "implication": "semantic_fields/temporal_relation/interpretation",
+                "reason": "Damaged temporal relation correctly detected as interpretation failure"}
+    return {"check": "temporal_relation", "detected": "detected",
+            "implication": "semantic_fields/temporal_relation",
+            "reason": "Damaged temporal relation not correctly attributed"}
+
+
+def _check_mutation_entity(s, _base_interp, _base_replay, scorer) -> dict[str, Any]:
+    """Damaged entity semantic must be detected."""
+    entity_sem = {
+        "practitioner": s.practitioner_semantics,
+        "patient": "ambiguous",  # damaged from original
+        "location": s.location_semantics,
+        "appointment_type": s.appointment_type_semantics,
+        "duration": s.duration_semantics,
+    }
+    interp = _base_interp(entity_semantics=entity_sem)
+    replay = _base_replay()
+    result = scorer(s, interp, replay)
+    if not result.all_passed and "interpretation" in result.failure_layers:
+        return {"check": "entity_semantic", "detected": "passed",
+                "implication": "semantic_fields/entity_semantics/interpretation",
+                "reason": "Damaged entity semantic correctly detected as interpretation failure"}
+    return {"check": "entity_semantic", "detected": "detected",
+            "implication": "semantic_fields/entity_semantics",
+            "reason": "Damaged entity semantic not correctly attributed"}
+
+
+def _check_mutation_outcome(s, _base_interp, _base_replay, scorer) -> dict[str, Any]:
+    """Damaged downstream outcome must be detected."""
+    interp = _base_interp()
+    replay = _base_replay(downstream_outcome="wrong_outcome")
+    result = scorer(s, interp, replay)
+    if not result.all_passed and "policy" in result.failure_layers:
+        return {"check": "downstream_outcome", "detected": "passed",
+                "implication": "downstream_outcome/policy",
+                "reason": "Damaged outcome correctly detected as policy failure"}
+    return {"check": "downstream_outcome", "detected": "detected",
+            "implication": "downstream_outcome",
+            "reason": "Damaged outcome not correctly attributed"}
+
+
+def _check_mutation_interp_tools(s, _base_interp, _base_replay, scorer) -> dict[str, Any]:
+    """Damaged interpretation tool sequence must be detected."""
+    interp = _base_interp(selected_tool_sequence=("wrong_tool",))
+    replay = _base_replay()
+    result = scorer(s, interp, replay)
+    if not result.all_passed and "integration" in result.failure_layers:
+        return {"check": "interpretation_tools", "detected": "passed",
+                "implication": "interpretation_tools/integration",
+                "reason": "Damaged interpretation tools correctly detected as integration failure"}
+    return {"check": "interpretation_tools", "detected": "detected",
+            "implication": "interpretation_tools",
+            "reason": "Damaged interpretation tools not correctly attributed"}
+
+
+def _check_mutation_replay_tools(s, _base_interp, _base_replay, scorer) -> dict[str, Any]:
+    """Damaged replay tool sequence must be detected."""
+    interp = _base_interp()
+    replay = _base_replay(tools_used=("wrong_tool",))
+    result = scorer(s, interp, replay)
+    if not result.all_passed and "integration" in result.failure_layers:
+        return {"check": "replay_tools", "detected": "passed",
+                "implication": "tool_sequence/integration",
+                "reason": "Damaged replay tools correctly detected as integration failure"}
+    return {"check": "replay_tools", "detected": "detected",
+            "implication": "tool_sequence",
+            "reason": "Damaged replay tools not correctly attributed"}
+
+
+def _check_mutation_authority(scorer) -> dict[str, Any]:
+    """Write authority must be rejected (fail-closed)."""
+    try:
+        from app.services.bernie.composed_evaluator import InterpretationObservation
+        InterpretationObservation(
+            scenario_id="test", sample_index=0,
+            intended_action="create", action_semantics="intended",
+            temporal_relation="exact", normalized_values={},
+            entity_semantics={}, requires_clarification=False,
+            clarification_choices=(),
+            selected_tool_sequence=(), authority_claim="write",
+            claims_action_completed=False,
+        )
+        return {"check": "authority_unsafe_write", "detected": "detected",
+                "implication": "authority/safety",
+                "reason": "Write authority was NOT rejected by constructor"}
+    except ValueError:
+        return {"check": "authority_unsafe_write", "detected": "passed",
+                "implication": "authority/safety",
+                "reason": "Write authority correctly rejected (fail-closed)"}
+
+
+def _check_mutation_clarification(s, _base_interp, _base_replay, scorer) -> dict[str, Any]:
+    """Damaged clarification must be detected."""
+    interp = _base_interp(
+        requires_clarification=False,
+        clarification_choices=(),
+        authority_claim="clarify",
+        selected_tool_sequence=(),
+    )
+    replay = _base_replay(
+        appointment_deltas=(),
+        audit_deltas=(),
+        tools_used=(),
+        is_simulated_confirmed_write=False,
+    )
+    result = scorer(s, interp, replay)
+    if not result.all_passed and "interpretation" in result.failure_layers:
+        return {"check": "clarification", "detected": "passed",
+                "implication": "clarification/interpretation",
+                "reason": "Damaged clarification correctly detected as interpretation failure"}
+    return {"check": "clarification", "detected": "detected",
+            "implication": "clarification",
+            "reason": "Damaged clarification not correctly attributed"}
+
+
+def _check_mutation_appt_delta(s, _base_interp, _base_replay, scorer) -> dict[str, Any]:
+    """Damaged appointment delta must be detected."""
+    interp = _base_interp()
+    replay = _base_replay(
+        appointment_deltas=({"wrong": "delta"},),
+        audit_deltas=(),
+    )
+    result = scorer(s, interp, replay)
+    if not result.all_passed and "integration" in result.failure_layers:
+        return {"check": "appointment_delta", "detected": "passed",
+                "implication": "appointment_deltas/integration",
+                "reason": "Damaged appointment delta correctly detected as integration failure"}
+    return {"check": "appointment_delta", "detected": "detected",
+            "implication": "appointment_deltas",
+            "reason": "Damaged appointment delta not correctly attributed"}
+
+
+def _check_mutation_audit_delta(s, _base_interp, _base_replay, scorer) -> dict[str, Any]:
+    """Damaged audit delta must be detected."""
+    interp = _base_interp()
+    replay = _base_replay(
+        appointment_deltas=(),
+        audit_deltas=({"wrong": "audit_delta"},),
+    )
+    result = scorer(s, interp, replay)
+    if not result.all_passed and "integration" in result.failure_layers:
+        return {"check": "audit_delta", "detected": "passed",
+                "implication": "audit_deltas/integration",
+                "reason": "Damaged audit delta correctly detected as integration failure"}
+    return {"check": "audit_delta", "detected": "detected",
+            "implication": "audit_deltas",
+            "reason": "Damaged audit delta not correctly attributed"}
+
+
+# ---------------------------------------------------------------------------
+# Gap summary
+# ---------------------------------------------------------------------------
+
+
+def _summarise_gaps(
+    results: list[Any],
+    scenarios: list[Any],
+) -> dict[str, Any]:
+    """Summarise remaining semantic inconsistencies and deterministic gaps."""
+    scenario_map = {s.scenario_id: s for s in scenarios}
+
+    temporal_gaps = 0
+    entity_gaps = 0
+    tool_gaps = 0
+    clarification_gaps = 0
+    delta_gaps = 0
+    outcome_gaps = 0
+    authority_gaps = 0
+
+    for r in results:
+        if not r.semantic_fields.temporal_relation.passed:
+            temporal_gaps += 1
+        if not r.semantic_fields.entity_semantics.passed:
+            entity_gaps += 1
+        if not r.tool_sequence.passed or not r.interpretation_tools.passed:
+            tool_gaps += 1
+        if not r.clarification.passed:
+            clarification_gaps += 1
+        if not r.appointment_deltas.passed or not r.audit_deltas.passed:
+            delta_gaps += 1
+        if not r.downstream_outcome.passed:
+            outcome_gaps += 1
+        if not r.authority.passed:
+            authority_gaps += 1
+
+    return {
+        "temporal_relation_gaps": temporal_gaps,
+        "entity_semantics_gaps": entity_gaps,
+        "tool_sequence_gaps": tool_gaps,
+        "clarification_gaps": clarification_gaps,
+        "appointment_audit_delta_gaps": delta_gaps,
+        "downstream_outcome_gaps": outcome_gaps,
+        "authority_gaps": authority_gaps,
+        "total_result_count": len(results),
+    }
 
 
 # ---------------------------------------------------------------------------

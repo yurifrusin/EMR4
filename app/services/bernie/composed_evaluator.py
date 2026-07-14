@@ -548,7 +548,11 @@ def score_interpretation_replay_pair(
         ),
         clarification=_build_field_comparison(
             "requires_clarification",
-            scenario.expected_clarification is not None,
+            (
+                False
+                if scenario.action_semantics == "prohibited"
+                else scenario.expected_clarification is not None
+            ),
             interpretation.requires_clarification,
         ),
     )
@@ -668,10 +672,25 @@ def score_interpretation_replay_pair(
     )
 
     # --- Clarification ------------------------------------------------------
+    # Prohibited action semantics never requires clarification.
+    # Expected clarification is a refusal/explanation copy, not a
+    # user-interaction prompt.  Ambiguous scenarios still require it.
+    # When clarification is not required (prohibited), the expected choices
+    # are also irrelevant — clear them to avoid false mismatches.
+    expected_requires = (
+        False
+        if scenario.action_semantics == "prohibited"
+        else scenario.expected_clarification is not None
+    )
+    expected_choices: tuple[str, ...] = (
+        ()
+        if scenario.action_semantics == "prohibited"
+        else tuple(scenario.clarification_choices)
+    )
     clarification = ClarificationResult(
-        expected_requires=scenario.expected_clarification is not None,
+        expected_requires=expected_requires,
         observed_requires=interpretation.requires_clarification,
-        expected_choices=tuple(scenario.clarification_choices),
+        expected_choices=expected_choices,
         observed_choices=interpretation.clarification_choices,
     )
 

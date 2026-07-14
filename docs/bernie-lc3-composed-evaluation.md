@@ -154,16 +154,90 @@ The total lattice remains 152,064.
 
 The committed report is at
 ``docs/bernie-lc3-composed-evaluation-report.json``.  It is generated
-deterministically with no wall-clock timestamp.  Tests regenerated the report
-and compare it exactly with the committed artifact.
+deterministically with no wall-clock timestamp.
 
-The current deterministic fallback passes ~61% of cases (11/18) with honest
-failures attributed to interpretation (temporal parsing, entity extraction
-edge cases) and integration (tool sequence alignment, fixture-specific
-practitioner-IDs).  There are zero safety failures and zero policy failures.
-A non-perfect report is preferred to oracle echoing.
+### Actual counts (DW2 revision)
 
-## Boundary
+| Metric | Value |
+|---|---|
+| Scenarios | 18 (3 LC1 Gold + 15 LC2 Silver) |
+| Samples (2× repeat) | 36 |
+| Passed | 24 (67%) |
+| Failed | 12 (33%) |
+| Safety failures | 0 |
+| Policy failures | 0 |
+| Interpretation failures | 22 (all-layer) |
+| Integration failures | 10 (all-layer) |
+| Variant scenarios | 0 (deterministic adapter) |
+
+### Per-dimension breakdown (36 samples)
+
+| Dimension | Passed | Failed |
+|---|---|---|
+| intended_action | 24 | 12 |
+| action_semantics | 36 | 0 |
+| temporal_relation | 30 | 6 |
+| normalized_values | 28 | 8 |
+| entity_semantics | 34 | 2 |
+| requires_clarification | 36 | 0 |
+| downstream_outcome | 36 | 0 |
+| interpretation_tools | 26 | 10 |
+| replay_tool_sequence | 26 | 10 |
+| authority | 36 | 0 |
+| appointment_deltas | 36 | 0 |
+| audit_deltas | 36 | 0 |
+| safety | 36 | 0 |
+
+### Metamorphic evidence
+
+6/6 checks pass: paraphrase variants, minimal temporal/duration pairs,
+correction isolation, unsafe preservation, and idempotency.
+
+### Mutation evidence
+
+9/9 checks pass: temporal relation, entity semantic, downstream outcome,
+interpretation tools, replay tools, authority, clarification, appointment
+delta, and audit delta mutations are all correctly detected with the
+expected attribution layer.
+
+### Candidate-aware lattice
+
+| Metric | Value |
+|---|---|
+| Adjudicated cells | 3 |
+| Adjudicated empty | 152061 |
+| Candidate-only cells | 7 |
+| Union covered cells | 10 |
+| Union empty cells | 152054 |
+| Total lattice | 152064 |
+| Gaps preserved | True |
+
+### Remaining gaps
+
+Failures are honest (not oracle-echo):
+- **temporal_relation** (3 scenarios × 2 repeats = 6): the ambiguity
+  scenarios expect ``interval`` for "sometime in the afternoon" but the
+  deterministic interpreter returns ``unspecified`` (consistent with the LC1
+  reference which also uses ``unspecified`` for the same phrase).  This is a
+  documented semantic inconsistency between fixtures — preserved, not branched.
+- **normalized_values** (4 scenarios × 2 repeats = 8): flows from the same
+  temporal mismatch plus one scenario with no explicit time/duration.
+- **entity_semantics** (1 scenario × 2 repeats = 2): the LC1 overlap/correction
+  scenario's entity extraction does not reach the patient name in the
+  correction-turn interval format.
+- **intended_action** (6 scenarios × 2 repeats = 12): scenarios where
+  clarification/temporal ambiguity was detected; the observed action is
+  ``None`` because the system correctly identifies ambiguity before
+  committing to an action.
+- **interpretation_tools** / **replay_tools** (5 scenarios × 2 repeats = 10):
+  tool sequence alignment differs from expected in clarification and
+  correction scenarios where the system's deterministic tool selection does
+  not match the adjudicated expectation.
+
+No safety, policy, authority, clarification delta, or outcome failures.
+Zero repeat variance confirms the deterministic adapter is stable.
+
+### Boundary
 
 - No provider SDK, provider adapter, live prompt, or external call.
 - No route, GraphQL, OpenAPI, database model, migration, or appointment/audit

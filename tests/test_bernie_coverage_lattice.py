@@ -227,3 +227,36 @@ class TestEmptyDirectory:
     def test_empty_dir_prints_error(self, empty_dir: str) -> None:
         result = _run_lattice(fixture_dir=empty_dir)
         assert "ERROR" in result.stderr
+
+
+# ---------------------------------------------------------------------------
+# 7.  Strict loading rejects unknown fixture files
+# ---------------------------------------------------------------------------
+
+class TestStrictLoading:
+    """The CLI must reject unknown files (strict canonical loader)."""
+
+    def test_unknown_fixture_rejected(self, tmp_path: Path) -> None:
+        """A directory with an unknown JSON file is rejected."""
+        d = tmp_path / "bad_fixtures"
+        d.mkdir(parents=True)
+        # Create an unknown fixture file
+        (d / "unknown_file.json").write_text(
+            json.dumps({"spec_version": "lc1.v1", "description": "bad"}),
+            encoding="utf-8",
+        )
+        result = _run_lattice(fixture_dir=str(d))
+        assert result.returncode != 0
+        assert "ERROR" in result.stderr or "Unknown fixture file" in result.stderr
+
+    def test_non_list_payload_rejected(self, tmp_path: Path) -> None:
+        """A non-list payload in the fixture directory is rejected."""
+        d = tmp_path / "bad_payload"
+        d.mkdir(parents=True)
+        (d / "booking_create_then_exact_duplicate.json").write_text(
+            json.dumps({"not": "a list"}),
+            encoding="utf-8",
+        )
+        result = _run_lattice(fixture_dir=str(d))
+        assert result.returncode != 0
+        assert "ERROR" in result.stderr or "Unknown fixture file" in result.stderr

@@ -27,6 +27,15 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from app.services.bernie.scenario_spec import ReceptionScenarioSpec
 
+# Import the strict canonical loader from the LC3 corpus evaluator.
+from app.services.bernie.composed_corpus_evaluator import (
+    KNOWN_LC1_FIXTURES,
+    KNOWN_LC2_FAMILY_FILES,
+    EXPECTED_LC2_PER_FAMILY,
+    load_lc1_scenarios,
+    load_lc2_candidates,
+)
+
 
 # ---------------------------------------------------------------------------
 # Coverage dimensions
@@ -101,26 +110,19 @@ LANGUAGE_FORMS: List[str] = [
 # ---------------------------------------------------------------------------
 
 def discover_fixtures(fixture_dir: Path) -> List[Dict[str, Any]]:
-    """Discover and load all JSON fixture files in *fixture_dir*."""
+    """Discover and load all JSON fixture files in *fixture_dir*.
+
+    Uses the strict canonical loader (``load_lc1_scenarios``) so that unknown
+    files, wrong counts, non-list payloads, and invalid tiers/states are all
+    rejected with a clean CLI error.
+    """
     if not fixture_dir.is_dir():
         raise NotADirectoryError(
             f"Fixture directory does not exist: {fixture_dir}"
         )
-    fixtures: List[Dict[str, Any]] = []
-    for path in sorted(fixture_dir.iterdir()):
-        if path.suffix.lower() == ".json":
-            with open(path, "r", encoding="utf-8") as fh:
-                raw = json.load(fh)
-            try:
-                fixture = ReceptionScenarioSpec.model_validate(raw)
-            except Exception as error:
-                raise ValueError(f"Invalid scenario fixture {path.name}: {error}") from error
-            fixtures.append(fixture.model_dump(mode="json"))
-    if not fixtures:
-        raise ValueError(
-            f"No JSON fixtures found in {fixture_dir} (directory is empty)"
-        )
-    return fixtures
+    # Use the strict LC1 loader which validates known file names, tier, and count.
+    scenarios = load_lc1_scenarios(fixture_dir)
+    return [s.model_dump(mode="json") for s in scenarios]
 
 
 # ---------------------------------------------------------------------------
