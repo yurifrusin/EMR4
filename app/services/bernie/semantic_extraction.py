@@ -80,12 +80,16 @@ _CREATE_PATTERNS: list[re.Pattern[str]] = [
     re.compile(r"\b(need to |would like to |can i |could i )?(make|create|schedule|put)\b", re.I),
     re.compile(r"\b(i'?d like |i want |looking to |wants? to )?(book|make|schedule)\b", re.I),
     re.compile(r"\b(set up|arrange|organise|organize)\b", re.I),
+    # Anchored "New booking:" label — structured note/triage form
+    re.compile(r"^New booking:", re.I),
 ]
 
 # cancel
 _CANCEL_PATTERNS: list[re.Pattern[str]] = [
     re.compile(r"\b(cancel|delete|remove) (the |a |an )?(booking|appointment)\b", re.I),
     re.compile(r"\b(patient cancelled|take .* (booking|appointment) out|remove .* diary)\b", re.I),
+    # "call off ... booking/appointment" — contextual cancellation phrasing
+    re.compile(r"\bcall off\b.*\b(booking|appointment)\b", re.I),
     re.compile(r"\b(cancel|delete|remove)\b", re.I),
 ]
 
@@ -108,12 +112,35 @@ _STATUS_CHANGE_PATTERNS: list[re.Pattern[str]] = [
     re.compile(r"\b(mark .* (arrived|completed|dna|no show)|change .* status)\b", re.I),
     re.compile(r"\b(set .* (arrived|completed|dna|no.show))\b", re.I),
     re.compile(r"\b(update .* status)\b", re.I),
+    # Anchored "Arrived:" label — structured triage note form
+    re.compile(r"^Arrived:", re.I),
+    # "Status: ... ARRIVED" — status label (case-insensitive so it works through
+    # lowercased detection path; the full "Status:" + status keyword context
+    # prevents overmatch on non-diary uses)
+    re.compile(r"\bstatus:.*\barrived\b", re.I),
+    # "confirm arrival ... booking/appointment" — arrival confirmation command
+    re.compile(r"\bconfirm arrival\b.*\b(booking|appointment)\b", re.I),
 ]
 
 # explain_schedule
 _EXPLAIN_PATTERNS: list[re.Pattern[str]] = [
     re.compile(r"\b(explain|why|what happened|schedule pattern)\b", re.I),
     re.compile(r"\b(what.*going on|how.*look|tell me about)\b", re.I),
+    # Availability / schedule queries — practitioner-oriented read-only questions
+    re.compile(r"\b(availability|availabilities)\b", re.I),
+    re.compile(r"\bwhat\s+does\b.*\b(schedule|day|appointments?|availability)\b", re.I),
+    re.compile(r"\bwhat\s+appointments?\b", re.I),
+    re.compile(r"\b(free|open|available)\s+(slots?|times?|appointments?)\b", re.I),
+    # Anchored "Schedule:" label
+    re.compile(r"^Schedule:", re.I),
+    # "show/list me" schedule/appointments
+    re.compile(r"\b(show|list)\b.*\b(appointments?|schedule|times?|slots?)\b", re.I),
+    # "day view" / "calendar" / "roster" queries
+    re.compile(r"\b(day.view|calendar|roster)\b", re.I),
+    # "what ... day looks like" — narrative schedule query
+    re.compile(r"\b(what|how).*\bday\b.*\blooks?\b", re.I),
+    # "pull up ... schedule" — retrieval request
+    re.compile(r"\bpull up\b.*\bschedule\b", re.I),
 ]
 
 

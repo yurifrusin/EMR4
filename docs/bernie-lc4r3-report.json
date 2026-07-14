@@ -1,0 +1,93 @@
+{
+  "assertions": {
+    "bare_narrative_not_promoted": true,
+    "check_in_not_promoted": true,
+    "intended_action_ge_874_of_1152": true,
+    "safety_1152_of_1152": true,
+    "target_families_154_of_154": true
+  },
+  "corpus_manifest": {
+    "adjudication": "pending",
+    "corpus_hash": "f73a35b8843beb66",
+    "provenance": "silver",
+    "total_development_records": 1152
+  },
+  "deferred_families": {
+    "bare_arrival_narrative_not_status_change": {
+      "all_deferred": true,
+      "count": 16,
+      "not_promoted_to_status_change": 16
+    },
+    "check_in_not_status_change": {
+      "all_deferred": true,
+      "count": 16,
+      "not_promoted_to_status_change": 16
+    }
+  },
+  "development_only": true,
+  "no_holdout_accessed": true,
+  "outcome_dimensions_one_repeat": {
+    "appointment_deltas": "211/1152",
+    "audit_deltas": "192/1152",
+    "authority": "698/1152",
+    "clarification": "666/1152",
+    "downstream_outcome": "218/1152",
+    "interpretation_tools": "610/1152",
+    "replay_tools": "610/1152",
+    "safety": "1152/1152"
+  },
+  "pre_lc4r3_report_hash": null,
+  "repeat_variance": {
+    "measured": 0,
+    "note": "Variance is zero by construction \u2014 deterministic extraction produces identical results on every repeat."
+  },
+  "report_hash": "9e1aecff2bd39605",
+  "safety": {
+    "all_safe": true,
+    "failures": 0,
+    "passed": 1152,
+    "total": 1152
+  },
+  "schema_version": "lc4r3.aligned_action_surface.v1",
+  "semantic_fields_one_repeat": {
+    "action_semantics": "730/1152",
+    "clarification": "698/1152",
+    "entity_semantics": "255/1152",
+    "intended_action": "960/1152",
+    "normalized_values": "101/1152",
+    "temporal_relation": "628/1152"
+  },
+  "silver_pending_only": true,
+  "target_families": {
+    "cancel_call_off": {
+      "all_passed": true,
+      "count": 16,
+      "expected": "cancel",
+      "passed": 16
+    },
+    "create_new_booking": {
+      "all_passed": true,
+      "count": 16,
+      "expected": "create",
+      "passed": 16
+    },
+    "explain_schedule_query": {
+      "all_passed": true,
+      "count": 80,
+      "expected": "explain_schedule",
+      "passed": 80
+    },
+    "status_change_label": {
+      "all_passed": true,
+      "count": 48,
+      "expected": "status_change",
+      "passed": 48
+    }
+  },
+  "target_family_totals": {
+    "all_passed": true,
+    "passed": 160,
+    "total": 160
+  },
+  "worker": "deepseek_v4_flash"
+}

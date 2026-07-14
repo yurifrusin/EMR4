@@ -1,8 +1,8 @@
 {
   "aligned_subset_scores": {
-    "aligned_failed": 1180,
+    "aligned_failed": 1324,
     "aligned_passed": 0,
-    "aligned_total": 1180
+    "aligned_total": 1324
   },
   "baseline_lc4r1_one_repeat": {
     "appointment_deltas": "212/1152",
@@ -23,21 +23,13 @@
     "temporal_relation": "628/1152"
   },
   "candidate_quality": {
-    "aligned_failure": 1180,
+    "aligned_failure": 1324,
     "aligned_pass": 0,
-    "surface_contract_conflict": 1072,
-    "unsupported_or_ambiguous_surface": 52
+    "surface_contract_conflict": 916,
+    "unsupported_or_ambiguous_surface": 64
   },
   "conflict_example_count": 10,
   "conflict_examples": [
-    {
-      "candidate_id": "lc4_dw1_dev_var_001_03",
-      "category": "aligned_failure",
-      "evidence_excerpt": "New booking: Margaret Thompson, Dr Shera, tomorrow 3pm, 1...",
-      "expected_value": "False",
-      "observed_value": "True",
-      "rule_id": "CONFLICT-CLR-001"
-    },
     {
       "candidate_id": "lc4_dw1_dev_var_001_04",
       "category": "surface_contract_conflict",
@@ -109,6 +101,14 @@
       "expected_value": "False",
       "observed_value": "True",
       "rule_id": "CONFLICT-CLR-001"
+    },
+    {
+      "candidate_id": "lc4_dw1_dev_var_002_08",
+      "category": "aligned_failure",
+      "evidence_excerpt": "Please add someone to some doctor's book tomorrow at 3pm ...",
+      "expected_value": "False",
+      "observed_value": "True",
+      "rule_id": "CONFLICT-CLR-001"
     }
   ],
   "corpus_manifest": {
@@ -120,93 +120,93 @@
     "total_development_samples_two_repeats": 2304
   },
   "current_one_repeat": {
-    "appointment_deltas": "209/1152",
+    "appointment_deltas": "211/1152",
     "audit_deltas": "192/1152",
-    "authority": "642/1152",
-    "clarification": "610/1152",
-    "downstream_outcome": "197/1152",
-    "interpretation_tools": "592/1152",
-    "replay_tools": "592/1152",
+    "authority": "698/1152",
+    "clarification": "666/1152",
+    "downstream_outcome": "218/1152",
+    "interpretation_tools": "610/1152",
+    "replay_tools": "610/1152",
     "safety": "1152/1152"
   },
   "current_one_repeat_semantic_fields": {
-    "action_semantics": "674/1152",
-    "clarification": "642/1152",
+    "action_semantics": "730/1152",
+    "clarification": "698/1152",
     "entity_semantics": "255/1152",
-    "intended_action": "720/1152",
+    "intended_action": "960/1152",
     "normalized_values": "101/1152",
     "temporal_relation": "628/1152"
   },
   "current_two_repeats": {
-    "appointment_deltas": "418/2304",
+    "appointment_deltas": "422/2304",
     "audit_deltas": "384/2304",
-    "authority": "1284/2304",
-    "clarification": "1220/2304",
-    "downstream_outcome": "394/2304",
-    "interpretation_tools": "1184/2304",
-    "replay_tools": "1184/2304",
+    "authority": "1396/2304",
+    "clarification": "1332/2304",
+    "downstream_outcome": "436/2304",
+    "interpretation_tools": "1220/2304",
+    "replay_tools": "1220/2304",
     "safety": "2304/2304"
   },
   "delta_vs_baseline_one_repeat": {
-    "appointment_deltas": "-3",
+    "appointment_deltas": "-1",
     "audit_deltas": "+0",
-    "authority": "+0",
-    "clarification": "+0",
-    "downstream_outcome": "+147",
-    "interpretation_tools": "+0",
-    "replay_tools": "+0",
+    "authority": "+56",
+    "clarification": "+56",
+    "downstream_outcome": "+168",
+    "interpretation_tools": "+18",
+    "replay_tools": "+18",
     "safety": "+0"
   },
   "delta_vs_baseline_semantic_fields": {
-    "action_semantics": "+0",
-    "clarification": "+0",
+    "action_semantics": "+56",
+    "clarification": "+56",
     "entity_semantics": "+0",
-    "intended_action": "+0",
+    "intended_action": "+240",
     "normalized_values": "+0",
     "temporal_relation": "+0"
   },
   "development_only": true,
   "dimension_attribution": {
     "appointment_deltas": {
-      "aligned_failure": 968,
-      "failed": 1886,
-      "passed": 418,
+      "aligned_failure": 952,
+      "failed": 1882,
+      "passed": 422,
       "surface_contract_conflict": 866,
       "total": 2304,
-      "unsupported_or_ambiguous_surface": 52
+      "unsupported_or_ambiguous_surface": 64
     },
     "audit_deltas": {
-      "aligned_failure": 988,
+      "aligned_failure": 976,
       "failed": 1920,
       "passed": 384,
       "surface_contract_conflict": 880,
       "total": 2304,
-      "unsupported_or_ambiguous_surface": 52
+      "unsupported_or_ambiguous_surface": 64
     },
     "downstream_outcome": {
-      "aligned_failure": 966,
-      "failed": 1910,
-      "passed": 394,
-      "surface_contract_conflict": 912,
+      "aligned_failure": 1080,
+      "failed": 1868,
+      "passed": 436,
+      "surface_contract_conflict": 752,
       "total": 2304,
-      "unsupported_or_ambiguous_surface": 32
+      "unsupported_or_ambiguous_surface": 36
     },
     "replay_tools": {
-      "aligned_failure": 508,
-      "failed": 1120,
-      "passed": 1184,
-      "surface_contract_conflict": 586,
+      "aligned_failure": 558,
+      "failed": 1084,
+      "passed": 1220,
+      "surface_contract_conflict": 494,
       "total": 2304,
-      "unsupported_or_ambiguous_surface": 26
+      "unsupported_or_ambiguous_surface": 32
     }
   },
   "no_holdout_accessed": true,
   "per_rule_counts": {
-    "CONFLICT-ACT-001": 256,
-    "CONFLICT-AMB-001": 52,
-    "CONFLICT-CLR-001": 588,
+    "CONFLICT-ACT-001": 96,
+    "CONFLICT-AMB-001": 64,
+    "CONFLICT-CLR-001": 638,
     "CONFLICT-DUR-001": 276,
-    "CONFLICT-ENT-001": 46,
+    "CONFLICT-ENT-001": 50,
     "CONFLICT-NEG-001": 32,
     "CONFLICT-TMP-001": 462
   },
@@ -219,7 +219,7 @@
     "one_repeat": 0,
     "two_repeats": 0
   },
-  "report_hash": "cba97acd3f23d2ec",
+  "report_hash": "e3bae8f2b875cfbd",
   "schema_version": "lc4r2.development_gap_report.v3",
   "semantic_fields": {
     "baseline_field_passes": {
@@ -231,14 +231,14 @@
       "temporal_relation": 628
     },
     "field_passes": {
-      "action_semantics": 674,
-      "clarification": 642,
+      "action_semantics": 730,
+      "clarification": 698,
       "entity_semantics": 255,
-      "intended_action": 720,
+      "intended_action": 960,
       "normalized_values": 101,
       "temporal_relation": 628
     },
-    "passed": 720,
+    "passed": 960,
     "total": 1152
   },
   "silver_conflicts_do_not_reduce_gold_gaps": true,
