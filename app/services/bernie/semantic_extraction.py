@@ -16,7 +16,10 @@ from dataclasses import dataclass, field
 from datetime import date, timedelta
 from typing import Any
 
-from app.services.bernie.language_normalization import normalize_utterance
+from app.services.bernie.language_normalization import (
+    NormalizedUtterance,
+    normalize_utterance,
+)
 from app.services.diary.temporal import (
     extract_natural_time_constraints,
     parse_time_fragment,
@@ -37,6 +40,15 @@ class SemanticExtraction:
 
     ``claims_action_completed`` is always ``False`` and ``authority_claim``
     is always ``"read"``, ``"clarify"``, or ``"refuse"``.
+
+    ``normalized_turns`` contains the ``NormalizedUtterance`` result for every
+    input turn, providing lossless original-text evidence alongside derived
+    normalized text, time forms, and source spans.
+
+    ``action_negated`` is ``True`` when the intended action is negated (e.g.
+    "do not mark as completed") or reversed ("never mind", "not needed").
+    Such utterances retain the recognised action as semantic subject and
+    ``read`` authority, but select no mutation tools.
     """
 
     intended_action: str | None
@@ -51,6 +63,8 @@ class SemanticExtraction:
     authority_claim: str
     claims_action_completed: bool = False
     selected_tool_sequence: tuple[str, ...] = ()
+    normalized_turns: tuple[NormalizedUtterance, ...] = ()
+    action_negated: bool = False
 
 
 # ---------------------------------------------------------------------------
@@ -167,6 +181,24 @@ _NEGATION_PREFIX = re.compile(
     r"\b(do not|don'?t|never|please do not|please don'?t|not|no)\s+", re.I
 )
 
+# Reversal patterns that undo/negate a previously stated action
+_REVERSAL_PATTERNS: list[re.Pattern[str]] = [
+    re.compile(r"\bnever mind\b", re.I),
+    re.compile(r"\bnot needed\b", re.I),
+    re.compile(r"\bno need\b", re.I),
+    re.compile(r"\bleave it (where it was|as is)\b", re.I),
+    re.compile(r"\bforget it\b", re.I),
+    re.compile(r"\bscrap that\b", re.I),
+]
+
+
+def _is_reversal(text: str) -> bool:
+    """Check if text is a reversal that cancels a pending action."""
+    for pat in _REVERSAL_PATTERNS:
+        if pat.search(text):
+            return True
+    return False
+
 
 def _has_unsafe_demand(text: str) -> bool:
     """Check if text contains an unsafe bypass/completion demand.
@@ -186,6 +218,51 @@ def _has_unsafe_demand(text: str) -> bool:
             if _NEGATION_PREFIX.search(before):
                 continue  # This occurrence is negated — safe
             return True
+    return False
+
+
+# ---------------------------------------------------------------------------
+# Action negation detection
+# ---------------------------------------------------------------------------
+
+# Consolidated action patterns for reuse by negation detection.
+_ACTION_PATTERNS: dict[str, list[re.Pattern[str]]] = {
+    "create": _CREATE_PATTERNS,
+    "cancel": _CANCEL_PATTERNS,
+    "move": _MOVE_PATTERNS,
+    "resize": _RESIZE_PATTERNS,
+    "status_change": _STATUS_CHANGE_PATTERNS,
+    "explain_schedule": _EXPLAIN_PATTERNS,
+}
+
+
+def _has_action_negation(
+    utterances: list[str],
+    intended_action: str | None,
+) -> bool:
+    """Check whether the intended action is negated or reversed.
+
+    Returns ``True`` when any utterance contains a reversal pattern
+    (e.g. "never mind", "not needed") or when the action-detection
+    pattern match for *intended_action* is preceded by a negation
+    prefix ("do not", "don't", "never", "please do not", "not", "no").
+    """
+    if intended_action is None:
+        return False
+
+    for u in utterances:
+        # Reversal patterns unconditionally negate the action
+        if _is_reversal(u):
+            return True
+
+        # Negation prefix before an action pattern match
+        if intended_action in _ACTION_PATTERNS:
+            for pat in _ACTION_PATTERNS[intended_action]:
+                for match in pat.finditer(u):
+                    before = u[max(0, match.start() - 30):match.start()]
+                    if _NEGATION_PREFIX.search(before):
+                        return True
+
     return False
 
 
@@ -275,7 +352,8 @@ def _extract_practitioner(text: str) -> tuple[str | None, str]:
 # Duration extraction
 # ---------------------------------------------------------------------------
 
-_DURATION_PATTERN = re.compile(r"\b(\d+)\s*minutes?\b", re.I)
+# Matches "15 minutes", "15 minute", "15 mins", "15 min"
+_DURATION_PATTERN = re.compile(r"\b(\d+)\s*(minutes?|mins?)\b", re.I)
 _DURATION_AMBIGUOUS = re.compile(
     r"\b(how long|some time|a while|short|long)\b", re.I
 )
@@ -689,38 +767,67 @@ def _determine_tools(
     has_patient: bool,
     has_time_bounds: bool,
     action_semantics: str,
+    action_negated: bool = False,
     first_utterance: str = "",
 ) -> tuple[str, ...]:
     """Deterministic tool sequence from extraction results.
 
+    Action-specific mapping (R4 contract):
+
+    - ``create``        → ``search_patients, find_slots, create_booking``
+    - ``move``          → ``search_patients, update_appointment``
+    - ``resize``        → ``search_patients, update_appointment``
+    - ``cancel``        → ``search_patients, update_appointment``
+    - ``status_change`` → ``search_patients, change_appointment_status``
+    - ``explain_schedule`` → ``search_patients, find_slots``
+    - ``clarification`` → ``request_clarification``
+
     For unsafe utterances (adversarial scenarios), the tool sequence includes
     the first turn's legitimate tools plus ``refuse_instruction``, because the
     system processes the initial request before detecting the unsafe demand.
+
+    For negated/reversed actions no mutation tool is selected.
     """
     tools: list[str] = []
 
-    # First turn's processing — applies even when the overall action is
-    # "prohibited" due to an unsafe second turn.
+    # --- Negated / reversed: no mutation tool, read-only search ---
+    if action_negated:
+        if has_patient:
+            tools.append("search_patients")
+        return tuple(tools)
+
+    # --- Unsafe: first-turn tools + refuse_instruction ---
+    if has_unsafe:
+        if has_patient:
+            tools.append("search_patients")
+        if intended_action == "create" and has_time_bounds:
+            tools.append("find_slots")
+            tools.append("create_booking")
+        tools.append("refuse_instruction")
+        return tuple(tools)
+
+    # --- Clarification: request_clarification only ---
+    if requires_clarification:
+        tools.append("request_clarification")
+        return tuple(tools)
+
+    # --- Normal action-specific tool mapping ---
     if has_patient:
         tools.append("search_patients")
 
-    if intended_action == "create" and not requires_clarification:
-        if has_time_bounds:
-            tools.append("find_slots")
-
-    if intended_action in ("create", "move", "resize", "cancel", "status_change"):
-        # Add create_booking when the first turn has enough info,
-        # even if an unsafe demand later causes overall "prohibited".
-        if not requires_clarification:
-            tools.append("create_booking")
-    elif intended_action == "explain_schedule" and not requires_clarification:
-        pass
-
-    if requires_clarification and not has_unsafe:
-        tools.append("request_clarification")
-
-    if has_unsafe:
-        tools.append("refuse_instruction")
+    if intended_action == "create":
+        tools.append("find_slots")
+        tools.append("create_booking")
+    elif intended_action == "move":
+        tools.append("update_appointment")
+    elif intended_action == "resize":
+        tools.append("update_appointment")
+    elif intended_action == "cancel":
+        tools.append("update_appointment")
+    elif intended_action == "status_change":
+        tools.append("change_appointment_status")
+    elif intended_action == "explain_schedule":
+        tools.append("find_slots")
 
     return tuple(tools)
 
@@ -728,6 +835,42 @@ def _determine_tools(
 # ---------------------------------------------------------------------------
 # Main entry point
 # ---------------------------------------------------------------------------
+
+
+def _derive_final_temporal(
+    utterances: list[str],
+    normalized_values: dict[str, Any],
+) -> tuple[str, str | None, str | None]:
+    """Derive the final temporal relation from all utterances.
+
+    Scans all utterances and uses the last non-unspecified temporal
+    information, so that an additive or corrective later turn that
+    supplies a missing time takes precedence over the first turn's
+    ``"unspecified"``.
+    """
+    final_relation: str = "unspecified"
+    final_earliest: str | None = None
+    final_latest: str | None = None
+
+    for utterance in utterances:
+        relation, earliest, latest = _extract_temporal(utterance)
+        if relation != "unspecified" or earliest is not None or latest is not None:
+            final_relation = relation
+            if earliest:
+                final_earliest = earliest
+            if latest:
+                final_latest = latest
+
+    # Fall back to normalized_values if no utterance had temporal info
+    if final_relation == "unspecified" and normalized_values.get("earliest_time"):
+        final_earliest = normalized_values["earliest_time"]
+        final_latest = normalized_values.get("latest_time", final_earliest)
+        if final_earliest == final_latest:
+            final_relation = "exact"
+        else:
+            final_relation = "interval"
+
+    return final_relation, final_earliest, final_latest
 
 
 def extract_semantics(
@@ -738,6 +881,10 @@ def extract_semantics(
 
     This is the sole public entry point. It receives only dialogue text and
     a reference date — no scenario contract, expected values, or scorer oracle.
+
+    The function first reduces multi-turn dialogue to derive the final
+    extracted state, then calculates all top-level fields from that final
+    state rather than only the first turn.
 
     Parameters
     ----------
@@ -760,38 +907,46 @@ def extract_semantics(
     if not utterances:
         raise ValueError("utterances must be non-empty")
 
+    # --- 0. Normalized turns (lossless evidence for every input turn) ---
+    normalized_turns = tuple(normalize_utterance(u) for u in utterances)
+
     # --- 1. Unsafe detection (run first — it gates everything) ---
     has_unsafe = any(_has_unsafe_demand(u) for u in utterances)
 
-    # --- 2. Action detection ---
+    # --- 2. Action detection (from first turn) ---
     primary = utterances[0]
     intended_action = _detect_intended_action(primary)
 
-    # --- 3. Temporal extraction ---
-    temporal_relation, earliest, latest = _extract_temporal(primary)
+    # --- 3. Multi-turn reduction (for normalized_values) ---
+    normalized_values = _reduce_multi_turn(utterances, reference_date)
+
+    # Derive final temporal relation, has_time_bounds from all turns
+    temporal_relation, earliest, latest = _derive_final_temporal(
+        utterances, normalized_values,
+    )
     has_time_bounds = bool(earliest is not None or latest is not None)
 
-    # --- 4. Date extraction ---
-    ref_parts = reference_date.split("-")
-    ref = date(int(ref_parts[0]), int(ref_parts[1]), int(ref_parts[2]))
-    date_val = _extract_date(primary, ref)
+    # --- 4. Date from reduced values ---
+    date_val = normalized_values.get("appointment_date")
     has_date = date_val is not None
 
-    # --- 5. Duration extraction ---
-    duration_minutes, _ = _extract_duration(primary)
+    # --- 5. Duration from reduced values ---
+    duration_minutes = normalized_values.get("duration_minutes")
     has_duration = duration_minutes is not None
 
-    # --- 6. Entity extraction ---
-    _, patient_sem = _extract_patient(primary)
-    _, practitioner_sem = _extract_practitioner(primary)
+    # --- 6. Entity semantics (multi-turn aware) ---
+    entities = _extract_entity_semantics(utterances)
+    patient_sem = entities.get("patient", "omitted")
+    practitioner_sem = entities.get("practitioner", "omitted")
 
-    # --- 7. Clarification detection ---
+    # --- 7. Correction index ---
     correction_index = None
     for i, u in enumerate(utterances):
         if i > 0 and _is_correction_turn(u):
             correction_index = i
             break
 
+    # --- 8. Clarification detection (uses final state) ---
     requires_clarification, clarification_choices = _determine_clarification(
         utterances,
         intended_action,
@@ -803,33 +958,24 @@ def extract_semantics(
         correction_index,
     )
 
-    # --- 8. Action semantics ---
+    # --- 9. Action negation ---
+    action_negated = _has_action_negation(utterances, intended_action)
+
+    # When the action is negated/reversed, clarification is not needed
+    # because the negation itself is the complete instruction.
+    if action_negated:
+        requires_clarification = False
+        clarification_choices = ()
+
+    # --- 10. Action semantics ---
     if has_unsafe:
         action_semantics = "prohibited"
+    elif action_negated:
+        action_semantics = "intended"  # negated actions are safe, not prohibited
     elif requires_clarification:
         action_semantics = "ambiguous"
     else:
         action_semantics = "intended"
-
-    # --- 9. Normalized values (multi-turn reduction) ---
-    normalized_values = _reduce_multi_turn(utterances, reference_date)
-
-    # Re-evaluate temporal_relation if a correction turn changed the bounds.
-    # When the correction turn introduces an interval (e.g. "3pm to 4pm"
-    # instead of "at 3pm"), the top-level relation must reflect that.
-    if correction_index is not None and correction_index < len(utterances):
-        corr_relation, corr_earliest, corr_latest = _extract_temporal(
-            utterances[correction_index]
-        )
-        if corr_relation != "unspecified":
-            temporal_relation = corr_relation
-            if corr_earliest:
-                earliest = corr_earliest
-            if corr_latest:
-                latest = corr_latest
-
-    # --- 10. Entity semantics (multi-turn) ---
-    entities = _extract_entity_semantics(utterances)
 
     # --- 11. Authority ---
     if has_unsafe:
@@ -839,7 +985,7 @@ def extract_semantics(
     else:
         authority = "read"
 
-    # --- 12. Tool sequence ---
+    # --- 12. Tool sequence (uses final state including action_negated) ---
     tools = _determine_tools(
         intended_action,
         has_unsafe,
@@ -847,6 +993,7 @@ def extract_semantics(
         patient_sem == "exact",
         has_time_bounds,
         action_semantics,
+        action_negated=action_negated,
     )
 
     return SemanticExtraction(
@@ -862,6 +1009,8 @@ def extract_semantics(
         authority_claim=authority,
         claims_action_completed=False,
         selected_tool_sequence=tools,
+        normalized_turns=normalized_turns,
+        action_negated=action_negated,
     )
 
 

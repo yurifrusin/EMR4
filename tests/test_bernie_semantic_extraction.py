@@ -16,12 +16,19 @@ Covers the bounded behaviours required by the sprint contract:
 - Authority is always read, clarify, or refuse.
 - claims_action_completed is always False.
 - No expected-answer echo -- the extraction never reads a scenario contract.
+- ``min``/``mins`` duration forms (R1).
+- ``normalized_turns`` evidence with original text and source spans (R2).
+- ``action_negated`` fact for safe negated and reversed actions (R3).
+- Action-specific tool mapping (R4).
+- Multi-turn final-state consistency (R5).
+- Strengthened safety assertions (R6).
 """
 
 from __future__ import annotations
 
 import pytest
 
+from app.services.bernie.language_normalization import NormalizedUtterance
 from app.services.bernie.semantic_extraction import (
     SemanticExtraction,
     extract_semantics,
@@ -593,3 +600,518 @@ class TestInputValidation:
     def test_empty_utterances_raises(self) -> None:
         with pytest.raises(ValueError, match="utterances must be non-empty"):
             extract_semantics([], "2026-07-13")
+
+
+# ============================================================
+# 11.  R1 — Normalized-value: min/mins duration forms
+# ============================================================
+
+
+class TestMinMinsDuration:
+    """Duration extraction supports ``min``/``mins`` in addition to
+    ``minute``/``minutes``."""
+
+    def test_min_duration(self) -> None:
+        result = extract_semantics(
+            ["Book Margaret Thompson tomorrow at 3pm for 30 min"],
+            "2026-07-13",
+        )
+        assert result.normalized_values.get("duration_minutes") == 30
+        assert result.entity_semantics["duration"] == "exact"
+        assert result.earliest_time == "15:00"
+
+    def test_mins_duration(self) -> None:
+        result = extract_semantics(
+            ["Book Margaret Thompson tomorrow at 3pm for 45 mins"],
+            "2026-07-13",
+        )
+        assert result.normalized_values.get("duration_minutes") == 45
+        assert result.entity_semantics["duration"] == "exact"
+
+    def test_minutes_still_works(self) -> None:
+        result = extract_semantics(
+            ["Book Margaret Thompson tomorrow at 3pm for 15 minutes"],
+            "2026-07-13",
+        )
+        assert result.normalized_values.get("duration_minutes") == 15
+
+    def test_minute_singular_still_works(self) -> None:
+        result = extract_semantics(
+            ["Book Margaret Thompson tomorrow at 3pm for 1 minute"],
+            "2026-07-13",
+        )
+        assert result.normalized_values.get("duration_minutes") == 1
+
+    def test_min_does_not_match_non_duration(self) -> None:
+        """``min`` as part of other words (e.g. 'admin') does not match."""
+        result = extract_semantics(
+            ["Book Margaret Thompson tomorrow at 3pm for admin"],
+            "2026-07-13",
+        )
+        assert result.normalized_values.get("duration_minutes") is None
+
+
+# ============================================================
+# 12.  R2 — Lossless normalized-turn evidence
+# ============================================================
+
+
+class TestNormalizedTurns:
+    """``SemanticExtraction.normalized_turns`` provides ``NormalizedUtterance``
+    for every input turn with original text, normalized form, time forms, and
+    source spans."""
+
+    def test_normalized_turns_length(self) -> None:
+        result = extract_semantics(
+            ["Book Margaret Thompson tomorrow at 3pm", "for 15 minutes"],
+            "2026-07-13",
+        )
+        assert len(result.normalized_turns) == 2
+
+    def test_normalized_turns_original_preserved(self) -> None:
+        utterance = "Book Margaret Thompson tomorrow at 3pm for 15 minutes"
+        result = extract_semantics([utterance], "2026-07-13")
+        assert result.normalized_turns[0].original == utterance
+
+    def test_normalized_turns_normalized_derived(self) -> None:
+        result = extract_semantics(
+            ["Book Margaret Thompson TOMORROW at 3pm"], "2026-07-13"
+        )
+        norm = result.normalized_turns[0].normalized
+        assert norm == "book margaret thompson tomorrow at 3pm"
+        assert norm.islower()
+
+    def test_normalized_turns_time_forms(self) -> None:
+        result = extract_semantics(
+            ["Book Margaret Thompson tomorrow at 3pm"], "2026-07-13"
+        )
+        time_forms = result.normalized_turns[0].time_forms
+        assert "3pm" in time_forms or "at 3pm" in time_forms
+
+    def test_normalized_turns_source_spans(self) -> None:
+        result = extract_semantics(
+            ["Book Margaret Thompson tomorrow at 3pm"], "2026-07-13"
+        )
+        spans = result.normalized_turns[0].source_spans
+        assert len(spans) > 0
+        # Every span is a (start, end) pair within the original string
+        for key, (start, end) in spans.items():
+            assert 0 <= start < end
+            assert end <= len(result.normalized_turns[0].original)
+
+    def test_normalized_turns_single_turn(self) -> None:
+        result = extract_semantics(
+            ["Book Margaret Thompson tomorrow at 3pm"], "2026-07-13"
+        )
+        assert len(result.normalized_turns) == 1
+        assert isinstance(result.normalized_turns[0], NormalizedUtterance)
+
+    def test_normalized_turns_multi_turn_original(self) -> None:
+        utterances = [
+            "Book Margaret Thompson tomorrow at 3pm",
+            "Actually make it 4pm",
+            "for 15 minutes",
+        ]
+        result = extract_semantics(utterances, "2026-07-13")
+        assert len(result.normalized_turns) == 3
+        for i, u in enumerate(utterances):
+            assert result.normalized_turns[i].original == u
+
+
+# ============================================================
+# 13.  R3 — Safe negation / reversal detection
+# ============================================================
+
+
+class TestActionNegation:
+    """Negated or reversed actions are detected via ``action_negated``,
+    retain ``read`` authority, and select no mutation tools."""
+
+    # --- Negated completion ---
+
+    def test_negated_completion_intended_not_prohibited(self) -> None:
+        """``Please do not mark ... as completed`` is safe, not prohibited."""
+        result = extract_semantics(
+            ["Please do not mark Margaret Thompson's"
+             " appointment as completed"],
+            "2026-07-13",
+        )
+        assert result.action_semantics == "intended"
+        assert result.action_negated is True
+        assert result.authority_claim == "read"
+        assert result.claims_action_completed is False
+        # No mutation tool
+        assert "change_appointment_status" not in result.selected_tool_sequence
+        assert "update_appointment" not in result.selected_tool_sequence
+        assert "create_booking" not in result.selected_tool_sequence
+        # Search tool is acceptable for identification
+        assert "search_patients" in result.selected_tool_sequence
+
+    def test_negated_mark_completed_no_mutation_tools(self) -> None:
+        """Safe negated completion selects no mutation tool."""
+        result = extract_semantics(
+            ["Please do not mark Margaret Thompson's"
+             " appointment as completed"],
+            "2026-07-13",
+        )
+        assert result.action_negated is True
+        for tool in ("change_appointment_status", "update_appointment",
+                     "create_booking", "refuse_instruction"):
+            assert tool not in result.selected_tool_sequence, (
+                f"Negated action should not select {tool}"
+            )
+
+    def test_never_mark_completed_is_negated(self) -> None:
+        """``Never mark ... completed`` is a safe negation."""
+        result = extract_semantics(
+            ["Never mark Margaret Thompson's appointment as completed"],
+            "2026-07-13",
+        )
+        assert result.action_semantics == "intended"
+        assert result.action_negated is True
+        assert result.authority_claim == "read"
+        assert result.claims_action_completed is False
+        assert "change_appointment_status" not in result.selected_tool_sequence
+
+    def test_negated_recognized_action_subject(self) -> None:
+        """Negated action retains the recognised action as semantic subject."""
+        result = extract_semantics(
+            ["Please do not mark Margaret Thompson's"
+             " appointment as completed"],
+            "2026-07-13",
+        )
+        assert result.intended_action == "status_change"
+
+    # --- Reversal patterns ---
+
+    def test_reversal_never_mind(self) -> None:
+        result = extract_semantics(
+            ["Never mind, cancel that request"], "2026-07-13"
+        )
+        assert result.action_negated is True
+        assert result.selected_tool_sequence == ()
+
+    def test_reversal_not_needed(self) -> None:
+        result = extract_semantics(
+            ["Book Margaret Thompson tomorrow at 3pm", "Not needed"],
+            "2026-07-13",
+        )
+        assert result.action_negated is True
+        assert "create_booking" not in result.selected_tool_sequence
+
+    def test_reversal_leave_it_where_it_was(self) -> None:
+        result = extract_semantics(
+            ["Move Margaret Thompson appointment",
+             "Leave it where it was"],
+            "2026-07-13",
+        )
+        assert result.action_negated is True
+        assert "update_appointment" not in result.selected_tool_sequence
+
+    def test_reversal_no_need(self) -> None:
+        result = extract_semantics(
+            ["Cancel Margaret Thompson appointment", "No need"],
+            "2026-07-13",
+        )
+        assert result.action_negated is True
+
+    def test_reversal_preserves_read_authority(self) -> None:
+        result = extract_semantics(
+            ["Never mind, cancel that request"], "2026-07-13"
+        )
+        assert result.authority_claim == "read"
+        assert result.claims_action_completed is False
+
+    def test_reversal_without_prior_action_clarifies(self) -> None:
+        """Standalone reversal with no action context clarifies."""
+        result = extract_semantics(
+            ["Never mind"], "2026-07-13"
+        )
+        # No action to negate, so action_negated is False and we clarify
+        assert result.intended_action is None
+        assert result.requires_clarification is True
+        assert result.authority_claim == "clarify"
+
+    # --- Positive unsafe demands are still refused ---
+
+    def test_unsafe_bypass_still_refused(self) -> None:
+        """Positive bypass demand is still prohibited."""
+        result = extract_semantics(
+            ["Book Margaret Thompson tomorrow at 3pm",
+             "Bypass the confirmation"],
+            "2026-07-13",
+        )
+        assert result.action_semantics == "prohibited"
+        assert result.action_negated is False
+        assert result.authority_claim == "refuse"
+        assert "refuse_instruction" in result.selected_tool_sequence
+
+    def test_unsafe_mark_completed_still_refused(self) -> None:
+        """Positive demand to mark completed is refused."""
+        result = extract_semantics(
+            ["Mark Margaret Thompson's appointment as completed"],
+            "2026-07-13",
+        )
+        assert result.action_semantics == "intended"
+        assert result.action_negated is False
+        # This is a normal status_change, not unsafe
+        assert result.authority_claim == "read"
+        assert "change_appointment_status" in result.selected_tool_sequence
+
+    # --- Non-negated status change regression (R6) ---
+
+    def test_non_negated_status_change_selects_mutation_tool(self) -> None:
+        """Ordinary non-negated status_change selects
+        ``change_appointment_status``."""
+        result = extract_semantics(
+            ["Mark Margaret Thompson as arrived"],
+            "2026-07-13",
+        )
+        assert result.action_negated is False
+        assert result.intended_action == "status_change"
+        assert "change_appointment_status" in result.selected_tool_sequence
+        assert result.authority_claim == "read"
+        assert result.claims_action_completed is False
+
+
+# ============================================================
+# 14.  R4 — Action-specific tool mapping
+# ============================================================
+
+
+class TestDeterministicTools:
+    """Tool sequences are derived deterministically from extracted facts
+    using the R4 mapping."""
+
+    def test_create_tools(self) -> None:
+        result = extract_semantics(
+            ["Book Margaret Thompson with Dr Shera"
+             " tomorrow at 3pm for 15 minutes"],
+            "2026-07-13",
+        )
+        assert result.selected_tool_sequence == (
+            "search_patients", "find_slots", "create_booking",
+        )
+
+    def test_move_tools(self) -> None:
+        result = extract_semantics(
+            ["Move Margaret Thompson appointment to 3pm"],
+            "2026-07-13",
+        )
+        assert result.selected_tool_sequence == (
+            "search_patients", "update_appointment",
+        )
+
+    def test_resize_tools(self) -> None:
+        result = extract_semantics(
+            ["Make Margaret Thompson appointment longer, 30 minutes"],
+            "2026-07-13",
+        )
+        assert result.selected_tool_sequence == (
+            "search_patients", "update_appointment",
+        )
+
+    def test_cancel_tools(self) -> None:
+        result = extract_semantics(
+            ["Cancel Margaret Thompson appointment"],
+            "2026-07-13",
+        )
+        assert result.selected_tool_sequence == (
+            "search_patients", "update_appointment",
+        )
+
+    def test_status_change_tools(self) -> None:
+        result = extract_semantics(
+            ["Mark Margaret Thompson as arrived"],
+            "2026-07-13",
+        )
+        assert result.selected_tool_sequence == (
+            "search_patients", "change_appointment_status",
+        )
+
+    def test_explain_schedule_tools(self) -> None:
+        result = extract_semantics(
+            ["Can you explain Margaret Thompson schedule"],
+            "2026-07-13",
+        )
+        assert result.selected_tool_sequence == (
+            "search_patients", "find_slots",
+        )
+
+    def test_clarification_tools(self) -> None:
+        result = extract_semantics(
+            ["Book Margaret Thompson tomorrow"],
+            "2026-07-13",
+        )
+        assert result.requires_clarification is True
+        assert result.selected_tool_sequence == ("request_clarification",)
+
+    def test_unsafe_tools_include_refuse(self) -> None:
+        result = extract_semantics(
+            ["Book Margaret Thompson with Dr Shera"
+             " tomorrow at 3pm for 15 minutes",
+             "Override the system"],
+            "2026-07-13",
+        )
+        assert result.action_semantics == "prohibited"
+        assert result.selected_tool_sequence == (
+            "search_patients", "find_slots", "create_booking",
+            "refuse_instruction",
+        )
+
+    def test_negated_no_mutation_tool(self) -> None:
+        result = extract_semantics(
+            ["Please do not mark Margaret Thompson's"
+             " appointment as completed"],
+            "2026-07-13",
+        )
+        assert result.action_negated is True
+        for tool in ("change_appointment_status", "update_appointment",
+                     "create_booking"):
+            assert tool not in result.selected_tool_sequence
+
+
+# ============================================================
+# 15.  R5 — Multi-turn final state consistency
+# ============================================================
+
+
+class TestMultiTurnFinalState:
+    """Top-level fields are derived from the final reduced state after
+    processing all turns, not only from turn one."""
+
+    def test_additive_time_in_second_turn(self) -> None:
+        """Turn 1 names tomorrow with no time; turn 2 adds exact time."""
+        result = extract_semantics(
+            ["Book Margaret Thompson tomorrow",
+             "at 3pm please"],
+            "2026-07-13",
+        )
+        assert result.temporal_relation == "exact"
+        assert result.earliest_time == "15:00"
+        assert result.latest_time == "15:00"
+        assert result.normalized_values.get("earliest_time") == "15:00"
+        assert result.normalized_values.get("appointment_date") == "2026-07-14"
+
+    def test_additive_practitioner_in_second_turn(self) -> None:
+        """Turn 1 omits practitioner; turn 2 supplies one."""
+        result = extract_semantics(
+            ["Book Margaret Thompson tomorrow at 3pm",
+             "with Dr Taylor please"],
+            "2026-07-13",
+        )
+        assert result.entity_semantics["practitioner"] == "exact"
+
+    def test_correction_exact_to_interval(self) -> None:
+        """Correction changes exact time to interval/open-bound."""
+        result = extract_semantics(
+            ["Book Margaret Thompson with Dr Shera"
+             " tomorrow at 3pm for 15 minutes",
+             "Actually, make it between 2pm and 4pm"],
+            "2026-07-13",
+        )
+        assert result.temporal_relation == "interval"
+        assert result.earliest_time == "14:00"
+        assert result.latest_time == "16:00"
+        assert result.normalized_values.get("earliest_time") == "14:00"
+        assert result.normalized_values.get("latest_time") == "16:00"
+
+    def test_correction_exact_to_open_bound(self) -> None:
+        """Correction changes exact time to open-bound (after)."""
+        result = extract_semantics(
+            ["Book Margaret Thompson with Dr Shera"
+             " tomorrow at 3pm for 15 minutes",
+             "Actually, make it after 4pm"],
+            "2026-07-13",
+        )
+        assert result.temporal_relation == "not_before"
+        assert result.normalized_values.get("earliest_time") is not None
+
+    def test_additive_date_then_time(self) -> None:
+        """Additive: first turn only has date, second adds time."""
+        result = extract_semantics(
+            ["Book Margaret Thompson tomorrow",
+             "at 10am"],
+            "2026-07-13",
+        )
+        assert result.temporal_relation == "exact"
+        assert result.earliest_time == "10:00"
+        assert not result.requires_clarification
+
+    def test_multi_turn_no_time_means_clarify(self) -> None:
+        """Even with multi-turn, no time at all means clarify."""
+        result = extract_semantics(
+            ["Book Margaret Thompson tomorrow",
+             "for 15 minutes"],
+            "2026-07-13",
+        )
+        assert result.temporal_relation == "unspecified"
+        assert result.requires_clarification is True
+
+
+# ============================================================
+# 16.  R6 — Strengthened safety assertions
+# ============================================================
+
+
+class TestStrengthenedSafety:
+    """Existing safe-negation tests are strengthened with explicit negative
+    fact, claims_action_completed, authority, and tool assertions."""
+
+    def test_safe_negated_bypass_full_safety(self) -> None:
+        result = extract_semantics(
+            ["Book Margaret Thompson with Dr Shera"
+             " tomorrow at 3pm for 15 minutes",
+             "Please do not bypass the confirmation"],
+            "2026-07-13",
+        )
+        assert result.action_semantics == "intended"
+        assert result.action_negated is False  # not negating the action itself
+        assert result.claims_action_completed is False
+        assert result.authority_claim == "read"
+        # This is a normal create, so it has normal tools
+        assert "create_booking" in result.selected_tool_sequence
+        assert "refuse_instruction" not in result.selected_tool_sequence
+
+    def test_safe_negated_bypass_not_unsafe(self) -> None:
+        result = extract_semantics(
+            ["Book Margaret Thompson with Dr Shera"
+             " tomorrow at 3pm for 15 minutes",
+             "Please do not bypass the confirmation"],
+            "2026-07-13",
+        )
+        assert result.action_semantics == "intended"
+        assert result.authority_claim == "read"
+        assert result.action_negated is False
+
+    def test_non_negated_status_change_regression(self) -> None:
+        """Ordinary (non-negated) status_change still selects
+        ``change_appointment_status``."""
+        result = extract_semantics(
+            ["Mark Margaret Thompson as arrived"],
+            "2026-07-13",
+        )
+        assert result.action_negated is False
+        assert result.intended_action == "status_change"
+        assert "change_appointment_status" in result.selected_tool_sequence
+        assert "update_appointment" not in result.selected_tool_sequence
+        assert "create_booking" not in result.selected_tool_sequence
+        assert result.authority_claim == "read"
+        assert result.claims_action_completed is False
+
+    def test_negated_completion_full_safety_assertions(self) -> None:
+        """Negated completion: explicit negative fact, safe authority,
+        no mutation tool."""
+        result = extract_semantics(
+            ["Please do not mark Margaret Thompson's"
+             " appointment as completed"],
+            "2026-07-13",
+        )
+        assert result.action_semantics == "intended"
+        assert result.action_negated is True
+        assert result.claims_action_completed is False
+        assert result.authority_claim == "read"
+        assert "change_appointment_status" not in result.selected_tool_sequence
+        assert "update_appointment" not in result.selected_tool_sequence
+        assert "create_booking" not in result.selected_tool_sequence
+        assert "refuse_instruction" not in result.selected_tool_sequence
