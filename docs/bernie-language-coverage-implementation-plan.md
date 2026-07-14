@@ -269,6 +269,8 @@ the mixed upstream sources.
 
 ### LC3 - Composed T2/T3 Evaluator
 
+Status: complete and independently reviewed on 2026-07-14.
+
 - Run every language variant through typed interpretation and deterministic
   diary replay.
 - Add field-level, downstream-outcome, tool, authority, clarification, and
@@ -278,6 +280,16 @@ the mixed upstream sources.
 
 Exit: failures identify the responsible layer, and intentionally introduced
 semantic/parser defects are detected.
+
+LC3 composes the three adjudicated LC1 scenarios and fifteen Silver/pending LC2
+candidates into 36 deterministic samples (two repeats each). The committed
+report records 26 passes and 10 honest failures, with interpretation and
+integration layers separately visible, zero policy/safety/variance failures,
+seven passing metamorphic relations, and nine detected scorer mutations. The
+candidate-aware lattice retains all 152,061 adjudicated empty cells while
+showing seven distinct candidate-only cells; pending evidence does not reduce
+Gold gaps. Gemini 3.5 Flash independently returned `DECISION: pass` after
+reproducing the focused tests and lattice arithmetic. No candidate was promoted.
 
 ### LC4 - Scale And Holdout Evaluation
 
@@ -320,12 +332,15 @@ variance, not average accuracy or persuasive output.
 
 ## Immediate Direction
 
-The next EMR4 product tranche is LC3, not T3.5. Preserve T3.1-T3.4, defer live
-or static provider-adapter work, and compose LC2's pending corpus with typed
-interpretation plus deterministic diary replay before growing or promoting the
-corpus.
+The next EMR4 product tranche is LC4, not T3.5. Preserve T3.1-T3.4, defer live
+or static provider-adapter work, and expand the corpus from LC3's measured gaps.
+Prioritize clarification, interval/unspecified temporal relations, entity
+ambiguity, and interpretation/replay tool selection. Establish an independently
+sourced or generated protected holdout before using any model against it; do
+not promote the fifteen Silver/pending LC2 candidates merely because LC3 can
+execute them.
 
-No user decision is required for ordinary LC3 implementation. Pause only if
+No user decision is required for ordinary LC4 implementation. Pause only if
 work would broaden historical-trove access, send sensitive data to a provider,
 accept material licensing/cost terms, open live-provider execution, or change
 diary write authority.
@@ -334,8 +349,8 @@ diary write authority.
 
 After restarting the app, a new orchestrator should read `AGENTS.md`, this plan,
 the T1/T2 closeouts, and the T3 shadow-evaluation status before changing code.
-It should verify `master` and `origin/master`, confirm the LC1/LC2 closeout and
-the blocked T3 gates, and begin LC3 through the normal Ariadne workflow without
+It should verify `master` and `origin/master`, confirm the LC1-LC3 closeout and
+the blocked T3 gates, and begin LC4 through the normal Ariadne workflow without
 reopening T3.5 or asking for routine permission.
 
 Recommended new-task prompt:
@@ -346,11 +361,12 @@ AGENTS.md and read docs/bernie-language-coverage-implementation-plan.md,
 docs/bernie-t1-stateful-scenario-laboratory.md,
 docs/bernie-t2-deterministic-behaviour-matrix.md, and
 docs/bernie-t3-shadow-evaluation.md. Verify the worktree and origin/master,
-then begin LC3 Composed T2/T3 Evaluator through the normal Ariadne workflow.
-Run the LC2 corpus through typed interpretation and deterministic diary replay;
-score field, downstream outcome, tool, authority, clarification, and variance
-layers; add metamorphic/property/mutation tests; and refresh candidate-aware
-coverage gaps. Preserve T3.1-T3.4 and defer T3.5 provider adapters. Continue
+then begin LC4 Scale and Holdout Evaluation through the normal Ariadne workflow.
+Grow the corpus from LC3's measured clarification, temporal, entity, and tool
+selection gaps; establish an independent protected holdout; preserve corpus
+provenance and no-self-certification; and keep candidate-aware adjudicated gaps
+separate from pending evidence. Preserve T3.1-T3.4 and defer T3.5 provider
+adapters. Continue
 through ordinary implementation, tests, review, commit, and push without
 pausing unless a documented user decision boundary is reached.
 ```

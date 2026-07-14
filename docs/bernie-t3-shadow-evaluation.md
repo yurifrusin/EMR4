@@ -91,9 +91,10 @@ diary replay. The approved direction is recorded in
 
 ## Next Slice
 
-Do not proceed directly to T3.5. LC1 Semantic Foundation and LC2 Corpus Factory
-are complete; begin LC3 Composed T2/T3 Evaluator. Run the pending corpus through
-typed interpretation and deterministic diary replay, score semantic and
-authority failures by layer, add metamorphic/property/mutation checks, and
-refresh candidate-aware coverage gaps. Preserve the T3.1-T3.4 infrastructure
-while external calls remain blocked.
+Do not proceed directly to T3.5. LC1 Semantic Foundation, LC2 Corpus Factory,
+and LC3 Composed T2/T3 Evaluator are complete. LC3 now exposes field, outcome,
+tool, authority, clarification, delta, safety, failure-layer, mutation,
+metamorphic, and repeat-variance evidence across the adjudicated seed and
+Silver/pending corpus. Begin LC4 Scale and Holdout Evaluation from the measured
+clarification, temporal, entity, and tool-selection gaps. Preserve the T3.1-T3.4
+infrastructure while external calls remain blocked.
