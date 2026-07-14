@@ -14,8 +14,6 @@ Covers:
 
 from __future__ import annotations
 
-import copy
-import hashlib
 import json
 import pathlib
 import random
@@ -149,16 +147,6 @@ class TestOrderInvariance:
     def test_shuffled_input_produces_same_taxonomy(self) -> None:
         """Classifying variants in original and shuffled order gives identical
         aggregate taxonomy."""
-        # Build report in original order to get reference taxonomy
-        report_original = build_report()
-        original_tax = report_original["temporal_taxonomy"]
-        original_pairs = report_original["conflict_pair_counts"]
-        original_subtypes = report_original["insufficient_subtypes"]
-
-        # Now load variants and run classification with shuffled order.
-        # We need direct access to the loading + classification pipeline
-        # without the full report build (to avoid regenerating the evaluation
-        # report inside the test).
         from scripts.bernie_lc4r6_temporal_evidence_report import (
             _classify_temporal_aligned_failures,
             _load_corpus,
@@ -166,24 +154,14 @@ class TestOrderInvariance:
 
         corpus = _load_corpus()
         variants = list(corpus.all_variants())
+        taxonomy_original = _classify_temporal_aligned_failures(variants)
 
-        # Create a deterministic shuffle (reversed order is also a valid test)
         shuffled = list(variants)
         random.seed(42)
         random.shuffle(shuffled)
 
         taxonomy_shuffled = _classify_temporal_aligned_failures(shuffled)
-
-        # Compare every measurable field
-        for name in EXPECTED_BUCKETS:
-            assert taxonomy_shuffled["buckets"][name]["count"] == original_tax[name]["count"], (
-                f"Bucket {name} count differs after shuffle: "
-                f"{taxonomy_shuffled['buckets'][name]['count']} != {original_tax[name]['count']}"
-            )
-            assert taxonomy_shuffled["buckets"][name]["hash"] == original_tax[name]["hash"], (
-                f"Bucket {name} hash differs after shuffle: "
-                f"{taxonomy_shuffled['buckets'][name]['hash']} != {original_tax[name]['hash']}"
-            )
+        assert taxonomy_shuffled == taxonomy_original
 
     def test_reversed_input_produces_same_taxonomy(self) -> None:
         """Classifying variants in reversed order gives identical taxonomy."""
@@ -202,12 +180,7 @@ class TestOrderInvariance:
         reversed_variants = list(reversed(variants))
         tax_reversed = _classify_temporal_aligned_failures(reversed_variants)
 
-        for name in EXPECTED_BUCKETS:
-            assert tax_reversed["buckets"][name]["count"] == tax_original["buckets"][name]["count"]
-            assert tax_reversed["buckets"][name]["hash"] == tax_original["buckets"][name]["hash"]
-
-        assert tax_reversed["selection"]["hash"] == tax_original["selection"]["hash"]
-        assert tax_reversed["selection"]["count"] == tax_original["selection"]["count"]
+        assert tax_reversed == tax_original
 
 
 # =============================================================================
