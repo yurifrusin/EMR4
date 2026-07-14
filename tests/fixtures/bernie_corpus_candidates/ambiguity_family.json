@@ -32,11 +32,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "clarify_temporal",
-      "description": "Ambiguity: 'sometime in the afternoon' is an interval (13:00-17:00) requiring exact time clarification.",
+      "description": "Ambiguity: 'sometime in the afternoon' is an interval (13:00-17:00) requiring exact time clarification; date and duration explicit.",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Can I book Margaret Thompson with Dr Shera sometime in the afternoon"
+          "utterance": "Can I book Margaret Thompson with Dr Shera tomorrow sometime in the afternoon for 15 minutes"
         }
       ],
       "reference_date": "2026-07-13",
@@ -47,32 +47,34 @@
       "earliest_time": "13:00",
       "latest_time": "17:00",
       "normalized_values": {
+        "appointment_date": "2026-07-14",
         "time_period": "afternoon",
         "earliest_time": "13:00",
-        "latest_time": "17:00"
+        "latest_time": "17:00",
+        "duration_minutes": 15
       },
       "source_spans": {
         "temporal_relation": [
           {
             "turn_index": 0,
-            "start": 43,
-            "end": 68,
+            "start": 52,
+            "end": 77,
             "text": "sometime in the afternoon"
           }
         ],
         "earliest_time": [
           {
             "turn_index": 0,
-            "start": 43,
-            "end": 68,
+            "start": 52,
+            "end": 77,
             "text": "sometime in the afternoon"
           }
         ],
         "latest_time": [
           {
             "turn_index": 0,
-            "start": 43,
-            "end": 68,
+            "start": 52,
+            "end": 77,
             "text": "sometime in the afternoon"
           }
         ],
@@ -90,6 +92,22 @@
             "start": 29,
             "end": 42,
             "text": "with Dr Shera"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 78,
+            "end": 92,
+            "text": "for 15 minutes"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 43,
+            "end": 51,
+            "text": "tomorrow"
           }
         ]
       },
@@ -170,11 +188,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "clarify_temporal",
-      "description": "Ambiguity: practitioner unspecified, interval temporal relation retained — clarification required for practitioner.",
+      "description": "Ambiguity: practitioner unspecified, interval temporal relation retained — clarification required for practitioner; date and duration explicit.",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Can I book Margaret Thompson with a doctor sometime in the afternoon"
+          "utterance": "Can I book Margaret Thompson with a doctor tomorrow sometime in the afternoon for 15 minutes"
         }
       ],
       "reference_date": "2026-07-13",
@@ -185,32 +203,34 @@
       "earliest_time": "13:00",
       "latest_time": "17:00",
       "normalized_values": {
+        "appointment_date": "2026-07-14",
         "time_period": "afternoon",
         "earliest_time": "13:00",
-        "latest_time": "17:00"
+        "latest_time": "17:00",
+        "duration_minutes": 15
       },
       "source_spans": {
         "temporal_relation": [
           {
             "turn_index": 0,
-            "start": 43,
-            "end": 68,
+            "start": 52,
+            "end": 77,
             "text": "sometime in the afternoon"
           }
         ],
         "earliest_time": [
           {
             "turn_index": 0,
-            "start": 43,
-            "end": 68,
+            "start": 52,
+            "end": 77,
             "text": "sometime in the afternoon"
           }
         ],
         "latest_time": [
           {
             "turn_index": 0,
-            "start": 43,
-            "end": 68,
+            "start": 52,
+            "end": 77,
             "text": "sometime in the afternoon"
           }
         ],
@@ -228,6 +248,22 @@
             "start": 29,
             "end": 42,
             "text": "with a doctor"
+          }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 78,
+            "end": 92,
+            "text": "for 15 minutes"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 43,
+            "end": 51,
+            "text": "tomorrow"
           }
         ]
       },

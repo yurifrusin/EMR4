@@ -287,7 +287,8 @@
         "diary_page_date": "2026-07-14",
         "seeded_appointments": [],
         "practitioners_available": [
-          "pr-001"
+          "pr-001",
+          "pr-002"
         ],
         "patients_booked_today": []
       },

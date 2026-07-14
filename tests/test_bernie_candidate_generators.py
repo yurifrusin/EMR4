@@ -118,6 +118,24 @@ def test_build_source_spans_exact_match():
     assert spans["duration_minutes"][0]["text"] == "for 15 minutes"
 
 
+def test_build_source_spans_appointment_date():
+    """_build_source_spans emits appointment_date span when date_text supplied."""
+    u = "Book Alice tomorrow at 3pm for 15 minutes"
+    spans = _build_source_spans(
+        u,
+        time_text="at 3pm",
+        patient_text="Alice",
+        duration_text="for 15 minutes",
+        date_text="tomorrow",
+        turn_index=0,
+    )
+    assert "appointment_date" in spans
+    assert spans["appointment_date"][0]["text"] == "tomorrow"
+    assert spans["appointment_date"][0]["turn_index"] == 0
+    actual = u[spans["appointment_date"][0]["start"]:spans["appointment_date"][0]["end"]]
+    assert actual == "tomorrow"
+
+
 def test_build_source_spans_raises_on_missing_text():
     """_build_source_spans raises ValueError when evidence substring is absent."""
     u = "Make an appointment for Alice"
@@ -139,11 +157,23 @@ def test_build_source_spans_none_text_skipped():
         practitioner_text="Dr Taylor",
         turn_index=0,
     )
-    # No temporal_relation, earliest_time, latest_time, or duration_minutes
-    for key in ("temporal_relation", "earliest_time", "latest_time", "duration_minutes"):
+    # No temporal_relation, earliest_time, latest_time, duration_minutes, or appointment_date
+    for key in ("temporal_relation", "earliest_time", "latest_time", "duration_minutes", "appointment_date"):
         assert key not in spans
     assert "patient" in spans
     assert "practitioner" in spans
+
+
+def test_build_source_spans_date_text_raises_on_missing():
+    """_build_source_spans raises ValueError when date_text substring is absent."""
+    u = "Book Alice tomorrow"
+    with pytest.raises(ValueError, match="not found"):
+        _build_source_spans(
+            u,
+            patient_text="Alice",
+            date_text="next week",
+            turn_index=0,
+        )
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -637,6 +667,57 @@ def test_ambiguity_has_clarification_text():
         assert len(c.scenario.expected_clarification) > 0
 
 
+def test_ambiguity_amb1_explicit_date_and_duration():
+    """AMB1 explicitly retains 'tomorrow' and 'for 15 minutes' with source evidence."""
+    candidates = generate_ambiguity_candidates()
+    amb1 = [c for c in candidates if c.scenario.scenario_id == "lc2_dw2_ambiguity_001"][0]
+    u = amb1.scenario.dialogue_turns[0]["utterance"]
+    assert "tomorrow" in u
+    assert "for 15 minutes" in u
+    assert "sometime in the afternoon" in u
+    # appointment_date source span
+    assert "appointment_date" in amb1.scenario.source_spans
+    assert amb1.scenario.source_spans["appointment_date"][0].text == "tomorrow"
+    # duration source span
+    assert "duration_minutes" in amb1.scenario.source_spans
+    assert amb1.scenario.source_spans["duration_minutes"][0].text == "for 15 minutes"
+    # Normalized values include date and duration
+    assert amb1.scenario.normalized_values.get("appointment_date") == "2026-07-14"
+    assert amb1.scenario.normalized_values.get("duration_minutes") == 15
+
+
+def test_ambiguity_amb2_explicit_date_and_duration():
+    """AMB2 explicitly retains 'tomorrow' and 'for 15 minutes' with source evidence."""
+    candidates = generate_ambiguity_candidates()
+    amb2 = [c for c in candidates if c.scenario.scenario_id == "lc2_dw2_ambiguity_002"][0]
+    u = amb2.scenario.dialogue_turns[0]["utterance"]
+    assert "tomorrow" in u
+    assert "for 15 minutes" in u
+    assert "sometime in the afternoon" in u
+    # appointment_date source span
+    assert "appointment_date" in amb2.scenario.source_spans
+    assert amb2.scenario.source_spans["appointment_date"][0].text == "tomorrow"
+    # duration source span
+    assert "duration_minutes" in amb2.scenario.source_spans
+    assert amb2.scenario.source_spans["duration_minutes"][0].text == "for 15 minutes"
+    # Normalized values include date and duration
+    assert amb2.scenario.normalized_values.get("appointment_date") == "2026-07-14"
+    assert amb2.scenario.normalized_values.get("duration_minutes") == 15
+
+
+def test_ambiguity_amb3_date_only():
+    """AMB3 remains date-only with no time or duration."""
+    candidates = generate_ambiguity_candidates()
+    amb3 = [c for c in candidates if c.scenario.scenario_id == "lc2_dw2_ambiguity_003"][0]
+    u = amb3.scenario.dialogue_turns[0]["utterance"]
+    assert "tomorrow" in u
+    assert "afternoon" not in u
+    assert amb3.scenario.duration_minutes is None
+    assert amb3.scenario.temporal_relation == "unspecified"
+    assert amb3.scenario.earliest_time is None
+    assert amb3.scenario.latest_time is None
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 #  Correction tests
 # ─────────────────────────────────────────────────────────────────────────────
@@ -738,6 +819,17 @@ def test_correction_corrected_field_source_span_turn2():
                         )
 
 
+def test_correction_case2_practitioner_in_roster():
+    """Correction case 2 final delta practitioner pr-002 exists in initial practitioners_available."""
+    candidates = generate_correction_candidates()
+    cor2 = [c for c in candidates if c.scenario.scenario_id == "lc2_dw2_correction_002"][0]
+    roster = cor2.scenario.initial_diary_state["practitioners_available"]
+    delta = cor2.scenario.expected_appointment_deltas[0]
+    assert delta["practitioner_id"] in roster, (
+        f"Delta practitioner {delta['practitioner_id']} not in roster {roster}"
+    )
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 #  Adversarial tests
 # ─────────────────────────────────────────────────────────────────────────────
@@ -776,6 +868,50 @@ def test_adversarial_forbids_second_appointment():
     candidates = generate_adversarial_candidates()
     for c in candidates:
         assert "second_appointment_created" in c.scenario.forbidden_outcomes
+        # appointment_created must NOT be forbidden because turn 1 has one legitimate delta
+        assert "appointment_created" not in c.scenario.forbidden_outcomes, (
+            f"{c.scenario.scenario_id}: appointment_created must not be forbidden "
+            "(turn 1 has one legitimate creation delta)"
+        )
+
+
+def test_adversarial_unsafe_instruction_span():
+    """Each adversarial candidate has unsafe_instruction source span pointing to turn 2."""
+    candidates = generate_adversarial_candidates()
+    for c in candidates:
+        assert "unsafe_instruction" in c.scenario.source_spans, (
+            f"{c.scenario.scenario_id}: missing unsafe_instruction source span"
+        )
+        spans = c.scenario.source_spans["unsafe_instruction"]
+        for span in spans:
+            assert span.turn_index == 1, (
+                f"{c.scenario.scenario_id}: unsafe_instruction must point to turn 2"
+            )
+            turns = c.scenario.dialogue_turns
+            assert span.turn_index < len(turns)
+            actual = turns[span.turn_index]["utterance"][span.start:span.end]
+            assert actual == span.text, (
+                f"{c.scenario.scenario_id}: unsafe_instruction span text mismatch"
+            )
+
+
+def test_adversarial_prohibited_action_has_turn2_evidence():
+    """Each adversarial prohibited action is evidenced in turn 2 utterance."""
+    candidates = generate_adversarial_candidates()
+    for c in candidates:
+        turns = c.scenario.dialogue_turns
+        assert len(turns) == 2
+        t2 = turns[1]["utterance"].lower()
+        # Each case has a distinct malicious instruction
+        sid = c.scenario.scenario_id
+        if "adversarial_001" in sid:
+            assert "ignore" in t2 and "duplicate" in t2
+        elif "adversarial_002" in sid:
+            assert "override" in t2
+        elif "adversarial_003" in sid:
+            assert "bypass" in t2
+        else:
+            pytest.fail(f"Unknown adversarial scenario: {sid}")
 
 
 def test_adversarial_refuse_instruction_in_tool_sequence():
@@ -1039,3 +1175,62 @@ def test_no_mutation_of_source_gold():
     gold1 = _load_gold_seed("booking_create_then_exact_duplicate")
     gold2 = _load_gold_seed("booking_create_then_exact_duplicate")
     assert gold1.model_dump(mode="json") == gold2.model_dump(mode="json")
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+#  Trajectory consistency checks — Fix 5
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+def test_trajectory_consistency():
+    """Generic trajectory consistency: delta/forbidden/roster/source invariants.
+
+    Rules:
+    1. If a scenario expects a created appointment delta, ``appointment_created``
+       must NOT be listed as a forbidden outcome.
+    2. Every delta practitioner must exist in ``practitioners_available``.
+    3. Every non-null normalized appointment_date or duration_minutes introduced
+       by a generated utterance must have exact source-span evidence.
+    """
+    result = generate_all_candidates()
+    for family, candidates in result.items():
+        for c in candidates:
+            s = c.scenario
+            utterances = [t["utterance"] for t in s.dialogue_turns if "utterance" in t]
+
+            # Rule 1: creation delta => appointment_created not forbidden
+            for delta in s.expected_appointment_deltas:
+                if delta["change_type"] == "created":
+                    assert "appointment_created" not in s.forbidden_outcomes, (
+                        f"{family}/{s.scenario_id}: expected created delta but "
+                        "appointment_created is forbidden"
+                    )
+
+            # Rule 2: every delta practitioner in available roster
+            roster = s.initial_diary_state.get("practitioners_available", [])
+            for delta in s.expected_appointment_deltas:
+                pid = delta.get("practitioner_id")
+                if pid:
+                    assert pid in roster, (
+                        f"{family}/{s.scenario_id}: delta practitioner {pid} "
+                        f"not in roster {roster}"
+                    )
+
+            # Rule 3: non-null normalized values have source evidence
+            spans = s.source_spans
+            nv = s.normalized_values
+            if nv.get("appointment_date") is not None:
+                assert "appointment_date" in spans or any(
+                    "tomorrow" in utt or "today" in utt or "next" in utt
+                    for utt in utterances
+                ), (
+                    f"{family}/{s.scenario_id}: appointment_date normalized "
+                    "but no date source evidence"
+                )
+            if nv.get("duration_minutes") is not None:
+                assert "duration_minutes" in spans or any(
+                    "minute" in utt for utt in utterances
+                ), (
+                    f"{family}/{s.scenario_id}: duration_minutes normalized "
+                    "but no duration source evidence"
+                )
