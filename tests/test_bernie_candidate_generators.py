@@ -568,6 +568,22 @@ def test_minimal_pair_date_change():
     assert has_date_change, "No minimal pair changed appointment date"
 
 
+def test_minimal_pair_date_change_preserves_full_source_phrase():
+    """The changed relative date retains its whole semantic source phrase."""
+    candidates = generate_minimal_pair_candidates()
+    date_change = next(
+        candidate
+        for candidate in candidates
+        if candidate.scenario.scenario_id == "lc2_dw2_minimal_pair_001"
+    )
+    span = date_change.scenario.source_spans["appointment_date"][0]
+    utterance = date_change.scenario.dialogue_turns[span.turn_index]["utterance"]
+
+    assert span.text == "the day after tomorrow"
+    assert utterance[span.start:span.end] == span.text
+    assert date_change.scenario.normalized_values["appointment_date"] == "2026-07-15"
+
+
 def test_minimal_pair_time_change():
     """At least one minimal pair changes the time."""
     candidates = generate_minimal_pair_candidates()

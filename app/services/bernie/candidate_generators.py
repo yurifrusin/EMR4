@@ -530,7 +530,7 @@ def generate_minimal_pair_candidates() -> list[CorpusCandidate]:
                 patient_text="Margaret Thompson",
                 practitioner_text="with Dr Shera",
                 duration_text="for 15 minutes",
-                date_text="tomorrow",
+                date_text="the day after tomorrow",
                 turn_index=0,
             ),
             duration_minutes=15,
