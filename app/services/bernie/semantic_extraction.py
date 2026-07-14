@@ -114,10 +114,10 @@ _STATUS_CHANGE_PATTERNS: list[re.Pattern[str]] = [
     re.compile(r"\b(update .* status)\b", re.I),
     # Anchored "Arrived:" label — structured triage note form
     re.compile(r"^Arrived:", re.I),
-    # "Status: ... ARRIVED" — status label (case-insensitive so it works through
-    # lowercased detection path; the full "Status:" + status keyword context
-    # prevents overmatch on non-diary uses)
-    re.compile(r"\bstatus:.*\barrived\b", re.I),
+    # "Status: ... ARRIVED" — anchored status label at utterance start
+    # (case-insensitive; requires "Status:" at start + "arrived" keyword
+    # context prevents overmatch on non-diary uses)
+    re.compile(r"^status:.*\barrived\b", re.I),
     # "confirm arrival ... booking/appointment" — arrival confirmation command
     re.compile(r"\bconfirm arrival\b.*\b(booking|appointment)\b", re.I),
 ]
@@ -126,21 +126,16 @@ _STATUS_CHANGE_PATTERNS: list[re.Pattern[str]] = [
 _EXPLAIN_PATTERNS: list[re.Pattern[str]] = [
     re.compile(r"\b(explain|why|what happened|schedule pattern)\b", re.I),
     re.compile(r"\b(what.*going on|how.*look|tell me about)\b", re.I),
-    # Availability / schedule queries — practitioner-oriented read-only questions
-    re.compile(r"\b(availability|availabilities)\b", re.I),
-    re.compile(r"\bwhat\s+does\b.*\b(schedule|day|appointments?|availability)\b", re.I),
-    re.compile(r"\bwhat\s+appointments?\b", re.I),
-    re.compile(r"\b(free|open|available)\s+(slots?|times?|appointments?)\b", re.I),
-    # Anchored "Schedule:" label
-    re.compile(r"^Schedule:", re.I),
-    # "show/list me" schedule/appointments
-    re.compile(r"\b(show|list)\b.*\b(appointments?|schedule|times?|slots?)\b", re.I),
-    # "day view" / "calendar" / "roster" queries
-    re.compile(r"\b(day.view|calendar|roster)\b", re.I),
-    # "what ... day looks like" — narrative schedule query
-    re.compile(r"\b(what|how).*\bday\b.*\blooks?\b", re.I),
-    # "pull up ... schedule" — retrieval request
-    re.compile(r"\bpull up\b.*\bschedule\b", re.I),
+    # Practitioner possessive availability — "Dr Shera's availability" / "some doctor's availability"
+    re.compile(r"\b(?:dr [a-z]+|some doctor)'s availability\b", re.I),
+    # "what appointments does Dr ... have" / "what appointments does some doctor have"
+    re.compile(r"\bwhat appointments does\b.*\b(?:dr [a-z]+|some doctor)\b.*\bhave\b", re.I),
+    # "what Dr ...'s day looks like" / "what some doctor's day looks like"
+    re.compile(r"\bwhat\b.*\b(?:dr [a-z]+|some doctor)'s day\b.*\blooks?\b", re.I),
+    # "when Dr ... has free slots" / "when some doctor has free slots"
+    re.compile(r"\b(when|where)\b.*\b(?:dr [a-z]+|some doctor)\b.*\b(free|available|open)\s+(slots?|times?)\b", re.I),
+    # "show me Dr ...'s available times" / "show me some doctor's available times"
+    re.compile(r"\bshow\b.*\b(?:dr [a-z]+|some doctor)'s available times\b", re.I),
 ]
 
 

@@ -1,10 +1,16 @@
 {
   "assertions": {
-    "bare_narrative_not_promoted": true,
-    "check_in_not_promoted": true,
-    "intended_action_ge_874_of_1152": true,
-    "safety_1152_of_1152": true,
-    "target_families_154_of_154": true
+    "cancel_exact_13": true,
+    "create_exact_16": true,
+    "deferred_bare_arrival_exact_13_not_promoted": true,
+    "deferred_checkin_exact_13_not_promoted": true,
+    "explain_exact_80": true,
+    "intended_action_exact_computed": 880,
+    "intended_action_exact_ge_874_of_1152": true,
+    "repeat_variance_measured_zero": true,
+    "safety_exact_1152_of_1152": true,
+    "status_change_exact_45": true,
+    "target_families_exact_154_of_154": true
   },
   "corpus_manifest": {
     "adjudication": "pending",
@@ -15,17 +21,25 @@
   "deferred_families": {
     "bare_arrival_narrative_not_status_change": {
       "all_deferred": true,
-      "count": 16,
-      "not_promoted_to_status_change": 16
+      "count": 13,
+      "not_promoted_to_status_change": 13
     },
     "check_in_not_status_change": {
       "all_deferred": true,
-      "count": 16,
-      "not_promoted_to_status_change": 16
+      "count": 13,
+      "not_promoted_to_status_change": 13
     }
   },
   "development_only": true,
-  "no_holdout_accessed": true,
+  "frozen_selection": {
+    "cancel": 13,
+    "create": 16,
+    "deferred_bare_arrival": 13,
+    "deferred_checkin": 13,
+    "explain_schedule": 80,
+    "explicit_status": 45,
+    "total_target": 154
+  },
   "outcome_dimensions_one_repeat": {
     "appointment_deltas": "211/1152",
     "audit_deltas": "192/1152",
@@ -36,12 +50,21 @@
     "replay_tools": "610/1152",
     "safety": "1152/1152"
   },
-  "pre_lc4r3_report_hash": null,
-  "repeat_variance": {
-    "measured": 0,
-    "note": "Variance is zero by construction \u2014 deterministic extraction produces identical results on every repeat."
+  "pre_lc4r3_baseline_semantic_fields": {
+    "action_semantics": 674,
+    "clarification": 642,
+    "entity_semantics": 255,
+    "intended_action": 720,
+    "normalized_values": 101,
+    "temporal_relation": 628
   },
-  "report_hash": "9e1aecff2bd39605",
+  "pre_lc4r3_report_hash": "cba97acd3f23d2ec",
+  "repeat_variance": {
+    "all_deltas_zero": true,
+    "measured": 0,
+    "measured_fully": "verified by two-run deterministic audit"
+  },
+  "report_hash": "f0c87df0b483208d",
   "safety": {
     "all_safe": true,
     "failures": 0,
@@ -49,11 +72,12 @@
     "total": 1152
   },
   "schema_version": "lc4r3.aligned_action_surface.v1",
+  "selection_hash": "bb4fa0e16761c2a0",
   "semantic_fields_one_repeat": {
     "action_semantics": "730/1152",
     "clarification": "698/1152",
     "entity_semantics": "255/1152",
-    "intended_action": "960/1152",
+    "intended_action": "880/1152",
     "normalized_values": "101/1152",
     "temporal_relation": "628/1152"
   },
@@ -61,9 +85,9 @@
   "target_families": {
     "cancel_call_off": {
       "all_passed": true,
-      "count": 16,
+      "count": 13,
       "expected": "cancel",
-      "passed": 16
+      "passed": 13
     },
     "create_new_booking": {
       "all_passed": true,
@@ -79,15 +103,15 @@
     },
     "status_change_label": {
       "all_passed": true,
-      "count": 48,
+      "count": 45,
       "expected": "status_change",
-      "passed": 48
+      "passed": 45
     }
   },
   "target_family_totals": {
     "all_passed": true,
-    "passed": 160,
-    "total": 160
+    "passed": 154,
+    "total": 154
   },
   "worker": "deepseek_v4_flash"
 }
