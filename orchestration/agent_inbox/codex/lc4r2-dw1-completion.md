@@ -5,7 +5,7 @@
 **Branch:** `codex/lc4r2-dw1-replay-quality`
 **Base SHA:** `e6ab2969` (parent of original candidate)
 **Original candidate SHA:** `f57affcc8aba324be623c397cd4c4c3386d5a7d4`
-**Revised candidate SHA:** (to be filled after commit)
+**Revised candidate SHA:** `e66c0db941ae5638761712e201b41d3f6bf1c16a`
 
 ## DECISION: revision_accepted
 
@@ -227,7 +227,7 @@ any authored aligned replay regression.
 
 ## Report Hashes
 
-- Development gap report (v2): `d0b8c0d4f5e1a2b3` (deterministic)
+- Development gap report (v2): `9aff0265c4875527` (deterministic)
 - Corpus hash: `f73a35b8843beb66`
 
 ## Boundary Confirmation
