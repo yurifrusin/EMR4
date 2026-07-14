@@ -95,6 +95,17 @@ test-schema enum creation collisions before test execution. The identical
 groups then passed serially; this was a verification-orchestration defect, not
 a product failure.
 
+The final pre-integration cleanliness check also found that the first Claude
+Code bare worker had written rejected initial-candidate copies of the runtime,
+test, and report script into the protected master working directory despite
+being supplied a disposable worker `--cwd`. Timestamps and diffs matched the
+worker's preserved `revision_required` commit exactly; no unrelated user work
+was present. Sol did not integrate over them. The three paths were preserved
+reversibly as stash
+`ariadne-lc4r4-master-leak-preserved-2026-07-14`, after which master was clean.
+Origin was unchanged. This is a transport-isolation process incident, not an
+accepted worker capability or integration authority.
+
 The live shadow gate remains `decision: blocked`, external calls false, and
 runtime authority false. Gemini independently reproduced focused semantics,
 the LC4R4 report check/regressions, scenario integrity, evidence contracts,
@@ -115,3 +126,8 @@ explicit practitioner schedule questions whose action semantics and
 clarification currently fail because explanation handling incorrectly expects
 a patient identity. That should be isolated from their remaining temporal,
 duration-default, and Silver-label conflicts before any repair.
+
+Before another Claude Code bare worker is dispatched, the orchestrator must
+verify the launcher/worktree binding and monitor protected master cleanliness
+before, during, and after the lane. Any integration-tree write is a scope
+breach and must stop candidate acceptance until preserved and reconciled.
