@@ -512,7 +512,7 @@ class TestOrderInvariance:
         )
 
     def test_three_orders_identical_taxonomy(self):
-        """All three orderings produce identical aggregate taxonomy."""
+        """All three orderings produce the same complete queue and taxonomy."""
         mod = self._get_module()
 
         def taxonomy(records):
@@ -538,8 +538,12 @@ class TestOrderInvariance:
         records_rev = mod.build_queue_from_variants(reversed_variants)
         tax_rev = taxonomy(records_rev)
 
+        assert records_orig == records_shuf == records_rev
         assert tax_orig == tax_shuf, "Shuffled taxonomy differs from original"
         assert tax_orig == tax_rev, "Reversed taxonomy differs from original"
+        primary_orig = mod._primary_disposition_counts(records_orig)
+        assert primary_orig == mod._primary_disposition_counts(records_shuf)
+        assert primary_orig == mod._primary_disposition_counts(records_rev)
 
 
 # ---------------------------------------------------------------------------
@@ -560,6 +564,15 @@ class TestFailClosed:
                          fromlist=["build_queue_and_report", "run_check"])
         records, report = mod.build_queue_and_report()
         assert mod.run_check(records, report), "run_check should pass on self-consistent data"
+
+    def test_run_check_returns_false_for_malformed_record(self):
+        """Missing queue fields fail closed rather than raising."""
+        sys.path.insert(0, str(PROJECT_ROOT))
+        from scripts.bernie_lc4r7_silver_reconciliation import run_check
+
+        records = [dict(record) for record in _load_queue()]
+        del records[0]["reason_code"]
+        assert run_check(records, _load_report()) is False
 
     def test_run_check_fails_on_queue_drift(self):
         """run_check returns False when queue records are mutated."""

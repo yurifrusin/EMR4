@@ -873,13 +873,51 @@ def _load_frozen_report() -> dict[str, Any]:
 
 def run_check(records: RecordType, report: dict[str, Any]) -> bool:
     """Verify recomputed queue and report against contract constants AND committed artifacts."""
-    frozen_queue = _load_frozen_queue()
-    frozen_report = _load_frozen_report()
     issues: list[str] = []
+
+    try:
+        frozen_queue = _load_frozen_queue()
+        frozen_report = _load_frozen_report()
+    except (FileNotFoundError, json.JSONDecodeError, TypeError, ValueError) as exc:
+        print(f"LC4R7 CHECK FAILED:\n  - unable to load frozen artifacts: {exc}")
+        return False
+
+    if not isinstance(records, list) or not isinstance(report, dict):
+        print("LC4R7 CHECK FAILED:\n  - records/report have invalid top-level types")
+        return False
+
+    # Validate record shape before any hash or aggregate helper indexes fields.
+    records_well_formed = True
+    for i, record in enumerate(records):
+        if not isinstance(record, dict):
+            issues.append(f"Record {i}: expected object")
+            records_well_formed = False
+            continue
+        keys = set(record)
+        if keys != REQUIRED_QUEUE_KEYS:
+            issues.append(f"Record {i}: keys {keys} != required {REQUIRED_QUEUE_KEYS}")
+            records_well_formed = False
+            continue
+        if not all(isinstance(record[key], str) for key in REQUIRED_QUEUE_KEYS):
+            issues.append(f"Record {i}: all values must be strings")
+            records_well_formed = False
+            continue
+        if record["dimension"] not in {dim for dim, _ in EXPECTED_DIMENSION_DISPOSITIONS}:
+            issues.append(f"Record {i}: invalid dimension {record['dimension']!r}")
+        if record["disposition"] not in ALLOWED_DISPOSITIONS:
+            issues.append(f"Record {i}: invalid disposition {record['disposition']!r}")
+        if record["reason_code"] not in ALLOWED_REASON_CODES:
+            issues.append(f"Record {i}: invalid reason_code {record['reason_code']!r}")
+        if record["provenance"] != "silver":
+            issues.append(f"Record {i}: provenance != silver")
+        if record["adjudication"] != "pending":
+            issues.append(f"Record {i}: adjudication != pending")
 
     # --- 1. Report hash ---
     recomputed_hash_no_hash = _compute_report_hash(report)
     frozen_hash = frozen_report.get("report_hash", "")
+    if _compute_report_hash(frozen_report) != frozen_hash:
+        issues.append("committed frozen report hash is invalid")
     if recomputed_hash_no_hash != frozen_hash:
         issues.append(
             f"report_hash mismatch: recomputed={recomputed_hash_no_hash}, "
@@ -897,9 +935,18 @@ def run_check(records: RecordType, report: dict[str, Any]) -> bool:
         issues.append("selection.expected_hash != contract constant")
     if report.get("selection", {}).get("expected_count") != EXPECTED_ALIGNED_FAILURE_COUNT:
         issues.append("selection.expected_count != contract constant")
+    expected_selection = {
+        "count": EXPECTED_ALIGNED_FAILURE_COUNT,
+        "hash": EXPECTED_ALIGNED_FAILURE_HASH,
+        "expected_count": EXPECTED_ALIGNED_FAILURE_COUNT,
+        "expected_hash": EXPECTED_ALIGNED_FAILURE_HASH,
+        "hash_match": True,
+    }
+    if report.get("selection") != expected_selection:
+        issues.append("selection does not exactly match the frozen contract")
 
     # --- 3. Queue hash and count ---
-    q_hash = _queue_hash(records)
+    q_hash = _queue_hash(records) if records_well_formed else "invalid"
     fq_hash = _queue_hash(frozen_queue)
     if q_hash != fq_hash:
         issues.append(f"queue hash mismatch: recomputed={q_hash}, frozen={fq_hash}")
@@ -917,11 +964,26 @@ def run_check(records: RecordType, report: dict[str, Any]) -> bool:
         issues.append(
             f"queue count {len(records)} != contract constant {EXPECTED_QUEUE_COUNT}"
         )
+    if records_well_formed:
+        canonical_records = sorted(_canonical_json(record) for record in records)
+        canonical_frozen = sorted(_canonical_json(record) for record in frozen_queue)
+        if canonical_records != canonical_frozen:
+            issues.append("recomputed queue does not exactly match committed queue")
+    expected_queue_report = {
+        "total_records": EXPECTED_QUEUE_COUNT,
+        "expected_count": EXPECTED_QUEUE_COUNT,
+        "hash": EXPECTED_QUEUE_HASH,
+        "expected_hash": EXPECTED_QUEUE_HASH,
+        "hash_match": True,
+    }
+    if report.get("queue") != expected_queue_report:
+        issues.append("queue report does not exactly match the frozen contract")
 
     # --- 4. Primary dispositions ---
     # Recompute from records for validation
-    all_scenario_ids = sorted({r["scenario_id"] for r in records})
-    primary_counts, primary_hashes = _primary_disposition_counts(records)
+    primary_counts, primary_hashes = (
+        _primary_disposition_counts(records) if records_well_formed else ({}, {})
+    )
     frozen_primary = frozen_report.get("primary_dispositions", {})
     for disp in sorted(EXPECTED_PRIMARY_DISPOSITIONS.keys()):
         rc = primary_counts.get(disp, 0)
@@ -943,12 +1005,24 @@ def run_check(records: RecordType, report: dict[str, Any]) -> bool:
             issues.append(
                 f"primary_disposition.{disp} hash {rh} != contract {expected_hash}"
             )
+        expected_info = {
+            "count": expected_count,
+            "hash": expected_hash,
+            "expected_count": expected_count,
+            "expected_hash": expected_hash,
+            "hash_match": True,
+        }
+        if report.get("primary_dispositions", {}).get(disp) != expected_info:
+            issues.append(f"primary_disposition.{disp} report does not match contract")
+    if set(report.get("primary_dispositions", {})) != set(EXPECTED_PRIMARY_DISPOSITIONS):
+        issues.append("primary_dispositions report has missing or extra dispositions")
 
     # --- 5. Dimension/disposition counts ---
     dim_disp_records: dict[tuple[str, str], int] = {}
-    for r in records:
-        key = (r["dimension"], r["disposition"])
-        dim_disp_records[key] = dim_disp_records.get(key, 0) + 1
+    if records_well_formed:
+        for r in records:
+            key = (r["dimension"], r["disposition"])
+            dim_disp_records[key] = dim_disp_records.get(key, 0) + 1
     # Check no extra pairs beyond expected
     for (dim, disp), actual in dim_disp_records.items():
         expected = EXPECTED_DIMENSION_DISPOSITIONS.get((dim, disp), -1)
@@ -965,6 +1039,12 @@ def run_check(records: RecordType, report: dict[str, Any]) -> bool:
                 f"dimension_disposition {dim}/{disp}: "
                 f"recomputed={actual}, expected={expected}"
             )
+    expected_dim_report = {
+        f"{dim}|{disp}": count
+        for (dim, disp), count in EXPECTED_DIMENSION_DISPOSITIONS.items()
+    }
+    if report.get("dimension_disposition_counts") != expected_dim_report:
+        issues.append("dimension_disposition_counts report does not exactly match contract")
 
     # --- 6. Semantic baseline ---
     r_base = report.get("current_semantic_baseline", {})
@@ -1047,22 +1127,16 @@ def run_check(records: RecordType, report: dict[str, Any]) -> bool:
     if report.get("corpus_hash", "") != frozen_report.get("corpus_hash", ""):
         issues.append("corpus_hash mismatch")
 
-    # --- 11. Queue schema validation ---
-    for i, r in enumerate(records):
-        keys = set(r.keys())
-        if keys != REQUIRED_QUEUE_KEYS:
-            issues.append(f"Record {i}: keys {keys} != required {REQUIRED_QUEUE_KEYS}")
-        if r["disposition"] not in ALLOWED_DISPOSITIONS:
-            issues.append(f"Record {i}: invalid disposition {r['disposition']!r}")
-        if r["reason_code"] not in ALLOWED_REASON_CODES:
-            issues.append(f"Record {i}: invalid reason_code {r['reason_code']!r}")
-        if r["provenance"] != "silver":
-            issues.append(f"Record {i}: provenance != silver")
-        if r["adjudication"] != "pending":
-            issues.append(f"Record {i}: adjudication != pending")
-
-    # --- 12. Assertions ---
+    # --- 11. Assertions ---
     assertions = report.get("assertions", {})
+    expected_assertions = {
+        "selection_count_572", "selection_hash_match", "queue_count_1436",
+        "queue_hash_match", "zero_parser_gaps", "exit_gate_blocked",
+        "check_in_preserved_as_planned", "safety_exact_1152_of_1152",
+        "repeat_variance_zero",
+    }
+    if set(assertions) != expected_assertions:
+        issues.append("assertions report has missing or extra assertions")
     for name, value in assertions.items():
         if value is not True:
             issues.append(f"assertion {name} is {value!r}, expected True")

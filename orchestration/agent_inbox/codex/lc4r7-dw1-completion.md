@@ -10,7 +10,7 @@ Six owned files implemented:
 | File | Description |
 |---|---|
 | `scripts/bernie_lc4r7_silver_reconciliation.py` | Reconciliation helper with `--check` |
-| `tests/test_bernie_lc4r7_silver_reconciliation.py` | 58 focused tests |
+| `tests/test_bernie_lc4r7_silver_reconciliation.py` | 59 focused tests after Sol recovery |
 | `docs/bernie-lc4r7-adjudication-queue.json` | 1,436-record redacted queue |
 | `docs/bernie-lc4r7-silver-reconciliation-report.json` | Aggregate report with frozen assertions |
 | `docs/bernie-lc4r7-silver-reconciliation.md` | Implementation note |
@@ -61,8 +61,9 @@ field names, or scenario oracle fields feed into interpretation.
 | Initial denied PowerShell attempt | PowerShell access denied in don't-ask mode |
 | Rejected first commit `61d3362b` | First commit provided queue without full contract validation |
 | Rejected first revision `30af9d2f` | Acceptance revision did not exercise alternate input orders, contained forbidden-content no-op loop, lacked strengthened contract-constant checks, omitted real fail-closed tests, and recorded wrong test count in completion artifact |
-| This revision (`HEAD`) | All five defects corrected; 58 tests pass; `--check` exits zero; no push |
-| This revision's denied-attempt evidence (if any) | None — all tools succeeded on final attempt |
+| Worker revision `f71481a9` | Worker reported 58 tests passing and `--check` exiting zero; Sol retained acceptance authority |
+| This revision's denied-attempt evidence | One denied PowerShell `python --version` attempt is recorded in the durable launcher receipt; it did not affect the product result |
+| Sol recovery amendment | Sol added exact canonical queue/order assertions, malformed-record fail-closed handling, complete report-to-contract checks, and corrected this provenance before independent review |
 
 ## Candidate commit
 
