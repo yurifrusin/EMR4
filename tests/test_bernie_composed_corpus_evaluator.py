@@ -345,16 +345,35 @@ class TestCommittedReportMatch:
         committed = json.loads(
             COMMITTED_REPORT.read_text(encoding="utf-8")
         )
-        # The committed report is from the previous structure; after the LC3 DW2
-        # revision the report structure changed (added repeats, evidence, etc.).
-        # Compare schema_version, manifest, and basic counts.
-        assert regenerated["schema_version"] == committed["schema_version"]
-        assert regenerated["corpus_manifest"]["lc1_count"] == committed["corpus_manifest"]["lc1_count"]
-        assert regenerated["corpus_manifest"]["lc2_count"] == committed["corpus_manifest"]["lc2_count"]
-        # New fields should be present
-        assert "metamorphic_evidence" in regenerated
-        assert "mutation_evidence" in regenerated
-        assert "remaining_gaps" in regenerated
+        assert regenerated == committed
+
+    def test_report_executes_complete_probe_sets(self) -> None:
+        report = json.loads(generate_report_json())
+        metamorphic = report["metamorphic_evidence"]
+        mutation = report["mutation_evidence"]
+
+        assert metamorphic["total_checks"] == 7
+        assert metamorphic["passed_count"] == 7
+        assert metamorphic["failed_count"] == 0
+        assert {item["check"] for item in metamorphic["checks"]} == {
+            "paraphrase_variants",
+            "minimal_pair_date",
+            "minimal_pair_time",
+            "minimal_pair_duration",
+            "correction_isolation",
+            "unsafe_preservation",
+            "idempotency",
+        }
+        assert mutation["total_checks"] == 9
+        assert mutation["passed_count"] == 9
+        assert mutation["failed_count"] == 0
+
+    def test_candidate_examples_are_unique_cells(self) -> None:
+        lattice = json.loads(generate_report_json())["candidate_aware_lattice"]
+        cells = [json.dumps(item["cell"], sort_keys=True) for item in lattice["candidate_only_cell_examples"]]
+
+        assert len(cells) == len(set(cells))
+        assert lattice["pending_candidates_do_not_reduce_adjudicated_gaps"] is True
 
 
 # =============================================================================

@@ -25,14 +25,24 @@ FIXTURE_DIR = (
     / "fixtures"
     / "bernie_scenario_spec"
 )
+CANDIDATE_DIR = (
+    Path(__file__).resolve().parent
+    / "fixtures"
+    / "bernie_corpus_candidates"
+)
 LATTICE_SCRIPT = SCRIPTS_DIR / "bernie_coverage_lattice.py"
 PYTHON = sys.executable
 
 
-def _run_lattice(fixture_dir: str | None = None) -> subprocess.CompletedProcess:
+def _run_lattice(
+    fixture_dir: str | None = None,
+    candidate_dir: str | None = None,
+) -> subprocess.CompletedProcess:
     cmd = [PYTHON, str(LATTICE_SCRIPT)]
     if fixture_dir is not None:
         cmd.extend(["--fixture-dir", fixture_dir])
+    if candidate_dir is not None:
+        cmd.extend(["--candidate-dir", candidate_dir])
     return subprocess.run(
         cmd,
         capture_output=True,
@@ -260,3 +270,46 @@ class TestStrictLoading:
         result = _run_lattice(fixture_dir=str(d))
         assert result.returncode != 0
         assert "ERROR" in result.stderr or "Unknown fixture file" in result.stderr
+
+    @staticmethod
+    def _copy_candidate_manifest(target: Path) -> None:
+        target.mkdir(parents=True)
+        for source in CANDIDATE_DIR.glob("*.json"):
+            (target / source.name).write_text(
+                source.read_text(encoding="utf-8"), encoding="utf-8"
+            )
+
+    def test_candidate_unknown_file_rejected(self, tmp_path: Path) -> None:
+        candidate_dir = tmp_path / "candidates"
+        self._copy_candidate_manifest(candidate_dir)
+        (candidate_dir / "unexpected.json").write_text("[]", encoding="utf-8")
+
+        result = _run_lattice(candidate_dir=str(candidate_dir))
+
+        assert result.returncode != 0
+        assert "ERROR: Unknown family file" in result.stderr
+
+    def test_candidate_non_list_payload_rejected(self, tmp_path: Path) -> None:
+        candidate_dir = tmp_path / "candidates"
+        self._copy_candidate_manifest(candidate_dir)
+        (candidate_dir / "paraphrase_family.json").write_text(
+            json.dumps({"not": "an array"}), encoding="utf-8"
+        )
+
+        result = _run_lattice(candidate_dir=str(candidate_dir))
+
+        assert result.returncode != 0
+        assert "ERROR: LC2 family file paraphrase_family.json must contain a JSON array" in result.stderr
+
+    def test_candidate_wrong_tier_rejected(self, tmp_path: Path) -> None:
+        candidate_dir = tmp_path / "candidates"
+        self._copy_candidate_manifest(candidate_dir)
+        path = candidate_dir / "paraphrase_family.json"
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        payload[0]["provenance"] = "gold"
+        path.write_text(json.dumps(payload), encoding="utf-8")
+
+        result = _run_lattice(candidate_dir=str(candidate_dir))
+
+        assert result.returncode != 0
+        assert "ERROR:" in result.stderr

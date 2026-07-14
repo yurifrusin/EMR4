@@ -309,19 +309,15 @@ def main(argv: List[str] | None = None) -> int:
             )
             return 1
 
-        # Load CorpusCandidate wrappers
-        from app.services.bernie.corpus_tier import CorpusCandidate
-
-        all_wrappers: List[Dict[str, Any]] = []
-        for path in sorted(candidate_path.iterdir()):
-            if path.suffix.lower() != ".json":
-                continue
-            with open(path, "r", encoding="utf-8") as fh:
-                raw_list = json.load(fh)
-            if isinstance(raw_list, list):
-                for entry in raw_list:
-                    candidate = CorpusCandidate.model_validate(entry)
-                    all_wrappers.append(candidate.model_dump(mode="json"))
+        # Reuse the canonical strict loader so candidate-aware mode rejects
+        # unknown files, non-array payloads, wrong family counts, duplicate
+        # IDs, non-Silver tiers, and non-pending adjudication states.
+        try:
+            candidates = load_lc2_candidates(candidate_path)
+        except (NotADirectoryError, ValueError) as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            return 1
+        all_wrappers = [candidate.model_dump(mode="json") for candidate in candidates]
 
         # Compute adjudicated covered cells from LC1 fixtures
         adjudicated_covered: Set[Tuple[str, str, str, str, str, str]] = set()
@@ -392,6 +388,7 @@ def main(argv: List[str] | None = None) -> int:
             "union_covered_cell_count": len(union_covered),
             "union_empty_cell_count": total_cells - len(union_covered),
             "total_lattice_cells": total_cells,
+            "pending_candidates_do_not_reduce_adjudicated_gaps": True,
             "proof_adjudicated_gaps_preserved": (
                 f"adjudicated_empty={total_cells - len(adjudicated_covered)}, "
                 f"union_empty={total_cells - len(union_covered)}, "

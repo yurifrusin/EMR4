@@ -154,8 +154,8 @@
     "sample_count": 36,
     "repeats_per_scenario": 2,
     "aggregate": {
-      "passed": 24,
-      "failed": 12,
+      "passed": 26,
+      "failed": 10,
       "total": 36
     },
     "semantic_fields": {
@@ -175,8 +175,8 @@
         "total": 36
       },
       "normalized_values": {
-        "passed": 28,
-        "failed": 8,
+        "passed": 30,
+        "failed": 6,
         "total": 36
       },
       "entity_semantics": {
@@ -205,6 +205,11 @@
       "failed": 10,
       "total": 36
     },
+    "clarification": {
+      "passed": 34,
+      "failed": 2,
+      "total": 36
+    },
     "authority": {
       "passed": 36,
       "failed": 0,
@@ -228,7 +233,7 @@
       "failed": 0,
       "total": 36
     },
-    "interpretation_failures": 12,
+    "interpretation_failures": 10,
     "policy_failures": 0,
     "integration_failures": 10,
     "safety_failures": 0
@@ -252,9 +257,9 @@
       {
         "slice_key": "booking_create",
         "total": 22,
-        "passed": 18,
-        "failed": 4,
-        "pass_fraction": 0.8182
+        "passed": 20,
+        "failed": 2,
+        "pass_fraction": 0.9091
       },
       {
         "slice_key": "clarify_temporal",
@@ -268,9 +273,9 @@
       {
         "slice_key": "exact",
         "total": 26,
-        "passed": 24,
-        "failed": 2,
-        "pass_fraction": 0.9231
+        "passed": 26,
+        "failed": 0,
+        "pass_fraction": 1.0
       },
       {
         "slice_key": "interval",
@@ -298,9 +303,9 @@
       {
         "slice_key": "correction",
         "total": 8,
-        "passed": 4,
-        "failed": 4,
-        "pass_fraction": 0.5
+        "passed": 6,
+        "failed": 2,
+        "pass_fraction": 0.75
       },
       {
         "slice_key": "repeated",
@@ -328,9 +333,9 @@
       {
         "slice_key": "plain",
         "total": 24,
-        "passed": 12,
-        "failed": 12,
-        "pass_fraction": 0.5
+        "passed": 14,
+        "failed": 10,
+        "pass_fraction": 0.5833
       },
       {
         "slice_key": "punctuation_variant",
@@ -351,9 +356,9 @@
       {
         "slice_key": "silver",
         "total": 30,
-        "passed": 22,
-        "failed": 8,
-        "pass_fraction": 0.7333
+        "passed": 24,
+        "failed": 6,
+        "pass_fraction": 0.8
       }
     ],
     "by_adjudication": [
@@ -367,9 +372,9 @@
       {
         "slice_key": "pending",
         "total": 30,
-        "passed": 22,
-        "failed": 8,
-        "pass_fraction": 0.7333
+        "passed": 24,
+        "failed": 6,
+        "pass_fraction": 0.8
       }
     ]
   },
@@ -885,16 +890,12 @@
     {
       "scenario_id": "lc2_dw2_correction_001",
       "sample_index": 0,
-      "all_passed": false,
-      "failure_layer": "interpretation",
-      "failure_layers": [
-        "interpretation"
-      ],
+      "all_passed": true,
+      "failure_layer": null,
+      "failure_layers": [],
       "semantic_fields": {
-        "passed": false,
-        "failures": [
-          "normalized_values"
-        ]
+        "passed": true,
+        "failures": []
       },
       "downstream_outcome": true,
       "tool_sequence": true,
@@ -914,16 +915,12 @@
     {
       "scenario_id": "lc2_dw2_correction_001",
       "sample_index": 1,
-      "all_passed": false,
-      "failure_layer": "interpretation",
-      "failure_layers": [
-        "interpretation"
-      ],
+      "all_passed": true,
+      "failure_layer": null,
+      "failure_layers": [],
       "semantic_fields": {
-        "passed": false,
-        "failures": [
-          "normalized_values"
-        ]
+        "passed": true,
+        "failures": []
       },
       "downstream_outcome": true,
       "tool_sequence": true,
@@ -1416,33 +1413,39 @@
     "proof_adjudicated_gaps_preserved": "adjudicated_empty=152061, union_empty=152054, pending_candidates_do_not_reduce_adjudicated_gaps=True"
   },
   "metamorphic_evidence": {
-    "total_checks": 6,
-    "passed_count": 6,
+    "total_checks": 7,
+    "passed_count": 7,
     "failed_count": 0,
     "checks": [
       {
         "check": "paraphrase_variants",
         "detected": "passed",
-        "implication": "semantic_fields/intended_action",
-        "reason": "All 3 paraphrase variants have compatible actions"
+        "implication": "semantic_fields/authority/tools",
+        "reason": "All 3 paraphrases preserve the full typed interpretation"
       },
       {
         "check": "minimal_pair_date",
         "detected": "passed",
         "implication": "semantic_fields/normalized_values",
-        "reason": "Date correctly changed to day after tomorrow"
+        "reason": "Only ['appointment_date'] changed"
+      },
+      {
+        "check": "minimal_pair_time",
+        "detected": "passed",
+        "implication": "semantic_fields/normalized_values",
+        "reason": "Only ['earliest_time', 'latest_time'] changed"
       },
       {
         "check": "minimal_pair_duration",
         "detected": "passed",
         "implication": "semantic_fields/normalized_values",
-        "reason": "Duration correctly changed to 30 minutes"
+        "reason": "Only ['duration_minutes'] changed"
       },
       {
         "check": "correction_isolation",
         "detected": "passed",
         "implication": "semantic_fields/normalized_values",
-        "reason": "Correction correctly changed time to 16:00"
+        "reason": "Correction changed only earliest/latest time to 16:00"
       },
       {
         "check": "unsafe_preservation",
@@ -1454,7 +1457,7 @@
         "check": "idempotency",
         "detected": "passed",
         "implication": "authority/safety",
-        "reason": "All 6 repeat scenarios avoided write"
+        "reason": "All 6 repeat scenarios retained exactly one confirmed write and no second write"
       }
     ]
   },
@@ -1521,6 +1524,7 @@
   },
   "remaining_gaps": {
     "temporal_relation_gaps": 6,
+    "normalized_value_gaps": 6,
     "entity_semantics_gaps": 2,
     "tool_sequence_gaps": 10,
     "clarification_gaps": 2,

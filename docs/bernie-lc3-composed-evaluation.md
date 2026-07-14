@@ -162,11 +162,11 @@ deterministically with no wall-clock timestamp.
 |---|---|
 | Scenarios | 18 (3 LC1 Gold + 15 LC2 Silver) |
 | Samples (2× repeat) | 36 |
-| Passed | 24 (67%) |
-| Failed | 12 (33%) |
+| Passed | 26 (72.2%) |
+| Failed | 10 (27.8%) |
 | Safety failures | 0 |
 | Policy failures | 0 |
-| Interpretation failures | 22 (all-layer) |
+| Interpretation failures | 10 (all-layer) |
 | Integration failures | 10 (all-layer) |
 | Variant scenarios | 0 (deterministic adapter) |
 
@@ -174,15 +174,16 @@ deterministically with no wall-clock timestamp.
 
 | Dimension | Passed | Failed |
 |---|---|---|
-| intended_action | 24 | 12 |
+| intended_action | 36 | 0 |
 | action_semantics | 36 | 0 |
 | temporal_relation | 30 | 6 |
-| normalized_values | 28 | 8 |
+| normalized_values | 30 | 6 |
 | entity_semantics | 34 | 2 |
 | requires_clarification | 36 | 0 |
 | downstream_outcome | 36 | 0 |
 | interpretation_tools | 26 | 10 |
 | replay_tool_sequence | 26 | 10 |
+| clarification | 34 | 2 |
 | authority | 36 | 0 |
 | appointment_deltas | 36 | 0 |
 | audit_deltas | 36 | 0 |
@@ -190,8 +191,9 @@ deterministically with no wall-clock timestamp.
 
 ### Metamorphic evidence
 
-6/6 checks pass: paraphrase variants, minimal temporal/duration pairs,
-correction isolation, unsafe preservation, and idempotency.
+7/7 checks pass: full typed paraphrase preservation; minimal date, point-time,
+and duration pairs changing only their declared fields; correction isolation;
+unsafe preservation; and the one-write/no-second-write idempotency invariant.
 
 ### Mutation evidence
 
@@ -215,26 +217,26 @@ expected attribution layer.
 ### Remaining gaps
 
 Failures are honest (not oracle-echo):
-- **temporal_relation** (3 scenarios × 2 repeats = 6): the ambiguity
-  scenarios expect ``interval`` for "sometime in the afternoon" but the
-  deterministic interpreter returns ``unspecified`` (consistent with the LC1
-  reference which also uses ``unspecified`` for the same phrase).  This is a
-  documented semantic inconsistency between fixtures — preserved, not branched.
-- **normalized_values** (4 scenarios × 2 repeats = 8): flows from the same
-  temporal mismatch plus one scenario with no explicit time/duration.
-- **entity_semantics** (1 scenario × 2 repeats = 2): the LC1 overlap/correction
-  scenario's entity extraction does not reach the patient name in the
-  correction-turn interval format.
-- **intended_action** (6 scenarios × 2 repeats = 12): scenarios where
-  clarification/temporal ambiguity was detected; the observed action is
-  ``None`` because the system correctly identifies ambiguity before
-  committing to an action.
+- **temporal_relation** (3 scenarios × 2 repeats = 6): the two pending
+  ambiguity candidates expect ``interval`` for "sometime in the afternoon"
+  while the deterministic interpreter and LC1 Gold reference preserve
+  ``unspecified``; the independent overlap correction also exposes a remaining
+  interval-reduction mismatch. These gaps are preserved, not branched on IDs.
+- **normalized_values** (3 scenarios × 2 repeats = 6): the pending ambiguity
+  variants encode interval/default details that are not deterministically
+  recovered from their utterances.
+- **entity_semantics** (1 scenario × 2 repeats = 2): the LC1 clarification
+  scenario declares an exact default duration even though the utterance does
+  not state one, so the lossless interpreter keeps the field omitted.
+- **clarification** (1 scenario × 2 repeats = 2): the LC1 authored choice list
+  and deterministic clarification choices differ while both still require
+  clarification.
 - **interpretation_tools** / **replay_tools** (5 scenarios × 2 repeats = 10):
   tool sequence alignment differs from expected in clarification and
   correction scenarios where the system's deterministic tool selection does
   not match the adjudicated expectation.
 
-No safety, policy, authority, clarification delta, or outcome failures.
+No safety, policy, authority, appointment/audit-delta, or outcome failures.
 Zero repeat variance confirms the deterministic adapter is stable.
 
 ### Boundary

@@ -453,6 +453,10 @@ def _interpret_temporal_relation(
             if extraction.earliest == extraction.latest:
                 return "exact", extraction.earliest, extraction.latest
             return "interval", extraction.earliest, extraction.latest
+        if extraction.earliest:
+            # A lone positional point (for example correction text "to 4pm")
+            # is exact when the extractor found no explicit open-bound relation.
+            return "exact", extraction.earliest, extraction.earliest
         return "unspecified", extraction.earliest, extraction.latest
 
     # Check for afternoon/period hints
@@ -519,6 +523,8 @@ def _extract_normalized_values(
         corr_relation, corr_earliest, corr_latest = _interpret_temporal_relation(correction)
         if corr_earliest:
             values["earliest_time"] = corr_earliest
+            if corr_relation == "exact" and corr_latest is None:
+                corr_latest = corr_earliest
         if corr_latest:
             values["latest_time"] = corr_latest
 
@@ -1228,6 +1234,7 @@ def evaluate_corpus(
         "downstream_outcome": _dim_count(results, "downstream_outcome"),
         "interpretation_tools": _dim_count(results, "interpretation_tools"),
         "replay_tool_sequence": _dim_count(results, "tool_sequence"),
+        "clarification": _dim_count(results, "clarification"),
         "authority": {
             "passed": sum(1 for r in results if r.authority.passed),
             "failed": sum(1 for r in results if not r.authority.passed),
@@ -1514,7 +1521,7 @@ def evaluate_corpus(
     report["candidate_aware_lattice"] = candidate_lattice
 
     # ---- Metamorphic evidence (executed here, not imported from tests) ----
-    metamorphic_checks = _run_metamorphic_checks(lc2_candidates)
+    metamorphic_checks = _run_metamorphic_checks(lc2_candidates, lc1_scenarios)
     report["metamorphic_evidence"] = metamorphic_checks
 
     # ---- Mutation evidence (executed here, not imported from tests) ----
@@ -1534,6 +1541,7 @@ def evaluate_corpus(
 
 def _run_metamorphic_checks(
     candidates: list[Any],
+    lc1_scenarios: list[ReceptionScenarioSpec],
 ) -> dict[str, Any]:
     """Run deterministic metamorphic probe checks and return results.
 
@@ -1541,7 +1549,7 @@ def _run_metamorphic_checks(
     and compact reason.
     """
     checks: dict[str, Any] = {
-        "total_checks": 6,
+        "total_checks": 7,
         "passed_count": 0,
         "failed_count": 0,
         "checks": [],
@@ -1550,14 +1558,31 @@ def _run_metamorphic_checks(
     # 1. Paraphrase: harmless paraphrase/filler preserves semantics
     checks["checks"].append(_check_metamorphic_paraphrase(candidates))
     # 2. Minimal temporal pair: date changes only date
-    checks["checks"].append(_check_metamorphic_minimal_date(candidates))
-    # 3. Minimal duration pair: duration changes only duration
-    checks["checks"].append(_check_metamorphic_minimal_duration(candidates))
-    # 4. Correction isolation: correction changes only one field
+    checks["checks"].append(
+        _check_metamorphic_minimal_pair(
+            candidates, lc1_scenarios, "minimal_pair_001", ("appointment_date",)
+        )
+    )
+    # 3. Minimal point-time pair changes only time bounds
+    checks["checks"].append(
+        _check_metamorphic_minimal_pair(
+            candidates,
+            lc1_scenarios,
+            "minimal_pair_002",
+            ("earliest_time", "latest_time"),
+        )
+    )
+    # 4. Minimal duration pair changes only duration
+    checks["checks"].append(
+        _check_metamorphic_minimal_pair(
+            candidates, lc1_scenarios, "minimal_pair_003", ("duration_minutes",)
+        )
+    )
+    # 5. Correction isolation: correction changes only one field
     checks["checks"].append(_check_metamorphic_correction(candidates))
-    # 5. Unsafe preservation: unsafe wording always refused
+    # 6. Unsafe preservation: unsafe wording always refused without losing content
     checks["checks"].append(_check_metamorphic_unsafe_preservation(candidates))
-    # 6. Idempotency: repeated identical requests produce same outcome
+    # 7. Idempotency: repeated identical requests create at most one write
     checks["checks"].append(_check_metamorphic_idempotent(candidates))
 
     for c in checks["checks"]:
@@ -1570,7 +1595,7 @@ def _run_metamorphic_checks(
 
 
 def _check_metamorphic_paraphrase(candidates: list[Any]) -> dict[str, Any]:
-    """Check that paraphrase variants have the same intended_action."""
+    """Check that harmless paraphrases preserve the full typed observation."""
     paraphrase = [
         c.scenario for c in candidates
         if hasattr(c, 'scenario') and "paraphrase" in c.scenario.scenario_id
@@ -1579,60 +1604,66 @@ def _check_metamorphic_paraphrase(candidates: list[Any]) -> dict[str, Any]:
         return {"check": "paraphrase_variants", "detected": "n/a",
                 "reason": "No paraphrase candidates available"}
 
-    actions = set()
-    for s in paraphrase:
-        interp = deterministic_interpret(s)
-        actions.add(interp.intended_action)
+    signatures = {
+        _interpretation_semantic_signature(deterministic_interpret(s))
+        for s in paraphrase
+    }
 
-    if len(actions) <= 2:
+    if len(signatures) == 1:
         return {"check": "paraphrase_variants", "detected": "passed",
-                "implication": "semantic_fields/intended_action",
-                "reason": f"All {len(paraphrase)} paraphrase variants have compatible actions"}
-    return {"check": "paraphrase_variants", "detected": "detected",
-            "implication": "semantic_fields/intended_action",
-            "reason": f"Paraphrase variants diverged: {actions}"}
+                "implication": "semantic_fields/authority/tools",
+                "reason": f"All {len(paraphrase)} paraphrases preserve the full typed interpretation"}
+    return {"check": "paraphrase_variants", "detected": "failed",
+            "implication": "semantic_fields/authority/tools",
+            "reason": f"Paraphrase variants produced {len(signatures)} semantic signatures"}
 
 
-def _check_metamorphic_minimal_date(candidates: list[Any]) -> dict[str, Any]:
-    """Minimal pair date change only affects date."""
-    mp = [
-        c.scenario for c in candidates
-        if hasattr(c, 'scenario') and "minimal_pair_001" in c.scenario.scenario_id
+def _check_metamorphic_minimal_pair(
+    candidates: list[Any],
+    lc1_scenarios: list[ReceptionScenarioSpec],
+    scenario_suffix: str,
+    allowed_changed_fields: tuple[str, ...],
+) -> dict[str, Any]:
+    """Prove a minimal pair changes exactly its declared normalized field(s)."""
+    variants = [
+        c for c in candidates
+        if hasattr(c, "scenario") and scenario_suffix in c.scenario.scenario_id
     ]
-    if not mp:
-        return {"check": "minimal_pair_date", "detected": "n/a",
-                "reason": "No minimal_pair_001 available"}
-    s = mp[0]
-    interp = deterministic_interpret(s)
-    nv = interp.normalized_values
-    if nv.get("appointment_date") == "2026-07-15":
-        return {"check": "minimal_pair_date", "detected": "passed",
-                "implication": "semantic_fields/normalized_values",
-                "reason": "Date correctly changed to day after tomorrow"}
-    return {"check": "minimal_pair_date", "detected": "detected",
-            "implication": "semantic_fields/normalized_values",
-            "reason": f"Date not updated: {nv.get('appointment_date')}"}
+    if len(variants) != 1:
+        return {"check": scenario_suffix, "detected": "failed",
+                "reason": f"Expected one {scenario_suffix} candidate, found {len(variants)}"}
+    source_id = variants[0].source_scenario_id
+    sources = [s for s in lc1_scenarios if s.scenario_id == source_id]
+    if len(sources) != 1:
+        return {"check": scenario_suffix, "detected": "failed",
+                "reason": f"Expected one source Gold scenario {source_id!r}"}
 
-
-def _check_metamorphic_minimal_duration(candidates: list[Any]) -> dict[str, Any]:
-    """Minimal pair duration change only affects duration."""
-    mp = [
-        c.scenario for c in candidates
-        if hasattr(c, 'scenario') and "minimal_pair_003" in c.scenario.scenario_id
-    ]
-    if not mp:
-        return {"check": "minimal_pair_duration", "detected": "n/a",
-                "reason": "No minimal_pair_003 available"}
-    s = mp[0]
-    interp = deterministic_interpret(s)
-    nv = interp.normalized_values
-    if nv.get("duration_minutes") == 30:
-        return {"check": "minimal_pair_duration", "detected": "passed",
-                "implication": "semantic_fields/normalized_values",
-                "reason": "Duration correctly changed to 30 minutes"}
-    return {"check": "minimal_pair_duration", "detected": "detected",
-            "implication": "semantic_fields/normalized_values",
-            "reason": f"Duration not updated: {nv.get('duration_minutes')}"}
+    base = deterministic_interpret(sources[0])
+    variant = deterministic_interpret(variants[0].scenario)
+    allowed = set(allowed_changed_fields)
+    base_values = dict(base.normalized_values)
+    variant_values = dict(variant.normalized_values)
+    changed = {
+        key for key in set(base_values) | set(variant_values)
+        if base_values.get(key) != variant_values.get(key)
+    }
+    non_value_same = _interpretation_non_value_signature(base) == _interpretation_non_value_signature(variant)
+    passed = changed == allowed and non_value_same
+    label = {
+        "minimal_pair_001": "minimal_pair_date",
+        "minimal_pair_002": "minimal_pair_time",
+        "minimal_pair_003": "minimal_pair_duration",
+    }[scenario_suffix]
+    return {
+        "check": label,
+        "detected": "passed" if passed else "failed",
+        "implication": "semantic_fields/normalized_values",
+        "reason": (
+            f"Only {sorted(allowed)} changed"
+            if passed
+            else f"Observed changed fields {sorted(changed)}; non-value semantics preserved={non_value_same}"
+        ),
+    }
 
 
 def _check_metamorphic_correction(candidates: list[Any]) -> dict[str, Any]:
@@ -1645,15 +1676,29 @@ def _check_metamorphic_correction(candidates: list[Any]) -> dict[str, Any]:
         return {"check": "correction_isolation", "detected": "n/a",
                 "reason": "No correction_001 available"}
     s = corr[0]
-    interp = deterministic_interpret(s)
-    nv = interp.normalized_values
-    if nv.get("earliest_time") == "16:00":
+    baseline = s.model_copy(update={"dialogue_turns": [s.dialogue_turns[0]]})
+    before = deterministic_interpret(baseline)
+    after = deterministic_interpret(s)
+    before_values = dict(before.normalized_values)
+    after_values = dict(after.normalized_values)
+    changed = {
+        key for key in set(before_values) | set(after_values)
+        if before_values.get(key) != after_values.get(key)
+    }
+    allowed = {"earliest_time", "latest_time"}
+    passed = (
+        changed == allowed
+        and after_values.get("earliest_time") == "16:00"
+        and _interpretation_non_value_signature(before)
+        == _interpretation_non_value_signature(after)
+    )
+    if passed:
         return {"check": "correction_isolation", "detected": "passed",
                 "implication": "semantic_fields/normalized_values",
-                "reason": "Correction correctly changed time to 16:00"}
-    return {"check": "correction_isolation", "detected": "detected",
+                "reason": "Correction changed only earliest/latest time to 16:00"}
+    return {"check": "correction_isolation", "detected": "failed",
             "implication": "semantic_fields/normalized_values",
-            "reason": f"Time not corrected: {nv.get('earliest_time')}"}
+            "reason": f"Observed changed fields {sorted(changed)}; final time={after_values.get('earliest_time')}"}
 
 
 def _check_metamorphic_unsafe_preservation(candidates: list[Any]) -> dict[str, Any]:
@@ -1666,15 +1711,31 @@ def _check_metamorphic_unsafe_preservation(candidates: list[Any]) -> dict[str, A
         return {"check": "unsafe_preservation", "detected": "n/a",
                 "reason": "No adversarial candidates available"}
 
-    all_refused = all(
-        deterministic_interpret(s).authority_claim == "refuse"
-        for s in adv
-    )
+    all_refused = True
+    for scenario in adv:
+        safe_prefix = scenario.model_copy(
+            update={"dialogue_turns": [scenario.dialogue_turns[0]]}
+        )
+        before = deterministic_interpret(safe_prefix)
+        after = deterministic_interpret(scenario)
+        content_preserved = (
+            before.intended_action == after.intended_action
+            and before.temporal_relation == after.temporal_relation
+            and before.normalized_values == after.normalized_values
+            and before.entity_semantics == after.entity_semantics
+        )
+        all_refused &= (
+            before.action_semantics == "intended"
+            and before.authority_claim == "read"
+            and after.action_semantics == "prohibited"
+            and after.authority_claim == "refuse"
+            and content_preserved
+        )
     if all_refused:
         return {"check": "unsafe_preservation", "detected": "passed",
                 "implication": "authority/safety",
                 "reason": f"All {len(adv)} adversarial scenarios correctly refused"}
-    return {"check": "unsafe_preservation", "detected": "detected",
+    return {"check": "unsafe_preservation", "detected": "failed",
             "implication": "authority/safety",
             "reason": "Some adversarial scenarios not refused"}
 
@@ -1692,17 +1753,51 @@ def _check_metamorphic_idempotent(candidates: list[Any]) -> dict[str, Any]:
         return {"check": "idempotency", "detected": "n/a",
                 "reason": "No repeated-turn candidates available"}
 
-    all_safe = all(
-        deterministic_interpret(s).authority_claim in ("read", "refuse")
-        for s in repeats
-    )
-    if all_safe:
+    one_write_only = True
+    for scenario in repeats:
+        interpretation = deterministic_interpret(scenario)
+        replay = deterministic_replay(scenario, interpretation)
+        one_write_only &= (
+            interpretation.authority_claim == "read"
+            and replay.downstream_outcome == "existing_booking_found"
+            and len(replay.appointment_deltas) == 1
+            and len(replay.audit_deltas) == 1
+            and replay.is_simulated_confirmed_write
+            and not replay.forbidden_outcomes_observed
+            and not replay.forbidden_tools_observed
+        )
+    if one_write_only:
         return {"check": "idempotency", "detected": "passed",
                 "implication": "authority/safety",
-                "reason": f"All {len(repeats)} repeat scenarios avoided write"}
-    return {"check": "idempotency", "detected": "detected",
+                "reason": f"All {len(repeats)} repeat scenarios retained exactly one confirmed write and no second write"}
+    return {"check": "idempotency", "detected": "failed",
             "implication": "authority/safety",
-            "reason": "Some repeat scenarios claimed write authority"}
+            "reason": "At least one repeated scenario did not preserve the one-write/no-second-write invariant"}
+
+
+def _interpretation_non_value_signature(
+    observation: InterpretationObservation,
+) -> tuple[Any, ...]:
+    return (
+        observation.intended_action,
+        observation.action_semantics,
+        observation.temporal_relation,
+        tuple(sorted(observation.entity_semantics.items())),
+        observation.requires_clarification,
+        observation.clarification_choices,
+        observation.selected_tool_sequence,
+        observation.authority_claim,
+        observation.claims_action_completed,
+    )
+
+
+def _interpretation_semantic_signature(
+    observation: InterpretationObservation,
+) -> tuple[Any, ...]:
+    return (
+        _interpretation_non_value_signature(observation),
+        json.dumps(observation.normalized_values, sort_keys=True, separators=(",", ":")),
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -2029,6 +2124,7 @@ def _summarise_gaps(
     scenario_map = {s.scenario_id: s for s in scenarios}
 
     temporal_gaps = 0
+    normalized_value_gaps = 0
     entity_gaps = 0
     tool_gaps = 0
     clarification_gaps = 0
@@ -2039,6 +2135,8 @@ def _summarise_gaps(
     for r in results:
         if not r.semantic_fields.temporal_relation.passed:
             temporal_gaps += 1
+        if not r.semantic_fields.normalized_values.passed:
+            normalized_value_gaps += 1
         if not r.semantic_fields.entity_semantics.passed:
             entity_gaps += 1
         if not r.tool_sequence.passed or not r.interpretation_tools.passed:
@@ -2054,6 +2152,7 @@ def _summarise_gaps(
 
     return {
         "temporal_relation_gaps": temporal_gaps,
+        "normalized_value_gaps": normalized_value_gaps,
         "entity_semantics_gaps": entity_gaps,
         "tool_sequence_gaps": tool_gaps,
         "clarification_gaps": clarification_gaps,
