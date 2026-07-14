@@ -26,8 +26,8 @@ non-circular way:
 
 1. **Implementation commit:** `645d35f3` — the five owned files committed on
    branch `codex/lc4r6-dw1-temporal-audit`.
-2. **Evidence commit:** `<LC4R6_EVIDENCE_COMMIT>` — this completion artifact
-   updated to record `645d35f3` as the implementation commit.
+2. **Evidence commit:** `4e8e47ae` — this completion artifact updated to
+   record `645d35f3` as the implementation commit.
 
 The evidence commit modifies only this completion artifact.  No implementation
 file was changed after the implementation commit.
