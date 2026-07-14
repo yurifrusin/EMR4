@@ -28,12 +28,14 @@ from app.services.bernie.scenario_spec import ReceptionScenarioSpec
 # Constants
 # ---------------------------------------------------------------------------
 
-LC4_SCHEMA_VERSION = "lc4.scale_corpus.v1"
+LC4_SCHEMA_VERSION = "lc4.scale_corpus.v2"
 DEVELOPMENT_GROUP_COUNT = 96
-VARIANTS_PER_GROUP = 12
+SURFACE_VARIANTS_PER_GROUP = 9
 MULTI_TURN_VARIANTS_PER_GROUP = 3
-TOTAL_VARIANTS = DEVELOPMENT_GROUP_COUNT * VARIANTS_PER_GROUP  # 1152
+VARIANTS_PER_GROUP = SURFACE_VARIANTS_PER_GROUP + MULTI_TURN_VARIANTS_PER_GROUP  # 12 total
+TOTAL_SURFACE_VARIANTS = DEVELOPMENT_GROUP_COUNT * SURFACE_VARIANTS_PER_GROUP  # 864
 TOTAL_TRAJECTORIES = DEVELOPMENT_GROUP_COUNT * MULTI_TURN_VARIANTS_PER_GROUP  # 288
+TOTAL_INDIVIDUAL_RECORDS = TOTAL_SURFACE_VARIANTS + TOTAL_TRAJECTORIES  # 1152
 
 DEV_GROUP_PREFIX = "lc4_dw1_dev"
 DEV_VARIANT_PREFIX = "lc4_dw1_dev_var"
@@ -122,14 +124,21 @@ def _canonical_json(obj: Any) -> str:
 
 
 def compute_group_hash(group_data: dict[str, Any]) -> str:
-    """Deterministic hash of a group's semantic profile."""
+    """Deterministic hash of a group's semantic profile AND all variant hashes."""
     canonical = _canonical_json(group_data)
     return _stable_hash(canonical)
 
 
+def _strip_variant_hash(variant_data: dict[str, Any]) -> dict[str, Any]:
+    """Return a copy of variant data without variant_hash (not a model field)."""
+    return {k: v for k, v in variant_data.items() if k != "variant_hash"}
+
+
 def compute_variant_hash(variant_data: dict[str, Any]) -> str:
-    """Deterministic hash of a single variant."""
-    canonical = _canonical_json(variant_data)
+    """Deterministic hash of a single canonical variant payload."""
+    # Strip any pre-existing hash field to make computation idempotent
+    payload = _strip_variant_hash(variant_data)
+    canonical = _canonical_json(payload)
     return _stable_hash(canonical)
 
 
@@ -235,9 +244,9 @@ class ScaleDevelopmentGroup:
         return self.surface_variants + self.multi_turn_variants
 
     def __post_init__(self) -> None:
-        if len(self.surface_variants) != VARIANTS_PER_GROUP:
+        if len(self.surface_variants) != SURFACE_VARIANTS_PER_GROUP:
             raise ValueError(
-                f"Expected {VARIANTS_PER_GROUP} surface variants, "
+                f"Expected {SURFACE_VARIANTS_PER_GROUP} surface variants, "
                 f"got {len(self.surface_variants)}"
             )
         if len(self.multi_turn_variants) != MULTI_TURN_VARIANTS_PER_GROUP:
@@ -256,9 +265,9 @@ class ScaleDevelopmentGroup:
 class ScaleCorpus:
     """Provider-free development corpus collection.
 
-    Exactly 96 development groups, each with 12 surface variants and 3
-    multi-turn variants.  All evidence is Silver/pending and must never
-    be promoted or counted as adjudicated coverage.
+    Exactly 96 development groups, each with 9 surface variants and 3
+    multi-turn variants (12 total per group).  All evidence is Silver/pending
+    and must never be promoted or counted as adjudicated coverage.
     """
 
     groups: tuple[ScaleDevelopmentGroup, ...]
@@ -283,7 +292,7 @@ class ScaleCorpus:
         return None
 
     def all_variants(self) -> list[ReceptionScenarioSpec]:
-        """Return all 1,152 + 288 = 1,440 variants."""
+        """Return all 1,152 individual records (864 surface + 288 MT)."""
         result: list[ReceptionScenarioSpec] = []
         for g in self.groups:
             result.extend(g.all_variants)
@@ -412,6 +421,22 @@ class DevelopmentOnlyLoader:
                     f"Development loader cannot access holdout path: {resolved}"
                 )
 
+    def _validate_variant_and_hash(
+        self, v: dict[str, Any], variant_type: str
+    ) -> ReceptionScenarioSpec:
+        """Validate a variant dict and verify its hash. Strips non-model fields."""
+        stored_hash = v.get("variant_hash")
+        if stored_hash:
+            recomputed = compute_variant_hash(v)
+            if stored_hash != recomputed:
+                raise ValueError(
+                    f"{variant_type} {v.get('scenario_id')} hash mismatch: "
+                    f"stored={stored_hash}, recomputed={recomputed}"
+                )
+        # Strip variant_hash before model validation (extra="forbid")
+        clean = _strip_variant_hash(v)
+        return ReceptionScenarioSpec.model_validate(clean)
+
     def load_group(self, group_path: pathlib.Path) -> ScaleDevelopmentGroup:
         """Load a single development group from a JSON fixture file."""
         if not group_path.is_file():
@@ -447,28 +472,64 @@ class DevelopmentOnlyLoader:
             gap_targets=tuple(spec_dict.get("gap_targets", [])),
         )
 
-        # Load surface variants
-        surface_variants = tuple(
-            ReceptionScenarioSpec.model_validate(v)
-            for v in raw.get("surface_variants", [])
-        )
+        # Load and validate surface variants
+        surface_variants = []
+        for v in raw.get("surface_variants", []):
+            scenario = self._validate_variant_and_hash(v, "Surface variant")
+            surface_variants.append(scenario)
 
-        # Load multi-turn variants
-        multi_turn_variants = tuple(
-            ReceptionScenarioSpec.model_validate(v)
-            for v in raw.get("multi_turn_variants", [])
-        )
+        # Load and validate multi-turn variants
+        multi_turn_variants = []
+        for v in raw.get("multi_turn_variants", []):
+            scenario = self._validate_variant_and_hash(v, "Multi-turn variant")
+            multi_turn_variants.append(scenario)
 
         ref_date = date.fromisoformat(raw["reference_date"])
         clinic_clock = datetime.fromisoformat(raw["clinic_clock"])
 
+        # Recompute and verify group hash
+        stored_group_hash = raw.get("group_hash", "")
+        if stored_group_hash:
+            group_id = raw["group_id"]
+            # Rebuild the group data input for hash verification
+            surface_hashes = [v.get("variant_hash", compute_variant_hash(v)) for v in raw.get("surface_variants", [])]
+            multi_turn_hashes = [v.get("variant_hash", compute_variant_hash(v)) for v in raw.get("multi_turn_variants", [])]
+            group_data_input = {
+                "group_id": group_id,
+                "spec": {
+                    "group_index": spec.group_index,
+                    "intended_action": spec.intended_action,
+                    "temporal_relation": spec.temporal_relation,
+                    "diary_state": spec.diary_state,
+                    "entity_state": spec.entity_state,
+                    "patient_semantics": spec.patient_semantics,
+                    "practitioner_semantics": spec.practitioner_semantics,
+                    "location_semantics": spec.location_semantics,
+                    "appointment_type_semantics": spec.appointment_type_semantics,
+                    "duration_semantics": spec.duration_semantics,
+                    "dialogue_form": spec.dialogue_form,
+                    "language_form": spec.language_form,
+                    "gap_targets": list(spec.gap_targets),
+                },
+                "surface_count": len(surface_variants),
+                "multi_turn_count": len(multi_turn_variants),
+                "surface_variant_hashes": surface_hashes,
+                "multi_turn_variant_hashes": multi_turn_hashes,
+            }
+            recomputed_group_hash = compute_group_hash(group_data_input)
+            if stored_group_hash != recomputed_group_hash:
+                raise ValueError(
+                    f"Group {group_id} hash mismatch: "
+                    f"stored={stored_group_hash}, recomputed={recomputed_group_hash}"
+                )
+
         group = ScaleDevelopmentGroup(
             spec=spec,
-            group_hash=raw.get("group_hash", ""),
+            group_hash=stored_group_hash,
             reference_date=ref_date,
             clinic_clock=clinic_clock,
-            surface_variants=surface_variants,
-            multi_turn_variants=multi_turn_variants,
+            surface_variants=tuple(surface_variants),
+            multi_turn_variants=tuple(multi_turn_variants),
         )
         return group
 
@@ -498,9 +559,12 @@ class DevelopmentOnlyLoader:
 
         groups: list[ScaleDevelopmentGroup] = []
         seen_ids: set[str] = set()
+        all_variant_ids: set[str] = set()
+        loaded_filenames: set[str] = set()
 
         for entry in manifest.get("groups", []):
             filename = entry.get("filename", "")
+            loaded_filenames.add(filename)
             group_path = self._fixture_root / filename
             if not group_path.is_file():
                 raise FileNotFoundError(
@@ -513,14 +577,43 @@ class DevelopmentOnlyLoader:
                     f"Duplicate group_id in manifest: {group.group_id!r}"
                 )
             seen_ids.add(group.group_id)
+
+            # Check for duplicate variant IDs across groups
+            for v in group.all_variants:
+                if v.scenario_id in all_variant_ids:
+                    raise ValueError(
+                        f"Duplicate variant ID across groups: {v.scenario_id!r}"
+                    )
+                all_variant_ids.add(v.scenario_id)
+
             groups.append(group)
+
+        # Check for unreferenced group files in fixture directory
+        for fpath in self._fixture_root.iterdir():
+            if fpath.suffix == ".json" and fpath.name != "lc4_development_manifest.json":
+                if fpath.name not in loaded_filenames:
+                    raise ValueError(
+                        f"Unreferenced group file in fixture directory: {fpath.name}"
+                    )
 
         # Sort by group_index for deterministic order
         groups.sort(key=lambda g: g.spec.group_index)
 
+        # Verify corpus hash
+        stored_corpus_hash = manifest.get("corpus_hash", "")
+        if stored_corpus_hash:
+            group_hashes = [g.group_hash for g in groups]
+            corpus_hash_input = _canonical_json(group_hashes)
+            recomputed_corpus_hash = _stable_hash(corpus_hash_input)
+            if stored_corpus_hash != recomputed_corpus_hash:
+                raise ValueError(
+                    f"Corpus hash mismatch: "
+                    f"stored={stored_corpus_hash}, recomputed={recomputed_corpus_hash}"
+                )
+
         corpus = ScaleCorpus(
             groups=tuple(groups),
-            corpus_hash=manifest.get("corpus_hash", ""),
+            corpus_hash=stored_corpus_hash,
         )
         return corpus
 
@@ -639,20 +732,18 @@ def _build_scenario(
     # Determine language form
     eff_language_form = language_form
 
-    # Entity semantics
+    # Entity semantics from group spec
     patient_sem = group_spec.patient_semantics
     pract_sem = group_spec.practitioner_semantics
     duration_sem = group_spec.duration_semantics
 
-    # Detect if entity is ambiguous/omitted from utterance
-    if patient_name.lower() in utterance.lower():
-        patient_sem = "exact"
-    elif "patient" not in utterance.lower() and "for" not in utterance.lower():
+    # Only override when spec says "exact" but utterance doesn't mention the entity.
+    # Never override "omitted" to "exact" — spec is authoritative.
+    if patient_sem == "exact" and patient_name.lower() not in utterance.lower():
+        # Utterance doesn't name patient despite exact semantics — flag as omitted
         patient_sem = "omitted"
 
-    if practitioner_name.lower() in utterance.lower():
-        pract_sem = "exact"
-    elif "dr" not in utterance.lower() and "doctor" not in utterance.lower():
+    if pract_sem == "exact" and practitioner_name.lower() not in utterance.lower():
         pract_sem = "omitted"
 
     # Expected outcome + tool sequence
@@ -921,6 +1012,47 @@ def _derive_audit_deltas(action: Action) -> list[dict[str, Any]]:
 # ---------------------------------------------------------------------------
 
 
+def _apply_entity_semantics(
+    utterance: str,
+    patient_sem: str,
+    practitioner_sem: str,
+    patient_name: str = "Margaret Thompson",
+    practitioner_name: str = "Dr Shera",
+) -> str:
+    """Post-process utterance to reflect entity semantics.
+
+    For omitted entities, replace the named entity with a generic reference.
+    For ambiguous entities, use a vague reference.
+    For negated entities, prefix with a negation phrase.
+    For mismatched entities, replace with wrong name.
+    For corrected entities, leave as-is (correction is handled in multi-turn).
+    """
+    result = utterance
+
+    if patient_sem == "omitted" and patient_name in result:
+        result = result.replace(patient_name, "a patient", 1)
+    elif patient_sem == "ambiguous" and patient_name in result:
+        result = result.replace(patient_name, "someone", 1)
+    elif patient_sem == "negated" and patient_name in result:
+        # Keep the name but ensure negation context
+        if not any(w in result.lower() for w in ("not", "n't", "except", "but not")):
+            result = result.replace(patient_name, f"not {patient_name}")
+    elif patient_sem == "mismatched":
+        result = result.replace(patient_name, "Robert Johnson")
+
+    if practitioner_sem == "omitted" and practitioner_name in result:
+        result = result.replace(practitioner_name, "a practitioner", 1)
+    elif practitioner_sem == "ambiguous" and practitioner_name in result:
+        result = result.replace(practitioner_name, "some doctor", 1)
+    elif practitioner_sem == "negated" and practitioner_name in result:
+        if not any(w in result.lower() for w in ("not", "n't", "except", "but not")):
+            result = result.replace(practitioner_name, f"not {practitioner_name}")
+    elif practitioner_sem == "mismatched":
+        result = result.replace(practitioner_name, "Dr Patel")
+
+    return result
+
+
 def _make_utterance_variant(
     action: Action,
     template_index: int,
@@ -930,10 +1062,13 @@ def _make_utterance_variant(
     date_str: str = "tomorrow",
     duration_str: str = "15 minutes",
     location_str: str = "Room 2",
+    patient_sem: str = "exact",
+    practitioner_sem: str = "exact",
 ) -> str:
     """Generate a single utterance variant with meaningful wording variation.
 
-    Uses 12 distinct linguistic patterns — never simple token substitution.
+    Uses 9 distinct linguistic patterns per action for the 9 surface variants.
+    Entity semantics are applied as post-processing to ensure agreement.
     """
     patterns: list[str] = []
 
@@ -945,86 +1080,68 @@ def _make_utterance_variant(
             f"Hi, I need to book {patient_name} in to see {practitioner_name} {date_str} around {time_str} for roughly {duration_str}, please.",
             f"Please make an apt for {patient_name} w/ {practitioner_name} on {date_str} @ {time_str} ~{duration_str}.",
             f"I'd like to put {patient_name} down for an appointment with {practitioner_name} {date_str} at {time_str}, lasting {duration_str}.",
-            f"yeah could we um get {patient_name} in with {practitioner_name} {date_str} at {time_str} for like {duration_str} thanks",
             f"Schedule {patient_name} — {practitioner_name} — {date_str} {time_str} — {duration_str}.",
             f"Please add {patient_name} to {practitioner_name}'s book {date_str} at {time_str} for a {duration_str} slot.",
             f"Set up a visit for {patient_name} with {practitioner_name} {date_str} at {time_str}, duration {duration_str}.",
-            f"{practitioner_name} needs to see {patient_name} {date_str} at {time_str} for {duration_str}.",
-            f"Would it be possible to arrange {patient_name} with {practitioner_name} {date_str} at {time_str}? About {duration_str} should do.",
         ]
     elif action == "move":
         patterns = [
-            f"Move Margaret Thompson's appointment with Dr Shera from {time_str} to 4pm {date_str}.",
+            f"Move {patient_name}'s appointment with {practitioner_name} from {time_str} to 4pm {date_str}.",
             f"Could I reschedule {patient_name}'s booking with {practitioner_name}? We need to shift it to 4pm {date_str} instead.",
             f"Reschedule: {patient_name}, {practitioner_name}, move to {date_str} at 4pm.",
             f"Hi, {patient_name}'s appointment with {practitioner_name} needs to be moved to {date_str} at 4pm, not {time_str}.",
             f"Please shift {patient_name}'s apt w/ {practitioner_name} to {date_str} @ 4pm.",
             f"I need to move {patient_name}'s booking forward to {date_str} at 4pm — can you update that?",
-            f"yeah could we um shift {patient_name} with {practitioner_name} to {date_str} at 4pm instead",
             f"Change: {patient_name} — {practitioner_name} — move to {date_str} 4pm.",
             f"Please reschedule {patient_name}'s appointment with {practitioner_name} to {date_str} at 4pm.",
-            f"Move {patient_name}'s slot to {date_str} at 4pm with {practitioner_name}.",
-            f"{practitioner_name}'s appointment for {patient_name} needs to move to {date_str} at 4pm.",
             f"Could we reschedule {patient_name} with {practitioner_name} to {date_str} at 4pm, please?",
         ]
     elif action == "resize":
         patterns = [
-            f"Make Margaret Thompson's appointment with Dr Shera longer — change it to 30 minutes {date_str} at {time_str}.",
+            f"Make {patient_name}'s appointment with {practitioner_name} longer — change it to 30 minutes {date_str} at {time_str}.",
             f"I need to extend {patient_name}'s booking with {practitioner_name} to 30 minutes {date_str} at {time_str}.",
             f"Change duration: {patient_name}, {practitioner_name}, now 30 mins {date_str} {time_str}.",
             f"Hi, can you make {patient_name}'s appointment with {practitioner_name} longer? Stretch it to 30 minutes.",
             f"Increase {patient_name}'s apt w/ {practitioner_name} to 30 mins {date_str} {time_str}.",
             f"We need to double {patient_name}'s appointment with {practitioner_name} to 30 minutes please.",
-            f"yeah can we um make {patient_name}'s time with {practitioner_name} longer to 30 mins",
             f"Resize: {patient_name} — {practitioner_name} — 30 min slot {date_str} {time_str}.",
             f"Please change {patient_name}'s booking to 30 minutes with {practitioner_name}.",
-            f"Update {patient_name}'s slot duration to 30 minutes with {practitioner_name}.",
-            f"{practitioner_name}'s appointment for {patient_name} should be 30 minutes now.",
             f"Could we increase {patient_name}'s appointment with {practitioner_name} to 30 minutes?",
         ]
     elif action == "cancel":
         patterns = [
-            f"Cancel Margaret Thompson's appointment with Dr Shera {date_str} at {time_str}.",
+            f"Cancel {patient_name}'s appointment with {practitioner_name} {date_str} at {time_str}.",
             f"I need to remove {patient_name}'s booking with {practitioner_name} for {date_str} at {time_str}.",
             f"Cancel: {patient_name}, {practitioner_name}, {date_str} {time_str}.",
             f"Hi, would you please cancel {patient_name}'s appointment with {practitioner_name} for {date_str}?",
             f"Please cancel {patient_name}'s apt w/ {practitioner_name} on {date_str} @ {time_str}.",
             f"We need to call off {patient_name}'s booking with {practitioner_name} for {date_str} at {time_str}.",
-            f"yeah can we um delete {patient_name}'s appointment with {practitioner_name} for {date_str}",
             f"Remove: {patient_name} — {practitioner_name} — {date_str} {time_str}.",
             f"Please delete {patient_name}'s appointment with {practitioner_name} on {date_str} at {time_str}.",
-            f"Cancel the booking for {patient_name} with {practitioner_name} on {date_str}.",
-            f"{patient_name}'s appointment with {practitioner_name} on {date_str} — please cancel it.",
             f"Could I cancel {patient_name}'s booking with {practitioner_name} for {date_str} at {time_str}?",
         ]
     elif action == "status_change":
         patterns = [
-            f"Mark Margaret Thompson arrived for her appointment with Dr Shera {date_str} at {time_str}.",
+            f"Mark {patient_name} arrived for her appointment with {practitioner_name} {date_str} at {time_str}.",
             f"{patient_name} has arrived for her appointment with {practitioner_name} — please mark her as arrived.",
             f"Arrived: {patient_name}, {practitioner_name}, {date_str} {time_str}.",
             f"Hi, could you please check in {patient_name}? She's here to see {practitioner_name}.",
             f"Please mark {patient_name} arrived for {practitioner_name} {date_str} {time_str}.",
             f"{patient_name} is here now — please confirm arrival for her booking with {practitioner_name}.",
-            f"yeah {patient_name}'s here for {practitioner_name} can you mark her arrived",
             f"Status: {patient_name} — {practitioner_name} — ARRIVED {date_str} {time_str}.",
             f"Please update {patient_name}'s status to arrived for {practitioner_name}.",
-            f"Check in {patient_name} for her appointment with {practitioner_name} please.",
-            f"{patient_name} has walked in for {practitioner_name} — mark as arrived.",
             f"Could you mark {patient_name} as arrived for {practitioner_name}? She's here.",
         ]
     elif action == "explain_schedule":
         patterns = [
-            f"Can you explain what Dr Shera's schedule looks like {date_str}?",
+            f"Can you explain what {practitioner_name}'s schedule looks like {date_str}?",
             f"Could I see {practitioner_name}'s availability for {date_str} please?",
             f"What appointments does {practitioner_name} have {date_str}?",
             f"Hi, I need to know what {practitioner_name}'s day looks like {date_str}.",
             f"Show me {practitioner_name}'s schedule for {date_str}.",
             f"Can you tell me when {practitioner_name} has free slots {date_str}?",
-            f"yeah what's {practitioner_name}'s diary look like {date_str} any gaps?",
             f"Schedule: {practitioner_name} — {date_str} — availability?",
             f"Please show me {practitioner_name}'s available times for {date_str}.",
-            f"What times does {practitioner_name} have open {date_str}?",
-            f"I need to check {practitioner_name}'s rosters for {date_str}.",
             f"Could you pull up {practitioner_name}'s schedule for {date_str} so I can see the gaps?",
         ]
     else:
@@ -1033,8 +1150,16 @@ def _make_utterance_variant(
         ]
 
     if template_index < len(patterns):
-        return patterns[template_index]
-    return patterns[0]
+        utterance = patterns[template_index]
+    else:
+        utterance = patterns[0]
+
+    # Apply entity semantics post-processing
+    utterance = _apply_entity_semantics(
+        utterance, patient_sem, practitioner_sem,
+        patient_name=patient_name, practitioner_name=practitioner_name,
+    )
+    return utterance
 
 
 def _build_multi_turn_utterances(
@@ -1237,7 +1362,12 @@ def generate_development_fixture(
             language_form=language_form,
             gap_targets=tuple(gap_targets),
             # Vary entity semantics per group
-            patient_semantics="exact" if entity_state != "ambiguous" else "ambiguous",
+            # explain_schedule doesn't involve a patient entity, so default to "omitted"
+            patient_semantics=(
+                "omitted" if action == "explain_schedule" else
+                "exact" if entity_state != "ambiguous" else
+                "ambiguous"
+            ),
             practitioner_semantics=(
                 "corrected" if dialogue_form == "correction" else
                 "ambiguous" if entity_state == "ambiguous" else
@@ -1272,14 +1402,15 @@ def generate_development_fixture(
             "group_id": spec.group_id,
             "filename": filename,
             "group_hash": group_data["group_hash"],
+            "variant_hashes": group_data.get("variant_hashes", {}),
             "action": spec.intended_action,
             "temporal_relation": spec.temporal_relation,
             "gap_targets": list(spec.gap_targets),
-            "variant_count": VARIANTS_PER_GROUP,
+            "surface_variant_count": SURFACE_VARIANTS_PER_GROUP,
             "multi_turn_count": MULTI_TURN_VARIANTS_PER_GROUP,
         })
 
-    # Compute corpus hash
+    # Compute corpus hash from chained group hashes (which cover all variant payloads)
     corpus_hash_input = _canonical_json([g["group_hash"] for g in group_files])
     corpus_hash = _stable_hash(corpus_hash_input)
 
@@ -1290,8 +1421,9 @@ def generate_development_fixture(
         "provenance": "silver",
         "adjudication": "pending",
         "total_groups": DEVELOPMENT_GROUP_COUNT,
-        "total_variants": TOTAL_VARIANTS,
-        "total_trajectories": TOTAL_TRAJECTORIES,
+        "total_surface_variants": TOTAL_SURFACE_VARIANTS,
+        "total_multi_turn_trajectories": TOTAL_TRAJECTORIES,
+        "total_individual_records": TOTAL_INDIVIDUAL_RECORDS,
         "reference_date": reference_date.isoformat(),
         "generator_identity": {
             "provider_id": "deepseek",
@@ -1372,16 +1504,18 @@ def _build_group_fixture(
         earliest_time = None
         latest_time = None
 
-    # Build the 12 surface variant specs
+    # Build the 9 surface variant specs
     surface_variants: list[ReceptionScenarioSpec] = []
     surface_data: list[dict[str, Any]] = []
 
-    for vi in range(1, VARIANTS_PER_GROUP + 1):
+    for vi in range(1, SURFACE_VARIANTS_PER_GROUP + 1):
         variant_id = f"{DEV_VARIANT_PREFIX}_{spec.group_index:03d}_{vi:02d}"
 
         utterance = _make_utterance_variant(
             action, vi - 1,
             date_str=date_str, time_str=time_str,
+            patient_sem=spec.patient_semantics,
+            practitioner_sem=spec.practitioner_semantics,
         )
 
         # Determine dialogue form per variant (must be valid DialogueForm literal)
@@ -1497,7 +1631,17 @@ def _build_group_fixture(
         multi_turn_variants.append(scenario)
         multi_turn_data.append(scenario.model_dump(mode="json"))
 
-    # Compute group hash
+    # Compute variant hashes and include them in fixture data
+    surface_hashes = [compute_variant_hash(sd) for sd in surface_data]
+    multi_turn_hashes = [compute_variant_hash(md) for md in multi_turn_data]
+
+    # Add variant hashes to each variant data
+    for sd, h in zip(surface_data, surface_hashes):
+        sd["variant_hash"] = h
+    for md, h in zip(multi_turn_data, multi_turn_hashes):
+        md["variant_hash"] = h
+
+    # Compute group hash — covers spec AND all variant payloads
     group_data_input = {
         "group_id": group_id,
         "spec": {
@@ -1508,12 +1652,17 @@ def _build_group_fixture(
             "entity_state": spec.entity_state,
             "patient_semantics": spec.patient_semantics,
             "practitioner_semantics": spec.practitioner_semantics,
+            "location_semantics": spec.location_semantics,
+            "appointment_type_semantics": spec.appointment_type_semantics,
+            "duration_semantics": spec.duration_semantics,
             "dialogue_form": spec.dialogue_form,
             "language_form": spec.language_form,
             "gap_targets": list(spec.gap_targets),
         },
         "surface_count": len(surface_data),
         "multi_turn_count": len(multi_turn_data),
+        "surface_variant_hashes": surface_hashes,
+        "multi_turn_variant_hashes": multi_turn_hashes,
     }
     group_hash = compute_group_hash(group_data_input)
 
@@ -1531,6 +1680,10 @@ def _build_group_fixture(
         "schema_version": LC4_SCHEMA_VERSION,
         "group_id": group_id,
         "group_hash": group_hash,
+        "variant_hashes": {
+            "surface": surface_hashes,
+            "multi_turn": multi_turn_hashes,
+        },
         "provenance": "silver",
         "adjudication": "pending",
         "reference_date": reference_date.isoformat(),
@@ -1631,8 +1784,14 @@ def validate_corpus(corpus: ScaleCorpus) -> list[str]:
     return errors
 
 
-def validate_variant(scenario: ReceptionScenarioSpec) -> list[str]:
+def validate_variant(
+    scenario: ReceptionScenarioSpec,
+    group_spec: DevelopmentGroupSpec | None = None,
+) -> list[str]:
     """Validate a single variant's internal consistency.
+
+    When *group_spec* is provided, also validates cross-field agreement
+    between the variant and its parent group spec.
 
     Returns a list of error messages (empty if valid).
     """
@@ -1672,7 +1831,7 @@ def validate_variant(scenario: ReceptionScenarioSpec) -> list[str]:
                 if end > len(original) or original[start:end] != text:
                     errors.append(
                         f"Span text {text!r} does not match source at "
-                        f"position {start}:{end}"
+                        f"position {start}:{end} in turn {ti}"
                     )
 
     # Verify earliest/latest consistency
@@ -1690,6 +1849,42 @@ def validate_variant(scenario: ReceptionScenarioSpec) -> list[str]:
             errors.append("interval requires both time bounds")
         elif scenario.earliest_time >= scenario.latest_time:
             errors.append("interval requires earliest < latest")
+
+    # Validate normalized values include required fields
+    norm = scenario.normalized_values
+    if "appointment_date" not in norm:
+        errors.append("normalized_values missing appointment_date")
+    if "duration_minutes" not in norm:
+        errors.append("normalized_values missing duration_minutes")
+
+    # Check field-level entity semantics agreement with utterance
+    utterance_text = " ".join(utterances).lower()
+    if scenario.patient_semantics == "exact" and "margaret" not in utterance_text:
+        errors.append(
+            f"patient_semantics=exact but 'Margaret' not found in utterance"
+        )
+    if scenario.practitioner_semantics == "exact" and "shera" not in utterance_text:
+        errors.append(
+            f"practitioner_semantics=exact but 'Shera' not found in utterance"
+        )
+
+    # Cross-validate against group spec if provided
+    if group_spec is not None:
+        if scenario.intended_action != group_spec.intended_action:
+            errors.append(
+                f"Variant action {scenario.intended_action!r} != "
+                f"group action {group_spec.intended_action!r}"
+            )
+        if scenario.temporal_relation != group_spec.temporal_relation:
+            errors.append(
+                f"Variant temporal {scenario.temporal_relation!r} != "
+                f"group temporal {group_spec.temporal_relation!r}"
+            )
+        if scenario.diary_state != group_spec.diary_state:
+            errors.append(
+                f"Variant diary_state {scenario.diary_state!r} != "
+                f"group diary_state {group_spec.diary_state!r}"
+            )
 
     return errors
 
@@ -1731,10 +1926,12 @@ def validate_scale_corpus_isolation() -> None:
 __all__ = [
     "LC4_SCHEMA_VERSION",
     "DEVELOPMENT_GROUP_COUNT",
+    "SURFACE_VARIANTS_PER_GROUP",
     "VARIANTS_PER_GROUP",
     "MULTI_TURN_VARIANTS_PER_GROUP",
-    "TOTAL_VARIANTS",
+    "TOTAL_SURFACE_VARIANTS",
     "TOTAL_TRAJECTORIES",
+    "TOTAL_INDIVIDUAL_RECORDS",
     "GAP_PRIORITY_MINIMUM",
     "ALL_ACTIONS",
     "ALL_TEMPORAL_RELATIONS",

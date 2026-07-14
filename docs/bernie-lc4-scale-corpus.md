@@ -3,10 +3,10 @@
 ## Purpose
 
 DW1 builds a provider-free generic LC4 scale-corpus framework and exactly 96
-development semantic groups (1,152 surface variants + 288 multi-turn trajectories)
-targeting the LC3 measured gaps: clarification dialogue, interval/unspecified
-temporal relations, entity ambiguity/omission/correction, and interpretation/replay
-tool selection.
+development semantic groups (864 surface variants + 288 multi-turn trajectories =
+1,152 total individual records) targeting the LC3 measured gaps: clarification
+dialogue, interval/unspecified temporal relations, entity ambiguity/omission/
+correction, and interpretation/replay tool selection.
 
 All development evidence is DeepSeek-generated Silver/pending with complete
 deterministic provenance.  It must never be promoted or counted as adjudicated
@@ -21,7 +21,7 @@ coverage.
 | Model | Purpose |
 |---|---|
 | `DevelopmentGroupSpec` | Compact semantic specification for one group |
-| `ScaleDevelopmentGroup` | Expanded group with 12 + 3 validated variants |
+| `ScaleDevelopmentGroup` | Expanded group with 9 + 3 (12 total) validated variants |
 | `ScaleCorpus` | Collection of exactly 96 development groups |
 | `PartitionSlot` / `PartitionSchema` | Generic partition interface (test only with dummy records) |
 | `SealedHoldoutCapability` | Generic sealed-holdout capability (no real holdout) |
@@ -29,7 +29,9 @@ coverage.
 ### Loader
 
 `DevelopmentOnlyLoader` loads development fixtures from
-`tests/fixtures/bernie_lc4_development/`.  It rejects holdout fixture paths.
+`tests/fixtures/bernie_lc4_development/`.  It rejects holdout fixture paths,
+verifies every variant hash, group hash, and corpus hash on load, and detects
+unreferenced/duplicate/cross-group records.
 
 - `load_all()` — loads all 96 groups via the manifest
 - `load_group(path)` — loads a single group JSON file
@@ -38,19 +40,25 @@ coverage.
 ### Generator
 
 `generate_development_fixture(output_dir)` — deterministic generator that
-produces all 96 fixture files from the 96 group spec definitions.
+produces all 96 fixture files from the 96 group spec definitions.  Each group
+contains 9 surface variants + 3 multi-turn trajectories = 12 total per group.
+Every variant includes a content-addressable `variant_hash`; the group hash
+chains from spec + all variant hashes; the corpus hash chains from all group
+hashes.
 
 ### Validation helpers
 
 - `validate_corpus(corpus)` — full integrity / coverage check
-- `validate_variant(scenario)` — per-variant consistency check
+- `validate_variant(scenario, group_spec=None)` — per-variant consistency check
+  with optional group-spec cross-validation
 - `validate_scale_corpus_isolation()` — import isolation guard
 
 ## Fixtures
 
 `tests/fixtures/bernie_lc4_development/`
 
-- `lc4_development_manifest.json` — manifest with corpus hash, group index
+- `lc4_development_manifest.json` — manifest with corpus hash, group index,
+  variant hashes
 - `lc4_dw1_dev_group_001.json` … `lc4_dw1_dev_group_096.json` — group files
 
 ### Group distribution
@@ -75,27 +83,29 @@ At least 58 of 96 groups target LC3 weaknesses.  Current generation produces
 
 | Class | Coverage |
 |---|---|
-| `TestExactCounts` | 96 groups, 12 variants/group, 3 MT/group, total 1,152 + 288 |
+| `TestExactCounts` | 96 groups, 9+3=12 variants/group, 864+288=1,152 total |
 | `TestModelValidation` | Every variant validates through model |
-| `TestStableHashes` | Hashes are deterministic and stable |
-| `TestSemanticInvariance` | All variants share group core semantics |
+| `TestStableHashes` | Hashes cover variant payloads, deterministic and stable |
+| `TestSemanticInvariance` | Action/temporal/diary-state/provenance/entity invariance |
 | `TestUniqueIDs` | No duplicate variant or group IDs |
 | `TestDimensionCoverage` | All dimensions covered, min 12 per action/temporal |
-| `TestGapPriority` | ≥58 gap-priority groups |
-| `TestShuffleStability` | Deterministic load order |
-| `TestFailClosed` | Duplicate/missing/tampered/cross-partition |
+| `TestGapPriority` | ≥58 gap-priority, all 4 target categories used |
+| `TestShuffleStability` | Deterministic load order, stable hash across loads |
+| `TestFailClosed` | Duplicate/missing/tampered/holdout/cross-group rejection |
 | `TestProvenance` | Silver/pending/no-authority |
 | `TestImportIsolation` | No prohibited imports |
 | `TestPartitionSchema` | Dummy partition/ holdout capability |
 | `TestValidateCorpus` | validate_corpus integrity checks |
 | `TestSourceSpanIntegrity` | Source spans match utterance text |
 | `TestTemporalConsistency` | Temporal relation constraints satisfied |
-| `TestMeaningfulWording` | Variants have distinct meaningful utterances |
+| `TestMeaningfulWording` | Distinct utterances, entity presence agrees with semantics |
+| `TestNegativeRejectedDefects` | Negative tests for surface+MT>12, tampering, stale hash, semantic drift, evidence coordinates, duplicate IDs, unreferenced files |
 
 ## Scripts
 
 - `scripts/bernie_lc4_development_report.py` — generates deterministic report
-  at `docs/bernie-lc4-development-report.json`
+  at `docs/bernie-lc4-development-report.json` (python script.py to write;
+  python script.py --check to verify in memory without writing)
 - `scripts/generate_lc4_development_fixtures.py` — regenerates all fixture
   files deterministically (reproducible)
 

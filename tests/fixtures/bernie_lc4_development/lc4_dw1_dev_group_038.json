@@ -1,7 +1,25 @@
 {
-  "schema_version": "lc4.scale_corpus.v1",
+  "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_038",
-  "group_hash": "sha256:ac4be00f02c7a7e1f4bbd160224c38562dbaab38b4675372927519c7c79d813d",
+  "group_hash": "sha256:5a88b1c572a61e183c48ff5b6f255a616b386a7dbb5d4ecce4b6fe99f1d096de",
+  "variant_hashes": {
+    "surface": [
+      "sha256:45dfbddaf0b2d37f5ef388fbef7394774d9f5fcb809b012fb123d2817c3a7370",
+      "sha256:b7c0f060a51df14d2adb56030d356268d8005fe192b5d89e8782dfc450779b47",
+      "sha256:cbf888420d5c6f12606b1f59c86cbcf9f85187c6f3ccf28108d9e9b50465723a",
+      "sha256:2cbf493af764a5adf2857c20a8d5b79588912e981542c295002ba95c90c05d75",
+      "sha256:4d646428cccbce9b17e1a33c3660a71df137f9a76a650474d15e3b257177d772",
+      "sha256:ef9baa7bd113b17ab70f054c2415bee32f96301740b2516d9517c49efb6d2c10",
+      "sha256:4a696dda4827542284c8552c2574b51919e07dd2ebd0dbbfa800b3751e7f9518",
+      "sha256:49646659ae50d57bbc3e7f26039676a81cd3df3e8a6b525dd5d9e2f4927fe799",
+      "sha256:d91e932e9a042ad79e60c1d390b2795a4213d988db7f88f3beb8930af8af6b8a"
+    ],
+    "multi_turn": [
+      "sha256:b7a7c37e47617aa63b884b240e22712708bf9b67e60632c6999820d66cfe8567",
+      "sha256:b14bc818a026f8d4fadde7efe2ee82e9425751b603114d13b18cf361095b14cc",
+      "sha256:442a3b45b0c75b072370ce3ea553c50772d1f2c18fefa35c50d97a00de555f4a"
+    ]
+  },
   "provenance": "silver",
   "adjudication": "pending",
   "reference_date": "2026-07-14",
@@ -31,11 +49,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_038",
-      "description": "resize:not_before:anaphora:speech_like - Make Margaret Thompson's appointment with Dr Shera longer \u2014 change it to 30 minu",
+      "description": "resize:not_before:anaphora:speech_like - Make someone's appointment with some doctor longer \u2014 change it to 30 minutes tom",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Make Margaret Thompson's appointment with Dr Shera longer \u2014 change it to 30 minutes tomorrow after at 3pm."
+          "utterance": "Make someone's appointment with some doctor longer \u2014 change it to 30 minutes tomorrow after at 3pm."
         }
       ],
       "reference_date": "2026-07-14",
@@ -54,44 +72,28 @@
         "temporal_relation": [
           {
             "turn_index": 0,
-            "start": 102,
-            "end": 105,
+            "start": 95,
+            "end": 98,
             "text": "3pm"
-          }
-        ],
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 5,
-            "end": 22,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 42,
-            "end": 50,
-            "text": "Dr Shera"
           }
         ],
         "duration_minutes": [
           {
             "turn_index": 0,
-            "start": 73,
-            "end": 83,
+            "start": 66,
+            "end": 76,
             "text": "30 minutes"
           }
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "terminal",
-      "entity_state": "exact",
+      "entity_state": "ambiguous",
       "dialogue_form": "anaphora",
       "language_form": "speech_like",
       "initial_diary_state": {
@@ -130,7 +132,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:45dfbddaf0b2d37f5ef388fbef7394774d9f5fcb809b012fb123d2817c3a7370"
     },
     {
       "spec_version": "lc1.v1",
@@ -138,11 +141,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_038",
-      "description": "resize:not_before:anaphora:speech_like - I need to extend Margaret Thompson's booking with Dr Shera to 30 minutes tomorro",
+      "description": "resize:not_before:anaphora:speech_like - I need to extend someone's booking with some doctor to 30 minutes tomorrow after",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "I need to extend Margaret Thompson's booking with Dr Shera to 30 minutes tomorrow after at 3pm."
+          "utterance": "I need to extend someone's booking with some doctor to 30 minutes tomorrow after at 3pm."
         }
       ],
       "reference_date": "2026-07-14",
@@ -161,44 +164,28 @@
         "temporal_relation": [
           {
             "turn_index": 0,
-            "start": 91,
-            "end": 94,
+            "start": 84,
+            "end": 87,
             "text": "3pm"
-          }
-        ],
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 17,
-            "end": 34,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 50,
-            "end": 58,
-            "text": "Dr Shera"
           }
         ],
         "duration_minutes": [
           {
             "turn_index": 0,
-            "start": 62,
-            "end": 72,
+            "start": 55,
+            "end": 65,
             "text": "30 minutes"
           }
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "terminal",
-      "entity_state": "exact",
+      "entity_state": "ambiguous",
       "dialogue_form": "anaphora",
       "language_form": "speech_like",
       "initial_diary_state": {
@@ -237,7 +224,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:b7c0f060a51df14d2adb56030d356268d8005fe192b5d89e8782dfc450779b47"
     },
     {
       "spec_version": "lc1.v1",
@@ -245,498 +233,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_038",
-      "description": "resize:not_before:anaphora:speech_like - Change duration: Margaret Thompson, Dr Shera, now 30 mins tomorrow after 3pm.",
+      "description": "resize:not_before:anaphora:speech_like - Change duration: someone, some doctor, now 30 mins tomorrow after 3pm.",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Change duration: Margaret Thompson, Dr Shera, now 30 mins tomorrow after 3pm."
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "resize",
-      "action_semantics": "intended",
-      "temporal_relation": "not_before",
-      "earliest_time": "15:00",
-      "latest_time": null,
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "15:00"
-      },
-      "source_spans": {
-        "temporal_relation": [
-          {
-            "turn_index": 0,
-            "start": 73,
-            "end": 76,
-            "text": "3pm"
-          }
-        ],
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 17,
-            "end": 34,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 36,
-            "end": 44,
-            "text": "Dr Shera"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "terminal",
-      "entity_state": "exact",
-      "dialogue_form": "anaphora",
-      "language_form": "speech_like",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "appointment_resized",
-      "expected_tool_sequence": [
-        "request_clarification"
-      ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "resized",
-          "new_duration_minutes": 15
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "resize_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": []
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_038_04",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_038",
-      "description": "resize:not_before:anaphora:speech_like - Hi, can you make Margaret Thompson's appointment with Dr Shera longer? Stretch i",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "Hi, can you make Margaret Thompson's appointment with Dr Shera longer? Stretch it to 30 minutes."
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "resize",
-      "action_semantics": "intended",
-      "temporal_relation": "not_before",
-      "earliest_time": "15:00",
-      "latest_time": null,
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "15:00"
-      },
-      "source_spans": {
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 17,
-            "end": 34,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 54,
-            "end": 62,
-            "text": "Dr Shera"
-          }
-        ],
-        "duration_minutes": [
-          {
-            "turn_index": 0,
-            "start": 85,
-            "end": 95,
-            "text": "30 minutes"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "terminal",
-      "entity_state": "exact",
-      "dialogue_form": "anaphora",
-      "language_form": "speech_like",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "appointment_resized",
-      "expected_tool_sequence": [
-        "request_clarification"
-      ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "resized",
-          "new_duration_minutes": 15
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "resize_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": []
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_038_05",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_038",
-      "description": "resize:not_before:anaphora:speech_like - Increase Margaret Thompson's apt w/ Dr Shera to 30 mins tomorrow after 3pm.",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "Increase Margaret Thompson's apt w/ Dr Shera to 30 mins tomorrow after 3pm."
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "resize",
-      "action_semantics": "intended",
-      "temporal_relation": "not_before",
-      "earliest_time": "15:00",
-      "latest_time": null,
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "15:00"
-      },
-      "source_spans": {
-        "temporal_relation": [
-          {
-            "turn_index": 0,
-            "start": 71,
-            "end": 74,
-            "text": "3pm"
-          }
-        ],
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 9,
-            "end": 26,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 36,
-            "end": 44,
-            "text": "Dr Shera"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "terminal",
-      "entity_state": "exact",
-      "dialogue_form": "anaphora",
-      "language_form": "speech_like",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "appointment_resized",
-      "expected_tool_sequence": [
-        "request_clarification"
-      ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "resized",
-          "new_duration_minutes": 15
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "resize_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": []
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_038_06",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_038",
-      "description": "resize:not_before:anaphora:speech_like - We need to double Margaret Thompson's appointment with Dr Shera to 30 minutes pl",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "We need to double Margaret Thompson's appointment with Dr Shera to 30 minutes please."
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "resize",
-      "action_semantics": "intended",
-      "temporal_relation": "not_before",
-      "earliest_time": "15:00",
-      "latest_time": null,
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "15:00"
-      },
-      "source_spans": {
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 18,
-            "end": 35,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 55,
-            "end": 63,
-            "text": "Dr Shera"
-          }
-        ],
-        "duration_minutes": [
-          {
-            "turn_index": 0,
-            "start": 67,
-            "end": 77,
-            "text": "30 minutes"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "terminal",
-      "entity_state": "exact",
-      "dialogue_form": "anaphora",
-      "language_form": "speech_like",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "appointment_resized",
-      "expected_tool_sequence": [
-        "request_clarification"
-      ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "resized",
-          "new_duration_minutes": 15
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "resize_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": []
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_038_07",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_038",
-      "description": "resize:not_before:anaphora:speech_like - yeah can we um make Margaret Thompson's time with Dr Shera longer to 30 mins",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "yeah can we um make Margaret Thompson's time with Dr Shera longer to 30 mins"
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "resize",
-      "action_semantics": "intended",
-      "temporal_relation": "not_before",
-      "earliest_time": "15:00",
-      "latest_time": null,
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "15:00"
-      },
-      "source_spans": {
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 20,
-            "end": 37,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 50,
-            "end": 58,
-            "text": "Dr Shera"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "terminal",
-      "entity_state": "exact",
-      "dialogue_form": "anaphora",
-      "language_form": "speech_like",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "appointment_resized",
-      "expected_tool_sequence": [
-        "request_clarification"
-      ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "resized",
-          "new_duration_minutes": 15
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "resize_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": []
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_038_08",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_038",
-      "description": "resize:not_before:anaphora:speech_like - Resize: Margaret Thompson \u2014 Dr Shera \u2014 30 min slot tomorrow after 3pm.",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "Resize: Margaret Thompson \u2014 Dr Shera \u2014 30 min slot tomorrow after 3pm."
+          "utterance": "Change duration: someone, some doctor, now 30 mins tomorrow after 3pm."
         }
       ],
       "reference_date": "2026-07-14",
@@ -759,32 +260,16 @@
             "end": 69,
             "text": "3pm"
           }
-        ],
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 8,
-            "end": 25,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 28,
-            "end": 36,
-            "text": "Dr Shera"
-          }
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "terminal",
-      "entity_state": "exact",
+      "entity_state": "ambiguous",
       "dialogue_form": "anaphora",
       "language_form": "speech_like",
       "initial_diary_state": {
@@ -823,7 +308,428 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:cbf888420d5c6f12606b1f59c86cbcf9f85187c6f3ccf28108d9e9b50465723a"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_038_04",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_038",
+      "description": "resize:not_before:anaphora:speech_like - Hi, can you make someone's appointment with some doctor longer? Stretch it to 30",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Hi, can you make someone's appointment with some doctor longer? Stretch it to 30 minutes."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "resize",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "15:00",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "15:00"
+      },
+      "source_spans": {
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 78,
+            "end": 88,
+            "text": "30 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "terminal",
+      "entity_state": "ambiguous",
+      "dialogue_form": "anaphora",
+      "language_form": "speech_like",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_resized",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "resized",
+          "new_duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "resize_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:2cbf493af764a5adf2857c20a8d5b79588912e981542c295002ba95c90c05d75"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_038_05",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_038",
+      "description": "resize:not_before:anaphora:speech_like - Increase someone's apt w/ some doctor to 30 mins tomorrow after 3pm.",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Increase someone's apt w/ some doctor to 30 mins tomorrow after 3pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "resize",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "15:00",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "15:00"
+      },
+      "source_spans": {
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 64,
+            "end": 67,
+            "text": "3pm"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "terminal",
+      "entity_state": "ambiguous",
+      "dialogue_form": "anaphora",
+      "language_form": "speech_like",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_resized",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "resized",
+          "new_duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "resize_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:4d646428cccbce9b17e1a33c3660a71df137f9a76a650474d15e3b257177d772"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_038_06",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_038",
+      "description": "resize:not_before:anaphora:speech_like - We need to double someone's appointment with some doctor to 30 minutes please.",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "We need to double someone's appointment with some doctor to 30 minutes please."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "resize",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "15:00",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "15:00"
+      },
+      "source_spans": {
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 60,
+            "end": 70,
+            "text": "30 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "terminal",
+      "entity_state": "ambiguous",
+      "dialogue_form": "anaphora",
+      "language_form": "speech_like",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_resized",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "resized",
+          "new_duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "resize_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:ef9baa7bd113b17ab70f054c2415bee32f96301740b2516d9517c49efb6d2c10"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_038_07",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_038",
+      "description": "resize:not_before:anaphora:speech_like - Resize: someone \u2014 some doctor \u2014 30 min slot tomorrow after 3pm.",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Resize: someone \u2014 some doctor \u2014 30 min slot tomorrow after 3pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "resize",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "15:00",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "15:00"
+      },
+      "source_spans": {
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 59,
+            "end": 62,
+            "text": "3pm"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "terminal",
+      "entity_state": "ambiguous",
+      "dialogue_form": "anaphora",
+      "language_form": "speech_like",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_resized",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "resized",
+          "new_duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "resize_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:4a696dda4827542284c8552c2574b51919e07dd2ebd0dbbfa800b3751e7f9518"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_038_08",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_038",
+      "description": "resize:not_before:anaphora:speech_like - Please change someone's booking to 30 minutes with some doctor.",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please change someone's booking to 30 minutes with some doctor."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "resize",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "15:00",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "15:00"
+      },
+      "source_spans": {
+        "duration_minutes": [
+          {
+            "turn_index": 0,
+            "start": 35,
+            "end": 45,
+            "text": "30 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "terminal",
+      "entity_state": "ambiguous",
+      "dialogue_form": "anaphora",
+      "language_form": "speech_like",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_resized",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "resized",
+          "new_duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "resize_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:49646659ae50d57bbc3e7f26039676a81cd3df3e8a6b525dd5d9e2f4927fe799"
     },
     {
       "spec_version": "lc1.v1",
@@ -831,11 +737,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_038",
-      "description": "resize:not_before:anaphora:speech_like - Please change Margaret Thompson's booking to 30 minutes with Dr Shera.",
+      "description": "resize:not_before:anaphora:speech_like - Could we increase someone's appointment with some doctor to 30 minutes?",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Please change Margaret Thompson's booking to 30 minutes with Dr Shera."
+          "utterance": "Could we increase someone's appointment with some doctor to 30 minutes?"
         }
       ],
       "reference_date": "2026-07-14",
@@ -851,138 +757,23 @@
         "earliest_time": "15:00"
       },
       "source_spans": {
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 14,
-            "end": 31,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 61,
-            "end": 69,
-            "text": "Dr Shera"
-          }
-        ],
         "duration_minutes": [
-          {
-            "turn_index": 0,
-            "start": 45,
-            "end": 55,
-            "text": "30 minutes"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "terminal",
-      "entity_state": "exact",
-      "dialogue_form": "anaphora",
-      "language_form": "speech_like",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "appointment_resized",
-      "expected_tool_sequence": [
-        "request_clarification"
-      ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "resized",
-          "new_duration_minutes": 15
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "resize_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": []
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_038_10",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_038",
-      "description": "resize:not_before:anaphora:speech_like - Update Margaret Thompson's slot duration to 30 minutes with Dr Shera.",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "Update Margaret Thompson's slot duration to 30 minutes with Dr Shera."
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "resize",
-      "action_semantics": "intended",
-      "temporal_relation": "not_before",
-      "earliest_time": "15:00",
-      "latest_time": null,
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "15:00"
-      },
-      "source_spans": {
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 7,
-            "end": 24,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
           {
             "turn_index": 0,
             "start": 60,
-            "end": 68,
-            "text": "Dr Shera"
-          }
-        ],
-        "duration_minutes": [
-          {
-            "turn_index": 0,
-            "start": 44,
-            "end": 54,
+            "end": 70,
             "text": "30 minutes"
           }
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "terminal",
-      "entity_state": "exact",
+      "entity_state": "ambiguous",
       "dialogue_form": "anaphora",
       "language_form": "speech_like",
       "initial_diary_state": {
@@ -1021,205 +812,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_038_11",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_038",
-      "description": "resize:not_before:anaphora:speech_like - Dr Shera's appointment for Margaret Thompson should be 30 minutes now.",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "Dr Shera's appointment for Margaret Thompson should be 30 minutes now."
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "resize",
-      "action_semantics": "intended",
-      "temporal_relation": "not_before",
-      "earliest_time": "15:00",
-      "latest_time": null,
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "15:00"
-      },
-      "source_spans": {
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 27,
-            "end": 44,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 0,
-            "end": 8,
-            "text": "Dr Shera"
-          }
-        ],
-        "duration_minutes": [
-          {
-            "turn_index": 0,
-            "start": 55,
-            "end": 65,
-            "text": "30 minutes"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "terminal",
-      "entity_state": "exact",
-      "dialogue_form": "anaphora",
-      "language_form": "speech_like",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "appointment_resized",
-      "expected_tool_sequence": [
-        "request_clarification"
-      ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "resized",
-          "new_duration_minutes": 15
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "resize_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": []
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_038_12",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_038",
-      "description": "resize:not_before:anaphora:speech_like - Could we increase Margaret Thompson's appointment with Dr Shera to 30 minutes?",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "Could we increase Margaret Thompson's appointment with Dr Shera to 30 minutes?"
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "resize",
-      "action_semantics": "intended",
-      "temporal_relation": "not_before",
-      "earliest_time": "15:00",
-      "latest_time": null,
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "15:00"
-      },
-      "source_spans": {
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 18,
-            "end": 35,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 55,
-            "end": 63,
-            "text": "Dr Shera"
-          }
-        ],
-        "duration_minutes": [
-          {
-            "turn_index": 0,
-            "start": 67,
-            "end": 77,
-            "text": "30 minutes"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "terminal",
-      "entity_state": "exact",
-      "dialogue_form": "anaphora",
-      "language_form": "speech_like",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "appointment_resized",
-      "expected_tool_sequence": [
-        "request_clarification"
-      ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "resized",
-          "new_duration_minutes": 15
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "resize_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:d91e932e9a042ad79e60c1d390b2795a4213d988db7f88f3beb8930af8af6b8a"
     }
   ],
   "multi_turn_variants": [
@@ -1295,13 +889,13 @@
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "terminal",
-      "entity_state": "exact",
+      "entity_state": "ambiguous",
       "dialogue_form": "clarification",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1345,7 +939,8 @@
         "2pm",
         "3pm",
         "4pm"
-      ]
+      ],
+      "variant_hash": "sha256:b7a7c37e47617aa63b884b240e22712708bf9b67e60632c6999820d66cfe8567"
     },
     {
       "spec_version": "lc1.v1",
@@ -1417,13 +1012,13 @@
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "omitted",
-      "patient_semantics": "exact",
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "terminal",
-      "entity_state": "omitted",
+      "entity_state": "ambiguous",
       "dialogue_form": "correction",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1462,7 +1057,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:b14bc818a026f8d4fadde7efe2ee82e9425751b603114d13b18cf361095b14cc"
     },
     {
       "spec_version": "lc1.v1",
@@ -1512,13 +1108,13 @@
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "omitted",
-      "patient_semantics": "exact",
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "terminal",
-      "entity_state": "omitted",
+      "entity_state": "ambiguous",
       "dialogue_form": "reversal",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1557,7 +1153,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:442a3b45b0c75b072370ce3ea553c50772d1f2c18fefa35c50d97a00de555f4a"
     }
   ]
 }

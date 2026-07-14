@@ -1,7 +1,25 @@
 {
-  "schema_version": "lc4.scale_corpus.v1",
+  "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_019",
-  "group_hash": "sha256:0cb351113b9419ceebdc3b0bb90b11781673ce09b31b64541ae7584367072600",
+  "group_hash": "sha256:495d80288e9d9e0769dd2c218d5ba35df41e4b3f18dd5c2569980c8e6cca837d",
+  "variant_hashes": {
+    "surface": [
+      "sha256:92d38a984a3a369b41bb0e82da3916a97e6612bee214ac9c609e22250333f583",
+      "sha256:a070c1b653f938b783a2a5d52944de5541e3989429e1295fed7143aadd1eb925",
+      "sha256:0b54813a95e2cba33dbde40d353ce0ed4500782d76029e765507b6fc12dbf1fd",
+      "sha256:0a1e28e86043270b645397cde0ef52ee7b1c8737dab0ddea3810835f33dade4d",
+      "sha256:c529c3ae4887abdf0dc5fa6d1e1f15f0bae849c5fb445386d2e0325414a2cd2a",
+      "sha256:0ee8d20116fe80b5ea358a4154c841c37f9c7f2ee42a0f0caf07a585f1ea83ca",
+      "sha256:4a992a93551afeaa1af7681d97827988694a725855fedf44511241a904bac97f",
+      "sha256:7b51e3ad4a6403d128caa3525d3ff14166e86f6bf914014520e21501f220740c",
+      "sha256:a8085aadf763f00635e2e37c03e4b4c79c367448fe6255409506871dcb49456c"
+    ],
+    "multi_turn": [
+      "sha256:35a700373c11d721e88b3f36a6f1e7b2fe6cb28976562c7c67aca46bb4a44079",
+      "sha256:1b004e036dfa8e44338fccaa3cbd02a3f8e4d04f7c5a35cfba5a93930af2035d",
+      "sha256:4e2c9453b52e8e33d73f1c00ccb09be345e17f87f9dd0b9063b28ffd19c6b1a7"
+    ]
+  },
   "provenance": "silver",
   "adjudication": "pending",
   "reference_date": "2026-07-14",
@@ -83,13 +101,13 @@
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
+      "practitioner_semantics": "corrected",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "roster_absent",
-      "entity_state": "exact",
+      "entity_state": "corrected",
       "dialogue_form": "correction",
       "language_form": "filler",
       "initial_diary_state": {
@@ -130,7 +148,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:92d38a984a3a369b41bb0e82da3916a97e6612bee214ac9c609e22250333f583"
     },
     {
       "spec_version": "lc1.v1",
@@ -185,13 +204,13 @@
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
+      "practitioner_semantics": "corrected",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "roster_absent",
-      "entity_state": "exact",
+      "entity_state": "corrected",
       "dialogue_form": "correction",
       "language_form": "filler",
       "initial_diary_state": {
@@ -232,7 +251,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:a070c1b653f938b783a2a5d52944de5541e3989429e1295fed7143aadd1eb925"
     },
     {
       "spec_version": "lc1.v1",
@@ -287,13 +307,13 @@
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
+      "practitioner_semantics": "corrected",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "roster_absent",
-      "entity_state": "exact",
+      "entity_state": "corrected",
       "dialogue_form": "correction",
       "language_form": "filler",
       "initial_diary_state": {
@@ -334,7 +354,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:0b54813a95e2cba33dbde40d353ce0ed4500782d76029e765507b6fc12dbf1fd"
     },
     {
       "spec_version": "lc1.v1",
@@ -395,13 +416,13 @@
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
+      "practitioner_semantics": "corrected",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "roster_absent",
-      "entity_state": "exact",
+      "entity_state": "corrected",
       "dialogue_form": "correction",
       "language_form": "filler",
       "initial_diary_state": {
@@ -442,7 +463,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:0a1e28e86043270b645397cde0ef52ee7b1c8737dab0ddea3810835f33dade4d"
     },
     {
       "spec_version": "lc1.v1",
@@ -497,13 +519,13 @@
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
+      "practitioner_semantics": "corrected",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "roster_absent",
-      "entity_state": "exact",
+      "entity_state": "corrected",
       "dialogue_form": "correction",
       "language_form": "filler",
       "initial_diary_state": {
@@ -544,7 +566,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:c529c3ae4887abdf0dc5fa6d1e1f15f0bae849c5fb445386d2e0325414a2cd2a"
     },
     {
       "spec_version": "lc1.v1",
@@ -591,13 +614,13 @@
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "omitted",
+      "practitioner_semantics": "corrected",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "roster_absent",
-      "entity_state": "omitted",
+      "entity_state": "corrected",
       "dialogue_form": "correction",
       "language_form": "filler",
       "initial_diary_state": {
@@ -638,113 +661,12 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:0ee8d20116fe80b5ea358a4154c841c37f9c7f2ee42a0f0caf07a585f1ea83ca"
     },
     {
       "spec_version": "lc1.v1",
       "scenario_id": "lc4_dw1_dev_var_019_07",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_019",
-      "description": "move:exact:correction:filler - yeah could we um shift Margaret Thompson with Dr Shera to tomorrow at 4pm instea",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "yeah could we um shift Margaret Thompson with Dr Shera to tomorrow at 4pm instead"
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "move",
-      "action_semantics": "intended",
-      "temporal_relation": "exact",
-      "earliest_time": "15:00",
-      "latest_time": "15:00",
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "15:00",
-        "latest_time": "15:00"
-      },
-      "source_spans": {
-        "temporal_relation": [
-          {
-            "turn_index": 0,
-            "start": 70,
-            "end": 73,
-            "text": "4pm"
-          }
-        ],
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 23,
-            "end": 40,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 46,
-            "end": 54,
-            "text": "Dr Shera"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "roster_absent",
-      "entity_state": "exact",
-      "dialogue_form": "correction",
-      "language_form": "filler",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "appointment_moved",
-      "expected_tool_sequence": [
-        "search_patients",
-        "update_appointment"
-      ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "moved",
-          "new_start_time": "15:00",
-          "new_date": "2026-07-15"
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "move_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": []
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_019_08",
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_019",
@@ -795,13 +717,13 @@
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
+      "practitioner_semantics": "corrected",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "roster_absent",
-      "entity_state": "exact",
+      "entity_state": "corrected",
       "dialogue_form": "correction",
       "language_form": "filler",
       "initial_diary_state": {
@@ -842,11 +764,12 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:4a992a93551afeaa1af7681d97827988694a725855fedf44511241a904bac97f"
     },
     {
       "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_019_09",
+      "scenario_id": "lc4_dw1_dev_var_019_08",
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_019",
@@ -897,13 +820,13 @@
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
+      "practitioner_semantics": "corrected",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "roster_absent",
-      "entity_state": "exact",
+      "entity_state": "corrected",
       "dialogue_form": "correction",
       "language_form": "filler",
       "initial_diary_state": {
@@ -944,215 +867,12 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:7b51e3ad4a6403d128caa3525d3ff14166e86f6bf914014520e21501f220740c"
     },
     {
       "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_019_10",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_019",
-      "description": "move:exact:correction:filler - Move Margaret Thompson's slot to tomorrow at 4pm with Dr Shera.",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "Move Margaret Thompson's slot to tomorrow at 4pm with Dr Shera."
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "move",
-      "action_semantics": "intended",
-      "temporal_relation": "exact",
-      "earliest_time": "15:00",
-      "latest_time": "15:00",
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "15:00",
-        "latest_time": "15:00"
-      },
-      "source_spans": {
-        "temporal_relation": [
-          {
-            "turn_index": 0,
-            "start": 45,
-            "end": 48,
-            "text": "4pm"
-          }
-        ],
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 5,
-            "end": 22,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 54,
-            "end": 62,
-            "text": "Dr Shera"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "roster_absent",
-      "entity_state": "exact",
-      "dialogue_form": "correction",
-      "language_form": "filler",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "appointment_moved",
-      "expected_tool_sequence": [
-        "search_patients",
-        "update_appointment"
-      ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "moved",
-          "new_start_time": "15:00",
-          "new_date": "2026-07-15"
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "move_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": []
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_019_11",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_019",
-      "description": "move:exact:correction:filler - Dr Shera's appointment for Margaret Thompson needs to move to tomorrow at 4pm.",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "Dr Shera's appointment for Margaret Thompson needs to move to tomorrow at 4pm."
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "move",
-      "action_semantics": "intended",
-      "temporal_relation": "exact",
-      "earliest_time": "15:00",
-      "latest_time": "15:00",
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "15:00",
-        "latest_time": "15:00"
-      },
-      "source_spans": {
-        "temporal_relation": [
-          {
-            "turn_index": 0,
-            "start": 74,
-            "end": 77,
-            "text": "4pm"
-          }
-        ],
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 27,
-            "end": 44,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 0,
-            "end": 8,
-            "text": "Dr Shera"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "roster_absent",
-      "entity_state": "exact",
-      "dialogue_form": "correction",
-      "language_form": "filler",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "appointment_moved",
-      "expected_tool_sequence": [
-        "search_patients",
-        "update_appointment"
-      ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "moved",
-          "new_start_time": "15:00",
-          "new_date": "2026-07-15"
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "move_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": []
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_019_12",
+      "scenario_id": "lc4_dw1_dev_var_019_09",
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_019",
@@ -1203,13 +923,13 @@
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
+      "practitioner_semantics": "corrected",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "roster_absent",
-      "entity_state": "exact",
+      "entity_state": "corrected",
       "dialogue_form": "correction",
       "language_form": "filler",
       "initial_diary_state": {
@@ -1250,7 +970,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:a8085aadf763f00635e2e37c03e4b4c79c367448fe6255409506871dcb49456c"
     }
   ],
   "multi_turn_variants": [
@@ -1319,13 +1040,13 @@
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
+      "practitioner_semantics": "corrected",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "roster_absent",
-      "entity_state": "exact",
+      "entity_state": "corrected",
       "dialogue_form": "clarification",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1370,7 +1091,8 @@
         "2pm",
         "3pm",
         "4pm"
-      ]
+      ],
+      "variant_hash": "sha256:35a700373c11d721e88b3f36a6f1e7b2fe6cb28976562c7c67aca46bb4a44079"
     },
     {
       "spec_version": "lc1.v1",
@@ -1443,13 +1165,13 @@
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
+      "practitioner_semantics": "corrected",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "roster_absent",
-      "entity_state": "exact",
+      "entity_state": "corrected",
       "dialogue_form": "correction",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1490,7 +1212,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:1b004e036dfa8e44338fccaa3cbd02a3f8e4d04f7c5a35cfba5a93930af2035d"
     },
     {
       "spec_version": "lc1.v1",
@@ -1549,13 +1272,13 @@
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "omitted",
+      "practitioner_semantics": "corrected",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "roster_absent",
-      "entity_state": "omitted",
+      "entity_state": "corrected",
       "dialogue_form": "reversal",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1596,7 +1319,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:4e2c9453b52e8e33d73f1c00ccb09be345e17f87f9dd0b9063b28ffd19c6b1a7"
     }
   ]
 }

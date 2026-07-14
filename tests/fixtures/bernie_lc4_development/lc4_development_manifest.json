@@ -1,11 +1,12 @@
 {
-  "schema_version": "lc4.scale_corpus.v1",
+  "schema_version": "lc4.scale_corpus.v2",
   "corpus": "lc4-development",
   "provenance": "silver",
   "adjudication": "pending",
   "total_groups": 96,
-  "total_variants": 1152,
-  "total_trajectories": 288,
+  "total_surface_variants": 864,
+  "total_multi_turn_trajectories": 288,
+  "total_individual_records": 1152,
   "reference_date": "2026-07-14",
   "generator_identity": {
     "provider_id": "deepseek",
@@ -18,24 +19,60 @@
     "confirmation": false,
     "override_authority": false
   },
-  "corpus_hash": "sha256:7f4196b3fecc4bd2bcf361618b72ee0cea867bee43caa079fa66c7e06834d91a",
+  "corpus_hash": "sha256:03d36809f1b5e7cfb86e141a5ff5c4ce01ca9675b64ebd254a905efc23d66935",
   "groups": [
     {
       "group_index": 1,
       "group_id": "lc4_dw1_dev_group_001",
       "filename": "lc4_dw1_dev_group_001.json",
-      "group_hash": "sha256:1a4ac9613951219cfeaae59e55784368eaedaf476b74664b713a1caa58a1c532",
+      "group_hash": "sha256:0a80c05b4e05ca4da5b7df42b72763152ba46edfa061e35449e34002274ecc21",
+      "variant_hashes": {
+        "surface": [
+          "sha256:a3435f77da1f759dd1fd230e818dfc4279ab2f5deca53c5ab2ef0a694af787a0",
+          "sha256:954be89fb36de43632efcef8280abd2f35d9f36da3675f9f80ef763d9e71e5b8",
+          "sha256:14a011744a39fada072f57aebb66e598e23c45cd63e07b29b68b8797bf4eb663",
+          "sha256:0f1a4b639be1e046a158d247be61928497bd8eefd2fede8557e91d04917a3eb2",
+          "sha256:04ad6a987a55328f0243e1f15d673d436e82e859d29faa4148317a72db5cc23a",
+          "sha256:5e8d04316c6daacb6e99fdb0e0af47bbdcc8f63489a8aeb7e9a1fefc1a5ca180",
+          "sha256:1ffe4e985d6f8a3d9319b35b0e81c33166425103b85cdc739a062b97ed245c31",
+          "sha256:6561449cf16729b56cb5809a0f49e7f15eb40edcc68d4cd0596ec92396234633",
+          "sha256:3bcc330edee7d2db05678b6be1e3828d811df0a3f0a0393248c680eca5946d82"
+        ],
+        "multi_turn": [
+          "sha256:f3254e5dab3eeff80d0154054a5be3cb70a1466a2a9e5b48c0fb53c509a83a13",
+          "sha256:eb7e1a8fdac69756abd22a4a1e38e9e949805861b66c13f6334386e2e59ea942",
+          "sha256:8b8da82d1364c8354a4d097ec66c18b9ea68d5231f37945f9cf687896ac1b934"
+        ]
+      },
       "action": "create",
       "temporal_relation": "exact",
       "gap_targets": [],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 2,
       "group_id": "lc4_dw1_dev_group_002",
       "filename": "lc4_dw1_dev_group_002.json",
-      "group_hash": "sha256:d2cb80fc867cc6cf281f86b55a2722970c536974da107259c9d1062fc7779803",
+      "group_hash": "sha256:684130ccfd54a70753619b52297df801f422e6fecf337140eef307469b6858ff",
+      "variant_hashes": {
+        "surface": [
+          "sha256:8aef903c8ce29e10c5feb866835634664aa8925d294c2f75e08288aa08f98f51",
+          "sha256:97f1d5b68007bfbceaeb1a8184505d7414bb34bdb7640220ac3ab123bb6bdea2",
+          "sha256:9979fdde43e8d92b0830b2e5b552fd33b37179252b47e73268d82cb440d6ebfe",
+          "sha256:b01d3d9595b87f204ff0900a22a67cdbb5c009a99e519860847ba12ddd95383d",
+          "sha256:52058d4364dd8e016ca2f55aa836343cbe8ca29111828f8bced3b82bd23c40e2",
+          "sha256:5fc89df42e8f0b65e13b3eea9caf23efd25d979ba186dc439e270861b0dfd2a2",
+          "sha256:fd84c3f521057c1f62a1af5e568d820de06b9191d5cd27072e96d44a2abd8972",
+          "sha256:80d841996024ff871e96937ddb3c85111f22ca2208e1f7576c738f6b0c0073ed",
+          "sha256:155058b2bf2e55bab57256c6bf338a05b83e1c737fc2538c7748906020f3f424"
+        ],
+        "multi_turn": [
+          "sha256:cf5dca73007517e12f85d7be315d917afe3586e32c326d75c7a6e4822fa07f21",
+          "sha256:602452f08fbb2e26b5e5ec93515872a273a27823af80631a4718e661bd07bc3a",
+          "sha256:7c8cd215e45419710ea3e401865686b3f9b0e6f4cc8af849e46da53f61271cc3"
+        ]
+      },
       "action": "create",
       "temporal_relation": "exact",
       "gap_targets": [
@@ -43,108 +80,252 @@
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 3,
       "group_id": "lc4_dw1_dev_group_003",
       "filename": "lc4_dw1_dev_group_003.json",
-      "group_hash": "sha256:3ed671c3ed9bf4fa43d8fa5d376a979d1dd7b8460d74f2ff2f34e258c7ecf201",
+      "group_hash": "sha256:2c078a23014852fce859b9d029659f694cf20ef46fccb1914a1de07388473810",
+      "variant_hashes": {
+        "surface": [
+          "sha256:180de09d1055f188b718044edc93750848705d4ba6c08576642c49ecd1974b3b",
+          "sha256:6788f0fa09b01bb47753c3a0e9107ae642a413fac58d448b560201db4811804c",
+          "sha256:9d4e22580901e2de52d55d8513cdff665ecefe9785e9156c5a6ee6413eab4fc2",
+          "sha256:d4313adde1af954352dbee4ff49eea2a9dbc8f69ca89f14b88c12ac31e57807f",
+          "sha256:12d5adbda9b8a812663933f124af7a899c9bdd035a5440f369a48110aa4adf8f",
+          "sha256:971d6cfb9f0d1a949c89ba1d793588222bb79620f2aec494d3c88c5be2a463e3",
+          "sha256:d53b03692175cf4fae20b0f9ca2c86b6dfeb8f47e03582ff26db6ba860bc4ceb",
+          "sha256:934b463a379feefccfe7fd7fb69e51f29fd64343bfa1c3343102f652594181a4",
+          "sha256:85b0e628878f7955683dd44d3caa06c84d198480af6f69cbbf3d5806a6ca73f5"
+        ],
+        "multi_turn": [
+          "sha256:f12fb56708f238f68a0d3637225b023b6d730be1776a2a06a361dbbc5690d91f",
+          "sha256:361949e7947cdb5960fa274785e0dee6ce0bc8bce6ab3193ff0b3e74486e324b",
+          "sha256:ebaee74a6e6de5c8a03fabc1a8939d62af910f555551d8d213528a546cd77794"
+        ]
+      },
       "action": "create",
       "temporal_relation": "exact",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 4,
       "group_id": "lc4_dw1_dev_group_004",
       "filename": "lc4_dw1_dev_group_004.json",
-      "group_hash": "sha256:30ef6954c86af877b004335d1d57d73ceeb707a45003974368e34708338663fa",
+      "group_hash": "sha256:b7f43bd485945f62240aeaf46198de93b4055f65396144dcf598961d6414865a",
+      "variant_hashes": {
+        "surface": [
+          "sha256:b5055b1087f1b3a53bfaf94533be76bec5238de0c9c3b34520134fcd2d074e4c",
+          "sha256:24ef8557415af9b7d519ca38f75d95aeff8615578bd16938bd4ec2b40967e570",
+          "sha256:110354813fd7bede4a14d2139b6f984a52108f82cb81a4c3d562cb3d48fb4112",
+          "sha256:0ff7f20460a407acd54b6589ce25c488e799f05fde7176738ff287b9a2933dee",
+          "sha256:5d8d47eb94401d7aaa447a4807b0a77db7446bd46c655c7d59161c415156fc10",
+          "sha256:8ec057687ab76e0946e2db7f1ab0b26d0c9fec15ece0aedbc969c284ed4bf1cd",
+          "sha256:c7ae86b3f2d88a0f2d27b90263e9809b30824cc80f3e6d9a2632a8a39c6829d8",
+          "sha256:6fc66567a35f441cde53b99539fa288997b76d08f97877bbcc9e87dc18a96db3",
+          "sha256:4f4254c6433b423b2a9e8b1e7931edd4919c9e753d6d9498b3a3bd01954ccc63"
+        ],
+        "multi_turn": [
+          "sha256:dec57a6a6f9799e900ca6f4ee2d0778c5e3822e3459d35cdf71cfd45d2fcb502",
+          "sha256:2488a26c81d4e7979cb47ce931e0dfdd2d8dbdd1113d1d7d5f712ef99b7ed093",
+          "sha256:f34186a44f5b24ce96a01f6d498f1163673a39a2f83156c995d847f3711ee676"
+        ]
+      },
       "action": "create",
       "temporal_relation": "not_before",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 5,
       "group_id": "lc4_dw1_dev_group_005",
       "filename": "lc4_dw1_dev_group_005.json",
-      "group_hash": "sha256:e24a062afd50e60184531d83696708166245eee3d7bda3c5fe698aa7505a4bce",
+      "group_hash": "sha256:588ed2fe86f83921e0e4bf806bfadc68ac32b7d551ac8eb48f9272c398b68ba3",
+      "variant_hashes": {
+        "surface": [
+          "sha256:2c3e7961a621614cd0e864bbc1db7428e89da29b9b1e5c6e1617a06863d98f35",
+          "sha256:d3303138c7906b48cdf1f06eb62737bbe9138c51dac415aad8535b7eb62a5705",
+          "sha256:e526f10908989e2bf66c7d1312db9b093624b288cf5db20be18328ae20d2474a",
+          "sha256:d72f77a1e57df4292cb91ba1d52328a4863cfd41683de66c37ca61ffb52bbad1",
+          "sha256:7f285e549b01fff7628b014f72cbc31a045f1c1c17c31821cb593f01472821dd",
+          "sha256:b6e56f492e3af8cb7bd46e1b904db3958075f1bca1981f77ccb50bf8e7c5512b",
+          "sha256:624de388fd1094db2430d261e59355161ca351a31e5782b9a9a3726d2e834fd5",
+          "sha256:f3bb860b70e3654cd811b6b8a3c0680a3990c4ef73cdec74c378e00c34e63f88",
+          "sha256:12d61ad7ab6f1027b80cc134e52c03847c436e5a5a180df33a2c2e3fd02c09b0"
+        ],
+        "multi_turn": [
+          "sha256:96f74df5cc204097b11d0355e34d41d415a2b1416e337192d90885b1a8fba12c",
+          "sha256:b52a2bba0d8114803212cbfb22c4cbced98714e634625155a919f891cfbd40ac",
+          "sha256:89f496f6a0c66117c7c75245350fa0cfd3137407b14e2f71ead208d127f50e73"
+        ]
+      },
       "action": "create",
       "temporal_relation": "not_before",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 6,
       "group_id": "lc4_dw1_dev_group_006",
       "filename": "lc4_dw1_dev_group_006.json",
-      "group_hash": "sha256:6ee118f15c0d6728692fa280809b2721e7a5fcfef91949f9733f824e98db3178",
+      "group_hash": "sha256:c51eb0157f42f3cfa71b48dc5ca99eecd2141117d9e5a14a7129e6423f1d89fe",
+      "variant_hashes": {
+        "surface": [
+          "sha256:c2ec751446c3bb9aeb7b8c140a9ec6a639bd2a89a4620457666cc95eb583333f",
+          "sha256:9199f7ca65bfa41c5d22e7ec4cde735c6cbad334ef059f096e1becf25d93f969",
+          "sha256:b51fcfaa2468df02ed818539371d77bd3baad1fbe0a4146db1d39b7681289ad6",
+          "sha256:93b70808440eaa746330c3f38af61bdbc97a1e1060ff76ef2ed82873b4cdf2bd",
+          "sha256:b9aa6b59247df8706a023afeb85f6c573859ee6093ec7fc8e14f0526ddbc8beb",
+          "sha256:93e2c1f122f6a804f44be2853a36ffe4bb8d282e1284ca0f789b42f69a6a640c",
+          "sha256:352154e58aa3c09ccbba0292deb9c156b2ca0bf1c6ab77fd452d9365fa0772d5",
+          "sha256:63f2fb9c1c474b972ea82a48dcb220dedc431dbca68fbc6af77e942705fa1986",
+          "sha256:bea250044ad2435effeb20a35d45e6106f5b5c40591fe8a659577e9582b3d80c"
+        ],
+        "multi_turn": [
+          "sha256:96bc99cd52e358bf296237af3edd5ca79c34310369c95899c3e3ba27d080908e",
+          "sha256:b386ea70175d8157523fd925e541d937aaddff660970bbcc8160e098c36fb758",
+          "sha256:d081b3bb3ee20eb4c0559ec9c338b79e0ca0aa0bcdf1453a29d9ed2b3c1a2bcd"
+        ]
+      },
       "action": "create",
       "temporal_relation": "not_before",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 7,
       "group_id": "lc4_dw1_dev_group_007",
       "filename": "lc4_dw1_dev_group_007.json",
-      "group_hash": "sha256:1e8d2af39f298c55feed6b36daca33acf7f2c231be3dd2dda2f90e6b66cec4bd",
+      "group_hash": "sha256:75ceb0a7d36f081b9b0255fe74ac0e51d0716b366a0234d652fa0dceadbfc944",
+      "variant_hashes": {
+        "surface": [
+          "sha256:c0de0758ae6ab6a688cda747d70ab7fd892f1e449cb1e80dba1c813cf460c98a",
+          "sha256:5a8ba6e2b7b8530bd7f636dad5dd151da04fcc251158059a2037620db26079f7",
+          "sha256:52f10cfb2291ae3752d0c5047e38e43f88a14388cf110d00add6e2248e59751d",
+          "sha256:039dab8abc1e77507535161c9ee49b3fe44644d7ccb050a531a7de57e12242cd",
+          "sha256:e28752f2a887ccd3d95ac753429e3b5d82b81137cffff3d3b4d25b4c0783c763",
+          "sha256:68818f4efcd5f7254715515e579c30421ab3b6c059667b7c5fc9f95aca573c60",
+          "sha256:cf5f8193a95bd1b094b942874998e9403a2403b1e3dce0d3d7deb3cec064c1a0",
+          "sha256:192d44d06eb651ee54b8d892d96596b4172d589594e98f0e1fc85b9e978043b3",
+          "sha256:fa637901d7707476494a3901d60d81c9923ebf20b10abbef3fde9d9ea341bcd9"
+        ],
+        "multi_turn": [
+          "sha256:5ea31c5c8688012d58b0ccd84aa4b1296f4eea4adebe75f1489be193dad55a48",
+          "sha256:9ac20c0b02d8557f4f1f571a2cb7c0e2443a1285cb5d2dff6300d30a9bb22d7e",
+          "sha256:7fb2a9dfee30ff93b791985861e7c28e8cd99187a78d11fb90e98d62063dfc0d"
+        ]
+      },
       "action": "create",
       "temporal_relation": "not_after",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 8,
       "group_id": "lc4_dw1_dev_group_008",
       "filename": "lc4_dw1_dev_group_008.json",
-      "group_hash": "sha256:f0e6634a9543cf756b18d97e6b9016002d96b3b5dceab5b127dc91a975559eee",
+      "group_hash": "sha256:3db49e6a439ca314e944cf94c4c445cab236de3c0f69a0bb5e71feba259f6ead",
+      "variant_hashes": {
+        "surface": [
+          "sha256:3911541cad6e0f31f747b03db679a7994dda657c49ffd78f82ec54d0135ba07c",
+          "sha256:99a5252ca5f830c9ff6f181829ba662ca4c691f35b03ed5a88289b5636f7bc90",
+          "sha256:3d471378def5f2924fde69a0e601083c42ab7a5428b1c73ca725090fe40416b2",
+          "sha256:f04cf7273c6f5c28d325d7239c75594611ffbb5916522347d32ecfed63a3b10a",
+          "sha256:1c3873307b2959639601304088fe7cdf77f63be00fea95bbcca940544edc87f0",
+          "sha256:d7a577ff2f45f6c6bcdc85c92c65608a2cde72b2645111325bac65e3cb6fc6bb",
+          "sha256:bf481925d2839488a266e95b205322d4c47845c2e2a6874a3654b7b78993e0a9",
+          "sha256:bacc42782d7a6021d57ab397627cbbf5be1cb6eec72b4b246af739d939da49e3",
+          "sha256:94aae7e332f6b8c38d0b58fbcc958ec578ec0d28ec4b78b3ec27e1bc37a2963b"
+        ],
+        "multi_turn": [
+          "sha256:b83654df57b2e93cbf76b3d0b9706b08e445d3b7b2e0db13943d05f73be09766",
+          "sha256:28d762277ce7aa83f55e78e1124b831a9187e59a57f77dc52db6cf156b984ad2",
+          "sha256:172fa4cfdc88a8f98264957550683904741efcc0fae4c1d22219c78590fcd122"
+        ]
+      },
       "action": "create",
       "temporal_relation": "not_after",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 9,
       "group_id": "lc4_dw1_dev_group_009",
       "filename": "lc4_dw1_dev_group_009.json",
-      "group_hash": "sha256:34773938b69156f863784bd374c67991434ffd2726a5d60d5fb5eddd32db2995",
+      "group_hash": "sha256:04ce106f4004bde70d8794fbaf9fd4ed43aae431d6aa4d6ecda16e6293e8d8cc",
+      "variant_hashes": {
+        "surface": [
+          "sha256:7ee7ea7b35376ac00bc2fc4ec204e37b1119af17de7d15fcd032474f7ea0f7a8",
+          "sha256:bce6d74660f6ed66d38758fe0a89bae93ddfb35c4d3feab1f9435bcf9dfda2a7",
+          "sha256:cdebf14b480a3fe315f382f3d8d75c500fc90fc6971f865d8bca6502ebaaada9",
+          "sha256:80bf343091f4d50e2c741cc15d8af017f4f6a7f6a5381b9345a089b52c9a93a3",
+          "sha256:dc1d2006d839258bc55ae9a5f3f03b396a3f8b9a03d74d3c01cd55faadd99e26",
+          "sha256:a38560a08c34497331a097f02c0beed0d8cf2a250645e9df3e33c1fd4fd0a619",
+          "sha256:c8417c14ba7db037e3109ef22677653ae56c8e758da3b5e2d7fa62d495f57488",
+          "sha256:1d72ddcd2e8f7048b7be49bddf4eb0fa87cdc33fcb7c8a53a2e9147ad4a02c96",
+          "sha256:73075790584abef7d1151b1bfc0fd58377431be4354f05b758f352c8b1a77586"
+        ],
+        "multi_turn": [
+          "sha256:f3175582cff830fe8e76f94c07b97f9d8801b808b7c93c535547c46241b42513",
+          "sha256:5154c1c396a248da98be73a0b02523ab75918d3480aefd119974de637664b485",
+          "sha256:96641d289c8a8399b69572f97abd5a5b528464e4bab4fe7abd926005b3bbe03d"
+        ]
+      },
       "action": "create",
       "temporal_relation": "not_after",
       "gap_targets": [
         "entity_ambiguity_omission_correction"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 10,
       "group_id": "lc4_dw1_dev_group_010",
       "filename": "lc4_dw1_dev_group_010.json",
-      "group_hash": "sha256:5589a2d4ae03990221cd08e488c3730a958e8ed600de90f5269d15358d48cfd6",
+      "group_hash": "sha256:4074119c43231309f21d330ab806619ef7224a686d2267a9e3774bf34ffead6e",
+      "variant_hashes": {
+        "surface": [
+          "sha256:dbd36acfc892efb048ab678711ef635499c02e5cee8b4f121a6f74c94804a440",
+          "sha256:542562a4d34e5b4d30284e927564bd2b398beb982d3712d9e35e3d0b309465da",
+          "sha256:316956302cf0d445ae6f9e3854ccd0984c8a7d39bec33387601c4d25e6ff928a",
+          "sha256:c54d7ba140ef1f194cbf09f219ac9038ac399f86754b720cfd06be817a133752",
+          "sha256:a878e369c657bb1f698c9d09e1385fbab41ec73292640b4aeff8629e5b21a15a",
+          "sha256:a6f569e3995af446bc7140e7d2d4616df8905c3815b2b797f23f469af396ec21",
+          "sha256:aba09598af082aec856f28e86b2e1f323840c4a694dbd547116c9fbcee574366",
+          "sha256:9315b30ce7236e8797af567576d80f9f0be807c16447daadde9aa0ad51461291",
+          "sha256:4c8bad2055174840bcc7a6a23e5d77e0a4f534734492760e23fc6be871ce3ef7"
+        ],
+        "multi_turn": [
+          "sha256:ec45d5f8f1d3b5bbdb60c4c0a60c3ebb1e4d6faad8cd3bedeacab6c6647243dc",
+          "sha256:4bba9aebb09dd1cceccfadb40e7279c12c0c38f9d3b5a3032aef66bd2e9b7107",
+          "sha256:2cb18b2140793a5e6300e50f8afa06c010fd546af6df4ba9253c087d768a6d6e"
+        ]
+      },
       "action": "create",
       "temporal_relation": "interval",
       "gap_targets": [
@@ -152,14 +333,32 @@
         "interval_unspecified_temporal",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 11,
       "group_id": "lc4_dw1_dev_group_011",
       "filename": "lc4_dw1_dev_group_011.json",
-      "group_hash": "sha256:73818b43b2c96b1d68027a65d3388930d26ebb166510fb1540f7567604ad76af",
+      "group_hash": "sha256:3badb3b800c4e7fbf9f6cb7086a1d8390cf374b49031a7f9255e681925c98537",
+      "variant_hashes": {
+        "surface": [
+          "sha256:2446f3ba7f2aebdacd15d013fc4627acbc18be9384caa774110319c4eab292b7",
+          "sha256:5ac4be130614bd58d95ac8d3b7b5c6909fbd376882fe11d5bae46f7140dd293a",
+          "sha256:7c5b8ab3cfaec80c877d6e5bd951e90ac26f06ace70bba785fda4fb490b7bd28",
+          "sha256:6c56232d57ff986dfbb99379c65dbc7589982c3cf0b030302f8a33df49c3609e",
+          "sha256:1663fd72e2a957e367ecf82db89bc4cace20bf3430705b2698a77ef1d353418b",
+          "sha256:f900dce7ec57166e908e477cf68165cf4ac729c7fd8c04dd5b9f9a20fa7b8ea1",
+          "sha256:ed88b63d2f8cb20920500e84fb5211f55060bed22b7ce3e1d9689e6ffa641def",
+          "sha256:e3b0d28f2188adf16d35f43f82f4f9484a531575c0ec9ab05ef4815379ad711b",
+          "sha256:6a9cca95a0e756e01f2bbf1b5bd03a5d5b1a3dc3d0f5e09aae988140742156b7"
+        ],
+        "multi_turn": [
+          "sha256:3de8e394ab70b16c8b57e2c763b8865ded68b626bb10d2e3f94d828102de8867",
+          "sha256:ef848efa573605c4b319114948e01fa4beed350d68029c60e1a800a2a706d015",
+          "sha256:b8dd0f82d1a06472401425081c436746829d4e6f8a4fcb16894bb8d050e9cbf3"
+        ]
+      },
       "action": "create",
       "temporal_relation": "interval",
       "gap_targets": [
@@ -167,55 +366,127 @@
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 12,
       "group_id": "lc4_dw1_dev_group_012",
       "filename": "lc4_dw1_dev_group_012.json",
-      "group_hash": "sha256:88ad35827e20c3515d038a6c3f5ce229b36c9004746829af5e36df4296db25d5",
+      "group_hash": "sha256:969c30673cb639c462104b804fedaf9aebead5c78661b98eb31f793e7a91cc20",
+      "variant_hashes": {
+        "surface": [
+          "sha256:cede2660b0677f213d18c59e170cd5147f6a4d0a8924a2557a8b9e831a89671f",
+          "sha256:0a049b589a5e859ed1f8d695a967d23f86454d9fd984e718175d7dc893797814",
+          "sha256:144d8f9cf86b9617fc1a69356ce43e6ba0b6ec4655ce294f0820bbb06a25319a",
+          "sha256:23c6f4bca59afc26e283d5d008f2730138469af4076f69c6998e5cea2c575bbd",
+          "sha256:0a320a31a1ad00c19df7293411515c982d5767ed8ddf56725747db0ccd09c3ae",
+          "sha256:d86a4ae04d2a975d7d40064faa7630bff1c177cb77161817e5aed10907ea38e0",
+          "sha256:858124107a0e9be6db74e2c079c9e5071b8513351058fdc7ac008e19aa9e92bb",
+          "sha256:b8c17c52674ce769cd40794464b1716ddd4977f4a1bb5897fd4831276b0db3af",
+          "sha256:e0e37bf74b4daf5a42bd3c39f573e7e3791458c52238d3d0f12c2b8ef0b03315"
+        ],
+        "multi_turn": [
+          "sha256:3a95f59743dc929c089f3c8077f74ccbad84385fc99fdf8f1e08fa917e9b3dde",
+          "sha256:1c7d886143f665237394c0ccfee39a2ea548d5ee02039643ea4c22fdb2463424",
+          "sha256:05cf463a2ad196ee80605668fa46cb08ccea601cfea0737eab3663cd76013b1d"
+        ]
+      },
       "action": "create",
       "temporal_relation": "interval",
       "gap_targets": [
         "interval_unspecified_temporal",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 13,
       "group_id": "lc4_dw1_dev_group_013",
       "filename": "lc4_dw1_dev_group_013.json",
-      "group_hash": "sha256:ecc55375e13c30d0b93728d21e7e33e92f5690b6cc45fc39d6f4116c32ffcff9",
+      "group_hash": "sha256:d937b5993fe1eeef6a86d589a96e9d963f0a583653176d840d05bf44fa360810",
+      "variant_hashes": {
+        "surface": [
+          "sha256:39f00fa0f2f831a40ba8e7ba57b62d713bed2a84321f342aa9f66d937d602f95",
+          "sha256:590dfd03dffa6e59760e102f7d61444fe7264582146671754cbeef8569fbf0ac",
+          "sha256:66cfb2d263853e8a6f059de67d834548a182fff5523b47a6b723d9b4c9416fbb",
+          "sha256:817f4c8e98032498036956ff6fdb3956b3d274d2f27cc864d4d6103328d31b81",
+          "sha256:1ed00891a30758c9da828b6eeefe9561d975806d00c9f1915db900e32eac7a22",
+          "sha256:5ee503fa1a5e2c54cfe68d842778407e31549cc32fea247fb7cb3050e5c74340",
+          "sha256:2f7c84c62d2e0e48495447f412d5d86ea614f06dd7673c4ae44e1ba274642f5e",
+          "sha256:10ced5bc18ad701c0c2ac82c5fd5452f65a9f41e35638f6abbd221633fcd0418",
+          "sha256:78bf81700b7a52c27ee43fa552cc7c9d8d117cf3f98b8401a924d48fdc7ec55b"
+        ],
+        "multi_turn": [
+          "sha256:065614b6f418aed3cb179f29a12e7124589ff303fe4e98ad43cf4c498b8136af",
+          "sha256:14db31b1c9385bad3c415b5191672ccd9b7bd41ecb5d841c83f5d815165b1def",
+          "sha256:d107be74d5981423c2ffc4d831e2d5c997edf540ab104fd7d562e6176f1b859a"
+        ]
+      },
       "action": "create",
       "temporal_relation": "approximate",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 14,
       "group_id": "lc4_dw1_dev_group_014",
       "filename": "lc4_dw1_dev_group_014.json",
-      "group_hash": "sha256:1d182d67588362519961a008ce8c99faf71cbeefb9f87426d76061b7a57ef837",
+      "group_hash": "sha256:60b0f647fba6489f8d1bc02b2fc5155c63dd68d47d89a4adf2b5c07ad7a2fc10",
+      "variant_hashes": {
+        "surface": [
+          "sha256:ca535258df7ec5fa9c9972e42a71f9732f173009a92394b76c7aba9fb293e7f4",
+          "sha256:242d5ff5585997c19031b57dfe98fe36b8397df10b698f38c16803040696e3be",
+          "sha256:cf45507779f5ade43f22b580438c137245d8c7dd03d915f567d2fef064ae2c40",
+          "sha256:f0bd76a8e5371a27f933a5e636a74dde6a5adc4136e39d9ec60feb7c1ddbcdac",
+          "sha256:bb71c24f6eb8b9c2a6bebade8b803a90acb4b8c4e62de19922984d76958e3985",
+          "sha256:ee15e3a7c455386ea7653fb421bdaadd195f0c44b26b2e523044047b4bd52af0",
+          "sha256:d746e611fb0891902b88c12519e03402589ed2a1fbf1f41b560efe2627f9dd91",
+          "sha256:9bb0a74ea426e228b73bdb2269be4f465b5fa16a9d6596d80232757f6f974866",
+          "sha256:87be40cb894450b8a12518a7a56da0395cc8cff782a8bf1f72fb4af074238c39"
+        ],
+        "multi_turn": [
+          "sha256:447d5dc714bff08f1d444d1bf60d6064f830a4be1886426b09242f350131c255",
+          "sha256:6c8851014a8b4fd7f0c0c48f6c8e04a4b939dfc897c53c7b8e25b902020d7222",
+          "sha256:1ba352b4c7bd2452d6095b7de57e3b277cecc8a362128026f064ebd0ffbf2a52"
+        ]
+      },
       "action": "create",
       "temporal_relation": "approximate",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 15,
       "group_id": "lc4_dw1_dev_group_015",
       "filename": "lc4_dw1_dev_group_015.json",
-      "group_hash": "sha256:184634f7943367d2459f636a32995e8a58c248ccdf3b0826a783721cf53b95c8",
+      "group_hash": "sha256:b4b974942e96776577f3fdb7308263a6e8fa5e13bdb17fb6971c2c6db7963e0e",
+      "variant_hashes": {
+        "surface": [
+          "sha256:983425acf54ebd9d9fb2ce91860caaf1ca68a0a5fbee5a0f7c9beda0c5258d75",
+          "sha256:602486f72541db51ac175858f3c1b964b1f8fa0c9e3ba4b111d2f3d4e7cc9797",
+          "sha256:afde07516119d09dc8ab61803cae34cc8b29d60002753cadfac80e7bfd65fb68",
+          "sha256:96f73c6865a98d3234531c552f52fdf096c3d9a95cc7d1652fb05ea50fa4b3d7",
+          "sha256:cb685aeb765faed36eee1fd24ee8daba8a44d4965b7776dbebbd34f36a1be490",
+          "sha256:467eed0c56a1b707e8e0e84fc9c05efb2ee0eefb073e2e038dac2bde053d96e6",
+          "sha256:db202ecf1e3b5f11d21bf7eb35e31fb37b1aa1d1f3e80dd2eef2484535f19b97",
+          "sha256:eb2f107dd53a117e09a3ad5f7faf56ca0e267d17f5a49cab52944e1d130f664a",
+          "sha256:7b651e81fa7eb14cc9699655670f8f9aa535f86c3fb8a3036b42fd72d82ca613"
+        ],
+        "multi_turn": [
+          "sha256:4af51982503628864dedbdfde7acdf6f4afd36ccaf6ee0a19dd5056acd12f3ad",
+          "sha256:87d5750fab01b0326bbc1235380b83fa7e36f244dd19ba59e60041ac064e1308",
+          "sha256:0cbb456fab3780a6f2aaef6c86bec6fd83a33508e02ea1fad39466d3b8ab33bc"
+        ]
+      },
       "action": "create",
       "temporal_relation": "unspecified",
       "gap_targets": [
@@ -223,147 +494,345 @@
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 16,
       "group_id": "lc4_dw1_dev_group_016",
       "filename": "lc4_dw1_dev_group_016.json",
-      "group_hash": "sha256:f95094f7fa6ffe3a7c8c50d4280f2f805fd73d43d863c37f72c671861584d0d9",
+      "group_hash": "sha256:c8ed191b2115977fc798d08fda6cabf7b90fc1d6224b3bed876cff4eac758f44",
+      "variant_hashes": {
+        "surface": [
+          "sha256:4223228aac0ff6159f2bf9fd90bc7b56d408e75bc619d95879684c848c90be16",
+          "sha256:bf0bd0b85bfc04aff6799ef605eeb63d1ed0e5b309467bc42d26e1d8fcb543c5",
+          "sha256:e5c1cf21145d4da0ae29465731555e7e6a1a23db198d89494d917741bab7c76f",
+          "sha256:d1b1c6f48bf79324ae3d921a1b57854926ea42cd2cb7d23668c5ff0311ca4e87",
+          "sha256:46277dd7e880990f338b77c057191d9148a2eda8315e35595b3edea3c5bbedb8",
+          "sha256:f8238e0ea531a7067caf1fa4a6e56789f1faaccbb3910b1ec3cee5158828a235",
+          "sha256:cad7c3fe7c8285952dd145e4b091827f67afce4f6b48fe90db5906fc83d04361",
+          "sha256:b003ca06a164c303dd3d6fc7b2cbc5f96a00094d74c4cfa3de47fee8e6bd7f64",
+          "sha256:c2e51767bafff83cf36f29820d3c1ff06a50781236c8e0c97c31bc89971eb0d2"
+        ],
+        "multi_turn": [
+          "sha256:f8a4497183342284fe699dab1d0d5ad9d6b3474a9c3897f2c8d6a1bb2c2bdf2f",
+          "sha256:33d4057e607399a65d46b133bd15aa2cae030ad2bf7ec425cf65aed7922ec7ad",
+          "sha256:d9669036eabea79dee53feb7a3013b85e82ca394854de056ac009cc2bec24e1e"
+        ]
+      },
       "action": "create",
       "temporal_relation": "unspecified",
       "gap_targets": [
         "interval_unspecified_temporal",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 17,
       "group_id": "lc4_dw1_dev_group_017",
       "filename": "lc4_dw1_dev_group_017.json",
-      "group_hash": "sha256:8594909799b11d1a4421fbc2d6e6cff72715aa95a6ee649ece801a8721e7b2e6",
+      "group_hash": "sha256:9a98c9b82995da84f1e4b30f189f00f7d86c00f349f5a1368f3c5258bf31d6c4",
+      "variant_hashes": {
+        "surface": [
+          "sha256:8ffccaac54a191881fc7b4846f13b38331054cee2a8bcea6b7896722cf7d8345",
+          "sha256:5561b543afc358d756b601b592a80aa309dec9086ff9ed8414016990dd681017",
+          "sha256:c70a7dc1109c8a70aa11b770cbab4d075e011446314ed05542c64b059805097f",
+          "sha256:77a134dbda6538acd70f054d4730350e13e80c74013e94259d63e0a62bf7dbeb",
+          "sha256:c066286c7855ca031ed2590932751d22a20179eb36e7b04365dd71c01165b071",
+          "sha256:c99da0a1760580450da0173b8a29fadb3ecdd4849b565388be7a42866a31b8c0",
+          "sha256:e632043f173d880bfe24ee29fe2d9a0e75833492877527e572eda2970b4077f4",
+          "sha256:01ce226166ff37c166006053be3ead668a234affca120ac147c66cb78ff9bd16",
+          "sha256:cd32bfc9f3415084db13d42228e4aa8f54986a67155a4a9bde7b2af0776ee23f"
+        ],
+        "multi_turn": [
+          "sha256:a05c17f68472137f96a9b46484cfc754b78ed931e51fbbcde0161f5c1fa921e2",
+          "sha256:791ea7be662eaac46c09b13a2a1de48d1c801b839638b3241814f706be8e305c",
+          "sha256:1d2a0d83145eb2f978be6b0f337f26a33242c8244e882b50e94062e0101ec560"
+        ]
+      },
       "action": "move",
       "temporal_relation": "exact",
       "gap_targets": [
         "entity_ambiguity_omission_correction"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 18,
       "group_id": "lc4_dw1_dev_group_018",
       "filename": "lc4_dw1_dev_group_018.json",
-      "group_hash": "sha256:ca54cf387291f8ffacfc13d66b972241c000ea15dff8c0a0aab5b9c0428e65a8",
+      "group_hash": "sha256:f24645ddc46d876e010b20efa206a3e8240c7a620378dcbaf7b2cd5c0c5a9712",
+      "variant_hashes": {
+        "surface": [
+          "sha256:958b00676cf7cdeca8790dcdf598e01e3d188ac48c2f4aafb9c42b28e6e09acf",
+          "sha256:d5e361770a44188b37cf811a60985bca4ea7d5774030a981221217615eb54b98",
+          "sha256:c4536eb3395dde13f97d4c7c8eb0eae98f86320a66d54ef917061ec5674c9bb1",
+          "sha256:2a8a001a49751832b4370807f1df246c30713e385324161bcf7fb1e7d5792e06",
+          "sha256:591f8cd74f50f67b39eda7c3de98fc37e1f0a9150f5ed1c4b9aa6c07a312428f",
+          "sha256:fa5592f4708f14ab14965a4426173efa26b9e7fce7fa7f5e389cc983da546a30",
+          "sha256:6951d7927d0dc6fa9123bca378badcd72b1ee0e19f7e724fc16e40f3e0bc2cdb",
+          "sha256:20c1b49d35b2ec21df739ca27a0bfb32422cb097cee9901c981537b4237e43f4",
+          "sha256:aba4409a2d633edba7e75d6f6de45bc9a2d880ef3b32c4e7bd473423930ae657"
+        ],
+        "multi_turn": [
+          "sha256:6ce6a8d1f8a4d7c35a590d2d172641a5df873dd4c00401d03dc6efabb3b52167",
+          "sha256:372d17b34794d281c5d74b6c897b5f6cbf4426afe3b30e1f3bc06355109b4604",
+          "sha256:3c327c4c829cb2eb8f75597adb941d2be52cf47fda2caea1f970d188dc819c7d"
+        ]
+      },
       "action": "move",
       "temporal_relation": "exact",
       "gap_targets": [
         "clarification_dialogue",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 19,
       "group_id": "lc4_dw1_dev_group_019",
       "filename": "lc4_dw1_dev_group_019.json",
-      "group_hash": "sha256:0cb351113b9419ceebdc3b0bb90b11781673ce09b31b64541ae7584367072600",
+      "group_hash": "sha256:495d80288e9d9e0769dd2c218d5ba35df41e4b3f18dd5c2569980c8e6cca837d",
+      "variant_hashes": {
+        "surface": [
+          "sha256:92d38a984a3a369b41bb0e82da3916a97e6612bee214ac9c609e22250333f583",
+          "sha256:a070c1b653f938b783a2a5d52944de5541e3989429e1295fed7143aadd1eb925",
+          "sha256:0b54813a95e2cba33dbde40d353ce0ed4500782d76029e765507b6fc12dbf1fd",
+          "sha256:0a1e28e86043270b645397cde0ef52ee7b1c8737dab0ddea3810835f33dade4d",
+          "sha256:c529c3ae4887abdf0dc5fa6d1e1f15f0bae849c5fb445386d2e0325414a2cd2a",
+          "sha256:0ee8d20116fe80b5ea358a4154c841c37f9c7f2ee42a0f0caf07a585f1ea83ca",
+          "sha256:4a992a93551afeaa1af7681d97827988694a725855fedf44511241a904bac97f",
+          "sha256:7b51e3ad4a6403d128caa3525d3ff14166e86f6bf914014520e21501f220740c",
+          "sha256:a8085aadf763f00635e2e37c03e4b4c79c367448fe6255409506871dcb49456c"
+        ],
+        "multi_turn": [
+          "sha256:35a700373c11d721e88b3f36a6f1e7b2fe6cb28976562c7c67aca46bb4a44079",
+          "sha256:1b004e036dfa8e44338fccaa3cbd02a3f8e4d04f7c5a35cfba5a93930af2035d",
+          "sha256:4e2c9453b52e8e33d73f1c00ccb09be345e17f87f9dd0b9063b28ffd19c6b1a7"
+        ]
+      },
       "action": "move",
       "temporal_relation": "exact",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 20,
       "group_id": "lc4_dw1_dev_group_020",
       "filename": "lc4_dw1_dev_group_020.json",
-      "group_hash": "sha256:4de796fe40b2ace0bbdea6474ea7fbcd58e2c3d095410f4507b88e9cfa996d46",
+      "group_hash": "sha256:33803f13584e5042f68ed539ca26b54fade6d6331224d4f3df9c792e6aacdff3",
+      "variant_hashes": {
+        "surface": [
+          "sha256:70cb2d334f656f1b38637906521565b63eae221b34c09e8d1193dd81a414fe65",
+          "sha256:9431c4bf4d5c6c136fc034154046efbac3cc2d122b426b0f2cc546b247183015",
+          "sha256:d8ef17ad52af199b98aaeeff23a7a7bc17619a6e148481d3cad32def945e6381",
+          "sha256:15337eee0aea4f06ae9cee33919a4568aeb65e5bf14aa12027579107833792ea",
+          "sha256:85f15094d9bb8ec54eab5006fa17c82126b3c6757e7052a6b55abc1474215d97",
+          "sha256:a74b954f02780cf672abef7a89fe5ece5473640b83904ed76395237dd66d44c4",
+          "sha256:ae3c12d2b7a37b93812d26ae7315d8970e7bbca3a496dc2495c8fc5c208c3ef8",
+          "sha256:de2c43081c14af40eb7e4dc27e3bda842581354fab592b448895ae3988cdb48e",
+          "sha256:25c32ec0dced77d70d8bf55df3c60d3f345d370216aa4922b2a944acb3139364"
+        ],
+        "multi_turn": [
+          "sha256:277ca70fb0afe5fcf22ea446a1b827155c0a0452a511389b1fb8ee53682670ef",
+          "sha256:c9c15be4bd8977fdede57971716a7b2a76af2fe2efb42b516864a99a390a7584",
+          "sha256:ef3f4d387d908ad1b606342ab0098a5492b6fb46a0521b39d6745295105bb87b"
+        ]
+      },
       "action": "move",
       "temporal_relation": "not_before",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 21,
       "group_id": "lc4_dw1_dev_group_021",
       "filename": "lc4_dw1_dev_group_021.json",
-      "group_hash": "sha256:e8c6f6dd90e3bccbbf2263d10a696cb751055492a837171256f24862fe037f46",
+      "group_hash": "sha256:04e44e0edcbb1e0eba186943ffbdde1b6ee84439cee4a04aacaac4fc35164ac1",
+      "variant_hashes": {
+        "surface": [
+          "sha256:b8e636c43ad7c527779dbe5dbc7aefe44b58fe6974b0f93d71e4bb6c51e71a25",
+          "sha256:b48469d79a699f1e103662ca998120f95726ff12e25f79132d2441d0bb1519e7",
+          "sha256:d88d94b412d09ea09e5b1f129a8da4ebc4f7ba2680f80eddde7df7e89b4a63f6",
+          "sha256:6004265ac2d0a7395b2471e3f928ede77a15b4c8cd089c2522100676084eb201",
+          "sha256:92ae998221b5ce83eee1740ad340ddcb08250599b9584c5ff75eab4c21ffd556",
+          "sha256:3e1d5557cab1dbc40b3bc64b5911a5bcd3829a6f1bb7c03f6e0385f5646476ef",
+          "sha256:f24ca77baeba9346769345ce6eddc8a3620df8cfe628eac432fa5f9bafd03b49",
+          "sha256:4e7cdd8d15f000a17b9eadb3ef402ed32127ab9f650c511f61fcabec577f6b4b",
+          "sha256:361ebef880216219d8679bb4c74acd482dfa07f6b05bb0456cb3a485bf60662e"
+        ],
+        "multi_turn": [
+          "sha256:81f8545ea931bb25c8e71db39c576b060b979e88ac412bea168b5cdf118723ad",
+          "sha256:37089861b126dfdef7b030301c5f53141f759bf965c4fc560ceefc8bef5c4099",
+          "sha256:2178e5256ef333ec07216dbead7f805658a3f87a764993affbc8e9ca598209ef"
+        ]
+      },
       "action": "move",
       "temporal_relation": "not_before",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 22,
       "group_id": "lc4_dw1_dev_group_022",
       "filename": "lc4_dw1_dev_group_022.json",
-      "group_hash": "sha256:93b2d003a9d859bd37d846e379f64181b17c6b94e5c7ceefd586e834b6273539",
+      "group_hash": "sha256:a037636bde012728fabceb5f99b03cf1d3ffdf66d9c7edc1dcc2cbccb5f56b79",
+      "variant_hashes": {
+        "surface": [
+          "sha256:6893c040f086f7e87a610bf859ce7a880c8e279ab5f2895392ab94951d93d570",
+          "sha256:9232319bfbcb1191456ea74660289c9583a951fc914d3c4a94f879b49b3a6530",
+          "sha256:b8c2a547ccd8fac99ac167c13f7a0653619a924b8702629495482c2c688cb8c0",
+          "sha256:067dd57575d94b145dab3f1d17675ec210a614d330057b060dade94b730fe96f",
+          "sha256:612018906cba1c54a0696bc0e5ebe464ad2703f11f1c7f8fda3f15a2ee92bd1d",
+          "sha256:f1e4ad11fa13daa84c7a3751646a887efe0b1eb75fa10373781c67eb68dc84f8",
+          "sha256:429da2f9e51cc28bff9fcde64cbfce4efbff8b04244e3fce1359c569857ef168",
+          "sha256:3e3f07f8c0bb30ecdf876e31bfd2ca630c434bab16dec2672d80019de0f59044",
+          "sha256:55be1ed35de971199e0e598661b530d956d1120e066d97ac85425c3e7f7b6657"
+        ],
+        "multi_turn": [
+          "sha256:a5125cffca7381936129223d48579a40af92888b76e26686f0ddd13ea57a264f",
+          "sha256:267a6a3054c2048a959247a6d6981efe4b597973ca15885ad836f364033e5389",
+          "sha256:24dc2cf44dfb784ccf65d6715321a6eb2cee92975a9d7aad5f3fb219e990ce62"
+        ]
+      },
       "action": "move",
       "temporal_relation": "not_before",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 23,
       "group_id": "lc4_dw1_dev_group_023",
       "filename": "lc4_dw1_dev_group_023.json",
-      "group_hash": "sha256:3f46967821ad2739ee93a7efe9a8ffbd6174161e0e5fb667cfc668033e621bfe",
+      "group_hash": "sha256:69b2042e79ad8bf2d1d069edd4f769a8cf37eb42291584bff67e43abe32810fa",
+      "variant_hashes": {
+        "surface": [
+          "sha256:a4a245ceb879ae0b7fc6592bba0b0cf90ec740fde96ca75064df95dec140eaa2",
+          "sha256:26832b7a15ce68f4de0332cf5d559a42132750560e93c1f50da41b96e9864e39",
+          "sha256:e12792dd27300048574e8511779d9256aac2a57dfaccad67e19da1c36db02f1d",
+          "sha256:4b7f44a94cdf295519f123b58645947b9b02ffd066393f61305fc31fc45dc216",
+          "sha256:5087eed93b7457e03fb4779dbac2b4f7975ac1f7f728273d1bc71e9057ca9b3a",
+          "sha256:4029256c5aa6f0b5d6df45b5ebd7933f94ac5f0f9bd488ac2ea7c87a3943f565",
+          "sha256:2d42ccf074699eedc1d1c3b1e4094855c5c0658c2e2701144931a187c783ecf8",
+          "sha256:3994f993f12c9f979f8bb27d6f8979de46198a8b109a65140d5f37acb2aa1284",
+          "sha256:dd677e208b21dbb704b9979283d08797fe721586f5f1c043db854b27a79fdb08"
+        ],
+        "multi_turn": [
+          "sha256:8c6a171062c45876d86fb9bc0e5167db8862f6842a500bb6bc68ebe25c6edb0f",
+          "sha256:449be4fc2d79b03a4f7b766cb064b07d893343323b0fea1dcea6c9f8d5e83b24",
+          "sha256:53e88ec8afb727caaadf58ef2ce9d7356e6fe8c279992160774095df47719681"
+        ]
+      },
       "action": "move",
       "temporal_relation": "not_after",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 24,
       "group_id": "lc4_dw1_dev_group_024",
       "filename": "lc4_dw1_dev_group_024.json",
-      "group_hash": "sha256:1989c0838ff0a451ef6ea2cf6ee1930f458cbc48c0cc743303c6d0d634958fd4",
+      "group_hash": "sha256:d93c6c9303e9e2328cda5f8ef6b3ee6da2bc02e0bc5e8dccfb21dd82ae9efeee",
+      "variant_hashes": {
+        "surface": [
+          "sha256:96ea39f7a4a9fccf6f96ccdd3770f82261ab6f4708ad626ad7079c8d54d78f90",
+          "sha256:004a8071139f139584cc7b2d283480a4410afaf1eaccd43a8141e48997681c25",
+          "sha256:a77d950ceee03e8949118220fc03b114adab773c45c9aa6dce12601193070919",
+          "sha256:9cb823974fa4604fa46d32b1cad66ba299184d129388e8c01c8d7ab11156ed02",
+          "sha256:f7e4ed5fcb21f35f516f5b7a3ef8f7d51cde9be6bcda3a0659f5af220773d79d",
+          "sha256:eb60aef3a89f83f13e160daee9bb20c3c347053471df3ef387c31803f6dcd1c3",
+          "sha256:98fe591ae453c446bc433a4a551555bce1b8dfc7b84f808d8fc88e299ad408ae",
+          "sha256:36f885df717156cd61ec6fbbac73761c13a0fd26d60c5d5130bd05caf190a035",
+          "sha256:3739360b50bdce403b67a5ac34c4301d4650136fc07746fc5f7a1d1f538c8cce"
+        ],
+        "multi_turn": [
+          "sha256:e8538a105becb51f20b6e2d0d60eaf5c1df825234724274fc1ae8192cd98f1fb",
+          "sha256:d6e1216b6838e278d11801783335208d3ff197dc2b3c3a74c43d1f7ebc2e5b25",
+          "sha256:d7fa7ab69225e315da8e873e1ff35b2fe95de21081082372fcf371ef3348b536"
+        ]
+      },
       "action": "move",
       "temporal_relation": "not_after",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 25,
       "group_id": "lc4_dw1_dev_group_025",
       "filename": "lc4_dw1_dev_group_025.json",
-      "group_hash": "sha256:b524f005d4d55a862c75123554cd7e68fb91b327f2e9eff15bfea4d539e33a6d",
+      "group_hash": "sha256:c45e1be3584654c37efa96bae885426039be0604bdbc098e8773e9bf483e5763",
+      "variant_hashes": {
+        "surface": [
+          "sha256:483feb78c6c33d3e4430f8f26172dc7a19e83364521d3e7f30103d51aa53766e",
+          "sha256:16975040ee2428719f88c154546f4f03a4b3f8fcd4b7e1c7de93519190f7dde4",
+          "sha256:7bdbbf271603447af0c4335b74f29d54f3c64450952e991872e43584b24b06c9",
+          "sha256:4a7b65845e8c22d3c4d1cce07f10ffca410da280f1bdb419e6aebc35a0633032",
+          "sha256:7c82bba0c88bb7ca6445ac73a733bb9ae4e42e954c499dc1c797c3eb25acf8c8",
+          "sha256:3983e29984ef955212619015b0fb00664b936786e96af8c9f68f02c3eb4c112f",
+          "sha256:f1800ccb8f67b15ca56193a24324c554ee51dea35870ed96e502e46c46e39155",
+          "sha256:5732bee5ddbf86fbf092abd37ac68e267cd9514be348362fe69c658bfd033737",
+          "sha256:95c208c27cc239cac82a608c8e0d8b26b6470df82346f1ad3ef657923ae92494"
+        ],
+        "multi_turn": [
+          "sha256:84886a24e7fec1b5fe323c13295a1c198267c7c858d83fba27f3eb1840c85fbb",
+          "sha256:149973538c2a410c0877ab06cc639ac8ba07d81c0529381135a51f358ded6628",
+          "sha256:54519ef8125fea5ffe09589a43c8416a9c200bb28d72d25f4aa48268a64a4703"
+        ]
+      },
       "action": "move",
       "temporal_relation": "not_after",
       "gap_targets": [],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 26,
       "group_id": "lc4_dw1_dev_group_026",
       "filename": "lc4_dw1_dev_group_026.json",
-      "group_hash": "sha256:11ef3c024c3cecbd02e736707fc95c781e19aa29405821907d73c7e3128ee4e4",
+      "group_hash": "sha256:21092ec1fd8824f48645ef69e351fd8beb69b82392bed60e263ebbce3afacebd",
+      "variant_hashes": {
+        "surface": [
+          "sha256:d1e55c5334d9746f89a870fbf557b54ec39ad398f7200cfc4a1d54fa3d811688",
+          "sha256:60faadbd20df979c2f6a0b82fad6edfce71a56bc280d33f469926f64d1bb194d",
+          "sha256:5d706e537d72b54f932279158d9901e6660fcb9948f1dfe44b816aeae0be2ae7",
+          "sha256:2b6b5c6150fffe8eb19c42541c9d76e39d0bb242842482baf965f1b6832812b8",
+          "sha256:ba4e7d0f47416cf502b7a4c31855980a92f4d6809ffa2c28af42b4803ddef871",
+          "sha256:5bd15787cf0ff3bf7a6f904206e687ceed5b39449c8b9fdfc939c190a57586b9",
+          "sha256:b631527bd1dbb2c707769f36afad0f045d7cc3adf8b75a53b0d2421c5ae9525e",
+          "sha256:892cdd62040f845f417edb218167fd692f7d8ed4f1a7e59779a9c7e42a09deed",
+          "sha256:1a6612c9c5656175b4424b4ad5c122347018b9cfd732130cb60863d2c6a838f5"
+        ],
+        "multi_turn": [
+          "sha256:310180175d70058482aace99f65ce10e94c62b8bc82445d2fc8dabeb8c4cf433",
+          "sha256:875db0b0ec1ab446f7a17550887c575d543b89c56dedb60c95dc5eaf59c9471d",
+          "sha256:fb2f9104e5f47bf53a5e7b230bdc209e6d6d2692494b81facb1d62ce5d6775ca"
+        ]
+      },
       "action": "move",
       "temporal_relation": "interval",
       "gap_targets": [
@@ -372,14 +841,32 @@
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 27,
       "group_id": "lc4_dw1_dev_group_027",
       "filename": "lc4_dw1_dev_group_027.json",
-      "group_hash": "sha256:96322f08ac27add790b3a888a8b3af576607da6306485a0a398de85e142d0af6",
+      "group_hash": "sha256:3f222ce78f0e73a99347cf52f52e78661e87d4bb3b1c37d1efb3247ef1acd839",
+      "variant_hashes": {
+        "surface": [
+          "sha256:c2db722bba67ccb86c8742cc0d3b9d6b3826375fd368c8eb5bc74b5e1157cc29",
+          "sha256:e6aa7859107cf7347ade1be0783a875d0e5808f1bd27325b3563d5ed662c3f27",
+          "sha256:3b5727a7ec888109727ce7ac186232dc650bb6279009573b366af0c9c2263ff6",
+          "sha256:ba4f505daab49e5fcd347a21358e378198bcefaff06dc2565cb8b9e5f4b3c361",
+          "sha256:38a14cfe91990e1fb10eafddf6c7d65230b9a9917da9e553e59e5abaa8d08ba5",
+          "sha256:fdee363c7cefadcfe34413277084e2e2d105da5b01cbaff0583af1924edbbeaf",
+          "sha256:93f0d6d7912bbee250a28e252268140719080fb674487f7a07b50c77c2828a9c",
+          "sha256:afe452ad5355b458e6942c5bc8d31c8c43a665b343a7032e8b89fa0689ce9600",
+          "sha256:c29dde83d694a3a72b17d7090f44429bf106d4a9a3379f735214eb8aa44e277a"
+        ],
+        "multi_turn": [
+          "sha256:d69c48eae4b0316ee6acdce84ed429f89dc1235830d17209afd8d50c8b05a183",
+          "sha256:4b134799b4c40d87f6fa2f052eca30a335f3d614625b5150afe18d79466da48f",
+          "sha256:3be2d8c5df19a05ad0d9b91675b54b483e346b08d0ecb596a775adb9960d3567"
+        ]
+      },
       "action": "move",
       "temporal_relation": "interval",
       "gap_targets": [
@@ -387,69 +874,159 @@
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 28,
       "group_id": "lc4_dw1_dev_group_028",
       "filename": "lc4_dw1_dev_group_028.json",
-      "group_hash": "sha256:045a1aa71ad3023aea96bccd5df9b1bfe9a84e67f1dc3a4ce086b66966b969db",
+      "group_hash": "sha256:ab4f3bb8db30462779fd1269f820aa7e27ad4eab5e2354366e29a0b18f1b52b3",
+      "variant_hashes": {
+        "surface": [
+          "sha256:ba5a7178104d55087ba078abaf50b4419c862dfc85f202d8a9549705b1c8671c",
+          "sha256:9b1ab763984340a444548d99b1d69076f5962ea9685daddd78ba65b88f420555",
+          "sha256:07b944cb36e7ed7d1aa118b6e8a917fd5f6071462a2e3c29047e5840e337e713",
+          "sha256:0945c391577ab211f7151c997eaccd932acfe4bd9da35f59ce44b5c2747e15bc",
+          "sha256:6daadaa031458d9956ead6278a5f8682dd9c32d510ae52dfeac38d1f61b2ef0c",
+          "sha256:e2f795ee5bc06f14629f2166b3fa35e0733984f3855c91e51bc96fd52fb2e176",
+          "sha256:dbe32584a1c73f0719160ac4562f6633a84942148af5dd5795e03203214851c5",
+          "sha256:dd90051e2f74b176bb18dbf15b0d66bcca601d4592dfca6da703d6e62e441e4e",
+          "sha256:84382f3cc8309e02da0451e3f48ee088ed80b804754c4ff27b328aace0db6b72"
+        ],
+        "multi_turn": [
+          "sha256:990cab125016b063f2fa263d23d496c820ea1f3662e9c84c1f615198fa1fcca3",
+          "sha256:dda93960be23a2c58b0c98f79efedf42914b4698402f6605386839c68c64c0db",
+          "sha256:fa351c1e64737ddbe036a00eb52a57a8f23c2d8d22cf22d584cf7624b48df654"
+        ]
+      },
       "action": "move",
       "temporal_relation": "interval",
       "gap_targets": [
         "interval_unspecified_temporal",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 29,
       "group_id": "lc4_dw1_dev_group_029",
       "filename": "lc4_dw1_dev_group_029.json",
-      "group_hash": "sha256:019ceebc8504722d368010702f8f1941ef71bfb7b2a8e92b25e49efc27baaea1",
+      "group_hash": "sha256:3dd8fe7a223c00f5bf701eda565ee7f3b82043b11293d6398425f50b910174b9",
+      "variant_hashes": {
+        "surface": [
+          "sha256:65c1387f8bae9d0f68a71157dc1cce75b7a829b8c22a6110c2b1fa424b387bed",
+          "sha256:8022be5b118dd5405f8e8225417aeece61834d35d71012dd8100243708222fa9",
+          "sha256:3602fe4de3e51bc8ae6f5558a2e69c096afe139c800c729df9d3de91abb7a600",
+          "sha256:8c85df363ccd20a632c0d129ccf0f989ae2a6fd413cecb013a8ae337022535af",
+          "sha256:9b6620892e353da0babae4bd59514a82fe4279406ec3579f6c6c3430baf10c67",
+          "sha256:8d6aa943ba7f6c5061fe5f5663b1b24099becb70df1499482df0b69ab4019ff7",
+          "sha256:67e6a6c85f97753573eb00bdf005d3ae1cc038f42ef5c0d1fa996ebae731f50e",
+          "sha256:36b05aa4b2e7bca0c4b36780f220798bcd80ac3633f31f561b4596f789ba51d4",
+          "sha256:54fbb1ae55bbfae11dd27f00d83b585b3dc60c84561b02df04a2639b78c978cd"
+        ],
+        "multi_turn": [
+          "sha256:e23691e461290ef362cc208a81460f4975545eca39d4a238f22af8bff5cb92ed",
+          "sha256:434324fb4f2e8bbd481237bfa74e2e63ed7d468dcb6115f8f603fa163b0a6073",
+          "sha256:aadeb9084ca18803ab0394683f692fa7f2d66a16220037312f9e2c265299d88a"
+        ]
+      },
       "action": "move",
       "temporal_relation": "approximate",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 30,
       "group_id": "lc4_dw1_dev_group_030",
       "filename": "lc4_dw1_dev_group_030.json",
-      "group_hash": "sha256:162e9354e69c771669771c0f2d2cd97c65fdd9855ed2d92046a09d6601e03c93",
+      "group_hash": "sha256:b3291be57080998289ec70926295a3dd1532b9cf1ef51883480c7dad569566dd",
+      "variant_hashes": {
+        "surface": [
+          "sha256:5f1840adc1a1a127754734e41c6da8e0fe67a178870fd3dcaedff961f7609121",
+          "sha256:35d52c5bd697b996cd3f68c2759e7a6c9ff1448c3ee79387d7fcd96a6387f404",
+          "sha256:eee05329187eb623d44441674eb2afa2e2280442d075ad8fad7a09f27d3f6be0",
+          "sha256:bdf85b65d77bc33322df3b1d793cc827eae61501dae7f72dc19c35605901024d",
+          "sha256:877ac4f3cd272f712f108f1d4e7610e81c291c57df4241ab5b3482ed8383400a",
+          "sha256:7433e1b3f20798ae910ecf234c56f1c5fadb41fe3364c7c35a25c4c8470386e4",
+          "sha256:c134e3276ebaee7182a19c09a32aa9f9109f4744e4b58d5b14f1556009075075",
+          "sha256:1f8bba4165272e257b6783fef280bccad1fea608e12f09304495655a97cbbce7",
+          "sha256:d1dda776258e9ef9720e7393690fef074081a0e7064991cd9e188fbbf7839adb"
+        ],
+        "multi_turn": [
+          "sha256:9a5ee5f4769f495bf1e58656067007120f39889c3eb5df7a4e7f2571c69732d6",
+          "sha256:a97d41993d655b1c3ad0b9504935df1392c2926acdf0ee00c29dbce076b72075",
+          "sha256:0c67595924696ef83808d0b9b6894aaafa48d0f3dc17c68c6aaccd8b396003fc"
+        ]
+      },
       "action": "move",
       "temporal_relation": "approximate",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 31,
       "group_id": "lc4_dw1_dev_group_031",
       "filename": "lc4_dw1_dev_group_031.json",
-      "group_hash": "sha256:ae8724409100fba653ff6e3d8f9eb274d19b43fcaf21027907b33556496e2ab5",
+      "group_hash": "sha256:59b16994b1d2f30bb20de43ff0c54a220cb5c56eb0e8a19f81169f2b85351ef3",
+      "variant_hashes": {
+        "surface": [
+          "sha256:ad254eb8a710851d7488fce81d77ba70c4f4803ccd47d5d575f1c3987da39f96",
+          "sha256:c182f1f772839568b26aafb733bc737625bf45249e4dc8ab8e116e8dc880b56e",
+          "sha256:6618699b55211e65d5fb64005079f2b8db750a36cc7fbb504ae9f4e154ba9751",
+          "sha256:68cebac69a865a15a4efcfed744cfda5d1503994e32815f7ed8c8c53ec30195d",
+          "sha256:10072776213cded95f49095b46ba03c9595d853b37ad27709525fed733e479dc",
+          "sha256:26449c5efebe8cd24b2ae491a21399f23b6865e61ca1d4ca008e7676c78e5779",
+          "sha256:6f9d0986edef9b60f4808158556622f67fca955a4db269f6a2459d44122322e7",
+          "sha256:05f61eecb3e34e0c26b6bba411d1a7f70dcff2d744b8276e7208f84ee4a0862b",
+          "sha256:6a4c1effafc5434f38dc7248392019e958d882b19ac273bbc829f6ca41d08c95"
+        ],
+        "multi_turn": [
+          "sha256:c77974e916c6888c8488d7e458117a8d554bca50915cb2907ac1ce7fd2520445",
+          "sha256:3958f6674de949e671a8f26e9ee35e89536103b0768f0f5db93fbe369195ebc8",
+          "sha256:b079049aa544d58d1ad5a3692aa06b10f9dbd13dc1cc1db84a4e11a101e3a00f"
+        ]
+      },
       "action": "move",
       "temporal_relation": "unspecified",
       "gap_targets": [
         "interval_unspecified_temporal",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 32,
       "group_id": "lc4_dw1_dev_group_032",
       "filename": "lc4_dw1_dev_group_032.json",
-      "group_hash": "sha256:428d39c5c69b2fc19d667a070fb2d9261c3eb4634315819c2b5b20b513648347",
+      "group_hash": "sha256:34e00fe0d2ccad5e002d92bac5dee0da3ed09c0d9b7e2244d37899f0c8be0f71",
+      "variant_hashes": {
+        "surface": [
+          "sha256:d14284d888c7ee408eb64d64510a3083d302fd98e6d109f4310fac4f737729a5",
+          "sha256:d517edd4ddada534dbf70b6b6b56f3370c21caa38205ac6955732a090f44214b",
+          "sha256:c95fe65bda05dd0289e8cb3ed84b029723054b27f66843ebecc628f4102e8307",
+          "sha256:75f095f938847949be223668130dcfbcea5f504842db8b29d5a4a3f56fad4cce",
+          "sha256:dfad0bd5ae2fce69c2a5b57453701d8cd29702a1f4baed92749da8805dd31c39",
+          "sha256:10f1a59ee70c3ff85659f379563c874e2a70ca7d7c81717fa9f700ac2f5aa5e7",
+          "sha256:0c8489482ba57f42a95de787ddc094eac1d31ad086ad1d5569a40fd44e24dd47",
+          "sha256:c2fb617c945b35c66fb11b4efb81b24b413ac24638de04ce4a6af1b308b5f6d7",
+          "sha256:7b48930d5df9f70193f70f855ff5c490d65adf862811594ccc78052285c158d0"
+        ],
+        "multi_turn": [
+          "sha256:94b4582a2b25b09f46f4023447a0a8958637873dff0b34b7b58f9a282772dccb",
+          "sha256:3d6e94b57d4baec1a524f7d4218b1496ebf5fbe64911a73f7625652563e191df",
+          "sha256:021c021f217038dd4fd3fe8da2cf171a686b1c51248535d7d2cf108388143747"
+        ]
+      },
       "action": "move",
       "temporal_relation": "unspecified",
       "gap_targets": [
@@ -457,135 +1034,315 @@
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 33,
       "group_id": "lc4_dw1_dev_group_033",
       "filename": "lc4_dw1_dev_group_033.json",
-      "group_hash": "sha256:bcf1925baa78d185031b0fb066fac16f49beea8e1a29d8366fefa54a62fef00e",
+      "group_hash": "sha256:343db2d00737dc46cfc3635c0f8ea9059461a4ddec5df8a4e3e671f2577a2603",
+      "variant_hashes": {
+        "surface": [
+          "sha256:323bb3008d0ba6a43c2b8f70f3b7c9754bea82732392b72f6aa5bffef6759dc8",
+          "sha256:81de96b8267470f0d3cab981227abd99bcd467b23aca55dd058cf484e2593252",
+          "sha256:ef85855a739b3bd20f9bbde3f7d174c6aaee2e0dcff429da76f1f3dd11c509d1",
+          "sha256:6b9b15512d8a7830f53345cc7bcf07b57f271e868e2c36110e423d3333d8c5bb",
+          "sha256:5c0a8ffa6a9a98f78619fce39ef811307891068d6b44d5edf6cfc855189d689e",
+          "sha256:6db9ad97ebd4858be807954868a98d2633026483f4da02a85bd8e9e8c0a5afce",
+          "sha256:8ad1fefca05ace69b1d62a6c141a70bea11c89a74982430d9bdb9a562d910f9b",
+          "sha256:96dfe83927462b449c3cc97b00145be8efb1127e4e5ff5af6c789e195c38e705",
+          "sha256:b0ffeefde7c03f269384f5c0c3f77fe18cdbde7a122c2a7cbfddbb444d9dae02"
+        ],
+        "multi_turn": [
+          "sha256:efe84281c0d085bd3fc50d560de68c717cde9fc6f6ed7facea9301c4efda7310",
+          "sha256:219f44c11eec32b6c642289fac569be4d2d62214e268b1ccd8f2caac99af3bbf",
+          "sha256:d5b710bcd8fa8fc8086083f8f4a5c02cfc39601ce3298c9e1593feea6a541610"
+        ]
+      },
       "action": "resize",
       "temporal_relation": "exact",
       "gap_targets": [
         "entity_ambiguity_omission_correction"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 34,
       "group_id": "lc4_dw1_dev_group_034",
       "filename": "lc4_dw1_dev_group_034.json",
-      "group_hash": "sha256:638e5509f032d1e4e2d8472bc17c8990e492a5bb8bdb8298dda2e15fcfce55bc",
+      "group_hash": "sha256:19aae34a29d0f0c7b84cefbdbd48aef56e1dca2d6119c0f5ccbdfaa619c33518",
+      "variant_hashes": {
+        "surface": [
+          "sha256:f5fff2e3e7ed1412225edb5d123df7d3764f6a26cb25437c6738462b804093a5",
+          "sha256:d874468ffbeacfb28e54def2daf2ee9b3795689a1a6d45c69785648e8cc320fd",
+          "sha256:6e0469e7c010e77478fb1bc738a649926318c376666c0b6e8232f3c594efeb0a",
+          "sha256:67bf1a2cc80248c7d892594e212f7c0e028e4fb3168d8a4ea74c8026c54f068f",
+          "sha256:1557881f6cd8c2de54eb50beffb0a3a284b1032eae040334322a6e5112b40409",
+          "sha256:b4efcd6a475b25e5e5817d2e9a602ddeb6a87a926e25298924ef864e2bb0fca9",
+          "sha256:64214bdd15b3e702fc73e701b6059a036bbdcddeeef76553de834ab7b042ffba",
+          "sha256:d74d504e5f8fb5f76009cd3c28d343e1f9ec7d89e2774638a6f20a8535c12d00",
+          "sha256:17393977463b6d4f3fe70ce506be04459240a335ffc7e28c6dd547258f5e6f62"
+        ],
+        "multi_turn": [
+          "sha256:c1cfa737dfe39e2804597904fa561270b3df1113874cb2d120d9b491c14c6fef",
+          "sha256:437b6042ee3dd4f508fa60f37621fb77a9c36c1f33ac3a60413a9f5eabb6efef",
+          "sha256:a297400b6c3976e441a4fcd97cfd3f8e76b25dbea36ef834640f739cb193d204"
+        ]
+      },
       "action": "resize",
       "temporal_relation": "exact",
       "gap_targets": [
         "clarification_dialogue",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 35,
       "group_id": "lc4_dw1_dev_group_035",
       "filename": "lc4_dw1_dev_group_035.json",
-      "group_hash": "sha256:51ba2dcc677ea96d5e570148ac12725d7a148dba9c3ed5e49c4ffb7b4ec03a81",
+      "group_hash": "sha256:a834b2c36f0497e692d1321b21aba2c3ca56979231df0f042d45bf900b0d147b",
+      "variant_hashes": {
+        "surface": [
+          "sha256:2f896e37ca98b0e6b5064c0645450c4ccb3b8dd2072ad5133fc4804418bfefe7",
+          "sha256:98720b19384faa6425edbdd56e6c78a8d532dbab11c8a595713bc63d7b6899cd",
+          "sha256:2e901ef6bcc38600184b6f8da782c3d06a9c72a82b53a1b076ea1343fffd3f4f",
+          "sha256:b6cee3359ca0c1a1b8ea18192a8daf4bb34b6f0302ddb0c7b544ebf8c4a7918a",
+          "sha256:89a76a328720917aedd2c79e475899d62346acbdf035b53a733391880c2743e8",
+          "sha256:259b685e8c70ee347d1e4022c6eefadb8a3436e58e10061513ece28a282a0c5d",
+          "sha256:88a690e63c9689bea611d639443b868d5ee61d6c9c8654e1789dfc0340cd771d",
+          "sha256:4e91425e3016e492c22d13f625c76c59942605d4c40ede4cef9e7af6a1959de5",
+          "sha256:e0aa47ef155055795abc870d57e21933becc4f7b2356e592b7f3fde2df244faa"
+        ],
+        "multi_turn": [
+          "sha256:3950748800b77d59bdf41e17766747d186f2770dcc099cf873b53c4c3584578b",
+          "sha256:2277068ac55d9634f59c98b27aa3292554eeba9a35536ce45045f7a0eb84e776",
+          "sha256:f06d28dea2fc23bcbc53f3abcbed9e2815f70a24794b8364d487c951acc7b326"
+        ]
+      },
       "action": "resize",
       "temporal_relation": "exact",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 36,
       "group_id": "lc4_dw1_dev_group_036",
       "filename": "lc4_dw1_dev_group_036.json",
-      "group_hash": "sha256:8c1d6e6549abedd7c70950093c890e7b1280696e529e5932152e9b87221c2301",
+      "group_hash": "sha256:e4e3a09180953788ecd228a0133bf776cd795ddf0874c9ab551583ad543fca59",
+      "variant_hashes": {
+        "surface": [
+          "sha256:dc8d9ed716f97ca2120ec3f56c5229b32ff53d4162d85375a7390d72bf1ef5be",
+          "sha256:23ff9aace433a06b9f8dc5969e8d3fb00ab005fe1949a99f2cc29cff9369b8e6",
+          "sha256:cc57f7ceee49a039f897ae6b2ee817630040faab90a4810b3e749676b7dc6403",
+          "sha256:b888879c691bce3bdea4fdcec98c787451a286013dfd7a9cfe85765c674a5ac3",
+          "sha256:e00ff4e83282bbfe116dfe31f3dfc94b6e929f0af45f7b7e1b54c33b9f24b162",
+          "sha256:e9563591238586f7962640c88a2a20abf6c715bcc2407d6a9a9b7b29cb558e13",
+          "sha256:52f673f476f5051283561bf95659e0f0924ad647cacfd7e20b10c213fc7a2564",
+          "sha256:760e859ef4d40c4d5619e9896645fabea7cf8845e00143dfeb2e415ab3f031f9",
+          "sha256:a7435b76d57bcfe3d7efd6d6a9a0e2a05286f320fbc025a4db8274542b5ed670"
+        ],
+        "multi_turn": [
+          "sha256:c396dec2db88a750f22f6cf1fee7906a531f813f9f33ec8d3bd1ccee904c9902",
+          "sha256:5d67895cea18dc8feebca3dce2f80479bb868016a8ca06c49c20ca2610e832ff",
+          "sha256:5c7918ad8b39fde58430e46acefaa97c1c302388326f5d2313ba5362b289bfc8"
+        ]
+      },
       "action": "resize",
       "temporal_relation": "not_before",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 37,
       "group_id": "lc4_dw1_dev_group_037",
       "filename": "lc4_dw1_dev_group_037.json",
-      "group_hash": "sha256:3557b5517f4f5f97346d51abfab25f0008bd9a920e89eafc7c6fe8ae5102170b",
+      "group_hash": "sha256:4dab7f7b0480985e7ecc39ed6dbf15eb0e1c519129bb65255a716432057e10ad",
+      "variant_hashes": {
+        "surface": [
+          "sha256:616539c5f8b7b17d7226dd848612b019eb0ec03228cb67579cbb865f36cff75c",
+          "sha256:697738164e62786acb9e495a779004e28cb1b2460dc66f7da6225017756ac34a",
+          "sha256:36bb918b8da672436d56e1ecb30444ad0ee3d7472f0097f99ef6a5c2c94f8c36",
+          "sha256:fa0cac01dd03455258dff2900de0589d795d2d9a4a5773e0d0b980152e135db8",
+          "sha256:099c2aff9d86a97acc4365220baf3834118a000cc7c83ae6ede416c48d40bc39",
+          "sha256:6e856e5fa18286bcc3d88d5ee37411acbf96bb9927aa2d4037c8c0f6ebf0be59",
+          "sha256:712b5ba6143a6eb4286776d621a79bc4d2d279449f5e4ff313fd3a7d14e269f3",
+          "sha256:e83218ae3a13ca6e94c476563160e870942bd55a80ead3120bae1c8be206b029",
+          "sha256:5c5c28084211e7da558e23aed877e563b8a584d470ae940293c75ede6544f15d"
+        ],
+        "multi_turn": [
+          "sha256:a2dc7a16a67394a36f6f38dcaeae64225df5e31864934adcdcb929685410304d",
+          "sha256:8025bd83913f212e539236ddaf767c9ebc0c21fbf00ca41388bdc98bb8b3947a",
+          "sha256:9687f49b6f45826038749986467ba8888fe5fea85fa7ec34c5fbd8a5578c150a"
+        ]
+      },
       "action": "resize",
       "temporal_relation": "not_before",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 38,
       "group_id": "lc4_dw1_dev_group_038",
       "filename": "lc4_dw1_dev_group_038.json",
-      "group_hash": "sha256:ac4be00f02c7a7e1f4bbd160224c38562dbaab38b4675372927519c7c79d813d",
+      "group_hash": "sha256:5a88b1c572a61e183c48ff5b6f255a616b386a7dbb5d4ecce4b6fe99f1d096de",
+      "variant_hashes": {
+        "surface": [
+          "sha256:45dfbddaf0b2d37f5ef388fbef7394774d9f5fcb809b012fb123d2817c3a7370",
+          "sha256:b7c0f060a51df14d2adb56030d356268d8005fe192b5d89e8782dfc450779b47",
+          "sha256:cbf888420d5c6f12606b1f59c86cbcf9f85187c6f3ccf28108d9e9b50465723a",
+          "sha256:2cbf493af764a5adf2857c20a8d5b79588912e981542c295002ba95c90c05d75",
+          "sha256:4d646428cccbce9b17e1a33c3660a71df137f9a76a650474d15e3b257177d772",
+          "sha256:ef9baa7bd113b17ab70f054c2415bee32f96301740b2516d9517c49efb6d2c10",
+          "sha256:4a696dda4827542284c8552c2574b51919e07dd2ebd0dbbfa800b3751e7f9518",
+          "sha256:49646659ae50d57bbc3e7f26039676a81cd3df3e8a6b525dd5d9e2f4927fe799",
+          "sha256:d91e932e9a042ad79e60c1d390b2795a4213d988db7f88f3beb8930af8af6b8a"
+        ],
+        "multi_turn": [
+          "sha256:b7a7c37e47617aa63b884b240e22712708bf9b67e60632c6999820d66cfe8567",
+          "sha256:b14bc818a026f8d4fadde7efe2ee82e9425751b603114d13b18cf361095b14cc",
+          "sha256:442a3b45b0c75b072370ce3ea553c50772d1f2c18fefa35c50d97a00de555f4a"
+        ]
+      },
       "action": "resize",
       "temporal_relation": "not_before",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 39,
       "group_id": "lc4_dw1_dev_group_039",
       "filename": "lc4_dw1_dev_group_039.json",
-      "group_hash": "sha256:38baa2558d770120a874ac65632d2be66ba3f3d0f3fb7c64beb401bed10c85b8",
+      "group_hash": "sha256:51d60ad670f8539cf1b60788cf7120b8dba5d72fdddbbf8db5009180a73f051e",
+      "variant_hashes": {
+        "surface": [
+          "sha256:45e41a7b76867f4b6711e47dba285204edb53a80d3beae71e7ee0fbaba9f9619",
+          "sha256:eb504c5f0f5eb0d916395a87352c054b37e6b4b526b634cbd04b2d395ea0f86e",
+          "sha256:035a68e5f6a2b168b6898adbadfc4ed9aa5e610ec7f81e110eb6203a30ceb275",
+          "sha256:b222b074fd93ba6fcaac93c088d0c4dd8d1a834005543864de927a102a123101",
+          "sha256:005cfbe1cc95bb5d6d1c09720e9607dde63bdc48ad09d2f2d40a0f5cb2e2c5f0",
+          "sha256:5ea2ce40b80c7c4c7a35aec1126cfe1846d2c04d4d2034f04fe6e828f4c48684",
+          "sha256:c2fedb852ab5f83b5cb290102c67b2e7cdbea63d8c8657c34cf2bdb01b0b4c6a",
+          "sha256:7d2e2321860c10b44105a6ded38b2dd491d60f74d9aa3768a38c67e2753f83a5",
+          "sha256:5846128f0b6e927fbeaab5deee984599cb8a271321567f4169341749842924fe"
+        ],
+        "multi_turn": [
+          "sha256:107d1e0695e47c26d11f284ec2c53b0ae732ed6bce154c385377d157e876e398",
+          "sha256:445ae07715359b40a4c5049340d94defc255ff9d5841e980d16862a4618fdbc9",
+          "sha256:f08fd2ec0a11ba651f6272cc16194523c5fb86433e0a9af87eb61f695ac47293"
+        ]
+      },
       "action": "resize",
       "temporal_relation": "not_after",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 40,
       "group_id": "lc4_dw1_dev_group_040",
       "filename": "lc4_dw1_dev_group_040.json",
-      "group_hash": "sha256:42ac661ced448ce3732e72ec458060e10bd1e3469b0b6ee5510f6ad62ad60331",
+      "group_hash": "sha256:3936ba6bdb1326a3fe943edbdb52ea5d184df0a9559aefc9446399a8aaf54c36",
+      "variant_hashes": {
+        "surface": [
+          "sha256:386aa418329d56915dc02b1dc09094aee80c5db2b04f66b6df583ffb752a75cd",
+          "sha256:8894735ed3d37be154f2c0d575fc7581edd0b1c49d2bad52d53df43bcc9b7c0f",
+          "sha256:6be2b291e04125e4aa70f2c989117afc61046a45b264d8e8d8a53ee8019cafb0",
+          "sha256:46e8e2d44612990d05b15a6c802eb487cec48fac8ca48e8336f2a5f541f4b895",
+          "sha256:df6e1d33eae6348804ad65e3d77851ef06894fae3eb4def837ca6e29f372bcdb",
+          "sha256:2482bfdbcbe844193e5907521a96306b0b206826d751f70b6feddc6279bb6441",
+          "sha256:463136cccb879d08dc592831058e622a289194d5f237b1f261368ac317c16d7f",
+          "sha256:c03ef9a145431ef7487c2d4220a4c40c8324e4316fbbc0b8c31a1a69a7f9ef72",
+          "sha256:0531af119a000105cbee88013249af211c50303854ed3c1e449baaf8b766c7c9"
+        ],
+        "multi_turn": [
+          "sha256:5f8f46e75ec46db8a814b46c9d12c8b7ebd62b7ee9e7af68fa4b5e45e93b36bb",
+          "sha256:073eee351d3a11c36d061d64c798e0ada2ecf9e763a2279d1d006e837531daba",
+          "sha256:277715db55e622c06a516a7d8df367f2833f904b1862eaa06d4c10bb659c8959"
+        ]
+      },
       "action": "resize",
       "temporal_relation": "not_after",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 41,
       "group_id": "lc4_dw1_dev_group_041",
       "filename": "lc4_dw1_dev_group_041.json",
-      "group_hash": "sha256:d503a6709d872eff63d6df0ea3bced8690b09f7c03edea1d9cefec8af75fa273",
+      "group_hash": "sha256:c45f034d6a3081109a04cc8b79611556d92af3a04fac52ce0f1baecfac72e8d4",
+      "variant_hashes": {
+        "surface": [
+          "sha256:d5deaccd3a9b369d5d8d2872b07ad8844a0968e80a8ebc555b907829a79001d4",
+          "sha256:e32895611f13e37209c1b31bde90f812c0884d67f3ecbd7d321f88f881a9165b",
+          "sha256:616394ed4863d2dc8201a4fc612ee77895da88f7d2ccf58d2b98f927b023bd25",
+          "sha256:f489d524a4d10a98a8008089ebc86dd50bb823a8d78252d490fb625b92539b60",
+          "sha256:44b54b2877697d86b4e29408405b061a8acac8bda78f4b49b6043b19a5fa0626",
+          "sha256:30ea54d081a99fb7936a6a09be9f512b4dff0f7fd74a7ac1f75eba4873d7a13a",
+          "sha256:844393249f00119ffd31e94e9fe74cbdab8e837593c8fd4a34817029eb4890d2",
+          "sha256:c1ba86e57075a11b44f371a1dbdef3cdec7c02f167a0aeccc0d8f6195bef6ff0",
+          "sha256:2b0eabbc34901d0541cc2a73630666789b8f9296a8776fcd432cf7c5dbbe2871"
+        ],
+        "multi_turn": [
+          "sha256:1bd833d7ab4f3222dacd14c80a9250ed377f5681c911c2cb5a656f86e9bc5d52",
+          "sha256:83cadac31776e2fd85ace54e2f026fc48a7a40cadf7fac01ed3dcb6fea9b75b4",
+          "sha256:9c2755f606b73bead56167eb9a25abae2c5b8a6dad29f5d00e91f734cc207f29"
+        ]
+      },
       "action": "resize",
       "temporal_relation": "not_after",
       "gap_targets": [
         "entity_ambiguity_omission_correction"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 42,
       "group_id": "lc4_dw1_dev_group_042",
       "filename": "lc4_dw1_dev_group_042.json",
-      "group_hash": "sha256:13bfad315badbd2bdc6a7786c4312a735930c8eac6090de314cf646519fd086d",
+      "group_hash": "sha256:a550317442ceee2604c553d6ce6aa581da92fca81eb2f23f31738dad095f0810",
+      "variant_hashes": {
+        "surface": [
+          "sha256:da1e36c8b1e706713898d5e579da7d30db1cf92a5ee495bda418959641666745",
+          "sha256:83d84c46c64ec1cf4b09ef5007bfb133a015d9923e4cda84c5b30f0bc45eb775",
+          "sha256:4bc83e30b0fd0bccd5acf5375486ac8660413c6cf5b8fdca6a0642ca37ef0ad1",
+          "sha256:7497bb51ce7820efd64ac48998ab63233d1e456c8f5efa805d777a8399f9bae3",
+          "sha256:fc411892c4180ec4486a87900ecd3d3b764e85b3b75459a87828139fbc8b6eff",
+          "sha256:7d139c10bf153eed18691879e3426e7f46a9b3c2687d717c40858cc9af77d19c",
+          "sha256:94e905767816b488ee40d45f2b875f13ec50e6e121234127f4a47ac80ea5115d",
+          "sha256:b5a253970a7a0d195d7630cd82d76cb994d1b021ff3059353caa7dee12536796",
+          "sha256:c6f7b9eefb389b2f61375aa43a12d72272b9003226b8a7ca096eb3fe529370ce"
+        ],
+        "multi_turn": [
+          "sha256:30a07d46dabf7dbb1236bfc85af6a8f9a66df6c5cd172481e7611b69842593dc",
+          "sha256:86b8b0a35d8f2672e7a779cf9277c998c7a6ed5eb9630fd5ff15b3968044f353",
+          "sha256:d7cc244437bacec33e75c871cf2a560e1afd3d54406cf37c733d604ec0f172cc"
+        ]
+      },
       "action": "resize",
       "temporal_relation": "interval",
       "gap_targets": [
@@ -593,28 +1350,64 @@
         "interval_unspecified_temporal",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 43,
       "group_id": "lc4_dw1_dev_group_043",
       "filename": "lc4_dw1_dev_group_043.json",
-      "group_hash": "sha256:86241983b30e8bf841a10912bf0970df7c86a4ff92984c7103bedba54b92e932",
+      "group_hash": "sha256:129d6c89807602bdbbfa1f7b2bca63a61074616901091bc77f02f45d7672dfde",
+      "variant_hashes": {
+        "surface": [
+          "sha256:c60183535aeb12e59d2c2a933b255fe03e800574fa05c75d11ed57a7276a4641",
+          "sha256:61f608a4c682a7eccf54424fb6e12ec64ceac5e58fc3a74c101e76299aa2508c",
+          "sha256:a99c77ddbd00e54d239772ac9dc2d651bfef7ebac2ff14d3fd533a428b482104",
+          "sha256:d93e7b4aa74cf1ee51dc081822b4df7ab3f37ea3dbb4c2a7b60c39a39d7f7140",
+          "sha256:e1c54a9aa525c7eab34a54f672354591cc350228c0f8029787a08bd18a3b24d6",
+          "sha256:33b04250a1d227fb34a8a50c75f7ef0e05ea4946870f25692ef49b725f3c1d62",
+          "sha256:0851303e40ab1b7804eb1ac2dc6f6b539352b7074a6ccb4b2bac24448e3b9e9a",
+          "sha256:ccf4287c38d1cb0da2a50aeaacf61ff956439b13c3f1293f97a140d432fe5fbf",
+          "sha256:bc189e945f44f6a73c5f88cd4988a1673cabe3c54a6166463fd6daa7a0117d46"
+        ],
+        "multi_turn": [
+          "sha256:030014ef1b43ca2ccb354ba44abde9d5a9237676b1f69a517acdbbf413f135b8",
+          "sha256:105f473af4e40f531d066f0d0e541652fa0defa3855f4ad1b5ba5f0ed3017791",
+          "sha256:5037d72bbfd34017ae39d3536487f4e9b121eaaf9fe10e824fefcdeb286cfa40"
+        ]
+      },
       "action": "resize",
       "temporal_relation": "interval",
       "gap_targets": [
         "interval_unspecified_temporal",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 44,
       "group_id": "lc4_dw1_dev_group_044",
       "filename": "lc4_dw1_dev_group_044.json",
-      "group_hash": "sha256:ecef1903ac3077d44ac11c3709393752f0f1a5dce0889b668f95ec16ce9bd4ff",
+      "group_hash": "sha256:48d5e19e25f1a0ac163503eb6011b68b4db2651887ede6c07aa98dcc4a6ee38a",
+      "variant_hashes": {
+        "surface": [
+          "sha256:0c682ffde2b4d3979ce6004b68e5853e16a103d5d28666eb885562c54dce73c8",
+          "sha256:db7c9d934437731ec4908ecb2f8dd6c5d91a299237732806bb77220ac34a8bd5",
+          "sha256:659a995bb5b59a6d572262478fc7297ac3f8d4f2eb7136bdbbc25f93e3a2a2fa",
+          "sha256:fae4d495fff1cbc35b0d2bec3d541885f804a3da747a551bcff5aa22f95fc31d",
+          "sha256:5cfe439da97eaff00b8a3291124f75da62843c18033cb83676fde4ff2544ff6a",
+          "sha256:16d366e52d4ca588df01db4cac48ee0cf8a4fce0fb351ac6bf247ce14a3207d9",
+          "sha256:605af8bc45cb45e81f99b60ae80cd239cab125a49a1f2e7103d27e8134e5d59c",
+          "sha256:a9aa55aa43690d7004f88011e387a7283931c2401e217c7e6957c9388eb082e5",
+          "sha256:7f37d298310cc4d5b92dc0dfd99a974361c9e3b956f584ca90a6aee7c81d7070"
+        ],
+        "multi_turn": [
+          "sha256:cfb61b0886c8d3235a11abcae55d9f1d28adb689cc41e916d8db168d5acbcebc",
+          "sha256:792e12fab4e943eb04a2ad8b40e44953236dac5fb0ec4b9e9ee811dcfd1b5eb3",
+          "sha256:26e42f61c3cacd95b82193c116635c22f7df983f254c2a14d89834044914b05e"
+        ]
+      },
       "action": "resize",
       "temporal_relation": "interval",
       "gap_targets": [
@@ -622,41 +1415,95 @@
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 45,
       "group_id": "lc4_dw1_dev_group_045",
       "filename": "lc4_dw1_dev_group_045.json",
-      "group_hash": "sha256:1c5bb45e32b91d5cb40837b2e4c48b431d75498e8ac00f94770ab1108a083063",
+      "group_hash": "sha256:d6181eebe64a132b0d4e079989c5da2f1f31d0e4f174e0a42db50d1766608c7a",
+      "variant_hashes": {
+        "surface": [
+          "sha256:fddd0ddc83b0a1d44271bf7265bcc3ca3b82bef6c5e3ee4a923ce9eb229af9f3",
+          "sha256:29db5bc1630de3d3e4d22d317d8039f41a078bb84602564411f38f18dedda3d1",
+          "sha256:2dd66c9b6140fd8cf9604d48eb13838e539508e3b0f33457686c5afd3bbdbe09",
+          "sha256:8a5fde71397e10caee396171ce0c0d4a02b478a4acb3ae7b3bf1e8fe36945432",
+          "sha256:3d532de6542fcafab9a5f31980e2b92f5ed222915b59d894d01e2aeff7f687ae",
+          "sha256:98c6c1facc704d63f98f1021591dc076f0ca81442e5fd96e565e841be6fe2cd1",
+          "sha256:5f8001da621ae128f540c1e60352cb470c1f1056525c3251b74ebaa99099c367",
+          "sha256:8df279a77d481cc728690a43dcc585e4c5a5b4a7a91f050ab63edc896198b786",
+          "sha256:db1a987b928c3de85aecd13c91964df04e07660d3101d67607a47827488977f9"
+        ],
+        "multi_turn": [
+          "sha256:4ad1b7126ac80d910e5cc52b4024cd4aef42f5ee68fe57d5f1e88d18ca8a5150",
+          "sha256:2749d0a632eb3d79e4104efb11493d430c1054163818d71538bebfc4350257aa",
+          "sha256:1ed752c70c7e785589cec24173dffef1b0e17e63163e8d2688952cf9a589fef5"
+        ]
+      },
       "action": "resize",
       "temporal_relation": "approximate",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 46,
       "group_id": "lc4_dw1_dev_group_046",
       "filename": "lc4_dw1_dev_group_046.json",
-      "group_hash": "sha256:557d0182b1d5bb9d9e4b90869ca12067b2392f55075afe239824974042f8caf9",
+      "group_hash": "sha256:43706a19a9b2f44e2de7550e1c8bc84dd7ea1cb50924e123793d57df95d28dae",
+      "variant_hashes": {
+        "surface": [
+          "sha256:fd0fef8ea60d7f71fcb5d8cd2822b13367bc67f999313a176b3a27c63011b9cc",
+          "sha256:817c08d8472aebf99331841e684a649e18e9a78bd9351b01713963ac1ecad9bf",
+          "sha256:f9ed0d53586379bbcd7dac993fabf8b0b2edc6e16b3946579a6e81d3e62ca653",
+          "sha256:252ae01ad8b01c98af874ecc01b50e34617a0bba1d7bebe90ea75033c9e6a279",
+          "sha256:def9d487e6bbcf0aedfdf8bec182e5bcbfa411be29191d5423357af202ac9733",
+          "sha256:ab8e870f0d462062cbe6ff3222cb2aa39547250568d35c63178308a8232d66f4",
+          "sha256:4729ab0fea1279cbbd33377f9fdbd30eb6bb597c84be65ca6d64d1a0b10526a2",
+          "sha256:0cb9d60ee51b817bf3f7ade35d6610ebc821f6307facadb63ce853e18709176b",
+          "sha256:f533631139faa93de792ff56cf3784924a0ee8299dff7c2cf09774ac903b243f"
+        ],
+        "multi_turn": [
+          "sha256:08b37be24d2a0a8f2257d71bdd9e8b0f5e79034a87c588daa7d29edbf977f882",
+          "sha256:728a8899719781b574c39cceace5d138ea7e65874d1503b9fa0c97c3f3f46c73",
+          "sha256:1388ad42abc1bd73539d76ca220ca84ebe20c0c57ad320eb6e942bd8b09f4fe2"
+        ]
+      },
       "action": "resize",
       "temporal_relation": "approximate",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 47,
       "group_id": "lc4_dw1_dev_group_047",
       "filename": "lc4_dw1_dev_group_047.json",
-      "group_hash": "sha256:e960d6142167e85bb43190acf4be7d20b19cab0c4ada027cf054f6ba7a379439",
+      "group_hash": "sha256:ffd347c8489c17e2a0f3c09f347d57cdc23e60034d883d98459e786dc4fe496c",
+      "variant_hashes": {
+        "surface": [
+          "sha256:fda07aac1e1b358e8b29018cbd6e586566c34c83d079c871b2b7e5bf265ec6c5",
+          "sha256:acfe54315dfeda4ecd0457d0a8dbc3e9c34def33b1e0a360c77f3efea94cdf37",
+          "sha256:014d9b81e5894b9550afedfb853822def0306418d9ad565001ffd1204c43afff",
+          "sha256:9c47a8dc52f66189d3f20d0dd1835d65cd09512bd89ce6b7ea5241024520f996",
+          "sha256:f71b3ff80cbf61a49365c298d82d2f6c79235b51f65cec2dc138ad9ef06e9162",
+          "sha256:62ebe3c32bf6e2726a51a66b18f6ef508acd8c3a590c13702f5a35846bef2221",
+          "sha256:8abf782948debea4ec8151d279a901788c1bc87bc124e16526d3bfded6f03c87",
+          "sha256:9d0406a00802c638dd9598abdc9e5b38f558c1213c15a0e780d9fad9a7e90fad",
+          "sha256:84732f8a02770683f6a40d1c32ff999fea6c41d5988ac8dc6b1d21744d48a7fa"
+        ],
+        "multi_turn": [
+          "sha256:faed8d7219ab90d5b152e7853fc24a391376174ac50e7753cb6aa3261866237e",
+          "sha256:9368258612c776d6a884b80fae9bd90a6dee6d60c5a6a46191333d8e6eb0f123",
+          "sha256:8ffa4608d0b47c7baccb1c4bbf2c6ad5932ee3a08de8f76168e6fda09f5771fa"
+        ]
+      },
       "action": "resize",
       "temporal_relation": "unspecified",
       "gap_targets": [
@@ -664,39 +1511,93 @@
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 48,
       "group_id": "lc4_dw1_dev_group_048",
       "filename": "lc4_dw1_dev_group_048.json",
-      "group_hash": "sha256:4727fdbef0ebbef31b2c10ac54e9c5219fbba9629dcd0a34f3151ec97f36e43b",
+      "group_hash": "sha256:7e7e1736773fbb5ca03dce91da85d134b97c84dfe80ff0c61280e85f9725d86b",
+      "variant_hashes": {
+        "surface": [
+          "sha256:9cb1744b4234738c5c416a129072ebbae861ccf99e6a297bb91c8207ea1e626f",
+          "sha256:7361535bf7f66e6b7c636a42e687e1086c6fe66d429619d8debe0424dd846414",
+          "sha256:0d202287ac86af79c5f11273e02e9c1501bc674d5dafadaef3c3f58e9f6a761a",
+          "sha256:9d3319f1524cc20dce94a0fee5f9b9a1197f764d8ee5e3bf07ad989fd8716ad0",
+          "sha256:0680d583d93a2fd62847221989f293c8fb0cd59316baffb69a8bde9490f0f871",
+          "sha256:260fbf9ffc5bfdf6760f5a21a342c30fd7f508a0a953e1dda034063dcbf866ca",
+          "sha256:6e1db6581168a50168ceb9c26121ec91f6a2f376d861a4ac72917a3ab0bf3247",
+          "sha256:5132ae6e7bc1c455c31f0ee0c2bbe06f24e4db004d3b4c677940a593f9f257cd",
+          "sha256:fd6cf222c59cb23755e4e1d4652616ffeb97cf0dbac7c04368489335c9aaac5e"
+        ],
+        "multi_turn": [
+          "sha256:a1d43aa07b898e91484290b3053fe5e05cbc21ab8f8e4c4f3d3da6c9b494a105",
+          "sha256:833e37ce728a4932b15c0a44c382aabcce07cbd6dada03a6e1de5587ed7c1e54",
+          "sha256:1c8b07d35d8fb66dcc14b83ec3df60168bc7692353cf25d85420ff8d03b38ace"
+        ]
+      },
       "action": "resize",
       "temporal_relation": "unspecified",
       "gap_targets": [
         "interval_unspecified_temporal",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 49,
       "group_id": "lc4_dw1_dev_group_049",
       "filename": "lc4_dw1_dev_group_049.json",
-      "group_hash": "sha256:deb403118e9e65b0cc829a3b35e6d40a05149131dab4a24fb04894879baa5a7a",
+      "group_hash": "sha256:bda6b175a21d58cb120e961272bf1adb941fb471fecb817a196476ae5b03c12d",
+      "variant_hashes": {
+        "surface": [
+          "sha256:f2685df1680d573beb4a8f1869f00e7a6002bb10b741c0db9ff014750cd2d8d8",
+          "sha256:4789cfb32825c4aff38c5af1237731eff07f0fb8db12d30fa4a8143ef6ac5f2f",
+          "sha256:17a12fa247c6e9e78eb329f949e03041ab3ae42c2c9c022ea374d1a4dd19866b",
+          "sha256:fe8e2fe8b613ae935a050f009cb06005bf6084f1834929fee770daaa88312f96",
+          "sha256:efda3406f10b5ae8b74b81d42d389a2f528456d4c3e7529999cdff083e04dea4",
+          "sha256:0f116d81251e0b1c1e54c41f5faaedeab3b3b3db2823c9d2d8a4f379aad754cc",
+          "sha256:427a9e4527213a7bc963ef515951b9ae51f21a916f364699cc106dd54796f964",
+          "sha256:ca7584250af4cb78d691e8af68b5a684065fe8ade8493a60ac4311e4ba896777",
+          "sha256:156f49392c357cc61e8f1394d6858d324d39d77cd011c39bc6b6fd3640c1d2d4"
+        ],
+        "multi_turn": [
+          "sha256:f53c51d7829c971469566261a8986a0413872e2e98029ab8a5edc74931289aaa",
+          "sha256:ff13a3f5e669f74d82160d3dff36ca8af2b2dcbcbf9cd35cd5a82da9f8cf971b",
+          "sha256:326b20ec278caca6fea212add4774e53f5908b83d7f4ff74231200eecefec378"
+        ]
+      },
       "action": "cancel",
       "temporal_relation": "exact",
       "gap_targets": [],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 50,
       "group_id": "lc4_dw1_dev_group_050",
       "filename": "lc4_dw1_dev_group_050.json",
-      "group_hash": "sha256:a8221707015f5a453ec9ddb554cd17adea08f1742fb8040383717159faffecc4",
+      "group_hash": "sha256:46d06cd7db0861dafee6726ff250fe77de70a708103cafb35f7d3758a4cf5350",
+      "variant_hashes": {
+        "surface": [
+          "sha256:cf5b645c3bf77fe4010b49b06d438ddf8d1806e8ad1334b68246e0a9deba6390",
+          "sha256:cd9ac2edc750a35ce98733541bf38a1ad3d623d37006eb84cc2ecc56382e4dbe",
+          "sha256:a8ee23390690f0360eb83f9f94b8b76569b47dfd1defb67fee8a71a140f442c6",
+          "sha256:b647c323bd4a290dab3f0bedfc6060c5ba89959ad0836020c93f50562fd3f30f",
+          "sha256:cf8d486977945aba08f5bfbdf231075ea1f7f12e819f643a439c555b776de60a",
+          "sha256:47b684626d2775c0171264a64f9650f7423c47e9de69bd1dec6ecbae40daedd1",
+          "sha256:dac5b3f18f0f65a8901bd9d0a3db949691aacc5bf44d5aebdb8e319f21d8b576",
+          "sha256:393a05dee37716f2ef3a330ab61a262e83349887273b8b2fc9db69474aebe713",
+          "sha256:973644abbeed8968f7cf680ac44aee829662fff0b883d45bea7b6d51f33586cb"
+        ],
+        "multi_turn": [
+          "sha256:2383f500a1d51efa75d536e46bb845ae133187d57532e1d33dfc8a98b26c398e",
+          "sha256:e1550d72daebd283acad6ae8a6e3677e3d9310e768d67a2bf11d058bfc82cf2c",
+          "sha256:9df6a96e70288359b6ec3b382ef626582ae15740ba5ea75340164b22d3155099"
+        ]
+      },
       "action": "cancel",
       "temporal_relation": "exact",
       "gap_targets": [
@@ -704,108 +1605,252 @@
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 51,
       "group_id": "lc4_dw1_dev_group_051",
       "filename": "lc4_dw1_dev_group_051.json",
-      "group_hash": "sha256:b12e4f780e7a2bd4676371943d2574a276fee05030a5a379bf2805da1b4b372e",
+      "group_hash": "sha256:854c495240858197e1790e91102c24b9aeb98a266f1746ebb8fad1f0bde562c6",
+      "variant_hashes": {
+        "surface": [
+          "sha256:d24d0952a959581f4e58eb3649059f104ff9bf9a27877deb913820577fd51a28",
+          "sha256:421348c8e7de4d7bd5c2da06b9701f107315cd70e5e8918191c1eb39cd08a2d5",
+          "sha256:e8f7d2a867392c40f4be30c7a9dd76e93624e182203d54ab420a838f0c489dac",
+          "sha256:0fb11188afa3b76d4d9eaeaf62627b244a5591d952b4264ad9d2f4644c7c02cb",
+          "sha256:3bd8989d574476e60f1119a9fead96b050faedccddeab459030c27899d04ea88",
+          "sha256:e46ae350d8b17531c8fdeda949dd35a194161f124da75a92581ffa03a9e5397e",
+          "sha256:9512b257961d10e3a94fc3d3c1c1d19a0e9eae247d74397b39a2f9e82fd6866c",
+          "sha256:f21ffa2e5ea6ff6b34a058a724f5971b842c50b3bdfc202b1f983d8360450649",
+          "sha256:d4c064148f4301cc4f1f95c8817d6c5fce10605b0841c0615683117f73b875e3"
+        ],
+        "multi_turn": [
+          "sha256:4d83c4cf65ea0e55e66da06eac794786ae68adef93e1a99a3e1056a35e706809",
+          "sha256:ec4fd6fc47bac41d3397a0c9fb4562da5a1cc9550f42860761e023e461a4e40a",
+          "sha256:54bece6cc844c01801081350b739b367bd8568912d3927dad885992027291487"
+        ]
+      },
       "action": "cancel",
       "temporal_relation": "exact",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 52,
       "group_id": "lc4_dw1_dev_group_052",
       "filename": "lc4_dw1_dev_group_052.json",
-      "group_hash": "sha256:667666a828a526bf842c753d1595035d02e34030d3ba7abffaa196ddf8465d1a",
+      "group_hash": "sha256:1c62c704c898229e14d435e45bea7824968a359e87e31aaac8689e685435ac16",
+      "variant_hashes": {
+        "surface": [
+          "sha256:6425fbb4ab65671ddbd1f346985a59c632bd118cfd19883a36bad53691188f3c",
+          "sha256:8c9142522621422fe5b7191ba78146b6408a117854bafc90c8db6871bd0ab7bd",
+          "sha256:62a2c2ff1e10cf33a83681c7b3629fdf3335f37b6ca27a6a240b2683a8e84aae",
+          "sha256:8dd6285196a5386a9dc71f3e627783dc5e01c41f284357f6730640fdd84ef80b",
+          "sha256:3635bf1256cf6689de59262faf5940526d294518782d340710dca20b6cda3a1d",
+          "sha256:b361bc0f685fc376df97e04b9ee4573debdaaa03b5cbfb6559499b7001eea846",
+          "sha256:47f2f3ca0590497b8a8afa832818a3b0fa8e79278bbaa14e2b817e99c52f7c35",
+          "sha256:887d3f2f5439efc07818f7494980e6df2b1fd57fb191c4ba25009163277d2ef0",
+          "sha256:622eb356fa585246735999c639e30e994b47e99d9b5ad5cec46c9e12350a67a4"
+        ],
+        "multi_turn": [
+          "sha256:34c445b71964f3239fb43bdc26332ed19b6a9b02008578b4d823f62f360994a7",
+          "sha256:5e808735b09723fcbcd9c4f0a23f8c097a49e8bb7c2143705c8d12cfb41f7067",
+          "sha256:df180504ad1e9013f1fcead42eaa6db895452e1339e64f6114b5b5ca9d0df334"
+        ]
+      },
       "action": "cancel",
       "temporal_relation": "not_before",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 53,
       "group_id": "lc4_dw1_dev_group_053",
       "filename": "lc4_dw1_dev_group_053.json",
-      "group_hash": "sha256:c58a882efd0820ad94e7f051270dd08dacc4f0085098668c0087ac4fea20d699",
+      "group_hash": "sha256:f86412ecc85c8e7008030c81ba3b25ff9f20d5cd45ac9e00f1efe98b0bc08bd5",
+      "variant_hashes": {
+        "surface": [
+          "sha256:a808136ac946f8f3a21e8ea5249ca65c4aea17ee254ce7292a68f3514d5e69c6",
+          "sha256:22308d2cb5fb6d768fba2bd70e38166930b3dcdef16765255e179f650b79d3a6",
+          "sha256:395d107cff344dc037cbece0ee3622ca13405229ed56ea9c98a420cacbb17dc2",
+          "sha256:a07dab3e795e158220c12e291493d2315b125ac7af44427d84c91662d2dce26f",
+          "sha256:dfb193497f6cf7841b2fb1b0aaf916aafb299d3ed4e4f81355c8097fb6d88739",
+          "sha256:7f06e6b43d5b2fbd365847a924f2350124d7d7e61057178e95ecead45440becf",
+          "sha256:d4bcc6d69362017f3c44210ce5a9f540b167916d5af1b266970c6416e88d6042",
+          "sha256:235de3bc816c7d226b34d620f1c1f2ecb1d1450cfefde0b20d29511f0f204a19",
+          "sha256:b95beb567e9a2a4070a955317e3e3688ed285d84a61a74d1943c7d5c6558e961"
+        ],
+        "multi_turn": [
+          "sha256:8f4a595f43b0525878d12e5facb65a444c85d95bbc63fd7d92f639ec0745b483",
+          "sha256:65c69458f2c634f8823004bad9ae90301f75563045a19cc41ade34be12ca5eae",
+          "sha256:ea259def677782ff87ab7ee44b8195614006169f7d66be66afc310abf6436493"
+        ]
+      },
       "action": "cancel",
       "temporal_relation": "not_before",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 54,
       "group_id": "lc4_dw1_dev_group_054",
       "filename": "lc4_dw1_dev_group_054.json",
-      "group_hash": "sha256:00b80255c0b09711dd03635f6ca59cc52d4e42a33c36d007b5399a7bfb842677",
+      "group_hash": "sha256:8189204f00654090ba2b7ac4275570d6b816081490e7a5d150a325039a874a69",
+      "variant_hashes": {
+        "surface": [
+          "sha256:b5ff868739be571d3b00115ab1f848534cf8f9eb316648aa9f1a0d0152e0b4fb",
+          "sha256:17584f357a1ac114d87b92a329c36191c5a8de12b2f6db6da1dff5bb02bd3829",
+          "sha256:ad30b7a77c1d261b4d004a288434d099f9a5980cb558eb8dd61406a0f63e38f8",
+          "sha256:17daa0e2714c7c87740a45a23c3e3f7f72a759331c977c404ca17f232ae6d117",
+          "sha256:fdd8fd0750d66e3369f951e46ecbcd5133e6f2d88a4465b6c5e665fcd87c94da",
+          "sha256:9cc8ccc4d746eb9e20a194a2f1f636c2cea665f1f8bfe0f38e063516a7d23574",
+          "sha256:3c9b1237252a06a9142616772f927a8eb1947a61deeab670975e1f131bda6381",
+          "sha256:65f5b07fe6de05dbb170aeea7fd30a0c1f13dcdc05a5334f674f7296f83556fa",
+          "sha256:b1bd77601a43b4103cd0a1d6ed8d1c9f807e894a1ba3c1101238dd1cf825f9ac"
+        ],
+        "multi_turn": [
+          "sha256:4c39a34d3cd2eba3a307ee2b81d076d7db1234fea5e3aa3804798a3dfbafb465",
+          "sha256:af59ebc3fa24e6f9e22d1ef5d96f067293fefdd265ae5ff76c57e453335fba51",
+          "sha256:7fa2d3392d592b1eb2fe02f8f21c01cba8f8bd5e6af3b7a5cd745d074ac18d5f"
+        ]
+      },
       "action": "cancel",
       "temporal_relation": "not_before",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 55,
       "group_id": "lc4_dw1_dev_group_055",
       "filename": "lc4_dw1_dev_group_055.json",
-      "group_hash": "sha256:bfc3440893dc7ecfdbf1bb628541565d5847d950f679306e8e5331168895c2ca",
+      "group_hash": "sha256:dd284adf8e6faea9567844337aa1c14ab125b5e9f756d970232ca33cb0eb4a36",
+      "variant_hashes": {
+        "surface": [
+          "sha256:713aa67f89469bdcf654e35b9268ebfc22e924eaf55506d33f13942d7f06a932",
+          "sha256:98c8973f7273a98d8813e5902aed214018bd6e967f4d4e2415105f1638536c40",
+          "sha256:668ab911cbbcf202f58ac59b7d0faefb302b7f96cbd749050185925bc67e5ec4",
+          "sha256:4a86d0468b441744e7d5cf48a45871e6f8a0ff653a03372c520bef530750a4b2",
+          "sha256:17aa2d4a8a39119a2e7e83bd769ad1689ab2aaee00bf0ea7f4bde1a996b65fc0",
+          "sha256:06ee12374ecf2367f4af75aec6259d6341eee62dad2e87097d919b73db1eb04b",
+          "sha256:6e0ee3200fd4e251d16060ba4cada33bb53e3534c20bd7266ce949265fadead2",
+          "sha256:f783206c11b44af5d74cf4ac376b07507c5d15cc41679b0053362237215b468f",
+          "sha256:851546a2060a350fbd755aac15a54fe65e7d394b1bfb61d3a1e992f36172b8c6"
+        ],
+        "multi_turn": [
+          "sha256:a0f0130de39e0ddefde468e5f39cf4499260d1473935b3a173ed1aca249d1e57",
+          "sha256:5a345591909ae77f1257cce2109e0cc561b997ba238fda89814d6a2150483fdf",
+          "sha256:71780ca8d22f7edd30075700ab8485ff5354775d151c813602982deafe046277"
+        ]
+      },
       "action": "cancel",
       "temporal_relation": "not_after",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 56,
       "group_id": "lc4_dw1_dev_group_056",
       "filename": "lc4_dw1_dev_group_056.json",
-      "group_hash": "sha256:5dbf7e83baef15dd2e5769925e8d48f3d6e260fe1e521612b7182758724f8f7b",
+      "group_hash": "sha256:fa11888a89dd42e4e5287ad3b0249dca4b045788b81298831ce3204fe6df4776",
+      "variant_hashes": {
+        "surface": [
+          "sha256:6c753273f19321a80784f74de182b3ada1a20c37faa29a45e03d5c1728ced8dd",
+          "sha256:c348297f067518f062052b0e4b31b301bd05c7d91750c01f78d0b51d3ba9a455",
+          "sha256:d9785aa789b8fb05defb9176b52d49b9493e02cd052a976fbf8a0f53d0b3c954",
+          "sha256:24a05c253e0cc500f7dae71a65bd394eb85171bcf9adb8496cc3d7cc31506f6e",
+          "sha256:8f00866ef3be91d96669f27b3fb14626d2d7a389091c4a9c9937328bd9f4cf4c",
+          "sha256:866b777d6479fff9f930496f78cfa48e7d88f46cf18b229151aac9bfec90692f",
+          "sha256:38f46a233b13c937080dbe920835e9e53bfaf0190aa0edc81dd8e598d561e4d1",
+          "sha256:896c8f71fc4dd603b61e77ea2eecae7dd82ff32e212a99828a87fac57247403a",
+          "sha256:f8ea2c78b1aac2693093026425ccb39b38cf889b5dedd82b507dbecc15891377"
+        ],
+        "multi_turn": [
+          "sha256:4b501bfeac198bf00efc201df00937abe6d04dd17ca1cc8b04e7c8f578cbca31",
+          "sha256:9d71c64904b5ea64c130b0f02c90bd4a361437f0aa86387db0574c7a08191235",
+          "sha256:5c644273021d1f7ec214c85dd4ef956a1f17eef5e71855a271d8bf29ec53ced8"
+        ]
+      },
       "action": "cancel",
       "temporal_relation": "not_after",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 57,
       "group_id": "lc4_dw1_dev_group_057",
       "filename": "lc4_dw1_dev_group_057.json",
-      "group_hash": "sha256:a895162ac1e8d1f07ee59e7cbdab0f231aee1f6d6b8c4c2ddeae1123db18a60f",
+      "group_hash": "sha256:53b6f121f0bd1f22cf55978f09fbc6074d0f2d6892f56cf96347c551df9dc346",
+      "variant_hashes": {
+        "surface": [
+          "sha256:8f2ee45bad261f07474cc5f5f6699de541b0bf62eab4309a1b2cb800552a8ad5",
+          "sha256:04fbdbfc0b01ce52224573b213ffd262809024c900b9682abbb0f0a781021ce8",
+          "sha256:0d418c45ae61311b66550c6532e87d9ec92e3fd691f946d3eace72e80a97b73e",
+          "sha256:58964af8954e3918f519d7b8f9b51594dd35c002306d5f19d2750de94cc6e642",
+          "sha256:fd47524f66a13833f0467bfded322ba838379aadbb75ef31595b9824164cb361",
+          "sha256:ca21ff639d34237f9e7c6c2025d2f616490e1a274df5f811b24445ee9307f122",
+          "sha256:2751079660fac2ee3520bb30b6d7b9739ff4e7a291a668381a9b9c2eac7f1f8d",
+          "sha256:cbf484a5ba26eae6bf3ea648275398306ac74d3de6f59df42c92c2d8efa1441b",
+          "sha256:765b508113b285d5dfeeb99ad2256bc904f26758595781f452208420cde31900"
+        ],
+        "multi_turn": [
+          "sha256:64ff125b896975dfb6b799175e1643679509ce9a2f61c7ee837b66d237f6e096",
+          "sha256:d717c7bd9fbaad26e53739a9f4cccac637dd560cfc2a3df847c26cc049787caf",
+          "sha256:763af715fdacb1c3a22dd52ba1ddd02d6e932ce6bbf24c345a8ce42f2d437e1c"
+        ]
+      },
       "action": "cancel",
       "temporal_relation": "not_after",
       "gap_targets": [
         "entity_ambiguity_omission_correction"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 58,
       "group_id": "lc4_dw1_dev_group_058",
       "filename": "lc4_dw1_dev_group_058.json",
-      "group_hash": "sha256:03bbbc11e9dd6ba4074c9b8bcfb869126025b073e0bb33112b0eba9fcbaddf64",
+      "group_hash": "sha256:c30ffe81f6d6c416cb079a3103fd117f218fca9a0c653efafdd410db4757e5e2",
+      "variant_hashes": {
+        "surface": [
+          "sha256:f89861a13f305b24ffb1be77f44e5774f0340a487d4e5df89a58b983d76d081c",
+          "sha256:89f0b14485f1cad55d3dac40f6d2f212a68c5b5564fd88e3e87bb69d67c9817c",
+          "sha256:7f820925746b50922766900a22f41c9fad33e42a27f2b49de954f3ab380b849e",
+          "sha256:58028f9abf9e766722e4d556f10fc2bc54d2333a7d58907fda59c0c0e97822de",
+          "sha256:f88c22521ad5261742b578212b1ebaf2f4c3936414250d74d08842c5b4acd690",
+          "sha256:d1b9dd6aaf7b0183045377bd71d058f714c1b4e4fe3492819390e36651a0476e",
+          "sha256:a94d1e7bc69be7fdf8ddf0db3c38aa7c26f357708ff716506d384416358d0d57",
+          "sha256:fd08eb821653d7918a5d4d6d915f5e3950bed70867346b96a95e7c371e72bb72",
+          "sha256:f6ad56d1af6e434ad49a976fe8eb4c557a94ecaddffb26c51391788f38291331"
+        ],
+        "multi_turn": [
+          "sha256:85d302de99407d93ab8128605f77acc356a6d2d8abd994ed028f91ece076ca7e",
+          "sha256:556fcd1c855e9dd89e528fd9cadfb19df36da1f7c40d5ddf5c3dced4b7aa9822",
+          "sha256:b03b0b787f6cb674e60895313d94a30abe50fb60b85e79ca91ba7ad1be1db152"
+        ]
+      },
       "action": "cancel",
       "temporal_relation": "interval",
       "gap_targets": [
@@ -813,14 +1858,32 @@
         "interval_unspecified_temporal",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 59,
       "group_id": "lc4_dw1_dev_group_059",
       "filename": "lc4_dw1_dev_group_059.json",
-      "group_hash": "sha256:0fdd70bde7432cb7b700bfc6657c31cf4fccd97ec80fbdf518c6ec172e6179e0",
+      "group_hash": "sha256:be0f6bbcf219eed3c42a9d266fb14bf0d0bd0680efd84c295bc30893c894d5bd",
+      "variant_hashes": {
+        "surface": [
+          "sha256:8fee83d57ad68c26c5b75ffd46920e04009b9296d03e17d2e87a861dcc64aead",
+          "sha256:eb7ea0b5b7ff5f611fb8c4dc5a7e77b2d7515a2df9dcec9a5e9abdb72b27a2a6",
+          "sha256:1e2d7cb7b46bb856144eb27a74545f5efee18674f82f8f04b1552a5704ce3068",
+          "sha256:a41daa08167d2595834a613b89cac87e58c1cbe57060988f67c97d1172cf0849",
+          "sha256:7cb37b2426e57d52d083a07d633509bcf1230e7a019bc029daf3ac661c0109c0",
+          "sha256:8c9608b3b101e543b95b4bd315bc034329fbfff855a54c25bc99b458dad4b47d",
+          "sha256:fc0e3bcf8138ac044495477e1d6d72bcb309efeccea4b721877bc94368cc5324",
+          "sha256:c3aa6eb7ae79f9b3c2745cb6750013c9833d8f709b68d85699d90567e85c0d59",
+          "sha256:55cc651290d37d1f21e5dfa805822180fed1f0b7577acd4bbd65bf9c840008c0"
+        ],
+        "multi_turn": [
+          "sha256:c58df2d8237ff2635440c8159b42823bef45fbb7a3e8ab9ea28f9de0cd9684cb",
+          "sha256:f2abd1d428d518c58415117022eadced6954bee8ed55bc5e3c63a59e67ac2b6f",
+          "sha256:4d85222e558c878b343720c21c6fd7b50b039e670cc37353e85580aa2eccdf74"
+        ]
+      },
       "action": "cancel",
       "temporal_relation": "interval",
       "gap_targets": [
@@ -828,55 +1891,127 @@
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 60,
       "group_id": "lc4_dw1_dev_group_060",
       "filename": "lc4_dw1_dev_group_060.json",
-      "group_hash": "sha256:2a5781b4d360bbe27f424a8e256601df86ac7955d482c17d057a50a3533e2a76",
+      "group_hash": "sha256:cda8e340a5a6906eaa610e882c9c25f83607e8e36975a25459cebf593b206e2b",
+      "variant_hashes": {
+        "surface": [
+          "sha256:89bbcd4f4ca09b97b4108f46303056234e83441e060a4e64319e4a6d8ca3bb81",
+          "sha256:4b147cc945de4848998a680aa89b7440b38086f106d33815c379aed3aab178f6",
+          "sha256:3d3fc68502e4d443ef0556fde195941e8e06a18e355498387c10af8043693e09",
+          "sha256:77d352e6878ece9e68544d4feef732f7503bc36a7c2a874da2dd38c3d5bdfc6f",
+          "sha256:e01855f6a042cb911bffbff3f722fd9a01a36e838eb3465fed0550a675691e07",
+          "sha256:bdd133b150d4af5eb7590292103977845dd781223e95342e9f774008b40f9a26",
+          "sha256:ebdd5471a07e3f1d6d923174645539fa970d95cad668007c22c7a251a7d02c81",
+          "sha256:17098a4402093fca2b3a49939078aa1d0942698b8cf0c5b04d953ed4cde7669e",
+          "sha256:c78bc92ae711c5ed4faf1fce02e2b2b0571cc835efad9b8edbb156615f77783d"
+        ],
+        "multi_turn": [
+          "sha256:8c34a2db7c4f903034fe34bda3c591dfecadd362a73c221a5cfc265f388d07b5",
+          "sha256:74b66bc3c84e53767103586fe182ae7c0d9cf72465c2d43612a64f21c30ae942",
+          "sha256:aa4c0d8650cd7d0911827f2d6bbe63b95de8b1d75955619971d54aa02e5e9ed8"
+        ]
+      },
       "action": "cancel",
       "temporal_relation": "interval",
       "gap_targets": [
         "interval_unspecified_temporal",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 61,
       "group_id": "lc4_dw1_dev_group_061",
       "filename": "lc4_dw1_dev_group_061.json",
-      "group_hash": "sha256:eb6626d1a9b1b0ab986000483f0b340a4cde209ff78ba363996f2dc86da454b1",
+      "group_hash": "sha256:2dd766946216db6041af43b31890a435f1710ea82793ed998529a0c0964bf7e8",
+      "variant_hashes": {
+        "surface": [
+          "sha256:9e6b4e624d997fe57941e7a33f51bcef6018394f45f7cc829e3e9065ef125bb6",
+          "sha256:64c000687844b648aac4de0190944d9679a7afbb26f90b7ebfb8706f6686c47b",
+          "sha256:a3f8835a5e763b8ed015b6032dc03ee8723495d3b7f7e5d1b8a03cfa48d0b97b",
+          "sha256:51bdc0d9dd9e51b1805ffa5c7af970d1b4fc7f01d049bac1c6acccea8dbdd296",
+          "sha256:ddbd12dc716ed618a2abe8c89cf9c11d10c69d9684b625e0e4dbfcb692ba048f",
+          "sha256:828dc5d8a02173bc304082eb2a50de6aca3f0002b82c4e5aced164caa196945c",
+          "sha256:160151a647aff735800f9f556b53df3fb5fd594c3d2cc876b92bb1e1083525ef",
+          "sha256:0744ff9368cc5bdf4bd3448a1dd990b1019fb6a7141f1e6b41b319802e781de2",
+          "sha256:7bf0b0ad660cfe506bf91597854cc9bcf64d5ed23e92b8070c9d2f13c538d1c5"
+        ],
+        "multi_turn": [
+          "sha256:dcea8b49f5a64a0f1e0a3e8abde3670090d37d1f8b38fd658fc3c7e31f2d5cce",
+          "sha256:5da478a2bdf9512d1ca0c0d9fcb6ec7383ce898ec986fd2f9a4544cff5f19ec7",
+          "sha256:33b7a70ff9c6258399532b290b41211d759088b0c375146ceba0a24365d6796a"
+        ]
+      },
       "action": "cancel",
       "temporal_relation": "approximate",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 62,
       "group_id": "lc4_dw1_dev_group_062",
       "filename": "lc4_dw1_dev_group_062.json",
-      "group_hash": "sha256:336c184cf703771d59fa9eab65371f46f4b2a8890fe1f0041b5ef10745871a84",
+      "group_hash": "sha256:70529b71a14a1b05725f1f7d5d76dbcf928bbc66bdd7b6ccf1f3d70e8f829ffd",
+      "variant_hashes": {
+        "surface": [
+          "sha256:b965cedd175c5b4071c699b06a9cf5659f1b3f60f1ae43e974afdc5d8c88b55c",
+          "sha256:9649d6a64eade268611354bd67233a06ccb20e1f11a42a8b29a705025204abb9",
+          "sha256:9e13292e07d3bb2736ddd7d865ea9291d9b776249bf6ab2bb5f077375fd00fc0",
+          "sha256:d377b764956e5bc20ac7eaf9d6508dac3eb3d09dc3b185b9d2716a9089b866bd",
+          "sha256:c7be5b3c49b2b17325eee1dae8c3a208ccd5014f430cf846c315e2e8cc87ecf5",
+          "sha256:024c9328e4b6cb7cd60601953816383b5a9d9e2887e01cf021ccf9b4087373a0",
+          "sha256:add8f759c7e0ace37927ee25b8fb6dbcfd93d852f06257ebbdfc8eb28ca3b772",
+          "sha256:d776b247fe13f28dda85899183f07eb419d79886c9e99a244a3c5969851bbf3c",
+          "sha256:c573732497457f09bdadd5c0916633e59d72bf59a2adeecb1a191fa619a91336"
+        ],
+        "multi_turn": [
+          "sha256:a7bf922697d79ff00f3749f617eece33e460a0193f085ad825a82d7b06b1524c",
+          "sha256:0de915422f8cab5fa9e32c90fc5f20fea7101c3646b02e8e84b6e6c1d848afdb",
+          "sha256:e2dc381060f68fda17ef34f612cfb914aa2ceea1bd9583aed3e950992916644a"
+        ]
+      },
       "action": "cancel",
       "temporal_relation": "approximate",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 63,
       "group_id": "lc4_dw1_dev_group_063",
       "filename": "lc4_dw1_dev_group_063.json",
-      "group_hash": "sha256:51e218c7986ae0ff6f1d4dbea7967d28e0b3390f0f36553f6ccc5377e2e69ef2",
+      "group_hash": "sha256:c0dcb2a5b61b4ff0810144295d4525dc2859efb91d3f1305005218c19461a394",
+      "variant_hashes": {
+        "surface": [
+          "sha256:ba87b4caa059861df414e6d40311b71ff728386d524aed5edd72450d69b68e9f",
+          "sha256:9baf3d163ca2e492dbc4d2bc90dc4503aa8c8a5e5f0242521e8fb25a6f361c14",
+          "sha256:a50f4f1b9aedc216b3187672ff4a23ff494ce2cab2f674debe49d99027046cb9",
+          "sha256:b53d654dbc4c719475b9dd298abba6779c88e99b7b04d6845bd7ec476c9e5194",
+          "sha256:f927be3efa1bbdc813df3cda9c847e93f2033aa614f3574690c7bac46e84c423",
+          "sha256:99609a33dd9d21e7e2c77d4c55bac8178af1c132c97a533aa803b834d3f16628",
+          "sha256:18143d71d47892a843db834b3daa67ab0a56d49acc9270c6701eb0c5de2684f6",
+          "sha256:4295d92cd9028af24e583bfcae616a18c60c4a41d8d1aa74fbf0a8e66948d45e",
+          "sha256:2c108349511aa13cd2031d5db1f22a60aaea1db1e52c598789738e1c76345eb4"
+        ],
+        "multi_turn": [
+          "sha256:2f57f1fad2529e3949f2065ff0b79bf66edaa070664dc10196b4889f771e8984",
+          "sha256:562914dc66d8774cbf68b2aec4f6d992115003f7dfbaa1b77ebd8612e8bb1490",
+          "sha256:3cd965c653faba929e87cde06ca850fe2bc352faeabd7a15c5538153cec61278"
+        ]
+      },
       "action": "cancel",
       "temporal_relation": "unspecified",
       "gap_targets": [
@@ -884,147 +2019,345 @@
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 64,
       "group_id": "lc4_dw1_dev_group_064",
       "filename": "lc4_dw1_dev_group_064.json",
-      "group_hash": "sha256:0e3ee168f051cdde02277fa6f254dcc6fe86a26b487fa54baf8d558ba06ba585",
+      "group_hash": "sha256:be3384f5fcfcc65a958922c531f4f90e3015cc7fb89822c79b4e414d11e88745",
+      "variant_hashes": {
+        "surface": [
+          "sha256:70f7a9b0b5245aa87a556ab214a1a30bc839fb3af54c5f10ec82c334b214db82",
+          "sha256:0f5a628d355ce949482f6386c2f38d7ff02ee28b0ba83f259208d3ef28f28ea4",
+          "sha256:4850495bf59cd846243c5a71fb6a45729e7b668c0b05b01a2dd5d9648b928a9c",
+          "sha256:33f3a489fd8b754bbe7f8bc4fae50cfbefa16d5aedf53788cfd8041c0c39fb34",
+          "sha256:80963b3670b35bc6f8a8031a161b40c01f04299fdc858edd8dbba94a0ee5903e",
+          "sha256:90e2c7bbe1caea930341ba7468cad270f3a9791816a4ca0db909f6d920151dc2",
+          "sha256:62ac67b9c7894f331efe51235b64118b458176582b3f9fe0878dc4d3aefe517f",
+          "sha256:3b7198bf42ce811c51a15867a55279e60436daa1ca30d5876a08c38af4e4873c",
+          "sha256:1b401b3186d467b739eeae8a015a77660f5a6113c9ee365fc49da11ded4ca755"
+        ],
+        "multi_turn": [
+          "sha256:66226ecd58f3f13f0304f27dc213fb9769ba7c204b18d2e3fce86a9e2016fbf6",
+          "sha256:90f17e5cb7e8f1d2d1d1610f53a389142c9141f8643ec567b901892fd5d5b557",
+          "sha256:48e064d90fb599897e9720a1d31d96a8f23fb84dce83fad4a280d829c0aeb3f4"
+        ]
+      },
       "action": "cancel",
       "temporal_relation": "unspecified",
       "gap_targets": [
         "interval_unspecified_temporal",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 65,
       "group_id": "lc4_dw1_dev_group_065",
       "filename": "lc4_dw1_dev_group_065.json",
-      "group_hash": "sha256:3911a9fb174d01dbe983b50522e22d5bdb6d5c4f68f0127e0f15821ec749f339",
+      "group_hash": "sha256:b51d29c9b903d59f70e759183eee1b052d43416b3cf7feeaa0a904c58c83c71b",
+      "variant_hashes": {
+        "surface": [
+          "sha256:7a31227a49c9fafd647b245251a19898be0989af30c99e1a1b55c26f10bca318",
+          "sha256:5c32da8d640ddc35c9cdc4c6e5ebb93bc03ba62757f6a44df1ba09f1edbfbba0",
+          "sha256:dc10f08d1abe49ca51c2b8650f17ad9f56f173e937a3022a4f15c255d6f13c7a",
+          "sha256:243249a5a635f89e26ed079249640d35547da6db97b465637310a0a22ab97632",
+          "sha256:4cb70e7f540b03047a1b16687f75034d1a01ee98f674635fe6c72b5dbe1b1d70",
+          "sha256:fa283c0d1ce7acd01fd16d35b2475da27560c4ea184ebd0b16de5b0bef0ad95a",
+          "sha256:b77132046300909c2581311fbca0d58081e7691c168c7236ac833d59d1ea3dca",
+          "sha256:20bb62521e39560ee85fd7b8202a710206c01eb10e59b788c7e45d54d06b31c7",
+          "sha256:45ae5c9490844d8457255f0c359d9c85f36b56596bc0af7067bd357331ee949f"
+        ],
+        "multi_turn": [
+          "sha256:fa38e3ac7ed715b3f4cb23165806036e3f790a0e270ab9b4ae29b19e15ec91ad",
+          "sha256:a9cfa3681f8ce387eee7498b7f0d5433157e8a63f471da90083e4d59becbcba4",
+          "sha256:c318ac7c36a0cf08ebb2f69599c64cdbc9d91d2313244175a0f4f164f4b1477b"
+        ]
+      },
       "action": "status_change",
       "temporal_relation": "exact",
       "gap_targets": [
         "entity_ambiguity_omission_correction"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 66,
       "group_id": "lc4_dw1_dev_group_066",
       "filename": "lc4_dw1_dev_group_066.json",
-      "group_hash": "sha256:5478769a6241b88dc75933927b5b0eb98b9241244352ae4b2dc756b10966890f",
+      "group_hash": "sha256:f2dbd1230763d4f55f8a348682814477f6ad4ccc37e183d308a4b45f4e89fd70",
+      "variant_hashes": {
+        "surface": [
+          "sha256:9803105377d2cb2257c18ebc998a4e6b67df79cc1be306e1c79fe3db4ae5dd12",
+          "sha256:e414bfd801e732cc49f45d253ec3039d254286922960d5dcc9af598b11a36186",
+          "sha256:eb7455473831423bd757f70c906601662102add8555dd5e8708548ba9389aef4",
+          "sha256:10ff5b9550231395773a3020a08c9c9c3e9e8458a0fc75e2be5d411dd7b9a43b",
+          "sha256:0522b55708d5ae5f3710486a1f794cf753e65a035c60cbbb30ee53d44ebab325",
+          "sha256:03d2fe19ac33bf8da6bbcb4340e9d5cc32c4712fafd30668d61b5bab30c1fbc3",
+          "sha256:beb4399a827d0b5d2b21c868415a18fdaf44c4bf9e5b1e16e5bcf77ef9a7113f",
+          "sha256:17ef00b3c004a26b83f1a03454005e0d3401a95e751a36b332b1947205425740",
+          "sha256:2549cfeaa61b059b3bb070a2af1d569fe734b725a881150d6a7ff6fa8e45cc57"
+        ],
+        "multi_turn": [
+          "sha256:a1f9134ad994904947470dabc86061c34f6959e183c720a47b80f626baaa448a",
+          "sha256:df5e9b164b0345e6e93645e3c85dd53a01a0e3c1f9c4170fca6adf9dbfd42f98",
+          "sha256:323757db669d768e0ce21255c4420761ed7171ef6fdfc25ae107cc5ed4cd2e57"
+        ]
+      },
       "action": "status_change",
       "temporal_relation": "exact",
       "gap_targets": [
         "clarification_dialogue",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 67,
       "group_id": "lc4_dw1_dev_group_067",
       "filename": "lc4_dw1_dev_group_067.json",
-      "group_hash": "sha256:ee28153df920cb0cd21898eb349c40e109542480889c32123959457495e49fc4",
+      "group_hash": "sha256:bdc2d4617535d1b56e0ddfaa9c80b7dd01e60ceb21f61689d4389daa4ab45c93",
+      "variant_hashes": {
+        "surface": [
+          "sha256:ac9d1c0ca98ff8e2b796ff52e5e7690a7d959d24ad520e042bde0768573769df",
+          "sha256:5afd41a902725980d06574b636d0020486925ec3bb8f7d2f6cad2e2b13bc5366",
+          "sha256:978b6e67f2b1066a7a9fd31cd018a3cbcc2b0fa26e3e291890a6f210b07759f4",
+          "sha256:b9bd184c2143260611de3acb1988f605c4da2de0c7853cfe12beaebad0bf1588",
+          "sha256:08ee4fc6905b0786cef77273972621d8595ea1aaceb296fcb577479dbb1fbe9e",
+          "sha256:6803ee7e4005aff0fcfa03ad8ade81737cb155b15b9565cc0429bcd18b8c6822",
+          "sha256:5e6a9c99018d1ababcf0e94758569645c15a3fa7096a00b54eeaab6e760ec15b",
+          "sha256:fbff1fcd0485a25d7f3c5dabd59b62b7f9965420e7f36c449fb9bdba73bc8022",
+          "sha256:2f8f43d15e6c1f309c7d8db25fdba888f9ebd1598c90152135756c4c9fd8295c"
+        ],
+        "multi_turn": [
+          "sha256:8641ae0dbfaedb1fd1f5a646cc2f393df58774ad163930bc32b75cf264fc8d42",
+          "sha256:1b6b7fb718bebdb5eaaf749515b31414e815ef4913319f4528cb284f63176090",
+          "sha256:140c26f11573a2994ea2584630132cea9e9538afd78a1f4c80e7c915438b6bde"
+        ]
+      },
       "action": "status_change",
       "temporal_relation": "exact",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 68,
       "group_id": "lc4_dw1_dev_group_068",
       "filename": "lc4_dw1_dev_group_068.json",
-      "group_hash": "sha256:73ee551145612ebf6a011407d22c239ec269b5e04b0ec358a60a3a85740b756d",
+      "group_hash": "sha256:352806372d915c1318527652598b6b9e90e5c6570685b45ef712764a1c1b50a3",
+      "variant_hashes": {
+        "surface": [
+          "sha256:716919d2cc191c67928ca7c927234202af726699b40ece4c8c4529a344088cb8",
+          "sha256:c8c74692c5a71cb4d22ebb9f13e6b032d6e7fdf6981f5ae3c2f3d9c5a3d9b615",
+          "sha256:b02441292a1ec84c1823ebc822335e8b78fa4a991e1cb063392f252e0234f422",
+          "sha256:582034cf3cc3c7541be432857e24e8559ea283dbf28dbda80d07dc2dd31ed9e4",
+          "sha256:f6864ef779656a42422766dbe710c1b103cc2893d65e9a6d4fbf3a86492c3c53",
+          "sha256:3ec66d8a10d27c96a620e5adc10d78b12624e476de9f457dda18ed6c2cfb846a",
+          "sha256:2d143b2a0c67727b46dd22f21cf94be943a81f21e0054162b3a33b7aa2b8c38b",
+          "sha256:85724a7b3395ad8585a5a7064619ac69f28fbed06c09555881aee8bae87b2203",
+          "sha256:88d4afc8bbbb9c69ed843dfd2d6522c2ef4e09fadfc1e8387915b10e98a55f7f"
+        ],
+        "multi_turn": [
+          "sha256:a46a0d745fa529280b1db9eb00dced348f822da05ff65860bf4ab2c3c7ba0092",
+          "sha256:f5369fd344307dbecffab781b0e8da2b6396dbd6b480472331712b84468b5e4e",
+          "sha256:2b948633d366f039ccd7a8301ba0d9bae1f26754e02d935b56fc185ad6aaca01"
+        ]
+      },
       "action": "status_change",
       "temporal_relation": "not_before",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 69,
       "group_id": "lc4_dw1_dev_group_069",
       "filename": "lc4_dw1_dev_group_069.json",
-      "group_hash": "sha256:0cc32c811c20e582206fc87baef08ae8826a8d9b47ed9aaa34e78432c93042f5",
+      "group_hash": "sha256:693f8cd4c751c4720bacbc1bdfdfa45ef0032495836caf9ed55c146fa31082a8",
+      "variant_hashes": {
+        "surface": [
+          "sha256:e23ebb03aa7d1703ddfc7152242a6ea477a8241cf2bde464c91eef4a4c5a9335",
+          "sha256:4c57fb3b1723a96414de916ec9145c385ee8b1ad68e5575f3d5db2ff5c474e47",
+          "sha256:e6540fa6fc840fad0594b074c96518cb8b25d9dda59d607d1fe0dd4186fa4097",
+          "sha256:e49c82137e090db0ca952476c7dbe42fac35e05096ecda2a8a1fd7b26efafdc2",
+          "sha256:b5a873036eef47c82a20c5ce8b0622bd738e1f52cbd50bcb41c87b35c8d291af",
+          "sha256:7283f6c77bf87f38f82f40ee93ad434ef3e171b8933b5bcb7cf708921ebc854f",
+          "sha256:480b4702b27be1025352b6937da7aefaff7606e788ef69810deaa51d602cecde",
+          "sha256:2122738f65695c65d8c28ca70b33ea5cc791a8bc9125b924f6edac92c23e73bc",
+          "sha256:7dc56541c8300edf2b2c8118443597bc962177cec4ebbe30db66880f847989b6"
+        ],
+        "multi_turn": [
+          "sha256:2916e57687aaa96f55650d095cc9354147ab7485c9518a18a0e94dcd1e8dc388",
+          "sha256:0d418d74c7d2322c5d83f8e5ed5a87e9e31621e8ccef1666d9a528f8b545bf14",
+          "sha256:48e1dd46939dd1447c0128c145305ae7b424aeb6ad4c1eca0bb61e3a9bc43c16"
+        ]
+      },
       "action": "status_change",
       "temporal_relation": "not_before",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 70,
       "group_id": "lc4_dw1_dev_group_070",
       "filename": "lc4_dw1_dev_group_070.json",
-      "group_hash": "sha256:7679c6ee62d9d7e43a3db90cc286f3969d8fee23344e8f40da3bf3fddda11a0e",
+      "group_hash": "sha256:8f267fca329cf31597458890eb57bc45dacd19b35d6a7608937d60f705a56d65",
+      "variant_hashes": {
+        "surface": [
+          "sha256:bc6dcdbe2973d8fa2286c44d2b8844114c6c8d582a73c408840beed65a3353e9",
+          "sha256:97b3dc9859803af30afa44e1e8106aa3b379748f8bfb495ff855c941fe68b230",
+          "sha256:451c788a77312580dfe20115eeebd4b0422fcb638d528b4efc93c7cdf4d2c659",
+          "sha256:a7b8fbbbd38653df594c17e32e57a2cd04d951045e7d1cf4797a056fd49c6218",
+          "sha256:95fa850a7213dbedd641a5a2fffb58c182f4c9b604b24c4a02082041bb59962f",
+          "sha256:8932641843a5e806ac42a350757818e0fee206fa91c644fa4eb7910c4e92a826",
+          "sha256:778feb47cc956f44050d733d48db68d82cc39e18cca4fc94a9f9d87273a9bf9c",
+          "sha256:d5cc6eded4192261b29249d0cae3e3afead4b5daecb318190eed2dd36ddff1f5",
+          "sha256:b44741dc2f642c5a6195736f00e621d0c37d64abeca2e969a89c195e1096d48e"
+        ],
+        "multi_turn": [
+          "sha256:76fd7dcf1cceb625de2a605d71d864ad11e12e872491e48d1093aea3cd8404fe",
+          "sha256:0e461d5cb61f76532e57ec7ac2da9e9260dd6bb2ee0d0db614901d1e509b279e",
+          "sha256:e48365a9f7290e671e7df3fa0e0333bfd3fac9132fcb77bc3322d7851d16015b"
+        ]
+      },
       "action": "status_change",
       "temporal_relation": "not_before",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 71,
       "group_id": "lc4_dw1_dev_group_071",
       "filename": "lc4_dw1_dev_group_071.json",
-      "group_hash": "sha256:f8c5444fbaeea3d61eeb5d5c2854b99f14162fa7f5e61c047f413233cc774a9a",
+      "group_hash": "sha256:6df24418819a725de901586be61ac557d030cbb645d94b9329eb2d1ecf80597c",
+      "variant_hashes": {
+        "surface": [
+          "sha256:4ac3ea56df4107da49d214e498787ea6a407d3d1b38b5cf8fee6010dd4fe991d",
+          "sha256:caff5749059c7005af6afe5139b8dc62aa841fe8f208c51edb4bda2ca03a81c6",
+          "sha256:f640e306371329eab66e1a18d352fedbec6aa67a04130516be9406ebe2a4e50c",
+          "sha256:54c64c3b5cc053c471c033edcdb51fbf54fd4cf47b7f886df35cc7b13b9cb45e",
+          "sha256:580f28894771a05bc2cf8cf23e48d8f743b92ace4884fc12535af53d17209f40",
+          "sha256:e0df82691199b099e64083a1bc1ed0ab56b44a7f76ba2874f3c4f7e3a7ea6c0b",
+          "sha256:e2362a46fd027c4802f5f915533ac09a5d2cec5ede0266a9e383066780947fa3",
+          "sha256:081fa9e1bb2bb2bd0983a88e1a87a3210572e53c13c832d1937093ec26559aa4",
+          "sha256:0215d2e750795ff5c05af50689d7d0be2e5f66a952ab298e5cf8fe283f5502ac"
+        ],
+        "multi_turn": [
+          "sha256:414a0a2580fc1e4971e6bc172c14c8ab017bee11759caa49c42987d94f02a86e",
+          "sha256:ee75d34625ab723b665d48163313c3c158304defc052cfd71c9f9d832ae99221",
+          "sha256:b3a2690c8fa5152a7bb3fd283aa08ee8ccf03226ccd9878a8a37902991f55f6a"
+        ]
+      },
       "action": "status_change",
       "temporal_relation": "not_after",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 72,
       "group_id": "lc4_dw1_dev_group_072",
       "filename": "lc4_dw1_dev_group_072.json",
-      "group_hash": "sha256:01cca032746ca2bd67650a2a81b0ca47436ee731e890a181f81aeacd9dec45f9",
+      "group_hash": "sha256:9c461149b74fb6c70eda393b3a96482b78106d8b224bb600095462a9715b3d79",
+      "variant_hashes": {
+        "surface": [
+          "sha256:d378e5cfb23df7c24763eb84189aeef0cd853cd3fd388c8a71f1a96f97f21129",
+          "sha256:69bf0826e2fc0faf33680a1d472915e19dfd21d6fef7dc37d1a2fe1b67c1a80a",
+          "sha256:eeed79544860358ba1e637659186939be8d0f21a2e9ec2956f496a8ea5c08495",
+          "sha256:cd5dd21dfb630469c726a3ef5a71eeab6c7989cdd850d797c5cd53ceffa3eee6",
+          "sha256:34beaa63afdfd8ed56e3c79e5d06ae8683270be9d3849bcadf9cf0082533ceee",
+          "sha256:d4fea690c656c0a4e720baf9ca31a883426970d1a600f5b38bf8c6fe3f9166f1",
+          "sha256:bf7b5d3ac3bd259b70276136e187c156376286a12455c96764ab799ee0bf1503",
+          "sha256:1247b400a81b89b73f022629136d8c5759d6fbfd0a088cd775a8d3a025aa1603",
+          "sha256:ac87a0058cdd9ce53648d29316515cbd286bdb1635386ece02cd20280d223ae1"
+        ],
+        "multi_turn": [
+          "sha256:bddf4602635649378e0ce7c856b8296e3b75efa8211f6a29be928ce06526a696",
+          "sha256:3a3e71f3861c901979a5c79abae561616b09bb610b7d012419c2255d751fbf71",
+          "sha256:51b9db9cbdf7a0f70c4a52ba30d56daa47dcf6407ba2f0ebbe591bed08ae9e5d"
+        ]
+      },
       "action": "status_change",
       "temporal_relation": "not_after",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 73,
       "group_id": "lc4_dw1_dev_group_073",
       "filename": "lc4_dw1_dev_group_073.json",
-      "group_hash": "sha256:fcfc9899754484d2cb8875e9f6d3204bb83d6f6573889486c2f697d7f4d4cb85",
+      "group_hash": "sha256:878d45e8293a5295c4609f2fd64a38ce221a9e46650f004714fa34fdf7b31a0e",
+      "variant_hashes": {
+        "surface": [
+          "sha256:6bb811044b25a2be7ecb982d96ab8809179b2e8d1d3737dede6bb0ff5b08c685",
+          "sha256:386e22d184d9404377c2174d19f30ab242f7d163123bb93184cfe31377ac8e10",
+          "sha256:6664ab78d371a866df1f1b73e923c906715dde74d07b2719ec3b56086e58ef61",
+          "sha256:5ab21b28eec2e91bc1408901c3471a3d16f2f20a9b31072aad05b25630f63031",
+          "sha256:93da5bdd83d4df11182cff031ee01c3b9e79303db2fe976fd8e000738b75c5cd",
+          "sha256:64a619c561c4942d09c8d004513cdbdcba2d92078d4a1fa48ff8444632733dd1",
+          "sha256:bd621dc2463bc109a0339792502b351aec362124ae5561eb01aa5c70e3a20a23",
+          "sha256:6a21474627ffc5d44e46733fdaf1176983d4068dcd41a1c0f9b5b8d8df736df6",
+          "sha256:fa45b16c0471b18335f8a077084b380f2875cd97056ac1860ba9c0761a5a256d"
+        ],
+        "multi_turn": [
+          "sha256:0741adb40409023467ab5a86f7094c5a9a9892eda7a6eae3316adc4aadb72587",
+          "sha256:7f70ad2f4dd4c01b367e8dd4f5868a38151c0a9788450e85974a6a1e84691034",
+          "sha256:1aa7744802cdb15b867c84a9f95965852405e7cd1766012fad74886384b6b6b4"
+        ]
+      },
       "action": "status_change",
       "temporal_relation": "not_after",
       "gap_targets": [],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 74,
       "group_id": "lc4_dw1_dev_group_074",
       "filename": "lc4_dw1_dev_group_074.json",
-      "group_hash": "sha256:9ab1b514c308c6a02b3908074d9df631e7ca738185a6f3c635f7e5e8cdb6e939",
+      "group_hash": "sha256:ffe137738af368859ddc53e005f5d1023f297de260fc9f044e42a3524de72366",
+      "variant_hashes": {
+        "surface": [
+          "sha256:59c2fcdc75177f9307c767463fd88efb229e35fb48a8dcf5d177b2cf9bed6612",
+          "sha256:fc3a6e1e80e00f21806d9da9622f88f321865776f9fcff479e83288ebb223bd8",
+          "sha256:dffd8848746cfe20a4d2de30a57761410c26a0c8a270b9ca3ab95992e9744e13",
+          "sha256:1a4391ab3562fe568a1ba819a98220d8a544217f895f9a2cf23f680e0eeee4cd",
+          "sha256:c3f19298c8e32e21906ea4dbf82f6214b657e7b1ed7c990db5524fff446b4e03",
+          "sha256:4d905f56be6ead1b5129fced7a485732cf8e153fea9bdcb7f5a86d419f828fd9",
+          "sha256:54d87184925b384293c95e884f00b10aa60236e6387a167b56afd3f3e4dfcd95",
+          "sha256:a7dd86ae0e09ac5e1b3961964cc8f44ab95d7ae57aec2663eec47aa4210447f8",
+          "sha256:f44352cb062f45b08dde1a343a7bb10a024b5ab7e701c845aac1ad088c7dfded"
+        ],
+        "multi_turn": [
+          "sha256:2fa1c5afca5cdeeff35ec9d1aa30f3cb1b4abc57028a49a677eb00cfedcaf203",
+          "sha256:b9ebc53fbe5a0ba1103570553950a3e0c5b18de4c57a5df6685e7dca80977849",
+          "sha256:f00503ad3ff3dce54243525387e8523e854b22c5973717ad47e7e850050b969a"
+        ]
+      },
       "action": "status_change",
       "temporal_relation": "interval",
       "gap_targets": [
@@ -1033,14 +2366,32 @@
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 75,
       "group_id": "lc4_dw1_dev_group_075",
       "filename": "lc4_dw1_dev_group_075.json",
-      "group_hash": "sha256:301f4c0275cbeb9d3c95a14b698526398f994460f1c32661d803b82a967bd926",
+      "group_hash": "sha256:93937f3495e5cb1a8501ddb68077d095c7c9761aec1d630cbaa3a2e93f8766e6",
+      "variant_hashes": {
+        "surface": [
+          "sha256:ce7d310b58b44cf31ec3bb1b2607a1d883f8f560106eea3bb2a938fc3324fa82",
+          "sha256:fed56db66a7d02e05c05fe9804e5d2a462951f465d1c39224bb016ab3bc4dc28",
+          "sha256:77b2dad96dab740e04791f031d3cb811e001be5737dc01f3b543be9dda5cbf2a",
+          "sha256:86b6162fd37fbf931f6c9b71a868dc22755482f489e82e0a42d0ba12ba9a8633",
+          "sha256:0cc974018ece025857f6a72f07f2d8371112678edffb0f7428680f13f9217478",
+          "sha256:361ae8072ae9aaa80101336e15818f15bd5eeae3146c71f2841edc254050b4c9",
+          "sha256:57964d011025305b2eafae47321382ed5a187bb45ffd43c69a0cb3e855ff019a",
+          "sha256:9cb6e855e7ab40c9c06256d0bcba081c8f8629a70b8f6535e17749c57ca0e969",
+          "sha256:984f0da1a8fd96578ea49d4563f4ed69ddc89e9b73e9e7e2600e30de4ba2f07b"
+        ],
+        "multi_turn": [
+          "sha256:6ba559b7630adde09beffa75785a22925eb8053a6a46771a7307b7e0cf5ddfa1",
+          "sha256:6012c08dd03ae961a2ea7501511c08967d8fb0d1ea667c73d0954030fa1f1b9f",
+          "sha256:ba71da2d839504ecaeceede2ceae53ac190fb18834cc8710e10b5d2d9916c911"
+        ]
+      },
       "action": "status_change",
       "temporal_relation": "interval",
       "gap_targets": [
@@ -1048,69 +2399,159 @@
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 76,
       "group_id": "lc4_dw1_dev_group_076",
       "filename": "lc4_dw1_dev_group_076.json",
-      "group_hash": "sha256:ab2d77cb7c447056f74c11948ea69468c3b4873d5fc3b4d7f52f727772505049",
+      "group_hash": "sha256:b629c19d507be8126d9fff4661c7a2cd76e3b336bc925f1c9c9fa079e990cef2",
+      "variant_hashes": {
+        "surface": [
+          "sha256:8d312406697ab336cf2d0c79ba090ef65a2036d4891b345474151cd7b4402ef5",
+          "sha256:48cead4c8e542ff07b360095f9d2b715d629f567e20fef1bd548e47adb8516fc",
+          "sha256:c727383f6ee42bc7701f5a5c71dfaad05aed5dc758b38807e1c50870ace4b8bb",
+          "sha256:3da908611e124392a632891e57a0562dccb36cc89d48c9d86741ad0049022d80",
+          "sha256:90f96e3e12978fdaef187f40593a7f41c2794d6a3ad7d4e4f57347a8f53e3a94",
+          "sha256:b73e001c523049b2d3d551b2b19f8a8d5af8154050f6efe1404c8e2755e32c96",
+          "sha256:e9c899dbbb54a003d001f85118fe00200d0a6cba378a5177d28c5be81d540c84",
+          "sha256:4a62099999e1119a5f4b05a96741d6c6dd99575ad986d9ad28a8c9904fa04700",
+          "sha256:0d80e6edc58c26b204585446d116b32b4da38cf7ff66f7cbab104905e4022f99"
+        ],
+        "multi_turn": [
+          "sha256:30cdceb53add473d909530f3de2cde35934351397e66f529559d7c1d412ee2e7",
+          "sha256:6e0f30a15b4425b12203b927cc48c991858a76263ce7652fb70e787c4daa0e07",
+          "sha256:c2087222c53cfb8c5816152a7c070963c65c50bdbc0d9fa36d9f2e25b9557f5f"
+        ]
+      },
       "action": "status_change",
       "temporal_relation": "interval",
       "gap_targets": [
         "interval_unspecified_temporal",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 77,
       "group_id": "lc4_dw1_dev_group_077",
       "filename": "lc4_dw1_dev_group_077.json",
-      "group_hash": "sha256:45a93e702972a353311f610ed7fe4d7e1e559d86a61609b76d659c273172ed04",
+      "group_hash": "sha256:296ff86520b829eef48a0675f95fde9b5f48a3b26e8fe16c678fb8b876c91463",
+      "variant_hashes": {
+        "surface": [
+          "sha256:2eb9a1a5bb143fcfcf738db40d9ea1ab54178461942b7bc54557d9ebb7fd738f",
+          "sha256:2145cc0866de7c4a09a29da8f2da27ea3d174268f9ec8aefb9e7ee4f93cc7216",
+          "sha256:b4c3c5a412475332fb0f98ebf7e4ab337c4ed669f733dd4f262e5489783d5cac",
+          "sha256:009ba4530515fd124e81f70437146e7ca94260f6005921f100d99ccda077f6dc",
+          "sha256:b29ada870fb24a4c77031efa1ca18d2769b7dd9fc23a38ee6c3e11d45ab61dbd",
+          "sha256:c24b6a654551b6601ee7d02d4d8f2c2a577c4da27018ff9f82ce446cbb9ad9da",
+          "sha256:e12afcb0e0e728d9618f940fc4c576051254c874fac1072ae3b9f9135e87fb80",
+          "sha256:6d5009718478c7be95333257ad664a9358440d95a31f91dda8f07bf70b7f461e",
+          "sha256:cfca8508b00c36d7f2a340825819f2e3a02ded32e4f15bebf2070c04deaded02"
+        ],
+        "multi_turn": [
+          "sha256:1f60bc4c72e9cbd8a1c03e67f4098a8fc17e26e7aa63a79f4b7e42e91b0ffc8a",
+          "sha256:3e8fec1b766422379757ba8faff7dcf1140783a28ad907513201fd781b6337e9",
+          "sha256:37a46e38f07ca2f80c171780b594883073970c2ca2474a6abe0b140a08958270"
+        ]
+      },
       "action": "status_change",
       "temporal_relation": "approximate",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 78,
       "group_id": "lc4_dw1_dev_group_078",
       "filename": "lc4_dw1_dev_group_078.json",
-      "group_hash": "sha256:ddd82608abe0792993acdfd661f7e2b5574f7215d06abc656cf9fd152b418901",
+      "group_hash": "sha256:c6f2b468d9eb478fe3677a13a5e28debbb246015a4bb7562b29678778e54c178",
+      "variant_hashes": {
+        "surface": [
+          "sha256:89deef4ea6fff15234b82db6a2826444670f2341a095c1187d3c4a69b4deeca7",
+          "sha256:18c65ec08fd3203ea3690fa2b1fcfb20fd358e598de933d330a334180fddba15",
+          "sha256:e89f35fec4261be9499c36262f30566cdabee58f6e44b354da3c71bd6c06d87c",
+          "sha256:8b05a8cbb2c47ed2d93a7dada541ef8cba616190dcc2dd47d534a6e4cad69bcd",
+          "sha256:c6747815d468fdc341d79a5b01fa86583d7c8f8f52abe2efa86d0f84720de62e",
+          "sha256:3411c1772f2ee8e6354ec2179c1e2db593b9fcc494b34f41db57c5712f64b202",
+          "sha256:e35c01fb69817ccf543b0beb8c889c6271e357f2e4b6715681f19d4b4f95ea10",
+          "sha256:9722a851692f18c231b3d9f4713b16c1fbbf6a5acc8695dfc5ffaf2578d9761f",
+          "sha256:28d0c6fab1b81fa3717bf130db95df8e6a33abb7d8589a1411d8ad682e9e1ddf"
+        ],
+        "multi_turn": [
+          "sha256:ed43a1e7a1178aae6de594233c969893dbfb6ccfe355e8cd4714b308138a98ec",
+          "sha256:da2c4616c99b8cb42a931e34f03f228846c8db829ea9956b3ce2f68cecffc5bf",
+          "sha256:b251fc21114c7eab043275131249fd97172a285921a8fa95e63d1a7894178f2f"
+        ]
+      },
       "action": "status_change",
       "temporal_relation": "approximate",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 79,
       "group_id": "lc4_dw1_dev_group_079",
       "filename": "lc4_dw1_dev_group_079.json",
-      "group_hash": "sha256:a675cf13c0533db3886bf6fd3e15131cd6500419e04419ddd8421845158367b4",
+      "group_hash": "sha256:3faf49aede45ee58ee1f64739942ee1b9b59a08d4a85596c36e0277a3b1cb520",
+      "variant_hashes": {
+        "surface": [
+          "sha256:5ee93b69e92533d9939635bdeec2a470a785c80f067d08ff5a252b298f09dbe7",
+          "sha256:cde4794504e37c57600f81043e22f8225ab43ae2e2b74902d6c4606ebeb5a4d8",
+          "sha256:91b7d7a4d747863dd168289c95818631f64753c44ff0e97bed6da84e72207455",
+          "sha256:0ebea49d7854cb6b6f9839079a4f1e7436f6a5e717abb3a834760c28d79341b9",
+          "sha256:21f2a958a7690684b7c70ac8692bff300db86a549191f48f30022209e598b3e2",
+          "sha256:d144db596b8e22e2514de26dc15e3088e446f357478ec2d6e268d5b8503104e8",
+          "sha256:697064ca4e1504aa5876343741b113099b4c2f7016258600c6d6f5206c45c6f7",
+          "sha256:131d1beb9bcdeabf8d03393b81f88ef7b9dfa2baf8ab07a24f8914f1772ecd52",
+          "sha256:b771691d84127add756fdbb65ed1a2ab484391524db4249288499a162a4f8647"
+        ],
+        "multi_turn": [
+          "sha256:44adf26d3b1ae7ab5b6cb4dd67027a6ee9d8f05530d8bf521096969cdee0b7ee",
+          "sha256:6b090cff15c73b807a27aa050dd4207fe3c37911db2450aeaf3fe4e98a5c629a",
+          "sha256:a3c03871c17601bfbf076e35844bca6514ea3ab9653d28fcf93abc5a0e866925"
+        ]
+      },
       "action": "status_change",
       "temporal_relation": "unspecified",
       "gap_targets": [
         "interval_unspecified_temporal",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 80,
       "group_id": "lc4_dw1_dev_group_080",
       "filename": "lc4_dw1_dev_group_080.json",
-      "group_hash": "sha256:c5d82f2801c157edfb57c1c2d95e57d9c0b43f8a09765b67ced7385dce3f37d0",
+      "group_hash": "sha256:0269adecb70c2b7861a22cba2b904368de6a88a11f8ce3f56b67eaddaa6a9f6c",
+      "variant_hashes": {
+        "surface": [
+          "sha256:a18299f183145a58dcb761249b9a562c498e88997d513024b0d2768b4ed75b5e",
+          "sha256:97f2e67b6b3db4b693d40f9b64dda0172a75603474cb3d45f9cee69215412b9b",
+          "sha256:f94d2c9358aee42d92952e2d7440a9b8349dc0dd6cb83b6b699158d1b00f3df7",
+          "sha256:ddb123adfaa5378bd78c856d2f7548d008dff4f68d415b2f08978d2d931c3d4c",
+          "sha256:85345a846cc7ffb07a28ed790b140c1cc355e5a6e713ea9fa66336abcdc7530f",
+          "sha256:c98f67ec9347ad72ccbcd4c252285e4ee41f7f01c012207cfce2417ee71fbeb2",
+          "sha256:fdd1db3dd8c971295498f5301abfd0acff68f2238f5d4c1be4bce87b34ddcf6e",
+          "sha256:3abd525b961a367461a21559bda95f175c43ea2bcee78a999429effa4923c225",
+          "sha256:eb583069ce9f8b4724876c205e7b0bf56fecf8331db1545a206ab691835880cf"
+        ],
+        "multi_turn": [
+          "sha256:f3c43b2a3e706ab33989f48980d793b966d6fe4814b86248b75a9426bae804d4",
+          "sha256:cb3b9d5158546b9c11c22fa4995f23e38af8b04ac28c0c994360d486320ea358",
+          "sha256:05abdefb92cc224e781e01b9cb47b318e30e7f40bd927a52088d453bc9a4e419"
+        ]
+      },
       "action": "status_change",
       "temporal_relation": "unspecified",
       "gap_targets": [
@@ -1118,135 +2559,315 @@
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 81,
       "group_id": "lc4_dw1_dev_group_081",
       "filename": "lc4_dw1_dev_group_081.json",
-      "group_hash": "sha256:d997c20324a99ca8ca0ea68c9a876a54924ae332159e86cc0b979ea22fc96dfd",
+      "group_hash": "sha256:1ef3c3a157d4b136f4551d66487f32d096e58a02aefd81735f488acf7fa42944",
+      "variant_hashes": {
+        "surface": [
+          "sha256:8ad912bde6bb1acbf654cc373d668ce36f5388029da5a72df6d8ba1d5412845a",
+          "sha256:209e5f42794a6d360e6af66f440163af26680f58b493600ef54839df5553aca0",
+          "sha256:792bb6ac7074c118c1ca90d79c22b814981305bf3a0d78856b844cb325f76fc9",
+          "sha256:8c88fa9403a47e3bfd047bc60f8909665f5cfc2289bbac00ca7d1e89a4c0e934",
+          "sha256:527a2e1130023a647d8a9602aca14e6d0785085317bfb846e99291d4ded75029",
+          "sha256:b8b45f4371149aa61fa45a29befe8a03a66414fab33617a7c3fad07fd241cdf9",
+          "sha256:a7926eb6a00adcc15829e64e2fd6365b8129b81e29ddd5672c2fa709474ba7eb",
+          "sha256:862a5c13e4307611d611b5c3fcd99639bb71fa87c8ffd93e1e608fcec0db54d6",
+          "sha256:062e9d8425251fb9f61634a97d3491390ef40a16d5880a0d7789ba3c8f217745"
+        ],
+        "multi_turn": [
+          "sha256:52866a4527197dea5be7ee1a161d2f7ad8283d3cf02c86260f08c506711218b9",
+          "sha256:b92a20d0130b4699f38e54b81986684ec3a73ce390441fb4f4cac547850c07ac",
+          "sha256:0c49ec2329f98de25deb9149fac91415f4a9463bcd8ddf3a269e72654e2976a5"
+        ]
+      },
       "action": "explain_schedule",
       "temporal_relation": "exact",
       "gap_targets": [
         "entity_ambiguity_omission_correction"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 82,
       "group_id": "lc4_dw1_dev_group_082",
       "filename": "lc4_dw1_dev_group_082.json",
-      "group_hash": "sha256:48c74982fff7f12554eb2bf10fca426e2ff59e5cc9f3ce4985fb4f9769720512",
+      "group_hash": "sha256:1bef94019d2f680a494f270e7fbb4db61dbe1d80f6c6c167f59418e6231b61da",
+      "variant_hashes": {
+        "surface": [
+          "sha256:6272e93480f8bd6f1b9f52202caaa7f4b4e5e4149e6f2684135befdf984d4cc4",
+          "sha256:d0c7230405fb42e6bebb4f3c51e24c976a562a08c03c7ec865c1c8016f8fbb22",
+          "sha256:254499aaa008143504630b168e75aa78a7295705f4b854dcb344cf562334a83e",
+          "sha256:74ab1d380808e1741ed89ce9d078d5a56b544e294392eba25be472065943e2ba",
+          "sha256:662f02cae5f2bdae1bbbbf04d920e8214ea8fcfc8d8457552b2a701391c8e04d",
+          "sha256:383cf03a8fd7e27ea2380de384a725ac7c3a4a692a4321a7fafd2581628e7090",
+          "sha256:40697d1a615279d47be0e7ba2fcaef104ce4fb54744f90255b3552ed27e173a7",
+          "sha256:96280c45c6a312b1813355105a05afbc46e36f840c3d1bf75ba169cbfe319a36",
+          "sha256:e611cef2410e4c7f6867e781e7a13af48b2767b01bd32b71be3c1ebe481e818a"
+        ],
+        "multi_turn": [
+          "sha256:44147baff883415656fcc69430983c4034b0d4ac39a3869f3673441ffe385dbb",
+          "sha256:5b90cd529066bcf765f9fbd2c3d3d69d2630c46c86880913c3da801b26c2d2c8",
+          "sha256:1a4637080f69c24696d8f717b969ad9f5b3c5ca5c6c324f0204ede334fbf8681"
+        ]
+      },
       "action": "explain_schedule",
       "temporal_relation": "exact",
       "gap_targets": [
         "clarification_dialogue",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 83,
       "group_id": "lc4_dw1_dev_group_083",
       "filename": "lc4_dw1_dev_group_083.json",
-      "group_hash": "sha256:5501432c84c6fa53a343541e04169d9a7dec88e636f8f0e35ae1fe3641c59013",
+      "group_hash": "sha256:6b37ffef9e54e8e176034386f5a382214aad79d54c664ca7fc912f62f185d29d",
+      "variant_hashes": {
+        "surface": [
+          "sha256:e2c6c72366f989bffca2b1420ecb3361bf6a18be6a5b875f20a1666f771aac02",
+          "sha256:97694dd3ef9556e465fde7a890c5b8fde4a2d84c8da6afd005d70a8540ba33c7",
+          "sha256:f11096084dc0dcb52792b09ab660362742d4a495693d0bf64a2dc5bb9c41bc00",
+          "sha256:fa3e2e36bb4178403abba965cee26800f3291d7b64a30fff9bb7ec37b294107f",
+          "sha256:f906f0cf2c8a71bce36ee19fddce1d63d7d4bbcf1fea6f30c502082607b83aae",
+          "sha256:7d5ffe44c636a3e13dfac72d54a114393f96e62a9693d767810aa70365297c65",
+          "sha256:63c23ab882c08eada616a039ebf35a9fcd649a9ad7abf78ff3f0c70436f6a41d",
+          "sha256:f357704b5ecf186ec37865a8202101849ba9dd3175286606accca858bf1c6929",
+          "sha256:afe4e8edccc815745fb1da8ae92be721c6f405c65645ee504627bc323fa578aa"
+        ],
+        "multi_turn": [
+          "sha256:61eec24f3dab7f48105e10c82dd374f54bb581544800fd12137505efb96507c7",
+          "sha256:747a497d6b36574e9b767a1bd9846a40a496a0e1b4eadfc4f157c17bb4463627",
+          "sha256:25126c4788c49a9f3defb3252125bb90caf179c97f899009163d1e5046bdead3"
+        ]
+      },
       "action": "explain_schedule",
       "temporal_relation": "exact",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 84,
       "group_id": "lc4_dw1_dev_group_084",
       "filename": "lc4_dw1_dev_group_084.json",
-      "group_hash": "sha256:ce50a6a704f640ddcdefa596eda1f64b42dd0964471247c5d2fd85149faeb4bb",
+      "group_hash": "sha256:074cfd0f58c7390c105394fc46bfac92f7b1fc4ab6df767b2d1f29baa4c1d072",
+      "variant_hashes": {
+        "surface": [
+          "sha256:b06cdd4197faae09d776460f2ea6f5f842afc2bdcf703da581b4f60a84278f80",
+          "sha256:cef70952adce7ad9bb8bca1f105439898bfcae98343e2c985b3b0ae4f7698554",
+          "sha256:f51b5f892bdd28ff9c6f56c3023b3b7ae13e6a44b41030535871b2c4427743b7",
+          "sha256:9bf0e7f94ac54c99be4defb0cfc90f95fe142bcb96843a6beb2f412fafd72661",
+          "sha256:c0ad7c3b0cd624fcdc561f30a1243303fed75c4cbe001d5c69e5d9a3c61035c1",
+          "sha256:9e5bb3e1864ac26df464d2af4a03df442a00744ad93ad7e6f45b70ad0c13e059",
+          "sha256:548a0575f90d980cf267aeb10391312157209839a0327e356a0b1a99ae5fdd90",
+          "sha256:8818f552691d0bb611f4d89031deceb5e89a0696f17de2f8a758373fd6e2a278",
+          "sha256:6e263703737b057e66053ad5af6b6f055bd2a1d823182a249e5e1b79652ed6bf"
+        ],
+        "multi_turn": [
+          "sha256:1cecf5592c52fbc2b788bd2ca4610139aeb7342fea25eefce4341b69cbc858b5",
+          "sha256:41da427a1217b169c6dd291c8012f555183ba62bba32b7b2b985add230f9afce",
+          "sha256:98b69e17fa8b77dc9040ac01fd2de3c96ad0282733b83827932a1db50110bb3a"
+        ]
+      },
       "action": "explain_schedule",
       "temporal_relation": "not_before",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 85,
       "group_id": "lc4_dw1_dev_group_085",
       "filename": "lc4_dw1_dev_group_085.json",
-      "group_hash": "sha256:1584cc622c352e2d21701688e7d9563f8c9346b3fd7a91636693567f6ed3ee69",
+      "group_hash": "sha256:5e0c351c1215c7651a59c4185b871e0f781af682866edeeae80bd476ab2fef21",
+      "variant_hashes": {
+        "surface": [
+          "sha256:259e70b45fa782cc2d52c31cedb69be5bdadd845c3c8d8adb90cc3c2671bb54c",
+          "sha256:d5798da2dd8cdacefd1c773f004c8f0280e8bd1cf6215e0ddf7634c72e2d97fa",
+          "sha256:6b1cabe1fc82580b672fc48af12f38c3cad71a97aec1bd035ac2141aaba9703f",
+          "sha256:d152f6eee75195af71e86301a6a43f3e9d3c62a5dd99f41da62c18fa26c38158",
+          "sha256:b0cb00d717ca8680bf0d266d2cadd538ab8f4f10aa75c845e40b6960d695410e",
+          "sha256:68ad46cea8088171a5a26c2138c3d6a5c3428c25aa10290f59cfaf61ab85eba7",
+          "sha256:1fe1a721d62004cecdf38a4b39999880bf682c92bbd3e137d47dd49156658a9e",
+          "sha256:2d3f5364e6d6ad9c77714ab1e75308f9d38274e4800c7030852c426f27edea48",
+          "sha256:7aaa2f62e760b108e38d9fdf602d480e52d9094e89b45cce1fb31bec5c765bb4"
+        ],
+        "multi_turn": [
+          "sha256:876c3ab72308006572b93894b5f5e0a7838e0a25683eae9af94cdfad70322f43",
+          "sha256:a407cde5d20f48e7e1890ce516e449974bf4ceb2cf6248919fdfd71daa0c00ea",
+          "sha256:7a4b2567b9bd29269f545bfbaa4345fcfeffb449bbf85646cea85a0471052d96"
+        ]
+      },
       "action": "explain_schedule",
       "temporal_relation": "not_before",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 86,
       "group_id": "lc4_dw1_dev_group_086",
       "filename": "lc4_dw1_dev_group_086.json",
-      "group_hash": "sha256:3446be4212a187aac2e16d695325b14b39ba94f55cdd9df155564fd2733e4958",
+      "group_hash": "sha256:8905ee9bf1a675a74f02249a45cb26beba002e58b91c8cb10dc9bd912ef25bb9",
+      "variant_hashes": {
+        "surface": [
+          "sha256:03b0d8ccea7739d8b86fc3a14016599eeba09c379903813259b4a066f76c98ff",
+          "sha256:45c9a37ef3a77b078996773a653d704ccf0a562e0af8ab7c4416e4820723bf27",
+          "sha256:c355d802a8dfe36bb4cdfef11ef09168a001a25ade14c36f3bdb34040ba54043",
+          "sha256:b01573fdae7ea6e7173cbbf156e1340ec7f9c0b0c9e39612988ec23b569c9d73",
+          "sha256:8a69636af43f35c2514311c76404d115fdac0fe6d1b7a8044e13840699904370",
+          "sha256:106857bfdbf8f61885fac37a6e3985062b49ce83eb25a22c02a899b50c92203b",
+          "sha256:2ae3970bab321365522d2e889393bc88d33fd0e6fbe4e60d5590e68f0e47a9f8",
+          "sha256:06006a135ee6e5a4a593053bbfe911299db43dfd284ed8ed9df8f2132d46109c",
+          "sha256:351a8fc921231c2da823c20bc96fef0186dcb1e98b25d2ab8449c087aa3fe9eb"
+        ],
+        "multi_turn": [
+          "sha256:adcde6a408a3999dec68d231147a5e2f9b80cd6cd2a8e83711902aff1bb53024",
+          "sha256:4c3cebe4eff09b25c357a0b41c03afbfbfb802a2ee6f56272656940adf5183d0",
+          "sha256:60651e9589179d17ac5b1a6e67c2850dc92cac6d94612fc70f840557b5fc8909"
+        ]
+      },
       "action": "explain_schedule",
       "temporal_relation": "not_before",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 87,
       "group_id": "lc4_dw1_dev_group_087",
       "filename": "lc4_dw1_dev_group_087.json",
-      "group_hash": "sha256:10bab10c7e5e6b78bfe59aa7b8b13e75c1438ede0f2a8fb0a4d218dd3b9dfbc5",
+      "group_hash": "sha256:6310102b9bbfc95f7e400e11b123683103154564b8e0cdd9a37e94ab294a8e8e",
+      "variant_hashes": {
+        "surface": [
+          "sha256:30e648c99a3facf78e9dd6c5cbd43a979a2645faece6a797afe7abf862c289d9",
+          "sha256:cbfe4894a88245dfe995baa30ebc4f0b93b9d644f7180fee27cda35fc6dd1421",
+          "sha256:b7498cbd4cc40b83759cecb30071de57057e5e56aed227723c3b53b8c8440320",
+          "sha256:d4f10ac29d1717608d2884ae7893f5ef602ef8684771cae93c97f84adac8f487",
+          "sha256:526c0a10b0d948dc2c5739bef0e2f385c136528516a78a28848a313698ab2b4b",
+          "sha256:baac5a391ca50924e1c45644902a1ad61bf71929ca7e430bb4e0aed508f710e7",
+          "sha256:50a1e48f94321fe89fc191c8e7f51bf453862ccb671796533d01a94ed2d2b4eb",
+          "sha256:abc63c4dd9d26789efb240ac82937174b02b4f45147f7e18d487905751006f15",
+          "sha256:69af1f3ce27e0ea82e4800f5b2de287a93ca865572222612047fe291ff0f7f58"
+        ],
+        "multi_turn": [
+          "sha256:bc2b7fde30eaac0b99289f6344cf06da40e40f86796296a501bc3055f1b1cc70",
+          "sha256:8f5be54d4ec61daddb681d744e05ad7072f92dcf58a6500c1befff28f5086d8c",
+          "sha256:d9073fd92cbdbd8a463a937cd00541404b85917d7013b6d1c87ba1b37508bcbf"
+        ]
+      },
       "action": "explain_schedule",
       "temporal_relation": "not_after",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 88,
       "group_id": "lc4_dw1_dev_group_088",
       "filename": "lc4_dw1_dev_group_088.json",
-      "group_hash": "sha256:16853ebbe21be51fd430b8b125add240b90cfac68542d9de2f79bd95c8f4f07e",
+      "group_hash": "sha256:f9b6e8f509bc1527c740a9e74a2ab2cf6fb1f8f37f48bcd05dc310eb3ec6b44e",
+      "variant_hashes": {
+        "surface": [
+          "sha256:e5a5530d2bb487a0d45bb4975f9fd610b63735585c364780dd48375143e70326",
+          "sha256:5c1efbded833195a49e70556cc4cc203b163e914f6b8c7b30a91beb18f4deac5",
+          "sha256:4f8ce046ed17d3ce9ffc617bed9a7344ab88f1f23458b3fa90666caa534ea880",
+          "sha256:362b69af2ab02ecccefb2375c2257b34db2ef08a83462c1ce71dcd3bd2df63e2",
+          "sha256:da5d75bc454f5931a4e777ced2826594b0b29bc4632e696f07d0826569a49020",
+          "sha256:43a32c856ec141577ee6378fc0821596a29d732fa278cb4e13a918862d914805",
+          "sha256:f69ed2d3242cef3f2c0c0ad003f3fac2228261e6cf903571e55fa804575c07a8",
+          "sha256:9f3e6e25f12a30c2b313607070345759e00bce9df4ba9bc6818cd5a7b0639a2b",
+          "sha256:cb89bebb4ee7c7b81f0ffc343e8b700729c67ad61aee9bcd998acbb278cf259e"
+        ],
+        "multi_turn": [
+          "sha256:593b3cfa50987bf836091773b67f8ab0ee4c43895481216d0c8853875478b3c3",
+          "sha256:2b966f8c65210f7b1619266949d503c52307642b1aa2551d0b1fdae8622fa774",
+          "sha256:039f6394c5b01aaba1ba086393bfe5fe7afd99c2f68838449d58dcc0dab81c70"
+        ]
+      },
       "action": "explain_schedule",
       "temporal_relation": "not_after",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 89,
       "group_id": "lc4_dw1_dev_group_089",
       "filename": "lc4_dw1_dev_group_089.json",
-      "group_hash": "sha256:1ef7a360e95d5243d96557f9442b08df592271a5838c6dfc66ade00ca2309570",
+      "group_hash": "sha256:8a17e53e7b06e31049671b0cbebe8f48ed95369898a57e8221cef20eba148ebc",
+      "variant_hashes": {
+        "surface": [
+          "sha256:e56fcb85513f3e17dfdc14b97c7cef2d4e12c591a7a9d09df036c542c4bd96a6",
+          "sha256:cb62d436813507b26efd40b2d193bbe75315fe8ec5dd9b02a0857304a664830e",
+          "sha256:51acee7e037b80b58fdf6c4d7ffcf0d4d3525c88d7ce2cf9c97c62031f5e7f01",
+          "sha256:5b180abcfe823df4f4d84fc408e2c4a18600bc4d9e23d38f65a069fa2d0ca750",
+          "sha256:4610e25b931c2ef82ff40fde85e422b583192aa82b3299da92b95d3c22c9f5b0",
+          "sha256:4a60b9defb978985537a14279b8a2a1fe5cc87b0a26f3ade4cc489c03223187d",
+          "sha256:149d7d18720701d7dfb332dc4f9f4e166a9e334c2fff70062f3f3f7fc50e468f",
+          "sha256:a7f91f76a416167e1f66e7f6881a877abac519728b601829d6bc104a6bf4852a",
+          "sha256:c3b1156003c4c6bc509230d8297cd52b32d81877e7cab189fe1673f3e9cc7285"
+        ],
+        "multi_turn": [
+          "sha256:c1615ffc305ba89d7e684c76c71d19d7a6326d495815924a3a2ccb1c60b0af19",
+          "sha256:be0231ec79cf6a734b17930bd1d4267fbd5d226c59f6ca3c51536ca6cafa597d",
+          "sha256:352aafaf40ac2d39626c5e3213b12ce813506a20f3f667bac55a7c0d74fe9d3b"
+        ]
+      },
       "action": "explain_schedule",
       "temporal_relation": "not_after",
       "gap_targets": [
         "entity_ambiguity_omission_correction"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 90,
       "group_id": "lc4_dw1_dev_group_090",
       "filename": "lc4_dw1_dev_group_090.json",
-      "group_hash": "sha256:6243ac29e2f773902e834eedfcbc984ac4e615148606e9ff5501fdae746b3487",
+      "group_hash": "sha256:6b69bcd51e51bddd861a4331e414f6f2088e242ad74bc6c449a0e380284d77ee",
+      "variant_hashes": {
+        "surface": [
+          "sha256:aa1013ad181dd71db945b9d5cc7df71980b2f007fefad6c02ca9c1afed35f93c",
+          "sha256:e707fe327fb68196c73e04df567688a2a5585a44baa1459c9ed6cb5c6af07ec1",
+          "sha256:f004bee3413bb603bf2fee22271534ea7d71029719791c0683c1b1d6ff07aa98",
+          "sha256:6cd432d5aaa3828f0a41e9c1ba39c530104ab8f77596bc07a52591a99fcaa6e5",
+          "sha256:e87879b9bcec147013534eaffe57d8e5de8d6da8aff033160820524ade998185",
+          "sha256:72818ff83fe18aaa612578fe137376c1976c8c904e43a17427f7ad8b99cc319c",
+          "sha256:9b67895f12b77e38186c994ffce899abe17e274cba3d36815cef607a8da5eec7",
+          "sha256:1e4bc025594f49a9fc3bef22eb366591122fcd6e9bf27d611ad9013940f53a08",
+          "sha256:63f4f72d8fdb90e97ce8dd0a3ec3e64df5c4ddbb525c851eef06c03a213c2408"
+        ],
+        "multi_turn": [
+          "sha256:639ad3c3e672d5135cc5dc1187ade3cc87b38048f96fa919475c8670102b5236",
+          "sha256:e37ea32782d3ff716001e44ce511f35e4be6172e6bc8bed56379ef8bf8241456",
+          "sha256:5faed1a50d093d9f55c2242a00a10b1521832ddfc031195b63244126e780a7f3"
+        ]
+      },
       "action": "explain_schedule",
       "temporal_relation": "interval",
       "gap_targets": [
@@ -1254,28 +2875,64 @@
         "interval_unspecified_temporal",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 91,
       "group_id": "lc4_dw1_dev_group_091",
       "filename": "lc4_dw1_dev_group_091.json",
-      "group_hash": "sha256:1e6e5e30835e5d4c0941768af3ba5d1fe5a023c7085eedb5ee9e78bdc03e5c6c",
+      "group_hash": "sha256:9ada77b82d11b74f63d1fe0033c3779c73e11d70f73fe2bf449e77c87f543b24",
+      "variant_hashes": {
+        "surface": [
+          "sha256:458d37c70323fa98bfa9f32772ea251a456bb511129c880add1445755fc0eb48",
+          "sha256:7fcbb00414efea406cf43b637de603d4261c742f2d39655b007e88c5d3e50dc3",
+          "sha256:5cc7f0e1e9718d9fb18ef8a20a30d9ebfebe81a478314563ab0892b1d14a2b2e",
+          "sha256:8e3c861330fa20e29c3bd47485addd2974fc0ad796bbdbd6362cee18771f8417",
+          "sha256:5e25ec99bc485835035d878d3d00365cde69c0770aaf1a53554385c4bf9fd8c3",
+          "sha256:1f75e90285390a44147504cf0a7a64bd3f03068daa887700194ddf142125be0b",
+          "sha256:729af7f7b90b99bc49aa564ec6a94e8b9988adc6f9538e5b8896a77343878e8d",
+          "sha256:67e72aa9cb622f2240a16c0da791aa29b6b6b967dba55836c24661b9fa1a9595",
+          "sha256:e2e32d840a6e41e7f0f62d0461ea6c0c57447e72143dd126d905042500b25a48"
+        ],
+        "multi_turn": [
+          "sha256:7ba02038d48d30a53d7813b65f2ac92a71ff0f62fbfbb36be6bccc80bc1da7c1",
+          "sha256:250dd33ad4412f387a683dd9e04b58dc489a494c2e63d39d3d611c163ad36e00",
+          "sha256:6fb9f4e156f5986aab96b20b6a033b9d7d6fd428fb6af35e4cf53f511920fdcd"
+        ]
+      },
       "action": "explain_schedule",
       "temporal_relation": "interval",
       "gap_targets": [
         "interval_unspecified_temporal",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 92,
       "group_id": "lc4_dw1_dev_group_092",
       "filename": "lc4_dw1_dev_group_092.json",
-      "group_hash": "sha256:64556b623832b27ee2826f9a52cba1786bc5467a33b88728e4cb83894e8e625a",
+      "group_hash": "sha256:757590044ac6b670c1f9c25d7ecb8c84f7112b9d505435c8e75171d95cfa5815",
+      "variant_hashes": {
+        "surface": [
+          "sha256:105b9b5f77948bc642f0cc28c40095e68461268f5dd27fbf0d016c315d799e98",
+          "sha256:b42c8405ae21f516b20f5cc58a66de020bf5d5750de6e974dcf05b6d8179e912",
+          "sha256:9a62dd19f79eac5e062d9246ff00a47a4a75abbf9dae58bf6ec2c521a5565399",
+          "sha256:2766319cf0e90e4c4acbf14a643cc6a177fabcf2d879d8220de6ee96872c192a",
+          "sha256:c517a77968d69c6ef39dbafb1d1310ae2ce4a88da54427c0b144426f12dc59bf",
+          "sha256:2087060320793883f45c007df41755f97d46e30c81a059df0d9151e33eabe3af",
+          "sha256:dda6fc86e4d682aa56c31374f6743514b8c0e666dd7ca0d7849238203814bba5",
+          "sha256:ff2899588a55f3405ef6427db3cb6cda11621750c5eca14396eef95e3e12ba9e",
+          "sha256:d6e11456f3b33693735b2a0a9ebccbefd9c73a848c6bf28d2ff430dea4a4bc00"
+        ],
+        "multi_turn": [
+          "sha256:299dfdaeb45f6886eb8cf3e35bc99ce630d7731b9c382f166d6a6cf8e9b4d5e4",
+          "sha256:3a020bd8c9c295e49b77e16080ff1cee4b65c7881a04449361ccca1c5ca0003a",
+          "sha256:f06e2067bdc83050dab53e02d7bcd0a87dfc2f8f4ca01c21cb6f6b2abf74283b"
+        ]
+      },
       "action": "explain_schedule",
       "temporal_relation": "interval",
       "gap_targets": [
@@ -1283,41 +2940,95 @@
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 93,
       "group_id": "lc4_dw1_dev_group_093",
       "filename": "lc4_dw1_dev_group_093.json",
-      "group_hash": "sha256:6b4704bfd9e95c4cc142a434cca68d2156601e00f52719a760a17b2f30f9907d",
+      "group_hash": "sha256:9041e9dc9a7e92a5c2dcba834bc4545640ea2dff88a3b7d421c61b6697dc9730",
+      "variant_hashes": {
+        "surface": [
+          "sha256:f44e2e783c727b15fddd1dfbd749eaa22465cf9fdf043c7a7d295b76be10ecd8",
+          "sha256:b6ed322d0699e76fa4985b1662e972feced6136dfb2a3b11077dada997e1f231",
+          "sha256:6a4a866340dc9e47488ef4c88e0f6b7c7e3f62dcdab704134637c18591983ab1",
+          "sha256:ef00c98155b7b03a6ec181843a8044517efdc4f4ecbc6432d3f68ed6c99350bb",
+          "sha256:48b1a73e17551d289e4791868da6ae477165615fe1e731f90cc37fdf133d4969",
+          "sha256:6f58fc4837df3309304f4f754f576fbdbd0c4fbec4512637b1dc86d661b0c0b2",
+          "sha256:b7cb239341be203de572b2b5c66325399b99dcf89d9e53769ad3a77270b5e0b6",
+          "sha256:df2c01cf3ff433cdf188f1356c1e4ebac8f67e769cc3079f868cbed5ce1ae077",
+          "sha256:2dc56ac7438fafa1448a853901a560cd79d031c18eff097e60a85ddc6fcb8a55"
+        ],
+        "multi_turn": [
+          "sha256:a99007efa8b53446230c996cc4679ca0cce0fc923694c75b1770e0d28d5de8f3",
+          "sha256:a9ce815731e5bcc4b5f2d39ff33eee071eb1ea5aae989b7ce816c8ee8e048a3b",
+          "sha256:610f8fc45d6bc1ae806be3e1c875fe7801c8255d83119d6acec7c7ca626b2846"
+        ]
+      },
       "action": "explain_schedule",
       "temporal_relation": "approximate",
       "gap_targets": [
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 94,
       "group_id": "lc4_dw1_dev_group_094",
       "filename": "lc4_dw1_dev_group_094.json",
-      "group_hash": "sha256:d4b5850e5c387d3746fe58a288a298d6c0574c57ba01525deef5350cd461174c",
+      "group_hash": "sha256:5b92eeef0cffa2cdd81259d150371f2e6d008ec8dc138f4f042e988ce498df2b",
+      "variant_hashes": {
+        "surface": [
+          "sha256:1f9c7b8464dc99f02fc89dbd1189aad6a332581cdea2f5b3f3443260e7d5253e",
+          "sha256:465a1794fa8969a06827a32c7f17e1d7440c4552b3c8ba5893209bee85f9567e",
+          "sha256:fc141afe5ace054de20beaa95574ea4a15ec5e6493db4d81963b4994d910d0c0",
+          "sha256:337faecdb2b9793d364d0de66096801968a8c4925f917ab7942d8230080fc29c",
+          "sha256:900f1f51def92d6bb5adb4a99b835525f08f909e368e8ddc6505bc4f8fce8c80",
+          "sha256:a1fe8836b552400e8c783c019fd21bd4f36f5817d6e64ebca2f0c52423cb8fe8",
+          "sha256:a1a9f90909f2fd3a4cf0a9788d887d262562b6084f9da519db921b9f9efdcbd8",
+          "sha256:fe4da4a54fd0389625f638a2f596efdba9adaa04c2d019fa3f90f66f37a9bc35",
+          "sha256:c74710f3048f9c79ebe77cac16abf5c7ea395b5fdbf14756547874c03f3fb16f"
+        ],
+        "multi_turn": [
+          "sha256:4a4ce4ee66644054c0c7d9e91edc97c78f273495b1ea52127799a91dc3d253c0",
+          "sha256:fa8de3794557d9dc05317f76ce13dec5173ceec5da7f0e6788c608d4e67d91bc",
+          "sha256:ad09af36a9c90176446f244fcc97cfca25b6f5bfb1e1487b51c9e63968e401f9"
+        ]
+      },
       "action": "explain_schedule",
       "temporal_relation": "approximate",
       "gap_targets": [
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 95,
       "group_id": "lc4_dw1_dev_group_095",
       "filename": "lc4_dw1_dev_group_095.json",
-      "group_hash": "sha256:70d31003524e4940c9d8146ecc5d3c5d65eef17225c6e843dd25b9263b6e67ed",
+      "group_hash": "sha256:614540ab37601399914bac95691072da651763f4041ed5b2c2ff9618e7ab3947",
+      "variant_hashes": {
+        "surface": [
+          "sha256:8447fd2164c605f88c69415207c125598a9f4022684f2763591be8af498218e8",
+          "sha256:1c08249cb50633a3b1023ffbe7a854574f7b7aa0e2b4a06d5387a05c0316d031",
+          "sha256:55d355d3051f2d966eda6aad15fcd3ce6191b72c705ad64777c02d52b301540e",
+          "sha256:44bd91cfdf344937da8f3aaf791d73b84a84cfa9e607fd559da5cdb598f2951b",
+          "sha256:08bc23501b81800451f5d4df2f3bb00c08cf701c612210a17cde45aa00accee3",
+          "sha256:235c06ec943039b1ace8d753cf4f62b939399f5184217d7e837633f5a9472f55",
+          "sha256:45a187046bf63fdb3a0fc4ae8df650833adabdb654caeb0c426f830abeaedf7b",
+          "sha256:426a463a874c2d89f7d441ffca6b731926ec17a7061abf7f06160a18f100c365",
+          "sha256:6db7aa46ec41f6fb3728f28a160a1ff684f489391fa3705b4f4dee10ead0502b"
+        ],
+        "multi_turn": [
+          "sha256:786113baf3e61d6f2b88abb79146016e33d73e5f377a26b14e12f3b656e8e0cb",
+          "sha256:91fac3d64ff98e11a0a667538c9fcb84b777c88006732e6b3b3adf674dd5a423",
+          "sha256:8d8fc14907f514198229c08095e26c16d5e7bcc701a5671af6c9bd0fe18818a0"
+        ]
+      },
       "action": "explain_schedule",
       "temporal_relation": "unspecified",
       "gap_targets": [
@@ -1325,21 +3036,39 @@
         "entity_ambiguity_omission_correction",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     },
     {
       "group_index": 96,
       "group_id": "lc4_dw1_dev_group_096",
       "filename": "lc4_dw1_dev_group_096.json",
-      "group_hash": "sha256:040922ab2f6ab1e5687282bca878544e88f6fb0b4b84b39c28cf1940c306224c",
+      "group_hash": "sha256:24ff61f29e4c651c3d479dd916216626bf8c66ce2a78ebdddafb58738928f7b4",
+      "variant_hashes": {
+        "surface": [
+          "sha256:cbab863f8731c18bb437ac0d713a45cabef9bd69aea7c4f8a0a3efee7d3e90f3",
+          "sha256:e9e323e8aed70e455cc5647837ae75b561ef2dbb7e4a1ed92ec895d7fdd46b61",
+          "sha256:f1bc31ecb1e6e633f8ab037d369aedca49d7c8a89feb0c670dd4500dc8a1e5c8",
+          "sha256:3e5915b44f1d4edb0b91b36cbf5322786738d39bd0209399ec80fa718c684c8c",
+          "sha256:fa9b79e4b6b17db32edb70a20091e51dafeb8adee2aa46ed51bd4125507e5f7d",
+          "sha256:b4ceeff7d0957d7b5a335ada329e9b5794d2018bcb1a31f7ff884d51de40059b",
+          "sha256:543bc6c5d605ecef5a360213f3ed03c2306c1492d00e56a40cee3d501583ac89",
+          "sha256:94be11652d32cc00ea9a0d5bd1401b579e9e03a188fd2ec1e4a8b3909ab5f339",
+          "sha256:73022ecdf3e836592fc2f578160ddebc5c3c89baca52a96d4422802d88319a76"
+        ],
+        "multi_turn": [
+          "sha256:7498f3f0b2f0833472752e931703b8b0716f4d3090b9274cab73ce3150f85dbd",
+          "sha256:8c49409a9c306693ee55fd1b3e7f4f315a11341f5feab352fcb895f97bb041b8",
+          "sha256:f438914ee1dbc8a03a34d7887dc843c29675303d61dab5b4b5a03490cc3f57d4"
+        ]
+      },
       "action": "explain_schedule",
       "temporal_relation": "unspecified",
       "gap_targets": [
         "interval_unspecified_temporal",
         "interpretation_replay_tool_selection"
       ],
-      "variant_count": 12,
+      "surface_variant_count": 9,
       "multi_turn_count": 3
     }
   ]

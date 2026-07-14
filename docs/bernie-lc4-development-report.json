@@ -1,12 +1,12 @@
 {
-  "schema_version": "lc4.development_report.v1",
+  "schema_version": "lc4.development_report.v2",
   "generated_at": null,
   "corpus_manifest": {
     "development_group_count": 96,
-    "surface_variant_count": 1152,
+    "surface_variant_count": 864,
     "multi_turn_trajectory_count": 288,
-    "total_individual_records": 1440,
-    "corpus_hash": "sha256:7f4196b3fecc4bd2bcf361618b72ee0cea867bee43caa079fa66c7e06834d91a",
+    "total_individual_records": 1152,
+    "corpus_hash": "sha256:03d36809f1b5e7cfb86e141a5ff5c4ce01ca9675b64ebd254a905efc23d66935",
     "provenance": "silver",
     "adjudication": "pending",
     "generator_identity": {

@@ -1,7 +1,25 @@
 {
-  "schema_version": "lc4.scale_corpus.v1",
+  "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_023",
-  "group_hash": "sha256:3f46967821ad2739ee93a7efe9a8ffbd6174161e0e5fb667cfc668033e621bfe",
+  "group_hash": "sha256:69b2042e79ad8bf2d1d069edd4f769a8cf37eb42291584bff67e43abe32810fa",
+  "variant_hashes": {
+    "surface": [
+      "sha256:a4a245ceb879ae0b7fc6592bba0b0cf90ec740fde96ca75064df95dec140eaa2",
+      "sha256:26832b7a15ce68f4de0332cf5d559a42132750560e93c1f50da41b96e9864e39",
+      "sha256:e12792dd27300048574e8511779d9256aac2a57dfaccad67e19da1c36db02f1d",
+      "sha256:4b7f44a94cdf295519f123b58645947b9b02ffd066393f61305fc31fc45dc216",
+      "sha256:5087eed93b7457e03fb4779dbac2b4f7975ac1f7f728273d1bc71e9057ca9b3a",
+      "sha256:4029256c5aa6f0b5d6df45b5ebd7933f94ac5f0f9bd488ac2ea7c87a3943f565",
+      "sha256:2d42ccf074699eedc1d1c3b1e4094855c5c0658c2e2701144931a187c783ecf8",
+      "sha256:3994f993f12c9f979f8bb27d6f8979de46198a8b109a65140d5f37acb2aa1284",
+      "sha256:dd677e208b21dbb704b9979283d08797fe721586f5f1c043db854b27a79fdb08"
+    ],
+    "multi_turn": [
+      "sha256:8c6a171062c45876d86fb9bc0e5167db8862f6842a500bb6bc68ebe25c6edb0f",
+      "sha256:449be4fc2d79b03a4f7b766cb064b07d893343323b0fea1dcea6c9f8d5e83b24",
+      "sha256:53e88ec8afb727caaadf58ef2ce9d7356e6fe8c279992160774095df47719681"
+    ]
+  },
   "provenance": "silver",
   "adjudication": "pending",
   "reference_date": "2026-07-14",
@@ -130,7 +148,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:a4a245ceb879ae0b7fc6592bba0b0cf90ec740fde96ca75064df95dec140eaa2"
     },
     {
       "spec_version": "lc1.v1",
@@ -231,7 +250,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:26832b7a15ce68f4de0332cf5d559a42132750560e93c1f50da41b96e9864e39"
     },
     {
       "spec_version": "lc1.v1",
@@ -332,7 +352,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:e12792dd27300048574e8511779d9256aac2a57dfaccad67e19da1c36db02f1d"
     },
     {
       "spec_version": "lc1.v1",
@@ -439,7 +460,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:4b7f44a94cdf295519f123b58645947b9b02ffd066393f61305fc31fc45dc216"
     },
     {
       "spec_version": "lc1.v1",
@@ -540,7 +562,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:5087eed93b7457e03fb4779dbac2b4f7975ac1f7f728273d1bc71e9057ca9b3a"
     },
     {
       "spec_version": "lc1.v1",
@@ -633,112 +656,12 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:4029256c5aa6f0b5d6df45b5ebd7933f94ac5f0f9bd488ac2ea7c87a3943f565"
     },
     {
       "spec_version": "lc1.v1",
       "scenario_id": "lc4_dw1_dev_var_023_07",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_023",
-      "description": "move:not_after:repeated:punctuation_variant - yeah could we um shift Margaret Thompson with Dr Shera to tomorrow before at 4pm",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "yeah could we um shift Margaret Thompson with Dr Shera to tomorrow before at 4pm instead"
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "move",
-      "action_semantics": "intended",
-      "temporal_relation": "not_after",
-      "earliest_time": null,
-      "latest_time": "17:00",
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "latest_time": "17:00"
-      },
-      "source_spans": {
-        "temporal_relation": [
-          {
-            "turn_index": 0,
-            "start": 77,
-            "end": 80,
-            "text": "4pm"
-          }
-        ],
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 23,
-            "end": 40,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 46,
-            "end": 54,
-            "text": "Dr Shera"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "empty",
-      "entity_state": "exact",
-      "dialogue_form": "repeated",
-      "language_form": "punctuation_variant",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "appointment_moved",
-      "expected_tool_sequence": [
-        "search_patients",
-        "update_appointment"
-      ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "moved",
-          "new_start_time": "15:00",
-          "new_date": "2026-07-15"
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "move_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": []
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_023_08",
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_023",
@@ -835,11 +758,12 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:2d42ccf074699eedc1d1c3b1e4094855c5c0658c2e2701144931a187c783ecf8"
     },
     {
       "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_023_09",
+      "scenario_id": "lc4_dw1_dev_var_023_08",
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_023",
@@ -936,213 +860,12 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:3994f993f12c9f979f8bb27d6f8979de46198a8b109a65140d5f37acb2aa1284"
     },
     {
       "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_023_10",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_023",
-      "description": "move:not_after:repeated:punctuation_variant - Move Margaret Thompson's slot to tomorrow before at 4pm with Dr Shera.",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "Move Margaret Thompson's slot to tomorrow before at 4pm with Dr Shera."
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "move",
-      "action_semantics": "intended",
-      "temporal_relation": "not_after",
-      "earliest_time": null,
-      "latest_time": "17:00",
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "latest_time": "17:00"
-      },
-      "source_spans": {
-        "temporal_relation": [
-          {
-            "turn_index": 0,
-            "start": 52,
-            "end": 55,
-            "text": "4pm"
-          }
-        ],
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 5,
-            "end": 22,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 61,
-            "end": 69,
-            "text": "Dr Shera"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "empty",
-      "entity_state": "exact",
-      "dialogue_form": "repeated",
-      "language_form": "punctuation_variant",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "appointment_moved",
-      "expected_tool_sequence": [
-        "search_patients",
-        "update_appointment"
-      ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "moved",
-          "new_start_time": "15:00",
-          "new_date": "2026-07-15"
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "move_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": []
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_023_11",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_023",
-      "description": "move:not_after:repeated:punctuation_variant - Dr Shera's appointment for Margaret Thompson needs to move to tomorrow before at",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "Dr Shera's appointment for Margaret Thompson needs to move to tomorrow before at 4pm."
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "move",
-      "action_semantics": "intended",
-      "temporal_relation": "not_after",
-      "earliest_time": null,
-      "latest_time": "17:00",
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "latest_time": "17:00"
-      },
-      "source_spans": {
-        "temporal_relation": [
-          {
-            "turn_index": 0,
-            "start": 81,
-            "end": 84,
-            "text": "4pm"
-          }
-        ],
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 27,
-            "end": 44,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 0,
-            "end": 8,
-            "text": "Dr Shera"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "empty",
-      "entity_state": "exact",
-      "dialogue_form": "repeated",
-      "language_form": "punctuation_variant",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "appointment_moved",
-      "expected_tool_sequence": [
-        "search_patients",
-        "update_appointment"
-      ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "moved",
-          "new_start_time": "15:00",
-          "new_date": "2026-07-15"
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "move_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": []
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_023_12",
+      "scenario_id": "lc4_dw1_dev_var_023_09",
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_023",
@@ -1239,7 +962,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:dd677e208b21dbb704b9979283d08797fe721586f5f1c043db854b27a79fdb08"
     }
   ],
   "multi_turn_variants": [
@@ -1350,7 +1074,8 @@
         "2pm",
         "3pm",
         "4pm"
-      ]
+      ],
+      "variant_hash": "sha256:8c6a171062c45876d86fb9bc0e5167db8862f6842a500bb6bc68ebe25c6edb0f"
     },
     {
       "spec_version": "lc1.v1",
@@ -1461,7 +1186,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:449be4fc2d79b03a4f7b766cb064b07d893343323b0fea1dcea6c9f8d5e83b24"
     },
     {
       "spec_version": "lc1.v1",
@@ -1558,7 +1284,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:53e88ec8afb727caaadf58ef2ce9d7356e6fe8c279992160774095df47719681"
     }
   ]
 }

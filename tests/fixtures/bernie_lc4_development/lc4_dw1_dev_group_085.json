@@ -1,7 +1,25 @@
 {
-  "schema_version": "lc4.scale_corpus.v1",
+  "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_085",
-  "group_hash": "sha256:1584cc622c352e2d21701688e7d9563f8c9346b3fd7a91636693567f6ed3ee69",
+  "group_hash": "sha256:5e0c351c1215c7651a59c4185b871e0f781af682866edeeae80bd476ab2fef21",
+  "variant_hashes": {
+    "surface": [
+      "sha256:259e70b45fa782cc2d52c31cedb69be5bdadd845c3c8d8adb90cc3c2671bb54c",
+      "sha256:d5798da2dd8cdacefd1c773f004c8f0280e8bd1cf6215e0ddf7634c72e2d97fa",
+      "sha256:6b1cabe1fc82580b672fc48af12f38c3cad71a97aec1bd035ac2141aaba9703f",
+      "sha256:d152f6eee75195af71e86301a6a43f3e9d3c62a5dd99f41da62c18fa26c38158",
+      "sha256:b0cb00d717ca8680bf0d266d2cadd538ab8f4f10aa75c845e40b6960d695410e",
+      "sha256:68ad46cea8088171a5a26c2138c3d6a5c3428c25aa10290f59cfaf61ab85eba7",
+      "sha256:1fe1a721d62004cecdf38a4b39999880bf682c92bbd3e137d47dd49156658a9e",
+      "sha256:2d3f5364e6d6ad9c77714ab1e75308f9d38274e4800c7030852c426f27edea48",
+      "sha256:7aaa2f62e760b108e38d9fdf602d480e52d9094e89b45cce1fb31bec5c765bb4"
+    ],
+    "multi_turn": [
+      "sha256:876c3ab72308006572b93894b5f5e0a7838e0a25683eae9af94cdfad70322f43",
+      "sha256:a407cde5d20f48e7e1890ce516e449974bf4ceb2cf6248919fdfd71daa0c00ea",
+      "sha256:7a4b2567b9bd29269f545bfbaa4345fcfeffb449bbf85646cea85a0471052d96"
+    ]
+  },
   "provenance": "silver",
   "adjudication": "pending",
   "reference_date": "2026-07-14",
@@ -12,7 +30,7 @@
     "temporal_relation": "not_before",
     "diary_state": "roster_absent",
     "entity_state": "exact",
-    "patient_semantics": "exact",
+    "patient_semantics": "omitted",
     "practitioner_semantics": "exact",
     "location_semantics": "omitted",
     "appointment_type_semantics": "omitted",
@@ -91,7 +109,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:259e70b45fa782cc2d52c31cedb69be5bdadd845c3c8d8adb90cc3c2671bb54c"
     },
     {
       "spec_version": "lc1.v1",
@@ -130,12 +149,12 @@
       },
       "duration_minutes": 15,
       "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
+      "patient_semantics": "omitted",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "roster_absent",
-      "entity_state": "exact",
+      "entity_state": "omitted",
       "dialogue_form": "ellipsis",
       "language_form": "typo",
       "initial_diary_state": {
@@ -160,7 +179,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:d5798da2dd8cdacefd1c773f004c8f0280e8bd1cf6215e0ddf7634c72e2d97fa"
     },
     {
       "spec_version": "lc1.v1",
@@ -229,7 +249,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:6b1cabe1fc82580b672fc48af12f38c3cad71a97aec1bd035ac2141aaba9703f"
     },
     {
       "spec_version": "lc1.v1",
@@ -298,7 +319,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:d152f6eee75195af71e86301a6a43f3e9d3c62a5dd99f41da62c18fa26c38158"
     },
     {
       "spec_version": "lc1.v1",
@@ -337,12 +359,12 @@
       },
       "duration_minutes": 15,
       "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
+      "patient_semantics": "omitted",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "roster_absent",
-      "entity_state": "exact",
+      "entity_state": "omitted",
       "dialogue_form": "ellipsis",
       "language_form": "typo",
       "initial_diary_state": {
@@ -367,7 +389,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:b0cb00d717ca8680bf0d266d2cadd538ab8f4f10aa75c845e40b6960d695410e"
     },
     {
       "spec_version": "lc1.v1",
@@ -436,80 +459,12 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:68ad46cea8088171a5a26c2138c3d6a5c3428c25aa10290f59cfaf61ab85eba7"
     },
     {
       "spec_version": "lc1.v1",
       "scenario_id": "lc4_dw1_dev_var_085_07",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_085",
-      "description": "explain_schedule:not_before:ellipsis:typo - yeah what's Dr Shera's diary look like tomorrow after any gaps?",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "yeah what's Dr Shera's diary look like tomorrow after any gaps?"
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "explain_schedule",
-      "action_semantics": "intended",
-      "temporal_relation": "not_before",
-      "earliest_time": "15:00",
-      "latest_time": null,
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "15:00"
-      },
-      "source_spans": {
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 12,
-            "end": 20,
-            "text": "Dr Shera"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "omitted",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "roster_absent",
-      "entity_state": "omitted",
-      "dialogue_form": "ellipsis",
-      "language_form": "typo",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "schedule_explained",
-      "expected_tool_sequence": [
-        "search_patients",
-        "find_slots"
-      ],
-      "expected_appointment_deltas": [],
-      "expected_audit_deltas": [],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": []
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_085_08",
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_085",
@@ -574,11 +529,12 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:1fe1a721d62004cecdf38a4b39999880bf682c92bbd3e137d47dd49156658a9e"
     },
     {
       "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_085_09",
+      "scenario_id": "lc4_dw1_dev_var_085_08",
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_085",
@@ -607,75 +563,6 @@
             "turn_index": 0,
             "start": 15,
             "end": 23,
-            "text": "Dr Shera"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "roster_absent",
-      "entity_state": "exact",
-      "dialogue_form": "ellipsis",
-      "language_form": "typo",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "schedule_explained",
-      "expected_tool_sequence": [
-        "search_patients",
-        "find_slots"
-      ],
-      "expected_appointment_deltas": [],
-      "expected_audit_deltas": [],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": []
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_085_10",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_085",
-      "description": "explain_schedule:not_before:ellipsis:typo - What times does Dr Shera have open tomorrow after?",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "What times does Dr Shera have open tomorrow after?"
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "explain_schedule",
-      "action_semantics": "intended",
-      "temporal_relation": "not_before",
-      "earliest_time": "15:00",
-      "latest_time": null,
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "15:00"
-      },
-      "source_spans": {
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 16,
-            "end": 24,
             "text": "Dr Shera"
           }
         ]
@@ -712,80 +599,12 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:2d3f5364e6d6ad9c77714ab1e75308f9d38274e4800c7030852c426f27edea48"
     },
     {
       "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_085_11",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_085",
-      "description": "explain_schedule:not_before:ellipsis:typo - I need to check Dr Shera's rosters for tomorrow after.",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "I need to check Dr Shera's rosters for tomorrow after."
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "explain_schedule",
-      "action_semantics": "intended",
-      "temporal_relation": "not_before",
-      "earliest_time": "15:00",
-      "latest_time": null,
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "15:00"
-      },
-      "source_spans": {
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 16,
-            "end": 24,
-            "text": "Dr Shera"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "roster_absent",
-      "entity_state": "exact",
-      "dialogue_form": "ellipsis",
-      "language_form": "typo",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "schedule_explained",
-      "expected_tool_sequence": [
-        "search_patients",
-        "find_slots"
-      ],
-      "expected_appointment_deltas": [],
-      "expected_audit_deltas": [],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": []
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_085_12",
+      "scenario_id": "lc4_dw1_dev_var_085_09",
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_085",
@@ -820,12 +639,12 @@
       },
       "duration_minutes": 15,
       "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
+      "patient_semantics": "omitted",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "roster_absent",
-      "entity_state": "exact",
+      "entity_state": "omitted",
       "dialogue_form": "ellipsis",
       "language_form": "typo",
       "initial_diary_state": {
@@ -850,7 +669,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:7aaa2f62e760b108e38d9fdf602d480e52d9094e89b45cce1fb31bec5c765bb4"
     }
   ],
   "multi_turn_variants": [
@@ -895,12 +715,12 @@
       },
       "duration_minutes": 15,
       "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
+      "patient_semantics": "omitted",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "roster_absent",
-      "entity_state": "exact",
+      "entity_state": "omitted",
       "dialogue_form": "clarification",
       "language_form": "plain",
       "initial_diary_state": {
@@ -929,7 +749,8 @@
         "2pm",
         "3pm",
         "4pm"
-      ]
+      ],
+      "variant_hash": "sha256:876c3ab72308006572b93894b5f5e0a7838e0a25683eae9af94cdfad70322f43"
     },
     {
       "spec_version": "lc1.v1",
@@ -1008,7 +829,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:a407cde5d20f48e7e1890ce516e449974bf4ceb2cf6248919fdfd71daa0c00ea"
     },
     {
       "spec_version": "lc1.v1",
@@ -1051,12 +873,12 @@
       },
       "duration_minutes": 15,
       "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
+      "patient_semantics": "omitted",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "roster_absent",
-      "entity_state": "exact",
+      "entity_state": "omitted",
       "dialogue_form": "reversal",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1081,7 +903,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:7a4b2567b9bd29269f545bfbaa4345fcfeffb449bbf85646cea85a0471052d96"
     }
   ]
 }

@@ -1,10 +1,11 @@
 """LC4 development corpus — reproducible manifest and coverage report.
 
 Usage:
-    python scripts/bernie_lc4_development_report.py
+    python scripts/bernie_lc4_development_report.py          # write report
+    python scripts/bernie_lc4_development_report.py --check  # verify in memory only
 
 Output:
-    docs/bernie-lc4-development-report.json (deterministic)
+    docs/bernie-lc4-development-report.json (deterministic, write mode only)
 """
 
 from __future__ import annotations
@@ -19,8 +20,9 @@ sys.path.insert(0, str(_HERE))
 
 from app.services.bernie.scale_corpus import (
     DEVELOPMENT_GROUP_COUNT,
-    TOTAL_VARIANTS,
+    TOTAL_SURFACE_VARIANTS,
     TOTAL_TRAJECTORIES,
+    TOTAL_INDIVIDUAL_RECORDS,
     ALL_ACTIONS,
     ALL_TEMPORAL_RELATIONS,
     ALL_DIARY_STATES,
@@ -35,7 +37,8 @@ from app.services.bernie.scale_corpus import (
 REPORT_PATH = _HERE / "docs" / "bernie-lc4-development-report.json"
 
 
-def main() -> None:
+def _compute_report() -> dict:
+    """Compute the report in memory and return the dict."""
     fixture_dir = _HERE / "tests" / "fixtures" / "bernie_lc4_development"
     loader = DevelopmentOnlyLoader(fixture_dir)
     corpus = loader.load_all()
@@ -90,13 +93,13 @@ def main() -> None:
     }
 
     report: dict = {
-        "schema_version": "lc4.development_report.v1",
-        "generated_at": None,  # No timestamp — deterministic
+        "schema_version": "lc4.development_report.v2",
+        "generated_at": None,
         "corpus_manifest": {
             "development_group_count": len(corpus.groups),
-            "surface_variant_count": TOTAL_VARIANTS,
+            "surface_variant_count": TOTAL_SURFACE_VARIANTS,
             "multi_turn_trajectory_count": TOTAL_TRAJECTORIES,
-            "total_individual_records": TOTAL_VARIANTS + TOTAL_TRAJECTORIES,
+            "total_individual_records": TOTAL_INDIVIDUAL_RECORDS,
             "corpus_hash": corpus.corpus_hash,
             "provenance": "silver",
             "adjudication": "pending",
@@ -133,11 +136,32 @@ def main() -> None:
         },
         "validation_errors": errors,
     }
+    return report
 
+
+def main() -> None:
+    check_mode = "--check" in sys.argv
+
+    report = _compute_report()
     report_json = json.dumps(report, indent=2, default=str) + "\n"
 
-    REPORT_PATH.write_text(report_json, encoding="utf-8")
-    print(f"Report written to {REPORT_PATH}")
+    if check_mode:
+        # --check: compute in memory, compare exact bytes, fail on drift, no write
+        if REPORT_PATH.exists():
+            existing = REPORT_PATH.read_text(encoding="utf-8")
+            if existing != report_json:
+                print("REPORT DRIFT DETECTED", file=sys.stderr)
+                print("  Existing report differs from in-memory computation.", file=sys.stderr)
+                print("  Regenerate with: python scripts/bernie_lc4_development_report.py", file=sys.stderr)
+                sys.exit(1)
+            print("Report check passed — in-memory computation matches stored report.")
+        else:
+            print(f"Report file not found at {REPORT_PATH} — nothing to check.", file=sys.stderr)
+            sys.exit(1)
+    else:
+        # Write mode (default)
+        REPORT_PATH.write_text(report_json, encoding="utf-8")
+        print(f"Report written to {REPORT_PATH}")
 
 
 if __name__ == "__main__":

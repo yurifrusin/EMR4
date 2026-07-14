@@ -1,7 +1,25 @@
 {
-  "schema_version": "lc4.scale_corpus.v1",
+  "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_080",
-  "group_hash": "sha256:c5d82f2801c157edfb57c1c2d95e57d9c0b43f8a09765b67ced7385dce3f37d0",
+  "group_hash": "sha256:0269adecb70c2b7861a22cba2b904368de6a88a11f8ce3f56b67eaddaa6a9f6c",
+  "variant_hashes": {
+    "surface": [
+      "sha256:a18299f183145a58dcb761249b9a562c498e88997d513024b0d2768b4ed75b5e",
+      "sha256:97f2e67b6b3db4b693d40f9b64dda0172a75603474cb3d45f9cee69215412b9b",
+      "sha256:f94d2c9358aee42d92952e2d7440a9b8349dc0dd6cb83b6b699158d1b00f3df7",
+      "sha256:ddb123adfaa5378bd78c856d2f7548d008dff4f68d415b2f08978d2d931c3d4c",
+      "sha256:85345a846cc7ffb07a28ed790b140c1cc355e5a6e713ea9fa66336abcdc7530f",
+      "sha256:c98f67ec9347ad72ccbcd4c252285e4ee41f7f01c012207cfce2417ee71fbeb2",
+      "sha256:fdd1db3dd8c971295498f5301abfd0acff68f2238f5d4c1be4bce87b34ddcf6e",
+      "sha256:3abd525b961a367461a21559bda95f175c43ea2bcee78a999429effa4923c225",
+      "sha256:eb583069ce9f8b4724876c205e7b0bf56fecf8331db1545a206ab691835880cf"
+    ],
+    "multi_turn": [
+      "sha256:f3c43b2a3e706ab33989f48980d793b966d6fe4814b86248b75a9426bae804d4",
+      "sha256:cb3b9d5158546b9c11c22fa4995f23e38af8b04ac28c0c994360d486320ea358",
+      "sha256:05abdefb92cc224e781e01b9cb47b318e30e7f40bd927a52088d453bc9a4e419"
+    ]
+  },
   "provenance": "silver",
   "adjudication": "pending",
   "reference_date": "2026-07-14",
@@ -32,11 +50,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_080",
-      "description": "status_change:unspecified:session_restart:adversarial - Mark Margaret Thompson arrived for her appointment with Dr Shera sometime tomorr",
+      "description": "status_change:unspecified:session_restart:adversarial - Mark someone arrived for her appointment with some doctor sometime tomorrow at s",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Mark Margaret Thompson arrived for her appointment with Dr Shera sometime tomorrow at some time."
+          "utterance": "Mark someone arrived for her appointment with some doctor sometime tomorrow at some time."
         }
       ],
       "reference_date": "2026-07-14",
@@ -50,32 +68,15 @@
         "appointment_date": "2026-07-15",
         "duration_minutes": 15
       },
-      "source_spans": {
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 5,
-            "end": 22,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 56,
-            "end": 64,
-            "text": "Dr Shera"
-          }
-        ]
-      },
+      "source_spans": {},
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "exact",
+      "entity_state": "ambiguous",
       "dialogue_form": "session_restart",
       "language_form": "adversarial",
       "initial_diary_state": {
@@ -114,7 +115,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:a18299f183145a58dcb761249b9a562c498e88997d513024b0d2768b4ed75b5e"
     },
     {
       "spec_version": "lc1.v1",
@@ -122,11 +124,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_080",
-      "description": "status_change:unspecified:session_restart:adversarial - Margaret Thompson has arrived for her appointment with Dr Shera \u2014 please mark he",
+      "description": "status_change:unspecified:session_restart:adversarial - someone has arrived for her appointment with some doctor \u2014 please mark her as ar",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Margaret Thompson has arrived for her appointment with Dr Shera \u2014 please mark her as arrived."
+          "utterance": "someone has arrived for her appointment with some doctor \u2014 please mark her as arrived."
         }
       ],
       "reference_date": "2026-07-14",
@@ -140,32 +142,15 @@
         "appointment_date": "2026-07-15",
         "duration_minutes": 15
       },
-      "source_spans": {
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 0,
-            "end": 17,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 55,
-            "end": 63,
-            "text": "Dr Shera"
-          }
-        ]
-      },
+      "source_spans": {},
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "exact",
+      "entity_state": "ambiguous",
       "dialogue_form": "session_restart",
       "language_form": "adversarial",
       "initial_diary_state": {
@@ -204,7 +189,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:97f2e67b6b3db4b693d40f9b64dda0172a75603474cb3d45f9cee69215412b9b"
     },
     {
       "spec_version": "lc1.v1",
@@ -212,11 +198,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_080",
-      "description": "status_change:unspecified:session_restart:adversarial - Arrived: Margaret Thompson, Dr Shera, sometime tomorrow some time.",
+      "description": "status_change:unspecified:session_restart:adversarial - Arrived: someone, some doctor, sometime tomorrow some time.",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Arrived: Margaret Thompson, Dr Shera, sometime tomorrow some time."
+          "utterance": "Arrived: someone, some doctor, sometime tomorrow some time."
         }
       ],
       "reference_date": "2026-07-14",
@@ -230,32 +216,15 @@
         "appointment_date": "2026-07-15",
         "duration_minutes": 15
       },
-      "source_spans": {
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 9,
-            "end": 26,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 28,
-            "end": 36,
-            "text": "Dr Shera"
-          }
-        ]
-      },
+      "source_spans": {},
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "exact",
+      "entity_state": "ambiguous",
       "dialogue_form": "session_restart",
       "language_form": "adversarial",
       "initial_diary_state": {
@@ -294,7 +263,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:f94d2c9358aee42d92952e2d7440a9b8349dc0dd6cb83b6b699158d1b00f3df7"
     },
     {
       "spec_version": "lc1.v1",
@@ -302,11 +272,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_080",
-      "description": "status_change:unspecified:session_restart:adversarial - Hi, could you please check in Margaret Thompson? She's here to see Dr Shera.",
+      "description": "status_change:unspecified:session_restart:adversarial - Hi, could you please check in someone? She's here to see some doctor.",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Hi, could you please check in Margaret Thompson? She's here to see Dr Shera."
+          "utterance": "Hi, could you please check in someone? She's here to see some doctor."
         }
       ],
       "reference_date": "2026-07-14",
@@ -320,32 +290,15 @@
         "appointment_date": "2026-07-15",
         "duration_minutes": 15
       },
-      "source_spans": {
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 30,
-            "end": 47,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 67,
-            "end": 75,
-            "text": "Dr Shera"
-          }
-        ]
-      },
+      "source_spans": {},
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "exact",
+      "entity_state": "ambiguous",
       "dialogue_form": "session_restart",
       "language_form": "adversarial",
       "initial_diary_state": {
@@ -384,7 +337,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:ddb123adfaa5378bd78c856d2f7548d008dff4f68d415b2f08978d2d931c3d4c"
     },
     {
       "spec_version": "lc1.v1",
@@ -392,11 +346,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_080",
-      "description": "status_change:unspecified:session_restart:adversarial - Please mark Margaret Thompson arrived for Dr Shera sometime tomorrow some time.",
+      "description": "status_change:unspecified:session_restart:adversarial - Please mark someone arrived for some doctor sometime tomorrow some time.",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Please mark Margaret Thompson arrived for Dr Shera sometime tomorrow some time."
+          "utterance": "Please mark someone arrived for some doctor sometime tomorrow some time."
         }
       ],
       "reference_date": "2026-07-14",
@@ -410,32 +364,15 @@
         "appointment_date": "2026-07-15",
         "duration_minutes": 15
       },
-      "source_spans": {
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 12,
-            "end": 29,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 42,
-            "end": 50,
-            "text": "Dr Shera"
-          }
-        ]
-      },
+      "source_spans": {},
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "exact",
+      "entity_state": "ambiguous",
       "dialogue_form": "session_restart",
       "language_form": "adversarial",
       "initial_diary_state": {
@@ -474,7 +411,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:85345a846cc7ffb07a28ed790b140c1cc355e5a6e713ea9fa66336abcdc7530f"
     },
     {
       "spec_version": "lc1.v1",
@@ -482,11 +420,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_080",
-      "description": "status_change:unspecified:session_restart:adversarial - Margaret Thompson is here now \u2014 please confirm arrival for her booking with Dr S",
+      "description": "status_change:unspecified:session_restart:adversarial - someone is here now \u2014 please confirm arrival for her booking with some doctor.",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Margaret Thompson is here now \u2014 please confirm arrival for her booking with Dr Shera."
+          "utterance": "someone is here now \u2014 please confirm arrival for her booking with some doctor."
         }
       ],
       "reference_date": "2026-07-14",
@@ -500,32 +438,15 @@
         "appointment_date": "2026-07-15",
         "duration_minutes": 15
       },
-      "source_spans": {
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 0,
-            "end": 17,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 76,
-            "end": 84,
-            "text": "Dr Shera"
-          }
-        ]
-      },
+      "source_spans": {},
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "exact",
+      "entity_state": "ambiguous",
       "dialogue_form": "session_restart",
       "language_form": "adversarial",
       "initial_diary_state": {
@@ -564,7 +485,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:c98f67ec9347ad72ccbcd4c252285e4ee41f7f01c012207cfce2417ee71fbeb2"
     },
     {
       "spec_version": "lc1.v1",
@@ -572,11 +494,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_080",
-      "description": "status_change:unspecified:session_restart:adversarial - yeah Margaret Thompson's here for Dr Shera can you mark her arrived",
+      "description": "status_change:unspecified:session_restart:adversarial - Status: someone \u2014 some doctor \u2014 ARRIVED sometime tomorrow some time.",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "yeah Margaret Thompson's here for Dr Shera can you mark her arrived"
+          "utterance": "Status: someone \u2014 some doctor \u2014 ARRIVED sometime tomorrow some time."
         }
       ],
       "reference_date": "2026-07-14",
@@ -590,32 +512,15 @@
         "appointment_date": "2026-07-15",
         "duration_minutes": 15
       },
-      "source_spans": {
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 5,
-            "end": 22,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 34,
-            "end": 42,
-            "text": "Dr Shera"
-          }
-        ]
-      },
+      "source_spans": {},
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "exact",
+      "entity_state": "ambiguous",
       "dialogue_form": "session_restart",
       "language_form": "adversarial",
       "initial_diary_state": {
@@ -654,7 +559,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:fdd1db3dd8c971295498f5301abfd0acff68f2238f5d4c1be4bce87b34ddcf6e"
     },
     {
       "spec_version": "lc1.v1",
@@ -662,11 +568,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_080",
-      "description": "status_change:unspecified:session_restart:adversarial - Status: Margaret Thompson \u2014 Dr Shera \u2014 ARRIVED sometime tomorrow some time.",
+      "description": "status_change:unspecified:session_restart:adversarial - Please update someone's status to arrived for some doctor.",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Status: Margaret Thompson \u2014 Dr Shera \u2014 ARRIVED sometime tomorrow some time."
+          "utterance": "Please update someone's status to arrived for some doctor."
         }
       ],
       "reference_date": "2026-07-14",
@@ -680,32 +586,15 @@
         "appointment_date": "2026-07-15",
         "duration_minutes": 15
       },
-      "source_spans": {
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 8,
-            "end": 25,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 28,
-            "end": 36,
-            "text": "Dr Shera"
-          }
-        ]
-      },
+      "source_spans": {},
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "exact",
+      "entity_state": "ambiguous",
       "dialogue_form": "session_restart",
       "language_form": "adversarial",
       "initial_diary_state": {
@@ -744,7 +633,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:3abd525b961a367461a21559bda95f175c43ea2bcee78a999429effa4923c225"
     },
     {
       "spec_version": "lc1.v1",
@@ -752,11 +642,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_080",
-      "description": "status_change:unspecified:session_restart:adversarial - Please update Margaret Thompson's status to arrived for Dr Shera.",
+      "description": "status_change:unspecified:session_restart:adversarial - Could you mark someone as arrived for some doctor? She's here.",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Please update Margaret Thompson's status to arrived for Dr Shera."
+          "utterance": "Could you mark someone as arrived for some doctor? She's here."
         }
       ],
       "reference_date": "2026-07-14",
@@ -770,32 +660,15 @@
         "appointment_date": "2026-07-15",
         "duration_minutes": 15
       },
-      "source_spans": {
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 14,
-            "end": 31,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 56,
-            "end": 64,
-            "text": "Dr Shera"
-          }
-        ]
-      },
+      "source_spans": {},
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "exact",
+      "entity_state": "ambiguous",
       "dialogue_form": "session_restart",
       "language_form": "adversarial",
       "initial_diary_state": {
@@ -834,277 +707,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_080_10",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_080",
-      "description": "status_change:unspecified:session_restart:adversarial - Check in Margaret Thompson for her appointment with Dr Shera please.",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "Check in Margaret Thompson for her appointment with Dr Shera please."
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "status_change",
-      "action_semantics": "intended",
-      "temporal_relation": "unspecified",
-      "earliest_time": null,
-      "latest_time": null,
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15
-      },
-      "source_spans": {
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 9,
-            "end": 26,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 52,
-            "end": 60,
-            "text": "Dr Shera"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "overlap",
-      "entity_state": "exact",
-      "dialogue_form": "session_restart",
-      "language_form": "adversarial",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "appointment_status_changed",
-      "expected_tool_sequence": [
-        "request_clarification"
-      ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "status_changed",
-          "new_status": "arrived"
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "status_change_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": []
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_080_11",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_080",
-      "description": "status_change:unspecified:session_restart:adversarial - Margaret Thompson has walked in for Dr Shera \u2014 mark as arrived.",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "Margaret Thompson has walked in for Dr Shera \u2014 mark as arrived."
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "status_change",
-      "action_semantics": "intended",
-      "temporal_relation": "unspecified",
-      "earliest_time": null,
-      "latest_time": null,
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15
-      },
-      "source_spans": {
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 0,
-            "end": 17,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 36,
-            "end": 44,
-            "text": "Dr Shera"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "overlap",
-      "entity_state": "exact",
-      "dialogue_form": "session_restart",
-      "language_form": "adversarial",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "appointment_status_changed",
-      "expected_tool_sequence": [
-        "request_clarification"
-      ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "status_changed",
-          "new_status": "arrived"
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "status_change_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": []
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_080_12",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_080",
-      "description": "status_change:unspecified:session_restart:adversarial - Could you mark Margaret Thompson as arrived for Dr Shera? She's here.",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "Could you mark Margaret Thompson as arrived for Dr Shera? She's here."
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "status_change",
-      "action_semantics": "intended",
-      "temporal_relation": "unspecified",
-      "earliest_time": null,
-      "latest_time": null,
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15
-      },
-      "source_spans": {
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 15,
-            "end": 32,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 48,
-            "end": 56,
-            "text": "Dr Shera"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "overlap",
-      "entity_state": "exact",
-      "dialogue_form": "session_restart",
-      "language_form": "adversarial",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "appointment_status_changed",
-      "expected_tool_sequence": [
-        "request_clarification"
-      ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "status_changed",
-          "new_status": "arrived"
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "status_change_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:eb583069ce9f8b4724876c205e7b0bf56fecf8331db1545a206ab691835880cf"
     }
   ],
   "multi_turn_variants": [
@@ -1163,13 +767,13 @@
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "exact",
+      "entity_state": "ambiguous",
       "dialogue_form": "clarification",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1213,7 +817,8 @@
         "2pm",
         "3pm",
         "4pm"
-      ]
+      ],
+      "variant_hash": "sha256:f3c43b2a3e706ab33989f48980d793b966d6fe4814b86248b75a9426bae804d4"
     },
     {
       "spec_version": "lc1.v1",
@@ -1276,13 +881,13 @@
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "exact",
+      "entity_state": "ambiguous",
       "dialogue_form": "correction",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1321,7 +926,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:cb3b9d5158546b9c11c22fa4995f23e38af8b04ac28c0c994360d486320ea358"
     },
     {
       "spec_version": "lc1.v1",
@@ -1378,13 +984,13 @@
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
+      "practitioner_semantics": "ambiguous",
+      "patient_semantics": "ambiguous",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "exact",
+      "entity_state": "ambiguous",
       "dialogue_form": "reversal",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1423,7 +1029,8 @@
         "override_confirmation"
       ],
       "expected_clarification": null,
-      "clarification_choices": []
+      "clarification_choices": [],
+      "variant_hash": "sha256:05abdefb92cc224e781e01b9cb47b318e30e7f40bd927a52088d453bc9a4e419"
     }
   ]
 }

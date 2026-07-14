@@ -34,8 +34,10 @@ def main() -> None:
             print(f"  - {e}")
         sys.exit(1)
 
+    total_variants = sum(len(g.surface_variants) + len(g.multi_turn_variants) for g in corpus.groups)
+    mt_variants = sum(len(g.multi_turn_variants) for g in corpus.groups)
     print(f"Generated {len(corpus.groups)} groups")
-    print(f"  Total variants: {corpus.groups[0].surface_variants[0].scenario_id} ... {corpus.groups[-1].multi_turn_variants[-1].scenario_id}")
+    print(f"  Total variants: {total_variants} ({total_variants - mt_variants} surface + {mt_variants} MT)")
     print(f"  Gap-priority groups: {corpus.gap_priority_group_count}")
 
     # Print coverage stats
