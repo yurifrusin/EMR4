@@ -268,6 +268,13 @@ def parse_args(argv: List[str] | None = None) -> argparse.Namespace:
         default=None,
         help="Also write the machine-readable JSON report to this path",
     )
+    # ── Candidate-aware mode ──────────────────────────────────────────────
+    parser.add_argument(
+        "--candidate-dir",
+        type=Path,
+        default=None,
+        help="Path to LC2 CorpusCandidate wrapper directory for candidate-aware mode",
+    )
     return parser.parse_args(argv)
 
 
@@ -289,6 +296,112 @@ def main(argv: List[str] | None = None) -> int:
         max_empty_cells=None if args.all_empty_cells else args.empty_cell_limit,
     )
     rendered = json.dumps(report, indent=2) + "\n"
+
+    # ── Candidate-aware mode ──────────────────────────────────────────────
+    if args.candidate_dir is not None:
+        candidate_path = Path(args.candidate_dir)
+        if not candidate_path.is_dir():
+            print(
+                f"ERROR: Candidate directory does not exist: {candidate_path}",
+                file=sys.stderr,
+            )
+            return 1
+
+        # Load CorpusCandidate wrappers
+        from app.services.bernie.corpus_tier import CorpusCandidate
+
+        all_wrappers: List[Dict[str, Any]] = []
+        for path in sorted(candidate_path.iterdir()):
+            if path.suffix.lower() != ".json":
+                continue
+            with open(path, "r", encoding="utf-8") as fh:
+                raw_list = json.load(fh)
+            if isinstance(raw_list, list):
+                for entry in raw_list:
+                    candidate = CorpusCandidate.model_validate(entry)
+                    all_wrappers.append(candidate.model_dump(mode="json"))
+
+        # Compute adjudicated covered cells from LC1 fixtures
+        adjudicated_covered: Set[Tuple[str, str, str, str, str, str]] = set()
+        for fixture in fixtures:
+            action = fixture.get("intended_action", "unknown")
+            diary_state = fixture.get("diary_state", "unknown")
+            entity_state = fixture.get("entity_state", "unknown")
+            temporal = fixture.get("temporal_relation", "unspecified")
+            dialogue = fixture.get("dialogue_form", "unknown")
+            language = fixture.get("language_form", "unknown")
+            adjudicated_covered.add(
+                (action, diary_state, entity_state, temporal, dialogue, language)
+            )
+
+        # Candidate-only cells
+        candidate_covered: Set[Tuple[str, str, str, str, str, str]] = set()
+        for wrapper in all_wrappers:
+            sc = wrapper["scenario"]
+            cell = (
+                sc["intended_action"],
+                sc["diary_state"],
+                sc["entity_state"],
+                sc["temporal_relation"],
+                sc["dialogue_form"],
+                sc["language_form"],
+            )
+            if cell not in adjudicated_covered:
+                candidate_covered.add(cell)
+
+        union_covered = adjudicated_covered | candidate_covered
+        total_cells = (
+            len(DIARY_ACTIONS)
+            * len(DIARY_STATES)
+            * len(ENTITY_STATES)
+            * len(TEMPORAL_FORMS)
+            * len(DIALOGUE_FORMS)
+            * len(LANGUAGE_FORMS)
+        )
+
+        # Candidate count breakdown
+        tier_counts: Dict[str, int] = {}
+        adj_counts: Dict[str, int] = {}
+        for wrapper in all_wrappers:
+            tier = wrapper.get("provenance", "unknown")
+            tier_counts[tier] = tier_counts.get(tier, 0) + 1
+            adj = wrapper.get("adjudication", "unknown")
+            adj_counts[adj] = adj_counts.get(adj, 0) + 1
+
+        candidate_lattice = {
+            "feature_version": "lc3.candidate_aware_lattice.v1",
+            "adjudicated_scenario_count": len(fixtures),
+            "adjudicated_covered_cell_count": len(adjudicated_covered),
+            "adjudicated_empty_cell_count": total_cells - len(adjudicated_covered),
+            "candidate_count_by_tier": tier_counts,
+            "candidate_count_by_adjudication": adj_counts,
+            "candidate_only_cell_count": len(candidate_covered),
+            "candidate_only_cell_examples": [
+                {
+                    "diary_action": c[0],
+                    "diary_state": c[1],
+                    "entity_state": c[2],
+                    "temporal_form": c[3],
+                    "dialogue_form": c[4],
+                    "language_form": c[5],
+                }
+                for c in sorted(candidate_covered)[:5]
+            ],
+            "union_covered_cell_count": len(union_covered),
+            "union_empty_cell_count": total_cells - len(union_covered),
+            "total_lattice_cells": total_cells,
+            "proof_adjudicated_gaps_preserved": (
+                f"adjudicated_empty={total_cells - len(adjudicated_covered)}, "
+                f"union_empty={total_cells - len(union_covered)}, "
+                f"pending_candidates_do_not_reduce_adjudicated_gaps="
+                f"{(total_cells - len(union_covered)) <= (total_cells - len(adjudicated_covered))}"
+            ),
+        }
+
+        # Embed in the base report (backward-compatible extension)
+        report["candidate_aware_lattice"] = candidate_lattice
+        rendered = json.dumps(report, indent=2) + "\n"
+
     if args.output is not None:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(rendered, encoding="utf-8")

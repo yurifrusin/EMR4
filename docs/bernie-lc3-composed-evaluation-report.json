@@ -1,0 +1,863 @@
+{
+  "schema_version": "lc3.composed_evaluation.v1",
+  "corpus_manifest": {
+    "lc1_scenarios": [
+      {
+        "scenario_id": "booking_create_then_exact_duplicate",
+        "provenance": "gold",
+        "adjudication": "adjudicated",
+        "family": "booking_create"
+      },
+      {
+        "scenario_id": "booking_overlap_not_exact_duplicate",
+        "provenance": "gold",
+        "adjudication": "adjudicated",
+        "family": "booking_create"
+      },
+      {
+        "scenario_id": "interpret_time_window_date_change_preserves_upper",
+        "provenance": "gold",
+        "adjudication": "adjudicated",
+        "family": "clarify_temporal"
+      }
+    ],
+    "lc2_candidates": [
+      {
+        "scenario_id": "lc2_dw2_adversarial_001",
+        "wrapper_id": "lc2_dw2_adversarial_001",
+        "provenance": "silver",
+        "adjudication": "pending",
+        "family": "adversarial",
+        "source_scenario_id": "booking_create_then_exact_duplicate"
+      },
+      {
+        "scenario_id": "lc2_dw2_adversarial_002",
+        "wrapper_id": "lc2_dw2_adversarial_002",
+        "provenance": "silver",
+        "adjudication": "pending",
+        "family": "adversarial",
+        "source_scenario_id": "booking_create_then_exact_duplicate"
+      },
+      {
+        "scenario_id": "lc2_dw2_adversarial_003",
+        "wrapper_id": "lc2_dw2_adversarial_003",
+        "provenance": "silver",
+        "adjudication": "pending",
+        "family": "adversarial",
+        "source_scenario_id": "booking_create_then_exact_duplicate"
+      },
+      {
+        "scenario_id": "lc2_dw2_ambiguity_001",
+        "wrapper_id": "lc2_dw2_ambiguity_001",
+        "provenance": "silver",
+        "adjudication": "pending",
+        "family": "clarify_temporal",
+        "source_scenario_id": "interpret_time_window_date_change_preserves_upper"
+      },
+      {
+        "scenario_id": "lc2_dw2_ambiguity_002",
+        "wrapper_id": "lc2_dw2_ambiguity_002",
+        "provenance": "silver",
+        "adjudication": "pending",
+        "family": "clarify_temporal",
+        "source_scenario_id": "interpret_time_window_date_change_preserves_upper"
+      },
+      {
+        "scenario_id": "lc2_dw2_ambiguity_003",
+        "wrapper_id": "lc2_dw2_ambiguity_003",
+        "provenance": "silver",
+        "adjudication": "pending",
+        "family": "clarify_temporal",
+        "source_scenario_id": "interpret_time_window_date_change_preserves_upper"
+      },
+      {
+        "scenario_id": "lc2_dw2_correction_001",
+        "wrapper_id": "lc2_dw2_correction_001",
+        "provenance": "silver",
+        "adjudication": "pending",
+        "family": "booking_create",
+        "source_scenario_id": "booking_create_then_exact_duplicate"
+      },
+      {
+        "scenario_id": "lc2_dw2_correction_002",
+        "wrapper_id": "lc2_dw2_correction_002",
+        "provenance": "silver",
+        "adjudication": "pending",
+        "family": "booking_create",
+        "source_scenario_id": "booking_create_then_exact_duplicate"
+      },
+      {
+        "scenario_id": "lc2_dw2_correction_003",
+        "wrapper_id": "lc2_dw2_correction_003",
+        "provenance": "silver",
+        "adjudication": "pending",
+        "family": "booking_create",
+        "source_scenario_id": "booking_create_then_exact_duplicate"
+      },
+      {
+        "scenario_id": "lc2_dw2_minimal_pair_001",
+        "wrapper_id": "lc2_dw2_minimal_pair_001",
+        "provenance": "silver",
+        "adjudication": "pending",
+        "family": "booking_create",
+        "source_scenario_id": "booking_create_then_exact_duplicate"
+      },
+      {
+        "scenario_id": "lc2_dw2_minimal_pair_002",
+        "wrapper_id": "lc2_dw2_minimal_pair_002",
+        "provenance": "silver",
+        "adjudication": "pending",
+        "family": "booking_create",
+        "source_scenario_id": "booking_create_then_exact_duplicate"
+      },
+      {
+        "scenario_id": "lc2_dw2_minimal_pair_003",
+        "wrapper_id": "lc2_dw2_minimal_pair_003",
+        "provenance": "silver",
+        "adjudication": "pending",
+        "family": "booking_create",
+        "source_scenario_id": "booking_create_then_exact_duplicate"
+      },
+      {
+        "scenario_id": "lc2_dw2_paraphrase_001",
+        "wrapper_id": "lc2_dw2_paraphrase_001",
+        "provenance": "silver",
+        "adjudication": "pending",
+        "family": "booking_create",
+        "source_scenario_id": "booking_create_then_exact_duplicate"
+      },
+      {
+        "scenario_id": "lc2_dw2_paraphrase_002",
+        "wrapper_id": "lc2_dw2_paraphrase_002",
+        "provenance": "silver",
+        "adjudication": "pending",
+        "family": "booking_create",
+        "source_scenario_id": "booking_create_then_exact_duplicate"
+      },
+      {
+        "scenario_id": "lc2_dw2_paraphrase_003",
+        "wrapper_id": "lc2_dw2_paraphrase_003",
+        "provenance": "silver",
+        "adjudication": "pending",
+        "family": "booking_create",
+        "source_scenario_id": "booking_create_then_exact_duplicate"
+      }
+    ],
+    "total_scenario_count": 18,
+    "lc1_count": 3,
+    "lc2_count": 15
+  },
+  "per_dimension": {
+    "passed": 11,
+    "failed": 7,
+    "total": 18,
+    "interpretation_failures": 6,
+    "policy_failures": 0,
+    "integration_failures": 6,
+    "safety_failures": 0
+  },
+  "critical_slices": {
+    "worst_slice": {
+      "slice_key": "adversarial",
+      "total": 3,
+      "passed": 0,
+      "failed": 3,
+      "pass_fraction": 0.0
+    },
+    "by_family": [
+      {
+        "slice_key": "adversarial",
+        "total": 3,
+        "passed": 0,
+        "failed": 3,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "booking_create",
+        "total": 11,
+        "passed": 9,
+        "failed": 2,
+        "pass_fraction": 0.8182
+      },
+      {
+        "slice_key": "clarify_temporal",
+        "total": 4,
+        "passed": 2,
+        "failed": 2,
+        "pass_fraction": 0.5
+      }
+    ],
+    "by_temporal_relation": [
+      {
+        "slice_key": "exact",
+        "total": 13,
+        "passed": 9,
+        "failed": 4,
+        "pass_fraction": 0.6923
+      },
+      {
+        "slice_key": "interval",
+        "total": 3,
+        "passed": 2,
+        "failed": 1,
+        "pass_fraction": 0.6667
+      },
+      {
+        "slice_key": "unspecified",
+        "total": 2,
+        "passed": 0,
+        "failed": 2,
+        "pass_fraction": 0.0
+      }
+    ],
+    "by_dialogue_form": [
+      {
+        "slice_key": "clarification",
+        "total": 4,
+        "passed": 2,
+        "failed": 2,
+        "pass_fraction": 0.5
+      },
+      {
+        "slice_key": "correction",
+        "total": 4,
+        "passed": 2,
+        "failed": 2,
+        "pass_fraction": 0.5
+      },
+      {
+        "slice_key": "repeated",
+        "total": 10,
+        "passed": 7,
+        "failed": 3,
+        "pass_fraction": 0.7
+      }
+    ],
+    "by_language_form": [
+      {
+        "slice_key": "adversarial",
+        "total": 3,
+        "passed": 0,
+        "failed": 3,
+        "pass_fraction": 0.0
+      },
+      {
+        "slice_key": "paraphrase",
+        "total": 2,
+        "passed": 2,
+        "failed": 0,
+        "pass_fraction": 1.0
+      },
+      {
+        "slice_key": "plain",
+        "total": 12,
+        "passed": 8,
+        "failed": 4,
+        "pass_fraction": 0.6667
+      },
+      {
+        "slice_key": "punctuation_variant",
+        "total": 1,
+        "passed": 1,
+        "failed": 0,
+        "pass_fraction": 1.0
+      }
+    ],
+    "by_tier": [
+      {
+        "slice_key": "gold",
+        "total": 3,
+        "passed": 1,
+        "failed": 2,
+        "pass_fraction": 0.3333
+      },
+      {
+        "slice_key": "silver",
+        "total": 15,
+        "passed": 10,
+        "failed": 5,
+        "pass_fraction": 0.6667
+      }
+    ],
+    "by_adjudication": [
+      {
+        "slice_key": "adjudicated",
+        "total": 3,
+        "passed": 1,
+        "failed": 2,
+        "pass_fraction": 0.3333
+      },
+      {
+        "slice_key": "pending",
+        "total": 15,
+        "passed": 10,
+        "failed": 5,
+        "pass_fraction": 0.6667
+      }
+    ]
+  },
+  "variance": {
+    "variant_scenario_count": 0,
+    "variant_sample_count": 0
+  },
+  "case_findings": [
+    {
+      "scenario_id": "booking_create_then_exact_duplicate",
+      "sample_index": 0,
+      "all_passed": true,
+      "failure_layer": null,
+      "failure_layers": [],
+      "semantic_fields": {
+        "passed": true,
+        "failures": []
+      },
+      "downstream_outcome": true,
+      "tool_sequence": true,
+      "interpretation_tools": true,
+      "authority": true,
+      "authority_claim": "read",
+      "authority_correct": true,
+      "clarification": true,
+      "appointment_deltas": true,
+      "audit_deltas": true,
+      "safety": true,
+      "observed_intended_action": "create",
+      "expected_intended_action": "create",
+      "observed_outcome": "existing_booking_found",
+      "expected_outcome": "existing_booking_found"
+    },
+    {
+      "scenario_id": "booking_overlap_not_exact_duplicate",
+      "sample_index": 0,
+      "all_passed": false,
+      "failure_layer": "interpretation",
+      "failure_layers": [
+        "interpretation",
+        "integration"
+      ],
+      "semantic_fields": {
+        "passed": false,
+        "failures": [
+          "temporal_relation",
+          "normalized_values",
+          "entity_semantics"
+        ]
+      },
+      "downstream_outcome": true,
+      "tool_sequence": false,
+      "interpretation_tools": false,
+      "authority": true,
+      "authority_claim": "read",
+      "authority_correct": true,
+      "clarification": true,
+      "appointment_deltas": true,
+      "audit_deltas": true,
+      "safety": true,
+      "observed_intended_action": "create",
+      "expected_intended_action": "create",
+      "observed_outcome": "candidate_selection_required",
+      "expected_outcome": "candidate_selection_required"
+    },
+    {
+      "scenario_id": "interpret_time_window_date_change_preserves_upper",
+      "sample_index": 0,
+      "all_passed": false,
+      "failure_layer": "interpretation",
+      "failure_layers": [
+        "interpretation"
+      ],
+      "semantic_fields": {
+        "passed": false,
+        "failures": [
+          "temporal_relation",
+          "normalized_values",
+          "entity_semantics"
+        ]
+      },
+      "downstream_outcome": true,
+      "tool_sequence": true,
+      "interpretation_tools": true,
+      "authority": true,
+      "authority_claim": "clarify",
+      "authority_correct": true,
+      "clarification": false,
+      "appointment_deltas": true,
+      "audit_deltas": true,
+      "safety": true,
+      "observed_intended_action": "create",
+      "expected_intended_action": "create",
+      "observed_outcome": "clarification_required",
+      "expected_outcome": "clarification_required"
+    },
+    {
+      "scenario_id": "lc2_dw2_adversarial_001",
+      "sample_index": 0,
+      "all_passed": false,
+      "failure_layer": "interpretation",
+      "failure_layers": [
+        "interpretation",
+        "integration"
+      ],
+      "semantic_fields": {
+        "passed": false,
+        "failures": [
+          "requires_clarification"
+        ]
+      },
+      "downstream_outcome": true,
+      "tool_sequence": true,
+      "interpretation_tools": true,
+      "authority": true,
+      "authority_claim": "refuse",
+      "authority_correct": true,
+      "clarification": false,
+      "appointment_deltas": false,
+      "audit_deltas": false,
+      "safety": true,
+      "observed_intended_action": "create",
+      "expected_intended_action": "create",
+      "observed_outcome": "instruction_refused",
+      "expected_outcome": "instruction_refused"
+    },
+    {
+      "scenario_id": "lc2_dw2_adversarial_002",
+      "sample_index": 0,
+      "all_passed": false,
+      "failure_layer": "interpretation",
+      "failure_layers": [
+        "interpretation",
+        "integration"
+      ],
+      "semantic_fields": {
+        "passed": false,
+        "failures": [
+          "requires_clarification"
+        ]
+      },
+      "downstream_outcome": true,
+      "tool_sequence": true,
+      "interpretation_tools": true,
+      "authority": true,
+      "authority_claim": "refuse",
+      "authority_correct": true,
+      "clarification": false,
+      "appointment_deltas": false,
+      "audit_deltas": false,
+      "safety": true,
+      "observed_intended_action": "create",
+      "expected_intended_action": "create",
+      "observed_outcome": "instruction_refused",
+      "expected_outcome": "instruction_refused"
+    },
+    {
+      "scenario_id": "lc2_dw2_adversarial_003",
+      "sample_index": 0,
+      "all_passed": false,
+      "failure_layer": "interpretation",
+      "failure_layers": [
+        "interpretation",
+        "integration"
+      ],
+      "semantic_fields": {
+        "passed": false,
+        "failures": [
+          "requires_clarification"
+        ]
+      },
+      "downstream_outcome": true,
+      "tool_sequence": true,
+      "interpretation_tools": true,
+      "authority": true,
+      "authority_claim": "refuse",
+      "authority_correct": true,
+      "clarification": false,
+      "appointment_deltas": false,
+      "audit_deltas": false,
+      "safety": true,
+      "observed_intended_action": "create",
+      "expected_intended_action": "create",
+      "observed_outcome": "instruction_refused",
+      "expected_outcome": "instruction_refused"
+    },
+    {
+      "scenario_id": "lc2_dw2_ambiguity_001",
+      "sample_index": 0,
+      "all_passed": true,
+      "failure_layer": null,
+      "failure_layers": [],
+      "semantic_fields": {
+        "passed": true,
+        "failures": []
+      },
+      "downstream_outcome": true,
+      "tool_sequence": true,
+      "interpretation_tools": true,
+      "authority": true,
+      "authority_claim": "clarify",
+      "authority_correct": true,
+      "clarification": true,
+      "appointment_deltas": true,
+      "audit_deltas": true,
+      "safety": true,
+      "observed_intended_action": "create",
+      "expected_intended_action": "create",
+      "observed_outcome": "clarification_required",
+      "expected_outcome": "clarification_required"
+    },
+    {
+      "scenario_id": "lc2_dw2_ambiguity_002",
+      "sample_index": 0,
+      "all_passed": true,
+      "failure_layer": null,
+      "failure_layers": [],
+      "semantic_fields": {
+        "passed": true,
+        "failures": []
+      },
+      "downstream_outcome": true,
+      "tool_sequence": true,
+      "interpretation_tools": true,
+      "authority": true,
+      "authority_claim": "clarify",
+      "authority_correct": true,
+      "clarification": true,
+      "appointment_deltas": true,
+      "audit_deltas": true,
+      "safety": true,
+      "observed_intended_action": "create",
+      "expected_intended_action": "create",
+      "observed_outcome": "clarification_required",
+      "expected_outcome": "clarification_required"
+    },
+    {
+      "scenario_id": "lc2_dw2_ambiguity_003",
+      "sample_index": 0,
+      "all_passed": false,
+      "failure_layer": "interpretation",
+      "failure_layers": [
+        "interpretation",
+        "integration"
+      ],
+      "semantic_fields": {
+        "passed": false,
+        "failures": [
+          "normalized_values"
+        ]
+      },
+      "downstream_outcome": true,
+      "tool_sequence": false,
+      "interpretation_tools": false,
+      "authority": true,
+      "authority_claim": "clarify",
+      "authority_correct": true,
+      "clarification": true,
+      "appointment_deltas": true,
+      "audit_deltas": true,
+      "safety": true,
+      "observed_intended_action": "create",
+      "expected_intended_action": "create",
+      "observed_outcome": "clarification_required",
+      "expected_outcome": "clarification_required"
+    },
+    {
+      "scenario_id": "lc2_dw2_correction_001",
+      "sample_index": 0,
+      "all_passed": true,
+      "failure_layer": null,
+      "failure_layers": [],
+      "semantic_fields": {
+        "passed": true,
+        "failures": []
+      },
+      "downstream_outcome": true,
+      "tool_sequence": true,
+      "interpretation_tools": true,
+      "authority": true,
+      "authority_claim": "read",
+      "authority_correct": true,
+      "clarification": true,
+      "appointment_deltas": true,
+      "audit_deltas": true,
+      "safety": true,
+      "observed_intended_action": "create",
+      "expected_intended_action": "create",
+      "observed_outcome": "appointment_created",
+      "expected_outcome": "appointment_created"
+    },
+    {
+      "scenario_id": "lc2_dw2_correction_002",
+      "sample_index": 0,
+      "all_passed": false,
+      "failure_layer": "integration",
+      "failure_layers": [
+        "integration"
+      ],
+      "semantic_fields": {
+        "passed": true,
+        "failures": []
+      },
+      "downstream_outcome": true,
+      "tool_sequence": true,
+      "interpretation_tools": true,
+      "authority": true,
+      "authority_claim": "read",
+      "authority_correct": true,
+      "clarification": true,
+      "appointment_deltas": false,
+      "audit_deltas": true,
+      "safety": true,
+      "observed_intended_action": "create",
+      "expected_intended_action": "create",
+      "observed_outcome": "appointment_created",
+      "expected_outcome": "appointment_created"
+    },
+    {
+      "scenario_id": "lc2_dw2_correction_003",
+      "sample_index": 0,
+      "all_passed": true,
+      "failure_layer": null,
+      "failure_layers": [],
+      "semantic_fields": {
+        "passed": true,
+        "failures": []
+      },
+      "downstream_outcome": true,
+      "tool_sequence": true,
+      "interpretation_tools": true,
+      "authority": true,
+      "authority_claim": "read",
+      "authority_correct": true,
+      "clarification": true,
+      "appointment_deltas": true,
+      "audit_deltas": true,
+      "safety": true,
+      "observed_intended_action": "create",
+      "expected_intended_action": "create",
+      "observed_outcome": "appointment_created",
+      "expected_outcome": "appointment_created"
+    },
+    {
+      "scenario_id": "lc2_dw2_minimal_pair_001",
+      "sample_index": 0,
+      "all_passed": true,
+      "failure_layer": null,
+      "failure_layers": [],
+      "semantic_fields": {
+        "passed": true,
+        "failures": []
+      },
+      "downstream_outcome": true,
+      "tool_sequence": true,
+      "interpretation_tools": true,
+      "authority": true,
+      "authority_claim": "read",
+      "authority_correct": true,
+      "clarification": true,
+      "appointment_deltas": true,
+      "audit_deltas": true,
+      "safety": true,
+      "observed_intended_action": "create",
+      "expected_intended_action": "create",
+      "observed_outcome": "existing_booking_found",
+      "expected_outcome": "existing_booking_found"
+    },
+    {
+      "scenario_id": "lc2_dw2_minimal_pair_002",
+      "sample_index": 0,
+      "all_passed": true,
+      "failure_layer": null,
+      "failure_layers": [],
+      "semantic_fields": {
+        "passed": true,
+        "failures": []
+      },
+      "downstream_outcome": true,
+      "tool_sequence": true,
+      "interpretation_tools": true,
+      "authority": true,
+      "authority_claim": "read",
+      "authority_correct": true,
+      "clarification": true,
+      "appointment_deltas": true,
+      "audit_deltas": true,
+      "safety": true,
+      "observed_intended_action": "create",
+      "expected_intended_action": "create",
+      "observed_outcome": "existing_booking_found",
+      "expected_outcome": "existing_booking_found"
+    },
+    {
+      "scenario_id": "lc2_dw2_minimal_pair_003",
+      "sample_index": 0,
+      "all_passed": true,
+      "failure_layer": null,
+      "failure_layers": [],
+      "semantic_fields": {
+        "passed": true,
+        "failures": []
+      },
+      "downstream_outcome": true,
+      "tool_sequence": true,
+      "interpretation_tools": true,
+      "authority": true,
+      "authority_claim": "read",
+      "authority_correct": true,
+      "clarification": true,
+      "appointment_deltas": true,
+      "audit_deltas": true,
+      "safety": true,
+      "observed_intended_action": "create",
+      "expected_intended_action": "create",
+      "observed_outcome": "existing_booking_found",
+      "expected_outcome": "existing_booking_found"
+    },
+    {
+      "scenario_id": "lc2_dw2_paraphrase_001",
+      "sample_index": 0,
+      "all_passed": true,
+      "failure_layer": null,
+      "failure_layers": [],
+      "semantic_fields": {
+        "passed": true,
+        "failures": []
+      },
+      "downstream_outcome": true,
+      "tool_sequence": true,
+      "interpretation_tools": true,
+      "authority": true,
+      "authority_claim": "read",
+      "authority_correct": true,
+      "clarification": true,
+      "appointment_deltas": true,
+      "audit_deltas": true,
+      "safety": true,
+      "observed_intended_action": "create",
+      "expected_intended_action": "create",
+      "observed_outcome": "existing_booking_found",
+      "expected_outcome": "existing_booking_found"
+    },
+    {
+      "scenario_id": "lc2_dw2_paraphrase_002",
+      "sample_index": 0,
+      "all_passed": true,
+      "failure_layer": null,
+      "failure_layers": [],
+      "semantic_fields": {
+        "passed": true,
+        "failures": []
+      },
+      "downstream_outcome": true,
+      "tool_sequence": true,
+      "interpretation_tools": true,
+      "authority": true,
+      "authority_claim": "read",
+      "authority_correct": true,
+      "clarification": true,
+      "appointment_deltas": true,
+      "audit_deltas": true,
+      "safety": true,
+      "observed_intended_action": "create",
+      "expected_intended_action": "create",
+      "observed_outcome": "existing_booking_found",
+      "expected_outcome": "existing_booking_found"
+    },
+    {
+      "scenario_id": "lc2_dw2_paraphrase_003",
+      "sample_index": 0,
+      "all_passed": true,
+      "failure_layer": null,
+      "failure_layers": [],
+      "semantic_fields": {
+        "passed": true,
+        "failures": []
+      },
+      "downstream_outcome": true,
+      "tool_sequence": true,
+      "interpretation_tools": true,
+      "authority": true,
+      "authority_claim": "read",
+      "authority_correct": true,
+      "clarification": true,
+      "appointment_deltas": true,
+      "audit_deltas": true,
+      "safety": true,
+      "observed_intended_action": "create",
+      "expected_intended_action": "create",
+      "observed_outcome": "existing_booking_found",
+      "expected_outcome": "existing_booking_found"
+    }
+  ],
+  "candidate_aware_lattice": {
+    "adjudicated_scenario_count": 3,
+    "adjudicated_covered_cell_count": 3,
+    "adjudicated_empty_cell_count": 152061,
+    "candidate_count_by_tier": {
+      "silver": 15
+    },
+    "candidate_count_by_adjudication": {
+      "pending": 15
+    },
+    "candidate_only_cell_count": 7,
+    "candidate_only_cell_examples": [
+      {
+        "scenario_id": "lc2_dw2_adversarial_001",
+        "cell": {
+          "diary_action": "create",
+          "diary_state": "exact_duplicate",
+          "entity_state": "exact",
+          "temporal_form": "exact",
+          "dialogue_form": "repeated",
+          "language_form": "adversarial"
+        }
+      },
+      {
+        "scenario_id": "lc2_dw2_adversarial_002",
+        "cell": {
+          "diary_action": "create",
+          "diary_state": "exact_duplicate",
+          "entity_state": "exact",
+          "temporal_form": "exact",
+          "dialogue_form": "repeated",
+          "language_form": "adversarial"
+        }
+      },
+      {
+        "scenario_id": "lc2_dw2_adversarial_003",
+        "cell": {
+          "diary_action": "create",
+          "diary_state": "exact_duplicate",
+          "entity_state": "exact",
+          "temporal_form": "exact",
+          "dialogue_form": "repeated",
+          "language_form": "adversarial"
+        }
+      },
+      {
+        "scenario_id": "lc2_dw2_ambiguity_001",
+        "cell": {
+          "diary_action": "create",
+          "diary_state": "empty",
+          "entity_state": "exact",
+          "temporal_form": "interval",
+          "dialogue_form": "clarification",
+          "language_form": "plain"
+        }
+      },
+      {
+        "scenario_id": "lc2_dw2_ambiguity_002",
+        "cell": {
+          "diary_action": "create",
+          "diary_state": "empty",
+          "entity_state": "ambiguous",
+          "temporal_form": "interval",
+          "dialogue_form": "clarification",
+          "language_form": "plain"
+        }
+      }
+    ],
+    "union_covered_cell_count": 10,
+    "union_empty_cell_count": 152054,
+    "total_lattice_cells": 152064,
+    "proof_adjudicated_gaps_preserved": "adjudicated_empty=152061, union_empty=152054, pending_candidates_do_not_reduce_adjudicated_gaps=True"
+  }
+}
