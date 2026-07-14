@@ -1053,7 +1053,29 @@ class TestMultiTurnFinalState:
             "2026-07-13",
         )
         assert result.temporal_relation == "not_before"
-        assert result.normalized_values.get("earliest_time") is not None
+        assert result.earliest_time == "16:00"
+        assert result.latest_time is None
+        assert result.normalized_values == {
+            "appointment_date": "2026-07-14",
+            "earliest_time": "16:00",
+            "duration_minutes": 15,
+        }
+
+    def test_correction_exact_to_not_after_clears_stale_earliest(self) -> None:
+        result = extract_semantics(
+            ["Book Margaret Thompson with Dr Shera"
+             " tomorrow at 3pm for 15 minutes",
+             "Actually, make it before 5pm"],
+            "2026-07-13",
+        )
+        assert result.temporal_relation == "not_after"
+        assert result.earliest_time is None
+        assert result.latest_time == "17:00"
+        assert result.normalized_values == {
+            "appointment_date": "2026-07-14",
+            "latest_time": "17:00",
+            "duration_minutes": 15,
+        }
 
     def test_additive_date_then_time(self) -> None:
         """Additive: first turn only has date, second adds time."""

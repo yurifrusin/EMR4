@@ -665,11 +665,18 @@ def _reduce_multi_turn(
                 values["appointment_date"] = corr_date
 
             corr_relation, corr_earliest, corr_latest = _extract_temporal(utterance)
-            if corr_earliest:
+            if corr_earliest is not None or corr_latest is not None:
+                # A temporal correction replaces the complete relation, not
+                # merely whichever bound happens to be present.  Otherwise an
+                # exact -> open-bound correction can retain an incompatible
+                # stale opposite bound from the earlier turn.
+                values.pop("earliest_time", None)
+                values.pop("latest_time", None)
+            if corr_earliest is not None:
                 values["earliest_time"] = corr_earliest
                 if corr_relation == "exact" and corr_latest is None:
                     corr_latest = corr_earliest
-            if corr_latest:
+            if corr_latest is not None:
                 values["latest_time"] = corr_latest
 
             corr_dur, _ = _extract_duration(utterance)
@@ -877,10 +884,11 @@ def _derive_final_temporal(
         relation, earliest, latest = _extract_temporal(utterance)
         if relation != "unspecified" or earliest is not None or latest is not None:
             final_relation = relation
-            if earliest:
-                final_earliest = earliest
-            if latest:
-                final_latest = latest
+            # Later temporal evidence replaces the complete relation.  Clear
+            # absent bounds so exact -> not_before/not_after corrections do not
+            # leak a stale opposite bound into the top-level observation.
+            final_earliest = earliest
+            final_latest = latest
 
     # Fall back to normalized_values if no utterance had temporal info
     if final_relation == "unspecified" and normalized_values.get("earliest_time"):

@@ -27,17 +27,20 @@ own candidate.
 ## Recovery lease
 
 Sol adopted the two worker commits as an untrusted candidate under the bounded
-low-risk recovery policy. Sol owns one narrow amendment in the next commit:
-speech-like filler forms `after at <time>` and `before at <time>` preserve the
-explicit open-bound operator instead of allowing the nested `at` token to
-erase it. The amendment changes only the pure semantic extraction module and
-its focused tests. It does not change fixtures, expected values, routes, APIs,
+low-risk recovery policy. Sol owns two narrow amendments: speech-like filler
+forms `after at <time>` and `before at <time>` preserve the explicit open-bound
+operator instead of allowing the nested `at` token to erase it; and a later
+temporal correction replaces the complete prior relation so an exact point
+cannot leak a stale opposite bound into a new `not_before` or `not_after`
+constraint. The amendments change only the pure semantic extraction module and
+its focused tests. They do not change fixtures, expected values, routes, APIs,
 database state, providers, UI, T3 gates, or write authority.
 
 This is a semantic normalization rule, not a corpus-label shortcut: `after`
 remains `not_before`, `before` remains `not_after`, and their single bound is
 derived from the utterance. Dedicated tests assert both the relation and the
-lossless normalized values.
+lossless normalized values. Correction regressions assert that absent bounds
+are genuinely cleared from both the top-level observation and normalized map.
 
 ## Independent development evidence
 
