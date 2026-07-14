@@ -554,29 +554,30 @@ class TestFailClosed:
 
         ref_date = date(2026, 7, 14)
         clock = datetime(2026, 7, 14, 9, 0, tzinfo=timezone.utc)
-        fake_variant = _make_fake_scenario("test")
+        fake_variant1 = _make_fake_scenario("g1_v1")
+        fake_variant2 = _make_fake_scenario("g2_v1")
 
         g1 = ScaleDevelopmentGroup(spec=spec1, group_hash="h1", reference_date=ref_date,
                                     clinic_clock=clock,
-                                    surface_variants=tuple([fake_variant] * 9),
-                                    multi_turn_variants=tuple([fake_variant] * 3))
+                                    surface_variants=tuple([fake_variant1] + _make_fake_scenarios("g1_s", 8)),
+                                    multi_turn_variants=tuple(_make_fake_scenarios("g1_m", 3)))
         g2 = ScaleDevelopmentGroup(spec=spec1, group_hash="h2", reference_date=ref_date,
                                     clinic_clock=clock,
-                                    surface_variants=tuple([fake_variant] * 9),
-                                    multi_turn_variants=tuple([fake_variant] * 3))
+                                    surface_variants=tuple([fake_variant2] + _make_fake_scenarios("g2_s", 8)),
+                                    multi_turn_variants=tuple(_make_fake_scenarios("g2_m", 3)))
 
-        # Create 96 groups with one duplicate (g1 and g2 share group_index=1)
+        # Create 94 more groups with unique variant IDs
         groups = [g1, g2]
         for i in range(2, 96):
             s = DevelopmentGroupSpec(group_index=i, intended_action="create", temporal_relation="exact",
                                       diary_state="empty", entity_state="exact")
             g = ScaleDevelopmentGroup(spec=s, group_hash=f"h{i}", reference_date=ref_date,
                                        clinic_clock=clock,
-                                       surface_variants=tuple([fake_variant] * 9),
-                                       multi_turn_variants=tuple([fake_variant] * 3))
+                                       surface_variants=tuple(_make_fake_scenarios(f"fill{i}_s", 9)),
+                                       multi_turn_variants=tuple(_make_fake_scenarios(f"fill{i}_m", 3)))
             groups.append(g)
 
-        with pytest.raises(ValueError, match="Duplicate group_id"):
+        with pytest.raises(ValueError, match="Duplicate group_id|variant_id"):
             ScaleCorpus(groups=tuple(groups), corpus_hash="test")
 
     def test_wrong_count_rejected(self) -> None:
@@ -788,12 +789,12 @@ class TestValidateCorpus:
                 group_index=i + 1, intended_action="create", temporal_relation="exact",
                 diary_state="empty", entity_state="exact",
             )
-            fake = _make_fake_scenario(f"dummy_{i}")
+            # Use unique variant IDs per group
             g = ScaleDevelopmentGroup(
                 spec=spec, group_hash=f"h{i}", reference_date=ref_date,
                 clinic_clock=clock,
-                surface_variants=tuple([fake] * 9),
-                multi_turn_variants=tuple([fake] * 3),
+                surface_variants=tuple(_make_fake_scenarios(f"miss_{i}_s", 9)),
+                multi_turn_variants=tuple(_make_fake_scenarios(f"miss_{i}_m", 3)),
             )
             groups.append(g)
 
@@ -962,6 +963,86 @@ class TestMeaningfulWording:
 
 
 # ===================================================================
+#  18. Read-only audit — zero drift and zero entity mismatch
+# ===================================================================
+
+
+class TestReadOnlyAudit:
+    """Read-only audit over all fixtures: assert zero invariant-profile drift
+    and zero group/variant entity mismatch."""
+
+    def test_zero_invariant_drift(self) -> None:
+        """Every variant matches its group spec on all invariant fields."""
+        loader = DevelopmentOnlyLoader(_FIXTURE_DIR)
+        corpus = loader.load_all()
+        drift_count = 0
+        for g in corpus.groups:
+            for v in g.all_variants:
+                errors = validate_variant(v, group_spec=g.spec)
+                if errors:
+                    drift_count += 1
+        assert drift_count == 0, f"{drift_count} variants have invariant drift"
+
+    def test_zero_entity_mismatch(self) -> None:
+        """Entity semantics in every variant agree with group spec."""
+        loader = DevelopmentOnlyLoader(_FIXTURE_DIR)
+        corpus = loader.load_all()
+        mismatches = 0
+        for g in corpus.groups:
+            g_map = g.spec.entity_semantics_map
+            for v in g.all_variants:
+                if v.patient_semantics != g_map.get("patient", "exact"):
+                    mismatches += 1
+                elif v.practitioner_semantics != g_map.get("practitioner", "exact"):
+                    mismatches += 1
+                elif v.location_semantics != g.spec.location_semantics:
+                    mismatches += 1
+                elif v.appointment_type_semantics != g.spec.appointment_type_semantics:
+                    mismatches += 1
+                elif v.duration_semantics != g.spec.duration_semantics:
+                    mismatches += 1
+        assert mismatches == 0, f"{mismatches} entity-semantic mismatches"
+
+    def test_all_source_spans_match_utterance(self) -> None:
+        """Every source span accurately references dialogue turn text."""
+        loader = DevelopmentOnlyLoader(_FIXTURE_DIR)
+        corpus = loader.load_all()
+        for g in corpus.groups:
+            for v in g.all_variants:
+                errors = validate_variant(v)
+                source_errors = [
+                    e for e in errors
+                    if "does not match source" in e or "exceeds dialogue" in e
+                ]
+                assert not source_errors, (
+                    f"{v.scenario_id}: {source_errors}"
+                )
+
+    def test_all_required_evidence_keys_present(self) -> None:
+        """All variants have required evidence source spans."""
+        loader = DevelopmentOnlyLoader(_FIXTURE_DIR)
+        corpus = loader.load_all()
+        missing: list[str] = []
+        for g in corpus.groups:
+            for v in g.all_variants:
+                norm = v.normalized_values
+                spans = v.source_spans
+                if "appointment_date" in norm and "appointment_date" not in spans:
+                    missing.append(f"{v.scenario_id}: missing appointment_date span")
+                if "earliest_time" in norm and norm["earliest_time"] is not None:
+                    import re as _re
+                    utt = " ".join(
+                        t.get("utterance", "") for t in v.dialogue_turns
+                    )
+                    if _re.search(r"\b(\d{1,2})\s*(pm|am)\b", utt, _re.I):
+                        if "earliest_time" not in spans and "latest_time" not in spans:
+                            missing.append(
+                                f"{v.scenario_id}: time present but no time span"
+                            )
+        assert not missing, "Evidence coverage issues:\n" + "\n".join(missing[:20])
+
+
+# ===================================================================
 #  Helpers (duplicate of package-level for module isolation)
 # ===================================================================
 
@@ -993,26 +1074,53 @@ class TestNegativeRejectedDefects:
                 multi_turn_variants=tuple([fake] * 3),
             )
 
-    def test_rejects_tampered_variant_payload(self) -> None:
+    def test_rejects_tampered_variant_payload(self, tmp_path: pathlib.Path) -> None:
         """Tampered variant data changes hash and fails loader."""
-        g = _load_group_file(1)
-        tampered = dict(g["surface_variants"][0])
-        # Change an utterance
-        tampered["dialogue_turns"] = [{"turn": 1, "utterance": "TAMPERED utterance"}]
-        recomputed_hash = compute_variant_hash(tampered)
-        stored_hash = g["surface_variants"][0]["variant_hash"]
-        assert recomputed_hash != stored_hash, (
-            "Tampered variant should have different hash"
+        import shutil
+        import json
+        dest = tmp_path / "fixtures"
+        shutil.copytree(_FIXTURE_DIR, dest)
+        # Tamper the first variant in group 1
+        group_path = dest / "lc4_dw1_dev_group_001.json"
+        with open(group_path, "r", encoding="utf-8") as f:
+            group_data = json.load(f)
+        # Mutate the first surface variant
+        group_data["surface_variants"][0]["dialogue_turns"] = [
+            {"turn": 1, "utterance": "TAMPERED utterance"}
+        ]
+        # Update variant_hash would be wrong but we let the loader detect it
+        group_data["surface_variants"][0]["variant_hash"] = compute_variant_hash(
+            group_data["surface_variants"][0]
         )
+        with open(group_path, "w", encoding="utf-8") as f:
+            json.dump(group_data, f, indent=2)
+        loader = DevelopmentOnlyLoader(dest)
+        with pytest.raises((ValueError, Exception)):
+            loader.load_all()
 
-    def test_rejects_stale_manifest_corpus_hash(self) -> None:
+    def test_rejects_stale_manifest_corpus_hash(self, tmp_path: pathlib.Path) -> None:
         """Loader rejects stale corpus hash (tampered manifest)."""
-        manifest = _load_manifest()
-        old_hash = manifest["corpus_hash"]
-        # A changed corpus hash would fail during load
-        assert old_hash.startswith("sha256:"), (
-            f"Corpus hash should be sha256, got: {old_hash}"
-        )
+        import shutil
+        dest = tmp_path / "fixtures"
+        shutil.copytree(_FIXTURE_DIR, dest)
+        manifest_path = dest / "lc4_development_manifest.json"
+        with open(manifest_path, "r", encoding="utf-8") as f:
+            manifest = json.load(f)
+        # Tamper the corpus hash
+        manifest["corpus_hash"] = "sha256:" + "0" * 64
+        # Keep only first group to speed up test
+        first_group = manifest["groups"][0]
+        manifest["groups"] = [first_group]
+        with open(manifest_path, "w", encoding="utf-8") as f:
+            json.dump(manifest, f, indent=2)
+        # Remove group files not in manifest
+        for fpath in list(dest.iterdir()):
+            if fpath.suffix == ".json" and fpath.name != "lc4_development_manifest.json":
+                if fpath.name != first_group["filename"]:
+                    fpath.unlink()
+        loader = DevelopmentOnlyLoader(dest)
+        with pytest.raises(ValueError, match="hash mismatch"):
+            loader.load_all()
 
     def test_rejects_semantic_entity_drift(self) -> None:
         """Variant with omitted semantics but exact entity name fails agreement check."""
@@ -1082,19 +1190,9 @@ class TestNegativeRejectedDefects:
             )
             groups.append(g)
 
-        # The __post_init__ of ScaleDevelopmentGroup won't catch duplicates across groups.
-        # The manifest loader should. Let's verify the ScaleCorpus doesn't catch this either.
-        # We need a manual duplicate check - the loader catches this in load_all.
-        # For the test, verify that a manual check detects it.
-        from collections import Counter
-        all_ids = []
-        for g in groups:
-            for v in g.all_variants:
-                all_ids.append(v.scenario_id)
-        counts = Counter(all_ids)
-        dups = [k for k, v in counts.items() if v > 1]
-        assert len(dups) > 0, "Expected at least one duplicate variant ID"
-        assert "dup_var_001" in dups, "Expected dup_var_001 to be duplicate"
+        # ScaleCorpus.__post_init__ now rejects duplicate variant IDs across groups
+        with pytest.raises(ValueError, match="Duplicate variant_id"):
+            ScaleCorpus(groups=tuple(groups), corpus_hash="test")
 
     def test_rejects_unreferenced_group_file(self) -> None:
         """Loader detects fixture files not referenced in manifest."""
@@ -1110,19 +1208,92 @@ class TestNegativeRejectedDefects:
             if unref_path.exists():
                 unref_path.unlink()
 
-    def test_non_mutating_check(self) -> None:
-        """--check mode must not write files (tested by running without side effects)."""
-        import hashlib
+    def test_rejects_missing_required_evidence(self) -> None:
+        """Loader rejects variant missing required source span evidence."""
+        import shutil
         import json
-        # Simulate a check: read current report, compute in-memory, compare bytes
+        g = _load_group_file(1)
+        # Take a surface variant and strip its appointment_date source span
+        v = dict(g["surface_variants"][0])
+        if "appointment_date" in v.get("source_spans", {}):
+            del v["source_spans"]["appointment_date"]
+        # Write to tmp_path and expect failure
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = pathlib.Path(tmp)
+            dest = tmp_path / "fixtures"
+            shutil.copytree(_FIXTURE_DIR, dest)
+            # Update group 1's variant
+            gpath = dest / "lc4_dw1_dev_group_001.json"
+            with open(gpath, "r", encoding="utf-8") as f:
+                gd = json.load(f)
+            gd["surface_variants"][0] = v
+            # Recompute hashes
+            gd["surface_variants"][0]["variant_hash"] = compute_variant_hash(v)
+            with open(gpath, "w", encoding="utf-8") as f:
+                json.dump(gd, f, indent=2)
+            loader = DevelopmentOnlyLoader(dest)
+            with pytest.raises(ValueError, match="no source_spans"):
+                loader.load_all()
+
+    def test_rejects_group_semantic_drift(self) -> None:
+        """Loader rejects variant whose semantics drift from group spec."""
+        import shutil
+        import json
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = pathlib.Path(tmp)
+            dest = tmp_path / "fixtures"
+            shutil.copytree(_FIXTURE_DIR, dest)
+            # Change group 1 spec's practitioner_semantics to "omitted"
+            gpath = dest / "lc4_dw1_dev_group_001.json"
+            with open(gpath, "r", encoding="utf-8") as f:
+                gd = json.load(f)
+            # Change practitioner_semantics for a variant to drift from spec
+            gd["surface_variants"][0]["practitioner_semantics"] = "omitted"
+            # Remove practitioner span to match
+            if "practitioner" in gd["surface_variants"][0].get("source_spans", {}):
+                del gd["surface_variants"][0]["source_spans"]["practitioner"]
+            # Recompute variant hash
+            gd["surface_variants"][0]["variant_hash"] = compute_variant_hash(
+                gd["surface_variants"][0]
+            )
+            with open(gpath, "w", encoding="utf-8") as f:
+                json.dump(gd, f, indent=2)
+            loader = DevelopmentOnlyLoader(dest)
+            with pytest.raises(ValueError, match="practitioner_semantics"):
+                loader.load_all()
+
+    def test_non_mutating_check(self) -> None:
+        """--check mode must not write files (proven by in-memory comparison)."""
+        import json
+        from scripts.bernie_lc4_development_report import _compute_report
         report_path = pathlib.Path("docs/bernie-lc4-development-report.json")
-        if report_path.exists():
-            with open(report_path, "rb") as f:
-                original_bytes = f.read()
-            # Verify it's valid JSON
-            data = json.loads(original_bytes)
-            assert "corpus_manifest" in data
-            # The check should not modify the file
+        if not report_path.exists():
+            pytest.skip("Report file not found")
+        # Record original mtime and bytes
+        orig_stat = report_path.stat()
+        with open(report_path, "rb") as f:
+            orig_bytes = f.read()
+        # Verify it's valid JSON
+        data = json.loads(orig_bytes)
+        assert "corpus_manifest" in data
+        # Compute the report in memory (the --check mode equivalent)
+        computed = _compute_report()
+        computed_json = json.dumps(computed, indent=2, default=str) + "\n"
+        # Compare content ignoring line-ending differences
+        assert computed_json.replace("\r\n", "\n").encode("utf-8") == orig_bytes.replace(b"\r\n", b"\n"), (
+            "In-memory report differs from stored report. "
+            "Regenerate with: python scripts/bernie_lc4_development_report.py"
+        )
+        # Verify file did not change (byte-level)
+        with open(report_path, "rb") as f:
+            new_bytes = f.read()
+        assert new_bytes == orig_bytes, "--check mode modified the report file"
+        new_stat = report_path.stat()
+        assert new_stat.st_mtime_ns == orig_stat.st_mtime_ns, (
+            "--check mode modified file mtime"
+        )
 
 
 def _make_fake_scenario(scenario_id: str) -> ReceptionScenarioSpec:
@@ -1166,6 +1337,11 @@ def _make_fake_scenario(scenario_id: str) -> ReceptionScenarioSpec:
     )
 
 
+def _make_fake_scenarios(base_id: str, count: int) -> list[ReceptionScenarioSpec]:
+    """Create multiple unique fake scenarios with sequential IDs."""
+    return [_make_fake_scenario(f"{base_id}_{j:03d}") for j in range(count)]
+
+
 def _make_dummy_group(index: int) -> ScaleDevelopmentGroup:
     """Create a dummy ScaleDevelopmentGroup for testing."""
     spec = DevelopmentGroupSpec(
@@ -1175,12 +1351,11 @@ def _make_dummy_group(index: int) -> ScaleDevelopmentGroup:
         diary_state="empty",
         entity_state="exact",
     )
-    fake = _make_fake_scenario(f"dummy_{index}")
     ref_date = date(2026, 7, 14)
     clock = datetime(2026, 7, 14, 9, 0, tzinfo=timezone.utc)
     return ScaleDevelopmentGroup(
         spec=spec, group_hash=f"h{index}", reference_date=ref_date,
         clinic_clock=clock,
-        surface_variants=tuple([fake] * 9),
-        multi_turn_variants=tuple([fake] * 3),
+        surface_variants=tuple(_make_fake_scenarios(f"dummy_{index}_s", 9)),
+        multi_turn_variants=tuple(_make_fake_scenarios(f"dummy_{index}_m", 3)),
     )

@@ -1,23 +1,23 @@
 {
   "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_080",
-  "group_hash": "sha256:0269adecb70c2b7861a22cba2b904368de6a88a11f8ce3f56b67eaddaa6a9f6c",
+  "group_hash": "sha256:327879ca406ca728947b27e35f0ca6f3db05295b75cd15cd5c361ad4689ce066",
   "variant_hashes": {
     "surface": [
-      "sha256:a18299f183145a58dcb761249b9a562c498e88997d513024b0d2768b4ed75b5e",
-      "sha256:97f2e67b6b3db4b693d40f9b64dda0172a75603474cb3d45f9cee69215412b9b",
-      "sha256:f94d2c9358aee42d92952e2d7440a9b8349dc0dd6cb83b6b699158d1b00f3df7",
-      "sha256:ddb123adfaa5378bd78c856d2f7548d008dff4f68d415b2f08978d2d931c3d4c",
-      "sha256:85345a846cc7ffb07a28ed790b140c1cc355e5a6e713ea9fa66336abcdc7530f",
-      "sha256:c98f67ec9347ad72ccbcd4c252285e4ee41f7f01c012207cfce2417ee71fbeb2",
-      "sha256:fdd1db3dd8c971295498f5301abfd0acff68f2238f5d4c1be4bce87b34ddcf6e",
-      "sha256:3abd525b961a367461a21559bda95f175c43ea2bcee78a999429effa4923c225",
-      "sha256:eb583069ce9f8b4724876c205e7b0bf56fecf8331db1545a206ab691835880cf"
+      "sha256:baaaec458913d5087dce862cceb3e0cbd14bfd561004820155745d7c1fdffdf8",
+      "sha256:a7a0280f325d55505e4bfad35ef1d3c8e76e8e2087d1be7facae56757ad0ecd8",
+      "sha256:95b16836f8eba4f91806eb2670a179558622246c3eae125b77a9222871bea143",
+      "sha256:6a9bcf30f781e4a6caac96415c57387fe350953d84983f016da939b68c0b779e",
+      "sha256:1e52bbb24e6fa7f9c391f06be574e5dd401bc0e22f8c88d925b55f684ceed98a",
+      "sha256:69d36c19801c42fba0dba9aa739334cd0e791996e97f275044d2473f9fb3f55b",
+      "sha256:d63f3e64bb7c19dfd786657c627fc1c83f9c338e902e5a9a0b3f8b0eeb14e5e7",
+      "sha256:f7b6df291dcae4e0771711337b4583348a048c4393b261d83a6d2af2faf84646",
+      "sha256:a4c747ca39381d2a424695b136fb4cf9d2007ea4da405257d50a2aaf194521c8"
     ],
     "multi_turn": [
-      "sha256:f3c43b2a3e706ab33989f48980d793b966d6fe4814b86248b75a9426bae804d4",
-      "sha256:cb3b9d5158546b9c11c22fa4995f23e38af8b04ac28c0c994360d486320ea358",
-      "sha256:05abdefb92cc224e781e01b9cb47b318e30e7f40bd927a52088d453bc9a4e419"
+      "sha256:4880faf817e1c5a58421a7ef2de693e5b2dbdf0d7b40f9b20e56ddea7112ce18",
+      "sha256:f803c0c70ae64023c3781dbad19e0ca060614474813b7a1d055045708ab16b2f",
+      "sha256:449fc621b4bac5f8cc24cdeb0618add093fcf8ae514e407eb08dbb9e330c8ca2"
     ]
   },
   "provenance": "silver",
@@ -68,7 +68,16 @@
         "appointment_date": "2026-07-15",
         "duration_minutes": 15
       },
-      "source_spans": {},
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 67,
+            "end": 75,
+            "text": "tomorrow"
+          }
+        ]
+      },
       "duration_minutes": 15,
       "practitioner_semantics": "ambiguous",
       "patient_semantics": "ambiguous",
@@ -116,7 +125,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:a18299f183145a58dcb761249b9a562c498e88997d513024b0d2768b4ed75b5e"
+      "variant_hash": "sha256:baaaec458913d5087dce862cceb3e0cbd14bfd561004820155745d7c1fdffdf8"
     },
     {
       "spec_version": "lc1.v1",
@@ -124,11 +133,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_080",
-      "description": "status_change:unspecified:session_restart:adversarial - someone has arrived for her appointment with some doctor \u2014 please mark her as ar",
+      "description": "status_change:unspecified:session_restart:adversarial - someone has arrived for her appointment with some doctor sometime tomorrow at so",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "someone has arrived for her appointment with some doctor \u2014 please mark her as arrived."
+          "utterance": "someone has arrived for her appointment with some doctor sometime tomorrow at some time \u2014 please mark her as arrived."
         }
       ],
       "reference_date": "2026-07-14",
@@ -142,7 +151,16 @@
         "appointment_date": "2026-07-15",
         "duration_minutes": 15
       },
-      "source_spans": {},
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 66,
+            "end": 74,
+            "text": "tomorrow"
+          }
+        ]
+      },
       "duration_minutes": 15,
       "practitioner_semantics": "ambiguous",
       "patient_semantics": "ambiguous",
@@ -190,7 +208,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:97f2e67b6b3db4b693d40f9b64dda0172a75603474cb3d45f9cee69215412b9b"
+      "variant_hash": "sha256:a7a0280f325d55505e4bfad35ef1d3c8e76e8e2087d1be7facae56757ad0ecd8"
     },
     {
       "spec_version": "lc1.v1",
@@ -216,7 +234,16 @@
         "appointment_date": "2026-07-15",
         "duration_minutes": 15
       },
-      "source_spans": {},
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 40,
+            "end": 48,
+            "text": "tomorrow"
+          }
+        ]
+      },
       "duration_minutes": 15,
       "practitioner_semantics": "ambiguous",
       "patient_semantics": "ambiguous",
@@ -264,7 +291,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:f94d2c9358aee42d92952e2d7440a9b8349dc0dd6cb83b6b699158d1b00f3df7"
+      "variant_hash": "sha256:95b16836f8eba4f91806eb2670a179558622246c3eae125b77a9222871bea143"
     },
     {
       "spec_version": "lc1.v1",
@@ -272,11 +299,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_080",
-      "description": "status_change:unspecified:session_restart:adversarial - Hi, could you please check in someone? She's here to see some doctor.",
+      "description": "status_change:unspecified:session_restart:adversarial - Hi, could you please check in someone? She's here to see some doctor sometime to",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Hi, could you please check in someone? She's here to see some doctor."
+          "utterance": "Hi, could you please check in someone? She's here to see some doctor sometime tomorrow at some time."
         }
       ],
       "reference_date": "2026-07-14",
@@ -290,7 +317,16 @@
         "appointment_date": "2026-07-15",
         "duration_minutes": 15
       },
-      "source_spans": {},
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 78,
+            "end": 86,
+            "text": "tomorrow"
+          }
+        ]
+      },
       "duration_minutes": 15,
       "practitioner_semantics": "ambiguous",
       "patient_semantics": "ambiguous",
@@ -338,7 +374,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:ddb123adfaa5378bd78c856d2f7548d008dff4f68d415b2f08978d2d931c3d4c"
+      "variant_hash": "sha256:6a9bcf30f781e4a6caac96415c57387fe350953d84983f016da939b68c0b779e"
     },
     {
       "spec_version": "lc1.v1",
@@ -364,7 +400,16 @@
         "appointment_date": "2026-07-15",
         "duration_minutes": 15
       },
-      "source_spans": {},
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 53,
+            "end": 61,
+            "text": "tomorrow"
+          }
+        ]
+      },
       "duration_minutes": 15,
       "practitioner_semantics": "ambiguous",
       "patient_semantics": "ambiguous",
@@ -412,7 +457,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:85345a846cc7ffb07a28ed790b140c1cc355e5a6e713ea9fa66336abcdc7530f"
+      "variant_hash": "sha256:1e52bbb24e6fa7f9c391f06be574e5dd401bc0e22f8c88d925b55f684ceed98a"
     },
     {
       "spec_version": "lc1.v1",
@@ -420,11 +465,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_080",
-      "description": "status_change:unspecified:session_restart:adversarial - someone is here now \u2014 please confirm arrival for her booking with some doctor.",
+      "description": "status_change:unspecified:session_restart:adversarial - someone is here now \u2014 please confirm arrival for her booking with some doctor so",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "someone is here now \u2014 please confirm arrival for her booking with some doctor."
+          "utterance": "someone is here now \u2014 please confirm arrival for her booking with some doctor sometime tomorrow at some time."
         }
       ],
       "reference_date": "2026-07-14",
@@ -438,7 +483,16 @@
         "appointment_date": "2026-07-15",
         "duration_minutes": 15
       },
-      "source_spans": {},
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 87,
+            "end": 95,
+            "text": "tomorrow"
+          }
+        ]
+      },
       "duration_minutes": 15,
       "practitioner_semantics": "ambiguous",
       "patient_semantics": "ambiguous",
@@ -486,7 +540,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:c98f67ec9347ad72ccbcd4c252285e4ee41f7f01c012207cfce2417ee71fbeb2"
+      "variant_hash": "sha256:69d36c19801c42fba0dba9aa739334cd0e791996e97f275044d2473f9fb3f55b"
     },
     {
       "spec_version": "lc1.v1",
@@ -512,7 +566,16 @@
         "appointment_date": "2026-07-15",
         "duration_minutes": 15
       },
-      "source_spans": {},
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 49,
+            "end": 57,
+            "text": "tomorrow"
+          }
+        ]
+      },
       "duration_minutes": 15,
       "practitioner_semantics": "ambiguous",
       "patient_semantics": "ambiguous",
@@ -560,7 +623,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:fdd1db3dd8c971295498f5301abfd0acff68f2238f5d4c1be4bce87b34ddcf6e"
+      "variant_hash": "sha256:d63f3e64bb7c19dfd786657c627fc1c83f9c338e902e5a9a0b3f8b0eeb14e5e7"
     },
     {
       "spec_version": "lc1.v1",
@@ -568,11 +631,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_080",
-      "description": "status_change:unspecified:session_restart:adversarial - Please update someone's status to arrived for some doctor.",
+      "description": "status_change:unspecified:session_restart:adversarial - Please update someone's status to arrived for some doctor sometime tomorrow at s",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Please update someone's status to arrived for some doctor."
+          "utterance": "Please update someone's status to arrived for some doctor sometime tomorrow at some time."
         }
       ],
       "reference_date": "2026-07-14",
@@ -586,7 +649,16 @@
         "appointment_date": "2026-07-15",
         "duration_minutes": 15
       },
-      "source_spans": {},
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 67,
+            "end": 75,
+            "text": "tomorrow"
+          }
+        ]
+      },
       "duration_minutes": 15,
       "practitioner_semantics": "ambiguous",
       "patient_semantics": "ambiguous",
@@ -634,7 +706,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:3abd525b961a367461a21559bda95f175c43ea2bcee78a999429effa4923c225"
+      "variant_hash": "sha256:f7b6df291dcae4e0771711337b4583348a048c4393b261d83a6d2af2faf84646"
     },
     {
       "spec_version": "lc1.v1",
@@ -642,11 +714,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_080",
-      "description": "status_change:unspecified:session_restart:adversarial - Could you mark someone as arrived for some doctor? She's here.",
+      "description": "status_change:unspecified:session_restart:adversarial - Could you mark someone as arrived for some doctor? She's here sometime tomorrow ",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Could you mark someone as arrived for some doctor? She's here."
+          "utterance": "Could you mark someone as arrived for some doctor? She's here sometime tomorrow at some time."
         }
       ],
       "reference_date": "2026-07-14",
@@ -660,7 +732,16 @@
         "appointment_date": "2026-07-15",
         "duration_minutes": 15
       },
-      "source_spans": {},
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 71,
+            "end": 79,
+            "text": "tomorrow"
+          }
+        ]
+      },
       "duration_minutes": 15,
       "practitioner_semantics": "ambiguous",
       "patient_semantics": "ambiguous",
@@ -708,7 +789,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:eb583069ce9f8b4724876c205e7b0bf56fecf8331db1545a206ab691835880cf"
+      "variant_hash": "sha256:a4c747ca39381d2a424695b136fb4cf9d2007ea4da405257d50a2aaf194521c8"
     }
   ],
   "multi_turn_variants": [
@@ -726,7 +807,7 @@
         },
         {
           "turn": 2,
-          "utterance": "Margaret Thompson is here to see Dr Shera at 3pm."
+          "utterance": "Margaret Thompson is here to see Dr Shera tomorrow at 3pm."
         }
       ],
       "reference_date": "2026-07-14",
@@ -760,9 +841,17 @@
         "temporal_relation": [
           {
             "turn_index": 1,
-            "start": 45,
-            "end": 48,
+            "start": 54,
+            "end": 57,
             "text": "3pm"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 42,
+            "end": 50,
+            "text": "tomorrow"
           }
         ]
       },
@@ -818,7 +907,7 @@
         "3pm",
         "4pm"
       ],
-      "variant_hash": "sha256:f3c43b2a3e706ab33989f48980d793b966d6fe4814b86248b75a9426bae804d4"
+      "variant_hash": "sha256:4880faf817e1c5a58421a7ef2de693e5b2dbdf0d7b40f9b20e56ddea7112ce18"
     },
     {
       "spec_version": "lc1.v1",
@@ -826,7 +915,7 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_080",
-      "description": "status_change:unspecified:correction:plain - Mark Margaret Thompson arrived for Dr Patel. Sorry, she's here for Dr Shera at 3",
+      "description": "status_change:unspecified:correction:plain - Mark Margaret Thompson arrived for Dr Patel. Sorry, she's here for Dr Shera tomo",
       "dialogue_turns": [
         {
           "turn": 1,
@@ -834,7 +923,7 @@
         },
         {
           "turn": 2,
-          "utterance": "Sorry, she's here for Dr Shera at 3pm."
+          "utterance": "Sorry, she's here for Dr Shera tomorrow at 3pm."
         }
       ],
       "reference_date": "2026-07-14",
@@ -874,9 +963,17 @@
         "temporal_relation": [
           {
             "turn_index": 1,
-            "start": 34,
-            "end": 37,
+            "start": 43,
+            "end": 46,
             "text": "3pm"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 31,
+            "end": 39,
+            "text": "tomorrow"
           }
         ]
       },
@@ -927,7 +1024,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:cb3b9d5158546b9c11c22fa4995f23e38af8b04ac28c0c994360d486320ea358"
+      "variant_hash": "sha256:f803c0c70ae64023c3781dbad19e0ca060614474813b7a1d055045708ab16b2f"
     },
     {
       "spec_version": "lc1.v1",
@@ -935,11 +1032,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_080",
-      "description": "status_change:unspecified:reversal:plain - Mark Margaret Thompson as arrived for Dr Shera at 3pm. Actually, she hasn't arri",
+      "description": "status_change:unspecified:reversal:plain - Mark Margaret Thompson as arrived for Dr Shera tomorrow at 3pm. Actually, she ha",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Mark Margaret Thompson as arrived for Dr Shera at 3pm."
+          "utterance": "Mark Margaret Thompson as arrived for Dr Shera tomorrow at 3pm."
         },
         {
           "turn": 2,
@@ -977,9 +1074,17 @@
         "temporal_relation": [
           {
             "turn_index": 0,
-            "start": 50,
-            "end": 53,
+            "start": 59,
+            "end": 62,
             "text": "3pm"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 47,
+            "end": 55,
+            "text": "tomorrow"
           }
         ]
       },
@@ -1030,7 +1135,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:05abdefb92cc224e781e01b9cb47b318e30e7f40bd927a52088d453bc9a4e419"
+      "variant_hash": "sha256:449fc621b4bac5f8cc24cdeb0618add093fcf8ae514e407eb08dbb9e330c8ca2"
     }
   ]
 }

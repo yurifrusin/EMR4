@@ -1,23 +1,23 @@
 {
   "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_020",
-  "group_hash": "sha256:33803f13584e5042f68ed539ca26b54fade6d6331224d4f3df9c792e6aacdff3",
+  "group_hash": "sha256:8f402cce9018d177dc20e32902f7866f25414a164de6fd65be32ef5b059e3568",
   "variant_hashes": {
     "surface": [
-      "sha256:70cb2d334f656f1b38637906521565b63eae221b34c09e8d1193dd81a414fe65",
-      "sha256:9431c4bf4d5c6c136fc034154046efbac3cc2d122b426b0f2cc546b247183015",
-      "sha256:d8ef17ad52af199b98aaeeff23a7a7bc17619a6e148481d3cad32def945e6381",
-      "sha256:15337eee0aea4f06ae9cee33919a4568aeb65e5bf14aa12027579107833792ea",
-      "sha256:85f15094d9bb8ec54eab5006fa17c82126b3c6757e7052a6b55abc1474215d97",
-      "sha256:a74b954f02780cf672abef7a89fe5ece5473640b83904ed76395237dd66d44c4",
-      "sha256:ae3c12d2b7a37b93812d26ae7315d8970e7bbca3a496dc2495c8fc5c208c3ef8",
-      "sha256:de2c43081c14af40eb7e4dc27e3bda842581354fab592b448895ae3988cdb48e",
-      "sha256:25c32ec0dced77d70d8bf55df3c60d3f345d370216aa4922b2a944acb3139364"
+      "sha256:0073bb31d67531ca5834627e3566053d497abfaf98017f12d92670d318ed7639",
+      "sha256:8ffd58bcde1ee35e78ee26532b8d21f2a6eb75f323442e17022565e05b7cb4e2",
+      "sha256:8b61ffeeeb61e941eaa40c40d63405e3f57474cbea30dd8e96a0dca766147fd6",
+      "sha256:9ec89a9a89bac59ac388a8420de1816661aed698bb8d01af25e221af97504a3b",
+      "sha256:e5d204282b7ad619ddebb65da25e6ee0effee11efbad348ab31cbd47970bd4b7",
+      "sha256:e2cffa0492c4323a5662f2b1061c3c84c4c8d05aba01b9919f3e49d561f55a92",
+      "sha256:c55c59f555226c2c87a062c29ee961eee9f5596528f4fae53aa9ef8f2300ffad",
+      "sha256:0172be0fdad8f88414d696459168c9ce7061007ec7c1f1562a5535eed16e6c4f",
+      "sha256:12095ea36252319633c5f9563e696e41ea80a37c03137b9a8740f23c2cf9546c"
     ],
     "multi_turn": [
-      "sha256:277ca70fb0afe5fcf22ea446a1b827155c0a0452a511389b1fb8ee53682670ef",
-      "sha256:c9c15be4bd8977fdede57971716a7b2a76af2fe2efb42b516864a99a390a7584",
-      "sha256:ef3f4d387d908ad1b606342ab0098a5492b6fb46a0521b39d6745295105bb87b"
+      "sha256:aa8d4d597710280cd8ce2a196e898ef46fa3e18c8603266446fde29ac9ff8047",
+      "sha256:0350d66b8a1e535316f169f87264452c7ff66e039f249bc005a36661f7af9988",
+      "sha256:e8eb5e30fc2d9d6d8c2a9ff7a0756f358769abb9ee68d4a737c285baa8d31f3d"
     ]
   },
   "provenance": "silver",
@@ -69,6 +69,14 @@
         "earliest_time": "15:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 60,
+            "end": 68,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -81,6 +89,14 @@
             "start": 56,
             "end": 59,
             "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 49,
+            "end": 52,
+            "text": "3pm"
           }
         ]
       },
@@ -132,7 +148,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:70cb2d334f656f1b38637906521565b63eae221b34c09e8d1193dd81a414fe65"
+      "variant_hash": "sha256:0073bb31d67531ca5834627e3566053d497abfaf98017f12d92670d318ed7639"
     },
     {
       "spec_version": "lc1.v1",
@@ -160,7 +176,23 @@
         "earliest_time": "15:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 82,
+            "end": 90,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 78,
+            "end": 81,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
           {
             "turn_index": 0,
             "start": 78,
@@ -217,7 +249,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:9431c4bf4d5c6c136fc034154046efbac3cc2d122b426b0f2cc546b247183015"
+      "variant_hash": "sha256:8ffd58bcde1ee35e78ee26532b8d21f2a6eb75f323442e17022565e05b7cb4e2"
     },
     {
       "spec_version": "lc1.v1",
@@ -245,7 +277,23 @@
         "earliest_time": "15:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 42,
+            "end": 50,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 60,
+            "end": 63,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
           {
             "turn_index": 0,
             "start": 60,
@@ -302,7 +350,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:d8ef17ad52af199b98aaeeff23a7a7bc17619a6e148481d3cad32def945e6381"
+      "variant_hash": "sha256:8b61ffeeeb61e941eaa40c40d63405e3f57474cbea30dd8e96a0dca766147fd6"
     },
     {
       "spec_version": "lc1.v1",
@@ -330,6 +378,14 @@
         "earliest_time": "15:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 64,
+            "end": 72,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -337,6 +393,14 @@
             "end": 85,
             "text": "4pm"
           },
+          {
+            "turn_index": 0,
+            "start": 91,
+            "end": 94,
+            "text": "3pm"
+          }
+        ],
+        "earliest_time": [
           {
             "turn_index": 0,
             "start": 91,
@@ -393,7 +457,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:15337eee0aea4f06ae9cee33919a4568aeb65e5bf14aa12027579107833792ea"
+      "variant_hash": "sha256:9ec89a9a89bac59ac388a8420de1816661aed698bb8d01af25e221af97504a3b"
     },
     {
       "spec_version": "lc1.v1",
@@ -421,7 +485,23 @@
         "earliest_time": "15:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 45,
+            "end": 53,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 62,
+            "end": 65,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
           {
             "turn_index": 0,
             "start": 62,
@@ -478,7 +558,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:85f15094d9bb8ec54eab5006fa17c82126b3c6757e7052a6b55abc1474215d97"
+      "variant_hash": "sha256:e5d204282b7ad619ddebb65da25e6ee0effee11efbad348ab31cbd47970bd4b7"
     },
     {
       "spec_version": "lc1.v1",
@@ -486,11 +566,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_020",
-      "description": "move:not_before:reversal:abbreviation - I need to move someone's booking forward to tomorrow after at 4pm \u2014 can you upda",
+      "description": "move:not_before:reversal:abbreviation - I need to move someone's booking with some doctor forward to tomorrow after at 4",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "I need to move someone's booking forward to tomorrow after at 4pm \u2014 can you update that?"
+          "utterance": "I need to move someone's booking with some doctor forward to tomorrow after at 4pm \u2014 can you update that?"
         }
       ],
       "reference_date": "2026-07-14",
@@ -506,11 +586,27 @@
         "earliest_time": "15:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 61,
+            "end": 69,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
-            "start": 62,
-            "end": 65,
+            "start": 79,
+            "end": 82,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 79,
+            "end": 82,
             "text": "4pm"
           }
         ]
@@ -563,7 +659,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:a74b954f02780cf672abef7a89fe5ece5473640b83904ed76395237dd66d44c4"
+      "variant_hash": "sha256:e2cffa0492c4323a5662f2b1061c3c84c4c8d05aba01b9919f3e49d561f55a92"
     },
     {
       "spec_version": "lc1.v1",
@@ -591,7 +687,23 @@
         "earliest_time": "15:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 40,
+            "end": 48,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 55,
+            "end": 58,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
           {
             "turn_index": 0,
             "start": 55,
@@ -648,7 +760,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:ae3c12d2b7a37b93812d26ae7315d8970e7bbca3a496dc2495c8fc5c208c3ef8"
+      "variant_hash": "sha256:c55c59f555226c2c87a062c29ee961eee9f5596528f4fae53aa9ef8f2300ffad"
     },
     {
       "spec_version": "lc1.v1",
@@ -676,7 +788,23 @@
         "earliest_time": "15:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 60,
+            "end": 68,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 78,
+            "end": 81,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
           {
             "turn_index": 0,
             "start": 78,
@@ -733,7 +861,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:de2c43081c14af40eb7e4dc27e3bda842581354fab592b448895ae3988cdb48e"
+      "variant_hash": "sha256:0172be0fdad8f88414d696459168c9ce7061007ec7c1f1562a5535eed16e6c4f"
     },
     {
       "spec_version": "lc1.v1",
@@ -761,7 +889,23 @@
         "earliest_time": "15:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 48,
+            "end": 56,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 66,
+            "end": 69,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
           {
             "turn_index": 0,
             "start": 66,
@@ -818,7 +962,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:25c32ec0dced77d70d8bf55df3c60d3f345d370216aa4922b2a944acb3139364"
+      "variant_hash": "sha256:12095ea36252319633c5f9563e696e41ea80a37c03137b9a8740f23c2cf9546c"
     }
   ],
   "multi_turn_variants": [
@@ -828,11 +972,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_020",
-      "description": "move:not_before:clarification:plain - I need to move Margaret Thompson's appointment. Move it to tomorrow at 4pm with ",
+      "description": "move:not_before:clarification:plain - I need to move Margaret Thompson's appointment with Dr Shera. Move it to tomorro",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "I need to move Margaret Thompson's appointment."
+          "utterance": "I need to move Margaret Thompson's appointment with Dr Shera."
         },
         {
           "turn": 2,
@@ -862,6 +1006,12 @@
         ],
         "practitioner": [
           {
+            "turn_index": 0,
+            "start": 52,
+            "end": 60,
+            "text": "Dr Shera"
+          },
+          {
             "turn_index": 1,
             "start": 32,
             "end": 40,
@@ -874,6 +1024,14 @@
             "start": 23,
             "end": 26,
             "text": "4pm"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 11,
+            "end": 19,
+            "text": "tomorrow"
           }
         ],
         "earliest_time": [
@@ -938,7 +1096,7 @@
         "3pm",
         "4pm"
       ],
-      "variant_hash": "sha256:277ca70fb0afe5fcf22ea446a1b827155c0a0452a511389b1fb8ee53682670ef"
+      "variant_hash": "sha256:aa8d4d597710280cd8ce2a196e898ef46fa3e18c8603266446fde29ac9ff8047"
     },
     {
       "spec_version": "lc1.v1",
@@ -946,11 +1104,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_020",
-      "description": "move:not_before:correction:plain - Move Margaret Thompson's appointment to Thursday at 2pm. Actually, move it to to",
+      "description": "move:not_before:correction:plain - Move Margaret Thompson's appointment with Dr Shera to Thursday at 2pm. Actually,",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Move Margaret Thompson's appointment to Thursday at 2pm."
+          "utterance": "Move Margaret Thompson's appointment with Dr Shera to Thursday at 2pm."
         },
         {
           "turn": 2,
@@ -978,11 +1136,25 @@
             "text": "Margaret Thompson"
           }
         ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 42,
+            "end": 50,
+            "text": "Dr Shera"
+          },
+          {
+            "turn_index": 1,
+            "start": 42,
+            "end": 50,
+            "text": "Dr Shera"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
-            "start": 52,
-            "end": 55,
+            "start": 66,
+            "end": 69,
             "text": "2pm"
           },
           {
@@ -992,20 +1164,26 @@
             "text": "4pm"
           }
         ],
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 54,
+            "end": 62,
+            "text": "Thursday"
+          },
+          {
+            "turn_index": 1,
+            "start": 21,
+            "end": 29,
+            "text": "tomorrow"
+          }
+        ],
         "earliest_time": [
           {
             "turn_index": 0,
-            "start": 52,
-            "end": 55,
+            "start": 66,
+            "end": 69,
             "text": "2pm"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 1,
-            "start": 42,
-            "end": 50,
-            "text": "Dr Shera"
           }
         ]
       },
@@ -1057,7 +1235,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:c9c15be4bd8977fdede57971716a7b2a76af2fe2efb42b516864a99a390a7584"
+      "variant_hash": "sha256:0350d66b8a1e535316f169f87264452c7ff66e039f249bc005a36661f7af9988"
     },
     {
       "spec_version": "lc1.v1",
@@ -1065,11 +1243,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_020",
-      "description": "move:not_before:reversal:plain - Move Margaret Thompson's appointment to tomorrow at 4pm. Actually, leave it wher",
+      "description": "move:not_before:reversal:plain - Move Margaret Thompson's appointment with Dr Shera to tomorrow at 4pm. Actually,",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Move Margaret Thompson's appointment to tomorrow at 4pm."
+          "utterance": "Move Margaret Thompson's appointment with Dr Shera to tomorrow at 4pm."
         },
         {
           "turn": 2,
@@ -1097,19 +1275,35 @@
             "text": "Margaret Thompson"
           }
         ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 42,
+            "end": 50,
+            "text": "Dr Shera"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
-            "start": 52,
-            "end": 55,
+            "start": 66,
+            "end": 69,
             "text": "4pm"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 54,
+            "end": 62,
+            "text": "tomorrow"
           }
         ],
         "earliest_time": [
           {
             "turn_index": 0,
-            "start": 52,
-            "end": 55,
+            "start": 66,
+            "end": 69,
             "text": "4pm"
           }
         ]
@@ -1162,7 +1356,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:ef3f4d387d908ad1b606342ab0098a5492b6fb46a0521b39d6745295105bb87b"
+      "variant_hash": "sha256:e8eb5e30fc2d9d6d8c2a9ff7a0756f358769abb9ee68d4a737c285baa8d31f3d"
     }
   ]
 }

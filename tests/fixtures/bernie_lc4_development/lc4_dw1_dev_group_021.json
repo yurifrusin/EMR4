@@ -1,23 +1,23 @@
 {
   "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_021",
-  "group_hash": "sha256:04e44e0edcbb1e0eba186943ffbdde1b6ee84439cee4a04aacaac4fc35164ac1",
+  "group_hash": "sha256:edb98b74f35eaf0d24864a1cd1ca4905d7042cdcbb550da1ebda3b176e909638",
   "variant_hashes": {
     "surface": [
-      "sha256:b8e636c43ad7c527779dbe5dbc7aefe44b58fe6974b0f93d71e4bb6c51e71a25",
-      "sha256:b48469d79a699f1e103662ca998120f95726ff12e25f79132d2441d0bb1519e7",
-      "sha256:d88d94b412d09ea09e5b1f129a8da4ebc4f7ba2680f80eddde7df7e89b4a63f6",
-      "sha256:6004265ac2d0a7395b2471e3f928ede77a15b4c8cd089c2522100676084eb201",
-      "sha256:92ae998221b5ce83eee1740ad340ddcb08250599b9584c5ff75eab4c21ffd556",
-      "sha256:3e1d5557cab1dbc40b3bc64b5911a5bcd3829a6f1bb7c03f6e0385f5646476ef",
-      "sha256:f24ca77baeba9346769345ce6eddc8a3620df8cfe628eac432fa5f9bafd03b49",
-      "sha256:4e7cdd8d15f000a17b9eadb3ef402ed32127ab9f650c511f61fcabec577f6b4b",
-      "sha256:361ebef880216219d8679bb4c74acd482dfa07f6b05bb0456cb3a485bf60662e"
+      "sha256:ad802a99201c3d11d4c6141be92f909bfe784a5f85bc2d3fe7c79f66c1415eff",
+      "sha256:f2fdc83031f06367a971030d1c27b5d1e5319aa210ff45e0d6989d3845a9beda",
+      "sha256:b0dffa8443165f33883c833416f09d6186153e45f43a127cebd850a512a28438",
+      "sha256:325133af607852142eac95da2dca8e9d5c6e599212d13fb92b8bda69bebf4b5d",
+      "sha256:290e3001b9f1141299e58e6431a13f6ce6f8ea5f46b17b7ddabb9f5deff13c12",
+      "sha256:95f5ac5480e66f64aeb4696acd78563808d987f7cc36a50c77b433acac1e7725",
+      "sha256:3882ffe7ebe2bfc542dfd1e852a288e0d90bc36193cc79068883cfd5f415bd7d",
+      "sha256:71a1e858f5fd9a4615bd7ed1eef56ff48ec6f7b4c1f06f8c4aaac3bf7dba4319",
+      "sha256:14f62a49f84e141bc8d489b6b013a914da603eb78762e22327cb57884c525381"
     ],
     "multi_turn": [
-      "sha256:81f8545ea931bb25c8e71db39c576b060b979e88ac412bea168b5cdf118723ad",
-      "sha256:37089861b126dfdef7b030301c5f53141f759bf965c4fc560ceefc8bef5c4099",
-      "sha256:2178e5256ef333ec07216dbead7f805658a3f87a764993affbc8e9ca598209ef"
+      "sha256:9a314208d6bd3209207a1994448a4df5dcca4476de0d1afcc333820a9f6e8104",
+      "sha256:3d707a7f6bfef4b7bc82f11567aff779594c7cdca36697733706199c1e03f4c4",
+      "sha256:850dd59b27ed688e9468b150df4184c9e7984819c1ba317501922d31aaa018fe"
     ]
   },
   "provenance": "silver",
@@ -69,6 +69,14 @@
         "earliest_time": "15:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 67,
+            "end": 75,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -81,6 +89,14 @@
             "start": 63,
             "end": 66,
             "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 56,
+            "end": 59,
+            "text": "3pm"
           }
         ],
         "patient": [
@@ -102,509 +118,6 @@
       },
       "duration_minutes": 15,
       "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "no_slots",
-      "entity_state": "exact",
-      "dialogue_form": "ellipsis",
-      "language_form": "typo",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "appointment_moved",
-      "expected_tool_sequence": [
-        "request_clarification"
-      ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "moved",
-          "new_start_time": "15:00",
-          "new_date": "2026-07-15"
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "move_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": [],
-      "variant_hash": "sha256:b8e636c43ad7c527779dbe5dbc7aefe44b58fe6974b0f93d71e4bb6c51e71a25"
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_021_02",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_021",
-      "description": "move:not_before:ellipsis:typo - Could I reschedule Margaret Thompson's booking with Dr Shera? We need to shift i",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "Could I reschedule Margaret Thompson's booking with Dr Shera? We need to shift it to 4pm tomorrow after instead."
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "move",
-      "action_semantics": "intended",
-      "temporal_relation": "not_before",
-      "earliest_time": "15:00",
-      "latest_time": null,
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "15:00"
-      },
-      "source_spans": {
-        "temporal_relation": [
-          {
-            "turn_index": 0,
-            "start": 85,
-            "end": 88,
-            "text": "4pm"
-          }
-        ],
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 19,
-            "end": 36,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 52,
-            "end": 60,
-            "text": "Dr Shera"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "no_slots",
-      "entity_state": "exact",
-      "dialogue_form": "ellipsis",
-      "language_form": "typo",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "appointment_moved",
-      "expected_tool_sequence": [
-        "request_clarification"
-      ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "moved",
-          "new_start_time": "15:00",
-          "new_date": "2026-07-15"
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "move_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": [],
-      "variant_hash": "sha256:b48469d79a699f1e103662ca998120f95726ff12e25f79132d2441d0bb1519e7"
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_021_03",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_021",
-      "description": "move:not_before:ellipsis:typo - Reschedule: Margaret Thompson, Dr Shera, move to tomorrow after at 4pm.",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "Reschedule: Margaret Thompson, Dr Shera, move to tomorrow after at 4pm."
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "move",
-      "action_semantics": "intended",
-      "temporal_relation": "not_before",
-      "earliest_time": "15:00",
-      "latest_time": null,
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "15:00"
-      },
-      "source_spans": {
-        "temporal_relation": [
-          {
-            "turn_index": 0,
-            "start": 67,
-            "end": 70,
-            "text": "4pm"
-          }
-        ],
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 12,
-            "end": 29,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 31,
-            "end": 39,
-            "text": "Dr Shera"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "no_slots",
-      "entity_state": "exact",
-      "dialogue_form": "ellipsis",
-      "language_form": "typo",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "appointment_moved",
-      "expected_tool_sequence": [
-        "request_clarification"
-      ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "moved",
-          "new_start_time": "15:00",
-          "new_date": "2026-07-15"
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "move_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": [],
-      "variant_hash": "sha256:d88d94b412d09ea09e5b1f129a8da4ebc4f7ba2680f80eddde7df7e89b4a63f6"
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_021_04",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_021",
-      "description": "move:not_before:ellipsis:typo - Hi, Margaret Thompson's appointment with Dr Shera needs to be moved to tomorrow ",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "Hi, Margaret Thompson's appointment with Dr Shera needs to be moved to tomorrow after at 4pm, not 3pm."
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "move",
-      "action_semantics": "intended",
-      "temporal_relation": "not_before",
-      "earliest_time": "15:00",
-      "latest_time": null,
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "15:00"
-      },
-      "source_spans": {
-        "temporal_relation": [
-          {
-            "turn_index": 0,
-            "start": 89,
-            "end": 92,
-            "text": "4pm"
-          },
-          {
-            "turn_index": 0,
-            "start": 98,
-            "end": 101,
-            "text": "3pm"
-          }
-        ],
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 4,
-            "end": 21,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 41,
-            "end": 49,
-            "text": "Dr Shera"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "no_slots",
-      "entity_state": "exact",
-      "dialogue_form": "ellipsis",
-      "language_form": "typo",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "appointment_moved",
-      "expected_tool_sequence": [
-        "request_clarification"
-      ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "moved",
-          "new_start_time": "15:00",
-          "new_date": "2026-07-15"
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "move_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": [],
-      "variant_hash": "sha256:6004265ac2d0a7395b2471e3f928ede77a15b4c8cd089c2522100676084eb201"
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_021_05",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_021",
-      "description": "move:not_before:ellipsis:typo - Please shift Margaret Thompson's apt w/ Dr Shera to tomorrow after @ 4pm.",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "Please shift Margaret Thompson's apt w/ Dr Shera to tomorrow after @ 4pm."
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "move",
-      "action_semantics": "intended",
-      "temporal_relation": "not_before",
-      "earliest_time": "15:00",
-      "latest_time": null,
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "15:00"
-      },
-      "source_spans": {
-        "temporal_relation": [
-          {
-            "turn_index": 0,
-            "start": 69,
-            "end": 72,
-            "text": "4pm"
-          }
-        ],
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 13,
-            "end": 30,
-            "text": "Margaret Thompson"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 0,
-            "start": 40,
-            "end": 48,
-            "text": "Dr Shera"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "exact",
-      "patient_semantics": "exact",
-      "location_semantics": "omitted",
-      "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
-      "diary_state": "no_slots",
-      "entity_state": "exact",
-      "dialogue_form": "ellipsis",
-      "language_form": "typo",
-      "initial_diary_state": {
-        "reference_date": "2026-07-14",
-        "diary_page_date": "2026-07-15",
-        "seeded_appointments": [],
-        "practitioners_available": [
-          "pr-001"
-        ],
-        "patients_booked_today": []
-      },
-      "expected_outcome_kind": "appointment_moved",
-      "expected_tool_sequence": [
-        "request_clarification"
-      ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "moved",
-          "new_start_time": "15:00",
-          "new_date": "2026-07-15"
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "move_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
-      "forbidden_outcomes": [],
-      "forbidden_tool_calls": [
-        "mutate_diary_direct",
-        "override_confirmation"
-      ],
-      "expected_clarification": null,
-      "clarification_choices": [],
-      "variant_hash": "sha256:92ae998221b5ce83eee1740ad340ddcb08250599b9584c5ff75eab4c21ffd556"
-    },
-    {
-      "spec_version": "lc1.v1",
-      "scenario_id": "lc4_dw1_dev_var_021_06",
-      "provenance": "silver",
-      "adjudication": "pending",
-      "family": "lc4_dw1_dev_group_021",
-      "description": "move:not_before:ellipsis:typo - I need to move Margaret Thompson's booking forward to tomorrow after at 4pm \u2014 ca",
-      "dialogue_turns": [
-        {
-          "turn": 1,
-          "utterance": "I need to move Margaret Thompson's booking forward to tomorrow after at 4pm \u2014 can you update that?"
-        }
-      ],
-      "reference_date": "2026-07-14",
-      "clinic_clock": "2026-07-14T09:00:00+10:00",
-      "intended_action": "move",
-      "action_semantics": "intended",
-      "temporal_relation": "not_before",
-      "earliest_time": "15:00",
-      "latest_time": null,
-      "normalized_values": {
-        "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "15:00"
-      },
-      "source_spans": {
-        "temporal_relation": [
-          {
-            "turn_index": 0,
-            "start": 72,
-            "end": 75,
-            "text": "4pm"
-          }
-        ],
-        "patient": [
-          {
-            "turn_index": 0,
-            "start": 15,
-            "end": 32,
-            "text": "Margaret Thompson"
-          }
-        ]
-      },
-      "duration_minutes": 15,
-      "practitioner_semantics": "omitted",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
@@ -651,7 +164,598 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:3e1d5557cab1dbc40b3bc64b5911a5bcd3829a6f1bb7c03f6e0385f5646476ef"
+      "variant_hash": "sha256:ad802a99201c3d11d4c6141be92f909bfe784a5f85bc2d3fe7c79f66c1415eff"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_021_02",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_021",
+      "description": "move:not_before:ellipsis:typo - Could I reschedule Margaret Thompson's booking with Dr Shera? We need to shift i",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Could I reschedule Margaret Thompson's booking with Dr Shera? We need to shift it to 4pm tomorrow after instead."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "move",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "15:00",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "15:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 89,
+            "end": 97,
+            "text": "tomorrow"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 85,
+            "end": 88,
+            "text": "4pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 19,
+            "end": 36,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 52,
+            "end": 60,
+            "text": "Dr Shera"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 85,
+            "end": 88,
+            "text": "4pm"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "no_slots",
+      "entity_state": "omitted",
+      "dialogue_form": "ellipsis",
+      "language_form": "typo",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_moved",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "moved",
+          "new_start_time": "15:00",
+          "new_date": "2026-07-15"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "move_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:f2fdc83031f06367a971030d1c27b5d1e5319aa210ff45e0d6989d3845a9beda"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_021_03",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_021",
+      "description": "move:not_before:ellipsis:typo - Reschedule: Margaret Thompson, Dr Shera, move to tomorrow after at 4pm.",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Reschedule: Margaret Thompson, Dr Shera, move to tomorrow after at 4pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "move",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "15:00",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "15:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 49,
+            "end": 57,
+            "text": "tomorrow"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 67,
+            "end": 70,
+            "text": "4pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 12,
+            "end": 29,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 31,
+            "end": 39,
+            "text": "Dr Shera"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 67,
+            "end": 70,
+            "text": "4pm"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "no_slots",
+      "entity_state": "omitted",
+      "dialogue_form": "ellipsis",
+      "language_form": "typo",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_moved",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "moved",
+          "new_start_time": "15:00",
+          "new_date": "2026-07-15"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "move_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:b0dffa8443165f33883c833416f09d6186153e45f43a127cebd850a512a28438"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_021_04",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_021",
+      "description": "move:not_before:ellipsis:typo - Hi, Margaret Thompson's appointment with Dr Shera needs to be moved to tomorrow ",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Hi, Margaret Thompson's appointment with Dr Shera needs to be moved to tomorrow after at 4pm, not 3pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "move",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "15:00",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "15:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 71,
+            "end": 79,
+            "text": "tomorrow"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 89,
+            "end": 92,
+            "text": "4pm"
+          },
+          {
+            "turn_index": 0,
+            "start": 98,
+            "end": 101,
+            "text": "3pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 98,
+            "end": 101,
+            "text": "3pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 4,
+            "end": 21,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 41,
+            "end": 49,
+            "text": "Dr Shera"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "no_slots",
+      "entity_state": "omitted",
+      "dialogue_form": "ellipsis",
+      "language_form": "typo",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_moved",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "moved",
+          "new_start_time": "15:00",
+          "new_date": "2026-07-15"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "move_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:325133af607852142eac95da2dca8e9d5c6e599212d13fb92b8bda69bebf4b5d"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_021_05",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_021",
+      "description": "move:not_before:ellipsis:typo - Please shift Margaret Thompson's apt w/ Dr Shera to tomorrow after @ 4pm.",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please shift Margaret Thompson's apt w/ Dr Shera to tomorrow after @ 4pm."
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "move",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "15:00",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "15:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 52,
+            "end": 60,
+            "text": "tomorrow"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 69,
+            "end": 72,
+            "text": "4pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 13,
+            "end": 30,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 40,
+            "end": 48,
+            "text": "Dr Shera"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 69,
+            "end": 72,
+            "text": "4pm"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "no_slots",
+      "entity_state": "omitted",
+      "dialogue_form": "ellipsis",
+      "language_form": "typo",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_moved",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "moved",
+          "new_start_time": "15:00",
+          "new_date": "2026-07-15"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "move_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:290e3001b9f1141299e58e6431a13f6ce6f8ea5f46b17b7ddabb9f5deff13c12"
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4_dw1_dev_var_021_06",
+      "provenance": "silver",
+      "adjudication": "pending",
+      "family": "lc4_dw1_dev_group_021",
+      "description": "move:not_before:ellipsis:typo - I need to move Margaret Thompson's booking with Dr Shera forward to tomorrow aft",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "I need to move Margaret Thompson's booking with Dr Shera forward to tomorrow after at 4pm \u2014 can you update that?"
+        }
+      ],
+      "reference_date": "2026-07-14",
+      "clinic_clock": "2026-07-14T09:00:00+10:00",
+      "intended_action": "move",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "15:00",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-15",
+        "duration_minutes": 15,
+        "earliest_time": "15:00"
+      },
+      "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 68,
+            "end": 76,
+            "text": "tomorrow"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 86,
+            "end": 89,
+            "text": "4pm"
+          }
+        ],
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 15,
+            "end": 32,
+            "text": "Margaret Thompson"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 48,
+            "end": 56,
+            "text": "Dr Shera"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 86,
+            "end": 89,
+            "text": "4pm"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "omitted",
+      "appointment_type_semantics": "omitted",
+      "duration_semantics": "exact",
+      "diary_state": "no_slots",
+      "entity_state": "omitted",
+      "dialogue_form": "ellipsis",
+      "language_form": "typo",
+      "initial_diary_state": {
+        "reference_date": "2026-07-14",
+        "diary_page_date": "2026-07-15",
+        "seeded_appointments": [],
+        "practitioners_available": [
+          "pr-001"
+        ],
+        "patients_booked_today": []
+      },
+      "expected_outcome_kind": "appointment_moved",
+      "expected_tool_sequence": [
+        "request_clarification"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-15",
+          "change_type": "moved",
+          "new_start_time": "15:00",
+          "new_date": "2026-07-15"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "move_requested",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [
+        "mutate_diary_direct",
+        "override_confirmation"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:95f5ac5480e66f64aeb4696acd78563808d987f7cc36a50c77b433acac1e7725"
     },
     {
       "spec_version": "lc1.v1",
@@ -679,6 +783,14 @@
         "earliest_time": "15:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 47,
+            "end": 55,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -702,6 +814,14 @@
             "end": 36,
             "text": "Dr Shera"
           }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 62,
+            "end": 65,
+            "text": "4pm"
+          }
         ]
       },
       "duration_minutes": 15,
@@ -711,7 +831,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "no_slots",
-      "entity_state": "exact",
+      "entity_state": "omitted",
       "dialogue_form": "ellipsis",
       "language_form": "typo",
       "initial_diary_state": {
@@ -752,7 +872,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:f24ca77baeba9346769345ce6eddc8a3620df8cfe628eac432fa5f9bafd03b49"
+      "variant_hash": "sha256:3882ffe7ebe2bfc542dfd1e852a288e0d90bc36193cc79068883cfd5f415bd7d"
     },
     {
       "spec_version": "lc1.v1",
@@ -780,6 +900,14 @@
         "earliest_time": "15:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 67,
+            "end": 75,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -803,6 +931,14 @@
             "end": 63,
             "text": "Dr Shera"
           }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 85,
+            "end": 88,
+            "text": "4pm"
+          }
         ]
       },
       "duration_minutes": 15,
@@ -812,7 +948,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "no_slots",
-      "entity_state": "exact",
+      "entity_state": "omitted",
       "dialogue_form": "ellipsis",
       "language_form": "typo",
       "initial_diary_state": {
@@ -853,7 +989,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:4e7cdd8d15f000a17b9eadb3ef402ed32127ab9f650c511f61fcabec577f6b4b"
+      "variant_hash": "sha256:71a1e858f5fd9a4615bd7ed1eef56ff48ec6f7b4c1f06f8c4aaac3bf7dba4319"
     },
     {
       "spec_version": "lc1.v1",
@@ -881,6 +1017,14 @@
         "earliest_time": "15:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 55,
+            "end": 63,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -904,6 +1048,14 @@
             "end": 51,
             "text": "Dr Shera"
           }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 73,
+            "end": 76,
+            "text": "4pm"
+          }
         ]
       },
       "duration_minutes": 15,
@@ -913,7 +1065,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "no_slots",
-      "entity_state": "exact",
+      "entity_state": "omitted",
       "dialogue_form": "ellipsis",
       "language_form": "typo",
       "initial_diary_state": {
@@ -954,7 +1106,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:361ebef880216219d8679bb4c74acd482dfa07f6b05bb0456cb3a485bf60662e"
+      "variant_hash": "sha256:14f62a49f84e141bc8d489b6b013a914da603eb78762e22327cb57884c525381"
     }
   ],
   "multi_turn_variants": [
@@ -964,11 +1116,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_021",
-      "description": "move:not_before:clarification:plain - I need to move Margaret Thompson's appointment. Move it to tomorrow at 4pm with ",
+      "description": "move:not_before:clarification:plain - I need to move Margaret Thompson's appointment with Dr Shera. Move it to tomorro",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "I need to move Margaret Thompson's appointment."
+          "utterance": "I need to move Margaret Thompson's appointment with Dr Shera."
         },
         {
           "turn": 2,
@@ -998,6 +1150,12 @@
         ],
         "practitioner": [
           {
+            "turn_index": 0,
+            "start": 52,
+            "end": 60,
+            "text": "Dr Shera"
+          },
+          {
             "turn_index": 1,
             "start": 32,
             "end": 40,
@@ -1010,6 +1168,14 @@
             "start": 23,
             "end": 26,
             "text": "4pm"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 11,
+            "end": 19,
+            "text": "tomorrow"
           }
         ],
         "earliest_time": [
@@ -1028,7 +1194,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "no_slots",
-      "entity_state": "exact",
+      "entity_state": "omitted",
       "dialogue_form": "clarification",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1074,7 +1240,7 @@
         "3pm",
         "4pm"
       ],
-      "variant_hash": "sha256:81f8545ea931bb25c8e71db39c576b060b979e88ac412bea168b5cdf118723ad"
+      "variant_hash": "sha256:9a314208d6bd3209207a1994448a4df5dcca4476de0d1afcc333820a9f6e8104"
     },
     {
       "spec_version": "lc1.v1",
@@ -1082,11 +1248,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_021",
-      "description": "move:not_before:correction:plain - Move Margaret Thompson's appointment to Thursday at 2pm. Actually, move it to to",
+      "description": "move:not_before:correction:plain - Move Margaret Thompson's appointment with Dr Shera to Thursday at 2pm. Actually,",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Move Margaret Thompson's appointment to Thursday at 2pm."
+          "utterance": "Move Margaret Thompson's appointment with Dr Shera to Thursday at 2pm."
         },
         {
           "turn": 2,
@@ -1114,11 +1280,25 @@
             "text": "Margaret Thompson"
           }
         ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 42,
+            "end": 50,
+            "text": "Dr Shera"
+          },
+          {
+            "turn_index": 1,
+            "start": 42,
+            "end": 50,
+            "text": "Dr Shera"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
-            "start": 52,
-            "end": 55,
+            "start": 66,
+            "end": 69,
             "text": "2pm"
           },
           {
@@ -1128,20 +1308,26 @@
             "text": "4pm"
           }
         ],
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 54,
+            "end": 62,
+            "text": "Thursday"
+          },
+          {
+            "turn_index": 1,
+            "start": 21,
+            "end": 29,
+            "text": "tomorrow"
+          }
+        ],
         "earliest_time": [
           {
             "turn_index": 0,
-            "start": 52,
-            "end": 55,
+            "start": 66,
+            "end": 69,
             "text": "2pm"
-          }
-        ],
-        "practitioner": [
-          {
-            "turn_index": 1,
-            "start": 42,
-            "end": 50,
-            "text": "Dr Shera"
           }
         ]
       },
@@ -1152,7 +1338,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "no_slots",
-      "entity_state": "exact",
+      "entity_state": "omitted",
       "dialogue_form": "correction",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1193,7 +1379,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:37089861b126dfdef7b030301c5f53141f759bf965c4fc560ceefc8bef5c4099"
+      "variant_hash": "sha256:3d707a7f6bfef4b7bc82f11567aff779594c7cdca36697733706199c1e03f4c4"
     },
     {
       "spec_version": "lc1.v1",
@@ -1201,11 +1387,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_021",
-      "description": "move:not_before:reversal:plain - Move Margaret Thompson's appointment to tomorrow at 4pm. Actually, leave it wher",
+      "description": "move:not_before:reversal:plain - Move Margaret Thompson's appointment with Dr Shera to tomorrow at 4pm. Actually,",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Move Margaret Thompson's appointment to tomorrow at 4pm."
+          "utterance": "Move Margaret Thompson's appointment with Dr Shera to tomorrow at 4pm."
         },
         {
           "turn": 2,
@@ -1233,25 +1419,41 @@
             "text": "Margaret Thompson"
           }
         ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 42,
+            "end": 50,
+            "text": "Dr Shera"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
-            "start": 52,
-            "end": 55,
+            "start": 66,
+            "end": 69,
             "text": "4pm"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 54,
+            "end": 62,
+            "text": "tomorrow"
           }
         ],
         "earliest_time": [
           {
             "turn_index": 0,
-            "start": 52,
-            "end": 55,
+            "start": 66,
+            "end": 69,
             "text": "4pm"
           }
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "omitted",
+      "practitioner_semantics": "exact",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
@@ -1298,7 +1500,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:2178e5256ef333ec07216dbead7f805658a3f87a764993affbc8e9ca598209ef"
+      "variant_hash": "sha256:850dd59b27ed688e9468b150df4184c9e7984819c1ba317501922d31aaa018fe"
     }
   ]
 }

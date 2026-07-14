@@ -1,23 +1,23 @@
 {
   "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_058",
-  "group_hash": "sha256:c30ffe81f6d6c416cb079a3103fd117f218fca9a0c653efafdd410db4757e5e2",
+  "group_hash": "sha256:9787085d53f03e83d535d931d500aef7ab9706b97a19f8e66f70671641cbe667",
   "variant_hashes": {
     "surface": [
-      "sha256:f89861a13f305b24ffb1be77f44e5774f0340a487d4e5df89a58b983d76d081c",
-      "sha256:89f0b14485f1cad55d3dac40f6d2f212a68c5b5564fd88e3e87bb69d67c9817c",
-      "sha256:7f820925746b50922766900a22f41c9fad33e42a27f2b49de954f3ab380b849e",
-      "sha256:58028f9abf9e766722e4d556f10fc2bc54d2333a7d58907fda59c0c0e97822de",
-      "sha256:f88c22521ad5261742b578212b1ebaf2f4c3936414250d74d08842c5b4acd690",
-      "sha256:d1b9dd6aaf7b0183045377bd71d058f714c1b4e4fe3492819390e36651a0476e",
-      "sha256:a94d1e7bc69be7fdf8ddf0db3c38aa7c26f357708ff716506d384416358d0d57",
-      "sha256:fd08eb821653d7918a5d4d6d915f5e3950bed70867346b96a95e7c371e72bb72",
-      "sha256:f6ad56d1af6e434ad49a976fe8eb4c557a94ecaddffb26c51391788f38291331"
+      "sha256:7f116eb3cd26b8f551f50c8f3cd22773773339c9f61a100e45193e30b499dfaf",
+      "sha256:e6c7812c47e1ecb16eeed1c79e5cfc337a9315fa199ad36696f1162a655f9e52",
+      "sha256:e6381835782a95163533a1c2ed2c131bdd710519d8d93319b51f8f22bde98e2e",
+      "sha256:850bae9823648452bb3ff64bcaa59e61049059c6a05e2e026bdc357bfc991364",
+      "sha256:dbc5baa01f62ed31dc3f21c832ef3b04d0e7dba9720ad2f9e7ad9d61fe60af6a",
+      "sha256:e05b6c97befe9169539e895ba0b2d3547f531ae9595e77f0aa592d95a125e0cb",
+      "sha256:c4c60716185bfcfa511fcdffa7910283a14d7d927d27279fa8ac6b320e8b55cf",
+      "sha256:f28014adf22adc99060ed67b57710f43768ebb2baf2e2bdb3f8fb1ebc8e3ab45",
+      "sha256:bcbe3d469d554de4500aa983382d49b69caa528eb80601aca048134d47849bc2"
     ],
     "multi_turn": [
-      "sha256:85d302de99407d93ab8128605f77acc356a6d2d8abd994ed028f91ece076ca7e",
-      "sha256:556fcd1c855e9dd89e528fd9cadfb19df36da1f7c40d5ddf5c3dced4b7aa9822",
-      "sha256:b03b0b787f6cb674e60895313d94a30abe50fb60b85e79ca91ba7ad1be1db152"
+      "sha256:69b0fc1022e38a98c7316af570a445529dde0275d5fad908f17384dbcd0d8ae7",
+      "sha256:08dded78bbe054533d8f85127bdeda2d3a28e19d5ce055dde1392d7846912037",
+      "sha256:5180a279cb238ccd7566440b5f0100322d17f4f6807e5447fa88e904b25f617b"
     ]
   },
   "provenance": "silver",
@@ -71,6 +71,14 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 53,
+            "end": 61,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -78,6 +86,22 @@
             "end": 76,
             "text": "2pm"
           },
+          {
+            "turn_index": 0,
+            "start": 81,
+            "end": 84,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 73,
+            "end": 76,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 81,
@@ -109,7 +133,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "exact",
+      "entity_state": "negated",
       "dialogue_form": "clarification",
       "language_form": "paraphrase",
       "initial_diary_state": {
@@ -149,7 +173,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:f89861a13f305b24ffb1be77f44e5774f0340a487d4e5df89a58b983d76d081c"
+      "variant_hash": "sha256:7f116eb3cd26b8f551f50c8f3cd22773773339c9f61a100e45193e30b499dfaf"
     },
     {
       "spec_version": "lc1.v1",
@@ -178,6 +202,14 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 63,
+            "end": 71,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -185,6 +217,22 @@
             "end": 86,
             "text": "2pm"
           },
+          {
+            "turn_index": 0,
+            "start": 91,
+            "end": 94,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 83,
+            "end": 86,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 91,
@@ -216,7 +264,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "exact",
+      "entity_state": "negated",
       "dialogue_form": "clarification",
       "language_form": "paraphrase",
       "initial_diary_state": {
@@ -256,7 +304,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:89f0b14485f1cad55d3dac40f6d2f212a68c5b5564fd88e3e87bb69d67c9817c"
+      "variant_hash": "sha256:e6c7812c47e1ecb16eeed1c79e5cfc337a9315fa199ad36696f1162a655f9e52"
     },
     {
       "spec_version": "lc1.v1",
@@ -285,6 +333,14 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 37,
+            "end": 45,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -292,6 +348,22 @@
             "end": 57,
             "text": "2pm"
           },
+          {
+            "turn_index": 0,
+            "start": 62,
+            "end": 65,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 54,
+            "end": 57,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 62,
@@ -323,7 +395,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "exact",
+      "entity_state": "negated",
       "dialogue_form": "clarification",
       "language_form": "paraphrase",
       "initial_diary_state": {
@@ -363,7 +435,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:7f820925746b50922766900a22f41c9fad33e42a27f2b49de954f3ab380b849e"
+      "variant_hash": "sha256:e6381835782a95163533a1c2ed2c131bdd710519d8d93319b51f8f22bde98e2e"
     },
     {
       "spec_version": "lc1.v1",
@@ -375,7 +447,7 @@
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Hi, would you please cancel Margaret Thompson's appointment with Dr Shera for tomorrow between?"
+          "utterance": "Hi, would you please cancel Margaret Thompson's appointment with Dr Shera for tomorrow between at 2pm and 4pm?"
         }
       ],
       "reference_date": "2026-07-14",
@@ -392,6 +464,44 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 78,
+            "end": 86,
+            "text": "tomorrow"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 98,
+            "end": 101,
+            "text": "2pm"
+          },
+          {
+            "turn_index": 0,
+            "start": 106,
+            "end": 109,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 98,
+            "end": 101,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 106,
+            "end": 109,
+            "text": "4pm"
+          }
+        ],
         "patient": [
           {
             "turn_index": 0,
@@ -416,7 +526,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "exact",
+      "entity_state": "negated",
       "dialogue_form": "clarification",
       "language_form": "paraphrase",
       "initial_diary_state": {
@@ -456,7 +566,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:58028f9abf9e766722e4d556f10fc2bc54d2333a7d58907fda59c0c0e97822de"
+      "variant_hash": "sha256:850bae9823648452bb3ff64bcaa59e61049059c6a05e2e026bdc357bfc991364"
     },
     {
       "spec_version": "lc1.v1",
@@ -485,6 +595,14 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 53,
+            "end": 61,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -492,6 +610,22 @@
             "end": 75,
             "text": "2pm"
           },
+          {
+            "turn_index": 0,
+            "start": 80,
+            "end": 83,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 72,
+            "end": 75,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 80,
@@ -523,7 +657,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "exact",
+      "entity_state": "negated",
       "dialogue_form": "clarification",
       "language_form": "paraphrase",
       "initial_diary_state": {
@@ -563,7 +697,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:f88c22521ad5261742b578212b1ebaf2f4c3936414250d74d08842c5b4acd690"
+      "variant_hash": "sha256:dbc5baa01f62ed31dc3f21c832ef3b04d0e7dba9720ad2f9e7ad9d61fe60af6a"
     },
     {
       "spec_version": "lc1.v1",
@@ -592,6 +726,14 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 66,
+            "end": 74,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -599,6 +741,22 @@
             "end": 89,
             "text": "2pm"
           },
+          {
+            "turn_index": 0,
+            "start": 94,
+            "end": 97,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 86,
+            "end": 89,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 94,
@@ -630,7 +788,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "exact",
+      "entity_state": "negated",
       "dialogue_form": "clarification",
       "language_form": "paraphrase",
       "initial_diary_state": {
@@ -670,7 +828,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:d1b9dd6aaf7b0183045377bd71d058f714c1b4e4fe3492819390e36651a0476e"
+      "variant_hash": "sha256:e05b6c97befe9169539e895ba0b2d3547f531ae9595e77f0aa592d95a125e0cb"
     },
     {
       "spec_version": "lc1.v1",
@@ -699,6 +857,14 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 39,
+            "end": 47,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -706,6 +872,22 @@
             "end": 59,
             "text": "2pm"
           },
+          {
+            "turn_index": 0,
+            "start": 64,
+            "end": 67,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 56,
+            "end": 59,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 64,
@@ -737,7 +919,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "exact",
+      "entity_state": "negated",
       "dialogue_form": "clarification",
       "language_form": "paraphrase",
       "initial_diary_state": {
@@ -777,7 +959,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:a94d1e7bc69be7fdf8ddf0db3c38aa7c26f357708ff716506d384416358d0d57"
+      "variant_hash": "sha256:c4c60716185bfcfa511fcdffa7910283a14d7d927d27279fa8ac6b320e8b55cf"
     },
     {
       "spec_version": "lc1.v1",
@@ -806,6 +988,14 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 63,
+            "end": 71,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -813,6 +1003,22 @@
             "end": 86,
             "text": "2pm"
           },
+          {
+            "turn_index": 0,
+            "start": 91,
+            "end": 94,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 83,
+            "end": 86,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 91,
@@ -844,7 +1050,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "exact",
+      "entity_state": "negated",
       "dialogue_form": "clarification",
       "language_form": "paraphrase",
       "initial_diary_state": {
@@ -884,7 +1090,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:fd08eb821653d7918a5d4d6d915f5e3950bed70867346b96a95e7c371e72bb72"
+      "variant_hash": "sha256:f28014adf22adc99060ed67b57710f43768ebb2baf2e2bdb3f8fb1ebc8e3ab45"
     },
     {
       "spec_version": "lc1.v1",
@@ -913,6 +1119,14 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 61,
+            "end": 69,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -920,6 +1134,22 @@
             "end": 84,
             "text": "2pm"
           },
+          {
+            "turn_index": 0,
+            "start": 89,
+            "end": 92,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 81,
+            "end": 84,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 89,
@@ -951,7 +1181,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "exact",
+      "entity_state": "negated",
       "dialogue_form": "clarification",
       "language_form": "paraphrase",
       "initial_diary_state": {
@@ -991,7 +1221,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:f6ad56d1af6e434ad49a976fe8eb4c557a94ecaddffb26c51391788f38291331"
+      "variant_hash": "sha256:bcbe3d469d554de4500aa983382d49b69caa528eb80601aca048134d47849bc2"
     }
   ],
   "multi_turn_variants": [
@@ -1050,7 +1280,23 @@
             "text": "3pm"
           }
         ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 37,
+            "end": 45,
+            "text": "tomorrow"
+          }
+        ],
         "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 49,
+            "end": 52,
+            "text": "3pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 1,
             "start": 49,
@@ -1066,7 +1312,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "exact",
+      "entity_state": "negated",
       "dialogue_form": "clarification",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1111,7 +1357,7 @@
         "3pm",
         "4pm"
       ],
-      "variant_hash": "sha256:85d302de99407d93ab8128605f77acc356a6d2d8abd994ed028f91ece076ca7e"
+      "variant_hash": "sha256:69b0fc1022e38a98c7316af570a445529dde0275d5fad908f17384dbcd0d8ae7"
     },
     {
       "spec_version": "lc1.v1",
@@ -1174,7 +1420,23 @@
             "text": "3pm"
           }
         ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 44,
+            "end": 52,
+            "text": "tomorrow"
+          }
+        ],
         "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 56,
+            "end": 59,
+            "text": "3pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 1,
             "start": 56,
@@ -1190,7 +1452,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "exact",
+      "entity_state": "negated",
       "dialogue_form": "correction",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1230,7 +1492,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:556fcd1c855e9dd89e528fd9cadfb19df36da1f7c40d5ddf5c3dced4b7aa9822"
+      "variant_hash": "sha256:08dded78bbe054533d8f85127bdeda2d3a28e19d5ce055dde1392d7846912037"
     },
     {
       "spec_version": "lc1.v1",
@@ -1238,11 +1500,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_058",
-      "description": "cancel:interval:reversal:plain - Cancel Margaret Thompson's appointment tomorrow at 3pm. Oh wait, don't cancel \u2014 ",
+      "description": "cancel:interval:reversal:plain - Cancel Margaret Thompson's appointment with Dr Shera tomorrow at 3pm. Oh wait, d",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Cancel Margaret Thompson's appointment tomorrow at 3pm."
+          "utterance": "Cancel Margaret Thompson's appointment with Dr Shera tomorrow at 3pm."
         },
         {
           "turn": 2,
@@ -1271,31 +1533,55 @@
             "text": "Margaret Thompson"
           }
         ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 44,
+            "end": 52,
+            "text": "Dr Shera"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
-            "start": 51,
-            "end": 54,
+            "start": 65,
+            "end": 68,
             "text": "3pm"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 53,
+            "end": 61,
+            "text": "tomorrow"
           }
         ],
         "earliest_time": [
           {
             "turn_index": 0,
-            "start": 51,
-            "end": 54,
+            "start": 65,
+            "end": 68,
+            "text": "3pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 68,
             "text": "3pm"
           }
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "omitted",
+      "practitioner_semantics": "exact",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "overlap",
-      "entity_state": "omitted",
+      "entity_state": "negated",
       "dialogue_form": "reversal",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1335,7 +1621,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:b03b0b787f6cb674e60895313d94a30abe50fb60b85e79ca91ba7ad1be1db152"
+      "variant_hash": "sha256:5180a279cb238ccd7566440b5f0100322d17f4f6807e5447fa88e904b25f617b"
     }
   ]
 }

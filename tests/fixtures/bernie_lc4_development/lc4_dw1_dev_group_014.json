@@ -1,23 +1,23 @@
 {
   "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_014",
-  "group_hash": "sha256:60b0f647fba6489f8d1bc02b2fc5155c63dd68d47d89a4adf2b5c07ad7a2fc10",
+  "group_hash": "sha256:c347b8589fd6f2612a18c27c26e35b2792496ccd418cbf0a6ae8e09643e3c248",
   "variant_hashes": {
     "surface": [
-      "sha256:ca535258df7ec5fa9c9972e42a71f9732f173009a92394b76c7aba9fb293e7f4",
-      "sha256:242d5ff5585997c19031b57dfe98fe36b8397df10b698f38c16803040696e3be",
-      "sha256:cf45507779f5ade43f22b580438c137245d8c7dd03d915f567d2fef064ae2c40",
-      "sha256:f0bd76a8e5371a27f933a5e636a74dde6a5adc4136e39d9ec60feb7c1ddbcdac",
-      "sha256:bb71c24f6eb8b9c2a6bebade8b803a90acb4b8c4e62de19922984d76958e3985",
-      "sha256:ee15e3a7c455386ea7653fb421bdaadd195f0c44b26b2e523044047b4bd52af0",
-      "sha256:d746e611fb0891902b88c12519e03402589ed2a1fbf1f41b560efe2627f9dd91",
-      "sha256:9bb0a74ea426e228b73bdb2269be4f465b5fa16a9d6596d80232757f6f974866",
-      "sha256:87be40cb894450b8a12518a7a56da0395cc8cff782a8bf1f72fb4af074238c39"
+      "sha256:b840d9c32b14ab7284ef7062d76b612c1b6e567db207bac9abded0ce18a6468f",
+      "sha256:3dba5503e93bafa53fe4ee7927cf5852fb7f840a8f9d6f65a2942231967aa58f",
+      "sha256:eb42bab3f40290d61c7b34fb5d8165c93677378f316e791670ef50faa121cd21",
+      "sha256:d1a5dc30b48a50063524f9a963757479400f641033c48ae394e92791b7d4fe26",
+      "sha256:7e85b00f907f18c77afedbd5e2413845f39124f6a42d3a0faa35938a2829a357",
+      "sha256:8829f39d423daba7ce45b8222999aa16efad4b0ce031652b906056f79837ccda",
+      "sha256:a0797c226617b530e3010d11e32deeb40affb158c586fb8bede0f0455894e53f",
+      "sha256:a27f18e8f0cbb76d9bcc4b652819d53d173ce05eca1c778b76aa9f281c11af48",
+      "sha256:9d08e5080fbfb60f2d838dfc0d73a5d08bffaf914eb96503ebe92d4154d28246"
     ],
     "multi_turn": [
-      "sha256:447d5dc714bff08f1d444d1bf60d6064f830a4be1886426b09242f350131c255",
-      "sha256:6c8851014a8b4fd7f0c0c48f6c8e04a4b939dfc897c53c7b8e25b902020d7222",
-      "sha256:1ba352b4c7bd2452d6095b7de57e3b277cecc8a362128026f064ebd0ffbf2a52"
+      "sha256:bfaeb9b812edd8fa791b5ae564e5d8d31f72126ecc1f6c8a2746c71f79eb46ac",
+      "sha256:a9c297297112c72d0ecc4f0a21072b39871947405a5921ab62f2b098c9c20b08",
+      "sha256:45c1e2ea4952936d0e863185799db0de6f3f296946bd31278fbbf78154c1439d"
     ]
   },
   "provenance": "silver",
@@ -70,7 +70,31 @@
         "latest_time": "15:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 30,
+            "end": 38,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 56,
+            "end": 59,
+            "text": "3pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 56,
+            "end": 59,
+            "text": "3pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 56,
@@ -135,7 +159,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:ca535258df7ec5fa9c9972e42a71f9732f173009a92394b76c7aba9fb293e7f4"
+      "variant_hash": "sha256:b840d9c32b14ab7284ef7062d76b612c1b6e567db207bac9abded0ce18a6468f"
     },
     {
       "spec_version": "lc1.v1",
@@ -164,7 +188,31 @@
         "latest_time": "15:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 61,
+            "end": 69,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 87,
+            "end": 90,
+            "text": "3pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 87,
+            "end": 90,
+            "text": "3pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 87,
@@ -229,7 +277,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:242d5ff5585997c19031b57dfe98fe36b8397df10b698f38c16803040696e3be"
+      "variant_hash": "sha256:3dba5503e93bafa53fe4ee7927cf5852fb7f840a8f9d6f65a2942231967aa58f"
     },
     {
       "spec_version": "lc1.v1",
@@ -258,7 +306,31 @@
         "latest_time": "15:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 35,
+            "end": 43,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 58,
+            "end": 61,
+            "text": "3pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 58,
+            "end": 61,
+            "text": "3pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 58,
@@ -323,7 +395,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:cf45507779f5ade43f22b580438c137245d8c7dd03d915f567d2fef064ae2c40"
+      "variant_hash": "sha256:eb42bab3f40290d61c7b34fb5d8165c93677378f316e791670ef50faa121cd21"
     },
     {
       "spec_version": "lc1.v1",
@@ -352,7 +424,31 @@
         "latest_time": "15:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 49,
+            "end": 57,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 79,
+            "end": 82,
+            "text": "3pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 79,
+            "end": 82,
+            "text": "3pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 79,
@@ -417,7 +513,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:f0bd76a8e5371a27f933a5e636a74dde6a5adc4136e39d9ec60feb7c1ddbcdac"
+      "variant_hash": "sha256:d1a5dc30b48a50063524f9a963757479400f641033c48ae394e92791b7d4fe26"
     },
     {
       "spec_version": "lc1.v1",
@@ -446,7 +542,31 @@
         "latest_time": "15:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 49,
+            "end": 57,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 74,
+            "end": 77,
+            "text": "3pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 74,
+            "end": 77,
+            "text": "3pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 74,
@@ -511,7 +631,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:bb71c24f6eb8b9c2a6bebade8b803a90acb4b8c4e62de19922984d76958e3985"
+      "variant_hash": "sha256:7e85b00f907f18c77afedbd5e2413845f39124f6a42d3a0faa35938a2829a357"
     },
     {
       "spec_version": "lc1.v1",
@@ -540,7 +660,31 @@
         "latest_time": "15:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 73,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 91,
+            "end": 94,
+            "text": "3pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 91,
+            "end": 94,
+            "text": "3pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 91,
@@ -605,7 +749,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:ee15e3a7c455386ea7653fb421bdaadd195f0c44b26b2e523044047b4bd52af0"
+      "variant_hash": "sha256:8829f39d423daba7ce45b8222999aa16efad4b0ce031652b906056f79837ccda"
     },
     {
       "spec_version": "lc1.v1",
@@ -634,7 +778,31 @@
         "latest_time": "15:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 33,
+            "end": 41,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 56,
+            "end": 59,
+            "text": "3pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 56,
+            "end": 59,
+            "text": "3pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 56,
@@ -699,7 +867,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:d746e611fb0891902b88c12519e03402589ed2a1fbf1f41b560efe2627f9dd91"
+      "variant_hash": "sha256:a0797c226617b530e3010d11e32deeb40affb158c586fb8bede0f0455894e53f"
     },
     {
       "spec_version": "lc1.v1",
@@ -728,7 +896,31 @@
         "latest_time": "15:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 41,
+            "end": 49,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 67,
+            "end": 70,
+            "text": "3pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 67,
+            "end": 70,
+            "text": "3pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 67,
@@ -793,7 +985,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:9bb0a74ea426e228b73bdb2269be4f465b5fa16a9d6596d80232757f6f974866"
+      "variant_hash": "sha256:a27f18e8f0cbb76d9bcc4b652819d53d173ce05eca1c778b76aa9f281c11af48"
     },
     {
       "spec_version": "lc1.v1",
@@ -822,7 +1014,31 @@
         "latest_time": "15:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 44,
+            "end": 52,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 70,
+            "end": 73,
+            "text": "3pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 70,
+            "end": 73,
+            "text": "3pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 70,
@@ -887,7 +1103,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:87be40cb894450b8a12518a7a56da0395cc8cff782a8bf1f72fb4af074238c39"
+      "variant_hash": "sha256:9d08e5080fbfb60f2d838dfc0d73a5d08bffaf914eb96503ebe92d4154d28246"
     }
   ],
   "multi_turn_variants": [
@@ -938,6 +1154,14 @@
             "text": "Dr Shera"
           }
         ],
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 63,
+            "end": 71,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 1,
@@ -947,6 +1171,14 @@
           }
         ],
         "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 35,
+            "end": 38,
+            "text": "3pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 1,
             "start": 35,
@@ -1016,7 +1248,7 @@
         "3pm",
         "4pm"
       ],
-      "variant_hash": "sha256:447d5dc714bff08f1d444d1bf60d6064f830a4be1886426b09242f350131c255"
+      "variant_hash": "sha256:bfaeb9b812edd8fa791b5ae564e5d8d31f72126ecc1f6c8a2746c71f79eb46ac"
     },
     {
       "spec_version": "lc1.v1",
@@ -1085,20 +1317,36 @@
             "text": "3pm"
           }
         ],
-        "earliest_time": [
-          {
-            "turn_index": 0,
-            "start": 49,
-            "end": 52,
-            "text": "2pm"
-          }
-        ],
         "duration_minutes": [
           {
             "turn_index": 0,
             "start": 57,
             "end": 67,
             "text": "15 minutes"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 37,
+            "end": 45,
+            "text": "tomorrow"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 35,
+            "end": 38,
+            "text": "3pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 1,
+            "start": 35,
+            "end": 38,
+            "text": "3pm"
           }
         ]
       },
@@ -1150,7 +1398,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:6c8851014a8b4fd7f0c0c48f6c8e04a4b939dfc897c53c7b8e25b902020d7222"
+      "variant_hash": "sha256:a9c297297112c72d0ecc4f0a21072b39871947405a5921ab62f2b098c9c20b08"
     },
     {
       "spec_version": "lc1.v1",
@@ -1215,12 +1463,28 @@
             "text": "3pm"
           }
         ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 49,
+            "end": 52,
+            "text": "3pm"
+          }
+        ],
         "duration_minutes": [
           {
             "turn_index": 0,
             "start": 57,
             "end": 67,
             "text": "15 minutes"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 37,
+            "end": 45,
+            "text": "tomorrow"
           }
         ]
       },
@@ -1272,7 +1536,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:1ba352b4c7bd2452d6095b7de57e3b277cecc8a362128026f064ebd0ffbf2a52"
+      "variant_hash": "sha256:45c1e2ea4952936d0e863185799db0de6f3f296946bd31278fbbf78154c1439d"
     }
   ]
 }

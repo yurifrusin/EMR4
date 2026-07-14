@@ -1,23 +1,23 @@
 {
   "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_015",
-  "group_hash": "sha256:b4b974942e96776577f3fdb7308263a6e8fa5e13bdb17fb6971c2c6db7963e0e",
+  "group_hash": "sha256:553d4e17e26f87969a8477fd39bf5883c03e87b7f8aa44f8456a9b2501c774cf",
   "variant_hashes": {
     "surface": [
-      "sha256:983425acf54ebd9d9fb2ce91860caaf1ca68a0a5fbee5a0f7c9beda0c5258d75",
-      "sha256:602486f72541db51ac175858f3c1b964b1f8fa0c9e3ba4b111d2f3d4e7cc9797",
-      "sha256:afde07516119d09dc8ab61803cae34cc8b29d60002753cadfac80e7bfd65fb68",
-      "sha256:96f73c6865a98d3234531c552f52fdf096c3d9a95cc7d1652fb05ea50fa4b3d7",
-      "sha256:cb685aeb765faed36eee1fd24ee8daba8a44d4965b7776dbebbd34f36a1be490",
-      "sha256:467eed0c56a1b707e8e0e84fc9c05efb2ee0eefb073e2e038dac2bde053d96e6",
-      "sha256:db202ecf1e3b5f11d21bf7eb35e31fb37b1aa1d1f3e80dd2eef2484535f19b97",
-      "sha256:eb2f107dd53a117e09a3ad5f7faf56ca0e267d17f5a49cab52944e1d130f664a",
-      "sha256:7b651e81fa7eb14cc9699655670f8f9aa535f86c3fb8a3036b42fd72d82ca613"
+      "sha256:bf875930d3ac2f35139ee709f69036799dff02e3ab7ac0b6ccfd67677ac51481",
+      "sha256:5a2200d45c231a6bf58a1caaf40765470c5add38e244ec0adcd235563432ab73",
+      "sha256:77436b103de7fad53835cb4ca5f1773c51a5052d987b084c687fd8030226430f",
+      "sha256:a4f4fec0242d9eb2cc274c4374b7a52f883328027f51ce5a35f9d20dd5b7913a",
+      "sha256:d0fffecfd076f95f1a74e3bea8198c5381adcbfd6db05476c067fc11690b4aa9",
+      "sha256:994632f26981f89a1101e984fe76c2af74b41f792c2574f31afcbb4e6a0c90c0",
+      "sha256:6f4a2be6dfaf4e99964bc31d8139b2707b02a47df3e9a9e5ddd020ea8d816e36",
+      "sha256:e2db85d1cea084e32236a483815c3d9e9a134d4d5eb8ee3a31e35ac595bc261f",
+      "sha256:857b8a4159d29caf5af979ffff49c0978469a23f9067ef64ad486812f53992ee"
     ],
     "multi_turn": [
-      "sha256:4af51982503628864dedbdfde7acdf6f4afd36ccaf6ee0a19dd5056acd12f3ad",
-      "sha256:87d5750fab01b0326bbc1235380b83fa7e36f244dd19ba59e60041ac064e1308",
-      "sha256:0cbb456fab3780a6f2aaef6c86bec6fd83a33508e02ea1fad39466d3b8ab33bc"
+      "sha256:8e8db30e6a75d2b0c084e07fec46ad0ad9182c7d46b403b0018bc8e9764409d8",
+      "sha256:22479c53345c77e7de0b32338f4a14bcc2cf8c79f562ae2f854d5c9054617f34",
+      "sha256:5d6f0e5b79548409f4ce5cd65066980097cdfed95752529f7c8434b486833b14"
     ]
   },
   "provenance": "silver",
@@ -69,6 +69,14 @@
         "duration_minutes": 15
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 46,
+            "end": 54,
+            "text": "tomorrow"
+          }
+        ],
         "patient": [
           {
             "turn_index": 0,
@@ -101,7 +109,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "same_day_distinct",
-      "entity_state": "exact",
+      "entity_state": "omitted",
       "dialogue_form": "repeated",
       "language_form": "punctuation_variant",
       "initial_diary_state": {
@@ -142,7 +150,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:983425acf54ebd9d9fb2ce91860caaf1ca68a0a5fbee5a0f7c9beda0c5258d75"
+      "variant_hash": "sha256:bf875930d3ac2f35139ee709f69036799dff02e3ab7ac0b6ccfd67677ac51481"
     },
     {
       "spec_version": "lc1.v1",
@@ -169,6 +177,14 @@
         "duration_minutes": 15
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 77,
+            "end": 85,
+            "text": "tomorrow"
+          }
+        ],
         "patient": [
           {
             "turn_index": 0,
@@ -201,7 +217,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "same_day_distinct",
-      "entity_state": "exact",
+      "entity_state": "omitted",
       "dialogue_form": "repeated",
       "language_form": "punctuation_variant",
       "initial_diary_state": {
@@ -242,7 +258,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:602486f72541db51ac175858f3c1b964b1f8fa0c9e3ba4b111d2f3d4e7cc9797"
+      "variant_hash": "sha256:5a2200d45c231a6bf58a1caaf40765470c5add38e244ec0adcd235563432ab73"
     },
     {
       "spec_version": "lc1.v1",
@@ -269,6 +285,14 @@
         "duration_minutes": 15
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 51,
+            "end": 59,
+            "text": "tomorrow"
+          }
+        ],
         "patient": [
           {
             "turn_index": 0,
@@ -301,7 +325,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "same_day_distinct",
-      "entity_state": "exact",
+      "entity_state": "omitted",
       "dialogue_form": "repeated",
       "language_form": "punctuation_variant",
       "initial_diary_state": {
@@ -342,7 +366,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:afde07516119d09dc8ab61803cae34cc8b29d60002753cadfac80e7bfd65fb68"
+      "variant_hash": "sha256:77436b103de7fad53835cb4ca5f1773c51a5052d987b084c687fd8030226430f"
     },
     {
       "spec_version": "lc1.v1",
@@ -369,6 +393,14 @@
         "duration_minutes": 15
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 73,
+            "text": "tomorrow"
+          }
+        ],
         "patient": [
           {
             "turn_index": 0,
@@ -401,7 +433,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "same_day_distinct",
-      "entity_state": "exact",
+      "entity_state": "omitted",
       "dialogue_form": "repeated",
       "language_form": "punctuation_variant",
       "initial_diary_state": {
@@ -442,7 +474,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:96f73c6865a98d3234531c552f52fdf096c3d9a95cc7d1652fb05ea50fa4b3d7"
+      "variant_hash": "sha256:a4f4fec0242d9eb2cc274c4374b7a52f883328027f51ce5a35f9d20dd5b7913a"
     },
     {
       "spec_version": "lc1.v1",
@@ -469,6 +501,14 @@
         "duration_minutes": 15
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 65,
+            "end": 73,
+            "text": "tomorrow"
+          }
+        ],
         "patient": [
           {
             "turn_index": 0,
@@ -501,7 +541,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "same_day_distinct",
-      "entity_state": "exact",
+      "entity_state": "omitted",
       "dialogue_form": "repeated",
       "language_form": "punctuation_variant",
       "initial_diary_state": {
@@ -542,7 +582,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:cb685aeb765faed36eee1fd24ee8daba8a44d4965b7776dbebbd34f36a1be490"
+      "variant_hash": "sha256:d0fffecfd076f95f1a74e3bea8198c5381adcbfd6db05476c067fc11690b4aa9"
     },
     {
       "spec_version": "lc1.v1",
@@ -569,6 +609,14 @@
         "duration_minutes": 15
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 81,
+            "end": 89,
+            "text": "tomorrow"
+          }
+        ],
         "patient": [
           {
             "turn_index": 0,
@@ -601,7 +649,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "same_day_distinct",
-      "entity_state": "exact",
+      "entity_state": "omitted",
       "dialogue_form": "repeated",
       "language_form": "punctuation_variant",
       "initial_diary_state": {
@@ -642,7 +690,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:467eed0c56a1b707e8e0e84fc9c05efb2ee0eefb073e2e038dac2bde053d96e6"
+      "variant_hash": "sha256:994632f26981f89a1101e984fe76c2af74b41f792c2574f31afcbb4e6a0c90c0"
     },
     {
       "spec_version": "lc1.v1",
@@ -669,6 +717,14 @@
         "duration_minutes": 15
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 49,
+            "end": 57,
+            "text": "tomorrow"
+          }
+        ],
         "patient": [
           {
             "turn_index": 0,
@@ -701,7 +757,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "same_day_distinct",
-      "entity_state": "exact",
+      "entity_state": "omitted",
       "dialogue_form": "repeated",
       "language_form": "punctuation_variant",
       "initial_diary_state": {
@@ -742,7 +798,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:db202ecf1e3b5f11d21bf7eb35e31fb37b1aa1d1f3e80dd2eef2484535f19b97"
+      "variant_hash": "sha256:6f4a2be6dfaf4e99964bc31d8139b2707b02a47df3e9a9e5ddd020ea8d816e36"
     },
     {
       "spec_version": "lc1.v1",
@@ -769,6 +825,14 @@
         "duration_minutes": 15
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 57,
+            "end": 65,
+            "text": "tomorrow"
+          }
+        ],
         "patient": [
           {
             "turn_index": 0,
@@ -801,7 +865,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "same_day_distinct",
-      "entity_state": "exact",
+      "entity_state": "omitted",
       "dialogue_form": "repeated",
       "language_form": "punctuation_variant",
       "initial_diary_state": {
@@ -842,7 +906,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:eb2f107dd53a117e09a3ad5f7faf56ca0e267d17f5a49cab52944e1d130f664a"
+      "variant_hash": "sha256:e2db85d1cea084e32236a483815c3d9e9a134d4d5eb8ee3a31e35ac595bc261f"
     },
     {
       "spec_version": "lc1.v1",
@@ -869,6 +933,14 @@
         "duration_minutes": 15
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 60,
+            "end": 68,
+            "text": "tomorrow"
+          }
+        ],
         "patient": [
           {
             "turn_index": 0,
@@ -901,7 +973,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "same_day_distinct",
-      "entity_state": "exact",
+      "entity_state": "omitted",
       "dialogue_form": "repeated",
       "language_form": "punctuation_variant",
       "initial_diary_state": {
@@ -942,7 +1014,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:7b651e81fa7eb14cc9699655670f8f9aa535f86c3fb8a3036b42fd72d82ca613"
+      "variant_hash": "sha256:857b8a4159d29caf5af979ffff49c0978469a23f9067ef64ad486812f53992ee"
     }
   ],
   "multi_turn_variants": [
@@ -991,6 +1063,14 @@
             "text": "Dr Shera"
           }
         ],
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 63,
+            "end": 71,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 1,
@@ -1015,7 +1095,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "same_day_distinct",
-      "entity_state": "exact",
+      "entity_state": "omitted",
       "dialogue_form": "clarification",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1061,7 +1141,7 @@
         "3pm",
         "4pm"
       ],
-      "variant_hash": "sha256:4af51982503628864dedbdfde7acdf6f4afd36ccaf6ee0a19dd5056acd12f3ad"
+      "variant_hash": "sha256:8e8db30e6a75d2b0c084e07fec46ad0ad9182c7d46b403b0018bc8e9764409d8"
     },
     {
       "spec_version": "lc1.v1",
@@ -1135,6 +1215,14 @@
             "end": 67,
             "text": "15 minutes"
           }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 37,
+            "end": 45,
+            "text": "tomorrow"
+          }
         ]
       },
       "duration_minutes": 15,
@@ -1144,7 +1232,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "same_day_distinct",
-      "entity_state": "exact",
+      "entity_state": "omitted",
       "dialogue_form": "correction",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1185,7 +1273,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:87d5750fab01b0326bbc1235380b83fa7e36f244dd19ba59e60041ac064e1308"
+      "variant_hash": "sha256:22479c53345c77e7de0b32338f4a14bcc2cf8c79f562ae2f854d5c9054617f34"
     },
     {
       "spec_version": "lc1.v1",
@@ -1247,6 +1335,14 @@
             "end": 67,
             "text": "15 minutes"
           }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 37,
+            "end": 45,
+            "text": "tomorrow"
+          }
         ]
       },
       "duration_minutes": 15,
@@ -1256,7 +1352,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "same_day_distinct",
-      "entity_state": "exact",
+      "entity_state": "omitted",
       "dialogue_form": "reversal",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1297,7 +1393,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:0cbb456fab3780a6f2aaef6c86bec6fd83a33508e02ea1fad39466d3b8ab33bc"
+      "variant_hash": "sha256:5d6f0e5b79548409f4ce5cd65066980097cdfed95752529f7c8434b486833b14"
     }
   ]
 }

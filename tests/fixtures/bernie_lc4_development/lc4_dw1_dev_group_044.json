@@ -1,23 +1,23 @@
 {
   "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_044",
-  "group_hash": "sha256:48d5e19e25f1a0ac163503eb6011b68b4db2651887ede6c07aa98dcc4a6ee38a",
+  "group_hash": "sha256:c358c6e7bbb6e402f22127bc74c7c88f5959c7e26d546043d6d82083fd3c3f97",
   "variant_hashes": {
     "surface": [
-      "sha256:0c682ffde2b4d3979ce6004b68e5853e16a103d5d28666eb885562c54dce73c8",
-      "sha256:db7c9d934437731ec4908ecb2f8dd6c5d91a299237732806bb77220ac34a8bd5",
-      "sha256:659a995bb5b59a6d572262478fc7297ac3f8d4f2eb7136bdbbc25f93e3a2a2fa",
-      "sha256:fae4d495fff1cbc35b0d2bec3d541885f804a3da747a551bcff5aa22f95fc31d",
-      "sha256:5cfe439da97eaff00b8a3291124f75da62843c18033cb83676fde4ff2544ff6a",
-      "sha256:16d366e52d4ca588df01db4cac48ee0cf8a4fce0fb351ac6bf247ce14a3207d9",
-      "sha256:605af8bc45cb45e81f99b60ae80cd239cab125a49a1f2e7103d27e8134e5d59c",
-      "sha256:a9aa55aa43690d7004f88011e387a7283931c2401e217c7e6957c9388eb082e5",
-      "sha256:7f37d298310cc4d5b92dc0dfd99a974361c9e3b956f584ca90a6aee7c81d7070"
+      "sha256:686db640db05f11385b890c1d9497de0f1dd2c0e08e72f622d03437b8ea351b8",
+      "sha256:b9c60d193c943e30e28ae3b6008fe1350550716fe5c063747d6014302e580dd7",
+      "sha256:0bf89da505d0b97b51ac617cea6c69cd4aebf8299aa4bb1f4898f3e6a3f53439",
+      "sha256:e91f152dae32e0acea9b534deba41827ac436ca4a75273de35cd3b24fa209732",
+      "sha256:6371d1b55abb2f6e7a81c2abb3460e82f01921fce07d38d4c0a1f4f144d22507",
+      "sha256:494c42e01b8c29ec3e3d1a759f2dccae386437f8162e4980b0f637cd41ad7565",
+      "sha256:6da45ee08c8012426521a5105839432ce5ef80177df28ee499b629344b1402da",
+      "sha256:3b06fc25afe78719b95518485420f8c92dd8c0d2b73aaf6811aea983ab68c192",
+      "sha256:1d67877d63dd1089a7bd6ff55db8a3666f8db081d952d5c67ce63b7a91eaf87b"
     ],
     "multi_turn": [
-      "sha256:cfb61b0886c8d3235a11abcae55d9f1d28adb689cc41e916d8db168d5acbcebc",
-      "sha256:792e12fab4e943eb04a2ad8b40e44953236dac5fb0ec4b9e9ee811dcfd1b5eb3",
-      "sha256:26e42f61c3cacd95b82193c116635c22f7df983f254c2a14d89834044914b05e"
+      "sha256:60f993020728a8913ac35feda33bef5acf242c5096b396e28e6a93439eb4e80c",
+      "sha256:26d3da55ac3a5d7847ced4ca38b65e3a8ddef7b284a1c47ac47f5f5295808160",
+      "sha256:12763efd50ce0d796443601a6ace218be3cfaaaafe6f10fe6971a5bede3d39a3"
     ]
   },
   "provenance": "silver",
@@ -71,6 +71,14 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 77,
+            "end": 85,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -78,6 +86,22 @@
             "end": 100,
             "text": "2pm"
           },
+          {
+            "turn_index": 0,
+            "start": 105,
+            "end": 108,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 97,
+            "end": 100,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 105,
@@ -141,7 +165,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:0c682ffde2b4d3979ce6004b68e5853e16a103d5d28666eb885562c54dce73c8"
+      "variant_hash": "sha256:686db640db05f11385b890c1d9497de0f1dd2c0e08e72f622d03437b8ea351b8"
     },
     {
       "spec_version": "lc1.v1",
@@ -170,6 +194,14 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 66,
+            "end": 74,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -177,6 +209,22 @@
             "end": 89,
             "text": "2pm"
           },
+          {
+            "turn_index": 0,
+            "start": 94,
+            "end": 97,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 86,
+            "end": 89,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 94,
@@ -240,7 +288,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:db7c9d934437731ec4908ecb2f8dd6c5d91a299237732806bb77220ac34a8bd5"
+      "variant_hash": "sha256:b9c60d193c943e30e28ae3b6008fe1350550716fe5c063747d6014302e580dd7"
     },
     {
       "spec_version": "lc1.v1",
@@ -269,6 +317,14 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 51,
+            "end": 59,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -276,6 +332,22 @@
             "end": 71,
             "text": "2pm"
           },
+          {
+            "turn_index": 0,
+            "start": 76,
+            "end": 79,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 68,
+            "end": 71,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 76,
@@ -331,7 +403,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:659a995bb5b59a6d572262478fc7297ac3f8d4f2eb7136bdbbc25f93e3a2a2fa"
+      "variant_hash": "sha256:0bf89da505d0b97b51ac617cea6c69cd4aebf8299aa4bb1f4898f3e6a3f53439"
     },
     {
       "spec_version": "lc1.v1",
@@ -343,7 +415,7 @@
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Hi, can you make someone's appointment with some doctor longer? Stretch it to 30 minutes."
+          "utterance": "Hi, can you make someone's appointment with some doctor longer? Stretch it to 30 minutes tomorrow between 2pm and 4pm."
         }
       ],
       "reference_date": "2026-07-14",
@@ -360,6 +432,44 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 89,
+            "end": 97,
+            "text": "tomorrow"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 106,
+            "end": 109,
+            "text": "2pm"
+          },
+          {
+            "turn_index": 0,
+            "start": 114,
+            "end": 117,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 106,
+            "end": 109,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 114,
+            "end": 117,
+            "text": "4pm"
+          }
+        ],
         "duration_minutes": [
           {
             "turn_index": 0,
@@ -416,7 +526,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:fae4d495fff1cbc35b0d2bec3d541885f804a3da747a551bcff5aa22f95fc31d"
+      "variant_hash": "sha256:e91f152dae32e0acea9b534deba41827ac436ca4a75273de35cd3b24fa209732"
     },
     {
       "spec_version": "lc1.v1",
@@ -445,6 +555,14 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 49,
+            "end": 57,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -452,6 +570,22 @@
             "end": 69,
             "text": "2pm"
           },
+          {
+            "turn_index": 0,
+            "start": 74,
+            "end": 77,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 66,
+            "end": 69,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 74,
@@ -507,7 +641,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:5cfe439da97eaff00b8a3291124f75da62843c18033cb83676fde4ff2544ff6a"
+      "variant_hash": "sha256:6371d1b55abb2f6e7a81c2abb3460e82f01921fce07d38d4c0a1f4f144d22507"
     },
     {
       "spec_version": "lc1.v1",
@@ -515,11 +649,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_044",
-      "description": "resize:interval:reversal:abbreviation - We need to double someone's appointment with some doctor to 30 minutes please.",
+      "description": "resize:interval:reversal:abbreviation - We need to double someone's appointment with some doctor to 30 minutes tomorrow ",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "We need to double someone's appointment with some doctor to 30 minutes please."
+          "utterance": "We need to double someone's appointment with some doctor to 30 minutes tomorrow between 2pm and 4pm."
         }
       ],
       "reference_date": "2026-07-14",
@@ -536,6 +670,44 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 71,
+            "end": 79,
+            "text": "tomorrow"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 88,
+            "end": 91,
+            "text": "2pm"
+          },
+          {
+            "turn_index": 0,
+            "start": 96,
+            "end": 99,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 88,
+            "end": 91,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 96,
+            "end": 99,
+            "text": "4pm"
+          }
+        ],
         "duration_minutes": [
           {
             "turn_index": 0,
@@ -592,7 +764,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:16d366e52d4ca588df01db4cac48ee0cf8a4fce0fb351ac6bf247ce14a3207d9"
+      "variant_hash": "sha256:494c42e01b8c29ec3e3d1a759f2dccae386437f8162e4980b0f637cd41ad7565"
     },
     {
       "spec_version": "lc1.v1",
@@ -621,6 +793,14 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 44,
+            "end": 52,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -628,6 +808,22 @@
             "end": 64,
             "text": "2pm"
           },
+          {
+            "turn_index": 0,
+            "start": 69,
+            "end": 72,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 61,
+            "end": 64,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 69,
@@ -683,7 +879,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:605af8bc45cb45e81f99b60ae80cd239cab125a49a1f2e7103d27e8134e5d59c"
+      "variant_hash": "sha256:6da45ee08c8012426521a5105839432ce5ef80177df28ee499b629344b1402da"
     },
     {
       "spec_version": "lc1.v1",
@@ -691,11 +887,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_044",
-      "description": "resize:interval:reversal:abbreviation - Please change someone's booking to 30 minutes with some doctor.",
+      "description": "resize:interval:reversal:abbreviation - Please change someone's booking to 30 minutes with some doctor tomorrow between ",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Please change someone's booking to 30 minutes with some doctor."
+          "utterance": "Please change someone's booking to 30 minutes with some doctor tomorrow between 2pm and 4pm."
         }
       ],
       "reference_date": "2026-07-14",
@@ -712,6 +908,44 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 63,
+            "end": 71,
+            "text": "tomorrow"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 80,
+            "end": 83,
+            "text": "2pm"
+          },
+          {
+            "turn_index": 0,
+            "start": 88,
+            "end": 91,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 80,
+            "end": 83,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 88,
+            "end": 91,
+            "text": "4pm"
+          }
+        ],
         "duration_minutes": [
           {
             "turn_index": 0,
@@ -768,7 +1002,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:a9aa55aa43690d7004f88011e387a7283931c2401e217c7e6957c9388eb082e5"
+      "variant_hash": "sha256:3b06fc25afe78719b95518485420f8c92dd8c0d2b73aaf6811aea983ab68c192"
     },
     {
       "spec_version": "lc1.v1",
@@ -776,11 +1010,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_044",
-      "description": "resize:interval:reversal:abbreviation - Could we increase someone's appointment with some doctor to 30 minutes?",
+      "description": "resize:interval:reversal:abbreviation - Could we increase someone's appointment with some doctor to 30 minutes tomorrow ",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Could we increase someone's appointment with some doctor to 30 minutes?"
+          "utterance": "Could we increase someone's appointment with some doctor to 30 minutes tomorrow between 2pm and 4pm?"
         }
       ],
       "reference_date": "2026-07-14",
@@ -797,6 +1031,44 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 71,
+            "end": 79,
+            "text": "tomorrow"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 88,
+            "end": 91,
+            "text": "2pm"
+          },
+          {
+            "turn_index": 0,
+            "start": 96,
+            "end": 99,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 88,
+            "end": 91,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 96,
+            "end": 99,
+            "text": "4pm"
+          }
+        ],
         "duration_minutes": [
           {
             "turn_index": 0,
@@ -853,7 +1125,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:7f37d298310cc4d5b92dc0dfd99a974361c9e3b956f584ca90a6aee7c81d7070"
+      "variant_hash": "sha256:1d67877d63dd1089a7bd6ff55db8a3666f8db081d952d5c67ce63b7a91eaf87b"
     }
   ],
   "multi_turn_variants": [
@@ -863,11 +1135,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_044",
-      "description": "resize:interval:clarification:plain - Can you make Margaret Thompson's appointment longer? Change it to 30 minutes tom",
+      "description": "resize:interval:clarification:plain - Can you make Margaret Thompson's appointment with Dr Shera longer? Change it to ",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Can you make Margaret Thompson's appointment longer?"
+          "utterance": "Can you make Margaret Thompson's appointment with Dr Shera longer?"
         },
         {
           "turn": 2,
@@ -898,6 +1170,12 @@
         ],
         "practitioner": [
           {
+            "turn_index": 0,
+            "start": 50,
+            "end": 58,
+            "text": "Dr Shera"
+          },
+          {
             "turn_index": 1,
             "start": 45,
             "end": 53,
@@ -912,6 +1190,22 @@
             "text": "3pm"
           }
         ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 13,
+            "end": 23,
+            "text": "30 minutes"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 24,
+            "end": 32,
+            "text": "tomorrow"
+          }
+        ],
         "earliest_time": [
           {
             "turn_index": 1,
@@ -920,12 +1214,12 @@
             "text": "3pm"
           }
         ],
-        "duration_minutes": [
+        "latest_time": [
           {
             "turn_index": 1,
-            "start": 13,
-            "end": 23,
-            "text": "30 minutes"
+            "start": 36,
+            "end": 39,
+            "text": "3pm"
           }
         ]
       },
@@ -981,7 +1275,7 @@
         "3pm",
         "4pm"
       ],
-      "variant_hash": "sha256:cfb61b0886c8d3235a11abcae55d9f1d28adb689cc41e916d8db168d5acbcebc"
+      "variant_hash": "sha256:60f993020728a8913ac35feda33bef5acf242c5096b396e28e6a93439eb4e80c"
     },
     {
       "spec_version": "lc1.v1",
@@ -989,11 +1283,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_044",
-      "description": "resize:interval:correction:plain - Make Margaret Thompson's appointment 45 minutes. Actually, 30 minutes is better ",
+      "description": "resize:interval:correction:plain - Make Margaret Thompson's appointment with Dr Shera 45 minutes tomorrow. Actually",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Make Margaret Thompson's appointment 45 minutes."
+          "utterance": "Make Margaret Thompson's appointment with Dr Shera 45 minutes tomorrow."
         },
         {
           "turn": 2,
@@ -1022,11 +1316,19 @@
             "text": "Margaret Thompson"
           }
         ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 42,
+            "end": 50,
+            "text": "Dr Shera"
+          }
+        ],
         "duration_minutes": [
           {
             "turn_index": 0,
-            "start": 37,
-            "end": 47,
+            "start": 51,
+            "end": 61,
             "text": "45 minutes"
           },
           {
@@ -1034,6 +1336,20 @@
             "start": 10,
             "end": 20,
             "text": "30 minutes"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 62,
+            "end": 70,
+            "text": "tomorrow"
+          },
+          {
+            "turn_index": 1,
+            "start": 31,
+            "end": 39,
+            "text": "tomorrow"
           }
         ],
         "temporal_relation": [
@@ -1045,6 +1361,14 @@
           }
         ],
         "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 43,
+            "end": 46,
+            "text": "3pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 1,
             "start": 43,
@@ -1100,7 +1424,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:792e12fab4e943eb04a2ad8b40e44953236dac5fb0ec4b9e9ee811dcfd1b5eb3"
+      "variant_hash": "sha256:26d3da55ac3a5d7847ced4ca38b65e3a8ddef7b284a1c47ac47f5f5295808160"
     },
     {
       "spec_version": "lc1.v1",
@@ -1108,11 +1432,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_044",
-      "description": "resize:interval:reversal:plain - Make Margaret Thompson's appointment 30 minutes. Actually no, keep the original ",
+      "description": "resize:interval:reversal:plain - Make Margaret Thompson's appointment with Dr Shera 30 minutes tomorrow at 3pm. A",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Make Margaret Thompson's appointment 30 minutes."
+          "utterance": "Make Margaret Thompson's appointment with Dr Shera 30 minutes tomorrow at 3pm."
         },
         {
           "turn": 2,
@@ -1141,12 +1465,52 @@
             "text": "Margaret Thompson"
           }
         ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 42,
+            "end": 50,
+            "text": "Dr Shera"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 74,
+            "end": 77,
+            "text": "3pm"
+          }
+        ],
         "duration_minutes": [
           {
             "turn_index": 0,
-            "start": 37,
-            "end": 47,
+            "start": 51,
+            "end": 61,
             "text": "30 minutes"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 62,
+            "end": 70,
+            "text": "tomorrow"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 74,
+            "end": 77,
+            "text": "3pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 74,
+            "end": 77,
+            "text": "3pm"
           }
         ]
       },
@@ -1197,7 +1561,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:26e42f61c3cacd95b82193c116635c22f7df983f254c2a14d89834044914b05e"
+      "variant_hash": "sha256:12763efd50ce0d796443601a6ace218be3cfaaaafe6f10fe6971a5bede3d39a3"
     }
   ]
 }

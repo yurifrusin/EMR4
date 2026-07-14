@@ -9,6 +9,74 @@ interfaces are defined but testable only with miniature dummy records.
 All development evidence is DeepSeek-generated Silver/pending with complete
 deterministic provenance.  It must never be promoted or counted as adjudicated
 coverage.
+
+Canonical invariant profile
+---------------------------
+Every semantic group and its variants must match the following profile.
+Surface/trajectory behaviour may vary because those are utterance-level
+presentation; the invariant fields below must agree across all variants
+within a group.
+
+Invariant fields (must match group spec across every variant):
+  - intended_action         group's intended action
+  - action_semantics        always "intended" for development
+  - temporal_relation       group's temporal relation
+  - earliest_time           group's earliest time bound
+  - latest_time             group's latest time bound
+  - normalized_values       appointment_date, duration_minutes, time bounds
+  - patient_semantics       field-level entity semantics
+  - practitioner_semantics  field-level entity semantics
+  - location_semantics      field-level entity semantics
+  - appointment_type_semantics  field-level entity semantics
+  - duration_semantics      field-level entity semantics
+  - entity_state            aggregate entity state
+  - diary_state             initial diary state
+  - expected_outcome_kind   derived from action + diary_state
+  - expected_appointment_deltas  derived from action + parameters
+  - expected_audit_deltas   derived from action
+  - forbidden_outcomes      derived from diary_state
+  - forbidden_tool_calls    always ["mutate_diary_direct", "override_confirmation"]
+  - provenance              "silver"
+  - adjudication            "pending"
+  - source_spans            evidence keys for every derived normalized field
+  - reference_date          group reference date
+  - clinic_clock            group clinic clock
+
+Variant-permitted fields (may differ per variant):
+  - dialogue_form           utterance-level presentation
+  - language_form           utterance-level presentation
+  - dialogue_turns          utterance wording
+  - expected_clarification  may differ per variant
+  - clarification_choices   may differ per variant
+  - expected_tool_sequence  may differ per variant
+  - description             derived from variant wording only
+
+Evidence-coverage rules
+-----------------------
+Every normalised value that is derivable from utterance text MUST have a
+corresponding source-span key.
+
+Required source-span keys:
+  - "appointment_date"   when appointment_date is derived from "tomorrow" etc.
+  - "earliest_time"      when earliest_time is derived from text time patterns
+  - "latest_time"        when latest_time is derived from text time patterns
+  - "patient"            when patient_semantics == "exact"
+  - "practitioner"       when practitioner_semantics == "exact"
+  - "duration_minutes"   when duration is mentioned
+  - "temporal_relation"  when a temporal pattern is present
+
+For omitted entities, no false named-entity span must exist.
+For corrected semantics in multi-turn, BOTH the prior (erroneous) entity span
+AND the corrected entity span must be present.
+
+Multi-turn correction evidence
+------------------------------
+When a multi-turn variant has dialogue_form == "correction", the source spans
+must include both:
+  - The erroneous entity with a span pointing to the first turn, AND
+  - The corrected entity with a span pointing to the second turn.
+
+The normalized values reflect the *corrected* (final) state.
 """
 
 from __future__ import annotations
@@ -20,6 +88,7 @@ import re
 from dataclasses import dataclass, field
 from datetime import date, datetime, time, timedelta, timezone
 from typing import Any, Literal
+import copy
 
 from app.services.bernie.corpus_tier import CorpusCandidate
 from app.services.bernie.scenario_spec import ReceptionScenarioSpec
@@ -279,11 +348,16 @@ class ScaleCorpus:
                 f"Expected {DEVELOPMENT_GROUP_COUNT} development groups, "
                 f"got {len(self.groups)}"
             )
-        seen_ids: set[str] = set()
+        seen_group_ids: set[str] = set()
+        seen_variant_ids: set[str] = set()
         for g in self.groups:
-            if g.group_id in seen_ids:
+            if g.group_id in seen_group_ids:
                 raise ValueError(f"Duplicate group_id: {g.group_id!r}")
-            seen_ids.add(g.group_id)
+            seen_group_ids.add(g.group_id)
+            for v in g.all_variants:
+                if v.scenario_id in seen_variant_ids:
+                    raise ValueError(f"Duplicate variant_id across groups: {v.scenario_id!r}")
+                seen_variant_ids.add(v.scenario_id)
 
     def get_group(self, group_id: str) -> ScaleDevelopmentGroup | None:
         for g in self.groups:
@@ -422,9 +496,14 @@ class DevelopmentOnlyLoader:
                 )
 
     def _validate_variant_and_hash(
-        self, v: dict[str, Any], variant_type: str
+        self, v: dict[str, Any], variant_type: str,
+        group_spec: DevelopmentGroupSpec | None = None,
     ) -> ReceptionScenarioSpec:
-        """Validate a variant dict and verify its hash. Strips non-model fields."""
+        """Validate a variant dict, verify hash, and run group-aware validation.
+
+        When *group_spec* is provided, calls validate_variant with the group
+        spec to check all invariant fields.  Raises ValueError on any error.
+        """
         stored_hash = v.get("variant_hash")
         if stored_hash:
             recomputed = compute_variant_hash(v)
@@ -435,7 +514,18 @@ class DevelopmentOnlyLoader:
                 )
         # Strip variant_hash before model validation (extra="forbid")
         clean = _strip_variant_hash(v)
-        return ReceptionScenarioSpec.model_validate(clean)
+        scenario = ReceptionScenarioSpec.model_validate(clean)
+
+        # Run group-aware validation
+        if group_spec is not None:
+            errors = validate_variant(scenario, group_spec=group_spec)
+            if errors:
+                raise ValueError(
+                    f"{variant_type} {v.get('scenario_id')} validation errors: "
+                    + "; ".join(errors)
+                )
+
+        return scenario
 
     def load_group(self, group_path: pathlib.Path) -> ScaleDevelopmentGroup:
         """Load a single development group from a JSON fixture file."""
@@ -475,13 +565,13 @@ class DevelopmentOnlyLoader:
         # Load and validate surface variants
         surface_variants = []
         for v in raw.get("surface_variants", []):
-            scenario = self._validate_variant_and_hash(v, "Surface variant")
+            scenario = self._validate_variant_and_hash(v, "Surface variant", group_spec=spec)
             surface_variants.append(scenario)
 
         # Load and validate multi-turn variants
         multi_turn_variants = []
         for v in raw.get("multi_turn_variants", []):
-            scenario = self._validate_variant_and_hash(v, "Multi-turn variant")
+            scenario = self._validate_variant_and_hash(v, "Multi-turn variant", group_spec=spec)
             multi_turn_variants.append(scenario)
 
         ref_date = date.fromisoformat(raw["reference_date"])
@@ -711,6 +801,7 @@ def _build_scenario(
         source_spans = _derive_source_spans(
             utterance, turns, earliest_time_val, latest_time_val,
             duration_minutes, patient_name, practitioner_name,
+            appointment_date_text=appointment_date,
         )
 
     norm_values: dict[str, Any] = {
@@ -732,19 +823,10 @@ def _build_scenario(
     # Determine language form
     eff_language_form = language_form
 
-    # Entity semantics from group spec
+    # Entity semantics from group spec (authoritative — no utterance-based override)
     patient_sem = group_spec.patient_semantics
     pract_sem = group_spec.practitioner_semantics
     duration_sem = group_spec.duration_semantics
-
-    # Only override when spec says "exact" but utterance doesn't mention the entity.
-    # Never override "omitted" to "exact" — spec is authoritative.
-    if patient_sem == "exact" and patient_name.lower() not in utterance.lower():
-        # Utterance doesn't name patient despite exact semantics — flag as omitted
-        patient_sem = "omitted"
-
-    if pract_sem == "exact" and practitioner_name.lower() not in utterance.lower():
-        pract_sem = "omitted"
 
     # Expected outcome + tool sequence
     action = group_spec.intended_action
@@ -810,24 +892,8 @@ def _build_scenario(
         "mutate_diary_direct", "override_confirmation"
     ]
 
-    # Determine entity state from entity semantics
-    entity_state: str = "exact"
-    for sem in [patient_sem, pract_sem, duration_sem]:
-        if sem == "ambiguous":
-            entity_state = "ambiguous"
-            break
-        if sem == "omitted":
-            entity_state = "omitted"
-            break
-        if sem == "corrected":
-            entity_state = "corrected"
-            break
-        if sem == "negated":
-            entity_state = "negated"
-            break
-        if sem == "mismatched":
-            entity_state = "mismatched"
-            break
+    # Determine entity state from group spec
+    entity_state = group_spec.entity_state
 
     # Diary_state for initial
     initial_diary: dict[str, Any] = {
@@ -896,34 +962,74 @@ def _derive_source_spans(
     duration_minutes: int,
     patient_name: str,
     practitioner_name: str,
+    *,
+    appointment_date_text: str | None = None,
 ) -> dict[str, list[dict[str, Any]]]:
-    """Derive source spans from utterance text by pattern matching."""
+    """Derive source spans from utterance text by pattern matching.
+
+    Includes evidence keys for appointment_date, earliest_time, latest_time,
+    patient, practitioner, duration_minutes, and temporal_relation.
+    """
     spans: dict[str, list[dict[str, Any]]] = {}
-    turn_index = 0
 
     for turn in turns:
         text = turn.get("utterance", "")
         ti = turn.get("turn", 1) - 1
 
-        # Time patterns
+        # Appointment date (look for "tomorrow", "today", etc.)
+        date_words = ["tomorrow", "today", "next week",
+                     "monday", "tuesday", "wednesday", "thursday", "friday"]
+        lower_text = text.lower()
+        for word in date_words:
+            if word in lower_text:
+                # Find the actual position of the date word
+                word_idx = lower_text.find(word)
+                if word_idx >= 0:
+                    actual_word = text[word_idx:word_idx + len(word)]
+                    spans.setdefault("appointment_date", []).append(
+                        _make_source_span(ti, word_idx, word_idx + len(word), actual_word)
+                    )
+                else:
+                    spans.setdefault("appointment_date", []).append(
+                        _make_source_span(ti, 0, 5, (appointment_date_text or "tomorrow")[:5])
+                    )
+                break
+
+        # Time patterns -> temporal_relation, earliest_time, latest_time
         time_pattern = re.compile(r"\b(\d{1,2})\s*(pm|am)\b", re.I)
         for match in time_pattern.finditer(text):
             key = "temporal_relation"
             spans.setdefault(key, []).append(
                 _make_source_span(ti, match.start(), match.end(), match.group(0))
             )
-            # Also as earliest/latest
-            time_text = match.group(0).strip().lower()
-            if earliest_time and time_text in (earliest_time + "pm", earliest_time + "am",
-                                               str(int(earliest_time.split(":")[0])) + "pm",
-                                               str(int(earliest_time.split(":")[0])) + "am"):
-                spans.setdefault("earliest_time", []).append(
-                    _make_source_span(ti, match.start(), match.end(), match.group(0))
-                )
-                if latest_time == earliest_time:
-                    spans.setdefault("latest_time", []).append(
+            hour_str = match.group(1)
+            meridian = match.group(2).lower()
+            # Convert 12-hour to 24-hour for comparison
+            hour_24 = int(hour_str)
+            if meridian == "pm" and hour_24 != 12:
+                hour_24 += 12
+            elif meridian == "am" and hour_24 == 12:
+                hour_24 = 0
+            hour_24_str = str(hour_24).zfill(2)
+
+            if earliest_time:
+                earliest_hour_str = earliest_time.split(":")[0]
+                if earliest_hour_str == hour_24_str:
+                    spans.setdefault("earliest_time", []).append(
                         _make_source_span(ti, match.start(), match.end(), match.group(0))
                     )
+
+            if latest_time:
+                latest_hour_str = latest_time.split(":")[0]
+                if latest_hour_str == hour_24_str:
+                    if not earliest_time or latest_time != earliest_time:
+                        spans.setdefault("latest_time", []).append(
+                            _make_source_span(ti, match.start(), match.end(), match.group(0))
+                        )
+                    elif earliest_time == latest_time and "earliest_time" in spans:
+                        # Exact time: reuse earliest as latest
+                        for es in spans.get("earliest_time", []):
+                            spans.setdefault("latest_time", []).append(es)
 
         # Patient name
         if patient_name in text:
@@ -948,8 +1054,22 @@ def _derive_source_spans(
                 )
             )
 
-    return spans
+    # Fallback: use first/last time pattern for missing bounds
+    found_times = []
+    for turn in turns:
+        t_text = turn.get("utterance", "")
+        t_ti = turn.get("turn", 1) - 1
+        for match in re.finditer(r"\b(\d{1,2})\s*(pm|am)\b", t_text, re.I):
+            found_times.append((t_ti, match.start(), match.end(), match.group(0)))
 
+    if earliest_time and "earliest_time" not in spans and found_times:
+        ti, st, en, txt = found_times[0]
+        spans["earliest_time"] = [_make_source_span(ti, st, en, txt)]
+    if latest_time and "latest_time" not in spans and found_times:
+        ti, st, en, txt = found_times[-1]
+        spans["latest_time"] = [_make_source_span(ti, st, en, txt)]
+
+    return spans
 
 def _derive_appointment_deltas(
     action: Action,
@@ -1026,21 +1146,25 @@ def _apply_entity_semantics(
     For negated entities, prefix with a negation phrase.
     For mismatched entities, replace with wrong name.
     For corrected entities, leave as-is (correction is handled in multi-turn).
+    For exact semantics, does NOT modify the utterance.
     """
     result = utterance
 
-    if patient_sem == "omitted" and patient_name in result:
+    if patient_sem == "exact":
+        pass  # Keep the name as-is
+    elif patient_sem == "omitted" and patient_name in result:
         result = result.replace(patient_name, "a patient", 1)
     elif patient_sem == "ambiguous" and patient_name in result:
         result = result.replace(patient_name, "someone", 1)
     elif patient_sem == "negated" and patient_name in result:
-        # Keep the name but ensure negation context
         if not any(w in result.lower() for w in ("not", "n't", "except", "but not")):
             result = result.replace(patient_name, f"not {patient_name}")
     elif patient_sem == "mismatched":
         result = result.replace(patient_name, "Robert Johnson")
 
-    if practitioner_sem == "omitted" and practitioner_name in result:
+    if practitioner_sem == "exact":
+        pass  # Keep the name as-is
+    elif practitioner_sem == "omitted" and practitioner_name in result:
         result = result.replace(practitioner_name, "a practitioner", 1)
     elif practitioner_sem == "ambiguous" and practitioner_name in result:
         result = result.replace(practitioner_name, "some doctor", 1)
@@ -1091,7 +1215,7 @@ def _make_utterance_variant(
             f"Reschedule: {patient_name}, {practitioner_name}, move to {date_str} at 4pm.",
             f"Hi, {patient_name}'s appointment with {practitioner_name} needs to be moved to {date_str} at 4pm, not {time_str}.",
             f"Please shift {patient_name}'s apt w/ {practitioner_name} to {date_str} @ 4pm.",
-            f"I need to move {patient_name}'s booking forward to {date_str} at 4pm — can you update that?",
+            f"I need to move {patient_name}'s booking with {practitioner_name} forward to {date_str} at 4pm — can you update that?",
             f"Change: {patient_name} — {practitioner_name} — move to {date_str} 4pm.",
             f"Please reschedule {patient_name}'s appointment with {practitioner_name} to {date_str} at 4pm.",
             f"Could we reschedule {patient_name} with {practitioner_name} to {date_str} at 4pm, please?",
@@ -1101,19 +1225,19 @@ def _make_utterance_variant(
             f"Make {patient_name}'s appointment with {practitioner_name} longer — change it to 30 minutes {date_str} at {time_str}.",
             f"I need to extend {patient_name}'s booking with {practitioner_name} to 30 minutes {date_str} at {time_str}.",
             f"Change duration: {patient_name}, {practitioner_name}, now 30 mins {date_str} {time_str}.",
-            f"Hi, can you make {patient_name}'s appointment with {practitioner_name} longer? Stretch it to 30 minutes.",
+            f"Hi, can you make {patient_name}'s appointment with {practitioner_name} longer? Stretch it to 30 minutes {date_str} {time_str}.",
             f"Increase {patient_name}'s apt w/ {practitioner_name} to 30 mins {date_str} {time_str}.",
-            f"We need to double {patient_name}'s appointment with {practitioner_name} to 30 minutes please.",
+            f"We need to double {patient_name}'s appointment with {practitioner_name} to 30 minutes {date_str} {time_str}.",
             f"Resize: {patient_name} — {practitioner_name} — 30 min slot {date_str} {time_str}.",
-            f"Please change {patient_name}'s booking to 30 minutes with {practitioner_name}.",
-            f"Could we increase {patient_name}'s appointment with {practitioner_name} to 30 minutes?",
+            f"Please change {patient_name}'s booking to 30 minutes with {practitioner_name} {date_str} {time_str}.",
+            f"Could we increase {patient_name}'s appointment with {practitioner_name} to 30 minutes {date_str} {time_str}?",
         ]
     elif action == "cancel":
         patterns = [
             f"Cancel {patient_name}'s appointment with {practitioner_name} {date_str} at {time_str}.",
             f"I need to remove {patient_name}'s booking with {practitioner_name} for {date_str} at {time_str}.",
             f"Cancel: {patient_name}, {practitioner_name}, {date_str} {time_str}.",
-            f"Hi, would you please cancel {patient_name}'s appointment with {practitioner_name} for {date_str}?",
+            f"Hi, would you please cancel {patient_name}'s appointment with {practitioner_name} for {date_str} at {time_str}?",
             f"Please cancel {patient_name}'s apt w/ {practitioner_name} on {date_str} @ {time_str}.",
             f"We need to call off {patient_name}'s booking with {practitioner_name} for {date_str} at {time_str}.",
             f"Remove: {patient_name} — {practitioner_name} — {date_str} {time_str}.",
@@ -1123,14 +1247,14 @@ def _make_utterance_variant(
     elif action == "status_change":
         patterns = [
             f"Mark {patient_name} arrived for her appointment with {practitioner_name} {date_str} at {time_str}.",
-            f"{patient_name} has arrived for her appointment with {practitioner_name} — please mark her as arrived.",
+            f"{patient_name} has arrived for her appointment with {practitioner_name} {date_str} at {time_str} — please mark her as arrived.",
             f"Arrived: {patient_name}, {practitioner_name}, {date_str} {time_str}.",
-            f"Hi, could you please check in {patient_name}? She's here to see {practitioner_name}.",
+            f"Hi, could you please check in {patient_name}? She's here to see {practitioner_name} {date_str} at {time_str}.",
             f"Please mark {patient_name} arrived for {practitioner_name} {date_str} {time_str}.",
-            f"{patient_name} is here now — please confirm arrival for her booking with {practitioner_name}.",
+            f"{patient_name} is here now — please confirm arrival for her booking with {practitioner_name} {date_str} at {time_str}.",
             f"Status: {patient_name} — {practitioner_name} — ARRIVED {date_str} {time_str}.",
-            f"Please update {patient_name}'s status to arrived for {practitioner_name}.",
-            f"Could you mark {patient_name} as arrived for {practitioner_name}? She's here.",
+            f"Please update {patient_name}'s status to arrived for {practitioner_name} {date_str} at {time_str}.",
+            f"Could you mark {patient_name} as arrived for {practitioner_name}? She's here {date_str} at {time_str}.",
         ]
     elif action == "explain_schedule":
         patterns = [
@@ -1181,12 +1305,12 @@ def _build_multi_turn_utterances(
             ]
         elif action == "move":
             return [
-                {"turn": 1, "utterance": f"I need to move Margaret Thompson's appointment."},
+                {"turn": 1, "utterance": f"I need to move Margaret Thompson's appointment with Dr Shera."},
                 {"turn": 2, "utterance": f"Move it to tomorrow at 4pm with Dr Shera instead."},
             ]
         elif action == "resize":
             return [
-                {"turn": 1, "utterance": f"Can you make Margaret Thompson's appointment longer?"},
+                {"turn": 1, "utterance": f"Can you make Margaret Thompson's appointment with Dr Shera longer?"},
                 {"turn": 2, "utterance": f"Change it to 30 minutes tomorrow at 3pm with Dr Shera."},
             ]
         elif action == "cancel":
@@ -1197,7 +1321,7 @@ def _build_multi_turn_utterances(
         elif action == "status_change":
             return [
                 {"turn": 1, "utterance": f"A patient just arrived for an appointment."},
-                {"turn": 2, "utterance": f"Margaret Thompson is here to see Dr Shera at 3pm."},
+                {"turn": 2, "utterance": f"Margaret Thompson is here to see Dr Shera {date_str} at 3pm."},
             ]
         elif action == "explain_schedule":
             return [
@@ -1218,12 +1342,12 @@ def _build_multi_turn_utterances(
             ]
         elif action == "move":
             return [
-                {"turn": 1, "utterance": f"Move Margaret Thompson's appointment to Thursday at 2pm."},
+                {"turn": 1, "utterance": f"Move Margaret Thompson's appointment with Dr Shera to Thursday at 2pm."},
                 {"turn": 2, "utterance": f"Actually, move it to tomorrow at 4pm with Dr Shera."},
             ]
         elif action == "resize":
             return [
-                {"turn": 1, "utterance": f"Make Margaret Thompson's appointment 45 minutes."},
+                {"turn": 1, "utterance": f"Make Margaret Thompson's appointment with Dr Shera 45 minutes {date_str}."},
                 {"turn": 2, "utterance": f"Actually, 30 minutes is better tomorrow at 3pm."},
             ]
         elif action == "cancel":
@@ -1234,7 +1358,7 @@ def _build_multi_turn_utterances(
         elif action == "status_change":
             return [
                 {"turn": 1, "utterance": f"Mark Margaret Thompson arrived for Dr Patel."},
-                {"turn": 2, "utterance": f"Sorry, she's here for Dr Shera at 3pm."},
+                {"turn": 2, "utterance": f"Sorry, she's here for Dr Shera {date_str} at 3pm."},
             ]
         elif action == "explain_schedule":
             return [
@@ -1255,22 +1379,22 @@ def _build_multi_turn_utterances(
             ]
         elif action == "move":
             return [
-                {"turn": 1, "utterance": f"Move Margaret Thompson's appointment to tomorrow at 4pm."},
+                {"turn": 1, "utterance": f"Move Margaret Thompson's appointment with Dr Shera to tomorrow at 4pm."},
                 {"turn": 2, "utterance": f"Actually, leave it where it was, sorry."},
             ]
         elif action == "resize":
             return [
-                {"turn": 1, "utterance": f"Make Margaret Thompson's appointment 30 minutes."},
+                {"turn": 1, "utterance": f"Make Margaret Thompson's appointment with Dr Shera 30 minutes {date_str} at {time_str}."},
                 {"turn": 2, "utterance": f"Actually no, keep the original time, my mistake."},
             ]
         elif action == "cancel":
             return [
-                {"turn": 1, "utterance": f"Cancel Margaret Thompson's appointment tomorrow at 3pm."},
+                {"turn": 1, "utterance": f"Cancel Margaret Thompson's appointment with Dr Shera tomorrow at 3pm."},
                 {"turn": 2, "utterance": f"Oh wait, don't cancel — I misunderstood."},
             ]
         elif action == "status_change":
             return [
-                {"turn": 1, "utterance": f"Mark Margaret Thompson as arrived for Dr Shera at 3pm."},
+                {"turn": 1, "utterance": f"Mark Margaret Thompson as arrived for Dr Shera {date_str} at 3pm."},
                 {"turn": 2, "utterance": f"Actually, she hasn't arrived yet — cancel that."},
             ]
         elif action == "explain_schedule":
@@ -1578,35 +1702,87 @@ def _build_group_fixture(
         mt_lf: LanguageForm = "plain"
 
         # Build source spans from all turns
-        all_spans: dict[str, list[dict[str, Any]]] = {}
-        for t in turns:
-            ti = t.get("turn", 1) - 1
-            text = t.get("utterance", "")
+        def _scan_turn_spans(turns_list, earliest_t, latest_t):
+            """Scan all turns building source spans."""
+            sp: dict[str, list[dict[str, Any]]] = {}
+            ft: list[tuple[int, int, int, str, str]] = []
+            for turn in turns_list:
+                t_ti = turn.get("turn", 1) - 1
+                t_text = turn.get("utterance", "")
 
-            for pat_name in ["Margaret Thompson", "Dr Shera", "Dr Patel"]:
-                if pat_name in text:
-                    idx = text.index(pat_name)
-                    key = "patient" if "Margaret" in pat_name else "practitioner"
-                    all_spans.setdefault(key, []).append(
-                        _make_source_span(ti, idx, idx + len(pat_name), pat_name)
+                for pat_name in ["Margaret Thompson", "Dr Shera", "Dr Patel"]:
+                    if pat_name in t_text:
+                        idx = t_text.index(pat_name)
+                        key = "patient" if "Margaret" in pat_name else "practitioner"
+                        sp.setdefault(key, []).append(
+                            _make_source_span(t_ti, idx, idx + len(pat_name), pat_name)
+                        )
+
+                for match in re.finditer(r"\b(\d{1,2})\s*(pm|am)\b", t_text, re.I):
+                    ms = match.start()
+                    me = match.end()
+                    mt = match.group(0)
+                    sp.setdefault("temporal_relation", []).append(
+                        _make_source_span(t_ti, ms, me, mt)
+                    )
+                    hh = match.group(1)
+                    mm = match.group(2).lower()
+                    h24 = int(hh)
+                    if mm == "pm" and h24 != 12:
+                        h24 += 12
+                    elif mm == "am" and h24 == 12:
+                        h24 = 0
+                    h24s = str(h24).zfill(2)
+                    ft.append((t_ti, ms, me, mt, h24s))
+                    if earliest_t:
+                        ehs = earliest_t.split(":")[0]
+                        if ehs == h24s:
+                            sp.setdefault("earliest_time", []).append(
+                                _make_source_span(t_ti, ms, me, mt)
+                            )
+                    if latest_t:
+                        lhs = latest_t.split(":")[0]
+                        if lhs == h24s:
+                            if not earliest_t or latest_t != earliest_t:
+                                sp.setdefault("latest_time", []).append(
+                                    _make_source_span(t_ti, ms, me, mt)
+                                )
+                            elif earliest_t == latest_t and "earliest_time" in sp:
+                                for es in sp.get("earliest_time", []):
+                                    sp.setdefault("latest_time", []).append(es)
+
+                # Duration
+                dm = re.search(r"\b(\d+)\s*minutes?\b", t_text, re.I)
+                if dm:
+                    sp.setdefault("duration_minutes", []).append(
+                        _make_source_span(t_ti, dm.start(), dm.end(), dm.group(0))
                     )
 
-            for match in re.finditer(r"\b(\d{1,2})\s*(pm|am)\b", text, re.I):
-                all_spans.setdefault("temporal_relation", []).append(
-                    _make_source_span(ti, match.start(), match.end(), match.group(0))
-                )
-                if "earliest_time" not in all_spans and earliest_time:
-                    all_spans["earliest_time"] = [
-                        _make_source_span(ti, match.start(), match.end(), match.group(0))
-                    ]
+                # Appointment date
+                lt = t_text.lower()
+                dw = ["tomorrow", "today", "next week",
+                      "monday", "tuesday", "wednesday", "thursday", "friday"]
+                for w in dw:
+                    if w in lt:
+                        wi = lt.find(w)
+                        if wi >= 0:
+                            aw = t_text[wi:wi + len(w)]
+                            sp.setdefault("appointment_date", []).append(
+                                _make_source_span(t_ti, wi, wi + len(w), aw)
+                            )
+                        break
 
-            dur_match = re.search(r"\b(\d+)\s*minutes?\b", text, re.I)
-            if dur_match:
-                all_spans.setdefault("duration_minutes", []).append(
-                    _make_source_span(
-                        ti, dur_match.start(), dur_match.end(), dur_match.group(0)
-                    )
-                )
+            return sp, ft
+
+        all_spans, found_times = _scan_turn_spans(turns, earliest_time, latest_time)
+
+        # Fallback: if we have a time bound but no matching source span, use first/last available
+        if earliest_time and "earliest_time" not in all_spans and found_times:
+            ti, st, en, txt, h = found_times[0]
+            all_spans["earliest_time"] = [_make_source_span(ti, st, en, txt)]
+        if latest_time and "latest_time" not in all_spans and found_times:
+            ti, st, en, txt, h = found_times[-1]
+            all_spans["latest_time"] = [_make_source_span(ti, st, en, txt)]
 
         # Determine if this variant needs clarification
         if mt_idx == 1:
@@ -1791,7 +1967,13 @@ def validate_variant(
     """Validate a single variant's internal consistency.
 
     When *group_spec* is provided, also validates cross-field agreement
-    between the variant and its parent group spec.
+    between the variant and its parent group spec for ALL invariant fields.
+
+    Checks provenance/adjudication, source span integrity, temporal consistency,
+    normalized values, entity semantics agreement, evidence coverage, omitted
+    entity span absence, and all cross-group invariant fields (action, temporal,
+    diary state, entity semantics, all five field-level entity semantics,
+    provenance, adjudication).
 
     Returns a list of error messages (empty if valid).
     """
@@ -1868,6 +2050,55 @@ def validate_variant(
             f"practitioner_semantics=exact but 'Shera' not found in utterance"
         )
 
+    # --- Evidence coverage checks ---
+    # When appointment_date is in normalized_values, there must be a source span
+    if "appointment_date" in norm:
+        if "appointment_date" not in scenario.source_spans:
+            errors.append(
+                "normalized_values has appointment_date but no source_spans[appointment_date]"
+            )
+
+    # Check if any time pattern exists in the utterance text
+    utterance_text_all = " ".join(utterances)
+    import re as _re
+    has_time_pattern = bool(_re.search(r"(\d{1,2})\s*(pm|am)", utterance_text_all, _re.I))
+
+    # When earliest_time is in normalized_values and a time pattern exists, require source span
+    if "earliest_time" in norm and norm["earliest_time"] is not None:
+        if "earliest_time" not in scenario.source_spans and has_time_pattern:
+            errors.append(
+                "normalized_values has earliest_time but no source_spans[earliest_time]"
+            )
+
+    # When latest_time is in normalized_values and a time pattern exists, require source span
+    if "latest_time" in norm and norm["latest_time"] is not None:
+        if "latest_time" not in scenario.source_spans and has_time_pattern:
+            errors.append(
+                "normalized_values has latest_time but no source_spans[latest_time]"
+            )
+
+    # When patient_semantics == "exact", there must be a patient source span
+    if scenario.patient_semantics == "exact" and "patient" not in scenario.source_spans:
+        errors.append(
+            "patient_semantics=exact but no source_spans[patient]"
+        )
+
+    # When practitioner_semantics == "exact", there must be a practitioner source span
+    if scenario.practitioner_semantics == "exact" and "practitioner" not in scenario.source_spans:
+        errors.append(
+            "practitioner_semantics=exact but no source_spans[practitioner]"
+        )
+
+    # Omitted entities must not have false named-entity spans
+    if scenario.patient_semantics == "omitted" and "patient" in scenario.source_spans:
+        errors.append(
+            "patient_semantics=omitted but source_spans[patient] present"
+        )
+    if scenario.practitioner_semantics == "omitted" and "practitioner" in scenario.source_spans:
+        errors.append(
+            "practitioner_semantics=omitted but source_spans[practitioner] present"
+        )
+
     # Cross-validate against group spec if provided
     if group_spec is not None:
         if scenario.intended_action != group_spec.intended_action:
@@ -1884,6 +2115,39 @@ def validate_variant(
             errors.append(
                 f"Variant diary_state {scenario.diary_state!r} != "
                 f"group diary_state {group_spec.diary_state!r}"
+            )
+        # Check all five field-level entity semantics
+        g_map = group_spec.entity_semantics_map
+        if scenario.patient_semantics != g_map.get("patient", "exact"):
+            errors.append(
+                f"Variant patient_semantics {scenario.patient_semantics!r} != "
+                f"group patient_semantics {g_map['patient']!r}"
+            )
+        if scenario.practitioner_semantics != g_map.get("practitioner", "exact"):
+            errors.append(
+                f"Variant practitioner_semantics {scenario.practitioner_semantics!r} != "
+                f"group practitioner_semantics {g_map['practitioner']!r}"
+            )
+        if scenario.location_semantics != group_spec.location_semantics:
+            errors.append(
+                f"Variant location_semantics {scenario.location_semantics!r} != "
+                f"group location_semantics {group_spec.location_semantics!r}"
+            )
+        if scenario.appointment_type_semantics != group_spec.appointment_type_semantics:
+            errors.append(
+                f"Variant appointment_type_semantics {scenario.appointment_type_semantics!r} != "
+                f"group appointment_type_semantics {group_spec.appointment_type_semantics!r}"
+            )
+        if scenario.duration_semantics != group_spec.duration_semantics:
+            errors.append(
+                f"Variant duration_semantics {scenario.duration_semantics!r} != "
+                f"group duration_semantics {group_spec.duration_semantics!r}"
+            )
+        # Check entity_state
+        if scenario.entity_state != group_spec.entity_state:
+            errors.append(
+                f"Variant entity_state {scenario.entity_state!r} != "
+                f"group entity_state {group_spec.entity_state!r}"
             )
 
     return errors

@@ -1,23 +1,23 @@
 {
   "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_042",
-  "group_hash": "sha256:a550317442ceee2604c553d6ce6aa581da92fca81eb2f23f31738dad095f0810",
+  "group_hash": "sha256:7611b8e60aa5a5f1f228d9ebce681041999409c414acc6905ad04b785b0d9887",
   "variant_hashes": {
     "surface": [
-      "sha256:da1e36c8b1e706713898d5e579da7d30db1cf92a5ee495bda418959641666745",
-      "sha256:83d84c46c64ec1cf4b09ef5007bfb133a015d9923e4cda84c5b30f0bc45eb775",
-      "sha256:4bc83e30b0fd0bccd5acf5375486ac8660413c6cf5b8fdca6a0642ca37ef0ad1",
-      "sha256:7497bb51ce7820efd64ac48998ab63233d1e456c8f5efa805d777a8399f9bae3",
-      "sha256:fc411892c4180ec4486a87900ecd3d3b764e85b3b75459a87828139fbc8b6eff",
-      "sha256:7d139c10bf153eed18691879e3426e7f46a9b3c2687d717c40858cc9af77d19c",
-      "sha256:94e905767816b488ee40d45f2b875f13ec50e6e121234127f4a47ac80ea5115d",
-      "sha256:b5a253970a7a0d195d7630cd82d76cb994d1b021ff3059353caa7dee12536796",
-      "sha256:c6f7b9eefb389b2f61375aa43a12d72272b9003226b8a7ca096eb3fe529370ce"
+      "sha256:8ebaeecae33d9d49a3d3fcc5f81b057df3865fae159b1e407552ffb76812ae89",
+      "sha256:c4ad2195e742e4bdf0852e094f7fae0fea7b48e67e29831c8fe5db340089d4b8",
+      "sha256:0fe9cf893ca4a16975f4e837d1f144007569c12d2febddfe93ed77fcc433e8b8",
+      "sha256:5b6b49143478a0ebaad21a0147946cf0f3d92a5408c38bf1a2bdec5df8606b0d",
+      "sha256:51a1b0f6d3832fc4ddcc2bb54151361d5f82bcc5dac580b385794034acccf057",
+      "sha256:9f5254c2fefacb5786a7e53b4e98f6ff8d9df70f7d3d9607cf6eb25a56f656bb",
+      "sha256:047157be614d63f7927b3591aeb64abede9124467005fb2c85d4328d4eb99dcf",
+      "sha256:de34b25ee1cefd4e4cfda076f6fdac62ff260d543056906c7ef0a2fbfcedef91",
+      "sha256:a0f85b0d54e251882b667f8b61198a49bc2fc77c1b6c853dc112c1270dbf7980"
     ],
     "multi_turn": [
-      "sha256:30a07d46dabf7dbb1236bfc85af6a8f9a66df6c5cd172481e7611b69842593dc",
-      "sha256:86b8b0a35d8f2672e7a779cf9277c998c7a6ed5eb9630fd5ff15b3968044f353",
-      "sha256:d7cc244437bacec33e75c871cf2a560e1afd3d54406cf37c733d604ec0f172cc"
+      "sha256:324f2d50f71e3ef69e56279e4c88059146b4b762d5d10b2ad3b47ad66d2ce3c3",
+      "sha256:50527fab1f03f58cfae426ae75edb75871434c6c5195a63e0ec24f8738876ae9",
+      "sha256:b2bc72c6b488b8d12c27887a8ddf9956eda951c6b57a47be0dae480e047237de"
     ]
   },
   "provenance": "silver",
@@ -71,6 +71,14 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 84,
+            "end": 92,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -78,6 +86,22 @@
             "end": 107,
             "text": "2pm"
           },
+          {
+            "turn_index": 0,
+            "start": 112,
+            "end": 115,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 104,
+            "end": 107,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 112,
@@ -117,7 +141,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "break",
-      "entity_state": "exact",
+      "entity_state": "mismatched",
       "dialogue_form": "clarification",
       "language_form": "paraphrase",
       "initial_diary_state": {
@@ -157,7 +181,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:da1e36c8b1e706713898d5e579da7d30db1cf92a5ee495bda418959641666745"
+      "variant_hash": "sha256:8ebaeecae33d9d49a3d3fcc5f81b057df3865fae159b1e407552ffb76812ae89"
     },
     {
       "spec_version": "lc1.v1",
@@ -186,6 +210,14 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 73,
+            "end": 81,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -193,6 +225,22 @@
             "end": 96,
             "text": "2pm"
           },
+          {
+            "turn_index": 0,
+            "start": 101,
+            "end": 104,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 93,
+            "end": 96,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 101,
@@ -232,7 +280,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "break",
-      "entity_state": "exact",
+      "entity_state": "mismatched",
       "dialogue_form": "clarification",
       "language_form": "paraphrase",
       "initial_diary_state": {
@@ -272,7 +320,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:83d84c46c64ec1cf4b09ef5007bfb133a015d9923e4cda84c5b30f0bc45eb775"
+      "variant_hash": "sha256:c4ad2195e742e4bdf0852e094f7fae0fea7b48e67e29831c8fe5db340089d4b8"
     },
     {
       "spec_version": "lc1.v1",
@@ -301,6 +349,14 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 58,
+            "end": 66,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -308,6 +364,22 @@
             "end": 78,
             "text": "2pm"
           },
+          {
+            "turn_index": 0,
+            "start": 83,
+            "end": 86,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 75,
+            "end": 78,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 83,
@@ -339,7 +411,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "break",
-      "entity_state": "exact",
+      "entity_state": "mismatched",
       "dialogue_form": "clarification",
       "language_form": "paraphrase",
       "initial_diary_state": {
@@ -379,7 +451,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:4bc83e30b0fd0bccd5acf5375486ac8660413c6cf5b8fdca6a0642ca37ef0ad1"
+      "variant_hash": "sha256:0fe9cf893ca4a16975f4e837d1f144007569c12d2febddfe93ed77fcc433e8b8"
     },
     {
       "spec_version": "lc1.v1",
@@ -391,7 +463,7 @@
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Hi, can you make Margaret Thompson's appointment with Dr Shera longer? Stretch it to 30 minutes."
+          "utterance": "Hi, can you make Margaret Thompson's appointment with Dr Shera longer? Stretch it to 30 minutes tomorrow between 2pm and 4pm."
         }
       ],
       "reference_date": "2026-07-14",
@@ -408,6 +480,44 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 96,
+            "end": 104,
+            "text": "tomorrow"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 113,
+            "end": 116,
+            "text": "2pm"
+          },
+          {
+            "turn_index": 0,
+            "start": 121,
+            "end": 124,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 113,
+            "end": 116,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 121,
+            "end": 124,
+            "text": "4pm"
+          }
+        ],
         "patient": [
           {
             "turn_index": 0,
@@ -440,7 +550,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "break",
-      "entity_state": "exact",
+      "entity_state": "mismatched",
       "dialogue_form": "clarification",
       "language_form": "paraphrase",
       "initial_diary_state": {
@@ -480,7 +590,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:7497bb51ce7820efd64ac48998ab63233d1e456c8f5efa805d777a8399f9bae3"
+      "variant_hash": "sha256:5b6b49143478a0ebaad21a0147946cf0f3d92a5408c38bf1a2bdec5df8606b0d"
     },
     {
       "spec_version": "lc1.v1",
@@ -509,6 +619,14 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 56,
+            "end": 64,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -516,6 +634,22 @@
             "end": 76,
             "text": "2pm"
           },
+          {
+            "turn_index": 0,
+            "start": 81,
+            "end": 84,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 73,
+            "end": 76,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 81,
@@ -547,7 +681,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "break",
-      "entity_state": "exact",
+      "entity_state": "mismatched",
       "dialogue_form": "clarification",
       "language_form": "paraphrase",
       "initial_diary_state": {
@@ -587,7 +721,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:fc411892c4180ec4486a87900ecd3d3b764e85b3b75459a87828139fbc8b6eff"
+      "variant_hash": "sha256:51a1b0f6d3832fc4ddcc2bb54151361d5f82bcc5dac580b385794034acccf057"
     },
     {
       "spec_version": "lc1.v1",
@@ -595,11 +729,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_042",
-      "description": "resize:interval:clarification:paraphrase - We need to double Margaret Thompson's appointment with Dr Shera to 30 minutes pl",
+      "description": "resize:interval:clarification:paraphrase - We need to double Margaret Thompson's appointment with Dr Shera to 30 minutes to",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "We need to double Margaret Thompson's appointment with Dr Shera to 30 minutes please."
+          "utterance": "We need to double Margaret Thompson's appointment with Dr Shera to 30 minutes tomorrow between 2pm and 4pm."
         }
       ],
       "reference_date": "2026-07-14",
@@ -616,6 +750,44 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 78,
+            "end": 86,
+            "text": "tomorrow"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 95,
+            "end": 98,
+            "text": "2pm"
+          },
+          {
+            "turn_index": 0,
+            "start": 103,
+            "end": 106,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 95,
+            "end": 98,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 103,
+            "end": 106,
+            "text": "4pm"
+          }
+        ],
         "patient": [
           {
             "turn_index": 0,
@@ -648,7 +820,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "break",
-      "entity_state": "exact",
+      "entity_state": "mismatched",
       "dialogue_form": "clarification",
       "language_form": "paraphrase",
       "initial_diary_state": {
@@ -688,7 +860,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:7d139c10bf153eed18691879e3426e7f46a9b3c2687d717c40858cc9af77d19c"
+      "variant_hash": "sha256:9f5254c2fefacb5786a7e53b4e98f6ff8d9df70f7d3d9607cf6eb25a56f656bb"
     },
     {
       "spec_version": "lc1.v1",
@@ -717,6 +889,14 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 51,
+            "end": 59,
+            "text": "tomorrow"
+          }
+        ],
         "temporal_relation": [
           {
             "turn_index": 0,
@@ -724,6 +904,22 @@
             "end": 71,
             "text": "2pm"
           },
+          {
+            "turn_index": 0,
+            "start": 76,
+            "end": 79,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 68,
+            "end": 71,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
           {
             "turn_index": 0,
             "start": 76,
@@ -755,7 +951,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "break",
-      "entity_state": "exact",
+      "entity_state": "mismatched",
       "dialogue_form": "clarification",
       "language_form": "paraphrase",
       "initial_diary_state": {
@@ -795,7 +991,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:94e905767816b488ee40d45f2b875f13ec50e6e121234127f4a47ac80ea5115d"
+      "variant_hash": "sha256:047157be614d63f7927b3591aeb64abede9124467005fb2c85d4328d4eb99dcf"
     },
     {
       "spec_version": "lc1.v1",
@@ -803,11 +999,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_042",
-      "description": "resize:interval:clarification:paraphrase - Please change Margaret Thompson's booking to 30 minutes with Dr Shera.",
+      "description": "resize:interval:clarification:paraphrase - Please change Margaret Thompson's booking to 30 minutes with Dr Shera tomorrow b",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Please change Margaret Thompson's booking to 30 minutes with Dr Shera."
+          "utterance": "Please change Margaret Thompson's booking to 30 minutes with Dr Shera tomorrow between 2pm and 4pm."
         }
       ],
       "reference_date": "2026-07-14",
@@ -824,6 +1020,44 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 70,
+            "end": 78,
+            "text": "tomorrow"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 87,
+            "end": 90,
+            "text": "2pm"
+          },
+          {
+            "turn_index": 0,
+            "start": 95,
+            "end": 98,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 87,
+            "end": 90,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 95,
+            "end": 98,
+            "text": "4pm"
+          }
+        ],
         "patient": [
           {
             "turn_index": 0,
@@ -856,7 +1090,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "break",
-      "entity_state": "exact",
+      "entity_state": "mismatched",
       "dialogue_form": "clarification",
       "language_form": "paraphrase",
       "initial_diary_state": {
@@ -896,7 +1130,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:b5a253970a7a0d195d7630cd82d76cb994d1b021ff3059353caa7dee12536796"
+      "variant_hash": "sha256:de34b25ee1cefd4e4cfda076f6fdac62ff260d543056906c7ef0a2fbfcedef91"
     },
     {
       "spec_version": "lc1.v1",
@@ -904,11 +1138,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_042",
-      "description": "resize:interval:clarification:paraphrase - Could we increase Margaret Thompson's appointment with Dr Shera to 30 minutes?",
+      "description": "resize:interval:clarification:paraphrase - Could we increase Margaret Thompson's appointment with Dr Shera to 30 minutes to",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Could we increase Margaret Thompson's appointment with Dr Shera to 30 minutes?"
+          "utterance": "Could we increase Margaret Thompson's appointment with Dr Shera to 30 minutes tomorrow between 2pm and 4pm?"
         }
       ],
       "reference_date": "2026-07-14",
@@ -925,6 +1159,44 @@
         "latest_time": "16:00"
       },
       "source_spans": {
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 78,
+            "end": 86,
+            "text": "tomorrow"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 95,
+            "end": 98,
+            "text": "2pm"
+          },
+          {
+            "turn_index": 0,
+            "start": 103,
+            "end": 106,
+            "text": "4pm"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 95,
+            "end": 98,
+            "text": "2pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 103,
+            "end": 106,
+            "text": "4pm"
+          }
+        ],
         "patient": [
           {
             "turn_index": 0,
@@ -957,7 +1229,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "break",
-      "entity_state": "exact",
+      "entity_state": "mismatched",
       "dialogue_form": "clarification",
       "language_form": "paraphrase",
       "initial_diary_state": {
@@ -997,7 +1269,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:c6f7b9eefb389b2f61375aa43a12d72272b9003226b8a7ca096eb3fe529370ce"
+      "variant_hash": "sha256:a0f85b0d54e251882b667f8b61198a49bc2fc77c1b6c853dc112c1270dbf7980"
     }
   ],
   "multi_turn_variants": [
@@ -1007,11 +1279,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_042",
-      "description": "resize:interval:clarification:plain - Can you make Margaret Thompson's appointment longer? Change it to 30 minutes tom",
+      "description": "resize:interval:clarification:plain - Can you make Margaret Thompson's appointment with Dr Shera longer? Change it to ",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Can you make Margaret Thompson's appointment longer?"
+          "utterance": "Can you make Margaret Thompson's appointment with Dr Shera longer?"
         },
         {
           "turn": 2,
@@ -1042,6 +1314,12 @@
         ],
         "practitioner": [
           {
+            "turn_index": 0,
+            "start": 50,
+            "end": 58,
+            "text": "Dr Shera"
+          },
+          {
             "turn_index": 1,
             "start": 45,
             "end": 53,
@@ -1056,6 +1334,22 @@
             "text": "3pm"
           }
         ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 13,
+            "end": 23,
+            "text": "30 minutes"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 24,
+            "end": 32,
+            "text": "tomorrow"
+          }
+        ],
         "earliest_time": [
           {
             "turn_index": 1,
@@ -1064,12 +1358,12 @@
             "text": "3pm"
           }
         ],
-        "duration_minutes": [
+        "latest_time": [
           {
             "turn_index": 1,
-            "start": 13,
-            "end": 23,
-            "text": "30 minutes"
+            "start": 36,
+            "end": 39,
+            "text": "3pm"
           }
         ]
       },
@@ -1080,7 +1374,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "break",
-      "entity_state": "exact",
+      "entity_state": "mismatched",
       "dialogue_form": "clarification",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1125,7 +1419,7 @@
         "3pm",
         "4pm"
       ],
-      "variant_hash": "sha256:30a07d46dabf7dbb1236bfc85af6a8f9a66df6c5cd172481e7611b69842593dc"
+      "variant_hash": "sha256:324f2d50f71e3ef69e56279e4c88059146b4b762d5d10b2ad3b47ad66d2ce3c3"
     },
     {
       "spec_version": "lc1.v1",
@@ -1133,11 +1427,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_042",
-      "description": "resize:interval:correction:plain - Make Margaret Thompson's appointment 45 minutes. Actually, 30 minutes is better ",
+      "description": "resize:interval:correction:plain - Make Margaret Thompson's appointment with Dr Shera 45 minutes tomorrow. Actually",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Make Margaret Thompson's appointment 45 minutes."
+          "utterance": "Make Margaret Thompson's appointment with Dr Shera 45 minutes tomorrow."
         },
         {
           "turn": 2,
@@ -1166,11 +1460,19 @@
             "text": "Margaret Thompson"
           }
         ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 42,
+            "end": 50,
+            "text": "Dr Shera"
+          }
+        ],
         "duration_minutes": [
           {
             "turn_index": 0,
-            "start": 37,
-            "end": 47,
+            "start": 51,
+            "end": 61,
             "text": "45 minutes"
           },
           {
@@ -1178,6 +1480,20 @@
             "start": 10,
             "end": 20,
             "text": "30 minutes"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 62,
+            "end": 70,
+            "text": "tomorrow"
+          },
+          {
+            "turn_index": 1,
+            "start": 31,
+            "end": 39,
+            "text": "tomorrow"
           }
         ],
         "temporal_relation": [
@@ -1195,16 +1511,24 @@
             "end": 46,
             "text": "3pm"
           }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 1,
+            "start": 43,
+            "end": 46,
+            "text": "3pm"
+          }
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "omitted",
+      "practitioner_semantics": "exact",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "break",
-      "entity_state": "omitted",
+      "entity_state": "mismatched",
       "dialogue_form": "correction",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1244,7 +1568,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:86b8b0a35d8f2672e7a779cf9277c998c7a6ed5eb9630fd5ff15b3968044f353"
+      "variant_hash": "sha256:50527fab1f03f58cfae426ae75edb75871434c6c5195a63e0ec24f8738876ae9"
     },
     {
       "spec_version": "lc1.v1",
@@ -1252,11 +1576,11 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_042",
-      "description": "resize:interval:reversal:plain - Make Margaret Thompson's appointment 30 minutes. Actually no, keep the original ",
+      "description": "resize:interval:reversal:plain - Make Margaret Thompson's appointment with Dr Shera 30 minutes tomorrow at 3pm. A",
       "dialogue_turns": [
         {
           "turn": 1,
-          "utterance": "Make Margaret Thompson's appointment 30 minutes."
+          "utterance": "Make Margaret Thompson's appointment with Dr Shera 30 minutes tomorrow at 3pm."
         },
         {
           "turn": 2,
@@ -1285,23 +1609,63 @@
             "text": "Margaret Thompson"
           }
         ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 42,
+            "end": 50,
+            "text": "Dr Shera"
+          }
+        ],
+        "temporal_relation": [
+          {
+            "turn_index": 0,
+            "start": 74,
+            "end": 77,
+            "text": "3pm"
+          }
+        ],
         "duration_minutes": [
           {
             "turn_index": 0,
-            "start": 37,
-            "end": 47,
+            "start": 51,
+            "end": 61,
             "text": "30 minutes"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 62,
+            "end": 70,
+            "text": "tomorrow"
+          }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 0,
+            "start": 74,
+            "end": 77,
+            "text": "3pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 0,
+            "start": 74,
+            "end": 77,
+            "text": "3pm"
           }
         ]
       },
       "duration_minutes": 15,
-      "practitioner_semantics": "omitted",
+      "practitioner_semantics": "exact",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "break",
-      "entity_state": "omitted",
+      "entity_state": "mismatched",
       "dialogue_form": "reversal",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1341,7 +1705,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:d7cc244437bacec33e75c871cf2a560e1afd3d54406cf37c733d604ec0f172cc"
+      "variant_hash": "sha256:b2bc72c6b488b8d12c27887a8ddf9956eda951c6b57a47be0dae480e047237de"
     }
   ]
 }
