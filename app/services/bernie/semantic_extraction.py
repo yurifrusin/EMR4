@@ -408,6 +408,15 @@ _EVENING = re.compile(r"\bevening\b", re.I)
 
 _SOMETIME_AFTERNOON = re.compile(r"\bsometime in the afternoon\b", re.I)
 
+# Speech-like/filler form produced by receptionist wording such as
+# "after at 3pm" or "before at 5pm".  The explicit open-bound operator is
+# authority-bearing and must win over the nested point-time ``at`` token.
+_OPEN_BOUND_AT_TIME = re.compile(
+    r"\b(?P<operator>after|before)\s+at\s+"
+    r"(?P<time>(?:[01]?\d|2[0-3])(?:[:.][0-5]\d)?\s*(?:am|pm)?)\b",
+    re.I,
+)
+
 
 def _extract_time_period(text: str) -> str | None:
     """Extract time period like 'afternoon' from text."""
@@ -443,6 +452,18 @@ def _extract_temporal(
     # Special case: "sometime in the afternoon" is truly unspecified
     if _SOMETIME_AFTERNOON.search(text):
         return "unspecified", None, None
+
+    # Preserve an explicit open-bound operator through speech-like filler.
+    # The shared temporal helper correctly prioritises ordinary "after 3pm"
+    # and "before 5pm", but its generic ``at`` rule would otherwise turn
+    # "after at 3pm" into an exact point and erase the preceding operator.
+    open_bound_match = _OPEN_BOUND_AT_TIME.search(text)
+    if open_bound_match:
+        parsed = parse_time_fragment(open_bound_match.group("time"))
+        if parsed is not None:
+            if open_bound_match.group("operator").lower() == "after":
+                return "not_before", parsed, None
+            return "not_after", None, parsed
 
     extraction = extract_natural_time_constraints(text)
 

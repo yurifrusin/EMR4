@@ -129,6 +129,34 @@ class TestTemporalRelations:
         assert result.temporal_relation == "not_after"
         assert result.latest_time is not None
 
+    def test_not_before_preserves_operator_through_at_filler(self) -> None:
+        result = extract_semantics(
+            ["Book Margaret Thompson tomorrow after at 3pm for 15 minutes"],
+            "2026-07-13",
+        )
+        assert result.temporal_relation == "not_before"
+        assert result.earliest_time == "15:00"
+        assert result.latest_time is None
+        assert result.normalized_values == {
+            "appointment_date": "2026-07-14",
+            "earliest_time": "15:00",
+            "duration_minutes": 15,
+        }
+
+    def test_not_after_preserves_operator_through_at_filler(self) -> None:
+        result = extract_semantics(
+            ["Book Margaret Thompson tomorrow before at 5pm for 15 minutes"],
+            "2026-07-13",
+        )
+        assert result.temporal_relation == "not_after"
+        assert result.earliest_time is None
+        assert result.latest_time == "17:00"
+        assert result.normalized_values == {
+            "appointment_date": "2026-07-14",
+            "latest_time": "17:00",
+            "duration_minutes": 15,
+        }
+
     def test_interval_between(self) -> None:
         result = extract_semantics(
             ["Book Margaret Thompson tomorrow between 2pm and 4pm"],
