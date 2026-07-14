@@ -104,6 +104,14 @@
             "end": 79,
             "text": "for 15 minutes"
           }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 49,
+            "end": 57,
+            "text": "tomorrow"
+          }
         ]
       },
       "duration_minutes": 15,
@@ -265,6 +273,14 @@
             "end": 93,
             "text": "15 minutes"
           }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 66,
+            "end": 74,
+            "text": "tomorrow"
+          }
         ]
       },
       "duration_minutes": 15,
@@ -425,6 +441,14 @@
             "start": 79,
             "end": 93,
             "text": "for 15 minutes"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 0,
+            "start": 63,
+            "end": 71,
+            "text": "tomorrow"
           }
         ]
       },

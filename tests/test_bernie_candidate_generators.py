@@ -1216,21 +1216,49 @@ def test_trajectory_consistency():
                         f"not in roster {roster}"
                     )
 
-            # Rule 3: non-null normalized values have source evidence
+            # Rule 3: non-null normalized values require exact source-span evidence
             spans = s.source_spans
             nv = s.normalized_values
+
             if nv.get("appointment_date") is not None:
-                assert "appointment_date" in spans or any(
-                    "tomorrow" in utt or "today" in utt or "next" in utt
-                    for utt in utterances
-                ), (
-                    f"{family}/{s.scenario_id}: appointment_date normalized "
-                    "but no date source evidence"
+                assert "appointment_date" in spans and spans["appointment_date"], (
+                    f"{family}/{s.scenario_id}: appointment_date={nv['appointment_date']!r} "
+                    "normalized but appointment_date source span missing or empty"
                 )
+                for span in spans["appointment_date"]:
+                    assert 0 <= span.turn_index < len(utterances), (
+                        f"{family}/{s.scenario_id}: appointment_date span turn_index "
+                        f"{span.turn_index} out of range (0..{len(utterances)-1})"
+                    )
+                    utt = utterances[span.turn_index]
+                    assert span.end <= len(utt), (
+                        f"{family}/{s.scenario_id}: appointment_date span end "
+                        f"{span.end} exceeds utterance length {len(utt)}"
+                    )
+                    actual = utt[span.start:span.end]
+                    assert actual == span.text, (
+                        f"{family}/{s.scenario_id}: appointment_date span text "
+                        f"{span.text!r} != utterance slice {actual!r} "
+                        f"at turn {span.turn_index}[{span.start}:{span.end}]"
+                    )
             if nv.get("duration_minutes") is not None:
-                assert "duration_minutes" in spans or any(
-                    "minute" in utt for utt in utterances
-                ), (
-                    f"{family}/{s.scenario_id}: duration_minutes normalized "
-                    "but no duration source evidence"
+                assert "duration_minutes" in spans and spans["duration_minutes"], (
+                    f"{family}/{s.scenario_id}: duration_minutes={nv['duration_minutes']!r} "
+                    "normalized but duration_minutes source span missing or empty"
                 )
+                for span in spans["duration_minutes"]:
+                    assert 0 <= span.turn_index < len(utterances), (
+                        f"{family}/{s.scenario_id}: duration_minutes span turn_index "
+                        f"{span.turn_index} out of range (0..{len(utterances)-1})"
+                    )
+                    utt = utterances[span.turn_index]
+                    assert span.end <= len(utt), (
+                        f"{family}/{s.scenario_id}: duration_minutes span end "
+                        f"{span.end} exceeds utterance length {len(utt)}"
+                    )
+                    actual = utt[span.start:span.end]
+                    assert actual == span.text, (
+                        f"{family}/{s.scenario_id}: duration_minutes span text "
+                        f"{span.text!r} != utterance slice {actual!r} "
+                        f"at turn {span.turn_index}[{span.start}:{span.end}]"
+                    )
