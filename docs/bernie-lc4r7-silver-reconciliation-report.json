@@ -1,0 +1,119 @@
+{
+  "schema_version": "lc4r7.silver_reconciliation.v1",
+  "development_only": true,
+  "silver_pending_only": true,
+  "corpus_hash": "sha256:aa2d946b60694eab96846ed77e885273c807e127f8998981a8cf8ff20ebae647",
+  "selection": {
+    "count": 572,
+    "hash": "e17eb1739c16f3de",
+    "expected_count": 572,
+    "expected_hash": "e17eb1739c16f3de",
+    "hash_match": true
+  },
+  "current_semantic_baseline": {
+    "intended_action": "880/1152",
+    "action_semantics": "814/1152",
+    "temporal_relation": "628/1152",
+    "normalized_values": "101/1152",
+    "entity_semantics": "300/1152",
+    "clarification": "782/1152"
+  },
+  "safety": {
+    "all_safe": true,
+    "passed": 1152,
+    "total": 1152
+  },
+  "repeat_variance": {
+    "all_deltas_zero": true,
+    "variant_scenario_count": 0,
+    "method": "per-scenario observation and safety fingerprint",
+    "sample_count": 2304
+  },
+  "queue": {
+    "total_records": 1436,
+    "expected_count": 1436,
+    "hash": "373111d5c50c4240",
+    "expected_hash": "373111d5c50c4240",
+    "hash_match": true
+  },
+  "primary_dispositions": {
+    "contradictory": {
+      "count": 94,
+      "expected_count": 62,
+      "expected_hash": "d5e74c6e0544109f"
+    },
+    "incomplete": {
+      "count": 137,
+      "expected_count": 137,
+      "expected_hash": "60f8b473eb85904d"
+    },
+    "malformed": {
+      "count": 48,
+      "expected_count": 48,
+      "expected_hash": "9514dac1b6880d01"
+    },
+    "mixed_contract_defect": {
+      "count": 150,
+      "expected_count": 182,
+      "expected_hash": "e148db0d28acdcd2"
+    },
+    "non_language_contract_mismatch": {
+      "count": 51,
+      "expected_count": 51,
+      "expected_hash": "2e45f30f714568ef"
+    },
+    "planned_not_implemented": {
+      "count": 39,
+      "expected_count": 39,
+      "expected_hash": "f706165328a3297f"
+    },
+    "requires_adjudication": {
+      "count": 53,
+      "expected_count": 53,
+      "expected_hash": "9496e23c6f339603"
+    },
+    "surface_supported_parser_gap": {
+      "count": 0,
+      "expected_count": 0,
+      "expected_hash": "e3b0c44298fc1c14"
+    }
+  },
+  "dimension_disposition_counts": {
+    "normalized_values|contradictory": 45,
+    "requires_clarification|requires_adjudication": 53,
+    "temporal_relation|contradictory": 75,
+    "entity_semantics|contradictory": 17,
+    "replay_contract|non_language_contract_mismatch": 51,
+    "entity_semantics|incomplete": 374,
+    "normalized_values|mixed_contract_defect": 146,
+    "entity_semantics|mixed_contract_defect": 58,
+    "normalized_values|incomplete": 220,
+    "action_semantics|planned_not_implemented": 39,
+    "intended_action|planned_not_implemented": 26,
+    "action_semantics|contradictory": 78,
+    "requires_clarification|contradictory": 78,
+    "requires_clarification|planned_not_implemented": 26,
+    "temporal_relation|incomplete": 18,
+    "normalized_values|malformed": 66,
+    "temporal_relation|malformed": 66
+  },
+  "exit_gate": {
+    "status": "blocked_pending_adjudication_and_contract_reconciliation",
+    "requires_adjudication_count": 53,
+    "non_language_contract_mismatch_count": 51,
+    "parser_gap_count": 0,
+    "remediation_authorized": false
+  },
+  "assertions": {
+    "selection_count_572": true,
+    "selection_hash_match": true,
+    "queue_count_1436": true,
+    "queue_hash_match": true,
+    "zero_parser_gaps": true,
+    "exit_gate_blocked": true,
+    "check_in_preserved_as_planned": true,
+    "safety_exact_1152_of_1152": true,
+    "repeat_variance_zero": true
+  },
+  "report_hash": "sha256:b5b295e013a48b7c36567666ee32144918a7c8cc2dd4f950f50fbc08007a446b"
+}
