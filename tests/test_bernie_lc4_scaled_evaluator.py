@@ -32,6 +32,7 @@ _REPORT_PATH = _HERE.parent / "docs" / "bernie-lc4-development-evaluation-report
 
 from app.services.bernie.scaled_evaluator import (
     LC4_SCALED_REPORT_SCHEMA_VERSION,
+    CASE_FINDINGS_LIMIT,
     EXPECTED_REPEATS,
     EXPECTED_TOTAL_SAMPLES,
     EXPECTED_LC1_GOLD_CELLS,
@@ -44,6 +45,8 @@ from app.services.bernie.scaled_evaluator import (
     build_candidate_lattice,
     compute_variance,
     build_bounded_findings,
+    validate_report_hash,
+    compute_sanitized_holdout_hash,
     validate_scaled_evaluator_isolation,
     validate_holdout_import_isolation,
 )
@@ -92,8 +95,73 @@ class TestExactReport:
             "Regenerate with: py scripts/bernie_lc4_scaled_evaluation.py"
         )
 
-    def test_report_hashes_stable(self) -> None:
-        """Report hash is stable across regenerations."""
+    def test_report_hash_authority(self) -> None:
+        """Report hash must validate successfully."""
+        report = generate_scaled_evaluation_report(_FIXTURE_DIR, repeats=2)
+        assert validate_report_hash(report), "Report hash validation failed"
+
+    def test_report_hash_invalidated_by_manifest(self) -> None:
+        """Mutation to manifest must invalidate the hash."""
+        report = generate_scaled_evaluation_report(_FIXTURE_DIR, repeats=2)
+        mutant = dict(report)
+        mutant["manifest"] = dict(mutant["manifest"])
+        mutant["manifest"]["development_groups"] = 0
+        assert not validate_report_hash(mutant), (
+            "Hash should be invalidated by manifest mutation"
+        )
+
+    def test_report_hash_invalidated_by_per_dimension(self) -> None:
+        """Mutation to per_dimension must invalidate the hash."""
+        report = generate_scaled_evaluation_report(_FIXTURE_DIR, repeats=2)
+        mutant = dict(report)
+        mutant["per_dimension"] = dict(mutant["per_dimension"])
+        mutant["per_dimension"]["sample_count"] = 0
+        assert not validate_report_hash(mutant), (
+            "Hash should be invalidated by per_dimension mutation"
+        )
+
+    def test_report_hash_invalidated_by_slices(self) -> None:
+        """Mutation to critical_slices must invalidate the hash."""
+        report = generate_scaled_evaluation_report(_FIXTURE_DIR, repeats=2)
+        mutant = dict(report)
+        mutant["critical_slices"] = dict(mutant["critical_slices"])
+        mutant["critical_slices"]["worst_slice"] = None
+        assert not validate_report_hash(mutant), (
+            "Hash should be invalidated by slices mutation"
+        )
+
+    def test_report_hash_invalidated_by_variance(self) -> None:
+        """Mutation to variance must invalidate the hash."""
+        report = generate_scaled_evaluation_report(_FIXTURE_DIR, repeats=2)
+        mutant = dict(report)
+        mutant["variance"] = dict(mutant["variance"])
+        mutant["variance"]["variant_scenario_count"] = 999
+        assert not validate_report_hash(mutant), (
+            "Hash should be invalidated by variance mutation"
+        )
+
+    def test_report_hash_invalidated_by_findings(self) -> None:
+        """Mutation to case_findings must invalidate the hash."""
+        report = generate_scaled_evaluation_report(_FIXTURE_DIR, repeats=2)
+        mutant = dict(report)
+        # Replace the findings list with a truncated version
+        mutant["case_findings"] = mutant["case_findings"][:1]
+        assert not validate_report_hash(mutant), (
+            "Hash should be invalidated by findings mutation"
+        )
+
+    def test_report_hash_invalidated_by_partition(self) -> None:
+        """Mutation to partition must invalidate the hash."""
+        report = generate_scaled_evaluation_report(_FIXTURE_DIR, repeats=2)
+        mutant = dict(report)
+        mutant["partition"] = dict(mutant["partition"])
+        mutant["partition"]["total_variants"] = 0
+        assert not validate_report_hash(mutant), (
+            "Hash should be invalidated by partition mutation"
+        )
+
+    def test_exact_regeneration_same_hash(self) -> None:
+        """Exact regeneration must produce the same hash."""
         report1 = generate_scaled_evaluation_report(_FIXTURE_DIR, repeats=2)
         report2 = generate_scaled_evaluation_report(_FIXTURE_DIR, repeats=2)
         assert report1["report_hash"] == report2["report_hash"]
@@ -140,7 +208,25 @@ class TestExactCounts:
 
 
 # ===================================================================
-#  3. Two-repeat variance
+#  3. Fail-closed ValueErrors (replacement for previous assert checks)
+# ===================================================================
+
+
+class TestFailClosed:
+    """Production asserts replaced with explicit ValueError checks."""
+
+    def test_wrong_repeats_raises(self) -> None:
+        """Repeats != 2 must raise ValueError."""
+        with pytest.raises(ValueError, match="repeats"):
+            generate_scaled_evaluation_report(_FIXTURE_DIR, repeats=3)
+
+    def test_zero_repeats_raises(self) -> None:
+        with pytest.raises(ValueError, match="repeats"):
+            generate_scaled_evaluation_report(_FIXTURE_DIR, repeats=0)
+
+
+# ===================================================================
+#  4. Two-repeat variance
 # ===================================================================
 
 
@@ -155,29 +241,11 @@ class TestTwoRepeatVariance:
         assert report["variance"]["all_samples_deterministic"] is True
 
     def test_repeat_scores_match(self) -> None:
-        """Repeat 0 and repeat 1 must have identical results."""
+        """Repeat 0 and repeat 1 must have identical results (variance = 0)."""
         report = generate_scaled_evaluation_report(_FIXTURE_DIR, repeats=2)
-        findings = report["case_findings"]
-
-        # Group by scenario_id, compare sample 0 and sample 1
-        by_scenario: dict[str, list[dict[str, Any]]] = {}
-        for f in findings:
-            by_scenario.setdefault(f["scenario_id"], []).append(f)
-
-        mismatches: list[str] = []
-        for sid, samples in by_scenario.items():
-            if len(samples) != 2:
-                mismatches.append(f"{sid}: expected 2 samples, got {len(samples)}")
-                continue
-            s0 = samples[0]
-            s1 = samples[1]
-            if s0["all_passed"] != s1["all_passed"]:
-                mismatches.append(
-                    f"{sid}: repeat 0 all_passed={s0['all_passed']}, "
-                    f"repeat 1={s1['all_passed']}"
-                )
-
-        assert not mismatches, "\n".join(mismatches[:20])
+        assert report["variance"]["variant_scenario_count"] == 0
+        assert report["variance"]["variant_sample_count"] == 0
+        assert report["variance"]["all_samples_deterministic"] is True
 
 
 # ===================================================================
@@ -316,9 +384,53 @@ class TestSliceDimensions:
 class TestBoundedFindings:
     """Case findings must be bounded (not a full unbounded report dump)."""
 
-    def test_findings_count_matches_samples(self) -> None:
+    def test_findings_capped_at_limit(self) -> None:
+        """Findings must not exceed CASE_FINDINGS_LIMIT."""
         report = generate_scaled_evaluation_report(_FIXTURE_DIR, repeats=2)
-        assert len(report["case_findings"]) == EXPECTED_TOTAL_SAMPLES
+        assert len(report["case_findings"]) <= CASE_FINDINGS_LIMIT, (
+            f"Expected <= {CASE_FINDINGS_LIMIT} findings, "
+            f"got {len(report['case_findings'])}"
+        )
+        assert report["case_findings_limit"] == CASE_FINDINGS_LIMIT
+        assert report["case_findings_included"] <= CASE_FINDINGS_LIMIT
+
+    def test_findings_limit_metadata_present(self) -> None:
+        """Report must include findings cap metadata."""
+        report = generate_scaled_evaluation_report(_FIXTURE_DIR, repeats=2)
+        assert "case_findings_limit" in report
+        assert "case_findings_included" in report
+        assert "case_findings_omitted" in report
+        assert "case_findings_selection_policy" in report
+
+    def test_findings_dedup_repeats(self) -> None:
+        """No two findings should share the same scenario_id (repeat 0 and 1 deduped)."""
+        report = generate_scaled_evaluation_report(_FIXTURE_DIR, repeats=2)
+        seen: set[str] = set()
+        for f in report["case_findings"]:
+            sid = f["scenario_id"]
+            assert sid not in seen, (
+                f"Duplicate scenario_id in findings: {sid}"
+            )
+            seen.add(sid)
+
+    def test_findings_deterministic_selection(self) -> None:
+        """Two independent evaluations must produce identical findings."""
+        report1 = generate_scaled_evaluation_report(_FIXTURE_DIR, repeats=2)
+        report2 = generate_scaled_evaluation_report(_FIXTURE_DIR, repeats=2)
+        ids1 = [f["scenario_id"] for f in report1["case_findings"]]
+        ids2 = [f["scenario_id"] for f in report2["case_findings"]]
+        assert ids1 == ids2, "Findings selection is not deterministic"
+
+    def test_findings_omitted_arithmetic(self) -> None:
+        """Omitted count arithmetic must be correct (deduped - selected)."""
+        report = generate_scaled_evaluation_report(_FIXTURE_DIR, repeats=2)
+        assert report["case_findings_omitted"] >= 0
+        # The total deduped count (1152 scenarios) minus selected (<=96) = omitted
+        assert (
+            report["case_findings_omitted"]
+            + report["case_findings_included"]
+            <= report["manifest"]["total_scenarios"]
+        )
 
     def test_findings_are_compact(self) -> None:
         """Each finding must have only the expected compact fields."""
@@ -346,6 +458,14 @@ class TestBoundedFindings:
             assert len(f["failure_layers"]) > 0, (
                 f"Failed finding {f['scenario_id']} has no failure layers"
             )
+
+    def test_findings_selection_rejects_zero_limit(self) -> None:
+        """build_bounded_findings must reject limit <= 0."""
+        with pytest.raises(ValueError, match="positive"):
+            build_bounded_findings([], limit=0)
+
+    def test_findings_limit_constant_is_96(self) -> None:
+        assert CASE_FINDINGS_LIMIT == 96
 
 
 # ===================================================================
@@ -530,17 +650,17 @@ class TestHoldoutAccess:
     def test_wrong_hash_rejected(self) -> None:
         cap = SealedHoldoutReceipt(
             manifest_hash="real_hash",
-            purpose="sealed_baseline_evaluation",
             evaluator_identity="sol_evaluator",
             evaluation_id="eval_001",
             is_sealed=True,
         )
-        assert not cap.validate_access("wrong_hash", "sealed_baseline_evaluation")
+        assert not cap.validate_access(
+            "wrong_hash", "sealed_baseline_evaluation"
+        )
 
     def test_wrong_purpose_rejected(self) -> None:
         cap = SealedHoldoutReceipt(
             manifest_hash="real_hash",
-            purpose="sealed_baseline_evaluation",
             evaluator_identity="sol_evaluator",
             evaluation_id="eval_001",
             is_sealed=True,
@@ -550,22 +670,95 @@ class TestHoldoutAccess:
     def test_unsealed_rejected(self) -> None:
         cap = SealedHoldoutReceipt(
             manifest_hash="real_hash",
-            purpose="sealed_baseline_evaluation",
             evaluator_identity="sol_evaluator",
             evaluation_id="eval_001",
             is_sealed=False,
         )
-        assert not cap.validate_access("real_hash", "sealed_baseline_evaluation")
+        assert not cap.validate_access(
+            "real_hash", "sealed_baseline_evaluation"
+        )
 
     def test_correct_access_granted(self) -> None:
         cap = SealedHoldoutReceipt(
             manifest_hash="real_hash",
-            purpose="sealed_baseline_evaluation",
             evaluator_identity="sol_evaluator",
             evaluation_id="eval_001",
             is_sealed=True,
         )
-        assert cap.validate_access("real_hash", "sealed_baseline_evaluation")
+        assert cap.validate_access(
+            "real_hash", "sealed_baseline_evaluation"
+        )
+
+    def test_correct_access_with_identity(self) -> None:
+        """Full credential check includes evaluator_identity and evaluation_id."""
+        cap = SealedHoldoutReceipt(
+            manifest_hash="real_hash",
+            evaluator_identity="sol_evaluator",
+            evaluation_id="eval_001",
+            is_sealed=True,
+        )
+        assert cap.validate_access(
+            "real_hash", "sealed_baseline_evaluation",
+            evaluator_identity="sol_evaluator",
+            evaluation_id="eval_001",
+        )
+
+    def test_wrong_evaluator_identity_rejected(self) -> None:
+        cap = SealedHoldoutReceipt(
+            manifest_hash="real_hash",
+            evaluator_identity="sol_evaluator",
+            evaluation_id="eval_001",
+            is_sealed=True,
+        )
+        assert not cap.validate_access(
+            "real_hash", "sealed_baseline_evaluation",
+            evaluator_identity="wrong_evaluator",
+        )
+
+    def test_wrong_evaluation_id_rejected(self) -> None:
+        cap = SealedHoldoutReceipt(
+            manifest_hash="real_hash",
+            evaluator_identity="sol_evaluator",
+            evaluation_id="eval_001",
+            is_sealed=True,
+        )
+        assert not cap.validate_access(
+            "real_hash", "sealed_baseline_evaluation",
+            evaluation_id="wrong_id",
+        )
+
+    def test_blank_manifest_hash_raises(self) -> None:
+        with pytest.raises(ValueError, match="manifest_hash"):
+            SealedHoldoutReceipt(
+                manifest_hash="",
+                evaluator_identity="e",
+                evaluation_id="id",
+            )
+
+    def test_blank_evaluator_identity_raises(self) -> None:
+        with pytest.raises(ValueError, match="evaluator_identity"):
+            SealedHoldoutReceipt(
+                manifest_hash="h",
+                evaluator_identity="",
+                evaluation_id="id",
+            )
+
+    def test_blank_evaluation_id_raises(self) -> None:
+        with pytest.raises(ValueError, match="evaluation_id"):
+            SealedHoldoutReceipt(
+                manifest_hash="h",
+                evaluator_identity="e",
+                evaluation_id="",
+            )
+
+    def test_malformed_purpose_raises(self) -> None:
+        with pytest.raises(ValueError, match="purpose"):
+            SealedHoldoutReceipt(
+                manifest_hash="h",
+                evaluator_identity="e",
+                evaluation_id="id",
+                purpose="training",
+            )
 
 
 class TestSingleUseLedger:
@@ -573,7 +766,7 @@ class TestSingleUseLedger:
 
     def test_first_use_succeeds(self) -> None:
         cap = SealedHoldoutReceipt(
-            manifest_hash="h", purpose="sealed_baseline_evaluation",
+            manifest_hash="h",
             evaluator_identity="e", evaluation_id="id", is_sealed=True,
         )
         ledger = SingleUseLedger(capability=cap)
@@ -582,7 +775,7 @@ class TestSingleUseLedger:
 
     def test_reuse_fails(self) -> None:
         cap = SealedHoldoutReceipt(
-            manifest_hash="h", purpose="sealed_baseline_evaluation",
+            manifest_hash="h",
             evaluator_identity="e", evaluation_id="id", is_sealed=True,
         )
         ledger = SingleUseLedger(capability=cap)
@@ -591,7 +784,7 @@ class TestSingleUseLedger:
 
     def test_wrong_credential_first_use(self) -> None:
         cap = SealedHoldoutReceipt(
-            manifest_hash="h", purpose="sealed_baseline_evaluation",
+            manifest_hash="h",
             evaluator_identity="e", evaluation_id="id", is_sealed=True,
         )
         ledger = SingleUseLedger(capability=cap)
@@ -599,6 +792,32 @@ class TestSingleUseLedger:
         assert ledger.is_consumed is False  # Not consumed
         # Correct credentials still work
         assert ledger.consume("h", "sealed_baseline_evaluation") is True
+
+    def test_consume_with_identity_checks(self) -> None:
+        """Full credential check before consume."""
+        cap = SealedHoldoutReceipt(
+            manifest_hash="h",
+            evaluator_identity="e", evaluation_id="id", is_sealed=True,
+        )
+        ledger = SingleUseLedger(capability=cap)
+        assert ledger.consume(
+            "h", "sealed_baseline_evaluation",
+            evaluator_identity="e", evaluation_id="id",
+        ) is True
+        assert ledger.is_consumed is True
+
+    def test_wrong_identity_does_not_consume(self) -> None:
+        """Wrong identity must not consume the single use."""
+        cap = SealedHoldoutReceipt(
+            manifest_hash="h",
+            evaluator_identity="e", evaluation_id="id", is_sealed=True,
+        )
+        ledger = SingleUseLedger(capability=cap)
+        assert ledger.consume(
+            "h", "sealed_baseline_evaluation",
+            evaluator_identity="wrong",
+        ) is False
+        assert ledger.is_consumed is False
 
 
 class TestHoldoutReportSanitizer:
@@ -659,6 +878,80 @@ class TestHoldoutReportSanitizer:
         }
         with pytest.raises(ValueError, match="lc4_dw1_dev_group"):
             sanitize_holdout_report(report)
+
+    def test_rejects_expected_alias(self) -> None:
+        """'expected' key at any depth must be rejected."""
+        report = {"aggregate": {"passed": 1, "total": 1},
+                  "nested": {"expected": "create"}}
+        with pytest.raises(ValueError, match="expected"):
+            sanitize_holdout_report(report)
+
+    def test_rejects_observed_alias(self) -> None:
+        """'observed' key must be rejected case-insensitively."""
+        report = {"aggregate": {"passed": 1, "total": 1},
+                  "Observed": "something"}
+        with pytest.raises(ValueError, match="Observed"):
+            sanitize_holdout_report(report)
+
+    def test_rejects_span_alias(self) -> None:
+        """'source_span' key alias must be rejected."""
+        report = {"aggregate": {"passed": 1, "total": 1},
+                  "source_span_ref": {"start": 0}}
+        with pytest.raises(ValueError, match="source_span"):
+            sanitize_holdout_report(report)
+
+    def test_rejects_finding_alias(self) -> None:
+        """'finding' key must be rejected."""
+        report = {"aggregate": {"passed": 1, "total": 1},
+                  "findings_list": []}
+        with pytest.raises(ValueError, match="findings"):
+            sanitize_holdout_report(report)
+
+    def test_rejects_tuple_with_forbidden_string(self) -> None:
+        """String in a tuple value must be checked."""
+        report = {
+            "schema_version": "v1",
+            "aggregate": {"passed": 1, "total": 1},
+            "some_list": ("lc4_dw1_dev_var_001",),
+        }
+        with pytest.raises(ValueError, match="lc4_dw1_dev_var"):
+            sanitize_holdout_report(report)
+
+    def test_rejects_non_numeric_aggregate_value(self) -> None:
+        """Aggregate must have only numeric values."""
+        report = {"aggregate": {"passed": "ten", "total": 12}}
+        with pytest.raises(ValueError, match="numeric"):
+            sanitize_holdout_report(report)
+
+    def test_rejects_aggregate_non_dict(self) -> None:
+        report = {"aggregate": [1, 2, 3]}
+        with pytest.raises(ValueError, match="aggregate"):
+            sanitize_holdout_report(report)
+
+    def test_holdout_hash_validation(self) -> None:
+        """Sanitized holdout hash must be stable."""
+        report = {
+            "schema_version": "v1",
+            "aggregate": {"passed": 10, "failed": 2, "total": 12},
+            "critical_slices": {
+                "worst_slice": None,
+                "by_action": [],
+            },
+        }
+        h1 = compute_sanitized_holdout_hash(report)
+        h2 = compute_sanitized_holdout_hash(report)
+        assert h1 == h2, "Holdout hash must be deterministic"
+
+    def test_holdout_hash_invalidated_by_mutation(self) -> None:
+        """Mutation to aggregate must produce different holdout hash."""
+        report = {
+            "schema_version": "v1",
+            "aggregate": {"passed": 10, "failed": 2, "total": 12},
+        }
+        h1 = compute_sanitized_holdout_hash(report)
+        report["aggregate"]["passed"] = 11
+        h2 = compute_sanitized_holdout_hash(report)
+        assert h1 != h2, "Hash must change when aggregate is mutated"
 
 
 # ===================================================================

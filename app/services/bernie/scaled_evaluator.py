@@ -88,6 +88,10 @@ def _canonical_json(obj: Any) -> str:
 # Sealed holdout interface (generic — test only with dummy records)
 # ---------------------------------------------------------------------------
 
+# The only permitted purpose for a sealed holdout evaluation
+_SEALED_HOLDOUT_PURPOSE = "sealed_baseline_evaluation"
+
+
 @dataclass(frozen=True)
 class SealedHoldoutReceipt:
     """Receipt metadata for a sealed holdout evaluation.
@@ -95,20 +99,56 @@ class SealedHoldoutReceipt:
     This is a generic interface only.  The actual 24-group holdout is
     authored by Sol after all DeepSeek and Gemini work ends.
     Test only with miniature dummy records.
+
+    The purpose is fixed to ``sealed_baseline_evaluation`` and cannot
+    be caller-configured to another matching string.
     """
+
     manifest_hash: str
-    purpose: str
     evaluator_identity: str
     evaluation_id: str
     is_sealed: bool = False
 
-    def validate_access(self, manifest_hash: str, purpose: str) -> bool:
-        """Fail-closed: wrong or reused credentials are rejected."""
-        return (
-            self.is_sealed
-            and manifest_hash == self.manifest_hash
-            and purpose == self.purpose
-        )
+    purpose: str = _SEALED_HOLDOUT_PURPOSE
+
+    def __post_init__(self) -> None:
+        """Validate that no field is blank or malformed."""
+        if not self.manifest_hash or not self.manifest_hash.strip():
+            raise ValueError("manifest_hash must not be blank")
+        if not self.evaluator_identity or not self.evaluator_identity.strip():
+            raise ValueError("evaluator_identity must not be blank")
+        if not self.evaluation_id or not self.evaluation_id.strip():
+            raise ValueError("evaluation_id must not be blank")
+        if self.purpose != _SEALED_HOLDOUT_PURPOSE:
+            raise ValueError(
+                f"purpose must be {_SEALED_HOLDOUT_PURPOSE!r}, "
+                f"got {self.purpose!r}"
+            )
+
+    def validate_access(
+        self,
+        manifest_hash: str,
+        purpose: str,
+        *,
+        evaluator_identity: str = "",
+        evaluation_id: str = "",
+    ) -> bool:
+        """Fail-closed: wrong or reused credentials are rejected.
+
+        The supplied expected evaluator_identity and evaluation_id must
+        match the sealed receipt as well as the manifest hash and purpose.
+        """
+        if not self.is_sealed:
+            return False
+        if manifest_hash != self.manifest_hash:
+            return False
+        if purpose != self.purpose:
+            return False
+        if evaluator_identity and evaluator_identity != self.evaluator_identity:
+            return False
+        if evaluation_id and evaluation_id != self.evaluation_id:
+            return False
+        return True
 
 
 @dataclass(frozen=True)
@@ -120,14 +160,28 @@ class SingleUseLedger:
     capability: SealedHoldoutReceipt
     _consumed: bool = False
 
-    def consume(self, manifest_hash: str, purpose: str) -> bool:
+    def consume(
+        self,
+        manifest_hash: str,
+        purpose: str,
+        *,
+        evaluator_identity: str = "",
+        evaluation_id: str = "",
+    ) -> bool:
         """Attempt to consume the capability once.
 
+        Single use is consumed only after *every* credential check passes
+        (manifest hash, purpose, evaluator identity, and evaluation ID).
         Returns True if access is granted.  Subsequent attempts fail.
         """
         if self._consumed:
             return False
-        if not self.capability.validate_access(manifest_hash, purpose):
+        if not self.capability.validate_access(
+            manifest_hash,
+            purpose,
+            evaluator_identity=evaluator_identity,
+            evaluation_id=evaluation_id,
+        ):
             return False
         object.__setattr__(self, "_consumed", True)
         return True
@@ -141,12 +195,30 @@ class SingleUseLedger:
 # Aggregate-only holdout sanitizer / report builder
 # ---------------------------------------------------------------------------
 
-# Prohibited keys (or key substrings) in holdout report content
+# Prohibited key aliases (checked case-insensitively) in holdout report content.
+# Covers identifier, utterance, expected, observed, tool, delta, span,
+# normalized, finding, and per-case aliases at any nesting depth.
 _PROHIBITED_HOLDOUT_KEYS: frozenset[str] = frozenset({
-    "scenario_id", "group_id", "variant_id", "utterance", "dialogue_turn",
-    "expected_outcome", "expected_label", "expected_tool", "expected_delta",
-    "source_span", "normalized_value", "case_finding", "per_case_result",
-    "scenario_id_list", "variant_id_list", "turn_text", "observation_text",
+    # scenario / variant / group identifiers
+    "scenario_id", "scenario", "group_id", "variant_id", "variant",
+    # utterances and dialogue
+    "utterance", "utterance_text", "dialogue_turn", "turn_text", "turn",
+    "observation_text", "receptionist_text", "patient_text",
+    # expected / observed outcome labels
+    "expected_outcome", "expected", "expected_label", "observed",
+    "observed_outcome", "actual_outcome", "actual",
+    # expected tools / tool sequences
+    "expected_tool", "expected_tool_sequence", "tool_sequence",
+    "expected_delta", "appointment_delta", "delta",
+    # source spans
+    "source_span", "source_spans", "span", "span_text",
+    # normalized values
+    "normalized_value", "normalized_values", "normalized",
+    # case findings / per-case results
+    "case_finding", "case_findings", "finding", "findings",
+    "per_case_result", "per_case", "result", "per_sample",
+    # forbidden content
+    "forbidden_outcome", "forbidden_tool",
 })
 
 
@@ -156,9 +228,15 @@ def sanitize_holdout_report(report: dict[str, Any]) -> dict[str, Any]:
     Only aggregate/slice counts, fractions, partition/corpus/report hashes,
     version, repeat count, and sealed receipt metadata are allowed.
 
+    Uses a strict recursive allowlist/schema.  Rejects unknown nested keys,
+    non-aggregate nested structures, identifier/utterance/expected/observed/
+    tool/delta/span/normalized/finding/per-case key aliases case-insensitively,
+    and forbidden strings at any nesting depth including tuple/list values.
+
     Raises ValueError if any prohibited content is found.
     """
-    _check_prohibited_keys(report)
+    # Strict recursive check at every nesting depth including tuple values
+    _check_holdout_structure(report)
 
     allowed_top_keys = {
         "schema_version", "sealed_receipt", "partition",
@@ -178,10 +256,20 @@ def sanitize_holdout_report(report: dict[str, Any]) -> dict[str, Any]:
     # Check aggregate section
     if "aggregate" in report:
         agg = report["aggregate"]
+        if not isinstance(agg, dict):
+            raise ValueError(
+                f"Holdout aggregate must be a dict, got {type(agg).__name__}"
+            )
         for agg_key in agg:
             if agg_key not in ("passed", "failed", "total", "pass_fraction"):
                 raise ValueError(
                     f"Holdout aggregate contains prohibited key: {agg_key!r}"
+                )
+            val = agg[agg_key]
+            if not isinstance(val, (int, float)):
+                raise ValueError(
+                    f"Holdout aggregate.{agg_key} must be numeric, "
+                    f"got {type(val).__name__}"
                 )
 
     # Check per_dimension section
@@ -195,8 +283,12 @@ def sanitize_holdout_report(report: dict[str, Any]) -> dict[str, Any]:
     return report
 
 
-def _check_prohibited_keys(obj: Any, path: str = "") -> None:
-    """Recursively check for prohibited key substrings."""
+def _check_holdout_structure(obj: Any, path: str = "") -> None:
+    """Recursively check for prohibited key aliases at every nesting depth.
+
+    Checks dict keys case-insensitively, string values for forbidden patterns,
+    and also iterates through tuple values for string content.
+    """
     if isinstance(obj, dict):
         for key, value in obj.items():
             key_lower = key.lower()
@@ -206,27 +298,30 @@ def _check_prohibited_keys(obj: Any, path: str = "") -> None:
                         f"Holdout report contains prohibited key {key!r}"
                         f" at {path}"
                     )
-            _check_prohibited_keys(value, f"{path}.{key}")
-            # Also check string values for prohibited patterns
+            _check_holdout_structure(value, f"{path}.{key}")
             if isinstance(value, str):
-                _check_string_value(value, f"{path}.{key}")
-            elif isinstance(value, list):
-                _check_list_values(value, f"{path}.{key}")
-    elif isinstance(obj, list):
-        _check_list_values(obj, path)
+                _check_holdout_string_value(value, f"{path}.{key}")
+            elif isinstance(value, (list, tuple)):
+                _check_holdout_sequence(value, f"{path}.{key}")
+    elif isinstance(obj, (list, tuple)):
+        _check_holdout_sequence(obj, path)
 
 
-def _check_list_values(items: list[Any], path: str) -> None:
+def _check_holdout_sequence(items: list | tuple, path: str) -> None:
     for idx, item in enumerate(items):
+        item_path = f"{path}[{idx}]"
         if isinstance(item, str):
-            _check_string_value(item, f"{path}[{idx}]")
+            _check_holdout_string_value(item, item_path)
         elif isinstance(item, dict):
-            _check_prohibited_keys(item, f"{path}[{idx}]")
+            _check_holdout_structure(item, item_path)
+        elif isinstance(item, (list, tuple)):
+            _check_holdout_sequence(item, item_path)
 
 
-def _check_string_value(value: str, path: str) -> None:
-    """Check a string value against prohibited patterns."""
+def _check_holdout_string_value(value: str, path: str) -> None:
+    """Check a string value against prohibited patterns (generic dummy names)."""
     lower = value.lower()
+    # Generic dummy-dev patterns that should never appear in holdout reports
     prohibited_patterns = [
         "lc4_dw1_dev_group", "lc4_dw1_dev_var", "lc4_dw1_dev_mt",
         "margaret thompson", "dr shera", "dr patel",
@@ -242,6 +337,11 @@ def _check_string_value(value: str, path: str) -> None:
 
 def _check_dimension_section(dim: dict[str, Any]) -> None:
     """Check per_dimension section for prohibited content."""
+    if not isinstance(dim, dict):
+        raise ValueError(
+            f"Holdout per_dimension must be a dict, "
+            f"got {type(dim).__name__}"
+        )
     allowed_dim_keys = {
         "scenario_count", "sample_count", "repeats_per_scenario",
         "aggregate", "semantic_fields", "downstream_outcome",
@@ -255,6 +355,21 @@ def _check_dimension_section(dim: dict[str, Any]) -> None:
             raise ValueError(
                 f"Holdout per_dimension contains prohibited key: {key!r}"
             )
+
+
+def compute_sanitized_holdout_hash(report: dict[str, Any]) -> str:
+    """Compute SHA-256 over a sanitized holdout aggregate report.
+
+    Removes report_hash first (if present), computes canonical JSON,
+    and returns the SHA-256 hex digest with ``sha256:`` prefix.
+    The report must pass sanitize_holdout_report first.
+    """
+    # Sanitize first to reject prohibited content
+    sanitize_holdout_report(report)
+
+    report_copy = dict(report)
+    report_copy.pop("report_hash", None)
+    return _stable_hash(_canonical_json(report_copy))
 
 
 def _check_slice_section(slices: dict[str, Any]) -> None:
@@ -709,47 +824,143 @@ def _semantic_safety_fingerprint(result: ComposedSampleResult) -> tuple[Any, ...
 # ---------------------------------------------------------------------------
 
 
+CASE_FINDINGS_LIMIT = 96
+
+
+def _finding_from_result(r: ComposedSampleResult) -> dict[str, Any]:
+    """Convert a single result to a compact finding dict."""
+    return {
+        "scenario_id": r.scenario_id,
+        "sample_index": r.sample_index,
+        "all_passed": r.all_passed,
+        "failure_layer": r.failure_layer,
+        "failure_layers": list(r.failure_layers),
+        "semantic_fields": {
+            "passed": r.semantic_fields.passed,
+            "failures": r.semantic_fields.failures,
+        },
+        "downstream_outcome": {
+            "passed": r.downstream_outcome.passed,
+            "expected": r.downstream_outcome.comparison.expected,
+            "observed": r.downstream_outcome.comparison.observed,
+        },
+        "tool_sequence": r.tool_sequence.passed,
+        "interpretation_tools": r.interpretation_tools.passed,
+        "authority": {
+            "passed": r.authority.passed,
+            "claim": r.authority.authority_claim,
+            "correct": r.authority.authority_correct,
+            "is_safety_violation": r.authority.is_safety_violation,
+        },
+        "clarification": r.clarification.passed,
+        "appointment_deltas": r.appointment_deltas.passed,
+        "audit_deltas": r.audit_deltas.passed,
+        "safety": r.safety.passed,
+    }
+
+
+def _deduplicate_findings(
+    findings: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Remove duplicate findings from same scenario_id (repeat 0 vs 1)."""
+    seen: set[str] = set()
+    deduped: list[dict[str, Any]] = []
+    for f in findings:
+        sid = f["scenario_id"]
+        if sid not in seen:
+            seen.add(sid)
+            deduped.append(f)
+    return deduped
+
+
+def _select_deterministic_findings(
+    findings: list[dict[str, Any]],
+    *,
+    limit: int,
+) -> list[dict[str, Any]]:
+    """Select up to *limit* findings deterministically, prioritising useful
+    failures across failure layers and critical slice dimensions.
+
+    Selection policy (documented in report metadata):
+      1. Deduplicate repeats so at most one finding per scenario_id.
+      2. Separate into failed (primary and preferred) and passed.
+      3. From failed, prioritise by failure-layer depth:
+         multi-layer > integration_only > interpretation_only > policy_only.
+         Within each depth tier, sort by scenario_id for determinism.
+      4. If room remains after filling from failed, fill from passed
+         sorted by scenario_id.
+      5. Take at most *limit* total.
+    """
+    deduped = _deduplicate_findings(findings)
+
+    failed = [f for f in deduped if not f["all_passed"]]
+    passed = [f for f in deduped if f["all_passed"]]
+
+    def _layer_depth(f: dict[str, Any]) -> int:
+        layers = f.get("failure_layers", [])
+        if len(layers) > 1:
+            return 0  # multi-layer most useful
+        if "integration" in layers:
+            return 1
+        if "interpretation" in layers:
+            return 2
+        if "policy" in layers:
+            return 3
+        return 4
+
+    failed.sort(key=lambda f: (_layer_depth(f), f["scenario_id"]))
+    passed.sort(key=lambda f: f["scenario_id"])
+
+    selected: list[dict[str, Any]] = []
+    selected.extend(failed[:limit])
+    remaining = limit - len(selected)
+    if remaining > 0:
+        selected.extend(passed[:remaining])
+
+    return selected[:limit]
+
+
 def build_bounded_findings(
     results: list[ComposedSampleResult],
-) -> list[dict[str, Any]]:
+    *,
+    limit: int = CASE_FINDINGS_LIMIT,
+) -> dict[str, Any]:
     """Build bounded development case findings for repair.
+
+    Returns a dict with:
+      - ``findings``: the selected bounded findings list
+      - ``findings_limit``: the configured maximum
+      - ``findings_included``: how many were included
+      - ``findings_omitted``: how many were excluded after dedup
+      - ``selection_policy``: documented deterministic selection policy
 
     Includes scenario_id, all_passed, failure_layer(s), per-field status,
     and observed values for repair.  Does not dump unbounded detail.
     """
-    findings: list[dict[str, Any]] = []
-    for r in results:
-        finding: dict[str, Any] = {
-            "scenario_id": r.scenario_id,
-            "sample_index": r.sample_index,
-            "all_passed": r.all_passed,
-            "failure_layer": r.failure_layer,
-            "failure_layers": list(r.failure_layers),
-            "semantic_fields": {
-                "passed": r.semantic_fields.passed,
-                "failures": r.semantic_fields.failures,
-            },
-            "downstream_outcome": {
-                "passed": r.downstream_outcome.passed,
-                "expected": r.downstream_outcome.comparison.expected,
-                "observed": r.downstream_outcome.comparison.observed,
-            },
-            "tool_sequence": r.tool_sequence.passed,
-            "interpretation_tools": r.interpretation_tools.passed,
-            "authority": {
-                "passed": r.authority.passed,
-                "claim": r.authority.authority_claim,
-                "correct": r.authority.authority_correct,
-                "is_safety_violation": r.authority.is_safety_violation,
-            },
-            "clarification": r.clarification.passed,
-            "appointment_deltas": r.appointment_deltas.passed,
-            "audit_deltas": r.audit_deltas.passed,
-            "safety": r.safety.passed,
-        }
-        findings.append(finding)
+    if limit <= 0:
+        raise ValueError(f"Case findings limit must be positive, got {limit}")
 
-    return findings
+    all_findings = [
+        _finding_from_result(r) for r in results
+    ]
+
+    # Track omitted count before selection
+    dedup_before = len(_deduplicate_findings(all_findings))
+    selected = _select_deterministic_findings(all_findings, limit=limit)
+    omitted = dedup_before - len(selected)
+
+    return {
+        "findings": selected,
+        "findings_limit": limit,
+        "findings_included": len(selected),
+        "findings_omitted": max(omitted, 0),
+        "selection_policy": (
+            "deterministic: deduplicate repeats (one per scenario_id), "
+            "prioritise multi-layer failures, then integration-only, "
+            "interpretation-only, policy-only, sorted by scenario_id; "
+            "fill remaining from passed sorted by scenario_id"
+        ),
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -787,15 +998,22 @@ def generate_scaled_evaluation_report(
     corpus: ScaleCorpus = loader.load_all()
     all_scenarios = corpus.all_variants()
 
+    if repeats != EXPECTED_REPEATS:
+        raise ValueError(
+            f"Expected {EXPECTED_REPEATS} repeats, got {repeats}"
+        )
+
     total_scenarios = len(all_scenarios)
     total_samples = total_scenarios * repeats
 
-    assert total_scenarios == TOTAL_INDIVIDUAL_RECORDS, (
-        f"Expected {TOTAL_INDIVIDUAL_RECORDS} scenarios, got {total_scenarios}"
-    )
-    assert total_samples == EXPECTED_TOTAL_SAMPLES, (
-        f"Expected {EXPECTED_TOTAL_SAMPLES} samples, got {total_samples}"
-    )
+    if total_scenarios != TOTAL_INDIVIDUAL_RECORDS:
+        raise ValueError(
+            f"Expected {TOTAL_INDIVIDUAL_RECORDS} scenarios, got {total_scenarios}"
+        )
+    if total_samples != EXPECTED_TOTAL_SAMPLES:
+        raise ValueError(
+            f"Expected {EXPECTED_TOTAL_SAMPLES} samples, got {total_samples}"
+        )
 
     # 2. Count by type
     surface_variants, trajectory_variants = _split_variants_by_type(all_scenarios)
@@ -836,20 +1054,16 @@ def generate_scaled_evaluation_report(
     # 7. Variance
     variance = compute_variance(results)
 
-    # 8. Bounded findings
-    case_findings = build_bounded_findings(results)
+    # 8. Bounded findings — returns dict with findings list + metadata
+    findings_container = build_bounded_findings(results)
 
     # 9. Candidate-aware lattice
     lattice = build_candidate_lattice(all_scenarios)
 
-    # 10. Corpus/partition/report hashes
-    report_data = _build_report_hashes(results, corpus)
-    report_hash = report_data["report_hash"]
-
-    # Build report
-    report: dict[str, Any] = {
+    # Build report without report_hash first, so the hash covers the
+    # canonical complete report payload including all sections.
+    report_no_hash: dict[str, Any] = {
         "schema_version": LC4_SCALED_REPORT_SCHEMA_VERSION,
-        "report_hash": report_hash,
         "corpus_hash": corpus.corpus_hash,
         "partition": {
             "schema_version": "lc4.partition.v1",
@@ -875,33 +1089,40 @@ def generate_scaled_evaluation_report(
         "per_dimension": per_dim,
         "critical_slices": slices,
         "variance": variance,
-        "case_findings": case_findings,
+        "case_findings": findings_container["findings"],
+        "case_findings_limit": findings_container["findings_limit"],
+        "case_findings_included": findings_container["findings_included"],
+        "case_findings_omitted": findings_container["findings_omitted"],
+        "case_findings_selection_policy": findings_container["selection_policy"],
         "candidate_aware_lattice": lattice,
     }
 
-    return report
+    # Compute authority-bearing hash over the canonical complete report payload
+    report_hash = _stable_hash(_canonical_json(report_no_hash))
+    report_no_hash["report_hash"] = report_hash
+
+    return report_no_hash
+
+
+def validate_report_hash(report: dict[str, Any]) -> bool:
+    """Recompute the report hash and reject if mismatched.
+
+    Removes report_hash from a copy of the report, recomputes SHA-256
+    over the canonical JSON, and returns True only on exact match.
+    """
+    if "report_hash" not in report:
+        raise ValueError("Report missing report_hash field")
+    claimed = report["report_hash"]
+    report_copy = dict(report)
+    del report_copy["report_hash"]
+    computed = _stable_hash(_canonical_json(report_copy))
+    return computed == claimed
 
 
 def _default_fixture_dir() -> pathlib.Path:
     """Return the default development fixture directory."""
     here = pathlib.Path(__file__).resolve().parent.parent.parent.parent
     return here / "tests" / "fixtures" / "bernie_lc4_development"
-
-
-def _build_report_hashes(
-    results: list[ComposedSampleResult],
-    corpus: ScaleCorpus,
-) -> dict[str, str]:
-    """Build report hash from canonical result fingerprint."""
-    # Build a canonical summary for hashing
-    canonical_input = {
-        "corpus_hash": corpus.corpus_hash,
-        "total_results": len(results),
-        "passed": sum(1 for r in results if r.all_passed),
-        "failed": sum(1 for r in results if not r.all_passed),
-    }
-    report_hash = _stable_hash(_canonical_json(canonical_input))
-    return {"report_hash": report_hash}
 
 
 def generate_report_json(
@@ -1015,6 +1236,7 @@ def validate_holdout_import_isolation() -> list[str]:
 
 __all__ = [
     "LC4_SCALED_REPORT_SCHEMA_VERSION",
+    "CASE_FINDINGS_LIMIT",
     "EXPECTED_REPEATS",
     "EXPECTED_TOTAL_SAMPLES",
     "EXPECTED_LC1_GOLD_CELLS",
@@ -1027,6 +1249,8 @@ __all__ = [
     "build_candidate_lattice",
     "compute_variance",
     "build_bounded_findings",
+    "validate_report_hash",
+    "compute_sanitized_holdout_hash",
     "validate_scaled_evaluator_isolation",
     "validate_holdout_import_isolation",
 ]
