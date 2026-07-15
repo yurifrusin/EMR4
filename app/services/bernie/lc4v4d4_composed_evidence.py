@@ -37,6 +37,7 @@ from app.services.bernie.composed_evaluator import (
 from app.services.bernie.lc4v4_development_diagnostic import (
     author_all_probes,
     dict_to_spec,
+    run_diagnostic,
 )
 from app.services.bernie.lc4v4d3_policy_evidence import (
     D3_TARGET_IDS,
@@ -113,8 +114,17 @@ def _validate_d3_report() -> bool:
     )
 
 
-def _validate_selection_hash() -> bool:
-    return EXPECTED_20_CASE_HASH == _selection_hash(D3_TARGET_IDS)
+def _accepted_d3_cases() -> dict[str, dict[str, Any]]:
+    payload = json.loads(D3_REPORT_PATH.read_text(encoding="utf-8"))
+    cases = payload.get("cases", [])
+    if not isinstance(cases, list):
+        return {}
+    by_id = {
+        case.get("probe_id"): case
+        for case in cases
+        if isinstance(case, dict) and isinstance(case.get("probe_id"), str)
+    }
+    return by_id if len(by_id) == len(cases) else {}
 
 
 def _probes_by_id() -> dict[str, dict[str, Any]]:
@@ -185,12 +195,112 @@ def _check_utterance_fields_unchanged(
         and oa.temporal_relation == le.temporal_relation
         and oa.normalized_values == le.normalized_values
         and oa.entity_semantics == le.entity_semantics
-        and oa.requires_clarification == le.requires_clarification
-        and oa.clarification_choices == le.clarification_choices
-        and oa.selected_tool_sequence == le.selected_tool_sequence
-        and oa.authority_claim == le.authority_claim
+        and oa.claims_action_completed == le.claims_action_completed
         and oa.action_negated == le.action_negated
     )
+
+
+def _matches_accepted_d3_policy(
+    result: VersionedComposedResult,
+    accepted_case: dict[str, Any],
+) -> tuple[bool, str]:
+    """Compare the complete D4 typed result with frozen accepted D3 output."""
+    option_a = accepted_case.get("option_a", {})
+    utterance = option_a.get("utterance", {})
+    policy = option_a.get("policy", {})
+    if not isinstance(utterance, dict) or not isinstance(policy, dict):
+        return False, "accepted D3 case is incomplete"
+
+    interp = result.interpretation
+    replay = result.replay
+    checks = {
+        "intended_action": interp.intended_action == utterance.get("intended_action"),
+        "action_semantics": interp.action_semantics == utterance.get("action_semantics"),
+        "temporal_relation": interp.temporal_relation == utterance.get("temporal_relation"),
+        "normalized_values": interp.normalized_values == utterance.get("normalized_values"),
+        "entity_semantics": interp.entity_semantics == utterance.get("entity_semantics"),
+        "action_negated": interp.action_negated == utterance.get("action_negated"),
+        "requires_clarification": (
+            interp.requires_clarification == policy.get("requires_clarification")
+            and replay.requires_clarification == policy.get("requires_clarification")
+        ),
+        "clarification_choices": (
+            list(interp.clarification_choices) == policy.get("clarification_choices")
+            and list(replay.clarification_choices) == policy.get("clarification_choices")
+        ),
+        "selected_tools": (
+            list(interp.selected_tool_sequence) == policy.get("selected_tools")
+            and list(replay.tools_used) == policy.get("selected_tools")
+        ),
+        "authority": interp.authority_claim == policy.get("authority"),
+        "downstream_outcome": replay.downstream_outcome == policy.get("downstream_outcome"),
+        "appointment_deltas": list(replay.appointment_deltas) == policy.get("appointment_deltas"),
+        "audit_deltas": list(replay.audit_deltas) == policy.get("audit_deltas"),
+        "simulated_write": (
+            replay.is_simulated_confirmed_write
+            == policy.get("is_simulated_confirmed_write")
+        ),
+        "diary_relation": result.diary_relation == policy.get("diary_relation"),
+        "conflicting_fields": (
+            list(result.conflicting_fields) == policy.get("conflicting_fields")
+        ),
+        "resolved_patient": result.resolved_patient == policy.get("resolved_patient"),
+        "resolved_practitioner": (
+            result.resolved_practitioner == policy.get("resolved_practitioner")
+        ),
+        "resolved_practitioner_id": (
+            result.resolved_practitioner_id == policy.get("resolved_practitioner_id")
+        ),
+        "forbidden_observations": (
+            not replay.forbidden_outcomes_observed
+            and not replay.forbidden_tools_observed
+        ),
+    }
+    failed = [name for name, passed in checks.items() if not passed]
+    return not failed, "complete accepted D3 policy match" if not failed else ", ".join(failed)
+
+
+def _legacy_option_differences(
+    legacy: VersionedComposedResult,
+    option_a: VersionedComposedResult,
+) -> list[str]:
+    pairs = {
+        "interpretation.requires_clarification": (
+            legacy.interpretation.requires_clarification,
+            option_a.interpretation.requires_clarification,
+        ),
+        "interpretation.clarification_choices": (
+            legacy.interpretation.clarification_choices,
+            option_a.interpretation.clarification_choices,
+        ),
+        "interpretation.selected_tool_sequence": (
+            legacy.interpretation.selected_tool_sequence,
+            option_a.interpretation.selected_tool_sequence,
+        ),
+        "interpretation.authority_claim": (
+            legacy.interpretation.authority_claim,
+            option_a.interpretation.authority_claim,
+        ),
+        "replay.downstream_outcome": (
+            legacy.replay.downstream_outcome,
+            option_a.replay.downstream_outcome,
+        ),
+        "replay.tools_used": (legacy.replay.tools_used, option_a.replay.tools_used),
+        "replay.appointment_deltas": (
+            legacy.replay.appointment_deltas,
+            option_a.replay.appointment_deltas,
+        ),
+        "replay.audit_deltas": (legacy.replay.audit_deltas, option_a.replay.audit_deltas),
+        "diary_relation": (legacy.diary_relation, option_a.diary_relation),
+        "conflicting_fields": (legacy.conflicting_fields, option_a.conflicting_fields),
+    }
+    return [name for name, values in pairs.items() if values[0] != values[1]]
+
+
+def _result_payload(result: VersionedComposedResult) -> dict[str, Any]:
+    payload = asdict(result)
+    payload["policy_version"] = result.policy_version.value
+    return payload
 
 
 def _check_option_a_overlay(
@@ -271,11 +381,23 @@ def _check_option_a_overlay(
 def run_d4_evidence(source_commit: str = "unknown") -> dict[str, Any]:
     g_d2_valid = _validate_d2_report()
     g_d3_valid = _validate_d3_report()
-    g_selection_valid = _validate_selection_hash()
     probes = _probes_by_id()
+    diagnostic = run_diagnostic(list(probes.values()), source_commit=source_commit)
+    actual_policy_ids = tuple(sorted(
+        item.probe_id
+        for item in diagnostic.probe_results
+        if item.classification == "policy_contract_gap"
+    ))
     g_exact_population = (
-        set(tuple(sorted(probes.keys()))).issuperset(set(D3_TARGET_IDS))
-        and len(D3_TARGET_IDS) == 20
+        actual_policy_ids == tuple(sorted(D3_TARGET_IDS))
+        and len(actual_policy_ids) == 20
+    )
+    current_selection_hash = _selection_hash(actual_policy_ids)
+    g_selection_valid = current_selection_hash == EXPECTED_20_CASE_HASH
+    accepted_cases = _accepted_d3_cases()
+    g_d3_case_population = (
+        set(accepted_cases) == set(D3_TARGET_IDS)
+        and len(accepted_cases) == 20
     )
     g_legacy_hash = _compute_legacy_60_hash() == EXPECTED_LEGACY_60_HASH
 
@@ -297,21 +419,44 @@ def run_d4_evidence(source_commit: str = "unknown") -> dict[str, Any]:
 
     option_a_results: list[dict[str, Any]] = []
     target_fingerprints: list[str] = []
+    incompatible_differences: list[dict[str, Any]] = []
 
     for probe_id in D3_TARGET_IDS:
         spec = _spec_from_id(probe_id)
+        legacy = compose_versioned(
+            spec, sample_index=0, policy_version=PolicyVersion.LEGACY,
+        )
         r1 = compose_versioned(spec, sample_index=0, policy_version=PolicyVersion.OPTION_A)
         r2 = compose_versioned(spec, sample_index=0, policy_version=PolicyVersion.OPTION_A)
-        fp1 = _payload_hash(asdict(r1))
-        fp2 = _payload_hash(asdict(r2))
+        first_payload = _result_payload(r1)
+        second_payload = _result_payload(r2)
+        fp1 = _payload_hash(first_payload)
+        fp2 = _payload_hash(second_payload)
         target_fingerprints.extend([fp1, fp2])
-        passed, reason = _check_option_a_overlay(probe_id, r1)
+        overlay_passed, overlay_reason = _check_option_a_overlay(probe_id, r1)
+        accepted_passed, accepted_reason = _matches_accepted_d3_policy(
+            r1, accepted_cases.get(probe_id, {}),
+        )
+        semantic_preserved = _check_utterance_fields_unchanged(r1, legacy)
+        passed = overlay_passed and accepted_passed and semantic_preserved
         cat = _category(probe_id)
+        differences = _legacy_option_differences(legacy, r1)
+        if probe_id in INCOMPATIBLE_D1_CASES:
+            incompatible_differences.append({
+                "probe_id": probe_id,
+                "differences": differences,
+            })
         option_a_results.append({
             "probe_id": probe_id,
             "category": cat,
             "passed": passed,
-            "reason": reason,
+            "overlay_passed": overlay_passed,
+            "overlay_reason": overlay_reason,
+            "accepted_d3_match": accepted_passed,
+            "accepted_d3_reason": accepted_reason,
+            "utterance_semantics_preserved": semantic_preserved,
+            "legacy": _result_payload(legacy),
+            "option_a": first_payload,
             "fingerprint_0": fp1,
             "fingerprint_1": fp2,
             "deterministic": fp1 == fp2,
@@ -320,32 +465,33 @@ def run_d4_evidence(source_commit: str = "unknown") -> dict[str, Any]:
     g_all_pass = len(option_a_results) == 20 and all(r["passed"] for r in option_a_results)
     g_zero_variance = all(r["fingerprint_0"] == r["fingerprint_1"] for r in option_a_results)
 
-    g_utterance_preserved = True
-    for probe_id in D3_TARGET_IDS:
-        spec = _spec_from_id(probe_id)
-        legacy_result = compose_versioned(spec, sample_index=0, policy_version=PolicyVersion.LEGACY)
-        opt_a_result = compose_versioned(spec, sample_index=0, policy_version=PolicyVersion.OPTION_A)
-        if not _check_utterance_fields_unchanged(opt_a_result, legacy_result):
-            g_utterance_preserved = False
-            break
+    g_utterance_preserved = all(
+        result["utterance_semantics_preserved"] for result in option_a_results
+    )
+    g_replay_exact = (
+        g_d3_case_population
+        and all(result["accepted_d3_match"] for result in option_a_results)
+    )
 
-    g_replay_exact = True
-    for probe_id in D3_TARGET_IDS:
-        spec = _spec_from_id(probe_id)
-        r1 = compose_versioned(spec, sample_index=0, policy_version=PolicyVersion.OPTION_A)
-        r2 = compose_versioned(spec, sample_index=0, policy_version=PolicyVersion.OPTION_A)
-        if not (
-            asdict(r1.replay) == asdict(r2.replay)
-            and r1.diary_relation == r2.diary_relation
-            and r1.conflicting_fields == r2.conflicting_fields
-            and r1.resolved_patient == r2.resolved_patient
-            and r1.resolved_practitioner == r2.resolved_practitioner
-            and r1.resolved_practitioner_id == r2.resolved_practitioner_id
-        ):
-            g_replay_exact = False
-            break
-
-    g_incompatible_recorded = len(INCOMPATIBLE_D1_CASES) == 6
+    incompatible_by_id = {
+        item["probe_id"]: item["differences"] for item in incompatible_differences
+    }
+    omitted_differences = set(incompatible_by_id.get(OMITTED_PRACTITIONER_ID, []))
+    state_join_differences_valid = all(
+        {"diary_relation", "conflicting_fields"}.issubset(
+            set(incompatible_by_id.get(probe_id, []))
+        )
+        for probe_id in STATE_JOIN_ORACLE
+    )
+    g_incompatible_recorded = (
+        set(incompatible_by_id) == set(INCOMPATIBLE_D1_CASES)
+        and len(incompatible_by_id) == 6
+        and {
+            "interpretation.requires_clarification",
+            "interpretation.selected_tool_sequence",
+        }.issubset(omitted_differences)
+        and state_join_differences_valid
+    )
 
     g_no_forbidden_mutation = True
     for probe_id in D3_TARGET_IDS:
@@ -373,6 +519,7 @@ def run_d4_evidence(source_commit: str = "unknown") -> dict[str, Any]:
         "d3_report_valid": g_d3_valid,
         "selection_hash_valid": g_selection_valid,
         "exact_20_case_population": g_exact_population,
+        "accepted_d3_case_population": g_d3_case_population,
         "legacy_60_baseline_hash_exact": g_legacy_hash,
         "legacy_runner_equivalence": g_legacy_equivalence,
         "all_20_option_a_pass": g_all_pass,
@@ -389,15 +536,21 @@ def run_d4_evidence(source_commit: str = "unknown") -> dict[str, Any]:
         "d2_report_hash": EXPECTED_D2_REPORT_HASH,
         "d3_report_hash": EXPECTED_D3_REPORT_HASH,
         "d3_selection_hash": EXPECTED_20_CASE_HASH,
+        "current_policy_population_hash": current_selection_hash,
         "legacy_60_baseline_hash": EXPECTED_LEGACY_60_HASH,
         "total_cases": len(D3_TARGET_IDS),
         "total_observations": len(target_fingerprints),
         "category_counts": category_counts,
         "incompatible_d1_cases": sorted(INCOMPATIBLE_D1_CASES),
+        "incompatible_d1_differences": incompatible_differences,
         "gates": gates,
         "cases": option_a_results,
     }
-    report["decision"] = "candidate_complete" if all(gates.values()) else "revision_required"
+    report["decision"] = (
+        "versioned_composed_integration_valid"
+        if all(gates.values())
+        else "revision_required"
+    )
     canonical = dict(report)
     canonical.pop("decision", None)
     report["report_hash"] = _payload_hash(canonical)

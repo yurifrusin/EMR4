@@ -16,7 +16,7 @@ import json
 import pathlib
 import re
 from collections import defaultdict
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any
 
 from app.services.bernie.composed_evaluator import (
@@ -475,6 +475,7 @@ def _determine_forbidden_observations(
     scenario: ReceptionScenarioSpec,
     interpretation: InterpretationObservation,
     outcome: str | None,
+    tools: tuple[str, ...] | None = None,
 ) -> tuple[list[str], list[str]]:
     """Check which forbidden outcomes/tools were observed."""
     forbidden_outcomes: list[str] = []
@@ -482,10 +483,10 @@ def _determine_forbidden_observations(
 
     if outcome is not None and outcome in scenario.forbidden_outcomes:
         forbidden_outcomes.append(outcome)
-    if outcome is not None:
-        for fo in scenario.forbidden_outcomes:
-            if fo in (outcome,):
-                pass  # already added above
+    if tools is not None:
+        forbidden_tools.extend(
+            tool for tool in tools if tool in scenario.forbidden_tool_calls
+        )
 
     return forbidden_outcomes, forbidden_tools
 
@@ -713,23 +714,6 @@ def compose_versioned(
         # Pure extraction once
         extraction = extract_semantics(utterances, reference_date_str)
 
-        # Build interpretation observation preserving pure utterance fields
-        interp = InterpretationObservation(
-            scenario_id=scenario.scenario_id,
-            sample_index=sample_index,
-            intended_action=extraction.intended_action,
-            action_semantics=extraction.action_semantics,
-            temporal_relation=extraction.temporal_relation,
-            normalized_values=dict(extraction.normalized_values),
-            entity_semantics=dict(extraction.entity_semantics),
-            requires_clarification=extraction.requires_clarification,
-            clarification_choices=extraction.clarification_choices,
-            selected_tool_sequence=extraction.selected_tool_sequence,
-            authority_claim=extraction.authority_claim,
-            claims_action_completed=False,
-            action_negated=extraction.action_negated,
-        )
-
         # Resolve policy
         from app.services.bernie.lc4v4d3_policy_resolution import resolve_policy
 
@@ -756,6 +740,32 @@ def compose_versioned(
             reference_date=reference_date_str,
         )
 
+        # Preserve the pure utterance semantic fields while carrying the
+        # explicitly selected policy's operational fields into the ordinary
+        # typed interpretation observation.
+        interp = InterpretationObservation(
+            scenario_id=scenario.scenario_id,
+            sample_index=sample_index,
+            intended_action=extraction.intended_action,
+            action_semantics=extraction.action_semantics,
+            temporal_relation=extraction.temporal_relation,
+            normalized_values=dict(extraction.normalized_values),
+            entity_semantics=dict(extraction.entity_semantics),
+            requires_clarification=policy.requires_clarification,
+            clarification_choices=policy.clarification_choices,
+            selected_tool_sequence=policy.selected_tools,
+            authority_claim=policy.authority,
+            claims_action_completed=extraction.claims_action_completed,
+            action_negated=extraction.action_negated,
+        )
+
+        forbidden_outcomes, forbidden_tools = _determine_forbidden_observations(
+            scenario,
+            interp,
+            policy.downstream_outcome,
+            policy.selected_tools,
+        )
+
         # Build replay observation from policy result
         replay = ReplayObservation(
             scenario_id=scenario.scenario_id,
@@ -766,8 +776,8 @@ def compose_versioned(
             clarification_choices=policy.clarification_choices,
             appointment_deltas=policy.appointment_deltas,
             audit_deltas=policy.audit_deltas,
-            forbidden_outcomes_observed=(),
-            forbidden_tools_observed=(),
+            forbidden_outcomes_observed=tuple(forbidden_outcomes),
+            forbidden_tools_observed=tuple(forbidden_tools),
             is_simulated_confirmed_write=policy.is_simulated_confirmed_write,
         )
 

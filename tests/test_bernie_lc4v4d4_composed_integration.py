@@ -180,6 +180,10 @@ class TestOptionAComposed:
         assert list(result.replay.clarification_choices) == ["Sam Smith", "Avery Quinn"]
         assert list(result.replay.tools_used) == ["request_clarification"]
         assert result.replay.downstream_outcome == "clarification_required"
+        assert result.interpretation.requires_clarification
+        assert result.interpretation.clarification_choices == result.replay.clarification_choices
+        assert result.interpretation.selected_tool_sequence == result.replay.tools_used
+        assert result.interpretation.authority_claim == "clarify"
 
     def test_corrected_patient(self) -> None:
         spec = _spec_from_id("lc4v4d1_entity_patient_corrected_04")
@@ -216,6 +220,14 @@ class TestOptionAComposed:
         assert result.replay.downstream_outcome == "instruction_refused"
         assert not result.replay.appointment_deltas
         assert not result.replay.is_simulated_confirmed_write
+        assert result.interpretation.selected_tool_sequence == ("refuse_instruction",)
+        assert result.interpretation.authority_claim == "refuse"
+
+    def test_forbidden_policy_tool_is_observed(self) -> None:
+        spec = _spec_from_id("lc4v4d1_safety_create_unsafe_02")
+        spec.forbidden_tool_calls = ["refuse_instruction"]
+        result = compose_versioned(spec, policy_version=PolicyVersion.OPTION_A)
+        assert result.replay.forbidden_tools_observed == ("refuse_instruction",)
 
 
 # ===================================================================
@@ -287,8 +299,9 @@ class TestD4EvidenceReport:
 
     def test_d4_all_gates_pass(self) -> None:
         report = run_d4_evidence("test-source")
-        assert report["decision"] == "candidate_complete"
+        assert report["decision"] == "versioned_composed_integration_valid"
         assert all(report["gates"].values())
+        assert len(report["gates"]) == 13
 
     def test_d4_category_counts(self) -> None:
         report = run_d4_evidence("test-source")
@@ -350,13 +363,22 @@ class TestTamperResistance:
         with pytest.raises(ValueError, match="Unsupported policy version"):
             compose_versioned(spec, policy_version="bogus")  # type: ignore
 
-    def test_empty_utterances_still_runs(self) -> None:
-        """Even with missing utterances, legacy compose should not crash."""
-        probes = _probes_by_id()
-        spec = dict_to_spec(probes[D3_TARGET_IDS[0]])
-        # This should not raise
-        result = compose_versioned(spec, policy_version=PolicyVersion.LEGACY)
-        assert result.interpretation is not None
+    def test_missing_accepted_case_fails_report(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        import app.services.bernie.lc4v4d4_composed_evidence as evidence
+
+        monkeypatch.setattr(evidence, "_accepted_d3_cases", lambda: {})
+        report = evidence.run_d4_evidence("tampered")
+        assert report["gates"]["accepted_d3_case_population"] is False
+        assert report["gates"]["replay_fields_exact"] is False
+        assert report["decision"] == "revision_required"
+
+    def test_legacy_hash_tamper_fails_report(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        import app.services.bernie.lc4v4d4_composed_evidence as evidence
+
+        monkeypatch.setattr(evidence, "_compute_legacy_60_hash", lambda: "sha256:tampered")
+        report = evidence.run_d4_evidence("tampered")
+        assert report["gates"]["legacy_60_baseline_hash_exact"] is False
+        assert report["decision"] == "revision_required"
 
 
 # ===================================================================
