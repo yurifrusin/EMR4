@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V2 development repair exit reached; LC4V2R3 is not authorized |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v2e1-sol-acceptance.md` |
-| Current result | Deterministic exit audit returned `no_r3_authorized`; R1 21/21, R2 28/28, ordinary `880/814/672/154/330/835`, safety 1,152/1,152, zero variance; holdouts v1 and v2 sealed |
-| Next implementation | Pause at Yuri's decision boundary: approve either a genuinely fresh certification holdout or an explicit reviewed reuse policy; neither is currently authorized |
+| Active product track | LC4V3 genuinely fresh certification holdout; content-blind framework stage |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v3-sol-contract.md` |
+| Current result | Yuri authorized fresh holdout v3 after `no_r3_authorized`; no v3 content exists; holdouts v1 and v2 remain sealed |
+| Next implementation | Build and independently review the content-blind LC4V3 framework before Sol authors any protected v3 content |
 
 ### LC4R10 accepted state
 
@@ -167,6 +167,20 @@ product certification. A fresh certification holdout or reviewed reuse policy
 now requires Yuri's explicit decision. The frozen contract is
 `orchestration/agent_inbox/codex/lc4v2e1-sol-contract.md`; see
 `orchestration/agent_inbox/codex/lc4v2e1-sol-acceptance.md`.
+
+### LC4V3 authorized state
+
+Yuri authorized the recommended genuinely fresh certification holdout on
+2026-07-15. LC4V3 begins content-blind: DeepSeek Flash may implement only the
+empty framework, Gemini must independently veto the recovered framework before
+content exists, and Sol alone owns actual corpus authorship, sealing, one-shot
+evaluation, acceptance, and protected integration. The comparable fixed shape
+is 24 groups, 288 scenarios, 72 trajectories, and 576 two-repeat samples.
+
+Holdouts v1 and v2 remain sealed and unavailable. No LC4V3 content exists yet.
+T3.1-T3.4 remain blocked by default; T3.5/live models remain a separate Yuri
+decision. The active contract is
+`orchestration/agent_inbox/codex/lc4v3-sol-contract.md`.
 
 ## 4. Authority Allocation
 
