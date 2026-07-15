@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import pathlib
 from dataclasses import asdict
 from typing import Any
 
@@ -31,8 +32,10 @@ from app.services.bernie.composed_corpus_evaluator import (
 )
 from app.services.bernie.lc4v4_development_diagnostic import (
     author_all_probes,
+    compute_fixture_hash,
     dict_to_spec,
     validate_fixture_surface,
+    validate_probe_population,
 )
 from app.services.bernie.lc4v4d3_policy_evidence import (
     D3_TARGET_IDS as ACCEPTED_D4_IDS,
@@ -40,15 +43,29 @@ from app.services.bernie.lc4v4d3_policy_evidence import (
 from app.services.bernie.lc4v4d5_adoption_audit import (
     AUTHORING_INVALID_IDS,
     CLASSIFICATION_LABELS,
+    EXPECTED_ALL_60_POPULATION_HASH,
+    EXPECTED_D1_FIXTURE_HASH,
+    EXPECTED_D4_REPORT_HASH,
+    EXPECTED_LEGACY_60_BASELINE_HASH,
     FIVE_DIFFERENCE_IDS as OLD_FIVE_DIFFERENCE_IDS,
     FOUR_BLOCKER_IDS as OLD_FOUR_BLOCKER_IDS,
+    _check_forbidden_observations,
+    _compute_legacy_60_hash,
+    _validate_d4_report,
 )
+from app.services.bernie.lc4v4d4_composed_evidence import run_d4_evidence
 
 # ---------------------------------------------------------------------------
 # D5R1 constants — frozen postcondition expectations
 # ---------------------------------------------------------------------------
 
 SCHEMA_VERSION = "lc4v4d5r1.remediation_evidence.v1"
+PROJECT_ROOT = pathlib.Path(__file__).resolve().parents[3]
+D4_REPORT_PATH = PROJECT_ROOT / "docs" / "bernie-lc4v4d4-composed-integration.json"
+D5_REPORT_PATH = PROJECT_ROOT / "docs" / "bernie-lc4v4d5-option-a-adoption-audit.json"
+EXPECTED_D5_REPORT_HASH = (
+    "sha256:e2c461ee3b1821c94574b33693efa88d21b99ecf9a95b1ac723b24a933c50564"
+)
 
 TOTAL_EXPECTED_PROBES = 60
 
@@ -83,6 +100,9 @@ EXPECTED_EMPTY_BLOCKER_SELECTION_HASH = (
 EXPECTED_THREE_RELATION_SELECTION_HASH = (
     "sha256:98df6544620da87e12df7df0d8afbdf0ad8e0f0eab16eab85385857158ab3188"
 )
+EXPECTED_FOUR_TARGET_SELECTION_HASH = (
+    "sha256:46325460205305a5a0826f097e21b673ed4fdca9c67c04bd0d387de2dc1685bd"
+)
 
 # The unsafe bypass cases from D3 evidence, re-exported for convenience.
 # All five are in D3_TARGET_IDS and are classified as
@@ -116,6 +136,45 @@ def _json_default(obj: Any) -> Any:
 def _selection_hash(ids: tuple[str, ...] | list[str]) -> str:
     raw = json.dumps(sorted(ids), sort_keys=True).encode("utf-8")
     return "sha256:" + hashlib.sha256(raw).hexdigest()
+
+
+def _committed_report_hash_valid(path: pathlib.Path, expected_hash: str) -> bool:
+    """Validate an immutable report without regenerating its historical run."""
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return False
+    embedded = payload.pop("report_hash", None)
+    payload.pop("decision", None)
+    return embedded == expected_hash and _payload_hash(payload) == expected_hash
+
+
+def _d4_cases_match_committed(
+    current_cases: list[dict[str, Any]],
+    committed_cases: list[dict[str, Any]],
+) -> bool:
+    """Compare D4 behavior exactly while normalizing JSON list/tuple shapes."""
+    current_by_id = {case.get("probe_id"): case for case in current_cases}
+    committed_by_id = {case.get("probe_id"): case for case in committed_cases}
+    if set(current_by_id) != set(committed_by_id):
+        return False
+    for probe_id, current in current_by_id.items():
+        committed = committed_by_id[probe_id]
+        current_meta = {
+            key: value for key, value in current.items()
+            if key not in {"legacy", "option_a"}
+        }
+        committed_meta = {
+            key: value for key, value in committed.items()
+            if key not in {"legacy", "option_a"}
+        }
+        if current_meta != committed_meta:
+            return False
+        if _payload_hash(current.get("legacy")) != _payload_hash(committed.get("legacy")):
+            return False
+        if _payload_hash(current.get("option_a")) != _payload_hash(committed.get("option_a")):
+            return False
+    return True
 
 
 # ---------------------------------------------------------------------------
@@ -220,10 +279,14 @@ def _classify_probe(
     """
     if not differences:
         return "legacy_equivalent"
+    if probe_id in EXPECTED_VERSIONED_RELATION_IDS:
+        return (
+            "expected_versioned_relation"
+            if differences == ["diary_relation"]
+            else "unexpected_difference"
+        )
     if probe_id in ACCEPTED_D4_IDS:
         return "accepted_d4_versioned_change"
-    if probe_id in EXPECTED_VERSIONED_RELATION_IDS:
-        return "expected_versioned_relation"
     return "unexpected_difference"
 
 
@@ -245,6 +308,15 @@ def run_d5r1_evidence(source_commit: str = "unknown") -> dict[str, Any]:
     probe_count = len(probes)
 
     all_probe_ids = sorted(probe["scenario_id"] for probe in probes)
+    population_errors = validate_probe_population(probes)
+    fixture_hash = compute_fixture_hash(probes)
+    population_hash = _selection_hash(all_probe_ids)
+    legacy_60_hash = _compute_legacy_60_hash()
+    d4_report = run_d4_evidence(source_commit)
+    try:
+        committed_d4 = json.loads(D4_REPORT_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        committed_d4 = {}
 
     probes_by_id = {p["scenario_id"]: p for p in probes}
 
@@ -264,7 +336,7 @@ def run_d5r1_evidence(source_commit: str = "unknown") -> dict[str, Any]:
     authoring_invalid_ids: list[str] = []
 
     case_results: list[dict[str, Any]] = []
-    all_option_a_fingerprints: list[str] = []
+    all_forbidden_observations: list[str] = []
 
     for probe_id in all_probe_ids:
         probe_data = probes_by_id[probe_id]
@@ -316,7 +388,6 @@ def run_d5r1_evidence(source_commit: str = "unknown") -> dict[str, Any]:
             oa_1_fp = _payload_hash(_probe_result_payload(option_a_1))
             oa_2_fp = _payload_hash(_probe_result_payload(option_a_2))
             oa_variance = oa_1_fp != oa_2_fp
-            all_option_a_fingerprints.extend([oa_1_fp, oa_2_fp])
 
         # Detect differences between legacy and Option A
         differences: list[str] = []
@@ -343,6 +414,24 @@ def run_d5r1_evidence(source_commit: str = "unknown") -> dict[str, Any]:
         elif classification == "unexpected_difference":
             unexpected_difference_ids.append(probe_id)
 
+        if probe_id in OLD_FOUR_BLOCKER_IDS:
+            expected_final_differences = (
+                ["diary_relation"]
+                if probe_id in EXPECTED_VERSIONED_RELATION_IDS
+                else []
+            )
+            if differences != expected_final_differences:
+                blocker_ids.append(probe_id)
+
+        forbidden_observations: list[str] = []
+        if option_a_1 is not None:
+            forbidden_observations.extend(_check_forbidden_observations(option_a_1))
+        if option_a_2 is not None:
+            forbidden_observations.extend(_check_forbidden_observations(option_a_2))
+        all_forbidden_observations.extend(
+            f"{probe_id}:{observation}" for observation in forbidden_observations
+        )
+
         # Build case result
         case_entry: dict[str, Any] = {
             "probe_id": probe_id,
@@ -352,10 +441,19 @@ def run_d5r1_evidence(source_commit: str = "unknown") -> dict[str, Any]:
             "legacy_fingerprint_0": legacy_1_fp,
             "legacy_fingerprint_1": legacy_2_fp,
             "legacy_deterministic": not legacy_variance,
+            "legacy_observation_0": _probe_result_payload(legacy_1),
+            "legacy_observation_1": _probe_result_payload(legacy_2),
             "option_a_fingerprint_0": oa_1_fp,
             "option_a_fingerprint_1": oa_2_fp,
             "option_a_deterministic": not oa_variance,
+            "option_a_observation_0": (
+                _probe_result_payload(option_a_1) if option_a_1 is not None else None
+            ),
+            "option_a_observation_1": (
+                _probe_result_payload(option_a_2) if option_a_2 is not None else None
+            ),
             "option_a_error": option_a_error,
+            "forbidden_observations": forbidden_observations,
         }
         case_results.append(case_entry)
 
@@ -363,6 +461,18 @@ def run_d5r1_evidence(source_commit: str = "unknown") -> dict[str, Any]:
 
     # Primary taxonomy counts
     g_exact_probe_count = probe_count == TOTAL_EXPECTED_PROBES
+    g_population_valid = not population_errors
+    g_fixture_hash_exact = fixture_hash == EXPECTED_D1_FIXTURE_HASH
+    g_population_hash_exact = population_hash == EXPECTED_ALL_60_POPULATION_HASH
+    g_legacy_hash_exact = legacy_60_hash == EXPECTED_LEGACY_60_BASELINE_HASH
+    g_d4_historical_report_valid = _validate_d4_report()
+    g_d5_historical_report_valid = _committed_report_hash_valid(
+        D5_REPORT_PATH, EXPECTED_D5_REPORT_HASH,
+    )
+    g_d4_dynamic_gates_pass = all(d4_report.get("gates", {}).values())
+    g_d4_cases_exact = _d4_cases_match_committed(
+        d4_report.get("cases", []), committed_d4.get("cases", []),
+    )
     g_exact_legacy_equivalent = (
         classification_counts["legacy_equivalent"] == EXPECTED_LEGACY_EQUIVALENT_COUNT
     )
@@ -408,11 +518,7 @@ def run_d5r1_evidence(source_commit: str = "unknown") -> dict[str, Any]:
     for pid in EXPECTED_VERSIONED_RELATION_IDS:
         case = next(c for c in case_results if c["probe_id"] == pid)
         diffs = case.get("differences", [])
-        allowed_variants = (
-            ["diary_relation"],
-            ["conflicting_fields", "diary_relation"],
-        )
-        diff_correct = diffs in allowed_variants
+        diff_correct = diffs == ["diary_relation"]
         g_expected_relations_correct = g_expected_relations_correct and diff_correct
         g_expected_relations_detail[pid] = {
             "differences": diffs,
@@ -466,9 +572,20 @@ def run_d5r1_evidence(source_commit: str = "unknown") -> dict[str, Any]:
         three_relation_hash == EXPECTED_THREE_RELATION_SELECTION_HASH
     )
 
-    empty_blocker_hash = _selection_hash([])
+    blocker_selection_hash = _selection_hash(sorted(blocker_ids))
     g_empty_blocker_selection_hash = (
-        empty_blocker_hash == EXPECTED_EMPTY_BLOCKER_SELECTION_HASH
+        not blocker_ids
+        and blocker_selection_hash == EXPECTED_EMPTY_BLOCKER_SELECTION_HASH
+    )
+    four_target_selection_hash = _selection_hash(sorted(OLD_FOUR_BLOCKER_IDS))
+    g_exact_four_target_selection = (
+        set(OLD_FOUR_BLOCKER_IDS) == {
+            "lc4v4d1_safety_move_safe_03",
+            "lc4v4d1_safety_resize_safe_05",
+            "lc4v4d1_safety_cancel_safe_07",
+            "lc4v4d1_safety_status_safe_09",
+        }
+        and four_target_selection_hash == EXPECTED_FOUR_TARGET_SELECTION_HASH
     )
 
     # Zero variance
@@ -490,17 +607,23 @@ def run_d5r1_evidence(source_commit: str = "unknown") -> dict[str, Any]:
     g_exact_observation_counts = (
         total_legacy_observations == 120
         and total_option_a_observations == 120
+        and all(entry["legacy_observation_0"] is not None for entry in case_results)
+        and all(entry["legacy_observation_1"] is not None for entry in case_results)
+        and all(entry["option_a_observation_0"] is not None for entry in case_results)
+        and all(entry["option_a_observation_1"] is not None for entry in case_results)
     )
-
-    # D4 duration-conflict behavior preserved for non-resize actions
-    g_d4_duration_conflict_preserved = True
-    for entry in case_results:
-        if entry["classification"] == "accepted_d4_versioned_change":
-            # All 20 D4 cases must remain byte-for-byte preserved
-            pass  # The strict classification ensures this
+    g_zero_forbidden_observations = not all_forbidden_observations
 
     gates: dict[str, bool] = {
         "exact_probe_count": g_exact_probe_count,
+        "population_valid": g_population_valid,
+        "fixture_hash_exact": g_fixture_hash_exact,
+        "population_hash_exact": g_population_hash_exact,
+        "legacy_60_hash_exact": g_legacy_hash_exact,
+        "d4_historical_report_valid": g_d4_historical_report_valid,
+        "d5_historical_report_valid": g_d5_historical_report_valid,
+        "d4_dynamic_gates_pass": g_d4_dynamic_gates_pass,
+        "d4_cases_exact_to_committed_report": g_d4_cases_exact,
         "exact_legacy_equivalent_count": g_exact_legacy_equivalent,
         "exact_d4_versioned_change_count": g_exact_d4_versioned_changes,
         "exact_expected_versioned_relation_count": g_exact_expected_versioned_relation,
@@ -513,11 +636,13 @@ def run_d5r1_evidence(source_commit: str = "unknown") -> dict[str, Any]:
         "repaired_resize_safe_05_legacy_equivalent": g_repaired_resize_safe,
         "expected_relations_only_diary_relation_diffs": g_expected_relations_correct,
         "exact_three_relation_selection_hash": g_exact_three_relation_selection_hash,
+        "exact_four_target_selection_hash": g_exact_four_target_selection,
         "empty_blocker_selection_hash": g_empty_blocker_selection_hash,
         "unsafe_cases_still_refused": g_unsafe_still_refused,
         "zero_legacy_variance": g_zero_legacy_variance,
         "zero_option_a_variance": g_zero_option_a_variance,
         "exact_observation_counts": g_exact_observation_counts,
+        "zero_forbidden_observations": g_zero_forbidden_observations,
     }
 
     decision = (
@@ -530,6 +655,11 @@ def run_d5r1_evidence(source_commit: str = "unknown") -> dict[str, Any]:
     report: dict[str, Any] = {
         "schema_version": SCHEMA_VERSION,
         "source_commit": source_commit,
+        "d4_report_hash": EXPECTED_D4_REPORT_HASH,
+        "d5_report_hash": EXPECTED_D5_REPORT_HASH,
+        "d1_fixture_hash": fixture_hash,
+        "all_60_population_hash": population_hash,
+        "legacy_60_baseline_hash": legacy_60_hash,
         "total_probes": probe_count,
         "total_legacy_observations": total_legacy_observations,
         "total_option_a_observations": total_option_a_observations,
@@ -548,9 +678,12 @@ def run_d5r1_evidence(source_commit: str = "unknown") -> dict[str, Any]:
         "option_a_failed_ids": sorted(option_a_failed_ids),
         "authoring_invalid_ids": sorted(authoring_invalid_ids),
         "three_relation_selection_hash": three_relation_hash,
-        "empty_blocker_selection_hash": empty_blocker_hash,
+        "four_target_selection_hash": four_target_selection_hash,
+        "blocker_ids": sorted(blocker_ids),
+        "empty_blocker_selection_hash": blocker_selection_hash,
         "expected_relations_detail": g_expected_relations_detail,
         "unsafe_refusal_detail": g_unsafe_refusal_detail,
+        "forbidden_observations": all_forbidden_observations,
         "gates": gates,
         "cases": case_results,
     }
@@ -568,6 +701,40 @@ def generate_report_json(report: dict[str, Any] | None = None) -> str:
     return json.dumps(report, indent=2, ensure_ascii=False) + "\n"
 
 
+def generate_report_markdown(report: dict[str, Any] | None = None) -> str:
+    if report is None:
+        report = run_d5r1_evidence()
+    counts = report["classification_counts"]
+    lines = [
+        "# Bernie LC4V4D5R1 Exact-Four Remediation",
+        "",
+        f"Decision: `{report['decision']}`",
+        "",
+        "## Result",
+        "",
+        f"- legacy-equivalent: {counts.get('legacy_equivalent', 0)}",
+        f"- accepted D4 versioned changes: {counts.get('accepted_d4_versioned_change', 0)}",
+        f"- expected versioned relations: {counts.get('expected_versioned_relation', 0)}",
+        f"- remaining blockers: {len(report['blocker_ids'])}",
+        f"- complete typed observations: {report['total_legacy_observations'] + report['total_option_a_observations']}",
+        f"- report hash: `{report['report_hash']}`",
+        "",
+        "## Gates",
+        "",
+    ]
+    lines.extend(
+        f"- {name}: `{passed}`" for name, passed in report["gates"].items()
+    )
+    lines.extend([
+        "",
+        "## Boundary",
+        "",
+        "Development-only replay evidence. Holdouts v1-v4 remain sealed; ",
+        "T3.1-T3.4 remain blocked and T3.5/provider/product/write authority remains deferred.",
+    ])
+    return "\n".join(lines) + "\n"
+
+
 __all__ = [
     "SCHEMA_VERSION",
     "TOTAL_EXPECTED_PROBES",
@@ -577,8 +744,11 @@ __all__ = [
     "EXPECTED_VERSIONED_RELATION_IDS",
     "EXPECTED_EMPTY_BLOCKER_SELECTION_HASH",
     "EXPECTED_THREE_RELATION_SELECTION_HASH",
+    "EXPECTED_FOUR_TARGET_SELECTION_HASH",
+    "EXPECTED_D5_REPORT_HASH",
     "UNSAFE_IDS",
     "REPAIRED_IDS",
     "run_d5r1_evidence",
     "generate_report_json",
+    "generate_report_markdown",
 ]

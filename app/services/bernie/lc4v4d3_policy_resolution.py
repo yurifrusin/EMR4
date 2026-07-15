@@ -102,10 +102,48 @@ _PRACTITIONER_ID_MAP: dict[str, str] = {
     "Dr Singh": "pr-006",
 }
 
+_MUTATION_ACTIONS = frozenset({"move", "resize", "cancel", "status_change"})
+_UNCERTAIN_MUTATION_DIARY_STATES = frozenset({
+    "terminal",
+    "stale",
+    "concurrent",
+    "no_slots",
+    "roster_absent",
+    "break",
+    "elapsed_window",
+})
+
 
 def map_practitioner_id(name: str) -> str | None:
     """Map a synthetic practitioner name to a deterministic ID."""
     return _PRACTITIONER_ID_MAP.get(name)
+
+
+def _simulated_mutation_deltas(
+    *,
+    change_type: str,
+    normalized_values: dict[str, Any],
+    practitioner_id: str,
+    reference_date: str | None,
+) -> tuple[tuple[dict[str, Any], ...], tuple[dict[str, Any], ...]]:
+    """Build the existing deterministic replay-only mutation evidence."""
+    appointment = {
+        "appointment_id": "apt-001",
+        "change_type": change_type,
+        "patient_id": "p-001",
+        "practitioner_id": practitioner_id,
+        "date": normalized_values.get(
+            "appointment_date", reference_date or "2026-07-16",
+        ),
+        "start_time": normalized_values.get("earliest_time", ""),
+        "duration_minutes": normalized_values.get("duration_minutes", 15),
+    }
+    audit = {
+        "change_type": change_type,
+        "appointment_id": "apt-001",
+        "count": 1,
+    }
+    return (appointment,), (audit,)
 
 
 # ---------------------------------------------------------------------------
@@ -656,6 +694,26 @@ def resolve_policy(
             utterance_entity_semantics_unchanged=True,
         )
 
+    # A safe mutation cannot identify its target practitioner when the
+    # surfaced practitioner is omitted or cannot be mapped.  Fail closed
+    # before constructing replay-only mutation evidence.
+    if intended_action in _MUTATION_ACTIONS and result_practitioner_id is None:
+        return PolicyResolution(
+            requires_clarification=True,
+            clarification_choices=(),
+            resolved_patient=result_patient,
+            resolved_practitioner=result_practitioner,
+            resolved_practitioner_id=None,
+            selected_tools=("request_clarification",),
+            authority="clarify",
+            downstream_outcome="clarification_required",
+            appointment_deltas=(),
+            audit_deltas=(),
+            is_simulated_confirmed_write=False,
+            diary_comparison=result_diary,
+            utterance_entity_semantics_unchanged=True,
+        )
+
     # ── Normal action: build tools and deltas ─────────────────────────
     has_patient = entity_semantics.get("patient") in ("exact", "corrected")
     tools: list[str] = []
@@ -705,85 +763,49 @@ def resolve_policy(
         elif diary_state == "overlap":
             result_outcome = "candidate_selection_required"
     elif intended_action == "move":
-        tools.append("update_appointment")
-        result_outcome = "appointment_moved"
-        vals_mut = normalized_values
-        pid_mut = result_practitioner_id
-        result_apt_deltas = (
-            {
-                "appointment_id": "apt-001",
-                "change_type": "moved",
-                "patient_id": "p-001",
-                "practitioner_id": pid_mut,
-                "date": vals_mut.get("appointment_date", reference_date or "2026-07-16"),
-                "start_time": vals_mut.get("earliest_time", ""),
-                "duration_minutes": vals_mut.get("duration_minutes", 15),
-            },
-        )
-        result_aud_deltas = (
-            {"change_type": "moved", "appointment_id": "apt-001", "count": 1},
-        )
-        result_simulated = True
+        if diary_state not in _UNCERTAIN_MUTATION_DIARY_STATES:
+            tools.append("update_appointment")
+            result_outcome = "appointment_moved"
+            result_apt_deltas, result_aud_deltas = _simulated_mutation_deltas(
+                change_type="moved",
+                normalized_values=normalized_values,
+                practitioner_id=result_practitioner_id,
+                reference_date=reference_date,
+            )
+            result_simulated = True
     elif intended_action == "resize":
-        tools.append("update_appointment")
-        result_outcome = "appointment_resized"
-        vals_mut = normalized_values
-        pid_mut = result_practitioner_id
-        result_apt_deltas = (
-            {
-                "appointment_id": "apt-001",
-                "change_type": "resized",
-                "patient_id": "p-001",
-                "practitioner_id": pid_mut,
-                "date": vals_mut.get("appointment_date", reference_date or "2026-07-16"),
-                "start_time": vals_mut.get("earliest_time", ""),
-                "duration_minutes": vals_mut.get("duration_minutes", 15),
-            },
-        )
-        result_aud_deltas = (
-            {"change_type": "resized", "appointment_id": "apt-001", "count": 1},
-        )
-        result_simulated = True
+        if diary_state not in _UNCERTAIN_MUTATION_DIARY_STATES:
+            tools.append("update_appointment")
+            result_outcome = "appointment_resized"
+            result_apt_deltas, result_aud_deltas = _simulated_mutation_deltas(
+                change_type="resized",
+                normalized_values=normalized_values,
+                practitioner_id=result_practitioner_id,
+                reference_date=reference_date,
+            )
+            result_simulated = True
     elif intended_action == "cancel":
-        tools.append("update_appointment")
-        result_outcome = "appointment_cancelled"
-        vals_mut = normalized_values
-        pid_mut = result_practitioner_id
-        result_apt_deltas = (
-            {
-                "appointment_id": "apt-001",
-                "change_type": "cancelled",
-                "patient_id": "p-001",
-                "practitioner_id": pid_mut,
-                "date": vals_mut.get("appointment_date", reference_date or "2026-07-16"),
-                "start_time": vals_mut.get("earliest_time", ""),
-                "duration_minutes": vals_mut.get("duration_minutes", 15),
-            },
-        )
-        result_aud_deltas = (
-            {"change_type": "cancelled", "appointment_id": "apt-001", "count": 1},
-        )
-        result_simulated = True
+        if diary_state not in _UNCERTAIN_MUTATION_DIARY_STATES:
+            tools.append("update_appointment")
+            result_outcome = "appointment_cancelled"
+            result_apt_deltas, result_aud_deltas = _simulated_mutation_deltas(
+                change_type="cancelled",
+                normalized_values=normalized_values,
+                practitioner_id=result_practitioner_id,
+                reference_date=reference_date,
+            )
+            result_simulated = True
     elif intended_action == "status_change":
-        tools.append("change_appointment_status")
-        result_outcome = "appointment_status_changed"
-        vals_mut = normalized_values
-        pid_mut = result_practitioner_id
-        result_apt_deltas = (
-            {
-                "appointment_id": "apt-001",
-                "change_type": "status_changed",
-                "patient_id": "p-001",
-                "practitioner_id": pid_mut,
-                "date": vals_mut.get("appointment_date", reference_date or "2026-07-16"),
-                "start_time": vals_mut.get("earliest_time", ""),
-                "duration_minutes": vals_mut.get("duration_minutes", 15),
-            },
-        )
-        result_aud_deltas = (
-            {"change_type": "status_changed", "appointment_id": "apt-001", "count": 1},
-        )
-        result_simulated = True
+        if diary_state not in _UNCERTAIN_MUTATION_DIARY_STATES:
+            tools.append("change_appointment_status")
+            result_outcome = "appointment_status_changed"
+            result_apt_deltas, result_aud_deltas = _simulated_mutation_deltas(
+                change_type="status_changed",
+                normalized_values=normalized_values,
+                practitioner_id=result_practitioner_id,
+                reference_date=reference_date,
+            )
+            result_simulated = True
     elif intended_action == "explain_schedule":
         tools.append("find_slots")
         result_outcome = "schedule_explained"

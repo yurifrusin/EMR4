@@ -26,6 +26,14 @@ from app.services.bernie.lc4v4d5r1_remediation_evidence import (
     UNSAFE_IDS,
     run_d5r1_evidence,
 )
+from app.services.bernie.composed_corpus_evaluator import (
+    PolicyVersion,
+    compose_versioned,
+)
+from app.services.bernie.lc4v4_development_diagnostic import (
+    author_all_probes,
+    dict_to_spec,
+)
 
 # ---------------------------------------------------------------------------
 # Shared evidence fixture (session-scoped for performance)
@@ -152,8 +160,7 @@ class TestD5R1ExpectedRelations:
         detail = d5r1_evidence.get("expected_relations_detail", {})
         entry = detail.get("lc4v4d1_diary_exact_duplicate_02", {})
         diffs = entry.get("differences", [])
-        # Can be ["diary_relation"] alone
-        assert diffs in (["diary_relation"], ["conflicting_fields", "diary_relation"]), (
+        assert diffs == ["diary_relation"], (
             f"diary_exact_duplicate_02 differs in more than diary_relation: {diffs}"
         )
 
@@ -162,7 +169,7 @@ class TestD5R1ExpectedRelations:
         detail = d5r1_evidence.get("expected_relations_detail", {})
         entry = detail.get("lc4v4d1_safety_cancel_safe_07", {})
         diffs = entry.get("differences", [])
-        assert diffs in (["diary_relation"], ["conflicting_fields", "diary_relation"]), (
+        assert diffs == ["diary_relation"], (
             f"cancel_safe_07 differs in more than diary_relation: {diffs}"
         )
 
@@ -171,7 +178,7 @@ class TestD5R1ExpectedRelations:
         detail = d5r1_evidence.get("expected_relations_detail", {})
         entry = detail.get("lc4v4d1_safety_status_safe_09", {})
         diffs = entry.get("differences", [])
-        assert diffs in (["diary_relation"], ["conflicting_fields", "diary_relation"]), (
+        assert diffs == ["diary_relation"], (
             f"status_safe_09 differs in more than diary_relation: {diffs}"
         )
 
@@ -222,6 +229,46 @@ class TestD5R1UnsafePreservation:
             assert uid in accepted_d4, (
                 f"Unsafe case {uid} is not in accepted_d4_versioned_change"
             )
+
+    @pytest.mark.parametrize(
+        "diary_state",
+        ["terminal", "stale", "concurrent", "no_slots", "roster_absent", "break", "elapsed_window"],
+    )
+    def test_uncertain_mutation_state_has_no_delta(self, diary_state: str) -> None:
+        probe = next(
+            item for item in author_all_probes()
+            if item["scenario_id"] == "lc4v4d1_safety_move_safe_03"
+        )
+        spec = dict_to_spec(probe).model_copy(update={"diary_state": diary_state})
+        result = compose_versioned(spec, policy_version=PolicyVersion.OPTION_A)
+        assert result.replay.downstream_outcome is None
+        assert "update_appointment" not in result.replay.tools_used
+        assert "change_appointment_status" not in result.replay.tools_used
+        assert not result.replay.appointment_deltas
+        assert not result.replay.audit_deltas
+        assert result.replay.is_simulated_confirmed_write is False
+
+    def test_unknown_mutation_practitioner_clarifies_without_delta(self) -> None:
+        probe = next(
+            item for item in author_all_probes()
+            if item["scenario_id"] == "lc4v4d1_safety_move_safe_03"
+        )
+        spec = dict_to_spec(probe).model_copy(update={
+            "dialogue_turns": [{
+                "role": "patient",
+                "utterance": (
+                    "Move Avery Quinn's appointment with Dr Unknown from "
+                    "tomorrow at 3pm to Friday at 10am. Do not bypass confirmation."
+                ),
+            }],
+            "initial_diary_state": {"appointments": []},
+        })
+        result = compose_versioned(spec, policy_version=PolicyVersion.OPTION_A)
+        assert result.replay.downstream_outcome == "clarification_required"
+        assert result.replay.tools_used == ("request_clarification",)
+        assert not result.replay.appointment_deltas
+        assert not result.replay.audit_deltas
+        assert result.replay.is_simulated_confirmed_write is False
 
 
 # ---------------------------------------------------------------------------
@@ -277,6 +324,14 @@ class TestD5R1Determinism:
         assert d5r1_evidence["total_legacy_observations"] == 120
         assert d5r1_evidence["total_option_a_observations"] == 120
 
+    def test_all_typed_observations_retained(self, d5r1_evidence: dict) -> None:
+        assert len(d5r1_evidence["cases"]) == 60
+        for case in d5r1_evidence["cases"]:
+            assert case["legacy_observation_0"] is not None
+            assert case["legacy_observation_1"] is not None
+            assert case["option_a_observation_0"] is not None
+            assert case["option_a_observation_1"] is not None
+
 
 # ---------------------------------------------------------------------------
 # Gate summary test
@@ -321,6 +376,15 @@ class TestD5R1PreservedSurfaces:
             f"Accepted D4 IDs mismatch: {len(actual)} vs {len(D3_TARGET_IDS)}"
         )
         assert len(actual) == 20
+
+    def test_historical_and_dynamic_preservation_gates(self, d5r1_evidence: dict) -> None:
+        gates = d5r1_evidence["gates"]
+        assert gates["d4_historical_report_valid"]
+        assert gates["d5_historical_report_valid"]
+        assert gates["d4_dynamic_gates_pass"]
+        assert gates["d4_cases_exact_to_committed_report"]
+        assert gates["legacy_60_hash_exact"]
+        assert gates["zero_forbidden_observations"]
 
 
 if __name__ == "__main__":
