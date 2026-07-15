@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V4Q1 content-blind authoring quality and fresh-v4 framework; no actual v4 content yet |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v4q1-sol-contract.md` and `orchestration/agent_inbox/codex/lc4v4q1-sol-recovery-amendment.md` |
-| Current result | Flash candidate `4dc5ac8d` rejected conceptually; Sol recovery passes 52 focused/handover and 132 ordinary selected tests; no actual v4 content exists |
-| Next implementation | Commit and push the recovered content-blind head, then obtain a fresh Gemini veto before freezing one-shot acceptance and beginning Sol-only v4 authorship |
+| Active product track | LC4V4 fresh one-shot certification; content-blind framework accepted and no actual v4 content yet |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v4q1-sol-contract.md`, `orchestration/agent_inbox/codex/lc4v4q1-sol-recovery-amendment.md`, `orchestration/agent_inbox/codex/lc4v4q1-antigravity-review.md`, and `orchestration/agent_inbox/codex/lc4v4-one-shot-acceptance-rule.md` |
+| Current result | Flash candidate `4dc5ac8d` was rejected conceptually; Sol recovery passed 52 focused/handover and 132 ordinary selected tests; Gemini returned `DECISION: pass` on exact head `25e4461b`; no actual v4 content exists |
+| Next implementation | Commit and push the accepted pre-content framework and frozen one-shot rule, keep all external sessions closed, then Sol alone authors, quality-validates, freezes, seals, and evaluates fresh v4 exactly once |
 
 ### LC4R10 accepted state
 

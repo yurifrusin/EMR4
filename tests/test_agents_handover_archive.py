@@ -76,7 +76,11 @@ def test_compact_live_handover_retains_required_authority_and_boundaries() -> No
         "complete `0/576`",
         "lc4v4q1-sol-contract.md",
         "lc4v4q1-sol-recovery-amendment.md",
+        "lc4v4q1-antigravity-review.md",
+        "lc4v4-one-shot-acceptance-rule.md",
         "4dc5ac8d",
+        "25e4461b",
+        "Gemini returned `DECISION: pass`",
         "no actual v4 content yet",
     ]:
         assert required in live
