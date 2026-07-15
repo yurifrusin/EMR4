@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V4 content attempt stopped at a documented pre-authoring metadata-only boundary; framework accepted and no actual v4 content exists |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v4q1-sol-contract.md`, `orchestration/agent_inbox/codex/lc4v4q1-sol-recovery-amendment.md`, `orchestration/agent_inbox/codex/lc4v4q1-antigravity-review.md`, and `orchestration/agent_inbox/codex/lc4v4-one-shot-acceptance-rule.md` |
-| Current result | Flash candidate `4dc5ac8d` was rejected; Gemini returned `DECISION: pass` on Sol's recovery at exact head `25e4461b`; the accepted framework is pushed at `1c0e3ba3`. During the first content-phase orientation, a broad search displayed one protected v3 test filename despite exclusion globs. No protected content or case-level evidence was opened and no actual v4 content exists, but the frozen rule classifies enumeration as invalid. See `orchestration/agent_inbox/codex/lc4v4-preauthoring-metadata-incident.md` |
-| Next implementation | Pause for Yuri's explicit decision. Recommended recovery is a fresh v4 attempt from the accepted framework, the same product thresholds under a new rule identity, and a strict named-file read allowlist with no broad recursive search or globbing during the content phase |
+| Active product track | Authorized `lc4v4-fresh-attempt-002`; framework accepted and no actual v4 content exists |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v4q1-sol-contract.md`, `orchestration/agent_inbox/codex/lc4v4q1-sol-recovery-amendment.md`, `orchestration/agent_inbox/codex/lc4v4q1-antigravity-review.md`, and `orchestration/agent_inbox/codex/lc4v4-one-shot-acceptance-rule-v2.md` |
+| Current result | Yuri explicitly authorized a proportionate fresh attempt after the metadata-only incident. The first attempt remains invalid. Attempt 002 uses the accepted framework at `1c0e3ba3`, the same frozen thresholds, no external model, and strict named-file-only access. No actual v4 content exists |
+| Next implementation | Commit and push rule V2 before content. Sol then authors, quality-validates, freezes, seals, and evaluates attempt 002 exactly once; after consumption, only aggregate evidence may be used |
 
 ### LC4R10 accepted state
 
