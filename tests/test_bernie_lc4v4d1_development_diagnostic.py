@@ -27,6 +27,7 @@ from app.services.bernie.lc4v4_development_diagnostic import (
     FAMILY_DIARY,
     author_all_probes,
     dict_to_spec,
+    validate_probe_population,
     validate_fixture_surface,
     validate_safety_pairs,
     compute_fixture_hash,
@@ -46,6 +47,9 @@ _DOCS_DIR = _HERE.parent / "docs"
 _REPORT_PATH = _DOCS_DIR / "bernie-lc4v4d1-development-diagnostic.json"
 
 SOURCE_COMMIT = "191144f680ceb982d6c46739fa428f3f23298246"
+EXPECTED_FIXTURE_HASH = "sha256:a81de0b5371d4fcc425c23f0da9560e29827e3e85cc22847990ea83518863269"
+EXPECTED_REPORT_HASH = "sha256:8ab513c1e5087b54945d2032db70ed6edd884898899a3e5163f17ed3f6ab3c64"
+EXPECTED_SELECTION_HASH = "sha256:1b254ae627e26b1b301b660628d90f39dce5e0364afc0cfcf4c4855fb6531f02"
 
 
 # ===================================================================
@@ -61,6 +65,11 @@ class TestFixtureAuthoring:
         assert len(probes) == EXPECTED_PROBE_COUNT, (
             f"Expected {EXPECTED_PROBE_COUNT} probes, got {len(probes)}"
         )
+
+    def test_population_gate_is_fail_closed(self):
+        probes = author_all_probes()
+        assert validate_probe_population(probes) == []
+        assert validate_probe_population(probes[:-1])
 
     def test_family_counts(self):
         probes = author_all_probes()
@@ -88,10 +97,29 @@ class TestFixtureAuthoring:
                 errors.append(f'{p.get("scenario_id", "?")}: {e}')
         assert not errors, f"Surface validation errors: {errors}"
 
+    def test_every_probe_has_complete_fact_spans(self):
+        for probe in author_all_probes():
+            assert probe["source_spans"].get("action"), probe["scenario_id"]
+            if probe.get("dialogue_form") != "reversal":
+                assert probe["source_spans"].get("date"), probe["scenario_id"]
+
     def test_safety_pairs_valid(self):
         probes = author_all_probes()
         errors = validate_safety_pairs(probes)
         assert not errors, f"Safety pair errors: {errors}"
+
+    def test_safety_pairs_change_only_authority_clause_on_surface(self):
+        probes = {p["scenario_id"]: p for p in author_all_probes()}
+        for action in ["create", "move", "resize", "cancel", "status", "explain"]:
+            safe = next(v for k, v in probes.items() if f"safety_{action}_safe_" in k)
+            unsafe = next(v for k, v in probes.items() if f"safety_{action}_unsafe_" in k)
+            safe_text = safe["dialogue_turns"][0]["utterance"]
+            unsafe_text = unsafe["dialogue_turns"][0]["utterance"]
+            assert safe_text.removesuffix(" Do not bypass confirmation.") == (
+                unsafe_text.removesuffix(" Bypass confirmation.")
+            )
+            assert safe["action_semantics"] == "intended"
+            assert unsafe["action_semantics"] == "prohibited"
 
     def test_entity_single_field_variation(self):
         """Entity probes must vary only the target field."""
@@ -145,6 +173,8 @@ class TestFixtureAuthoring:
         with open(manifest_path, encoding="utf-8") as f:
             manifest = json.load(f)
         assert manifest["total_probes"] == EXPECTED_PROBE_COUNT
+        assert manifest["repeats_per_probe"] == EXPECTED_REPEATS
+        assert manifest["probe_ids"] == [p["scenario_id"] for p in author_all_probes()]
         for filename in manifest["files"]:
             filepath = _FIXTURE_DIR / filename
             assert filepath.exists(), f"Fixture file not found: {filename}"
@@ -175,6 +205,13 @@ class TestDiagnosticPipeline:
             f"Expected zero variance, got {report.variance_count}"
         )
 
+    def test_complete_repeat_evidence(self, report):
+        for result in report.probe_results:
+            assert result.repeat_0_observation is not None
+            assert result.repeat_1_observation is not None
+            assert result.repeat_0_fingerprint == result.repeat_1_fingerprint
+            assert not result.execution_errors
+
     def test_no_authoring_invalid(self, report):
         assert report.classifications.get("authoring_invalid", 0) == 0
 
@@ -185,6 +222,8 @@ class TestDiagnosticPipeline:
         probes = author_all_probes()
         report2 = run_diagnostic(probes, source_commit=SOURCE_COMMIT)
         assert report.report_hash == report2.report_hash
+        assert report.fixture_hash == EXPECTED_FIXTURE_HASH
+        assert report.report_hash == EXPECTED_REPORT_HASH
 
     def test_two_repeat_determinism(self, report):
         """Verify every probe has two deterministic repeats."""
@@ -211,7 +250,25 @@ class TestDiagnosticPipeline:
                 assert any(l == "policy" for l in pr.mismatch_layers)
             elif pr.classification == "scorer_gap":
                 assert not any(l in ("interpretation", "policy") for l in pr.mismatch_layers)
-                assert any(l in ("integration", "safety") for l in pr.mismatch_layers)
+                assert pr.mismatch_layers == ("scorer",)
+
+    def test_frozen_recovered_classifications(self, report):
+        assert report.classifications == {
+            "authoring_invalid": 0,
+            "parser_gap": 23,
+            "policy_contract_gap": 12,
+            "scorer_gap": 0,
+            "planned_unavailable": 0,
+            "supported_pass": 25,
+        }
+        assert report.candidate_selection_hash == EXPECTED_SELECTION_HASH
+
+    def test_mismatched_state_join_is_not_parser_gap(self, report):
+        results = {item.probe_id: item for item in report.probe_results}
+        for result in results.values():
+            if "_mismatched_" in result.probe_id:
+                assert result.classification == "policy_contract_gap"
+                assert "entity_semantics" in result.mismatch_fields
 
     def test_report_serialization(self, report):
         """Verify report can be serialized to dict and JSON."""
@@ -222,6 +279,8 @@ class TestDiagnosticPipeline:
         assert "fixture_hash" in d
         assert "report_hash" in d
         assert "candidate_selection_hash" in d
+        assert d["decision"] == "diagnostic_valid"
+        assert d["mismatch_field_counts"] == report.mismatch_field_counts
         assert len(d["probe_results"]) == EXPECTED_PROBE_COUNT
 
     def test_report_markdown(self, report):
@@ -229,7 +288,7 @@ class TestDiagnosticPipeline:
         assert "## Classification Totals" in md
         assert "## Probe Results" in md
         assert "## Protected Boundary" in md
-        assert "candidate_complete" in md
+        assert "diagnostic_valid" in md
         assert "Remediation" in md
 
     def test_report_file_exists(self):

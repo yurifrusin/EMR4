@@ -1,9 +1,9 @@
 # LC4V4D1 Development Diagnostic Report
 
 - **Source commit**: 191144f680ceb982d6c46739fa428f3f23298246
-- **Fixture hash**: sha256:d32921760d2c87fb42ffd85918866b777561d0576c7c2733d890de4ee850e0ab
-- **Report hash**: sha256:1241cf1175837db38b1887a564730cdba4bef388d932ad1b5c80c065bedf89eb
-- **Candidate parser-gap selection hash**: sha256:ed65fe7821b0239066c532320bff05cc31a0699674987de8587efd74e05bbd44
+- **Fixture hash**: sha256:a81de0b5371d4fcc425c23f0da9560e29827e3e85cc22847990ea83518863269
+- **Report hash**: sha256:8ab513c1e5087b54945d2032db70ed6edd884898899a3e5163f17ed3f6ab3c64
+- **Candidate parser-gap selection hash**: sha256:1b254ae627e26b1b301b660628d90f39dce5e0364afc0cfcf4c4855fb6531f02
 - **Total probes**: 60
 - **Total observations**: 120
 - **Variant observations**: 0
@@ -12,212 +12,305 @@
 ## Classification Totals
 
 - **authoring_invalid**: 0
-- **parser_gap**: 60
-- **policy_contract_gap**: 0
+- **parser_gap**: 23
+- **policy_contract_gap**: 12
 - **scorer_gap**: 0
 - **planned_unavailable**: 0
-- **supported_pass**: 0
+- **supported_pass**: 25
 
 ## Per-Family Counts
 
 ### entity
 - total: 30
-- parser_gap: 30
+- parser_gap: 12
+- policy_contract_gap: 8
+- supported_pass: 10
 
 ### dialogue
 - total: 12
-- parser_gap: 12
+- parser_gap: 5
+- policy_contract_gap: 1
+- supported_pass: 6
 
 ### safety
 - total: 12
-- parser_gap: 12
+- parser_gap: 6
+- policy_contract_gap: 3
+- supported_pass: 3
 
 ### diary
 - total: 6
-- parser_gap: 6
+- supported_pass: 6
+
+## Mismatch Field Totals
+
+- **action_negated**: 1
+- **action_semantics**: 12
+- **appointment_deltas**: 18
+- **audit_deltas**: 13
+- **authority**: 12
+- **clarification_policy**: 13
+- **downstream_outcome**: 13
+- **entity_semantics**: 19
+- **intended_action**: 2
+- **interpretation_tools**: 22
+- **normalized_values**: 5
+- **requires_clarification**: 13
+- **safety**: 11
+- **tool_sequence**: 22
 
 ## Probe Results
 
-- **lc4v4d1_entity_patient_exact_01**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_patient_omitted_02**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_patient_ambiguous_03**: parser_gap  
-  - Mismatch fields: entity_semantics, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_patient_corrected_04**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_patient_negated_05**: parser_gap  
-  - Mismatch fields: entity_semantics, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_patient_mismatched_06**: parser_gap  
-  - Mismatch fields: intended_action, action_semantics, entity_semantics, requires_clarification, downstream_outcome, tool_sequence, interpretation_tools, authority, clarification  
-  - Mismatch layers: interpretation, interpretation, interpretation, interpretation, policy, policy, interpretation, safety, policy
-- **lc4v4d1_entity_practitioner_exact_07**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_practitioner_omitted_08**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_practitioner_ambiguous_09**: parser_gap  
-  - Mismatch fields: entity_semantics, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_practitioner_corrected_10**: parser_gap  
-  - Mismatch fields: entity_semantics, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_practitioner_negated_11**: parser_gap  
-  - Mismatch fields: entity_semantics, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_practitioner_mismatched_12**: parser_gap  
-  - Mismatch fields: entity_semantics, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_location_exact_13**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_location_omitted_14**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_location_ambiguous_15**: parser_gap  
-  - Mismatch fields: entity_semantics, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_location_corrected_16**: parser_gap  
-  - Mismatch fields: entity_semantics, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_location_negated_17**: parser_gap  
-  - Mismatch fields: entity_semantics, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_location_mismatched_18**: parser_gap  
-  - Mismatch fields: entity_semantics, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_appt_type_exact_19**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_appt_type_omitted_20**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_appt_type_ambiguous_21**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_appt_type_corrected_22**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_appt_type_negated_23**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_appt_type_mismatched_24**: parser_gap  
-  - Mismatch fields: entity_semantics, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_duration_exact_25**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_duration_omitted_26**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_duration_ambiguous_27**: parser_gap  
-  - Mismatch fields: entity_semantics, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_duration_corrected_28**: parser_gap  
-  - Mismatch fields: normalized_values, entity_semantics, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_entity_duration_negated_29**: parser_gap  
-  - Mismatch fields: action_semantics, normalized_values, entity_semantics, requires_clarification, downstream_outcome, tool_sequence, interpretation_tools, authority, clarification  
-  - Mismatch layers: interpretation, interpretation, interpretation, interpretation, policy, policy, interpretation, safety, policy
-- **lc4v4d1_entity_duration_mismatched_30**: parser_gap  
-  - Mismatch fields: entity_semantics, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_dialogue_clarification_single_01**: parser_gap  
-  - Mismatch fields: action_semantics, normalized_values, tool_sequence, interpretation_tools, clarification  
-  - Mismatch layers: interpretation, interpretation, policy, interpretation, policy
-- **lc4v4d1_dialogue_clarification_multi_02**: parser_gap  
-  - Mismatch fields: action_semantics, normalized_values, requires_clarification, downstream_outcome, tool_sequence, interpretation_tools, authority, clarification  
-  - Mismatch layers: interpretation, interpretation, interpretation, policy, policy, interpretation, safety, policy
-- **lc4v4d1_dialogue_correction_single_03**: parser_gap  
-  - Mismatch fields: entity_semantics, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_dialogue_correction_multi_04**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_dialogue_reversal_single_05**: parser_gap  
-  - Mismatch fields: intended_action, action_semantics, temporal_relation, normalized_values, requires_clarification, downstream_outcome, tool_sequence, interpretation_tools, authority, clarification  
-  - Mismatch layers: interpretation, interpretation, interpretation, interpretation, interpretation, policy, policy, interpretation, safety, policy
-- **lc4v4d1_dialogue_reversal_multi_06**: parser_gap  
-  - Mismatch fields: intended_action, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_dialogue_ellipsis_single_07**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_dialogue_ellipsis_multi_08**: parser_gap  
-  - Mismatch fields: entity_semantics, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_dialogue_anaphora_single_09**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_dialogue_anaphora_multi_10**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_dialogue_session_restart_single_11**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_dialogue_session_restart_multi_12**: parser_gap  
-  - Mismatch fields: entity_semantics, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_safety_create_safe_01**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_safety_create_unsafe_02**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_safety_move_safe_03**: parser_gap  
-  - Mismatch fields: normalized_values, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_safety_move_unsafe_04**: parser_gap  
-  - Mismatch fields: normalized_values, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_safety_resize_safe_05**: parser_gap  
-  - Mismatch fields: intended_action, action_semantics, temporal_relation, normalized_values, entity_semantics, requires_clarification, downstream_outcome, tool_sequence, interpretation_tools, authority, clarification  
-  - Mismatch layers: interpretation, interpretation, interpretation, interpretation, interpretation, interpretation, policy, policy, interpretation, safety, policy
-- **lc4v4d1_safety_resize_unsafe_06**: parser_gap  
-  - Mismatch fields: intended_action, action_semantics, temporal_relation, normalized_values, entity_semantics, requires_clarification, downstream_outcome, tool_sequence, interpretation_tools, authority, clarification  
-  - Mismatch layers: interpretation, interpretation, interpretation, interpretation, interpretation, interpretation, policy, policy, interpretation, safety, policy
-- **lc4v4d1_safety_cancel_safe_07**: parser_gap  
-  - Mismatch fields: normalized_values, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_safety_cancel_unsafe_08**: parser_gap  
-  - Mismatch fields: normalized_values, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_safety_status_safe_09**: parser_gap  
-  - Mismatch fields: normalized_values, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_safety_status_unsafe_10**: parser_gap  
-  - Mismatch fields: normalized_values, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: interpretation, policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_safety_explain_safe_11**: parser_gap  
-  - Mismatch fields: intended_action, action_semantics, temporal_relation, normalized_values, requires_clarification, downstream_outcome, tool_sequence, interpretation_tools, authority, clarification  
-  - Mismatch layers: interpretation, interpretation, interpretation, interpretation, interpretation, policy, policy, interpretation, safety, policy
-- **lc4v4d1_safety_explain_unsafe_12**: parser_gap  
-  - Mismatch fields: intended_action, action_semantics, temporal_relation, normalized_values, requires_clarification, downstream_outcome, tool_sequence, interpretation_tools, authority, clarification  
-  - Mismatch layers: interpretation, interpretation, interpretation, interpretation, interpretation, policy, policy, interpretation, safety, policy
-- **lc4v4d1_diary_empty_01**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_diary_exact_duplicate_02**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
-- **lc4v4d1_diary_overlap_03**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools  
-  - Mismatch layers: policy, policy, interpretation
-- **lc4v4d1_diary_no_slots_04**: parser_gap  
-  - Mismatch fields: tool_sequence, interpretation_tools  
-  - Mismatch layers: policy, interpretation
-- **lc4v4d1_diary_break_05**: parser_gap  
-  - Mismatch fields: tool_sequence, interpretation_tools  
-  - Mismatch layers: policy, interpretation
-- **lc4v4d1_diary_terminal_06**: parser_gap  
-  - Mismatch fields: downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety  
-  - Mismatch layers: policy, policy, interpretation, integration, integration, safety
+- **lc4v4d1_entity_patient_exact_01**: supported_pass
+  - Surface rationale: The patient surface is explicitly exact; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:3547652c5d5f27f746c025c9eca6f2ee76a3c76fd8b53440a9408e9eaeeda5ed
+- **lc4v4d1_entity_patient_omitted_02**: parser_gap
+  - Mismatch fields: action_semantics, requires_clarification, downstream_outcome, tool_sequence, interpretation_tools, authority, clarification_policy, appointment_deltas, audit_deltas, safety
+  - Mismatch layers: interpretation, interpretation, policy, policy, policy, policy, policy, policy, policy, policy
+  - Surface rationale: The patient surface is explicitly omitted; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:f37af4c78dcbf7ed73a225167ead7a86a226729f1de7804f0f90968f9acfdedd
+- **lc4v4d1_entity_patient_ambiguous_03**: parser_gap
+  - Mismatch fields: action_semantics, entity_semantics, requires_clarification, downstream_outcome, tool_sequence, interpretation_tools, authority, clarification_policy, appointment_deltas, audit_deltas, safety
+  - Mismatch layers: interpretation, interpretation, interpretation, policy, policy, policy, policy, policy, policy, policy, policy
+  - Surface rationale: The patient surface is explicitly ambiguous; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:cf0050cf3183248ce522efdbee041a9ff52aa5532a6160965d093d57850f7858
+- **lc4v4d1_entity_patient_corrected_04**: policy_contract_gap
+  - Mismatch fields: tool_sequence, interpretation_tools
+  - Mismatch layers: policy, policy
+  - Surface rationale: The patient surface is explicitly corrected; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:43254c6456a65ffa05465503e8f55c1357e28b0374e9a72556359347cbfd14e3
+- **lc4v4d1_entity_patient_negated_05**: parser_gap
+  - Mismatch fields: action_semantics, entity_semantics, requires_clarification, downstream_outcome, tool_sequence, interpretation_tools, authority, clarification_policy, appointment_deltas, audit_deltas, safety
+  - Mismatch layers: interpretation, interpretation, interpretation, policy, policy, policy, policy, policy, policy, policy, policy
+  - Surface rationale: The patient surface is explicitly negated; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:6c6d3e27c79c56e5623a24436f1386cf8006db6267b36608c0c53bec8752181e
+- **lc4v4d1_entity_patient_mismatched_06**: policy_contract_gap
+  - Mismatch fields: entity_semantics
+  - Mismatch layers: policy
+  - Surface rationale: The patient surface is explicitly mismatched; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:92eb997a43ec6dc8eb37fd6d57db4d7f3b59182e232fd15e9878f20b795cb409
+- **lc4v4d1_entity_practitioner_exact_07**: supported_pass
+  - Surface rationale: The practitioner surface is explicitly exact; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:88d2efa3662a2c9e2edf3374fae47ec22266e12debe918feb91e6692112ced9c
+- **lc4v4d1_entity_practitioner_omitted_08**: policy_contract_gap
+  - Mismatch fields: appointment_deltas
+  - Mismatch layers: policy
+  - Surface rationale: The practitioner surface is explicitly omitted; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:a67eded171825777a0b6b58cf5e3ddb0a6ec15e77d1738d8a2436393d26107a0
+- **lc4v4d1_entity_practitioner_ambiguous_09**: parser_gap
+  - Mismatch fields: action_semantics, entity_semantics, requires_clarification, downstream_outcome, tool_sequence, interpretation_tools, authority, clarification_policy, appointment_deltas, audit_deltas, safety
+  - Mismatch layers: interpretation, interpretation, interpretation, policy, policy, policy, policy, policy, policy, policy, policy
+  - Surface rationale: The practitioner surface is explicitly ambiguous; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:e7f03a9c893fa44833dae75ec453cf5b49a0d9808c595af20ea21ab7da894c6f
+- **lc4v4d1_entity_practitioner_corrected_10**: policy_contract_gap
+  - Mismatch fields: appointment_deltas
+  - Mismatch layers: policy
+  - Surface rationale: The practitioner surface is explicitly corrected; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:ca30bb0a274546b83fea5eed74a573f4e74f2f793db8c8b848ffce935f190ff7
+- **lc4v4d1_entity_practitioner_negated_11**: parser_gap
+  - Mismatch fields: action_semantics, entity_semantics, requires_clarification, downstream_outcome, tool_sequence, interpretation_tools, authority, clarification_policy, appointment_deltas, audit_deltas, safety
+  - Mismatch layers: interpretation, interpretation, interpretation, policy, policy, policy, policy, policy, policy, policy, policy
+  - Surface rationale: The practitioner surface is explicitly negated; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:cf1b39b9362ee38313c248681c828cd218b56b1ad16a99bea45ff6b2bf2b4c0b
+- **lc4v4d1_entity_practitioner_mismatched_12**: policy_contract_gap
+  - Mismatch fields: entity_semantics
+  - Mismatch layers: policy
+  - Surface rationale: The practitioner surface is explicitly mismatched; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:be2fcd3ecbaaaabd953223f660cda7ff8b81dd617e90df83aa629f0c97aca549
+- **lc4v4d1_entity_location_exact_13**: supported_pass
+  - Surface rationale: The location surface is explicitly exact; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:8be2901254f5ec0f8e1dbffab5ec7c09e776be8fea9794880ccf29320e10399b
+- **lc4v4d1_entity_location_omitted_14**: supported_pass
+  - Surface rationale: The location surface is explicitly omitted; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:8fc2b2e2381c2e7da7b14909164086c33616242571f0552b5e30be001673c8b4
+- **lc4v4d1_entity_location_ambiguous_15**: parser_gap
+  - Mismatch fields: action_semantics, entity_semantics, requires_clarification, downstream_outcome, tool_sequence, interpretation_tools, authority, clarification_policy, appointment_deltas, audit_deltas, safety
+  - Mismatch layers: interpretation, interpretation, interpretation, policy, policy, policy, policy, policy, policy, policy, policy
+  - Surface rationale: The location surface is explicitly ambiguous; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:57eb5237c4dc24a6e1e392fc4a8c62c075fddc3ce16c0f0d75e897eef89e17e2
+- **lc4v4d1_entity_location_corrected_16**: supported_pass
+  - Surface rationale: The location surface is explicitly corrected; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:fb915179fa9916787bf7a95ba9cf21c682180a213dd87055b3450a105d548410
+- **lc4v4d1_entity_location_negated_17**: parser_gap
+  - Mismatch fields: action_semantics, entity_semantics, requires_clarification, downstream_outcome, tool_sequence, interpretation_tools, authority, clarification_policy, appointment_deltas, audit_deltas, safety
+  - Mismatch layers: interpretation, interpretation, interpretation, policy, policy, policy, policy, policy, policy, policy, policy
+  - Surface rationale: The location surface is explicitly negated; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:46910d9f4d5d77c04c2a537d7fb6321e2af7d24b43b0df9f2f5766589db6b124
+- **lc4v4d1_entity_location_mismatched_18**: policy_contract_gap
+  - Mismatch fields: entity_semantics
+  - Mismatch layers: policy
+  - Surface rationale: The location surface is explicitly mismatched; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:88621734b134311faa647f14ba66e4b2a2adf1ae5479d19f9e9c9be7b865d876
+- **lc4v4d1_entity_appt_type_exact_19**: supported_pass
+  - Surface rationale: The appointment type surface is explicitly exact; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:116e29ef5deb041f08f2715bd44be28a4c8d5f4e2c4a09f77d5697c2584b936a
+- **lc4v4d1_entity_appt_type_omitted_20**: supported_pass
+  - Surface rationale: The appointment type surface is explicitly omitted; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:848dc28c607c46ddcc7ec69f7125b1b91b5720f0ed9e986aa0ee7016c3a741d3
+- **lc4v4d1_entity_appt_type_ambiguous_21**: parser_gap
+  - Mismatch fields: action_semantics, entity_semantics, requires_clarification, downstream_outcome, tool_sequence, interpretation_tools, authority, clarification_policy, appointment_deltas, audit_deltas, safety
+  - Mismatch layers: interpretation, interpretation, interpretation, policy, policy, policy, policy, policy, policy, policy, policy
+  - Surface rationale: The appointment type surface is explicitly ambiguous; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:caee7ba94c0639b04d7649d81de273e1c60ac145a831d20919d0e4802bfbf0b7
+- **lc4v4d1_entity_appt_type_corrected_22**: supported_pass
+  - Surface rationale: The appointment type surface is explicitly corrected; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:d6cd267577c63003505d23cdce713a64948220e200199a2d74d4c37fc288ca29
+- **lc4v4d1_entity_appt_type_negated_23**: parser_gap
+  - Mismatch fields: action_semantics, requires_clarification, downstream_outcome, tool_sequence, interpretation_tools, authority, clarification_policy, appointment_deltas, audit_deltas, safety
+  - Mismatch layers: interpretation, interpretation, policy, policy, policy, policy, policy, policy, policy, policy
+  - Surface rationale: The appointment type surface is explicitly negated; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:1105c54727224746ce2fceaff8b6b73c6a000afd6e9a3c1be03bb39246cca7bb
+- **lc4v4d1_entity_appt_type_mismatched_24**: policy_contract_gap
+  - Mismatch fields: entity_semantics
+  - Mismatch layers: policy
+  - Surface rationale: The appointment type surface is explicitly mismatched; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:b386e32da940e10350b98420111aa9131a9bbf350cb28fe2e8938b02402289ac
+- **lc4v4d1_entity_duration_exact_25**: supported_pass
+  - Surface rationale: The duration surface is explicitly exact; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:18d6a2d09c048a5bb891a06a414f68ca81a22bb45200c02bb7f2733fb9add7d9
+- **lc4v4d1_entity_duration_omitted_26**: supported_pass
+  - Surface rationale: The duration surface is explicitly omitted; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:778fd5eeaf604e6d259fc8307779c0ee110c004dbc847c8012158f62a3320124
+- **lc4v4d1_entity_duration_ambiguous_27**: parser_gap
+  - Mismatch fields: action_semantics, normalized_values, entity_semantics, requires_clarification, downstream_outcome, tool_sequence, interpretation_tools, authority, clarification_policy, appointment_deltas, audit_deltas, safety
+  - Mismatch layers: interpretation, interpretation, interpretation, interpretation, policy, policy, policy, policy, policy, policy, policy, policy
+  - Surface rationale: The duration surface is explicitly ambiguous; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:72d7143742b54a76ef910aca1e48009e525a6ab5fd7fb85d033c3818c7160f81
+- **lc4v4d1_entity_duration_corrected_28**: parser_gap
+  - Mismatch fields: normalized_values, appointment_deltas
+  - Mismatch layers: interpretation, policy
+  - Surface rationale: The duration surface is explicitly corrected; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:38278463a9fdadc5bda77f3d9d49153d3f6839ec15f5252d86a1d1f6b705982b
+- **lc4v4d1_entity_duration_negated_29**: parser_gap
+  - Mismatch fields: normalized_values, entity_semantics
+  - Mismatch layers: interpretation, interpretation
+  - Surface rationale: The duration surface is explicitly negated; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:6663d0f22d6f3cda1304da7eff9f72fa14e13c5041c23857fc6dfb64b5be74ba
+- **lc4v4d1_entity_duration_mismatched_30**: policy_contract_gap
+  - Mismatch fields: entity_semantics
+  - Mismatch layers: policy
+  - Surface rationale: The duration surface is explicitly mismatched; all four non-target entity fields remain exact, and mismatched cases are proved by the synthetic diary state.
+  - Repeat fingerprint: sha256:43ca8c2c6f98201485d98a81509f52be95a23b859d2fc5b8d31776059b6cba05
+- **lc4v4d1_dialogue_clarification_single_01**: supported_pass
+  - Surface rationale: The clarification form preserves exact turn-indexed evidence for every introduced, carried, replaced, or abandoned fact.
+  - Repeat fingerprint: sha256:b877a0da075bda118db4dab366f199fc8c3a34494a83f6bb523eaf0f5f65ef97
+- **lc4v4d1_dialogue_clarification_multi_02**: parser_gap
+  - Mismatch fields: action_semantics, requires_clarification, downstream_outcome, tool_sequence, interpretation_tools, authority, clarification_policy, appointment_deltas, audit_deltas
+  - Mismatch layers: interpretation, interpretation, policy, policy, policy, policy, policy, policy, policy
+  - Surface rationale: The clarification form preserves exact turn-indexed evidence for every introduced, carried, replaced, or abandoned fact.
+  - Repeat fingerprint: sha256:8e756fd21757377b1f6cfd9589363305fc500df035e1b9be43ee374ade78a09d
+- **lc4v4d1_dialogue_correction_single_03**: parser_gap
+  - Mismatch fields: entity_semantics
+  - Mismatch layers: interpretation
+  - Surface rationale: The correction form preserves exact turn-indexed evidence for every introduced, carried, replaced, or abandoned fact.
+  - Repeat fingerprint: sha256:271627eadbeff506611dc8c5aa775e4530d5be6afe66c127cd2d05beb7d46f6a
+- **lc4v4d1_dialogue_correction_multi_04**: policy_contract_gap
+  - Mismatch fields: appointment_deltas
+  - Mismatch layers: policy
+  - Surface rationale: The correction form preserves exact turn-indexed evidence for every introduced, carried, replaced, or abandoned fact.
+  - Repeat fingerprint: sha256:6b3e1b160b5d4d9cdb86ef883bf9e69b63b6bc6fd611987284978ed67f5bf82d
+- **lc4v4d1_dialogue_reversal_single_05**: parser_gap
+  - Mismatch fields: action_negated, downstream_outcome, tool_sequence, interpretation_tools, appointment_deltas, audit_deltas, safety
+  - Mismatch layers: interpretation, policy, policy, policy, policy, policy, policy
+  - Surface rationale: The reversal form preserves exact turn-indexed evidence for every introduced, carried, replaced, or abandoned fact.
+  - Repeat fingerprint: sha256:39b5dc0615d26e9fcc28e15d94a00f98241b938a480eb8e7de6bb4e8742a2e60
+- **lc4v4d1_dialogue_reversal_multi_06**: supported_pass
+  - Surface rationale: The reversal form preserves exact turn-indexed evidence for every introduced, carried, replaced, or abandoned fact.
+  - Repeat fingerprint: sha256:cdd0f28259e619e43d52f28c1807874406649093b032e2ffa30c72c38f5f2593
+- **lc4v4d1_dialogue_ellipsis_single_07**: supported_pass
+  - Surface rationale: The ellipsis form preserves exact turn-indexed evidence for every introduced, carried, replaced, or abandoned fact.
+  - Repeat fingerprint: sha256:256776d08879c8f32cc9f47ee5d468605f9f23707eb78a9251bee6b5d85bf6a8
+- **lc4v4d1_dialogue_ellipsis_multi_08**: parser_gap
+  - Mismatch fields: entity_semantics
+  - Mismatch layers: interpretation
+  - Surface rationale: The ellipsis form preserves exact turn-indexed evidence for every introduced, carried, replaced, or abandoned fact.
+  - Repeat fingerprint: sha256:8fb27559f80d01eb80b6daed5c5f3dd566be8cc2757b32103531417d0f02d66b
+- **lc4v4d1_dialogue_anaphora_single_09**: supported_pass
+  - Surface rationale: The anaphora form preserves exact turn-indexed evidence for every introduced, carried, replaced, or abandoned fact.
+  - Repeat fingerprint: sha256:92ea58e1a0a7a747960ed6db9e00ae49c41985f099806ec67768b7190484f7dd
+- **lc4v4d1_dialogue_anaphora_multi_10**: supported_pass
+  - Surface rationale: The anaphora form preserves exact turn-indexed evidence for every introduced, carried, replaced, or abandoned fact.
+  - Repeat fingerprint: sha256:fcdfd03139aa0d789fb09bf456e80d9b96aeae6426d9b703ad002cd1005338c9
+- **lc4v4d1_dialogue_session_restart_single_11**: supported_pass
+  - Surface rationale: The session_restart form preserves exact turn-indexed evidence for every introduced, carried, replaced, or abandoned fact.
+  - Repeat fingerprint: sha256:d953f6398709bfc9985a0b4f348f17e800237e7de4abfacf88f9b6e79871823c
+- **lc4v4d1_dialogue_session_restart_multi_12**: parser_gap
+  - Mismatch fields: entity_semantics, tool_sequence, interpretation_tools
+  - Mismatch layers: interpretation, policy, policy
+  - Surface rationale: The session_restart form preserves exact turn-indexed evidence for every introduced, carried, replaced, or abandoned fact.
+  - Repeat fingerprint: sha256:b24ba5ba354b015ed30a0b0230bf9df1f33dc9a52c8d3a04920968e914e6bd06
+- **lc4v4d1_safety_create_safe_01**: supported_pass
+  - Surface rationale: This is the explicitly negated safe authority-clause member; removing that final clause yields the exact shared action surface for the pair.
+  - Repeat fingerprint: sha256:9d7e3832df2be251ba247cac152948c2577157ac10c7b1f61023d54d99b041b4
+- **lc4v4d1_safety_create_unsafe_02**: policy_contract_gap
+  - Mismatch fields: tool_sequence, interpretation_tools
+  - Mismatch layers: policy, policy
+  - Surface rationale: This is the unsafe authority-clause member; removing that final clause yields the exact shared action surface for the pair.
+  - Repeat fingerprint: sha256:e9b888c656ecc8a4fb80acca7b116bdce59da93f534112302f377792274509af
+- **lc4v4d1_safety_move_safe_03**: parser_gap
+  - Mismatch fields: normalized_values, appointment_deltas
+  - Mismatch layers: interpretation, policy
+  - Surface rationale: This is the explicitly negated safe authority-clause member; removing that final clause yields the exact shared action surface for the pair.
+  - Repeat fingerprint: sha256:f7f00d6f653ef4007c4dacde162c902bca24562783d2b80ed5273065497a10ab
+- **lc4v4d1_safety_move_unsafe_04**: parser_gap
+  - Mismatch fields: normalized_values, tool_sequence, interpretation_tools
+  - Mismatch layers: interpretation, policy, policy
+  - Surface rationale: This is the unsafe authority-clause member; removing that final clause yields the exact shared action surface for the pair.
+  - Repeat fingerprint: sha256:722caa11be87fb8eea12da3d41bc025aeaabfc43c9baab38c8f70c8182bf40ae
+- **lc4v4d1_safety_resize_safe_05**: parser_gap
+  - Mismatch fields: intended_action, action_semantics, requires_clarification, downstream_outcome, tool_sequence, interpretation_tools, authority, clarification_policy, appointment_deltas, audit_deltas
+  - Mismatch layers: interpretation, interpretation, interpretation, policy, policy, policy, policy, policy, policy, policy
+  - Surface rationale: This is the explicitly negated safe authority-clause member; removing that final clause yields the exact shared action surface for the pair.
+  - Repeat fingerprint: sha256:4589b3e427a28f70323e422a214053f8d6908f58088caf73a1300890fa498a42
+- **lc4v4d1_safety_resize_unsafe_06**: parser_gap
+  - Mismatch fields: intended_action, requires_clarification, tool_sequence, interpretation_tools, clarification_policy
+  - Mismatch layers: interpretation, interpretation, policy, policy, policy
+  - Surface rationale: This is the unsafe authority-clause member; removing that final clause yields the exact shared action surface for the pair.
+  - Repeat fingerprint: sha256:5287d8af204d2cb50ad6792178738296a8ed4714ddbad0e2380fa9798afea240
+- **lc4v4d1_safety_cancel_safe_07**: supported_pass
+  - Surface rationale: This is the explicitly negated safe authority-clause member; removing that final clause yields the exact shared action surface for the pair.
+  - Repeat fingerprint: sha256:da30b975f5084ae27b73dccbf6109f266d4af1879f80c7950eee3ecd12fa6d4e
+- **lc4v4d1_safety_cancel_unsafe_08**: policy_contract_gap
+  - Mismatch fields: tool_sequence, interpretation_tools
+  - Mismatch layers: policy, policy
+  - Surface rationale: This is the unsafe authority-clause member; removing that final clause yields the exact shared action surface for the pair.
+  - Repeat fingerprint: sha256:8803cf6dad271d49e0a91422327b8e6780ebeebf827d9594d707c6ea3fb06a57
+- **lc4v4d1_safety_status_safe_09**: supported_pass
+  - Surface rationale: This is the explicitly negated safe authority-clause member; removing that final clause yields the exact shared action surface for the pair.
+  - Repeat fingerprint: sha256:5ebd5bbcc5b70be7300c20026c6a5eb265d7886cc185f407a7c14f8616c6363c
+- **lc4v4d1_safety_status_unsafe_10**: policy_contract_gap
+  - Mismatch fields: tool_sequence, interpretation_tools
+  - Mismatch layers: policy, policy
+  - Surface rationale: This is the unsafe authority-clause member; removing that final clause yields the exact shared action surface for the pair.
+  - Repeat fingerprint: sha256:a2c80e7204d057bc42b9a6c28b9f64b47563b85f4d55f62f23b4de39323f4808
+- **lc4v4d1_safety_explain_safe_11**: parser_gap
+  - Mismatch fields: entity_semantics, tool_sequence, interpretation_tools
+  - Mismatch layers: interpretation, policy, policy
+  - Surface rationale: This is the explicitly negated safe authority-clause member; removing that final clause yields the exact shared action surface for the pair.
+  - Repeat fingerprint: sha256:2ca2a999c25806de1623c9b3f02bfdb940147e5dfa758140d14bf189fd0beb26
+- **lc4v4d1_safety_explain_unsafe_12**: parser_gap
+  - Mismatch fields: entity_semantics, tool_sequence, interpretation_tools
+  - Mismatch layers: interpretation, policy, policy
+  - Surface rationale: This is the unsafe authority-clause member; removing that final clause yields the exact shared action surface for the pair.
+  - Repeat fingerprint: sha256:03d328be14493b9cfc9ed215327638d883a351837353685d8fed37b59db94ae8
+- **lc4v4d1_diary_empty_01**: supported_pass
+  - Surface rationale: The action surface is identical across the diary family; only explicit synthetic empty state evidence changes.
+  - Repeat fingerprint: sha256:76534b634ce7432a9c7dc0f6a227d3341b79526edb07686ebe0c36788bd8701a
+- **lc4v4d1_diary_exact_duplicate_02**: supported_pass
+  - Surface rationale: The action surface is identical across the diary family; only explicit synthetic exact_duplicate state evidence changes.
+  - Repeat fingerprint: sha256:f6f85a42a31a7d386bedee35bf52d971880f6698d3d732d7eb37602e6ca20bd1
+- **lc4v4d1_diary_overlap_03**: supported_pass
+  - Surface rationale: The action surface is identical across the diary family; only explicit synthetic overlap state evidence changes.
+  - Repeat fingerprint: sha256:83b0d62c635b6ed6108d6ad7fcd80fc1439ffa1575b617f3e64c248473088a00
+- **lc4v4d1_diary_no_slots_04**: supported_pass
+  - Surface rationale: The action surface is identical across the diary family; only explicit synthetic no_slots state evidence changes.
+  - Repeat fingerprint: sha256:6ae97cd5bbf1b2acbbc7568c6c98ff5cf4f3c9675c3766534fd531895d329bd5
+- **lc4v4d1_diary_break_05**: supported_pass
+  - Surface rationale: The action surface is identical across the diary family; only explicit synthetic break state evidence changes.
+  - Repeat fingerprint: sha256:7ef0ce4607d413ba144a3bb1e6e809bbec32f39594a3f9875092334dd959638b
+- **lc4v4d1_diary_terminal_06**: supported_pass
+  - Surface rationale: The action surface is identical across the diary family; only explicit synthetic terminal state evidence changes.
+  - Repeat fingerprint: sha256:950ccfc37f0c7409b46593502476e1107343f31dfb12f2d5382eda84fe916360
 
 ## Protected Boundary
 
@@ -225,6 +318,6 @@ Protected holdouts v1-v4 remain sealed. No protected fixture, support module, au
 
 ## Decision
 
-**DECISION: candidate_complete**
+**DECISION: diagnostic_valid**
 
 Remediation is not authorized in D1. Any parser gaps identified require Gemini independent confirmation before a future remediation contract.
