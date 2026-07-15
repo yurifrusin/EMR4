@@ -112,19 +112,18 @@ Read these before acting on remembered process details.
   cleanliness check.
 - 2026-07-09: EMR4 Diary/Bernie UI sprint evidence should default to the
   version-controlled Playwright/pytest harnesses, especially
-  `review/test_diary_smoke.py` and narrow route-intercepted checks. Browser
-  plugin use is still allowed for supplemental visual inspection, console
-  debugging, screenshots, and ambiguous rendering failures, but it must not
-  replace committed Playwright regression evidence for ordinary UI behaviour.
-- 2026-07-09: Worker enumeration must not become empty ritual. At sprint prep,
+  `review/test_diary_smoke.py` and narrow route-intercepted checks. Browser plugin is supplemental
+  for visual inspection, console debugging, screenshots, and ambiguous rendering failures,
+  but it must not replace committed Playwright regression evidence for ordinary UI behaviour.
+- 2026-07-09: Worker enumeration is not itself evidence and must not become empty ritual. At sprint prep,
   Ariadne must classify each preferred lane as implementation owner,
   independent review/veto, consumer/product review, mechanical safety sweep, or
-  intentionally stood down. A worker lane is useful only when it has a distinct
-  artifact or veto surface that can be integrated: committed branch, review
+  intentionally stood down. A worker lane is useful only when it has a
+  distinct artifact or veto surface that can be integrated: committed branch, review
   packet, decision table, failing-test proposal, OpenAPI/consumer diff, or
   explicit no-go finding. Adjust sprint sizes and block arrangements to maximize
-  useful worker gain: combine related micro-sprints into one evidence/review
-  block when that creates separable lanes, split broad sprints when ownership
+  useful worker gain: combine related micro-sprints into one evidence/review block
+  when that creates separable lanes, split broad sprints when ownership
   surfaces would otherwise overlap, and keep tiny serial work Ariadne-local with
   the reason recorded. Do not spawn or announce workers merely to satisfy the
   Claude/Antigravity/DeepSeek naming ritual.

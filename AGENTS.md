@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V4D2 bounded semantic remediation over the frozen D1 parser selection |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v4d2-sol-contract.md` |
-| Current result | LC4V4 remains `certification_fail` and holdouts v1-v4 remain sealed. D1 is `diagnostic_valid`: 60 fresh inspectable development probes, 120 deterministic observations, 23 parser gaps, 12 policy-contract gaps, 25 supported passes, zero authoring/scorer/planned-unavailable cases, and zero variance. Gemini returned `DECISION: pass` on exact recovered report head `5e1f0de4`. No remediation occurred in D1 |
-| Next implementation | Dispatch one DeepSeek V4 Flash/high lane through Claude Code `--bare` to implement only the 23-case semantic repair and D2 evidence. Sol then accepts/recovers, runs serial preservation, and obtains a fresh Gemini veto. Keep all 12 policy/state-join cases outside parser repair and do not inspect or rerun holdouts v1-v4 |
+| Active product track | LC4V4D2 accepted; prepare a separately frozen LC4V4D3 policy/state-join tranche |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v4d2-sol-acceptance.md` |
+| Current result | LC4V4 remains `certification_fail` and holdouts v1-v4 remain sealed. D2 audited three internally contradictory D1 oracle rows and quarantined them without rewriting frozen evidence. All 20 valid D1 parser targets now close; current development view is 3 authoring-invalid, 0 parser gaps, 20 policy-contract gaps, and 37 supported passes over 114 valid repeat observations with zero variance. Gemini returned `DECISION: pass` on exact recovered report head `13d95c18` |
+| Next implementation | After a fresh receipt, freeze LC4V4D3 over the exact current 20 policy-contract cases. Separate clarification/tool/authority policy from explicit diary state joins, preserve the five mismatched joins as context-dependent, and authorize only bounded policy/replay changes supported by ordinary development evidence. Do not use further utterance-parser repair, inspect/rerun holdouts v1-v4, or open T3/provider/write surfaces |
 
 LC4V4 provenance: the frozen pre-content records remain
 `lc4v4q1-sol-contract.md`, `lc4v4q1-sol-recovery-amendment.md`,
@@ -65,32 +65,26 @@ while D1 uses only ordinary development fixtures and the accepted aggregate
 closeout: complete 70/576 and safety 466/576. V4 is sealed; no rerun or parser
 remediation is authorized from its aggregate result.
 
-### LC4V4D1 accepted state
+### LC4V4D1 incident and LC4V4D2 accepted state
 
-LC4V4D1 authored 60 fresh inspectable development probes across the isolated
-entity lattice, paired dialogue forms, matched explicitly-negated-safe/unsafe
-authority clauses, and six otherwise-identical diary states. The recovered
-diagnostic executed 120 complete observations with zero variance and returned
-23 parser gaps, 12 policy-contract gaps, and 25 supported passes. There were no
-authoring-invalid, scorer-only, or planned-unavailable cases. Fixture hash is
-`sha256:a81de0b5371d4fcc425c23f0da9560e29827e3e85cc22847990ea83518863269`;
-full report hash is
-`sha256:1527b99359dc76e831d7eabf49fff022781faf5d248c436bde6e022f30eff84d`;
-the 23-case selection hash is
-`sha256:1b254ae627e26b1b301b660628d90f39dce5e0364afc0cfcf4c4855fb6531f02`.
+LC4V4D1 authored 60 fresh inspectable development probes. Its frozen fixture,
+report, and raw 23-case selection hashes remain `a81de0b...`, `1527b993...`,
+and `1b254ae6...`. D1 is diagnostic only. During D2, a cross-field audit proved
+three frozen rows internally contradictory: corrected duration retained the
+old value, negated duration retained a value, and explicit elliptical duration
+was labelled omitted. The original `diagnostic_valid` decision is superseded
+by `lc4v4d1-sol-acceptance-amendment.md`; audited D1 is 3 authoring-invalid,
+20 parser gaps, 12 policy gaps, and 25 supported passes. Evidence was not rewritten.
 
-DeepSeek Flash's 60/60 parser-gap candidate was rejected for conceptual oracle,
-classification, repeat, and hashing defects. Sol recovered under the lease
-without a correction loop. The focused suite passed 30/30 and the adjacent
-serial preservation gate passed 182/182 selected nodes; two immutable
-historical report-equality nodes remained deselected and unchanged. Gemini 3.5
-Flash/high independently returned `DECISION: pass` on exact recovered report
-head `5e1f0de4`. D1 is diagnostic only and performed no remediation. The 23
-surface-semantic cases may seed a separately frozen D2 contract; the 12
-policy/state-join cases are excluded from parser repair. See
-`orchestration/agent_inbox/codex/lc4v4d1-sol-contract.md`,
-`orchestration/agent_inbox/codex/lc4v4d1-sol-acceptance.md` and
-`docs/bernie-lc4v4d1-development-diagnostic-closeout.md`.
+LC4V4D2 repaired all 20 valid utterance gaps under selection hash
+`sha256:0badec28ad533b630786d245e5ab47dee5655b83239869f7d0a2d12a8935d105`.
+Current D1 is 3 quarantined authoring-invalid, 0 parser gaps, 20 policy gaps,
+and 37 passes over 114 repeat observations with zero variance. The five diary
+joins remain policy gaps; report hash is `sha256:3220ac943659ae1449c5c285144b1fa980f659668a705ca7aef98f0aea6d317a`.
+Sol recovered Flash's fail-open evidence without a correction loop. Focused
+tests passed 203/203 and adjacent preservation passed 182/182. Gemini returned
+`DECISION: pass` on exact head `13d95c18`. See the D1 incident, D2 Sol
+acceptance, D2 closeout, and historical `lc4v4d1-sol-contract.md`.
 
 ### LC4R10 accepted state
 
@@ -394,6 +388,7 @@ the contract; do not misattribute it to LC work.
 
 ### Git and handoff
 
+- Sprint 156 status/delete confirm client header emission is the accepted historical closeout marker.
 - Preserve unrelated user changes in a dirty tree.
 - Workers commit only to disposable/task branches and do not push protected
   refs.
