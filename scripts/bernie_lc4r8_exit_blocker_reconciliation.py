@@ -781,7 +781,7 @@ def _load_json(path: pathlib.Path) -> Any:
         return json.load(f)
 
 
-def run_check(
+def _run_check_impl(
     clarification: dict[str, Any],
     replay_audit: dict[str, Any],
     exit_report: dict[str, Any],
@@ -1199,9 +1199,16 @@ def run_check(
         if status != "blocked_pending_generator_repair_and_contract_reconciliation":
             issues.append(f"{label} exit_status is {status!r}, expected blocked")
 
-    # Report hash
+    # Report hash. Validate both the supplied artifact's own hash field and
+    # its canonical content against the committed report.
     recomputed_hash = _compute_report_hash(exit_report)
     frozen_hash = frozen_report.get("report_hash", "")
+    supplied_hash = exit_report.get("report_hash", "")
+    if supplied_hash != recomputed_hash:
+        issues.append(
+            f"report_hash is not self-consistent: supplied={supplied_hash}, "
+            f"recomputed={recomputed_hash}"
+        )
     if recomputed_hash != frozen_hash:
         issues.append(
             f"report_hash mismatch: recomputed={recomputed_hash}, frozen={frozen_hash}"
@@ -1215,6 +1222,36 @@ def run_check(
         print("LC4R8 CHECK PASSED")
 
     return len(issues) == 0
+
+
+def run_check(
+    clarification: Any,
+    replay_audit: Any,
+    exit_report: Any,
+) -> bool:
+    """Fail closed for malformed recomputed artifact structures.
+
+    The detailed validator intentionally indexes required fields after it has
+    accumulated useful drift diagnostics. This boundary converts structural
+    shape errors into a deterministic ``False`` result rather than allowing a
+    malformed record or missing top-level section to escape as an exception.
+    """
+    if not all(isinstance(value, dict) for value in (
+        clarification,
+        replay_audit,
+        exit_report,
+    )):
+        print("LC4R8 CHECK FAILED:\n  - recomputed artifacts must be dictionaries")
+        return False
+
+    try:
+        return _run_check_impl(clarification, replay_audit, exit_report)
+    except (AttributeError, IndexError, KeyError, TypeError, ValueError) as exc:
+        print(
+            "LC4R8 CHECK FAILED:\n"
+            f"  - malformed recomputed artifact structure: {type(exc).__name__}: {exc}"
+        )
+        return False
 
 
 # ---------------------------------------------------------------------------

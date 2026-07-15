@@ -217,6 +217,9 @@ class TestBuildFromVariants:
         from scripts.bernie_lc4r8_exit_blocker_reconciliation import build_from_variants
         cls, rp, report = build_from_variants(variants, queue)
         return {
+            "canonical_clarification": _canonical_json(cls),
+            "canonical_replay": _canonical_json(rp),
+            "canonical_report": _canonical_json(report),
             "clarification_records": cls["records"],
             "replay_records": rp["records"],
             "clarification_selection_hash": cls["selection"]["hash"],
@@ -710,6 +713,27 @@ class TestFailClosedMutations:
         assert self._mutate_and_check(real_artifacts, mut,
                                        "extra field") is False
 
+    def test_non_dict_record_fails_closed(self, real_artifacts):
+        """A malformed non-object record must return False, not raise."""
+        def mut(cls, rp, report):
+            cls["records"][0] = "malformed"
+        assert self._mutate_and_check(real_artifacts, mut,
+                                       "non-dict record") is False
+
+    def test_records_collection_fails_closed(self, real_artifacts):
+        """A malformed records collection must return False, not raise."""
+        def mut(cls, rp, report):
+            rp["records"] = {"not": "a list"}
+        assert self._mutate_and_check(real_artifacts, mut,
+                                       "non-list records collection") is False
+
+    def test_missing_top_level_section_fails_closed(self, real_artifacts):
+        """A missing required section must return False, not raise."""
+        def mut(cls, rp, report):
+            del cls["selection"]
+        assert self._mutate_and_check(real_artifacts, mut,
+                                       "missing selection section") is False
+
     def test_unexpected_class(self, real_artifacts):
         """Unexpected blocker class must return False."""
         def mut(cls, rp, report):
@@ -952,6 +976,13 @@ class TestFailClosedMutations:
             report["development_only"] = False
         assert self._mutate_and_check(real_artifacts, mut,
                                        "report hash drift") is False
+
+    def test_report_hash_field_drift(self, real_artifacts):
+        """A directly drifted report_hash field must return False."""
+        def mut(cls, rp, report):
+            report["report_hash"] = "sha256:" + ("0" * 64)
+        assert self._mutate_and_check(real_artifacts, mut,
+                                       "report hash field drift") is False
 
     def test_report_content_drift(self, real_artifacts):
         """Changed report schema_version must return False."""
