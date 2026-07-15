@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V2R2 development-only safety-language repair complete and independently reviewed |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v2r2-sol-acceptance.md` |
-| Current result | LC4V2R2 improved its 14-pair matrix from 17/28 to 28/28 with zero variance; ordinary development remains `880/814/672/154/330/835`, safety 1,152/1,152; holdouts v1 and v2 sealed |
-| Next implementation | Run a bounded development-only exit-gap reassessment before naming LC4V2R3; authorize another repair only for a freshly frozen surface-supported gap, without accessing either holdout |
+| Active product track | LC4V2E1 development-only exit-gap reassessment; this is not LC4V2R3 |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v2e1-sol-contract.md` |
+| Current result | R1 and R2 pass 21/21 and 28/28 with empty failure selections; ordinary development remains `880/814/672/154/330/835`, safety 1,152/1,152; holdouts v1 and v2 sealed |
+| Next implementation | Bind the exact accepted R1/R2 and ordinary-development evidence, decide `r3_authorized|no_r3_authorized|reassessment_invalid`, and obtain an independent Gemini veto without accessing either holdout |
 
 ### LC4R10 accepted state
 
