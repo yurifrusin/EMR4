@@ -85,9 +85,10 @@ import hashlib
 import json
 import pathlib
 import re
+from types import MappingProxyType
 from dataclasses import dataclass, field
 from datetime import date, datetime, time, timedelta, timezone
-from typing import Any, Literal
+from typing import Any, Literal, Mapping
 import copy
 
 from app.services.bernie.corpus_tier import CorpusCandidate
@@ -138,9 +139,22 @@ LC4R9_ALLOWLIST_SELECTION_HASH = "b88018991e49ffd5"
 LC4R9_ALLOWLIST_COUNT = 11
 
 # The canonical override value for every allowlist scenario.
-LC4R9_AUDIT_OVERRIDE: list[dict[str, object]] = [
-    {"change_type": "created", "appointment_id": "apt-001", "count": 1},
-]
+# Immutable tuple of read-only mappings ensures each generated scenario receives
+# a fresh copy without exposing mutable module-level contract state.
+LC4R9_AUDIT_OVERRIDE: tuple[Mapping[str, object], ...] = (
+    MappingProxyType(
+        {"change_type": "created", "appointment_id": "apt-001", "count": 1}
+    ),
+)
+
+
+def _make_audit_override_copy() -> list[dict[str, object]]:
+    """Return a fresh deep-copy of the audit override for assignment to a scenario.
+
+    Each generated scenario must receive its own non-mutable-source copy so that
+    mutating one cannot affect others or the module-level constant.
+    """
+    return [dict(item) for item in LC4R9_AUDIT_OVERRIDE]
 
 # Pre-repair delta-line identifier hash (sorted newline-joined
 # scenario_id|create_requested|created).  Verifiable by the helper/tests.
@@ -1747,7 +1761,7 @@ def _build_group_fixture(
                     f"LC4R9 allowlist scenario {variant_id!r} has "
                     f"action={spec.intended_action!r}, expected 'create'"
                 )
-            audit_deltas_override = LC4R9_AUDIT_OVERRIDE
+            audit_deltas_override = _make_audit_override_copy()
 
         scenario = _build_scenario(
             spec, variant_id, utterance, df, lf,
@@ -2283,6 +2297,7 @@ __all__ = [
     "LC4R9_ALLOWLIST_SELECTION_HASH",
     "LC4R9_ALLOWLIST_COUNT",
     "LC4R9_AUDIT_OVERRIDE",
+    "_make_audit_override_copy",
     "LC4R9_PRE_REPAIR_DELTA_HASH",
     "ALL_ACTIONS",
     "ALL_TEMPORAL_RELATIONS",

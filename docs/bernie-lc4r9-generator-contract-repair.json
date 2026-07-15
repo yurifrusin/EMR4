@@ -20,6 +20,16 @@
     ]
   },
   "pre_repair_delta_hash": "14e3648ae8a98598bbc091ce16bf29f31fd5b2fdb92fe7d817ae86fb21837c69",
+  "frozen_post_repair_hashes": {
+    "group_001_hash": "sha256:b1e33767b127856e25095c907b14a40a6f88e6522af0cc1841e9baa3bdeff6d7",
+    "group_012_hash": "sha256:90d321501e51df4e1b91aa94997e3470b3d26c2678ca61045ad8c6c63abdc5c0",
+    "corpus_hash": "sha256:f11e98f9bc61b962da0e816fbb918d7f722d3f82c57dfde18a5e323c1b24e9e1"
+  },
+  "frozen_pre_repair_hashes": {
+    "group_001_hash": "sha256:0874f6887020df0ae9abe0ca75a9ee60bc9eb0d55094701fbf5a48788cd71e5d",
+    "group_012_hash": "sha256:76a4a27c6d217dcfd0fa4a96ea42b1416201b31fdb87af39c4bb32040f7fb9b6",
+    "corpus_hash": "sha256:aa2d946b60694eab96846ed77e885273c807e127f8998981a8cf8ff20ebae647"
+  },
   "checks": {
     "allowlist_invariants": {
       "check": "allowlist_invariants",
@@ -65,9 +75,14 @@
       "check": "non_selected_drift",
       "passed": true,
       "details": {
-        "checked_count": 853,
-        "drifted_ids": [],
-        "drift_count": 0
+        "pre_repair_reconstructed_group_001_hash": "sha256:0874f6887020df0ae9abe0ca75a9ee60bc9eb0d55094701fbf5a48788cd71e5d",
+        "expected_pre_repair_group_001_hash": "sha256:0874f6887020df0ae9abe0ca75a9ee60bc9eb0d55094701fbf5a48788cd71e5d",
+        "pre_repair_reconstructed_group_012_hash": "sha256:76a4a27c6d217dcfd0fa4a96ea42b1416201b31fdb87af39c4bb32040f7fb9b6",
+        "expected_pre_repair_group_012_hash": "sha256:76a4a27c6d217dcfd0fa4a96ea42b1416201b31fdb87af39c4bb32040f7fb9b6",
+        "pre_repair_reconstructed_corpus_hash": "sha256:aa2d946b60694eab96846ed77e885273c807e127f8998981a8cf8ff20ebae647",
+        "expected_pre_repair_corpus_hash": "sha256:aa2d946b60694eab96846ed77e885273c807e127f8998981a8cf8ff20ebae647",
+        "reconstruction_passed": true,
+        "errors": []
       }
     },
     "hash_cascade": {
@@ -76,16 +91,867 @@
       "details": {
         "group_001_hash": "sha256:b1e33767b127856e25095c907b14a40a6f88e6522af0cc1841e9baa3bdeff6d7",
         "group_012_hash": "sha256:90d321501e51df4e1b91aa94997e3470b3d26c2678ca61045ad8c6c63abdc5c0",
-        "corpus_hash": "sha256:f11e98f9bc61b962da0e816fbb918d7f722d3f82c57dfde18a5e323c1b24e9e1"
+        "corpus_hash": "sha256:f11e98f9bc61b962da0e816fbb918d7f722d3f82c57dfde18a5e323c1b24e9e1",
+        "frozen_hashes_match": true,
+        "recomputed_corpus_hash": "sha256:f11e98f9bc61b962da0e816fbb918d7f722d3f82c57dfde18a5e323c1b24e9e1",
+        "corpus_hash_match": true,
+        "group_hashes": [
+          {
+            "group_index": 1,
+            "group_id": "lc4_dw1_dev_group_001",
+            "stored_hash": "sha256:b1e33767b127856e25095c907b14a40a6f88e6522af0cc1841e9baa3bdeff6d7",
+            "recomputed_hash": "sha256:b1e33767b127856e25095c907b14a40a6f88e6522af0cc1841e9baa3bdeff6d7",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 2,
+            "group_id": "lc4_dw1_dev_group_002",
+            "stored_hash": "sha256:92eb14b0d2b31f92f7e292db0acaf383b29c5ba9dda964c2b7b9deda192c430b",
+            "recomputed_hash": "sha256:92eb14b0d2b31f92f7e292db0acaf383b29c5ba9dda964c2b7b9deda192c430b",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 3,
+            "group_id": "lc4_dw1_dev_group_003",
+            "stored_hash": "sha256:18aa023dea95c8eb374dedc6652133dfcdae2ba15f3e888130446e0092f0af25",
+            "recomputed_hash": "sha256:18aa023dea95c8eb374dedc6652133dfcdae2ba15f3e888130446e0092f0af25",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 4,
+            "group_id": "lc4_dw1_dev_group_004",
+            "stored_hash": "sha256:af920860edad642835fb4f1ff2c0f4449320ddf0ea0372871717e541372eee3d",
+            "recomputed_hash": "sha256:af920860edad642835fb4f1ff2c0f4449320ddf0ea0372871717e541372eee3d",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 5,
+            "group_id": "lc4_dw1_dev_group_005",
+            "stored_hash": "sha256:6a7146ea4cbb58bc706a3b3e169ca1a0ab0ec535273f3738c1820ca753d329a7",
+            "recomputed_hash": "sha256:6a7146ea4cbb58bc706a3b3e169ca1a0ab0ec535273f3738c1820ca753d329a7",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 6,
+            "group_id": "lc4_dw1_dev_group_006",
+            "stored_hash": "sha256:9994bb582b31dbf19d0b2bb73804288ead5d1cf1bcb907b147069ece0250dcc6",
+            "recomputed_hash": "sha256:9994bb582b31dbf19d0b2bb73804288ead5d1cf1bcb907b147069ece0250dcc6",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 7,
+            "group_id": "lc4_dw1_dev_group_007",
+            "stored_hash": "sha256:73f126a1964318c86d1f493c558ee1bb5e4c5b5a5870f445f9c146882c59c149",
+            "recomputed_hash": "sha256:73f126a1964318c86d1f493c558ee1bb5e4c5b5a5870f445f9c146882c59c149",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 8,
+            "group_id": "lc4_dw1_dev_group_008",
+            "stored_hash": "sha256:93fa6dc9a883360a124c87777a6f16eb2bd2f511476f539740e6d0bc21b9c2a5",
+            "recomputed_hash": "sha256:93fa6dc9a883360a124c87777a6f16eb2bd2f511476f539740e6d0bc21b9c2a5",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 9,
+            "group_id": "lc4_dw1_dev_group_009",
+            "stored_hash": "sha256:7dc6eeab5f8b7913e6962cd4322d9f6d0d865ce25cc98d667936e82a6bd2b752",
+            "recomputed_hash": "sha256:7dc6eeab5f8b7913e6962cd4322d9f6d0d865ce25cc98d667936e82a6bd2b752",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 10,
+            "group_id": "lc4_dw1_dev_group_010",
+            "stored_hash": "sha256:8292d2f47911bc8a0ca6d54b5779a15e90c7f259adbc961f58eaddf4fe0b3c8e",
+            "recomputed_hash": "sha256:8292d2f47911bc8a0ca6d54b5779a15e90c7f259adbc961f58eaddf4fe0b3c8e",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 11,
+            "group_id": "lc4_dw1_dev_group_011",
+            "stored_hash": "sha256:930fc7096b3a7a9a566d539296e40d93bdf31576eb327af12aa6216f994ced96",
+            "recomputed_hash": "sha256:930fc7096b3a7a9a566d539296e40d93bdf31576eb327af12aa6216f994ced96",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 12,
+            "group_id": "lc4_dw1_dev_group_012",
+            "stored_hash": "sha256:90d321501e51df4e1b91aa94997e3470b3d26c2678ca61045ad8c6c63abdc5c0",
+            "recomputed_hash": "sha256:90d321501e51df4e1b91aa94997e3470b3d26c2678ca61045ad8c6c63abdc5c0",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 13,
+            "group_id": "lc4_dw1_dev_group_013",
+            "stored_hash": "sha256:084fe6112176e51e1f00c471794edf31ad38f2f13d4be399aabad1c5d6d49cbf",
+            "recomputed_hash": "sha256:084fe6112176e51e1f00c471794edf31ad38f2f13d4be399aabad1c5d6d49cbf",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 14,
+            "group_id": "lc4_dw1_dev_group_014",
+            "stored_hash": "sha256:c347b8589fd6f2612a18c27c26e35b2792496ccd418cbf0a6ae8e09643e3c248",
+            "recomputed_hash": "sha256:c347b8589fd6f2612a18c27c26e35b2792496ccd418cbf0a6ae8e09643e3c248",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 15,
+            "group_id": "lc4_dw1_dev_group_015",
+            "stored_hash": "sha256:553d4e17e26f87969a8477fd39bf5883c03e87b7f8aa44f8456a9b2501c774cf",
+            "recomputed_hash": "sha256:553d4e17e26f87969a8477fd39bf5883c03e87b7f8aa44f8456a9b2501c774cf",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 16,
+            "group_id": "lc4_dw1_dev_group_016",
+            "stored_hash": "sha256:5576044343ec30df75747044c1573b3cd811d27a104dbb64d3d0082e48609ca6",
+            "recomputed_hash": "sha256:5576044343ec30df75747044c1573b3cd811d27a104dbb64d3d0082e48609ca6",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 17,
+            "group_id": "lc4_dw1_dev_group_017",
+            "stored_hash": "sha256:be26a6215440257f823001c6ff1692a2d369c572ca21c108221474a1b8dcb67f",
+            "recomputed_hash": "sha256:be26a6215440257f823001c6ff1692a2d369c572ca21c108221474a1b8dcb67f",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 18,
+            "group_id": "lc4_dw1_dev_group_018",
+            "stored_hash": "sha256:38882baea10697cd4dce3dca4064e869ea558345c84314b7451dbde34bee1a2a",
+            "recomputed_hash": "sha256:38882baea10697cd4dce3dca4064e869ea558345c84314b7451dbde34bee1a2a",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 19,
+            "group_id": "lc4_dw1_dev_group_019",
+            "stored_hash": "sha256:4c25a7f202b6241616e0054a52a14f6e0a96e1c96eb5cb06d8f036ca8937f6f8",
+            "recomputed_hash": "sha256:4c25a7f202b6241616e0054a52a14f6e0a96e1c96eb5cb06d8f036ca8937f6f8",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 20,
+            "group_id": "lc4_dw1_dev_group_020",
+            "stored_hash": "sha256:8f402cce9018d177dc20e32902f7866f25414a164de6fd65be32ef5b059e3568",
+            "recomputed_hash": "sha256:8f402cce9018d177dc20e32902f7866f25414a164de6fd65be32ef5b059e3568",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 21,
+            "group_id": "lc4_dw1_dev_group_021",
+            "stored_hash": "sha256:edb98b74f35eaf0d24864a1cd1ca4905d7042cdcbb550da1ebda3b176e909638",
+            "recomputed_hash": "sha256:edb98b74f35eaf0d24864a1cd1ca4905d7042cdcbb550da1ebda3b176e909638",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 22,
+            "group_id": "lc4_dw1_dev_group_022",
+            "stored_hash": "sha256:ed54b795e9df70e78e60fd70699d73ba09a97389c8437bb50e7d17e3820ea5c7",
+            "recomputed_hash": "sha256:ed54b795e9df70e78e60fd70699d73ba09a97389c8437bb50e7d17e3820ea5c7",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 23,
+            "group_id": "lc4_dw1_dev_group_023",
+            "stored_hash": "sha256:ee1072dddc66539e7b1cf6a434e0a8d7b6d1cf35d9b5eabc1a1eb6d845a29c47",
+            "recomputed_hash": "sha256:ee1072dddc66539e7b1cf6a434e0a8d7b6d1cf35d9b5eabc1a1eb6d845a29c47",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 24,
+            "group_id": "lc4_dw1_dev_group_024",
+            "stored_hash": "sha256:02bced0f76781a6032e65f17b07f2ba7e2d6d41058dcd50e28dbf7f67a980865",
+            "recomputed_hash": "sha256:02bced0f76781a6032e65f17b07f2ba7e2d6d41058dcd50e28dbf7f67a980865",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 25,
+            "group_id": "lc4_dw1_dev_group_025",
+            "stored_hash": "sha256:7c10eb9537f8998e48e88ba7f19c3a415dd1616d6084ea4d4329004c9ab3ac9f",
+            "recomputed_hash": "sha256:7c10eb9537f8998e48e88ba7f19c3a415dd1616d6084ea4d4329004c9ab3ac9f",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 26,
+            "group_id": "lc4_dw1_dev_group_026",
+            "stored_hash": "sha256:bab6fb9dfba20a66e3edadd8938e104c0e9a9502adcf2136d68855e9e0e19c91",
+            "recomputed_hash": "sha256:bab6fb9dfba20a66e3edadd8938e104c0e9a9502adcf2136d68855e9e0e19c91",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 27,
+            "group_id": "lc4_dw1_dev_group_027",
+            "stored_hash": "sha256:db8f676a4fae5ae7d9593b4eb08afd06dc5ce4a096ec778a308725d42f0bd11c",
+            "recomputed_hash": "sha256:db8f676a4fae5ae7d9593b4eb08afd06dc5ce4a096ec778a308725d42f0bd11c",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 28,
+            "group_id": "lc4_dw1_dev_group_028",
+            "stored_hash": "sha256:b4cfddbcda7fdd285d267edcdcc16b61f0e5b41a051938c7322d4aee28cf0e91",
+            "recomputed_hash": "sha256:b4cfddbcda7fdd285d267edcdcc16b61f0e5b41a051938c7322d4aee28cf0e91",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 29,
+            "group_id": "lc4_dw1_dev_group_029",
+            "stored_hash": "sha256:da0701c7c85eec23a652bc5b1098743f837d221b01158ba66b7f538db0e1115b",
+            "recomputed_hash": "sha256:da0701c7c85eec23a652bc5b1098743f837d221b01158ba66b7f538db0e1115b",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 30,
+            "group_id": "lc4_dw1_dev_group_030",
+            "stored_hash": "sha256:d474d90d89761293683487be404756f1bbbefeec824fb7ba906babe5c1862e8d",
+            "recomputed_hash": "sha256:d474d90d89761293683487be404756f1bbbefeec824fb7ba906babe5c1862e8d",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 31,
+            "group_id": "lc4_dw1_dev_group_031",
+            "stored_hash": "sha256:f7678c54d95a25a5e893bd72eef223cdfff113b26e5b497acaac440442fca9ce",
+            "recomputed_hash": "sha256:f7678c54d95a25a5e893bd72eef223cdfff113b26e5b497acaac440442fca9ce",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 32,
+            "group_id": "lc4_dw1_dev_group_032",
+            "stored_hash": "sha256:cae4efccb289d7036fa7e93a90c353f001de2c08251e88f9c16507ac3cdabf22",
+            "recomputed_hash": "sha256:cae4efccb289d7036fa7e93a90c353f001de2c08251e88f9c16507ac3cdabf22",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 33,
+            "group_id": "lc4_dw1_dev_group_033",
+            "stored_hash": "sha256:aa07cc147dbcc7eff1099579bd2ff7b6bc323ae436072b09ac984b135a7640dc",
+            "recomputed_hash": "sha256:aa07cc147dbcc7eff1099579bd2ff7b6bc323ae436072b09ac984b135a7640dc",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 34,
+            "group_id": "lc4_dw1_dev_group_034",
+            "stored_hash": "sha256:0c0e254374b435e6ca297e650d796222104a3b65f3ff528bfb4b51d39b51ddf0",
+            "recomputed_hash": "sha256:0c0e254374b435e6ca297e650d796222104a3b65f3ff528bfb4b51d39b51ddf0",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 35,
+            "group_id": "lc4_dw1_dev_group_035",
+            "stored_hash": "sha256:31d10fee0bf03795f1e1e30072d5eb79f0d9d8c7a16aff5b4952ba7a216dafb7",
+            "recomputed_hash": "sha256:31d10fee0bf03795f1e1e30072d5eb79f0d9d8c7a16aff5b4952ba7a216dafb7",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 36,
+            "group_id": "lc4_dw1_dev_group_036",
+            "stored_hash": "sha256:53c2b0b5917bcf4098e74c655abf3e7b1ca64d324ce1937d7174bcae7ff3341e",
+            "recomputed_hash": "sha256:53c2b0b5917bcf4098e74c655abf3e7b1ca64d324ce1937d7174bcae7ff3341e",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 37,
+            "group_id": "lc4_dw1_dev_group_037",
+            "stored_hash": "sha256:b7d3a5355462dfac7730b0cfd09d19fdfde2ef6403418ec33172ae7e9336e794",
+            "recomputed_hash": "sha256:b7d3a5355462dfac7730b0cfd09d19fdfde2ef6403418ec33172ae7e9336e794",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 38,
+            "group_id": "lc4_dw1_dev_group_038",
+            "stored_hash": "sha256:d25c12c93297b86eef6ad6b8546fee7033d97e1aa2a692c682c6f2e9136d4ce2",
+            "recomputed_hash": "sha256:d25c12c93297b86eef6ad6b8546fee7033d97e1aa2a692c682c6f2e9136d4ce2",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 39,
+            "group_id": "lc4_dw1_dev_group_039",
+            "stored_hash": "sha256:25587a8b4d777a3335d07c2dd29fa67bae32f1e951c0ecf2aa534220fd843ad4",
+            "recomputed_hash": "sha256:25587a8b4d777a3335d07c2dd29fa67bae32f1e951c0ecf2aa534220fd843ad4",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 40,
+            "group_id": "lc4_dw1_dev_group_040",
+            "stored_hash": "sha256:68eaa346d41a7d37a18ec9b5546d625e50b7ac82d9f40c6aa6b734f4621dd84b",
+            "recomputed_hash": "sha256:68eaa346d41a7d37a18ec9b5546d625e50b7ac82d9f40c6aa6b734f4621dd84b",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 41,
+            "group_id": "lc4_dw1_dev_group_041",
+            "stored_hash": "sha256:dd9a04554bc5184806851ec4d16a8a0447a1321565b7901b62894560a9f29bf7",
+            "recomputed_hash": "sha256:dd9a04554bc5184806851ec4d16a8a0447a1321565b7901b62894560a9f29bf7",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 42,
+            "group_id": "lc4_dw1_dev_group_042",
+            "stored_hash": "sha256:7611b8e60aa5a5f1f228d9ebce681041999409c414acc6905ad04b785b0d9887",
+            "recomputed_hash": "sha256:7611b8e60aa5a5f1f228d9ebce681041999409c414acc6905ad04b785b0d9887",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 43,
+            "group_id": "lc4_dw1_dev_group_043",
+            "stored_hash": "sha256:e8dd3f75cfb505c96fa29bd4654d5b1e675986ebbd95575c61c80f5e4fce5cec",
+            "recomputed_hash": "sha256:e8dd3f75cfb505c96fa29bd4654d5b1e675986ebbd95575c61c80f5e4fce5cec",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 44,
+            "group_id": "lc4_dw1_dev_group_044",
+            "stored_hash": "sha256:c358c6e7bbb6e402f22127bc74c7c88f5959c7e26d546043d6d82083fd3c3f97",
+            "recomputed_hash": "sha256:c358c6e7bbb6e402f22127bc74c7c88f5959c7e26d546043d6d82083fd3c3f97",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 45,
+            "group_id": "lc4_dw1_dev_group_045",
+            "stored_hash": "sha256:fa4d04a1582d155eab64257aca72544e98622240c12b23a2827623f2543e71be",
+            "recomputed_hash": "sha256:fa4d04a1582d155eab64257aca72544e98622240c12b23a2827623f2543e71be",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 46,
+            "group_id": "lc4_dw1_dev_group_046",
+            "stored_hash": "sha256:60ffd90934e479b12238428ad902da3664089cc7bbbaa280d901074277ed2249",
+            "recomputed_hash": "sha256:60ffd90934e479b12238428ad902da3664089cc7bbbaa280d901074277ed2249",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 47,
+            "group_id": "lc4_dw1_dev_group_047",
+            "stored_hash": "sha256:1ef6a7b397d457b6d0d80d81ba1bd6b7c221a54ba5b6639f310e160b268d8afc",
+            "recomputed_hash": "sha256:1ef6a7b397d457b6d0d80d81ba1bd6b7c221a54ba5b6639f310e160b268d8afc",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 48,
+            "group_id": "lc4_dw1_dev_group_048",
+            "stored_hash": "sha256:20991117458de7420c92c3f221e11c04c10fd1dc9a55a1f8a657e96dfb15cefa",
+            "recomputed_hash": "sha256:20991117458de7420c92c3f221e11c04c10fd1dc9a55a1f8a657e96dfb15cefa",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 49,
+            "group_id": "lc4_dw1_dev_group_049",
+            "stored_hash": "sha256:10ed0110770f61cdadbd9ae8e952192c430346336494bd81a270e7cf47a4bd7f",
+            "recomputed_hash": "sha256:10ed0110770f61cdadbd9ae8e952192c430346336494bd81a270e7cf47a4bd7f",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 50,
+            "group_id": "lc4_dw1_dev_group_050",
+            "stored_hash": "sha256:6ca9ec885f8eeec514837cf37669e9731181abfc0b3d87dee540903393f023f5",
+            "recomputed_hash": "sha256:6ca9ec885f8eeec514837cf37669e9731181abfc0b3d87dee540903393f023f5",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 51,
+            "group_id": "lc4_dw1_dev_group_051",
+            "stored_hash": "sha256:3a9d9510ada2a02e809482b2958b40cb420d1fdb6f9993854dfdfbfce5105b5a",
+            "recomputed_hash": "sha256:3a9d9510ada2a02e809482b2958b40cb420d1fdb6f9993854dfdfbfce5105b5a",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 52,
+            "group_id": "lc4_dw1_dev_group_052",
+            "stored_hash": "sha256:3d74c7175b362c06184a60775bb08c016b4ea0b2c905314f1331012791852bb8",
+            "recomputed_hash": "sha256:3d74c7175b362c06184a60775bb08c016b4ea0b2c905314f1331012791852bb8",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 53,
+            "group_id": "lc4_dw1_dev_group_053",
+            "stored_hash": "sha256:37709f42bfbe33ce5f998bfdcad30d4444d559d700bbc92f97f975130abbcee3",
+            "recomputed_hash": "sha256:37709f42bfbe33ce5f998bfdcad30d4444d559d700bbc92f97f975130abbcee3",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 54,
+            "group_id": "lc4_dw1_dev_group_054",
+            "stored_hash": "sha256:0ec2f07812418e55b66d381bbbeb6fe3917461a4fa3734b96c47a0e6e4a5fab0",
+            "recomputed_hash": "sha256:0ec2f07812418e55b66d381bbbeb6fe3917461a4fa3734b96c47a0e6e4a5fab0",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 55,
+            "group_id": "lc4_dw1_dev_group_055",
+            "stored_hash": "sha256:0ca5dbc9f5386d9bca3d1af1c7fe51792010726f74e353162a1298da820ddb49",
+            "recomputed_hash": "sha256:0ca5dbc9f5386d9bca3d1af1c7fe51792010726f74e353162a1298da820ddb49",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 56,
+            "group_id": "lc4_dw1_dev_group_056",
+            "stored_hash": "sha256:390881b40c154573f9506c4d16f62adbd37647b563028b2777edb95939ccec89",
+            "recomputed_hash": "sha256:390881b40c154573f9506c4d16f62adbd37647b563028b2777edb95939ccec89",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 57,
+            "group_id": "lc4_dw1_dev_group_057",
+            "stored_hash": "sha256:3ea0d521b1915bbfe73914938764171830554258fb4d41a0d09c5e026fdaef6d",
+            "recomputed_hash": "sha256:3ea0d521b1915bbfe73914938764171830554258fb4d41a0d09c5e026fdaef6d",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 58,
+            "group_id": "lc4_dw1_dev_group_058",
+            "stored_hash": "sha256:9787085d53f03e83d535d931d500aef7ab9706b97a19f8e66f70671641cbe667",
+            "recomputed_hash": "sha256:9787085d53f03e83d535d931d500aef7ab9706b97a19f8e66f70671641cbe667",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 59,
+            "group_id": "lc4_dw1_dev_group_059",
+            "stored_hash": "sha256:65928c142950540c920554ee846c5cac3692038d523d9c4863313a491513ccae",
+            "recomputed_hash": "sha256:65928c142950540c920554ee846c5cac3692038d523d9c4863313a491513ccae",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 60,
+            "group_id": "lc4_dw1_dev_group_060",
+            "stored_hash": "sha256:23ce0294f46b419fee896336235c835bc07f2058a620f3f4e5a7b1bc6887ac97",
+            "recomputed_hash": "sha256:23ce0294f46b419fee896336235c835bc07f2058a620f3f4e5a7b1bc6887ac97",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 61,
+            "group_id": "lc4_dw1_dev_group_061",
+            "stored_hash": "sha256:c566d0ed501b457974405019a9526f9dea255d55bfcad3396756940ba734220a",
+            "recomputed_hash": "sha256:c566d0ed501b457974405019a9526f9dea255d55bfcad3396756940ba734220a",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 62,
+            "group_id": "lc4_dw1_dev_group_062",
+            "stored_hash": "sha256:7353d1999779a66200b3a0cf10d50bc22d10de597b6ecbbf5225f4f66b192e0d",
+            "recomputed_hash": "sha256:7353d1999779a66200b3a0cf10d50bc22d10de597b6ecbbf5225f4f66b192e0d",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 63,
+            "group_id": "lc4_dw1_dev_group_063",
+            "stored_hash": "sha256:f947c7da76766493462748bc5417b68c80c9dd7810be71794cf9e2ba1bcc0b20",
+            "recomputed_hash": "sha256:f947c7da76766493462748bc5417b68c80c9dd7810be71794cf9e2ba1bcc0b20",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 64,
+            "group_id": "lc4_dw1_dev_group_064",
+            "stored_hash": "sha256:7a487c7eb4e02777d906d21ec3d540cac80d0b264ae8eb0cc15ac8c31da51952",
+            "recomputed_hash": "sha256:7a487c7eb4e02777d906d21ec3d540cac80d0b264ae8eb0cc15ac8c31da51952",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 65,
+            "group_id": "lc4_dw1_dev_group_065",
+            "stored_hash": "sha256:b75b016ce8b750d021ce858b0dd1d74e6a2218d2a66ed50418e819cb2ab7228f",
+            "recomputed_hash": "sha256:b75b016ce8b750d021ce858b0dd1d74e6a2218d2a66ed50418e819cb2ab7228f",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 66,
+            "group_id": "lc4_dw1_dev_group_066",
+            "stored_hash": "sha256:be3d5d56af0fab646f904cf299c786aa9a050b9303c5078078228f46174c0b0e",
+            "recomputed_hash": "sha256:be3d5d56af0fab646f904cf299c786aa9a050b9303c5078078228f46174c0b0e",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 67,
+            "group_id": "lc4_dw1_dev_group_067",
+            "stored_hash": "sha256:58d21ea6aec6c29d54dd885856b61fd1368c5d930ef2c35f33a6152a58dbec92",
+            "recomputed_hash": "sha256:58d21ea6aec6c29d54dd885856b61fd1368c5d930ef2c35f33a6152a58dbec92",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 68,
+            "group_id": "lc4_dw1_dev_group_068",
+            "stored_hash": "sha256:d88b50341e9fdd4710ad2408a85c417c7a7cec693bcc8eaa0b99063645718646",
+            "recomputed_hash": "sha256:d88b50341e9fdd4710ad2408a85c417c7a7cec693bcc8eaa0b99063645718646",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 69,
+            "group_id": "lc4_dw1_dev_group_069",
+            "stored_hash": "sha256:62a8f14634eddebee8ffe0b8547f786042d804015e4e30e9c9ac1a1e9bd6e813",
+            "recomputed_hash": "sha256:62a8f14634eddebee8ffe0b8547f786042d804015e4e30e9c9ac1a1e9bd6e813",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 70,
+            "group_id": "lc4_dw1_dev_group_070",
+            "stored_hash": "sha256:f3a4d12e94a13f4e89d057fa668345607d1dc5d14c84cc18fb15113f87136a44",
+            "recomputed_hash": "sha256:f3a4d12e94a13f4e89d057fa668345607d1dc5d14c84cc18fb15113f87136a44",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 71,
+            "group_id": "lc4_dw1_dev_group_071",
+            "stored_hash": "sha256:6785f5677df46d5b1677f3c244607a9bfef2321ee7c994e6ae31d1557032693f",
+            "recomputed_hash": "sha256:6785f5677df46d5b1677f3c244607a9bfef2321ee7c994e6ae31d1557032693f",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 72,
+            "group_id": "lc4_dw1_dev_group_072",
+            "stored_hash": "sha256:95bedd315873f2663f3a5da978e2b1dca6b64dc4e33b4726e7693e338c8ae864",
+            "recomputed_hash": "sha256:95bedd315873f2663f3a5da978e2b1dca6b64dc4e33b4726e7693e338c8ae864",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 73,
+            "group_id": "lc4_dw1_dev_group_073",
+            "stored_hash": "sha256:ea412fe0c7c3d6d4464af10c0eaee0de94a70f35578675447fe46dd9b4a41953",
+            "recomputed_hash": "sha256:ea412fe0c7c3d6d4464af10c0eaee0de94a70f35578675447fe46dd9b4a41953",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 74,
+            "group_id": "lc4_dw1_dev_group_074",
+            "stored_hash": "sha256:f566d18cc2fbe08c56a876f08a93a0f4dd9326dc4b06a51ee22b74c3a245f42b",
+            "recomputed_hash": "sha256:f566d18cc2fbe08c56a876f08a93a0f4dd9326dc4b06a51ee22b74c3a245f42b",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 75,
+            "group_id": "lc4_dw1_dev_group_075",
+            "stored_hash": "sha256:df6c48601f2fbb8e3f2800601a5222321b3537def7f579582cd11723d5feaedb",
+            "recomputed_hash": "sha256:df6c48601f2fbb8e3f2800601a5222321b3537def7f579582cd11723d5feaedb",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 76,
+            "group_id": "lc4_dw1_dev_group_076",
+            "stored_hash": "sha256:4368ffedf20eb49d16ffd292520243e092aa5362e371dca269c1e21bea15a77c",
+            "recomputed_hash": "sha256:4368ffedf20eb49d16ffd292520243e092aa5362e371dca269c1e21bea15a77c",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 77,
+            "group_id": "lc4_dw1_dev_group_077",
+            "stored_hash": "sha256:d25e2854c40dd850a4fe51dbcb5999889f5d9dbfc4e60aafd6c9d5591a62b871",
+            "recomputed_hash": "sha256:d25e2854c40dd850a4fe51dbcb5999889f5d9dbfc4e60aafd6c9d5591a62b871",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 78,
+            "group_id": "lc4_dw1_dev_group_078",
+            "stored_hash": "sha256:fcc9d1d52027c86f93ad9f55c6f0b89fbf8eecf79a558ea58d9ea01c41d52964",
+            "recomputed_hash": "sha256:fcc9d1d52027c86f93ad9f55c6f0b89fbf8eecf79a558ea58d9ea01c41d52964",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 79,
+            "group_id": "lc4_dw1_dev_group_079",
+            "stored_hash": "sha256:2ca0d380f216fab23de36b3f1b4a11dfca6505560595b21ea30a9696618a01c0",
+            "recomputed_hash": "sha256:2ca0d380f216fab23de36b3f1b4a11dfca6505560595b21ea30a9696618a01c0",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 80,
+            "group_id": "lc4_dw1_dev_group_080",
+            "stored_hash": "sha256:327879ca406ca728947b27e35f0ca6f3db05295b75cd15cd5c361ad4689ce066",
+            "recomputed_hash": "sha256:327879ca406ca728947b27e35f0ca6f3db05295b75cd15cd5c361ad4689ce066",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 81,
+            "group_id": "lc4_dw1_dev_group_081",
+            "stored_hash": "sha256:0fc7e771e1a32b5f3d61620d116cd69dba815a5d8f5058175b9c617f3a8ead95",
+            "recomputed_hash": "sha256:0fc7e771e1a32b5f3d61620d116cd69dba815a5d8f5058175b9c617f3a8ead95",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 82,
+            "group_id": "lc4_dw1_dev_group_082",
+            "stored_hash": "sha256:8330ff4fc75585900eba7cdd0918f01bdeab9055ca2b21ea252e340d72bb697e",
+            "recomputed_hash": "sha256:8330ff4fc75585900eba7cdd0918f01bdeab9055ca2b21ea252e340d72bb697e",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 83,
+            "group_id": "lc4_dw1_dev_group_083",
+            "stored_hash": "sha256:9dc6373477f69751cba4bfccd72e394265e351d1b18a4d7761a7264c6f4f4389",
+            "recomputed_hash": "sha256:9dc6373477f69751cba4bfccd72e394265e351d1b18a4d7761a7264c6f4f4389",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 84,
+            "group_id": "lc4_dw1_dev_group_084",
+            "stored_hash": "sha256:9ccb547cde5228ca4444831279613e029e510c43bcec850b927848f8e367daee",
+            "recomputed_hash": "sha256:9ccb547cde5228ca4444831279613e029e510c43bcec850b927848f8e367daee",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 85,
+            "group_id": "lc4_dw1_dev_group_085",
+            "stored_hash": "sha256:0fe910b22fc96c981a795247ee7298b7fd4befbc0eb07bc0a5d731843affe82c",
+            "recomputed_hash": "sha256:0fe910b22fc96c981a795247ee7298b7fd4befbc0eb07bc0a5d731843affe82c",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 86,
+            "group_id": "lc4_dw1_dev_group_086",
+            "stored_hash": "sha256:7191d9b5da8bbd712f426510487027bd003483d79ef36bc066323a08ca25744b",
+            "recomputed_hash": "sha256:7191d9b5da8bbd712f426510487027bd003483d79ef36bc066323a08ca25744b",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 87,
+            "group_id": "lc4_dw1_dev_group_087",
+            "stored_hash": "sha256:386ea8ee55c8e73e62752a157ba18ba99bb988292b500d4c7145c0e494f72124",
+            "recomputed_hash": "sha256:386ea8ee55c8e73e62752a157ba18ba99bb988292b500d4c7145c0e494f72124",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 88,
+            "group_id": "lc4_dw1_dev_group_088",
+            "stored_hash": "sha256:d6d310a61693464adf7ed90ab85ec8040ef5f0b629445a3e036375c5c0696cd6",
+            "recomputed_hash": "sha256:d6d310a61693464adf7ed90ab85ec8040ef5f0b629445a3e036375c5c0696cd6",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 89,
+            "group_id": "lc4_dw1_dev_group_089",
+            "stored_hash": "sha256:98abe6e8e2fc0ffdecae5e98450f7c77bf4151b8a645c8d3286bb6eab5be4846",
+            "recomputed_hash": "sha256:98abe6e8e2fc0ffdecae5e98450f7c77bf4151b8a645c8d3286bb6eab5be4846",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 90,
+            "group_id": "lc4_dw1_dev_group_090",
+            "stored_hash": "sha256:fd71aadf31eb2039b87f9f3d5799202daa984808f15f34a02f8c3a17c9cc9463",
+            "recomputed_hash": "sha256:fd71aadf31eb2039b87f9f3d5799202daa984808f15f34a02f8c3a17c9cc9463",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 91,
+            "group_id": "lc4_dw1_dev_group_091",
+            "stored_hash": "sha256:abead7fec2d346d1500f3002486344d5c9984cfd86aa07c4c6a66322eba3db83",
+            "recomputed_hash": "sha256:abead7fec2d346d1500f3002486344d5c9984cfd86aa07c4c6a66322eba3db83",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 92,
+            "group_id": "lc4_dw1_dev_group_092",
+            "stored_hash": "sha256:e4c99b2eb8124dca2a93c5933d3a9d64fa4c0301f80838558081830c10f993c3",
+            "recomputed_hash": "sha256:e4c99b2eb8124dca2a93c5933d3a9d64fa4c0301f80838558081830c10f993c3",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 93,
+            "group_id": "lc4_dw1_dev_group_093",
+            "stored_hash": "sha256:86c5c2bf3adc6978a75b9d6847992f2c948402dff8f678ff370ac76cf2de7935",
+            "recomputed_hash": "sha256:86c5c2bf3adc6978a75b9d6847992f2c948402dff8f678ff370ac76cf2de7935",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 94,
+            "group_id": "lc4_dw1_dev_group_094",
+            "stored_hash": "sha256:a22eda2c5b13114761dd75002e2f9c5aa18762287b865578178e094f7e87d78d",
+            "recomputed_hash": "sha256:a22eda2c5b13114761dd75002e2f9c5aa18762287b865578178e094f7e87d78d",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 95,
+            "group_id": "lc4_dw1_dev_group_095",
+            "stored_hash": "sha256:eb5620d3f788ee6738a095ef9de554ba3771c79d6d52c4fe03ed2789f83315f9",
+            "recomputed_hash": "sha256:eb5620d3f788ee6738a095ef9de554ba3771c79d6d52c4fe03ed2789f83315f9",
+            "match": true,
+            "variant_hash_errors": []
+          },
+          {
+            "group_index": 96,
+            "group_id": "lc4_dw1_dev_group_096",
+            "stored_hash": "sha256:11c6294361612c2b02d0cd815fe408ff1487dc14b8e81b992bdbc9eb4098b005",
+            "recomputed_hash": "sha256:11c6294361612c2b02d0cd815fe408ff1487dc14b8e81b992bdbc9eb4098b005",
+            "match": true,
+            "variant_hash_errors": []
+          }
+        ],
+        "errors": []
       }
     },
-    "composed_result": {
-      "check": "composed_result",
+    "composed_evaluator": {
+      "check": "composed_evaluator",
       "passed": true,
       "details": {
-        "passed_count": 11,
-        "failed_count": 0,
-        "failed": []
+        "selected_scenario_count": 11,
+        "composed_passed_count": 11,
+        "composed_failed_count": 0,
+        "composed_failed": []
+      }
+    },
+    "semantic_safety_baseline": {
+      "check": "semantic_safety_baseline",
+      "passed": true,
+      "details": {
+        "total_samples": 2304,
+        "semantic_counts": {
+          "intended_action_pass": 1760,
+          "action_semantics_pass": 1628,
+          "temporal_relation_pass": 1256,
+          "normalized_values_pass": 202,
+          "entity_semantics_pass": 600,
+          "clarification_pass": 1564,
+          "expected": [
+            880,
+            814,
+            628,
+            101,
+            300,
+            782
+          ],
+          "match": true
+        },
+        "safety": {
+          "per_repeat_passed": [
+            1152,
+            1152
+          ],
+          "expected_per_repeat_passed": [
+            1152,
+            1152
+          ],
+          "total_passed": 2304,
+          "total_samples": 2304,
+          "match": true
+        },
+        "variance": {
+          "variant_scenario_count": 0,
+          "variant_sample_count": 0,
+          "total_samples": 2304,
+          "expected_zero_variance": true,
+          "expected_samples": 2304,
+          "match": true
+        }
+      }
+    },
+    "exit_evidence": {
+      "check": "exit_evidence",
+      "passed": true,
+      "details": {
+        "exit_counts": {
+          "generator_repair_authorized": 0,
+          "clarification_blockers": 53,
+          "replay_contract_reconciliation_blockers": 40
+        },
+        "expected_counts": {
+          "generator_repair_authorized": 0,
+          "clarification_blockers": 53,
+          "replay_contract_reconciliation_blockers": 40
+        },
+        "counts_match": true,
+        "selection_hashes": {
+          "clarification": "9496e23c6f339603",
+          "replay_all": "2e45f30f714568ef",
+          "repaired": "b88018991e49ffd5",
+          "remaining_replay": "defe4c59877753e9"
+        },
+        "repair_failures": [],
+        "remaining_replay_unexpected_passes": [],
+        "clarification_unblocked": [],
+        "selection_errors": [],
+        "clarification_blocker_count": 53,
+        "replay_blocker_count": 40,
+        "total_scenarios": 1152,
+        "exit_status": "blocked_pending_contract_reconciliation"
       }
     }
   },

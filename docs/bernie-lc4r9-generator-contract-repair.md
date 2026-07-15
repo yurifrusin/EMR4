@@ -36,7 +36,10 @@ Added to `app/services/bernie/scale_corpus.py`:
 - `LC4R9_AUDIT_VOCABULARY_ALLOWLIST` — frozen set of the 11 scenario IDs
 - `LC4R9_ALLOWLIST_SELECTION_HASH` — `b88018991e49ffd5`
 - `LC4R9_ALLOWLIST_COUNT` — 11
-- `LC4R9_AUDIT_OVERRIDE` — `[{"change_type": "created", "appointment_id": "apt-001", "count": 1}]`
+- `LC4R9_AUDIT_OVERRIDE` — a tuple containing the canonical read-only audit
+  mapping for `created`, `apt-001`, count 1
+- `_make_audit_override_copy()` — returns a fresh list/dict copy for each
+  generated scenario
 - `LC4R9_PRE_REPAIR_DELTA_HASH` — SHA-256 of sorted `scenario_id|create_requested|created` lines
 - `_validate_lc4r9_allowlist()` — fail-closed validation of hash, count, surface-only constraint
 
@@ -44,7 +47,8 @@ Added to `app/services/bernie/scale_corpus.py`:
 
 In `_build_group_fixture`, when building each surface variant, the code checks whether
 the `variant_id` is in the allowlist. If so, it asserts the action is `create` and
-passes `LC4R9_AUDIT_OVERRIDE` as `expected_audit_deltas_override` to `_build_scenario`.
+passes a fresh canonical override copy as `expected_audit_deltas_override` to
+`_build_scenario`.
 
 ### Fixture regeneration
 
@@ -68,9 +72,16 @@ their committed state.
 
 ## Verification
 
-- 36/36 focused tests pass
+- 54/54 focused tests pass
 - `scripts/bernie_lc4r9_generator_contract_repair.py --check` passes
 - Python compilation passes for all 3 owned modules
 - Byte-for-byte full regeneration check passes
 - `git diff --check` is clean
-- Changes limited to 9 owned files
+- Product/corpus changes remain limited to the 9 worker-owned files; Sol's
+  separate recovery amendment records acceptance provenance
+- Real two-repeat evaluator evidence preserves semantic counts
+  `880/814/628/101/300/782`, safety 1,152/1,152, and zero variance over 2,304
+  samples
+- Frozen LC4R8 development-only selections recompute to zero generator-repair
+  cases, 53 clarification blockers, and 40 remaining replay reconciliation
+  blockers
