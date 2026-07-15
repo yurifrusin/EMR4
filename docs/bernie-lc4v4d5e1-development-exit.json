@@ -1,0 +1,39 @@
+{
+  "schema_version": "lc4v4d5e1.development_exit.v1",
+  "source_commit": "e411a91164fe11574a527d94427ce1e4a48b5d62",
+  "input_report_hashes": {
+    "d4": "sha256:dd1ecc077a59bf05e777eda1f3a5450c0a1b97a4c8a3fd21dc0363d473abd653",
+    "d5": "sha256:e2c461ee3b1821c94574b33693efa88d21b99ecf9a95b1ac723b24a933c50564",
+    "d5r1": "sha256:0cb444d1aeba82a80f5a16170b30b8ea203842dec4af81b768a688e5aae9bcdf"
+  },
+  "development_taxonomy": {
+    "legacy_equivalent": 37,
+    "accepted_d4_versioned_change": 20,
+    "expected_versioned_relation": 3,
+    "remaining_blockers": 0
+  },
+  "gates": {
+    "d4_hash_valid": true,
+    "d4_schema_and_decision_exact": true,
+    "d4_all_13_gates_pass": true,
+    "d4_categories_complete": true,
+    "d5_hash_valid": true,
+    "d5_schema_and_decision_exact": true,
+    "d5_all_27_gates_pass": true,
+    "d5_diagnostic_taxonomy_exact": true,
+    "d5r1_hash_valid": true,
+    "d5r1_schema_and_decision_exact": true,
+    "d5r1_all_28_gates_pass": true,
+    "d5r1_taxonomy_exact": true,
+    "d5r1_empty_blocker_selection": true,
+    "d5r1_zero_forbidden_observations": true,
+    "legacy_and_d4_chain_unchanged": true,
+    "d5r1_acceptance_exact": true,
+    "legacy_default_option_a_explicit": true
+  },
+  "recommendation": "authorize_genuinely_fresh_certification_holdout",
+  "requires_user_decision": true,
+  "certification_claimed": false,
+  "report_hash": "sha256:435920eb93c4e5b0afd84768d41014a16ae7e1888660afb090809aa9cbab3b00",
+  "decision": "development_exit_valid_holdout_decision_required"
+}

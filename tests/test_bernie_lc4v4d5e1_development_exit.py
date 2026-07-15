@@ -15,7 +15,17 @@ from app.services.bernie.lc4v4d5e1_development_exit import (
     EXPECTED_D4_HASH,
     EXPECTED_D5_HASH,
     EXPECTED_D5R1_HASH,
+    generate_report_json,
+    generate_report_markdown,
     run_d5e1_exit,
+)
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+JSON_REPORT = ROOT / "docs" / "bernie-lc4v4d5e1-development-exit.json"
+MARKDOWN_REPORT = ROOT / "docs" / "bernie-lc4v4d5e1-development-exit.md"
+SOURCE_COMMIT = "e411a91164fe11574a527d94427ce1e4a48b5d62"
+EXPECTED_REPORT_HASH = (
+    "sha256:435920eb93c4e5b0afd84768d41014a16ae7e1888660afb090809aa9cbab3b00"
 )
 
 
@@ -48,6 +58,13 @@ def test_report_is_deterministic() -> None:
     first = run_d5e1_exit("test-source")
     second = run_d5e1_exit("test-source")
     assert first == second
+
+
+def test_committed_report_matches_source() -> None:
+    report = run_d5e1_exit(SOURCE_COMMIT)
+    assert report["report_hash"] == EXPECTED_REPORT_HASH
+    assert JSON_REPORT.read_text(encoding="utf-8") == generate_report_json(report)
+    assert MARKDOWN_REPORT.read_text(encoding="utf-8") == generate_report_markdown(report)
 
 
 @pytest.mark.parametrize(
