@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V3 genuinely fresh certification holdout; content-blind framework stage |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v3-sol-contract.md` |
-| Current result | Yuri authorized fresh holdout v3 after `no_r3_authorized`; no v3 content exists; holdouts v1 and v2 remain sealed |
-| Next implementation | Build and independently review the content-blind LC4V3 framework before Sol authors any protected v3 content |
+| Active product track | LC4V3 genuinely fresh certification holdout; Sol-only content authorship stage |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v3-sol-contract.md` and `orchestration/agent_inbox/codex/lc4v3-one-shot-acceptance-rule.md` |
+| Current result | Recovered content-blind framework passed Gemini veto on `170b44ab`; no v3 content exists yet; holdouts v1 and v2 remain sealed |
+| Next implementation | Freeze the pre-result acceptance rule, close external sessions, then Sol alone authors and freezes the 24-group v3 corpus before its single aggregate run |
 
 ### LC4R10 accepted state
 
@@ -181,6 +181,15 @@ Holdouts v1 and v2 remain sealed and unavailable. No LC4V3 content exists yet.
 T3.1-T3.4 remain blocked by default; T3.5/live models remain a separate Yuri
 decision. The active contract is
 `orchestration/agent_inbox/codex/lc4v3-sol-contract.md`.
+
+DeepSeek Flash's content-blind candidate at `7392b951` was rejected for
+fail-open scenario, seal, and report validation. Sol recovered it under the
+lease without a correction loop. The recovered framework passes 56 focused
+and 188 ordinary selected tests. Gemini 3.5 Flash/medium returned
+`DECISION: pass` on exact recovered head `170b44ab` before any real v3 content
+existed. External model sessions are closed. Product thresholds are frozen in
+`orchestration/agent_inbox/codex/lc4v3-one-shot-acceptance-rule.md` before
+Sol-only authorship begins.
 
 ## 4. Authority Allocation
 

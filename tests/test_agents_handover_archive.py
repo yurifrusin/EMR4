@@ -67,6 +67,9 @@ def test_compact_live_handover_retains_required_authority_and_boundaries() -> No
         "lc4v2e1-sol-acceptance.md",
         "no_r3_authorized",
         "lc4v3-sol-contract.md",
+        "lc4v3-one-shot-acceptance-rule.md",
+        "7392b951",
+        "170b44ab",
         "no v3 content exists",
         "complete `0/576`",
     ]:
