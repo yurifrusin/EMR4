@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V4D3 diagnostic decision boundary over the exact 20 policy/state-join cases |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v4d3-sol-diagnostic-contract.md` and `docs/bernie-lc4v4d3-policy-decision-surface.md` |
-| Current result | LC4V4D2 is accepted and published at aligned ref `52bca079`. D3 partitions the remaining 20 policy gaps (selection hash `d3c6618c...`) into 14 narrow corrections and six material contract conflicts: one practitioner-less create expectation and five cases that mix utterance semantics with diary-state disagreement. A pre-plan broad search exposed generic lines from a protected support module; it is documented, supplies no evidence, and grants no reuse authority |
-| Next implementation | Paused for Yuri's required material clarification-policy/product decision. Sol recommends Option A: omitted practitioner clarifies, diary conflicts use a separate state relation, and unsafe bypass demands refuse before tools. After approval, freeze a separate D3 implementation contract, use one bounded Flash lane plus Gemini veto, and keep parser, holdouts, T3/providers, and live/write authority closed |
+| Active product track | LC4V4D3 approved Option A policy-resolution implementation over the exact 20 cases |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v4d3-sol-implementation-contract.md` and `docs/bernie-lc4v4d3-option-a-decision.md` |
+| Current result | Yuri approved strict separated semantics: omitted practitioner clarifies, diary conflicts use a separate state relation, and unsafe bypass demands refuse before tools. D3 retains the exact selection hash `d3c6618c...` and versions six incompatible D1 expectations rather than forcing them green. The pre-plan protected-support search incident remains documented, supplies no evidence, and grants no reuse authority |
+| Next implementation | Dispatch one bounded DeepSeek V4 Flash/high lane through Claude Code `--bare` for the versioned policy layer, D3 evidence, and focused tests. Sol then accepts/recovers, runs serial preservation, and obtains a fresh Gemini exact-head veto. Keep accepted D2 utterance semantics, frozen D1/D2 reports, holdouts, T3/providers, and live/write authority unchanged |
 
 LC4V4 provenance: the frozen pre-content records remain
 `lc4v4q1-sol-contract.md`, `lc4v4q1-sol-recovery-amendment.md`,
