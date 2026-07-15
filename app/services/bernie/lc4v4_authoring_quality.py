@@ -1,51 +1,68 @@
-"""Content-blind authoring quality gate for LC4V4.
+"""Independent, content-blind authoring-quality gate for LC4V4.
 
-This module is a frozen, provider-free validator for rendered scenario surfaces.
-It must not import or execute the production parser, composed evaluator, replay,
-scenario fixtures, providers, or runtime.
-
-The validator checks:
-- each rendered turn equals ``prefix + core + suffix`` byte-for-byte;
-- every case-sensitive authority token appears byte-identically at its stated
-  coordinates, including proper-name case;
-- every source span matches the rendered source exactly;
-- duplicate, overlapping, out-of-range, missing, or empty authority spans are
-  rejected where the field contract requires one;
-- ``exact`` and ``corrected`` entity semantics carry case-preserved evidence;
-- ``omitted``, ``ambiguous``, ``negated``, and ``mismatched`` semantics use
-  explicit relation assertions rather than silently claiming exact evidence;
-- expected tools, outcome, deltas, and authority are independently derived from
-  canonical facts through a frozen local policy table (not copied from parser);
-- JSON bytes are UTF-8/LF deterministic and hash-stable.
-
-No provider, route, database, UI, runtime, wall-clock, production parser,
-composed evaluator, or protected-holdout dependency exists.
+The gate validates authored semantic facts and rendered evidence before a
+certification corpus may be sealed.  It deliberately does not import or call
+the production interpreter, replay, scorer, providers, routes, storage, or any
+holdout implementation.
 """
 
 from __future__ import annotations
 
 import hashlib
 import json
-from dataclasses import dataclass, field
-from typing import Any, Literal
+import re
+from dataclasses import asdict, dataclass
+from typing import Any, Literal, Mapping, Sequence
 
-# ---------------------------------------------------------------------------
-# Typed records
-# ---------------------------------------------------------------------------
+
+AUTHORING_RECEIPT_SCHEMA = "lc4v4.authoring_quality_receipt.v1"
+REQUIRED_RECEIPT_CATEGORIES = frozenset({
+    "turn_index_population",
+    "rendered_text_composition",
+    "canonical_core_preservation",
+    "language_form_vocabulary",
+    "authority_token_duplicate",
+    "authority_span_range",
+    "authority_token_inside_core",
+    "authority_token_value",
+    "source_span_value",
+    "authority_span_overlap",
+    "required_authority_evidence",
+    "entity_relation_evidence",
+    "policy_derivation",
+    "scenario_population",
+    "scenario_identity",
+    "distinct_coverage_cells",
+    "category_completeness",
+})
+REQUIRED_CATEGORY_MIN_TOTALS: dict[str, int] = {
+    "turn_index_population": 288,
+    "rendered_text_composition": 360,
+    "canonical_core_preservation": 360,
+    "language_form_vocabulary": 360,
+    "authority_token_duplicate": 288,
+    "authority_span_range": 288,
+    "authority_token_inside_core": 288,
+    "authority_token_value": 288,
+    "source_span_value": 288,
+    "authority_span_overlap": 288,
+    "required_authority_evidence": 288,
+    "entity_relation_evidence": 1440,
+    "policy_derivation": 3744,
+    "scenario_population": 1,
+    "scenario_identity": 1,
+    "distinct_coverage_cells": 1,
+    "category_completeness": 7,
+}
 
 EntityRelation = Literal[
-    "exact",
-    "corrected",
-    "omitted",
-    "ambiguous",
-    "negated",
-    "mismatched",
+    "exact", "corrected", "omitted", "ambiguous", "negated", "mismatched"
 ]
 
 
 @dataclass(frozen=True)
 class AuthorityToken:
-    """One authority-bearing evidence token in a rendered surface."""
+    """One authority-bearing token at exact coordinates in a rendered turn."""
 
     field_name: str
     canonical_text: str
@@ -58,26 +75,20 @@ class AuthorityToken:
 
 @dataclass(frozen=True)
 class RenderedTurn:
-    """One rendered turn split into prefix, core, and suffix."""
+    """A rendered turn with independent canonical and rendered core values."""
 
+    turn_index: int
     prefix: str
-    core: str
+    canonical_core: str
+    rendered_core: str
     suffix: str
-    language_form: str | None = None
-
-    @property
-    def full_text(self) -> str:
-        """Byte-for-byte concatenation of prefix + core + suffix."""
-        return self.prefix + self.core + self.suffix
+    rendered_text: str
+    language_form: str
 
 
 @dataclass(frozen=True)
 class CanonicalFactBundle:
-    """Canonical semantic facts for one scenario surface.
-
-    This is the input to the authoring quality validator.  It is constructed
-    from frozen adjudicated facts, never from production parser output.
-    """
+    """Adjudicated semantic facts, never a production-parser observation."""
 
     scenario_id: str
     intended_action: str
@@ -87,20 +98,13 @@ class CanonicalFactBundle:
     entity_relations: dict[str, EntityRelation]
     requires_clarification: bool
     clarification_choices: tuple[str, ...]
-    selected_tool_sequence: tuple[str, ...]
-    authority_claim: str | None
-    claims_action_completed: bool
     action_negated: bool
     diary_state: str
 
 
 @dataclass(frozen=True)
 class ExpectedScenarioContract:
-    """Expected scenario contract independently derived from canonical facts.
-
-    All fields are derived through a frozen local policy table, never copied
-    from production parser observations.
-    """
+    """Expected contract independently derived from canonical facts."""
 
     intended_action: str
     action_semantics: str
@@ -111,169 +115,15 @@ class ExpectedScenarioContract:
     clarification_choices: tuple[str, ...]
     expected_tool_sequence: tuple[str, ...]
     expected_outcome_kind: str | None
-    expected_authority: str | None
+    expected_authority: str
     expected_appointment_deltas: tuple[dict[str, Any], ...]
     expected_audit_deltas: tuple[dict[str, Any], ...]
     diary_state: str
 
 
-# ---------------------------------------------------------------------------
-# Frozen policy table – independently derives expected values from canonical
-# facts without reference to production parser or scenario fixtures.
-# This is the single source of truth for expected contracts in this module.
-# ---------------------------------------------------------------------------
-
-
-def _derive_expected_outcome(facts: CanonicalFactBundle) -> str | None:
-    """Independently derive expected outcome from canonical facts."""
-    if facts.action_semantics == "prohibited":
-        return "instruction_refused"
-    if facts.requires_clarification:
-        return "clarification_required"
-    if facts.action_negated:
-        return None
-    intended = facts.intended_action
-    diary = facts.diary_state
-    if intended == "explain_schedule":
-        return "schedule_explained"
-    if intended == "create":
-        if diary in ("empty", "same_day_distinct", "terminal"):
-            return "appointment_created"
-        if diary == "exact_duplicate":
-            return "existing_booking_found"
-        if diary == "overlap":
-            return "candidate_selection_required"
-        return None
-    _UNCERTAIN = frozenset({
-        "terminal", "stale", "concurrent", "no_slots",
-        "roster_absent", "break", "elapsed_window",
-    })
-    if diary in _UNCERTAIN:
-        return None
-    action_map = {
-        "move": "appointment_moved",
-        "resize": "appointment_resized",
-        "cancel": "appointment_cancelled",
-        "status_change": "appointment_status_changed",
-    }
-    return action_map.get(intended, None)
-
-
-def _derive_expected_tools(facts: CanonicalFactBundle) -> tuple[str, ...]:
-    """Independently derive expected tool sequence from canonical facts."""
-    tools: list[str] = []
-    for t in facts.selected_tool_sequence:
-        if t not in tools:
-            tools.append(t)
-    return tuple(tools)
-
-
-def _derive_expected_authority(facts: CanonicalFactBundle) -> str | None:
-    """Independently derive expected authority posture from canonical facts."""
-    if facts.action_semantics == "prohibited":
-        return "refuse"
-    if facts.action_semantics == "ambiguous" or facts.requires_clarification:
-        return "clarify"
-    return "read"
-
-
-def _derive_expected_deltas(
-    facts: CanonicalFactBundle,
-    outcome: str | None,
-) -> tuple[tuple[dict[str, Any], ...], tuple[dict[str, Any], ...]]:
-    """Independently derive expected appointment/audit deltas.
-
-    Only mutation outcomes produce deltas.  Refusal, negation,
-    clarification, and non-mutation outcomes produce none.
-    """
-    if outcome is None or facts.action_negated:
-        return (), ()
-    if outcome == "instruction_refused":
-        return (), ()
-    if outcome == "clarification_required":
-        return (), ()
-    if outcome == "schedule_explained":
-        return (), ()
-    if outcome == "candidate_selection_required":
-        return (), ()
-
-    change_map = {
-        "appointment_created": "created",
-        "existing_booking_found": "created",
-        "appointment_moved": "moved",
-        "appointment_resized": "resized",
-        "appointment_cancelled": "cancelled",
-        "appointment_status_changed": "status_changed",
-    }
-    change_type = change_map.get(outcome, "")
-    if not change_type:
-        return (), ()
-
-    vals = facts.normalized_values
-    apt = {
-        "appointment_id": "apt-001",
-        "change_type": change_type,
-        "patient_id": "p-001",
-        "practitioner_id": "pr-001",
-        "date": vals.get("appointment_date", ""),
-        "start_time": vals.get("earliest_time", ""),
-        "duration_minutes": vals.get("duration_minutes", 15),
-    }
-    aud = {
-        "change_type": change_type,
-        "appointment_id": "apt-001",
-        "count": 1,
-    }
-    return (apt,), (aud,)
-
-
-def derive_expected_contract(facts: CanonicalFactBundle) -> ExpectedScenarioContract:
-    """Derive the expected scenario contract from canonical facts.
-
-    This function is the single entry point for the frozen policy table.
-    It must not import or call any production parser, composed evaluator,
-    replay, scenario fixture, provider, or runtime module.
-
-    Parameters
-    ----------
-    facts :
-        The canonical fact bundle for one scenario.
-
-    Returns
-    -------
-    ExpectedScenarioContract
-        The expected contract with all fields independently derived.
-    """
-    outcome = _derive_expected_outcome(facts)
-    tools = _derive_expected_tools(facts)
-    authority = _derive_expected_authority(facts)
-    apt_deltas, aud_deltas = _derive_expected_deltas(facts, outcome)
-
-    return ExpectedScenarioContract(
-        intended_action=facts.intended_action,
-        action_semantics=facts.action_semantics,
-        temporal_relation=facts.temporal_relation,
-        normalized_values=dict(facts.normalized_values),
-        entity_relations=dict(facts.entity_relations),
-        requires_clarification=facts.requires_clarification,
-        clarification_choices=facts.clarification_choices,
-        expected_tool_sequence=tools,
-        expected_outcome_kind=outcome,
-        expected_authority=authority,
-        expected_appointment_deltas=apt_deltas,
-        expected_audit_deltas=aud_deltas,
-        diary_state=facts.diary_state,
-    )
-
-
-# ---------------------------------------------------------------------------
-# Validator
-# ---------------------------------------------------------------------------
-
-
 @dataclass(frozen=True)
 class AuthoringQualityFinding:
-    """One finding from the authoring quality check."""
+    """Internal pre-receipt finding. Detail is never emitted in the receipt."""
 
     category: str
     passed: bool
@@ -282,207 +132,321 @@ class AuthoringQualityFinding:
 
 @dataclass(frozen=True)
 class AuthoringQualityReceipt:
-    """Aggregate authoring-quality receipt.
+    """Aggregate-only, hash-bound authoring-quality receipt."""
 
-    Contains no utterances, tokens, source spans, scenario IDs,
-    expected values, or case findings.
-    """
-
+    schema_version: str
     total_checks: int
     passed_checks: int
     failed_checks: int
-    findings: tuple[AuthoringQualityFinding, ...] = ()
-    total_surfaces_validated: int = 0
-    surfaces_passed: int = 0
-    surfaces_failed: int = 0
+    total_surfaces_validated: int
+    surfaces_passed: int
+    surfaces_failed: int
+    distinct_coverage_cells: int
+    category_totals: dict[str, dict[str, int]]
+    all_passed: bool
+    receipt_hash: str
 
-    @property
-    def all_passed(self) -> bool:
-        return self.failed_checks == 0
+
+_ACTIONS = {
+    "create", "move", "resize", "cancel", "status_change", "explain_schedule"
+}
+_DIARY_STATES = {
+    "empty", "exact_duplicate", "overlap", "same_day_distinct", "terminal",
+    "stale", "concurrent", "roster_absent", "break", "no_slots",
+    "elapsed_window",
+}
+_ENTITY_RELATIONS = {
+    "exact", "corrected", "omitted", "ambiguous", "negated", "mismatched"
+}
+_TEMPORAL_RELATIONS = {
+    "exact", "not_before", "not_after", "interval", "approximate", "unspecified"
+}
+_DIALOGUE_FORMS = {
+    "one_shot", "clarification", "correction", "reversal", "ellipsis",
+    "anaphora", "repeated", "session_restart",
+}
+_LANGUAGE_FORMS = {
+    "plain", "paraphrase", "filler", "abbreviation", "typo", "speech_like",
+    "punctuation_variant", "adversarial",
+}
+_ENTITY_FIELDS = {
+    "patient", "practitioner", "location", "appointment_type", "duration"
+}
+
+LATTICE_VOCABULARIES: dict[str, set[str]] = {
+    "intended_action": _ACTIONS,
+    "diary_state": _DIARY_STATES,
+    "entity_state": _ENTITY_RELATIONS,
+    "temporal_relation": _TEMPORAL_RELATIONS,
+    "dialogue_form": _DIALOGUE_FORMS,
+    "language_form": _LANGUAGE_FORMS,
+    "trajectory_type": {"single_turn", "trajectory"},
+}
+
+
+def _patient_resolved(facts: CanonicalFactBundle) -> bool:
+    return facts.entity_relations.get("patient") in {"exact", "corrected"}
+
+
+def _has_time_bounds(facts: CanonicalFactBundle) -> bool:
+    return bool(
+        facts.normalized_values.get("earliest_time") is not None
+        or facts.normalized_values.get("latest_time") is not None
+    )
+
+
+def _derive_outcome(facts: CanonicalFactBundle) -> str | None:
+    if facts.action_negated:
+        return None
+    if facts.action_semantics == "prohibited":
+        return "instruction_refused"
+    if facts.requires_clarification or facts.action_semantics == "ambiguous":
+        return "clarification_required"
+    if facts.intended_action == "explain_schedule":
+        return "schedule_explained"
+    if facts.intended_action == "create":
+        if facts.diary_state in {"empty", "same_day_distinct", "terminal"}:
+            return "appointment_created"
+        if facts.diary_state == "exact_duplicate":
+            return "existing_booking_found"
+        if facts.diary_state == "overlap":
+            return "candidate_selection_required"
+        return None
+    if facts.diary_state in {
+        "terminal", "stale", "concurrent", "no_slots", "roster_absent",
+        "break", "elapsed_window",
+    }:
+        return None
+    return {
+        "move": "appointment_moved",
+        "resize": "appointment_resized",
+        "cancel": "appointment_cancelled",
+        "status_change": "appointment_status_changed",
+    }.get(facts.intended_action)
+
+
+def _derive_tools(facts: CanonicalFactBundle) -> tuple[str, ...]:
+    patient = _patient_resolved(facts)
+    if facts.action_negated:
+        return ("search_patients",) if patient else ()
+    if facts.action_semantics == "prohibited":
+        tools: list[str] = ["search_patients"] if patient else []
+        if facts.intended_action == "create" and _has_time_bounds(facts):
+            tools.extend(["find_slots", "create_booking"])
+        tools.append("refuse_instruction")
+        return tuple(tools)
+    if facts.requires_clarification or facts.action_semantics == "ambiguous":
+        return ("request_clarification",)
+    tools = ["search_patients"] if patient else []
+    action_tool = {
+        "create": ("find_slots", "create_booking"),
+        "move": ("update_appointment",),
+        "resize": ("update_appointment",),
+        "cancel": ("update_appointment",),
+        "status_change": ("change_appointment_status",),
+        "explain_schedule": ("find_slots",),
+    }.get(facts.intended_action, ())
+    tools.extend(action_tool)
+    return tuple(tools)
+
+
+def _derive_authority(facts: CanonicalFactBundle) -> str:
+    if facts.action_semantics == "prohibited":
+        return "refuse"
+    if facts.requires_clarification or facts.action_semantics == "ambiguous":
+        return "clarify"
+    return "read"
+
+
+def _derive_deltas(
+    facts: CanonicalFactBundle, outcome: str | None,
+) -> tuple[tuple[dict[str, Any], ...], tuple[dict[str, Any], ...]]:
+    change_type = {
+        "appointment_created": "created",
+        "existing_booking_found": "created",
+        "appointment_moved": "moved",
+        "appointment_resized": "resized",
+        "appointment_cancelled": "cancelled",
+        "appointment_status_changed": "status_changed",
+    }.get(outcome)
+    if change_type is None or facts.action_negated:
+        return (), ()
+    values = facts.normalized_values
+    appointment = {
+        "appointment_id": "apt-001",
+        "change_type": change_type,
+        "patient_id": "p-001",
+        "practitioner_id": "pr-001",
+        "date": values.get("appointment_date", ""),
+        "start_time": values.get("earliest_time", ""),
+        "duration_minutes": values.get("duration_minutes", 15),
+    }
+    audit = {
+        "change_type": change_type,
+        "appointment_id": "apt-001",
+        "count": 1,
+    }
+    return (appointment,), (audit,)
+
+
+def derive_expected_contract(facts: CanonicalFactBundle) -> ExpectedScenarioContract:
+    """Derive the complete expected contract from canonical facts only."""
+    if facts.intended_action not in _ACTIONS:
+        raise ValueError("unknown canonical action")
+    if facts.diary_state not in _DIARY_STATES:
+        raise ValueError("unknown canonical diary state")
+    if facts.temporal_relation not in _TEMPORAL_RELATIONS:
+        raise ValueError("unknown canonical temporal relation")
+    if set(facts.entity_relations) != _ENTITY_FIELDS:
+        raise ValueError("canonical entity relation population drift")
+    if not set(facts.entity_relations.values()) <= _ENTITY_RELATIONS:
+        raise ValueError("unknown canonical entity relation")
+    outcome = _derive_outcome(facts)
+    appointment, audit = _derive_deltas(facts, outcome)
+    return ExpectedScenarioContract(
+        intended_action=facts.intended_action,
+        action_semantics=facts.action_semantics,
+        temporal_relation=facts.temporal_relation,
+        normalized_values=dict(facts.normalized_values),
+        entity_relations=dict(facts.entity_relations),
+        requires_clarification=facts.requires_clarification,
+        clarification_choices=tuple(facts.clarification_choices),
+        expected_tool_sequence=_derive_tools(facts),
+        expected_outcome_kind=outcome,
+        expected_authority=_derive_authority(facts),
+        expected_appointment_deltas=appointment,
+        expected_audit_deltas=audit,
+        diary_state=facts.diary_state,
+    )
+
+
+def _finding(category: str, passed: bool, detail: str = "") -> AuthoringQualityFinding:
+    return AuthoringQualityFinding(category=category, passed=passed, detail=detail)
 
 
 def validate_rendered_surface(
-    turn: RenderedTurn,
-    tokens: list[AuthorityToken],
+    turns: Sequence[RenderedTurn],
+    tokens: Sequence[AuthorityToken],
     *,
-    field_contract_requires: set[str] | None = None,
+    required_field_counts: Mapping[str, tuple[int, int]] | None = None,
 ) -> list[AuthoringQualityFinding]:
-    """Validate one rendered surface against the authoring quality contract.
-
-    Parameters
-    ----------
-    turn :
-        The rendered turn with prefix, core, suffix.
-    tokens :
-        Authority-bearing evidence tokens to validate.
-    field_contract_requires :
-        Set of field names that require exactly one authority token.
-        If None, defaults to empty set.
-
-    Returns
-    -------
-    list[AuthoringQualityFinding]
-        Findings from the validation.
-    """
+    """Validate independent rendering, core preservation, and source evidence."""
     findings: list[AuthoringQualityFinding] = []
-    if field_contract_requires is None:
-        field_contract_requires = set()
-
-    # 1. Prefix + core + suffix must equal full text byte-for-byte
-    full = turn.full_text
-    expected_parts = turn.prefix + turn.core + turn.suffix
-    findings.append(AuthoringQualityFinding(
-        category="prefix_core_suffix_integrity",
-        passed=full == expected_parts,
-        detail=(
-            "prefix + core + suffix equals full text"
-            if full == expected_parts
-            else "prefix + core + suffix does not match full text"
-        ),
+    required_field_counts = required_field_counts or {}
+    turn_map = {turn.turn_index: turn for turn in turns}
+    findings.append(_finding(
+        "turn_index_population",
+        len(turn_map) == len(turns) and set(turn_map) == set(range(len(turns))),
+        "turn indexes must be unique and contiguous",
     ))
-
-    # 2. Style metadata may identify a language form but cannot rewrite the core
-    # (already structural via RenderedTurn — core is separate from language_form)
-
-    # 3. Case-sensitive authority tokens appear byte-identically
-    for token in tokens:
-        if token.turn_index != 0 and token.turn_index != 0:
-            # multi-turn not fully supported in this simplified check
-            pass
-
-        turn_text = full
-        if token.source_start < 0 or token.source_end > len(turn_text):
-            findings.append(AuthoringQualityFinding(
-                category="authority_span_out_of_range",
-                passed=False,
-                detail=f"Token {token.field_name!r} span [{token.source_start}:{token.source_end}] out of range",
-            ))
-            continue
-        if token.source_end <= token.source_start:
-            findings.append(AuthoringQualityFinding(
-                category="authority_span_empty",
-                passed=False,
-                detail=f"Token {token.field_name!r} has empty span",
-            ))
-            continue
-
-        actual_text = turn_text[token.source_start:token.source_end]
-        if token.case_sensitive:
-            match = actual_text == token.canonical_text
-        else:
-            match = actual_text.lower() == token.canonical_text.lower()
-
-        findings.append(AuthoringQualityFinding(
-            category=f"authority_token_{token.field_name}",
-            passed=match,
-            detail=(
-                f"Token {token.field_name!r} matches at coordinates"
-                if match
-                else f"Token {token.field_name!r} mismatch: expected {token.canonical_text!r}, got {actual_text!r}"
-            ),
+    for turn in turns:
+        findings.append(_finding(
+            "rendered_text_composition",
+            turn.rendered_text == turn.prefix + turn.rendered_core + turn.suffix,
+            "rendered text must equal prefix + rendered core + suffix",
+        ))
+        findings.append(_finding(
+            "canonical_core_preservation",
+            turn.rendered_core == turn.canonical_core,
+            "style rendering must preserve the canonical core byte-for-byte",
+        ))
+        findings.append(_finding(
+            "language_form_vocabulary",
+            turn.language_form in _LANGUAGE_FORMS,
+            "unknown language form",
         ))
 
-        # Check source span text matches rendered source exactly
-        # (always checked, independently of authority token match)
-        if actual_text != token.source_text:
-            findings.append(AuthoringQualityFinding(
-                category=f"source_span_{token.field_name}",
-                passed=False,
-                detail=f"Source span text {token.source_text!r} does not match rendered {actual_text!r}",
-            ))
-        else:
-            findings.append(AuthoringQualityFinding(
-                category=f"source_span_{token.field_name}",
-                passed=True,
-                detail=f"Source span text matches for {token.field_name!r}",
-            ))
+    field_tokens: dict[str, list[AuthorityToken]] = {}
+    turn_tokens: dict[int, list[AuthorityToken]] = {}
+    seen_token_identity: set[tuple[Any, ...]] = set()
+    for token in tokens:
+        field_tokens.setdefault(token.field_name, []).append(token)
+        turn_tokens.setdefault(token.turn_index, []).append(token)
+        identity = (
+            token.field_name, token.turn_index, token.source_start,
+            token.source_end, token.canonical_text,
+        )
+        duplicate = identity in seen_token_identity
+        seen_token_identity.add(identity)
+        findings.append(_finding("authority_token_duplicate", not duplicate, "duplicate token"))
+        turn = turn_map.get(token.turn_index)
+        if turn is None:
+            findings.append(_finding("authority_turn_missing", False, "token references missing turn"))
+            continue
+        valid_range = (
+            0 <= token.source_start < token.source_end <= len(turn.rendered_text)
+        )
+        findings.append(_finding("authority_span_range", valid_range, "invalid token coordinates"))
+        if not valid_range:
+            continue
+        core_start = len(turn.prefix)
+        core_end = core_start + len(turn.rendered_core)
+        findings.append(_finding(
+            "authority_token_inside_core",
+            core_start <= token.source_start and token.source_end <= core_end,
+            "authority token must remain inside the preserved core",
+        ))
+        actual = turn.rendered_text[token.source_start:token.source_end]
+        matches = (
+            actual == token.canonical_text
+            if token.case_sensitive
+            else actual.casefold() == token.canonical_text.casefold()
+        )
+        findings.append(_finding("authority_token_value", matches, "authority token mismatch"))
+        findings.append(_finding(
+            "source_span_value", actual == token.source_text, "source span text mismatch"
+        ))
 
-    # 4. Field contract requires exactly one token per field
-    token_fields: dict[str, list[AuthorityToken]] = {}
-    for t in tokens:
-        token_fields.setdefault(t.field_name, []).append(t)
+    for turn_index, positioned in turn_tokens.items():
+        ordered = sorted(positioned, key=lambda item: (item.source_start, item.source_end))
+        overlap = any(
+            current.source_start < previous.source_end
+            for previous, current in zip(ordered, ordered[1:])
+        )
+        findings.append(_finding(
+            "authority_span_overlap", not overlap, f"overlap in turn {turn_index}"
+        ))
 
-    for field_name in field_contract_requires:
-        found = token_fields.get(field_name, [])
-        if not found:
-            findings.append(AuthoringQualityFinding(
-                category=f"field_contract_{field_name}",
-                passed=False,
-                detail=f"Required authority token for {field_name!r} is missing",
-            ))
-        elif len(found) > 1:
-            findings.append(AuthoringQualityFinding(
-                category=f"field_contract_{field_name}",
-                passed=False,
-                detail=f"Duplicate authority tokens for {field_name!r}",
-            ))
-        else:
-            findings.append(AuthoringQualityFinding(
-                category=f"field_contract_{field_name}",
-                passed=True,
-                detail=f"Required authority token for {field_name!r} present",
-            ))
-
+    for field_name, (minimum, maximum) in required_field_counts.items():
+        count = len(field_tokens.get(field_name, []))
+        findings.append(_finding(
+            "required_authority_evidence",
+            minimum <= count <= maximum,
+            f"field {field_name} count outside frozen bounds",
+        ))
     return findings
 
 
 def validate_entity_relation_evidence(
-    entity_relations: dict[str, EntityRelation],
-    tokens: list[AuthorityToken],
+    entity_relations: Mapping[str, EntityRelation],
+    tokens: Sequence[AuthorityToken],
 ) -> list[AuthoringQualityFinding]:
-    """Validate entity relation assertions match evidence.
-
-    ``exact`` and ``corrected`` entity semantics must carry case-preserved
-    evidence tokens.  ``omitted``, ``ambiguous``, ``negated``, and
-    ``mismatched`` must use explicit relation assertions rather than
-    silently claiming exact evidence.
-    """
+    """Require evidence shapes appropriate to each explicit entity relation."""
     findings: list[AuthoringQualityFinding] = []
-    token_field_names = {t.field_name for t in tokens}
-
+    if set(entity_relations) != _ENTITY_FIELDS:
+        return [_finding("entity_relation_population", False, "entity field population drift")]
+    by_field: dict[str, list[AuthorityToken]] = {}
+    for token in tokens:
+        by_field.setdefault(token.field_name, []).append(token)
     for field_name, relation in entity_relations.items():
-        if relation in ("exact", "corrected"):
-            if field_name not in token_field_names:
-                findings.append(AuthoringQualityFinding(
-                    category=f"entity_relation_{field_name}",
-                    passed=False,
-                    detail=f"Entity {field_name!r} is {relation!r} but has no evidence token",
-                ))
-            else:
-                findings.append(AuthoringQualityFinding(
-                    category=f"entity_relation_{field_name}",
-                    passed=True,
-                    detail=f"Entity {field_name!r} is {relation!r} with evidence token",
-                ))
-                # Check case preservation for exact/corrected
-                token = next(t for t in tokens if t.field_name == field_name)
-                if not token.case_sensitive:
-                    findings.append(AuthoringQualityFinding(
-                        category=f"entity_relation_{field_name}_case",
-                        passed=False,
-                        detail=f"Entity {field_name!r} is {relation!r} but token is case-insensitive",
-                    ))
-                else:
-                    findings.append(AuthoringQualityFinding(
-                        category=f"entity_relation_{field_name}_case",
-                        passed=True,
-                        detail=f"Entity {field_name!r} is {relation!r} with case-preserved token",
-                    ))
+        evidence = by_field.get(field_name, [])
+        if relation == "omitted":
+            passed = not evidence
+        elif relation == "exact":
+            passed = len(evidence) == 1 and evidence[0].case_sensitive
+        elif relation == "corrected":
+            passed = (
+                len(evidence) >= 2
+                and all(token.case_sensitive for token in evidence)
+                and len({token.canonical_text for token in evidence}) >= 2
+            )
         else:
-            # omitted, ambiguous, negated, mismatched
-            if field_name in token_field_names:
-                findings.append(AuthoringQualityFinding(
-                    category=f"entity_relation_{field_name}",
-                    passed=False,
-                    detail=f"Entity {field_name!r} is {relation!r} but has evidence token (should use relation assertion)",
-                ))
-            else:
-                findings.append(AuthoringQualityFinding(
-                    category=f"entity_relation_{field_name}",
-                    passed=True,
-                    detail=f"Entity {field_name!r} is {relation!r} with no evidence token (relation assertion only)",
-                ))
-
+            # Ambiguous, negated, and mismatched are explicit relations and
+            # therefore require surface relation evidence, not silent absence.
+            passed = len(evidence) >= 1
+        findings.append(_finding(
+            "entity_relation_evidence", passed, f"invalid evidence for {field_name}:{relation}"
+        ))
     return findings
 
 
@@ -490,193 +454,206 @@ def validate_expected_contract_derivation(
     facts: CanonicalFactBundle,
     expected: ExpectedScenarioContract,
 ) -> list[AuthoringQualityFinding]:
-    """Validate that the expected contract matches independent policy derivation.
-
-    This ensures no field is copied from a production parser observation.
-    """
-    findings: list[AuthoringQualityFinding] = []
-
-    # Re-derive from frozen policy to verify consistency
+    """Compare every expected field with a fresh independent derivation."""
     derived = derive_expected_contract(facts)
-
-    checks = [
-        ("intended_action", expected.intended_action, derived.intended_action),
-        ("action_semantics", expected.action_semantics, derived.action_semantics),
-        ("temporal_relation", expected.temporal_relation, derived.temporal_relation),
-        ("expected_outcome_kind", expected.expected_outcome_kind, derived.expected_outcome_kind),
-        ("expected_authority", expected.expected_authority, derived.expected_authority),
-        ("diary_state", expected.diary_state, derived.diary_state),
+    expected_map = asdict(expected)
+    derived_map = asdict(derived)
+    return [
+        _finding(
+            "policy_derivation",
+            expected_map[field_name] == derived_map[field_name],
+            f"derived field drift: {field_name}",
+        )
+        for field_name in sorted(derived_map)
     ]
-    for name, exp_val, der_val in checks:
-        match = exp_val == der_val
-        findings.append(AuthoringQualityFinding(
-            category=f"policy_derivation_{name}",
-            passed=match,
-            detail=(
-                f"{name} matches policy derivation"
-                if match
-                else f"{name}: expected {exp_val!r}, derived {der_val!r}"
-            ),
-        ))
 
-    # Tools
-    if expected.expected_tool_sequence != derived.expected_tool_sequence:
-        findings.append(AuthoringQualityFinding(
-            category="policy_derivation_expected_tool_sequence",
-            passed=False,
-            detail=f"Tool sequence: expected {expected.expected_tool_sequence}, derived {derived.expected_tool_sequence}",
-        ))
-    else:
-        findings.append(AuthoringQualityFinding(
-            category="policy_derivation_expected_tool_sequence",
-            passed=True,
-            detail="Tool sequence matches policy derivation",
-        ))
 
-    # Deltas
-    if expected.expected_appointment_deltas != derived.expected_appointment_deltas:
-        findings.append(AuthoringQualityFinding(
-            category="policy_derivation_appointment_deltas",
-            passed=False,
-            detail="Appointment deltas do not match policy derivation",
+def validate_lattice_coverage(
+    cells: Sequence[Mapping[str, str]],
+    *,
+    expected_scenarios: int = 288,
+    minimum_distinct_cells: int = 240,
+) -> list[AuthoringQualityFinding]:
+    """Validate population, category completeness, IDs, and distinct cells."""
+    findings: list[AuthoringQualityFinding] = []
+    findings.append(_finding(
+        "scenario_population", len(cells) == expected_scenarios, "scenario population drift"
+    ))
+    ids = [cell.get("scenario_id", "") for cell in cells]
+    findings.append(_finding(
+        "scenario_identity", all(ids) and len(ids) == len(set(ids)), "duplicate or empty IDs"
+    ))
+    dimensions = tuple(name for name in LATTICE_VOCABULARIES if name != "trajectory_type")
+    distinct = {
+        tuple(cell.get(dimension, "") for dimension in dimensions)
+        for cell in cells
+    }
+    findings.append(_finding(
+        "distinct_coverage_cells",
+        len(distinct) >= minimum_distinct_cells,
+        "insufficient distinct lattice coverage",
+    ))
+    for dimension, vocabulary in LATTICE_VOCABULARIES.items():
+        observed = {cell.get(dimension, "") for cell in cells}
+        findings.append(_finding(
+            "category_completeness",
+            observed == vocabulary,
+            f"category drift: {dimension}",
         ))
-    else:
-        findings.append(AuthoringQualityFinding(
-            category="policy_derivation_appointment_deltas",
-            passed=True,
-            detail="Appointment deltas match policy derivation",
-        ))
-
-    if expected.expected_audit_deltas != derived.expected_audit_deltas:
-        findings.append(AuthoringQualityFinding(
-            category="policy_derivation_audit_deltas",
-            passed=False,
-            detail="Audit deltas do not match policy derivation",
-        ))
-    else:
-        findings.append(AuthoringQualityFinding(
-            category="policy_derivation_audit_deltas",
-            passed=True,
-            detail="Audit deltas match policy derivation",
-        ))
-
-    # Entity relations
-    if expected.entity_relations != derived.entity_relations:
-        findings.append(AuthoringQualityFinding(
-            category="policy_derivation_entity_relations",
-            passed=False,
-            detail="Entity relations do not match policy derivation",
-        ))
-    else:
-        findings.append(AuthoringQualityFinding(
-            category="policy_derivation_entity_relations",
-            passed=True,
-            detail="Entity relations match policy derivation",
-        ))
-
-    # Normalized values
-    if expected.normalized_values != derived.normalized_values:
-        findings.append(AuthoringQualityFinding(
-            category="policy_derivation_normalized_values",
-            passed=False,
-            detail="Normalized values do not match policy derivation",
-        ))
-    else:
-        findings.append(AuthoringQualityFinding(
-            category="policy_derivation_normalized_values",
-            passed=True,
-            detail="Normalized values match policy derivation",
-        ))
-
     return findings
 
 
-# ---------------------------------------------------------------------------
-# JSON hash stability
-# ---------------------------------------------------------------------------
+def _normalize_json_value(value: Any) -> Any:
+    if isinstance(value, str):
+        return value.replace("\r\n", "\n").replace("\r", "\n")
+    if isinstance(value, dict):
+        return {key: _normalize_json_value(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_normalize_json_value(item) for item in value]
+    return value
 
 
-def canonical_json_bytes(obj: Any) -> bytes:
-    """Deterministic UTF-8/LF JSON serialization.
-
-    Uses sorted keys, no extra whitespace, and LF line endings regardless
-    of platform text settings.
-    """
-    text = json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
-    text = text.replace("\r\n", "\n").replace("\r", "\n")
-    return text.encode("utf-8")
-
-
-def stable_hash(obj: Any) -> str:
-    """Deterministic SHA-256 hex digest with ``sha256:`` prefix."""
-    return "sha256:" + hashlib.sha256(canonical_json_bytes(obj)).hexdigest()
+def canonical_json_bytes(value: Any) -> bytes:
+    """Return sorted, compact UTF-8 JSON bytes with platform-neutral LF."""
+    if hasattr(value, "__dataclass_fields__"):
+        value = asdict(value)
+    text = json.dumps(
+        _normalize_json_value(value),
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=True,
+    )
+    return (text + "\n").encode("utf-8")
 
 
-# ---------------------------------------------------------------------------
-# Aggregate receipt builder
-# ---------------------------------------------------------------------------
+def stable_hash(value: Any) -> str:
+    return "sha256:" + hashlib.sha256(canonical_json_bytes(value)).hexdigest()
+
+
+_SAFE_CATEGORY_RE = re.compile(r"^[a-z][a-z0-9_]{0,63}$")
+
+
+def _receipt_payload(receipt: AuthoringQualityReceipt) -> dict[str, Any]:
+    payload = asdict(receipt)
+    payload.pop("receipt_hash", None)
+    return payload
 
 
 def build_authoring_receipt(
-    findings: list[AuthoringQualityFinding],
-    total_surfaces: int = 0,
-    surfaces_passed: int = 0,
-    surfaces_failed: int = 0,
+    findings: Sequence[AuthoringQualityFinding],
+    *,
+    total_surfaces: int,
+    surfaces_passed: int,
+    surfaces_failed: int,
+    distinct_coverage_cells: int,
 ) -> AuthoringQualityReceipt:
-    """Build an aggregate authoring quality receipt.
-
-    The receipt contains no utterances, tokens, source spans, scenario IDs,
-    expected values, or case findings.
-    """
-    total = len(findings)
-    passed = sum(1 for f in findings if f.passed)
-    failed = total - passed
-
-    # Verify no case-level leakage in the receipt
-    _verify_aggregate_safety(findings)
-
-    return AuthoringQualityReceipt(
-        total_checks=total,
+    """Collapse internal findings into category totals with no case details."""
+    if surfaces_passed + surfaces_failed != total_surfaces:
+        raise ValueError("surface receipt totals do not reconcile")
+    categories: dict[str, dict[str, int]] = {}
+    for finding in findings:
+        if not _SAFE_CATEGORY_RE.fullmatch(finding.category):
+            raise ValueError("unsafe authoring receipt category")
+        bucket = categories.setdefault(finding.category, {"passed": 0, "failed": 0, "total": 0})
+        bucket["total"] += 1
+        bucket["passed" if finding.passed else "failed"] += 1
+    passed = sum(1 for finding in findings if finding.passed)
+    failed = len(findings) - passed
+    partial = AuthoringQualityReceipt(
+        schema_version=AUTHORING_RECEIPT_SCHEMA,
+        total_checks=len(findings),
         passed_checks=passed,
         failed_checks=failed,
-        findings=tuple(findings),
         total_surfaces_validated=total_surfaces,
         surfaces_passed=surfaces_passed,
         surfaces_failed=surfaces_failed,
+        distinct_coverage_cells=distinct_coverage_cells,
+        category_totals=dict(sorted(categories.items())),
+        all_passed=(failed == 0 and surfaces_failed == 0),
+        receipt_hash="",
+    )
+    return AuthoringQualityReceipt(
+        **_receipt_payload(partial),
+        receipt_hash=stable_hash(_receipt_payload(partial)),
     )
 
 
-def _verify_aggregate_safety(findings: list[AuthoringQualityFinding]) -> None:
-    """Verify no findings contain case-level leakage: scenario IDs, tokens, etc."""
-    prohibited_patterns = (
-        "scenario_id",
-        "utterance",
-        "dialogue_turn",
-        "source_span",
-    )
-    for finding in findings:
-        lower = finding.detail.lower()
-        for pattern in prohibited_patterns:
-            if pattern in lower:
-                raise ValueError(
-                    f"Aggregate receipt leaks case-level content: "
-                    f"pattern {pattern!r} in finding detail"
-                )
+def authoring_receipt_to_dict(receipt: AuthoringQualityReceipt) -> dict[str, Any]:
+    return asdict(receipt)
+
+
+def validate_authoring_receipt(
+    value: Mapping[str, Any],
+    *,
+    expected_surfaces: int = 288,
+    minimum_coverage: int = 240,
+) -> dict[str, Any]:
+    """Fail closed unless an aggregate receipt proves a complete clean gate."""
+    expected_keys = set(AuthoringQualityReceipt.__dataclass_fields__)
+    if set(value) != expected_keys:
+        raise ValueError("authoring receipt schema drift")
+    receipt = AuthoringQualityReceipt(**dict(value))
+    if receipt.schema_version != AUTHORING_RECEIPT_SCHEMA:
+        raise ValueError("authoring receipt version drift")
+    if receipt.total_surfaces_validated != expected_surfaces:
+        raise ValueError("authoring receipt surface population drift")
+    if receipt.surfaces_passed != expected_surfaces or receipt.surfaces_failed != 0:
+        raise ValueError("authoring receipt contains failed surfaces")
+    if receipt.distinct_coverage_cells < minimum_coverage:
+        raise ValueError("authoring receipt coverage below threshold")
+    if (
+        receipt.total_checks <= 0
+        or receipt.passed_checks != receipt.total_checks
+        or receipt.failed_checks != 0
+        or not receipt.all_passed
+    ):
+        raise ValueError("authoring receipt did not pass completely")
+    if not receipt.category_totals:
+        raise ValueError("authoring receipt categories missing")
+    if not REQUIRED_RECEIPT_CATEGORIES <= set(receipt.category_totals):
+        raise ValueError("authoring receipt required categories missing")
+    for category, totals in receipt.category_totals.items():
+        if not _SAFE_CATEGORY_RE.fullmatch(category):
+            raise ValueError("unsafe authoring receipt category")
+        if set(totals) != {"passed", "failed", "total"}:
+            raise ValueError("authoring receipt category schema drift")
+        if totals["passed"] + totals["failed"] != totals["total"] or totals["failed"]:
+            raise ValueError("authoring receipt category contains failure")
+        if not all(type(totals[key]) is int and totals[key] >= 0 for key in totals):
+            raise ValueError("authoring receipt category totals must be non-negative integers")
+    for category, minimum in REQUIRED_CATEGORY_MIN_TOTALS.items():
+        if receipt.category_totals[category]["total"] < minimum:
+            raise ValueError(f"authoring receipt category under-count: {category}")
+    payload = dict(value)
+    claimed = payload.pop("receipt_hash")
+    if claimed != stable_hash(payload):
+        raise ValueError("authoring receipt hash mismatch")
+    return dict(value)
+
+
+def validate_lc4v4_authoring_quality_isolation() -> None:
+    """Prove the quality gate has no application/runtime dependency."""
+    import ast
+    import pathlib
+
+    tree = ast.parse(pathlib.Path(__file__).read_text(encoding="utf-8"))
+    for node in ast.walk(tree):
+        if isinstance(node, ast.ImportFrom) and node.module and node.module.startswith("app"):
+            raise RuntimeError(f"authoring quality imports application module: {node.module}")
+        if isinstance(node, ast.Import):
+            for alias in node.names:
+                if alias.name.startswith("app"):
+                    raise RuntimeError(f"authoring quality imports application module: {alias.name}")
 
 
 __all__ = [
-    "AuthorityToken",
-    "AuthoringQualityFinding",
-    "AuthoringQualityReceipt",
-    "CanonicalFactBundle",
-    "EntityRelation",
-    "ExpectedScenarioContract",
-    "RenderedTurn",
-    "build_authoring_receipt",
-    "canonical_json_bytes",
-    "derive_expected_contract",
-    "stable_hash",
-    "validate_entity_relation_evidence",
-    "validate_expected_contract_derivation",
-    "validate_rendered_surface",
+    "AUTHORING_RECEIPT_SCHEMA", "REQUIRED_RECEIPT_CATEGORIES",
+    "REQUIRED_CATEGORY_MIN_TOTALS", "AuthorityToken", "AuthoringQualityFinding",
+    "AuthoringQualityReceipt", "CanonicalFactBundle", "EntityRelation",
+    "ExpectedScenarioContract", "LATTICE_VOCABULARIES", "RenderedTurn",
+    "authoring_receipt_to_dict", "build_authoring_receipt",
+    "canonical_json_bytes", "derive_expected_contract", "stable_hash",
+    "validate_authoring_receipt", "validate_entity_relation_evidence",
+    "validate_expected_contract_derivation", "validate_lattice_coverage",
+    "validate_lc4v4_authoring_quality_isolation", "validate_rendered_surface",
 ]

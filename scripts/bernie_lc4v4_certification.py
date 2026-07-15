@@ -1,199 +1,106 @@
 #!/usr/bin/env python3
-"""LC4V4 content-blind certification CLI.
-
-Usage:
-    python -m scripts.bernie_lc4v4_certification --corpus-dir <path> [--seal] [--evaluate]
-
-This script performs content-blind certification operations without loading
-any real v4 corpus content.  It validates that the empty framework satisfies
-all structural, identity, and hash-chain requirements.
-
-No provider, route, database, UI, deployment, runtime, historical diary,
-memory, confirmation, release, or write-authority surface is referenced.
-"""
+"""Fail-closed LC4V4 manifest, seal, one-shot, and aggregate CLI."""
 
 from __future__ import annotations
 
 import argparse
 import json
 import pathlib
-import sys
+from typing import Any
+
+from app.services.bernie.lc4v4_certification import (
+    build_manifest,
+    check_aggregate_report,
+    create_seal,
+    reconstruct_manifest,
+    run_baseline_once,
+    verify_manifest_against_corpus,
+    write_json_exclusive,
+)
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="LC4V4 content-blind certification CLI"
+def _read_object(path: pathlib.Path, label: str) -> dict[str, Any]:
+    value = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(value, dict):
+        raise ValueError(f"{label} must be a JSON object")
+    return value
+
+
+def _parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description=__doc__)
+    commands = parser.add_subparsers(dest="command", required=True)
+
+    build = commands.add_parser("build-manifest")
+    build.add_argument("corpus", type=pathlib.Path)
+    build.add_argument("quality_receipt", type=pathlib.Path)
+    build.add_argument("--write", type=pathlib.Path, required=True)
+
+    check = commands.add_parser("check-manifest")
+    check.add_argument("corpus", type=pathlib.Path)
+    check.add_argument("quality_receipt", type=pathlib.Path)
+    check.add_argument("manifest", type=pathlib.Path)
+
+    seal = commands.add_parser("create-seal")
+    seal.add_argument("corpus", type=pathlib.Path)
+    seal.add_argument("quality_receipt", type=pathlib.Path)
+    seal.add_argument("manifest", type=pathlib.Path)
+    seal.add_argument("--write", type=pathlib.Path, required=True)
+
+    baseline = commands.add_parser("baseline-once")
+    baseline.add_argument("corpus", type=pathlib.Path)
+    baseline.add_argument("quality_receipt", type=pathlib.Path)
+    baseline.add_argument("manifest", type=pathlib.Path)
+    baseline.add_argument("seal", type=pathlib.Path)
+    baseline.add_argument("--write", type=pathlib.Path, required=True)
+    baseline.add_argument("consumed_seal", type=pathlib.Path)
+
+    aggregate = commands.add_parser("check-aggregate")
+    aggregate.add_argument("report", type=pathlib.Path)
+    return parser
+
+
+def main() -> int:
+    args = _parser().parse_args()
+    if args.command == "check-aggregate":
+        report = _read_object(args.report, "aggregate report")
+        result = check_aggregate_report(report)
+        if not result["valid"]:
+            raise ValueError(f"aggregate report invalid: {result['errors']}")
+        print("Aggregate report valid")
+        print(f"Report hash: {report['report_hash']}")
+        return 0
+
+    quality = _read_object(args.quality_receipt, "authoring quality receipt")
+    if args.command == "build-manifest":
+        manifest = build_manifest(args.corpus, quality)
+        write_json_exclusive(args.write, manifest)
+        print(f"Manifest written to {args.write}")
+        return 0
+
+    manifest = _read_object(args.manifest, "manifest")
+    reconstruct_manifest(manifest)
+    verify_manifest_against_corpus(args.corpus, manifest, quality)
+    if args.command == "check-manifest":
+        print("Manifest exactly matches LC4V4 corpus and quality receipt")
+        return 0
+    if args.command == "create-seal":
+        seal = create_seal(manifest)
+        write_json_exclusive(args.write, seal)
+        print(f"Seal written to {args.write}")
+        return 0
+    seal = _read_object(args.seal, "seal")
+    run_baseline_once(
+        args.corpus,
+        manifest,
+        quality,
+        seal,
+        report_path=args.write,
+        consumed_seal_path=args.consumed_seal,
     )
-    parser.add_argument(
-        "--corpus-dir",
-        type=pathlib.Path,
-        default=None,
-        help="Path to the corpus directory (24 group JSON files)",
-    )
-    parser.add_argument(
-        "--manifest-only",
-        action="store_true",
-        help="Build and validate the manifest only",
-    )
-    parser.add_argument(
-        "--seal-only",
-        action="store_true",
-        help="Build and validate the seal only",
-    )
-    parser.add_argument(
-        "--evaluate",
-        action="store_true",
-        help="Run aggregate evaluation (requires full corpus)",
-    )
-    parser.add_argument(
-        "--check-report",
-        type=pathlib.Path,
-        default=None,
-        help="Validate an existing aggregate report JSON file",
-    )
-    parser.add_argument(
-        "--forbidden-keys",
-        type=pathlib.Path,
-        default=None,
-        help="Check a JSON file for forbidden case-level keys",
-    )
-
-    args = parser.parse_args()
-
-    # Late import to avoid loading certification dependencies at parse time.
-    from app.services.bernie.lc4v4_certification import (
-        LC4V4_CORPUS_IDENTITY,
-        LC4V4_EVALUATION_ID,
-        LC4V4_EVALUATOR_VERSION,
-        LC4V4_GROUP_COUNT,
-        LC4V4_REPEAT_COUNT,
-        LC4V4_TOTAL_SCENARIOS,
-        LC4V4_TOTAL_SAMPLES,
-        LC4V4_TOTAL_TRAJECTORIES,
-        build_manifest,
-        check_aggregate_report,
-        check_forbidden_aggregate_keys,
-        create_seal,
-        evaluate_aggregate,
-        get_source_commit,
-        load_verified_scenarios,
-        reconstruct_manifest,
-        validate_lc4v4_isolation,
-        verify_seal,
-    )
-
-    # Print contract constants as identity proof
-    print(f"LC4V4_CORPUS_IDENTITY: {LC4V4_CORPUS_IDENTITY}")
-    print(f"LC4V4_EVALUATION_ID: {LC4V4_EVALUATION_ID}")
-    print(f"LC4V4_EVALUATOR_VERSION: {LC4V4_EVALUATOR_VERSION}")
-    print(f"LC4V4_GROUP_COUNT: {LC4V4_GROUP_COUNT}")
-    print(f"LC4V4_REPEAT_COUNT: {LC4V4_REPEAT_COUNT}")
-    print(f"LC4V4_TOTAL_SCENARIOS: {LC4V4_TOTAL_SCENARIOS}")
-    print(f"LC4V4_TOTAL_TRAJECTORIES: {LC4V4_TOTAL_TRAJECTORIES}")
-    print(f"LC4V4_TOTAL_SAMPLES: {LC4V4_TOTAL_SAMPLES}")
-    print(f"SOURCE_COMMIT: {get_source_commit()}")
-
-    # Isolation check
-    try:
-        validate_lc4v4_isolation()
-        print("ISOLATION: passed")
-    except RuntimeError as e:
-        print(f"ISOLATION: failed - {e}", file=sys.stderr)
-        sys.exit(1)
-
-    # Forbidden-key check
-    if args.forbidden_keys:
-        try:
-            with open(args.forbidden_keys, "r", encoding="utf-8") as f:
-                data = json.load(f)
-            check_forbidden_aggregate_keys(data)
-            print(f"FORBIDDEN_KEYS_CHECK: passed for {args.forbidden_keys}")
-        except (ValueError, json.JSONDecodeError) as e:
-            print(f"FORBIDDEN_KEYS_CHECK: failed - {e}", file=sys.stderr)
-            sys.exit(1)
-        return
-
-    # Report validation
-    if args.check_report:
-        try:
-            with open(args.check_report, "r", encoding="utf-8") as f:
-                report = json.load(f)
-            result = check_aggregate_report(report)
-            if result["valid"]:
-                print(f"REPORT_VALIDATION: passed for {args.check_report}")
-            else:
-                print(
-                    f"REPORT_VALIDATION: failed - {result['errors']}",
-                    file=sys.stderr,
-                )
-                sys.exit(1)
-        except (ValueError, json.JSONDecodeError, FileNotFoundError) as e:
-            print(f"REPORT_VALIDATION: error - {e}", file=sys.stderr)
-            sys.exit(1)
-        return
-
-    if not args.corpus_dir:
-        print("No operation specified. Use --corpus-dir or --check-report.", file=sys.stderr)
-        parser.print_help()
-        sys.exit(1)
-
-    if not args.corpus_dir.is_dir():
-        print(f"Corpus directory not found: {args.corpus_dir}", file=sys.stderr)
-        sys.exit(1)
-
-    # Build manifest
-    try:
-        manifest = build_manifest(args.corpus_dir)
-        print(f"MANIFEST: built successfully")
-        print(f"  files: {len(manifest['files'])}")
-        print(f"  corpus_hash: {manifest['corpus_hash']}")
-        reconstructed = reconstruct_manifest(manifest)
-        print(f"MANIFEST_RECONSTRUCTION: passed")
-    except (ValueError, NotADirectoryError) as e:
-        print(f"MANIFEST: failed - {e}", file=sys.stderr)
-        sys.exit(1)
-
-    if args.manifest_only:
-        print(json.dumps(manifest, indent=2))
-        return
-
-    # Create seal
-    if args.seal_only or args.evaluate:
-        try:
-            seal = create_seal(manifest)
-            print(f"SEAL: created successfully")
-            print(f"  manifest_hash: {seal['manifest_hash']}")
-            print(f"  consumed: {seal['consumed']}")
-            verified = verify_seal(seal, manifest)
-            print(f"SEAL_VERIFICATION: passed")
-        except ValueError as e:
-            print(f"SEAL: failed - {e}", file=sys.stderr)
-            sys.exit(1)
-
-        if args.seal_only:
-            print(json.dumps(seal, indent=2))
-            return
-
-    # Evaluate
-    if args.evaluate:
-        try:
-            scenarios = load_verified_scenarios(args.corpus_dir)
-            print(f"SCENARIOS: loaded {len(scenarios)} scenarios")
-            source_commit = get_source_commit()
-            report = evaluate_aggregate(
-                scenarios,
-                manifest_hash=manifest["corpus_hash"],
-                corpus_hash=manifest["corpus_hash"],
-                source_commit=source_commit,
-            )
-            print(f"EVALUATION: completed")
-            print(f"  total_samples: {report['total_samples']}")
-            print(f"  report_hash: {report['report_hash']}")
-            print(json.dumps(report, indent=2))
-        except (ValueError, RuntimeError) as e:
-            print(f"EVALUATION: failed - {e}", file=sys.stderr)
-            sys.exit(1)
+    print(f"Report written to {args.write}")
+    print(f"Consumed seal written to {args.consumed_seal}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

@@ -37,6 +37,7 @@ from app.services.bernie.composed_evaluator import (
     score_interpretation_replay_pair,
 )
 from app.services.bernie.scenario_spec import ReceptionScenarioSpec
+from app.services.bernie.lc4v4_authoring_quality import validate_authoring_receipt
 
 # ---------------------------------------------------------------------------
 # Fixed production shape – content-blind contract constants
@@ -66,6 +67,7 @@ _MANIFEST_KEYS = {
     "surface_variants_per_group", "multi_turn_per_group", "total_scenarios",
     "total_trajectories", "repeat_count", "total_production_samples",
     "evaluation_id", "evaluator_version", "files", "corpus_hash",
+    "authoring_quality_receipt_hash",
 }
 _SEAL_KEYS = {
     "seal_version", "manifest_hash", "corpus_hash", "source_commit",
@@ -270,7 +272,10 @@ def _validated_group_scenarios(
 # ---------------------------------------------------------------------------
 
 
-def build_manifest(corpus_dir: pathlib.Path) -> dict[str, Any]:
+def build_manifest(
+    corpus_dir: pathlib.Path,
+    authoring_quality_receipt: dict[str, Any],
+) -> dict[str, Any]:
     """Build the LC4V4 manifest from a corpus directory.
 
     Scans for group JSON files, validates count (24), variant shape
@@ -295,6 +300,11 @@ def build_manifest(corpus_dir: pathlib.Path) -> dict[str, Any]:
     ValueError
         If the group count, filenames, variant shape, or totals mismatch.
     """
+    verified_quality = validate_authoring_receipt(
+        authoring_quality_receipt,
+        expected_surfaces=LC4V4_TOTAL_SCENARIOS,
+        minimum_coverage=240,
+    )
     if not corpus_dir.is_dir():
         raise NotADirectoryError(f"Corpus directory not found: {corpus_dir}")
 
@@ -323,6 +333,7 @@ def build_manifest(corpus_dir: pathlib.Path) -> dict[str, Any]:
     total_scenarios_count: int = 0
     total_trajectories_count: int = 0
     all_ids: set[str] = set()
+    all_scenarios: list[ReceptionScenarioSpec] = []
 
     for group_index, gf in enumerate(group_files, 1):
         fhash: str = _file_hash(gf)
@@ -338,6 +349,7 @@ def build_manifest(corpus_dir: pathlib.Path) -> dict[str, Any]:
             if scenario.scenario_id in all_ids:
                 raise ValueError(f"duplicate scenario ID: {scenario.scenario_id}")
             all_ids.add(scenario.scenario_id)
+            all_scenarios.append(scenario)
 
         total_scenarios_count += len(surfaces) + len(multi_turns)
         total_trajectories_count += len(multi_turns)
@@ -354,6 +366,31 @@ def build_manifest(corpus_dir: pathlib.Path) -> dict[str, Any]:
         )
     if len(all_ids) != LC4V4_TOTAL_SCENARIOS:
         raise ValueError("scenario identity population is incomplete")
+    cells = {
+        (
+            scenario.intended_action,
+            scenario.diary_state,
+            scenario.entity_state,
+            scenario.temporal_relation,
+            scenario.dialogue_form,
+            scenario.language_form,
+        )
+        for scenario in all_scenarios
+    }
+    if len(cells) < 240:
+        raise ValueError("LC4V4 distinct coverage is below 240 cells")
+    if verified_quality["distinct_coverage_cells"] != len(cells):
+        raise ValueError("authoring quality receipt coverage does not match corpus")
+    for label, observed, expected in (
+        ("action", {s.intended_action for s in all_scenarios}, set(ALL_ACTIONS)),
+        ("diary state", {s.diary_state for s in all_scenarios}, set(ALL_DIARY_STATES)),
+        ("entity state", {s.entity_state for s in all_scenarios}, set(ALL_ENTITY_SEMANTICS)),
+        ("temporal relation", {s.temporal_relation for s in all_scenarios}, set(ALL_TEMPORAL_RELATIONS)),
+        ("dialogue form", {s.dialogue_form for s in all_scenarios}, set(ALL_DIALOGUE_FORMS)),
+        ("language form", {s.language_form for s in all_scenarios}, set(ALL_LANGUAGE_FORMS)),
+    ):
+        if observed != expected:
+            raise ValueError(f"LC4V4 {label} coverage is incomplete")
 
     corpus_hash_input: str = _canonical_json(file_entries)
     corpus_hash: str = _stable_hash(corpus_hash_input)
@@ -373,6 +410,7 @@ def build_manifest(corpus_dir: pathlib.Path) -> dict[str, Any]:
         "evaluator_version": LC4V4_EVALUATOR_VERSION,
         "files": file_entries,
         "corpus_hash": corpus_hash,
+        "authoring_quality_receipt_hash": verified_quality["receipt_hash"],
     }
 
     return manifest
@@ -411,6 +449,10 @@ def reconstruct_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
             f"Manifest corpus identity mismatch: "
             f"{manifest.get('corpus_identity')!r} != {LC4V4_CORPUS_IDENTITY!r}"
         )
+    _require_sha256(
+        manifest.get("authoring_quality_receipt_hash"),
+        "manifest authoring quality receipt hash",
+    )
 
     # Fixed counts
     _require_equal(manifest, "group_count", LC4V4_GROUP_COUNT)
@@ -459,11 +501,13 @@ def reconstruct_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
 
 
 def verify_manifest_against_corpus(
-    corpus_dir: pathlib.Path, manifest: dict[str, Any],
+    corpus_dir: pathlib.Path,
+    manifest: dict[str, Any],
+    authoring_quality_receipt: dict[str, Any],
 ) -> dict[str, Any]:
     """Rebuild a pre-consumption manifest and require exact equality."""
     reconstructed = reconstruct_manifest(manifest)
-    live = build_manifest(corpus_dir)
+    live = build_manifest(corpus_dir, authoring_quality_receipt)
     if live != reconstructed:
         raise ValueError("frozen manifest does not exactly match corpus")
     return reconstructed
@@ -629,6 +673,71 @@ def verify_seal(
     _require_sha256(seal.get("corpus_hash"), "seal corpus_hash")
 
     return seal
+
+
+def write_json_exclusive(path: pathlib.Path, value: dict[str, Any]) -> None:
+    """Write deterministic UTF-8/LF JSON and refuse replacement."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("x", encoding="utf-8", newline="\n") as stream:
+        json.dump(value, stream, indent=2, sort_keys=True)
+        stream.write("\n")
+
+
+def _require_safe_artifact_paths(
+    corpus_dir: pathlib.Path,
+    *artifact_paths: pathlib.Path,
+) -> None:
+    corpus = corpus_dir.resolve()
+    resolved = [path.resolve() for path in artifact_paths]
+    if len(resolved) != len(set(resolved)):
+        raise ValueError("LC4V4 artifact paths must be distinct")
+    for path in resolved:
+        if path == corpus or corpus in path.parents:
+            raise ValueError("LC4V4 output artifacts must remain outside the corpus")
+        if path.exists():
+            raise FileExistsError(f"refusing to replace existing artifact: {path}")
+
+
+def run_baseline_once(
+    corpus_dir: pathlib.Path,
+    manifest: dict[str, Any],
+    authoring_quality_receipt: dict[str, Any],
+    seal: dict[str, Any],
+    *,
+    report_path: pathlib.Path,
+    consumed_seal_path: pathlib.Path,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Run the only production baseline and consume its exact seal.
+
+    Verification and evaluation occur before any output. The aggregate report
+    is then created exclusively, followed by the consumed seal. A failure
+    after report creation invalidates the evidence and never authorizes rerun.
+    """
+    _require_safe_artifact_paths(corpus_dir, report_path, consumed_seal_path)
+    verified_manifest = verify_manifest_against_corpus(
+        corpus_dir,
+        manifest,
+        authoring_quality_receipt,
+    )
+    source_commit = get_source_commit()
+    verified_seal = verify_seal(
+        seal,
+        verified_manifest,
+        expected_source_commit=source_commit,
+    )
+    scenarios = load_verified_scenarios(corpus_dir)
+    report = evaluate_aggregate(
+        scenarios,
+        manifest_hash=verified_seal["manifest_hash"],
+        corpus_hash=verified_seal["corpus_hash"],
+        source_commit=verified_seal["source_commit"],
+        repeats=verified_seal["repeat_count"],
+    )
+    write_json_exclusive(report_path, report)
+    consumed = dict(verified_seal)
+    consumed["consumed"] = True
+    write_json_exclusive(consumed_seal_path, consumed)
+    return report, consumed
 
 
 # ---------------------------------------------------------------------------
@@ -1420,6 +1529,8 @@ __all__ = [
     "load_verified_scenarios",
     "create_seal",
     "verify_seal",
+    "write_json_exclusive",
+    "run_baseline_once",
     "check_forbidden_aggregate_keys",
     "evaluate_aggregate",
     "validate_report_hash",

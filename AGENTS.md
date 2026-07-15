@@ -47,9 +47,9 @@ sources is insufficient and must return `revision_required`.
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
 | Active product track | LC4V4Q1 content-blind authoring quality and fresh-v4 framework; no actual v4 content yet |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v4q1-sol-contract.md` |
-| Current result | Yuri authorized the recommended fresh-v4 path; holdouts v1-v3 remain sealed and no parser remediation is authorized |
-| Next implementation | Commit the contract, run one bounded Flash framework lane, recover/accept under Sol, and obtain a fresh Gemini veto before Sol-only v4 authorship |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v4q1-sol-contract.md` and `orchestration/agent_inbox/codex/lc4v4q1-sol-recovery-amendment.md` |
+| Current result | Flash candidate `4dc5ac8d` rejected conceptually; Sol recovery passes 52 focused/handover and 132 ordinary selected tests; no actual v4 content exists |
+| Next implementation | Commit and push the recovered content-blind head, then obtain a fresh Gemini veto before freezing one-shot acceptance and beginning Sol-only v4 authorship |
 
 ### LC4R10 accepted state
 

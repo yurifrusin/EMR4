@@ -1,116 +1,67 @@
 # Bernie LC4V4 Content-Blind Framework
 
-## Overview
+LC4V4 begins with an authoring-quality gate and empty certification framework.
+Neither component contains real v4 scenarios. Holdouts v1-v3 remain sealed.
 
-This document describes the LC4V4 content-blind authoring quality and
-certification framework. The framework is designed to be entirely independent of
-actual v4 scenario content, production parsers, providers, routes, databases,
-and runtime dependencies.
+## Independent authoring quality
 
-## Architecture
+Every authored turn has six independent values: turn index, prefix, canonical
+core, rendered core, suffix, and final rendered text. Validation requires the
+rendered core to equal the canonical core byte-for-byte and the final text to
+equal `prefix + rendered_core + suffix`. This detects whole-string case
+transforms and punctuation or wrapper code that rewrites semantic content.
 
-```
-lc4v4_authoring_quality.py     Content-blind rendering/evidence validator
-lc4v4_certification.py         Empty certification framework (manifest/seal/report)
-```
+Authority-bearing tokens carry exact turn coordinates, canonical text,
+case-sensitivity, and lossless source text. The validator checks the addressed
+turn, valid non-overlapping coordinates, containment inside the preserved
+core, exact/case-aware value, source-text equality, duplicate tokens, and
+field-specific evidence counts. Entity relations use relation-specific rules:
+exact requires one case-preserved token; corrected requires at least two
+different case-preserved tokens; omitted requires none; ambiguous, negated,
+and mismatched require explicit surface evidence.
 
-## Authoring Quality Gate
+Expected tools, authority, outcome, appointment deltas, and audit deltas are
+derived from canonical facts through a local frozen policy table. No expected
+tool sequence or outcome is accepted as canonical input. A separate comparison
+checks every expected contract field against a fresh derivation.
 
-The `lc4v4_authoring_quality` module provides:
+The lattice gate checks 288 unique scenario IDs, every canonical category,
+both trajectory types, and at least 240 distinct six-dimensional cells. Its
+receipt removes all finding details and contains only aggregate category
+totals. Every required category must be present and completely passing. The
+receipt is deterministic UTF-8/LF JSON with its own SHA-256 hash.
 
-### Typed Records
+## Manifest and one-shot binding
 
-- **`CanonicalFactBundle`** - Canonical semantic facts for one scenario surface
-- **`RenderedTurn`** - A rendered turn split into `prefix`, `core`, `suffix`
-- **`AuthorityToken`** - Authority-bearing evidence token with field name,
-  canonical text, case-sensitivity flag, turn index, and source coordinates
-- **`ExpectedScenarioContract`** - Expected values independently derived
-  through the frozen policy table
-- **`AuthoringQualityReceipt`** - Aggregate receipt with no case-level leakage
-- **`AuthoringQualityFinding`** - Individual validation result
+The v4 manifest binds:
 
-### Validation Functions
+- exact 24-group, 288-scenario, 72-trajectory corpus bytes;
+- category-complete corpus metadata and at least 240 distinct cells;
+- the exact passing authoring-quality receipt hash;
+- evaluator identity, repeat policy, and aggregate population.
 
-| Function | Purpose |
-|---|---|
-| `validate_rendered_surface()` | Checks prefix+core+suffix integrity, authority tokens at coordinates, source-span matching, field contract requirements |
-| `validate_entity_relation_evidence()` | Verifies exact/corrected relations have case-preserved evidence; omitted/ambiguous/negated/mismatched use relation assertions |
-| `validate_expected_contract_derivation()` | Ensures expected contract matches independent policy derivation |
-| `derive_expected_contract()` | Frozen policy table: derives expected outcome/tools/authority/deltas from canonical facts |
+The seal then binds the manifest hash, corpus hash, current full Git commit,
+evaluator identity, evaluation identity, and unconsumed state. The only
+baseline entrypoint reconstructs the manifest, revalidates the quality receipt
+and corpus, verifies the live source commit and unconsumed seal, evaluates two
+repeats, creates the aggregate report exclusively, and creates the consumed
+seal exclusively last. Output paths must be distinct and outside the corpus.
+Existing paths are never replaced.
 
-### Frozen Policy Table
+After consumption, `check-aggregate` accepts only the aggregate report. It has
+no corpus, quality-receipt, manifest, or seal argument and recursively rejects
+case-level keys and values.
 
-The policy table independently determines expected values:
+## CLI
 
-- **Outcome**: Based on `action_semantics`, `requires_clarification`,
-  `action_negated`, `intended_action`, and `diary_state`
-- **Authority**: `refuse` for prohibited, `clarify` for ambiguous/clarification,
-  `read` otherwise
-- **Tools**: Deduplicated from `selected_tool_sequence`
-- **Deltas**: Generated only for mutation outcomes (created/moved/resized/etc.)
-
-## Certification Framework
-
-The `lc4v4_certification` module provides an empty content-blind framework:
-
-### Fixed Constants
-
-| Constant | Value |
-|---|---|
-| `LC4V4_CORPUS_IDENTITY` | `lc4-holdout-v4` |
-| `LC4V4_EVALUATION_ID` | `lc4-holdout-v4-baseline-001` |
-| `LC4V4_EVALUATOR_VERSION` | `lc4v4.aggregate_evaluator.v1` |
-| `LC4V4_GROUP_COUNT` | 24 |
-| `LC4V4_SURFACE_PER_GROUP` | 9 |
-| `LC4V4_MT_PER_GROUP` | 3 |
-| `LC4V4_TOTAL_SCENARIOS` | 288 |
-| `LC4V4_TOTAL_TRAJECTORIES` | 72 |
-| `LC4V4_REPEAT_COUNT` | 2 |
-| `LC4V4_TOTAL_SAMPLES` | 576 |
-
-### Operations
-
-| Function | Purpose |
-|---|---|
-| `build_manifest()` | Scans corpus directory, validates group files, computes hashes |
-| `reconstruct_manifest()` | Verifies manifest schema, counts, and hashes |
-| `create_seal()` | Creates seal from verified manifest + source commit |
-| `verify_seal()` | Verifies seal hash chain against manifest |
-| `evaluate_aggregate()` | Runs deterministic evaluation, emits aggregate-only report |
-| `check_aggregate_report()` | Post-consumption aggregate validation |
-| `check_forbidden_aggregate_keys()` | Recursively checks for prohibited case-level keys |
-
-### Hash Chain
-
-```
-Corpus files → manifest (file hashes + corpus hash)
-                                    ↓
-Manifest → seal (manifest hash + source commit binding)
-                                    ↓
-Seal → aggregate evaluation → report (report hash)
+```text
+build-manifest <corpus> <quality-receipt> --write <manifest>
+check-manifest <corpus> <quality-receipt> <manifest>
+create-seal <corpus> <quality-receipt> <manifest> --write <seal>
+baseline-once <corpus> <quality-receipt> <manifest> <seal> --write <report> <consumed-seal>
+check-aggregate <report>
 ```
 
-### Post-Consumption Validation
-
-After consumption, only `check_aggregate_report()` may run. It accepts only the
-report object (or report path), never a corpus, manifest, or seal path.
-
-## Content-Blind Principles
-
-1. No real v4 corpus, manifest, seal, or report is ever loaded
-2. No v1, v2, or v3 fixtures, support modules, or case-level surface are
-   inspected
-3. No provider, route, database, UI, deployment, or runtime dependency
-4. All validation is deterministic and fail-closed
-5. UTF-8/LF JSON serialization with hash stability guarantees
-6. Aggregate receipts recursively reject case-level leakage
-
-## CLI Script
-
-The `scripts/bernie_lc4v4_certification.py` script provides:
-
-```bash
-python -m scripts.bernie_lc4v4_certification --corpus-dir <path> [--manifest-only|--seal-only|--evaluate]
-python -m scripts.bernie_lc4v4_certification --check-report <path>
-python -m scripts.bernie_lc4v4_certification --forbidden-keys <path>
-```
+All paths are operator supplied. The framework opens no provider, T3, route,
+database, UI, runtime, historical-diary, deployment, release, confirmation, or
+write-authority surface.
