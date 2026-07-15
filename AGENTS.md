@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V2E1 development-only exit-gap reassessment; this is not LC4V2R3 |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v2e1-sol-contract.md` |
-| Current result | R1 and R2 pass 21/21 and 28/28 with empty failure selections; ordinary development remains `880/814/672/154/330/835`, safety 1,152/1,152; holdouts v1 and v2 sealed |
-| Next implementation | Bind the exact accepted R1/R2 and ordinary-development evidence, decide `r3_authorized|no_r3_authorized|reassessment_invalid`, and obtain an independent Gemini veto without accessing either holdout |
+| Active product track | LC4V2 development repair exit reached; LC4V2R3 is not authorized |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v2e1-sol-acceptance.md` |
+| Current result | Deterministic exit audit returned `no_r3_authorized`; R1 21/21, R2 28/28, ordinary `880/814/672/154/330/835`, safety 1,152/1,152, zero variance; holdouts v1 and v2 sealed |
+| Next implementation | Pause at Yuri's decision boundary: approve either a genuinely fresh certification holdout or an explicit reviewed reuse policy; neither is currently authorized |
 
 ### LC4R10 accepted state
 
@@ -151,6 +151,22 @@ safety, variance, and corpus hash remain unchanged.
 The frozen plan is
 `orchestration/agent_inbox/codex/lc4v2r2-sol-contract.md`; the active decision
 is `orchestration/agent_inbox/codex/lc4v2r2-sol-acceptance.md`.
+
+### LC4V2E1 accepted state
+
+LC4V2E1 bound the exact accepted R1, R2, R10, and ordinary-manifest evidence
+without parser execution or file discovery. Its deterministic report returned
+`no_r3_authorized`, with report hash
+`sha256:aa65f631f748948cdaf0c7adc280a2db1d86b3f2f4779edc1f67ecc3c0412fba`.
+Any input/hash/schema/count/variance drift instead returns
+`reassessment_invalid` and cannot write an accepted report.
+
+Gemini 3.5 Flash/medium independently returned `DECISION: pass` on exact head
+`e0d30bd8`. This closes the current development repair sequence but is not
+product certification. A fresh certification holdout or reviewed reuse policy
+now requires Yuri's explicit decision. The frozen contract is
+`orchestration/agent_inbox/codex/lc4v2e1-sol-contract.md`; see
+`orchestration/agent_inbox/codex/lc4v2e1-sol-acceptance.md`.
 
 ## 4. Authority Allocation
 

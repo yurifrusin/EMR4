@@ -73,14 +73,20 @@ expected xfail, and one expected skip.
 A recovery search returned protected v1 path names but no protected content or
 label; the metadata-only incident does not authorize reuse.
 
+LC4V2E1 then bound only the exact accepted R1, R2, R10, and ordinary manifest
+artifacts. Its deterministic exit report returned `no_r3_authorized`, report
+hash `sha256:aa65f631f748948cdaf0c7adc280a2db1d86b3f2f4779edc1f67ecc3c0412fba`.
+Gemini independently passed exact head `e0d30bd8`. The current development
+repair sequence is complete; this is not certification.
+
 ## Next safe sequence
 
 1. Keep holdouts v1 and v2 sealed; use only aggregate v2 evidence for planning.
-2. Run a bounded development-only exit-gap reassessment before naming R3;
-   freeze another repair only for a new independently surface-supported gap.
+2. Do not name R3: the development exit-gap reassessment found no authorized
+   repair surface.
 3. Keep T3.5 provider adapters and live-provider execution separately deferred.
-4. Require explicit approval for a later fresh certification holdout or any
-   reviewed reuse policy.
+4. Pause for Yuri's explicit choice between a fresh certification holdout and
+   a reviewed reuse policy.
 5. Authorize parser work only from a newly frozen independently supported
    development surface subset.
 
@@ -102,6 +108,8 @@ label; the metadata-only incident does not authorize reuse.
 - `orchestration/agent_inbox/codex/lc4v2r1-sol-acceptance.md`
 - `docs/bernie-lc4v2r2-safety-language.md`
 - `orchestration/agent_inbox/codex/lc4v2r2-sol-acceptance.md`
+- `docs/bernie-lc4v2-development-exit-reassessment.md`
+- `orchestration/agent_inbox/codex/lc4v2e1-sol-acceptance.md`
 
 Protected holdouts v1 and v2 are sealed. Do not enumerate their paths, inspect
 content, rerun them, regenerate them, hash-check them, infer labels from them,

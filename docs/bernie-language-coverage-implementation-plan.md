@@ -397,6 +397,14 @@ development aggregate and corpus hash remain unchanged. Do not predeclare an
 R3 repair: first perform a bounded development-only exit-gap reassessment and
 freeze another repair only if independently surface-supported evidence remains.
 
+LC4V2E1 completed that reassessment. The exact accepted R1/R2 repair surfaces
+remain empty, LC4R10 and the ordinary development aggregate remain unchanged,
+and no new post-R2 surface-supported failure was introduced. The deterministic
+decision is `no_r3_authorized`; LC4V2R3 must not be created from the current
+evidence. This closes development repair, not certification. The next gate is
+Yuri's decision between a genuinely fresh certification holdout and an explicit
+reviewed reuse policy.
+
 ## Agent Allocation
 
 - Sol at High reasoning owns the semantic architecture, coverage decisions,
@@ -414,14 +422,13 @@ freeze another repair only if independently surface-supported evidence remains.
 
 ## Immediate Direction
 
-The next EMR4 language step is a bounded development-only exit-gap
-reassessment, not live T3.5 execution or a predeclared R3 repair. LC4V2R1 and
-LC4V2R2 have closed their independently authored entity/normalization and
-safety-language matrices without changing the ordinary aggregate. Freeze a
-further repair only if the reassessment finds a new surface-supported gap
-against ordinary development evidence. Do not inspect or reuse sealed holdouts
-v1 or v2, and do not promote Silver/pending candidates merely because the
-evaluator can execute them.
+The development-only exit-gap reassessment is complete and returned
+`no_r3_authorized`; do not predeclare or begin LC4V2R3. The next EMR4 language
+step is a user decision between a genuinely fresh certification holdout and an
+explicit reviewed reuse policy. Until that choice is made, keep sealed holdouts
+v1 and v2 untouched, preserve T3.1-T3.4 blocked by default, defer T3.5, and do
+not promote Silver/pending candidates merely because the evaluator can execute
+them.
 
 No user decision is required for ordinary development-only repair work. Pause if
 work would reuse/re-evaluate protected holdout v1 or v2, broaden historical-trove
