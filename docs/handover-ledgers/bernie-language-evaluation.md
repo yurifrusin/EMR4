@@ -1,6 +1,6 @@
 # Bernie Language and Evaluation Ledger
 
-Last consolidated: 2026-07-15 after LC4R9.
+Last consolidated: 2026-07-15 after LC4R10.
 
 ## Current accepted state
 
@@ -11,7 +11,7 @@ LC4R1-LC4R8 then separated credible implementation defects from unsupported,
 ambiguous, malformed, incomplete, contradictory, or stale corpus contracts.
 
 Current development semantic counts are
-`880/814/628/101/300/782` for intended action, action semantics, temporal
+`880/814/672/154/330/835` for intended action, action semantics, temporal
 relation, normalized values, entity semantics, and clarification. Safety is
 1,152/1,152 and deterministic variance is zero over 2,304 samples.
 
@@ -27,17 +27,27 @@ LC4R9 repaired the frozen 11 audit-vocabulary cases at the source generator and
 regenerated the ordinary development corpus. All 11 now pass complete composed
 evaluation. Post-repair corpus hash is
 `sha256:f11e98f9bc61b962da0e816fbb918d7f722d3f82c57dfde18a5e323c1b24e9e1`.
-The other 53 + 40 remain contract-reconciliation work. No parser remediation
-is currently authorized.
+LC4R10 then reconciled the other frozen 53 + 40 records at the source-generator
+contract. All 93 now pass every composed semantic, clarification, outcome,
+tool, delta, authority, and safety dimension. Post-reconciliation corpus hash
+is `sha256:af8f3276a50a2defcf4e4f65570a5dd4de0d252544ff6d695792d63e7e518195`.
+No independently supported parser gap remains and no parser remediation is
+currently authorized.
+
+The final explicit serial development gate passed 831 tests with exactly 22
+historical report/queue equality nodes deselected. Gemini 3.5 Flash returned
+`DECISION: pass` on exact recovered source head `01d7ac18`; the acceptance
+preserves and corrects its non-blocking prose miscount of those historical
+nodes. Protected holdout v1 remained sealed.
 
 ## Next safe sequence
 
-1. Reconcile the remaining frozen 53 clarification and 40 replay populations
-   through development-only surface evidence.
-2. Keep corpus reconciliation separate from parser remediation.
-3. Authorize parser work only from a newly frozen surface-supported subset.
-4. Request a user decision only before holdout reuse/v2 or T3.5 live-provider
-   execution.
+1. Request Yuri's decision between holdout v2 and an explicit holdout-v1 reuse
+   policy before LC5 certification work.
+2. Keep holdout v1 sealed until that decision is made.
+3. Keep T3.5 provider adapters and live-provider execution separately deferred.
+4. Authorize future parser work only from a newly frozen independently
+   supported surface subset.
 
 ## Primary evidence
 
@@ -49,7 +59,8 @@ is currently authorized.
 - `docs/bernie-lc4r7-silver-reconciliation.md`
 - `docs/bernie-lc4r8-exit-blocker-reconciliation.md`
 - `docs/bernie-lc4r9-generator-contract-repair.md`
-- `orchestration/agent_inbox/codex/lc4r9-sol-acceptance.md`
+- `docs/bernie-lc4r10-contract-reconciliation.md`
+- `orchestration/agent_inbox/codex/lc4r10-sol-acceptance.md`
 
 Protected holdout v1 is sealed. Do not enumerate its paths, inspect content,
 rerun it, regenerate it, hash-check it, infer labels from it, or tune against

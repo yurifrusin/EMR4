@@ -46,42 +46,47 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | Bernie development-corpus contract reconciliation after accepted LC4R9 |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4r9-sol-acceptance.md` |
-| Current result | Exit counts `0/53/40`; status `blocked_pending_contract_reconciliation` |
-| Next implementation | LC4R10: reconcile the remaining frozen 53 clarification and 40 replay contract populations; authorize no parser work without a new surface-supported subset |
+| Active product track | Bernie development-corpus reconciliation complete through LC4R10; certification decision pending |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4r10-sol-acceptance.md` |
+| Current result | Frozen LC4R10 population 93/93 complete; semantic counts `880/814/672/154/330/835`; safety 1,152/1,152; variance zero over 2,304 |
+| Next implementation | Pause at the documented user boundary: approve holdout v2 or an explicit holdout-v1 reuse policy before LC5 certification; T3.5 remains separately deferred |
 
-### LC4R9 accepted state
+### LC4R10 accepted state
 
-LC1-LC4 and LC4R1-LC4R9 are complete. The current development semantic counts
-are `880/814/628/101/300/782`; safety is 1,152/1,152; variance is zero over
+LC1-LC4 and LC4R1-LC4R10 are complete. The current development semantic counts
+are `880/814/672/154/330/835`; safety is 1,152/1,152; variance is zero over
 2,304 samples.
 
-LC4R9 repaired exactly the 11 generator-backed audit-vocabulary cases authorized
-by LC4R8. All 11 now pass the complete composed path. The remaining development
-exit surface is:
+LC4R10 reconciled the remaining frozen 53 clarification and 40 replay contract
+populations. All 93 now pass the complete deterministic interpretation,
+replay, and scoring path. The post-reconciliation corpus hash is
+`sha256:af8f3276a50a2defcf4e4f65570a5dd4de0d252544ff6d695792d63e7e518195`.
+No independently supported parser gap remains and no parser remediation is
+authorized.
 
-- 53 clarification records still blocked by upstream semantic contracts;
-- 40 replay records still requiring contract reconciliation;
-- zero generator-backed repairs remain; and
-- no parser remediation is currently authorized.
+Sol's recovered focused suite passed 20/20 and the final explicit serial
+development gate passed 831 nodes after deselecting exactly 22 immutable
+historical equality/queue nodes. Gemini 3.5 Flash/medium returned
+`DECISION: pass` on exact recovered source head `01d7ac18`. Its prose counted
+26 superseded nodes; Sol directly enumerated the six safe implicated modules
+and preserved the corrected 22-node count in the acceptance without another
+provider round trip.
 
-Sol's recovered focused suite passed 54/54. Gemini returned `DECISION: pass` on
-exact reviewed source head `a8f46cea`. The final 275-node serial preservation
-gate completed with 273 passes, one expected xfail, and one established skip,
-excluding only the historical LC4 report-equality node that intentionally
-freezes the pre-LC4R9 corpus hash. See the acceptance document for exact
-provenance, hashes, worker failures, protected-search incident, and recovery.
+DeepSeek V4 Flash/high ran once through Claude Code `--bare`; Sol rejected its
+conceptual taxonomy failure and recovered under the lease without a correction
+loop. Protected holdout v1 remained sealed. T3.1-T3.4 remain intact and blocked
+by default; T3.5 and all live/write authority remain deferred. See the LC4R10
+acceptance for exact hashes, provenance, recovery, veto, and gate evidence.
 
 ### Next sequence
 
-1. Plan LC4R10 against the accepted 53 clarification and 40 replay populations.
-2. Reconcile development contracts through explicit source generators and
-   independently reviewable surface evidence.
+1. Ask Yuri to choose between authoring a new holdout v2 or approving an
+   explicit holdout-v1 reuse policy before LC5 certification work.
+2. Do not inspect, enumerate, run, or infer from holdout v1 before that
+   decision.
 3. Keep `check_in` and other planned-not-implemented actions unavailable.
-4. Authorize parser remediation only from a newly frozen surface-supported
-   subset; otherwise continue corpus-quality reconciliation.
-5. Do not reuse holdout v1 or open T3.5 without the separate user decision.
+4. Keep T3.5 provider adapters and all live/write authority behind their
+   separate deferred decision gate.
 
 ## 4. Authority Allocation
 

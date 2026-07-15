@@ -47,7 +47,9 @@ The post-policy resolved-dialogue outcome split is 22 action outcomes
 - `scripts/bernie_lc4r10_contract_reconciliation.py --check`: pass;
 - full regeneration: byte-for-byte identical;
 - only the 53 source-selected group files and manifest changed;
-- no parser/extraction behavior changed.
+- no parser/extraction behavior changed;
+- final serial development gate: 831 passed with 22 narrowly documented
+  historical equality/queue nodes deselected.
 
 The repeat evaluator also now preserves `action_negated` when assigning sample
 indexes. Without that lossless field copy, the withdrawn reversal was replayed
@@ -65,6 +67,15 @@ source, report, and tests. The preserved evidence is in
 `orchestration/agent_inbox/codex/lc4r10-dw1-completion.md` and
 `orchestration/agent_inbox/codex/lc4r10-sol-recovery-amendment.md`.
 
+Gemini 3.5 Flash/medium independently reviewed exact recovered source head
+`01d7ac1882e92e5f461f6e333515a24d80e40bde` through a fresh Antigravity
+project and returned `DECISION: pass`. Its review prose overstated the
+historical supersession count as 26; Sol directly enumerated the safe
+development modules and preserved the corrected exact count of 22 in the
+acceptance rather than opening another provider loop for a mechanical edit.
+See `orchestration/agent_inbox/codex/lc4r10-antigravity-independent-review.md`
+and `orchestration/agent_inbox/codex/lc4r10-sol-acceptance.md`.
+
 ## Boundaries
 
 Protected holdout v1 was not opened, enumerated, imported, loaded, regenerated,
@@ -74,3 +85,5 @@ release, memory, RAG/GraphRAG, confirmation, or live/write authority was used.
 T3.1-T3.4 remain intact and blocked by default; T3.5 remains deferred.
 
 The machine-readable authority artifact is `docs/bernie-lc4r10-report.json`.
+The next step is a user decision between holdout v2 and an explicit holdout-v1
+reuse policy before LC5 certification work. T3.5 remains separately deferred.
