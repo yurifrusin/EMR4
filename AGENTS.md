@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V4D1 diagnostic complete; prepare LC4V4D2 bounded semantic remediation |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v4d1-sol-acceptance.md` |
+| Active product track | LC4V4D2 bounded semantic remediation over the frozen D1 parser selection |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v4d2-sol-contract.md` |
 | Current result | LC4V4 remains `certification_fail` and holdouts v1-v4 remain sealed. D1 is `diagnostic_valid`: 60 fresh inspectable development probes, 120 deterministic observations, 23 parser gaps, 12 policy-contract gaps, 25 supported passes, zero authoring/scorer/planned-unavailable cases, and zero variance. Gemini returned `DECISION: pass` on exact recovered report head `5e1f0de4`. No remediation occurred in D1 |
-| Next implementation | Freeze LC4V4D2 as an ordinary development-only semantic remediation contract over the Gemini-confirmed 23-case parser selection. Keep the 12 policy/state-join cases outside parser repair for a separate later tranche. Preserve D1 as the fixed regression gate and do not inspect or rerun holdouts v1-v4 |
+| Next implementation | Dispatch one DeepSeek V4 Flash/high lane through Claude Code `--bare` to implement only the 23-case semantic repair and D2 evidence. Sol then accepts/recovers, runs serial preservation, and obtains a fresh Gemini veto. Keep all 12 policy/state-join cases outside parser repair and do not inspect or rerun holdouts v1-v4 |
 
 LC4V4 provenance: the frozen pre-content records remain
 `lc4v4q1-sol-contract.md`, `lc4v4q1-sol-recovery-amendment.md`,
