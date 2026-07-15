@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import hashlib
+import inspect
 import pathlib
 
 import pytest
@@ -101,7 +102,7 @@ class TestContractChange1ExplicitAlternatives:
         utt = "Book Avery Quinn with Dr Chen tomorrow at 3pm in Room 2 or Room 5."
         extraction = extract_semantics([utt], REFERENCE_DATE)
         surfaced = extract_surfaced_alternatives([utt], "location")
-        assert surfaced == ("2", "5")
+        assert surfaced == ("Room 2", "Room 5")
 
     def test_appointment_type_alternatives_surfaced(self) -> None:
         utt = "Book Avery Quinn with Dr Chen tomorrow at 3pm for a standard consultation or a care plan appointment."
@@ -113,7 +114,7 @@ class TestContractChange1ExplicitAlternatives:
         utt = "Book Avery Quinn with Dr Chen tomorrow at 3pm for 15 or 30 minutes."
         extraction = extract_semantics([utt], REFERENCE_DATE)
         surfaced = extract_surfaced_alternatives([utt], "duration")
-        assert surfaced == ("15", "30")
+        assert surfaced == ("15 minutes", "30 minutes")
 
 
 class TestContractChange2CorrectedPatient:
@@ -658,39 +659,101 @@ class TestEvidenceReport:
     """D3 evidence report generation."""
 
     def test_d3_evidence_runs(self) -> None:
-        """Evidence module runs without error."""
-        report = run_d3_evidence()
-        assert report is not None
-        assert "report_hash" in report
-        assert "population" in report
-        assert report["population"]["total"] == 20
+        report = run_d3_evidence("test-source")
+        assert report["total_cases"] == 20
+        assert report["total_observations"] == 40
+        assert report["selection_hash"] == EXPECTED_20_CASE_HASH
+        assert report["d2_report_hash"] == EXPECTED_D2_REPORT_HASH
 
     def test_d3_report_has_contract_checks(self) -> None:
-        """Report contains all six contract check categories."""
-        report = run_d3_evidence()
-        checks = report["contract_checks"]
-        assert "clarification_alternatives" in checks
-        assert "corrected_patient" in checks
-        assert "corrected_practitioner" in checks
-        assert "omitted_practitioner" in checks
-        assert "diary_conflict" in checks
-        assert "unsafe_bypass" in checks
+        report = run_d3_evidence("test-source")
+        assert report["category_counts"] == {
+            "clarification_alternatives": {"passed": 5, "failed": 0},
+            "corrected_patient": {"passed": 2, "failed": 0},
+            "omitted_practitioner": {"passed": 1, "failed": 0},
+            "corrected_practitioner": {"passed": 2, "failed": 0},
+            "diary_state_join": {"passed": 5, "failed": 0},
+            "unsafe_bypass": {"passed": 5, "failed": 0},
+        }
 
     def test_d3_report_deterministic(self) -> None:
-        """Two runs produce identical report hash."""
-        r1 = run_d3_evidence()
-        r2 = run_d3_evidence()
-        if r1.get("determinism", {}).get("deterministic"):
-            assert r1["report_hash"] == r2["report_hash"]
+        r1 = run_d3_evidence("test-source")
+        r2 = run_d3_evidence("test-source")
+        assert r1["report_hash"] == r2["report_hash"]
 
     def test_d3_all_20_cases_pass(self) -> None:
-        """Run evidence and verify 20/20 pass."""
-        report = run_d3_evidence()
-        all_pass = report.get("all_20_approved_cases_pass")
-        if not all_pass:
-            failures = {
-                k: v for k, v in report.get("contract_checks", {}).items()
-                if v.get("failed", 0) > 0
-            }
-            pytest.skip(f"Contract checks with failures: {failures}")
-        assert all_pass is True
+        report = run_d3_evidence("test-source")
+        assert report["decision"] == "option_a_policy_resolution_valid"
+        assert all(report["gates"].values())
+        assert all(case["passed"] for case in report["cases"])
+
+
+class TestSolRecoveryGuards:
+    def test_ambiguous_entities_are_not_silently_resolved(self) -> None:
+        patient = _run_d3_option_a("lc4v4d1_entity_patient_ambiguous_03")["policy"]
+        practitioner = _run_d3_option_a(
+            "lc4v4d1_entity_practitioner_ambiguous_09"
+        )["policy"]
+        assert patient["resolved_patient"] is None
+        assert practitioner["resolved_practitioner"] is None
+        assert practitioner["resolved_practitioner_id"] is None
+
+    @pytest.mark.parametrize(
+        "utterance",
+        [
+            "Move Avery Quinn's appointment with Dr Chen tomorrow at 3pm.",
+            "Resize Avery Quinn's appointment with Dr Chen tomorrow at 3pm.",
+            "Cancel Avery Quinn's appointment with Dr Chen tomorrow at 3pm.",
+            "Mark Avery Quinn's appointment with Dr Chen tomorrow at 3pm as arrived.",
+        ],
+    )
+    def test_action_verb_is_not_part_of_patient_identity(self, utterance: str) -> None:
+        assert extract_final_patient([utterance]) == "Avery Quinn"
+
+    def test_unrelated_diary_row_does_not_create_false_conflict(self) -> None:
+        utterance = "Book Avery Quinn with Dr Chen tomorrow at 3pm for 30 minutes."
+        extraction = extract_semantics([utterance], REFERENCE_DATE)
+        policy = resolve_policy(
+            [utterance],
+            entity_semantics=dict(extraction.entity_semantics),
+            requires_clarification=extraction.requires_clarification,
+            clarification_choices=extraction.clarification_choices,
+            intended_action=extraction.intended_action,
+            action_semantics=extraction.action_semantics,
+            authority_claim=extraction.authority_claim,
+            selected_tool_sequence=extraction.selected_tool_sequence,
+            normalized_values=dict(extraction.normalized_values),
+            diary_state="same_day_distinct",
+            diary_appointments=[{
+                "patient_name": "Different Patient",
+                "practitioner": "Dr Patel",
+                "date": "2026-07-16",
+                "start_time": "16:00",
+                "end_time": "16:30",
+            }],
+            reference_date=REFERENCE_DATE,
+        )
+        assert policy.diary_comparison.relation == "no_conflict"
+
+    def test_unknown_practitioner_fails_closed_without_default_id(self) -> None:
+        utterance = "Book Avery Quinn with Dr Unknown tomorrow at 3pm for 30 minutes."
+        extraction = extract_semantics([utterance], REFERENCE_DATE)
+        policy = resolve_policy(
+            [utterance],
+            entity_semantics=dict(extraction.entity_semantics),
+            requires_clarification=extraction.requires_clarification,
+            clarification_choices=extraction.clarification_choices,
+            intended_action=extraction.intended_action,
+            action_semantics=extraction.action_semantics,
+            authority_claim=extraction.authority_claim,
+            selected_tool_sequence=extraction.selected_tool_sequence,
+            normalized_values=dict(extraction.normalized_values),
+        )
+        assert policy.requires_clarification
+        assert policy.resolved_practitioner_id is None
+        assert policy.appointment_deltas == ()
+
+    def test_policy_runtime_has_no_scenario_or_expected_field_branch(self) -> None:
+        source = inspect.getsource(resolve_policy)
+        assert "scenario_id" not in source
+        assert "expected_" not in source

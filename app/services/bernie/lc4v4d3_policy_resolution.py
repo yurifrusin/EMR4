@@ -132,7 +132,7 @@ _ALTERNATIVE_PATTERNS: dict[str, list[re.Pattern[str]]] = {
     ],
     "location": [
         re.compile(
-            r"\b(?:Room|room)\s+(\d+)\s+or\s+(?:Room|room)\s+(\d+)\b",
+            r"\b((?:Room|room)\s+\d+)\s+or\s+((?:Room|room)\s+\d+)\b",
         ),
     ],
     "appointment_type": [
@@ -145,7 +145,7 @@ _ALTERNATIVE_PATTERNS: dict[str, list[re.Pattern[str]]] = {
     ],
     "duration": [
         re.compile(
-            r"\b(\d+)\s+or\s+(\d+)\s*(?:minutes?|mins?)\b", re.I
+            r"\b(\d+)\s+or\s+(\d+)\s*(minutes?|mins?)\b", re.I
         ),
     ],
 }
@@ -166,6 +166,9 @@ def extract_surfaced_alternatives(
             m = pat.search(u)
             if m:
                 groups = m.groups()
+                if entity_field == "duration" and len(groups) == 3:
+                    first, second, unit = groups
+                    return (f"{first} {unit}", f"{second} {unit}")
                 alts = tuple(g for g in groups if g is not None)
                 if alts:
                     return alts
@@ -176,10 +179,6 @@ def extract_surfaced_alternatives(
 # Practitioner name extraction (for final identity)
 # ---------------------------------------------------------------------------
 
-_PRACTITIONER_CAPTURE = re.compile(
-    r"\b(?:with|for|see)\s+(Dr\s+[A-Z][a-z]+)\b", re.I
-)
-
 _PRACTITIONER_NAKED = re.compile(
     r"\b(Dr\s+[A-Z][a-z]+)\b"
 )
@@ -188,18 +187,14 @@ _PRACTITIONER_NAKED = re.compile(
 def extract_final_practitioner(utterances: list[str]) -> str | None:
     """Extract the final surfaced practitioner name across all utterances.
 
-    Returns the last ``Dr X`` mention found, preferring the ``with/for/see``
-    pattern for accuracy.
+    Returns the last explicit ``Dr X`` mention, so correction turns replace
+    the earlier practitioner without requiring the preposition ``with``.
     """
     last: str | None = None
     for u in utterances:
-        m = _PRACTITIONER_CAPTURE.search(u)
-        if m:
-            last = m.group(1)
-        else:
-            m2 = _PRACTITIONER_NAKED.search(u)
-            if m2:
-                last = m2.group(1)
+        matches = _PRACTITIONER_NAKED.findall(u)
+        if matches:
+            last = matches[-1]
     return last
 
 
@@ -207,18 +202,24 @@ def extract_final_practitioner(utterances: list[str]) -> str | None:
 # Patient name extraction (for final identity)
 # ---------------------------------------------------------------------------
 
-_PATIENT_CAPTURE = re.compile(
-    r"\b(?:for |appointment for |schedule |patient |"
-    r"[Bb]ook |[Mm]ake |[Cc]reate |[Ss]ee |[Nn]eed |[Ww]ant |"
-    r"[Aa]n appointment for |[Aa] booking for )?"
-    r"(?!Dr\s+(?-i:[A-Z]))"
-    r"(?!(?:Book|Make|Create|Schedule|See)\s)"
-    r"((?-i:[A-Z])[a-z]+(?:\s+(?!Dr\b)(?-i:[A-Z])[a-z]+)+)\b",
+_PERSON_NAME = r"((?-i:[A-Z])[a-z]+(?:\s+(?-i:[A-Z])[a-z]+)+)"
+
+_CREATE_PATIENT_CAPTURE = re.compile(
+    r"\b(?:book|schedule|create|make)\s+"
+    r"(?!an?\s)(?!the\s)(?!Dr\s)" + _PERSON_NAME
+    + r"(?=\s+(?:appointment|or|with|tomorrow|today|on|at|for|in)\b|\s*[—-])",
+    re.I,
+)
+
+_MUTATION_PATIENT_CAPTURE = re.compile(
+    r"\b(?:move|resize|cancel|mark)\s+" + _PERSON_NAME
+    + r"['’]s\s+appointment\b",
+    re.I,
 )
 
 _PATIENT_CORRECTION_CAPTURE = re.compile(
-    r"\b(?:make it|make that|actually\s*,\s*make\s+that|it's|that's)\s+"
-    r"((?-i:[A-Z])[a-z]+(?:\s+(?-i:[A-Z])[a-z]+)+)\s+(?:instead|please)?",
+    r"\b(?:make it|make that|actually\s*,\s*make\s+that|sorry\s*,?)\s+"
+    r"(?!Dr\s)" + _PERSON_NAME + r"(?:\s+(?:instead|please))?",
     re.I,
 )
 
@@ -226,29 +227,18 @@ _PATIENT_CORRECTION_CAPTURE = re.compile(
 def extract_final_patient(utterances: list[str]) -> str | None:
     """Extract the final patient name across all utterances.
 
-    Prefers the last explicitly named patient, including after a correction
-    cue such as ``make that X instead``.
+    Uses action-local and correction-local grammatical relations so action
+    verbs and practitioner names cannot become patient identity.
     """
     last: str | None = None
     for u in utterances:
-        # Check correction patterns first
-        corr_m = _PATIENT_CORRECTION_CAPTURE.search(u)
-        if corr_m:
-            last = corr_m.group(1)
-            continue
-        # Inline correction with "sorry" / "actually"
-        inline_cue = re.search(
-            r"\b(?:sorry|actually|correction|i mean|i meant)\b", u, re.I
-        )
-        if inline_cue:
-            after = u[inline_cue.end():]
-            pat_m = _PATIENT_CAPTURE.search(after)
-            if pat_m:
-                last = pat_m.group(1)
-                continue
-        m = _PATIENT_CAPTURE.search(u)
-        if m:
-            last = m.group(1)
+        for pattern in (_CREATE_PATIENT_CAPTURE, _MUTATION_PATIENT_CAPTURE):
+            matches = pattern.findall(u)
+            if matches:
+                last = matches[-1]
+        corrections = _PATIENT_CORRECTION_CAPTURE.findall(u)
+        if corrections:
+            last = corrections[-1]
     return last
 
 
@@ -349,6 +339,17 @@ def compare_all_entities_to_diary(
     if not diary_appointments:
         return DiaryComparisonResult(relation="no_conflict")
 
+    requested_date = extraction_values.get("appointment_date")
+    requested_time = extraction_values.get("start_time")
+    candidates = [
+        appointment
+        for appointment in diary_appointments
+        if (requested_date is None or appointment.get("date") == requested_date)
+        and (requested_time is None or appointment.get("start_time") == requested_time)
+    ]
+    if not candidates:
+        return DiaryComparisonResult(relation="no_conflict")
+
     all_conflicts: list[str] = []
     found_duplicate = False
 
@@ -359,11 +360,17 @@ def compare_all_entities_to_diary(
                 val_str = str(utterance_value)
                 diary_key = _ENTITY_TO_DIARY_KEY.get(entity_field)
                 if diary_key:
-                    for apt in diary_appointments:
+                    for apt in candidates:
                         diary_value = _get_diary_value(apt, diary_key, entity_field)
-                        if diary_value is not None and diary_value != val_str:
+                        if (
+                            diary_value is not None
+                            and diary_value.casefold() != val_str.casefold()
+                        ):
                             all_conflicts.append(entity_field)
-                        elif diary_value is not None and diary_value == val_str:
+                        elif (
+                            diary_value is not None
+                            and diary_value.casefold() == val_str.casefold()
+                        ):
                             found_duplicate = True
 
     if all_conflicts:
@@ -388,25 +395,23 @@ _AMBIGUOUS_ENTITY_FIELDS: dict[str, str] = {
     "duration": "duration",
 }
 
-_DEFAULT_PRACTITIONER_ID = "pr-001"
-
-
 def _extract_utterance_values(
     utterances: list[str],
+    normalized_values: dict[str, Any],
 ) -> dict[str, Any]:
     """Extract raw utterance values for entities (not the semantics)."""
-    values: dict[str, Any] = {}
+    values: dict[str, Any] = {
+        "appointment_date": normalized_values.get("appointment_date"),
+        "start_time": normalized_values.get("earliest_time"),
+        "duration": normalized_values.get("duration_minutes"),
+    }
+    patient = extract_final_patient(utterances)
+    practitioner = extract_final_practitioner(utterances)
+    if patient:
+        values["patient"] = patient
+    if practitioner:
+        values["practitioner"] = practitioner
     for u in utterances:
-        m = _PATIENT_CAPTURE.search(u)
-        if m:
-            values["patient"] = m.group(1)
-        pm = _PRACTITIONER_CAPTURE.search(u)
-        if pm:
-            values["practitioner"] = pm.group(1)
-        else:
-            pm2 = _PRACTITIONER_NAKED.search(u)
-            if pm2:
-                values["practitioner"] = pm2.group(1)
         loc = re.search(r"\b((?:Room|room)\s+\d+)\b", u)
         if loc:
             values["location"] = loc.group(1)
@@ -418,10 +423,7 @@ def _extract_utterance_values(
             am = pat.search(u)
             if am:
                 values["appointment_type"] = am.group(1)
-        dm = re.search(r"\b(\d+)\s*(?:minutes?|mins?)\b", u, re.I)
-        if dm:
-            values["duration"] = dm.group(1)
-    return values
+    return {key: value for key, value in values.items() if value is not None}
 
 
 def resolve_policy(
@@ -485,7 +487,7 @@ def resolve_policy(
     if diary_appointments is None:
         diary_appointments = []
 
-    extraction_values = _extract_utterance_values(utterances)
+    extraction_values = _extract_utterance_values(utterances, normalized_values)
 
     result_clarify = requires_clarification
     result_choices = clarification_choices
@@ -498,6 +500,10 @@ def resolve_policy(
     result_diary = DiaryComparisonResult(relation="no_conflict")
     result_patient = extract_final_patient(utterances)
     result_practitioner = extract_final_practitioner(utterances)
+    if entity_semantics.get("patient") not in {"exact", "corrected"}:
+        result_patient = None
+    if entity_semantics.get("practitioner") not in {"exact", "corrected"}:
+        result_practitioner = None
     result_practitioner_id = (
         map_practitioner_id(result_practitioner) if result_practitioner else None
     )
@@ -558,6 +564,24 @@ def resolve_policy(
             result_tools = ("request_clarification",)
             result_outcome = "clarification_required"
             break
+
+    if (
+        intended_action == "create"
+        and practitioner_sem in {"exact", "corrected"}
+        and result_practitioner_id is None
+    ):
+        return PolicyResolution(
+            requires_clarification=True,
+            clarification_choices=(),
+            resolved_patient=result_patient,
+            resolved_practitioner=result_practitioner,
+            resolved_practitioner_id=None,
+            selected_tools=("request_clarification",),
+            authority="clarify",
+            downstream_outcome="clarification_required",
+            diary_comparison=result_diary,
+            utterance_entity_semantics_unchanged=True,
+        )
 
     # ── Diary field conflict: require clarification, no deltas ─────────
     if result_diary.relation == "field_conflict":
@@ -628,7 +652,7 @@ def resolve_policy(
         if diary_state in ("empty", "same_day_distinct", "terminal"):
             result_outcome = "appointment_created"
             vals = normalized_values
-            pid = result_practitioner_id or _DEFAULT_PRACTITIONER_ID
+            pid = result_practitioner_id
             apt = {
                 "appointment_id": "apt-001",
                 "change_type": "created",
@@ -646,7 +670,7 @@ def resolve_policy(
         elif diary_state == "exact_duplicate":
             result_outcome = "existing_booking_found"
             if normalized_values.get("earliest_time"):
-                pid = result_practitioner_id or _DEFAULT_PRACTITIONER_ID
+                pid = result_practitioner_id
                 vals = normalized_values
                 apt = {
                     "appointment_id": "apt-001",
