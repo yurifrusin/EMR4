@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V4 attempt 002 complete; protected one-shot result is closed |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v4-sol-acceptance.md` and `docs/bernie-lc4v4-fresh-certification-closeout.md` |
-| Current result | Valid evidence returned `certification_fail`: complete 70/576, safety 466/576, intended action and temporal relation 576/576, normalization 480/576, entity semantics 240/576, 288 coverage cells, and zero variance. Report hash `sha256:9fa0cfe19d6e24e19630d415e4a778c89b6381057ae661e4c7d6c53c088d68f5`. V4 is sealed; no parser remediation or rerun is authorized |
-| Next implementation | Recommend a separately frozen development-only diagnostic matrix across the weak aggregate axes, independently authored without copying or inferring v4 cases. Pause before any new certification holdout or reuse decision |
+| Active product track | LC4V4D1 independent development-only diagnostic matrix |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v4d1-sol-contract.md` |
+| Current result | LC4V4 valid evidence remains `certification_fail` and v1-v4 remain sealed. D1 freezes 60 fresh inspectable development probes across isolated entity, dialogue/trajectory, matched safety-policy, and diary-state families. D1 is diagnostic only; no parser remediation is authorized |
+| Next implementation | Commit and push the D1 contract, dispatch one bounded DeepSeek V4 Flash/high implementation lane through Claude Code `--bare`, then Sol accepts or recovers and obtains a fresh Gemini veto before closeout |
 
 LC4V4 provenance: the frozen pre-content records remain
 `lc4v4q1-sol-contract.md`, `lc4v4q1-sol-recovery-amendment.md`,
@@ -59,6 +59,11 @@ LC4V4 provenance: the frozen pre-content records remain
 `lc4v4-one-shot-acceptance-rule-v3.md`. Flash candidate `4dc5ac8d` was rejected;
 Gemini returned `DECISION: pass` on exact recovered head `25e4461b`. Yuri then
 authorized `lc4v4-fresh-attempt-002` with strict named-file-only access.
+LC4V4 attempt 002 complete evidence remains sealed and unchanged under
+`lc4v4-sol-acceptance.md` and `bernie-lc4v4-fresh-certification-closeout.md`
+while D1 uses only ordinary development fixtures and the accepted aggregate
+closeout: complete 70/576 and safety 466/576. V4 is sealed; no rerun or parser
+remediation is authorized from its aggregate result.
 
 ### LC4R10 accepted state
 
@@ -265,16 +270,16 @@ changes; it does not inherit the failed worker's acceptance framing.
 
 ## 5. Protected Evidence and Closed Gates
 
-### Protected holdouts v1, v2, and v3
+### Protected holdouts v1, v2, v3, and v4
 
-Protected holdouts v1, v2, and v3 remain sealed. Do not open, enumerate, list,
-search, import, run, regenerate, evaluate, hash-check, infer labels from, or
-tune against any protected fixture, support module, authoring surface,
-manifest, seal, receipt, or per-case report. The committed v2 aggregate report
-and aggregate closeout are the only v2 evidence available for planning; only
-the committed aggregate report, closeout, and Sol acceptance are available for
-v3 planning. A historical metadata-enumeration incident does not authorize v1
-reuse.
+Protected holdouts v1, v2, and v3 remain sealed, and v4 is now sealed under the
+same boundary. Do not open, enumerate, list, search, import, run, regenerate,
+evaluate, hash-check, infer labels from, or tune against any protected fixture,
+support module, authoring surface, manifest, seal, receipt, or per-case report.
+The committed v2 aggregate report and aggregate closeout are the only v2
+evidence available for planning; only the committed aggregate report, closeout,
+and Sol acceptance are available for v3 and v4 planning. Historical metadata-
+enumeration incidents do not authorize reuse.
 
 Before future certification, Yuri must approve a new holdout version or an
 explicit reviewed reuse policy. Development work uses only ordinary

@@ -91,6 +91,10 @@ def test_compact_live_handover_retains_required_authority_and_boundaries() -> No
         "complete 70/576",
         "safety 466/576",
         "V4 is sealed",
+        "lc4v4d1-sol-contract.md",
+        "60 fresh inspectable development probes",
+        "D1 is diagnostic only",
+        "Protected holdouts v1, v2, v3, and v4",
     ]:
         assert required in live
 
