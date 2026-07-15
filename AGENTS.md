@@ -47,9 +47,9 @@ sources is insufficient and must return `revision_required`.
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
 | Active product track | Authorized `lc4v4-fresh-attempt-002`; framework accepted and no actual v4 content exists |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v4q1-sol-contract.md`, `orchestration/agent_inbox/codex/lc4v4q1-sol-recovery-amendment.md`, `orchestration/agent_inbox/codex/lc4v4q1-antigravity-review.md`, and `orchestration/agent_inbox/codex/lc4v4-one-shot-acceptance-rule-v2.md` |
-| Current result | Yuri explicitly authorized a proportionate fresh attempt after the metadata-only incident. The first attempt remains invalid. Attempt 002 uses the accepted framework at `1c0e3ba3`, the same frozen thresholds, no external model, and strict named-file-only access. No actual v4 content exists |
-| Next implementation | Commit and push rule V2 before content. Sol then authors, quality-validates, freezes, seals, and evaluates attempt 002 exactly once; after consumption, only aggregate evidence may be used |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v4q1-sol-contract.md`, `orchestration/agent_inbox/codex/lc4v4q1-sol-recovery-amendment.md`, `orchestration/agent_inbox/codex/lc4v4q1-antigravity-review.md`, and `orchestration/agent_inbox/codex/lc4v4-one-shot-acceptance-rule-v3.md` |
+| Current result | Flash candidate `4dc5ac8d` was rejected and Gemini returned `DECISION: pass` on Sol's recovery at exact head `25e4461b`. Yuri explicitly authorized a proportionate fresh attempt after `lc4v4-preauthoring-metadata-incident.md`. The first attempt and `lc4v4-one-shot-acceptance-rule.md` remain invalid. `lc4v4-one-shot-acceptance-rule-v2.md` never activated because its preactivation handover guard failed before content. V3 adds an explicit green-checkpoint activation condition. Attempt 002 otherwise uses the accepted framework at `1c0e3ba3`, the same thresholds, no external model, and strict named-file-only access. No actual v4 content exists |
+| Next implementation | Pass the V3 preactivation checks, commit and push the clean activation checkpoint, then Sol authors, quality-validates, freezes, seals, and evaluates attempt 002 exactly once; after consumption, only aggregate evidence may be used |
 
 ### LC4R10 accepted state
 
