@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V4D5R1 exact-four Option A policy/replay remediation contract frozen; bounded implementation next |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v4d5r1-sol-contract.md`, grounded by `lc4v4d5-sol-acceptance.md` and `docs/bernie-lc4v4d5-option-a-adoption-audit-closeout.md` |
-| Current result | D5 retains 240 complete observations over all 60 ordinary probes with zero legacy and Option A variance. Exact taxonomy is `35/20/1/3/1`: 35 legacy-equivalent, 20 accepted D4 changes, one benign exact-duplicate relation, three missing-mutation-delta blockers, and one resize target-conflict-plus-delta blocker. All 27 gates pass; report hash is `e2c461ee...`. Gemini returned `DECISION: pass` on exact head `4fba7408`. No remediation or runtime default change was made |
-| Next implementation | Dispatch one bounded DeepSeek V4 Flash/high candidate through Claude Code `--bare` against the frozen D5R1 contract. Restore only the four supported safe move/resize/cancel/status simulated mutation/audit deltas and treat resize duration as a mutation target. Preserve all D4 behavior, benign exact-duplicate relations, legacy default, parser, historical evidence, and T3/provider/product/write boundaries |
+| Active product track | LC4V4D5R1 exact-four Option A policy/replay remediation accepted; prepare development-only D5E1 exit reassessment |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v4d5r1-sol-acceptance.md` and `docs/bernie-lc4v4d5r1-exact-four-remediation-closeout.md` |
+| Current result | D5R1 closes all four D5 blockers. All 60 ordinary probes retain 240 complete observations with exact taxonomy `37/20/3/0`: 37 legacy-equivalent, 20 accepted D4 changes, three benign diary-relation-only differences, and zero blockers. All 28 gates pass; report hash is `0cb444d1...`. Serial D1-D5R1 passed 177/177 and Gemini independently passed 120/120 with `DECISION: pass` on exact recovered head `82063c50`. No parser, fixture, product default, provider, runtime, or write authority changed |
+| Next implementation | Run a Sol-owned D5E1 development exit reassessment binding immutable D4/D5 evidence to accepted D5R1 without loading any holdout. If the development exit is clean, pause at the documented Yuri decision boundary for a fresh certification holdout versus an explicit reviewed reuse policy. Preserve the legacy default, parser, historical evidence, sealed holdouts, T3.1-T3.4, and T3.5/provider/product/write boundaries |
 
 LC4V4 provenance: the frozen pre-content records remain
 `lc4v4q1-sol-contract.md`, `lc4v4q1-sol-recovery-amendment.md`,
