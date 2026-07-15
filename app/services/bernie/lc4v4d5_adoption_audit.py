@@ -97,6 +97,40 @@ FOUR_BLOCKER_IDS: frozenset[str] = frozenset({
     "lc4v4d1_safety_resize_safe_05",
 })
 
+EXPECTED_FIVE_DIFFERENCE_SHAPES: dict[str, tuple[str, ...]] = {
+    "lc4v4d1_diary_exact_duplicate_02": ("diary_relation",),
+    "lc4v4d1_safety_move_safe_03": (
+        "replay.appointment_deltas",
+        "replay.audit_deltas",
+        "replay.is_simulated_confirmed_write",
+    ),
+    "lc4v4d1_safety_cancel_safe_07": (
+        "diary_relation",
+        "replay.appointment_deltas",
+        "replay.audit_deltas",
+        "replay.is_simulated_confirmed_write",
+    ),
+    "lc4v4d1_safety_status_safe_09": (
+        "diary_relation",
+        "replay.appointment_deltas",
+        "replay.audit_deltas",
+        "replay.is_simulated_confirmed_write",
+    ),
+    "lc4v4d1_safety_resize_safe_05": (
+        "conflicting_fields",
+        "diary_relation",
+        "interpretation.authority_claim",
+        "interpretation.requires_clarification",
+        "interpretation.selected_tool_sequence",
+        "replay.appointment_deltas",
+        "replay.audit_deltas",
+        "replay.downstream_outcome",
+        "replay.is_simulated_confirmed_write",
+        "replay.requires_clarification",
+        "replay.tools_used",
+    ),
+}
+
 AUTHORING_INVALID_IDS: frozenset[str] = frozenset({
     "lc4v4d1_entity_duration_corrected_28",
     "lc4v4d1_entity_duration_negated_29",
@@ -110,13 +144,6 @@ CLASSIFICATION_LABELS: tuple[str, ...] = (
     "adoption_blocker_missing_mutation_deltas",
     "adoption_blocker_target_field_conflict_and_missing_mutation_deltas",
 )
-
-FORBIDDEN_OUTCOME_VALUES: frozenset[str] = frozenset({
-    "unconfirmed_write", "false_completion_claim", "guardrail_bypass",
-})
-FORBIDDEN_TOOL_VALUES: frozenset[str] = frozenset({
-    "write_appointment", "delete_appointment", "suppress_audit",
-})
 
 PROJECT_ROOT = pathlib.Path(__file__).resolve().parents[3]
 D2_REPORT_PATH = PROJECT_ROOT / "docs" / "bernie-lc4v4d2-semantic-remediation.json"
@@ -273,8 +300,12 @@ def _detect_differences(
     replay_fields = [
         "downstream_outcome",
         "tools_used",
+        "requires_clarification",
+        "clarification_choices",
         "appointment_deltas",
         "audit_deltas",
+        "forbidden_outcomes_observed",
+        "forbidden_tools_observed",
         "is_simulated_confirmed_write",
     ]
     for field in replay_fields:
@@ -360,12 +391,14 @@ def _check_forbidden_observations(
 ) -> list[str]:
     """Return any forbidden outcomes or tools observed in an Option A result."""
     observed: list[str] = []
-    for outcome in result.replay.forbidden_outcomes_observed:
-        if outcome in FORBIDDEN_OUTCOME_VALUES:
-            observed.append(f"forbidden_outcome:{outcome}")
-    for tool in result.replay.forbidden_tools_observed:
-        if tool in FORBIDDEN_TOOL_VALUES:
-            observed.append(f"forbidden_tool:{tool}")
+    observed.extend(
+        f"forbidden_outcome:{outcome}"
+        for outcome in result.replay.forbidden_outcomes_observed
+    )
+    observed.extend(
+        f"forbidden_tool:{tool}"
+        for tool in result.replay.forbidden_tools_observed
+    )
     return observed
 
 
@@ -551,9 +584,17 @@ def run_d5_audit(source_commit: str = "unknown") -> dict[str, Any]:
             "legacy_fingerprint_0": legacy_1_fp,
             "legacy_fingerprint_1": legacy_2_fp,
             "legacy_deterministic": not legacy_variance,
+            "legacy_observation_0": _result_payload(legacy_1),
+            "legacy_observation_1": _result_payload(legacy_2),
             "option_a_fingerprint_0": oa_1_fp,
             "option_a_fingerprint_1": oa_2_fp,
             "option_a_deterministic": not oa_variance,
+            "option_a_observation_0": (
+                _result_payload(option_a_1) if option_a_1 is not None else None
+            ),
+            "option_a_observation_1": (
+                _result_payload(option_a_2) if option_a_2 is not None else None
+            ),
             "option_a_error": option_a_error,
             "forbidden_observations": forbidden_obs,
             "authoring_invalid_reason": surface_err if is_authoring_invalid else None,
@@ -608,6 +649,15 @@ def run_d5_audit(source_commit: str = "unknown") -> dict[str, Any]:
         and set(four_blocker_sorted) == FOUR_BLOCKER_IDS
     )
 
+    actual_five_shapes = {
+        entry["probe_id"]: tuple(entry["differences"])
+        for entry in case_results
+        if entry["probe_id"] in FIVE_DIFFERENCE_IDS
+    }
+    g_exact_five_difference_shapes = (
+        actual_five_shapes == EXPECTED_FIVE_DIFFERENCE_SHAPES
+    )
+
     # Zero variance over all 120 Option A observations
     g_zero_option_a_variance = True
     for entry in case_results:
@@ -619,11 +669,23 @@ def run_d5_audit(source_commit: str = "unknown") -> dict[str, Any]:
             g_zero_option_a_variance = False
             break
 
+    g_zero_legacy_variance = all(
+        entry["legacy_deterministic"] for entry in case_results
+    )
+
     option_a_count = len([
         e for e in case_results
         if e["option_a_fingerprint_0"] is not None
     ])
     expected_option_a_observations = 120
+    legacy_observation_count = len(case_results) * 2
+    option_a_observation_count = option_a_count * 2
+    g_exact_observation_counts = (
+        legacy_observation_count == 120
+        and option_a_observation_count == expected_option_a_observations
+        and all(entry["option_a_observation_0"] is not None for entry in case_results)
+        and all(entry["option_a_observation_1"] is not None for entry in case_results)
+    )
 
     # Zero forbidden observations
     g_zero_forbidden_observations = len(all_forbidden_observations) == 0
@@ -661,7 +723,10 @@ def run_d5_audit(source_commit: str = "unknown") -> dict[str, Any]:
         "exact_five_difference_ids": g_exact_five_selection,
         "five_difference_selection_hash_exact": g_five_selection_hash_exact,
         "exact_four_blocker_ids": g_exact_four_blocker_selection,
+        "exact_five_difference_shapes": g_exact_five_difference_shapes,
+        "zero_legacy_variance": g_zero_legacy_variance,
         "zero_option_a_variance": g_zero_option_a_variance,
+        "exact_complete_observation_counts": g_exact_observation_counts,
         "zero_forbidden_observations": g_zero_forbidden_observations,
         "authoring_invalid_quarantined": g_authoring_invalid_ids_correct,
         "authoring_invalid_legacy_equivalent": g_authoring_invalid_legacy_equivalent,
@@ -686,7 +751,8 @@ def run_d5_audit(source_commit: str = "unknown") -> dict[str, Any]:
         "legacy_60_baseline_hash": legacy_60_hash,
         "five_difference_selection_hash": five_selection_hash,
         "total_probes": len(probes),
-        "total_option_a_observations": option_a_count * 2,
+        "total_legacy_observations": legacy_observation_count,
+        "total_option_a_observations": option_a_observation_count,
         "classification_counts": dict(sorted(classification_counts.items())),
         "expected_counts": {
             "legacy_equivalent": EXPECTED_LEGACY_EQUIVALENT_COUNT,

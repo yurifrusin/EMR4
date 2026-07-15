@@ -116,7 +116,7 @@ class TestD5EvidenceReport:
 
     def test_d5_gate_count(self) -> None:
         report = run_d5_audit("test-source")
-        assert len(report["gates"]) == 24
+        assert len(report["gates"]) == 27
 
     def test_d5_classification_counts_exact(self) -> None:
         report = run_d5_audit("test-source")
@@ -244,7 +244,15 @@ class TestDeterminism:
 
     def test_total_observations(self) -> None:
         report = run_d5_audit("test-source")
+        assert report["total_legacy_observations"] == 120
         assert report["total_option_a_observations"] == 120
+        assert report["gates"]["zero_legacy_variance"]
+        assert report["gates"]["exact_complete_observation_counts"]
+        for case in report["cases"]:
+            assert case["legacy_observation_0"] is not None
+            assert case["legacy_observation_1"] is not None
+            assert case["option_a_observation_0"] is not None
+            assert case["option_a_observation_1"] is not None
 
 
 # ===================================================================
@@ -268,6 +276,10 @@ class TestAdoptionBlockers:
             assert detail["differences"], (
                 f"Blocker {detail['probe_id']} has no recorded differences"
             )
+
+    def test_five_difference_shapes_exact(self) -> None:
+        report = run_d5_audit("test-source")
+        assert report["gates"]["exact_five_difference_shapes"]
 
 
 # ===================================================================
@@ -333,3 +345,15 @@ class TestTamperResistance:
         )
         report = audit.run_d5_audit("tampered-d4-rpt")
         assert report["decision"] == "revision_required"
+
+    def test_unknown_forbidden_observation_is_not_filtered(self) -> None:
+        from dataclasses import replace
+        from app.services.bernie.composed_corpus_evaluator import PolicyVersion, compose_versioned
+        from app.services.bernie.lc4v4_development_diagnostic import dict_to_spec
+        from app.services.bernie.lc4v4d5_adoption_audit import _check_forbidden_observations
+
+        spec = dict_to_spec(author_all_probes()[0])
+        result = compose_versioned(spec, policy_version=PolicyVersion.OPTION_A)
+        replay = replace(result.replay, forbidden_tools_observed=("novel_forbidden",))
+        observed = _check_forbidden_observations(replace(result, replay=replay))
+        assert observed == ["forbidden_tool:novel_forbidden"]
