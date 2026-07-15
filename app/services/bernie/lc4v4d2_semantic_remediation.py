@@ -467,7 +467,7 @@ def d2_report_to_markdown(report: D2Report) -> str:
         "",
     ]
     for item in report.quarantines:
-        lines.append(f"- `{item.probe_id}` — {item.defect}.")
+        lines.append(f"- `{item.probe_id}`: {item.defect}.")
     lines.extend([
         "",
         "The three frozen cases remain unchanged and are not counted as parser failures. "
