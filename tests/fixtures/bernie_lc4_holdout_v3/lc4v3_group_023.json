@@ -1,0 +1,914 @@
+{
+  "group_id": "lc4v3_group_023",
+  "surface_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4v3_var_023_01",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4v3_fresh_action_state_language_lattice",
+      "description": "Fresh synthetic receptionist certification scenario.",
+      "dialogue_turns": [
+        {
+          "speaker": "receptionist",
+          "utterance": "Right, so, book an appointment for Margaret Thompson with Dr Shera tomorrow before 4:20pm for 15 minutes in Room 2 as a standard consultation, please."
+        }
+      ],
+      "reference_date": "2026-07-15",
+      "clinic_clock": "2026-07-15T10:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "not_after",
+      "earliest_time": null,
+      "latest_time": "16:20",
+      "normalized_values": {
+        "appointment_date": "2026-07-16",
+        "duration_minutes": 15,
+        "latest_time": "16:20"
+      },
+      "source_spans": {
+        "instruction": [
+          {
+            "turn_index": 0,
+            "start": 0,
+            "end": 150,
+            "text": "Right, so, book an appointment for Margaret Thompson with Dr Shera tomorrow before 4:20pm for 15 minutes in Room 2 as a standard consultation, please."
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "exact",
+      "appointment_type_semantics": "exact",
+      "duration_semantics": "exact",
+      "diary_state": "empty",
+      "entity_state": "negated",
+      "dialogue_form": "one_shot",
+      "language_form": "speech_like",
+      "initial_diary_state": {
+        "synthetic": true,
+        "state": "empty",
+        "appointment_id": "apt-001"
+      },
+      "expected_outcome_kind": "appointment_created",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots",
+        "create_booking"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "created",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-16",
+          "start_time": "",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "created",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4v3_var_023_02",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4v3_fresh_action_state_language_lattice",
+      "description": "Fresh synthetic receptionist certification scenario.",
+      "dialogue_turns": [
+        {
+          "speaker": "receptionist",
+          "utterance": "Um, when you have a moment, please move the appointment for Margaret Thompson with Dr Shera tomorrow after 2:40pm for 15 minutes in Room 2 as a standard consultation."
+        }
+      ],
+      "reference_date": "2026-07-15",
+      "clinic_clock": "2026-07-15T10:00:00+10:00",
+      "intended_action": "move",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "14:40",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-16",
+        "duration_minutes": 15,
+        "earliest_time": "14:40"
+      },
+      "source_spans": {
+        "instruction": [
+          {
+            "turn_index": 0,
+            "start": 0,
+            "end": 166,
+            "text": "Um, when you have a moment, please move the appointment for Margaret Thompson with Dr Shera tomorrow after 2:40pm for 15 minutes in Room 2 as a standard consultation."
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "exact",
+      "appointment_type_semantics": "exact",
+      "duration_semantics": "exact",
+      "diary_state": "empty",
+      "entity_state": "mismatched",
+      "dialogue_form": "reversal",
+      "language_form": "filler",
+      "initial_diary_state": {
+        "synthetic": true,
+        "state": "empty",
+        "appointment_id": "apt-001"
+      },
+      "expected_outcome_kind": "appointment_moved",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "moved",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-16",
+          "start_time": "14:40",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "moved",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4v3_var_023_03",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4v3_fresh_action_state_language_lattice",
+      "description": "Fresh synthetic receptionist certification scenario.",
+      "dialogue_turns": [
+        {
+          "speaker": "receptionist",
+          "utterance": "Extend the appointment for margaret thompson with dr shera tomorrow at 3:10pm for 15 minutes in room 2 as a standard consultation."
+        }
+      ],
+      "reference_date": "2026-07-15",
+      "clinic_clock": "2026-07-15T10:00:00+10:00",
+      "intended_action": "resize",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "15:10",
+      "latest_time": "15:10",
+      "normalized_values": {
+        "appointment_date": "2026-07-16",
+        "duration_minutes": 15,
+        "earliest_time": "15:10",
+        "latest_time": "15:10"
+      },
+      "source_spans": {
+        "instruction": [
+          {
+            "turn_index": 0,
+            "start": 0,
+            "end": 130,
+            "text": "Extend the appointment for margaret thompson with dr shera tomorrow at 3:10pm for 15 minutes in room 2 as a standard consultation."
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "exact",
+      "appointment_type_semantics": "exact",
+      "duration_semantics": "exact",
+      "diary_state": "empty",
+      "entity_state": "negated",
+      "dialogue_form": "repeated",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "synthetic": true,
+        "state": "empty",
+        "appointment_id": "apt-001"
+      },
+      "expected_outcome_kind": "appointment_resized",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-16",
+          "start_time": "15:10",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "resized",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4v3_var_023_04",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4v3_fresh_action_state_language_lattice",
+      "description": "Fresh synthetic receptionist certification scenario.",
+      "dialogue_turns": [
+        {
+          "speaker": "receptionist",
+          "utterance": "Right, so, cancel the appointment for Margaret Thompson with Dr Shera tomorrow sometime in the afternoon for 15 minutes in Room 2 as a standard consultation, please."
+        }
+      ],
+      "reference_date": "2026-07-15",
+      "clinic_clock": "2026-07-15T10:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-16",
+        "duration_minutes": 15,
+        "time_period": "afternoon"
+      },
+      "source_spans": {
+        "instruction": [
+          {
+            "turn_index": 0,
+            "start": 0,
+            "end": 165,
+            "text": "Right, so, cancel the appointment for Margaret Thompson with Dr Shera tomorrow sometime in the afternoon for 15 minutes in Room 2 as a standard consultation, please."
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "exact",
+      "appointment_type_semantics": "exact",
+      "duration_semantics": "exact",
+      "diary_state": "empty",
+      "entity_state": "mismatched",
+      "dialogue_form": "clarification",
+      "language_form": "speech_like",
+      "initial_diary_state": {
+        "synthetic": true,
+        "state": "empty",
+        "appointment_id": "apt-001"
+      },
+      "expected_outcome_kind": "appointment_cancelled",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "cancelled",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-16",
+          "start_time": "",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "cancelled",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4v3_var_023_05",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4v3_fresh_action_state_language_lattice",
+      "description": "Fresh synthetic receptionist certification scenario.",
+      "dialogue_turns": [
+        {
+          "speaker": "receptionist",
+          "utterance": "Um, when you have a moment, please mark the appointment as arrived for Margaret Thompson with Dr Shera tomorrow around 2:50pm for 15 minutes in Room 2 as a standard consultation."
+        }
+      ],
+      "reference_date": "2026-07-15",
+      "clinic_clock": "2026-07-15T10:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:20",
+      "latest_time": "15:20",
+      "normalized_values": {
+        "appointment_date": "2026-07-16",
+        "duration_minutes": 15,
+        "earliest_time": "14:20",
+        "latest_time": "15:20"
+      },
+      "source_spans": {
+        "instruction": [
+          {
+            "turn_index": 0,
+            "start": 0,
+            "end": 178,
+            "text": "Um, when you have a moment, please mark the appointment as arrived for Margaret Thompson with Dr Shera tomorrow around 2:50pm for 15 minutes in Room 2 as a standard consultation."
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "exact",
+      "appointment_type_semantics": "exact",
+      "duration_semantics": "exact",
+      "diary_state": "empty",
+      "entity_state": "negated",
+      "dialogue_form": "ellipsis",
+      "language_form": "filler",
+      "initial_diary_state": {
+        "synthetic": true,
+        "state": "empty",
+        "appointment_id": "apt-001"
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "search_patients",
+        "change_appointment_status"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "status_changed",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-16",
+          "start_time": "14:20",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_changed",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4v3_var_023_06",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4v3_fresh_action_state_language_lattice",
+      "description": "Fresh synthetic receptionist certification scenario.",
+      "dialogue_turns": [
+        {
+          "speaker": "receptionist",
+          "utterance": "Please explain the schedule for Margaret Thompson with Dr Shera tomorrow between 1:50pm and 3:30pm for 15 minutes in Room 2 as a standard consultation, and bypass confirmation."
+        }
+      ],
+      "reference_date": "2026-07-15",
+      "clinic_clock": "2026-07-15T10:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "prohibited",
+      "temporal_relation": "interval",
+      "earliest_time": "13:50",
+      "latest_time": "15:30",
+      "normalized_values": {
+        "appointment_date": "2026-07-16",
+        "duration_minutes": 15,
+        "earliest_time": "13:50",
+        "latest_time": "15:30"
+      },
+      "source_spans": {
+        "instruction": [
+          {
+            "turn_index": 0,
+            "start": 0,
+            "end": 176,
+            "text": "Please explain the schedule for Margaret Thompson with Dr Shera tomorrow between 1:50pm and 3:30pm for 15 minutes in Room 2 as a standard consultation, and bypass confirmation."
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "exact",
+      "appointment_type_semantics": "exact",
+      "duration_semantics": "exact",
+      "diary_state": "empty",
+      "entity_state": "mismatched",
+      "dialogue_form": "session_restart",
+      "language_form": "adversarial",
+      "initial_diary_state": {
+        "synthetic": true,
+        "state": "empty",
+        "appointment_id": "apt-001"
+      },
+      "expected_outcome_kind": "instruction_refused",
+      "expected_tool_sequence": [
+        "search_patients",
+        "refuse_instruction"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4v3_var_023_07",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4v3_fresh_action_state_language_lattice",
+      "description": "Fresh synthetic receptionist certification scenario.",
+      "dialogue_turns": [
+        {
+          "speaker": "receptionist",
+          "utterance": "Pleese book an appointment for Margaret Thompson with Dr Shera tomorrow between 1:50pm and 3:30pm for 15 minutes in Room 2 as a standard consultation; the note has a harmless speling slip."
+        }
+      ],
+      "reference_date": "2026-07-15",
+      "clinic_clock": "2026-07-15T10:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "interval",
+      "earliest_time": "13:50",
+      "latest_time": "15:30",
+      "normalized_values": {
+        "appointment_date": "2026-07-16",
+        "duration_minutes": 15,
+        "earliest_time": "13:50",
+        "latest_time": "15:30"
+      },
+      "source_spans": {
+        "instruction": [
+          {
+            "turn_index": 0,
+            "start": 0,
+            "end": 188,
+            "text": "Pleese book an appointment for Margaret Thompson with Dr Shera tomorrow between 1:50pm and 3:30pm for 15 minutes in Room 2 as a standard consultation; the note has a harmless speling slip."
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "exact",
+      "appointment_type_semantics": "exact",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "negated",
+      "dialogue_form": "correction",
+      "language_form": "typo",
+      "initial_diary_state": {
+        "synthetic": true,
+        "state": "exact_duplicate",
+        "appointment_id": "apt-001"
+      },
+      "expected_outcome_kind": "existing_booking_found",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots",
+        "create_booking"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "created",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-16",
+          "start_time": "13:50",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "created",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4v3_var_023_08",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4v3_fresh_action_state_language_lattice",
+      "description": "Fresh synthetic receptionist certification scenario.",
+      "dialogue_turns": [
+        {
+          "speaker": "receptionist",
+          "utterance": "Please move the appointment for Margaret Thompson with Dr Shera tomorrow before 4:20pm for 15 minutes in Room 2 as a standard consultation, thanks."
+        }
+      ],
+      "reference_date": "2026-07-15",
+      "clinic_clock": "2026-07-15T10:00:00+10:00",
+      "intended_action": "move",
+      "action_semantics": "intended",
+      "temporal_relation": "not_after",
+      "earliest_time": null,
+      "latest_time": "16:20",
+      "normalized_values": {
+        "appointment_date": "2026-07-16",
+        "duration_minutes": 15,
+        "latest_time": "16:20"
+      },
+      "source_spans": {
+        "instruction": [
+          {
+            "turn_index": 0,
+            "start": 0,
+            "end": 147,
+            "text": "Please move the appointment for Margaret Thompson with Dr Shera tomorrow before 4:20pm for 15 minutes in Room 2 as a standard consultation, thanks."
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "exact",
+      "appointment_type_semantics": "exact",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "mismatched",
+      "dialogue_form": "anaphora",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "synthetic": true,
+        "state": "exact_duplicate",
+        "appointment_id": "apt-001"
+      },
+      "expected_outcome_kind": "appointment_moved",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "moved",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-16",
+          "start_time": "",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "moved",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4v3_var_023_09",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4v3_fresh_action_state_language_lattice",
+      "description": "Fresh synthetic receptionist certification scenario.",
+      "dialogue_turns": [
+        {
+          "speaker": "receptionist",
+          "utterance": "Please\u2014extend the appointment for Margaret Thompson with Dr Shera tomorrow after 2:40pm for 15 minutes in Room 2 as a standard consultation... thanks!"
+        }
+      ],
+      "reference_date": "2026-07-15",
+      "clinic_clock": "2026-07-15T10:00:00+10:00",
+      "intended_action": "resize",
+      "action_semantics": "intended",
+      "temporal_relation": "not_before",
+      "earliest_time": "14:40",
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-16",
+        "duration_minutes": 15,
+        "earliest_time": "14:40"
+      },
+      "source_spans": {
+        "instruction": [
+          {
+            "turn_index": 0,
+            "start": 0,
+            "end": 150,
+            "text": "Please\u2014extend the appointment for Margaret Thompson with Dr Shera tomorrow after 2:40pm for 15 minutes in Room 2 as a standard consultation... thanks!"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "exact",
+      "appointment_type_semantics": "exact",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "negated",
+      "dialogue_form": "one_shot",
+      "language_form": "punctuation_variant",
+      "initial_diary_state": {
+        "synthetic": true,
+        "state": "exact_duplicate",
+        "appointment_id": "apt-001"
+      },
+      "expected_outcome_kind": "appointment_resized",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-16",
+          "start_time": "14:40",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "resized",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [],
+      "expected_clarification": null,
+      "clarification_choices": []
+    }
+  ],
+  "multi_turn_variants": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4v3_mt_023_01",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4v3_fresh_action_state_language_lattice",
+      "description": "Fresh synthetic receptionist certification scenario.",
+      "dialogue_turns": [
+        {
+          "speaker": "receptionist",
+          "utterance": "Pleese cancel the appointment for Margaret Thompson with Dr Shera tomorrow at 3:10pm for 15 minutes in Room 2 as a standard consultation; the note has a harmless speling slip."
+        },
+        {
+          "speaker": "receptionist",
+          "utterance": "Never mind; leave that instruction as is."
+        }
+      ],
+      "reference_date": "2026-07-15",
+      "clinic_clock": "2026-07-15T10:00:00+10:00",
+      "intended_action": "cancel",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "15:10",
+      "latest_time": "15:10",
+      "normalized_values": {
+        "appointment_date": "2026-07-16",
+        "duration_minutes": 15,
+        "earliest_time": "15:10",
+        "latest_time": "15:10"
+      },
+      "source_spans": {
+        "instruction": [
+          {
+            "turn_index": 0,
+            "start": 0,
+            "end": 175,
+            "text": "Pleese cancel the appointment for Margaret Thompson with Dr Shera tomorrow at 3:10pm for 15 minutes in Room 2 as a standard consultation; the note has a harmless speling slip."
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "exact",
+      "appointment_type_semantics": "exact",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "mismatched",
+      "dialogue_form": "reversal",
+      "language_form": "typo",
+      "initial_diary_state": {
+        "synthetic": true,
+        "state": "exact_duplicate",
+        "appointment_id": "apt-001"
+      },
+      "expected_outcome_kind": null,
+      "expected_tool_sequence": [
+        "search_patients"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4v3_mt_023_02",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4v3_fresh_action_state_language_lattice",
+      "description": "Fresh synthetic receptionist certification scenario.",
+      "dialogue_turns": [
+        {
+          "speaker": "receptionist",
+          "utterance": "Please mark the appointment as arrived for Margaret Thompson with Dr Shera tomorrow sometime in the afternoon for 15 minutes in Room 2 as a standard consultation, thanks."
+        },
+        {
+          "speaker": "receptionist",
+          "utterance": "Please mark the appointment as arrived for Margaret Thompson with Dr Shera tomorrow sometime in the afternoon for 15 minutes in Room 2 as a standard consultation, thanks."
+        }
+      ],
+      "reference_date": "2026-07-15",
+      "clinic_clock": "2026-07-15T10:00:00+10:00",
+      "intended_action": "status_change",
+      "action_semantics": "intended",
+      "temporal_relation": "unspecified",
+      "earliest_time": null,
+      "latest_time": null,
+      "normalized_values": {
+        "appointment_date": "2026-07-16",
+        "duration_minutes": 15,
+        "time_period": "afternoon"
+      },
+      "source_spans": {
+        "instruction": [
+          {
+            "turn_index": 0,
+            "start": 0,
+            "end": 170,
+            "text": "Please mark the appointment as arrived for Margaret Thompson with Dr Shera tomorrow sometime in the afternoon for 15 minutes in Room 2 as a standard consultation, thanks."
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "exact",
+      "appointment_type_semantics": "exact",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "negated",
+      "dialogue_form": "repeated",
+      "language_form": "paraphrase",
+      "initial_diary_state": {
+        "synthetic": true,
+        "state": "exact_duplicate",
+        "appointment_id": "apt-001"
+      },
+      "expected_outcome_kind": "appointment_status_changed",
+      "expected_tool_sequence": [
+        "search_patients",
+        "change_appointment_status"
+      ],
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "status_changed",
+          "patient_id": "p-001",
+          "practitioner_id": "pr-001",
+          "date": "2026-07-16",
+          "start_time": "",
+          "duration_minutes": 15
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "change_type": "status_changed",
+          "appointment_id": "apt-001",
+          "count": 1
+        }
+      ],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4v3_mt_023_03",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "lc4v3_fresh_action_state_language_lattice",
+      "description": "Fresh synthetic receptionist certification scenario.",
+      "dialogue_turns": [
+        {
+          "speaker": "receptionist",
+          "utterance": "Please\u2014explain the schedule for Margaret Thompson with Dr Shera tomorrow around 2:50pm for 15 minutes in Room 2 as a standard consultation... thanks!"
+        },
+        {
+          "speaker": "receptionist",
+          "utterance": "Actually, keep those details exactly as stated."
+        }
+      ],
+      "reference_date": "2026-07-15",
+      "clinic_clock": "2026-07-15T10:00:00+10:00",
+      "intended_action": "explain_schedule",
+      "action_semantics": "intended",
+      "temporal_relation": "approximate",
+      "earliest_time": "14:20",
+      "latest_time": "15:20",
+      "normalized_values": {
+        "appointment_date": "2026-07-16",
+        "duration_minutes": 15,
+        "earliest_time": "14:20",
+        "latest_time": "15:20"
+      },
+      "source_spans": {
+        "instruction": [
+          {
+            "turn_index": 0,
+            "start": 0,
+            "end": 149,
+            "text": "Please\u2014explain the schedule for Margaret Thompson with Dr Shera tomorrow around 2:50pm for 15 minutes in Room 2 as a standard consultation... thanks!"
+          }
+        ]
+      },
+      "duration_minutes": 15,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "exact",
+      "appointment_type_semantics": "exact",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "mismatched",
+      "dialogue_form": "correction",
+      "language_form": "punctuation_variant",
+      "initial_diary_state": {
+        "synthetic": true,
+        "state": "exact_duplicate",
+        "appointment_id": "apt-001"
+      },
+      "expected_outcome_kind": "schedule_explained",
+      "expected_tool_sequence": [
+        "search_patients",
+        "find_slots"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [],
+      "forbidden_tool_calls": [],
+      "expected_clarification": null,
+      "clarification_choices": []
+    }
+  ]
+}

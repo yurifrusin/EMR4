@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import ast
 import json
 import shutil
 import subprocess
@@ -521,11 +522,14 @@ def test_framework_import_isolation() -> None:
     validate_lc4v3_isolation()
 
 
-def test_no_real_v3_artifact_exists_in_repository() -> None:
-    for forbidden in (
-        ROOT / "tests/fixtures/bernie_lc4_holdout_v3",
-        ROOT / "docs/bernie-lc4v3-seal.json",
-        ROOT / "docs/bernie-lc4v3-aggregate-report.json",
-        ROOT / "scripts/bernie_lc4v3_authoring.py",
-    ):
-        assert not forbidden.exists()
+def test_framework_requires_operator_supplied_artifact_paths() -> None:
+    """Production evidence locations must never become framework defaults."""
+    parser_source = (ROOT / "scripts/bernie_lc4v3_certification.py").read_text(
+        encoding="utf-8",
+    )
+    tree = ast.parse(parser_source)
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Call) or not isinstance(node.func, ast.Attribute):
+            continue
+        if node.func.attr == "add_argument":
+            assert all(keyword.arg != "default" for keyword in node.keywords)

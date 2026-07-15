@@ -1,0 +1,113 @@
+{
+  "schema_version": "lc4v3.manifest.v1",
+  "corpus_identity": "lc4-holdout-v3",
+  "group_count": 24,
+  "variants_per_group": 12,
+  "surface_variants_per_group": 9,
+  "multi_turn_per_group": 3,
+  "total_scenarios": 288,
+  "total_trajectories": 72,
+  "repeat_count": 2,
+  "total_production_samples": 576,
+  "evaluation_id": "lc4-holdout-v3-baseline-001",
+  "evaluator_version": "lc4v3.aggregate_evaluator.v1",
+  "files": [
+    {
+      "filename": "lc4v3_group_001.json",
+      "file_hash": "sha256:a2a3efbf25b17d4a1b95e02bedfe3f85857d19dcf1a8637cd988127633927833"
+    },
+    {
+      "filename": "lc4v3_group_002.json",
+      "file_hash": "sha256:114892fab161557dc9d73748ab97d44e0fc55ed64b83bded8f47d348ba0bfc66"
+    },
+    {
+      "filename": "lc4v3_group_003.json",
+      "file_hash": "sha256:7c4fe07b0bf912377a4b24f24c807ebae2278d7e20f4376ed992080f8c6f8e7c"
+    },
+    {
+      "filename": "lc4v3_group_004.json",
+      "file_hash": "sha256:1f29ae940fdd772a5a05b9e769ddcbe4d9a14662492423c21b474257f187cdc7"
+    },
+    {
+      "filename": "lc4v3_group_005.json",
+      "file_hash": "sha256:07a70f5809f7f03393a928b55f12e1384180e02336a79de37a8e5429b4e8ebcf"
+    },
+    {
+      "filename": "lc4v3_group_006.json",
+      "file_hash": "sha256:dd2b8652ac857e15259d68109ae842651c252ca0ba46f41cd763e53535e15778"
+    },
+    {
+      "filename": "lc4v3_group_007.json",
+      "file_hash": "sha256:36a714578ab72e708f4043b76b4fb52abd5ccf590ec38999e2b23fb7246aec90"
+    },
+    {
+      "filename": "lc4v3_group_008.json",
+      "file_hash": "sha256:1c4c8e6bfcedbf5b85b4924467d6eba4d3aba8f04170f22304e8b6fc75f28303"
+    },
+    {
+      "filename": "lc4v3_group_009.json",
+      "file_hash": "sha256:30970b65b6588fd36bd601613cc3f4ab772731865839b12f215895a291d17940"
+    },
+    {
+      "filename": "lc4v3_group_010.json",
+      "file_hash": "sha256:30bca9e82ca4faebe46b84e8d446cff65b91b2b2d900d06edee6523a03cf6592"
+    },
+    {
+      "filename": "lc4v3_group_011.json",
+      "file_hash": "sha256:c191a76b4dfd0541d0e751dd1d583a825108ffe1a4ccc695d42330f9f9c8f49c"
+    },
+    {
+      "filename": "lc4v3_group_012.json",
+      "file_hash": "sha256:027a440537323c32c65faa533f60febf90b8c333bf84d9cd05ff5a537c811d81"
+    },
+    {
+      "filename": "lc4v3_group_013.json",
+      "file_hash": "sha256:2b1bf9bf115b1d7e6a253569f621a6b6f7c83c3f73965c544587e2ef0f12efd2"
+    },
+    {
+      "filename": "lc4v3_group_014.json",
+      "file_hash": "sha256:3ddffd72bdf2e172602bf4463dfbb73255c795c8d7ccc6dc24217e7425c44dc7"
+    },
+    {
+      "filename": "lc4v3_group_015.json",
+      "file_hash": "sha256:9d6ac7105ef5945d1457e4515595a20dec4d3bbc7cb8e0c2e21fbc6e7df5072f"
+    },
+    {
+      "filename": "lc4v3_group_016.json",
+      "file_hash": "sha256:94eb702be9bffa879978aa27c1bb33c510db9f6e3aebeecf770dab80380a6234"
+    },
+    {
+      "filename": "lc4v3_group_017.json",
+      "file_hash": "sha256:fef05ad9616c8d2fb6612491f1e0a4ff6b985006d279d0d0b98832fa8c1ca347"
+    },
+    {
+      "filename": "lc4v3_group_018.json",
+      "file_hash": "sha256:dc711de90f6d91436516657998bdcc215ceb6ba1018cb6502bf25ebe26f60d03"
+    },
+    {
+      "filename": "lc4v3_group_019.json",
+      "file_hash": "sha256:84f3a742bdd2bb6bfc44d3c8c002ef02cf22a6aa45fa5a8dee8d21522d1f7247"
+    },
+    {
+      "filename": "lc4v3_group_020.json",
+      "file_hash": "sha256:b0014ed965ba0551b58c3b6ef6c14ee6426a5504bfcb20739ef691ff8f71a746"
+    },
+    {
+      "filename": "lc4v3_group_021.json",
+      "file_hash": "sha256:aaf87b33cf44a7246d423c313548a0f47b9d5da9f2be83bae2b70148384e96f0"
+    },
+    {
+      "filename": "lc4v3_group_022.json",
+      "file_hash": "sha256:6605fff464e638b1b4cc00a6b79900b9c43475d89ce1e30bcb8366732bdcd414"
+    },
+    {
+      "filename": "lc4v3_group_023.json",
+      "file_hash": "sha256:f3f7238efb367b9f5c539929f7a64c6d6fb5dd051a3c925d7bb96f17b5bc1512"
+    },
+    {
+      "filename": "lc4v3_group_024.json",
+      "file_hash": "sha256:5ad12d99ba93e8f75b1d1291e0856bb345fabfbd8a4c934a4f81d08ca5012292"
+    }
+  ],
+  "corpus_hash": "sha256:c05ffbf9d513ed098216417bc3980abe284aa12079b6df4acd09d14bab88ec6d"
+}
