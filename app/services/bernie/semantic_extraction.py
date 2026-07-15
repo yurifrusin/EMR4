@@ -308,6 +308,94 @@ def _is_correction_turn(text: str) -> bool:
 
 
 # ---------------------------------------------------------------------------
+# Location extraction
+# ---------------------------------------------------------------------------
+
+_LOCATION_ROOM_PATTERN = re.compile(
+    r"\b(?:in\s+)?(?:Room|room)\s+(\d+)\b",
+)
+
+_LOCATION_AMBIGUOUS = re.compile(
+    r"\b(?:any\s+room|some\s+room|which\s+room)\b",
+    re.I,
+)
+
+_LOCATION_NEGATION_PREFIX = re.compile(
+    r"\b(?:not\s+in\s+|not\s+)\b", re.I
+)
+
+
+def _extract_location(text: str) -> tuple[str | None, str]:
+    """Extract location (room reference) from utterance.
+
+    Returns (location value or None, semantics label).
+    Semantics is ``"exact"``, ``"omitted"``, ``"ambiguous"``, or ``"negated"``.
+    """
+    # Check negation first: "not in Room 2" or "not Room 2"
+    neg_scope = _LOCATION_NEGATION_PREFIX.search(text)
+    if neg_scope:
+        after_neg = text[neg_scope.end():]
+        room_m = _LOCATION_ROOM_PATTERN.search(after_neg)
+        if room_m:
+            return room_m.group(1), "negated"
+
+    if _LOCATION_AMBIGUOUS.search(text):
+        return None, "ambiguous"
+
+    m = _LOCATION_ROOM_PATTERN.search(text)
+    if m:
+        return m.group(1), "exact"
+
+    return None, "omitted"
+
+
+# ---------------------------------------------------------------------------
+# Appointment type extraction
+# ---------------------------------------------------------------------------
+
+_APPOINTMENT_TYPE_PATTERNS: list[tuple[re.Pattern[str], str]] = [
+    (re.compile(r"\bstandard consultation\b", re.I), "standard_consultation"),
+    (re.compile(r"\blong consultation\b", re.I), "long_consultation"),
+    (re.compile(r"\bcare plan appointment\b", re.I), "care_plan_appointment"),
+]
+
+_APPOINTMENT_TYPE_AMBIGUOUS = re.compile(
+    r"\b(?:any\s+appointment\s+type|any\s+type|any\s+kind|"
+    r"whatever\s+(?:type|kind)|doesn'?t\s+matter)\b",
+    re.I,
+)
+
+_APPOINTMENT_TYPE_NEGATION_PREFIX = re.compile(
+    r"\b(?:not\s+(?:as\s+)?(?:a\s+)?(?:an\s+)?)\b", re.I
+)
+
+
+def _extract_appointment_type(text: str) -> tuple[str | None, str]:
+    """Extract appointment type from utterance.
+
+    Returns (type value or None, semantics label).
+    Semantics is ``"exact"``, ``"omitted"``, ``"ambiguous"``, or ``"negated"``.
+    """
+    # Check negation first
+    neg_scope = _APPOINTMENT_TYPE_NEGATION_PREFIX.search(text)
+    if neg_scope:
+        after_neg = text[neg_scope.end():]
+        for pat, type_name in _APPOINTMENT_TYPE_PATTERNS:
+            if pat.search(after_neg):
+                return type_name, "negated"
+
+    if _APPOINTMENT_TYPE_AMBIGUOUS.search(text):
+        return None, "ambiguous"
+
+    for pat, type_name in _APPOINTMENT_TYPE_PATTERNS:
+        m = pat.search(text)
+        if m:
+            return type_name, "exact"
+
+    return None, "omitted"
+
+
+# ---------------------------------------------------------------------------
 # Patient name extraction
 # ---------------------------------------------------------------------------
 
@@ -333,12 +421,17 @@ def _extract_patient(text: str) -> tuple[str | None, str]:
     """Extract patient name from utterance.
 
     Returns (name or None, semantics label).
-    Semantics is ``"exact"``, ``"omitted"``, or ``"ambiguous"``.
+    Semantics is ``"exact"``, ``"omitted"``, ``"ambiguous"``, or ``"negated"``.
     """
     if _AMBIGUOUS_PATIENT.search(text):
         return None, "ambiguous"
     m = _PATIENT_PATTERN.search(text)
     if m:
+        # Check if "not" directly precedes the captured name (entity negation,
+        # distinct from action-level negation like "do not book X")
+        before = text[max(0, m.start() - 8):m.start()]
+        if re.search(r"\bnot\s+$", before, re.I):
+            return m.group(1), "negated"
         return m.group(1), "exact"
     return None, "omitted"
 
@@ -363,11 +456,17 @@ def _extract_practitioner(text: str) -> tuple[str | None, str]:
     """Extract practitioner name from utterance.
 
     Returns (name or None, semantics label).
+    Semantics is ``"exact"``, ``"omitted"``, ``"ambiguous"``, or ``"negated"``.
     """
     if _AMBIGUOUS_PRACTITIONER.search(text):
         return None, "ambiguous"
     m = _PRACTITIONER_PATTERN.search(text)
     if m:
+        # Check if "not" directly precedes the captured name (entity negation,
+        # distinct from action-level negation like "do not book with X")
+        before = text[max(0, m.start() - 8):m.start()]
+        if re.search(r"\bnot\s+$", before, re.I):
+            return m.group(1), "negated"
         return m.group(1), "exact"
     return None, "omitted"
 
@@ -382,14 +481,44 @@ _DURATION_AMBIGUOUS = re.compile(
     r"\b(how long|some time|a while|short|long)\b", re.I
 )
 
+# Lexical duration forms mapped to minutes
+_LEXICAL_DURATION: list[tuple[re.Pattern[str], int]] = [
+    (re.compile(r"\bhalf\s+an?\s+hour\b", re.I), 30),
+    (re.compile(r"\bone\s+hour\b", re.I), 60),
+    (re.compile(r"\ba\s+quarter\s+of\s+an\s+hour\b", re.I), 15),
+    (re.compile(r"\bquarter\s+of\s+an\s+hour\b", re.I), 15),
+]
+
 
 def _extract_duration(text: str) -> tuple[int | None, str]:
     """Extract duration in minutes from utterance.
 
     Returns (minutes or None, semantics label).
+    Supports numeric patterns (e.g. ``"30 minutes"``) and lexical forms
+    (``"half an hour"``, ``"one hour"``, ``"quarter of an hour"``).
+
+    When a numeric or lexical duration is preceded by a negation prefix,
+    the semantics is ``"negated"`` and the value is not returned as a
+    normalized duration.
     """
+    # Check negation before any match
+    def _check_negation(match_start: int) -> bool:
+        before = text[max(0, match_start - 30):match_start]
+        return bool(_NEGATION_PREFIX.search(before))
+
+    # Try lexical forms first (before numeric, so "half an hour" is not confused)
+    for pat, minutes in _LEXICAL_DURATION:
+        m = pat.search(text)
+        if m:
+            if _check_negation(m.start()):
+                return None, "negated"
+            return minutes, "exact"
+
+    # Try numeric pattern
     m = _DURATION_PATTERN.search(text)
     if m:
+        if _check_negation(m.start()):
+            return None, "negated"
         return int(m.group(1)), "exact"
     if _DURATION_AMBIGUOUS.search(text):
         return None, "ambiguous"
@@ -540,6 +669,7 @@ def _determine_clarification(
     patient_semantics: str,
     practitioner_semantics: str,
     correction_index: int | None,
+    duration_semantics: str = "omitted",
 ) -> tuple[bool, tuple[str, ...]]:
     """Determine whether clarification is needed, based on action-relevant facts.
 
@@ -552,6 +682,9 @@ def _determine_clarification(
     - ``cancel``: needs patient/appointment identification (time is bonus)
     - ``status_change``: needs target status
     - ``explain_schedule``: needs patient identification
+
+    Negated required entities (patient, practitioner, duration) fail closed
+    into clarification.
     """
     from app.services.diary.temporal import parse_time_fragment
 
@@ -569,12 +702,17 @@ def _determine_clarification(
         if has_sometime:
             needs_clarify = True
 
-        # Ambiguous practitioner takes priority over sometime-in-afternoon
-        # because the practitioner name is required before any time choice
-        # can be acted on.
-        if practitioner_semantics == "ambiguous":
+        # Negated or ambiguous patient requires clarification
+        if patient_semantics in ("ambiguous", "negated"):
             needs_clarify = True
-            choices = ["Dr Taylor", "Dr Patel", "Dr Chen"]
+            choices = []
+        # Negated or ambiguous practitioner requires clarification
+        elif practitioner_semantics in ("ambiguous", "negated"):
+            needs_clarify = True
+            if practitioner_semantics == "ambiguous":
+                choices = ["Dr Taylor", "Dr Patel", "Dr Chen"]
+            else:
+                choices = []
         elif has_sometime:
             choices = ["1pm", "2pm", "3pm", "4pm"]
         # Date present but no time bounds → clarify for time
@@ -586,8 +724,15 @@ def _determine_clarification(
             needs_clarify = True
             choices = ["Morning", "Afternoon", "All day"]
 
-        # Correction may resolve
-        if correction_index is not None and needs_clarify:
+        # Negated duration requires clarification (user must provide replacement)
+        if duration_semantics == "negated":
+            needs_clarify = True
+            choices = []
+
+        # Correction may resolve (but not for negated entities)
+        if correction_index is not None and needs_clarify and duration_semantics != "negated" \
+                and patient_semantics not in ("ambiguous", "negated") \
+                and practitioner_semantics not in ("ambiguous", "negated"):
             correction = utterances[correction_index]
             corr_has_time = bool(
                 re.search(r"\b(\d{1,2})\s*(pm|am|:)\b", correction, re.I)
@@ -675,8 +820,8 @@ def _reduce_multi_turn(
         values["latest_time"] = latest
 
     # Duration
-    dur, _ = _extract_duration(primary)
-    if dur is not None:
+    dur, dur_sem = _extract_duration(primary)
+    if dur is not None and dur_sem != "negated":
         values["duration_minutes"] = dur
 
     # Time period
@@ -707,8 +852,11 @@ def _reduce_multi_turn(
             if corr_latest is not None:
                 values["latest_time"] = corr_latest
 
-            corr_dur, _ = _extract_duration(utterance)
-            if corr_dur is not None:
+            corr_dur, corr_dur_sem = _extract_duration(utterance)
+            if corr_dur_sem == "negated":
+                # Negated duration: remove any previously stored duration value
+                values.pop("duration_minutes", None)
+            elif corr_dur is not None:
                 values["duration_minutes"] = corr_dur
 
             corr_period = _extract_time_period(utterance)
@@ -726,8 +874,10 @@ def _reduce_multi_turn(
             if add_latest and "latest_time" not in values:
                 values["latest_time"] = add_latest
 
-            add_dur, _ = _extract_duration(utterance)
-            if add_dur is not None and "duration_minutes" not in values:
+            add_dur, add_dur_sem = _extract_duration(utterance)
+            if add_dur_sem == "negated":
+                values.pop("duration_minutes", None)
+            elif add_dur is not None and "duration_minutes" not in values:
                 values["duration_minutes"] = add_dur
 
     return values
@@ -765,6 +915,14 @@ def _extract_entity_semantics(
     prac_name, prac_sem = _extract_practitioner(primary)
     semantics["practitioner"] = prac_sem
 
+    # Location
+    loc_val, loc_sem = _extract_location(primary)
+    semantics["location"] = loc_sem
+
+    # Appointment type
+    apt_val, apt_sem = _extract_appointment_type(primary)
+    semantics["appointment_type"] = apt_sem
+
     # Duration
     dur_val, dur_sem = _extract_duration(primary)
     semantics["duration"] = dur_sem
@@ -787,6 +945,22 @@ def _extract_entity_semantics(
                 elif corr_prac_name != prac_name:
                     semantics["practitioner"] = "corrected"
                 # same name -> remains exact
+
+            corr_loc_val, corr_loc_sem = _extract_location(utterance)
+            if corr_loc_sem == "exact":
+                if semantics["location"] in ("omitted", "ambiguous"):
+                    semantics["location"] = "exact"
+                elif corr_loc_val != loc_val:
+                    semantics["location"] = "corrected"
+                # same value -> remains exact
+
+            corr_apt_val, corr_apt_sem = _extract_appointment_type(utterance)
+            if corr_apt_sem == "exact":
+                if semantics["appointment_type"] in ("omitted", "ambiguous"):
+                    semantics["appointment_type"] = "exact"
+                elif corr_apt_val != apt_val:
+                    semantics["appointment_type"] = "corrected"
+                # same value -> remains exact
 
             corr_dur_val, corr_dur_sem = _extract_duration(utterance)
             if corr_dur_sem == "exact":
@@ -1006,6 +1180,7 @@ def extract_semantics(
             break
 
     # --- 8. Clarification detection (uses final state) ---
+    duration_sem = entities.get("duration", "omitted")
     requires_clarification, clarification_choices = _determine_clarification(
         utterances,
         intended_action,
@@ -1015,6 +1190,7 @@ def extract_semantics(
         patient_sem,
         practitioner_sem,
         correction_index,
+        duration_semantics=duration_sem,
     )
 
     # --- 9. Action negation ---
