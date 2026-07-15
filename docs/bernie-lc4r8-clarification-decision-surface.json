@@ -1,0 +1,421 @@
+{
+  "schema_version": "lc4r8.clarification_decision_surface.v1",
+  "development_only": true,
+  "silver_pending_only": true,
+  "selection": {
+    "count": 53,
+    "hash": "9496e23c6f339603",
+    "expected_count": 53,
+    "expected_hash": "9496e23c6f339603",
+    "hash_match": true
+  },
+  "blocker_classes": {
+    "normalization_contract_blocked": {
+      "count": 3,
+      "hash": "db484a50adc0b601"
+    },
+    "entity_and_normalization_contract_blocked": {
+      "count": 6,
+      "hash": "ff20612b3c9e276e"
+    },
+    "temporal_and_normalization_contract_blocked": {
+      "count": 20,
+      "hash": "910950860133d8b9"
+    },
+    "temporal_entity_and_normalization_contract_blocked": {
+      "count": 24,
+      "hash": "7cfaa6e4ddefc172"
+    },
+    "isolated_clarification_policy_choice": {
+      "count": 0,
+      "hash": "e3b0c44298fc1c14"
+    }
+  },
+  "action_distribution": {
+    "create": 13,
+    "move": 13,
+    "resize": 14,
+    "cancel": 13
+  },
+  "records": [
+    {
+      "scenario_id": "lc4_dw1_dev_mt_001_01",
+      "blocker_class": "temporal_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_003_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_004_01",
+      "blocker_class": "temporal_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_005_01",
+      "blocker_class": "temporal_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_006_01",
+      "blocker_class": "temporal_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_007_01",
+      "blocker_class": "temporal_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_009_01",
+      "blocker_class": "temporal_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_010_01",
+      "blocker_class": "temporal_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_011_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_012_01",
+      "blocker_class": "temporal_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_013_01",
+      "blocker_class": "normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_015_01",
+      "blocker_class": "temporal_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_016_01",
+      "blocker_class": "temporal_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_017_01",
+      "blocker_class": "entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_018_01",
+      "blocker_class": "entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_019_01",
+      "blocker_class": "entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_021_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_022_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_023_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_024_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_025_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_027_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_028_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_029_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_030_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_031_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_033_01",
+      "blocker_class": "normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_034_01",
+      "blocker_class": "normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_035_01",
+      "blocker_class": "entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_036_01",
+      "blocker_class": "temporal_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_037_01",
+      "blocker_class": "temporal_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_039_01",
+      "blocker_class": "temporal_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_040_01",
+      "blocker_class": "temporal_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_041_01",
+      "blocker_class": "temporal_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_042_01",
+      "blocker_class": "temporal_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_043_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_045_01",
+      "blocker_class": "temporal_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_046_01",
+      "blocker_class": "temporal_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_047_01",
+      "blocker_class": "temporal_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_048_01",
+      "blocker_class": "temporal_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_049_01",
+      "blocker_class": "entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_051_01",
+      "blocker_class": "entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_052_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_053_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_054_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_055_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_057_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_058_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_059_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_060_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_061_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_063_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    },
+    {
+      "scenario_id": "lc4_dw1_dev_mt_064_01",
+      "blocker_class": "temporal_entity_and_normalization_contract_blocked",
+      "decision_readiness": "blocked_by_upstream_contract_defect",
+      "provenance": "silver",
+      "adjudication": "pending"
+    }
+  ],
+  "record_hash": "baf4c66b1a7ee139",
+  "expected_record_hash": "baf4c66b1a7ee139",
+  "record_hash_match": true,
+  "assertions": {
+    "selection_count_53": true,
+    "selection_hash_match": true,
+    "zero_decision_ready": true
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "schema_version": "lc4r8.exit_blocker_report.v1",
+  "development_only": true,
+  "silver_pending_only": true,
+  "clarification_decision_surface": {
+    "selection_count": 53,
+    "expected_selection_count": 53,
+    "selection_hash": "9496e23c6f339603",
+    "expected_selection_hash": "9496e23c6f339603",
+    "selection_hash_match": true,
+    "record_hash": "baf4c66b1a7ee139",
+    "expected_record_hash": "baf4c66b1a7ee139",
+    "record_hash_match": true,
+    "blocker_classes": {
+      "normalization_contract_blocked": {
+        "count": 3,
+        "hash": "db484a50adc0b601",
+        "expected_count": 3,
+        "expected_hash": "db484a50adc0b601",
+        "hash_match": true
+      },
+      "entity_and_normalization_contract_blocked": {
+        "count": 6,
+        "hash": "ff20612b3c9e276e",
+        "expected_count": 6,
+        "expected_hash": "ff20612b3c9e276e",
+        "hash_match": true
+      },
+      "temporal_and_normalization_contract_blocked": {
+        "count": 20,
+        "hash": "910950860133d8b9",
+        "expected_count": 20,
+        "expected_hash": "910950860133d8b9",
+        "hash_match": true
+      },
+      "temporal_entity_and_normalization_contract_blocked": {
+        "count": 24,
+        "hash": "7cfaa6e4ddefc172",
+        "expected_count": 24,
+        "expected_hash": "7cfaa6e4ddefc172",
+        "hash_match": true
+      },
+      "isolated_clarification_policy_choice": {
+        "count": 0,
+        "hash": "e3b0c44298fc1c14",
+        "expected_count": 0,
+        "expected_hash": "e3b0c44298fc1c14",
+        "hash_match": true
+      }
+    },
+    "action_distribution": {
+      "create": 13,
+      "move": 13,
+      "resize": 14,
+      "cancel": 13
+    }
+  },
+  "replay_contract_audit": {
+    "selection_count": 51,
+    "expected_selection_count": 51,
+    "selection_hash": "2e45f30f714568ef",
+    "expected_selection_hash": "2e45f30f714568ef",
+    "selection_hash_match": true,
+    "record_hash": "2fabb972ad0bc00b",
+    "expected_record_hash": "2fabb972ad0bc00b",
+    "record_hash_match": true,
+    "combined_hash": "fd0de59a2967ddf8",
+    "expected_combined_hash": "fd0de59a2967ddf8",
+    "combined_hash_match": true,
+    "blocker_classes": {
+      "audit_change_type_vocabulary_only": {
+        "count": 11,
+        "hash": "b88018991e49ffd5",
+        "expected_count": 11,
+        "expected_hash": "b88018991e49ffd5",
+        "hash_match": true
+      },
+      "clarification_tool_without_clarification_contract": {
+        "count": 11,
+        "hash": "dc7446b93a05c648",
+        "expected_count": 11,
+        "expected_hash": "dc7446b93a05c648",
+        "hash_match": true
+      },
+      "creation_expectation_conflicts_with_replay_policy": {
+        "count": 28,
+        "hash": "3206003d4bc39a23",
+        "expected_count": 28,
+        "expected_hash": "3206003d4bc39a23",
+        "hash_match": true
+      },
+      "negated_surface_conflicts_with_create_contract": {
+        "count": 1,
+        "hash": "020fade8ca644684",
+        "expected_count": 1,
+        "expected_hash": "020fade8ca644684",
+        "hash_match": true
+      },
+      "genuine_replay_integration_defect": {
+        "count": 0,
+        "hash": "e3b0c44298fc1c14",
+        "expected_count": 0,
+        "expected_hash": "e3b0c44298fc1c14",
+        "hash_match": true
+      }
+    }
+  },
+  "exit_counts": {
+    "clarification_policy_decision_ready": 0,
+    "genuine_replay_integration_defect": 0,
+    "generator_backed_contract_repair_authorized": 11,
+    "upstream_clarification_contract_blockers": 53,
+    "remaining_replay_contract_reconciliation_blockers": 40
+  },
+  "exit_status": "blocked_pending_generator_repair_and_contract_reconciliation",
+  "assertions": {
+    "clarification_selection_53": true,
+    "replay_selection_51": true,
+    "clarification_policy_decision_ready_0": true,
+    "genuine_replay_defect_0": true,
+    "generator_repair_authorized_11": true,
+    "exit_status_blocked": true
+  },
+  "report_hash": "sha256:6b68598bcb1b69b701f1f557b04e768a21957bf23b7ffb749a8eb09c569ff4fd"
+}
