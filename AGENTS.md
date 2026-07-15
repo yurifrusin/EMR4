@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V2R1 development-only entity/normalization repair complete and independently reviewed |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v2r1-sol-acceptance.md` |
-| Current result | LC4V2R1 improved its frozen matrix from 4/21 to 21/21; ordinary development remains `880/814/672/154/330/835`, safety 1,152/1,152, variance zero; holdouts v1 and v2 sealed |
-| Next implementation | Begin LC4V2R2 with a fresh Sol-authored development safety-language matrix separating unsafe bypass/completion demands from explicitly negated safe instructions; do not access either sealed holdout |
+| Active product track | LC4V2R2 development-only safety-language classification and bounded repair |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v2r2-sol-contract.md` |
+| Current result | LC4V2R2 froze 14 matched unsafe/safe pairs (28 cases); baseline is 17/28 complete with 11 surface-supported failures (`05c3a865bf1df2c2`); holdouts v1 and v2 remain sealed |
+| Next implementation | Implement and independently review the frozen LC4V2R2 matrix without changing its fixture, baseline, established staged tool policy, or any protected surface |
 
 ### LC4R10 accepted state
 

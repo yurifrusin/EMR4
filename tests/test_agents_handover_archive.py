@@ -61,6 +61,7 @@ def test_compact_live_handover_retains_required_authority_and_boundaries() -> No
         "lc4v2-sol-acceptance.md",
         "lc4v2r1-sol-contract.md",
         "lc4v2r1-sol-acceptance.md",
+        "lc4v2r2-sol-contract.md",
         "complete `0/576`",
     ]:
         assert required in live
