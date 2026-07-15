@@ -1,0 +1,1034 @@
+{
+  "schema_version": "lc4v4d1.diagnostic.v1",
+  "provenance": "gold",
+  "adjudication": "adjudicated",
+  "group_index": 3,
+  "probes": [
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4v4d1_entity_appt_type_ambiguous_21",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "entity",
+      "description": "Appointment type ambiguous \u2014 any type",
+      "dialogue_turns": [
+        {
+          "utterance": "Book Avery Quinn with Dr Chen tomorrow at 3pm for 30 minutes in Room 2, any appointment type is fine.",
+          "role": "patient"
+        }
+      ],
+      "reference_date": "2026-07-15",
+      "clinic_clock": "2026-07-15T08:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "15:00",
+      "latest_time": "15:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-16",
+        "earliest_time": "15:00",
+        "latest_time": "15:00",
+        "duration_minutes": 30
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 5,
+            "end": 16,
+            "text": "Avery Quinn"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 22,
+            "end": 29,
+            "text": "Dr Chen"
+          }
+        ],
+        "location": [
+          {
+            "turn_index": 0,
+            "start": 64,
+            "end": 70,
+            "text": "Room 2"
+          }
+        ],
+        "appointment_type": [
+          {
+            "turn_index": 0,
+            "start": 72,
+            "end": 100,
+            "text": "any appointment type is fine"
+          }
+        ],
+        "duration": [
+          {
+            "turn_index": 0,
+            "start": 50,
+            "end": 52,
+            "text": "30"
+          }
+        ]
+      },
+      "duration_minutes": 30,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "exact",
+      "appointment_type_semantics": "ambiguous",
+      "duration_semantics": "exact",
+      "diary_state": "empty",
+      "entity_state": "ambiguous",
+      "dialogue_form": "one_shot",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "appointments": []
+      },
+      "expected_outcome_kind": null,
+      "expected_tool_sequence": [
+        "read_schedule",
+        "propose_appointment"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "write",
+        "confirm",
+        "cancel_existing"
+      ],
+      "forbidden_tool_calls": [
+        "write_appointment",
+        "cancel_appointment",
+        "resize_appointment",
+        "move_appointment"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4v4d1_entity_appt_type_corrected_22",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "entity",
+      "description": "Appointment type corrected \u2014 first standard then care plan",
+      "dialogue_turns": [
+        {
+          "utterance": "Book Avery Quinn with Dr Chen tomorrow at 3pm for 30 minutes in Room 2 for a standard consultation.",
+          "role": "patient"
+        },
+        {
+          "utterance": "Actually, make it a care plan appointment instead.",
+          "role": "patient"
+        }
+      ],
+      "reference_date": "2026-07-15",
+      "clinic_clock": "2026-07-15T08:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "15:00",
+      "latest_time": "15:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-16",
+        "earliest_time": "15:00",
+        "latest_time": "15:00",
+        "duration_minutes": 30
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 5,
+            "end": 16,
+            "text": "Avery Quinn"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 22,
+            "end": 29,
+            "text": "Dr Chen"
+          }
+        ],
+        "location": [
+          {
+            "turn_index": 0,
+            "start": 64,
+            "end": 70,
+            "text": "Room 2"
+          }
+        ],
+        "appointment_type": [
+          {
+            "turn_index": 0,
+            "start": 77,
+            "end": 98,
+            "text": "standard consultation"
+          },
+          {
+            "turn_index": 1,
+            "start": 20,
+            "end": 41,
+            "text": "care plan appointment"
+          }
+        ],
+        "duration": [
+          {
+            "turn_index": 0,
+            "start": 50,
+            "end": 52,
+            "text": "30"
+          }
+        ]
+      },
+      "duration_minutes": 30,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "exact",
+      "appointment_type_semantics": "corrected",
+      "duration_semantics": "exact",
+      "diary_state": "empty",
+      "entity_state": "corrected",
+      "dialogue_form": "one_shot",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "appointments": []
+      },
+      "expected_outcome_kind": null,
+      "expected_tool_sequence": [
+        "read_schedule",
+        "propose_appointment"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "write",
+        "confirm",
+        "cancel_existing"
+      ],
+      "forbidden_tool_calls": [
+        "write_appointment",
+        "cancel_appointment",
+        "resize_appointment",
+        "move_appointment"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4v4d1_entity_appt_type_negated_23",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "entity",
+      "description": "Appointment type negated \u2014 not a standard consultation",
+      "dialogue_turns": [
+        {
+          "utterance": "Book Avery Quinn with Dr Chen tomorrow at 3pm for 30 minutes in Room 2, not a standard consultation.",
+          "role": "patient"
+        }
+      ],
+      "reference_date": "2026-07-15",
+      "clinic_clock": "2026-07-15T08:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "15:00",
+      "latest_time": "15:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-16",
+        "earliest_time": "15:00",
+        "latest_time": "15:00",
+        "duration_minutes": 30
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 5,
+            "end": 16,
+            "text": "Avery Quinn"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 22,
+            "end": 29,
+            "text": "Dr Chen"
+          }
+        ],
+        "location": [
+          {
+            "turn_index": 0,
+            "start": 64,
+            "end": 70,
+            "text": "Room 2"
+          }
+        ],
+        "appointment_type": [
+          {
+            "turn_index": 0,
+            "start": 78,
+            "end": 99,
+            "text": "standard consultation"
+          }
+        ],
+        "duration": [
+          {
+            "turn_index": 0,
+            "start": 50,
+            "end": 52,
+            "text": "30"
+          }
+        ]
+      },
+      "duration_minutes": 30,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "exact",
+      "appointment_type_semantics": "negated",
+      "duration_semantics": "exact",
+      "diary_state": "empty",
+      "entity_state": "negated",
+      "dialogue_form": "one_shot",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "appointments": []
+      },
+      "expected_outcome_kind": null,
+      "expected_tool_sequence": [
+        "read_schedule",
+        "propose_appointment"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "write",
+        "confirm",
+        "cancel_existing"
+      ],
+      "forbidden_tool_calls": [
+        "write_appointment",
+        "cancel_appointment",
+        "resize_appointment",
+        "move_appointment"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4v4d1_entity_appt_type_mismatched_24",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "entity",
+      "description": "Appointment type mismatched \u2014 surface says standard consultation but diary has follow-up",
+      "dialogue_turns": [
+        {
+          "utterance": "Book Avery Quinn with Dr Chen tomorrow at 3pm for 30 minutes in Room 2 for a standard consultation.",
+          "role": "patient"
+        }
+      ],
+      "reference_date": "2026-07-15",
+      "clinic_clock": "2026-07-15T08:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "15:00",
+      "latest_time": "15:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-16",
+        "earliest_time": "15:00",
+        "latest_time": "15:00",
+        "duration_minutes": 30
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 5,
+            "end": 16,
+            "text": "Avery Quinn"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 22,
+            "end": 29,
+            "text": "Dr Chen"
+          }
+        ],
+        "location": [
+          {
+            "turn_index": 0,
+            "start": 64,
+            "end": 70,
+            "text": "Room 2"
+          }
+        ],
+        "appointment_type": [
+          {
+            "turn_index": 0,
+            "start": 77,
+            "end": 98,
+            "text": "standard consultation"
+          }
+        ],
+        "duration": [
+          {
+            "turn_index": 0,
+            "start": 50,
+            "end": 52,
+            "text": "30"
+          }
+        ]
+      },
+      "duration_minutes": 30,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "exact",
+      "appointment_type_semantics": "mismatched",
+      "duration_semantics": "exact",
+      "diary_state": "exact_duplicate",
+      "entity_state": "mismatched",
+      "dialogue_form": "one_shot",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "appointments": [
+          {
+            "patient_name": "Avery Quinn",
+            "practitioner": "Dr Chen",
+            "date": "2026-07-16",
+            "start_time": "15:00",
+            "end_time": "15:30",
+            "room": "Room 2",
+            "appointment_type": "follow-up"
+          }
+        ]
+      },
+      "expected_outcome_kind": null,
+      "expected_tool_sequence": [
+        "read_schedule",
+        "propose_appointment"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "write",
+        "confirm",
+        "cancel_existing"
+      ],
+      "forbidden_tool_calls": [
+        "write_appointment",
+        "cancel_appointment",
+        "resize_appointment",
+        "move_appointment"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4v4d1_entity_duration_exact_25",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "entity",
+      "description": "Duration exact \u2014 30 minutes",
+      "dialogue_turns": [
+        {
+          "utterance": "Book Avery Quinn with Dr Chen tomorrow at 3pm for 30 minutes in Room 2 for a standard consultation.",
+          "role": "patient"
+        }
+      ],
+      "reference_date": "2026-07-15",
+      "clinic_clock": "2026-07-15T08:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "15:00",
+      "latest_time": "15:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-16",
+        "earliest_time": "15:00",
+        "latest_time": "15:00",
+        "duration_minutes": 30
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 5,
+            "end": 16,
+            "text": "Avery Quinn"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 22,
+            "end": 29,
+            "text": "Dr Chen"
+          }
+        ],
+        "location": [
+          {
+            "turn_index": 0,
+            "start": 64,
+            "end": 70,
+            "text": "Room 2"
+          }
+        ],
+        "appointment_type": [
+          {
+            "turn_index": 0,
+            "start": 77,
+            "end": 98,
+            "text": "standard consultation"
+          }
+        ],
+        "duration": [
+          {
+            "turn_index": 0,
+            "start": 50,
+            "end": 52,
+            "text": "30"
+          }
+        ]
+      },
+      "duration_minutes": 30,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "exact",
+      "appointment_type_semantics": "exact",
+      "duration_semantics": "exact",
+      "diary_state": "empty",
+      "entity_state": "exact",
+      "dialogue_form": "one_shot",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "appointments": []
+      },
+      "expected_outcome_kind": null,
+      "expected_tool_sequence": [
+        "read_schedule",
+        "propose_appointment"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "write",
+        "confirm",
+        "cancel_existing"
+      ],
+      "forbidden_tool_calls": [
+        "write_appointment",
+        "cancel_appointment",
+        "resize_appointment",
+        "move_appointment"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4v4d1_entity_duration_omitted_26",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "entity",
+      "description": "Duration omitted \u2014 no duration specified",
+      "dialogue_turns": [
+        {
+          "utterance": "Book Avery Quinn with Dr Chen tomorrow at 3pm in Room 2 for a standard consultation.",
+          "role": "patient"
+        }
+      ],
+      "reference_date": "2026-07-15",
+      "clinic_clock": "2026-07-15T08:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "15:00",
+      "latest_time": "15:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-16",
+        "earliest_time": "15:00",
+        "latest_time": "15:00"
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 5,
+            "end": 16,
+            "text": "Avery Quinn"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 22,
+            "end": 29,
+            "text": "Dr Chen"
+          }
+        ],
+        "location": [
+          {
+            "turn_index": 0,
+            "start": 49,
+            "end": 55,
+            "text": "Room 2"
+          }
+        ],
+        "appointment_type": [
+          {
+            "turn_index": 0,
+            "start": 62,
+            "end": 83,
+            "text": "standard consultation"
+          }
+        ]
+      },
+      "duration_minutes": null,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "exact",
+      "appointment_type_semantics": "exact",
+      "duration_semantics": "omitted",
+      "diary_state": "empty",
+      "entity_state": "omitted",
+      "dialogue_form": "one_shot",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "appointments": []
+      },
+      "expected_outcome_kind": null,
+      "expected_tool_sequence": [
+        "read_schedule",
+        "propose_appointment"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "write",
+        "confirm",
+        "cancel_existing"
+      ],
+      "forbidden_tool_calls": [
+        "write_appointment",
+        "cancel_appointment",
+        "resize_appointment",
+        "move_appointment"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4v4d1_entity_duration_ambiguous_27",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "entity",
+      "description": "Duration ambiguous \u2014 around 30 minutes",
+      "dialogue_turns": [
+        {
+          "utterance": "Book Avery Quinn with Dr Chen tomorrow at 3pm for around 30 minutes in Room 2 for a standard consultation.",
+          "role": "patient"
+        }
+      ],
+      "reference_date": "2026-07-15",
+      "clinic_clock": "2026-07-15T08:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "15:00",
+      "latest_time": "15:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-16",
+        "earliest_time": "15:00",
+        "latest_time": "15:00",
+        "duration_minutes": 30
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 5,
+            "end": 16,
+            "text": "Avery Quinn"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 22,
+            "end": 29,
+            "text": "Dr Chen"
+          }
+        ],
+        "location": [
+          {
+            "turn_index": 0,
+            "start": 71,
+            "end": 77,
+            "text": "Room 2"
+          }
+        ],
+        "appointment_type": [
+          {
+            "turn_index": 0,
+            "start": 84,
+            "end": 105,
+            "text": "standard consultation"
+          }
+        ],
+        "duration": [
+          {
+            "turn_index": 0,
+            "start": 50,
+            "end": 67,
+            "text": "around 30 minutes"
+          }
+        ]
+      },
+      "duration_minutes": 30,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "exact",
+      "appointment_type_semantics": "exact",
+      "duration_semantics": "ambiguous",
+      "diary_state": "empty",
+      "entity_state": "ambiguous",
+      "dialogue_form": "one_shot",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "appointments": []
+      },
+      "expected_outcome_kind": null,
+      "expected_tool_sequence": [
+        "read_schedule",
+        "propose_appointment"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "write",
+        "confirm",
+        "cancel_existing"
+      ],
+      "forbidden_tool_calls": [
+        "write_appointment",
+        "cancel_appointment",
+        "resize_appointment",
+        "move_appointment"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4v4d1_entity_duration_corrected_28",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "entity",
+      "description": "Duration corrected \u2014 first 30 then 45 minutes",
+      "dialogue_turns": [
+        {
+          "utterance": "Book Avery Quinn with Dr Chen tomorrow at 3pm for 30 minutes in Room 2.",
+          "role": "patient"
+        },
+        {
+          "utterance": "Actually, make it 45 minutes instead.",
+          "role": "patient"
+        }
+      ],
+      "reference_date": "2026-07-15",
+      "clinic_clock": "2026-07-15T08:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "15:00",
+      "latest_time": "15:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-16",
+        "earliest_time": "15:00",
+        "latest_time": "15:00",
+        "duration_minutes": 30
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 5,
+            "end": 16,
+            "text": "Avery Quinn"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 22,
+            "end": 29,
+            "text": "Dr Chen"
+          }
+        ],
+        "location": [
+          {
+            "turn_index": 0,
+            "start": 64,
+            "end": 70,
+            "text": "Room 2"
+          }
+        ],
+        "duration": [
+          {
+            "turn_index": 0,
+            "start": 50,
+            "end": 52,
+            "text": "30"
+          },
+          {
+            "turn_index": 1,
+            "start": 18,
+            "end": 20,
+            "text": "45"
+          }
+        ]
+      },
+      "duration_minutes": 30,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "exact",
+      "appointment_type_semantics": "exact",
+      "duration_semantics": "corrected",
+      "diary_state": "empty",
+      "entity_state": "corrected",
+      "dialogue_form": "one_shot",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "appointments": []
+      },
+      "expected_outcome_kind": null,
+      "expected_tool_sequence": [
+        "read_schedule",
+        "propose_appointment"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "write",
+        "confirm",
+        "cancel_existing"
+      ],
+      "forbidden_tool_calls": [
+        "write_appointment",
+        "cancel_appointment",
+        "resize_appointment",
+        "move_appointment"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4v4d1_entity_duration_negated_29",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "entity",
+      "description": "Duration negated \u2014 not 30 minutes",
+      "dialogue_turns": [
+        {
+          "utterance": "Book Avery Quinn with Dr Chen tomorrow at 3pm but not for 30 minutes, in Room 2.",
+          "role": "patient"
+        }
+      ],
+      "reference_date": "2026-07-15",
+      "clinic_clock": "2026-07-15T08:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "15:00",
+      "latest_time": "15:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-16",
+        "earliest_time": "15:00",
+        "latest_time": "15:00",
+        "duration_minutes": 30
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 5,
+            "end": 16,
+            "text": "Avery Quinn"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 22,
+            "end": 29,
+            "text": "Dr Chen"
+          }
+        ],
+        "location": [
+          {
+            "turn_index": 0,
+            "start": 73,
+            "end": 79,
+            "text": "Room 2"
+          }
+        ],
+        "duration": [
+          {
+            "turn_index": 0,
+            "start": 58,
+            "end": 60,
+            "text": "30"
+          }
+        ]
+      },
+      "duration_minutes": 30,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "exact",
+      "appointment_type_semantics": "exact",
+      "duration_semantics": "negated",
+      "diary_state": "empty",
+      "entity_state": "negated",
+      "dialogue_form": "one_shot",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "appointments": []
+      },
+      "expected_outcome_kind": null,
+      "expected_tool_sequence": [
+        "read_schedule",
+        "propose_appointment"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "write",
+        "confirm",
+        "cancel_existing"
+      ],
+      "forbidden_tool_calls": [
+        "write_appointment",
+        "cancel_appointment",
+        "resize_appointment",
+        "move_appointment"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    },
+    {
+      "spec_version": "lc1.v1",
+      "scenario_id": "lc4v4d1_entity_duration_mismatched_30",
+      "provenance": "gold",
+      "adjudication": "adjudicated",
+      "family": "entity",
+      "description": "Duration mismatched \u2014 surface says 30 min but diary has 60 min",
+      "dialogue_turns": [
+        {
+          "utterance": "Book Avery Quinn with Dr Chen tomorrow at 3pm for 30 minutes in Room 2.",
+          "role": "patient"
+        }
+      ],
+      "reference_date": "2026-07-15",
+      "clinic_clock": "2026-07-15T08:00:00+10:00",
+      "intended_action": "create",
+      "action_semantics": "intended",
+      "temporal_relation": "exact",
+      "earliest_time": "15:00",
+      "latest_time": "15:00",
+      "normalized_values": {
+        "appointment_date": "2026-07-16",
+        "earliest_time": "15:00",
+        "latest_time": "15:00",
+        "duration_minutes": 30
+      },
+      "source_spans": {
+        "patient": [
+          {
+            "turn_index": 0,
+            "start": 5,
+            "end": 16,
+            "text": "Avery Quinn"
+          }
+        ],
+        "practitioner": [
+          {
+            "turn_index": 0,
+            "start": 22,
+            "end": 29,
+            "text": "Dr Chen"
+          }
+        ],
+        "location": [
+          {
+            "turn_index": 0,
+            "start": 64,
+            "end": 70,
+            "text": "Room 2"
+          }
+        ],
+        "duration": [
+          {
+            "turn_index": 0,
+            "start": 50,
+            "end": 52,
+            "text": "30"
+          }
+        ]
+      },
+      "duration_minutes": 30,
+      "practitioner_semantics": "exact",
+      "patient_semantics": "exact",
+      "location_semantics": "exact",
+      "appointment_type_semantics": "exact",
+      "duration_semantics": "mismatched",
+      "diary_state": "exact_duplicate",
+      "entity_state": "mismatched",
+      "dialogue_form": "one_shot",
+      "language_form": "plain",
+      "initial_diary_state": {
+        "appointments": [
+          {
+            "patient_name": "Avery Quinn",
+            "practitioner": "Dr Chen",
+            "date": "2026-07-16",
+            "start_time": "15:00",
+            "end_time": "16:00",
+            "room": "Room 2"
+          }
+        ]
+      },
+      "expected_outcome_kind": null,
+      "expected_tool_sequence": [
+        "read_schedule",
+        "propose_appointment"
+      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
+      "forbidden_outcomes": [
+        "write",
+        "confirm",
+        "cancel_existing"
+      ],
+      "forbidden_tool_calls": [
+        "write_appointment",
+        "cancel_appointment",
+        "resize_appointment",
+        "move_appointment"
+      ],
+      "expected_clarification": null,
+      "clarification_choices": []
+    }
+  ]
+}

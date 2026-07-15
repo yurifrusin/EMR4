@@ -1,0 +1,15 @@
+{
+  "schema_version": "lc4v4d1.diagnostic.v1",
+  "fixture_hash": "sha256:d32921760d2c87fb42ffd85918866b777561d0576c7c2733d890de4ee850e0ab",
+  "total_probes": 60,
+  "total_files": 6,
+  "files": [
+    "lc4v4d1_dev_group_001.json",
+    "lc4v4d1_dev_group_002.json",
+    "lc4v4d1_dev_group_003.json",
+    "lc4v4d1_dev_group_004.json",
+    "lc4v4d1_dev_group_005.json",
+    "lc4v4d1_dev_group_006.json"
+  ],
+  "reference_date": "2026-07-15"
+}
