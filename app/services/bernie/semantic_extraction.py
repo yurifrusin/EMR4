@@ -105,6 +105,8 @@ _RESIZE_PATTERNS: list[re.Pattern[str]] = [
     re.compile(r"\bgive them \d+ minutes\b", re.I),
     re.compile(r"\b(more time|less time|shorten|lengthen)\b", re.I),
     re.compile(r"\bchange .* (to|from) \d+ .* (min|hour)\b", re.I),
+    # Explicit "resize" verb
+    re.compile(r"\bresize\b", re.I),
 ]
 
 # status_change
@@ -246,6 +248,10 @@ _REVERSAL_PATTERNS: list[re.Pattern[str]] = [
     re.compile(r"\bleave it (where it was|as is)\b", re.I),
     re.compile(r"\bforget it\b", re.I),
     re.compile(r"\bscrap that\b", re.I),
+    # Explicit reversal cues
+    re.compile(r"\bdisregard\b", re.I),
+    re.compile(r"\btake back\b", re.I),
+    re.compile(r"\bcancel that request\b", re.I),
 ]
 
 
@@ -356,7 +362,7 @@ _LOCATION_AMBIGUOUS = re.compile(
 )
 
 _LOCATION_NEGATION_PREFIX = re.compile(
-    r"\b(?:not\s+in\s+|not\s+)\b", re.I
+    r"\bnot\s+in\s+", re.I
 )
 
 
@@ -366,7 +372,14 @@ def _extract_location(text: str) -> tuple[str | None, str]:
     Returns (location value or None, semantics label).
     Semantics is ``"exact"``, ``"omitted"``, ``"ambiguous"``, or ``"negated"``.
     """
-    # Check negation first: "not in Room 2" or "not Room 2"
+    # Check for "Room X or Room Y" pattern for location ambiguity
+    _LOCATION_OR = re.compile(
+        r"\b(?:Room|room)\s+(\d+)\s+or\s+(?:Room|room)\s+(\d+)\b"
+    )
+    if _LOCATION_OR.search(text):
+        return None, "ambiguous"
+
+    # Check negation first: "not in Room 2"
     neg_scope = _LOCATION_NEGATION_PREFIX.search(text)
     if neg_scope:
         after_neg = text[neg_scope.end():]
@@ -401,7 +414,7 @@ _APPOINTMENT_TYPE_AMBIGUOUS = re.compile(
 )
 
 _APPOINTMENT_TYPE_NEGATION_PREFIX = re.compile(
-    r"\b(?:not\s+(?:as\s+)?(?:a\s+)?(?:an\s+)?)\b", re.I
+    r"\bnot\s+(?:a\s+|an\s+)?", re.I
 )
 
 
@@ -411,13 +424,16 @@ def _extract_appointment_type(text: str) -> tuple[str | None, str]:
     Returns (type value or None, semantics label).
     Semantics is ``"exact"``, ``"omitted"``, ``"ambiguous"``, or ``"negated"``.
     """
-    # Check negation first
-    neg_scope = _APPOINTMENT_TYPE_NEGATION_PREFIX.search(text)
-    if neg_scope:
-        after_neg = text[neg_scope.end():]
-        for pat, type_name in _APPOINTMENT_TYPE_PATTERNS:
-            if pat.search(after_neg):
-                return type_name, "negated"
+    # Check for "X or Y" pattern for appointment type ambiguity
+    # before checking individual types (must handle optional "a/an" after "or").
+    _APPOINTMENT_TYPE_OR = re.compile(
+        r"(?:standard consultation|care plan appointment|long consultation|follow-up)"
+        r"\s+or\s+(?:a\s+|an\s+)?"
+        r"(?:standard consultation|care plan appointment|long consultation|follow-up)",
+        re.I,
+    )
+    if _APPOINTMENT_TYPE_OR.search(text):
+        return None, "ambiguous"
 
     if _APPOINTMENT_TYPE_AMBIGUOUS.search(text):
         return None, "ambiguous"
@@ -425,6 +441,10 @@ def _extract_appointment_type(text: str) -> tuple[str | None, str]:
     for pat, type_name in _APPOINTMENT_TYPE_PATTERNS:
         m = pat.search(text)
         if m:
+            # Check for local negation prefix near the match
+            before = text[max(0, m.start() - 15):m.start()]
+            if re.search(r"\bnot\s+(?:a\s+|an\s+)?$", before, re.I):
+                return type_name, "negated"
             return type_name, "exact"
 
     return None, "omitted"
@@ -440,7 +460,7 @@ _PATIENT_PATTERN = re.compile(
     r"[Aa]n appointment for |[Aa] booking for )?"
     r"(?!Dr\s+[A-Z])"
     r"(?!(?:Book|Make|Create|Schedule|See)\s)"
-    r"([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)\b",
+    r"([A-Z][a-z]+(?:\s+(?!Dr\b)[A-Z][a-z]+)+)\b",
 )
 
 # Single given name after a booking verb (e.g. "Book Alex") — inherently
@@ -470,12 +490,21 @@ def _extract_patient(text: str) -> tuple[str | None, str]:
     """
     if _AMBIGUOUS_PATIENT.search(text):
         return None, "ambiguous"
+
+    # Check for "X or Y" pattern for patient ambiguity
+    # Exclude "Dr" titles from being captured as patient names.
+    _PATIENT_OR = re.compile(
+        r"\b(?!Dr\s+)([A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)\s+or\s+"
+        r"(?!Dr\s+)([A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)\b"
+    )
+    if _PATIENT_OR.search(text):
+        return None, "ambiguous"
+
     m = _PATIENT_PATTERN.search(text)
     if m:
-        # Check if "not" directly precedes the captured name (entity negation,
-        # distinct from action-level negation like "do not book X")
-        before = text[max(0, m.start(1) - 8):m.start(1)]
-        if re.search(r"\bnot\s+$", before, re.I):
+        # Check if "not" or "not for" precedes the captured name
+        before = text[max(0, m.start(1) - 12):m.start(1)]
+        if re.search(r"\bnot\s+(?:for\s+)?$", before, re.I):
             return m.group(1), "negated"
         return m.group(1), "exact"
     # Single given name after a booking verb is ambiguous
@@ -509,12 +538,19 @@ def _extract_practitioner(text: str) -> tuple[str | None, str]:
     """
     if _AMBIGUOUS_PRACTITIONER.search(text):
         return None, "ambiguous"
+
+    # Check for "Dr X or Dr Y" pattern for practitioner ambiguity
+    _PRACTITIONER_OR = re.compile(
+        r"\b(Dr\s+[A-Z][a-z]+)\s+or\s+(Dr\s+[A-Z][a-z]+)\b"
+    )
+    if _PRACTITIONER_OR.search(text):
+        return None, "ambiguous"
+
     m = _PRACTITIONER_PATTERN.search(text)
     if m:
-        # Check if "not" directly precedes the captured name (entity negation,
-        # distinct from action-level negation like "do not book with X")
-        before = text[max(0, m.start(1) - 8):m.start(1)]
-        if re.search(r"\bnot\s+$", before, re.I):
+        # Check if "not" or "not with" precedes the captured name
+        before = text[max(0, m.start(1) - 14):m.start(1)]
+        if re.search(r"\bnot\s+(?:with\s+)?$", before, re.I):
             return m.group(1), "negated"
         return m.group(1), "exact"
     return None, "omitted"
@@ -564,6 +600,13 @@ def _extract_duration(text: str) -> tuple[int | None, str]:
             )
         )
 
+    # Check for "X or Y minutes" pattern for duration ambiguity
+    _DURATION_OR_PATTERN = re.compile(
+        r"\b(\d+)\s+or\s+(\d+)\s*(minutes?|mins?)\b", re.I
+    )
+    if _DURATION_OR_PATTERN.search(text):
+        return None, "ambiguous"
+
     # Try lexical forms first (before numeric, so "half an hour" is not confused)
     for pat, minutes in _LEXICAL_DURATION:
         m = pat.search(text)
@@ -590,6 +633,26 @@ def _extract_duration(text: str) -> tuple[int | None, str]:
 _TODAY = re.compile(r"\btoday\b", re.I)
 _TOMORROW = re.compile(r"\btomorrow\b", re.I)
 _DAY_AFTER_TOMORROW = re.compile(r"\b(the )?day after tomorrow\b", re.I)
+# Weekday names for relative date resolution
+_WEEKDAY_NAMES = {
+    "monday": 0, "tuesday": 1, "wednesday": 2, "thursday": 3,
+    "friday": 4, "saturday": 5, "sunday": 6,
+}
+
+
+def _weekday_to_date(weekday: str, reference_date: date) -> str | None:
+    """Resolve a weekday name to an ISO date relative to reference_date.
+
+    Returns the next occurrence of the given weekday (today or later).
+    """
+    target = _WEEKDAY_NAMES.get(weekday.lower())
+    if target is None:
+        return None
+    current_weekday = reference_date.weekday()
+    days_ahead = target - current_weekday
+    if days_ahead <= 0:
+        days_ahead += 7
+    return (reference_date + timedelta(days=days_ahead)).isoformat()
 
 
 def _extract_date(
@@ -598,7 +661,7 @@ def _extract_date(
 ) -> str | None:
     """Extract appointment date from text relative to reference_date.
 
-    Only supports today/tomorrow/day-after-tomorrow for this sprint.
+    Supports today, tomorrow, day-after-tomorrow, and weekday names.
     """
     if _DAY_AFTER_TOMORROW.search(text):
         return (reference_date + timedelta(days=2)).isoformat()
@@ -606,6 +669,12 @@ def _extract_date(
         return (reference_date + timedelta(days=1)).isoformat()
     if _TODAY.search(text):
         return reference_date.isoformat()
+    # Check weekday names
+    for wd_name in _WEEKDAY_NAMES:
+        if re.search(rf"\b{wd_name}\b", text, re.I):
+            result = _weekday_to_date(wd_name, reference_date)
+            if result is not None:
+                return result
     return None
 
 
@@ -728,6 +797,7 @@ def _determine_clarification(
     practitioner_semantics: str,
     correction_index: int | None,
     duration_semantics: str = "omitted",
+    entities: dict[str, str] | None = None,
 ) -> tuple[bool, tuple[str, ...]]:
     """Determine whether clarification is needed, based on action-relevant facts.
 
@@ -757,11 +827,16 @@ def _determine_clarification(
         primary = utterances[0]
         has_sometime = bool(_SOMETIME_AFTERNOON.search(primary))
 
-        if has_sometime:
+        # If first turn has "sometime" but overall we have time bounds from
+        # a later turn, the time has been resolved (Rule 5).
+        if has_sometime and not has_time_bounds:
             needs_clarify = True
+        elif has_sometime:
+            needs_clarify = False
 
-        # Negated or ambiguous patient requires clarification
-        if patient_semantics in ("ambiguous", "negated"):
+        # Negated, ambiguous, or omitted patient requires clarification
+        # (omitted required patient identity fails closed, Rule 1)
+        if patient_semantics in ("ambiguous", "negated", "omitted"):
             needs_clarify = True
             choices = []
         # Negated or ambiguous practitioner requires clarification
@@ -771,7 +846,7 @@ def _determine_clarification(
                 choices = ["Dr Taylor", "Dr Patel", "Dr Chen"]
             else:
                 choices = []
-        elif has_sometime:
+        elif has_sometime and not has_time_bounds:
             choices = ["1pm", "2pm", "3pm", "4pm"]
         # Date present but no time bounds → clarify for time
         elif has_date and not has_time_bounds:
@@ -786,6 +861,24 @@ def _determine_clarification(
         if duration_semantics == "negated":
             needs_clarify = True
             choices = []
+
+        # Any other negated entity on create requires clarification
+        # (location, appointment_type — Rule 3)
+        if not needs_clarify and entities is not None:
+            for entity_key in ("location", "appointment_type"):
+                if entities.get(entity_key) == "negated":
+                    needs_clarify = True
+                    choices = []
+                    break
+
+        # Ambiguous location, appointment_type, or duration on create also
+        # requires clarification (Rule 2, Rule 4)
+        if not needs_clarify and entities is not None:
+            for entity_key in ("location", "appointment_type", "duration"):
+                if entities.get(entity_key) == "ambiguous":
+                    needs_clarify = True
+                    choices = []
+                    break
 
         # Correction may resolve (but not for negated entities)
         if correction_index is not None and needs_clarify and duration_semantics != "negated" \
@@ -888,7 +981,29 @@ def _reduce_multi_turn(
         values["time_period"] = period
 
     # Process remaining turns
+    _SESSION_RESTART_CUE = re.compile(
+        r"\b(?:start over|forget that|new booking|forget about|let me start over)\b", re.I
+    )
     for i, utterance in enumerate(utterances[1:], start=1):
+        # Session restart: discard all prior context and re-extract
+        if _SESSION_RESTART_CUE.search(utterance):
+            values = {}
+            restart_date = _extract_date(utterance, ref)
+            if restart_date:
+                values["appointment_date"] = restart_date
+            _, restart_earliest, restart_latest = _extract_temporal(utterance)
+            if restart_earliest:
+                values["earliest_time"] = restart_earliest
+            if restart_latest:
+                values["latest_time"] = restart_latest
+            restart_dur, restart_dur_sem = _extract_duration(utterance)
+            if restart_dur is not None and restart_dur_sem != "negated":
+                values["duration_minutes"] = restart_dur
+            restart_period = _extract_time_period(utterance)
+            if restart_period:
+                values["time_period"] = restart_period
+            continue
+
         if _is_correction_turn(utterance):
             # Correction turn: replace corrected fields only
             corr_date = _extract_date(utterance, ref)
@@ -985,6 +1100,57 @@ def _extract_entity_semantics(
     dur_val, dur_sem = _extract_duration(primary)
     semantics["duration"] = dur_sem
 
+    # --- Session restart detection ---
+    # If any turn contains a session-restart cue, discard prior context and
+    # re-extract from that turn as a fresh request.
+    _SESSION_RESTART_CUE = re.compile(
+        r"\b(?:start over|forget that|new booking|forget about|let me start over)\b", re.I
+    )
+    restart_index: int | None = None
+    for i, u in enumerate(utterances):
+        if i > 0 and _SESSION_RESTART_CUE.search(u):
+            restart_index = i
+            break
+
+    if restart_index is not None:
+        # Discard prior context and re-extract from the restart turn as primary
+        fresh_utterance = utterances[restart_index]
+        semantics = {
+            "practitioner": "omitted",
+            "patient": "omitted",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "omitted",
+        }
+        fresh_pat, fresh_pat_sem = _extract_patient(fresh_utterance)
+        semantics["patient"] = fresh_pat_sem
+        fresh_prac, fresh_prac_sem = _extract_practitioner(fresh_utterance)
+        semantics["practitioner"] = fresh_prac_sem
+        fresh_loc, fresh_loc_sem = _extract_location(fresh_utterance)
+        semantics["location"] = fresh_loc_sem
+        fresh_apt, fresh_apt_sem = _extract_appointment_type(fresh_utterance)
+        semantics["appointment_type"] = fresh_apt_sem
+        fresh_dur, fresh_dur_sem = _extract_duration(fresh_utterance)
+        semantics["duration"] = fresh_dur_sem
+        # Keep tuple values for the caller's use of pat_name etc.
+        pat_name = fresh_pat
+        prac_name = fresh_prac
+        return semantics
+
+    # --- Inline correction detection (single-turn) ---
+    # Check if the primary utterance itself contains a correction of a named
+    # entity (e.g. "Book Sam Smith — sorry, Avery Quinn — with Dr Chen...").
+    _INLINE_CORRECTION_CUE = re.compile(
+        r"\b(?:sorry|actually|correction|i mean|i meant|instead|make it)\b", re.I
+    )
+    if _INLINE_CORRECTION_CUE.search(primary):
+        # Try to find a corrected patient after the correction cue
+        cue_match = _INLINE_CORRECTION_CUE.search(primary)
+        after_cue = primary[cue_match.end():]
+        corr_pat, corr_pat_sem = _extract_patient(after_cue)
+        if corr_pat_sem == "exact" and pat_sem == "exact" and corr_pat != pat_name:
+            semantics["patient"] = "corrected"
+
     # Check subsequent turns for corrections
     for i, utterance in enumerate(utterances[1:], start=1):
         if _is_correction_turn(utterance):
@@ -1041,6 +1207,15 @@ def _extract_entity_semantics(
             add_dur_val, add_dur_sem = _extract_duration(utterance)
             if add_dur_sem == "exact" and semantics["duration"] == "omitted":
                 semantics["duration"] = "exact"
+
+            # Location and appointment type can also be added in additive turns
+            add_loc_val, add_loc_sem = _extract_location(utterance)
+            if add_loc_sem == "exact" and semantics["location"] == "omitted":
+                semantics["location"] = "exact"
+
+            add_apt_val, add_apt_sem = _extract_appointment_type(utterance)
+            if add_apt_sem == "exact" and semantics["appointment_type"] == "omitted":
+                semantics["appointment_type"] = "exact"
 
     return semantics
 
@@ -1211,6 +1386,38 @@ def extract_semantics(
     # --- 3. Multi-turn reduction (for normalized_values) ---
     normalized_values = _reduce_multi_turn(utterances, reference_date)
 
+    # --- 3a. Move-target date/time override ---
+    # For move actions, extract the target date/time (after "to") rather than
+    # the source (after "from"), so that move normalization uses the final
+    # target slot (Rule 9).
+    _MOVE_TARGET_PATTERN = re.compile(
+        r"\bto\s+(?P<target_date>"
+        r"monday|tuesday|wednesday|thursday|friday|saturday|sunday|"
+        r"tomorrow|today|the\s+\d+(?:st|nd|rd|th)?)\b",
+        re.I,
+    )
+    if intended_action == "move":
+        all_text = " ".join(utterances)
+        target_m = _MOVE_TARGET_PATTERN.search(all_text)
+        if target_m:
+            raw_date = target_m.group("target_date")
+            ref_parts = reference_date.split("-")
+            ref = date(int(ref_parts[0]), int(ref_parts[1]), int(ref_parts[2]))
+            target_date_str = _extract_date(raw_date, ref)
+            if target_date_str:
+                normalized_values["appointment_date"] = target_date_str
+            # Extract target time after the target date mention
+            after_target = all_text[target_m.end():]
+            target_time = re.search(
+                r"\b(\d{1,2})(?:\s*(:?)\s*(\d{2}))?\s*(am|pm)\b",
+                after_target, re.I,
+            )
+            if target_time:
+                parsed = parse_time_fragment(target_time.group(0))
+                if parsed:
+                    normalized_values["earliest_time"] = parsed
+                    normalized_values["latest_time"] = parsed
+
     # Derive final temporal relation, has_time_bounds from all turns
     temporal_relation, earliest, latest = _derive_final_temporal(
         utterances, normalized_values,
@@ -1249,6 +1456,7 @@ def extract_semantics(
         practitioner_sem,
         correction_index,
         duration_semantics=duration_sem,
+        entities=entities,
     )
 
     # --- 9. Action negation ---
