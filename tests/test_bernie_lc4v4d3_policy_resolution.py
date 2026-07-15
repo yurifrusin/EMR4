@@ -32,6 +32,8 @@ from app.services.bernie.lc4v4d3_policy_evidence import (
     D3_TARGET_IDS,
     EXPECTED_20_CASE_HASH,
     EXPECTED_D2_REPORT_HASH,
+    generate_report_json,
+    generate_report_markdown,
     run_d3_evidence,
     _run_d2,
     _run_d3_option_a,
@@ -43,6 +45,13 @@ from app.services.bernie.lc4v4d3_policy_evidence import (
 # ---------------------------------------------------------------------------
 
 REFERENCE_DATE = "2026-07-15"
+SOURCE_COMMIT = "5eefb1a590157014ffd1153b0fb8cee81ef8e825"
+EXPECTED_D3_REPORT_HASH = (
+    "sha256:94b751aea657696329c6b6d394253aef3ef0dbe82316e7725efc1c16fac523a8"
+)
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+D3_JSON_REPORT = ROOT / "docs" / "bernie-lc4v4d3-policy-resolution.json"
+D3_MARKDOWN_REPORT = ROOT / "docs" / "bernie-lc4v4d3-policy-resolution.md"
 
 
 def _hash(payload: object) -> str:
@@ -686,6 +695,14 @@ class TestEvidenceReport:
         assert report["decision"] == "option_a_policy_resolution_valid"
         assert all(report["gates"].values())
         assert all(case["passed"] for case in report["cases"])
+
+    def test_committed_reports_match_recovered_source(self) -> None:
+        report = run_d3_evidence(SOURCE_COMMIT)
+        assert report["report_hash"] == EXPECTED_D3_REPORT_HASH
+        assert D3_JSON_REPORT.read_text(encoding="utf-8") == generate_report_json(report)
+        assert D3_MARKDOWN_REPORT.read_text(encoding="utf-8") == (
+            generate_report_markdown(report) + "\n"
+        )
 
 
 class TestSolRecoveryGuards:
