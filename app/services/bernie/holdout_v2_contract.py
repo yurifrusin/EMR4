@@ -1,68 +1,74 @@
-"""LC4V2 content-blind framework: immutable contracts and one-shot evaluation harness.
+"""Provider-free contracts for the fresh LC4V2 certification holdout.
 
-This module implements the provider-free, content-blind LC4V2 manifest, seal,
-aggregate-report, and consumption contracts defined in the Sol acceptance
-document ``lc4v2-sol-contract.md``.  No v1 fixture, support module, seal,
-receipt, report, or path is imported, inspected, or referenced.
-
-.. warning::
-
-    This is a **content-blind framework** only.  Real v2 scenarios do not yet
-    exist.  All evaluation logic is a placeholder that validates schema and
-    manifest integrity without executing interpretation, replay, or scoring.
+The module is deliberately content-blind.  It knows how to validate a new v2
+corpus, bind it to a manifest and seal, stream it through the ordinary
+deterministic interpreter/replay/scorer, and emit aggregate-only evidence.  It
+does not import any earlier protected-holdout support.
 """
 
 from __future__ import annotations
 
 import hashlib
 import json
-import os
+from dataclasses import asdict, dataclass, replace
 from datetime import datetime, timezone
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
+from app.services.bernie.composed_corpus_evaluator import (
+    deterministic_interpret,
+    deterministic_replay,
+)
+from app.services.bernie.composed_evaluator import (
+    ComposedSampleResult,
+    score_interpretation_replay_pair,
+)
 from app.services.bernie.scenario_spec import ReceptionScenarioSpec
-
-# ---------------------------------------------------------------------------
-# Constants
-# ---------------------------------------------------------------------------
-
-CANONICAL_ENCODING = "utf-8"
-JSON_INDENT = 2
 
 CORPUS_VERSION = "lc4-holdout-v2"
 EVALUATION_ID = "lc4-holdout-v2-baseline-001"
-DEFAULT_REPEAT_COUNT = 2
-
-# Production defaults — fail closed
-DEFAULT_GROUP_COUNT = 24
-DEFAULT_VARIANT_COUNT = 288
-DEFAULT_MULTI_TURN_COUNT = 72
-
-# Samples = variants × repeats
-SAMPLES_PER_EVALUATION = DEFAULT_VARIANT_COUNT * DEFAULT_REPEAT_COUNT  # 576
-
-# Schema identifiers
-AGGREGATE_SCHEMA_VERSION = "lc4v2.aggregate.v1"
+MANIFEST_SCHEMA_VERSION = "lc4v2.manifest.v1"
+GROUP_SCHEMA_VERSION = "lc4v2.group.v1"
 SEAL_SCHEMA_VERSION = "lc4v2.seal.v1"
+AGGREGATE_SCHEMA_VERSION = "lc4v2.aggregate.v1"
+EVALUATOR_VERSION = "lc4v2.composed.v1"
 
-# Multi-turn dialogue forms (anything other than one-shot)
-MULTI_TURN_FORMS: frozenset[str] = frozenset(
-    {
-        "clarification",
-        "correction",
-        "reversal",
-        "ellipsis",
-        "anaphora",
-        "repeated",
-        "session_restart",
-    }
+DIMENSION_NAMES = (
+    "complete",
+    "intended_action",
+    "action_semantics",
+    "temporal_relation",
+    "normalized_value_match",
+    "entity_semantics",
+    "clarification",
+    "downstream_outcome",
+    "tool_sequence",
+    "interpretation_tools",
+    "authority",
+    "appointment_deltas",
+    "audit_deltas",
+    "safety",
 )
-
-# Keys that must never appear anywhere in an aggregate report
-FORBIDDEN_REPORT_KEYS: frozenset[str] = frozenset(
+FAILURE_LAYER_NAMES = ("interpretation", "policy", "integration", "safety")
+SLICE_AXES = (
+    "intended_action",
+    "temporal_relation",
+    "diary_state",
+    "entity_state",
+    "dialogue_form",
+    "language_form",
+)
+SLICE_VALUES = {
+    "intended_action": {"create", "move", "resize", "cancel", "status_change", "explain_schedule"},
+    "temporal_relation": {"exact", "not_before", "not_after", "interval", "approximate", "unspecified"},
+    "diary_state": {"empty", "exact_duplicate", "overlap", "same_day_distinct", "terminal", "stale", "concurrent", "roster_absent", "break", "no_slots", "elapsed_window"},
+    "entity_state": {"exact", "omitted", "ambiguous", "corrected", "negated", "mismatched"},
+    "dialogue_form": {"one_shot", "clarification", "correction", "reversal", "ellipsis", "anaphora", "repeated", "session_restart"},
+    "language_form": {"plain", "paraphrase", "filler", "abbreviation", "typo", "speech_like", "punctuation_variant", "adversarial"},
+}
+FORBIDDEN_REPORT_KEYS = frozenset(
     {
         "utterance",
         "utterances",
@@ -78,6 +84,7 @@ FORBIDDEN_REPORT_KEYS: frozenset[str] = frozenset(
         "expected_audit_deltas",
         "source_spans",
         "normalized_values",
+        "observation",
         "observations",
         "case_finding",
         "case_findings",
@@ -89,347 +96,377 @@ FORBIDDEN_REPORT_KEYS: frozenset[str] = frozenset(
 )
 
 
-# ---------------------------------------------------------------------------
-# Helpers
-# ---------------------------------------------------------------------------
+@dataclass(frozen=True)
+class CorpusProfile:
+    """Expected corpus shape; production values are fixed by ``PRODUCTION_PROFILE``."""
+
+    group_count: int
+    variants_per_group: int = 12
+    multi_turn_per_group: int = 3
+    repeat_count: int = 2
+
+    def __post_init__(self) -> None:
+        if min(
+            self.group_count,
+            self.variants_per_group,
+            self.repeat_count,
+        ) <= 0:
+            raise ValueError("profile counts must be positive")
+        if not 0 <= self.multi_turn_per_group <= self.variants_per_group:
+            raise ValueError("invalid multi-turn count")
+
+    @property
+    def variant_count(self) -> int:
+        return self.group_count * self.variants_per_group
+
+    @property
+    def multi_turn_count(self) -> int:
+        return self.group_count * self.multi_turn_per_group
+
+    @property
+    def sample_count(self) -> int:
+        return self.variant_count * self.repeat_count
 
 
-def _canonical_json(obj: Any) -> str:
-    """Serialize *obj* to canonical JSON (sorted keys, compact separators)."""
+PRODUCTION_PROFILE = CorpusProfile(group_count=24)
+
+
+def canonical_json(value: Any) -> str:
     return json.dumps(
-        obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+        value,
+        ensure_ascii=False,
+        separators=(",", ":"),
+        sort_keys=True,
     )
-
-
-def _sha256(data: bytes) -> str:
-    """Return raw hex SHA-256 digest of *data*."""
-    return hashlib.sha256(data).hexdigest()
 
 
 def sha256_digest(data: bytes) -> str:
-    """Return ``sha256:<hex>`` prefixed digest."""
-    return f"sha256:{_sha256(data)}"
+    return f"sha256:{hashlib.sha256(data).hexdigest()}"
 
 
-# ---------------------------------------------------------------------------
-# 1.  Group envelope
-# ---------------------------------------------------------------------------
+def _validate_sha256(value: str) -> str:
+    if len(value) != 71 or not value.startswith("sha256:"):
+        raise ValueError("digest must use sha256:<64 lowercase hex>")
+    try:
+        int(value[7:], 16)
+    except ValueError as error:
+        raise ValueError("digest must use sha256:<64 lowercase hex>") from error
+    if value != value.lower():
+        raise ValueError("digest must use lowercase hex")
+    return value
+
+
+def _validate_commit(value: str) -> str:
+    if len(value) != 40:
+        raise ValueError("source_commit must be a full 40-character Git SHA")
+    try:
+        int(value, 16)
+    except ValueError as error:
+        raise ValueError("source_commit must be hexadecimal") from error
+    return value.lower()
 
 
 class ScenarioGroupEnvelope(BaseModel):
-    """A group envelope containing exactly 12 ``ReceptionScenarioSpec`` payloads.
+    model_config = ConfigDict(extra="forbid", frozen=True)
 
-    Every variant must be Gold / adjudicated.  Exactly three variants per group
-    must be multi-turn.
-    """
-
-    model_config = ConfigDict(extra="forbid")
-
-    group_id: str = Field(min_length=1)
-    variants: list[ReceptionScenarioSpec] = Field(min_length=12, max_length=12)
+    schema_version: Literal["lc4v2.group.v1"] = GROUP_SCHEMA_VERSION
+    group_id: str = Field(pattern=r"^lc4v2_group_[0-9]{3}$")
+    variants: tuple[ReceptionScenarioSpec, ...]
 
     @model_validator(mode="after")
-    def _validate_group_shape(self) -> ScenarioGroupEnvelope:
+    def validate_content(self) -> "ScenarioGroupEnvelope":
         if len(self.variants) != 12:
-            raise ValueError(
-                f"group {self.group_id!r} must have exactly 12 variants, "
-                f"got {len(self.variants)}"
-            )
-
-        multi_turn_count = sum(
-            1 for v in self.variants if v.dialogue_form in MULTI_TURN_FORMS
-        )
-        if multi_turn_count != 3:
-            raise ValueError(
-                f"group {self.group_id!r} must have exactly 3 multi-turn variants, "
-                f"got {multi_turn_count}"
-            )
-
-        ids = [v.scenario_id for v in self.variants]
-        if len(ids) != len(set(ids)):
-            seen = {i for i in ids if ids.count(i) > 1}
-            raise ValueError(
-                f"group {self.group_id!r} has duplicate variant IDs: {sorted(seen)}"
-            )
-
-        for v in self.variants:
-            if v.provenance != "gold":
-                raise ValueError(
-                    f"variant {v.scenario_id!r} has non-gold provenance: {v.provenance}"
-                )
-            if v.adjudication != "adjudicated":
-                raise ValueError(
-                    f"variant {v.scenario_id!r} has non-adjudicated: {v.adjudication}"
-                )
-            if "expected_outcome_kind" not in v.model_fields_set:
-                raise ValueError(
-                    f"variant {v.scenario_id!r} missing expected_outcome_kind"
-                )
-
+            raise ValueError("each v2 group must contain exactly 12 variants")
+        if len({item.scenario_id for item in self.variants}) != 12:
+            raise ValueError("scenario IDs must be unique within a group")
+        multi_turn = sum(len(item.dialogue_turns) > 1 for item in self.variants)
+        if multi_turn != 3:
+            raise ValueError("each v2 group must contain exactly 3 multi-turn variants")
+        for item in self.variants:
+            if item.provenance != "gold" or item.adjudication != "adjudicated":
+                raise ValueError("v2 variants must be Gold/adjudicated")
+            if not item.scenario_id.startswith(f"{self.group_id}_"):
+                raise ValueError("scenario ID must be namespaced by group ID")
+            if "expected_outcome_kind" not in item.model_fields_set:
+                raise ValueError("expected_outcome_kind must be explicit")
+            if not item.source_spans:
+                raise ValueError("every v2 scenario must retain source-span evidence")
+            if item.initial_diary_state.get("synthetic") is not True:
+                raise ValueError("initial diary state must be explicitly synthetic")
         return self
-
-
-# ---------------------------------------------------------------------------
-# 2.  Manifest
-# ---------------------------------------------------------------------------
 
 
 class ManifestFileEntry(BaseModel):
-    """A single file entry binding a relative path to its SHA-256 digest."""
-
     model_config = ConfigDict(extra="forbid", frozen=True)
 
-    relative_path: str = Field(min_length=1)
-    sha256: str = Field(min_length=1)
+    relative_path: str
+    sha256: str
 
     @field_validator("relative_path")
     @classmethod
-    def _reject_absolute_and_traversal(
-        cls, value: str
-    ) -> str:
-        if os.path.isabs(value) or value.startswith("/"):
-            raise ValueError(f"absolute path forbidden: {value}")
-        parts = value.replace("\\", "/").split("/")
-        if ".." in parts:
-            raise ValueError(f"path traversal forbidden: {value}")
-        return value
+    def validate_path(cls, value: str) -> str:
+        path = PurePosixPath(value)
+        if not value or path.is_absolute() or ".." in path.parts:
+            raise ValueError("manifest paths must be safe relative POSIX paths")
+        if len(path.parts) != 1 or path.suffix != ".json":
+            raise ValueError("group entries must be top-level JSON files")
+        return path.as_posix()
+
+    @field_validator("sha256")
+    @classmethod
+    def validate_hash(cls, value: str) -> str:
+        return _validate_sha256(value)
 
 
 class Manifest(BaseModel):
-    """Bind every group file, SHA-256 hashes, corpus hash, and exact counts."""
-
     model_config = ConfigDict(extra="forbid", frozen=True)
 
-    corpus_version: str = Field(
-        default=CORPUS_VERSION, pattern=r"^lc4-holdout-v2$"
-    )
-    files: list[ManifestFileEntry]
-    corpus_hash: str = Field(min_length=1)
-    group_count: int = Field(default=DEFAULT_GROUP_COUNT, ge=1)
-    variant_count: int = Field(default=DEFAULT_VARIANT_COUNT, ge=1)
-    multi_turn_count: int = Field(default=DEFAULT_MULTI_TURN_COUNT, ge=0)
+    schema_version: Literal["lc4v2.manifest.v1"] = MANIFEST_SCHEMA_VERSION
+    corpus_version: Literal["lc4-holdout-v2"] = CORPUS_VERSION
+    files: tuple[ManifestFileEntry, ...]
+    group_count: int = Field(gt=0)
+    variant_count: int = Field(gt=0)
+    multi_turn_count: int = Field(ge=0)
+    corpus_hash: str
 
-    @field_validator("files")
+    @field_validator("corpus_hash")
     @classmethod
-    def _reject_duplicate_paths(
-        cls, value: list[ManifestFileEntry]
-    ) -> list[ManifestFileEntry]:
-        paths = [e.relative_path for e in value]
-        if len(paths) != len(set(paths)):
-            dupes = {p for p in paths if paths.count(p) > 1}
-            raise ValueError(f"duplicate manifest paths: {sorted(dupes)}")
-        return value
+    def validate_hash(cls, value: str) -> str:
+        return _validate_sha256(value)
 
-    def compute_hash(self) -> str:
-        """Return ``sha256:<hex>`` of the canonical JSON encoding."""
-        data = self.model_dump(mode="json")
-        raw = _canonical_json(data)
-        return sha256_digest(raw.encode(CANONICAL_ENCODING))
+    @model_validator(mode="after")
+    def validate_entries(self) -> "Manifest":
+        paths = [entry.relative_path for entry in self.files]
+        if paths != sorted(paths) or len(paths) != len(set(paths)):
+            raise ValueError("manifest file paths must be sorted and unique")
+        if len(paths) != self.group_count:
+            raise ValueError("manifest file count must equal group_count")
+        return self
 
-
-# ---------------------------------------------------------------------------
-# 3.  Pre-consumption seal
-# ---------------------------------------------------------------------------
+    def digest(self) -> str:
+        return sha256_digest(canonical_json(self.model_dump(mode="json")).encode())
 
 
 class PreConsumptionSeal(BaseModel):
-    """Pre-consumption seal binding corpus version, manifest, commit, and identity."""
+    model_config = ConfigDict(extra="forbid", frozen=True)
 
-    model_config = ConfigDict(extra="forbid")
+    schema_version: Literal["lc4v2.seal.v1"] = SEAL_SCHEMA_VERSION
+    corpus_version: Literal["lc4-holdout-v2"] = CORPUS_VERSION
+    evaluation_id: Literal["lc4-holdout-v2-baseline-001"] = EVALUATION_ID
+    state: Literal["sealed"] = "sealed"
+    manifest_hash: str
+    corpus_hash: str
+    source_commit: str
+    evaluator_version: Literal["lc4v2.composed.v1"] = EVALUATOR_VERSION
+    repeat_count: Literal[2] = 2
 
-    corpus_version: str = Field(
-        default=CORPUS_VERSION, pattern=r"^lc4-holdout-v2$"
-    )
-    manifest_hash: str = Field(min_length=1)
-    source_commit: str = Field(min_length=1)
-    evaluator_version: str = Field(min_length=1)
-    schema_version: str = Field(default=SEAL_SCHEMA_VERSION, min_length=1)
-    evaluation_id: str = Field(
-        default=EVALUATION_ID, pattern=r"^lc4-holdout-v2-baseline-001$"
-    )
-    repeat_count: int = Field(default=DEFAULT_REPEAT_COUNT, ge=1)
-    state: Literal["created", "consumed"]
+    @field_validator("manifest_hash", "corpus_hash")
+    @classmethod
+    def validate_hash(cls, value: str) -> str:
+        return _validate_sha256(value)
 
-
-# ---------------------------------------------------------------------------
-# 4.  Aggregate-only report
-# ---------------------------------------------------------------------------
+    @field_validator("source_commit")
+    @classmethod
+    def validate_commit(cls, value: str) -> str:
+        return _validate_commit(value)
 
 
 class AggregateDimension(BaseModel):
-    """Passed / failed totals for one evaluation dimension."""
-
-    model_config = ConfigDict(extra="forbid")
+    model_config = ConfigDict(extra="forbid", frozen=True)
 
     passed: int = Field(ge=0)
     failed: int = Field(ge=0)
 
 
-class FailureLayer(BaseModel):
-    """Count of failures attributed to a specific layer."""
+class SliceAggregate(BaseModel):
+    model_config = ConfigDict(extra="forbid", frozen=True)
 
-    model_config = ConfigDict(extra="forbid")
+    value: str = Field(min_length=1)
+    total: int = Field(gt=0)
+    complete_passed: int = Field(ge=0)
+    safety_passed: int = Field(ge=0)
 
-    layer: str = Field(min_length=1)
-    total: int = Field(ge=0)
-
-
-class CriticalSlice(BaseModel):
-    """Predefined critical-slice aggregate (no per-case data)."""
-
-    model_config = ConfigDict(extra="forbid")
-
-    name: str = Field(min_length=1)
-    passed: int = Field(ge=0)
-    failed: int = Field(ge=0)
-    total: int = Field(ge=0)
+    @model_validator(mode="after")
+    def validate_totals(self) -> "SliceAggregate":
+        if self.complete_passed > self.total or self.safety_passed > self.total:
+            raise ValueError("slice pass counts cannot exceed total")
+        return self
 
 
-class CoverageCell(BaseModel):
-    """Coverage-lattice cell count."""
+class VarianceSummary(BaseModel):
+    model_config = ConfigDict(extra="forbid", frozen=True)
 
-    model_config = ConfigDict(extra="forbid")
+    variant_scenario_count: int = Field(ge=0)
+    variant_sample_count: int = Field(ge=0)
+    total_samples: int = Field(gt=0)
 
-    cell: str = Field(min_length=1)
-    count: int = Field(ge=0)
+
+class CoverageSummary(BaseModel):
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    distinct_cells: int = Field(gt=0)
+    scenario_count: int = Field(gt=0)
 
 
 class AggregateReport(BaseModel):
-    """Aggregate-only evaluation result with no per-case data.
+    model_config = ConfigDict(extra="forbid", frozen=True)
 
-    The report exposes only dimension totals, failure layers, safety, variance,
-    critical-slice aggregates, coverage-cell counts, hashes, and provenance.
-    It must never contain utterance, dialogue, group/scenario/variant
-    identifiers, expected labels/outcomes/tools/deltas, source spans,
-    normalized values, observations, case findings, or per-case results.
-    """
-
-    model_config = ConfigDict(extra="forbid")
-
-    schema_version: str = Field(
-        default=AGGREGATE_SCHEMA_VERSION, min_length=1
-    )
+    schema_version: Literal["lc4v2.aggregate.v1"] = AGGREGATE_SCHEMA_VERSION
+    corpus_version: Literal["lc4-holdout-v2"] = CORPUS_VERSION
+    evaluation_id: Literal["lc4-holdout-v2-baseline-001"] = EVALUATION_ID
+    source_commit: str
+    manifest_hash: str
+    corpus_hash: str
+    evaluator_version: Literal["lc4v2.composed.v1"] = EVALUATOR_VERSION
+    repeat_count: Literal[2] = 2
+    sample_count: int = Field(gt=0)
     dimensions: dict[str, AggregateDimension]
-    failure_layers: list[FailureLayer]
-    safety_pass: int = Field(ge=0)
-    safety_total: int = Field(ge=0)
-    variance: float
-    critical_slices: list[CriticalSlice] = Field(default_factory=list)
-    coverage_cells: list[CoverageCell] = Field(default_factory=list)
-    corpus_hash: str = Field(min_length=1)
-    report_hash: str = Field(min_length=1, default="")
+    failure_layers: dict[str, int]
+    variance: VarianceSummary
+    critical_slices: dict[str, tuple[SliceAggregate, ...]]
+    coverage: CoverageSummary
+    report_hash: str
+
+    @field_validator("source_commit")
+    @classmethod
+    def validate_commit(cls, value: str) -> str:
+        return _validate_commit(value)
+
+    @field_validator("manifest_hash", "corpus_hash", "report_hash")
+    @classmethod
+    def validate_hash(cls, value: str) -> str:
+        return _validate_sha256(value)
 
     @model_validator(mode="after")
-    def _validate_dimension_totals(self) -> AggregateReport:
-        totals = {name: dim.passed + dim.failed for name, dim in self.dimensions.items()}
-        if not totals:
-            raise ValueError("at least one dimension is required")
-        expected = next(iter(totals.values()))
-        for name, total in totals.items():
-            if total != expected:
-                raise ValueError(
-                    f"dimension {name!r} total ({total}) != expected "
-                    f"{expected} (all dimensions must have the same total)"
-                )
+    def validate_aggregates(self) -> "AggregateReport":
+        if set(self.dimensions) != set(DIMENSION_NAMES):
+            raise ValueError("aggregate report must contain the exact dimensions")
+        for dimension in self.dimensions.values():
+            if dimension.passed + dimension.failed != self.sample_count:
+                raise ValueError("every dimension must total sample_count")
+        if set(self.failure_layers) != set(FAILURE_LAYER_NAMES):
+            raise ValueError("aggregate report must contain exact failure layers")
+        if any(
+            value < 0 or value > self.sample_count
+            for value in self.failure_layers.values()
+        ):
+            raise ValueError("failure-layer count cannot exceed sample_count")
+        if self.variance.total_samples != self.sample_count:
+            raise ValueError("variance total must equal sample_count")
+        if self.variance.variant_sample_count > self.sample_count:
+            raise ValueError("variant sample count cannot exceed sample_count")
+        if set(self.critical_slices) != set(SLICE_AXES):
+            raise ValueError("critical slices must contain the exact axes")
+        for values in self.critical_slices.values():
+            if sum(item.total for item in values) != self.sample_count:
+                raise ValueError("each critical-slice axis must total sample_count")
+            names = [item.value for item in values]
+            if names != sorted(names) or len(names) != len(set(names)):
+                raise ValueError("critical-slice values must be sorted and unique")
+        for axis, values in self.critical_slices.items():
+            if any(item.value not in SLICE_VALUES[axis] for item in values):
+                raise ValueError("critical-slice value is outside the canonical lattice")
+        if self.coverage.scenario_count * self.repeat_count != self.sample_count:
+            raise ValueError("coverage scenario count must bind sample_count")
+        if self.coverage.distinct_cells > self.coverage.scenario_count:
+            raise ValueError("distinct cells cannot exceed scenario count")
         return self
-
-    def check_forbidden_keys(self) -> None:
-        """Raise ``ValueError`` if any key in ``FORBIDDEN_REPORT_KEYS`` appears."""
-
-        def _walk(obj: Any, path: str) -> None:
-            if isinstance(obj, dict):
-                for key, value in obj.items():
-                    full = f"{path}.{key}" if path else key
-                    if key in FORBIDDEN_REPORT_KEYS:
-                        raise ValueError(
-                            f"forbidden report key at {full!r}: {key!r}"
-                        )
-                    _walk(value, full)
-            elif isinstance(obj, list):
-                for i, item in enumerate(obj):
-                    _walk(item, f"{path}[{i}]")
-
-        _walk(self.model_dump(mode="json"), "")
-
-
-# ---------------------------------------------------------------------------
-# 5.  Consumed seal
-# ---------------------------------------------------------------------------
 
 
 class ConsumedSeal(BaseModel):
-    """One-shot consumed seal binding the aggregate report hash exactly once."""
-
     model_config = ConfigDict(extra="forbid", frozen=True)
 
-    corpus_version: str = Field(
-        default=CORPUS_VERSION, pattern=r"^lc4-holdout-v2$"
-    )
-    manifest_hash: str = Field(min_length=1)
-    source_commit: str = Field(min_length=1)
-    evaluator_version: str = Field(min_length=1)
-    schema_version: str = Field(default=SEAL_SCHEMA_VERSION, min_length=1)
-    evaluation_id: str = Field(
-        default=EVALUATION_ID, pattern=r"^lc4-holdout-v2-baseline-001$"
-    )
-    repeat_count: int = Field(default=DEFAULT_REPEAT_COUNT, ge=1)
+    schema_version: Literal["lc4v2.seal.v1"] = SEAL_SCHEMA_VERSION
+    corpus_version: Literal["lc4-holdout-v2"] = CORPUS_VERSION
+    evaluation_id: Literal["lc4-holdout-v2-baseline-001"] = EVALUATION_ID
     state: Literal["consumed"] = "consumed"
-    report_hash: str = Field(min_length=1)
-    consumed_at: str = Field(
-        default_factory=lambda: datetime.now(timezone.utc).strftime(
-            "%Y-%m-%dT%H:%M:%SZ"
-        )
-    )
+    manifest_hash: str
+    corpus_hash: str
+    source_commit: str
+    evaluator_version: Literal["lc4v2.composed.v1"] = EVALUATOR_VERSION
+    repeat_count: Literal[2] = 2
+    report_hash: str
+    consumed_at: str
+
+    @field_validator("manifest_hash", "corpus_hash", "report_hash")
+    @classmethod
+    def validate_hash(cls, value: str) -> str:
+        return _validate_sha256(value)
+
+    @field_validator("source_commit")
+    @classmethod
+    def validate_commit(cls, value: str) -> str:
+        return _validate_commit(value)
+
+    @field_validator("consumed_at")
+    @classmethod
+    def validate_timestamp(cls, value: str) -> str:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        if parsed.tzinfo is None:
+            raise ValueError("consumed_at must be timezone-aware")
+        return value
 
 
-# ---------------------------------------------------------------------------
-# Manifest I/O and verification
-# ---------------------------------------------------------------------------
+def _load_group(path: Path) -> ScenarioGroupEnvelope:
+    try:
+        raw = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise ValueError(f"invalid group file {path.name}: {error}") from error
+    return ScenarioGroupEnvelope.model_validate(raw)
+
+
+def _group_files(group_dir: Path) -> list[Path]:
+    if not group_dir.is_dir():
+        raise ValueError("group directory does not exist")
+    files = sorted(path for path in group_dir.iterdir() if path.is_file())
+    if any(path.suffix != ".json" for path in files):
+        raise ValueError("group directory may contain JSON group files only")
+    return files
 
 
 def build_manifest(
     group_dir: Path,
     *,
-    group_count: int = DEFAULT_GROUP_COUNT,
-    variant_count: int = DEFAULT_VARIANT_COUNT,
-    multi_turn_count: int = DEFAULT_MULTI_TURN_COUNT,
+    profile: CorpusProfile = PRODUCTION_PROFILE,
 ) -> Manifest:
-    """Build a ``Manifest`` from a directory of group JSON files.
-
-    Count parameters default to production values (24/288/72) and are
-    injectable for tiny test fixtures.
-    """
-    json_files = sorted(
-        [f for f in group_dir.iterdir() if f.is_file() and f.suffix == ".json"]
-    )
-    if not json_files:
-        raise ValueError(f"no JSON files found in {group_dir}")
+    files = _group_files(group_dir)
+    if len(files) != profile.group_count:
+        raise ValueError("group count does not match profile")
 
     entries: list[ManifestFileEntry] = []
-    all_content: list[bytes] = []
-
-    for f in json_files:
-        content = f.read_bytes()
+    scenario_ids: set[str] = set()
+    variant_count = 0
+    multi_turn_count = 0
+    for path in files:
+        envelope = _load_group(path)
+        if path.stem != envelope.group_id:
+            raise ValueError("group filename must match group_id")
+        if len(envelope.variants) != profile.variants_per_group:
+            raise ValueError("variant count per group does not match profile")
+        group_multi = sum(len(item.dialogue_turns) > 1 for item in envelope.variants)
+        if group_multi != profile.multi_turn_per_group:
+            raise ValueError("multi-turn count per group does not match profile")
+        for scenario in envelope.variants:
+            if scenario.scenario_id in scenario_ids:
+                raise ValueError("duplicate scenario ID across groups")
+            scenario_ids.add(scenario.scenario_id)
+        variant_count += len(envelope.variants)
+        multi_turn_count += group_multi
         entries.append(
             ManifestFileEntry(
-                relative_path=f.name,
-                sha256=sha256_digest(content),
+                relative_path=path.name,
+                sha256=sha256_digest(path.read_bytes()),
             )
         )
-        all_content.append(content)
 
-    # Deterministic concatenation order
-    all_content.sort(key=lambda x: x)
-    combined = b"".join(all_content)
-    corpus_hash = sha256_digest(combined)
-
+    binding = [entry.model_dump(mode="json") for entry in entries]
+    corpus_hash = sha256_digest(canonical_json(binding).encode())
     return Manifest(
-        corpus_version=CORPUS_VERSION,
-        files=entries,
-        corpus_hash=corpus_hash,
-        group_count=group_count,
+        files=tuple(entries),
+        group_count=len(files),
         variant_count=variant_count,
         multi_turn_count=multi_turn_count,
+        corpus_hash=corpus_hash,
     )
 
 
@@ -437,298 +474,252 @@ def verify_manifest(
     manifest: Manifest,
     group_dir: Path,
     *,
-    expected_group_count: int = DEFAULT_GROUP_COUNT,
-    expected_variant_count: int = DEFAULT_VARIANT_COUNT,
-    expected_multi_turn_count: int = DEFAULT_MULTI_TURN_COUNT,
-) -> None:
-    """Verify *manifest* against the actual files in *group_dir*.
-
-    Raises ``ValueError`` on any mismatch (missing / extra files, absolute or
-    traversal paths, duplicate paths or IDs, byte or hash drift, wrong corpus
-    version, count drift).
-    """
-    # --- version ---
-    if manifest.corpus_version != CORPUS_VERSION:
-        raise ValueError(
-            f"corpus_version {manifest.corpus_version!r} != {CORPUS_VERSION!r}"
-        )
-
-    # --- counts ---
-    if manifest.group_count != expected_group_count:
-        raise ValueError(
-            f"group_count {manifest.group_count} != expected {expected_group_count}"
-        )
-    if manifest.variant_count != expected_variant_count:
-        raise ValueError(
-            f"variant_count {manifest.variant_count} != expected {expected_variant_count}"
-        )
-    if manifest.multi_turn_count != expected_multi_turn_count:
-        raise ValueError(
-            f"multi_turn_count {manifest.multi_turn_count} != expected {expected_multi_turn_count}"
-        )
-
-    # --- file set ---
-    actual_names: set[str] = set()
-    for f in group_dir.iterdir():
-        if f.is_file() and f.suffix == ".json":
-            actual_names.add(f.name)
-
-    manifest_paths = {e.relative_path for e in manifest.files}
-
-    missing = manifest_paths - actual_names
-    if missing:
-        raise ValueError(f"manifest references missing files: {sorted(missing)}")
-
-    extra = actual_names - manifest_paths
-    if extra:
-        raise ValueError(f"files not listed in manifest: {sorted(extra)}")
-
-    # --- per-file hash + path safety ---
-    resolved_group = group_dir.resolve()
-    all_content: list[bytes] = []
-
-    for entry in manifest.files:
-        file_path = (group_dir / entry.relative_path).resolve()
-        if not str(file_path).startswith(str(resolved_group)):
-            raise ValueError(
-                f"path traversal detected: {entry.relative_path}"
-            )
-        if not file_path.is_file():
-            raise ValueError(
-                f"manifest file not found: {entry.relative_path}"
-            )
-        content = file_path.read_bytes()
-        actual_hash = sha256_digest(content)
-        if actual_hash != entry.sha256:
-            raise ValueError(
-                f"hash mismatch for {entry.relative_path!r}: "
-                f"expected {entry.sha256}, got {actual_hash}"
-            )
-        all_content.append(content)
-
-    # --- corpus hash ---
-    all_content.sort(key=lambda x: x)
-    computed = sha256_digest(b"".join(all_content))
-    if computed != manifest.corpus_hash:
-        raise ValueError(
-            f"corpus hash mismatch: expected {manifest.corpus_hash}, "
-            f"computed {computed}"
-        )
-
-    # --- validate every group ---
-    seen_ids: set[str] = set()
-    total_variants = 0
-    total_multi_turn = 0
-
-    for entry in manifest.files:
-        file_path = group_dir / entry.relative_path
-        raw = json.loads(file_path.read_text(CANONICAL_ENCODING))
-        envelope = ScenarioGroupEnvelope.model_validate(raw)
-
-        total_variants += len(envelope.variants)
-        for v in envelope.variants:
-            if v.scenario_id in seen_ids:
-                raise ValueError(
-                    f"duplicate scenario_id across groups: {v.scenario_id}"
-                )
-            seen_ids.add(v.scenario_id)
-            if v.dialogue_form in MULTI_TURN_FORMS:
-                total_multi_turn += 1
-
-    if total_variants != expected_variant_count:
-        raise ValueError(
-            f"total variants {total_variants} != expected {expected_variant_count}"
-        )
-    if total_multi_turn != expected_multi_turn_count:
-        raise ValueError(
-            f"total multi-turn variants {total_multi_turn} != expected "
-            f"{expected_multi_turn_count}"
-        )
-
-
-# ---------------------------------------------------------------------------
-# Seal creation
-# ---------------------------------------------------------------------------
+    profile: CorpusProfile = PRODUCTION_PROFILE,
+) -> tuple[ScenarioGroupEnvelope, ...]:
+    rebuilt = build_manifest(group_dir, profile=profile)
+    if rebuilt != manifest:
+        raise ValueError("manifest does not exactly match corpus content")
+    return tuple(_load_group(group_dir / entry.relative_path) for entry in manifest.files)
 
 
 def create_seal(
     manifest: Manifest,
-    source_commit: str,
+    group_dir: Path,
     *,
-    evaluator_version: str = "0.1.0",
-    schema_version: str = SEAL_SCHEMA_VERSION,
+    source_commit: str,
+    profile: CorpusProfile = PRODUCTION_PROFILE,
 ) -> PreConsumptionSeal:
-    """Create a pre-consumption seal from a verified manifest."""
+    verify_manifest(manifest, group_dir, profile=profile)
     return PreConsumptionSeal(
-        corpus_version=CORPUS_VERSION,
-        manifest_hash=manifest.compute_hash(),
+        manifest_hash=manifest.digest(),
+        corpus_hash=manifest.corpus_hash,
         source_commit=source_commit,
-        evaluator_version=evaluator_version,
-        schema_version=schema_version,
-        evaluation_id=EVALUATION_ID,
-        repeat_count=DEFAULT_REPEAT_COUNT,
-        state="created",
     )
 
 
-# ---------------------------------------------------------------------------
-# Aggregate evaluation (content-blind placeholder)
-# ---------------------------------------------------------------------------
+def _result_dimensions(result: ComposedSampleResult) -> dict[str, bool]:
+    return {
+        "complete": result.all_passed,
+        "intended_action": result.semantic_fields.intended_action.passed,
+        "action_semantics": result.semantic_fields.action_semantics.passed,
+        "temporal_relation": result.semantic_fields.temporal_relation.passed,
+        "normalized_value_match": result.semantic_fields.normalized_values.passed,
+        "entity_semantics": result.semantic_fields.entity_semantics.passed,
+        "clarification": result.clarification.passed,
+        "downstream_outcome": result.downstream_outcome.passed,
+        "tool_sequence": result.tool_sequence.passed,
+        "interpretation_tools": result.interpretation_tools.passed,
+        "authority": result.authority.passed,
+        "appointment_deltas": result.appointment_deltas.passed,
+        "audit_deltas": result.audit_deltas.passed,
+        "safety": result.safety.passed,
+    }
 
-# When real v2 content exists, use:
-#   from app.services.bernie.composed_corpus_evaluator import (
-#       deterministic_interpret,
-#       deterministic_replay,
-#       score_interpretation_replay_pair,
-#   )
+
+def _observation_fingerprint(result: ComposedSampleResult) -> str:
+    payload = {
+        "interpretation": asdict(result.interpretation),
+        "replay": asdict(result.replay),
+    }
+    payload["interpretation"].pop("sample_index", None)
+    payload["replay"].pop("sample_index", None)
+    payload["interpretation"].pop("scenario_id", None)
+    payload["replay"].pop("scenario_id", None)
+    return sha256_digest(canonical_json(payload).encode())
 
 
-def run_aggregate_evaluation(
+def _assert_no_forbidden_keys(value: Any) -> None:
+    if isinstance(value, dict):
+        for key, child in value.items():
+            if key in FORBIDDEN_REPORT_KEYS:
+                raise ValueError(f"forbidden aggregate key: {key}")
+            _assert_no_forbidden_keys(child)
+    elif isinstance(value, (list, tuple)):
+        for child in value:
+            _assert_no_forbidden_keys(child)
+
+
+def validate_aggregate_payload(
+    raw: dict[str, Any],
+    *,
+    profile: CorpusProfile = PRODUCTION_PROFILE,
+) -> AggregateReport:
+    _assert_no_forbidden_keys(raw)
+    report = AggregateReport.model_validate(raw)
+    if report.repeat_count != profile.repeat_count:
+        raise ValueError("aggregate repeat count does not match profile")
+    if report.sample_count != profile.sample_count:
+        raise ValueError("aggregate sample count does not match profile")
+    if report.coverage.scenario_count != profile.variant_count:
+        raise ValueError("aggregate scenario count does not match profile")
+    unsigned = report.model_dump(mode="json", exclude={"report_hash"})
+    expected = sha256_digest(canonical_json(unsigned).encode())
+    if report.report_hash != expected:
+        raise ValueError("aggregate report hash mismatch")
+    return report
+
+
+def evaluate_aggregate(
     manifest: Manifest,
     seal: PreConsumptionSeal,
     group_dir: Path,
     *,
-    sample_size: int = SAMPLES_PER_EVALUATION,
-    expected_group_count: int = DEFAULT_GROUP_COUNT,
-    expected_variant_count: int = DEFAULT_VARIANT_COUNT,
-    expected_multi_turn_count: int = DEFAULT_MULTI_TURN_COUNT,
+    source_commit: str,
+    profile: CorpusProfile = PRODUCTION_PROFILE,
 ) -> AggregateReport:
-    """Run a deterministic aggregate evaluation.
+    if seal.state != "sealed":
+        raise ValueError("only a sealed corpus may be evaluated")
+    if source_commit != seal.source_commit:
+        raise ValueError("evaluation source commit does not match seal")
+    groups = verify_manifest(manifest, group_dir, profile=profile)
+    if seal.manifest_hash != manifest.digest() or seal.corpus_hash != manifest.corpus_hash:
+        raise ValueError("seal does not bind the supplied manifest")
+    if seal.repeat_count != profile.repeat_count:
+        raise ValueError("seal repeat count does not match profile")
 
-    This is a **content-blind placeholder**.  It validates the manifest and
-    returns a zero-failure aggregate report.  When real v2 content exists, Sol
-    will replace this with real interpretation, replay, and scoring calls.
-
-    The function never serialises utterances, IDs, expected
-    labels/outcomes/tools/deltas, source spans, normalised values,
-    observations, case findings, or per-case results.
-    """
-    verify_manifest(
-        manifest,
-        group_dir,
-        expected_group_count=expected_group_count,
-        expected_variant_count=expected_variant_count,
-        expected_multi_turn_count=expected_multi_turn_count,
-    )
-
-    dims = {
-        "interpretation": AggregateDimension(passed=sample_size, failed=0),
-        "replay": AggregateDimension(passed=sample_size, failed=0),
-        "composed_score": AggregateDimension(passed=sample_size, failed=0),
-        "outcome_match": AggregateDimension(passed=sample_size, failed=0),
-        "tool_sequence": AggregateDimension(passed=sample_size, failed=0),
-        "delta_match": AggregateDimension(passed=sample_size, failed=0),
+    dimensions = {
+        name: {"passed": 0, "failed": 0} for name in DIMENSION_NAMES
     }
+    failure_layers = {name: 0 for name in FAILURE_LAYER_NAMES}
+    slice_counts: dict[str, dict[str, dict[str, int]]] = {
+        axis: {} for axis in SLICE_AXES
+    }
+    fingerprints: dict[str, list[str]] = {}
+    coverage_cells: set[tuple[str, ...]] = set()
 
-    report_data: dict[str, Any] = {
+    for group in groups:
+        for scenario in group.variants:
+            coverage_cells.add(tuple(str(getattr(scenario, axis)) for axis in SLICE_AXES))
+            for sample_index in range(profile.repeat_count):
+                interpretation = replace(
+                    deterministic_interpret(scenario),
+                    sample_index=sample_index,
+                )
+                replay = deterministic_replay(scenario, interpretation)
+                result = score_interpretation_replay_pair(
+                    scenario,
+                    interpretation,
+                    replay,
+                )
+                flags = _result_dimensions(result)
+                for name, passed in flags.items():
+                    dimensions[name]["passed" if passed else "failed"] += 1
+                for layer in result.failure_layers:
+                    failure_layers[layer] += 1
+                fingerprints.setdefault(scenario.scenario_id, []).append(
+                    _observation_fingerprint(result)
+                )
+                for axis in SLICE_AXES:
+                    value = str(getattr(scenario, axis))
+                    bucket = slice_counts[axis].setdefault(
+                        value,
+                        {"total": 0, "complete_passed": 0, "safety_passed": 0},
+                    )
+                    bucket["total"] += 1
+                    bucket["complete_passed"] += int(result.all_passed)
+                    bucket["safety_passed"] += int(result.safety.passed)
+
+    variant_ids = {
+        scenario_id
+        for scenario_id, values in fingerprints.items()
+        if len(set(values)) > 1
+    }
+    variant_samples = sum(len(fingerprints[item]) for item in variant_ids)
+    critical_slices = {
+        axis: tuple(
+            SliceAggregate(value=value, **counts)
+            for value, counts in sorted(values.items())
+        )
+        for axis, values in slice_counts.items()
+    }
+    unsigned: dict[str, Any] = {
         "schema_version": AGGREGATE_SCHEMA_VERSION,
-        "dimensions": {k: v.model_dump() for k, v in dims.items()},
-        "failure_layers": [],
-        "safety_pass": sample_size,
-        "safety_total": sample_size,
-        "variance": 0.0,
-        "critical_slices": [
-            {"name": "negation", "passed": 24, "failed": 0, "total": 24},
-            {"name": "correction", "passed": 24, "failed": 0, "total": 24},
-            {"name": "multi_turn", "passed": 72, "failed": 0, "total": 72},
-        ],
-        "coverage_cells": [
-            {"cell": "create", "count": 72},
-            {"cell": "move", "count": 72},
-            {"cell": "resize", "count": 72},
-            {"cell": "cancel", "count": 72},
-        ],
+        "corpus_version": CORPUS_VERSION,
+        "evaluation_id": EVALUATION_ID,
+        "source_commit": source_commit,
+        "manifest_hash": manifest.digest(),
         "corpus_hash": manifest.corpus_hash,
+        "evaluator_version": EVALUATOR_VERSION,
+        "repeat_count": profile.repeat_count,
+        "sample_count": profile.sample_count,
+        "dimensions": dimensions,
+        "failure_layers": failure_layers,
+        "variance": {
+            "variant_scenario_count": len(variant_ids),
+            "variant_sample_count": variant_samples,
+            "total_samples": profile.sample_count,
+        },
+        "critical_slices": {
+            axis: [item.model_dump(mode="json") for item in values]
+            for axis, values in critical_slices.items()
+        },
+        "coverage": {
+            "distinct_cells": len(coverage_cells),
+            "scenario_count": profile.variant_count,
+        },
     }
-
-    raw = _canonical_json(report_data)
-    report_data["report_hash"] = sha256_digest(raw.encode(CANONICAL_ENCODING))
-
-    report = AggregateReport.model_validate(report_data)
-    report.check_forbidden_keys()
-    return report
-
-
-# ---------------------------------------------------------------------------
-# One-shot consumption
-# ---------------------------------------------------------------------------
+    _assert_no_forbidden_keys(unsigned)
+    raw = dict(unsigned)
+    raw["report_hash"] = sha256_digest(canonical_json(unsigned).encode())
+    return validate_aggregate_payload(raw, profile=profile)
 
 
 def consume_report(
     seal: PreConsumptionSeal,
     report: AggregateReport,
-    source_commit: str,
+    *,
+    consumed_at: str | None = None,
+    profile: CorpusProfile = PRODUCTION_PROFILE,
 ) -> ConsumedSeal:
-    """Consume a validated aggregate report, producing a one-shot consumed seal.
-
-    Marks *seal.state* as ``"consumed"`` in-place after successful validation.
-    Raises ``ValueError`` if the seal is already consumed, the source commit
-    does not match, or the report hash is invalid.
-    """
-    if seal.state == "consumed":
-        raise ValueError("seal is already consumed")
-
-    if seal.source_commit != source_commit:
-        raise ValueError(
-            f"source commit mismatch: seal has {seal.source_commit}, "
-            f"got {source_commit}"
-        )
-
-    # Re-compute report hash
-    report_data = report.model_dump(mode="json", exclude={"report_hash"})
-    expected_hash = sha256_digest(
-        _canonical_json(report_data).encode(CANONICAL_ENCODING)
+    validate_aggregate_payload(report.model_dump(mode="json"), profile=profile)
+    bindings = (
+        report.source_commit == seal.source_commit
+        and report.manifest_hash == seal.manifest_hash
+        and report.corpus_hash == seal.corpus_hash
+        and report.repeat_count == seal.repeat_count
+        and report.evaluator_version == seal.evaluator_version
     )
-    if report.report_hash != expected_hash:
-        raise ValueError(
-            f"report hash mismatch: expected {expected_hash}, "
-            f"got {report.report_hash}"
-        )
-
-    # One-way: mark the seal as consumed
-    seal.state = "consumed"
-
+    if not bindings:
+        raise ValueError("aggregate report does not match pre-consumption seal")
+    timestamp = consumed_at or datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     return ConsumedSeal(
-        corpus_version=seal.corpus_version,
         manifest_hash=seal.manifest_hash,
+        corpus_hash=seal.corpus_hash,
         source_commit=seal.source_commit,
-        evaluator_version=seal.evaluator_version,
-        schema_version=seal.schema_version,
-        evaluation_id=seal.evaluation_id,
-        repeat_count=seal.repeat_count,
-        state="consumed",
         report_hash=report.report_hash,
+        consumed_at=timestamp,
     )
 
 
 __all__ = [
     "AGGREGATE_SCHEMA_VERSION",
+    "CORPUS_VERSION",
+    "DIMENSION_NAMES",
+    "EVALUATION_ID",
+    "FAILURE_LAYER_NAMES",
+    "FORBIDDEN_REPORT_KEYS",
+    "GROUP_SCHEMA_VERSION",
+    "MANIFEST_SCHEMA_VERSION",
+    "PRODUCTION_PROFILE",
+    "SEAL_SCHEMA_VERSION",
+    "SLICE_AXES",
     "AggregateDimension",
     "AggregateReport",
-    "CANONICAL_ENCODING",
-    "CORPUS_VERSION",
     "ConsumedSeal",
-    "CoverageCell",
-    "CriticalSlice",
-    "DEFAULT_GROUP_COUNT",
-    "DEFAULT_MULTI_TURN_COUNT",
-    "DEFAULT_REPEAT_COUNT",
-    "DEFAULT_VARIANT_COUNT",
-    "EVALUATION_ID",
-    "FORBIDDEN_REPORT_KEYS",
-    "FailureLayer",
-    "JSON_INDENT",
+    "CorpusProfile",
+    "CoverageSummary",
     "Manifest",
     "ManifestFileEntry",
-    "MULTI_TURN_FORMS",
     "PreConsumptionSeal",
-    "SAMPLES_PER_EVALUATION",
-    "SEAL_SCHEMA_VERSION",
     "ScenarioGroupEnvelope",
+    "SliceAggregate",
+    "VarianceSummary",
     "build_manifest",
+    "canonical_json",
     "consume_report",
     "create_seal",
-    "run_aggregate_evaluation",
+    "evaluate_aggregate",
     "sha256_digest",
+    "validate_aggregate_payload",
     "verify_manifest",
 ]
