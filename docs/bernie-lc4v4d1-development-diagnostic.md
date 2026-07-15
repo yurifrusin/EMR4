@@ -1,8 +1,8 @@
 # LC4V4D1 Development Diagnostic Report
 
-- **Source commit**: 191144f680ceb982d6c46739fa428f3f23298246
+- **Source commit**: be1f1c13811ff608906511611f38420eaa6994ef
 - **Fixture hash**: sha256:a81de0b5371d4fcc425c23f0da9560e29827e3e85cc22847990ea83518863269
-- **Report hash**: sha256:8ab513c1e5087b54945d2032db70ed6edd884898899a3e5163f17ed3f6ab3c64
+- **Report hash**: sha256:1527b99359dc76e831d7eabf49fff022781faf5d248c436bde6e022f30eff84d
 - **Candidate parser-gap selection hash**: sha256:1b254ae627e26b1b301b660628d90f39dce5e0364afc0cfcf4c4855fb6531f02
 - **Total probes**: 60
 - **Total observations**: 120
