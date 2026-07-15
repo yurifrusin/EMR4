@@ -81,7 +81,9 @@ def test_compact_live_handover_retains_required_authority_and_boundaries() -> No
         "4dc5ac8d",
         "25e4461b",
         "Gemini returned `DECISION: pass`",
-        "no actual v4 content yet",
+        "no actual v4 content exists",
+        "lc4v4-preauthoring-metadata-incident.md",
+        "Pause for Yuri's explicit decision",
     ]:
         assert required in live
 
