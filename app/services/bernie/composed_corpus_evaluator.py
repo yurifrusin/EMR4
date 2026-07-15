@@ -11,10 +11,12 @@ Authority must be ``read``, ``clarify``, or ``refuse`` — never ``write``.
 
 from __future__ import annotations
 
+import enum
 import json
 import pathlib
 import re
 from collections import defaultdict
+from dataclasses import dataclass, field
 from typing import Any
 
 from app.services.bernie.composed_evaluator import (
@@ -41,6 +43,63 @@ LC3_REPORT_SCHEMA_VERSION = "lc3.composed_evaluation.v1"
 EXPECTED_LC1_COUNT = 3
 # Number of LC2 Silver wrappers expected
 EXPECTED_LC2_COUNT = 15
+
+# ---------------------------------------------------------------------------
+# D4 Policy version vocabulary
+# ---------------------------------------------------------------------------
+
+
+class PolicyVersion(enum.Enum):
+    """Explicit two-value policy-version vocabulary.
+
+    ``LEGACY`` is the default and must exactly reproduce the existing direct
+    deterministic_interpret / deterministic_replay path.  ``OPTION_A``
+    activates the versioned D3 resolve_policy layer after pure extraction.
+    """
+
+    LEGACY = "legacy"
+    OPTION_A = "option_a"
+
+    @classmethod
+    def default(cls) -> PolicyVersion:
+        return cls.LEGACY
+
+
+# ---------------------------------------------------------------------------
+# D4 Versioned composed result
+# ---------------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class VersionedComposedResult:
+    """Typed versioned composed result carrying policy version, utterance
+    observation, replay observation, and separate diary/policy fields.
+
+    The ``policy_version`` distinguishes legacy from Option A.
+
+    ``interpretation`` holds the utterance-derived
+    ``InterpretationObservation`` (pure extraction fields for Option A).
+
+    ``replay`` holds the ``ReplayObservation`` (built from policy result for
+    Option A).
+
+    ``diary_relation`` and ``conflicting_fields`` carry the separate diary
+    comparison result from Option A policy resolution.
+
+    ``resolved_patient``, ``resolved_practitioner``, and
+    ``resolved_practitioner_id`` carry the resolved identities from Option A
+    policy resolution.
+    """
+
+    policy_version: PolicyVersion
+    interpretation: InterpretationObservation
+    replay: ReplayObservation
+    diary_relation: str = "no_conflict"
+    conflicting_fields: tuple[str, ...] = ()
+    resolved_patient: str | None = None
+    resolved_practitioner: str | None = None
+    resolved_practitioner_id: str | None = None
+
 
 # ---------------------------------------------------------------------------
 # Fixture path helpers
@@ -577,6 +636,153 @@ def deterministic_replay(
         forbidden_tools_observed=tuple(forbidden_tools),
         is_simulated_confirmed_write=is_simulated,
     )
+
+
+# ---------------------------------------------------------------------------
+# D4 Versioned composed runner
+# ---------------------------------------------------------------------------
+
+
+def compose_versioned(
+    scenario: ReceptionScenarioSpec,
+    sample_index: int = 0,
+    policy_version: PolicyVersion = PolicyVersion.default(),
+) -> VersionedComposedResult:
+    """Run one composed deterministic interpretation/replay with an explicit
+    policy version.
+
+    The **legacy** branch delegates to ``deterministic_interpret`` and
+    ``deterministic_replay`` exactly, producing identical output.
+
+    The **Option A** branch runs ``extract_semantics`` once, passes pure
+    utterance data and the synthetic diary state to ``resolve_policy``, then
+    builds the typed interpretation/replay pair preserving pure utterance
+    semantic fields and carrying policy fields into replay.
+
+    Parameters
+    ----------
+    scenario :
+        The ``ReceptionScenarioSpec`` with dialogue turns and diary state.
+    sample_index :
+        Sample index for the observation (default 0).
+    policy_version :
+        Which policy version to apply (default ``LEGACY``).
+
+    Returns
+    -------
+    VersionedComposedResult
+        Typed result with interpretation, replay, and separate policy fields.
+
+    Raises
+    ------
+    ValueError
+        If an unsupported policy version is supplied.
+    """
+    utterances = [
+        turn.get("utterance", "")
+        for turn in scenario.dialogue_turns
+        if isinstance(turn.get("utterance"), str)
+    ]
+    reference_date_str = scenario.reference_date.isoformat()
+
+    if policy_version == PolicyVersion.LEGACY:
+        interp = deterministic_interpret(scenario)
+        interp = InterpretationObservation(
+            scenario_id=interp.scenario_id,
+            sample_index=sample_index,
+            intended_action=interp.intended_action,
+            action_semantics=interp.action_semantics,
+            temporal_relation=interp.temporal_relation,
+            normalized_values=interp.normalized_values,
+            entity_semantics=interp.entity_semantics,
+            requires_clarification=interp.requires_clarification,
+            clarification_choices=interp.clarification_choices,
+            selected_tool_sequence=interp.selected_tool_sequence,
+            authority_claim=interp.authority_claim,
+            claims_action_completed=interp.claims_action_completed,
+            action_negated=interp.action_negated,
+        )
+        replay = deterministic_replay(scenario, interp)
+        return VersionedComposedResult(
+            policy_version=PolicyVersion.LEGACY,
+            interpretation=interp,
+            replay=replay,
+        )
+
+    if policy_version == PolicyVersion.OPTION_A:
+        # Pure extraction once
+        extraction = extract_semantics(utterances, reference_date_str)
+
+        # Build interpretation observation preserving pure utterance fields
+        interp = InterpretationObservation(
+            scenario_id=scenario.scenario_id,
+            sample_index=sample_index,
+            intended_action=extraction.intended_action,
+            action_semantics=extraction.action_semantics,
+            temporal_relation=extraction.temporal_relation,
+            normalized_values=dict(extraction.normalized_values),
+            entity_semantics=dict(extraction.entity_semantics),
+            requires_clarification=extraction.requires_clarification,
+            clarification_choices=extraction.clarification_choices,
+            selected_tool_sequence=extraction.selected_tool_sequence,
+            authority_claim=extraction.authority_claim,
+            claims_action_completed=False,
+            action_negated=extraction.action_negated,
+        )
+
+        # Resolve policy
+        from app.services.bernie.lc4v4d3_policy_resolution import resolve_policy
+
+        diary_appointments = list(
+            scenario.initial_diary_state.get("appointments", [])
+        )
+        policy = resolve_policy(
+            utterances=utterances,
+            entity_semantics=dict(extraction.entity_semantics),
+            requires_clarification=extraction.requires_clarification,
+            clarification_choices=extraction.clarification_choices,
+            intended_action=extraction.intended_action,
+            action_semantics=extraction.action_semantics,
+            authority_claim=extraction.authority_claim,
+            selected_tool_sequence=extraction.selected_tool_sequence,
+            normalized_values=dict(extraction.normalized_values),
+            temporal_relation=extraction.temporal_relation,
+            earliest_time=extraction.earliest_time,
+            latest_time=extraction.latest_time,
+            has_unsafe=extraction.action_semantics == "prohibited",
+            action_negated=extraction.action_negated,
+            diary_state=scenario.diary_state,
+            diary_appointments=diary_appointments,
+            reference_date=reference_date_str,
+        )
+
+        # Build replay observation from policy result
+        replay = ReplayObservation(
+            scenario_id=scenario.scenario_id,
+            sample_index=sample_index,
+            downstream_outcome=policy.downstream_outcome,
+            tools_used=policy.selected_tools,
+            requires_clarification=policy.requires_clarification,
+            clarification_choices=policy.clarification_choices,
+            appointment_deltas=policy.appointment_deltas,
+            audit_deltas=policy.audit_deltas,
+            forbidden_outcomes_observed=(),
+            forbidden_tools_observed=(),
+            is_simulated_confirmed_write=policy.is_simulated_confirmed_write,
+        )
+
+        return VersionedComposedResult(
+            policy_version=PolicyVersion.OPTION_A,
+            interpretation=interp,
+            replay=replay,
+            diary_relation=policy.diary_comparison.relation,
+            conflicting_fields=policy.diary_comparison.conflicting_fields,
+            resolved_patient=policy.resolved_patient,
+            resolved_practitioner=policy.resolved_practitioner,
+            resolved_practitioner_id=policy.resolved_practitioner_id,
+        )
+
+    raise ValueError(f"Unsupported policy version: {policy_version}")
 
 
 # ---------------------------------------------------------------------------
@@ -1674,6 +1880,9 @@ __all__ = [
     "EXPECTED_LC2_COUNT",
     "KNOWN_LC1_FIXTURES",
     "KNOWN_LC2_FAMILY_FILES",
+    "PolicyVersion",
+    "VersionedComposedResult",
+    "compose_versioned",
     "load_lc1_scenarios",
     "load_lc2_candidates",
     "deterministic_interpret",
