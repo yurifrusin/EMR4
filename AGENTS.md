@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V4D5R1 exact-four Option A policy/replay remediation accepted; prepare development-only D5E1 exit reassessment |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v4d5r1-sol-acceptance.md` and `docs/bernie-lc4v4d5r1-exact-four-remediation-closeout.md` |
-| Current result | D5R1 closes all four D5 blockers. All 60 ordinary probes retain 240 complete observations with exact taxonomy `37/20/3/0`: 37 legacy-equivalent, 20 accepted D4 changes, three benign diary-relation-only differences, and zero blockers. All 28 gates pass; report hash is `0cb444d1...`. Serial D1-D5R1 passed 177/177 and Gemini independently passed 120/120 with `DECISION: pass` on exact recovered head `82063c50`. No parser, fixture, product default, provider, runtime, or write authority changed |
-| Next implementation | Run a Sol-owned D5E1 development exit reassessment binding immutable D4/D5 evidence to accepted D5R1 without loading any holdout. If the development exit is clean, pause at the documented Yuri decision boundary for a fresh certification holdout versus an explicit reviewed reuse policy. Preserve the legacy default, parser, historical evidence, sealed holdouts, T3.1-T3.4, and T3.5/provider/product/write boundaries |
+| Active product track | LC4V4D5E1 development exit accepted; paused at explicit certification-holdout user decision boundary |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v4d5e1-sol-acceptance.md` and `docs/bernie-lc4v4d5e1-development-exit-closeout.md` |
+| Current result | D5R1 closes all four adoption blockers at exact `37/20/3/0`, 240 complete observations, 28/28 gates, and report hash `0cb444d1...`. D5E1 then binds immutable D4/D5/D5R1 evidence without parser or fixture execution: 17/17 gates pass, report hash `435920eb...`, legacy remains the default, and Option A remains explicit. The ordinary development sequence is clean; certification is not claimed |
+| Next implementation | Pause for Yuri's explicit choice: authorize a genuinely fresh certification holdout v5 (Sol recommendation) or approve a separately reviewed reuse policy. Do not author, inspect, run, reuse, or evaluate any holdout before that decision. Preserve T3.1-T3.4 and defer T3.5/providers, historical material, product/runtime defaults, APIs/UI/database, deployment/release, and live/write authority |
 
 LC4V4 provenance: the frozen pre-content records remain
 `lc4v4q1-sol-contract.md`, `lc4v4q1-sol-recovery-amendment.md`,
