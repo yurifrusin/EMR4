@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V4D1 independent development-only diagnostic matrix |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v4d1-sol-contract.md` |
-| Current result | LC4V4 valid evidence remains `certification_fail` and v1-v4 remain sealed. D1 freezes 60 fresh inspectable development probes across isolated entity, dialogue/trajectory, matched safety-policy, and diary-state families. D1 is diagnostic only; no parser remediation is authorized |
-| Next implementation | Commit and push the D1 contract, dispatch one bounded DeepSeek V4 Flash/high implementation lane through Claude Code `--bare`, then Sol accepts or recovers and obtains a fresh Gemini veto before closeout |
+| Active product track | LC4V4D1 diagnostic complete; prepare LC4V4D2 bounded semantic remediation |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v4d1-sol-acceptance.md` |
+| Current result | LC4V4 remains `certification_fail` and holdouts v1-v4 remain sealed. D1 is `diagnostic_valid`: 60 fresh inspectable development probes, 120 deterministic observations, 23 parser gaps, 12 policy-contract gaps, 25 supported passes, zero authoring/scorer/planned-unavailable cases, and zero variance. Gemini returned `DECISION: pass` on exact recovered report head `5e1f0de4`. No remediation occurred in D1 |
+| Next implementation | Freeze LC4V4D2 as an ordinary development-only semantic remediation contract over the Gemini-confirmed 23-case parser selection. Keep the 12 policy/state-join cases outside parser repair for a separate later tranche. Preserve D1 as the fixed regression gate and do not inspect or rerun holdouts v1-v4 |
 
 LC4V4 provenance: the frozen pre-content records remain
 `lc4v4q1-sol-contract.md`, `lc4v4q1-sol-recovery-amendment.md`,
@@ -64,6 +64,33 @@ LC4V4 attempt 002 complete evidence remains sealed and unchanged under
 while D1 uses only ordinary development fixtures and the accepted aggregate
 closeout: complete 70/576 and safety 466/576. V4 is sealed; no rerun or parser
 remediation is authorized from its aggregate result.
+
+### LC4V4D1 accepted state
+
+LC4V4D1 authored 60 fresh inspectable development probes across the isolated
+entity lattice, paired dialogue forms, matched explicitly-negated-safe/unsafe
+authority clauses, and six otherwise-identical diary states. The recovered
+diagnostic executed 120 complete observations with zero variance and returned
+23 parser gaps, 12 policy-contract gaps, and 25 supported passes. There were no
+authoring-invalid, scorer-only, or planned-unavailable cases. Fixture hash is
+`sha256:a81de0b5371d4fcc425c23f0da9560e29827e3e85cc22847990ea83518863269`;
+full report hash is
+`sha256:1527b99359dc76e831d7eabf49fff022781faf5d248c436bde6e022f30eff84d`;
+the 23-case selection hash is
+`sha256:1b254ae627e26b1b301b660628d90f39dce5e0364afc0cfcf4c4855fb6531f02`.
+
+DeepSeek Flash's 60/60 parser-gap candidate was rejected for conceptual oracle,
+classification, repeat, and hashing defects. Sol recovered under the lease
+without a correction loop. The focused suite passed 30/30 and the adjacent
+serial preservation gate passed 182/182 selected nodes; two immutable
+historical report-equality nodes remained deselected and unchanged. Gemini 3.5
+Flash/high independently returned `DECISION: pass` on exact recovered report
+head `5e1f0de4`. D1 is diagnostic only and performed no remediation. The 23
+surface-semantic cases may seed a separately frozen D2 contract; the 12
+policy/state-join cases are excluded from parser repair. See
+`orchestration/agent_inbox/codex/lc4v4d1-sol-contract.md`,
+`orchestration/agent_inbox/codex/lc4v4d1-sol-acceptance.md` and
+`docs/bernie-lc4v4d1-development-diagnostic-closeout.md`.
 
 ### LC4R10 accepted state
 
