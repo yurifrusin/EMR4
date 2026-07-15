@@ -379,6 +379,15 @@ development evidence to repair entity semantics, normalization, clarification,
 and safety. A later certification requires a newly authorized fresh holdout or
 reviewed reuse policy.
 
+LC4V2R1 completed the first such development tranche. A fresh Sol-authored
+21-case matrix moved from 4/21 to 21/21 complete across normalized values,
+entity relations, clarification, authority, tool safety, and completion claims.
+It added conservative location/appointment-type relations, lexical durations,
+corrections, and scoped negation while leaving the 1,152-scenario development
+aggregate and temporal foundation unchanged. The next tranche is an
+independently authored safety-language matrix; it must not use either sealed
+holdout.
+
 ## Agent Allocation
 
 - Sol at High reasoning owns the semantic architecture, coverage decisions,

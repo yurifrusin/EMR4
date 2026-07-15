@@ -108,3 +108,8 @@ corpus-engineering tranche focused on entity semantics, normalization,
 clarification, and safety. Preserve T3.1-T3.4 and the blocked external-call
 gate. Opening T3.5 or authorizing a later fresh certification holdout remains
 a documented user decision boundary.
+
+LC4V2R1 has now completed the first development-only slice: its new 21-case
+entity/normalization matrix passes 21/21 without changing the ordinary corpus
+aggregate or reopening either holdout. Continue with a separately frozen
+safety-language matrix before reconsidering live T3.5 execution.

@@ -50,11 +50,21 @@ clarification 308/576, safety 532/576, and the complete composed contract
 0/576. The procedure passed its evidence contract, but product readiness
 failed. Holdout v2 is now sealed alongside v1.
 
+LC4V2R1 then introduced a new Sol-authored 21-case Gold development matrix for
+entity relations and lexical duration normalization. It improved from 4/21 to
+21/21 complete with zero variance. DeepSeek Flash supplied one rejected
+candidate; Sol recovered its fail-open evidence checker and negation scope, and
+Gemini independently passed exact recovered head `fa973311`. The ordinary
+development corpus remained `880/814/672/154/330/835`, safety 1,152/1,152,
+variance zero, and hash-identical. The final serial preservation gate collected
+383 nodes and completed with 381 passes, one expected xfail, and one expected
+skip. Neither sealed holdout was accessed.
+
 ## Next safe sequence
 
 1. Keep holdouts v1 and v2 sealed; use only aggregate v2 evidence for planning.
-2. Run a development-only semantic repair and corpus-engineering tranche
-   focused on entity semantics, normalization, clarification, and safety.
+2. Continue with a separately frozen development-only safety-language matrix
+   distinguishing unsafe demands from explicitly negated safe instructions.
 3. Keep T3.5 provider adapters and live-provider execution separately deferred.
 4. Require explicit approval for a later fresh certification holdout or any
    reviewed reuse policy.
@@ -75,6 +85,8 @@ failed. Holdout v2 is now sealed alongside v1.
 - `docs/bernie-lc4v2-fresh-holdout-closeout.md`
 - `orchestration/agent_inbox/codex/lc4r10-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/lc4v2-sol-acceptance.md`
+- `docs/bernie-lc4v2r1-entity-normalization.md`
+- `orchestration/agent_inbox/codex/lc4v2r1-sol-acceptance.md`
 
 Protected holdouts v1 and v2 are sealed. Do not enumerate their paths, inspect
 content, rerun them, regenerate them, hash-check them, infer labels from them,

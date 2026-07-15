@@ -25,6 +25,8 @@ and `duration` — with full semantics (`exact`, `omitted`, `ambiguous`,
 - Canonical report hash:
   `sha256:46570a2e3ab5d47fe4d74594544d4e92f1d68cc8d8a51d5db39a233f59d84c38`
 - Ordinary development corpus counts and hash unchanged
+- Final serial preservation gate: 383 collected, 381 passed, one expected
+  xfail, and one expected skip
 
 ## Changes
 

@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V2R1 development-only entity/normalization corpus engineering and bounded repair |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v2r1-sol-contract.md` |
-| Current result | LC4V2 aggregate: complete `0/576`, temporal `576/576`, intended action `528/576`, normalized value `288/576`, entity semantics `0/576`, safety `532/576`, variance zero; holdouts v1 and v2 sealed |
-| Next implementation | Implement and independently review the frozen 21-case Sol-authored development matrix; baseline is 4/21 complete with 17 surface-supported failures (`ddfbc280bb822993`); do not access either sealed holdout |
+| Active product track | LC4V2R1 development-only entity/normalization repair complete and independently reviewed |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v2r1-sol-acceptance.md` |
+| Current result | LC4V2R1 improved its frozen matrix from 4/21 to 21/21; ordinary development remains `880/814/672/154/330/835`, safety 1,152/1,152, variance zero; holdouts v1 and v2 sealed |
+| Next implementation | Begin LC4V2R2 with a fresh Sol-authored development safety-language matrix separating unsafe bypass/completion demands from explicitly negated safe instructions; do not access either sealed holdout |
 
 ### LC4R10 accepted state
 
@@ -109,6 +109,27 @@ one-shot evidence and authority decision.
    any later certification.
 4. Keep `check_in`, T3.5 provider adapters/live calls, and all runtime/write
    authority behind their deferred gates.
+
+### LC4V2R1 accepted state
+
+LC4V2R1 froze 21 new synthetic Gold/adjudicated development probes for patient,
+practitioner, location, appointment type, duration, correction, ambiguity,
+negation, and lexical duration normalization. The baseline passed 4/21 complete;
+the recovered implementation passes 21/21 with zero two-repeat variance and an
+empty failure selection `e3b0c44298fc1c14`. The exact report hash is
+`sha256:46570a2e3ab5d47fe4d74594544d4e92f1d68cc8d8a51d5db39a233f59d84c38`.
+
+DeepSeek V4 Flash/high supplied one candidate through Claude Code `--bare`.
+Sol rejected its fail-open evidence checker and over-broad negation scope,
+opened no correction loop, and recovered under the lease. Gemini 3.5
+Flash/medium independently returned `DECISION: pass` on exact recovered head
+`fa973311`. Ordinary development counts, safety, variance, and corpus hash did
+not change. The final serial preservation gate collected 383 nodes and
+completed with 381 passes, one expected xfail, and one expected skip. Text-only
+`mismatched` remains deferred because it requires authoritative diary context.
+The frozen plan is
+`orchestration/agent_inbox/codex/lc4v2r1-sol-contract.md`; the active decision
+is `orchestration/agent_inbox/codex/lc4v2r1-sol-acceptance.md`.
 
 ## 4. Authority Allocation
 
