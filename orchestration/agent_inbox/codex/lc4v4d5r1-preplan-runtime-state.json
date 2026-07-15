@@ -55,7 +55,7 @@
     ]
   },
   "continuation_event": "post_compaction",
-  "planned_action": "commit",
+  "planned_action": "worker_dispatch",
   "schema_version": "ariadne.orchestrator_runtime_state.v1",
   "worker_slots": [
     {
