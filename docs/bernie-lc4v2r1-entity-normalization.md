@@ -22,6 +22,9 @@ and `duration` — with full semantics (`exact`, `omitted`, `ambiguous`,
 
 - 21/21 across all seven contracted dimensions
 - Zero repeat variance
+- Canonical report hash:
+  `sha256:46570a2e3ab5d47fe4d74594544d4e92f1d68cc8d8a51d5db39a233f59d84c38`
+- Ordinary development corpus counts and hash unchanged
 
 ## Changes
 
@@ -55,15 +58,29 @@ and `duration` — with full semantics (`exact`, `omitted`, `ambiguous`,
 - Fixture integrity tests (hash, count, schema, unique IDs, relations)
 - Forbidden expected-field injection tests
 - False-positive entity capture protection tests
+- Negated-action/entity scope and location-clause scope tests
+- Appointment-type versus duration separation tests
+- Immutable baseline and canonical report-hash mutation tests
 - Temporal interval regression test (`after 3 but before 4:30`)
 - Two-repeat zero-variance test
 
 ### `scripts/bernie_lc4v2r1_entity_normalization.py`
 
-- Development-only audit harness with `--check` mode
+- Development-only audit harness with explicit `--write` mode and a
+  non-mutating exact `--check` mode
 - Produces `docs/bernie-lc4v2r1-entity-normalization-report.json`
 - Reports baseline comparison, per-case findings, selection hashes,
-  variance, and protected-boundary declarations
+  variance, canonical report hash, and protected-boundary declarations
+
+## Worker and recovery provenance
+
+DeepSeek V4 Flash/high supplied candidate commit `861049e9`. Sol rejected its
+self-certified pass because the first audit checker rewrote its report, did not
+bind the immutable baseline, retained an unset completion hash, and over-broadly
+scoped one patient-negation pattern. Sol preserved the candidate and recovered
+the evidence tooling and semantic scope under the Ariadne lease without a Flash
+correction loop. See
+`orchestration/agent_inbox/codex/lc4v2r1-sol-recovery-amendment.md`.
 
 ## Protected boundaries
 

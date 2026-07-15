@@ -203,6 +203,11 @@ _NEGATION_PREFIX = re.compile(
     r"\b(do not|don'?t|never|please do not|please don'?t|not|no)\s+", re.I
 )
 
+_DIRECT_NEGATION_PREFIX = re.compile(
+    r"\b(?:do not|don'?t|never|please do not|please don'?t|not|no)\s+$",
+    re.I,
+)
+
 # Reversal patterns that undo/negate a previously stated action
 _REVERSAL_PATTERNS: list[re.Pattern[str]] = [
     re.compile(r"\bnever mind\b", re.I),
@@ -282,7 +287,7 @@ def _has_action_negation(
             for pat in _ACTION_PATTERNS[intended_action]:
                 for match in pat.finditer(u):
                     before = u[max(0, match.start() - 30):match.start()]
-                    if _NEGATION_PREFIX.search(before):
+                    if _DIRECT_NEGATION_PREFIX.search(before):
                         return True
 
     return False
@@ -429,7 +434,7 @@ def _extract_patient(text: str) -> tuple[str | None, str]:
     if m:
         # Check if "not" directly precedes the captured name (entity negation,
         # distinct from action-level negation like "do not book X")
-        before = text[max(0, m.start() - 8):m.start()]
+        before = text[max(0, m.start(1) - 8):m.start(1)]
         if re.search(r"\bnot\s+$", before, re.I):
             return m.group(1), "negated"
         return m.group(1), "exact"
@@ -464,7 +469,7 @@ def _extract_practitioner(text: str) -> tuple[str | None, str]:
     if m:
         # Check if "not" directly precedes the captured name (entity negation,
         # distinct from action-level negation like "do not book with X")
-        before = text[max(0, m.start() - 8):m.start()]
+        before = text[max(0, m.start(1) - 8):m.start(1)]
         if re.search(r"\bnot\s+$", before, re.I):
             return m.group(1), "negated"
         return m.group(1), "exact"
@@ -478,7 +483,10 @@ def _extract_practitioner(text: str) -> tuple[str | None, str]:
 # Matches "15 minutes", "15 minute", "15 mins", "15 min"
 _DURATION_PATTERN = re.compile(r"\b(\d+)\s*(minutes?|mins?)\b", re.I)
 _DURATION_AMBIGUOUS = re.compile(
-    r"\b(how long|some time|a while|short|long)\b", re.I
+    r"\b(how long|some time|a while|"
+    r"short(?!\s+(?:consultation|appointment))|"
+    r"long(?!\s+(?:consultation|appointment)))\b",
+    re.I,
 )
 
 # Lexical duration forms mapped to minutes
@@ -504,7 +512,13 @@ def _extract_duration(text: str) -> tuple[int | None, str]:
     # Check negation before any match
     def _check_negation(match_start: int) -> bool:
         before = text[max(0, match_start - 30):match_start]
-        return bool(_NEGATION_PREFIX.search(before))
+        return bool(
+            re.search(
+                r"\b(?:but\s+not|not|except)\s+(?:for\s+)?$",
+                before,
+                re.I,
+            )
+        )
 
     # Try lexical forms first (before numeric, so "half an hour" is not confused)
     for pat, minutes in _LEXICAL_DURATION:

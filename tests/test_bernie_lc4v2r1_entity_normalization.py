@@ -8,7 +8,11 @@ relations, normalized shapes, baseline counts, and safety invariants.
 from __future__ import annotations
 
 import hashlib
+import inspect
 import json
+import subprocess
+import sys
+from copy import deepcopy
 from pathlib import Path
 
 import pytest
@@ -16,6 +20,16 @@ import pytest
 from app.services.bernie.semantic_extraction import (
     SemanticExtraction,
     extract_semantics,
+)
+from scripts.bernie_lc4v2r1_entity_normalization import (
+    BASELINE_PATH,
+    EXPECTED_BASELINE_COUNTS,
+    REPORT_PATH,
+    _compute_report_hash,
+    _report_is_accepted,
+    _selection_hash,
+    _validate_baseline,
+    build_report,
 )
 
 FIXTURE_PATH = Path(
@@ -118,6 +132,12 @@ class TestFixtureIntegrity:
                     f"'{forbidden}' leaked into extraction"
                 )
 
+    def test_extraction_boundary_accepts_only_surface_and_reference_date(self):
+        assert tuple(inspect.signature(extract_semantics).parameters) == (
+            "utterances",
+            "reference_date",
+        )
+
 
 # ============================================================
 # Per-case extraction tests (parameterized)
@@ -207,10 +227,40 @@ class TestBaselineImmutability:
     """The committed baseline counts must match known values."""
 
     def test_baseline_counts_preserved(self):
-        assert BASELINE_PASS_COUNTS["complete"] == 4
+        baseline = json.loads(BASELINE_PATH.read_text(encoding="utf-8"))
+        _validate_baseline(baseline)
+        assert baseline["pass_counts"] == BASELINE_PASS_COUNTS
+        assert baseline["pass_counts"] == EXPECTED_BASELINE_COUNTS
 
     def test_baseline_selection_hash_preserved(self):
-        assert BASELINE_FAILED_SELECTION_HASH == "ddfbc280bb822993"
+        baseline = json.loads(BASELINE_PATH.read_text(encoding="utf-8"))
+        failed_ids = [
+            item["case_id"] for item in baseline["findings"]
+            if item["failed_dimensions"]
+        ]
+        assert _selection_hash(failed_ids) == BASELINE_FAILED_SELECTION_HASH
+
+    @pytest.mark.parametrize(
+        ("field", "replacement"),
+        [
+            ("parser_source_commit", "0" * 40),
+            ("failed_selection_hash", "0" * 16),
+            ("failed_case_count", 16),
+        ],
+    )
+    def test_baseline_metadata_drift_fails_closed(self, field, replacement):
+        baseline = json.loads(BASELINE_PATH.read_text(encoding="utf-8"))
+        mutated = deepcopy(baseline)
+        mutated[field] = replacement
+        with pytest.raises(ValueError):
+            _validate_baseline(mutated)
+
+    def test_baseline_pass_count_drift_fails_closed(self):
+        baseline = json.loads(BASELINE_PATH.read_text(encoding="utf-8"))
+        mutated = deepcopy(baseline)
+        mutated["pass_counts"]["complete"] = 5
+        with pytest.raises(ValueError):
+            _validate_baseline(mutated)
 
 
 # ============================================================
@@ -260,6 +310,32 @@ class TestFalsePositiveProtection:
             "2026-07-15",
         )
         assert result.entity_semantics["patient"] == "exact"
+
+    def test_negated_action_does_not_negate_patient_entity(self):
+        result = extract_semantics(
+            ["Do not book Avery Quinn with Dr Chen tomorrow at 3pm for 30 minutes."],
+            "2026-07-15",
+        )
+        assert result.action_negated is True
+        assert result.entity_semantics["patient"] == "exact"
+        assert result.entity_semantics["duration"] == "exact"
+
+    def test_negated_location_before_clause_does_not_negate_action(self):
+        result = extract_semantics(
+            ["Not Room 2; book Avery Quinn with Dr Chen tomorrow at 3pm for 30 minutes."],
+            "2026-07-15",
+        )
+        assert result.action_negated is False
+        assert result.entity_semantics["location"] == "negated"
+        assert result.entity_semantics["duration"] == "exact"
+
+    def test_long_consultation_is_not_ambiguous_duration(self):
+        result = extract_semantics(
+            ["Book Avery Quinn with Dr Chen tomorrow at 3pm as a long consultation."],
+            "2026-07-15",
+        )
+        assert result.entity_semantics["appointment_type"] == "exact"
+        assert result.entity_semantics["duration"] == "omitted"
 
 
 # ============================================================
@@ -323,3 +399,33 @@ class TestDeterministicRepeat:
                 f"Variance detected in case {case_id}: "
                 f"two identical runs differ"
             )
+
+
+class TestAuditReceipt:
+    def test_report_hash_and_all_dimensions_are_bound(self):
+        report = build_report()
+        assert report["report_hash"] == _compute_report_hash(report)
+        assert report["assertions"]["baseline_is_exactly_bound"] is True
+        assert report["assertions"]["all_dimensions_21_of_21"] is True
+        assert report["failed_selection_hash"] == _selection_hash([])
+
+    def test_report_hash_mutation_fails_closed(self):
+        report = build_report()
+        report["report_hash"] = "sha256:" + "0" * 64
+        assert _report_is_accepted(report) is False
+
+    def test_check_mode_is_non_mutating(self):
+        before = REPORT_PATH.read_bytes()
+        completed = subprocess.run(
+            [
+                sys.executable,
+                "scripts/bernie_lc4v2r1_entity_normalization.py",
+                "--check",
+            ],
+            cwd=Path(__file__).resolve().parents[1],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        assert completed.returncode == 0, completed.stdout + completed.stderr
+        assert REPORT_PATH.read_bytes() == before

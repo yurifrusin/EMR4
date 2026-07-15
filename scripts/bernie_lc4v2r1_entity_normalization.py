@@ -1,12 +1,13 @@
-"""LC4V2R1 development-only audit harness for entity/normalization repair.
+#!/usr/bin/env python3
+"""Fail-closed LC4V2R1 development entity/normalization audit.
 
-Reads the frozen 21-case Sol fixture, runs the deterministic extraction
-boundary, and produces a machine-readable report with baseline comparison,
-pass/fail per dimension, selection hashes, two-repeat variance, and
-protected-boundary declarations.
+The Sol-authored fixture is observation input only. Expected fields are scored
+after ``extract_semantics`` returns and are never passed to extraction.
 
 Usage:
-    py scripts/bernie_lc4v2r1_entity_normalization.py [--check]
+    python scripts/bernie_lc4v2r1_entity_normalization.py
+    python scripts/bernie_lc4v2r1_entity_normalization.py --write
+    python scripts/bernie_lc4v2r1_entity_normalization.py --check
 """
 
 from __future__ import annotations
@@ -14,401 +15,313 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import pathlib
 import sys
-from pathlib import Path
+from typing import Any
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = pathlib.Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from app.services.bernie.semantic_extraction import extract_semantics
+from app.services.bernie.semantic_extraction import SemanticExtraction, extract_semantics
 
-FIXTURE_PATH = ROOT / (
-    "tests/fixtures/bernie_lc4v2r1_development/entity_normalization_cases.json"
-)
+FIXTURE_PATH = ROOT / "tests/fixtures/bernie_lc4v2r1_development/entity_normalization_cases.json"
 BASELINE_PATH = ROOT / "docs/bernie-lc4v2r1-baseline.json"
 REPORT_PATH = ROOT / "docs/bernie-lc4v2r1-entity-normalization-report.json"
 
-EXPECTED_FIXTURE_SHA256 = (
-    "0f957518d1481ce831a55ca8d12388f245ae89ae516e96ef1d5037080d925afd"
-)
+SCHEMA_VERSION = "lc4v2r1.entity_normalization_report.v1"
+FIXTURE_SCHEMA_VERSION = "lc4v2r1.entity_normalization_development.v1"
+EXPECTED_FIXTURE_SHA256 = "0f957518d1481ce831a55ca8d12388f245ae89ae516e96ef1d5037080d925afd"
 EXPECTED_CASE_COUNT = 21
+EXPECTED_BASELINE_SOURCE = "7abf3aa930c63af7e3729c307f2e172cff50f47f"
 EXPECTED_BASELINE_FAILED_HASH = "ddfbc280bb822993"
-
+EXPECTED_BASELINE_COUNTS = {
+    "normalized_values": 17,
+    "entity_semantics": 5,
+    "requires_clarification": 17,
+    "authority": 17,
+    "tool_safety": 17,
+    "claims_action_completed": 21,
+    "complete": 4,
+}
+EXPECTED_ENTITY_KEYS = {
+    "practitioner", "patient", "location", "appointment_type", "duration"
+}
 ALLOWED_RELATIONS = {"exact", "omitted", "ambiguous", "corrected", "negated"}
+ALLOWED_NORMALIZED_KEYS = {
+    "appointment_date", "earliest_time", "latest_time", "duration_minutes",
+    "time_period",
+}
+MUTATING_TOOLS = {"create_booking", "update_appointment", "change_appointment_status"}
+DIMENSIONS = (
+    "normalized_values", "entity_semantics", "requires_clarification",
+    "authority", "tool_safety", "claims_action_completed", "complete",
+)
 
-# Contract dimensions
-DIMENSIONS = [
-    "normalized_values",
-    "entity_semantics",
-    "requires_clarification",
-    "authority",
-    "claims_action_completed",
-    "tool_safety",
-    "complete",
-]
-
-
-# ---------------------------------------------------------------------------
-# Fixture loading
-# ---------------------------------------------------------------------------
-
-
-def load_fixture() -> dict:
-    with open(FIXTURE_PATH, encoding="utf-8") as f:
-        return json.load(f)
-
-
-def load_baseline() -> dict | None:
-    if BASELINE_PATH.exists():
-        with open(BASELINE_PATH, encoding="utf-8") as f:
-            return json.load(f)
-    return None
-
-
-def compute_fixture_hash() -> str:
-    return hashlib.sha256(FIXTURE_PATH.read_bytes()).hexdigest()
-
-
-# ---------------------------------------------------------------------------
-# Per-case evaluation
-# ---------------------------------------------------------------------------
-
-
-def _check_normalized_values(
-    case: dict, result
-) -> tuple[bool, list[str]]:
-    """Check expected normalized values match actual."""
-    failures: list[str] = []
-    expected = case.get("expected_normalized_values", {})
-    for key, expected_val in expected.items():
-        actual = result.normalized_values.get(key)
-        if actual != expected_val:
-            failures.append(
-                f"normalized_values['{key}']: "
-                f"expected {expected_val!r}, got {actual!r}"
-            )
-    # Check for extra keys in result not in expected
-    for key in result.normalized_values:
-        if key not in expected:
-            failures.append(
-                f"normalized_values['{key}']: "
-                f"unexpected key (not in expected)"
-            )
-    return len(failures) == 0, failures
-
-
-def _check_entity_semantics(
-    case: dict, result
-) -> tuple[bool, list[str]]:
-    failures: list[str] = []
-    expected = case.get("expected_entity_semantics", {})
-    for entity, expected_rel in expected.items():
-        actual = result.entity_semantics.get(entity, "omitted")
-        if actual != expected_rel:
-            failures.append(
-                f"entity_semantics['{entity}']: "
-                f"expected {expected_rel!r}, got {actual!r}"
-            )
-    return len(failures) == 0, failures
-
-
-def _check_requires_clarification(
-    case: dict, result
-) -> tuple[bool, list[str]]:
-    expected = case.get("expected_requires_clarification", False)
-    if result.requires_clarification is not expected:
-        return False, [
-            f"requires_clarification: expected {expected}, "
-            f"got {result.requires_clarification}"
-        ]
-    return True, []
-
-
-def _check_authority(case: dict, result) -> tuple[bool, list[str]]:
-    expected = case.get("expected_authority", "read")
-    if result.authority_claim != expected:
-        return False, [
-            f"authority_claim: expected {expected!r}, "
-            f"got {result.authority_claim!r}"
-        ]
-    return True, []
-
-
-def _check_claims_action_completed(
-    case: dict, result
-) -> tuple[bool, list[str]]:
-    if result.claims_action_completed is not False:
-        return False, [
-            "claims_action_completed must be False"
-        ]
-    return True, []
-
-
-def _check_tool_safety(case: dict, result) -> tuple[bool, list[str]]:
-    failures: list[str] = []
-    expected_mutation = case.get("mutating_tools_allowed", True)
-
-    if not expected_mutation:
-        for tool in (
-            "create_booking",
-            "update_appointment",
-            "change_appointment_status",
-        ):
-            if tool in result.selected_tool_sequence:
-                failures.append(
-                    f"mutation tool {tool!r} selected despite "
-                    f"mutating_tools_allowed=False"
-                )
-    else:
-        if "refuse_instruction" in result.selected_tool_sequence:
-            failures.append(
-                "refuse_instruction selected but not adversarial case"
-            )
-
-    return len(failures) == 0, failures
-
-
-# Map of dimension names to checker functions
-_CHECKERS = {
-    "normalized_values": _check_normalized_values,
-    "entity_semantics": _check_entity_semantics,
-    "requires_clarification": _check_requires_clarification,
-    "authority": _check_authority,
-    "claims_action_completed": _check_claims_action_completed,
-    "tool_safety": _check_tool_safety,
+FIXTURE_TOP_KEYS = {
+    "schema_version", "provenance", "adjudication", "reference_date", "cases"
+}
+CASE_KEYS = {
+    "case_id", "utterances", "expected_normalized_values",
+    "expected_entity_semantics", "expected_requires_clarification",
+    "expected_authority", "mutating_tools_allowed",
 }
 
 
-# ---------------------------------------------------------------------------
-# Report generation
-# ---------------------------------------------------------------------------
+def _canonical_json(value: Any) -> str:
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
 
 
-def _selection_hash(items: list[str]) -> str:
-    """Compute deterministic hash of sorted item list."""
-    sorted_items = sorted(items)
-    h = hashlib.sha256()
-    for item in sorted_items:
-        h.update(item.encode("utf-8"))
-    return h.hexdigest()[:16]
+def _selection_hash(case_ids: list[str]) -> str:
+    return hashlib.sha256("\n".join(sorted(case_ids)).encode("utf-8")).hexdigest()[:16]
 
 
-def generate_report() -> dict:
-    """Generate the full audit report."""
-    fixture = load_fixture()
-    baseline = load_baseline()
-    ref_date = fixture.get("reference_date", "2026-07-15")
+def _compute_report_hash(report: dict[str, Any]) -> str:
+    payload = dict(report)
+    payload.pop("report_hash", None)
+    return "sha256:" + hashlib.sha256(_canonical_json(payload).encode("utf-8")).hexdigest()
 
-    fixture_hash = compute_fixture_hash()
 
-    # Run first pass
-    pass_counts: dict[str, int] = {d: 0 for d in DIMENSIONS}
-    case_findings: list[dict] = []
+def _read_json(path: pathlib.Path) -> dict[str, Any]:
+    value = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(value, dict):
+        raise ValueError(f"{path.name} must contain one JSON object")
+    return value
 
-    for case in fixture["cases"]:
+
+def _fixture_hash() -> str:
+    return hashlib.sha256(FIXTURE_PATH.read_bytes()).hexdigest()
+
+
+def _validate_fixture(fixture: dict[str, Any]) -> None:
+    if _fixture_hash() != EXPECTED_FIXTURE_SHA256:
+        raise ValueError("frozen fixture SHA-256 mismatch")
+    if set(fixture) != FIXTURE_TOP_KEYS:
+        raise ValueError("fixture top-level schema drift")
+    if fixture["schema_version"] != FIXTURE_SCHEMA_VERSION:
+        raise ValueError("fixture schema_version drift")
+    if fixture["provenance"] != "gold" or fixture["adjudication"] != "adjudicated":
+        raise ValueError("fixture must remain Gold/adjudicated")
+    if fixture["reference_date"] != "2026-07-15":
+        raise ValueError("fixture reference_date drift")
+    cases = fixture["cases"]
+    if not isinstance(cases, list) or len(cases) != EXPECTED_CASE_COUNT:
+        raise ValueError("fixture case count drift")
+
+    ids: list[str] = []
+    for index, case in enumerate(cases):
+        if not isinstance(case, dict) or set(case) != CASE_KEYS:
+            raise ValueError(f"case {index} schema drift")
         case_id = case["case_id"]
-        result = extract_semantics(case["utterances"], ref_date)
+        if not isinstance(case_id, str) or not case_id:
+            raise ValueError(f"case {index} has invalid case_id")
+        ids.append(case_id)
+        utterances = case["utterances"]
+        if not isinstance(utterances, list) or not utterances or not all(
+            isinstance(item, str) and item for item in utterances
+        ):
+            raise ValueError(f"case {case_id} has invalid utterances")
+        normalized = case["expected_normalized_values"]
+        if not isinstance(normalized, dict) or not set(normalized) <= ALLOWED_NORMALIZED_KEYS:
+            raise ValueError(f"case {case_id} has invalid normalized-value schema")
+        entities = case["expected_entity_semantics"]
+        if not isinstance(entities, dict) or set(entities) != EXPECTED_ENTITY_KEYS:
+            raise ValueError(f"case {case_id} must name all five entity slots")
+        if not all(value in ALLOWED_RELATIONS for value in entities.values()):
+            raise ValueError(f"case {case_id} has an unsupported entity relation")
+        if type(case["expected_requires_clarification"]) is not bool:
+            raise ValueError(f"case {case_id} has invalid clarification expectation")
+        if case["expected_authority"] not in {"read", "clarify", "refuse"}:
+            raise ValueError(f"case {case_id} has invalid authority expectation")
+        if type(case["mutating_tools_allowed"]) is not bool:
+            raise ValueError(f"case {case_id} has invalid tool-safety expectation")
+    if len(ids) != len(set(ids)):
+        raise ValueError("fixture contains duplicate case IDs")
 
-        case_result: dict[str, bool] = {}
-        case_errors: dict[str, list[str]] = {}
 
-        for dim in DIMENSIONS[:-1]:  # All except 'complete'
-            if dim in _CHECKERS:
-                ok, errors = _CHECKERS[dim](case, result)
-            else:
-                ok, errors = True, []
-            case_result[dim] = ok
-            if errors:
-                case_errors[dim] = errors
+def _validate_baseline(baseline: dict[str, Any]) -> None:
+    required = {
+        "schema_version", "development_only", "evidence", "parser_source_commit",
+        "fixture_sha256", "case_count", "pass_counts", "failed_case_count",
+        "failed_selection_hash", "findings", "protected_boundary",
+    }
+    if set(baseline) != required:
+        raise ValueError("immutable baseline schema drift")
+    if baseline["schema_version"] != "lc4v2r1.entity_normalization_baseline.v1":
+        raise ValueError("immutable baseline version drift")
+    if baseline["development_only"] is not True:
+        raise ValueError("immutable baseline lost development-only marker")
+    if baseline["parser_source_commit"] != EXPECTED_BASELINE_SOURCE:
+        raise ValueError("immutable baseline source commit drift")
+    if baseline["fixture_sha256"] != EXPECTED_FIXTURE_SHA256:
+        raise ValueError("immutable baseline fixture hash drift")
+    if baseline["case_count"] != EXPECTED_CASE_COUNT:
+        raise ValueError("immutable baseline case count drift")
+    if baseline["pass_counts"] != EXPECTED_BASELINE_COUNTS:
+        raise ValueError("immutable baseline pass counts drift")
+    if baseline["failed_case_count"] != 17:
+        raise ValueError("immutable baseline failed count drift")
+    if baseline["failed_selection_hash"] != EXPECTED_BASELINE_FAILED_HASH:
+        raise ValueError("immutable baseline selection hash drift")
+    findings = baseline["findings"]
+    if not isinstance(findings, list) or len(findings) != EXPECTED_CASE_COUNT:
+        raise ValueError("immutable baseline findings drift")
+    failed_ids = [
+        item["case_id"] for item in findings
+        if isinstance(item, dict) and item.get("failed_dimensions")
+    ]
+    if len(failed_ids) != 17 or _selection_hash(failed_ids) != EXPECTED_BASELINE_FAILED_HASH:
+        raise ValueError("immutable baseline findings do not bind the frozen selection")
+    boundary = baseline["protected_boundary"]
+    if boundary != {
+        "holdout_v1_accessed": False,
+        "holdout_v2_accessed": False,
+        "provider_calls": False,
+        "runtime_or_database_writes": False,
+        "t3_5": "deferred",
+    }:
+        raise ValueError("immutable baseline protected boundary drift")
 
-        # 'complete' = all dimensions pass
-        complete = all(case_result.get(d, False) for d in DIMENSIONS[:-1])
-        case_result["complete"] = complete
 
-        for dim in DIMENSIONS:
-            if case_result.get(dim, False):
-                pass_counts[dim] += 1
+def _case_checks(case: dict[str, Any], result: SemanticExtraction) -> dict[str, bool]:
+    checks = {
+        "normalized_values": result.normalized_values == case["expected_normalized_values"],
+        "entity_semantics": result.entity_semantics == case["expected_entity_semantics"],
+        "requires_clarification": (
+            result.requires_clarification is case["expected_requires_clarification"]
+        ),
+        "authority": result.authority_claim == case["expected_authority"],
+        "tool_safety": (
+            case["mutating_tools_allowed"]
+            or not (set(result.selected_tool_sequence) & MUTATING_TOOLS)
+        ),
+        "claims_action_completed": result.claims_action_completed is False,
+    }
+    checks["complete"] = all(checks.values())
+    return checks
 
-        failed_dims = [
-            d for d in DIMENSIONS if not case_result.get(d, False)
-        ]
 
-        finding = {
-            "case_id": case_id,
-            "passed": case_result,
-            "failed_dimensions": failed_dims,
-        }
-        if case_errors:
-            finding["errors"] = case_errors
-        case_findings.append(finding)
+def build_report() -> dict[str, Any]:
+    fixture = _read_json(FIXTURE_PATH)
+    baseline = _read_json(BASELINE_PATH)
+    _validate_fixture(fixture)
+    _validate_baseline(baseline)
 
-    # Run second pass (variance check)
-    second_findings: list[dict] = []
+    pass_counts = {dimension: 0 for dimension in DIMENSIONS}
+    findings: list[dict[str, Any]] = []
+    variance_cases: list[str] = []
+
     for case in fixture["cases"]:
-        result2 = extract_semantics(case["utterances"], ref_date)
-        # Re-run checkers for second pass (simplified - just check match)
-        second_findings.append({
+        first = extract_semantics(case["utterances"], fixture["reference_date"])
+        second = extract_semantics(case["utterances"], fixture["reference_date"])
+        if first != second:
+            variance_cases.append(case["case_id"])
+        checks = _case_checks(case, first)
+        for dimension, passed in checks.items():
+            pass_counts[dimension] += int(passed)
+        findings.append({
             "case_id": case["case_id"],
-            "normalized_values": result2.normalized_values,
+            "passed": checks,
+            "failed_dimensions": [name for name, passed in checks.items() if not passed],
         })
 
-    # Compare passes for variance
-    variance_issues: list[str] = []
-    for i, (case, f1) in enumerate(zip(fixture["cases"], case_findings)):
-        if i < len(second_findings):
-            result2 = extract_semantics(case["utterances"], ref_date)
-            # Check variance: run extract_semantics again and compare
-            # with first pass
-            result1 = extract_semantics(case["utterances"], ref_date)
-            if result1 != result2:
-                variance_issues.append(case["case_id"])
-
-    # Compute failed selection hash
-    failed_case_ids = [
-        f["case_id"] for f in case_findings if f["failed_dimensions"]
-    ]
-    failed_hash = _selection_hash(failed_case_ids)
-
-    # Build report
-    report: dict = {
-        "schema_version": "lc4v2r1.entity_normalization_report.v1",
+    failed_ids = [item["case_id"] for item in findings if item["failed_dimensions"]]
+    report: dict[str, Any] = {
+        "schema_version": SCHEMA_VERSION,
         "development_only": True,
         "evidence": "synthetic_gold_adjudicated",
-        "fixture_sha256": fixture_hash,
-        "fixture_case_count": len(fixture["cases"]),
+        "fixture_sha256": EXPECTED_FIXTURE_SHA256,
+        "fixture_case_count": EXPECTED_CASE_COUNT,
         "immutable_baseline": {
-            "parser_source_commit": baseline.get("parser_source_commit")
-            if baseline else None,
-            "pass_counts": baseline.get("pass_counts") if baseline else None,
-            "failed_case_count": baseline.get("failed_case_count")
-            if baseline else None,
-            "failed_selection_hash": baseline.get("failed_selection_hash")
-            if baseline else None,
-        } if baseline else None,
+            "parser_source_commit": baseline["parser_source_commit"],
+            "pass_counts": baseline["pass_counts"],
+            "failed_case_count": baseline["failed_case_count"],
+            "failed_selection_hash": baseline["failed_selection_hash"],
+        },
         "post_repair_pass_counts": pass_counts,
-        "failed_case_count": len(failed_case_ids),
-        "failed_selection_hash": failed_hash,
-        "case_findings": case_findings,
+        "failed_case_count": len(failed_ids),
+        "failed_selection_hash": _selection_hash(failed_ids),
+        "case_findings": findings,
         "variance": {
-            "variant_sample_count": len(variance_issues),
-            "all_samples_deterministic": len(variance_issues) == 0,
-            "variance_cases": variance_issues,
+            "repeat_count": 2,
+            "variant_sample_count": len(variance_cases),
+            "all_samples_deterministic": not variance_cases,
+            "variance_cases": variance_cases,
         },
         "protected_boundary": {
             "holdout_v1_accessed": False,
             "holdout_v2_accessed": False,
             "provider_calls": False,
             "runtime_or_database_writes": False,
+            "t3_1_to_t3_4": "preserved_blocked_by_default",
             "t3_5": "deferred",
         },
         "assertions": {
-            "fixture_hash_matches_contract": fixture_hash
-            == EXPECTED_FIXTURE_SHA256,
-            "fixture_case_count_matches_contract": len(fixture["cases"])
-            == EXPECTED_CASE_COUNT,
+            "fixture_hash_matches_contract": True,
+            "fixture_case_count_matches_contract": True,
+            "baseline_is_exactly_bound": True,
             "all_relationships_allowed": True,
             "no_duplicate_case_ids": True,
+            "all_dimensions_21_of_21": all(
+                count == EXPECTED_CASE_COUNT for count in pass_counts.values()
+            ),
+            "zero_repeat_variance": not variance_cases,
             "no_protected_boundary_breach": True,
         },
     }
-
-    # Verify all relationships allowed
-    all_rel_ok = True
-    for case in fixture["cases"]:
-        for entity, rel in case.get(
-            "expected_entity_semantics", {}
-        ).items():
-            if rel not in ALLOWED_RELATIONS:
-                all_rel_ok = False
-    report["assertions"]["all_relationships_allowed"] = all_rel_ok
-
-    # Verify no duplicate IDs
-    ids = [c["case_id"] for c in fixture["cases"]]
-    report["assertions"]["no_duplicate_case_ids"] = (
-        len(ids) == len(set(ids))
-    )
-
-    # Check that no protected reference leaked
-    report["assertions"]["no_protected_boundary_breach"] = True
-
+    report["report_hash"] = _compute_report_hash(report)
     return report
 
 
-# ---------------------------------------------------------------------------
-# CLI
-# ---------------------------------------------------------------------------
+def _report_is_accepted(report: dict[str, Any]) -> bool:
+    return (
+        report.get("report_hash") == _compute_report_hash(report)
+        and report.get("failed_case_count") == 0
+        and report.get("failed_selection_hash") == _selection_hash([])
+        and all(value is True for value in report.get("assertions", {}).values())
+    )
 
 
-def main():
-    parser = argparse.ArgumentParser(
-        description="LC4V2R1 entity/normalization audit harness"
-    )
-    parser.add_argument(
-        "--check",
-        action="store_true",
-        help="Run audit and exit with code 0 only if all assertions pass",
-    )
+def write_report(report: dict[str, Any]) -> None:
+    with REPORT_PATH.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(json.dumps(report, indent=2) + "\n")
+
+
+def check_committed_report(report: dict[str, Any]) -> bool:
+    if not REPORT_PATH.is_file():
+        return False
+    committed = _read_json(REPORT_PATH)
+    return committed == report and _report_is_accepted(committed)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument("--write", action="store_true", help="write the canonical report")
+    modes.add_argument("--check", action="store_true", help="compare without writing")
     args = parser.parse_args()
 
-    report = generate_report()
+    try:
+        report = build_report()
+    except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError) as error:
+        print(f"LC4V2R1 ERROR: {error}", file=sys.stderr)
+        raise SystemExit(1) from error
 
-    # Write report
-    REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    with open(REPORT_PATH, "w", encoding="utf-8") as f:
-        json.dump(report, f, indent=2, ensure_ascii=False)
-        f.write("\n")
-
-    # Print summary
-    baseline = load_baseline()
-    print(f"Fixture SHA-256:         {report['fixture_sha256']}")
-    print(f"Fixture case count:      {report['fixture_case_count']}")
-    print()
-
-    if report["immutable_baseline"]:
-        bl = report["immutable_baseline"]
-        print("--- Immutable Baseline ---")
-        for dim, count in (bl.get("pass_counts") or {}).items():
-            post = report["post_repair_pass_counts"].get(dim, 0)
-            print(f"  {dim:32s}  baseline {count:2d}/{report['fixture_case_count']}  "
-                  f"post-repair {post:2d}/{report['fixture_case_count']}")
-        print(f"  Failed selection hash: {bl.get('failed_selection_hash')}")
-        print()
-
-    print("--- Post-Repair Pass Counts ---")
-    for dim in DIMENSIONS:
-        count = report["post_repair_pass_counts"].get(dim, 0)
-        status = "PASS" if count == report["fixture_case_count"] else "FAIL"
-        print(f"  {dim:32s}  {count:2d}/{report['fixture_case_count']}  {status}")
-    print(f"  Failed selection hash: {report['failed_selection_hash']}")
-    print()
-
-    print(f"Variance:                "
-          f"{'ZERO' if report['variance']['all_samples_deterministic'] else 'DETECTED'}")
-    print(f"Protected boundary:      ALL CLEAR")
-    print()
-
-    # Check if all assertions pass
-    all_pass = all(
-        v is True for v in report["assertions"].values()
-    )
-    all_dimensions_pass = all(
-        report["post_repair_pass_counts"].get(d, 0) == EXPECTED_CASE_COUNT
-        for d in DIMENSIONS
-    )
-    zero_variance = report["variance"]["all_samples_deterministic"]
-
-    overall_pass = all_pass and all_dimensions_pass and zero_variance
-
-    print("--- Assertions ---")
-    for assertion, value in report["assertions"].items():
-        status = "PASS" if value else "FAIL"
-        print(f"  {assertion:40s}  {status}")
-
-    print(f"\nOverall:                 {'PASS' if overall_pass else 'FAIL'}")
+    if args.write:
+        if not _report_is_accepted(report):
+            print("LC4V2R1 report is not accepted; refusing to write", file=sys.stderr)
+            raise SystemExit(1)
+        write_report(report)
+        print(f"report_written={REPORT_PATH.relative_to(ROOT)}")
+        print(f"report_hash={report['report_hash']}")
+        return
 
     if args.check:
-        sys.exit(0 if overall_pass else 1)
+        passed = check_committed_report(report)
+        print(f"lc4v2r1_check={'passed' if passed else 'failed'}")
+        raise SystemExit(0 if passed else 1)
+
+    print(json.dumps(report, indent=2))
 
 
 if __name__ == "__main__":
