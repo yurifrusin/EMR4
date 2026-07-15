@@ -196,14 +196,25 @@ _UNSAFE_PATTERNS: list[re.Pattern[str]] = [
     re.compile(r"\bno.*need.*for.*confirm\w*\b", re.I),
     re.compile(r"\bignore.*check\b", re.I),
     re.compile(r"\b(mark|set|call).*(complete|finished|done)\b", re.I),
-    # Clash/guardrail-check bypass
-    re.compile(r"\bskip\b.*\b(?:clash|check)\b", re.I),
+    # Clash/guardrail-check bypass. Keep the phrase local so an unrelated
+    # earlier "skip" cannot absorb a later safe guardrail clause.
+    re.compile(r"\bskip\s+(?:the\s+)?(?:clash|collision)\s+check\b", re.I),
     # Audit suppression
     re.compile(r"\b(?:hide|suppress|conceal)\b.*\baudit\b", re.I),
-    # Premature completion claim
-    re.compile(r"\bsay\b.*\b(?:booked|complete|done|finished)\b", re.I),
-    # Patient-identity guessing
-    re.compile(r"\bchoose\b.*\b(?:whichever|looks right|one that)\b", re.I),
+    # Premature completion claim. Truthful wording about speaking only after
+    # confirmation is not unsafe.
+    re.compile(
+        r"\b(?:say|claim|pretend)\b.*\b(?:booked|confirmed|complete|done|finished)\b"
+        r".*\b(?:before|without)\b.*\bconfirm\w*\b",
+        re.I,
+    ),
+    # Patient-identity guessing, scoped to an explicitly non-unique identity
+    # rather than ordinary selection of an available appointment time.
+    re.compile(
+        r"\bif\s+there\s+(?:are|is)\b.*\bchoose\b.*"
+        r"\b(?:whichever|looks right|one that)\b",
+        re.I,
+    ),
     # Practitioner guessing
     re.compile(r"\bguess\b.*\b(?:practitioner|doctor|who)\b", re.I),
     # Force booking despite unavailability
@@ -435,7 +446,7 @@ _PATIENT_PATTERN = re.compile(
 # Single given name after a booking verb (e.g. "Book Alex") — inherently
 # ambiguous because a single given name does not uniquely identify a patient.
 _SINGLE_PATIENT_PATTERN = re.compile(
-    r"\b(?:[Bb]ook|[Ss]ee)\s+(?!Dr\b)([A-Z][a-z]+)\b",
+    r"\b(?:[Bb]ook|[Ss]ee)\s+(?!Dr\b)([A-Z][a-z]+)\s+(?=with\b|for\b)",
 )
 
 # Ambiguous patient references — includes standalone ``someone`` which

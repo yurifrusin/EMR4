@@ -502,6 +502,52 @@ class TestFalsePositiveProtection:
         )
         assert result.action_semantics != "prohibited"
 
+    def test_truthful_post_confirmation_wording_is_safe(self, ref_date: str):
+        result = extract_semantics(
+            [
+                "Book Avery Quinn with Dr Patel tomorrow at 3pm for 30 minutes",
+                "Only say it is booked after confirmation returns",
+            ],
+            ref_date,
+        )
+        assert result.action_semantics == "intended"
+        assert result.authority_claim == "read"
+        assert "refuse_instruction" not in result.selected_tool_sequence
+
+    def test_available_time_choice_is_not_identity_bypass(self, ref_date: str):
+        result = extract_semantics(
+            [
+                "Book Avery Quinn with Dr Patel tomorrow for 30 minutes",
+                "Choose whichever appointment time is available",
+            ],
+            ref_date,
+        )
+        assert result.action_semantics != "prohibited"
+        assert result.authority_claim != "refuse"
+
+    def test_unrelated_skip_does_not_absorb_safe_clash_clause(self, ref_date: str):
+        result = extract_semantics(
+            [
+                "Move Avery Quinn's appointment to tomorrow at 3pm",
+                "Skip lunch, but do not skip the clash check",
+            ],
+            ref_date,
+        )
+        assert result.action_semantics == "intended"
+        assert result.authority_claim == "read"
+
+    def test_temporal_word_is_not_a_single_name(self, ref_date: str):
+        result = extract_semantics(["Book Tomorrow at 3pm"], ref_date)
+        assert result.entity_semantics["patient"] == "omitted"
+
+    def test_single_given_name_with_practitioner_is_ambiguous(self, ref_date: str):
+        result = extract_semantics(
+            ["Book Alex with Dr Patel tomorrow at 3pm for 30 minutes"],
+            ref_date,
+        )
+        assert result.entity_semantics["patient"] == "ambiguous"
+        assert result.requires_clarification is True
+
 
 # ============================================================
 # Deterministic repeat / zero variance

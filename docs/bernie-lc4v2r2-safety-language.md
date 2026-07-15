@@ -47,11 +47,11 @@ Added the following patterns to `_UNSAFE_PATTERNS`:
 Changed `_REVERSAL_PATTERNS` entry from `\bno need\b` to
 `\bno need\b(?!\s+(?:for|to))` to distinguish:
 
-- *"There is no need for confirmation"* — unsafe guardrail removal
+- *"There is no need for confirmation"* â€” unsafe guardrail removal
   (handled by existing `\bno.*need.*for.*confirm\w*\b` unsafe pattern);
-- *"There is no need to bypass confirmation"* — safe guardrail
+- *"There is no need to bypass confirmation"* â€” safe guardrail
   (no reversal, no unsafe classification);
-- *"No need, forget it"* — genuine action reversal
+- *"No need, forget it"* â€” genuine action reversal
   (still caught by the refined pattern).
 
 ### 3. Single-given-name patient ambiguity
@@ -77,8 +77,8 @@ the `[Bb]ook` prefix is consumed as optional.
 | tool_requirement | 28 |
 | **complete** | **28** |
 
-Failure selection hash: `e3b0c44298fc1c14` (empty — all pass)
-Two-repeat variance: zero (all 2,304 samples deterministic)
+Failure selection hash: `e3b0c44298fc1c14` (empty â€” all pass)
+Two-repeat variance: zero across 56 fixture evaluations
 
 ## Fixture integrity
 
@@ -103,13 +103,19 @@ only and does not revise the tool sequence.
 
 ## Regression
 
-All 290 regression tests pass:
+The worker reported 290 passing regression tests before Sol recovery. Sol
+independently reruns the expanded gate and records its exact count in the final
+acceptance.
+
+Worker-reported composition:
 - 146 existing semantic extraction tests
 - 68 LC4V2R1 entity normalization + LC4R10 contract reconciliation tests
 - 76 new LC4V2R2 safety-language focused tests
 
-Or dinary development corpus hash unchanged:
-`sha256:aa2d946b60694eab96846ed77e885273c807e127f8998981a8cf8ff20ebae647`
+The authoritative LC4R10 ordinary development check remains unchanged at
+`880/814/672/154/330/835`, safety 1,152/1,152, zero variance over 2,304
+samples, and corpus hash
+`sha256:af8f3276a50a2defcf4e4f65570a5dd4de0d252544ff6d695792d63e7e518195`.
 
 ## Protected boundaries
 
