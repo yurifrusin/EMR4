@@ -729,7 +729,7 @@ def generate_report_markdown(report: dict[str, Any] | None = None) -> str:
         "",
         "## Boundary",
         "",
-        "Development-only replay evidence. Holdouts v1-v4 remain sealed; ",
+        "Development-only replay evidence. Holdouts v1-v4 remain sealed;",
         "T3.1-T3.4 remain blocked and T3.5/provider/product/write authority remains deferred.",
     ])
     return "\n".join(lines) + "\n"
