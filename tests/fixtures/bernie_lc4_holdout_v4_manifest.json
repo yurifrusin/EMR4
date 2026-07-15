@@ -1,0 +1,114 @@
+{
+  "authoring_quality_receipt_hash": "sha256:72d29420749f99bd89be49893695b734b56d4b9cf358bb1c7df02da17868cad1",
+  "corpus_hash": "sha256:8b2779cde8532e67afbfc423c1bc53b85460fa52054f860e02b672cac2cbf751",
+  "corpus_identity": "lc4-holdout-v4",
+  "evaluation_id": "lc4-holdout-v4-baseline-001",
+  "evaluator_version": "lc4v4.aggregate_evaluator.v1",
+  "files": [
+    {
+      "file_hash": "sha256:4e9407d8cbeb8c3b95935f15b868cb94de407c6f9334b510643ec85eef64b8cc",
+      "filename": "lc4v4_group_001.json"
+    },
+    {
+      "file_hash": "sha256:8bf1219f6bc044702081563831e71309095fefa4b6699086d9844a003fccf250",
+      "filename": "lc4v4_group_002.json"
+    },
+    {
+      "file_hash": "sha256:d39f670ba6912fa21b712020bf4afd547fbee8644ac57b6cf4a8c602f80d4a45",
+      "filename": "lc4v4_group_003.json"
+    },
+    {
+      "file_hash": "sha256:25ec0e3a330a6732f54aa38a90221eba07689228352bcb1562be092a895b5dc9",
+      "filename": "lc4v4_group_004.json"
+    },
+    {
+      "file_hash": "sha256:0afbfc0bc00536046c83a13ab2b24cdba2820dd6e3f1f60d65de0172c0d42056",
+      "filename": "lc4v4_group_005.json"
+    },
+    {
+      "file_hash": "sha256:baa15061bd00411edd03c8059a5c7eed2350adfc3186b62d8dec9fa7989071aa",
+      "filename": "lc4v4_group_006.json"
+    },
+    {
+      "file_hash": "sha256:25ebf1e21e975f9047b85cadcd445299fd105a97c2a2d7f354a476dace5a13fa",
+      "filename": "lc4v4_group_007.json"
+    },
+    {
+      "file_hash": "sha256:39d59522769124ec31a572f001718149048d2056692ade05068427d228f706bf",
+      "filename": "lc4v4_group_008.json"
+    },
+    {
+      "file_hash": "sha256:7530a232d49392294e60ef89a9dd45adc41ccc0c40b778fba4917fab0bf57a60",
+      "filename": "lc4v4_group_009.json"
+    },
+    {
+      "file_hash": "sha256:95007fca99fe98303f0e831981eed07dcbf645e83ed424d0e301d788193832e2",
+      "filename": "lc4v4_group_010.json"
+    },
+    {
+      "file_hash": "sha256:0a383fe7d0466aa52fcf2b5a42b18566d83e3ec27754c62424c388cc36059a4b",
+      "filename": "lc4v4_group_011.json"
+    },
+    {
+      "file_hash": "sha256:bf3c1cd13f49c849b157a904198105489afb9611818b91f18f72b1180b6db796",
+      "filename": "lc4v4_group_012.json"
+    },
+    {
+      "file_hash": "sha256:59ef458fc0a49e1001a831a7ec912bcbf247194ce8bdd2546a96ba94ddbbb4b4",
+      "filename": "lc4v4_group_013.json"
+    },
+    {
+      "file_hash": "sha256:2cce058c91fce615163f18cfbf5ec7b9b110889d8712489dd1bd326ae603f19d",
+      "filename": "lc4v4_group_014.json"
+    },
+    {
+      "file_hash": "sha256:33e7004e408d3f5efe44c92ceb5adee67c17b32c27c779e78878f21d977fee2a",
+      "filename": "lc4v4_group_015.json"
+    },
+    {
+      "file_hash": "sha256:b61c70bc336ea8da43512a93ead46cebc1ee29d327cf041ddd97d965520a9d44",
+      "filename": "lc4v4_group_016.json"
+    },
+    {
+      "file_hash": "sha256:f20b1baee765be94515eeeb54ef80e625ac536ea27d55884230db8836ab4828e",
+      "filename": "lc4v4_group_017.json"
+    },
+    {
+      "file_hash": "sha256:a47ea1fcc80d3e19e5cbeed795cb53adf93067d85c0f6a31117434007ce02cbf",
+      "filename": "lc4v4_group_018.json"
+    },
+    {
+      "file_hash": "sha256:b7a3f9a2c2299a5c0788f15dde2674a37f855f7ba051bc86ae56e695dd3cf078",
+      "filename": "lc4v4_group_019.json"
+    },
+    {
+      "file_hash": "sha256:b93d4fa95254a7f958499197b388fca2854561fd83601112ad9111dbc994f020",
+      "filename": "lc4v4_group_020.json"
+    },
+    {
+      "file_hash": "sha256:99efee47040463f6a1f5b3ee7dcc23f7cd221ce0888c3b176b2f5bad27182905",
+      "filename": "lc4v4_group_021.json"
+    },
+    {
+      "file_hash": "sha256:94eeb21207b8ed1353ea86f40c458bcf2a8ca3a465bc4097740b0757fb27b4e0",
+      "filename": "lc4v4_group_022.json"
+    },
+    {
+      "file_hash": "sha256:0c7f88ad91c49631a8bf8dd6cbfa73ebe25ca2fce7f022f0c739f2af048dec5d",
+      "filename": "lc4v4_group_023.json"
+    },
+    {
+      "file_hash": "sha256:280b2390eb06620dfe26a92564bfb341fa0de4e688cc80d7f632e901f63575ee",
+      "filename": "lc4v4_group_024.json"
+    }
+  ],
+  "group_count": 24,
+  "multi_turn_per_group": 3,
+  "repeat_count": 2,
+  "schema_version": "lc4v4.manifest.v1",
+  "surface_variants_per_group": 9,
+  "total_production_samples": 576,
+  "total_scenarios": 288,
+  "total_trajectories": 72,
+  "variants_per_group": 12
+}
