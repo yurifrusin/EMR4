@@ -56,7 +56,7 @@ def test_compact_live_handover_retains_required_authority_and_boundaries() -> No
         "GPT Sol",
         "DeepSeek V4 Flash/high via Claude Code `--bare`",
         "DeepSeek Pro is not the Conductor",
-        "Protected holdouts v1 and v2 remain sealed",
+        "Protected holdouts v1, v2, and v3 remain sealed",
         "T3.1-T3.4 remain intact and blocked by default",
         "lc4v2-sol-acceptance.md",
         "lc4v2r1-sol-contract.md",
@@ -68,9 +68,11 @@ def test_compact_live_handover_retains_required_authority_and_boundaries() -> No
         "no_r3_authorized",
         "lc4v3-sol-contract.md",
         "lc4v3-one-shot-acceptance-rule.md",
+        "lc4v3-sol-acceptance.md",
         "7392b951",
         "170b44ab",
-        "no v3 content exists",
+        "certification_fail",
+        "complete 494/576",
         "complete `0/576`",
     ]:
         assert required in live

@@ -1,6 +1,6 @@
 # Bernie Language and Evaluation Ledger
 
-Last consolidated: 2026-07-15 after LC4V2.
+Last consolidated: 2026-07-15 after LC4V3.
 
 ## Current accepted state
 
@@ -79,14 +79,29 @@ hash `sha256:aa65f631f748948cdaf0c7adc280a2db1d86b3f2f4779edc1f67ecc3c0412fba`.
 Gemini independently passed exact head `e0d30bd8`. The current development
 repair sequence is complete; this is not certification.
 
+Yuri authorized genuinely fresh LC4V3 certification. DeepSeek Flash supplied
+one rejected content-blind framework candidate; Sol recovered it, and Gemini
+independently passed exact recovered framework head `170b44ab` before content
+existed. Sol alone authored and froze the fresh corpus at `c57a4d62`, closed
+external sessions, sealed it, and ran the single permitted baseline. Evidence
+is valid and variance is zero. The frozen product decision is
+`certification_fail`: complete 494/576, entity semantics 494/576, both tool
+dimensions 496/576, safety 576/576, temporal and normalization 576/576, and
+288 distinct coverage cells. The plain-language slice was 0/82 while every
+other language-form slice passed completely. That aggregate discontinuity is
+consistent with an authoring/representation defect, but it supplies no
+case-level parser evidence and cannot authorize inspection, tuning, repair, or
+a rerun. Holdouts v1-v3 are sealed.
+
 ## Next safe sequence
 
-1. Keep holdouts v1 and v2 sealed; use only aggregate v2 evidence for planning.
+1. Keep holdouts v1, v2, and v3 sealed; use only committed aggregate evidence
+   and closeouts for planning.
 2. Do not name R3: the development exit-gap reassessment found no authorized
    repair surface.
 3. Keep T3.5 provider adapters and live-provider execution separately deferred.
-4. Pause for Yuri's explicit choice between a fresh certification holdout and
-   a reviewed reuse policy.
+4. Pause for Yuri's explicit choice before a genuinely fresh v4 or a reviewed
+   reuse policy. Recommend content-blind authoring-quality work before v4.
 5. Authorize parser work only from a newly frozen independently supported
    development surface subset.
 
@@ -110,8 +125,10 @@ repair sequence is complete; this is not certification.
 - `orchestration/agent_inbox/codex/lc4v2r2-sol-acceptance.md`
 - `docs/bernie-lc4v2-development-exit-reassessment.md`
 - `orchestration/agent_inbox/codex/lc4v2e1-sol-acceptance.md`
+- `docs/bernie-lc4v3-fresh-certification-closeout.md`
+- `orchestration/agent_inbox/codex/lc4v3-sol-acceptance.md`
 
-Protected holdouts v1 and v2 are sealed. Do not enumerate their paths, inspect
+Protected holdouts v1, v2, and v3 are sealed. Do not enumerate their paths, inspect
 content, rerun them, regenerate them, hash-check them, infer labels from them,
 or tune against them. T3.1-T3.4 remain blocked-by-default evaluation
 scaffolding; T3.5 is deferred.

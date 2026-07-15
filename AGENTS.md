@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V3 genuinely fresh certification holdout; Sol-only content authorship stage |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v3-sol-contract.md` and `orchestration/agent_inbox/codex/lc4v3-one-shot-acceptance-rule.md` |
-| Current result | Recovered content-blind framework passed Gemini veto on `170b44ab`; no v3 content exists yet; holdouts v1 and v2 remain sealed |
-| Next implementation | Freeze the pre-result acceptance rule, close external sessions, then Sol alone authors and freezes the 24-group v3 corpus before its single aggregate run |
+| Active product track | LC4V3 fresh certification is closed as a valid `certification_fail`; no parser remediation is authorized |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v3-sol-acceptance.md` |
+| Current result | Evidence valid; complete 494/576, safety 576/576, temporal and normalization 576/576, zero variance; holdouts v1-v3 sealed |
+| Next implementation | Pause at the user boundary before a fresh v4/reuse decision; recommend a content-blind authoring-quality tranche followed by genuinely fresh v4 content, never v3 repair or reuse |
 
 ### LC4R10 accepted state
 
@@ -168,7 +168,7 @@ now requires Yuri's explicit decision. The frozen contract is
 `orchestration/agent_inbox/codex/lc4v2e1-sol-contract.md`; see
 `orchestration/agent_inbox/codex/lc4v2e1-sol-acceptance.md`.
 
-### LC4V3 authorized state
+### LC4V3 accepted state
 
 Yuri authorized the recommended genuinely fresh certification holdout on
 2026-07-15. LC4V3 begins content-blind: DeepSeek Flash may implement only the
@@ -177,9 +177,9 @@ content exists, and Sol alone owns actual corpus authorship, sealing, one-shot
 evaluation, acceptance, and protected integration. The comparable fixed shape
 is 24 groups, 288 scenarios, 72 trajectories, and 576 two-repeat samples.
 
-Holdouts v1 and v2 remain sealed and unavailable. No LC4V3 content exists yet.
+Holdouts v1 and v2 remained sealed and unavailable throughout authorship.
 T3.1-T3.4 remain blocked by default; T3.5/live models remain a separate Yuri
-decision. The active contract is
+decision. The frozen contract is
 `orchestration/agent_inbox/codex/lc4v3-sol-contract.md`.
 
 DeepSeek Flash's content-blind candidate at `7392b951` was rejected for
@@ -189,7 +189,20 @@ and 188 ordinary selected tests. Gemini 3.5 Flash/medium returned
 `DECISION: pass` on exact recovered head `170b44ab` before any real v3 content
 existed. External model sessions are closed. Product thresholds are frozen in
 `orchestration/agent_inbox/codex/lc4v3-one-shot-acceptance-rule.md` before
-Sol-only authorship begins.
+Sol-only authorship began.
+
+Sol froze the fresh corpus at source commit `c57a4d62`, then ran the only
+permitted baseline from its unconsumed seal. The evidence procedure passed and
+the aggregate report is deterministic, but the frozen thresholds return
+`certification_fail`: complete 494/576, entity semantics 494/576,
+interpretation and replay tools 496/576, safety 576/576, temporal relation and
+normalization 576/576, 288 distinct coverage cells, and zero repeat variance.
+The plain-language slice was 0/82 while every other language slice passed,
+which is aggregate evidence of a systematic authoring/representation defect,
+not case-level parser evidence. No v3 repair, rerun, relabelling, or parser
+remediation is authorized. Holdouts v1-v3 are sealed. See
+`orchestration/agent_inbox/codex/lc4v3-sol-acceptance.md` and
+`docs/bernie-lc4v3-fresh-certification-closeout.md`.
 
 ## 4. Authority Allocation
 
@@ -243,14 +256,16 @@ changes; it does not inherit the failed worker's acceptance framing.
 
 ## 5. Protected Evidence and Closed Gates
 
-### Protected holdouts v1 and v2
+### Protected holdouts v1, v2, and v3
 
-Protected holdouts v1 and v2 remain sealed. Do not open, enumerate, list,
+Protected holdouts v1, v2, and v3 remain sealed. Do not open, enumerate, list,
 search, import, run, regenerate, evaluate, hash-check, infer labels from, or
-tune against either protected fixture, support module, authoring surface,
+tune against any protected fixture, support module, authoring surface,
 manifest, seal, receipt, or per-case report. The committed v2 aggregate report
-and aggregate closeout are the only v2 evidence available for planning. A
-historical metadata-enumeration incident does not authorize v1 reuse.
+and aggregate closeout are the only v2 evidence available for planning; only
+the committed aggregate report, closeout, and Sol acceptance are available for
+v3 planning. A historical metadata-enumeration incident does not authorize v1
+reuse.
 
 Before future certification, Yuri must approve a new holdout version or an
 explicit reviewed reuse policy. Development work uses only ordinary

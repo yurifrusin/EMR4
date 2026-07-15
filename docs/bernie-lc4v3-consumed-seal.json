@@ -1,0 +1,11 @@
+{
+  "seal_version": "lc4v3.seal.v1",
+  "manifest_hash": "sha256:a128a77e9932710f2c979df1d0ab068832a55d976a44e923f13a56a8494f884f",
+  "corpus_hash": "sha256:c05ffbf9d513ed098216417bc3980abe284aa12079b6df4acd09d14bab88ec6d",
+  "source_commit": "c57a4d62dd1b633a0a1bb20f26b5bd0fd0a5d310",
+  "evaluator_version": "lc4v3.aggregate_evaluator.v1",
+  "evaluation_id": "lc4-holdout-v3-baseline-001",
+  "repeat_count": 2,
+  "consumed": true,
+  "report_hash": "sha256:cdbb5967ea0c5e32f7176425b04efdd6600aca7c51f88e241139da15301a8b73"
+}
