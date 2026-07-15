@@ -1,0 +1,72 @@
+{
+  "schema_version": "bernie.lc4v2.development_exit_gap.v1",
+  "development_only": true,
+  "source_commit": "5b21db8de98fea29f5e34d939cb88563698f8a89",
+  "input_file_hashes": {
+    "r1_acceptance": "7ae181e4c997915569ab721970899411a312fa64ae6b1e94ef80574635a37c4e",
+    "r2_acceptance": "4520dcb2f9083d7a9dd54d86ee291450b998ed9a82be3a737fa12c76431d1356",
+    "r1_report": "1ec1f5e0e6c29cd8292015b30228d2d54b4ec0d827a6ca1cf45c6c538b290b1f",
+    "r2_report": "d7eec5e71d1abfd03b1db08aed5d5496a8553d8d716901458cb66de175bf2029",
+    "r10_report": "72e202fc05f38db11c071f310d96c2f9444cb7b2428bf8b29d85f6f4aeca8a8f",
+    "development_manifest": "fb86598333542431e4c53fa6da9adc052d0ca028cbe5016c909130a189411e1a"
+  },
+  "repair_surfaces": {
+    "lc4v2r1": {
+      "case_count": 21,
+      "failed_case_count": 0,
+      "failed_selection_hash": "e3b0c44298fc1c14",
+      "zero_repeat_variance": true
+    },
+    "lc4v2r2": {
+      "case_count": 28,
+      "failed_case_count": 0,
+      "failed_selection_hash": "e3b0c44298fc1c14",
+      "zero_repeat_variance": true
+    }
+  },
+  "ordinary_development": {
+    "semantic_pass_counts": {
+      "action_semantics": 814,
+      "entity_semantics": 330,
+      "intended_action": 880,
+      "normalized_values": 154,
+      "requires_clarification": 835,
+      "temporal_relation": 672
+    },
+    "safety": {
+      "failed": 0,
+      "passed": 1152,
+      "total": 1152
+    },
+    "variance": {
+      "total_samples": 2304,
+      "variant_samples": 0
+    },
+    "corpus_hash": "sha256:af8f3276a50a2defcf4e4f65570a5dd4de0d252544ff6d695792d63e7e518195"
+  },
+  "new_surface_count": 0,
+  "supported_gap_count": 0,
+  "decision": "no_r3_authorized",
+  "r3_authorized": false,
+  "development_repair_exit_reached": true,
+  "certification_status": "unresolved_user_decision",
+  "next_gate": "fresh_holdout_or_reviewed_reuse_policy",
+  "protected_boundary": {
+    "protected_evidence_accessed": false,
+    "provider_calls": false,
+    "runtime_or_database_writes": false,
+    "t3_1_to_t3_4": "preserved_blocked_by_default",
+    "t3_5": "deferred"
+  },
+  "assertions": {
+    "exact_authorized_input_set": true,
+    "all_input_file_hashes_match": true,
+    "all_input_schemas_exact": true,
+    "r1_zero_failure_contract_passes": true,
+    "r2_zero_failure_contract_passes": true,
+    "ordinary_development_baseline_passes": true,
+    "no_new_post_r2_failure_surface_in_frozen_inputs": true,
+    "protected_evidence_not_configured": true
+  },
+  "report_hash": "sha256:aa65f631f748948cdaf0c7adc280a2db1d86b3f2f4779edc1f67ecc3c0412fba"
+}
