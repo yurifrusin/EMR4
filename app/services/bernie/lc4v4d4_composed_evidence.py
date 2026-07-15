@@ -591,10 +591,10 @@ def generate_report_markdown(report: dict[str, Any] | None = None) -> str:
     for case_id in report.get("incompatible_d1_cases", []):
         lines.append(f"- {case_id}")
     lines.extend(["", "## Boundary", "",
-        "D4 is an explicitly versioned overlay on the composed deterministic ",
-        "development harness.  Frozen D1/D2/D3 evidence is unchanged.  ",
-        "Holdouts v1-v4, T3, providers, product runtime, and write authority ",
-        "remain closed.  The evidence overlay maps only the exact 20 accepted ",
+        "D4 is an explicitly versioned overlay on the composed deterministic",
+        "development harness. Frozen D1/D2/D3 evidence is unchanged.",
+        "Holdouts v1-v4, T3, providers, product runtime, and write authority",
+        "remain closed. The evidence overlay maps only the exact 20 accepted",
         "development IDs."])
     return "\n".join(lines)
 
