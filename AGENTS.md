@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V3 fresh certification is closed as a valid `certification_fail`; no parser remediation is authorized |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v3-sol-acceptance.md` |
-| Current result | Evidence valid; complete 494/576, safety 576/576, temporal and normalization 576/576, zero variance; holdouts v1-v3 sealed |
-| Next implementation | Pause at the user boundary before a fresh v4/reuse decision; recommend a content-blind authoring-quality tranche followed by genuinely fresh v4 content, never v3 repair or reuse |
+| Active product track | LC4V4Q1 content-blind authoring quality and fresh-v4 framework; no actual v4 content yet |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v4q1-sol-contract.md` |
+| Current result | Yuri authorized the recommended fresh-v4 path; holdouts v1-v3 remain sealed and no parser remediation is authorized |
+| Next implementation | Commit the contract, run one bounded Flash framework lane, recover/accept under Sol, and obtain a fresh Gemini veto before Sol-only v4 authorship |
 
 ### LC4R10 accepted state
 

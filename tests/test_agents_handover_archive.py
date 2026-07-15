@@ -74,6 +74,8 @@ def test_compact_live_handover_retains_required_authority_and_boundaries() -> No
         "certification_fail",
         "complete 494/576",
         "complete `0/576`",
+        "lc4v4q1-sol-contract.md",
+        "no actual v4 content yet",
     ]:
         assert required in live
 
