@@ -1,0 +1,11 @@
+{
+  "corpus_hash": "sha256:09c623070360f24ce402392225150063a8f9d265f25f640f659f25de434da335",
+  "corpus_version": "lc4-holdout-v2",
+  "evaluation_id": "lc4-holdout-v2-baseline-001",
+  "evaluator_version": "lc4v2.composed.v1",
+  "manifest_hash": "sha256:5555cfdde6a3b854d531630bfbb46678c403926847a04b176ae8e67319c44423",
+  "repeat_count": 2,
+  "schema_version": "lc4v2.seal.v1",
+  "source_commit": "f5af2fe5e7d7d6d96bb65299f832b0d6536e7b51",
+  "state": "sealed"
+}

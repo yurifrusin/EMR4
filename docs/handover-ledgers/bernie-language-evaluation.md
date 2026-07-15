@@ -1,6 +1,6 @@
 # Bernie Language and Evaluation Ledger
 
-Last consolidated: 2026-07-15 after LC4R10.
+Last consolidated: 2026-07-15 after LC4V2.
 
 ## Current accepted state
 
@@ -34,20 +34,32 @@ is `sha256:af8f3276a50a2defcf4e4f65570a5dd4de0d252544ff6d695792d63e7e518195`.
 No independently supported parser gap remains and no parser remediation is
 currently authorized.
 
-The final explicit serial development gate passed 831 tests with exactly 22
+The final explicit LC4R10 serial development gate passed 831 tests with exactly 22
 historical report/queue equality nodes deselected. Gemini 3.5 Flash returned
 `DECISION: pass` on exact recovered source head `01d7ac18`; the acceptance
 preserves and corrects its non-blocking prose miscount of those historical
 nodes. Protected holdout v1 remained sealed.
 
+Yuri then authorized a genuinely fresh holdout v2. A content-blind framework
+was independently reviewed before actual content existed; Sol alone authored,
+sealed, and consumed the 24-group, 288-variant, 72-multi-turn Gold corpus. The
+only `lc4-holdout-v2-baseline-001` run produced 576 aggregate samples with zero
+repeat variance. Temporal relations passed 576/576, intended action 528/576,
+action semantics 410/576, normalized values 288/576, entity semantics 0/576,
+clarification 308/576, safety 532/576, and the complete composed contract
+0/576. The procedure passed its evidence contract, but product readiness
+failed. Holdout v2 is now sealed alongside v1.
+
 ## Next safe sequence
 
-1. Request Yuri's decision between holdout v2 and an explicit holdout-v1 reuse
-   policy before LC5 certification work.
-2. Keep holdout v1 sealed until that decision is made.
+1. Keep holdouts v1 and v2 sealed; use only aggregate v2 evidence for planning.
+2. Run a development-only semantic repair and corpus-engineering tranche
+   focused on entity semantics, normalization, clarification, and safety.
 3. Keep T3.5 provider adapters and live-provider execution separately deferred.
-4. Authorize future parser work only from a newly frozen independently
-   supported surface subset.
+4. Require explicit approval for a later fresh certification holdout or any
+   reviewed reuse policy.
+5. Authorize parser work only from a newly frozen independently supported
+   development surface subset.
 
 ## Primary evidence
 
@@ -60,9 +72,11 @@ nodes. Protected holdout v1 remained sealed.
 - `docs/bernie-lc4r8-exit-blocker-reconciliation.md`
 - `docs/bernie-lc4r9-generator-contract-repair.md`
 - `docs/bernie-lc4r10-contract-reconciliation.md`
+- `docs/bernie-lc4v2-fresh-holdout-closeout.md`
 - `orchestration/agent_inbox/codex/lc4r10-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/lc4v2-sol-acceptance.md`
 
-Protected holdout v1 is sealed. Do not enumerate its paths, inspect content,
-rerun it, regenerate it, hash-check it, infer labels from it, or tune against
-it. T3.1-T3.4 remain blocked-by-default evaluation scaffolding; T3.5 is
-deferred.
+Protected holdouts v1 and v2 are sealed. Do not enumerate their paths, inspect
+content, rerun them, regenerate them, hash-check them, infer labels from them,
+or tune against them. T3.1-T3.4 remain blocked-by-default evaluation
+scaffolding; T3.5 is deferred.

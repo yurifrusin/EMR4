@@ -56,10 +56,10 @@ def test_compact_live_handover_retains_required_authority_and_boundaries() -> No
         "GPT Sol",
         "DeepSeek V4 Flash/high via Claude Code `--bare`",
         "DeepSeek Pro is not the Conductor",
-        "Protected holdout v1 remains sealed",
+        "Protected holdouts v1 and v2 remain sealed",
         "T3.1-T3.4 remain intact and blocked by default",
-        "Yuri selected the recommended fresh holdout-v2 path",
-        "lc4v2-sol-contract.md",
+        "lc4v2-sol-acceptance.md",
+        "complete `0/576`",
     ]:
         assert required in live
 

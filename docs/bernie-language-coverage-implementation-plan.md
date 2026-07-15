@@ -321,7 +321,9 @@ new holdout version.
 
 ### LC4R - Deterministic Semantic Gap Repair
 
-LC4R is the next credibility tranche before live-model comparison. It uses only
+Status: LC4R1-LC4R10 complete on 2026-07-15.
+
+LC4R was the next credibility tranche before live-model comparison. It used only
 the development partition and ordinary authored regression fixtures. It must
 not read, re-evaluate, regenerate, or tune against protected holdout labels.
 
@@ -354,6 +356,29 @@ semantic failure.
 Exit: model comparison is based on critical semantic slices, safety, and
 variance, not average accuracy or persuasive output.
 
+### LC4V2 - Fresh Certification Holdout
+
+Status: procedure complete on 2026-07-15; product-readiness baseline failed.
+
+After LC4R10 reconciled the frozen development populations, Yuri authorized a
+genuinely fresh holdout instead of reusing v1. DeepSeek implemented only a
+content-blind candidate framework; Sol rejected its conceptual fail-open gaps
+and recovered under the lease. Gemini independently passed the recovered
+framework before actual content existed. Sol alone then authored, sealed, and
+consumed the 24-group, 288-variant, 72-multi-turn Gold corpus exactly once.
+
+The 576-sample aggregate baseline produced 0 complete passes, 576 temporal
+relation passes, 528 intended-action passes, 410 action-semantics passes, 288
+normalized-value passes, zero entity-semantics passes, 308 clarification
+passes, 532 safety passes, and zero repeat variance. The construction and
+one-shot evidence procedure passed; Bernie product readiness did not. Holdout
+v2 is sealed alongside v1 and cannot be used for remediation.
+
+Before LC5 live execution, use only aggregate findings and ordinary
+development evidence to repair entity semantics, normalization, clarification,
+and safety. A later certification requires a newly authorized fresh holdout or
+reviewed reuse policy.
+
 ## Agent Allocation
 
 - Sol at High reasoning owns the semantic architecture, coverage decisions,
@@ -371,26 +396,28 @@ variance, not average accuracy or persuasive output.
 
 ## Immediate Direction
 
-The next EMR4 product tranche is LC4R, not T3.5. LC4's one-shot protected
-baseline proves that the deterministic language bridge is not credible at
-scale. Repair the development path without inspecting or reusing holdout v1,
-then make an explicit new-version/reuse decision before another certification
-evaluation. Do not promote Silver/pending candidates merely because the
+The next EMR4 product tranche is aggregate-guided development repair, not live
+T3.5 execution. LC4V2 confirms that explicit temporal relations generalized,
+but entity semantics, normalized values, clarification, and safety still make
+the deterministic language bridge non-credible at scale. Repair only against
+ordinary development evidence without inspecting or reusing sealed holdouts
+v1 or v2. Do not promote Silver/pending candidates merely because the
 evaluator can execute them.
 
-No user decision is required for ordinary development-only LC4R work. Pause if
-work would reuse/re-evaluate protected holdout v1, broaden historical-trove
+No user decision is required for ordinary development-only repair work. Pause if
+work would reuse/re-evaluate protected holdout v1 or v2, broaden historical-trove
 access, send sensitive data to a provider, accept material licensing/cost
 terms, open live-provider execution, or change diary write authority.
 
 ## Restart Rehydration
 
 After restarting the app, a new orchestrator should read `AGENTS.md`, this plan,
-the T1/T2 closeouts, and the T3 shadow-evaluation status before changing code.
-It should verify `master` and `origin/master`, confirm the LC1-LC4 closeout,
-the consumed holdout-v1 seal, and the blocked T3 gates, then begin LC4R through
-the normal Ariadne workflow without reopening T3.5 or asking for routine
-development-only permission.
+the T1/T2 closeouts, the T3 shadow-evaluation status, and the active acceptance
+named in the Current Baton before changing code. It should verify `master`,
+`handoff/current`, and their origin refs; confirm the LC4R10 and LC4V2
+closeouts; preserve both sealed holdouts; and keep the blocked T3 gates intact.
+Ordinary development-only repair may continue without reopening T3.5 or asking
+for routine permission.
 
 Recommended new-task prompt:
 
@@ -400,13 +427,15 @@ AGENTS.md and read docs/bernie-language-coverage-implementation-plan.md,
 docs/bernie-t1-stateful-scenario-laboratory.md,
 docs/bernie-t2-deterministic-behaviour-matrix.md, and
 docs/bernie-t3-shadow-evaluation.md. Verify the worktree and origin/master,
-then begin LC4R Deterministic Semantic Gap Repair through the normal Ariadne
-workflow. Use only the development partition and ordinary authored regressions;
-do not read, rerun, regenerate, or tune against `lc4-holdout-v1`. Prioritize
-lossless normalization, explicit temporal/negation semantics, entity resolution,
-clarification state, and interpretation/replay tool selection. Preserve corpus
-provenance and keep candidate evidence separate from adjudicated gaps. Preserve
-T3.1-T3.4 and defer T3.5 provider adapters. Continue
+then begin an aggregate-guided development-only semantic repair and corpus-
+engineering tranche through the normal Ariadne workflow. Use only the
+development partition and newly authored ordinary regressions; do not open,
+list, search, rerun, regenerate, hash-check, infer from, or tune against sealed
+holdouts v1 or v2. Prioritize entity semantics, lossless normalization,
+clarification state, and safety while preserving the accepted temporal
+foundation. Preserve corpus provenance and keep candidate evidence separate
+from adjudicated gaps. Preserve T3.1-T3.4 and defer T3.5 provider adapters and
+live calls. Continue
 through ordinary implementation, tests, review, commit, and push without
 pausing unless a documented user decision boundary is reached.
 ```

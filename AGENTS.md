@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V2 fresh certification holdout, authorized by Yuri after accepted LC4R10 |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v2-sol-contract.md` |
-| Current result | Frozen LC4R10 population 93/93 complete; semantic counts `880/814/672/154/330/835`; safety 1,152/1,152; variance zero over 2,304 |
-| Next implementation | Build and independently veto the content-blind v2 framework before Sol-only authoring, seal, and one-shot aggregate baseline; holdout v1 stays sealed and T3.5 stays deferred |
+| Active product track | LC4V2 fresh certification holdout complete; procedure passed and product-readiness baseline failed |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v2-sol-acceptance.md` |
+| Current result | LC4V2 aggregate: complete `0/576`, temporal `576/576`, intended action `528/576`, normalized value `288/576`, entity semantics `0/576`, safety `532/576`, variance zero; holdouts v1 and v2 sealed |
+| Next implementation | Present the T3.5 boundary. Sol recommends an aggregate-guided development-only repair/corpus-engineering tranche before live-model comparison; do not access either sealed holdout |
 
 ### LC4R10 accepted state
 
@@ -78,20 +78,35 @@ loop. Protected holdout v1 remained sealed. T3.1-T3.4 remain intact and blocked
 by default; T3.5 and all live/write authority remain deferred. See the LC4R10
 acceptance for exact hashes, provenance, recovery, veto, and gate evidence.
 
-### Next sequence
+### LC4V2 accepted state and next sequence
 
-Yuri selected the recommended fresh holdout-v2 path on 2026-07-15. This closes
-the new-version/reuse decision only; it does not open T3.5 or live providers.
+Yuri selected the recommended fresh holdout-v2 path on 2026-07-15. DeepSeek V4
+Flash/high worked only on a content-blind framework candidate; Sol rejected its
+conceptual fail-open defects and replaced it under the recovery lease. Gemini
+3.5 Flash independently returned `DECISION: pass` on recovered framework head
+`82dfa640` before actual content existed. External workers were then closed.
+Sol alone authored and froze the 24-group/288-variant/72-multi-turn synthetic
+Gold corpus at source commit `f5af2fe5`.
 
-1. Freeze and implement a content-blind v2 manifest, seal, one-shot receipt,
-   and aggregate-report framework without reading holdout v1.
-2. Obtain a fresh Gemini framework veto before any v2 content exists.
-3. Close external workers; Sol alone authors, seals, and consumes the fresh
-   24-group/288-variant/72-multi-turn synthetic Gold corpus exactly once.
-4. Commit only aggregate baseline evidence, then seal v2 under the same
-   no-read/no-rerun/no-tuning policy as v1.
-5. Keep `check_in`, T3.5 provider adapters, and all live/write authority behind
-   their separate deferred gates.
+The one and only `lc4-holdout-v2-baseline-001` run produced 576 aggregate
+samples: complete `0/576`, temporal relation `576/576`, intended action
+`528/576`, action semantics `410/576`, normalized value `288/576`, entity
+semantics `0/576`, clarification `308/576`, safety `532/576`, and zero repeat
+variance. The evidence procedure passed; product readiness failed. Holdout v2
+became sealed immediately after its aggregate receipt validation.
+The post-seal serial preservation gate collected 222 safe nodes and completed
+with 220 passes, one expected xfail, and one expected skip without loading
+either protected holdout.
+
+1. Keep holdouts v1 and v2 sealed and use only the committed aggregate v2
+   evidence for planning.
+2. Recommend an ordinary development-only semantic repair and corpus-
+   engineering tranche focused on entity semantics, normalization,
+   clarification, and safety.
+3. Require a separately authorized fresh holdout or reviewed reuse policy for
+   any later certification.
+4. Keep `check_in`, T3.5 provider adapters/live calls, and all runtime/write
+   authority behind their deferred gates.
 
 ## 4. Authority Allocation
 
@@ -145,16 +160,19 @@ changes; it does not inherit the failed worker's acceptance framing.
 
 ## 5. Protected Evidence and Closed Gates
 
-### Protected holdout v1
+### Protected holdouts v1 and v2
 
-Protected holdout v1 remains sealed. Do not open, enumerate, list, search,
-import, run, regenerate, evaluate, hash-check, infer labels from, or tune
-against any protected fixture, support module, seal, receipt, or report. A
-historical metadata-enumeration incident does not authorize reuse.
+Protected holdouts v1 and v2 remain sealed. Do not open, enumerate, list,
+search, import, run, regenerate, evaluate, hash-check, infer labels from, or
+tune against either protected fixture, support module, authoring surface,
+manifest, seal, receipt, or per-case report. The committed v2 aggregate report
+and aggregate closeout are the only v2 evidence available for planning. A
+historical metadata-enumeration incident does not authorize v1 reuse.
 
-Before future certification, Yuri must approve either a new holdout version or
-an explicit reuse policy. Development work uses only ordinary development,
-Silver/pending, synthetic, or otherwise explicitly authorized evidence.
+Before future certification, Yuri must approve a new holdout version or an
+explicit reviewed reuse policy. Development work uses only ordinary
+development, Silver/pending, newly authored synthetic, or otherwise explicitly
+authorized evidence.
 
 ### T3 and providers
 

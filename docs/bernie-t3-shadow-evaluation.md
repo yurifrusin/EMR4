@@ -2,8 +2,9 @@
 
 Status: T3.1 contract/scorer, T3.2 source-safe corpus projection, T3.3
 default-disabled repeat runner, and T3.4 live-replay gate implemented; no
-live-provider replay is enabled. T3.5 remains deferred after LC4 because the
-scaled deterministic language bridge is not yet credible. See
+live-provider replay is enabled. T3.5 remains deferred after LC4V2 because the
+fresh aggregate baseline shows that the deterministic language bridge is not
+yet credible. See
 `docs/bernie-language-coverage-implementation-plan.md`.
 
 ## Purpose
@@ -92,16 +93,18 @@ diary replay. The approved direction is recorded in
 
 ## Next Slice
 
-Do not proceed directly to T3.5. LC1-LC4 are complete. LC4 scaled the corpus to
-120 semantic groups and 1,440 variants, then consumed one protected aggregate
-baseline over `lc4-holdout-v1`. Development produced 0/2,304 complete passes;
-the holdout produced 0/576, including eight safety failures and zero repeat
-variance. Those results make live-provider comparison premature because the
-deterministic language bridge would dominate the outcome.
+Do not proceed directly to T3.5. LC4R1-LC4R10 repaired and reconciled the
+development corpus without reopening protected holdout v1. Yuri then
+authorized a fresh synthetic holdout v2. Its only aggregate baseline produced
+0/576 complete passes, 576/576 temporal-relation passes, 528/576 intended
+action passes, 288/576 normalized-value passes, 0/576 entity-semantic passes,
+532/576 safety passes, and zero repeat variance. The v2 procedure passed, but
+product-readiness certification failed.
 
-Begin LC4R deterministic semantic-gap repair against the Silver/pending
-development partition only. Do not inspect, rerun, regenerate, or tune against
-holdout v1. Preserve T3.1-T3.4 and the blocked external-call gate. Before any
-later certification evaluation, define a new holdout version or an explicit
-reviewed reuse policy; opening live provider execution remains a documented
-user decision boundary.
+Holdouts v1 and v2 are now sealed. Do not inspect, rerun, regenerate,
+hash-check, infer from, or tune against either corpus. The recommended next
+slice is an aggregate-guided development-only semantic repair and
+corpus-engineering tranche focused on entity semantics, normalization,
+clarification, and safety. Preserve T3.1-T3.4 and the blocked external-call
+gate. Opening T3.5 or authorizing a later fresh certification holdout remains
+a documented user decision boundary.
