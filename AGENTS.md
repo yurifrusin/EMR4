@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V4D5E1 development exit accepted; paused at explicit certification-holdout user decision boundary |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v4d5e1-sol-acceptance.md` and `docs/bernie-lc4v4d5e1-development-exit-closeout.md` |
+| Active product track | LC4V5 genuinely fresh one-shot certification authorized; content-blind framework and frozen thresholds next |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v5-sol-contract.md` and `lc4v5-one-shot-acceptance-rule.md`, grounded by accepted D5E1 exit |
 | Current result | D5R1 closes all four adoption blockers at exact `37/20/3/0`, 240 complete observations, 28/28 gates, and report hash `0cb444d1...`. D5E1 then binds immutable D4/D5/D5R1 evidence without parser or fixture execution: 17/17 gates pass, report hash `435920eb...`, legacy remains the default, and Option A remains explicit. The ordinary development sequence is clean; certification is not claimed |
-| Next implementation | Pause for Yuri's explicit choice: authorize a genuinely fresh certification holdout v5 (Sol recommendation) or approve a separately reviewed reuse policy. Do not author, inspect, run, reuse, or evaluate any holdout before that decision. Preserve T3.1-T3.4 and defer T3.5/providers, historical material, product/runtime defaults, APIs/UI/database, deployment/release, and live/write authority |
+| Next implementation | Build only the v5 content-blind framework through one bounded DeepSeek Flash/high Claude Code `--bare` lane, recover under Sol if needed, and obtain a fresh Gemini veto before any content exists. Then close external sessions; Sol alone authors, freezes, seals, and performs the single aggregate-only evaluation. Preserve v1-v4 seals, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
 
 LC4V4 provenance: the frozen pre-content records remain
 `lc4v4q1-sol-contract.md`, `lc4v4q1-sol-recovery-amendment.md`,
