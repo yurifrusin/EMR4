@@ -2021,6 +2021,38 @@ def validate_fixture_surface(spec: ReceptionScenarioSpec) -> str | None:
     if spec.family == FAMILY_SAFETY and not spec.source_spans.get("authority_clause"):
         return f"Probe {spec.scenario_id}: authority clause is not evidenced"
 
+    duration_spans = spec.source_spans.get("duration", [])
+    if spec.duration_semantics == "omitted" and duration_spans:
+        return (
+            f"Probe {spec.scenario_id}: duration is labelled omitted despite "
+            "explicit duration source evidence"
+        )
+    if spec.duration_semantics == "ambiguous" and (
+        spec.duration_minutes is not None
+        or "duration_minutes" in spec.normalized_values
+    ):
+        return f"Probe {spec.scenario_id}: ambiguous duration was collapsed to one value"
+    if spec.duration_semantics == "negated" and (
+        spec.duration_minutes is not None
+        or "duration_minutes" in spec.normalized_values
+    ):
+        return f"Probe {spec.scenario_id}: excluded duration remains normalized"
+    if spec.duration_semantics == "corrected":
+        surfaced_minutes = [
+            int(span.text) for span in duration_spans if span.text.isdigit()
+        ]
+        if len(set(surfaced_minutes)) < 2:
+            return f"Probe {spec.scenario_id}: corrected duration lacks two values"
+        final_minutes = surfaced_minutes[-1]
+        if (
+            spec.duration_minutes != final_minutes
+            or spec.normalized_values.get("duration_minutes") != final_minutes
+        ):
+            return (
+                f"Probe {spec.scenario_id}: corrected duration does not normalize "
+                f"to final surfaced value {final_minutes}"
+            )
+
     recognized = _build_lossless_source_spans(spec.model_dump(mode="json"))
     for field_name, expected_spans in recognized.items():
         actual = [span.model_dump() for span in spec.source_spans.get(field_name, [])]

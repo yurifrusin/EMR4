@@ -248,11 +248,18 @@ _REVERSAL_PATTERNS: list[re.Pattern[str]] = [
     re.compile(r"\bleave it (where it was|as is)\b", re.I),
     re.compile(r"\bforget it\b", re.I),
     re.compile(r"\bscrap that\b", re.I),
-    # Explicit reversal cues
-    re.compile(r"\bdisregard\b", re.I),
-    re.compile(r"\btake back\b", re.I),
+    # Explicit request-local reversal cues.  Keep them scoped so phrases such
+    # as "do not disregard confirmation" cannot negate the booking action.
+    re.compile(r"\bdisregard\s+(?:that|the)\s+(?:booking\s+)?request\b", re.I),
     re.compile(r"\bcancel that request\b", re.I),
 ]
+
+_SESSION_RESTART_CUE = re.compile(
+    r"\b(?:let me\s+)?start over\b|"
+    r"\bforget that[.!?]\s*new booking\s*:|"
+    r"\bnew booking\s*:",
+    re.I,
+)
 
 
 def _is_reversal(text: str) -> bool:
@@ -494,8 +501,10 @@ def _extract_patient(text: str) -> tuple[str | None, str]:
     # Check for "X or Y" pattern for patient ambiguity
     # Exclude "Dr" titles from being captured as patient names.
     _PATIENT_OR = re.compile(
-        r"\b(?!Dr\s+)([A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)\s+or\s+"
-        r"(?!Dr\s+)([A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)\b"
+        r"\b(?:book|schedule|create|appointment\s+for)\s+"
+        r"(?!Dr\s+)([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)\s+or\s+"
+        r"(?!Dr\s+)([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)\b",
+        re.I,
     )
     if _PATIENT_OR.search(text):
         return None, "ambiguous"
@@ -981,9 +990,6 @@ def _reduce_multi_turn(
         values["time_period"] = period
 
     # Process remaining turns
-    _SESSION_RESTART_CUE = re.compile(
-        r"\b(?:start over|forget that|new booking|forget about|let me start over)\b", re.I
-    )
     for i, utterance in enumerate(utterances[1:], start=1):
         # Session restart: discard all prior context and re-extract
         if _SESSION_RESTART_CUE.search(utterance):
@@ -1103,9 +1109,6 @@ def _extract_entity_semantics(
     # --- Session restart detection ---
     # If any turn contains a session-restart cue, discard prior context and
     # re-extract from that turn as a fresh request.
-    _SESSION_RESTART_CUE = re.compile(
-        r"\b(?:start over|forget that|new booking|forget about|let me start over)\b", re.I
-    )
     restart_index: int | None = None
     for i, u in enumerate(utterances):
         if i > 0 and _SESSION_RESTART_CUE.search(u):

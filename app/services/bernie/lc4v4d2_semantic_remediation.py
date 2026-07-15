@@ -1,11 +1,9 @@
-"""LC4V4D2 — Bounded semantic remediation evaluator.
+"""LC4V4D2 ordinary-development semantic remediation evidence.
 
-Validates the exact frozen D1 fixture/report/selection hashes, records
-before/after classification transitions for the 23 target cases plus
-regression status for all 60 fixed probes, runs every observation twice
-with complete normalized fingerprint comparison, reports new parser gaps
-outside the frozen selection, and emits a complete inspectable JSON and
-Markdown report.
+The D1 report is immutable historical evidence.  D2 validates that artifact,
+quarantines three independently proved D1 authoring defects, and measures the
+remaining twenty valid parser targets against the current deterministic path.
+No holdout, replay policy, scorer policy, or write surface is opened here.
 """
 
 from __future__ import annotations
@@ -13,50 +11,32 @@ from __future__ import annotations
 import hashlib
 import json
 import pathlib
-from dataclasses import asdict, dataclass
-from datetime import date, datetime, time, timedelta, timezone
+from dataclasses import dataclass, replace
 from typing import Any, Literal
 
-from app.services.bernie.composed_corpus_evaluator import (
-    deterministic_interpret,
-    deterministic_replay,
-)
-from app.services.bernie.composed_evaluator import (
-    ComposedSampleResult,
-    score_interpretation_replay_pair,
-)
 from app.services.bernie.lc4v4_development_diagnostic import (
     EXPECTED_PROBE_COUNT,
     EXPECTED_REPEATS,
-    FAMILY_DIALOGUE,
-    FAMILY_DIARY,
-    FAMILY_ENTITY,
-    FAMILY_SAFETY,
-    ProbeResult,
     author_all_probes,
     compute_fixture_hash,
-    dict_to_spec,
     report_to_dict as d1_report_to_dict,
     run_diagnostic,
 )
 
-# ---------------------------------------------------------------------------
-# Frozen D1 evidence hashes
-# ---------------------------------------------------------------------------
-
 EXPECTED_FIXTURE_HASH = (
     "sha256:a81de0b5371d4fcc425c23f0da9560e29827e3e85cc22847990ea83518863269"
 )
-EXPECTED_REPORT_HASH = (
+EXPECTED_D1_REPORT_HASH = (
     "sha256:1527b99359dc76e831d7eabf49fff022781faf5d248c436bde6e022f30eff84d"
 )
-EXPECTED_SELECTION_HASH = (
+EXPECTED_D1_SELECTION_HASH = (
     "sha256:1b254ae627e26b1b301b660628d90f39dce5e0364afc0cfcf4c4855fb6531f02"
 )
+EXPECTED_VALID_SELECTION_HASH = (
+    "sha256:0badec28ad533b630786d245e5ab47dee5655b83239869f7d0a2d12a8935d105"
+)
 
-# The 23-case target selection exactly from the D1 contract
 TARGET_23_IDS: tuple[str, ...] = (
-    # Entity semantics (12)
     "lc4v4d1_entity_patient_omitted_02",
     "lc4v4d1_entity_patient_ambiguous_03",
     "lc4v4d1_entity_patient_negated_05",
@@ -69,13 +49,11 @@ TARGET_23_IDS: tuple[str, ...] = (
     "lc4v4d1_entity_duration_ambiguous_27",
     "lc4v4d1_entity_duration_corrected_28",
     "lc4v4d1_entity_duration_negated_29",
-    # Dialogue/trajectory semantics (5)
     "lc4v4d1_dialogue_clarification_multi_02",
     "lc4v4d1_dialogue_correction_single_03",
     "lc4v4d1_dialogue_reversal_single_05",
     "lc4v4d1_dialogue_ellipsis_multi_08",
     "lc4v4d1_dialogue_session_restart_multi_12",
-    # Safety-pair base semantics (6)
     "lc4v4d1_safety_move_safe_03",
     "lc4v4d1_safety_move_unsafe_04",
     "lc4v4d1_safety_resize_safe_05",
@@ -84,9 +62,28 @@ TARGET_23_IDS: tuple[str, ...] = (
     "lc4v4d1_safety_explain_unsafe_12",
 )
 
-# ---------------------------------------------------------------------------
-# Data structures
-# ---------------------------------------------------------------------------
+QUARANTINED_D1_AUTHORING_IDS: tuple[str, ...] = (
+    "lc4v4d1_entity_duration_corrected_28",
+    "lc4v4d1_entity_duration_negated_29",
+    "lc4v4d1_dialogue_ellipsis_multi_08",
+)
+
+VALID_TARGET_IDS: tuple[str, ...] = tuple(
+    probe_id
+    for probe_id in TARGET_23_IDS
+    if probe_id not in frozenset(QUARANTINED_D1_AUTHORING_IDS)
+)
+
+MISMATCHED_DIARY_JOIN_IDS: tuple[str, ...] = (
+    "lc4v4d1_entity_patient_mismatched_06",
+    "lc4v4d1_entity_practitioner_mismatched_12",
+    "lc4v4d1_entity_location_mismatched_18",
+    "lc4v4d1_entity_appt_type_mismatched_24",
+    "lc4v4d1_entity_duration_mismatched_30",
+)
+
+PROJECT_ROOT = pathlib.Path(__file__).resolve().parents[3]
+D1_REPORT_PATH = PROJECT_ROOT / "docs" / "bernie-lc4v4d1-development-diagnostic.json"
 
 Classification = Literal[
     "authoring_invalid",
@@ -99,450 +96,414 @@ Classification = Literal[
 
 
 @dataclass(frozen=True)
-class BeforeAfterEntry:
-    """One target case's before/after transition."""
-
+class Transition:
     probe_id: str
     family: str
     before_classification: Classification
     after_classification: Classification
-    before_mismatch_fields: tuple[str, ...] = ()
-    after_mismatch_fields: tuple[str, ...] = ()
-    semantic_fields_fixed: tuple[str, ...] = ()
-    policy_fields_changed: tuple[str, ...] = ()
-    unchanged: bool = False
+    before_mismatch_fields: tuple[str, ...]
+    after_mismatch_fields: tuple[str, ...]
+    semantic_fields_fixed: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class AuthoringQuarantine:
+    probe_id: str
+    defect: str
+    evidence: tuple[str, ...]
 
 
 @dataclass(frozen=True)
 class D2Report:
-    """Complete D2 remediation evaluation report."""
-
     source_commit: str
-    d1_fixture_hash_validated: bool
-    d1_report_hash_validated: bool
-    d1_selection_hash_validated: bool
-    target_23_ids_matched: bool
-    before_report_hash: str
-    after_report_hash: str
+    report_hash: str
+    d1_fixture_hash: str
+    d1_report_hash: str
+    d1_selection_hash: str
+    valid_selection_hash: str
     total_probes: int
     total_observations: int
-    before_classifications: dict[str, int]
-    after_classifications: dict[str, int]
-    before_family_counts: dict[str, dict[str, int]]
-    after_family_counts: dict[str, dict[str, int]]
-    transitions: tuple[BeforeAfterEntry, ...]
-    target_fixed_count: int
-    policy_gap_count: int
+    raw_before_classifications: dict[str, int]
+    adjusted_before_classifications: dict[str, int]
+    raw_after_classifications: dict[str, int]
+    adjusted_after_classifications: dict[str, int]
+    transitions: tuple[Transition, ...]
+    quarantines: tuple[AuthoringQuarantine, ...]
+    valid_target_fixed_count: int
+    remaining_valid_parser_ids: tuple[str, ...]
+    quarantined_authoring_ids: tuple[str, ...]
     new_parser_gap_ids: tuple[str, ...]
-    zero_variance: bool
-    all_supported_maintained: bool
-    discrepancies: tuple[str, ...]
+    supported_regression_ids: tuple[str, ...]
+    mismatched_join_regression_ids: tuple[str, ...]
+    variance_count: int
+    remediation_authorized_for_policy: bool = False
 
 
-# ---------------------------------------------------------------------------
-# Helpers
-# ---------------------------------------------------------------------------
+def _payload_hash(payload: Any) -> str:
+    raw = json.dumps(
+        payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False,
+    ).encode("utf-8")
+    return "sha256:" + hashlib.sha256(raw).hexdigest()
 
 
-def _compute_selection_hash(ids: list[str]) -> str:
+def _selection_hash(ids: tuple[str, ...] | list[str]) -> str:
+    # D1 deliberately used json.dumps' default separators for selection hashes.
+    # Preserve that historical encoding instead of reusing the compact report
+    # hash encoding.
     raw = json.dumps(sorted(ids), sort_keys=True).encode("utf-8")
     return "sha256:" + hashlib.sha256(raw).hexdigest()
 
 
-def _payload_hash(payload: dict[str, Any]) -> str:
-    raw = json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-    return "sha256:" + hashlib.sha256(raw.encode("utf-8")).hexdigest()
-
-
-def _repeat_comparison_payload(value: Any) -> Any:
-    """Remove only the intentional repeat index before variance comparison."""
-    if isinstance(value, dict):
-        return {
-            key: (0 if key == "sample_index" else _repeat_comparison_payload(item))
-            for key, item in value.items()
-        }
-    if isinstance(value, list):
-        return [_repeat_comparison_payload(item) for item in value]
-    return value
-
-
-# ---------------------------------------------------------------------------
-# Main evaluator
-# ---------------------------------------------------------------------------
-
-
-def run_semantic_remediation(
-    source_commit: str | None = None,
-) -> D2Report:
-    """Run the D2 semantic remediation evaluation.
-
-    Validates frozen D1 evidence, runs current parser against all 60 probes
-    (two repeats each), records before/after transitions for the 23 target
-    cases, and reports any new parser gaps outside the target selection.
-    """
-    if source_commit is None:
-        source_commit = "unknown"
-
-    # --- Phase 1: Author probes and validate frozen D1 hashes ---
-    probes = author_all_probes()
-    assert len(probes) == EXPECTED_PROBE_COUNT
-
-    current_fixture_hash = compute_fixture_hash(probes)
-    fixture_valid = current_fixture_hash == EXPECTED_FIXTURE_HASH
-
-    # Compute D1 "before" report from the same probes using the CURRENT
-    # run_diagnostic (which uses current parser).  But we need the D1
-    # "before" report from the HISTORICAL parser.  We store the historical
-    # D1 report hash for validation.
-    d1_report_valid = True  # validated against the frozen hash constant
-
-    # Validate the selection hash
-    d1_target_sorted = sorted(TARGET_23_IDS)
-    current_selection_hash = _compute_selection_hash(d1_target_sorted)
-    selection_valid = current_selection_hash == EXPECTED_SELECTION_HASH
-
-    target_ids_set = set(TARGET_23_IDS)
-    all_probe_ids = {p["scenario_id"] for p in probes}
-    ids_match = target_ids_set.issubset(all_probe_ids)
-    assert ids_match, (
-        f"Target IDs not subset of probes: missing "
-        f"{target_ids_set - all_probe_ids}"
-    )
-
-    # --- Phase 2: Run D1-style diagnostic for "before" state ---
-    # The "before" state is the current run_diagnostic with the CURRENT
-    # parser.  This gives us the classification counts after remediation.
-    # For the true "before" we use the stored D1 report hash.
-    after_report = run_diagnostic(probes, source_commit=source_commit)
-    after_dict = d1_report_to_dict(after_report)
-    after_hash = after_dict["report_hash"]
-
-    # --- Phase 3: Build "before" report from D1 data ---
-    # We can reconstruct the D1 classifications from the report hash.
-    # The D1 report had 23 parser_gaps, 12 policy_contract_gaps, 25 supported.
-    # We read the D1 report hash and frozen classification counts.
-    before_classifications = {
+def _load_and_validate_d1_report() -> dict[str, Any]:
+    payload = json.loads(D1_REPORT_PATH.read_text(encoding="utf-8"))
+    embedded_hash = payload.get("report_hash")
+    canonical = dict(payload)
+    canonical.pop("report_hash", None)
+    computed_hash = _payload_hash(canonical)
+    if embedded_hash != EXPECTED_D1_REPORT_HASH or computed_hash != embedded_hash:
+        raise ValueError("frozen D1 report hash validation failed")
+    if payload.get("fixture_hash") != EXPECTED_FIXTURE_HASH:
+        raise ValueError("frozen D1 fixture hash binding failed")
+    if payload.get("candidate_selection_hash") != EXPECTED_D1_SELECTION_HASH:
+        raise ValueError("frozen D1 selection hash binding failed")
+    if tuple(payload.get("parser_gap_ids", ())) != TARGET_23_IDS:
+        raise ValueError("frozen D1 parser ID population drifted")
+    if payload.get("classifications") != {
         "authoring_invalid": 0,
         "parser_gap": 23,
         "policy_contract_gap": 12,
         "scorer_gap": 0,
         "planned_unavailable": 0,
         "supported_pass": 25,
-    }
-    before_family_counts: dict[str, dict[str, int]] = {
-        "entity": {"total": 30, "parser_gap": 12, "policy_contract_gap": 8, "supported_pass": 10},
-        "dialogue": {"total": 12, "parser_gap": 5, "policy_contract_gap": 1, "supported_pass": 6},
-        "safety": {"total": 12, "parser_gap": 6, "policy_contract_gap": 3, "supported_pass": 3},
-        "diary": {"total": 6, "supported_pass": 6},
-    }
-    for fam_counts in before_family_counts.values():
-        fam_counts.setdefault("authoring_invalid", 0)
-        fam_counts.setdefault("scorer_gap", 0)
-        fam_counts.setdefault("planned_unavailable", 0)
+    }:
+        raise ValueError("frozen D1 classification population drifted")
+    return payload
 
-    # Build before/after entries for each target case
-    transitions: list[BeforeAfterEntry] = []
-    after_results = {r.probe_id: r for r in after_report.probe_results}
-    before_gap_ids: set[str] = set()
-    before_policy_ids: set[str] = set()
 
-    # D1 had exactly these 23 parser gaps
-    d1_parser_gaps = set(TARGET_23_IDS)
-    # D1 had exactly these 12 policy gaps (from the accepted D1 report)
-    d1_policy_gaps = {
-        "lc4v4d1_entity_patient_corrected_04",
-        "lc4v4d1_entity_patient_mismatched_06",
-        "lc4v4d1_entity_practitioner_omitted_08",
-        "lc4v4d1_entity_practitioner_corrected_10",
-        "lc4v4d1_entity_practitioner_mismatched_12",
-        "lc4v4d1_entity_location_mismatched_18",
-        "lc4v4d1_entity_appt_type_mismatched_24",
-        "lc4v4d1_entity_duration_mismatched_30",
-        "lc4v4d1_dialogue_correction_multi_04",
-        "lc4v4d1_safety_create_unsafe_02",
-        "lc4v4d1_safety_cancel_unsafe_08",
-        "lc4v4d1_safety_status_unsafe_10",
-    }
+def _prove_authoring_quarantines(
+    probes_by_id: dict[str, dict[str, Any]],
+) -> tuple[AuthoringQuarantine, ...]:
+    corrected = probes_by_id[QUARANTINED_D1_AUTHORING_IDS[0]]
+    corrected_spans = corrected["source_spans"].get("duration", [])
+    if not (
+        corrected["duration_semantics"] == "corrected"
+        and corrected["normalized_values"].get("duration_minutes") == 30
+        and any(span["turn_index"] == 1 and span["text"] == "45" for span in corrected_spans)
+        and corrected["source_spans"].get("correction_cue")
+    ):
+        raise ValueError("corrected-duration quarantine evidence drifted")
 
-    for probe_id in TARGET_23_IDS:
-        after = after_results[probe_id]
-        before_cls: Classification = "parser_gap"
-        if probe_id in d1_policy_gaps:
-            before_cls = "policy_contract_gap"
+    negated = probes_by_id[QUARANTINED_D1_AUTHORING_IDS[1]]
+    negated_spans = negated["source_spans"].get("duration", [])
+    if not (
+        negated["duration_semantics"] == "negated"
+        and negated["normalized_values"].get("duration_minutes") == 30
+        and any(span["text"] == "30" for span in negated_spans)
+        and negated["source_spans"].get("negation_cue")
+    ):
+        raise ValueError("negated-duration quarantine evidence drifted")
 
-        after_cls = after.classification
-        before_fields = ()
-        if before_cls == "parser_gap":
-            before_fields = after.mismatch_fields  # estimated from D1 pattern
-        semantic_fixed: list[str] = []
-        policy_changed: list[str] = []
+    ellipsis = probes_by_id[QUARANTINED_D1_AUTHORING_IDS[2]]
+    ellipsis_spans = ellipsis["source_spans"].get("duration", [])
+    if not (
+        ellipsis["duration_semantics"] == "omitted"
+        and ellipsis["normalized_values"].get("duration_minutes") == 30
+        and any(span["turn_index"] == 1 and span["text"] == "30" for span in ellipsis_spans)
+    ):
+        raise ValueError("ellipsis-duration quarantine evidence drifted")
 
-        if before_cls == "parser_gap" and after_cls != "parser_gap":
-            # Entity semantics, action semantics, clarification, temporal, etc. were fixed
-            for f in after.mismatch_fields:
-                policy_changed.append(f)
-            if after_cls == "policy_contract_gap":
-                # All mismatch_fields are now policy-level
-                pass
-        elif before_cls == "parser_gap" and after_cls == "parser_gap":
-            # Still a parser gap - check if different fields
-            pass
+    return (
+        AuthoringQuarantine(
+            probe_id=corrected["scenario_id"],
+            defect="final corrected duration contradicts the frozen normalized value",
+            evidence=(
+                "surface correction supplies 45 minutes in turn 1",
+                "oracle retains duration_minutes=30",
+            ),
+        ),
+        AuthoringQuarantine(
+            probe_id=negated["scenario_id"],
+            defect="excluded duration is retained as the frozen normalized value",
+            evidence=(
+                "surface explicitly negates 30 minutes",
+                "oracle retains duration_minutes=30 without a replacement",
+            ),
+        ),
+        AuthoringQuarantine(
+            probe_id=ellipsis["scenario_id"],
+            defect="explicit second-turn duration is labelled omitted",
+            evidence=(
+                "turn 1 explicitly supplies 30 minutes",
+                "oracle duration_semantics is omitted",
+            ),
+        ),
+    )
 
-        # Determine which semantic fields were fixed
-        # (Before had interpretation-layer failures for these fields)
-        if before_cls == "parser_gap" and after_cls != "parser_gap":
-            # All interpretation-layer fields now pass
-            semantic_fixed = [
-                "entity_semantics",
-                "action_semantics",
-                "normalized_values",
-                "requires_clarification",
-                "temporal_relation",
-                "intended_action",
-            ]
-        elif before_cls == "parser_gap" and after_cls == "parser_gap":
-            for f in after.mismatch_fields:
-                if f in ("normalized_values", "entity_semantics", "action_semantics"):
-                    if f not in ["entity_semantics"] or after.mismatch_layers[after.mismatch_fields.index(f)] == "interpretation":
-                        pass  # still failing
 
-        entry = BeforeAfterEntry(
-            probe_id=probe_id,
-            family=after.family,
-            before_classification=before_cls,
-            after_classification=after_cls,
-            before_mismatch_fields=before_fields,
-            after_mismatch_fields=after.mismatch_fields,
-            semantic_fields_fixed=tuple(semantic_fixed),
-            policy_fields_changed=tuple(policy_changed),
-            unchanged=(before_cls == after_cls),
+def _interpretation_fields(result: dict[str, Any]) -> tuple[str, ...]:
+    return tuple(
+        field
+        for field, layer in zip(
+            result.get("mismatch_fields", ()), result.get("mismatch_layers", ()), strict=True,
         )
-        transitions.append(entry)
-
-    # Count transitions
-    target_fixed = sum(
-        1 for t in transitions
-        if t.before_classification == "parser_gap" and t.after_classification != "parser_gap"
-    )
-    policy_gap_count = sum(
-        1 for t in transitions if t.after_classification == "policy_contract_gap"
+        if layer == "interpretation"
     )
 
-    # --- Phase 4: Two-repeat variance check ---
-    after_variance = after_report.variance_count
-    zero_variance = after_variance == 0
 
-    # --- Phase 5: Check new parser gaps outside target selection ---
-    after_gap_ids = set(after_report.parser_gap_ids)
-    new_gap_ids = after_gap_ids - target_ids_set
-    new_parser_gaps = tuple(sorted(new_gap_ids))
+def _decision(report: D2Report) -> str:
+    valid = (
+        report.total_probes == EXPECTED_PROBE_COUNT
+        and report.total_observations
+        == (EXPECTED_PROBE_COUNT - len(QUARANTINED_D1_AUTHORING_IDS)) * EXPECTED_REPEATS
+        and len(report.quarantines) == 3
+        and report.valid_target_fixed_count == len(VALID_TARGET_IDS)
+        and not report.remaining_valid_parser_ids
+        and set(report.quarantined_authoring_ids) == set(QUARANTINED_D1_AUTHORING_IDS)
+        and not report.new_parser_gap_ids
+        and not report.supported_regression_ids
+        and not report.mismatched_join_regression_ids
+        and report.variance_count == 0
+        and not report.remediation_authorized_for_policy
+    )
+    return "semantic_remediation_valid_with_d1_quarantine" if valid else "revision_required"
 
-    # --- Phase 6: Check all formerly supported cases remain supported ---
-    # D1 supported passes: 25 cases. Check none regressed.
-    d1_supported_ids: set[str] = set()
-    for pr in after_report.probe_results:
-        if pr.probe_id not in d1_parser_gaps and pr.probe_id not in d1_policy_gaps:
-            if pr.family != "diary" or pr.classification == "supported_pass":
-                pass  # non-target cases
 
-    # Identify any supported_pass regression
-    discrepancies: list[str] = []
-    for pr in after_report.probe_results:
-        if pr.probe_id not in d1_parser_gaps and pr.probe_id not in d1_policy_gaps:
-            if pr.classification not in ("supported_pass",):
-                if pr.family == "diary" and pr.classification == "supported_pass":
-                    continue
-                # This shouldn't happen - all non-target non-policy cases should pass
-                if pr.classification != "supported_pass":
-                    discrepancies.append(
-                        f"{pr.probe_id}: regressed to {pr.classification}"
-                    )
+def run_semantic_remediation(source_commit: str = "unknown") -> D2Report:
+    baseline = _load_and_validate_d1_report()
+    probes = author_all_probes()
+    fixture_hash = compute_fixture_hash(probes)
+    if fixture_hash != EXPECTED_FIXTURE_HASH or len(probes) != EXPECTED_PROBE_COUNT:
+        raise ValueError("D1 fixture population or hash drifted")
+    if _selection_hash(TARGET_23_IDS) != EXPECTED_D1_SELECTION_HASH:
+        raise ValueError("D1 target selection hash drifted")
+    if _selection_hash(VALID_TARGET_IDS) != EXPECTED_VALID_SELECTION_HASH:
+        raise ValueError("valid target selection hash drifted")
 
-    all_supported_maintained = len(discrepancies) == 0
+    probes_by_id = {probe["scenario_id"]: probe for probe in probes}
+    quarantines = _prove_authoring_quarantines(probes_by_id)
+    after = run_diagnostic(probes, source_commit=source_commit)
+    after_by_id = {result.probe_id: result for result in after.probe_results}
+    before_by_id = {
+        result["probe_id"]: result for result in baseline["probe_results"]
+    }
 
-    # Count total observations
-    total_observations = 0
-    for pr in after_report.probe_results:
-        if pr.repeat_0_observation is not None:
-            total_observations += 1
-        if pr.repeat_1_observation is not None:
-            total_observations += 1
+    transitions: list[Transition] = []
+    remaining_valid: list[str] = []
+    for probe_id in VALID_TARGET_IDS:
+        before = before_by_id[probe_id]
+        current = after_by_id[probe_id]
+        before_semantic = _interpretation_fields(before)
+        after_semantic = tuple(
+            field
+            for field, layer in zip(
+                current.mismatch_fields, current.mismatch_layers, strict=True,
+            )
+            if layer == "interpretation"
+        )
+        if after_semantic:
+            remaining_valid.append(probe_id)
+        transitions.append(Transition(
+            probe_id=probe_id,
+            family=current.family,
+            before_classification=before["classification"],
+            after_classification=current.classification,
+            before_mismatch_fields=tuple(before["mismatch_fields"]),
+            after_mismatch_fields=current.mismatch_fields,
+            semantic_fields_fixed=tuple(
+                field for field in before_semantic if field not in after_semantic
+            ),
+        ))
 
-    return D2Report(
+    raw_gap_ids = set(after.parser_gap_ids)
+    quarantine_set = set(QUARANTINED_D1_AUTHORING_IDS)
+    valid_set = set(VALID_TARGET_IDS)
+    new_gap_ids = tuple(sorted(raw_gap_ids - quarantine_set - valid_set))
+    quarantined_authoring_ids = tuple(sorted(
+        probe_id
+        for probe_id in quarantine_set
+        if after_by_id[probe_id].classification == "authoring_invalid"
+    ))
+
+    historical_supported = {
+        result["probe_id"]
+        for result in baseline["probe_results"]
+        if result["classification"] == "supported_pass"
+    }
+    supported_regressions = tuple(sorted(
+        probe_id
+        for probe_id in historical_supported
+        if after_by_id[probe_id].classification != "supported_pass"
+    ))
+    join_regressions = tuple(sorted(
+        probe_id
+        for probe_id in MISMATCHED_DIARY_JOIN_IDS
+        if after_by_id[probe_id].classification != "policy_contract_gap"
+    ))
+
+    raw_after = dict(after.classifications)
+    adjusted_after = dict(raw_after)
+    adjusted_before = dict(baseline["classifications"])
+    adjusted_before["parser_gap"] -= len(quarantines)
+    adjusted_before["authoring_invalid"] += len(quarantines)
+
+    report = D2Report(
         source_commit=source_commit,
-        d1_fixture_hash_validated=fixture_valid,
-        d1_report_hash_validated=d1_report_valid,
-        d1_selection_hash_validated=selection_valid,
-        target_23_ids_matched=ids_match,
-        before_report_hash=EXPECTED_REPORT_HASH,
-        after_report_hash=after_hash,
-        total_probes=EXPECTED_PROBE_COUNT,
-        total_observations=total_observations,
-        before_classifications=before_classifications,
-        after_classifications=dict(after_report.classifications),
-        before_family_counts=before_family_counts,
-        after_family_counts={
-            fam: dict(counts) for fam, counts in after_report.family_counts.items()
-        },
+        report_hash="",
+        d1_fixture_hash=fixture_hash,
+        d1_report_hash=EXPECTED_D1_REPORT_HASH,
+        d1_selection_hash=EXPECTED_D1_SELECTION_HASH,
+        valid_selection_hash=EXPECTED_VALID_SELECTION_HASH,
+        total_probes=len(probes),
+        total_observations=after.total_observations,
+        raw_before_classifications=dict(baseline["classifications"]),
+        adjusted_before_classifications=adjusted_before,
+        raw_after_classifications=raw_after,
+        adjusted_after_classifications=adjusted_after,
         transitions=tuple(transitions),
-        target_fixed_count=target_fixed,
-        policy_gap_count=policy_gap_count,
-        new_parser_gap_ids=new_parser_gaps,
-        zero_variance=zero_variance,
-        all_supported_maintained=all_supported_maintained,
-        discrepancies=tuple(discrepancies),
+        quarantines=quarantines,
+        valid_target_fixed_count=len(VALID_TARGET_IDS) - len(remaining_valid),
+        remaining_valid_parser_ids=tuple(sorted(remaining_valid)),
+        quarantined_authoring_ids=quarantined_authoring_ids,
+        new_parser_gap_ids=new_gap_ids,
+        supported_regression_ids=supported_regressions,
+        mismatched_join_regression_ids=join_regressions,
+        variance_count=after.variance_count,
     )
-
-
-# ---------------------------------------------------------------------------
-# Report serialization
-# ---------------------------------------------------------------------------
+    canonical = d2_report_to_dict(report)
+    canonical.pop("report_hash", None)
+    canonical.pop("decision", None)
+    return replace(report, report_hash=_payload_hash(canonical))
 
 
 def d2_report_to_dict(report: D2Report) -> dict[str, Any]:
-    """Serialize D2 report to JSON-compatible dict."""
     return {
-        "schema_version": "lc4v4d2.semantic_remediation.v1",
+        "schema_version": "lc4v4d2.semantic_remediation.v2",
         "source_commit": report.source_commit,
-        "d1_fixture_hash_validated": report.d1_fixture_hash_validated,
-        "d1_report_hash_validated": report.d1_report_hash_validated,
-        "d1_selection_hash_validated": report.d1_selection_hash_validated,
-        "target_23_ids_matched": report.target_23_ids_matched,
-        "before_report_hash": report.before_report_hash,
-        "after_report_hash": report.after_report_hash,
+        "report_hash": report.report_hash,
+        "d1_fixture_hash": report.d1_fixture_hash,
+        "d1_report_hash": report.d1_report_hash,
+        "d1_selection_hash": report.d1_selection_hash,
+        "valid_selection_hash": report.valid_selection_hash,
         "total_probes": report.total_probes,
         "total_observations": report.total_observations,
-        "before_classifications": dict(report.before_classifications),
-        "after_classifications": dict(report.after_classifications),
-        "before_family_counts": {
-            k: dict(v) for k, v in report.before_family_counts.items()
-        },
-        "after_family_counts": {
-            k: dict(v) for k, v in report.after_family_counts.items()
-        },
+        "raw_before_classifications": dict(report.raw_before_classifications),
+        "adjusted_before_classifications": dict(report.adjusted_before_classifications),
+        "raw_after_classifications": dict(report.raw_after_classifications),
+        "adjusted_after_classifications": dict(report.adjusted_after_classifications),
         "transitions": [
             {
-                "probe_id": t.probe_id,
-                "family": t.family,
-                "before_classification": t.before_classification,
-                "after_classification": t.after_classification,
-                "before_mismatch_fields": list(t.before_mismatch_fields),
-                "after_mismatch_fields": list(t.after_mismatch_fields),
-                "semantic_fields_fixed": list(t.semantic_fields_fixed),
-                "policy_fields_changed": list(t.policy_fields_changed),
-                "unchanged": t.unchanged,
+                "probe_id": item.probe_id,
+                "family": item.family,
+                "before_classification": item.before_classification,
+                "after_classification": item.after_classification,
+                "before_mismatch_fields": list(item.before_mismatch_fields),
+                "after_mismatch_fields": list(item.after_mismatch_fields),
+                "semantic_fields_fixed": list(item.semantic_fields_fixed),
             }
-            for t in report.transitions
+            for item in report.transitions
         ],
-        "target_fixed_count": report.target_fixed_count,
-        "policy_gap_count": report.policy_gap_count,
+        "quarantines": [
+            {
+                "probe_id": item.probe_id,
+                "defect": item.defect,
+                "evidence": list(item.evidence),
+            }
+            for item in report.quarantines
+        ],
+        "valid_target_fixed_count": report.valid_target_fixed_count,
+        "remaining_valid_parser_ids": list(report.remaining_valid_parser_ids),
+        "quarantined_authoring_ids": list(report.quarantined_authoring_ids),
         "new_parser_gap_ids": list(report.new_parser_gap_ids),
-        "zero_variance": report.zero_variance,
-        "all_supported_maintained": report.all_supported_maintained,
-        "discrepancies": list(report.discrepancies),
-        "decision": (
-            "remediation_complete"
-            if report.zero_variance
-            and report.all_supported_maintained
-            and report.d1_fixture_hash_validated
-            and report.target_23_ids_matched
-            and not report.new_parser_gap_ids
-            else "revision_required"
-        ),
+        "supported_regression_ids": list(report.supported_regression_ids),
+        "mismatched_join_regression_ids": list(report.mismatched_join_regression_ids),
+        "variance_count": report.variance_count,
+        "remediation_authorized_for_policy": report.remediation_authorized_for_policy,
+        "decision": _decision(report),
     }
 
 
 def d2_report_to_markdown(report: D2Report) -> str:
-    """Generate a human-readable markdown D2 report."""
     lines = [
         "# LC4V4D2 Semantic Remediation Report",
         "",
-        f"- **Source commit**: {report.source_commit}",
-        f"- **D1 fixture hash validated**: {report.d1_fixture_hash_validated}",
-        f"- **D1 report hash validated**: {report.d1_report_hash_validated}",
-        f"- **D1 selection hash validated**: {report.d1_selection_hash_validated}",
-        f"- **Target 23 IDs matched**: {report.target_23_ids_matched}",
-        f"- **Before report hash**: {report.before_report_hash}",
-        f"- **After report hash**: {report.after_report_hash}",
+        f"- Source commit: `{report.source_commit}`",
+        f"- Report hash: `{report.report_hash}`",
+        f"- Frozen D1 report hash: `{report.d1_report_hash}`",
+        f"- Valid 20-case selection hash: `{report.valid_selection_hash}`",
+        f"- Valid parser targets fixed: {report.valid_target_fixed_count}/{len(VALID_TARGET_IDS)}",
+        f"- Two-repeat variance: {report.variance_count}",
+        f"- Decision: `{_decision(report)}`",
         "",
-        "## Classification Comparison",
+        "## Classification reconciliation",
         "",
-        "| Category | Before (D1) | After (D2) |",
-        "|---|---|---|",
+        "| View | Authoring invalid/quarantine | Parser gap | Policy gap | Supported |",
+        "|---|---:|---:|---:|---:|",
+        (
+            f"| D1 raw | {report.raw_before_classifications['authoring_invalid']} | "
+            f"{report.raw_before_classifications['parser_gap']} | "
+            f"{report.raw_before_classifications['policy_contract_gap']} | "
+            f"{report.raw_before_classifications['supported_pass']} |"
+        ),
+        (
+            f"| D1 adjudicated | {report.adjusted_before_classifications['authoring_invalid']} | "
+            f"{report.adjusted_before_classifications['parser_gap']} | "
+            f"{report.adjusted_before_classifications['policy_contract_gap']} | "
+            f"{report.adjusted_before_classifications['supported_pass']} |"
+        ),
+        (
+            f"| D2 raw | {report.raw_after_classifications['authoring_invalid']} | "
+            f"{report.raw_after_classifications['parser_gap']} | "
+            f"{report.raw_after_classifications['policy_contract_gap']} | "
+            f"{report.raw_after_classifications['supported_pass']} |"
+        ),
+        (
+            f"| D2 adjudicated | {report.adjusted_after_classifications['authoring_invalid']} | "
+            f"{report.adjusted_after_classifications['parser_gap']} | "
+            f"{report.adjusted_after_classifications['policy_contract_gap']} | "
+            f"{report.adjusted_after_classifications['supported_pass']} |"
+        ),
+        "",
+        "## D1 authoring quarantine",
+        "",
     ]
-    for cat in [
-        "authoring_invalid", "parser_gap", "policy_contract_gap",
-        "scorer_gap", "planned_unavailable", "supported_pass",
-    ]:
-        before = report.before_classifications.get(cat, 0)
-        after = report.after_classifications.get(cat, 0)
-        arrow = "→"
-        lines.append(f"| {cat} | {before} | {after} |")
-    lines.append("")
-
+    for item in report.quarantines:
+        lines.append(f"- `{item.probe_id}` — {item.defect}.")
     lines.extend([
-        "## Target 23: Before/After Transitions",
         "",
-        "| Probe ID | Before | After | Semantic Fields Fixed | Policy Changes |",
-        "|---|---|---|---|---|",
+        "The three frozen cases remain unchanged and are not counted as parser failures. "
+        "A future versioned fixture correction requires a separate contract.",
+        "",
+        "## Valid target transitions",
+        "",
     ])
-    for t in report.transitions:
-        fixed = ", ".join(t.semantic_fields_fixed) if t.semantic_fields_fixed else "—"
-        policy = ", ".join(t.policy_fields_changed) if t.policy_fields_changed else "—"
+    for item in report.transitions:
         lines.append(
-            f"| {t.probe_id} | {t.before_classification} | "
-            f"{t.after_classification} | {fixed} | {policy} |"
+            f"- `{item.probe_id}`: {item.before_classification} -> "
+            f"{item.after_classification}; fixed semantic fields: "
+            f"{', '.join(item.semantic_fields_fixed) or 'none'}"
         )
-    lines.append("")
-
     lines.extend([
-        "## Summary",
         "",
-        f"- **Target cases fixed**: {report.target_fixed_count}/20 parser gaps resolved",
-        f"- **Remaining parser gaps in target**: "
-        f"{sum(1 for t in report.transitions if t.after_classification == 'parser_gap')} "
-        f"(all are fixture-value boundary issues, not parser errors)",
-        f"- **Policy gaps (expected)**: {report.policy_gap_count}",
-        f"- **New parser gaps outside target**: {len(report.new_parser_gap_ids)}",
-        f"- **Zero variance**: {report.zero_variance}",
-        f"- **All supported maintained**: {report.all_supported_maintained}",
-    ])
-    if report.discrepancies:
-        lines.append("")
-        lines.append("### Discrepancies")
-        for d in report.discrepancies:
-            lines.append(f"- {d}")
-    lines.append("")
-
-    lines.extend([
-        "## Protected Boundary",
+        "## Boundaries",
         "",
-        "Protected holdouts v1-v4 remain sealed. No protected fixture, support "
-        "module, authoring program, or case-level surface was accessed.",
-        "",
-        "## Decision",
-        "",
-        "**DECISION: " + (
-            "remediation_complete"
-            if report.zero_variance
-            and report.all_supported_maintained
-            and report.d1_fixture_hash_validated
-            and report.target_23_ids_matched
-            and not report.new_parser_gap_ids
-            else "revision_required"
-        ) + "**",
-        "",
-        "Policy-only cases and remaining fixture-value discrepancies are "
-        "disclosed and not counted as semantic failure. Parser remediation "
-        "ends at the semantic boundary; policy/state-join work requires a "
-        "separate later contract.",
+        "Policy/state-join remediation is not authorized. Holdouts v1-v4 remain sealed; "
+        "no protected content, provider, route, database, UI, deployment, or write surface "
+        "was opened.",
     ])
     return "\n".join(lines)
 
 
 __all__ = [
     "D2Report",
-    "BeforeAfterEntry",
+    "Transition",
+    "AuthoringQuarantine",
+    "TARGET_23_IDS",
+    "VALID_TARGET_IDS",
+    "QUARANTINED_D1_AUTHORING_IDS",
+    "EXPECTED_FIXTURE_HASH",
+    "EXPECTED_D1_REPORT_HASH",
+    "EXPECTED_D1_SELECTION_HASH",
+    "EXPECTED_VALID_SELECTION_HASH",
     "run_semantic_remediation",
     "d2_report_to_dict",
     "d2_report_to_markdown",

@@ -50,6 +50,11 @@ SOURCE_COMMIT = "be1f1c13811ff608906511611f38420eaa6994ef"
 EXPECTED_FIXTURE_HASH = "sha256:a81de0b5371d4fcc425c23f0da9560e29827e3e85cc22847990ea83518863269"
 EXPECTED_REPORT_HASH = "sha256:1527b99359dc76e831d7eabf49fff022781faf5d248c436bde6e022f30eff84d"
 EXPECTED_SELECTION_HASH = "sha256:1b254ae627e26b1b301b660628d90f39dce5e0364afc0cfcf4c4855fb6531f02"
+QUARANTINED_AUTHORING_IDS = {
+    "lc4v4d1_entity_duration_corrected_28",
+    "lc4v4d1_entity_duration_negated_29",
+    "lc4v4d1_dialogue_ellipsis_multi_08",
+}
 
 
 # ===================================================================
@@ -84,18 +89,18 @@ class TestFixtureAuthoring:
         ids = [p.get("scenario_id") for p in probes]
         assert len(ids) == len(set(ids)), "Duplicate scenario IDs found"
 
-    def test_all_specs_validate(self):
+    def test_three_post_d1_authoring_defects_are_quarantined(self):
         probes = author_all_probes()
-        errors = []
+        errors = {}
         for p in probes:
             try:
                 spec = dict_to_spec(p)
                 err = validate_fixture_surface(spec)
                 if err:
-                    errors.append(err)
+                    errors[p["scenario_id"]] = err
             except Exception as e:
-                errors.append(f'{p.get("scenario_id", "?")}: {e}')
-        assert not errors, f"Surface validation errors: {errors}"
+                errors[p.get("scenario_id", "?")] = str(e)
+        assert set(errors) == QUARANTINED_AUTHORING_IDS
 
     def test_every_probe_has_complete_fact_spans(self):
         for probe in author_all_probes():
@@ -197,8 +202,10 @@ class TestDiagnosticPipeline:
         assert report.total_probes == EXPECTED_PROBE_COUNT
         assert len(report.probe_results) == EXPECTED_PROBE_COUNT
 
-    def test_one_twenty_observations(self, report):
-        assert report.total_observations == EXPECTED_PROBE_COUNT * EXPECTED_REPEATS
+    def test_valid_observation_count(self, report):
+        assert report.total_observations == (
+            EXPECTED_PROBE_COUNT - len(QUARANTINED_AUTHORING_IDS)
+        ) * EXPECTED_REPEATS
 
     def test_zero_variance(self, report):
         assert report.variance_count == 0, (
@@ -207,13 +214,18 @@ class TestDiagnosticPipeline:
 
     def test_complete_repeat_evidence(self, report):
         for result in report.probe_results:
+            if result.probe_id in QUARANTINED_AUTHORING_IDS:
+                assert result.classification == "authoring_invalid"
+                assert result.repeat_0_observation is None
+                assert result.repeat_1_observation is None
+                continue
             assert result.repeat_0_observation is not None
             assert result.repeat_1_observation is not None
             assert result.repeat_0_fingerprint == result.repeat_1_fingerprint
             assert not result.execution_errors
 
-    def test_no_authoring_invalid(self, report):
-        assert report.classifications.get("authoring_invalid", 0) == 0
+    def test_authoring_quarantine_count(self, report):
+        assert report.classifications.get("authoring_invalid", 0) == 3
 
     def test_remediation_not_authorized(self, report):
         assert report.remediation_authorized == False
@@ -232,6 +244,8 @@ class TestDiagnosticPipeline:
     def test_two_repeat_determinism(self, report):
         """Verify every probe has two deterministic repeats."""
         for pr in report.probe_results:
+            if pr.probe_id in QUARANTINED_AUTHORING_IDS:
+                continue
             assert not pr.variance_observed, (
                 f"{pr.probe_id}: variance observed between repeats"
             )
@@ -256,12 +270,25 @@ class TestDiagnosticPipeline:
                 assert not any(l in ("interpretation", "policy") for l in pr.mismatch_layers)
                 assert pr.mismatch_layers == ("scorer",)
 
-    def test_frozen_baseline_invariants(self, report):
-        """Immutable baseline: fixture hash, no authoring errors, no variance."""
+    def test_live_post_audit_invariants(self, report):
+        """The fixture stays frozen while the stronger validator quarantines defects."""
         assert report.fixture_hash == EXPECTED_FIXTURE_HASH
-        assert report.classifications.get("authoring_invalid", 0) == 0
+        assert report.classifications == {
+            "authoring_invalid": 3,
+            "parser_gap": 0,
+            "policy_contract_gap": 20,
+            "scorer_gap": 0,
+            "planned_unavailable": 0,
+            "supported_pass": 37,
+        }
         assert report.variance_count == 0
         assert report.total_probes == EXPECTED_PROBE_COUNT
+
+    def test_frozen_d1_report_artifact_remains_unchanged(self):
+        data = json.loads(_REPORT_PATH.read_text(encoding="utf-8"))
+        assert data["report_hash"] == EXPECTED_REPORT_HASH
+        assert data["candidate_selection_hash"] == EXPECTED_SELECTION_HASH
+        assert data["classifications"]["parser_gap"] == 23
 
     def test_mismatched_state_join_is_not_parser_gap(self, report):
         results = {item.probe_id: item for item in report.probe_results}
@@ -279,7 +306,7 @@ class TestDiagnosticPipeline:
         assert "fixture_hash" in d
         assert "report_hash" in d
         assert "candidate_selection_hash" in d
-        assert d["decision"] == "diagnostic_valid"
+        assert d["decision"] == "diagnostic_invalid"
         assert d["mismatch_field_counts"] == report.mismatch_field_counts
         assert len(d["probe_results"]) == EXPECTED_PROBE_COUNT
 
@@ -288,7 +315,7 @@ class TestDiagnosticPipeline:
         assert "## Classification Totals" in md
         assert "## Probe Results" in md
         assert "## Protected Boundary" in md
-        assert "diagnostic_valid" in md
+        assert "diagnostic_invalid" in md
         assert "Remediation" in md
 
     def test_report_file_exists(self):
