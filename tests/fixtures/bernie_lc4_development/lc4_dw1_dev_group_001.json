@@ -1,18 +1,18 @@
 {
   "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_001",
-  "group_hash": "sha256:0874f6887020df0ae9abe0ca75a9ee60bc9eb0d55094701fbf5a48788cd71e5d",
+  "group_hash": "sha256:b1e33767b127856e25095c907b14a40a6f88e6522af0cc1841e9baa3bdeff6d7",
   "variant_hashes": {
     "surface": [
-      "sha256:66ae945529855acd9f8ca40e3552d63e5ad814ec5a2ef67b0c0f69a29e1c9803",
-      "sha256:04e5eba09e7ad618f09322d104de21e4f5b869b84fa22d57872e0a31be75afcb",
-      "sha256:800012cadcf1d7ce9885d95632de72a976d565367fd7b848725ba06cf52e918f",
+      "sha256:7a88be787e841bdcaa8c6a8bab0fa661d377ec1a8b39ff2147ac1060819c3f42",
+      "sha256:516e185cd8b2e3f5b6a715c932d5894485b93ff6282f42f6c76c9d1edf4ef242",
+      "sha256:9ab1cdf1add35d3be92c2aaf93df63967235fe02123cb511bbcce660c5a0ff03",
       "sha256:d0f0c8526da75d12901c49bb39a8695cb579aa23cbc9ecebeea561be62336e4f",
-      "sha256:75ae30a0072652e6a497c136f0c52e2548d10e7ea52809bbcd0f363e355cc0a1",
-      "sha256:37e5e2345a29e937d11a02a6a6c8e6264cfa3f1480355f625aa88116f2647914",
-      "sha256:7f3862eaa6ff8b58af018ef001cc28b07b80b04eaaba1e34c7cad1020406c13a",
-      "sha256:6b716823ed804665672794d3fc27cc7af75c60a09e25af75d2e6566f44c316c3",
-      "sha256:5a47bf402e99a4b058fe35c016616d97db3c9e6abd5905b514f3d67862db4c24"
+      "sha256:0b9262b1abde683ded34f4a3214b1b18a93cb74c193cea9711bd62b1549c1905",
+      "sha256:478ba6963f81d87f2b5809932f4c25403df316acb73b9097aa0b61ac6c670100",
+      "sha256:632c4b21f7325ce572843da1809176c0b32925c9eb0ff1004885792bc9aefa20",
+      "sha256:26f694acd004e578f658c1ed460c0fbef63be07fbc6f504f43a3d49770308623",
+      "sha256:faa8fc86428d0ca577a9ae2225a959266c9dbc3e9bc76346e18ac2cc0a36be98"
     ],
     "multi_turn": [
       "sha256:d2bcb56d5aa6806569043884341067ff74ac898aa07982ee45894f0eca1f1dcf",
@@ -162,7 +162,7 @@
       ],
       "expected_audit_deltas": [
         {
-          "change_type": "create_requested",
+          "change_type": "created",
           "appointment_id": "apt-001",
           "count": 1
         }
@@ -174,7 +174,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:66ae945529855acd9f8ca40e3552d63e5ad814ec5a2ef67b0c0f69a29e1c9803"
+      "variant_hash": "sha256:7a88be787e841bdcaa8c6a8bab0fa661d377ec1a8b39ff2147ac1060819c3f42"
     },
     {
       "spec_version": "lc1.v1",
@@ -298,7 +298,7 @@
       ],
       "expected_audit_deltas": [
         {
-          "change_type": "create_requested",
+          "change_type": "created",
           "appointment_id": "apt-001",
           "count": 1
         }
@@ -310,7 +310,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:04e5eba09e7ad618f09322d104de21e4f5b869b84fa22d57872e0a31be75afcb"
+      "variant_hash": "sha256:516e185cd8b2e3f5b6a715c932d5894485b93ff6282f42f6c76c9d1edf4ef242"
     },
     {
       "spec_version": "lc1.v1",
@@ -434,7 +434,7 @@
       ],
       "expected_audit_deltas": [
         {
-          "change_type": "create_requested",
+          "change_type": "created",
           "appointment_id": "apt-001",
           "count": 1
         }
@@ -446,7 +446,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:800012cadcf1d7ce9885d95632de72a976d565367fd7b848725ba06cf52e918f"
+      "variant_hash": "sha256:9ab1cdf1add35d3be92c2aaf93df63967235fe02123cb511bbcce660c5a0ff03"
     },
     {
       "spec_version": "lc1.v1",
@@ -706,7 +706,7 @@
       ],
       "expected_audit_deltas": [
         {
-          "change_type": "create_requested",
+          "change_type": "created",
           "appointment_id": "apt-001",
           "count": 1
         }
@@ -718,7 +718,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:75ae30a0072652e6a497c136f0c52e2548d10e7ea52809bbcd0f363e355cc0a1"
+      "variant_hash": "sha256:0b9262b1abde683ded34f4a3214b1b18a93cb74c193cea9711bd62b1549c1905"
     },
     {
       "spec_version": "lc1.v1",
@@ -842,7 +842,7 @@
       ],
       "expected_audit_deltas": [
         {
-          "change_type": "create_requested",
+          "change_type": "created",
           "appointment_id": "apt-001",
           "count": 1
         }
@@ -854,7 +854,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:37e5e2345a29e937d11a02a6a6c8e6264cfa3f1480355f625aa88116f2647914"
+      "variant_hash": "sha256:478ba6963f81d87f2b5809932f4c25403df316acb73b9097aa0b61ac6c670100"
     },
     {
       "spec_version": "lc1.v1",
@@ -978,7 +978,7 @@
       ],
       "expected_audit_deltas": [
         {
-          "change_type": "create_requested",
+          "change_type": "created",
           "appointment_id": "apt-001",
           "count": 1
         }
@@ -990,7 +990,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:7f3862eaa6ff8b58af018ef001cc28b07b80b04eaaba1e34c7cad1020406c13a"
+      "variant_hash": "sha256:632c4b21f7325ce572843da1809176c0b32925c9eb0ff1004885792bc9aefa20"
     },
     {
       "spec_version": "lc1.v1",
@@ -1114,7 +1114,7 @@
       ],
       "expected_audit_deltas": [
         {
-          "change_type": "create_requested",
+          "change_type": "created",
           "appointment_id": "apt-001",
           "count": 1
         }
@@ -1126,7 +1126,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:6b716823ed804665672794d3fc27cc7af75c60a09e25af75d2e6566f44c316c3"
+      "variant_hash": "sha256:26f694acd004e578f658c1ed460c0fbef63be07fbc6f504f43a3d49770308623"
     },
     {
       "spec_version": "lc1.v1",
@@ -1250,7 +1250,7 @@
       ],
       "expected_audit_deltas": [
         {
-          "change_type": "create_requested",
+          "change_type": "created",
           "appointment_id": "apt-001",
           "count": 1
         }
@@ -1262,7 +1262,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:5a47bf402e99a4b058fe35c016616d97db3c9e6abd5905b514f3d67862db4c24"
+      "variant_hash": "sha256:faa8fc86428d0ca577a9ae2225a959266c9dbc3e9bc76346e18ac2cc0a36be98"
     }
   ],
   "multi_turn_variants": [

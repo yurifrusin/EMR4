@@ -1,0 +1,93 @@
+{
+  "schema": "lc4r9.generator_contract_repair.v1",
+  "development_only": true,
+  "silver_pending_only": true,
+  "allowlist": {
+    "count": 11,
+    "hash": "b88018991e49ffd5",
+    "ids": [
+      "lc4_dw1_dev_var_001_01",
+      "lc4_dw1_dev_var_001_02",
+      "lc4_dw1_dev_var_001_03",
+      "lc4_dw1_dev_var_001_05",
+      "lc4_dw1_dev_var_001_06",
+      "lc4_dw1_dev_var_001_07",
+      "lc4_dw1_dev_var_001_08",
+      "lc4_dw1_dev_var_001_09",
+      "lc4_dw1_dev_var_012_03",
+      "lc4_dw1_dev_var_012_05",
+      "lc4_dw1_dev_var_012_07"
+    ]
+  },
+  "pre_repair_delta_hash": "14e3648ae8a98598bbc091ce16bf29f31fd5b2fdb92fe7d817ae86fb21837c69",
+  "checks": {
+    "allowlist_invariants": {
+      "check": "allowlist_invariants",
+      "passed": true,
+      "details": {
+        "count": {
+          "expected": 11,
+          "got": 11,
+          "match": true
+        },
+        "hash": {
+          "expected": "b88018991e49ffd5",
+          "got": "b88018991e49ffd5",
+          "match": true
+        },
+        "surface_only": true
+      }
+    },
+    "vocabulary_change": {
+      "check": "vocabulary_change",
+      "passed": true,
+      "details": {
+        "source": "app/services/bernie/scale_corpus.py (generator allowlist)",
+        "expected_count": 11,
+        "overridden_count": 11,
+        "overridden_ids": [
+          "lc4_dw1_dev_var_001_01",
+          "lc4_dw1_dev_var_001_02",
+          "lc4_dw1_dev_var_001_03",
+          "lc4_dw1_dev_var_001_05",
+          "lc4_dw1_dev_var_001_06",
+          "lc4_dw1_dev_var_001_07",
+          "lc4_dw1_dev_var_001_08",
+          "lc4_dw1_dev_var_001_09",
+          "lc4_dw1_dev_var_012_03",
+          "lc4_dw1_dev_var_012_05",
+          "lc4_dw1_dev_var_012_07"
+        ],
+        "missing_ids": []
+      }
+    },
+    "non_selected_drift": {
+      "check": "non_selected_drift",
+      "passed": true,
+      "details": {
+        "checked_count": 853,
+        "drifted_ids": [],
+        "drift_count": 0
+      }
+    },
+    "hash_cascade": {
+      "check": "hash_cascade",
+      "passed": true,
+      "details": {
+        "group_001_hash": "sha256:b1e33767b127856e25095c907b14a40a6f88e6522af0cc1841e9baa3bdeff6d7",
+        "group_012_hash": "sha256:90d321501e51df4e1b91aa94997e3470b3d26c2678ca61045ad8c6c63abdc5c0",
+        "corpus_hash": "sha256:f11e98f9bc61b962da0e816fbb918d7f722d3f82c57dfde18a5e323c1b24e9e1"
+      }
+    },
+    "composed_result": {
+      "check": "composed_result",
+      "passed": true,
+      "details": {
+        "passed_count": 11,
+        "failed_count": 0,
+        "failed": []
+      }
+    }
+  },
+  "all_passed": true
+}

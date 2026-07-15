@@ -112,6 +112,42 @@ DEV_MT_PREFIX = "lc4_dw1_dev_mt"
 
 GAP_PRIORITY_MINIMUM = 58
 
+# ---------------------------------------------------------------------------
+# LC4R9 audit-vocabulary allowlist (fail-closed, frozen)
+# ---------------------------------------------------------------------------
+# Exact 11 surface scenarios whose expected_audit_deltas override from
+# "create_requested" to "created".  All must have intended_action == "create".
+# Do not edit the set, hash, or override without an explicit sprint contract
+# amendment.
+
+LC4R9_AUDIT_VOCABULARY_ALLOWLIST: frozenset[str] = frozenset({
+    "lc4_dw1_dev_var_001_01",
+    "lc4_dw1_dev_var_001_02",
+    "lc4_dw1_dev_var_001_03",
+    "lc4_dw1_dev_var_001_05",
+    "lc4_dw1_dev_var_001_06",
+    "lc4_dw1_dev_var_001_07",
+    "lc4_dw1_dev_var_001_08",
+    "lc4_dw1_dev_var_001_09",
+    "lc4_dw1_dev_var_012_03",
+    "lc4_dw1_dev_var_012_05",
+    "lc4_dw1_dev_var_012_07",
+})
+
+LC4R9_ALLOWLIST_SELECTION_HASH = "b88018991e49ffd5"
+LC4R9_ALLOWLIST_COUNT = 11
+
+# The canonical override value for every allowlist scenario.
+LC4R9_AUDIT_OVERRIDE: list[dict[str, object]] = [
+    {"change_type": "created", "appointment_id": "apt-001", "count": 1},
+]
+
+# Pre-repair delta-line identifier hash (sorted newline-joined
+# scenario_id|create_requested|created).  Verifiable by the helper/tests.
+LC4R9_PRE_REPAIR_DELTA_HASH = (
+    "14e3648ae8a98598bbc091ce16bf29f31fd5b2fdb92fe7d817ae86fb21837c69"
+)
+
 # Temporal relation literals
 TemporalRelation = Literal[
     "exact", "not_before", "not_after", "interval", "approximate", "unspecified"
@@ -176,6 +212,38 @@ GapTarget = Literal[
     "entity_ambiguity_omission_correction",
     "interpretation_replay_tool_selection",
 ]
+
+# ---------------------------------------------------------------------------
+# LC4R9 allowlist validation (fail-closed)
+# ---------------------------------------------------------------------------
+
+
+def _validate_lc4r9_allowlist() -> None:
+    """Validate LC4R9 audit-vocabulary allowlist invariants.
+
+    Raises RuntimeError if the allowlist hash, count, or surface-only
+    constraint is violated.  Called during generator entry points.
+    """
+    computed_count = len(LC4R9_AUDIT_VOCABULARY_ALLOWLIST)
+    if computed_count != LC4R9_ALLOWLIST_COUNT:
+        raise RuntimeError(
+            f"LC4R9 allowlist count mismatch: got {computed_count}, "
+            f"expected {LC4R9_ALLOWLIST_COUNT}"
+        )
+    computed_hash = hashlib.sha256(
+        "\n".join(sorted(LC4R9_AUDIT_VOCABULARY_ALLOWLIST)).encode("utf-8")
+    ).hexdigest()[:16]
+    if computed_hash != LC4R9_ALLOWLIST_SELECTION_HASH:
+        raise RuntimeError(
+            f"LC4R9 allowlist hash mismatch: got {computed_hash}, "
+            f"expected {LC4R9_ALLOWLIST_SELECTION_HASH}"
+        )
+    for sid in LC4R9_AUDIT_VOCABULARY_ALLOWLIST:
+        if not sid.startswith(DEV_VARIANT_PREFIX):
+            raise RuntimeError(
+                f"LC4R9 allowlist contains non-surface ID: {sid!r}"
+            )
+
 
 # ---------------------------------------------------------------------------
 # Deterministic hash helpers
@@ -1428,6 +1496,9 @@ def generate_development_fixture(
     if reference_date is None:
         reference_date = date(2026, 7, 14)
 
+    # Fail-closed on LC4R9 allowlist invariants
+    _validate_lc4r9_allowlist()
+
     clinic_tz = timezone(timedelta(hours=10))
     clinic_clock = datetime(
         reference_date.year, reference_date.month, reference_date.day,
@@ -1518,7 +1589,7 @@ def generate_development_fixture(
         filename = f"{DEV_GROUP_PREFIX}_group_{spec.group_index:03d}.json"
         filepath = output_dir / filename
 
-        with open(filepath, "w", encoding="utf-8") as f:
+        with open(filepath, "w", encoding="utf-8", newline="\n") as f:
             json.dump(group_data, f, indent=2, default=str)
 
         group_files.append({
@@ -1565,7 +1636,7 @@ def generate_development_fixture(
     }
 
     manifest_path = output_dir / "lc4_development_manifest.json"
-    with open(manifest_path, "w", encoding="utf-8") as f:
+    with open(manifest_path, "w", encoding="utf-8", newline="\n") as f:
         json.dump(manifest, f, indent=2, default=str)
 
     return ScaleCorpus(groups=tuple(groups), corpus_hash=corpus_hash)
@@ -1668,12 +1739,23 @@ def _build_group_fixture(
             elif vi % 10 == 0:
                 lf = "abbreviation"
 
+        # LC4R9 audit-vocabulary allowlist: override create_requested -> created
+        audit_deltas_override: list[dict[str, object]] | None = None
+        if variant_id in LC4R9_AUDIT_VOCABULARY_ALLOWLIST:
+            if spec.intended_action != "create":
+                raise RuntimeError(
+                    f"LC4R9 allowlist scenario {variant_id!r} has "
+                    f"action={spec.intended_action!r}, expected 'create'"
+                )
+            audit_deltas_override = LC4R9_AUDIT_OVERRIDE
+
         scenario = _build_scenario(
             spec, variant_id, utterance, df, lf,
             reference_date, clinic_clock,
             earliest_time=earliest_time,
             latest_time=latest_time,
             duration_minutes=15,
+            expected_audit_deltas_override=audit_deltas_override,
         )
 
         surface_variants.append(scenario)
@@ -2197,6 +2279,11 @@ __all__ = [
     "TOTAL_TRAJECTORIES",
     "TOTAL_INDIVIDUAL_RECORDS",
     "GAP_PRIORITY_MINIMUM",
+    "LC4R9_AUDIT_VOCABULARY_ALLOWLIST",
+    "LC4R9_ALLOWLIST_SELECTION_HASH",
+    "LC4R9_ALLOWLIST_COUNT",
+    "LC4R9_AUDIT_OVERRIDE",
+    "LC4R9_PRE_REPAIR_DELTA_HASH",
     "ALL_ACTIONS",
     "ALL_TEMPORAL_RELATIONS",
     "ALL_DIARY_STATES",
@@ -2217,4 +2304,5 @@ __all__ = [
     "validate_corpus",
     "validate_variant",
     "validate_scale_corpus_isolation",
+    "_validate_lc4r9_allowlist",
 ]
