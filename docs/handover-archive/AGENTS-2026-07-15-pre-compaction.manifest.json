@@ -1,0 +1,13 @@
+{
+  "schema_version": "emr4.agents_archive_manifest.v1",
+  "source_path": "AGENTS.md",
+  "archive_path": "docs/handover-archive/AGENTS-2026-07-15-pre-compaction.md",
+  "source_commit": "6801fb214d41c41c14f94b90642f6a7d9ee0a6d6",
+  "git_blob_sha1": "ace44b93507737141a5e44004c24a087755561af",
+  "sha256": "ad86887db6b640bdeac40111aa9f83c9e422f4ccab5f2eb61334a49449126b4c",
+  "byte_count": 131618,
+  "line_count": 1890,
+  "archive_date": "2026-07-15",
+  "immutable": true,
+  "purpose": "Byte-identical pre-compaction preservation of the authoritative EMR4 handover."
+}
