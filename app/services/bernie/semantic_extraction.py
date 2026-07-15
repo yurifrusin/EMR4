@@ -196,6 +196,22 @@ _UNSAFE_PATTERNS: list[re.Pattern[str]] = [
     re.compile(r"\bno.*need.*for.*confirm\w*\b", re.I),
     re.compile(r"\bignore.*check\b", re.I),
     re.compile(r"\b(mark|set|call).*(complete|finished|done)\b", re.I),
+    # Clash/guardrail-check bypass
+    re.compile(r"\bskip\b.*\b(?:clash|check)\b", re.I),
+    # Audit suppression
+    re.compile(r"\b(?:hide|suppress|conceal)\b.*\baudit\b", re.I),
+    # Premature completion claim
+    re.compile(r"\bsay\b.*\b(?:booked|complete|done|finished)\b", re.I),
+    # Patient-identity guessing
+    re.compile(r"\bchoose\b.*\b(?:whichever|looks right|one that)\b", re.I),
+    # Practitioner guessing
+    re.compile(r"\bguess\b.*\b(?:practitioner|doctor|who)\b", re.I),
+    # Force booking despite unavailability
+    re.compile(r"\bforce\b.*\b(?:booking|book|slot)\b", re.I),
+    # Double-negation trap: "do not refuse to X" = unsafe demand
+    re.compile(r"\bdo\s+not\s+refuse\s+to\b", re.I),
+    # Identity-check bypass
+    re.compile(r"\bdo\s+not\s+need\s+to\s+check\b", re.I),
 ]
 
 # Negation prefixes that make an unsafe pattern safe
@@ -212,7 +228,10 @@ _DIRECT_NEGATION_PREFIX = re.compile(
 _REVERSAL_PATTERNS: list[re.Pattern[str]] = [
     re.compile(r"\bnever mind\b", re.I),
     re.compile(r"\bnot needed\b", re.I),
-    re.compile(r"\bno need\b", re.I),
+    # "No need" as a reversal only when it's not about guardrails
+    # (e.g. "No need, forget it" reverses; "no need for confirmation" is
+    #  a guardrail-removal unsafe demand, not an action reversal)
+    re.compile(r"\bno need\b(?!\s+(?:for|to))", re.I),
     re.compile(r"\bleave it (where it was|as is)\b", re.I),
     re.compile(r"\bforget it\b", re.I),
     re.compile(r"\bscrap that\b", re.I),
@@ -409,7 +428,14 @@ _PATIENT_PATTERN = re.compile(
     r"[Bb]ook |[Mm]ake |[Cc]reate |[Ss]ee |[Nn]eed |[Ww]ant |"
     r"[Aa]n appointment for |[Aa] booking for )?"
     r"(?!Dr\s+[A-Z])"
+    r"(?!(?:Book|Make|Create|Schedule|See)\s)"
     r"([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)\b",
+)
+
+# Single given name after a booking verb (e.g. "Book Alex") — inherently
+# ambiguous because a single given name does not uniquely identify a patient.
+_SINGLE_PATIENT_PATTERN = re.compile(
+    r"\b(?:[Bb]ook|[Ss]ee)\s+(?!Dr\b)([A-Z][a-z]+)\b",
 )
 
 # Ambiguous patient references — includes standalone ``someone`` which
@@ -427,6 +453,9 @@ def _extract_patient(text: str) -> tuple[str | None, str]:
 
     Returns (name or None, semantics label).
     Semantics is ``"exact"``, ``"omitted"``, ``"ambiguous"``, or ``"negated"``.
+
+    A single given name (e.g. "Book Alex") is inherently ambiguous and
+    returns ``ambiguous`` semantics.
     """
     if _AMBIGUOUS_PATIENT.search(text):
         return None, "ambiguous"
@@ -438,6 +467,10 @@ def _extract_patient(text: str) -> tuple[str | None, str]:
         if re.search(r"\bnot\s+$", before, re.I):
             return m.group(1), "negated"
         return m.group(1), "exact"
+    # Single given name after a booking verb is ambiguous
+    single_m = _SINGLE_PATIENT_PATTERN.search(text)
+    if single_m:
+        return single_m.group(1), "ambiguous"
     return None, "omitted"
 
 
