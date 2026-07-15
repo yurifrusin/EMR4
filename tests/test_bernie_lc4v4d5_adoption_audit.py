@@ -46,7 +46,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent
 D5_JSON_REPORT = ROOT / "docs" / "bernie-lc4v4d5-option-a-adoption-audit.json"
 D5_MARKDOWN_REPORT = ROOT / "docs" / "bernie-lc4v4d5-option-a-adoption-audit.md"
-SOURCE_COMMIT = "1ac0c71b929cff610f78d2ed8a803b057627d31e"
+SOURCE_COMMIT = "80bfdfd49bad95589d35e7865d5a97493376f1bf"
 
 
 def _hash(payload: Any) -> str:

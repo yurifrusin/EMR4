@@ -1,7 +1,7 @@
 # LC4V4D5 Option A Adoption Audit Evidence
 
-- Source commit: `1ac0c71b929cff610f78d2ed8a803b057627d31e`
-- Report hash: `sha256:350d7a2bca61320f6397e7ab15b333ec3ef0d247970e7365813886a9add9a94a`
+- Source commit: `80bfdfd49bad95589d35e7865d5a97493376f1bf`
+- Report hash: `sha256:e2c461ee3b1821c94574b33693efa88d21b99ecf9a95b1ac723b24a933c50564`
 - Fixture hash: `sha256:a81de0b5371d4fcc425c23f0da9560e29827e3e85cc22847990ea83518863269`
 - All-60 population hash: `sha256:ed65fe7821b0239066c532320bff05cc31a0699674987de8587efd74e05bbd44`
 - D2 report hash: `sha256:3220ac943659ae1449c5c285144b1fa980f659668a705ca7aef98f0aea6d317a`
@@ -36,7 +36,10 @@
 - exact_five_difference_ids: `True`
 - five_difference_selection_hash_exact: `True`
 - exact_four_blocker_ids: `True`
+- exact_five_difference_shapes: `True`
+- zero_legacy_variance: `True`
 - zero_option_a_variance: `True`
+- exact_complete_observation_counts: `True`
 - zero_forbidden_observations: `True`
 - authoring_invalid_quarantined: `True`
 - authoring_invalid_legacy_equivalent: `True`
@@ -78,6 +81,7 @@
   - Field difference: replay.audit_deltas
   - Field difference: replay.downstream_outcome
   - Field difference: replay.is_simulated_confirmed_write
+  - Field difference: replay.requires_clarification
   - Field difference: replay.tools_used
 - lc4v4d1_safety_status_safe_09: adoption_blocker_missing_mutation_deltas
   - Field difference: diary_relation
