@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V4D5 development-wide Option A adoption audit accepted; prepare exact-four D5R1 policy/replay remediation |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v4d5-sol-acceptance.md` and `docs/bernie-lc4v4d5-option-a-adoption-audit-closeout.md` |
+| Active product track | LC4V4D5R1 exact-four Option A policy/replay remediation contract frozen; bounded implementation next |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v4d5r1-sol-contract.md`, grounded by `lc4v4d5-sol-acceptance.md` and `docs/bernie-lc4v4d5-option-a-adoption-audit-closeout.md` |
 | Current result | D5 retains 240 complete observations over all 60 ordinary probes with zero legacy and Option A variance. Exact taxonomy is `35/20/1/3/1`: 35 legacy-equivalent, 20 accepted D4 changes, one benign exact-duplicate relation, three missing-mutation-delta blockers, and one resize target-conflict-plus-delta blocker. All 27 gates pass; report hash is `e2c461ee...`. Gemini returned `DECISION: pass` on exact head `4fba7408`. No remediation or runtime default change was made |
-| Next implementation | After a fresh receipt, freeze D5R1 to remediate only the four reviewed safe move/resize/cancel/status Option A blockers: restore supported simulated mutation/audit deltas and make resize treat requested duration as the mutation target rather than diary conflict identity. Preserve all D4 behavior, the benign exact-duplicate relation, legacy default, parser, historical evidence, and T3/provider/product/write boundaries |
+| Next implementation | Dispatch one bounded DeepSeek V4 Flash/high candidate through Claude Code `--bare` against the frozen D5R1 contract. Restore only the four supported safe move/resize/cancel/status simulated mutation/audit deltas and treat resize duration as a mutation target. Preserve all D4 behavior, benign exact-duplicate relations, legacy default, parser, historical evidence, and T3/provider/product/write boundaries |
 
 LC4V4 provenance: the frozen pre-content records remain
 `lc4v4q1-sol-contract.md`, `lc4v4q1-sol-recovery-amendment.md`,

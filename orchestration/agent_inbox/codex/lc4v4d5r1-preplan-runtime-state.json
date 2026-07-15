@@ -1,0 +1,68 @@
+{
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "evidence": ["Declared preferred DeepSeek Flash transport; live reachability is checked again before dispatch."],
+      "method": "synthetic_fixture",
+      "reachability": "unknown"
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "evidence": ["Declared real-TTY fallback only; not selected for D5R1."],
+      "method": "synthetic_fixture",
+      "reachability": "unknown"
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "evidence": ["Declared availability-gated consultation transport; not selected for D5R1."],
+      "method": "synthetic_fixture",
+      "reachability": "unknown"
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "evidence": ["Declared fresh-project Gemini veto transport; live reachability is checked before review."],
+      "method": "synthetic_fixture",
+      "reachability": "unknown"
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "evidence": ["Protected GPT Sol session is active as conductor and integrator."],
+      "method": "synthetic_fixture",
+      "reachability": "reachable"
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "evidence": ["Declared fallback only; no native Codex subagent is assigned or authorized for D5R1."],
+      "method": "synthetic_fixture",
+      "reachability": "unknown"
+    }
+  ],
+  "assigned_agent_ids": [],
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "unknown",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "continuation_event": "post_compaction",
+  "planned_action": "commit",
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "worker_slots": [
+    {
+      "active_instance_ids": [],
+      "resource_id": "deepseek-flash-workers",
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": []
+}
