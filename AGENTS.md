@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | Bernie development-corpus reconciliation complete through LC4R10; certification decision pending |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4r10-sol-acceptance.md` |
+| Active product track | LC4V2 fresh certification holdout, authorized by Yuri after accepted LC4R10 |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v2-sol-contract.md` |
 | Current result | Frozen LC4R10 population 93/93 complete; semantic counts `880/814/672/154/330/835`; safety 1,152/1,152; variance zero over 2,304 |
-| Next implementation | Pause at the documented user boundary: approve holdout v2 or an explicit holdout-v1 reuse policy before LC5 certification; T3.5 remains separately deferred |
+| Next implementation | Build and independently veto the content-blind v2 framework before Sol-only authoring, seal, and one-shot aggregate baseline; holdout v1 stays sealed and T3.5 stays deferred |
 
 ### LC4R10 accepted state
 
@@ -80,13 +80,18 @@ acceptance for exact hashes, provenance, recovery, veto, and gate evidence.
 
 ### Next sequence
 
-1. Ask Yuri to choose between authoring a new holdout v2 or approving an
-   explicit holdout-v1 reuse policy before LC5 certification work.
-2. Do not inspect, enumerate, run, or infer from holdout v1 before that
-   decision.
-3. Keep `check_in` and other planned-not-implemented actions unavailable.
-4. Keep T3.5 provider adapters and all live/write authority behind their
-   separate deferred decision gate.
+Yuri selected the recommended fresh holdout-v2 path on 2026-07-15. This closes
+the new-version/reuse decision only; it does not open T3.5 or live providers.
+
+1. Freeze and implement a content-blind v2 manifest, seal, one-shot receipt,
+   and aggregate-report framework without reading holdout v1.
+2. Obtain a fresh Gemini framework veto before any v2 content exists.
+3. Close external workers; Sol alone authors, seals, and consumes the fresh
+   24-group/288-variant/72-multi-turn synthetic Gold corpus exactly once.
+4. Commit only aggregate baseline evidence, then seal v2 under the same
+   no-read/no-rerun/no-tuning policy as v1.
+5. Keep `check_in`, T3.5 provider adapters, and all live/write authority behind
+   their separate deferred gates.
 
 ## 4. Authority Allocation
 
