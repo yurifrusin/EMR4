@@ -68,7 +68,7 @@ def _spec_from_id(probe_id: str) -> ReceptionScenarioSpec:
     return dict_to_spec(_probes_by_id()[probe_id])
 
 
-SOURCE_COMMIT = "fbcd1c63f7dbbafce8ef96f71a5cdab22b15735e"
+SOURCE_COMMIT = "4218d2ee3aca321fe8169a0f27567945e5fa04ca"
 
 
 # ===================================================================
