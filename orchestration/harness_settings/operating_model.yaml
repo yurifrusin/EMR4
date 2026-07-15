@@ -95,6 +95,19 @@ economical_execution:
   deepseek_pro_planning_role: compact_high_leverage_consultant_not_default_coordinator
   preferred_coding_worker: deepseek-flash-workers
   preferred_workers: [deepseek-flash-workers, antigravity-gemini-flash-3-5-worker]
+  deepseek_flash_preferred_for: [stable_bounded_implementation_contract, mechanical_test_generation, deterministic_fixture_regeneration, contained_code_repair]
+  sol_retained_surfaces: [cross_sprint_taxonomy, frozen_selection_semantics, acceptance_interpretation, authority_allocation, protected_evidence_policy, historical_evidence_reconciliation]
+  rejected_flash_candidate:
+    classify_before_redispatch: [mechanical, conceptual]
+    mechanical_same_lane_revision_limit: 1
+    conceptual_same_lane_revision_limit: 0
+    conceptual_triggers: [category_meaning_error, frozen_population_vs_corpus_population_error, acceptance_semantics_error, provenance_error, authority_error]
+    any_failed_revision_ends_external_correction_loop: true
+    next_action: sol_recovery_lease_or_distinct_resource_with_recorded_leverage
+    capability_inference_may_not_use_alone: [cached_token_volume, elapsed_time, model_reputation]
+  recovered_material_change_review:
+    fresh_context_gemini_veto_when_risk_triggered: true
+    inherit_failed_worker_acceptance_framing: false
   worker_allocation_rule: allocate_only_distinct_bounded_surfaces; no_model_quota_is_mandatory
   gemini_preferred_for: [independent_cross_check, adversarial_review, separable_ui_or_test_surface]
   openai_terra_use_when: [deepseek_transport_unavailable, repeated_deepseek_acceptance_failure, tightly_coupled_high_risk_integration]

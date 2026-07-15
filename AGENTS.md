@@ -109,6 +109,31 @@ Use workers only for bounded separable artifacts or genuine veto surfaces.
 Tiny, serial, protected, or tightly coupled work may remain Sol-owned. Record
 the actual worker mix and any substitution in closeout evidence.
 
+### Flash complexity and correction-loop rule
+
+DeepSeek Flash is the default for stable, bounded implementation contracts,
+mechanical test generation, fixture regeneration, and contained code repair. It
+does not own cross-sprint taxonomy, frozen-selection meaning, acceptance
+semantics, authority allocation, protected-evidence policy, or reconciliation
+of several historical evidence layers. Those remain Sol work.
+
+Classify a rejected Flash candidate before redispatch:
+
+- a mechanical defect (for example a missing hash, file, assertion, or
+  one-line verifier guard) may receive at most one bounded same-lane revision;
+- a conceptual defect involving category meaning, frozen population versus
+  corpus-wide population, acceptance criteria, provenance, or authority moves
+  immediately to Sol's recovery lease without another Flash correction loop;
+- any failed bounded revision ends external correction for that lane. Preserve
+  the failure and scope breaches, then recover under Sol ownership or select a
+  genuinely different implementation resource when new implementation work has
+  clear leverage.
+
+Large cached-token totals, elapsed time, or model reputation do not alone prove
+inability. The stop signal is the kind and recurrence of acceptance error.
+Gemini Flash remains a fresh-context independent veto after recovered material
+changes; it does not inherit the failed worker's acceptance framing.
+
 ## 5. Protected Evidence and Closed Gates
 
 ### Protected holdout v1
@@ -184,6 +209,8 @@ Worker closeout provenance is non-transferable. Sol may adopt failed worker
 source only as an untrusted candidate under
 `docs/ariadne-orchestrator-recovery-lease.md`. Preserve the failure, record
 every Sol amendment, and run risk-proportional independent verification.
+Apply the Flash complexity and correction-loop rule above before any
+same-lane redispatch.
 
 ### Tests
 

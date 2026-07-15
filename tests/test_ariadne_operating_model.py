@@ -61,3 +61,20 @@ def test_orchestrator_commits_and_pushes_regular_checkpoints() -> None:
     assert checkpoints["advance_handoff_current_after_accepted_checkpoint"] is True
     assert checkpoints["workers_may_push_master"] is False
     assert checkpoints["executor_may_push_master_without_authorization"] is False
+
+
+def test_flash_complexity_routing_stops_conceptual_correction_loops() -> None:
+    economical = load("operating_model.yaml")["economical_execution"]
+    routing = economical["rejected_flash_candidate"]
+
+    assert "stable_bounded_implementation_contract" in economical["deepseek_flash_preferred_for"]
+    assert "frozen_selection_semantics" in economical["sol_retained_surfaces"]
+    assert routing["mechanical_same_lane_revision_limit"] == 1
+    assert routing["conceptual_same_lane_revision_limit"] == 0
+    assert routing["any_failed_revision_ends_external_correction_loop"] is True
+    assert "frozen_population_vs_corpus_population_error" in routing["conceptual_triggers"]
+    assert "cached_token_volume" in routing["capability_inference_may_not_use_alone"]
+
+    review = economical["recovered_material_change_review"]
+    assert review["fresh_context_gemini_veto_when_risk_triggered"] is True
+    assert review["inherit_failed_worker_acceptance_framing"] is False

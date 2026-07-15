@@ -21,6 +21,14 @@ security-boundary, database, deployment, and release work additionally require
 an independent verifier. A recovery lease cannot expand sprint scope or
 silently reassign a role.
 
+For DeepSeek Flash lanes, classify the rejection before redispatch. Mechanical
+omissions may receive one bounded correction. Conceptual errors involving
+taxonomy, frozen-set meaning, corpus-wide versus adjudicated populations,
+acceptance semantics, provenance, or authority transfer immediately to this
+lease. If a bounded correction also fails, no further same-lane Flash revision
+is permitted. Cached-token volume and elapsed time are recorded as efficiency
+evidence but are not themselves capability or failure verdicts.
+
 The protected OpenAI primary orchestrator is currently GPT Sol. The stable
 resource identity is `openai-primary-orchestrator`; model changes are runtime
 state that must trigger context rehydration rather than resource renaming.

@@ -36,6 +36,25 @@ The Conductor re-enters only when sprint scope, worker assignment/ownership, or
 acceptance criteria must change, or when the sprint closes and the next sprint
 must be planned.
 
+## Worker Complexity Routing
+
+DeepSeek Flash is preferred for stable bounded coding contracts, mechanical
+tests, deterministic fixture generation, and contained repairs. Sol retains
+taxonomy, frozen-selection semantics, acceptance interpretation, authority and
+protected-evidence decisions, and cross-sprint evidence reconciliation.
+
+After a rejected Flash candidate, Sol classifies the defect before deciding on
+redispatch. A mechanical omission may receive one bounded same-lane revision.
+A conceptual error about population, category, acceptance, provenance, or
+authority moves directly to the recovery lease. A failed revision is the hard
+end of that external correction loop. This is an error-shape rule rather than a
+claim about general model capability; token volume and elapsed time are
+advisory evidence only.
+
+Recovered material changes receive a fresh-context Gemini veto when the risk
+gate requires independent LLM verification. The veto reviewer must not inherit
+the failed worker's acceptance conclusions as facts.
+
 ## Verification
 
 Deterministic schema, fingerprint, resource-limit, ownership, and workspace
@@ -55,11 +74,10 @@ planning event.
 ## Continuous Sprint Engine
 
 Sprint closeout is not a conversational stopping point. Sol closes the sprint,
-hands planning authority to Fable, reviews the resulting next-sprint plan,
-runs deterministic checks and any risk-triggered independent review, then
-executes. This cycle continues sprint after sprint without asking the user to
-say "continue". It stops only for an explicit user stop or a genuine
-undelegated decision boundary.
+selects the planning mode, runs deterministic checks and any risk-triggered
+independent review, then executes. This cycle continues sprint after sprint
+without asking the user to say "continue". It stops only for an explicit user
+stop or a genuine undelegated decision boundary.
 
 Accepted worker artifacts, harness corrections, bounded integrations, and
 sprint closeouts are committed and pushed regularly by Sol, with
