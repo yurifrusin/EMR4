@@ -1,0 +1,1698 @@
+{
+  "group_id": "lc4v2_group_014",
+  "schema_version": "lc4v2.group.v1",
+  "variants": [
+    {
+      "action_semantics": "intended",
+      "adjudication": "adjudicated",
+      "appointment_type_semantics": "exact",
+      "clarification_choices": [],
+      "clinic_clock": "2026-08-03T08:20:00+10:00",
+      "description": "Fresh synthetic v2 resize/interval/same_day_distinct/corrected",
+      "dialogue_form": "one_shot",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please extend the standard consult for Morgan Reed—correction, Avery Quinn with Dr Chen to 30-minute tomorrow between 2pm and 4pm."
+        }
+      ],
+      "diary_state": "same_day_distinct",
+      "duration_minutes": 30,
+      "duration_semantics": "exact",
+      "earliest_time": "14:00",
+      "entity_state": "corrected",
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "date": "2026-08-04",
+          "duration_minutes": 30,
+          "patient_id": "p-001",
+          "practitioner_id": "pr-004",
+          "start_time": "14:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "count": 1
+        }
+      ],
+      "expected_clarification": null,
+      "expected_outcome_kind": "appointment_resized",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "family": "lc4v2_group_014",
+      "forbidden_outcomes": [
+        "appointment_confirmed",
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "confirm_appointment",
+        "mutate_diary_direct"
+      ],
+      "initial_diary_state": {
+        "diary_page_date": "2026-08-04",
+        "reference_date": "2026-08-03",
+        "seeded_appointments": [
+          {
+            "appointment_id": "apt-001",
+            "synthetic": true
+          }
+        ],
+        "state": "same_day_distinct",
+        "synthetic": true
+      },
+      "intended_action": "resize",
+      "language_form": "plain",
+      "latest_time": "16:00",
+      "location_semantics": "omitted",
+      "normalized_values": {
+        "appointment_date": "2026-08-04",
+        "duration_minutes": 30,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "patient_semantics": "corrected",
+      "practitioner_semantics": "exact",
+      "provenance": "gold",
+      "reference_date": "2026-08-03",
+      "scenario_id": "lc4v2_group_014_var_001",
+      "source_spans": {
+        "appointment_date": [
+          {
+            "end": 109,
+            "start": 101,
+            "text": "tomorrow",
+            "turn_index": 0
+          }
+        ],
+        "appointment_type": [
+          {
+            "end": 34,
+            "start": 18,
+            "text": "standard consult",
+            "turn_index": 0
+          }
+        ],
+        "duration_minutes": [
+          {
+            "end": 100,
+            "start": 91,
+            "text": "30-minute",
+            "turn_index": 0
+          }
+        ],
+        "earliest_time": [
+          {
+            "end": 121,
+            "start": 118,
+            "text": "2pm",
+            "turn_index": 0
+          }
+        ],
+        "latest_time": [
+          {
+            "end": 129,
+            "start": 126,
+            "text": "4pm",
+            "turn_index": 0
+          }
+        ],
+        "patient": [
+          {
+            "end": 74,
+            "start": 63,
+            "text": "Avery Quinn",
+            "turn_index": 0
+          }
+        ],
+        "practitioner": [
+          {
+            "end": 87,
+            "start": 80,
+            "text": "Dr Chen",
+            "turn_index": 0
+          }
+        ]
+      },
+      "spec_version": "lc1.v1",
+      "temporal_relation": "interval"
+    },
+    {
+      "action_semantics": "intended",
+      "adjudication": "adjudicated",
+      "appointment_type_semantics": "exact",
+      "clarification_choices": [],
+      "clinic_clock": "2026-08-03T08:20:00+10:00",
+      "description": "Fresh synthetic v2 resize/interval/same_day_distinct/corrected",
+      "dialogue_form": "one_shot",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Could you extend the standard consult for Morgan Reed—correction, Avery Quinn with Dr Chen to 30-minute tomorrow between 2pm and 4pm, please?"
+        }
+      ],
+      "diary_state": "same_day_distinct",
+      "duration_minutes": 30,
+      "duration_semantics": "exact",
+      "earliest_time": "14:00",
+      "entity_state": "corrected",
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "date": "2026-08-04",
+          "duration_minutes": 30,
+          "patient_id": "p-001",
+          "practitioner_id": "pr-004",
+          "start_time": "14:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "count": 1
+        }
+      ],
+      "expected_clarification": null,
+      "expected_outcome_kind": "appointment_resized",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "family": "lc4v2_group_014",
+      "forbidden_outcomes": [
+        "appointment_confirmed",
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "confirm_appointment",
+        "mutate_diary_direct"
+      ],
+      "initial_diary_state": {
+        "diary_page_date": "2026-08-04",
+        "reference_date": "2026-08-03",
+        "seeded_appointments": [
+          {
+            "appointment_id": "apt-001",
+            "synthetic": true
+          }
+        ],
+        "state": "same_day_distinct",
+        "synthetic": true
+      },
+      "intended_action": "resize",
+      "language_form": "paraphrase",
+      "latest_time": "16:00",
+      "location_semantics": "omitted",
+      "normalized_values": {
+        "appointment_date": "2026-08-04",
+        "duration_minutes": 30,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "patient_semantics": "corrected",
+      "practitioner_semantics": "exact",
+      "provenance": "gold",
+      "reference_date": "2026-08-03",
+      "scenario_id": "lc4v2_group_014_var_002",
+      "source_spans": {
+        "appointment_date": [
+          {
+            "end": 112,
+            "start": 104,
+            "text": "tomorrow",
+            "turn_index": 0
+          }
+        ],
+        "appointment_type": [
+          {
+            "end": 37,
+            "start": 21,
+            "text": "standard consult",
+            "turn_index": 0
+          }
+        ],
+        "duration_minutes": [
+          {
+            "end": 103,
+            "start": 94,
+            "text": "30-minute",
+            "turn_index": 0
+          }
+        ],
+        "earliest_time": [
+          {
+            "end": 124,
+            "start": 121,
+            "text": "2pm",
+            "turn_index": 0
+          }
+        ],
+        "latest_time": [
+          {
+            "end": 132,
+            "start": 129,
+            "text": "4pm",
+            "turn_index": 0
+          }
+        ],
+        "patient": [
+          {
+            "end": 77,
+            "start": 66,
+            "text": "Avery Quinn",
+            "turn_index": 0
+          }
+        ],
+        "practitioner": [
+          {
+            "end": 90,
+            "start": 83,
+            "text": "Dr Chen",
+            "turn_index": 0
+          }
+        ]
+      },
+      "spec_version": "lc1.v1",
+      "temporal_relation": "interval"
+    },
+    {
+      "action_semantics": "intended",
+      "adjudication": "adjudicated",
+      "appointment_type_semantics": "exact",
+      "clarification_choices": [],
+      "clinic_clock": "2026-08-03T08:20:00+10:00",
+      "description": "Fresh synthetic v2 resize/interval/same_day_distinct/corrected",
+      "dialogue_form": "one_shot",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Hi, when you get a moment, extend the standard consult for Morgan Reed—correction, Avery Quinn with Dr Chen to 30-minute tomorrow between 2pm and 4pm, thanks."
+        }
+      ],
+      "diary_state": "same_day_distinct",
+      "duration_minutes": 30,
+      "duration_semantics": "exact",
+      "earliest_time": "14:00",
+      "entity_state": "corrected",
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "date": "2026-08-04",
+          "duration_minutes": 30,
+          "patient_id": "p-001",
+          "practitioner_id": "pr-004",
+          "start_time": "14:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "count": 1
+        }
+      ],
+      "expected_clarification": null,
+      "expected_outcome_kind": "appointment_resized",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "family": "lc4v2_group_014",
+      "forbidden_outcomes": [
+        "appointment_confirmed",
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "confirm_appointment",
+        "mutate_diary_direct"
+      ],
+      "initial_diary_state": {
+        "diary_page_date": "2026-08-04",
+        "reference_date": "2026-08-03",
+        "seeded_appointments": [
+          {
+            "appointment_id": "apt-001",
+            "synthetic": true
+          }
+        ],
+        "state": "same_day_distinct",
+        "synthetic": true
+      },
+      "intended_action": "resize",
+      "language_form": "filler",
+      "latest_time": "16:00",
+      "location_semantics": "omitted",
+      "normalized_values": {
+        "appointment_date": "2026-08-04",
+        "duration_minutes": 30,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "patient_semantics": "corrected",
+      "practitioner_semantics": "exact",
+      "provenance": "gold",
+      "reference_date": "2026-08-03",
+      "scenario_id": "lc4v2_group_014_var_003",
+      "source_spans": {
+        "appointment_date": [
+          {
+            "end": 129,
+            "start": 121,
+            "text": "tomorrow",
+            "turn_index": 0
+          }
+        ],
+        "appointment_type": [
+          {
+            "end": 54,
+            "start": 38,
+            "text": "standard consult",
+            "turn_index": 0
+          }
+        ],
+        "duration_minutes": [
+          {
+            "end": 120,
+            "start": 111,
+            "text": "30-minute",
+            "turn_index": 0
+          }
+        ],
+        "earliest_time": [
+          {
+            "end": 141,
+            "start": 138,
+            "text": "2pm",
+            "turn_index": 0
+          }
+        ],
+        "latest_time": [
+          {
+            "end": 149,
+            "start": 146,
+            "text": "4pm",
+            "turn_index": 0
+          }
+        ],
+        "patient": [
+          {
+            "end": 94,
+            "start": 83,
+            "text": "Avery Quinn",
+            "turn_index": 0
+          }
+        ],
+        "practitioner": [
+          {
+            "end": 107,
+            "start": 100,
+            "text": "Dr Chen",
+            "turn_index": 0
+          }
+        ]
+      },
+      "spec_version": "lc1.v1",
+      "temporal_relation": "interval"
+    },
+    {
+      "action_semantics": "intended",
+      "adjudication": "adjudicated",
+      "appointment_type_semantics": "exact",
+      "clarification_choices": [],
+      "clinic_clock": "2026-08-03T08:20:00+10:00",
+      "description": "Fresh synthetic v2 resize/interval/same_day_distinct/corrected",
+      "dialogue_form": "one_shot",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Pls extend the standard consult for Morgan Reed—correction, Avery Quinn with Dr Chen to 30-minute tomorrow between 2pm and 4pm."
+        }
+      ],
+      "diary_state": "same_day_distinct",
+      "duration_minutes": 30,
+      "duration_semantics": "exact",
+      "earliest_time": "14:00",
+      "entity_state": "corrected",
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "date": "2026-08-04",
+          "duration_minutes": 30,
+          "patient_id": "p-001",
+          "practitioner_id": "pr-004",
+          "start_time": "14:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "count": 1
+        }
+      ],
+      "expected_clarification": null,
+      "expected_outcome_kind": "appointment_resized",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "family": "lc4v2_group_014",
+      "forbidden_outcomes": [
+        "appointment_confirmed",
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "confirm_appointment",
+        "mutate_diary_direct"
+      ],
+      "initial_diary_state": {
+        "diary_page_date": "2026-08-04",
+        "reference_date": "2026-08-03",
+        "seeded_appointments": [
+          {
+            "appointment_id": "apt-001",
+            "synthetic": true
+          }
+        ],
+        "state": "same_day_distinct",
+        "synthetic": true
+      },
+      "intended_action": "resize",
+      "language_form": "abbreviation",
+      "latest_time": "16:00",
+      "location_semantics": "omitted",
+      "normalized_values": {
+        "appointment_date": "2026-08-04",
+        "duration_minutes": 30,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "patient_semantics": "corrected",
+      "practitioner_semantics": "exact",
+      "provenance": "gold",
+      "reference_date": "2026-08-03",
+      "scenario_id": "lc4v2_group_014_var_004",
+      "source_spans": {
+        "appointment_date": [
+          {
+            "end": 106,
+            "start": 98,
+            "text": "tomorrow",
+            "turn_index": 0
+          }
+        ],
+        "appointment_type": [
+          {
+            "end": 31,
+            "start": 15,
+            "text": "standard consult",
+            "turn_index": 0
+          }
+        ],
+        "duration_minutes": [
+          {
+            "end": 97,
+            "start": 88,
+            "text": "30-minute",
+            "turn_index": 0
+          }
+        ],
+        "earliest_time": [
+          {
+            "end": 118,
+            "start": 115,
+            "text": "2pm",
+            "turn_index": 0
+          }
+        ],
+        "latest_time": [
+          {
+            "end": 126,
+            "start": 123,
+            "text": "4pm",
+            "turn_index": 0
+          }
+        ],
+        "patient": [
+          {
+            "end": 71,
+            "start": 60,
+            "text": "Avery Quinn",
+            "turn_index": 0
+          }
+        ],
+        "practitioner": [
+          {
+            "end": 84,
+            "start": 77,
+            "text": "Dr Chen",
+            "turn_index": 0
+          }
+        ]
+      },
+      "spec_version": "lc1.v1",
+      "temporal_relation": "interval"
+    },
+    {
+      "action_semantics": "intended",
+      "adjudication": "adjudicated",
+      "appointment_type_semantics": "exact",
+      "clarification_choices": [],
+      "clinic_clock": "2026-08-03T08:20:00+10:00",
+      "description": "Fresh synthetic v2 resize/interval/same_day_distinct/corrected",
+      "dialogue_form": "one_shot",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Pleae extend the standard consult for Morgan Reed—correction, Avery Quinn with Dr Chen to 30-minute tomorrow between 2pm and 4pm."
+        }
+      ],
+      "diary_state": "same_day_distinct",
+      "duration_minutes": 30,
+      "duration_semantics": "exact",
+      "earliest_time": "14:00",
+      "entity_state": "corrected",
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "date": "2026-08-04",
+          "duration_minutes": 30,
+          "patient_id": "p-001",
+          "practitioner_id": "pr-004",
+          "start_time": "14:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "count": 1
+        }
+      ],
+      "expected_clarification": null,
+      "expected_outcome_kind": "appointment_resized",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "family": "lc4v2_group_014",
+      "forbidden_outcomes": [
+        "appointment_confirmed",
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "confirm_appointment",
+        "mutate_diary_direct"
+      ],
+      "initial_diary_state": {
+        "diary_page_date": "2026-08-04",
+        "reference_date": "2026-08-03",
+        "seeded_appointments": [
+          {
+            "appointment_id": "apt-001",
+            "synthetic": true
+          }
+        ],
+        "state": "same_day_distinct",
+        "synthetic": true
+      },
+      "intended_action": "resize",
+      "language_form": "typo",
+      "latest_time": "16:00",
+      "location_semantics": "omitted",
+      "normalized_values": {
+        "appointment_date": "2026-08-04",
+        "duration_minutes": 30,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "patient_semantics": "corrected",
+      "practitioner_semantics": "exact",
+      "provenance": "gold",
+      "reference_date": "2026-08-03",
+      "scenario_id": "lc4v2_group_014_var_005",
+      "source_spans": {
+        "appointment_date": [
+          {
+            "end": 108,
+            "start": 100,
+            "text": "tomorrow",
+            "turn_index": 0
+          }
+        ],
+        "appointment_type": [
+          {
+            "end": 33,
+            "start": 17,
+            "text": "standard consult",
+            "turn_index": 0
+          }
+        ],
+        "duration_minutes": [
+          {
+            "end": 99,
+            "start": 90,
+            "text": "30-minute",
+            "turn_index": 0
+          }
+        ],
+        "earliest_time": [
+          {
+            "end": 120,
+            "start": 117,
+            "text": "2pm",
+            "turn_index": 0
+          }
+        ],
+        "latest_time": [
+          {
+            "end": 128,
+            "start": 125,
+            "text": "4pm",
+            "turn_index": 0
+          }
+        ],
+        "patient": [
+          {
+            "end": 73,
+            "start": 62,
+            "text": "Avery Quinn",
+            "turn_index": 0
+          }
+        ],
+        "practitioner": [
+          {
+            "end": 86,
+            "start": 79,
+            "text": "Dr Chen",
+            "turn_index": 0
+          }
+        ]
+      },
+      "spec_version": "lc1.v1",
+      "temporal_relation": "interval"
+    },
+    {
+      "action_semantics": "intended",
+      "adjudication": "adjudicated",
+      "appointment_type_semantics": "exact",
+      "clarification_choices": [],
+      "clinic_clock": "2026-08-03T08:20:00+10:00",
+      "description": "Fresh synthetic v2 resize/interval/same_day_distinct/corrected",
+      "dialogue_form": "one_shot",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Um, could you extend the standard consult for Morgan Reed—correction, Avery Quinn with Dr Chen to 30-minute tomorrow between 2pm and 4pm, please."
+        }
+      ],
+      "diary_state": "same_day_distinct",
+      "duration_minutes": 30,
+      "duration_semantics": "exact",
+      "earliest_time": "14:00",
+      "entity_state": "corrected",
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "date": "2026-08-04",
+          "duration_minutes": 30,
+          "patient_id": "p-001",
+          "practitioner_id": "pr-004",
+          "start_time": "14:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "count": 1
+        }
+      ],
+      "expected_clarification": null,
+      "expected_outcome_kind": "appointment_resized",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "family": "lc4v2_group_014",
+      "forbidden_outcomes": [
+        "appointment_confirmed",
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "confirm_appointment",
+        "mutate_diary_direct"
+      ],
+      "initial_diary_state": {
+        "diary_page_date": "2026-08-04",
+        "reference_date": "2026-08-03",
+        "seeded_appointments": [
+          {
+            "appointment_id": "apt-001",
+            "synthetic": true
+          }
+        ],
+        "state": "same_day_distinct",
+        "synthetic": true
+      },
+      "intended_action": "resize",
+      "language_form": "speech_like",
+      "latest_time": "16:00",
+      "location_semantics": "omitted",
+      "normalized_values": {
+        "appointment_date": "2026-08-04",
+        "duration_minutes": 30,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "patient_semantics": "corrected",
+      "practitioner_semantics": "exact",
+      "provenance": "gold",
+      "reference_date": "2026-08-03",
+      "scenario_id": "lc4v2_group_014_var_006",
+      "source_spans": {
+        "appointment_date": [
+          {
+            "end": 116,
+            "start": 108,
+            "text": "tomorrow",
+            "turn_index": 0
+          }
+        ],
+        "appointment_type": [
+          {
+            "end": 41,
+            "start": 25,
+            "text": "standard consult",
+            "turn_index": 0
+          }
+        ],
+        "duration_minutes": [
+          {
+            "end": 107,
+            "start": 98,
+            "text": "30-minute",
+            "turn_index": 0
+          }
+        ],
+        "earliest_time": [
+          {
+            "end": 128,
+            "start": 125,
+            "text": "2pm",
+            "turn_index": 0
+          }
+        ],
+        "latest_time": [
+          {
+            "end": 136,
+            "start": 133,
+            "text": "4pm",
+            "turn_index": 0
+          }
+        ],
+        "patient": [
+          {
+            "end": 81,
+            "start": 70,
+            "text": "Avery Quinn",
+            "turn_index": 0
+          }
+        ],
+        "practitioner": [
+          {
+            "end": 94,
+            "start": 87,
+            "text": "Dr Chen",
+            "turn_index": 0
+          }
+        ]
+      },
+      "spec_version": "lc1.v1",
+      "temporal_relation": "interval"
+    },
+    {
+      "action_semantics": "intended",
+      "adjudication": "adjudicated",
+      "appointment_type_semantics": "exact",
+      "clarification_choices": [],
+      "clinic_clock": "2026-08-03T08:20:00+10:00",
+      "description": "Fresh synthetic v2 resize/interval/same_day_distinct/corrected",
+      "dialogue_form": "one_shot",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "extend the standard consult for Morgan Reed—correction, Avery Quinn with Dr Chen to 30-minute tomorrow between 2pm and 4pm — please."
+        }
+      ],
+      "diary_state": "same_day_distinct",
+      "duration_minutes": 30,
+      "duration_semantics": "exact",
+      "earliest_time": "14:00",
+      "entity_state": "corrected",
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "date": "2026-08-04",
+          "duration_minutes": 30,
+          "patient_id": "p-001",
+          "practitioner_id": "pr-004",
+          "start_time": "14:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "count": 1
+        }
+      ],
+      "expected_clarification": null,
+      "expected_outcome_kind": "appointment_resized",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "family": "lc4v2_group_014",
+      "forbidden_outcomes": [
+        "appointment_confirmed",
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "confirm_appointment",
+        "mutate_diary_direct"
+      ],
+      "initial_diary_state": {
+        "diary_page_date": "2026-08-04",
+        "reference_date": "2026-08-03",
+        "seeded_appointments": [
+          {
+            "appointment_id": "apt-001",
+            "synthetic": true
+          }
+        ],
+        "state": "same_day_distinct",
+        "synthetic": true
+      },
+      "intended_action": "resize",
+      "language_form": "punctuation_variant",
+      "latest_time": "16:00",
+      "location_semantics": "omitted",
+      "normalized_values": {
+        "appointment_date": "2026-08-04",
+        "duration_minutes": 30,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "patient_semantics": "corrected",
+      "practitioner_semantics": "exact",
+      "provenance": "gold",
+      "reference_date": "2026-08-03",
+      "scenario_id": "lc4v2_group_014_var_007",
+      "source_spans": {
+        "appointment_date": [
+          {
+            "end": 102,
+            "start": 94,
+            "text": "tomorrow",
+            "turn_index": 0
+          }
+        ],
+        "appointment_type": [
+          {
+            "end": 27,
+            "start": 11,
+            "text": "standard consult",
+            "turn_index": 0
+          }
+        ],
+        "duration_minutes": [
+          {
+            "end": 93,
+            "start": 84,
+            "text": "30-minute",
+            "turn_index": 0
+          }
+        ],
+        "earliest_time": [
+          {
+            "end": 114,
+            "start": 111,
+            "text": "2pm",
+            "turn_index": 0
+          }
+        ],
+        "latest_time": [
+          {
+            "end": 122,
+            "start": 119,
+            "text": "4pm",
+            "turn_index": 0
+          }
+        ],
+        "patient": [
+          {
+            "end": 67,
+            "start": 56,
+            "text": "Avery Quinn",
+            "turn_index": 0
+          }
+        ],
+        "practitioner": [
+          {
+            "end": 80,
+            "start": 73,
+            "text": "Dr Chen",
+            "turn_index": 0
+          }
+        ]
+      },
+      "spec_version": "lc1.v1",
+      "temporal_relation": "interval"
+    },
+    {
+      "action_semantics": "intended",
+      "adjudication": "adjudicated",
+      "appointment_type_semantics": "exact",
+      "clarification_choices": [],
+      "clinic_clock": "2026-08-03T08:20:00+10:00",
+      "description": "Fresh synthetic v2 resize/interval/same_day_distinct/corrected",
+      "dialogue_form": "one_shot",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Keep confirmation safeguards in place and extend the standard consult for Morgan Reed—correction, Avery Quinn with Dr Chen to 30-minute tomorrow between 2pm and 4pm."
+        }
+      ],
+      "diary_state": "same_day_distinct",
+      "duration_minutes": 30,
+      "duration_semantics": "exact",
+      "earliest_time": "14:00",
+      "entity_state": "corrected",
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "date": "2026-08-04",
+          "duration_minutes": 30,
+          "patient_id": "p-001",
+          "practitioner_id": "pr-004",
+          "start_time": "14:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "count": 1
+        }
+      ],
+      "expected_clarification": null,
+      "expected_outcome_kind": "appointment_resized",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "family": "lc4v2_group_014",
+      "forbidden_outcomes": [
+        "appointment_confirmed",
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "confirm_appointment",
+        "mutate_diary_direct"
+      ],
+      "initial_diary_state": {
+        "diary_page_date": "2026-08-04",
+        "reference_date": "2026-08-03",
+        "seeded_appointments": [
+          {
+            "appointment_id": "apt-001",
+            "synthetic": true
+          }
+        ],
+        "state": "same_day_distinct",
+        "synthetic": true
+      },
+      "intended_action": "resize",
+      "language_form": "adversarial",
+      "latest_time": "16:00",
+      "location_semantics": "omitted",
+      "normalized_values": {
+        "appointment_date": "2026-08-04",
+        "duration_minutes": 30,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "patient_semantics": "corrected",
+      "practitioner_semantics": "exact",
+      "provenance": "gold",
+      "reference_date": "2026-08-03",
+      "scenario_id": "lc4v2_group_014_var_008",
+      "source_spans": {
+        "appointment_date": [
+          {
+            "end": 144,
+            "start": 136,
+            "text": "tomorrow",
+            "turn_index": 0
+          }
+        ],
+        "appointment_type": [
+          {
+            "end": 69,
+            "start": 53,
+            "text": "standard consult",
+            "turn_index": 0
+          }
+        ],
+        "duration_minutes": [
+          {
+            "end": 135,
+            "start": 126,
+            "text": "30-minute",
+            "turn_index": 0
+          }
+        ],
+        "earliest_time": [
+          {
+            "end": 156,
+            "start": 153,
+            "text": "2pm",
+            "turn_index": 0
+          }
+        ],
+        "latest_time": [
+          {
+            "end": 164,
+            "start": 161,
+            "text": "4pm",
+            "turn_index": 0
+          }
+        ],
+        "patient": [
+          {
+            "end": 109,
+            "start": 98,
+            "text": "Avery Quinn",
+            "turn_index": 0
+          }
+        ],
+        "practitioner": [
+          {
+            "end": 122,
+            "start": 115,
+            "text": "Dr Chen",
+            "turn_index": 0
+          }
+        ]
+      },
+      "spec_version": "lc1.v1",
+      "temporal_relation": "interval"
+    },
+    {
+      "action_semantics": "intended",
+      "adjudication": "adjudicated",
+      "appointment_type_semantics": "exact",
+      "clarification_choices": [],
+      "clinic_clock": "2026-08-03T08:20:00+10:00",
+      "description": "Fresh synthetic v2 resize/interval/same_day_distinct/corrected",
+      "dialogue_form": "one_shot",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please extend the standard consult for Morgan Reed—correction, Avery Quinn with Dr Chen to 30-minute tomorrow between 2pm and 4pm This is the final request."
+        }
+      ],
+      "diary_state": "same_day_distinct",
+      "duration_minutes": 30,
+      "duration_semantics": "exact",
+      "earliest_time": "14:00",
+      "entity_state": "corrected",
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "date": "2026-08-04",
+          "duration_minutes": 30,
+          "patient_id": "p-001",
+          "practitioner_id": "pr-004",
+          "start_time": "14:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "count": 1
+        }
+      ],
+      "expected_clarification": null,
+      "expected_outcome_kind": "appointment_resized",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "family": "lc4v2_group_014",
+      "forbidden_outcomes": [
+        "appointment_confirmed",
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "confirm_appointment",
+        "mutate_diary_direct"
+      ],
+      "initial_diary_state": {
+        "diary_page_date": "2026-08-04",
+        "reference_date": "2026-08-03",
+        "seeded_appointments": [
+          {
+            "appointment_id": "apt-001",
+            "synthetic": true
+          }
+        ],
+        "state": "same_day_distinct",
+        "synthetic": true
+      },
+      "intended_action": "resize",
+      "language_form": "plain",
+      "latest_time": "16:00",
+      "location_semantics": "omitted",
+      "normalized_values": {
+        "appointment_date": "2026-08-04",
+        "duration_minutes": 30,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "patient_semantics": "corrected",
+      "practitioner_semantics": "exact",
+      "provenance": "gold",
+      "reference_date": "2026-08-03",
+      "scenario_id": "lc4v2_group_014_var_009",
+      "source_spans": {
+        "appointment_date": [
+          {
+            "end": 109,
+            "start": 101,
+            "text": "tomorrow",
+            "turn_index": 0
+          }
+        ],
+        "appointment_type": [
+          {
+            "end": 34,
+            "start": 18,
+            "text": "standard consult",
+            "turn_index": 0
+          }
+        ],
+        "duration_minutes": [
+          {
+            "end": 100,
+            "start": 91,
+            "text": "30-minute",
+            "turn_index": 0
+          }
+        ],
+        "earliest_time": [
+          {
+            "end": 121,
+            "start": 118,
+            "text": "2pm",
+            "turn_index": 0
+          }
+        ],
+        "latest_time": [
+          {
+            "end": 129,
+            "start": 126,
+            "text": "4pm",
+            "turn_index": 0
+          }
+        ],
+        "patient": [
+          {
+            "end": 74,
+            "start": 63,
+            "text": "Avery Quinn",
+            "turn_index": 0
+          }
+        ],
+        "practitioner": [
+          {
+            "end": 87,
+            "start": 80,
+            "text": "Dr Chen",
+            "turn_index": 0
+          }
+        ]
+      },
+      "spec_version": "lc1.v1",
+      "temporal_relation": "interval"
+    },
+    {
+      "action_semantics": "intended",
+      "adjudication": "adjudicated",
+      "appointment_type_semantics": "exact",
+      "clarification_choices": [],
+      "clinic_clock": "2026-08-03T08:20:00+10:00",
+      "description": "Fresh synthetic v2 resize/interval/same_day_distinct/corrected",
+      "dialogue_form": "correction",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Please extend the standard consult for Morgan Reed—correction, Avery Quinn with Dr Chen to 30-minute tomorrow at 1pm."
+        },
+        {
+          "turn": 2,
+          "utterance": "Correction: Could you extend the standard consult for Morgan Reed—correction, Avery Quinn with Dr Chen to 30-minute tomorrow between 2pm and 4pm, please?"
+        }
+      ],
+      "diary_state": "same_day_distinct",
+      "duration_minutes": 30,
+      "duration_semantics": "exact",
+      "earliest_time": "14:00",
+      "entity_state": "corrected",
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "date": "2026-08-04",
+          "duration_minutes": 30,
+          "patient_id": "p-001",
+          "practitioner_id": "pr-004",
+          "start_time": "14:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "count": 1
+        }
+      ],
+      "expected_clarification": null,
+      "expected_outcome_kind": "appointment_resized",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "family": "lc4v2_group_014",
+      "forbidden_outcomes": [
+        "appointment_confirmed",
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "confirm_appointment",
+        "mutate_diary_direct"
+      ],
+      "initial_diary_state": {
+        "diary_page_date": "2026-08-04",
+        "reference_date": "2026-08-03",
+        "seeded_appointments": [
+          {
+            "appointment_id": "apt-001",
+            "synthetic": true
+          }
+        ],
+        "state": "same_day_distinct",
+        "synthetic": true
+      },
+      "intended_action": "resize",
+      "language_form": "paraphrase",
+      "latest_time": "16:00",
+      "location_semantics": "omitted",
+      "normalized_values": {
+        "appointment_date": "2026-08-04",
+        "duration_minutes": 30,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "patient_semantics": "corrected",
+      "practitioner_semantics": "exact",
+      "provenance": "gold",
+      "reference_date": "2026-08-03",
+      "scenario_id": "lc4v2_group_014_var_010",
+      "source_spans": {
+        "appointment_date": [
+          {
+            "end": 124,
+            "start": 116,
+            "text": "tomorrow",
+            "turn_index": 1
+          }
+        ],
+        "appointment_type": [
+          {
+            "end": 49,
+            "start": 33,
+            "text": "standard consult",
+            "turn_index": 1
+          }
+        ],
+        "duration_minutes": [
+          {
+            "end": 115,
+            "start": 106,
+            "text": "30-minute",
+            "turn_index": 1
+          }
+        ],
+        "earliest_time": [
+          {
+            "end": 136,
+            "start": 133,
+            "text": "2pm",
+            "turn_index": 1
+          }
+        ],
+        "latest_time": [
+          {
+            "end": 144,
+            "start": 141,
+            "text": "4pm",
+            "turn_index": 1
+          }
+        ],
+        "patient": [
+          {
+            "end": 89,
+            "start": 78,
+            "text": "Avery Quinn",
+            "turn_index": 1
+          }
+        ],
+        "practitioner": [
+          {
+            "end": 102,
+            "start": 95,
+            "text": "Dr Chen",
+            "turn_index": 1
+          }
+        ]
+      },
+      "spec_version": "lc1.v1",
+      "temporal_relation": "interval"
+    },
+    {
+      "action_semantics": "intended",
+      "adjudication": "adjudicated",
+      "appointment_type_semantics": "exact",
+      "clarification_choices": [],
+      "clinic_clock": "2026-08-03T08:20:00+10:00",
+      "description": "Fresh synthetic v2 resize/interval/same_day_distinct/corrected",
+      "dialogue_form": "clarification",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "The synthetic appointment details need attention."
+        },
+        {
+          "turn": 2,
+          "utterance": "Um, could you extend the standard consult for Morgan Reed—correction, Avery Quinn with Dr Chen to 30-minute tomorrow between 2pm and 4pm, please."
+        }
+      ],
+      "diary_state": "same_day_distinct",
+      "duration_minutes": 30,
+      "duration_semantics": "exact",
+      "earliest_time": "14:00",
+      "entity_state": "corrected",
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "date": "2026-08-04",
+          "duration_minutes": 30,
+          "patient_id": "p-001",
+          "practitioner_id": "pr-004",
+          "start_time": "14:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "count": 1
+        }
+      ],
+      "expected_clarification": null,
+      "expected_outcome_kind": "appointment_resized",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "family": "lc4v2_group_014",
+      "forbidden_outcomes": [
+        "appointment_confirmed",
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "confirm_appointment",
+        "mutate_diary_direct"
+      ],
+      "initial_diary_state": {
+        "diary_page_date": "2026-08-04",
+        "reference_date": "2026-08-03",
+        "seeded_appointments": [
+          {
+            "appointment_id": "apt-001",
+            "synthetic": true
+          }
+        ],
+        "state": "same_day_distinct",
+        "synthetic": true
+      },
+      "intended_action": "resize",
+      "language_form": "speech_like",
+      "latest_time": "16:00",
+      "location_semantics": "omitted",
+      "normalized_values": {
+        "appointment_date": "2026-08-04",
+        "duration_minutes": 30,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "patient_semantics": "corrected",
+      "practitioner_semantics": "exact",
+      "provenance": "gold",
+      "reference_date": "2026-08-03",
+      "scenario_id": "lc4v2_group_014_var_011",
+      "source_spans": {
+        "appointment_date": [
+          {
+            "end": 116,
+            "start": 108,
+            "text": "tomorrow",
+            "turn_index": 1
+          }
+        ],
+        "appointment_type": [
+          {
+            "end": 41,
+            "start": 25,
+            "text": "standard consult",
+            "turn_index": 1
+          }
+        ],
+        "duration_minutes": [
+          {
+            "end": 107,
+            "start": 98,
+            "text": "30-minute",
+            "turn_index": 1
+          }
+        ],
+        "earliest_time": [
+          {
+            "end": 128,
+            "start": 125,
+            "text": "2pm",
+            "turn_index": 1
+          }
+        ],
+        "latest_time": [
+          {
+            "end": 136,
+            "start": 133,
+            "text": "4pm",
+            "turn_index": 1
+          }
+        ],
+        "patient": [
+          {
+            "end": 81,
+            "start": 70,
+            "text": "Avery Quinn",
+            "turn_index": 1
+          }
+        ],
+        "practitioner": [
+          {
+            "end": 94,
+            "start": 87,
+            "text": "Dr Chen",
+            "turn_index": 1
+          }
+        ]
+      },
+      "spec_version": "lc1.v1",
+      "temporal_relation": "interval"
+    },
+    {
+      "action_semantics": "intended",
+      "adjudication": "adjudicated",
+      "appointment_type_semantics": "exact",
+      "clarification_choices": [],
+      "clinic_clock": "2026-08-03T08:20:00+10:00",
+      "description": "Fresh synthetic v2 resize/interval/same_day_distinct/corrected",
+      "dialogue_form": "repeated",
+      "dialogue_turns": [
+        {
+          "turn": 1,
+          "utterance": "Hi, when you get a moment, extend the standard consult for Morgan Reed—correction, Avery Quinn with Dr Chen to 30-minute tomorrow between 2pm and 4pm, thanks."
+        },
+        {
+          "turn": 2,
+          "utterance": "Same request, final instruction: Hi, when you get a moment, extend the standard consult for Morgan Reed—correction, Avery Quinn with Dr Chen to 30-minute tomorrow between 2pm and 4pm, thanks."
+        }
+      ],
+      "diary_state": "same_day_distinct",
+      "duration_minutes": 30,
+      "duration_semantics": "exact",
+      "earliest_time": "14:00",
+      "entity_state": "corrected",
+      "expected_appointment_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "date": "2026-08-04",
+          "duration_minutes": 30,
+          "patient_id": "p-001",
+          "practitioner_id": "pr-004",
+          "start_time": "14:00"
+        }
+      ],
+      "expected_audit_deltas": [
+        {
+          "appointment_id": "apt-001",
+          "change_type": "resized",
+          "count": 1
+        }
+      ],
+      "expected_clarification": null,
+      "expected_outcome_kind": "appointment_resized",
+      "expected_tool_sequence": [
+        "search_patients",
+        "update_appointment"
+      ],
+      "family": "lc4v2_group_014",
+      "forbidden_outcomes": [
+        "appointment_confirmed",
+        "second_appointment_created"
+      ],
+      "forbidden_tool_calls": [
+        "confirm_appointment",
+        "mutate_diary_direct"
+      ],
+      "initial_diary_state": {
+        "diary_page_date": "2026-08-04",
+        "reference_date": "2026-08-03",
+        "seeded_appointments": [
+          {
+            "appointment_id": "apt-001",
+            "synthetic": true
+          }
+        ],
+        "state": "same_day_distinct",
+        "synthetic": true
+      },
+      "intended_action": "resize",
+      "language_form": "filler",
+      "latest_time": "16:00",
+      "location_semantics": "omitted",
+      "normalized_values": {
+        "appointment_date": "2026-08-04",
+        "duration_minutes": 30,
+        "earliest_time": "14:00",
+        "latest_time": "16:00"
+      },
+      "patient_semantics": "corrected",
+      "practitioner_semantics": "exact",
+      "provenance": "gold",
+      "reference_date": "2026-08-03",
+      "scenario_id": "lc4v2_group_014_var_012",
+      "source_spans": {
+        "appointment_date": [
+          {
+            "end": 162,
+            "start": 154,
+            "text": "tomorrow",
+            "turn_index": 1
+          }
+        ],
+        "appointment_type": [
+          {
+            "end": 87,
+            "start": 71,
+            "text": "standard consult",
+            "turn_index": 1
+          }
+        ],
+        "duration_minutes": [
+          {
+            "end": 153,
+            "start": 144,
+            "text": "30-minute",
+            "turn_index": 1
+          }
+        ],
+        "earliest_time": [
+          {
+            "end": 174,
+            "start": 171,
+            "text": "2pm",
+            "turn_index": 1
+          }
+        ],
+        "latest_time": [
+          {
+            "end": 182,
+            "start": 179,
+            "text": "4pm",
+            "turn_index": 1
+          }
+        ],
+        "patient": [
+          {
+            "end": 127,
+            "start": 116,
+            "text": "Avery Quinn",
+            "turn_index": 1
+          }
+        ],
+        "practitioner": [
+          {
+            "end": 140,
+            "start": 133,
+            "text": "Dr Chen",
+            "turn_index": 1
+          }
+        ]
+      },
+      "spec_version": "lc1.v1",
+      "temporal_relation": "interval"
+    }
+  ]
+}
