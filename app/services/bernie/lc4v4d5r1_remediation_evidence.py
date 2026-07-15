@@ -515,7 +515,7 @@ def run_d5r1_evidence(source_commit: str = "unknown") -> dict[str, Any]:
     # Verify expected versioned relation probes differ only by diary_relation
     g_expected_relations_correct = True
     g_expected_relations_detail: dict[str, Any] = {}
-    for pid in EXPECTED_VERSIONED_RELATION_IDS:
+    for pid in sorted(EXPECTED_VERSIONED_RELATION_IDS):
         case = next(c for c in case_results if c["probe_id"] == pid)
         diffs = case.get("differences", [])
         diff_correct = diffs == ["diary_relation"]
@@ -530,7 +530,7 @@ def run_d5r1_evidence(source_commit: str = "unknown") -> dict[str, Any]:
     # ``accepted_d4_versioned_change``.  Verify the actual refusal behavior.
     g_unsafe_still_refused = True
     g_unsafe_refusal_detail: dict[str, Any] = {}
-    for uid in UNSAFE_IDS:
+    for uid in sorted(UNSAFE_IDS):
         if uid in option_a_failed_ids:
             g_unsafe_still_refused = False
             g_unsafe_refusal_detail[uid] = {"error": "option_a_failed"}
