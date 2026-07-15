@@ -29,7 +29,12 @@ from app.services.bernie.semantic_extraction import extract_semantics
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 D1_REPORT = ROOT / "docs" / "bernie-lc4v4d1-development-diagnostic.json"
-SOURCE_COMMIT = "5ba29ef0f3e03a6128e5e0a34bad1c4d40f36f20"
+D2_JSON_REPORT = ROOT / "docs" / "bernie-lc4v4d2-semantic-remediation.json"
+D2_MARKDOWN_REPORT = ROOT / "docs" / "bernie-lc4v4d2-semantic-remediation.md"
+SOURCE_COMMIT = "862c34bbda6d2544c63263155d9e3915d5b557df"
+EXPECTED_D2_REPORT_HASH = (
+    "sha256:3220ac943659ae1449c5c285144b1fa980f659668a705ca7aef98f0aea6d317a"
+)
 
 
 def _hash_payload(payload: object) -> str:
@@ -123,6 +128,7 @@ class TestRecoveredReport:
     def test_report_is_deterministic_and_complete(self, report):
         repeated = run_semantic_remediation(SOURCE_COMMIT)
         assert repeated.report_hash == report.report_hash
+        assert report.report_hash == EXPECTED_D2_REPORT_HASH
         payload = d2_report_to_dict(report)
         assert payload["report_hash"] == report.report_hash
         assert len(payload["transitions"]) == 20
@@ -130,6 +136,14 @@ class TestRecoveredReport:
         markdown = d2_report_to_markdown(report)
         assert "D1 authoring quarantine" in markdown
         assert "Policy/state-join remediation is not authorized" in markdown
+
+    def test_committed_reports_match_exact_recovery(self, report):
+        assert json.loads(D2_JSON_REPORT.read_text(encoding="utf-8")) == (
+            d2_report_to_dict(report)
+        )
+        assert D2_MARKDOWN_REPORT.read_text(encoding="utf-8") == (
+            d2_report_to_markdown(report) + "\n"
+        )
 
 
 @pytest.mark.parametrize(

@@ -1,15 +1,14 @@
 {
-  "schema_version": "lc4v4d2.semantic_remediation.v1",
-  "source_commit": "c8f015962ecc836d2c0b2a25426ea1114e8c1ccb",
-  "d1_fixture_hash_validated": true,
-  "d1_report_hash_validated": true,
-  "d1_selection_hash_validated": true,
-  "target_23_ids_matched": true,
-  "before_report_hash": "sha256:1527b99359dc76e831d7eabf49fff022781faf5d248c436bde6e022f30eff84d",
-  "after_report_hash": "sha256:a8180c600766e4e08456f1ce2fda27eefee11652082cca979204b76a799a6dfa",
+  "schema_version": "lc4v4d2.semantic_remediation.v2",
+  "source_commit": "862c34bbda6d2544c63263155d9e3915d5b557df",
+  "report_hash": "sha256:3220ac943659ae1449c5c285144b1fa980f659668a705ca7aef98f0aea6d317a",
+  "d1_fixture_hash": "sha256:a81de0b5371d4fcc425c23f0da9560e29827e3e85cc22847990ea83518863269",
+  "d1_report_hash": "sha256:1527b99359dc76e831d7eabf49fff022781faf5d248c436bde6e022f30eff84d",
+  "d1_selection_hash": "sha256:1b254ae627e26b1b301b660628d90f39dce5e0364afc0cfcf4c4855fb6531f02",
+  "valid_selection_hash": "sha256:0badec28ad533b630786d245e5ab47dee5655b83239869f7d0a2d12a8935d105",
   "total_probes": 60,
-  "total_observations": 120,
-  "before_classifications": {
+  "total_observations": 114,
+  "raw_before_classifications": {
     "authoring_invalid": 0,
     "parser_gap": 23,
     "policy_contract_gap": 12,
@@ -17,87 +16,29 @@
     "planned_unavailable": 0,
     "supported_pass": 25
   },
-  "after_classifications": {
-    "authoring_invalid": 0,
-    "parser_gap": 3,
+  "adjusted_before_classifications": {
+    "authoring_invalid": 3,
+    "parser_gap": 20,
+    "policy_contract_gap": 12,
+    "scorer_gap": 0,
+    "planned_unavailable": 0,
+    "supported_pass": 25
+  },
+  "raw_after_classifications": {
+    "authoring_invalid": 3,
+    "parser_gap": 0,
     "policy_contract_gap": 20,
     "scorer_gap": 0,
     "planned_unavailable": 0,
     "supported_pass": 37
   },
-  "before_family_counts": {
-    "entity": {
-      "total": 30,
-      "parser_gap": 12,
-      "policy_contract_gap": 8,
-      "supported_pass": 10,
-      "authoring_invalid": 0,
-      "scorer_gap": 0,
-      "planned_unavailable": 0
-    },
-    "dialogue": {
-      "total": 12,
-      "parser_gap": 5,
-      "policy_contract_gap": 1,
-      "supported_pass": 6,
-      "authoring_invalid": 0,
-      "scorer_gap": 0,
-      "planned_unavailable": 0
-    },
-    "safety": {
-      "total": 12,
-      "parser_gap": 6,
-      "policy_contract_gap": 3,
-      "supported_pass": 3,
-      "authoring_invalid": 0,
-      "scorer_gap": 0,
-      "planned_unavailable": 0
-    },
-    "diary": {
-      "total": 6,
-      "supported_pass": 6,
-      "authoring_invalid": 0,
-      "scorer_gap": 0,
-      "planned_unavailable": 0
-    }
-  },
-  "after_family_counts": {
-    "entity": {
-      "total": 30,
-      "authoring_invalid": 0,
-      "parser_gap": 2,
-      "policy_contract_gap": 13,
-      "scorer_gap": 0,
-      "supported_pass": 15,
-      "planned_unavailable": 0
-    },
-    "dialogue": {
-      "total": 12,
-      "authoring_invalid": 0,
-      "parser_gap": 1,
-      "policy_contract_gap": 2,
-      "scorer_gap": 0,
-      "supported_pass": 9,
-      "planned_unavailable": 0
-    },
-    "safety": {
-      "total": 12,
-      "authoring_invalid": 0,
-      "parser_gap": 0,
-      "policy_contract_gap": 5,
-      "scorer_gap": 0,
-      "supported_pass": 7,
-      "planned_unavailable": 0
-    },
-    "diary": {
-      "total": 6,
-      "authoring_invalid": 0,
-      "parser_gap": 0,
-      "policy_contract_gap": 0,
-      "scorer_gap": 0,
-      "supported_pass": 6,
-      "planned_unavailable": 0
-    }
+  "adjusted_after_classifications": {
+    "authoring_invalid": 3,
+    "parser_gap": 0,
+    "policy_contract_gap": 20,
+    "scorer_gap": 0,
+    "planned_unavailable": 0,
+    "supported_pass": 37
   },
   "transitions": [
     {
@@ -105,18 +46,23 @@
       "family": "entity",
       "before_classification": "parser_gap",
       "after_classification": "supported_pass",
-      "before_mismatch_fields": [],
+      "before_mismatch_fields": [
+        "action_semantics",
+        "requires_clarification",
+        "downstream_outcome",
+        "tool_sequence",
+        "interpretation_tools",
+        "authority",
+        "clarification_policy",
+        "appointment_deltas",
+        "audit_deltas",
+        "safety"
+      ],
       "after_mismatch_fields": [],
       "semantic_fields_fixed": [
-        "entity_semantics",
         "action_semantics",
-        "normalized_values",
-        "requires_clarification",
-        "temporal_relation",
-        "intended_action"
-      ],
-      "policy_fields_changed": [],
-      "unchanged": false
+        "requires_clarification"
+      ]
     },
     {
       "probe_id": "lc4v4d1_entity_patient_ambiguous_03",
@@ -124,41 +70,51 @@
       "before_classification": "parser_gap",
       "after_classification": "policy_contract_gap",
       "before_mismatch_fields": [
-        "clarification_policy"
+        "action_semantics",
+        "entity_semantics",
+        "requires_clarification",
+        "downstream_outcome",
+        "tool_sequence",
+        "interpretation_tools",
+        "authority",
+        "clarification_policy",
+        "appointment_deltas",
+        "audit_deltas",
+        "safety"
       ],
       "after_mismatch_fields": [
         "clarification_policy"
       ],
       "semantic_fields_fixed": [
-        "entity_semantics",
         "action_semantics",
-        "normalized_values",
-        "requires_clarification",
-        "temporal_relation",
-        "intended_action"
-      ],
-      "policy_fields_changed": [
-        "clarification_policy"
-      ],
-      "unchanged": false
+        "entity_semantics",
+        "requires_clarification"
+      ]
     },
     {
       "probe_id": "lc4v4d1_entity_patient_negated_05",
       "family": "entity",
       "before_classification": "parser_gap",
       "after_classification": "supported_pass",
-      "before_mismatch_fields": [],
+      "before_mismatch_fields": [
+        "action_semantics",
+        "entity_semantics",
+        "requires_clarification",
+        "downstream_outcome",
+        "tool_sequence",
+        "interpretation_tools",
+        "authority",
+        "clarification_policy",
+        "appointment_deltas",
+        "audit_deltas",
+        "safety"
+      ],
       "after_mismatch_fields": [],
       "semantic_fields_fixed": [
-        "entity_semantics",
         "action_semantics",
-        "normalized_values",
-        "requires_clarification",
-        "temporal_relation",
-        "intended_action"
-      ],
-      "policy_fields_changed": [],
-      "unchanged": false
+        "entity_semantics",
+        "requires_clarification"
+      ]
     },
     {
       "probe_id": "lc4v4d1_entity_practitioner_ambiguous_09",
@@ -166,41 +122,51 @@
       "before_classification": "parser_gap",
       "after_classification": "policy_contract_gap",
       "before_mismatch_fields": [
-        "clarification_policy"
+        "action_semantics",
+        "entity_semantics",
+        "requires_clarification",
+        "downstream_outcome",
+        "tool_sequence",
+        "interpretation_tools",
+        "authority",
+        "clarification_policy",
+        "appointment_deltas",
+        "audit_deltas",
+        "safety"
       ],
       "after_mismatch_fields": [
         "clarification_policy"
       ],
       "semantic_fields_fixed": [
-        "entity_semantics",
         "action_semantics",
-        "normalized_values",
-        "requires_clarification",
-        "temporal_relation",
-        "intended_action"
-      ],
-      "policy_fields_changed": [
-        "clarification_policy"
-      ],
-      "unchanged": false
+        "entity_semantics",
+        "requires_clarification"
+      ]
     },
     {
       "probe_id": "lc4v4d1_entity_practitioner_negated_11",
       "family": "entity",
       "before_classification": "parser_gap",
       "after_classification": "supported_pass",
-      "before_mismatch_fields": [],
+      "before_mismatch_fields": [
+        "action_semantics",
+        "entity_semantics",
+        "requires_clarification",
+        "downstream_outcome",
+        "tool_sequence",
+        "interpretation_tools",
+        "authority",
+        "clarification_policy",
+        "appointment_deltas",
+        "audit_deltas",
+        "safety"
+      ],
       "after_mismatch_fields": [],
       "semantic_fields_fixed": [
-        "entity_semantics",
         "action_semantics",
-        "normalized_values",
-        "requires_clarification",
-        "temporal_relation",
-        "intended_action"
-      ],
-      "policy_fields_changed": [],
-      "unchanged": false
+        "entity_semantics",
+        "requires_clarification"
+      ]
     },
     {
       "probe_id": "lc4v4d1_entity_location_ambiguous_15",
@@ -208,41 +174,51 @@
       "before_classification": "parser_gap",
       "after_classification": "policy_contract_gap",
       "before_mismatch_fields": [
-        "clarification_policy"
+        "action_semantics",
+        "entity_semantics",
+        "requires_clarification",
+        "downstream_outcome",
+        "tool_sequence",
+        "interpretation_tools",
+        "authority",
+        "clarification_policy",
+        "appointment_deltas",
+        "audit_deltas",
+        "safety"
       ],
       "after_mismatch_fields": [
         "clarification_policy"
       ],
       "semantic_fields_fixed": [
-        "entity_semantics",
         "action_semantics",
-        "normalized_values",
-        "requires_clarification",
-        "temporal_relation",
-        "intended_action"
-      ],
-      "policy_fields_changed": [
-        "clarification_policy"
-      ],
-      "unchanged": false
+        "entity_semantics",
+        "requires_clarification"
+      ]
     },
     {
       "probe_id": "lc4v4d1_entity_location_negated_17",
       "family": "entity",
       "before_classification": "parser_gap",
       "after_classification": "supported_pass",
-      "before_mismatch_fields": [],
+      "before_mismatch_fields": [
+        "action_semantics",
+        "entity_semantics",
+        "requires_clarification",
+        "downstream_outcome",
+        "tool_sequence",
+        "interpretation_tools",
+        "authority",
+        "clarification_policy",
+        "appointment_deltas",
+        "audit_deltas",
+        "safety"
+      ],
       "after_mismatch_fields": [],
       "semantic_fields_fixed": [
-        "entity_semantics",
         "action_semantics",
-        "normalized_values",
-        "requires_clarification",
-        "temporal_relation",
-        "intended_action"
-      ],
-      "policy_fields_changed": [],
-      "unchanged": false
+        "entity_semantics",
+        "requires_clarification"
+      ]
     },
     {
       "probe_id": "lc4v4d1_entity_appt_type_ambiguous_21",
@@ -250,41 +226,49 @@
       "before_classification": "parser_gap",
       "after_classification": "policy_contract_gap",
       "before_mismatch_fields": [
-        "clarification_policy"
+        "action_semantics",
+        "entity_semantics",
+        "requires_clarification",
+        "downstream_outcome",
+        "tool_sequence",
+        "interpretation_tools",
+        "authority",
+        "clarification_policy",
+        "appointment_deltas",
+        "audit_deltas",
+        "safety"
       ],
       "after_mismatch_fields": [
         "clarification_policy"
       ],
       "semantic_fields_fixed": [
-        "entity_semantics",
         "action_semantics",
-        "normalized_values",
-        "requires_clarification",
-        "temporal_relation",
-        "intended_action"
-      ],
-      "policy_fields_changed": [
-        "clarification_policy"
-      ],
-      "unchanged": false
+        "entity_semantics",
+        "requires_clarification"
+      ]
     },
     {
       "probe_id": "lc4v4d1_entity_appt_type_negated_23",
       "family": "entity",
       "before_classification": "parser_gap",
       "after_classification": "supported_pass",
-      "before_mismatch_fields": [],
+      "before_mismatch_fields": [
+        "action_semantics",
+        "requires_clarification",
+        "downstream_outcome",
+        "tool_sequence",
+        "interpretation_tools",
+        "authority",
+        "clarification_policy",
+        "appointment_deltas",
+        "audit_deltas",
+        "safety"
+      ],
       "after_mismatch_fields": [],
       "semantic_fields_fixed": [
-        "entity_semantics",
         "action_semantics",
-        "normalized_values",
-        "requires_clarification",
-        "temporal_relation",
-        "intended_action"
-      ],
-      "policy_fields_changed": [],
-      "unchanged": false
+        "requires_clarification"
+      ]
     },
     {
       "probe_id": "lc4v4d1_entity_duration_ambiguous_27",
@@ -292,73 +276,50 @@
       "before_classification": "parser_gap",
       "after_classification": "policy_contract_gap",
       "before_mismatch_fields": [
-        "clarification_policy"
+        "action_semantics",
+        "normalized_values",
+        "entity_semantics",
+        "requires_clarification",
+        "downstream_outcome",
+        "tool_sequence",
+        "interpretation_tools",
+        "authority",
+        "clarification_policy",
+        "appointment_deltas",
+        "audit_deltas",
+        "safety"
       ],
       "after_mismatch_fields": [
         "clarification_policy"
       ],
       "semantic_fields_fixed": [
-        "entity_semantics",
         "action_semantics",
         "normalized_values",
-        "requires_clarification",
-        "temporal_relation",
-        "intended_action"
-      ],
-      "policy_fields_changed": [
-        "clarification_policy"
-      ],
-      "unchanged": false
-    },
-    {
-      "probe_id": "lc4v4d1_entity_duration_corrected_28",
-      "family": "entity",
-      "before_classification": "parser_gap",
-      "after_classification": "parser_gap",
-      "before_mismatch_fields": [
-        "normalized_values",
-        "appointment_deltas"
-      ],
-      "after_mismatch_fields": [
-        "normalized_values",
-        "appointment_deltas"
-      ],
-      "semantic_fields_fixed": [],
-      "policy_fields_changed": [],
-      "unchanged": true
-    },
-    {
-      "probe_id": "lc4v4d1_entity_duration_negated_29",
-      "family": "entity",
-      "before_classification": "parser_gap",
-      "after_classification": "parser_gap",
-      "before_mismatch_fields": [
-        "normalized_values"
-      ],
-      "after_mismatch_fields": [
-        "normalized_values"
-      ],
-      "semantic_fields_fixed": [],
-      "policy_fields_changed": [],
-      "unchanged": true
+        "entity_semantics",
+        "requires_clarification"
+      ]
     },
     {
       "probe_id": "lc4v4d1_dialogue_clarification_multi_02",
       "family": "dialogue",
       "before_classification": "parser_gap",
       "after_classification": "supported_pass",
-      "before_mismatch_fields": [],
+      "before_mismatch_fields": [
+        "action_semantics",
+        "requires_clarification",
+        "downstream_outcome",
+        "tool_sequence",
+        "interpretation_tools",
+        "authority",
+        "clarification_policy",
+        "appointment_deltas",
+        "audit_deltas"
+      ],
       "after_mismatch_fields": [],
       "semantic_fields_fixed": [
-        "entity_semantics",
         "action_semantics",
-        "normalized_values",
-        "requires_clarification",
-        "temporal_relation",
-        "intended_action"
-      ],
-      "policy_fields_changed": [],
-      "unchanged": false
+        "requires_clarification"
+      ]
     },
     {
       "probe_id": "lc4v4d1_dialogue_correction_single_03",
@@ -366,95 +327,63 @@
       "before_classification": "parser_gap",
       "after_classification": "policy_contract_gap",
       "before_mismatch_fields": [
-        "tool_sequence",
-        "interpretation_tools"
+        "entity_semantics"
       ],
       "after_mismatch_fields": [
         "tool_sequence",
         "interpretation_tools"
       ],
       "semantic_fields_fixed": [
-        "entity_semantics",
-        "action_semantics",
-        "normalized_values",
-        "requires_clarification",
-        "temporal_relation",
-        "intended_action"
-      ],
-      "policy_fields_changed": [
-        "tool_sequence",
-        "interpretation_tools"
-      ],
-      "unchanged": false
+        "entity_semantics"
+      ]
     },
     {
       "probe_id": "lc4v4d1_dialogue_reversal_single_05",
       "family": "dialogue",
       "before_classification": "parser_gap",
       "after_classification": "supported_pass",
-      "before_mismatch_fields": [],
+      "before_mismatch_fields": [
+        "action_negated",
+        "downstream_outcome",
+        "tool_sequence",
+        "interpretation_tools",
+        "appointment_deltas",
+        "audit_deltas",
+        "safety"
+      ],
       "after_mismatch_fields": [],
       "semantic_fields_fixed": [
-        "entity_semantics",
-        "action_semantics",
-        "normalized_values",
-        "requires_clarification",
-        "temporal_relation",
-        "intended_action"
-      ],
-      "policy_fields_changed": [],
-      "unchanged": false
-    },
-    {
-      "probe_id": "lc4v4d1_dialogue_ellipsis_multi_08",
-      "family": "dialogue",
-      "before_classification": "parser_gap",
-      "after_classification": "parser_gap",
-      "before_mismatch_fields": [
-        "entity_semantics"
-      ],
-      "after_mismatch_fields": [
-        "entity_semantics"
-      ],
-      "semantic_fields_fixed": [],
-      "policy_fields_changed": [],
-      "unchanged": true
+        "action_negated"
+      ]
     },
     {
       "probe_id": "lc4v4d1_dialogue_session_restart_multi_12",
       "family": "dialogue",
       "before_classification": "parser_gap",
       "after_classification": "supported_pass",
-      "before_mismatch_fields": [],
+      "before_mismatch_fields": [
+        "entity_semantics",
+        "tool_sequence",
+        "interpretation_tools"
+      ],
       "after_mismatch_fields": [],
       "semantic_fields_fixed": [
-        "entity_semantics",
-        "action_semantics",
-        "normalized_values",
-        "requires_clarification",
-        "temporal_relation",
-        "intended_action"
-      ],
-      "policy_fields_changed": [],
-      "unchanged": false
+        "entity_semantics"
+      ]
     },
     {
       "probe_id": "lc4v4d1_safety_move_safe_03",
       "family": "safety",
       "before_classification": "parser_gap",
       "after_classification": "supported_pass",
-      "before_mismatch_fields": [],
+      "before_mismatch_fields": [
+        "normalized_values",
+        "appointment_deltas"
+      ],
       "after_mismatch_fields": [],
       "semantic_fields_fixed": [
-        "entity_semantics",
-        "action_semantics",
-        "normalized_values",
-        "requires_clarification",
-        "temporal_relation",
-        "intended_action"
-      ],
-      "policy_fields_changed": [],
-      "unchanged": false
+        "normalized_values"
+      ]
     },
     {
       "probe_id": "lc4v4d1_safety_move_unsafe_04",
@@ -462,6 +391,7 @@
       "before_classification": "parser_gap",
       "after_classification": "policy_contract_gap",
       "before_mismatch_fields": [
+        "normalized_values",
         "tool_sequence",
         "interpretation_tools"
       ],
@@ -470,36 +400,32 @@
         "interpretation_tools"
       ],
       "semantic_fields_fixed": [
-        "entity_semantics",
-        "action_semantics",
-        "normalized_values",
-        "requires_clarification",
-        "temporal_relation",
-        "intended_action"
-      ],
-      "policy_fields_changed": [
-        "tool_sequence",
-        "interpretation_tools"
-      ],
-      "unchanged": false
+        "normalized_values"
+      ]
     },
     {
       "probe_id": "lc4v4d1_safety_resize_safe_05",
       "family": "safety",
       "before_classification": "parser_gap",
       "after_classification": "supported_pass",
-      "before_mismatch_fields": [],
+      "before_mismatch_fields": [
+        "intended_action",
+        "action_semantics",
+        "requires_clarification",
+        "downstream_outcome",
+        "tool_sequence",
+        "interpretation_tools",
+        "authority",
+        "clarification_policy",
+        "appointment_deltas",
+        "audit_deltas"
+      ],
       "after_mismatch_fields": [],
       "semantic_fields_fixed": [
-        "entity_semantics",
+        "intended_action",
         "action_semantics",
-        "normalized_values",
-        "requires_clarification",
-        "temporal_relation",
-        "intended_action"
-      ],
-      "policy_fields_changed": [],
-      "unchanged": false
+        "requires_clarification"
+      ]
     },
     {
       "probe_id": "lc4v4d1_safety_resize_unsafe_06",
@@ -507,69 +433,89 @@
       "before_classification": "parser_gap",
       "after_classification": "policy_contract_gap",
       "before_mismatch_fields": [
+        "intended_action",
+        "requires_clarification",
         "tool_sequence",
-        "interpretation_tools"
+        "interpretation_tools",
+        "clarification_policy"
       ],
       "after_mismatch_fields": [
         "tool_sequence",
         "interpretation_tools"
       ],
       "semantic_fields_fixed": [
-        "entity_semantics",
-        "action_semantics",
-        "normalized_values",
-        "requires_clarification",
-        "temporal_relation",
-        "intended_action"
-      ],
-      "policy_fields_changed": [
-        "tool_sequence",
-        "interpretation_tools"
-      ],
-      "unchanged": false
+        "intended_action",
+        "requires_clarification"
+      ]
     },
     {
       "probe_id": "lc4v4d1_safety_explain_safe_11",
       "family": "safety",
       "before_classification": "parser_gap",
       "after_classification": "supported_pass",
-      "before_mismatch_fields": [],
+      "before_mismatch_fields": [
+        "entity_semantics",
+        "tool_sequence",
+        "interpretation_tools"
+      ],
       "after_mismatch_fields": [],
       "semantic_fields_fixed": [
-        "entity_semantics",
-        "action_semantics",
-        "normalized_values",
-        "requires_clarification",
-        "temporal_relation",
-        "intended_action"
-      ],
-      "policy_fields_changed": [],
-      "unchanged": false
+        "entity_semantics"
+      ]
     },
     {
       "probe_id": "lc4v4d1_safety_explain_unsafe_12",
       "family": "safety",
       "before_classification": "parser_gap",
       "after_classification": "supported_pass",
-      "before_mismatch_fields": [],
+      "before_mismatch_fields": [
+        "entity_semantics",
+        "tool_sequence",
+        "interpretation_tools"
+      ],
       "after_mismatch_fields": [],
       "semantic_fields_fixed": [
-        "entity_semantics",
-        "action_semantics",
-        "normalized_values",
-        "requires_clarification",
-        "temporal_relation",
-        "intended_action"
-      ],
-      "policy_fields_changed": [],
-      "unchanged": false
+        "entity_semantics"
+      ]
     }
   ],
-  "target_fixed_count": 20,
-  "policy_gap_count": 8,
+  "quarantines": [
+    {
+      "probe_id": "lc4v4d1_entity_duration_corrected_28",
+      "defect": "final corrected duration contradicts the frozen normalized value",
+      "evidence": [
+        "surface correction supplies 45 minutes in turn 1",
+        "oracle retains duration_minutes=30"
+      ]
+    },
+    {
+      "probe_id": "lc4v4d1_entity_duration_negated_29",
+      "defect": "excluded duration is retained as the frozen normalized value",
+      "evidence": [
+        "surface explicitly negates 30 minutes",
+        "oracle retains duration_minutes=30 without a replacement"
+      ]
+    },
+    {
+      "probe_id": "lc4v4d1_dialogue_ellipsis_multi_08",
+      "defect": "explicit second-turn duration is labelled omitted",
+      "evidence": [
+        "turn 1 explicitly supplies 30 minutes",
+        "oracle duration_semantics is omitted"
+      ]
+    }
+  ],
+  "valid_target_fixed_count": 20,
+  "remaining_valid_parser_ids": [],
+  "quarantined_authoring_ids": [
+    "lc4v4d1_dialogue_ellipsis_multi_08",
+    "lc4v4d1_entity_duration_corrected_28",
+    "lc4v4d1_entity_duration_negated_29"
+  ],
   "new_parser_gap_ids": [],
-  "zero_variance": true,
-  "all_supported_maintained": true,
-  "discrepancies": [],
-  "decision": "remediation_complete"
+  "supported_regression_ids": [],
+  "mismatched_join_regression_ids": [],
+  "variance_count": 0,
+  "remediation_authorized_for_policy": false,
+  "decision": "semantic_remediation_valid_with_d1_quarantine"
 }
