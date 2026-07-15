@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V2R2 development-only safety-language classification and bounded repair |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v2r2-sol-contract.md` |
-| Current result | LC4V2R2 froze 14 matched unsafe/safe pairs (28 cases); baseline is 17/28 complete with 11 surface-supported failures (`05c3a865bf1df2c2`); holdouts v1 and v2 remain sealed |
-| Next implementation | Implement and independently review the frozen LC4V2R2 matrix without changing its fixture, baseline, established staged tool policy, or any protected surface |
+| Active product track | LC4V2R2 development-only safety-language repair complete and independently reviewed |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v2r2-sol-acceptance.md` |
+| Current result | LC4V2R2 improved its 14-pair matrix from 17/28 to 28/28 with zero variance; ordinary development remains `880/814/672/154/330/835`, safety 1,152/1,152; holdouts v1 and v2 sealed |
+| Next implementation | Run a bounded development-only exit-gap reassessment before naming LC4V2R3; authorize another repair only for a freshly frozen surface-supported gap, without accessing either holdout |
 
 ### LC4R10 accepted state
 
@@ -130,6 +130,27 @@ completed with 381 passes, one expected xfail, and one expected skip. Text-only
 The frozen plan is
 `orchestration/agent_inbox/codex/lc4v2r1-sol-contract.md`; the active decision
 is `orchestration/agent_inbox/codex/lc4v2r1-sol-acceptance.md`.
+
+### LC4V2R2 accepted state
+
+LC4V2R2 froze 14 matched unsafe/safe pairs (28 synthetic Gold development
+cases) across all six implemented action categories. The baseline passed 17/28
+complete; the recovered implementation passes 28/28 with zero variance across
+56 fixture evaluations and report hash
+`sha256:6cec58fe319a070b2c0f6d2cf0d99f74dc0f4b98352b3268709da2abc400f750`.
+
+DeepSeek Flash's uncommitted self-pass was rejected for incomplete provenance,
+incorrect aggregate claims, and over-broad regexes. Sol recovered under the
+lease and added false-positive guards; Gemini independently returned
+`DECISION: pass` on exact recovered head `ae4304f8` after reproducing 295/295
+tests. A Sol search returned protected v1 path names but no protected content or
+label; the metadata-only incident is recorded and does not authorize reuse.
+The final serial preservation gate collected 464 nodes and completed with 462
+passes, one expected xfail, and one expected skip. Ordinary development counts,
+safety, variance, and corpus hash remain unchanged.
+The frozen plan is
+`orchestration/agent_inbox/codex/lc4v2r2-sol-contract.md`; the active decision
+is `orchestration/agent_inbox/codex/lc4v2r2-sol-acceptance.md`.
 
 ## 4. Authority Allocation
 

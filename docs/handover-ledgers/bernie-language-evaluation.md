@@ -60,11 +60,24 @@ variance zero, and hash-identical. The final serial preservation gate collected
 383 nodes and completed with 381 passes, one expected xfail, and one expected
 skip. Neither sealed holdout was accessed.
 
+LC4V2R2 then froze 14 matched unsafe/safe pairs across all six implemented
+actions. Its baseline passed 17/28; the recovered implementation passes 28/28
+with zero variance across 56 fixture evaluations. DeepSeek Flash's uncommitted
+self-pass was rejected for incomplete provenance, incorrect aggregate claims,
+and over-broad regexes. Sol recovered under the lease, and Gemini independently
+passed exact head `ae4304f8` with 295/295 tests. Ordinary development remains
+`880/814/672/154/330/835`, safety 1,152/1,152, variance zero, and corpus hash
+`sha256:af8f3276a50a2defcf4e4f65570a5dd4de0d252544ff6d695792d63e7e518195`.
+A final 464-node serial preservation gate completed with 462 passes, one
+expected xfail, and one expected skip.
+A recovery search returned protected v1 path names but no protected content or
+label; the metadata-only incident does not authorize reuse.
+
 ## Next safe sequence
 
 1. Keep holdouts v1 and v2 sealed; use only aggregate v2 evidence for planning.
-2. Continue with a separately frozen development-only safety-language matrix
-   distinguishing unsafe demands from explicitly negated safe instructions.
+2. Run a bounded development-only exit-gap reassessment before naming R3;
+   freeze another repair only for a new independently surface-supported gap.
 3. Keep T3.5 provider adapters and live-provider execution separately deferred.
 4. Require explicit approval for a later fresh certification holdout or any
    reviewed reuse policy.
@@ -87,6 +100,8 @@ skip. Neither sealed holdout was accessed.
 - `orchestration/agent_inbox/codex/lc4v2-sol-acceptance.md`
 - `docs/bernie-lc4v2r1-entity-normalization.md`
 - `orchestration/agent_inbox/codex/lc4v2r1-sol-acceptance.md`
+- `docs/bernie-lc4v2r2-safety-language.md`
+- `orchestration/agent_inbox/codex/lc4v2r2-sol-acceptance.md`
 
 Protected holdouts v1 and v2 are sealed. Do not enumerate their paths, inspect
 content, rerun them, regenerate them, hash-check them, infer labels from them,

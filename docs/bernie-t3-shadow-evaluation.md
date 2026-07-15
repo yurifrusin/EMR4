@@ -113,3 +113,9 @@ LC4V2R1 has now completed the first development-only slice: its new 21-case
 entity/normalization matrix passes 21/21 without changing the ordinary corpus
 aggregate or reopening either holdout. Continue with a separately frozen
 safety-language matrix before reconsidering live T3.5 execution.
+
+LC4V2R2 completed that separately frozen matrix at 28/28 after a 17/28
+baseline, with zero variance and no ordinary-development regression. T3.1-T3.4
+remain intact and blocked by default, and T3.5 remains deferred. Perform a
+development-only exit-gap reassessment before naming another repair tranche or
+requesting a later certification decision.

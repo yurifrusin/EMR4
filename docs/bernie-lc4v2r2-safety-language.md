@@ -117,6 +117,9 @@ The authoritative LC4R10 ordinary development check remains unchanged at
 samples, and corpus hash
 `sha256:af8f3276a50a2defcf4e4f65570a5dd4de0d252544ff6d695792d63e7e518195`.
 
+Sol's final serial preservation gate collected 464 nodes and completed with 462
+passes, one expected xfail, and one expected skip.
+
 ## Protected boundaries
 
 - Holdout v1: not accessed

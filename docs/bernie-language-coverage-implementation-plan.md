@@ -388,6 +388,15 @@ aggregate and temporal foundation unchanged. The next tranche is an
 independently authored safety-language matrix; it must not use either sealed
 holdout.
 
+LC4V2R2 completed that safety-language tranche. Fourteen matched unsafe/safe
+pairs moved from 17/28 to 28/28 complete across all contracted dimensions with
+zero two-repeat variance. The recovered parser distinguishes positive bypass
+demands, negated guardrails, action negation, double negation, and `no need`
+scope while retaining the established staged tool policy. The ordinary
+development aggregate and corpus hash remain unchanged. Do not predeclare an
+R3 repair: first perform a bounded development-only exit-gap reassessment and
+freeze another repair only if independently surface-supported evidence remains.
+
 ## Agent Allocation
 
 - Sol at High reasoning owns the semantic architecture, coverage decisions,
@@ -405,12 +414,13 @@ holdout.
 
 ## Immediate Direction
 
-The next EMR4 product tranche is aggregate-guided development repair, not live
-T3.5 execution. LC4V2 confirms that explicit temporal relations generalized,
-but entity semantics, normalized values, clarification, and safety still make
-the deterministic language bridge non-credible at scale. Repair only against
-ordinary development evidence without inspecting or reusing sealed holdouts
-v1 or v2. Do not promote Silver/pending candidates merely because the
+The next EMR4 language step is a bounded development-only exit-gap
+reassessment, not live T3.5 execution or a predeclared R3 repair. LC4V2R1 and
+LC4V2R2 have closed their independently authored entity/normalization and
+safety-language matrices without changing the ordinary aggregate. Freeze a
+further repair only if the reassessment finds a new surface-supported gap
+against ordinary development evidence. Do not inspect or reuse sealed holdouts
+v1 or v2, and do not promote Silver/pending candidates merely because the
 evaluator can execute them.
 
 No user decision is required for ordinary development-only repair work. Pause if
