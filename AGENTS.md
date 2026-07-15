@@ -46,43 +46,42 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | Bernie language coverage repair after accepted LC4R8 |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4r8-sol-acceptance.md` |
-| Current result | Exit counts `0/0/11/53/40`; status `blocked_pending_generator_repair_and_contract_reconciliation` |
-| Next implementation | LC4R9: frozen 11-case generator-backed audit-vocabulary repair |
+| Active product track | Bernie development-corpus contract reconciliation after accepted LC4R9 |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4r9-sol-acceptance.md` |
+| Current result | Exit counts `0/53/40`; status `blocked_pending_contract_reconciliation` |
+| Next implementation | LC4R10: reconcile the remaining frozen 53 clarification and 40 replay contract populations; authorize no parser work without a new surface-supported subset |
 
-### LC4R8 accepted state
+### LC4R9 accepted state
 
-LC1-LC4 and LC4R1-LC4R8 are complete. The current development semantic counts
+LC1-LC4 and LC4R1-LC4R9 are complete. The current development semantic counts
 are `880/814/628/101/300/782`; safety is 1,152/1,152; variance is zero over
 2,304 samples.
 
-LC4R8 established:
+LC4R9 repaired exactly the 11 generator-backed audit-vocabulary cases authorized
+by LC4R8. All 11 now pass the complete composed path. The remaining development
+exit surface is:
 
-- 53 clarification records all have upstream semantic-contract defects;
-  zero are ready for a material clarification-policy choice;
-- 51 replay/contract records split into 11 audit-vocabulary-only, 11
-  clarification-tool/contract conflicts, 28 creation/replay-policy conflicts,
-  one negated-surface/create-contract conflict, and zero genuine replay
-  integration defects;
-- only the frozen 11-case audit-vocabulary subset is authorized for LC4R9;
+- 53 clarification records still blocked by upstream semantic contracts;
+- 40 replay records still requiring contract reconciliation;
+- zero generator-backed repairs remain; and
 - no parser remediation is currently authorized.
 
-Sol's recovered focused suite passed 88/88. Gemini returned `DECISION: pass` on
-exact reviewed source head `1824de50`. The expanded clean preservation gate
-completed with 1,595 passes, one expected xfail, and one established skip over
-1,597 selected nodes. It excluded the documented pre-existing interpretation
-runtime-isolation baseline plus three historical exact-report nodes. See the
-acceptance document for exact provenance and hashes.
+Sol's recovered focused suite passed 54/54. Gemini returned `DECISION: pass` on
+exact reviewed source head `a8f46cea`. The final 275-node serial preservation
+gate completed with 273 passes, one expected xfail, and one established skip,
+excluding only the historical LC4 report-equality node that intentionally
+freezes the pre-LC4R9 corpus hash. See the acceptance document for exact
+provenance, hashes, worker failures, protected-search incident, and recovery.
 
 ### Next sequence
 
-1. Preserve this compact-handover maintenance as a standalone verified commit.
-2. Plan LC4R9 against the exact 11-case selection from LC4R8.
-3. Change the source generator/contract, never generated fixtures in place.
-4. Freeze and independently review the exact regenerated delta.
-5. Recompute development-only evidence once and define the LC4R exit gate.
-6. Keep corpus reconciliation separate from parser remediation.
+1. Plan LC4R10 against the accepted 53 clarification and 40 replay populations.
+2. Reconcile development contracts through explicit source generators and
+   independently reviewable surface evidence.
+3. Keep `check_in` and other planned-not-implemented actions unavailable.
+4. Authorize parser remediation only from a newly frozen surface-supported
+   subset; otherwise continue corpus-quality reconciliation.
+5. Do not reuse holdout v1 or open T3.5 without the separate user decision.
 
 ## 4. Authority Allocation
 

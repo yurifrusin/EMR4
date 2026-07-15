@@ -58,7 +58,8 @@ def test_compact_live_handover_retains_required_authority_and_boundaries() -> No
         "DeepSeek Pro is not the Conductor",
         "Protected holdout v1 remains sealed",
         "T3.1-T3.4 remain intact and blocked by default",
-        "blocked_pending_generator_repair_and_contract_reconciliation",
+        "blocked_pending_contract_reconciliation",
+        "lc4r9-sol-acceptance.md",
     ]:
         assert required in live
 

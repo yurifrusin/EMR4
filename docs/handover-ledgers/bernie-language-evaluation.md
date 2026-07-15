@@ -1,6 +1,6 @@
 # Bernie Language and Evaluation Ledger
 
-Last consolidated: 2026-07-15 after LC4R8.
+Last consolidated: 2026-07-15 after LC4R9.
 
 ## Current accepted state
 
@@ -23,20 +23,20 @@ LC4R8 accepted two development-only blocker surfaces:
   tool/contract conflicts, 28 creation/replay-policy conflicts, one negated
   surface/create-contract conflict, and zero genuine replay defects.
 
-Only the frozen 11 audit-vocabulary cases are authorized for LC4R9
-generator-backed repair. The other 53 + 40 remain contract-reconciliation
-work. No parser remediation is currently authorized.
+LC4R9 repaired the frozen 11 audit-vocabulary cases at the source generator and
+regenerated the ordinary development corpus. All 11 now pass complete composed
+evaluation. Post-repair corpus hash is
+`sha256:f11e98f9bc61b962da0e816fbb918d7f722d3f82c57dfde18a5e323c1b24e9e1`.
+The other 53 + 40 remain contract-reconciliation work. No parser remediation
+is currently authorized.
 
 ## Next safe sequence
 
-1. Change the source generator/contract for exactly the frozen 11 cases.
-2. Regenerate through the ordinary development-only path; never edit generated
-   fixtures in place.
-3. Freeze and review the exact delta.
-4. Recompute ordinary development evidence once.
-5. Define an LC4R exit gate and keep corpus reconciliation separate from
-   parser remediation.
-6. Request a user decision only before holdout reuse/v2 or T3.5 live-provider
+1. Reconcile the remaining frozen 53 clarification and 40 replay populations
+   through development-only surface evidence.
+2. Keep corpus reconciliation separate from parser remediation.
+3. Authorize parser work only from a newly frozen surface-supported subset.
+4. Request a user decision only before holdout reuse/v2 or T3.5 live-provider
    execution.
 
 ## Primary evidence
@@ -48,7 +48,8 @@ work. No parser remediation is currently authorized.
 - `docs/bernie-lc4-scale-and-holdout-closeout.md`
 - `docs/bernie-lc4r7-silver-reconciliation.md`
 - `docs/bernie-lc4r8-exit-blocker-reconciliation.md`
-- `orchestration/agent_inbox/codex/lc4r8-sol-acceptance.md`
+- `docs/bernie-lc4r9-generator-contract-repair.md`
+- `orchestration/agent_inbox/codex/lc4r9-sol-acceptance.md`
 
 Protected holdout v1 is sealed. Do not enumerate its paths, inspect content,
 rerun it, regenerate it, hash-check it, infer labels from it, or tune against
