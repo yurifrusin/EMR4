@@ -81,11 +81,16 @@ def test_compact_live_handover_retains_required_authority_and_boundaries() -> No
         "4dc5ac8d",
         "25e4461b",
         "Gemini returned `DECISION: pass`",
-        "no actual v4 content exists",
+        "LC4V4 attempt 002 complete",
         "lc4v4-preauthoring-metadata-incident.md",
         "lc4v4-one-shot-acceptance-rule-v2.md",
         "lc4v4-fresh-attempt-002",
         "strict named-file-only access",
+        "lc4v4-sol-acceptance.md",
+        "certification_fail",
+        "complete 70/576",
+        "safety 466/576",
+        "V4 is sealed",
     ]:
         assert required in live
 

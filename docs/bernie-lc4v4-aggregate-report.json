@@ -1,0 +1,458 @@
+{
+  "corpus_hash": "sha256:8b2779cde8532e67afbfc423c1bc53b85460fa52054f860e02b672cac2cbf751",
+  "coverage_cells": {
+    "distinct_cell_count": 288,
+    "total_possible_cells": 152064
+  },
+  "critical_slices": {
+    "by_action": [
+      {
+        "failed": 88,
+        "pass_fraction": 0.0833,
+        "passed": 8,
+        "slice_key": "cancel",
+        "total": 96
+      },
+      {
+        "failed": 84,
+        "pass_fraction": 0.125,
+        "passed": 12,
+        "slice_key": "create",
+        "total": 96
+      },
+      {
+        "failed": 86,
+        "pass_fraction": 0.1042,
+        "passed": 10,
+        "slice_key": "explain_schedule",
+        "total": 96
+      },
+      {
+        "failed": 76,
+        "pass_fraction": 0.2083,
+        "passed": 20,
+        "slice_key": "move",
+        "total": 96
+      },
+      {
+        "failed": 86,
+        "pass_fraction": 0.1042,
+        "passed": 10,
+        "slice_key": "resize",
+        "total": 96
+      },
+      {
+        "failed": 86,
+        "pass_fraction": 0.1042,
+        "passed": 10,
+        "slice_key": "status_change",
+        "total": 96
+      }
+    ],
+    "by_dialogue_form": [
+      {
+        "failed": 54,
+        "pass_fraction": 0.1818,
+        "passed": 12,
+        "slice_key": "anaphora",
+        "total": 66
+      },
+      {
+        "failed": 64,
+        "pass_fraction": 0.0,
+        "passed": 0,
+        "slice_key": "clarification",
+        "total": 64
+      },
+      {
+        "failed": 62,
+        "pass_fraction": 0.2051,
+        "passed": 16,
+        "slice_key": "correction",
+        "total": 78
+      },
+      {
+        "failed": 70,
+        "pass_fraction": 0.1026,
+        "passed": 8,
+        "slice_key": "ellipsis",
+        "total": 78
+      },
+      {
+        "failed": 68,
+        "pass_fraction": 0.15,
+        "passed": 12,
+        "slice_key": "one_shot",
+        "total": 80
+      },
+      {
+        "failed": 66,
+        "pass_fraction": 0.1538,
+        "passed": 12,
+        "slice_key": "repeated",
+        "total": 78
+      },
+      {
+        "failed": 66,
+        "pass_fraction": 0.0,
+        "passed": 0,
+        "slice_key": "reversal",
+        "total": 66
+      },
+      {
+        "failed": 56,
+        "pass_fraction": 0.1515,
+        "passed": 10,
+        "slice_key": "session_restart",
+        "total": 66
+      }
+    ],
+    "by_diary_state": [
+      {
+        "failed": 48,
+        "pass_fraction": 0.0,
+        "passed": 0,
+        "slice_key": "break",
+        "total": 48
+      },
+      {
+        "failed": 38,
+        "pass_fraction": 0.2083,
+        "passed": 10,
+        "slice_key": "concurrent",
+        "total": 48
+      },
+      {
+        "failed": 42,
+        "pass_fraction": 0.125,
+        "passed": 6,
+        "slice_key": "elapsed_window",
+        "total": 48
+      },
+      {
+        "failed": 50,
+        "pass_fraction": 0.1667,
+        "passed": 10,
+        "slice_key": "empty",
+        "total": 60
+      },
+      {
+        "failed": 50,
+        "pass_fraction": 0.1667,
+        "passed": 10,
+        "slice_key": "exact_duplicate",
+        "total": 60
+      },
+      {
+        "failed": 48,
+        "pass_fraction": 0.0,
+        "passed": 0,
+        "slice_key": "no_slots",
+        "total": 48
+      },
+      {
+        "failed": 54,
+        "pass_fraction": 0.1,
+        "passed": 6,
+        "slice_key": "overlap",
+        "total": 60
+      },
+      {
+        "failed": 48,
+        "pass_fraction": 0.0,
+        "passed": 0,
+        "slice_key": "roster_absent",
+        "total": 48
+      },
+      {
+        "failed": 50,
+        "pass_fraction": 0.1667,
+        "passed": 10,
+        "slice_key": "same_day_distinct",
+        "total": 60
+      },
+      {
+        "failed": 38,
+        "pass_fraction": 0.2083,
+        "passed": 10,
+        "slice_key": "stale",
+        "total": 48
+      },
+      {
+        "failed": 40,
+        "pass_fraction": 0.1667,
+        "passed": 8,
+        "slice_key": "terminal",
+        "total": 48
+      }
+    ],
+    "by_entity_state": [
+      {
+        "failed": 96,
+        "pass_fraction": 0.0,
+        "passed": 0,
+        "slice_key": "ambiguous",
+        "total": 96
+      },
+      {
+        "failed": 96,
+        "pass_fraction": 0.0,
+        "passed": 0,
+        "slice_key": "corrected",
+        "total": 96
+      },
+      {
+        "failed": 50,
+        "pass_fraction": 0.4792,
+        "passed": 46,
+        "slice_key": "exact",
+        "total": 96
+      },
+      {
+        "failed": 96,
+        "pass_fraction": 0.0,
+        "passed": 0,
+        "slice_key": "mismatched",
+        "total": 96
+      },
+      {
+        "failed": 72,
+        "pass_fraction": 0.25,
+        "passed": 24,
+        "slice_key": "negated",
+        "total": 96
+      },
+      {
+        "failed": 96,
+        "pass_fraction": 0.0,
+        "passed": 0,
+        "slice_key": "omitted",
+        "total": 96
+      }
+    ],
+    "by_language_form": [
+      {
+        "failed": 54,
+        "pass_fraction": 0.1562,
+        "passed": 10,
+        "slice_key": "abbreviation",
+        "total": 64
+      },
+      {
+        "failed": 68,
+        "pass_fraction": 0.0,
+        "passed": 0,
+        "slice_key": "adversarial",
+        "total": 68
+      },
+      {
+        "failed": 68,
+        "pass_fraction": 0.1282,
+        "passed": 10,
+        "slice_key": "filler",
+        "total": 78
+      },
+      {
+        "failed": 62,
+        "pass_fraction": 0.0882,
+        "passed": 6,
+        "slice_key": "paraphrase",
+        "total": 68
+      },
+      {
+        "failed": 64,
+        "pass_fraction": 0.1579,
+        "passed": 12,
+        "slice_key": "plain",
+        "total": 76
+      },
+      {
+        "failed": 62,
+        "pass_fraction": 0.1842,
+        "passed": 14,
+        "slice_key": "punctuation_variant",
+        "total": 76
+      },
+      {
+        "failed": 58,
+        "pass_fraction": 0.1212,
+        "passed": 8,
+        "slice_key": "speech_like",
+        "total": 66
+      },
+      {
+        "failed": 70,
+        "pass_fraction": 0.125,
+        "passed": 10,
+        "slice_key": "typo",
+        "total": 80
+      }
+    ],
+    "by_temporal_relation": [
+      {
+        "failed": 74,
+        "pass_fraction": 0.0976,
+        "passed": 8,
+        "slice_key": "approximate",
+        "total": 82
+      },
+      {
+        "failed": 142,
+        "pass_fraction": 0.1446,
+        "passed": 24,
+        "slice_key": "exact",
+        "total": 166
+      },
+      {
+        "failed": 70,
+        "pass_fraction": 0.1463,
+        "passed": 12,
+        "slice_key": "interval",
+        "total": 82
+      },
+      {
+        "failed": 66,
+        "pass_fraction": 0.1951,
+        "passed": 16,
+        "slice_key": "not_after",
+        "total": 82
+      },
+      {
+        "failed": 72,
+        "pass_fraction": 0.122,
+        "passed": 10,
+        "slice_key": "not_before",
+        "total": 82
+      },
+      {
+        "failed": 82,
+        "pass_fraction": 0.0,
+        "passed": 0,
+        "slice_key": "unspecified",
+        "total": 82
+      }
+    ],
+    "by_trajectory_type": [
+      {
+        "failed": 362,
+        "pass_fraction": 0.162,
+        "passed": 70,
+        "slice_key": "single_turn",
+        "total": 432
+      },
+      {
+        "failed": 144,
+        "pass_fraction": 0.0,
+        "passed": 0,
+        "slice_key": "trajectory",
+        "total": 144
+      }
+    ],
+    "worst_slice": {
+      "dimension": "language_form",
+      "failed": 68,
+      "pass_fraction": 0.0,
+      "passed": 0,
+      "slice_key": "adversarial",
+      "total": 68
+    }
+  },
+  "evaluation_id": "lc4-holdout-v4-baseline-001",
+  "evaluator_version": "lc4v4.aggregate_evaluator.v1",
+  "failure_layers": {
+    "integration": 340,
+    "interpretation": 500,
+    "policy": 304,
+    "safety": 110
+  },
+  "manifest_hash": "sha256:a27a74330ca5b763c0ba52453f0c5d2abd0e286e314e53b945ef1d61130594fb",
+  "per_dimension": {
+    "action_semantics": {
+      "failed": 188,
+      "passed": 388,
+      "total": 576
+    },
+    "appointment_deltas": {
+      "failed": 120,
+      "passed": 456,
+      "total": 576
+    },
+    "audit_deltas": {
+      "failed": 104,
+      "passed": 472,
+      "total": 576
+    },
+    "authority": {
+      "failed": 296,
+      "passed": 280,
+      "total": 576
+    },
+    "clarification": {
+      "failed": 282,
+      "passed": 294,
+      "total": 576
+    },
+    "complete_composed_contract": {
+      "failed": 506,
+      "passed": 70,
+      "total": 576
+    },
+    "downstream_outcome": {
+      "failed": 304,
+      "passed": 272,
+      "total": 576
+    },
+    "entity_semantics": {
+      "failed": 336,
+      "passed": 240,
+      "total": 576
+    },
+    "intended_action": {
+      "failed": 0,
+      "passed": 576,
+      "total": 576
+    },
+    "interpretation_tools": {
+      "failed": 324,
+      "passed": 252,
+      "total": 576
+    },
+    "normalized_values": {
+      "failed": 96,
+      "passed": 480,
+      "total": 576
+    },
+    "repeats_per_scenario": 2,
+    "replay_tool_sequence": {
+      "failed": 324,
+      "passed": 252,
+      "total": 576
+    },
+    "safety": {
+      "failed": 110,
+      "passed": 466,
+      "total": 576
+    },
+    "sample_count": 576,
+    "scenario_count": 288,
+    "temporal_relation": {
+      "failed": 0,
+      "passed": 576,
+      "total": 576
+    }
+  },
+  "repeat_count": 2,
+  "report_hash": "sha256:9fa0cfe19d6e24e19630d415e4a778c89b6381057ae661e4c7d6c53c088d68f5",
+  "schema_version": "lc4v4.aggregate_evaluation.v1",
+  "source_commit": "9c005e777d008e03a3ee085382915dfc1dc652c6",
+  "total_groups": 24,
+  "total_samples": 576,
+  "total_scenarios": 288,
+  "total_trajectories": 72,
+  "variance": {
+    "all_samples_deterministic": true,
+    "total_repeats": 2,
+    "variant_sample_count": 0,
+    "variant_scenario_count": 0
+  }
+}

@@ -46,10 +46,19 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | Authorized `lc4v4-fresh-attempt-002`; framework accepted and no actual v4 content exists |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v4q1-sol-contract.md`, `orchestration/agent_inbox/codex/lc4v4q1-sol-recovery-amendment.md`, `orchestration/agent_inbox/codex/lc4v4q1-antigravity-review.md`, and `orchestration/agent_inbox/codex/lc4v4-one-shot-acceptance-rule-v3.md` |
-| Current result | Flash candidate `4dc5ac8d` was rejected and Gemini returned `DECISION: pass` on Sol's recovery at exact head `25e4461b`. Yuri explicitly authorized a proportionate fresh attempt after `lc4v4-preauthoring-metadata-incident.md`. The first attempt and `lc4v4-one-shot-acceptance-rule.md` remain invalid. `lc4v4-one-shot-acceptance-rule-v2.md` never activated because its preactivation handover guard failed before content. V3 adds an explicit green-checkpoint activation condition. Attempt 002 otherwise uses the accepted framework at `1c0e3ba3`, the same thresholds, no external model, and strict named-file-only access. No actual v4 content exists |
-| Next implementation | Pass the V3 preactivation checks, commit and push the clean activation checkpoint, then Sol authors, quality-validates, freezes, seals, and evaluates attempt 002 exactly once; after consumption, only aggregate evidence may be used |
+| Active product track | LC4V4 attempt 002 complete; protected one-shot result is closed |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v4-sol-acceptance.md` and `docs/bernie-lc4v4-fresh-certification-closeout.md` |
+| Current result | Valid evidence returned `certification_fail`: complete 70/576, safety 466/576, intended action and temporal relation 576/576, normalization 480/576, entity semantics 240/576, 288 coverage cells, and zero variance. Report hash `sha256:9fa0cfe19d6e24e19630d415e4a778c89b6381057ae661e4c7d6c53c088d68f5`. V4 is sealed; no parser remediation or rerun is authorized |
+| Next implementation | Recommend a separately frozen development-only diagnostic matrix across the weak aggregate axes, independently authored without copying or inferring v4 cases. Pause before any new certification holdout or reuse decision |
+
+LC4V4 provenance: the frozen pre-content records remain
+`lc4v4q1-sol-contract.md`, `lc4v4q1-sol-recovery-amendment.md`,
+`lc4v4q1-antigravity-review.md`, `lc4v4-one-shot-acceptance-rule.md`,
+`lc4v4-preauthoring-metadata-incident.md`,
+`lc4v4-one-shot-acceptance-rule-v2.md`, and
+`lc4v4-one-shot-acceptance-rule-v3.md`. Flash candidate `4dc5ac8d` was rejected;
+Gemini returned `DECISION: pass` on exact recovered head `25e4461b`. Yuri then
+authorized `lc4v4-fresh-attempt-002` with strict named-file-only access.
 
 ### LC4R10 accepted state
 
