@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V4D3 approved Option A policy-resolution implementation over the exact 20 cases |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v4d3-sol-implementation-contract.md` and `docs/bernie-lc4v4d3-option-a-decision.md` |
-| Current result | Yuri approved strict separated semantics: omitted practitioner clarifies, diary conflicts use a separate state relation, and unsafe bypass demands refuse before tools. D3 retains the exact selection hash `d3c6618c...` and versions six incompatible D1 expectations rather than forcing them green. The pre-plan protected-support search incident remains documented, supplies no evidence, and grants no reuse authority |
-| Next implementation | Dispatch one bounded DeepSeek V4 Flash/high lane through Claude Code `--bare` for the versioned policy layer, D3 evidence, and focused tests. Sol then accepts/recovers, runs serial preservation, and obtains a fresh Gemini exact-head veto. Keep accepted D2 utterance semantics, frozen D1/D2 reports, holdouts, T3/providers, and live/write authority unchanged |
+| Active product track | LC4V4D3 Option A policy resolution accepted; prepare bounded LC4V4D4 composed-harness integration |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v4d3-sol-acceptance.md` and `docs/bernie-lc4v4d3-policy-resolution-closeout.md` |
+| Current result | D3 passes 20/20 approved cases over 40 complete observations with zero variance, exact categories `5/2/1/2/5/5`, and report hash `94b751ae...`. All seven gates pass. Gemini returned `DECISION: pass` on exact head `b0089662`. The policy layer is explicitly versioned and development-only; frozen D1/D2 evidence and product runtime are unchanged. The protected-support search incident supplies no evidence or reuse authority |
+| Next implementation | After a fresh receipt, freeze LC4V4D4 to integrate explicit Option A selection into the ordinary composed development harness, prove legacy selection remains reproducible, and add versioned replay/scoring evidence. Do not silently change D1/D2 behavior, rerun holdouts, modify the utterance parser, or open T3/provider/product/write surfaces |
 
 LC4V4 provenance: the frozen pre-content records remain
 `lc4v4q1-sol-contract.md`, `lc4v4q1-sol-recovery-amendment.md`,
