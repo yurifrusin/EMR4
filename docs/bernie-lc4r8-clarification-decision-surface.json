@@ -37,6 +37,12 @@
     "resize": 14,
     "cancel": 13
   },
+  "action_hashes": {
+    "create": "1839c8c567e44922",
+    "move": "ec7e009f37f0834a",
+    "resize": "e49785ce6f8922e5",
+    "cancel": "830386f883de7fd0"
+  },
   "records": [
     {
       "scenario_id": "lc4_dw1_dev_mt_001_01",

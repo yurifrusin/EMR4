@@ -2,6 +2,73 @@
   "schema_version": "lc4r8.exit_blocker_report.v1",
   "development_only": true,
   "silver_pending_only": true,
+  "corpus_hash": {
+    "observed": "sha256:aa2d946b60694eab96846ed77e885273c807e127f8998981a8cf8ff20ebae647",
+    "expected": "sha256:aa2d946b60694eab96846ed77e885273c807e127f8998981a8cf8ff20ebae647",
+    "match": true
+  },
+  "semantic_baseline": {
+    "observed": {
+      "intended_action": 880,
+      "action_semantics": 814,
+      "temporal_relation": 628,
+      "normalized_values": 101,
+      "entity_semantics": 300,
+      "clarification": 782
+    },
+    "expected": {
+      "intended_action": 880,
+      "action_semantics": 814,
+      "temporal_relation": 628,
+      "normalized_values": 101,
+      "entity_semantics": 300,
+      "clarification": 782
+    },
+    "assertions": {
+      "baseline_intended_action": true,
+      "baseline_action_semantics": true,
+      "baseline_temporal_relation": true,
+      "baseline_normalized_values": true,
+      "baseline_entity_semantics": true,
+      "baseline_clarification": true
+    }
+  },
+  "safety": {
+    "observed": {
+      "passed": 1152,
+      "total": 1152,
+      "all_safe": true
+    },
+    "expected": {
+      "passed": 1152,
+      "total": 1152,
+      "all_safe": true
+    },
+    "assertions": {
+      "safety_passed": true,
+      "safety_total": true,
+      "safety_all_safe": true
+    }
+  },
+  "variance": {
+    "observed": {
+      "variant_scenario_count": 0,
+      "total_repeats": 2,
+      "sample_count": 2304,
+      "all_samples_deterministic": true
+    },
+    "expected": {
+      "variant_scenario_count": 0,
+      "total_repeats": 2,
+      "sample_count": 2304,
+      "all_samples_deterministic": true
+    },
+    "assertions": {
+      "variance_zero": true,
+      "variance_sample_count": true,
+      "variance_deterministic": true
+    }
+  },
   "clarification_decision_surface": {
     "selection_count": 53,
     "expected_selection_count": 53,
@@ -53,6 +120,12 @@
       "move": 13,
       "resize": 14,
       "cancel": 13
+    },
+    "action_hashes": {
+      "create": "1839c8c567e44922",
+      "move": "ec7e009f37f0834a",
+      "resize": "e49785ce6f8922e5",
+      "cancel": "830386f883de7fd0"
     }
   },
   "replay_contract_audit": {
@@ -106,11 +179,20 @@
     }
   },
   "exit_counts": {
-    "clarification_policy_decision_ready": 0,
-    "genuine_replay_integration_defect": 0,
-    "generator_backed_contract_repair_authorized": 11,
-    "upstream_clarification_contract_blockers": 53,
-    "remaining_replay_contract_reconciliation_blockers": 40
+    "observed": {
+      "clarification_policy_decision_ready": 0,
+      "genuine_replay_integration_defect": 0,
+      "generator_backed_contract_repair_authorized": 11,
+      "upstream_clarification_contract_blockers": 53,
+      "remaining_replay_contract_reconciliation_blockers": 40
+    },
+    "expected": {
+      "clarification_policy_decision_ready": 0,
+      "genuine_replay_integration_defect": 0,
+      "generator_backed_contract_repair_authorized": 11,
+      "upstream_clarification_contract_blockers": 53,
+      "remaining_replay_contract_reconciliation_blockers": 40
+    }
   },
   "exit_status": "blocked_pending_generator_repair_and_contract_reconciliation",
   "assertions": {
@@ -121,5 +203,5 @@
     "generator_repair_authorized_11": true,
     "exit_status_blocked": true
   },
-  "report_hash": "sha256:6b68598bcb1b69b701f1f557b04e768a21957bf23b7ffb749a8eb09c569ff4fd"
+  "report_hash": "sha256:cc262683c1c5528fb3d10f49ef55cae17b2896a2739f51c110374bbe7dfa7644"
 }

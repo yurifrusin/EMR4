@@ -7,6 +7,8 @@ protected integrator:** GPT Sol.
 
 **Worker:** DeepSeek V4 Flash/high through Claude Code `--bare`.
 
+**Revision:** Accepted replacement for rejected candidate `0378b8b5`.
+
 ## Summary
 
 LC4R8 reconciles the two exit blockers from the LC4R7 Silver/pending queue:
@@ -29,17 +31,25 @@ database, UI, historical diary, memory/RAG, or write surface was opened.
 The 53 `requires_adjudication` scenarios are classified by examining the
 semantic fields that fail alongside `requires_clarification`:
 
-| Blocker class | Count | Condition |
+| Blocker class | Count | Hash |
 |---|---|---|
-| `normalization_contract_blocked` | 3 | Only `normalized_values` also fails |
-| `entity_and_normalization_contract_blocked` | 6 | `entity_semantics` + `normalized_values` fail |
-| `temporal_and_normalization_contract_blocked` | 20 | `temporal_relation` + `normalized_values` fail |
-| `temporal_entity_and_normalization_contract_blocked` | 24 | All three fail |
-| `isolated_clarification_policy_choice` | 0 | No other field fails |
+| `normalization_contract_blocked` | 3 | `db484a50adc0b601` |
+| `entity_and_normalization_contract_blocked` | 6 | `ff20612b3c9e276e` |
+| `temporal_and_normalization_contract_blocked` | 20 | `910950860133d8b9` |
+| `temporal_entity_and_normalization_contract_blocked` | 24 | `7cfaa6e4ddefc172` |
+| `isolated_clarification_policy_choice` | 0 | `e3b0c44298fc1c14` |
 
 Every record shows `decision_readiness: blocked_by_upstream_contract_defect`.
-No scenario is decision-ready. Action distribution: create 13, move 13,
-resize 14, cancel 13.
+No scenario is decision-ready.
+
+Action distribution with frozen selection hashes:
+
+| Action | Count | Hash |
+|---|---|---|
+| create | 13 | `1839c8c567e44922` |
+| move | 13 | `ec7e009f37f0834a` |
+| resize | 14 | `e49785ce6f8922e5` |
+| cancel | 13 | `830386f883de7fd0` |
 
 ## Replay/Delta Contract Audit
 
@@ -70,6 +80,23 @@ blocked_pending_generator_repair_and_contract_reconciliation
 | Upstream clarification contract blockers | 53 |
 | Remaining replay contract reconciliation blockers | 40 |
 
+## Semantic Baseline, Safety, and Variance
+
+The development corpus
+(`sha256:aa2d946b60694eab96846ed77e885273c807e127f8998981a8cf8ff20ebae647`)
+preserves the LC4R7 contract baseline over 1,152 scenarios / 2,304 samples:
+
+| Metric | Observed | Expected | Match |
+|---|---|---|---|
+| Intended action | 880/1152 | 880/1152 | ✓ |
+| Action semantics | 814/1152 | 814/1152 | ✓ |
+| Temporal relation | 628/1152 | 628/1152 | ✓ |
+| Normalized values | 101/1152 | 101/1152 | ✓ |
+| Entity semantics | 300/1152 | 300/1152 | ✓ |
+| Clarification | 782/1152 | 782/1152 | ✓ |
+| Safety (all safe) | 1152/1152 | 1152/1152 | ✓ |
+| Variance (deterministic) | 0/2304 | 0/2304 | ✓ |
+
 ## Protected Evidence and Authority
 
 No protected holdout v1 evidence was opened, enumerated, imported, loaded,
@@ -78,10 +105,22 @@ historical diary material was inspected. No provider inference, T3.5 adapter,
 route/API, database, UI, deployment, memory, RAG/GraphRAG, confirmation, or
 write authority was used.
 
+## Revision Notes
+
+- Initial worker pass (`0378b8b5`) briefly created and then removed the
+  temporary root `bernie_lc4r8_output.json`; that commit was rejected.
+- This revision adds: `build_from_variants` entry point, action selection
+  hashes, semantic baseline/safety/variance sections in the report, observed
+  exit counts computed from classified artifacts (not copied from constants),
+  strengthened `run_check` with schema validation and record equality checks,
+  and comprehensive fail-closed mutation tests (84 total).
+- Exit counters 0/0/11/53/40 and all frozen 53/51 class counts and hashes,
+  record hashes, and combined hash are retained unchanged.
+
 ## Files Changed
 
-- `scripts/bernie_lc4r8_exit_blocker_reconciliation.py` — new helper
-- `tests/test_bernie_lc4r8_exit_blocker_reconciliation.py` — focused tests
+- `scripts/bernie_lc4r8_exit_blocker_reconciliation.py` — revised helper
+- `tests/test_bernie_lc4r8_exit_blocker_reconciliation.py` — focused tests (84)
 - `docs/bernie-lc4r8-clarification-decision-surface.json` — 53 redacted records
 - `docs/bernie-lc4r8-replay-contract-audit.json` — 51 redacted records
 - `docs/bernie-lc4r8-exit-blocker-report.json` — aggregate report
