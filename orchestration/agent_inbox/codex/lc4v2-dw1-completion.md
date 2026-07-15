@@ -44,29 +44,29 @@ $ py -m pytest tests/test_bernie_holdout_v2_contract.py -v --tb=short
 
 ## Limitations
 
-1. **Evaluation is a content-blind placeholder.**  
+1. **Evaluation is a content-blind placeholder.**
    `run_aggregate_evaluation` validates the manifest and returns a zero-failure
    aggregate report.  Sol replaces it with real deterministic interpretation,
    replay, and scoring after v2 content exists.
 
-2. **Lossless source-span validation is inherited.**  
+2. **Lossless source-span validation is inherited.**
    The `ReceptionScenarioSpec` model already validates that source spans match
    original dialogue text.  No additional re-validation is implemented here.
 
-3. **Synthetic-only state is a content-level concern.**  
+3. **Synthetic-only state is a content-level concern.**
    The framework validates that `initial_diary_state` is a dict (Pydantic
    type), but distinguishing "synthetic" from "real" state requires
    content-level knowledge and is deferred to Sol's authoring phase.
 
-4. **No multi-platform support.**  
+4. **No multi-platform support.**
    The CLI targets Python 3.14+ with pydantic 2.x.  No Windows/Mac/Linux
    compatibility testing was performed beyond the project's Ubuntu CI target.
 
-5. **CLI does not perform Git operations.**  
+5. **CLI does not perform Git operations.**
    The `--write` flag creates files at configurable paths.  Git add/commit/push
    remains Sol integration work.
 
-6. **Test group counts are synthetic and small.**  
+6. **Test group counts are synthetic and small.**
    Test fixtures use 1–2 groups (12–24 variants).  Full 24-group/288-variant
    validation requires real corpus content.
 
