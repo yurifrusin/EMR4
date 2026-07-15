@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "Everything is verified. Here is the complete summary of the implementation.\n\n---\n\n## Changed Files\n\n| File | Action |\n|---|---|\n| `app/services/bernie/lc4v4d3_policy_resolution.py` | Modified (89 insertions, 5 deletions) |\n| `app/services/bernie/lc4v4d5r1_remediation_evidence.py` | New (585 lines) |\n| `tests/test_bernie_lc4v4d5r1_remediation.py` | New (250 lines) |\n| `orchestration/agent_inbox/claude/lc4v4d5r1-deepseek-candidate.md` | New |\n\n## Changes to `lc4v4d3_policy_resolution.py`\n\n1. **`compare_all_entities_to_diary`**: Added `exclude_fields` parameter. Entity fields in this tuple are skipped during diary comparison (both conflict and duplicate detection).\n\n2. **`resolve_policy` \u2014 diary comparison**: Passes `exclude_fields=(\"duration\",)` when `intended_action == \"resize\"`. Also overrides `exact_duplicate` to `no_conflict` for resize (the remaining fields match the diary, but the duration change is the intended mutation).\n\n3. **`resolve_policy` \u2014 normal action deltas**: For `move`, `resize`, `cancel`, and `status_change`, emits the same deterministic appointment delta (`apt-001`, `p-001`, mapped practitioner ID, date, start_time, duration_minutes defaulting to 15), one-count audit delta, and `is_simulated_confirmed_write: true`.\n\n## Exact Taxonomy\n\n| Classification | Expected | Actual |\n|---|---|---|\n| `legacy_equivalent` | 37 | 37 |\n| `accepted_d4_versioned_change` | 20 | 20 |\n| `expected_versioned_relation` | 3 | 3 |\n| `adoption_blocker_*` | 0 | 0 |\n| `unexpected_difference` | 0 | 0 |\n| `option_a_failed` | 0 | 0 |\n\n## Key Probe Classifications\n\n| Probe | New Classification |\n|---|---|\n| `lc4v4d1_safety_move_safe_03` | `legacy_equivalent` (repaired) |\n| `lc4v4d1_safety_resize_safe_05` | `legacy_equivalent` (repaired) |\n| `lc4v4d1_safety_cancel_safe_07` | `expected_versioned_relation` (only `diary_relation` diff) |\n| `lc4v4d1_safety_status_safe_09` | `expected_versioned_relation` (only `diary_relation` diff) |\n| `lc4v4d1_diary_exact_duplicate_02` | `expected_versioned_relation` (only `diary_relation` diff) |\n\n## Selection Hashes\n\n- Three-relation selection hash: `sha256:98df6544620da87e12df7df0d8afbdf0ad8e0f0eab16eab85385857158ab3188` \u2713\n- Empty blocker selection hash: `sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945` \u2713\n\n## Preserved Surfaces\n\n- All 13 D4 evidence gates: **PASS** \u2611\n- Legacy-60 baseline hash: **unchanged** \u2611\n- D4 historical report hash: **unchanged** \u2611\n- Zero variance (legacy and Option A): **PASS** \u2611\n- Zero forbidden observations: **PASS** \u2611\n- All 5 unsafe cases still refuse with no deltas: **PASS** \u2611\n- All 3 authoring-invalid probes remain legacy-equivalent: **PASS** \u2611\n\n## Test Results\n\n```\n27 passed in 5.63s\n```\n\n---\n\n**DECISION: pass**",
+  "usage": {
+    "input_tokens": 103952,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 6973952,
+    "output_tokens": 59982,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 5.525435999999999,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [
+    {
+      "tool_name": "PowerShell",
+      "tool_use_id": "call_00_nZjBwNOUoO0ka88AIgH52007",
+      "tool_input": {
+        "command": "Get-Command python -All | Select-Object -ExpandProperty Source | Select-Object -First 2",
+        "description": "Find actual Python executables"
+      }
+    }
+  ],
+  "terminal_reason": "completed"
+}
