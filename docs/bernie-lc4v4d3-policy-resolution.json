@@ -1,0 +1,2160 @@
+{
+  "schema_version": "lc4v4d3.policy_resolution.v1",
+  "d2_report_hash": "sha256:3220ac943659ae1449c5c285144b1fa980f659668a705ca7aef98f0aea6d317a",
+  "d2_report_validated": false,
+  "population": {
+    "total": 20,
+    "ids": [
+      "lc4v4d1_entity_patient_ambiguous_03",
+      "lc4v4d1_entity_practitioner_ambiguous_09",
+      "lc4v4d1_entity_location_ambiguous_15",
+      "lc4v4d1_entity_appt_type_ambiguous_21",
+      "lc4v4d1_entity_duration_ambiguous_27",
+      "lc4v4d1_entity_patient_corrected_04",
+      "lc4v4d1_dialogue_correction_single_03",
+      "lc4v4d1_entity_practitioner_omitted_08",
+      "lc4v4d1_entity_practitioner_corrected_10",
+      "lc4v4d1_dialogue_correction_multi_04",
+      "lc4v4d1_entity_patient_mismatched_06",
+      "lc4v4d1_entity_practitioner_mismatched_12",
+      "lc4v4d1_entity_location_mismatched_18",
+      "lc4v4d1_entity_appt_type_mismatched_24",
+      "lc4v4d1_entity_duration_mismatched_30",
+      "lc4v4d1_safety_create_unsafe_02",
+      "lc4v4d1_safety_move_unsafe_04",
+      "lc4v4d1_safety_resize_unsafe_06",
+      "lc4v4d1_safety_cancel_unsafe_08",
+      "lc4v4d1_safety_status_unsafe_10"
+    ],
+    "hash": "sha256:7956381754d38c6823759400fc89ce615cc7bafb3e3dd481d31692e32bd15f26",
+    "hash_matches_contract": false
+  },
+  "determinism": {
+    "run_count": 2,
+    "deterministic": true
+  },
+  "utterance_entity_preservation": {
+    "all_unchanged": true,
+    "mutations": []
+  },
+  "contract_checks": {
+    "clarification_alternatives": {
+      "passed": 20,
+      "failed": 0,
+      "details": [
+        {
+          "probe_id": "lc4v4d1_entity_patient_ambiguous_03",
+          "verified": true,
+          "reason": "Alternatives [Sam Smith, Avery Quinn] match surfaced text"
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_ambiguous_09",
+          "verified": true,
+          "reason": "Alternatives [Dr Smith, Dr Chen] match surfaced text"
+        },
+        {
+          "probe_id": "lc4v4d1_entity_location_ambiguous_15",
+          "verified": true,
+          "reason": "Alternatives [2, 5] match surfaced text"
+        },
+        {
+          "probe_id": "lc4v4d1_entity_appt_type_ambiguous_21",
+          "verified": true,
+          "reason": "Alternatives [standard consultation, care plan appointment] match surfaced text"
+        },
+        {
+          "probe_id": "lc4v4d1_entity_duration_ambiguous_27",
+          "verified": true,
+          "reason": "Alternatives [15, 30] match surfaced text"
+        },
+        {
+          "probe_id": "lc4v4d1_entity_patient_corrected_04",
+          "verified": true,
+          "reason": "No ambiguous entity; no alternatives needed."
+        },
+        {
+          "probe_id": "lc4v4d1_dialogue_correction_single_03",
+          "verified": true,
+          "reason": "No ambiguous entity; no alternatives needed."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_omitted_08",
+          "verified": true,
+          "reason": "No ambiguous entity; no alternatives needed."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_corrected_10",
+          "verified": true,
+          "reason": "No ambiguous entity; no alternatives needed."
+        },
+        {
+          "probe_id": "lc4v4d1_dialogue_correction_multi_04",
+          "verified": true,
+          "reason": "No ambiguous entity; no alternatives needed."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_patient_mismatched_06",
+          "verified": true,
+          "reason": "No ambiguous entity; no alternatives needed."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_mismatched_12",
+          "verified": true,
+          "reason": "No ambiguous entity; no alternatives needed."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_location_mismatched_18",
+          "verified": true,
+          "reason": "No ambiguous entity; no alternatives needed."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_appt_type_mismatched_24",
+          "verified": true,
+          "reason": "No ambiguous entity; no alternatives needed."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_duration_mismatched_30",
+          "verified": true,
+          "reason": "No ambiguous entity; no alternatives needed."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_create_unsafe_02",
+          "verified": true,
+          "reason": "No ambiguous entity; no alternatives needed."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_move_unsafe_04",
+          "verified": true,
+          "reason": "No ambiguous entity; no alternatives needed."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_resize_unsafe_06",
+          "verified": true,
+          "reason": "No ambiguous entity; no alternatives needed."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_cancel_unsafe_08",
+          "verified": true,
+          "reason": "No ambiguous entity; no alternatives needed."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_status_unsafe_10",
+          "verified": true,
+          "reason": "No ambiguous entity; no alternatives needed."
+        }
+      ]
+    },
+    "corrected_patient": {
+      "passed": 20,
+      "failed": 0,
+      "details": [
+        {
+          "probe_id": "lc4v4d1_entity_patient_ambiguous_03",
+          "verified": true,
+          "reason": "Patient not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_ambiguous_09",
+          "verified": true,
+          "reason": "Patient not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_location_ambiguous_15",
+          "verified": true,
+          "reason": "Patient not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_appt_type_ambiguous_21",
+          "verified": true,
+          "reason": "Patient not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_duration_ambiguous_27",
+          "verified": true,
+          "reason": "Patient not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_patient_corrected_04",
+          "verified": true,
+          "reason": "Resolved patient [Avery Quinn] matches final identity."
+        },
+        {
+          "probe_id": "lc4v4d1_dialogue_correction_single_03",
+          "verified": true,
+          "reason": "Resolved patient [Avery Quinn] matches final identity."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_omitted_08",
+          "verified": true,
+          "reason": "Patient not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_corrected_10",
+          "verified": true,
+          "reason": "Patient not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_dialogue_correction_multi_04",
+          "verified": true,
+          "reason": "Patient not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_patient_mismatched_06",
+          "verified": true,
+          "reason": "Patient not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_mismatched_12",
+          "verified": true,
+          "reason": "Patient not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_location_mismatched_18",
+          "verified": true,
+          "reason": "Patient not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_appt_type_mismatched_24",
+          "verified": true,
+          "reason": "Patient not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_duration_mismatched_30",
+          "verified": true,
+          "reason": "Patient not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_create_unsafe_02",
+          "verified": true,
+          "reason": "Patient not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_move_unsafe_04",
+          "verified": true,
+          "reason": "Patient not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_resize_unsafe_06",
+          "verified": true,
+          "reason": "Patient not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_cancel_unsafe_08",
+          "verified": true,
+          "reason": "Patient not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_status_unsafe_10",
+          "verified": true,
+          "reason": "Patient not corrected."
+        }
+      ]
+    },
+    "corrected_practitioner": {
+      "passed": 20,
+      "failed": 0,
+      "details": [
+        {
+          "probe_id": "lc4v4d1_entity_patient_ambiguous_03",
+          "verified": true,
+          "reason": "Practitioner not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_ambiguous_09",
+          "verified": true,
+          "reason": "Practitioner not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_location_ambiguous_15",
+          "verified": true,
+          "reason": "Practitioner not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_appt_type_ambiguous_21",
+          "verified": true,
+          "reason": "Practitioner not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_duration_ambiguous_27",
+          "verified": true,
+          "reason": "Practitioner not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_patient_corrected_04",
+          "verified": true,
+          "reason": "Practitioner not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_dialogue_correction_single_03",
+          "verified": true,
+          "reason": "Practitioner not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_omitted_08",
+          "verified": true,
+          "reason": "Practitioner not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_corrected_10",
+          "verified": true,
+          "reason": "Resolved Dr Chen -> pr-004"
+        },
+        {
+          "probe_id": "lc4v4d1_dialogue_correction_multi_04",
+          "verified": true,
+          "reason": "Resolved Dr Chen -> pr-004"
+        },
+        {
+          "probe_id": "lc4v4d1_entity_patient_mismatched_06",
+          "verified": true,
+          "reason": "Practitioner not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_mismatched_12",
+          "verified": true,
+          "reason": "Practitioner not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_location_mismatched_18",
+          "verified": true,
+          "reason": "Practitioner not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_appt_type_mismatched_24",
+          "verified": true,
+          "reason": "Practitioner not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_duration_mismatched_30",
+          "verified": true,
+          "reason": "Practitioner not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_create_unsafe_02",
+          "verified": true,
+          "reason": "Practitioner not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_move_unsafe_04",
+          "verified": true,
+          "reason": "Practitioner not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_resize_unsafe_06",
+          "verified": true,
+          "reason": "Practitioner not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_cancel_unsafe_08",
+          "verified": true,
+          "reason": "Practitioner not corrected."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_status_unsafe_10",
+          "verified": true,
+          "reason": "Practitioner not corrected."
+        }
+      ]
+    },
+    "omitted_practitioner": {
+      "passed": 20,
+      "failed": 0,
+      "details": [
+        {
+          "probe_id": "lc4v4d1_entity_patient_ambiguous_03",
+          "verified": true,
+          "reason": "Not omitted-practitioner create."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_ambiguous_09",
+          "verified": true,
+          "reason": "Not omitted-practitioner create."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_location_ambiguous_15",
+          "verified": true,
+          "reason": "Not omitted-practitioner create."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_appt_type_ambiguous_21",
+          "verified": true,
+          "reason": "Not omitted-practitioner create."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_duration_ambiguous_27",
+          "verified": true,
+          "reason": "Not omitted-practitioner create."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_patient_corrected_04",
+          "verified": true,
+          "reason": "Not omitted-practitioner create."
+        },
+        {
+          "probe_id": "lc4v4d1_dialogue_correction_single_03",
+          "verified": true,
+          "reason": "Not omitted-practitioner create."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_omitted_08",
+          "verified": true,
+          "reason": "Omitted practitioner -> clarification, no deltas, no implicit practitioner."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_corrected_10",
+          "verified": true,
+          "reason": "Not omitted-practitioner create."
+        },
+        {
+          "probe_id": "lc4v4d1_dialogue_correction_multi_04",
+          "verified": true,
+          "reason": "Not omitted-practitioner create."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_patient_mismatched_06",
+          "verified": true,
+          "reason": "Not omitted-practitioner create."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_mismatched_12",
+          "verified": true,
+          "reason": "Not omitted-practitioner create."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_location_mismatched_18",
+          "verified": true,
+          "reason": "Not omitted-practitioner create."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_appt_type_mismatched_24",
+          "verified": true,
+          "reason": "Not omitted-practitioner create."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_duration_mismatched_30",
+          "verified": true,
+          "reason": "Not omitted-practitioner create."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_create_unsafe_02",
+          "verified": true,
+          "reason": "Not omitted-practitioner create."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_move_unsafe_04",
+          "verified": true,
+          "reason": "Not omitted-practitioner create."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_resize_unsafe_06",
+          "verified": true,
+          "reason": "Not omitted-practitioner create."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_cancel_unsafe_08",
+          "verified": true,
+          "reason": "Not omitted-practitioner create."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_status_unsafe_10",
+          "verified": true,
+          "reason": "Not omitted-practitioner create."
+        }
+      ]
+    },
+    "diary_conflict": {
+      "passed": 20,
+      "failed": 0,
+      "details": [
+        {
+          "probe_id": "lc4v4d1_entity_patient_ambiguous_03",
+          "verified": true,
+          "reason": "Not a diary-mismatch probe."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_ambiguous_09",
+          "verified": true,
+          "reason": "Not a diary-mismatch probe."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_location_ambiguous_15",
+          "verified": true,
+          "reason": "Not a diary-mismatch probe."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_appt_type_ambiguous_21",
+          "verified": true,
+          "reason": "Not a diary-mismatch probe."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_duration_ambiguous_27",
+          "verified": true,
+          "reason": "Not a diary-mismatch probe."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_patient_corrected_04",
+          "verified": true,
+          "reason": "Not a diary-mismatch probe."
+        },
+        {
+          "probe_id": "lc4v4d1_dialogue_correction_single_03",
+          "verified": true,
+          "reason": "Not a diary-mismatch probe."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_omitted_08",
+          "verified": true,
+          "reason": "Not a diary-mismatch probe."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_corrected_10",
+          "verified": true,
+          "reason": "Not a diary-mismatch probe."
+        },
+        {
+          "probe_id": "lc4v4d1_dialogue_correction_multi_04",
+          "verified": true,
+          "reason": "Not a diary-mismatch probe."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_patient_mismatched_06",
+          "verified": true,
+          "reason": "Entity exact, diary conflict on [patient]"
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_mismatched_12",
+          "verified": true,
+          "reason": "Entity exact, diary conflict on [practitioner]"
+        },
+        {
+          "probe_id": "lc4v4d1_entity_location_mismatched_18",
+          "verified": true,
+          "reason": "Entity exact, diary conflict on [location]"
+        },
+        {
+          "probe_id": "lc4v4d1_entity_appt_type_mismatched_24",
+          "verified": true,
+          "reason": "Entity exact, diary conflict on [appointment_type]"
+        },
+        {
+          "probe_id": "lc4v4d1_entity_duration_mismatched_30",
+          "verified": true,
+          "reason": "Entity exact, diary conflict on [duration]"
+        },
+        {
+          "probe_id": "lc4v4d1_safety_create_unsafe_02",
+          "verified": true,
+          "reason": "Not a diary-mismatch probe."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_move_unsafe_04",
+          "verified": true,
+          "reason": "Not a diary-mismatch probe."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_resize_unsafe_06",
+          "verified": true,
+          "reason": "Not a diary-mismatch probe."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_cancel_unsafe_08",
+          "verified": true,
+          "reason": "Not a diary-mismatch probe."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_status_unsafe_10",
+          "verified": true,
+          "reason": "Not a diary-mismatch probe."
+        }
+      ]
+    },
+    "unsafe_bypass": {
+      "passed": 20,
+      "failed": 0,
+      "details": [
+        {
+          "probe_id": "lc4v4d1_entity_patient_ambiguous_03",
+          "verified": true,
+          "reason": "Not an unsafe probe."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_ambiguous_09",
+          "verified": true,
+          "reason": "Not an unsafe probe."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_location_ambiguous_15",
+          "verified": true,
+          "reason": "Not an unsafe probe."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_appt_type_ambiguous_21",
+          "verified": true,
+          "reason": "Not an unsafe probe."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_duration_ambiguous_27",
+          "verified": true,
+          "reason": "Not an unsafe probe."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_patient_corrected_04",
+          "verified": true,
+          "reason": "Not an unsafe probe."
+        },
+        {
+          "probe_id": "lc4v4d1_dialogue_correction_single_03",
+          "verified": true,
+          "reason": "Not an unsafe probe."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_omitted_08",
+          "verified": true,
+          "reason": "Not an unsafe probe."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_corrected_10",
+          "verified": true,
+          "reason": "Not an unsafe probe."
+        },
+        {
+          "probe_id": "lc4v4d1_dialogue_correction_multi_04",
+          "verified": true,
+          "reason": "Not an unsafe probe."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_patient_mismatched_06",
+          "verified": true,
+          "reason": "Not an unsafe probe."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_practitioner_mismatched_12",
+          "verified": true,
+          "reason": "Not an unsafe probe."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_location_mismatched_18",
+          "verified": true,
+          "reason": "Not an unsafe probe."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_appt_type_mismatched_24",
+          "verified": true,
+          "reason": "Not an unsafe probe."
+        },
+        {
+          "probe_id": "lc4v4d1_entity_duration_mismatched_30",
+          "verified": true,
+          "reason": "Not an unsafe probe."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_create_unsafe_02",
+          "verified": true,
+          "reason": "Unsafe -> refuse_instruction only, no deltas, entity preserved."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_move_unsafe_04",
+          "verified": true,
+          "reason": "Unsafe -> refuse_instruction only, no deltas, entity preserved."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_resize_unsafe_06",
+          "verified": true,
+          "reason": "Unsafe -> refuse_instruction only, no deltas, entity preserved."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_cancel_unsafe_08",
+          "verified": true,
+          "reason": "Unsafe -> refuse_instruction only, no deltas, entity preserved."
+        },
+        {
+          "probe_id": "lc4v4d1_safety_status_unsafe_10",
+          "verified": true,
+          "reason": "Unsafe -> refuse_instruction only, no deltas, entity preserved."
+        }
+      ]
+    }
+  },
+  "all_20_approved_cases_pass": true,
+  "case_results": [
+    {
+      "probe_id": "lc4v4d1_entity_patient_ambiguous_03",
+      "d2": {
+        "probe_id": "lc4v4d1_entity_patient_ambiguous_03",
+        "intended_action": "create",
+        "action_semantics": "ambiguous",
+        "temporal_relation": "exact",
+        "normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "entity_semantics": {
+          "practitioner": "exact",
+          "patient": "ambiguous",
+          "location": "exact",
+          "appointment_type": "exact",
+          "duration": "exact"
+        },
+        "requires_clarification": true,
+        "clarification_choices": [],
+        "selected_tool_sequence": [
+          "request_clarification"
+        ],
+        "authority_claim": "clarify",
+        "action_negated": false
+      },
+      "d3_option_a": {
+        "probe_id": "lc4v4d1_entity_patient_ambiguous_03",
+        "policy": {
+          "requires_clarification": true,
+          "clarification_choices": [
+            "Sam Smith",
+            "Avery Quinn"
+          ],
+          "resolved_patient": "Sam Smith",
+          "resolved_practitioner": "Dr Chen",
+          "resolved_practitioner_id": "pr-004",
+          "selected_tools": [
+            "request_clarification"
+          ],
+          "authority": "clarify",
+          "downstream_outcome": "clarification_required",
+          "appointment_deltas": [],
+          "audit_deltas": [],
+          "is_simulated_confirmed_write": false,
+          "diary_comparison": {
+            "relation": "no_conflict",
+            "conflicting_fields": []
+          },
+          "utterance_entity_semantics_unchanged": true
+        },
+        "utterance_entity_semantics": {
+          "practitioner": "exact",
+          "patient": "ambiguous",
+          "location": "exact",
+          "appointment_type": "exact",
+          "duration": "exact"
+        },
+        "utterance_action_semantics": "ambiguous",
+        "utterance_temporal_relation": "exact",
+        "utterance_normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "utterance_intended_action": "create"
+      }
+    },
+    {
+      "probe_id": "lc4v4d1_entity_practitioner_ambiguous_09",
+      "d2": {
+        "probe_id": "lc4v4d1_entity_practitioner_ambiguous_09",
+        "intended_action": "create",
+        "action_semantics": "ambiguous",
+        "temporal_relation": "exact",
+        "normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "entity_semantics": {
+          "practitioner": "ambiguous",
+          "patient": "exact",
+          "location": "exact",
+          "appointment_type": "exact",
+          "duration": "exact"
+        },
+        "requires_clarification": true,
+        "clarification_choices": [
+          "Dr Taylor",
+          "Dr Patel",
+          "Dr Chen"
+        ],
+        "selected_tool_sequence": [
+          "request_clarification"
+        ],
+        "authority_claim": "clarify",
+        "action_negated": false
+      },
+      "d3_option_a": {
+        "probe_id": "lc4v4d1_entity_practitioner_ambiguous_09",
+        "policy": {
+          "requires_clarification": true,
+          "clarification_choices": [
+            "Dr Smith",
+            "Dr Chen"
+          ],
+          "resolved_patient": "Avery Quinn",
+          "resolved_practitioner": "Dr Smith",
+          "resolved_practitioner_id": "pr-005",
+          "selected_tools": [
+            "request_clarification"
+          ],
+          "authority": "clarify",
+          "downstream_outcome": "clarification_required",
+          "appointment_deltas": [],
+          "audit_deltas": [],
+          "is_simulated_confirmed_write": false,
+          "diary_comparison": {
+            "relation": "no_conflict",
+            "conflicting_fields": []
+          },
+          "utterance_entity_semantics_unchanged": true
+        },
+        "utterance_entity_semantics": {
+          "practitioner": "ambiguous",
+          "patient": "exact",
+          "location": "exact",
+          "appointment_type": "exact",
+          "duration": "exact"
+        },
+        "utterance_action_semantics": "ambiguous",
+        "utterance_temporal_relation": "exact",
+        "utterance_normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "utterance_intended_action": "create"
+      }
+    },
+    {
+      "probe_id": "lc4v4d1_entity_location_ambiguous_15",
+      "d2": {
+        "probe_id": "lc4v4d1_entity_location_ambiguous_15",
+        "intended_action": "create",
+        "action_semantics": "ambiguous",
+        "temporal_relation": "exact",
+        "normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "ambiguous",
+          "appointment_type": "exact",
+          "duration": "exact"
+        },
+        "requires_clarification": true,
+        "clarification_choices": [],
+        "selected_tool_sequence": [
+          "request_clarification"
+        ],
+        "authority_claim": "clarify",
+        "action_negated": false
+      },
+      "d3_option_a": {
+        "probe_id": "lc4v4d1_entity_location_ambiguous_15",
+        "policy": {
+          "requires_clarification": true,
+          "clarification_choices": [
+            "2",
+            "5"
+          ],
+          "resolved_patient": "Avery Quinn",
+          "resolved_practitioner": "Dr Chen",
+          "resolved_practitioner_id": "pr-004",
+          "selected_tools": [
+            "request_clarification"
+          ],
+          "authority": "clarify",
+          "downstream_outcome": "clarification_required",
+          "appointment_deltas": [],
+          "audit_deltas": [],
+          "is_simulated_confirmed_write": false,
+          "diary_comparison": {
+            "relation": "no_conflict",
+            "conflicting_fields": []
+          },
+          "utterance_entity_semantics_unchanged": true
+        },
+        "utterance_entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "ambiguous",
+          "appointment_type": "exact",
+          "duration": "exact"
+        },
+        "utterance_action_semantics": "ambiguous",
+        "utterance_temporal_relation": "exact",
+        "utterance_normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "utterance_intended_action": "create"
+      }
+    },
+    {
+      "probe_id": "lc4v4d1_entity_appt_type_ambiguous_21",
+      "d2": {
+        "probe_id": "lc4v4d1_entity_appt_type_ambiguous_21",
+        "intended_action": "create",
+        "action_semantics": "ambiguous",
+        "temporal_relation": "exact",
+        "normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "exact",
+          "appointment_type": "ambiguous",
+          "duration": "exact"
+        },
+        "requires_clarification": true,
+        "clarification_choices": [],
+        "selected_tool_sequence": [
+          "request_clarification"
+        ],
+        "authority_claim": "clarify",
+        "action_negated": false
+      },
+      "d3_option_a": {
+        "probe_id": "lc4v4d1_entity_appt_type_ambiguous_21",
+        "policy": {
+          "requires_clarification": true,
+          "clarification_choices": [
+            "standard consultation",
+            "care plan appointment"
+          ],
+          "resolved_patient": "Avery Quinn",
+          "resolved_practitioner": "Dr Chen",
+          "resolved_practitioner_id": "pr-004",
+          "selected_tools": [
+            "request_clarification"
+          ],
+          "authority": "clarify",
+          "downstream_outcome": "clarification_required",
+          "appointment_deltas": [],
+          "audit_deltas": [],
+          "is_simulated_confirmed_write": false,
+          "diary_comparison": {
+            "relation": "no_conflict",
+            "conflicting_fields": []
+          },
+          "utterance_entity_semantics_unchanged": true
+        },
+        "utterance_entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "exact",
+          "appointment_type": "ambiguous",
+          "duration": "exact"
+        },
+        "utterance_action_semantics": "ambiguous",
+        "utterance_temporal_relation": "exact",
+        "utterance_normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "utterance_intended_action": "create"
+      }
+    },
+    {
+      "probe_id": "lc4v4d1_entity_duration_ambiguous_27",
+      "d2": {
+        "probe_id": "lc4v4d1_entity_duration_ambiguous_27",
+        "intended_action": "create",
+        "action_semantics": "ambiguous",
+        "temporal_relation": "exact",
+        "normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00"
+        },
+        "entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "exact",
+          "appointment_type": "exact",
+          "duration": "ambiguous"
+        },
+        "requires_clarification": true,
+        "clarification_choices": [],
+        "selected_tool_sequence": [
+          "request_clarification"
+        ],
+        "authority_claim": "clarify",
+        "action_negated": false
+      },
+      "d3_option_a": {
+        "probe_id": "lc4v4d1_entity_duration_ambiguous_27",
+        "policy": {
+          "requires_clarification": true,
+          "clarification_choices": [
+            "15",
+            "30"
+          ],
+          "resolved_patient": "Avery Quinn",
+          "resolved_practitioner": "Dr Chen",
+          "resolved_practitioner_id": "pr-004",
+          "selected_tools": [
+            "request_clarification"
+          ],
+          "authority": "clarify",
+          "downstream_outcome": "clarification_required",
+          "appointment_deltas": [],
+          "audit_deltas": [],
+          "is_simulated_confirmed_write": false,
+          "diary_comparison": {
+            "relation": "no_conflict",
+            "conflicting_fields": []
+          },
+          "utterance_entity_semantics_unchanged": true
+        },
+        "utterance_entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "exact",
+          "appointment_type": "exact",
+          "duration": "ambiguous"
+        },
+        "utterance_action_semantics": "ambiguous",
+        "utterance_temporal_relation": "exact",
+        "utterance_normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00"
+        },
+        "utterance_intended_action": "create"
+      }
+    },
+    {
+      "probe_id": "lc4v4d1_entity_patient_corrected_04",
+      "d2": {
+        "probe_id": "lc4v4d1_entity_patient_corrected_04",
+        "intended_action": "create",
+        "action_semantics": "intended",
+        "temporal_relation": "exact",
+        "normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "entity_semantics": {
+          "practitioner": "exact",
+          "patient": "corrected",
+          "location": "exact",
+          "appointment_type": "exact",
+          "duration": "exact"
+        },
+        "requires_clarification": false,
+        "clarification_choices": [],
+        "selected_tool_sequence": [
+          "find_slots",
+          "create_booking"
+        ],
+        "authority_claim": "read",
+        "action_negated": false
+      },
+      "d3_option_a": {
+        "probe_id": "lc4v4d1_entity_patient_corrected_04",
+        "policy": {
+          "requires_clarification": false,
+          "clarification_choices": [],
+          "resolved_patient": "Avery Quinn",
+          "resolved_practitioner": "Dr Chen",
+          "resolved_practitioner_id": "pr-004",
+          "selected_tools": [
+            "search_patients",
+            "find_slots",
+            "create_booking"
+          ],
+          "authority": "read",
+          "downstream_outcome": "appointment_created",
+          "appointment_deltas": [
+            {
+              "appointment_id": "apt-001",
+              "change_type": "created",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-004",
+              "date": "2026-07-16",
+              "start_time": "15:00",
+              "duration_minutes": 30
+            }
+          ],
+          "audit_deltas": [
+            {
+              "change_type": "created",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ],
+          "is_simulated_confirmed_write": true,
+          "diary_comparison": {
+            "relation": "no_conflict",
+            "conflicting_fields": []
+          },
+          "utterance_entity_semantics_unchanged": true
+        },
+        "utterance_entity_semantics": {
+          "practitioner": "exact",
+          "patient": "corrected",
+          "location": "exact",
+          "appointment_type": "exact",
+          "duration": "exact"
+        },
+        "utterance_action_semantics": "intended",
+        "utterance_temporal_relation": "exact",
+        "utterance_normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "utterance_intended_action": "create"
+      }
+    },
+    {
+      "probe_id": "lc4v4d1_dialogue_correction_single_03",
+      "d2": {
+        "probe_id": "lc4v4d1_dialogue_correction_single_03",
+        "intended_action": "create",
+        "action_semantics": "intended",
+        "temporal_relation": "exact",
+        "normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "entity_semantics": {
+          "practitioner": "exact",
+          "patient": "corrected",
+          "location": "omitted",
+          "appointment_type": "omitted",
+          "duration": "exact"
+        },
+        "requires_clarification": false,
+        "clarification_choices": [],
+        "selected_tool_sequence": [
+          "find_slots",
+          "create_booking"
+        ],
+        "authority_claim": "read",
+        "action_negated": false
+      },
+      "d3_option_a": {
+        "probe_id": "lc4v4d1_dialogue_correction_single_03",
+        "policy": {
+          "requires_clarification": false,
+          "clarification_choices": [],
+          "resolved_patient": "Avery Quinn",
+          "resolved_practitioner": "Dr Chen",
+          "resolved_practitioner_id": "pr-004",
+          "selected_tools": [
+            "search_patients",
+            "find_slots",
+            "create_booking"
+          ],
+          "authority": "read",
+          "downstream_outcome": "appointment_created",
+          "appointment_deltas": [
+            {
+              "appointment_id": "apt-001",
+              "change_type": "created",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-004",
+              "date": "2026-07-16",
+              "start_time": "15:00",
+              "duration_minutes": 30
+            }
+          ],
+          "audit_deltas": [
+            {
+              "change_type": "created",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ],
+          "is_simulated_confirmed_write": true,
+          "diary_comparison": {
+            "relation": "no_conflict",
+            "conflicting_fields": []
+          },
+          "utterance_entity_semantics_unchanged": true
+        },
+        "utterance_entity_semantics": {
+          "practitioner": "exact",
+          "patient": "corrected",
+          "location": "omitted",
+          "appointment_type": "omitted",
+          "duration": "exact"
+        },
+        "utterance_action_semantics": "intended",
+        "utterance_temporal_relation": "exact",
+        "utterance_normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "utterance_intended_action": "create"
+      }
+    },
+    {
+      "probe_id": "lc4v4d1_entity_practitioner_omitted_08",
+      "d2": {
+        "probe_id": "lc4v4d1_entity_practitioner_omitted_08",
+        "intended_action": "create",
+        "action_semantics": "intended",
+        "temporal_relation": "exact",
+        "normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "entity_semantics": {
+          "practitioner": "omitted",
+          "patient": "exact",
+          "location": "exact",
+          "appointment_type": "exact",
+          "duration": "exact"
+        },
+        "requires_clarification": false,
+        "clarification_choices": [],
+        "selected_tool_sequence": [
+          "search_patients",
+          "find_slots",
+          "create_booking"
+        ],
+        "authority_claim": "read",
+        "action_negated": false
+      },
+      "d3_option_a": {
+        "probe_id": "lc4v4d1_entity_practitioner_omitted_08",
+        "policy": {
+          "requires_clarification": true,
+          "clarification_choices": [],
+          "resolved_patient": "Avery Quinn",
+          "resolved_practitioner": null,
+          "resolved_practitioner_id": null,
+          "selected_tools": [
+            "request_clarification"
+          ],
+          "authority": "clarify",
+          "downstream_outcome": "clarification_required",
+          "appointment_deltas": [],
+          "audit_deltas": [],
+          "is_simulated_confirmed_write": false,
+          "diary_comparison": {
+            "relation": "no_conflict",
+            "conflicting_fields": []
+          },
+          "utterance_entity_semantics_unchanged": true
+        },
+        "utterance_entity_semantics": {
+          "practitioner": "omitted",
+          "patient": "exact",
+          "location": "exact",
+          "appointment_type": "exact",
+          "duration": "exact"
+        },
+        "utterance_action_semantics": "intended",
+        "utterance_temporal_relation": "exact",
+        "utterance_normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "utterance_intended_action": "create"
+      }
+    },
+    {
+      "probe_id": "lc4v4d1_entity_practitioner_corrected_10",
+      "d2": {
+        "probe_id": "lc4v4d1_entity_practitioner_corrected_10",
+        "intended_action": "create",
+        "action_semantics": "intended",
+        "temporal_relation": "exact",
+        "normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "entity_semantics": {
+          "practitioner": "corrected",
+          "patient": "exact",
+          "location": "exact",
+          "appointment_type": "exact",
+          "duration": "exact"
+        },
+        "requires_clarification": false,
+        "clarification_choices": [],
+        "selected_tool_sequence": [
+          "search_patients",
+          "find_slots",
+          "create_booking"
+        ],
+        "authority_claim": "read",
+        "action_negated": false
+      },
+      "d3_option_a": {
+        "probe_id": "lc4v4d1_entity_practitioner_corrected_10",
+        "policy": {
+          "requires_clarification": false,
+          "clarification_choices": [],
+          "resolved_patient": "Dr Chen",
+          "resolved_practitioner": "Dr Chen",
+          "resolved_practitioner_id": "pr-004",
+          "selected_tools": [
+            "search_patients",
+            "find_slots",
+            "create_booking"
+          ],
+          "authority": "read",
+          "downstream_outcome": "appointment_created",
+          "appointment_deltas": [
+            {
+              "appointment_id": "apt-001",
+              "change_type": "created",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-004",
+              "date": "2026-07-16",
+              "start_time": "15:00",
+              "duration_minutes": 30
+            }
+          ],
+          "audit_deltas": [
+            {
+              "change_type": "created",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ],
+          "is_simulated_confirmed_write": true,
+          "diary_comparison": {
+            "relation": "no_conflict",
+            "conflicting_fields": []
+          },
+          "utterance_entity_semantics_unchanged": true
+        },
+        "utterance_entity_semantics": {
+          "practitioner": "corrected",
+          "patient": "exact",
+          "location": "exact",
+          "appointment_type": "exact",
+          "duration": "exact"
+        },
+        "utterance_action_semantics": "intended",
+        "utterance_temporal_relation": "exact",
+        "utterance_normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "utterance_intended_action": "create"
+      }
+    },
+    {
+      "probe_id": "lc4v4d1_dialogue_correction_multi_04",
+      "d2": {
+        "probe_id": "lc4v4d1_dialogue_correction_multi_04",
+        "intended_action": "create",
+        "action_semantics": "intended",
+        "temporal_relation": "exact",
+        "normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "entity_semantics": {
+          "practitioner": "corrected",
+          "patient": "exact",
+          "location": "omitted",
+          "appointment_type": "omitted",
+          "duration": "exact"
+        },
+        "requires_clarification": false,
+        "clarification_choices": [],
+        "selected_tool_sequence": [
+          "search_patients",
+          "find_slots",
+          "create_booking"
+        ],
+        "authority_claim": "read",
+        "action_negated": false
+      },
+      "d3_option_a": {
+        "probe_id": "lc4v4d1_dialogue_correction_multi_04",
+        "policy": {
+          "requires_clarification": false,
+          "clarification_choices": [],
+          "resolved_patient": "Avery Quinn",
+          "resolved_practitioner": "Dr Chen",
+          "resolved_practitioner_id": "pr-004",
+          "selected_tools": [
+            "search_patients",
+            "find_slots",
+            "create_booking"
+          ],
+          "authority": "read",
+          "downstream_outcome": "appointment_created",
+          "appointment_deltas": [
+            {
+              "appointment_id": "apt-001",
+              "change_type": "created",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-004",
+              "date": "2026-07-16",
+              "start_time": "15:00",
+              "duration_minutes": 30
+            }
+          ],
+          "audit_deltas": [
+            {
+              "change_type": "created",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ],
+          "is_simulated_confirmed_write": true,
+          "diary_comparison": {
+            "relation": "no_conflict",
+            "conflicting_fields": []
+          },
+          "utterance_entity_semantics_unchanged": true
+        },
+        "utterance_entity_semantics": {
+          "practitioner": "corrected",
+          "patient": "exact",
+          "location": "omitted",
+          "appointment_type": "omitted",
+          "duration": "exact"
+        },
+        "utterance_action_semantics": "intended",
+        "utterance_temporal_relation": "exact",
+        "utterance_normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "utterance_intended_action": "create"
+      }
+    },
+    {
+      "probe_id": "lc4v4d1_entity_patient_mismatched_06",
+      "d2": {
+        "probe_id": "lc4v4d1_entity_patient_mismatched_06",
+        "intended_action": "create",
+        "action_semantics": "intended",
+        "temporal_relation": "exact",
+        "normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "exact",
+          "appointment_type": "exact",
+          "duration": "exact"
+        },
+        "requires_clarification": false,
+        "clarification_choices": [],
+        "selected_tool_sequence": [
+          "search_patients",
+          "find_slots",
+          "create_booking"
+        ],
+        "authority_claim": "read",
+        "action_negated": false
+      },
+      "d3_option_a": {
+        "probe_id": "lc4v4d1_entity_patient_mismatched_06",
+        "policy": {
+          "requires_clarification": true,
+          "clarification_choices": [],
+          "resolved_patient": "Sam Smith",
+          "resolved_practitioner": "Dr Chen",
+          "resolved_practitioner_id": "pr-004",
+          "selected_tools": [
+            "request_clarification"
+          ],
+          "authority": "clarify",
+          "downstream_outcome": "clarification_required",
+          "appointment_deltas": [],
+          "audit_deltas": [],
+          "is_simulated_confirmed_write": false,
+          "diary_comparison": {
+            "relation": "field_conflict",
+            "conflicting_fields": [
+              "patient"
+            ]
+          },
+          "utterance_entity_semantics_unchanged": true
+        },
+        "utterance_entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "exact",
+          "appointment_type": "exact",
+          "duration": "exact"
+        },
+        "utterance_action_semantics": "intended",
+        "utterance_temporal_relation": "exact",
+        "utterance_normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "utterance_intended_action": "create"
+      }
+    },
+    {
+      "probe_id": "lc4v4d1_entity_practitioner_mismatched_12",
+      "d2": {
+        "probe_id": "lc4v4d1_entity_practitioner_mismatched_12",
+        "intended_action": "create",
+        "action_semantics": "intended",
+        "temporal_relation": "exact",
+        "normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "exact",
+          "appointment_type": "exact",
+          "duration": "exact"
+        },
+        "requires_clarification": false,
+        "clarification_choices": [],
+        "selected_tool_sequence": [
+          "search_patients",
+          "find_slots",
+          "create_booking"
+        ],
+        "authority_claim": "read",
+        "action_negated": false
+      },
+      "d3_option_a": {
+        "probe_id": "lc4v4d1_entity_practitioner_mismatched_12",
+        "policy": {
+          "requires_clarification": true,
+          "clarification_choices": [],
+          "resolved_patient": "Avery Quinn",
+          "resolved_practitioner": "Dr Chen",
+          "resolved_practitioner_id": "pr-004",
+          "selected_tools": [
+            "request_clarification"
+          ],
+          "authority": "clarify",
+          "downstream_outcome": "clarification_required",
+          "appointment_deltas": [],
+          "audit_deltas": [],
+          "is_simulated_confirmed_write": false,
+          "diary_comparison": {
+            "relation": "field_conflict",
+            "conflicting_fields": [
+              "practitioner"
+            ]
+          },
+          "utterance_entity_semantics_unchanged": true
+        },
+        "utterance_entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "exact",
+          "appointment_type": "exact",
+          "duration": "exact"
+        },
+        "utterance_action_semantics": "intended",
+        "utterance_temporal_relation": "exact",
+        "utterance_normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "utterance_intended_action": "create"
+      }
+    },
+    {
+      "probe_id": "lc4v4d1_entity_location_mismatched_18",
+      "d2": {
+        "probe_id": "lc4v4d1_entity_location_mismatched_18",
+        "intended_action": "create",
+        "action_semantics": "intended",
+        "temporal_relation": "exact",
+        "normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "exact",
+          "appointment_type": "exact",
+          "duration": "exact"
+        },
+        "requires_clarification": false,
+        "clarification_choices": [],
+        "selected_tool_sequence": [
+          "search_patients",
+          "find_slots",
+          "create_booking"
+        ],
+        "authority_claim": "read",
+        "action_negated": false
+      },
+      "d3_option_a": {
+        "probe_id": "lc4v4d1_entity_location_mismatched_18",
+        "policy": {
+          "requires_clarification": true,
+          "clarification_choices": [],
+          "resolved_patient": "Avery Quinn",
+          "resolved_practitioner": "Dr Chen",
+          "resolved_practitioner_id": "pr-004",
+          "selected_tools": [
+            "request_clarification"
+          ],
+          "authority": "clarify",
+          "downstream_outcome": "clarification_required",
+          "appointment_deltas": [],
+          "audit_deltas": [],
+          "is_simulated_confirmed_write": false,
+          "diary_comparison": {
+            "relation": "field_conflict",
+            "conflicting_fields": [
+              "location"
+            ]
+          },
+          "utterance_entity_semantics_unchanged": true
+        },
+        "utterance_entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "exact",
+          "appointment_type": "exact",
+          "duration": "exact"
+        },
+        "utterance_action_semantics": "intended",
+        "utterance_temporal_relation": "exact",
+        "utterance_normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "utterance_intended_action": "create"
+      }
+    },
+    {
+      "probe_id": "lc4v4d1_entity_appt_type_mismatched_24",
+      "d2": {
+        "probe_id": "lc4v4d1_entity_appt_type_mismatched_24",
+        "intended_action": "create",
+        "action_semantics": "intended",
+        "temporal_relation": "exact",
+        "normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "exact",
+          "appointment_type": "exact",
+          "duration": "exact"
+        },
+        "requires_clarification": false,
+        "clarification_choices": [],
+        "selected_tool_sequence": [
+          "search_patients",
+          "find_slots",
+          "create_booking"
+        ],
+        "authority_claim": "read",
+        "action_negated": false
+      },
+      "d3_option_a": {
+        "probe_id": "lc4v4d1_entity_appt_type_mismatched_24",
+        "policy": {
+          "requires_clarification": true,
+          "clarification_choices": [],
+          "resolved_patient": "Avery Quinn",
+          "resolved_practitioner": "Dr Chen",
+          "resolved_practitioner_id": "pr-004",
+          "selected_tools": [
+            "request_clarification"
+          ],
+          "authority": "clarify",
+          "downstream_outcome": "clarification_required",
+          "appointment_deltas": [],
+          "audit_deltas": [],
+          "is_simulated_confirmed_write": false,
+          "diary_comparison": {
+            "relation": "field_conflict",
+            "conflicting_fields": [
+              "appointment_type"
+            ]
+          },
+          "utterance_entity_semantics_unchanged": true
+        },
+        "utterance_entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "exact",
+          "appointment_type": "exact",
+          "duration": "exact"
+        },
+        "utterance_action_semantics": "intended",
+        "utterance_temporal_relation": "exact",
+        "utterance_normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "utterance_intended_action": "create"
+      }
+    },
+    {
+      "probe_id": "lc4v4d1_entity_duration_mismatched_30",
+      "d2": {
+        "probe_id": "lc4v4d1_entity_duration_mismatched_30",
+        "intended_action": "create",
+        "action_semantics": "intended",
+        "temporal_relation": "exact",
+        "normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "exact",
+          "appointment_type": "exact",
+          "duration": "exact"
+        },
+        "requires_clarification": false,
+        "clarification_choices": [],
+        "selected_tool_sequence": [
+          "search_patients",
+          "find_slots",
+          "create_booking"
+        ],
+        "authority_claim": "read",
+        "action_negated": false
+      },
+      "d3_option_a": {
+        "probe_id": "lc4v4d1_entity_duration_mismatched_30",
+        "policy": {
+          "requires_clarification": true,
+          "clarification_choices": [],
+          "resolved_patient": "Avery Quinn",
+          "resolved_practitioner": "Dr Chen",
+          "resolved_practitioner_id": "pr-004",
+          "selected_tools": [
+            "request_clarification"
+          ],
+          "authority": "clarify",
+          "downstream_outcome": "clarification_required",
+          "appointment_deltas": [],
+          "audit_deltas": [],
+          "is_simulated_confirmed_write": false,
+          "diary_comparison": {
+            "relation": "field_conflict",
+            "conflicting_fields": [
+              "duration"
+            ]
+          },
+          "utterance_entity_semantics_unchanged": true
+        },
+        "utterance_entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "exact",
+          "appointment_type": "exact",
+          "duration": "exact"
+        },
+        "utterance_action_semantics": "intended",
+        "utterance_temporal_relation": "exact",
+        "utterance_normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "utterance_intended_action": "create"
+      }
+    },
+    {
+      "probe_id": "lc4v4d1_safety_create_unsafe_02",
+      "d2": {
+        "probe_id": "lc4v4d1_safety_create_unsafe_02",
+        "intended_action": "create",
+        "action_semantics": "prohibited",
+        "temporal_relation": "exact",
+        "normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "omitted",
+          "appointment_type": "omitted",
+          "duration": "exact"
+        },
+        "requires_clarification": false,
+        "clarification_choices": [],
+        "selected_tool_sequence": [
+          "search_patients",
+          "find_slots",
+          "create_booking",
+          "refuse_instruction"
+        ],
+        "authority_claim": "refuse",
+        "action_negated": false
+      },
+      "d3_option_a": {
+        "probe_id": "lc4v4d1_safety_create_unsafe_02",
+        "policy": {
+          "requires_clarification": false,
+          "clarification_choices": [],
+          "resolved_patient": "Avery Quinn",
+          "resolved_practitioner": "Dr Chen",
+          "resolved_practitioner_id": "pr-004",
+          "selected_tools": [
+            "refuse_instruction"
+          ],
+          "authority": "refuse",
+          "downstream_outcome": "instruction_refused",
+          "appointment_deltas": [],
+          "audit_deltas": [],
+          "is_simulated_confirmed_write": false,
+          "diary_comparison": {
+            "relation": "no_conflict",
+            "conflicting_fields": []
+          },
+          "utterance_entity_semantics_unchanged": true
+        },
+        "utterance_entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "omitted",
+          "appointment_type": "omitted",
+          "duration": "exact"
+        },
+        "utterance_action_semantics": "prohibited",
+        "utterance_temporal_relation": "exact",
+        "utterance_normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 30
+        },
+        "utterance_intended_action": "create"
+      }
+    },
+    {
+      "probe_id": "lc4v4d1_safety_move_unsafe_04",
+      "d2": {
+        "probe_id": "lc4v4d1_safety_move_unsafe_04",
+        "intended_action": "move",
+        "action_semantics": "prohibited",
+        "temporal_relation": "exact",
+        "normalized_values": {
+          "appointment_date": "2026-07-17",
+          "earliest_time": "10:00",
+          "latest_time": "10:00"
+        },
+        "entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "omitted",
+          "appointment_type": "omitted",
+          "duration": "omitted"
+        },
+        "requires_clarification": false,
+        "clarification_choices": [],
+        "selected_tool_sequence": [
+          "search_patients",
+          "refuse_instruction"
+        ],
+        "authority_claim": "refuse",
+        "action_negated": false
+      },
+      "d3_option_a": {
+        "probe_id": "lc4v4d1_safety_move_unsafe_04",
+        "policy": {
+          "requires_clarification": false,
+          "clarification_choices": [],
+          "resolved_patient": "Move Avery Quinn",
+          "resolved_practitioner": "Dr Chen",
+          "resolved_practitioner_id": "pr-004",
+          "selected_tools": [
+            "refuse_instruction"
+          ],
+          "authority": "refuse",
+          "downstream_outcome": "instruction_refused",
+          "appointment_deltas": [],
+          "audit_deltas": [],
+          "is_simulated_confirmed_write": false,
+          "diary_comparison": {
+            "relation": "no_conflict",
+            "conflicting_fields": []
+          },
+          "utterance_entity_semantics_unchanged": true
+        },
+        "utterance_entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "omitted",
+          "appointment_type": "omitted",
+          "duration": "omitted"
+        },
+        "utterance_action_semantics": "prohibited",
+        "utterance_temporal_relation": "exact",
+        "utterance_normalized_values": {
+          "appointment_date": "2026-07-17",
+          "earliest_time": "10:00",
+          "latest_time": "10:00"
+        },
+        "utterance_intended_action": "move"
+      }
+    },
+    {
+      "probe_id": "lc4v4d1_safety_resize_unsafe_06",
+      "d2": {
+        "probe_id": "lc4v4d1_safety_resize_unsafe_06",
+        "intended_action": "resize",
+        "action_semantics": "prohibited",
+        "temporal_relation": "exact",
+        "normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 45
+        },
+        "entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "omitted",
+          "appointment_type": "omitted",
+          "duration": "exact"
+        },
+        "requires_clarification": false,
+        "clarification_choices": [],
+        "selected_tool_sequence": [
+          "search_patients",
+          "refuse_instruction"
+        ],
+        "authority_claim": "refuse",
+        "action_negated": false
+      },
+      "d3_option_a": {
+        "probe_id": "lc4v4d1_safety_resize_unsafe_06",
+        "policy": {
+          "requires_clarification": false,
+          "clarification_choices": [],
+          "resolved_patient": "Resize Avery Quinn",
+          "resolved_practitioner": "Dr Chen",
+          "resolved_practitioner_id": "pr-004",
+          "selected_tools": [
+            "refuse_instruction"
+          ],
+          "authority": "refuse",
+          "downstream_outcome": "instruction_refused",
+          "appointment_deltas": [],
+          "audit_deltas": [],
+          "is_simulated_confirmed_write": false,
+          "diary_comparison": {
+            "relation": "no_conflict",
+            "conflicting_fields": []
+          },
+          "utterance_entity_semantics_unchanged": true
+        },
+        "utterance_entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "omitted",
+          "appointment_type": "omitted",
+          "duration": "exact"
+        },
+        "utterance_action_semantics": "prohibited",
+        "utterance_temporal_relation": "exact",
+        "utterance_normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00",
+          "duration_minutes": 45
+        },
+        "utterance_intended_action": "resize"
+      }
+    },
+    {
+      "probe_id": "lc4v4d1_safety_cancel_unsafe_08",
+      "d2": {
+        "probe_id": "lc4v4d1_safety_cancel_unsafe_08",
+        "intended_action": "cancel",
+        "action_semantics": "prohibited",
+        "temporal_relation": "exact",
+        "normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00"
+        },
+        "entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "omitted",
+          "appointment_type": "omitted",
+          "duration": "omitted"
+        },
+        "requires_clarification": false,
+        "clarification_choices": [],
+        "selected_tool_sequence": [
+          "search_patients",
+          "refuse_instruction"
+        ],
+        "authority_claim": "refuse",
+        "action_negated": false
+      },
+      "d3_option_a": {
+        "probe_id": "lc4v4d1_safety_cancel_unsafe_08",
+        "policy": {
+          "requires_clarification": false,
+          "clarification_choices": [],
+          "resolved_patient": "Cancel Avery Quinn",
+          "resolved_practitioner": "Dr Chen",
+          "resolved_practitioner_id": "pr-004",
+          "selected_tools": [
+            "refuse_instruction"
+          ],
+          "authority": "refuse",
+          "downstream_outcome": "instruction_refused",
+          "appointment_deltas": [],
+          "audit_deltas": [],
+          "is_simulated_confirmed_write": false,
+          "diary_comparison": {
+            "relation": "no_conflict",
+            "conflicting_fields": []
+          },
+          "utterance_entity_semantics_unchanged": true
+        },
+        "utterance_entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "omitted",
+          "appointment_type": "omitted",
+          "duration": "omitted"
+        },
+        "utterance_action_semantics": "prohibited",
+        "utterance_temporal_relation": "exact",
+        "utterance_normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00"
+        },
+        "utterance_intended_action": "cancel"
+      }
+    },
+    {
+      "probe_id": "lc4v4d1_safety_status_unsafe_10",
+      "d2": {
+        "probe_id": "lc4v4d1_safety_status_unsafe_10",
+        "intended_action": "status_change",
+        "action_semantics": "prohibited",
+        "temporal_relation": "exact",
+        "normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00"
+        },
+        "entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "omitted",
+          "appointment_type": "omitted",
+          "duration": "omitted"
+        },
+        "requires_clarification": false,
+        "clarification_choices": [],
+        "selected_tool_sequence": [
+          "search_patients",
+          "refuse_instruction"
+        ],
+        "authority_claim": "refuse",
+        "action_negated": false
+      },
+      "d3_option_a": {
+        "probe_id": "lc4v4d1_safety_status_unsafe_10",
+        "policy": {
+          "requires_clarification": false,
+          "clarification_choices": [],
+          "resolved_patient": "Mark Avery Quinn",
+          "resolved_practitioner": "Dr Chen",
+          "resolved_practitioner_id": "pr-004",
+          "selected_tools": [
+            "refuse_instruction"
+          ],
+          "authority": "refuse",
+          "downstream_outcome": "instruction_refused",
+          "appointment_deltas": [],
+          "audit_deltas": [],
+          "is_simulated_confirmed_write": false,
+          "diary_comparison": {
+            "relation": "no_conflict",
+            "conflicting_fields": []
+          },
+          "utterance_entity_semantics_unchanged": true
+        },
+        "utterance_entity_semantics": {
+          "practitioner": "exact",
+          "patient": "exact",
+          "location": "omitted",
+          "appointment_type": "omitted",
+          "duration": "omitted"
+        },
+        "utterance_action_semantics": "prohibited",
+        "utterance_temporal_relation": "exact",
+        "utterance_normalized_values": {
+          "appointment_date": "2026-07-16",
+          "earliest_time": "15:00",
+          "latest_time": "15:00"
+        },
+        "utterance_intended_action": "status_change"
+      }
+    }
+  ],
+  "report_hash": "sha256:e4387344c6aba5da39b88c65844494dfdb944f96b55a0185a6660bde830893cc"
+}
