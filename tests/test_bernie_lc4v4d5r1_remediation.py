@@ -13,6 +13,7 @@ Validates that the policy resolution changes produce the frozen D5R1 taxonomy:
 from __future__ import annotations
 
 import json
+import pathlib
 
 import pytest
 
@@ -24,6 +25,8 @@ from app.services.bernie.lc4v4d5r1_remediation_evidence import (
     EXPECTED_VERSIONED_RELATION_COUNT,
     EXPECTED_VERSIONED_RELATION_IDS,
     UNSAFE_IDS,
+    generate_report_json,
+    generate_report_markdown,
     run_d5r1_evidence,
 )
 from app.services.bernie.composed_corpus_evaluator import (
@@ -34,6 +37,14 @@ from app.services.bernie.composed_corpus_evaluator import (
 from app.services.bernie.lc4v4_development_diagnostic import (
     author_all_probes,
     dict_to_spec,
+)
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+JSON_REPORT = ROOT / "docs" / "bernie-lc4v4d5r1-exact-four-remediation.json"
+MARKDOWN_REPORT = ROOT / "docs" / "bernie-lc4v4d5r1-exact-four-remediation.md"
+SOURCE_COMMIT = "33ce3d89f5519e40276037a03b4e7742804080e5"
+EXPECTED_REPORT_HASH = (
+    "sha256:0cb444d1aeba82a80f5a16170b30b8ea203842dec4af81b768a688e5aae9bcdf"
 )
 
 # ---------------------------------------------------------------------------
@@ -295,6 +306,12 @@ class TestD5R1Hashes:
             f"expected {EXPECTED_EMPTY_BLOCKER_SELECTION_HASH}, "
             f"got {actual}"
         )
+
+    def test_committed_report_hash_and_content(self) -> None:
+        report = run_d5r1_evidence(SOURCE_COMMIT)
+        assert report["report_hash"] == EXPECTED_REPORT_HASH
+        assert JSON_REPORT.read_text(encoding="utf-8") == generate_report_json(report)
+        assert MARKDOWN_REPORT.read_text(encoding="utf-8") == generate_report_markdown(report)
 
 
 # ---------------------------------------------------------------------------
