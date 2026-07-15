@@ -93,17 +93,31 @@ consistent with an authoring/representation defect, but it supplies no
 case-level parser evidence and cannot authorize inspection, tuning, repair, or
 a rerun. Holdouts v1-v3 are sealed.
 
+LC4V4 was subsequently authorized and remains a sealed aggregate
+`certification_fail`; its ordinary development sequence D1-D3 identified,
+repaired, and then explicitly versioned the valid utterance and policy surfaces
+without using sealed case-level evidence. LC4V4D4 integrated the approved
+Option A policy into the ordinary composed development harness while leaving
+legacy as the exact default. The 60-probe legacy baseline hash is
+`sha256:665851ffe055efb40f2ba1e43291d6b945c4764b4f441837781d4fc964d6ff27`.
+All 20 Option A cases pass over 40 observations with zero variance; all 13
+fail-closed gates pass and the report hash is
+`sha256:dd1ecc077a59bf05e777eda1f3a5450c0a1b97a4c8a3fd21dc0363d473abd653`.
+Gemini independently returned `DECISION: pass` on exact recovered report head
+`bd51caf0`. The exact six incompatible D1 expectations remain frozen and are
+represented only as explicit versioned overlay differences.
+
 ## Next safe sequence
 
-1. Keep holdouts v1, v2, and v3 sealed; use only committed aggregate evidence
+1. Keep holdouts v1, v2, v3, and v4 sealed; use only committed aggregate evidence
    and closeouts for planning.
-2. Do not name R3: the development exit-gap reassessment found no authorized
-   repair surface.
-3. Keep T3.5 provider adapters and live-provider execution separately deferred.
-4. Pause for Yuri's explicit choice before a genuinely fresh v4 or a reviewed
-   reuse policy. Recommend content-blind authoring-quality work before v4.
-5. Authorize parser work only from a newly frozen independently supported
-   development surface subset.
+2. Run a bounded development-wide Option A adoption audit over all 60 ordinary
+   D1 probes before any broader development default or certification proposal.
+3. Keep the exact D4 20-case overlay frozen; classify other differences before
+   authorizing remediation and do not rewrite historical fixtures/reports.
+4. Keep T3.5 provider adapters and live-provider execution separately deferred.
+5. Pause for Yuri's explicit choice before a new certification holdout or a
+   reviewed reuse policy.
 
 ## Primary evidence
 
@@ -127,8 +141,10 @@ a rerun. Holdouts v1-v3 are sealed.
 - `orchestration/agent_inbox/codex/lc4v2e1-sol-acceptance.md`
 - `docs/bernie-lc4v3-fresh-certification-closeout.md`
 - `orchestration/agent_inbox/codex/lc4v3-sol-acceptance.md`
+- `docs/bernie-lc4v4d4-composed-integration-closeout.md`
+- `orchestration/agent_inbox/codex/lc4v4d4-sol-acceptance.md`
 
-Protected holdouts v1, v2, and v3 are sealed. Do not enumerate their paths, inspect
+Protected holdouts v1, v2, v3, and v4 are sealed. Do not enumerate their paths, inspect
 content, rerun them, regenerate them, hash-check them, infer labels from them,
 or tune against them. T3.1-T3.4 remain blocked-by-default evaluation
 scaffolding; T3.5 is deferred.

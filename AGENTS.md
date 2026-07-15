@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V4D4 versioned composed-harness integration contract frozen; bounded implementation pending |
-| Active acceptance/plan | `orchestration/agent_inbox/codex/lc4v4d4-sol-contract.md`, with D3 acceptance retained at `orchestration/agent_inbox/codex/lc4v4d3-sol-acceptance.md` |
-| Current result | D3 remains accepted at 20/20 and zero variance. D4 freezes an explicit legacy-default/Option-A composed runner, a separate state-relation carrier, a versioned scoring overlay, and exact legacy baseline hash `665851ff...`. No worker has yet been accepted and all D1/D2/D3 evidence remains unchanged |
-| Next implementation | Run one bounded DeepSeek V4 Flash/high implementation/test lane through Claude Code `--bare`, then Sol recovery and serial verification, followed by a fresh Gemini exact-head veto. Do not rerun holdouts, change utterance parsing, silently replace legacy behavior, or open T3/provider/product/write surfaces |
+| Active product track | LC4V4D4 versioned composed-harness integration accepted; prepare bounded development-wide Option A adoption audit |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v4d4-sol-acceptance.md` and `docs/bernie-lc4v4d4-composed-integration-closeout.md` |
+| Current result | D4 passes 20/20 approved Option A cases over 40 complete observations with zero variance, exact categories `5/2/1/2/5/5`, exact 60-probe legacy baseline hash `665851ff...`, and report hash `dd1ecc07...`. All 13 gates pass. Gemini returned `DECISION: pass` on exact recovered report head `bd51caf0`. Legacy remains the default; Option A is explicit and development-only. Frozen D1/D2/D3 evidence and product runtime are unchanged |
+| Next implementation | After a fresh receipt, freeze a bounded LC4V4D5 development-wide Option A adoption audit over all 60 ordinary D1 probes. Preserve the exact 20-case D4 overlay, classify every remaining legacy/Option-A difference before authorizing any remediation, and do not change the parser, historical fixtures/reports, or T3/provider/product/write surfaces. A later holdout or reuse policy remains a separate Yuri decision |
 
 LC4V4 provenance: the frozen pre-content records remain
 `lc4v4q1-sol-contract.md`, `lc4v4q1-sol-recovery-amendment.md`,
