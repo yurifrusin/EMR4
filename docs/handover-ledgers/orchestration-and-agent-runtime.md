@@ -1,0 +1,62 @@
+# Ariadne and Agent Runtime Ledger
+
+The live authority allocation in root `AGENTS.md` overrides all historical
+allocation language.
+
+## Current allocation
+
+- GPT Sol: Conductor, planner, architecture and acceptance owner, recovery
+  owner, and protected integrator.
+- DeepSeek V4 Flash/high through Claude Code `--bare`: economical bounded
+  implementation and test worker.
+- Gemini 3.5 Flash through a fresh Antigravity project: economical peer worker
+  and independent veto reviewer.
+- DeepSeek Pro: not a routine or fallback Conductor and not authorized for
+  planning, sprint allocation, or acceptance revision without a new explicit
+  user instruction.
+- Claude/Fable/Opus and native Codex workers: availability- and leverage-gated
+  options, never automatic integration authorities.
+
+Preferred launchers are `scripts/ariadne_deepseek_claude.py` and
+`scripts/ariadne_antigravity.py`. Deep Code is a real-TTY fallback only.
+Durable packet artifacts, not terminal prose, carry worker authority.
+
+## Rehydration and receipts
+
+New sessions, post-compaction continuations, restored conversations, and
+model/provider changes require a fresh orchestrator receipt. Before planning,
+dispatch, verifier acceptance, integration, commit, or push, reread and name:
+
+1. live Current Baton;
+2. current authority allocation;
+3. active plan and acceptance evidence;
+4. protected-evidence and user-decision boundaries; and
+5. Git refs and worktree state.
+
+Conversation summaries are continuity aids only. They cannot establish model
+allocation, provider transport, holdout rules, or user authority.
+
+## Recovery and integration
+
+Worker closeout provenance is non-transferable. Sol may adopt failed worker
+source only as an untrusted candidate under
+`docs/ariadne-orchestrator-recovery-lease.md`, must preserve failures, own and
+record amendments, and run risk-proportional independent verification.
+
+Only the protected integrator advances `master` and `handoff/current`. Worker
+branches do not push or integrate. Test processes that load the shared
+PostgreSQL schema must run serially.
+
+## Primary documents
+
+- `docs/ariadne-operating-model-v2.md`
+- `docs/ariadne-autonomous-continuation.md`
+- `docs/ariadne-orchestrator-receipts.md`
+- `docs/ariadne-orchestrator-recovery-lease.md`
+- `docs/ariadne-economical-deepseek-execution.md`
+- `docs/ariadne-deepcode-runtime-observability.md`
+- `orchestration/protocol_alerts.md`
+
+For historical transport experiments, rejected Conductor plans, old model
+allocations, and worker-pool incidents, consult the immutable snapshot rather
+than copying those superseded instructions into a live sprint plan.

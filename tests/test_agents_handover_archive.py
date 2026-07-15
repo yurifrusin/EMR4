@@ -40,3 +40,57 @@ def test_archive_index_names_snapshot_and_manifest() -> None:
     )
     assert "AGENTS-2026-07-15-pre-compaction.md" in index
     assert "AGENTS-2026-07-15-pre-compaction.manifest.json" in index
+
+
+def test_compact_live_handover_retains_required_authority_and_boundaries() -> None:
+    live_path = ROOT / "AGENTS.md"
+    live = live_path.read_text(encoding="utf-8")
+
+    assert len(live.splitlines()) < 500
+    for required in [
+        "## 2. Mandatory Rehydration",
+        "## 3. Current Baton",
+        "## 4. Authority Allocation",
+        "## 5. Protected Evidence and Closed Gates",
+        "## 6. User Decision Boundaries",
+        "GPT Sol",
+        "DeepSeek V4 Flash/high via Claude Code `--bare`",
+        "DeepSeek Pro is not the Conductor",
+        "Protected holdout v1 remains sealed",
+        "T3.1-T3.4 remain intact and blocked by default",
+        "blocked_pending_generator_repair_and_contract_reconciliation",
+    ]:
+        assert required in live
+
+
+def test_live_handover_names_every_required_rehydration_source() -> None:
+    live = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+    for source in [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree",
+    ]:
+        assert source in live
+
+
+def test_live_handover_routes_removed_history_to_verified_snapshot_and_ledgers() -> None:
+    live = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+    manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+
+    assert manifest["archive_path"] in live
+    assert manifest["sha256"] in live
+    assert manifest["git_blob_sha1"] in live
+    assert manifest["source_commit"] in live
+
+    ledgers = [
+        "docs/handover-ledgers/README.md",
+        "docs/handover-ledgers/bernie-language-evaluation.md",
+        "docs/handover-ledgers/orchestration-and-agent-runtime.md",
+        "docs/handover-ledgers/historical-diary-and-interpretation.md",
+        "docs/handover-ledgers/product-platform-api-and-security.md",
+    ]
+    for relative_path in ledgers:
+        assert relative_path in live
+        assert (ROOT / relative_path).is_file()
