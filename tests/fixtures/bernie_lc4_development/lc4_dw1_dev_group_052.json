@@ -1,7 +1,7 @@
 {
   "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_052",
-  "group_hash": "sha256:3d74c7175b362c06184a60775bb08c016b4ea0b2c905314f1331012791852bb8",
+  "group_hash": "sha256:a333ce2d15ee1258176460d94e6628e5e199a59b27418ad89388fa10a1c4c7d1",
   "variant_hashes": {
     "surface": [
       "sha256:4c47285a684b5faea4c1f711e07dad14784206142520162329ebcaded0431a14",
@@ -15,7 +15,7 @@
       "sha256:c77056f0076dbffddff4ad47ff9f86c61959ab76d2ccf87fbab373f9b4a94ffe"
     ],
     "multi_turn": [
-      "sha256:fb4fb7d735e08981c75fb6f8e635e492735cc3408397b249f12e176d2f1dbad7",
+      "sha256:7e6671a017f8f7500212fab52fb1022f753c4a0b09572c10514369312402a5ce",
       "sha256:20d27a611b4d5fe32f30b7f104a7a9661bc4a7150b04c7e9b4a1b6d8fe9a7ca4",
       "sha256:f1cd3fbe91c5ff512b367b8485dce373ed84017489e3862edcc5d2a088be8954"
     ]
@@ -1103,7 +1103,7 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_052",
-      "description": "cancel:not_before:clarification:plain - I need to cancel an appointment. It's Margaret Thompson with Dr Shera tomorrow a",
+      "description": "cancel:exact:clarification:plain - I need to cancel an appointment. It's Margaret Thompson with Dr Shera tomorrow a",
       "dialogue_turns": [
         {
           "turn": 1,
@@ -1118,13 +1118,13 @@
       "clinic_clock": "2026-07-14T09:00:00+10:00",
       "intended_action": "cancel",
       "action_semantics": "intended",
-      "temporal_relation": "not_before",
+      "temporal_relation": "exact",
       "earliest_time": "15:00",
-      "latest_time": null,
+      "latest_time": "15:00",
       "normalized_values": {
         "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "15:00"
+        "earliest_time": "15:00",
+        "latest_time": "15:00"
       },
       "source_spans": {
         "patient": [
@@ -1159,6 +1159,14 @@
             "text": "3pm"
           }
         ],
+        "latest_time": [
+          {
+            "turn_index": 1,
+            "start": 49,
+            "end": 52,
+            "text": "3pm"
+          }
+        ],
         "appointment_date": [
           {
             "turn_index": 1,
@@ -1168,14 +1176,14 @@
           }
         ]
       },
-      "duration_minutes": 15,
+      "duration_minutes": null,
       "practitioner_semantics": "exact",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
+      "duration_semantics": "omitted",
       "diary_state": "roster_absent",
-      "entity_state": "negated",
+      "entity_state": "exact",
       "dialogue_form": "clarification",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1187,40 +1195,21 @@
         ],
         "patients_booked_today": []
       },
-      "expected_outcome_kind": "appointment_cancelled",
+      "expected_outcome_kind": null,
       "expected_tool_sequence": [
-        "request_clarification"
+        "search_patients",
+        "update_appointment"
       ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "cancelled",
-          "start_time": "15:00"
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "cancel_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
       "forbidden_outcomes": [],
       "forbidden_tool_calls": [
         "mutate_diary_direct",
         "override_confirmation"
       ],
-      "expected_clarification": "Please clarify: which time works?",
-      "clarification_choices": [
-        "10am",
-        "2pm",
-        "3pm",
-        "4pm"
-      ],
-      "variant_hash": "sha256:fb4fb7d735e08981c75fb6f8e635e492735cc3408397b249f12e176d2f1dbad7"
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:7e6671a017f8f7500212fab52fb1022f753c4a0b09572c10514369312402a5ce"
     },
     {
       "spec_version": "lc1.v1",

@@ -1216,6 +1216,7 @@ def generate_scaled_evaluation_report(
                 selected_tool_sequence=interp.selected_tool_sequence,
                 authority_claim=interp.authority_claim,
                 claims_action_completed=interp.claims_action_completed,
+                action_negated=interp.action_negated,
             )
             replay = deterministic_replay(scenario, interp)
             result = score_interpretation_replay_pair(scenario, interp, replay)

@@ -162,6 +162,85 @@ LC4R9_PRE_REPAIR_DELTA_HASH = (
     "14e3648ae8a98598bbc091ce16bf29f31fd5b2fdb92fe7d817ae86fb21837c69"
 )
 
+# ---------------------------------------------------------------------------
+# LC4R10 development-only contract-reconciliation selections
+# ---------------------------------------------------------------------------
+
+
+def _mt01_ids(group_indexes: tuple[int, ...]) -> frozenset[str]:
+    return frozenset(
+        f"{DEV_MT_PREFIX}_{group_index:03d}_01"
+        for group_index in group_indexes
+    )
+
+
+LC4R10_RESOLVED_CLARIFICATION_IDS = _mt01_ids((
+    1, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 15, 16,
+    17, 18, 19, 21, 22, 23, 24, 25, 27, 28, 29, 30, 31,
+    33, 34, 35, 36, 37, 39, 40, 41, 42, 43, 45, 46, 47, 48,
+    49, 51, 52, 53, 54, 55, 57, 58, 59, 60, 61, 63, 64,
+))
+
+_LC4R10_REPLAY_SURFACE_SUFFIXES = (1, 2, 3, 6, 7, 8, 9)
+LC4R10_REPLAY_IDS = frozenset({
+    f"{DEV_VARIANT_PREFIX}_{group_index:03d}_{suffix:02d}"
+    for group_index in (4, 5, 6, 7, 9)
+    for suffix in _LC4R10_REPLAY_SURFACE_SUFFIXES
+}) | frozenset({
+    f"{DEV_VARIANT_PREFIX}_010_{suffix:02d}" for suffix in (3, 5, 7)
+}) | frozenset({
+    f"{DEV_MT_PREFIX}_001_03",
+    f"{DEV_MT_PREFIX}_003_02",
+})
+
+LC4R10_RECONCILIATION_IDS = (
+    LC4R10_RESOLVED_CLARIFICATION_IDS | LC4R10_REPLAY_IDS
+)
+LC4R10_RESOLVED_CLARIFICATION_COUNT = 53
+LC4R10_RESOLVED_CLARIFICATION_HASH = "9496e23c6f339603"
+LC4R10_REPLAY_COUNT = 40
+LC4R10_REPLAY_HASH = "defe4c59877753e9"
+LC4R10_RECONCILIATION_COUNT = 93
+LC4R10_RECONCILIATION_HASH = "d8d138cb267b4304"
+
+
+def _short_selection_hash(scenario_ids: frozenset[str]) -> str:
+    return hashlib.sha256(
+        "\n".join(sorted(scenario_ids)).encode("utf-8")
+    ).hexdigest()[:16]
+
+
+def _validate_lc4r10_selections() -> None:
+    expected = (
+        (
+            LC4R10_RESOLVED_CLARIFICATION_IDS,
+            LC4R10_RESOLVED_CLARIFICATION_COUNT,
+            LC4R10_RESOLVED_CLARIFICATION_HASH,
+        ),
+        (LC4R10_REPLAY_IDS, LC4R10_REPLAY_COUNT, LC4R10_REPLAY_HASH),
+        (
+            LC4R10_RECONCILIATION_IDS,
+            LC4R10_RECONCILIATION_COUNT,
+            LC4R10_RECONCILIATION_HASH,
+        ),
+    )
+    for scenario_ids, count, selection_hash in expected:
+        if len(scenario_ids) != count:
+            raise RuntimeError(
+                f"LC4R10 selection count drift: {len(scenario_ids)} != {count}"
+            )
+        observed_hash = _short_selection_hash(scenario_ids)
+        if observed_hash != selection_hash:
+            raise RuntimeError(
+                "LC4R10 selection hash drift: "
+                f"{observed_hash!r} != {selection_hash!r}"
+            )
+
+
+_validate_lc4r10_selections()
+
+_EXPECTED_OUTCOME_UNSET = object()
+
 # Temporal relation literals
 TemporalRelation = Literal[
     "exact", "not_before", "not_after", "interval", "approximate", "unspecified"
@@ -828,7 +907,7 @@ def _build_scenario(
     clinic_clock: datetime,
     earliest_time: str | None = None,
     latest_time: str | None = None,
-    duration_minutes: int = 15,
+    duration_minutes: int | None = 15,
     appointment_date: str | None = None,
     patient_name: str = "Margaret Thompson",
     practitioner_name: str = "Dr Shera",
@@ -838,8 +917,15 @@ def _build_scenario(
     expected_clarification: str | None = None,
     clarification_choices: list[str] | None = None,
     initial_diary_state_extra: dict[str, Any] | None = None,
+    temporal_relation_override: TemporalRelation | None = None,
+    patient_semantics_override: EntitySem | None = None,
+    practitioner_semantics_override: EntitySem | None = None,
+    location_semantics_override: EntitySem | None = None,
+    appointment_type_semantics_override: EntitySem | None = None,
+    duration_semantics_override: EntitySem | None = None,
+    entity_state_override: EntitySem | None = None,
     expected_tool_sequence_override: list[str] | None = None,
-    expected_outcome_override: str | None = None,
+    expected_outcome_override: Any = _EXPECTED_OUTCOME_UNSET,
     expected_appointment_deltas_override: list[dict[str, Any]] | None = None,
     expected_audit_deltas_override: list[dict[str, Any]] | None = None,
     forbidden_outcomes_override: list[str] | None = None,
@@ -852,7 +938,7 @@ def _build_scenario(
     if appointment_date is None:
         appointment_date = (reference_date + timedelta(days=1)).isoformat()
 
-    temporal_rel = group_spec.temporal_relation
+    temporal_rel = temporal_relation_override or group_spec.temporal_relation
     if earliest_time is None:
         earliest_time = "15:00"
     if latest_time is None:
@@ -886,10 +972,9 @@ def _build_scenario(
             appointment_date_text=appointment_date,
         )
 
-    norm_values: dict[str, Any] = {
-        "appointment_date": appointment_date,
-        "duration_minutes": duration_minutes,
-    }
+    norm_values: dict[str, Any] = {"appointment_date": appointment_date}
+    if duration_minutes is not None:
+        norm_values["duration_minutes"] = duration_minutes
     if earliest_time_val is not None:
         norm_values["earliest_time"] = earliest_time_val
     if latest_time_val is not None:
@@ -906,15 +991,22 @@ def _build_scenario(
     eff_language_form = language_form
 
     # Entity semantics from group spec (authoritative — no utterance-based override)
-    patient_sem = group_spec.patient_semantics
-    pract_sem = group_spec.practitioner_semantics
-    duration_sem = group_spec.duration_semantics
+    patient_sem = patient_semantics_override or group_spec.patient_semantics
+    pract_sem = (
+        practitioner_semantics_override or group_spec.practitioner_semantics
+    )
+    location_sem = location_semantics_override or group_spec.location_semantics
+    appointment_type_sem = (
+        appointment_type_semantics_override
+        or group_spec.appointment_type_semantics
+    )
+    duration_sem = duration_semantics_override or group_spec.duration_semantics
 
     # Expected outcome + tool sequence
     action = group_spec.intended_action
     diary_state = group_spec.diary_state
 
-    if expected_outcome_override:
+    if expected_outcome_override is not _EXPECTED_OUTCOME_UNSET:
         outcome_kind = expected_outcome_override
     elif action == "create" and diary_state == "exact_duplicate":
         outcome_kind = "existing_booking_found"
@@ -956,7 +1048,8 @@ def _build_scenario(
         apt_deltas = expected_appointment_deltas_override
     else:
         apt_deltas = _derive_appointment_deltas(
-            action, appointment_date, earliest_time_val, duration_minutes,
+            action, appointment_date, earliest_time_val,
+            duration_minutes if duration_minutes is not None else 15,
             practitioner_name, patient_name,
         )
 
@@ -975,7 +1068,7 @@ def _build_scenario(
     ]
 
     # Determine entity state from group spec
-    entity_state = group_spec.entity_state
+    entity_state = entity_state_override or group_spec.entity_state
 
     # Diary_state for initial
     initial_diary: dict[str, Any] = {
@@ -1008,8 +1101,8 @@ def _build_scenario(
         duration_minutes=duration_minutes,
         practitioner_semantics=pract_sem,
         patient_semantics=patient_sem,
-        location_semantics=group_spec.location_semantics,
-        appointment_type_semantics=group_spec.appointment_type_semantics,
+        location_semantics=location_sem,
+        appointment_type_semantics=appointment_type_sem,
         duration_semantics=duration_sem,
         diary_state=diary_state,
         entity_state=entity_state,
@@ -1041,7 +1134,7 @@ def _derive_source_spans(
     turns: list[dict[str, Any]],
     earliest_time: str | None,
     latest_time: str | None,
-    duration_minutes: int,
+    duration_minutes: int | None,
     patient_name: str,
     practitioner_name: str,
     *,
@@ -1207,6 +1300,85 @@ def _derive_audit_deltas(action: Action) -> list[dict[str, Any]]:
             "count": 1,
         }
     ]
+
+
+_LC4R10_UNCERTAIN_STATES = frozenset({
+    "terminal", "stale", "concurrent", "no_slots",
+    "roster_absent", "break", "elapsed_window",
+})
+
+
+def _lc4r10_expected_outcome(
+    action: Action,
+    diary_state: DiaryState,
+) -> str | None:
+    """Return the source-owned deterministic outcome for a reconciled case."""
+    if action == "explain_schedule":
+        return "schedule_explained"
+    if action == "create":
+        if diary_state in ("empty", "same_day_distinct", "terminal"):
+            return "appointment_created"
+        if diary_state == "exact_duplicate":
+            return "existing_booking_found"
+        if diary_state == "overlap":
+            return "candidate_selection_required"
+        return None
+    if diary_state in _LC4R10_UNCERTAIN_STATES:
+        return None
+    return {
+        "move": "appointment_moved",
+        "resize": "appointment_resized",
+        "cancel": "appointment_cancelled",
+        "status_change": "appointment_status_changed",
+    }.get(action)
+
+
+def _lc4r10_tool_sequence(action: Action) -> list[str]:
+    if action == "create":
+        return ["search_patients", "find_slots", "create_booking"]
+    if action in ("move", "resize", "cancel"):
+        return ["search_patients", "update_appointment"]
+    if action == "status_change":
+        return ["search_patients", "change_appointment_status"]
+    if action == "explain_schedule":
+        return ["search_patients", "find_slots"]
+    return ["search_patients"]
+
+
+def _lc4r10_replay_deltas(
+    action: Action,
+    outcome: str | None,
+    appointment_date: str,
+    earliest_time: str | None,
+    duration_minutes: int | None,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Build selected expected deltas from action policy, never scorer labels."""
+    change_type_by_outcome = {
+        "appointment_created": "created",
+        "existing_booking_found": "created",
+        "appointment_moved": "moved",
+        "appointment_resized": "resized",
+        "appointment_cancelled": "cancelled",
+        "appointment_status_changed": "status_changed",
+    }
+    change_type = change_type_by_outcome.get(outcome)
+    if change_type is None:
+        return [], []
+    appointment_delta = {
+        "appointment_id": "apt-001",
+        "change_type": change_type,
+        "patient_id": "p-001",
+        "practitioner_id": "pr-001",
+        "date": appointment_date,
+        "start_time": earliest_time or "",
+        "duration_minutes": duration_minutes or 15,
+    }
+    audit_delta = {
+        "change_type": change_type,
+        "appointment_id": "apt-001",
+        "count": 1,
+    }
+    return [appointment_delta], [audit_delta]
 
 
 # ---------------------------------------------------------------------------
@@ -1763,12 +1935,33 @@ def _build_group_fixture(
                 )
             audit_deltas_override = _make_audit_override_copy()
 
+        expected_outcome_override: Any = _EXPECTED_OUTCOME_UNSET
+        expected_tool_override: list[str] | None = None
+        appointment_deltas_override: list[dict[str, Any]] | None = None
+        if variant_id in LC4R10_REPLAY_IDS:
+            expected_outcome_override = _lc4r10_expected_outcome(
+                action, spec.diary_state
+            )
+            expected_tool_override = _lc4r10_tool_sequence(action)
+            appointment_deltas_override, audit_deltas_override = (
+                _lc4r10_replay_deltas(
+                    action,
+                    expected_outcome_override,
+                    (reference_date + timedelta(days=1)).isoformat(),
+                    earliest_time,
+                    15,
+                )
+            )
+
         scenario = _build_scenario(
             spec, variant_id, utterance, df, lf,
             reference_date, clinic_clock,
             earliest_time=earliest_time,
             latest_time=latest_time,
             duration_minutes=15,
+            expected_outcome_override=expected_outcome_override,
+            expected_tool_sequence_override=expected_tool_override,
+            expected_appointment_deltas_override=appointment_deltas_override,
             expected_audit_deltas_override=audit_deltas_override,
         )
 
@@ -1870,32 +2063,111 @@ def _build_group_fixture(
 
             return sp, ft
 
-        all_spans, found_times = _scan_turn_spans(turns, earliest_time, latest_time)
+        is_resolved_clarification = (
+            mt_id in LC4R10_RESOLVED_CLARIFICATION_IDS
+        )
+        mt_temporal_override: TemporalRelation | None = None
+        mt_earliest = earliest_time
+        mt_latest = latest_time
+        mt_duration: int | None = 15
+        patient_semantics_override: EntitySem | None = None
+        practitioner_semantics_override: EntitySem | None = None
+        location_semantics_override: EntitySem | None = None
+        appointment_type_semantics_override: EntitySem | None = None
+        duration_semantics_override: EntitySem | None = None
+        entity_state_override: EntitySem | None = None
 
-        # Fallback: if we have a time bound but no matching source span, use first/last available
-        if earliest_time and "earliest_time" not in all_spans and found_times:
-            ti, st, en, txt, h = found_times[0]
-            all_spans["earliest_time"] = [_make_source_span(ti, st, en, txt)]
-        if latest_time and "latest_time" not in all_spans and found_times:
-            ti, st, en, txt, h = found_times[-1]
-            all_spans["latest_time"] = [_make_source_span(ti, st, en, txt)]
-
-        # Determine if this variant needs clarification
-        if mt_idx == 1:
+        if is_resolved_clarification:
+            authored_templates: dict[
+                Action,
+                tuple[TemporalRelation, str, str, int | None, EntitySem],
+            ] = {
+                "create": ("approximate", "14:30", "15:30", 15, "exact"),
+                "move": ("exact", "16:00", "16:00", None, "omitted"),
+                "resize": ("exact", "15:00", "15:00", 30, "exact"),
+                "cancel": ("exact", "15:00", "15:00", None, "omitted"),
+            }
+            (
+                mt_temporal_override,
+                mt_earliest,
+                mt_latest,
+                mt_duration,
+                duration_semantics_override,
+            ) = authored_templates[action]
+            patient_semantics_override = "exact"
+            practitioner_semantics_override = "exact"
+            location_semantics_override = "omitted"
+            appointment_type_semantics_override = "omitted"
+            entity_state_override = "exact"
+            exp_clarif = None
+            clarif_choices = None
+        elif mt_idx == 1:
             exp_clarif = "Please clarify: which time works?"
             clarif_choices = ["10am", "2pm", "3pm", "4pm"]
         else:
             exp_clarif = None
             clarif_choices = None
 
+        all_spans, found_times = _scan_turn_spans(
+            turns, mt_earliest, mt_latest
+        )
+        if mt_earliest and "earliest_time" not in all_spans and found_times:
+            ti, st, en, txt, h = found_times[0]
+            all_spans["earliest_time"] = [
+                _make_source_span(ti, st, en, txt)
+            ]
+        if mt_latest and "latest_time" not in all_spans and found_times:
+            ti, st, en, txt, h = found_times[-1]
+            all_spans["latest_time"] = [
+                _make_source_span(ti, st, en, txt)
+            ]
+
+        expected_outcome_override: Any = _EXPECTED_OUTCOME_UNSET
+        expected_tool_override: list[str] | None = None
+        appointment_deltas_override: list[dict[str, Any]] | None = None
+        audit_deltas_override: list[dict[str, Any]] | None = None
+        if mt_id in LC4R10_RECONCILIATION_IDS:
+            if mt_id == f"{DEV_MT_PREFIX}_001_03":
+                expected_outcome_override = None
+                expected_tool_override = ["search_patients"]
+                appointment_deltas_override = []
+                audit_deltas_override = []
+            else:
+                expected_outcome_override = _lc4r10_expected_outcome(
+                    action, spec.diary_state
+                )
+                expected_tool_override = _lc4r10_tool_sequence(action)
+                appointment_deltas_override, audit_deltas_override = (
+                    _lc4r10_replay_deltas(
+                        action,
+                        expected_outcome_override,
+                        (reference_date + timedelta(days=1)).isoformat(),
+                        mt_earliest,
+                        mt_duration,
+                    )
+                )
+
         scenario = _build_scenario(
             spec, mt_id, combined, mt_df, mt_lf,
             reference_date, clinic_clock,
-            earliest_time=earliest_time,
-            latest_time=latest_time,
-            duration_minutes=15,
+            earliest_time=mt_earliest,
+            latest_time=mt_latest,
+            duration_minutes=mt_duration,
             dialogue_turns=turns,
             source_spans=all_spans,
+            temporal_relation_override=mt_temporal_override,
+            patient_semantics_override=patient_semantics_override,
+            practitioner_semantics_override=practitioner_semantics_override,
+            location_semantics_override=location_semantics_override,
+            appointment_type_semantics_override=(
+                appointment_type_semantics_override
+            ),
+            duration_semantics_override=duration_semantics_override,
+            entity_state_override=entity_state_override,
+            expected_outcome_override=expected_outcome_override,
+            expected_tool_sequence_override=expected_tool_override,
+            expected_appointment_deltas_override=appointment_deltas_override,
+            expected_audit_deltas_override=audit_deltas_override,
             expected_clarification=exp_clarif,
             clarification_choices=clarif_choices,
         )
@@ -2132,7 +2404,10 @@ def validate_variant(
     norm = scenario.normalized_values
     if "appointment_date" not in norm:
         errors.append("normalized_values missing appointment_date")
-    if "duration_minutes" not in norm:
+    if (
+        scenario.duration_semantics != "omitted"
+        and "duration_minutes" not in norm
+    ):
         errors.append("normalized_values missing duration_minutes")
 
     # Check field-level entity semantics agreement with utterance
@@ -2197,12 +2472,18 @@ def validate_variant(
 
     # Cross-validate against group spec if provided
     if group_spec is not None:
+        has_resolved_dialogue_contract = (
+            scenario.scenario_id in LC4R10_RESOLVED_CLARIFICATION_IDS
+        )
         if scenario.intended_action != group_spec.intended_action:
             errors.append(
                 f"Variant action {scenario.intended_action!r} != "
                 f"group action {group_spec.intended_action!r}"
             )
-        if scenario.temporal_relation != group_spec.temporal_relation:
+        if (
+            not has_resolved_dialogue_contract
+            and scenario.temporal_relation != group_spec.temporal_relation
+        ):
             errors.append(
                 f"Variant temporal {scenario.temporal_relation!r} != "
                 f"group temporal {group_spec.temporal_relation!r}"
@@ -2212,39 +2493,39 @@ def validate_variant(
                 f"Variant diary_state {scenario.diary_state!r} != "
                 f"group diary_state {group_spec.diary_state!r}"
             )
-        # Check all five field-level entity semantics
-        g_map = group_spec.entity_semantics_map
-        if scenario.patient_semantics != g_map.get("patient", "exact"):
-            errors.append(
-                f"Variant patient_semantics {scenario.patient_semantics!r} != "
-                f"group patient_semantics {g_map['patient']!r}"
-            )
-        if scenario.practitioner_semantics != g_map.get("practitioner", "exact"):
-            errors.append(
-                f"Variant practitioner_semantics {scenario.practitioner_semantics!r} != "
-                f"group practitioner_semantics {g_map['practitioner']!r}"
-            )
-        if scenario.location_semantics != group_spec.location_semantics:
-            errors.append(
-                f"Variant location_semantics {scenario.location_semantics!r} != "
-                f"group location_semantics {group_spec.location_semantics!r}"
-            )
-        if scenario.appointment_type_semantics != group_spec.appointment_type_semantics:
-            errors.append(
-                f"Variant appointment_type_semantics {scenario.appointment_type_semantics!r} != "
-                f"group appointment_type_semantics {group_spec.appointment_type_semantics!r}"
-            )
-        if scenario.duration_semantics != group_spec.duration_semantics:
-            errors.append(
-                f"Variant duration_semantics {scenario.duration_semantics!r} != "
-                f"group duration_semantics {group_spec.duration_semantics!r}"
-            )
-        # Check entity_state
-        if scenario.entity_state != group_spec.entity_state:
-            errors.append(
-                f"Variant entity_state {scenario.entity_state!r} != "
-                f"group entity_state {group_spec.entity_state!r}"
-            )
+        if not has_resolved_dialogue_contract:
+            # Check all five field-level entity semantics.
+            g_map = group_spec.entity_semantics_map
+            if scenario.patient_semantics != g_map.get("patient", "exact"):
+                errors.append(
+                    f"Variant patient_semantics {scenario.patient_semantics!r} != "
+                    f"group patient_semantics {g_map['patient']!r}"
+                )
+            if scenario.practitioner_semantics != g_map.get("practitioner", "exact"):
+                errors.append(
+                    f"Variant practitioner_semantics {scenario.practitioner_semantics!r} != "
+                    f"group practitioner_semantics {g_map['practitioner']!r}"
+                )
+            if scenario.location_semantics != group_spec.location_semantics:
+                errors.append(
+                    f"Variant location_semantics {scenario.location_semantics!r} != "
+                    f"group location_semantics {group_spec.location_semantics!r}"
+                )
+            if scenario.appointment_type_semantics != group_spec.appointment_type_semantics:
+                errors.append(
+                    f"Variant appointment_type_semantics {scenario.appointment_type_semantics!r} != "
+                    f"group appointment_type_semantics {group_spec.appointment_type_semantics!r}"
+                )
+            if scenario.duration_semantics != group_spec.duration_semantics:
+                errors.append(
+                    f"Variant duration_semantics {scenario.duration_semantics!r} != "
+                    f"group duration_semantics {group_spec.duration_semantics!r}"
+                )
+            if scenario.entity_state != group_spec.entity_state:
+                errors.append(
+                    f"Variant entity_state {scenario.entity_state!r} != "
+                    f"group entity_state {group_spec.entity_state!r}"
+                )
 
     return errors
 

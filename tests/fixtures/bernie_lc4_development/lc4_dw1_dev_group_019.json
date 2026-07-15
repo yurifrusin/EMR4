@@ -1,7 +1,7 @@
 {
   "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_019",
-  "group_hash": "sha256:4c25a7f202b6241616e0054a52a14f6e0a96e1c96eb5cb06d8f036ca8937f6f8",
+  "group_hash": "sha256:a2140d1daec16828765a5dfb41b202af0cf81cda757acf3b61ff06d4bf14975f",
   "variant_hashes": {
     "surface": [
       "sha256:c96913cba85596db60a2802ee53d8942e8f56a5aa615a2388853bfd852263940",
@@ -15,7 +15,7 @@
       "sha256:52b4345b7295b4e12e98d88069c69ac831c60be71ebb462bf4d778d0228a3a37"
     ],
     "multi_turn": [
-      "sha256:5e990ca250a4b547dde76feeb842a7514120099dc07f18444fc195144a7b4b4f",
+      "sha256:54299a8f5fad47c1b421c74985e02f7d14ef11658a6043b7e37d626707149c5d",
       "sha256:2ca15ce921aa30b2d42c50fdef1a7a6b2458a9cae16f14dd1b3b5b9461cc2e40",
       "sha256:9b2552822eb3058671ff8366d248d8ed824a72004c2b74d41a94daf1ad4f9583"
     ]
@@ -1221,13 +1221,12 @@
       "intended_action": "move",
       "action_semantics": "intended",
       "temporal_relation": "exact",
-      "earliest_time": "15:00",
-      "latest_time": "15:00",
+      "earliest_time": "16:00",
+      "latest_time": "16:00",
       "normalized_values": {
         "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "15:00",
-        "latest_time": "15:00"
+        "earliest_time": "16:00",
+        "latest_time": "16:00"
       },
       "source_spans": {
         "patient": [
@@ -1260,14 +1259,6 @@
             "text": "4pm"
           }
         ],
-        "appointment_date": [
-          {
-            "turn_index": 1,
-            "start": 11,
-            "end": 19,
-            "text": "tomorrow"
-          }
-        ],
         "earliest_time": [
           {
             "turn_index": 1,
@@ -1283,14 +1274,22 @@
             "end": 26,
             "text": "4pm"
           }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 11,
+            "end": 19,
+            "text": "tomorrow"
+          }
         ]
       },
-      "duration_minutes": 15,
-      "practitioner_semantics": "corrected",
+      "duration_minutes": null,
+      "practitioner_semantics": "exact",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
+      "duration_semantics": "omitted",
       "diary_state": "roster_absent",
       "entity_state": "exact",
       "dialogue_form": "clarification",
@@ -1304,41 +1303,21 @@
         ],
         "patients_booked_today": []
       },
-      "expected_outcome_kind": "appointment_moved",
+      "expected_outcome_kind": null,
       "expected_tool_sequence": [
-        "request_clarification"
+        "search_patients",
+        "update_appointment"
       ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "moved",
-          "new_start_time": "15:00",
-          "new_date": "2026-07-15"
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "move_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
       "forbidden_outcomes": [],
       "forbidden_tool_calls": [
         "mutate_diary_direct",
         "override_confirmation"
       ],
-      "expected_clarification": "Please clarify: which time works?",
-      "clarification_choices": [
-        "10am",
-        "2pm",
-        "3pm",
-        "4pm"
-      ],
-      "variant_hash": "sha256:5e990ca250a4b547dde76feeb842a7514120099dc07f18444fc195144a7b4b4f"
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:54299a8f5fad47c1b421c74985e02f7d14ef11658a6043b7e37d626707149c5d"
     },
     {
       "spec_version": "lc1.v1",

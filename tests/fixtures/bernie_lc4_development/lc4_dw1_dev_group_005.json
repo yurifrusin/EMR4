@@ -1,21 +1,21 @@
 {
   "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_005",
-  "group_hash": "sha256:6a7146ea4cbb58bc706a3b3e169ca1a0ab0ec535273f3738c1820ca753d329a7",
+  "group_hash": "sha256:4a2f16f9001be879beee5780751ccac841c4d634c1352759eb477fb2eabe2a06",
   "variant_hashes": {
     "surface": [
-      "sha256:4523f446d420fcf625c48d11de88a83a3d280cacf66811d71debce2ee92c9d08",
-      "sha256:2ace49ba3061197fca7ca24e07cdde67f79f17aa14ba3db963b16673c0f6bb6b",
-      "sha256:6c8f266d1b8fb8bc835ded7466619e1be3637b527a1f6ecdd8af81f4dc020cbf",
+      "sha256:1df945f629c8a8055ab59610d1f290ca51ac6e006b3f4f242c7934fa4f505f50",
+      "sha256:5c1fc43b2e9bce42325d22f29ac704e1bd1e15ae9c724414f6b1b3ee1cedd43e",
+      "sha256:f3d70001461b0df783f2ceb5fa4397b2455b9c5dded186489f873d30e1e766b7",
       "sha256:98adebbf4c3e4c52918384d6758bad01ad6639a9002b019ad63e709436971dae",
       "sha256:33225c07521b601b2cbfb7590512af9905600487a4ac78401d8b4dc89a86feca",
-      "sha256:9abda03cb95cebc97efc8e8417e4005249c764cdd2eb2df8f199f0e199221c25",
-      "sha256:dea20c4831fae63128764ea0f3a6d2b326e2deba9fc4aa87fa8c539f603a8f22",
-      "sha256:7b9652af5208d88a5584e606f3dd14990839ed88f65f6961585f7eeb47bc409c",
-      "sha256:5296258f912b1df9427c2367c4ba7758c141010912b45989d8c14dfecdeead1a"
+      "sha256:a8bea1682f7d695b72a2c6ef0bd35b0b9be14a814819c4f261de44eb9e64d4c1",
+      "sha256:d617810718a1fa88162c7bfb2b6fffe359d4a670d1320fe1e81a2083eedef713",
+      "sha256:f6cd40778a9fe5c11bf25f05d5c54686217cc8f3342d819fdc337f490f74b93f",
+      "sha256:7aa20bd4a5f39e79861cb0c976c584b4761b284697708c5e7199d70a7b0bbfbc"
     ],
     "multi_turn": [
-      "sha256:c9d1e49df068ba71ef7414b6852e5916d2b6a05e12b4e3e1992460f41ad14338",
+      "sha256:a7c1c0811ce3c2bd4888e381f5fc889cf42f0163ca682edfccab122b20ce4aff",
       "sha256:22cba3720f13b5680f86bff5fd83690e47a52d1736d3e01adc5a00831dd138f2",
       "sha256:7e4b92ecf84b72947266c96a773df3185d9ce6de74787f0f86185ecbecda05d5"
     ]
@@ -146,17 +146,17 @@
       "expected_appointment_deltas": [
         {
           "appointment_id": "apt-001",
+          "change_type": "created",
           "patient_id": "p-001",
           "practitioner_id": "pr-001",
           "date": "2026-07-15",
-          "change_type": "created",
           "start_time": "15:00",
           "duration_minutes": 15
         }
       ],
       "expected_audit_deltas": [
         {
-          "change_type": "create_requested",
+          "change_type": "created",
           "appointment_id": "apt-001",
           "count": 1
         }
@@ -168,7 +168,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:4523f446d420fcf625c48d11de88a83a3d280cacf66811d71debce2ee92c9d08"
+      "variant_hash": "sha256:1df945f629c8a8055ab59610d1f290ca51ac6e006b3f4f242c7934fa4f505f50"
     },
     {
       "spec_version": "lc1.v1",
@@ -273,17 +273,17 @@
       "expected_appointment_deltas": [
         {
           "appointment_id": "apt-001",
+          "change_type": "created",
           "patient_id": "p-001",
           "practitioner_id": "pr-001",
           "date": "2026-07-15",
-          "change_type": "created",
           "start_time": "15:00",
           "duration_minutes": 15
         }
       ],
       "expected_audit_deltas": [
         {
-          "change_type": "create_requested",
+          "change_type": "created",
           "appointment_id": "apt-001",
           "count": 1
         }
@@ -295,7 +295,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:2ace49ba3061197fca7ca24e07cdde67f79f17aa14ba3db963b16673c0f6bb6b"
+      "variant_hash": "sha256:5c1fc43b2e9bce42325d22f29ac704e1bd1e15ae9c724414f6b1b3ee1cedd43e"
     },
     {
       "spec_version": "lc1.v1",
@@ -400,17 +400,17 @@
       "expected_appointment_deltas": [
         {
           "appointment_id": "apt-001",
+          "change_type": "created",
           "patient_id": "p-001",
           "practitioner_id": "pr-001",
           "date": "2026-07-15",
-          "change_type": "created",
           "start_time": "15:00",
           "duration_minutes": 15
         }
       ],
       "expected_audit_deltas": [
         {
-          "change_type": "create_requested",
+          "change_type": "created",
           "appointment_id": "apt-001",
           "count": 1
         }
@@ -422,7 +422,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:6c8f266d1b8fb8bc835ded7466619e1be3637b527a1f6ecdd8af81f4dc020cbf"
+      "variant_hash": "sha256:f3d70001461b0df783f2ceb5fa4397b2455b9c5dded186489f873d30e1e766b7"
     },
     {
       "spec_version": "lc1.v1",
@@ -781,17 +781,17 @@
       "expected_appointment_deltas": [
         {
           "appointment_id": "apt-001",
+          "change_type": "created",
           "patient_id": "p-001",
           "practitioner_id": "pr-001",
           "date": "2026-07-15",
-          "change_type": "created",
           "start_time": "15:00",
           "duration_minutes": 15
         }
       ],
       "expected_audit_deltas": [
         {
-          "change_type": "create_requested",
+          "change_type": "created",
           "appointment_id": "apt-001",
           "count": 1
         }
@@ -803,7 +803,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:9abda03cb95cebc97efc8e8417e4005249c764cdd2eb2df8f199f0e199221c25"
+      "variant_hash": "sha256:a8bea1682f7d695b72a2c6ef0bd35b0b9be14a814819c4f261de44eb9e64d4c1"
     },
     {
       "spec_version": "lc1.v1",
@@ -908,17 +908,17 @@
       "expected_appointment_deltas": [
         {
           "appointment_id": "apt-001",
+          "change_type": "created",
           "patient_id": "p-001",
           "practitioner_id": "pr-001",
           "date": "2026-07-15",
-          "change_type": "created",
           "start_time": "15:00",
           "duration_minutes": 15
         }
       ],
       "expected_audit_deltas": [
         {
-          "change_type": "create_requested",
+          "change_type": "created",
           "appointment_id": "apt-001",
           "count": 1
         }
@@ -930,7 +930,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:dea20c4831fae63128764ea0f3a6d2b326e2deba9fc4aa87fa8c539f603a8f22"
+      "variant_hash": "sha256:d617810718a1fa88162c7bfb2b6fffe359d4a670d1320fe1e81a2083eedef713"
     },
     {
       "spec_version": "lc1.v1",
@@ -1035,17 +1035,17 @@
       "expected_appointment_deltas": [
         {
           "appointment_id": "apt-001",
+          "change_type": "created",
           "patient_id": "p-001",
           "practitioner_id": "pr-001",
           "date": "2026-07-15",
-          "change_type": "created",
           "start_time": "15:00",
           "duration_minutes": 15
         }
       ],
       "expected_audit_deltas": [
         {
-          "change_type": "create_requested",
+          "change_type": "created",
           "appointment_id": "apt-001",
           "count": 1
         }
@@ -1057,7 +1057,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:7b9652af5208d88a5584e606f3dd14990839ed88f65f6961585f7eeb47bc409c"
+      "variant_hash": "sha256:f6cd40778a9fe5c11bf25f05d5c54686217cc8f3342d819fdc337f490f74b93f"
     },
     {
       "spec_version": "lc1.v1",
@@ -1162,17 +1162,17 @@
       "expected_appointment_deltas": [
         {
           "appointment_id": "apt-001",
+          "change_type": "created",
           "patient_id": "p-001",
           "practitioner_id": "pr-001",
           "date": "2026-07-15",
-          "change_type": "created",
           "start_time": "15:00",
           "duration_minutes": 15
         }
       ],
       "expected_audit_deltas": [
         {
-          "change_type": "create_requested",
+          "change_type": "created",
           "appointment_id": "apt-001",
           "count": 1
         }
@@ -1184,7 +1184,7 @@
       ],
       "expected_clarification": null,
       "clarification_choices": [],
-      "variant_hash": "sha256:5296258f912b1df9427c2367c4ba7758c141010912b45989d8c14dfecdeead1a"
+      "variant_hash": "sha256:7aa20bd4a5f39e79861cb0c976c584b4761b284697708c5e7199d70a7b0bbfbc"
     }
   ],
   "multi_turn_variants": [
@@ -1194,7 +1194,7 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_005",
-      "description": "create:not_before:clarification:plain - Hi, I need to book Margaret Thompson in with Dr Shera sometime tomorrow. She'd p",
+      "description": "create:approximate:clarification:plain - Hi, I need to book Margaret Thompson in with Dr Shera sometime tomorrow. She'd p",
       "dialogue_turns": [
         {
           "turn": 1,
@@ -1209,13 +1209,14 @@
       "clinic_clock": "2026-07-14T09:00:00+10:00",
       "intended_action": "create",
       "action_semantics": "intended",
-      "temporal_relation": "not_before",
-      "earliest_time": "15:00",
-      "latest_time": null,
+      "temporal_relation": "approximate",
+      "earliest_time": "14:30",
+      "latest_time": "15:30",
       "normalized_values": {
         "appointment_date": "2026-07-15",
         "duration_minutes": 15,
-        "earliest_time": "15:00"
+        "earliest_time": "14:30",
+        "latest_time": "15:30"
       },
       "source_spans": {
         "patient": [
@@ -1250,7 +1251,7 @@
             "text": "3pm"
           }
         ],
-        "earliest_time": [
+        "latest_time": [
           {
             "turn_index": 1,
             "start": 35,
@@ -1265,6 +1266,14 @@
             "end": 54,
             "text": "15 minutes"
           }
+        ],
+        "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 35,
+            "end": 38,
+            "text": "3pm"
+          }
         ]
       },
       "duration_minutes": 15,
@@ -1274,7 +1283,7 @@
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "terminal",
-      "entity_state": "corrected",
+      "entity_state": "exact",
       "dialogue_form": "clarification",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1288,22 +1297,24 @@
       },
       "expected_outcome_kind": "appointment_created",
       "expected_tool_sequence": [
-        "request_clarification"
+        "search_patients",
+        "find_slots",
+        "create_booking"
       ],
       "expected_appointment_deltas": [
         {
           "appointment_id": "apt-001",
+          "change_type": "created",
           "patient_id": "p-001",
           "practitioner_id": "pr-001",
           "date": "2026-07-15",
-          "change_type": "created",
-          "start_time": "15:00",
+          "start_time": "14:30",
           "duration_minutes": 15
         }
       ],
       "expected_audit_deltas": [
         {
-          "change_type": "create_requested",
+          "change_type": "created",
           "appointment_id": "apt-001",
           "count": 1
         }
@@ -1313,14 +1324,9 @@
         "mutate_diary_direct",
         "override_confirmation"
       ],
-      "expected_clarification": "Please clarify: which time works?",
-      "clarification_choices": [
-        "10am",
-        "2pm",
-        "3pm",
-        "4pm"
-      ],
-      "variant_hash": "sha256:c9d1e49df068ba71ef7414b6852e5916d2b6a05e12b4e3e1992460f41ad14338"
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:a7c1c0811ce3c2bd4888e381f5fc889cf42f0163ca682edfccab122b20ce4aff"
     },
     {
       "spec_version": "lc1.v1",

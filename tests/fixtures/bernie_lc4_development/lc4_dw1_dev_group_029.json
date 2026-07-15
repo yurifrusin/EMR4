@@ -1,7 +1,7 @@
 {
   "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_029",
-  "group_hash": "sha256:da0701c7c85eec23a652bc5b1098743f837d221b01158ba66b7f538db0e1115b",
+  "group_hash": "sha256:d2ae07634c863ad18a19380f5e073de6c0ba4dfb3850a8021fda4664d3099998",
   "variant_hashes": {
     "surface": [
       "sha256:4c45b090fa19fa82dee8f9eb7a63086642d5200024f8b0a21a448cac6172c373",
@@ -15,7 +15,7 @@
       "sha256:1db568b79387a0993ea56ad63e0f681932e6cc50448774fc43674f5efad1a197"
     ],
     "multi_turn": [
-      "sha256:1a5846fa6e3dddbedbaba0954bc048528450ee4f9d8acde9b651535c43c1ce7b",
+      "sha256:d8a8ed98d6ada338771f4b5fca1a0d284f51fe4f7448e6b49031d26657edab95",
       "sha256:cf0a3aea2225a06e89346bdf6ea20ea44327fb9aa28fa661225795497b0d6c54",
       "sha256:1e85ca4ec7fb9a8e742bf7763d75f8fa21d1cec84f494baf6993e83758cb3b08"
     ]
@@ -1206,7 +1206,7 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_029",
-      "description": "move:approximate:clarification:plain - I need to move Margaret Thompson's appointment with Dr Shera. Move it to tomorro",
+      "description": "move:exact:clarification:plain - I need to move Margaret Thompson's appointment with Dr Shera. Move it to tomorro",
       "dialogue_turns": [
         {
           "turn": 1,
@@ -1221,14 +1221,13 @@
       "clinic_clock": "2026-07-14T09:00:00+10:00",
       "intended_action": "move",
       "action_semantics": "intended",
-      "temporal_relation": "approximate",
-      "earliest_time": "15:00",
-      "latest_time": "15:00",
+      "temporal_relation": "exact",
+      "earliest_time": "16:00",
+      "latest_time": "16:00",
       "normalized_values": {
         "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "15:00",
-        "latest_time": "15:00"
+        "earliest_time": "16:00",
+        "latest_time": "16:00"
       },
       "source_spans": {
         "patient": [
@@ -1261,14 +1260,6 @@
             "text": "4pm"
           }
         ],
-        "appointment_date": [
-          {
-            "turn_index": 1,
-            "start": 11,
-            "end": 19,
-            "text": "tomorrow"
-          }
-        ],
         "earliest_time": [
           {
             "turn_index": 1,
@@ -1284,16 +1275,24 @@
             "end": 26,
             "text": "4pm"
           }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 11,
+            "end": 19,
+            "text": "tomorrow"
+          }
         ]
       },
-      "duration_minutes": 15,
+      "duration_minutes": null,
       "practitioner_semantics": "exact",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
+      "duration_semantics": "omitted",
       "diary_state": "concurrent",
-      "entity_state": "corrected",
+      "entity_state": "exact",
       "dialogue_form": "clarification",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1305,41 +1304,21 @@
         ],
         "patients_booked_today": []
       },
-      "expected_outcome_kind": "appointment_moved",
+      "expected_outcome_kind": null,
       "expected_tool_sequence": [
-        "request_clarification"
+        "search_patients",
+        "update_appointment"
       ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "moved",
-          "new_start_time": "15:00",
-          "new_date": "2026-07-15"
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "move_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
       "forbidden_outcomes": [],
       "forbidden_tool_calls": [
         "mutate_diary_direct",
         "override_confirmation"
       ],
-      "expected_clarification": "Please clarify: which time works?",
-      "clarification_choices": [
-        "10am",
-        "2pm",
-        "3pm",
-        "4pm"
-      ],
-      "variant_hash": "sha256:1a5846fa6e3dddbedbaba0954bc048528450ee4f9d8acde9b651535c43c1ce7b"
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:d8a8ed98d6ada338771f4b5fca1a0d284f51fe4f7448e6b49031d26657edab95"
     },
     {
       "spec_version": "lc1.v1",

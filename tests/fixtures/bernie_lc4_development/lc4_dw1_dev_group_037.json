@@ -1,7 +1,7 @@
 {
   "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_037",
-  "group_hash": "sha256:b7d3a5355462dfac7730b0cfd09d19fdfde2ef6403418ec33172ae7e9336e794",
+  "group_hash": "sha256:3fc6d95b553072168ba8e541ca4f3e5250b02c947a2446bf5119d0452e645e86",
   "variant_hashes": {
     "surface": [
       "sha256:7d5c46ed99ae50c3bdbc0d9b52f685643d2bb769af71faed1ff62a2a0cb96595",
@@ -15,7 +15,7 @@
       "sha256:7bb74d97620b5bfe8be3880bc30afc950e6c42f85b5307d7a5ff50033295e1c5"
     ],
     "multi_turn": [
-      "sha256:29a3dda55dce4ad581ea9fe561db6c513c7eac007fe512c3e25b73a6dd2e9e6a",
+      "sha256:b0c8379963563fc7c0dd30afe2f618be138b6df70dec78e8ce461e29e06e7bb0",
       "sha256:77bf785b7d7b2475a8aa53c246285798ae7a9bef694d3f12a6cce5d49dbf2186",
       "sha256:dca5fd37957efba2e1f43fdf4df099a5dfdb5b76a6f36e96b4d60ff486012e11"
     ]
@@ -1151,7 +1151,7 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_037",
-      "description": "resize:not_before:clarification:plain - Can you make Margaret Thompson's appointment with Dr Shera longer? Change it to ",
+      "description": "resize:exact:clarification:plain - Can you make Margaret Thompson's appointment with Dr Shera longer? Change it to ",
       "dialogue_turns": [
         {
           "turn": 1,
@@ -1166,13 +1166,14 @@
       "clinic_clock": "2026-07-14T09:00:00+10:00",
       "intended_action": "resize",
       "action_semantics": "intended",
-      "temporal_relation": "not_before",
+      "temporal_relation": "exact",
       "earliest_time": "15:00",
-      "latest_time": null,
+      "latest_time": "15:00",
       "normalized_values": {
         "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "15:00"
+        "duration_minutes": 30,
+        "earliest_time": "15:00",
+        "latest_time": "15:00"
       },
       "source_spans": {
         "patient": [
@@ -1213,6 +1214,14 @@
             "text": "3pm"
           }
         ],
+        "latest_time": [
+          {
+            "turn_index": 1,
+            "start": 36,
+            "end": 39,
+            "text": "3pm"
+          }
+        ],
         "duration_minutes": [
           {
             "turn_index": 1,
@@ -1230,7 +1239,7 @@
           }
         ]
       },
-      "duration_minutes": 15,
+      "duration_minutes": 30,
       "practitioner_semantics": "exact",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
@@ -1251,21 +1260,23 @@
       },
       "expected_outcome_kind": "appointment_resized",
       "expected_tool_sequence": [
-        "request_clarification"
+        "search_patients",
+        "update_appointment"
       ],
       "expected_appointment_deltas": [
         {
           "appointment_id": "apt-001",
+          "change_type": "resized",
           "patient_id": "p-001",
           "practitioner_id": "pr-001",
           "date": "2026-07-15",
-          "change_type": "resized",
-          "new_duration_minutes": 15
+          "start_time": "15:00",
+          "duration_minutes": 30
         }
       ],
       "expected_audit_deltas": [
         {
-          "change_type": "resize_requested",
+          "change_type": "resized",
           "appointment_id": "apt-001",
           "count": 1
         }
@@ -1275,14 +1286,9 @@
         "mutate_diary_direct",
         "override_confirmation"
       ],
-      "expected_clarification": "Please clarify: which time works?",
-      "clarification_choices": [
-        "10am",
-        "2pm",
-        "3pm",
-        "4pm"
-      ],
-      "variant_hash": "sha256:29a3dda55dce4ad581ea9fe561db6c513c7eac007fe512c3e25b73a6dd2e9e6a"
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:b0c8379963563fc7c0dd30afe2f618be138b6df70dec78e8ce461e29e06e7bb0"
     },
     {
       "spec_version": "lc1.v1",

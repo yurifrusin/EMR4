@@ -334,9 +334,11 @@ def _map_outcome(
     Uses only interpretation observation + synthetic diary state / reference
     date — never expected outcome, tools, deltas, or labels.
 
-    All six diary actions get action-specific outcomes. Uncertain states
-    (terminal, stale, concurrent, no_slots, roster_absent, break,
-    elapsed_window) fail closed.
+    All six diary actions get action-specific outcomes. Create treats a
+    same-day distinct booking and a terminal prior appointment as available
+    history, matching the authored T1 stateful cases. Stale, concurrent,
+    no-slot, roster-absent, break, and elapsed-window states fail closed;
+    terminal remains fail-closed for non-create mutations.
     """
     # Negated/reversed action -> no mutation
     if interpretation.action_negated:
@@ -359,7 +361,7 @@ def _map_outcome(
 
     # Create requires specific diary state
     if intended == "create":
-        if diary_state == "empty":
+        if diary_state in ("empty", "same_day_distinct", "terminal"):
             return "appointment_created"
         if diary_state == "exact_duplicate":
             return "existing_booking_found"

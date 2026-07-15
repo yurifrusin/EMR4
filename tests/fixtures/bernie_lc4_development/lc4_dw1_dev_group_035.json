@@ -1,7 +1,7 @@
 {
   "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_035",
-  "group_hash": "sha256:31d10fee0bf03795f1e1e30072d5eb79f0d9d8c7a16aff5b4952ba7a216dafb7",
+  "group_hash": "sha256:2a31744332bd3613e29f858862cb4ecb75a85905012748fd740b7af6eff1b4c0",
   "variant_hashes": {
     "surface": [
       "sha256:8099cb65516e278e87acf6350d66cdb66ba42cfdd58ecbb4121fca20ded90333",
@@ -15,7 +15,7 @@
       "sha256:d0a01f53ab3f48fd24182266f875b95c4c510155094f5c06ae53d433147cf362"
     ],
     "multi_turn": [
-      "sha256:993fca69f5e6b69497bdf0840879f1d5ac57aa81f424f151916d7d14c720c083",
+      "sha256:ddc787bb4917a09d3ceba39c0c87e680cc34efd2091fef0ee936ad104adb87f6",
       "sha256:e99b64038710103ccea05140d60199d558b72ef3623c1cb3a02d1c672adaf1f6",
       "sha256:6fbfad4319e1370954401077e0cb490e8974a18f9ef26349edeec78c378b4d3c"
     ]
@@ -1271,7 +1271,7 @@
       "latest_time": "15:00",
       "normalized_values": {
         "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
+        "duration_minutes": 30,
         "earliest_time": "15:00",
         "latest_time": "15:00"
       },
@@ -1339,14 +1339,14 @@
           }
         ]
       },
-      "duration_minutes": 15,
-      "practitioner_semantics": "corrected",
+      "duration_minutes": 30,
+      "practitioner_semantics": "exact",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "exact_duplicate",
-      "entity_state": "corrected",
+      "entity_state": "exact",
       "dialogue_form": "clarification",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1360,21 +1360,23 @@
       },
       "expected_outcome_kind": "appointment_resized",
       "expected_tool_sequence": [
-        "request_clarification"
+        "search_patients",
+        "update_appointment"
       ],
       "expected_appointment_deltas": [
         {
           "appointment_id": "apt-001",
+          "change_type": "resized",
           "patient_id": "p-001",
           "practitioner_id": "pr-001",
           "date": "2026-07-15",
-          "change_type": "resized",
-          "new_duration_minutes": 15
+          "start_time": "15:00",
+          "duration_minutes": 30
         }
       ],
       "expected_audit_deltas": [
         {
-          "change_type": "resize_requested",
+          "change_type": "resized",
           "appointment_id": "apt-001",
           "count": 1
         }
@@ -1386,14 +1388,9 @@
         "mutate_diary_direct",
         "override_confirmation"
       ],
-      "expected_clarification": "Please clarify: which time works?",
-      "clarification_choices": [
-        "10am",
-        "2pm",
-        "3pm",
-        "4pm"
-      ],
-      "variant_hash": "sha256:993fca69f5e6b69497bdf0840879f1d5ac57aa81f424f151916d7d14c720c083"
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:ddc787bb4917a09d3ceba39c0c87e680cc34efd2091fef0ee936ad104adb87f6"
     },
     {
       "spec_version": "lc1.v1",

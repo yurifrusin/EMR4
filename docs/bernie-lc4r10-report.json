@@ -1,0 +1,146 @@
+{
+  "all_assertions_passed": true,
+  "assertions": {
+    "all_93_contracts_pass": true,
+    "clarification_audit_matches_source_selection": true,
+    "combined_selection_is_disjoint_93": true,
+    "explicit_null_outcomes_have_zero_expected_deltas": true,
+    "replay_audit_matches_source_selection": true,
+    "safety_1152_of_1152": true,
+    "semantic_counts_match": true,
+    "variance_zero_over_2304": true
+  },
+  "corpus_hash": "sha256:af8f3276a50a2defcf4e4f65570a5dd4de0d252544ff6d695792d63e7e518195",
+  "corrected_contract_results": {
+    "dimension_pass_counts": {
+      "all_passed": 93,
+      "appointment_deltas": 93,
+      "audit_deltas": 93,
+      "authority": 93,
+      "clarification": 93,
+      "downstream_outcome": 93,
+      "interpretation_tools": 93,
+      "safety": 93,
+      "semantic_action_semantics": 93,
+      "semantic_clarification": 93,
+      "semantic_entity_semantics": 93,
+      "semantic_intended_action": 93,
+      "semantic_normalized_values": 93,
+      "semantic_temporal_relation": 93,
+      "tool_sequence": 93
+    },
+    "explicit_null_outcome_count": 56,
+    "scenario_count": 93
+  },
+  "development_baseline": {
+    "safety": {
+      "failed": 0,
+      "passed": 1152,
+      "total": 1152
+    },
+    "scenario_count": 1152,
+    "semantic_pass_counts_single_repeat": {
+      "action_semantics": 814,
+      "entity_semantics": 330,
+      "intended_action": 880,
+      "normalized_values": 154,
+      "requires_clarification": 835,
+      "temporal_relation": 672
+    },
+    "variance": {
+      "total_samples": 2304,
+      "variant_samples": 0
+    }
+  },
+  "development_only": true,
+  "protected_boundary": {
+    "historical_diary_material_accessed": false,
+    "holdout_v1_accessed": false,
+    "holdout_v1_reused": false,
+    "provider_calls": false,
+    "runtime_or_database_writes": false,
+    "t3_1_to_t3_4": "preserved_blocked_by_default",
+    "t3_5": "deferred"
+  },
+  "replay_subsets": {
+    "fail_closed_no_outcome_contract": {
+      "count": 24,
+      "expected_count": 24,
+      "expected_hash": "2913bfd9110af319",
+      "hash": "2913bfd9110af319"
+    },
+    "resolved_correction_candidate_selection": {
+      "count": 1,
+      "expected_count": 1,
+      "expected_hash": "d67780b27dbfbdca",
+      "hash": "d67780b27dbfbdca"
+    },
+    "resolved_reversal_no_outcome": {
+      "count": 1,
+      "expected_count": 1,
+      "expected_hash": "020fade8ca644684",
+      "hash": "020fade8ca644684"
+    },
+    "valid_create_policy_alignment": {
+      "count": 14,
+      "expected_count": 14,
+      "expected_hash": "e79a4ecc777b9f9c",
+      "hash": "e79a4ecc777b9f9c"
+    }
+  },
+  "resolved_clarification_actions": {
+    "cancel": {
+      "count": 13,
+      "expected_hash": "830386f883de7fd0",
+      "hash": "830386f883de7fd0"
+    },
+    "create": {
+      "count": 13,
+      "expected_hash": "1839c8c567e44922",
+      "hash": "1839c8c567e44922"
+    },
+    "move": {
+      "count": 13,
+      "expected_hash": "ec7e009f37f0834a",
+      "hash": "ec7e009f37f0834a"
+    },
+    "resize": {
+      "count": 14,
+      "expected_hash": "e49785ce6f8922e5",
+      "hash": "e49785ce6f8922e5"
+    }
+  },
+  "resolved_clarification_outcomes": {
+    "action_outcome": {
+      "count": 22,
+      "expected_count": 22,
+      "expected_hash": "e9b8e74b01d3ffc6",
+      "hash": "e9b8e74b01d3ffc6"
+    },
+    "fail_closed_no_outcome": {
+      "count": 31,
+      "expected_count": 31,
+      "expected_hash": "73229d3e6f4a355c",
+      "hash": "73229d3e6f4a355c"
+    }
+  },
+  "schema_version": "bernie.lc4r10.contract_reconciliation.v1",
+  "selections": {
+    "clarification": {
+      "count": 53,
+      "expected_hash": "9496e23c6f339603",
+      "hash": "9496e23c6f339603"
+    },
+    "combined": {
+      "count": 93,
+      "expected_hash": "d8d138cb267b4304",
+      "hash": "d8d138cb267b4304"
+    },
+    "replay": {
+      "count": 40,
+      "expected_hash": "defe4c59877753e9",
+      "hash": "defe4c59877753e9"
+    }
+  },
+  "silver_pending_only": true
+}

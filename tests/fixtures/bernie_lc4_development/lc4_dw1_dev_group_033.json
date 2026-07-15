@@ -1,7 +1,7 @@
 {
   "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_033",
-  "group_hash": "sha256:aa07cc147dbcc7eff1099579bd2ff7b6bc323ae436072b09ac984b135a7640dc",
+  "group_hash": "sha256:c28fd1f71aeed5bee37bd72eeac82094615348435809889b18f28a63d275097c",
   "variant_hashes": {
     "surface": [
       "sha256:737866f22f4b45c1e4e8b49efc1126352cc592e5d7febd2bf08d1ab619d14cdb",
@@ -15,7 +15,7 @@
       "sha256:b8fa44b38407b082e45c71f45b2222810762906fc1d1d7a1db2b7e2f936f09f1"
     ],
     "multi_turn": [
-      "sha256:d4805a949c7791914a8f47678260454b5525b39056ecc46138bea1e616b143b2",
+      "sha256:543e649ac0a6571206de32a9e8878350232aea6fe9d6fa0c4a883d91059e37ba",
       "sha256:57a2e3d07b82ae65995b23832ac5e9e3a1766c138f5a33bf895b8d305c16e9e0",
       "sha256:dde3b65493d18d232b3d9e0e58576231301b59366fdd743646e05f2fd9a1970d"
     ]
@@ -1243,7 +1243,7 @@
       "latest_time": "15:00",
       "normalized_values": {
         "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
+        "duration_minutes": 30,
         "earliest_time": "15:00",
         "latest_time": "15:00"
       },
@@ -1311,14 +1311,14 @@
           }
         ]
       },
-      "duration_minutes": 15,
+      "duration_minutes": 30,
       "practitioner_semantics": "exact",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "elapsed_window",
-      "entity_state": "omitted",
+      "entity_state": "exact",
       "dialogue_form": "clarification",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1330,40 +1330,21 @@
         ],
         "patients_booked_today": []
       },
-      "expected_outcome_kind": "appointment_resized",
+      "expected_outcome_kind": null,
       "expected_tool_sequence": [
-        "request_clarification"
+        "search_patients",
+        "update_appointment"
       ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "resized",
-          "new_duration_minutes": 15
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "resize_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
       "forbidden_outcomes": [],
       "forbidden_tool_calls": [
         "mutate_diary_direct",
         "override_confirmation"
       ],
-      "expected_clarification": "Please clarify: which time works?",
-      "clarification_choices": [
-        "10am",
-        "2pm",
-        "3pm",
-        "4pm"
-      ],
-      "variant_hash": "sha256:d4805a949c7791914a8f47678260454b5525b39056ecc46138bea1e616b143b2"
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:543e649ac0a6571206de32a9e8878350232aea6fe9d6fa0c4a883d91059e37ba"
     },
     {
       "spec_version": "lc1.v1",

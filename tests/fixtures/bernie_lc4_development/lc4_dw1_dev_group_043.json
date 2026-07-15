@@ -1,7 +1,7 @@
 {
   "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_043",
-  "group_hash": "sha256:e8dd3f75cfb505c96fa29bd4654d5b1e675986ebbd95575c61c80f5e4fce5cec",
+  "group_hash": "sha256:04010c25d00f6191ea63031cf0f89978b728e484a293f1b471e1c3b495b0e686",
   "variant_hashes": {
     "surface": [
       "sha256:77dce72071e318a811cc917f4130e65983431a929f40e6b7b3075b70fd5e68d0",
@@ -15,7 +15,7 @@
       "sha256:836779d19060d5a14c06f761d61c8adc74810a423b41bff96cf3f78db239ddc3"
     ],
     "multi_turn": [
-      "sha256:48c3e4e756b3a99c16c1d0018f9612e660940ecbc9bb192156ef1e5999341400",
+      "sha256:df71f9d949d8d82658e58b228e2955d27cc792e83aa06b8bd80e22fe5ad2df32",
       "sha256:abd7283ede149f8744ae4827ac6eeee25cafdd81698344e55cc714cd207d31ba",
       "sha256:556d159bf1db18968dbd0b697d8720e2007a5c127d624f84c93658efedeae62b"
     ]
@@ -1287,7 +1287,7 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_043",
-      "description": "resize:interval:clarification:plain - Can you make Margaret Thompson's appointment with Dr Shera longer? Change it to ",
+      "description": "resize:exact:clarification:plain - Can you make Margaret Thompson's appointment with Dr Shera longer? Change it to ",
       "dialogue_turns": [
         {
           "turn": 1,
@@ -1302,14 +1302,14 @@
       "clinic_clock": "2026-07-14T09:00:00+10:00",
       "intended_action": "resize",
       "action_semantics": "intended",
-      "temporal_relation": "interval",
-      "earliest_time": "14:00",
-      "latest_time": "16:00",
+      "temporal_relation": "exact",
+      "earliest_time": "15:00",
+      "latest_time": "15:00",
       "normalized_values": {
         "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "14:00",
-        "latest_time": "16:00"
+        "duration_minutes": 30,
+        "earliest_time": "15:00",
+        "latest_time": "15:00"
       },
       "source_spans": {
         "patient": [
@@ -1342,22 +1342,6 @@
             "text": "3pm"
           }
         ],
-        "duration_minutes": [
-          {
-            "turn_index": 1,
-            "start": 13,
-            "end": 23,
-            "text": "30 minutes"
-          }
-        ],
-        "appointment_date": [
-          {
-            "turn_index": 1,
-            "start": 24,
-            "end": 32,
-            "text": "tomorrow"
-          }
-        ],
         "earliest_time": [
           {
             "turn_index": 1,
@@ -1373,10 +1357,26 @@
             "end": 39,
             "text": "3pm"
           }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 13,
+            "end": 23,
+            "text": "30 minutes"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 24,
+            "end": 32,
+            "text": "tomorrow"
+          }
         ]
       },
-      "duration_minutes": 15,
-      "practitioner_semantics": "corrected",
+      "duration_minutes": 30,
+      "practitioner_semantics": "exact",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
@@ -1394,40 +1394,21 @@
         ],
         "patients_booked_today": []
       },
-      "expected_outcome_kind": "appointment_resized",
+      "expected_outcome_kind": null,
       "expected_tool_sequence": [
-        "request_clarification"
+        "search_patients",
+        "update_appointment"
       ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "resized",
-          "new_duration_minutes": 15
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "resize_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
       "forbidden_outcomes": [],
       "forbidden_tool_calls": [
         "mutate_diary_direct",
         "override_confirmation"
       ],
-      "expected_clarification": "Please clarify: which time works?",
-      "clarification_choices": [
-        "10am",
-        "2pm",
-        "3pm",
-        "4pm"
-      ],
-      "variant_hash": "sha256:48c3e4e756b3a99c16c1d0018f9612e660940ecbc9bb192156ef1e5999341400"
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:df71f9d949d8d82658e58b228e2955d27cc792e83aa06b8bd80e22fe5ad2df32"
     },
     {
       "spec_version": "lc1.v1",

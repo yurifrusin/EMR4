@@ -1,7 +1,7 @@
 {
   "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_042",
-  "group_hash": "sha256:7611b8e60aa5a5f1f228d9ebce681041999409c414acc6905ad04b785b0d9887",
+  "group_hash": "sha256:07465007edc4b08a6cc765b3edafc064b0de02750b1032ebffa5e4802d7644f8",
   "variant_hashes": {
     "surface": [
       "sha256:8ebaeecae33d9d49a3d3fcc5f81b057df3865fae159b1e407552ffb76812ae89",
@@ -15,7 +15,7 @@
       "sha256:a0f85b0d54e251882b667f8b61198a49bc2fc77c1b6c853dc112c1270dbf7980"
     ],
     "multi_turn": [
-      "sha256:324f2d50f71e3ef69e56279e4c88059146b4b762d5d10b2ad3b47ad66d2ce3c3",
+      "sha256:6ad16a8cd6164b6a1118f3f6fd40cc058a29fb6ac2920f363edb4c740eb36c37",
       "sha256:50527fab1f03f58cfae426ae75edb75871434c6c5195a63e0ec24f8738876ae9",
       "sha256:b2bc72c6b488b8d12c27887a8ddf9956eda951c6b57a47be0dae480e047237de"
     ]
@@ -1279,7 +1279,7 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_042",
-      "description": "resize:interval:clarification:plain - Can you make Margaret Thompson's appointment with Dr Shera longer? Change it to ",
+      "description": "resize:exact:clarification:plain - Can you make Margaret Thompson's appointment with Dr Shera longer? Change it to ",
       "dialogue_turns": [
         {
           "turn": 1,
@@ -1294,14 +1294,14 @@
       "clinic_clock": "2026-07-14T09:00:00+10:00",
       "intended_action": "resize",
       "action_semantics": "intended",
-      "temporal_relation": "interval",
-      "earliest_time": "14:00",
-      "latest_time": "16:00",
+      "temporal_relation": "exact",
+      "earliest_time": "15:00",
+      "latest_time": "15:00",
       "normalized_values": {
         "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "earliest_time": "14:00",
-        "latest_time": "16:00"
+        "duration_minutes": 30,
+        "earliest_time": "15:00",
+        "latest_time": "15:00"
       },
       "source_spans": {
         "patient": [
@@ -1334,22 +1334,6 @@
             "text": "3pm"
           }
         ],
-        "duration_minutes": [
-          {
-            "turn_index": 1,
-            "start": 13,
-            "end": 23,
-            "text": "30 minutes"
-          }
-        ],
-        "appointment_date": [
-          {
-            "turn_index": 1,
-            "start": 24,
-            "end": 32,
-            "text": "tomorrow"
-          }
-        ],
         "earliest_time": [
           {
             "turn_index": 1,
@@ -1365,16 +1349,32 @@
             "end": 39,
             "text": "3pm"
           }
+        ],
+        "duration_minutes": [
+          {
+            "turn_index": 1,
+            "start": 13,
+            "end": 23,
+            "text": "30 minutes"
+          }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 24,
+            "end": 32,
+            "text": "tomorrow"
+          }
         ]
       },
-      "duration_minutes": 15,
+      "duration_minutes": 30,
       "practitioner_semantics": "exact",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "break",
-      "entity_state": "mismatched",
+      "entity_state": "exact",
       "dialogue_form": "clarification",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1386,40 +1386,21 @@
         ],
         "patients_booked_today": []
       },
-      "expected_outcome_kind": "appointment_resized",
+      "expected_outcome_kind": null,
       "expected_tool_sequence": [
-        "request_clarification"
+        "search_patients",
+        "update_appointment"
       ],
-      "expected_appointment_deltas": [
-        {
-          "appointment_id": "apt-001",
-          "patient_id": "p-001",
-          "practitioner_id": "pr-001",
-          "date": "2026-07-15",
-          "change_type": "resized",
-          "new_duration_minutes": 15
-        }
-      ],
-      "expected_audit_deltas": [
-        {
-          "change_type": "resize_requested",
-          "appointment_id": "apt-001",
-          "count": 1
-        }
-      ],
+      "expected_appointment_deltas": [],
+      "expected_audit_deltas": [],
       "forbidden_outcomes": [],
       "forbidden_tool_calls": [
         "mutate_diary_direct",
         "override_confirmation"
       ],
-      "expected_clarification": "Please clarify: which time works?",
-      "clarification_choices": [
-        "10am",
-        "2pm",
-        "3pm",
-        "4pm"
-      ],
-      "variant_hash": "sha256:324f2d50f71e3ef69e56279e4c88059146b4b762d5d10b2ad3b47ad66d2ce3c3"
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:6ad16a8cd6164b6a1118f3f6fd40cc058a29fb6ac2920f363edb4c740eb36c37"
     },
     {
       "spec_version": "lc1.v1",

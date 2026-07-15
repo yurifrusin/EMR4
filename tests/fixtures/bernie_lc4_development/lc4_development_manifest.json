@@ -19,13 +19,13 @@
     "confirmation": false,
     "override_authority": false
   },
-  "corpus_hash": "sha256:f11e98f9bc61b962da0e816fbb918d7f722d3f82c57dfde18a5e323c1b24e9e1",
+  "corpus_hash": "sha256:af8f3276a50a2defcf4e4f65570a5dd4de0d252544ff6d695792d63e7e518195",
   "groups": [
     {
       "group_index": 1,
       "group_id": "lc4_dw1_dev_group_001",
       "filename": "lc4_dw1_dev_group_001.json",
-      "group_hash": "sha256:b1e33767b127856e25095c907b14a40a6f88e6522af0cc1841e9baa3bdeff6d7",
+      "group_hash": "sha256:263287d0b6d119b93f5d62e1dcd7f525f6769573c9934c5436234c2610bd9e71",
       "variant_hashes": {
         "surface": [
           "sha256:7a88be787e841bdcaa8c6a8bab0fa661d377ec1a8b39ff2147ac1060819c3f42",
@@ -39,9 +39,9 @@
           "sha256:faa8fc86428d0ca577a9ae2225a959266c9dbc3e9bc76346e18ac2cc0a36be98"
         ],
         "multi_turn": [
-          "sha256:d2bcb56d5aa6806569043884341067ff74ac898aa07982ee45894f0eca1f1dcf",
+          "sha256:a7361f9dda5478424df583297fed1ad53c8494cc946280a5c49482664c36dcdc",
           "sha256:20e9255f10306117ebe217e0dd3ffdb76eea245f930bc5bdf781a7734f509a88",
-          "sha256:c254b1e81d68cfd7af6222edaec7d1d794d79f02dba982d6ddc2d6ac6464108d"
+          "sha256:d54c2a79c2a9a0a0503fe0426f69fea9025afa63db89bd15775c3fc257107a2e"
         ]
       },
       "action": "create",
@@ -87,7 +87,7 @@
       "group_index": 3,
       "group_id": "lc4_dw1_dev_group_003",
       "filename": "lc4_dw1_dev_group_003.json",
-      "group_hash": "sha256:18aa023dea95c8eb374dedc6652133dfcdae2ba15f3e888130446e0092f0af25",
+      "group_hash": "sha256:239eca59c2f91137d8a4067115c0c23c37ec96c28fa8b716782be8a1bb75d948",
       "variant_hashes": {
         "surface": [
           "sha256:37e76b8d2e7d9673e15207fa5fb92f818f1e65365b89cc729f63b3a315d50abb",
@@ -101,8 +101,8 @@
           "sha256:0dc9359ffd551f0d26cab2140afe32fe2b8be97e8bf5071bc59a554c4bf64228"
         ],
         "multi_turn": [
-          "sha256:1f2003d38cd08237e38d07b76b8e085f9dc954e39b622d577e84823a1b3856f3",
-          "sha256:e91d05daf9d2fa7e5cf4e8dd37a5c40d50c3bd9fd3c41e1cc166e116ba6909d4",
+          "sha256:5af4f42b9248f83adf6fdbd758688b86f4812088138fae4b87654c48cb18abb4",
+          "sha256:ff6c96a12cfcc918f134ef72374944468624f42e912e97c78b51159cab7db79c",
           "sha256:d71035df3865da1ed61116c5c9527c1e24a314ca5581aa0b052598cb02de88bf"
         ]
       },
@@ -119,21 +119,21 @@
       "group_index": 4,
       "group_id": "lc4_dw1_dev_group_004",
       "filename": "lc4_dw1_dev_group_004.json",
-      "group_hash": "sha256:af920860edad642835fb4f1ff2c0f4449320ddf0ea0372871717e541372eee3d",
+      "group_hash": "sha256:73bc6029fe0887e507138388c280543b8d63c1dc050dec6b18c2f2d350a77559",
       "variant_hashes": {
         "surface": [
-          "sha256:d52508eec3b2819dd290449253a803cedc5e8bce2a8601b3e8d572c5e5a110cc",
-          "sha256:f2c4ba9206ca95a5aa30da959dcca5bb43bc828114fe8d8aa143a5a7713496ec",
-          "sha256:f42f46ec98accd5f9ad69b5d597555d1cb4683733d7d324d9976102660f6f61f",
+          "sha256:3b67218b0de1d14434de87c8e72d986abc64c0679e493e3c44b19cf415c30865",
+          "sha256:077e6fc688dbedcb19d92305c9fe0e4ab0a4a26475137b05e12f2e66e30e201d",
+          "sha256:d4d5a9bb601c58377e012f7507c0e4c1328bcd7bd056a66c1e23671e2aee8903",
           "sha256:753e409bcfb9fa454e81913d38d067d9282cdc83c6a0f33aeeb05bf53c871aed",
           "sha256:1ba0555713d31876698bd8b89363162be0c5519282af65f8020e2eef1480ecf4",
-          "sha256:2febb94898441c823ec108041feed732c02a967f3141057225acc03bc094858a",
-          "sha256:59965f434f66076d046a254791149d9d8ea4586f322466ae620f6f988bcad2c9",
-          "sha256:3c307ff349fde02bf3b94ad23201c9a81ed75500f9f033ef657f46666b86871a",
-          "sha256:2816f151f4f4913671556c662542c32414153e4e9f665284bc776079f008dfd6"
+          "sha256:79a0e3f485e234de98f9322276e984f766f2060181365d88572b15e471017db9",
+          "sha256:606ad1ab6be75c634e7bc80d818c94b4efeddf229fbd94a91255ed6fead07170",
+          "sha256:fd6a775dd2eb6fb9824799540611f426e35b82dc3c801671e08484203c6012a2",
+          "sha256:169066a58169c0a41067c7a51c0a73eceeeea87f67646f8a8230f53a25cd6134"
         ],
         "multi_turn": [
-          "sha256:ac25bf959ee862b9f17565a533817e4ce2847b8d9a20fdac14f272c63725461d",
+          "sha256:d7be6ac648403e7aa7691c1b9ca8f60084ed606693c945a7ef126d80d645135a",
           "sha256:485778cf2275e6d0776290c607985b7d85a55ad102d7f4ecb5372bbfa4f4f037",
           "sha256:130cce1b0798750b0038caadfa84319607c083046d864e9a8117bd1cc0f25fc8"
         ]
@@ -150,21 +150,21 @@
       "group_index": 5,
       "group_id": "lc4_dw1_dev_group_005",
       "filename": "lc4_dw1_dev_group_005.json",
-      "group_hash": "sha256:6a7146ea4cbb58bc706a3b3e169ca1a0ab0ec535273f3738c1820ca753d329a7",
+      "group_hash": "sha256:4a2f16f9001be879beee5780751ccac841c4d634c1352759eb477fb2eabe2a06",
       "variant_hashes": {
         "surface": [
-          "sha256:4523f446d420fcf625c48d11de88a83a3d280cacf66811d71debce2ee92c9d08",
-          "sha256:2ace49ba3061197fca7ca24e07cdde67f79f17aa14ba3db963b16673c0f6bb6b",
-          "sha256:6c8f266d1b8fb8bc835ded7466619e1be3637b527a1f6ecdd8af81f4dc020cbf",
+          "sha256:1df945f629c8a8055ab59610d1f290ca51ac6e006b3f4f242c7934fa4f505f50",
+          "sha256:5c1fc43b2e9bce42325d22f29ac704e1bd1e15ae9c724414f6b1b3ee1cedd43e",
+          "sha256:f3d70001461b0df783f2ceb5fa4397b2455b9c5dded186489f873d30e1e766b7",
           "sha256:98adebbf4c3e4c52918384d6758bad01ad6639a9002b019ad63e709436971dae",
           "sha256:33225c07521b601b2cbfb7590512af9905600487a4ac78401d8b4dc89a86feca",
-          "sha256:9abda03cb95cebc97efc8e8417e4005249c764cdd2eb2df8f199f0e199221c25",
-          "sha256:dea20c4831fae63128764ea0f3a6d2b326e2deba9fc4aa87fa8c539f603a8f22",
-          "sha256:7b9652af5208d88a5584e606f3dd14990839ed88f65f6961585f7eeb47bc409c",
-          "sha256:5296258f912b1df9427c2367c4ba7758c141010912b45989d8c14dfecdeead1a"
+          "sha256:a8bea1682f7d695b72a2c6ef0bd35b0b9be14a814819c4f261de44eb9e64d4c1",
+          "sha256:d617810718a1fa88162c7bfb2b6fffe359d4a670d1320fe1e81a2083eedef713",
+          "sha256:f6cd40778a9fe5c11bf25f05d5c54686217cc8f3342d819fdc337f490f74b93f",
+          "sha256:7aa20bd4a5f39e79861cb0c976c584b4761b284697708c5e7199d70a7b0bbfbc"
         ],
         "multi_turn": [
-          "sha256:c9d1e49df068ba71ef7414b6852e5916d2b6a05e12b4e3e1992460f41ad14338",
+          "sha256:a7c1c0811ce3c2bd4888e381f5fc889cf42f0163ca682edfccab122b20ce4aff",
           "sha256:22cba3720f13b5680f86bff5fd83690e47a52d1736d3e01adc5a00831dd138f2",
           "sha256:7e4b92ecf84b72947266c96a773df3185d9ce6de74787f0f86185ecbecda05d5"
         ]
@@ -182,21 +182,21 @@
       "group_index": 6,
       "group_id": "lc4_dw1_dev_group_006",
       "filename": "lc4_dw1_dev_group_006.json",
-      "group_hash": "sha256:9994bb582b31dbf19d0b2bb73804288ead5d1cf1bcb907b147069ece0250dcc6",
+      "group_hash": "sha256:f3a9f3086419fe80aaa669888700e733e71443e021ee2f1b817752ec2f73ce6c",
       "variant_hashes": {
         "surface": [
-          "sha256:b4c973c8053c2c8b7951e4b034f3c2ccaca6518086cb4925ff048340392a7136",
-          "sha256:209c59b59ad77e7da43d3a822939c3f78d2e710bb809a694a23b783225d10ceb",
-          "sha256:8db27d0965e3176d09c915defb2be0985682ed7afa8a87469d8a07027c505d87",
+          "sha256:6ef509b27618ce8f3518372c623c9a2ecb29d947356da11ce4f6aa4bad159019",
+          "sha256:6acdbc543147a844837d25fa19bc578f3219606242d6dd29a72713c14c793d1c",
+          "sha256:1c07cac8cbfb15df7a8d05d5f9958702b531108c934d8262f38afc05ee699b3d",
           "sha256:bf4b0360765b30ba7b2da29219ef996ec619186890f20d9f9472aee2f40130ed",
           "sha256:007549b397883160889bfd3fe556fc12cf85d5f34193c2413dc4d7f7648d090b",
-          "sha256:b2986b75689deca7412a38565172f36c0bf57d9ad61fc48c948fb64cdd77c415",
-          "sha256:c2c74b25d9e302f662d77d8ceec5bbf67b57b5dc2faea4b41727ca0880b21100",
-          "sha256:240cd35fd31f8090342fc706b92d390ec7c708215dc7129e105d78fcfa28afb3",
-          "sha256:f9075d205faa03b5549f75e5c2ef0439161e41a5c96be00d39e00960295cdcf6"
+          "sha256:dc70254ec56561acf3400e9891d1253c369306f35312be701936fb697f9a3081",
+          "sha256:3034dbfdbdc1854939c24a2d14a8a9fc5d4924c1a26d0bd9d9df37b56c9a1c15",
+          "sha256:22445610577fc1e3045bcd82e9a95b623b91e9c655030e7dde4349f7134494de",
+          "sha256:8703788dd669cda3710659ca8b05d10081f4e530b848a6f01857c012649089d6"
         ],
         "multi_turn": [
-          "sha256:1287f5711afc6102c6b602ea5d4c533a3bab630322d383ff3059f740b0f9ead9",
+          "sha256:dad8ae79584d8c8df708ff88c0aefcfb83515d9ca7e0f56bb71b9a59ae0e5603",
           "sha256:40bf9768a4e624d50876abf54f2ba79ec68ec4db47cd8fdbaf1ef578d6af554b",
           "sha256:1386e8364bbe3ed490135e5f6530f4c211a18e38e2e5e203cc13ba0c1d926b20"
         ]
@@ -213,21 +213,21 @@
       "group_index": 7,
       "group_id": "lc4_dw1_dev_group_007",
       "filename": "lc4_dw1_dev_group_007.json",
-      "group_hash": "sha256:73f126a1964318c86d1f493c558ee1bb5e4c5b5a5870f445f9c146882c59c149",
+      "group_hash": "sha256:9db17972f21e1e2748559090948dd44f966b5e56e8ca84b234e6bf919d13b4aa",
       "variant_hashes": {
         "surface": [
-          "sha256:1584c3bcfd5eebe384a1ad24ea7901055d59263288b7c7cb70baf46608850009",
-          "sha256:ccfbdd2a10dc7e9a124c71ac80f7264b131431fc87690aa94e469304816c39fe",
-          "sha256:040c847dfd85bcdd84a45a3811f9bf4ed96a3c235fe41267ead1bf08752c9c08",
+          "sha256:35a99033ad522def4afc3ad7f8988110acd1613fb9702de9d4d93edb86eec49f",
+          "sha256:c8ea3997998cdc479fae7255f760086f41eab1e46501a069566edcdfc6ecdbc6",
+          "sha256:b3965f72202a3cca6af0523edc9ed717ad03d814adf3b596af25cbf8ee42ab1a",
           "sha256:7e0d81375a875abe9d38c910544b069f30bfc1bb8881d33551d03cb06116959b",
           "sha256:dd92ed5e827e335287a7ac8734e9ff6eb9144ac1c57a1c2a36568725da65b4c1",
-          "sha256:a02052a9a1feb1be319eca93fc1f9bc56ad9f64c40b92b4ddcb0d24999e3b977",
-          "sha256:ce721847ce440538daae7a98f91d6b2a1305d2f96eb0b7a91edec078e830c474",
-          "sha256:94b0010d48cdb0cae6d392ea903fcc878c53f2635666361bff5bf6f0862389a8",
-          "sha256:2eb06edd548a161e212e4d0d76c03bddf93b2cec749faf041f1bf196c45a10a7"
+          "sha256:5e64d6778b24f69f77f74a29d2053d620c68bf77fe0cfef3fa8c21ebdc6500f3",
+          "sha256:683b9267a93a3ad2b233810efe049e86f448f151b7a7a22b3f069a10d410d0fe",
+          "sha256:8d8ae81acad31017d3b441a561c48f9970b7d84525fb075b34b06d68f01a9703",
+          "sha256:16ac648c4d09f20c392d123d301de66bd925126aed1f0a7480117829f01bdd1f"
         ],
         "multi_turn": [
-          "sha256:bf4606cc1b74c28b20f4d4c1c5cbd603e1d7ca0275b3171e9927fd6ba3712555",
+          "sha256:28a9ef310875070e7685ccdf74ba2af50890cb5b937d649107f51784e0280674",
           "sha256:38c5cf9bf307e31ab503aaafc175256820aa96d48330932212e7531b2f425dc2",
           "sha256:c586f2bfbc57ba69f6cd05d5772d45b5e8f0fc9a876b43a428e135201134bc46"
         ]
@@ -276,21 +276,21 @@
       "group_index": 9,
       "group_id": "lc4_dw1_dev_group_009",
       "filename": "lc4_dw1_dev_group_009.json",
-      "group_hash": "sha256:7dc6eeab5f8b7913e6962cd4322d9f6d0d865ce25cc98d667936e82a6bd2b752",
+      "group_hash": "sha256:ea4c05f0a4f7350d345bd347d2102d105f88cc6c3e7c09af0f7341b3aeff735d",
       "variant_hashes": {
         "surface": [
-          "sha256:0d0d4703b7eed8015c3e6c17313662b2f838e83a2317337f446d8cce67a4f7a2",
-          "sha256:5001165a86ae98492ffe7ae0808c2104d5eef19ec292b764e49ca0500ac33fa4",
-          "sha256:d6c894ecdcb01a67be5164e10ae782a13ddd8269ed0662c99b4c6a3737f95758",
+          "sha256:397a3fa641350fe24e3bf1da51e280501937dce32f20c23fe179472322c7a457",
+          "sha256:d8112a39dff8479bc7bb2bc6a1553dc217caed60c1ffbddbce1c43d8a43fff3f",
+          "sha256:4c70a368fe9ad0623c82430e928cd4e0555a96652e36f8a43b0a36fa303a5a0d",
           "sha256:cacfcc97782aa9badd5e72abb5dc5df66a3c857bbf247df735392f0a0b3ea2ad",
           "sha256:6c077d53025f78d5f857967911b105a9701b25cc88cb0b331b1f91cac5e35192",
-          "sha256:66526e4258cc772fc0356a8b838b3ce686d90aee8c14740eba11b8f4f753c61e",
-          "sha256:3df31ea078bb8acf04030b72ff5a4e93e10b24c356048c545afc9ee78b2d0980",
-          "sha256:17a52c4b7bc0a0541ac6d31ad92cd2b43808dc65f442fdaccfe63b55737bd94a",
-          "sha256:0e88df22b7036a916b75857a801ac6dbb56f4f07ef27c7278af73903937c5175"
+          "sha256:e0a05b61dfd2022dfd802063aed5f8bceb6cb9be26ab0e6abd030f07a92dd8fe",
+          "sha256:dfeb7b22b56dfde86d72613785fc4adb987a2e46ba13207a4175c0ce85f0dc79",
+          "sha256:584dc885ac74a22a02f7025f20242ebecc0a9f9d8b337f1f1718cf7f3b56d89a",
+          "sha256:57bb15587f7b7fb9bf4ad63464d35e35cda8c2d5325cde4b493a53e88b9b9476"
         ],
         "multi_turn": [
-          "sha256:de30bfded1bb06745ea239665843510198b1e2154212a03fccf6f07d5d39ba9b",
+          "sha256:5e6ecf8f17b34ba171b70f57063cafe95f8f75f3d8f5a71232993738acf31749",
           "sha256:0d029aaf7d9945bf5fc21499a18d582ce58a58af87d5e61196fbe770d6bdd3d9",
           "sha256:ce741527da94afc3809e9109fb29abf6914e40b3bdf7ac07ec09a693d54836cd"
         ]
@@ -307,21 +307,21 @@
       "group_index": 10,
       "group_id": "lc4_dw1_dev_group_010",
       "filename": "lc4_dw1_dev_group_010.json",
-      "group_hash": "sha256:8292d2f47911bc8a0ca6d54b5779a15e90c7f259adbc961f58eaddf4fe0b3c8e",
+      "group_hash": "sha256:b4a3c1c862f97d0acec0bf3980b4686134f29c044da7cb465ba216219b13dcbc",
       "variant_hashes": {
         "surface": [
           "sha256:657c78f4f8d8897ad9896f551993655ab948c0cb6218b47ec08c1c8c3a363ad1",
           "sha256:f75afc44264c2292d1cd3ddc6b2105f9dca6f7b98a89b2a8a9f22127b03ca190",
-          "sha256:61e38064cc88b2c70b70eb5ea7736907480264202d111e7aaa991033869cc6cf",
+          "sha256:4995e0c687be9463a191770ac0909c5bb8de174cc42f84371ec3ddd05c03ea00",
           "sha256:69cbdb6d73074d4652f215ec7851b9a2e31244b13bfdbff9d0a5bf2b5930d00d",
-          "sha256:6cff39be5a4f8fd26bbc4410a1ba1504eff39d731724a2849a2be80424807054",
+          "sha256:42e88aac9eee966a8a4676283c38f0591935180d50d5c7a819bf5a240548a39e",
           "sha256:4dd4a5642d9a48e84b74e3383529a776c3c2474d7ce2a3f605396c167fa61d8d",
-          "sha256:8dbea657810ac4612b1a5ad9af570dd81f95e9bcc609d082b11048833aa52800",
+          "sha256:71a39597243643ad521c34b771f0f1344e8ce68cd623df33fd940277b51475bb",
           "sha256:dbfcd29f2512080b076d6475a55612cf5cfc41ebdbc59c0d7022f5f6402426b4",
           "sha256:a5d580139511252fbd2c965acff0480e7b7c48e9e37d245d944d104cc1aed64f"
         ],
         "multi_turn": [
-          "sha256:9faeff5a7ff847058c80a7254b6d1daa22e468f97412467cbc25d257463faeb3",
+          "sha256:f16baf6863cb382f005b8949f0e458ad31d0732675b186844a8018f5dbd82419",
           "sha256:d7218ea9f7341915dca5ba7065891fb02abe50ed389a1d7fb36e75c048c86527",
           "sha256:5a9b51e26cef0453d8aae93ae169fe974acc66998c2c9d7b112c4858544ada12"
         ]
@@ -340,7 +340,7 @@
       "group_index": 11,
       "group_id": "lc4_dw1_dev_group_011",
       "filename": "lc4_dw1_dev_group_011.json",
-      "group_hash": "sha256:930fc7096b3a7a9a566d539296e40d93bdf31576eb327af12aa6216f994ced96",
+      "group_hash": "sha256:03f1a59a255647501b9e80fe7ca8c837cd38ef7e166fba07837cf51d208cac73",
       "variant_hashes": {
         "surface": [
           "sha256:06aad34143d32e96d70dbcdb6991aca2b56a9096c289bbf25b1da22822912861",
@@ -354,7 +354,7 @@
           "sha256:3593d141f2bb52e563947e2e0268dfeb18c483794179621b400bea4924dac39d"
         ],
         "multi_turn": [
-          "sha256:d5cdeb3b4cad16adf35dbed5b450fb9a9352a2ce3e90d3638cc4a3838f370f05",
+          "sha256:3f42a580c0c901a54f9fb6d4486c6e516e9525a13d4931ecff441561000c3ff2",
           "sha256:e445cbc8ff9662d3ffc0fcd6e1041f0b2ed82f8bda3db9ddbe67705eee1e663c",
           "sha256:7d89decaa8dd315db6c44f0a57ce3b692dea9f56b85557fd27e2c9b2cd1fc004"
         ]
@@ -373,7 +373,7 @@
       "group_index": 12,
       "group_id": "lc4_dw1_dev_group_012",
       "filename": "lc4_dw1_dev_group_012.json",
-      "group_hash": "sha256:90d321501e51df4e1b91aa94997e3470b3d26c2678ca61045ad8c6c63abdc5c0",
+      "group_hash": "sha256:42388e4cddfff7af19a2ea143eaea0ce7b077231b446bf8c5197677c2bfd4fd5",
       "variant_hashes": {
         "surface": [
           "sha256:bc79aa392654c6144cb3ca5b44f36b65cf0907aecc180df5b4814b30522acef8",
@@ -387,7 +387,7 @@
           "sha256:3d99374c3c6278e6b12ad84ed769f6f2aebb90f5cb95b2c4f4c441c301fdea99"
         ],
         "multi_turn": [
-          "sha256:5c1a17889eb79ec8bd0eba178d000118cc01987b013bdb6ba7a3f04675e0d564",
+          "sha256:08e583874759e040438f652b770e4b94f98e5e27a342acb952eb5904df7054b2",
           "sha256:16237f2f35c904a6784a486a930dc0bdf6c2dabb59fa6f1efebfe8318e1219e5",
           "sha256:9578897d6f8fc3d6beb04e8e01ba79da5ac2d0d62234824afd335d1cc234276a"
         ]
@@ -405,7 +405,7 @@
       "group_index": 13,
       "group_id": "lc4_dw1_dev_group_013",
       "filename": "lc4_dw1_dev_group_013.json",
-      "group_hash": "sha256:084fe6112176e51e1f00c471794edf31ad38f2f13d4be399aabad1c5d6d49cbf",
+      "group_hash": "sha256:0c453112751b02e8dd5d06ed9caf8569f040e694530308dab331804b6c060a47",
       "variant_hashes": {
         "surface": [
           "sha256:f1862e8ed5824b6f540ba7ec5d5b280dbd554284579d67cf8585ee423c3d0ef1",
@@ -419,7 +419,7 @@
           "sha256:f3863af129125dbed680802cc45547c375cc0adf797c0c475031d3dcc05fefde"
         ],
         "multi_turn": [
-          "sha256:871198bda387cd25354cd70a5ce15b333b1d17f850ae1d9dd462771ee67aaebf",
+          "sha256:cf5f66c0bf1a5f03c81e36719270bdc9e26b2d2871be48a6d4f7435a14344955",
           "sha256:ea1bed087760b06ce6836a240179ef2735c0adc04faa96c96c92bd5f730ad860",
           "sha256:c75e79dc9a5b6dd329a07ad3db30b0d2a0665b2c5292c2628cdbafc5cbb94cfd"
         ]
@@ -468,7 +468,7 @@
       "group_index": 15,
       "group_id": "lc4_dw1_dev_group_015",
       "filename": "lc4_dw1_dev_group_015.json",
-      "group_hash": "sha256:553d4e17e26f87969a8477fd39bf5883c03e87b7f8aa44f8456a9b2501c774cf",
+      "group_hash": "sha256:9998fded927cdf6ad8c2859b45c8ebdfdbf4766cf53f31bf9a50841b2b5744c6",
       "variant_hashes": {
         "surface": [
           "sha256:bf875930d3ac2f35139ee709f69036799dff02e3ab7ac0b6ccfd67677ac51481",
@@ -482,7 +482,7 @@
           "sha256:857b8a4159d29caf5af979ffff49c0978469a23f9067ef64ad486812f53992ee"
         ],
         "multi_turn": [
-          "sha256:8e8db30e6a75d2b0c084e07fec46ad0ad9182c7d46b403b0018bc8e9764409d8",
+          "sha256:552ace299019c4dba01fbc3bb1266ec7bd989dd5a7e9e9509b59849573d3c060",
           "sha256:22479c53345c77e7de0b32338f4a14bcc2cf8c79f562ae2f854d5c9054617f34",
           "sha256:5d6f0e5b79548409f4ce5cd65066980097cdfed95752529f7c8434b486833b14"
         ]
@@ -501,7 +501,7 @@
       "group_index": 16,
       "group_id": "lc4_dw1_dev_group_016",
       "filename": "lc4_dw1_dev_group_016.json",
-      "group_hash": "sha256:5576044343ec30df75747044c1573b3cd811d27a104dbb64d3d0082e48609ca6",
+      "group_hash": "sha256:3ec1c0ed694e130046ae77fefda3b0013126770ebaa966af691c44ea20013c12",
       "variant_hashes": {
         "surface": [
           "sha256:2ce43702ecf82965c60104493750b2dbaa98969fac3591fe812d6766e0a89e12",
@@ -515,7 +515,7 @@
           "sha256:d9a1127e87ff614612d6b63949cf3973e2563d4670e52f7d41f815a64dce7e3c"
         ],
         "multi_turn": [
-          "sha256:9d7345d836501c2f30b17cacacfb70cd7794d76bd286cf3558cc9f83563fa9d2",
+          "sha256:7e5aae555df4461bff4a2c413ef5e27fc0b58fd37f65207a6b300870028f3466",
           "sha256:9dbfff95018b9d6ce7340e9fefb245474303c3c72d9bf985ba10adc36bc8aa2b",
           "sha256:b89aad787152da7c401a0e9e3ccfcdfa41abd25c9422f545e2fef7e404df6ff1"
         ]
@@ -533,7 +533,7 @@
       "group_index": 17,
       "group_id": "lc4_dw1_dev_group_017",
       "filename": "lc4_dw1_dev_group_017.json",
-      "group_hash": "sha256:be26a6215440257f823001c6ff1692a2d369c572ca21c108221474a1b8dcb67f",
+      "group_hash": "sha256:bf0c4f57e2bc6eadceaae582c6c725ce7cac68dd36127eaf648817a254208916",
       "variant_hashes": {
         "surface": [
           "sha256:4b6b4160c57fec1f10c25b0a51fcf7566d834547333cff021ac6ec5e33bb9684",
@@ -547,7 +547,7 @@
           "sha256:c1ed68a46ed6528d666f582de68a3384d306719a3edb1b93a953bbcda18cc6f9"
         ],
         "multi_turn": [
-          "sha256:f24ad4787c7f6eb73fe8c9620d9eeebd45e8e928159e837a0e5378aa48f041f9",
+          "sha256:6580b5b98bf7a8cc8d3242c50ad3aa47151b369bf2608065aa01fd3a2edde8dd",
           "sha256:b77d325c9d8172a841160d1bac0bd80215444708a7f90a0a1643ff5b743046aa",
           "sha256:c12a1f30ab52fc3d27602bd71e3e0aa32ea9514e66248a6f6c4039f166d7c985"
         ]
@@ -564,7 +564,7 @@
       "group_index": 18,
       "group_id": "lc4_dw1_dev_group_018",
       "filename": "lc4_dw1_dev_group_018.json",
-      "group_hash": "sha256:38882baea10697cd4dce3dca4064e869ea558345c84314b7451dbde34bee1a2a",
+      "group_hash": "sha256:9e6803fd397fbb4c9ddbcecd64fca5ca9ff8cb35af5bf490fab56b62126ac075",
       "variant_hashes": {
         "surface": [
           "sha256:cd9b2d4d8756cf613415f1baa1f68b4fdf454ac5bcd02cbf2169ae52c0104e8d",
@@ -578,7 +578,7 @@
           "sha256:0375fa202d82673ba2d1d6161515894988d69df502a858f886cd19032dbe8152"
         ],
         "multi_turn": [
-          "sha256:ba72aa94432ad059b68e75334436df26fe50507d877b7c30a093b6c1887c2001",
+          "sha256:18b3cd0630e5d3cb370d318ee59eb4c034489813a7e4fa43572dba244904411f",
           "sha256:0d86d1a3be2c073f841b13fb2a0569715eea610a23a4f7567e4923bdbb931f91",
           "sha256:9eefc7ffd66641cb6aada5a1af85bb32c81b49a35bd8473ea1c13807aea47dbc"
         ]
@@ -596,7 +596,7 @@
       "group_index": 19,
       "group_id": "lc4_dw1_dev_group_019",
       "filename": "lc4_dw1_dev_group_019.json",
-      "group_hash": "sha256:4c25a7f202b6241616e0054a52a14f6e0a96e1c96eb5cb06d8f036ca8937f6f8",
+      "group_hash": "sha256:a2140d1daec16828765a5dfb41b202af0cf81cda757acf3b61ff06d4bf14975f",
       "variant_hashes": {
         "surface": [
           "sha256:c96913cba85596db60a2802ee53d8942e8f56a5aa615a2388853bfd852263940",
@@ -610,7 +610,7 @@
           "sha256:52b4345b7295b4e12e98d88069c69ac831c60be71ebb462bf4d778d0228a3a37"
         ],
         "multi_turn": [
-          "sha256:5e990ca250a4b547dde76feeb842a7514120099dc07f18444fc195144a7b4b4f",
+          "sha256:54299a8f5fad47c1b421c74985e02f7d14ef11658a6043b7e37d626707149c5d",
           "sha256:2ca15ce921aa30b2d42c50fdef1a7a6b2458a9cae16f14dd1b3b5b9461cc2e40",
           "sha256:9b2552822eb3058671ff8366d248d8ed824a72004c2b74d41a94daf1ad4f9583"
         ]
@@ -659,7 +659,7 @@
       "group_index": 21,
       "group_id": "lc4_dw1_dev_group_021",
       "filename": "lc4_dw1_dev_group_021.json",
-      "group_hash": "sha256:edb98b74f35eaf0d24864a1cd1ca4905d7042cdcbb550da1ebda3b176e909638",
+      "group_hash": "sha256:58272fdc8305c02024e06ee0fa3795473b1b5eddc3f8954a9b14da4cbf765544",
       "variant_hashes": {
         "surface": [
           "sha256:ad802a99201c3d11d4c6141be92f909bfe784a5f85bc2d3fe7c79f66c1415eff",
@@ -673,7 +673,7 @@
           "sha256:14f62a49f84e141bc8d489b6b013a914da603eb78762e22327cb57884c525381"
         ],
         "multi_turn": [
-          "sha256:9a314208d6bd3209207a1994448a4df5dcca4476de0d1afcc333820a9f6e8104",
+          "sha256:bf67717cc964928526b7e8eafc0feb695e3528c48bad47ed5c3191810f76b7ce",
           "sha256:3d707a7f6bfef4b7bc82f11567aff779594c7cdca36697733706199c1e03f4c4",
           "sha256:850dd59b27ed688e9468b150df4184c9e7984819c1ba317501922d31aaa018fe"
         ]
@@ -691,7 +691,7 @@
       "group_index": 22,
       "group_id": "lc4_dw1_dev_group_022",
       "filename": "lc4_dw1_dev_group_022.json",
-      "group_hash": "sha256:ed54b795e9df70e78e60fd70699d73ba09a97389c8437bb50e7d17e3820ea5c7",
+      "group_hash": "sha256:f62f90e7c76a6296f634d370920dc3ad33fc7bbf069a72176edaba6e57bbfc0b",
       "variant_hashes": {
         "surface": [
           "sha256:f06db43eff774bf0dee0edaced03de938a8759e081b7135e183cfdef87a1a093",
@@ -705,7 +705,7 @@
           "sha256:e57ba030535dbf973ddc5d9d010eafe1578873204b481e334f217946ecb39901"
         ],
         "multi_turn": [
-          "sha256:87327650292bbae62e83d83c99736520be89149d229776d21e774d23188988dd",
+          "sha256:904150d332a70d800dd3bc630f6e258cbae5e2d319a51c94c1eabd2d1c8ac997",
           "sha256:d0077321c66f9af4e92c338b0d70f05cebdf0a7c9acc9a8f55d0219ce0b19d2f",
           "sha256:be2105b37c50a2bb9f4f23ee7e5206f0c6d3891f0c24f4731adf7378b388f093"
         ]
@@ -722,7 +722,7 @@
       "group_index": 23,
       "group_id": "lc4_dw1_dev_group_023",
       "filename": "lc4_dw1_dev_group_023.json",
-      "group_hash": "sha256:ee1072dddc66539e7b1cf6a434e0a8d7b6d1cf35d9b5eabc1a1eb6d845a29c47",
+      "group_hash": "sha256:a2d14038f2c9f72dffbe3c5d7bcfee4e61a80bc5631205b181d9e164164554d9",
       "variant_hashes": {
         "surface": [
           "sha256:57619ade03ccfea19c5938e4ccff9a4c81388ea05ed7b8251ac7492cbd621a17",
@@ -736,7 +736,7 @@
           "sha256:ce3581d4220b17384fdddd1f4fad1607c78416174e2de5501f78ec21689e627c"
         ],
         "multi_turn": [
-          "sha256:11d71cfb0c4a7c335e93a5cec4aac2a53a999a6a5b769a77c274773749d59196",
+          "sha256:e7e9865bf38dd995f02894f7840a65d2ef23e710e85ca4c570358ec48d21051d",
           "sha256:c9aaade8487a25331fbba5d45b9fea3b408b230853079cf24948a24684fae0b6",
           "sha256:3bcc4fa0d4ee588d1ac88055249d2c0d667d74894cf89657b64f15f0cb2be0d9"
         ]
@@ -754,7 +754,7 @@
       "group_index": 24,
       "group_id": "lc4_dw1_dev_group_024",
       "filename": "lc4_dw1_dev_group_024.json",
-      "group_hash": "sha256:02bced0f76781a6032e65f17b07f2ba7e2d6d41058dcd50e28dbf7f67a980865",
+      "group_hash": "sha256:35f5dce6b71b7b2eefa93aa6f2e24ca2ac7a3ec508a798db1f4f90273e9e40c5",
       "variant_hashes": {
         "surface": [
           "sha256:8eea9d1e2413a1389cb788406b949c1504d4d1c757013347ce4dfe72230dfabd",
@@ -768,7 +768,7 @@
           "sha256:08e27bdcc6dfc37a96ca9456aaccc3e10d65554431be0b2ff17f8266a02a606d"
         ],
         "multi_turn": [
-          "sha256:8de1d0f0f9b3733c4165d6f2b9ded6b29c366f2fa5558b71066de5f2a1458bd0",
+          "sha256:b7c50a1e8f61b98e65bed6caa770ee5bf5a29ee025ea76c0b63d340a2d44cf60",
           "sha256:b0b3dbc904e5b8062170b68e457288a175e50c988c4ce4d2b7bf02a6291cde1e",
           "sha256:e17811a9d8291d89d660c192f9124e0e08812606e921489468fabfe6ef4230cd"
         ]
@@ -785,7 +785,7 @@
       "group_index": 25,
       "group_id": "lc4_dw1_dev_group_025",
       "filename": "lc4_dw1_dev_group_025.json",
-      "group_hash": "sha256:7c10eb9537f8998e48e88ba7f19c3a415dd1616d6084ea4d4329004c9ab3ac9f",
+      "group_hash": "sha256:ed4aaf4520686319b0ce5eb657bd61cb19c9a4789faaa14b3da6ef0f95affca9",
       "variant_hashes": {
         "surface": [
           "sha256:8fddda8d8b4eea26d0b11fc51d254752cdd89482f370f25b732d2ab23362935f",
@@ -799,7 +799,7 @@
           "sha256:072e915d969b43d992697f0e36fc649553f379e634c64545d9863cf295e0c664"
         ],
         "multi_turn": [
-          "sha256:33b90ae56980793666cd09fec2753c5eb41820108031d93bc0f3d4ea0272358b",
+          "sha256:e8f2b588493520374e4278bd52d232463a95f5269c88cbfc65cfb2d85378afe4",
           "sha256:a136d0be1cd4e4a3cb81977951f2b37ddd4880fe8ddddd56c6c4e6360c41b49b",
           "sha256:3fe8b54073d5f579416d110e50a81d4d23fb77ac1f96c5220e3b5c7156072348"
         ]
@@ -848,7 +848,7 @@
       "group_index": 27,
       "group_id": "lc4_dw1_dev_group_027",
       "filename": "lc4_dw1_dev_group_027.json",
-      "group_hash": "sha256:db8f676a4fae5ae7d9593b4eb08afd06dc5ce4a096ec778a308725d42f0bd11c",
+      "group_hash": "sha256:b688ef78d8be6d55b881873c342e7a4e5d91b43003b4123eba6776bba47dcf58",
       "variant_hashes": {
         "surface": [
           "sha256:78007d41f576909817760fdac269e2067db277fc177c6ebd1f0a6768f950ed63",
@@ -862,7 +862,7 @@
           "sha256:f09a409f766abf4c1c5b958d7c13f32f950e5e0da7403e16cd6bbab90076ef17"
         ],
         "multi_turn": [
-          "sha256:d46aa99612184fcdf2a759766b7c5aef2480af43cb6afc07cda13fc342718001",
+          "sha256:3a68fff1bea3e54490cc176638c33c02c4a226d71ec9e7da158085a014b704be",
           "sha256:bf2478936f06a0aff285678ceaee66fc1f9e5b16b1018097b550a27ab46fca76",
           "sha256:d5df8514e53aab1a502410acabfe85f05843cffb41015fce3114548769d277a3"
         ]
@@ -881,7 +881,7 @@
       "group_index": 28,
       "group_id": "lc4_dw1_dev_group_028",
       "filename": "lc4_dw1_dev_group_028.json",
-      "group_hash": "sha256:b4cfddbcda7fdd285d267edcdcc16b61f0e5b41a051938c7322d4aee28cf0e91",
+      "group_hash": "sha256:5e234bcddc7172cc6299925a1ab490ac0a23b19d8a40391ec4de0fa076b223b8",
       "variant_hashes": {
         "surface": [
           "sha256:8bf620194f45a4e6b30ddb0bac448f32459b392d613c2ca0fa8328ea0d2423b2",
@@ -895,7 +895,7 @@
           "sha256:867d28b347fa02a507896b164ef2669c0059ae281b04def1763b7e346dabab39"
         ],
         "multi_turn": [
-          "sha256:4f620da4f88c2fc4dcb7c500d80d181f9b0d8b2890ac4839dd27e26fc7b7173e",
+          "sha256:389171df3f6ba80c8581bf4ebb832aa9bcb0d7e55ca3606328f9801e7e4a3a62",
           "sha256:5b7c2b68f9fe96eaab49c1f7f184acb6cc3bf53ff2972669d81a96f44d13df9c",
           "sha256:da3c6304fa71e0fb623f66c7ae3169e09ae536f6a5f828c731903ab21ec54e35"
         ]
@@ -913,7 +913,7 @@
       "group_index": 29,
       "group_id": "lc4_dw1_dev_group_029",
       "filename": "lc4_dw1_dev_group_029.json",
-      "group_hash": "sha256:da0701c7c85eec23a652bc5b1098743f837d221b01158ba66b7f538db0e1115b",
+      "group_hash": "sha256:d2ae07634c863ad18a19380f5e073de6c0ba4dfb3850a8021fda4664d3099998",
       "variant_hashes": {
         "surface": [
           "sha256:4c45b090fa19fa82dee8f9eb7a63086642d5200024f8b0a21a448cac6172c373",
@@ -927,7 +927,7 @@
           "sha256:1db568b79387a0993ea56ad63e0f681932e6cc50448774fc43674f5efad1a197"
         ],
         "multi_turn": [
-          "sha256:1a5846fa6e3dddbedbaba0954bc048528450ee4f9d8acde9b651535c43c1ce7b",
+          "sha256:d8a8ed98d6ada338771f4b5fca1a0d284f51fe4f7448e6b49031d26657edab95",
           "sha256:cf0a3aea2225a06e89346bdf6ea20ea44327fb9aa28fa661225795497b0d6c54",
           "sha256:1e85ca4ec7fb9a8e742bf7763d75f8fa21d1cec84f494baf6993e83758cb3b08"
         ]
@@ -945,7 +945,7 @@
       "group_index": 30,
       "group_id": "lc4_dw1_dev_group_030",
       "filename": "lc4_dw1_dev_group_030.json",
-      "group_hash": "sha256:d474d90d89761293683487be404756f1bbbefeec824fb7ba906babe5c1862e8d",
+      "group_hash": "sha256:27b0f3e5b56106e5c9405ce83f298ce42bff73e3ea9498664d5c0ceaac26f2fd",
       "variant_hashes": {
         "surface": [
           "sha256:ecdea5029e81b4bee9389499c57fb6d9cfe351750c8e93bb4cb4ee92471a0698",
@@ -959,7 +959,7 @@
           "sha256:dbda8dc5d880396ef0772ff4372efb2b3e4c61bd224a0cb4da9efc2e28da7963"
         ],
         "multi_turn": [
-          "sha256:f04f7599fa8a5dbd042d2144b68ececd2ecd02bac9ab6d7f7e4a13668467bdd4",
+          "sha256:f3a387fdd82d615a5fa4f0ff874f1b77a04f6a6421118050e5048fa53cbca0ed",
           "sha256:0713fe5cfc1b73e47c091492f91452dcc656e2e8b54227d123c970e3bd491ec9",
           "sha256:9a20385afb05f2d53307a0a498f31fd5baf94bd05d44461102638ee94fa96911"
         ]
@@ -976,7 +976,7 @@
       "group_index": 31,
       "group_id": "lc4_dw1_dev_group_031",
       "filename": "lc4_dw1_dev_group_031.json",
-      "group_hash": "sha256:f7678c54d95a25a5e893bd72eef223cdfff113b26e5b497acaac440442fca9ce",
+      "group_hash": "sha256:0695ed5ce7866e7f48e2345896a8212944892408ffddec7159442b84c1ef7302",
       "variant_hashes": {
         "surface": [
           "sha256:4f95985a40b76d0d1eac7ddcea646dcb185a43bbee96347fe3aa73d886e9fbfd",
@@ -990,7 +990,7 @@
           "sha256:1be03355225475f85d89c7ad90688087e46392ee1b54479f57fa1e4dcd45050f"
         ],
         "multi_turn": [
-          "sha256:c126879398c7027ff1ad421780c3ca8c434986e8c8e205389ac8f09fd1db0636",
+          "sha256:0b344e1535b2a1db54541ffa5abd3bcef73aca0eba53570a7a7bdd169462f811",
           "sha256:83e7c6ac95d026f3f960beb473a0324a16e97f829f44a278c33617a4de34889e",
           "sha256:181a39f93bab97adb1c25b1dd984bea5d04717e53604ef0810114285055fda0f"
         ]
@@ -1041,7 +1041,7 @@
       "group_index": 33,
       "group_id": "lc4_dw1_dev_group_033",
       "filename": "lc4_dw1_dev_group_033.json",
-      "group_hash": "sha256:aa07cc147dbcc7eff1099579bd2ff7b6bc323ae436072b09ac984b135a7640dc",
+      "group_hash": "sha256:c28fd1f71aeed5bee37bd72eeac82094615348435809889b18f28a63d275097c",
       "variant_hashes": {
         "surface": [
           "sha256:737866f22f4b45c1e4e8b49efc1126352cc592e5d7febd2bf08d1ab619d14cdb",
@@ -1055,7 +1055,7 @@
           "sha256:b8fa44b38407b082e45c71f45b2222810762906fc1d1d7a1db2b7e2f936f09f1"
         ],
         "multi_turn": [
-          "sha256:d4805a949c7791914a8f47678260454b5525b39056ecc46138bea1e616b143b2",
+          "sha256:543e649ac0a6571206de32a9e8878350232aea6fe9d6fa0c4a883d91059e37ba",
           "sha256:57a2e3d07b82ae65995b23832ac5e9e3a1766c138f5a33bf895b8d305c16e9e0",
           "sha256:dde3b65493d18d232b3d9e0e58576231301b59366fdd743646e05f2fd9a1970d"
         ]
@@ -1072,7 +1072,7 @@
       "group_index": 34,
       "group_id": "lc4_dw1_dev_group_034",
       "filename": "lc4_dw1_dev_group_034.json",
-      "group_hash": "sha256:0c0e254374b435e6ca297e650d796222104a3b65f3ff528bfb4b51d39b51ddf0",
+      "group_hash": "sha256:094f71c8b78258bef7ea0e82c1942921d2ddbf2f62a7bc2fd27809844cd6b658",
       "variant_hashes": {
         "surface": [
           "sha256:d61f39e0f0fac2d117ac58e4b22d66520c1e5ab283b3de9084c2fe95329f20e3",
@@ -1086,7 +1086,7 @@
           "sha256:3cc9254d653aa46758648cfb62c06c2f6ff80a8bb7848b33455f519e3f77215a"
         ],
         "multi_turn": [
-          "sha256:d01b2afb56986474a9ba57ff8fe88b62e773614b396af4edfd5b69a373a267ff",
+          "sha256:289833b4cdd1cca6e7c3ab09029908d1e7ed52b25175ee44676778671df09b27",
           "sha256:bfbcdd38e180b3f898e93514343130ae43f902d5ff0774134b7d1133a57ce6fc",
           "sha256:2dc0a1fb8c94871890a8d2e307f7ed1850283ead0fe83fc63f3cd7af4c914e82"
         ]
@@ -1104,7 +1104,7 @@
       "group_index": 35,
       "group_id": "lc4_dw1_dev_group_035",
       "filename": "lc4_dw1_dev_group_035.json",
-      "group_hash": "sha256:31d10fee0bf03795f1e1e30072d5eb79f0d9d8c7a16aff5b4952ba7a216dafb7",
+      "group_hash": "sha256:2a31744332bd3613e29f858862cb4ecb75a85905012748fd740b7af6eff1b4c0",
       "variant_hashes": {
         "surface": [
           "sha256:8099cb65516e278e87acf6350d66cdb66ba42cfdd58ecbb4121fca20ded90333",
@@ -1118,7 +1118,7 @@
           "sha256:d0a01f53ab3f48fd24182266f875b95c4c510155094f5c06ae53d433147cf362"
         ],
         "multi_turn": [
-          "sha256:993fca69f5e6b69497bdf0840879f1d5ac57aa81f424f151916d7d14c720c083",
+          "sha256:ddc787bb4917a09d3ceba39c0c87e680cc34efd2091fef0ee936ad104adb87f6",
           "sha256:e99b64038710103ccea05140d60199d558b72ef3623c1cb3a02d1c672adaf1f6",
           "sha256:6fbfad4319e1370954401077e0cb490e8974a18f9ef26349edeec78c378b4d3c"
         ]
@@ -1136,7 +1136,7 @@
       "group_index": 36,
       "group_id": "lc4_dw1_dev_group_036",
       "filename": "lc4_dw1_dev_group_036.json",
-      "group_hash": "sha256:53c2b0b5917bcf4098e74c655abf3e7b1ca64d324ce1937d7174bcae7ff3341e",
+      "group_hash": "sha256:b6366e1ba44231c6744b667dd561cf7ec7db34974586c7bc6ab2f6adf333a1cc",
       "variant_hashes": {
         "surface": [
           "sha256:0345b0eb01ed7cc47a745cbb71ee7cb4ef0b44da9ae8e36f035ab54daa968c03",
@@ -1150,7 +1150,7 @@
           "sha256:92a67ea9087fbdb89588841772cc1f190599c5efa1836312aa21d99e351032a5"
         ],
         "multi_turn": [
-          "sha256:f98a5957bf4fb2fe58d09796ea1c164b7b199cc8d5e4cef837b5cad1c59f613f",
+          "sha256:f35c1a2981cac3a56a51a4d950a8322e5d195d7d5bea16e1856eb2834320b623",
           "sha256:eac4ad687176e95d272775a6273b699ad34b261a9dce851f54fa16ef5a48955d",
           "sha256:27c7d5f593045f7a92ca54f8bb90d47a1fb686d8388b3d6026406f5717c38b8c"
         ]
@@ -1167,7 +1167,7 @@
       "group_index": 37,
       "group_id": "lc4_dw1_dev_group_037",
       "filename": "lc4_dw1_dev_group_037.json",
-      "group_hash": "sha256:b7d3a5355462dfac7730b0cfd09d19fdfde2ef6403418ec33172ae7e9336e794",
+      "group_hash": "sha256:3fc6d95b553072168ba8e541ca4f3e5250b02c947a2446bf5119d0452e645e86",
       "variant_hashes": {
         "surface": [
           "sha256:7d5c46ed99ae50c3bdbc0d9b52f685643d2bb769af71faed1ff62a2a0cb96595",
@@ -1181,7 +1181,7 @@
           "sha256:7bb74d97620b5bfe8be3880bc30afc950e6c42f85b5307d7a5ff50033295e1c5"
         ],
         "multi_turn": [
-          "sha256:29a3dda55dce4ad581ea9fe561db6c513c7eac007fe512c3e25b73a6dd2e9e6a",
+          "sha256:b0c8379963563fc7c0dd30afe2f618be138b6df70dec78e8ce461e29e06e7bb0",
           "sha256:77bf785b7d7b2475a8aa53c246285798ae7a9bef694d3f12a6cce5d49dbf2186",
           "sha256:dca5fd37957efba2e1f43fdf4df099a5dfdb5b76a6f36e96b4d60ff486012e11"
         ]
@@ -1230,7 +1230,7 @@
       "group_index": 39,
       "group_id": "lc4_dw1_dev_group_039",
       "filename": "lc4_dw1_dev_group_039.json",
-      "group_hash": "sha256:25587a8b4d777a3335d07c2dd29fa67bae32f1e951c0ecf2aa534220fd843ad4",
+      "group_hash": "sha256:c25f073865db8bc71f13ef5632604bee4066b6078af519a5c3f16f9315312898",
       "variant_hashes": {
         "surface": [
           "sha256:b26970de90648c5026aa94fd4d48e39dc71a7ef989cca2a323bb94f73b4823fc",
@@ -1244,7 +1244,7 @@
           "sha256:42aed0f3b7e9d9ad36fa07a094fa76551aa11c52bb4d66149964ea59221da6b1"
         ],
         "multi_turn": [
-          "sha256:70fb9b1441869960e4b22ef044f018791c5ebeb531668591ae70d670f755ee27",
+          "sha256:df512eecfd30e613306a9de1b42d23407dad14fb05925c306fbb97adff1cab15",
           "sha256:ce9f7819d3ffd23ac432587c91ed06f1ddb29521ea8da55433813fec3d14e27b",
           "sha256:6e40f21673c1fb3313aa8dbf61cfbee74468004e5c057545785382a2dc13665f"
         ]
@@ -1262,7 +1262,7 @@
       "group_index": 40,
       "group_id": "lc4_dw1_dev_group_040",
       "filename": "lc4_dw1_dev_group_040.json",
-      "group_hash": "sha256:68eaa346d41a7d37a18ec9b5546d625e50b7ac82d9f40c6aa6b734f4621dd84b",
+      "group_hash": "sha256:9c31dd05b3de32cc1eb27f8db45137b060bf574026e5ef9ea60ed6b0bbe41e4e",
       "variant_hashes": {
         "surface": [
           "sha256:7dbf85394e9db46943c7cd6f77f02536cb3712674a30638e4e2e0e1eec2a1996",
@@ -1276,7 +1276,7 @@
           "sha256:dc8c2df26e3ac5a7d8066753e41537cf3e18e9144ca951cfb9afc0fde68a9c86"
         ],
         "multi_turn": [
-          "sha256:564c04c93eecf58d03906b86f514a1dbbbe8d569d58be864b2cc55ae57a787e0",
+          "sha256:f0c1f55f0bfd7711116a97420a4bd446adaace7262277631a864a075b3935016",
           "sha256:caede498e6e7c067c617b04db756bba98ad3e7386958a61820241ae4a4481443",
           "sha256:cbffd4dc0b15a217193da1c0ca9daf7e195587bfaf3ee5ae10363bb61dce5e84"
         ]
@@ -1293,7 +1293,7 @@
       "group_index": 41,
       "group_id": "lc4_dw1_dev_group_041",
       "filename": "lc4_dw1_dev_group_041.json",
-      "group_hash": "sha256:dd9a04554bc5184806851ec4d16a8a0447a1321565b7901b62894560a9f29bf7",
+      "group_hash": "sha256:13e73a02ecd9ee1cfc76dedf7980d4700ec6f70fb94c4bb072e88af78c1cb1b5",
       "variant_hashes": {
         "surface": [
           "sha256:acf4359f52114846329ac71aa501067f6106dc70033f51e54b901403257d51cf",
@@ -1307,7 +1307,7 @@
           "sha256:4e2022b7d72d6cbdbfdd2c1fb6a467cb8bc7312fa0f707292ad1d834834bf66c"
         ],
         "multi_turn": [
-          "sha256:971c13504404de2ee4cca57a2f4fa75a6483aefd988546e994c2c8e17b13539a",
+          "sha256:73c96b30bd1af2aa5c7c412831650db685786d74cce3844192a0fb8ef1f87b0d",
           "sha256:da23e7b28f2520a4f5b7abf0cf071eec6ca6cd0a69da016d0c619a9c6927d99f",
           "sha256:487daa881ab83150b3766a039648464eaa198ec012247cbd4c131f0b9e11d8a9"
         ]
@@ -1324,7 +1324,7 @@
       "group_index": 42,
       "group_id": "lc4_dw1_dev_group_042",
       "filename": "lc4_dw1_dev_group_042.json",
-      "group_hash": "sha256:7611b8e60aa5a5f1f228d9ebce681041999409c414acc6905ad04b785b0d9887",
+      "group_hash": "sha256:07465007edc4b08a6cc765b3edafc064b0de02750b1032ebffa5e4802d7644f8",
       "variant_hashes": {
         "surface": [
           "sha256:8ebaeecae33d9d49a3d3fcc5f81b057df3865fae159b1e407552ffb76812ae89",
@@ -1338,7 +1338,7 @@
           "sha256:a0f85b0d54e251882b667f8b61198a49bc2fc77c1b6c853dc112c1270dbf7980"
         ],
         "multi_turn": [
-          "sha256:324f2d50f71e3ef69e56279e4c88059146b4b762d5d10b2ad3b47ad66d2ce3c3",
+          "sha256:6ad16a8cd6164b6a1118f3f6fd40cc058a29fb6ac2920f363edb4c740eb36c37",
           "sha256:50527fab1f03f58cfae426ae75edb75871434c6c5195a63e0ec24f8738876ae9",
           "sha256:b2bc72c6b488b8d12c27887a8ddf9956eda951c6b57a47be0dae480e047237de"
         ]
@@ -1357,7 +1357,7 @@
       "group_index": 43,
       "group_id": "lc4_dw1_dev_group_043",
       "filename": "lc4_dw1_dev_group_043.json",
-      "group_hash": "sha256:e8dd3f75cfb505c96fa29bd4654d5b1e675986ebbd95575c61c80f5e4fce5cec",
+      "group_hash": "sha256:04010c25d00f6191ea63031cf0f89978b728e484a293f1b471e1c3b495b0e686",
       "variant_hashes": {
         "surface": [
           "sha256:77dce72071e318a811cc917f4130e65983431a929f40e6b7b3075b70fd5e68d0",
@@ -1371,7 +1371,7 @@
           "sha256:836779d19060d5a14c06f761d61c8adc74810a423b41bff96cf3f78db239ddc3"
         ],
         "multi_turn": [
-          "sha256:48c3e4e756b3a99c16c1d0018f9612e660940ecbc9bb192156ef1e5999341400",
+          "sha256:df71f9d949d8d82658e58b228e2955d27cc792e83aa06b8bd80e22fe5ad2df32",
           "sha256:abd7283ede149f8744ae4827ac6eeee25cafdd81698344e55cc714cd207d31ba",
           "sha256:556d159bf1db18968dbd0b697d8720e2007a5c127d624f84c93658efedeae62b"
         ]
@@ -1422,7 +1422,7 @@
       "group_index": 45,
       "group_id": "lc4_dw1_dev_group_045",
       "filename": "lc4_dw1_dev_group_045.json",
-      "group_hash": "sha256:fa4d04a1582d155eab64257aca72544e98622240c12b23a2827623f2543e71be",
+      "group_hash": "sha256:6cf7dbd85957f1a74a62c6f3e12ac65d9ea29544f69e3148d3bf69b9c684f544",
       "variant_hashes": {
         "surface": [
           "sha256:9ad6178a095a600ae44d04ca4628e54ce5b03751ce819300e76e8f780200ecc8",
@@ -1436,7 +1436,7 @@
           "sha256:d137bdd7586f8360c4777fe0e310ce5b6555c742a98a376ffce73641b6ce2b6c"
         ],
         "multi_turn": [
-          "sha256:7effb5e11aab6c8da4e3322641c0c71daac4cee198e0c5e8aacee61bbe646da0",
+          "sha256:97ea68d0046d2db0c0ff2615c55c4d6be9f282a6a57e732586159735804184e9",
           "sha256:d88ab0a9aaa3c2209238fd69e26fc5235c5b78f9816eeebfea5ab1444dd8e21f",
           "sha256:5f981c007d21384e855693f8992d437e5af059a8ed7acb008581dc170ac453bb"
         ]
@@ -1454,7 +1454,7 @@
       "group_index": 46,
       "group_id": "lc4_dw1_dev_group_046",
       "filename": "lc4_dw1_dev_group_046.json",
-      "group_hash": "sha256:60ffd90934e479b12238428ad902da3664089cc7bbbaa280d901074277ed2249",
+      "group_hash": "sha256:b3caa52fe764ecbb675791a5a1bcfe91b1253cc6876d212aca0bfe1d3395fa33",
       "variant_hashes": {
         "surface": [
           "sha256:814d126b36268c3e211aa819abb4ccf50ed35d617b4cb3fd61ec6f6b92bc4277",
@@ -1468,7 +1468,7 @@
           "sha256:bb798f854026fa714fcaa2d17289fd42cc6eb0ea6069e08779e4c881024be9a5"
         ],
         "multi_turn": [
-          "sha256:db26c50ca9ebcb87938fdba6e4a1ce790d869c5df2ffcc2f5b449004e0b119bb",
+          "sha256:7a81f343eb033d01b3415cf9c0a344d03e86773288ea21b6cc539863f45fe68e",
           "sha256:44b0fb587fda045a5f0784a7a210783e77a69fd9d96fb844188b163ca7e7348e",
           "sha256:2d20d378347004b407daecbe24a694146884e8ba1dc1cd178606b3bbca7da6fb"
         ]
@@ -1485,7 +1485,7 @@
       "group_index": 47,
       "group_id": "lc4_dw1_dev_group_047",
       "filename": "lc4_dw1_dev_group_047.json",
-      "group_hash": "sha256:1ef6a7b397d457b6d0d80d81ba1bd6b7c221a54ba5b6639f310e160b268d8afc",
+      "group_hash": "sha256:3cc49fa7837d66f9df274de8494be9a19ce42ba424d3c0107ea1b37f56455d4f",
       "variant_hashes": {
         "surface": [
           "sha256:c18f80305817ce5a28bd4de624a88cfe0d2974b14d3f9db664a0b41c45d25355",
@@ -1499,7 +1499,7 @@
           "sha256:916f389c5bec5120fcb0541a609ad4e8f0ed69b0e57d3a52f0c35f5a2ace3103"
         ],
         "multi_turn": [
-          "sha256:7d4d53ce5c434fa5be596586f9911a641309d251bfecb2b18d672e278b68da0d",
+          "sha256:1c0546109fb38a419ea1538760161223f35976c237bf736e23a4a124cf2a3bc7",
           "sha256:464c50e08c37ce90b730c2e11d05d371d7853d3866dc2ad23288d664c6addddf",
           "sha256:f109ed0c2c0c6105bdd84b736038e41249555fc9b537cf0a75ebc17af9c08c35"
         ]
@@ -1518,7 +1518,7 @@
       "group_index": 48,
       "group_id": "lc4_dw1_dev_group_048",
       "filename": "lc4_dw1_dev_group_048.json",
-      "group_hash": "sha256:20991117458de7420c92c3f221e11c04c10fd1dc9a55a1f8a657e96dfb15cefa",
+      "group_hash": "sha256:1310c93d09caa14fd6d9776e32b35cf47c8a3814d7ca9df34306b0fca25f710f",
       "variant_hashes": {
         "surface": [
           "sha256:b1158046e40d794bd3498f26abef11e23e76a0d9af2a2ea964de7bc69dcaabff",
@@ -1532,7 +1532,7 @@
           "sha256:95acc428a8cfcd8298664504a3dc41eae37911ae96cf0db67c69edc8124b8a90"
         ],
         "multi_turn": [
-          "sha256:fc5d874b69613a0f558ed34410e0198c9916d44b0faf37d2749adda20580a66a",
+          "sha256:29657c46b2d4c4c7b70710f7418cfc23de22e7d126ac604dbb210b71d7742e06",
           "sha256:b6564ed38fa34d558981b9fd9a614331b4bf4136e8991f605e58df44c2ca65bc",
           "sha256:23926d712922afc04b4c874aaeb82e9858c7376ccc1f5b12f5879e3d3a8ea46a"
         ]
@@ -1550,7 +1550,7 @@
       "group_index": 49,
       "group_id": "lc4_dw1_dev_group_049",
       "filename": "lc4_dw1_dev_group_049.json",
-      "group_hash": "sha256:10ed0110770f61cdadbd9ae8e952192c430346336494bd81a270e7cf47a4bd7f",
+      "group_hash": "sha256:c5fb12c0e790061b92ad29c7d052ebdf15c2f75337522c7dfbc8de52f2a3569c",
       "variant_hashes": {
         "surface": [
           "sha256:a6a6b34decb15084ae7c0b934a7c1f56ae2e7ba69b9507f2c2ca768118ba710e",
@@ -1564,7 +1564,7 @@
           "sha256:e59213d90ed79e50c3328aa782374571347de848d0a9d9ca4386aa1211fecb6a"
         ],
         "multi_turn": [
-          "sha256:9a45b286528a796ea4479ca9f2ce81299975f1fe394c71ee6f46054c21f0940e",
+          "sha256:78a1524d2499cb84dd13e5ef8e55b09ece0c0e12e24ae7e2dbe320335fbeb495",
           "sha256:6c6bb9f295c265335429fb37a95c45326d28ef52165d683cd2825eb4bf47d81a",
           "sha256:7b7958003246e2895347bb9b17a37f521c876cc6ec2f4b044eb9ea18a03fbfc9"
         ]
@@ -1612,7 +1612,7 @@
       "group_index": 51,
       "group_id": "lc4_dw1_dev_group_051",
       "filename": "lc4_dw1_dev_group_051.json",
-      "group_hash": "sha256:3a9d9510ada2a02e809482b2958b40cb420d1fdb6f9993854dfdfbfce5105b5a",
+      "group_hash": "sha256:86c02a6b573299120c3514af3fd0d039c247d97971327568af6837e0baf08c18",
       "variant_hashes": {
         "surface": [
           "sha256:0b4f1ab5f4c15329642f8ebb6e187713f49a46ed8769e56a9a3d37a8b65d8e8f",
@@ -1626,7 +1626,7 @@
           "sha256:f8595bc05e40af826d0a50d4bcc73634dfc0e5d2527d0eead5946e6a1013966f"
         ],
         "multi_turn": [
-          "sha256:3a2da31a8e8cbc702000302b46bd68eef7bd61a58a7fcf77020f3eb3a294b8d9",
+          "sha256:b20fed8caa33479e888114eced3537b66208b080b884e99dfce6627c671ba18b",
           "sha256:41808e379884a6071f87e73a9c57e85b9be05fb70914f12a9497ba45227c9c58",
           "sha256:889f298a8d597d6c02cd2f8c3bd09939eec7013d89f2f45621e3f71e05471e83"
         ]
@@ -1644,7 +1644,7 @@
       "group_index": 52,
       "group_id": "lc4_dw1_dev_group_052",
       "filename": "lc4_dw1_dev_group_052.json",
-      "group_hash": "sha256:3d74c7175b362c06184a60775bb08c016b4ea0b2c905314f1331012791852bb8",
+      "group_hash": "sha256:a333ce2d15ee1258176460d94e6628e5e199a59b27418ad89388fa10a1c4c7d1",
       "variant_hashes": {
         "surface": [
           "sha256:4c47285a684b5faea4c1f711e07dad14784206142520162329ebcaded0431a14",
@@ -1658,7 +1658,7 @@
           "sha256:c77056f0076dbffddff4ad47ff9f86c61959ab76d2ccf87fbab373f9b4a94ffe"
         ],
         "multi_turn": [
-          "sha256:fb4fb7d735e08981c75fb6f8e635e492735cc3408397b249f12e176d2f1dbad7",
+          "sha256:7e6671a017f8f7500212fab52fb1022f753c4a0b09572c10514369312402a5ce",
           "sha256:20d27a611b4d5fe32f30b7f104a7a9661bc4a7150b04c7e9b4a1b6d8fe9a7ca4",
           "sha256:f1cd3fbe91c5ff512b367b8485dce373ed84017489e3862edcc5d2a088be8954"
         ]
@@ -1675,7 +1675,7 @@
       "group_index": 53,
       "group_id": "lc4_dw1_dev_group_053",
       "filename": "lc4_dw1_dev_group_053.json",
-      "group_hash": "sha256:37709f42bfbe33ce5f998bfdcad30d4444d559d700bbc92f97f975130abbcee3",
+      "group_hash": "sha256:0640fcd3f4f6ad5ceab72b6b2601250fdc07e6d73cd9fa42d212325d3c7a9eda",
       "variant_hashes": {
         "surface": [
           "sha256:cf42f08f1d97863129394abd1636c116f6d61bd659a5e7044ce77da8249e65b1",
@@ -1689,7 +1689,7 @@
           "sha256:082ab2d1271f5919d4ea8687e29f177a2f812a2f48b3ccfa32252862a85b8081"
         ],
         "multi_turn": [
-          "sha256:305f5898bb1229f82b344bb00b3e72813a7e35eb0774a4e4ac6f55a1d4a79a01",
+          "sha256:72c8d5d4d0474de5224c3ef11d5172b11092a130584a86d439c9f55a1a9fb73c",
           "sha256:50112468683def8e55ea6ed227ae26928b90c1cc54b1e4b2033a83c03cf923ee",
           "sha256:a885759bb23959b24f202ad41939665a2c17f223003ac8f3682b4bc21453b1d6"
         ]
@@ -1707,7 +1707,7 @@
       "group_index": 54,
       "group_id": "lc4_dw1_dev_group_054",
       "filename": "lc4_dw1_dev_group_054.json",
-      "group_hash": "sha256:0ec2f07812418e55b66d381bbbeb6fe3917461a4fa3734b96c47a0e6e4a5fab0",
+      "group_hash": "sha256:97f6d333f3827be6f87a33be085c6578e2507f1c0d2233f0697e3c1989db620a",
       "variant_hashes": {
         "surface": [
           "sha256:f2af9ee4334c61f815e9600412f8327393bd09222bbf3936145b70ca086bc4d6",
@@ -1721,7 +1721,7 @@
           "sha256:90dbf8c178c7fef51225e45a354a811ca7d3cdad3e8330c23a48caae69b8d67b"
         ],
         "multi_turn": [
-          "sha256:8fd7bb9b471122f789cc7c16f52b117db8dd992cca0cdbd0d912cb72cab4310a",
+          "sha256:9f46c458355d99b893826ca0a91d102be2d201331aaf28405a5283bdbf37228f",
           "sha256:6bb84a91156523d4db46419a4871df3e219cfb1a6c12950374fe7a0b4bc6f58d",
           "sha256:9a5105f2b2ce8842db3399bec72c8e2ae07bef1c2adedb833b65ff41abd882c3"
         ]
@@ -1738,7 +1738,7 @@
       "group_index": 55,
       "group_id": "lc4_dw1_dev_group_055",
       "filename": "lc4_dw1_dev_group_055.json",
-      "group_hash": "sha256:0ca5dbc9f5386d9bca3d1af1c7fe51792010726f74e353162a1298da820ddb49",
+      "group_hash": "sha256:49075591e2073b7296c5cc5d76688a7043beba37c1214606048834d272defe22",
       "variant_hashes": {
         "surface": [
           "sha256:29b941756ce6c81a2a1fb0e88d135beafe174da68c6ff89f4c1f23017b27b660",
@@ -1752,7 +1752,7 @@
           "sha256:b053df0af670f73c4742bc87d08f769095cdac912dcd5cc28519fc10eca3c996"
         ],
         "multi_turn": [
-          "sha256:9c411c3ef076ceb1bceae28ea8d664fe79c710f1e9b90c7922234d9032f3a918",
+          "sha256:4f3099d25f4b7ea8f69cf3c80bcf2124ef114527eae22d338f7407b6c3476815",
           "sha256:18b04c1224e0961336f1893f42f5321df55b220987df8660270717599a5d5b4e",
           "sha256:eadd4b1c6a1ca66b0ce0f7c4976a78175abcb0879b25b96006223f83393f29b2"
         ]
@@ -1801,7 +1801,7 @@
       "group_index": 57,
       "group_id": "lc4_dw1_dev_group_057",
       "filename": "lc4_dw1_dev_group_057.json",
-      "group_hash": "sha256:3ea0d521b1915bbfe73914938764171830554258fb4d41a0d09c5e026fdaef6d",
+      "group_hash": "sha256:45226603ee1431f0cee4abb4c3150574437dbf8d62e78ced2c28026dc3f24736",
       "variant_hashes": {
         "surface": [
           "sha256:14f1243046d65954bc39fbcc4b75684b5b7a213eb59731b68bade92a0810b0d4",
@@ -1815,7 +1815,7 @@
           "sha256:2ab302c66dd819fcc842ebdb8a9549acc660a3da4fd3fc8f70ead21e7f49cdaa"
         ],
         "multi_turn": [
-          "sha256:ff04f85ea8f57452cc8c8bbe9eb8edde5a61923c7356b5f68229ac9272de5063",
+          "sha256:f4d1f37586b6a23a10f4027c7253040f8aa765aae7b70803dc94e6d38a025288",
           "sha256:d7eddcc9d36ed20e9617df100f4649d61ae8737ce65e6f159f12cd4c2e5cb557",
           "sha256:ed4f9159a612d39cf20324cf6bd82555d7be5db25f7d5c2b96fbabcd17bed7da"
         ]
@@ -1832,7 +1832,7 @@
       "group_index": 58,
       "group_id": "lc4_dw1_dev_group_058",
       "filename": "lc4_dw1_dev_group_058.json",
-      "group_hash": "sha256:9787085d53f03e83d535d931d500aef7ab9706b97a19f8e66f70671641cbe667",
+      "group_hash": "sha256:6ec0e38c3dee2da6d4eb89242fdd4f628a328475d8b09d09c8a03682a5171474",
       "variant_hashes": {
         "surface": [
           "sha256:7f116eb3cd26b8f551f50c8f3cd22773773339c9f61a100e45193e30b499dfaf",
@@ -1846,7 +1846,7 @@
           "sha256:bcbe3d469d554de4500aa983382d49b69caa528eb80601aca048134d47849bc2"
         ],
         "multi_turn": [
-          "sha256:69b0fc1022e38a98c7316af570a445529dde0275d5fad908f17384dbcd0d8ae7",
+          "sha256:3eca9c43d6fabc0ac9bd9fc0c13814cf4c4fff2a7dd171efd9891725c03d3318",
           "sha256:08dded78bbe054533d8f85127bdeda2d3a28e19d5ce055dde1392d7846912037",
           "sha256:5180a279cb238ccd7566440b5f0100322d17f4f6807e5447fa88e904b25f617b"
         ]
@@ -1865,7 +1865,7 @@
       "group_index": 59,
       "group_id": "lc4_dw1_dev_group_059",
       "filename": "lc4_dw1_dev_group_059.json",
-      "group_hash": "sha256:65928c142950540c920554ee846c5cac3692038d523d9c4863313a491513ccae",
+      "group_hash": "sha256:048d299c1c2e0a9c6e796f4b49dcad5f3b85fd87a6ae887f0b18e9c3f61139fb",
       "variant_hashes": {
         "surface": [
           "sha256:e6ca64a06a91994fd5c1766801f952b461e7a813383efb9ebddfd870542081a9",
@@ -1879,7 +1879,7 @@
           "sha256:acce54ab4c65a2af88b4a85fa0ac7560285a33fdabb70dcec64a0d9b8e4cf9bd"
         ],
         "multi_turn": [
-          "sha256:17efc78cf0586d9f2fa1357257f2fb666faf7ed73de6e9ecf446ec6bbf98fac8",
+          "sha256:a0f22b0d7385b7838dca6767622387159b16ddc76ada1227e0a88cc2982102fc",
           "sha256:6b3c520dff179eb6b502884b3262bd2e44804fce5cc6c48ba3b9f0b147c6bec1",
           "sha256:cf0b8dc5ed17eeffbcc4f9d8312a48a34c0db0a2be92a65e029f11099488fe34"
         ]
@@ -1898,7 +1898,7 @@
       "group_index": 60,
       "group_id": "lc4_dw1_dev_group_060",
       "filename": "lc4_dw1_dev_group_060.json",
-      "group_hash": "sha256:23ce0294f46b419fee896336235c835bc07f2058a620f3f4e5a7b1bc6887ac97",
+      "group_hash": "sha256:3b74ccab206493d74fe2907fe4a51074efac1ec011ecb7a1ee9f7c0d8746b656",
       "variant_hashes": {
         "surface": [
           "sha256:e98598be9bd63928db76965ec4a4022f2d28b0856745ee8ff8554a01da4cfad1",
@@ -1912,7 +1912,7 @@
           "sha256:6b49267b1a97e53765b4971d16adfd96bd4ec7af0dedcbc897f1b9b829b9fb59"
         ],
         "multi_turn": [
-          "sha256:ff1860399444f653a5080a9210e702973cf2984373c64106d5027273cd33ab3a",
+          "sha256:2d35aafb325ad00a18e1def769a4e6d5c908d8d06097ef3a9d765e7b029e19ed",
           "sha256:b45e934bc140cee06e8594d6660e643c2c23d2fb544d4517a8a1626d8153e30f",
           "sha256:1229ce3f78da7d9e566ebeb848029296fe864a021bb7c625da294d52691e4a06"
         ]
@@ -1930,7 +1930,7 @@
       "group_index": 61,
       "group_id": "lc4_dw1_dev_group_061",
       "filename": "lc4_dw1_dev_group_061.json",
-      "group_hash": "sha256:c566d0ed501b457974405019a9526f9dea255d55bfcad3396756940ba734220a",
+      "group_hash": "sha256:cf04b2cd181d882a7de2d0428a451925a7c4094d18729d1c4af1d99e4795faa2",
       "variant_hashes": {
         "surface": [
           "sha256:8392baa24b4fab33648e351376571355f578e30bc8718ad0797c29a71075fd90",
@@ -1944,7 +1944,7 @@
           "sha256:ee1b33658285d235a88ba3ddd74897d2094e1c02730b9919c562caf1ce0c2469"
         ],
         "multi_turn": [
-          "sha256:d1336ad9c503b50df3c0ea21d98ba949ddbbcde08fde6dbd3d7eb2dfa7e978fa",
+          "sha256:f337aad2400abb3949bf40e370040042764c102c6334f4c75280b687ba5d10f4",
           "sha256:6f4578b3cdf314eae52d599aa96ad9d20375e05d6a80e6cd15e38b1c0f260b18",
           "sha256:862d519806911dd3327f44d9e98d911e6462444b0d5e6a212c2cdded4e36b1e0"
         ]
@@ -1993,7 +1993,7 @@
       "group_index": 63,
       "group_id": "lc4_dw1_dev_group_063",
       "filename": "lc4_dw1_dev_group_063.json",
-      "group_hash": "sha256:f947c7da76766493462748bc5417b68c80c9dd7810be71794cf9e2ba1bcc0b20",
+      "group_hash": "sha256:dad0f2866471b6f0244250d8f91edd809d717c759e7adf9660374a62404aac45",
       "variant_hashes": {
         "surface": [
           "sha256:9a4e85505969ca2e710c55cdacf11d9edfe10842d44fe25b0de29ac8d137ef18",
@@ -2007,7 +2007,7 @@
           "sha256:97824d124187656382f71b87be427ae7daea9468d12e5f484f7a8f40c3fb0e78"
         ],
         "multi_turn": [
-          "sha256:e1ef9e6e0685b5a50c1157bbcf80ca860c60262bfaa054a07d0c5c1678925b0d",
+          "sha256:b9b5c0135d333181b5e9e03b5648dda4dedd35890051b0a6287a5ab6c54105b1",
           "sha256:a064a8a48b4b6bf99f10239fe6d097a653d507853d826ff43c7c4f7f5aa55a1a",
           "sha256:71af8a60353d288720befa3c12ff0daea8efd6d624f90a35c90d521c7ace4582"
         ]
@@ -2026,7 +2026,7 @@
       "group_index": 64,
       "group_id": "lc4_dw1_dev_group_064",
       "filename": "lc4_dw1_dev_group_064.json",
-      "group_hash": "sha256:7a487c7eb4e02777d906d21ec3d540cac80d0b264ae8eb0cc15ac8c31da51952",
+      "group_hash": "sha256:bbf4931e1d935fd4b7fbb6f0ec010a2647550918b2035d940a503e2ffe349a45",
       "variant_hashes": {
         "surface": [
           "sha256:b9d8d75d30ea79fc93336f667fcefc0a33efb8668e938b6df3e0fc36661ce441",
@@ -2040,7 +2040,7 @@
           "sha256:d8645fa4d4ef23f6bf74be160710a3a3c4c7a352da6af3662313686e57a39851"
         ],
         "multi_turn": [
-          "sha256:cfb4c863201ee0009129574ea22adbc14e2efcdb929397c3aebe9c8cfd4326d5",
+          "sha256:4fcef2ac7c274531d4a1a4c58d2f95b0c6d55efd4acb34369f5bfc7751df4f9d",
           "sha256:74ff1bb5e65fe77c8badd715cceecefc3e36509e07f02af789d27f6c18f0d378",
           "sha256:6cbe9a04ca9adca9c56728fbd2b5c52ebbd633a82455e2834176e136341c2f39"
         ]

@@ -1,7 +1,7 @@
 {
   "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_048",
-  "group_hash": "sha256:20991117458de7420c92c3f221e11c04c10fd1dc9a55a1f8a657e96dfb15cefa",
+  "group_hash": "sha256:1310c93d09caa14fd6d9776e32b35cf47c8a3814d7ca9df34306b0fca25f710f",
   "variant_hashes": {
     "surface": [
       "sha256:b1158046e40d794bd3498f26abef11e23e76a0d9af2a2ea964de7bc69dcaabff",
@@ -15,7 +15,7 @@
       "sha256:95acc428a8cfcd8298664504a3dc41eae37911ae96cf0db67c69edc8124b8a90"
     ],
     "multi_turn": [
-      "sha256:fc5d874b69613a0f558ed34410e0198c9916d44b0faf37d2749adda20580a66a",
+      "sha256:29657c46b2d4c4c7b70710f7418cfc23de22e7d126ac604dbb210b71d7742e06",
       "sha256:b6564ed38fa34d558981b9fd9a614331b4bf4136e8991f605e58df44c2ca65bc",
       "sha256:23926d712922afc04b4c874aaeb82e9858c7376ccc1f5b12f5879e3d3a8ea46a"
     ]
@@ -999,7 +999,7 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_048",
-      "description": "resize:unspecified:clarification:plain - Can you make Margaret Thompson's appointment with Dr Shera longer? Change it to ",
+      "description": "resize:exact:clarification:plain - Can you make Margaret Thompson's appointment with Dr Shera longer? Change it to ",
       "dialogue_turns": [
         {
           "turn": 1,
@@ -1014,12 +1014,14 @@
       "clinic_clock": "2026-07-14T09:00:00+10:00",
       "intended_action": "resize",
       "action_semantics": "intended",
-      "temporal_relation": "unspecified",
-      "earliest_time": null,
-      "latest_time": null,
+      "temporal_relation": "exact",
+      "earliest_time": "15:00",
+      "latest_time": "15:00",
       "normalized_values": {
         "appointment_date": "2026-07-15",
-        "duration_minutes": 15
+        "duration_minutes": 30,
+        "earliest_time": "15:00",
+        "latest_time": "15:00"
       },
       "source_spans": {
         "patient": [
@@ -1052,6 +1054,22 @@
             "text": "3pm"
           }
         ],
+        "earliest_time": [
+          {
+            "turn_index": 1,
+            "start": 36,
+            "end": 39,
+            "text": "3pm"
+          }
+        ],
+        "latest_time": [
+          {
+            "turn_index": 1,
+            "start": 36,
+            "end": 39,
+            "text": "3pm"
+          }
+        ],
         "duration_minutes": [
           {
             "turn_index": 1,
@@ -1069,14 +1087,14 @@
           }
         ]
       },
-      "duration_minutes": 15,
+      "duration_minutes": 30,
       "practitioner_semantics": "exact",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
       "duration_semantics": "exact",
       "diary_state": "same_day_distinct",
-      "entity_state": "mismatched",
+      "entity_state": "exact",
       "dialogue_form": "clarification",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1090,21 +1108,23 @@
       },
       "expected_outcome_kind": "appointment_resized",
       "expected_tool_sequence": [
-        "request_clarification"
+        "search_patients",
+        "update_appointment"
       ],
       "expected_appointment_deltas": [
         {
           "appointment_id": "apt-001",
+          "change_type": "resized",
           "patient_id": "p-001",
           "practitioner_id": "pr-001",
           "date": "2026-07-15",
-          "change_type": "resized",
-          "new_duration_minutes": 15
+          "start_time": "15:00",
+          "duration_minutes": 30
         }
       ],
       "expected_audit_deltas": [
         {
-          "change_type": "resize_requested",
+          "change_type": "resized",
           "appointment_id": "apt-001",
           "count": 1
         }
@@ -1114,14 +1134,9 @@
         "mutate_diary_direct",
         "override_confirmation"
       ],
-      "expected_clarification": "Please clarify: which time works?",
-      "clarification_choices": [
-        "10am",
-        "2pm",
-        "3pm",
-        "4pm"
-      ],
-      "variant_hash": "sha256:fc5d874b69613a0f558ed34410e0198c9916d44b0faf37d2749adda20580a66a"
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:29657c46b2d4c4c7b70710f7418cfc23de22e7d126ac604dbb210b71d7742e06"
     },
     {
       "spec_version": "lc1.v1",

@@ -1,7 +1,7 @@
 {
   "schema_version": "lc4.scale_corpus.v2",
   "group_id": "lc4_dw1_dev_group_057",
-  "group_hash": "sha256:3ea0d521b1915bbfe73914938764171830554258fb4d41a0d09c5e026fdaef6d",
+  "group_hash": "sha256:45226603ee1431f0cee4abb4c3150574437dbf8d62e78ced2c28026dc3f24736",
   "variant_hashes": {
     "surface": [
       "sha256:14f1243046d65954bc39fbcc4b75684b5b7a213eb59731b68bade92a0810b0d4",
@@ -15,7 +15,7 @@
       "sha256:2ab302c66dd819fcc842ebdb8a9549acc660a3da4fd3fc8f70ead21e7f49cdaa"
     ],
     "multi_turn": [
-      "sha256:ff04f85ea8f57452cc8c8bbe9eb8edde5a61923c7356b5f68229ac9272de5063",
+      "sha256:f4d1f37586b6a23a10f4027c7253040f8aa765aae7b70803dc94e6d38a025288",
       "sha256:d7eddcc9d36ed20e9617df100f4649d61ae8737ce65e6f159f12cd4c2e5cb557",
       "sha256:ed4f9159a612d39cf20324cf6bd82555d7be5db25f7d5c2b96fbabcd17bed7da"
     ]
@@ -1112,7 +1112,7 @@
       "provenance": "silver",
       "adjudication": "pending",
       "family": "lc4_dw1_dev_group_057",
-      "description": "cancel:not_after:clarification:plain - I need to cancel an appointment. It's Margaret Thompson with Dr Shera tomorrow a",
+      "description": "cancel:exact:clarification:plain - I need to cancel an appointment. It's Margaret Thompson with Dr Shera tomorrow a",
       "dialogue_turns": [
         {
           "turn": 1,
@@ -1127,13 +1127,13 @@
       "clinic_clock": "2026-07-14T09:00:00+10:00",
       "intended_action": "cancel",
       "action_semantics": "intended",
-      "temporal_relation": "not_after",
-      "earliest_time": null,
-      "latest_time": "17:00",
+      "temporal_relation": "exact",
+      "earliest_time": "15:00",
+      "latest_time": "15:00",
       "normalized_values": {
         "appointment_date": "2026-07-15",
-        "duration_minutes": 15,
-        "latest_time": "17:00"
+        "earliest_time": "15:00",
+        "latest_time": "15:00"
       },
       "source_spans": {
         "patient": [
@@ -1160,12 +1160,12 @@
             "text": "3pm"
           }
         ],
-        "appointment_date": [
+        "earliest_time": [
           {
             "turn_index": 1,
-            "start": 37,
-            "end": 45,
-            "text": "tomorrow"
+            "start": 49,
+            "end": 52,
+            "text": "3pm"
           }
         ],
         "latest_time": [
@@ -1175,16 +1175,24 @@
             "end": 52,
             "text": "3pm"
           }
+        ],
+        "appointment_date": [
+          {
+            "turn_index": 1,
+            "start": 37,
+            "end": 45,
+            "text": "tomorrow"
+          }
         ]
       },
-      "duration_minutes": 15,
+      "duration_minutes": null,
       "practitioner_semantics": "exact",
       "patient_semantics": "exact",
       "location_semantics": "omitted",
       "appointment_type_semantics": "omitted",
-      "duration_semantics": "exact",
+      "duration_semantics": "omitted",
       "diary_state": "exact_duplicate",
-      "entity_state": "omitted",
+      "entity_state": "exact",
       "dialogue_form": "clarification",
       "language_form": "plain",
       "initial_diary_state": {
@@ -1198,21 +1206,23 @@
       },
       "expected_outcome_kind": "appointment_cancelled",
       "expected_tool_sequence": [
-        "request_clarification"
+        "search_patients",
+        "update_appointment"
       ],
       "expected_appointment_deltas": [
         {
           "appointment_id": "apt-001",
+          "change_type": "cancelled",
           "patient_id": "p-001",
           "practitioner_id": "pr-001",
           "date": "2026-07-15",
-          "change_type": "cancelled",
-          "start_time": "15:00"
+          "start_time": "15:00",
+          "duration_minutes": 15
         }
       ],
       "expected_audit_deltas": [
         {
-          "change_type": "cancel_requested",
+          "change_type": "cancelled",
           "appointment_id": "apt-001",
           "count": 1
         }
@@ -1224,14 +1234,9 @@
         "mutate_diary_direct",
         "override_confirmation"
       ],
-      "expected_clarification": "Please clarify: which time works?",
-      "clarification_choices": [
-        "10am",
-        "2pm",
-        "3pm",
-        "4pm"
-      ],
-      "variant_hash": "sha256:ff04f85ea8f57452cc8c8bbe9eb8edde5a61923c7356b5f68229ac9272de5063"
+      "expected_clarification": null,
+      "clarification_choices": [],
+      "variant_hash": "sha256:f4d1f37586b6a23a10f4027c7253040f8aa765aae7b70803dc94e6d38a025288"
     },
     {
       "spec_version": "lc1.v1",

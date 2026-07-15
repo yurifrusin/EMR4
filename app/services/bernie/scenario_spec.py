@@ -119,7 +119,18 @@ class ReceptionScenarioSpec(BaseModel):
     ]
 
     initial_diary_state: dict[str, Any]
-    expected_outcome_kind: str = Field(min_length=1)
+    # Required but nullable: explicit null means deterministic no-outcome.
+    # With no default, omission remains a validation error.
+    expected_outcome_kind: str | None = Field(...)
+
+    @field_validator("expected_outcome_kind")
+    @classmethod
+    def validate_expected_outcome_kind(cls, value: str | None) -> str | None:
+        if value is not None and not value:
+            raise ValueError(
+                "expected_outcome_kind must be non-empty when not null"
+            )
+        return value
     expected_tool_sequence: list[str]
     expected_appointment_deltas: list[dict[str, Any]]
     expected_audit_deltas: list[dict[str, Any]]

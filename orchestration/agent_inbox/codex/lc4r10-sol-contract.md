@@ -38,9 +38,11 @@ Resolved-clarification action populations:
 - resize: 14, `e49785ce6f8922e5`;
 - cancel: 13, `830386f883de7fd0`.
 
-Of those 53, 20 have an action-specific deterministic outcome and 33 are
-fail-closed under the existing diary policy. Their hashes are respectively
-`0c0d5ac78c729754` and `5aeb6947a8105867`.
+Of those 53, the pre-policy profile contained 20 action outcomes and 33
+fail-closed outcomes. Applying the separately frozen T1-backed create-policy
+correction moves the selected `same_day_distinct` and terminal-history
+dialogues into the action-outcome population, so the accepted post-correction
+split is 22 (`e9b8e74b01d3ffc6`) and 31 (`73229d3e6f4a355c`).
 
 ## Canonical decisions
 

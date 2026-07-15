@@ -38,6 +38,7 @@ from app.services.bernie.scale_corpus import (
     TOTAL_TRAJECTORIES,
     TOTAL_INDIVIDUAL_RECORDS,
     GAP_PRIORITY_MINIMUM,
+    LC4R10_RESOLVED_CLARIFICATION_IDS,
     ALL_ACTIONS,
     ALL_TEMPORAL_RELATIONS,
     ALL_DIARY_STATES,
@@ -979,25 +980,26 @@ class TestReadOnlyAudit:
                     drift_count += 1
         assert drift_count == 0, f"{drift_count} variants have invariant drift"
 
-    def test_zero_entity_mismatch(self) -> None:
-        """Entity semantics in every variant agree with group spec."""
+    def test_entity_mismatch_is_lc4r10_resolved_dialogue_only(self) -> None:
+        """Only the frozen resolved dialogues may override group semantics."""
         loader = DevelopmentOnlyLoader(_FIXTURE_DIR)
         corpus = loader.load_all()
-        mismatches = 0
+        mismatches: set[str] = set()
         for g in corpus.groups:
             g_map = g.spec.entity_semantics_map
             for v in g.all_variants:
                 if v.patient_semantics != g_map.get("patient", "exact"):
-                    mismatches += 1
+                    mismatches.add(v.scenario_id)
                 elif v.practitioner_semantics != g_map.get("practitioner", "exact"):
-                    mismatches += 1
+                    mismatches.add(v.scenario_id)
                 elif v.location_semantics != g.spec.location_semantics:
-                    mismatches += 1
+                    mismatches.add(v.scenario_id)
                 elif v.appointment_type_semantics != g.spec.appointment_type_semantics:
-                    mismatches += 1
+                    mismatches.add(v.scenario_id)
                 elif v.duration_semantics != g.spec.duration_semantics:
-                    mismatches += 1
-        assert mismatches == 0, f"{mismatches} entity-semantic mismatches"
+                    mismatches.add(v.scenario_id)
+        assert len(mismatches) == 30
+        assert mismatches <= set(LC4R10_RESOLVED_CLARIFICATION_IDS)
 
     def test_all_source_spans_match_utterance(self) -> None:
         """Every source span accurately references dialogue turn text."""
