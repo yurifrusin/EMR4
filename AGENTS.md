@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V4D2 accepted; prepare a separately frozen LC4V4D3 policy/state-join tranche |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v4d2-sol-acceptance.md` |
-| Current result | LC4V4 remains `certification_fail` and holdouts v1-v4 remain sealed. D2 audited three internally contradictory D1 oracle rows and quarantined them without rewriting frozen evidence. All 20 valid D1 parser targets now close; current development view is 3 authoring-invalid, 0 parser gaps, 20 policy-contract gaps, and 37 supported passes over 114 valid repeat observations with zero variance. Gemini returned `DECISION: pass` on exact recovered report head `13d95c18` |
-| Next implementation | After a fresh receipt, freeze LC4V4D3 over the exact current 20 policy-contract cases. Separate clarification/tool/authority policy from explicit diary state joins, preserve the five mismatched joins as context-dependent, and authorize only bounded policy/replay changes supported by ordinary development evidence. Do not use further utterance-parser repair, inspect/rerun holdouts v1-v4, or open T3/provider/write surfaces |
+| Active product track | LC4V4D3 diagnostic decision boundary over the exact 20 policy/state-join cases |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v4d3-sol-diagnostic-contract.md` and `docs/bernie-lc4v4d3-policy-decision-surface.md` |
+| Current result | LC4V4D2 is accepted and published at aligned ref `52bca079`. D3 partitions the remaining 20 policy gaps (selection hash `d3c6618c...`) into 14 narrow corrections and six material contract conflicts: one practitioner-less create expectation and five cases that mix utterance semantics with diary-state disagreement. A pre-plan broad search exposed generic lines from a protected support module; it is documented, supplies no evidence, and grants no reuse authority |
+| Next implementation | Paused for Yuri's required material clarification-policy/product decision. Sol recommends Option A: omitted practitioner clarifies, diary conflicts use a separate state relation, and unsafe bypass demands refuse before tools. After approval, freeze a separate D3 implementation contract, use one bounded Flash lane plus Gemini veto, and keep parser, holdouts, T3/providers, and live/write authority closed |
 
 LC4V4 provenance: the frozen pre-content records remain
 `lc4v4q1-sol-contract.md`, `lc4v4q1-sol-recovery-amendment.md`,
