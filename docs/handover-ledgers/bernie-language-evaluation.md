@@ -107,6 +107,14 @@ Gemini independently returned `DECISION: pass` on exact recovered report head
 `bd51caf0`. The exact six incompatible D1 expectations remain frozen and are
 represented only as explicit versioned overlay differences.
 
+LC4V4D5 then audited explicit Option A over all 60 ordinary D1 probes. It
+retains 240 complete observations with zero variance and classifies exactly
+`35/20/1/3/1`: 35 legacy-equivalent, 20 accepted D4 changes, one benign
+exact-duplicate relation, three missing-mutation-delta blockers, and one resize
+target-conflict-plus-delta blocker. All 27 gates pass; report hash is
+`sha256:e2c461ee3b1821c94574b33693efa88d21b99ecf9a95b1ac723b24a933c50564`.
+Gemini returned `DECISION: pass` on exact head `4fba7408`. D5 is diagnostic only.
+
 ## Next safe sequence
 
 1. Keep holdouts v1, v2, v3, and v4 sealed; use only committed aggregate evidence

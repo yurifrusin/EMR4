@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V4D5 development-wide Option A adoption-audit contract frozen; diagnostic implementation pending |
-| Active acceptance/plan | `orchestration/agent_inbox/codex/lc4v4d5-sol-contract.md`, with D4 acceptance retained at `orchestration/agent_inbox/codex/lc4v4d4-sol-acceptance.md` |
-| Current result | D4 remains accepted. The frozen D5 pre-plan baseline finds 35 exact legacy/Option-A equivalences, 20 accepted D4 changes, and five additional differences across all 60 ordinary probes, with zero variance and zero forbidden observations. One new difference is an expected exact-duplicate relation; four are supported safe-action adoption blockers involving missing mutation deltas, with resize also misclassifying its target duration as a diary conflict. No remediation is yet authorized |
-| Next implementation | Run one bounded DeepSeek V4 Flash/high audit-mechanics lane through Claude Code `--bare`, then Sol acceptance/recovery and a fresh Gemini veto. D5 is diagnostic only: do not edit the composed runner, D3 resolver, parser, historical evidence, or T3/provider/product/write surfaces. If the exact four blockers survive independent review, plan their remediation separately before any holdout decision |
+| Active product track | LC4V4D5 development-wide Option A adoption audit accepted; prepare exact-four D5R1 policy/replay remediation |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v4d5-sol-acceptance.md` and `docs/bernie-lc4v4d5-option-a-adoption-audit-closeout.md` |
+| Current result | D5 retains 240 complete observations over all 60 ordinary probes with zero legacy and Option A variance. Exact taxonomy is `35/20/1/3/1`: 35 legacy-equivalent, 20 accepted D4 changes, one benign exact-duplicate relation, three missing-mutation-delta blockers, and one resize target-conflict-plus-delta blocker. All 27 gates pass; report hash is `e2c461ee...`. Gemini returned `DECISION: pass` on exact head `4fba7408`. No remediation or runtime default change was made |
+| Next implementation | After a fresh receipt, freeze D5R1 to remediate only the four reviewed safe move/resize/cancel/status Option A blockers: restore supported simulated mutation/audit deltas and make resize treat requested duration as the mutation target rather than diary conflict identity. Preserve all D4 behavior, the benign exact-duplicate relation, legacy default, parser, historical evidence, and T3/provider/product/write boundaries |
 
 LC4V4 provenance: the frozen pre-content records remain
 `lc4v4q1-sol-contract.md`, `lc4v4q1-sol-recovery-amendment.md`,
