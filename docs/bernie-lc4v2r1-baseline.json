@@ -1,0 +1,49 @@
+{
+  "schema_version": "lc4v2r1.entity_normalization_baseline.v1",
+  "development_only": true,
+  "evidence": "synthetic_gold_adjudicated",
+  "parser_source_commit": "7abf3aa930c63af7e3729c307f2e172cff50f47f",
+  "fixture_sha256": "0f957518d1481ce831a55ca8d12388f245ae89ae516e96ef1d5037080d925afd",
+  "case_count": 21,
+  "pass_counts": {
+    "normalized_values": 17,
+    "entity_semantics": 5,
+    "requires_clarification": 17,
+    "authority": 17,
+    "tool_safety": 17,
+    "claims_action_completed": 21,
+    "complete": 4
+  },
+  "failed_case_count": 17,
+  "failed_selection_hash": "ddfbc280bb822993",
+  "findings": [
+    {"case_id": "exact_full_surface", "failed_dimensions": ["entity_semantics"]},
+    {"case_id": "location_exact_room_12", "failed_dimensions": ["entity_semantics"]},
+    {"case_id": "location_ambiguous_any_room", "failed_dimensions": ["entity_semantics"]},
+    {"case_id": "location_corrected_room", "failed_dimensions": ["entity_semantics"]},
+    {"case_id": "location_negated_room", "failed_dimensions": ["entity_semantics"]},
+    {"case_id": "appointment_type_exact_standard", "failed_dimensions": ["entity_semantics"]},
+    {"case_id": "appointment_type_exact_care_plan", "failed_dimensions": ["entity_semantics"]},
+    {"case_id": "appointment_type_ambiguous", "failed_dimensions": ["entity_semantics"]},
+    {"case_id": "appointment_type_corrected", "failed_dimensions": ["entity_semantics"]},
+    {"case_id": "appointment_type_negated", "failed_dimensions": ["entity_semantics"]},
+    {"case_id": "patient_ambiguous_someone", "failed_dimensions": ["requires_clarification", "authority", "tool_safety"]},
+    {"case_id": "patient_corrected_name", "failed_dimensions": []},
+    {"case_id": "patient_negated_name", "failed_dimensions": ["entity_semantics", "requires_clarification", "authority", "tool_safety"]},
+    {"case_id": "practitioner_ambiguous_any_doctor", "failed_dimensions": []},
+    {"case_id": "practitioner_corrected_name", "failed_dimensions": []},
+    {"case_id": "practitioner_negated_name", "failed_dimensions": ["entity_semantics", "requires_clarification", "authority", "tool_safety"]},
+    {"case_id": "duration_half_hour", "failed_dimensions": ["normalized_values", "entity_semantics"]},
+    {"case_id": "duration_one_hour", "failed_dimensions": ["normalized_values", "entity_semantics"]},
+    {"case_id": "duration_quarter_hour", "failed_dimensions": ["normalized_values", "entity_semantics"]},
+    {"case_id": "duration_corrected_numeric", "failed_dimensions": []},
+    {"case_id": "duration_negated_without_replacement", "failed_dimensions": ["normalized_values", "entity_semantics", "requires_clarification", "authority", "tool_safety"]}
+  ],
+  "protected_boundary": {
+    "holdout_v1_accessed": false,
+    "holdout_v2_accessed": false,
+    "provider_calls": false,
+    "runtime_or_database_writes": false,
+    "t3_5": "deferred"
+  }
+}

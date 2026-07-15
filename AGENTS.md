@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V2 fresh certification holdout complete; procedure passed and product-readiness baseline failed |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v2-sol-acceptance.md` |
+| Active product track | LC4V2R1 development-only entity/normalization corpus engineering and bounded repair |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v2r1-sol-contract.md` |
 | Current result | LC4V2 aggregate: complete `0/576`, temporal `576/576`, intended action `528/576`, normalized value `288/576`, entity semantics `0/576`, safety `532/576`, variance zero; holdouts v1 and v2 sealed |
-| Next implementation | Present the T3.5 boundary. Sol recommends an aggregate-guided development-only repair/corpus-engineering tranche before live-model comparison; do not access either sealed holdout |
+| Next implementation | Implement and independently review the frozen 21-case Sol-authored development matrix; baseline is 4/21 complete with 17 surface-supported failures (`ddfbc280bb822993`); do not access either sealed holdout |
 
 ### LC4R10 accepted state
 
@@ -97,6 +97,8 @@ became sealed immediately after its aggregate receipt validation.
 The post-seal serial preservation gate collected 222 safe nodes and completed
 with 220 passes, one expected xfail, and one expected skip without loading
 either protected holdout.
+See `orchestration/agent_inbox/codex/lc4v2-sol-acceptance.md` for the exact
+one-shot evidence and authority decision.
 
 1. Keep holdouts v1 and v2 sealed and use only the committed aggregate v2
    evidence for planning.

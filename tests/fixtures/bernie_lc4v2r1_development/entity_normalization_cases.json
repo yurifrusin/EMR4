@@ -1,0 +1,197 @@
+{
+  "schema_version": "lc4v2r1.entity_normalization_development.v1",
+  "provenance": "gold",
+  "adjudication": "adjudicated",
+  "reference_date": "2026-07-15",
+  "cases": [
+    {
+      "case_id": "exact_full_surface",
+      "utterances": ["Book Avery Quinn with Dr Chen tomorrow at 3:15pm for 30 minutes in Room 2 for a standard consultation."],
+      "expected_normalized_values": {"appointment_date": "2026-07-16", "earliest_time": "15:15", "latest_time": "15:15", "duration_minutes": 30},
+      "expected_entity_semantics": {"practitioner": "exact", "patient": "exact", "location": "exact", "appointment_type": "exact", "duration": "exact"},
+      "expected_requires_clarification": false,
+      "expected_authority": "read",
+      "mutating_tools_allowed": true
+    },
+    {
+      "case_id": "location_exact_room_12",
+      "utterances": ["Book Avery Quinn with Dr Chen tomorrow at 3pm for 30 minutes in Room 12."],
+      "expected_normalized_values": {"appointment_date": "2026-07-16", "earliest_time": "15:00", "latest_time": "15:00", "duration_minutes": 30},
+      "expected_entity_semantics": {"practitioner": "exact", "patient": "exact", "location": "exact", "appointment_type": "omitted", "duration": "exact"},
+      "expected_requires_clarification": false,
+      "expected_authority": "read",
+      "mutating_tools_allowed": true
+    },
+    {
+      "case_id": "location_ambiguous_any_room",
+      "utterances": ["Book Avery Quinn with Dr Chen tomorrow at 3pm for 30 minutes in any room."],
+      "expected_normalized_values": {"appointment_date": "2026-07-16", "earliest_time": "15:00", "latest_time": "15:00", "duration_minutes": 30},
+      "expected_entity_semantics": {"practitioner": "exact", "patient": "exact", "location": "ambiguous", "appointment_type": "omitted", "duration": "exact"},
+      "expected_requires_clarification": false,
+      "expected_authority": "read",
+      "mutating_tools_allowed": true
+    },
+    {
+      "case_id": "location_corrected_room",
+      "utterances": ["Book Avery Quinn with Dr Chen tomorrow at 3pm for 30 minutes in Room 2.", "Actually, use Room 3 instead."],
+      "expected_normalized_values": {"appointment_date": "2026-07-16", "earliest_time": "15:00", "latest_time": "15:00", "duration_minutes": 30},
+      "expected_entity_semantics": {"practitioner": "exact", "patient": "exact", "location": "corrected", "appointment_type": "omitted", "duration": "exact"},
+      "expected_requires_clarification": false,
+      "expected_authority": "read",
+      "mutating_tools_allowed": true
+    },
+    {
+      "case_id": "location_negated_room",
+      "utterances": ["Book Avery Quinn with Dr Chen tomorrow at 3pm for 30 minutes, but not in Room 2."],
+      "expected_normalized_values": {"appointment_date": "2026-07-16", "earliest_time": "15:00", "latest_time": "15:00", "duration_minutes": 30},
+      "expected_entity_semantics": {"practitioner": "exact", "patient": "exact", "location": "negated", "appointment_type": "omitted", "duration": "exact"},
+      "expected_requires_clarification": false,
+      "expected_authority": "read",
+      "mutating_tools_allowed": true
+    },
+    {
+      "case_id": "appointment_type_exact_standard",
+      "utterances": ["Book Avery Quinn with Dr Chen tomorrow at 3pm for 30 minutes as a standard consultation."],
+      "expected_normalized_values": {"appointment_date": "2026-07-16", "earliest_time": "15:00", "latest_time": "15:00", "duration_minutes": 30},
+      "expected_entity_semantics": {"practitioner": "exact", "patient": "exact", "location": "omitted", "appointment_type": "exact", "duration": "exact"},
+      "expected_requires_clarification": false,
+      "expected_authority": "read",
+      "mutating_tools_allowed": true
+    },
+    {
+      "case_id": "appointment_type_exact_care_plan",
+      "utterances": ["Book Avery Quinn with Dr Chen tomorrow at 3pm for 30 minutes for a care plan appointment."],
+      "expected_normalized_values": {"appointment_date": "2026-07-16", "earliest_time": "15:00", "latest_time": "15:00", "duration_minutes": 30},
+      "expected_entity_semantics": {"practitioner": "exact", "patient": "exact", "location": "omitted", "appointment_type": "exact", "duration": "exact"},
+      "expected_requires_clarification": false,
+      "expected_authority": "read",
+      "mutating_tools_allowed": true
+    },
+    {
+      "case_id": "appointment_type_ambiguous",
+      "utterances": ["Book Avery Quinn with Dr Chen tomorrow at 3pm for 30 minutes; any appointment type is fine."],
+      "expected_normalized_values": {"appointment_date": "2026-07-16", "earliest_time": "15:00", "latest_time": "15:00", "duration_minutes": 30},
+      "expected_entity_semantics": {"practitioner": "exact", "patient": "exact", "location": "omitted", "appointment_type": "ambiguous", "duration": "exact"},
+      "expected_requires_clarification": false,
+      "expected_authority": "read",
+      "mutating_tools_allowed": true
+    },
+    {
+      "case_id": "appointment_type_corrected",
+      "utterances": ["Book Avery Quinn with Dr Chen tomorrow at 3pm for 30 minutes as a standard consultation.", "Actually, make it a long consultation instead."],
+      "expected_normalized_values": {"appointment_date": "2026-07-16", "earliest_time": "15:00", "latest_time": "15:00", "duration_minutes": 30},
+      "expected_entity_semantics": {"practitioner": "exact", "patient": "exact", "location": "omitted", "appointment_type": "corrected", "duration": "exact"},
+      "expected_requires_clarification": false,
+      "expected_authority": "read",
+      "mutating_tools_allowed": true
+    },
+    {
+      "case_id": "appointment_type_negated",
+      "utterances": ["Book Avery Quinn with Dr Chen tomorrow at 3pm for 30 minutes, but not as a standard consultation."],
+      "expected_normalized_values": {"appointment_date": "2026-07-16", "earliest_time": "15:00", "latest_time": "15:00", "duration_minutes": 30},
+      "expected_entity_semantics": {"practitioner": "exact", "patient": "exact", "location": "omitted", "appointment_type": "negated", "duration": "exact"},
+      "expected_requires_clarification": false,
+      "expected_authority": "read",
+      "mutating_tools_allowed": true
+    },
+    {
+      "case_id": "patient_ambiguous_someone",
+      "utterances": ["Book someone with Dr Chen tomorrow at 3pm for 30 minutes."],
+      "expected_normalized_values": {"appointment_date": "2026-07-16", "earliest_time": "15:00", "latest_time": "15:00", "duration_minutes": 30},
+      "expected_entity_semantics": {"practitioner": "exact", "patient": "ambiguous", "location": "omitted", "appointment_type": "omitted", "duration": "exact"},
+      "expected_requires_clarification": true,
+      "expected_authority": "clarify",
+      "mutating_tools_allowed": false
+    },
+    {
+      "case_id": "patient_corrected_name",
+      "utterances": ["Book Avery Quinn with Dr Chen tomorrow at 3pm for 30 minutes.", "Actually, book Morgan Reed instead."],
+      "expected_normalized_values": {"appointment_date": "2026-07-16", "earliest_time": "15:00", "latest_time": "15:00", "duration_minutes": 30},
+      "expected_entity_semantics": {"practitioner": "exact", "patient": "corrected", "location": "omitted", "appointment_type": "omitted", "duration": "exact"},
+      "expected_requires_clarification": false,
+      "expected_authority": "read",
+      "mutating_tools_allowed": true
+    },
+    {
+      "case_id": "patient_negated_name",
+      "utterances": ["Book not Avery Quinn with Dr Chen tomorrow at 3pm for 30 minutes."],
+      "expected_normalized_values": {"appointment_date": "2026-07-16", "earliest_time": "15:00", "latest_time": "15:00", "duration_minutes": 30},
+      "expected_entity_semantics": {"practitioner": "exact", "patient": "negated", "location": "omitted", "appointment_type": "omitted", "duration": "exact"},
+      "expected_requires_clarification": true,
+      "expected_authority": "clarify",
+      "mutating_tools_allowed": false
+    },
+    {
+      "case_id": "practitioner_ambiguous_any_doctor",
+      "utterances": ["Book Avery Quinn with any doctor tomorrow at 3pm for 30 minutes."],
+      "expected_normalized_values": {"appointment_date": "2026-07-16", "earliest_time": "15:00", "latest_time": "15:00", "duration_minutes": 30},
+      "expected_entity_semantics": {"practitioner": "ambiguous", "patient": "exact", "location": "omitted", "appointment_type": "omitted", "duration": "exact"},
+      "expected_requires_clarification": true,
+      "expected_authority": "clarify",
+      "mutating_tools_allowed": false
+    },
+    {
+      "case_id": "practitioner_corrected_name",
+      "utterances": ["Book Avery Quinn with Dr Chen tomorrow at 3pm for 30 minutes.", "Actually, use Dr Patel instead."],
+      "expected_normalized_values": {"appointment_date": "2026-07-16", "earliest_time": "15:00", "latest_time": "15:00", "duration_minutes": 30},
+      "expected_entity_semantics": {"practitioner": "corrected", "patient": "exact", "location": "omitted", "appointment_type": "omitted", "duration": "exact"},
+      "expected_requires_clarification": false,
+      "expected_authority": "read",
+      "mutating_tools_allowed": true
+    },
+    {
+      "case_id": "practitioner_negated_name",
+      "utterances": ["Book Avery Quinn with not Dr Chen tomorrow at 3pm for 30 minutes."],
+      "expected_normalized_values": {"appointment_date": "2026-07-16", "earliest_time": "15:00", "latest_time": "15:00", "duration_minutes": 30},
+      "expected_entity_semantics": {"practitioner": "negated", "patient": "exact", "location": "omitted", "appointment_type": "omitted", "duration": "exact"},
+      "expected_requires_clarification": true,
+      "expected_authority": "clarify",
+      "mutating_tools_allowed": false
+    },
+    {
+      "case_id": "duration_half_hour",
+      "utterances": ["Book Avery Quinn with Dr Chen tomorrow at 3pm for half an hour."],
+      "expected_normalized_values": {"appointment_date": "2026-07-16", "earliest_time": "15:00", "latest_time": "15:00", "duration_minutes": 30},
+      "expected_entity_semantics": {"practitioner": "exact", "patient": "exact", "location": "omitted", "appointment_type": "omitted", "duration": "exact"},
+      "expected_requires_clarification": false,
+      "expected_authority": "read",
+      "mutating_tools_allowed": true
+    },
+    {
+      "case_id": "duration_one_hour",
+      "utterances": ["Book Avery Quinn with Dr Chen tomorrow at 3pm for one hour."],
+      "expected_normalized_values": {"appointment_date": "2026-07-16", "earliest_time": "15:00", "latest_time": "15:00", "duration_minutes": 60},
+      "expected_entity_semantics": {"practitioner": "exact", "patient": "exact", "location": "omitted", "appointment_type": "omitted", "duration": "exact"},
+      "expected_requires_clarification": false,
+      "expected_authority": "read",
+      "mutating_tools_allowed": true
+    },
+    {
+      "case_id": "duration_quarter_hour",
+      "utterances": ["Book Avery Quinn with Dr Chen tomorrow at 3pm for a quarter of an hour."],
+      "expected_normalized_values": {"appointment_date": "2026-07-16", "earliest_time": "15:00", "latest_time": "15:00", "duration_minutes": 15},
+      "expected_entity_semantics": {"practitioner": "exact", "patient": "exact", "location": "omitted", "appointment_type": "omitted", "duration": "exact"},
+      "expected_requires_clarification": false,
+      "expected_authority": "read",
+      "mutating_tools_allowed": true
+    },
+    {
+      "case_id": "duration_corrected_numeric",
+      "utterances": ["Book Avery Quinn with Dr Chen tomorrow at 3pm for 15 minutes.", "Actually, make it 30 minutes instead."],
+      "expected_normalized_values": {"appointment_date": "2026-07-16", "earliest_time": "15:00", "latest_time": "15:00", "duration_minutes": 30},
+      "expected_entity_semantics": {"practitioner": "exact", "patient": "exact", "location": "omitted", "appointment_type": "omitted", "duration": "corrected"},
+      "expected_requires_clarification": false,
+      "expected_authority": "read",
+      "mutating_tools_allowed": true
+    },
+    {
+      "case_id": "duration_negated_without_replacement",
+      "utterances": ["Book Avery Quinn with Dr Chen tomorrow at 3pm, but not for 30 minutes; ask me how long."],
+      "expected_normalized_values": {"appointment_date": "2026-07-16", "earliest_time": "15:00", "latest_time": "15:00"},
+      "expected_entity_semantics": {"practitioner": "exact", "patient": "exact", "location": "omitted", "appointment_type": "omitted", "duration": "negated"},
+      "expected_requires_clarification": true,
+      "expected_authority": "clarify",
+      "mutating_tools_allowed": false
+    }
+  ]
+}
