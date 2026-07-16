@@ -1,9 +1,8 @@
-"""LC4V6 content-blind framework — empty schema, validators, state machine.
+"""Content-blind framework for the fresh LC4V6 one-shot certification.
 
-No real V6 content exists in this module. It provides only the typed
-contracts, manifest validation, hash binding, aggregate reduction,
-evidence validation, one-shot state machine, and dependency injection
-ports that a future sealed corpus and evaluator will implement.
+The module contains schema, aggregation, validation, and fail-closed state
+machinery only. It contains no V6 utterance, expected semantic value, corpus,
+manifest instance, seal, or acceptance threshold.
 """
 
 from __future__ import annotations
@@ -11,458 +10,613 @@ from __future__ import annotations
 import hashlib
 import json
 import os
-from dataclasses import dataclass, field
-from typing import Any, Protocol
+from dataclasses import asdict, dataclass, field
+from pathlib import Path
+from typing import Any, Callable, Mapping, Protocol, Sequence
 
 
-# ---------------------------------------------------------------------------
-# 1. Frozen typed schema — no real V6 content
-# ---------------------------------------------------------------------------
+SCHEMA_VERSION = "lc4v6.content_blind_framework.v1"
+MANIFEST_SCHEMA_VERSION = "lc4v6.manifest.v1"
+AGGREGATE_SCHEMA_VERSION = "lc4v6.aggregate_report.v1"
+SEAL_SCHEMA_VERSION = "lc4v6.source_seal.v1"
+ATTEMPT_ID = "lc4v6-fresh-attempt-001"
+
+GROUP_COUNT = 24
+SCENARIO_COUNT = 288
+MULTI_TURN_COUNT = 72
+ONE_SHOT_COUNT = 216
+REPEATS = 2
+SAMPLE_COUNT = SCENARIO_COUNT * REPEATS
+
+ACTIONS = frozenset(
+    {"create", "move", "resize", "cancel", "status_change", "explain_schedule"}
+)
+DIMENSIONS = (
+    "intended_action",
+    "action_semantics",
+    "temporal_relation",
+    "normalized_values",
+    "entity_semantics",
+    "clarification",
+    "downstream_outcome",
+    "interpretation_tools",
+    "replay_tools",
+    "authority",
+    "appointment_deltas",
+    "audit_deltas",
+)
+FAILURE_LAYERS = ("interpretation", "policy", "integration", "safety")
+REQUIRED_SLICE_CATEGORIES = frozenset(
+    {"family", "language_form", "dialogue_form", "temporal_relation", "provenance", "adjudication"}
+)
+FORBIDDEN_AGGREGATE_KEYS = frozenset(
+    {
+        "scenario_id",
+        "scenario_ids",
+        "utterance",
+        "utterances",
+        "expected",
+        "expected_values",
+        "source_span",
+        "source_spans",
+        "normalized_turn",
+        "normalized_turns",
+        "label",
+        "labels",
+        "failure_id",
+        "failure_ids",
+        "failure_selection",
+        "case",
+        "cases",
+    }
+)
 
 
-@dataclass(frozen=True)
-class ScenarioContract:
-    """Frozen schema for a future V6 scenario contract.
-
-    The framework accepts scenario objects as supplied data; it does not
-    inspect, branch on, or interpret their content at this level.
-    """
-
-    group: str
-    cell: str
-    action: str
-    is_multi_turn: bool
-    data: Any = None
+def canonical_json(payload: Any) -> str:
+    """Return deterministic UTF-8 JSON without incidental whitespace."""
+    return json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
 
 
-@dataclass(frozen=True)
-class TypedObservation:
-    """Frozen schema for a future V6 typed evaluation observation.
-
-    Carries aggregate-safe evaluation dimensions only — no case-level
-    identifiers, utterances, expected values, or labels.
-    """
-
-    dimensions: dict[str, int] = field(default_factory=dict)
+def sha256_text(text: str) -> str:
+    return "sha256:" + hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
-# ---------------------------------------------------------------------------
-# 2. Fixed manifest shape
-# ---------------------------------------------------------------------------
-
-FIXED_MANIFEST_SHAPE: dict[str, int] = {
-    "groups": 24,
-    "scenarios": 288,
-    "multi_turn": 72,
-    "one_shot": 216,
-    "actions": 6,
-    "cells": 288,
-    "repeats": 2,
-}
+def sha256_bytes(raw: bytes) -> str:
+    return "sha256:" + hashlib.sha256(raw).hexdigest()
 
 
-@dataclass(frozen=True)
-class ManifestValidationResult:
-    """Result of a manifest shape validation."""
-
-    valid: bool
-    errors: tuple[str, ...] = ()
+def sha256_payload(payload: Any) -> str:
+    return sha256_text(canonical_json(payload))
 
 
-def validate_manifest_shape(manifest: dict[str, Any]) -> ManifestValidationResult:
-    """Validate that a manifest matches the exact fixed V6 shape.
-
-    Only structural counts are validated; the scenario objects themselves
-    are accepted as supplied data.
-    """
-    errors: list[str] = []
-    for key, expected in FIXED_MANIFEST_SHAPE.items():
-        actual = manifest.get(key)
-        if actual is None:
-            errors.append(f"manifest missing key: {key}")
-        elif actual != expected:
-            errors.append(
-                f"manifest {key}: expected {expected}, got {actual}"
-            )
-    if errors:
-        return ManifestValidationResult(valid=False, errors=tuple(errors))
-    return ManifestValidationResult(valid=True)
-
-
-# ---------------------------------------------------------------------------
-# 3. Hash binding helpers
-# ---------------------------------------------------------------------------
-
-
-def _prefix_hash(raw: str) -> str:
-    """Return ``sha256:<hexdigest>``."""
-    return "sha256:" + hashlib.sha256(raw.encode()).hexdigest()
-
-
-def hash_content(content: str) -> str:
-    """Return sha256-prefixed hex digest of a string."""
-    return _prefix_hash(content)
-
-
-def hash_bytes(data: bytes) -> str:
-    """Return sha256-prefixed hex digest of bytes."""
-    return "sha256:" + hashlib.sha256(data).hexdigest()
-
-
-def bind_source_hash(source_commit: str) -> str:
-    """Bind a source commit identifier into its hash."""
-    return hash_content(source_commit)
-
-
-def bind_corpus_hash(corpus_json: str) -> str:
-    """Bind a corpus JSON string into its hash."""
-    return hash_content(corpus_json)
-
-
-def bind_manifest_hash(manifest_json: str) -> str:
-    """Bind a manifest JSON string into its hash."""
-    return hash_content(manifest_json)
-
-
-def bind_framework_hash(framework_code: str) -> str:
-    """Bind framework source code into its hash."""
-    return hash_content(framework_code)
-
-
-def bind_evaluator_hash(evaluator_code: str) -> str:
-    """Bind evaluator source code into its hash."""
-    return hash_content(evaluator_code)
+def _is_sha256(value: Any) -> bool:
+    if not isinstance(value, str) or not value.startswith("sha256:"):
+        return False
+    digest = value.removeprefix("sha256:")
+    return len(digest) == 64 and all(char in "0123456789abcdef" for char in digest)
 
 
 @dataclass(frozen=True)
 class BoundHashes:
-    """Container for all bound hashes in a V6 evaluation."""
-
     source: str
     corpus: str
     manifest: str
     framework: str
     evaluator: str
-    report: str = ""
-    seal: str = ""
 
-
-# ---------------------------------------------------------------------------
-# 4. Aggregate-only reducer
-# ---------------------------------------------------------------------------
+    def valid(self) -> bool:
+        return all(_is_sha256(value) for value in asdict(self).values())
 
 
 @dataclass(frozen=True)
-class AggregateReport:
-    """Public aggregate-only result.
+class ScenarioContract:
+    """Internal future scenario schema; the framework supplies no instances."""
 
-    Contains no scenario IDs, utterances, expected values, source spans,
-    normalized turns, labels, or failure selections.
-    """
+    scenario_id: str
+    group: str
+    coverage_cell: str
+    action: str
+    utterances: tuple[str, ...]
+    reference_date: str
+    expected: Mapping[str, Any]
+    slices: Mapping[str, str]
 
-    total_samples: int
-    complete: int
-    safe: int
-    variance: int
-    dimensions: dict[str, int]
-    slices: dict[str, float]
-    hashes: BoundHashes
-    attempt_id: str = ""
-
-
-def reduce_observations(
-    observations: list[TypedObservation],
-    hashes: BoundHashes,
-    attempt_id: str = "",
-) -> AggregateReport:
-    """Aggregate-only reducer.
-
-    Returns only aggregate counts, dimensions, slices, and hashes.
-    No case-level artifacts are exposed in the public result.
-    """
-    total = len(observations)
-    complete = sum(1 for o in observations if o.dimensions.get("complete", 0))
-    safe = sum(1 for o in observations if o.dimensions.get("safe", 0))
-    variance = 0
-
-    dimensions: dict[str, int] = {}
-    for obs in observations:
-        for key, val in obs.dimensions.items():
-            dimensions[key] = dimensions.get(key, 0) + val
-
-    slices: dict[str, float] = {}
-
-    return AggregateReport(
-        total_samples=total,
-        complete=complete,
-        safe=safe,
-        variance=variance,
-        dimensions=dimensions,
-        slices=slices,
-        hashes=hashes,
-        attempt_id=attempt_id,
-    )
-
-
-# ---------------------------------------------------------------------------
-# 5. Evidence validator
-# ---------------------------------------------------------------------------
+    @property
+    def is_multi_turn(self) -> bool:
+        return len(self.utterances) > 1
 
 
 @dataclass(frozen=True)
-class EvidenceValidationResult:
-    """Result of evidence population validation."""
+class TypedObservation:
+    """Internal typed result. Case identity is discarded by aggregation."""
 
-    valid: bool
-    errors: tuple[str, ...] = ()
+    scenario_id: str
+    repeat_index: int
+    dimension_passes: Mapping[str, bool]
+    safe: bool
+    failure_layers: Mapping[str, bool]
+    slices: Mapping[str, str]
 
-
-def validate_evidence_population(
-    report: AggregateReport,
-    manifest: dict[str, Any],
-    hashes: BoundHashes,
-) -> EvidenceValidationResult:
-    """Validate exact population, zero exceptions / missing dimensions /
-    case artifacts / variance, predefined slice arithmetic, and
-    hash/schema consistency.
-    """
-    errors: list[str] = []
-
-    expected_total = (
-        FIXED_MANIFEST_SHAPE["scenarios"] * FIXED_MANIFEST_SHAPE["repeats"]
-    )
-    if report.total_samples != expected_total:
-        errors.append(
-            f"total_samples: expected {expected_total}, "
-            f"got {report.total_samples}"
-        )
-
-    if report.variance != 0:
-        errors.append(f"variance: expected 0, got {report.variance}")
-
-    # Hash prefix consistency
-    for label, value in [
-        ("source", hashes.source),
-        ("corpus", hashes.corpus),
-        ("manifest", hashes.manifest),
-        ("framework", hashes.framework),
-        ("evaluator", hashes.evaluator),
-    ]:
-        if value and not value.startswith("sha256:"):
-            errors.append(f"{label} hash must start with sha256:")
-
-    # Schema consistency: manifest shape must match
-    shape_check = validate_manifest_shape(manifest)
-    if not shape_check.valid:
-        errors.extend(
-            f"manifest shape: {e}" for e in shape_check.errors
-        )
-
-    if errors:
-        return EvidenceValidationResult(valid=False, errors=tuple(errors))
-    return EvidenceValidationResult(valid=True)
+    @property
+    def complete(self) -> bool:
+        return all(self.dimension_passes.get(name) is True for name in DIMENSIONS)
 
 
-# ---------------------------------------------------------------------------
-# 6. File-backed one-shot state machine
-# ---------------------------------------------------------------------------
-
-ATTEMPT_ID = "lc4v6-fresh-attempt-001"
-SEAL_FILENAME = "lc4v6-source-seal.txt"
-MARKER_FILENAME = "lc4v6-attempt-marker.txt"
-REPORT_FILENAME = "lc4v6-aggregate-report.json"
-
-
-@dataclass(frozen=True)
-class StateMachineResult:
-    """Result of a state machine transition."""
-
-    success: bool
-    error: str = ""
-    attempt_id: str = ""
-
-
-def _read_text_file(path: str) -> str | None:
-    try:
-        with open(path, "r") as f:
-            return f.read()
-    except FileNotFoundError:
-        return None
-
-
-def _write_text_file(path: str, content: str) -> None:
-    with open(path, "w") as f:
-        f.write(content)
-
-
-class OneShotStateMachine:
-    """File-backed one-shot state machine for V6 evaluation.
-
-    Fails closed unless:
-    - The exact frozen source seal file is present
-    - The seal is unconsumed (non-empty content)
-    - No attempt marker file exists
-    - No report file exists
-
-    On success: writes the attempt marker with ID
-    ``lc4v6-fresh-attempt-001``, consumes the seal by overwriting
-    it with empty content, and writes the aggregate report.
-
-    Refuses rerun, overwrite, and seal reuse.
-    """
-
-    def __init__(
-        self,
-        working_dir: str,
-        expected_seal_content: str = "",
-    ) -> None:
-        self._working_dir = working_dir
-        self._expected_seal_content = expected_seal_content
-        self._seal_path = os.path.join(working_dir, SEAL_FILENAME)
-        self._marker_path = os.path.join(working_dir, MARKER_FILENAME)
-        self._report_path = os.path.join(working_dir, REPORT_FILENAME)
-
-    def validate_prerun(self) -> StateMachineResult:
-        """Check that the file system is in a valid pre-run state."""
-        seal_content = _read_text_file(self._seal_path)
-        if seal_content is None:
-            return StateMachineResult(
-                success=False,
-                error="seal file not found",
-            )
-        if not seal_content.strip():
-            return StateMachineResult(
-                success=False,
-                error="seal file is empty (already consumed)",
-            )
-        if (
-            self._expected_seal_content
-            and seal_content.strip() != self._expected_seal_content
-        ):
-            return StateMachineResult(
-                success=False,
-                error="seal content does not match expected value",
-            )
-
-        marker = _read_text_file(self._marker_path)
-        if marker is not None:
-            return StateMachineResult(
-                success=False,
-                error="attempt marker already exists",
-            )
-
-        report = _read_text_file(self._report_path)
-        if report is not None:
-            return StateMachineResult(
-                success=False,
-                error="report already exists",
-            )
-
-        return StateMachineResult(success=True)
-
-    def consume(self, report_content: str) -> StateMachineResult:
-        """Atomically consume the seal, write marker, and write report.
-
-        Fails closed if pre-run state is invalid.
-        """
-        precheck = self.validate_prerun()
-        if not precheck.success:
-            return precheck
-
-        _write_text_file(self._marker_path, ATTEMPT_ID)
-        _write_text_file(self._seal_path, "")
-        _write_text_file(self._report_path, report_content)
-
-        return StateMachineResult(success=True, attempt_id=ATTEMPT_ID)
-
-    def has_run(self) -> bool:
-        """Return True if an attempt marker exists."""
-        marker = _read_text_file(self._marker_path)
-        return marker is not None
-
-    def get_attempt_id(self) -> str | None:
-        """Return the attempt ID if one exists."""
-        marker = _read_text_file(self._marker_path)
-        if marker is None:
-            return None
-        return marker.strip()
-
-
-# ---------------------------------------------------------------------------
-# 7. Dependency injection ports
-# ---------------------------------------------------------------------------
-
-
-class Extractor(Protocol):
-    """Protocol for future semantic extraction injection."""
-
-    def extract(
-        self, utterances: list[str], reference_date: str
-    ) -> object:
-        ...
-
-
-class PolicyResolver(Protocol):
-    """Protocol for future policy resolution injection."""
-
-    def resolve(
-        self, extraction: object, scenario: ScenarioContract
-    ) -> object:
-        ...
-
-
-class ReplayEvaluator(Protocol):
-    """Protocol for future replay evaluation injection."""
-
-    def evaluate(
-        self, extraction: object, policy: object
-    ) -> TypedObservation:
+class ScenarioEvaluator(Protocol):
+    def __call__(self, scenario: ScenarioContract, repeat_index: int) -> TypedObservation:
         ...
 
 
 @dataclass(frozen=True)
 class EvaluationContext:
-    """Wiring for dependency-injected evaluation components.
+    evaluator: ScenarioEvaluator
 
-    All fields are optional so empty tests can construct a context
-    without importing real prompts or protected content.
+    def evaluate(self, scenarios: Sequence[ScenarioContract]) -> tuple[TypedObservation, ...]:
+        return tuple(
+            self.evaluator(scenario, repeat_index)
+            for scenario in scenarios
+            for repeat_index in range(REPEATS)
+        )
+
+
+@dataclass(frozen=True)
+class ValidationResult:
+    valid: bool
+    errors: tuple[str, ...] = ()
+
+
+def validate_manifest(
+    manifest: Mapping[str, Any], scenarios: Sequence[ScenarioContract]
+) -> ValidationResult:
+    errors: list[str] = []
+    exact_counts = {
+        "group_count": GROUP_COUNT,
+        "scenario_count": SCENARIO_COUNT,
+        "multi_turn_count": MULTI_TURN_COUNT,
+        "one_shot_count": ONE_SHOT_COUNT,
+        "action_count": len(ACTIONS),
+        "coverage_cell_count": SCENARIO_COUNT,
+        "repeats": REPEATS,
+    }
+    if manifest.get("schema_version") != MANIFEST_SCHEMA_VERSION:
+        errors.append("manifest schema_version is not exact")
+    if manifest.get("attempt_id") != ATTEMPT_ID:
+        errors.append("manifest attempt_id is not exact")
+    for field_name, expected in exact_counts.items():
+        if manifest.get(field_name) != expected:
+            errors.append(f"manifest {field_name} must equal {expected}")
+    if len(scenarios) != SCENARIO_COUNT:
+        errors.append(f"scenario population must equal {SCENARIO_COUNT}")
+        return ValidationResult(False, tuple(errors))
+
+    scenario_ids = [scenario.scenario_id for scenario in scenarios]
+    groups = [scenario.group for scenario in scenarios]
+    cells = [scenario.coverage_cell for scenario in scenarios]
+    actions = {scenario.action for scenario in scenarios}
+    multi_turn = sum(scenario.is_multi_turn for scenario in scenarios)
+    group_counts = {group: groups.count(group) for group in set(groups)}
+    group_multi_counts = {
+        group: sum(scenario.is_multi_turn for scenario in scenarios if scenario.group == group)
+        for group in set(groups)
+    }
+
+    if len(set(scenario_ids)) != SCENARIO_COUNT or any(not item for item in scenario_ids):
+        errors.append("scenario IDs must be non-empty and unique")
+    if len(group_counts) != GROUP_COUNT or any(count != 12 for count in group_counts.values()):
+        errors.append("groups must be exactly 24 populations of 12")
+    if any(count != 3 for count in group_multi_counts.values()):
+        errors.append("every group must contain exactly three multi-turn scenarios")
+    if len(set(cells)) != SCENARIO_COUNT or any(not item for item in cells):
+        errors.append("coverage cells must be non-empty and unique")
+    if actions != ACTIONS:
+        errors.append("action population is not exact")
+    if multi_turn != MULTI_TURN_COUNT:
+        errors.append(f"multi-turn population must equal {MULTI_TURN_COUNT}")
+    if sum(not scenario.is_multi_turn for scenario in scenarios) != ONE_SHOT_COUNT:
+        errors.append(f"one-shot population must equal {ONE_SHOT_COUNT}")
+    if any(not scenario.utterances or not scenario.reference_date for scenario in scenarios):
+        errors.append("scenario utterances and reference date must be present")
+    return ValidationResult(not errors, tuple(errors))
+
+
+def _slice_rows(observations: Sequence[TypedObservation]) -> dict[str, list[dict[str, Any]]]:
+    categories = sorted({category for item in observations for category in item.slices})
+    result: dict[str, list[dict[str, Any]]] = {}
+    for category in categories:
+        keys = sorted({item.slices[category] for item in observations if category in item.slices})
+        rows: list[dict[str, Any]] = []
+        for key in keys:
+            selected = [item for item in observations if item.slices.get(category) == key]
+            passed = sum(item.complete for item in selected)
+            rows.append(
+                {"slice_key": key, "passed": passed, "failed": len(selected) - passed, "total": len(selected)}
+            )
+        result[category] = rows
+    return result
+
+
+def _repeat_variance(observations: Sequence[TypedObservation]) -> int:
+    by_scenario: dict[str, list[TypedObservation]] = {}
+    for observation in observations:
+        by_scenario.setdefault(observation.scenario_id, []).append(observation)
+    variance = 0
+    for repeats in by_scenario.values():
+        signatures = {
+            canonical_json(
+                {
+                    "dimensions": dict(item.dimension_passes),
+                    "safe": item.safe,
+                    "layers": dict(item.failure_layers),
+                }
+            )
+            for item in repeats
+        }
+        variance += len(signatures) != 1
+    return variance
+
+
+def validate_observations(
+    observations: Sequence[TypedObservation], scenarios: Sequence[ScenarioContract]
+) -> ValidationResult:
+    errors: list[str] = []
+    scenario_ids = {scenario.scenario_id for scenario in scenarios}
+    if len(observations) != SAMPLE_COUNT:
+        errors.append(f"observation population must equal {SAMPLE_COUNT}")
+    if {item.scenario_id for item in observations} != scenario_ids:
+        errors.append("observation scenario population does not match manifest")
+    by_scenario: dict[str, list[TypedObservation]] = {}
+    for observation in observations:
+        by_scenario.setdefault(observation.scenario_id, []).append(observation)
+        if set(observation.dimension_passes) != set(DIMENSIONS):
+            errors.append("observation dimension population is not exact")
+        if set(observation.failure_layers) != set(FAILURE_LAYERS):
+            errors.append("observation failure-layer population is not exact")
+        if observation.safe == (observation.failure_layers.get("safety") is True):
+            errors.append("observation safety and safety-layer evidence disagree")
+        matching = next(
+            (scenario for scenario in scenarios if scenario.scenario_id == observation.scenario_id),
+            None,
+        )
+        if matching is not None and dict(observation.slices) != dict(matching.slices):
+            errors.append("observation slices do not match the scenario contract")
+    if any(
+        len(repeats) != REPEATS
+        or {item.repeat_index for item in repeats} != set(range(REPEATS))
+        for repeats in by_scenario.values()
+    ):
+        errors.append("every scenario must have exact repeat indexes 0 and 1")
+    return ValidationResult(not errors, tuple(dict.fromkeys(errors)))
+
+
+def aggregate_observations(
+    observations: Sequence[TypedObservation],
+    hashes: BoundHashes,
+    *,
+    evaluation_exception_count: int = 0,
+    case_level_artifact_count: int = 0,
+) -> dict[str, Any]:
+    """Reduce internal observations to the only committable aggregate shape."""
+    complete = sum(item.complete for item in observations)
+    safe = sum(item.safe for item in observations)
+    per_dimension = {
+        name: {
+            "passed": sum(item.dimension_passes.get(name) is True for item in observations),
+            "failed": sum(item.dimension_passes.get(name) is not True for item in observations),
+            "total": len(observations),
+        }
+        for name in DIMENSIONS
+    }
+    failure_layers = {
+        layer: sum(item.failure_layers.get(layer) is True for item in observations)
+        for layer in FAILURE_LAYERS
+    }
+    action_counts = {
+        action: sum(item.slices.get("action") == action for item in observations)
+        for action in sorted(ACTIONS)
+    }
+    return {
+        "schema_version": AGGREGATE_SCHEMA_VERSION,
+        "attempt_id": ATTEMPT_ID,
+        "group_count": GROUP_COUNT,
+        "scenario_count": SCENARIO_COUNT,
+        "multi_turn_count": MULTI_TURN_COUNT,
+        "one_shot_count": ONE_SHOT_COUNT,
+        "coverage_cell_count": SCENARIO_COUNT,
+        "repeats_per_scenario": REPEATS,
+        "sample_count": len(observations),
+        "complete_contract": {"passed": complete, "failed": len(observations) - complete, "total": len(observations)},
+        "safety": {"passed": safe, "failed": len(observations) - safe, "total": len(observations)},
+        "per_dimension": per_dimension,
+        "failure_layers": failure_layers,
+        "action_counts": action_counts,
+        "slices": _slice_rows(observations),
+        "evaluation_exception_count": evaluation_exception_count,
+        "missing_dimension_count": sum(
+            set(item.dimension_passes) != set(DIMENSIONS) for item in observations
+        ),
+        "case_level_artifact_count": case_level_artifact_count,
+        "repeat_variance_count": _repeat_variance(observations),
+        "hashes": asdict(hashes),
+    }
+
+
+def _find_forbidden_keys(value: Any) -> set[str]:
+    found: set[str] = set()
+    if isinstance(value, Mapping):
+        for key, nested in value.items():
+            lowered = str(key).lower()
+            if lowered in FORBIDDEN_AGGREGATE_KEYS:
+                found.add(lowered)
+            found.update(_find_forbidden_keys(nested))
+    elif isinstance(value, (list, tuple)):
+        for nested in value:
+            found.update(_find_forbidden_keys(nested))
+    return found
+
+
+def validate_aggregate_structure(
+    report: Mapping[str, Any], expected_hashes: BoundHashes
+) -> ValidationResult:
+    errors: list[str] = []
+    if _find_forbidden_keys(report):
+        errors.append("aggregate contains forbidden case-level keys")
+    if report.get("schema_version") != AGGREGATE_SCHEMA_VERSION:
+        errors.append("aggregate schema_version is not exact")
+    if report.get("attempt_id") != ATTEMPT_ID:
+        errors.append("aggregate attempt_id is not exact")
+    sample_count = report.get("sample_count")
+    if not isinstance(sample_count, int) or sample_count < 0:
+        errors.append("aggregate sample_count is malformed")
+        sample_count = 0
+    for field_name in (
+        "group_count",
+        "scenario_count",
+        "multi_turn_count",
+        "one_shot_count",
+        "coverage_cell_count",
+        "repeats_per_scenario",
+        "evaluation_exception_count",
+        "missing_dimension_count",
+        "case_level_artifact_count",
+        "repeat_variance_count",
+    ):
+        value = report.get(field_name)
+        if not isinstance(value, int) or value < 0:
+            errors.append(f"aggregate {field_name} is malformed")
+    if not expected_hashes.valid() or report.get("hashes") != asdict(expected_hashes):
+        errors.append("aggregate hash bindings are not exact")
+
+    for field_name in ("complete_contract", "safety"):
+        counts = report.get(field_name)
+        if not isinstance(counts, Mapping) or counts.get("total") != sample_count:
+            errors.append(f"aggregate {field_name} total is malformed")
+        elif counts.get("passed", -1) + counts.get("failed", -1) != sample_count:
+            errors.append(f"aggregate {field_name} arithmetic is invalid")
+    dimensions = report.get("per_dimension")
+    if not isinstance(dimensions, Mapping) or set(dimensions) != set(DIMENSIONS):
+        errors.append("aggregate dimension population is not exact")
+    else:
+        for name, counts in dimensions.items():
+            if (
+                not isinstance(counts, Mapping)
+                or counts.get("total") != sample_count
+                or counts.get("passed", -1) + counts.get("failed", -1) != sample_count
+            ):
+                errors.append(f"aggregate dimension arithmetic is invalid: {name}")
+    layers = report.get("failure_layers")
+    if not isinstance(layers, Mapping) or set(layers) != set(FAILURE_LAYERS):
+        errors.append("aggregate failure-layer population is not exact")
+    elif any(not isinstance(value, int) or value < 0 or value > sample_count for value in layers.values()):
+        errors.append("aggregate failure-layer count is invalid")
+
+    action_counts = report.get("action_counts")
+    if not isinstance(action_counts, Mapping) or set(action_counts) != ACTIONS:
+        errors.append("aggregate action population is not exact")
+    elif any(not isinstance(value, int) or value <= 0 for value in action_counts.values()):
+        errors.append("aggregate action count is malformed")
+    elif sum(action_counts.values()) != sample_count:
+        errors.append("aggregate action arithmetic is invalid")
+
+    slices = report.get("slices")
+    if not isinstance(slices, Mapping) or not REQUIRED_SLICE_CATEGORIES.issubset(slices):
+        errors.append("aggregate slices are missing")
+    else:
+        for category, rows in slices.items():
+            if not isinstance(rows, list) or not rows:
+                errors.append(f"slice category is empty: {category}")
+                continue
+            keys = [row.get("slice_key") for row in rows if isinstance(row, Mapping)]
+            if len(keys) != len(rows) or len(set(keys)) != len(keys):
+                errors.append(f"slice keys are invalid: {category}")
+            total = 0
+            for row in rows:
+                if not isinstance(row, Mapping):
+                    errors.append(f"slice row is malformed: {category}")
+                    continue
+                passed, failed, row_total = row.get("passed"), row.get("failed"), row.get("total")
+                if not all(isinstance(value, int) and value >= 0 for value in (passed, failed, row_total)):
+                    errors.append(f"slice count is malformed: {category}")
+                elif passed + failed != row_total:
+                    errors.append(f"slice arithmetic is invalid: {category}")
+                total += row_total if isinstance(row_total, int) else 0
+            if total != sample_count:
+                errors.append(f"slice category total is malformed: {category}")
+    return ValidationResult(not errors, tuple(errors))
+
+
+def validate_aggregate(
+    report: Mapping[str, Any], expected_hashes: BoundHashes
+) -> ValidationResult:
+    errors = list(validate_aggregate_structure(report, expected_hashes).errors)
+    exact_counts = {
+        "group_count": GROUP_COUNT,
+        "scenario_count": SCENARIO_COUNT,
+        "multi_turn_count": MULTI_TURN_COUNT,
+        "one_shot_count": ONE_SHOT_COUNT,
+        "coverage_cell_count": SCENARIO_COUNT,
+        "repeats_per_scenario": REPEATS,
+        "sample_count": SAMPLE_COUNT,
+        "evaluation_exception_count": 0,
+        "missing_dimension_count": 0,
+        "case_level_artifact_count": 0,
+        "repeat_variance_count": 0,
+    }
+    for field_name, expected in exact_counts.items():
+        if report.get(field_name) != expected:
+            errors.append(f"aggregate {field_name} must equal {expected}")
+    return ValidationResult(not errors, tuple(dict.fromkeys(errors)))
+
+
+@dataclass(frozen=True)
+class OneShotPaths:
+    root: Path
+    seal_name: str = "lc4v6-source-seal.json"
+    marker_name: str = "lc4v6-attempt-marker.json"
+    report_name: str = "lc4v6-aggregate-report.json"
+    lock_name: str = "lc4v6-attempt.lock"
+
+    @property
+    def seal(self) -> Path:
+        return self.root / self.seal_name
+
+    @property
+    def marker(self) -> Path:
+        return self.root / self.marker_name
+
+    @property
+    def report(self) -> Path:
+        return self.root / self.report_name
+
+    @property
+    def lock(self) -> Path:
+        return self.root / self.lock_name
+
+
+def build_unconsumed_seal(source_commit: str, hashes: BoundHashes) -> dict[str, Any]:
+    return {
+        "schema_version": SEAL_SCHEMA_VERSION,
+        "attempt_id": ATTEMPT_ID,
+        "source_commit": source_commit,
+        "hashes": asdict(hashes),
+        "consumed": False,
+    }
+
+
+class OneShotStateMachine:
+    """Fail-closed one-shot transition with an exclusive durable lock.
+
+    Multiple-file replacement cannot be globally atomic. The exclusive lock is
+    intentionally retained: any interruption leaves state non-rerunnable and
+    therefore fails closed instead of silently authorizing a second evaluation.
     """
 
-    extractor: Extractor | None = None
-    resolver: PolicyResolver | None = None
-    evaluator: ReplayEvaluator | None = None
+    def __init__(self, paths: OneShotPaths, source_commit: str, hashes: BoundHashes):
+        self.paths = paths
+        self.source_commit = source_commit
+        self.hashes = hashes
 
+    def _read_json(self, path: Path) -> Mapping[str, Any] | None:
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            return None
+        return payload if isinstance(payload, Mapping) else None
 
-# ---------------------------------------------------------------------------
-# Public API
-# ---------------------------------------------------------------------------
+    def validate_prerun(self) -> ValidationResult:
+        errors: list[str] = []
+        expected = build_unconsumed_seal(self.source_commit, self.hashes)
+        seal = self._read_json(self.paths.seal)
+        if seal != expected:
+            errors.append("source seal is absent, malformed, consumed, or drifted")
+        for path, label in (
+            (self.paths.marker, "attempt marker"),
+            (self.paths.report, "aggregate report"),
+            (self.paths.lock, "attempt lock"),
+        ):
+            if path.exists():
+                errors.append(f"{label} already exists")
+        return ValidationResult(not errors, tuple(errors))
+
+    @staticmethod
+    def _atomic_json(path: Path, payload: Mapping[str, Any]) -> None:
+        temporary = path.with_suffix(path.suffix + ".tmp")
+        encoded = (json.dumps(payload, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
+        with temporary.open("xb") as stream:
+            stream.write(encoded)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, path)
+
+    def consume(self, report: Mapping[str, Any]) -> ValidationResult:
+        preflight = self.validate_prerun()
+        if not preflight.valid:
+            return preflight
+        report_validation = validate_aggregate_structure(report, self.hashes)
+        if not report_validation.valid:
+            return report_validation
+        self.paths.root.mkdir(parents=True, exist_ok=True)
+        try:
+            descriptor = os.open(self.paths.lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+        except FileExistsError:
+            return ValidationResult(False, ("attempt lock already exists",))
+        with os.fdopen(descriptor, "w", encoding="utf-8") as lock:
+            lock.write(ATTEMPT_ID + "\n")
+            lock.flush()
+            os.fsync(lock.fileno())
+
+        report_hash = sha256_payload(report)
+        consumed_seal = {
+            **build_unconsumed_seal(self.source_commit, self.hashes),
+            "consumed": True,
+            "report_hash": report_hash,
+        }
+        consumed_seal_hash = sha256_payload(consumed_seal)
+        marker = {
+            "schema_version": "lc4v6.attempt_marker.v1",
+            "attempt_id": ATTEMPT_ID,
+            "report_hash": report_hash,
+            "consumed_seal_hash": consumed_seal_hash,
+        }
+        try:
+            self._atomic_json(self.paths.report, report)
+            self._atomic_json(self.paths.seal, consumed_seal)
+            self._atomic_json(self.paths.marker, marker)
+        except OSError as error:
+            return ValidationResult(False, (f"one-shot transition failed closed: {error}",))
+        return ValidationResult(True)
+
 
 __all__ = [
+    "ACTIONS",
+    "AGGREGATE_SCHEMA_VERSION",
     "ATTEMPT_ID",
-    "AggregateReport",
     "BoundHashes",
+    "DIMENSIONS",
     "EvaluationContext",
-    "EvidenceValidationResult",
-    "Extractor",
-    "FIXED_MANIFEST_SHAPE",
-    "ManifestValidationResult",
+    "FAILURE_LAYERS",
+    "GROUP_COUNT",
+    "MANIFEST_SCHEMA_VERSION",
+    "MULTI_TURN_COUNT",
+    "ONE_SHOT_COUNT",
+    "OneShotPaths",
     "OneShotStateMachine",
-    "PolicyResolver",
-    "ReplayEvaluator",
-    "REPORT_FILENAME",
-    "SEAL_FILENAME",
-    "MARKER_FILENAME",
+    "REPEATS",
+    "REQUIRED_SLICE_CATEGORIES",
+    "SAMPLE_COUNT",
+    "SCENARIO_COUNT",
+    "SCHEMA_VERSION",
+    "SEAL_SCHEMA_VERSION",
     "ScenarioContract",
-    "StateMachineResult",
     "TypedObservation",
-    "bind_corpus_hash",
-    "bind_evaluator_hash",
-    "bind_framework_hash",
-    "bind_manifest_hash",
-    "bind_source_hash",
-    "hash_bytes",
-    "hash_content",
-    "reduce_observations",
-    "validate_evidence_population",
-    "validate_manifest_shape",
+    "ValidationResult",
+    "aggregate_observations",
+    "build_unconsumed_seal",
+    "canonical_json",
+    "sha256_bytes",
+    "sha256_payload",
+    "sha256_text",
+    "validate_aggregate",
+    "validate_aggregate_structure",
+    "validate_manifest",
+    "validate_observations",
 ]

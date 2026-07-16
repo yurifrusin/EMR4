@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All checks pass:\n\n- **Branch:** `claude/lc4v6-content-blind-framework` \u2713\n- **HEAD descends from** `4b9caf98` \u2713 (via merge-base ancestor check)\n- **Worktree clean** (3 untracked files, no modifications) \u2713\n- **Tests:** 75 passed, 0 failed, 0 skipped \u2713\n- **`git diff --check`:** clean \u2713\n\n## Summary\n\n### Created files (3)\n\n| File | Description |\n|---|---|\n| `app/services/bernie/lc4v6_content_blind_framework.py` | Empty framework: frozen schema, manifest validator, hash bindings, aggregate reducer, evidence validator, one-shot state machine, DI ports |\n| `tests/test_bernie_lc4v6_content_blind_framework.py` | 75 tests covering all required boundaries |\n| `orchestration/agent_inbox/claude/lc4v6-deepseek-candidate.md` | Durable candidate artifact |\n\n### Framework properties implemented\n\n1. **Frozen typed schema** \u2014 `ScenarioContract` and `TypedObservation` (`@dataclass(frozen=True)`)\n2. **Strict manifest validation** \u2014 exact fixed shape (24 groups, 288 scenarios, 72 multi-turn, 216 one-shot, 6 actions, 288 cells, 2 repeats)\n3. **Hash binding helpers** \u2014 `bind_source_hash`, `bind_corpus_hash`, `bind_manifest_hash`, `bind_framework_hash`, `bind_evaluator_hash` (all return `sha256:` prefixed)\n4. **Aggregate-only reducer** \u2014 `AggregateReport` contains no case-level fields (verified via field-inspection test)\n5. **Evidence validator** \u2014 checks exact population (576), zero variance, hash prefix, schema consistency\n6. **One-shot state machine** \u2014 fails closed without unconsumed seal; writes marker `lc4v6-fresh-attempt-001`, consumes seal, blocks rerun/overwrite/reuse\n7. **Dependency injection** \u2014 `EvaluationContext` with `Extractor`/`PolicyResolver`/`ReplayEvaluator` protocols; all optional for empty tests\n8. **No import-time execution**, no real V6 content, no scenario ID branching\n\n### Known limitations\n\n- Threshold acceptance rule not implemented (Sol-owned)\n- Slice arithmetic is placeholder (filled by future evaluator)\n- No file locking for cross-process safety\n\n---\n\nDECISION: pass",
+  "usage": {
+    "input_tokens": 58438,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 1545216,
+    "output_tokens": 22506,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 1.6394779999999995,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}
