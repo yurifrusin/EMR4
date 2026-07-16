@@ -48,8 +48,8 @@ sources is insufficient and must return `revision_required`.
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
 | Active product track | LC4V9 is sealed `certification_fail`; LC4V9D1 is accepted; genuinely fresh LC4V10 content-blind framework is in Sol recovery before pre-content veto |
 | Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-contract.md` and `lc4v10-one-shot-acceptance-rule.md`; D1 remains governed by `lc4v9d1-sol-acceptance.md` |
-| Current result | Flash candidate `8207f873` passed its self-tests but was rejected for conceptual scenario/sample conflation, oracle leakage, missing-dimension, source-binding, and in-memory lifecycle defects. Sol recovery now passes 27/27 focused and 114/114 combined ordinary/integrity nodes; no V10 content exists |
-| Next implementation | Commit the recovered V10 empty framework, obtain fresh Gemini pre-content veto, then close external sessions for Sol-only corpus authorship, immutable seal, and one one-shot certification. Preserve v1-v9, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
+| Current result | Flash candidate `8207f873` was rejected for conceptual fail-open defects. Sol recovery passes 27/27 focused and 114/114 combined nodes. Gemini confirmed the framework but its first command was 113/114 from stale handover strings; Sol fixed only that administrative gate and now reproduces 114/114. No V10 content exists |
+| Next implementation | Obtain one fresh exact-head Gemini pre-content veto with 114/114, then close external sessions for Sol-only corpus authorship, immutable seal, and one one-shot certification. Preserve v1-v9, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 
