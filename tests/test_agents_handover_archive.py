@@ -66,7 +66,7 @@ def test_compact_live_handover_retains_required_authority_and_boundaries() -> No
         "lc4v10-one-shot-acceptance-rule.md",
         "Flash candidate `8207f873`",
         "27/27 focused and 114/114 combined",
-        "no V10 content exists",
+        "No V10 content exists",
         "successive genuinely fresh holdout versions",
         "unexpected material decision fork",
         "standing authority does not",

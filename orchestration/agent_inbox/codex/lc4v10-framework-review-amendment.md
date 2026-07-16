@@ -22,3 +22,14 @@ The exact combined command now passes 114/114 on the integration worktree. A
 fresh Gemini project must reproduce 114/114 and return an exact-head decision
 before pre-content acceptance. The first review and its limitation remain
 preserved unchanged.
+
+## Second review
+
+The second fresh project correctly returned `revision_required` at reviewer
+commit `bfa5b613`: the exact gate was again 113/114 because the updated test
+required lowercase `no V10 content exists` while the current baton used the
+grammatically capitalized `No V10 content exists`. Sol changed that one test
+literal and reproduced 114/114 against the current handover. Framework,
+product, contract, thresholds, and protected state remain byte-for-byte
+unchanged from recovered head `d56db482`. One final fresh exact-head veto is
+required.
