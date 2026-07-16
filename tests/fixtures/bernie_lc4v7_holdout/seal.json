@@ -1,0 +1,10 @@
+{
+  "attempt_id": "lc4v7-fresh-certification-001",
+  "consumed_at": null,
+  "consumed_reason": null,
+  "corpus_hash": "sha256:966a537efb772a970da5c4159c2cca78fa861d4a8efd8edeea7bbaf9fcbfd068",
+  "manifest_hash": "sha256:10826fefbfdc05dde5727e8556a6eef05e65c4e0d7fe6451a87c9260960a280e",
+  "schema_version": "bernie.lc4v7.seal.v1",
+  "source_commit": "403fcafd0a3013072506f34c8cf8c7b6bd25f898",
+  "state": "unconsumed"
+}

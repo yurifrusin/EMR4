@@ -1,0 +1,66 @@
+{
+  "acceptance_rule_hash": "sha256:c693df6a9addc21d0e2e682540067a4b6e7943c48df1194973e570fbcf9ea9e7",
+  "attempt_id": "lc4v7-fresh-certification-001",
+  "contract_hash": "sha256:320ed7887950d961f76341e9002d56169a2c7dd113aaf43046e43bbb64ce2f2f",
+  "corpus_hash": "sha256:966a537efb772a970da5c4159c2cca78fa861d4a8efd8edeea7bbaf9fcbfd068",
+  "corpus_population": {
+    "actions": {
+      "cancel": 48,
+      "create": 48,
+      "explain_schedule": 48,
+      "move": 48,
+      "resize": 48,
+      "status_change": 48
+    },
+    "families": {
+      "cancel_ambiguous_practitioner": 12,
+      "cancel_guardrail_polarity": 12,
+      "cancel_known": 12,
+      "cancel_unknown_practitioner": 12,
+      "create_ambiguous_practitioner": 12,
+      "create_guardrail_polarity": 12,
+      "create_known": 12,
+      "create_unknown_practitioner": 12,
+      "explain_schedule_ambiguous_practitioner": 12,
+      "explain_schedule_guardrail_polarity": 12,
+      "explain_schedule_known": 12,
+      "explain_schedule_unknown_practitioner": 12,
+      "move_ambiguous_practitioner": 12,
+      "move_guardrail_polarity": 12,
+      "move_known": 12,
+      "move_unknown_practitioner": 12,
+      "resize_ambiguous_practitioner": 12,
+      "resize_guardrail_polarity": 12,
+      "resize_known": 12,
+      "resize_unknown_practitioner": 12,
+      "status_change_ambiguous_practitioner": 12,
+      "status_change_guardrail_polarity": 12,
+      "status_change_known": 12,
+      "status_change_unknown_practitioner": 12
+    },
+    "language_styles": {
+      "correction": 48,
+      "interval": 48,
+      "paraphrase": 48,
+      "plain": 48,
+      "speech_like": 48,
+      "word_order": 48
+    },
+    "scenarios": 288,
+    "turns": {
+      "multi": 72,
+      "one": 216
+    },
+    "unique_coverage_cells": 288
+  },
+  "created_by": "gpt_sol",
+  "framework_hashes": {
+    "app/services/bernie/lc4v7_acceptance_rule.py": "sha256:0bc280ef88e44085fee1bf4f06b7cdfa49ba9f7d7ddbda35b4cf11c54f344d1e",
+    "app/services/bernie/lc4v7_content_blind_framework.py": "sha256:df0a3e88c791308d7487cbb0e06ddd08e21f5685d229fed0edf06246ee575909",
+    "scripts/run_bernie_lc4v7_certification.py": "sha256:91ca17aac0be9af962de12321225c2f314bb6b2a85b74424357712704f0bc244",
+    "tests/test_bernie_lc4v7_acceptance_rule.py": "sha256:79702eb2318acccd203270784a113d0ba8ceee374002ac1799a34d579b2d4a27",
+    "tests/test_bernie_lc4v7_content_blind_framework.py": "sha256:57435dcae8262ab7dc9639b07a1ec20cf5391e5c91e59b710bba6043c24beabf"
+  },
+  "schema_version": "bernie.lc4v7.manifest.v1",
+  "source_commit": "403fcafd0a3013072506f34c8cf8c7b6bd25f898"
+}
