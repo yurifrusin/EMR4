@@ -46,8 +46,8 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V7D1 ordinary development exited cleanly; Yuri's conditional genuinely fresh LC4V8 authorization is active |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v7d1-sol-acceptance.md` and `docs/bernie-lc4v7d1-development-closeout.md` |
+| Active product track | LC4V8 genuinely fresh content-blind framework is in progress; no actual V8 corpus content exists yet |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v8-sol-contract.md` and `orchestration/agent_inbox/codex/lc4v8-one-shot-acceptance-rule.md`; LC4V7D1 closed under `lc4v7d1-sol-acceptance.md` |
 | Current result | D1 froze 24 valid fresh gaps, repaired only those rules, and now passes 24/24 normalization, extraction, policy, composition, and safety over 48 observations with zero variance. Gemini returned `DECISION: pass` on exact head `19d50763`; the broader serial preservation gate passed 680 nodes with 16 documented historical deselections. V7 remains consumed and unchanged |
 | Next implementation | Begin genuinely fresh LC4V8 content-blind: new framework only, generic evidence-vs-product taxonomy, fresh Gemini pre-content veto, then Sol-only corpus authorship, immutable seal, and one one-shot certification. Do not inspect or reuse V7 protected implementation/content. Preserve v1-v7, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
 
