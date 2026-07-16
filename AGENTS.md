@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V7 sole fresh attempt is consumed with `certification_invalid_acceptance_rule_misclassification`; user development-strategy decision required |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v7-sol-acceptance.md` and `docs/bernie-lc4v7-fresh-certification-closeout.md` |
+| Active product track | LC4V7 is consumed and sealed with an acceptance-rule misclassification; Yuri authorized bounded ordinary-development LC4V7D1 and a genuinely fresh LC4V8 if D1 exits cleanly |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v7d1-sol-contract.md`; V7 public aggregate authority remains `orchestration/agent_inbox/codex/lc4v7-sol-acceptance.md` and `docs/bernie-lc4v7-fresh-certification-closeout.md` |
 | Current result | V7 produced complete deterministic aggregate evidence over 576 samples with zero validation, runtime, missing-dimension, case-artifact, oracle, or variance defects and safety 576/576. Its executable rule incorrectly treated nonzero product policy/integration failures as evidence invalidity. Raw decision remains `certification_invalid`; aggregates also miss product gates, including complete 224/576, so there is no pass |
-| Next implementation | Pause at Yuri's decision boundary. Recommended option: bounded ordinary-development V7D1 using only fresh inspectable probes from public aggregates, first correcting future evidence-vs-product taxonomy, then adjudicating speech-like time, cross-turn intervals, ambiguous practitioners, and unknown-practitioner schedule explanation. Do not inspect, rerun, rescore, relabel, or repair sealed V7. Preserve v1-v7, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
+| Next implementation | Execute frozen LC4V7D1 using only 24 fresh inspectable ordinary probes across speech-like time, cross-turn intervals, ambiguous practitioner alternatives, and unknown-practitioner schedule explanation. Freeze and repair only valid fresh gaps. If D1 reaches its documented clean exit, begin separately fresh LC4V8 with the generic evidence-vs-product decision taxonomy. Preserve v1-v7, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 
