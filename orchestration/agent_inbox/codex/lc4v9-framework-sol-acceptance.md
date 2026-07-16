@@ -2,7 +2,7 @@
 
 Date: 2026-07-16
 
-Decision: `superseded_pending_fourth_veto`
+Decision: `framework_accepted_content_authoring_authorized`
 
 The content-blind framework and one-shot rule were frozen before any actual V9
 content. DeepSeek Flash's single candidate was preserved and rejected; Sol
@@ -94,3 +94,19 @@ The framework and adversarial tests are amended in
 `lc4v9-third-post-veto-interface-amendment.md`. This acceptance is superseded
 for authorship until the exact amended head receives one fresh independent
 pass. All protected paths remain absent and closed meanwhile.
+
+## Definitive five-outcome acceptance
+
+A fourth genuinely fresh Gemini 3.5 Flash/medium Antigravity project reviewed
+the complete amended outcome matrix at exact head
+`d5b82a242a7eea153b72db1034e176d6a10e6efe` and returned `DECISION: pass`.
+It reproduced 69/69 framework-plus-taxonomy tests, 74/74 ordinary D1 tests,
+and 2/2 selected runtime-isolation tests. Its one-file receipt commit was
+integrated at `14edf941`; the external session is closed.
+
+This supersedes the pending-veto status and is the definitive pre-content
+framework acceptance. The full five-outcome audit now matches ordinary policy,
+including empty clarification choices and the single bounded no-action patient
+lookup, without weakening any mutation, evidence, source-binding, threshold,
+or aggregate-report guard. No V9 protected content existed at this point.
+Sol-only authorship under the frozen paths and attempt ID is authorized.
