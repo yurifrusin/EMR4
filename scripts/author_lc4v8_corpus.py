@@ -275,13 +275,13 @@ def main() -> int:
     if errors:
         raise SystemExit("; ".join(errors))
     args.fixture.parent.mkdir(parents=True, exist_ok=True)
-    args.fixture.write_text(
-        json.dumps(fixture, sort_keys=True, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8",
+    args.fixture.write_bytes(
+        (json.dumps(fixture, sort_keys=True, indent=2, ensure_ascii=False) + "\n")
+        .encode("utf-8")
     )
-    args.thresholds.write_text(
-        json.dumps(FROZEN_THRESHOLDS, sort_keys=True, indent=2) + "\n",
-        encoding="utf-8",
+    args.thresholds.write_bytes(
+        (json.dumps(FROZEN_THRESHOLDS, sort_keys=True, indent=2) + "\n")
+        .encode("utf-8")
     )
     return 0
 
