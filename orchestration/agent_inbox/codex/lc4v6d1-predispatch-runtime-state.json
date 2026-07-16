@@ -55,7 +55,7 @@
     ]
   },
   "continuation_event": "pre_worker_dispatch",
-  "planned_action": "worker_dispatch",
+  "planned_action": "push",
   "schema_version": "ariadne.orchestrator_runtime_state.v1",
   "worker_slots": [
     {
