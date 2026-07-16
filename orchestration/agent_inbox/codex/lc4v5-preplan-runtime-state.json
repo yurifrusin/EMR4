@@ -10,7 +10,7 @@
   "assigned_agent_ids": [],
   "context_health": {"agent_contexts":[{"agent_id":"orchestrator","measurement_source":"unknown","rehydrated_from_receipt":true,"rehydration_sources":["live_handover_current_baton","current_authority_allocation","active_plan_and_acceptance","protected_evidence_boundaries","git_refs_and_worktree"]}]},
   "continuation_event": "pre_worker_dispatch",
-  "planned_action": "integration",
+  "planned_action": "commit",
   "schema_version": "ariadne.orchestrator_runtime_state.v1",
   "worker_slots": [{"active_instance_ids":[],"resource_id":"deepseek-flash-workers","stale_instance_ids":[]}],
   "workspace_receipts": []

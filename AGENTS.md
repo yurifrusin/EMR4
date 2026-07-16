@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V5 genuinely fresh one-shot certification; protected source frozen and unconsumed seal minted; single production evaluation next |
+| Active product track | LC4V5 genuinely fresh one-shot certification complete and permanently sealed; valid evidence returned certification fail; user remediation decision required |
 | Active acceptance | `orchestration/agent_inbox/codex/lc4v5-sol-contract.md` and `lc4v5-one-shot-acceptance-rule.md`, grounded by accepted D5E1 exit |
-| Current result | D5E1 remains the accepted development exit. LC4V5's recovered content-blind framework passed Gemini veto on exact head `4cfa2c45`; external sessions then closed. Sol alone froze the 24-group/288-scenario source at `c2dd34b6`, corpus hash `d5828f9e...`, manifest hash `650510b5...`, and unconsumed seal hash `b45958f3...`. No parser or replay ran during authoring |
-| Next implementation | Commit and push the unconsumed seal checkpoint, verify absent marker/report/receipt and clean origin relation, then Sol performs the aggregate-only production evaluation exactly once. Accept the valid result without reopening v5, close out, and stop at the post-result product/runtime adoption decision barrier. Preserve v1-v4 seals, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
+| Current result | LC4V5 attempt `lc4v5-fresh-attempt-001` is consumed and sealed. All evidence gates passed over 24 groups, 288 scenarios, 576 samples, and zero variance; report hash `17c12355...`, consumed seal hash `f3b8d31d...`. Product result is `certification_fail`: complete 512/576, safety 560/576, interpretation failures 48, integration 16, policy 2, safety 16. Every one of the twelve individual semantic dimensions still clears 548; failures concentrate in three aggregate families |
+| Next implementation | Pause at Yuri's documented decision boundary. Recommended next track is a fresh inspectable development-only LC4V5R1 diagnostic/remediation tranche ordered by risk: create-approximate safety, move-interval normalization, then ambiguous-resize clarification. Never reopen or reuse v5 content; authorize a genuinely fresh later holdout only after ordinary development exit. Preserve T3.1-T3.4 and all T3.5/provider/product/write boundaries |
 
 LC4V4 provenance: the frozen pre-content records remain
 `lc4v4q1-sol-contract.md`, `lc4v4q1-sol-recovery-amendment.md`,

@@ -15254,3 +15254,29 @@ Status: accepted and independently reviewed on 2026-07-14.
 Sprint engine state: LC1 complete. Next recommended product tranche is LC2
 Corpus Factory and Independent Adjudication; no user decision is currently
 required inside its documented synthetic, provider-free boundary.
+
+## LC4V5 Fresh Certification — 2026-07-16
+
+- DeepSeek V4 Flash produced a content-blind candidate; Sol preserved it,
+  corrected material fail-open evidence and one-shot defects, and passed 113
+  serial framework/dependency tests.
+- Gemini 3.5 Flash returned `DECISION: pass` on exact pre-content head
+  `4cfa2c45`; both external worktrees were removed before content existed.
+- Sol alone froze source commit `c2dd34b6`, minted an unconsumed seal, pushed the
+  checkpoint, and executed attempt `lc4v5-fresh-attempt-001` exactly once.
+- All evidence gates pass over 576 samples with zero exceptions, zero case-level
+  artifacts, and zero variance. The consumed seal binds report hash
+  `17c12355...`.
+- Product certification fails: complete 512/576, safety 560/576,
+  interpretation failures 48, safety failures 16. Every individual semantic
+  dimension nevertheless clears its 548/576 threshold.
+- All 64 complete failures occur in three aggregate families; no per-case
+  selection exists or was opened. The post-run serial gate passed 123 tests.
+- V5 is permanently sealed. T3.1-T3.4 remain intact and T3.5/providers,
+  runtime/default changes, APIs, UI, database, deployment, release, and writes
+  remain closed.
+
+Sprint engine state: pause at the user decision boundary. Recommended next work
+is a new inspectable development-only LC4V5R1 remediation tranche ordered by
+create-approximate safety, move-interval normalization, and ambiguous-resize
+clarification. A later holdout must be genuinely fresh and separately approved.
