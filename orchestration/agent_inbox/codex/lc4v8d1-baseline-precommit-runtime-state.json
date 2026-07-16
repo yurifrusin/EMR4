@@ -1,0 +1,17 @@
+{
+  "adapter_observations": [
+    {"adapter_id":"deepseek_via_claude_code_bare","evidence":["Flash self-pass remains rejected; its session is closed and no correction loop is open."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"deepcode_cli","evidence":["Fallback unselected."],"method":"synthetic_fixture","reachability":"unknown"},
+    {"adapter_id":"claude_cli_print","evidence":["No Claude Code worker active."],"method":"synthetic_fixture","reachability":"unknown"},
+    {"adapter_id":"antigravity_cli_print","evidence":["Fresh final exact-head veto is the next step after baseline commit."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"codex_primary_session","evidence":["GPT Sol freezes a 24/24 empty-selection baseline at recovered source 8823bf0d; 86 baseline/authorship/handover nodes pass."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"codex_subagent_spawn","evidence":["No native subagent assigned."],"method":"synthetic_fixture","reachability":"unknown"}
+  ],
+  "assigned_agent_ids": [],
+  "context_health": {"agent_contexts":[{"agent_id":"orchestrator","measurement_source":"unknown","rehydrated_from_receipt":true,"rehydration_sources":["live_handover_current_baton","current_authority_allocation","active_plan_and_acceptance","protected_evidence_boundaries","git_refs_and_worktree"]}]},
+  "continuation_event": "post_compaction",
+  "planned_action": "commit",
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "worker_slots": [{"active_instance_ids":[],"resource_id":"deepseek-flash-workers","stale_instance_ids":[]}],
+  "workspace_receipts": []
+}

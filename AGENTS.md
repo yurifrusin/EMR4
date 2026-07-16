@@ -48,8 +48,8 @@ sources is insufficient and must return `revision_required`.
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
 | Active product track | Yuri authorized ordinary-development LC4V8D1; its fresh projection diagnostic is frozen before baseline |
 | Active acceptance | `orchestration/agent_inbox/codex/lc4v8d1-sol-contract.md`; V8 remains accepted and sealed under `lc4v8-sol-acceptance.md` |
-| Current result | Sol authored 24 inspectable probes from public aggregates only: six canonical policy actions, six policy boundaries, six time surfaces, and six temporal-composition cases. Cross-field authorship checks pass 6/6. A contained pre-authoring metadata-only protected search incident exposed no case/Gold content |
-| Next implementation | Obtain fresh Gemini pre-baseline veto, then dispatch one bounded DeepSeek Flash runner/test candidate through Claude Code `--bare`; freeze the two-repeat baseline selection before any remediation. Preserve v1-v8, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
+| Current result | Recovered D1 baseline passes 24/24 normalization, extraction, semantic policy behavior, exact canonical projection, composition, and safety across 48 observations with zero variance and an empty selection. This supports a V8-specific Gold/evaluator mismatch and authorizes no product repair. The contained metadata incident exposed no case/Gold content |
+| Next implementation | Obtain fresh Gemini exact-head veto over recovered source and the frozen no-remediation conclusion, then run broader serial preservation, accept, close out, commit, and push. Preserve v1-v8, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 

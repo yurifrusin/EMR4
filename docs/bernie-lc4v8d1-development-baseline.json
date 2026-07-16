@@ -1,0 +1,41 @@
+{
+  "schema_version": "bernie.lc4v8d1.baseline_receipt.v1",
+  "date": "2026-07-16",
+  "decision": "development_diagnostic_pass_empty_selection_no_remediation_authorized",
+  "source_commit": "8823bf0d",
+  "evidence_class": "fresh_inspectable_ordinary_development_only",
+  "protected_source_used": false,
+  "fixture_raw_hash": "sha256:ebcfe4bbbd9c89dff00f1ff30643f2b9dc21f5cfba5febf62fd22e041f76269c",
+  "fixture_canonical_hash": "sha256:a15a9ad47cd576679ac393c758216a3257ad1f67aa4b4455ef8c6b574c5f376e",
+  "report_hash": "sha256:e7507a4333316012449168f4e11ab93e0b8b60b29c1495b1864eb932bd5fa0bd",
+  "selection": {
+    "non_pass_count": 0,
+    "selection_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "aggregate": {
+    "total": 24,
+    "normalization_pass": 24,
+    "extraction_pass": 24,
+    "policy_behavior_pass": 24,
+    "policy_projection_pass": 24,
+    "composed_pass": 24,
+    "safe": 24,
+    "variance": 0
+  },
+  "classifications": {
+    "pass": 24,
+    "authoring_invalid": 0,
+    "normalization_gap": 0,
+    "parser_gap": 0,
+    "policy_behavior_gap": 0,
+    "policy_projection_gap": 0
+  },
+  "family_counts": {
+    "canonical_policy_actions": 6,
+    "policy_boundaries": 6,
+    "time_surface_forms": 6,
+    "time_relation_composition": 6
+  },
+  "repeat_observations": 48,
+  "product_runtime_files_changed": []
+}
