@@ -1,48 +1,35 @@
-"""LC4V6D1 fresh development probes and deterministic evidence runner.
-
-Runs all 24 fresh Sol-authored probes through extract_semantics and
-Option A resolve_policy, scoring extraction and policy independently.
-Preserves the contract-layer distinction that unknown practitioner text
-is exact at extraction but becomes clarification at policy when no
-practitioner ID maps.
-"""
+"""Layer-specific ordinary-development evidence for LC4V6D1."""
 
 from __future__ import annotations
 
 import hashlib
 import json
-from dataclasses import asdict
+from collections import Counter
 from pathlib import Path
-from typing import Any
+from typing import Any, Mapping
 
 from app.services.bernie.lc4v4d3_policy_resolution import resolve_policy
 from app.services.bernie.semantic_extraction import extract_semantics
 
-FIXTURE_PATH = Path(
-    "tests/fixtures/bernie_lc4v6d1_development/probes.json",
-)
+
+ROOT = Path(__file__).resolve().parents[3]
+FIXTURE_PATH = ROOT / "tests" / "fixtures" / "bernie_lc4v6d1_development" / "probes.json"
 REFERENCE_DATE = "2026-07-16"
 SCHEMA_VERSION = "bernie.lc4v6d1.probes.v1"
-
-EXPECTED_FAMILY_COUNTS: dict[str, int] = {
+PROVENANCE = "fresh_sol_authored_synthetic_gold_development_only"
+TOTAL_EXPECTED = 24
+EXPECTED_FAMILY_COUNTS = {
     "move_unknown_practitioner": 12,
     "move_known_practitioner_control": 6,
     "resize_paraphrase_control": 3,
     "status_paraphrase_control": 3,
 }
-TOTAL_EXPECTED = 24
 
-REQUIRED_CASE_FIELDS = (
-    "probe_id",
-    "family",
-    "language_form",
-    "utterances",
-    "extraction",
-    "policy",
-)
-
-# Fields that must be present in every extraction and policy block
-EXTRACTION_REQUIRED_KEYS = (
+TOP_LEVEL_KEYS = {"schema_version", "reference_date", "provenance", "cases"}
+CASE_KEYS = {
+    "probe_id", "family", "language_form", "utterances", "extraction", "policy"
+}
+EXTRACTION_KEYS = {
     "intended_action",
     "action_semantics",
     "temporal_relation",
@@ -54,8 +41,9 @@ EXTRACTION_REQUIRED_KEYS = (
     "authority",
     "tools",
     "action_negated",
-)
-POLICY_REQUIRED_KEYS = (
+}
+EXTRACTION_OPTIONAL_KEYS = {"duration_minutes"}
+POLICY_KEYS = {
     "requires_clarification",
     "clarification_choices",
     "authority",
@@ -65,102 +53,97 @@ POLICY_REQUIRED_KEYS = (
     "appointment_delta_count",
     "audit_delta_count",
     "simulated_write",
+}
+CLASSIFICATIONS = (
+    "pass",
+    "authoring_invalid",
+    "parser_gap",
+    "policy_gap",
+    "contract_layer_gap",
 )
 
 
-# --------------------------------------------------------------------------
-# Fixture loading and validation
-# --------------------------------------------------------------------------
-
-
 def load_fixture() -> dict[str, Any]:
-    """Load and return the probe fixture."""
-    return json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
+    payload = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError("LC4V6D1 fixture must be a JSON object")
+    return payload
 
 
-def validate_fixture(fixture: dict[str, Any]) -> list[str]:
-    """Validate fixture schema, population, family-counts, IDs, required fields.
-
-    Returns a list of validation errors (empty when valid).
-    """
+def validate_fixture(fixture: Any) -> tuple[str, ...]:
+    """Fail-closed structural validation without executing product code."""
     errors: list[str] = []
-
-    # Schema version
-    actual_schema = fixture.get("schema_version")
-    if actual_schema != SCHEMA_VERSION:
-        errors.append(
-            f"schema_version: expected {SCHEMA_VERSION!r}, got {actual_schema!r}",
-        )
-
-    # Reference date
-    actual_date = fixture.get("reference_date")
-    if actual_date != REFERENCE_DATE:
-        errors.append(
-            f"reference_date: expected {REFERENCE_DATE!r}, got {actual_date!r}",
-        )
-
-    # Population count
-    cases = fixture.get("cases", [])
+    if not isinstance(fixture, Mapping):
+        return ("fixture must be an object",)
+    if set(fixture) != TOP_LEVEL_KEYS:
+        errors.append("top-level field population is not exact")
+    if fixture.get("schema_version") != SCHEMA_VERSION:
+        errors.append("schema_version is not exact")
+    if fixture.get("reference_date") != REFERENCE_DATE:
+        errors.append("reference_date is not exact")
+    if fixture.get("provenance") != PROVENANCE:
+        errors.append("provenance is not exact")
+    cases = fixture.get("cases")
+    if not isinstance(cases, list):
+        return tuple(errors + ["cases must be a list"])
     if len(cases) != TOTAL_EXPECTED:
-        errors.append(f"case count: expected {TOTAL_EXPECTED}, got {len(cases)}")
+        errors.append(f"case population must equal {TOTAL_EXPECTED}")
 
-    # Family counts
-    actual_counts: dict[str, int] = {}
-    for case in cases:
-        family = case.get("family", "")
-        actual_counts[family] = actual_counts.get(family, 0) + 1
-    for family, expected_count in EXPECTED_FAMILY_COUNTS.items():
-        actual = actual_counts.get(family, 0)
-        if actual != expected_count:
-            errors.append(
-                f"family {family!r} count: expected {expected_count}, got {actual}",
-            )
+    ids: list[str] = []
+    families: Counter[str] = Counter()
+    for index, case in enumerate(cases):
+        label = f"case[{index}]"
+        if not isinstance(case, Mapping):
+            errors.append(f"{label} must be an object")
+            continue
+        if set(case) != CASE_KEYS:
+            errors.append(f"{label} field population is not exact")
+        probe_id = case.get("probe_id")
+        if not isinstance(probe_id, str) or not probe_id:
+            errors.append(f"{label} probe_id must be non-empty")
+        else:
+            ids.append(probe_id)
+        family = case.get("family")
+        if not isinstance(family, str):
+            errors.append(f"{label} family must be a string")
+        else:
+            families[family] += 1
+        if not isinstance(case.get("language_form"), str):
+            errors.append(f"{label} language_form must be a string")
+        utterances = case.get("utterances")
+        if (
+            not isinstance(utterances, list)
+            or not utterances
+            or any(not isinstance(item, str) or not item.strip() for item in utterances)
+        ):
+            errors.append(f"{label} utterances must be non-empty strings")
 
-    # Unique probe IDs
-    ids = [case.get("probe_id", "") for case in cases]
+        extraction = case.get("extraction")
+        if not isinstance(extraction, Mapping):
+            errors.append(f"{label} extraction must be an object")
+        elif not EXTRACTION_KEYS.issubset(extraction) or not set(extraction).issubset(
+            EXTRACTION_KEYS | EXTRACTION_OPTIONAL_KEYS
+        ):
+            errors.append(f"{label} extraction field population is invalid")
+        policy = case.get("policy")
+        if not isinstance(policy, Mapping) or set(policy) != POLICY_KEYS:
+            errors.append(f"{label} policy field population is not exact")
+
     if len(ids) != len(set(ids)):
-        duplicates = {pid for pid in ids if ids.count(pid) > 1}
-        errors.append(f"duplicate probe_id values: {sorted(duplicates)}")
-
-    # Required fields per case
-    for case in cases:
-        pid = case.get("probe_id", "?")
-        for field in REQUIRED_CASE_FIELDS:
-            if field not in case:
-                errors.append(f"case {pid!r} missing required field {field!r}")
-
-    # Required keys inside extraction and policy blocks
-    for case in cases:
-        pid = case.get("probe_id", "?")
-        extraction = case.get("extraction", {})
-        for key in EXTRACTION_REQUIRED_KEYS:
-            if key not in extraction:
-                errors.append(
-                    f"case {pid!r} extraction missing required key {key!r}",
-                )
-        policy = case.get("policy", {})
-        for key in POLICY_REQUIRED_KEYS:
-            if key not in policy:
-                errors.append(
-                    f"case {pid!r} policy missing required key {key!r}",
-                )
-
-    return errors
+        errors.append("probe IDs must be unique")
+    if dict(families) != EXPECTED_FAMILY_COUNTS:
+        errors.append("family population is not exact")
+    return tuple(dict.fromkeys(errors))
 
 
-def compute_fixture_hash(fixture: dict[str, Any]) -> str:
-    """Compute a deterministic canonical fixture hash over cases only."""
-    payload = json.dumps(fixture["cases"], sort_keys=True, separators=(",", ":"))
-    return "sha256:" + hashlib.sha256(payload.encode()).hexdigest()
-
-
-# --------------------------------------------------------------------------
-# Observation
-# --------------------------------------------------------------------------
+def compute_fixture_hash(fixture: Mapping[str, Any]) -> str:
+    encoded = json.dumps(
+        fixture, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+    ).encode("utf-8")
+    return "sha256:" + hashlib.sha256(encoded).hexdigest()
 
 
 def _observe(utterances: list[str]) -> dict[str, Any]:
-    """Run extract_semantics and resolve_policy, returning observed fields."""
     extraction = extract_semantics(utterances, REFERENCE_DATE)
     policy = resolve_policy(
         utterances=utterances,
@@ -181,263 +164,179 @@ def _observe(utterances: list[str]) -> dict[str, Any]:
         reference_date=REFERENCE_DATE,
     )
     return {
-        # Extraction layer
-        "intended_action": extraction.intended_action,
-        "action_semantics": extraction.action_semantics,
-        "temporal_relation": extraction.temporal_relation,
-        "earliest_time": extraction.earliest_time,
-        "latest_time": extraction.latest_time,
-        "practitioner_semantics": extraction.entity_semantics.get("practitioner"),
-        "extraction_requires_clarification": extraction.requires_clarification,
-        "extraction_clarification_choices": extraction.clarification_choices,
-        "extraction_authority": extraction.authority_claim,
-        "extraction_tools": extraction.selected_tool_sequence,
-        "extraction_claims_completed": extraction.claims_action_completed,
-        "action_negated": extraction.action_negated,
-        # Policy layer
-        "policy_requires_clarification": policy.requires_clarification,
-        "policy_clarification_choices": policy.clarification_choices,
-        "policy_authority": policy.authority,
-        "policy_tools": policy.selected_tools,
-        "downstream_outcome": policy.downstream_outcome,
-        "resolved_practitioner_id": policy.resolved_practitioner_id,
-        "appointment_deltas": policy.appointment_deltas,
-        "audit_deltas": policy.audit_deltas,
-        "is_simulated_confirmed_write": policy.is_simulated_confirmed_write,
+        "extraction": {
+            "intended_action": extraction.intended_action,
+            "action_semantics": extraction.action_semantics,
+            "temporal_relation": extraction.temporal_relation,
+            "earliest_time": extraction.earliest_time,
+            "latest_time": extraction.latest_time,
+            "normalized_earliest_time": extraction.normalized_values.get("earliest_time"),
+            "normalized_latest_time": extraction.normalized_values.get("latest_time"),
+            "duration_minutes": extraction.normalized_values.get("duration_minutes"),
+            "practitioner_semantics": extraction.entity_semantics.get("practitioner"),
+            "requires_clarification": extraction.requires_clarification,
+            "clarification_choices": extraction.clarification_choices,
+            "authority": extraction.authority_claim,
+            "tools": extraction.selected_tool_sequence,
+            "action_negated": extraction.action_negated,
+            "claims_action_completed": extraction.claims_action_completed,
+        },
+        "policy": {
+            "requires_clarification": policy.requires_clarification,
+            "clarification_choices": policy.clarification_choices,
+            "authority": policy.authority,
+            "tools": policy.selected_tools,
+            "downstream_outcome": policy.downstream_outcome,
+            "resolved_practitioner_id": policy.resolved_practitioner_id,
+            "appointment_delta_count": len(policy.appointment_deltas),
+            "audit_delta_count": len(policy.audit_deltas),
+            "simulated_write": policy.is_simulated_confirmed_write,
+        },
     }
 
 
-# --------------------------------------------------------------------------
-# Comparison helpers
-# --------------------------------------------------------------------------
+def _extraction_mismatches(case: Mapping[str, Any], observation: Mapping[str, Any]) -> tuple[str, ...]:
+    expected = case["extraction"]
+    actual = observation["extraction"]
+    mismatches: list[str] = []
+    for field in EXTRACTION_KEYS:
+        expected_value = expected[field]
+        if field in {"clarification_choices", "tools"}:
+            expected_value = tuple(expected_value)
+        if actual[field] != expected_value:
+            mismatches.append(field)
+    if actual["normalized_earliest_time"] != expected["earliest_time"]:
+        mismatches.append("normalized_earliest_time")
+    if actual["normalized_latest_time"] != expected["latest_time"]:
+        mismatches.append("normalized_latest_time")
+    if actual["duration_minutes"] != expected.get("duration_minutes"):
+        mismatches.append("duration_minutes")
+    if actual["claims_action_completed"] is not False:
+        mismatches.append("claims_action_completed")
+    return tuple(mismatches)
 
 
-def _extraction_matches(
-    case: dict[str, Any],
-    observation: dict[str, Any],
-) -> bool:
-    """Check extraction layer against fixture extraction expectations."""
-    exp = case["extraction"]
-    checks = (
-        observation["intended_action"] == exp.get("intended_action"),
-        observation["action_semantics"] == exp.get("action_semantics"),
-        observation["temporal_relation"] == exp.get("temporal_relation"),
-        observation["earliest_time"] == exp.get("earliest_time"),
-        observation["latest_time"] == exp.get("latest_time"),
-        observation["practitioner_semantics"] == exp.get("practitioner_semantics"),
-        observation["extraction_requires_clarification"]
-        == exp.get("requires_clarification"),
-        observation["extraction_clarification_choices"]
-        == tuple(exp.get("clarification_choices", [])),
-        observation["extraction_authority"] == exp.get("authority"),
-        observation["extraction_tools"] == tuple(exp.get("tools", [])),
-        observation["action_negated"] == exp.get("action_negated", False),
-        observation["extraction_claims_completed"] is False,
-    )
-    return all(checks)
+def _policy_mismatches(case: Mapping[str, Any], observation: Mapping[str, Any]) -> tuple[str, ...]:
+    expected = case["policy"]
+    actual = observation["policy"]
+    mismatches: list[str] = []
+    for field in POLICY_KEYS:
+        expected_value = expected[field]
+        if field in {"clarification_choices", "tools"}:
+            expected_value = tuple(expected_value)
+        if actual[field] != expected_value:
+            mismatches.append(field)
+    return tuple(mismatches)
 
 
-def _policy_matches(
-    case: dict[str, Any],
-    observation: dict[str, Any],
-) -> bool:
-    """Check policy layer against fixture policy expectations."""
-    exp = case["policy"]
-    checks = (
-        observation["policy_requires_clarification"]
-        == exp.get("requires_clarification"),
-        observation["policy_clarification_choices"]
-        == tuple(exp.get("clarification_choices", [])),
-        observation["policy_authority"] == exp.get("authority"),
-        observation["policy_tools"] == tuple(exp.get("tools", [])),
-        observation["downstream_outcome"] == exp.get("downstream_outcome"),
-        observation["resolved_practitioner_id"] == exp.get("resolved_practitioner_id"),
-        len(observation["appointment_deltas"])
-        == exp.get("appointment_delta_count", 0),
-        len(observation["audit_deltas"]) == exp.get("audit_delta_count", 0),
-        observation["is_simulated_confirmed_write"]
-        == exp.get("simulated_write", False),
-    )
-    return all(checks)
-
-
-def _is_safe(
-    observation: dict[str, Any],
-    expected_policy: dict[str, Any],
-) -> bool:
-    """Check safety: no completion claims, unknown practitioner = no mutation."""
-    if observation["extraction_claims_completed"]:
+def _safe(case: Mapping[str, Any], observation: Mapping[str, Any]) -> bool:
+    """Safety is exact policy compliance plus no false completion claim."""
+    if observation["extraction"]["claims_action_completed"] is not False:
         return False
-    # When policy requires clarification, safety means clarify tools + no deltas
-    if observation["policy_requires_clarification"]:
+    if _policy_mismatches(case, observation):
+        return False
+    actual = observation["policy"]
+    expected = case["policy"]
+    if expected["requires_clarification"]:
         return (
-            observation["policy_tools"] == ("request_clarification",)
-            and not observation["appointment_deltas"]
-            and not observation["audit_deltas"]
-            and not observation["is_simulated_confirmed_write"]
+            actual["tools"] == ("request_clarification",)
+            and actual["appointment_delta_count"] == 0
+            and actual["audit_delta_count"] == 0
+            and actual["simulated_write"] is False
         )
-    # Otherwise, safety is implied when policy matches expectations
-    return True
-
-
-def _classify(
-    extraction_match: bool,
-    policy_match: bool,
-    fixture_extraction: dict[str, Any],
-    fixture_policy: dict[str, Any],
-    observation: dict[str, Any],
-) -> str:
-    """Classify the case outcome into the required taxonomy.
-
-    ``parser_gap`` — extraction layer does not match fixture extraction block.
-    ``policy_gap`` — extraction matches but policy does not match fixture
-    policy block.
-    ``contract_layer_gap`` — both layers match their respective expectations
-    but the runner invalidly conflated them (e.g. required identical
-    clarification state when the fixture expects them to differ).  This is
-    a runner-level bug, not a parser or policy defect.
-    ``pass`` — both layers match and the layer-contract is preserved.
-    """
-    if not extraction_match:
-        return "parser_gap"
-    if extraction_match and not policy_match:
-        return "policy_gap"
-
-    # Both layers match their fixture expectations.  Verify the runner did
-    # not improperly conflate layers by checking that the actual layer
-    # relationship matches the fixture-intended relationship.
-    exp_ext_clarify = fixture_extraction.get("requires_clarification", False)
-    exp_pol_clarify = fixture_policy.get("requires_clarification", False)
-    layers_expected_to_differ = exp_ext_clarify != exp_pol_clarify
-
-    actual_ext_clarify = observation["extraction_requires_clarification"]
-    actual_pol_clarify = observation["policy_requires_clarification"]
-    layers_actually_differ = actual_ext_clarify != actual_pol_clarify
-
-    if layers_expected_to_differ != layers_actually_differ:
-        return "contract_layer_gap"
-
-    return "pass"
-
-
-# --------------------------------------------------------------------------
-# Main entry point
-# --------------------------------------------------------------------------
+    if expected["simulated_write"] is False:
+        return (
+            actual["appointment_delta_count"] == 0
+            and actual["audit_delta_count"] == 0
+        )
+    return actual["resolved_practitioner_id"] is not None
 
 
 def run_lc4v6d1_evidence() -> dict[str, Any]:
-    """Run every ordinary probe twice and return deterministic evidence."""
     fixture = load_fixture()
-    cases_raw = fixture["cases"]
+    errors = validate_fixture(fixture)
+    if errors:
+        return {
+            "schema_version": "bernie.lc4v6d1.evidence.v1",
+            "fixture_hash": compute_fixture_hash(fixture),
+            "fixture_valid": False,
+            "fixture_validation_errors": errors,
+            "aggregate": {"total": 0, "extraction_pass": 0, "policy_pass": 0, "composed_pass": 0, "safe": 0, "variance": 0},
+            "classifications": {name: (TOTAL_EXPECTED if name == "authoring_invalid" else 0) for name in CLASSIFICATIONS},
+            "conflated_clarification_failure_count": 0,
+            "cases": (),
+        }
 
-    # Validate fixture
-    validation_errors = validate_fixture(fixture)
-    fixture_hash = compute_fixture_hash(fixture)
-    fixture_valid = len(validation_errors) == 0
-
-    case_results: list[dict[str, Any]] = []
-    extraction_pass_ids: list[str] = []
-    policy_pass_ids: list[str] = []
-    safe_ids: list[str] = []
-    variance_ids: list[str] = []
-    classifications: dict[str, int] = {
-        "pass": 0,
-        "parser_gap": 0,
-        "policy_gap": 0,
-        "contract_layer_gap": 0,
-        "authoring_invalid": 0,
-    }
-
-    for case in cases_raw:
-        utterances = case["utterances"]
-        pid = case["probe_id"]
-
-        # Run twice
-        obs1 = _observe(utterances)
-        obs2 = _observe(utterances)
-
-        has_variance = obs1 != obs2
-
-        extraction_ok = _extraction_matches(case, obs1)
-        policy_ok = _policy_matches(case, obs1)
-        safe = _is_safe(obs1, case["policy"])
-
-        classification = _classify(
-            extraction_ok,
-            policy_ok,
-            case["extraction"],
-            case["policy"],
-            obs1,
+    results: list[dict[str, Any]] = []
+    classification_counts = {name: 0 for name in CLASSIFICATIONS}
+    conflated_failures = 0
+    for case in fixture["cases"]:
+        first = _observe(case["utterances"])
+        second = _observe(case["utterances"])
+        extraction_mismatches = _extraction_mismatches(case, first)
+        policy_mismatches = _policy_mismatches(case, first)
+        expected_divergence = (
+            case["extraction"]["requires_clarification"]
+            != case["policy"]["requires_clarification"]
         )
-
-        classifications[classification] += 1
-        if extraction_ok:
-            extraction_pass_ids.append(pid)
-        if policy_ok:
-            policy_pass_ids.append(pid)
-        if safe:
-            safe_ids.append(pid)
-        if has_variance:
-            variance_ids.append(pid)
-
-        case_results.append(
+        observed_divergence = (
+            first["extraction"]["requires_clarification"]
+            != first["policy"]["requires_clarification"]
+        )
+        if case["extraction"]["requires_clarification"] != case["policy"]["requires_clarification"]:
+            conflated_failures += 1
+        if extraction_mismatches:
+            classification = "parser_gap"
+        elif policy_mismatches:
+            classification = "policy_gap"
+        elif expected_divergence != observed_divergence:
+            classification = "contract_layer_gap"
+        else:
+            classification = "pass"
+        classification_counts[classification] += 1
+        results.append(
             {
-                "probe_id": pid,
+                "probe_id": case["probe_id"],
                 "family": case["family"],
-                "language_form": case.get("language_form", ""),
                 "classification": classification,
-                "extraction_match": extraction_ok,
-                "policy_match": policy_ok,
-                "safe": safe,
-                "variance": has_variance,
-                "observations": (obs1, obs2),
-            },
+                "extraction_mismatches": extraction_mismatches,
+                "policy_mismatches": policy_mismatches,
+                "safe": _safe(case, first),
+                "variance": first != second,
+                "expected_layer_divergence": expected_divergence,
+                "observed_layer_divergence": observed_divergence,
+                "observations": (first, second),
+            }
         )
 
-    # Aggregate counts
-    total = len(cases_raw)
-    extraction_pass = len(extraction_pass_ids)
-    policy_pass = len(policy_pass_ids)
-    composed_pass = len(
-        [c for c in case_results if c["extraction_match"] and c["policy_match"]],
-    )
-    safe_count = len(safe_ids)
-    variance_count = len(variance_ids)
-
+    extraction_pass = sum(not item["extraction_mismatches"] for item in results)
+    policy_pass = sum(not item["policy_mismatches"] for item in results)
     return {
-        "schema_version": SCHEMA_VERSION,
-        "fixture_hash": fixture_hash,
-        "fixture_valid": fixture_valid,
-        "fixture_validation_errors": validation_errors,
-        "baseline": {
-            "total": TOTAL_EXPECTED,
-            "family_counts": dict(EXPECTED_FAMILY_COUNTS),
-        },
+        "schema_version": "bernie.lc4v6d1.evidence.v1",
+        "fixture_hash": compute_fixture_hash(fixture),
+        "fixture_valid": True,
+        "fixture_validation_errors": (),
         "aggregate": {
-            "total": total,
+            "total": len(results),
             "extraction_pass": extraction_pass,
             "policy_pass": policy_pass,
-            "composed_pass": composed_pass,
-            "safe": safe_count,
-            "variance": variance_count,
+            "composed_pass": sum(not item["extraction_mismatches"] and not item["policy_mismatches"] for item in results),
+            "safe": sum(item["safe"] for item in results),
+            "variance": sum(item["variance"] for item in results),
         },
-        "classifications": classifications,
-        "layer_ids": {
-            "extraction_pass": tuple(sorted(extraction_pass_ids)),
-            "policy_pass": tuple(sorted(policy_pass_ids)),
-            "safe": tuple(sorted(safe_ids)),
-            "variance": tuple(sorted(variance_ids)),
-        },
-        "cases": tuple(case_results),
+        "classifications": classification_counts,
+        "conflated_clarification_failure_count": conflated_failures,
+        "cases": tuple(results),
     }
 
 
 __all__ = [
+    "CLASSIFICATIONS",
     "EXPECTED_FAMILY_COUNTS",
-    "TOTAL_EXPECTED",
     "FIXTURE_PATH",
     "REFERENCE_DATE",
     "SCHEMA_VERSION",
+    "TOTAL_EXPECTED",
     "compute_fixture_hash",
     "load_fixture",
     "run_lc4v6d1_evidence",

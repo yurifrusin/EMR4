@@ -1,0 +1,42 @@
+{
+  "schema_version": "bernie.lc4v6d1.evidence.v1",
+  "fixture_hash": "sha256:cee606a54a6b508e4d7b8f1a9ce1e6e4a0a905373deadce71c995901b1645ebc",
+  "fixture_valid": true,
+  "fixture_validation_errors": [],
+  "population": {
+    "total": 24,
+    "family_counts": {
+      "move_unknown_practitioner": 12,
+      "move_known_practitioner_control": 6,
+      "resize_paraphrase_control": 3,
+      "status_paraphrase_control": 3
+    },
+    "repeats_per_probe": 2
+  },
+  "aggregate": {
+    "total": 24,
+    "extraction_pass": 24,
+    "policy_pass": 24,
+    "composed_pass": 24,
+    "safe": 24,
+    "variance": 0
+  },
+  "classifications": {
+    "pass": 24,
+    "authoring_invalid": 0,
+    "parser_gap": 0,
+    "policy_gap": 0,
+    "contract_layer_gap": 0
+  },
+  "layer_diagnosis": {
+    "unknown_practitioner_extraction_policy_divergence": 12,
+    "conflated_clarification_failure_count": 12,
+    "decision": "contract_granularity_gap_supported_no_runtime_remediation"
+  },
+  "selection": {
+    "parser_gap_ids": [],
+    "policy_gap_ids": [],
+    "authoring_invalid_ids": [],
+    "remediation_authorized": false
+  }
+}
