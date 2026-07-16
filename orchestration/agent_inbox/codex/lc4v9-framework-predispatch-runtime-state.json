@@ -1,0 +1,19 @@
+{
+  "adapter_observations": [
+    {"adapter_id":"deepseek_via_claude_code_bare","evidence":["DeepSeek V4 Flash/high is selected for one bounded empty-framework implementation in the isolated lc4v9-dw1 worktree."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"deepcode_cli","evidence":["Real-TTY fallback is unselected."],"method":"synthetic_fixture","reachability":"unknown"},
+    {"adapter_id":"claude_cli_print","evidence":["Claude Code --bare is the authorized DeepSeek transport; it receives the exact committed source head and named-file-only packet."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"antigravity_cli_print","evidence":["Gemini remains reserved for a later fresh pre-content veto and is not active."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"codex_primary_session","evidence":["GPT Sol retains planning, recovery, acceptance, protected content, integration, and push authority."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"codex_subagent_spawn","evidence":["No native subagent assigned."],"method":"synthetic_fixture","reachability":"unknown"}
+  ],
+  "assigned_agent_ids": ["deepseek-v4-flash-lc4v9-dw1"],
+  "context_health": {"agent_contexts":[{"agent_id":"orchestrator","measurement_source":"unknown","rehydrated_from_receipt":true,"rehydration_sources":["live_handover_current_baton","current_authority_allocation","active_plan_and_acceptance","protected_evidence_boundaries","git_refs_and_worktree"]}]},
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "worker_slots": [{"active_instance_ids":["deepseek-v4-flash-lc4v9-dw1"],"resource_id":"deepseek-flash-workers","stale_instance_ids":[]}],
+  "workspace_receipts": [
+    {"agent_id":"deepseek-v4-flash-lc4v9-dw1","branch":"claude/lc4v9-content-blind-framework","clean":true,"at_handoff_current":true,"recorded_at":"2026-07-16T21:30:00+10:00","worktree":"C:\\Users\\sarashera\\EMR4-worktrees\\lc4v9-dw1"}
+  ]
+}

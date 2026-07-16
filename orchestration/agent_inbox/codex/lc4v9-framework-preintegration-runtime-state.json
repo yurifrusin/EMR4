@@ -1,0 +1,19 @@
+{
+  "adapter_observations": [
+    {"adapter_id":"deepseek_via_claude_code_bare","evidence":["The single Flash candidate is preserved at dfe72104 and rejected; no external correction loop is active."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"deepcode_cli","evidence":["Fallback unselected."],"method":"synthetic_fixture","reachability":"unknown"},
+    {"adapter_id":"claude_cli_print","evidence":["Claude Code --bare transport is idle and the worker branch is clean at recovered head bbbba8a9."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"antigravity_cli_print","evidence":["Fresh Gemini pre-content veto remains pending until protected integration of the recovered framework."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"codex_primary_session","evidence":["GPT Sol reviewed and recovered the candidate under the lease; 61 focused plus taxonomy and two selected isolation tests pass."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"codex_subagent_spawn","evidence":["No native subagent assigned."],"method":"synthetic_fixture","reachability":"unknown"}
+  ],
+  "assigned_agent_ids": [],
+  "context_health": {"agent_contexts":[{"agent_id":"orchestrator","measurement_source":"unknown","rehydrated_from_receipt":true,"rehydration_sources":["live_handover_current_baton","current_authority_allocation","active_plan_and_acceptance","protected_evidence_boundaries","git_refs_and_worktree"]}]},
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "integration",
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "worker_slots": [{"active_instance_ids":[],"resource_id":"deepseek-flash-workers","stale_instance_ids":[]}],
+  "workspace_receipts": [
+    {"agent_id":"orchestrator","branch":"master","clean":false,"at_handoff_current":true,"recorded_at":"2026-07-16T22:10:00+10:00","worktree":"C:\\Users\\sarashera\\emr4"}
+  ]
+}

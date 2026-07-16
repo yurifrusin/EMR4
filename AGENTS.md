@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V9 genuinely fresh content-blind certification is authorized; contract and one-shot acceptance are frozen before framework implementation or actual content |
+| Active product track | LC4V9 genuinely fresh content-blind certification is authorized; the recovered empty framework is integrated and awaits fresh Gemini pre-content veto; no actual V9 content exists |
 | Active acceptance | `orchestration/agent_inbox/codex/lc4v9-sol-contract.md` and `orchestration/agent_inbox/codex/lc4v9-one-shot-acceptance-rule.md`; LC4V8D1 remains accepted under `lc4v8d1-sol-acceptance.md` |
-| Current result | V8D1 passes 24/24 normalization, extraction, semantic policy behaviour, exact canonical projection, composition, and safety across 48 observations with zero variance. It supports a V8-specific Gold/evaluator mismatch and authorizes no product repair. V9 adds independently scored policy-behaviour and exact 14-field projection dimensions plus fail-closed Gold cross-field validation |
-| Next implementation | Dispatch DeepSeek V4 Flash/high only for the empty V9 framework, review/recover under Sol, obtain fresh Gemini pre-content veto, then close external sessions for Sol-only corpus authorship, immutable seal, and one one-shot run. Preserve v1-v8, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
+| Current result | Flash's one uncommitted candidate was preserved at `7187bcce` and rejected for conceptual fail-open evidence defects; no correction loop was opened. Sol recovered the empty framework at `efd52702`. It passes 61/61 focused-plus-taxonomy tests and 2/2 selected runtime-isolation tests, with exact framework/evaluator source binding, durable consumed-first markers, explicit coverage cells, exact 14-way conjunction, and canonical report hashing |
+| Next implementation | Obtain a fresh Gemini pre-content veto on the exact integrated framework head. Only after `DECISION: pass` may external sessions close for Sol-only corpus/evaluator/threshold authorship, immutable seal, and one one-shot run. Preserve v1-v8, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 
