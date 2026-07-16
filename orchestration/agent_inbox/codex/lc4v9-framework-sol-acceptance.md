@@ -2,7 +2,7 @@
 
 Date: 2026-07-16
 
-Decision: `superseded_pending_third_veto`
+Decision: `framework_accepted_content_authoring_authorized`
 
 The content-blind framework and one-shot rule were frozen before any actual V9
 content. DeepSeek Flash's single candidate was preserved and rejected; Sol
@@ -62,3 +62,24 @@ framework amendment and required fresh third veto are recorded in
 superseded for authorship until that exact amended head receives an independent
 pass and a new Sol acceptance is committed. Its protected-surface allocation
 and all closed boundaries remain frozen and unchanged.
+
+## Final amended-head acceptance
+
+The empty-choice amendment was committed and published before any protected
+content existed. A third genuinely fresh Gemini 3.5 Flash/medium Antigravity
+project independently returned `DECISION: pass` on exact review head
+`c43b73ed3180b54c68aa1410197adbe7e49d692b`. It reproduced 64/64
+framework-plus-taxonomy tests, 74/74 ordinary D1 tests, and 2/2 selected
+runtime-isolation tests. Its one-file receipt commit was integrated at
+`756264e4`; its session is closed.
+
+The accepted framework therefore permits an empty clarification-choice array
+only inside the otherwise exact clarification state. All mutation, authority,
+projection, temporal/diary, source-binding, consumed-first, evidence-validity,
+threshold, repeat, conjunction, and report-routing guards remain unchanged.
+
+No actual V9 protected content surface existed at this acceptance point. The
+frozen Sol-only file allocation and attempt ID above are now authorized for
+Sol-only authorship, source commit, immutable manifest/seal creation, and the
+single consumed run. No external model or provider may access those surfaces
+from their first creation onward.
