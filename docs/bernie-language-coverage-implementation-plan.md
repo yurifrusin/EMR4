@@ -416,6 +416,14 @@ dimensions, case artifacts, or variance. The frozen decision is
 `move_unknown_practitioner` at `0/24`, with paraphrase at `34/48`. This does
 not expose case-level evidence or authorize V6 inspection, tuning, or rerun.
 
+LC4V6D1 then tested the public aggregate hypothesis with 24 new inspectable
+layer-specific probes. All 24 pass extraction, policy, composition, safety, and
+two-repeat determinism. Twelve unknown-practitioner moves correctly retain the
+exact name at context-free extraction and clarify only after policy directory
+resolution; a conflated clarification score would fail all 12. This authorizes
+no runtime repair. It establishes a future certification-framework requirement
+without reopening or proving anything case-level about V6.
+
 ## Agent Allocation
 
 - Sol at High reasoning owns the semantic architecture, coverage decisions,
@@ -433,15 +441,13 @@ not expose case-level evidence or authorize V6 inspection, tuning, or rerun.
 
 ## Immediate Direction
 
-LC4V6 is complete with valid evidence and a frozen `certification_fail`. The
-next EMR4 language step is Yuri's decision on the recommended bounded
-development-only LC4V6D1 diagnostic tranche. If authorized, Sol should author
-fresh inspectable ordinary probes from the public aggregate categories only,
-first separating authoring, parser, and policy causes and remediating only
-independently supported development gaps. Keep sealed holdouts v1-v6 untouched.
-Any later V7 or reuse policy is a separate user decision after development exit.
-Preserve T3.1-T3.4 blocked by default, defer T3.5, and do not promote
-Silver/pending candidates merely because the evaluator can execute them.
+LC4V6D1 is complete with no runtime remediation. The next EMR4 language step
+is Yuri's certification-strategy decision. The recommended path is a genuinely
+fresh V7 whose content-blind framework scores extraction and policy
+clarification separately before composition and freezes thresholds before
+content. Alternative V6 reuse/rescoring requires an explicit separately
+reviewed policy and is not recommended. Keep sealed holdouts v1-v6 untouched,
+preserve T3.1-T3.4 blocked by default, and defer T3.5.
 
 No user decision is required for ordinary development-only repair work. Pause if
 work would reuse/re-evaluate protected holdout v1 or v2, broaden historical-trove
@@ -455,10 +461,9 @@ After restarting the app, a new orchestrator should read `AGENTS.md`, this plan,
 the T1/T2 closeouts, the T3 shadow-evaluation status, and the active acceptance
 named in the Current Baton before changing code. It should verify `master`,
 `handoff/current`, and their origin refs; confirm the LC4R10 and LC4V2
-closeouts plus the LC4V6 acceptance; preserve sealed holdouts v1-v6; and keep
-the blocked T3 gates intact.
-Ordinary development-only repair may continue without reopening T3.5 or asking
-for routine permission.
+closeouts plus the LC4V6/D1 acceptances; preserve sealed holdouts v1-v6; and
+keep the blocked T3 gates intact. Pause for the V7-versus-explicit-reuse user
+decision before certification work.
 
 Recommended new-task prompt:
 
@@ -468,14 +473,12 @@ AGENTS.md and read docs/bernie-language-coverage-implementation-plan.md,
 docs/bernie-t1-stateful-scenario-laboratory.md,
 docs/bernie-t2-deterministic-behaviour-matrix.md, and
 docs/bernie-t3-shadow-evaluation.md. Verify the worktree and origin/master,
-then resume the active LC4V6 decision state through the normal Ariadne
-workflow. LC4V6 is evidence-valid, `certification_fail`, permanently consumed,
-and aggregate-only. If Yuri authorizes LC4V6D1, use only newly authored
-inspectable ordinary regressions derived from the public aggregate categories;
-do not open, list, search, rerun, regenerate, hash-check, infer from, or tune
-against sealed holdouts v1-v6. Separate authoring, parser, and policy causes
-before remediation, preserve corpus provenance, and keep candidate evidence
-separate from adjudicated gaps. Preserve T3.1-T3.4 and defer T3.5 provider
+then resume the active LC4V6D1 decision state through the normal Ariadne
+workflow. D1 passes 24/24 fresh layer-specific probes and authorizes no runtime
+repair. Pause for Yuri's choice between a genuinely fresh layer-specific V7
+(recommended) and an explicit separately reviewed reuse/rescoring policy. Do
+not open, list, search, rerun, regenerate, hash-check, infer from, or tune
+against sealed holdouts v1-v6. Preserve T3.1-T3.4 and defer T3.5 provider
 adapters and live calls. Continue
 through ordinary implementation, tests, review, commit, and push without
 pausing unless a documented user decision boundary is reached.

@@ -46,23 +46,23 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V6 genuinely fresh one-shot certification is complete, evidence-valid, and permanently sealed with `certification_fail`; user development decision required |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v6-sol-acceptance.md` and `docs/bernie-lc4v6-fresh-certification-closeout.md` |
-| Current result | V6 produced exact valid evidence over 576 samples with zero exceptions, missing dimensions, case artifacts, or variance. Safety is 576/576; policy and integration failures are zero; every dimension clears 548/576. The composed contract is 540/576 and interpretation failures are 36, missing their frozen gates by eight. The worst public aggregate family is `move_unknown_practitioner` at 0/24; paraphrase is 34/48. V6 is consumed and cannot be inspected, rerun, relabelled, repaired, or reused implicitly |
-| Next implementation | Pause at Yuri's documented decision boundary. Recommended option: authorize bounded development-only LC4V6D1 using fresh inspectable probes derived only from the public aggregate categories, first separating authoring, parser, and policy causes. Do not repair from sealed V6 evidence. Any later V7 is a separate decision after development exit. Preserve T3.1-T3.4 and all T3.5/provider/product/write boundaries |
+| Active product track | LC4V6D1 development diagnostic is complete with no runtime remediation; user certification-strategy decision required |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v6d1-sol-acceptance.md` and `docs/bernie-lc4v6d1-development-closeout.md` |
+| Current result | All 24 fresh D1 probes pass extraction, policy, composition, and safety with zero variance. Twelve unknown-practitioner moves correctly preserve exact names at context-free extraction and clarify only at authoritative policy; a conflated clarification scorer would fail all 12. No fresh authoring, parser, or policy gap remains and runtime remediation is unauthorized. This supports a future certification-contract granularity change but does not reopen or rescore sealed V6 |
+| Next implementation | Pause at Yuri's documented decision boundary. Recommended option: authorize a genuinely fresh V7 with a content-blind evaluator that scores extraction and policy clarification separately before composition. Alternative V6 reuse/rescoring requires an explicit separately reviewed policy and is not recommended. Preserve sealed v1-v6, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
 
-### LC4V6 accepted state
+### LC4V6 and LC4V6D1 accepted state
 
 Fresh V6 used Flash only for the empty framework, Gemini for its pre-content
 veto, and Sol alone for frozen thresholds plus Gold authorship at `0527848b`.
 Its sole attempt is valid and consumed: complete `540/576`, safety `576/576`,
-interpretation failures 36, policy/integration zero, clarification `552/576`,
-normalization `564/576`, all other dimensions `576/576`, and zero evidence
-defects/variance. Decision: `certification_fail`; worst public family
-`move_unknown_practitioner` is `0/24`, paraphrase `34/48`, report hash
-`sha256:02f1555adc494672b15aed722f86414eb4570014e795f79210ae10b7936d417a`.
-V6 has no case-level repair authority. Keep it sealed; LC4V6D1 requires Yuri's
-choice and fresh ordinary probes. See the active acceptance and topic ledger.
+interpretation failures 36 and decision `certification_fail`; keep it sealed.
+D1 then passed 24/24 fresh probes at extraction, policy, composition, and safety
+with zero variance. Its 12 unknown-practitioner moves prove the intended layer
+split and expose how conflated clarification scoring fails correct behaviour.
+DeepSeek's evidence self-pass was recovered by Sol; Gemini passed contracts and
+exact recovered head `bef040eb`. No runtime repair is authorized. Recommend a
+fresh layer-specific V7; D1 does not reveal or rescore V6. See active acceptance.
 
 LC4V4 provenance: the frozen pre-content records remain
 `lc4v4q1-sol-contract.md`, `lc4v4q1-sol-recovery-amendment.md`,

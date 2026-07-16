@@ -136,16 +136,28 @@ is `34/48`. Report hash is
 V6 is permanently consumed and supplies aggregate diagnostic direction only,
 not case-level parser evidence.
 
+LC4V6D1 then froze 24 new inspectable layer-specific probes: 12 unknown-
+practitioner moves, six matched known-practitioner moves, three resize controls,
+and three status controls. All 24 pass extraction, policy, composition, safety,
+and two-repeat determinism. The unknown names are linguistically exact at
+context-free extraction and safely clarify only after policy directory lookup;
+a conflated clarification scorer would fail all 12. DeepSeek's evidence
+self-pass was rejected for conceptual normalization, mapping, safety, and hash
+gaps; Sol recovered without a correction loop. Gemini passed the authored
+contracts and exact recovered head `bef040eb`. No parser/policy runtime change
+was made or authorized. D1 supports a future layer-specific certification
+contract but does not reveal or rescore V6.
+
 ## Next safe sequence
 
 1. Keep holdouts v1-v6 sealed; use only accepted aggregate evidence and
    closeouts for planning.
-2. Pause for Yuri's choice on the recommended development-only LC4V6D1 tranche.
-3. If authorized, author fresh inspectable ordinary probes from the public
-   aggregate categories and separate authoring, parser, and policy causes
-   before remediation.
-4. Require a later explicit Yuri decision for any V7 holdout or reuse policy
-   after an accepted development exit.
+2. Pause for Yuri's certification-strategy choice: genuinely fresh V7 with a
+   layer-specific content-blind evaluator (recommended), or explicit reviewed
+   V6 reuse/rescoring policy.
+3. Do not modify or rescore V6 implicitly; any V7 must freeze its framework,
+   thresholds, authorship separation, and seal before content/evaluation.
+4. Retain the D1 conclusion that no parser/policy remediation is authorized.
 5. Keep T3.1-T3.4 blocked by default and T3.5/providers plus every product/write
    surface deferred.
 
@@ -175,6 +187,8 @@ not case-level parser evidence.
 - `orchestration/agent_inbox/codex/lc4v4d4-sol-acceptance.md`
 - `docs/bernie-lc4v6-fresh-certification-closeout.md`
 - `orchestration/agent_inbox/codex/lc4v6-sol-acceptance.md`
+- `docs/bernie-lc4v6d1-development-closeout.md`
+- `orchestration/agent_inbox/codex/lc4v6d1-sol-acceptance.md`
 
 Protected holdouts v1-v6 are sealed. Do not enumerate their paths, inspect
 content, rerun them, regenerate them, hash-check them, infer labels from them,
