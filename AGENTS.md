@@ -49,7 +49,7 @@ sources is insufficient and must return `revision_required`.
 | Active product track | LC4V9 is validly consumed and sealed with `certification_fail`; ordinary inspectable LC4V9D1 non-create identity/projection diagnosis is now content-blind and in progress |
 | Active acceptance | `orchestration/agent_inbox/codex/lc4v9d1-sol-contract.md`; sealed V9 acceptance remains `lc4v9-sol-acceptance.md` and `docs/bernie-lc4v9-fresh-certification-closeout.md` |
 | Current result | Flash's 69-test self-pass was rejected for conceptual Gold/taxonomy defects. Sol recovery froze valid 7 extraction and 14 policy gaps, repaired only the ordinary patient-grammar causes, and now passes 30/30 extraction, policy behavior, exact projection, composition, and safety with zero variance and empty failure selection. Focused tests pass 70/70; adjacent preservation passes 281/281 with two documented historical equality deselections |
-| Next implementation | Commit and publish the recovered LC4V9D1 source, obtain one fresh Gemini 3.5 Flash/medium independent review, then close out and push if accepted. A future certification/holdout remains Yuri's decision. Preserve v1-v9, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
+| Next implementation | Preserve Gemini's `revision_required`, document the LC4V4D1 historical live-invariant deselection, reproduce the amended broader preservation gate, and obtain a fresh exact-head review before D1 acceptance. A future certification/holdout remains Yuri's decision |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 
