@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V8D1 ordinary development exit is accepted with an empty repair selection; user V9 decision required |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v8d1-sol-acceptance.md` and `docs/bernie-lc4v8d1-development-closeout.md`; V8 remains sealed under `lc4v8-sol-acceptance.md` |
-| Current result | D1 passes 24/24 normalization, extraction, semantic policy behavior, exact canonical projection, composition, and safety across 48 observations with zero variance. Gemini passed exact baseline head `b72cf748`; broader preservation passed 581 selected nodes. The result supports a V8-specific Gold/evaluator mismatch and authorizes no product repair |
-| Next implementation | Pause for Yuri. Recommend genuinely fresh LC4V9 with the D1-proven canonical projection and semantic/projection cross-field gates frozen before content, then fresh Gemini veto, Sol-only authorship, immutable seal, and one one-shot run. Preserve v1-v8, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
+| Active product track | LC4V9 genuinely fresh content-blind certification is authorized; contract and one-shot acceptance are frozen before framework implementation or actual content |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v9-sol-contract.md` and `orchestration/agent_inbox/codex/lc4v9-one-shot-acceptance-rule.md`; LC4V8D1 remains accepted under `lc4v8d1-sol-acceptance.md` |
+| Current result | V8D1 passes 24/24 normalization, extraction, semantic policy behaviour, exact canonical projection, composition, and safety across 48 observations with zero variance. It supports a V8-specific Gold/evaluator mismatch and authorizes no product repair. V9 adds independently scored policy-behaviour and exact 14-field projection dimensions plus fail-closed Gold cross-field validation |
+| Next implementation | Dispatch DeepSeek V4 Flash/high only for the empty V9 framework, review/recover under Sol, obtain fresh Gemini pre-content veto, then close external sessions for Sol-only corpus authorship, immutable seal, and one one-shot run. Preserve v1-v8, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 
