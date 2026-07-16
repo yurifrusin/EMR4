@@ -17,12 +17,14 @@ import json
 
 import pytest
 
+import app.services.bernie.lc4v8d1_development_evidence as evidence_module
 from app.services.bernie.lc4v8d1_development_evidence import (
     EXPECTED_FAMILY_COUNTS,
     TOTAL_EXPECTED,
     CLASSIFICATIONS,
     PROJECTION_FIELDS,
     compute_fixture_hash,
+    compute_raw_fixture_hash,
     load_fixture,
     run_lc4v8d1_evidence,
     validate_fixture,
@@ -53,6 +55,7 @@ def test_raw_fixture_hash_matches_authorship() -> None:
         f"sha256:{digest}"
         == "sha256:ebcfe4bbbd9c89dff00f1ff30643f2b9dc21f5cfba5febf62fd22e041f76269c"
     )
+    assert compute_raw_fixture_hash() == EVIDENCE["fixture_raw_hash"]
 
 
 # ---------------------------------------------------------------------------
@@ -104,6 +107,34 @@ def test_raw_fixture_hash_matches_authorship() -> None:
             lambda d: d["cases"][0]["expected"]["policy_resolution"]
             .update({"appointment_delta_count": -1}),
             "appointment_delta_count",
+        ),
+        (
+            lambda d: d["cases"][0]["expected"]["policy_semantics"]
+            .update({"mutation_allowed": False}),
+            "semantics and projection contradict",
+        ),
+        (
+            lambda d: d["cases"][6]["expected"]["policy_resolution"]
+            .update({"simulated_write": True}),
+            "semantics and projection contradict",
+        ),
+        (
+            lambda d: d["cases"][0]["expected"]["policy_resolution"]
+            .update({"entity_semantics_unchanged": False}),
+            "entity_semantics_unchanged",
+        ),
+        (
+            lambda d: d["cases"][0]["expected"].update({"latest_time": None}),
+            "temporal relation and bounds contradict",
+        ),
+        (
+            lambda d: d["cases"][0]["diary_appointments"].append({}),
+            "empty diary_state requires no appointments",
+        ),
+        (
+            lambda d: d["cases"][11]["expected"]["policy_resolution"]
+            .update({"conflicting_fields": []}),
+            "field_conflict Gold is incomplete",
         ),
     ],
 )
@@ -347,8 +378,22 @@ def test_project_policy_never_branches_on_identity() -> None:
 # ---------------------------------------------------------------------------
 
 
-def test_validation_invalid_returns_authoring_invalid_without_execution() -> None:
+def test_validation_invalid_returns_authoring_invalid_without_execution(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     """A broken fixture must return all cases as authoring_invalid."""
+    calls = {"extract": 0, "policy": 0}
+
+    def forbidden_extract(*args, **kwargs):
+        calls["extract"] += 1
+        raise AssertionError("extraction executed for invalid fixture")
+
+    def forbidden_policy(*args, **kwargs):
+        calls["policy"] += 1
+        raise AssertionError("policy executed for invalid fixture")
+
+    monkeypatch.setattr(evidence_module, "extract_semantics", forbidden_extract)
+    monkeypatch.setattr(evidence_module, "resolve_policy", forbidden_policy)
     broken = copy.deepcopy(FIXTURE)
     broken["schema_version"] = "bad"
     result = run_lc4v8d1_evidence(broken)
@@ -361,6 +406,43 @@ def test_validation_invalid_returns_authoring_invalid_without_execution() -> Non
         for name, count in result["classifications"].items()
         if name != "authoring_invalid"
     )
+    assert calls == {"extract": 0, "policy": 0}
+    assert result["selection"]["non_pass_count"] == TOTAL_EXPECTED
+    assert result["selection"]["selection_hash"].startswith("sha256:")
+    payload = copy.deepcopy(result)
+    reported_hash = payload.pop("report_hash")
+    encoded = json.dumps(
+        payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+    ).encode("utf-8")
+    assert reported_hash == "sha256:" + hashlib.sha256(encoded).hexdigest()
+
+
+def test_default_raw_fixture_drift_fails_before_product_execution(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path,
+) -> None:
+    drifted = copy.deepcopy(FIXTURE)
+    drifted["cases"][0]["language_form"] = "structurally_valid_byte_drift"
+    drift_path = tmp_path / "probes.json"
+    drift_path.write_text(json.dumps(drifted), encoding="utf-8")
+    calls = {"extract": 0, "policy": 0}
+
+    def forbidden_extract(*args, **kwargs):
+        calls["extract"] += 1
+        raise AssertionError("extraction executed after raw fixture drift")
+
+    def forbidden_policy(*args, **kwargs):
+        calls["policy"] += 1
+        raise AssertionError("policy executed after raw fixture drift")
+
+    monkeypatch.setattr(evidence_module, "FIXTURE_PATH", drift_path)
+    monkeypatch.setattr(evidence_module, "extract_semantics", forbidden_extract)
+    monkeypatch.setattr(evidence_module, "resolve_policy", forbidden_policy)
+    result = run_lc4v8d1_evidence()
+    assert result["fixture_valid"] is False
+    assert result["fixture_validation_errors"] == ("raw fixture hash is not exact",)
+    assert result["classifications"]["authoring_invalid"] == TOTAL_EXPECTED
+    assert calls == {"extract": 0, "policy": 0}
 
 
 # ---------------------------------------------------------------------------
@@ -434,3 +516,49 @@ def test_derived_semantics_present_in_all_observations() -> None:
             }
             assert isinstance(ds["mutation_allowed"], bool)
             assert isinstance(ds["safe"], bool)
+
+
+def test_incomplete_mutation_is_a_policy_behavior_gap() -> None:
+    case_result = next(
+        item for item in EVIDENCE["cases"]
+        if item["probe_id"] == "v8d1-policy-action-001"
+    )
+    observation = copy.deepcopy(case_result["observations"][0])
+    observation["policy"]["selected_tools"] = ["search_patients"]
+    observation["policy"]["appointment_delta_count"] = 0
+    observation["policy"]["audit_delta_count"] = 0
+    observation["policy"]["simulated_write"] = False
+    observation["derived_semantics"] = evidence_module._derive_policy_semantics(
+        observation
+    )
+    assert observation["derived_semantics"] == {
+        "resolution": "propose_mutation",
+        "mutation_allowed": False,
+        "safe": False,
+    }
+    expected = FIXTURE["cases"][0]["expected"]
+    assert evidence_module._policy_behavior_mismatches(expected, observation) == (
+        "mutation_allowed",
+        "safe",
+    )
+
+
+@pytest.mark.parametrize(
+    "probe_id",
+    [
+        "v8d1-policy-boundary-003",
+        "v8d1-policy-boundary-004",
+        "v8d1-policy-boundary-005",
+        "v8d1-policy-action-006",
+    ],
+)
+def test_hidden_mutation_evidence_fails_nonmutation_safety(probe_id: str) -> None:
+    case_result = next(item for item in EVIDENCE["cases"] if item["probe_id"] == probe_id)
+    observation = copy.deepcopy(case_result["observations"][0])
+    observation["policy"]["selected_tools"].append("update_appointment")
+    observation["policy"]["appointment_delta_count"] = 1
+    observation["policy"]["audit_delta_count"] = 1
+    observation["policy"]["simulated_write"] = True
+    derived = evidence_module._derive_policy_semantics(observation)
+    assert derived["safe"] is False
+    assert evidence_module._safe({**observation, "derived_semantics": derived}) is False

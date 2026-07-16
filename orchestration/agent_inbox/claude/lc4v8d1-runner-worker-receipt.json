@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All done. Here's the summary of what was implemented:\n\n## Files Created\n\n1. **`app/services/bernie/lc4v8d1_development_evidence.py`** \u2014 Evidence runner that:\n   - Loads and fail-closed validates the 24-case fixture (matching authorship test invariants)\n   - Calls `extract_semantics` then `resolve_policy` for each valid case\n   - Projects `PolicyResolution` to exactly 14 JSON-safe fields\n   - Independently derives semantic policy invariants (`propose_mutation`, `proceed_read`, `clarify`, `refuse`, `no_action` + mutation allowance + safety)\n   - Scores four layers: normalization, extraction, policy behavior, policy projection\n   - Applies frozen classification precedence\n   - Executes every case twice, exposes inspectable observations\n   - Produces deterministic hashes for fixture, selection, and complete report\n\n2. **`tests/test_bernie_lc4v8d1_development.py`** \u2014 62 tests covering:\n   - Fixture integrity (raw hash, computed hash)\n   - 14 fail-closed validation mutations\n   - Family/exact counts\n   - Aggregate accounting, classification accounting, two-repeat variance\n   - Per-case mismatch accounting\n   - Safety invariants\n   - Hash determinism and report binding\n   - No probe-ID branching (source inspection)\n   - Authoring-invalid guard\n   - 14-field projection completeness and type correctness\n   - Derived semantics presence in all observations\n\n3. **`orchestration/agent_inbox/claude/lc4v8d1-deepseek-candidate.md`** \u2014 Closeout document with all hashes, counts, scope audit, and decision.\n\n## Test Results\n\n**279 passed, 2 deselected, 2 warnings** across all required test files. Zero variance over all 24 cases \u00d7 2 repeats (48 observations). All 24 cases classify as `pass`.\n\n**`git diff --check`**: clean\n\n**DECISION: candidate_ready_for_sol_review**",
+  "usage": {
+    "input_tokens": 92177,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 2233216,
+    "output_tokens": 38313,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 2.547088,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [
+    {
+      "tool_name": "PowerShell",
+      "tool_use_id": "call_00_BINTOg2k0CienRDtnsqg1181",
+      "tool_input": {
+        "command": "cd C:\\Users\\sarashera\\EMR4-worktrees\\lc4v8d1-dw1; C:\\Users\\sarashera\\emr4\\.venv\\Scripts\\python.exe -m pytest tests/test_bernie_lc4v8d1_development.py -v 2>&1",
+        "timeout": 120000,
+        "description": "Run V8D1 development tests via PowerShell"
+      }
+    }
+  ],
+  "terminal_reason": "completed"
+}

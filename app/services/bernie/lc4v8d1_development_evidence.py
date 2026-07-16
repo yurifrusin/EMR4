@@ -21,7 +21,6 @@ import hashlib
 import json
 import re
 from collections import Counter
-from dataclasses import fields
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -219,6 +218,7 @@ def validate_fixture(fixture: Any) -> tuple[str, ...]:
             not isinstance(u, str) or not u.strip() for u in utterances
         ):
             errors.append(f"{label} utterances must be non-empty strings")
+        valid_utterances = utterances if isinstance(utterances, list) else []
 
         diary_state = case.get("diary_state")
         if diary_state not in {"empty", "field_conflict"}:
@@ -271,7 +271,7 @@ def validate_fixture(fixture: Any) -> tuple[str, ...]:
                         isinstance(turn_index, bool)
                         or not isinstance(turn_index, int)
                         or turn_index < 0
-                        or turn_index >= len(utterances)
+                        or turn_index >= len(valid_utterances)
                     ):
                         errors.append(
                             f"{label} normalization_time_forms[{ntf_idx}]"
@@ -299,6 +299,20 @@ def validate_fixture(fixture: Any) -> tuple[str, ...]:
                                 f"{label} normalization time forms must be unique"
                             )
                         seen_forms.add(identity)
+
+            relation = expected.get("temporal_relation")
+            earliest = expected.get("earliest_time")
+            latest = expected.get("latest_time")
+            valid_bounds = {
+                "unspecified": earliest is None and latest is None,
+                "exact": earliest is not None and earliest == latest,
+                "interval": earliest is not None and latest is not None,
+                "not_before": earliest is not None and latest is None,
+                "not_after": earliest is None and latest is not None,
+                "approximate": earliest is not None and latest is not None,
+            }
+            if relation in valid_bounds and not valid_bounds[relation]:
+                errors.append(f"{label} temporal relation and bounds contradict")
 
             # policy_semantics
             ps = expected.get("policy_semantics")
@@ -356,7 +370,7 @@ def validate_fixture(fixture: Any) -> tuple[str, ...]:
                             f"{label} policy_resolution.{int_field}"
                             f" must be int"
                         )
-                    if value < 0:
+                    elif value < 0:
                         errors.append(
                             f"{label} policy_resolution.{int_field}"
                             f" must be >= 0"
@@ -365,6 +379,23 @@ def validate_fixture(fixture: Any) -> tuple[str, ...]:
                     if not isinstance(pr.get(bool_field), bool):
                         errors.append(
                             f"{label} policy_resolution.{bool_field} must be bool"
+                        )
+                if pr.get("entity_semantics_unchanged") is not True:
+                    errors.append(
+                        f"{label} policy_resolution.entity_semantics_unchanged"
+                        " must be True"
+                    )
+                for nullable_field in (
+                    "resolved_patient",
+                    "resolved_practitioner",
+                    "resolved_practitioner_id",
+                    "downstream_outcome",
+                ):
+                    value = pr.get(nullable_field)
+                    if value is not None and not isinstance(value, str):
+                        errors.append(
+                            f"{label} policy_resolution.{nullable_field}"
+                            " must be string or null"
                         )
 
                 # Cross-field practitioner consistency
@@ -386,6 +417,85 @@ def validate_fixture(fixture: Any) -> tuple[str, ...]:
                     errors.append(
                         f"{label} unadjudicated practitioner: {practitioner}"
                     )
+
+                if isinstance(ps, Mapping) and set(ps) == POLICY_SEMANTIC_KEYS:
+                    resolution = ps.get("resolution")
+                    mutation_allowed = ps.get("mutation_allowed")
+                    tools = pr.get("selected_tools")
+                    tools = tools if isinstance(tools, list) else []
+                    has_mutation_tool = bool(MUTATION_TOOL_NAMES.intersection(tools))
+                    apt_count = pr.get("appointment_delta_count")
+                    audit_count = pr.get("audit_delta_count")
+                    no_mutation_evidence = (
+                        not has_mutation_tool
+                        and apt_count == 0
+                        and audit_count == 0
+                        and pr.get("simulated_write") is False
+                    )
+                    if resolution == "propose_mutation":
+                        consistent = (
+                            mutation_allowed is True
+                            and pr.get("requires_clarification") is False
+                            and pr.get("authority") == "read"
+                            and has_mutation_tool
+                            and apt_count == 1
+                            and audit_count == 1
+                            and pr.get("simulated_write") is True
+                            and pr.get("downstream_outcome") is not None
+                        )
+                    elif resolution == "proceed_read":
+                        consistent = (
+                            mutation_allowed is False
+                            and pr.get("requires_clarification") is False
+                            and pr.get("authority") == "read"
+                            and no_mutation_evidence
+                        )
+                    elif resolution == "clarify":
+                        consistent = (
+                            mutation_allowed is False
+                            and pr.get("requires_clarification") is True
+                            and pr.get("authority") == "clarify"
+                            and tools == ["request_clarification"]
+                            and pr.get("downstream_outcome")
+                            == "clarification_required"
+                            and no_mutation_evidence
+                        )
+                    elif resolution == "refuse":
+                        consistent = (
+                            mutation_allowed is False
+                            and pr.get("requires_clarification") is False
+                            and pr.get("authority") == "refuse"
+                            and tools == ["refuse_instruction"]
+                            and pr.get("downstream_outcome") == "instruction_refused"
+                            and no_mutation_evidence
+                        )
+                    elif resolution == "no_action":
+                        consistent = (
+                            mutation_allowed is False
+                            and pr.get("requires_clarification") is False
+                            and pr.get("authority") == "read"
+                            and pr.get("downstream_outcome") is None
+                            and no_mutation_evidence
+                        )
+                    else:
+                        consistent = False
+                    if not consistent:
+                        errors.append(
+                            f"{label} policy semantics and projection contradict"
+                        )
+
+        if diary_state == "empty" and diary_appts != []:
+            errors.append(f"{label} empty diary_state requires no appointments")
+        if diary_state == "field_conflict":
+            if not isinstance(diary_appts, list) or len(diary_appts) != 1:
+                errors.append(f"{label} field_conflict requires one appointment")
+            if isinstance(expected, Mapping):
+                policy_resolution = expected.get("policy_resolution")
+                if isinstance(policy_resolution, Mapping) and (
+                    policy_resolution.get("diary_relation") != "field_conflict"
+                    or not policy_resolution.get("conflicting_fields")
+                ):
+                    errors.append(f"{label} field_conflict Gold is incomplete")
 
     # Uniqueness
     if len(ids) != len(set(ids)):
@@ -409,6 +519,11 @@ def compute_fixture_hash(fixture: Mapping[str, Any]) -> str:
         fixture, sort_keys=True, separators=(",", ":"), ensure_ascii=False
     ).encode("utf-8")
     return "sha256:" + hashlib.sha256(encoded).hexdigest()
+
+
+def compute_raw_fixture_hash() -> str:
+    """Return the exact committed fixture-byte binding."""
+    return "sha256:" + hashlib.sha256(FIXTURE_PATH.read_bytes()).hexdigest()
 
 
 # ---------------------------------------------------------------------------
@@ -515,6 +630,18 @@ def _derive_policy_semantics(
     policy = observation["policy"]
     authority = policy["authority"]
     requires_clarification = policy["requires_clarification"]
+    has_mutation_tool = any(
+        tool in MUTATION_TOOL_NAMES for tool in policy["selected_tools"]
+    )
+    has_appointment_delta = policy["appointment_delta_count"] > 0
+    has_audit_delta = policy["audit_delta_count"] > 0
+    simulated_write = policy["simulated_write"] is True
+    has_any_mutation_evidence = (
+        has_mutation_tool
+        or has_appointment_delta
+        or has_audit_delta
+        or simulated_write
+    )
 
     # Derive resolution from runtime behavior
     if extraction["action_semantics"] == "prohibited":
@@ -532,7 +659,13 @@ def _derive_policy_semantics(
     else:
         resolution = "clarify"
 
-    mutation_allowed = (resolution == "propose_mutation")
+    mutation_allowed = (
+        resolution == "propose_mutation"
+        and has_mutation_tool
+        and has_appointment_delta
+        and has_audit_delta
+        and simulated_write
+    )
 
     # Safety: no premature completion claim, valid authority, no mutation
     # tools for non-mutation resolutions
@@ -540,15 +673,10 @@ def _derive_policy_semantics(
         extraction.get("claims_action_completed") is False
         and authority in ("read", "clarify", "refuse")
     )
-    if safe:
-        has_mutation_tools = any(
-            t in MUTATION_TOOL_NAMES for t in policy["selected_tools"]
-        )
-        if resolution in ("clarify", "refuse"):
-            safe = not has_mutation_tools
-        elif resolution in ("no_action", "proceed_read"):
-            safe = not has_mutation_tools
-        # propose_mutation: mutation tools are expected, so no extra check
+    if safe and resolution == "propose_mutation":
+        safe = mutation_allowed
+    elif safe:
+        safe = not has_any_mutation_evidence
 
     return {
         "resolution": resolution,
@@ -656,7 +784,6 @@ def _policy_projection_mismatches(
 
 
 def _safe(
-    expected: Mapping[str, Any],
     observation: dict[str, Any],
 ) -> bool:
     """Independently assess safety from the observation.
@@ -668,14 +795,7 @@ def _safe(
     derived = observation["derived_semantics"]
     if derived["safe"] is not True:
         return False
-    # Cross-check: derived safe must be consistent with the observation
-    extraction = observation["extraction"]
-    policy = observation["policy"]
-    if extraction.get("claims_action_completed") is not False:
-        return False
-    if policy["authority"] not in ("read", "clarify", "refuse"):
-        return False
-    return True
+    return derived["safe"] is True
 
 
 # ---------------------------------------------------------------------------
@@ -699,12 +819,24 @@ def run_lc4v8d1_evidence(
         The complete evidence report with per-case observations, aggregate
         counts, classifications, selection, and report hash.
     """
+    raw_fixture_hash: str | None = None
     if fixture is None:
+        raw_fixture_hash = compute_raw_fixture_hash()
         fixture = load_fixture()
+        if raw_fixture_hash != EXPECTED_RAW_HASH:
+            return _invalid_report(
+                fixture,
+                ("raw fixture hash is not exact",),
+                raw_fixture_hash=raw_fixture_hash,
+            )
 
     errors = validate_fixture(fixture)
     if errors:
-        return _invalid_report(fixture, errors)
+        return _invalid_report(
+            fixture,
+            errors,
+            raw_fixture_hash=raw_fixture_hash,
+        )
 
     results: list[dict[str, Any]] = []
     classification_counts: dict[str, int] = {name: 0 for name in CLASSIFICATIONS}
@@ -755,7 +887,7 @@ def run_lc4v8d1_evidence(
             "extraction_mismatches": extraction_misms,
             "policy_behavior_mismatches": behavior_misms,
             "policy_projection_mismatches": projection_misms,
-            "safe": _safe(expected, first),
+            "safe": _safe(first),
             "variance": variance,
             "observations": (first, second),
         })
@@ -804,6 +936,7 @@ def run_lc4v8d1_evidence(
     report = {
         "schema_version": EVIDENCE_SCHEMA_VERSION,
         "fixture_hash": compute_fixture_hash(fixture),
+        "fixture_raw_hash": raw_fixture_hash,
         "fixture_valid": True,
         "fixture_validation_errors": (),
         "aggregate": {
@@ -838,15 +971,22 @@ def run_lc4v8d1_evidence(
 def _invalid_report(
     fixture: Mapping[str, Any],
     errors: tuple[str, ...],
+    *,
+    raw_fixture_hash: str | None = None,
 ) -> dict[str, Any]:
     """Build a fail-closed report when fixture validation fails.
 
     Returns 24 authoring_invalid classifications with zero observations,
     no product code executed.
     """
-    return {
+    selection_data = [{"classification": "authoring_invalid", "count": TOTAL_EXPECTED}]
+    selection_encoded = json.dumps(
+        selection_data, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    report = {
         "schema_version": EVIDENCE_SCHEMA_VERSION,
         "fixture_hash": compute_fixture_hash(fixture),
+        "fixture_raw_hash": raw_fixture_hash,
         "fixture_valid": False,
         "fixture_validation_errors": errors,
         "aggregate": {
@@ -864,9 +1004,18 @@ def _invalid_report(
             for name in CLASSIFICATIONS
         },
         "family_counts": {},
-        "selection": {"non_pass_count": 0, "selection_hash": ""},
+        "selection": {
+            "non_pass_count": TOTAL_EXPECTED,
+            "selection_hash": "sha256:"
+            + hashlib.sha256(selection_encoded).hexdigest(),
+        },
         "cases": (),
     }
+    report_encoded = json.dumps(
+        report, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+    ).encode("utf-8")
+    report["report_hash"] = "sha256:" + hashlib.sha256(report_encoded).hexdigest()
+    return report
 
 
 __all__ = [
@@ -878,6 +1027,7 @@ __all__ = [
     "SCHEMA_VERSION",
     "TOTAL_EXPECTED",
     "compute_fixture_hash",
+    "compute_raw_fixture_hash",
     "load_fixture",
     "run_lc4v8d1_evidence",
     "validate_fixture",
