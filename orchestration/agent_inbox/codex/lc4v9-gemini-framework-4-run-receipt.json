@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_worktree",
+  "model": "Gemini 3.5 Flash (Medium)",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\lc4v9-gemini4",
+  "branch": "gemini/lc4v9-framework-veto-4",
+  "head_before": "d5b82a242a7eea153b72db1034e176d6a10e6efe",
+  "head_after": "069ba1de780a6f4284fba43df9ac6e1d4f276233",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "result": "I am waiting for the first pytest command to complete.\nI am waiting for the second pytest command to complete.\nI am waiting for the first count pytest run to complete.\nI am waiting for the second count pytest run to complete.\nI have completed the fourth fresh pre-content framework veto of the LC4V9 framework in the bound worktree `C:\\Users\\sarashera\\EMR4-worktrees\\lc4v9-gemini4` on branch `gemini/lc4v9-framework-veto-4` at HEAD commit `d5b82a242a7eea153b72db1034e176d6a10e6efe`.\n\n### Summary of Actions\n1. **Rehydration**: Rehydrated the context from all 5 named sources, verifying baton states, authority, boundaries, and workspace git status.\n2. **Forbidden Boundary Audit**: Confirmed that no forbidden paths were read or discovered, and that no V9 corpus, evaluator, authoring, thresholds, manifest, seal, attempt marker, or report files exist in the worktree.\n3. **Serial Test Execution**: Ran all required pytest suites serially:\n   - Framework & Taxonomy: 69 tests passed.\n   - Development: 74 tests passed.\n   - Isolation: 2 tests passed.\n   - Total: 145 tests passed.\n4. **Guarantees Verification**: Verified the `no_action` rules (accepts only `[]` or `[\"search_patients\"]`, preserves read authority and null downstream outcome, rejects all mutation/clarification/refusal evidence/tools/states), 14-field projection, temporal/diary separation, shape constraints, consumed-first marker, Git/source/hash bindings, zero variance, and taxonomy.\n5. **Committed Review**: Wrote and committed `orchestration/agent_inbox/antigravity/lc4v9-gemini-framework-review-4.md` on the target branch.\n\nDECISION: pass"
+}
