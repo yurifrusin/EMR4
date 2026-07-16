@@ -1,0 +1,12 @@
+{
+  "corpus_source_commit": "313e6247ea0851d12b925e8fc5b31315b2464654",
+  "evaluator_path": "app/services/bernie/lc4v8_evaluator.py",
+  "evaluator_sha256": "02d553a72a22f4c9f8507d643ea2602c4e6eb8767763a8b59a68c18c08130b0b",
+  "fixture_path": "tests/fixtures/bernie_lc4v8_certification/fixture.json",
+  "fixture_sha256": "d085d8e6cf5023bad2d54a2ce63042be5ec5f11eabf216209c933be4de2bf816",
+  "framework_path": "app/services/bernie/lc4v8_content_blind_framework.py",
+  "framework_sha256": "30379be2472679c44b2ff7356a011a1393928f098ab11e525bcf89d783387952",
+  "schema_version": "bernie.lc4v8.manifest.v1",
+  "thresholds_path": "tests/fixtures/bernie_lc4v8_certification/thresholds.json",
+  "thresholds_sha256": "a8659027bec8ba55d368ee747a224d0e3b02af4c3e5b171b23a6053c80ae097e"
+}
