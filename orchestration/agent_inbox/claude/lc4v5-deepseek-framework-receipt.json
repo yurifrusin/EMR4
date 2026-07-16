@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "Here's a summary of everything that was created:\n\n---\n\n## LC4V5 Content-Blind Framework \u2014 Complete\n\n### Files created\n\n| File | Lines | Purpose |\n|---|---|---|\n| `app/services/bernie/lc4v5_holdout_framework.py` | 1,686 | Content-blind framework module |\n| `tests/test_bernie_lc4v5_holdout_framework.py` | 1,146 | Synthetic framework tests (80 tests) |\n| `orchestration/agent_inbox/claude/lc4v5-deepseek-framework-candidate.md` | 172 | Framework candidate description for Gemini veto |\n\n### Framework capabilities\n\n- **Schema validation**: `V5CorpusManifest.validate()` checks group counts (24), scenario totals (288), schema version, group ID uniqueness, scenario ID counts, corpus hash integrity\n- **Canonical hashing**: `compute_scenario_hash`, `compute_group_hash`, `compute_corpus_hash` \u2014 deterministic SHA-256 over canonical JSON (sorted keys, no whitespace)\n- **Manifest/seal validation**: `V5Seal.create()` mints HMAC-SHA256 tags; `validate()` checks tag, corpus binding, state; `consume()` is strictly one-shot\n- **State machine**: `HoldoutState` enum (UNSEALED \u2192 SEALED \u2192 CONSUMED \u2192 VOID) with explicit `can_transition_to` validation\n- **Aggregate-only report**: `V5AggregateReport` preserves only aggregate counts, per-dimension passes, failure layers, variance, slice stats \u2014 no per-case evidence ever persisted\n- **Threshold evaluation**: `evaluate_thresholds()` implements frozen acceptance rules (548/576 min, 0 safety, \u226428 per failure layer, \u22650.90 slices)\n- **Population validation**: `validate_v5_population()` checks 288 scenarios, 216/72 one-shot/multi-turn split, 6 actions, gold/adjudicated provenance\n- **Tamper detection**: `detect_tamper()` catches HMAC mismatches, hash mismatches, missing scenarios, wrong attempt IDs, consumed/void seals\n- **Malformed input**: `validate_scenario_list()` detects empty lists, duplicates, schema violations\n- **Synthetic injection**: `make_synthetic_scenario`, `make_synthetic_group`, `make_synthetic_corpus` for framework testing without real content\n- **Full pipeline**: `run_framework_validation()` runs all checks end-to-end\n\n### Test results\n\n**80/80 tests passing** across 12 test classes:\n- Constants, canonical hashing, state machine transitions\n- Manifest, seal, and population validation\n- Report generation and threshold evaluation\n- Tamper detection and malformed input\n- Synthetic injection and full pipeline\n- Aggregate-only contract enforcement\n\n### Content-blindness verified\n\nNo v1-v4 holdout paths were accessed. No real v5 fixtures, group labels, utterances, expected values, or case IDs exist in any of the three files. All test scenarios use `syn-` prefixes. The framework imports only `scenario_spec.py` and `composed_evaluator.py` from the project (plus standard library modules).",
+  "usage": {
+    "input_tokens": 104474,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 4183936,
+    "output_tokens": 47600,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 3.8233729999999997,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [
+    {
+      "tool_name": "PowerShell",
+      "tool_use_id": "call_00_Y0y4mx9ZRn38OkQwPXFZ0287",
+      "tool_input": {
+        "command": "Get-Command python3, python -ErrorAction SilentlyContinue | Select-Object Source",
+        "description": "Find Python executable paths"
+      }
+    }
+  ],
+  "terminal_reason": "completed"
+}
