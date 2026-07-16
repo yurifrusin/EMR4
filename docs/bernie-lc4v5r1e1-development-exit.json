@@ -1,0 +1,39 @@
+{
+  "schema_version": "lc4v5r1e1.development_exit.v1",
+  "source_commit": "af8dc8dfb2750b291c2f750dc9c4598b3dc4f228",
+  "input_file_hashes": {
+    "lc4v5_aggregate": "sha256:40dfa844b5e94ce5ec88aae39d942ab9edfeb7835ce613da4d68c5ed99f0fb1c",
+    "lc4v5_acceptance": "sha256:ecd575cfe73f4cbba9eee6c0733a30ac5aefe3ec78183371a0664c8aed8bdbcd",
+    "lc4v5r1_development": "sha256:3ab20d99c93fb14c528e229752072a969b5190b6fb3fd7cde8755aa40468689c",
+    "lc4v5r1_acceptance": "sha256:174fe7b737a7622930088407923c0663ad866523599e56c094114c4a1e286f2c"
+  },
+  "development_result": {
+    "families": 3,
+    "probes": 18,
+    "baseline_complete": 4,
+    "repaired_complete": 18,
+    "baseline_safe": 14,
+    "repaired_safe": 18,
+    "repeat_variance": 0
+  },
+  "gates": {
+    "v5_report_file_hash_exact": true,
+    "v5_schema_and_population_exact": true,
+    "v5_certification_fail_aggregate_exact": true,
+    "v5_three_family_localization_exact": true,
+    "v5_other_families_complete": true,
+    "v5_acceptance_hash_and_decision_exact": true,
+    "r1_report_file_hash_exact": true,
+    "r1_schema_and_probe_hash_exact": true,
+    "r1_baseline_exact": true,
+    "r1_repaired_exact": true,
+    "r1_family_counts_exact": true,
+    "r1_closed_boundaries_exact": true,
+    "r1_acceptance_hash_and_decision_exact": true
+  },
+  "recommendation": "authorize_genuinely_fresh_certification_holdout_v6",
+  "requires_user_decision": true,
+  "certification_claimed": false,
+  "report_hash": "sha256:488e3478eab1c9451f5d78c33c16a2d06be1fc89117f8da8fc6a24fdc2f001ed",
+  "decision": "development_exit_valid_holdout_decision_required"
+}
