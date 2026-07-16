@@ -341,7 +341,8 @@ def _has_action_negation(
 # ---------------------------------------------------------------------------
 
 _CORRECTION_PATTERNS: list[re.Pattern[str]] = [
-    re.compile(r"\b(actually|no[,\s]|correction)\b", re.I),
+    re.compile(r"\b(actually|correction)\b", re.I),
+    re.compile(r"^\s*no\s*[,;:\-]", re.I),
     re.compile(r"\b(change that to|make it .* instead|make it .* please)\b", re.I),
     re.compile(r"\b(not that|different|let me change|i meant|i mean)\b", re.I),
 ]
@@ -578,6 +579,10 @@ _DURATION_AMBIGUOUS = re.compile(
     re.I,
 )
 
+_DURATION_OR_PATTERN = re.compile(
+    r"\b(\d+)\s+or\s+(\d+)\s*(minutes?|mins?)\b", re.I
+)
+
 # Lexical duration forms mapped to minutes
 _LEXICAL_DURATION: list[tuple[re.Pattern[str], int]] = [
     (re.compile(r"\bhalf\s+an?\s+hour\b", re.I), 30),
@@ -610,9 +615,6 @@ def _extract_duration(text: str) -> tuple[int | None, str]:
         )
 
     # Check for "X or Y minutes" pattern for duration ambiguity
-    _DURATION_OR_PATTERN = re.compile(
-        r"\b(\d+)\s+or\s+(\d+)\s*(minutes?|mins?)\b", re.I
-    )
     if _DURATION_OR_PATTERN.search(text):
         return None, "ambiguous"
 
@@ -796,6 +798,19 @@ def _extract_temporal(
 # ---------------------------------------------------------------------------
 
 
+def _extract_duration_alternatives(utterances: list[str]) -> tuple[str, ...]:
+    """Return only duration alternatives explicitly present in the dialogue."""
+    for utterance in utterances:
+        match = _DURATION_OR_PATTERN.search(utterance)
+        if match:
+            unit = match.group(3)
+            return (
+                f"{match.group(1)} {unit}",
+                f"{match.group(2)} {unit}",
+            )
+    return ()
+
+
 def _determine_clarification(
     utterances: list[str],
     intended_action: str | None,
@@ -807,6 +822,7 @@ def _determine_clarification(
     correction_index: int | None,
     duration_semantics: str = "omitted",
     entities: dict[str, str] | None = None,
+    temporal_relation: str = "unspecified",
 ) -> tuple[bool, tuple[str, ...]]:
     """Determine whether clarification is needed, based on action-relevant facts.
 
@@ -889,6 +905,13 @@ def _determine_clarification(
                     choices = []
                     break
 
+        # An approximate window is useful search evidence, but it is not an
+        # exact create target. Preserve the bounds and ask for an exact choice
+        # before exposing any create authority.
+        if temporal_relation == "approximate" and not has_sometime:
+            needs_clarify = True
+            choices = []
+
         # Correction may resolve (but not for negated entities)
         if correction_index is not None and needs_clarify and duration_semantics != "negated" \
                 and patient_semantics not in ("ambiguous", "negated") \
@@ -912,7 +935,7 @@ def _determine_clarification(
     if intended_action == "resize":
         # Resize: needs explicit duration
         if not has_duration:
-            return True, ("15 minutes", "30 minutes")
+            return True, _extract_duration_alternatives(utterances)
         return False, ()
 
     if intended_action == "cancel":
@@ -1425,6 +1448,35 @@ def extract_semantics(
     temporal_relation, earliest, latest = _derive_final_temporal(
         utterances, normalized_values,
     )
+    if intended_action == "move":
+        primary_target = _MOVE_TARGET_PATTERN.search(primary)
+        later_temporal = any(
+            relation != "unspecified" or lower is not None or upper is not None
+            for relation, lower, upper in (
+                _extract_temporal(utterance) for utterance in utterances[1:]
+            )
+        )
+        if primary_target is not None and not later_temporal:
+            target_relation, target_earliest, target_latest = _extract_temporal(
+                primary[primary_target.end():]
+            )
+            if (
+                target_relation != "unspecified"
+                or target_earliest is not None
+                or target_latest is not None
+            ):
+                temporal_relation = target_relation
+                earliest = target_earliest
+                latest = target_latest
+    if temporal_relation != "unspecified" or earliest is not None or latest is not None:
+        if earliest is None:
+            normalized_values.pop("earliest_time", None)
+        else:
+            normalized_values["earliest_time"] = earliest
+        if latest is None:
+            normalized_values.pop("latest_time", None)
+        else:
+            normalized_values["latest_time"] = latest
     has_time_bounds = bool(earliest is not None or latest is not None)
 
     # --- 4. Date from reduced values ---
@@ -1460,6 +1512,7 @@ def extract_semantics(
         correction_index,
         duration_semantics=duration_sem,
         entities=entities,
+        temporal_relation=temporal_relation,
     )
 
     # --- 9. Action negation ---

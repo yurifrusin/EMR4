@@ -1,0 +1,44 @@
+{
+  "schema_version": "bernie.lc4v5r1.development-evidence.v1",
+  "probe_hash": "sha256:e44885916b9790ac858715c7d3d7c43b10231edc5bdfcceeba8486fc077ec55f",
+  "baseline": {
+    "complete": 4,
+    "safe": 14,
+    "complete_ids": [
+      "lc4v5r1_b2",
+      "lc4v5r1_b4",
+      "lc4v5r1_b5",
+      "lc4v5r1_c6"
+    ]
+  },
+  "repaired": {
+    "total": 18,
+    "complete": 18,
+    "safe": 18,
+    "variance": 0,
+    "variance_ids": []
+  },
+  "family_counts": {
+    "create_approximate": {
+      "total": 6,
+      "complete": 6,
+      "safe": 6,
+      "variance": 0
+    },
+    "move_interval": {
+      "total": 6,
+      "complete": 6,
+      "safe": 6,
+      "variance": 0
+    },
+    "ambiguous_resize": {
+      "total": 6,
+      "complete": 6,
+      "safe": 6,
+      "variance": 0
+    }
+  },
+  "protected_evidence_accessed": false,
+  "t3_provider_or_write_boundary_opened": false,
+  "decision": "development_repair_pass"
+}
