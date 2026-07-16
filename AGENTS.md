@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V8 genuinely fresh one-shot certification is complete, evidence-valid, and permanently sealed with `certification_fail`; a user development decision is required |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v8-sol-acceptance.md` and `docs/bernie-lc4v8-fresh-certification-closeout.md` |
-| Current result | The consumed V8 attempt produced 576 valid observations with zero evidence defects or variance: safety 576/576, policy/integration failures zero, complete and policy resolution 0/576, temporal relation and normalization 528/576, and every other semantic dimension 576/576. Every group and language-form complete gate fails. V8 cannot be inspected or rerun |
-| Next implementation | Pause for Yuri. Recommend bounded development-only LC4V8D1 using fresh inspectable probes derived only from public aggregates: first separate policy-resolution authoring/projection mismatch from product causes, then independently sample temporal/normalization. A later V9 is a separate decision. Preserve v1-v8, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
+| Active product track | Yuri authorized ordinary-development LC4V8D1; its fresh projection diagnostic is frozen before baseline |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v8d1-sol-contract.md`; V8 remains accepted and sealed under `lc4v8-sol-acceptance.md` |
+| Current result | Sol authored 24 inspectable probes from public aggregates only: six canonical policy actions, six policy boundaries, six time surfaces, and six temporal-composition cases. Cross-field authorship checks pass 6/6. A contained pre-authoring metadata-only protected search incident exposed no case/Gold content |
+| Next implementation | Obtain fresh Gemini pre-baseline veto, then dispatch one bounded DeepSeek Flash runner/test candidate through Claude Code `--bare`; freeze the two-repeat baseline selection before any remediation. Preserve v1-v8, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 
