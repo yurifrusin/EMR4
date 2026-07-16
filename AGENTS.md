@@ -46,12 +46,12 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V6D1 development diagnostic is complete with no runtime remediation; user certification-strategy decision required |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v6d1-sol-acceptance.md` and `docs/bernie-lc4v6d1-development-closeout.md` |
-| Current result | All 24 fresh D1 probes pass extraction, policy, composition, and safety with zero variance. Twelve unknown-practitioner moves correctly preserve exact names at context-free extraction and clarify only at authoritative policy; a conflated clarification scorer would fail all 12. No fresh authoring, parser, or policy gap remains and runtime remediation is unauthorized. This supports a future certification-contract granularity change but does not reopen or rescore sealed V6 |
-| Next implementation | Pause at Yuri's documented decision boundary. Recommended option: authorize a genuinely fresh V7 with a content-blind evaluator that scores extraction and policy clarification separately before composition. Alternative V6 reuse/rescoring requires an explicit separately reviewed policy and is not recommended. Preserve sealed v1-v6, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
+| Active product track | LC4V7 genuinely fresh layer-specific certification is authorized; contract and thresholds are frozen before framework or corpus content |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v7-sol-contract.md` and `orchestration/agent_inbox/codex/lc4v7-one-shot-acceptance-rule.md` |
+| Current result | LC4V6D1 passed 24/24 fresh probes and established that extraction and policy clarification must be scored independently before composition. Yuri authorized the recommended fresh V7. Its fixed shape is 24 families, 288 scenarios, 72 multi-turn trajectories, two repeats, and 576 samples; no V7 content exists yet |
+| Next implementation | Dispatch one bounded DeepSeek V4 Flash/high empty content-blind framework lane through Claude Code `--bare`; Sol reviews/recovers, then Gemini 3.5 Flash independently vetoes the exact empty framework before Sol-only authorship. Preserve sealed v1-v6, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
 
-### LC4V6 and LC4V6D1 accepted state
+### LC4V6, LC4V6D1, and active LC4V7 state
 
 Fresh V6 used Flash only for the empty framework, Gemini for its pre-content
 veto, and Sol alone for frozen thresholds plus Gold authorship at `0527848b`.
@@ -62,7 +62,9 @@ with zero variance. Its 12 unknown-practitioner moves prove the intended layer
 split and expose how conflated clarification scoring fails correct behaviour.
 DeepSeek's evidence self-pass was recovered by Sol; Gemini passed contracts and
 exact recovered head `bef040eb`. No runtime repair is authorized. Recommend a
-fresh layer-specific V7; D1 does not reveal or rescore V6. See active acceptance.
+fresh layer-specific V7; D1 does not reveal or rescore V6. Yuri authorized V7
+on 2026-07-16. Its layer-specific contract and thresholds are frozen before
+content at `eb2099f0`; the empty framework lane is next. See active acceptance.
 
 LC4V4 provenance: the frozen pre-content records remain
 `lc4v4q1-sol-contract.md`, `lc4v4q1-sol-recovery-amendment.md`,
