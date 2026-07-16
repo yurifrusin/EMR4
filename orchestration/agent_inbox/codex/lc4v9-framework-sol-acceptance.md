@@ -2,7 +2,7 @@
 
 Date: 2026-07-16
 
-Decision: `framework_accepted_content_authoring_authorized`
+Decision: `superseded_pending_fourth_veto`
 
 The content-blind framework and one-shot rule were frozen before any actual V9
 content. DeepSeek Flash's single candidate was preserved and rejected; Sol
@@ -83,3 +83,14 @@ frozen Sol-only file allocation and attempt ID above are now authorized for
 Sol-only authorship, source commit, immutable manifest/seal creation, and the
 single consumed run. No external model or provider may access those surfaces
 from their first creation onward.
+
+## Second finalization supersession
+
+Before creating any protected content, Sol's full five-outcome authoring audit
+found that the framework rejected the ordinary negated-action projection:
+`no_action` may retain exactly one read-only `search_patients` lookup while
+still carrying no mutation tool, delta, simulated write, or downstream claim.
+The framework and adversarial tests are amended in
+`lc4v9-third-post-veto-interface-amendment.md`. This acceptance is superseded
+for authorship until the exact amended head receives one fresh independent
+pass. All protected paths remain absent and closed meanwhile.

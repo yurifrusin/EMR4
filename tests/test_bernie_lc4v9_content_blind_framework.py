@@ -422,6 +422,38 @@ def test_omitted_practitioner_clarification_allows_empty_choices() -> None:
     validate_gold_cross_field_consistency(fixture)
 
 
+def test_negated_no_action_allows_only_bounded_patient_lookup() -> None:
+    fixture = make_fixture()
+    no_action = fixture["scenarios"][0]["gold"]
+    no_action["canonical_projection"].update(
+        {
+            "selected_tools": ["search_patients"],
+            "downstream_outcome": None,
+        }
+    )
+    validate_gold_cross_field_consistency(fixture)
+
+
+@pytest.mark.parametrize(
+    "selected_tools, downstream_outcome",
+    (
+        (["find_slots"], None),
+        (["request_clarification"], None),
+        (["search_patients", "search_patients"], None),
+        (["search_patients"], "appointment_cancelled"),
+    ),
+)
+def test_no_action_rejects_unbounded_read_or_downstream_claim(
+    selected_tools: list[str], downstream_outcome: str | None
+) -> None:
+    fixture = make_fixture()
+    projection = fixture["scenarios"][0]["gold"]["canonical_projection"]
+    projection["selected_tools"] = selected_tools
+    projection["downstream_outcome"] = downstream_outcome
+    with pytest.raises(GoldValidationError):
+        validate_gold_cross_field_consistency(fixture)
+
+
 def test_refusal_tool_is_safe_nonmutation_not_hidden_write() -> None:
     fixture = make_fixture()
     refusal = fixture["scenarios"][0]["gold"]

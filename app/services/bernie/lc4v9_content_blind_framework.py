@@ -567,7 +567,11 @@ def validate_gold_cross_field_consistency(fixture: Mapping[str, Any]) -> None:
                 or projection["downstream_outcome"] != "instruction_refused"
             ):
                 errors.append(f"{label} has contradictory refusal fields")
-            if outcome == "no_action" and (tools or projection["authority"] != "read"):
+            if outcome == "no_action" and (
+                tools not in ([], ["search_patients"])
+                or projection["authority"] != "read"
+                or projection["downstream_outcome"] is not None
+            ):
                 errors.append(f"{label} has contradictory no-action fields")
             if outcome == "proceed_read" and (not tools or projection["authority"] != "read"):
                 errors.append(f"{label} has contradictory read fields")

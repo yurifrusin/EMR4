@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V9 genuinely fresh certification has passed its final amended content-blind framework gate. All external sessions are closed and Sol-only protected authorship is authorized; no actual V9 content existed at acceptance |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v9-sol-contract.md`, `lc4v9-one-shot-acceptance-rule.md`, `lc4v9-second-post-veto-interface-amendment.md`, and final `lc4v9-framework-sol-acceptance.md`; LC4V8D1 remains accepted under `lc4v8d1-sol-acceptance.md` |
-| Current result | Flash's rejected candidate and Sol recovery remain preserved. The first two Gemini passes remain evidence for their exact heads only. A third fresh Gemini project returned `DECISION: pass` on exact final review head `c43b73ed`, reproducing 64/64 focused-plus-taxonomy, 74/74 ordinary D1, and 2/2 selected isolation tests. Its receipt is integrated at `756264e4`; the external session is closed |
-| Next implementation | Sol alone authors and validates the frozen 24-group/288-scenario/72-multi-turn V9 corpus, bound evaluator, thresholds, authoring tool, and runner; commit source, create immutable manifest/seal for attempt `lc4v9-fresh-certification-001`, then perform exactly one run. Preserve v1-v8, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
+| Active product track | LC4V9 genuinely fresh certification remains content-blind. The full five-outcome audit found and repaired the negated `no_action` read-lookup mismatch before content; authorship awaits one fresh exact-head Gemini veto. No actual V9 content exists |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v9-sol-contract.md`, `lc4v9-one-shot-acceptance-rule.md`, and `lc4v9-third-post-veto-interface-amendment.md`; the prior framework acceptance is superseded pending the fourth veto. LC4V8D1 remains accepted under `lc4v8d1-sol-acceptance.md` |
+| Current result | The prior passes remain exact-head evidence only. The latest amendment allows only the ordinary bounded `[search_patients]` lookup in `no_action`, while adversarially rejecting every other tool, duplicate lookup, downstream claim, and all mutation evidence. Protected V9 content remains absent |
+| Next implementation | Commit and publish the complete five-outcome amendment, obtain one fresh Gemini 3.5 Flash/medium named-file-only veto, then accept and begin Sol-only protected authorship. Preserve v1-v8, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 

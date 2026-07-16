@@ -1,0 +1,17 @@
+{
+  "adapter_observations": [
+    {"adapter_id":"deepseek_via_claude_code_bare","evidence":["Closed."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"deepcode_cli","evidence":["Unselected."],"method":"synthetic_fixture","reachability":"unknown"},
+    {"adapter_id":"claude_cli_print","evidence":["Idle."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"antigravity_cli_print","evidence":["Prior review is closed; a fresh exact-head veto is required."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"codex_primary_session","evidence":["GPT Sol completed the five-outcome ordinary-interface audit before protected content and repaired bounded no-action read lookup validation."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"codex_subagent_spawn","evidence":["None assigned."],"method":"synthetic_fixture","reachability":"unknown"}
+  ],
+  "assigned_agent_ids": [],
+  "context_health": {"agent_contexts":[{"agent_id":"orchestrator","measurement_source":"unknown","rehydrated_from_receipt":true,"rehydration_sources":["live_handover_current_baton","current_authority_allocation","active_plan_and_acceptance","protected_evidence_boundaries","git_refs_and_worktree"]}]},
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit",
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "worker_slots": [],
+  "workspace_receipts": []
+}
