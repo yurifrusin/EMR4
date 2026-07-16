@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import subprocess
 import sys
 from collections import Counter
@@ -40,17 +41,44 @@ from app.services.bernie.semantic_extraction import extract_semantics
 
 
 ZERO_HASH = "sha256:" + "0" * 64
+COMMIT_RE = re.compile(r"^[0-9a-f]{40}$")
 
 
-def _current_source_head() -> str:
-    completed = subprocess.run(
-        ["git", "rev-parse", "HEAD"],
+def validate_source_binding(
+    source_commit: str, corpus_path: Path, corpus_hash: str
+) -> tuple[str, ...]:
+    """Prove an ancestor source commit contains the exact corpus blob."""
+    errors: list[str] = []
+    if not COMMIT_RE.fullmatch(source_commit):
+        return ("source commit format is invalid",)
+    try:
+        relative = corpus_path.resolve().relative_to(ROOT.resolve()).as_posix()
+    except ValueError:
+        return ("corpus path is outside the repository",)
+    ancestor = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", source_commit, "HEAD"],
         cwd=ROOT,
-        check=True,
         capture_output=True,
-        text=True,
     )
-    return completed.stdout.strip()
+    if ancestor.returncode != 0:
+        errors.append("source commit is not an ancestor of the execution head")
+        return tuple(errors)
+    committed = subprocess.run(
+        ["git", "show", f"{source_commit}:{relative}"],
+        cwd=ROOT,
+        capture_output=True,
+    )
+    if committed.returncode != 0:
+        errors.append("source commit does not contain the corpus path")
+        return tuple(errors)
+    try:
+        committed_payload = json.loads(committed.stdout.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError):
+        errors.append("source corpus blob is not canonical JSON input")
+        return tuple(errors)
+    if canonical_sha256(committed_payload) != corpus_hash:
+        errors.append("source corpus blob hash drift")
+    return tuple(errors)
 
 
 def _observe(
@@ -371,8 +399,6 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     corpus: dict[str, Any] | None = None
     manifest: dict[str, Any] | None = None
     try:
-        if _current_source_head() != args.source_commit:
-            errors.append("live source commit drift")
         corpus = load_json_object(args.corpus)
         manifest = load_json_object(args.manifest)
         corpus_hash = canonical_sha256(corpus)
@@ -382,6 +408,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             manifest=manifest_hash,
             framework_contract=str(manifest.get("contract_hash", ZERO_HASH)),
             acceptance_rule=str(manifest.get("acceptance_rule_hash", ZERO_HASH)),
+        )
+        errors.extend(
+            validate_source_binding(args.source_commit, args.corpus, corpus_hash)
         )
         corpus_errors = validate_corpus(corpus)
         summary = population_summary(corpus.get("scenarios", []))

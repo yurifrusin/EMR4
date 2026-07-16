@@ -33,6 +33,7 @@ from scripts.run_bernie_lc4v7_certification import (
     _observe,
     run,
     score_observation,
+    validate_source_binding,
 )
 
 
@@ -304,6 +305,33 @@ def test_runtime_boundary_cannot_receive_gold_or_identity() -> None:
     source = inspect.getsource(_observe)
     assert "gold" not in source.casefold()
     assert "scenario_id" not in source
+
+
+def test_source_binding_uses_an_ancestor_with_the_exact_committed_blob() -> None:
+    import subprocess
+
+    source_commit = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    path = Path(
+        "orchestration/agent_inbox/codex/lc4v7-post-compaction-receipt.json"
+    )
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    assert validate_source_binding(
+        source_commit, path, canonical_sha256(payload)
+    ) == ()
+    assert "blob hash drift" in " ".join(
+        validate_source_binding(source_commit, path, "sha256:" + "0" * 64)
+    )
+
+
+def test_source_binding_refuses_uncommitted_external_paths(tmp_path: Path) -> None:
+    assert validate_source_binding("a" * 40, tmp_path / "corpus.json", "hash") == (
+        "corpus path is outside the repository",
+    )
 
 
 def test_invalid_attempt_consumes_seal_and_writes_aggregate_only(tmp_path: Path) -> None:
