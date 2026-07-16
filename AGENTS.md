@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V5 genuinely fresh one-shot certification; content-blind framework accepted and external sessions closed; protected Sol-only content authoring next |
+| Active product track | LC4V5 genuinely fresh one-shot certification; protected source frozen and unconsumed seal minted; single production evaluation next |
 | Active acceptance | `orchestration/agent_inbox/codex/lc4v5-sol-contract.md` and `lc4v5-one-shot-acceptance-rule.md`, grounded by accepted D5E1 exit |
-| Current result | D5E1 remains the accepted development exit. For LC4V5, DeepSeek candidate `37cca54e` was preserved but materially recovered by Sol; 113 serial framework/dependency tests pass. Gemini 3.5 Flash returned `DECISION: pass` on exact pre-content head `4cfa2c45`. Both external worktrees and sessions are closed, and no v5 content existed before that veto |
-| Next implementation | Sol alone authors the fresh v5 corpus, freezes its source commit, creates the exact manifest and unconsumed seal, commits that protected source, and performs the aggregate-only production evaluation exactly once. No external model may inspect the content. Preserve v1-v4 seals, T3.1-T3.4, and all T3.5/provider/product/write boundaries. Stop at the post-result product/runtime adoption decision barrier |
+| Current result | D5E1 remains the accepted development exit. LC4V5's recovered content-blind framework passed Gemini veto on exact head `4cfa2c45`; external sessions then closed. Sol alone froze the 24-group/288-scenario source at `c2dd34b6`, corpus hash `d5828f9e...`, manifest hash `650510b5...`, and unconsumed seal hash `b45958f3...`. No parser or replay ran during authoring |
+| Next implementation | Commit and push the unconsumed seal checkpoint, verify absent marker/report/receipt and clean origin relation, then Sol performs the aggregate-only production evaluation exactly once. Accept the valid result without reopening v5, close out, and stop at the post-result product/runtime adoption decision barrier. Preserve v1-v4 seals, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
 
 LC4V4 provenance: the frozen pre-content records remain
 `lc4v4q1-sol-contract.md`, `lc4v4q1-sol-recovery-amendment.md`,
