@@ -1,0 +1,68 @@
+{
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "evidence": ["LC4V6 framework lane is complete and closed; no further DeepSeek dispatch is planned."],
+      "method": "synthetic_fixture",
+      "reachability": "unknown"
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "evidence": ["Real-TTY fallback remains unselected."],
+      "method": "synthetic_fixture",
+      "reachability": "unknown"
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "evidence": ["Availability-gated consultation transport remains unselected."],
+      "method": "synthetic_fixture",
+      "reachability": "unknown"
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "evidence": ["LC4V6 independent framework review is complete and the external session is closed."],
+      "method": "synthetic_fixture",
+      "reachability": "unknown"
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "evidence": ["Protected GPT Sol session is active as conductor, corpus author, acceptance owner, and integrator."],
+      "method": "synthetic_fixture",
+      "reachability": "reachable"
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "evidence": ["No native Codex subagent is assigned or authorized for the protected LC4V6 one-shot sequence."],
+      "method": "synthetic_fixture",
+      "reachability": "unknown"
+    }
+  ],
+  "assigned_agent_ids": [],
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "unknown",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "continuation_event": "post_compaction",
+  "planned_action": "commit",
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "worker_slots": [
+    {
+      "active_instance_ids": [],
+      "resource_id": "deepseek-flash-workers",
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": []
+}
