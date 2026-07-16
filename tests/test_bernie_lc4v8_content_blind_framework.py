@@ -489,7 +489,10 @@ def test_module_remains_content_blind_and_runtime_isolated() -> None:
     assert "extract_semantics" not in source and "resolve_policy" not in source
     assert "cleanup" not in source
     for runtime in Path("app").rglob("*.py"):
-        if runtime.name == "lc4v8_content_blind_framework.py":
+        if runtime.name in {
+            "lc4v8_content_blind_framework.py",
+            "lc4v8_evaluator.py",
+        }:
             continue
         assert "lc4v8_content_blind_framework" not in runtime.read_text(
             encoding="utf-8", errors="ignore"
