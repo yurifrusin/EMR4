@@ -405,6 +405,17 @@ evidence. This closes development repair, not certification. The next gate is
 Yuri's decision between a genuinely fresh certification holdout and an explicit
 reviewed reuse policy.
 
+That decision sequence subsequently produced fresh sealed V3-V6 attempts and
+ordinary development repair/exit tranches between them. LC4V6 is the current
+authority. Its single attempt is evidence-valid and permanently consumed:
+complete `540/576`, safety `576/576`, interpretation failures 36,
+policy/integration failures zero, clarification `552/576`, normalization
+`564/576`, every other dimension `576/576`, and zero exceptions, missing
+dimensions, case artifacts, or variance. The frozen decision is
+`certification_fail`. Public aggregate localization is dominated by
+`move_unknown_practitioner` at `0/24`, with paraphrase at `34/48`. This does
+not expose case-level evidence or authorize V6 inspection, tuning, or rerun.
+
 ## Agent Allocation
 
 - Sol at High reasoning owns the semantic architecture, coverage decisions,
@@ -422,18 +433,21 @@ reviewed reuse policy.
 
 ## Immediate Direction
 
-The development-only exit-gap reassessment is complete and returned
-`no_r3_authorized`; do not predeclare or begin LC4V2R3. The next EMR4 language
-step is a user decision between a genuinely fresh certification holdout and an
-explicit reviewed reuse policy. Until that choice is made, keep sealed holdouts
-v1 and v2 untouched, preserve T3.1-T3.4 blocked by default, defer T3.5, and do
-not promote Silver/pending candidates merely because the evaluator can execute
-them.
+LC4V6 is complete with valid evidence and a frozen `certification_fail`. The
+next EMR4 language step is Yuri's decision on the recommended bounded
+development-only LC4V6D1 diagnostic tranche. If authorized, Sol should author
+fresh inspectable ordinary probes from the public aggregate categories only,
+first separating authoring, parser, and policy causes and remediating only
+independently supported development gaps. Keep sealed holdouts v1-v6 untouched.
+Any later V7 or reuse policy is a separate user decision after development exit.
+Preserve T3.1-T3.4 blocked by default, defer T3.5, and do not promote
+Silver/pending candidates merely because the evaluator can execute them.
 
 No user decision is required for ordinary development-only repair work. Pause if
 work would reuse/re-evaluate protected holdout v1 or v2, broaden historical-trove
 access, send sensitive data to a provider, accept material licensing/cost
-terms, open live-provider execution, or change diary write authority.
+terms, open live-provider execution, create/reuse a certification holdout, or
+change diary write authority.
 
 ## Restart Rehydration
 
@@ -441,7 +455,8 @@ After restarting the app, a new orchestrator should read `AGENTS.md`, this plan,
 the T1/T2 closeouts, the T3 shadow-evaluation status, and the active acceptance
 named in the Current Baton before changing code. It should verify `master`,
 `handoff/current`, and their origin refs; confirm the LC4R10 and LC4V2
-closeouts; preserve both sealed holdouts; and keep the blocked T3 gates intact.
+closeouts plus the LC4V6 acceptance; preserve sealed holdouts v1-v6; and keep
+the blocked T3 gates intact.
 Ordinary development-only repair may continue without reopening T3.5 or asking
 for routine permission.
 
@@ -453,15 +468,15 @@ AGENTS.md and read docs/bernie-language-coverage-implementation-plan.md,
 docs/bernie-t1-stateful-scenario-laboratory.md,
 docs/bernie-t2-deterministic-behaviour-matrix.md, and
 docs/bernie-t3-shadow-evaluation.md. Verify the worktree and origin/master,
-then begin an aggregate-guided development-only semantic repair and corpus-
-engineering tranche through the normal Ariadne workflow. Use only the
-development partition and newly authored ordinary regressions; do not open,
-list, search, rerun, regenerate, hash-check, infer from, or tune against sealed
-holdouts v1 or v2. Prioritize entity semantics, lossless normalization,
-clarification state, and safety while preserving the accepted temporal
-foundation. Preserve corpus provenance and keep candidate evidence separate
-from adjudicated gaps. Preserve T3.1-T3.4 and defer T3.5 provider adapters and
-live calls. Continue
+then resume the active LC4V6 decision state through the normal Ariadne
+workflow. LC4V6 is evidence-valid, `certification_fail`, permanently consumed,
+and aggregate-only. If Yuri authorizes LC4V6D1, use only newly authored
+inspectable ordinary regressions derived from the public aggregate categories;
+do not open, list, search, rerun, regenerate, hash-check, infer from, or tune
+against sealed holdouts v1-v6. Separate authoring, parser, and policy causes
+before remediation, preserve corpus provenance, and keep candidate evidence
+separate from adjudicated gaps. Preserve T3.1-T3.4 and defer T3.5 provider
+adapters and live calls. Continue
 through ordinary implementation, tests, review, commit, and push without
 pausing unless a documented user decision boundary is reached.
 ```

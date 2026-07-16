@@ -115,17 +115,39 @@ target-conflict-plus-delta blocker. All 27 gates pass; report hash is
 `sha256:e2c461ee3b1821c94574b33693efa88d21b99ecf9a95b1ac723b24a933c50564`.
 Gemini returned `DECISION: pass` on exact head `4fba7408`. D5 is diagnostic only.
 
+LC4V5 later remained a permanently sealed aggregate certification failure.
+Its fresh ordinary R1 tranche closed the three public aggregate-localized
+development surfaces at 18/18 complete and 18/18 safe with zero variance, and
+E1 passed all 13 development-exit gates. Yuri then authorized a genuinely
+fresh V6 rather than reuse.
+
+LC4V6 used the same content-blind separation: DeepSeek Flash supplied only an
+empty framework candidate, Sol recovered it, and Gemini returned
+`DECISION: pass` on exact recovered framework head `f53bb976` before content
+existed. Sol alone authored and sealed source commit `0527848b`, then executed
+the only permitted attempt. Evidence is exact and valid across 576 samples,
+with zero exceptions, missing dimensions, case artifacts, or variance. The
+frozen decision is `certification_fail`: complete `540/576`, safety `576/576`,
+interpretation failures 36, policy/integration failures zero, clarification
+`552/576`, normalization `564/576`, and every other dimension `576/576`.
+The worst public family is `move_unknown_practitioner` at `0/24`; paraphrase
+is `34/48`. Report hash is
+`sha256:02f1555adc494672b15aed722f86414eb4570014e795f79210ae10b7936d417a`.
+V6 is permanently consumed and supplies aggregate diagnostic direction only,
+not case-level parser evidence.
+
 ## Next safe sequence
 
-1. Keep holdouts v1, v2, v3, and v4 sealed; use only committed aggregate evidence
-   and closeouts for planning.
-2. Run a bounded development-wide Option A adoption audit over all 60 ordinary
-   D1 probes before any broader development default or certification proposal.
-3. Keep the exact D4 20-case overlay frozen; classify other differences before
-   authorizing remediation and do not rewrite historical fixtures/reports.
-4. Keep T3.5 provider adapters and live-provider execution separately deferred.
-5. Pause for Yuri's explicit choice before a new certification holdout or a
-   reviewed reuse policy.
+1. Keep holdouts v1-v6 sealed; use only accepted aggregate evidence and
+   closeouts for planning.
+2. Pause for Yuri's choice on the recommended development-only LC4V6D1 tranche.
+3. If authorized, author fresh inspectable ordinary probes from the public
+   aggregate categories and separate authoring, parser, and policy causes
+   before remediation.
+4. Require a later explicit Yuri decision for any V7 holdout or reuse policy
+   after an accepted development exit.
+5. Keep T3.1-T3.4 blocked by default and T3.5/providers plus every product/write
+   surface deferred.
 
 ## Primary evidence
 
@@ -151,8 +173,10 @@ Gemini returned `DECISION: pass` on exact head `4fba7408`. D5 is diagnostic only
 - `orchestration/agent_inbox/codex/lc4v3-sol-acceptance.md`
 - `docs/bernie-lc4v4d4-composed-integration-closeout.md`
 - `orchestration/agent_inbox/codex/lc4v4d4-sol-acceptance.md`
+- `docs/bernie-lc4v6-fresh-certification-closeout.md`
+- `orchestration/agent_inbox/codex/lc4v6-sol-acceptance.md`
 
-Protected holdouts v1, v2, v3, and v4 are sealed. Do not enumerate their paths, inspect
+Protected holdouts v1-v6 are sealed. Do not enumerate their paths, inspect
 content, rerun them, regenerate them, hash-check them, infer labels from them,
 or tune against them. T3.1-T3.4 remain blocked-by-default evaluation
 scaffolding; T3.5 is deferred.
