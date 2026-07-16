@@ -1,18 +1,12 @@
-"""Tests for the LC4V9 content-blind certification framework.
-
-All scenarios use opaque in-memory placeholder objects and temporary
-directories.  No actual V9 corpus, evaluator, authoring module,
-manifest, seal, marker, or report is created outside test-controlled
-paths.
-"""
-
 from __future__ import annotations
 
+import copy
 import hashlib
+import importlib.util
 import json
-import os
-import tempfile
-from collections.abc import Callable
+import subprocess
+import sys
+from pathlib import Path
 from typing import Any
 
 import pytest
@@ -23,1137 +17,601 @@ from app.services.bernie.certification_decision_taxonomy import (
     CERTIFICATION_PASS,
 )
 from app.services.bernie.lc4v9_content_blind_framework import (
-    NUM_GROUPS,
-    NUM_SCENARIOS,
-    NUM_MULTI_TURN,
-    NUM_SAMPLES,
-    SCENARIOS_PER_GROUP,
-    GROUPS_PER_ACTION,
-    MULTI_TURN_PER_GROUP,
-    NUM_REPEATS,
-    ONE_TURN_TOTAL,
-    SCENARIOS_PER_LANGUAGE_FORM,
-    SCENARIOS_PER_FORM_PER_GROUP,
     ACTIONS,
-    LANGUAGE_FORMS,
-    SCORING_DIMENSIONS,
-    COMPLETE,
-    SEMANTIC_OUTCOMES,
     CANONICAL_PROJECTION_FIELDS,
     DEFAULT_THRESHOLDS,
-    SEAL_UNCONSUMED,
-    SEAL_CONSUMED,
-    ValidationError,
+    LANGUAGE_FORMS,
+    SCORING_DIMENSIONS,
+    BindingValidationError,
+    GoldValidationError,
+    ReportError,
     SchemaValidationError,
     ShapeValidationError,
-    GoldValidationError,
-    BindingValidationError,
-    SealValidationError,
-    MarkerError,
-    ReportError,
-    validate_fixture_schema,
-    validate_threshold_schema,
-    validate_manifest_schema,
-    validate_seal_schema,
-    validate_report_schema,
+    canonical_json_bytes,
+    canonicalize_json,
+    run_certification,
     validate_canonical_projection,
+    validate_evaluator_result,
+    validate_fixture_schema,
     validate_fixture_shape,
     validate_gold_cross_field_consistency,
-    validate_source_bindings,
-    validate_evaluator_source_identity,
-    validate_seal_state,
-    validate_results_dimensions,
-    validate_zero_variance,
-    run_certification,
+    validate_manifest_schema,
+    validate_report_schema,
+    validate_threshold_schema,
 )
 
-# ---------------------------------------------------------------------------
-# Test helpers
-# ---------------------------------------------------------------------------
+
+FIXTURE_PATH = "protected/lc4v9_fixture.json"
+FRAMEWORK_PATH = "app/services/bernie/lc4v9_content_blind_framework.py"
+EVALUATOR_PATH = "tests/test_bernie_lc4v9_content_blind_framework.py"
+THRESHOLD_PATH = "protected/lc4v9_thresholds.json"
+MANIFEST_PATH = "protected/lc4v9_manifest.json"
+SEAL_PATH = "protected/lc4v9_seal.json"
+MARKER_PATH = "protected/lc4v9_attempt.marker"
+REPORT_PATH = "protected/lc4v9_report.json"
+ATTEMPT_ID = "lc4v9-one-shot-001"
 
 
-def _sha256(data: bytes) -> str:
+def _sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
-def _make_canonical_projection(
-    *,
-    outcome: str = "proceed_read",
-) -> dict[str, Any]:
-    """Build a valid canonical 14-field projection."""
-    is_mutation = outcome == "propose_mutation"
+def _projection() -> dict[str, Any]:
     return {
-        "requires_clarification": True if outcome == "clarify" else None,
-        "clarification_choices": ["opt_a", "opt_b"] if outcome == "clarify" else [],
-        "resolved_patient": "pat-001",
-        "resolved_practitioner": "dr-smith",
-        "resolved_practitioner_id": "doc-42",
-        "selected_tools": ["tool-a", "tool-b"] if is_mutation else [],
-        "authority": "propose" if is_mutation else "read",
-        "diary_relation": "conflicting" if is_mutation else "none",
-        "conflicting_fields": ["start_time"] if is_mutation else [],
-        "downstream_outcome": "pending",
-        "appointment_delta_count": 1 if is_mutation else 0,
+        "requires_clarification": False,
+        "clarification_choices": [],
+        "resolved_patient": None,
+        "resolved_practitioner": None,
+        "resolved_practitioner_id": None,
+        "selected_tools": [],
+        "authority": None,
+        "diary_relation": None,
+        "conflicting_fields": [],
+        "downstream_outcome": None,
+        "appointment_delta_count": 0,
         "audit_delta_count": 0,
-        "simulated_write": True if is_mutation else False,
-        "entity_semantics_unchanged": False,
+        "simulated_write": False,
+        "entity_semantics_unchanged": True,
     }
 
 
-def _make_gold(*, outcome: str = "proceed_read") -> dict[str, Any]:
-    """Build a valid Gold entry."""
-    is_mutation = outcome == "propose_mutation"
+def _gold(action: str) -> dict[str, Any]:
     return {
-        "semantic_outcome": outcome,
-        "mutation_allowed": is_mutation,
+        "intended_action": action,
+        "action_semantics": {"opaque": True},
+        "temporal_relation": None,
+        "temporal_bounds": None,
+        "normalized_values": {},
+        "entity_semantics": {
+            "patient": None,
+            "practitioner": None,
+            "practitioner_id": None,
+        },
+        "lossless_source_spans": [],
+        "extraction_clarification": None,
+        "semantic_outcome": "no_action",
+        "mutation_allowed": False,
         "safe": True,
-        "canonical_projection": _make_canonical_projection(outcome=outcome),
+        "canonical_projection": _projection(),
+        "policy_clarification": None,
+        "clarification_composition": None,
+        "interpretation_tool": {"opaque": True},
+        "replay": {"opaque": True},
     }
 
 
-def _make_scenario(
-    group_id: str,
-    language_form: str,
-    turn_count: int,
-    idx: int,
-    *,
-    outcome: str = "proceed_read",
-) -> dict[str, Any]:
-    """Build a single scenario dict."""
-    return {
-        "id": f"sc-{group_id}-{language_form}-{idx}",
-        "group": group_id,
-        "language_form": language_form,
-        "turn_count": turn_count,
-        "receptionist_utterances": [f"utterance-{idx}"],
-        "diary_state": {"slot": "value"},
-        "gold": _make_gold(outcome=outcome),
-    }
-
-
-def _make_groups() -> dict[str, str]:
-    """Build a valid groups dict: 24 groups, 4 per action."""
-    groups: dict[str, str] = {}
-    for action in ACTIONS:
-        for i in range(GROUPS_PER_ACTION):
-            gid = f"{action}-{i + 1}"
-            groups[gid] = action
-    return groups
-
-
-def _make_valid_fixture() -> dict[str, Any]:
-    """Build a fixture with exactly the correct 24/288/72/576 shape."""
-    groups = _make_groups()
-    group_ids = list(groups.keys())
-    scenarios: list[dict[str, Any]] = []
-
-    for g_idx, gid in enumerate(group_ids):
-        # Exactly 3 multi-turn scenarios per group, assigned to distinct
-        # language forms (first 3 forms, first rep only).
-        for lf_idx, lf in enumerate(LANGUAGE_FORMS):
-            for rep in range(SCENARIOS_PER_FORM_PER_GROUP):
-                is_multi = (rep == 0 and lf_idx < MULTI_TURN_PER_GROUP)
-                tc = 3 if is_multi else 1
-                sc_idx = g_idx * SCENARIOS_PER_GROUP + lf_idx * SCENARIOS_PER_FORM_PER_GROUP + rep
-                outcome = "proceed_read"
-                if is_multi:
-                    outcome = "clarify"
-                elif rep == 0:
-                    outcome = "no_action"
+def make_fixture() -> dict[str, Any]:
+    groups = []
+    scenarios = []
+    for action_index, action in enumerate(ACTIONS):
+        for action_group in range(4):
+            group_id = f"g-{action_index}-{action_group}"
+            groups.append({"id": group_id, "action": action})
+            for scenario_index in range(12):
+                language_form = LANGUAGE_FORMS[scenario_index // 2]
+                turn_count = 2 if scenario_index < 3 else 1
+                scenario_id = f"s-{action_index}-{action_group}-{scenario_index}"
                 scenarios.append(
-                    _make_scenario(gid, lf, tc, sc_idx, outcome=outcome)
+                    {
+                        "id": scenario_id,
+                        "coverage_cell": f"cell-{scenario_id}",
+                        "group": group_id,
+                        "language_form": language_form,
+                        "turn_count": turn_count,
+                        "receptionist_utterances": [
+                            f"opaque-{scenario_id}-{turn}" for turn in range(turn_count)
+                        ],
+                        "diary_state": {},
+                        "gold": _gold(action),
+                    }
                 )
-
     return {
-        "schema_version": "lc4v9-fixture-1",
+        "schema_version": "lc4v9-fixture.v1",
         "groups": groups,
         "scenarios": scenarios,
     }
 
 
-def _make_valid_thresholds() -> dict[str, int]:
-    return dict(DEFAULT_THRESHOLDS)
-
-
-def _make_valid_manifest(
+def make_evaluator_result(
+    fixture: dict[str, Any],
     *,
-    fixture_path: str = "",
-    framework_path: str = "",
-    evaluator_path: str = "",
-    threshold_path: str = "",
-    source_commit: str = "a" * 40,
+    failed: dict[str, set[str]] | None = None,
+    validation_errors: int = 0,
+    runtime_exceptions: int = 0,
+    policy_failures: int = 0,
+    integration_failures: int = 0,
 ) -> dict[str, Any]:
-    """Build a valid manifest."""
-    def _h(p: str) -> str:
-        if p and os.path.exists(p):
-            with open(p, "rb") as f:
-                return _sha256(f.read())
-        return "dummy"
-
-    return {
-        "schema_version": "lc4v9-manifest-1",
-        "fixture_hash": _h(fixture_path),
-        "framework_hash": _h(framework_path),
-        "evaluator_hash": _h(evaluator_path),
-        "threshold_hash": _h(threshold_path),
-        "source_commit": source_commit,
-        "fixture_blob": _h(fixture_path),
-        "framework_blob": _h(framework_path),
-        "evaluator_blob": _h(evaluator_path),
-        "threshold_blobs": {threshold_path: _h(threshold_path)} if threshold_path else {},
-    }
-
-
-def _make_valid_seal(
-    manifest_path: str = "",
-    attempt_id: str = "test-attempt-001",
-    *,
-    manifest_hash_override: str | None = None,
-) -> dict[str, Any]:
-    mh = manifest_hash_override or ""
-    if manifest_path and os.path.exists(manifest_path):
-        with open(manifest_path, "rb") as f:
-            mh = _sha256(f.read())
-    return {
-        "schema_version": "lc4v9-seal-1",
-        "manifest_hash": mh,
-        "attempt_id": attempt_id,
-        "status": SEAL_UNCONSUMED,
-    }
-
-
-def _make_evaluator(
-    *,
-    pass_all: bool = True,
-    num_results: int = NUM_SAMPLES,
-) -> Callable[[Any], dict[str, Any]]:
-    """Build an evaluator that returns deterministic results."""
-    def _evaluator(fixture: Any) -> dict[str, Any]:
-        scs = fixture.get("scenarios", [])
-        results: list[dict[str, Any]] = []
-        for sc in scs:
-            for rep in range(NUM_REPEATS):
-                dims = {d: pass_all for d in SCORING_DIMENSIONS}
-                results.append({
-                    "scenario_id": sc.get("id", ""),
-                    "repeat": rep,
-                    "dimensions": dims,
-                    "complete": pass_all,
-                })
-        return {"results": results[:num_results]}
-    return _evaluator
-
-
-def _make_injectable_io(tmpdir: str) -> dict[str, Any]:
-    """Build injectable I/O callables for run_certification."""
-    markers_created: set[str] = set()
-
-    def _read_json(p: str) -> Any:
-        with open(p, "r") as f:
-            return json.load(f)
-
-    def _write_json(p: str, obj: Any) -> None:
-        with open(p, "w") as f:
-            json.dump(obj, f)
-
-    def _read_bytes(p: str) -> bytes:
-        with open(p, "rb") as f:
-            return f.read()
-
-    def _file_exists(p: str) -> bool:
-        return os.path.exists(p)
-
-    def _create_exclusive(p: str) -> bool:
-        if p in markers_created:
-            return False
-        markers_created.add(p)
-        return True
-
-    def _get_git_head() -> str:
-        return "a" * 40
-
-    def _is_ancestor(candidate: str, head: str) -> bool:
-        return candidate == head or candidate.startswith("a")
-
-    def _get_blob_hash(p: str, commit: str) -> str:
-        if os.path.exists(p):
-            with open(p, "rb") as f:
-                return _sha256(f.read())
-        return "dummy_blob"
-
-    def _get_evaluator_source_info(eval_fn: Callable) -> tuple[str, str]:
-        return (os.path.join(tmpdir, "evaluator.py"), "dummy_eval_hash")
-
-    return {
-        "read_json": _read_json,
-        "write_json": _write_json,
-        "read_bytes": _read_bytes,
-        "compute_sha256": _sha256,
-        "file_exists": _file_exists,
-        "create_exclusive": _create_exclusive,
-        "get_git_head": _get_git_head,
-        "is_ancestor": _is_ancestor,
-        "get_blob_hash": _get_blob_hash,
-        "get_evaluator_source_info": _get_evaluator_source_info,
-    }
-
-
-def _write_framework_stub(tmpdir: str) -> str:
-    """Write a minimal framework stub for hash validation."""
-    path = os.path.join(tmpdir, "framework_stub.py")
-    with open(path, "w") as f:
-        f.write("# framework stub for testing\n")
-    return path
-
-
-def _write_evaluator_stub(tmpdir: str) -> str:
-    """Write a minimal evaluator stub for hash validation."""
-    path = os.path.join(tmpdir, "evaluator_stub.py")
-    with open(path, "w") as f:
-        f.write("# evaluator stub for testing\n")
-    return path
-
-
-# ===================================================================
-# Schema validation
-# ===================================================================
-
-
-class TestSchemaValidation:
-    """Unknown/missing field rejection for all schemas."""
-
-    def test_fixture_missing_required(self):
-        with pytest.raises(SchemaValidationError, match="missing required"):
-            validate_fixture_schema({})
-
-    def test_fixture_unknown_field(self):
-        with pytest.raises(SchemaValidationError, match="unknown fields"):
-            validate_fixture_schema({"groups": {}, "scenarios": [], "bogus": 1})
-
-    def test_scenario_missing_gold(self):
-        fxt = {"groups": {}, "scenarios": [{"id": "x", "group": "g", "language_form": "plain", "turn_count": 1}]}
-        with pytest.raises(SchemaValidationError, match="missing required"):
-            validate_fixture_schema(fxt)
-
-    def test_scenario_unknown_field(self):
-        bad = _make_valid_fixture()
-        bad["scenarios"][0]["alien"] = True
-        with pytest.raises(SchemaValidationError, match="unknown fields"):
-            validate_fixture_schema(bad)
-
-    def test_gold_unknown_field(self):
-        bad = _make_valid_fixture()
-        bad["scenarios"][0]["gold"]["invalid_key"] = 1
-        with pytest.raises(SchemaValidationError, match="unknown fields"):
-            validate_fixture_schema(bad)
-
-    def test_gold_missing_required(self):
-        bad = _make_valid_fixture()
-        del bad["scenarios"][0]["gold"]["semantic_outcome"]
-        with pytest.raises(SchemaValidationError):
-            validate_fixture_schema(bad)
-
-    def test_threshold_unknown_field(self):
-        with pytest.raises(SchemaValidationError, match="unknown fields"):
-            validate_threshold_schema({"complete_min": 548, "fake": 0})
-
-    def test_threshold_missing_field(self):
-        with pytest.raises(SchemaValidationError, match="missing required"):
-            validate_threshold_schema({})
-
-    def test_manifest_unknown_field(self):
-        m = _make_valid_manifest()
-        m["ghost"] = True
-        with pytest.raises(SchemaValidationError, match="unknown fields"):
-            validate_manifest_schema(m)
-
-    def test_manifest_missing_required(self):
-        with pytest.raises(SchemaValidationError):
-            validate_manifest_schema({})
-
-    def test_seal_unknown_field(self):
-        s = _make_valid_seal()
-        s["spooky"] = 1
-        with pytest.raises(SchemaValidationError, match="unknown fields"):
-            validate_seal_schema(s)
-
-    def test_seal_missing_status(self):
-        with pytest.raises(SchemaValidationError):
-            validate_seal_schema({"schema_version": "v1", "manifest_hash": "x", "attempt_id": "a"})
-
-    def test_report_has_forbidden_field(self):
-        rpt = {
-            "schema_version": "lc4v9-report-1",
-            "decision": CERTIFICATION_PASS,
-            "aggregate_counts": {},
-            "case_ids": ["sc-001"],
+    failed = failed or {}
+    results = []
+    for scenario in fixture["scenarios"]:
+        dimensions = {
+            dimension: dimension not in failed.get(scenario["id"], set())
+            for dimension in SCORING_DIMENSIONS
         }
-        with pytest.raises(ReportError, match="Oracle-bearing"):
-            validate_report_schema(rpt)
-
-    def test_report_nested_forbidden_field(self):
-        rpt = {
-            "schema_version": "lc4v9-report-1",
-            "decision": CERTIFICATION_PASS,
-            "aggregate_counts": {"per_case_results": ["x"]},
-        }
-        with pytest.raises(ReportError, match="Oracle-bearing"):
-            validate_report_schema(rpt)
-
-    def test_valid_schemas_pass(self):
-        fxt = _make_valid_fixture()
-        validate_fixture_schema(fxt)
-        validate_threshold_schema(_make_valid_thresholds())
-        validate_manifest_schema(_make_valid_manifest())
-        validate_seal_schema(_make_valid_seal())
-        rpt = {
-            "schema_version": "lc4v9-report-1",
-            "decision": CERTIFICATION_PASS,
-            "aggregate_counts": {"total_samples": 576, "complete": 576, "safety": 576, "dimension_totals": {}},
-        }
-        validate_report_schema(rpt)
-
-
-# ===================================================================
-# Canonical projection
-# ===================================================================
-
-
-class TestCanonicalProjection:
-    """14-field projection validation."""
-
-    def test_valid_projection(self):
-        proj = _make_canonical_projection(outcome="proceed_read")
-        validate_canonical_projection(proj)
-
-    def test_missing_field(self):
-        proj = _make_canonical_projection()
-        del proj["authority"]
-        with pytest.raises(SchemaValidationError, match="missing required"):
-            validate_canonical_projection(proj)
-
-    def test_unknown_field(self):
-        proj = _make_canonical_projection()
-        proj["extra"] = 1
-        with pytest.raises(SchemaValidationError, match="unknown fields"):
-            validate_canonical_projection(proj)
-
-    def test_tuple_accepted(self):
-        """Tuples are accepted and projected as arrays."""
-        proj = _make_canonical_projection(outcome="propose_mutation")
-        proj["selected_tools"] = ("hammer", "saw")
-        validate_canonical_projection(proj)
-
-    def test_null_accepted(self):
-        proj = _make_canonical_projection()
-        proj["selected_tools"] = None
-        proj["appointment_delta_count"] = None
-        validate_canonical_projection(proj)
-
-    def test_wrong_type_rejected(self):
-        proj = _make_canonical_projection()
-        proj["selected_tools"] = "not_a_list"
-        with pytest.raises(SchemaValidationError, match="must be a list"):
-            validate_canonical_projection(proj)
-
-
-# ===================================================================
-# Shape validation
-# ===================================================================
-
-
-class TestShapeValidation:
-    """24/288/72/576 and coverage-cell uniqueness."""
-
-    def test_valid_shape(self):
-        fxt = _make_valid_fixture()
-        validate_fixture_shape(fxt)
-
-    def test_wrong_scenario_count(self):
-        fxt = _make_valid_fixture()
-        fxt["scenarios"] = fxt["scenarios"][:10]
-        with pytest.raises(ShapeValidationError, match="Expected 288 scenarios"):
-            validate_fixture_shape(fxt)
-
-    def test_wrong_group_count(self):
-        fxt = _make_valid_fixture()
-        fxt["scenarios"] = fxt["scenarios"][:SCENARIOS_PER_GROUP]  # only 1 group
-        with pytest.raises(ShapeValidationError, match="Expected 24 unique groups"):
-            validate_fixture_shape(fxt)
-
-    def test_duplicate_coverage_cell(self):
-        fxt = _make_valid_fixture()
-        # Duplicate first scenario
-        fxt["scenarios"].append(dict(fxt["scenarios"][0]))
-        with pytest.raises(ShapeValidationError, match="Duplicate coverage cell|Expected 288 scenarios"):
-            validate_fixture_shape(fxt)
-
-    def test_wrong_multi_turn_count(self):
-        fxt = _make_valid_fixture()
-        # Change all turn counts to multi-turn
-        for sc in fxt["scenarios"]:
-            sc["turn_count"] = 3
-        with pytest.raises(ShapeValidationError, match="multi-turn"):
-            validate_fixture_shape(fxt)
-
-    def test_wrong_language_form_count(self):
-        fxt = _make_valid_fixture()
-        # Remove all scenarios of one form
-        fxt["scenarios"] = [s for s in fxt["scenarios"] if s["language_form"] != "plain"]
-        with pytest.raises(ShapeValidationError, match="Language form"):
-            validate_fixture_shape(fxt)
-
-    def test_wrong_action_group_count(self):
-        """Remap a group's action so one action has 5 groups."""
-        fxt = _make_valid_fixture()
-        groups = fxt.get("groups", {})
-        if isinstance(groups, dict):
-            for gid in list(groups.keys()):
-                if groups[gid] == "move":
-                    groups[gid] = "create"
-                    break
-        with pytest.raises(ShapeValidationError, match="Action"):
-            validate_fixture_shape(fxt)
-
-
-# ===================================================================
-# Gold cross-field consistency
-# ===================================================================
-
-
-class TestGoldCrossFieldConsistency:
-    """Contradictory Gold rejection."""
-
-    def test_valid_gold_passes(self):
-        fxt = _make_valid_fixture()
-        validate_gold_cross_field_consistency(fxt)
-
-    def test_mutation_requires_true_mutation_allowed(self):
-        fxt = _make_valid_fixture()
-        fxt["scenarios"][0]["gold"] = _make_gold(outcome="propose_mutation")
-        fxt["scenarios"][0]["gold"]["mutation_allowed"] = False
-        with pytest.raises(GoldValidationError, match="mutation_allowed=True"):
-            validate_gold_cross_field_consistency(fxt)
-
-    def test_mutation_requires_tools(self):
-        fxt = _make_valid_fixture()
-        fxt["scenarios"][0]["gold"] = _make_gold(outcome="propose_mutation")
-        fxt["scenarios"][0]["gold"]["canonical_projection"]["selected_tools"] = []
-        with pytest.raises(GoldValidationError, match="non-empty"):
-            validate_gold_cross_field_consistency(fxt)
-
-    def test_mutation_requires_simulated_write(self):
-        fxt = _make_valid_fixture()
-        fxt["scenarios"][0]["gold"] = _make_gold(outcome="propose_mutation")
-        fxt["scenarios"][0]["gold"]["canonical_projection"]["simulated_write"] = False
-        with pytest.raises(GoldValidationError, match="simulated_write"):
-            validate_gold_cross_field_consistency(fxt)
-
-    def test_mutation_requires_delta(self):
-        fxt = _make_valid_fixture()
-        fxt["scenarios"][0]["gold"] = _make_gold(outcome="propose_mutation")
-        cp = fxt["scenarios"][0]["gold"]["canonical_projection"]
-        cp["appointment_delta_count"] = 0
-        cp["audit_delta_count"] = 0
-        with pytest.raises(GoldValidationError, match="delta"):
-            validate_gold_cross_field_consistency(fxt)
-
-    def test_clarify_requires_clarification_true(self):
-        fxt = _make_valid_fixture()
-        fxt["scenarios"][0]["gold"] = _make_gold(outcome="clarify")
-        fxt["scenarios"][0]["gold"]["canonical_projection"]["requires_clarification"] = None
-        with pytest.raises(GoldValidationError, match="requires_clarification=True"):
-            validate_gold_cross_field_consistency(fxt)
-
-    def test_read_rejects_hidden_mutation(self):
-        fxt = _make_valid_fixture()
-        g = _make_gold(outcome="proceed_read")
-        g["canonical_projection"]["simulated_write"] = True
-        fxt["scenarios"][0]["gold"] = g
-        with pytest.raises(GoldValidationError, match="falsy simulated_write"):
-            validate_gold_cross_field_consistency(fxt)
-
-    def test_refuse_rejects_mutation_allowed(self):
-        fxt = _make_valid_fixture()
-        g = _make_gold(outcome="refuse")
-        g["mutation_allowed"] = True
-        fxt["scenarios"][0]["gold"] = g
-        with pytest.raises(GoldValidationError, match="mutation_allowed=False"):
-            validate_gold_cross_field_consistency(fxt)
-
-    def test_no_action_rejects_delta(self):
-        fxt = _make_valid_fixture()
-        g = _make_gold(outcome="no_action")
-        g["canonical_projection"]["appointment_delta_count"] = 5
-        fxt["scenarios"][0]["gold"] = g
-        with pytest.raises(GoldValidationError, match="appointment_delta_count=0"):
-            validate_gold_cross_field_consistency(fxt)
-
-    def test_invalid_outcome_rejected(self):
-        fxt = _make_valid_fixture()
-        fxt["scenarios"][0]["gold"]["semantic_outcome"] = "invalid_action"
-        with pytest.raises(GoldValidationError, match="not one of"):
-            validate_gold_cross_field_consistency(fxt)
-
-
-# ===================================================================
-# Source binding validation
-# ===================================================================
-
-
-class TestSourceBindingValidation:
-    """SHA-256, commit, blob, evaluator path mismatch rejection."""
-
-    def test_hash_mismatch_raises(self):
-        with tempfile.TemporaryDirectory() as td:
-            fw_path = _write_framework_stub(td)
-            ev_path = _write_evaluator_stub(td)
-
-            fxt = _make_valid_fixture()
-            fix_path = os.path.join(td, "fixture.json")
-            with open(fix_path, "w") as f:
-                json.dump(fxt, f)
-
-            thr_path = os.path.join(td, "thresholds.json")
-            with open(thr_path, "w") as f:
-                json.dump(_make_valid_thresholds(), f)
-
-            man = _make_valid_manifest(
-                fixture_path=fix_path,
-                framework_path=fw_path,
-                evaluator_path=ev_path,
-                threshold_path=thr_path,
-            )
-            # Corrupt fixture hash
-            man["fixture_hash"] = "badhash"
-
-            def _get_eval_info(fn):
-                return (ev_path, _sha256(b"# evaluator stub for testing\n"))
-
-            def _read_bytes(p):
-                with open(p, "rb") as f:
-                    return f.read()
-
-            with pytest.raises(BindingValidationError, match="Fixture hash mismatch"):
-                validate_source_bindings(
-                    manifest=man,
-                    fixture_path=fix_path,
-                    framework_path=fw_path,
-                    evaluator=lambda x: {},
-                    threshold_path=thr_path,
-                    read_bytes=_read_bytes,
-                    compute_sha256=_sha256,
-                    get_git_head=lambda: "a" * 40,
-                    is_ancestor=lambda c, h: True,
-                    get_blob_hash=lambda p, c: "dummy_blob",
-                    get_evaluator_source_info=_get_eval_info,
-                )
-
-    def test_ancestry_mismatch_raises(self):
-        with tempfile.TemporaryDirectory() as td:
-            fw_path = _write_framework_stub(td)
-            ev_path = _write_evaluator_stub(td)
-            fix_path = os.path.join(td, "fixture.json")
-            with open(fix_path, "w") as f:
-                json.dump(_make_valid_fixture(), f)
-            thr_path = os.path.join(td, "thresholds.json")
-            with open(thr_path, "w") as f:
-                json.dump(_make_valid_thresholds(), f)
-            man = _make_valid_manifest(
-                fixture_path=fix_path, framework_path=fw_path,
-                evaluator_path=ev_path, threshold_path=thr_path,
-                source_commit="deadbeef" * 5,
-            )
-
-            def _read_bytes(p):
-                with open(p, "rb") as f:
-                    return f.read()
-
-            with pytest.raises(BindingValidationError, match="not an ancestor"):
-                validate_source_bindings(
-                    manifest=man,
-                    fixture_path=fix_path,
-                    framework_path=fw_path,
-                    evaluator=lambda x: {},
-                    threshold_path=thr_path,
-                    read_bytes=_read_bytes,
-                    compute_sha256=_sha256,
-                    get_git_head=lambda: "f" * 40,
-                    is_ancestor=lambda c, h: False,
-                    get_blob_hash=lambda p, c: "dummy_blob",
-                    get_evaluator_source_info=lambda fn: (ev_path, "dummy"),
-                )
-
-    def test_evaluator_path_raises(self):
-        with tempfile.TemporaryDirectory() as td:
-            ev_path = _write_evaluator_stub(td)
-            man = _make_valid_manifest(evaluator_path=ev_path)
-            man["evaluator_hash"] = "wrong"
-
-            with pytest.raises(BindingValidationError, match="Evaluator source hash mismatch"):
-                validate_evaluator_source_identity(
-                    evaluator=lambda x: {},
-                    manifest=man,
-                    get_evaluator_source_info=lambda fn: (ev_path, "computed_wrong"),
-                    read_bytes=lambda p: b"",
-                    compute_sha256=lambda b: "computed_wrong",
-                )
-
-
-# ===================================================================
-# Seal validation
-# ===================================================================
-
-
-class TestSealValidation:
-    """Seal status and manifest hash binding."""
-
-    def test_consumed_seal_rejected(self):
-        seal = _make_valid_seal()
-        seal["status"] = SEAL_CONSUMED
-        with pytest.raises(SealValidationError, match="Seal status"):
-            validate_seal_state(
-                seal=seal,
-                manifest={},
-                manifest_path="",
-                read_bytes=lambda p: b"{}",
-                compute_sha256=_sha256,
-            )
-
-    def test_manifest_hash_mismatch(self):
-        seal = _make_valid_seal(manifest_hash_override="hash-one")
-        with pytest.raises(SealValidationError, match="manifest_hash"):
-            validate_seal_state(
-                seal=seal,
-                manifest={},
-                manifest_path="",
-                read_bytes=lambda p: b'{"data": 1}',
-                compute_sha256=_sha256,
-            )
-
-
-# ===================================================================
-# Results validation
-# ===================================================================
-
-
-class TestResultsValidation:
-    """Dimension completeness and zero-variance enforcement."""
-
-    def test_missing_dimension_raises(self):
-        results = [{"scenario_id": "s1", "repeat": 0, "dimensions": {}, "complete": True}]
-        with pytest.raises(SchemaValidationError, match="missing"):
-            validate_results_dimensions(results)
-
-    def test_extra_dimension_raises(self):
-        dims = {d: True for d in SCORING_DIMENSIONS}
-        dims["extra"] = True
-        results = [{"scenario_id": "s1", "repeat": 0, "dimensions": dims, "complete": True}]
-        with pytest.raises(SchemaValidationError, match="unknown fields"):
-            validate_results_dimensions(results)
-
-    def test_non_bool_dimension_raises(self):
-        dims = {d: True for d in SCORING_DIMENSIONS}
-        dims["safety"] = 1
-        results = [{"scenario_id": "s1", "repeat": 0, "dimensions": dims, "complete": True}]
-        with pytest.raises(SchemaValidationError, match="must be bool"):
-            validate_results_dimensions(results)
-
-    def test_zero_variance_passes(self):
-        results = []
-        for sid in ["s1", "s2"]:
-            for rep in range(NUM_REPEATS):
-                results.append({
-                    "scenario_id": sid,
-                    "repeat": rep,
-                    "dimensions": {d: True for d in SCORING_DIMENSIONS},
-                    "complete": True,
-                })
-        validate_zero_variance(results)
-
-    def test_variance_raises(self):
-        results = []
-        for rep in range(NUM_REPEATS):
-            dims = {d: (rep == 0) for d in SCORING_DIMENSIONS}
-            results.append({
-                "scenario_id": "s1",
-                "repeat": rep,
-                "dimensions": dims,
-                "complete": True,
-            })
-        with pytest.raises(ValidationError, match="variance"):
-            validate_zero_variance(results)
-
-    def test_wrong_repeat_count_raises(self):
-        results = [
-            {"scenario_id": "s1", "repeat": 0, "dimensions": {d: True for d in SCORING_DIMENSIONS}, "complete": True},
-        ]
-        with pytest.raises(ValidationError, match="repeats"):
-            validate_zero_variance(results)
-
-
-# ===================================================================
-# Marker management
-# ===================================================================
-
-
-class TestMarkerPersistence:
-    """Exclusive marker collision and persistence on every exit path."""
-
-    def test_marker_collision_raises(self):
-        with tempfile.TemporaryDirectory() as td:
-            marker_path = os.path.join(td, "marker.json")
-
-            io = _make_injectable_io(td)
-            # First creation succeeds
-            from app.services.bernie.lc4v9_content_blind_framework import (
-                _create_marker_exclusive,
-            )
-            _create_marker_exclusive(
-                marker_path=marker_path,
-                create_exclusive=io["create_exclusive"],
-                write_json=io["write_json"],
-                attempt_id="test",
-                manifest_hash="abc",
-            )
-            # Second creation should fail
-            with pytest.raises(MarkerError, match="already exists"):
-                _create_marker_exclusive(
-                    marker_path=marker_path,
-                    create_exclusive=io["create_exclusive"],
-                    write_json=io["write_json"],
-                    attempt_id="test",
-                    manifest_hash="abc",
-                )
-
-
-# ===================================================================
-# Full certification lifecycle
-# ===================================================================
-
-
-class TestFullCertification:
-    """End-to-end certification execution with opaque placeholders."""
-
-    def test_valid_execution_pass(self):
-        """Full execution with all-pass evaluator returns CERTIFICATION_PASS."""
-        with tempfile.TemporaryDirectory() as td:
-            fxt = _make_valid_fixture()
-            fix_path = os.path.join(td, "fixture.json")
-            with open(fix_path, "w") as f:
-                json.dump(fxt, f)
-
-            thr_path = os.path.join(td, "thresholds.json")
-            with open(thr_path, "w") as f:
-                json.dump(_make_valid_thresholds(), f)
-
-            fw_path = _write_framework_stub(td)
-            ev_path = _write_evaluator_stub(td)
-
-            man = _make_valid_manifest(
-                fixture_path=fix_path,
-                framework_path=fw_path,
-                evaluator_path=ev_path,
-                threshold_path=thr_path,
-            )
-            man_path = os.path.join(td, "manifest.json")
-            with open(man_path, "w") as f:
-                json.dump(man, f)
-
-            seal = _make_valid_seal(manifest_path=man_path)
-            seal_path = os.path.join(td, "seal.json")
-            with open(seal_path, "w") as f:
-                json.dump(seal, f)
-
-            marker_path = os.path.join(td, "marker.json")
-            report_path = os.path.join(td, "report.json")
-
-            io = _make_injectable_io(td)
-            evaluator = _make_evaluator(pass_all=True)
-
-            # Override evaluator source info to match manifest
-            def _eval_source_info(fn):
-                return (ev_path, man["evaluator_hash"])
-
-            io["get_evaluator_source_info"] = _eval_source_info
-
-            decision = run_certification(
-                fixture_path=fix_path,
-                framework_path=fw_path,
-                evaluator=evaluator,
-                threshold_path=thr_path,
-                manifest_path=man_path,
-                seal_path=seal_path,
-                marker_path=marker_path,
-                report_path=report_path,
-                **{k: io[k] for k in [
-                    "read_json", "write_json", "read_bytes",
-                    "compute_sha256", "file_exists", "create_exclusive",
-                    "get_git_head", "is_ancestor", "get_blob_hash",
-                    "get_evaluator_source_info",
-                ]},
-            )
-            assert decision == CERTIFICATION_PASS
-            assert os.path.exists(report_path)
-            with open(report_path) as f:
-                rpt = json.load(f)
-            assert rpt["decision"] == CERTIFICATION_PASS
-            assert rpt["aggregate_counts"]["complete"] == NUM_SAMPLES
-
-    def test_valid_execution_fail(self):
-        """Evaluator with all-fail returns CERTIFICATION_FAIL."""
-        with tempfile.TemporaryDirectory() as td:
-            fxt = _make_valid_fixture()
-            fix_path = os.path.join(td, "fixture.json")
-            with open(fix_path, "w") as f:
-                json.dump(fxt, f)
-            thr_path = os.path.join(td, "thresholds.json")
-            with open(thr_path, "w") as f:
-                json.dump(_make_valid_thresholds(), f)
-            fw_path = _write_framework_stub(td)
-            ev_path = _write_evaluator_stub(td)
-            man = _make_valid_manifest(
-                fixture_path=fix_path, framework_path=fw_path,
-                evaluator_path=ev_path, threshold_path=thr_path,
-            )
-            man_path = os.path.join(td, "manifest.json")
-            with open(man_path, "w") as f:
-                json.dump(man, f)
-            seal = _make_valid_seal(manifest_path=man_path)
-            seal_path = os.path.join(td, "seal.json")
-            with open(seal_path, "w") as f:
-                json.dump(seal, f)
-            marker_path = os.path.join(td, "marker.json")
-            report_path = os.path.join(td, "report.json")
-            io = _make_injectable_io(td)
-            evaluator = _make_evaluator(pass_all=False)
-
-            def _eval_source_info(fn):
-                return (ev_path, man["evaluator_hash"])
-            io["get_evaluator_source_info"] = _eval_source_info
-
-            decision = run_certification(
-                fixture_path=fix_path, framework_path=fw_path,
-                evaluator=evaluator, threshold_path=thr_path,
-                manifest_path=man_path, seal_path=seal_path,
-                marker_path=marker_path, report_path=report_path,
-                **{k: io[k] for k in [
-                    "read_json", "write_json", "read_bytes",
-                    "compute_sha256", "file_exists", "create_exclusive",
-                    "get_git_head", "is_ancestor", "get_blob_hash",
-                    "get_evaluator_source_info",
-                ]},
-            )
-            assert decision == CERTIFICATION_FAIL
-            assert os.path.exists(report_path)
-
-    def test_marker_consumed_on_exception(self):
-        """Marker is consumed when evaluator raises."""
-        with tempfile.TemporaryDirectory() as td:
-            fxt = _make_valid_fixture()
-            fix_path = os.path.join(td, "fixture.json")
-            with open(fix_path, "w") as f:
-                json.dump(fxt, f)
-            thr_path = os.path.join(td, "thresholds.json")
-            with open(thr_path, "w") as f:
-                json.dump(_make_valid_thresholds(), f)
-            fw_path = _write_framework_stub(td)
-            ev_path = _write_evaluator_stub(td)
-            man = _make_valid_manifest(
-                fixture_path=fix_path, framework_path=fw_path,
-                evaluator_path=ev_path, threshold_path=thr_path,
-            )
-            man_path = os.path.join(td, "manifest.json")
-            with open(man_path, "w") as f:
-                json.dump(man, f)
-            seal = _make_valid_seal(manifest_path=man_path)
-            seal_path = os.path.join(td, "seal.json")
-            with open(seal_path, "w") as f:
-                json.dump(seal, f)
-            marker_path = os.path.join(td, "marker.json")
-            report_path = os.path.join(td, "report.json")
-            io = _make_injectable_io(td)
-
-            def _bad_evaluator(fixture):
-                raise RuntimeError("evaluator crashed")
-
-            def _eval_source_info(fn):
-                return (ev_path, man["evaluator_hash"])
-            io["get_evaluator_source_info"] = _eval_source_info
-
-            with pytest.raises(MarkerError, match="evaluator crashed"):
-                run_certification(
-                    fixture_path=fix_path, framework_path=fw_path,
-                    evaluator=_bad_evaluator, threshold_path=thr_path,
-                    manifest_path=man_path, seal_path=seal_path,
-                    marker_path=marker_path, report_path=report_path,
-                    **{k: io[k] for k in [
-                        "read_json", "write_json", "read_bytes",
-                        "compute_sha256", "file_exists", "create_exclusive",
-                        "get_git_head", "is_ancestor", "get_blob_hash",
-                        "get_evaluator_source_info",
-                    ]},
-                )
-            assert os.path.exists(marker_path)
-
-    def test_invalid_evidence_returns_invalid(self):
-        """Evidence with validation errors returns CERTIFICATION_INVALID."""
-        with tempfile.TemporaryDirectory() as td:
-            fxt = _make_valid_fixture()
-            fix_path = os.path.join(td, "fixture.json")
-            with open(fix_path, "w") as f:
-                json.dump(fxt, f)
-            thr_path = os.path.join(td, "thresholds.json")
-            with open(thr_path, "w") as f:
-                json.dump(_make_valid_thresholds(), f)
-            fw_path = _write_framework_stub(td)
-            ev_path = _write_evaluator_stub(td)
-            man = _make_valid_manifest(
-                fixture_path=fix_path, framework_path=fw_path,
-                evaluator_path=ev_path, threshold_path=thr_path,
-            )
-            man_path = os.path.join(td, "manifest.json")
-            with open(man_path, "w") as f:
-                json.dump(man, f)
-            seal = _make_valid_seal(manifest_path=man_path)
-            seal_path = os.path.join(td, "seal.json")
-            with open(seal_path, "w") as f:
-                json.dump(seal, f)
-            marker_path = os.path.join(td, "marker.json")
-            report_path = os.path.join(td, "report.json")
-            io = _make_injectable_io(td)
-
-            def _eval_with_errors(fixture):
-                scs = fixture.get("scenarios", [])
-                results = []
-                for sc in scs:
-                    for rep in range(NUM_REPEATS):
-                        results.append({
-                            "scenario_id": sc.get("id", ""),
-                            "repeat": rep,
-                            "dimensions": {d: True for d in SCORING_DIMENSIONS},
-                            "complete": True,
-                        })
-                return {
-                    "results": results,
-                    "validation_errors": ["schema violation in scenario 5"],
+        for repeat in (0, 1):
+            results.append(
+                {
+                    "scenario_id": scenario["id"],
+                    "repeat": repeat,
+                    "dimensions": copy.deepcopy(dimensions),
+                    "complete": all(dimensions.values()),
                 }
-
-            def _eval_source_info(fn):
-                return (ev_path, man["evaluator_hash"])
-            io["get_evaluator_source_info"] = _eval_source_info
-
-            decision = run_certification(
-                fixture_path=fix_path, framework_path=fw_path,
-                evaluator=_eval_with_errors, threshold_path=thr_path,
-                manifest_path=man_path, seal_path=seal_path,
-                marker_path=marker_path, report_path=report_path,
-                **{k: io[k] for k in [
-                    "read_json", "write_json", "read_bytes",
-                    "compute_sha256", "file_exists", "create_exclusive",
-                    "get_git_head", "is_ancestor", "get_blob_hash",
-                    "get_evaluator_source_info",
-                ]},
             )
-            assert decision == CERTIFICATION_INVALID
+    return {
+        "schema_version": "lc4v9-evaluator-result.v1",
+        "results": results,
+        "validation_errors": validation_errors,
+        "runtime_exceptions": runtime_exceptions,
+        "policy_failures": policy_failures,
+        "integration_failures": integration_failures,
+    }
 
-    def test_aggregate_report_rejects_oracle_content(self):
-        """Verify the report emission produces only aggregate fields."""
-        with tempfile.TemporaryDirectory() as td:
-            fxt = _make_valid_fixture()
-            fix_path = os.path.join(td, "fixture.json")
-            with open(fix_path, "w") as f:
-                json.dump(fxt, f)
-            thr_path = os.path.join(td, "thresholds.json")
-            with open(thr_path, "w") as f:
-                json.dump(_make_valid_thresholds(), f)
-            fw_path = _write_framework_stub(td)
-            ev_path = _write_evaluator_stub(td)
-            man = _make_valid_manifest(
-                fixture_path=fix_path, framework_path=fw_path,
-                evaluator_path=ev_path, threshold_path=thr_path,
-            )
-            man_path = os.path.join(td, "manifest.json")
-            with open(man_path, "w") as f:
-                json.dump(man, f)
-            seal = _make_valid_seal(manifest_path=man_path)
-            seal_path = os.path.join(td, "seal.json")
-            with open(seal_path, "w") as f:
-                json.dump(seal, f)
-            marker_path = os.path.join(td, "marker.json")
-            report_path = os.path.join(td, "report.json")
-            io = _make_injectable_io(td)
-            evaluator = _make_evaluator(pass_all=True)
 
-            def _eval_source_info(fn):
-                return (ev_path, man["evaluator_hash"])
-            io["get_evaluator_source_info"] = _eval_source_info
+class Harness:
+    def __init__(self, repository_root: Path) -> None:
+        self.root = repository_root
+        self.fixture = make_fixture()
+        self.evaluator_result = make_evaluator_result(self.fixture)
+        self.raise_from_evaluator = False
+        framework_source = Path(FRAMEWORK_PATH).read_bytes()
+        evaluator_source = (
+            "from __future__ import annotations\n"
+            "import copy\n"
+            "RESULT = None\n"
+            "RAISE = False\n"
+            "def evaluate(fixture):\n"
+            "    if RAISE:\n"
+            "        raise RuntimeError('opaque evaluator failure')\n"
+            "    return copy.deepcopy(RESULT)\n"
+        ).encode("utf-8")
+        source_files = {
+            FIXTURE_PATH: canonical_json_bytes(self.fixture),
+            FRAMEWORK_PATH: framework_source,
+            EVALUATOR_PATH: evaluator_source,
+            THRESHOLD_PATH: canonical_json_bytes(DEFAULT_THRESHOLDS),
+        }
+        for relative_path, payload in source_files.items():
+            target = self.root / relative_path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(payload)
 
-            decision = run_certification(
-                fixture_path=fix_path, framework_path=fw_path,
-                evaluator=evaluator, threshold_path=thr_path,
-                manifest_path=man_path, seal_path=seal_path,
-                marker_path=marker_path, report_path=report_path,
-                **{k: io[k] for k in [
-                    "read_json", "write_json", "read_bytes",
-                    "compute_sha256", "file_exists", "create_exclusive",
-                    "get_git_head", "is_ancestor", "get_blob_hash",
-                    "get_evaluator_source_info",
-                ]},
-            )
-            with open(report_path) as f:
-                rpt = json.load(f)
-            assert "case_ids" not in rpt
-            assert "utterances" not in rpt
-            assert "gold_contracts" not in rpt
-            assert "per_case_results" not in rpt
-            assert decision == CERTIFICATION_PASS
+        self._git("init", "-q")
+        self._git("config", "user.email", "lc4v9@example.invalid")
+        self._git("config", "user.name", "LC4V9 Opaque Test")
+        self._git("add", FIXTURE_PATH, FRAMEWORK_PATH, EVALUATOR_PATH, THRESHOLD_PATH)
+        self._git("commit", "-q", "-m", "freeze opaque source")
+        source_commit = self._git("rev-parse", "HEAD")
+        self.manifest = {
+            "schema_version": "lc4v9-manifest.v1",
+            "source_commit": source_commit,
+            "fixture_path": FIXTURE_PATH,
+            "fixture_hash": _sha(source_files[FIXTURE_PATH]),
+            "fixture_blob": self._git("rev-parse", f"{source_commit}:{FIXTURE_PATH}"),
+            "framework_path": FRAMEWORK_PATH,
+            "framework_hash": _sha(source_files[FRAMEWORK_PATH]),
+            "framework_blob": self._git("rev-parse", f"{source_commit}:{FRAMEWORK_PATH}"),
+            "evaluator_path": EVALUATOR_PATH,
+            "evaluator_hash": _sha(source_files[EVALUATOR_PATH]),
+            "evaluator_blob": self._git("rev-parse", f"{source_commit}:{EVALUATOR_PATH}"),
+            "threshold_path": THRESHOLD_PATH,
+            "threshold_hash": _sha(source_files[THRESHOLD_PATH]),
+            "threshold_blob": self._git("rev-parse", f"{source_commit}:{THRESHOLD_PATH}"),
+            "manifest_path": MANIFEST_PATH,
+            "seal_path": SEAL_PATH,
+            "marker_path": MARKER_PATH,
+            "report_path": REPORT_PATH,
+        }
+        manifest_bytes = canonical_json_bytes(self.manifest)
+        self._write(MANIFEST_PATH, manifest_bytes)
+        self.seal = {
+            "schema_version": "lc4v9-seal.v1",
+            "manifest_hash": _sha(manifest_bytes),
+            "attempt_id": ATTEMPT_ID,
+            "status": "unconsumed",
+        }
+        self._write(SEAL_PATH, canonical_json_bytes(self.seal))
+        self.framework_module = self._load_module(
+            "lc4v9_opaque_framework", self.root / FRAMEWORK_PATH
+        )
+        self.evaluator_module = self._load_module(
+            "lc4v9_opaque_evaluator", self.root / EVALUATOR_PATH
+        )
 
-    def test_pre_marker_validation_fails_closed(self):
-        """A shape failure before marker creation raises and does not create marker."""
-        with tempfile.TemporaryDirectory() as td:
-            fxt = _make_valid_fixture()
-            fxt["scenarios"] = fxt["scenarios"][:5]  # Wrong count
-            fix_path = os.path.join(td, "fixture.json")
-            with open(fix_path, "w") as f:
-                json.dump(fxt, f)
-            thr_path = os.path.join(td, "thresholds.json")
-            with open(thr_path, "w") as f:
-                json.dump(_make_valid_thresholds(), f)
-            fw_path = _write_framework_stub(td)
-            ev_path = _write_evaluator_stub(td)
-            man = _make_valid_manifest(
-                fixture_path=fix_path, framework_path=fw_path,
-                evaluator_path=ev_path, threshold_path=thr_path,
-            )
-            man_path = os.path.join(td, "manifest.json")
-            with open(man_path, "w") as f:
-                json.dump(man, f)
-            seal = _make_valid_seal(manifest_path=man_path)
-            seal_path = os.path.join(td, "seal.json")
-            with open(seal_path, "w") as f:
-                json.dump(seal, f)
-            marker_path = os.path.join(td, "marker.json")
-            report_path = os.path.join(td, "report.json")
-            io = _make_injectable_io(td)
-            evaluator = _make_evaluator()
+    def _git(self, *arguments: str) -> str:
+        completed = subprocess.run(
+            ("git", *arguments),
+            cwd=self.root,
+            capture_output=True,
+            check=True,
+            text=True,
+        )
+        return completed.stdout.strip()
 
-            def _eval_source_info(fn):
-                return (ev_path, man["evaluator_hash"])
-            io["get_evaluator_source_info"] = _eval_source_info
+    def _write(self, relative_path: str, payload: bytes) -> None:
+        target = self.root / relative_path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(payload)
 
-            with pytest.raises(ShapeValidationError):
-                run_certification(
-                    fixture_path=fix_path, framework_path=fw_path,
-                    evaluator=evaluator, threshold_path=thr_path,
-                    manifest_path=man_path, seal_path=seal_path,
-                    marker_path=marker_path, report_path=report_path,
-                    **{k: io[k] for k in [
-                        "read_json", "write_json", "read_bytes",
-                        "compute_sha256", "file_exists", "create_exclusive",
-                        "get_git_head", "is_ancestor", "get_blob_hash",
-                        "get_evaluator_source_info",
-                    ]},
-                )
-            # Marker should NOT exist (validation was pre-marker)
-            assert not os.path.exists(marker_path)
+    def _load_module(self, stem: str, path: Path):
+        module_name = f"{stem}_{abs(hash(str(self.root)))}"
+        spec = importlib.util.spec_from_file_location(module_name, path)
+        assert spec is not None and spec.loader is not None
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[module_name] = module
+        spec.loader.exec_module(module)
+        return module
+
+    def mutate_json(self, relative_path: str, mutation) -> None:
+        target = self.root / relative_path
+        value = json.loads(target.read_bytes())
+        mutation(value)
+        target.write_bytes(canonical_json_bytes(value))
+
+    def run(
+        self,
+        *,
+        attempt_id: str = ATTEMPT_ID,
+        marker_path: str = MARKER_PATH,
+        report_path: str = REPORT_PATH,
+    ):
+        self.evaluator_module.RESULT = copy.deepcopy(self.evaluator_result)
+        self.evaluator_module.RAISE = self.raise_from_evaluator
+        return self.framework_module.run_certification(
+            attempt_id=attempt_id,
+            fixture_path=FIXTURE_PATH,
+            framework_path=FRAMEWORK_PATH,
+            evaluator=self.evaluator_module.evaluate,
+            threshold_path=THRESHOLD_PATH,
+            manifest_path=MANIFEST_PATH,
+            seal_path=SEAL_PATH,
+            marker_path=marker_path,
+            report_path=report_path,
+            repository_root=str(self.root),
+        )
+
+
+def test_valid_fixture_has_exact_comparable_shape() -> None:
+    fixture = make_fixture()
+    validate_fixture_schema(fixture)
+    validate_fixture_shape(fixture)
+    validate_gold_cross_field_consistency(fixture)
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    (
+        lambda fixture: fixture.pop("schema_version"),
+        lambda fixture: fixture.__setitem__("unknown", True),
+        lambda fixture: fixture["groups"][0].__setitem__("unknown", True),
+        lambda fixture: fixture["scenarios"][0].pop("coverage_cell"),
+        lambda fixture: fixture["scenarios"][0]["gold"].pop("replay"),
+        lambda fixture: fixture["scenarios"][0]["gold"].__setitem__("unknown", True),
+    ),
+)
+def test_fixture_schemas_reject_missing_or_unknown_fields(mutation) -> None:
+    fixture = make_fixture()
+    mutation(fixture)
+    with pytest.raises(SchemaValidationError):
+        validate_fixture_schema(fixture)
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    (
+        lambda fixture: fixture["groups"].pop(),
+        lambda fixture: fixture["groups"][1].__setitem__("id", fixture["groups"][0]["id"]),
+        lambda fixture: fixture["scenarios"].pop(),
+        lambda fixture: fixture["scenarios"][1].__setitem__("id", fixture["scenarios"][0]["id"]),
+        lambda fixture: fixture["scenarios"][1].__setitem__("coverage_cell", fixture["scenarios"][0]["coverage_cell"]),
+        lambda fixture: fixture["scenarios"][0].__setitem__("turn_count", 3),
+        lambda fixture: fixture["scenarios"][0].__setitem__("language_form", "other"),
+        lambda fixture: fixture["scenarios"][0]["gold"].__setitem__("intended_action", "cancel"),
+    ),
+)
+def test_shape_contract_fails_closed(mutation) -> None:
+    fixture = make_fixture()
+    mutation(fixture)
+    with pytest.raises(ShapeValidationError):
+        validate_fixture_shape(fixture)
+
+
+def test_projection_canonicalizes_tuples_and_keeps_nulls() -> None:
+    projection = _projection()
+    projection["selected_tools"] = ("opaque-tool",)
+    validated = validate_canonical_projection(projection)
+    assert validated["selected_tools"] == ["opaque-tool"]
+    assert validated["resolved_patient"] is None
+    assert set(validated) == set(CANONICAL_PROJECTION_FIELDS)
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    (
+        lambda projection: projection.pop("authority"),
+        lambda projection: projection.__setitem__("unknown", True),
+        lambda projection: projection.__setitem__("simulated_write", 1),
+        lambda projection: projection.__setitem__("appointment_delta_count", -1),
+    ),
+)
+def test_projection_rejects_schema_and_type_drift(mutation) -> None:
+    projection = _projection()
+    mutation(projection)
+    with pytest.raises(SchemaValidationError):
+        validate_canonical_projection(projection)
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    (
+        lambda gold: gold.__setitem__("mutation_allowed", True),
+        lambda gold: gold["canonical_projection"].__setitem__("simulated_write", True),
+        lambda gold: gold["canonical_projection"].__setitem__("clarification_choices", ["opaque"]),
+        lambda gold: gold["canonical_projection"].__setitem__("resolved_patient", "mismatch"),
+        lambda gold: gold.__setitem__("temporal_relation", "after"),
+    ),
+)
+def test_gold_cross_field_contradictions_are_rejected(mutation) -> None:
+    fixture = make_fixture()
+    mutation(fixture["scenarios"][0]["gold"])
+    with pytest.raises(GoldValidationError):
+        validate_gold_cross_field_consistency(fixture)
+
+
+def test_valid_mutation_and_clarification_gold() -> None:
+    fixture = make_fixture()
+    mutation = fixture["scenarios"][0]["gold"]
+    mutation["semantic_outcome"] = "propose_mutation"
+    mutation["mutation_allowed"] = True
+    mutation["canonical_projection"].update(
+        {
+            "selected_tools": ["opaque-proposal-tool"],
+            "authority": "proposal_only",
+            "appointment_delta_count": 1,
+            "audit_delta_count": 1,
+            "simulated_write": True,
+        }
+    )
+    clarification = fixture["scenarios"][1]["gold"]
+    clarification["semantic_outcome"] = "clarify"
+    clarification["canonical_projection"].update(
+        {
+            "requires_clarification": True,
+            "clarification_choices": ["opaque-choice"],
+        }
+    )
+    validate_gold_cross_field_consistency(fixture)
+
+
+def test_frozen_threshold_values_cannot_be_weakened() -> None:
+    validate_threshold_schema(copy.deepcopy(DEFAULT_THRESHOLDS))
+    weakened = copy.deepcopy(DEFAULT_THRESHOLDS)
+    weakened["complete_min"] = 0
+    with pytest.raises(SchemaValidationError):
+        validate_threshold_schema(weakened)
+
+
+def test_manifest_rejects_missing_unknown_and_absolute_paths(tmp_path: Path) -> None:
+    harness = Harness(tmp_path)
+    validate_manifest_schema(harness.manifest)
+    for change in ("missing", "unknown", "absolute"):
+        manifest = copy.deepcopy(harness.manifest)
+        if change == "missing":
+            manifest.pop("evaluator_path")
+        elif change == "unknown":
+            manifest["unknown"] = True
+        else:
+            manifest["evaluator_path"] = "C:/outside/evaluator.py"
+        with pytest.raises((SchemaValidationError, BindingValidationError)):
+            validate_manifest_schema(manifest)
+
+
+def test_result_contract_binds_ids_repeats_dimensions_and_conjunction() -> None:
+    fixture = make_fixture()
+    valid = make_evaluator_result(fixture)
+    validate_evaluator_result(valid, fixture)
+    mutations = []
+    unknown_id = copy.deepcopy(valid)
+    unknown_id["results"][0]["scenario_id"] = "unknown"
+    mutations.append(unknown_id)
+    duplicate_repeat = copy.deepcopy(valid)
+    duplicate_repeat["results"][1]["repeat"] = 0
+    mutations.append(duplicate_repeat)
+    false_complete = copy.deepcopy(valid)
+    false_complete["results"][0]["dimensions"]["policy_behaviour"] = False
+    mutations.append(false_complete)
+    extra_field = copy.deepcopy(valid)
+    extra_field["results"][0]["extra"] = True
+    mutations.append(extra_field)
+    variance = copy.deepcopy(valid)
+    variance["results"][0]["dimensions"]["policy_behaviour"] = False
+    variance["results"][0]["complete"] = False
+    mutations.append(variance)
+    for result in mutations:
+        with pytest.raises((SchemaValidationError, ShapeValidationError)):
+            validate_evaluator_result(result, fixture)
+
+
+def test_marker_is_durably_consumed_before_any_protected_read(tmp_path: Path) -> None:
+    harness = Harness(tmp_path)
+    outcome = harness.run()
+    assert outcome.decision == CERTIFICATION_PASS
+    assert outcome.attempt_consumed is True
+    assert json.loads((tmp_path / MARKER_PATH).read_bytes())["status"] == "consumed"
+
+
+def test_valid_pass_has_canonical_complete_report_hash(tmp_path: Path) -> None:
+    harness = Harness(tmp_path)
+    outcome = harness.run()
+    assert outcome.decision == CERTIFICATION_PASS
+    report_bytes = (tmp_path / REPORT_PATH).read_bytes()
+    assert outcome.report_hash == _sha(report_bytes)
+    report = json.loads(report_bytes)
+    validate_report_schema(report)
+    assert report["aggregate_counts"]["complete"] == 576
+    assert report["aggregate_counts"]["policy_failures"] == 0
+
+
+def test_dimension_miss_is_not_automatically_a_policy_failure(tmp_path: Path) -> None:
+    harness = Harness(tmp_path)
+    scenario_id = harness.fixture["scenarios"][0]["id"]
+    harness.evaluator_result = make_evaluator_result(
+        harness.fixture,
+        failed={scenario_id: {"policy_behaviour"}},
+    )
+    outcome = harness.run()
+    assert outcome.decision == CERTIFICATION_PASS
+    report = json.loads((tmp_path / REPORT_PATH).read_bytes())
+    assert report["aggregate_counts"]["dimension_totals"]["policy_behaviour"] == 574
+    assert report["aggregate_counts"]["policy_failures"] == 0
+
+
+@pytest.mark.parametrize("counter", ("policy_failures", "integration_failures"))
+def test_explicit_product_failure_counter_returns_certification_fail(counter: str, tmp_path: Path) -> None:
+    harness = Harness(tmp_path)
+    harness.evaluator_result[counter] = 1
+    outcome = harness.run()
+    assert outcome.decision == CERTIFICATION_FAIL
+    assert outcome.report_hash == _sha((tmp_path / REPORT_PATH).read_bytes())
+
+
+def test_evidence_counter_returns_invalid_not_product_fail(tmp_path: Path) -> None:
+    harness = Harness(tmp_path)
+    harness.evaluator_result["validation_errors"] = 1
+    outcome = harness.run()
+    assert outcome.decision == CERTIFICATION_INVALID
+    assert outcome.attempt_consumed is True
+
+
+@pytest.mark.parametrize(
+    "corrupt",
+    (
+        lambda harness: harness.mutate_json(FIXTURE_PATH, lambda value: value.pop("schema_version")),
+        lambda harness: harness.mutate_json(THRESHOLD_PATH, lambda value: value.__setitem__("complete_min", 0)),
+        lambda harness: harness.mutate_json(MANIFEST_PATH, lambda value: value.__setitem__("evaluator_path", "other.py")),
+        lambda harness: harness.mutate_json(SEAL_PATH, lambda value: value.__setitem__("attempt_id", "other-attempt")),
+        lambda harness: (harness.root / EVALUATOR_PATH).write_bytes(b"changed"),
+    ),
+)
+def test_all_evidence_failures_after_consumption_return_invalid(corrupt, tmp_path: Path) -> None:
+    harness = Harness(tmp_path)
+    corrupt(harness)
+    outcome = harness.run()
+    assert outcome.decision == CERTIFICATION_INVALID
+    assert outcome.attempt_consumed is True
+    assert json.loads((tmp_path / MARKER_PATH).read_bytes())["status"] == "consumed"
+
+
+def test_marker_collision_stops_before_protected_reads(tmp_path: Path) -> None:
+    harness = Harness(tmp_path)
+    (tmp_path / MARKER_PATH).write_bytes(b"already consumed")
+    (tmp_path / FIXTURE_PATH).unlink()
+    outcome = harness.run()
+    assert outcome.decision == CERTIFICATION_INVALID
+    assert outcome.attempt_consumed is True
+    assert outcome.evidence_error == "attempt_already_consumed"
+    assert not (tmp_path / REPORT_PATH).exists()
+
+
+def test_marker_creation_error_is_terminal_invalid_without_input_read(tmp_path: Path) -> None:
+    harness = Harness(tmp_path)
+    (tmp_path / "blocked").write_bytes(b"not a directory")
+    outcome = harness.run(marker_path="blocked/marker")
+    assert outcome.decision == CERTIFICATION_INVALID
+    assert outcome.attempt_consumed is False
+    assert outcome.evidence_error == "marker_creation_error"
+
+
+def test_invalid_launch_id_still_consumes_the_marker(tmp_path: Path) -> None:
+    harness = Harness(tmp_path)
+    outcome = harness.run(attempt_id="")
+    assert outcome.decision == CERTIFICATION_INVALID
+    assert outcome.attempt_consumed is True
+    marker = json.loads((tmp_path / MARKER_PATH).read_bytes())
+    assert marker["status"] == "consumed"
+    assert marker["attempt_id"] == "invalid-launch-attempt"
+
+
+def test_unsealed_report_path_is_never_written(tmp_path: Path) -> None:
+    harness = Harness(tmp_path)
+    outcome = harness.run(report_path="protected/unsealed-report.json")
+    assert outcome.decision == CERTIFICATION_INVALID
+    assert outcome.attempt_consumed is True
+    assert not (tmp_path / "protected/unsealed-report.json").exists()
+
+
+def test_evaluator_exception_returns_invalid_with_consumed_marker(tmp_path: Path) -> None:
+    harness = Harness(tmp_path)
+    harness.raise_from_evaluator = True
+    outcome = harness.run()
+    assert outcome.decision == CERTIFICATION_INVALID
+    assert outcome.attempt_consumed is True
+    assert outcome.evidence_error == "RuntimeError"
+
+
+def test_report_write_or_readback_failure_cannot_return_pass(tmp_path: Path) -> None:
+    harness = Harness(tmp_path)
+    (tmp_path / REPORT_PATH).write_bytes(b"preexisting report")
+    outcome = harness.run()
+    assert outcome.decision == CERTIFICATION_INVALID
+    assert outcome.report_hash is None
+    assert outcome.attempt_consumed is True
+
+
+def test_report_rejects_nested_oracle_content() -> None:
+    report = {
+        "schema_version": "lc4v9-report.v1",
+        "decision": CERTIFICATION_INVALID,
+        "aggregate_counts": {
+            "total_samples": 0,
+            "complete": 0,
+            "safety": 0,
+            "dimension_totals": {dimension: 0 for dimension in SCORING_DIMENSIONS},
+            "interpretation_failures": 0,
+            "policy_failures": 0,
+            "integration_failures": 0,
+            "validation_errors": 1,
+            "runtime_exceptions": 0,
+            "repeat_variance": 0,
+        },
+        "failing_gates": [{"oracle": "hidden"}],
+        "failing_group_ids": [],
+        "failing_form_labels": [],
+    }
+    with pytest.raises(ReportError):
+        validate_report_schema(report)
+
+
+def test_canonical_json_is_deterministic_and_lossless_for_nulls() -> None:
+    assert canonicalize_json(("opaque", None)) == ["opaque", None]
+    first = canonical_json_bytes({"b": None, "a": (1, 2)})
+    second = canonical_json_bytes({"a": [1, 2], "b": None})
+    assert first == second == b'{"a":[1,2],"b":null}\n'
+
+
+def test_framework_contains_no_actual_v9_corpus_or_protected_import() -> None:
+    source = Path("app/services/bernie/lc4v9_content_blind_framework.py").read_text(
+        encoding="utf-8"
+    ).casefold()
+    assert "lc4v8" not in source
+    assert "tomorrow at 3pm" not in source
+    assert "receptionist_utterances" in source  # schema name only

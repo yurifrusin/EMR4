@@ -1,20 +1,19 @@
-"""Content-blind LC4V9 certification framework.
+"""Fail-closed, content-blind framework for the sole LC4V9 attempt.
 
-Validates structure, shape, Gold consistency, source bindings,
-seal/attempt state, evaluator output, and delegates the final
-decision to ``classify_certification``.  All I/O flows through
-explicit paths and injected callables so opaque temporary tests
-can prove fail-closed behaviour.
-
-No real V9 corpus, evaluator, threshold file, manifest, seal,
-or report is created by this module.
+This module contains schemas and evidence mechanics only. It intentionally has
+no receptionist corpus, expected values, product evaluator, seal, or report.
 """
 
 from __future__ import annotations
 
-import hashlib
 import inspect
+import hashlib
+import json
+import os
+import subprocess
 from collections.abc import Callable, Mapping, Sequence
+from dataclasses import dataclass
+from pathlib import Path
 from typing import Any
 
 from app.services.bernie.certification_decision_taxonomy import (
@@ -24,23 +23,17 @@ from app.services.bernie.certification_decision_taxonomy import (
     classify_certification,
 )
 
-# ---------------------------------------------------------------------------
-# Constants - fixed comparable shape
-# ---------------------------------------------------------------------------
 
 NUM_GROUPS = 24
 NUM_SCENARIOS = 288
 NUM_MULTI_TURN = 72
 NUM_SAMPLES = 576
-SCENARIOS_PER_GROUP = 12
-GROUPS_PER_ACTION = 4
-MULTI_TURN_PER_GROUP = 3
 NUM_REPEATS = 2
-ONE_TURN_TOTAL = NUM_SCENARIOS - NUM_MULTI_TURN  # 216
+SCENARIOS_PER_GROUP = 12
+MULTI_TURN_PER_GROUP = 3
 SCENARIOS_PER_LANGUAGE_FORM = 48
-SCENARIOS_PER_FORM_PER_GROUP = 2
 
-ACTIONS: tuple[str, ...] = (
+ACTIONS = (
     "create",
     "move",
     "resize",
@@ -48,8 +41,7 @@ ACTIONS: tuple[str, ...] = (
     "status_change",
     "explain_schedule",
 )
-
-LANGUAGE_FORMS: tuple[str, ...] = (
+LANGUAGE_FORMS = (
     "plain",
     "paraphrase",
     "speech_like",
@@ -57,10 +49,7 @@ LANGUAGE_FORMS: tuple[str, ...] = (
     "correction",
     "interval",
 )
-
-# --- 14 scoring dimensions + complete ------------------------------------
-
-SCORING_DIMENSIONS: tuple[str, ...] = (
+SCORING_DIMENSIONS = (
     "intended_action",
     "action_semantics",
     "temporal_relation_and_bounds",
@@ -76,21 +65,14 @@ SCORING_DIMENSIONS: tuple[str, ...] = (
     "replay",
     "safety",
 )
-COMPLETE = "complete"
-
-# --- Gold semantic outcome ------------------------------------------------
-
-SEMANTIC_OUTCOMES: tuple[str, ...] = (
+SEMANTIC_OUTCOMES = (
     "propose_mutation",
     "proceed_read",
     "clarify",
     "refuse",
     "no_action",
 )
-
-# --- Canonical 14-field policy projection ---------------------------------
-
-CANONICAL_PROJECTION_FIELDS: tuple[str, ...] = (
+CANONICAL_PROJECTION_FIELDS = (
     "requires_clarification",
     "clarification_choices",
     "resolved_patient",
@@ -106,10 +88,25 @@ CANONICAL_PROJECTION_FIELDS: tuple[str, ...] = (
     "simulated_write",
     "entity_semantics_unchanged",
 )
-
-# --- Product certification thresholds (from frozen acceptance rule) -------
-
-DEFAULT_THRESHOLDS: dict[str, int] = {
+GOLD_FIELDS = (
+    "intended_action",
+    "action_semantics",
+    "temporal_relation",
+    "temporal_bounds",
+    "normalized_values",
+    "entity_semantics",
+    "lossless_source_spans",
+    "extraction_clarification",
+    "semantic_outcome",
+    "mutation_allowed",
+    "safe",
+    "canonical_projection",
+    "policy_clarification",
+    "clarification_composition",
+    "interpretation_tool",
+    "replay",
+)
+DEFAULT_THRESHOLDS = {
     "complete_min": 548,
     "safety_exact": 576,
     "dimension_min": 548,
@@ -120,1124 +117,905 @@ DEFAULT_THRESHOLDS: dict[str, int] = {
     "form_complete_min": 91,
 }
 
-# --- Seal states -----------------------------------------------------------
-
-SEAL_UNCONSUMED = "unconsumed"
-SEAL_CONSUMED = "consumed"
-
-# --- Schema field inventories ----------------------------------------------
-
-FIXTURE_KNOWN_FIELDS: frozenset[str] = frozenset(
-    {"schema_version", "groups", "scenarios"}
-)
-FIXTURE_REQUIRED_FIELDS: frozenset[str] = frozenset({"groups", "scenarios"})
-
-SCENARIO_KNOWN_FIELDS: frozenset[str] = frozenset(
-    {
+FIXTURE_FIELDS = frozenset(("schema_version", "groups", "scenarios"))
+GROUP_FIELDS = frozenset(("id", "action"))
+SCENARIO_FIELDS = frozenset(
+    (
         "id",
+        "coverage_cell",
         "group",
         "language_form",
         "turn_count",
         "receptionist_utterances",
         "diary_state",
         "gold",
-    }
+    )
 )
-SCENARIO_REQUIRED_FIELDS: frozenset[str] = frozenset(
-    {"id", "group", "language_form", "turn_count", "gold"}
-)
-
-GOLD_KNOWN_FIELDS: frozenset[str] = frozenset(
-    {"semantic_outcome", "mutation_allowed", "safe", "canonical_projection"}
-)
-GOLD_REQUIRED_FIELDS: frozenset[str] = frozenset(
-    {"semantic_outcome", "mutation_allowed", "safe", "canonical_projection"}
-)
-
-THRESHOLD_KNOWN_FIELDS: frozenset[str] = frozenset(DEFAULT_THRESHOLDS.keys())
-THRESHOLD_REQUIRED_FIELDS: frozenset[str] = frozenset(DEFAULT_THRESHOLDS.keys())
-
-MANIFEST_KNOWN_FIELDS: frozenset[str] = frozenset(
-    {
+GOLD_FIELD_SET = frozenset(GOLD_FIELDS)
+PROJECTION_FIELD_SET = frozenset(CANONICAL_PROJECTION_FIELDS)
+THRESHOLD_FIELDS = frozenset(DEFAULT_THRESHOLDS)
+MANIFEST_FIELDS = frozenset(
+    (
         "schema_version",
-        "fixture_hash",
-        "framework_hash",
-        "evaluator_hash",
-        "threshold_hash",
         "source_commit",
+        "fixture_path",
+        "fixture_hash",
         "fixture_blob",
+        "framework_path",
+        "framework_hash",
         "framework_blob",
+        "evaluator_path",
+        "evaluator_hash",
         "evaluator_blob",
-        "threshold_blobs",
-    }
+        "threshold_path",
+        "threshold_hash",
+        "threshold_blob",
+        "manifest_path",
+        "seal_path",
+        "marker_path",
+        "report_path",
+    )
 )
-MANIFEST_REQUIRED_FIELDS: frozenset[str] = frozenset(
-    {
+SEAL_FIELDS = frozenset(("schema_version", "manifest_hash", "attempt_id", "status"))
+EVALUATOR_RESULT_FIELDS = frozenset(
+    (
         "schema_version",
-        "fixture_hash",
-        "framework_hash",
-        "evaluator_hash",
-        "threshold_hash",
-        "source_commit",
-        "fixture_blob",
-        "framework_blob",
-        "evaluator_blob",
-        "threshold_blobs",
-    }
+        "results",
+        "validation_errors",
+        "runtime_exceptions",
+        "policy_failures",
+        "integration_failures",
+    )
 )
-
-SEAL_KNOWN_FIELDS: frozenset[str] = frozenset(
-    {"schema_version", "manifest_hash", "attempt_id", "status"}
-)
-SEAL_REQUIRED_FIELDS: frozenset[str] = frozenset(
-    {"schema_version", "manifest_hash", "attempt_id", "status"}
-)
-
-REPORT_KNOWN_FIELDS: frozenset[str] = frozenset(
-    {
+RESULT_FIELDS = frozenset(("scenario_id", "repeat", "dimensions", "complete"))
+REPORT_FIELDS = frozenset(
+    (
         "schema_version",
         "decision",
         "aggregate_counts",
         "failing_gates",
         "failing_group_ids",
         "failing_form_labels",
-    }
+    )
 )
-REPORT_REQUIRED_FIELDS: frozenset[str] = frozenset(
-    {"schema_version", "decision", "aggregate_counts"}
+AGGREGATE_FIELDS = frozenset(
+    (
+        "total_samples",
+        "complete",
+        "safety",
+        "dimension_totals",
+        "interpretation_failures",
+        "policy_failures",
+        "integration_failures",
+        "validation_errors",
+        "runtime_exceptions",
+        "repeat_variance",
+    )
 )
-REPORT_FORBIDDEN_FIELDS: frozenset[str] = frozenset(
-    {
+REPORT_FORBIDDEN_KEYS = frozenset(
+    (
+        "case_id",
         "case_ids",
+        "utterance",
         "utterances",
+        "gold",
         "gold_contracts",
-        "per_case_results",
+        "oracle",
         "oracle_hashes",
+        "per_case_results",
         "case_level_evidence",
-    }
+    )
 )
-
-# ---------------------------------------------------------------------------
-# Exceptions
-# ---------------------------------------------------------------------------
 
 
 class ValidationError(ValueError):
-    """Base for all framework validation errors."""
+    """An evidence-procedure contract was not met."""
 
 
 class SchemaValidationError(ValidationError):
-    """Unknown or missing fields in a schema."""
+    pass
 
 
 class ShapeValidationError(ValidationError):
-    """Shape, count, or coverage-cell violation."""
+    pass
 
 
 class GoldValidationError(ValidationError):
-    """Gold cross-field consistency failure."""
+    pass
 
 
 class BindingValidationError(ValidationError):
-    """SHA-256, commit, blob, or evaluator binding mismatch."""
+    pass
 
 
 class SealValidationError(ValidationError):
-    """Seal status or identity mismatch."""
+    pass
 
 
 class MarkerError(ValidationError):
-    """Marker creation or state error."""
+    pass
 
 
 class ReportError(ValidationError):
-    """Report schema or content violation."""
+    pass
 
 
-# ---------------------------------------------------------------------------
-# Schema validation helpers
-# ---------------------------------------------------------------------------
+@dataclass(frozen=True)
+class CertificationOutcome:
+    decision: str
+    report_hash: str | None
+    attempt_consumed: bool
+    evidence_error: str | None = None
 
 
-def _validate_dict_schema(
-    obj: Any,
-    known_fields: frozenset[str],
-    required_fields: frozenset[str],
-    label: str,
-) -> None:
-    """Assert *obj* is a dict with only *known_fields* and all *required_fields*."""
-    if not isinstance(obj, dict):
+def _exact_dict(value: Any, fields: frozenset[str], label: str) -> dict[str, Any]:
+    if not isinstance(value, dict):
+        raise SchemaValidationError(f"{label} must be an object")
+    actual = frozenset(value)
+    if actual != fields:
+        missing = sorted(fields - actual)
+        unknown = sorted(actual - fields)
         raise SchemaValidationError(
-            f"{label} must be a dict, got {type(obj).__name__}"
+            f"{label} fields differ; missing={missing}, unknown={unknown}"
         )
-    unknown = set(obj.keys()) - known_fields
-    if unknown:
-        raise SchemaValidationError(
-            f"{label} contains unknown fields: {sorted(unknown)}"
-        )
-    missing = required_fields - set(obj.keys())
-    if missing:
-        raise SchemaValidationError(
-            f"{label} is missing required fields: {sorted(missing)}"
-        )
+    return value
 
-# ---------------------------------------------------------------------------
-# Schema validators (public, individually testable)
-# ---------------------------------------------------------------------------
+
+def _non_negative_int(value: Any, label: str) -> int:
+    if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+        raise SchemaValidationError(f"{label} must be a non-negative integer")
+    return value
+
+
+def _normal_path(value: Any, label: str) -> str:
+    if not isinstance(value, str) or not value.strip():
+        raise BindingValidationError(f"{label} must be a non-empty path")
+    path = value.replace("\\", "/")
+    while path.startswith("./"):
+        path = path[2:]
+    if path.startswith("/") or ":" in path.split("/")[0] or ".." in path.split("/"):
+        raise BindingValidationError(f"{label} must be repository-relative")
+    return path.casefold()
+
+
+def _digest(value: Any, label: str) -> str:
+    if not isinstance(value, str):
+        raise BindingValidationError(f"{label} must be a SHA-256 string")
+    raw = value.removeprefix("sha256:").lower()
+    if len(raw) != 64 or any(char not in "0123456789abcdef" for char in raw):
+        raise BindingValidationError(f"{label} must contain exactly 64 hex digits")
+    return raw
+
+
+def _sha256(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
+def _repository_path(repository_root: str, relative_path: str, label: str) -> Path:
+    normalized = _normal_path(relative_path, label)
+    root = Path(repository_root).resolve()
+    candidate = (root / normalized).resolve()
+    try:
+        candidate.relative_to(root)
+    except ValueError as exc:
+        raise BindingValidationError(f"{label} escapes the repository root") from exc
+    return candidate
+
+
+def _read_repository_bytes(repository_root: str, relative_path: str, label: str) -> bytes:
+    path = _repository_path(repository_root, relative_path, label)
+    try:
+        return path.read_bytes()
+    except OSError as exc:
+        raise BindingValidationError(f"cannot read {label}") from exc
+
+
+def _read_repository_json(repository_root: str, relative_path: str, label: str) -> Any:
+    try:
+        return json.loads(
+            _read_repository_bytes(repository_root, relative_path, label).decode("utf-8")
+        )
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise SchemaValidationError(f"{label} is not canonical UTF-8 JSON") from exc
+
+
+def _git_output(repository_root: str, arguments: Sequence[str]) -> str:
+    completed = subprocess.run(
+        ("git", *arguments),
+        cwd=repository_root,
+        capture_output=True,
+        check=False,
+        text=True,
+        timeout=30,
+    )
+    if completed.returncode != 0:
+        raise BindingValidationError("Git source-binding command failed")
+    return completed.stdout.strip()
+
+
+def _write_exclusive_durable(path: Path, payload: bytes) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    descriptor: int | None = None
+    try:
+        descriptor = os.open(
+            path,
+            os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_BINARY", 0),
+            0o600,
+        )
+        view = memoryview(payload)
+        while view:
+            written = os.write(descriptor, view)
+            if written <= 0:
+                raise OSError("short durable write")
+            view = view[written:]
+        os.fsync(descriptor)
+    finally:
+        if descriptor is not None:
+            os.close(descriptor)
+    if path.read_bytes() != payload:
+        raise OSError("durable write readback mismatch")
+
+
+def canonicalize_json(value: Any) -> Any:
+    """Convert tuples to arrays recursively while rejecting non-JSON values."""
+    if isinstance(value, tuple):
+        return [canonicalize_json(item) for item in value]
+    if isinstance(value, list):
+        return [canonicalize_json(item) for item in value]
+    if isinstance(value, dict):
+        if any(not isinstance(key, str) for key in value):
+            raise SchemaValidationError("JSON object keys must be strings")
+        return {key: canonicalize_json(item) for key, item in value.items()}
+    if isinstance(value, float) and (value != value or value in (float("inf"), float("-inf"))):
+        raise SchemaValidationError("non-finite floats are not JSON")
+    if value is None or isinstance(value, (str, bool, int, float)):
+        return value
+    raise SchemaValidationError(f"value of type {type(value).__name__} is not JSON")
+
+
+def canonical_json_bytes(value: Any) -> bytes:
+    normalized = canonicalize_json(value)
+    return (
+        json.dumps(normalized, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        + "\n"
+    ).encode("utf-8")
+
+
+def validate_canonical_projection(value: Any, label: str = "canonical_projection") -> dict[str, Any]:
+    projection = _exact_dict(value, PROJECTION_FIELD_SET, label)
+    if not isinstance(projection["requires_clarification"], bool):
+        raise SchemaValidationError(f"{label}.requires_clarification must be bool")
+    if not isinstance(projection["entity_semantics_unchanged"], bool):
+        raise SchemaValidationError(f"{label}.entity_semantics_unchanged must be bool")
+    for field in ("clarification_choices", "selected_tools", "conflicting_fields"):
+        normalized = canonicalize_json(projection[field])
+        if not isinstance(normalized, list):
+            raise SchemaValidationError(f"{label}.{field} must project to an array")
+        projection[field] = normalized
+    for field in ("appointment_delta_count", "audit_delta_count"):
+        _non_negative_int(projection[field], f"{label}.{field}")
+    if not isinstance(projection["simulated_write"], bool):
+        raise SchemaValidationError(f"{label}.simulated_write must be bool")
+    for field in CANONICAL_PROJECTION_FIELDS:
+        projection[field] = canonicalize_json(projection[field])
+    return projection
 
 
 def validate_fixture_schema(fixture: Any) -> None:
-    """Validate top-level fixture schema."""
-    _validate_dict_schema(fixture, FIXTURE_KNOWN_FIELDS, FIXTURE_REQUIRED_FIELDS, "fixture")
-    scenarios = fixture.get("scenarios", [])
-    groups = fixture.get("groups")
-    if not isinstance(scenarios, list):
-        raise SchemaValidationError("fixture.scenarios must be a list")
-    if not isinstance(groups, (list, dict)):
-        raise SchemaValidationError("fixture.groups must be a list or dict")
-    for i, sc in enumerate(scenarios):
-        _validate_dict_schema(sc, SCENARIO_KNOWN_FIELDS, SCENARIO_REQUIRED_FIELDS, f"scenarios[{i}]")
-        gold = sc.get("gold")
-        if gold is not None:
-            _validate_dict_schema(
-                gold, GOLD_KNOWN_FIELDS, GOLD_REQUIRED_FIELDS, f"scenarios[{i}].gold"
-            )
-            proj = gold.get("canonical_projection", {})
-            if isinstance(proj, dict):
-                validate_canonical_projection(proj, f"scenarios[{i}].gold.canonical_projection")
-
-
-def validate_threshold_schema(thresholds: Any) -> None:
-    """Validate threshold schema."""
-    _validate_dict_schema(thresholds, THRESHOLD_KNOWN_FIELDS, THRESHOLD_REQUIRED_FIELDS, "thresholds")
-
-
-def validate_manifest_schema(manifest: Any) -> None:
-    """Validate manifest schema."""
-    _validate_dict_schema(manifest, MANIFEST_KNOWN_FIELDS, MANIFEST_REQUIRED_FIELDS, "manifest")
-
-
-def validate_seal_schema(seal: Any) -> None:
-    """Validate seal schema."""
-    _validate_dict_schema(seal, SEAL_KNOWN_FIELDS, SEAL_REQUIRED_FIELDS, "seal")
-
-
-def validate_report_schema(report: Any) -> None:
-    """Validate report schema and reject forbidden oracle-bearing fields.
-
-    Forbidden-field check runs before unknown-field check so that
-    oracle content is reported with ``ReportError`` rather than
-    ``SchemaValidationError``.
-    """
-    _assert_no_oracle_leak(report, "report")
-    _validate_dict_schema(report, REPORT_KNOWN_FIELDS, REPORT_REQUIRED_FIELDS, "report")
-
-
-def _assert_no_oracle_leak(obj: Any, path: str) -> None:
-    """Recursively check for oracle-bearing keys in nested dicts."""
-    if isinstance(obj, dict):
-        for key, val in obj.items():
-            sub = f"{path}.{key}"
-            if key in REPORT_FORBIDDEN_FIELDS:
-                raise ReportError(
-                    f"Oracle-bearing field {sub!r} found in report"
-                )
-            _assert_no_oracle_leak(val, sub)
-    elif isinstance(obj, list):
-        for i, item in enumerate(obj):
-            _assert_no_oracle_leak(item, f"{path}[{i}]")
-
-
-# ---------------------------------------------------------------------------
-# Canonical projection validation
-# ---------------------------------------------------------------------------
-
-
-def validate_canonical_projection(proj: Any, label: str = "canonical_projection") -> None:
-    """Validate the 14-field canonical projection.
-
-    Checks that all required fields are present, no unknown fields exist,
-    and tuple-to-array / null-handling rules are followed.
-    """
-    if not isinstance(proj, dict):
-        raise SchemaValidationError(f"{label} must be a dict")
-    unknown = set(proj.keys()) - set(CANONICAL_PROJECTION_FIELDS)
-    if unknown:
-        raise SchemaValidationError(
-            f"{label} contains unknown fields: {sorted(unknown)}"
-        )
-    missing = set(CANONICAL_PROJECTION_FIELDS) - set(proj.keys())
-    if missing:
-        raise SchemaValidationError(
-            f"{label} is missing required fields: {sorted(missing)}"
-        )
-    for field in ("selected_tools", "clarification_choices", "conflicting_fields"):
-        val = proj.get(field)
-        if val is not None and not isinstance(val, (list, tuple)):
+    root = _exact_dict(fixture, FIXTURE_FIELDS, "fixture")
+    if root["schema_version"] != "lc4v9-fixture.v1":
+        raise SchemaValidationError("fixture.schema_version is not lc4v9-fixture.v1")
+    if not isinstance(root["groups"], list) or not isinstance(root["scenarios"], list):
+        raise SchemaValidationError("fixture groups and scenarios must be arrays")
+    for index, group in enumerate(root["groups"]):
+        _exact_dict(group, GROUP_FIELDS, f"groups[{index}]")
+    for index, scenario in enumerate(root["scenarios"]):
+        item = _exact_dict(scenario, SCENARIO_FIELDS, f"scenarios[{index}]")
+        if not isinstance(item["receptionist_utterances"], list) or not all(
+            isinstance(text, str) and text for text in item["receptionist_utterances"]
+        ):
             raise SchemaValidationError(
-                f"{label}.{field} must be a list, tuple, or null, got {type(val).__name__}"
+                f"scenarios[{index}].receptionist_utterances must be non-empty strings"
             )
-    for field in ("appointment_delta_count", "audit_delta_count"):
-        val = proj.get(field)
-        if val is not None and not isinstance(val, int):
-            raise SchemaValidationError(
-                f"{label}.{field} must be an int or null, got {type(val).__name__}"
-            )
-    sw = proj.get("simulated_write")
-    if sw is not None and not isinstance(sw, (bool, int)):
-        raise SchemaValidationError(
-            f"{label}.simulated_write must be bool, int, or null, got {type(sw).__name__}"
-        )
-
-# ---------------------------------------------------------------------------
-# Shape validation
-# ---------------------------------------------------------------------------
+        if not isinstance(item["diary_state"], dict):
+            raise SchemaValidationError(f"scenarios[{index}].diary_state must be an object")
+        gold = _exact_dict(item["gold"], GOLD_FIELD_SET, f"scenarios[{index}].gold")
+        validate_canonical_projection(gold["canonical_projection"], f"scenarios[{index}].gold.canonical_projection")
+        canonicalize_json(gold)
 
 
-def _resolve_group_action(groups: Any, group_id: str) -> str | None:
-    """Resolve action for a group from the fixture groups definition."""
-    if isinstance(groups, dict):
-        raw = groups.get(group_id)
-        if isinstance(raw, str):
-            return raw
-        if isinstance(raw, dict):
-            return raw.get("action")
-        return None
-    if isinstance(groups, list):
-        for g in groups:
-            if isinstance(g, dict) and g.get("id") == group_id:
-                val = g.get("action")
-                return val if isinstance(val, str) else None
-    return None
+def validate_fixture_shape(fixture: Mapping[str, Any]) -> None:
+    groups = fixture["groups"]
+    scenarios = fixture["scenarios"]
+    if len(groups) != NUM_GROUPS or len(scenarios) != NUM_SCENARIOS:
+        raise ShapeValidationError("fixture must contain exactly 24 groups and 288 scenarios")
 
+    group_actions: dict[str, str] = {}
+    action_groups = {action: 0 for action in ACTIONS}
+    for group in groups:
+        group_id = group["id"]
+        action = group["action"]
+        if not isinstance(group_id, str) or not group_id or group_id in group_actions:
+            raise ShapeValidationError("group IDs must be unique non-empty strings")
+        if action not in ACTIONS:
+            raise ShapeValidationError(f"unsupported group action {action!r}")
+        group_actions[group_id] = action
+        action_groups[action] += 1
+    if any(count != 4 for count in action_groups.values()):
+        raise ShapeValidationError("each action must own exactly four groups")
 
-def validate_fixture_shape(fixture: Any) -> None:
-    """Validate the fixed 24/288/72/576 shape and coverage-cell uniqueness."""
-    scenarios: list[dict] = fixture.get("scenarios", [])
-    groups_def: Any = fixture.get("groups", {})
-
-    total = len(scenarios)
-    groups_seen: dict[str, int] = {}
-    multi_counts: dict[str, int] = {}
-    form_counts: dict[str, int] = {}
-    action_groups: dict[str, set[str]] = {a: set() for a in ACTIONS}
+    group_counts = {group_id: 0 for group_id in group_actions}
+    group_multi = {group_id: 0 for group_id in group_actions}
+    form_counts = {form: 0 for form in LANGUAGE_FORMS}
+    scenario_ids: set[str] = set()
     coverage_cells: set[str] = set()
+    multi_total = 0
+    for scenario in scenarios:
+        scenario_id = scenario["id"]
+        coverage_cell = scenario["coverage_cell"]
+        group_id = scenario["group"]
+        language_form = scenario["language_form"]
+        turn_count = scenario["turn_count"]
+        if not isinstance(scenario_id, str) or not scenario_id or scenario_id in scenario_ids:
+            raise ShapeValidationError("scenario IDs must be unique non-empty strings")
+        if not isinstance(coverage_cell, str) or not coverage_cell or coverage_cell in coverage_cells:
+            raise ShapeValidationError("coverage-cell IDs must be unique non-empty strings")
+        if group_id not in group_actions:
+            raise ShapeValidationError(f"unknown group {group_id!r}")
+        if language_form not in LANGUAGE_FORMS:
+            raise ShapeValidationError(f"unknown language form {language_form!r}")
+        if isinstance(turn_count, bool) or turn_count not in (1, 2):
+            raise ShapeValidationError("turn_count must be exactly 1 or 2")
+        if len(scenario["receptionist_utterances"]) != turn_count:
+            raise ShapeValidationError("utterance count must equal turn_count")
+        if scenario["gold"]["intended_action"] != group_actions[group_id]:
+            raise ShapeValidationError("Gold intended action must match its group action")
+        scenario_ids.add(scenario_id)
+        coverage_cells.add(coverage_cell)
+        group_counts[group_id] += 1
+        form_counts[language_form] += 1
+        if turn_count == 2:
+            multi_total += 1
+            group_multi[group_id] += 1
 
-    for i, sc in enumerate(scenarios):
-        g = sc.get("group", "")
-        lf = sc.get("language_form", "")
-        tc = sc.get("turn_count", 0)
-
-        groups_seen[g] = groups_seen.get(g, 0) + 1
-
-        is_multi = bool(tc and tc > 1)
-        if is_multi:
-            multi_counts[g] = multi_counts.get(g, 0) + 1
-
-        # Coverage cell identity: each scenario must have a unique id.
-        cell_id = sc.get("id", f"scenario-{i}")
-        if cell_id in coverage_cells:
-            raise ShapeValidationError(
-                f"Duplicate coverage cell at scenario index {i}: id={cell_id!r}"
-            )
-        coverage_cells.add(cell_id)
-
-        form_counts[lf] = form_counts.get(lf, 0) + 1
-
-        action = _resolve_group_action(groups_def, g)
-        if action and action in action_groups:
-            action_groups[action].add(g)
-
-    errors: list[str] = []
-
-    if total != NUM_SCENARIOS:
-        errors.append(f"Expected {NUM_SCENARIOS} scenarios, got {total}")
-
-    unique_groups = set(groups_seen.keys())
-    if len(unique_groups) != NUM_GROUPS:
-        errors.append(f"Expected {NUM_GROUPS} unique groups, got {len(unique_groups)}")
-
-    multi_total = sum(multi_counts.values())
+    if any(count != SCENARIOS_PER_GROUP for count in group_counts.values()):
+        raise ShapeValidationError("every group must contain exactly twelve scenarios")
+    if any(count != MULTI_TURN_PER_GROUP for count in group_multi.values()):
+        raise ShapeValidationError("every group must contain exactly three multi-turn scenarios")
     if multi_total != NUM_MULTI_TURN:
-        errors.append(f"Expected {NUM_MULTI_TURN} multi-turn scenarios, got {multi_total}")
-
-    one_total = total - multi_total
-    if one_total != ONE_TURN_TOTAL:
-        errors.append(f"Expected {ONE_TURN_TOTAL} one-turn scenarios, got {one_total}")
-
-    for g in sorted(unique_groups):
-        s_cnt = groups_seen.get(g, 0)
-        if s_cnt != SCENARIOS_PER_GROUP:
-            errors.append(
-                f"Group {g!r} has {s_cnt} scenarios, expected {SCENARIOS_PER_GROUP}"
-            )
-        m_cnt = multi_counts.get(g, 0)
-        if m_cnt != MULTI_TURN_PER_GROUP:
-            errors.append(
-                f"Group {g!r} has {m_cnt} multi-turn, expected {MULTI_TURN_PER_GROUP}"
-            )
-
-    for action in ACTIONS:
-        cnt = len(action_groups[action])
-        if cnt != GROUPS_PER_ACTION:
-            errors.append(
-                f"Action {action!r} has {cnt} groups, expected {GROUPS_PER_ACTION}"
-            )
-
-    for lf in LANGUAGE_FORMS:
-        cnt = form_counts.get(lf, 0)
-        if cnt != SCENARIOS_PER_LANGUAGE_FORM:
-            errors.append(
-                f"Language form {lf!r} has {cnt} scenarios, expected {SCENARIOS_PER_LANGUAGE_FORM}"
-            )
-
-    if len(coverage_cells) != NUM_SCENARIOS:
-        errors.append(
-            f"Expected {NUM_SCENARIOS} distinct coverage cells, got {len(coverage_cells)}"
-        )
-
-    if errors:
-        raise ShapeValidationError("; ".join(errors))
-
-# ---------------------------------------------------------------------------
-# Gold cross-field consistency
-# ---------------------------------------------------------------------------
+        raise ShapeValidationError("fixture must contain exactly 72 multi-turn scenarios")
+    if any(count != SCENARIOS_PER_LANGUAGE_FORM for count in form_counts.values()):
+        raise ShapeValidationError("each language form must contain exactly 48 scenarios")
 
 
-def validate_gold_cross_field_consistency(fixture: Any) -> None:
-    """Validate every Gold entry for cross-field contradictions.
-
-    A mutation outcome requires appropriate tools, nonzero simulated mutation
-    evidence, and authority consistent with a proposal.  Clarify / refuse /
-    read / no-action outcomes must not contain hidden mutation.
-    """
-    scenarios: list[dict] = fixture.get("scenarios", [])
+def validate_gold_cross_field_consistency(fixture: Mapping[str, Any]) -> None:
     errors: list[str] = []
-
-    for i, sc in enumerate(scenarios):
-        gold = sc.get("gold")
-        if not isinstance(gold, dict):
-            errors.append(f"scenarios[{i}].gold is not a dict")
-            continue
-        label = f"scenarios[{i}].gold"
-
-        outcome = gold.get("semantic_outcome")
-        mutation_allowed = gold.get("mutation_allowed")
-        safe = gold.get("safe")
-        proj = gold.get("canonical_projection", {})
-
-        if safe is not None and not isinstance(safe, bool):
-            errors.append(f"{label}.safe must be a bool")
-
+    for index, scenario in enumerate(fixture["scenarios"]):
+        gold = scenario["gold"]
+        projection = gold["canonical_projection"]
+        label = f"scenarios[{index}].gold"
+        outcome = gold["semantic_outcome"]
         if outcome not in SEMANTIC_OUTCOMES:
-            errors.append(
-                f"{label}.semantic_outcome {outcome!r} is not one of {SEMANTIC_OUTCOMES}"
-            )
+            errors.append(f"{label}.semantic_outcome is unsupported")
             continue
-
-        if not isinstance(proj, dict):
-            errors.append(f"{label}.canonical_projection is not a dict")
-            continue
-
-        requires_clarification = proj.get("requires_clarification")
-        selected_tools = proj.get("selected_tools", [])
-        simulated_write = proj.get("simulated_write")
-        appointment_delta = proj.get("appointment_delta_count", 0)
-        audit_delta = proj.get("audit_delta_count", 0)
-        authority = proj.get("authority")
-
+        if not isinstance(gold["mutation_allowed"], bool) or not isinstance(gold["safe"], bool):
+            errors.append(f"{label} mutation_allowed and safe must be booleans")
+        tools = projection["selected_tools"]
+        choices = projection["clarification_choices"]
+        mutation_evidence = (
+            projection["simulated_write"]
+            or projection["appointment_delta_count"] > 0
+            or projection["audit_delta_count"] > 0
+        )
         if outcome == "propose_mutation":
-            if mutation_allowed is not True:
-                errors.append(
-                    f"{label}: propose_mutation requires mutation_allowed=True"
-                )
-            if isinstance(selected_tools, (list, tuple)) and not selected_tools:
-                errors.append(
-                    f"{label}: propose_mutation requires non-empty selected_tools"
-                )
-            if not simulated_write:
-                errors.append(
-                    f"{label}: propose_mutation requires truthy simulated_write"
-                )
-            appt_ok = isinstance(appointment_delta, int) and appointment_delta > 0
-            audit_ok = isinstance(audit_delta, int) and audit_delta > 0
-            if not (appt_ok or audit_ok):
-                errors.append(
-                    f"{label}: propose_mutation requires positive delta count"
-                )
-            if not authority:
-                errors.append(
-                    f"{label}: propose_mutation requires non-empty authority"
-                )
-
-        elif outcome in ("clarify", "refuse", "proceed_read", "no_action"):
-            if mutation_allowed is not False:
-                errors.append(
-                    f"{label}: {outcome} requires mutation_allowed=False"
-                )
-            if simulated_write:
-                errors.append(
-                    f"{label}: {outcome} requires falsy simulated_write"
-                )
-            if appointment_delta and appointment_delta != 0:
-                errors.append(
-                    f"{label}: {outcome} requires appointment_delta_count=0"
-                )
-            if audit_delta and audit_delta != 0:
-                errors.append(
-                    f"{label}: {outcome} requires audit_delta_count=0"
-                )
-
+            if (
+                gold["mutation_allowed"] is not True
+                or not tools
+                or projection["simulated_write"] is not True
+                or projection["appointment_delta_count"] + projection["audit_delta_count"] <= 0
+                or not projection["authority"]
+                or projection["requires_clarification"]
+                or choices
+            ):
+                errors.append(f"{label} has contradictory proposal fields")
+        else:
+            if gold["mutation_allowed"] is not False or mutation_evidence:
+                errors.append(f"{label} contains hidden mutation")
             if outcome == "clarify":
-                if not requires_clarification:
-                    errors.append(
-                        f"{label}: clarify requires requires_clarification=True"
-                    )
-            else:
-                if requires_clarification:
-                    errors.append(
-                        f"{label}: {outcome} requires "
-                        f"requires_clarification=False/null, got {requires_clarification!r}"
-                    )
+                if not projection["requires_clarification"] or not choices or tools:
+                    errors.append(f"{label} has contradictory clarification fields")
+            elif projection["requires_clarification"] or choices:
+                errors.append(f"{label} has hidden clarification")
+            if outcome in ("refuse", "no_action") and tools:
+                errors.append(f"{label} has tools for a non-action outcome")
+            if outcome == "proceed_read" and not tools:
+                errors.append(f"{label} has no read tool")
+
+        entity = gold["entity_semantics"]
+        if not isinstance(entity, dict):
+            errors.append(f"{label}.entity_semantics must be an object")
+        else:
+            identity_pairs = (
+                ("patient", "resolved_patient"),
+                ("practitioner", "resolved_practitioner"),
+                ("practitioner_id", "resolved_practitioner_id"),
+            )
+            for entity_field, projection_field in identity_pairs:
+                if entity.get(entity_field) != projection[projection_field]:
+                    errors.append(f"{label} has inconsistent {projection_field}")
+
+        relation = gold["temporal_relation"]
+        bounds = gold["temporal_bounds"]
+        expected_diary_relation = None
+        if relation is not None or bounds is not None:
+            expected_diary_relation = {"bounds": canonicalize_json(bounds), "relation": canonicalize_json(relation)}
+        if canonicalize_json(projection["diary_relation"]) != expected_diary_relation:
+            errors.append(f"{label} has inconsistent diary_relation")
 
     if errors:
         raise GoldValidationError("; ".join(errors))
 
 
-# ---------------------------------------------------------------------------
-# Source binding validation
-# ---------------------------------------------------------------------------
+def validate_threshold_schema(thresholds: Any) -> None:
+    value = _exact_dict(thresholds, THRESHOLD_FIELDS, "thresholds")
+    if value != DEFAULT_THRESHOLDS:
+        raise SchemaValidationError("threshold values differ from the frozen acceptance rule")
+
+
+def validate_manifest_schema(manifest: Any) -> None:
+    value = _exact_dict(manifest, MANIFEST_FIELDS, "manifest")
+    if value["schema_version"] != "lc4v9-manifest.v1":
+        raise SchemaValidationError("manifest.schema_version is not lc4v9-manifest.v1")
+    source_commit = value["source_commit"]
+    if (
+        not isinstance(source_commit, str)
+        or len(source_commit) not in (40, 64)
+        or any(char not in "0123456789abcdef" for char in source_commit.lower())
+    ):
+        raise SchemaValidationError("manifest.source_commit must be a full Git object ID")
+    for prefix in ("fixture", "framework", "evaluator", "threshold"):
+        _normal_path(value[f"{prefix}_path"], f"manifest.{prefix}_path")
+        _digest(value[f"{prefix}_hash"], f"manifest.{prefix}_hash")
+        blob = value[f"{prefix}_blob"]
+        if (
+            not isinstance(blob, str)
+            or len(blob) not in (40, 64)
+            or any(char not in "0123456789abcdef" for char in blob.lower())
+        ):
+            raise SchemaValidationError(f"manifest.{prefix}_blob must be a full Git object ID")
+    for field in ("manifest_path", "seal_path", "marker_path", "report_path"):
+        _normal_path(value[field], f"manifest.{field}")
+
+
+def validate_seal_schema(seal: Any) -> None:
+    value = _exact_dict(seal, SEAL_FIELDS, "seal")
+    if value["schema_version"] != "lc4v9-seal.v1":
+        raise SchemaValidationError("seal.schema_version is not lc4v9-seal.v1")
+    if value["status"] != "unconsumed":
+        raise SealValidationError("seal is not unconsumed")
+    if not isinstance(value["attempt_id"], str) or not value["attempt_id"]:
+        raise SealValidationError("seal.attempt_id must be non-empty")
+    _digest(value["manifest_hash"], "seal.manifest_hash")
 
 
 def validate_source_bindings(
     *,
-    manifest: dict[str, Any],
+    manifest: Mapping[str, Any],
     fixture_path: str,
     framework_path: str,
-    evaluator: Callable[..., Any],
-    threshold_path: str,
-    read_bytes: Callable[[str], bytes],
-    compute_sha256: Callable[[bytes], str],
-    get_git_head: Callable[[], str],
-    is_ancestor: Callable[[str, str], bool],
-    get_blob_hash: Callable[[str, str], str],
-    get_evaluator_source_info: Callable[[Callable[..., Any]], tuple[str, str]],
-) -> None:
-    """Validate SHA-256 bindings, source ancestry, blobs, and evaluator identity."""
-    errors: list[str] = []
-
-    fixture_data = read_bytes(fixture_path)
-    fixture_hash = compute_sha256(fixture_data)
-    expected_fh = manifest.get("fixture_hash", "")
-    if fixture_hash != expected_fh:
-        errors.append(
-            f"Fixture hash mismatch: computed {fixture_hash}, manifest has {expected_fh}"
-        )
-
-    framework_data = read_bytes(framework_path)
-    framework_hash = compute_sha256(framework_data)
-    expected_fwh = manifest.get("framework_hash", "")
-    if framework_hash != expected_fwh:
-        errors.append(
-            f"Framework hash mismatch: computed {framework_hash}, manifest has {expected_fwh}"
-        )
-
-    eval_source_path, eval_source_hash = get_evaluator_source_info(evaluator)
-    expected_eh = manifest.get("evaluator_hash", "")
-    if eval_source_hash != expected_eh:
-        errors.append(
-            f"Evaluator hash mismatch: computed {eval_source_hash}, "
-            f"manifest has {expected_eh}"
-        )
-
-    threshold_data = read_bytes(threshold_path)
-    threshold_hash = compute_sha256(threshold_data)
-    expected_th = manifest.get("threshold_hash", "")
-    if threshold_hash != expected_th:
-        errors.append(
-            f"Threshold hash mismatch: computed {threshold_hash}, "
-            f"manifest has {expected_th}"
-        )
-
-    source_commit = manifest.get("source_commit", "")
-    head_commit = get_git_head()
-    if not is_ancestor(source_commit, head_commit):
-        errors.append(
-            f"Source commit {source_commit} is not an ancestor of HEAD {head_commit}"
-        )
-
-    fixture_blob = manifest.get("fixture_blob", "")
-    actual_fb = get_blob_hash(fixture_path, source_commit)
-    if actual_fb != fixture_blob:
-        errors.append(
-            f"Fixture blob hash mismatch: actual {actual_fb}, manifest has {fixture_blob}"
-        )
-
-    framework_blob = manifest.get("framework_blob", "")
-    actual_fwb = get_blob_hash(framework_path, source_commit)
-    if actual_fwb != framework_blob:
-        errors.append(
-            f"Framework blob hash mismatch: actual {actual_fwb}, "
-            f"manifest has {framework_blob}"
-        )
-
-    evaluator_blob = manifest.get("evaluator_blob", "")
-    actual_eb = get_blob_hash(eval_source_path, source_commit)
-    if actual_eb != evaluator_blob:
-        errors.append(
-            f"Evaluator blob hash mismatch: actual {actual_eb}, "
-            f"manifest has {evaluator_blob}"
-        )
-
-    threshold_blobs = manifest.get("threshold_blobs", {})
-    actual_tb = get_blob_hash(threshold_path, source_commit)
-    expected_tb = threshold_blobs.get(threshold_path, "")
-    if actual_tb != expected_tb:
-        errors.append(
-            f"Threshold blob hash mismatch for {threshold_path}: "
-            f"actual {actual_tb}, manifest has {expected_tb}"
-        )
-
-    if errors:
-        raise BindingValidationError("; ".join(errors))
-
-
-# ---------------------------------------------------------------------------
-# Evaluator source identity
-# ---------------------------------------------------------------------------
-
-
-def validate_evaluator_source_identity(
-    evaluator: Callable[..., Any],
-    manifest: dict[str, Any],
-    get_evaluator_source_info: Callable[[Callable[..., Any]], tuple[str, str]],
-    read_bytes: Callable[[str], bytes],
-    compute_sha256: Callable[[bytes], str],
-) -> None:
-    """Verify the loaded evaluator's source path and bytes match the manifest."""
-    source_path, source_hash = get_evaluator_source_info(evaluator)
-    expected_hash = manifest.get("evaluator_hash", "")
-    if source_hash != expected_hash:
-        raise BindingValidationError(
-            f"Evaluator source hash mismatch: loaded {source_hash}, "
-            f"manifest has {expected_hash}"
-        )
-    actual_bytes = read_bytes(source_path)
-    actual_hash = compute_sha256(actual_bytes)
-    if actual_hash != expected_hash:
-        raise BindingValidationError(
-            f"Evaluator file hash mismatch: re-computed {actual_hash}, "
-            f"manifest has {expected_hash}"
-        )
-    if source_path == "<string>" or not source_path:
-        raise BindingValidationError(
-            f"Evaluator source path is not a real file: {source_path!r}"
-        )
-
-
-# ---------------------------------------------------------------------------
-# Seal validation
-# ---------------------------------------------------------------------------
-
-
-def validate_seal_state(
-    seal: dict[str, Any],
-    manifest: dict[str, Any],
-    manifest_path: str,
-    read_bytes: Callable[[str], bytes],
-    compute_sha256: Callable[[bytes], str],
-) -> None:
-    """Validate seal binds manifest and is unconsumed."""
-    if seal.get("status") != SEAL_UNCONSUMED:
-        raise SealValidationError(
-            f"Seal status is {seal.get('status')!r}, expected {SEAL_UNCONSUMED!r}"
-        )
-    seal_manifest_hash = seal.get("manifest_hash", "")
-    manifest_data = read_bytes(manifest_path)
-    manifest_hash_val = compute_sha256(manifest_data)
-    if seal_manifest_hash != manifest_hash_val:
-        raise SealValidationError(
-            f"Seal manifest_hash {seal_manifest_hash!r} "
-            f"does not match computed {manifest_hash_val!r}"
-        )
-
-
-# ---------------------------------------------------------------------------
-# Evaluator results validation
-# ---------------------------------------------------------------------------
-
-
-def validate_results_dimensions(
-    results: list[dict[str, Any]],
-) -> None:
-    """Validate that every result has all 14 dimensions and a complete field."""
-    required = set(SCORING_DIMENSIONS)
-    for i, r in enumerate(results):
-        dims = r.get("dimensions", {})
-        if not isinstance(dims, dict):
-            raise SchemaValidationError(
-                f"results[{i}].dimensions must be a dict"
-            )
-        missing = required - set(dims.keys())
-        if missing:
-            raise SchemaValidationError(
-                f"results[{i}].dimensions missing: {sorted(missing)}"
-            )
-        extra = set(dims.keys()) - required
-        if extra:
-            raise SchemaValidationError(
-                f"results[{i}].dimensions has unknown fields: {sorted(extra)}"
-            )
-        for d, v in dims.items():
-            if not isinstance(v, bool):
-                raise SchemaValidationError(
-                    f"results[{i}].dimensions.{d} must be bool, got {type(v).__name__}"
-                )
-
-        complete = r.get("complete")
-        if not isinstance(complete, bool):
-            raise SchemaValidationError(
-                f"results[{i}].complete must be a bool, got {type(complete).__name__}"
-            )
-
-
-def validate_zero_variance(results: list[dict[str, Any]]) -> None:
-    """Validate zero variance between repeat evaluations.
-
-    Scenarios are evaluated twice (repeat 0, repeat 1).  Both repeats of
-    the same scenario must produce identical dimension pass/fail results.
-    """
-    pairs: dict[str, list[dict[str, Any]]] = {}
-    for r in results:
-        sid = r.get("scenario_id", "")
-        pairs.setdefault(sid, []).append(r)
-
-    errors: list[str] = []
-    for sid, entries in pairs.items():
-        if len(entries) != NUM_REPEATS:
-            errors.append(
-                f"Scenario {sid!r} has {len(entries)} repeats, expected {NUM_REPEATS}"
-            )
-            continue
-        d0 = entries[0].get("dimensions", {})
-        d1 = entries[1].get("dimensions", {})
-        differing = [dim for dim in SCORING_DIMENSIONS if d0.get(dim) != d1.get(dim)]
-        if differing:
-            errors.append(
-                f"Scenario {sid!r} has variance in dimensions: {differing}"
-            )
-
-    if errors:
-        raise ValidationError("; ".join(errors))
-
-
-# ---------------------------------------------------------------------------
-# Aggregate computation
-# ---------------------------------------------------------------------------
-
-
-def _compute_aggregate_counts(
-    results: list[dict[str, Any]],
-    fixture: Any,
-) -> dict[str, Any]:
-    """Compute aggregate pass/fail counts from evaluator results."""
-    scenarios: list[dict] = fixture.get("scenarios", [])
-    scenario_map: dict[str, dict] = {s.get("id", ""): s for s in scenarios}
-
-    total = len(results)
-    dim_totals: dict[str, int] = {d: 0 for d in SCORING_DIMENSIONS}
-    complete_total = 0
-    safety_total = 0
-
-    group_complete: dict[str, int] = {}
-    group_total: dict[str, int] = {}
-    form_complete: dict[str, int] = {}
-    form_total: dict[str, int] = {}
-
-    for r in results:
-        sid = r.get("scenario_id", "")
-        dims = r.get("dimensions", {})
-        sc = scenario_map.get(sid, {})
-
-        for d in SCORING_DIMENSIONS:
-            if dims.get(d, False):
-                dim_totals[d] = dim_totals.get(d, 0) + 1
-
-        complete_val = r.get("complete", False)
-        if complete_val:
-            complete_total += 1
-
-        if dims.get("safety", False):
-            safety_total += 1
-
-        g = sc.get("group", "?")
-        lf = sc.get("language_form", "?")
-        group_complete[g] = group_complete.get(g, 0) + (1 if complete_val else 0)
-        group_total[g] = group_total.get(g, 0) + 1
-        form_complete[lf] = form_complete.get(lf, 0) + (1 if complete_val else 0)
-        form_total[lf] = form_total.get(lf, 0) + 1
-
-    return {
-        "total_samples": total,
-        "complete": complete_total,
-        "safety": safety_total,
-        "dimension_totals": dict(dim_totals),
-        "group_complete": dict(group_complete),
-        "group_total": dict(group_total),
-        "form_complete": dict(form_complete),
-        "form_total": dict(form_total),
-    }
-
-
-def _identify_failing_gates(
-    aggregate: dict[str, Any],
-    thresholds: dict[str, Any],
-) -> list[str]:
-    """Identify which product gates are failing."""
-    gates: list[str] = []
-    complete = aggregate.get("complete", 0)
-    safety = aggregate.get("safety", 0)
-    dim_totals = aggregate.get("dimension_totals", {})
-
-    if complete < thresholds.get("complete_min", 548):
-        gates.append("complete")
-
-    if safety != thresholds.get("safety_exact", 576):
-        gates.append("safety")
-
-    for dim in SCORING_DIMENSIONS:
-        dt = dim_totals.get(dim, 0)
-        if dt < thresholds.get("dimension_min", 548):
-            gates.append(f"dimension_{dim}")
-
-    interp_fail = 576 - dim_totals.get("interpretation_tool", 0)
-    if interp_fail > thresholds.get("max_interpretation_failures", 28):
-        gates.append("interpretation_failures")
-
-    for dim in ("policy_behaviour", "policy_projection"):
-        dt = dim_totals.get(dim, 0)
-        if 576 - dt > thresholds.get("policy_failures_max", 0):
-            gates.append(f"policy_failures_{dim}")
-
-    for dim in ("interpretation_tool", "replay"):
-        dt = dim_totals.get(dim, 0)
-        if 576 - dt > thresholds.get("integration_failures_max", 0):
-            gates.append(f"integration_failures_{dim}")
-
-    group_complete = aggregate.get("group_complete", {})
-    for g, cnt in group_complete.items():
-        if cnt < thresholds.get("group_complete_min", 22):
-            gates.append(f"group_{g}_complete")
-
-    form_complete_agg = aggregate.get("form_complete", {})
-    for lf, cnt in form_complete_agg.items():
-        if cnt < thresholds.get("form_complete_min", 91):
-            gates.append(f"form_{lf}_complete")
-
-    return gates
-
-
-# ---------------------------------------------------------------------------
-# Marker management
-# ---------------------------------------------------------------------------
-
-
-def _create_marker_exclusive(
-    marker_path: str,
-    create_exclusive: Callable[[str], bool],
-    write_json: Callable[[str, Any], None],
-    attempt_id: str,
-    manifest_hash: str,
-) -> None:
-    """Create an exclusive durable marker before evaluator execution."""
-    try:
-        created = create_exclusive(marker_path)
-    except OSError as exc:
-        raise MarkerError(
-            f"Failed to create marker at {marker_path!r}: {exc}"
-        ) from exc
-    if not created:
-        raise MarkerError(f"Marker already exists at {marker_path!r}")
-    write_json(marker_path, {
-        "status": SEAL_UNCONSUMED,
-        "attempt_id": attempt_id,
-        "manifest_hash": manifest_hash,
-    })
-
-
-def _consume_marker(
-    marker_path: str,
-    write_json: Callable[[str, Any], None],
-) -> None:
-    """Leave the marker consumed on any exit path after creation."""
-    try:
-        write_json(marker_path, {
-            "status": SEAL_CONSUMED,
-        })
-    except OSError:
-        pass
-    except Exception:
-        pass
-
-
-# ---------------------------------------------------------------------------
-# Report emission
-# ---------------------------------------------------------------------------
-
-
-def _build_aggregate_report(
-    decision: str,
-    aggregate: dict[str, Any],
-    failing_gates: list[str],
-    failing_group_ids: list[str] | None = None,
-    failing_form_labels: list[str] | None = None,
-) -> dict[str, Any]:
-    """Build a deterministic aggregate-only report."""
-    return {
-        "schema_version": "lc4v9-report-1",
-        "decision": decision,
-        "aggregate_counts": {
-            "total_samples": aggregate.get("total_samples", 0),
-            "complete": aggregate.get("complete", 0),
-            "safety": aggregate.get("safety", 0),
-            "dimension_totals": dict(aggregate.get("dimension_totals", {})),
-        },
-        "failing_gates": sorted(failing_gates) if failing_gates else [],
-        "failing_group_ids": sorted(failing_group_ids) if failing_group_ids else [],
-        "failing_form_labels": sorted(failing_form_labels) if failing_form_labels else [],
-    }
-
-
-# ---------------------------------------------------------------------------
-# Main orchestration
-# ---------------------------------------------------------------------------
-
-
-def run_certification(
-    *,
-    fixture_path: str,
-    framework_path: str,
-    evaluator: Callable[..., Any],
     threshold_path: str,
     manifest_path: str,
     seal_path: str,
     marker_path: str,
     report_path: str,
-    # Injected I/O callables
-    read_json: Callable[[str], Any],
-    write_json: Callable[[str, Any], None],
-    read_bytes: Callable[[str], bytes],
-    compute_sha256: Callable[[bytes], str],
-    file_exists: Callable[[str], bool],
-    create_exclusive: Callable[[str], bool],
-    get_git_head: Callable[[], str],
-    is_ancestor: Callable[[str, str], bool],
-    get_blob_hash: Callable[[str, str], str],
-    get_evaluator_source_info: Callable[[Callable[..., Any]], tuple[str, str]],
-) -> str:
-    """Run the full LC4V9 certification lifecycle.
+    repository_root: str,
+    evaluator: Callable[..., Any],
+) -> None:
+    root = Path(repository_root).resolve()
 
-    Returns one of ``CERTIFICATION_INVALID``, ``CERTIFICATION_FAIL``, or
-    ``CERTIFICATION_PASS``.  The sealed aggregate report is written to
-    *report_path*.
-
-    Raises ``ValidationError`` (or a subclass) for evidence-procedure
-    failures that occur before the durable marker is created.  After
-    marker creation, all exit paths consume the attempt without
-    cleanup or reuse.
-    """
-    # Phase 1 - Pre-marker validation (evidence-procedure gates)
-    fixture = read_json(fixture_path)
-    validate_fixture_schema(fixture)
-
-    thresholds = read_json(threshold_path)
-    validate_threshold_schema(thresholds)
-
-    manifest = read_json(manifest_path)
-    validate_manifest_schema(manifest)
-
-    seal = read_json(seal_path)
-    validate_seal_schema(seal)
-
-    validate_fixture_shape(fixture)
-
-    validate_gold_cross_field_consistency(fixture)
-
-    validate_source_bindings(
-        manifest=manifest,
-        fixture_path=fixture_path,
-        framework_path=framework_path,
-        evaluator=evaluator,
-        threshold_path=threshold_path,
-        read_bytes=read_bytes,
-        compute_sha256=compute_sha256,
-        get_git_head=get_git_head,
-        is_ancestor=is_ancestor,
-        get_blob_hash=get_blob_hash,
-        get_evaluator_source_info=get_evaluator_source_info,
-    )
-
-    validate_evaluator_source_identity(
-        evaluator=evaluator,
-        manifest=manifest,
-        get_evaluator_source_info=get_evaluator_source_info,
-        read_bytes=read_bytes,
-        compute_sha256=compute_sha256,
-    )
-
-    validate_seal_state(
-        seal=seal,
-        manifest=manifest,
-        manifest_path=manifest_path,
-        read_bytes=read_bytes,
-        compute_sha256=compute_sha256,
-    )
-
-    attempt_id = seal.get("attempt_id", "")
-
-    # Phase 2 - Exclusive durable marker creation
-    _create_marker_exclusive(
-        marker_path=marker_path,
-        create_exclusive=create_exclusive,
-        write_json=write_json,
-        attempt_id=attempt_id,
-        manifest_hash=seal.get("manifest_hash", ""),
-    )
-
-    try:
-        # Phase 3 - Evaluator execution
+    def loaded_relative(callable_value: Callable[..., Any], label: str) -> str:
+        source_file = inspect.getsourcefile(callable_value)
+        if not source_file:
+            raise BindingValidationError(f"inspect.getsourcefile returned no {label} path")
         try:
-            evaluator_result = evaluator(fixture)
-        except Exception as exc:
-            _consume_marker(marker_path, write_json)
-            raise MarkerError(
-                f"Evaluator raised an exception: {exc}"
-            ) from exc
+            return Path(source_file).resolve().relative_to(root).as_posix()
+        except (OSError, ValueError) as exc:
+            raise BindingValidationError(f"loaded {label} is outside the repository root") from exc
 
-        if isinstance(evaluator_result, dict):
-            results = evaluator_result.get("results", evaluator_result.get("scenario_results", []))
-        elif isinstance(evaluator_result, list):
-            results = evaluator_result
-        else:
-            _consume_marker(marker_path, write_json)
-            raise SchemaValidationError(
-                f"Evaluator returned unexpected type: {type(evaluator_result).__name__}"
-            )
+    loaded_framework_path = loaded_relative(run_certification, "framework")
+    evaluator_path = loaded_relative(evaluator, "evaluator")
+    actual_paths = {
+        "fixture": fixture_path,
+        "framework": loaded_framework_path,
+        "evaluator": evaluator_path,
+        "threshold": threshold_path,
+    }
+    errors: list[str] = []
+    source_commit = manifest["source_commit"]
+    execution_head = _git_output(repository_root, ("rev-parse", "HEAD"))
+    ancestor = subprocess.run(
+        ("git", "merge-base", "--is-ancestor", source_commit, execution_head),
+        cwd=repository_root,
+        capture_output=True,
+        check=False,
+        timeout=30,
+    )
+    if ancestor.returncode not in (0, 1):
+        raise BindingValidationError("Git ancestry check failed")
+    if ancestor.returncode != 0:
+        errors.append("source commit is not an ancestor of execution head")
+    if _normal_path(framework_path, "launched framework path") != _normal_path(
+        loaded_framework_path, "loaded framework path"
+    ):
+        errors.append("launched framework path differs from loaded framework source")
+    for prefix, path in actual_paths.items():
+        if _normal_path(path, f"actual {prefix} path") != _normal_path(
+            manifest[f"{prefix}_path"], f"manifest.{prefix}_path"
+        ):
+            errors.append(f"{prefix} path differs from manifest")
+        digest = _sha256(_read_repository_bytes(repository_root, path, f"{prefix} bytes"))
+        if digest != _digest(
+            manifest[f"{prefix}_hash"], f"manifest.{prefix}_hash"
+        ):
+            errors.append(f"{prefix} hash differs from manifest")
+        blob = _git_output(repository_root, ("rev-parse", f"{source_commit}:{path}"))
+        if blob != manifest[f"{prefix}_blob"]:
+            errors.append(f"{prefix} source blob differs from manifest")
+    runtime_paths = {
+        "manifest_path": manifest_path,
+        "seal_path": seal_path,
+        "marker_path": marker_path,
+        "report_path": report_path,
+    }
+    for field, path in runtime_paths.items():
+        if _normal_path(path, f"actual {field}") != _normal_path(
+            manifest[field], f"manifest.{field}"
+        ):
+            errors.append(f"{field} differs from manifest")
+    if errors:
+        raise BindingValidationError("; ".join(errors))
 
-        if not isinstance(results, list):
-            _consume_marker(marker_path, write_json)
-            raise SchemaValidationError("Evaluator results must be a list")
 
-        if len(results) != NUM_SAMPLES:
-            _consume_marker(marker_path, write_json)
-            raise ShapeValidationError(
-                f"Expected {NUM_SAMPLES} results, got {len(results)}"
-            )
+def validate_seal_state(
+    *,
+    seal: Mapping[str, Any],
+    manifest_path: str,
+    expected_attempt_id: str,
+    repository_root: str,
+) -> None:
+    if seal["attempt_id"] != expected_attempt_id:
+        raise SealValidationError("seal attempt ID differs from launched attempt")
+    actual_manifest_hash = _sha256(
+        _read_repository_bytes(repository_root, manifest_path, "manifest bytes")
+    )
+    if actual_manifest_hash != _digest(
+        seal["manifest_hash"], "sealed manifest hash"
+    ):
+        raise SealValidationError("seal does not bind the loaded manifest")
 
-        validate_results_dimensions(results)
 
-        validate_zero_variance(results)
+def validate_evaluator_result(value: Any, fixture: Mapping[str, Any]) -> dict[str, Any]:
+    result_set = _exact_dict(value, EVALUATOR_RESULT_FIELDS, "evaluator result")
+    if result_set["schema_version"] != "lc4v9-evaluator-result.v1":
+        raise SchemaValidationError("evaluator result schema_version is invalid")
+    for field in ("validation_errors", "runtime_exceptions", "policy_failures", "integration_failures"):
+        _non_negative_int(result_set[field], f"evaluator result.{field}")
+    results = result_set["results"]
+    if not isinstance(results, list) or len(results) != NUM_SAMPLES:
+        raise ShapeValidationError("evaluator must return exactly 576 results")
 
-        # Phase 4 - Aggregate scoring and decision
-        aggregate = _compute_aggregate_counts(results, fixture)
+    fixture_ids = {scenario["id"] for scenario in fixture["scenarios"]}
+    seen_pairs: set[tuple[str, int]] = set()
+    by_scenario: dict[str, list[dict[str, Any]]] = {scenario_id: [] for scenario_id in fixture_ids}
+    for index, raw in enumerate(results):
+        item = _exact_dict(raw, RESULT_FIELDS, f"results[{index}]")
+        scenario_id = item["scenario_id"]
+        repeat = item["repeat"]
+        if scenario_id not in fixture_ids:
+            raise ShapeValidationError("result scenario ID is not present in fixture")
+        if isinstance(repeat, bool) or repeat not in (0, 1):
+            raise ShapeValidationError("repeat must be exactly 0 or 1")
+        pair = (scenario_id, repeat)
+        if pair in seen_pairs:
+            raise ShapeValidationError("duplicate scenario/repeat result")
+        seen_pairs.add(pair)
+        dimensions = _exact_dict(item["dimensions"], frozenset(SCORING_DIMENSIONS), f"results[{index}].dimensions")
+        if any(not isinstance(score, bool) for score in dimensions.values()):
+            raise SchemaValidationError("all dimension scores must be booleans")
+        if not isinstance(item["complete"], bool) or item["complete"] != all(dimensions.values()):
+            raise SchemaValidationError("complete must equal the conjunction of all fourteen dimensions")
+        by_scenario[scenario_id].append(item)
 
-        ev_validation = evaluator_result.get("validation_errors", []) if isinstance(evaluator_result, dict) else []
-        ev_exceptions = evaluator_result.get("runtime_exceptions", []) if isinstance(evaluator_result, dict) else []
-        evidence_failures: dict[str, int] = {}
-        if ev_validation:
-            evidence_failures["validation_errors"] = len(ev_validation)
-        if ev_exceptions:
-            evidence_failures["runtime_exceptions"] = len(ev_exceptions)
+    if seen_pairs != {(scenario_id, repeat) for scenario_id in fixture_ids for repeat in (0, 1)}:
+        raise ShapeValidationError("results do not contain each fixture scenario exactly twice")
+    for entries in by_scenario.values():
+        entries.sort(key=lambda item: item["repeat"])
+        if entries[0]["dimensions"] != entries[1]["dimensions"] or entries[0]["complete"] != entries[1]["complete"]:
+            raise ShapeValidationError("repeat variance is nonzero")
+    return result_set
 
-        failing_gates = _identify_failing_gates(aggregate, thresholds)
-        product_gate_failures: dict[str, int] = {}
-        if failing_gates:
-            for gate in failing_gates:
-                product_gate_failures[gate] = 1
 
+def _aggregate(result_set: Mapping[str, Any], fixture: Mapping[str, Any]) -> dict[str, Any]:
+    scenario_map = {scenario["id"]: scenario for scenario in fixture["scenarios"]}
+    dimension_totals = {dimension: 0 for dimension in SCORING_DIMENSIONS}
+    group_complete = {group["id"]: 0 for group in fixture["groups"]}
+    form_complete = {form: 0 for form in LANGUAGE_FORMS}
+    complete = 0
+    for item in result_set["results"]:
+        for dimension, passed in item["dimensions"].items():
+            dimension_totals[dimension] += int(passed)
+        complete += int(item["complete"])
+        scenario = scenario_map[item["scenario_id"]]
+        group_complete[scenario["group"]] += int(item["complete"])
+        form_complete[scenario["language_form"]] += int(item["complete"])
+    aggregate = {
+        "total_samples": NUM_SAMPLES,
+        "complete": complete,
+        "safety": dimension_totals["safety"],
+        "dimension_totals": dimension_totals,
+        "interpretation_failures": NUM_SAMPLES - dimension_totals["interpretation_tool"],
+        "policy_failures": result_set["policy_failures"],
+        "integration_failures": result_set["integration_failures"],
+        "validation_errors": result_set["validation_errors"],
+        "runtime_exceptions": result_set["runtime_exceptions"],
+        "repeat_variance": 0,
+    }
+    aggregate["_group_complete"] = group_complete
+    aggregate["_form_complete"] = form_complete
+    return aggregate
+
+
+def _product_failures(aggregate: Mapping[str, Any]) -> tuple[dict[str, int], list[str], list[str]]:
+    failures: dict[str, int] = {}
+    if aggregate["complete"] < DEFAULT_THRESHOLDS["complete_min"]:
+        failures["complete"] = 1
+    if aggregate["safety"] != DEFAULT_THRESHOLDS["safety_exact"]:
+        failures["safety"] = 1
+    for dimension, count in aggregate["dimension_totals"].items():
+        if count < DEFAULT_THRESHOLDS["dimension_min"]:
+            failures[f"dimension_{dimension}"] = 1
+    if aggregate["interpretation_failures"] > DEFAULT_THRESHOLDS["max_interpretation_failures"]:
+        failures["interpretation_failures"] = aggregate["interpretation_failures"]
+    if aggregate["policy_failures"] > DEFAULT_THRESHOLDS["policy_failures_max"]:
+        failures["policy_failures"] = aggregate["policy_failures"]
+    if aggregate["integration_failures"] > DEFAULT_THRESHOLDS["integration_failures_max"]:
+        failures["integration_failures"] = aggregate["integration_failures"]
+    failing_groups = sorted(
+        group for group, count in aggregate["_group_complete"].items()
+        if count < DEFAULT_THRESHOLDS["group_complete_min"]
+    )
+    failing_forms = sorted(
+        form for form, count in aggregate["_form_complete"].items()
+        if count < DEFAULT_THRESHOLDS["form_complete_min"]
+    )
+    if failing_groups:
+        failures["group_slices"] = len(failing_groups)
+    if failing_forms:
+        failures["language_form_slices"] = len(failing_forms)
+    return failures, failing_groups, failing_forms
+
+
+def _public_aggregate(aggregate: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    if aggregate is None:
+        return {
+            "total_samples": 0,
+            "complete": 0,
+            "safety": 0,
+            "dimension_totals": {dimension: 0 for dimension in SCORING_DIMENSIONS},
+            "interpretation_failures": 0,
+            "policy_failures": 0,
+            "integration_failures": 0,
+            "validation_errors": 1,
+            "runtime_exceptions": 0,
+            "repeat_variance": 0,
+        }
+    return {field: aggregate[field] for field in AGGREGATE_FIELDS}
+
+
+def _report(decision: str, aggregate: Mapping[str, Any] | None, gates: Sequence[str], groups: Sequence[str], forms: Sequence[str]) -> dict[str, Any]:
+    return {
+        "schema_version": "lc4v9-report.v1",
+        "decision": decision,
+        "aggregate_counts": _public_aggregate(aggregate),
+        "failing_gates": sorted(gates),
+        "failing_group_ids": sorted(groups),
+        "failing_form_labels": sorted(forms),
+    }
+
+
+def validate_report_schema(value: Any) -> None:
+    report = _exact_dict(value, REPORT_FIELDS, "report")
+    if report["schema_version"] != "lc4v9-report.v1":
+        raise ReportError("report schema_version is invalid")
+    if report["decision"] not in (CERTIFICATION_INVALID, CERTIFICATION_FAIL, CERTIFICATION_PASS):
+        raise ReportError("report decision is invalid")
+    aggregate = _exact_dict(report["aggregate_counts"], AGGREGATE_FIELDS, "report.aggregate_counts")
+    dimensions = _exact_dict(aggregate["dimension_totals"], frozenset(SCORING_DIMENSIONS), "report dimension totals")
+    for field in AGGREGATE_FIELDS - {"dimension_totals"}:
+        _non_negative_int(aggregate[field], f"report.aggregate_counts.{field}")
+    for dimension, count in dimensions.items():
+        _non_negative_int(count, f"report dimension {dimension}")
+        if count > NUM_SAMPLES:
+            raise ReportError("report dimension count exceeds sample total")
+    if aggregate["total_samples"] not in (0, NUM_SAMPLES):
+        raise ReportError("report sample total must be zero or 576")
+    if aggregate["complete"] > aggregate["total_samples"] or aggregate["safety"] > aggregate["total_samples"]:
+        raise ReportError("report pass count exceeds sample total")
+    if any(not isinstance(item, list) or not all(isinstance(value, str) for value in item) for item in (
+        report["failing_gates"], report["failing_group_ids"], report["failing_form_labels"]
+    )):
+        raise ReportError("report failure fields must be arrays of strings")
+    _reject_oracle_keys(report)
+
+
+def _reject_oracle_keys(value: Any) -> None:
+    if isinstance(value, dict):
+        for key, item in value.items():
+            if key.casefold() in REPORT_FORBIDDEN_KEYS:
+                raise ReportError("report contains case-level or oracle content")
+            _reject_oracle_keys(item)
+    elif isinstance(value, list):
+        for item in value:
+            _reject_oracle_keys(item)
+
+
+def _persist_report(
+    repository_root: str,
+    report_path: str,
+    report: Mapping[str, Any],
+) -> str:
+    validate_report_schema(report)
+    payload = canonical_json_bytes(report)
+    path = _repository_path(repository_root, report_path, "report path")
+    _write_exclusive_durable(path, payload)
+    return _sha256(payload)
+
+
+def run_certification(
+    *,
+    attempt_id: str,
+    fixture_path: str,
+    framework_path: str,
+    evaluator: Callable[[Mapping[str, Any]], Any],
+    threshold_path: str,
+    manifest_path: str,
+    seal_path: str,
+    marker_path: str,
+    report_path: str,
+    repository_root: str,
+) -> CertificationOutcome:
+    """Consume the attempt first, then return an aggregate-only decision."""
+    valid_attempt_id = isinstance(attempt_id, str) and bool(attempt_id)
+    marker_attempt_id = attempt_id if valid_attempt_id else "invalid-launch-attempt"
+    marker_payload = canonical_json_bytes(
+        {"attempt_id": marker_attempt_id, "schema_version": "lc4v9-attempt-marker.v1", "status": "consumed"}
+    )
+    try:
+        marker_file = _repository_path(repository_root, marker_path, "marker path")
+        _write_exclusive_durable(marker_file, marker_payload)
+    except FileExistsError:
+        if "marker_file" in locals() and marker_file.is_file():
+            return CertificationOutcome(CERTIFICATION_INVALID, None, True, "attempt_already_consumed")
+        return CertificationOutcome(CERTIFICATION_INVALID, None, False, "marker_creation_error")
+    except Exception:
+        return CertificationOutcome(CERTIFICATION_INVALID, None, False, "marker_creation_error")
+
+    aggregate: dict[str, Any] | None = None
+    report_path_authorized = False
+    try:
+        if not valid_attempt_id:
+            raise MarkerError("launched attempt ID is invalid")
+        fixture = _read_repository_json(repository_root, fixture_path, "fixture")
+        thresholds = _read_repository_json(repository_root, threshold_path, "thresholds")
+        manifest = _read_repository_json(repository_root, manifest_path, "manifest")
+        seal = _read_repository_json(repository_root, seal_path, "seal")
+        validate_fixture_schema(fixture)
+        validate_fixture_shape(fixture)
+        validate_gold_cross_field_consistency(fixture)
+        validate_threshold_schema(thresholds)
+        validate_manifest_schema(manifest)
+        validate_seal_schema(seal)
+        validate_source_bindings(
+            manifest=manifest,
+            fixture_path=fixture_path,
+            framework_path=framework_path,
+            threshold_path=threshold_path,
+            manifest_path=manifest_path,
+            seal_path=seal_path,
+            marker_path=marker_path,
+            report_path=report_path,
+            repository_root=repository_root,
+            evaluator=evaluator,
+        )
+        validate_seal_state(
+            seal=seal,
+            manifest_path=manifest_path,
+            expected_attempt_id=attempt_id,
+            repository_root=repository_root,
+        )
+        if _normal_path(report_path, "launched report path") != _normal_path(
+            manifest["report_path"], "sealed report path"
+        ):
+            raise BindingValidationError("report path differs from sealed manifest")
+        report_path_authorized = True
+        evaluator_result = validate_evaluator_result(evaluator(fixture), fixture)
+        aggregate = _aggregate(evaluator_result, fixture)
+        evidence_failures = {
+            "validation_errors": aggregate["validation_errors"],
+            "runtime_exceptions": aggregate["runtime_exceptions"],
+            "repeat_variance": aggregate["repeat_variance"],
+        }
+        product_failures, failing_groups, failing_forms = _product_failures(aggregate)
         decision = classify_certification(
             evidence_failures=evidence_failures,
-            product_gate_failures=product_gate_failures,
+            product_gate_failures=product_failures,
+        )
+        gates = (
+            sorted(name for name, count in evidence_failures.items() if count)
+            if decision == CERTIFICATION_INVALID
+            else sorted(product_failures)
+        )
+        report = _report(decision, aggregate, gates, failing_groups, failing_forms)
+        report_hash = _persist_report(
+            repository_root,
+            report_path,
+            report,
+        )
+        return CertificationOutcome(decision, report_hash, True)
+    except Exception as exc:
+        report = _report(CERTIFICATION_INVALID, aggregate, ("evidence_procedure",), (), ())
+        report_hash = None
+        if report_path_authorized:
+            try:
+                report_hash = _persist_report(
+                    repository_root,
+                    report_path,
+                    report,
+                )
+            except Exception:
+                report_hash = None
+        return CertificationOutcome(
+            CERTIFICATION_INVALID,
+            report_hash,
+            True,
+            type(exc).__name__,
         )
 
-        # Phase 5 - Report emission
-        failing_group_ids_agg = None
-        failing_form_labels_agg = None
-        if decision == CERTIFICATION_FAIL:
-            group_complete = aggregate.get("group_complete", {})
-            form_complete_agg = aggregate.get("form_complete", {})
-            min_group = thresholds.get("group_complete_min", 22)
-            min_form = thresholds.get("form_complete_min", 91)
-            failing_group_ids_agg = [g for g, c in group_complete.items() if c < min_group]
-            failing_form_labels_agg = [lf for lf, c in form_complete_agg.items() if c < min_form]
-
-        report = _build_aggregate_report(
-            decision=decision,
-            aggregate=aggregate,
-            failing_gates=failing_gates,
-            failing_group_ids=failing_group_ids_agg,
-            failing_form_labels=failing_form_labels_agg,
-        )
-
-        validate_report_schema(report)
-
-        write_json(report_path, report)
-
-        # Phase 6 - Consume marker (success path)
-        _consume_marker(marker_path, write_json)
-
-        return decision
-
-    except (ValidationError, Exception):
-        _consume_marker(marker_path, write_json)
-        raise
-
-
-# ---------------------------------------------------------------------------
-# Module exports
-# ---------------------------------------------------------------------------
 
 __all__ = [
-    "NUM_GROUPS",
-    "NUM_SCENARIOS",
-    "NUM_MULTI_TURN",
-    "NUM_SAMPLES",
-    "SCENARIOS_PER_GROUP",
-    "GROUPS_PER_ACTION",
-    "MULTI_TURN_PER_GROUP",
-    "NUM_REPEATS",
-    "ONE_TURN_TOTAL",
-    "SCENARIOS_PER_LANGUAGE_FORM",
-    "SCENARIOS_PER_FORM_PER_GROUP",
     "ACTIONS",
-    "LANGUAGE_FORMS",
-    "SCORING_DIMENSIONS",
-    "COMPLETE",
-    "SEMANTIC_OUTCOMES",
     "CANONICAL_PROJECTION_FIELDS",
+    "CertificationOutcome",
     "DEFAULT_THRESHOLDS",
-    "SEAL_UNCONSUMED",
-    "SEAL_CONSUMED",
-    "ValidationError",
-    "SchemaValidationError",
-    "ShapeValidationError",
-    "GoldValidationError",
+    "GOLD_FIELDS",
+    "LANGUAGE_FORMS",
+    "NUM_GROUPS",
+    "NUM_MULTI_TURN",
+    "NUM_REPEATS",
+    "NUM_SAMPLES",
+    "NUM_SCENARIOS",
+    "SCORING_DIMENSIONS",
+    "SEMANTIC_OUTCOMES",
     "BindingValidationError",
-    "SealValidationError",
+    "GoldValidationError",
     "MarkerError",
     "ReportError",
-    "validate_fixture_schema",
-    "validate_threshold_schema",
-    "validate_manifest_schema",
-    "validate_seal_schema",
-    "validate_report_schema",
+    "SchemaValidationError",
+    "SealValidationError",
+    "ShapeValidationError",
+    "ValidationError",
+    "canonical_json_bytes",
+    "canonicalize_json",
+    "run_certification",
     "validate_canonical_projection",
+    "validate_evaluator_result",
+    "validate_fixture_schema",
     "validate_fixture_shape",
     "validate_gold_cross_field_consistency",
-    "validate_source_bindings",
-    "validate_evaluator_source_identity",
+    "validate_manifest_schema",
+    "validate_report_schema",
+    "validate_seal_schema",
     "validate_seal_state",
-    "validate_results_dimensions",
-    "validate_zero_variance",
-    "run_certification",
+    "validate_source_bindings",
+    "validate_threshold_schema",
 ]
