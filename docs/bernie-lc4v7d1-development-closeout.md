@@ -2,7 +2,7 @@
 
 Date: 2026-07-16
 
-Decision: `development_exit_pass_pending_independent_exact_head_review`
+Decision: `development_exit_pass`
 
 LC4V7D1 used only the 24 fresh inspectable ordinary-development probes frozen
 in the Sol contract. Protected holdouts v1-v7 were not opened, enumerated,
@@ -83,14 +83,18 @@ passed 680 nodes after deselecting exactly 16 documented historical nodes:
 The underlying D2-D4 case checks continue to pass. Their committed reports
 were not regenerated or rewritten.
 
-## Conditional V8 exit
+## Independent review and V8 exit
 
-All product and evidence conditions for the already-authorized V8 path are
-satisfied except the required fresh exact-head Gemini review. If that review
-returns `DECISION: pass`, LC4V7D1 closes and LC4V8 may begin without another
-user decision. V8 must be genuinely fresh, content-blind before authorship,
-use the generic certification decision taxonomy, and never reuse V7 protected
-implementation or content.
+Gemini 3.5 Flash independently returned `DECISION: pass` on exact recovered
+head `19d507634adb40dd2649db3823daf8e3afde9160`. It reproduced the 336-node
+focused gate with two historical deselections, all final evidence hashes and
+counts, the empty selection, the four rule repairs, and the full 16-node
+preservation accounting. It found zero scope or evidence defect.
+
+All conditions for the already-authorized V8 path are satisfied. LC4V7D1 is
+closed and V8 may begin without another user decision. V8 must be genuinely
+fresh, content-blind before authorship, use the generic certification decision
+taxonomy, and never reuse V7 protected implementation or content.
 
 T3.1-T3.4 remain intact and blocked. T3.5/providers, historical data,
 runtime/product wiring, APIs, UI, database, deployment, release, and all
