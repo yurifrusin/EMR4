@@ -56,6 +56,63 @@ _TIME_PATTERNS = [
     re.compile(r"(?P<hour>\d{1,2})\s*(?P<ampm>am|pm)\b", re.IGNORECASE),
 ]
 
+_HOUR_WORD_PATTERN = (
+    r"one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve"
+)
+_MINUTE_WORD_PATTERN = (
+    r"zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|"
+    r"thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|"
+    r"(?:twenty|thirty|forty|fifty)(?:\s+(?:one|two|three|four|five|six|seven|eight|nine))?"
+)
+_HUNDRED_HOUR_PATTERN = (
+    r"zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|"
+    r"thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|"
+    r"twenty(?:\s+(?:one|two|three))?"
+)
+
+# Longest and most specific spoken forms run first. Overlap suppression keeps
+# ``nine am`` from becoming a second time inside ``half past nine am``.
+_SPOKEN_TIME_PATTERNS: list[tuple[str, re.Pattern[str]]] = [
+    (
+        "quarter",
+        re.compile(
+            rf"\bquarter\s+(?P<direction>past|to)\s+"
+            rf"(?P<hour>{_HOUR_WORD_PATTERN})\s*(?P<ampm>am|pm)\b",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        "half_past",
+        re.compile(
+            rf"\bhalf\s+past\s+(?P<hour>{_HOUR_WORD_PATTERN})\s*"
+            rf"(?P<ampm>am|pm)\b",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        "hour_minute",
+        re.compile(
+            rf"\b(?P<hour>{_HOUR_WORD_PATTERN})\s+"
+            rf"(?P<minute>{_MINUTE_WORD_PATTERN})\s*(?P<ampm>am|pm)\b",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        "hour",
+        re.compile(
+            rf"\b(?P<hour>{_HOUR_WORD_PATTERN})\s*(?P<ampm>am|pm)\b",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        "hundred",
+        re.compile(
+            rf"\b(?P<hour>{_HUNDRED_HOUR_PATTERN})\s+hundred\b",
+            re.IGNORECASE,
+        ),
+    ),
+]
+
 _OPERATOR_WORDS: frozenset[str] = frozenset({
     "at",
     "before",
@@ -115,6 +172,7 @@ def _detect_time_forms(original: str) -> Dict[str, str]:
         dict mapping the detected fragment string -> canonical HH:MM.
     """
     detected: Dict[str, str] = {}
+    occupied: list[Tuple[int, int]] = []
     for pat in _TIME_PATTERNS:
         for m in pat.finditer(original):
             fragment = m.group(0).strip()
@@ -142,6 +200,54 @@ def _detect_time_forms(original: str) -> Dict[str, str]:
             elif ampm == "am" and hour == 12:
                 hour = 0
             detected[fragment] = f"{hour:02d}:{minute:02d}"
+            occupied.append(m.span())
+
+    def overlaps(span: Tuple[int, int]) -> bool:
+        return any(span[0] < prior[1] and prior[0] < span[1] for prior in occupied)
+
+    for kind, pattern in _SPOKEN_TIME_PATTERNS:
+        for match in pattern.finditer(original):
+            if overlaps(match.span()):
+                continue
+            fragment = match.group(0)
+            minute = 0
+            ampm: str | None = None
+            if kind == "hundred":
+                # Compound 24-hour words such as ``twenty three hundred``.
+                hour = sum(
+                    int(_NUMBER_WORDS[word])
+                    for word in match.group("hour").lower().split()
+                )
+                if not 0 <= hour <= 23:
+                    continue
+            else:
+                hour = int(_NUMBER_WORDS[match.group("hour").lower()])
+                ampm = match.group("ampm").lower()
+                if kind == "half_past":
+                    minute = 30
+                elif kind == "quarter":
+                    direction = match.group("direction").lower()
+                    if ampm == "pm" and hour != 12:
+                        hour += 12
+                    elif ampm == "am" and hour == 12:
+                        hour = 0
+                    if direction == "past":
+                        minute = 15
+                    else:
+                        total_minutes = (hour * 60 - 15) % (24 * 60)
+                        hour, minute = divmod(total_minutes, 60)
+                    ampm = None  # conversion already applied
+                elif kind == "hour_minute":
+                    minute = sum(
+                        int(_NUMBER_WORDS[word])
+                        for word in match.group("minute").lower().split()
+                    )
+                if ampm == "pm" and hour != 12:
+                    hour += 12
+                elif ampm == "am" and hour == 12:
+                    hour = 0
+            detected[fragment] = f"{hour:02d}:{minute:02d}"
+            occupied.append(match.span())
     return detected
 
 

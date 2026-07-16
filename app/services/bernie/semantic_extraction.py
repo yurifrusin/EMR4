@@ -708,6 +708,12 @@ _OPEN_BOUND_AT_TIME = re.compile(
     re.I,
 )
 
+_NEGATED_BOUND_TIME = re.compile(
+    r"\bnot\s+(?P<operator>before|after)\s+"
+    r"(?P<time>(?:[01]?\d|2[0-3])(?:[:.][0-5]\d)?\s*(?:am|pm)?)\b",
+    re.I,
+)
+
 
 def _extract_time_period(text: str) -> str | None:
     """Extract time period like 'afternoon' from text."""
@@ -744,6 +750,17 @@ def _extract_temporal(
     if _SOMETIME_AFTERNOON.search(text):
         return "unspecified", None, None
 
+    # ``not before`` is a lower bound and ``not after`` is an upper bound.
+    # Handle these authority-bearing phrases before the shared helper, whose
+    # generic negation treatment otherwise reverses them.
+    negated_bound_match = _NEGATED_BOUND_TIME.search(text)
+    if negated_bound_match:
+        parsed = parse_time_fragment(negated_bound_match.group("time"))
+        if parsed is not None:
+            if negated_bound_match.group("operator").lower() == "before":
+                return "not_before", parsed, None
+            return "not_after", None, parsed
+
     # Preserve an explicit open-bound operator through speech-like filler.
     # The shared temporal helper correctly prioritises ordinary "after 3pm"
     # and "before 5pm", but its generic ``at`` rule would otherwise turn
@@ -755,6 +772,33 @@ def _extract_temporal(
             if open_bound_match.group("operator").lower() == "after":
                 return "not_before", parsed, None
             return "not_after", None, parsed
+
+    # Lossless normalization retains spoken fragments and their source spans
+    # while supplying canonical HH:MM values. Consume only derived values;
+    # never replace the original utterance evidence.
+    normalized = normalize_utterance(text)
+    spoken_times = [
+        (fragment, canonical)
+        for fragment, canonical in normalized.time_forms.items()
+        if not any(character.isdigit() for character in fragment)
+    ]
+    if spoken_times:
+        spoken_times.sort(
+            key=lambda item: normalized.source_spans.get(
+                f"time:{item[0]}", (len(text), len(text))
+            )[0]
+        )
+        values = [canonical for _fragment, canonical in spoken_times]
+        if len(values) >= 2 and re.search(r"\bbetween\b", text, re.I):
+            return "interval", values[0], values[1]
+        canonical = values[0]
+        if re.search(r"\b(?:after|not\s+before)\b", text, re.I):
+            return "not_before", canonical, None
+        if re.search(r"\b(?:before|not\s+after)\b", text, re.I):
+            return "not_after", None, canonical
+        if re.search(r"\b(?:around|about)\b", text, re.I):
+            return "approximate", canonical, canonical
+        return "exact", canonical, canonical
 
     extraction = extract_natural_time_constraints(text)
 
@@ -811,6 +855,21 @@ def _extract_duration_alternatives(utterances: list[str]) -> tuple[str, ...]:
     return ()
 
 
+def _extract_practitioner_alternatives(
+    utterances: list[str],
+) -> tuple[str, ...]:
+    """Return only explicit ``Dr X or Dr Y`` alternatives in source order."""
+    pattern = re.compile(
+        r"\b(Dr\s+(?-i:[A-Z])[a-z]+)\s+or\s+"
+        r"(Dr\s+(?-i:[A-Z])[a-z]+)\b"
+    )
+    for utterance in utterances:
+        match = pattern.search(utterance)
+        if match:
+            return match.group(1), match.group(2)
+    return ()
+
+
 def _determine_clarification(
     utterances: list[str],
     intended_action: str | None,
@@ -844,6 +903,12 @@ def _determine_clarification(
     if intended_action is None:
         return True, ()  # Unknown action -> clarify
 
+    # Practitioner ambiguity is action-independent. Surface only choices
+    # actually present in the dialogue; generic ``some doctor`` wording has
+    # no lossless alternatives to invent.
+    if practitioner_semantics == "ambiguous":
+        return True, _extract_practitioner_alternatives(utterances)
+
     if intended_action == "create":
         needs_clarify = False
         choices: list[str] = []
@@ -865,12 +930,9 @@ def _determine_clarification(
             needs_clarify = True
             choices = []
         # Negated or ambiguous practitioner requires clarification
-        elif practitioner_semantics in ("ambiguous", "negated"):
+        elif practitioner_semantics == "negated":
             needs_clarify = True
-            if practitioner_semantics == "ambiguous":
-                choices = ["Dr Taylor", "Dr Patel", "Dr Chen"]
-            else:
-                choices = []
+            choices = []
         elif has_sometime and not has_time_bounds:
             choices = ["1pm", "2pm", "3pm", "4pm"]
         # Date present but no time bounds → clarify for time
@@ -1334,24 +1396,44 @@ def _derive_final_temporal(
 ) -> tuple[str, str | None, str | None]:
     """Derive the final temporal relation from all utterances.
 
-    Scans all utterances and uses the last non-unspecified temporal
-    information, so that an additive or corrective later turn that
-    supplies a missing time takes precedence over the first turn's
-    ``"unspecified"``.
+    Complementary open bounds in additive turns compose into an interval.
+    Corrections and session restarts replace the complete prior relation so a
+    stale opposite bound cannot leak into the final state.
     """
     final_relation: str = "unspecified"
     final_earliest: str | None = None
     final_latest: str | None = None
 
-    for utterance in utterances:
+    for index, utterance in enumerate(utterances):
         relation, earliest, latest = _extract_temporal(utterance)
         if relation != "unspecified" or earliest is not None or latest is not None:
-            final_relation = relation
-            # Later temporal evidence replaces the complete relation.  Clear
-            # absent bounds so exact -> not_before/not_after corrections do not
-            # leak a stale opposite bound into the top-level observation.
-            final_earliest = earliest
-            final_latest = latest
+            replaces_prior = index > 0 and (
+                _is_correction_turn(utterance)
+                or _SESSION_RESTART_CUE.search(utterance) is not None
+            )
+            complementary = (
+                (final_relation == "not_before" and relation == "not_after")
+                or (final_relation == "not_after" and relation == "not_before")
+            )
+            refines_interval = final_relation == "interval" and relation in {
+                "not_before", "not_after"
+            }
+
+            if not replaces_prior and complementary:
+                if earliest is not None:
+                    final_earliest = earliest
+                if latest is not None:
+                    final_latest = latest
+                final_relation = "interval"
+            elif not replaces_prior and refines_interval:
+                if relation == "not_before":
+                    final_earliest = earliest
+                else:
+                    final_latest = latest
+            else:
+                final_relation = relation
+                final_earliest = earliest
+                final_latest = latest
 
     # Fall back to normalized_values if no utterance had temporal info
     if final_relation == "unspecified" and normalized_values.get("earliest_time"):

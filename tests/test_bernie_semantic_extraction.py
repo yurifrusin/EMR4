@@ -398,6 +398,51 @@ class TestTemporalRelations:
         assert result.temporal_relation == "not_after"
         assert result.latest_time is not None
 
+    @pytest.mark.parametrize(
+        ("phrase", "relation", "earliest", "latest"),
+        [
+            ("not before 1pm", "not_before", "13:00", None),
+            ("not after 2:15pm", "not_after", None, "14:15"),
+        ],
+    )
+    def test_negated_bound_phrases_preserve_operator_meaning(
+        self,
+        phrase: str,
+        relation: str,
+        earliest: str | None,
+        latest: str | None,
+    ) -> None:
+        result = extract_semantics(
+            [f"Book Rowan Mercer with Dr Singh tomorrow {phrase} for 20 minutes"],
+            "2026-07-13",
+        )
+        assert result.temporal_relation == relation
+        assert result.earliest_time == earliest
+        assert result.latest_time == latest
+
+    @pytest.mark.parametrize(
+        ("phrase", "canonical"),
+        [
+            ("three pm", "15:00"),
+            ("half past nine am", "09:30"),
+            ("quarter past two pm", "14:15"),
+            ("quarter to four pm", "15:45"),
+            ("four thirty pm", "16:30"),
+            ("fifteen hundred", "15:00"),
+        ],
+    )
+    def test_spoken_time_forms_drive_exact_semantics(
+        self, phrase: str, canonical: str
+    ) -> None:
+        result = extract_semantics(
+            [f"Book Rowan Mercer with Dr Singh tomorrow at {phrase} for 20 minutes"],
+            "2026-07-13",
+        )
+        assert result.temporal_relation == "exact"
+        assert result.earliest_time == canonical
+        assert result.latest_time == canonical
+        assert result.normalized_turns[0].time_forms[phrase] == canonical
+
     def test_not_before_preserves_operator_through_at_filler(self) -> None:
         result = extract_semantics(
             ["Book Margaret Thompson tomorrow after at 3pm for 15 minutes"],
@@ -556,6 +601,34 @@ class TestMultiTurn:
         assert vals.get("earliest_time") == "15:00"
         assert vals.get("duration_minutes") == 15
 
+    @pytest.mark.parametrize(
+        ("first_bound", "second_bound", "earliest", "latest"),
+        [
+            ("after 3pm", "before 4:30pm", "15:00", "16:30"),
+            ("before 11am", "after 9am", "09:00", "11:00"),
+            ("not before 1pm", "not after 2:15pm", "13:00", "14:15"),
+        ],
+    )
+    def test_additive_complementary_bounds_compose_interval(
+        self,
+        first_bound: str,
+        second_bound: str,
+        earliest: str,
+        latest: str,
+    ) -> None:
+        result = extract_semantics(
+            [
+                f"Book Rowan Mercer with Dr Singh tomorrow {first_bound} for 20 minutes",
+                second_bound,
+            ],
+            "2026-07-13",
+        )
+        assert result.temporal_relation == "interval"
+        assert result.earliest_time == earliest
+        assert result.latest_time == latest
+        assert result.normalized_values["earliest_time"] == earliest
+        assert result.normalized_values["latest_time"] == latest
+
     def test_correction_replaces_time(self) -> None:
         """Correction turn replaces time, keeps patient and date."""
         result = extract_semantics(
@@ -697,6 +770,27 @@ class TestClarification:
         )
         assert result.requires_clarification is True
         assert result.authority_claim == "clarify"
+
+    @pytest.mark.parametrize(
+        "utterance",
+        [
+            "Book Rowan Mercer with Dr Abbott or Dr Nolan tomorrow at 3pm for 20 minutes",
+            "Move Rowan Mercer's appointment with Dr Abbott or Dr Nolan to tomorrow at 3pm",
+            "Resize Rowan Mercer's appointment with Dr Abbott or Dr Nolan to 30 minutes",
+            "Cancel Rowan Mercer's appointment with Dr Abbott or Dr Nolan",
+            "Mark Rowan Mercer's appointment with Dr Abbott or Dr Nolan as arrived",
+            "Explain Dr Abbott or Dr Nolan schedule options",
+        ],
+    )
+    def test_practitioner_alternatives_are_action_independent_and_lossless(
+        self, utterance: str
+    ) -> None:
+        result = extract_semantics([utterance], "2026-07-13")
+        assert result.entity_semantics["practitioner"] == "ambiguous"
+        assert result.requires_clarification is True
+        assert result.clarification_choices == ("Dr Abbott", "Dr Nolan")
+        assert result.authority_claim == "clarify"
+        assert result.selected_tool_sequence == ("request_clarification",)
 
     def test_create_with_time_does_not_clarify(self) -> None:
         result = extract_semantics(

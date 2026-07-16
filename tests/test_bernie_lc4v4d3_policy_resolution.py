@@ -770,6 +770,32 @@ class TestSolRecoveryGuards:
         assert policy.resolved_practitioner_id is None
         assert policy.appointment_deltas == ()
 
+    def test_unknown_practitioner_schedule_explanation_fails_closed(self) -> None:
+        utterance = "Can you explain Dr Rowan's schedule?"
+        extraction = extract_semantics([utterance], REFERENCE_DATE)
+        assert extraction.entity_semantics["practitioner"] == "exact"
+        assert extraction.requires_clarification is False
+        policy = resolve_policy(
+            [utterance],
+            entity_semantics=dict(extraction.entity_semantics),
+            requires_clarification=extraction.requires_clarification,
+            clarification_choices=extraction.clarification_choices,
+            intended_action=extraction.intended_action,
+            action_semantics=extraction.action_semantics,
+            authority_claim=extraction.authority_claim,
+            selected_tool_sequence=extraction.selected_tool_sequence,
+            normalized_values=dict(extraction.normalized_values),
+        )
+        assert policy.requires_clarification is True
+        assert policy.resolved_practitioner == "Dr Rowan"
+        assert policy.resolved_practitioner_id is None
+        assert policy.selected_tools == ("request_clarification",)
+        assert policy.authority == "clarify"
+        assert policy.downstream_outcome == "clarification_required"
+        assert policy.appointment_deltas == ()
+        assert policy.audit_deltas == ()
+        assert policy.is_simulated_confirmed_write is False
+
     def test_policy_runtime_has_no_scenario_or_expected_field_branch(self) -> None:
         source = inspect.getsource(resolve_policy)
         assert "scenario_id" not in source

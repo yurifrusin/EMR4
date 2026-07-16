@@ -117,22 +117,28 @@ def test_family_population_is_exact() -> None:
 # ---------------------------------------------------------------------------
 
 
-def test_baseline_aggregate_and_classifications() -> None:
-    """Confirm the runner produces correct aggregate totals."""
+def test_final_aggregate_and_classifications() -> None:
+    """Confirm every frozen fresh probe passes after bounded repair."""
     assert EVIDENCE["fixture_valid"] is True
     agg = EVIDENCE["aggregate"]
     assert agg["total"] == 24
-    # All counts must sum to 24 (or less, for passes)
-    # Every case has at most two observations
-    assert agg["variance"] == 0
-
-    # Sanity: at least some gaps exist (baseline is diagnostic)
-    total_non_pass = sum(
-        EVIDENCE["classifications"].get(name, 0)
-        for name in ("normalization_gap", "parser_gap", "policy_gap", "contract_layer_gap")
-    )
-    assert total_non_pass > 0
-    assert sum(EVIDENCE["classifications"].values()) == 24
+    assert agg == {
+        "total": 24,
+        "normalization_pass": 24,
+        "extraction_pass": 24,
+        "policy_pass": 24,
+        "composed_pass": 24,
+        "safe": 24,
+        "variance": 0,
+    }
+    assert EVIDENCE["classifications"] == {
+        "pass": 24,
+        "authoring_invalid": 0,
+        "normalization_gap": 0,
+        "parser_gap": 0,
+        "policy_gap": 0,
+        "contract_layer_gap": 0,
+    }
 
     # Family counts match
     assert EVIDENCE["family_counts"] == EXPECTED_FAMILY_COUNTS
@@ -191,52 +197,56 @@ def test_each_case_mismatch_accounting(item: dict) -> None:
         assert not item["policy_mismatches"]
 
 
-def test_speech_like_time_normalization_gaps() -> None:
-    """All six speech-like time cases exhibit normalisation gaps."""
+def test_speech_like_time_cases_pass_all_layers() -> None:
     speech = [
         item for item in EVIDENCE["cases"]
         if item["family"] == "speech_like_time"
     ]
     assert len(speech) == 6
     for item in speech:
-        assert item["classification"] == "normalization_gap"
-        assert len(item["normalization_mismatches"]) >= 1
+        assert item["classification"] == "pass"
+        assert item["normalization_mismatches"] == ()
+        assert item["extraction_mismatches"] == ()
+        assert item["policy_mismatches"] == ()
 
 
-def test_cross_turn_interval_parser_gaps() -> None:
-    """All six interval cases exhibit parser gaps (additive bounds)."""
+def test_cross_turn_interval_cases_pass_all_layers() -> None:
     intervals = [
         item for item in EVIDENCE["cases"]
         if item["family"] == "cross_turn_interval"
     ]
     assert len(intervals) == 6
     for item in intervals:
-        assert item["classification"] == "parser_gap"
-        assert "earliest_time" in item["extraction_mismatches"] or "temporal_relation" in item["extraction_mismatches"]
+        assert item["classification"] == "pass"
+        assert item["normalization_mismatches"] == ()
+        assert item["extraction_mismatches"] == ()
+        assert item["policy_mismatches"] == ()
 
 
-def test_ambiguous_practitioner_parser_gaps() -> None:
-    """All six ambiguous-practitioner cases exhibit parser gaps in choices."""
+def test_ambiguous_practitioner_cases_pass_all_layers() -> None:
     ambiguous = [
         item for item in EVIDENCE["cases"]
         if item["family"] == "ambiguous_practitioner_alternatives"
     ]
     assert len(ambiguous) == 6
     for item in ambiguous:
-        assert item["classification"] == "parser_gap"
-        assert "extraction_clarification_choices" in item["extraction_mismatches"]
+        assert item["classification"] == "pass"
+        assert item["normalization_mismatches"] == ()
+        assert item["extraction_mismatches"] == ()
+        assert item["policy_mismatches"] == ()
 
 
-def test_unknown_practitioner_policy_gaps() -> None:
-    """All six unknown-practitioner cases exhibit policy gaps."""
+def test_unknown_practitioner_cases_pass_all_layers() -> None:
     unknown = [
         item for item in EVIDENCE["cases"]
         if item["family"] == "unknown_practitioner_schedule_explanation"
     ]
     assert len(unknown) == 6
     for item in unknown:
-        assert item["classification"] == "policy_gap"
-        assert "policy_requires_clarification" in item["policy_mismatches"]
+        assert item["classification"] == "pass"
+        assert item["normalization_mismatches"] == ()
+        assert item["extraction_mismatches"] == ()
+        assert item["policy_mismatches"] == ()
 
 
 # ---------------------------------------------------------------------------
@@ -247,9 +257,8 @@ def test_unknown_practitioner_policy_gaps() -> None:
 def test_unknown_practitioner_layer_divergence() -> None:
     """Unknown-practitioner cases have expected extraction/policy divergence.
 
-    Expected divergence is True (extraction says no clarification, policy should
-    require it).  Observed divergence is False because current policy does not
-    yet handle unknown practitioners on explain_schedule (this is a policy gap).
+    Expected and observed divergence are both true: extraction recognizes the
+    name while policy requires authoritative roster clarification.
     """
     unknown = [
         item for item in EVIDENCE["cases"]
@@ -257,10 +266,8 @@ def test_unknown_practitioner_layer_divergence() -> None:
     ]
     for item in unknown:
         assert item["expected_layer_divergence"] is True
-        # Current policy returns no clarification for explain_schedule even
-        # with unknown practitioner, so observed = False
-        assert item["observed_layer_divergence"] is False
-        assert item["classification"] == "policy_gap"
+        assert item["observed_layer_divergence"] is True
+        assert item["classification"] == "pass"
 
 
 def test_no_contract_layer_gaps() -> None:
@@ -324,13 +331,13 @@ def test_report_hash_binds_final_selection_and_complete_report() -> None:
     ).encode("utf-8")
     assert reported_hash == "sha256:" + hashlib.sha256(encoded).hexdigest()
     assert EVIDENCE["selection"] == {
-        "non_pass_count": 24,
+        "non_pass_count": 0,
         "selection_hash": (
-            "sha256:643339dfb9008f8df1b81b5e8e8effbf5d6d4561bafa67376d721fb0c185cd77"
+            "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
         ),
     }
     assert reported_hash == (
-        "sha256:c093616ff2916097e546cda2e4c9681eaaf1ef27b49fc0d86a5651cc7ef7a97d"
+        "sha256:802f089a0d356706bef8d40846955c241f4459bd75d836c302020f1725b97808"
     )
 
 
@@ -343,14 +350,9 @@ def test_family_specific_classifications() -> None:
         family_classifications[item["family"]][cls] = (
             family_classifications[item["family"]].get(cls, 0) + 1
         )
-    # speech_like_time: 6 normalization_gap
-    assert family_classifications["speech_like_time"].get("normalization_gap", 0) == 6
-    # cross_turn_interval: 6 parser_gap
-    assert family_classifications["cross_turn_interval"].get("parser_gap", 0) == 6
-    # ambiguous_practitioner_alternatives: 6 parser_gap
-    assert family_classifications["ambiguous_practitioner_alternatives"].get("parser_gap", 0) == 6
-    # unknown_practitioner_schedule_explanation: 6 policy_gap
-    assert family_classifications["unknown_practitioner_schedule_explanation"].get("policy_gap", 0) == 6
+    assert family_classifications == {
+        family: {"pass": 6} for family in EXPECTED_FAMILY_COUNTS
+    }
 
 
 # ---------------------------------------------------------------------------

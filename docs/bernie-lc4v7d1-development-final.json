@@ -1,0 +1,204 @@
+{
+  "schema_version": "bernie.lc4v7d1.final.v1",
+  "decision": "development_exit_pass",
+  "fixture_hash": "sha256:03544ffab7d3a720faf6cba3cac7f33c5e45e7a42dfec231223334fdd335b2ea",
+  "report_hash": "sha256:802f089a0d356706bef8d40846955c241f4459bd75d836c302020f1725b97808",
+  "selection": {
+    "non_pass_count": 0,
+    "selection_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "aggregate": {
+    "total": 24,
+    "normalization_pass": 24,
+    "extraction_pass": 24,
+    "policy_pass": 24,
+    "composed_pass": 24,
+    "safe": 24,
+    "variance": 0
+  },
+  "classifications": {
+    "pass": 24,
+    "authoring_invalid": 0,
+    "normalization_gap": 0,
+    "parser_gap": 0,
+    "policy_gap": 0,
+    "contract_layer_gap": 0
+  },
+  "family_counts": {
+    "speech_like_time": 6,
+    "cross_turn_interval": 6,
+    "ambiguous_practitioner_alternatives": 6,
+    "unknown_practitioner_schedule_explanation": 6
+  },
+  "repeat_observations": 48,
+  "cases": [
+    {
+      "probe_id": "v7d1-speech-001",
+      "family": "speech_like_time",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-speech-002",
+      "family": "speech_like_time",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-speech-003",
+      "family": "speech_like_time",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-speech-004",
+      "family": "speech_like_time",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-speech-005",
+      "family": "speech_like_time",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-speech-006",
+      "family": "speech_like_time",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-interval-001",
+      "family": "cross_turn_interval",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-interval-002",
+      "family": "cross_turn_interval",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-interval-003",
+      "family": "cross_turn_interval",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-interval-004",
+      "family": "cross_turn_interval",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-interval-005",
+      "family": "cross_turn_interval",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-interval-006",
+      "family": "cross_turn_interval",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-ambiguous-001",
+      "family": "ambiguous_practitioner_alternatives",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-ambiguous-002",
+      "family": "ambiguous_practitioner_alternatives",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-ambiguous-003",
+      "family": "ambiguous_practitioner_alternatives",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-ambiguous-004",
+      "family": "ambiguous_practitioner_alternatives",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-ambiguous-005",
+      "family": "ambiguous_practitioner_alternatives",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-ambiguous-006",
+      "family": "ambiguous_practitioner_alternatives",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-unknown-explain-001",
+      "family": "unknown_practitioner_schedule_explanation",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-unknown-explain-002",
+      "family": "unknown_practitioner_schedule_explanation",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-unknown-explain-003",
+      "family": "unknown_practitioner_schedule_explanation",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-unknown-explain-004",
+      "family": "unknown_practitioner_schedule_explanation",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-unknown-explain-005",
+      "family": "unknown_practitioner_schedule_explanation",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-unknown-explain-006",
+      "family": "unknown_practitioner_schedule_explanation",
+      "classification": "pass",
+      "safe": true,
+      "variance": false
+    }
+  ]
+}

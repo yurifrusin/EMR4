@@ -638,6 +638,30 @@ def resolve_policy(
         )
 
     # ── Diary field conflict: require clarification, no deltas ─────────
+    # A schedule explanation is a read request, but the backend still owns
+    # practitioner identity and roster truth. Do not expose slot-search or a
+    # completed explanation for an exact surfaced name that cannot be resolved.
+    if (
+        intended_action == "explain_schedule"
+        and practitioner_sem in {"exact", "corrected"}
+        and result_practitioner_id is None
+    ):
+        return PolicyResolution(
+            requires_clarification=True,
+            clarification_choices=(),
+            resolved_patient=result_patient,
+            resolved_practitioner=result_practitioner,
+            resolved_practitioner_id=None,
+            selected_tools=("request_clarification",),
+            authority="clarify",
+            downstream_outcome="clarification_required",
+            appointment_deltas=(),
+            audit_deltas=(),
+            is_simulated_confirmed_write=False,
+            diary_comparison=result_diary,
+            utterance_entity_semantics_unchanged=True,
+        )
+
     if result_diary.relation == "field_conflict":
         return PolicyResolution(
             requires_clarification=True,

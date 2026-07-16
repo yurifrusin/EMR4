@@ -453,6 +453,32 @@ class TestNormalizationBasic:
         assert "3.30pm" in result.time_forms
         assert result.time_forms["3.30pm"] == "15:30"
 
+    @pytest.mark.parametrize(
+        ("fragment", "canonical"),
+        [
+            ("three pm", "15:00"),
+            ("half past nine am", "09:30"),
+            ("quarter past two pm", "14:15"),
+            ("quarter to four pm", "15:45"),
+            ("four thirty pm", "16:30"),
+            ("fifteen hundred", "15:00"),
+            ("twenty three hundred", "23:00"),
+        ],
+    )
+    def test_spoken_time_forms_are_lossless(
+        self, fragment: str, canonical: str
+    ) -> None:
+        original = f"Book Rowan tomorrow at {fragment}."
+        result = normalize_utterance(original)
+        assert result.original == original
+        assert result.time_forms[fragment] == canonical
+        start, end = result.source_spans[f"time:{fragment}"]
+        assert original[start:end] == fragment
+
+    def test_long_spoken_time_does_not_emit_overlapping_short_form(self) -> None:
+        result = normalize_utterance("at half past nine am")
+        assert result.time_forms == {"half past nine am": "09:30"}
+
     def test_invalid_clock_form_is_not_promoted_to_normalized_time(self) -> None:
         result = normalize_utterance("at 29:99")
         assert result.time_forms == {}
