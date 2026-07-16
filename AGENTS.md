@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V9 genuinely fresh certification is complete, valid, consumed, and sealed with `certification_fail`. Ordinary development-only LC4V9D1 diagnosis may now begin from aggregate evidence only |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v9-sol-acceptance.md` and `docs/bernie-lc4v9-fresh-certification-closeout.md`; framework provenance remains in `lc4v9-framework-sol-acceptance.md`. LC4V8D1 remains accepted under `lc4v8d1-sol-acceptance.md` |
+| Active product track | LC4V9 is validly consumed and sealed with `certification_fail`; ordinary inspectable LC4V9D1 non-create identity/projection diagnosis is now content-blind and in progress |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v9d1-sol-contract.md`; sealed V9 acceptance remains `lc4v9-sol-acceptance.md` and `docs/bernie-lc4v9-fresh-certification-closeout.md` |
 | Current result | Complete 88/576; entity semantics 96/576; policy projection 88/576; policy behavior/clarification/composition/replay 528/576; all other interpretation, temporal, normalization, traceability, tooling, and safety dimensions 576/576. Evidence counters and repeat variance are zero. All 20 non-create groups fail their slice; no create group does. Post-seal ordinary preservation passes 356/356 with three documented deselections |
-| Next implementation | Freeze and run an ordinary inspectable synthetic LC4V9D1 diagnostic across move, resize, cancel, status-change, and explain-schedule identity/projection surfaces without loading or inferring V9. Repair only independently supported development gaps. A future certification/holdout remains Yuri's decision. Preserve v1-v9, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
+| Next implementation | DeepSeek Flash may implement only the bounded 30-probe D1 development candidate in a disposable Claude Code `--bare` worktree; Sol then audits Gold, accepts or recovers, runs the baseline, and repairs only independently supported development gaps. A future certification/holdout remains Yuri's decision. Preserve v1-v9, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 
