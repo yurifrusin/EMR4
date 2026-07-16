@@ -1,0 +1,65 @@
+{
+  "author": "gpt_sol",
+  "corpus_hash": "sha256:966a537efb772a970da5c4159c2cca78fa861d4a8efd8edeea7bbaf9fcbfd068",
+  "parser_or_policy_executed_during_authorship": false,
+  "population": {
+    "actions": {
+      "cancel": 48,
+      "create": 48,
+      "explain_schedule": 48,
+      "move": 48,
+      "resize": 48,
+      "status_change": 48
+    },
+    "families": {
+      "cancel_ambiguous_practitioner": 12,
+      "cancel_guardrail_polarity": 12,
+      "cancel_known": 12,
+      "cancel_unknown_practitioner": 12,
+      "create_ambiguous_practitioner": 12,
+      "create_guardrail_polarity": 12,
+      "create_known": 12,
+      "create_unknown_practitioner": 12,
+      "explain_schedule_ambiguous_practitioner": 12,
+      "explain_schedule_guardrail_polarity": 12,
+      "explain_schedule_known": 12,
+      "explain_schedule_unknown_practitioner": 12,
+      "move_ambiguous_practitioner": 12,
+      "move_guardrail_polarity": 12,
+      "move_known": 12,
+      "move_unknown_practitioner": 12,
+      "resize_ambiguous_practitioner": 12,
+      "resize_guardrail_polarity": 12,
+      "resize_known": 12,
+      "resize_unknown_practitioner": 12,
+      "status_change_ambiguous_practitioner": 12,
+      "status_change_guardrail_polarity": 12,
+      "status_change_known": 12,
+      "status_change_unknown_practitioner": 12
+    },
+    "language_styles": {
+      "correction": 48,
+      "interval": 48,
+      "paraphrase": 48,
+      "plain": 48,
+      "speech_like": 48,
+      "word_order": 48
+    },
+    "scenarios": 288,
+    "turns": {
+      "multi": 72,
+      "one": 216
+    },
+    "unique_coverage_cells": 288
+  },
+  "schema_version": "bernie.lc4v7.preseal-authoring-metadata.v1",
+  "semantic_overlays": {
+    "ambiguous_practitioner": 72,
+    "explicit_safe_negation": 36,
+    "extraction_policy_clarification_divergence": 72,
+    "guardrail_polarity": 72,
+    "known": 72,
+    "unknown_practitioner": 72,
+    "unsafe_demand": 36
+  }
+}

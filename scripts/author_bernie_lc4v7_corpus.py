@@ -117,7 +117,10 @@ def _identity(mode: str, index: int) -> tuple[str, str, str | None, list[str]]:
         practitioner = UNKNOWN_PRACTITIONERS[index % len(UNKNOWN_PRACTITIONERS)]
         return patient, practitioner, None, []
     if mode == "ambiguous_practitioner":
-        return patient, "Dr Taylor or Dr Chen", None, list(AMBIGUOUS_CHOICES)
+        choices = list(AMBIGUOUS_CHOICES)
+        if index % 2:
+            choices.reverse()
+        return patient, " or ".join(choices), None, choices
     practitioner, practitioner_id = KNOWN_PRACTITIONERS[index % len(KNOWN_PRACTITIONERS)]
     return patient, practitioner, practitioner_id, []
 
@@ -154,6 +157,8 @@ def _command(
         verb = "Shift" if style == "paraphrase" else "Move"
         if style == "word_order":
             return f"{temporal.capitalize()}, move {patient}'s appointment with {practitioner}."
+        if style == "paraphrase":
+            return f"{verb} {patient}'s appointment with {practitioner} {temporal}."
         return f"{verb} {patient}'s appointment with {practitioner} to {temporal}."
     if action == "resize":
         verb = "Extend" if style == "paraphrase" else "Resize"

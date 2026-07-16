@@ -74,3 +74,54 @@ def test_source_spans_are_bounded_and_turn_aligned() -> None:
         for utterance, spans in zip(case["utterances"], spans_by_turn, strict=True):
             for start, end in spans.values():
                 assert 0 <= start <= end <= len(utterance)
+
+
+def test_all_authored_dialogue_sequences_are_distinct() -> None:
+    sequences = [tuple(case["utterances"]) for case in CORPUS["scenarios"]]
+    assert len(sequences) == len(set(sequences)) == 288
+
+
+def test_source_span_labels_point_to_the_authored_text() -> None:
+    for case in CORPUS["scenarios"]:
+        for utterance, spans in zip(
+            case["utterances"],
+            case["extraction_gold"]["source_spans"],
+            strict=True,
+        ):
+            for label, (start, end) in spans.items():
+                fragment = utterance[start:end]
+                kind, authored = label.split(":", 1)
+                if kind == "operator":
+                    authored = authored.rsplit(":", 1)[0]
+                assert fragment.casefold() == authored.casefold()
+
+
+def test_composition_and_policy_gold_are_cross_field_consistent() -> None:
+    for case in CORPUS["scenarios"]:
+        policy = case["policy_gold"]
+        terminal = case["composition_gold"]["terminal_class"]
+        if terminal == "clarification_required":
+            assert policy["requires_clarification"] is True
+            assert policy["authority"] == "clarify"
+            assert policy["selected_tools"] == ["request_clarification"]
+            assert policy["appointment_deltas"] == []
+            assert policy["audit_deltas"] == []
+            assert policy["simulated_write"] is False
+        elif terminal == "refused":
+            assert policy["requires_clarification"] is False
+            assert policy["authority"] == "refuse"
+            assert policy["selected_tools"] == ["refuse_instruction"]
+            assert policy["appointment_deltas"] == []
+            assert policy["audit_deltas"] == []
+            assert policy["simulated_write"] is False
+        elif terminal == "replay_only_change":
+            assert policy["requires_clarification"] is False
+            assert policy["resolved_practitioner_id"] is not None
+            assert policy["appointment_deltas"]
+            assert policy["audit_deltas"]
+            assert policy["simulated_write"] is True
+        else:
+            assert terminal == "read_only"
+            assert policy["simulated_write"] is False
+            assert policy["appointment_deltas"] == []
+            assert policy["audit_deltas"] == []
