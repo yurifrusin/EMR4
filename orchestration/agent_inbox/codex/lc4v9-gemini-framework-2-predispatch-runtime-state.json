@@ -1,0 +1,19 @@
+{
+  "adapter_observations": [
+    {"adapter_id":"deepseek_via_claude_code_bare","evidence":["Flash remains closed."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"deepcode_cli","evidence":["Fallback unselected."],"method":"synthetic_fixture","reachability":"unknown"},
+    {"adapter_id":"claude_cli_print","evidence":["Claude Code --bare is idle."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"antigravity_cli_print","evidence":["A second fresh Gemini 3.5 Flash/medium project is assigned the amended-head veto at exact aligned head b5aaa89c."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"codex_primary_session","evidence":["GPT Sol retains all acceptance, content, integration, and push authority; no V9 content exists."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"codex_subagent_spawn","evidence":["No native subagent assigned."],"method":"synthetic_fixture","reachability":"unknown"}
+  ],
+  "assigned_agent_ids": ["gemini-lc4v9-framework-veto-2"],
+  "context_health": {"agent_contexts":[{"agent_id":"orchestrator","measurement_source":"unknown","rehydrated_from_receipt":true,"rehydration_sources":["live_handover_current_baton","current_authority_allocation","active_plan_and_acceptance","protected_evidence_boundaries","git_refs_and_worktree"]}]},
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "worker_slots": [{"active_instance_ids":[],"resource_id":"deepseek-flash-workers","stale_instance_ids":[]}],
+  "workspace_receipts": [
+    {"agent_id":"gemini-lc4v9-framework-veto-2","branch":"gemini/lc4v9-framework-veto-2","clean":true,"at_handoff_current":true,"recorded_at":"2026-07-16T22:35:00+10:00","worktree":"C:\\Users\\sarashera\\EMR4-worktrees\\lc4v9-gemini2"}
+  ]
+}

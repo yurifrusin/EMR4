@@ -1,0 +1,54 @@
+# LC4V9 Sol Framework Acceptance
+
+Date: 2026-07-16
+
+Decision: `framework_accepted_content_authoring_authorized`
+
+The content-blind framework and one-shot rule were frozen before any actual V9
+content. DeepSeek Flash's single candidate was preserved and rejected; Sol
+recovered it under the lease. Gemini's first pass on `4c9283b0` was correctly
+superseded for authorship after Sol found an ordinary-interface mismatch before
+content. Sol amended the framework at
+`b5aaa89cfc8ed4bf697e4b68e41cfaa301c59e38`.
+
+A second fresh Gemini 3.5 Flash/medium Antigravity project independently
+returned `DECISION: pass` on that exact amended head. It reproduced 63/63
+framework-plus-taxonomy, 74/74 ordinary D1, and 2/2 selected runtime-isolation
+tests. Its permitted single-file review commit was integrated at `17fa83e0`.
+No external model session remains active.
+
+At this acceptance point there is no actual V9 corpus, product evaluator,
+authoring module, threshold file, manifest, seal, marker, report, or protected
+case content. Holdouts v1-v8 remained sealed throughout framework work and
+review.
+
+## Frozen Sol-only protected surface
+
+Sol may now create only these actual V9 certification surfaces:
+
+- fixture: `tests/fixtures/bernie_lc4v9_fresh_certification.json`;
+- thresholds: `tests/fixtures/bernie_lc4v9_thresholds.json`;
+- evaluator: `app/services/bernie/lc4v9_certification_evaluator.py`;
+- authoring tool: `scripts/author_bernie_lc4v9_certification.py`;
+- one-shot runner: `scripts/run_bernie_lc4v9_certification.py`;
+- source manifest: `orchestration/agent_inbox/codex/lc4v9-source-manifest.json`;
+- seal: `orchestration/agent_inbox/codex/lc4v9-seal.json`;
+- durable marker: `orchestration/agent_inbox/codex/lc4v9-attempt-marker.json`;
+  and
+- aggregate report: `orchestration/agent_inbox/codex/lc4v9-aggregate-report.json`.
+
+Attempt ID is frozen as `lc4v9-fresh-certification-001`. The marker and report
+must not exist until the sole run. Source authorship/validation commits first;
+manifest and seal commit second; exclusive consumed-marker creation precedes
+all protected reads in the only run.
+
+From the first creation of any listed content surface, it is protected from all
+external workers and providers. Sol alone may author, inspect, validate,
+commit, manifest, seal, execute, and accept it. After the attempt is consumed,
+only its aggregate report, closeout, and Sol acceptance remain available for
+planning; no case-level repair, rerun, relabelling, rescoring, or reuse is
+authorized.
+
+T3.1-T3.4, T3.5/providers, historical data, runtime/product wiring, API/UI/DB,
+deployment, release, and all live/write authority remain closed.
+
