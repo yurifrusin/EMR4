@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V9 is sealed `certification_fail`; LC4V9D1 is accepted `development_exit_pass`; genuinely fresh LC4V10 is authorized and begins content-blind |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v9d1-sol-acceptance.md`; sealed V9 remains governed by `lc4v9-sol-acceptance.md` and `docs/bernie-lc4v9-fresh-certification-closeout.md` |
-| Current result | D1 froze a valid 9-pass/7-extraction-gap/14-policy-gap baseline, repaired only those 21 ordinary non-create identity/projection causes, and now passes 30/30 across 60 observations with zero variance and empty selection. Fresh Gemini returned `DECISION: pass`; Sol reproduced 70/70 focused and 280/280 broader nodes with three documented historical equality deselections |
-| Next implementation | Begin genuinely fresh LC4V10 content-blind framework, fresh Gemini pre-content veto, Sol-only corpus authorship, immutable seal, and one one-shot certification. Yuri preauthorizes successive fresh versions until pass, stalled progress, or an unexpected material fork. Preserve v1-v9, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
+| Active product track | LC4V9 is sealed `certification_fail`; LC4V9D1 is accepted; genuinely fresh LC4V10 content-blind framework is in Sol recovery before pre-content veto |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-contract.md` and `lc4v10-one-shot-acceptance-rule.md`; D1 remains governed by `lc4v9d1-sol-acceptance.md` |
+| Current result | Flash candidate `8207f873` passed its self-tests but was rejected for conceptual scenario/sample conflation, oracle leakage, missing-dimension, source-binding, and in-memory lifecycle defects. Sol recovery now passes 27/27 focused and 114/114 combined ordinary/integrity nodes; no V10 content exists |
+| Next implementation | Commit the recovered V10 empty framework, obtain fresh Gemini pre-content veto, then close external sessions for Sol-only corpus authorship, immutable seal, and one one-shot certification. Preserve v1-v9, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 

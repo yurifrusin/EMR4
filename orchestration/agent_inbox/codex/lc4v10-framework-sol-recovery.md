@@ -78,3 +78,25 @@ Sol may adopt candidate `8207f873` only as untrusted scaffolding and will:
 
 No actual V10 content or protected artifact exists. Holdouts v1-v9 remain
 sealed and untouched.
+
+## Recovered result
+
+Sol adopted candidate `8207f873` only after preserving the rejection, then
+replaced its evaluator core. The recovered framework now represents 288
+immutable scenarios, creates both repeats internally, passes only utterances,
+synthetic diary state, and reference date to a fixed ordinary product observer,
+and rejects missing or unknown dimensions.
+
+The runner creates an exclusive durable marker before every protected read,
+never deletes it, consumes readable seal state and the marker on every later
+exit, validates exact fixture/Gold/projection/manifest/threshold/seal/report
+schemas, binds fixture/framework/evaluator/threshold bytes and Git blobs to an
+ancestor source commit, and compares the executing module bytes to the bound
+framework. Aggregate output contains only generic fixed counts, gate names,
+decision, states, and report hash.
+
+The recovered focused suite passes 27/27. The combined recovered framework,
+generic decision taxonomy, accepted D1 ordinary development, and handover
+integrity command passes 114/114 serially. It directly proves the prior three
+fail-open probes now fail closed. Fresh Gemini pre-content veto remains
+required before any actual V10 content or protected artifact may exist.
