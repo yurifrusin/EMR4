@@ -148,17 +148,45 @@ contracts and exact recovered head `bef040eb`. No parser/policy runtime change
 was made or authorized. D1 supports a future layer-specific certification
 contract but does not reveal or rescore V6.
 
+Yuri then authorized genuinely fresh LC4V7 with extraction clarification,
+policy clarification, and their composition scored independently. DeepSeek
+Flash's empty-framework candidate was rejected after its own closeout admitted
+running protected V6 framework tests; Sol did not adopt that source. Sol built
+a clean-room framework, and Gemini independently passed exact head `186ccf44`
+plus the source-binding amendment at `b4f8cb18` before any content existed.
+Sol alone authored and froze 288 fresh scenarios at source `403fcafd` without
+executing parser or policy, then committed the unconsumed seal and ran the only
+permitted attempt.
+
+V7 is consumed with
+`certification_invalid_acceptance_rule_misclassification`. Its aggregate
+evaluation evidence is complete and deterministic over 576 samples: zero
+validation/runtime/missing-dimension/case-artifact/oracle/variance defects and
+safety `576/576`. The executable rule incorrectly placed nonzero product
+policy/integration failures in evidence validity, so the raw report returned
+`certification_invalid`. It remains unchanged. The aggregate counts also miss
+product gates: complete `224/576`, temporal `384/576`, normalization `432/576`,
+extraction clarification `408/576`, policy clarification and composition each
+`540/576`, policy failures 100, and integration failures 176. Speech-like and
+interval are each `0/96`; all ambiguous-practitioner families and unknown-
+practitioner schedule explanation are `0/24`. Report hash is
+`sha256:fd64f30c7b0869923bb5938f5d7ddd03fb8c8f768c240f9ba364cfdbf104d1fb`.
+These are public aggregates only; V7 supplies no case-level repair authority.
+
 ## Next safe sequence
 
-1. Keep holdouts v1-v6 sealed; use only accepted aggregate evidence and
+1. Keep holdouts v1-v7 sealed; use only accepted aggregate evidence and
    closeouts for planning.
-2. Pause for Yuri's certification-strategy choice: genuinely fresh V7 with a
-   layer-specific content-blind evaluator (recommended), or explicit reviewed
-   V6 reuse/rescoring policy.
-3. Do not modify or rescore V6 implicitly; any V7 must freeze its framework,
-   thresholds, authorship separation, and seal before content/evaluation.
-4. Retain the D1 conclusion that no parser/policy remediation is authorized.
-5. Keep T3.1-T3.4 blocked by default and T3.5/providers plus every product/write
+2. Pause for Yuri's development-strategy choice. Recommend fresh inspectable
+   V7D1 probes derived only from public aggregates.
+3. First correct the generic future-certification distinction between
+   evidence invalidity and product failure; do not change sealed V7.
+4. Adjudicate fresh speech-like time, cross-turn interval, ambiguous-
+   practitioner, and unknown-practitioner schedule-explanation probes before
+   authorizing parser or policy repair.
+5. Defer a genuinely fresh V8 decision until D1 exits; do not reuse, rerun,
+   rescore, relabel, or repair V7 implicitly.
+6. Keep T3.1-T3.4 blocked by default and T3.5/providers plus every product/write
    surface deferred.
 
 ## Primary evidence
@@ -189,8 +217,10 @@ contract but does not reveal or rescore V6.
 - `orchestration/agent_inbox/codex/lc4v6-sol-acceptance.md`
 - `docs/bernie-lc4v6d1-development-closeout.md`
 - `orchestration/agent_inbox/codex/lc4v6d1-sol-acceptance.md`
+- `docs/bernie-lc4v7-fresh-certification-closeout.md`
+- `orchestration/agent_inbox/codex/lc4v7-sol-acceptance.md`
 
-Protected holdouts v1-v6 are sealed. Do not enumerate their paths, inspect
+Protected holdouts v1-v7 are sealed. Do not enumerate their paths, inspect
 content, rerun them, regenerate them, hash-check them, infer labels from them,
 or tune against them. T3.1-T3.4 remain blocked-by-default evaluation
 scaffolding; T3.5 is deferred.

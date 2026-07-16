@@ -46,25 +46,25 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V7 genuinely fresh layer-specific certification is authorized; contract and thresholds are frozen before framework or corpus content |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v7-sol-contract.md` and `orchestration/agent_inbox/codex/lc4v7-one-shot-acceptance-rule.md` |
-| Current result | LC4V6D1 passed 24/24 fresh probes and established that extraction and policy clarification must be scored independently before composition. Yuri authorized the recommended fresh V7. Its fixed shape is 24 families, 288 scenarios, 72 multi-turn trajectories, two repeats, and 576 samples; no V7 content exists yet |
-| Next implementation | Dispatch one bounded DeepSeek V4 Flash/high empty content-blind framework lane through Claude Code `--bare`; Sol reviews/recovers, then Gemini 3.5 Flash independently vetoes the exact empty framework before Sol-only authorship. Preserve sealed v1-v6, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
+| Active product track | LC4V7 sole fresh attempt is consumed with `certification_invalid_acceptance_rule_misclassification`; user development-strategy decision required |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v7-sol-acceptance.md` and `docs/bernie-lc4v7-fresh-certification-closeout.md` |
+| Current result | V7 produced complete deterministic aggregate evidence over 576 samples with zero validation, runtime, missing-dimension, case-artifact, oracle, or variance defects and safety 576/576. Its executable rule incorrectly treated nonzero product policy/integration failures as evidence invalidity. Raw decision remains `certification_invalid`; aggregates also miss product gates, including complete 224/576, so there is no pass |
+| Next implementation | Pause at Yuri's decision boundary. Recommended option: bounded ordinary-development V7D1 using only fresh inspectable probes from public aggregates, first correcting future evidence-vs-product taxonomy, then adjudicating speech-like time, cross-turn intervals, ambiguous practitioners, and unknown-practitioner schedule explanation. Do not inspect, rerun, rescore, relabel, or repair sealed V7. Preserve v1-v7, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
 
-### LC4V6, LC4V6D1, and active LC4V7 state
+### LC4V6, LC4V6D1, and LC4V7 state
 
 Fresh V6 used Flash only for the empty framework, Gemini for its pre-content
-veto, and Sol alone for frozen thresholds plus Gold authorship at `0527848b`.
-Its sole attempt is valid and consumed: complete `540/576`, safety `576/576`,
-interpretation failures 36 and decision `certification_fail`; keep it sealed.
-D1 then passed 24/24 fresh probes at extraction, policy, composition, and safety
-with zero variance. Its 12 unknown-practitioner moves prove the intended layer
-split and expose how conflated clarification scoring fails correct behaviour.
-DeepSeek's evidence self-pass was recovered by Sol; Gemini passed contracts and
-exact recovered head `bef040eb`. No runtime repair is authorized. Recommend a
-fresh layer-specific V7; D1 does not reveal or rescore V6. Yuri authorized V7
-on 2026-07-16. Its layer-specific contract and thresholds are frozen before
-content at `eb2099f0`; the empty framework lane is next. See active acceptance.
+veto, and Sol for Gold at `0527848b`; its consumed result is
+`certification_fail`, complete `540/576`, safety `576/576`. D1 then passed
+24/24 fresh layer-specific probes with zero variance and no runtime repair.
+Its unknown-practitioner moves established extraction/policy clarification
+separation without revealing or rescoring V6.
+
+Yuri authorized V7 on 2026-07-16. Flash breached protected V6 access, so Sol
+built clean-room head `186ccf44`; Gemini also passed amended `b4f8cb18` before
+content. Sol froze source `403fcafd`. The consumed raw result is
+`certification_invalid` because product failures were misclassified as evidence
+invalidity; complete `224/576`, safety `576/576`, and product gates miss. V7 is sealed; see active acceptance.
 
 LC4V4 provenance: the frozen pre-content records remain
 `lc4v4q1-sol-contract.md`, `lc4v4q1-sol-recovery-amendment.md`,
@@ -306,14 +306,14 @@ changes; it does not inherit the failed worker's acceptance framing.
 
 ## 5. Protected Evidence and Closed Gates
 
-### Protected holdouts v1-v6
+### Protected holdouts v1-v7
 
-Protected holdouts v1, v2, and v3 remain sealed. Protected holdouts v1, v2, v3, and v4, plus v5-v6, share the same no-access boundary. Do not open, enumerate, list, search, import, run, regenerate,
+Protected holdouts v1, v2, and v3 remain sealed. Protected holdouts v1, v2, v3, and v4, plus v5-v7, share the same no-access boundary. Do not open, enumerate, list, search, import, run, regenerate,
 evaluate, hash-check, infer labels from, or tune against any protected fixture,
 support module, authoring surface, manifest, seal, receipt, or per-case report.
 The committed v2 aggregate report and aggregate closeout are the only v2
 evidence available for planning; only the committed aggregate report, closeout,
-and Sol acceptance are available for v3 and v4 planning. Historical metadata-
+and Sol acceptance are available for v3-v7 planning. Historical metadata-
 enumeration incidents do not authorize reuse.
 
 Before future certification, Yuri must approve a new holdout version or an
