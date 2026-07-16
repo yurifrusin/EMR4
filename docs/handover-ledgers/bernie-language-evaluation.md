@@ -210,16 +210,42 @@ immutable authorship and exact baseline head `b72cf748`. The broader gate passed
 Gold/evaluator mismatch, finds no broad temporal/parser defect, and authorizes
 no product runtime repair.
 
+Yuri then authorized genuinely fresh LC4V9. Its valid consumed attempt returned
+`certification_fail`: complete 88/576, entity semantics 96/576, exact policy
+projection 88/576, policy behavior/clarification/composition/replay 528/576,
+and every other semantic, safety, evidence, runtime, and variance gate 576/576
+or zero as appropriate. All 20 non-create groups failed while no create group
+failed. V9 is permanently sealed and supplies no case-level repair authority.
+
+LC4V9D1 used the aggregate pattern to author 30 fresh inspectable non-create
+development probes. Its valid pre-repair baseline contained 9 passes, 7
+extraction gaps, 14 policy gaps, and no authoring-invalid row. Sol rejected
+Flash's conceptually invalid Gold/taxonomy and recovered without a correction
+loop. The repaired source passes all 30 cases across extraction, semantic
+policy behavior, exact projection, composition, and safety over 60 observations
+with zero variance and empty selection. The complete report hash is
+`sha256:3429eef910fa871c6d416c1a8dd40d5f42b04581b67b18ddddfc3866ce60c879`.
+A fresh Gemini review passed 70 focused and 280 broader selected nodes; Sol
+reproduced both commands. Exactly three immutable historical equality nodes
+were deselected.
+
+On 2026-07-17 Yuri preauthorized successive genuinely fresh certification
+versions beginning with V10 until a valid pass, evidence of stalled progress,
+or an unexpected material decision fork. This does not authorize holdout reuse
+or weaken content-blind, independent-veto, Sol-only authorship, immutable-seal,
+or one-shot requirements.
+
 ## Next safe sequence
 
-1. Keep holdouts v1-v8 sealed; use only accepted aggregate evidence and
+1. Keep holdouts v1-v9 sealed; use only accepted aggregate evidence and
    closeouts for planning.
-2. Pause for Yuri's certification decision. Recommend genuinely fresh LC4V9
-   with D1's canonical projection and cross-field gates frozen before content.
+2. Begin genuinely fresh LC4V10 content-blind under the standing authorization.
 3. Require fresh Gemini pre-content veto, Sol-only authorship, immutable seal,
-   and one one-shot evaluation.
-4. Do not inspect, reuse, rerun, rescore, relabel, or repair V8.
-5. Treat any later V9 certification as a separate Yuri decision.
+   and one one-shot evaluation for every version.
+4. If a valid attempt fails, use only permitted aggregates for a fresh ordinary
+   development diagnostic; never tune against or rerun the holdout.
+5. Continue fresh versions until pass, stalled progress, or an unexpected
+   material fork.
 6. Keep T3.1-T3.4 blocked by default and T3.5/providers plus every product/write
    surface deferred.
 
@@ -257,8 +283,12 @@ no product runtime repair.
 - `orchestration/agent_inbox/codex/lc4v8-sol-acceptance.md`
 - `docs/bernie-lc4v8d1-development-closeout.md`
 - `orchestration/agent_inbox/codex/lc4v8d1-sol-acceptance.md`
+- `docs/bernie-lc4v9-fresh-certification-closeout.md`
+- `orchestration/agent_inbox/codex/lc4v9-sol-acceptance.md`
+- `docs/bernie-lc4v9d1-development-closeout.md`
+- `orchestration/agent_inbox/codex/lc4v9d1-sol-acceptance.md`
 
-Protected holdouts v1-v8 are sealed. Do not enumerate their paths, inspect
+Protected holdouts v1-v9 are sealed. Do not enumerate their paths, inspect
 content, rerun them, regenerate them, hash-check them, infer labels from them,
 or tune against them. T3.1-T3.4 remain blocked-by-default evaluation
 scaffolding; T3.5 is deferred.

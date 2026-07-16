@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V9 is validly consumed and sealed with `certification_fail`; ordinary inspectable LC4V9D1 non-create identity/projection diagnosis is now content-blind and in progress |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v9d1-sol-contract.md`; sealed V9 acceptance remains `lc4v9-sol-acceptance.md` and `docs/bernie-lc4v9-fresh-certification-closeout.md` |
-| Current result | Flash's 69-test self-pass was rejected for conceptual Gold/taxonomy defects. Sol recovery froze valid 7 extraction and 14 policy gaps, repaired only the ordinary patient-grammar causes, and now passes 30/30 extraction, policy behavior, exact projection, composition, and safety with zero variance and empty failure selection. Focused tests pass 70/70; adjacent preservation passes 281/281 with two documented historical equality deselections |
-| Next implementation | Preserve Gemini's `revision_required`, document the LC4V4D1 historical live-invariant deselection, reproduce the amended broader preservation gate, and obtain a fresh exact-head review before D1 acceptance. A future certification/holdout remains Yuri's decision |
+| Active product track | LC4V9 is sealed `certification_fail`; LC4V9D1 is accepted `development_exit_pass`; genuinely fresh LC4V10 is authorized and begins content-blind |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v9d1-sol-acceptance.md`; sealed V9 remains governed by `lc4v9-sol-acceptance.md` and `docs/bernie-lc4v9-fresh-certification-closeout.md` |
+| Current result | D1 froze a valid 9-pass/7-extraction-gap/14-policy-gap baseline, repaired only those 21 ordinary non-create identity/projection causes, and now passes 30/30 across 60 observations with zero variance and empty selection. Fresh Gemini returned `DECISION: pass`; Sol reproduced 70/70 focused and 280/280 broader nodes with three documented historical equality deselections |
+| Next implementation | Begin genuinely fresh LC4V10 content-blind framework, fresh Gemini pre-content veto, Sol-only corpus authorship, immutable seal, and one one-shot certification. Yuri preauthorizes successive fresh versions until pass, stalled progress, or an unexpected material fork. Preserve v1-v9, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 
@@ -73,40 +73,29 @@ Yuri authorized fresh V8 after V7D1. Flash's fail-open candidate was rejected; S
 `528/576`, all other dimensions including safety `576/576`, and zero variance.
 V8 is sealed; accepted D1 supplies no repair target and leaves V9 at Yuri's boundary.
 
-LC4V4 provenance: the frozen pre-content records remain
-`lc4v4q1-sol-contract.md`, `lc4v4q1-sol-recovery-amendment.md`,
-`lc4v4q1-antigravity-review.md`, `lc4v4-one-shot-acceptance-rule.md`,
-`lc4v4-preauthoring-metadata-incident.md`,
-`lc4v4-one-shot-acceptance-rule-v2.md`, and
-`lc4v4-one-shot-acceptance-rule-v3.md`. Flash candidate `4dc5ac8d` was rejected;
-Gemini returned `DECISION: pass` on exact recovered head `25e4461b`. Yuri then
-authorized `lc4v4-fresh-attempt-002` with strict named-file-only access.
-LC4V4 attempt 002 complete evidence remains sealed and unchanged under
-`lc4v4-sol-acceptance.md` and `bernie-lc4v4-fresh-certification-closeout.md`
-while D1 uses only ordinary development fixtures and the accepted aggregate
-closeout: complete 70/576 and safety 466/576. V4 is sealed; no rerun or parser
-remediation is authorized from its aggregate result.
+### LC4V9 and LC4V9D1 accepted state
 
-### LC4V4D1 incident and LC4V4D2 accepted state
+Fresh V9 validly consumed its sole attempt with `certification_fail`: complete
+88/576, entity semantics 96/576, exact policy projection 88/576, policy
+behavior/clarification/composition/replay 528/576, and all other semantic,
+safety, evidence, runtime, and variance gates perfect. All 20 non-create groups
+failed and no create group failed; V9 is sealed.
 
-LC4V4D1 authored 60 fresh inspectable development probes. Its frozen fixture,
-report, and raw 23-case selection hashes remain `a81de0b...`, `1527b993...`,
-and `1b254ae6...`. D1 is diagnostic only. During D2, a cross-field audit proved
-three frozen rows internally contradictory: corrected duration retained the
-old value, negated duration retained a value, and explicit elliptical duration
-was labelled omitted. The original `diagnostic_valid` decision is superseded
-by `lc4v4d1-sol-acceptance-amendment.md`; audited D1 is 3 authoring-invalid,
-20 parser gaps, 12 policy gaps, and 25 supported passes. Evidence was not rewritten.
+D1 then froze 30 fresh inspectable probes across the five non-create actions.
+Its valid baseline contained 7 extraction and 14 policy gaps. Sol rejected
+Flash's conceptually invalid Gold/taxonomy, recovered under the lease, and
+repaired only the reproduced patient-grammar causes. Final D1 is 30/30 with
+zero variance and empty selection. A fresh Gemini project returned
+`DECISION: pass`; Sol reproduced 70 focused and 280 broader selected nodes with
+three documented immutable historical equality deselections. See
+`lc4v9d1-sol-acceptance.md` and `bernie-lc4v9d1-development-closeout.md`.
 
-LC4V4D2 repaired all 20 valid utterance gaps under selection hash
-`sha256:0badec28ad533b630786d245e5ab47dee5655b83239869f7d0a2d12a8935d105`.
-Current D1 is 3 quarantined authoring-invalid, 0 parser gaps, 20 policy gaps,
-and 37 passes over 114 repeat observations with zero variance. The five diary
-joins remain policy gaps; report hash is `sha256:3220ac943659ae1449c5c285144b1fa980f659668a705ca7aef98f0aea6d317a`.
-Sol recovered Flash's fail-open evidence without a correction loop. Focused
-tests passed 203/203 and adjacent preservation passed 182/182. Gemini returned
-`DECISION: pass` on exact head `13d95c18`. See the D1 incident, D2 Sol
-acceptance, D2 closeout, and historical `lc4v4d1-sol-contract.md`.
+LC4V4 remains sealed. Its attempt-002 aggregate is complete 70/576 and safety
+466/576; no rerun or direct remediation is authorized. The D1/D2 authoring
+incident, quarantined rows, recovered parser gaps, immutable hashes, historical
+equality nodes, and exact veto provenance are preserved in
+`docs/handover-ledgers/bernie-language-evaluation.md` and their named Sol
+acceptance/closeout records; they are historical, not current baton authority.
 
 ### LC4R10 accepted state
 
@@ -306,20 +295,24 @@ changes; it does not inherit the failed worker's acceptance framing.
 
 ## 5. Protected Evidence and Closed Gates
 
-### Protected holdouts v1-v8
+### Protected holdouts v1-v9
 
-Protected holdouts v1, v2, and v3 remain sealed. Protected holdouts v1, v2, v3, and v4, plus v5-v8, share the same no-access boundary. Do not open, enumerate, list, search, import, run, regenerate,
+Protected holdouts v1, v2, and v3 remain sealed. Protected holdouts v1-v9
+share the same no-access boundary. Do not open, enumerate, list, search, import, run, regenerate,
 evaluate, hash-check, infer labels from, or tune against any protected fixture,
 support module, authoring surface, manifest, seal, receipt, or per-case report.
 The committed v2 aggregate report and aggregate closeout are the only v2
 evidence available for planning; only the committed aggregate report, closeout,
-and Sol acceptance are available for v3-v8 planning. Historical metadata-
+and Sol acceptance are available for v3-v9 planning. Historical metadata-
 enumeration incidents do not authorize reuse.
 
-Before future certification, Yuri must approve a new holdout version or an
-explicit reviewed reuse policy. Development work uses only ordinary
-development, Silver/pending, newly authored synthetic, or otherwise explicitly
-authorized evidence.
+Yuri preauthorized successive genuinely fresh holdout versions beginning with
+V10 until certification passes, evidence shows progress has stalled, or an
+unexpected material decision fork arises. This standing authority does not
+permit reuse: every new version must remain clean-room, content-blind before
+fresh independent veto, Sol-authored, immutably sealed, and one-shot.
+Development work uses only ordinary development, Silver/pending, newly authored
+synthetic, or otherwise explicitly authorized evidence.
 
 ### T3 and providers
 
@@ -349,10 +342,12 @@ it.
 
 Continue autonomously through ordinary development-only analysis,
 implementation, tests, review, recovery, documentation, commit, and push.
-Pause before:
+Yuri's 2026-07-17 standing authorization also permits successive genuinely
+fresh certification versions from V10 onward until a valid pass, stalled
+progress, or an unexpected material fork. Pause before:
 
 - a material clarification-policy or product-behaviour choice;
-- holdout reuse or creation of a new holdout version;
+- holdout reuse, or any new holdout outside the standing fresh-version cycle;
 - live-provider calls, T3.5 activation, or sensitive-data transmission;
 - historical-trove scope expansion beyond an approved payload;
 - material licence or cost acceptance;
