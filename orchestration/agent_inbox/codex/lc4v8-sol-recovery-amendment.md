@@ -50,3 +50,33 @@ recovered head before any actual V8 corpus content exists.
 
 The protected v1-v7 boundary, T3.1-T3.5 gates, and all product/write boundaries
 remain unchanged.
+
+## Sol amendments
+
+Sol replaced the candidate's disconnected helpers with one executable
+`run_one_shot` lifecycle and made these material amendments:
+
+- exact top-level, group, scenario, Gold, manifest, seal, threshold, and report
+  schemas with unknown-field rejection;
+- per-scenario language-form and turn validation, exact public group IDs, all
+  fixed distributions, and globally unique coverage cells;
+- a callback input containing only utterances and synthetic diary state, with
+  exact post-return scoring of all thirteen dimensions;
+- raw-output repeat fingerprints, explicit product interpretation/policy/
+  integration counters, and complete 24-group/six-form aggregate validation;
+- direct Git ancestry and committed-blob reads rather than a caller-supplied
+  ancestry boolean;
+- a manifest binding fixture, framework, and frozen-threshold bytes at the
+  corpus source commit, plus a seal binding the manifest bytes and attempt ID;
+- an exclusive persistent marker with no deletion API, a durable consumed
+  state, and consumption on pass, fail, invalid, missing-output, exception, and
+  report-write failure paths; and
+- a final report hash computed only after evidence counters, product failures,
+  group/form gates, and decision are populated.
+
+The recovered focused gate passes 41 tests, including temporary-repository
+Git/blob verification and complete 576-sample pass, product-fail, and
+evidence-invalid executions. The generic decision taxonomy is included in
+that count. Formatting-module checks were unavailable because neither `ruff`
+nor `black` is installed in the project environment; Python compilation and
+`git diff --check` pass.

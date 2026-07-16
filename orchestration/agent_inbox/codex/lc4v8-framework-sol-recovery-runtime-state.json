@@ -1,0 +1,19 @@
+{
+  "adapter_observations": [
+    {"adapter_id":"deepseek_via_claude_code_bare","evidence":["Candidate 2beeffe8 preserved and rejected for conceptual evidence-integrity defects."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"deepcode_cli","evidence":["Fallback unselected."],"method":"synthetic_fixture","reachability":"unknown"},
+    {"adapter_id":"claude_cli_print","evidence":["Claude Code --bare worker session is closed; no correction loop authorized."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"antigravity_cli_print","evidence":["Fresh pre-content veto is next after recovered-head commit."],"method":"synthetic_fixture","reachability":"unknown"},
+    {"adapter_id":"codex_primary_session","evidence":["GPT Sol recovered the framework under the lease; 41 focused and 2 ordinary isolation tests pass."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"codex_subagent_spawn","evidence":["No native subagent assigned."],"method":"synthetic_fixture","reachability":"unknown"}
+  ],
+  "assigned_agent_ids": [],
+  "context_health": {"agent_contexts":[{"agent_id":"orchestrator","measurement_source":"unknown","rehydrated_from_receipt":true,"rehydration_sources":["live_handover_current_baton","current_authority_allocation","active_plan_and_acceptance","protected_evidence_boundaries","git_refs_and_worktree"]}]},
+  "continuation_event": "post_compaction",
+  "planned_action": "verifier_acceptance",
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "worker_slots": [{"active_instance_ids":[],"resource_id":"deepseek-flash-workers","stale_instance_ids":[]}],
+  "workspace_receipts": [
+    {"agent_id":"orchestrator","branch":"master","clean":false,"at_handoff_current":false,"recorded_at":"2026-07-16T17:40:38+10:00","worktree":"C:\\Users\\sarashera\\emr4"}
+  ]
+}
