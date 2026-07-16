@@ -1,0 +1,17 @@
+{
+  "adapter_observations": [
+    {"adapter_id":"deepseek_via_claude_code_bare","evidence":["DeepSeek V4 Flash/high allocated to exact bounded four-surface D1 candidate."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"deepcode_cli","evidence":["Fallback unselected."],"method":"synthetic_fixture","reachability":"unknown"},
+    {"adapter_id":"claude_cli_print","evidence":["Claude Code --bare is the bound transport."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"antigravity_cli_print","evidence":["Not dispatched; reserved for independent review after accepted material work."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"codex_primary_session","evidence":["GPT Sol retains Gold audit, taxonomy, acceptance, recovery, baseline, integration, and push authority."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"codex_subagent_spawn","evidence":["None assigned."],"method":"synthetic_fixture","reachability":"unknown"}
+  ],
+  "assigned_agent_ids": ["deepseek-lc4v9d1-candidate"],
+  "context_health": {"agent_contexts":[{"agent_id":"orchestrator","measurement_source":"unknown","rehydrated_from_receipt":true,"rehydration_sources":["live_handover_current_baton","current_authority_allocation","active_plan_and_acceptance","protected_evidence_boundaries","git_refs_and_worktree"]}]},
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch",
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "worker_slots": [{"active_instance_ids":["deepseek-lc4v9d1-candidate"],"resource_id":"deepseek-flash-workers","stale_instance_ids":[]}],
+  "workspace_receipts": []
+}
