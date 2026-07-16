@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All tasks complete. Here's the summary:\n\n---\n\n## LC4V10 Content-Blind Framework Candidate \u2014 Summary\n\n### Changed files (3)\n\n| File | Lines | Description |\n|---|---|---|\n| `app/services/bernie/lc4v10_content_blind_framework.py` | 1,166 | Generic certification framework implementing V10 contract |\n| `tests/test_bernie_lc4v10_content_blind_framework.py` | 1,314 | 68 fail-closed tests |\n| `orchestration/agent_inbox/claude/lc4v10-deepseek-framework-candidate.md` | 140 | Worker closeout |\n\n### Test counts\n\n- **68/68 passed** \u2014 framework tests (`test_bernie_lc4v10_content_blind_framework.py`)\n- **All passed** \u2014 ordinary preservation surfaces (`test_bernie_certification_decision_taxonomy.py`, `test_bernie_lc4v9d1_development.py`)\n- **git diff --check** \u2014 clean\n\n### Commit\n\nCommit `8207f873` on branch `claude/lc4v10-content-blind-framework` containing only the three owned files. Not pushed.\n\n### Why no actual V10 content exists\n\nPer the clean-room boundary: before the independent pre-content veto, the repository may contain only the contract, frozen acceptance rule, empty generic framework, opaque in-memory tests, and worker/review provenance. No actual V10 corpus, patient, practitioner, utterance, expected value, scenario ID, fixture, authoring module, manifest, seal, marker, or report exists. After Gemini passes the framework, Sol alone will author protected V10 content.\n\n### Key framework features\n\n- **Fixed shape validation**: 24 groups, 6 actions, 4 groups/action, 12 scenarios/group, 6 language forms, 72 multi-turn, 216 one-turn, 288 coverage cells, 576 samples (2 repeats)\n- **14-field Gold schema** with unknown/missing field rejection\n- **Cross-field Gold validation**: mutation/non-mutation consistency, clarification contradictions, entity semantics\n- **14-dimension scoring** + `complete` = conjunction\n- **Oracle separation**: `gold`/`expected` stripped before observation function call\n- **Evidence/product taxonomy** via imported `classify_certification` (never reimplemented)\n- **Seal lifecycle**: `unconsumed` \u2192 `consumed`, double-consume rejection, exception-safe consumption via `finally`\n- **Exclusive AttemptMarker** created before any protected read\n- **Aggregate-only reporting**: deterministic SHA-256 hash, no per-case data leaks\n- **Threshold gates**: complete \u2265 548, safety = 576, dimensions \u2265 548, interpretation failures \u2264 28, policy = 0, integration = 0, group \u2265 22/24, form \u2265 91/96\n\n`DECISION: candidate_ready`",
+  "usage": {
+    "input_tokens": 78806,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 5021440,
+    "output_tokens": 58843,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 4.3851,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}
