@@ -1,0 +1,24 @@
+{
+  "action_count": 6,
+  "attempt_id": "lc4v6-fresh-attempt-001",
+  "author": "gpt-sol",
+  "component_hashes": {
+    "acceptance_rule": "sha256:e5bbe3e731ef7533596063dc48af71de5b46bc00db128ac390c7ed25b0778879",
+    "evaluator": "sha256:410f7da3c83ad99325fe43bd91e5e04511aa4292eae5371e09fe460015eadbc0",
+    "runner": "sha256:bf6175e5bd2d0723df730673b465e842dd9c95ed4fbe032fb83136587204f18a"
+  },
+  "content_reviewed_by_external_worker": false,
+  "corpus_hash": "sha256:10fef42500f5fd379248c67d0348e5bd75176be62445f9180c9a18618aa1bdfa",
+  "coverage_cell_count": 288,
+  "evaluator_hash": "sha256:485acda0a4f9c54fd9d2d890e228cac8fe58bfa73d4f140499c0b5ea2c4cc220",
+  "framework_hash": "sha256:5d3b90126cf0e3d5077b7670883128c01496b9240693499765241ea7e841ce5f",
+  "group_count": 24,
+  "manifest_hash": "sha256:4892e7144549d25c522f3e0eafc6faaed0af61b33e0fc05ca8a3f460a01cdd9a",
+  "multi_turn_count": 72,
+  "one_shot_count": 216,
+  "repeats": 2,
+  "scenario_count": 288,
+  "schema_version": "lc4v6.manifest.v1",
+  "source_commit": "0527848bb7d4c86a4c138f49016472c447c05757",
+  "source_hash": "sha256:d0ea315cbe2da3c2fbb68cd2934484e4d96e59db1ae8a164f7394fab48482a64"
+}
