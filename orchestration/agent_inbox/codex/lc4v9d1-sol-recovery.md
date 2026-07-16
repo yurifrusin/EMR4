@@ -37,3 +37,18 @@ adopts the source only as untrusted scaffolding under the recovery lease.
 
 No protected V9 content was accessed. Parser and policy product code remain
 unchanged during recovery.
+
+## Recovered result
+
+Sol replaced the six explain rows with patient-bearing Gold, enforced the
+exact per-action structure set and full-patient invariant, excluded action
+verbs from semantic patient capture, and added bounded action-local policy
+captures for direct, `appointment for`, possessive, patient-first, and
+schedule-for grammar.
+
+The accepted development result is 30/30 extraction, policy behavior, exact
+projection, composition, and safety with zero variance. The failure selection
+is empty (`sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945`).
+Focused tests pass 70/70; adjacent semantic/policy/D1 preservation passes
+281/281 after deselecting the two documented historical LC4V4D3 report-
+equality nodes. Independent Gemini review remains required before acceptance.

@@ -255,6 +255,34 @@ _MUTATION_PATIENT_CAPTURE = re.compile(
     re.I,
 )
 
+_DIRECT_NON_CREATE_PATIENT_CAPTURE = re.compile(
+    r"\b(?:move|resize|cancel|mark|explain)\s+(?!the\b)" + _PERSON_NAME
+    + r"(?=\s+(?:with|tomorrow|today|on|at|as)\b|['â€™]s\s+appointment\b)",
+    re.I,
+)
+
+_APPOINTMENT_FOR_PATIENT_CAPTURE = re.compile(
+    r"\bappointment(?:\s+schedule)?\s+for\s+" + _PERSON_NAME
+    + r"(?=\s+(?:with|tomorrow|today|on|at|as)\b|\s*[,.])",
+    re.I,
+)
+
+_POSSESSIVE_PATIENT_CAPTURE = re.compile(
+    r"\b" + _PERSON_NAME + r"['â€™]s\s+appointment(?:\s+schedule)?\b",
+)
+
+_PATIENT_FIRST_CAPTURE = re.compile(
+    r"\b" + _PERSON_NAME
+    + r"\s*[-â€”—]\s*(?:please\s+)?(?:move|resize|cancel|mark|explain)\b",
+    re.I,
+)
+
+_SCHEDULE_FOR_PATIENT_CAPTURE = re.compile(
+    r"\b(?:the\s+)?schedule\s+for\s+" + _PERSON_NAME
+    + r"(?=\s+with\b|\s*[,.])",
+    re.I,
+)
+
 _PATIENT_CORRECTION_CAPTURE = re.compile(
     r"\b(?:make it|make that|actually\s*,\s*make\s+that|sorry\s*,?)\s+"
     r"(?!Dr\s)" + _PERSON_NAME + r"(?:\s+(?:instead|please))?",
@@ -270,10 +298,23 @@ def extract_final_patient(utterances: list[str]) -> str | None:
     """
     last: str | None = None
     for u in utterances:
-        for pattern in (_CREATE_PATIENT_CAPTURE, _MUTATION_PATIENT_CAPTURE):
+        for pattern in (
+            _CREATE_PATIENT_CAPTURE,
+            _MUTATION_PATIENT_CAPTURE,
+            _DIRECT_NON_CREATE_PATIENT_CAPTURE,
+            _APPOINTMENT_FOR_PATIENT_CAPTURE,
+            _POSSESSIVE_PATIENT_CAPTURE,
+            _PATIENT_FIRST_CAPTURE,
+            _SCHEDULE_FOR_PATIENT_CAPTURE,
+        ):
             matches = pattern.findall(u)
             if matches:
                 last = matches[-1]
+                words = last.split()
+                if words and words[0].casefold() in {
+                    "move", "resize", "cancel", "mark", "explain", "tell"
+                }:
+                    last = " ".join(words[1:]) or None
         corrections = _PATIENT_CORRECTION_CAPTURE.findall(u)
         if corrections:
             last = corrections[-1]

@@ -152,15 +152,25 @@ def test_no_create_probes() -> None:
 
 
 def test_language_form_diversity() -> None:
-    """Each action has at least one of each required language structure."""
+    """Each action has exactly the six frozen language structures."""
+    required = {
+        "direct_named_patient", "appointment_for_patient",
+        "possessive_patient", "patient_first_word_order",
+        "polite_speech_like", "two_turn_additive_context",
+    }
     action_forms: dict[str, set[str]] = {}
     for case in FIXTURE["cases"]:
         action = case["expected"]["intended_action"]
         action_forms.setdefault(action, set()).add(case["language_form"])
     for action, forms in action_forms.items():
-        assert len(forms) >= 3, (
-            f"{action} has only {len(forms)} language forms: {forms}"
-        )
+        assert forms == required, f"{action} language forms drifted: {forms}"
+
+
+def test_every_probe_has_full_exact_patient_gold() -> None:
+    for case in FIXTURE["cases"]:
+        expected = case["expected"]
+        assert expected["entity_semantics"]["patient"] == "exact"
+        assert len(expected["extracted_patient"].split()) >= 2
 
 
 # ---------------------------------------------------------------------------
@@ -489,7 +499,10 @@ def test_no_cross_field_gold_contradictions() -> None:
             assert pr.get("simulated_write") is False
         elif ps.get("resolution") == "proceed_read":
             assert pr.get("authority") == "read"
-            assert pr.get("selected_tools") == ["find_slots"]
+            expected_tools = ["find_slots"]
+            if pr.get("resolved_patient") is not None:
+                expected_tools.insert(0, "search_patients")
+            assert pr.get("selected_tools") == expected_tools
             assert pr.get("downstream_outcome") == "schedule_explained"
             assert pr.get("appointment_delta_count") == 0
             assert pr.get("audit_delta_count") == 0

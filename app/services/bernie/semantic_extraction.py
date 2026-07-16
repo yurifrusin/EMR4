@@ -467,7 +467,7 @@ _PATIENT_PATTERN = re.compile(
     r"[Bb]ook |[Mm]ake |[Cc]reate |[Ss]ee |[Nn]eed |[Ww]ant |"
     r"[Aa]n appointment for |[Aa] booking for )?"
     r"(?!Dr\s+[A-Z])"
-    r"(?!(?:Book|Make|Create|Schedule|See)\s)"
+    r"(?!(?:Book|Make|Create|Schedule|See|Move|Resize|Cancel|Mark|Explain|Tell)\s)"
     r"([A-Z][a-z]+(?:\s+(?!Dr\b)[A-Z][a-z]+)+)\b",
 )
 

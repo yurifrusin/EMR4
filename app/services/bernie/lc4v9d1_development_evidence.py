@@ -54,6 +54,19 @@ PROVENANCE_VALUE = (
     "fresh_flash_synthetic_gold_development_only_for_lc4v9d1_non_create_identity_diagnostic"
 )
 TOTAL_EXPECTED = 30
+NON_CREATE_ACTIONS = frozenset(
+    {"move", "resize", "cancel", "status_change", "explain_schedule"}
+)
+REQUIRED_LANGUAGE_FORMS = frozenset(
+    {
+        "direct_named_patient",
+        "appointment_for_patient",
+        "possessive_patient",
+        "patient_first_word_order",
+        "polite_speech_like",
+        "two_turn_additive_context",
+    }
+)
 
 TOP_LEVEL_KEYS = {"schema_version", "reference_date", "provenance", "cases"}
 CASE_KEYS = {
@@ -181,6 +194,7 @@ def validate_fixture(fixture: Any) -> tuple[str, ...]:
 
     ids: list[str] = []
     lang_forms: Counter[str] = Counter()
+    action_forms: dict[str, set[str]] = {action: set() for action in NON_CREATE_ACTIONS}
 
     for index, case in enumerate(cases):
         label = f"case[{index}]"
@@ -231,6 +245,8 @@ def validate_fixture(fixture: Any) -> tuple[str, ...]:
         intended = expected.get("intended_action")
         if intended not in KNOWN_INTENDED_ACTIONS:
             errors.append(f"{label} intended_action ({intended}) is not valid")
+        elif intended in action_forms and isinstance(lang_form, str):
+            action_forms[intended].add(lang_form)
 
         # --- temporal fields ---
         temporal = expected.get("temporal_relation")
@@ -267,6 +283,8 @@ def validate_fixture(fixture: Any) -> tuple[str, ...]:
                 val = es.get(sem_field)
                 if val not in {"exact", "omitted", "ambiguous", "negated", "corrected"}:
                     errors.append(f"{label} entity_semantics.{sem_field} is invalid")
+            if es.get("patient") != "exact":
+                errors.append(f"{label} every D1 probe requires exact patient semantics")
 
         # --- extracted_patient / extracted_practitioner ---
         for ext_field in ("extracted_patient", "extracted_practitioner"):
@@ -283,6 +301,9 @@ def validate_fixture(fixture: Any) -> tuple[str, ...]:
                 prac_sem = es.get("practitioner") if isinstance(es, Mapping) else None
                 if val is not None and prac_sem not in {"exact", "corrected"}:
                     errors.append(f"{label} extracted_practitioner present but entity_semantics says {prac_sem}")
+        extracted_patient = expected.get("extracted_patient")
+        if not isinstance(extracted_patient, str) or len(extracted_patient.split()) < 2:
+            errors.append(f"{label} every D1 probe requires a full patient Gold identity")
 
         # --- policy_semantics ---
         ps = expected.get("policy_semantics")
@@ -420,6 +441,9 @@ def validate_fixture(fixture: Any) -> tuple[str, ...]:
     # Uniqueness
     if len(ids) != len(set(ids)):
         errors.append("probe IDs must be unique")
+    for action, forms in action_forms.items():
+        if forms != REQUIRED_LANGUAGE_FORMS:
+            errors.append(f"{action} language structures are not the exact frozen set")
 
     return tuple(dict.fromkeys(errors))
 
