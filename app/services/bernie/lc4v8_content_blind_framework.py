@@ -7,6 +7,7 @@ no V8 utterance, diary state, Gold contract, or earlier holdout dependency.
 from __future__ import annotations
 
 import hashlib
+import inspect
 import json
 import os
 import re
@@ -95,7 +96,8 @@ SCENARIO_FIELDS = frozenset({
 })
 MANIFEST_FIELDS = frozenset({
     "schema_version", "corpus_source_commit", "fixture_path", "fixture_sha256",
-    "framework_path", "framework_sha256", "thresholds_path", "thresholds_sha256",
+    "framework_path", "framework_sha256", "evaluator_path", "evaluator_sha256",
+    "thresholds_path", "thresholds_sha256",
 })
 SEAL_FIELDS = frozenset({"schema_version", "manifest_sha256", "attempt_id", "state"})
 THRESHOLD_FIELDS = frozenset(FROZEN_THRESHOLDS)
@@ -302,11 +304,11 @@ def validate_manifest_schema(manifest: Mapping[str, object]) -> list[str]:
     commit = manifest.get("corpus_source_commit")
     if not isinstance(commit, str) or not _HEX40_RE.fullmatch(commit):
         errors.append("manifest.corpus_source_commit must be lowercase 40-hex")
-    for key in ("fixture_path", "framework_path", "thresholds_path"):
+    for key in ("fixture_path", "framework_path", "evaluator_path", "thresholds_path"):
         value = manifest.get(key)
         if not isinstance(value, str) or not value or "\\" in value or value.startswith("/") or ".." in Path(value).parts:
             errors.append(f"manifest.{key} must be a normalized repo-relative path")
-    for key in ("fixture_sha256", "framework_sha256", "thresholds_sha256"):
+    for key in ("fixture_sha256", "framework_sha256", "evaluator_sha256", "thresholds_sha256"):
         value = manifest.get(key)
         if not isinstance(value, str) or not _HEX64_RE.fullmatch(value):
             errors.append(f"manifest.{key} must be lowercase 64-hex")
@@ -497,7 +499,7 @@ def validate_source_binding(
     ancestor = _git(repo_root, "merge-base", "--is-ancestor", commit, "HEAD", check=False)
     if ancestor.returncode != 0:
         errors.append("corpus source commit is not an ancestor of execution HEAD")
-    for prefix in ("fixture", "framework", "thresholds"):
+    for prefix in ("fixture", "framework", "evaluator", "thresholds"):
         path = manifest.get(f"{prefix}_path")
         expected_hash = manifest.get(f"{prefix}_sha256")
         if not isinstance(path, str) or not isinstance(expected_hash, str):
@@ -751,6 +753,7 @@ def run_one_shot(
     seal_path: Path,
     thresholds_path: Path,
     framework_path: Path,
+    evaluator_path: Path,
     marker_path: Path,
     report_path: Path,
     expected_attempt_id: str,
@@ -775,10 +778,11 @@ def run_one_shot(
             _seal_bytes, seal = _load_json_bytes(seal_path)
             threshold_bytes, thresholds = _load_json_bytes(thresholds_path)
             framework_bytes = framework_path.read_bytes()
+            evaluator_bytes = evaluator_path.read_bytes()
         except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError):
             evidence["validation_errors"] += 1
             fixture = manifest = seal = {}
-            fixture_bytes = threshold_bytes = framework_bytes = manifest_bytes = b""
+            fixture_bytes = threshold_bytes = framework_bytes = evaluator_bytes = manifest_bytes = b""
 
         validation_errors: list[str] = []
         validation_errors.extend(validate_fixture_schema(fixture))
@@ -793,17 +797,22 @@ def run_one_shot(
         expected_paths = {
             "fixture_path": fixture_path.resolve().relative_to(repo_root.resolve()).as_posix(),
             "framework_path": framework_path.resolve().relative_to(repo_root.resolve()).as_posix(),
+            "evaluator_path": evaluator_path.resolve().relative_to(repo_root.resolve()).as_posix(),
             "thresholds_path": thresholds_path.resolve().relative_to(repo_root.resolve()).as_posix(),
         }
         for key, expected_path in expected_paths.items():
             if manifest.get(key) != expected_path:
                 validation_errors.append(f"manifest {key} mismatch")
+        callable_source = inspect.getsourcefile(evaluator)
+        if callable_source is None or Path(callable_source).resolve() != evaluator_path.resolve():
+            validation_errors.append("evaluator callable source mismatch")
         validation_errors.extend(validate_source_binding(
             repo_root=repo_root,
             manifest=manifest,
             current_bytes={
                 "fixture": fixture_bytes,
                 "framework": framework_bytes,
+                "evaluator": evaluator_bytes,
                 "thresholds": threshold_bytes,
             },
         ))

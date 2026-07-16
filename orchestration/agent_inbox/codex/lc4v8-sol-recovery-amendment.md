@@ -68,6 +68,9 @@ Sol replaced the candidate's disconnected helpers with one executable
   ancestry boolean;
 - a manifest binding fixture, framework, and frozen-threshold bytes at the
   corpus source commit, plus a seal binding the manifest bytes and attempt ID;
+- an additional manifest binding for the product-facing evaluator module,
+  including direct verification that the supplied callback's Python source
+  file is that exact committed module rather than an unbound callable;
 - an exclusive persistent marker with no deletion API, a durable consumed
   state, and consumption on pass, fail, invalid, missing-output, exception, and
   report-write failure paths; and

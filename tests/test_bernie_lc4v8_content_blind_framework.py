@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import copy
+import importlib.util
 import json
 import subprocess
+import sys
 from pathlib import Path
 from typing import Callable
 
@@ -108,7 +110,7 @@ def _write_json(path: Path, value: object) -> bytes:
     return raw
 
 
-def _prepared_attempt(tmp_path: Path) -> dict[str, Path | str]:
+def _prepared_attempt(tmp_path: Path, mode: str = "pass") -> dict[str, object]:
     repo = tmp_path / "repo"
     repo.mkdir(parents=True)
     _git(repo, "init")
@@ -116,12 +118,43 @@ def _prepared_attempt(tmp_path: Path) -> dict[str, Path | str]:
     _git(repo, "config", "user.name", "V8 Framework Test")
     fixture_path = repo / "fixture.json"
     framework_path = repo / "framework.py"
+    evaluator_path = repo / "evaluator.py"
     thresholds_path = repo / "thresholds.json"
     fixture_bytes = _write_json(fixture_path, _fixture())
     framework_bytes = b"# opaque framework binding\n"
     framework_path.write_bytes(framework_bytes)
+    evaluator_source = f'''\
+from app.services.bernie.lc4v8_content_blind_framework import DIMENSION_NAMES, ScenarioOutput
+
+_calls = 0
+
+def _dimensions():
+    return {{name: {{"opaque": name}} for name in DIMENSION_NAMES}}
+
+def evaluate(_value):
+    global _calls
+    _calls += 1
+    mode = {mode!r}
+    if mode == "runtime_exception":
+        raise RuntimeError("opaque failure")
+    dimensions = _dimensions()
+    if mode == "wrong":
+        dimensions["intended_action"] = "wrong"
+    if mode == "missing":
+        del dimensions["safety"]
+    if mode == "variance":
+        dimensions["intended_action"] = f"wrong-{{_calls}}"
+    return ScenarioOutput(
+        dimensions=dimensions,
+        interpretation_failure=False,
+        policy_failure=mode == "policy_failure",
+        integration_failure=mode == "integration_failure",
+    )
+'''
+    evaluator_bytes = evaluator_source.encode("utf-8")
+    evaluator_path.write_bytes(evaluator_bytes)
     threshold_bytes = _write_json(thresholds_path, FROZEN_THRESHOLDS)
-    _git(repo, "add", "fixture.json", "framework.py", "thresholds.json")
+    _git(repo, "add", "fixture.json", "framework.py", "evaluator.py", "thresholds.json")
     _git(repo, "commit", "-m", "freeze opaque source")
     source_commit = _git(repo, "rev-parse", "HEAD")
     manifest = {
@@ -131,6 +164,8 @@ def _prepared_attempt(tmp_path: Path) -> dict[str, Path | str]:
         "fixture_sha256": sha256_bytes(fixture_bytes),
         "framework_path": "framework.py",
         "framework_sha256": sha256_bytes(framework_bytes),
+        "evaluator_path": "evaluator.py",
+        "evaluator_sha256": sha256_bytes(evaluator_bytes),
         "thresholds_path": "thresholds.json",
         "thresholds_sha256": sha256_bytes(threshold_bytes),
     }
@@ -145,6 +180,12 @@ def _prepared_attempt(tmp_path: Path) -> dict[str, Path | str]:
     }
     seal_path = repo / "seal.json"
     _write_json(seal_path, seal)
+    module_name = f"_lc4v8_test_evaluator_{abs(hash(str(evaluator_path)))}"
+    spec = importlib.util.spec_from_file_location(module_name, evaluator_path)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[module_name] = module
+    spec.loader.exec_module(module)
     return {
         "repo_root": repo,
         "fixture_path": fixture_path,
@@ -152,17 +193,18 @@ def _prepared_attempt(tmp_path: Path) -> dict[str, Path | str]:
         "seal_path": seal_path,
         "thresholds_path": thresholds_path,
         "framework_path": framework_path,
+        "evaluator_path": evaluator_path,
         "marker_path": repo / "attempt.marker.json",
         "report_path": repo / "report.json",
         "expected_attempt_id": attempt_id,
+        "_evaluator": module.evaluate,
     }
 
 
-def _run(
-    prepared: dict[str, Path | str],
-    evaluator: Callable[[ScenarioInput], ScenarioOutput],
-):
-    return run_one_shot(evaluator=evaluator, **prepared)  # type: ignore[arg-type]
+def _run(prepared: dict[str, object]):
+    evaluator = prepared["_evaluator"]
+    arguments = {key: value for key, value in prepared.items() if not key.startswith("_")}
+    return run_one_shot(evaluator=evaluator, **arguments)  # type: ignore[arg-type]
 
 
 def test_exact_fixture_and_shape_pass() -> None:
@@ -223,6 +265,8 @@ def test_manifest_seal_and_frozen_thresholds_are_exact() -> None:
         "fixture_sha256": "b" * 64,
         "framework_path": "framework.py",
         "framework_sha256": "c" * 64,
+        "evaluator_path": "evaluator.py",
+        "evaluator_sha256": "e" * 64,
         "thresholds_path": "thresholds.json",
         "thresholds_sha256": "d" * 64,
     }
@@ -248,6 +292,8 @@ def test_manifest_rejects_parent_path() -> None:
         "fixture_sha256": "b" * 64,
         "framework_path": "framework.py",
         "framework_sha256": "c" * 64,
+        "evaluator_path": "evaluator.py",
+        "evaluator_sha256": "e" * 64,
         "thresholds_path": "thresholds.json",
         "thresholds_sha256": "d" * 64,
     }
@@ -298,7 +344,7 @@ def test_marker_is_exclusive_persistent_and_has_no_cleanup(tmp_path: Path) -> No
 
 def test_one_shot_passes_and_writes_anonymous_valid_report(tmp_path: Path) -> None:
     prepared = _prepared_attempt(tmp_path)
-    result = _run(prepared, lambda _value: _passing_output())
+    result = _run(prepared)
     assert result.decision == CERTIFICATION_PASS
     assert result.marker_created
     assert result.report is not None
@@ -316,11 +362,8 @@ def test_one_shot_passes_and_writes_anonymous_valid_report(tmp_path: Path) -> No
 
 
 def test_valid_product_miss_is_fail_not_invalid(tmp_path: Path) -> None:
-    prepared = _prepared_attempt(tmp_path)
-    result = _run(
-        prepared,
-        lambda _value: _passing_output(intended_action="wrong"),
-    )
+    prepared = _prepared_attempt(tmp_path, "wrong")
+    result = _run(prepared)
     assert result.decision == CERTIFICATION_FAIL
     assert result.report is not None
     assert result.report["evidence_failures"] == {
@@ -337,31 +380,16 @@ def test_valid_product_miss_is_fail_not_invalid(tmp_path: Path) -> None:
 def test_policy_and_integration_failures_are_product_results(
     tmp_path: Path, failure_field: str
 ) -> None:
-    prepared = _prepared_attempt(tmp_path)
-
-    def evaluator(_value: ScenarioInput) -> ScenarioOutput:
-        kwargs = {
-            "dimensions": _expected(),
-            "interpretation_failure": False,
-            "policy_failure": False,
-            "integration_failure": False,
-        }
-        kwargs[failure_field] = True
-        return ScenarioOutput(**kwargs)  # type: ignore[arg-type]
-
-    result = _run(prepared, evaluator)
+    prepared = _prepared_attempt(tmp_path, failure_field)
+    result = _run(prepared)
     assert result.decision == CERTIFICATION_FAIL
     assert result.report is not None
     assert not any(result.report["evidence_failures"].values())  # type: ignore[union-attr]
 
 
 def test_runtime_exception_is_invalid_and_consumes(tmp_path: Path) -> None:
-    prepared = _prepared_attempt(tmp_path)
-
-    def evaluator(_value: ScenarioInput) -> ScenarioOutput:
-        raise RuntimeError("opaque failure")
-
-    result = _run(prepared, evaluator)
+    prepared = _prepared_attempt(tmp_path, "runtime_exception")
+    result = _run(prepared)
     assert result.decision == CERTIFICATION_INVALID
     assert result.report is not None
     assert result.report["evidence_failures"]["runtime_exceptions"] == 1  # type: ignore[index]
@@ -370,13 +398,8 @@ def test_runtime_exception_is_invalid_and_consumes(tmp_path: Path) -> None:
 
 
 def test_missing_output_dimension_is_invalid_and_consumes(tmp_path: Path) -> None:
-    prepared = _prepared_attempt(tmp_path)
-    missing = _expected()
-    del missing["safety"]
-    result = _run(
-        prepared,
-        lambda _value: ScenarioOutput(missing, False, False, False),
-    )
+    prepared = _prepared_attempt(tmp_path, "missing")
+    result = _run(prepared)
     assert result.decision == CERTIFICATION_INVALID
     assert result.report is not None
     assert result.report["evidence_failures"]["missing_dimensions"] == 1  # type: ignore[index]
@@ -392,14 +415,16 @@ def test_tampered_committed_binding_is_invalid_before_evaluation(tmp_path: Path)
         calls += 1
         return _passing_output()
 
-    result = _run(prepared, evaluator)
+    result = run_one_shot(evaluator=evaluator, **{
+        key: value for key, value in prepared.items() if not key.startswith("_")
+    })  # type: ignore[arg-type]
     assert result.decision == CERTIFICATION_INVALID
     assert calls == 0
 
 
 def test_second_attempt_cannot_evaluate_or_overwrite_report(tmp_path: Path) -> None:
     prepared = _prepared_attempt(tmp_path)
-    first = _run(prepared, lambda _value: _passing_output())
+    first = _run(prepared)
     original_report = Path(prepared["report_path"]).read_bytes()
     calls = 0
 
@@ -408,7 +433,9 @@ def test_second_attempt_cannot_evaluate_or_overwrite_report(tmp_path: Path) -> N
         calls += 1
         return _passing_output()
 
-    second = _run(prepared, evaluator)
+    second = run_one_shot(evaluator=evaluator, **{
+        key: value for key, value in prepared.items() if not key.startswith("_")
+    })  # type: ignore[arg-type]
     assert first.decision == CERTIFICATION_PASS
     assert second.decision == CERTIFICATION_INVALID
     assert not second.marker_created and second.report is None
@@ -419,7 +446,7 @@ def test_second_attempt_cannot_evaluate_or_overwrite_report(tmp_path: Path) -> N
 def test_preexisting_report_path_forces_invalid_and_consumes(tmp_path: Path) -> None:
     prepared = _prepared_attempt(tmp_path)
     Path(prepared["report_path"]).write_text("occupied\n", encoding="utf-8")
-    result = _run(prepared, lambda _value: _passing_output())
+    result = _run(prepared)
     assert result.decision == CERTIFICATION_INVALID
     assert result.report is not None
     assert result.report["decision"] == CERTIFICATION_INVALID
@@ -431,7 +458,7 @@ def test_preexisting_report_path_forces_invalid_and_consumes(tmp_path: Path) -> 
 
 def test_report_rejects_missing_slice_and_hash_tampering(tmp_path: Path) -> None:
     prepared = _prepared_attempt(tmp_path)
-    result = _run(prepared, lambda _value: _passing_output())
+    result = _run(prepared)
     assert result.report is not None
     missing_slice = copy.deepcopy(result.report)
     del missing_slice["group_counts"]["g24"]  # type: ignore[index]
@@ -444,9 +471,9 @@ def test_report_rejects_missing_slice_and_hash_tampering(tmp_path: Path) -> None
 
 def test_report_hash_binds_final_product_failures(tmp_path: Path) -> None:
     first_prepared = _prepared_attempt(tmp_path / "first")
-    second_prepared = _prepared_attempt(tmp_path / "second")
-    passed = _run(first_prepared, lambda _value: _passing_output())
-    failed = _run(second_prepared, lambda _value: _passing_output(intended_action="wrong"))
+    passed = _run(first_prepared)
+    second_prepared = _prepared_attempt(tmp_path / "second", "wrong")
+    failed = _run(second_prepared)
     assert passed.report is not None and failed.report is not None
     assert passed.report["report_hash"] != failed.report["report_hash"]
     assert deterministic_hash({
