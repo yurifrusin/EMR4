@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V8 genuinely fresh content-blind framework is in progress; no actual V8 corpus content exists yet |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v8-sol-contract.md` and `orchestration/agent_inbox/codex/lc4v8-one-shot-acceptance-rule.md`; LC4V7D1 closed under `lc4v7d1-sol-acceptance.md` |
-| Current result | D1 froze 24 valid fresh gaps, repaired only those rules, and now passes 24/24 normalization, extraction, policy, composition, and safety over 48 observations with zero variance. Gemini returned `DECISION: pass` on exact head `19d50763`; the broader serial preservation gate passed 680 nodes with 16 documented historical deselections. V7 remains consumed and unchanged |
-| Next implementation | Begin genuinely fresh LC4V8 content-blind: new framework only, generic evidence-vs-product taxonomy, fresh Gemini pre-content veto, then Sol-only corpus authorship, immutable seal, and one one-shot certification. Do not inspect or reuse V7 protected implementation/content. Preserve v1-v7, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
+| Active product track | LC4V8 genuinely fresh one-shot certification is complete, evidence-valid, and permanently sealed with `certification_fail`; a user development decision is required |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v8-sol-acceptance.md` and `docs/bernie-lc4v8-fresh-certification-closeout.md` |
+| Current result | The consumed V8 attempt produced 576 valid observations with zero evidence defects or variance: safety 576/576, policy/integration failures zero, complete and policy resolution 0/576, temporal relation and normalization 528/576, and every other semantic dimension 576/576. Every group and language-form complete gate fails. V8 cannot be inspected or rerun |
+| Next implementation | Pause for Yuri. Recommend bounded development-only LC4V8D1 using fresh inspectable probes derived only from public aggregates: first separate policy-resolution authoring/projection mismatch from product causes, then independently sample temporal/normalization. A later V9 is a separate decision. Preserve v1-v8, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 
@@ -65,6 +65,13 @@ built clean-room head `186ccf44`; Gemini also passed amended `b4f8cb18` before
 content. Sol froze source `403fcafd`. The consumed raw result is
 `certification_invalid` because product failures were misclassified as evidence
 invalidity; complete `224/576`, safety `576/576`, and product gates miss. V7 is sealed; see active acceptance.
+
+### LC4V8 accepted state
+
+Yuri authorized fresh V8 after V7D1. Flash's fail-open candidate was rejected; Sol recovered, Gemini passed two pre-content vetoes, and Sol froze source `313e6247` plus seal `5d465667`. The sole valid 576-observation attempt returned
+`certification_fail`: complete/policy resolution `0/576`, temporal/normalization
+`528/576`, all other dimensions including safety `576/576`, and zero variance.
+V8 is sealed; details and the D1 boundary are in the active acceptance.
 
 LC4V4 provenance: the frozen pre-content records remain
 `lc4v4q1-sol-contract.md`, `lc4v4q1-sol-recovery-amendment.md`,
@@ -150,15 +157,8 @@ either protected holdout.
 See `orchestration/agent_inbox/codex/lc4v2-sol-acceptance.md` for the exact
 one-shot evidence and authority decision.
 
-1. Keep holdouts v1 and v2 sealed and use only the committed aggregate v2
-   evidence for planning.
-2. Recommend an ordinary development-only semantic repair and corpus-
-   engineering tranche focused on entity semantics, normalization,
-   clarification, and safety.
-3. Require a separately authorized fresh holdout or reviewed reuse policy for
-   any later certification.
-4. Keep `check_in`, T3.5 provider adapters/live calls, and all runtime/write
-   authority behind their deferred gates.
+V2 remains sealed; its accepted aggregate-only development direction is
+superseded by the later accepted sequence below.
 
 ### LC4V2R1 accepted state
 
@@ -306,14 +306,14 @@ changes; it does not inherit the failed worker's acceptance framing.
 
 ## 5. Protected Evidence and Closed Gates
 
-### Protected holdouts v1-v7
+### Protected holdouts v1-v8
 
-Protected holdouts v1, v2, and v3 remain sealed. Protected holdouts v1, v2, v3, and v4, plus v5-v7, share the same no-access boundary. Do not open, enumerate, list, search, import, run, regenerate,
+Protected holdouts v1, v2, and v3 remain sealed. Protected holdouts v1, v2, v3, and v4, plus v5-v8, share the same no-access boundary. Do not open, enumerate, list, search, import, run, regenerate,
 evaluate, hash-check, infer labels from, or tune against any protected fixture,
 support module, authoring surface, manifest, seal, receipt, or per-case report.
 The committed v2 aggregate report and aggregate closeout are the only v2
 evidence available for planning; only the committed aggregate report, closeout,
-and Sol acceptance are available for v3-v7 planning. Historical metadata-
+and Sol acceptance are available for v3-v8 planning. Historical metadata-
 enumeration incidents do not authorize reuse.
 
 Before future certification, Yuri must approve a new holdout version or an

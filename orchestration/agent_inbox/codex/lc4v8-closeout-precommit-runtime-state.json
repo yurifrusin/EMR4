@@ -1,0 +1,34 @@
+{
+  "adapter_observations": [
+    {"adapter_id":"deepseek_via_claude_code_bare","evidence":["Flash content-blind candidate provenance is preserved; conceptual rejection closed without a correction loop."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"deepcode_cli","evidence":["Fallback unselected."],"method":"synthetic_fixture","reachability":"unknown"},
+    {"adapter_id":"claude_cli_print","evidence":["No active Claude Code worker; the bounded Flash session is closed."],"method":"synthetic_fixture","reachability":"unknown"},
+    {"adapter_id":"antigravity_cli_print","evidence":["Two fresh Gemini pre-content vetoes returned DECISION: pass; both sessions are closed."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"codex_primary_session","evidence":["GPT Sol rehydrated after compaction, accepted the consumed aggregate V8 result, and is closing the protected integration."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"codex_subagent_spawn","evidence":["No native subagent assigned."],"method":"synthetic_fixture","reachability":"unknown"}
+  ],
+  "assigned_agent_ids": [],
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "unknown",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "continuation_event": "post_compaction",
+  "planned_action": "commit",
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "worker_slots": [
+    {"active_instance_ids": [], "resource_id": "deepseek-flash-workers", "stale_instance_ids": []}
+  ],
+  "workspace_receipts": []
+}

@@ -173,19 +173,39 @@ practitioner schedule explanation are `0/24`. Report hash is
 `sha256:fd64f30c7b0869923bb5938f5d7ddd03fb8c8f768c240f9ba364cfdbf104d1fb`.
 These are public aggregates only; V7 supplies no case-level repair authority.
 
+LC4V7D1 then used 24 fresh inspectable development probes to isolate and repair
+the valid aggregate-directed gaps without touching V7. All 24 pass
+normalization, extraction, policy, composition, and safety over 48 repeat
+observations with zero variance. Gemini returned `DECISION: pass` on exact head
+`19d50763`; the broader serial preservation gate passed 680 nodes with 16
+documented historical deselections.
+
+Yuri subsequently authorized genuinely fresh LC4V8. DeepSeek Flash's
+content-blind candidate at `2beeffe8` was rejected for conceptual fail-open
+evidence behavior; Sol recovered under the lease, and Gemini independently
+passed two exact pre-content framework heads, ending at `b24f0293`. Sol alone
+authored and froze source `313e6247`, sealed it at `5d465667`, and executed the
+only attempt. Its evidence procedure is valid across 576 observations with
+zero validation, runtime, missing-dimension, artifact, oracle-leak, or variance
+defects. The result is `certification_fail`: complete and policy resolution
+are `0/576`; temporal relation and normalized values are `528/576`; safety and
+every other semantic dimension are `576/576`; policy and integration failures
+are zero. Every group and language-form complete gate fails. Report hash is
+`sha256:1b66929304a0a0e1cfecf31e85ab3dc85b891c7ddac73772f84c0815835c7ac6`.
+V8 is permanently consumed. Its first aggregate-only hypothesis is a
+systematic policy-resolution authoring/projection mismatch, not broad parser
+regression; it supplies no case-level repair authority.
+
 ## Next safe sequence
 
-1. Keep holdouts v1-v7 sealed; use only accepted aggregate evidence and
+1. Keep holdouts v1-v8 sealed; use only accepted aggregate evidence and
    closeouts for planning.
-2. Pause for Yuri's development-strategy choice. Recommend fresh inspectable
-   V7D1 probes derived only from public aggregates.
-3. First correct the generic future-certification distinction between
-   evidence invalidity and product failure; do not change sealed V7.
-4. Adjudicate fresh speech-like time, cross-turn interval, ambiguous-
-   practitioner, and unknown-practitioner schedule-explanation probes before
-   authorizing parser or policy repair.
-5. Defer a genuinely fresh V8 decision until D1 exits; do not reuse, rerun,
-   rescore, relabel, or repair V7 implicitly.
+2. Pause for Yuri's development decision. Recommend a bounded fresh
+   inspectable LC4V8D1 based only on public aggregate categories.
+3. First distinguish policy-resolution Gold/projection mismatch from product
+   behavior, then independently sample temporal/normalization.
+4. Do not inspect, reuse, rerun, rescore, relabel, or repair V8.
+5. Treat any later V9 certification as a separate Yuri decision.
 6. Keep T3.1-T3.4 blocked by default and T3.5/providers plus every product/write
    surface deferred.
 
@@ -219,8 +239,10 @@ These are public aggregates only; V7 supplies no case-level repair authority.
 - `orchestration/agent_inbox/codex/lc4v6d1-sol-acceptance.md`
 - `docs/bernie-lc4v7-fresh-certification-closeout.md`
 - `orchestration/agent_inbox/codex/lc4v7-sol-acceptance.md`
+- `docs/bernie-lc4v8-fresh-certification-closeout.md`
+- `orchestration/agent_inbox/codex/lc4v8-sol-acceptance.md`
 
-Protected holdouts v1-v7 are sealed. Do not enumerate their paths, inspect
+Protected holdouts v1-v8 are sealed. Do not enumerate their paths, inspect
 content, rerun them, regenerate them, hash-check them, infer labels from them,
 or tune against them. T3.1-T3.4 remain blocked-by-default evaluation
 scaffolding; T3.5 is deferred.
