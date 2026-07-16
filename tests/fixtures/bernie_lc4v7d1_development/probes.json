@@ -1,0 +1,175 @@
+{
+  "schema_version": "bernie.lc4v7d1.probes.v1",
+  "reference_date": "2026-07-16",
+  "provenance": "fresh_sol_authored_synthetic_gold_development_only",
+  "cases": [
+    {
+      "probe_id": "v7d1-speech-001",
+      "family": "speech_like_time",
+      "language_form": "spoken_hour",
+      "utterances": ["Book Rowan Mercer with Dr Singh tomorrow at three pm for 20 minutes."],
+      "expected": {"intended_action":"create","temporal_relation":"exact","earliest_time":"15:00","latest_time":"15:00","practitioner_semantics":"exact","extraction_requires_clarification":false,"extraction_clarification_choices":[],"policy_requires_clarification":false,"policy_clarification_choices":[],"policy_authority":"read","policy_tools":["search_patients","find_slots","create_booking"],"policy_outcome":"appointment_created","resolved_practitioner_id":"pr-006","safe_no_mutation":false,"normalization_time_forms":[{"turn_index":0,"fragment":"three pm","canonical":"15:00"}]}
+    },
+    {
+      "probe_id": "v7d1-speech-002",
+      "family": "speech_like_time",
+      "language_form": "half_past",
+      "utterances": ["Book Talia Brooks with Dr Taylor tomorrow at half past nine am for 30 minutes."],
+      "expected": {"intended_action":"create","temporal_relation":"exact","earliest_time":"09:30","latest_time":"09:30","practitioner_semantics":"exact","extraction_requires_clarification":false,"extraction_clarification_choices":[],"policy_requires_clarification":false,"policy_clarification_choices":[],"policy_authority":"read","policy_tools":["search_patients","find_slots","create_booking"],"policy_outcome":"appointment_created","resolved_practitioner_id":"pr-002","safe_no_mutation":false,"normalization_time_forms":[{"turn_index":0,"fragment":"half past nine am","canonical":"09:30"}]}
+    },
+    {
+      "probe_id": "v7d1-speech-003",
+      "family": "speech_like_time",
+      "language_form": "quarter_past",
+      "utterances": ["Book Nia Caldwell with Dr Patel tomorrow at quarter past two pm for 15 minutes."],
+      "expected": {"intended_action":"create","temporal_relation":"exact","earliest_time":"14:15","latest_time":"14:15","practitioner_semantics":"exact","extraction_requires_clarification":false,"extraction_clarification_choices":[],"policy_requires_clarification":false,"policy_clarification_choices":[],"policy_authority":"read","policy_tools":["search_patients","find_slots","create_booking"],"policy_outcome":"appointment_created","resolved_practitioner_id":"pr-003","safe_no_mutation":false,"normalization_time_forms":[{"turn_index":0,"fragment":"quarter past two pm","canonical":"14:15"}]}
+    },
+    {
+      "probe_id": "v7d1-speech-004",
+      "family": "speech_like_time",
+      "language_form": "quarter_to",
+      "utterances": ["Book Felix Warren with Dr Chen tomorrow at quarter to four pm for 45 minutes."],
+      "expected": {"intended_action":"create","temporal_relation":"exact","earliest_time":"15:45","latest_time":"15:45","practitioner_semantics":"exact","extraction_requires_clarification":false,"extraction_clarification_choices":[],"policy_requires_clarification":false,"policy_clarification_choices":[],"policy_authority":"read","policy_tools":["search_patients","find_slots","create_booking"],"policy_outcome":"appointment_created","resolved_practitioner_id":"pr-004","safe_no_mutation":false,"normalization_time_forms":[{"turn_index":0,"fragment":"quarter to four pm","canonical":"15:45"}]}
+    },
+    {
+      "probe_id": "v7d1-speech-005",
+      "family": "speech_like_time",
+      "language_form": "spoken_minutes",
+      "utterances": ["Book Mara Ellison with Dr Smith tomorrow at four thirty pm for 30 minutes."],
+      "expected": {"intended_action":"create","temporal_relation":"exact","earliest_time":"16:30","latest_time":"16:30","practitioner_semantics":"exact","extraction_requires_clarification":false,"extraction_clarification_choices":[],"policy_requires_clarification":false,"policy_clarification_choices":[],"policy_authority":"read","policy_tools":["search_patients","find_slots","create_booking"],"policy_outcome":"appointment_created","resolved_practitioner_id":"pr-005","safe_no_mutation":false,"normalization_time_forms":[{"turn_index":0,"fragment":"four thirty pm","canonical":"16:30"}]}
+    },
+    {
+      "probe_id": "v7d1-speech-006",
+      "family": "speech_like_time",
+      "language_form": "hundred_hour",
+      "utterances": ["Book Imani Foster with Dr Shera tomorrow at fifteen hundred for 20 minutes."],
+      "expected": {"intended_action":"create","temporal_relation":"exact","earliest_time":"15:00","latest_time":"15:00","practitioner_semantics":"exact","extraction_requires_clarification":false,"extraction_clarification_choices":[],"policy_requires_clarification":false,"policy_clarification_choices":[],"policy_authority":"read","policy_tools":["search_patients","find_slots","create_booking"],"policy_outcome":"appointment_created","resolved_practitioner_id":"pr-001","safe_no_mutation":false,"normalization_time_forms":[{"turn_index":0,"fragment":"fifteen hundred","canonical":"15:00"}]}
+    },
+    {
+      "probe_id": "v7d1-interval-001",
+      "family": "cross_turn_interval",
+      "language_form": "lower_then_upper",
+      "utterances": ["Book Priya Lawson with Dr Chen tomorrow after 3pm for 30 minutes.","And before 4:30pm."],
+      "expected": {"intended_action":"create","temporal_relation":"interval","earliest_time":"15:00","latest_time":"16:30","practitioner_semantics":"exact","extraction_requires_clarification":false,"extraction_clarification_choices":[],"policy_requires_clarification":false,"policy_clarification_choices":[],"policy_authority":"read","policy_tools":["search_patients","find_slots","create_booking"],"policy_outcome":"appointment_created","resolved_practitioner_id":"pr-004","safe_no_mutation":false,"normalization_time_forms":[]}
+    },
+    {
+      "probe_id": "v7d1-interval-002",
+      "family": "cross_turn_interval",
+      "language_form": "upper_then_lower",
+      "utterances": ["Book Owen Wallace with Dr Taylor tomorrow before 11am for 30 minutes.","Also after 9am."],
+      "expected": {"intended_action":"create","temporal_relation":"interval","earliest_time":"09:00","latest_time":"11:00","practitioner_semantics":"exact","extraction_requires_clarification":false,"extraction_clarification_choices":[],"policy_requires_clarification":false,"policy_clarification_choices":[],"policy_authority":"read","policy_tools":["search_patients","find_slots","create_booking"],"policy_outcome":"appointment_created","resolved_practitioner_id":"pr-002","safe_no_mutation":false,"normalization_time_forms":[]}
+    },
+    {
+      "probe_id": "v7d1-interval-003",
+      "family": "cross_turn_interval",
+      "language_form": "not_before_not_after",
+      "utterances": ["Book Cora Bennett with Dr Patel tomorrow not before 1pm for 15 minutes.","And not after 2:15pm."],
+      "expected": {"intended_action":"create","temporal_relation":"interval","earliest_time":"13:00","latest_time":"14:15","practitioner_semantics":"exact","extraction_requires_clarification":false,"extraction_clarification_choices":[],"policy_requires_clarification":false,"policy_clarification_choices":[],"policy_authority":"read","policy_tools":["search_patients","find_slots","create_booking"],"policy_outcome":"appointment_created","resolved_practitioner_id":"pr-003","safe_no_mutation":false,"normalization_time_forms":[]}
+    },
+    {
+      "probe_id": "v7d1-interval-004",
+      "family": "cross_turn_interval",
+      "language_form": "speech_filler_bounds",
+      "utterances": ["Book Leo Hart with Dr Singh tomorrow after at 10am for 30 minutes.","Before at 11:30am please."],
+      "expected": {"intended_action":"create","temporal_relation":"interval","earliest_time":"10:00","latest_time":"11:30","practitioner_semantics":"exact","extraction_requires_clarification":false,"extraction_clarification_choices":[],"policy_requires_clarification":false,"policy_clarification_choices":[],"policy_authority":"read","policy_tools":["search_patients","find_slots","create_booking"],"policy_outcome":"appointment_created","resolved_practitioner_id":"pr-006","safe_no_mutation":false,"normalization_time_forms":[]}
+    },
+    {
+      "probe_id": "v7d1-interval-005",
+      "family": "cross_turn_interval",
+      "language_form": "reverse_additive_bounds",
+      "utterances": ["Book Zoe Madden with Dr Smith tomorrow before 5pm for 20 minutes.","After 4pm as well."],
+      "expected": {"intended_action":"create","temporal_relation":"interval","earliest_time":"16:00","latest_time":"17:00","practitioner_semantics":"exact","extraction_requires_clarification":false,"extraction_clarification_choices":[],"policy_requires_clarification":false,"policy_clarification_choices":[],"policy_authority":"read","policy_tools":["search_patients","find_slots","create_booking"],"policy_outcome":"appointment_created","resolved_practitioner_id":"pr-005","safe_no_mutation":false,"normalization_time_forms":[]}
+    },
+    {
+      "probe_id": "v7d1-interval-006",
+      "family": "cross_turn_interval",
+      "language_form": "three_turn_additive",
+      "utterances": ["Book Eden Price with Dr Shera tomorrow for 30 minutes.","After 2pm.","Before 3:30pm."],
+      "expected": {"intended_action":"create","temporal_relation":"interval","earliest_time":"14:00","latest_time":"15:30","practitioner_semantics":"exact","extraction_requires_clarification":false,"extraction_clarification_choices":[],"policy_requires_clarification":false,"policy_clarification_choices":[],"policy_authority":"read","policy_tools":["search_patients","find_slots","create_booking"],"policy_outcome":"appointment_created","resolved_practitioner_id":"pr-001","safe_no_mutation":false,"normalization_time_forms":[]}
+    },
+    {
+      "probe_id": "v7d1-ambiguous-001",
+      "family": "ambiguous_practitioner_alternatives",
+      "language_form": "create",
+      "utterances": ["Book Asha Merritt with Dr Abbott or Dr Nolan tomorrow at 3pm for 30 minutes."],
+      "expected": {"intended_action":"create","temporal_relation":"exact","earliest_time":"15:00","latest_time":"15:00","practitioner_semantics":"ambiguous","extraction_requires_clarification":true,"extraction_clarification_choices":["Dr Abbott","Dr Nolan"],"policy_requires_clarification":true,"policy_clarification_choices":["Dr Abbott","Dr Nolan"],"policy_authority":"clarify","policy_tools":["request_clarification"],"policy_outcome":"clarification_required","resolved_practitioner_id":null,"safe_no_mutation":true,"normalization_time_forms":[]}
+    },
+    {
+      "probe_id": "v7d1-ambiguous-002",
+      "family": "ambiguous_practitioner_alternatives",
+      "language_form": "move",
+      "utterances": ["Move Blake Sutton's appointment with Dr Keats or Dr Rowan to tomorrow at 4pm."],
+      "expected": {"intended_action":"move","temporal_relation":"exact","earliest_time":"16:00","latest_time":"16:00","practitioner_semantics":"ambiguous","extraction_requires_clarification":true,"extraction_clarification_choices":["Dr Keats","Dr Rowan"],"policy_requires_clarification":true,"policy_clarification_choices":["Dr Keats","Dr Rowan"],"policy_authority":"clarify","policy_tools":["request_clarification"],"policy_outcome":"clarification_required","resolved_practitioner_id":null,"safe_no_mutation":true,"normalization_time_forms":[]}
+    },
+    {
+      "probe_id": "v7d1-ambiguous-003",
+      "family": "ambiguous_practitioner_alternatives",
+      "language_form": "resize",
+      "utterances": ["Resize Dana Voss's appointment with Dr Mercer or Dr Brooks to 30 minutes."],
+      "expected": {"intended_action":"resize","temporal_relation":"unspecified","earliest_time":null,"latest_time":null,"practitioner_semantics":"ambiguous","extraction_requires_clarification":true,"extraction_clarification_choices":["Dr Mercer","Dr Brooks"],"policy_requires_clarification":true,"policy_clarification_choices":["Dr Mercer","Dr Brooks"],"policy_authority":"clarify","policy_tools":["request_clarification"],"policy_outcome":"clarification_required","resolved_practitioner_id":null,"safe_no_mutation":true,"normalization_time_forms":[]}
+    },
+    {
+      "probe_id": "v7d1-ambiguous-004",
+      "family": "ambiguous_practitioner_alternatives",
+      "language_form": "cancel",
+      "utterances": ["Cancel Mira Kent's appointment with Dr Nolan or Dr Abbott."],
+      "expected": {"intended_action":"cancel","temporal_relation":"unspecified","earliest_time":null,"latest_time":null,"practitioner_semantics":"ambiguous","extraction_requires_clarification":true,"extraction_clarification_choices":["Dr Nolan","Dr Abbott"],"policy_requires_clarification":true,"policy_clarification_choices":["Dr Nolan","Dr Abbott"],"policy_authority":"clarify","policy_tools":["request_clarification"],"policy_outcome":"clarification_required","resolved_practitioner_id":null,"safe_no_mutation":true,"normalization_time_forms":[]}
+    },
+    {
+      "probe_id": "v7d1-ambiguous-005",
+      "family": "ambiguous_practitioner_alternatives",
+      "language_form": "status_change",
+      "utterances": ["Mark Noel Bishop's appointment with Dr Rowan or Dr Keats as arrived."],
+      "expected": {"intended_action":"status_change","temporal_relation":"unspecified","earliest_time":null,"latest_time":null,"practitioner_semantics":"ambiguous","extraction_requires_clarification":true,"extraction_clarification_choices":["Dr Rowan","Dr Keats"],"policy_requires_clarification":true,"policy_clarification_choices":["Dr Rowan","Dr Keats"],"policy_authority":"clarify","policy_tools":["request_clarification"],"policy_outcome":"clarification_required","resolved_practitioner_id":null,"safe_no_mutation":true,"normalization_time_forms":[]}
+    },
+    {
+      "probe_id": "v7d1-ambiguous-006",
+      "family": "ambiguous_practitioner_alternatives",
+      "language_form": "explain_schedule",
+      "utterances": ["Can you explain Dr Brooks or Dr Mercer schedule options?"],
+      "expected": {"intended_action":"explain_schedule","temporal_relation":"unspecified","earliest_time":null,"latest_time":null,"practitioner_semantics":"ambiguous","extraction_requires_clarification":true,"extraction_clarification_choices":["Dr Brooks","Dr Mercer"],"policy_requires_clarification":true,"policy_clarification_choices":["Dr Brooks","Dr Mercer"],"policy_authority":"clarify","policy_tools":["request_clarification"],"policy_outcome":"clarification_required","resolved_practitioner_id":null,"safe_no_mutation":true,"normalization_time_forms":[]}
+    },
+    {
+      "probe_id": "v7d1-unknown-explain-001",
+      "family": "unknown_practitioner_schedule_explanation",
+      "language_form": "plain",
+      "utterances": ["Can you explain Dr Rowan's schedule?"],
+      "expected": {"intended_action":"explain_schedule","temporal_relation":"unspecified","earliest_time":null,"latest_time":null,"practitioner_semantics":"exact","extraction_requires_clarification":false,"extraction_clarification_choices":[],"policy_requires_clarification":true,"policy_clarification_choices":[],"policy_authority":"clarify","policy_tools":["request_clarification"],"policy_outcome":"clarification_required","resolved_practitioner_id":null,"safe_no_mutation":true,"normalization_time_forms":[]}
+    },
+    {
+      "probe_id": "v7d1-unknown-explain-002",
+      "family": "unknown_practitioner_schedule_explanation",
+      "language_form": "tell_me_about",
+      "utterances": ["Tell me about Dr Keats's diary pattern."],
+      "expected": {"intended_action":"explain_schedule","temporal_relation":"unspecified","earliest_time":null,"latest_time":null,"practitioner_semantics":"exact","extraction_requires_clarification":false,"extraction_clarification_choices":[],"policy_requires_clarification":true,"policy_clarification_choices":[],"policy_authority":"clarify","policy_tools":["request_clarification"],"policy_outcome":"clarification_required","resolved_practitioner_id":null,"safe_no_mutation":true,"normalization_time_forms":[]}
+    },
+    {
+      "probe_id": "v7d1-unknown-explain-003",
+      "family": "unknown_practitioner_schedule_explanation",
+      "language_form": "how_day_looks",
+      "utterances": ["How does Dr Abbott's day look?"],
+      "expected": {"intended_action":"explain_schedule","temporal_relation":"unspecified","earliest_time":null,"latest_time":null,"practitioner_semantics":"exact","extraction_requires_clarification":false,"extraction_clarification_choices":[],"policy_requires_clarification":true,"policy_clarification_choices":[],"policy_authority":"clarify","policy_tools":["request_clarification"],"policy_outcome":"clarification_required","resolved_practitioner_id":null,"safe_no_mutation":true,"normalization_time_forms":[]}
+    },
+    {
+      "probe_id": "v7d1-unknown-explain-004",
+      "family": "unknown_practitioner_schedule_explanation",
+      "language_form": "appointments_have",
+      "utterances": ["What appointments does Dr Nolan have tomorrow?"],
+      "expected": {"intended_action":"explain_schedule","temporal_relation":"unspecified","earliest_time":null,"latest_time":null,"practitioner_semantics":"exact","extraction_requires_clarification":false,"extraction_clarification_choices":[],"policy_requires_clarification":true,"policy_clarification_choices":[],"policy_authority":"clarify","policy_tools":["request_clarification"],"policy_outcome":"clarification_required","resolved_practitioner_id":null,"safe_no_mutation":true,"normalization_time_forms":[]}
+    },
+    {
+      "probe_id": "v7d1-unknown-explain-005",
+      "family": "unknown_practitioner_schedule_explanation",
+      "language_form": "free_slots",
+      "utterances": ["When does Dr Mercer have free slots tomorrow?"],
+      "expected": {"intended_action":"explain_schedule","temporal_relation":"unspecified","earliest_time":null,"latest_time":null,"practitioner_semantics":"exact","extraction_requires_clarification":false,"extraction_clarification_choices":[],"policy_requires_clarification":true,"policy_clarification_choices":[],"policy_authority":"clarify","policy_tools":["request_clarification"],"policy_outcome":"clarification_required","resolved_practitioner_id":null,"safe_no_mutation":true,"normalization_time_forms":[]}
+    },
+    {
+      "probe_id": "v7d1-unknown-explain-006",
+      "family": "unknown_practitioner_schedule_explanation",
+      "language_form": "available_times",
+      "utterances": ["Show me Dr Brooks's available times tomorrow."],
+      "expected": {"intended_action":"explain_schedule","temporal_relation":"unspecified","earliest_time":null,"latest_time":null,"practitioner_semantics":"exact","extraction_requires_clarification":false,"extraction_clarification_choices":[],"policy_requires_clarification":true,"policy_clarification_choices":[],"policy_authority":"clarify","policy_tools":["request_clarification"],"policy_outcome":"clarification_required","resolved_practitioner_id":null,"safe_no_mutation":true,"normalization_time_forms":[]}
+    }
+  ]
+}
