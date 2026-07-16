@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V9 genuinely fresh content-blind certification is authorized; the recovered empty framework is integrated and awaits fresh Gemini pre-content veto; no actual V9 content exists |
+| Active product track | LC4V9 genuinely fresh content-blind certification is authorized; first Gemini pass on `4c9283b0` is superseded for authorship by a post-veto ordinary-interface amendment; a second fresh pre-content veto is required and no actual V9 content exists |
 | Active acceptance | `orchestration/agent_inbox/codex/lc4v9-sol-contract.md` and `orchestration/agent_inbox/codex/lc4v9-one-shot-acceptance-rule.md`; LC4V8D1 remains accepted under `lc4v8d1-sol-acceptance.md` |
-| Current result | Flash's one uncommitted candidate was preserved at `7187bcce` and rejected for conceptual fail-open evidence defects; no correction loop was opened. Sol recovered the empty framework at `efd52702`. It passes 61/61 focused-plus-taxonomy tests and 2/2 selected runtime-isolation tests, with exact framework/evaluator source binding, durable consumed-first markers, explicit coverage cells, exact 14-way conjunction, and canonical report hashing |
-| Next implementation | Obtain a fresh Gemini pre-content veto on the exact integrated framework head. Only after `DECISION: pass` may external sessions close for Sol-only corpus/evaluator/threshold authorship, immutable seal, and one one-shot run. Preserve v1-v8, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
+| Current result | Flash's rejected candidate and Sol recovery remain preserved. Gemini passed exact head `4c9283b0`, but Sol then proved ordinary-interface conflation of temporal vs diary relation and mutation vs non-mutating policy tools before content. The amended framework passes 63/63 focused-plus-taxonomy, 74/74 ordinary D1, and 2/2 selected isolation tests; see `lc4v9-post-veto-interface-amendment.md` |
+| Next implementation | Commit the ordinary-interface amendment and obtain a second fresh Gemini pre-content veto on its exact head. Only after `DECISION: pass` may external sessions close for Sol-only corpus/evaluator/threshold authorship, immutable seal, and one one-shot run. Preserve v1-v8, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 

@@ -72,6 +72,19 @@ SEMANTIC_OUTCOMES = (
     "refuse",
     "no_action",
 )
+TEMPORAL_RELATIONS = (
+    "unspecified",
+    "exact",
+    "interval",
+    "not_before",
+    "not_after",
+    "approximate",
+)
+DIARY_RELATIONS = ("no_conflict", "exact_duplicate", "field_conflict")
+AUTHORITIES = ("read", "clarify", "refuse")
+MUTATION_TOOL_NAMES = frozenset(
+    ("create_booking", "update_appointment", "change_appointment_status")
+)
 CANONICAL_PROJECTION_FIELDS = (
     "requires_clarification",
     "clarification_choices",
@@ -391,11 +404,25 @@ def validate_canonical_projection(value: Any, label: str = "canonical_projection
         normalized = canonicalize_json(projection[field])
         if not isinstance(normalized, list):
             raise SchemaValidationError(f"{label}.{field} must project to an array")
+        if any(not isinstance(item, str) for item in normalized):
+            raise SchemaValidationError(f"{label}.{field} must contain only strings")
         projection[field] = normalized
     for field in ("appointment_delta_count", "audit_delta_count"):
         _non_negative_int(projection[field], f"{label}.{field}")
     if not isinstance(projection["simulated_write"], bool):
         raise SchemaValidationError(f"{label}.simulated_write must be bool")
+    if projection["authority"] not in AUTHORITIES:
+        raise SchemaValidationError(f"{label}.authority is unsupported")
+    if projection["diary_relation"] not in DIARY_RELATIONS:
+        raise SchemaValidationError(f"{label}.diary_relation is unsupported")
+    for field in (
+        "resolved_patient",
+        "resolved_practitioner",
+        "resolved_practitioner_id",
+        "downstream_outcome",
+    ):
+        if projection[field] is not None and not isinstance(projection[field], str):
+            raise SchemaValidationError(f"{label}.{field} must be string or null")
     for field in CANONICAL_PROJECTION_FIELDS:
         projection[field] = canonicalize_json(projection[field])
     return projection
@@ -502,34 +529,49 @@ def validate_gold_cross_field_consistency(fixture: Mapping[str, Any]) -> None:
             errors.append(f"{label} mutation_allowed and safe must be booleans")
         tools = projection["selected_tools"]
         choices = projection["clarification_choices"]
+        mutation_tools = MUTATION_TOOL_NAMES.intersection(tools)
         mutation_evidence = (
             projection["simulated_write"]
             or projection["appointment_delta_count"] > 0
             or projection["audit_delta_count"] > 0
+            or bool(mutation_tools)
         )
         if outcome == "propose_mutation":
             if (
                 gold["mutation_allowed"] is not True
-                or not tools
+                or not mutation_tools
                 or projection["simulated_write"] is not True
                 or projection["appointment_delta_count"] + projection["audit_delta_count"] <= 0
-                or not projection["authority"]
+                or projection["authority"] != "read"
                 or projection["requires_clarification"]
                 or choices
+                or projection["downstream_outcome"] is None
             ):
                 errors.append(f"{label} has contradictory proposal fields")
         else:
             if gold["mutation_allowed"] is not False or mutation_evidence:
                 errors.append(f"{label} contains hidden mutation")
             if outcome == "clarify":
-                if not projection["requires_clarification"] or not choices or tools:
+                if (
+                    not projection["requires_clarification"]
+                    or not choices
+                    or tools != ["request_clarification"]
+                    or projection["authority"] != "clarify"
+                    or projection["downstream_outcome"] != "clarification_required"
+                ):
                     errors.append(f"{label} has contradictory clarification fields")
             elif projection["requires_clarification"] or choices:
                 errors.append(f"{label} has hidden clarification")
-            if outcome in ("refuse", "no_action") and tools:
-                errors.append(f"{label} has tools for a non-action outcome")
-            if outcome == "proceed_read" and not tools:
-                errors.append(f"{label} has no read tool")
+            if outcome == "refuse" and (
+                tools != ["refuse_instruction"]
+                or projection["authority"] != "refuse"
+                or projection["downstream_outcome"] != "instruction_refused"
+            ):
+                errors.append(f"{label} has contradictory refusal fields")
+            if outcome == "no_action" and (tools or projection["authority"] != "read"):
+                errors.append(f"{label} has contradictory no-action fields")
+            if outcome == "proceed_read" and (not tools or projection["authority"] != "read"):
+                errors.append(f"{label} has contradictory read fields")
 
         entity = gold["entity_semantics"]
         if not isinstance(entity, dict):
@@ -546,11 +588,41 @@ def validate_gold_cross_field_consistency(fixture: Mapping[str, Any]) -> None:
 
         relation = gold["temporal_relation"]
         bounds = gold["temporal_bounds"]
-        expected_diary_relation = None
-        if relation is not None or bounds is not None:
-            expected_diary_relation = {"bounds": canonicalize_json(bounds), "relation": canonicalize_json(relation)}
-        if canonicalize_json(projection["diary_relation"]) != expected_diary_relation:
-            errors.append(f"{label} has inconsistent diary_relation")
+        if relation not in TEMPORAL_RELATIONS:
+            errors.append(f"{label}.temporal_relation is unsupported")
+        elif not isinstance(bounds, dict) or set(bounds) != {"earliest_time", "latest_time"}:
+            errors.append(f"{label}.temporal_bounds must have exact bound fields")
+        else:
+            earliest = bounds["earliest_time"]
+            latest = bounds["latest_time"]
+            for bound_name, bound in (("earliest_time", earliest), ("latest_time", latest)):
+                if bound is not None and (
+                    not isinstance(bound, str)
+                    or len(bound) != 5
+                    or bound[2] != ":"
+                    or not bound.replace(":", "").isdigit()
+                    or not (0 <= int(bound[:2]) <= 23 and 0 <= int(bound[3:]) <= 59)
+                ):
+                    errors.append(f"{label}.{bound_name} must be HH:MM or null")
+            relation_shape = {
+                "unspecified": earliest is None and latest is None,
+                "exact": earliest is not None and earliest == latest,
+                "interval": earliest is not None and latest is not None and earliest < latest,
+                "not_before": earliest is not None and latest is None,
+                "not_after": earliest is None and latest is not None,
+                "approximate": earliest is not None and latest is not None and earliest < latest,
+            }
+            if not relation_shape[relation]:
+                errors.append(f"{label} temporal relation and bounds contradict")
+
+        diary_relation = projection["diary_relation"]
+        conflicts = projection["conflicting_fields"]
+        if diary_relation == "field_conflict" and not conflicts:
+            errors.append(f"{label} field-conflict projection lacks conflicting fields")
+        if diary_relation != "field_conflict" and conflicts:
+            errors.append(f"{label} non-conflict projection contains conflicting fields")
+        if projection["entity_semantics_unchanged"] is not True:
+            errors.append(f"{label} must preserve entity semantics")
 
     if errors:
         raise GoldValidationError("; ".join(errors))

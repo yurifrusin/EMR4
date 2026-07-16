@@ -64,8 +64,8 @@ def _projection() -> dict[str, Any]:
         "resolved_practitioner": None,
         "resolved_practitioner_id": None,
         "selected_tools": [],
-        "authority": None,
-        "diary_relation": None,
+        "authority": "read",
+        "diary_relation": "no_conflict",
         "conflicting_fields": [],
         "downstream_outcome": None,
         "appointment_delta_count": 0,
@@ -79,8 +79,8 @@ def _gold(action: str) -> dict[str, Any]:
     return {
         "intended_action": action,
         "action_semantics": {"opaque": True},
-        "temporal_relation": None,
-        "temporal_bounds": None,
+        "temporal_relation": "unspecified",
+        "temporal_bounds": {"earliest_time": None, "latest_time": None},
         "normalized_values": {},
         "entity_semantics": {
             "patient": None,
@@ -384,11 +384,12 @@ def test_valid_mutation_and_clarification_gold() -> None:
     mutation["mutation_allowed"] = True
     mutation["canonical_projection"].update(
         {
-            "selected_tools": ["opaque-proposal-tool"],
-            "authority": "proposal_only",
+            "selected_tools": ["create_booking"],
+            "authority": "read",
             "appointment_delta_count": 1,
             "audit_delta_count": 1,
             "simulated_write": True,
+            "downstream_outcome": "proposal_created",
         }
     )
     clarification = fixture["scenarios"][1]["gold"]
@@ -397,8 +398,34 @@ def test_valid_mutation_and_clarification_gold() -> None:
         {
             "requires_clarification": True,
             "clarification_choices": ["opaque-choice"],
+            "selected_tools": ["request_clarification"],
+            "authority": "clarify",
+            "downstream_outcome": "clarification_required",
         }
     )
+    validate_gold_cross_field_consistency(fixture)
+
+
+def test_refusal_tool_is_safe_nonmutation_not_hidden_write() -> None:
+    fixture = make_fixture()
+    refusal = fixture["scenarios"][0]["gold"]
+    refusal["semantic_outcome"] = "refuse"
+    refusal["canonical_projection"].update(
+        {
+            "selected_tools": ["refuse_instruction"],
+            "authority": "refuse",
+            "downstream_outcome": "instruction_refused",
+        }
+    )
+    validate_gold_cross_field_consistency(fixture)
+
+
+def test_temporal_relation_is_not_conflated_with_diary_relation() -> None:
+    fixture = make_fixture()
+    gold = fixture["scenarios"][0]["gold"]
+    gold["temporal_relation"] = "interval"
+    gold["temporal_bounds"] = {"earliest_time": "15:00", "latest_time": "16:30"}
+    gold["canonical_projection"]["diary_relation"] = "no_conflict"
     validate_gold_cross_field_consistency(fixture)
 
 
