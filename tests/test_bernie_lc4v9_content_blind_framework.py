@@ -406,6 +406,22 @@ def test_valid_mutation_and_clarification_gold() -> None:
     validate_gold_cross_field_consistency(fixture)
 
 
+def test_omitted_practitioner_clarification_allows_empty_choices() -> None:
+    fixture = make_fixture()
+    clarification = fixture["scenarios"][0]["gold"]
+    clarification["semantic_outcome"] = "clarify"
+    clarification["canonical_projection"].update(
+        {
+            "requires_clarification": True,
+            "clarification_choices": [],
+            "selected_tools": ["request_clarification"],
+            "authority": "clarify",
+            "downstream_outcome": "clarification_required",
+        }
+    )
+    validate_gold_cross_field_consistency(fixture)
+
+
 def test_refusal_tool_is_safe_nonmutation_not_hidden_write() -> None:
     fixture = make_fixture()
     refusal = fixture["scenarios"][0]["gold"]

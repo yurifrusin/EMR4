@@ -554,7 +554,6 @@ def validate_gold_cross_field_consistency(fixture: Mapping[str, Any]) -> None:
             if outcome == "clarify":
                 if (
                     not projection["requires_clarification"]
-                    or not choices
                     or tools != ["request_clarification"]
                     or projection["authority"] != "clarify"
                     or projection["downstream_outcome"] != "clarification_required"

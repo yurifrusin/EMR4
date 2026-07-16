@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V9 genuinely fresh certification has passed its amended content-blind framework gate; all external sessions are closed and Sol-only protected authorship is authorized; no actual V9 content exists at the framework acceptance point |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v9-sol-contract.md`, `lc4v9-one-shot-acceptance-rule.md`, and `lc4v9-framework-sol-acceptance.md`; LC4V8D1 remains accepted under `lc4v8d1-sol-acceptance.md` |
-| Current result | Flash's rejected candidate and Sol recovery remain preserved. First Gemini pass was superseded safely before content. A second fresh Gemini project returned `DECISION: pass` on amended head `b5aaa89c`, reproducing 63/63 focused-plus-taxonomy, 74/74 ordinary D1, and 2/2 selected isolation tests. The review receipt is integrated at `17fa83e0`; external sessions are closed |
-| Next implementation | Sol alone authors and validates the frozen 24-group/288-scenario/72-multi-turn V9 corpus, bound evaluator, thresholds, authoring tool, and runner; commit source, create immutable manifest/seal for attempt `lc4v9-fresh-certification-001`, then perform exactly one run. Preserve v1-v8, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
+| Active product track | LC4V9 genuinely fresh certification remains content-blind. Sol found and repaired a second ordinary-interface mismatch before content; authorship is paused only for a third fresh Gemini veto on the exact amended head. No actual V9 content exists |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v9-sol-contract.md`, `lc4v9-one-shot-acceptance-rule.md`, and `lc4v9-second-post-veto-interface-amendment.md`; the prior framework acceptance is superseded pending the third veto. LC4V8D1 remains accepted under `lc4v8d1-sol-acceptance.md` |
+| Current result | Flash's rejected candidate and Sol recovery remain preserved. The first two Gemini passes remain evidence for their exact heads only. The latest amendment permits the established safe clarification state with an empty choice list while retaining exact clarification authority/tool/downstream and zero-mutation requirements; framework-plus-taxonomy, ordinary D1, and selected isolation suites pass |
+| Next implementation | Commit the empty-choice amendment, dispatch one fresh Gemini 3.5 Flash/medium veto with named-file-only access, accept only an exact-head pass, then close the session and begin Sol-only protected authorship. Preserve v1-v8, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 

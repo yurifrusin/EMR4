@@ -2,7 +2,7 @@
 
 Date: 2026-07-16
 
-Decision: `framework_accepted_content_authoring_authorized`
+Decision: `superseded_pending_third_veto`
 
 The content-blind framework and one-shot rule were frozen before any actual V9
 content. DeepSeek Flash's single candidate was preserved and rejected; Sol
@@ -52,3 +52,13 @@ authorized.
 T3.1-T3.4, T3.5/providers, historical data, runtime/product wiring, API/UI/DB,
 deployment, release, and all live/write authority remain closed.
 
+## Supersession
+
+Before any protected content was created, Sol found one further ordinary-
+interface mismatch: the accepted product policy may clarify an omitted or
+unresolved practitioner with an empty `clarification_choices` array. The
+framework amendment and required fresh third veto are recorded in
+`lc4v9-second-post-veto-interface-amendment.md`. This acceptance is therefore
+superseded for authorship until that exact amended head receives an independent
+pass and a new Sol acceptance is committed. Its protected-surface allocation
+and all closed boundaries remain frozen and unchanged.
