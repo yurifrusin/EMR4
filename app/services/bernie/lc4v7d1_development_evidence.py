@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from collections import Counter
 from pathlib import Path
 from typing import Any, Mapping
@@ -65,6 +66,9 @@ EXPECTED_KEYS = {
     "normalization_time_forms",
 }
 NORMALIZATION_TIME_FORM_KEYS = {"turn_index", "fragment", "canonical"}
+TEMPORAL_RELATIONS = {
+    "unspecified", "exact", "interval", "not_before", "not_after", "approximate"
+}
 
 CLASSIFICATIONS = (
     "pass",
@@ -125,8 +129,10 @@ def validate_fixture(fixture: Any) -> tuple[str, ...]:
             errors.append(f"{label} family must be a string")
         else:
             families[family] += 1
-        if not isinstance(case.get("language_form"), str):
-            errors.append(f"{label} language_form must be a string")
+        if not isinstance(case.get("language_form"), str) or not case.get(
+            "language_form"
+        ):
+            errors.append(f"{label} language_form must be a non-empty string")
         utterances = case.get("utterances")
         if (
             not isinstance(utterances, list)
@@ -140,10 +146,51 @@ def validate_fixture(fixture: Any) -> tuple[str, ...]:
         if not isinstance(expected, Mapping) or set(expected) != EXPECTED_KEYS:
             errors.append(f"{label} expected field population is not exact")
         else:
+            if expected.get("intended_action") not in {
+                "create", "move", "resize", "cancel", "status_change",
+                "explain_schedule",
+            }:
+                errors.append(f"{label} intended_action is invalid")
+            if expected.get("temporal_relation") not in TEMPORAL_RELATIONS:
+                errors.append(f"{label} temporal_relation is invalid")
+            for field in ("earliest_time", "latest_time", "resolved_practitioner_id"):
+                if expected.get(field) is not None and not isinstance(
+                    expected.get(field), str
+                ):
+                    errors.append(f"{label} {field} must be a string or null")
+            if expected.get("practitioner_semantics") not in {
+                "exact", "corrected", "ambiguous", "negated", "omitted"
+            }:
+                errors.append(f"{label} practitioner_semantics is invalid")
+            for field in (
+                "extraction_requires_clarification",
+                "policy_requires_clarification",
+                "safe_no_mutation",
+            ):
+                if not isinstance(expected.get(field), bool):
+                    errors.append(f"{label} {field} must be boolean")
+            for field in (
+                "extraction_clarification_choices",
+                "policy_clarification_choices",
+                "policy_tools",
+            ):
+                value = expected.get(field)
+                if (
+                    not isinstance(value, list)
+                    or any(not isinstance(item, str) or not item for item in value)
+                ):
+                    errors.append(f"{label} {field} must be a string list")
+            if expected.get("policy_authority") not in {"read", "clarify", "refuse"}:
+                errors.append(f"{label} policy_authority is invalid")
+            if expected.get("policy_outcome") is not None and not isinstance(
+                expected.get("policy_outcome"), str
+            ):
+                errors.append(f"{label} policy_outcome must be a string or null")
             ntf = expected.get("normalization_time_forms", [])
             if not isinstance(ntf, list):
                 errors.append(f"{label} normalization_time_forms must be a list")
             else:
+                seen_forms: set[tuple[int, str]] = set()
                 for ntf_idx, ntf_item in enumerate(ntf):
                     if (
                         not isinstance(ntf_item, Mapping)
@@ -154,6 +201,35 @@ def validate_fixture(fixture: Any) -> tuple[str, ...]:
                             f" schema is invalid"
                         )
                         break
+                    turn_index = ntf_item.get("turn_index")
+                    fragment = ntf_item.get("fragment")
+                    canonical = ntf_item.get("canonical")
+                    if (
+                        isinstance(turn_index, bool)
+                        or not isinstance(turn_index, int)
+                        or turn_index < 0
+                        or not isinstance(utterances, list)
+                        or turn_index >= len(utterances)
+                    ):
+                        errors.append(
+                            f"{label} normalization_time_forms[{ntf_idx}] turn_index is invalid"
+                        )
+                    if not isinstance(fragment, str) or not fragment:
+                        errors.append(
+                            f"{label} normalization_time_forms[{ntf_idx}] fragment is invalid"
+                        )
+                    if (
+                        not isinstance(canonical, str)
+                        or not re.fullmatch(r"(?:[01]\d|2[0-3]):[0-5]\d", canonical)
+                    ):
+                        errors.append(
+                            f"{label} normalization_time_forms[{ntf_idx}] canonical is invalid"
+                        )
+                    if isinstance(turn_index, int) and isinstance(fragment, str):
+                        identity = (turn_index, fragment)
+                        if identity in seen_forms:
+                            errors.append(f"{label} normalization time forms must be unique")
+                        seen_forms.add(identity)
 
     if len(ids) != len(set(ids)):
         errors.append("probe IDs must be unique")
@@ -332,6 +408,15 @@ def _policy_mismatches(
         "resolved_practitioner_id"
     ):
         mismatches.append("resolved_practitioner_id")
+    expect_no_mutation = expected.get("safe_no_mutation", True)
+    expected_delta_count = 0 if expect_no_mutation else 1
+    expected_simulated = not expect_no_mutation
+    if policy["appointment_delta_count"] != expected_delta_count:
+        mismatches.append("appointment_delta_count")
+    if policy["audit_delta_count"] != expected_delta_count:
+        mismatches.append("audit_delta_count")
+    if policy["simulated_write"] is not expected_simulated:
+        mismatches.append("simulated_write")
     return tuple(mismatches)
 
 
@@ -368,9 +453,12 @@ def _safe(
 # ---------------------------------------------------------------------------
 
 
-def run_lc4v7d1_evidence() -> dict[str, Any]:
+def run_lc4v7d1_evidence(
+    fixture: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
     """Run the complete LC4V7D1 evidence procedure and return the report."""
-    fixture = load_fixture()
+    if fixture is None:
+        fixture = load_fixture()
     errors = validate_fixture(fixture)
     if errors:
         return {
@@ -452,6 +540,28 @@ def run_lc4v7d1_evidence() -> dict[str, Any]:
     extraction_pass = sum(not item["extraction_mismatches"] for item in results)
     policy_pass = sum(not item["policy_mismatches"] for item in results)
 
+    non_pass = [item for item in results if item["classification"] != "pass"]
+    selection_data = [
+        {
+            "probe_id": item["probe_id"],
+            "classification": item["classification"],
+            "normalization_mismatches": item["normalization_mismatches"],
+            "extraction_mismatches": item["extraction_mismatches"],
+            "policy_mismatches": item["policy_mismatches"],
+        }
+        for item in non_pass
+    ]
+    selection_encoded = json.dumps(
+        selection_data,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    ).encode("utf-8")
+    selection = {
+        "non_pass_count": len(non_pass),
+        "selection_hash": "sha256:" + hashlib.sha256(selection_encoded).hexdigest(),
+    }
+
     report = {
         "schema_version": "bernie.lc4v7d1.evidence.v1",
         "fixture_hash": compute_fixture_hash(fixture),
@@ -475,46 +585,17 @@ def run_lc4v7d1_evidence() -> dict[str, Any]:
         "family_counts": dict(
             Counter(item["family"] for item in results)
         ),
-        "selection": {
-            "non_pass_count": 0,
-            "selection_hash": "",
-        },
+        "selection": selection,
         "cases": tuple(results),
     }
 
-    # Compute report hash (without the hash field itself)
+    # Bind the complete final report, including the frozen non-pass selection.
+    # The only excluded field is the self-referential hash itself.
     report_encoded = json.dumps(
         report, sort_keys=True, separators=(",", ":"), ensure_ascii=False
     ).encode("utf-8")
     report["report_hash"] = (
         "sha256:" + hashlib.sha256(report_encoded).hexdigest()
-    )
-
-    # Compute selection hash (non-pass cases only)
-    non_pass = [
-        item
-        for item in results
-        if item["classification"] != "pass"
-    ]
-    selection_data = [
-        {
-            "probe_id": item["probe_id"],
-            "classification": item["classification"],
-            "normalization_mismatches": item["normalization_mismatches"],
-            "extraction_mismatches": item["extraction_mismatches"],
-            "policy_mismatches": item["policy_mismatches"],
-        }
-        for item in non_pass
-    ]
-    selection_encoded = json.dumps(
-        selection_data,
-        sort_keys=True,
-        separators=(",", ":"),
-        ensure_ascii=False,
-    ).encode("utf-8")
-    report["selection"]["non_pass_count"] = len(non_pass)
-    report["selection"]["selection_hash"] = (
-        "sha256:" + hashlib.sha256(selection_encoded).hexdigest()
     )
 
     return report

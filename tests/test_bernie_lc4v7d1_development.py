@@ -11,6 +11,7 @@ No assertion assumes baseline gaps pass; the runner discovers them.
 from __future__ import annotations
 
 import copy
+import hashlib
 import inspect
 import json
 
@@ -72,6 +73,21 @@ def test_fixture_is_exact_and_frozen() -> None:
             lambda value: value["cases"][0]["expected"]["normalization_time_forms"]
             .append({"bad": "data"}),
             "normalization_time_forms",
+        ),
+        (
+            lambda value: value["cases"][0]["expected"]["normalization_time_forms"][0]
+            .update(turn_index=-1),
+            "turn_index",
+        ),
+        (
+            lambda value: value["cases"][0]["expected"]["normalization_time_forms"][0]
+            .update(canonical="25:90"),
+            "canonical",
+        ),
+        (
+            lambda value: value["cases"][0]["expected"]
+            .update(safe_no_mutation=1),
+            "safe_no_mutation",
         ),
     ],
 )
@@ -300,6 +316,24 @@ def test_selection_and_report_hashes_are_deterministic() -> None:
     assert second["aggregate"] == EVIDENCE["aggregate"]
 
 
+def test_report_hash_binds_final_selection_and_complete_report() -> None:
+    payload = copy.deepcopy(EVIDENCE)
+    reported_hash = payload.pop("report_hash")
+    encoded = json.dumps(
+        payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+    ).encode("utf-8")
+    assert reported_hash == "sha256:" + hashlib.sha256(encoded).hexdigest()
+    assert EVIDENCE["selection"] == {
+        "non_pass_count": 24,
+        "selection_hash": (
+            "sha256:643339dfb9008f8df1b81b5e8e8effbf5d6d4561bafa67376d721fb0c185cd77"
+        ),
+    }
+    assert reported_hash == (
+        "sha256:c093616ff2916097e546cda2e4c9681eaaf1ef27b49fc0d86a5651cc7ef7a97d"
+    )
+
+
 def test_family_specific_classifications() -> None:
     """Every case has a valid family that maps to expected counts."""
     family_classifications: dict[str, dict[str, int]] = {}
@@ -353,24 +387,17 @@ def test_observe_never_passes_expected_values() -> None:
 # ---------------------------------------------------------------------------
 
 
-def test_validation_invalid_returns_authoring_invalid() -> None:
+def test_validation_invalid_returns_authoring_invalid_without_execution() -> None:
     """A broken fixture must return all cases as authoring_invalid."""
     broken = copy.deepcopy(FIXTURE)
     broken["schema_version"] = "bad"
-    # Re-run validation through the main pipeline
-    from app.services.bernie.lc4v7d1_development_evidence import (
-        validate_fixture,
+    result = run_lc4v7d1_evidence(broken)
+    assert result["fixture_valid"] is False
+    assert result["aggregate"]["total"] == 0
+    assert result["cases"] == ()
+    assert result["classifications"]["authoring_invalid"] == TOTAL_EXPECTED
+    assert all(
+        count == 0
+        for name, count in result["classifications"].items()
+        if name != "authoring_invalid"
     )
-    errors = validate_fixture(broken)
-    assert errors
-    # Simulate what the runner returns
-    from app.services.bernie.lc4v7d1_development_evidence import (
-        run_lc4v7d1_evidence,
-    )
-    # We can't easily swap the fixture; instead validate the logic
-    assert "schema_version" in errors[0]
-
-
-def test_committed_report_matches_live_aggregate():
-    """Placeholder: the committed report is not required for D1."""
-    pass

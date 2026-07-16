@@ -1,0 +1,17 @@
+{
+  "adapter_observations": [
+    {"adapter_id":"deepseek_via_claude_code_bare","evidence":["Runner/test dispatch remains blocked pending independent pre-baseline review."],"method":"synthetic_fixture","reachability":"unknown"},
+    {"adapter_id":"deepcode_cli","evidence":["Real-TTY fallback remains unselected."],"method":"synthetic_fixture","reachability":"unknown"},
+    {"adapter_id":"claude_cli_print","evidence":["Availability-gated consultation remains unselected."],"method":"synthetic_fixture","reachability":"unknown"},
+    {"adapter_id":"antigravity_cli_print","evidence":["Fresh independent reviewer is assigned to exact source head be5eeceb."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"codex_primary_session","evidence":["GPT Sol remains protected conductor and acceptance owner."],"method":"synthetic_fixture","reachability":"reachable"},
+    {"adapter_id":"codex_subagent_spawn","evidence":["No native Codex subagent is assigned."],"method":"synthetic_fixture","reachability":"unknown"}
+  ],
+  "assigned_agent_ids": ["antigravity"],
+  "context_health": {"agent_contexts":[{"agent_id":"orchestrator","measurement_source":"unknown","rehydrated_from_receipt":true,"rehydration_sources":["live_handover_current_baton","current_authority_allocation","active_plan_and_acceptance","protected_evidence_boundaries","git_refs_and_worktree"]}]},
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "worker_slots": [{"active_instance_ids":[],"resource_id":"deepseek-flash-workers","stale_instance_ids":[]}],
+  "workspace_receipts": [{"agent_id":"antigravity","branch":"antigravity/current","clean":true,"at_handoff_current":true,"recorded_at":"2026-07-16T16:20:00+10:00","worktree":"C:\\Users\\sarashera\\EMR4-worktrees\\antigravity"}]
+}

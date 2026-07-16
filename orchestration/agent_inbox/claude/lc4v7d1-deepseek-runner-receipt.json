@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "LC4V7D1 baseline is **complete**. Commit `f28bac48` on `claude/current`.\n\n## Summary\n\n**Decision: CANDIDATE: ready**\n\n**Changed files** (three owned files only):\n- `app/services/bernie/lc4v7d1_development_evidence.py` \u2014 created\n- `tests/test_bernie_lc4v7d1_development.py` \u2014 created  \n- `orchestration/agent_inbox/claude/lc4v7d1-deepseek-candidate.md` \u2014 created\n\n**Fixture hash:** `sha256:03544ffab7d3a720faf6cba3cac7f33c5e45e7a42dfec231223334fdd335b2ea`  \n**Report hash:** `sha256:693d40bbd2c15bc24c74ca110206e65086d278a6557507573e88a86882daa6ea`  \n**Selection hash:** `sha256:90801c120db94731ea0852a62ab5ad5a89f257b5e2084d6e0c0a29a9360d689f`  \n**Non-pass count:** 24/24\n\n**Aggregate:** total=24, normalization_pass=18, extraction_pass=6, policy_pass=12, composed_pass=0, safe=12, variance=0\n\n**Classifications:** normalization_gap=6, parser_gap=12, policy_gap=6, authoring_invalid=0, contract_layer_gap=0, pass=0\n\n**Layer gaps discovered:**\n\n| Family | Count | Classification | Root cause |\n|--------|-------|---------------|------------|\n| `speech_like_time` | 6 | `normalization_gap` | `_detect_time_forms` requires digit `\\d` for hour; word-form times undetected |\n| `cross_turn_interval` | 6 | `parser_gap` | `_derive_final_temporal` replaces rather than composing additive bounds |\n| `ambiguous_practitioner_alternatives` | 6 | `parser_gap` | Hardcoded fallback choices vs. actual utterance alternatives; move/resize/cancel/status_change don't check practitioner |\n| `unknown_practitioner_schedule_explanation` | 6 | `policy_gap` | `resolve_policy` has no guard for unknown practitioner on `explain_schedule` |\n\n**Tests:** 63/63 pass (56 V7D1 + 7 taxonomy), zero variance, deterministic hashes, no probe-ID branching, no expected-value leakage.",
+  "usage": {
+    "input_tokens": 71055,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 2097024,
+    "output_tokens": 46289,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 2.5733170000000003,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

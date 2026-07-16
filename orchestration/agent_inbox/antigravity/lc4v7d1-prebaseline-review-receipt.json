@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_worktree",
+  "model": "Gemini 3.5 Flash (Medium)",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\antigravity",
+  "branch": "antigravity/current",
+  "head_before": "be5eeceb5e9f203de61cfadd9ac45e3c80184306",
+  "head_after": "be5eeceb5e9f203de61cfadd9ac45e3c80184306",
+  "dirty_after": true,
+  "os_sandbox": false,
+  "result": "I have completed the fresh-context, read-only semantic and evidence-contract review for LC4V7D1. \n\nOnly the designated review file has been created, and the working tree check confirms no other files were modified.\n\n### Summary of Review\n1. **Fixture Structure & Clean Room:** Verified that `tests/fixtures/bernie_lc4v7d1_development/probes.json` contains exactly 24 cases (6 per family) with unique IDs. The wording is clean and uses synthetic entities without importing or inferring from any sealed holdouts.\n2. **Utterance & Label Coherence:** Confirmed that all utterances and expected values are coherent under the parser/policy contracts, including mapping written time formats, cross-turn interval compositions, alternative listings, and failing closed under unknown rosters.\n3. **Layer Separation:** The matrix successfully isolates normalization, extraction, and policy concerns, facilitating precise categorization of gaps.\n4. **Decision Taxonomy:** The generic taxonomy module [certification_decision_taxonomy.py](file:///C:/Users/sarashera/EMR4-worktrees/antigravity/app/services/bernie/certification_decision_taxonomy.py) correctly prioritizes run validity (`CERTIFICATION_INVALID` vs `CERTIFICATION_FAIL`).\n5. **Fail-Closed Semantics:** Validation logic utilizes strict type checks (raising TypeError/ValueError and preventing `bool` coercion) and is holdout-independent.\n6. **Exit Strictness:** The conditions for D1 exit and conditional V8 authority are exceptionally rigorous, preserving master cleanliness and the user decision boundary.\n\nNo authored defects or typos were found in the fixture. The review artifact [lc4v7d1-prebaseline-review.md](file:///C:/Users/sarashera/EMR4-worktrees/antigravity/orchestration/agent_inbox/antigravity/lc4v7d1-prebaseline-review.md) has been created and populated with the five-source Ariadne Orchestrator Receipt and detailed answers to all review questions.\n\n**DECISION: pass**"
+}

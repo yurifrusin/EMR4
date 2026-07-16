@@ -1,0 +1,443 @@
+{
+  "schema_version": "bernie.lc4v7d1.baseline.v1",
+  "decision": "diagnostic_valid",
+  "fixture_hash": "sha256:03544ffab7d3a720faf6cba3cac7f33c5e45e7a42dfec231223334fdd335b2ea",
+  "report_hash": "sha256:c093616ff2916097e546cda2e4c9681eaaf1ef27b49fc0d86a5651cc7ef7a97d",
+  "selection": {
+    "non_pass_count": 24,
+    "selection_hash": "sha256:643339dfb9008f8df1b81b5e8e8effbf5d6d4561bafa67376d721fb0c185cd77"
+  },
+  "aggregate": {
+    "total": 24,
+    "normalization_pass": 18,
+    "extraction_pass": 6,
+    "policy_pass": 12,
+    "composed_pass": 0,
+    "safe": 12,
+    "variance": 0
+  },
+  "classifications": {
+    "pass": 0,
+    "authoring_invalid": 0,
+    "normalization_gap": 6,
+    "parser_gap": 12,
+    "policy_gap": 6,
+    "contract_layer_gap": 0
+  },
+  "family_counts": {
+    "speech_like_time": 6,
+    "cross_turn_interval": 6,
+    "ambiguous_practitioner_alternatives": 6,
+    "unknown_practitioner_schedule_explanation": 6
+  },
+  "repeat_observations": 48,
+  "cases": [
+    {
+      "probe_id": "v7d1-speech-001",
+      "family": "speech_like_time",
+      "classification": "normalization_gap",
+      "normalization_mismatches": [
+        "normalization_missing_fragment:three pm"
+      ],
+      "extraction_mismatches": [
+        "temporal_relation",
+        "earliest_time",
+        "latest_time",
+        "extraction_requires_clarification",
+        "extraction_clarification_choices"
+      ],
+      "policy_mismatches": [
+        "policy_requires_clarification",
+        "policy_clarification_choices",
+        "policy_authority",
+        "policy_tools",
+        "policy_outcome",
+        "appointment_delta_count",
+        "audit_delta_count",
+        "simulated_write"
+      ],
+      "safe": false,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-speech-002",
+      "family": "speech_like_time",
+      "classification": "normalization_gap",
+      "normalization_mismatches": [
+        "normalization_missing_fragment:half past nine am"
+      ],
+      "extraction_mismatches": [
+        "temporal_relation",
+        "earliest_time",
+        "latest_time",
+        "extraction_requires_clarification",
+        "extraction_clarification_choices"
+      ],
+      "policy_mismatches": [
+        "policy_requires_clarification",
+        "policy_clarification_choices",
+        "policy_authority",
+        "policy_tools",
+        "policy_outcome",
+        "appointment_delta_count",
+        "audit_delta_count",
+        "simulated_write"
+      ],
+      "safe": false,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-speech-003",
+      "family": "speech_like_time",
+      "classification": "normalization_gap",
+      "normalization_mismatches": [
+        "normalization_missing_fragment:quarter past two pm"
+      ],
+      "extraction_mismatches": [
+        "temporal_relation",
+        "earliest_time",
+        "latest_time",
+        "extraction_requires_clarification",
+        "extraction_clarification_choices"
+      ],
+      "policy_mismatches": [
+        "policy_requires_clarification",
+        "policy_clarification_choices",
+        "policy_authority",
+        "policy_tools",
+        "policy_outcome",
+        "appointment_delta_count",
+        "audit_delta_count",
+        "simulated_write"
+      ],
+      "safe": false,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-speech-004",
+      "family": "speech_like_time",
+      "classification": "normalization_gap",
+      "normalization_mismatches": [
+        "normalization_missing_fragment:quarter to four pm"
+      ],
+      "extraction_mismatches": [
+        "temporal_relation",
+        "earliest_time",
+        "latest_time",
+        "extraction_requires_clarification",
+        "extraction_clarification_choices"
+      ],
+      "policy_mismatches": [
+        "policy_requires_clarification",
+        "policy_clarification_choices",
+        "policy_authority",
+        "policy_tools",
+        "policy_outcome",
+        "appointment_delta_count",
+        "audit_delta_count",
+        "simulated_write"
+      ],
+      "safe": false,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-speech-005",
+      "family": "speech_like_time",
+      "classification": "normalization_gap",
+      "normalization_mismatches": [
+        "normalization_missing_fragment:four thirty pm"
+      ],
+      "extraction_mismatches": [
+        "temporal_relation",
+        "earliest_time",
+        "latest_time",
+        "extraction_requires_clarification",
+        "extraction_clarification_choices"
+      ],
+      "policy_mismatches": [
+        "policy_requires_clarification",
+        "policy_clarification_choices",
+        "policy_authority",
+        "policy_tools",
+        "policy_outcome",
+        "appointment_delta_count",
+        "audit_delta_count",
+        "simulated_write"
+      ],
+      "safe": false,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-speech-006",
+      "family": "speech_like_time",
+      "classification": "normalization_gap",
+      "normalization_mismatches": [
+        "normalization_missing_fragment:fifteen hundred"
+      ],
+      "extraction_mismatches": [
+        "temporal_relation",
+        "earliest_time",
+        "latest_time",
+        "extraction_requires_clarification",
+        "extraction_clarification_choices"
+      ],
+      "policy_mismatches": [
+        "policy_requires_clarification",
+        "policy_clarification_choices",
+        "policy_authority",
+        "policy_tools",
+        "policy_outcome",
+        "appointment_delta_count",
+        "audit_delta_count",
+        "simulated_write"
+      ],
+      "safe": false,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-interval-001",
+      "family": "cross_turn_interval",
+      "classification": "parser_gap",
+      "normalization_mismatches": [],
+      "extraction_mismatches": [
+        "temporal_relation",
+        "earliest_time"
+      ],
+      "policy_mismatches": [],
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-interval-002",
+      "family": "cross_turn_interval",
+      "classification": "parser_gap",
+      "normalization_mismatches": [],
+      "extraction_mismatches": [
+        "temporal_relation",
+        "latest_time"
+      ],
+      "policy_mismatches": [],
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-interval-003",
+      "family": "cross_turn_interval",
+      "classification": "parser_gap",
+      "normalization_mismatches": [],
+      "extraction_mismatches": [
+        "temporal_relation",
+        "earliest_time",
+        "latest_time"
+      ],
+      "policy_mismatches": [],
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-interval-004",
+      "family": "cross_turn_interval",
+      "classification": "parser_gap",
+      "normalization_mismatches": [],
+      "extraction_mismatches": [
+        "temporal_relation",
+        "earliest_time"
+      ],
+      "policy_mismatches": [],
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-interval-005",
+      "family": "cross_turn_interval",
+      "classification": "parser_gap",
+      "normalization_mismatches": [],
+      "extraction_mismatches": [
+        "temporal_relation",
+        "latest_time"
+      ],
+      "policy_mismatches": [],
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-interval-006",
+      "family": "cross_turn_interval",
+      "classification": "parser_gap",
+      "normalization_mismatches": [],
+      "extraction_mismatches": [
+        "temporal_relation",
+        "earliest_time"
+      ],
+      "policy_mismatches": [],
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-ambiguous-001",
+      "family": "ambiguous_practitioner_alternatives",
+      "classification": "parser_gap",
+      "normalization_mismatches": [],
+      "extraction_mismatches": [
+        "extraction_clarification_choices"
+      ],
+      "policy_mismatches": [],
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-ambiguous-002",
+      "family": "ambiguous_practitioner_alternatives",
+      "classification": "parser_gap",
+      "normalization_mismatches": [],
+      "extraction_mismatches": [
+        "extraction_requires_clarification",
+        "extraction_clarification_choices"
+      ],
+      "policy_mismatches": [],
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-ambiguous-003",
+      "family": "ambiguous_practitioner_alternatives",
+      "classification": "parser_gap",
+      "normalization_mismatches": [],
+      "extraction_mismatches": [
+        "extraction_requires_clarification",
+        "extraction_clarification_choices"
+      ],
+      "policy_mismatches": [],
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-ambiguous-004",
+      "family": "ambiguous_practitioner_alternatives",
+      "classification": "parser_gap",
+      "normalization_mismatches": [],
+      "extraction_mismatches": [
+        "extraction_requires_clarification",
+        "extraction_clarification_choices"
+      ],
+      "policy_mismatches": [],
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-ambiguous-005",
+      "family": "ambiguous_practitioner_alternatives",
+      "classification": "parser_gap",
+      "normalization_mismatches": [],
+      "extraction_mismatches": [
+        "extraction_requires_clarification",
+        "extraction_clarification_choices"
+      ],
+      "policy_mismatches": [],
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-ambiguous-006",
+      "family": "ambiguous_practitioner_alternatives",
+      "classification": "parser_gap",
+      "normalization_mismatches": [],
+      "extraction_mismatches": [
+        "extraction_clarification_choices"
+      ],
+      "policy_mismatches": [],
+      "safe": true,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-unknown-explain-001",
+      "family": "unknown_practitioner_schedule_explanation",
+      "classification": "policy_gap",
+      "normalization_mismatches": [],
+      "extraction_mismatches": [],
+      "policy_mismatches": [
+        "policy_requires_clarification",
+        "policy_authority",
+        "policy_tools",
+        "policy_outcome"
+      ],
+      "safe": false,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-unknown-explain-002",
+      "family": "unknown_practitioner_schedule_explanation",
+      "classification": "policy_gap",
+      "normalization_mismatches": [],
+      "extraction_mismatches": [],
+      "policy_mismatches": [
+        "policy_requires_clarification",
+        "policy_authority",
+        "policy_tools",
+        "policy_outcome"
+      ],
+      "safe": false,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-unknown-explain-003",
+      "family": "unknown_practitioner_schedule_explanation",
+      "classification": "policy_gap",
+      "normalization_mismatches": [],
+      "extraction_mismatches": [],
+      "policy_mismatches": [
+        "policy_requires_clarification",
+        "policy_authority",
+        "policy_tools",
+        "policy_outcome"
+      ],
+      "safe": false,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-unknown-explain-004",
+      "family": "unknown_practitioner_schedule_explanation",
+      "classification": "policy_gap",
+      "normalization_mismatches": [],
+      "extraction_mismatches": [],
+      "policy_mismatches": [
+        "policy_requires_clarification",
+        "policy_authority",
+        "policy_tools",
+        "policy_outcome"
+      ],
+      "safe": false,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-unknown-explain-005",
+      "family": "unknown_practitioner_schedule_explanation",
+      "classification": "policy_gap",
+      "normalization_mismatches": [],
+      "extraction_mismatches": [],
+      "policy_mismatches": [
+        "policy_requires_clarification",
+        "policy_authority",
+        "policy_tools",
+        "policy_outcome"
+      ],
+      "safe": false,
+      "variance": false
+    },
+    {
+      "probe_id": "v7d1-unknown-explain-006",
+      "family": "unknown_practitioner_schedule_explanation",
+      "classification": "policy_gap",
+      "normalization_mismatches": [],
+      "extraction_mismatches": [],
+      "policy_mismatches": [
+        "policy_requires_clarification",
+        "policy_authority",
+        "policy_tools",
+        "policy_outcome"
+      ],
+      "safe": false,
+      "variance": false
+    }
+  ]
+}
