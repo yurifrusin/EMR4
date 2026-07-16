@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V9 is sealed `certification_fail`; LC4V9D1 is accepted; genuinely fresh LC4V10 content-blind framework is in Sol recovery before pre-content veto |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-contract.md` and `lc4v10-one-shot-acceptance-rule.md`; D1 remains governed by `lc4v9d1-sol-acceptance.md` |
-| Current result | Flash candidate `8207f873` was rejected for conceptual fail-open defects. Sol recovery passes 27/27 focused. Two Gemini reviews confirmed all eight defects closed but correctly exposed stale handover assertion wording; the exact current gate now passes 114/114. No V10 content exists |
-| Next implementation | Obtain the final fresh exact-head Gemini pre-content veto with 114/114, then close external sessions for Sol-only corpus authorship, immutable seal, and one one-shot certification. Preserve v1-v9, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
+| Active product track | LC4V10 content-blind framework is accepted; all external sessions are closed and Sol-only protected authorship is authorized |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-framework-sol-acceptance.md`, `lc4v10-sol-contract.md`, and `lc4v10-one-shot-acceptance-rule.md` |
+| Current result | Flash candidate `8207f873` was rejected for eight conceptual fail-open defects. Sol recovery at `d56db482` passes 27/27 focused and 114/114 combined nodes. Exact-file Gemini review 5 returned `DECISION: pass` at `411bc90d`. No V10 content exists yet |
+| Next implementation | Sol alone authors and validates the fresh 288-scenario Gold corpus, commits exact source blobs, creates the bound manifest and unconsumed seal, verifies marker/report absence, then executes the sole V10 attempt. Preserve v1-v9, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 

@@ -61,7 +61,7 @@ def test_compact_live_handover_retains_required_authority_and_boundaries() -> No
         "Protected holdouts v1-v9",
         "lc4v9d1-sol-acceptance.md",
         "7 extraction and 14 policy gaps",
-        "genuinely fresh LC4V10",
+        "LC4V10 content-blind framework is accepted",
         "lc4v10-sol-contract.md",
         "lc4v10-one-shot-acceptance-rule.md",
         "Flash candidate `8207f873`",
