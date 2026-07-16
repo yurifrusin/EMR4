@@ -46,10 +46,25 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V5 genuinely fresh one-shot certification complete and permanently sealed; valid evidence returned certification fail; user remediation decision required |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v5-sol-contract.md` and `lc4v5-one-shot-acceptance-rule.md`, grounded by accepted D5E1 exit |
-| Current result | LC4V5 attempt `lc4v5-fresh-attempt-001` is consumed and sealed. All evidence gates passed over 24 groups, 288 scenarios, 576 samples, and zero variance; report hash `17c12355...`, consumed seal hash `f3b8d31d...`. Product result is `certification_fail`: complete 512/576, safety 560/576, interpretation failures 48, integration 16, policy 2, safety 16. Every one of the twelve individual semantic dimensions still clears 548; failures concentrate in three aggregate families |
-| Next implementation | Pause at Yuri's documented decision boundary. Recommended next track is a fresh inspectable development-only LC4V5R1 diagnostic/remediation tranche ordered by risk: create-approximate safety, move-interval normalization, then ambiguous-resize clarification. Never reopen or reuse v5 content; authorize a genuinely fresh later holdout only after ordinary development exit. Preserve T3.1-T3.4 and all T3.5/provider/product/write boundaries |
+| Active product track | LC4V5R1 remediation and LC4V5R1E1 development exit complete; user certification decision required |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v5r1-sol-acceptance.md` and `lc4v5r1e1-sol-acceptance.md` |
+| Current result | The sealed v5 aggregate localized 64 failures to create-approximate, move-interval, and ambiguous-resize. Fresh R1 development evidence improved from 4/18 complete and 14/18 safe to 18/18 complete and 18/18 safe with zero variance. Gemini returned `DECISION: pass` after 413/413 tests. E1 then passed all 13 evidence gates and the final serial handover gate passed 450/450. This closes supported ordinary-development blockers but is not certification |
+| Next implementation | Pause at Yuri's documented decision boundary. Recommended option: authorize a genuinely fresh certification holdout v6. Alternative: approve a separately reviewed explicit reuse policy. Never reopen, rerun, or reuse v5 implicitly. Preserve T3.1-T3.4 and all T3.5/provider/product/write boundaries |
+
+### LC4V5R1 and LC4V5R1E1 accepted state
+
+LC4V5 remains permanently consumed and sealed. R1 used only 18 fresh ordinary
+probes across the three aggregate-localized families. Sol rejected a timed-out,
+scope-breaching Flash candidate and recovered under the lease: 18/18 complete,
+18/18 safe, and zero variance under probe hash `sha256:e4488591...`. The broad
+Sol gate passed 439/439; Gemini passed 413/413 and returned `DECISION: pass` on
+exact recovery head `4a27900a`.
+
+E1 is a parser-free binder over committed v5/R1 evidence. All 13 gates and the
+450-test handover gate pass; report hash is `sha256:488e3478...`. No
+certification, authorship, or reuse may begin until Yuri chooses a genuinely
+fresh holdout v6 (recommended) or an explicit reviewed reuse policy. See the
+R1/E1 artifacts for exact provenance and historical-test distinctions.
 
 LC4V4 provenance: the frozen pre-content records remain
 `lc4v4q1-sol-contract.md`, `lc4v4q1-sol-recovery-amendment.md`,
@@ -291,10 +306,9 @@ changes; it does not inherit the failed worker's acceptance framing.
 
 ## 5. Protected Evidence and Closed Gates
 
-### Protected holdouts v1, v2, v3, and v4
+### Protected holdouts v1-v5
 
-Protected holdouts v1, v2, and v3 remain sealed, and v4 is now sealed under the
-same boundary. Do not open, enumerate, list, search, import, run, regenerate,
+Protected holdouts v1, v2, v3, and v4 remain sealed; v5 is also sealed. Protected holdouts v1, v2, and v3 remain sealed under the same no-access boundary. Do not open, enumerate, list, search, import, run, regenerate,
 evaluate, hash-check, infer labels from, or tune against any protected fixture,
 support module, authoring surface, manifest, seal, receipt, or per-case report.
 The committed v2 aggregate report and aggregate closeout are the only v2
