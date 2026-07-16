@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_worktree",
+  "model": "Gemini 3.5 Flash (Medium)",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\lc4v5-framework-gemini",
+  "branch": "antigravity/lc4v5-content-blind-framework-review",
+  "head_before": "4cfa2c45c24719c1cf6f7d756f0533056eb08004",
+  "head_after": "4cfa2c45c24719c1cf6f7d756f0533056eb08004",
+  "dirty_after": true,
+  "os_sandbox": false,
+  "result": "I am waiting for the test suite execution task to complete. Once finished, I will examine the results and proceed with the framework review.\nI have completed the content-blind independent review for the **LC4V5 holdout framework**.\n\nThe review artifact has been written to the designated workspace path:\n[lc4v5-antigravity-framework-review.md](file:///C:/Users/sarashera/EMR4-worktrees/lc4v5-framework-gemini/orchestration/agent_inbox/antigravity/lc4v5-antigravity-framework-review.md)\n\n### Summary of Completed Steps:\n1. **Rehydration Verification:** Validated workspace parameters (`C:\\Users\\sarashera\\EMR4-worktrees\\lc4v5-framework-gemini` on branch `antigravity/lc4v5-content-blind-framework-review` at head `4cfa2c45c24719c1cf6f7d756f0533056eb08004`).\n2. **Ariadne Orchestrator Receipt:** Generated a fresh preflight receipt checking all five mandatory rehydration sources (`live_handover_current_baton`, `current_authority_allocation`, `active_plan_and_acceptance`, `protected_evidence_boundaries`, `git_refs_and_worktree`), which resolved cleanly to a `passed` status.\n3. **Execution of Focus Tests:** Executed the synthetic test suite and dependent tests (`113 passed`, exit code `0`). Verified the repository state is clean.\n4. **Framework Audit:** Proved strict unknown-field checks, exact population requirements (24 groups, 288 scenarios, 216/72 turn splits, 576 samples), immutable cryptographic binding gates, exclusive one-shot marker transitions, strict aggregate-only outputs, frozen threshold constraints, evidence-invalidity precedence, and total runtime isolation.\n\n**Final Veto Decision:**\n`DECISION: pass`"
+}
