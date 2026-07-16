@@ -196,14 +196,28 @@ V8 is permanently consumed. Its first aggregate-only hypothesis is a
 systematic policy-resolution authoring/projection mismatch, not broad parser
 regression; it supplies no case-level repair authority.
 
+Yuri authorized LC4V8D1, which froze 24 fresh inspectable ordinary-development
+probes across canonical policy actions, policy boundaries, time surfaces, and
+temporal composition. All 24 pass normalization, extraction, independently
+scored semantic policy behavior, exact 14-field canonical projection,
+composition, and safety across 48 observations with zero variance. Report hash
+is `sha256:e7507a4333316012449168f4e11ab93e0b8b60b29c1495b1864eb932bd5fa0bd`;
+the non-pass selection is empty. Flash's useful uncommitted candidate was
+rejected for conceptual provenance and fail-open evidence defects; Sol
+recovered under the lease without a correction loop. Gemini passed both the
+immutable authorship and exact baseline head `b72cf748`. The broader gate passed
+581 selected nodes with ten documented deselections. D1 supports a V8-specific
+Gold/evaluator mismatch, finds no broad temporal/parser defect, and authorizes
+no product runtime repair.
+
 ## Next safe sequence
 
 1. Keep holdouts v1-v8 sealed; use only accepted aggregate evidence and
    closeouts for planning.
-2. Pause for Yuri's development decision. Recommend a bounded fresh
-   inspectable LC4V8D1 based only on public aggregate categories.
-3. First distinguish policy-resolution Gold/projection mismatch from product
-   behavior, then independently sample temporal/normalization.
+2. Pause for Yuri's certification decision. Recommend genuinely fresh LC4V9
+   with D1's canonical projection and cross-field gates frozen before content.
+3. Require fresh Gemini pre-content veto, Sol-only authorship, immutable seal,
+   and one one-shot evaluation.
 4. Do not inspect, reuse, rerun, rescore, relabel, or repair V8.
 5. Treat any later V9 certification as a separate Yuri decision.
 6. Keep T3.1-T3.4 blocked by default and T3.5/providers plus every product/write
@@ -241,6 +255,8 @@ regression; it supplies no case-level repair authority.
 - `orchestration/agent_inbox/codex/lc4v7-sol-acceptance.md`
 - `docs/bernie-lc4v8-fresh-certification-closeout.md`
 - `orchestration/agent_inbox/codex/lc4v8-sol-acceptance.md`
+- `docs/bernie-lc4v8d1-development-closeout.md`
+- `orchestration/agent_inbox/codex/lc4v8d1-sol-acceptance.md`
 
 Protected holdouts v1-v8 are sealed. Do not enumerate their paths, inspect
 content, rerun them, regenerate them, hash-check them, infer labels from them,

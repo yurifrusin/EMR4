@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | Yuri authorized ordinary-development LC4V8D1; its fresh projection diagnostic is frozen before baseline |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v8d1-sol-contract.md`; V8 remains accepted and sealed under `lc4v8-sol-acceptance.md` |
-| Current result | Recovered D1 baseline passes 24/24 normalization, extraction, semantic policy behavior, exact canonical projection, composition, and safety across 48 observations with zero variance and an empty selection. This supports a V8-specific Gold/evaluator mismatch and authorizes no product repair. The contained metadata incident exposed no case/Gold content |
-| Next implementation | Obtain fresh Gemini exact-head veto over recovered source and the frozen no-remediation conclusion, then run broader serial preservation, accept, close out, commit, and push. Preserve v1-v8, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
+| Active product track | LC4V8D1 ordinary development exit is accepted with an empty repair selection; user V9 decision required |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v8d1-sol-acceptance.md` and `docs/bernie-lc4v8d1-development-closeout.md`; V8 remains sealed under `lc4v8-sol-acceptance.md` |
+| Current result | D1 passes 24/24 normalization, extraction, semantic policy behavior, exact canonical projection, composition, and safety across 48 observations with zero variance. Gemini passed exact baseline head `b72cf748`; broader preservation passed 581 selected nodes. The result supports a V8-specific Gold/evaluator mismatch and authorizes no product repair |
+| Next implementation | Pause for Yuri. Recommend genuinely fresh LC4V9 with the D1-proven canonical projection and semantic/projection cross-field gates frozen before content, then fresh Gemini veto, Sol-only authorship, immutable seal, and one one-shot run. Preserve v1-v8, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 
@@ -71,7 +71,7 @@ invalidity; complete `224/576`, safety `576/576`, and product gates miss. V7 is 
 Yuri authorized fresh V8 after V7D1. Flash's fail-open candidate was rejected; Sol recovered, Gemini passed two pre-content vetoes, and Sol froze source `313e6247` plus seal `5d465667`. The sole valid 576-observation attempt returned
 `certification_fail`: complete/policy resolution `0/576`, temporal/normalization
 `528/576`, all other dimensions including safety `576/576`, and zero variance.
-V8 is sealed; details and the D1 boundary are in the active acceptance.
+V8 is sealed; accepted D1 supplies no repair target and leaves V9 at Yuri's boundary.
 
 LC4V4 provenance: the frozen pre-content records remain
 `lc4v4q1-sol-contract.md`, `lc4v4q1-sol-recovery-amendment.md`,
