@@ -1,0 +1,11 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "reconciliation_sources": ["live_handover_current_baton","current_authority_allocation","active_plan_and_acceptance","protected_evidence_boundaries","git_refs_and_worktree"],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:30e48e4a6bac8f20617d0f8fd0a6e24992d278151a92b85b09da65b1603ee7a2",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
