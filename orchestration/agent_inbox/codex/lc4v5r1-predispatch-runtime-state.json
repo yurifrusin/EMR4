@@ -1,0 +1,77 @@
+{
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "evidence": ["Claude Code 2.1.196 returned exact marker LC4V5R1_DEEPSEEK_READY through DeepSeek V4 Flash/high bare mode on 2026-07-16."],
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable"
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "evidence": ["Declared real-TTY fallback only; not selected for LC4V5R1."],
+      "method": "synthetic_fixture",
+      "reachability": "unknown"
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "evidence": ["Declared availability-gated consultation transport; not selected for LC4V5R1."],
+      "method": "synthetic_fixture",
+      "reachability": "unknown"
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "evidence": ["Declared fresh-project Gemini independent-review transport; live reachability will be checked before review."],
+      "method": "synthetic_fixture",
+      "reachability": "unknown"
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "evidence": ["Protected GPT Sol session is active as conductor, acceptance owner, recovery owner, and integrator."],
+      "method": "synthetic_fixture",
+      "reachability": "reachable"
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "evidence": ["Declared fallback only; no native Codex subagent is assigned or authorized for LC4V5R1."],
+      "method": "synthetic_fixture",
+      "reachability": "unknown"
+    }
+  ],
+  "assigned_agent_ids": ["lc4v5r1-deepseek-flash-001"],
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "unknown",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "worker_slots": [
+    {
+      "active_instance_ids": ["lc4v5r1-deepseek-flash-001"],
+      "resource_id": "deepseek-flash-workers",
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "agent_id": "lc4v5r1-deepseek-flash-001",
+      "at_handoff_current": true,
+      "branch": "claude/lc4v5r1-development-remediation",
+      "clean": true,
+      "recorded_at": "2026-07-16T01:18:30Z",
+      "worktree": "C:/Users/sarashera/EMR4-worktrees/lc4v5r1-dw1"
+    }
+  ]
+}
