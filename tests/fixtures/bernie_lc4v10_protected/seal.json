@@ -1,1 +1,1 @@
-{"attempt_id":"lc4v10-fresh-certification-001","manifest_sha256":"d9467d100775f99a001fe371b691ca796fbb3d36f07b55686b152dff3dcd1516","schema_version":"bernie.lc4v10.seal.v1","state":"unconsumed","thresholds_sha256":"71be796a80a84b553000547b6da6607eaf64053332e02cce3508b93b816f02cf"}
+{"attempt_id":"lc4v10-fresh-certification-001","manifest_sha256":"d9467d100775f99a001fe371b691ca796fbb3d36f07b55686b152dff3dcd1516","schema_version":"bernie.lc4v10.seal.v1","state":"consumed","thresholds_sha256":"71be796a80a84b553000547b6da6607eaf64053332e02cce3508b93b816f02cf"}

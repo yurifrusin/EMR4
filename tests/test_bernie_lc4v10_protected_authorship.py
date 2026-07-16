@@ -12,12 +12,20 @@ import json
 from collections import Counter
 from pathlib import Path
 
+import pytest
+
 from app.services.bernie import lc4v10_protected_authoring as authoring
 from app.services.bernie.lc4v10_content_blind_framework import (
     ACTIONS,
     LANGUAGE_FORMS,
     validate_fixture,
     validate_thresholds,
+)
+
+ROOT = Path(__file__).resolve().parents[1]
+pytestmark = pytest.mark.skipif(
+    (ROOT / authoring.PROTECTED_ROOT / "attempt.marker.json").exists(),
+    reason="LC4V10 is consumed; protected authoring content must not be reopened",
 )
 
 
@@ -72,9 +80,8 @@ def test_threshold_artifact_is_exact() -> None:
 
 
 def test_committed_artifact_bytes_match_independent_authorship() -> None:
-    root = Path(__file__).resolve().parents[1]
-    fixture_path = root / authoring.FIXTURE_PATH
-    thresholds_path = root / authoring.THRESHOLDS_PATH
+    fixture_path = ROOT / authoring.FIXTURE_PATH
+    thresholds_path = ROOT / authoring.THRESHOLDS_PATH
     fixture_bytes = fixture_path.read_bytes()
     thresholds_bytes = thresholds_path.read_bytes()
     assert json.loads(fixture_bytes) == authoring.build_fixture()

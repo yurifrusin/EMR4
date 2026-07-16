@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V10 source is sealed and unconsumed; the sole protected one-shot is the next authorized action |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-source-seal-record.md`, `lc4v10-framework-sol-acceptance.md`, `lc4v10-sol-contract.md`, and `lc4v10-one-shot-acceptance-rule.md` |
-| Current result | Flash candidate `8207f873` was rejected; Sol recovery passed 27/27 focused, 114/114 combined, and independent veto. Sol alone authored 288 fresh scenarios; 46 framework/authoring checks pass. Source `d07b0c80` binds fixture `6e04bb61...` and thresholds `71be796a...`; manifest `d9467d10...` and unconsumed seal `650f58a5...` validate with marker/report absent |
-| Next implementation | Commit the bound manifest and unconsumed seal, re-verify source ancestry plus marker/report absence, then execute and accept the sole V10 attempt. Preserve v1-v9, T3.1-T3.4, and all T3.5/provider/product/write boundaries |
+| Active product track | LC4V10 fresh certification passed; the successive fresh-version cycle is closed |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md` and `docs/bernie-lc4v10-fresh-certification-closeout.md` |
+| Current result | The sole V10 attempt validly consumed with `certification_pass`: complete and every dimension 576/576, all 24 groups 24/24, all six language forms 96/96, zero variance, and empty evidence/product failure maps. Report SHA-256 is `5986691e...` |
+| Next implementation | No V11 is needed or authorized under the completed cycle. Preserve v1-v10 and all T3/provider/product/write boundaries; the next material product track requires ordinary planning and any applicable Yuri decision |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 
@@ -295,26 +295,23 @@ changes; it does not inherit the failed worker's acceptance framing.
 
 ## 5. Protected Evidence and Closed Gates
 
-### Protected holdouts v1-v9 and unconsumed V10
+### Protected holdouts v1-v10
 
-Protected holdouts v1, v2, and v3 remain sealed. Protected holdouts v1-v9
+Protected holdouts v1, v2, and v3 remain sealed. Protected holdouts v1-v10
 share the same no-access boundary. Do not open, enumerate, list, search, import, run, regenerate,
 evaluate, hash-check, infer labels from, or tune against any protected fixture,
 support module, authoring surface, manifest, seal, receipt, or per-case report.
 The committed v2 aggregate report and aggregate closeout are the only v2
 evidence available for planning; only the committed aggregate report, closeout,
-and Sol acceptance are available for v3-v9 planning. Historical metadata-
+and Sol acceptance are available for v3-v10 planning. Historical metadata-
 enumeration incidents do not authorize reuse.
 
-V10's fresh source is now protected and bound to its unconsumed seal. It may
-be read only by the already-authorized Sol one-shot lifecycle and its exact
-pre-execution binding checks; no external worker or reviewer may access it.
+V10 is consumed and sealed; only its committed aggregate report, closeout,
+and Sol acceptance are available for future planning.
 
 Yuri preauthorized successive genuinely fresh holdout versions beginning with
-V10 until certification passes, evidence shows progress has stalled, or an
-unexpected material decision fork arises. This standing authority does not
-permit reuse: every new version must remain clean-room, content-blind before
-fresh independent veto, Sol-authored, immutably sealed, and one-shot.
+V10 until certification passed, progress stalled, or a material fork arose.
+V10 passed, so that standing fresh-version cycle is complete and grants no V11.
 Development work uses only ordinary development, Silver/pending, newly authored
 synthetic, or otherwise explicitly authorized evidence.
 

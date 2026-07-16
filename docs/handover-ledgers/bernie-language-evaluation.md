@@ -287,8 +287,11 @@ or one-shot requirements.
 - `orchestration/agent_inbox/codex/lc4v9-sol-acceptance.md`
 - `docs/bernie-lc4v9d1-development-closeout.md`
 - `orchestration/agent_inbox/codex/lc4v9d1-sol-acceptance.md`
+- `docs/bernie-lc4v10-fresh-certification-closeout.md`
+- `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`
 
-Protected holdouts v1-v9 are sealed. Do not enumerate their paths, inspect
-content, rerun them, regenerate them, hash-check them, infer labels from them,
-or tune against them. T3.1-T3.4 remain blocked-by-default evaluation
+Protected holdouts v1-v10 are sealed. LC4V10 validly passed its sole attempt
+at 576/576 complete with empty evidence and product failure maps. Do not
+enumerate protected paths, inspect content, rerun, regenerate, hash-check,
+infer labels, or tune against them. T3.1-T3.4 remain blocked-by-default evaluation
 scaffolding; T3.5 is deferred.
