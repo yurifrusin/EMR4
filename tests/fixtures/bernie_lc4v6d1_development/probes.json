@@ -1,0 +1,199 @@
+{
+  "schema_version": "bernie.lc4v6d1.probes.v1",
+  "reference_date": "2026-07-16",
+  "provenance": "fresh_sol_authored_synthetic_gold_development_only",
+  "cases": [
+    {
+      "probe_id": "lc4v6d1_u01",
+      "family": "move_unknown_practitioner",
+      "language_form": "plain",
+      "utterances": ["Move Jordan Lee's appointment with Dr Rivera to tomorrow at 3 pm."],
+      "extraction": {"intended_action": "move", "action_semantics": "intended", "temporal_relation": "exact", "earliest_time": "15:00", "latest_time": "15:00", "practitioner_semantics": "exact", "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "action_negated": false},
+      "policy": {"requires_clarification": true, "clarification_choices": [], "authority": "clarify", "tools": ["request_clarification"], "downstream_outcome": "clarification_required", "resolved_practitioner_id": null, "appointment_delta_count": 0, "audit_delta_count": 0, "simulated_write": false}
+    },
+    {
+      "probe_id": "lc4v6d1_u02",
+      "family": "move_unknown_practitioner",
+      "language_form": "paraphrase",
+      "utterances": ["Reschedule Jordan Lee with Dr Morgan to Friday at 3:15 pm."],
+      "extraction": {"intended_action": "move", "action_semantics": "intended", "temporal_relation": "exact", "earliest_time": "15:15", "latest_time": "15:15", "practitioner_semantics": "exact", "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "action_negated": false},
+      "policy": {"requires_clarification": true, "clarification_choices": [], "authority": "clarify", "tools": ["request_clarification"], "downstream_outcome": "clarification_required", "resolved_practitioner_id": null, "appointment_delta_count": 0, "audit_delta_count": 0, "simulated_write": false}
+    },
+    {
+      "probe_id": "lc4v6d1_u03",
+      "family": "move_unknown_practitioner",
+      "language_form": "paraphrase",
+      "utterances": ["Shift Jordan Lee's Dr Bennett appointment to tomorrow at 2:30 pm."],
+      "extraction": {"intended_action": "move", "action_semantics": "intended", "temporal_relation": "exact", "earliest_time": "14:30", "latest_time": "14:30", "practitioner_semantics": "exact", "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "action_negated": false},
+      "policy": {"requires_clarification": true, "clarification_choices": [], "authority": "clarify", "tools": ["request_clarification"], "downstream_outcome": "clarification_required", "resolved_practitioner_id": null, "appointment_delta_count": 0, "audit_delta_count": 0, "simulated_write": false}
+    },
+    {
+      "probe_id": "lc4v6d1_u04",
+      "family": "move_unknown_practitioner",
+      "language_form": "speech_like",
+      "utterances": ["Could you move Jordan Lee's booking with Dr Foster to Friday at 4 pm?"],
+      "extraction": {"intended_action": "move", "action_semantics": "intended", "temporal_relation": "exact", "earliest_time": "16:00", "latest_time": "16:00", "practitioner_semantics": "exact", "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "action_negated": false},
+      "policy": {"requires_clarification": true, "clarification_choices": [], "authority": "clarify", "tools": ["request_clarification"], "downstream_outcome": "clarification_required", "resolved_practitioner_id": null, "appointment_delta_count": 0, "audit_delta_count": 0, "simulated_write": false}
+    },
+    {
+      "probe_id": "lc4v6d1_u05",
+      "family": "move_unknown_practitioner",
+      "language_form": "paraphrase",
+      "utterances": ["Please push Jordan Lee's appointment with Dr Wallace back to tomorrow at 3:45 pm."],
+      "extraction": {"intended_action": "move", "action_semantics": "intended", "temporal_relation": "exact", "earliest_time": "15:45", "latest_time": "15:45", "practitioner_semantics": "exact", "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "action_negated": false},
+      "policy": {"requires_clarification": true, "clarification_choices": [], "authority": "clarify", "tools": ["request_clarification"], "downstream_outcome": "clarification_required", "resolved_practitioner_id": null, "appointment_delta_count": 0, "audit_delta_count": 0, "simulated_write": false}
+    },
+    {
+      "probe_id": "lc4v6d1_u06",
+      "family": "move_unknown_practitioner",
+      "language_form": "paraphrase",
+      "utterances": ["Bring Jordan Lee's visit with Dr Norris forward to Friday at 2 pm."],
+      "extraction": {"intended_action": "move", "action_semantics": "intended", "temporal_relation": "exact", "earliest_time": "14:00", "latest_time": "14:00", "practitioner_semantics": "exact", "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "action_negated": false},
+      "policy": {"requires_clarification": true, "clarification_choices": [], "authority": "clarify", "tools": ["request_clarification"], "downstream_outcome": "clarification_required", "resolved_practitioner_id": null, "appointment_delta_count": 0, "audit_delta_count": 0, "simulated_write": false}
+    },
+    {
+      "probe_id": "lc4v6d1_u07",
+      "family": "move_unknown_practitioner",
+      "language_form": "word_order",
+      "utterances": ["Move the Dr Rivera appointment for Jordan Lee to Friday at 3 pm."],
+      "extraction": {"intended_action": "move", "action_semantics": "intended", "temporal_relation": "exact", "earliest_time": "15:00", "latest_time": "15:00", "practitioner_semantics": "exact", "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "action_negated": false},
+      "policy": {"requires_clarification": true, "clarification_choices": [], "authority": "clarify", "tools": ["request_clarification"], "downstream_outcome": "clarification_required", "resolved_practitioner_id": null, "appointment_delta_count": 0, "audit_delta_count": 0, "simulated_write": false}
+    },
+    {
+      "probe_id": "lc4v6d1_u08",
+      "family": "move_unknown_practitioner",
+      "language_form": "word_order",
+      "utterances": ["Reschedule Jordan Lee's appointment to tomorrow at 3 pm with Dr Morgan."],
+      "extraction": {"intended_action": "move", "action_semantics": "intended", "temporal_relation": "exact", "earliest_time": "15:00", "latest_time": "15:00", "practitioner_semantics": "exact", "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "action_negated": false},
+      "policy": {"requires_clarification": true, "clarification_choices": [], "authority": "clarify", "tools": ["request_clarification"], "downstream_outcome": "clarification_required", "resolved_practitioner_id": null, "appointment_delta_count": 0, "audit_delta_count": 0, "simulated_write": false}
+    },
+    {
+      "probe_id": "lc4v6d1_u09",
+      "family": "move_unknown_practitioner",
+      "language_form": "multi_turn",
+      "utterances": ["Move Jordan Lee's appointment with Dr Bennett to tomorrow.", "Make that 3 pm."],
+      "extraction": {"intended_action": "move", "action_semantics": "intended", "temporal_relation": "exact", "earliest_time": "15:00", "latest_time": "15:00", "practitioner_semantics": "exact", "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "action_negated": false},
+      "policy": {"requires_clarification": true, "clarification_choices": [], "authority": "clarify", "tools": ["request_clarification"], "downstream_outcome": "clarification_required", "resolved_practitioner_id": null, "appointment_delta_count": 0, "audit_delta_count": 0, "simulated_write": false}
+    },
+    {
+      "probe_id": "lc4v6d1_u10",
+      "family": "move_unknown_practitioner",
+      "language_form": "multi_turn",
+      "utterances": ["Shift Jordan Lee with Dr Foster to Friday at 2 pm.", "Actually, 2:20 pm."],
+      "extraction": {"intended_action": "move", "action_semantics": "intended", "temporal_relation": "exact", "earliest_time": "14:20", "latest_time": "14:20", "practitioner_semantics": "exact", "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "action_negated": false},
+      "policy": {"requires_clarification": true, "clarification_choices": [], "authority": "clarify", "tools": ["request_clarification"], "downstream_outcome": "clarification_required", "resolved_practitioner_id": null, "appointment_delta_count": 0, "audit_delta_count": 0, "simulated_write": false}
+    },
+    {
+      "probe_id": "lc4v6d1_u11",
+      "family": "move_unknown_practitioner",
+      "language_form": "interval",
+      "utterances": ["Move Jordan Lee's appointment with Dr Wallace to Friday between 2 pm and 3 pm."],
+      "extraction": {"intended_action": "move", "action_semantics": "intended", "temporal_relation": "interval", "earliest_time": "14:00", "latest_time": "15:00", "practitioner_semantics": "exact", "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "action_negated": false},
+      "policy": {"requires_clarification": true, "clarification_choices": [], "authority": "clarify", "tools": ["request_clarification"], "downstream_outcome": "clarification_required", "resolved_practitioner_id": null, "appointment_delta_count": 0, "audit_delta_count": 0, "simulated_write": false}
+    },
+    {
+      "probe_id": "lc4v6d1_u12",
+      "family": "move_unknown_practitioner",
+      "language_form": "interval",
+      "utterances": ["Reschedule Jordan Lee with Dr Norris to tomorrow after 3 pm but before 4 pm."],
+      "extraction": {"intended_action": "move", "action_semantics": "intended", "temporal_relation": "interval", "earliest_time": "15:00", "latest_time": "16:00", "practitioner_semantics": "exact", "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "action_negated": false},
+      "policy": {"requires_clarification": true, "clarification_choices": [], "authority": "clarify", "tools": ["request_clarification"], "downstream_outcome": "clarification_required", "resolved_practitioner_id": null, "appointment_delta_count": 0, "audit_delta_count": 0, "simulated_write": false}
+    },
+    {
+      "probe_id": "lc4v6d1_k01",
+      "family": "move_known_practitioner_control",
+      "language_form": "plain",
+      "utterances": ["Move Jordan Lee's appointment with Dr Chen to tomorrow at 3 pm."],
+      "extraction": {"intended_action": "move", "action_semantics": "intended", "temporal_relation": "exact", "earliest_time": "15:00", "latest_time": "15:00", "practitioner_semantics": "exact", "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "action_negated": false},
+      "policy": {"requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "downstream_outcome": "appointment_moved", "resolved_practitioner_id": "pr-004", "appointment_delta_count": 1, "audit_delta_count": 1, "simulated_write": true}
+    },
+    {
+      "probe_id": "lc4v6d1_k02",
+      "family": "move_known_practitioner_control",
+      "language_form": "paraphrase",
+      "utterances": ["Reschedule Jordan Lee with Dr Patel to Friday at 3:15 pm."],
+      "extraction": {"intended_action": "move", "action_semantics": "intended", "temporal_relation": "exact", "earliest_time": "15:15", "latest_time": "15:15", "practitioner_semantics": "exact", "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "action_negated": false},
+      "policy": {"requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "downstream_outcome": "appointment_moved", "resolved_practitioner_id": "pr-003", "appointment_delta_count": 1, "audit_delta_count": 1, "simulated_write": true}
+    },
+    {
+      "probe_id": "lc4v6d1_k03",
+      "family": "move_known_practitioner_control",
+      "language_form": "paraphrase",
+      "utterances": ["Shift Jordan Lee's Dr Singh appointment to tomorrow at 2:30 pm."],
+      "extraction": {"intended_action": "move", "action_semantics": "intended", "temporal_relation": "exact", "earliest_time": "14:30", "latest_time": "14:30", "practitioner_semantics": "exact", "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "action_negated": false},
+      "policy": {"requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "downstream_outcome": "appointment_moved", "resolved_practitioner_id": "pr-006", "appointment_delta_count": 1, "audit_delta_count": 1, "simulated_write": true}
+    },
+    {
+      "probe_id": "lc4v6d1_k04",
+      "family": "move_known_practitioner_control",
+      "language_form": "speech_like",
+      "utterances": ["Could you move Jordan Lee's booking with Dr Smith to Friday at 4 pm?"],
+      "extraction": {"intended_action": "move", "action_semantics": "intended", "temporal_relation": "exact", "earliest_time": "16:00", "latest_time": "16:00", "practitioner_semantics": "exact", "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "action_negated": false},
+      "policy": {"requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "downstream_outcome": "appointment_moved", "resolved_practitioner_id": "pr-005", "appointment_delta_count": 1, "audit_delta_count": 1, "simulated_write": true}
+    },
+    {
+      "probe_id": "lc4v6d1_k05",
+      "family": "move_known_practitioner_control",
+      "language_form": "paraphrase",
+      "utterances": ["Please push Jordan Lee's appointment with Dr Taylor back to tomorrow at 3:45 pm."],
+      "extraction": {"intended_action": "move", "action_semantics": "intended", "temporal_relation": "exact", "earliest_time": "15:45", "latest_time": "15:45", "practitioner_semantics": "exact", "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "action_negated": false},
+      "policy": {"requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "downstream_outcome": "appointment_moved", "resolved_practitioner_id": "pr-002", "appointment_delta_count": 1, "audit_delta_count": 1, "simulated_write": true}
+    },
+    {
+      "probe_id": "lc4v6d1_k06",
+      "family": "move_known_practitioner_control",
+      "language_form": "paraphrase",
+      "utterances": ["Bring Jordan Lee's visit with Dr Shera forward to Friday at 2 pm."],
+      "extraction": {"intended_action": "move", "action_semantics": "intended", "temporal_relation": "exact", "earliest_time": "14:00", "latest_time": "14:00", "practitioner_semantics": "exact", "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "action_negated": false},
+      "policy": {"requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "downstream_outcome": "appointment_moved", "resolved_practitioner_id": "pr-001", "appointment_delta_count": 1, "audit_delta_count": 1, "simulated_write": true}
+    },
+    {
+      "probe_id": "lc4v6d1_r01",
+      "family": "resize_paraphrase_control",
+      "language_form": "paraphrase",
+      "utterances": ["Shorten Jordan Lee's appointment with Dr Singh to 15 minutes."],
+      "extraction": {"intended_action": "resize", "action_semantics": "intended", "temporal_relation": "unspecified", "earliest_time": null, "latest_time": null, "practitioner_semantics": "exact", "duration_minutes": 15, "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "action_negated": false},
+      "policy": {"requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "downstream_outcome": "appointment_resized", "resolved_practitioner_id": "pr-006", "appointment_delta_count": 1, "audit_delta_count": 1, "simulated_write": true}
+    },
+    {
+      "probe_id": "lc4v6d1_r02",
+      "family": "resize_paraphrase_control",
+      "language_form": "lexical_duration",
+      "utterances": ["Resize Jordan Lee's appointment with Dr Shera to a quarter of an hour."],
+      "extraction": {"intended_action": "resize", "action_semantics": "intended", "temporal_relation": "unspecified", "earliest_time": null, "latest_time": null, "practitioner_semantics": "exact", "duration_minutes": 15, "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "action_negated": false},
+      "policy": {"requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "downstream_outcome": "appointment_resized", "resolved_practitioner_id": "pr-001", "appointment_delta_count": 1, "audit_delta_count": 1, "simulated_write": true}
+    },
+    {
+      "probe_id": "lc4v6d1_r03",
+      "family": "resize_paraphrase_control",
+      "language_form": "multi_turn",
+      "utterances": ["Make Jordan Lee's appointment with Dr Taylor longer.", "Set it to 30 minutes."],
+      "extraction": {"intended_action": "resize", "action_semantics": "intended", "temporal_relation": "unspecified", "earliest_time": null, "latest_time": null, "practitioner_semantics": "exact", "duration_minutes": 30, "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "action_negated": false},
+      "policy": {"requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "update_appointment"], "downstream_outcome": "appointment_resized", "resolved_practitioner_id": "pr-002", "appointment_delta_count": 1, "audit_delta_count": 1, "simulated_write": true}
+    },
+    {
+      "probe_id": "lc4v6d1_s01",
+      "family": "status_paraphrase_control",
+      "language_form": "plain",
+      "utterances": ["Mark Jordan Lee's appointment with Dr Patel as arrived."],
+      "extraction": {"intended_action": "status_change", "action_semantics": "intended", "temporal_relation": "unspecified", "earliest_time": null, "latest_time": null, "practitioner_semantics": "exact", "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "change_appointment_status"], "action_negated": false},
+      "policy": {"requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "change_appointment_status"], "downstream_outcome": "appointment_status_changed", "resolved_practitioner_id": "pr-003", "appointment_delta_count": 1, "audit_delta_count": 1, "simulated_write": true}
+    },
+    {
+      "probe_id": "lc4v6d1_s02",
+      "family": "status_paraphrase_control",
+      "language_form": "paraphrase",
+      "utterances": ["Set Jordan Lee's appointment with Dr Chen to completed."],
+      "extraction": {"intended_action": "status_change", "action_semantics": "intended", "temporal_relation": "unspecified", "earliest_time": null, "latest_time": null, "practitioner_semantics": "exact", "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "change_appointment_status"], "action_negated": false},
+      "policy": {"requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients", "change_appointment_status"], "downstream_outcome": "appointment_status_changed", "resolved_practitioner_id": "pr-004", "appointment_delta_count": 1, "audit_delta_count": 1, "simulated_write": true}
+    },
+    {
+      "probe_id": "lc4v6d1_s03",
+      "family": "status_paraphrase_control",
+      "language_form": "negated",
+      "utterances": ["Don't mark Jordan Lee's appointment with Dr Smith completed."],
+      "extraction": {"intended_action": "status_change", "action_semantics": "intended", "temporal_relation": "unspecified", "earliest_time": null, "latest_time": null, "practitioner_semantics": "exact", "requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients"], "action_negated": true},
+      "policy": {"requires_clarification": false, "clarification_choices": [], "authority": "read", "tools": ["search_patients"], "downstream_outcome": null, "resolved_practitioner_id": "pr-005", "appointment_delta_count": 0, "audit_delta_count": 0, "simulated_write": false}
+    }
+  ]
+}
