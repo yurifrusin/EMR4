@@ -33,3 +33,18 @@ literal and reproduced 114/114 against the current handover. Framework,
 product, contract, thresholds, and protected state remain byte-for-byte
 unchanged from recovered head `d56db482`. One final fresh exact-head veto is
 required.
+
+## Third review
+
+The third fresh project returned `revision_required` at reviewer commit
+`5068d0d8`. All eight framework defects remained closed, but the handover test
+still required the former combined phrase `27/27 focused and 114/114 combined`
+after the baton split those facts into separate clauses. It also ran a
+cumulative historical `git diff --check` that reported trailing whitespace in
+the preserved second Gemini attestation. Sol will not rewrite worker evidence.
+
+The test now requires the stable facts `27/27 focused` and `114/114`
+independently. The final review checks whitespace on the recovered source and
+the current carrier change rather than rewriting immutable historical review
+prose. The live handover is frozen until that review finishes. No framework,
+product, contract, threshold, or protected artifact changed.

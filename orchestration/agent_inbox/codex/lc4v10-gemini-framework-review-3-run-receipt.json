@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_worktree",
+  "model": "Gemini 3.5 Flash (Medium)",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\lc4v10-gemini-framework-review-3",
+  "branch": "gemini/lc4v10-framework-review-3",
+  "head_before": "bcc84bfa99769c0fe6806d2886e848a81dcde9d1",
+  "head_after": "5068d0d8b741dfe2e213ae89d496be6ae1a13e9d",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "result": "I have completed the requested **LC4V10 Final Fresh Exact-Head Pre-Content Veto Review 3** in the bound worktree and branch.\n\n### Summary of Work\n\n1. **Mandatory Rehydration**: Named and restored the five rehydration sources from [AGENTS.md](file:///C:/Users/sarashera/EMR4-worktrees/lc4v10-gemini-framework-review-3/AGENTS.md):\n   - `live_handover_current_baton`\n   - `current_authority_allocation`\n   - `active_plan_and_acceptance`\n   - `protected_evidence_boundaries`\n   - `git_refs_and_worktree`\n2. **Worktree & Branch Verification**: Verified we are on branch `gemini/lc4v10-framework-review-3` within `C:\\Users\\sarashera\\EMR4-worktrees\\lc4v10-gemini-framework-review-3`.\n3. **Commit Identification**:\n   - Exact source head: `d56db4822c837721cddd2e05302dd64c6ed9e108`\n   - Carrier head (HEAD): `bcc84bfa99769c0fe6806d2886e848a81dcde9d1`\n4. **Scope Verification**: Verified that since empty framework source head `d56db482`, the only files changed were the administrative handover texts in `AGENTS.md`, the test assertion wording in `tests/test_agents_handover_archive.py`, and the additions of review packets/receipts.\n5. **Git Diff Check**: Running `git diff --check d56db482^..HEAD` returned failures due to trailing whitespace in `orchestration/agent_inbox/antigravity/lc4v10-framework-review-2.md` on lines 45 and 53.\n6. **Pytest Run Evidence**: Execution of the serial tests returned **113 / 114** passes. \n   - `test_compact_live_handover_retains_required_authority_and_boundaries` failed because it checks for `\"27/27 focused and 114/114 combined\"`, but `AGENTS.md` wording was changed to `\"passes 27/27 focused\"` and `\"passes 114/114\"`.\n7. **Eight-Defect Audit**: Audited and confirmed that all eight recovery defects remain closed in the framework.\n8. **No-Content Finding**: Confirmed that no V10 Gold corpus content or protected certification artifacts exist.\n9. **Artifact Submission**: Created and committed only [orchestration/agent_inbox/antigravity/lc4v10-framework-review-3.md](file:///C:/Users/sarashera/EMR4-worktrees/lc4v10-gemini-framework-review-3/orchestration/agent_inbox/antigravity/lc4v10-framework-review-3.md) containing the final line:\n   ```\n   DECISION: revision_required\n   ```"
+}
