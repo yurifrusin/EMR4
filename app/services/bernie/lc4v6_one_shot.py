@@ -116,7 +116,7 @@ def validate_frozen_source() -> tuple[tuple[Any, ...], Mapping[str, Any], BoundH
         errors.append("source commit binding drifted")
 
     scenarios = tuple(author_scenarios())
-    if manifest.get("corpus_hash") != corpus_hash(scenarios):
+    if manifest.get("corpus_hash") != corpus_hash():
         errors.append("corpus hash drifted")
     manifest_validation = validate_manifest(manifest, scenarios)
     errors.extend(manifest_validation.errors)
