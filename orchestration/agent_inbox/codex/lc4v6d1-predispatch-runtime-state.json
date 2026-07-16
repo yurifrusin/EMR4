@@ -1,0 +1,77 @@
+{
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "evidence": ["Claude Code command is installed; clean claude/current is realigned to exact handoff/current b8bafbdd for bounded LC4V6D1 dispatch."],
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable"
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "evidence": ["Real-TTY fallback remains unselected."],
+      "method": "synthetic_fixture",
+      "reachability": "unknown"
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "evidence": ["Availability-gated consultation transport remains unselected."],
+      "method": "synthetic_fixture",
+      "reachability": "unknown"
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "evidence": ["Fresh-project contract review remains planned after the implementation candidate."],
+      "method": "synthetic_fixture",
+      "reachability": "unknown"
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "evidence": ["Protected GPT Sol session is active as conductor, corpus author, acceptance owner, and integrator."],
+      "method": "synthetic_fixture",
+      "reachability": "reachable"
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "evidence": ["No native Codex subagent is assigned to LC4V6D1."],
+      "method": "synthetic_fixture",
+      "reachability": "unknown"
+    }
+  ],
+  "assigned_agent_ids": ["lc4v6d1-deepseek-flash-001"],
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "unknown",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "worker_slots": [
+    {
+      "active_instance_ids": ["lc4v6d1-deepseek-flash-001"],
+      "resource_id": "deepseek-flash-workers",
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "agent_id": "lc4v6d1-deepseek-flash-001",
+      "at_handoff_current": true,
+      "branch": "claude/current",
+      "clean": true,
+      "recorded_at": "2026-07-16T02:00:00Z",
+      "worktree": "C:/Users/sarashera/EMR4-worktrees/claude"
+    }
+  ]
+}
