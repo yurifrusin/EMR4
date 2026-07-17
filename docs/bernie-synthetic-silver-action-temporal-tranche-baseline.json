@@ -1,0 +1,1908 @@
+{
+  "schema_version": "emr4.bernie.synthetic_noise_action_temporal_report.v1",
+  "decision": "tranche_evaluation_complete",
+  "evidence_tier": "development_silver_diagnostic_remediation",
+  "input_bindings": {
+    "selection_path": "tests/fixtures/bernie_synthetic_noise/action_temporal_tranche.json",
+    "selection_file_hash": "sha256:871374a811749d43629c41673a4b9a5ec913ae0fdb24257f1b7a598cf0777532",
+    "selection_source_commit": "fafe6ad57bde62a6ee08172d88ec43fd71728f64",
+    "candidate_canonical_hash": "sha256:ae14c613ecdd87aac39201d44a8024f3b9216f871c7d5859c4249e7f4026c665",
+    "accepted_robustness_report_hash": "sha256:18501cf5c8d28c0e660a9f5c7b15f7690622e44c90b248d51301c6ece03973c5",
+    "semantic_extraction_file_hash": "sha256:0831776b6bb3ea642482d7ff2603c1dbe115450cfc458da77418cdf89dfab25a",
+    "temporal_file_hash": "sha256:684a9ffc551eb58a36327b6fbb78133315a9953b101ac8f668419eb69788fa5a"
+  },
+  "population": {
+    "candidates": 24,
+    "repeats_per_candidate": 2,
+    "observations": 48,
+    "complete_candidates": 0,
+    "failed_candidates": 24
+  },
+  "variance": {
+    "variant_candidate_count": 0,
+    "variant_candidate_ids": []
+  },
+  "dimension_counts": {
+    "action_semantics": {
+      "passed": 28,
+      "failed": 20,
+      "total": 48
+    },
+    "appointment_deltas": {
+      "passed": 14,
+      "failed": 34,
+      "total": 48
+    },
+    "audit_deltas": {
+      "passed": 12,
+      "failed": 36,
+      "total": 48
+    },
+    "authority": {
+      "passed": 28,
+      "failed": 20,
+      "total": 48
+    },
+    "clarification_choices": {
+      "passed": 28,
+      "failed": 20,
+      "total": 48
+    },
+    "downstream_outcome": {
+      "passed": 12,
+      "failed": 36,
+      "total": 48
+    },
+    "entity_semantics": {
+      "passed": 12,
+      "failed": 36,
+      "total": 48
+    },
+    "intended_action": {
+      "passed": 26,
+      "failed": 22,
+      "total": 48
+    },
+    "interpretation_tool_sequence": {
+      "passed": 34,
+      "failed": 14,
+      "total": 48
+    },
+    "normalized_values": {
+      "passed": 10,
+      "failed": 38,
+      "total": 48
+    },
+    "replay_tool_sequence": {
+      "passed": 34,
+      "failed": 14,
+      "total": 48
+    },
+    "safety": {
+      "passed": 48,
+      "failed": 0,
+      "total": 48
+    },
+    "semantic_clarification": {
+      "passed": 28,
+      "failed": 20,
+      "total": 48
+    },
+    "temporal_relation": {
+      "passed": 18,
+      "failed": 30,
+      "total": 48
+    }
+  },
+  "primary_diagnostic_candidate_counts": {
+    "action_extraction": 12,
+    "replay_integration": 2,
+    "temporal_normalization": 10
+  },
+  "cases": [
+    {
+      "candidate_id": "sol_bernie_noise_seed_081_01",
+      "lane": "action_extraction",
+      "selection_reason": "schedule explanation one-shot medium",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "one_shot",
+      "noise_level": "medium",
+      "complete": false,
+      "primary_diagnostic_category": "action_extraction",
+      "failed_dimensions": {
+        "intended_action": {
+          "expected": "explain_schedule",
+          "observed": null
+        },
+        "action_semantics": {
+          "expected": "intended",
+          "observed": "ambiguous"
+        },
+        "temporal_relation": {
+          "expected": "exact",
+          "observed": "unspecified"
+        },
+        "normalized_values": {
+          "expected": {
+            "appointment_date": "2026-07-15",
+            "duration_minutes": 15,
+            "earliest_time": "15:00",
+            "latest_time": "15:00"
+          },
+          "observed": {
+            "appointment_date": "2026-07-15"
+          }
+        },
+        "entity_semantics": {
+          "expected": {
+            "practitioner": "exact",
+            "patient": "omitted",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "exact"
+          },
+          "observed": {
+            "practitioner": "exact",
+            "patient": "omitted",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "omitted"
+          }
+        },
+        "semantic_clarification": {
+          "expected": false,
+          "observed": true
+        },
+        "authority": {
+          "expected": "read",
+          "observed": "clarify"
+        },
+        "clarification_choices": {
+          "expected": {
+            "requires": false,
+            "choices": []
+          },
+          "observed": {
+            "requires": true,
+            "choices": []
+          }
+        },
+        "downstream_outcome": {
+          "expected": "schedule_explained",
+          "observed": "clarification_required"
+        }
+      }
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_082_02",
+      "lane": "action_extraction",
+      "selection_reason": "schedule explanation clarification high",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "clarification",
+      "noise_level": "high",
+      "complete": false,
+      "primary_diagnostic_category": "action_extraction",
+      "failed_dimensions": {
+        "intended_action": {
+          "expected": "explain_schedule",
+          "observed": null
+        },
+        "action_semantics": {
+          "expected": "intended",
+          "observed": "ambiguous"
+        },
+        "temporal_relation": {
+          "expected": "exact",
+          "observed": "unspecified"
+        },
+        "normalized_values": {
+          "expected": {
+            "appointment_date": "2026-07-15",
+            "duration_minutes": 15,
+            "earliest_time": "15:00",
+            "latest_time": "15:00"
+          },
+          "observed": {
+            "appointment_date": "2026-07-15"
+          }
+        },
+        "entity_semantics": {
+          "expected": {
+            "practitioner": "exact",
+            "patient": "omitted",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "exact"
+          },
+          "observed": {
+            "practitioner": "exact",
+            "patient": "omitted",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "omitted"
+          }
+        },
+        "semantic_clarification": {
+          "expected": false,
+          "observed": true
+        },
+        "authority": {
+          "expected": "read",
+          "observed": "clarify"
+        },
+        "clarification_choices": {
+          "expected": {
+            "requires": false,
+            "choices": []
+          },
+          "observed": {
+            "requires": true,
+            "choices": []
+          }
+        },
+        "downstream_outcome": {
+          "expected": "schedule_explained",
+          "observed": "clarification_required"
+        }
+      }
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_083_01",
+      "lane": "action_extraction",
+      "selection_reason": "schedule explanation correction medium",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "correction",
+      "noise_level": "medium",
+      "complete": false,
+      "primary_diagnostic_category": "action_extraction",
+      "failed_dimensions": {
+        "intended_action": {
+          "expected": "explain_schedule",
+          "observed": null
+        },
+        "action_semantics": {
+          "expected": "intended",
+          "observed": "ambiguous"
+        },
+        "temporal_relation": {
+          "expected": "exact",
+          "observed": "unspecified"
+        },
+        "normalized_values": {
+          "expected": {
+            "appointment_date": "2026-07-15",
+            "duration_minutes": 15,
+            "earliest_time": "15:00",
+            "latest_time": "15:00"
+          },
+          "observed": {
+            "appointment_date": "2026-07-15"
+          }
+        },
+        "entity_semantics": {
+          "expected": {
+            "practitioner": "corrected",
+            "patient": "omitted",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "exact"
+          },
+          "observed": {
+            "practitioner": "exact",
+            "patient": "omitted",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "omitted"
+          }
+        },
+        "semantic_clarification": {
+          "expected": false,
+          "observed": true
+        },
+        "interpretation_tool_sequence": {
+          "expected": [
+            "search_patients",
+            "find_slots"
+          ],
+          "observed": [
+            "request_clarification"
+          ]
+        },
+        "authority": {
+          "expected": "read",
+          "observed": "clarify"
+        },
+        "clarification_choices": {
+          "expected": {
+            "requires": false,
+            "choices": []
+          },
+          "observed": {
+            "requires": true,
+            "choices": []
+          }
+        },
+        "downstream_outcome": {
+          "expected": "schedule_explained",
+          "observed": "clarification_required"
+        },
+        "replay_tool_sequence": {
+          "expected": [
+            "search_patients",
+            "find_slots"
+          ],
+          "observed": [
+            "request_clarification"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_088_02",
+      "lane": "action_extraction",
+      "selection_reason": "schedule explanation session restart high",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "session_restart",
+      "noise_level": "high",
+      "complete": false,
+      "primary_diagnostic_category": "action_extraction",
+      "failed_dimensions": {
+        "intended_action": {
+          "expected": "explain_schedule",
+          "observed": null
+        },
+        "action_semantics": {
+          "expected": "intended",
+          "observed": "ambiguous"
+        },
+        "temporal_relation": {
+          "expected": "not_after",
+          "observed": "unspecified"
+        },
+        "normalized_values": {
+          "expected": {
+            "appointment_date": "2026-07-15",
+            "duration_minutes": 15,
+            "latest_time": "17:00"
+          },
+          "observed": {
+            "appointment_date": "2026-07-15"
+          }
+        },
+        "entity_semantics": {
+          "expected": {
+            "practitioner": "exact",
+            "patient": "omitted",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "exact"
+          },
+          "observed": {
+            "practitioner": "exact",
+            "patient": "omitted",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "omitted"
+          }
+        },
+        "semantic_clarification": {
+          "expected": false,
+          "observed": true
+        },
+        "interpretation_tool_sequence": {
+          "expected": [
+            "search_patients",
+            "find_slots"
+          ],
+          "observed": [
+            "request_clarification"
+          ]
+        },
+        "authority": {
+          "expected": "read",
+          "observed": "clarify"
+        },
+        "clarification_choices": {
+          "expected": {
+            "requires": false,
+            "choices": []
+          },
+          "observed": {
+            "requires": true,
+            "choices": []
+          }
+        },
+        "downstream_outcome": {
+          "expected": "schedule_explained",
+          "observed": "clarification_required"
+        },
+        "replay_tool_sequence": {
+          "expected": [
+            "search_patients",
+            "find_slots"
+          ],
+          "observed": [
+            "request_clarification"
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_033_01",
+      "lane": "action_extraction",
+      "selection_reason": "resize shorthand one-shot medium",
+      "intended_action": "resize",
+      "dialogue_form": "one_shot",
+      "noise_level": "medium",
+      "complete": false,
+      "primary_diagnostic_category": "action_extraction",
+      "failed_dimensions": {
+        "intended_action": {
+          "expected": "resize",
+          "observed": "create"
+        },
+        "interpretation_tool_sequence": {
+          "expected": [
+            "request_clarification"
+          ],
+          "observed": [
+            "search_patients",
+            "find_slots",
+            "create_booking"
+          ]
+        },
+        "downstream_outcome": {
+          "expected": "appointment_resized",
+          "observed": null
+        },
+        "replay_tool_sequence": {
+          "expected": [
+            "request_clarification"
+          ],
+          "observed": [
+            "search_patients",
+            "find_slots",
+            "create_booking"
+          ]
+        },
+        "appointment_deltas": {
+          "expected": [
+            {
+              "appointment_id": "apt-001",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-001",
+              "date": "2026-07-15",
+              "change_type": "resized",
+              "new_duration_minutes": 15
+            }
+          ],
+          "observed": []
+        },
+        "audit_deltas": {
+          "expected": [
+            {
+              "change_type": "resize_requested",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ],
+          "observed": []
+        }
+      }
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_043_02",
+      "lane": "action_extraction",
+      "selection_reason": "resize shorthand correction high",
+      "intended_action": "resize",
+      "dialogue_form": "correction",
+      "noise_level": "high",
+      "complete": false,
+      "primary_diagnostic_category": "action_extraction",
+      "failed_dimensions": {
+        "intended_action": {
+          "expected": "resize",
+          "observed": "create"
+        },
+        "entity_semantics": {
+          "expected": {
+            "practitioner": "corrected",
+            "patient": "exact",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "exact"
+          },
+          "observed": {
+            "practitioner": "exact",
+            "patient": "exact",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "exact"
+          }
+        },
+        "interpretation_tool_sequence": {
+          "expected": [
+            "search_patients",
+            "update_appointment"
+          ],
+          "observed": [
+            "search_patients",
+            "find_slots",
+            "create_booking"
+          ]
+        },
+        "downstream_outcome": {
+          "expected": "appointment_resized",
+          "observed": null
+        },
+        "replay_tool_sequence": {
+          "expected": [
+            "search_patients",
+            "update_appointment"
+          ],
+          "observed": [
+            "search_patients",
+            "find_slots",
+            "create_booking"
+          ]
+        },
+        "appointment_deltas": {
+          "expected": [
+            {
+              "appointment_id": "apt-001",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-001",
+              "date": "2026-07-15",
+              "change_type": "resized",
+              "new_duration_minutes": 15
+            }
+          ],
+          "observed": []
+        },
+        "audit_deltas": {
+          "expected": [
+            {
+              "change_type": "resize_requested",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ],
+          "observed": []
+        }
+      }
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_065_02",
+      "lane": "action_extraction",
+      "selection_reason": "status shorthand one-shot high",
+      "intended_action": "status_change",
+      "dialogue_form": "one_shot",
+      "noise_level": "high",
+      "complete": false,
+      "primary_diagnostic_category": "action_extraction",
+      "failed_dimensions": {
+        "intended_action": {
+          "expected": "status_change",
+          "observed": null
+        },
+        "action_semantics": {
+          "expected": "intended",
+          "observed": "ambiguous"
+        },
+        "normalized_values": {
+          "expected": {
+            "appointment_date": "2026-07-15",
+            "duration_minutes": 15,
+            "earliest_time": "15:00",
+            "latest_time": "15:00"
+          },
+          "observed": {
+            "appointment_date": "2026-07-15",
+            "earliest_time": "15:00",
+            "latest_time": "15:00"
+          }
+        },
+        "entity_semantics": {
+          "expected": {
+            "practitioner": "exact",
+            "patient": "exact",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "exact"
+          },
+          "observed": {
+            "practitioner": "exact",
+            "patient": "exact",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "omitted"
+          }
+        },
+        "semantic_clarification": {
+          "expected": false,
+          "observed": true
+        },
+        "interpretation_tool_sequence": {
+          "expected": [
+            "search_patients",
+            "change_appointment_status"
+          ],
+          "observed": [
+            "request_clarification"
+          ]
+        },
+        "authority": {
+          "expected": "read",
+          "observed": "clarify"
+        },
+        "clarification_choices": {
+          "expected": {
+            "requires": false,
+            "choices": []
+          },
+          "observed": {
+            "requires": true,
+            "choices": []
+          }
+        },
+        "downstream_outcome": {
+          "expected": "appointment_status_changed",
+          "observed": "clarification_required"
+        },
+        "replay_tool_sequence": {
+          "expected": [
+            "search_patients",
+            "change_appointment_status"
+          ],
+          "observed": [
+            "request_clarification"
+          ]
+        },
+        "appointment_deltas": {
+          "expected": [
+            {
+              "appointment_id": "apt-001",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-001",
+              "date": "2026-07-15",
+              "change_type": "status_changed",
+              "new_status": "arrived"
+            }
+          ],
+          "observed": []
+        },
+        "audit_deltas": {
+          "expected": [
+            {
+              "change_type": "status_change_requested",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ],
+          "observed": []
+        }
+      }
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_075_01",
+      "lane": "action_extraction",
+      "selection_reason": "status shorthand correction medium",
+      "intended_action": "status_change",
+      "dialogue_form": "correction",
+      "noise_level": "medium",
+      "complete": false,
+      "primary_diagnostic_category": "action_extraction",
+      "failed_dimensions": {
+        "intended_action": {
+          "expected": "status_change",
+          "observed": null
+        },
+        "action_semantics": {
+          "expected": "intended",
+          "observed": "ambiguous"
+        },
+        "normalized_values": {
+          "expected": {
+            "appointment_date": "2026-07-15",
+            "duration_minutes": 15,
+            "earliest_time": "14:00",
+            "latest_time": "16:00"
+          },
+          "observed": {
+            "appointment_date": "2026-07-15",
+            "earliest_time": "14:00",
+            "latest_time": "16:00"
+          }
+        },
+        "entity_semantics": {
+          "expected": {
+            "practitioner": "corrected",
+            "patient": "exact",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "exact"
+          },
+          "observed": {
+            "practitioner": "exact",
+            "patient": "exact",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "omitted"
+          }
+        },
+        "semantic_clarification": {
+          "expected": false,
+          "observed": true
+        },
+        "authority": {
+          "expected": "read",
+          "observed": "clarify"
+        },
+        "clarification_choices": {
+          "expected": {
+            "requires": false,
+            "choices": []
+          },
+          "observed": {
+            "requires": true,
+            "choices": []
+          }
+        },
+        "downstream_outcome": {
+          "expected": "appointment_status_changed",
+          "observed": "clarification_required"
+        },
+        "appointment_deltas": {
+          "expected": [
+            {
+              "appointment_id": "apt-001",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-001",
+              "date": "2026-07-15",
+              "change_type": "status_changed",
+              "new_status": "arrived"
+            }
+          ],
+          "observed": []
+        },
+        "audit_deltas": {
+          "expected": [
+            {
+              "change_type": "status_change_requested",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ],
+          "observed": []
+        }
+      }
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_002_01",
+      "lane": "action_extraction",
+      "selection_reason": "create clarification medium",
+      "intended_action": "create",
+      "dialogue_form": "clarification",
+      "noise_level": "medium",
+      "complete": false,
+      "primary_diagnostic_category": "action_extraction",
+      "failed_dimensions": {
+        "intended_action": {
+          "expected": "create",
+          "observed": null
+        },
+        "action_semantics": {
+          "expected": "intended",
+          "observed": "ambiguous"
+        },
+        "entity_semantics": {
+          "expected": {
+            "practitioner": "ambiguous",
+            "patient": "ambiguous",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "exact"
+          },
+          "observed": {
+            "practitioner": "omitted",
+            "patient": "omitted",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "exact"
+          }
+        },
+        "semantic_clarification": {
+          "expected": false,
+          "observed": true
+        },
+        "authority": {
+          "expected": "read",
+          "observed": "clarify"
+        },
+        "clarification_choices": {
+          "expected": {
+            "requires": false,
+            "choices": []
+          },
+          "observed": {
+            "requires": true,
+            "choices": []
+          }
+        },
+        "downstream_outcome": {
+          "expected": "existing_booking_found",
+          "observed": "clarification_required"
+        },
+        "appointment_deltas": {
+          "expected": [
+            {
+              "appointment_id": "apt-001",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-001",
+              "date": "2026-07-15",
+              "change_type": "created",
+              "start_time": "15:00",
+              "duration_minutes": 15
+            }
+          ],
+          "observed": []
+        },
+        "audit_deltas": {
+          "expected": [
+            {
+              "change_type": "create_requested",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ],
+          "observed": []
+        }
+      }
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_018_02",
+      "lane": "action_extraction",
+      "selection_reason": "move clarification high",
+      "intended_action": "move",
+      "dialogue_form": "clarification",
+      "noise_level": "high",
+      "complete": false,
+      "primary_diagnostic_category": "action_extraction",
+      "failed_dimensions": {
+        "intended_action": {
+          "expected": "move",
+          "observed": null
+        },
+        "action_semantics": {
+          "expected": "intended",
+          "observed": "ambiguous"
+        },
+        "normalized_values": {
+          "expected": {
+            "appointment_date": "2026-07-15",
+            "duration_minutes": 15,
+            "earliest_time": "15:00",
+            "latest_time": "15:00"
+          },
+          "observed": {
+            "appointment_date": "2026-07-15",
+            "earliest_time": "15:00",
+            "latest_time": "15:00"
+          }
+        },
+        "entity_semantics": {
+          "expected": {
+            "practitioner": "exact",
+            "patient": "exact",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "exact"
+          },
+          "observed": {
+            "practitioner": "exact",
+            "patient": "exact",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "omitted"
+          }
+        },
+        "semantic_clarification": {
+          "expected": false,
+          "observed": true
+        },
+        "authority": {
+          "expected": "read",
+          "observed": "clarify"
+        },
+        "clarification_choices": {
+          "expected": {
+            "requires": false,
+            "choices": []
+          },
+          "observed": {
+            "requires": true,
+            "choices": []
+          }
+        },
+        "downstream_outcome": {
+          "expected": "appointment_moved",
+          "observed": "clarification_required"
+        },
+        "appointment_deltas": {
+          "expected": [
+            {
+              "appointment_id": "apt-001",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-001",
+              "date": "2026-07-15",
+              "change_type": "moved",
+              "new_start_time": "15:00",
+              "new_date": "2026-07-15"
+            }
+          ],
+          "observed": []
+        },
+        "audit_deltas": {
+          "expected": [
+            {
+              "change_type": "move_requested",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ],
+          "observed": []
+        }
+      }
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_056_01",
+      "lane": "action_extraction",
+      "selection_reason": "cancel session restart medium",
+      "intended_action": "cancel",
+      "dialogue_form": "session_restart",
+      "noise_level": "medium",
+      "complete": false,
+      "primary_diagnostic_category": "action_extraction",
+      "failed_dimensions": {
+        "intended_action": {
+          "expected": "cancel",
+          "observed": null
+        },
+        "action_semantics": {
+          "expected": "intended",
+          "observed": "ambiguous"
+        },
+        "temporal_relation": {
+          "expected": "not_after",
+          "observed": "exact"
+        },
+        "normalized_values": {
+          "expected": {
+            "appointment_date": "2026-07-15",
+            "duration_minutes": 15,
+            "latest_time": "17:00"
+          },
+          "observed": {
+            "appointment_date": "2026-07-15",
+            "earliest_time": "17:00",
+            "latest_time": "17:00"
+          }
+        },
+        "entity_semantics": {
+          "expected": {
+            "practitioner": "ambiguous",
+            "patient": "ambiguous",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "exact"
+          },
+          "observed": {
+            "practitioner": "ambiguous",
+            "patient": "ambiguous",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "omitted"
+          }
+        },
+        "semantic_clarification": {
+          "expected": false,
+          "observed": true
+        },
+        "authority": {
+          "expected": "read",
+          "observed": "clarify"
+        },
+        "clarification_choices": {
+          "expected": {
+            "requires": false,
+            "choices": []
+          },
+          "observed": {
+            "requires": true,
+            "choices": []
+          }
+        },
+        "downstream_outcome": {
+          "expected": "appointment_cancelled",
+          "observed": "clarification_required"
+        },
+        "appointment_deltas": {
+          "expected": [
+            {
+              "appointment_id": "apt-001",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-001",
+              "date": "2026-07-15",
+              "change_type": "cancelled",
+              "start_time": "15:00"
+            }
+          ],
+          "observed": []
+        },
+        "audit_deltas": {
+          "expected": [
+            {
+              "change_type": "cancel_requested",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ],
+          "observed": []
+        }
+      }
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_032_02",
+      "lane": "action_extraction",
+      "selection_reason": "move session restart high",
+      "intended_action": "move",
+      "dialogue_form": "session_restart",
+      "noise_level": "high",
+      "complete": false,
+      "primary_diagnostic_category": "action_extraction",
+      "failed_dimensions": {
+        "action_semantics": {
+          "expected": "intended",
+          "observed": "ambiguous"
+        },
+        "normalized_values": {
+          "expected": {
+            "appointment_date": "2026-07-15",
+            "duration_minutes": 15
+          },
+          "observed": {
+            "appointment_date": "2026-07-15"
+          }
+        },
+        "entity_semantics": {
+          "expected": {
+            "practitioner": "ambiguous",
+            "patient": "ambiguous",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "exact"
+          },
+          "observed": {
+            "practitioner": "ambiguous",
+            "patient": "ambiguous",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "omitted"
+          }
+        },
+        "semantic_clarification": {
+          "expected": false,
+          "observed": true
+        },
+        "authority": {
+          "expected": "read",
+          "observed": "clarify"
+        },
+        "clarification_choices": {
+          "expected": {
+            "requires": false,
+            "choices": []
+          },
+          "observed": {
+            "requires": true,
+            "choices": []
+          }
+        },
+        "downstream_outcome": {
+          "expected": "appointment_moved",
+          "observed": "clarification_required"
+        },
+        "appointment_deltas": {
+          "expected": [
+            {
+              "appointment_id": "apt-001",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-001",
+              "date": "2026-07-15",
+              "change_type": "moved",
+              "new_start_time": "15:00",
+              "new_date": "2026-07-15"
+            }
+          ],
+          "observed": []
+        },
+        "audit_deltas": {
+          "expected": [
+            {
+              "change_type": "move_requested",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ],
+          "observed": []
+        }
+      }
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_004_01",
+      "lane": "temporal_normalization",
+      "selection_reason": "not-before or-later medium",
+      "intended_action": "create",
+      "dialogue_form": "reversal",
+      "noise_level": "medium",
+      "complete": false,
+      "primary_diagnostic_category": "temporal_normalization",
+      "failed_dimensions": {
+        "temporal_relation": {
+          "expected": "not_before",
+          "observed": "exact"
+        },
+        "normalized_values": {
+          "expected": {
+            "appointment_date": "2026-07-15",
+            "duration_minutes": 15,
+            "earliest_time": "15:00"
+          },
+          "observed": {
+            "appointment_date": "2026-07-15",
+            "earliest_time": "15:00",
+            "latest_time": "15:00",
+            "duration_minutes": 15
+          }
+        }
+      }
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_007_02",
+      "lane": "temporal_normalization",
+      "selection_reason": "not-after by high",
+      "intended_action": "create",
+      "dialogue_form": "repeated",
+      "noise_level": "high",
+      "complete": false,
+      "primary_diagnostic_category": "temporal_normalization",
+      "failed_dimensions": {
+        "temporal_relation": {
+          "expected": "not_after",
+          "observed": "exact"
+        },
+        "normalized_values": {
+          "expected": {
+            "appointment_date": "2026-07-15",
+            "duration_minutes": 15,
+            "latest_time": "17:00"
+          },
+          "observed": {
+            "appointment_date": "2026-07-15",
+            "earliest_time": "17:00",
+            "latest_time": "17:00",
+            "duration_minutes": 15
+          }
+        }
+      }
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_021_01",
+      "lane": "temporal_normalization",
+      "selection_reason": "not-before ellipsis medium",
+      "intended_action": "move",
+      "dialogue_form": "ellipsis",
+      "noise_level": "medium",
+      "complete": false,
+      "primary_diagnostic_category": "temporal_normalization",
+      "failed_dimensions": {
+        "temporal_relation": {
+          "expected": "not_before",
+          "observed": "exact"
+        },
+        "normalized_values": {
+          "expected": {
+            "appointment_date": "2026-07-15",
+            "duration_minutes": 15,
+            "earliest_time": "15:00"
+          },
+          "observed": {
+            "appointment_date": "2026-07-15",
+            "earliest_time": "15:00",
+            "latest_time": "15:00"
+          }
+        },
+        "entity_semantics": {
+          "expected": {
+            "practitioner": "exact",
+            "patient": "exact",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "exact"
+          },
+          "observed": {
+            "practitioner": "exact",
+            "patient": "exact",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "omitted"
+          }
+        },
+        "interpretation_tool_sequence": {
+          "expected": [
+            "request_clarification"
+          ],
+          "observed": [
+            "search_patients",
+            "update_appointment"
+          ]
+        },
+        "downstream_outcome": {
+          "expected": "appointment_moved",
+          "observed": null
+        },
+        "replay_tool_sequence": {
+          "expected": [
+            "request_clarification"
+          ],
+          "observed": [
+            "search_patients",
+            "update_appointment"
+          ]
+        },
+        "appointment_deltas": {
+          "expected": [
+            {
+              "appointment_id": "apt-001",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-001",
+              "date": "2026-07-15",
+              "change_type": "moved",
+              "new_start_time": "15:00",
+              "new_date": "2026-07-15"
+            }
+          ],
+          "observed": []
+        },
+        "audit_deltas": {
+          "expected": [
+            {
+              "change_type": "move_requested",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ],
+          "observed": []
+        }
+      }
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_024_02",
+      "lane": "temporal_normalization",
+      "selection_reason": "not-after session restart high",
+      "intended_action": "move",
+      "dialogue_form": "session_restart",
+      "noise_level": "high",
+      "complete": false,
+      "primary_diagnostic_category": "temporal_normalization",
+      "failed_dimensions": {
+        "temporal_relation": {
+          "expected": "not_after",
+          "observed": "exact"
+        },
+        "normalized_values": {
+          "expected": {
+            "appointment_date": "2026-07-15",
+            "duration_minutes": 15,
+            "latest_time": "17:00"
+          },
+          "observed": {
+            "appointment_date": "2026-07-15",
+            "earliest_time": "17:00",
+            "latest_time": "17:00"
+          }
+        },
+        "entity_semantics": {
+          "expected": {
+            "practitioner": "exact",
+            "patient": "exact",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "exact"
+          },
+          "observed": {
+            "practitioner": "exact",
+            "patient": "exact",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "omitted"
+          }
+        },
+        "appointment_deltas": {
+          "expected": [
+            {
+              "appointment_id": "apt-001",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-001",
+              "date": "2026-07-15",
+              "change_type": "moved",
+              "new_start_time": "15:00",
+              "new_date": "2026-07-15"
+            }
+          ],
+          "observed": [
+            {
+              "appointment_id": "apt-001",
+              "change_type": "moved",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-001",
+              "date": "2026-07-15",
+              "start_time": "17:00",
+              "duration_minutes": 15
+            }
+          ]
+        },
+        "audit_deltas": {
+          "expected": [
+            {
+              "change_type": "move_requested",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ],
+          "observed": [
+            {
+              "change_type": "moved",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_029_01",
+      "lane": "temporal_normalization",
+      "selection_reason": "corrected approximate medium",
+      "intended_action": "move",
+      "dialogue_form": "ellipsis",
+      "noise_level": "medium",
+      "complete": false,
+      "primary_diagnostic_category": "temporal_normalization",
+      "failed_dimensions": {
+        "temporal_relation": {
+          "expected": "approximate",
+          "observed": "exact"
+        },
+        "normalized_values": {
+          "expected": {
+            "appointment_date": "2026-07-15",
+            "duration_minutes": 15,
+            "earliest_time": "15:00",
+            "latest_time": "15:00"
+          },
+          "observed": {
+            "appointment_date": "2026-07-15",
+            "earliest_time": "16:00",
+            "latest_time": "16:00"
+          }
+        },
+        "entity_semantics": {
+          "expected": {
+            "practitioner": "exact",
+            "patient": "exact",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "exact"
+          },
+          "observed": {
+            "practitioner": "exact",
+            "patient": "exact",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "omitted"
+          }
+        },
+        "downstream_outcome": {
+          "expected": "appointment_moved",
+          "observed": null
+        },
+        "appointment_deltas": {
+          "expected": [
+            {
+              "appointment_id": "apt-001",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-001",
+              "date": "2026-07-15",
+              "change_type": "moved",
+              "new_start_time": "15:00",
+              "new_date": "2026-07-15"
+            }
+          ],
+          "observed": []
+        },
+        "audit_deltas": {
+          "expected": [
+            {
+              "change_type": "move_requested",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ],
+          "observed": []
+        }
+      }
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_029_02",
+      "lane": "temporal_normalization",
+      "selection_reason": "corrected approximate high",
+      "intended_action": "move",
+      "dialogue_form": "ellipsis",
+      "noise_level": "high",
+      "complete": false,
+      "primary_diagnostic_category": "temporal_normalization",
+      "failed_dimensions": {
+        "temporal_relation": {
+          "expected": "approximate",
+          "observed": "exact"
+        },
+        "normalized_values": {
+          "expected": {
+            "appointment_date": "2026-07-15",
+            "duration_minutes": 15,
+            "earliest_time": "15:00",
+            "latest_time": "15:00"
+          },
+          "observed": {
+            "appointment_date": "2026-07-15",
+            "earliest_time": "16:00",
+            "latest_time": "16:00"
+          }
+        },
+        "entity_semantics": {
+          "expected": {
+            "practitioner": "exact",
+            "patient": "exact",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "exact"
+          },
+          "observed": {
+            "practitioner": "exact",
+            "patient": "exact",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "omitted"
+          }
+        },
+        "downstream_outcome": {
+          "expected": "appointment_moved",
+          "observed": null
+        },
+        "appointment_deltas": {
+          "expected": [
+            {
+              "appointment_id": "apt-001",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-001",
+              "date": "2026-07-15",
+              "change_type": "moved",
+              "new_start_time": "15:00",
+              "new_date": "2026-07-15"
+            }
+          ],
+          "observed": []
+        },
+        "audit_deltas": {
+          "expected": [
+            {
+              "change_type": "move_requested",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ],
+          "observed": []
+        }
+      }
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_039_01",
+      "lane": "temporal_normalization",
+      "selection_reason": "not-after resize medium",
+      "intended_action": "resize",
+      "dialogue_form": "repeated",
+      "noise_level": "medium",
+      "complete": false,
+      "primary_diagnostic_category": "temporal_normalization",
+      "failed_dimensions": {
+        "temporal_relation": {
+          "expected": "not_after",
+          "observed": "exact"
+        },
+        "normalized_values": {
+          "expected": {
+            "appointment_date": "2026-07-15",
+            "duration_minutes": 15,
+            "latest_time": "17:00"
+          },
+          "observed": {
+            "appointment_date": "2026-07-15",
+            "earliest_time": "17:00",
+            "latest_time": "17:00",
+            "duration_minutes": 15
+          }
+        },
+        "interpretation_tool_sequence": {
+          "expected": [
+            "request_clarification"
+          ],
+          "observed": [
+            "search_patients",
+            "update_appointment"
+          ]
+        },
+        "downstream_outcome": {
+          "expected": "appointment_resized",
+          "observed": null
+        },
+        "replay_tool_sequence": {
+          "expected": [
+            "request_clarification"
+          ],
+          "observed": [
+            "search_patients",
+            "update_appointment"
+          ]
+        },
+        "appointment_deltas": {
+          "expected": [
+            {
+              "appointment_id": "apt-001",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-001",
+              "date": "2026-07-15",
+              "change_type": "resized",
+              "new_duration_minutes": 15
+            }
+          ],
+          "observed": []
+        },
+        "audit_deltas": {
+          "expected": [
+            {
+              "change_type": "resize_requested",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ],
+          "observed": []
+        }
+      }
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_052_02",
+      "lane": "temporal_normalization",
+      "selection_reason": "not-before cancel reversal high",
+      "intended_action": "cancel",
+      "dialogue_form": "reversal",
+      "noise_level": "high",
+      "complete": false,
+      "primary_diagnostic_category": "temporal_normalization",
+      "failed_dimensions": {
+        "temporal_relation": {
+          "expected": "not_before",
+          "observed": "exact"
+        },
+        "normalized_values": {
+          "expected": {
+            "appointment_date": "2026-07-15",
+            "duration_minutes": 15,
+            "earliest_time": "15:00"
+          },
+          "observed": {
+            "appointment_date": "2026-07-15",
+            "earliest_time": "15:00",
+            "latest_time": "15:00"
+          }
+        },
+        "entity_semantics": {
+          "expected": {
+            "practitioner": "exact",
+            "patient": "exact",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "exact"
+          },
+          "observed": {
+            "practitioner": "exact",
+            "patient": "exact",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "omitted"
+          }
+        },
+        "downstream_outcome": {
+          "expected": "appointment_cancelled",
+          "observed": null
+        },
+        "appointment_deltas": {
+          "expected": [
+            {
+              "appointment_id": "apt-001",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-001",
+              "date": "2026-07-15",
+              "change_type": "cancelled",
+              "start_time": "15:00"
+            }
+          ],
+          "observed": []
+        },
+        "audit_deltas": {
+          "expected": [
+            {
+              "change_type": "cancel_requested",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ],
+          "observed": []
+        }
+      }
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_070_01",
+      "lane": "temporal_normalization",
+      "selection_reason": "not-before status anaphora medium",
+      "intended_action": "status_change",
+      "dialogue_form": "anaphora",
+      "noise_level": "medium",
+      "complete": false,
+      "primary_diagnostic_category": "temporal_normalization",
+      "failed_dimensions": {
+        "temporal_relation": {
+          "expected": "not_before",
+          "observed": "exact"
+        },
+        "normalized_values": {
+          "expected": {
+            "appointment_date": "2026-07-15",
+            "duration_minutes": 15,
+            "earliest_time": "15:00"
+          },
+          "observed": {
+            "appointment_date": "2026-07-15",
+            "earliest_time": "15:00",
+            "latest_time": "15:00"
+          }
+        },
+        "entity_semantics": {
+          "expected": {
+            "practitioner": "exact",
+            "patient": "exact",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "exact"
+          },
+          "observed": {
+            "practitioner": "exact",
+            "patient": "exact",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "omitted"
+          }
+        },
+        "appointment_deltas": {
+          "expected": [
+            {
+              "appointment_id": "apt-001",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-001",
+              "date": "2026-07-15",
+              "change_type": "status_changed",
+              "new_status": "arrived"
+            }
+          ],
+          "observed": [
+            {
+              "appointment_id": "apt-001",
+              "change_type": "status_changed",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-001",
+              "date": "2026-07-15",
+              "start_time": "15:00",
+              "duration_minutes": 15
+            }
+          ]
+        },
+        "audit_deltas": {
+          "expected": [
+            {
+              "change_type": "status_change_requested",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ],
+          "observed": [
+            {
+              "change_type": "status_changed",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_072_02",
+      "lane": "temporal_normalization",
+      "selection_reason": "not-after status session restart high",
+      "intended_action": "status_change",
+      "dialogue_form": "session_restart",
+      "noise_level": "high",
+      "complete": false,
+      "primary_diagnostic_category": "temporal_normalization",
+      "failed_dimensions": {
+        "temporal_relation": {
+          "expected": "not_after",
+          "observed": "exact"
+        },
+        "normalized_values": {
+          "expected": {
+            "appointment_date": "2026-07-15",
+            "duration_minutes": 15,
+            "latest_time": "17:00"
+          },
+          "observed": {
+            "appointment_date": "2026-07-15",
+            "earliest_time": "17:00",
+            "latest_time": "17:00"
+          }
+        },
+        "entity_semantics": {
+          "expected": {
+            "practitioner": "exact",
+            "patient": "exact",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "exact"
+          },
+          "observed": {
+            "practitioner": "exact",
+            "patient": "exact",
+            "location": "omitted",
+            "appointment_type": "omitted",
+            "duration": "omitted"
+          }
+        },
+        "downstream_outcome": {
+          "expected": "appointment_status_changed",
+          "observed": null
+        },
+        "appointment_deltas": {
+          "expected": [
+            {
+              "appointment_id": "apt-001",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-001",
+              "date": "2026-07-15",
+              "change_type": "status_changed",
+              "new_status": "arrived"
+            }
+          ],
+          "observed": []
+        },
+        "audit_deltas": {
+          "expected": [
+            {
+              "change_type": "status_change_requested",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ],
+          "observed": []
+        }
+      }
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_012_01",
+      "lane": "replay_control",
+      "selection_reason": "create reversal audit control",
+      "intended_action": "create",
+      "dialogue_form": "reversal",
+      "noise_level": "medium",
+      "complete": false,
+      "primary_diagnostic_category": "replay_integration",
+      "failed_dimensions": {
+        "audit_deltas": {
+          "expected": [
+            {
+              "change_type": "create_requested",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ],
+          "observed": [
+            {
+              "change_type": "created",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_047_01",
+      "lane": "replay_control",
+      "selection_reason": "resize repetition delta control",
+      "intended_action": "resize",
+      "dialogue_form": "repeated",
+      "noise_level": "medium",
+      "complete": false,
+      "primary_diagnostic_category": "replay_integration",
+      "failed_dimensions": {
+        "appointment_deltas": {
+          "expected": [
+            {
+              "appointment_id": "apt-001",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-001",
+              "date": "2026-07-15",
+              "change_type": "resized",
+              "new_duration_minutes": 15
+            }
+          ],
+          "observed": [
+            {
+              "appointment_id": "apt-001",
+              "change_type": "resized",
+              "patient_id": "p-001",
+              "practitioner_id": "pr-001",
+              "date": "2026-07-15",
+              "start_time": "",
+              "duration_minutes": 15
+            }
+          ]
+        },
+        "audit_deltas": {
+          "expected": [
+            {
+              "change_type": "resize_requested",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ],
+          "observed": [
+            {
+              "change_type": "resized",
+              "appointment_id": "apt-001",
+              "count": 1
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "boundaries": {
+    "protected_holdout_access": false,
+    "historical_diary_access": false,
+    "external_corpus_access": false,
+    "provider_access": false,
+    "product_write": false,
+    "contains_source_utterances": false,
+    "scorer_oracle_used_by_interpreter": false
+  },
+  "report_hash": "sha256:1bf572c3906fe108cd81332953ae3333d033b6afc2f34827b2cdd0f1154e3822"
+}

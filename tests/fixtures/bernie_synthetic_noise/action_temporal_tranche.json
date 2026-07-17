@@ -1,0 +1,47 @@
+{
+  "schema_version": "emr4.bernie.synthetic_noise_action_temporal_tranche.v1",
+  "decision": "frozen_development_selection",
+  "authority": "yuri_2026_07_17_action_temporal_tranche",
+  "selection_source_commit": "fafe6ad57bde62a6ee08172d88ec43fd71728f64",
+  "baseline_report_hash": "sha256:18501cf5c8d28c0e660a9f5c7b15f7690622e44c90b248d51301c6ece03973c5",
+  "candidate_canonical_hash": "sha256:ae14c613ecdd87aac39201d44a8024f3b9216f871c7d5859c4249e7f4026c665",
+  "selection_counts": {
+    "total": 24,
+    "action_extraction": 12,
+    "temporal_normalization": 10,
+    "replay_controls": 2
+  },
+  "selected_candidates": [
+    {"candidate_id": "sol_bernie_noise_seed_081_01", "lane": "action_extraction", "reason": "schedule explanation one-shot medium"},
+    {"candidate_id": "sol_bernie_noise_seed_082_02", "lane": "action_extraction", "reason": "schedule explanation clarification high"},
+    {"candidate_id": "sol_bernie_noise_seed_083_01", "lane": "action_extraction", "reason": "schedule explanation correction medium"},
+    {"candidate_id": "sol_bernie_noise_seed_088_02", "lane": "action_extraction", "reason": "schedule explanation session restart high"},
+    {"candidate_id": "sol_bernie_noise_seed_033_01", "lane": "action_extraction", "reason": "resize shorthand one-shot medium"},
+    {"candidate_id": "sol_bernie_noise_seed_043_02", "lane": "action_extraction", "reason": "resize shorthand correction high"},
+    {"candidate_id": "sol_bernie_noise_seed_065_02", "lane": "action_extraction", "reason": "status shorthand one-shot high"},
+    {"candidate_id": "sol_bernie_noise_seed_075_01", "lane": "action_extraction", "reason": "status shorthand correction medium"},
+    {"candidate_id": "sol_bernie_noise_seed_002_01", "lane": "action_extraction", "reason": "create clarification medium"},
+    {"candidate_id": "sol_bernie_noise_seed_018_02", "lane": "action_extraction", "reason": "move clarification high"},
+    {"candidate_id": "sol_bernie_noise_seed_056_01", "lane": "action_extraction", "reason": "cancel session restart medium"},
+    {"candidate_id": "sol_bernie_noise_seed_032_02", "lane": "action_extraction", "reason": "move session restart high"},
+    {"candidate_id": "sol_bernie_noise_seed_004_01", "lane": "temporal_normalization", "reason": "not-before or-later medium"},
+    {"candidate_id": "sol_bernie_noise_seed_007_02", "lane": "temporal_normalization", "reason": "not-after by high"},
+    {"candidate_id": "sol_bernie_noise_seed_021_01", "lane": "temporal_normalization", "reason": "not-before ellipsis medium"},
+    {"candidate_id": "sol_bernie_noise_seed_024_02", "lane": "temporal_normalization", "reason": "not-after session restart high"},
+    {"candidate_id": "sol_bernie_noise_seed_029_01", "lane": "temporal_normalization", "reason": "corrected approximate medium"},
+    {"candidate_id": "sol_bernie_noise_seed_029_02", "lane": "temporal_normalization", "reason": "corrected approximate high"},
+    {"candidate_id": "sol_bernie_noise_seed_039_01", "lane": "temporal_normalization", "reason": "not-after resize medium"},
+    {"candidate_id": "sol_bernie_noise_seed_052_02", "lane": "temporal_normalization", "reason": "not-before cancel reversal high"},
+    {"candidate_id": "sol_bernie_noise_seed_070_01", "lane": "temporal_normalization", "reason": "not-before status anaphora medium"},
+    {"candidate_id": "sol_bernie_noise_seed_072_02", "lane": "temporal_normalization", "reason": "not-after status session restart high"},
+    {"candidate_id": "sol_bernie_noise_seed_012_01", "lane": "replay_control", "reason": "create reversal audit control"},
+    {"candidate_id": "sol_bernie_noise_seed_047_01", "lane": "replay_control", "reason": "resize repetition delta control"}
+  ],
+  "boundaries": {
+    "protected_holdout_access": false,
+    "historical_diary_access": false,
+    "external_corpus_access": false,
+    "provider_access": false,
+    "runtime_or_product_write": false
+  }
+}
