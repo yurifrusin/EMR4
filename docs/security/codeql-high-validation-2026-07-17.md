@@ -90,4 +90,3 @@ specific high findings.
 The separate delivery-control recommendation remains unchanged: validate
 signals before enforcement, then decide whether to protect `master`, enable
 secret push protection, require stable checks, and adopt response SLAs.
-
