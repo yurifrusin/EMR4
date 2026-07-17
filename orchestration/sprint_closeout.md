@@ -15282,6 +15282,9 @@ create-approximate safety, move-interval normalization, and ambiguous-resize
 clarification. A later holdout must be genuinely fresh and separately approved.
 ## T3R1 Closeout - Synthetic Silver v2 Shadow Refresh
 
+- Protected PR #27 passed Python/JavaScript CodeQL, Python security, and the
+  Node/Office security baseline, then squash-merged to `master` as
+  `0f21c8b9`. The open development-only `adm-zip` alert did not block the gate.
 - Yuri authorized the provider-free T3R1 direction after accepting the
   completed synthetic Silver v2 course.
 - Sol projected all 192 admitted v2 dialogues into the default-disabled T3
