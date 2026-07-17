@@ -2,7 +2,7 @@
 
 Date: 2026-07-17
 
-Status: `authorized_pre_evaluation`
+Status: `accepted_baseline_complete`
 
 Authority: Yuri's development-only baseline authorization
 
@@ -87,3 +87,12 @@ During initial file discovery, a broad filename command emitted names of some
 protected-path files despite the intended content globs. No protected file was
 opened, read, hashed, imported, or used, and the names provide no case labels.
 This metadata-only incident is contained here and grants no reuse authority.
+
+## Accepted evidence
+
+The exact report at
+`docs/bernie-synthetic-silver-robustness-baseline-report.json` has report hash
+`sha256:18501cf5c8d28c0e660a9f5c7b15f7690622e44c90b248d51301c6ece03973c5`.
+A fresh Gemini 3.5 Flash project independently reproduced the input bindings,
+adapter, evaluator path, counts, safety, variance, and evidence/product
+decision distinction and returned `DECISION: pass`.
