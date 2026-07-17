@@ -44,7 +44,7 @@
       "recovery": {
         "owner_resource_id": "openai-primary-orchestrator",
         "artifact_path": "orchestration/agent_inbox/codex/security-hardening-sol-recovery.md",
-        "artifact_sha256": "48f5b5c1bd280f06bf6dcd95841ae96ec45edd05f6d18f5598630adbec4000bd"
+        "artifact_sha256": "b42a225fb0d23ed194bba9ad6ac19bdce41fd476bfaf5194712a3d6ee27ed4bb"
       }
     },
     "red": {

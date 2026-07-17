@@ -43,3 +43,15 @@ fresh independent exact-final-candidate pass whenever a prior lane is recovered.
 The recovered candidate passes the executable plan gate, 44 focused Python
 tests, Node syntax, and diff whitespace checks. It still requires a fresh
 Gemini exact-candidate red veto and Sol purple synthesis before integration.
+
+## CodeQL recovery continuation
+
+The representative PR later caused GitHub Advanced Security to block the
+reviewed candidate with two changed-line high alerts. Sol preserved that
+result, separated mock and authenticated loading, and advanced the exact code
+candidate to `a248f659545975ada9662e08f89962c87952e77f`. The bounded recovery is
+documented in `security-hardening-codeql-recovery.md`; a new fresh Gemini
+exact-head veto and replacement purple synthesis both passed. Thus the
+original blue candidate `604b3452787d45ad99d9f08e70101bfd87516671` is bound
+through Sol recovery to the final candidate without treating its self-pass as
+transferrable acceptance.
