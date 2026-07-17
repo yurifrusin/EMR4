@@ -60,3 +60,14 @@ PostgreSQL schema must run serially.
 For historical transport experiments, rejected Conductor plans, old model
 allocations, and worker-pool incidents, consult the immutable snapshot rather
 than copying those superseded instructions into a live sprint plan.
+
+## 2026-07-17 Secure SDLC review protocol
+
+Material sprints now carry a Sol-owned security delta. Named sensitive
+triggers require asymmetric blue and fresh-context red evidence; cross-layer,
+four-sprint cadence, provider, and deployment triggers require Sol purple
+synthesis. The executable gate binds repository-contained artifacts to hashes,
+candidate heads, decisions, recovery authority, and canonical unresolved-
+finding severity. Workers still cannot accept, integrate, or push protected
+refs. See `docs/ariadne-secure-sdlc-red-blue-protocol.md` and the 2026-07-17
+security closeout.
