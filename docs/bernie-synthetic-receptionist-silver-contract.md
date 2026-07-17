@@ -203,3 +203,13 @@ Sol's bounded decision is recorded in
 It does not claim real-world representativeness, clinical validation,
 production readiness, Gold status, protected-holdout coverage, or new
 certification coverage.
+
+## Superseded admission state
+
+The 192/192 admission above remains immutable historical v1 evidence. The
+subsequent all-192 coherence audit found that 102 rows inherit internal source-
+oracle conflicts or whole-action reversal conflicts that cannot be repaired
+without changing their frozen anchors. Current development admission is
+therefore the separately bound 90-row coherent selection in
+`tests/fixtures/bernie_synthetic_noise/admission_coherent.json`. The original
+candidate and admission files remain preserved and must not be rewritten.

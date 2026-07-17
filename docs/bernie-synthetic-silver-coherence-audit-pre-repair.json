@@ -1,0 +1,2783 @@
+{
+  "schema_version": "emr4.bernie.synthetic_noise_coherence_audit.v1",
+  "stage": "pre_repair",
+  "decision": "audit_complete",
+  "source_head": "7c51e574930962ae83e721e3766fcbbee26d6013",
+  "population": {
+    "candidates": 192,
+    "accepted": 85,
+    "quarantined_or_rejected": 107
+  },
+  "input_bindings": {
+    "candidate_canonical_hash": "sha256:ae14c613ecdd87aac39201d44a8024f3b9216f871c7d5859c4249e7f4026c665",
+    "candidate_file_payload_hash": "sha256:193b705e0ce06fa32b72a063dec659e52a584fc489137bd7cbad8e511940e37f",
+    "seed_manifest_hash": "sha256:fd1c619cf826d72b57ffdfc62cafbafa209f8aed87a8f8e6bad6c22c2f93c7cb"
+  },
+  "decision_counts": {
+    "accept_coherent": 85,
+    "quarantine_entity_transition_conflict": 16,
+    "quarantine_missing_surfaced_evidence": 3,
+    "quarantine_oracle_policy_conflict": 76,
+    "quarantine_replay_contract_conflict": 8,
+    "reject_semantic_corruption": 4
+  },
+  "reason_counts": {
+    "clarification_tool_with_success_or_mutation_delta": 78,
+    "clarification_tool_without_clarification_contract": 78,
+    "existing_booking_outcome_with_creation_delta": 4,
+    "intended_action_not_explicitly_surfaced": 8,
+    "mutation_tools_without_outcome_and_delta": 6,
+    "schedule_request_anaphora_refers_to_appointment": 4,
+    "whole_action_withdrawn_but_oracle_expects_action": 24
+  },
+  "breakdown": {
+    "by_action": {
+      "cancel": {
+        "accept_coherent": 14,
+        "quarantine_entity_transition_conflict": 4,
+        "quarantine_oracle_policy_conflict": 14
+      },
+      "create": {
+        "accept_coherent": 8,
+        "quarantine_entity_transition_conflict": 4,
+        "quarantine_oracle_policy_conflict": 12,
+        "quarantine_replay_contract_conflict": 8
+      },
+      "explain_schedule": {
+        "accept_coherent": 14,
+        "quarantine_entity_transition_conflict": 2,
+        "quarantine_oracle_policy_conflict": 12,
+        "reject_semantic_corruption": 4
+      },
+      "move": {
+        "accept_coherent": 18,
+        "quarantine_entity_transition_conflict": 2,
+        "quarantine_oracle_policy_conflict": 12
+      },
+      "resize": {
+        "accept_coherent": 13,
+        "quarantine_entity_transition_conflict": 2,
+        "quarantine_missing_surfaced_evidence": 3,
+        "quarantine_oracle_policy_conflict": 14
+      },
+      "status_change": {
+        "accept_coherent": 18,
+        "quarantine_entity_transition_conflict": 2,
+        "quarantine_oracle_policy_conflict": 12
+      }
+    },
+    "by_dialogue_form": {
+      "anaphora": {
+        "accept_coherent": 11,
+        "quarantine_missing_surfaced_evidence": 1,
+        "quarantine_oracle_policy_conflict": 6,
+        "quarantine_replay_contract_conflict": 2,
+        "reject_semantic_corruption": 4
+      },
+      "clarification": {
+        "quarantine_oracle_policy_conflict": 24
+      },
+      "correction": {
+        "accept_coherent": 16,
+        "quarantine_oracle_policy_conflict": 8
+      },
+      "ellipsis": {
+        "accept_coherent": 13,
+        "quarantine_missing_surfaced_evidence": 1,
+        "quarantine_oracle_policy_conflict": 8,
+        "quarantine_replay_contract_conflict": 2
+      },
+      "one_shot": {
+        "accept_coherent": 15,
+        "quarantine_missing_surfaced_evidence": 1,
+        "quarantine_oracle_policy_conflict": 6,
+        "quarantine_replay_contract_conflict": 2
+      },
+      "repeated": {
+        "accept_coherent": 14,
+        "quarantine_oracle_policy_conflict": 8,
+        "quarantine_replay_contract_conflict": 2
+      },
+      "reversal": {
+        "quarantine_entity_transition_conflict": 16,
+        "quarantine_oracle_policy_conflict": 8
+      },
+      "session_restart": {
+        "accept_coherent": 16,
+        "quarantine_oracle_policy_conflict": 8
+      }
+    },
+    "by_noise_level": {
+      "high": {
+        "accept_coherent": 44,
+        "quarantine_entity_transition_conflict": 8,
+        "quarantine_oracle_policy_conflict": 38,
+        "quarantine_replay_contract_conflict": 4,
+        "reject_semantic_corruption": 2
+      },
+      "medium": {
+        "accept_coherent": 41,
+        "quarantine_entity_transition_conflict": 8,
+        "quarantine_missing_surfaced_evidence": 3,
+        "quarantine_oracle_policy_conflict": 38,
+        "quarantine_replay_contract_conflict": 4,
+        "reject_semantic_corruption": 2
+      }
+    }
+  },
+  "accepted_selection_hash": "sha256:14b2db11fdad71251300e67d1b40fac232e8355364200b20a895373d77b36d4e",
+  "quarantine_selection_hash": "sha256:d1f9d1441896f9c8a81a868cdfef14332318197b899df9228799e659754e58ed",
+  "cases": [
+    {
+      "candidate_id": "sol_bernie_noise_seed_001_01",
+      "source_seed_id": "bernie_noise_seed_001",
+      "intended_action": "create",
+      "dialogue_form": "one_shot",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_001_02",
+      "source_seed_id": "bernie_noise_seed_001",
+      "intended_action": "create",
+      "dialogue_form": "one_shot",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_002_01",
+      "source_seed_id": "bernie_noise_seed_002",
+      "intended_action": "create",
+      "dialogue_form": "clarification",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        },
+        {
+          "decision": "quarantine_replay_contract_conflict",
+          "reason": "existing_booking_outcome_with_creation_delta"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_002_02",
+      "source_seed_id": "bernie_noise_seed_002",
+      "intended_action": "create",
+      "dialogue_form": "clarification",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        },
+        {
+          "decision": "quarantine_replay_contract_conflict",
+          "reason": "existing_booking_outcome_with_creation_delta"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_003_01",
+      "source_seed_id": "bernie_noise_seed_003",
+      "intended_action": "create",
+      "dialogue_form": "correction",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_003_02",
+      "source_seed_id": "bernie_noise_seed_003",
+      "intended_action": "create",
+      "dialogue_form": "correction",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_004_01",
+      "source_seed_id": "bernie_noise_seed_004",
+      "intended_action": "create",
+      "dialogue_form": "reversal",
+      "noise_level": "medium",
+      "decision": "quarantine_entity_transition_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_004_02",
+      "source_seed_id": "bernie_noise_seed_004",
+      "intended_action": "create",
+      "dialogue_form": "reversal",
+      "noise_level": "high",
+      "decision": "quarantine_entity_transition_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_005_01",
+      "source_seed_id": "bernie_noise_seed_005",
+      "intended_action": "create",
+      "dialogue_form": "ellipsis",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_005_02",
+      "source_seed_id": "bernie_noise_seed_005",
+      "intended_action": "create",
+      "dialogue_form": "ellipsis",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_006_01",
+      "source_seed_id": "bernie_noise_seed_006",
+      "intended_action": "create",
+      "dialogue_form": "anaphora",
+      "noise_level": "medium",
+      "decision": "quarantine_replay_contract_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_replay_contract_conflict",
+          "reason": "mutation_tools_without_outcome_and_delta"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_006_02",
+      "source_seed_id": "bernie_noise_seed_006",
+      "intended_action": "create",
+      "dialogue_form": "anaphora",
+      "noise_level": "high",
+      "decision": "quarantine_replay_contract_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_replay_contract_conflict",
+          "reason": "mutation_tools_without_outcome_and_delta"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_007_01",
+      "source_seed_id": "bernie_noise_seed_007",
+      "intended_action": "create",
+      "dialogue_form": "repeated",
+      "noise_level": "medium",
+      "decision": "quarantine_replay_contract_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_replay_contract_conflict",
+          "reason": "mutation_tools_without_outcome_and_delta"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_007_02",
+      "source_seed_id": "bernie_noise_seed_007",
+      "intended_action": "create",
+      "dialogue_form": "repeated",
+      "noise_level": "high",
+      "decision": "quarantine_replay_contract_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_replay_contract_conflict",
+          "reason": "mutation_tools_without_outcome_and_delta"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_008_01",
+      "source_seed_id": "bernie_noise_seed_008",
+      "intended_action": "create",
+      "dialogue_form": "session_restart",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_008_02",
+      "source_seed_id": "bernie_noise_seed_008",
+      "intended_action": "create",
+      "dialogue_form": "session_restart",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_009_01",
+      "source_seed_id": "bernie_noise_seed_009",
+      "intended_action": "create",
+      "dialogue_form": "one_shot",
+      "noise_level": "medium",
+      "decision": "quarantine_replay_contract_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_replay_contract_conflict",
+          "reason": "mutation_tools_without_outcome_and_delta"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_009_02",
+      "source_seed_id": "bernie_noise_seed_009",
+      "intended_action": "create",
+      "dialogue_form": "one_shot",
+      "noise_level": "high",
+      "decision": "quarantine_replay_contract_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_replay_contract_conflict",
+          "reason": "mutation_tools_without_outcome_and_delta"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_010_01",
+      "source_seed_id": "bernie_noise_seed_010",
+      "intended_action": "create",
+      "dialogue_form": "clarification",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_010_02",
+      "source_seed_id": "bernie_noise_seed_010",
+      "intended_action": "create",
+      "dialogue_form": "clarification",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_011_01",
+      "source_seed_id": "bernie_noise_seed_011",
+      "intended_action": "create",
+      "dialogue_form": "correction",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_011_02",
+      "source_seed_id": "bernie_noise_seed_011",
+      "intended_action": "create",
+      "dialogue_form": "correction",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_012_01",
+      "source_seed_id": "bernie_noise_seed_012",
+      "intended_action": "create",
+      "dialogue_form": "reversal",
+      "noise_level": "medium",
+      "decision": "quarantine_entity_transition_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_012_02",
+      "source_seed_id": "bernie_noise_seed_012",
+      "intended_action": "create",
+      "dialogue_form": "reversal",
+      "noise_level": "high",
+      "decision": "quarantine_entity_transition_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_013_01",
+      "source_seed_id": "bernie_noise_seed_013",
+      "intended_action": "create",
+      "dialogue_form": "ellipsis",
+      "noise_level": "medium",
+      "decision": "quarantine_replay_contract_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_replay_contract_conflict",
+          "reason": "existing_booking_outcome_with_creation_delta"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_013_02",
+      "source_seed_id": "bernie_noise_seed_013",
+      "intended_action": "create",
+      "dialogue_form": "ellipsis",
+      "noise_level": "high",
+      "decision": "quarantine_replay_contract_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_replay_contract_conflict",
+          "reason": "existing_booking_outcome_with_creation_delta"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_014_01",
+      "source_seed_id": "bernie_noise_seed_014",
+      "intended_action": "create",
+      "dialogue_form": "anaphora",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_014_02",
+      "source_seed_id": "bernie_noise_seed_014",
+      "intended_action": "create",
+      "dialogue_form": "anaphora",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_015_01",
+      "source_seed_id": "bernie_noise_seed_015",
+      "intended_action": "create",
+      "dialogue_form": "repeated",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_015_02",
+      "source_seed_id": "bernie_noise_seed_015",
+      "intended_action": "create",
+      "dialogue_form": "repeated",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_016_01",
+      "source_seed_id": "bernie_noise_seed_016",
+      "intended_action": "create",
+      "dialogue_form": "session_restart",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_016_02",
+      "source_seed_id": "bernie_noise_seed_016",
+      "intended_action": "create",
+      "dialogue_form": "session_restart",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_017_01",
+      "source_seed_id": "bernie_noise_seed_017",
+      "intended_action": "move",
+      "dialogue_form": "one_shot",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_017_02",
+      "source_seed_id": "bernie_noise_seed_017",
+      "intended_action": "move",
+      "dialogue_form": "one_shot",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_018_01",
+      "source_seed_id": "bernie_noise_seed_018",
+      "intended_action": "move",
+      "dialogue_form": "clarification",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_018_02",
+      "source_seed_id": "bernie_noise_seed_018",
+      "intended_action": "move",
+      "dialogue_form": "clarification",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_019_01",
+      "source_seed_id": "bernie_noise_seed_019",
+      "intended_action": "move",
+      "dialogue_form": "correction",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_019_02",
+      "source_seed_id": "bernie_noise_seed_019",
+      "intended_action": "move",
+      "dialogue_form": "correction",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_020_01",
+      "source_seed_id": "bernie_noise_seed_020",
+      "intended_action": "move",
+      "dialogue_form": "reversal",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_020_02",
+      "source_seed_id": "bernie_noise_seed_020",
+      "intended_action": "move",
+      "dialogue_form": "reversal",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_021_01",
+      "source_seed_id": "bernie_noise_seed_021",
+      "intended_action": "move",
+      "dialogue_form": "ellipsis",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_021_02",
+      "source_seed_id": "bernie_noise_seed_021",
+      "intended_action": "move",
+      "dialogue_form": "ellipsis",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_022_01",
+      "source_seed_id": "bernie_noise_seed_022",
+      "intended_action": "move",
+      "dialogue_form": "anaphora",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_022_02",
+      "source_seed_id": "bernie_noise_seed_022",
+      "intended_action": "move",
+      "dialogue_form": "anaphora",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_023_01",
+      "source_seed_id": "bernie_noise_seed_023",
+      "intended_action": "move",
+      "dialogue_form": "repeated",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_023_02",
+      "source_seed_id": "bernie_noise_seed_023",
+      "intended_action": "move",
+      "dialogue_form": "repeated",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_024_01",
+      "source_seed_id": "bernie_noise_seed_024",
+      "intended_action": "move",
+      "dialogue_form": "session_restart",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_024_02",
+      "source_seed_id": "bernie_noise_seed_024",
+      "intended_action": "move",
+      "dialogue_form": "session_restart",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_025_01",
+      "source_seed_id": "bernie_noise_seed_025",
+      "intended_action": "move",
+      "dialogue_form": "one_shot",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_025_02",
+      "source_seed_id": "bernie_noise_seed_025",
+      "intended_action": "move",
+      "dialogue_form": "one_shot",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_026_01",
+      "source_seed_id": "bernie_noise_seed_026",
+      "intended_action": "move",
+      "dialogue_form": "clarification",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_026_02",
+      "source_seed_id": "bernie_noise_seed_026",
+      "intended_action": "move",
+      "dialogue_form": "clarification",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_027_01",
+      "source_seed_id": "bernie_noise_seed_027",
+      "intended_action": "move",
+      "dialogue_form": "correction",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_027_02",
+      "source_seed_id": "bernie_noise_seed_027",
+      "intended_action": "move",
+      "dialogue_form": "correction",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_028_01",
+      "source_seed_id": "bernie_noise_seed_028",
+      "intended_action": "move",
+      "dialogue_form": "reversal",
+      "noise_level": "medium",
+      "decision": "quarantine_entity_transition_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_028_02",
+      "source_seed_id": "bernie_noise_seed_028",
+      "intended_action": "move",
+      "dialogue_form": "reversal",
+      "noise_level": "high",
+      "decision": "quarantine_entity_transition_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_029_01",
+      "source_seed_id": "bernie_noise_seed_029",
+      "intended_action": "move",
+      "dialogue_form": "ellipsis",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_029_02",
+      "source_seed_id": "bernie_noise_seed_029",
+      "intended_action": "move",
+      "dialogue_form": "ellipsis",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_030_01",
+      "source_seed_id": "bernie_noise_seed_030",
+      "intended_action": "move",
+      "dialogue_form": "anaphora",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_030_02",
+      "source_seed_id": "bernie_noise_seed_030",
+      "intended_action": "move",
+      "dialogue_form": "anaphora",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_031_01",
+      "source_seed_id": "bernie_noise_seed_031",
+      "intended_action": "move",
+      "dialogue_form": "repeated",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_031_02",
+      "source_seed_id": "bernie_noise_seed_031",
+      "intended_action": "move",
+      "dialogue_form": "repeated",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_032_01",
+      "source_seed_id": "bernie_noise_seed_032",
+      "intended_action": "move",
+      "dialogue_form": "session_restart",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_032_02",
+      "source_seed_id": "bernie_noise_seed_032",
+      "intended_action": "move",
+      "dialogue_form": "session_restart",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_033_01",
+      "source_seed_id": "bernie_noise_seed_033",
+      "intended_action": "resize",
+      "dialogue_form": "one_shot",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_missing_surfaced_evidence",
+          "reason": "intended_action_not_explicitly_surfaced"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_033_02",
+      "source_seed_id": "bernie_noise_seed_033",
+      "intended_action": "resize",
+      "dialogue_form": "one_shot",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_034_01",
+      "source_seed_id": "bernie_noise_seed_034",
+      "intended_action": "resize",
+      "dialogue_form": "clarification",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_missing_surfaced_evidence",
+          "reason": "intended_action_not_explicitly_surfaced"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_034_02",
+      "source_seed_id": "bernie_noise_seed_034",
+      "intended_action": "resize",
+      "dialogue_form": "clarification",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_035_01",
+      "source_seed_id": "bernie_noise_seed_035",
+      "intended_action": "resize",
+      "dialogue_form": "correction",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_035_02",
+      "source_seed_id": "bernie_noise_seed_035",
+      "intended_action": "resize",
+      "dialogue_form": "correction",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_036_01",
+      "source_seed_id": "bernie_noise_seed_036",
+      "intended_action": "resize",
+      "dialogue_form": "reversal",
+      "noise_level": "medium",
+      "decision": "quarantine_entity_transition_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_036_02",
+      "source_seed_id": "bernie_noise_seed_036",
+      "intended_action": "resize",
+      "dialogue_form": "reversal",
+      "noise_level": "high",
+      "decision": "quarantine_entity_transition_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_037_01",
+      "source_seed_id": "bernie_noise_seed_037",
+      "intended_action": "resize",
+      "dialogue_form": "ellipsis",
+      "noise_level": "medium",
+      "decision": "quarantine_missing_surfaced_evidence",
+      "findings": [
+        {
+          "decision": "quarantine_missing_surfaced_evidence",
+          "reason": "intended_action_not_explicitly_surfaced"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_037_02",
+      "source_seed_id": "bernie_noise_seed_037",
+      "intended_action": "resize",
+      "dialogue_form": "ellipsis",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_038_01",
+      "source_seed_id": "bernie_noise_seed_038",
+      "intended_action": "resize",
+      "dialogue_form": "anaphora",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_missing_surfaced_evidence",
+          "reason": "intended_action_not_explicitly_surfaced"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_038_02",
+      "source_seed_id": "bernie_noise_seed_038",
+      "intended_action": "resize",
+      "dialogue_form": "anaphora",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_039_01",
+      "source_seed_id": "bernie_noise_seed_039",
+      "intended_action": "resize",
+      "dialogue_form": "repeated",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_039_02",
+      "source_seed_id": "bernie_noise_seed_039",
+      "intended_action": "resize",
+      "dialogue_form": "repeated",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_040_01",
+      "source_seed_id": "bernie_noise_seed_040",
+      "intended_action": "resize",
+      "dialogue_form": "session_restart",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_040_02",
+      "source_seed_id": "bernie_noise_seed_040",
+      "intended_action": "resize",
+      "dialogue_form": "session_restart",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_041_01",
+      "source_seed_id": "bernie_noise_seed_041",
+      "intended_action": "resize",
+      "dialogue_form": "one_shot",
+      "noise_level": "medium",
+      "decision": "quarantine_missing_surfaced_evidence",
+      "findings": [
+        {
+          "decision": "quarantine_missing_surfaced_evidence",
+          "reason": "intended_action_not_explicitly_surfaced"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_041_02",
+      "source_seed_id": "bernie_noise_seed_041",
+      "intended_action": "resize",
+      "dialogue_form": "one_shot",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_042_01",
+      "source_seed_id": "bernie_noise_seed_042",
+      "intended_action": "resize",
+      "dialogue_form": "clarification",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_missing_surfaced_evidence",
+          "reason": "intended_action_not_explicitly_surfaced"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_042_02",
+      "source_seed_id": "bernie_noise_seed_042",
+      "intended_action": "resize",
+      "dialogue_form": "clarification",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_043_01",
+      "source_seed_id": "bernie_noise_seed_043",
+      "intended_action": "resize",
+      "dialogue_form": "correction",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_043_02",
+      "source_seed_id": "bernie_noise_seed_043",
+      "intended_action": "resize",
+      "dialogue_form": "correction",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_044_01",
+      "source_seed_id": "bernie_noise_seed_044",
+      "intended_action": "resize",
+      "dialogue_form": "reversal",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_044_02",
+      "source_seed_id": "bernie_noise_seed_044",
+      "intended_action": "resize",
+      "dialogue_form": "reversal",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_045_01",
+      "source_seed_id": "bernie_noise_seed_045",
+      "intended_action": "resize",
+      "dialogue_form": "ellipsis",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_missing_surfaced_evidence",
+          "reason": "intended_action_not_explicitly_surfaced"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_045_02",
+      "source_seed_id": "bernie_noise_seed_045",
+      "intended_action": "resize",
+      "dialogue_form": "ellipsis",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_046_01",
+      "source_seed_id": "bernie_noise_seed_046",
+      "intended_action": "resize",
+      "dialogue_form": "anaphora",
+      "noise_level": "medium",
+      "decision": "quarantine_missing_surfaced_evidence",
+      "findings": [
+        {
+          "decision": "quarantine_missing_surfaced_evidence",
+          "reason": "intended_action_not_explicitly_surfaced"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_046_02",
+      "source_seed_id": "bernie_noise_seed_046",
+      "intended_action": "resize",
+      "dialogue_form": "anaphora",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_047_01",
+      "source_seed_id": "bernie_noise_seed_047",
+      "intended_action": "resize",
+      "dialogue_form": "repeated",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_047_02",
+      "source_seed_id": "bernie_noise_seed_047",
+      "intended_action": "resize",
+      "dialogue_form": "repeated",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_048_01",
+      "source_seed_id": "bernie_noise_seed_048",
+      "intended_action": "resize",
+      "dialogue_form": "session_restart",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_048_02",
+      "source_seed_id": "bernie_noise_seed_048",
+      "intended_action": "resize",
+      "dialogue_form": "session_restart",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_049_01",
+      "source_seed_id": "bernie_noise_seed_049",
+      "intended_action": "cancel",
+      "dialogue_form": "one_shot",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_049_02",
+      "source_seed_id": "bernie_noise_seed_049",
+      "intended_action": "cancel",
+      "dialogue_form": "one_shot",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_050_01",
+      "source_seed_id": "bernie_noise_seed_050",
+      "intended_action": "cancel",
+      "dialogue_form": "clarification",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_050_02",
+      "source_seed_id": "bernie_noise_seed_050",
+      "intended_action": "cancel",
+      "dialogue_form": "clarification",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_051_01",
+      "source_seed_id": "bernie_noise_seed_051",
+      "intended_action": "cancel",
+      "dialogue_form": "correction",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_051_02",
+      "source_seed_id": "bernie_noise_seed_051",
+      "intended_action": "cancel",
+      "dialogue_form": "correction",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_052_01",
+      "source_seed_id": "bernie_noise_seed_052",
+      "intended_action": "cancel",
+      "dialogue_form": "reversal",
+      "noise_level": "medium",
+      "decision": "quarantine_entity_transition_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_052_02",
+      "source_seed_id": "bernie_noise_seed_052",
+      "intended_action": "cancel",
+      "dialogue_form": "reversal",
+      "noise_level": "high",
+      "decision": "quarantine_entity_transition_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_053_01",
+      "source_seed_id": "bernie_noise_seed_053",
+      "intended_action": "cancel",
+      "dialogue_form": "ellipsis",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_053_02",
+      "source_seed_id": "bernie_noise_seed_053",
+      "intended_action": "cancel",
+      "dialogue_form": "ellipsis",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_054_01",
+      "source_seed_id": "bernie_noise_seed_054",
+      "intended_action": "cancel",
+      "dialogue_form": "anaphora",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_054_02",
+      "source_seed_id": "bernie_noise_seed_054",
+      "intended_action": "cancel",
+      "dialogue_form": "anaphora",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_055_01",
+      "source_seed_id": "bernie_noise_seed_055",
+      "intended_action": "cancel",
+      "dialogue_form": "repeated",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_055_02",
+      "source_seed_id": "bernie_noise_seed_055",
+      "intended_action": "cancel",
+      "dialogue_form": "repeated",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_056_01",
+      "source_seed_id": "bernie_noise_seed_056",
+      "intended_action": "cancel",
+      "dialogue_form": "session_restart",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_056_02",
+      "source_seed_id": "bernie_noise_seed_056",
+      "intended_action": "cancel",
+      "dialogue_form": "session_restart",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_057_01",
+      "source_seed_id": "bernie_noise_seed_057",
+      "intended_action": "cancel",
+      "dialogue_form": "one_shot",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_057_02",
+      "source_seed_id": "bernie_noise_seed_057",
+      "intended_action": "cancel",
+      "dialogue_form": "one_shot",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_058_01",
+      "source_seed_id": "bernie_noise_seed_058",
+      "intended_action": "cancel",
+      "dialogue_form": "clarification",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_058_02",
+      "source_seed_id": "bernie_noise_seed_058",
+      "intended_action": "cancel",
+      "dialogue_form": "clarification",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_059_01",
+      "source_seed_id": "bernie_noise_seed_059",
+      "intended_action": "cancel",
+      "dialogue_form": "correction",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_059_02",
+      "source_seed_id": "bernie_noise_seed_059",
+      "intended_action": "cancel",
+      "dialogue_form": "correction",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_060_01",
+      "source_seed_id": "bernie_noise_seed_060",
+      "intended_action": "cancel",
+      "dialogue_form": "reversal",
+      "noise_level": "medium",
+      "decision": "quarantine_entity_transition_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_060_02",
+      "source_seed_id": "bernie_noise_seed_060",
+      "intended_action": "cancel",
+      "dialogue_form": "reversal",
+      "noise_level": "high",
+      "decision": "quarantine_entity_transition_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_061_01",
+      "source_seed_id": "bernie_noise_seed_061",
+      "intended_action": "cancel",
+      "dialogue_form": "ellipsis",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_061_02",
+      "source_seed_id": "bernie_noise_seed_061",
+      "intended_action": "cancel",
+      "dialogue_form": "ellipsis",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_062_01",
+      "source_seed_id": "bernie_noise_seed_062",
+      "intended_action": "cancel",
+      "dialogue_form": "anaphora",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_062_02",
+      "source_seed_id": "bernie_noise_seed_062",
+      "intended_action": "cancel",
+      "dialogue_form": "anaphora",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_063_01",
+      "source_seed_id": "bernie_noise_seed_063",
+      "intended_action": "cancel",
+      "dialogue_form": "repeated",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_063_02",
+      "source_seed_id": "bernie_noise_seed_063",
+      "intended_action": "cancel",
+      "dialogue_form": "repeated",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_064_01",
+      "source_seed_id": "bernie_noise_seed_064",
+      "intended_action": "cancel",
+      "dialogue_form": "session_restart",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_064_02",
+      "source_seed_id": "bernie_noise_seed_064",
+      "intended_action": "cancel",
+      "dialogue_form": "session_restart",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_065_01",
+      "source_seed_id": "bernie_noise_seed_065",
+      "intended_action": "status_change",
+      "dialogue_form": "one_shot",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_065_02",
+      "source_seed_id": "bernie_noise_seed_065",
+      "intended_action": "status_change",
+      "dialogue_form": "one_shot",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_066_01",
+      "source_seed_id": "bernie_noise_seed_066",
+      "intended_action": "status_change",
+      "dialogue_form": "clarification",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_066_02",
+      "source_seed_id": "bernie_noise_seed_066",
+      "intended_action": "status_change",
+      "dialogue_form": "clarification",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_067_01",
+      "source_seed_id": "bernie_noise_seed_067",
+      "intended_action": "status_change",
+      "dialogue_form": "correction",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_067_02",
+      "source_seed_id": "bernie_noise_seed_067",
+      "intended_action": "status_change",
+      "dialogue_form": "correction",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_068_01",
+      "source_seed_id": "bernie_noise_seed_068",
+      "intended_action": "status_change",
+      "dialogue_form": "reversal",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_068_02",
+      "source_seed_id": "bernie_noise_seed_068",
+      "intended_action": "status_change",
+      "dialogue_form": "reversal",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_069_01",
+      "source_seed_id": "bernie_noise_seed_069",
+      "intended_action": "status_change",
+      "dialogue_form": "ellipsis",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_069_02",
+      "source_seed_id": "bernie_noise_seed_069",
+      "intended_action": "status_change",
+      "dialogue_form": "ellipsis",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_070_01",
+      "source_seed_id": "bernie_noise_seed_070",
+      "intended_action": "status_change",
+      "dialogue_form": "anaphora",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_070_02",
+      "source_seed_id": "bernie_noise_seed_070",
+      "intended_action": "status_change",
+      "dialogue_form": "anaphora",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_071_01",
+      "source_seed_id": "bernie_noise_seed_071",
+      "intended_action": "status_change",
+      "dialogue_form": "repeated",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_071_02",
+      "source_seed_id": "bernie_noise_seed_071",
+      "intended_action": "status_change",
+      "dialogue_form": "repeated",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_072_01",
+      "source_seed_id": "bernie_noise_seed_072",
+      "intended_action": "status_change",
+      "dialogue_form": "session_restart",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_072_02",
+      "source_seed_id": "bernie_noise_seed_072",
+      "intended_action": "status_change",
+      "dialogue_form": "session_restart",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_073_01",
+      "source_seed_id": "bernie_noise_seed_073",
+      "intended_action": "status_change",
+      "dialogue_form": "one_shot",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_073_02",
+      "source_seed_id": "bernie_noise_seed_073",
+      "intended_action": "status_change",
+      "dialogue_form": "one_shot",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_074_01",
+      "source_seed_id": "bernie_noise_seed_074",
+      "intended_action": "status_change",
+      "dialogue_form": "clarification",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_074_02",
+      "source_seed_id": "bernie_noise_seed_074",
+      "intended_action": "status_change",
+      "dialogue_form": "clarification",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_075_01",
+      "source_seed_id": "bernie_noise_seed_075",
+      "intended_action": "status_change",
+      "dialogue_form": "correction",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_075_02",
+      "source_seed_id": "bernie_noise_seed_075",
+      "intended_action": "status_change",
+      "dialogue_form": "correction",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_076_01",
+      "source_seed_id": "bernie_noise_seed_076",
+      "intended_action": "status_change",
+      "dialogue_form": "reversal",
+      "noise_level": "medium",
+      "decision": "quarantine_entity_transition_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_076_02",
+      "source_seed_id": "bernie_noise_seed_076",
+      "intended_action": "status_change",
+      "dialogue_form": "reversal",
+      "noise_level": "high",
+      "decision": "quarantine_entity_transition_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_077_01",
+      "source_seed_id": "bernie_noise_seed_077",
+      "intended_action": "status_change",
+      "dialogue_form": "ellipsis",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_077_02",
+      "source_seed_id": "bernie_noise_seed_077",
+      "intended_action": "status_change",
+      "dialogue_form": "ellipsis",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_078_01",
+      "source_seed_id": "bernie_noise_seed_078",
+      "intended_action": "status_change",
+      "dialogue_form": "anaphora",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_078_02",
+      "source_seed_id": "bernie_noise_seed_078",
+      "intended_action": "status_change",
+      "dialogue_form": "anaphora",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_079_01",
+      "source_seed_id": "bernie_noise_seed_079",
+      "intended_action": "status_change",
+      "dialogue_form": "repeated",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_079_02",
+      "source_seed_id": "bernie_noise_seed_079",
+      "intended_action": "status_change",
+      "dialogue_form": "repeated",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_080_01",
+      "source_seed_id": "bernie_noise_seed_080",
+      "intended_action": "status_change",
+      "dialogue_form": "session_restart",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_080_02",
+      "source_seed_id": "bernie_noise_seed_080",
+      "intended_action": "status_change",
+      "dialogue_form": "session_restart",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_081_01",
+      "source_seed_id": "bernie_noise_seed_081",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "one_shot",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_081_02",
+      "source_seed_id": "bernie_noise_seed_081",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "one_shot",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_082_01",
+      "source_seed_id": "bernie_noise_seed_082",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "clarification",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_082_02",
+      "source_seed_id": "bernie_noise_seed_082",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "clarification",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_083_01",
+      "source_seed_id": "bernie_noise_seed_083",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "correction",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_083_02",
+      "source_seed_id": "bernie_noise_seed_083",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "correction",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_084_01",
+      "source_seed_id": "bernie_noise_seed_084",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "reversal",
+      "noise_level": "medium",
+      "decision": "quarantine_entity_transition_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_084_02",
+      "source_seed_id": "bernie_noise_seed_084",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "reversal",
+      "noise_level": "high",
+      "decision": "quarantine_entity_transition_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_085_01",
+      "source_seed_id": "bernie_noise_seed_085",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "ellipsis",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_085_02",
+      "source_seed_id": "bernie_noise_seed_085",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "ellipsis",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_086_01",
+      "source_seed_id": "bernie_noise_seed_086",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "anaphora",
+      "noise_level": "medium",
+      "decision": "reject_semantic_corruption",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        },
+        {
+          "decision": "reject_semantic_corruption",
+          "reason": "schedule_request_anaphora_refers_to_appointment"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_086_02",
+      "source_seed_id": "bernie_noise_seed_086",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "anaphora",
+      "noise_level": "high",
+      "decision": "reject_semantic_corruption",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        },
+        {
+          "decision": "reject_semantic_corruption",
+          "reason": "schedule_request_anaphora_refers_to_appointment"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_087_01",
+      "source_seed_id": "bernie_noise_seed_087",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "repeated",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_087_02",
+      "source_seed_id": "bernie_noise_seed_087",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "repeated",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_088_01",
+      "source_seed_id": "bernie_noise_seed_088",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "session_restart",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_088_02",
+      "source_seed_id": "bernie_noise_seed_088",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "session_restart",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_089_01",
+      "source_seed_id": "bernie_noise_seed_089",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "one_shot",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_089_02",
+      "source_seed_id": "bernie_noise_seed_089",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "one_shot",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_090_01",
+      "source_seed_id": "bernie_noise_seed_090",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "clarification",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_090_02",
+      "source_seed_id": "bernie_noise_seed_090",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "clarification",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_091_01",
+      "source_seed_id": "bernie_noise_seed_091",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "correction",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_091_02",
+      "source_seed_id": "bernie_noise_seed_091",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "correction",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_092_01",
+      "source_seed_id": "bernie_noise_seed_092",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "reversal",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_092_02",
+      "source_seed_id": "bernie_noise_seed_092",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "reversal",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_entity_transition_conflict",
+          "reason": "whole_action_withdrawn_but_oracle_expects_action"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_093_01",
+      "source_seed_id": "bernie_noise_seed_093",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "ellipsis",
+      "noise_level": "medium",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_093_02",
+      "source_seed_id": "bernie_noise_seed_093",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "ellipsis",
+      "noise_level": "high",
+      "decision": "quarantine_oracle_policy_conflict",
+      "findings": [
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_with_success_or_mutation_delta"
+        },
+        {
+          "decision": "quarantine_oracle_policy_conflict",
+          "reason": "clarification_tool_without_clarification_contract"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_094_01",
+      "source_seed_id": "bernie_noise_seed_094",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "anaphora",
+      "noise_level": "medium",
+      "decision": "reject_semantic_corruption",
+      "findings": [
+        {
+          "decision": "reject_semantic_corruption",
+          "reason": "schedule_request_anaphora_refers_to_appointment"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_094_02",
+      "source_seed_id": "bernie_noise_seed_094",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "anaphora",
+      "noise_level": "high",
+      "decision": "reject_semantic_corruption",
+      "findings": [
+        {
+          "decision": "reject_semantic_corruption",
+          "reason": "schedule_request_anaphora_refers_to_appointment"
+        }
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_095_01",
+      "source_seed_id": "bernie_noise_seed_095",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "repeated",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_095_02",
+      "source_seed_id": "bernie_noise_seed_095",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "repeated",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_096_01",
+      "source_seed_id": "bernie_noise_seed_096",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "session_restart",
+      "noise_level": "medium",
+      "decision": "accept_coherent",
+      "findings": []
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_096_02",
+      "source_seed_id": "bernie_noise_seed_096",
+      "intended_action": "explain_schedule",
+      "dialogue_form": "session_restart",
+      "noise_level": "high",
+      "decision": "accept_coherent",
+      "findings": []
+    }
+  ],
+  "boundaries": {
+    "protected_holdout_access": false,
+    "historical_diary_access": false,
+    "external_corpus_access": false,
+    "product_parser_used_for_decisions": false,
+    "product_write": false
+  },
+  "report_hash": "sha256:616f6180108776991096f4e90d5454a99aa313471fe97591d6d527175b17c79a"
+}
