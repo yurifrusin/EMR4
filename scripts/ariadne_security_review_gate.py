@@ -37,6 +37,11 @@ def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _sha256_normalized_text(path: Path) -> str:
+    text = path.read_text(encoding="utf-8").replace("\r\n", "\n").replace("\r", "\n")
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
 def _valid_head(value: Any) -> bool:
     return isinstance(value, str) and re.fullmatch(r"[0-9a-f]{40}", value) is not None
 
@@ -89,7 +94,7 @@ def _purple_cadence(
     ledger_path = _repo_artifact(settings["purple_cadence"]["ledger_path"])
     if ledger_path is None or not ledger_path.is_file():
         return 0, ["purple_cadence_ledger_missing"]
-    if cadence.get("ledger_sha256") != _sha256(ledger_path):
+    if cadence.get("ledger_sha256") != _sha256_normalized_text(ledger_path):
         reasons.append("purple_cadence_ledger_hash_mismatch")
 
     entries: list[dict[str, Any]] = []
