@@ -50,13 +50,13 @@ The candidate claims to add only:
 4. Reproduce the final 24-candidate report exactly:
 
    ```powershell
-   .\.venv\Scripts\python.exe scripts\bernie_synthetic_silver_action_temporal_tranche.py --check --output docs\bernie-synthetic-silver-action-temporal-tranche-final.json
+   C:\Users\sarashera\emr4\.venv\Scripts\python.exe scripts\bernie_synthetic_silver_action_temporal_tranche.py --check --output docs\bernie-synthetic-silver-action-temporal-tranche-final.json
    ```
 
 5. Run the focused parser and semantic preservation tests:
 
    ```powershell
-   .\.venv\Scripts\python.exe -m pytest tests\test_bernie_synthetic_noise_action_temporal_parser.py tests\test_bernie_semantic_extraction.py -q
+   C:\Users\sarashera\emr4\.venv\Scripts\python.exe -m pytest tests\test_bernie_synthetic_noise_action_temporal_parser.py tests\test_bernie_semantic_extraction.py -q
    ```
 
 6. Rebuild the full 192-candidate Silver evaluation to an ignored local path
