@@ -44,7 +44,7 @@
       "recovery": {
         "owner_resource_id": "openai-primary-orchestrator",
         "artifact_path": "orchestration/agent_inbox/codex/security-hardening-sol-recovery.md",
-        "artifact_sha256": "b42a225fb0d23ed194bba9ad6ac19bdce41fd476bfaf5194712a3d6ee27ed4bb"
+        "artifact_sha256": "1f7689f39681dcf2e5a7327265b12ad58c9967e5af6e0bbd580d6bdf565c10fc"
       }
     },
     "red": {
@@ -52,8 +52,9 @@
       "resource_id": "antigravity-gemini-flash-3-5-worker",
       "packet_path": "orchestration/agent_inbox/codex/security-hardening-bootstrap-final-red-packet.md",
       "candidate_head": "73eba9c144ac1a41be5b2e150b9d2c1c7c77675c",
-      "artifact_path": null,
-      "decision": "pending",
+      "artifact_path": "orchestration/agent_inbox/antigravity/security-hardening-bootstrap-final-red-review.md",
+      "artifact_sha256": "2c6adc92bab0f627c5d596ed0d4326b8d562891b9d5fe093c4ec153a249828bd",
+      "decision": "pass",
       "fresh_context": true,
       "candidate_only": true,
       "prior_review_artifacts_excluded": true
@@ -62,8 +63,9 @@
       "required": true,
       "resource_id": "openai-primary-orchestrator",
       "candidate_head": "73eba9c144ac1a41be5b2e150b9d2c1c7c77675c",
-      "artifact_path": null,
-      "decision": "pending"
+      "artifact_path": "orchestration/agent_inbox/codex/security-hardening-final-purple-acceptance.md",
+      "artifact_sha256": "f68b22524f78d586fcef11017962a93c97b810c50ff74bcf4e9186d09e48a07b",
+      "decision": "pass"
     }
   },
   "superseded_reviews": [
