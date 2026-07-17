@@ -18,6 +18,18 @@ def test_dev_and_smoke_capabilities_are_local_only() -> None:
     assert 'window.location.protocol === "file:"' in source
 
 
+def test_local_smoke_loader_cannot_bypass_authenticated_diary_loader() -> None:
+    source = _source()
+    assert "async function loadAuthenticatedDiary(silent = false, options = {})" in source
+    assert "return loadDiaryData(silent, options, false);" in source
+    assert "async function loadSmokeDiary(silent = false, options = {})" in source
+    assert "return loadDiaryData(silent, options, true);" in source
+    assert "if (isSmoke) { loadSmokeDiary(); }" in source
+    assert "else if (token) { loadAuthenticatedDiary(); scheduleRefresh(); }" in source
+    assert "if (token || isSmoke" not in source
+    assert "if (!token && !smokeMode)" not in source
+
+
 def test_ngrok_backend_selection_uses_approved_domain_suffixes() -> None:
     source = _source()
     assert "function isApprovedNgrokHostname(hostname)" in source

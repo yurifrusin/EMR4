@@ -4434,14 +4434,32 @@ function saveBreaks() {
 }
 
 // ─── LOAD DIARY ────────────────────────────────────────────
-async function loadDiary(silent = false, options = {}) {
-  const smokeMode = isSmokeMode();
-
-  if (!token && !smokeMode) {
+async function loadAuthenticatedDiary(silent = false, options = {}) {
+  if (!token) {
     setStatus("Waiting for auth token…");
     showAuthBanner();
     return;
   }
+
+  return loadDiaryData(silent, options, false);
+}
+
+async function loadSmokeDiary(silent = false, options = {}) {
+  if (!isSmokeMode()) {
+    throw new Error("Local smoke mode is not available in this context.");
+  }
+
+  return loadDiaryData(silent, options, true);
+}
+
+async function loadDiary(silent = false, options = {}) {
+  if (isSmokeMode()) {
+    return loadSmokeDiary(silent, options);
+  }
+  return loadAuthenticatedDiary(silent, options);
+}
+
+async function loadDiaryData(silent = false, options = {}, smokeMode = false) {
 
   hideAuthBanner();
   await ensureCurrentUserRole();
@@ -6901,7 +6919,6 @@ async function loadBernieLiveReview() {
 
 async function initBernieReview() {
   const urlParams = new URLSearchParams(window.location.search);
-  const isSmoke = isSmokeMode();
   const reviewParam = urlParams.get("bernie_review");
   const devReviewParam = isLocalHarnessCapabilityEnabled("bernie_dev_review") ? "true" : null;
 
@@ -7356,7 +7373,8 @@ Office.onReady(() => {
     setStatus("Waiting for auth token...");
     showAuthBanner();
   }
-  if (token || isSmoke || hasLiveDevReview || isDevFixture) { loadDiary(); scheduleRefresh(); }
+  if (isSmoke) { loadSmokeDiary(); }
+  else if (token) { loadAuthenticatedDiary(); scheduleRefresh(); }
   if (isSmoke || hasLiveDevReview || isDevFixture) { initBernieReview(); }
   checkBerniePilotEligibility();
 });
