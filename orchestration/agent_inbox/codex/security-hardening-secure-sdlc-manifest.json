@@ -7,7 +7,7 @@
     "owner_resource_id": "openai-primary-orchestrator",
     "rationale": "Changes security controls, confirmation handling, external UI behaviour, CI admission, and repository protection."
   },
-  "candidate_head": "a248f659545975ada9662e08f89962c87952e77f",
+  "candidate_head": "73eba9c144ac1a41be5b2e150b9d2c1c7c77675c",
   "declared_tier": "dual_review",
   "triggers": [
     "confirmation_workflow",
@@ -50,11 +50,10 @@
     "red": {
       "required": true,
       "resource_id": "antigravity-gemini-flash-3-5-worker",
-      "packet_path": "orchestration/agent_inbox/codex/security-hardening-codeql-final-red-packet.md",
-      "candidate_head": "a248f659545975ada9662e08f89962c87952e77f",
-      "artifact_path": "orchestration/agent_inbox/antigravity/security-hardening-codeql-final-red-review.md",
-      "artifact_sha256": "353e38406170f2b7e27a5db166e4441241b6e6a4beb657323b72cd3fa719876d",
-      "decision": "pass",
+      "packet_path": "orchestration/agent_inbox/codex/security-hardening-bootstrap-final-red-packet.md",
+      "candidate_head": "73eba9c144ac1a41be5b2e150b9d2c1c7c77675c",
+      "artifact_path": null,
+      "decision": "pending",
       "fresh_context": true,
       "candidate_only": true,
       "prior_review_artifacts_excluded": true
@@ -62,10 +61,9 @@
     "purple": {
       "required": true,
       "resource_id": "openai-primary-orchestrator",
-      "candidate_head": "a248f659545975ada9662e08f89962c87952e77f",
-      "artifact_path": "orchestration/agent_inbox/codex/security-hardening-codeql-purple-acceptance.md",
-      "artifact_sha256": "249b9f280cf892c4f8529de2c5e9c93257a23804f8b7778c75054674e18a5360",
-      "decision": "pass"
+      "candidate_head": "73eba9c144ac1a41be5b2e150b9d2c1c7c77675c",
+      "artifact_path": null,
+      "decision": "pending"
     }
   },
   "superseded_reviews": [
@@ -89,12 +87,26 @@
       "artifact_path": "orchestration/agent_inbox/codex/security-hardening-purple-acceptance.md",
       "artifact_sha256": "f0ebec57e64388ea74d17a21e5ecd03749310717fc801a6c25bd4232ea0211d2",
       "decision": "pass"
+    },
+    {
+      "role": "red",
+      "candidate_head": "a248f659545975ada9662e08f89962c87952e77f",
+      "artifact_path": "orchestration/agent_inbox/antigravity/security-hardening-codeql-final-red-review.md",
+      "artifact_sha256": "353e38406170f2b7e27a5db166e4441241b6e6a4beb657323b72cd3fa719876d",
+      "decision": "pass"
+    },
+    {
+      "role": "purple",
+      "candidate_head": "a248f659545975ada9662e08f89962c87952e77f",
+      "artifact_path": "orchestration/agent_inbox/codex/security-hardening-codeql-purple-acceptance.md",
+      "artifact_sha256": "249b9f280cf892c4f8529de2c5e9c93257a23804f8b7778c75054674e18a5360",
+      "decision": "pass"
     }
   ],
   "post_review_recovery": {
     "owner_resource_id": "openai-primary-orchestrator",
-    "artifact_path": "orchestration/agent_inbox/codex/security-hardening-codeql-recovery.md",
-    "artifact_sha256": "1bd1d31b5867d071cddcbcd2c5115f4dfe2405e6d8219439445449c367847f0d",
+    "artifact_path": "orchestration/agent_inbox/codex/security-hardening-codeql-bootstrap-recovery.md",
+    "artifact_sha256": "48e77f87be28d0dc70fac58af07aa3dc9d15d4ae6d0592397c28f4f36b09f0df",
     "trigger": "representative_pr_codeql_high_findings"
   },
   "unresolved_findings": []
