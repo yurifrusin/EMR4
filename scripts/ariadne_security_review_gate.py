@@ -166,7 +166,12 @@ def _review_reasons(
 
     exact_pass = False
     recovered = False
-    if phase == "plan" and _valid_head(review_candidate) and review_candidate != final_candidate_head:
+    if (
+        phase == "plan"
+        and _valid_head(review_candidate)
+        and review_candidate != final_candidate_head
+        and review.get("disposition") != recovery_settings["allowed_disposition"]
+    ):
         reasons.append(f"review_candidate_head_mismatch:{role}")
     if phase == "acceptance":
         if review.get("disposition") == recovery_settings["allowed_disposition"]:
