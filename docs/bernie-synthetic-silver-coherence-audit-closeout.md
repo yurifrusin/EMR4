@@ -87,6 +87,12 @@ repair or make the coherent rows Gold.
   verified exactly 12 text changes, reproduced every count and hash, ran 18/18
   review tests, and returned `DECISION: pass` with `PROTECTED_ACCESS: false`.
 
+The first PR security run rejected the audit's required Git-object SHA-1
+calculation as Bandit B324. Sol marked that exact call
+`usedforsecurity=False`; Git blob identity still requires SHA-1, and the value
+is used only to bind frozen repository objects, not for security. All audit
+hashes, counts, admission decisions, tests, and review claims remained exact.
+
 ## Disposition and next decision
 
 The useful next corpus step is a v2 anchor set built only from internally

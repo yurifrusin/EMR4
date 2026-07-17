@@ -129,7 +129,9 @@ def _git_blob_hash(path: Path) -> str:
     # Windows worktree materializes CRLF.
     payload = path.read_bytes().replace(b"\r\n", b"\n")
     header = f"blob {len(payload)}\0".encode("ascii")
-    return hashlib.sha1(header + payload).hexdigest()
+    # Git object identity requires SHA-1 by protocol; this is not a security
+    # digest or trust decision.
+    return hashlib.sha1(header + payload, usedforsecurity=False).hexdigest()
 
 
 def _file_payload_hash(records: Iterable[dict[str, Any]]) -> str:
