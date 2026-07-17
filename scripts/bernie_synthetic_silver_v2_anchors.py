@@ -9,8 +9,14 @@ Usage:
 from __future__ import annotations
 
 import sys
+from pathlib import Path
 
-from app.services.bernie.synthetic_noise_v2 import (
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from app.services.bernie.synthetic_noise_v2 import (  # noqa: E402
     DEFAULT_SEED_PATH_V2,
     check_v2_anchor_manifest,
     write_v2_anchor_manifest,

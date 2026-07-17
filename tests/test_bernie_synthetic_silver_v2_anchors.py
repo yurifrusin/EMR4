@@ -22,6 +22,8 @@ from app.services.bernie.synthetic_noise_v2 import (
     check_v2_anchor_manifest,
     validate_v2_anchor_manifest,
 )
+from app.services.bernie.corpus_tier import compute_scenario_hash
+from app.services.bernie.scale_corpus import DevelopmentOnlyLoader
 
 # ==========================================================================
 # Structure, balance, determinism
@@ -142,6 +144,10 @@ def test_contains_source_utterances_false() -> None:
 
 def test_every_anchor_has_source_scenario_id_and_hash() -> None:
     manifest = build_v2_anchor_manifest()
+    sources = {
+        scenario.scenario_id: scenario
+        for scenario in DevelopmentOnlyLoader().load_all().all_variants()
+    }
     for a in manifest["anchors"]:
         dfc = a["dialogue_form_contract"]
         sb = dfc["source_bindings"]
@@ -152,6 +158,9 @@ def test_every_anchor_has_source_scenario_id_and_hash() -> None:
             f"Missing scenario_hash in {a['seed_id']}"
         )
         assert sb["source_scenario_hash"].startswith("sha256:")
+        source = sources[sb["source_scenario_id"]]
+        assert sb["source_scenario_hash"] == compute_scenario_hash(source)
+        assert source.intended_action == a["semantic_contract"]["intended_action"]
 
 
 def test_anchor_source_hash_matches_dialogue_form_contract() -> None:
@@ -239,6 +248,24 @@ def test_mutation_anchors_have_tools_outcome_deltas() -> None:
             )
 
 
+def test_successful_mutation_contracts_preserve_source_delta_shapes() -> None:
+    manifest = build_v2_anchor_manifest()
+    sources = {
+        scenario.scenario_id: scenario
+        for scenario in DevelopmentOnlyLoader().load_all().all_variants()
+    }
+    for anchor in manifest["anchors"]:
+        form = anchor["dialogue_form_contract"]["dialogue_form"]
+        sc = anchor["semantic_contract"]
+        if form in {"clarification", "reversal"} or sc["intended_action"] == "explain_schedule":
+            continue
+        source = sources[anchor["source_scenario_id"]]
+        assert sc["expected_tool_sequence"] == source.expected_tool_sequence
+        assert sc["expected_outcome_kind"] == source.expected_outcome_kind
+        assert sc["expected_appointment_deltas"] == source.expected_appointment_deltas
+        assert sc["expected_audit_deltas"] == source.expected_audit_deltas
+
+
 # ==========================================================================
 # Coherence invariants -- schedule explanation
 # ==========================================================================
@@ -262,6 +289,7 @@ def test_schedule_explanation_has_no_deltas() -> None:
         assert sc["expected_audit_deltas"] == [], (
             f"{a['seed_id']} should have empty audit deltas"
         )
+        assert sc["expected_tool_sequence"] == ["find_slots"]
 
 
 # ==========================================================================
@@ -306,10 +334,19 @@ def test_clarification_variant_1_is_patient_ambiguity() -> None:
         cv = a["dialogue_form_contract"]["cell_variant"]
         if form != "clarification" or cv != 1:
             continue
-        q = a["semantic_contract"]["expected_clarification"]
-        assert "patient" in q.lower(), (
-            f"{a['seed_id']} variant 1 should mention patient: {q}"
-        )
+        sc = a["semantic_contract"]
+        target = a["dialogue_form_contract"]["ambiguity_target"]
+        q = sc["expected_clarification"]
+        if sc["intended_action"] == "explain_schedule":
+            assert target == "practitioner"
+            assert sc["patient_semantics"] == "omitted"
+            assert sc["practitioner_semantics"] == "ambiguous"
+            assert "practitioner" in q.lower()
+        else:
+            assert target == "patient"
+            assert sc["patient_semantics"] == "ambiguous"
+            assert sc["practitioner_semantics"] == "exact"
+            assert "patient" in q.lower()
 
 
 def test_clarification_variant_2_is_practitioner_ambiguity() -> None:
@@ -320,6 +357,8 @@ def test_clarification_variant_2_is_practitioner_ambiguity() -> None:
         if form != "clarification" or cv != 2:
             continue
         q = a["semantic_contract"]["expected_clarification"]
+        assert a["dialogue_form_contract"]["ambiguity_target"] == "practitioner"
+        assert a["semantic_contract"]["practitioner_semantics"] == "ambiguous"
         assert "practitioner" in q.lower(), (
             f"{a['seed_id']} variant 2 should mention practitioner: {q}"
         )
@@ -390,6 +429,13 @@ def test_correction_anchors_have_tools_and_outcome() -> None:
         assert sc["expected_outcome_kind"] is not None, (
             f"{a['seed_id']} correction needs non-null outcome"
         )
+        dfc = a["dialogue_form_contract"]
+        assert sc["practitioner_semantics"] == "corrected"
+        assert sc["entity_state"] == "corrected"
+        assert dfc["correction_target"] == "practitioner"
+        assert dfc["prior_value"] == "Dr Patel"
+        assert dfc["final_value"] == "Dr Shera"
+        assert "explicit_replacement_cue" in dfc["surface_requirements"]
 
 
 # ==========================================================================
@@ -420,6 +466,10 @@ def test_local_recovery_forms_have_tools_outcome_deltas() -> None:
             assert sc["expected_appointment_deltas"], (
                 f"{a['seed_id']} ({form}) needs appointment deltas"
             )
+        dfc = a["dialogue_form_contract"]
+        if form in {"ellipsis", "anaphora"}:
+            assert dfc["local_recovery_required"] is True
+            assert "antecedent_in_prior_turn" in dfc["surface_requirements"]
 
 
 # ==========================================================================
@@ -449,6 +499,30 @@ def test_validator_rejects_empty_clarification_choices() -> None:
     assert any("at least 2" in e for e in errors), (
         f"Expected rejection of empty choices, got: {errors}"
     )
+
+
+def test_validator_rejects_clarification_without_ambiguous_entity() -> None:
+    manifest = build_v2_anchor_manifest()
+    for anchor in manifest["anchors"]:
+        sc = anchor["semantic_contract"]
+        if (
+            anchor["dialogue_form_contract"]["dialogue_form"] == "clarification"
+            and sc["intended_action"] != "explain_schedule"
+        ):
+            sc["patient_semantics"] = "exact"
+            break
+    errors = validate_v2_anchor_manifest(manifest)
+    assert any("patient ambiguity" in error for error in errors)
+
+
+def test_validator_rejects_correction_without_replacement_contract() -> None:
+    manifest = build_v2_anchor_manifest()
+    for anchor in manifest["anchors"]:
+        if anchor["dialogue_form_contract"]["dialogue_form"] == "correction":
+            anchor["dialogue_form_contract"]["prior_value"] = None
+            break
+    errors = validate_v2_anchor_manifest(manifest)
+    assert any("explicit practitioner replacement" in error for error in errors)
 
 
 def test_validator_rejects_clarification_with_wrong_tool() -> None:
@@ -561,6 +635,13 @@ def test_validator_rejects_seed_hash_mismatch() -> None:
     )
 
 
+def test_validator_rejects_source_hash_mismatch() -> None:
+    manifest = build_v2_anchor_manifest()
+    manifest["anchors"][0]["source_scenario_hash"] = "sha256:" + "0" * 64
+    errors = validate_v2_anchor_manifest(manifest)
+    assert any("source scenario hash mismatch" in error for error in errors)
+
+
 def test_validator_rejects_authority_grant() -> None:
     manifest = build_v2_anchor_manifest()
     manifest["anchors"][0]["authority_grant"]["diary_write"] = True
@@ -592,19 +673,19 @@ def test_no_product_interpreter_or_scorer_import() -> None:
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):
             for alias in node.names:
-                imported_modules.add(alias.name.split(".")[0])
+                imported_modules.add(alias.name)
         elif isinstance(node, ast.ImportFrom) and node.module:
-            imported_modules.add(node.module.split(".")[0])
+            imported_modules.add(node.module)
 
-    prohibited = {
-        "app.interpreter",
-        "app.replay",
-        "app.scorer",
-        "interpreter",
-        "replay",
-        "scorer",
+    prohibited_fragments = {
+        "semantic_extraction",
+        "composed_corpus_evaluator",
+        "composed_evaluator",
+        "synthetic_noise_robustness",
     }
-    assert not imported_modules.intersection(prohibited), (
-        f"V2 module imports prohibited modules: "
-        f"{imported_modules & prohibited}"
-    )
+    violations = {
+        module
+        for module in imported_modules
+        if any(fragment in module for fragment in prohibited_fragments)
+    }
+    assert not violations, f"V2 module imports product evaluator code: {violations}"
