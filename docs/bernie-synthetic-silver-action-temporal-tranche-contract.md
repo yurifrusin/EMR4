@@ -2,7 +2,7 @@
 
 Date: 2026-07-17
 
-Status: `authorized_selection_frozen`
+Status: `accepted_partial_pass`
 
 Authority: Yuri's bounded ordinary-development diagnostic/remediation authorization
 
@@ -68,3 +68,13 @@ Protected V1-V10 artifacts remain inaccessible. Only ordinary development,
 the admitted synthetic Silver corpus, its accepted aggregate baseline, and
 new tranche artifacts may be used. The earlier metadata-only filename incident
 grants no access authority.
+
+## Accepted evidence
+
+The immutable pre-repair report hash is
+`sha256:1bf572c3906fe108cd81332953ae3333d033b6afc2f34827b2cdd0f1154e3822`.
+The final exact report hash is
+`sha256:6a4c89992e7a791164bda581b04ae2216a3c7e2661b4a9f29963b220d90b9db2`.
+Fresh Gemini independently reproduced the final tranche, the full 192-record
+Silver result, the focused tests, and the exact ordinary-development impact
+and returned `DECISION: pass` on candidate code head `13214dab`.

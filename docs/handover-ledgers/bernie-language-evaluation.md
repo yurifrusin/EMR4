@@ -268,6 +268,23 @@ a bounded action/temporal remediation diagnostic versus revising or expanding
 the synthetic distribution. One broad discovery command emitted protected
 filenames only; no protected content or label was accessed or used.
 
+Yuri authorized the bounded action/temporal tranche. Sol froze 24 candidates
+before repair; the pre-repair population was 0/24 complete. Eleven supported
+action and ten supported temporal assertions were accepted without allowing
+the interpreter to receive expected fields or invent duration/time values
+absent from dialogue. The final tranche is 2/24 complete, safety 48/48, zero
+variance, with report hash
+`sha256:6a4c89992e7a791164bda581b04ae2216a3c7e2661b4a9f29963b220d90b9db2`.
+Across all Silver, complete candidates improve from 2/192 to 11/192 while
+safety remains 384/384 and variance zero. Exact parent comparison changes 32
+authored resize scenarios and no LC4R10 reconciliation scenario. Fresh Gemini
+independently reproduced the exact reports and returned `DECISION: pass`.
+The tranche closes as an accepted `partial_pass`: the remaining 22 selected
+failures expose missing surfaced evidence or oracle, clarification-policy,
+entity-transition, and replay-contract incoherence and are not automatic
+parser targets. The next material choice is a bounded all-192 corpus/admission
+coherence audit with quarantine or regeneration of invalid rows.
+
 ## Next safe sequence
 
 1. Keep holdouts v1-v10 sealed; use only accepted aggregate evidence and
@@ -276,12 +293,15 @@ filenames only; no protected content or label was accessed or used.
    do not promote it to Gold or certification evidence.
 3. Preserve the accepted robustness baseline as diagnostic failure evidence;
    do not treat `baseline_complete` as a product pass.
-4. Pause for Yuri to choose between a small action/temporal development
-   diagnostic/remediation tranche and revising or expanding the synthetic
-   language distribution.
-5. Return any material parser or clarification-policy behavior choice to
-   Yuri's boundary before implementation.
-6. Keep T3.1-T3.4 blocked by default and T3.5/providers plus every product/write
+4. Preserve the accepted action/temporal `partial_pass`; do not turn its 22
+   residual candidates into automatic parser targets.
+5. Pause for Yuri to decide whether to authorize a bounded audit of all 192
+   candidates for surfaced semantic-evidence completeness and internal
+   oracle/policy coherence, followed by quarantine or regeneration of invalid
+   rows.
+6. Return any material parser, replay, scorer, admission, or clarification-
+   policy behavior choice to Yuri's boundary before implementation.
+7. Keep T3.1-T3.4 blocked by default and T3.5/providers plus every product/write
    surface deferred.
 
 ## Primary evidence
@@ -330,6 +350,10 @@ filenames only; no protected content or label was accessed or used.
 - `docs/bernie-synthetic-silver-robustness-baseline-contract.md`
 - `docs/bernie-synthetic-silver-robustness-baseline-closeout.md`
 - `orchestration/agent_inbox/codex/synthetic-silver-robustness-baseline-sol-acceptance.md`
+- `docs/bernie-synthetic-silver-action-temporal-tranche-contract.md`
+- `docs/bernie-synthetic-silver-action-temporal-classification.md`
+- `docs/bernie-synthetic-silver-action-temporal-tranche-closeout.md`
+- `orchestration/agent_inbox/codex/synthetic-silver-action-temporal-sol-acceptance.md`
 
 Protected holdouts v1-v10 are sealed. LC4V10 validly passed its sole attempt
 at 576/576 complete with empty evidence and product failure maps. Do not
