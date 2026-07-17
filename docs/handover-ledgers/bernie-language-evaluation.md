@@ -253,17 +253,35 @@ reject. No external corpus, historical diary, or protected holdout was used.
 The result makes no real-world, Gold, certification, provider/runtime, or
 write-authority claim.
 
+Yuri authorized the next development-only robustness baseline. Sol bound the
+accepted corpus and current deterministic interpreter at source `4ac0a901`,
+adapted each candidate from its named ordinary-development oracle, and ran two
+interpretation/replay/scoring observations per candidate. Exact report hash
+`sha256:18501cf5c8d28c0e660a9f5c7b15f7690622e44c90b248d51301c6ece03973c5`
+is complete over 192 candidates and 384 observations with zero variance and
+safety 384/384. Only the two seed-001 one-shot create variants pass every
+dimension. Primary failures are action extraction 114,
+temporal/normalization 68, entity semantics 6, and replay-only 2. A fresh
+Gemini project independently reproduced the exact baseline and returned
+`DECISION: pass`. The result authorizes no repair; the next material choice is
+a bounded action/temporal remediation diagnostic versus revising or expanding
+the synthetic distribution. One broad discovery command emitted protected
+filenames only; no protected content or label was accessed or used.
+
 ## Next safe sequence
 
 1. Keep holdouts v1-v10 sealed; use only accepted aggregate evidence and
    closeouts for planning.
 2. Preserve the accepted 192-record synthetic corpus as development Silver;
    do not promote it to Gold or certification evidence.
-3. Pause after the completed pilot. A separately authorized development sprint
-   may measure current interpreter robustness on the admitted set.
-4. Return any material parser or clarification-policy behavior choice to
+3. Preserve the accepted robustness baseline as diagnostic failure evidence;
+   do not treat `baseline_complete` as a product pass.
+4. Pause for Yuri to choose between a small action/temporal development
+   diagnostic/remediation tranche and revising or expanding the synthetic
+   language distribution.
+5. Return any material parser or clarification-policy behavior choice to
    Yuri's boundary before implementation.
-5. Keep T3.1-T3.4 blocked by default and T3.5/providers plus every product/write
+6. Keep T3.1-T3.4 blocked by default and T3.5/providers plus every product/write
    surface deferred.
 
 ## Primary evidence
@@ -309,6 +327,9 @@ write-authority claim.
 - `docs/bernie-synthetic-receptionist-silver-contract.md`
 - `docs/bernie-synthetic-receptionist-silver-closeout.md`
 - `orchestration/agent_inbox/codex/synthetic-receptionist-silver-sol-acceptance.md`
+- `docs/bernie-synthetic-silver-robustness-baseline-contract.md`
+- `docs/bernie-synthetic-silver-robustness-baseline-closeout.md`
+- `orchestration/agent_inbox/codex/synthetic-silver-robustness-baseline-sol-acceptance.md`
 
 Protected holdouts v1-v10 are sealed. LC4V10 validly passed its sole attempt
 at 576/576 complete with empty evidence and product failure maps. Do not

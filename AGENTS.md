@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V10 fresh certification passed; the Secure SDLC transition remains complete. The Kaggle appointment-call lane is closed as provenance-blocked and product-misaligned. The multi-model synthetic receptionist-to-Bernie corpus pilot is complete with 192 accepted development-Silver candidates |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`, `docs/bernie-lc4v10-fresh-certification-closeout.md`, `orchestration/agent_inbox/codex/security-hardening-final-purple-acceptance.md`, `docs/security/secure-sdlc-red-blue-diary-hardening-closeout-2026-07-17.md`, `docs/bernie-post-certification-transition-review.md`, `docs/bernie-dialogue-corpus-source-assessment.md`, `orchestration/agent_inbox/codex/appointment-call-quarantine-pilot-sol-acceptance.md`, `docs/bernie-appointment-call-quarantine-pilot-closeout.md`, `docs/bernie-synthetic-receptionist-silver-contract.md`, `docs/bernie-synthetic-receptionist-silver-closeout.md`, and `orchestration/agent_inbox/codex/synthetic-receptionist-silver-sol-acceptance.md` |
-| Current result | V10 remains a valid bounded `certification_pass`: complete and every dimension 576/576. Secure SDLC and GitHub controls remain complete. No external corpus was downloaded, opened, transmitted, or admitted. The final synthetic corpus hash `sha256:ae14c613ecdd87aac39201d44a8024f3b9216f871c7d5859c4249e7f4026c665` passed fresh DeepSeek and Gemini all-record reviews; Sol accepted 192, quarantined zero, and rejected zero as ordinary development Silver only |
-| Next implementation | No V11 is needed or authorized. Pause after the completed synthetic corpus pilot. A future separately authorized development sprint may evaluate current interpreter robustness on the admitted Silver set; any material parser/policy choice returns to Yuri. No Gold promotion, certification claim, runtime/provider activation, or write authority is authorized. Preserve v1-v10 and all T3/provider/product/write boundaries |
+| Active product track | LC4V10 fresh certification passed; Secure SDLC remains complete. The external appointment-call lane is closed. The 192-record synthetic receptionist-to-Bernie Silver corpus and its current-interpreter robustness baseline are complete |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`, `docs/bernie-lc4v10-fresh-certification-closeout.md`, `orchestration/agent_inbox/codex/security-hardening-final-purple-acceptance.md`, `docs/security/secure-sdlc-red-blue-diary-hardening-closeout-2026-07-17.md`, `docs/bernie-post-certification-transition-review.md`, `docs/bernie-dialogue-corpus-source-assessment.md`, `orchestration/agent_inbox/codex/appointment-call-quarantine-pilot-sol-acceptance.md`, `docs/bernie-appointment-call-quarantine-pilot-closeout.md`, `docs/bernie-synthetic-receptionist-silver-contract.md`, `docs/bernie-synthetic-receptionist-silver-closeout.md`, `orchestration/agent_inbox/codex/synthetic-receptionist-silver-sol-acceptance.md`, `docs/bernie-synthetic-silver-robustness-baseline-contract.md`, `docs/bernie-synthetic-silver-robustness-baseline-closeout.md`, and `orchestration/agent_inbox/codex/synthetic-silver-robustness-baseline-sol-acceptance.md` |
+| Current result | V10 remains a valid bounded `certification_pass`: complete and every dimension 576/576. The provider-free synthetic robustness baseline is valid and complete over 192 candidates and 384 observations with zero variance and safety 384/384, but only 2/192 candidates pass every product dimension. Primary failures are action extraction 114, temporal/normalization 68, entity semantics 6, and replay-only 2. Fresh Gemini independently passed exact report hash `sha256:18501cf5c8d28c0e660a9f5c7b15f7690622e44c90b248d51301c6ece03973c5` |
+| Next implementation | No V11 is needed or authorized. Pause for Yuri's material choice: authorize a small ordinary-development diagnostic/remediation tranche beginning with action extraction and temporal operators, or revise/expand the synthetic language distribution first. No automatic parser/policy repair, Gold promotion, certification claim, runtime/provider activation, or write authority is authorized. Preserve v1-v10 and all T3/provider/product/write boundaries |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 
@@ -161,6 +161,18 @@ each accepted all 192 records on final canonical hash
 `sha256:ae14c613ecdd87aac39201d44a8024f3b9216f871c7d5859c4249e7f4026c665`;
 Sol admitted the same exact set as development Silver. It is not real-world,
 Gold, protected-holdout, certification, provider/runtime, or write evidence.
+
+The authorized robustness baseline then ran the current interpreter, replay,
+and scorer twice over all 192 admitted candidates. Exact report hash
+`sha256:18501cf5c8d28c0e660a9f5c7b15f7690622e44c90b248d51301c6ece03973c5`
+is `baseline_complete`: 384/384 safety, zero variance, but only 2/192 complete
+product passes. Fresh Gemini independently reproduced the adapter, no-oracle-
+leakage boundary, counts, and hashes and returned `DECISION: pass`. The primary
+candidate failures are action extraction 114, temporal/normalization 68,
+entity semantics 6, and replay-only 2. No product repair is authorized by the
+diagnostic. A broad discovery command emitted protected-path filenames only;
+no protected content or label was opened or used, and the incident is
+contained as metadata-only.
 
 ### Earlier LC4V2-V3 sequence
 
