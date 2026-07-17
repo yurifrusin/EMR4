@@ -8,7 +8,6 @@ from copy import deepcopy
 import json
 from pathlib import Path
 
-from app.services.bernie.synthetic_noise_v2 import build_v2_anchor_manifest
 from app.services.bernie.synthetic_noise_v2_candidates import (
     AUTHORITY_ALL_FALSE,
     CANDIDATE_COUNT_V2,

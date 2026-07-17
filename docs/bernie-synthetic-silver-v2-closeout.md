@@ -76,6 +76,10 @@ PROTECTED_ACCESS: false
 Its durable report is
 `orchestration/agent_inbox/antigravity/synthetic-silver-v2-final-review.md`.
 
+During protected-PR integration, GitHub CodeQL identified two unused imports.
+Sol removed only those imports; no behavior, fixture, evidence binding, or
+canonical hash changed.
+
 ## Disposition
 
 Preserve v1 as historical partial/quarantined Silver and v2 as the current
