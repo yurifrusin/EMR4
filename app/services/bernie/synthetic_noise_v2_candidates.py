@@ -8,7 +8,6 @@ product interpreter, replay, and scorer are deliberately not imported.
 from __future__ import annotations
 
 from collections import Counter
-from copy import deepcopy
 from datetime import date
 import hashlib
 import json
