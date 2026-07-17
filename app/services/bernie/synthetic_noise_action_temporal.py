@@ -32,6 +32,9 @@ SELECTION_PATH = Path(
 BASELINE_REPORT_PATH = Path(
     "docs/bernie-synthetic-silver-action-temporal-tranche-baseline.json"
 )
+FINAL_REPORT_PATH = Path(
+    "docs/bernie-synthetic-silver-action-temporal-tranche-final.json"
+)
 ROBUSTNESS_REPORT_PATH = Path(
     "docs/bernie-synthetic-silver-robustness-baseline-report.json"
 )
@@ -247,6 +250,7 @@ def write_tranche_report(path: Path = BASELINE_REPORT_PATH) -> dict[str, Any]:
 __all__ = [
     "BASELINE_REPORT_PATH",
     "EXPECTED_SELECTED_CANDIDATES",
+    "FINAL_REPORT_PATH",
     "SELECTION_PATH",
     "build_tranche_report",
     "write_tranche_report",

@@ -5,9 +5,11 @@ import json
 from app.services.bernie.synthetic_noise_action_temporal import (
     BASELINE_REPORT_PATH,
     EXPECTED_SELECTED_CANDIDATES,
+    FINAL_REPORT_PATH,
     SELECTION_PATH,
     build_tranche_report,
 )
+from app.services.bernie.synthetic_noise_robustness import _sha256
 
 
 def test_action_temporal_selection_is_exact_and_closed() -> None:
@@ -24,9 +26,13 @@ def test_action_temporal_selection_is_exact_and_closed() -> None:
     assert not any(selection["boundaries"].values())
 
 
-def test_action_temporal_pre_repair_report_is_complete_and_deterministic() -> None:
-    report = build_tranche_report()
-    assert report["decision"] == "tranche_evaluation_complete"
+def test_action_temporal_pre_repair_report_is_immutable() -> None:
+    report = json.loads(BASELINE_REPORT_PATH.read_text(encoding="utf-8"))
+    without_hash = {key: value for key, value in report.items() if key != "report_hash"}
+    assert report["report_hash"] == (
+        "sha256:1bf572c3906fe108cd81332953ae3333d033b6afc2f34827b2cdd0f1154e3822"
+    )
+    assert _sha256(without_hash) == report["report_hash"]
     assert report["population"] == {
         "candidates": 24,
         "repeats_per_candidate": 2,
@@ -50,9 +56,30 @@ def test_action_temporal_pre_repair_report_is_complete_and_deterministic() -> No
     }
 
 
-def test_action_temporal_report_regenerates_exactly_without_utterances() -> None:
+def test_action_temporal_post_repair_report_is_complete_and_deterministic() -> None:
     report = build_tranche_report()
-    committed = json.loads(BASELINE_REPORT_PATH.read_text(encoding="utf-8"))
+    assert report["decision"] == "tranche_evaluation_complete"
+    assert report["population"] == {
+        "candidates": 24,
+        "repeats_per_candidate": 2,
+        "observations": 48,
+        "complete_candidates": 2,
+        "failed_candidates": 22,
+    }
+    assert report["variance"] == {
+        "variant_candidate_count": 0,
+        "variant_candidate_ids": [],
+    }
+    assert report["dimension_counts"]["safety"] == {
+        "passed": 48,
+        "failed": 0,
+        "total": 48,
+    }
+
+
+def test_action_temporal_final_report_regenerates_without_utterances() -> None:
+    report = build_tranche_report()
+    committed = json.loads(FINAL_REPORT_PATH.read_text(encoding="utf-8"))
     assert committed == report
 
     def keys(value: object) -> set[str]:

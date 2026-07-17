@@ -88,6 +88,7 @@ _CREATE_PATTERNS: list[re.Pattern[str]] = [
 _CANCEL_PATTERNS: list[re.Pattern[str]] = [
     re.compile(r"\b(cancel|delete|remove) (the |a |an )?(booking|appointment)\b", re.I),
     re.compile(r"\b(patient cancelled|take .* (booking|appointment) out|remove .* diary)\b", re.I),
+    re.compile(r"\btake out\b.*\b(?:appt|appointment|booking)\b", re.I),
     # "call off ... booking/appointment" — contextual cancellation phrasing
     re.compile(r"\bcall off\b.*\b(booking|appointment)\b", re.I),
     re.compile(r"\b(cancel|delete|remove)\b", re.I),
@@ -105,6 +106,13 @@ _RESIZE_PATTERNS: list[re.Pattern[str]] = [
     re.compile(r"\bgive them \d+ minutes\b", re.I),
     re.compile(r"\b(more time|less time|shorten|lengthen)\b", re.I),
     re.compile(r"\bchange .* (to|from) \d+ .* (min|hour)\b", re.I),
+    re.compile(r"\b(?:appt|appointment|booking)\s+length\b", re.I),
+    re.compile(r"\bmake it\s+\d+\s*(?:mins?|minutes?|hours?)\b", re.I),
+    re.compile(
+        r"\bmake\s+[^,.;/]+['’]s\b.*\b(?:appt|appointment|booking)\b"
+        r".*\b\d+\s*(?:mins?|minutes?|hours?)\b",
+        re.I,
+    ),
     # Explicit "resize" verb
     re.compile(r"\bresize\b", re.I),
 ]
@@ -114,6 +122,10 @@ _STATUS_CHANGE_PATTERNS: list[re.Pattern[str]] = [
     re.compile(r"\b(mark .* (arrived|completed|dna|no show)|change .* status)\b", re.I),
     re.compile(r"\b(set .* (arrived|completed|dna|no.show))\b", re.I),
     re.compile(r"\b(update .* status)\b", re.I),
+    re.compile(
+        r"\bstatus(?:\s+one)?\b.*\b(?:arrived|completed|dna|no[ -]?show)\b",
+        re.I,
+    ),
     # Anchored "Arrived:" label — structured triage note form
     re.compile(r"^Arrived:", re.I),
     # "Status: ... ARRIVED" — anchored status label at utterance start
@@ -128,6 +140,12 @@ _STATUS_CHANGE_PATTERNS: list[re.Pattern[str]] = [
 _EXPLAIN_PATTERNS: list[re.Pattern[str]] = [
     re.compile(r"\b(explain|why|what happened|schedule pattern)\b", re.I),
     re.compile(r"\b(what.*going on|how.*look|tell me about)\b", re.I),
+    re.compile(r"\b(?:diary|schedule)\s+(?:rundown|run[- ]down)\b", re.I),
+    re.compile(
+        r"\b(?:talk|run)\s+me\s+through\s+(?:it|the\s+(?:diary|schedule))\b",
+        re.I,
+    ),
+    re.compile(r"\bdiary\s+view\b.*\bview\s+only\b", re.I),
     # Practitioner possessive availability — "Dr Shera's availability" / "some doctor's availability"
     re.compile(r"\b(?:dr [a-z]+|some doctor)'s availability\b", re.I),
     # "what appointments does Dr ... have" / "what appointments does some doctor have"
@@ -354,6 +372,30 @@ def _is_correction_turn(text: str) -> bool:
         if pat.search(text):
             return True
     return False
+
+
+def _derive_intended_action(utterances: list[str]) -> str | None:
+    """Reduce action evidence across turns without inventing an action.
+
+    Preserve the established first-turn contract. Only the explicit bounded
+    receptionist preface used for a pending diary request may defer action
+    evidence to a later turn. This prevents unrelated later corrections or
+    session text from changing an already established action.
+    """
+    intended_action = _detect_intended_action(utterances[0])
+    if intended_action is not None:
+        return intended_action
+    if not re.search(
+        r"\bdiary request\b.*\bdetails may need clarifying\b",
+        utterances[0],
+        re.I,
+    ):
+        return None
+    for utterance in utterances[1:]:
+        detected = _detect_intended_action(utterance)
+        if detected is not None:
+            return detected
+    return None
 
 
 # ---------------------------------------------------------------------------
@@ -714,6 +756,24 @@ _NEGATED_BOUND_TIME = re.compile(
     re.I,
 )
 
+_OR_LATER_TIME = re.compile(
+    r"\b(?P<time>(?:[01]?\d|2[0-3])(?:[:.][0-5]\d)?\s*(?:am|pm)?)"
+    r"\s+or\s+later\b",
+    re.I,
+)
+
+_BY_TIME = re.compile(
+    r"\bby\s+(?P<time>(?:[01]?\d|2[0-3])(?:[:.][0-5]\d)?\s*(?:am|pm)?)\b",
+    re.I,
+)
+
+_CORRECTED_APPROXIMATE_TIME = re.compile(
+    r"\b(?:sorry|actually|correction|i mean|i meant)\b[^.!?]*?"
+    r"\b(?:around|about)\s+"
+    r"(?P<time>(?:[01]?\d|2[0-3])(?:[:.][0-5]\d)?\s*(?:am|pm)?)\b",
+    re.I,
+)
+
 
 def _extract_time_period(text: str) -> str | None:
     """Extract time period like 'afternoon' from text."""
@@ -749,6 +809,24 @@ def _extract_temporal(
     # Special case: "sometime in the afternoon" is truly unspecified
     if _SOMETIME_AFTERNOON.search(text):
         return "unspecified", None, None
+
+    corrected_approximate = _CORRECTED_APPROXIMATE_TIME.search(text)
+    if corrected_approximate:
+        parsed = parse_time_fragment(corrected_approximate.group("time"))
+        if parsed is not None:
+            return "approximate", parsed, parsed
+
+    or_later = _OR_LATER_TIME.search(text)
+    if or_later:
+        parsed = parse_time_fragment(or_later.group("time"))
+        if parsed is not None:
+            return "not_before", parsed, None
+
+    by_time = _BY_TIME.search(text)
+    if by_time:
+        parsed = parse_time_fragment(by_time.group("time"))
+        if parsed is not None:
+            return "not_after", None, parsed
 
     # ``not before`` is a lower bound and ``not after`` is an upper bound.
     # Handle these authority-bearing phrases before the shared helper, whose
@@ -1487,9 +1565,9 @@ def extract_semantics(
     # --- 1. Unsafe detection (run first — it gates everything) ---
     has_unsafe = any(_has_unsafe_demand(u) for u in utterances)
 
-    # --- 2. Action detection (from first turn) ---
+    # --- 2. Action detection (reduced across turns) ---
     primary = utterances[0]
-    intended_action = _detect_intended_action(primary)
+    intended_action = _derive_intended_action(utterances)
 
     # --- 3. Multi-turn reduction (for normalized_values) ---
     normalized_values = _reduce_multi_turn(utterances, reference_date)

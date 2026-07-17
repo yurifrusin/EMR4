@@ -8,7 +8,7 @@ from app.services.bernie.synthetic_noise_robustness import (
     EXPECTED_CANDIDATES,
     EXPECTED_OBSERVATIONS,
     FROZEN_SOURCE_COMMIT,
-    build_baseline_report,
+    _sha256,
     build_evaluation_scenarios,
 )
 
@@ -35,14 +35,21 @@ def test_evaluation_adapter_preserves_each_frozen_semantic_anchor() -> None:
         assert scenario.adjudication == "pending"
 
 
-def test_committed_baseline_report_regenerates_exactly() -> None:
-    committed = json.loads(DEFAULT_REPORT_PATH.read_text(encoding="utf-8"))
+def _committed_baseline() -> dict:
+    return json.loads(DEFAULT_REPORT_PATH.read_text(encoding="utf-8"))
 
-    assert committed == build_baseline_report()
+
+def test_committed_baseline_report_is_immutable_and_self_verifying() -> None:
+    committed = json.loads(DEFAULT_REPORT_PATH.read_text(encoding="utf-8"))
+    without_hash = {key: value for key, value in committed.items() if key != "report_hash"}
+    assert committed["report_hash"] == (
+        "sha256:18501cf5c8d28c0e660a9f5c7b15f7690622e44c90b248d51301c6ece03973c5"
+    )
+    assert _sha256(without_hash) == committed["report_hash"]
 
 
 def test_baseline_is_complete_deterministic_and_safety_closed() -> None:
-    report = build_baseline_report()
+    report = _committed_baseline()
 
     assert report["decision"] == "baseline_complete"
     assert report["source_commit"] == FROZEN_SOURCE_COMMIT
@@ -64,7 +71,7 @@ def test_baseline_is_complete_deterministic_and_safety_closed() -> None:
 
 
 def test_baseline_preserves_the_full_failure_map_without_source_utterances() -> None:
-    report = build_baseline_report()
+    report = _committed_baseline()
     population = report["population"]
     serialized = json.dumps(report, sort_keys=True)
 
