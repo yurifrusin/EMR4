@@ -18,6 +18,10 @@ only with development evidence, and preserve consumed certification evidence.
 That process is now captured in
 `docs/bernie-fresh-certification-protocol.md`.
 
+The transition review now also includes a metadata-only assessment of public
+dialogue sources in `docs/bernie-dialogue-corpus-source-assessment.md`. No
+external corpus was downloaded or admitted to development evidence.
+
 ## What the sequence established
 
 - Deterministic semantics can cover varied receptionist phrasing without
@@ -50,7 +54,9 @@ sequence is:
 3. decide whether to enforce protected-master and secret push-protection
    controls in GitHub;
 4. execute the highest-priority Secure SDLC structural tranche; and
-5. only then plan the next product track, with a fresh threat-model delta and
+5. decide whether to authorize the recommended local-only quarantine pilot for
+   the appointment-call corpus; and
+6. only then plan the next product track, with a fresh threat-model delta and
    the existing provider/write gates still closed.
 
 ## Deliverables
@@ -59,4 +65,6 @@ sequence is:
 - dependency/security maintenance record;
 - Secure SDLC lifecycle review;
 - evidence-bound security-hardening proposal for the delivery control plane;
+- risk-triggered Ariadne red/blue/purple review protocol and executable gate;
+- public dialogue-source assessment and quarantine contract; and
 - refreshed live baton after verification and GitHub closeout.
