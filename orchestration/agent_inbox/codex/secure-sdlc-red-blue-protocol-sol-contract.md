@@ -90,4 +90,3 @@ within 30 days and disposition within 90 days or documented upstream blocking.
 - fresh blue and red artifacts pass, followed by Sol purple synthesis;
 - secret push protection and `master` protection read back exactly;
 - Git refs align and the worktree is clean after protected integration.
-
