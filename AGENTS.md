@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V10 fresh certification passed; certification transition and Secure SDLC review are complete |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`, `docs/bernie-lc4v10-fresh-certification-closeout.md`, `docs/bernie-post-certification-transition-review.md`, and `docs/security/codeql-high-validation-2026-07-17.md` |
-| Current result | V10 remains a valid bounded `certification_pass`: complete and every dimension 576/576. Security maintenance is green; all ten CodeQL candidates classified high were instance-preservingly validated as suppressed/not-applicable, with none surviving as a reportable high finding |
-| Next implementation | No V11 is needed or authorized. Pause for Yuri's choice on the recommended Diary defence-in-depth remediation and on GitHub master protection, secret push protection, required checks, and response SLAs. Preserve v1-v10 and all T3/provider/product/write boundaries |
+| Active product track | LC4V10 fresh certification passed; the post-certification Secure SDLC transition is complete and public dialogue-source triage is at its quarantine decision boundary |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`, `docs/bernie-lc4v10-fresh-certification-closeout.md`, `orchestration/agent_inbox/codex/security-hardening-final-purple-acceptance.md`, `docs/security/secure-sdlc-red-blue-diary-hardening-closeout-2026-07-17.md`, `docs/bernie-post-certification-transition-review.md`, and `docs/bernie-dialogue-corpus-source-assessment.md` |
+| Current result | V10 remains a valid bounded `certification_pass`: complete and every dimension 576/576. Ariadne Secure SDLC red/blue/purple enforcement, Diary defence-in-depth, secret push protection, and protected `master` are complete; the representative PR passed aggregate and language CodeQL, Python/Node security, and 139-case Diary smoke |
+| Next implementation | No V11 is needed or authorized. Pause for Yuri's decision whether to authorize the recommended small, local-only, non-provider quarantine pilot for the appointment-call corpus, or select another next product track. Preserve v1-v10 and all T3/provider/product/write boundaries |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 
@@ -135,13 +135,18 @@ Git-identity baseline, and documents the dev-only `uuid` alert as blocked by
 the latest supported TeamsFX dependency graph.
 
 GitHub has CodeQL, Dependabot, Python/Node SCA, Bandit, leakage lint, secret
-scanning, and private vulnerability reporting. Point-in-time review also found
-unprotected `master`, disabled secret push protection, and ten CodeQL
-candidates classified high. Bounded source/control/sink validation plus seven
-backend negative controls and two real CLI reproductions found none reportable
-at high severity; alerts remain open pending Yuri's remediation/disposition
-choice. See `docs/security/codeql-high-validation-2026-07-17.md` and
-`docs/security/secure-sdlc-hardening/hardening.md`.
+scanning, push protection, private vulnerability reporting, and protected
+`master`. Four stable security contexts are strict and enforced for admins;
+normal integration is PR-only. The ten historical high-classified CodeQL
+candidates were individually validated, and the later representative hardening
+PR cleared the aggregate alert gate without dismissal. Ariadne now enforces
+risk-triggered red/blue/purple evidence. See the final security closeout and
+`docs/security/codeql-high-validation-2026-07-17.md`.
+
+Metadata-only dialogue-source triage found the appointment-call Kaggle corpus
+promising but provenance/privacy-uncertain; no content was downloaded. A small
+local quarantine pilot is the current Yuri decision boundary. MedInstruct is
+not Bernie receptionist evidence.
 
 ### Earlier LC4V2-V3 sequence
 
@@ -259,6 +264,8 @@ progress, or an unexpected material fork. Pause before:
 - live-provider calls, T3.5 activation, or sensitive-data transmission;
 - historical-trove scope expansion beyond an approved payload;
 - material licence or cost acceptance;
+- download or inspection of the provenance-uncertain appointment-call corpus,
+  or admission of any external dialogue corpus into development evidence;
 - API/write-authority, database migration, deployment, production, or release
   changes not already explicitly authorized; or
 - an action requiring new external authority or affecting people/systems
@@ -309,7 +316,8 @@ the contract; do not misattribute it to LC work.
 - Preserve unrelated user changes in a dirty tree.
 - Workers commit only to disposable/task branches and do not push protected
   refs.
-- Sol reviews and integrates, then advances `master` and `handoff/current`.
+- Sol reviews and integrates through a check-gated pull request, then advances
+  `master` and `handoff/current`.
 - Fetch and verify origin immediately before push. Never force protected refs.
 - GitHub Pages deploys only from canonical `master`; a stale worker deployment
   can overwrite the live artifact.

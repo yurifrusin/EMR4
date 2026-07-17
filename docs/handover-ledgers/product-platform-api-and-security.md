@@ -80,3 +80,19 @@ receives UUID/fixed-mock IDs; and two logging alerts print asserted aggregates.
 The alerts were not dismissed. Diary defence-in-depth remediation and GitHub
 protection settings are now the user decision boundary. See
 `docs/security/codeql-high-validation-2026-07-17.md`.
+
+Yuri authorized both decisions. The resulting material cross-layer tranche
+hardwired risk-triggered red/blue/purple review into Ariadne, structurally
+separated local mock Diary loading from token-gated live loading, allowlisted
+confirmation destinations, removed insecure random fallback and selector
+construction, and passed all representative PR checks without dismissing a
+CodeQL result. GitHub now enforces secret push protection and protected
+`master` with strict Python/JavaScript CodeQL plus Python/Node security checks,
+administrators included. See
+`docs/security/secure-sdlc-red-blue-diary-hardening-closeout-2026-07-17.md`.
+
+The transition review also completed metadata-only corpus triage. The public
+appointment-call dataset is promising but requires a separately authorized
+local quarantine/provenance/PII pilot before download. MedInstruct is synthetic
+medical instruction data, not receptionist evidence. See
+`docs/bernie-dialogue-corpus-source-assessment.md`.
