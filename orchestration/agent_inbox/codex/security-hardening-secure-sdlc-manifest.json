@@ -7,7 +7,7 @@
     "owner_resource_id": "openai-primary-orchestrator",
     "rationale": "Changes security controls, confirmation handling, external UI behaviour, CI admission, and repository protection."
   },
-  "candidate_head": "4efe9ff3363c3f563a03a1f5bd0978998ca55d07",
+  "candidate_head": "a248f659545975ada9662e08f89962c87952e77f",
   "declared_tier": "dual_review",
   "triggers": [
     "confirmation_workflow",
@@ -50,11 +50,10 @@
     "red": {
       "required": true,
       "resource_id": "antigravity-gemini-flash-3-5-worker",
-      "packet_path": "orchestration/agent_inbox/codex/security-hardening-final-red-packet.md",
-      "candidate_head": "4efe9ff3363c3f563a03a1f5bd0978998ca55d07",
-      "artifact_path": "orchestration/agent_inbox/antigravity/security-hardening-final-red-review.md",
-      "artifact_sha256": "d6fbb51a74a83af0abb59ce885b9303612edb2a0a39133492a14b5d2bb19506e",
-      "decision": "pass",
+      "packet_path": "orchestration/agent_inbox/codex/security-hardening-codeql-final-red-packet.md",
+      "candidate_head": "a248f659545975ada9662e08f89962c87952e77f",
+      "artifact_path": null,
+      "decision": "pending",
       "fresh_context": true,
       "candidate_only": true,
       "prior_review_artifacts_excluded": true
@@ -62,10 +61,9 @@
     "purple": {
       "required": true,
       "resource_id": "openai-primary-orchestrator",
-      "candidate_head": "4efe9ff3363c3f563a03a1f5bd0978998ca55d07",
-      "artifact_path": "orchestration/agent_inbox/codex/security-hardening-purple-acceptance.md",
-      "artifact_sha256": "f0ebec57e64388ea74d17a21e5ecd03749310717fc801a6c25bd4232ea0211d2",
-      "decision": "pass"
+      "candidate_head": "a248f659545975ada9662e08f89962c87952e77f",
+      "artifact_path": null,
+      "decision": "pending"
     }
   },
   "superseded_reviews": [
@@ -75,7 +73,27 @@
       "artifact_path": "orchestration/agent_inbox/antigravity/security-hardening-red-review.md",
       "artifact_sha256": "e0c4ae8608311916bf1bb3f7f23c26bd0667962984e9e86e805ea735cb1bce48",
       "decision": "revision_required"
+    },
+    {
+      "role": "red",
+      "candidate_head": "4efe9ff3363c3f563a03a1f5bd0978998ca55d07",
+      "artifact_path": "orchestration/agent_inbox/antigravity/security-hardening-final-red-review.md",
+      "artifact_sha256": "d6fbb51a74a83af0abb59ce885b9303612edb2a0a39133492a14b5d2bb19506e",
+      "decision": "pass"
+    },
+    {
+      "role": "purple",
+      "candidate_head": "4efe9ff3363c3f563a03a1f5bd0978998ca55d07",
+      "artifact_path": "orchestration/agent_inbox/codex/security-hardening-purple-acceptance.md",
+      "artifact_sha256": "f0ebec57e64388ea74d17a21e5ecd03749310717fc801a6c25bd4232ea0211d2",
+      "decision": "pass"
     }
   ],
+  "post_review_recovery": {
+    "owner_resource_id": "openai-primary-orchestrator",
+    "artifact_path": "orchestration/agent_inbox/codex/security-hardening-codeql-recovery.md",
+    "artifact_sha256": "1bd1d31b5867d071cddcbcd2c5115f4dfe2405e6d8219439445449c367847f0d",
+    "trigger": "representative_pr_codeql_high_findings"
+  },
   "unresolved_findings": []
 }
