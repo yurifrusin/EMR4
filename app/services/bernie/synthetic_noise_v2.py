@@ -13,16 +13,15 @@ into an anchor.
 
 from __future__ import annotations
 
+from copy import deepcopy
 import hashlib
 import json
 from pathlib import Path
 from typing import Any
 
 from app.services.bernie.corpus_tier import compute_scenario_hash
-from app.services.bernie.scale_corpus import (
-    DevelopmentOnlyLoader,
-    ReceptionScenarioSpec,
-)
+from app.services.bernie.scale_corpus import DevelopmentOnlyLoader
+from app.services.bernie.scenario_spec import ReceptionScenarioSpec
 
 # ---------------------------------------------------------------------------
 # V2 schema and count constants
@@ -59,24 +58,29 @@ FORMS_V2: tuple[str, ...] = (
     "session_restart",
 )
 
-# Map v2 form names to the v1 scenario dialogue_form literal for searching
-# the existing development corpus.
-_FORM_V1_MAP: dict[str, str] = {
-    "one_shot": "one_shot",
-    "clarification": "clarification",
-    "correction": "correction",
-    "reversal": "reversal",
-    "ellipsis": "ellipsis",
-    "anaphora": "anaphora",
-    "repeated_request": "repeated",
-    "session_restart": "session_restart",
-}
-
 _AUTHORITY_ALL_FALSE: dict[str, bool] = {
     "provider_write": False,
     "diary_write": False,
     "confirmation": False,
     "override_authority": False,
+}
+
+_ACTION_OUTCOMES: dict[str, str] = {
+    "create": "appointment_created",
+    "move": "appointment_moved",
+    "resize": "appointment_resized",
+    "cancel": "appointment_cancelled",
+    "status_change": "appointment_status_changed",
+    "explain_schedule": "schedule_explained",
+}
+
+_ACTION_TOOLS: dict[str, list[str]] = {
+    "create": ["search_patients", "find_slots", "create_booking"],
+    "move": ["search_patients", "update_appointment"],
+    "resize": ["search_patients", "update_appointment"],
+    "cancel": ["search_patients", "update_appointment"],
+    "status_change": ["search_patients", "change_appointment_status"],
+    "explain_schedule": ["search_patients", "find_slots"],
 }
 
 
@@ -108,147 +112,67 @@ def _sha256(value: Any) -> str:
 def _select_anchor_sources(
     corpus: Any,
 ) -> dict[tuple[str, str], list[ReceptionScenarioSpec]]:
-    """Select exactly 2 source scenarios per (action, form) cell.
+    """Select coherent provenance bases independently of their dialogue form.
 
-    Returns a dict keyed by (action, form_v2) with a list of 2
-    ReceptionScenarioSpec sources, sorted deterministically by scenario_id.
+    Source dialogue is never copied. Each base must already have exact entity
+    semantics and a coherent successful action-specific policy/replay shape.
+    V2 then freezes its own dialogue-form meaning over that base. A small pool
+    may be reused deterministically; seed identity and form contracts remain
+    unique.
     """
-    all_variants = corpus.all_variants()
 
-    # Index variants by (v1_action, v1_dialogue_form)
-    buckets: dict[tuple[str, str], list[ReceptionScenarioSpec]] = {}
-    for v in all_variants:
-        key = (v.intended_action, v.dialogue_form)
-        buckets.setdefault(key, []).append(v)
+    pools: dict[str, list[ReceptionScenarioSpec]] = {}
+    for action in ACTIONS_V2:
+        eligible = sorted(
+            (
+                scenario
+                for scenario in corpus.all_variants()
+                if _source_is_eligible(scenario, action)
+            ),
+            key=lambda scenario: scenario.scenario_id,
+        )
+        if not eligible:
+            raise RuntimeError(f"No coherent development source for {action}")
+        pools[action] = eligible
 
     result: dict[tuple[str, str], list[ReceptionScenarioSpec]] = {}
     for action in ACTIONS_V2:
-        for form_v2 in FORMS_V2:
-            form_v1 = _FORM_V1_MAP[form_v2]
-            candidates = sorted(
-                buckets.get((action, form_v1), []),
-                key=lambda s: s.scenario_id,
-            )
-            if len(candidates) < 2:
-                raise RuntimeError(
-                    f"Not enough source scenarios for ({action}, {form_v2}): "
-                    f"found {len(candidates)}, need 2"
-                )
-            result[(action, form_v2)] = candidates[:2]
-
+        pool = pools[action]
+        for form_index, form_v2 in enumerate(FORMS_V2):
+            offset = form_index * 2
+            result[(action, form_v2)] = [
+                pool[offset % len(pool)],
+                pool[(offset + 1) % len(pool)],
+            ]
     return result
 
 
-# ---------------------------------------------------------------------------
-# Action-specific contract derivation helpers
-# ---------------------------------------------------------------------------
-
-
-def _action_tool_sequence(action: str) -> list[str]:
-    if action == "create":
-        return ["search_patients", "find_slots", "create_booking"]
-    if action in ("move", "resize", "cancel"):
-        return ["search_patients", "update_appointment"]
-    if action == "status_change":
-        return ["search_patients", "change_appointment_status"]
-    if action == "explain_schedule":
-        return ["search_patients", "find_slots"]
-    return ["search_patients"]
-
-
-def _action_outcome(action: str) -> str:
-    outcomes = {
-        "create": "appointment_created",
-        "move": "appointment_moved",
-        "resize": "appointment_resized",
-        "cancel": "appointment_cancelled",
-        "status_change": "appointment_status_changed",
-        "explain_schedule": "schedule_explained",
-    }
-    return outcomes.get(action, "action_completed")
-
-
-def _action_appointment_deltas(
-    action: str,
-    scenario: ReceptionScenarioSpec,
-) -> list[dict[str, Any]]:
-    """Derive action-specific appointment deltas from the source scenario.
-
-    Uses the source scenario's normalized values for date, times, and
-    duration so that the anchor's deltas are consistent with its
-    provenance base.
-    """
-    if action == "explain_schedule":
-        return []
-
-    norm = scenario.normalized_values
-    appointment_date = norm.get("appointment_date", "")
-    start_time = norm.get("earliest_time", "15:00")
-    duration_minutes = scenario.duration_minutes or 15
-
-    patient_name = "Margaret Thompson"
-    practitioner_name = "Dr Shera"
-
-    # Infer patient/practitioner IDs from scenario semantics
-    practitioner_id = "pr-001"
-    if scenario.practitioner_semantics == "mismatched":
-        practitioner_id = "pr-002"
-
-    delta: dict[str, Any] = {
-        "appointment_id": "apt-001",
-        "patient_id": "p-001",
-        "practitioner_id": practitioner_id,
-        "patient_name": patient_name,
-        "practitioner_name": practitioner_name,
-    }
-
-    if action == "create":
-        delta["change_type"] = "created"
-        delta["date"] = appointment_date
-        delta["start_time"] = start_time
-        delta["duration_minutes"] = duration_minutes
-    elif action == "move":
-        delta["change_type"] = "moved"
-        delta["new_date"] = appointment_date
-        delta["new_start_time"] = start_time
-    elif action == "resize":
-        delta["change_type"] = "resized"
-        delta["new_duration_minutes"] = duration_minutes
-    elif action == "cancel":
-        delta["change_type"] = "cancelled"
-        delta["date"] = appointment_date
-        delta["start_time"] = start_time
-    elif action == "status_change":
-        delta["change_type"] = "status_changed"
-        delta["new_status"] = "arrived"
-        delta["date"] = appointment_date
-        delta["start_time"] = start_time
-    else:
-        delta["change_type"] = "updated"
-
-    return [delta]
-
-
-def _action_audit_deltas(action: str) -> list[dict[str, Any]]:
-    if action == "explain_schedule":
-        return []
-    return [
-        {
-            "change_type": f"{action}_requested",
-            "appointment_id": "apt-001",
-            "count": 1,
-        }
-    ]
-
-
-def _forbidden_outcomes(action: str, diary_state: str) -> list[str]:
-    if action == "create" and diary_state == "exact_duplicate":
-        return ["second_appointment_created"]
-    return []
-
-
-def _forbidden_tool_calls() -> list[str]:
-    return ["mutate_diary_direct", "override_confirmation"]
+def _source_is_eligible(
+    scenario: ReceptionScenarioSpec, action: str
+) -> bool:
+    patient_is_coherent = (
+        scenario.patient_semantics == "omitted"
+        if action == "explain_schedule"
+        else scenario.patient_semantics == "exact"
+    )
+    deltas_are_coherent = (
+        not scenario.expected_appointment_deltas
+        and not scenario.expected_audit_deltas
+        if action == "explain_schedule"
+        else bool(scenario.expected_appointment_deltas)
+        and bool(scenario.expected_audit_deltas)
+    )
+    return bool(
+        scenario.intended_action == action
+        and scenario.action_semantics == "intended"
+        and scenario.entity_state == "exact"
+        and patient_is_coherent
+        and scenario.practitioner_semantics == "exact"
+        and scenario.expected_clarification is None
+        and scenario.expected_outcome_kind == _ACTION_OUTCOMES[action]
+        and scenario.expected_tool_sequence == _ACTION_TOOLS[action]
+        and deltas_are_coherent
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -262,58 +186,47 @@ def _build_semantic_contract(
     form_v2: str,
     cell_variant: int,
 ) -> dict[str, Any]:
-    """Build a complete dialogue-free semantic contract for a v2 anchor.
-
-    Copies entity, temporal, and diary semantics from the source scenario.
-    Derives outcome, tools, and deltas from the v2 form and action to
-    match the v2 coherence model.  No source utterance, description, or
-    source span is exported.
-    """
+    """Build the independent coherent oracle for one v2 dialogue form."""
     action = scenario.intended_action
     is_clarification = form_v2 == "clarification"
     is_reversal = form_v2 == "reversal"
     is_schedule = action == "explain_schedule"
 
-    # --- Outcome (derived per v2 form) ---
     if is_clarification:
         outcome = "clarification_required"
     elif is_reversal:
         outcome = None
     else:
-        outcome = _action_outcome(action)
+        outcome = scenario.expected_outcome_kind
 
-    # --- Tool sequence (derived per v2 form) ---
     if is_clarification:
         tools = ["request_clarification"]
     elif is_reversal:
-        # Only search_patients when patient is surfaced, else empty
-        if scenario.patient_semantics == "exact":
-            tools = ["search_patients"]
-        else:
-            tools = []
-    else:
-        tools = _action_tool_sequence(action)
-
-    # --- Appointment deltas ---
-    if is_clarification or is_reversal:
-        apt_deltas: list[dict[str, Any]] = []
+        tools = [] if is_schedule else ["search_patients"]
     elif is_schedule:
-        apt_deltas = []
+        tools = ["find_slots"]
     else:
-        apt_deltas = _action_appointment_deltas(action, scenario)
+        tools = list(scenario.expected_tool_sequence)
 
-    # --- Audit deltas ---
-    if is_clarification or is_reversal:
-        audit_deltas: list[dict[str, Any]] = []
-    elif is_schedule:
-        audit_deltas = []
-    else:
-        audit_deltas = _action_audit_deltas(action)
+    apt_deltas = (
+        []
+        if is_clarification or is_reversal
+        else deepcopy(scenario.expected_appointment_deltas)
+    )
+    audit_deltas = (
+        []
+        if is_clarification or is_reversal
+        else deepcopy(scenario.expected_audit_deltas)
+    )
 
-    # --- Clarification question/choices (fictional, form-derived) ---
+    patient_semantics = scenario.patient_semantics
+    practitioner_semantics = scenario.practitioner_semantics
+    entity_state = scenario.entity_state
     if is_clarification:
-        if cell_variant == 1:
-            # Patient ambiguity
+        entity_state = "ambiguous"
+        if cell_variant == 1 and not is_schedule:
+            patient_semantics = "ambiguous"
+            practitioner_semantics = "exact"
             clar_question = (
                 "Please clarify: which patient is this appointment for?"
             )
@@ -323,7 +236,8 @@ def _build_semantic_contract(
                 "Sarah Williams",
             ]
         else:
-            # Practitioner ambiguity
+            patient_semantics = "omitted" if is_schedule else "exact"
+            practitioner_semantics = "ambiguous"
             clar_question = (
                 "Please clarify: which practitioner should the appointment "
                 "be booked with?"
@@ -337,8 +251,11 @@ def _build_semantic_contract(
         clar_question = None
         clar_choices = []
 
-    # --- action_withdrawn ---
-    action_withdrawn = is_reversal
+    if form_v2 == "correction":
+        practitioner_semantics = "corrected"
+        entity_state = "corrected"
+    elif is_reversal:
+        entity_state = "negated"
 
     contract: dict[str, Any] = {
         "reference_date": scenario.reference_date.isoformat(),
@@ -350,25 +267,23 @@ def _build_semantic_contract(
         "latest_time": scenario.latest_time,
         "normalized_values": dict(scenario.normalized_values),
         "duration_minutes": scenario.duration_minutes,
-        "patient_semantics": scenario.patient_semantics,
-        "practitioner_semantics": scenario.practitioner_semantics,
+        "patient_semantics": patient_semantics,
+        "practitioner_semantics": practitioner_semantics,
         "location_semantics": scenario.location_semantics,
         "appointment_type_semantics": scenario.appointment_type_semantics,
         "duration_semantics": scenario.duration_semantics,
         "diary_state": scenario.diary_state,
-        "entity_state": scenario.entity_state,
-        "initial_diary_state": dict(scenario.initial_diary_state),
+        "entity_state": entity_state,
+        "initial_diary_state": deepcopy(scenario.initial_diary_state),
         "expected_outcome_kind": outcome,
         "expected_tool_sequence": tools,
         "expected_appointment_deltas": apt_deltas,
         "expected_audit_deltas": audit_deltas,
-        "forbidden_outcomes": _forbidden_outcomes(
-            action, scenario.diary_state
-        ),
-        "forbidden_tool_calls": _forbidden_tool_calls(),
+        "forbidden_outcomes": list(scenario.forbidden_outcomes),
+        "forbidden_tool_calls": list(scenario.forbidden_tool_calls),
         "expected_clarification": clar_question,
         "clarification_choices": clar_choices,
-        "action_withdrawn": action_withdrawn,
+        "action_withdrawn": is_reversal,
     }
     return contract
 
@@ -379,13 +294,58 @@ def _build_dialogue_form_contract(
     form_v2: str,
     cell_variant: int,
 ) -> dict[str, Any]:
-    """Build the dialogue-form contract for an anchor (without seed_hash).
+    """Freeze the evidence that candidate dialogue must surface locally."""
+    action = scenario.intended_action
+    is_schedule = action == "explain_schedule"
+    ambiguity_target: str | None = None
+    correction_target: str | None = None
+    prior_value: str | None = None
+    final_value: str | None = None
 
-    The caller adds seed_hash after computing it over the full anchor.
-    """
+    requirements: dict[str, list[str]] = {
+        "one_shot": ["complete_request_in_single_turn"],
+        "clarification": [
+            "explicit_action",
+            "explicit_unresolved_ambiguity",
+            "clarification_remains_unresolved",
+        ],
+        "correction": [
+            "initial_practitioner_value",
+            "explicit_replacement_cue",
+            "final_practitioner_value",
+        ],
+        "reversal": [
+            "initial_complete_request",
+            "explicit_whole_action_withdrawal",
+        ],
+        "ellipsis": ["antecedent_in_prior_turn", "locally_recoverable_ellipsis"],
+        "anaphora": ["antecedent_in_prior_turn", "locally_resolved_anaphora"],
+        "repeated_request": ["complete_request", "same_request_repeated_once"],
+        "session_restart": [
+            "explicit_prior_request_abandonment",
+            "complete_fresh_request",
+        ],
+    }
+    if form_v2 == "clarification":
+        ambiguity_target = (
+            "patient" if cell_variant == 1 and not is_schedule else "practitioner"
+        )
+        requirements[form_v2].append(f"explicit_{ambiguity_target}_ambiguity")
+    elif form_v2 == "correction":
+        correction_target = "practitioner"
+        prior_value = "Dr Patel"
+        final_value = "Dr Shera"
+
     return {
         "dialogue_form": form_v2,
-        "required_evidence_keys": sorted(scenario.source_spans),
+        "minimum_turns": 1 if form_v2 == "one_shot" else 2,
+        "surface_requirements": requirements[form_v2],
+        "ambiguity_target": ambiguity_target,
+        "correction_target": correction_target,
+        "prior_value": prior_value,
+        "final_value": final_value,
+        "local_recovery_required": form_v2 in {"ellipsis", "anaphora"},
+        "whole_action_withdrawn": form_v2 == "reversal",
         "authority_grant": dict(_AUTHORITY_ALL_FALSE),
         "source_bindings": {
             "source_scenario_id": scenario.scenario_id,
@@ -395,10 +355,21 @@ def _build_dialogue_form_contract(
     }
 
 
-def _map_form_to_v2(v1_form: str) -> str:
-    """Map a v1 dialogue_form literal to the v2 form name."""
-    reverse_map = {v: k for k, v in _FORM_V1_MAP.items()}
-    return reverse_map.get(v1_form, v1_form)
+def _required_evidence_keys(
+    scenario: ReceptionScenarioSpec, form_v2: str
+) -> list[str]:
+    keys = {"intended_action", "appointment_date", "practitioner"}
+    if scenario.intended_action != "explain_schedule":
+        keys.add("patient")
+    if scenario.temporal_relation != "unspecified":
+        keys.add("temporal_relation")
+    if scenario.intended_action in {"create", "resize"}:
+        keys.add("duration_minutes")
+    if scenario.intended_action == "status_change":
+        keys.add("status")
+    if form_v2 != "one_shot":
+        keys.add("dialogue_transition")
+    return sorted(keys)
 
 
 # ---------------------------------------------------------------------------
@@ -438,15 +409,12 @@ def _build_anchor(
         "semantic_contract": semantic_contract,
         "contains_source_utterances": False,
         "authority_grant": dict(_AUTHORITY_ALL_FALSE),
-        "required_evidence_keys": sorted(scenario.source_spans),
+        "required_evidence_keys": _required_evidence_keys(scenario, form_v2),
         "dialogue_form_contract": dialogue_form_contract,
     }
 
     seed_hash = _sha256(anchor_without_hash)
-
-    # Add seed_hash to both top-level and dialogue_form_contract
     anchor_without_hash["seed_hash"] = seed_hash
-    anchor_without_hash["dialogue_form_contract"]["seed_hash"] = seed_hash
 
     return anchor_without_hash
 
@@ -455,16 +423,10 @@ def _build_anchor(
 # Manifest builder
 # ---------------------------------------------------------------------------
 
-import copy
-
-
 def _strip_seed_hashes(anchor: dict[str, Any]) -> dict[str, Any]:
-    """Return a deep copy of anchor with all seed_hash fields removed."""
-    cleaned = copy.deepcopy(anchor)
+    """Return a deep copy of anchor with the top-level seed hash removed."""
+    cleaned = deepcopy(anchor)
     cleaned.pop("seed_hash", None)
-    dfc = cleaned.get("dialogue_form_contract")
-    if isinstance(dfc, dict):
-        dfc.pop("seed_hash", None)
     return cleaned
 
 
@@ -568,9 +530,18 @@ def validate_v2_anchor_manifest(manifest: dict[str, Any]) -> list[str]:
     if manifest.get("anchor_count") != len(anchors):
         errors.append("anchor_count does not match anchors length")
 
+    corpus = DevelopmentOnlyLoader().load_all()
+    source_lookup = {
+        scenario.scenario_id: scenario
+        for scenario in corpus.all_variants()
+    }
+    if manifest.get("source_corpus_hash") != corpus.corpus_hash:
+        errors.append("source_corpus_hash does not match ordinary development")
+
     # Action and form balance tracking
     action_counts: dict[str, int] = {a: 0 for a in ACTIONS_V2}
     form_counts: dict[str, int] = {f: 0 for f in FORMS_V2}
+    cell_counts: dict[tuple[str, str], int] = {}
 
     seen_ids: set[str] = set()
     seen_hashes: set[str] = set()
@@ -608,6 +579,19 @@ def validate_v2_anchor_manifest(manifest: dict[str, Any]) -> list[str]:
             errors.append(f"missing source_scenario_id in {seed_id}")
         if not source_bindings.get("source_scenario_hash"):
             errors.append(f"missing source_scenario_hash in {seed_id}")
+        source_id = anchor.get("source_scenario_id")
+        source = source_lookup.get(source_id)
+        if source is None:
+            errors.append(f"unknown ordinary-development source: {seed_id}")
+        else:
+            expected_source_hash = compute_scenario_hash(source)
+            if anchor.get("source_scenario_hash") != expected_source_hash:
+                errors.append(f"source scenario hash mismatch: {seed_id}")
+            if source_bindings != {
+                "source_scenario_id": source_id,
+                "source_scenario_hash": expected_source_hash,
+            }:
+                errors.append(f"source binding mismatch: {seed_id}")
 
         # Authority all false
         auth = anchor.get("authority_grant", {})
@@ -634,6 +618,9 @@ def validate_v2_anchor_manifest(manifest: dict[str, Any]) -> list[str]:
         df_form = dfc.get("dialogue_form")
         if df_form in form_counts:
             form_counts[df_form] += 1
+        if intended_action in action_counts and df_form in form_counts:
+            cell = (intended_action, df_form)
+            cell_counts[cell] = cell_counts.get(cell, 0) + 1
 
         # ---- Coherence invariants ----
         action = sc.get("intended_action")
@@ -648,6 +635,39 @@ def validate_v2_anchor_manifest(manifest: dict[str, Any]) -> list[str]:
         is_schedule = action == "explain_schedule"
         is_clarification_form = df_form == "clarification"
         is_reversal_form = df_form == "reversal"
+
+        if source is not None:
+            if not _source_is_eligible(source, str(action)):
+                errors.append(f"source is not a coherent provenance base: {seed_id}")
+            if action != source.intended_action:
+                errors.append(f"source action mismatch: {seed_id}")
+
+        expected_required = (
+            _required_evidence_keys(source, str(df_form))
+            if source is not None and df_form in FORMS_V2
+            else []
+        )
+        if anchor.get("required_evidence_keys") != expected_required:
+            errors.append(f"required evidence mismatch: {seed_id}")
+
+        cell_variant = dfc.get("cell_variant")
+        if cell_variant not in {1, 2}:
+            errors.append(f"cell_variant must be 1 or 2: {seed_id}")
+        elif source is not None and df_form in FORMS_V2:
+            expected_semantic = _build_semantic_contract(
+                source,
+                form_v2=str(df_form),
+                cell_variant=cell_variant,
+            )
+            if sc != expected_semantic:
+                errors.append(f"semantic contract mismatch: {seed_id}")
+            expected_form_contract = _build_dialogue_form_contract(
+                source,
+                form_v2=str(df_form),
+                cell_variant=cell_variant,
+            )
+            if dfc != expected_form_contract:
+                errors.append(f"dialogue form contract mismatch: {seed_id}")
 
         # Check action_withdrawn matches form
         if is_reversal_form and not withdrawn:
@@ -748,6 +768,33 @@ def validate_v2_anchor_manifest(manifest: dict[str, Any]) -> list[str]:
                     "clarification must have "
                     f"action_withdrawn=false: {seed_id}"
                 )
+            ambiguity_target = dfc.get("ambiguity_target")
+            if is_schedule:
+                if (
+                    ambiguity_target != "practitioner"
+                    or sc.get("patient_semantics") != "omitted"
+                    or sc.get("practitioner_semantics") != "ambiguous"
+                ):
+                    errors.append(
+                        f"schedule clarification must surface practitioner ambiguity: {seed_id}"
+                    )
+            elif cell_variant == 1:
+                if (
+                    ambiguity_target != "patient"
+                    or sc.get("patient_semantics") != "ambiguous"
+                    or sc.get("practitioner_semantics") != "exact"
+                ):
+                    errors.append(
+                        f"clarification variant 1 must surface patient ambiguity: {seed_id}"
+                    )
+            elif (
+                ambiguity_target != "practitioner"
+                or sc.get("patient_semantics") != "exact"
+                or sc.get("practitioner_semantics") != "ambiguous"
+            ):
+                errors.append(
+                    f"clarification variant 2 must surface practitioner ambiguity: {seed_id}"
+                )
 
         # Reversal check
         if is_reversal_form:
@@ -763,16 +810,16 @@ def validate_v2_anchor_manifest(manifest: dict[str, Any]) -> list[str]:
                     "reversal must have empty audit deltas: {seed_id}"
                 )
             # Check tool expectation
-            patient_sem = sc.get("patient_semantics")
-            if patient_sem == "exact":
-                expected_tools = ["search_patients"]
-            else:
-                expected_tools = []
+            expected_tools = [] if is_schedule else ["search_patients"]
             if tools != expected_tools:
                 errors.append(
                     f"reversal tool expectation mismatch for {seed_id}: "
                     f"expected {expected_tools}, got {tools}"
                 )
+            if sc.get("entity_state") != "negated":
+                errors.append(f"reversal entity state must be negated: {seed_id}")
+            if dfc.get("whole_action_withdrawn") is not True:
+                errors.append(f"reversal form contract must withdraw action: {seed_id}")
 
         # Correction check
         if df_form == "correction":
@@ -783,7 +830,17 @@ def validate_v2_anchor_manifest(manifest: dict[str, Any]) -> list[str]:
                 )
             if outcome is None:
                 errors.append(
-                    "correction requires non-null outcome: {seed_id}"
+                    f"correction requires non-null outcome: {seed_id}"
+                )
+            if (
+                sc.get("practitioner_semantics") != "corrected"
+                or sc.get("entity_state") != "corrected"
+                or dfc.get("correction_target") != "practitioner"
+                or not dfc.get("prior_value")
+                or not dfc.get("final_value")
+            ):
+                errors.append(
+                    f"correction must freeze explicit practitioner replacement: {seed_id}"
                 )
 
         # Ellipsis/anaphora/repeated/session_restart
@@ -824,6 +881,13 @@ def validate_v2_anchor_manifest(manifest: dict[str, Any]) -> list[str]:
                 f"form {form!r} has {count} anchors, expected {expected}"
             )
 
+    for action in ACTIONS_V2:
+        for form in FORMS_V2:
+            if cell_counts.get((action, form), 0) != 2:
+                errors.append(
+                    f"cell ({action}, {form}) must contain exactly 2 anchors"
+                )
+
     # Manifest hash
     manifest_without_hash = {
         k: v for k, v in manifest.items() if k != "manifest_hash"
@@ -845,7 +909,10 @@ def check_v2_anchor_manifest(
         return [f"Fixture file not found: {path}"]
 
     manifest = json.loads(path.read_text(encoding="utf-8"))
-    return validate_v2_anchor_manifest(manifest)
+    errors = validate_v2_anchor_manifest(manifest)
+    if manifest != build_v2_anchor_manifest():
+        errors.append("committed v2 anchor manifest does not regenerate exactly")
+    return errors
 
 
 # ---------------------------------------------------------------------------
