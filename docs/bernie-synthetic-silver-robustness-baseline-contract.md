@@ -87,4 +87,3 @@ During initial file discovery, a broad filename command emitted names of some
 protected-path files despite the intended content globs. No protected file was
 opened, read, hashed, imported, or used, and the names provide no case labels.
 This metadata-only incident is contained here and grants no reuse authority.
-
