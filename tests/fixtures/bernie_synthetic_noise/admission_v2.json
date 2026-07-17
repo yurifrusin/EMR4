@@ -1,14 +1,14 @@
 {
   "schema_version": "emr4.bernie.synthetic_noise_admission.v2",
   "decision": "v2_admission_pass",
-  "anchor_manifest_hash": "sha256:92ad7d9fe2af1efe3f65831ac7e6586d26b6c44b41eabae4be0545740bf3518c",
+  "anchor_manifest_hash": "sha256:8609cdd7cab00281c7c2061cf24291be91ca225c5e26c41f8aa5411729f47b23",
   "candidate_path": "tests/fixtures/bernie_synthetic_noise/candidates_sol_v2.jsonl",
   "candidate_count": 192,
   "accepted_count": 192,
   "quarantine_count": 0,
   "rejected_count": 0,
-  "canonical_candidate_hash": "sha256:634a7de32356d41232a279c335bcfb5e5a13cf6df884b8abf43e9769b7dc4cf9",
-  "file_payload_hash": "sha256:f9060e4e86a7d3ec04ef9cfe1ec954956d2d78eb7d693e5ceaf05b06411fc459",
+  "canonical_candidate_hash": "sha256:1dd79a3209f87e46dbdb2a375c2f2c82a654e9208105f6ee28b4cb5ce4b4d46e",
+  "file_payload_hash": "sha256:45ee95da32b4a6463d30e2d516358ae491a5350d8bf89723c8fd2d5fc9de505f",
   "accepted_candidate_ids": [
     "sol_v2_bernie_noise_seed_v2_001_01",
     "sol_v2_bernie_noise_seed_v2_001_02",
@@ -215,5 +215,5 @@
     "confirmation": false,
     "override_authority": false
   },
-  "admission_hash": "sha256:a630151b011ae09b63ae6daee84aabefb4a4e913c514a13e918d68c570e80cce"
+  "admission_hash": "sha256:a3f2ba35e5526d5b4529d37a77214b7034cb11f29517b4a5a3f1df044c5346e0"
 }

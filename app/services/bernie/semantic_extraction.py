@@ -146,6 +146,7 @@ _EXPLAIN_PATTERNS: list[re.Pattern[str]] = [
         re.I,
     ),
     re.compile(r"\bdiary\s+view\b.*\bview\s+only\b", re.I),
+    re.compile(r"\bshow\s+(?:me\s+)?(?:the\s+)?(?:diary|schedule)(?:\s+schedule)?\b", re.I),
     # Practitioner possessive availability — "Dr Shera's availability" / "some doctor's availability"
     re.compile(r"\b(?:dr [a-z]+|some doctor)'s availability\b", re.I),
     # "what appointments does Dr ... have" / "what appointments does some doctor have"
@@ -269,6 +270,11 @@ _REVERSAL_PATTERNS: list[re.Pattern[str]] = [
     # Explicit request-local reversal cues.  Keep them scoped so phrases such
     # as "do not disregard confirmation" cannot negate the booking action.
     re.compile(r"\bdisregard\s+(?:that|the)\s+(?:booking\s+)?request\b", re.I),
+    re.compile(
+        r"\bdisregard\s+(?:that|the)\s+"
+        r"(?:create|move|resize|cancel|status\s+change|explain\s+schedule)\s+request\b",
+        re.I,
+    ),
     re.compile(r"\bcancel that request\b", re.I),
 ]
 
@@ -519,6 +525,12 @@ _SINGLE_PATIENT_PATTERN = re.compile(
     r"\b(?:[Bb]ook|[Ss]ee)\s+(?!Dr\b)([A-Z][a-z]+)\s+(?=with\b|for\b)",
 )
 
+_PATIENT_OR_PATTERN = re.compile(
+    r"\b(?i:either\s+)?"
+    r"(?!(?i:Dr)\s+)([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)\s+(?i:or)\s+"
+    r"(?!(?i:Dr)\s+)([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)\b",
+)
+
 # Ambiguous patient references — includes standalone ``someone`` which
 # references an unspecified person rather than omitting the entity entirely.
 _AMBIGUOUS_PATIENT = re.compile(
@@ -541,15 +553,9 @@ def _extract_patient(text: str) -> tuple[str | None, str]:
     if _AMBIGUOUS_PATIENT.search(text):
         return None, "ambiguous"
 
-    # Check for "X or Y" pattern for patient ambiguity
-    # Exclude "Dr" titles from being captured as patient names.
-    _PATIENT_OR = re.compile(
-        r"\b(?:book|schedule|create|appointment\s+for)\s+"
-        r"(?!Dr\s+)([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)\s+or\s+"
-        r"(?!Dr\s+)([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)\b",
-        re.I,
-    )
-    if _PATIENT_OR.search(text):
+    # Explicit alternatives are ambiguous for every appointment action, not
+    # only when they immediately follow a booking verb.
+    if _PATIENT_OR_PATTERN.search(text):
         return None, "ambiguous"
 
     m = _PATIENT_PATTERN.search(text)
@@ -933,6 +939,17 @@ def _extract_duration_alternatives(utterances: list[str]) -> tuple[str, ...]:
     return ()
 
 
+def _extract_patient_alternatives(
+    utterances: list[str],
+) -> tuple[str, ...]:
+    """Return only explicit non-practitioner patient alternatives."""
+    for utterance in utterances:
+        match = _PATIENT_OR_PATTERN.search(utterance)
+        if match:
+            return match.group(1), match.group(2)
+    return ()
+
+
 def _extract_practitioner_alternatives(
     utterances: list[str],
 ) -> tuple[str, ...]:
@@ -986,6 +1003,12 @@ def _determine_clarification(
     # no lossless alternatives to invent.
     if practitioner_semantics == "ambiguous":
         return True, _extract_practitioner_alternatives(utterances)
+
+    # An explicitly ambiguous patient must fail closed for every mutating
+    # appointment action. Schedule explanation is practitioner-scoped and may
+    # legitimately omit a patient.
+    if patient_semantics == "ambiguous" and intended_action != "explain_schedule":
+        return True, _extract_patient_alternatives(utterances)
 
     if intended_action == "create":
         needs_clarify = False
@@ -1088,7 +1111,7 @@ def _determine_clarification(
         # Status change: needs target status
         if not re.search(
             r"\b(arrived|completed|dna|no show|didn'?t attend)\b",
-            utterances[0], re.I,
+            " ".join(utterances), re.I,
         ):
             return True, ("Arrived", "Completed")
         return False, ()

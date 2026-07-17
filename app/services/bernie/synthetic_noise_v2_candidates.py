@@ -147,7 +147,7 @@ def _entity_surfaces(anchor: dict[str, Any]) -> tuple[str | None, str]:
 def _operational_opener(anchor: dict[str, Any]) -> str:
     ordinal = int(anchor["seed_id"].rsplit("_", 1)[-1]) - 1
     prefixes = (
-        "Quick", "Routine", "Morning", "Afternoon", "Front-desk", "Diary",
+        "Quick", "Routine", "Roster", "Desk", "Front-desk", "Diary",
         "Booking", "Practice", "Reception", "Follow-up", "Same-day", "Standard",
     )
     suffixes = (
@@ -246,7 +246,7 @@ def _turns_and_evidence(
         locations["dialogue_transition"] = (1, "ask me to clarify")
     elif form == "correction":
         prior = request.replace("Dr Shera", "Dr Patel")
-        final = f"Correction—replace Dr Patel with Dr Shera. {request}"
+        final = f"Correction—replace the practitioner; use Dr Shera instead. {request}"
         utterances = [prior, final]
         locations = {key: (1, value) for key, value in evidence.items()}
         locations["dialogue_transition"] = (1, "Correction")
@@ -256,9 +256,9 @@ def _turns_and_evidence(
         locations = {key: (0, value) for key, value in evidence.items()}
         locations["dialogue_transition"] = (1, "disregard that")
     elif form in {"ellipsis", "anaphora"}:
-        context = _context_text(anchor, evidence)
+        context = "Diary request; details may need clarifying. " + _context_text(anchor, evidence)
         if high:
-            context += " Dictated in short fragments."
+            context += " Dictated as clipped fragments."
         referent = "that diary request" if action == "explain_schedule" else "that appointment"
         marker = "Use that" if form == "anaphora" else "With those details"
         prefix = "Uh—" if high else ""
@@ -277,7 +277,10 @@ def _turns_and_evidence(
         locations["dialogue_transition"] = (1, evidence["intended_action"])
     elif form == "session_restart":
         marker = "Start over—abandon the earlier draft."
-        utterances = ["I began a diary request, but abandon that incomplete draft.", f"{marker} {request}"]
+        utterances = [
+            "Diary request; details may need clarifying. I began a draft, but abandon it.",
+            f"{marker} {request}",
+        ]
         locations = {key: (1, value) for key, value in evidence.items()}
         locations["dialogue_transition"] = (1, "Start over")
     else:
