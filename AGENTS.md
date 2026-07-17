@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V10 fresh certification passed; Secure SDLC remains complete. The external appointment-call lane is closed. Synthetic Silver v1 closed with 90 coherent rows and 102 quarantined; Yuri has authorized a fresh coherent v2 anchor contract and successive evidence-backed synthetic refinements through completion, stall, or a material fork |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`, `docs/bernie-lc4v10-fresh-certification-closeout.md`, `orchestration/agent_inbox/codex/security-hardening-final-purple-acceptance.md`, `docs/security/secure-sdlc-red-blue-diary-hardening-closeout-2026-07-17.md`, `docs/bernie-post-certification-transition-review.md`, `docs/bernie-dialogue-corpus-source-assessment.md`, `orchestration/agent_inbox/codex/appointment-call-quarantine-pilot-sol-acceptance.md`, `docs/bernie-appointment-call-quarantine-pilot-closeout.md`, `docs/bernie-synthetic-receptionist-silver-contract.md`, `docs/bernie-synthetic-receptionist-silver-closeout.md`, `orchestration/agent_inbox/codex/synthetic-receptionist-silver-sol-acceptance.md`, `docs/bernie-synthetic-silver-robustness-baseline-contract.md`, `docs/bernie-synthetic-silver-robustness-baseline-closeout.md`, `orchestration/agent_inbox/codex/synthetic-silver-robustness-baseline-sol-acceptance.md`, `docs/bernie-synthetic-silver-action-temporal-tranche-contract.md`, `docs/bernie-synthetic-silver-action-temporal-tranche-closeout.md`, `orchestration/agent_inbox/codex/synthetic-silver-action-temporal-sol-acceptance.md`, `docs/bernie-synthetic-silver-coherence-audit-contract.md`, `docs/bernie-synthetic-silver-coherence-audit-closeout.md`, `orchestration/agent_inbox/codex/synthetic-silver-coherence-sol-acceptance.md`, and `docs/bernie-synthetic-silver-v2-anchor-contract.md` |
-| Current result | V10 remains a valid bounded `certification_pass`: complete and every dimension 576/576. The all-192 coherence audit is an accepted `partial_pass_with_quarantine`: 12 text-only defects were repaired, 90 rows are coherently admitted, and 102 are quarantined for oracle-policy, whole-action reversal, or replay-contract conflicts. The 90 admitted rows are 4/90 product complete with safety 180/180 and zero variance. Fresh Gemini independently reproduced and accepted every count, hash, classification, and repair with `PROTECTED_ACCESS: false` |
-| Next implementation | No V11 is needed or authorized. Freeze and independently veto the coherent v2 synthetic anchor contract, then build a fresh balanced 96-anchor/192-candidate corpus and continue through ordinary-development evaluation and evidence-supported refinements under Yuri's standing authorization. Pause at a genuine stall, unexpected material fork, clarification-policy/product choice, or any protected/provider/runtime/API/write/external-data boundary. Preserve v1-v10 and all T3/provider/product/write boundaries |
+| Active product track | LC4V10 fresh certification passed; Secure SDLC remains complete; the external appointment-call lane is closed. The synthetic Silver v2 course is complete and independently accepted; no residual supported parser target remains in its frozen balanced population |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`, `docs/bernie-lc4v10-fresh-certification-closeout.md`, `orchestration/agent_inbox/codex/security-hardening-final-purple-acceptance.md`, `docs/security/secure-sdlc-red-blue-diary-hardening-closeout-2026-07-17.md`, `docs/bernie-post-certification-transition-review.md`, `orchestration/agent_inbox/codex/appointment-call-quarantine-pilot-sol-acceptance.md`, `docs/bernie-appointment-call-quarantine-pilot-closeout.md`, `docs/bernie-synthetic-silver-v2-anchor-contract.md`, `docs/bernie-synthetic-silver-v2-closeout.md`, `orchestration/agent_inbox/antigravity/synthetic-silver-v2-final-review.md`, and `orchestration/agent_inbox/codex/synthetic-silver-v2-sol-acceptance.md` |
+| Current result | V10 remains a valid bounded `certification_pass`: complete and every dimension 576/576. Synthetic Silver v2 is an accepted bounded `synthetic_course_complete`: 96 coherent anchors, 192/192 candidates complete over two observations each, safety 384/384, and zero variance. Fresh Gemini reviewed all 192, reproduced exact hashes and 70/70 focused tests, and returned `DECISION: pass`, `POLICY_REPLAY_SCORER_CHANGES: false`, and `PROTECTED_ACCESS: false` |
+| Next implementation | No V11 is needed or authorized. No synthetic v3 or further v2 refinement is needed or authorized. Pause for Yuri to select another product track. Preserve v1-v10, synthetic v1/v2, and all protected holdout, T3/provider/runtime, external-data, policy/replay/scorer, API/database/UI, confirmation, deployment/release, and write boundaries |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 
@@ -199,14 +199,16 @@ accepted the result. A balanced replacement corpus now requires a new coherent
 v2 anchor contract rather than relabelling or parser-fitting these rows.
 
 Yuri then authorized the fresh coherent synthetic Silver v2 anchor contract
-and successive evidence-backed ordinary-development refinements. The standing
-sequence may continue through corpus engineering, unchanged-product
-evaluation, bounded parser diagnostics/repair, independent review, and
-protected integration until the frozen synthetic course passes, genuinely
-stalls, or reaches a material product or protected-surface fork. It does not
-authorize V11, protected evidence, external corpora, policy/replay/scorer
-changes, providers/runtime, API/database/UI, confirmation, deployment,
-release, or write authority.
+and successive evidence-backed ordinary-development refinements. That course
+is complete: 96 coherent anchors, 192/192 candidates complete over two
+observations each, safety 384/384, and zero variance. Final exact robustness
+hash is `sha256:ea4217943fa3a2ec83ec4afcff12cd7eebeba520f225d4e0fb290abb7850dedd`.
+Fresh Gemini independently reviewed all 192, passed 70/70 focused tests, and
+returned `DECISION: pass`, `POLICY_REPLAY_SCORER_CHANGES: false`, and
+`PROTECTED_ACCESS: false`. The standing sequence is exhausted and grants no
+synthetic v3, V11, protected evidence, external corpus, provider/runtime,
+policy/replay/scorer, API/database/UI, confirmation, deployment/release, or
+write authority.
 
 ### Earlier LC4V2-V3 sequence
 
@@ -316,10 +318,9 @@ it.
 Continue autonomously through ordinary development-only analysis,
 implementation, tests, review, recovery, documentation, commit, and push.
 The completed fresh-certification authorization grants no V11. Yuri's
-2026-07-17 standing synthetic authorization permits a fresh coherent v2
-anchor/candidate corpus and successive evidence-backed synthetic refinements
-through completion, genuine stall, or an unexpected material fork. Pause
-before:
+2026-07-17 standing synthetic authorization completed with the accepted v2
+course and grants no synthetic v3 or further refinement of the frozen v2
+population. Pause before:
 
 - a material clarification-policy or product-behaviour choice;
 - holdout reuse, or any new holdout outside the standing fresh-version cycle;

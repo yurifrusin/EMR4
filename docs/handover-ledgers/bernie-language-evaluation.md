@@ -301,6 +301,25 @@ conceptually accepted all findings and returned `DECISION: pass`. All
 clarification and reversal forms are absent from current admission; restoring
 balanced coverage requires a new coherent v2 anchor contract.
 
+Yuri then authorized a genuinely fresh coherent synthetic Silver v2 course and
+successive evidence-backed refinements through completion. V2 contains 96
+balanced dialogue-free anchors and 192 admitted candidates across six actions,
+eight dialogue forms, and two noise levels. The staged unchanged-product result
+progressed from 6/192 complete with safety 356/384, through 16/192 and 138/192,
+to final 192/192 complete with safety 384/384 and zero variance. No
+clarification policy, replay, scorer, certification, provider/runtime, API,
+database, UI, confirmation, deployment/release, or write surface changed.
+
+Final anchor, candidate, admission, and robustness hashes are respectively
+`sha256:8609cdd7cab00281c7c2061cf24291be91ca225c5e26c41f8aa5411729f47b23`,
+`sha256:1dd79a3209f87e46dbdb2a375c2f2c82a654e9208105f6ee28b4cb5ce4b4d46e`,
+`sha256:a3f2ba35e5526d5b4529d37a77214b7034cb11f29517b4a5a3f1df044c5346e0`,
+and `sha256:ea4217943fa3a2ec83ec4afcff12cd7eebeba520f225d4e0fb290abb7850dedd`.
+A fresh Gemini project reviewed all 192 candidates, reproduced 70/70 focused
+tests, and returned `DECISION: pass`, `POLICY_REPLAY_SCORER_CHANGES: false`,
+and `PROTECTED_ACCESS: false`. The synthetic course is complete and supplies no
+residual supported parser target.
+
 ## Next safe sequence
 
 1. Keep holdouts v1-v10 sealed; use only accepted aggregate evidence and
@@ -314,11 +333,11 @@ balanced coverage requires a new coherent v2 anchor contract.
    residual candidates into automatic parser targets.
 5. Preserve the accepted coherence `partial_pass_with_quarantine`; do not
    relabel the 102 quarantined rows or change their frozen source oracles.
-6. Pause for Yuri to decide whether to authorize a coherent v2 anchor contract
-   that restores balanced clarification and true-reversal coverage before
-   further parser work.
-7. Return any material parser, replay, scorer, admission, or clarification-
-   policy behavior choice to Yuri's boundary before implementation.
+6. Preserve the accepted balanced v2 population as current ordinary-development
+   Silver; do not promote it to real-world, Gold, certification, clinical, or
+   production evidence.
+7. Pause for Yuri to select another product track; the completed v2 standing
+   authorization grants no synthetic v3 or further parser work.
 8. Keep T3.1-T3.4 blocked by default and T3.5/providers plus every product/write
    surface deferred.
 
@@ -375,6 +394,10 @@ balanced coverage requires a new coherent v2 anchor contract.
 - `docs/bernie-synthetic-silver-coherence-audit-contract.md`
 - `docs/bernie-synthetic-silver-coherence-audit-closeout.md`
 - `orchestration/agent_inbox/codex/synthetic-silver-coherence-sol-acceptance.md`
+- `docs/bernie-synthetic-silver-v2-anchor-contract.md`
+- `docs/bernie-synthetic-silver-v2-closeout.md`
+- `orchestration/agent_inbox/antigravity/synthetic-silver-v2-final-review.md`
+- `orchestration/agent_inbox/codex/synthetic-silver-v2-sol-acceptance.md`
 
 Protected holdouts v1-v10 are sealed. LC4V10 validly passed its sole attempt
 at 576/576 complete with empty evidence and product failure maps. Do not
