@@ -225,7 +225,6 @@ def _dimension_records(
 ) -> list[dict[str, Any]]:
     semantic = result.semantic_fields
     interpretation = result.interpretation
-    replay = result.replay
     expected_requires = (
         False
         if scenario.action_semantics == "prohibited"
