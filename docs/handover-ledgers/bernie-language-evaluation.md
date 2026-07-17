@@ -336,10 +336,12 @@ residual supported parser target.
 6. Preserve the accepted balanced v2 population as current ordinary-development
    Silver; do not promote it to real-world, Gold, certification, clinical, or
    production evidence.
-7. Pause for Yuri to select another product track; the completed v2 standing
-   authorization grants no synthetic v3 or further parser work.
-8. Keep T3.1-T3.4 blocked by default and T3.5/providers plus every product/write
-   surface deferred.
+7. Preserve the accepted provider-free T3R1 projection of all 192 v2 dialogues;
+   its 384/384 expected-decision echo proves plumbing only and establishes no
+   model quality.
+8. Keep the live T3 gate blocked and pause for Yuri before any synthetic-only
+   provider comparison. T3.5/providers plus every product/write surface remain
+   deferred.
 
 ## Primary evidence
 
@@ -398,9 +400,12 @@ residual supported parser target.
 - `docs/bernie-synthetic-silver-v2-closeout.md`
 - `orchestration/agent_inbox/antigravity/synthetic-silver-v2-final-review.md`
 - `orchestration/agent_inbox/codex/synthetic-silver-v2-sol-acceptance.md`
+- `docs/bernie-t3r1-synthetic-shadow-refresh.md`
+- `docs/bernie-t3r1-synthetic-shadow-baseline.json`
+- `orchestration/agent_inbox/codex/t3r1-synthetic-shadow-refresh-sol-acceptance.md`
 
 Protected holdouts v1-v10 are sealed. LC4V10 validly passed its sole attempt
 at 576/576 complete with empty evidence and product failure maps. Do not
 enumerate protected paths, inspect content, rerun, regenerate, hash-check,
-infer labels, or tune against them. T3.1-T3.4 remain blocked-by-default evaluation
-scaffolding; T3.5 is deferred.
+infer labels, or tune against them. T3R1 remains provider-free and the live T3
+gate remains blocked; T3.5 is deferred.

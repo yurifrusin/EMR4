@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 
 import pytest
 
@@ -133,6 +133,24 @@ def test_identical_repeats_are_not_reported_as_variant():
         ShadowRunnerConfig(enabled=True, repeats=3)
     ).run((CASE,), FakeAdapter())
     assert summarize_shadow_run(observations).variant_case_count == 0
+
+
+def test_withdrawal_variance_is_reported():
+    withdrawal_case = replace(
+        CASE,
+        expected=replace(CASE.expected, action_withdrawn=False),
+    )
+    adapter = FakeAdapter(
+        responses=(
+            exact_response(action_withdrawn=False),
+            exact_response(action_withdrawn=True),
+        )
+    )
+    observations = ShadowEvaluationRunner(
+        ShadowRunnerConfig(enabled=True, repeats=2)
+    ).run((withdrawal_case,), adapter)
+
+    assert summarize_shadow_run(observations).variant_case_count == 1
 
 
 def test_empty_summary_is_well_defined():

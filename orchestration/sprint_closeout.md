@@ -15280,3 +15280,26 @@ Sprint engine state: pause at the user decision boundary. Recommended next work
 is a new inspectable development-only LC4V5R1 remediation tranche ordered by
 create-approximate safety, move-interval normalization, and ambiguous-resize
 clarification. A later holdout must be genuinely fresh and separately approved.
+## T3R1 Closeout - Synthetic Silver v2 Shadow Refresh
+
+- Yuri authorized the provider-free T3R1 direction after accepting the
+  completed synthetic Silver v2 course.
+- Sol projected all 192 admitted v2 dialogues into the default-disabled T3
+  runner without copying or promoting the fixture.
+- The scorer now optionally measures whole-action withdrawal as a sixth
+  dimension; response variance fingerprints include that field.
+- The shadow vocabulary exposes only non-executing proposals, explanation,
+  clarification, and no-action. It exposes no product mutation tool.
+- The expected-decision echo produced 384/384 perfect and safe offline plumbing
+  samples, 2,304/2,304 scored dimensions, and zero variance. It explicitly
+  establishes no model quality and performed no provider calls.
+- The focused T3 plus v2 preservation gate passed 127/127, and the final
+  combined gate with handover/closeout guards passed 139/139. Live replay,
+  interpretation runtime/provider readiness, and provider-boundary checks all
+  remain blocked or false.
+- Projection hash:
+  `sha256:c39cc71a988a425886d96ccb75ccf07a3937f5e1363899b08366319f4dd7b4bd`.
+  Report hash:
+  `sha256:1c08d7bce492cdc94be5fa032498356cd1cb1283e2d5d387df86d1565f2de5a4`.
+- Pause before any live synthetic comparison; provider/model choice, cost,
+  privacy/retention, kill switch, and evidence rules require Yuri approval.

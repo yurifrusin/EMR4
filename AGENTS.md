@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V10 fresh certification passed; Secure SDLC remains complete; the external appointment-call lane is closed. The synthetic Silver v2 course is complete and independently accepted; no residual supported parser target remains in its frozen balanced population |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`, `docs/bernie-lc4v10-fresh-certification-closeout.md`, `orchestration/agent_inbox/codex/security-hardening-final-purple-acceptance.md`, `docs/security/secure-sdlc-red-blue-diary-hardening-closeout-2026-07-17.md`, `docs/bernie-post-certification-transition-review.md`, `orchestration/agent_inbox/codex/appointment-call-quarantine-pilot-sol-acceptance.md`, `docs/bernie-appointment-call-quarantine-pilot-closeout.md`, `docs/bernie-synthetic-silver-v2-anchor-contract.md`, `docs/bernie-synthetic-silver-v2-closeout.md`, `orchestration/agent_inbox/antigravity/synthetic-silver-v2-final-review.md`, and `orchestration/agent_inbox/codex/synthetic-silver-v2-sol-acceptance.md` |
-| Current result | V10 remains a valid bounded `certification_pass`: complete and every dimension 576/576. Synthetic Silver v2 is an accepted bounded `synthetic_course_complete`: 96 coherent anchors, 192/192 candidates complete over two observations each, safety 384/384, and zero variance. Fresh Gemini reviewed all 192, reproduced exact hashes and 70/70 focused tests, and returned `DECISION: pass`, `POLICY_REPLAY_SCORER_CHANGES: false`, and `PROTECTED_ACCESS: false` |
-| Next implementation | No V11 is needed or authorized. No synthetic v3 or further v2 refinement is needed or authorized. Pause for Yuri to select another product track. Preserve v1-v10, synthetic v1/v2, and all protected holdout, T3/provider/runtime, external-data, policy/replay/scorer, API/database/UI, confirmation, deployment/release, and write boundaries |
+| Active product track | LC4V10 fresh certification passed; synthetic Silver v2 is complete. Yuri selected the provider-free T3 shadow-evaluation track; T3R1 now projects the exact 192 admitted noisy dialogues into a safe default-disabled model-comparison contract without live calls or product tools |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`, `docs/bernie-lc4v10-fresh-certification-closeout.md`, `orchestration/agent_inbox/codex/security-hardening-final-purple-acceptance.md`, `docs/security/secure-sdlc-red-blue-diary-hardening-closeout-2026-07-17.md`, `docs/bernie-post-certification-transition-review.md`, `orchestration/agent_inbox/codex/appointment-call-quarantine-pilot-sol-acceptance.md`, `docs/bernie-appointment-call-quarantine-pilot-closeout.md`, `docs/bernie-synthetic-silver-v2-anchor-contract.md`, `docs/bernie-synthetic-silver-v2-closeout.md`, `orchestration/agent_inbox/antigravity/synthetic-silver-v2-final-review.md`, `orchestration/agent_inbox/codex/synthetic-silver-v2-sol-acceptance.md`, `docs/bernie-t3r1-synthetic-shadow-refresh.md`, `docs/bernie-t3r1-synthetic-shadow-baseline.json`, and `orchestration/agent_inbox/codex/t3r1-synthetic-shadow-refresh-sol-acceptance.md` |
+| Current result | V10 remains a valid bounded `certification_pass`: complete and every dimension 576/576. Synthetic Silver v2 remains complete at 192/192 with safety 384/384 and zero variance. T3R1 is a provider-free `shadow_refresh_pass`: 192 projected cases, 384/384 perfect and safe offline plumbing samples, 2,304/2,304 dimensions, zero variance, exact projection hash `c39cc71a`, no provider calls, and no model-quality claim |
+| Next implementation | No V11 is needed or authorized. Pause before any live synthetic model comparison. Yuri must approve exact providers/models, cost cap, privacy/retention, kill switch, and evidence protocol before T3.5 or any external prompt/call. No synthetic v3, product runtime, API/database/UI, confirmation, deployment/release, or write authority is authorized |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 
@@ -123,6 +123,21 @@ conceptual taxonomy failure and recovered under the lease without a correction
 loop. Protected holdout v1 remained sealed. T3.1-T3.4 remain intact and blocked
 by default; T3.5 and all live/write authority remain deferred. See the LC4R10
 acceptance for exact hashes, provenance, recovery, veto, and gate evidence.
+
+### T3R1 accepted state
+
+Yuri selected the provider-free shadow-evaluation direction after synthetic
+Silver v2 completed. Sol bound all 192 admitted v2 dialogues into the existing
+default-disabled T3 runner. The projection uses only non-executing proposal,
+explanation, clarification, and no-action labels; it adds explicit whole-action
+withdrawal scoring and variance detection without exposing a product mutation
+tool.
+
+The expected-decision echo ran two offline samples per case: 384/384 perfect
+and safe, 2,304/2,304 scored dimensions, and zero variance. This is plumbing
+evidence only, not model-quality evidence. No external worker received the
+projection and no provider prompt or call occurred. The live T3 gate remains
+blocked; see the T3R1 closeout and Sol acceptance.
 
 ### Post-certification security transition
 

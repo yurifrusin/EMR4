@@ -1,11 +1,11 @@
 # Bernie T3 Nondeterministic Shadow Evaluation
 
 Status: T3.1 contract/scorer, T3.2 source-safe corpus projection, T3.3
-default-disabled repeat runner, and T3.4 live-replay gate implemented; no
-live-provider replay is enabled. T3.5 remains deferred after LC4V2 because the
-fresh aggregate baseline shows that the deterministic language bridge is not
-yet credible. See
-`docs/bernie-language-coverage-implementation-plan.md`.
+default-disabled repeat runner, T3.4 live-replay gate, and the T3R1 synthetic
+Silver v2 shadow refresh are implemented. No live-provider replay is enabled.
+T3.5 remains deferred pending a separately approved synthetic-only provider
+comparison. See `docs/bernie-language-coverage-implementation-plan.md` and
+`docs/bernie-t3r1-synthetic-shadow-refresh.md`.
 
 ## Purpose
 
@@ -91,31 +91,25 @@ adversarial generation, and an evaluator that composes interpretation with T2
 diary replay. The approved direction is recorded in
 `docs/bernie-language-coverage-implementation-plan.md`.
 
+## T3R1 Synthetic Silver v2 Refresh
+
+After LC4V10 certification and completion of the balanced synthetic Silver v2
+course, Yuri authorized the provider-free T3R1 refresh. T3 now projects all 192
+admitted v2 dialogues without duplicating the fixture. Five non-executing
+`propose_*` labels, schedule explanation, clarification, and no-action replace
+product mutation tool names at the model boundary. Whole-action withdrawal is
+an optional sixth scoring dimension, and response fingerprints now include it.
+
+The exact offline plumbing run is 384/384 perfect and safe with zero variance.
+It uses an expected-decision echo and explicitly establishes no model quality.
+No provider call, external prompt, raw response, runtime route, database, or
+write surface was opened.
+
 ## Next Slice
 
-Do not proceed directly to T3.5. LC4R1-LC4R10 repaired and reconciled the
-development corpus without reopening protected holdout v1. Yuri then
-authorized a fresh synthetic holdout v2. Its only aggregate baseline produced
-0/576 complete passes, 576/576 temporal-relation passes, 528/576 intended
-action passes, 288/576 normalized-value passes, 0/576 entity-semantic passes,
-532/576 safety passes, and zero repeat variance. The v2 procedure passed, but
-product-readiness certification failed.
-
-Holdouts v1 and v2 are now sealed. Do not inspect, rerun, regenerate,
-hash-check, infer from, or tune against either corpus. The recommended next
-slice is an aggregate-guided development-only semantic repair and
-corpus-engineering tranche focused on entity semantics, normalization,
-clarification, and safety. Preserve T3.1-T3.4 and the blocked external-call
-gate. Opening T3.5 or authorizing a later fresh certification holdout remains
-a documented user decision boundary.
-
-LC4V2R1 has now completed the first development-only slice: its new 21-case
-entity/normalization matrix passes 21/21 without changing the ordinary corpus
-aggregate or reopening either holdout. Continue with a separately frozen
-safety-language matrix before reconsidering live T3.5 execution.
-
-LC4V2R2 completed that separately frozen matrix at 28/28 after a 17/28
-baseline, with zero variance and no ordinary-development regression. T3.1-T3.4
-remain intact and blocked by default, and T3.5 remains deferred. Perform a
-development-only exit-gap reassessment before naming another repair tranche or
-requesting a later certification decision.
+Keep the live gate blocked. The next useful experiment is a capped,
+synthetic-only, no-write comparison across explicitly selected candidate LLMs.
+Do not implement or call T3.5 provider adapters until Yuri approves an exact
+provider/model list, cost cap, privacy and retention posture, kill switch, and
+evidence protocol. Protected holdouts v1-v10 remain sealed and are not inputs
+to that decision.

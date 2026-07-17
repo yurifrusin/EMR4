@@ -105,6 +105,7 @@ def _semantic_fingerprint(observation: ShadowObservation) -> tuple[object, ...]:
         response.tool_name,
         response.writes_authorized,
         response.claims_action_completed,
+        response.action_withdrawn,
     )
 
 

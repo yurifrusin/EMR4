@@ -1,6 +1,6 @@
 # Bernie Language Coverage Implementation Plan
 
-Status: approved course correction; implementation not started
+Status: language bridge certified; synthetic Silver v2 complete; provider-free T3R1 refresh accepted
 
 Date: 2026-07-14
 
@@ -441,16 +441,20 @@ without reopening or proving anything case-level about V6.
 
 ## Immediate Direction
 
-LC4V6D1 is complete with no runtime remediation. The next EMR4 language step
-is Yuri's certification-strategy decision. The recommended path is a genuinely
-fresh V7 whose content-blind framework scores extraction and policy
-clarification separately before composition and freezes thresholds before
-content. Alternative V6 reuse/rescoring requires an explicit separately
-reviewed policy and is not recommended. Keep sealed holdouts v1-v6 untouched,
-preserve T3.1-T3.4 blocked by default, and defer T3.5.
+LC4V10 completed the fresh-certification cycle at 576/576 with zero variance,
+and synthetic Silver v2 completed at 192/192 over two observations per case.
+T3R1 now projects all 192 noisy dialogues into the default-disabled shadow
+runner with a safe proposal vocabulary and explicit whole-action-withdrawal
+scoring. Its 384/384 result is an offline plumbing check, not model evidence.
+
+Keep holdouts v1-v10 sealed and the live T3 gate blocked. The next language
+decision is whether Yuri authorizes a capped, synthetic-only, no-write live
+comparison across named LLM providers and exact model versions. That approval
+must settle cost, privacy/retention, kill-switch, and evidence rules before any
+provider call.
 
 No user decision is required for ordinary development-only repair work. Pause if
-work would reuse/re-evaluate protected holdout v1 or v2, broaden historical-trove
+work would reuse/re-evaluate protected holdouts v1-v10, broaden historical-trove
 access, send sensitive data to a provider, accept material licensing/cost
 terms, open live-provider execution, create/reuse a certification holdout, or
 change diary write authority.
@@ -460,10 +464,9 @@ change diary write authority.
 After restarting the app, a new orchestrator should read `AGENTS.md`, this plan,
 the T1/T2 closeouts, the T3 shadow-evaluation status, and the active acceptance
 named in the Current Baton before changing code. It should verify `master`,
-`handoff/current`, and their origin refs; confirm the LC4R10 and LC4V2
-closeouts plus the LC4V6/D1 acceptances; preserve sealed holdouts v1-v6; and
-keep the blocked T3 gates intact. Pause for the V7-versus-explicit-reuse user
-decision before certification work.
+`handoff/current`, and their origin refs; confirm the LC4V10, synthetic Silver
+v2, and T3R1 acceptances; preserve sealed holdouts v1-v10; and keep the live T3
+gate blocked. Pause before any provider/model call or adapter activation.
 
 Recommended new-task prompt:
 
@@ -473,13 +476,10 @@ AGENTS.md and read docs/bernie-language-coverage-implementation-plan.md,
 docs/bernie-t1-stateful-scenario-laboratory.md,
 docs/bernie-t2-deterministic-behaviour-matrix.md, and
 docs/bernie-t3-shadow-evaluation.md. Verify the worktree and origin/master,
-then resume the active LC4V6D1 decision state through the normal Ariadne
-workflow. D1 passes 24/24 fresh layer-specific probes and authorizes no runtime
-repair. Pause for Yuri's choice between a genuinely fresh layer-specific V7
-(recommended) and an explicit separately reviewed reuse/rescoring policy. Do
-not open, list, search, rerun, regenerate, hash-check, infer from, or tune
-against sealed holdouts v1-v6. Preserve T3.1-T3.4 and defer T3.5 provider
-adapters and live calls. Continue
-through ordinary implementation, tests, review, commit, and push without
-pausing unless a documented user decision boundary is reached.
+then resume from the accepted provider-free T3R1 state through the normal
+Ariadne workflow. T3R1 projects all 192 admitted synthetic Silver v2 dialogues and its
+384/384 expected-decision echo proves offline plumbing only. Do not open, list,
+search, rerun, regenerate, hash-check, infer from, or tune against sealed
+holdouts v1-v10. Keep the live T3 gate blocked and pause before T3.5, external
+prompts, provider calls, raw-response retention, runtime wiring, or writes.
 ```

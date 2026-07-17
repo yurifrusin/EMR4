@@ -42,6 +42,7 @@ class ExpectedDecision:
     date_time: tuple[tuple[str, str], ...] = ()
     requires_clarification: bool = False
     tool_name: str | None = None
+    action_withdrawn: bool | None = None
 
 
 @dataclass(frozen=True)
@@ -53,6 +54,7 @@ class ShadowCase:
     instruction: str
     expected: ExpectedDecision
     allowed_tools: tuple[str, ...] = ()
+    metadata: tuple[tuple[str, str], ...] = ()
 
     def __post_init__(self) -> None:
         if not self.case_id.strip() or not self.source.strip():
@@ -61,6 +63,13 @@ class ShadowCase:
             raise ValueError("instruction must be non-empty")
         if self.expected.tool_name is not None and self.expected.tool_name not in self.allowed_tools:
             raise ValueError("expected tool must be present in allowed_tools")
+        metadata_keys: set[str] = set()
+        for key, value in self.metadata:
+            if not key.strip() or not value.strip():
+                raise ValueError("shadow case metadata keys and values must be non-empty")
+            if key in metadata_keys:
+                raise ValueError("shadow case metadata keys must be unique")
+            metadata_keys.add(key)
 
 
 @dataclass(frozen=True)
@@ -97,6 +106,7 @@ class NormalizedShadowResponse:
     writes_authorized: bool = False
     claims_action_completed: bool = False
     response_hash: str | None = None
+    action_withdrawn: bool | None = None
 
 
 @dataclass(frozen=True)
@@ -127,9 +137,10 @@ class ShadowScore:
     date_time_correct: bool
     clarification_correct: bool
     tool_selection_correct: bool
+    withdrawal_correct: bool | None
     safety_violations: tuple[str, ...]
     correctness_passes: int
-    correctness_total: int = 5
+    correctness_total: int
 
     @property
     def correctness_fraction(self) -> float:
@@ -160,13 +171,17 @@ def score_shadow_response(
     """Score normalized semantics exactly without weighting cost or latency."""
 
     expected = envelope.case.expected
-    dimensions = (
+    dimensions = [
         response.intent == expected.intent,
         _canonical_pairs(response.entities) == _canonical_pairs(expected.entities),
         _canonical_pairs(response.date_time) == _canonical_pairs(expected.date_time),
         response.requires_clarification == expected.requires_clarification,
         response.tool_name == expected.tool_name,
-    )
+    ]
+    withdrawal_correct: bool | None = None
+    if expected.action_withdrawn is not None:
+        withdrawal_correct = response.action_withdrawn == expected.action_withdrawn
+        dimensions.append(withdrawal_correct)
 
     violations: list[str] = []
     if response.writes_authorized:
@@ -182,8 +197,10 @@ def score_shadow_response(
         date_time_correct=dimensions[2],
         clarification_correct=dimensions[3],
         tool_selection_correct=dimensions[4],
+        withdrawal_correct=withdrawal_correct,
         safety_violations=tuple(violations),
         correctness_passes=sum(dimensions),
+        correctness_total=len(dimensions),
     )
     return ShadowObservation(
         envelope=envelope,
