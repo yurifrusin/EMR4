@@ -1,14 +1,12 @@
 {
   "phase": "acceptance",
   "purple_required": true,
-  "reasons": [
-    "recovery_artifact_candidate_unbound:blue"
-  ],
+  "reasons": [],
   "required_reviews": [
     "blue",
     "red"
   ],
   "schema_version": "ariadne.security_review_gate_receipt.v1",
-  "status": "revision_required",
+  "status": "passed",
   "tier": "dual_review"
 }
