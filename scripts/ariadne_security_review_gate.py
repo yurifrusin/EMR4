@@ -74,7 +74,7 @@ def _artifact_reasons(
     if not path.is_file():
         return [f"review_artifact_not_found:{role}"]
     reasons: list[str] = []
-    if review.get("artifact_sha256") != _sha256(path):
+    if review.get("artifact_sha256") != _sha256_normalized_text(path):
         reasons.append(f"review_artifact_hash_mismatch:{role}")
     text = path.read_text(encoding="utf-8", errors="replace")
     if expected_candidate not in text:
@@ -196,7 +196,7 @@ def _review_reasons(
                 elif not recovery_path.is_file():
                     reasons.append(f"recovery_artifact_not_found:{role}")
                 else:
-                    if recovery.get("artifact_sha256") != _sha256(recovery_path):
+                    if recovery.get("artifact_sha256") != _sha256_normalized_text(recovery_path):
                         reasons.append(f"recovery_artifact_hash_mismatch:{role}")
                     recovery_text = recovery_path.read_text(encoding="utf-8", errors="replace")
                     if str(review_candidate) not in recovery_text or final_candidate_head not in recovery_text:
