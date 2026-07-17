@@ -7345,11 +7345,8 @@ Office.onReady(() => {
   try { Office.context?.ui?.messageParent(JSON.stringify({ type: "ready" })); } catch (_) {}
 
   const urlParams = new URLSearchParams(window.location.search);
-  const isSmoke = isSmokeMode();
   const reviewParam = urlParams.get("bernie_review");
   const devReviewParam = isLocalHarnessCapabilityEnabled("bernie_dev_review") ? "true" : null;
-  const hasLiveDevReview = reviewParam === "live" && devReviewParam === "true";
-  const isDevFixture = devReviewParam === "true" && isBernieDevFixtureState(reviewParam);
 
   const devReviewTools = document.getElementById("bernie-dev-review-tools");
   const devStateSelect = document.getElementById("bernie-dev-state-select");
@@ -7369,13 +7366,9 @@ Office.onReady(() => {
     }
   }
 
-  if (!token && !isSmoke && !hasLiveDevReview && !isDevFixture) {
-    setStatus("Waiting for auth token...");
-    showAuthBanner();
-  }
-  if (isSmoke) { loadSmokeDiary(); }
-  else if (token) { loadAuthenticatedDiary(); scheduleRefresh(); }
-  if (isSmoke || hasLiveDevReview || isDevFixture) { initBernieReview(); }
+  loadDiary();
+  scheduleRefresh();
+  initBernieReview();
   checkBerniePilotEligibility();
 });
 

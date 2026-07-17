@@ -24,8 +24,9 @@ def test_local_smoke_loader_cannot_bypass_authenticated_diary_loader() -> None:
     assert "return loadDiaryData(silent, options, false);" in source
     assert "async function loadSmokeDiary(silent = false, options = {})" in source
     assert "return loadDiaryData(silent, options, true);" in source
-    assert "if (isSmoke) { loadSmokeDiary(); }" in source
-    assert "else if (token) { loadAuthenticatedDiary(); scheduleRefresh(); }" in source
+    assert "loadDiary();\n  scheduleRefresh();\n  initBernieReview();" in source
+    assert "if (isSmoke) { loadSmokeDiary(); }" not in source
+    assert "else if (token) { loadAuthenticatedDiary(); scheduleRefresh(); }" not in source
     assert "if (token || isSmoke" not in source
     assert "if (!token && !smokeMode)" not in source
 
