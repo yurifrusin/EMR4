@@ -52,8 +52,9 @@
       "resource_id": "antigravity-gemini-flash-3-5-worker",
       "packet_path": "orchestration/agent_inbox/codex/security-hardening-codeql-final-red-packet.md",
       "candidate_head": "a248f659545975ada9662e08f89962c87952e77f",
-      "artifact_path": null,
-      "decision": "pending",
+      "artifact_path": "orchestration/agent_inbox/antigravity/security-hardening-codeql-final-red-review.md",
+      "artifact_sha256": "353e38406170f2b7e27a5db166e4441241b6e6a4beb657323b72cd3fa719876d",
+      "decision": "pass",
       "fresh_context": true,
       "candidate_only": true,
       "prior_review_artifacts_excluded": true
@@ -62,8 +63,9 @@
       "required": true,
       "resource_id": "openai-primary-orchestrator",
       "candidate_head": "a248f659545975ada9662e08f89962c87952e77f",
-      "artifact_path": null,
-      "decision": "pending"
+      "artifact_path": "orchestration/agent_inbox/codex/security-hardening-codeql-purple-acceptance.md",
+      "artifact_sha256": "249b9f280cf892c4f8529de2c5e9c93257a23804f8b7778c75054674e18a5360",
+      "decision": "pass"
     }
   },
   "superseded_reviews": [
