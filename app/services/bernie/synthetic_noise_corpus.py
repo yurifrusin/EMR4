@@ -100,9 +100,17 @@ def _surface_evidence(scenario: Any) -> dict[str, list[str]]:
 
 
 def _representative_for_group(group: Any) -> Any:
-    if group.spec.dialogue_form != "one_shot" and group.multi_turn_variants:
-        return group.multi_turn_variants[0]
-    return group.surface_variants[0]
+    matching = [
+        scenario
+        for scenario in group.all_variants
+        if scenario.dialogue_form == group.spec.dialogue_form
+    ]
+    if not matching:
+        raise RuntimeError(
+            f"No development variant matches {group.group_id} dialogue form "
+            f"{group.spec.dialogue_form!r}"
+        )
+    return matching[0]
 
 
 def build_semantic_seed_manifest() -> dict[str, Any]:
@@ -317,6 +325,13 @@ def validate_candidate_records(
         if not isinstance(turns, list) or not 1 <= len(turns) <= 4:
             errors.append(f"{label}: dialogue_turns must contain 1-4 turns")
             turns = []
+        dialogue_form = seed["semantic_contract"]["dialogue_form"]
+        if dialogue_form == "one_shot" and len(turns) != 1:
+            errors.append(f"{label}: one_shot seed requires exactly one turn")
+        elif dialogue_form != "one_shot" and len(turns) < 2:
+            errors.append(
+                f"{label}: {dialogue_form} seed requires at least two turns"
+            )
         utterances: list[str] = []
         for turn_index, turn in enumerate(turns):
             if not isinstance(turn, dict) or set(turn) != {"turn", "speaker", "utterance"}:

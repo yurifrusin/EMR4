@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from collections import Counter
 
 from app.services.bernie.synthetic_noise_corpus import (
     CANDIDATE_SCHEMA_VERSION,
@@ -56,6 +57,24 @@ def test_semantic_seed_manifest_covers_all_implemented_actions() -> None:
     }
 
 
+def test_semantic_seed_manifest_balances_all_dialogue_forms() -> None:
+    manifest = build_semantic_seed_manifest()
+    dialogue_forms = Counter(
+        seed["semantic_contract"]["dialogue_form"] for seed in manifest["seeds"]
+    )
+
+    assert dialogue_forms == {
+        "one_shot": 12,
+        "clarification": 12,
+        "correction": 12,
+        "reversal": 12,
+        "ellipsis": 12,
+        "anaphora": 12,
+        "repeated": 12,
+        "session_restart": 12,
+    }
+
+
 def _valid_candidate(seed: dict[str, object]) -> dict[str, object]:
     tokens = []
     for values in seed["surface_evidence"].values():
@@ -73,6 +92,17 @@ def _valid_candidate(seed: dict[str, object]) -> dict[str, object]:
                 {"turn_index": 0, "start": start, "end": end, "text": value}
             )
             cursor = end + 1
+    dialogue_turns = [
+        {"turn": 1, "speaker": "receptionist", "utterance": utterance}
+    ]
+    if seed["semantic_contract"]["dialogue_form"] != "one_shot":
+        dialogue_turns.append(
+            {
+                "turn": 2,
+                "speaker": "receptionist",
+                "utterance": f"continuing {seed['seed_id']}",
+            }
+        )
     return {
         "schema_version": CANDIDATE_SCHEMA_VERSION,
         "candidate_id": f"test_{seed['seed_id']}_01",
@@ -86,9 +116,7 @@ def _valid_candidate(seed: dict[str, object]) -> dict[str, object]:
         "variant_index": 1,
         "noise_level": "medium",
         "noise_operations": ["filler", "reordered_slots"],
-        "dialogue_turns": [
-            {"turn": 1, "speaker": "receptionist", "utterance": utterance}
-        ],
+        "dialogue_turns": dialogue_turns,
         "evidence_spans": spans,
         "semantic_change": "none",
         "provenance": "silver",

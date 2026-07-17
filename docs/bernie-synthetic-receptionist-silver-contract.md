@@ -2,7 +2,7 @@
 
 Date: 2026-07-17
 
-Status: `pre_generation_contract`
+Status: `corrected_pre_generation_contract`
 
 Authority: Yuri's multi-model development-only corpus authorization
 
@@ -34,23 +34,36 @@ provider-adapter, confirmation, database, deployment, or write authority.
 
 ## Generation allocation
 
-The initial batch uses three independent generator identities:
+The first attempted wave used three generator identities. It was invalidated
+before integration because the Sol-owned seed exporter selected the first
+multi-turn variant for 84 groups instead of the variant matching each group's
+intended dialogue form. No candidate from that wave is accepted.
+
+The corrected manifest contains exactly 12 anchors for each dialogue form:
+one-shot, clarification, correction, reversal, ellipsis, anaphora, repeated,
+and session restart. Every non-one-shot candidate requires at least two
+receptionist turns.
+
+The corrected recovery and review allocation is:
 
 | Lane | Generator | Output target |
 |---|---|---:|
-| DeepSeek | DeepSeek V4 Flash/high through Claude Code `--bare` | 192 |
-| Gemini | Gemini 3.5 Flash through a fresh Antigravity project | 192 |
-| Codex | Native Codex worker in an isolated task worktree | 192 |
+| Sol recovery | Adopt the rejected Codex generator only as untrusted source under the recovery lease and regenerate from corrected anchors | 192 |
+| Gemini review | Fresh Gemini 3.5 Flash project reviews the exact recovered candidate | 192 reviews |
+| DeepSeek review | Fresh DeepSeek V4 Flash session reviews the exact recovered candidate | 192 reviews |
 
-Each lane receives all 96 semantic anchors and writes exactly two candidates
+The recovered generation receives all 96 semantic anchors and writes exactly two candidates
 per anchor:
 
 - variant 1: `medium`, with at least two declared noise operations;
 - variant 2: `high`, with at least three declared noise operations.
 
-The same model identity cannot accept or certify its own candidates. Later
-cross-review rotates model identities, while Sol owns final merge,
-quarantine, and acceptance.
+The same model identity cannot accept or certify its own candidates. Cross-
+review uses two model identities distinct from the original Codex generator,
+while Sol owns recovery, merge, quarantine, and acceptance. Gemini's first-wave generation candidate is preserved as rejected:
+its own checks passed, but the Sol validator found 168 duplicate dialogue
+payloads and its action templates did not represent distinct ambiguity and
+dialogue contracts. It receives no same-lane generation correction loop.
 
 ## Candidate record
 
