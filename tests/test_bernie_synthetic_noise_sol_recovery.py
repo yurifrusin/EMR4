@@ -83,3 +83,13 @@ def test_recovered_correction_forms_replace_generic_practitioner() -> None:
         first, final = record["dialogue_turns"]
         assert "a doctor" in first["utterance"]
         assert "Dr Shera" in final["utterance"]
+
+
+def test_every_declared_correction_is_explicit_in_the_dialogue() -> None:
+    _, records = _inputs()
+
+    corrected = [record for record in records if "correction" in record["noise_operations"]]
+    assert corrected
+    for record in corrected:
+        dialogue = " ".join(turn["utterance"] for turn in record["dialogue_turns"])
+        assert "Correction—" in dialogue or "—sorry," in dialogue

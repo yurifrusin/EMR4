@@ -187,11 +187,14 @@ def _patient_phrase(seed: dict[str, Any]) -> str:
 
 
 def _practitioner_phrase(seed: dict[str, Any]) -> str:
-    semantics = seed["semantic_contract"]["practitioner_semantics"]
+    contract = seed["semantic_contract"]
+    semantics = contract["practitioner_semantics"]
     if semantics == "ambiguous":
         return "a doctor"
     if semantics == "omitted":
         return ""
+    if semantics == "corrected" and contract["dialogue_form"] != "correction":
+        return "a doctor—sorry, Dr Shera"
     return _surface_value(seed, "practitioner")
 
 
@@ -467,14 +470,14 @@ def _build_spans(
     return spans
 
 
-def _operations(seed: dict[str, Any], variant_index: int) -> list[str]:
+def _operations(
+    seed: dict[str, Any],
+    variant_index: int,
+    turns: list[dict[str, Any]],
+) -> list[str]:
     operations = list(MEDIUM_OPERATIONS if variant_index == 1 else HIGH_OPERATIONS)
     contract = seed["semantic_contract"]
-    if (
-        contract["entity_state"] == "corrected"
-        or contract["patient_semantics"] == "corrected"
-        or contract["practitioner_semantics"] == "corrected"
-    ):
+    if any("—sorry," in turn["utterance"] for turn in turns):
         operations.append("correction")
     dialogue_form = contract["dialogue_form"]
     if dialogue_form in {"correction", "reversal", "ellipsis", "anaphora"}:
@@ -524,7 +527,7 @@ def build_candidates(manifest: dict[str, Any]) -> list[dict[str, Any]]:
                     "generator_identity": dict(GENERATOR_IDENTITY),
                     "variant_index": variant_index,
                     "noise_level": "medium" if variant_index == 1 else "high",
-                    "noise_operations": _operations(seed, variant_index),
+                    "noise_operations": _operations(seed, variant_index, turns),
                     "dialogue_turns": turns,
                     "evidence_spans": _build_spans(seed, turns),
                     "semantic_change": "none",

@@ -42,13 +42,18 @@ regeneration.
 10. Added independent regression tests for deterministic regeneration,
     central validator parity, dialogue-form coverage, closed authority, and
     correction replacement.
+11. After the first independent review round, removed `correction` operation
+    labels from 18 candidates whose text did not explicitly exhibit a
+    correction. The dialogue and semantic anchors were unchanged. Added a
+    regression assertion that every remaining correction declaration has an
+    explicit `Correction—` or `—sorry,` surface.
 
 ## Recovered candidate
 
 - Path: `tests/fixtures/bernie_synthetic_noise/candidates_sol_recovery.jsonl`
 - Count: 192 candidates from 96 seeds
-- File payload hash: `sha256:e4993ee85b2ad4c76f8a5db155364759f3b41fbafbf564816bc6e1594323df30`
-- Canonical candidate-record hash: `sha256:a7d2292adb4aca76c86fcdd019dc44d1708d9723a9b282db181327af889039bf`
+- File payload hash: `sha256:193b705e0ce06fa32b72a063dec659e52a584fc489137bd7cbad8e511940e37f`
+- Canonical candidate-record hash: `sha256:ae14c613ecdd87aac39201d44a8024f3b9216f871c7d5859c4249e7f4026c665`
 - Provenance/adjudication: `silver/pending`
 - Protected holdout access: false
 - Historical diary access: false
@@ -60,7 +65,7 @@ regeneration.
 ```text
 central candidate validator: pass, 192/192
 pytest tests/test_bernie_synthetic_noise_corpus.py
-       tests/test_bernie_synthetic_noise_sol_recovery.py: 10 passed
+       tests/test_bernie_synthetic_noise_sol_recovery.py: 11 passed
 ```
 
 This is a recovered candidate set, not admission, Gold evidence,
