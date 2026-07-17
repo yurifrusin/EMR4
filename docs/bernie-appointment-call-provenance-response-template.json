@@ -1,0 +1,60 @@
+{
+  "schema_version": "emr4.bernie.appointment_call_provenance_response.v1",
+  "prepared_at": "2026-07-17",
+  "source_reference": "ammarshafiq/healthcare-appointment-booking-calls-dataset",
+  "prior_decision": "stop_before_content_download",
+  "inquiry": {
+    "status": "closed_unsent_product_misaligned",
+    "channel": null,
+    "sent_at_utc": null,
+    "sender_identity": null,
+    "message_reference": null
+  },
+  "response": {
+    "received": false,
+    "received_at_utc": null,
+    "sender": null,
+    "channel": null,
+    "public_reference": null,
+    "local_confidential_evidence_location": null,
+    "committed_content_included": false
+  },
+  "gates": {
+    "controller_identity": "not_received",
+    "jurisdiction_and_collection": "not_received",
+    "recording_and_disclosure_basis": "not_received",
+    "uploader_authority": "not_received",
+    "recording_rights": "not_received",
+    "transcript_and_content_rights": "not_received",
+    "licence_scope": "not_received",
+    "data_lineage": "not_received",
+    "deidentification_method": "not_received",
+    "residual_risk_assessment": "not_received",
+    "permitted_downstream_use": "not_received"
+  },
+  "evidence": [],
+  "verification_notes": [],
+  "unresolved_blockers": [
+    "controller_identity",
+    "jurisdiction_and_collection",
+    "recording_and_disclosure_basis",
+    "uploader_authority",
+    "recording_rights",
+    "transcript_and_content_rights",
+    "licence_scope",
+    "data_lineage",
+    "deidentification_method",
+    "residual_risk_assessment",
+    "permitted_downstream_use"
+  ],
+  "actions": {
+    "corpus_downloaded": false,
+    "corpus_content_opened": false,
+    "provider_or_model_transmission": false,
+    "sample_audit_started": false,
+    "development_or_evaluation_use": false
+  },
+  "preliminary_disposition": "inquiry_not_planned_product_misaligned",
+  "download_authorized": false,
+  "requires_fresh_yuri_decision": true
+}
