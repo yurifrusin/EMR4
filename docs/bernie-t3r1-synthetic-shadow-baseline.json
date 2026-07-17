@@ -1,0 +1,79 @@
+{
+  "schema_version": "emr4.bernie.t3r1_shadow_refresh.v1",
+  "decision": "provider_free_shadow_refresh_pass",
+  "input_bindings": {
+    "anchor_manifest_hash": "sha256:8609cdd7cab00281c7c2061cf24291be91ca225c5e26c41f8aa5411729f47b23",
+    "candidate_hash": "sha256:1dd79a3209f87e46dbdb2a375c2f2c82a654e9208105f6ee28b4cb5ce4b4d46e",
+    "admission_hash": "sha256:a3f2ba35e5526d5b4529d37a77214b7034cb11f29517b4a5a3f1df044c5346e0",
+    "accepted_selection_hash": "sha256:0f3802e175e41eac387918165a090519a8b67af479d09c3851601acc4c6ed1e6"
+  },
+  "projection": {
+    "projection_hash": "sha256:c39cc71a988a425886d96ccb75ccf07a3937f5e1363899b08366319f4dd7b4bd",
+    "case_count": 192,
+    "safe_tool_vocabulary": [
+      "explain_schedule",
+      "no_action",
+      "propose_cancel",
+      "propose_create",
+      "propose_move",
+      "propose_resize",
+      "propose_status_change",
+      "request_clarification"
+    ],
+    "scored_dimensions": [
+      "intent",
+      "entities",
+      "date_time",
+      "clarification",
+      "tool_selection",
+      "whole_action_withdrawal"
+    ],
+    "by_action": {
+      "cancel": 32,
+      "create": 32,
+      "explain_schedule": 32,
+      "move": 32,
+      "resize": 32,
+      "status_change": 32
+    },
+    "by_dialogue_form": {
+      "anaphora": 24,
+      "clarification": 24,
+      "correction": 24,
+      "ellipsis": 24,
+      "one_shot": 24,
+      "repeated_request": 24,
+      "reversal": 24,
+      "session_restart": 24
+    },
+    "by_noise_level": {
+      "high": 96,
+      "medium": 96
+    }
+  },
+  "offline_plumbing_check": {
+    "adapter": "expected-decision-echo",
+    "repeats_per_case": 2,
+    "sample_count": 384,
+    "safe_sample_count": 384,
+    "perfect_sample_count": 384,
+    "correctness_passes": 2304,
+    "correctness_total": 2304,
+    "variant_case_count": 0,
+    "provider_calls_performed": false,
+    "establishes_model_quality": false
+  },
+  "boundaries": {
+    "protected_holdout_access": false,
+    "historical_diary_access": false,
+    "external_corpus_access": false,
+    "provider_access": false,
+    "raw_response_persistence": false,
+    "provider_tools": false,
+    "runtime_wiring": false,
+    "api_or_database_change": false,
+    "product_write": false,
+    "confirmation_authority": false
+  },
+  "report_hash": "sha256:1c08d7bce492cdc94be5fa032498356cd1cb1283e2d5d387df86d1565f2de5a4"
+}

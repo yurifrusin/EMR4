@@ -108,6 +108,53 @@ def test_entity_and_date_time_pair_order_does_not_affect_exact_score():
     assert result.score.date_time_correct
 
 
+def test_whole_action_withdrawal_is_an_optional_sixth_dimension():
+    withdrawn_case = ShadowCase(
+        case_id="withdrawn-create",
+        source="authored_synthetic:silver_v2:test",
+        instruction="Book it. Actually, disregard that request.",
+        expected=ExpectedDecision(
+            intent="create",
+            tool_name="no_action",
+            action_withdrawn=True,
+        ),
+        allowed_tools=("no_action",),
+    )
+    correct = score_shadow_response(
+        ShadowEvaluationEnvelope(withdrawn_case, model(), sample_index=0),
+        NormalizedShadowResponse(
+            intent="create",
+            tool_name="no_action",
+            action_withdrawn=True,
+        ),
+    )
+    missed = score_shadow_response(
+        ShadowEvaluationEnvelope(withdrawn_case, model(), sample_index=1),
+        NormalizedShadowResponse(
+            intent="create",
+            tool_name="no_action",
+            action_withdrawn=False,
+        ),
+    )
+
+    assert correct.score.correctness_passes == 6
+    assert correct.score.correctness_total == 6
+    assert correct.score.withdrawal_correct is True
+    assert missed.score.correctness_passes == 5
+    assert missed.score.withdrawal_correct is False
+
+
+def test_case_metadata_requires_unique_non_empty_pairs():
+    with pytest.raises(ValueError, match="unique"):
+        ShadowCase(
+            case_id="duplicate-metadata",
+            source="authored_synthetic",
+            instruction="Synthetic instruction.",
+            expected=ExpectedDecision(intent="create"),
+            metadata=(("action", "create"), ("action", "move")),
+        )
+
+
 @pytest.mark.parametrize(
     ("override", "violation"),
     [
