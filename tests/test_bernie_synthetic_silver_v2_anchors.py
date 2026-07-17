@@ -248,22 +248,36 @@ def test_mutation_anchors_have_tools_outcome_deltas() -> None:
             )
 
 
-def test_successful_mutation_contracts_preserve_source_delta_shapes() -> None:
+def test_successful_mutation_contracts_use_canonical_surfaced_delta_shapes() -> None:
     manifest = build_v2_anchor_manifest()
-    sources = {
-        scenario.scenario_id: scenario
-        for scenario in DevelopmentOnlyLoader().load_all().all_variants()
+    change_types = {
+        "create": "created",
+        "move": "moved",
+        "resize": "resized",
+        "cancel": "cancelled",
+        "status_change": "status_changed",
     }
     for anchor in manifest["anchors"]:
         form = anchor["dialogue_form_contract"]["dialogue_form"]
         sc = anchor["semantic_contract"]
         if form in {"clarification", "reversal"} or sc["intended_action"] == "explain_schedule":
             continue
-        source = sources[anchor["source_scenario_id"]]
-        assert sc["expected_tool_sequence"] == source.expected_tool_sequence
-        assert sc["expected_outcome_kind"] == source.expected_outcome_kind
-        assert sc["expected_appointment_deltas"] == source.expected_appointment_deltas
-        assert sc["expected_audit_deltas"] == source.expected_audit_deltas
+        change_type = change_types[sc["intended_action"]]
+        values = sc["normalized_values"]
+        assert sc["expected_appointment_deltas"] == [{
+            "appointment_id": "apt-001",
+            "change_type": change_type,
+            "patient_id": "p-001",
+            "practitioner_id": "pr-001",
+            "date": values["appointment_date"],
+            "start_time": values.get("earliest_time", ""),
+            "duration_minutes": values.get("duration_minutes", 15),
+        }]
+        assert sc["expected_audit_deltas"] == [{
+            "change_type": change_type,
+            "appointment_id": "apt-001",
+            "count": 1,
+        }]
 
 
 # ==========================================================================

@@ -58,9 +58,9 @@ def test_committed_candidates_and_admission_regenerate_exactly() -> None:
 
 def test_exact_candidate_and_admission_hashes() -> None:
     _, records, admission = _artifacts()
-    assert candidate_records_hash(records) == "sha256:634a7de32356d41232a279c335bcfb5e5a13cf6df884b8abf43e9769b7dc4cf9"
+    assert candidate_records_hash(records) == "sha256:1dd79a3209f87e46dbdb2a375c2f2c82a654e9208105f6ee28b4cb5ce4b4d46e"
     assert candidate_file_hash(records) == admission["file_payload_hash"]
-    assert admission["admission_hash"] == "sha256:a630151b011ae09b63ae6daee84aabefb4a4e913c514a13e918d68c570e80cce"
+    assert admission["admission_hash"] == "sha256:a3f2ba35e5526d5b4529d37a77214b7034cb11f29517b4a5a3f1df044c5346e0"
 
 
 def test_all_candidate_evidence_spans_slice_exactly() -> None:
@@ -101,7 +101,7 @@ def test_declared_core_noise_operations_are_surfaced() -> None:
             assert text.rfind(action) > text.find(appointment_date)
         else:
             assert {"speech_disfluency", "dictation_artifact", "reordered_slots"}.issubset(operations)
-            assert "uh" in text.lower() or "Dictated in short fragments" in text
+            assert "uh" in text.lower() or "Dictated as clipped fragments" in text
 
 
 def test_clarification_candidates_surface_unresolved_ambiguity() -> None:
@@ -126,7 +126,8 @@ def test_correction_candidates_surface_prior_replacement_and_final_value() -> No
             continue
         assert "Dr Patel" in record["dialogue_turns"][0]["utterance"]
         final = record["dialogue_turns"][-1]["utterance"]
-        assert "Correction" in final and "replace Dr Patel with Dr Shera" in final
+        assert "Correction" in final and "replace the practitioner" in final
+        assert "use Dr Shera instead" in final
 
 
 def test_reversal_candidates_surface_whole_action_withdrawal() -> None:

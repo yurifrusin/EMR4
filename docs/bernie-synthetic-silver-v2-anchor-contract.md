@@ -2,7 +2,7 @@
 
 Date: 2026-07-17
 
-Status: `frozen_pre_content_candidate`
+Status: `product_complete_pending_independent_acceptance`
 
 Authority: Yuri's 2026-07-17 standing synthetic-development authorization
 
@@ -40,11 +40,11 @@ surfaced request.
 
 Each anchor has a new `emr4.bernie.synthetic_noise_seed.v2` identity and binds
 one named ordinary-development source scenario only as a provenance base for
-fictional entities, reference date, diary state, and action-specific delta
-shape. V2 independently freezes its surfaced semantics, clarification state,
-expected tools, outcome, appointment deltas, and audit deltas. The source
-scenario's dialogue and inconsistent oracle fields are not copied into the
-anchor.
+fictional entities, reference date, temporal facts, and an executable diary
+state. V2 independently freezes its surfaced semantics, clarification state,
+expected tools, outcome, and canonical simulated appointment/audit delta
+shapes. The source scenario's dialogue and inconsistent oracle fields are not
+copied into the anchor.
 
 Every anchor records:
 

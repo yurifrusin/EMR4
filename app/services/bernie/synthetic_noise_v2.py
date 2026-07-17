@@ -83,6 +83,13 @@ _ACTION_TOOLS: dict[str, list[str]] = {
     "explain_schedule": ["search_patients", "find_slots"],
 }
 
+_EXECUTABLE_NON_CREATE_STATES = {
+    "empty",
+    "exact_duplicate",
+    "overlap",
+    "same_day_distinct",
+}
+
 
 # ---------------------------------------------------------------------------
 # Deterministic helpers
@@ -165,6 +172,13 @@ def _source_is_eligible(
     return bool(
         scenario.intended_action == action
         and scenario.action_semantics == "intended"
+        # Non-clarification create cells model executable requests. Approximate
+        # create targets are intentionally fail-closed by the product.
+        and (action != "create" or scenario.temporal_relation == "exact")
+        and (
+            action in {"create", "explain_schedule"}
+            or scenario.diary_state in _EXECUTABLE_NON_CREATE_STATES
+        )
         and scenario.entity_state == "exact"
         and patient_is_coherent
         and scenario.practitioner_semantics == "exact"
@@ -192,6 +206,33 @@ def _build_semantic_contract(
     is_reversal = form_v2 == "reversal"
     is_schedule = action == "explain_schedule"
 
+    earliest_time = scenario.earliest_time
+    latest_time = scenario.latest_time
+    if (
+        scenario.temporal_relation == "approximate"
+        and earliest_time is not None
+        and latest_time is not None
+    ):
+        lower_minutes = int(earliest_time[:2]) * 60 + int(earliest_time[3:])
+        upper_minutes = int(latest_time[:2]) * 60 + int(latest_time[3:])
+        midpoint = (lower_minutes + upper_minutes) // 2
+        lower = max(0, midpoint - 30)
+        upper = min(23 * 60 + 59, midpoint + 30)
+        earliest_time = f"{lower // 60:02d}:{lower % 60:02d}"
+        latest_time = f"{upper // 60:02d}:{upper % 60:02d}"
+
+    # Freeze only values the generated dialogue will actually surface. Source
+    # scenarios provide provenance and temporal facts, not a replay oracle.
+    normalized_values = {
+        "appointment_date": scenario.normalized_values["appointment_date"],
+    }
+    if earliest_time is not None:
+        normalized_values["earliest_time"] = earliest_time
+    if latest_time is not None:
+        normalized_values["latest_time"] = latest_time
+    if action in {"create", "resize"}:
+        normalized_values["duration_minutes"] = scenario.duration_minutes or 15
+
     if is_clarification:
         outcome = "clarification_required"
     elif is_reversal:
@@ -206,18 +247,32 @@ def _build_semantic_contract(
     elif is_schedule:
         tools = ["find_slots"]
     else:
-        tools = list(scenario.expected_tool_sequence)
+        tools = list(_ACTION_TOOLS[action])
 
-    apt_deltas = (
-        []
-        if is_clarification or is_reversal
-        else deepcopy(scenario.expected_appointment_deltas)
-    )
-    audit_deltas = (
-        []
-        if is_clarification or is_reversal
-        else deepcopy(scenario.expected_audit_deltas)
-    )
+    apt_deltas: list[dict[str, Any]] = []
+    audit_deltas: list[dict[str, Any]] = []
+    if not is_clarification and not is_reversal and not is_schedule:
+        change_type = {
+            "create": "created",
+            "move": "moved",
+            "resize": "resized",
+            "cancel": "cancelled",
+            "status_change": "status_changed",
+        }[action]
+        apt_deltas = [{
+            "appointment_id": "apt-001",
+            "change_type": change_type,
+            "patient_id": "p-001",
+            "practitioner_id": "pr-001",
+            "date": normalized_values["appointment_date"],
+            "start_time": normalized_values.get("earliest_time", ""),
+            "duration_minutes": normalized_values.get("duration_minutes", 15),
+        }]
+        audit_deltas = [{
+            "change_type": change_type,
+            "appointment_id": "apt-001",
+            "count": 1,
+        }]
 
     patient_semantics = scenario.patient_semantics
     practitioner_semantics = scenario.practitioner_semantics
@@ -233,7 +288,6 @@ def _build_semantic_contract(
             clar_choices = [
                 "Margaret Thompson",
                 "Robert Johnson",
-                "Sarah Williams",
             ]
         else:
             patient_semantics = "omitted" if is_schedule else "exact"
@@ -245,7 +299,6 @@ def _build_semantic_contract(
             clar_choices = [
                 "Dr Shera",
                 "Dr Patel",
-                "Dr Chen",
             ]
     else:
         clar_question = None
@@ -261,17 +314,17 @@ def _build_semantic_contract(
         "reference_date": scenario.reference_date.isoformat(),
         "clinic_clock": scenario.clinic_clock.isoformat(),
         "intended_action": scenario.intended_action,
-        "action_semantics": scenario.action_semantics,
+        "action_semantics": "ambiguous" if is_clarification else "intended",
         "temporal_relation": scenario.temporal_relation,
-        "earliest_time": scenario.earliest_time,
-        "latest_time": scenario.latest_time,
-        "normalized_values": dict(scenario.normalized_values),
-        "duration_minutes": scenario.duration_minutes,
+        "earliest_time": earliest_time,
+        "latest_time": latest_time,
+        "normalized_values": normalized_values,
+        "duration_minutes": scenario.duration_minutes if action in {"create", "resize"} else None,
         "patient_semantics": patient_semantics,
         "practitioner_semantics": practitioner_semantics,
         "location_semantics": scenario.location_semantics,
         "appointment_type_semantics": scenario.appointment_type_semantics,
-        "duration_semantics": scenario.duration_semantics,
+        "duration_semantics": "exact" if action in {"create", "resize"} else "omitted",
         "diary_state": scenario.diary_state,
         "entity_state": entity_state,
         "initial_diary_state": deepcopy(scenario.initial_diary_state),
