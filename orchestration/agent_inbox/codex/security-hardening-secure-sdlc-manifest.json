@@ -7,7 +7,7 @@
     "owner_resource_id": "openai-primary-orchestrator",
     "rationale": "Changes security controls, confirmation handling, external UI behaviour, CI admission, and repository protection."
   },
-  "candidate_head": "604b3452787d45ad99d9f08e70101bfd87516671",
+  "candidate_head": "4efe9ff3363c3f563a03a1f5bd0978998ca55d07",
   "declared_tier": "dual_review",
   "triggers": [
     "confirmation_workflow",
@@ -37,14 +37,21 @@
       "resource_id": "deepseek-flash-workers",
       "packet_path": "orchestration/agent_inbox/codex/security-hardening-blue-packet.md",
       "candidate_head": "604b3452787d45ad99d9f08e70101bfd87516671",
-      "artifact_path": null,
-      "decision": "pending"
+      "artifact_path": "orchestration/agent_inbox/deepseek/security-hardening-blue-review.md",
+      "artifact_sha256": "240ca5c1a07664608ca7a04ab6a016ebbd94582da4e7793d4ff2d769db883b8f",
+      "decision": "pass",
+      "disposition": "recovered_by_orchestrator",
+      "recovery": {
+        "owner_resource_id": "openai-primary-orchestrator",
+        "artifact_path": "orchestration/agent_inbox/codex/security-hardening-sol-recovery.md",
+        "artifact_sha256": "48f5b5c1bd280f06bf6dcd95841ae96ec45edd05f6d18f5598630adbec4000bd"
+      }
     },
     "red": {
       "required": true,
       "resource_id": "antigravity-gemini-flash-3-5-worker",
-      "packet_path": "orchestration/agent_inbox/codex/security-hardening-red-packet.md",
-      "candidate_head": "604b3452787d45ad99d9f08e70101bfd87516671",
+      "packet_path": "orchestration/agent_inbox/codex/security-hardening-final-red-packet.md",
+      "candidate_head": "4efe9ff3363c3f563a03a1f5bd0978998ca55d07",
       "artifact_path": null,
       "decision": "pending",
       "fresh_context": true,
@@ -54,10 +61,19 @@
     "purple": {
       "required": true,
       "resource_id": "openai-primary-orchestrator",
-      "candidate_head": "604b3452787d45ad99d9f08e70101bfd87516671",
+      "candidate_head": "4efe9ff3363c3f563a03a1f5bd0978998ca55d07",
       "artifact_path": null,
       "decision": "pending"
     }
   },
+  "superseded_reviews": [
+    {
+      "role": "red",
+      "candidate_head": "604b3452787d45ad99d9f08e70101bfd87516671",
+      "artifact_path": "orchestration/agent_inbox/antigravity/security-hardening-red-review.md",
+      "artifact_sha256": "e0c4ae8608311916bf1bb3f7f23c26bd0667962984e9e86e805ea735cb1bce48",
+      "decision": "revision_required"
+    }
+  ],
   "unresolved_findings": []
 }
