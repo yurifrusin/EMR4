@@ -114,3 +114,18 @@ The source remains promising but inadmissible. Reconsideration requires a
 verifiable provenance/rights/privacy package and a new Yuri decision to pursue
 external coordination or renew content inspection. See
 `docs/bernie-appointment-call-quarantine-pilot-closeout.md`.
+
+## Product-scope correction
+
+Yuri subsequently clarified that Bernie is not intended to act as a patient-
+facing medical receptionist. The target language is instruction from a trained
+receptionist to an assistant operating against authoritative diary contracts.
+Patient-to-receptionist calls therefore contain substantial out-of-distribution
+turn-taking, narrative, negotiation, clinical detail, emotion, and telephone
+noise that are neither required nor desirable for the current product.
+
+The Kaggle lane is now `closed_product_misaligned_and_provenance_blocked`. The
+prepared provenance inquiry remains unsent. The active alternative is a
+development-only synthetic Silver corpus whose frozen semantic anchors come
+from the ordinary LC development contract and whose noisy language
+realizations are independently generated and reviewed by multiple models.

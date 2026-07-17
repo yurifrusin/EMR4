@@ -1,0 +1,60 @@
+{
+  "schema_version": "emr4.bernie.synthetic_noise_admission.v1",
+  "decision": "accept_development_silver",
+  "candidate_path": "tests/fixtures/bernie_synthetic_noise/candidates_sol_recovery.jsonl",
+  "candidate_source_commit": "b1380f6aaf6eb21d9af763cfcc8db5130cba138d",
+  "candidate_count": 192,
+  "seed_count": 96,
+  "file_payload_hash": "sha256:193b705e0ce06fa32b72a063dec659e52a584fc489137bd7cbad8e511940e37f",
+  "canonical_candidate_hash": "sha256:ae14c613ecdd87aac39201d44a8024f3b9216f871c7d5859c4249e7f4026c665",
+  "evidence_tier": "silver",
+  "generation_time_adjudication": "pending",
+  "accepted_count": 192,
+  "quarantine_count": 0,
+  "rejected_count": 0,
+  "reviews": [
+    {
+      "reviewer": "deepseek-v4-flash-high",
+      "path": "orchestration/agent_inbox/deepseek/synthetic-noise-recovery-review-round-2.md",
+      "commit": "117609e3",
+      "decision": "pass",
+      "reviewed": 192,
+      "accepted": 192,
+      "quarantined": 0,
+      "rejected": 0
+    },
+    {
+      "reviewer": "gemini-3.5-flash-medium",
+      "path": "orchestration/agent_inbox/antigravity/synthetic-noise-recovery-review-round-2.md",
+      "commit": "5b8867ac",
+      "decision": "pass",
+      "reviewed": 192,
+      "accepted": 192,
+      "quarantined": 0,
+      "rejected": 0
+    }
+  ],
+  "authorized_uses": [
+    "ordinary_development_evaluation",
+    "synthetic_noise_robustness_tests",
+    "future_development_candidate_generation"
+  ],
+  "excluded_claims_and_authority": [
+    "real_world_representativeness",
+    "clinical_validation",
+    "gold_evidence",
+    "certification_evidence",
+    "protected_holdout_evidence",
+    "runtime_or_provider_activation",
+    "confirmation_or_write_authority"
+  ],
+  "protected_holdout_access": false,
+  "historical_diary_access": false,
+  "external_corpus_access": false,
+  "authority_grant": {
+    "provider_write": false,
+    "diary_write": false,
+    "confirmation": false,
+    "override_authority": false
+  }
+}
