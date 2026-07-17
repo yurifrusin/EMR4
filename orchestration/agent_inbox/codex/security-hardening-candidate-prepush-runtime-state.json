@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "push",
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "post_compaction_receipt",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree"
+      ]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["Blue session closed; original conclusion rejected and recovered under lease."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback unselected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["No active Claude Code worker."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["Fresh exact-final red review passed and is committed."]},
+    {"adapter_id": "codex_primary_session", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["Sol purple acceptance passed; candidate push is for representative required-check validation only."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native Codex subagent assigned."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-flash-reviewers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [{
+    "agent_id": "orchestrator",
+    "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\security-hardening-final-candidate",
+    "branch": "codex/security-hardening-final",
+    "clean": false,
+    "at_handoff_current": true,
+    "source_head": "3d9f70eaab5b6eedd1d90a6391cd4b07b481643e",
+    "candidate_head": "4efe9ff3363c3f563a03a1f5bd0978998ca55d07"
+  }],
+  "assigned_agent_ids": []
+}
