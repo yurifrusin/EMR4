@@ -235,18 +235,35 @@ or an unexpected material decision fork. This does not authorize holdout reuse
 or weaken content-blind, independent-veto, Sol-only authorship, immutable-seal,
 or one-shot requirements.
 
+LC4V10 subsequently passed its sole valid fresh attempt at 576/576 on every
+dimension and completed the standing certification cycle. No V11 is
+authorized.
+
+Yuri then authorized a development-only multi-model synthetic corpus for the
+actual Bernie target: trained receptionist instructions to an assistant. The
+pilot exported 96 dialogue-free anchors from ordinary LC development evidence
+and produced two noisy candidates per anchor. Wave one was rejected for a
+Sol-owned dialogue-form selector defect. Sol recovered only the Codex
+generator source under the lease; a first reviewed hash was then rejected for
+18 unsupported correction-operation labels. Fresh DeepSeek V4 Flash/high and
+Gemini 3.5 Flash/medium contexts each accepted 192/192 on final canonical hash
+`sha256:ae14c613ecdd87aac39201d44a8024f3b9216f871c7d5859c4249e7f4026c665`.
+Sol admitted all 192 as ordinary development Silver, with no quarantine or
+reject. No external corpus, historical diary, or protected holdout was used.
+The result makes no real-world, Gold, certification, provider/runtime, or
+write-authority claim.
+
 ## Next safe sequence
 
-1. Keep holdouts v1-v9 sealed; use only accepted aggregate evidence and
+1. Keep holdouts v1-v10 sealed; use only accepted aggregate evidence and
    closeouts for planning.
-2. Begin genuinely fresh LC4V10 content-blind under the standing authorization.
-3. Require fresh Gemini pre-content veto, Sol-only authorship, immutable seal,
-   and one one-shot evaluation for every version.
-4. If a valid attempt fails, use only permitted aggregates for a fresh ordinary
-   development diagnostic; never tune against or rerun the holdout.
-5. Continue fresh versions until pass, stalled progress, or an unexpected
-   material fork.
-6. Keep T3.1-T3.4 blocked by default and T3.5/providers plus every product/write
+2. Preserve the accepted 192-record synthetic corpus as development Silver;
+   do not promote it to Gold or certification evidence.
+3. Pause after the completed pilot. A separately authorized development sprint
+   may measure current interpreter robustness on the admitted set.
+4. Return any material parser or clarification-policy behavior choice to
+   Yuri's boundary before implementation.
+5. Keep T3.1-T3.4 blocked by default and T3.5/providers plus every product/write
    surface deferred.
 
 ## Primary evidence
@@ -289,6 +306,9 @@ or one-shot requirements.
 - `orchestration/agent_inbox/codex/lc4v9d1-sol-acceptance.md`
 - `docs/bernie-lc4v10-fresh-certification-closeout.md`
 - `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`
+- `docs/bernie-synthetic-receptionist-silver-contract.md`
+- `docs/bernie-synthetic-receptionist-silver-closeout.md`
+- `orchestration/agent_inbox/codex/synthetic-receptionist-silver-sol-acceptance.md`
 
 Protected holdouts v1-v10 are sealed. LC4V10 validly passed its sole attempt
 at 576/576 complete with empty evidence and product failure maps. Do not

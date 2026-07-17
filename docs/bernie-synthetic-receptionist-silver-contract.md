@@ -2,7 +2,7 @@
 
 Date: 2026-07-17
 
-Status: `corrected_pre_generation_contract`
+Status: `accepted_development_silver_v1`
 
 Authority: Yuri's multi-model development-only corpus authorization
 
@@ -190,10 +190,16 @@ Each lane must pass all of the following before semantic review:
 Mechanical validity is not semantic acceptance. Cross-review must still decide
 `accept`, `quarantine`, or `reject` per candidate and state the exact reason.
 
-## Initial acceptance claim
+## Accepted v1 claim
 
-The initial batch may claim only that multiple models produced mechanically
-valid, independently reviewed synthetic receptionist-to-Bernie Silver
-candidates over the ordinary LC development semantics. It may not claim
-real-world representativeness, clinical validation, production readiness, or
-new certification coverage.
+The accepted v1 batch contains 192 mechanically valid, independently reviewed
+synthetic receptionist-to-Bernie Silver candidates over ordinary LC
+development semantics. Fresh DeepSeek and Gemini reviews each accepted 192,
+quarantined zero, and rejected zero on canonical hash
+`sha256:ae14c613ecdd87aac39201d44a8024f3b9216f871c7d5859c4249e7f4026c665`.
+Sol's bounded decision is recorded in
+`tests/fixtures/bernie_synthetic_noise/admission.json`.
+
+It does not claim real-world representativeness, clinical validation,
+production readiness, Gold status, protected-holdout coverage, or new
+certification coverage.

@@ -13,6 +13,10 @@ from app.services.bernie.synthetic_noise_codex import (
     validate_candidates,
 )
 from app.services.bernie.synthetic_noise_corpus import validate_candidate_records
+from app.services.bernie.synthetic_noise_corpus import candidate_records_hash
+
+
+ADMISSION_PATH = OUTPUT_PATH.with_name("admission.json")
 
 
 def _inputs() -> tuple[dict[str, object], list[dict[str, object]]]:
@@ -93,3 +97,20 @@ def test_every_declared_correction_is_explicit_in_the_dialogue() -> None:
     for record in corrected:
         dialogue = " ".join(turn["utterance"] for turn in record["dialogue_turns"])
         assert "Correction—" in dialogue or "—sorry," in dialogue
+
+
+def test_admission_binds_exact_reviewed_candidate_and_closed_authority() -> None:
+    _, records = _inputs()
+    admission = json.loads(ADMISSION_PATH.read_text(encoding="utf-8"))
+
+    assert admission["decision"] == "accept_development_silver"
+    assert admission["candidate_count"] == len(records) == CANDIDATE_COUNT
+    assert admission["canonical_candidate_hash"] == candidate_records_hash(records)
+    assert admission["accepted_count"] == CANDIDATE_COUNT
+    assert admission["quarantine_count"] == 0
+    assert admission["rejected_count"] == 0
+    assert len(admission["reviews"]) == 2
+    assert all(review["decision"] == "pass" for review in admission["reviews"])
+    assert not any(admission["authority_grant"].values())
+    assert admission["protected_holdout_access"] is False
+    assert admission["external_corpus_access"] is False

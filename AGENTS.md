@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V10 fresh certification passed; the Secure SDLC transition remains complete. The Kaggle appointment-call lane is closed as provenance-blocked and product-misaligned. Yuri authorized a development-only multi-model synthetic receptionist-to-Bernie Silver corpus |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`, `docs/bernie-lc4v10-fresh-certification-closeout.md`, `orchestration/agent_inbox/codex/security-hardening-final-purple-acceptance.md`, `docs/security/secure-sdlc-red-blue-diary-hardening-closeout-2026-07-17.md`, `docs/bernie-post-certification-transition-review.md`, `docs/bernie-dialogue-corpus-source-assessment.md`, `orchestration/agent_inbox/codex/appointment-call-quarantine-pilot-sol-acceptance.md`, `docs/bernie-appointment-call-quarantine-pilot-closeout.md`, `docs/bernie-appointment-call-provenance-inquiry-package.md`, `docs/bernie-synthetic-receptionist-silver-contract.md`, and `docs/bernie-synthetic-receptionist-silver-wave-1-rejection.md` |
-| Current result | V10 remains a valid bounded `certification_pass`: complete and every dimension 576/576. Secure SDLC and GitHub controls remain complete. No external corpus was downloaded, opened, transmitted, or admitted. Synthetic generation wave 1 is rejected because the Sol-owned exporter misselected 84 dialogue-form anchors; the corrected dialogue-free manifest now has 12 anchors for each of eight forms and seven focused tests pass |
-| Next implementation | No V11 is needed or authorized. Freeze the corrected source, recover only the rejected Codex generator under the lease, regenerate 192 candidates, then require fresh Gemini and DeepSeek exact-candidate reviews plus Sol quarantine/acceptance. No Gold promotion, parser repair, runtime/provider activation, or write authority is authorized. Preserve v1-v10 and all T3/provider/product/write boundaries |
+| Active product track | LC4V10 fresh certification passed; the Secure SDLC transition remains complete. The Kaggle appointment-call lane is closed as provenance-blocked and product-misaligned. The multi-model synthetic receptionist-to-Bernie corpus pilot is complete with 192 accepted development-Silver candidates |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`, `docs/bernie-lc4v10-fresh-certification-closeout.md`, `orchestration/agent_inbox/codex/security-hardening-final-purple-acceptance.md`, `docs/security/secure-sdlc-red-blue-diary-hardening-closeout-2026-07-17.md`, `docs/bernie-post-certification-transition-review.md`, `docs/bernie-dialogue-corpus-source-assessment.md`, `orchestration/agent_inbox/codex/appointment-call-quarantine-pilot-sol-acceptance.md`, `docs/bernie-appointment-call-quarantine-pilot-closeout.md`, `docs/bernie-synthetic-receptionist-silver-contract.md`, `docs/bernie-synthetic-receptionist-silver-closeout.md`, and `orchestration/agent_inbox/codex/synthetic-receptionist-silver-sol-acceptance.md` |
+| Current result | V10 remains a valid bounded `certification_pass`: complete and every dimension 576/576. Secure SDLC and GitHub controls remain complete. No external corpus was downloaded, opened, transmitted, or admitted. The final synthetic corpus hash `sha256:ae14c613ecdd87aac39201d44a8024f3b9216f871c7d5859c4249e7f4026c665` passed fresh DeepSeek and Gemini all-record reviews; Sol accepted 192, quarantined zero, and rejected zero as ordinary development Silver only |
+| Next implementation | No V11 is needed or authorized. Pause after the completed synthetic corpus pilot. A future separately authorized development sprint may evaluate current interpreter robustness on the admitted Silver set; any material parser/policy choice returns to Yuri. No Gold promotion, certification claim, runtime/provider activation, or write authority is authorized. Preserve v1-v10 and all T3/provider/product/write boundaries |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 
@@ -150,6 +150,17 @@ before content download because the clinic/data controller, jurisdiction,
 collection basis, uploader authority, content-rights chain, redaction method,
 and residual-risk audit remain undocumented. No content was downloaded, opened,
 transmitted, or admitted. MedInstruct is not Bernie receptionist evidence.
+
+The replacement synthetic pilot exported 96 dialogue-free semantic anchors
+from ordinary LC development evidence and generated two noisy
+receptionist-to-Bernie candidates per anchor. The first generation wave and
+the first reviewed recovery hash were both rejected before admission: the
+former for a Sol-owned dialogue-form selector defect, the latter for 18
+unsupported correction-operation labels. Fresh DeepSeek and Gemini contexts
+each accepted all 192 records on final canonical hash
+`sha256:ae14c613ecdd87aac39201d44a8024f3b9216f871c7d5859c4249e7f4026c665`;
+Sol admitted the same exact set as development Silver. It is not real-world,
+Gold, protected-holdout, certification, provider/runtime, or write evidence.
 
 ### Earlier LC4V2-V3 sequence
 
