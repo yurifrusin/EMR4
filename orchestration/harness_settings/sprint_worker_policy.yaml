@@ -45,6 +45,10 @@ required_plan_fields:
   - independence_labels
   - unfilled_obligations
   - workspace_receipts
+  - security_delta
+  - security_review_tier
+  - red_blue_packet_independence
+  - purple_checkpoint_state
 deterministic_plan_checks:
   - settings_fingerprint_matches
   - final_sprint_and_allocation_authored_by_conductor
@@ -57,6 +61,10 @@ deterministic_plan_checks:
   - fallback_and_reduced_independence_are_explicit
   - no_orchestrator_substitution
   - workspace_receipts_match_assigned_agent_and_handoff_state
+  - material_sprint_security_delta_is_complete
+  - security_sensitive_triggers_require_independent_red_and_blue
+  - red_and_blue_packets_are_asymmetric
+  - purple_review_cadence_is_not_exceeded
 independent_verifier:
   mode: risk_triggered_optional
   triggers:

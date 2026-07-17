@@ -1,0 +1,74 @@
+schema_version: ariadne.security_review_protocol.v1
+purpose: risk_triggered_secure_sdlc_review_with_independent_red_blue_evidence
+material_sprint:
+  security_delta_required: true
+  classification_owner_resource_id: openai-primary-orchestrator
+  non_material_requires_owner_and_rationale: true
+  required_fields:
+    - assets_and_data
+    - trust_boundaries
+    - attacker_controlled_inputs
+    - dangerous_capabilities
+    - abuse_cases
+    - required_controls
+    - verification_evidence
+    - residual_risk_owner
+risk_classification:
+  default_tier: routine_delta
+  security_sensitive_tier: dual_review
+  security_sensitive_triggers:
+    - authentication_authorization
+    - phi_sensitive_data
+    - api_or_write_authority
+    - confirmation_workflow
+    - provider_prompt_tool_execution
+    - database_schema_rls
+    - cryptography_key_or_randomness
+    - audit_logging
+    - deployment_release
+    - externally_reachable_ui
+    - ci_supply_chain
+    - security_control_change
+    - cross_layer_security_tranche
+  purple_review_triggers:
+    - deployment_release
+    - provider_prompt_tool_execution
+    - cross_layer_security_tranche
+  maximum_material_sprints_between_purple: 4
+purple_cadence:
+  ledger_path: orchestration/security_review_ledger.jsonl
+  entry_schema_version: ariadne.security_review_ledger_entry.v1
+  no_prior_purple_count: 4
+roles:
+  blue:
+    required_for_tier: dual_review
+    preferred_resource_id: deepseek-flash-workers
+    owns: control_design_implementation_tests_and_defensive_bypass_review
+    may_not: [author_acceptance, read_red_artifact, integrate, commit_master, push_protected_refs]
+  red:
+    required_for_tier: dual_review
+    preferred_resource_id: antigravity-gemini-flash-3-5-worker
+    owns: fresh_context_adversarial_review_and_exploit_reproduction
+    may_not: [read_blue_artifact, inherit_blue_acceptance_framing, implement_unrequested_scope, integrate, commit_master, push_protected_refs]
+  purple:
+    owner_resource_id: openai-primary-orchestrator
+    owns: reconcile_evidence_rerun_checks_adjudicate_residual_risk_and_accept
+    may_not: [convert_unresolved_critical_or_high_issue_to_pass_without_resolution]
+independence:
+  asymmetric_packets_required: true
+  red_fresh_context_required: true
+  red_candidate_only_required: true
+  red_prior_review_artifacts_excluded: true
+  workers_cannot_self_certify: true
+acceptance:
+  required_decision: pass
+  blocking_unresolved_severities: [critical, high]
+  gate_phases: [plan, acceptance]
+  artifact_sha256_required: true
+  artifact_must_bind_candidate: true
+  allowed_finding_severities: [critical, high, medium, low, dev-only]
+recovery:
+  allowed_disposition: recovered_by_orchestrator
+  allowed_worker_decisions: [pass, revision_required]
+  recovery_owner_resource_id: openai-primary-orchestrator
+  exact_final_independent_pass_required: true

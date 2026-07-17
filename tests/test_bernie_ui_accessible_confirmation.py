@@ -327,3 +327,23 @@ def test_simulated_offline_confirm_does_not_render_receipt_group(diary_page):
     assert diary_page.locator("[data-testid='bernie-simulated-group']").count() == 1
     assert diary_page.locator("[data-testid='bernie-receipt-group']").count() == 0
     assert diary_page.locator("[data-testid='bernie-receipt-verification-info']").count() == 0
+
+
+def test_unknown_confirmation_endpoint_fails_closed_without_network_request(diary_page):
+    """A server payload cannot redirect the confirmation POST to an unapproved path."""
+    malicious = deepcopy(MOCK_PROPOSAL_PAYLOAD)
+    malicious["confirm_endpoint"] = "/api/v1/appointments/not-a-confirm-route"
+    captured = []
+    diary_page.route("**/api/v1/appointments/not-a-confirm-route", lambda route: captured.append(route.request.url))
+
+    diary_page.evaluate(
+        "(payload) => { isBerniePilotActive = true; renderBernieReview(payload); }",
+        malicious,
+    )
+    diary_page.locator("#btn-bernie-confirm").click()
+
+    error_msg = diary_page.locator("[data-testid='bernie-review-error-message']")
+    error_msg.wait_for(state="visible", timeout=5000)
+    assert "couldn't confirm this booking" in error_msg.text_content()
+    assert captured == []
+    assert diary_page.locator("[data-testid='bernie-receipt-group']").count() == 0

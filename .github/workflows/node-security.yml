@@ -2,13 +2,11 @@ name: Node & Office Add-in Security Baseline
 
 on:
   push:
-    paths:
-      - "EMR4 Sidebar/**"
-      - ".github/workflows/node-security.yml"
+    branches:
+      - master
   pull_request:
-    paths:
-      - "EMR4 Sidebar/**"
-      - ".github/workflows/node-security.yml"
+    branches:
+      - master
 
 permissions:
   contents: read

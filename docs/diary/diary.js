@@ -10,7 +10,7 @@
 const NGROK_URL   = "https://property-cinch-backfield.ngrok-free.dev";
 const BACKEND_URL = (window.location.port === "3000")
   ? "http://localhost:8001"
-  : window.location.hostname.includes("ngrok")
+  : isApprovedNgrokHostname(window.location.hostname)
     ? window.location.origin
     : NGROK_URL;
 const API_BASE = BACKEND_URL + "/api/v1";
@@ -115,6 +115,42 @@ function statusReasonCodeLabel(code) {
   return STATUS_REASON_CODE_LABELS[code] || String(code || "");
 }
 
+function isLocalHarnessHost() {
+  if (!window.location.hostname) {
+    return window.location.protocol === "file:";
+  }
+  return ["127.0.0.1", "localhost", "[::1]"].includes(window.location.hostname);
+}
+
+function isApprovedNgrokHostname(hostname) {
+  const normalized = String(hostname || "").toLowerCase().replace(/\.$/, "");
+  return [".ngrok-free.dev", ".ngrok-free.app", ".ngrok.app", ".ngrok.io"]
+    .some(suffix => normalized.length > suffix.length && normalized.endsWith(suffix));
+}
+
+function isLocalHarnessCapabilityEnabled(param) {
+  return isLocalHarnessHost() && new URLSearchParams(window.location.search).get(param) === "true";
+}
+
+function secureClientIdentifier(prefix) {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID();
+  }
+  if (typeof crypto !== "undefined" && typeof crypto.getRandomValues === "function") {
+    const bytes = new Uint8Array(16);
+    crypto.getRandomValues(bytes);
+    const value = Array.from(bytes, byte => byte.toString(16).padStart(2, "0")).join("");
+    return `${prefix || "id"}-${value}`;
+  }
+  throw new Error("Secure random identifier generation is unavailable.");
+}
+
+function findAppointmentElementById(appointmentId) {
+  const expected = String(appointmentId || "");
+  if (!expected) return null;
+  return Array.from(document.querySelectorAll(".appt")).find(element => element.dataset.id === expected) || null;
+}
+
 function shouldUseBernieServerSession() {
   if (!token) {
     return false;
@@ -184,17 +220,11 @@ class BernieSession {
   }
 
   generateSessionId() {
-    if (typeof crypto !== "undefined" && crypto.randomUUID) {
-      return crypto.randomUUID();
-    }
-    return "bernie-session-" + Math.random().toString(36).substring(2, 15) + "-" + Date.now();
+    return secureClientIdentifier("bernie-session");
   }
 
   generateEventId() {
-    if (typeof crypto !== "undefined" && crypto.randomUUID) {
-      return crypto.randomUUID();
-    }
-    return "evt-" + Math.random().toString(36).substring(2, 15) + "-" + Date.now();
+    return secureClientIdentifier("evt");
   }
 
   getServerRouteIdempotencyKey(kind, discriminator = "") {
@@ -865,8 +895,8 @@ function scrubBernieStaffCopy(message, fallback = "I need one more safe booking 
 }
 
 function isBernieDevOrDebug() {
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get("bernie_debug") === "true" || urlParams.get("bernie_dev_review") === "true";
+  return isLocalHarnessCapabilityEnabled("bernie_debug") ||
+    isLocalHarnessCapabilityEnabled("bernie_dev_review");
 }
 
 const PROVIDER_UNAVAILABLE_CODES = [
@@ -1313,16 +1343,15 @@ const mockLocations = [
 ];
 
 function isSmokeMode() {
-  return new URLSearchParams(window.location.search).get("smoke") === "true";
+  return isLocalHarnessCapabilityEnabled("smoke");
 }
 
 function isBernieManualContextAllowed() {
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get("smoke") === "true" || urlParams.get("bernie_dev_review") === "true";
+  return isSmokeMode() || isLocalHarnessCapabilityEnabled("bernie_dev_review");
 }
 
 function hasSlotPreviewParam() {
-  return new URLSearchParams(window.location.search).get("slot_preview") === "true";
+  return isLocalHarnessCapabilityEnabled("slot_preview");
 }
 
 function isBernieDevFixtureState(state) {
@@ -1466,8 +1495,8 @@ async function handleNoSlotSuggestionClick(suggestionText, originalTurnId) {
   updateBernieChatTranscriptUI();
 
   const urlParams = new URLSearchParams(window.location.search);
-  const isSmoke = urlParams.get("smoke") === "true";
-  const devReviewParam = urlParams.get("bernie_dev_review");
+  const isSmoke = isSmokeMode();
+  const devReviewParam = isLocalHarnessCapabilityEnabled("bernie_dev_review") ? "true" : null;
   const allowHarnessDefaults = (isSmoke || devReviewParam === "true") && urlParams.get("bernie_context_form") !== "true";
   const request = resolveBerniePilotLaunchRequest({ allowHarnessDefaults });
 
@@ -1881,7 +1910,7 @@ async function confirmBernieToolIntentChange(envelope) {
   const confirmHeaders = idempotencyHeadersFor(
     updateConfirmIdempotencyKey(envelope, confirmPayload)
   );
-  const response = await apiFetch(normalizeApiPath(envelope.confirm_endpoint), {
+  const response = await apiFetch(allowlistedConfirmApiPath(envelope.confirm_endpoint), {
     method: "POST",
     headers: confirmHeaders,
     body: JSON.stringify(confirmPayload)
@@ -2702,6 +2731,22 @@ function normalizeApiPath(path) {
   return value;
 }
 
+const ALLOWED_CONFIRM_ENDPOINT_PATHS = new Set([
+  "/appointments/proposals/create/confirm",
+  "/appointments/proposals/create/confirm-bernie",
+  "/appointments/proposals/update/confirm",
+  "/appointments/proposals/status-confirm",
+  "/appointments/proposals/delete-confirm"
+]);
+
+function allowlistedConfirmApiPath(endpoint) {
+  const normalized = normalizeApiPath(endpoint);
+  if (!ALLOWED_CONFIRM_ENDPOINT_PATHS.has(normalized)) {
+    throw new Error("The supplied endpoint is not an approved confirmation route.");
+  }
+  return normalized;
+}
+
 async function loadAuditHistory(apptId) {
   const listEl = document.getElementById("booking-audit-list");
   if (!listEl) return;
@@ -3424,8 +3469,8 @@ async function selectCandidate(slot, index) {
   });
 
   const urlParams = new URLSearchParams(window.location.search);
-  const isSmoke = urlParams.get("smoke") === "true";
-  const devReviewParam = urlParams.get("bernie_dev_review");
+  const isSmoke = isSmokeMode();
+  const devReviewParam = isLocalHarnessCapabilityEnabled("bernie_dev_review") ? "true" : null;
   const allowHarnessDefaults = (isSmoke || devReviewParam === "true") && urlParams.get("bernie_context_form") !== "true";
   const request = resolveBerniePilotLaunchRequest({ allowHarnessDefaults });
 
@@ -4390,10 +4435,9 @@ function saveBreaks() {
 
 // ─── LOAD DIARY ────────────────────────────────────────────
 async function loadDiary(silent = false, options = {}) {
-  const urlParams = new URLSearchParams(window.location.search);
-  const isSmokeMode = urlParams.get("smoke") === "true";
+  const smokeMode = isSmokeMode();
 
-  if (!token && !isSmokeMode) {
+  if (!token && !smokeMode) {
     setStatus("Waiting for auth token…");
     showAuthBanner();
     return;
@@ -4425,10 +4469,10 @@ async function loadDiary(silent = false, options = {}) {
     date_from: dayStart.toISOString(),
     date_to: dayEnd.toISOString(),
   });
-  if (!isSmokeMode && activeLocationId) {
+  if (!smokeMode && activeLocationId) {
     apptParams.set("location_id", activeLocationId);
   }
-  const locationQuery = !isSmokeMode && activeLocationId
+  const locationQuery = !smokeMode && activeLocationId
     ? `&location_id=${encodeURIComponent(activeLocationId)}`
     : "";
 
@@ -4436,7 +4480,7 @@ async function loadDiary(silent = false, options = {}) {
     let template, appointments, types, rosterEntries = [], fetchedWaitingAreas = [];
     let practitionerDirectory = [];
 
-    if (isSmokeMode) {
+    if (smokeMode) {
       template = normalizeTemplate(getMockTemplate());
       appointments = getMockAppointments().filter(a => {
         const apptLocId = a.location_id || "loc-1";
@@ -4587,7 +4631,7 @@ async function loadDiary(silent = false, options = {}) {
     }
 
     // Set mock practitioner IDs in smoke mode
-    if (isSmokeMode) {
+    if (smokeMode) {
       ahpraToPractitionerMap["MED0001234567"] = {
         id: "smoke-prac-1",
         first_name: "Alex",
@@ -4647,7 +4691,7 @@ async function loadDiary(silent = false, options = {}) {
 
     // Restore active selection if the appointment still exists after rebuild
     if (_activeBeforeId) {
-      const _el = document.querySelector(`.appt[data-id="${_activeBeforeId}"]`);
+      const _el = findAppointmentElementById(_activeBeforeId);
       if (_el) _el.classList.add("appt-active");
     }
 
@@ -4683,7 +4727,7 @@ async function loadDiary(silent = false, options = {}) {
     }
 
     const total = visibleAppointments.length;
-    setStatus(`${total} appointment${total !== 1 ? "s" : ""} · ${formatDateLabel(diaryDate)}${isSmokeMode ? " [SMOKE MODE]" : ""}`);
+    setStatus(`${total} appointment${total !== 1 ? "s" : ""} · ${formatDateLabel(diaryDate)}${smokeMode ? " [SMOKE MODE]" : ""}`);
   } catch (e) {
     if (isAuthBannerVisible()) {
       return;
@@ -5750,9 +5794,9 @@ function renderBernieReview(payload, interpretEnvelope = null) {
     confirmBox.appendChild(changeTimeBtn);
 
     const urlParams = new URLSearchParams(window.location.search);
-    const isSmoke = urlParams.get("smoke") === "true";
+    const isSmoke = isSmokeMode();
     const reviewParam = urlParams.get("bernie_review");
-    const devReviewParam = urlParams.get("bernie_dev_review");
+    const devReviewParam = isLocalHarnessCapabilityEnabled("bernie_dev_review") ? "true" : null;
     const isConfirmAdapter = isBerniePilotActive
       ? (!isSmoke || urlParams.get("bernie_confirm_adapter") === "true" || reviewParam !== "live")
       : ((isSmoke && urlParams.get("bernie_confirm_adapter") === "true" && (reviewParam !== "live" || devReviewParam === "true")) ||
@@ -5798,7 +5842,7 @@ function renderBernieReview(payload, interpretEnvelope = null) {
                 )
               )
             : {};
-          const response = await apiFetch(normalizeApiPath(payload.confirm_endpoint), {
+          const response = await apiFetch(allowlistedConfirmApiPath(payload.confirm_endpoint), {
             method: "POST",
             headers: confirmHeaders,
             body: JSON.stringify(body)
@@ -6125,8 +6169,8 @@ function renderBerniePilotContextForm(blocks = []) {
 
 async function checkBerniePilotEligibility() {
   const urlParams = new URLSearchParams(window.location.search);
-  const isSmoke = urlParams.get("smoke") === "true";
-  const devReviewParam = urlParams.get("bernie_dev_review");
+  const isSmoke = isSmokeMode();
+  const devReviewParam = isLocalHarnessCapabilityEnabled("bernie_dev_review") ? "true" : null;
 
   // If explicit devReviewParam is true, we preserve dev/query behavior
   if (devReviewParam === "true") {
@@ -6170,8 +6214,8 @@ function renderBernieInstructionInput(contentEl, { autoFocus = true } = {}) {
   if (!contentEl) return;
 
   const urlParams = new URLSearchParams(window.location.search);
-  const isSmoke = urlParams.get("smoke") === "true";
-  const devReviewParam = urlParams.get("bernie_dev_review");
+  const isSmoke = isSmokeMode();
+  const devReviewParam = isLocalHarnessCapabilityEnabled("bernie_dev_review") ? "true" : null;
   const allowHarnessDefaults = (isSmoke || devReviewParam === "true") && urlParams.get("bernie_context_form") !== "true";
   const request = resolveBerniePilotLaunchRequest({ allowHarnessDefaults });
   const contextReady = request.ready;
@@ -6290,10 +6334,7 @@ function renderBernieInstructionInput(contentEl, { autoFocus = true } = {}) {
       setBerniePilotContextValues({ practitionerId: "", patientId: "", sourceAppointmentId: "" });
       if (previousSourceAppointmentId) {
         lastActiveAppointmentId = previousSourceAppointmentId;
-        const escapedId = typeof CSS !== "undefined" && CSS.escape
-          ? CSS.escape(previousSourceAppointmentId)
-          : String(previousSourceAppointmentId).replace(/"/g, '\\"');
-        const selectedEl = document.querySelector(`[data-id="${escapedId}"]`);
+        const selectedEl = findAppointmentElementById(previousSourceAppointmentId);
         if (selectedEl) {
           selectedEl.classList.add("appt-active");
         }
@@ -6423,7 +6464,7 @@ function renderBernieInstructionInput(contentEl, { autoFocus = true } = {}) {
     const visibleReferenceDate = localDateKey(diaryDate);
     const urlParams = new URLSearchParams(window.location.search);
     const hasPinnedReferenceDate = !!urlParams.get("reference_date");
-    const isSmoke = urlParams.get("smoke") === "true";
+    const isSmoke = isSmokeMode();
     const forceVisibleDateReanchor = urlParams.get("bernie_reanchor_visible_date") === "true";
     const shouldReanchorVisibleDate = (
       !isReply &&
@@ -6692,8 +6733,8 @@ async function loadBernieLiveReview() {
   }
 
   const urlParams = new URLSearchParams(window.location.search);
-  const isSmoke = urlParams.get("smoke") === "true";
-  const devReviewParam = urlParams.get("bernie_dev_review");
+  const isSmoke = isSmokeMode();
+  const devReviewParam = isLocalHarnessCapabilityEnabled("bernie_dev_review") ? "true" : null;
   const allowHarnessDefaults = (isSmoke || devReviewParam === "true") && urlParams.get("bernie_context_form") !== "true";
   const request = resolveBerniePilotLaunchRequest({ allowHarnessDefaults });
 
@@ -6860,9 +6901,9 @@ async function loadBernieLiveReview() {
 
 async function initBernieReview() {
   const urlParams = new URLSearchParams(window.location.search);
-  const isSmoke = urlParams.get("smoke") === "true";
+  const isSmoke = isSmokeMode();
   const reviewParam = urlParams.get("bernie_review");
-  const devReviewParam = urlParams.get("bernie_dev_review");
+  const devReviewParam = isLocalHarnessCapabilityEnabled("bernie_dev_review") ? "true" : null;
 
   if (urlParams.get("bernie_open") === "true") {
     isBerniePilotActive = true;
@@ -7287,9 +7328,9 @@ Office.onReady(() => {
   try { Office.context?.ui?.messageParent(JSON.stringify({ type: "ready" })); } catch (_) {}
 
   const urlParams = new URLSearchParams(window.location.search);
-  const isSmoke = urlParams.get("smoke") === "true";
+  const isSmoke = isSmokeMode();
   const reviewParam = urlParams.get("bernie_review");
-  const devReviewParam = urlParams.get("bernie_dev_review");
+  const devReviewParam = isLocalHarnessCapabilityEnabled("bernie_dev_review") ? "true" : null;
   const hasLiveDevReview = reviewParam === "live" && devReviewParam === "true";
   const isDevFixture = devReviewParam === "true" && isBernieDevFixtureState(reviewParam);
 
@@ -7795,10 +7836,7 @@ async function apiErrorMessage(res, action) {
 }
 
 function generateClientIdempotencyKey() {
-  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
-    return crypto.randomUUID();
-  }
-  return "evt-" + Math.random().toString(36).substring(2, 10);
+  return secureClientIdentifier("evt");
 }
 
 function ensureElementIdempotencyKey(element) {
@@ -8214,7 +8252,7 @@ async function saveBooking() {
   saveBtn.disabled = true;
 
   try {
-    const isSmokeMode = new URLSearchParams(window.location.search).get("smoke") === "true";
+    const smokeMode = isSmokeMode();
     const statusToSend = statusVal;
     const payload = {
       practitioner_id: practitioner.id,
@@ -8237,9 +8275,9 @@ async function saveBooking() {
 
     const isConfirmed = saveBtn.dataset.confirmed === "true";
     let proposal = null;
-    const needsProposal = editingAppointmentId || !isConfirmed || !isSmokeMode;
+    const needsProposal = editingAppointmentId || !isConfirmed || !smokeMode;
     if (needsProposal) {
-      if (isSmokeMode) {
+      if (smokeMode) {
         proposal = simulateProposal(payload);
       } else {
         const url = editingAppointmentId
@@ -8317,7 +8355,7 @@ async function saveBooking() {
     }
 
     if (editingAppointmentId) {
-      if (isSmokeMode) {
+      if (smokeMode) {
         const appt = mockAppointmentsCache.find(x => x.id === editingAppointmentId);
         if (appt) {
           appt.start_time_local = timeVal;
@@ -8353,7 +8391,7 @@ async function saveBooking() {
           const confirmHeaders = idempotencyHeadersFor(
             updateConfirmIdempotencyKey(proposal, confirmPayload)
           );
-          updateRes = await apiFetch(normalizeApiPath(confirmEndpoint), {
+          updateRes = await apiFetch(allowlistedConfirmApiPath(confirmEndpoint), {
             method: "POST",
             headers: confirmHeaders,
             body: JSON.stringify(confirmPayload)
@@ -8389,7 +8427,7 @@ async function saveBooking() {
       }
       setStatus("Booking updated successfully.");
     } else {
-      if (isSmokeMode) {
+      if (smokeMode) {
         const newAppt = {
           id: "smoke-appt-" + (mockAppointmentsCache.length + 1),
           appointment_date: dateVal,
@@ -8420,7 +8458,7 @@ async function saveBooking() {
           const confirmHeaders = isCreateConfirmEndpoint(confirmEndpoint)
             ? idempotencyHeadersFor(ensureElementConfirmIdempotencyKey(saveBtn))
             : {};
-          createRes = await apiFetch(normalizeApiPath(confirmEndpoint), {
+          createRes = await apiFetch(allowlistedConfirmApiPath(confirmEndpoint), {
             method: "POST",
             headers: confirmHeaders,
             body: JSON.stringify(confirmPayload)
@@ -8512,8 +8550,8 @@ async function deleteBooking() {
   deleteBtn.disabled = true;
 
   try {
-    const isSmokeMode = new URLSearchParams(window.location.search).get("smoke") === "true";
-    const appt = isSmokeMode
+    const smokeMode = isSmokeMode();
+    const appt = smokeMode
       ? mockAppointmentsCache.find(x => x.id === editingAppointmentId)
       : todayAppointments.find(x => x.id === editingAppointmentId);
 
@@ -8533,7 +8571,7 @@ async function deleteBooking() {
     }
 
     let proposal;
-    if (isSmokeMode) {
+    if (smokeMode) {
       proposal = simulateStatusProposal(appt, {
         status: "Cancelled",
         waiting_area_id: null,
@@ -8592,7 +8630,7 @@ async function deleteBooking() {
       }
     }
 
-    if (isSmokeMode) {
+    if (smokeMode) {
       mockAppointmentsCache = mockAppointmentsCache.filter(x => x.id !== editingAppointmentId);
       setStatus("Booking cancelled (Mock).");
     } else {
@@ -8897,7 +8935,7 @@ async function handleMoveResize(appt, deltaStart, deltaDuration, column = null) 
         const confirmHeaders = idempotencyHeadersFor(
           updateConfirmIdempotencyKey(proposal, confirmPayload)
         );
-        updateRes = await apiFetch(normalizeApiPath(confirmEndpoint), {
+        updateRes = await apiFetch(allowlistedConfirmApiPath(confirmEndpoint), {
           method: "POST",
           headers: confirmHeaders,
           body: JSON.stringify(confirmPayload)
@@ -8943,7 +8981,7 @@ async function applySignedStatusProposal(appt, proposal, newStatus, waitingAreaI
     const confirmHeaders = idempotencyHeadersFor(
       statusConfirmIdempotencyKey(proposal, confirmPayload)
     );
-    const confirmRes = await apiFetch(normalizeApiPath(confirmEndpoint), {
+    const confirmRes = await apiFetch(allowlistedConfirmApiPath(confirmEndpoint), {
       method: "POST",
       headers: confirmHeaders,
       body: JSON.stringify(confirmPayload)
@@ -8991,7 +9029,7 @@ async function applySignedDeleteProposal(proposal, cancellationReason, statusRea
     const confirmHeaders = idempotencyHeadersFor(
       deleteConfirmIdempotencyKey(proposal, confirmPayload)
     );
-    const confirmRes = await apiFetch(normalizeApiPath(confirmEndpoint), {
+    const confirmRes = await apiFetch(allowlistedConfirmApiPath(confirmEndpoint), {
       method: "POST",
       headers: confirmHeaders,
       body: JSON.stringify(confirmPayload)
@@ -9114,7 +9152,7 @@ async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAre
       }
       setStatus("Status updated (Mock)");
       await loadDiary(true);
-      const el = document.querySelector(`.appt[data-id="${appt.id}"]`);
+      const el = findAppointmentElementById(appt.id);
       if (el) el.classList.add("appt-active");
     } else {
       const updatedAppt = await applySignedStatusProposal(appt, proposal, newStatus, waitingAreaId);
@@ -9122,7 +9160,7 @@ async function setAppointmentStatus(appt, newStatus, selectEl = null, waitingAre
       appt.waiting_area_id = updatedAppt.waiting_area_id;
       setStatus("Status updated successfully.");
       await loadDiary(true);
-      const el = document.querySelector(`.appt[data-id="${appt.id}"]`);
+      const el = findAppointmentElementById(appt.id);
       if (el) el.classList.add("appt-active");
     }
     await updateFlowPanel();
@@ -9714,7 +9752,7 @@ function renderFlowList(containerId, appts, actionLabel, targetStatus) {
 }
 
 function scrollToAppointment(apptId) {
-  const el = document.querySelector(`.appt[data-id="${apptId}"]`);
+  const el = findAppointmentElementById(apptId);
   if (el) {
     el.scrollIntoView({ behavior: "smooth", block: "center" });
     el.classList.add("appt-highlight");

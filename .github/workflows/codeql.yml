@@ -4,25 +4,9 @@ on:
   push:
     branches:
       - master
-    paths:
-      - ".github/workflows/codeql.yml"
-      - "**/*.py"
-      - "**/*.js"
-      - "**/*.ts"
-      - "**/*.tsx"
-      - "requirements.txt"
-      - "EMR4 Sidebar/package*.json"
   pull_request:
     branches:
       - master
-    paths:
-      - ".github/workflows/codeql.yml"
-      - "**/*.py"
-      - "**/*.js"
-      - "**/*.ts"
-      - "**/*.tsx"
-      - "requirements.txt"
-      - "EMR4 Sidebar/package*.json"
   schedule:
     - cron: "27 17 * * 1"
   workflow_dispatch:

@@ -56,6 +56,14 @@ verifier:
     - same_lane_execution_retry
     - deterministic_schema_or_fingerprint_check
     - transport_or_filename_correction
+secure_sdlc:
+  protocol_file: security_review_protocol.yaml
+  material_sprint_security_delta: required
+  security_sensitive_sprint_reviews: [independent_blue, fresh_context_red]
+  asymmetric_packets_required: true
+  purple_synthesis_owner: openai-primary-orchestrator
+  pre_dispatch_gate: scripts/ariadne_security_review_gate.py
+  pre_integration_gate: scripts/ariadne_security_review_gate.py
 execution_controls:
   wall_clock_deadlines: inactive
   monetary_caps: inherit_cost_controls

@@ -13,6 +13,11 @@ operating_model:
   settings_file: operating_model.yaml
   within_sprint_executive_role: orchestrator
   independent_verifier_mode: risk_triggered_optional
+secure_sdlc:
+  settings_file: security_review_protocol.yaml
+  material_sprint_security_delta: required
+  security_sensitive_review: independent_red_blue
+  purple_review_maximum_material_sprint_interval: 4
 direction_collaboration:
   settings_file: direction_collaboration.yaml
   optional: true
