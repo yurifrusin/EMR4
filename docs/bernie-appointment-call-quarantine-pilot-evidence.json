@@ -1,0 +1,61 @@
+{
+  "schema_version": "emr4.bernie.appointment_call_quarantine_pilot.v1",
+  "retrieved_at_utc": "2026-07-17T03:33:58Z",
+  "source": {
+    "card_url": "https://www.kaggle.com/datasets/ammarshafiq/healthcare-appointment-booking-calls-dataset",
+    "metadata_api_url": "https://www.kaggle.com/api/v1/datasets/view/ammarshafiq/healthcare-appointment-booking-calls-dataset",
+    "reference": "ammarshafiq/healthcare-appointment-booking-calls-dataset",
+    "dataset_id": 6376623,
+    "title": "Healthcare Appointment Booking Calls Dataset",
+    "uploader_display_name": "Muhammad Ammar",
+    "owner_display_name": "Muhammad Ammar",
+    "version": 1,
+    "version_created_at": "2024-12-26T08:44:36.077Z",
+    "version_notes": "Initial release",
+    "listed_license": "ODC Public Domain Dedication and Licence (PDDL)",
+    "listed_total_bytes": 154124772,
+    "listed_file_count": 739
+  },
+  "retrieval_evidence": {
+    "canonical_public_metadata_sha256": "6bd7f39c7877f9f1ae9fb73fdc257c4f872f7f8e286615de568170eef5473a7e",
+    "canonical_public_metadata_bytes": 3171,
+    "first_public_file_listing_page_sha256": "88316f009015e8db7e4f0eddfd72466cfb5e33f89d708481d38f9b82e1d4a9d3",
+    "first_public_file_listing_page_bytes": 2544,
+    "hash_method": "SHA-256 over UTF-8 bytes captured in-memory during the recorded retrieval; no corpus content was persisted"
+  },
+  "public_card_claims": {
+    "generic_medical_clinic": true,
+    "verbatim_transcripts": true,
+    "speaker_and_timestamp_segments": true,
+    "word_confidence_scores": true,
+    "ivr_events": true,
+    "job_and_account_metadata": true,
+    "pii_redacted_claim": true
+  },
+  "unresolved_required_evidence": [
+    "originating clinic or data controller identity",
+    "collection jurisdiction",
+    "complete collection period and purpose",
+    "caller notice, consent, or other documented legal basis",
+    "uploader authority to publish the calls and transcripts",
+    "original audio and transcript rights chain",
+    "redaction method, identifier taxonomy, and reviewer qualifications",
+    "residual direct and quasi-identifier audit",
+    "licence statement proving the uploader controls both database and content rights"
+  ],
+  "actions": {
+    "public_metadata_read": true,
+    "public_file_listing_first_page_read": true,
+    "corpus_file_downloaded": false,
+    "corpus_content_opened": false,
+    "local_quarantine_root_created": false,
+    "provider_or_model_transmission": false,
+    "development_corpus_deduplication": false,
+    "protected_holdout_access": false,
+    "training_or_tuning": false,
+    "gold_authoring": false,
+    "runtime_or_product_use": false
+  },
+  "decision": "stop_before_content_download",
+  "admission_status": "rejected_pending_verifiable_provenance_package"
+}

@@ -100,10 +100,17 @@ authorized, local-only quarantine tranche that:
 9. preserves source spans and transformation provenance for every derived
    development probe.
 
-## Recommended next decision
+## Pilot outcome and next decision
 
-After the security transition closes, authorize or decline a metadata-to-
-quarantine pilot for the appointment-call dataset. The recommended pilot is
-small, local-only, non-provider, non-training, and diagnostic. It should stop
-immediately if provenance, licence authority, consent, or residual-PHI evidence
-is inadequate.
+Yuri authorized the recommended metadata-to-quarantine pilot on 2026-07-17.
+The preliminary provenance and licence-authority gate stopped before corpus
+download or content inspection. The originating clinic/data controller,
+jurisdiction, caller notice or consent/legal basis, uploader authority,
+content-rights chain, redaction method, and residual-identifier audit remain
+undocumented. No corpus content was downloaded, opened, transmitted, or
+admitted.
+
+The source remains promising but inadmissible. Reconsideration requires a
+verifiable provenance/rights/privacy package and a new Yuri decision to pursue
+external coordination or renew content inspection. See
+`docs/bernie-appointment-call-quarantine-pilot-closeout.md`.
