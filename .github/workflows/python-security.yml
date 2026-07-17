@@ -32,7 +32,10 @@ jobs:
         run: pip-audit -r requirements.txt --desc
 
       - name: Static security analysis (Bandit)
+        if: ${{ always() }}
         # Scans app/ and scripts/ at medium+ severity AND medium+ confidence (-ll -ii).
         # Low-severity or low-confidence findings are intentionally suppressed.
-        # Configuration lives in pyproject.toml [tool.bandit].
-        run: bandit -r app/ scripts/ -ll -ii -c pyproject.toml
+        # Configuration lives in pyproject.toml [tool.bandit]. The reviewed
+        # baseline contains only two Git-object SHA-1 identity uses; new
+        # medium/high findings still fail the job.
+        run: python scripts/security_bandit_gate.py

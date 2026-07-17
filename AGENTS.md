@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V10 fresh certification passed; the successive fresh-version cycle is closed |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md` and `docs/bernie-lc4v10-fresh-certification-closeout.md` |
-| Current result | The sole V10 attempt validly consumed with `certification_pass`: complete and every dimension 576/576, all 24 groups 24/24, all six language forms 96/96, zero variance, and empty evidence/product failure maps. Report SHA-256 is `5986691e...` |
-| Next implementation | No V11 is needed or authorized under the completed cycle. Preserve v1-v10 and all T3/provider/product/write boundaries; the next material product track requires ordinary planning and any applicable Yuri decision |
+| Active product track | LC4V10 fresh certification passed; certification transition and Secure SDLC maintenance are active |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`, `docs/bernie-lc4v10-fresh-certification-closeout.md`, `docs/bernie-post-certification-transition-review.md`, and `docs/security/emr4-secure-sdlc-review-2026-07-17.md` |
+| Current result | V10 remains a valid bounded `certification_pass`: complete and every dimension 576/576. Maintenance removes vulnerable `python-jose`/`ecdsa`, restores independent Bandit visibility, and records Dependabot alert 5 as dev-only/upstream-blocked without an override |
+| Next implementation | No V11 is needed or authorized. Validate the ten high-classified CodeQL candidates, then pause for Yuri's decision on GitHub master protection, secret push protection, required checks, and response SLAs. Preserve v1-v10 and all T3/provider/product/write boundaries |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 
@@ -124,124 +124,30 @@ loop. Protected holdout v1 remained sealed. T3.1-T3.4 remain intact and blocked
 by default; T3.5 and all live/write authority remain deferred. See the LC4R10
 acceptance for exact hashes, provenance, recovery, veto, and gate evidence.
 
-### LC4V2 accepted state and next sequence
+### Post-certification security transition
 
-Yuri selected the recommended fresh holdout-v2 path on 2026-07-15. DeepSeek V4
-Flash/high worked only on a content-blind framework candidate; Sol rejected its
-conceptual fail-open defects and replaced it under the recovery lease. Gemini
-3.5 Flash independently returned `DECISION: pass` on recovered framework head
-`82dfa640` before actual content existed. External workers were then closed.
-Sol alone authored and froze the 24-group/288-variant/72-multi-turn synthetic
-Gold corpus at source commit `f5af2fe5`.
+The reusable fresh-certification discipline is captured in
+`docs/bernie-fresh-certification-protocol.md`; its bounded meaning and next
+sequence are reviewed in `docs/bernie-post-certification-transition-review.md`.
+The current security maintenance replaces `python-jose` with fixed-algorithm
+PyJWT, restores independent Bandit execution, retains a two-item reviewed
+Git-identity baseline, and documents the dev-only `uuid` alert as blocked by
+the latest supported TeamsFX dependency graph.
 
-The one and only `lc4-holdout-v2-baseline-001` run produced 576 aggregate
-samples: complete `0/576`, temporal relation `576/576`, intended action
-`528/576`, action semantics `410/576`, normalized value `288/576`, entity
-semantics `0/576`, clarification `308/576`, safety `532/576`, and zero repeat
-variance. The evidence procedure passed; product readiness failed. Holdout v2
-became sealed immediately after its aggregate receipt validation.
-The post-seal serial preservation gate collected 222 safe nodes and completed
-with 220 passes, one expected xfail, and one expected skip without loading
-either protected holdout.
-See `orchestration/agent_inbox/codex/lc4v2-sol-acceptance.md` for the exact
-one-shot evidence and authority decision.
+GitHub has CodeQL, Dependabot, Python/Node SCA, Bandit, leakage lint, secret
+scanning, and private vulnerability reporting. Point-in-time review also found
+unprotected `master`, disabled secret push protection, and ten unvalidated
+CodeQL candidates classified high. Do not equate these candidates with proven
+vulnerabilities. Their bounded validation is the next ordinary security
+tranche; changing GitHub protection settings remains a Yuri decision. See
+`docs/security/secure-sdlc-hardening/hardening.md`.
 
-V2 remains sealed; its accepted aggregate-only development direction is
-superseded by the later accepted sequence below.
+### Earlier LC4V2-V3 sequence
 
-### LC4V2R1 accepted state
-
-LC4V2R1 froze 21 new synthetic Gold/adjudicated development probes for patient,
-practitioner, location, appointment type, duration, correction, ambiguity,
-negation, and lexical duration normalization. The baseline passed 4/21 complete;
-the recovered implementation passes 21/21 with zero two-repeat variance and an
-empty failure selection `e3b0c44298fc1c14`. The exact report hash is
-`sha256:46570a2e3ab5d47fe4d74594544d4e92f1d68cc8d8a51d5db39a233f59d84c38`.
-
-DeepSeek V4 Flash/high supplied one candidate through Claude Code `--bare`.
-Sol rejected its fail-open evidence checker and over-broad negation scope,
-opened no correction loop, and recovered under the lease. Gemini 3.5
-Flash/medium independently returned `DECISION: pass` on exact recovered head
-`fa973311`. Ordinary development counts, safety, variance, and corpus hash did
-not change. The final serial preservation gate collected 383 nodes and
-completed with 381 passes, one expected xfail, and one expected skip. Text-only
-`mismatched` remains deferred because it requires authoritative diary context.
-The frozen plan is
-`orchestration/agent_inbox/codex/lc4v2r1-sol-contract.md`; the active decision
-is `orchestration/agent_inbox/codex/lc4v2r1-sol-acceptance.md`.
-
-### LC4V2R2 accepted state
-
-LC4V2R2 froze 14 matched unsafe/safe pairs (28 synthetic Gold development
-cases) across all six implemented action categories. The baseline passed 17/28
-complete; the recovered implementation passes 28/28 with zero variance across
-56 fixture evaluations and report hash
-`sha256:6cec58fe319a070b2c0f6d2cf0d99f74dc0f4b98352b3268709da2abc400f750`.
-
-DeepSeek Flash's uncommitted self-pass was rejected for incomplete provenance,
-incorrect aggregate claims, and over-broad regexes. Sol recovered under the
-lease and added false-positive guards; Gemini independently returned
-`DECISION: pass` on exact recovered head `ae4304f8` after reproducing 295/295
-tests. A Sol search returned protected v1 path names but no protected content or
-label; the metadata-only incident is recorded and does not authorize reuse.
-The final serial preservation gate collected 464 nodes and completed with 462
-passes, one expected xfail, and one expected skip. Ordinary development counts,
-safety, variance, and corpus hash remain unchanged.
-The frozen plan is
-`orchestration/agent_inbox/codex/lc4v2r2-sol-contract.md`; the active decision
-is `orchestration/agent_inbox/codex/lc4v2r2-sol-acceptance.md`.
-
-### LC4V2E1 accepted state
-
-LC4V2E1 bound the exact accepted R1, R2, R10, and ordinary-manifest evidence
-without parser execution or file discovery. Its deterministic report returned
-`no_r3_authorized`, with report hash
-`sha256:aa65f631f748948cdaf0c7adc280a2db1d86b3f2f4779edc1f67ecc3c0412fba`.
-Any input/hash/schema/count/variance drift instead returns
-`reassessment_invalid` and cannot write an accepted report.
-
-Gemini 3.5 Flash/medium independently returned `DECISION: pass` on exact head
-`e0d30bd8`. This closes the current development repair sequence but is not
-product certification. A fresh certification holdout or reviewed reuse policy
-now requires Yuri's explicit decision. The frozen contract is
-`orchestration/agent_inbox/codex/lc4v2e1-sol-contract.md`; see
-`orchestration/agent_inbox/codex/lc4v2e1-sol-acceptance.md`.
-
-### LC4V3 accepted state
-
-Yuri authorized the recommended genuinely fresh certification holdout on
-2026-07-15. LC4V3 begins content-blind: DeepSeek Flash may implement only the
-empty framework, Gemini must independently veto the recovered framework before
-content exists, and Sol alone owns actual corpus authorship, sealing, one-shot
-evaluation, acceptance, and protected integration. The comparable fixed shape
-is 24 groups, 288 scenarios, 72 trajectories, and 576 two-repeat samples.
-
-Holdouts v1 and v2 remained sealed and unavailable throughout authorship.
-T3.1-T3.4 remain blocked by default; T3.5/live models remain a separate Yuri
-decision. The frozen contract is
-`orchestration/agent_inbox/codex/lc4v3-sol-contract.md`.
-
-DeepSeek Flash's content-blind candidate at `7392b951` was rejected for
-fail-open scenario, seal, and report validation. Sol recovered it under the
-lease without a correction loop. The recovered framework passes 56 focused
-and 188 ordinary selected tests. Gemini 3.5 Flash/medium returned
-`DECISION: pass` on exact recovered head `170b44ab` before any real v3 content
-existed. External model sessions are closed. Product thresholds are frozen in
-`orchestration/agent_inbox/codex/lc4v3-one-shot-acceptance-rule.md` before
-Sol-only authorship began.
-
-Sol froze the fresh corpus at source commit `c57a4d62`, then ran the only
-permitted baseline from its unconsumed seal. The evidence procedure passed and
-the aggregate report is deterministic, but the frozen thresholds return
-`certification_fail`: complete 494/576, entity semantics 494/576,
-interpretation and replay tools 496/576, safety 576/576, temporal relation and
-normalization 576/576, 288 distinct coverage cells, and zero repeat variance.
-The plain-language slice was 0/82 while every other language slice passed,
-which is aggregate evidence of a systematic authoring/representation defect,
-not case-level parser evidence. No v3 repair, rerun, relabelling, or parser
-remediation is authorized. Holdouts v1-v3 are sealed. See
-`orchestration/agent_inbox/codex/lc4v3-sol-acceptance.md` and
-`docs/bernie-lc4v3-fresh-certification-closeout.md`.
+The accepted V2, V2R1, V2R2, V2E1, and V3 evidence, hashes, recovery decisions,
+and one-shot results are historical and unchanged. Their full current index is
+`docs/handover-ledgers/bernie-language-evaluation.md`; all versions remain
+sealed under section 5 and none authorizes provider, runtime, or write access.
 
 ## 4. Authority Allocation
 

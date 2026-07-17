@@ -1,0 +1,19 @@
+{
+  "schema_version": "emr4.bandit-reviewed-baseline.v1",
+  "reviewed_findings": [
+    {
+      "path": "app/services/bernie/lc4v10_content_blind_framework.py",
+      "test_id": "B324",
+      "line_number": 200,
+      "code_sha256": "1a3690c9d1cd9af5bca1725c884688fc0e40cf435de8db7dc84ad9d3622cd7ff",
+      "rationale": "SHA-1 reproduces Git blob identity and is not used as a cryptographic trust boundary."
+    },
+    {
+      "path": "app/services/bernie/lc4v10_protected_sealing.py",
+      "test_id": "B324",
+      "line_number": 45,
+      "code_sha256": "398c04b2b7c38fdb39fc0ffe96f2d14d047e58a97568e8ce6b98e29f75bd319b",
+      "rationale": "SHA-1 reproduces Git blob identity and is not used as a cryptographic trust boundary."
+    }
+  ]
+}

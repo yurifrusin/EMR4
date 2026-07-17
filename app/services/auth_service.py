@@ -2,7 +2,8 @@ from datetime import datetime, timedelta, timezone
 from typing import Optional
 import uuid
 import bcrypt
-from jose import JWTError, jwt
+import jwt
+from jwt import InvalidTokenError
 from fastapi import HTTPException, status
 from app.config import settings
 from app.schemas.auth import TokenData
@@ -43,5 +44,5 @@ def verify_token(token: str) -> TokenData:
             practice_id=uuid.UUID(practice_id),
             role=role,
         )
-    except (JWTError, ValueError):
+    except (InvalidTokenError, ValueError):
         raise credentials_exc

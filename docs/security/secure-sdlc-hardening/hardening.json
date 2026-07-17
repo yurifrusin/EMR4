@@ -1,0 +1,125 @@
+{
+  "documentType": "codex-security.hardening-analysis",
+  "schemaVersion": "1.0",
+  "analysisId": "hardening_20260717_emr4_delivery_control_plane",
+  "sourceEvidence": {
+    "kind": "document_collection",
+    "label": "EMR4 security contracts, workflows, and GitHub security-state snapshot",
+    "collectionSha256": "22bad242660dd7e25fb2cbef884865d4b7e1549f2f6134fb0378caf18560863b",
+    "artifactCount": 10,
+    "sourceDrift": "unknown",
+    "targetRevision": "240bf0b56071b5ea0f3d71e92ff765acc2f727d9"
+  },
+  "assessment": {
+    "outcome": "opportunities_identified",
+    "summary": "Existing security evidence should become an enforced, owned delivery control after current high-alert triage."
+  },
+  "constraints": {
+    "profile": "healthcare_security_balanced",
+    "changeHorizons": ["incremental", "medium_term"],
+    "nonNegotiables": [
+      "Preserve protected holdouts and closed provider/write gates.",
+      "Do not grant workers or providers integration authority.",
+      "Retain an audited emergency recovery route."
+    ],
+    "assumptions": [
+      "No measured CI latency budget was supplied.",
+      "CodeQL security alerts remain unvalidated candidates.",
+      "GitHub repository settings require explicit user approval before mutation."
+    ]
+  },
+  "opportunities": [
+    {
+      "opportunityId": "secure-delivery-control-plane",
+      "title": "Enforce the delivery security boundary",
+      "summary": "Align protected-integration policy with GitHub admission controls and owned alert response.",
+      "diagnosis": "Security automation produces evidence, but unprotected master and disabled secret push protection leave final admission dependent on human discipline.",
+      "evidence": [
+        {"claimType": "observed", "sourceKind": "document", "evidenceId": "E001", "path": "docs/security/secure-sdlc-hardening/evidence-manifest.json", "claim": "GitHub reports master branch protection is not configured."},
+        {"claimType": "observed", "sourceKind": "document", "evidenceId": "E002", "path": "docs/security/secure-sdlc-hardening/evidence-manifest.json", "claim": "Secret scanning is enabled and push protection is disabled."},
+        {"claimType": "observed", "sourceKind": "document", "evidenceId": "E003", "path": "docs/security/secure-sdlc-hardening/evidence-manifest.json", "claim": "Ten open CodeQL candidates are classified high; validity is not established."},
+        {"claimType": "observed", "sourceKind": "source", "evidenceId": "E005", "path": ".github/workflows/codeql.yml", "claim": "CodeQL, dependency, static-analysis, and leakage controls already produce security evidence."},
+        {"claimType": "inferred", "sourceKind": "source", "evidenceId": "E007", "path": "AGENTS.md", "claim": "Documented protected integration and technical GitHub admission enforcement are owned by different control planes."}
+      ],
+      "desiredInvariants": [
+        "Ordinary changes cannot reach master without selected stable security checks.",
+        "Recognized secrets are blocked before acceptance into repository history.",
+        "Every high security signal receives an owner, decision, and time-bound record.",
+        "Emergency integration is narrow, audited, and rehearsed."
+      ],
+      "proposalPath": "proposals/secure-delivery-control-plane.md",
+      "options": [
+        {
+          "optionId": "strengthened-advisory",
+          "title": "Strengthened advisory controls",
+          "kind": "baseline",
+          "summary": "Retain current GitHub admission while adding named ownership, SLAs, and security deltas.",
+          "diagramPaths": {
+            "before": "diagrams/secure-delivery-control-plane-before.mmd",
+            "after": "diagrams/secure-delivery-control-plane-advisory-after.mmd"
+          },
+          "evidenceCoverage": [
+            {"evidenceId": "E001", "effect": "mitigates", "tacticalFixRequired": true, "rationale": "Human review narrows error probability but direct push remains possible."},
+            {"evidenceId": "E002", "effect": "unaffected", "tacticalFixRequired": true, "rationale": "No pre-push secret enforcement is added."},
+            {"evidenceId": "E003", "effect": "mitigates", "tacticalFixRequired": true, "rationale": "Ownership improves response but does not enforce resolution before integration."}
+          ],
+          "tradeoffs": [
+            {"dimension": "security", "direction": "improves", "confidence": "medium", "basis": "source-derived", "assessment": "Named ownership improves response while bypass and secret-history risks remain.", "validationPlan": "Audit alert age and unreviewed direct pushes for eight weeks."},
+            {"dimension": "performance", "direction": "neutral", "confidence": "high", "basis": "source-derived", "assessment": "No runtime or CI-path hop is added.", "validationPlan": "Confirm application and CI timings are unchanged."},
+            {"dimension": "memory", "direction": "neutral", "confidence": "high", "basis": "source-derived", "assessment": "No runtime component or retained data structure is added.", "validationPlan": "No benchmark required beyond confirming no runtime change."},
+            {"dimension": "reliability", "direction": "neutral", "confidence": "medium", "basis": "source-derived", "assessment": "Integration remains available during CI outages, but unsafe integration remains possible.", "validationPlan": "Review integration incidents and CI outages."},
+            {"dimension": "operability", "direction": "regresses", "confidence": "medium", "basis": "source-derived", "assessment": "Weekly triage and SLA tracking add recurring human work.", "validationPlan": "Measure weekly triage time and backlog age."},
+            {"dimension": "migration", "direction": "neutral", "confidence": "high", "basis": "source-derived", "assessment": "Documentation and ownership can be introduced without repository-setting changes.", "validationPlan": "Confirm owner and first review record exist."}
+          ],
+          "residualRisks": ["Direct push bypass remains possible.", "Recognized secrets can enter history before detection.", "Process decays if scheduled review is missed."],
+          "implementationReadiness": {
+            "affectedComponents": ["AGENTS.md", "security review records"],
+            "workPackages": ["Define owner and SLA.", "Add per-sprint security delta."],
+            "acceptanceCriteria": ["Every high alert has a recorded owner and decision date."],
+            "migrationNotes": ["Can begin immediately without GitHub-setting changes."],
+            "rollback": "Remove the procedural additions; no runtime or repository setting changes occur."
+          }
+        },
+        {
+          "optionId": "enforced-protected-integration",
+          "title": "Enforced protected integration",
+          "kind": "structural",
+          "summary": "Require reviewed stable security checks, enable secret push protection, and retain audited break glass.",
+          "diagramPaths": {
+            "before": "diagrams/secure-delivery-control-plane-before.mmd",
+            "after": "diagrams/secure-delivery-control-plane-enforced-after.mmd"
+          },
+          "evidenceCoverage": [
+            {"evidenceId": "E001", "effect": "addresses", "tacticalFixRequired": true, "rationale": "Branch protection moves admission control to GitHub."},
+            {"evidenceId": "E002", "effect": "addresses", "tacticalFixRequired": true, "rationale": "Push protection blocks recognized secret patterns before acceptance."},
+            {"evidenceId": "E003", "effect": "mitigates", "tacticalFixRequired": true, "rationale": "Owned validation and curated required checks reduce silent backlog; findings still require case-level triage."},
+            {"evidenceId": "E004", "effect": "mitigates", "tacticalFixRequired": true, "rationale": "A dev-only upstream block remains visible and time-bound rather than force-overridden."}
+          ],
+          "tradeoffs": [
+            {"dimension": "security", "direction": "improves", "confidence": "high", "basis": "source-derived", "assessment": "Ordinary bypass is prevented and recognized secrets are stopped earlier; administrator bypass and scanner blind spots remain.", "validationPlan": "Rehearse rejected direct push, failing required check, and synthetic push-protection test."},
+            {"dimension": "performance", "direction": "regresses", "confidence": "medium", "basis": "hypothetical", "assessment": "Application runtime is unchanged, while integration waits for selected checks.", "validationPlan": "Measure median and p95 check latency over ten representative changes."},
+            {"dimension": "memory", "direction": "neutral", "confidence": "high", "basis": "source-derived", "assessment": "No application memory cost is introduced; only ordinary GitHub check metadata is retained.", "validationPlan": "Confirm no runtime deployment component is added."},
+            {"dimension": "reliability", "direction": "regresses", "confidence": "medium", "basis": "source-derived", "assessment": "A GitHub or CI outage can block normal integration; audited break glass contains the availability tradeoff.", "validationPlan": "Run a tabletop CI outage and break-glass rehearsal."},
+            {"dimension": "operability", "direction": "regresses", "confidence": "medium", "basis": "source-derived", "assessment": "Check curation, alert ownership, overrides, and rehearsals add operational work.", "validationPlan": "Measure triage effort, override frequency, and stale-alert age monthly."},
+            {"dimension": "migration", "direction": "regresses", "confidence": "medium", "basis": "source-derived", "assessment": "Current high alerts must be validated and check stability proven before enforcement.", "validationPlan": "Complete report-only trial and record rollback before enabling master protection."}
+          ],
+          "residualRisks": ["Administrators may retain emergency bypass.", "Static analysis cannot detect every vulnerability.", "Noisy checks can impair delivery until curated.", "Runtime RLS, encryption, audit, and storage gaps remain."],
+          "implementationReadiness": {
+            "affectedComponents": ["GitHub repository settings", ".github/workflows", "security response records"],
+            "workPackages": ["Validate high CodeQL candidates.", "Define owner/SLA and break glass.", "Curate required checks.", "Enable push and branch protection after approval."],
+            "acceptanceCriteria": ["Ordinary direct push is rejected.", "Required failing checks block integration.", "Synthetic recognized secret is blocked safely.", "Break glass is audited and rehearsed."],
+            "migrationNotes": ["Start report-only and enable stable checks incrementally."],
+            "rollback": "Disable required-check enforcement while retaining alert ownership and the decision record."
+          }
+        }
+      ],
+      "recommendedOptionId": "enforced-protected-integration",
+      "recommendation": "Use enforced protected integration after high-alert validation and break-glass rehearsal; use strengthened advisory controls only as the temporary migration state."
+    }
+  ],
+  "openQuestions": [
+    "Who may approve and exercise break glass when the project has one active maintainer?",
+    "Which checks are sufficiently stable to require immediately?",
+    "What severity-based remediation SLAs should govern validated findings?"
+  ]
+}

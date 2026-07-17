@@ -1,0 +1,6 @@
+flowchart LR
+  C["Contributor or integrator"] -->|"direct push possible"| M["master"]
+  M --> W["CodeQL / SCA / Bandit / leakage lint"]
+  W --> A["Alerts and workflow results"]
+  A -.->|"manual follow-up"| O["Security owner not formally assigned"]
+  U["Untrusted secret or risky change"] --> C

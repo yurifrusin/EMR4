@@ -1,0 +1,8 @@
+flowchart LR
+  U["Untrusted secret or risky change"] --> P["Push protection and protected branch"]
+  C["Contributor or integrator"] --> P
+  P -->|"review + required checks"| W["CodeQL / SCA / Bandit / leakage lint"]
+  W -->|"pass"| M["master"]
+  W -->|"finding"| O["Owned triage with SLA"]
+  O -->|"validated fix or recorded disposition"| P
+  B["Audited break-glass path"] -.-> P

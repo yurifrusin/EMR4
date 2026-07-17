@@ -58,7 +58,10 @@ class Settings(BaseSettings):
     database_url: str = "postgresql://postgres:postgres@127.0.0.1:5434/gp_pms_dev"
 
     secret_key: str = INSECURE_DEFAULT_SECRET
-    algorithm: str = "HS256"
+    # The authentication boundary intentionally supports one audited JWT
+    # algorithm.  Keeping this a Literal prevents environment configuration
+    # from silently enabling an unreviewed asymmetric implementation.
+    algorithm: Literal["HS256"] = "HS256"
     access_token_expire_minutes: int = 480  # 8 hours
 
     # CORS allow-list. Taskpane + Command Centre are served from GitHub Pages;

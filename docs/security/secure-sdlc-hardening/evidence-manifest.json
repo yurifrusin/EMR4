@@ -1,0 +1,44 @@
+{
+  "documentType": "emr4.security-evidence-manifest",
+  "schemaVersion": "1.0",
+  "capturedAt": "2026-07-17T00:20:00Z",
+  "targetRevision": "240bf0b56071b5ea0f3d71e92ff765acc2f727d9",
+  "repositoryFiles": [
+    {"path": "AGENTS.md", "sha256": "a51d890b9189c96a64331dc906e1bf56f87c3a7dc577c430ca160f2c2aeb12a4"},
+    {"path": "orchestration/api_spine_adr.md", "sha256": "bf0a83f457da0ca79f497834dfb5ba85b992775056218be89ad3ce9b19794101"},
+    {"path": "orchestration/api_spine_programme.md", "sha256": "5532f9ccc0efc326d34bc0d33f9f650d3f5322f8f4b22271fc8970b0dad31946"},
+    {"path": "orchestration/bernie_release_gates.md", "sha256": "d6f8f6663b9e2cd18a45ecb9a81489dceb0801b6094b3bc4fa1f8758a5e14633"},
+    {"path": ".github/workflows/python-security.yml", "sha256": "d298d2060d42082b9f0729ed649d193079ed150b2dc02cdf092afc76d11c183e"},
+    {"path": ".github/workflows/node-security.yml", "sha256": "59122e2050b124450cbb9457a251eb3c1b0816d0081db14c1f73e95db51ca240"},
+    {"path": ".github/workflows/codeql.yml", "sha256": "5b618c73d6312b41a2c2beff825eedd49895e5514a531c7fcbc694a0af15bc3a"},
+    {"path": ".github/dependabot.yml", "sha256": "29cac7e849f1e12ca2aef4694d784571ac72e66e1a5cddf66dd51fe52398b87e"},
+    {"path": "docs/api-spine/security/permission-matrix.yaml", "sha256": "7669a19a9bfc9ea91f9df8806ab4e0097ac11329d356e65125517c1cd3865165"}
+  ],
+  "githubObservations": {
+    "repositoryVisibility": "public",
+    "defaultBranch": "master",
+    "masterBranchProtection": "not_configured",
+    "dependabotSecurityUpdates": "enabled",
+    "secretScanning": "enabled",
+    "secretScanningPushProtection": "disabled",
+    "openSecretScanningAlerts": 0,
+    "openDependabotAlerts": [
+      {"number": 5, "dependency": "uuid", "scope": "development", "severity": "medium"}
+    ],
+    "openCodeScanningAlerts": 426,
+    "openCodeScanningSecurityAlerts": {
+      "high": 10,
+      "rules": {
+        "js/user-controlled-bypass": 4,
+        "js/insecure-randomness": 3,
+        "js/incomplete-sanitization": 1,
+        "py/clear-text-logging-sensitive-data": 2
+      }
+    }
+  },
+  "limitations": [
+    "The CodeQL alerts are unvalidated candidates, not confirmed vulnerabilities.",
+    "This is a targeted delivery-control review, not an exhaustive repository security scan.",
+    "GitHub settings are a point-in-time API observation and may drift."
+  ]
+}

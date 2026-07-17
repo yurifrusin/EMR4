@@ -1,0 +1,6 @@
+flowchart LR
+  C["Contributor or integrator"] -->|"documented review discipline"| M["master"]
+  M --> W["CodeQL / SCA / Bandit / leakage lint"]
+  W --> A["Alerts and workflow results"]
+  A -->|"periodic manual triage"| O["Named security reviewer"]
+  U["Untrusted secret or risky change"] --> C

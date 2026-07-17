@@ -47,3 +47,25 @@ The immutable pre-compaction handover preserves detailed phase history,
 environment credentials guidance, file maps, historical defects, and deploy
 gotchas. Treat source and current docs as authority when old narrative and live
 code differ.
+
+## 2026-07-17 post-certification security transition
+
+The failed Python Security workflow was traced to `python-jose`'s transitive
+`ecdsa` advisory. The auth boundary now uses `PyJWT==2.13.0` with configuration
+restricted to `HS256`; focused auth/API tests and `pip-audit` pass. Bandit runs
+with `always()` and an exact two-item baseline for SHA-1 used solely to
+reproduce Git blob identities. Historical-diary leakage lint remains clean.
+
+Dependabot alert 5 is dev-only: the production npm audit is clean, while the
+latest supported `@microsoft/teamsfx-core` still requests vulnerable
+`uuid@^8.3.2`. A non-forced lock refresh did not remove the alert and was not
+retained. No override or dismissal is authorized.
+
+The Secure SDLC review found strong existing design/verification controls but
+a delivery-enforcement gap: GitHub reports unprotected `master`, secret push
+protection disabled, and ten open CodeQL candidates classified high. The
+candidates require reachability/validity triage and are not yet confirmed
+vulnerabilities. Private vulnerability reporting is enabled and `SECURITY.md`
+now documents the reporting route. See
+`docs/security/emr4-secure-sdlc-review-2026-07-17.md` and the evidence-bound
+portfolio under `docs/security/secure-sdlc-hardening/`.
