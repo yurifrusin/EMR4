@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V10 fresh certification passed; the post-certification Secure SDLC transition is complete and public dialogue-source triage is at its quarantine decision boundary |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`, `docs/bernie-lc4v10-fresh-certification-closeout.md`, `orchestration/agent_inbox/codex/security-hardening-final-purple-acceptance.md`, `docs/security/secure-sdlc-red-blue-diary-hardening-closeout-2026-07-17.md`, `docs/bernie-post-certification-transition-review.md`, and `docs/bernie-dialogue-corpus-source-assessment.md` |
-| Current result | V10 remains a valid bounded `certification_pass`: complete and every dimension 576/576. Ariadne Secure SDLC red/blue/purple enforcement, Diary defence-in-depth, secret push protection, and protected `master` are complete; the representative PR passed aggregate and language CodeQL, Python/Node security, and 139-case Diary smoke |
-| Next implementation | No V11 is needed or authorized. Pause for Yuri's decision whether to authorize the recommended small, local-only, non-provider quarantine pilot for the appointment-call corpus, or select another next product track. Preserve v1-v10 and all T3/provider/product/write boundaries |
+| Active product track | LC4V10 fresh certification passed; the post-certification Secure SDLC transition is complete; the appointment-call quarantine pilot stopped before content download because provenance, rights, consent/legal-basis, and redaction evidence remain inadequate |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`, `docs/bernie-lc4v10-fresh-certification-closeout.md`, `orchestration/agent_inbox/codex/security-hardening-final-purple-acceptance.md`, `docs/security/secure-sdlc-red-blue-diary-hardening-closeout-2026-07-17.md`, `docs/bernie-post-certification-transition-review.md`, `docs/bernie-dialogue-corpus-source-assessment.md`, `orchestration/agent_inbox/codex/appointment-call-quarantine-pilot-sol-acceptance.md`, and `docs/bernie-appointment-call-quarantine-pilot-closeout.md` |
+| Current result | V10 remains a valid bounded `certification_pass`: complete and every dimension 576/576. Secure SDLC and GitHub controls remain complete. The local-only appointment-call pilot passed its fail-closed process with decision `stop_before_content_download`; no corpus content was downloaded, opened, transmitted, or admitted |
+| Next implementation | No V11 is needed or authorized. Pause for Yuri's decision whether to seek a verifiable provenance/rights/privacy package from the appointment-call data controller or select another product track. Preserve v1-v10 and all T3/provider/product/write boundaries |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 
@@ -144,9 +144,12 @@ risk-triggered red/blue/purple evidence. See the final security closeout and
 `docs/security/codeql-high-validation-2026-07-17.md`.
 
 Metadata-only dialogue-source triage found the appointment-call Kaggle corpus
-promising but provenance/privacy-uncertain; no content was downloaded. A small
-local quarantine pilot is the current Yuri decision boundary. MedInstruct is
-not Bernie receptionist evidence.
+promising but provenance/privacy-uncertain. Yuri authorized the small local
+quarantine pilot; its preliminary provenance and licence-authority gate stopped
+before content download because the clinic/data controller, jurisdiction,
+collection basis, uploader authority, content-rights chain, redaction method,
+and residual-risk audit remain undocumented. No content was downloaded, opened,
+transmitted, or admitted. MedInstruct is not Bernie receptionist evidence.
 
 ### Earlier LC4V2-V3 sequence
 
@@ -264,8 +267,9 @@ progress, or an unexpected material fork. Pause before:
 - live-provider calls, T3.5 activation, or sensitive-data transmission;
 - historical-trove scope expansion beyond an approved payload;
 - material licence or cost acceptance;
-- download or inspection of the provenance-uncertain appointment-call corpus,
-  or admission of any external dialogue corpus into development evidence;
+- renewed download or inspection of the provenance-blocked appointment-call
+  corpus, external coordination with its uploader/data controller, or admission
+  of any external dialogue corpus into development evidence;
 - API/write-authority, database migration, deployment, production, or release
   changes not already explicitly authorized; or
 - an action requiring new external authority or affecting people/systems

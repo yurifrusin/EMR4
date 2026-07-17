@@ -92,7 +92,11 @@ administrators included. See
 `docs/security/secure-sdlc-red-blue-diary-hardening-closeout-2026-07-17.md`.
 
 The transition review also completed metadata-only corpus triage. The public
-appointment-call dataset is promising but requires a separately authorized
-local quarantine/provenance/PII pilot before download. MedInstruct is synthetic
-medical instruction data, not receptionist evidence. See
-`docs/bernie-dialogue-corpus-source-assessment.md`.
+appointment-call dataset was promising enough for Yuri to authorize a local
+quarantine pilot. Its preliminary provenance and licence-authority gate stopped
+before content download: clinic/data-controller identity, jurisdiction,
+collection basis, uploader authority, content rights, redaction method, and a
+residual-identifier audit remain undocumented. No content was downloaded or
+admitted. MedInstruct is synthetic medical instruction data, not receptionist
+evidence. See `docs/bernie-dialogue-corpus-source-assessment.md` and
+`docs/bernie-appointment-call-quarantine-pilot-closeout.md`.

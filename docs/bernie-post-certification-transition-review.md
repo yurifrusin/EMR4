@@ -19,8 +19,10 @@ That process is now captured in
 `docs/bernie-fresh-certification-protocol.md`.
 
 The transition review now also includes a metadata-only assessment of public
-dialogue sources in `docs/bernie-dialogue-corpus-source-assessment.md`. No
-external corpus was downloaded or admitted to development evidence.
+dialogue sources in `docs/bernie-dialogue-corpus-source-assessment.md`. Yuri
+authorized the recommended appointment-call quarantine pilot; it stopped at
+the preliminary provenance gate before content download. No external corpus
+was downloaded or admitted to development evidence.
 
 ## What the sequence established
 
@@ -54,9 +56,10 @@ sequence is:
 3. decide whether to enforce protected-master and secret push-protection
    controls in GitHub;
 4. execute the highest-priority Secure SDLC structural tranche; and
-5. decide whether to authorize the recommended local-only quarantine pilot for
-   the appointment-call corpus; and
-6. only then plan the next product track, with a fresh threat-model delta and
+5. complete the authorized local-only appointment-call quarantine pilot, which
+   passed fail-closed with `stop_before_content_download`; and
+6. decide whether to seek an external provenance/rights/privacy package or plan
+   the next product track, with a fresh threat-model delta and
    the existing provider/write gates still closed.
 
 ## Deliverables
