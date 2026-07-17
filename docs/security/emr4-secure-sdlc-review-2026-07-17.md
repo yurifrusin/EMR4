@@ -2,6 +2,11 @@
 
 ## Overall assessment
 
+Validation update: the ten open CodeQL candidates classified high were traced
+and tested after this point-in-time review. None survived as a reportable high
+finding; see `docs/security/codeql-high-validation-2026-07-17.md`. They remain
+open in GitHub pending a deliberate remediation/disposition choice.
+
 EMR4 is already security-aware by design, but it is not yet doing everything
 reasonably available for a healthcare system. The strongest controls are its
 authority boundaries: backend ownership of clinical/diary truth, default-deny
@@ -43,11 +48,10 @@ gaps, not evidence that the LC4V10 result was poor.
 
 ## Priority gaps
 
-1. **Alert response:** validate the ten high CodeQL alerts. The smoke/dev URL
-   switches in the published Diary deserve first attention because they can
-   alter client-side authentication flow; backend authorization must be proven
-   rather than assumed. The two diagnostic-script logging findings may be safe
-   aggregates, but require explicit data-classification evidence.
+1. **Alert response:** decide the disposition of the ten now-validated high
+   candidates. The high claims did not survive, but the published Diary's
+   smoke/dev URL switches, identifier fallbacks, and selector construction are
+   still useful defence-in-depth remediation targets.
 2. **Protected integration:** decide whether to enable branch protection with
    required security checks and review, and secret-scanning push protection.
 3. **Data-plane controls:** implement PostgreSQL RLS, comprehensive append-only

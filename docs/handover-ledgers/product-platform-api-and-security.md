@@ -69,3 +69,14 @@ vulnerabilities. Private vulnerability reporting is enabled and `SECURITY.md`
 now documents the reporting route. See
 `docs/security/emr4-secure-sdlc-review-2026-07-17.md` and the evidence-bound
 portfolio under `docs/security/secure-sdlc-hardening/`.
+
+All ten high-classified CodeQL candidates were then validated individually.
+Seven focused backend-boundary tests passed and both flagged reporting CLIs
+emitted aggregate-only output. No candidate survived as a reportable high
+security finding: four client/demo bypass alerts are defeated by mock-only or
+independently authenticated backend boundaries; three random-value alerts use
+correlation/idempotency values rather than credentials; one selector alert
+receives UUID/fixed-mock IDs; and two logging alerts print asserted aggregates.
+The alerts were not dismissed. Diary defence-in-depth remediation and GitHub
+protection settings are now the user decision boundary. See
+`docs/security/codeql-high-validation-2026-07-17.md`.

@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V10 fresh certification passed; certification transition and Secure SDLC maintenance are active |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`, `docs/bernie-lc4v10-fresh-certification-closeout.md`, `docs/bernie-post-certification-transition-review.md`, and `docs/security/emr4-secure-sdlc-review-2026-07-17.md` |
-| Current result | V10 remains a valid bounded `certification_pass`: complete and every dimension 576/576. Maintenance removes vulnerable `python-jose`/`ecdsa`, restores independent Bandit visibility, and records Dependabot alert 5 as dev-only/upstream-blocked without an override |
-| Next implementation | No V11 is needed or authorized. Validate the ten high-classified CodeQL candidates, then pause for Yuri's decision on GitHub master protection, secret push protection, required checks, and response SLAs. Preserve v1-v10 and all T3/provider/product/write boundaries |
+| Active product track | LC4V10 fresh certification passed; certification transition and Secure SDLC review are complete |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`, `docs/bernie-lc4v10-fresh-certification-closeout.md`, `docs/bernie-post-certification-transition-review.md`, and `docs/security/codeql-high-validation-2026-07-17.md` |
+| Current result | V10 remains a valid bounded `certification_pass`: complete and every dimension 576/576. Security maintenance is green; all ten CodeQL candidates classified high were instance-preservingly validated as suppressed/not-applicable, with none surviving as a reportable high finding |
+| Next implementation | No V11 is needed or authorized. Pause for Yuri's choice on the recommended Diary defence-in-depth remediation and on GitHub master protection, secret push protection, required checks, and response SLAs. Preserve v1-v10 and all T3/provider/product/write boundaries |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 
@@ -136,10 +136,11 @@ the latest supported TeamsFX dependency graph.
 
 GitHub has CodeQL, Dependabot, Python/Node SCA, Bandit, leakage lint, secret
 scanning, and private vulnerability reporting. Point-in-time review also found
-unprotected `master`, disabled secret push protection, and ten unvalidated
-CodeQL candidates classified high. Do not equate these candidates with proven
-vulnerabilities. Their bounded validation is the next ordinary security
-tranche; changing GitHub protection settings remains a Yuri decision. See
+unprotected `master`, disabled secret push protection, and ten CodeQL
+candidates classified high. Bounded source/control/sink validation plus seven
+backend negative controls and two real CLI reproductions found none reportable
+at high severity; alerts remain open pending Yuri's remediation/disposition
+choice. See `docs/security/codeql-high-validation-2026-07-17.md` and
 `docs/security/secure-sdlc-hardening/hardening.md`.
 
 ### Earlier LC4V2-V3 sequence
