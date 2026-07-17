@@ -1,0 +1,20 @@
+{
+  "schema_version":"ariadne.orchestrator_runtime_state.v1",
+  "continuation_event":"pre_worker_dispatch",
+  "planned_action":"worker_dispatch",
+  "context_health":{"agent_contexts":[{"agent_id":"orchestrator","measurement_source":"post_compaction_receipt","rehydrated_from_receipt":true,"rehydration_sources":["live_handover_current_baton","current_authority_allocation","active_plan_and_acceptance","protected_evidence_boundaries","git_refs_and_worktree"]}]},
+  "adapter_observations":[
+    {"adapter_id":"deepseek_via_claude_code_bare","method":"synthetic_fixture","reachability":"reachable","evidence":["Blue lane closed and recovered."]},
+    {"adapter_id":"deepcode_cli","method":"synthetic_fixture","reachability":"unknown","evidence":["Fallback unselected."]},
+    {"adapter_id":"claude_cli_print","method":"synthetic_fixture","reachability":"reachable","evidence":["No active Claude worker."]},
+    {"adapter_id":"antigravity_cli_print","method":"synthetic_fixture","reachability":"reachable","evidence":["Final fresh bootstrap-recovery veto assigned after all representative GitHub checks passed."]},
+    {"adapter_id":"codex_primary_session","method":"synthetic_fixture","reachability":"reachable","evidence":["Sol retains protected integration and acceptance authority."]},
+    {"adapter_id":"codex_subagent_spawn","method":"synthetic_fixture","reachability":"unknown","evidence":["No native subagent assigned."]}
+  ],
+  "worker_slots":[
+    {"resource_id":"deepseek-flash-workers","active_instance_ids":[],"stale_instance_ids":[]},
+    {"resource_id":"gemini-flash-reviewers","active_instance_ids":["gemini-security-bootstrap-red"],"stale_instance_ids":[]}
+  ],
+  "workspace_receipts":[{"agent_id":"gemini-security-bootstrap-red","worktree":"C:\\Users\\sarashera\\EMR4-worktrees\\security-hardening-bootstrap-red","branch":"gemini/security-hardening-bootstrap-red","clean":true,"at_handoff_current":true,"source_head":"7b367a5d0e7971248ee7c0af947e2b6e17029b66","candidate_head":"73eba9c144ac1a41be5b2e150b9d2c1c7c77675c"}],
+  "assigned_agent_ids":["gemini-security-bootstrap-red"]
+}

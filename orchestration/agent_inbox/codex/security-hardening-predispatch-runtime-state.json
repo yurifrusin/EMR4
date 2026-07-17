@@ -1,0 +1,38 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "unknown",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["DeepSeek Flash blue packet bound to candidate 604b3452787d45ad99d9f08e70101bfd87516671 through Claude Code --bare."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback unselected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["Authorized DeepSeek transport ready."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["Fresh Gemini red packet bound to candidate 604b3452787d45ad99d9f08e70101bfd87516671."]},
+    {"adapter_id": "codex_primary_session", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["Sol retains purple synthesis and all protected authority."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native Codex subagent assigned."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": ["deepseek-security-blue"], "stale_instance_ids": []},
+    {"resource_id": "gemini-flash-reviewers", "active_instance_ids": ["gemini-security-red"], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [
+    {"agent_id": "deepseek-security-blue", "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\security-hardening-blue", "branch": "deepseek/security-hardening-blue", "clean": true, "at_handoff_current": true, "source_head": "1e38dcb9cfa651839bae65bad9438e449574cce4", "candidate_head": "604b3452787d45ad99d9f08e70101bfd87516671"},
+    {"agent_id": "gemini-security-red", "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\security-hardening-red", "branch": "gemini/security-hardening-red", "clean": true, "at_handoff_current": true, "source_head": "1e38dcb9cfa651839bae65bad9438e449574cce4", "candidate_head": "604b3452787d45ad99d9f08e70101bfd87516671"}
+  ],
+  "assigned_agent_ids": ["deepseek-security-blue", "gemini-security-red"]
+}

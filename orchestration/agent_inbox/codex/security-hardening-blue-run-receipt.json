@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "Done. Here is a summary of everything completed:\n\n---\n\n## Blue review \u2014 Complete\n\n**Decision:** `DECISION: pass`\n\n### What was done\n\n1. **Reviewed** the frozen candidate `604b3452` across all four owned questions.\n\n2. **Question 1 \u2014 Ariadne gate fail-closed:** Verified the gate rejects incomplete deltas, missing dual reviews, stale red context, overlapping packets, overdue purple, missing artifacts, and unresolved critical/high findings. All conditions emit specific `reason` strings and return `revision_required`.\n\n3. **Question 2 \u2014 Diary hardening:** Confirmed localhost-only gating (`isLocalHarnessHost`), the five-path confirm allowlist (`ALLOWED_CONFIRM_ENDPOINT_PATHS`), `Math.random` removal (zero occurrences remain), and identifier selector elimination (via `findAppointmentElementById` with safe `Array.find`).\n\n4. **Question 3 \u2014 Bypass analysis:** No viable bypass found for non-local dev flags, arbitrary confirm paths, predictable IDs, or selector injection. All five canonical confirm routes remain operational.\n\n5. **Question 4 \u2014 Reproduced tests:**\n   - **29 Python tests** \u2014 all passed across all five test modules\n   - **Node syntax check** \u2014 `node --check docs/diary/diary.js` exited cleanly\n   - **Playwright module** \u2014 7 tests collected, including the new boundary test `test_unknown_confirmation_endpoint_fails_closed_without_network_request`\n\n6. **Written** `orchestration/agent_inbox/deepseek/security-hardening-blue-review.md`\n\n7. **Committed** to `deepseek/security-hardening-blue` branch (commit `3ef98a5c`)",
+  "usage": {
+    "input_tokens": 27659,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 488704,
+    "output_tokens": 8537,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 0.6085320000000001,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

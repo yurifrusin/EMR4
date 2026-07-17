@@ -1,0 +1,10 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:3c7b396a611e9f1c6404e6866f7354084c07d9fb13443b1f0cad213f5c65d924",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "unknown",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree"
+      ]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["Blue original-candidate session closed; self-pass rejected and preserved under recovery."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback unselected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["No active Claude Code worker."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["Fresh Gemini exact-final red veto bound to 4efe9ff3363c3f563a03a1f5bd0978998ca55d07."]},
+    {"adapter_id": "codex_primary_session", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["Sol recovery passes plan gate and 44 focused tests; purple synthesis remains pending."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native Codex subagent assigned."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "gemini-flash-reviewers", "active_instance_ids": ["gemini-security-final-red"], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [{
+    "agent_id": "gemini-security-final-red",
+    "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\security-hardening-final-red",
+    "branch": "gemini/security-hardening-final-red",
+    "clean": true,
+    "at_handoff_current": true,
+    "source_head": "cccf8f5cc71ae4ff3a94273fd5a1f86163745766",
+    "candidate_head": "4efe9ff3363c3f563a03a1f5bd0978998ca55d07"
+  }],
+  "assigned_agent_ids": ["gemini-security-final-red"]
+}
