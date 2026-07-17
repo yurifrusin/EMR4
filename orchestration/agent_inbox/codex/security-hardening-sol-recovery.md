@@ -55,3 +55,9 @@ exact-head veto and replacement purple synthesis both passed. Thus the
 original blue candidate `604b3452787d45ad99d9f08e70101bfd87516671` is bound
 through Sol recovery to the final candidate without treating its self-pass as
 transferrable acceptance.
+
+The second representative CodeQL pass then required removal of the remaining
+top-level URL-dependent bootstrap conditions. The final exact code candidate
+is `73eba9c144ac1a41be5b2e150b9d2c1c7c77675c`. GitHub's aggregate CodeQL gate
+and every named candidate required check passed on that head, followed by a
+third fresh Gemini exact-head `DECISION: pass` and final Sol purple synthesis.
