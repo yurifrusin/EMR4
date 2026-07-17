@@ -1,0 +1,936 @@
+{
+  "schema_version": "emr4.bernie.synthetic_noise_coherence_admission.v1",
+  "decision": "partial_pass_with_quarantine",
+  "candidate_path": "tests/fixtures/bernie_synthetic_noise/candidates_sol_coherent.jsonl",
+  "source_candidate_path": "tests/fixtures/bernie_synthetic_noise/candidates_sol_recovery.jsonl",
+  "candidate_count": 192,
+  "accepted_count": 90,
+  "quarantine_count": 102,
+  "rejected_count": 0,
+  "canonical_candidate_hash": "sha256:4ac2b4705a49b9f394351ce523808e9c6b06c8cabd9cc2f4b1f6db6b5fe116f8",
+  "file_payload_hash": "sha256:78b9b2ed06b61a17220037db0ab891bba1993ca66415258cedee7ff725ff8e5b",
+  "audit_report_hash": "sha256:4e2f3a5dd3632a8d5f927a2d42a203a909673d89d6406ded886eb37bbbfabd80",
+  "accepted_selection_hash": "sha256:a27d96e149a1e0440ae39d3f90d1defe1990942deee48382c16d0fd77ec3f299",
+  "quarantine_selection_hash": "sha256:9a9498ff0d7aca97810a557613245a984eca3547e0b0c4297fc8f7e802ba28a1",
+  "accepted_candidate_ids": [
+    "sol_bernie_noise_seed_001_01",
+    "sol_bernie_noise_seed_001_02",
+    "sol_bernie_noise_seed_005_01",
+    "sol_bernie_noise_seed_005_02",
+    "sol_bernie_noise_seed_011_01",
+    "sol_bernie_noise_seed_011_02",
+    "sol_bernie_noise_seed_016_01",
+    "sol_bernie_noise_seed_016_02",
+    "sol_bernie_noise_seed_017_01",
+    "sol_bernie_noise_seed_017_02",
+    "sol_bernie_noise_seed_019_01",
+    "sol_bernie_noise_seed_019_02",
+    "sol_bernie_noise_seed_022_01",
+    "sol_bernie_noise_seed_022_02",
+    "sol_bernie_noise_seed_023_01",
+    "sol_bernie_noise_seed_023_02",
+    "sol_bernie_noise_seed_024_01",
+    "sol_bernie_noise_seed_024_02",
+    "sol_bernie_noise_seed_025_01",
+    "sol_bernie_noise_seed_025_02",
+    "sol_bernie_noise_seed_029_01",
+    "sol_bernie_noise_seed_029_02",
+    "sol_bernie_noise_seed_030_01",
+    "sol_bernie_noise_seed_030_02",
+    "sol_bernie_noise_seed_031_01",
+    "sol_bernie_noise_seed_031_02",
+    "sol_bernie_noise_seed_035_01",
+    "sol_bernie_noise_seed_035_02",
+    "sol_bernie_noise_seed_037_01",
+    "sol_bernie_noise_seed_037_02",
+    "sol_bernie_noise_seed_040_01",
+    "sol_bernie_noise_seed_040_02",
+    "sol_bernie_noise_seed_041_01",
+    "sol_bernie_noise_seed_041_02",
+    "sol_bernie_noise_seed_043_01",
+    "sol_bernie_noise_seed_043_02",
+    "sol_bernie_noise_seed_046_01",
+    "sol_bernie_noise_seed_046_02",
+    "sol_bernie_noise_seed_047_01",
+    "sol_bernie_noise_seed_047_02",
+    "sol_bernie_noise_seed_048_01",
+    "sol_bernie_noise_seed_048_02",
+    "sol_bernie_noise_seed_049_01",
+    "sol_bernie_noise_seed_049_02",
+    "sol_bernie_noise_seed_053_01",
+    "sol_bernie_noise_seed_053_02",
+    "sol_bernie_noise_seed_054_01",
+    "sol_bernie_noise_seed_054_02",
+    "sol_bernie_noise_seed_055_01",
+    "sol_bernie_noise_seed_055_02",
+    "sol_bernie_noise_seed_059_01",
+    "sol_bernie_noise_seed_059_02",
+    "sol_bernie_noise_seed_061_01",
+    "sol_bernie_noise_seed_061_02",
+    "sol_bernie_noise_seed_064_01",
+    "sol_bernie_noise_seed_064_02",
+    "sol_bernie_noise_seed_065_01",
+    "sol_bernie_noise_seed_065_02",
+    "sol_bernie_noise_seed_067_01",
+    "sol_bernie_noise_seed_067_02",
+    "sol_bernie_noise_seed_070_01",
+    "sol_bernie_noise_seed_070_02",
+    "sol_bernie_noise_seed_071_01",
+    "sol_bernie_noise_seed_071_02",
+    "sol_bernie_noise_seed_072_01",
+    "sol_bernie_noise_seed_072_02",
+    "sol_bernie_noise_seed_073_01",
+    "sol_bernie_noise_seed_073_02",
+    "sol_bernie_noise_seed_077_01",
+    "sol_bernie_noise_seed_077_02",
+    "sol_bernie_noise_seed_078_01",
+    "sol_bernie_noise_seed_078_02",
+    "sol_bernie_noise_seed_079_01",
+    "sol_bernie_noise_seed_079_02",
+    "sol_bernie_noise_seed_083_01",
+    "sol_bernie_noise_seed_083_02",
+    "sol_bernie_noise_seed_085_01",
+    "sol_bernie_noise_seed_085_02",
+    "sol_bernie_noise_seed_088_01",
+    "sol_bernie_noise_seed_088_02",
+    "sol_bernie_noise_seed_089_01",
+    "sol_bernie_noise_seed_089_02",
+    "sol_bernie_noise_seed_091_01",
+    "sol_bernie_noise_seed_091_02",
+    "sol_bernie_noise_seed_094_01",
+    "sol_bernie_noise_seed_094_02",
+    "sol_bernie_noise_seed_095_01",
+    "sol_bernie_noise_seed_095_02",
+    "sol_bernie_noise_seed_096_01",
+    "sol_bernie_noise_seed_096_02"
+  ],
+  "quarantined_candidates": [
+    {
+      "candidate_id": "sol_bernie_noise_seed_002_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract",
+        "existing_booking_outcome_with_creation_delta"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_002_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract",
+        "existing_booking_outcome_with_creation_delta"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_003_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_003_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_004_01",
+      "primary_decision": "quarantine_entity_transition_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_004_02",
+      "primary_decision": "quarantine_entity_transition_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_006_01",
+      "primary_decision": "quarantine_replay_contract_conflict",
+      "reasons": [
+        "mutation_tools_without_outcome_and_delta"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_006_02",
+      "primary_decision": "quarantine_replay_contract_conflict",
+      "reasons": [
+        "mutation_tools_without_outcome_and_delta"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_007_01",
+      "primary_decision": "quarantine_replay_contract_conflict",
+      "reasons": [
+        "mutation_tools_without_outcome_and_delta"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_007_02",
+      "primary_decision": "quarantine_replay_contract_conflict",
+      "reasons": [
+        "mutation_tools_without_outcome_and_delta"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_008_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_008_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_009_01",
+      "primary_decision": "quarantine_replay_contract_conflict",
+      "reasons": [
+        "mutation_tools_without_outcome_and_delta"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_009_02",
+      "primary_decision": "quarantine_replay_contract_conflict",
+      "reasons": [
+        "mutation_tools_without_outcome_and_delta"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_010_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_010_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_012_01",
+      "primary_decision": "quarantine_entity_transition_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_012_02",
+      "primary_decision": "quarantine_entity_transition_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_013_01",
+      "primary_decision": "quarantine_replay_contract_conflict",
+      "reasons": [
+        "existing_booking_outcome_with_creation_delta"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_013_02",
+      "primary_decision": "quarantine_replay_contract_conflict",
+      "reasons": [
+        "existing_booking_outcome_with_creation_delta"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_014_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_014_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_015_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_015_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_018_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_018_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_020_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action",
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_020_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action",
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_021_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_021_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_026_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_026_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_027_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_027_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_028_01",
+      "primary_decision": "quarantine_entity_transition_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_028_02",
+      "primary_decision": "quarantine_entity_transition_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_032_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_032_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_033_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_033_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_034_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_034_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_036_01",
+      "primary_decision": "quarantine_entity_transition_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_036_02",
+      "primary_decision": "quarantine_entity_transition_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_038_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_038_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_039_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_039_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_042_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_042_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_044_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action",
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_044_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action",
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_045_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_045_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_050_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_050_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_051_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_051_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_052_01",
+      "primary_decision": "quarantine_entity_transition_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_052_02",
+      "primary_decision": "quarantine_entity_transition_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_056_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_056_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_057_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_057_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_058_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_058_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_060_01",
+      "primary_decision": "quarantine_entity_transition_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_060_02",
+      "primary_decision": "quarantine_entity_transition_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_062_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_062_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_063_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_063_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_066_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_066_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_068_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action",
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_068_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action",
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_069_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_069_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_074_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_074_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_075_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_075_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_076_01",
+      "primary_decision": "quarantine_entity_transition_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_076_02",
+      "primary_decision": "quarantine_entity_transition_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_080_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_080_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_081_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_081_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_082_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_082_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_084_01",
+      "primary_decision": "quarantine_entity_transition_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_084_02",
+      "primary_decision": "quarantine_entity_transition_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_086_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_086_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_087_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_087_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_090_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_090_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_092_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action",
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_092_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "whole_action_withdrawn_but_oracle_expects_action",
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_093_01",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    },
+    {
+      "candidate_id": "sol_bernie_noise_seed_093_02",
+      "primary_decision": "quarantine_oracle_policy_conflict",
+      "reasons": [
+        "clarification_tool_with_success_or_mutation_delta",
+        "clarification_tool_without_clarification_contract"
+      ]
+    }
+  ],
+  "evidence_tier": "silver",
+  "authorized_uses": [
+    "ordinary_development_evaluation",
+    "synthetic_noise_robustness_tests",
+    "future_development_candidate_generation"
+  ],
+  "excluded_claims_and_authority": [
+    "real_world_representativeness",
+    "clinical_validation",
+    "gold_evidence",
+    "certification_evidence",
+    "protected_holdout_evidence",
+    "runtime_or_provider_activation",
+    "confirmation_or_write_authority"
+  ],
+  "protected_holdout_access": false,
+  "historical_diary_access": false,
+  "external_corpus_access": false,
+  "authority_grant": {
+    "provider_write": false,
+    "diary_write": false,
+    "confirmation": false,
+    "override_authority": false
+  },
+  "admission_hash": "sha256:55b5c968fa066fc0830e9c80781b0ded1e13520b6f206a41fee9dd0e027687cd"
+}
