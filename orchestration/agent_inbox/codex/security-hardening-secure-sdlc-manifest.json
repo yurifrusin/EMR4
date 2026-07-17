@@ -1,0 +1,63 @@
+{
+  "schema_version": "ariadne.sprint_security_review.v1",
+  "sprint_id": "secure-sdlc-red-blue-and-diary-hardening-2026-07-17",
+  "material_sprint": true,
+  "materiality": {
+    "classification": "material",
+    "owner_resource_id": "openai-primary-orchestrator",
+    "rationale": "Changes security controls, confirmation handling, external UI behaviour, CI admission, and repository protection."
+  },
+  "candidate_head": "604b3452787d45ad99d9f08e70101bfd87516671",
+  "declared_tier": "dual_review",
+  "triggers": [
+    "confirmation_workflow",
+    "cryptography_key_or_randomness",
+    "externally_reachable_ui",
+    "ci_supply_chain",
+    "security_control_change",
+    "cross_layer_security_tranche"
+  ],
+  "security_delta": {
+    "assets_and_data": ["appointment confirmation evidence", "authentication tokens", "repository credentials", "CI admission evidence"],
+    "trust_boundaries": ["URL to Diary dev capability", "API response to confirmation POST", "worker review to protected integration", "Git push to master"],
+    "attacker_controlled_inputs": ["URL query parameters", "confirmation endpoint field", "appointment identifier", "repository push contents"],
+    "dangerous_capabilities": ["appointment confirmation POST", "protected-ref integration", "security-control configuration"],
+    "abuse_cases": ["non-local smoke bypass", "confirmation path substitution", "predictable client key", "selector injection", "unreviewed direct master push", "committed secret"],
+    "required_controls": ["localhost capability gate", "canonical confirmation allowlist", "Web Crypto fail-closed IDs", "selector-free lookup", "independent red/blue evidence", "required checks", "secret push protection"],
+    "verification_evidence": ["focused static regression", "Playwright boundary test", "Ariadne plan/acceptance gate", "fresh worker artifacts", "GitHub settings readback"],
+    "residual_risk_owner": "Yuri as repository owner, with Sol recording and enforcing sprint evidence"
+  },
+  "purple_cadence": {
+    "ledger_sha256": "3a3ed9393ade3674bef36cba3899fa2230924b1e51d95d35f6c6f47447e268b9",
+    "declared_material_sprints_since_purple": 4
+  },
+  "reviews": {
+    "blue": {
+      "required": true,
+      "resource_id": "deepseek-flash-workers",
+      "packet_path": "orchestration/agent_inbox/codex/security-hardening-blue-packet.md",
+      "candidate_head": "604b3452787d45ad99d9f08e70101bfd87516671",
+      "artifact_path": null,
+      "decision": "pending"
+    },
+    "red": {
+      "required": true,
+      "resource_id": "antigravity-gemini-flash-3-5-worker",
+      "packet_path": "orchestration/agent_inbox/codex/security-hardening-red-packet.md",
+      "candidate_head": "604b3452787d45ad99d9f08e70101bfd87516671",
+      "artifact_path": null,
+      "decision": "pending",
+      "fresh_context": true,
+      "candidate_only": true,
+      "prior_review_artifacts_excluded": true
+    },
+    "purple": {
+      "required": true,
+      "resource_id": "openai-primary-orchestrator",
+      "candidate_head": "604b3452787d45ad99d9f08e70101bfd87516671",
+      "artifact_path": null,
+      "decision": "pending"
+    }
+  },
+  "unresolved_findings": []
+}

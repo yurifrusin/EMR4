@@ -89,6 +89,6 @@ def test_diary_client_surface_matches_checkpoint_summary():
     tool_intent_start = source.index("async function confirmBernieToolIntentChange(")
     next_function = source.index("\nfunction ", tool_intent_start)
     tool_intent = source[tool_intent_start:next_function]
-    assert "apiFetch(normalizeApiPath(envelope.confirm_endpoint)" in tool_intent
+    assert "apiFetch(allowlistedConfirmApiPath(envelope.confirm_endpoint)" in tool_intent
     assert "updateConfirmIdempotencyKey(envelope, confirmPayload)" in tool_intent
     assert "headers: confirmHeaders" in tool_intent

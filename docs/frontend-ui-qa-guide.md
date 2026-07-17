@@ -23,10 +23,9 @@ The script compares files in the working directory against `HEAD` and checks:
 
 ## 2. Visual QA Smoke-Test Protocol
 
-Always verify UI alterations using **Smoke Mode** (`?smoke=true`) to isolate layout inspections from backend API and auth dependencies.
+Always verify UI alterations locally using **Smoke Mode** (`?smoke=true`) to isolate layout inspections from backend API and auth dependencies. Smoke and dev-review URL capabilities deliberately fail closed on non-local hosts.
 
 ### A. Testing URLs
-- Deployed Smoke Diary: `https://yurifrusin.github.io/EMR4/diary/diary.html?smoke=true`
 - Local Smoke Diary: Open `docs/diary/diary.html?smoke=true` directly in the browser.
 - Deployed Taskpane (static review): `https://yurifrusin.github.io/EMR4/taskpane/taskpane.html`
 

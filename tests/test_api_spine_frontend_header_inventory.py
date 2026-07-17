@@ -122,7 +122,7 @@ def test_frontend_confirm_callers_are_wired_or_explicitly_tracked():
     preflight = _read(PREFLIGHT)
 
     tool_intent = _function_source(source, "confirmBernieToolIntentChange")
-    assert "apiFetch(normalizeApiPath(" in tool_intent
+    assert "apiFetch(allowlistedConfirmApiPath(" in tool_intent
     assert "updateConfirmIdempotencyKey(envelope, confirmPayload)" in tool_intent
     assert "headers: confirmHeaders" in tool_intent
 
