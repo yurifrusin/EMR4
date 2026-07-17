@@ -102,3 +102,11 @@ QUARANTINE: 0
 REJECT: 0
 PROTECTED_ACCESS: false
 EXTERNAL_CORPUS_ACCESS: false
+
+## Later coherence disposition
+
+This closeout records the valid original admission decision at its exact hash.
+It is superseded for current development use by the all-192 coherence audit:
+90 rows remain admitted and 102 are quarantined. See
+`docs/bernie-synthetic-silver-coherence-audit-closeout.md`. The historical
+192-row candidate remains immutable evidence and was not overwritten.

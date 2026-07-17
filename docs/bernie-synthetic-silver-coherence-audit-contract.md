@@ -2,7 +2,7 @@
 
 Date: 2026-07-17
 
-Status: `authorized_inputs_frozen`
+Status: `accepted_partial_pass_with_quarantine`
 
 Authority: Yuri's bounded corpus/admission audit and repair authorization
 
@@ -115,3 +115,11 @@ synthetic candidate, ordinary-development bindings, contract, tests, and audit
 artifacts; they receive no integration authority and may not certify their own
 work.
 
+## Accepted evidence
+
+The audit closes as `partial_pass_with_quarantine`: 90/192 rows are admitted as
+coherent and 102/192 are explicitly quarantined. Exact final report hash is
+`sha256:4e2f3a5dd3632a8d5f927a2d42a203a909673d89d6406ded886eb37bbbfabd80`.
+Fresh Gemini independently reproduced the taxonomy, 12 text-only repairs,
+90/102 admission split, all hashes, safety, variance, and tests and returned
+`DECISION: pass` on source code head `5649c9b1`.

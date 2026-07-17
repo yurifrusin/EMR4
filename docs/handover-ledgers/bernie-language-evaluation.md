@@ -285,23 +285,41 @@ entity-transition, and replay-contract incoherence and are not automatic
 parser targets. The next material choice is a bounded all-192 corpus/admission
 coherence audit with quarantine or regeneration of invalid rows.
 
+Yuri authorized that all-192 coherence audit. The frozen pre-repair result was
+85 coherent and 107 invalid rows. Sol repaired exactly eight missing resize-
+action surfaces and four schedule-anaphora referents without changing IDs,
+evidence coordinates, source semantics, provenance, or authority. Final
+current admission is 90 coherent, 102 quarantined, and zero rejected, with
+audit report hash
+`sha256:4e2f3a5dd3632a8d5f927a2d42a203a909673d89d6406ded886eb37bbbfabd80`
+and admission hash
+`sha256:55b5c968fa066fc0830e9c80781b0ded1e13520b6f206a41fee9dd0e027687cd`.
+Primary quarantines are 78 oracle-policy, 16 whole-action reversal, and 8
+replay-contract conflicts. The admitted 90 run twice with 4/90 product
+complete, safety 180/180, and zero variance. Fresh Gemini reproduced and
+conceptually accepted all findings and returned `DECISION: pass`. All
+clarification and reversal forms are absent from current admission; restoring
+balanced coverage requires a new coherent v2 anchor contract.
+
 ## Next safe sequence
 
 1. Keep holdouts v1-v10 sealed; use only accepted aggregate evidence and
    closeouts for planning.
-2. Preserve the accepted 192-record synthetic corpus as development Silver;
-   do not promote it to Gold or certification evidence.
+2. Preserve the original 192-record corpus as immutable historical Silver and
+   use only the separately bound 90-row coherent admission for current
+   development; do not promote either to Gold or certification evidence.
 3. Preserve the accepted robustness baseline as diagnostic failure evidence;
    do not treat `baseline_complete` as a product pass.
 4. Preserve the accepted action/temporal `partial_pass`; do not turn its 22
    residual candidates into automatic parser targets.
-5. Pause for Yuri to decide whether to authorize a bounded audit of all 192
-   candidates for surfaced semantic-evidence completeness and internal
-   oracle/policy coherence, followed by quarantine or regeneration of invalid
-   rows.
-6. Return any material parser, replay, scorer, admission, or clarification-
+5. Preserve the accepted coherence `partial_pass_with_quarantine`; do not
+   relabel the 102 quarantined rows or change their frozen source oracles.
+6. Pause for Yuri to decide whether to authorize a coherent v2 anchor contract
+   that restores balanced clarification and true-reversal coverage before
+   further parser work.
+7. Return any material parser, replay, scorer, admission, or clarification-
    policy behavior choice to Yuri's boundary before implementation.
-7. Keep T3.1-T3.4 blocked by default and T3.5/providers plus every product/write
+8. Keep T3.1-T3.4 blocked by default and T3.5/providers plus every product/write
    surface deferred.
 
 ## Primary evidence
@@ -354,6 +372,9 @@ coherence audit with quarantine or regeneration of invalid rows.
 - `docs/bernie-synthetic-silver-action-temporal-classification.md`
 - `docs/bernie-synthetic-silver-action-temporal-tranche-closeout.md`
 - `orchestration/agent_inbox/codex/synthetic-silver-action-temporal-sol-acceptance.md`
+- `docs/bernie-synthetic-silver-coherence-audit-contract.md`
+- `docs/bernie-synthetic-silver-coherence-audit-closeout.md`
+- `orchestration/agent_inbox/codex/synthetic-silver-coherence-sol-acceptance.md`
 
 Protected holdouts v1-v10 are sealed. LC4V10 validly passed its sole attempt
 at 576/576 complete with empty evidence and product failure maps. Do not
