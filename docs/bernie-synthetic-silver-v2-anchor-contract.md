@@ -2,7 +2,7 @@
 
 Date: 2026-07-17
 
-Status: `product_complete_pending_independent_acceptance`
+Status: `accepted_course_complete`
 
 Authority: Yuri's 2026-07-17 standing synthetic-development authorization
 
