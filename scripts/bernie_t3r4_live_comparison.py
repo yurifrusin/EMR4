@@ -24,7 +24,6 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from app.services.ai.evals.bernie_shadow_live_comparison import (
-    DEEPSEEK_LANE,
     DEFAULT_OBSERVATION_PATH,
     DispatchState,
     LANE_IDS,

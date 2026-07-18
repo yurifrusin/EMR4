@@ -23,7 +23,6 @@ from app.services.ai.evals.bernie_shadow_live_comparison import (
     live_response_schema,
     load_approval,
     load_observations,
-    observation_key,
     parse_json_object,
     success_record,
     validate_approval,
