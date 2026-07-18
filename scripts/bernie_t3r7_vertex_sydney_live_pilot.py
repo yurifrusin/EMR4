@@ -32,6 +32,7 @@ from app.services.ai.evals.bernie_vertex_sydney_live_pilot import (
     append_observation,
     build_cases,
     build_prompt,
+    build_report,
     canonical_hash,
     failure_record,
     live_response_schema,
@@ -42,7 +43,6 @@ from app.services.ai.evals.bernie_vertex_sydney_live_pilot import (
     success_record,
     utc_now,
     validate_approval,
-    write_report,
 )
 
 
@@ -525,13 +525,30 @@ def run_pilot(
 def finalize_evidence(
     *, source: Path = LOCAL_OBSERVATION_PATH,
     destination: Path = DEFAULT_OBSERVATION_PATH,
+    report_destination: Path = DEFAULT_REPORT_PATH,
 ) -> dict[str, Any]:
     records = load_observations(source)
-    if len(records) != 48 or any(record["status"] != "success" for record in records):
-        raise ValueError("T3R7 cannot finalize before all 48 observations succeed")
+    complete = len(records) == 48 and all(
+        record["status"] == "success" for record in records
+    )
+    stopped = (
+        bool(records)
+        and records[-1]["status"] != "success"
+        and all(record["status"] == "success" for record in records[:-1])
+    )
+    if not (complete or stopped):
+        raise ValueError("T3R7 evidence is neither complete nor fail-closed terminal")
     destination.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(source, destination)
-    report = write_report(DEFAULT_REPORT_PATH)
+    report = build_report(load_approval(), records)
+    if report["execution"]["all_authorized_work_complete"] is not True:
+        raise ValueError("T3R7 reducer does not recognize terminal evidence")
+    report_destination.parent.mkdir(parents=True, exist_ok=True)
+    report_destination.write_text(
+        json.dumps(report, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
     return {
         "observation_count": len(records),
         "report_decision": report["decision"],

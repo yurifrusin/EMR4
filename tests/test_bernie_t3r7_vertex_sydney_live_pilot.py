@@ -9,6 +9,8 @@ from types import SimpleNamespace
 import pytest
 
 from app.services.ai.evals.bernie_vertex_sydney_live_pilot import (
+    DEFAULT_OBSERVATION_PATH,
+    DEFAULT_REPORT_PATH,
     DispatchState,
     append_observation,
     build_cases,
@@ -16,6 +18,7 @@ from app.services.ai.evals.bernie_vertex_sydney_live_pilot import (
     build_report,
     canonical_hash,
     estimate_cost_usd,
+    failure_record,
     load_approval,
     load_observations,
     success_record,
@@ -176,13 +179,79 @@ def test_report_reduces_48_safe_exact_observations_without_promotion_claim():
     assert report["execution"]["consumed_calls"] == 48
     assert report["quality"]["safe_successful_samples"] == 48
     assert report["quality"]["correctness_passes"] == 288
+    assert report["quality"]["completed_repeat_case_count"] == 24
+    assert report["quality"]["variance_interpretable"] is True
     assert report["quality"]["variant_case_count"] == 0
     assert report["usage_and_cost"]["estimated_cost_usd"] < 1
+    assert report["usage_and_cost"]["observations_with_reported_usage"] == 48
+    assert report["usage_and_cost"]["observations_without_reported_usage"] == 0
+    assert report["usage_and_cost"]["authoritative_billed_total"] is False
     assert all(
         value is False
         for key, value in report["api_spine_boundary"].items()
         if key != "classification"
     )
+
+
+def test_finalize_accepts_one_terminal_consumed_failure_without_retry(tmp_path: Path):
+    packet = load_approval()
+    cases = build_cases(packet)
+    source = tmp_path / "local.jsonl"
+    destination = tmp_path / "durable.jsonl"
+    report_destination = tmp_path / "report.json"
+    for case in cases[:10]:
+        append_observation(_success(packet, case), source)
+    failed_case = cases[10]
+    append_observation(
+        failure_record(
+            packet=packet,
+            case=failed_case,
+            sample_index=0,
+            prompt_hash=canonical_hash(build_prompt(failed_case)),
+            status="parse_error",
+            safe_error_code="normalized_response_parse_or_schema_failure",
+            started_at="2026-07-18T00:02:00.000Z",
+            completed_at="2026-07-18T00:02:01.000Z",
+            latency_ms=1000,
+        ),
+        source,
+    )
+
+    result = live_script.finalize_evidence(
+        source=source,
+        destination=destination,
+        report_destination=report_destination,
+    )
+    report = json.loads(report_destination.read_text(encoding="utf-8"))
+
+    assert result["observation_count"] == 11
+    assert result["report_decision"] == "pilot_stopped_on_consumed_failure"
+    assert report["execution"]["all_authorized_work_complete"] is True
+    assert report["quality"]["completed_repeat_case_count"] == 0
+    assert report["quality"]["variance_interpretable"] is False
+    assert report["usage_and_cost"]["observations_with_reported_usage"] == 10
+    assert report["usage_and_cost"]["observations_without_reported_usage"] == 1
+    assert destination.read_bytes() == source.read_bytes()
+
+
+def test_committed_report_matches_terminal_normalized_ledger_and_handover():
+    records = load_observations(DEFAULT_OBSERVATION_PATH)
+    committed = json.loads(DEFAULT_REPORT_PATH.read_text(encoding="utf-8"))
+    closeout = Path("docs/bernie-t3r7-vertex-sydney-live-closeout.md").read_text(
+        encoding="utf-8"
+    )
+    handover = Path("AGENTS.md").read_text(encoding="utf-8")
+
+    assert len(records) == 11
+    assert build_report(records=records) == committed
+    assert committed["decision"] == "pilot_stopped_on_consumed_failure"
+    assert committed["execution"]["consumed_calls"] == 11
+    assert committed["execution"]["unused_calls"] == 37
+    assert committed["quality"]["variance_interpretable"] is False
+    assert committed["usage_and_cost"]["observations_without_reported_usage"] == 1
+    assert "cannot be reconstructed" in closeout
+    assert "no unused call" in closeout
+    assert "no further provider call is authorized" in handover
 
 
 def test_throttle_preserves_ten_second_start_interval_across_resume():

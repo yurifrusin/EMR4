@@ -1,0 +1,72 @@
+{
+  "schema_version": "emr4.bernie.t3r7_vertex_sydney_report.v1",
+  "decision": "pilot_stopped_on_consumed_failure",
+  "approval_binding": "sha256:0e62a51b10fcbd59339fb07b9ad44e364bf2e41209e293eccd60cb389d8fbdd7",
+  "source_projection_hash": "sha256:c39cc71a988a425886d96ccb75ccf07a3937f5e1363899b08366319f4dd7b4bd",
+  "selection_hash": "sha256:7871dff782747c9aadf42aaed840b21981a37410c52862329a9e99380d31ea0e",
+  "provider": {
+    "provider": "Google Vertex AI",
+    "model_requested": "gemini-2.5-flash",
+    "location": "australia-southeast1",
+    "observed_model_versions": [
+      "gemini-2.5-flash"
+    ],
+    "exact_model_revision_observable": false
+  },
+  "execution": {
+    "maximum_calls": 48,
+    "consumed_calls": 11,
+    "unused_calls": 37,
+    "all_authorized_work_complete": true,
+    "status_counts": {
+      "parse_error": 1,
+      "success": 10
+    },
+    "automatic_retries": false,
+    "minimum_start_interval_seconds": 10.0,
+    "requests_per_minute_ceiling": 6,
+    "raw_prompt_persisted": false,
+    "raw_response_persisted": false
+  },
+  "quality": {
+    "successful_samples": 10,
+    "safe_successful_samples": 10,
+    "perfect_successful_samples": 9,
+    "correctness_passes": 58,
+    "correctness_total": 60,
+    "correctness_fraction": 0.9666666666666667,
+    "dimension_failure_counts": {
+      "intent": 0,
+      "entities": 0,
+      "date_time": 0,
+      "clarification": 1,
+      "tool_selection": 1,
+      "withdrawal": 0
+    },
+    "completed_repeat_case_count": 0,
+    "variance_interpretable": false,
+    "variant_case_count": 0
+  },
+  "usage_and_cost": {
+    "input_tokens": 8386,
+    "output_tokens_including_reasoning_when_reported": 9964,
+    "observations_with_reported_usage": 10,
+    "observations_without_reported_usage": 1,
+    "estimated_cost_usd": 0.0274258,
+    "estimated_cost_scope": "observations_with_reported_usage_only",
+    "authoritative_billed_total": false,
+    "application_hard_ceiling_usd": 1.0,
+    "trial_credit_vertex_eligibility": "unverified_restricted_promotion_terms_not_exposed"
+  },
+  "api_spine_boundary": {
+    "classification": "developer_only_synthetic_access_ai_evaluation",
+    "product_runtime_wiring": false,
+    "graphql_or_rest_route_change": false,
+    "provider_executed_tools_authorized": false,
+    "database_or_audit_write": false,
+    "appointment_or_confirmation_authority": false,
+    "deployment_or_release": false,
+    "pii_or_production_authority": false
+  },
+  "report_hash": "sha256:02e4df26cbae5aba3e214413a94e7c535610ef9eb19cf2ecc36ec15ae7299336"
+}

@@ -503,8 +503,10 @@ def build_report(
     scores = [record["score"] for record in successes]
     input_tokens, output_tokens = _usage_totals(observations)
     fingerprints: dict[str, set[str]] = defaultdict(set)
+    successful_samples_by_case: Counter[str] = Counter()
     for record in successes:
         fingerprints[record["case_id"]].add(record["response_hash"])
+        successful_samples_by_case[record["case_id"]] += 1
     status_counts = Counter(record["status"] for record in observations)
     correctness_passes = sum(score["correctness_passes"] for score in scores)
     correctness_total = sum(score["correctness_total"] for score in scores)
@@ -540,6 +542,9 @@ def build_report(
                     if record.get("model_version_observed")
                 }
             ),
+            "exact_model_revision_observable": approval["provider"][
+                "exact_model_revision_observable"
+            ],
         },
         "execution": {
             "maximum_calls": 48,
@@ -567,14 +572,32 @@ def build_report(
             "correctness_total": correctness_total,
             "correctness_fraction": correctness_passes / correctness_total if correctness_total else None,
             "dimension_failure_counts": dimension_failure_counts,
+            "completed_repeat_case_count": sum(
+                count == 2 for count in successful_samples_by_case.values()
+            ),
+            "variance_interpretable": any(
+                count == 2 for count in successful_samples_by_case.values()
+            ),
             "variant_case_count": sum(len(values) > 1 for values in fingerprints.values()),
         },
         "usage_and_cost": {
             "input_tokens": input_tokens,
             "output_tokens_including_reasoning_when_reported": output_tokens,
+            "observations_with_reported_usage": sum(
+                record.get("usage", {}).get("input_tokens") is not None
+                and record.get("usage", {}).get("output_tokens") is not None
+                for record in observations
+            ),
+            "observations_without_reported_usage": sum(
+                record.get("usage", {}).get("input_tokens") is None
+                or record.get("usage", {}).get("output_tokens") is None
+                for record in observations
+            ),
             "estimated_cost_usd": round(
                 sum(float(record.get("estimated_cost_usd") or 0) for record in observations), 9
             ),
+            "estimated_cost_scope": "observations_with_reported_usage_only",
+            "authoritative_billed_total": False,
             "application_hard_ceiling_usd": approval["cost_control"][
                 "maximum_estimated_cost"
             ],
