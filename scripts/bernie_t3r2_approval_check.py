@@ -80,12 +80,18 @@ def assert_packet_blocked(packet: dict[str, Any]) -> None:
     assert packet["requires_explicit_yuri_approval"] is True
 
     lanes = packet["candidate_lanes"]
-    assert len(lanes) == 2
+    assert len(lanes) == 3
     assert {lane["lane_id"] for lane in lanes} == {
         "openai_gpt_subscription",
         "google_gemini_subscription",
+        "deepseek_v4_flash_api",
     }
-    assert all(lane["access_basis"] == "subscription_plan" for lane in lanes)
+    access_by_lane = {lane["lane_id"]: lane["access_basis"] for lane in lanes}
+    assert access_by_lane == {
+        "openai_gpt_subscription": "subscription_plan",
+        "google_gemini_subscription": "subscription_plan",
+        "deepseek_v4_flash_api": "metered_api_via_claude_code_bare",
+    }
     assert all(lane["exact_resolved_model_revision"] is None for lane in lanes)
     assert all(lane["silent_fallback_allowed"] is False for lane in lanes)
     assert all(lane["approved"] is False for lane in lanes)
@@ -109,13 +115,15 @@ def assert_packet_blocked(packet: dict[str, Any]) -> None:
     )
 
     limits = packet["execution_limits"]
-    assert limits["max_scheduled_samples"] == 24 * 2 * 2 == 96
+    assert limits["max_scheduled_samples"] == 24 * 3 * 2 == 144
     assert limits["max_attempts_per_scheduled_sample"] == 1
     assert limits["automatic_retries"] is False
     assert limits["provider_error_counts_as_consumed_sample"] is True
     assert limits["max_serialized_prompt_chars_per_sample"] == 12000
     assert limits["max_response_chars_per_sample"] == 4000
-    assert limits["max_wall_clock_minutes"] == 120
+    assert limits["max_provider_reported_tokens_per_lane_when_available"] == 250000
+    assert limits["max_provider_reported_tokens_total_when_available"] == 750000
+    assert limits["max_wall_clock_minutes"] == 180
 
     cost = packet["cost_control"]
     assert cost["marginal_dollar_cost_required"] is False

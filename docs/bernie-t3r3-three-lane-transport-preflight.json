@@ -1,0 +1,115 @@
+{
+  "schema_version": "emr4.bernie.t3r3_transport_preflight.v1",
+  "decision": "no_call_preflight_complete_live_blocked",
+  "approval_binding": {
+    "selection_hash": "sha256:7871dff782747c9aadf42aaed840b21981a37410c52862329a9e99380d31ea0e",
+    "case_count": 24,
+    "lane_count": 3,
+    "maximum_scheduled_samples": 144,
+    "live_gate_decision": "blocked"
+  },
+  "lane_results": [
+    {
+      "lane_id": "openai_gpt_subscription",
+      "provider": "OpenAI",
+      "transport_id": "codex_exec_subscription_ephemeral",
+      "requested_model_alias": "gpt-5.6-sol",
+      "access_basis": "subscription_plan",
+      "command_template_hash": "sha256:317fe44e4550ef85669ff67f45bcb2c52754d2ee810015e29a5f902e4fba8869",
+      "non_interactive": true,
+      "isolated_empty_workspace": true,
+      "structured_output_schema_control": true,
+      "local_session_persistence_disabled": true,
+      "host_tools_disable_control": false,
+      "silent_fallback_disabled": true,
+      "usage_telemetry_available": true,
+      "exact_resolved_revision_observable": false,
+      "provider_policy_evidence_status": "general_consumer_codex_controls_found_account_posture_unverified",
+      "provider_retention_approved": false,
+      "adapter_contract_ready": false,
+      "execution_ready": false,
+      "blocking_findings": [
+        "codex_exec_exposes_host_tools_without_an_all_tools_off_control",
+        "exact_resolved_model_revision_not_yet_observable",
+        "account_level_codex_training_and_retention_settings_unverified"
+      ]
+    },
+    {
+      "lane_id": "google_gemini_subscription",
+      "provider": "Google",
+      "transport_id": "antigravity_print_new_project_sandbox",
+      "requested_model_alias": "Gemini 3.5 Flash (Medium)",
+      "access_basis": "subscription_plan",
+      "command_template_hash": "sha256:a5d2cf7aa7ce006b0fee194e5e429bbf0bdac23220baaf8c69af49b3f6fc5853",
+      "non_interactive": true,
+      "isolated_empty_workspace": true,
+      "structured_output_schema_control": false,
+      "local_session_persistence_disabled": false,
+      "host_tools_disable_control": false,
+      "silent_fallback_disabled": false,
+      "usage_telemetry_available": false,
+      "exact_resolved_revision_observable": false,
+      "provider_policy_evidence_status": "antigravity_specific_retention_mapping_unresolved",
+      "provider_retention_approved": false,
+      "adapter_contract_ready": false,
+      "execution_ready": false,
+      "blocking_findings": [
+        "antigravity_has_no_all_tools_off_control",
+        "antigravity_has_no_structured_output_schema_flag",
+        "antigravity_new_project_does_not_prove_no_session_persistence",
+        "antigravity_has_no_explicit_no_fallback_control",
+        "exact_resolved_model_revision_not_yet_observable",
+        "antigravity_specific_retention_terms_not_established"
+      ]
+    },
+    {
+      "lane_id": "deepseek_v4_flash_api",
+      "provider": "DeepSeek",
+      "transport_id": "claude_code_bare_deepseek_tool_free",
+      "requested_model_alias": "deepseek-v4-flash",
+      "access_basis": "metered_api_via_claude_code_bare",
+      "command_template_hash": "sha256:43233441492d38f02edcd7739f21abbdcdc4243b5f9fd3da5938fb0a254ff314",
+      "non_interactive": true,
+      "isolated_empty_workspace": true,
+      "structured_output_schema_control": true,
+      "local_session_persistence_disabled": true,
+      "host_tools_disable_control": true,
+      "silent_fallback_disabled": true,
+      "usage_telemetry_available": true,
+      "exact_resolved_revision_observable": false,
+      "provider_policy_evidence_status": "official_deepseek_api_policy_reviewed_not_accepted",
+      "provider_retention_approved": false,
+      "adapter_contract_ready": true,
+      "execution_ready": false,
+      "blocking_findings": [
+        "exact_resolved_model_revision_not_yet_observable",
+        "mainland_china_storage_and_minimum_security_log_retention_not_accepted",
+        "explicit_run_approval_not_granted"
+      ]
+    }
+  ],
+  "aggregate": {
+    "adapter_contract_ready_lanes": 1,
+    "execution_ready_lanes": 0,
+    "provider_calls_performed": false,
+    "model_prompts_transmitted": false,
+    "fake_normalization_contract_verified": true,
+    "kill_switch_blocks_before_dispatch": true,
+    "kill_switch_enforces_sample_attempt_character_token_and_time_limits": true
+  },
+  "api_spine_boundary": {
+    "classification": "static_access_ai_evaluation_transport_preflight",
+    "graphql_or_rest_route_change": false,
+    "runtime_access_ai_invocation": false,
+    "provider_executed_tools": false,
+    "database_or_audit_write": false,
+    "appointment_or_confirmation_authority": false,
+    "raw_response_persistence": false
+  },
+  "next_decision": {
+    "deepseek": "complete_exact_revision_retention_and_final_run_approval",
+    "gpt": "select_tool_free_api_transport_or_accept_non_comparable_agentic_subscription_lane",
+    "gemini": "select_tool_free_api_transport_or_accept_non_comparable_agentic_subscription_lane"
+  },
+  "report_hash": "sha256:3f111b990e253c1471673222096cda063f60328b6b24c6f8f2981c43a7468c07"
+}

@@ -2,12 +2,13 @@
 
 Status: T3.1 contract/scorer, T3.2 source-safe corpus projection, T3.3
 default-disabled repeat runner, T3.4 live-replay gate, the T3R1 synthetic
-Silver v2 shadow refresh, and the blocked T3R2 live-comparison approval packet
-are implemented. No live-provider replay is enabled. T3.5 remains deferred
-pending explicit approval of the final synthetic-only provider-comparison
-payload. See `docs/bernie-language-coverage-implementation-plan.md`,
+Silver v2 shadow refresh, the blocked three-lane T3R2 approval packet, and the
+T3R3 no-call transport/retention/kill-switch preflight are implemented. No
+live-provider replay is enabled. T3.5 remains deferred pending resolution and
+explicit approval of the final synthetic-only provider-comparison payload. See
+`docs/bernie-language-coverage-implementation-plan.md`,
 `docs/bernie-t3r1-synthetic-shadow-refresh.md`, and
-`docs/bernie-t3r2-synthetic-live-comparison-approval-packet.md`.
+`docs/bernie-t3r3-three-lane-transport-preflight-closeout.md`.
 
 ## Purpose
 
@@ -109,10 +110,11 @@ write surface was opened.
 
 ## Next Slice
 
-Keep the live gate blocked. T3R2 freezes a proposed 24-case, two-lane,
-two-observation comparison with 96 samples maximum, no retry loop, and hard
-character/token-when-available/time ceilings suited to subscription access.
-Do not call T3.5 providers until Yuri approves the exact resolved model
-identities, privacy and retention posture, kill switch, evidence protocol, and
-explicit bounded run. Protected holdouts v1-v10 remain sealed and are not
-inputs to that decision.
+Keep the live gate blocked. The amended T3R2 packet freezes a 24-case,
+three-lane, two-observation comparison with 144 samples maximum and no retry
+loop. T3R3 found only the DeepSeek local contract mechanically tool-free; GPT
+Codex and Gemini Antigravity subscription transports remain agentic surfaces.
+Do not call T3.5 providers until Yuri chooses strict API comparability versus a
+labelled agentic-surface comparison and approves exact identities, retention,
+kill switch, evidence protocol, and the bounded run. Protected holdouts v1-v10
+remain sealed and are not inputs to that decision.
