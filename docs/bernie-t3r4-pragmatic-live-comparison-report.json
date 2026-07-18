@@ -1,0 +1,185 @@
+{
+  "schema_version": "emr4.bernie.t3r4_pragmatic_live_report.v1",
+  "decision": "comparison_complete_with_hard_limit_stop",
+  "approval_binding": "sha256:d71b19e848ea2d8737db190439b68a24bb4f0248afc6049f0e7728153903f69b",
+  "source_projection_hash": "sha256:c39cc71a988a425886d96ccb75ccf07a3937f5e1363899b08366319f4dd7b4bd",
+  "methodology": {
+    "comparison_kind": "pragmatic_agentic_subscription_surface_comparison",
+    "pure_model_comparison": false,
+    "primary_lane_ids": [
+      "google_gemini_subscription",
+      "openai_gpt_subscription"
+    ],
+    "auxiliary_lane_ids": [
+      "deepseek_v4_flash_api"
+    ],
+    "deepseek_excluded_from_primary_ranking": true,
+    "tool_observability_limit_retained": true,
+    "primary_fully_paired_case_count": 5,
+    "primary_fully_paired_case_ids": [
+      "t3r1_sol_v2_bernie_noise_seed_v2_013_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_019_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_023_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_027_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_031_02"
+    ]
+  },
+  "execution": {
+    "scheduled_samples": 120,
+    "consumed_samples": 89,
+    "provider_calls_performed": true,
+    "all_scheduled_samples_consumed": false,
+    "all_authorized_work_complete": true,
+    "unused_scheduled_samples": 31,
+    "stop_reasons": [
+      "openai_gpt_subscription_provider_reported_token_ceiling_reached"
+    ],
+    "automatic_retries": false,
+    "raw_prompt_persisted": false,
+    "raw_response_persisted": false
+  },
+  "primary_comparison": [
+    {
+      "lane_id": "openai_gpt_subscription",
+      "provider": "OpenAI",
+      "requested_model_alias": "gpt-5.5",
+      "role": "primary_production_relevant_agentic_surface",
+      "included_in_primary_ranking": true,
+      "scheduled_samples": 48,
+      "consumed_samples": 17,
+      "successful_samples": 12,
+      "status_counts": {
+        "provider_error": 5,
+        "success": 12
+      },
+      "safe_successful_samples": 12,
+      "perfect_successful_samples": 12,
+      "correctness_passes": 72,
+      "correctness_total": 72,
+      "correctness_fraction": 1.0,
+      "dimension_failure_counts": {
+        "intent": 0,
+        "entities": 0,
+        "date_time": 0,
+        "clarification": 0,
+        "tool_selection": 0,
+        "withdrawal": 0
+      },
+      "variant_case_count": 0,
+      "fully_successful_case_count": 5,
+      "partially_successful_case_count": 2,
+      "latency_ms_total": 126951,
+      "input_tokens_total": 247468,
+      "output_tokens_total": 2790,
+      "adapter_estimated_cost_usd_total": 0.0,
+      "adapter_cost_authoritative": false,
+      "exact_revision_observable": false,
+      "raw_prompt_or_response_persisted": false
+    },
+    {
+      "lane_id": "google_gemini_subscription",
+      "provider": "Google",
+      "requested_model_alias": "Gemini 3.5 Flash (Medium)",
+      "role": "primary_production_relevant_agentic_surface",
+      "included_in_primary_ranking": true,
+      "scheduled_samples": 48,
+      "consumed_samples": 48,
+      "successful_samples": 46,
+      "status_counts": {
+        "parse_error": 1,
+        "provider_error": 1,
+        "success": 46
+      },
+      "safe_successful_samples": 46,
+      "perfect_successful_samples": 43,
+      "correctness_passes": 272,
+      "correctness_total": 276,
+      "correctness_fraction": 0.9855072463768116,
+      "dimension_failure_counts": {
+        "intent": 0,
+        "entities": 2,
+        "date_time": 2,
+        "clarification": 0,
+        "tool_selection": 0,
+        "withdrawal": 0
+      },
+      "variant_case_count": 1,
+      "fully_successful_case_count": 22,
+      "partially_successful_case_count": 2,
+      "latency_ms_total": 416148,
+      "input_tokens_total": 0,
+      "output_tokens_total": 0,
+      "adapter_estimated_cost_usd_total": 0.0,
+      "adapter_cost_authoritative": false,
+      "exact_revision_observable": false,
+      "raw_prompt_or_response_persisted": false
+    }
+  ],
+  "primary_fully_paired_comparison": [
+    {
+      "lane_id": "google_gemini_subscription",
+      "sample_count": 10,
+      "perfect_sample_count": 10,
+      "correctness_passes": 60,
+      "correctness_total": 60,
+      "correctness_fraction": 1.0
+    },
+    {
+      "lane_id": "openai_gpt_subscription",
+      "sample_count": 10,
+      "perfect_sample_count": 10,
+      "correctness_passes": 60,
+      "correctness_total": 60,
+      "correctness_fraction": 1.0
+    }
+  ],
+  "auxiliary_diversity": [
+    {
+      "lane_id": "deepseek_v4_flash_api",
+      "provider": "DeepSeek",
+      "requested_model_alias": "deepseek-v4-flash",
+      "role": "auxiliary_synthetic_diversity_only",
+      "included_in_primary_ranking": false,
+      "scheduled_samples": 24,
+      "consumed_samples": 24,
+      "successful_samples": 23,
+      "status_counts": {
+        "provider_error": 1,
+        "success": 23
+      },
+      "safe_successful_samples": 23,
+      "perfect_successful_samples": 14,
+      "correctness_passes": 127,
+      "correctness_total": 138,
+      "correctness_fraction": 0.9202898550724637,
+      "dimension_failure_counts": {
+        "intent": 2,
+        "entities": 6,
+        "date_time": 1,
+        "clarification": 1,
+        "tool_selection": 1,
+        "withdrawal": 0
+      },
+      "variant_case_count": 7,
+      "fully_successful_case_count": 11,
+      "partially_successful_case_count": 1,
+      "latency_ms_total": 282735,
+      "input_tokens_total": 22932,
+      "output_tokens_total": 25720,
+      "adapter_estimated_cost_usd_total": 1.071515,
+      "adapter_cost_authoritative": false,
+      "exact_revision_observable": false,
+      "raw_prompt_or_response_persisted": false
+    }
+  ],
+  "api_spine_boundary": {
+    "classification": "developer_only_synthetic_access_ai_evaluation",
+    "product_runtime_wiring": false,
+    "graphql_or_rest_route_change": false,
+    "provider_executed_tools_authorized": false,
+    "database_or_audit_write": false,
+    "appointment_or_confirmation_authority": false,
+    "deployment_or_release": false
+  },
+  "report_hash": "sha256:74490b72580db78fdd6ee6fcaeb07d8a05240c81a217e1da5b7fc4cbeeaaf650"
+}
