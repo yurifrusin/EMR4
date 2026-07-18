@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V10 fresh certification passed; synthetic Silver v2 is complete. Yuri selected the provider-free T3 shadow-evaluation track; T3R1 now projects the exact 192 admitted noisy dialogues into a safe default-disabled model-comparison contract without live calls or product tools |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`, `docs/bernie-lc4v10-fresh-certification-closeout.md`, `orchestration/agent_inbox/codex/security-hardening-final-purple-acceptance.md`, `docs/security/secure-sdlc-red-blue-diary-hardening-closeout-2026-07-17.md`, `docs/bernie-post-certification-transition-review.md`, `orchestration/agent_inbox/codex/appointment-call-quarantine-pilot-sol-acceptance.md`, `docs/bernie-appointment-call-quarantine-pilot-closeout.md`, `docs/bernie-synthetic-silver-v2-anchor-contract.md`, `docs/bernie-synthetic-silver-v2-closeout.md`, `orchestration/agent_inbox/antigravity/synthetic-silver-v2-final-review.md`, `orchestration/agent_inbox/codex/synthetic-silver-v2-sol-acceptance.md`, `docs/bernie-t3r1-synthetic-shadow-refresh.md`, `docs/bernie-t3r1-synthetic-shadow-baseline.json`, and `orchestration/agent_inbox/codex/t3r1-synthetic-shadow-refresh-sol-acceptance.md` |
-| Current result | V10 remains a valid bounded `certification_pass`: complete and every dimension 576/576. Synthetic Silver v2 remains complete at 192/192 with safety 384/384 and zero variance. T3R1 is a provider-free `shadow_refresh_pass`: 192 projected cases, 384/384 perfect and safe offline plumbing samples, 2,304/2,304 dimensions, zero variance, exact projection hash `c39cc71a`, no provider calls, and no model-quality claim |
-| Next implementation | No V11 is needed or authorized. Pause before any live synthetic model comparison. Yuri must approve exact providers/models, cost cap, privacy/retention, kill switch, and evidence protocol before T3.5 or any external prompt/call. No synthetic v3, product runtime, API/database/UI, confirmation, deployment/release, or write authority is authorized |
+| Active product track | LC4V10 fresh certification passed; synthetic Silver v2 is complete. T3R1 projects all 192 admitted dialogues into the provider-free shadow contract. T3R2 now freezes a blocked 24-case, GPT/Gemini subscription-lane approval packet and restores mandatory Pushover sprint-closeout pings; no provider call occurred |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`, `docs/bernie-lc4v10-fresh-certification-closeout.md`, `orchestration/agent_inbox/codex/security-hardening-final-purple-acceptance.md`, `docs/security/secure-sdlc-red-blue-diary-hardening-closeout-2026-07-17.md`, `docs/bernie-post-certification-transition-review.md`, `orchestration/agent_inbox/codex/appointment-call-quarantine-pilot-sol-acceptance.md`, `docs/bernie-appointment-call-quarantine-pilot-closeout.md`, `docs/bernie-synthetic-silver-v2-anchor-contract.md`, `docs/bernie-synthetic-silver-v2-closeout.md`, `orchestration/agent_inbox/antigravity/synthetic-silver-v2-final-review.md`, `orchestration/agent_inbox/codex/synthetic-silver-v2-sol-acceptance.md`, `docs/bernie-t3r1-synthetic-shadow-refresh.md`, `docs/bernie-t3r1-synthetic-shadow-baseline.json`, `orchestration/agent_inbox/codex/t3r1-synthetic-shadow-refresh-sol-acceptance.md`, `docs/bernie-t3r2-synthetic-live-comparison-approval-packet.md`, `docs/bernie-t3r2-synthetic-live-comparison-approval.json`, `docs/bernie-t3r2-synthetic-live-comparison-approval-closeout.md`, and `orchestration/agent_inbox/codex/t3r2-synthetic-live-comparison-approval-sol-acceptance.md` |
+| Current result | V10 remains a valid bounded `certification_pass`: complete and every dimension 576/576. Synthetic Silver v2 remains complete at 192/192 with safety 384/384 and zero variance. T3R1 remains a provider-free 384/384 plumbing pass. T3R2 is an `approval_packet_ready_calls_blocked` result: 24 balanced cases, two proposed subscription lanes, 96 samples maximum, no retries, selection hash `7871dff7`, and no provider calls |
+| Next implementation | No V11 is needed or authorized, and no synthetic v3 is authorized. Pause before the first live synthetic prompt. Yuri must approve exact resolved model identities, privacy/retention, verified kill switch, evidence protocol, and the explicit bounded run. Product runtime, API/database/UI, confirmation, deployment/release, and write authority remain closed |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 
@@ -478,7 +478,11 @@ Before ending a material session:
 2. update active acceptance and the Current Baton;
 3. commit intentional changes;
 4. align and push `master` plus `handoff/current`; and
-5. verify origin refs and a clean integration worktree.
+5. verify origin refs and a clean integration worktree; and
+6. send the non-PHI Pushover closeout ping with
+   `scripts/notify_sprint_closeout.py`, stating whether the sprint engine is
+   continuing or paused and the concrete next work or pause reason. If delivery
+   fails, report that explicitly in the in-thread closeout.
 
 The user can say **"update the handover doc"** at any time to trigger a live
 baton refresh.

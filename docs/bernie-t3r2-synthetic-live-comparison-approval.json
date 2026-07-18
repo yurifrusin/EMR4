@@ -1,0 +1,163 @@
+{
+  "schema_version": "emr4.bernie.t3r2_live_comparison_approval.v1",
+  "decision": "blocked",
+  "created_on": "2026-07-18",
+  "authorizes_provider_calls": false,
+  "requires_explicit_yuri_approval": true,
+  "gate_binding": {
+    "path": "docs/bernie-t3-live-replay-gate.json",
+    "required_decision_before_approval": "blocked"
+  },
+  "candidate_lanes": [
+    {
+      "lane_id": "openai_gpt_subscription",
+      "provider": "OpenAI",
+      "access_basis": "subscription_plan",
+      "requested_model_alias": "gpt-sol",
+      "exact_resolved_model_revision": null,
+      "silent_fallback_allowed": false,
+      "approved": false
+    },
+    {
+      "lane_id": "google_gemini_subscription",
+      "provider": "Google",
+      "access_basis": "subscription_plan",
+      "requested_model_alias": "gemini-3.5-flash",
+      "exact_resolved_model_revision": null,
+      "silent_fallback_allowed": false,
+      "approved": false
+    }
+  ],
+  "population": {
+    "source": "admitted_synthetic_silver_v2_t3r1_projection",
+    "source_projection_hash": "sha256:c39cc71a988a425886d96ccb75ccf07a3937f5e1363899b08366319f4dd7b4bd",
+    "selection_rule": "action_index_plus_form_index_even; noise high for residue 0 modulo 4 and medium for residue 2; lexicographically first matching case",
+    "selection_hash": "sha256:7871dff782747c9aadf42aaed840b21981a37410c52862329a9e99380d31ea0e",
+    "case_count": 24,
+    "by_action": {
+      "cancel": 4,
+      "create": 4,
+      "explain_schedule": 4,
+      "move": 4,
+      "resize": 4,
+      "status_change": 4
+    },
+    "by_dialogue_form": {
+      "anaphora": 3,
+      "clarification": 3,
+      "correction": 3,
+      "ellipsis": 3,
+      "one_shot": 3,
+      "repeated_request": 3,
+      "reversal": 3,
+      "session_restart": 3
+    },
+    "by_noise_level": {
+      "high": 12,
+      "medium": 12
+    },
+    "selected_case_ids": [
+      "t3r1_sol_v2_bernie_noise_seed_v2_001_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_005_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_009_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_013_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_019_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_023_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_027_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_031_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_033_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_037_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_041_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_045_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_051_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_055_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_059_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_063_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_065_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_069_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_073_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_077_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_083_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_087_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_091_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_095_02"
+    ]
+  },
+  "execution_limits": {
+    "model_lane_count": 2,
+    "observations_per_case_per_lane": 2,
+    "max_scheduled_samples": 96,
+    "max_attempts_per_scheduled_sample": 1,
+    "automatic_retries": false,
+    "max_serialized_prompt_chars_per_sample": 12000,
+    "max_response_chars_per_sample": 4000,
+    "max_provider_reported_tokens_total_when_available": 500000,
+    "max_wall_clock_minutes": 120,
+    "provider_error_counts_as_consumed_sample": true
+  },
+  "cost_control": {
+    "marginal_dollar_cost_required": false,
+    "reason": "subscription-plan execution may not expose reliable marginal dollar cost",
+    "primary_caps": [
+      "scheduled_samples",
+      "attempts",
+      "prompt_characters",
+      "response_characters",
+      "provider_reported_tokens_when_available",
+      "wall_clock"
+    ],
+    "provider_reported_cost_recorded_when_available": true,
+    "explicit_run_approval_required": true,
+    "explicit_run_approval_granted": false
+  },
+  "privacy_and_retention": {
+    "synthetic_corpus_only": true,
+    "patient_or_practice_data_allowed": false,
+    "historical_diary_material_allowed": false,
+    "protected_holdout_material_allowed": false,
+    "external_corpus_material_allowed": false,
+    "raw_prompt_commit": false,
+    "raw_response_commit": false,
+    "raw_response_local_persistence": false,
+    "persist_normalized_response_and_hash_only": true,
+    "provider_account_retention_reviewed": false,
+    "privacy_and_retention_approved": false
+  },
+  "kill_switch": {
+    "pre_call_gate_check_required": true,
+    "stop_on_gate_or_ledger_drift": true,
+    "stop_on_any_unscheduled_call": true,
+    "stop_on_any_write_or_tool_request": true,
+    "stop_on_limit_breach": true,
+    "automatic_retry_loop_allowed": false,
+    "implementation_verified": false,
+    "reviewed": false
+  },
+  "evidence_protocol": {
+    "prompt_version": "bernie-t3r2-synthetic-shadow-v1",
+    "tool_schema_version": "bernie-shadow-safe-proposals-v1",
+    "temperature": 0.0,
+    "exact_resolved_model_revision_required": true,
+    "unresolved_revision_blocks_reproducibility_claim": true,
+    "record_response_hash": true,
+    "record_normalized_decision": true,
+    "record_latency_and_provider_reported_usage": true,
+    "correctness_and_safety_scored_separately_from_cost_and_latency": true,
+    "model_quality_claim_authorized": false,
+    "promotion_claim_authorized": false
+  },
+  "authority": {
+    "provider_executed_tools": false,
+    "runtime_wiring": false,
+    "api_or_database_change": false,
+    "appointment_or_audit_write": false,
+    "confirmation_authority": false,
+    "deployment_or_release": false
+  },
+  "approval": {
+    "reviewer": "",
+    "approved_on": "",
+    "approval_expires_on": "",
+    "decision": "blocked"
+  }
+}

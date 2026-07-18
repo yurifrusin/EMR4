@@ -1,11 +1,13 @@
 # Bernie T3 Nondeterministic Shadow Evaluation
 
 Status: T3.1 contract/scorer, T3.2 source-safe corpus projection, T3.3
-default-disabled repeat runner, T3.4 live-replay gate, and the T3R1 synthetic
-Silver v2 shadow refresh are implemented. No live-provider replay is enabled.
-T3.5 remains deferred pending a separately approved synthetic-only provider
-comparison. See `docs/bernie-language-coverage-implementation-plan.md` and
-`docs/bernie-t3r1-synthetic-shadow-refresh.md`.
+default-disabled repeat runner, T3.4 live-replay gate, the T3R1 synthetic
+Silver v2 shadow refresh, and the blocked T3R2 live-comparison approval packet
+are implemented. No live-provider replay is enabled. T3.5 remains deferred
+pending explicit approval of the final synthetic-only provider-comparison
+payload. See `docs/bernie-language-coverage-implementation-plan.md`,
+`docs/bernie-t3r1-synthetic-shadow-refresh.md`, and
+`docs/bernie-t3r2-synthetic-live-comparison-approval-packet.md`.
 
 ## Purpose
 
@@ -107,9 +109,10 @@ write surface was opened.
 
 ## Next Slice
 
-Keep the live gate blocked. The next useful experiment is a capped,
-synthetic-only, no-write comparison across explicitly selected candidate LLMs.
-Do not implement or call T3.5 provider adapters until Yuri approves an exact
-provider/model list, cost cap, privacy and retention posture, kill switch, and
-evidence protocol. Protected holdouts v1-v10 remain sealed and are not inputs
-to that decision.
+Keep the live gate blocked. T3R2 freezes a proposed 24-case, two-lane,
+two-observation comparison with 96 samples maximum, no retry loop, and hard
+character/token-when-available/time ceilings suited to subscription access.
+Do not call T3.5 providers until Yuri approves the exact resolved model
+identities, privacy and retention posture, kill switch, evidence protocol, and
+explicit bounded run. Protected holdouts v1-v10 remain sealed and are not
+inputs to that decision.
