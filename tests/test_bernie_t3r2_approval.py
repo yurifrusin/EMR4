@@ -20,8 +20,8 @@ def test_t3r2_status_is_aggregate_and_performs_no_calls():
         "schema_version": "emr4.bernie.t3r2_approval_status.v1",
         "decision": "blocked",
         "selected_case_count": 24,
-        "candidate_lane_count": 2,
-        "maximum_scheduled_samples": 96,
+        "candidate_lane_count": 3,
+        "maximum_scheduled_samples": 144,
         "provider_calls_performed": False,
         "external_calls_ready": False,
         "awaiting": [
@@ -38,7 +38,7 @@ def test_t3r2_status_is_aggregate_and_performs_no_calls():
     [
         lambda packet: packet.update(decision="approved"),
         lambda packet: packet.update(authorizes_provider_calls=True),
-        lambda packet: packet["execution_limits"].update(max_scheduled_samples=97),
+        lambda packet: packet["execution_limits"].update(max_scheduled_samples=145),
         lambda packet: packet["execution_limits"].update(automatic_retries=True),
         lambda packet: packet["privacy_and_retention"].update(patient_or_practice_data_allowed=True),
         lambda packet: packet["authority"].update(runtime_wiring=True),

@@ -2,6 +2,8 @@
   "schema_version": "emr4.bernie.t3r2_live_comparison_approval.v1",
   "decision": "blocked",
   "created_on": "2026-07-18",
+  "amended_on": "2026-07-18",
+  "amendment": "Yuri added DeepSeek as a third proposed lane before any provider call.",
   "authorizes_provider_calls": false,
   "requires_explicit_yuri_approval": true,
   "gate_binding": {
@@ -13,7 +15,7 @@
       "lane_id": "openai_gpt_subscription",
       "provider": "OpenAI",
       "access_basis": "subscription_plan",
-      "requested_model_alias": "gpt-sol",
+      "requested_model_alias": "gpt-5.6-sol",
       "exact_resolved_model_revision": null,
       "silent_fallback_allowed": false,
       "approved": false
@@ -22,7 +24,17 @@
       "lane_id": "google_gemini_subscription",
       "provider": "Google",
       "access_basis": "subscription_plan",
-      "requested_model_alias": "gemini-3.5-flash",
+      "requested_model_alias": "Gemini 3.5 Flash (Medium)",
+      "exact_resolved_model_revision": null,
+      "silent_fallback_allowed": false,
+      "approved": false
+    },
+    {
+      "lane_id": "deepseek_v4_flash_api",
+      "provider": "DeepSeek",
+      "access_basis": "metered_api_via_claude_code_bare",
+      "requested_model_alias": "deepseek-v4-flash",
+      "reasoning_effort": "high",
       "exact_resolved_model_revision": null,
       "silent_fallback_allowed": false,
       "approved": false
@@ -84,20 +96,21 @@
     ]
   },
   "execution_limits": {
-    "model_lane_count": 2,
+    "model_lane_count": 3,
     "observations_per_case_per_lane": 2,
-    "max_scheduled_samples": 96,
+    "max_scheduled_samples": 144,
     "max_attempts_per_scheduled_sample": 1,
     "automatic_retries": false,
     "max_serialized_prompt_chars_per_sample": 12000,
     "max_response_chars_per_sample": 4000,
-    "max_provider_reported_tokens_total_when_available": 500000,
-    "max_wall_clock_minutes": 120,
+    "max_provider_reported_tokens_per_lane_when_available": 250000,
+    "max_provider_reported_tokens_total_when_available": 750000,
+    "max_wall_clock_minutes": 180,
     "provider_error_counts_as_consumed_sample": true
   },
   "cost_control": {
     "marginal_dollar_cost_required": false,
-    "reason": "subscription-plan execution may not expose reliable marginal dollar cost",
+    "reason": "GPT and Gemini subscription execution may not expose reliable marginal dollar cost; DeepSeek usage is metered but remains bounded by the same hard run limits",
     "primary_caps": [
       "scheduled_samples",
       "attempts",
@@ -107,6 +120,7 @@
       "wall_clock"
     ],
     "provider_reported_cost_recorded_when_available": true,
+    "deepseek_provider_billed_cost_recorded_when_available": true,
     "explicit_run_approval_required": true,
     "explicit_run_approval_granted": false
   },

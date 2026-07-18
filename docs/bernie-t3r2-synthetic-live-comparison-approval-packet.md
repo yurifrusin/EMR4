@@ -6,9 +6,10 @@ Decision: `blocked_pending_explicit_yuri_approval`
 
 ## Proposed experiment
 
-Compare one GPT subscription lane and one Gemini subscription lane against a
+Compare one GPT subscription lane, one Gemini subscription lane, and one
+metered DeepSeek lane against a
 frozen 24-case sample of the admitted synthetic Silver v2 dialogue projection.
-Each model would see every case twice, producing at most 96 scheduled samples.
+Each model would see every case twice, producing at most 144 scheduled samples.
 The sample balances all six actions, all eight dialogue forms, and medium/high
 noise. It includes three clarification and three whole-action-reversal cases.
 
@@ -21,13 +22,14 @@ Precise marginal dollars are not a reliable control when execution is supplied
 through subscription plans. The proposed run therefore uses hard observable
 ceilings instead:
 
-- 24 cases, two model lanes, and two observations per case: 96 samples maximum;
+- 24 cases, three model lanes, and two observations per case: 144 samples
+  maximum;
 - one attempt per scheduled sample, with no automatic retries;
 - 12,000 serialized prompt characters and 4,000 response characters per
   sample;
-- 500,000 provider-reported tokens across the run when that measurement is
+- 750,000 provider-reported tokens across the run when that measurement is
   exposed; and
-- 120 minutes total wall-clock time.
+- 180 minutes total wall-clock time.
 
 A provider error consumes its scheduled sample. Missing token or cost telemetry
 is recorded as unavailable and cannot silently relax the case, attempt,
@@ -36,12 +38,14 @@ available, but neither affects correctness or safety scoring.
 
 ## Proposed model lanes
 
-The requested lanes are OpenAI `gpt-sol` and Google
-`gemini-3.5-flash`, both using the user's existing subscription access. The
-exact resolved model identity must be captured before the first scheduled
-sample. No silent model fallback is allowed. If a subscription surface cannot
-report an exact revision, the run may still be described by its requested and
-observed identity, but it cannot support an exact reproducibility claim.
+The requested lanes are OpenAI `gpt-5.6-sol` and Google
+`Gemini 3.5 Flash (Medium)` using the user's existing subscription access, plus
+DeepSeek `deepseek-v4-flash` at high reasoning through Claude Code `--bare`.
+DeepSeek is a metered API lane rather than a subscription lane. The exact
+resolved model identity must be captured before the first scheduled sample. No
+silent model fallback is allowed. If a surface cannot report an exact revision,
+the run may still be described by its requested and observed identity, but it
+cannot support an exact reproducibility claim.
 
 ## Privacy, retention, and evidence
 
