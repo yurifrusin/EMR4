@@ -1,0 +1,93 @@
+{
+  "schema_version": "emr4.bernie.t3r5_vertex_au_readiness_report.v1",
+  "checked_at": "2026-07-18",
+  "decision": "blocked_before_provider_call",
+  "authorizes_provider_call": false,
+  "evidence_hash": "sha256:f2e99177cfc654c73b766349d8358242cd812432075c8a5b084a1406a68e81dc",
+  "required_location": "australia-southeast1",
+  "minimum_model_runway_days": 180,
+  "model_assessments": [
+    {
+      "model_id": "gemini-3.5-flash",
+      "role": "current_general_purpose_successor",
+      "lifecycle_stage": "GA",
+      "required_location_available": false,
+      "retirement_on_or_after": "2027-05-19",
+      "documented_runway_days": 305,
+      "minimum_runway_satisfied": true,
+      "eligible": false
+    },
+    {
+      "model_id": "gemini-3.1-flash-lite",
+      "role": "current_economical_successor",
+      "lifecycle_stage": "GA",
+      "required_location_available": false,
+      "retirement_on_or_after": "2027-05-07",
+      "documented_runway_days": 293,
+      "minimum_runway_satisfied": true,
+      "eligible": false
+    },
+    {
+      "model_id": "gemini-2.5-flash",
+      "role": "legacy_sydney_available_candidate",
+      "lifecycle_stage": "GA",
+      "required_location_available": true,
+      "retirement_on_or_after": "2026-10-16",
+      "documented_runway_days": 90,
+      "minimum_runway_satisfied": false,
+      "eligible": false
+    }
+  ],
+  "eligible_models": [],
+  "local_checks": {
+    "expected_project_selected": true,
+    "keyless_impersonated_adc": true,
+    "vertex_ai_api_enabled": false,
+    "billing_enabled": false,
+    "project_environment_pin": false,
+    "location_environment_pin": false,
+    "vertex_transport_environment_pin": false
+  },
+  "control_checks": {
+    "prediction_only_iam_verified": false,
+    "data_access_audit_logging_verified": false,
+    "request_response_logging_disabled_verified": false,
+    "australian_resource_location_policy_verified": false,
+    "global_endpoint_denied_verified": false,
+    "retention_and_abuse_monitoring_posture_verified": false,
+    "grounding_and_tools_disabled_verified": false,
+    "cost_acceptance_recorded": false,
+    "billing_budget_alert_verified": false,
+    "application_hard_limit_and_kill_switch_verified": false
+  },
+  "blocking_reasons": [
+    "no_ga_model_has_both_sydney_availability_and_minimum_runway",
+    "vertex_ai_api_enabled",
+    "billing_enabled",
+    "project_environment_pin",
+    "location_environment_pin",
+    "vertex_transport_environment_pin",
+    "prediction_only_iam_verified",
+    "data_access_audit_logging_verified",
+    "request_response_logging_disabled_verified",
+    "australian_resource_location_policy_verified",
+    "global_endpoint_denied_verified",
+    "retention_and_abuse_monitoring_posture_verified",
+    "grounding_and_tools_disabled_verified",
+    "cost_acceptance_recorded",
+    "billing_budget_alert_verified",
+    "application_hard_limit_and_kill_switch_verified"
+  ],
+  "next_boundary": "recheck_when_a_current_gemini_successor_is_ga_in_australia_southeast1",
+  "api_spine_boundary": {
+    "classification": "developer_only_access_ai_provider_feasibility",
+    "stable_capability_id": "admin.booking.interpret",
+    "method": "evaluate_fixture",
+    "product_runtime_wiring": false,
+    "graphql_or_rest_route_change": false,
+    "database_or_audit_write": false,
+    "appointment_or_confirmation_authority": false,
+    "deployment_or_release": false
+  },
+  "report_hash": "sha256:c19a713ca4819319bcb380284cf4e6df74e4ef2c59c239f8138da17c805d57f2"
+}
