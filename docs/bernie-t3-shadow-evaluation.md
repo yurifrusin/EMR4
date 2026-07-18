@@ -3,15 +3,17 @@
 Status: T3.1 contract/scorer, T3.2 source-safe corpus projection, T3.3
 default-disabled repeat runner, T3.4 live-replay gate, the T3R1 synthetic
 Silver v2 shadow refresh, the T3R2/T3R3 approval and no-call preflight, and the
-bounded T3R4 pragmatic synthetic-only comparison, and the T3R5 no-call
-Australian Vertex feasibility design are complete. The dedicated T3R4
-evaluation exception is consumed; T3R5 stopped before a provider call because
-no long-lived current Gemini successor is available in Sydney. No product
-live-provider replay is enabled and T3.5 remains deferred. See
+bounded T3R4 pragmatic synthetic-only comparison, the T3R5 no-call Australian
+Vertex feasibility design, and the T3R6 US synthetic-development policy are
+complete. The dedicated T3R4 evaluation exception is consumed. T3R6 now
+permits a US synthetic-development trust zone from 2026-10-16 while preserving
+Australian production/PII gating. No product live-provider replay is enabled
+and T3.5 remains deferred. See
 `docs/bernie-language-coverage-implementation-plan.md`,
 `docs/bernie-t3r1-synthetic-shadow-refresh.md`, and
 `docs/bernie-t3r4-pragmatic-live-comparison-closeout.md` and
-`docs/bernie-t3r5-vertex-au-feasibility-closeout.md`.
+`docs/bernie-t3r5-vertex-au-feasibility-closeout.md`, and
+`docs/bernie-t3r6-us-synthetic-development-closeout.md`.
 
 ## Purpose
 
@@ -130,3 +132,18 @@ Reassess only when a current Gemini successor becomes GA in Sydney. A passing
 future readiness report would still need new explicit provider/model,
 retention, prompt, and budget approval before any synthetic Vertex call.
 Protected holdouts v1-v10 remain sealed and are not inputs.
+
+## T3R6 development/production residency split
+
+Yuri subsequently decided that US residency is acceptable for deliberately
+synthetic development after the Australian Gemini 2.5 Flash retirement date,
+because production and PII use are not expected before 2027 at the earliest.
+The current Gemini 3.5 Flash model lists `us` availability and ML processing
+and has 215 days of documented runway on the 2026-10-16 transition date.
+
+The US lane becomes policy-effective on that date but remains blocked before a
+provider call until its exact model, retention, cost, IAM, logging, audit,
+location pin, fallback denial, and hard kill-switch controls pass and Yuri
+approves the bounded synthetic call. Production or PII remains independently
+Australian-gated. There is no automatic development-to-production promotion or
+regional fallback.

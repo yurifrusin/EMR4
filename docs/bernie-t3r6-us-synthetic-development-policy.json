@@ -1,0 +1,79 @@
+{
+  "schema_version": "emr4.bernie.t3r6_us_synthetic_development.v1",
+  "checked_at": "2026-07-18",
+  "user_decision": {
+    "authorized_on": "2026-07-18",
+    "us_synthetic_development_authorized": true,
+    "effective_from": "2026-10-16",
+    "trigger": "documented_australian_retirement_of_gemini_2_5_flash",
+    "production_pii_earliest_review_year": 2027
+  },
+  "policy": {
+    "development_location": "us",
+    "production_pii_location": "australia-southeast1",
+    "minimum_model_runway_days": 180,
+    "allowed_evidence_class": "synthetic_development_only",
+    "stable_capability_id": "admin.booking.interpret",
+    "method": "evaluate_fixture",
+    "automatic_location_fallback": false,
+    "pii_allowed": false,
+    "patient_or_practice_data_allowed": false,
+    "protected_holdout_material_allowed": false,
+    "historical_diary_material_allowed": false,
+    "external_corpus_material_allowed": false,
+    "raw_prompt_or_response_persistence": false,
+    "grounding_allowed": false,
+    "tools_allowed": false,
+    "product_runtime_wiring": false,
+    "graphql_or_rest_change": false,
+    "database_or_audit_write": false,
+    "appointment_or_confirmation_authority": false,
+    "deployment_or_release": false
+  },
+  "documentary_evidence": {
+    "models": [
+      {
+        "model_id": "gemini-3.5-flash",
+        "role": "future_us_synthetic_development_candidate",
+        "lifecycle_stage": "GA",
+        "available_locations": ["global", "us", "eu", "europe-west2", "asia-northeast1", "asia-south1", "asia-southeast1"],
+        "location_controlled_locations": ["us", "eu", "europe-west2", "asia-northeast1", "asia-south1", "asia-southeast1"],
+        "retirement_on_or_after": "2027-05-19"
+      },
+      {
+        "model_id": "gemini-2.5-flash",
+        "role": "australian_transition_boundary",
+        "lifecycle_stage": "GA",
+        "available_locations": ["australia-southeast1"],
+        "location_controlled_locations": ["australia-southeast1"],
+        "retirement_on_or_after": "2026-10-16"
+      }
+    ]
+  },
+  "control_verification": {
+    "vertex_ai_api_enabled": false,
+    "billing_and_cost_acceptance_verified": false,
+    "keyless_prediction_only_iam_verified": false,
+    "us_location_pin_verified": false,
+    "global_and_non_us_fallback_denied_verified": false,
+    "data_access_audit_logging_verified": false,
+    "request_response_logging_disabled_verified": false,
+    "retention_and_abuse_monitoring_posture_verified": false,
+    "grounding_tools_and_explicit_cache_disabled_verified": false,
+    "application_hard_limit_and_kill_switch_verified": false
+  },
+  "sources": [
+    {
+      "id": "gemini_3_5_flash_model_card",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-5-flash"
+    },
+    {
+      "id": "gemini_2_5_flash_model_card",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/2-5-flash"
+    },
+    {
+      "id": "regional_endpoint_compliance",
+      "url": "https://docs.cloud.google.com/docs/security/compliance/about-regional-endpoints"
+    }
+  ]
+}

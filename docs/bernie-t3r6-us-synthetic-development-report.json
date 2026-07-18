@@ -1,0 +1,77 @@
+{
+  "schema_version": "emr4.bernie.t3r6_us_synthetic_development_report.v1",
+  "checked_at": "2026-07-18",
+  "as_of": "2026-07-18",
+  "policy_decision": "accepted_us_synthetic_development_after_au_2_5_retirement",
+  "readiness_decision": "us_synthetic_development_path_scheduled_not_call_ready",
+  "transition_effective": false,
+  "effective_from": "2026-10-16",
+  "development_location": "us",
+  "production_pii_location": "australia-southeast1",
+  "production_pii_earliest_review_year": 2027,
+  "authorizes_provider_call": false,
+  "authorizes_pii": false,
+  "authorizes_production": false,
+  "automatic_location_fallback": false,
+  "evidence_hash": "sha256:cbe3ba62ddf10779ff1450310f7718b496b06bfe078188bd595ffdb7b1bc0e01",
+  "model_assessments": [
+    {
+      "model_id": "gemini-3.5-flash",
+      "role": "future_us_synthetic_development_candidate",
+      "required_development_location_available": true,
+      "retirement_on_or_after": "2027-05-19",
+      "documented_runway_days": 305,
+      "minimum_runway_satisfied": true,
+      "eligible": true
+    },
+    {
+      "model_id": "gemini-2.5-flash",
+      "role": "australian_transition_boundary",
+      "required_development_location_available": false,
+      "retirement_on_or_after": "2026-10-16",
+      "documented_runway_days": 90,
+      "minimum_runway_satisfied": false,
+      "eligible": false
+    }
+  ],
+  "eligible_models": [
+    "gemini-3.5-flash"
+  ],
+  "control_checks": {
+    "vertex_ai_api_enabled": false,
+    "billing_and_cost_acceptance_verified": false,
+    "keyless_prediction_only_iam_verified": false,
+    "us_location_pin_verified": false,
+    "global_and_non_us_fallback_denied_verified": false,
+    "data_access_audit_logging_verified": false,
+    "request_response_logging_disabled_verified": false,
+    "retention_and_abuse_monitoring_posture_verified": false,
+    "grounding_tools_and_explicit_cache_disabled_verified": false,
+    "application_hard_limit_and_kill_switch_verified": false
+  },
+  "blocking_reasons": [
+    "us_transition_effective_date_not_reached",
+    "vertex_ai_api_enabled",
+    "billing_and_cost_acceptance_verified",
+    "keyless_prediction_only_iam_verified",
+    "us_location_pin_verified",
+    "global_and_non_us_fallback_denied_verified",
+    "data_access_audit_logging_verified",
+    "request_response_logging_disabled_verified",
+    "retention_and_abuse_monitoring_posture_verified",
+    "grounding_tools_and_explicit_cache_disabled_verified",
+    "application_hard_limit_and_kill_switch_verified"
+  ],
+  "next_boundary": "complete_controls_after_effective_date_then_rerun_no_call_readiness",
+  "api_spine_boundary": {
+    "classification": "developer_only_synthetic_access_ai_provider_feasibility",
+    "stable_capability_id": "admin.booking.interpret",
+    "method": "evaluate_fixture",
+    "product_runtime_wiring": false,
+    "graphql_or_rest_route_change": false,
+    "database_or_audit_write": false,
+    "appointment_or_confirmation_authority": false,
+    "deployment_or_release": false
+  },
+  "report_hash": "sha256:7f3aac1d92a4200221c0b41bc70f496de4639cad93ff413cd79ef04d6a61f996"
+}
