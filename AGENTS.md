@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V10 fresh certification passed; synthetic Silver v2 is complete. T3R1 projects all 192 admitted dialogues into the provider-free shadow contract. Yuri added DeepSeek to T3R2, and T3R3 completed a three-lane no-call transport, retention, normalization, and kill-switch preflight; mandatory Pushover closeout pings remain restored |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`, `docs/bernie-lc4v10-fresh-certification-closeout.md`, `orchestration/agent_inbox/codex/security-hardening-final-purple-acceptance.md`, `docs/security/secure-sdlc-red-blue-diary-hardening-closeout-2026-07-17.md`, `docs/bernie-post-certification-transition-review.md`, `orchestration/agent_inbox/codex/appointment-call-quarantine-pilot-sol-acceptance.md`, `docs/bernie-appointment-call-quarantine-pilot-closeout.md`, `docs/bernie-synthetic-silver-v2-anchor-contract.md`, `docs/bernie-synthetic-silver-v2-closeout.md`, `orchestration/agent_inbox/antigravity/synthetic-silver-v2-final-review.md`, `orchestration/agent_inbox/codex/synthetic-silver-v2-sol-acceptance.md`, `docs/bernie-t3r1-synthetic-shadow-refresh.md`, `docs/bernie-t3r1-synthetic-shadow-baseline.json`, `orchestration/agent_inbox/codex/t3r1-synthetic-shadow-refresh-sol-acceptance.md`, `docs/bernie-t3r2-synthetic-live-comparison-approval-packet.md`, `docs/bernie-t3r2-synthetic-live-comparison-approval.json`, `docs/bernie-t3r2-three-lane-amendment.md`, `docs/bernie-t3r3-provider-retention-review.md`, `docs/bernie-t3r3-three-lane-transport-preflight.json`, `docs/bernie-t3r3-three-lane-transport-preflight-closeout.md`, and `orchestration/agent_inbox/codex/t3r3-three-lane-transport-preflight-sol-acceptance.md` |
-| Current result | V10 remains a valid bounded `certification_pass`: complete and every dimension 576/576; synthetic Silver v2 remains 192/192 with safety 384/384 and zero variance; T3R1 remains a provider-free 384/384 plumbing pass. Amended T3R2 contains 24 balanced cases, three lanes, and 144 samples maximum. T3R3 is a `no_call_preflight_complete_live_blocked` result: DeepSeek alone is adapter-contract-ready, zero lanes are execution-ready, report hash `3f111b99`, and no provider call occurred |
-| Next implementation | No V11 is needed or authorized, and no synthetic v3 is authorized. Pause before the first live synthetic prompt for Yuri's material decision: strict tool-free API comparison across GPT/Gemini/DeepSeek versus a deliberately non-comparable agentic subscription-surface comparison, plus explicit DeepSeek retention/data-residency acceptance. Product runtime, API/database/UI, confirmation, deployment/release, and write authority remain closed |
+| Active product track | LC4V10 fresh certification passed; synthetic Silver v2 is complete. T3R4 completed the authorized pragmatic synthetic-only comparison: GPT/Codex and Gemini/Antigravity were primary practical systems, while DeepSeek was a reduced auxiliary diversity lane excluded from production ranking; mandatory Pushover closeout pings remain restored |
+| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`, `docs/bernie-lc4v10-fresh-certification-closeout.md`, `orchestration/agent_inbox/codex/security-hardening-final-purple-acceptance.md`, `docs/security/secure-sdlc-red-blue-diary-hardening-closeout-2026-07-17.md`, `docs/bernie-post-certification-transition-review.md`, `orchestration/agent_inbox/codex/appointment-call-quarantine-pilot-sol-acceptance.md`, `docs/bernie-appointment-call-quarantine-pilot-closeout.md`, `docs/bernie-synthetic-silver-v2-anchor-contract.md`, `docs/bernie-synthetic-silver-v2-closeout.md`, `orchestration/agent_inbox/antigravity/synthetic-silver-v2-final-review.md`, `orchestration/agent_inbox/codex/synthetic-silver-v2-sol-acceptance.md`, `docs/bernie-t3r1-synthetic-shadow-refresh.md`, `docs/bernie-t3r1-synthetic-shadow-baseline.json`, `orchestration/agent_inbox/codex/t3r1-synthetic-shadow-refresh-sol-acceptance.md`, `docs/bernie-t3r2-synthetic-live-comparison-approval.json`, `docs/bernie-t3r3-three-lane-transport-preflight-closeout.md`, `docs/bernie-t3r4-pragmatic-live-comparison-approval.json`, `docs/bernie-t3r4-pragmatic-live-comparison-report.json`, `docs/bernie-t3r4-pragmatic-live-comparison-closeout.md`, and `orchestration/agent_inbox/codex/t3r4-pragmatic-live-comparison-sol-acceptance.md` |
+| Current result | V10 remains a valid bounded `certification_pass`: complete and every dimension 576/576; synthetic Silver v2 remains 192/192. T3R4 validly closed `comparison_complete_with_hard_limit_stop`: GPT 17 consumed/12 successful/72 of 72 before its 250,258-token hard stop; Gemini 48/46/272 of 276; DeepSeek auxiliary 24/23/127 of 138; every successful observation was safe, raw prompt/response persistence was false, and the fully paired five-case primary slice tied 60/60 |
+| Next implementation | No V11 is needed or authorized, and no synthetic v3 is authorized. Pause for Yuri's decision whether to authorize a no-call Australian-region Gemini/Vertex feasibility and entitlement design before any separately approved tool-free Vertex evaluation. Product runtime, API/database/UI, confirmation, deployment/release, and write authority remain closed |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 
@@ -139,11 +139,9 @@ evidence only, not model-quality evidence. No external worker received the
 projection and no provider prompt or call occurred. The live T3 gate remains
 blocked; see the T3R1 closeout and Sol acceptance.
 
-### T3R2 and T3R3 accepted state
+### T3R2-T3R4 accepted state
 
-Yuri added DeepSeek before any call; the unchanged 24-case T3R2 selection now
-caps three lanes at 144 samples. T3R3 found only DeepSeek mechanically
-tool-free; the kill switch passed fake tests and zero prompt or call occurred.
+T3R3 found only DeepSeek mechanically tool-free. Yuri then approved T3R4's pragmatic systems methodology and DeepSeek's synthetic-only retention posture. T3R4 consumed 89 normalized observations: GPT stopped at its frozen token cap, Gemini completed its primary lane, and DeepSeek completed its reduced auxiliary lane. Every successful response was safe; no raw response, protected/historical/external/patient/practice data, runtime, route, database, confirmation, or write authority moved. Two fresh Gemini review attempts returned no decision and are rejected, so the bounded result is accepted without an independent veto and cannot select a production provider.
 
 ### Post-certification security transition
 
@@ -312,9 +310,7 @@ synthetic, or otherwise explicitly authorized evidence.
 
 ### T3 and providers
 
-T3.1-T3.4 remain intact and blocked by default. T3.5 provider adapters, live
-provider calls, external prompts, raw-response persistence, provider-executed
-tools, promotion claims, and runtime wiring remain deferred.
+T3.1-T3.4 remain intact and blocked by default. The dedicated T3R4 synthetic evaluation exception is consumed and closed. T3.5 runtime adapters, further live calls/external prompts, raw-response persistence, provider-executed tools, promotion claims, and runtime wiring remain deferred.
 
 ### Historical diary material
 

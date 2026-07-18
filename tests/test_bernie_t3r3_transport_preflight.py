@@ -196,10 +196,13 @@ def test_handover_and_retention_review_preserve_the_material_fork():
     retention = (ROOT / "docs/bernie-t3r3-provider-retention-review.md").read_text(
         encoding="utf-8"
     )
+    closeout = (ROOT / "docs/bernie-t3r3-three-lane-transport-preflight-closeout.md").read_text(
+        encoding="utf-8"
+    )
 
-    assert "T3R3 is a `no_call_preflight_complete_live_blocked` result" in handover
-    assert "strict tool-free API comparison" in handover
-    assert "no provider call occurred" in handover
+    assert "T3R4 validly closed `comparison_complete_with_hard_limit_stop`" in handover
+    assert "a strict model comparison using tool-free API transports" in closeout
+    assert "No lane is execution-ready and no model prompt was sent" in closeout
     assert "mainland China" in retention
     assert "Antigravity-specific retention mapping" in retention
     assert "individual services such as ChatGPT and Codex" in retention

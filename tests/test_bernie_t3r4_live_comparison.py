@@ -9,6 +9,8 @@ import pytest
 
 from app.services.ai.evals.bernie_shadow_live_comparison import (
     DEEPSEEK_LANE,
+    DEFAULT_OBSERVATION_PATH,
+    DEFAULT_REPORT_PATH,
     DispatchState,
     LANE_IDS,
     append_observation,
@@ -232,6 +234,33 @@ def test_complete_report_ranks_only_gpt_and_gemini_and_separates_deepseek():
     assert [item["lane_id"] for item in report["auxiliary_diversity"]] == [DEEPSEEK_LANE]
     assert report["auxiliary_diversity"][0]["included_in_primary_ranking"] is False
     assert all(value is False for key, value in report["api_spine_boundary"].items() if key != "classification")
+
+
+def test_committed_live_report_matches_normalized_ledger_and_hard_stop():
+    records = load_observations(DEFAULT_OBSERVATION_PATH)
+    committed = json.loads(DEFAULT_REPORT_PATH.read_text(encoding="utf-8"))
+
+    assert len(records) == 89
+    assert build_report(records=records) == committed
+    assert committed["decision"] == "comparison_complete_with_hard_limit_stop"
+    assert committed["execution"]["all_authorized_work_complete"] is True
+    assert committed["execution"]["raw_prompt_persisted"] is False
+    assert committed["execution"]["raw_response_persisted"] is False
+    assert committed["methodology"]["primary_fully_paired_case_count"] == 5
+    assert all(item["correctness_passes"] == 60 for item in committed["primary_fully_paired_comparison"])
+
+
+def test_closeout_and_handover_do_not_promote_the_bounded_result():
+    closeout = Path("docs/bernie-t3r4-pragmatic-live-comparison-closeout.md").read_text(
+        encoding="utf-8"
+    )
+    handover = Path("AGENTS.md").read_text(encoding="utf-8")
+
+    assert "too small to rank the underlying models" in closeout
+    assert "without an independent veto" in closeout
+    assert "does not authorize" in closeout
+    assert "T3R4 validly closed `comparison_complete_with_hard_limit_stop`" in handover
+    assert "further live calls/external prompts" in handover
 
 
 def test_live_transport_stays_out_of_application_runtime():
