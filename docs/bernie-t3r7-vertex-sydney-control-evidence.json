@@ -1,0 +1,64 @@
+{
+  "schema_version": "emr4.bernie.t3r7_vertex_sydney_control_evidence.v1",
+  "checked_on": "2026-07-18",
+  "decision": "controls_passed_for_exact_approved_synthetic_pilot",
+  "approval_binding": "sha256:0e62a51b10fcbd59339fb07b9ad44e364bf2e41209e293eccd60cb389d8fbdd7",
+  "project": "bernie-emr4-dev",
+  "model_id": "gemini-2.5-flash",
+  "location": "australia-southeast1",
+  "checks": {
+    "billing_enabled": true,
+    "billing_account_matches_displayed_credit_account": true,
+    "vertex_ai_api_enabled": true,
+    "keyless_impersonated_service_account_adc": true,
+    "prediction_only_custom_role_exact_permission": true,
+    "prediction_only_project_binding_only": true,
+    "vertex_data_read_audit_enabled": true,
+    "vertex_data_write_audit_enabled": true,
+    "request_response_logging_disabled_or_not_configured": true,
+    "regional_base_url_pinned": true,
+    "automatic_sdk_retry_attempts": 1
+  },
+  "cloud_changes": {
+    "billing_link_changed": false,
+    "vertex_ai_api_enablement_changed": false,
+    "prediction_only_custom_role_created": true,
+    "prediction_only_custom_role_granted": true,
+    "broader_vertex_ai_user_role_removed": true,
+    "vertex_data_access_audit_logging_enabled": true,
+    "request_response_logging_configuration_changed": false,
+    "service_account_key_created": false
+  },
+  "credit_posture": {
+    "credit_name": "Trial credit for GenAI App Builder",
+    "displayed_remaining_aud": 1401.15,
+    "displayed_percentage_remaining": 100,
+    "displayed_end_date": "2027-06-02",
+    "vertex_gemini_sku_eligibility": "unverified_restricted_promotion_terms_not_exposed",
+    "pilot_authority_depends_on_credit": false
+  },
+  "retention_posture": {
+    "synthetic_only": true,
+    "request_response_logging": "disabled_or_not_configured",
+    "raw_prompt_or_response_persistence": false,
+    "grounding_tools_and_explicit_cache": false,
+    "google_abuse_monitoring_prompt_retention_accepted": true
+  },
+  "evidence_minimization": {
+    "human_account_identifier_persisted": false,
+    "service_account_identifier_persisted": false,
+    "billing_account_identifier_persisted": false,
+    "credit_identifier_persisted": false,
+    "access_token_persisted": false,
+    "provider_calls_at_control_check": 0
+  },
+  "api_spine_boundary": {
+    "classification": "developer_only_synthetic_access_ai_evaluation",
+    "product_runtime_wiring": false,
+    "graphql_or_rest_route_change": false,
+    "database_or_audit_write": false,
+    "appointment_or_confirmation_authority": false,
+    "deployment_or_release": false,
+    "pii_or_production_authority": false
+  }
+}
