@@ -3,12 +3,15 @@
 Status: T3.1 contract/scorer, T3.2 source-safe corpus projection, T3.3
 default-disabled repeat runner, T3.4 live-replay gate, the T3R1 synthetic
 Silver v2 shadow refresh, the T3R2/T3R3 approval and no-call preflight, and the
-bounded T3R4 pragmatic synthetic-only comparison are complete. The dedicated
-T3R4 evaluation exception is consumed; no product live-provider replay is
-enabled and T3.5 remains deferred. See
+bounded T3R4 pragmatic synthetic-only comparison, and the T3R5 no-call
+Australian Vertex feasibility design are complete. The dedicated T3R4
+evaluation exception is consumed; T3R5 stopped before a provider call because
+no long-lived current Gemini successor is available in Sydney. No product
+live-provider replay is enabled and T3.5 remains deferred. See
 `docs/bernie-language-coverage-implementation-plan.md`,
 `docs/bernie-t3r1-synthetic-shadow-refresh.md`, and
-`docs/bernie-t3r4-pragmatic-live-comparison-closeout.md`.
+`docs/bernie-t3r4-pragmatic-live-comparison-closeout.md` and
+`docs/bernie-t3r5-vertex-au-feasibility-closeout.md`.
 
 ## Purpose
 
@@ -108,12 +111,22 @@ It uses an expected-decision echo and explicitly establishes no model quality.
 No provider call, external prompt, raw response, runtime route, database, or
 write surface was opened.
 
-## Next Slice
+## T3R5 Australian Vertex feasibility
 
 Keep the product live gate blocked. T3R4 leaves Gemini as the strongest broad
 production-relevant lead, while the only fully paired five-case GPT/Gemini
 slice is a 60/60 tie and cannot rank the models. DeepSeek remains useful only
-as a synthetic adversarial/diversity source. The next proposed work is a
-no-call Australian-region Gemini/Vertex feasibility and entitlement design;
-any Vertex evaluation needs a new explicit provider/model/retention/budget
-approval. Protected holdouts v1-v10 remain sealed and are not inputs.
+as a synthetic adversarial/diversity source.
+
+T3R5 found the current `gemini-3.5-flash` and `gemini-3.1-flash-lite`
+successors unavailable in `australia-southeast1`. The older
+`gemini-2.5-flash` is available there but has only 90 days of documented runway
+to retirement, below the accepted 180-day floor. Billing, Vertex API, regional
+environment pins, least-privilege IAM, audit/logging/retention enforcement, and
+cost controls are also incomplete or unverified. The deterministic result is
+`blocked_before_provider_call`.
+
+Reassess only when a current Gemini successor becomes GA in Sydney. A passing
+future readiness report would still need new explicit provider/model,
+retention, prompt, and budget approval before any synthetic Vertex call.
+Protected holdouts v1-v10 remain sealed and are not inputs.

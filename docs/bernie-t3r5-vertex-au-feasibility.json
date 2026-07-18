@@ -1,0 +1,144 @@
+{
+  "schema_version": "emr4.bernie.t3r5_vertex_au_feasibility.v1",
+  "checked_at": "2026-07-18",
+  "scope": {
+    "no_call_feasibility_only": true,
+    "provider_model_call_performed": false,
+    "cloud_mutation_performed": false,
+    "product_runtime_wiring": false,
+    "graphql_or_rest_change": false,
+    "database_or_audit_write": false,
+    "appointment_or_confirmation_authority": false,
+    "deployment_or_release": false,
+    "patient_or_practice_data_allowed": false,
+    "protected_holdout_material_allowed": false,
+    "historical_diary_material_allowed": false,
+    "external_corpus_material_allowed": false
+  },
+  "policy": {
+    "required_location": "australia-southeast1",
+    "minimum_model_runway_days": 180,
+    "required_project": "bernie-emr4-dev",
+    "stable_capability_id": "admin.booking.interpret",
+    "method": "evaluate_fixture",
+    "environment": "dev",
+    "phi_allowed": false,
+    "raw_prompt_or_response_persistence": false,
+    "grounding_allowed": false,
+    "tools_allowed": false
+  },
+  "documentary_evidence": {
+    "models": [
+      {
+        "model_id": "gemini-3.5-flash",
+        "role": "current_general_purpose_successor",
+        "lifecycle_stage": "GA",
+        "available_locations": [
+          "global",
+          "us",
+          "eu",
+          "europe-west2",
+          "asia-northeast1",
+          "asia-south1",
+          "asia-southeast1"
+        ],
+        "regional_isolation": false,
+        "retirement_on_or_after": "2027-05-19"
+      },
+      {
+        "model_id": "gemini-3.1-flash-lite",
+        "role": "current_economical_successor",
+        "lifecycle_stage": "GA",
+        "available_locations": ["global", "us", "eu"],
+        "regional_isolation": false,
+        "retirement_on_or_after": "2027-05-07"
+      },
+      {
+        "model_id": "gemini-2.5-flash",
+        "role": "legacy_sydney_available_candidate",
+        "lifecycle_stage": "GA",
+        "available_locations": ["australia-southeast1"],
+        "regional_isolation": true,
+        "retirement_on_or_after": "2026-10-16"
+      }
+    ]
+  },
+  "local_observations": {
+    "gcloud_installed": true,
+    "active_organization_account_present": true,
+    "configured_project": "bernie-emr4-dev",
+    "adc_is_impersonated_service_account": true,
+    "vertex_ai_api_enabled": false,
+    "billing_enabled": false,
+    "project_environment_pin_present": false,
+    "location_environment_pin": null,
+    "vertex_transport_environment_pin_present": false,
+    "account_or_service_account_identifiers_persisted": false
+  },
+  "control_verification": {
+    "prediction_only_iam_verified": false,
+    "data_access_audit_logging_verified": false,
+    "request_response_logging_disabled_verified": false,
+    "australian_resource_location_policy_verified": false,
+    "global_endpoint_denied_verified": false,
+    "retention_and_abuse_monitoring_posture_verified": false,
+    "grounding_and_tools_disabled_verified": false,
+    "cost_acceptance_recorded": false,
+    "billing_budget_alert_verified": false,
+    "application_hard_limit_and_kill_switch_verified": false
+  },
+  "sources": [
+    {
+      "id": "gemini_3_5_flash_model_card",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-5-flash"
+    },
+    {
+      "id": "gemini_3_1_flash_lite_model_card",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-1-flash-lite"
+    },
+    {
+      "id": "gemini_2_5_flash_model_card",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/2-5-flash"
+    },
+    {
+      "id": "model_lifecycle",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions"
+    },
+    {
+      "id": "regional_endpoints",
+      "url": "https://docs.cloud.google.com/docs/security/compliance/about-regional-endpoints"
+    },
+    {
+      "id": "restrict_endpoint_usage",
+      "url": "https://docs.cloud.google.com/docs/security/compliance/restrict-endpoint-usage"
+    },
+    {
+      "id": "resource_locations",
+      "url": "https://docs.cloud.google.com/organization-policy/restrict-locations"
+    },
+    {
+      "id": "zero_data_retention",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/zero-data-retention"
+    },
+    {
+      "id": "request_response_logging",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/capabilities/request-response-logging"
+    },
+    {
+      "id": "audit_logging",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/audit-logging"
+    },
+    {
+      "id": "iam_access_control",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/access-control"
+    },
+    {
+      "id": "billing_budget_notifications",
+      "url": "https://docs.cloud.google.com/billing/docs/how-to/budgets-programmatic-notifications"
+    },
+    {
+      "id": "throughput_quota",
+      "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/resources/throughput-quota"
+    }
+  ]
+}
