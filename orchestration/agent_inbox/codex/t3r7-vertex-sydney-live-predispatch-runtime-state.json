@@ -45,7 +45,7 @@
     },
     {
       "adapter_id": "codex_primary_session",
-      "method": "live_provider_dispatch",
+      "method": "codex_session_observation",
       "reachability": "reachable",
       "evidence": ["Source head 2718f0b7 freezes approval hash sha256:0e62a51b10fcbd59339fb07b9ad44e364bf2e41209e293eccd60cb389d8fbdd7. All eleven controls pass. Dispatch is limited to one canary first, then at most 47 remaining approved calls; Gemini 2.5 Flash in australia-southeast1; six requests per minute; no retries, tools, grounding, explicit cache, PII, raw persistence, runtime, or write authority; USD 1 hard ceiling."]
     },
