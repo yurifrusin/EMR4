@@ -46,10 +46,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | LC4V10 fresh certification passed; synthetic Silver v2 remains complete. T3R7's exact Sydney Vertex synthetic pilot stopped fail-closed on its consumed eleventh call after a normalized response parse/schema failure; no further provider call is authorized and mandatory Pushover closeout pings remain restored |
-| Active acceptance | `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`, `docs/bernie-lc4v10-fresh-certification-closeout.md`, `orchestration/agent_inbox/codex/security-hardening-final-purple-acceptance.md`, `docs/security/secure-sdlc-red-blue-diary-hardening-closeout-2026-07-17.md`, `docs/bernie-post-certification-transition-review.md`, `orchestration/agent_inbox/codex/appointment-call-quarantine-pilot-sol-acceptance.md`, `docs/bernie-appointment-call-quarantine-pilot-closeout.md`, `docs/bernie-synthetic-silver-v2-anchor-contract.md`, `docs/bernie-synthetic-silver-v2-closeout.md`, `orchestration/agent_inbox/antigravity/synthetic-silver-v2-final-review.md`, `orchestration/agent_inbox/codex/synthetic-silver-v2-sol-acceptance.md`, `docs/bernie-t3r1-synthetic-shadow-refresh.md`, `docs/bernie-t3r1-synthetic-shadow-baseline.json`, `orchestration/agent_inbox/codex/t3r1-synthetic-shadow-refresh-sol-acceptance.md`, `docs/bernie-t3r2-synthetic-live-comparison-approval.json`, `docs/bernie-t3r3-three-lane-transport-preflight-closeout.md`, `docs/bernie-t3r4-pragmatic-live-comparison-approval.json`, `docs/bernie-t3r4-pragmatic-live-comparison-report.json`, `docs/bernie-t3r4-pragmatic-live-comparison-closeout.md`, `orchestration/agent_inbox/codex/t3r4-pragmatic-live-comparison-sol-acceptance.md`, `docs/bernie-t3r5-vertex-au-feasibility-and-entitlement-design.md`, `docs/bernie-t3r5-vertex-au-readiness-report.json`, `docs/bernie-t3r5-vertex-au-feasibility-closeout.md`, `orchestration/agent_inbox/codex/t3r5-vertex-au-feasibility-sol-acceptance.md`, `docs/bernie-t3r6-us-synthetic-development-policy.md`, `docs/bernie-t3r6-us-synthetic-development-report.json`, `docs/bernie-t3r6-us-synthetic-development-closeout.md`, `orchestration/agent_inbox/codex/t3r6-us-synthetic-development-sol-acceptance.md`, `docs/bernie-t3r7-vertex-sydney-live-report.json`, `docs/bernie-t3r7-vertex-sydney-live-closeout.md`, and `orchestration/agent_inbox/codex/t3r7-vertex-sydney-live-sol-acceptance.md` |
-| Current result | V10 remains a valid bounded `certification_pass`: complete and every dimension 576/576; synthetic Silver v2 remains 192/192. T3R4 validly closed `comparison_complete_with_hard_limit_stop`. T3R7 consumed 11/48 calls: ten normalized successes were safe, nine were perfect, and call 11 returned no schema-valid normalized JSON. The runner did not retry and sent no later calls. Its recorded USD 0.0274258 estimate excludes the failed call's unavailable usage; zero repeat pairs mean variance is uninterpretable |
-| Next implementation | No V11 is needed or authorized; no synthetic v3, T3R7 retry, or further provider call is authorized. Pause for Yuri's decision whether to close the provider lane or authorize a separately frozen continuation that excludes the consumed case and records only non-content schema diagnostics. Production/PII remains Australian-gated for fresh review no earlier than 2027; product runtime, API/database/UI, confirmation, deployment/release, and write authority remain closed |
+| Active product track | Yuri accepted the strategic transition review, paused the provider lane without T3R7 retry, and froze the provider-free Stage 1 supervised-booking acceptance plan. Stage 1 must begin with read-only Tranche A readiness, then test the unchanged local synthetic Diary → FastAPI → isolated PostgreSQL path before any bounded correction is considered |
+| Active acceptance | `docs/bernie-stage1-provider-free-supervised-booking-acceptance-plan.md`, `orchestration/agent_inbox/codex/bernie-stage1-acceptance-plan-sol-review.md`, `docs/bernie-current-strategic-transition-review.md`, `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`, `docs/bernie-lc4v10-fresh-certification-closeout.md`, `orchestration/agent_inbox/codex/security-hardening-final-purple-acceptance.md`, `docs/security/secure-sdlc-red-blue-diary-hardening-closeout-2026-07-17.md`, `docs/bernie-post-certification-transition-review.md`, `orchestration/agent_inbox/codex/appointment-call-quarantine-pilot-sol-acceptance.md`, `docs/bernie-appointment-call-quarantine-pilot-closeout.md`, `docs/bernie-synthetic-silver-v2-anchor-contract.md`, `docs/bernie-synthetic-silver-v2-closeout.md`, `orchestration/agent_inbox/antigravity/synthetic-silver-v2-final-review.md`, `orchestration/agent_inbox/codex/synthetic-silver-v2-sol-acceptance.md`, `docs/bernie-t3r1-synthetic-shadow-refresh.md`, `docs/bernie-t3r1-synthetic-shadow-baseline.json`, `orchestration/agent_inbox/codex/t3r1-synthetic-shadow-refresh-sol-acceptance.md`, `docs/bernie-t3r2-synthetic-live-comparison-approval.json`, `docs/bernie-t3r3-three-lane-transport-preflight-closeout.md`, `docs/bernie-t3r4-pragmatic-live-comparison-approval.json`, `docs/bernie-t3r4-pragmatic-live-comparison-report.json`, `docs/bernie-t3r4-pragmatic-live-comparison-closeout.md`, `orchestration/agent_inbox/codex/t3r4-pragmatic-live-comparison-sol-acceptance.md`, `docs/bernie-t3r5-vertex-au-feasibility-and-entitlement-design.md`, `docs/bernie-t3r5-vertex-au-readiness-report.json`, `docs/bernie-t3r5-vertex-au-feasibility-closeout.md`, `orchestration/agent_inbox/codex/t3r5-vertex-au-feasibility-sol-acceptance.md`, `docs/bernie-t3r6-us-synthetic-development-policy.md`, `docs/bernie-t3r6-us-synthetic-development-report.json`, `docs/bernie-t3r6-us-synthetic-development-closeout.md`, `orchestration/agent_inbox/codex/t3r6-us-synthetic-development-sol-acceptance.md`, `docs/bernie-t3r7-vertex-sydney-live-report.json`, `docs/bernie-t3r7-vertex-sydney-live-closeout.md`, and `orchestration/agent_inbox/codex/t3r7-vertex-sydney-live-sol-acceptance.md` |
+| Current result | Strategic review accepted; provider experimentation paused. Stage 1 candidate SHA-256 `1cb02436b161167ac4b9f0fb9d33d33a9ee9657a7b9eb2a9205188d1917cbbf3` is frozen. LC4V10 fresh certification passed as a sealed `certification_pass`, complete and every dimension 576/576; Silver v2 remains complete; T3R7 remains the immutable 11/48 fail-closed result with no retry or continuing provider authority |
+| Next implementation | No V11 is needed or authorized. Run Stage 1 Tranche A read-only readiness and harness proof at Sol/high in a fresh context. If it passes, run unchanged-product Tranche B locally with synthetic data. Enter bounded Tranche C only for a permitted reproducible defect. No provider/cloud/protected/PII/production/new-corpus/migration/durable-session/deployment/release authority is authorized |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 
@@ -314,7 +314,7 @@ synthetic, or otherwise explicitly authorized evidence.
 
 ### T3 and providers
 
-T3.1-T3.4 remain intact and blocked by default. The dedicated T3R4 and T3R7 synthetic evaluation exceptions are consumed and closed. T3R5 remains historical no-call evidence. T3R6 authorizes a US synthetic-development policy from 2026-10-16 but no continuing provider call, prompt transmission, cost acceptance, runtime, PII, or production authority. T3.5 adapters, further live calls/external prompts, raw-response persistence, provider-executed tools, promotion claims, and runtime wiring remain deferred.
+The provider-experimentation lane is paused by Yuri without T3R7 retry. T3.1-T3.4 remain intact and blocked by default. The dedicated T3R4 and T3R7 synthetic evaluation exceptions are consumed and closed. T3R5 remains historical no-call evidence. T3R6 authorizes a US synthetic-development policy from 2026-10-16 but no continuing provider call, prompt transmission, cost acceptance, runtime, PII, or production authority. T3.5 adapters, further live calls/external prompts, raw-response persistence, provider-executed tools, promotion claims, and runtime wiring remain deferred.
 
 ### Historical diary material
 
@@ -327,21 +327,21 @@ broad-trove processing or product/runtime access.
 
 ### Product authority
 
-Bernie may explain, clarify, issue bounded read requests, and propose actions.
-The native backend remains authoritative for identity, availability,
-collisions, status transitions, confirmation, writes, and audit. Do not open a
-route/API, database, GraphQL, UI, deployment, confirmation, memory/RAG,
-GraphRAG, or write-authority surface unless the sprint explicitly authorizes
-it.
+Bernie may explain, clarify, read bounded context, and propose. The backend owns
+identity, availability, conflicts, confirmation, writes, and audit. Do not open
+API/database/GraphQL/UI/deployment/memory/RAG/write authority unless explicitly
+authorized. Stage 1 permits only its local synthetic Diary/FastAPI/PostgreSQL
+path: proposals do not mutate; staff confirms; the existing REST command may
+create exactly one appointment, audit, idempotency result, and typed receipt.
 
 ## 6. User Decision Boundaries
 
 Continue autonomously through ordinary development-only analysis,
-implementation, tests, review, recovery, documentation, commit, and push.
-The completed fresh-certification authorization grants no V11. Yuri's
-2026-07-17 standing synthetic authorization completed with the accepted v2
-course and grants no synthetic v3 or further refinement of the frozen v2
-population. Pause before:
+implementation, tests, review, recovery, documentation, commit, and push. The
+completed fresh-certification and v2 authorizations grant no V11, synthetic v3,
+or frozen-v2 refinement. Yuri's 2026-07-18 Stage 1 authorization permits only
+the tranches and confirmed synthetic appointment-create path in its frozen plan;
+it begins read-only and returns to Yuri for any material fork. Pause before:
 
 - a material clarification-policy or product-behaviour choice;
 - holdout reuse, or any new holdout outside the standing fresh-version cycle;
