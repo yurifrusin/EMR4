@@ -78,6 +78,8 @@ def review_prompt(source_head: str, hashes: dict[str, str]) -> str:
 Review only files inside this isolated bundle. Do not access parent directories, repositories,
 history, network sources, protected holdouts, historical diary data, or any other project.
 Do not edit files. The bundle contains synthetic normalized evidence only.
+Perform the review now using read-only inspection inside the bundle. Do not return a proposed
+plan, ask for approval, defer checks, or describe what you would inspect later.
 
 Bound source head: {source_head}
 Bound file hashes: {json.dumps(hashes, sort_keys=True)}
@@ -140,10 +142,21 @@ def run_review(output: Path) -> dict[str, str]:
         timeout=1300,
     )
     if completed.returncode != 0:
-        raise RuntimeError(f"Gemini review transport exited {completed.returncode}")
+        raise RuntimeError(f"gemini_review_transport_exit_{completed.returncode}")
     result = completed.stdout.strip()
     if "DECISION: pass" not in result and "DECISION: revision_required" not in result:
-        raise RuntimeError("Gemini review omitted its required decision")
+        failure_output = output.with_name(output.stem + "-failed-decision.md")
+        failure_output.parent.mkdir(parents=True, exist_ok=True)
+        failure_output.write_text(
+            "# T3R4 Independent Review - Rejected Output\n\n"
+            f"Source head: `{source_head}`\n\n"
+            "Reason: required bound decision was omitted.\n\n"
+            + result
+            + "\n",
+            encoding="utf-8",
+            newline="\n",
+        )
+        raise RuntimeError("gemini_review_required_decision_missing")
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(
         "# T3R4 Pragmatic Live Comparison - Independent Review\n\n"
@@ -169,7 +182,8 @@ def main() -> int:
     try:
         result = run_review(args.output.resolve())
     except (OSError, ValueError, RuntimeError, subprocess.TimeoutExpired) as error:
-        print(json.dumps({"status": "blocked", "safe_error_code": type(error).__name__}))
+        safe_code = str(error) if isinstance(error, RuntimeError) else type(error).__name__
+        print(json.dumps({"status": "blocked", "safe_error_code": safe_code}))
         return 2
     print(json.dumps(result, indent=2))
     return 0 if result["decision"] == "pass" else 2
