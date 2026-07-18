@@ -2,13 +2,13 @@
 
 Status: T3.1 contract/scorer, T3.2 source-safe corpus projection, T3.3
 default-disabled repeat runner, T3.4 live-replay gate, the T3R1 synthetic
-Silver v2 shadow refresh, the blocked three-lane T3R2 approval packet, and the
-T3R3 no-call transport/retention/kill-switch preflight are implemented. No
-live-provider replay is enabled. T3.5 remains deferred pending resolution and
-explicit approval of the final synthetic-only provider-comparison payload. See
+Silver v2 shadow refresh, the T3R2/T3R3 approval and no-call preflight, and the
+bounded T3R4 pragmatic synthetic-only comparison are complete. The dedicated
+T3R4 evaluation exception is consumed; no product live-provider replay is
+enabled and T3.5 remains deferred. See
 `docs/bernie-language-coverage-implementation-plan.md`,
 `docs/bernie-t3r1-synthetic-shadow-refresh.md`, and
-`docs/bernie-t3r3-three-lane-transport-preflight-closeout.md`.
+`docs/bernie-t3r4-pragmatic-live-comparison-closeout.md`.
 
 ## Purpose
 
@@ -110,11 +110,10 @@ write surface was opened.
 
 ## Next Slice
 
-Keep the live gate blocked. The amended T3R2 packet freezes a 24-case,
-three-lane, two-observation comparison with 144 samples maximum and no retry
-loop. T3R3 found only the DeepSeek local contract mechanically tool-free; GPT
-Codex and Gemini Antigravity subscription transports remain agentic surfaces.
-Do not call T3.5 providers until Yuri chooses strict API comparability versus a
-labelled agentic-surface comparison and approves exact identities, retention,
-kill switch, evidence protocol, and the bounded run. Protected holdouts v1-v10
-remain sealed and are not inputs to that decision.
+Keep the product live gate blocked. T3R4 leaves Gemini as the strongest broad
+production-relevant lead, while the only fully paired five-case GPT/Gemini
+slice is a 60/60 tie and cannot rank the models. DeepSeek remains useful only
+as a synthetic adversarial/diversity source. The next proposed work is a
+no-call Australian-region Gemini/Vertex feasibility and entitlement design;
+any Vertex evaluation needs a new explicit provider/model/retention/budget
+approval. Protected holdouts v1-v10 remain sealed and are not inputs.

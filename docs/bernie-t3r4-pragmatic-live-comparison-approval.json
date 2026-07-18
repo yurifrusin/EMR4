@@ -1,0 +1,177 @@
+{
+  "schema_version": "emr4.bernie.t3r4_pragmatic_live_approval.v1",
+  "decision": "approved",
+  "approved_on": "2026-07-18",
+  "approval_expires_on": "2026-07-19",
+  "authorizes_provider_calls": true,
+  "approval_source": "Yuri explicitly accepted the pragmatic agentic-surface comparison, synthetic-only provider handling, the documented DeepSeek data-residency/retention posture, and Sol's reduced auxiliary DeepSeek diversity role.",
+  "execution_amendment": {
+    "amended_on": "2026-07-18",
+    "reason": "The requested gpt-5.6-sol alias was not present in the Codex CLI model catalog and returned model_unavailable. The latest visible subscription alias gpt-5.5 was selected explicitly before any successful GPT observation.",
+    "pre_amendment_consumed_gpt_errors": 4,
+    "silent_fallback": false,
+    "sample_and_cost_ceiling_change": false
+  },
+  "runtime_gate_binding": {
+    "path": "docs/bernie-t3-live-replay-gate.json",
+    "required_decision": "blocked",
+    "meaning": "Product runtime remains blocked; this approval opens only the dedicated T3R4 evaluation script."
+  },
+  "source_population": {
+    "source": "admitted_synthetic_silver_v2_t3r1_projection",
+    "source_projection_hash": "sha256:c39cc71a988a425886d96ccb75ccf07a3937f5e1363899b08366319f4dd7b4bd",
+    "primary_selection_hash": "sha256:7871dff782747c9aadf42aaed840b21981a37410c52862329a9e99380d31ea0e",
+    "primary_case_count": 24,
+    "primary_case_ids": [
+      "t3r1_sol_v2_bernie_noise_seed_v2_001_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_005_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_009_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_013_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_019_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_023_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_027_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_031_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_033_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_037_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_041_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_045_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_051_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_055_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_059_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_063_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_065_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_069_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_073_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_077_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_083_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_087_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_091_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_095_02"
+    ],
+    "deepseek_diversity_selection_hash": "sha256:f4f1ee4c4de9bb954c964c68c492cc88463e89604ebee8db4c266840c746096a",
+    "deepseek_diversity_case_count": 12,
+    "deepseek_diversity_case_ids": [
+      "t3r1_sol_v2_bernie_noise_seed_v2_001_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_005_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_019_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_023_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_041_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_045_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_059_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_063_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_065_02",
+      "t3r1_sol_v2_bernie_noise_seed_v2_069_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_083_01",
+      "t3r1_sol_v2_bernie_noise_seed_v2_087_02"
+    ],
+    "deepseek_diversity_balance": {
+      "by_action": 2,
+      "by_noise_level": {"high": 6, "medium": 6},
+      "dialogue_forms_covered": 8
+    }
+  },
+  "lanes": [
+    {
+      "lane_id": "openai_gpt_subscription",
+      "provider": "OpenAI",
+      "requested_model_alias": "gpt-5.5",
+      "transport": "codex_exec_subscription_ephemeral",
+      "role": "primary_production_relevant_agentic_surface",
+      "case_count": 24,
+      "observations_per_case": 2,
+      "maximum_samples": 48,
+      "included_in_primary_ranking": true,
+      "exact_revision_observable": false,
+      "host_tools_fully_disableable": false,
+      "approved": true
+    },
+    {
+      "lane_id": "google_gemini_subscription",
+      "provider": "Google",
+      "requested_model_alias": "Gemini 3.5 Flash (Medium)",
+      "transport": "antigravity_print_new_project_sandbox",
+      "role": "primary_production_relevant_agentic_surface",
+      "case_count": 24,
+      "observations_per_case": 2,
+      "maximum_samples": 48,
+      "included_in_primary_ranking": true,
+      "exact_revision_observable": false,
+      "host_tools_fully_disableable": false,
+      "approved": true
+    },
+    {
+      "lane_id": "deepseek_v4_flash_api",
+      "provider": "DeepSeek",
+      "requested_model_alias": "deepseek-v4-flash",
+      "reasoning_effort": "high",
+      "transport": "claude_code_bare_deepseek_tool_free",
+      "role": "auxiliary_synthetic_diversity_only",
+      "case_count": 12,
+      "observations_per_case": 2,
+      "maximum_samples": 24,
+      "included_in_primary_ranking": false,
+      "exact_revision_observable": false,
+      "host_tools_fully_disableable": true,
+      "approved": true
+    }
+  ],
+  "execution_limits": {
+    "maximum_scheduled_samples": 120,
+    "maximum_attempts_per_sample": 1,
+    "automatic_retries": false,
+    "provider_error_consumes_sample": true,
+    "maximum_serialized_prompt_chars_per_sample": 12000,
+    "maximum_raw_response_chars_in_memory_per_sample": 4000,
+    "maximum_provider_reported_tokens": {
+      "openai_gpt_subscription": 250000,
+      "google_gemini_subscription": 250000,
+      "deepseek_v4_flash_api": 125000,
+      "total": 625000
+    },
+    "maximum_wall_clock_minutes": 180,
+    "deepseek_max_budget_usd_per_sample": 0.1
+  },
+  "privacy_and_retention": {
+    "synthetic_silver_v2_only": true,
+    "patient_or_practice_data_allowed": false,
+    "historical_diary_material_allowed": false,
+    "protected_holdout_material_allowed": false,
+    "external_corpus_material_allowed": false,
+    "raw_prompt_persistence": false,
+    "raw_response_persistence": false,
+    "normalized_response_and_hash_only": true,
+    "openai_consumer_account_posture_unverified_but_synthetic_only_risk_accepted": true,
+    "antigravity_specific_retention_unresolved_but_synthetic_only_risk_accepted": true,
+    "deepseek_mainland_china_storage_cache_and_log_posture_accepted_for_auxiliary_synthetic_only_use": true
+  },
+  "methodology": {
+    "comparison_kind": "pragmatic_agentic_subscription_surface_comparison",
+    "pure_model_comparison": false,
+    "gpt_and_gemini_primary_comparable_as_production_relevant_surfaces": true,
+    "deepseek_primary_comparison_candidate": false,
+    "deepseek_auxiliary_diversity_evidence_only": true,
+    "observed_tool_use_invalidates_sample": true,
+    "unobservable_tool_use_is_reported_as_a_transport_limitation": true,
+    "silent_fallback_allowed": false,
+    "exact_reproducibility_claim_authorized": false,
+    "promotion_or_runtime_claim_authorized": false
+  },
+  "evidence": {
+    "prompt_version": "bernie-t3r4-pragmatic-shadow-v1",
+    "schema_version": "bernie-shadow-normalized-response-v1",
+    "temperature_requested": 0.0,
+    "persist_prompt_hash": true,
+    "persist_normalized_response": true,
+    "persist_response_hash": true,
+    "persist_latency_and_usage_when_available": true,
+    "correctness_safety_variance_latency_and_usage_remain_separate": true
+  },
+  "authority": {
+    "provider_executed_tools": false,
+    "product_runtime_wiring": false,
+    "graphql_or_rest_route_change": false,
+    "database_or_audit_write": false,
+    "appointment_or_confirmation_authority": false,
+    "deployment_or_release": false
+  }
+}
