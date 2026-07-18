@@ -320,6 +320,23 @@ tests, and returned `DECISION: pass`, `POLICY_REPLAY_SCORER_CHANGES: false`,
 and `PROTECTED_ACCESS: false`. The synthetic course is complete and supplies no
 residual supported parser target.
 
+## T3R7 Vertex Sydney synthetic pilot
+
+Yuri authorized an exact current-model exception for 24 Silver v2 cases run
+twice through Vertex `gemini-2.5-flash` at `australia-southeast1`, bounded to
+48 calls, six starts per minute, one attempt, no tools, no raw prompt/response
+persistence, and a USD 1 application hard stop. Calls 1-10 normalized
+successfully and were safe. Call 11 returned no schema-valid normalized JSON,
+so the runner consumed it, did not retry, stopped, and never sent calls 12-48.
+
+The ten successes were 58/60 across the six scored dimensions, with one
+clarification and one tool-selection miss. No repeat pair completed, so
+variance is not interpretable. The recorded USD 0.0274258 estimate covers only
+the ten observations with usage; the failed call has no retained usage and the
+figure is not an authoritative billed total. Raw response non-persistence
+prevents a more specific post-hoc diagnosis. No unused-call authority carries
+forward.
+
 ## Next safe sequence
 
 1. Keep holdouts v1-v10 sealed; use only accepted aggregate evidence and
@@ -339,9 +356,9 @@ residual supported parser target.
 7. Preserve the accepted provider-free T3R1 projection of all 192 v2 dialogues;
    its 384/384 expected-decision echo proves plumbing only and establishes no
    model quality.
-8. Keep the live T3 gate blocked and pause for Yuri before any synthetic-only
-   provider comparison. T3.5/providers plus every product/write surface remain
-   deferred.
+8. Keep the live T3 gate blocked. T3R7 is consumed and closed; pause for Yuri
+   before any separately frozen provider continuation. T3.5 plus every
+   product/write surface remains deferred.
 
 ## Primary evidence
 
@@ -403,9 +420,12 @@ residual supported parser target.
 - `docs/bernie-t3r1-synthetic-shadow-refresh.md`
 - `docs/bernie-t3r1-synthetic-shadow-baseline.json`
 - `orchestration/agent_inbox/codex/t3r1-synthetic-shadow-refresh-sol-acceptance.md`
+- `docs/bernie-t3r7-vertex-sydney-live-report.json`
+- `docs/bernie-t3r7-vertex-sydney-live-closeout.md`
+- `orchestration/agent_inbox/codex/t3r7-vertex-sydney-live-sol-acceptance.md`
 
 Protected holdouts v1-v10 are sealed. LC4V10 validly passed its sole attempt
 at 576/576 complete with empty evidence and product failure maps. Do not
 enumerate protected paths, inspect content, rerun, regenerate, hash-check,
-infer labels, or tune against them. T3R1 remains provider-free and the live T3
-gate remains blocked; T3.5 is deferred.
+infer labels, or tune against them. T3R1 remains provider-free, T3R7 is
+consumed and closed, and the live T3 gate remains blocked; T3.5 is deferred.
