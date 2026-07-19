@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "strategic_planning",
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "extra_high_conversational_diary_north_star_preplan_audit",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree"
+      ]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No separable implementation artifact justifies worker dispatch."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Unselected fallback."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No provider-backed worker or prompt is used."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["The user requested Sol Extra High strategic synthesis rather than an external veto."]},
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The product direction is to displace grid/form interaction burden, not backend Diary authority: Bernie is the conversational twin of the living Diary while PostgreSQL remains truth.",
+        "Stage 3 must validate grid-free conversational work and the answer/proposal/confirmed mental model before provider or ambient voice work.",
+        "Repository auto-merge is currently disabled even though strict required checks, required conversation resolution, enforced admins, linear history, and no force/delete protection are active.",
+        "Ruff is absent from the local .venv, requirements, pyproject configuration, and GitHub workflows; there is no requirements-dev.txt, pre-commit config, or uv lock.",
+        "Stage 2's Sol Extra High single-thread ownership was deliberate under the worker-lane economy rule because migration, mutable PostgreSQL lifecycle, runtime wiring, recovery, acceptance, and protected integration were tightly coupled.",
+        "No repository setting, dependency, Stage 3 participant, voice, provider, PII, production, deployment, release, or mutation authority changes are made by this strategic tranche."
+      ]
+    },
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent assigned."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

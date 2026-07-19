@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "strategic_planning",
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "extra_high_conversational_diary_north_star_five_source_rehydration",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree"
+      ]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No implementation worker is needed for this bounded strategic tranche."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Unselected fallback."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No provider-backed worker or prompt is used."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No external reviewer is needed to draft the user-authorized product north star."]},
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "AGENTS.md, the current Stage 2 acceptance/closeout/plan/threat delta, the strategic transition review, the API Spine ADR/programme, Access AI design, Bernie release gates, artifact tests, and implementation plan were inspected.",
+        "Stage 2 remains final stage2_pass and all five protected refs were clean and aligned at ea5299cc7ecdd8abf764f12a42f17f91b13f17b1 before this documentation-only branch.",
+        "The user authorized a concise product north star, a reshaped Stage 3 decision, a deeper post-Stage-3 direction, and an assessment of auto-merge, Ruff, and Sol-only tranche execution.",
+        "Stage 3 execution, participants, voice capture, provider calls, PII, production, deployment, release, new mutations, protected evidence, historical material, and repository/dependency policy changes remain closed unless separately authorized.",
+        "The mixed API Spine remains binding: GraphQL/read frames answer questions; explicit REST commands own auditable actions; PostgreSQL owns Diary truth; Bernie remains proposal-only for writes."
+      ]
+    },
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent assigned; this product/authority decision remains Sol Extra High work."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
