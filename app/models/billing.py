@@ -1,10 +1,9 @@
 import uuid
 import enum
 from sqlalchemy import (
-    Column, String, Boolean, DateTime, Text, Enum, ForeignKey, Numeric, Index,
+    Column, String, DateTime, Text, Enum, ForeignKey, Numeric, Index,
 )
 from sqlalchemy.dialects.postgresql import UUID, JSONB
-from sqlalchemy.sql import func
 from app.models.base import Base
 
 

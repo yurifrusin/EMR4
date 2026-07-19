@@ -40,6 +40,12 @@ def build_receipt(*, runtime_state_path: Path, settings_dir: Path = SETTINGS_DIR
     )
 
 
+def write_json_lf(path: Path, payload: dict[str, Any]) -> None:
+    """Write canonical UTF-8 JSON with LF bytes on every platform."""
+    rendered = json.dumps(payload, indent=2, sort_keys=True)
+    path.write_bytes((rendered + "\n").encode("utf-8"))
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Build an advisory generic Ariadne orchestrator receipt.")
     parser.add_argument("--runtime-state", type=Path, required=True)
@@ -51,11 +57,10 @@ def main() -> int:
     except (OSError, ValueError, json.JSONDecodeError, yaml.YAMLError) as error:
         print(f"ariadne orchestrator preflight failed: {error}", file=sys.stderr)
         return 2
-    rendered = json.dumps(receipt, indent=2, sort_keys=True)
     if args.output:
-        args.output.write_text(rendered + "\n", encoding="utf-8")
+        write_json_lf(args.output, receipt)
     else:
-        print(rendered)
+        print(json.dumps(receipt, indent=2, sort_keys=True))
     return 0 if receipt["status"] == "passed" else 2
 
 

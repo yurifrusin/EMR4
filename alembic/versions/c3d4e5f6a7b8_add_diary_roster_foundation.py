@@ -24,7 +24,7 @@ def upgrade() -> None:
                   sa.ForeignKey("practices.id"), nullable=False),
         sa.Column("name", sa.String(100), nullable=False),
         sa.Column("display_order", sa.Integer, nullable=False),
-        sa.Column("is_active", sa.Boolean, nullable=False, server_default="true"),
+        sa.Column("is_active", sa.Boolean, nullable=True, server_default="true"),
     )
     op.create_index("ix_rooms_practice_id", "rooms", ["practice_id"])
     op.create_unique_constraint("uq_rooms_practice_order", "rooms",

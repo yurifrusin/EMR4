@@ -33,7 +33,7 @@ def upgrade() -> None:
         ),
         sa.Column("name", sa.String(100), nullable=False),
         sa.Column("display_order", sa.Integer(), nullable=False, server_default="0"),
-        sa.Column("is_active", sa.Boolean(), nullable=False, server_default="true"),
+        sa.Column("is_active", sa.Boolean(), nullable=True, server_default="true"),
     )
     op.create_index("ix_waiting_areas_practice_id", "waiting_areas", ["practice_id"])
 
@@ -56,11 +56,9 @@ def upgrade() -> None:
             nullable=True,
         ),
     )
-    op.create_index("ix_appointments_waiting_area_id", "appointments", ["waiting_area_id"])
 
 
 def downgrade() -> None:
-    op.drop_index("ix_appointments_waiting_area_id", table_name="appointments")
     op.drop_column("appointments", "waiting_area_id")
     op.drop_column("rooms", "default_waiting_area_id")
     op.drop_index("ix_waiting_areas_practice_id", table_name="waiting_areas")

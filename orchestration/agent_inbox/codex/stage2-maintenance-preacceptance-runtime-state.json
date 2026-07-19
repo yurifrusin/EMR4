@@ -1,0 +1,71 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "integration",
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "extra_high_stage2_technical_maintenance_preacceptance",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree"
+      ]
+    }]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Sol retained the tightly coupled CI, migration, receipt, verification, and GitHub-policy maintenance tranche under the worker-lane economy rule."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No provider-backed worker or prompt was used."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No provider-backed independent veto was used for the bounded maintenance tranche."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri explicitly approved the non-production Stage 2 technical recommendations.",
+        "Opt-in GitHub auto-merge is enabled and the exact master protection configuration is unchanged.",
+        "Pinned Ruff, canonical verification, LF receipts, timeout semantics, and the historical empty-database migration repair pass their bounded gates.",
+        "The preserved development database remains at Alembic head with no model drift and was not downgraded; the disposable empty database passed up/check/down-empty/re-up/check and was removed.",
+        "A broad exploratory Ruff source-structure incident was contained, not used as evidence, and the committed path is protected-safe and exact.",
+        "Production role/GUC/encryption, protected evidence, provider, PII, production, deployment, release, Stage 3, event runtime, and new mutation authority remain closed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent assigned."]
+    }
+  ],
+  "worker_slots": [{
+    "resource_id": "deepseek-flash-workers",
+    "active_instance_ids": [],
+    "stale_instance_ids": []
+  }],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

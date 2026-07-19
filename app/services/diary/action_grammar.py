@@ -42,7 +42,6 @@ from enum import Enum
 from typing import Optional
 
 from app.services.diary.capabilities import (
-    BERNIE_CAPABILITY_REGISTRY,
     BernieCapabilityTier,
     get_bernie_capability,
 )
