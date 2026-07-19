@@ -110,3 +110,6 @@ the live baton, current allocation, active plan/acceptance, protected evidence,
 and Git/worktree sources. Their SHA-256 values are respectively
 `9b589c638bcabe034603df62972da9ea015b17a2e650453510b62d7727a95be8`
 and `451d12450f222ab5d497054c6da80c171e30975d4afca285ca8ad2bf812721da`.
+The closeout commit is `3c35de865f5af3a3b7b0fa03fae3e3cc56dd8f18`;
+its pre-push receipt passes with SHA-256
+`e7f080008230b47a12ed08bcd4cae692bedd13d6f6502e177576a783823bed75`.
