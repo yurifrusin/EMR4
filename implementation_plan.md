@@ -22,6 +22,15 @@ availability, conflicts, confirmation, writes, audit, and receipts. The visual
 Diary remains an optional spatial overview, verification, exception-handling,
 and fallback surface.
 
+The controlling interaction design is
+[`docs/bernie-intent-projected-event-aware-diary-design.md`](docs/bernie-intent-projected-event-aware-diary-design.md).
+The fixed grid becomes an intent-projected meta-grid that can refigure around a
+patient, practitioner, date, time, location, availability question, or committed
+change. From the outset, Bernie also reserves a carefully filtered nervous
+system connected only to committed typed Diary events. Events trigger a fresh
+authorised read and may update a projection or offer a proposal; they never
+grant write authority or bypass staff confirmation.
+
 ### 1.1 Business & Licensing Model
 
 | Aspect | Decision |
@@ -635,6 +644,8 @@ flowchart TD
 | Item | Details |
 |:---|:---|
 | Reception chat panel | Text-first copilot surface inside the diary; voice can be added later after text workflows are safe |
+| Intent-projected Diary | “Open/show/focus/compare” requests produce precise, reversible patient-, practitioner-, date-, time-, location-, and availability-centred views instead of requiring manual grid navigation |
+| Committed-event awareness | Low-interruption, role-scoped notices and view reconciliation consume only committed typed events, re-read current authorised state, deduplicate delivery, and never act as commands |
 | Slot finding | "Find an appropriate time next week for this patient" using practitioner, room, appointment type, duration, breaks, waiting list, and patient constraints |
 | Action proposals | Bernie proposes booking/status/message actions; receptionist confirms before mutation |
 | Controlled tools | Backend tool endpoints for patient search, slot search, booking create/edit, provisional patient linking, waiting-room status, and message taking |
@@ -645,8 +656,9 @@ flowchart TD
 
 Bernie's ordinary booking input should be a staff instruction, not internal IDs.
 The API should treat selected diary appointments, Caller ID, visible diary state,
-current location, and future phone-system metadata as optional **context frames**:
-helpful evidence, never mandatory gates. A receptionist should be able to type
+current location, committed typed Diary events, and future phone-system metadata
+as optional **context frames**: helpful evidence, never mandatory gates or
+command authority. A receptionist should be able to type
 "Make an appointment for Billy Frusin with Dr Shera at 4:30 this arvo" or
 "Make an appointment for Billy Frusin with Nurse Chen earliest time after 2 but
 before 3.30" without first selecting an existing booking slot.
@@ -659,6 +671,12 @@ Context frames should be merged into a typed proposal envelope:
 - resolve relative date/time language against the active diary date and practice
   timezone
 - return candidate booking slots that staff can click
+- construct a visibly scoped, reversible Diary projection for the requested
+  patient, practitioner, date, time, location, availability, or comparison
+  context
+- treat a committed event as a signal for a current authorised read, suppress
+  unrelated/uncommitted/duplicate events, and explain why a surfaced change is
+  relevant
 - on click, navigate the diary to the proposed date/time/practitioner column and
   stage an enlarged highlighted provisional booking card
 - show patient identity evidence, DOB, Medicare/DVA/IHI/MRN/address/caller-ID
@@ -691,6 +709,15 @@ export mapping canonical.
   waiting-area semantics.
 - Start with a non-autonomous "suggest and confirm" mode. Bernie may retrieve and
   propose; human staff confirm writes.
+- Preserve the committed-event seam from the outset, but open no event producer,
+  outbox, broker, background consumer, subscription, notification, or proactive
+  UI runtime without a dedicated reviewed tranche. Publication must follow
+  commit; consumption must recheck tenancy/role and perform a fresh scoped read;
+  user-visible effects must deduplicate replay.
+- Treat the full fluid UX meta-grid as a dedicated visual-design tranche. Yuri's
+  current preference is a future focused Claude Fable engagement after an
+  explicit subscription, cost, synthetic-context, and transmission decision;
+  no provider work is authorized by this plan entry.
 - Use the formal command/proposal pattern for new mutating workflows: intent,
   typed command, warnings, blocks, confirmation requirement, result report, and
   audit context. Existing direct UI mutations should be retrofitted in risk

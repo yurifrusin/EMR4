@@ -8,6 +8,13 @@ Purpose: preserve product insights in a durable, easy-to-rehydrate form before
 they are promoted into an acceptance plan, architecture decision, or
 implementation tranche.
 
+Promotion record: Yuri completed review of Entries 001-002 on 2026-07-19. They
+are integrated, together with Entry 003, into
+`docs/bernie-intent-projected-event-aware-diary-design.md`, the product north
+star, the reshaped Stage 3 decision, and the implementation blueprint. The
+entries remain here as provenance and do not independently grant runtime
+authority.
+
 ## Notepad convention
 
 - Give every entry a stable sequential identifier and date.
@@ -25,7 +32,7 @@ Date: 2026-07-19
 Source: Yuri, developed in conversation from Experience Principle 1 of the
 conversational Diary north star
 
-State: `captured_product_direction_stage3_not_authorized`
+State: `integrated_into_canonical_product_design_stage3_not_authorized`
 
 ### Originating insight
 
@@ -136,7 +143,7 @@ Date: 2026-07-19
 
 Source: Yuri
 
-State: `captured_and_deferred_pending_explicit_claude_fable_decision`
+State: `integrated_deferred_programme_dependency_pending_explicit_claude_fable_decision`
 
 ### Originating insight
 
@@ -212,3 +219,54 @@ authorize the work.
 - the relationship between the design tranche and Stage 3 participant work;
   and
 - the exact implementation and release gates after design acceptance.
+
+## Entry 003 — The committed-event nervous system is foundational
+
+Date: 2026-07-19
+
+Source: Yuri
+
+State: `integrated_foundational_product_design_runtime_not_authorized`
+
+### Originating insight
+
+Low-interruption event awareness is invaluable and should be part of Bernie's
+Diary-twin design from the outset, rather than a conditional feature considered
+only if Stage 3 later rediscovers its value.
+
+The defining metaphor is a **carefully filtered nervous system connected to
+committed Diary changes**. The system can notice authoritative change and bring
+it into the user's current conversation or intent-projected view without
+requiring a manual grid scan.
+
+### Accepted boundary
+
+- Only committed, typed, versioned, practice-scoped events may enter the
+  awareness path.
+- Failed, provisional, uncommitted, and rolled-back state produces no
+  committed-change notice.
+- An event signals that current state should be read; it is not a portable
+  Diary record, remembered truth, or command grant.
+- Before display, the consumer rechecks current role/practice/resource
+  authority and fetches the current scoped read model.
+- Delivery is deduplicated, relevance-filtered, explainable, dismissible,
+  snoozable, and quiet by default.
+- A notice may update or offer a visual projection or lead to a proposal. It
+  may never perform an appointment mutation.
+- Event awareness is not ambient audio and does not authorize automatic spoken
+  PHI.
+
+### Promotion
+
+This decision is integrated into:
+
+- `docs/bernie-conversational-diary-north-star.md`;
+- `docs/bernie-intent-projected-event-aware-diary-design.md`;
+- `docs/bernie-stage3-conversational-diary-decision.md`;
+- the appointment-first API Spine event/capability prototypes; and
+- `implementation_plan.md` and the live handover.
+
+Stage 3 should test safe attention patterns and implementation priority, not
+ask whether the foundational product property is valuable. Runtime event
+production, delivery, consumption, notification, and UI authority remain a
+separate future tranche.

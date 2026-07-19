@@ -1,0 +1,71 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "strategic_planning",
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "extra_high_proactive_event_awareness_design_rehydration",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree"
+      ]
+    }]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No separable implementation artifact justifies worker dispatch for this tightly coupled product/API design decision."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No provider-backed worker, subscription, prompt, or content transmission is used."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No independent external veto is required to record Yuri's explicit product-direction decision."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri explicitly decided that low-interruption committed-event awareness is invaluable and must be foundational to Bernie's Diary-twin design from the outset.",
+        "The accepted boundary is a carefully filtered nervous system driven only by committed, typed, practice-scoped events; it is not ambient listening, model memory, uncommitted state, or autonomous action.",
+        "Stage 3 execution remains unauthorized; this tranche may revise product and evidence design only.",
+        "GraphQL remains read-only, state-changing work remains explicit REST/OpenAPI commands, and async events may observe committed change but never bypass commands.",
+        "Protected holdouts v1-v10 remain sealed and provider, PII, production, deployment, release, new mutation, GraphQL mutation, and autonomous-confirmation gates remain closed.",
+        "Before branching, master, handoff/current, origin/master, and origin/handoff/current were clean and aligned at f7ac809d455b69db34de30a5f3bb9af7174020d1."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent assigned."]
+    }
+  ],
+  "worker_slots": [{
+    "resource_id": "deepseek-flash-workers",
+    "active_instance_ids": [],
+    "stale_instance_ids": []
+  }],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,70 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit",
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "accepted_intent_projected_event_aware_design_commit",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree"
+      ]
+    }]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No worker owns acceptance, commit, or integration."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Fable remains deferred with no subscription, call, prompt, or transmission."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external reviewer has commit or integration authority."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The canonical design promotes all reviewed notepad entries and makes committed-event awareness foundational while runtime remains blocked.",
+        "The exact changed tracked paths are confined to the handover, north-star/Stage 3/implementation documents, two non-runtime API Spine prototypes, and their deterministic artifact test.",
+        "The focused handover/API Spine population passes 41 tests, Python compilation and whitespace validation pass, and AGENTS.md remains below 500 lines.",
+        "No protected, historical, provider, participant, voice, PII, production, deployment, release, event-runtime, GraphQL-mutation, or new-action authority moved.",
+        "The branch is based on clean aligned protected head f7ac809d455b69db34de30a5f3bb9af7174020d1."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent assigned."]
+    }
+  ],
+  "worker_slots": [{
+    "resource_id": "deepseek-flash-workers",
+    "active_instance_ids": [],
+    "stale_instance_ids": []
+  }],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

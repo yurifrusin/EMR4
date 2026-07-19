@@ -9,6 +9,10 @@ import pytest
 
 SPINE_DIR = Path("docs/api-spine")
 PERMISSION_MATRIX = SPINE_DIR / "security" / "permission-matrix.yaml"
+INTEGRATION_EVENTS = SPINE_DIR / "async" / "integration-events.yaml"
+AGENT_CAPABILITY_CHARTERS = (
+    SPINE_DIR / "manifests" / "agent-capability-charters.yaml"
+)
 
 
 def _files_under(subdir, *suffixes):
@@ -324,6 +328,106 @@ class TestSecurityArtifacts:
             pytest.skip("No security files.")
         for f in files:
             _check_no_forbidden(f, lang="yaml")
+
+
+class TestBernieCommittedEventAwarenessDesign:
+
+    @staticmethod
+    def _diary_family():
+        data = _load_yaml_file(INTEGRATION_EVENTS)
+        families = [
+            family
+            for family in data["event_families"]
+            if family["family_id"] == "diary"
+        ]
+        assert len(families) == 1
+        return data, families[0]
+
+    @staticmethod
+    def _bernie_charter():
+        data = _load_yaml_file(AGENT_CAPABILITY_CHARTERS)
+        agents = [
+            agent for agent in data["agents"] if agent["agent_id"] == "bernie"
+        ]
+        assert len(agents) == 1
+        return data, agents[0]
+
+    def test_proactive_diary_runtime_remains_blocked(self):
+        events, _ = self._diary_family()
+        charters, bernie = self._bernie_charter()
+
+        assert events["source_safety"]["proactive_diary_delivery_runtime"] == "blocked"
+        assert events["blocked_gates"]["proactive_diary_delivery_runtime"] == "blocked"
+        assert charters["source_safety"]["proactive_diary_delivery_runtime"] == "blocked"
+        assert bernie["blocked_gates"]["proactive_diary_delivery_runtime"] == "blocked"
+
+    def test_diary_events_are_committed_typed_signals_not_commands(self):
+        _, diary = self._diary_family()
+        delivery = diary["delivery_semantics"]
+        commands = diary["command_boundary"]
+
+        assert delivery["publish_after_commit_only"] is True
+        assert delivery["transactional_outbox_or_equivalent_required"] is True
+        assert delivery["stable_event_identity_required"] is True
+        assert delivery["aggregate_revision_required"] is True
+        assert delivery["user_visible_deduplication_required"] is True
+        assert delivery["fresh_scoped_read_before_display"] is True
+        assert commands["event_is_command_authority"] is False
+        assert commands["appointment_mutation_requires_rest_command"] is True
+        assert commands["staff_confirmation_required_for_mutation"] is True
+
+    def test_diary_event_attention_contract_is_low_interruption(self):
+        _, diary = self._diary_family()
+        attention = diary["attention_boundary"]
+
+        assert attention["low_interruption_filter_required"] is True
+        assert attention["practice_role_resource_recheck_required"] is True
+        assert attention["unrelated_event_suppression_required"] is True
+        assert attention["explain_why_required"] is True
+        assert attention["automatic_spoken_phi"] is False
+        assert {
+            "dismiss",
+            "snooze",
+            "mute_event_family",
+            "show_context",
+        } <= set(attention["user_controls"])
+
+    def test_diary_event_payload_excludes_free_text_and_direct_identifiers(self):
+        _, diary = self._diary_family()
+
+        assert {
+            "patient_name",
+            "phone_number",
+            "date_of_birth",
+            "medicare_number",
+            "appointment_reason_text",
+            "appointment_note",
+            "raw_instruction",
+            "free_text_transcript",
+            "provider_output",
+            "credential",
+        } <= set(diary["prohibited_payload_fields"])
+
+    def test_bernie_event_frame_requires_fresh_read_and_never_grants_action(self):
+        _, bernie = self._bernie_charter()
+        event_frames = [
+            frame
+            for frame in bernie["allowed_context_frames"]
+            if frame["frame"] == "committed_diary_event_context"
+        ]
+
+        assert len(event_frames) == 1
+        assert event_frames[0]["committed_only"] is True
+        assert event_frames[0]["fresh_scoped_read_before_display"] is True
+        assert "surface_low_interruption_committed_diary_change" in bernie["may"]
+        assert "treat_event_as_command_authority" in bernie["must_not"]
+        assert (
+            "use_event_payload_as_substitute_for_fresh_authorized_read"
+            in bernie["must_not"]
+        )
+
+
+class TestSecurityPermissionArtifacts:
 
     def test_permission_matrix_enterprise_auth_boundary_is_static_only(self):
         data = _load_yaml_file(PERMISSION_MATRIX)
