@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bernie Stage 3A — Yuri formative study</title>
+  <link rel="stylesheet" href="./stage3a.css" />
+</head>
+<body>
+  <a class="skip-link" href="#study-workspace">Skip to study workspace</a>
+
+  <header class="study-header">
+    <div>
+      <p class="eyebrow">Bernie Stage 3A · Yuri-only formative study</p>
+      <h1>The Diary, projected around the task</h1>
+      <p class="study-subtitle">
+        Typed, local and provider-disabled. All people and appointments are authored synthetic fixtures.
+      </p>
+    </div>
+    <div class="authority-banner" role="status" aria-label="Study authority boundary">
+      <strong>Nothing on this page writes to the Diary.</strong>
+      <span>Evidence: authored_synthetic_fixture_browser</span>
+    </div>
+  </header>
+
+  <main id="study-workspace" class="study-layout">
+    <aside class="study-sidebar" aria-labelledby="study-run-title">
+      <section class="panel compact-panel">
+        <h2 id="study-run-title">Study run</h2>
+        <label for="counterbalance">Counterbalance</label>
+        <select id="counterbalance">
+          <option value="A">A · alternating conversation first</option>
+          <option value="B">B · alternating grid first</option>
+        </select>
+        <p class="help-text">Paired tasks alternate their first route to reduce learning-order bias.</p>
+      </section>
+
+      <section class="panel scenario-panel" aria-labelledby="scenario-title">
+        <div class="panel-heading-row">
+          <h2 id="scenario-title">Scenarios</h2>
+          <span id="scenario-progress" class="quiet-label">0 / 14</span>
+        </div>
+        <ol id="scenario-list" class="scenario-list"></ol>
+      </section>
+    </aside>
+
+    <section class="study-main">
+      <section class="panel task-panel" aria-labelledby="active-task-title">
+        <div class="panel-heading-row">
+          <div>
+            <p id="active-task-id" class="eyebrow">Choose a scenario</p>
+            <h2 id="active-task-title">The active task will appear here</h2>
+          </div>
+          <span id="route-order" class="route-order">No route assigned</span>
+        </div>
+        <p id="active-task-goal" class="task-goal">
+          Select any scenario from the left. The study records structured outcomes, never your typed words.
+        </p>
+        <div class="route-tabs" role="tablist" aria-label="Study route">
+          <button id="route-conversation" class="route-tab is-active" role="tab" aria-selected="true" data-route="conversation">Conversation</button>
+          <button id="route-grid" class="route-tab" role="tab" aria-selected="false" data-route="grid">Ordinary grid</button>
+          <button id="route-attention" class="route-tab" role="tab" aria-selected="false" data-route="attention">Event attention lab</button>
+        </div>
+      </section>
+
+      <section id="conversation-route" class="panel route-panel" aria-labelledby="conversation-title">
+        <div class="panel-heading-row">
+          <div>
+            <p class="eyebrow">Deterministic functional route</p>
+            <h2 id="conversation-title">Ask Bernie</h2>
+          </div>
+          <span class="quiet-label">Not language-model evidence</span>
+        </div>
+        <form id="conversation-form" class="conversation-form">
+          <label for="conversation-input">Typed request</label>
+          <div class="input-row">
+            <input id="conversation-input" type="text" autocomplete="off" placeholder="For example: Show me all of Margaret Thompson's upcoming appointments" />
+            <button type="submit" class="primary-button">Ask</button>
+          </div>
+          <p id="prompt-hint" class="help-text">Start a scenario to see its suggested synthetic request.</p>
+        </form>
+        <div id="answer-region" class="answer-region" aria-live="polite">
+          <div class="empty-state">
+            <strong>No answer yet</strong>
+            <span>Bernie will label an answer, clarification, proposal, or block explicitly.</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="grid-route" class="panel route-panel hidden" aria-labelledby="grid-title">
+        <div class="panel-heading-row">
+          <div>
+            <p class="eyebrow">Comparison route</p>
+            <h2 id="grid-title">Ordinary Diary grid</h2>
+          </div>
+          <label class="inline-label" for="grid-date">Date
+            <select id="grid-date"></select>
+          </label>
+        </div>
+        <p class="help-text">Use the date control, columns and appointment cells as the comparison modality.</p>
+        <div id="ordinary-grid" class="ordinary-grid" aria-label="Synthetic ordinary Diary grid"></div>
+        <div id="grid-detail" class="grid-detail" aria-live="polite">Select an appointment cell to inspect it.</div>
+      </section>
+
+      <section id="attention-route" class="panel route-panel hidden" aria-labelledby="attention-title">
+        <div class="panel-heading-row">
+          <div>
+            <p class="eyebrow">Deterministic typed fixtures</p>
+            <h2 id="attention-title">Committed-event attention lab</h2>
+          </div>
+          <button id="reset-attention" class="secondary-button" type="button">Reset delivery state</button>
+        </div>
+        <p class="help-text">
+          Fixtures test filtering semantics only. There is no outbox, broker, subscription, background consumer or live event.
+        </p>
+        <div id="attention-fixtures" class="attention-fixtures"></div>
+        <div class="attention-output-grid">
+          <section aria-labelledby="visible-notices-title">
+            <h3 id="visible-notices-title">User-visible notices</h3>
+            <div id="visible-notices" class="notice-list" aria-live="polite">
+              <p class="empty-copy">No notice has been surfaced.</p>
+            </div>
+          </section>
+          <section aria-labelledby="filter-results-title">
+            <h3 id="filter-results-title">Facilitator filter readback</h3>
+            <div id="filter-results" class="filter-results">
+              <p class="empty-copy">Run a fixture to inspect its deterministic decision.</p>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="panel projection-panel" aria-labelledby="projection-title">
+        <div class="panel-heading-row">
+          <div>
+            <p class="eyebrow">Intent-projected Diary</p>
+            <h2 id="projection-title">Just-in-time view</h2>
+          </div>
+          <div class="projection-actions">
+            <button id="projection-back" class="secondary-button" type="button" disabled>Return to previous view</button>
+            <button id="projection-reset" class="secondary-button" type="button">Return to overview</button>
+          </div>
+        </div>
+        <div id="projection-scope" class="projection-scope">Scope: synthetic practice overview</div>
+        <div id="projection-content" class="projection-content">
+          <div class="empty-state">
+            <strong>Overview retained</strong>
+            <span>A supported request or relevant event can refigure this area without changing Diary truth.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel observation-panel" aria-labelledby="observation-title">
+        <div class="panel-heading-row">
+          <div>
+            <p class="eyebrow">Structured outcomes only</p>
+            <h2 id="observation-title">Facilitator observation</h2>
+          </div>
+          <span id="observation-count" class="quiet-label">0 records</span>
+        </div>
+        <div class="observation-controls">
+          <label>Task outcome
+            <select id="task-outcome">
+              <option value="not_recorded">Not recorded</option>
+              <option value="completed">Completed</option>
+              <option value="completed_with_clarification">Completed with clarification</option>
+              <option value="grid_fallback">Grid fallback</option>
+              <option value="blocked_safely">Blocked safely</option>
+              <option value="failed">Failed</option>
+            </select>
+          </label>
+          <label>State understood
+            <select id="state-comprehension">
+              <option value="not_recorded">Not recorded</option>
+              <option value="answer">Answer</option>
+              <option value="proposal">Proposal</option>
+              <option value="committed_action">Committed action</option>
+              <option value="uncertain">Uncertain</option>
+            </select>
+          </label>
+          <label>Projection usefulness
+            <select id="projection-rating">
+              <option value="not_recorded">Not recorded</option>
+              <option value="useful">Useful</option>
+              <option value="neutral">Neutral</option>
+              <option value="not_useful">Not useful</option>
+            </select>
+          </label>
+          <button id="record-observation" class="primary-button" type="button">Record structured outcome</button>
+        </div>
+        <div class="export-row">
+          <button id="download-observations" class="secondary-button" type="button">Download structured observations</button>
+          <button id="reset-study" class="danger-quiet-button" type="button">Clear in-memory study</button>
+          <p class="help-text">No local storage, cookies, telemetry, prompt text or transcript export.</p>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="./stage3a-data.js"></script>
+  <script src="./stage3a-core.js"></script>
+  <script src="./stage3a.js"></script>
+</body>
+</html>

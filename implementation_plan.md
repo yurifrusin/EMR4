@@ -100,8 +100,12 @@ safe actions for human confirmation.
 The longer-term interaction goal is not to polish the grid into the primary
 interface indefinitely. It is to let reception staff ask and complete supported
 Diary work conversationally, with the grid available when spatial review is
-useful. The north-star document and the separately authorized Stage 3 workflow
-decision govern that progression.
+useful. The north-star document and the Stage 3 workflow decision govern that
+progression. Yuri authorized a typed, local, provider-disabled, Yuri-only
+formative Stage 3A on 2026-07-19 under
+[`docs/bernie-stage3a-yuri-formative-validation-plan.md`](docs/bernie-stage3a-yuri-formative-validation-plan.md).
+Stage 3B representative-staff evidence remains a later decision after the
+dedicated fluid UX design tranche.
 
 Bernie is deliberately not the first patient-facing autonomous agent. The first
 implementation should be an internal copilot that acts through controlled backend
@@ -709,6 +713,11 @@ export mapping canonical.
   waiting-area semantics.
 - Start with a non-autonomous "suggest and confirm" mode. Bernie may retrieve and
   propose; human staff confirm writes.
+- Use Stage 3A only for the approved Yuri-only typed/local/synthetic functional
+  study. Its deterministic fixture browser can test conversational state,
+  reversible projections, grid comparison, attention filtering, and structured
+  observations, but cannot claim provider, committed-event runtime, mutation,
+  or representative-staff evidence.
 - Preserve the committed-event seam from the outset, but open no event producer,
   outbox, broker, background consumer, subscription, notification, or proactive
   UI runtime without a dedicated reviewed tranche. Publication must follow
