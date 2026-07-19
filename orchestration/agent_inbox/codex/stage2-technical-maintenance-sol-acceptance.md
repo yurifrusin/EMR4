@@ -4,7 +4,7 @@ Date: 2026-07-19
 
 Owner/reviewer: GPT Sol Extra High
 
-Decision: `candidate_pass_pending_protected_integration`
+Decision: `technical_maintenance_pass`
 
 ## Accepted scope
 
@@ -56,10 +56,15 @@ evidence and not used to broaden protected authority.
 | `alembic/versions/d4787e8e3629_phase_0_baseline.py` | `51d731271ab46800762cae403a02dd09e7049a1b5e21c8c747cfdec449aac326` |
 | `tests/test_repository_maintenance.py` | `d3c1ab529cbf4022eebd8ab0b45444faf0fe174236dba938031c7927a948d023` |
 
-## Integration boundary
+## Protected integration
 
-This acceptance authorizes normal commit, push, protected PR, and opt-in squash
-auto-merge after exact scope review and a passed pre-push receipt. Required
-checks and conversation resolution remain mandatory; no admin bypass is
-authorized. Final `technical_maintenance_pass` requires protected integration
-and aligned `master`/`handoff/current` readback.
+The accepted candidate commits were `76b3de28` and the pre-push receipt carrier
+`8830fbef`. PR 43 passed all four required strict contexts plus the aggregate
+CodeQL result. The newly enabled opt-in squash auto-merge waited for those gates
+and integrated the exact branch head as
+`26e8d9ae4531645f86b7723ca4bc7a94a84aa3ee`.
+
+No admin bypass, force push, protected direct push, check dismissal, or
+conversation dismissal occurred. The documentation-only closeout carrier may
+now record this result and align `master`/`handoff/current`; it changes no
+technical or product acceptance meaning.
