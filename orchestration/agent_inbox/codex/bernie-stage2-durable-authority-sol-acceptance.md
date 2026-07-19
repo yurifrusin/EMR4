@@ -241,6 +241,11 @@ The review-fix pre-commit receipt passes at
 `orchestration/agent_inbox/codex/bernie-stage2-review-fix-precommit-receipt.json`,
 SHA-256
 `451d12450f222ab5d497054c6da80c171e30975d4afca285ca8ad2bf812721da`.
+The correction commit is
+`84bf27ba3a6ea6f13814cbdc9aed03820fcc0125`; its pre-push receipt passes at
+`orchestration/agent_inbox/codex/bernie-stage2-review-fix-prepush-receipt.json`,
+SHA-256
+`e7f080008230b47a12ed08bcd4cae692bedd13d6f6502e177576a783823bed75`.
 The correction changes no product behavior, acceptance meaning, or authority.
 
 ## Exact critical hashes
