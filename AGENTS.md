@@ -34,6 +34,12 @@ model allocation, provider transport, holdout rules, write authority, or user
 decision boundaries. `rehydrated_from_receipt: true` without the five named
 sources is insufficient and must return `revision_required`.
 
+Use a fresh chat context for each named tranche by default. The new context must
+repeat this full rehydration before acting; prior-chat memory never substitutes
+for the five sources. Durable decisions that must survive the handoff belong in
+this file and the active plan/evidence documents. The outgoing tranche must name
+its exact result, artifacts, unresolved gates, next tranche, and reasoning level.
+
 ## 3. Current Baton
 
 | Item | Current value |
@@ -46,10 +52,10 @@ sources is insufficient and must return `revision_required`.
 | Conductor/integrator | GPT Sol |
 | Implementation/test worker | DeepSeek V4 Flash/high through Claude Code `--bare` |
 | Independent worker/reviewer | Gemini 3.5 Flash through a fresh Antigravity project |
-| Active product track | Yuri accepted the strategic transition review, paused the provider lane without T3R7 retry, and froze the provider-free Stage 1 supervised-booking acceptance plan. Stage 1 must begin with read-only Tranche A readiness, then test the unchanged local synthetic Diary → FastAPI → isolated PostgreSQL path before any bounded correction is considered |
-| Active acceptance | `docs/bernie-stage1-provider-free-supervised-booking-acceptance-plan.md`, `orchestration/agent_inbox/codex/bernie-stage1-acceptance-plan-sol-review.md`, `docs/bernie-current-strategic-transition-review.md`, `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`, `docs/bernie-lc4v10-fresh-certification-closeout.md`, `orchestration/agent_inbox/codex/security-hardening-final-purple-acceptance.md`, `docs/security/secure-sdlc-red-blue-diary-hardening-closeout-2026-07-17.md`, `docs/bernie-post-certification-transition-review.md`, `orchestration/agent_inbox/codex/appointment-call-quarantine-pilot-sol-acceptance.md`, `docs/bernie-appointment-call-quarantine-pilot-closeout.md`, `docs/bernie-synthetic-silver-v2-anchor-contract.md`, `docs/bernie-synthetic-silver-v2-closeout.md`, `orchestration/agent_inbox/antigravity/synthetic-silver-v2-final-review.md`, `orchestration/agent_inbox/codex/synthetic-silver-v2-sol-acceptance.md`, `docs/bernie-t3r1-synthetic-shadow-refresh.md`, `docs/bernie-t3r1-synthetic-shadow-baseline.json`, `orchestration/agent_inbox/codex/t3r1-synthetic-shadow-refresh-sol-acceptance.md`, `docs/bernie-t3r2-synthetic-live-comparison-approval.json`, `docs/bernie-t3r3-three-lane-transport-preflight-closeout.md`, `docs/bernie-t3r4-pragmatic-live-comparison-approval.json`, `docs/bernie-t3r4-pragmatic-live-comparison-report.json`, `docs/bernie-t3r4-pragmatic-live-comparison-closeout.md`, `orchestration/agent_inbox/codex/t3r4-pragmatic-live-comparison-sol-acceptance.md`, `docs/bernie-t3r5-vertex-au-feasibility-and-entitlement-design.md`, `docs/bernie-t3r5-vertex-au-readiness-report.json`, `docs/bernie-t3r5-vertex-au-feasibility-closeout.md`, `orchestration/agent_inbox/codex/t3r5-vertex-au-feasibility-sol-acceptance.md`, `docs/bernie-t3r6-us-synthetic-development-policy.md`, `docs/bernie-t3r6-us-synthetic-development-report.json`, `docs/bernie-t3r6-us-synthetic-development-closeout.md`, `orchestration/agent_inbox/codex/t3r6-us-synthetic-development-sol-acceptance.md`, `docs/bernie-t3r7-vertex-sydney-live-report.json`, `docs/bernie-t3r7-vertex-sydney-live-closeout.md`, and `orchestration/agent_inbox/codex/t3r7-vertex-sydney-live-sol-acceptance.md` |
-| Current result | Strategic review accepted; provider experimentation paused. Stage 1 candidate SHA-256 `1cb02436b161167ac4b9f0fb9d33d33a9ee9657a7b9eb2a9205188d1917cbbf3` is frozen. LC4V10 fresh certification passed as a sealed `certification_pass`, complete and every dimension 576/576; Silver v2 remains complete; T3R7 remains the immutable 11/48 fail-closed result with no retry or continuing provider authority |
-| Next implementation | No V11 is needed or authorized. Run Stage 1 Tranche A read-only readiness and harness proof at Sol/high in a fresh context. If it passes, run unchanged-product Tranche B locally with synthetic data. Enter bounded Tranche C only for a permitted reproducible defect. No provider/cloud/protected/PII/production/new-corpus/migration/durable-session/deployment/release authority is authorized |
+| Active product track | Yuri accepted the strategic transition review and paused the provider lane without retry. Stage 1 Tranches A-C produced complete local synthetic Diary → FastAPI → isolated PostgreSQL evidence plus a bounded future-reference freshness correction. Tranche D resolved S7 through the full 139-case route-intercepted Diary population; bounded Extra High maintenance repaired the nine historical G10 harness failures; and fresh Extra High reacceptance passed every frozen gate. Stage 1 now returns `stage1_pass` for the local synthetic provider-free development claim only. Check-gated protected integration is the active closeout |
+| Active acceptance | `orchestration/agent_inbox/codex/bernie-stage1-tranche-d-extra-high-sol-acceptance.md`, `orchestration/agent_inbox/codex/bernie-stage1-regression-harness-maintenance-sol-acceptance.md`, `docs/bernie-stage1-regression-harness-maintenance-plan.md`, `orchestration/agent_inbox/codex/bernie-stage1-tranche-d-sol-acceptance.md`, `docs/bernie-stage1-provider-free-supervised-booking-acceptance-plan.md`, `orchestration/agent_inbox/codex/bernie-stage1-acceptance-plan-sol-review.md`, `docs/bernie-current-strategic-transition-review.md`, `orchestration/agent_inbox/codex/lc4v10-sol-acceptance.md`, `docs/bernie-lc4v10-fresh-certification-closeout.md`, `orchestration/agent_inbox/codex/security-hardening-final-purple-acceptance.md`, `docs/security/secure-sdlc-red-blue-diary-hardening-closeout-2026-07-17.md`, `docs/bernie-post-certification-transition-review.md`, `orchestration/agent_inbox/codex/appointment-call-quarantine-pilot-sol-acceptance.md`, `docs/bernie-appointment-call-quarantine-pilot-closeout.md`, `docs/bernie-synthetic-silver-v2-anchor-contract.md`, `docs/bernie-synthetic-silver-v2-closeout.md`, `orchestration/agent_inbox/antigravity/synthetic-silver-v2-final-review.md`, `orchestration/agent_inbox/codex/synthetic-silver-v2-sol-acceptance.md`, `docs/bernie-t3r1-synthetic-shadow-refresh.md`, `docs/bernie-t3r1-synthetic-shadow-baseline.json`, `orchestration/agent_inbox/codex/t3r1-synthetic-shadow-refresh-sol-acceptance.md`, `docs/bernie-t3r2-synthetic-live-comparison-approval.json`, `docs/bernie-t3r3-three-lane-transport-preflight-closeout.md`, `docs/bernie-t3r4-pragmatic-live-comparison-approval.json`, `docs/bernie-t3r4-pragmatic-live-comparison-report.json`, `docs/bernie-t3r4-pragmatic-live-comparison-closeout.md`, `orchestration/agent_inbox/codex/t3r4-pragmatic-live-comparison-sol-acceptance.md`, `docs/bernie-t3r5-vertex-au-feasibility-and-entitlement-design.md`, `docs/bernie-t3r5-vertex-au-readiness-report.json`, `docs/bernie-t3r5-vertex-au-feasibility-closeout.md`, `orchestration/agent_inbox/codex/t3r5-vertex-au-feasibility-sol-acceptance.md`, `docs/bernie-t3r6-us-synthetic-development-policy.md`, `docs/bernie-t3r6-us-synthetic-development-report.json`, `docs/bernie-t3r6-us-synthetic-development-closeout.md`, `orchestration/agent_inbox/codex/t3r6-us-synthetic-development-sol-acceptance.md`, `docs/bernie-t3r7-vertex-sydney-live-report.json`, `docs/bernie-t3r7-vertex-sydney-live-closeout.md`, and `orchestration/agent_inbox/codex/t3r7-vertex-sydney-live-sol-acceptance.md` |
+| Current result | Fresh Extra High Tranche D returns `stage1_pass`. The complete explicit regression batches pass 63/63, 63/63, and 81/81 with no failures or deselections; the 115-node protected-safe Diary allowlist expands to 139/139 route-intercepted cases; all fourteen R2 and three maintenance bindings reproduce; and database readback remains exactly one appointment, one linked audit, and one completed confirmed-write idempotency result targeting that appointment. The optional direct idempotency-to-audit link remains null and is reserved for separately unauthorized Stage 2 complete-correlation work. No provider, protected, historical, PII, production, deployment, release, migration, or Stage 2 surface opened |
+| Next implementation | Complete the normal check-gated protected integration, align `master` and `handoff/current`, and send the final non-PHI closeout notification. Then return to Yuri for any Stage 2 decision. Do not begin Stage 2; its durable session, migration, concurrency, structural security, retention, recovery, and complete command/audit-correlation authority remain a new Yuri decision |
 
 ### LC4V6, LC4V6D1, and LC4V7 state
 
@@ -265,6 +271,57 @@ Use workers only for bounded separable artifacts or genuine veto surfaces.
 Tiny, serial, protected, or tightly coupled work may remain Sol-owned. Record
 the actual worker mix and any substitution in closeout evidence.
 
+### Worker-lane economy rule
+
+Dispatch is an optimization, not a default. Sol keeps a task when its execution
+is serial, stateful, tightly coupled to a disposable runtime/database, or small
+enough that writing the worker packet plus monitoring, review, and recovery is
+likely to cost as much as direct completion. This includes short live-browser
+acceptance sequences whose scenarios share one mutable synthetic database.
+
+Use DeepSeek Flash through Claude Code `--bare` when a stable, separable packet
+can own a mechanical script, focused tests, fixture regeneration, or contained
+repair and can return one durable artifact without acceptance judgment. Use
+Gemini Flash primarily for a fresh independent veto or a genuinely separable
+peer check, not as a second conductor for routine execution. A dispatch should
+normally save at least one meaningful implementation/test cycle or supply
+independence required by acceptance; otherwise Sol executes locally. Never
+split a serial acceptance run merely to maximize worker utilization.
+
+Native subagents follow the same rule. Sol may use them for parallel read-only
+analysis, independent reproduction, or separable implementation/test artifacts
+when their packet is bounded and their expected leverage exceeds briefing,
+monitoring, review, and correction cost. They do not receive acceptance,
+integration, baton, or protected-ref authority.
+
+### Reasoning-level and closeout rule
+
+Reasoning level follows decision risk; it is not a ceremonial Git gate. Sol at
+High may plan and execute a frozen bounded tranche, review its own complete
+evidence, integrate, commit, push through the normal protected-branch workflow,
+advance the baton after acceptance, and send closeout notification. A second
+Sol Extra High pass is not required merely because the implementation or
+execution was performed at High.
+
+Pause and use Extra High before:
+
+- freezing or materially revising acceptance meaning, architecture, authority
+  allocation, product policy, or user-visible behaviour;
+- choosing among material privacy, protected-evidence, provider/cloud,
+  production, release, migration, durable-session, security, licence, cost, or
+  data-retention alternatives;
+- overriding a failed gate, reconciling contradictory or incomplete evidence,
+  accepting a conceptual recovery, or making a claim broader than the frozen
+  evidence directly supports; or
+- any point where the active plan or Yuri explicitly requires Extra High for a
+  named material decision.
+
+High remains sufficient for mechanical corrections already permitted by a
+frozen plan, focused tests, deterministic harness/Playwright work, evidence
+packaging, routine review, and check-gated Git closeout when no item above is
+triggered. A fresh tranche chat is a context-hygiene rule, not a requirement to
+change reasoning level or agent identity.
+
 ### Flash complexity and correction-loop rule
 
 DeepSeek Flash is the default for stable, bounded implementation contracts,
@@ -395,12 +452,44 @@ rejects the intentionally configured blocked-gate path in `app/config.py`.
 Treat it as a documented baseline until a separate maintenance sprint resolves
 the contract; do not misattribute it to LC work.
 
+### Browser automation and evidence
+
+Acceptance depends on the exercised path and interception boundary, not on
+whether the browser is driven interactively or by a script. A task-scoped
+Playwright script is equivalent to interactive browser control when it drives a
+real browser through the ordinary UI, makes real non-intercepted calls to the
+intended local or deployed backend, and records the required screenshots,
+sanitized outcomes, and backend/database readback. Prefer a Playwright script
+for repeatable multi-scenario acceptance when selectors and fixtures are stable;
+interactive browser control remains useful for exploration and visual diagnosis.
+
+The evidence label remains strict:
+
+- no API interception or mocked transport, real local UI/backend/database:
+  `live_local_browser_backend_postgres`;
+- direct real local HTTP/backend/database support without a browser:
+  `live_local_backend_postgres`;
+- `page.route(...)`, fixture responses, mocked APIs, or equivalent interception:
+  `route_intercepted_browser`.
+
+Do not call route-intercepted evidence live. Do not let a Playwright script
+bypass explicit staff confirmation, call internal page functions as a substitute
+for the visible UI action, or fabricate receipt/readback evidence. For protected-
+safe work, scripts must use the active exact-path and exact-node allowlist and
+must not introduce repository-wide discovery. Browser processes and PostgreSQL-
+loading pytest processes remain serial when they share mutable runtime state.
+
 ### Git and handoff
 
 - Sprint 156 status/delete confirm client header emission is the accepted historical closeout marker.
 - Preserve unrelated user changes in a dirty tree.
 - Workers commit only to disposable/task branches and do not push protected
   refs.
+- Sol High may commit and push its own accepted bounded work; Git authority does
+  not require an additional Extra High pass. An accurately labelled partial
+  result may be committed to a task branch/PR, but protected integration, baton
+  movement, and a final product-stage claim wait for the applicable acceptance
+  gates.
 - Sol reviews and integrates through a check-gated pull request, then advances
   `master` and `handoff/current`.
 - Fetch and verify origin immediately before push. Never force protected refs.

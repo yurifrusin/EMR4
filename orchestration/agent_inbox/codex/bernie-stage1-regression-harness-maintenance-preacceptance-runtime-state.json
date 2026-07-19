@@ -1,0 +1,76 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_stage1_regression_harness_maintenance_five_source_rehydration_and_exact_gate_results",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No worker dispatched for this tightly coupled historical-harness maintenance."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No independent veto was required because the final delta is mechanical tests-only maintenance under a frozen product contract."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The exact frozen nine-node failure population now passes 9/9 and all three owned historical harness files pass 16/16.",
+        "The complete explicit G10 batches pass 63/63, 63/63, and 81/81; a retained transient Space-key timeout passed in isolation and in both clean full reruns.",
+        "All 115 explicitly named Diary functions expanded to 139 route-intercepted cases and passed 139/139.",
+        "Fourteen R2 artifact bindings reproduce; Python compilation, Node syntax, high-severity Bandit, readiness, provider-boundary, and whitespace checks pass.",
+        "The preserved synthetic database remains one appointment, one appointment-linked audit, and one completed idempotency result targeting the same appointment."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent assigned; acceptance remains protected-integration owned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

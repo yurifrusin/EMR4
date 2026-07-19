@@ -1,0 +1,170 @@
+{
+  "schema_version": "bernie.stage1.tranche-a-readiness.v1",
+  "generated_at_utc": "2026-07-18T14:24:53Z",
+  "decision": "ready_for_bounded_run",
+  "source": {
+    "commit": "2d3fa717d612add9d1f871daf9e899751c5d210c",
+    "branch": "master",
+    "worktree": "C:\\Users\\sarashera\\emr4",
+    "expected_handoff_commit": "2d3fa717d612add9d1f871daf9e899751c5d210c",
+    "plan_sha256": "f4a149e0792cabf1beba3f0344e3379fdd3f897d1720bdc3b5abefbfdee5790c",
+    "named_stage1_artifacts_only": true
+  },
+  "rehydration": {
+    "receipt": "orchestration/agent_inbox/codex/bernie-stage1-tranche-a-rehydration-receipt.json",
+    "receipt_sha256": "583b46006f6341c9ef6f52a0e26df5646d36962ee2278a3683a3c77b3f6f0645",
+    "status": "passed",
+    "mandatory_sources": [
+      "live_handover_current_baton",
+      "current_authority_allocation",
+      "active_plan_and_acceptance",
+      "protected_evidence_boundaries",
+      "git_refs_and_worktree"
+    ],
+    "git_refs_aligned": true,
+    "refs": {
+      "HEAD": "2d3fa717d612add9d1f871daf9e899751c5d210c",
+      "master": "2d3fa717d612add9d1f871daf9e899751c5d210c",
+      "handoff/current": "2d3fa717d612add9d1f871daf9e899751c5d210c",
+      "origin/master": "2d3fa717d612add9d1f871daf9e899751c5d210c",
+      "origin/handoff/current": "2d3fa717d612add9d1f871daf9e899751c5d210c"
+    }
+  },
+  "environment": {
+    "classification": "loopback_local_synthetic_provider_free",
+    "fastapi_process_count_planned": 1,
+    "backend_target": "http://localhost:8001",
+    "static_diary_target": "http://127.0.0.1:3000/diary/diary.html",
+    "postgres_target": "127.0.0.1:5434",
+    "postgres_version_major": 16,
+    "database_name_locked": "gp_pms_stage1_2d3fa717_20260719",
+    "database_existed_during_read_only_tranche": false,
+    "maintenance_connection_ready": true,
+    "create_database_capability": true,
+    "shared_database_use_forbidden": [
+      "gp_pms_dev",
+      "gp_pms_test"
+    ],
+    "provider": "fake",
+    "deterministic_fallback_enabled": true,
+    "live_provider_enabled": false,
+    "provider_calls_performed": false,
+    "cloud_operations_performed": false,
+    "external_transmissions_performed": false,
+    "ngrok_used": false,
+    "process_cloud_environment_present": false,
+    "ports_in_use_before_execution": {
+      "postgres_5434": true,
+      "fastapi_8001": false,
+      "static_diary_3000": false
+    }
+  },
+  "pilot": {
+    "enabled": true,
+    "synthetic_user_role": "Receptionist",
+    "eligibility": "allowlist_match",
+    "practice_allowed": true,
+    "user_allowed": true,
+    "surface": "bernie_staff_review",
+    "practice_id_sha256": "8e7b986901be5eb5bc0482413a8bfd925852e2289de2213a5c929a89cc0a410a",
+    "user_id_sha256": "5ee2305a972d80ad83e002154c2c422cc76df151a1cf34d2dcf0bf08a2807e4e"
+  },
+  "scenario": {
+    "reference_date_D": "2026-07-20",
+    "instruction": "Make an appointment for Margaret Thompson with Dr Shera today after 2 pm but before 3:45.",
+    "expected_window_local": {
+      "earliest_exclusive": "14:00",
+      "latest_exclusive": "15:45"
+    },
+    "fixture_map": {
+      "practice": "Stage 1 Synthetic Practice",
+      "timezone": "Australia/Brisbane",
+      "location": "Main Clinic",
+      "staff": "synthetic Receptionist using the configured pilot allowlist identity",
+      "practitioner": "Dr Alex Shera",
+      "practitioner_ahpra": "MED0001234567",
+      "patient": "Margaret Thompson",
+      "appointment_type": "Standard",
+      "duration_minutes": 15,
+      "schedule": "Monday-Friday 09:00-17:00",
+      "roster": "Room 1 assigned to Dr Alex Shera on D",
+      "target_window_initial_state": "available"
+    }
+  },
+  "harness": {
+    "browser": "Codex in-app Browser",
+    "real_static_diary": true,
+    "real_fastapi": true,
+    "real_isolated_postgresql": true,
+    "route_interception": false,
+    "smoke_mode": false,
+    "hidden_clock_patch": false,
+    "instruction_rewrite": false,
+    "authentication": "synthetic receptionist logs in through POST /api/v1/auth/login on a loopback same-origin bootstrap page; the bootstrap stores the returned token without recording or inspecting it and navigates to the real Diary",
+    "flow": [
+      "create the exact locked disposable database and schema without a migration",
+      "seed only the frozen synthetic fixture map",
+      "prove database identity, synthetic-only table inventory, roster, availability, fake provider, pilot allowlist and zero baseline command counts before opening the browser",
+      "start one loopback FastAPI process bound to the isolated database",
+      "start one loopback static server for the real docs/ Diary and the authentication bootstrap",
+      "open the authenticated real Diary on D with bernie_open=true and bernie_review=live and without smoke=true",
+      "capture sanitized request method/path/status evidence without headers, credentials, tokens or secret-bearing traces",
+      "execute S1-S7 and keep fixture setup counts separate from product-command counts"
+    ]
+  },
+  "read_only_checks": {
+    "interpretation_readiness": {
+      "exit_code": 0,
+      "case_count": 44,
+      "contract_count": 7,
+      "runtime_gate_decision": "blocked",
+      "runtime_or_provider_wiring_ready": false,
+      "raw_trove_access_ready": false
+    },
+    "provider_boundary_readiness": {
+      "exit_code": 0,
+      "live_provider_enabled": false,
+      "provider_calls_performed": false,
+      "route_behavior_changed": false,
+      "database_access": false,
+      "memory_or_rag": false,
+      "historical_diary_access": false
+    },
+    "direct_fake_provider_supporting_smoke": {
+      "evidence_label": "fake_provider",
+      "exit_code": 1,
+      "result": "clarification_required",
+      "provider": "fake",
+      "mode": "mocked",
+      "live_provider": false,
+      "parsed_reference_date": "2026-07-20",
+      "parsed_window": "14:00-15:45",
+      "explanation": "The service-only smoke does not have database identity context and therefore cannot resolve the practitioner or patient names. The unchanged authenticated API route performs same-practice name resolution before recomputing the interpretation, so this supporting-only result is not a reproduced Stage 1 product defect."
+    }
+  },
+  "boundaries": {
+    "appointment_writes": 0,
+    "product_changes": 0,
+    "database_mutations": 0,
+    "browser_opened": false,
+    "protected_evidence_access": false,
+    "blocked_corpus_access": false,
+    "historical_diary_access": false,
+    "provider_or_external_prompt": false,
+    "adc_gcloud_or_cloud_mutation": false,
+    "pii_or_non_synthetic_data": false,
+    "migration": false,
+    "durable_session_storage": false,
+    "new_corpus_or_holdout": false
+  },
+  "pre_browser_stop_checks": [
+    "database name and connection target differ from every shared database",
+    "schema was created without a migration and all admitted rows match the frozen synthetic fixture inventory",
+    "appointments, appointment audit and appointment command idempotency baseline counts are zero",
+    "the configured receptionist authenticates in the synthetic practice and passes pilot eligibility",
+    "Dr Alex Shera is rostered on D and 14:00-15:45 is available",
+    "effective interpreter provider is fake and live provider is disabled",
+    "no cloud/provider/ADC/gcloud/ngrok environment or outbound route is enabled",
+    "the browser URL is loopback, omits smoke=true and uses no request interception"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "verifier_acceptance",
+  "planned_action": "separate_sol_extra_high_stage1_acceptance",
+  "reasons": [
+    "continuation_event_missing_or_unapproved"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "revision_required",
+  "worker_dispatch_permitted": false
+}

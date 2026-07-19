@@ -1,0 +1,46 @@
+{
+  "schema_version": "bernie.stage1.s3.backend-replay-evidence.v1",
+  "evidence_label": "live_local_backend_postgres",
+  "database": "gp_pms_stage1_2d3fa717_20260719_r2",
+  "reference_date": "2026-07-20",
+  "instruction_unchanged": true,
+  "interpret_http_status": 200,
+  "supervised_http_status": 200,
+  "candidate_count": 7,
+  "selection_result": "confirmation_ready",
+  "confirm_endpoint": "/api/v1/appointments/proposals/create/confirm-bernie",
+  "confirm_http_statuses": [200, 200],
+  "exact_request_body_sha256": "71af99da87c2ab08b77a8985200f2ed97c5658d3f9db7f9882e75e2feab06d3a",
+  "idempotency_key_sha256": "4c356ce652e4159c1d2b10670a8e49b917d5aedbcc1d3e7b73945992414650b0",
+  "response_body_sha256": [
+    "bbd886aaaf1896fe774484353e13a7510264281792cdc901035b982d218c6c0c",
+    "bbd886aaaf1896fe774484353e13a7510264281792cdc901035b982d218c6c0c"
+  ],
+  "responses_equal": true,
+  "replay_receipt_equal": true,
+  "counts_after_replay": {
+    "appointments": 1,
+    "appointment_audits": 1,
+    "appointment_command_idempotency": 1
+  },
+  "receipt": {
+    "schema_version": "appointment.confirmation_receipt.v1",
+    "appointment_date": "2026-07-20",
+    "start_time_local": "14:00:00",
+    "duration_minutes": 15,
+    "status": "Booked",
+    "verification": {
+      "actor_authenticated": true,
+      "practice_scope_verified": true,
+      "proposal_revalidated": true,
+      "conflict_check_passed": true,
+      "idempotency_verified": true,
+      "audit_recorded": true,
+      "signed_evidence_verified": true,
+      "visual_diary_check_required": false
+    }
+  },
+  "credential_recorded": false,
+  "token_recorded": false,
+  "raw_headers_recorded": false
+}

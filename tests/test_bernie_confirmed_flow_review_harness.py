@@ -28,8 +28,10 @@ EXPECTED_AUDIT_EVIDENCE = [
     "bernie_confirm_create_proposal",
     "source_slot_selection_proposal",
     "source_create_proposal",
+    "legacy_unsigned_confirmation_compat",
     "bernie_identity_confidence_medium",
 ]
+EXPECTED_BLOCKED_AUDIT_EVIDENCE = EXPECTED_AUDIT_EVIDENCE[:-1]
 
 
 def _auth(token: str) -> dict[str, str]:
@@ -61,6 +63,14 @@ def _install_forbidden_ai_provider_guard(monkeypatch) -> None:
         raise AssertionError("Bernie confirmed flow must not call AI providers")
 
     monkeypatch.setattr(ai_service, "_get_default_provider", forbidden_provider)
+
+
+def _pin_clinic_fixture_time(monkeypatch) -> None:
+    monkeypatch.setattr(
+        appointments_router,
+        "_clinic_local_now",
+        lambda tz: datetime(2026, 6, 22, 9, 0, 0, tzinfo=tz),
+    )
 
 
 def _normalize(client, token: str, command: dict):
@@ -101,7 +111,10 @@ def _confirm(client, token: str, selection: dict, confirmed: bool = True):
             "confirmed": confirmed,
             "selection_proposal": selection,
         },
-        headers=_auth(token),
+        headers={
+            **_auth(token),
+            "Idempotency-Key": "confirmed-flow-review-harness",
+        },
     )
 
 
@@ -161,6 +174,7 @@ def _make_conflicting_appointment(db, practice, practitioner, patient) -> Appoin
     )
     db.add(appt)
     db.flush()
+    db.commit()
     return appt
 
 
@@ -174,6 +188,7 @@ def test_confirmed_bernie_flow_writes_only_at_explicit_successful_confirmation(
     monkeypatch,
 ):
     _install_forbidden_ai_provider_guard(monkeypatch)
+    _pin_clinic_fixture_time(monkeypatch)
     token = make_token(gp_user)
     selection = _prepare_selection(
         client,
@@ -219,6 +234,7 @@ def test_unconfirmed_bernie_flow_writes_no_appointment_or_audit(
     monkeypatch,
 ):
     _install_forbidden_ai_provider_guard(monkeypatch)
+    _pin_clinic_fixture_time(monkeypatch)
     token = make_token(gp_user)
     selection = _prepare_selection(
         client,
@@ -238,6 +254,7 @@ def test_unconfirmed_bernie_flow_writes_no_appointment_or_audit(
     assert data["autonomy_tier"] == "blocked"
     assert data["appointment"] is None
     assert data["blocks"][0]["code"] == "explicit_confirmation_required"
+    assert data["audit_evidence"] == EXPECTED_BLOCKED_AUDIT_EVIDENCE
     _assert_row_counts_unchanged(db, expected_counts)
 
 
@@ -252,6 +269,7 @@ def test_blocked_bernie_confirmation_writes_no_appointment_or_audit(
     monkeypatch,
 ):
     _install_forbidden_ai_provider_guard(monkeypatch)
+    _pin_clinic_fixture_time(monkeypatch)
     token = make_token(gp_user)
     selection = _prepare_selection(
         client,
@@ -273,6 +291,7 @@ def test_blocked_bernie_confirmation_writes_no_appointment_or_audit(
     assert data["appointment"] is None
     assert data["blocks"][0]["code"] == "create_proposal_revalidation_blocked"
     assert data["blocks"][1]["code"] == "appointment_conflict"
+    assert data["audit_evidence"] == EXPECTED_BLOCKED_AUDIT_EVIDENCE
     _assert_row_counts_unchanged(db, expected_counts)
 
 

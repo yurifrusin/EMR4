@@ -267,7 +267,10 @@ def test_confirm_bernie_invalid_practitioner_returns_typed_failure_not_not_found
     resp = client.post(
         CONFIRM_URL,
         json={"confirmed": True, "selection_proposal": selection},
-        headers=_auth(token),
+        headers={
+            **_auth(token),
+            "Idempotency-Key": "sprint98-invalid-practitioner-confirm",
+        },
     )
 
     assert resp.status_code == 200, resp.text

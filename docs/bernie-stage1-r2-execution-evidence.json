@@ -1,0 +1,321 @@
+{
+  "schema_version": "bernie.stage1.execution-evidence.v1",
+  "recorded_at": "2026-07-19T10:27:13+10:00",
+  "decision": "partial_evidence",
+  "decision_basis": "Execution evidence is complete and ready for a fresh Sol High Tranche D acceptance/closeout context; this execution context does not issue the final stage1_pass decision.",
+  "ready_for_fresh_sol_high_closeout_acceptance": true,
+  "extra_high_required_before_commit_or_push": false,
+  "extra_high_required_if_material_fork_or_unresolved_acceptance_discrepancy": true,
+  "source": {
+    "commit": "2d3fa717d612add9d1f871daf9e899751c5d210c",
+    "worktree": "C:\\Users\\sarashera\\emr4",
+    "branch": "master",
+    "refs_aligned_before_execution": true,
+    "ref_values": {
+      "HEAD": "2d3fa717d612add9d1f871daf9e899751c5d210c",
+      "master": "2d3fa717d612add9d1f871daf9e899751c5d210c",
+      "handoff/current": "2d3fa717d612add9d1f871daf9e899751c5d210c",
+      "origin/master": "2d3fa717d612add9d1f871daf9e899751c5d210c",
+      "origin/handoff/current": "2d3fa717d612add9d1f871daf9e899751c5d210c"
+    },
+    "frozen_plan_sha256": "f4a149e0792cabf1beba3f0344e3379fdd3f897d1720bdc3b5abefbfdee5790c",
+    "frozen_plan_hash_meaning": "plan hash used for the completed High execution before Yuri's reasoning-level-only closeout amendment",
+    "current_plan_includes_reasoning_level_amendment": true,
+    "current_plan_sha256": "8855eb6e8f09e06193b57d2435b026d89d37941db81cb8cf9ca38b713cc2515f",
+    "candidate_kind": "source_commit_plus_bounded_uncommitted_tranche_c_correction",
+    "commit_push_or_baton_move_performed": false
+  },
+  "rehydration": {
+    "five_sources_named": [
+      "live_handover_current_baton",
+      "current_authority_allocation",
+      "active_plan_and_acceptance",
+      "protected_evidence_boundaries",
+      "git_refs_and_worktree"
+    ],
+    "receipt": "orchestration/agent_inbox/codex/bernie-stage1-r2-rehydration-receipt.json",
+    "receipt_sha256": "a260ad3959caadd8ab7258591efa3b0c8f2272549c151cee87415bf26fab0d9d",
+    "preexecution_receipt": "orchestration/agent_inbox/codex/bernie-stage1-r2-preexecution-receipt.json",
+    "preexecution_receipt_sha256": "02df02cefc26911025c048e3526e16f1e31208c416ccd20efcd1ace18e3fcbda",
+    "preacceptance_receipt": "orchestration/agent_inbox/codex/bernie-stage1-r2-preacceptance-receipt.json",
+    "preacceptance_receipt_sha256": "c9668952b68763ce7d314a0a3f239990b7dfacfcb1e49bd4d93fb88383d26728",
+    "preacceptance_receipt_status": "passed",
+    "preacceptance_reconciliation_sources_complete": true,
+    "preserved_preacceptance_profile_mismatch_receipt": "orchestration/agent_inbox/codex/bernie-stage1-r2-preacceptance-revision-required-receipt.json"
+  },
+  "environment": {
+    "evidence_label_happy_path": "live_local_browser_backend_postgres",
+    "evidence_label_direct_http_support": "live_local_backend_postgres",
+    "evidence_label_route_intercepted_support": "route_intercepted_browser",
+    "database": "gp_pms_stage1_2d3fa717_20260719_r2",
+    "database_host": "127.0.0.1:5434",
+    "reference_date_D": "2026-07-20",
+    "clinic_timezone": "Australia/Brisbane",
+    "provider": "fake",
+    "one_local_backend": true,
+    "runtime_stopped_after_evidence_capture": true,
+    "disposable_database_preserved_for_acceptance_readback": true,
+    "synthetic_only": true,
+    "credential_recorded": false,
+    "token_recorded": false,
+    "raw_headers_recorded": false
+  },
+  "instruction": "Make an appointment for Margaret Thompson with Dr Shera today after 2 pm but before 3:45.",
+  "tranche_c": {
+    "failure_independently_reproduced_before_edit": true,
+    "failure": {
+      "candidate_count": 7,
+      "reason_code": "context_reference_date_stale",
+      "appointments": 0,
+      "appointment_audits": 0,
+      "appointment_command_idempotency": 0
+    },
+    "packet": "orchestration/agent_inbox/codex/bernie-stage1-tranche-c-reference-date-packet.json",
+    "packet_sha256": "6f8848a1642a3a3566965a98d3be6b9c8d09683428e62863b8a49adce9ccea6b",
+    "correction": {
+      "file": "app/routers/appointments.py",
+      "file_sha256": "533b44747c7b2c928c284a1fc3063ee9d2ff7f170cd877651369166da80100c0",
+      "rule": "A reference date is stale only when it predates clinic-local today; clinic-local today and future pinned dates are current.",
+      "ordinary_paths": [
+        "interpretation_context",
+        "supervised_booking_context"
+      ],
+      "new_policy_or_authority": false,
+      "migration": false,
+      "new_mutation_family": false
+    },
+    "focused_test_file": "tests/test_bernie_reference_date_freshness.py",
+    "focused_test_file_sha256": "487ab16dfad6219371ce1e77cdb236d06a3ed65a93d1cf78efd9d89a38cf3fca",
+    "focused_cases": 6,
+    "focused_passed": 6,
+    "evidence": "docs/bernie-stage1-tranche-c-reference-date-correction-evidence.json",
+    "evidence_sha256": "b6540032b93c48875338881b52385215e68c283faf8b9194106230ff8d022fb3"
+  },
+  "scenarios": {
+    "S0": {
+      "result": "pass",
+      "fresh_database": true,
+      "authenticated_synthetic_receptionist": true,
+      "pilot_eligible_same_practice": true,
+      "practitioner_rostered_on_D": true,
+      "target_window_initially_available": true,
+      "external_provider_disabled": true,
+      "outbound_or_cloud_step": false,
+      "protected_access": false,
+      "non_synthetic_data_access": false
+    },
+    "S1": {
+      "result": "pass",
+      "candidate_count": 7,
+      "selected": {
+        "patient": "Margaret Thompson",
+        "practitioner": "Alex Shera",
+        "appointment_date": "2026-07-20",
+        "start_time_local": "14:00:00",
+        "duration_minutes": 15
+      },
+      "explicit_confirmation_visible": true,
+      "pre_confirmation_counts": {
+        "appointments": 0,
+        "appointment_audits": 0,
+        "appointment_command_idempotency": 0
+      },
+      "raw_identifier_exposed": false
+    },
+    "S2": {
+      "result": "pass",
+      "explicit_receptionist_confirmation": true,
+      "post_confirmation_counts": {
+        "appointments": 1,
+        "appointment_audits": 1,
+        "appointment_command_idempotency": 1
+      },
+      "audit_appointment_link_match": true,
+      "idempotency_state": "completed",
+      "idempotency_result_kind": "confirmed_write",
+      "receipt_schema": "appointment.confirmation_receipt.v1",
+      "receipt_verification_all_required_true": true,
+      "visual_diary_check_required": false,
+      "diary_readback_count": 1
+    },
+    "S3": {
+      "result": "pass",
+      "backend_replay": {
+        "responses_equal": true,
+        "receipts_equal": true,
+        "counts_after_replay": {
+          "appointments": 1,
+          "appointment_audits": 1,
+          "appointment_command_idempotency": 1
+        },
+        "evidence": "docs/stage1-evidence/stage1-r2-s3-backend-replay.json",
+        "evidence_sha256": "50e8e01ef8b242174c8891a06e2f09a7b33c614294bbc88c69584571d083a3b1"
+      },
+      "browser_exact_duplicate": {
+        "instruction": "Make an appointment for Margaret Thompson with Dr Shera today at 2 pm.",
+        "status": "Existing booking found",
+        "heading": "Appointment already exists",
+        "confirm_action_exposed": false,
+        "counts_unchanged": true
+      }
+    },
+    "S4": {
+      "result": "pass",
+      "fixture_patients_with_same_display_name": 2,
+      "clarification": "I found more than one patient with that name. Can you give me a date of birth?",
+      "confirm_action_exposed": false,
+      "counts": {
+        "appointments": 0,
+        "appointment_audits": 0,
+        "appointment_command_idempotency": 0
+      }
+    },
+    "S5": {
+      "result": "pass",
+      "fixture_appointments_excluded_from_product_counts": 1,
+      "status": "No slots",
+      "heading": "No matching slots found",
+      "safe_next_actions_visible": true,
+      "confirm_action_exposed": false,
+      "bernie_appointment_audits": 0,
+      "appointment_command_idempotency": 0,
+      "raw_identifier_exposed": false
+    },
+    "S6": {
+      "result": "pass",
+      "competing_fixture_appointments_excluded_from_product_counts": 1,
+      "typed_error": "The create proposal is no longer safe to confirm.; This appointment overlaps an existing booking.",
+      "success_receipt_exposed": false,
+      "bernie_appointments": 0,
+      "bernie_appointment_audits": 0,
+      "appointment_command_idempotency": 0
+    },
+    "S7": {
+      "result": "pass_with_exact_node_scope_for_separate_acceptance_review",
+      "route_intercepted_browser_nodes_passed": 6,
+      "route_intercepted_browser_nodes_failed": 0,
+      "behaviors": [
+        "candidate selection and return-to-candidates",
+        "authoritative confirmation receipt and removal of confirm action",
+        "typed recovery and retry",
+        "non-confirmable states expose no confirm action",
+        "generic Not Found is replaced with calm copy",
+        "generic server failure is replaced with calm copy"
+      ],
+      "duplicate_behavior_support": "S3 live local browser evidence",
+      "whole_file_pytest_not_run": true,
+      "whole_file_pytest_not_run_reason": "The protected-safe operating rule permits exact pytest node IDs only and forbids test discovery; the frozen plan does not name a complete exact-node allowlist for the whole route-intercepted file.",
+      "requires_extra_high_acceptance_judgment": true
+    }
+  },
+  "screenshots": [
+    {
+      "scenario": "S1",
+      "path": "docs/stage1-evidence/stage1-r2-final-s1-proposal-before-confirmation.png",
+      "sha256": "a087f07c00230f28c7534ec8869762c34cbdcae111a3cfa564ba2c6d0373ad72",
+      "bytes": 77365
+    },
+    {
+      "scenario": "S2",
+      "path": "docs/stage1-evidence/stage1-r2-final-s2-confirmed-receipt.png",
+      "sha256": "6c32d2950cac044b3fc456442a15afb12981f72b34065810086efe2e66db3fc1",
+      "bytes": 75845
+    },
+    {
+      "scenario": "S3",
+      "path": "docs/stage1-evidence/stage1-r2-final-s3-exact-duplicate.png",
+      "sha256": "a4996bf694a91e6441164034aa1414e3de45b2c80d50c6b93da74763e7b74b23",
+      "bytes": 70287
+    },
+    {
+      "scenario": "S4",
+      "path": "docs/stage1-evidence/stage1-r2-final-s4-ambiguity.png",
+      "sha256": "61d498b26b87dd011a270d810e02b491cd9c7e39ebc55be9c2186683d7a26b3e",
+      "bytes": 64504
+    },
+    {
+      "scenario": "S5",
+      "path": "docs/stage1-evidence/stage1-r2-final-s5-no-slot.png",
+      "sha256": "6e216de4975ef7c81b95b68103a78a0d6b19288dba11e731f3279f57ae884896",
+      "bytes": 64657
+    },
+    {
+      "scenario": "S6",
+      "path": "docs/stage1-evidence/stage1-r2-final-s6-conflict.png",
+      "sha256": "41b139352a4fce00e456b72fc349eba9b6dcff7532aafd0c4e8b7e034dc4ca75",
+      "bytes": 78519
+    }
+  ],
+  "verification": {
+    "serial_only": true,
+    "commands": [
+      {
+        "command": ".venv\\Scripts\\python.exe -m pytest tests/test_bernie_reference_date_freshness.py::test_interpret_context_freshness_allows_today_and_future_but_stales_past tests/test_bernie_reference_date_freshness.py::test_supervised_context_freshness_allows_today_and_future_but_stales_past -q",
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "command": ".venv\\Scripts\\python.exe -m pytest review/test_diary_smoke.py::test_bernie_route_intercepted_selected_slot_can_return_to_candidates review/test_diary_smoke.py::test_bernie_generic_confirm_not_found_calm_copy review/test_diary_smoke.py::test_bernie_generic_confirm_other_error_calm_copy -q",
+        "passed": 3,
+        "failed": 0,
+        "evidence_label": "route_intercepted_browser"
+      },
+      {
+        "command": ".venv\\Scripts\\python.exe -m pytest review/test_diary_smoke.py::test_bernie_confirm_submit_adapter_success review/test_diary_smoke.py::test_bernie_confirm_submit_adapter_error_and_retry review/test_diary_smoke.py::test_bernie_confirm_submit_adapter_disabled_for_non_confirmable_states -q",
+        "passed": 3,
+        "failed": 0,
+        "evidence_label": "route_intercepted_browser"
+      },
+      {
+        "command": ".venv\\Scripts\\python.exe -m pytest tests/test_bernie_reference_date_freshness.py::test_interpret_context_freshness_allows_today_and_future_but_stales_past tests/test_bernie_reference_date_freshness.py::test_supervised_context_freshness_allows_today_and_future_but_stales_past tests/test_api_spine_artifacts.py::TestGraphQLArtifact::test_graphql_has_no_mutation_type tests/test_api_spine_artifacts.py::TestOpenAPICommandArtifact::test_openapi_includes_idempotency_key tests/test_api_spine_artifacts.py::TestOpenAPICommandArtifact::test_openapi_includes_audit_and_confirmer tests/test_api_spine_artifacts.py::TestSecurityArtifacts::test_permission_matrix_keeps_access_ai_boundary_gates_closed tests/test_api_spine_artifacts.py::TestEvidenceLabels::test_evidence_distinctions_not_only_in_one_artifact -q",
+        "passed": 11,
+        "failed": 0
+      },
+      {
+        "command": ".venv\\Scripts\\python.exe -m py_compile app/routers/appointments.py scripts/bernie_stage1_local_harness.py tests/test_bernie_reference_date_freshness.py",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "command": "git diff --check -- <exact Stage 1 changed paths>",
+        "passed": 1,
+        "failed": 0
+      }
+    ],
+    "total_pytest_cases_passed_in_recorded_commands": 23,
+    "total_pytest_cases_failed": 0,
+    "deselected": 0
+  },
+  "protocol_amendments_authorized_during_execution": {
+    "paths": [
+      "AGENTS.md",
+      "orchestration/bernie_release_gates.md"
+    ],
+    "browser_driver_rule": "Interactive browser control and task-scoped Playwright are evidence-equivalent when path and interception boundaries match.",
+    "worker_economy_rule": "Keep serial, stateful, tightly coupled acceptance local; dispatch only a separable artifact with net implementation/test or independent-veto leverage.",
+    "reasoning_level_rule": "Sol High may complete check-gated closeout of accepted bounded work; Extra High is reserved for material forks, failed-gate overrides, contradictory evidence, or broader authority decisions.",
+    "fresh_context_rule": "Each named tranche starts in a fresh chat and performs five-source rehydration; durable documents, not conversation memory, carry decisions forward.",
+    "product_acceptance_semantics_changed": false
+  },
+  "worker_mix": {
+    "execution_owner": "GPT Sol High",
+    "external_worker_dispatched": false,
+    "reason": "The restarted S0-S7 run was serial and coupled to one disposable synthetic database; worker packet, monitoring, correction, and integration overhead exceeded likely savings."
+  },
+  "attestation": {
+    "provider_call": false,
+    "external_prompt": false,
+    "cloud_mutation": false,
+    "external_transmission": false,
+    "migration": false,
+    "durable_session": false,
+    "deployment": false,
+    "production": false,
+    "release": false,
+    "protected_access": false,
+    "blocked_corpus_access": false,
+    "historical_diary_access": false,
+    "pii_or_non_synthetic_data": false
+  },
+  "next_required_action": "Open a fresh Sol High Tranche D chat, perform five-source rehydration, review this packet and the S7 scope note, and either issue stage1_pass then complete check-gated commit/push/baton closeout or record the exact unresolved gate. Escalate to Extra High only if the reasoning-level rule is triggered."
+}
