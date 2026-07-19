@@ -6,8 +6,11 @@ import pytest
 from app.config import settings
 from app.models.appointments import Appointment, AppointmentAuditLog
 import app.routers.appointments as appointments_router
-from app.routers.appointments import _BERNIE_SESSION_STORE
-from app.services.bernie import BernieSessionEventType, BernieSessionState
+from app.services.bernie import (
+    BernieSessionEventType,
+    BernieSessionState,
+    DatabaseBernieSessionStore,
+)
 from tests.conftest import make_token
 
 
@@ -57,14 +60,22 @@ def _create_recognition_session(client, token: str, surface_id: str) -> dict:
     return event.json()["session"]
 
 
-def _session_tail(session_id: str):
-    session = _BERNIE_SESSION_STORE.get_session(session_id)
+def _store(db, practice_id):
+    return DatabaseBernieSessionStore(
+        db,
+        practice_id=practice_id,
+        secret=settings.secret_key.encode("utf-8"),
+    )
+
+
+def _session_tail(db, practice_id, session_id: str):
+    session = _store(db, practice_id).get_session(session_id)
     assert session is not None
     return session
 
 
 def test_interpret_route_appends_compact_server_outcome_without_phi(
-    client, gp_user, practitioner, patient, monkeypatch
+    client, db, gp_user, practitioner, patient, monkeypatch
 ):
     monkeypatch.setattr(settings, "bernie_booking_interpreter_provider", "fake")
     token = make_token(gp_user)
@@ -90,7 +101,7 @@ def test_interpret_route_appends_compact_server_outcome_without_phi(
     assert resp.status_code == 200, resp.text
     data = resp.json()
     assert data["result"] == "interpreted"
-    updated = _session_tail(session["session_id"])
+    updated = _session_tail(db, gp_user.practice_id, session["session_id"])
     assert updated.state is BernieSessionState.context_enrichment
     assert updated.revision == session["revision"] + 1
     assert data["server_session"]["session_id"] == session["session_id"]
@@ -112,7 +123,7 @@ def test_supervised_booking_stages_server_proposal_and_session_bound_evidence(
     token = make_token(gp_user)
     surface_id = "diary-n8-proposal"
     session = _create_recognition_session(client, token, surface_id)
-    interpreted = _BERNIE_SESSION_STORE.append_server_outcome_event(
+    interpreted = _store(db, gp_user.practice_id).append_server_outcome_event(
         session_id=session["session_id"],
         event_type=BernieSessionEventType.interpretation_outcome,
         target_state=BernieSessionState.context_enrichment,
@@ -120,6 +131,7 @@ def test_supervised_booking_stages_server_proposal_and_session_bound_evidence(
         payload={"result": "interpreted", "safe": True},
     )
     assert interpreted.accepted is True
+    db.commit()
     before = (db.query(Appointment).count(), db.query(AppointmentAuditLog).count())
 
     resp = client.post(
@@ -172,7 +184,7 @@ def test_supervised_booking_stages_server_proposal_and_session_bound_evidence(
     assert data["selection_proposal"]["session_binding"] == data["staff_review"]["confirm_payload"]["session_binding"]
     signed_payload = data["staff_review"]["confirm_payload"]["signed_confirmation_evidence"]["payload"]
     assert signed_payload["session_binding"] == data["staff_review"]["confirm_payload"]["session_binding"]
-    updated = _session_tail(session["session_id"])
+    updated = _session_tail(db, gp_user.practice_id, session["session_id"])
     assert updated.state is BernieSessionState.proposal_preview
     assert updated.patient_id == patient.id
     assert updated.practitioner_id == practitioner.id
@@ -225,7 +237,7 @@ def test_session_bound_confirm_appends_confirmed_outcome_after_write(
     token = make_token(gp_user)
     surface_id = "diary-n8-confirm"
     session = _create_recognition_session(client, token, surface_id)
-    interpreted = _BERNIE_SESSION_STORE.append_server_outcome_event(
+    interpreted = _store(db, gp_user.practice_id).append_server_outcome_event(
         session_id=session["session_id"],
         event_type=BernieSessionEventType.interpretation_outcome,
         target_state=BernieSessionState.context_enrichment,
@@ -233,6 +245,7 @@ def test_session_bound_confirm_appends_confirmed_outcome_after_write(
         payload={"result": "interpreted", "safe": True},
     )
     assert interpreted.accepted is True
+    db.commit()
     proposal = client.post(
         WRAPPER_URL,
         json={
@@ -267,7 +280,7 @@ def test_session_bound_confirm_appends_confirmed_outcome_after_write(
         before[0] + 1,
         before[1] + 1,
     )
-    updated = _session_tail(session["session_id"])
+    updated = _session_tail(db, gp_user.practice_id, session["session_id"])
     assert updated.state is BernieSessionState.confirmed
     assert [event.event_type.value for event in updated.events[-2:]] == [
         "confirm_submitted",

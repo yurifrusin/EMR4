@@ -1,6 +1,6 @@
 # Idempotency Continuity Index
 
-Date: 2026-07-13
+Date: 2026-07-19
 
 Tranche: S19-S21
 
@@ -51,6 +51,29 @@ unless and until they become canonical OpenAPI `paths` entries. Their current
 posture remains tracked by the existing source checkpoints and blocked-gate
 notes rather than by this static OpenAPI continuity table.
 
+## Stage 2 Bernie Create-Confirm Checkpoint
+
+The existing backend variant
+`POST /api/v1/appointments/proposals/create/confirm-bernie` now has bounded
+local synthetic runtime evidence beyond the canonical declaration table:
+
+- the ledger claim is one PostgreSQL `INSERT ... ON CONFLICT DO NOTHING`
+  followed by a row lock on the single actor/practice/operation/key identity;
+- two independent same-key confirmation transactions return one stored result
+  and create exactly one appointment, audit, completed ledger, and confirmation
+  outcome;
+- an injected failure after the appointment, audit, and session events are
+  flushed but before command completion/commit rolls every effect back;
+- the same key then succeeds once, and a fresh database session replays the
+  stored response without another write; and
+- raw command and session-event idempotency keys are HMAC-hashed rather than
+  persisted.
+
+This checkpoint does not change the four canonical `ledger_wired` rows or their
+status counts. It applies only to the already approved Bernie appointment-create
+variant and does not grant durable replay to proposals, slot search, other
+compatibility writes, or new appointment actions.
+
 ## Closed Gates
 
 This index does not authorize:
@@ -69,10 +92,12 @@ This index does not authorize:
 
 ## Boundary
 
-This index and its source tests prove the current syntactic proposal boundary.
-They do not prove runtime concurrency behavior, network-loss replay behavior,
-database transaction durability, audit-log append-only semantics, or production
-deployment readiness.
+The canonical index rows and their static source tests do not prove runtime
+concurrency behavior for every command family, network-loss behavior, or
+production deployment readiness. The Stage 2 checkpoint separately proves
+transaction concurrency, rollback, and fresh-session replay for the one bounded
+local synthetic Bernie create-confirm variant; it is not a production or broad
+command-family claim.
 
 `tests/test_api_spine_idempotency_continuity_index.py` validates this index by
 parsing only this markdown file and

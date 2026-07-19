@@ -12,6 +12,12 @@ MIGRATION = (
     / "versions"
     / "l1m2n3o4p5q6_add_appointment_command_idempotency.py"
 )
+STAGE2_MIGRATION = (
+    ROOT
+    / "alembic"
+    / "versions"
+    / "m2n3o4p5q6r7_add_bernie_durable_authority.py"
+)
 PREFLIGHT_DOC = (
     ROOT
     / "orchestration"
@@ -37,6 +43,7 @@ REQUIRED_COLUMNS = (
     "result_kind",
     "target_appointment_id",
     "audit_log_id",
+    "bernie_session_id",
     "created_at",
     "updated_at",
     "expires_at",
@@ -79,6 +86,7 @@ def test_model_declares_appointment_command_idempotency_table_contract():
         "result_kind",
         "target_appointment_id",
         "audit_log_id",
+        "bernie_session_id",
         "expires_at",
     ):
         assert table.c[column].nullable is True
@@ -123,6 +131,11 @@ def test_model_declares_uniqueness_indexes_and_state_checks():
         "practice_id",
         "created_at",
     ]
+    assert indexes["ix_appt_cmd_idem_practice_session"] == [
+        "practice_id",
+        "bernie_session_id",
+    ]
+    assert indexes["uq_appt_cmd_idem_audit_log_id"] == ["audit_log_id"]
 
     checks = {
         constraint.name: str(constraint.sqltext)
@@ -153,12 +166,18 @@ def test_model_does_not_store_raw_keys_or_raw_request_bodies():
 
 def test_migration_matches_model_contract_and_previous_revision():
     text = _read(MIGRATION)
+    stage2_text = _read(STAGE2_MIGRATION)
 
     assert 'revision: str = "l1m2n3o4p5q6"' in text
     assert 'down_revision: Union[str, Sequence[str], None] = "k0l1m2n3o4p5"' in text
     assert f'op.create_table(\n        "{TABLE_NAME}"' in text
-    for column in REQUIRED_COLUMNS:
+    for column in tuple(column for column in REQUIRED_COLUMNS if column != "bernie_session_id"):
         assert f'"{column}"' in text
+    assert 'revision: str = "m2n3o4p5q6r7"' in stage2_text
+    assert 'down_revision: Union[str, Sequence[str], None] = "l1m2n3o4p5q6"' in stage2_text
+    assert 'sa.Column("bernie_session_id"' in stage2_text
+    assert "ck_appt_cmd_idem_completed_create_correlation" in stage2_text
+    assert "uq_appt_cmd_idem_audit_log_id" in stage2_text
     assert "uq_appt_cmd_idem_practice_actor_operation_key" in text
     assert "ix_appt_cmd_idem_practice_target" in text
     assert "ix_appt_cmd_idem_practice_created" in text
@@ -169,6 +188,7 @@ def test_migration_matches_model_contract_and_previous_revision():
     assert "failed_transient" in text
     for forbidden in FORBIDDEN_FIELDS:
         assert forbidden not in text
+        assert forbidden not in stage2_text
 
 
 def test_appointment_routes_do_not_import_storage_model_directly():

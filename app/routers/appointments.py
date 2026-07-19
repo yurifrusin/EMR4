@@ -109,7 +109,7 @@ from app.services.bernie import (
     BernieSessionEventType,
     BernieSessionRecord,
     BernieSessionState,
-    InMemoryBernieSessionStore,
+    DatabaseBernieSessionStore,
     build_session_confirmation_binding,
 )
 from app.services.bernie.ui_view_model import build_bernie_ui_view_model
@@ -228,7 +228,15 @@ BERNIE_WEEK_RELATIVE_RE = re.compile(
 )
 
 
-_BERNIE_SESSION_STORE = InMemoryBernieSessionStore()
+def _bernie_session_store(
+    db: Session,
+    practice_id: uuid.UUID,
+) -> DatabaseBernieSessionStore:
+    return DatabaseBernieSessionStore(
+        db,
+        practice_id=practice_id,
+        secret=_staff_create_confirm_idempotency_secret(),
+    )
 
 
 
@@ -847,12 +855,14 @@ def _write_audit(
     status_reason_code: Optional[str] = None,
     confirmed_warnings: Optional[list[str]] = None,
     audit_evidence: Optional[list[str]] = None,
-) -> None:
+    command_id: Optional[uuid.UUID] = None,
+    bernie_session_id: Optional[str] = None,
+) -> AppointmentAuditLog:
     bounded_codes = [
         *_sanitize_audit_evidence(audit_evidence),
         *(_sanitize_confirmed_warnings(confirmed_warnings) or []),
     ]
-    db.add(AppointmentAuditLog(
+    audit = AppointmentAuditLog(
         practice_id=practice_id,
         appointment_id=appointment_id,
         confirmed_by_user_id=confirmed_by_user_id,
@@ -862,7 +872,12 @@ def _write_audit(
         cancellation_reason=cancellation_reason,
         status_reason_code=status_reason_code,
         confirmed_warnings=bounded_codes or None,
-    ))
+        command_id=command_id,
+        bernie_session_id=bernie_session_id,
+    )
+    db.add(audit)
+    db.flush()
+    return audit
 
 
 def _audit_actor_display(user: Optional[User]) -> tuple[str, Optional[str]]:
@@ -892,6 +907,8 @@ def _create_appointment_from_body(
     current_user: User,
     confirmed_warnings: Optional[list[str]] = None,
     audit_evidence: Optional[list[str]] = None,
+    command_id: Optional[uuid.UUID] = None,
+    bernie_session_id: Optional[str] = None,
     commit: bool = True,
 ) -> AppointmentOut:
     practice_id = current_user.practice_id
@@ -948,6 +965,8 @@ def _create_appointment_from_body(
         status_after=AppointmentStatus.Booked,
         confirmed_warnings=confirmed_warnings,
         audit_evidence=audit_evidence,
+        command_id=command_id,
+        bernie_session_id=bernie_session_id,
     )
     if commit:
         db.commit()
@@ -1228,6 +1247,10 @@ def _build_confirmation_receipt(
     appointment: AppointmentOut,
     current_user: User,
     audit_evidence: list[str],
+    *,
+    correlation_id: Optional[uuid.UUID] = None,
+    audit_event_id: Optional[uuid.UUID] = None,
+    session_id: Optional[str] = None,
 ) -> ConfirmationReceipt:
     """Build a typed confirmation receipt from the committed appointment result.
 
@@ -1283,6 +1306,9 @@ def _build_confirmation_receipt(
         appointment_type=appointment_type_name,
         confirmed_by_display=confirmed_by_display,
         confirmed_by_role=confirmed_by_role,
+        correlation_id=correlation_id,
+        audit_event_id=audit_event_id,
+        session_id=session_id,
         verification=ConfirmationReceiptVerification(
             actor_authenticated=True,
             practice_scope_verified=True,
@@ -1515,8 +1541,12 @@ def confirm_create_proposal_route(
         current_user,
         confirmed_warnings=confirmed_warnings,
         audit_evidence=audit_evidence,
+        command_id=decision.record.id,
         commit=False,
     )
+    audit = db.query(AppointmentAuditLog).filter(
+        AppointmentAuditLog.command_id == decision.record.id,
+    ).one()
     response_body = AppointmentConfirmCreateProposalOut(
         safe=True,
         requires_confirmation=False,
@@ -1527,7 +1557,11 @@ def confirm_create_proposal_route(
         blocks=[],
         audit_evidence=audit_evidence,
         confirmation_receipt=_build_confirmation_receipt(
-            appointment, current_user, audit_evidence,
+            appointment,
+            current_user,
+            audit_evidence,
+            correlation_id=decision.record.id,
+            audit_event_id=audit.id,
         ),
     )
     complete_appointment_command(
@@ -1537,6 +1571,7 @@ def confirm_create_proposal_route(
         response_body=response_body.model_dump(mode="json"),
         result_kind="confirmed_write",
         target_appointment_id=appointment.id,
+        audit_log_id=audit.id,
     )
     db.commit()
     return response_body
@@ -2848,14 +2883,16 @@ def get_bernie_pilot_eligibility(
 def get_active_bernie_session(
     surface_id: str = Query("diary-main", min_length=1, max_length=100),
     reference_date: Optional[date_type] = Query(default=None),
+    db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
-    session = _BERNIE_SESSION_STORE.get_or_create_active_session(
+    session = _bernie_session_store(db, current_user.practice_id).get_or_create_active_session(
         practice_id=current_user.practice_id,
         user_id=current_user.id,
         surface_id=surface_id,
         request_reference_date=reference_date,
     )
+    db.commit()
     return BernieSessionActiveOut(
         result="active_session",
         session=_bernie_session_snapshot_out(session),
@@ -2865,14 +2902,16 @@ def get_active_bernie_session(
 @router.post("/bernie/sessions/new", response_model=BernieSessionActiveOut)
 def create_new_bernie_session(
     body: BernieSessionNewIn,
+    db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
-    session = _BERNIE_SESSION_STORE.create_session(
+    session = _bernie_session_store(db, current_user.practice_id).create_session(
         practice_id=current_user.practice_id,
         user_id=current_user.id,
         surface_id=body.surface_id,
         request_reference_date=body.reference_date,
     )
+    db.commit()
     return BernieSessionActiveOut(
         result="active_session",
         session=_bernie_session_snapshot_out(session),
@@ -2886,9 +2925,10 @@ def create_new_bernie_session(
 def append_bernie_session_event(
     session_id: str,
     body: BernieSessionEventAppendIn,
+    db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
-    result = _BERNIE_SESSION_STORE.append_client_event(
+    result = _bernie_session_store(db, current_user.practice_id).append_client_event(
         session_id=session_id,
         practice_id=current_user.practice_id,
         user_id=current_user.id,
@@ -2901,15 +2941,18 @@ def append_bernie_session_event(
     )
     response = _bernie_session_append_out(result)
     if not result.accepted:
+        db.rollback()
         return JSONResponse(
             status_code=status.HTTP_409_CONFLICT,
             content=response.model_dump(mode="json"),
         )
+    db.commit()
     return response
 
 
 def _append_bernie_route_outcome_event(
     *,
+    db: Session,
     session_id: Optional[str],
     current_user: User,
     event_type: BernieSessionEventType,
@@ -2930,7 +2973,8 @@ def _append_bernie_route_outcome_event(
     if not session_id:
         return BernieSessionEventResult(accepted=False, detail="No Bernie session supplied.")
 
-    session = _BERNIE_SESSION_STORE.get_session(session_id)
+    store = _bernie_session_store(db, current_user.practice_id)
+    session = store.get_session(session_id)
     if session is None:
         return BernieSessionEventResult(
             accepted=False,
@@ -2950,7 +2994,7 @@ def _append_bernie_route_outcome_event(
             detail="Bernie session belongs to a different diary surface.",
         )
 
-    return _BERNIE_SESSION_STORE.append_server_outcome_event(
+    return store.append_server_outcome_event(
         session_id=session_id,
         event_type=event_type,
         target_state=target_state,
@@ -3021,6 +3065,7 @@ def interpret_bernie_booking_instruction(
             interpretation_target,
         )
     route_outcome = _append_bernie_route_outcome_event(
+        db=db,
         session_id=body.server_session_id,
         current_user=current_user,
         surface_id=body.server_session_surface_id,
@@ -3046,6 +3091,9 @@ def interpret_bernie_booking_instruction(
         result = result.model_copy(
             update={"server_session": _bernie_session_snapshot_out(route_outcome.session)}
         )
+        db.commit()
+    elif body.server_session_id:
+        db.rollback()
     return result
 
 
@@ -6214,6 +6262,7 @@ def propose_bernie_supervised_booking(
                     ),
                 }
             )
+            db.commit()
         return out
 
     session_expected_revision = body.server_session_expected_revision
@@ -6227,6 +6276,7 @@ def propose_bernie_supervised_booking(
     ) -> BernieSessionEventResult:
         nonlocal session_expected_revision, server_session_snapshot
         result = _append_bernie_route_outcome_event(
+            db=db,
             session_id=body.server_session_id,
             current_user=current_user,
             surface_id=body.server_session_surface_id,
@@ -7096,6 +7146,7 @@ def _update_proposal_evidence_payload(proposal: AppointmentUpdateProposalOut) ->
 
 def _validate_bernie_session_confirmation_binding(
     *,
+    db: Session,
     session_binding: Optional[dict[str, Any]],
     current_user: User,
     candidate_freshness_id: Optional[str],
@@ -7119,7 +7170,7 @@ def _validate_bernie_session_confirmation_binding(
             "session_binding_malformed",
             "Session binding must include a session_id.",
         )]
-    session = _BERNIE_SESSION_STORE.get_session(session_id)
+    session = _bernie_session_store(db, current_user.practice_id).get_session(session_id)
     if session is None:
         return [_confirm_create_block(
             "session_binding_session_not_found",
@@ -7345,6 +7396,7 @@ def confirm_bernie_create_proposal(
 
     if effective_session_binding is not None:
         binding_blocks = _validate_bernie_session_confirmation_binding(
+            db=db,
             session_binding=effective_session_binding,
             current_user=current_user,
             candidate_freshness_id=body.candidate_freshness_id
@@ -7442,7 +7494,10 @@ def confirm_bernie_create_proposal(
         binding_surface_id = effective_session_binding.get("surface_id")
         binding_revision = effective_session_binding.get("session_revision")
         if isinstance(binding_session_id, str) and isinstance(binding_revision, int):
-            confirm_event = _BERNIE_SESSION_STORE.append_client_event(
+            confirm_event = _bernie_session_store(
+                db,
+                current_user.practice_id,
+            ).append_client_event(
                 session_id=binding_session_id,
                 practice_id=current_user.practice_id,
                 user_id=current_user.id,
@@ -7466,10 +7521,11 @@ def confirm_bernie_create_proposal(
         *,
         target_state: BernieSessionState,
         payload: dict[str, Any],
-    ) -> None:
+    ) -> Optional[BernieSessionEventResult]:
         if confirmation_session_id is None:
-            return
-        _append_bernie_route_outcome_event(
+            return None
+        return _append_bernie_route_outcome_event(
+            db=db,
             session_id=confirmation_session_id,
             current_user=current_user,
             surface_id=effective_session_binding.get("surface_id") if effective_session_binding else None,
@@ -7485,7 +7541,7 @@ def confirm_bernie_create_proposal(
         audit_evidence: list[str],
         target_state: BernieSessionState = BernieSessionState.proposal_preview,
     ) -> AppointmentConfirmCreateProposalOut:
-        _append_confirmation_outcome(
+        outcome = _append_confirmation_outcome(
             target_state=target_state,
             payload={
                 "result": "blocked",
@@ -7495,11 +7551,17 @@ def confirm_bernie_create_proposal(
                 "audit_evidence_codes": list(audit_evidence),
             },
         )
-        return _block_bernie_create_confirmation(
+        response = _block_bernie_create_confirmation(
             block_items,
             warnings=warnings,
             audit_evidence=audit_evidence,
         )
+        if outcome is not None and outcome.accepted:
+            db.delete(decision.record)
+            db.commit()
+        else:
+            db.rollback()
+        return response
 
     if blocks:
         db.rollback()
@@ -7520,7 +7582,6 @@ def confirm_bernie_create_proposal(
         or revalidated.autonomy_tier != "proposal"
         or not revalidated.requires_confirmation
     ):
-        db.rollback()
         return _block_bound_confirmation(
             [
                 _confirm_create_block(
@@ -7534,7 +7595,6 @@ def confirm_bernie_create_proposal(
         )
 
     if not _same_create_command(create_proposal.command, revalidated.command):
-        db.rollback()
         return _block_bound_confirmation(
             [_confirm_create_block(
                 "create_proposal_revalidation_mismatch",
@@ -7566,9 +7626,14 @@ def confirm_bernie_create_proposal(
         current_user,
         confirmed_warnings=confirmed_warnings,
         audit_evidence=audit_evidence,
+        command_id=decision.record.id,
+        bernie_session_id=confirmation_session_id,
         commit=False,
     )
-    _append_confirmation_outcome(
+    audit = db.query(AppointmentAuditLog).filter(
+        AppointmentAuditLog.command_id == decision.record.id,
+    ).one()
+    confirmation_outcome = _append_confirmation_outcome(
         target_state=BernieSessionState.confirmed,
         payload={
             "result": "confirmed",
@@ -7579,6 +7644,18 @@ def confirm_bernie_create_proposal(
             "audit_evidence_codes": list(audit_evidence),
         },
     )
+    if confirmation_session_id is not None and (
+        confirmation_outcome is None or not confirmation_outcome.accepted
+    ):
+        db.rollback()
+        return _block_bernie_create_confirmation(
+            [_confirm_create_block(
+                "session_confirmation_outcome_failed",
+                "Confirmation was not written because the Bernie session could not record its outcome.",
+            )],
+            warnings=[*selection.warnings, *revalidated.warnings],
+            audit_evidence=audit_evidence,
+        )
     response_body = AppointmentConfirmCreateProposalOut(
         safe=True,
         requires_confirmation=False,
@@ -7589,7 +7666,12 @@ def confirm_bernie_create_proposal(
         blocks=[],
         audit_evidence=audit_evidence,
         confirmation_receipt=_build_confirmation_receipt(
-            appointment, current_user, audit_evidence,
+            appointment,
+            current_user,
+            audit_evidence,
+            correlation_id=decision.record.id,
+            audit_event_id=audit.id,
+            session_id=confirmation_session_id,
         ),
     )
     complete_appointment_command(
@@ -7599,6 +7681,8 @@ def confirm_bernie_create_proposal(
         response_body=response_body.model_dump(mode="json"),
         result_kind="confirmed_write",
         target_appointment_id=appointment.id,
+        audit_log_id=audit.id,
+        bernie_session_id=confirmation_session_id,
     )
     db.commit()
     return response_body

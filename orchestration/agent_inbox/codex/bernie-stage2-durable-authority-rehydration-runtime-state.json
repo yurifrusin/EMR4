@@ -1,0 +1,84 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "new_session",
+  "planned_action": "fresh_sol_extra_high_stage2_durable_authority_recovery_security_plan_and_execution",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_stage2_five_source_rehydration_after_explicit_yuri_approval",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No worker dispatch is planned before the Stage 2 plan is frozen; the migration, transaction, RLS, restart, concurrency, and retry evidence share one PostgreSQL state and are initially Sol-owned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external implementation worker selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No provider lane is reopened; any later independent veto remains bounded to local source and synthetic evidence under the frozen Stage 2 plan."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "AGENTS.md, all 38 Current Baton acceptance artifacts, the strategic transition review, the Stage 1 plan and acceptance evidence, and the applicable API Spine sources were read in this fresh Extra High context.",
+        "Yuri explicitly approved the bounded Stage 2 scope for the existing appointment-create vertical, including the specified development retention periods.",
+        "Protected holdouts v1-v10, historical diary material, the blocked external corpus, live providers, cloud, PII, production, deployment, release, new appointment actions, broader API migrations, and autonomous confirmation remain closed.",
+        "A broad local filename inventory exposed protected fixture and support-module path names only. No protected file was opened, hashed, searched for content, run, or used; the metadata-only incident was contained immediately and all later inventory uses explicit Stage 2 paths.",
+        "HEAD, master, handoff/current, origin/master, and origin/handoff/current were fetched and verified clean and aligned at 8cadc64c56d014a7f3fbd70d82ac5c041e63fed8."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent assigned; the initial Stage 2 inventory and plan freeze are tightly coupled protected-integration work."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

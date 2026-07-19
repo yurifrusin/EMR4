@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "stage2_extra_high_five_source_rehydration_and_exact_gate_results",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external implementation worker was dispatched for the serial migration, database, and transaction lifecycle."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No provider-backed worker or prompt was used."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No independent provider veto was dispatched; Sol Extra High directly owned the bounded local synthetic security and acceptance decision."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The approved Stage 2 scope remains the existing local synthetic appointment-create vertical with providers disabled and no protected, historical, PII, production, deployment, release, new action, GraphQL mutation, or autonomous-confirmation authority.",
+        "The disposable gp_pms_stage2_migration database passed m2n3o4p5q6r7 upgrade, downgrade to l1m2n3o4p5q6, re-upgrade, and Alembic model-drift check.",
+        "The preserved gp_pms_dev database upgraded additively to m2n3o4p5q6r7: all four historical completed create commands have direct and reciprocal same-practice audit links; the pre-existing 12 appointments, 9 audit rows, and 4 command rows remain; both new session tables are initially empty.",
+        "A temporary non-login, non-superuser, non-bypass role saw one own-practice fixture and zero foreign or missing-context rows on all five scoped tables; foreign insert returned 42501; five opaque cross-practice references returned 23503; owner audit update and delete returned 55000; session retention delete cascaded event detail; the entire probe transaction and role rolled back cleanly.",
+        "The final explicit Stage 2 runtime/database population passed 100/100; API Spine artifact and drift checks passed 61/61; the focused security population passed 46/46; high-severity Bandit, Python compilation, Node syntax, readiness, provider-boundary, Alembic drift, and whitespace checks passed.",
+        "Stage 1-compatible regression passed 64/64, then a first supervised-flow attempt returned 62 passed and one five-second Enter-key Playwright timeout; that unchanged UI node passed in isolation and the complete batch passed cleanly 63/63. The 81/81 API/accessibility/classifier batch and all 115 explicit hash-bound Diary nodes expanding to 139 route-intercepted cases passed.",
+        "One broad filename inventory earlier exposed protected path names only. No protected content was opened, hashed, run, or used; later selection remained exact-path and exact-node only.",
+        "HEAD, master, handoff/current, origin/master, and origin/handoff/current remain aligned at 8cadc64c56d014a7f3fbd70d82ac5c041e63fed8 before integration."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was assigned; acceptance and protected integration remain Sol-owned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

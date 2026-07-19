@@ -10,6 +10,7 @@ from app.models.appointments import (
     Appointment, AppointmentType, PractitionerSchedule, ScheduleOverride,
     AppointmentCommandIdempotency,
 )
+from app.models.bernie_sessions import BernieBookingSession, BernieSessionEventRow
 from app.models.results import (
     TestRequest, Result, ResultItem, Referral, Reminder, ScannedDocument,
 )
@@ -29,6 +30,7 @@ __all__ = [
     "CarePlan",
     "Appointment", "AppointmentType", "PractitionerSchedule", "ScheduleOverride",
     "AppointmentCommandIdempotency",
+    "BernieBookingSession", "BernieSessionEventRow",
     "TestRequest", "Result", "ResultItem", "Referral", "Reminder", "ScannedDocument",
     "MbsClaim", "Invoice", "MbsDirectory", "SnomedDirectory",
     "DiaryTemplate", "DiaryColumn", "DiaryBreak", "Room", "DiaryRoster",

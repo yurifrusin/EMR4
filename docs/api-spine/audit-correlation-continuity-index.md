@@ -1,6 +1,6 @@
 # Audit Correlation Continuity Index
 
-Date: 2026-07-08
+Date: 2026-07-19
 
 Sprint: 201
 
@@ -58,6 +58,26 @@ GraphQL audit read models must not acquire command-plane-only fields such as
 OpenAPI command and confirmation metadata, where command handlers own
 idempotency, confirmer identity, evidence, and write authority.
 
+## Stage 2 Local Synthetic Runtime Checkpoint
+
+The approved Stage 2 appointment-create variant adds a runtime-proven, server-
+owned correlation chain without changing GraphQL or adding a GraphQL mutation:
+
+| Durable coordinate | Exact linkage | Runtime status |
+|---|---|---|
+| appointment command ledger id | `appointment_command_idempotency.id = appointment_audit_log.command_id = confirmation_receipt.correlation_id` | `local_synthetic_runtime_proven` |
+| appointment target | `appointment_command_idempotency.target_appointment_id = appointment_audit_log.appointment_id = confirmation_receipt.appointment_id` | `local_synthetic_runtime_proven` |
+| audit event | `appointment_command_idempotency.audit_log_id = appointment_audit_log.id = confirmation_receipt.audit_event_id` | `local_synthetic_runtime_proven` |
+| Bernie session | retained opaque `bernie_session_id` agrees across command, audit, and receipt | `local_synthetic_runtime_proven` |
+
+This checkpoint applies only to the existing
+`POST /api/v1/appointments/proposals/create/confirm-bernie` local synthetic
+vertical. The receipt `correlation_id` is the server-owned command-ledger UUID;
+it is deliberately not a claim that the draft `X-Correlation-Id` header is
+implemented or propagated by this route. Audit rows are append-only, while
+expired detailed session/event rows may be purged without erasing the opaque
+session coordinate from the durable command/audit/receipt chain.
+
 ## Closed Gates
 
 This index does not authorize:
@@ -76,10 +96,13 @@ This index does not authorize:
 
 ## Boundary
 
-This is a declaration-continuity artifact. It does not prove runtime
-correlation-id propagation, audit-log append-only semantics, database
-durability, resolver implementation, route handler correctness, or production
-deployment readiness.
+This declaration index alone does not prove runtime correlation-id propagation,
+resolver implementation, or production deployment readiness. The bounded Stage
+2 checkpoint separately proves local synthetic database durability, direct
+command/audit/receipt correlation, and append-only audit enforcement only for
+the named Bernie create-confirm variant. It does not generalize those claims to
+the draft request header, other command families, external clients, production,
+or deployment.
 
 `tests/test_api_spine_audit_correlation_continuity_index.py` validates this
 index by parsing only this markdown file,

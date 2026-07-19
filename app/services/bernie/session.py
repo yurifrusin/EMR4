@@ -1,16 +1,16 @@
-"""Persistence-shaped Bernie booking-session and event contracts.
+"""Durable Bernie booking-session and event contracts.
 
-Contract scaffolding for the server-owned booking-session statechart from the
-Fable 5 architecture consult (Sprint C substrate). This module defines the
-typed shapes and the static transition tables only - there is NO persisted
-session table, no session store, and no endpoint wiring in this slice.
+The typed shapes and static transition tables remain the single semantic
+statechart shared by the pure in-memory reference and the PostgreSQL runtime
+store. Persistence and route transaction mechanics live in ``session_store``
+and the appointment command router rather than in these models.
 
 Design constraints:
 
-- **Persistence-shaped, not persisted.** ``BernieSessionRecord`` and
+- **Persistence-shaped and durable.** ``BernieSessionRecord`` and
   ``BernieSessionEvent`` are flat, JSON-serializable Pydantic models whose
-  fields map 1:1 onto a future DB row / event-log row. Timestamps and ids are
-  stored fields, never derived at read time.
+  fields map onto the Stage 2 session and append-only event rows. Timestamps
+  and ids are stored fields, never derived at read time.
 - **Backend owns semantic state; frontend owns presentation state.** The
   states here are semantic booking-session states. Panel open/closed, composer
   mode, and disclosure state are frontend presentation state and deliberately
@@ -25,10 +25,10 @@ Design constraints:
   ``confirmed`` directly; ``confirmed`` is reachable only as a server advance
   from ``confirmation``, and ``confirmation`` only via ``confirm_submitted``
   from ``proposal_preview``.
-- **PHI note:** ``staff_instruction`` event payloads and recognised patient
-  ids make a persisted session row potentially PHI-bearing. Retention
-  classification is an open Yuri decision (consult plan section 9) and must be made
-  before any table lands.
+- **Field and retention boundary:** event payloads persist bounded structured
+  codes/coordinates only; raw instructions and names are rejected. This local
+  synthetic tranche retains incomplete detail for 24 hours and completed detail
+  for 30 days. Production/PII field protection and retention remain blocked.
 """
 
 from __future__ import annotations
@@ -202,6 +202,9 @@ class BernieSessionEventRejectionCode(str, Enum):
     event_not_allowed_in_state = "event_not_allowed_in_state"
     event_not_allowed_in_transient_state = "event_not_allowed_in_transient_state"
     phi_payload_not_allowed = "phi_payload_not_allowed"
+    event_payload_too_large = "event_payload_too_large"
+    event_payload_not_structured = "event_payload_not_structured"
+    session_expired = "session_expired"
 
 
 class BernieSessionEventResult(BaseModel):

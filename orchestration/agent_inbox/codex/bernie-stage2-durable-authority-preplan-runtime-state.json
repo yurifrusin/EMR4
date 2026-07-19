@@ -1,0 +1,84 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_user_approved_stage2_durable_authority_recovery_security_plan",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_stage2_preplan_five_source_rehydration_and_source_inventory",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No worker dispatch is part of the Extra High migration, retention, RLS, and threat-model plan freeze."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external implementation worker selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Any independent local-source veto will be considered only after the implementation evidence is complete; the provider lane remains paused."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The approved Stage 2 boundary was reconciled with the current in-memory Bernie session store, the appointment confirmation transaction, idempotency and audit models, the Alembic head, authentication/JWT controls, API Spine contracts, and the PostgreSQL RLS posture.",
+        "The exact pre-change focused baseline passed 73 tests serially.",
+        "PostgreSQL reports no current row-level security policies on appointments, appointment_audit_log, or appointment_command_idempotency; the application session store remains process-local and the successful Bernie command ledger does not record audit_log_id.",
+        "A metadata-only protected-path enumeration incident is contained and excluded from plan evidence; no protected content was accessed or used.",
+        "All five protected Git refs were fetched and verified aligned at 8cadc64c56d014a7f3fbd70d82ac5c041e63fed8 before the plan freeze."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent assigned; the plan freeze is protected integration work and the later implementation shares one database state."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
