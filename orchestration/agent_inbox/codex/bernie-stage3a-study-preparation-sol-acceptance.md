@@ -70,7 +70,7 @@ No failed gate was overridden.
 |---|---|
 | `docs/bernie-stage3-conversational-diary-decision.md` | `7c29576448a4fc4178e6a37f73f192e9fdb981752c0ae748634c24c50d317486` |
 | `docs/bernie-stage3a-yuri-formative-validation-plan.md` | `838cd7310ef41ae66a402996d8f25a1b69cc8644df030a186a4b71620279589e` |
-| `docs/bernie-stage3a-study-preparation-closeout.md` | `1d51fa6bd9516f81148c03ddfefa65699ea80815594497053d8219d16d69fff5` |
+| `docs/bernie-stage3a-study-preparation-closeout.md` | `2e9d52e38a129611d1bc6650bd79b1a2f1e98f639c0902168f3e5c8fa33de06d` |
 | `docs/diary/stage3a/index.html` | `98a6cc5aa94f6a3077d616859504576818c926269541ebf9a20378c83002e14b` |
 | `docs/diary/stage3a/stage3a-data.js` | `3103029f14f70fb46497ccbded7f1f7f9219daa68209e31aa0b677b4fbeca0d9` |
 | `docs/diary/stage3a/stage3a-core.js` | `4c75227dc9703da88bd12f297aaa30d2a719a4d2cd9bda308ba84cb2a8a3f15f` |
@@ -101,6 +101,19 @@ The exercised path was:
 
 At a 375-pixel content width, the page retained all 14 scenarios, produced no
 document horizontal overflow, and emitted no console warning/error.
+
+## Protected integration
+
+The bounded candidate commits are
+`4b043f3a3762d26daba7176dc1dafedfc1403e4c` and
+`0d90c1804448730e0cd8f83c3d643fd5ff033658`. Protected PR 45 passed Python
+Security, the Node/Office security baseline, Diary smoke review, both CodeQL
+language analyses, and the aggregate CodeQL gate on the exact final head. It
+had no comments, reviews, or unresolved threads.
+
+After the checks passed, the PR was promoted from draft and squash-merged as
+`25f8d4e61cf5ee5ca3726d4eed5fc99bb4e895da`. No branch protection, check,
+conversation, review, or admin rule was dismissed or bypassed.
 
 ## Evidence limitation and next gate
 
