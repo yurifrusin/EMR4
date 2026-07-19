@@ -150,7 +150,7 @@ def cleanup_empty_setup() -> dict[str, object]:
     }
 
 
-def _create_schema_and_seed(password: str) -> dict[str, object]:
+def _create_schema_and_seed(password: str) -> None:
     if not password:
         raise RuntimeError("STAGE1_SYNTHETIC_PASSWORD is required")
 
@@ -308,7 +308,6 @@ def _create_schema_and_seed(password: str) -> dict[str, object]:
             session.commit()
     finally:
         engine.dispose()
-    return readiness_report()
 
 
 def readiness_report() -> dict[str, object]:
@@ -427,7 +426,7 @@ def readiness_report() -> dict[str, object]:
     return result
 
 
-def rotate_synthetic_password(password: str) -> dict[str, object]:
+def rotate_synthetic_password(password: str) -> None:
     if not password:
         raise RuntimeError("STAGE1_SYNTHETIC_PASSWORD is required")
     from app.models.tenancy import User
@@ -444,11 +443,6 @@ def rotate_synthetic_password(password: str) -> dict[str, object]:
             session.commit()
     finally:
         engine.dispose()
-    return {
-        "database": LOCKED_DATABASE,
-        "synthetic_receptionist_password_rotated": True,
-        "credential_recorded": False,
-    }
 
 
 def start_runtime() -> dict[str, object]:
@@ -752,9 +746,8 @@ def main() -> int:
     try:
         if args.command == "setup":
             _create_database()
-            report = _create_schema_and_seed(
-                os.environ.get("STAGE1_SYNTHETIC_PASSWORD", "")
-            )
+            _create_schema_and_seed(os.environ.get("STAGE1_SYNTHETIC_PASSWORD", ""))
+            report = readiness_report()
         elif args.command == "status":
             report = readiness_report()
         elif args.command == "inspect-database":
@@ -762,9 +755,12 @@ def main() -> int:
         elif args.command == "cleanup-empty-setup":
             report = cleanup_empty_setup()
         elif args.command == "rotate-password":
-            report = rotate_synthetic_password(
-                os.environ.get("STAGE1_SYNTHETIC_PASSWORD", "")
-            )
+            rotate_synthetic_password(os.environ.get("STAGE1_SYNTHETIC_PASSWORD", ""))
+            report = {
+                "database": LOCKED_DATABASE,
+                "synthetic_receptionist_password_rotated": True,
+                "credential_recorded": False,
+            }
         elif args.command == "start-runtime":
             report = start_runtime()
         elif args.command == "probe-interpretation":

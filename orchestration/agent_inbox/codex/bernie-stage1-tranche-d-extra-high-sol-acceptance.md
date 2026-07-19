@@ -186,6 +186,12 @@ only `type(exc).__name__`; it does not serialize exception text. The readiness
 poll's transient connection-refusal handler also carries an explanatory
 comment, clearing CodeQL's accompanying empty-except note. Both changes remain
 inside the local synthetic harness and preserve fail-closed command behavior.
+CodeQL's next dataflow pass then identified the shared success-path `report`
+variable because the schema-seed and password-rotation helpers returned
+dictionaries from functions that accept the secret. Those helpers now return
+no value. Their sanitized readiness and rotation reports are constructed only
+after the secret-handling calls complete, preserving the same JSON contract
+while structurally preventing password-originated values from reaching stdout.
 
 Stage 1 is complete with `stage1_pass`. Stage 2 does not begin automatically.
 Its durable session, migration, concurrency, structural security, retention,
