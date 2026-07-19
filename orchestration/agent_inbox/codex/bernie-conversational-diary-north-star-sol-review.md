@@ -34,7 +34,12 @@ The verifier-acceptance receipt passes with SHA-256
 The integration and pre-commit receipts pass with SHA-256 values
 `9b589c638bcabe034603df62972da9ea015b17a2e650453510b62d7727a95be8`
 and `451d12450f222ab5d497054c6da80c171e30975d4afca285ca8ad2bf812721da`.
+The pre-push receipt passes with SHA-256
+`e7f080008230b47a12ed08bcd4cae692bedd13d6f6502e177576a783823bed75`.
 Every receipt names all five required rehydration sources.
+
+The accepted strategic commit is
+`a9d0a915978b3253b8e80c550e7633a7ac862e94`.
 
 Before this branch, `HEAD`, `master`, `handoff/current`, `origin/master`, and
 `origin/handoff/current` were clean and aligned at
