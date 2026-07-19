@@ -58,7 +58,11 @@
       "evidence": ["No native subagent assigned."]
     }
   ],
-  "worker_slots": [],
+  "worker_slots": [{
+    "resource_id": "deepseek-flash-workers",
+    "active_instance_ids": [],
+    "stale_instance_ids": []
+  }],
   "workspace_receipts": [],
   "assigned_agent_ids": []
 }
