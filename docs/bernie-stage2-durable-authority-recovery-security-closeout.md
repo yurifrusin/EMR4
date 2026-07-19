@@ -85,5 +85,7 @@ protocol, and acceptance thresholds. Provider work remains paused.
 
 The candidate is on `codex/bernie-stage2-durable-authority`, based on protected
 Stage 1 closeout head `8cadc64c56d014a7f3fbd70d82ac5c041e63fed8`.
+Its accepted implementation/evidence commit is
+`cd3a9e056d8553da9ae339896dd28222b6554a57`.
 Protected PR/check evidence, merge SHA, final ref alignment, and the non-PHI
 closeout notification will be appended only after they occur.

@@ -55,6 +55,8 @@ The protected-integration receipt SHA-256 is
 `9b589c638bcabe034603df62972da9ea015b17a2e650453510b62d7727a95be8`.
 The pre-commit receipt SHA-256 is
 `451d12450f222ab5d497054c6da80c171e30975d4afca285ca8ad2bf812721da`.
+The pre-push receipt SHA-256 is
+`e7f080008230b47a12ed08bcd4cae692bedd13d6f6502e177576a783823bed75`.
 Before integration, `HEAD`, local `master`, local `handoff/current`,
 `origin/master`, and `origin/handoff/current` were all
 `8cadc64c56d014a7f3fbd70d82ac5c041e63fed8`.
@@ -250,7 +252,9 @@ stateful transaction/migration tranche for which an external worker packet or
 native subagent would not have saved a meaningful cycle. No provider call or
 external prompt occurred.
 
-The accepted candidate may now enter the ordinary protected pull-request path.
+The accepted implementation/evidence commit is
+`cd3a9e056d8553da9ae339896dd28222b6554a57`. The candidate may now enter the
+ordinary protected pull-request path.
 This decision becomes final `stage2_pass` only after required GitHub checks pass
 without bypass and protected integration/closeout align `master` and
 `handoff/current`.
