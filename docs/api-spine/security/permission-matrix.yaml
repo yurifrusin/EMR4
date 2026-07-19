@@ -21,6 +21,7 @@ notes:
   - A missing role/action/resource triple must evaluate to deny.
   - Agents are principals with narrower delegated authority than the invoking human.
   - Database RLS or an RLS-equivalent milestone remains required before production external clients or live providers.
+  - Stage 2 proves forced PostgreSQL RLS for the local synthetic appointment-create vertical under a temporary non-login, non-superuser, non-bypass role; production role provisioning and external-client readiness remain blocked.
   - Enterprise-auth and FGA terms are a static boundary map only; this artifact does not enable a runtime FGA client, external identity write path, external patient client, or live provider.
 
 roles:

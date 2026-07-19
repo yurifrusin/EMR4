@@ -1,0 +1,84 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "protected_integration",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "stage2_extra_high_post_compaction_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external implementation worker was dispatched for the serial migration, database, and transaction lifecycle."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No provider-backed worker or prompt was used."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No independent provider veto was dispatched; Sol Extra High directly owns the bounded local synthetic security and acceptance decision."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The live handover, current authority allocation, active Stage 2 plan and acceptance sources, protected-evidence boundaries, user-decision boundaries, Git refs, and worktree were re-read after context restoration.",
+        "The approved Stage 2 scope remains the existing local synthetic appointment-create vertical with providers disabled and no protected, historical, PII, production, deployment, release, new action, GraphQL mutation, or autonomous-confirmation authority.",
+        "The disposable database migration lifecycle, preserved additive upgrade, forced-RLS restricted-role probe, append-only audit probe, durable restart/concurrency/retry/failure/retention tests, API Spine tests, security tests, Stage 1-compatible regressions, Bandit, compilation, syntax, readiness, and provider-boundary gates already passed before context restoration.",
+        "One broad filename inventory earlier exposed protected path names only. No protected content was opened, hashed, run, or used; later selection remained exact-path and exact-node only.",
+        "HEAD, master, handoff/current, origin/master, and origin/handoff/current remain aligned at 8cadc64c56d014a7f3fbd70d82ac5c041e63fed8 before integration; the worktree is on codex/bernie-stage2-durable-authority and contains only this tranche."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was assigned; acceptance and protected integration remain Sol-owned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

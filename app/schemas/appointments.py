@@ -351,6 +351,9 @@ class ConfirmationReceipt(BaseModel):
     appointment_type: Optional[str] = None
     confirmed_by_display: str
     confirmed_by_role: Optional[str] = None
+    correlation_id: Optional[uuid.UUID] = None
+    audit_event_id: Optional[uuid.UUID] = None
+    session_id: Optional[str] = None
     verification: ConfirmationReceiptVerification
 
 

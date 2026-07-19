@@ -1,6 +1,9 @@
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+import pytest
+from sqlalchemy.exc import IntegrityError
+
 from app.models.appointments import AppointmentCommandIdempotency
 from app.services.appointment_idempotency import (
     canonical_json,
@@ -18,13 +21,23 @@ HELPER_DOC = ROOT / "orchestration" / "api_spine_appointment_idempotency_storage
 SECRET = b"test-idempotency-secret"
 
 
-def _claim(db, practice, user, *, key="idem-1", body=None, stale_after=None, now=None):
+def _claim(
+    db,
+    practice,
+    user,
+    *,
+    key="idem-1",
+    body=None,
+    stale_after=None,
+    now=None,
+    operation_id="testAppointmentCommand",
+):
     return claim_appointment_command(
         db,
         practice_id=practice.id,
         actor_user_id=str(user.id),
         actor_role=user.role.value,
-        operation_id="confirmAppointmentCreateProposal",
+        operation_id=operation_id,
         route_family="create-confirm",
         raw_idempotency_key=key,
         request_body=body or {"confirmed": True, "proposal_id": "proposal-1"},
@@ -87,6 +100,31 @@ def test_completed_same_key_same_body_replays_stored_response(db, practice, gp_u
     assert replay.response_status_code == 201
     assert replay.response_body_json == {"appointment_id": "appt-1", "status": "Booked"}
     assert replay.record.id == first.record.id
+
+
+def test_completed_create_command_requires_target_and_direct_audit_correlation(
+    db,
+    practice,
+    gp_user,
+):
+    first = _claim(
+        db,
+        practice,
+        gp_user,
+        operation_id="confirmAppointmentCreateProposal",
+    )
+
+    with pytest.raises(IntegrityError) as error:
+        complete_appointment_command(
+            db,
+            first.record,
+            response_status_code=200,
+            response_body={"safe": True},
+            result_kind="confirmed_write",
+        )
+
+    assert "ck_appt_cmd_idem_completed_create_correlation" in str(error.value)
+    db.rollback()
 
 
 def test_same_key_different_body_conflicts_without_second_row(db, practice, gp_user):

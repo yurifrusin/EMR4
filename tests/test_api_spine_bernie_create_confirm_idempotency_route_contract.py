@@ -1,6 +1,7 @@
 from pathlib import Path
 from datetime import datetime, timedelta, timezone
 from copy import deepcopy
+from uuid import UUID
 
 import pytest
 
@@ -11,10 +12,13 @@ from app.models.appointments import (
     AppointmentAuditLog,
     AppointmentCommandIdempotency,
 )
-from app.routers.appointments import _BERNIE_SESSION_STORE
 from app.schemas.appointments import BernieCreateProposalConfirmationIn
 from app.services.appointment_idempotency import claim_appointment_command
-from app.services.bernie import BernieSessionEventType, BernieSessionState
+from app.services.bernie import (
+    BernieSessionEventType,
+    BernieSessionState,
+    DatabaseBernieSessionStore,
+)
 from tests.conftest import make_token
 
 
@@ -134,9 +138,17 @@ def _create_recognition_session(client, token: str, surface_id: str) -> dict:
     return event.json()["session"]
 
 
-def _bound_confirm_payload(client, token: str, practitioner, patient, *, surface_id: str) -> dict:
+def _store(db, practice_id) -> DatabaseBernieSessionStore:
+    return DatabaseBernieSessionStore(
+        db,
+        practice_id=practice_id,
+        secret=settings.secret_key.encode("utf-8"),
+    )
+
+
+def _bound_confirm_payload(client, db, token: str, practitioner, patient, *, surface_id: str) -> dict:
     session = _create_recognition_session(client, token, surface_id)
-    interpreted = _BERNIE_SESSION_STORE.append_server_outcome_event(
+    interpreted = _store(db, practitioner.practice_id).append_server_outcome_event(
         session_id=session["session_id"],
         event_type=BernieSessionEventType.interpretation_outcome,
         target_state=BernieSessionState.context_enrichment,
@@ -144,6 +156,7 @@ def _bound_confirm_payload(client, token: str, practitioner, patient, *, surface
         payload={"result": "interpreted", "safe": True},
     )
     assert interpreted.accepted is True
+    db.commit()
     proposal = client.post(
         WRAPPER_URL,
         json={
@@ -177,11 +190,11 @@ def _non_session_confirm_payload(client, token: str, practitioner, patient) -> d
     return {"confirmed": True, "selection_proposal": selection}
 
 
-def _session_event_count(payload: dict) -> int:
+def _session_event_count(db, payload: dict) -> int:
     binding = payload.get("session_binding") or payload["selection_proposal"].get("session_binding")
     if not binding:
         return 0
-    session = _BERNIE_SESSION_STORE.get_session(binding["session_id"])
+    session = _store(db, UUID(binding["practice_id"])).get_session(binding["session_id"])
     assert session is not None
     return len(session.events)
 
@@ -271,16 +284,16 @@ def test_missing_idempotency_key_blocks_before_writes_or_session_events(
     client, db, gp_user, practitioner, patient, schedule
 ):
     token = make_token(gp_user)
-    payload = _bound_confirm_payload(client, token, practitioner, patient, surface_id="s135-missing")
+    payload = _bound_confirm_payload(client, db, token, practitioner, patient, surface_id="s135-missing")
     before = _row_counts(db)
-    before_events = _session_event_count(payload)
+    before_events = _session_event_count(db, payload)
 
     resp = client.post(CONFIRM_URL, json=payload, headers=_auth(token))
 
     assert resp.status_code == 400, resp.text
     assert resp.json()["detail"]["code"] == "idempotency_key_required"
     assert _row_counts(db) == before
-    assert _session_event_count(payload) == before_events
+    assert _session_event_count(db, payload) == before_events
 
 
 def test_invalid_payload_does_not_create_ledger_by_default(client, db, gp_user):
@@ -301,7 +314,7 @@ def test_first_bound_confirmed_bernie_create_writes_appointment_audit_ledger_and
     client, db, gp_user, practitioner, patient, schedule
 ):
     token = make_token(gp_user)
-    payload = _bound_confirm_payload(client, token, practitioner, patient, surface_id="s135-first")
+    payload = _bound_confirm_payload(client, db, token, practitioner, patient, surface_id="s135-first")
     before = _row_counts(db)
 
     resp = client.post(CONFIRM_URL, json=payload, headers=_auth(token, "bound-first-key"))
@@ -315,7 +328,19 @@ def test_first_bound_confirmed_bernie_create_writes_appointment_audit_ledger_and
     assert ledger.operation_id == OPERATION_ID
     assert ledger.route_family == ROUTE_FAMILY
     assert ledger.response_status_code == 200
-    session = _BERNIE_SESSION_STORE.get_session(payload["session_binding"]["session_id"])
+    assert ledger.audit_log_id is not None
+    assert ledger.bernie_session_id == payload["session_binding"]["session_id"]
+    audit = db.query(AppointmentAuditLog).filter(
+        AppointmentAuditLog.id == ledger.audit_log_id,
+    ).one()
+    assert audit.command_id == ledger.id
+    assert audit.appointment_id == ledger.target_appointment_id
+    assert audit.bernie_session_id == ledger.bernie_session_id
+    receipt = data["confirmation_receipt"]
+    assert receipt["correlation_id"] == str(ledger.id)
+    assert receipt["audit_event_id"] == str(audit.id)
+    assert receipt["session_id"] == ledger.bernie_session_id
+    session = _store(db, gp_user.practice_id).get_session(payload["session_binding"]["session_id"])
     assert session is not None
     assert [event.event_type.value for event in session.events[-2:]] == [
         "confirm_submitted",
@@ -327,19 +352,19 @@ def test_same_key_same_body_replays_without_second_write_or_session_event(
     client, db, gp_user, practitioner, patient, schedule
 ):
     token = make_token(gp_user)
-    payload = _bound_confirm_payload(client, token, practitioner, patient, surface_id="s135-replay")
+    payload = _bound_confirm_payload(client, db, token, practitioner, patient, surface_id="s135-replay")
 
     first = client.post(CONFIRM_URL, json=payload, headers=_auth(token, "bound-replay-key"))
     assert first.status_code == 200, first.text
     after_first = _row_counts(db)
-    after_first_events = _session_event_count(payload)
+    after_first_events = _session_event_count(db, payload)
 
     second = client.post(CONFIRM_URL, json=payload, headers=_auth(token, "bound-replay-key"))
 
     assert second.status_code == 200, second.text
     assert second.json() == first.json()
     assert _row_counts(db) == after_first
-    assert _session_event_count(payload) == after_first_events
+    assert _session_event_count(db, payload) == after_first_events
 
 
 def test_same_key_same_body_replays_non_session_bound_without_second_write(
@@ -363,11 +388,11 @@ def test_same_key_different_body_conflicts_without_second_write_or_session_event
     client, db, gp_user, practitioner, patient, schedule
 ):
     token = make_token(gp_user)
-    payload = _bound_confirm_payload(client, token, practitioner, patient, surface_id="s135-conflict")
+    payload = _bound_confirm_payload(client, db, token, practitioner, patient, surface_id="s135-conflict")
     first = client.post(CONFIRM_URL, json=payload, headers=_auth(token, "bound-conflict-key"))
     assert first.status_code == 200, first.text
     after_first = _row_counts(db)
-    after_first_events = _session_event_count(payload)
+    after_first_events = _session_event_count(db, payload)
 
     changed = deepcopy(payload)
     changed["confirmed_warnings"] = ["changed-body"]
@@ -376,73 +401,73 @@ def test_same_key_different_body_conflicts_without_second_write_or_session_event
     assert second.status_code == 409, second.text
     assert second.json()["detail"]["code"] == "idempotency_key_conflict"
     assert _row_counts(db) == after_first
-    assert _session_event_count(payload) == after_first_events
+    assert _session_event_count(db, payload) == after_first_events
 
 
 def test_active_in_progress_key_fails_closed_without_write_or_session_event(
     client, db, gp_user, practitioner, patient, schedule
 ):
     token = make_token(gp_user)
-    payload = _bound_confirm_payload(client, token, practitioner, patient, surface_id="s135-progress")
+    payload = _bound_confirm_payload(client, db, token, practitioner, patient, surface_id="s135-progress")
     claim = _preclaim(db, gp_user, payload, key="bound-progress-key")
     assert claim.kind == "started"
     before = _row_counts(db)
-    before_events = _session_event_count(payload)
+    before_events = _session_event_count(db, payload)
 
     resp = client.post(CONFIRM_URL, json=payload, headers=_auth(token, "bound-progress-key"))
 
     assert resp.status_code == 409, resp.text
     assert resp.json()["detail"]["code"] == "idempotency_key_in_progress"
     assert _row_counts(db) == before
-    assert _session_event_count(payload) == before_events
+    assert _session_event_count(db, payload) == before_events
 
 
 def test_stale_in_progress_key_fails_closed_without_write_or_session_event(
     client, db, gp_user, practitioner, patient, schedule
 ):
     token = make_token(gp_user)
-    payload = _bound_confirm_payload(client, token, practitioner, patient, surface_id="s135-stale")
+    payload = _bound_confirm_payload(client, db, token, practitioner, patient, surface_id="s135-stale")
     claim = _preclaim(db, gp_user, payload, key="bound-stale-key")
     claim.record.updated_at = datetime(2000, 1, 1, tzinfo=timezone.utc)
     db.flush()
     before = _row_counts(db)
-    before_events = _session_event_count(payload)
+    before_events = _session_event_count(db, payload)
 
     resp = client.post(CONFIRM_URL, json=payload, headers=_auth(token, "bound-stale-key"))
 
     assert resp.status_code == 409, resp.text
     assert resp.json()["detail"]["code"] == "idempotency_key_stale_in_progress"
     assert _row_counts(db) == before
-    assert _session_event_count(payload) == before_events
+    assert _session_event_count(db, payload) == before_events
 
 
 def test_failed_transient_key_fails_closed_without_write_or_session_event(
     client, db, gp_user, practitioner, patient, schedule
 ):
     token = make_token(gp_user)
-    payload = _bound_confirm_payload(client, token, practitioner, patient, surface_id="s135-failed")
+    payload = _bound_confirm_payload(client, db, token, practitioner, patient, surface_id="s135-failed")
     claim = _preclaim(db, gp_user, payload, key="bound-failed-key")
     claim.record.state = "failed_transient"
     db.flush()
     before = _row_counts(db)
-    before_events = _session_event_count(payload)
+    before_events = _session_event_count(db, payload)
 
     resp = client.post(CONFIRM_URL, json=payload, headers=_auth(token, "bound-failed-key"))
 
     assert resp.status_code == 503, resp.text
     assert resp.json()["detail"]["code"] == "idempotency_key_failed_transient"
     assert _row_counts(db) == before
-    assert _session_event_count(payload) == before_events
+    assert _session_event_count(db, payload) == before_events
 
 
 def test_stale_session_binding_not_bypassed_by_idempotency(
     client, db, gp_user, practitioner, patient, schedule
 ):
     token = make_token(gp_user)
-    payload = _bound_confirm_payload(client, token, practitioner, patient, surface_id="s135-binding")
+    payload = _bound_confirm_payload(client, db, token, practitioner, patient, surface_id="s135-binding")
     payload["session_binding"]["session_revision"] = 0
     before = _row_counts(db)
-    before_events = _session_event_count(payload)
+    before_events = _session_event_count(db, payload)
 
     resp = client.post(CONFIRM_URL, json=payload, headers=_auth(token, "bound-binding-key"))
 
@@ -457,7 +482,7 @@ def test_stale_session_binding_not_bypassed_by_idempotency(
         "stale_session_revision",
     }
     assert _row_counts(db) == before
-    assert _session_event_count(payload) == before_events
+    assert _session_event_count(db, payload) == before_events
 
 
 def test_business_rule_failure_after_claim_removes_or_rolls_back_claim(
@@ -481,18 +506,24 @@ def test_replay_telemetry_distinct_from_new_confirm_mutation(
     client, db, gp_user, practitioner, patient, schedule
 ):
     token = make_token(gp_user)
-    payload = _bound_confirm_payload(client, token, practitioner, patient, surface_id="s135-telemetry")
+    payload = _bound_confirm_payload(client, db, token, practitioner, patient, surface_id="s135-telemetry")
 
     first = client.post(CONFIRM_URL, json=payload, headers=_auth(token, "telemetry-key"))
     assert first.status_code == 200, first.text
     ledger = db.query(AppointmentCommandIdempotency).one()
-    assert ledger.audit_log_id is None
+    assert ledger.audit_log_id is not None
+    audit = db.query(AppointmentAuditLog).filter(
+        AppointmentAuditLog.id == ledger.audit_log_id,
+    ).one()
+    assert audit.command_id == ledger.id
+    assert audit.appointment_id == ledger.target_appointment_id
+    assert audit.bernie_session_id == ledger.bernie_session_id
     assert ledger.response_body_json == first.json()
     assert ledger.result_kind == "confirmed_write"
-    event_count = _session_event_count(payload)
+    event_count = _session_event_count(db, payload)
 
     replay = client.post(CONFIRM_URL, json=payload, headers=_auth(token, "telemetry-key"))
 
     assert replay.status_code == 200, replay.text
     assert replay.json() == ledger.response_body_json
-    assert _session_event_count(payload) == event_count
+    assert _session_event_count(db, payload) == event_count

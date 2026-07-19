@@ -73,6 +73,13 @@ x-emr4-current-backend-alignment:
       current_backend_path: /appointments/proposals/create/confirm-bernie
       handler: confirm_bernie_create_proposal
       posture: create_confirm_family_variant
+      stage2_local_synthetic_checkpoint:
+        durable_session_state: postgresql_transactional
+        command_claim: atomic_on_conflict_then_row_lock
+        correlation: command_appointment_audit_session_receipt
+        practice_isolation: route_scope_plus_forced_rls_non_bypass_probe
+        audit_evidence: append_only_trigger
+        production_runtime_role: blocked_pending_fresh_decision
     - method: POST
       current_backend_path: /appointments/proposals/bernie/no-slot-suggestion-selection
       handler: select_no_slot_suggestion
@@ -84,7 +91,7 @@ x-emr4-current-backend-alignment:
     - method: GET
       current_backend_path: /appointments/bernie/sessions/active
       handler: get_active_bernie_session
-      posture: read_only_session_state
+      posture: session_state_read_or_initialize_no_appointment_write
     - method: POST
       current_backend_path: /appointments/bernie/sessions/new
       handler: create_new_bernie_session
@@ -953,6 +960,12 @@ components:
             type: string
         audit_event:
           $ref: "#/components/schemas/ConfirmationAuditEvent"
+        confirmation_receipt:
+          allOf:
+            - $ref: "#/components/schemas/ConfirmationReceipt"
+          description: >
+            Successful create confirmations may return the stored v1 receipt.
+            Blocked confirmations and non-create confirmation families omit it.
 
     SlotSearchNormalizeCommand:
       type: object
@@ -1269,6 +1282,91 @@ components:
           items:
             type: string
 
+    ConfirmationReceiptVerification:
+      type: object
+      required:
+        - actor_authenticated
+        - practice_scope_verified
+        - proposal_revalidated
+        - conflict_check_passed
+        - idempotency_verified
+        - audit_recorded
+        - signed_evidence_verified
+        - visual_diary_check_required
+      additionalProperties: false
+      properties:
+        actor_authenticated:
+          type: boolean
+        practice_scope_verified:
+          type: boolean
+        proposal_revalidated:
+          type: boolean
+        conflict_check_passed:
+          type: boolean
+        idempotency_verified:
+          type: boolean
+        audit_recorded:
+          type: boolean
+        signed_evidence_verified:
+          type: boolean
+        visual_diary_check_required:
+          const: false
+
+    ConfirmationReceipt:
+      type: object
+      required:
+        - schema_version
+        - outcome
+        - appointment_id
+        - patient_display
+        - practitioner_display
+        - appointment_date
+        - start_time_local
+        - duration_minutes
+        - status
+        - confirmed_by_display
+        - verification
+      additionalProperties: false
+      properties:
+        schema_version:
+          const: appointment.confirmation_receipt.v1
+        outcome:
+          const: appointment_created
+        appointment_id:
+          $ref: "#/components/schemas/Uuid"
+        patient_display:
+          type: string
+        practitioner_display:
+          type: string
+        appointment_date:
+          $ref: "#/components/schemas/ClinicDate"
+        start_time_local:
+          $ref: "#/components/schemas/ClinicTime"
+        duration_minutes:
+          type: integer
+          minimum: 1
+        status:
+          type: string
+        appointment_type:
+          type: string
+        confirmed_by_display:
+          type: string
+        confirmed_by_role:
+          type: string
+        correlation_id:
+          allOf:
+            - $ref: "#/components/schemas/Uuid"
+          description: >
+            Server-owned appointment command ledger id for the committed create
+            transaction. It is not the optional X-Correlation-Id request header.
+        audit_event_id:
+          $ref: "#/components/schemas/Uuid"
+        session_id:
+          type: string
+          maxLength: 64
+        verification:
+          $ref: "#/components/schemas/ConfirmationReceiptVerification"
+
   examples:
     AppointmentCreateProposalCommand:
       value:
@@ -1474,6 +1572,31 @@ components:
           evidence:
             - signed_confirmation_evidence_verified
             - explicit_staff_confirmation
+        confirmation_receipt:
+          schema_version: appointment.confirmation_receipt.v1
+          outcome: appointment_created
+          appointment_id: "77777777-7777-4777-8777-777777777777"
+          patient_display: "Margaret Thompson"
+          practitioner_display: "Dr Alex Shera"
+          appointment_date: "2026-07-14"
+          start_time_local: "09:30:00"
+          duration_minutes: 15
+          status: Booked
+          appointment_type: Standard
+          confirmed_by_display: "Reception User"
+          confirmed_by_role: receptionist
+          correlation_id: "88888888-8888-4888-8888-888888888888"
+          audit_event_id: "99999999-9999-4999-8999-999999999999"
+          session_id: "stage2-synthetic-session-coordinate"
+          verification:
+            actor_authenticated: true
+            practice_scope_verified: true
+            proposal_revalidated: true
+            conflict_check_passed: true
+            idempotency_verified: true
+            audit_recorded: true
+            signed_evidence_verified: true
+            visual_diary_check_required: false
 
     SlotSearchNormalizeCommand:
       value:

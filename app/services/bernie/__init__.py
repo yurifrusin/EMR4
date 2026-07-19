@@ -126,6 +126,7 @@ from app.services.bernie.session import (
     validate_session_event,
 )
 from app.services.bernie.session_store import (
+    DatabaseBernieSessionStore,
     InMemoryBernieSessionStore,
     build_session_confirmation_binding,
 )
@@ -238,6 +239,7 @@ __all__ = [
     "BernieSessionEventType",
     "BernieSessionRecord",
     "BernieSessionState",
+    "DatabaseBernieSessionStore",
     "InMemoryBernieSessionStore",
     "SessionTransitionValidation",
     "build_session_confirmation_binding",

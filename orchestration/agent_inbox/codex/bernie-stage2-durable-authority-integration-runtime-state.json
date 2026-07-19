@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "integration",
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "accepted_stage2_exact_candidate_and_check_gated_branch_integration",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree"
+      ]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No worker owns protected integration."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Unselected fallback."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No external implementation lane selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No external reviewer receives integration authority."]},
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol Extra High issued stage2_pass_ready_for_protected_integration after fresh five-source rehydration and verifier receipts.",
+        "All fifteen frozen gates pass: the explicit Stage 2 batch passed 100/100, API Spine 61/61, security 46/46, Stage 1-compatible supervised flow 63/63, API/accessibility/classifier 81/81, and the exact Diary allowlist 139/139.",
+        "The final changed/new Stage 2 test-file checkpoint passed 73/73 and the handover/API contract checkpoint passed 40/40; database RLS/immutability probe, Bandit, compilation, syntax, readiness, provider-boundary, Alembic drift, and whitespace gates pass.",
+        "The intended integration branch is codex/bernie-stage2-durable-authority from exact base 8cadc64c56d014a7f3fbd70d82ac5c041e63fed8.",
+        "Only the approved local synthetic appointment-create durability, recovery, security, API Spine, tests, receipts, acceptance, closeout, and handover artifacts are in integration scope."
+      ]
+    },
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent assigned; protected integration is Sol-owned."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

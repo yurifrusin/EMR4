@@ -198,6 +198,35 @@ def test_cross_user_and_wrong_surface_reject(client, gp_user, receptionist_user)
     assert _active_session(client, token, surface_id)["revision"] == 0
 
 
+def test_cross_practice_user_cannot_read_or_append_foreign_session(
+    client,
+    gp_user,
+    gp_user_b,
+):
+    owner_token = make_token(gp_user)
+    foreign_token = make_token(gp_user_b)
+    surface_id = _surface()
+    owner_session = _active_session(client, owner_token, surface_id)
+
+    foreign_append = _append_event(
+        client,
+        foreign_token,
+        owner_session["session_id"],
+        {
+            "surface_id": surface_id,
+            "event_type": "staff_instruction",
+            "expected_revision": 0,
+            "payload": {"intent_ref": "intent-cross-practice"},
+        },
+    )
+    foreign_active = _active_session(client, foreign_token, surface_id)
+
+    assert foreign_append.status_code == 409
+    assert foreign_append.json()["code"] == "session_not_found"
+    assert foreign_active["session_id"] != owner_session["session_id"]
+    assert _active_session(client, owner_token, surface_id)["revision"] == 0
+
+
 def test_phi_payload_rejects(client, gp_user):
     token = make_token(gp_user)
     surface_id = _surface()

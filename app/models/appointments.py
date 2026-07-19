@@ -4,6 +4,7 @@ from datetime import timedelta
 from sqlalchemy import (
     Column, String, Boolean, DateTime, Integer, Enum, ForeignKey, Date,
     Time, Index, Text, CheckConstraint, UniqueConstraint,
+    ForeignKeyConstraint,
 )
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.orm import relationship
@@ -78,6 +79,11 @@ class Appointment(Base):
         return self.start_time + timedelta(minutes=self.duration_minutes or 0)
 
     __table_args__ = (
+        UniqueConstraint(
+            "practice_id",
+            "id",
+            name="uq_appointments_practice_id_id",
+        ),
         Index("ix_appointments_practice_id", "practice_id"),
         Index("ix_appointments_patient_id", "patient_id"),
         Index("ix_appointments_practitioner_id", "practitioner_id"),
@@ -126,11 +132,51 @@ class AppointmentAuditLog(Base):
     cancellation_reason = Column(String(500), nullable=True)
     status_reason_code = Column(String(50), nullable=True)
     confirmed_warnings = Column(JSONB, nullable=True)
+    command_id = Column(
+        UUID(as_uuid=True),
+        ForeignKey(
+            "appointment_command_idempotency.id",
+            name="fk_appt_audit_log_command_id",
+            use_alter=True,
+        ),
+        nullable=True,
+    )
+    bernie_session_id = Column(
+        String(64),
+        nullable=True,
+    )
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
     __table_args__ = (
+        UniqueConstraint(
+            "practice_id",
+            "id",
+            name="uq_appt_audit_log_practice_id_id",
+        ),
+        ForeignKeyConstraint(
+            ["practice_id", "appointment_id"],
+            ["appointments.practice_id", "appointments.id"],
+            name="fk_appt_audit_log_practice_appointment",
+            use_alter=True,
+        ),
+        ForeignKeyConstraint(
+            ["practice_id", "command_id"],
+            [
+                "appointment_command_idempotency.practice_id",
+                "appointment_command_idempotency.id",
+            ],
+            name="fk_appt_audit_log_practice_command",
+            use_alter=True,
+        ),
         Index("ix_appt_audit_log_practice_appt", "practice_id", "appointment_id"),
         Index("ix_appt_audit_log_appointment_id", "appointment_id"),
+        Index(
+            "uq_appt_audit_log_command_id",
+            "command_id",
+            unique=True,
+            postgresql_where=command_id.isnot(None),
+        ),
+        Index("ix_appt_audit_log_practice_session", "practice_id", "bernie_session_id"),
     )
 
 
@@ -152,12 +198,29 @@ class AppointmentCommandIdempotency(Base):
     response_body_json = Column(JSONB, nullable=True)
     result_kind = Column(String(50), nullable=True)
     target_appointment_id = Column(UUID(as_uuid=True), ForeignKey("appointments.id"), nullable=True)
-    audit_log_id = Column(UUID(as_uuid=True), ForeignKey("appointment_audit_log.id"), nullable=True)
+    audit_log_id = Column(
+        UUID(as_uuid=True),
+        ForeignKey(
+            "appointment_audit_log.id",
+            name="fk_appt_cmd_idem_audit_log_id",
+            use_alter=True,
+        ),
+        nullable=True,
+    )
+    bernie_session_id = Column(
+        String(64),
+        nullable=True,
+    )
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)
     expires_at = Column(DateTime(timezone=True), nullable=True)
 
     __table_args__ = (
+        UniqueConstraint(
+            "practice_id",
+            "id",
+            name="uq_appt_cmd_idem_practice_id_id",
+        ),
         UniqueConstraint(
             "practice_id",
             "actor_user_id",
@@ -175,8 +238,34 @@ class AppointmentCommandIdempotency(Base):
             "response_body_hash IS NOT NULL AND response_body_json IS NOT NULL)",
             name="ck_appt_cmd_idem_completed_response",
         ),
+        CheckConstraint(
+            "NOT (state = 'completed' AND "
+            "operation_id = 'confirmAppointmentCreateProposal' AND "
+            "result_kind = 'confirmed_write') OR "
+            "(target_appointment_id IS NOT NULL AND audit_log_id IS NOT NULL)",
+            name="ck_appt_cmd_idem_completed_create_correlation",
+        ),
+        ForeignKeyConstraint(
+            ["practice_id", "target_appointment_id"],
+            ["appointments.practice_id", "appointments.id"],
+            name="fk_appt_cmd_idem_practice_target",
+            use_alter=True,
+        ),
+        ForeignKeyConstraint(
+            ["practice_id", "audit_log_id"],
+            ["appointment_audit_log.practice_id", "appointment_audit_log.id"],
+            name="fk_appt_cmd_idem_practice_audit",
+            use_alter=True,
+        ),
         Index("ix_appt_cmd_idem_practice_target", "practice_id", "target_appointment_id"),
         Index("ix_appt_cmd_idem_practice_created", "practice_id", "created_at"),
+        Index(
+            "uq_appt_cmd_idem_audit_log_id",
+            "audit_log_id",
+            unique=True,
+            postgresql_where=audit_log_id.isnot(None),
+        ),
+        Index("ix_appt_cmd_idem_practice_session", "practice_id", "bernie_session_id"),
     )
 
 

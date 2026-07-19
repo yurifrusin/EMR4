@@ -7,14 +7,17 @@ compatibility lane.
 
 from copy import deepcopy
 from datetime import date, datetime
+from uuid import UUID
 
 import pytest
 
 import app.routers.appointments as appointments_router
 from app.models.appointments import Appointment, AppointmentAuditLog
-from app.routers.appointments import _BERNIE_SESSION_STORE
+from app.config import settings
+from app.models.bernie_sessions import BernieBookingSession
 from app.services.bernie import (
     BernieSessionState,
+    DatabaseBernieSessionStore,
     SIGNED_CONFIRMATION_EVIDENCE_PURPOSE,
     SIGNED_CONFIRMATION_EVIDENCE_VERSION,
     build_session_confirmation_binding,
@@ -176,28 +179,36 @@ def test_valid_signature_for_wrong_payload_blocks_without_mutation(
     assert _row_counts(db) == before
 
 
-def _bind_payload_to_server_session(payload: dict, gp_user, *, revision: int = 7) -> dict:
+def _bind_payload_to_server_session(payload: dict, gp_user, db, *, revision: int = 7) -> dict:
     selection = payload["selection_proposal"]
     candidate = selection["selected_candidate"]
     command = selection["create_proposal"]["command"]
     candidate_id = payload["candidate_freshness_id"] or candidate["candidate_freshness_id"]
     proposal_id = payload["proposal_freshness_id"] or selection["proposal_freshness_id"]
 
-    session = _BERNIE_SESSION_STORE.create_session(
+    store = DatabaseBernieSessionStore(
+        db,
+        practice_id=gp_user.practice_id,
+        secret=settings.secret_key.encode("utf-8"),
+    )
+    session = store.create_session(
         practice_id=gp_user.practice_id,
         user_id=gp_user.id,
         surface_id=f"diary-test-{candidate_id[:8]}",
         request_reference_date=gp_user.created_at.date() if getattr(gp_user, "created_at", None) else None,
     )
-    session = session.model_copy(update={
-        "state": BernieSessionState.proposal_preview,
-        "revision": revision,
-        "patient_id": command["patient_id"],
-        "practitioner_id": command["practitioner_id"],
-        "candidate_freshness_ids": [candidate_id],
-        "staged_proposal_freshness_id": proposal_id,
-    })
-    _BERNIE_SESSION_STORE._sessions[session.session_id] = session
+    row = db.query(BernieBookingSession).filter(
+        BernieBookingSession.session_id == session.session_id,
+    ).one()
+    row.state = BernieSessionState.proposal_preview.value
+    row.revision = revision
+    row.patient_id = UUID(command["patient_id"])
+    row.practitioner_id = UUID(command["practitioner_id"])
+    row.candidate_freshness_ids = [candidate_id]
+    row.staged_proposal_freshness_id = proposal_id
+    db.flush()
+    session = store.get_session(session.session_id)
+    assert session is not None
 
     binding = build_session_confirmation_binding(
         session,
@@ -221,6 +232,7 @@ def test_session_bound_signed_confirmation_success_writes_and_audits_binding(
     payload = _bind_payload_to_server_session(
         _signed_confirm_payload(client, token, practitioner, patient),
         gp_user,
+        db,
     )
     before = _row_counts(db)
 
@@ -241,6 +253,7 @@ def test_signed_session_binding_mismatch_blocks_without_mutation(
     payload = _bind_payload_to_server_session(
         _signed_confirm_payload(client, token, practitioner, patient),
         gp_user,
+        db,
         revision=4,
     )
     tampered_binding = deepcopy(payload["session_binding"])

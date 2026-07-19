@@ -64,3 +64,22 @@ def test_requirements_remove_python_jose_and_transitive_ecdsa() -> None:
     assert "PyJWT==2.13.0" in requirements
     assert "python-jose" not in requirements
     assert "ecdsa" not in requirements
+
+
+def test_route_auth_rejects_token_practice_claim_that_differs_from_user(
+    client,
+    gp_user,
+) -> None:
+    token = create_access_token({
+        "sub": str(gp_user.id),
+        "practice_id": str(uuid4()),
+        "role": gp_user.role.value,
+    })
+
+    response = client.get(
+        "/api/v1/appointments/bernie/sessions/active",
+        headers={"Authorization": f"Bearer {token}"},
+    )
+
+    assert response.status_code == 401
+    assert response.json()["detail"] == "Token practice does not match the current user practice"

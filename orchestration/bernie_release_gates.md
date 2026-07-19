@@ -234,6 +234,31 @@ blocked values:
   with available tools, such as Yuri's clinical judgment, real-world phone/device
   context, external account ownership, or production service-console decisions.
 
+## Stage 2 Durable Appointment-Create Gate
+
+The approved provider-free Stage 2 local synthetic tranche may close only when
+the existing REST Bernie create-confirm variant proves all of the following in
+one database authority boundary:
+
+- durable session recovery and ordered event reconstruction after a fresh
+  SQLAlchemy session;
+- one accepted and one typed stale result for concurrent requests based on one
+  session revision;
+- exactly one appointment, append-only audit, completed idempotency result,
+  confirmation outcome, and stored receipt for simultaneous same-key confirms;
+- complete rollback after an injected pre-commit failure, followed by one clean
+  retry and a mutation-free fresh-session replay;
+- exact command, appointment, audit, retained session coordinate, and receipt
+  correlation;
+- route-level same-practice checks plus forced PostgreSQL RLS reproduced under
+  a non-bypass role with missing context failing closed; and
+- direct audit `UPDATE` and `DELETE` rejected independently of RLS.
+
+This gate is local synthetic evidence only. It does not provision a production
+database role, authorize PII, deploy a scheduler or cleanup job, add another
+appointment action, enable GraphQL mutations, reopen providers, or grant Bernie
+confirmation authority.
+
 ## Sprint 98 Screenshot Blockers
 
 Sprint 98 release gates must also block the exact regression classes reported

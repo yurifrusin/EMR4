@@ -1,12 +1,14 @@
 import hashlib
 import hmac
 import json
+import uuid
 from dataclasses import dataclass
 from datetime import date, datetime, time, timedelta, timezone
 from typing import Any, Literal
 from uuid import UUID
 
 from sqlalchemy.orm import Session
+from sqlalchemy.dialects.postgresql import insert as postgresql_insert
 
 from app.models.appointments import AppointmentCommandIdempotency
 
@@ -78,20 +80,16 @@ def claim_appointment_command(
     idempotency_key_hash = hash_idempotency_key(raw_idempotency_key, secret)
     request_body_hash = sha256_canonical_json(request_body)
 
-    record = (
-        db.query(AppointmentCommandIdempotency)
-        .filter(
-            AppointmentCommandIdempotency.practice_id == practice_id,
-            AppointmentCommandIdempotency.actor_user_id == actor_user_id,
-            AppointmentCommandIdempotency.operation_id == operation_id,
-            AppointmentCommandIdempotency.idempotency_key_hash == idempotency_key_hash,
-        )
-        .with_for_update()
-        .one_or_none()
+    identity_filter = (
+        AppointmentCommandIdempotency.practice_id == practice_id,
+        AppointmentCommandIdempotency.actor_user_id == actor_user_id,
+        AppointmentCommandIdempotency.operation_id == operation_id,
+        AppointmentCommandIdempotency.idempotency_key_hash == idempotency_key_hash,
     )
-
-    if record is None:
-        record = AppointmentCommandIdempotency(
+    inserted_id = db.execute(
+        postgresql_insert(AppointmentCommandIdempotency)
+        .values(
+            id=uuid.uuid4(),
             practice_id=practice_id,
             actor_user_id=actor_user_id,
             actor_role=actor_role,
@@ -102,8 +100,24 @@ def claim_appointment_command(
             request_body_canonicalization_version=1,
             state="in_progress",
         )
-        db.add(record)
-        db.flush()
+        .on_conflict_do_nothing(
+            constraint="uq_appt_cmd_idem_practice_actor_operation_key"
+        )
+        .returning(AppointmentCommandIdempotency.id)
+    ).scalar_one_or_none()
+    record = (
+        db.query(AppointmentCommandIdempotency)
+        .filter(
+            AppointmentCommandIdempotency.id == inserted_id
+            if inserted_id is not None
+            else identity_filter[0],
+            *(() if inserted_id is not None else identity_filter[1:]),
+        )
+        .with_for_update()
+        .one()
+    )
+
+    if inserted_id is not None:
         return AppointmentIdempotencyDecision(kind="started", record=record)
 
     if record.request_body_hash != request_body_hash:
@@ -142,6 +156,7 @@ def complete_appointment_command(
     result_kind: str,
     target_appointment_id: UUID | None = None,
     audit_log_id: UUID | None = None,
+    bernie_session_id: str | None = None,
 ) -> AppointmentCommandIdempotency:
     record.state = "completed"
     record.response_status_code = response_status_code
@@ -150,5 +165,6 @@ def complete_appointment_command(
     record.result_kind = result_kind
     record.target_appointment_id = target_appointment_id
     record.audit_log_id = audit_log_id
+    record.bernie_session_id = bernie_session_id
     db.flush()
     return record
