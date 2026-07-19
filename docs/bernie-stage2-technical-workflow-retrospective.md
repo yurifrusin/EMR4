@@ -4,7 +4,7 @@ Date: 2026-07-19
 
 Owner: GPT Sol Extra High
 
-Decision: `recommendations_approved_and_implemented_pending_protected_integration`
+Decision: `approved_maintenance_integrated`
 
 Execution record:
 `docs/bernie-stage2-technical-maintenance-closeout.md` and

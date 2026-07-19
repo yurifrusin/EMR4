@@ -4,7 +4,7 @@ Date: 2026-07-19
 
 Owner: GPT Sol Extra High
 
-Decision: `candidate_pass_pending_protected_integration`
+Decision: `technical_maintenance_pass`
 
 ## Outcome
 
@@ -54,9 +54,12 @@ authority moved.
 - `node --check docs/diary/diary.js`: pass; and
 - `git diff --check`: pass.
 
-The required GitHub Python Security, CodeQL, Node/Office, and aggregate security
-contexts remain the protected-integration gate; this result becomes final only
-after those checks and protected squash merge complete.
+Protected PR 43 passed Python Security, both CodeQL language analyses, the
+aggregate CodeQL context, and the Node/Office manifest/security context on exact
+branch head `8830fbef75124d82786faad0e30fbe98f9ceaf11`. Opt-in squash
+auto-merge then integrated the candidate as
+`26e8d9ae4531645f86b7723ca4bc7a94a84aa3ee` without admin bypass, force push,
+check dismissal, or conversation dismissal.
 
 ## Contained lint-scope incident
 
