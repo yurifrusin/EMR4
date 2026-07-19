@@ -1,0 +1,5 @@
+# Reproducible local/CI developer tools. Runtime dependencies remain in
+# requirements.txt; install this file only in development and verification.
+ruff==0.15.22
+bandit==1.9.4
+pip-audit==2.10.1

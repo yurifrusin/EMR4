@@ -1,7 +1,7 @@
 import uuid
 import enum
 from sqlalchemy import (
-    Column, String, Boolean, DateTime, Text, Enum, ForeignKey, Float, Index,
+    Column, String, Boolean, DateTime, Enum, ForeignKey, Float, Index,
 )
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.orm import relationship

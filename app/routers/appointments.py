@@ -23,7 +23,7 @@ from app.models.appointments import (
 from app.models.diary import DiaryBreak, DiaryColumn, DiaryTemplate, WaitingArea, Room, DiaryRoster
 from app.schemas.appointments import (
     AppointmentCreate, AppointmentUpdate, AppointmentStatusUpdate,
-    AppointmentOut, AppointmentTypeOut, PractitionerScheduleOut, ScheduleSlot,
+    AppointmentOut, AppointmentTypeOut, ScheduleSlot,
     AppointmentCheckinDefaults, AppointmentConflictBrief, AppointmentCreateCommand,
     AppointmentCreateProposalOut, AppointmentConfirmCreateProposalOut, AppointmentProposalIssue,
     ConfirmationReceipt, ConfirmationReceiptVerification,
@@ -57,7 +57,6 @@ from app.schemas.appointments import (
 )
 from app.services.bernie_booking_classifier import (
     BookingClassification,
-    BookingClassificationEvidence,
     classify_existing_booking,
 )
 from app.services.diary.outcomes import (
@@ -72,8 +71,6 @@ from app.services.diary.confirm_actions import (
 )
 from app.services.bernie import (
     BernieReceptionPolicyDecision,
-    ConfirmAffordanceDecision,
-    ConfirmAffordanceGate,
     evaluate_confirm_affordance,
     compute_candidate_freshness_id,
     compute_proposal_freshness_id,

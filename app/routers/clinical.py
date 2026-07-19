@@ -5,7 +5,7 @@ from app.dependencies import get_db, get_current_user
 from app.models.tenancy import User
 from app.models.patients import Patient
 from app.models.clinical import (
-    Allergy, PatientHistory, Encounter, Prescription, ClinicalDiagnosis,
+    Allergy, PatientHistory, Encounter, Prescription,
     ConsentForm,
 )
 from app.models.care_plans import CarePlan

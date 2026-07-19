@@ -19,11 +19,11 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install security tools
-        run: pip install pip-audit bandit
+      - name: Install pinned verification tools
+        run: pip install -r requirements-dev.txt
 
-      - name: Historical diary leakage lint
-        run: python scripts/historical_diary_leakage_lint.py tests docs
+      - name: Canonical Python lint and security gates
+        run: python scripts/verify_repository.py --profile ci-lint
 
       - name: Dependency CVE scan (pip-audit)
         # Fails when known CVEs are found in requirements.txt.
@@ -33,9 +33,5 @@ jobs:
 
       - name: Static security analysis (Bandit)
         if: ${{ always() }}
-        # Scans app/ and scripts/ at medium+ severity AND medium+ confidence (-ll -ii).
-        # Low-severity or low-confidence findings are intentionally suppressed.
-        # Configuration lives in pyproject.toml [tool.bandit]. The reviewed
-        # baseline contains only two Git-object SHA-1 identity uses; new
-        # medium/high findings still fail the job.
-        run: python scripts/security_bandit_gate.py
+        # Runs the exact reviewed baseline through the canonical entry point.
+        run: python scripts/verify_repository.py --profile ci-bandit

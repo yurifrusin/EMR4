@@ -14,7 +14,6 @@ cycle with envelopes.py because envelopes.py uses lazy imports to call back here
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Optional
 
 from app.services.diary.action_grammar import (
     DIARY_ACTION_GRAMMAR,

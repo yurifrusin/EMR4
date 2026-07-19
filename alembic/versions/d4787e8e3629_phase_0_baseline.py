@@ -19,9 +19,162 @@ branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
 
+EMPTY_BOOTSTRAP_MARKER_TYPE = "emr4_phase0_empty_bootstrap_marker"
+LEGACY_CORE_TABLES = {
+    "patients",
+    "encounters",
+    "mbs_claims",
+    "clinical_diagnoses",
+    "prescriptions",
+}
+LEGACY_DIRECTORY_TABLES = {"mbs_directory", "snomed_directory"}
+
+
+def _create_legacy_core_tables() -> None:
+    """Create the exact pre-Phase-0 tables expected by this baseline."""
+    op.create_table(
+        "patients",
+        sa.Column("id", sa.UUID(), nullable=False),
+        sa.Column("first_name", sa.String(length=100), nullable=False),
+        sa.Column("last_name", sa.String(length=100), nullable=False),
+        sa.Column("date_of_birth", sa.Date(), nullable=False),
+        sa.Column("medicare_number", sa.String(length=20), nullable=True),
+        sa.Column("ihi_number", sa.String(length=20), nullable=True),
+        sa.PrimaryKeyConstraint("id"),
+    )
+    op.create_table(
+        "encounters",
+        sa.Column("id", sa.UUID(), nullable=False),
+        sa.Column("patient_id", sa.UUID(), nullable=True),
+        sa.Column("google_doc_id", sa.String(length=255), nullable=False),
+        sa.Column(
+            "consultation_date",
+            sa.DateTime(timezone=True),
+            server_default=sa.text("CURRENT_TIMESTAMP"),
+            nullable=True,
+        ),
+        sa.Column("is_finalized", sa.Boolean(), nullable=True),
+        sa.Column("consultation_type", sa.String(length=255), nullable=True),
+        sa.Column("raw_document_text", sa.Text(), nullable=True),
+        sa.Column(
+            "document_embedding",
+            pgvector.sqlalchemy.vector.VECTOR(dim=768),
+            nullable=True,
+        ),
+        sa.ForeignKeyConstraint(["patient_id"], ["patients.id"]),
+        sa.PrimaryKeyConstraint("id"),
+    )
+    op.create_table(
+        "mbs_claims",
+        sa.Column("id", sa.UUID(), nullable=False),
+        sa.Column("encounter_id", sa.UUID(), nullable=True),
+        sa.Column("item_number", sa.String(length=10), nullable=False),
+        sa.Column("description", sa.Text(), nullable=True),
+        sa.Column("status", sa.String(length=20), nullable=True),
+        sa.ForeignKeyConstraint(["encounter_id"], ["encounters.id"]),
+        sa.PrimaryKeyConstraint("id"),
+    )
+    op.create_table(
+        "clinical_diagnoses",
+        sa.Column("id", sa.UUID(), nullable=False),
+        sa.Column("patient_id", sa.UUID(), nullable=True),
+        sa.Column("encounter_id", sa.UUID(), nullable=True),
+        sa.Column("term", sa.String(length=255), nullable=False),
+        sa.Column("snomed_ct_au_code", sa.String(length=50), nullable=True),
+        sa.ForeignKeyConstraint(["encounter_id"], ["encounters.id"]),
+        sa.ForeignKeyConstraint(["patient_id"], ["patients.id"]),
+        sa.PrimaryKeyConstraint("id"),
+    )
+    op.create_table(
+        "prescriptions",
+        sa.Column("id", sa.UUID(), nullable=False),
+        sa.Column("patient_id", sa.UUID(), nullable=True),
+        sa.Column("encounter_id", sa.UUID(), nullable=True),
+        sa.Column("drug_name", sa.String(length=255), nullable=False),
+        sa.Column("dosage_text", sa.Text(), nullable=True),
+        sa.Column("is_active", sa.Boolean(), nullable=True),
+        sa.ForeignKeyConstraint(["encounter_id"], ["encounters.id"]),
+        sa.ForeignKeyConstraint(["patient_id"], ["patients.id"]),
+        sa.PrimaryKeyConstraint("id"),
+    )
+
+
+def _create_missing_directory_tables(existing_tables: set[str]) -> None:
+    if "mbs_directory" not in existing_tables:
+        op.create_table(
+            "mbs_directory",
+            sa.Column("item_number", sa.String(length=10), nullable=False),
+            sa.Column("description", sa.Text(), nullable=False),
+            sa.Column("fee", sa.String(length=20), nullable=True),
+            sa.PrimaryKeyConstraint("item_number"),
+        )
+    if "snomed_directory" not in existing_tables:
+        op.create_table(
+            "snomed_directory",
+            sa.Column("concept_id", sa.String(length=50), nullable=False),
+            sa.Column("term", sa.String(length=255), nullable=False),
+            sa.PrimaryKeyConstraint("concept_id"),
+        )
+
+
+def _prepare_legacy_baseline() -> bool:
+    """Bootstrap an empty database or validate the historical legacy shape."""
+    existing_tables = set(sa.inspect(op.get_bind()).get_table_names(schema="public"))
+    existing_tables.discard("alembic_version")
+    empty_database = not existing_tables
+
+    if empty_database:
+        _create_legacy_core_tables()
+        existing_tables.update(LEGACY_CORE_TABLES)
+    else:
+        missing_core = LEGACY_CORE_TABLES - existing_tables
+        if missing_core:
+            missing = ", ".join(sorted(missing_core))
+            raise RuntimeError(
+                "Phase-0 legacy baseline is incomplete; refusing to guess "
+                f"missing table definitions: {missing}"
+            )
+
+    _create_missing_directory_tables(existing_tables)
+    if empty_database:
+        # A standalone enum is intentionally outside ORM table metadata. It
+        # survives the later revisions, lets root downgrade restore a truly
+        # empty database, and is removed with the other bootstrap enums.
+        op.execute(
+            f"CREATE TYPE {EMPTY_BOOTSTRAP_MARKER_TYPE} AS ENUM ('empty')"
+        )
+    return empty_database
+
+
+def _is_empty_database_bootstrap() -> bool:
+    marker = op.get_bind().execute(
+        sa.text(
+            f"SELECT to_regtype('public.{EMPTY_BOOTSTRAP_MARKER_TYPE}') "
+            "IS NOT NULL"
+        )
+    ).scalar_one()
+    return bool(marker)
+
+
+def _drop_foreign_key_for_column(table_name: str, column_name: str) -> None:
+    """Drop one PostgreSQL-named FK emitted from an unnamed Alembic FK."""
+    matches = [
+        foreign_key
+        for foreign_key in sa.inspect(op.get_bind()).get_foreign_keys(table_name)
+        if foreign_key.get("constrained_columns") == [column_name]
+    ]
+    if len(matches) != 1 or not matches[0].get("name"):
+        raise RuntimeError(
+            "Expected exactly one named foreign key for "
+            f"{table_name}.{column_name}; found {len(matches)}"
+        )
+    op.drop_constraint(matches[0]["name"], table_name, type_="foreignkey")
+
+
 def upgrade() -> None:
     """Upgrade schema."""
     op.execute("CREATE EXTENSION IF NOT EXISTS vector")
+    _prepare_legacy_baseline()
     # Truncate legacy tables so NOT NULL columns can be added cleanly (dev only)
     op.execute(
         "TRUNCATE TABLE prescriptions, mbs_claims, clinical_diagnoses, encounters, patients CASCADE"
@@ -618,9 +771,10 @@ def upgrade() -> None:
 
 def downgrade() -> None:
     """Downgrade schema."""
+    remove_bootstrap_tables = _is_empty_database_bootstrap()
     # ### commands auto generated by Alembic - please adjust! ###
-    op.drop_constraint(None, 'prescriptions', type_='foreignkey')
-    op.drop_constraint(None, 'prescriptions', type_='foreignkey')
+    _drop_foreign_key_for_column("prescriptions", "prescribed_by")
+    _drop_foreign_key_for_column("prescriptions", "practice_id")
     op.drop_index('ix_prescriptions_patient_id', table_name='prescriptions')
     op.alter_column('prescriptions', 'patient_id',
                existing_type=sa.UUID(),
@@ -636,7 +790,7 @@ def downgrade() -> None:
     op.drop_column('prescriptions', 'pbs_code')
     op.drop_column('prescriptions', 'prescribed_by')
     op.drop_column('prescriptions', 'practice_id')
-    op.drop_constraint(None, 'patients', type_='foreignkey')
+    _drop_foreign_key_for_column("patients", "practice_id")
     op.drop_index('ix_patients_practice_id', table_name='patients')
     op.drop_index('ix_patients_medicare_number', table_name='patients')
     op.drop_index('ix_patients_last_name', table_name='patients')
@@ -664,9 +818,9 @@ def downgrade() -> None:
     op.drop_column('patients', 'dva_number')
     op.drop_column('patients', 'practice_id')
     op.add_column('mbs_claims', sa.Column('status', sa.VARCHAR(length=20), autoincrement=False, nullable=True))
-    op.drop_constraint(None, 'mbs_claims', type_='foreignkey')
-    op.drop_constraint(None, 'mbs_claims', type_='foreignkey')
-    op.drop_constraint(None, 'mbs_claims', type_='foreignkey')
+    _drop_foreign_key_for_column("mbs_claims", "practice_id")
+    _drop_foreign_key_for_column("mbs_claims", "patient_id")
+    _drop_foreign_key_for_column("mbs_claims", "practitioner_id")
     op.drop_index('ix_mbs_claims_practice_id', table_name='mbs_claims')
     op.drop_index('ix_mbs_claims_patient_id', table_name='mbs_claims')
     op.drop_index('ix_mbs_claims_claim_status', table_name='mbs_claims')
@@ -679,9 +833,9 @@ def downgrade() -> None:
     op.drop_column('mbs_claims', 'practitioner_id')
     op.drop_column('mbs_claims', 'patient_id')
     op.drop_column('mbs_claims', 'practice_id')
-    op.drop_constraint(None, 'encounters', type_='foreignkey')
-    op.drop_constraint(None, 'encounters', type_='foreignkey')
-    op.drop_constraint(None, 'encounters', type_='foreignkey')
+    _drop_foreign_key_for_column("encounters", "practice_id")
+    _drop_foreign_key_for_column("encounters", "appointment_id")
+    _drop_foreign_key_for_column("encounters", "practitioner_id")
     op.drop_index('ix_encounters_practice_id', table_name='encounters')
     op.drop_index('ix_encounters_patient_id', table_name='encounters')
     op.alter_column('encounters', 'google_doc_id',
@@ -698,7 +852,7 @@ def downgrade() -> None:
     op.drop_column('encounters', 'appointment_id')
     op.drop_column('encounters', 'practitioner_id')
     op.drop_column('encounters', 'practice_id')
-    op.drop_constraint(None, 'clinical_diagnoses', type_='foreignkey')
+    _drop_foreign_key_for_column("clinical_diagnoses", "practice_id")
     op.drop_index('ix_clinical_diagnoses_practice_id', table_name='clinical_diagnoses')
     op.drop_index('ix_clinical_diagnoses_patient_id', table_name='clinical_diagnoses')
     op.alter_column('clinical_diagnoses', 'patient_id',
@@ -778,3 +932,35 @@ def downgrade() -> None:
     op.drop_table('appointment_types')
     op.drop_table('practices')
     # ### end Alembic commands ###
+    if remove_bootstrap_tables:
+        # The root migration must return a database it bootstrapped to the same
+        # genuinely empty state. Existing legacy databases retain their tables.
+        op.drop_table("prescriptions")
+        op.drop_table("mbs_claims")
+        op.drop_table("clinical_diagnoses")
+        op.drop_table("encounters")
+        op.drop_table("patients")
+        op.drop_table("mbs_directory")
+        op.drop_table("snomed_directory")
+        op.execute(
+            """
+            DO $$
+            DECLARE enum_record record;
+            BEGIN
+                FOR enum_record IN
+                    SELECT type_name.typname
+                    FROM pg_type AS type_name
+                    JOIN pg_namespace AS namespace
+                      ON namespace.oid = type_name.typnamespace
+                    WHERE type_name.typtype = 'e'
+                      AND namespace.nspname = 'public'
+                LOOP
+                    EXECUTE format(
+                        'DROP TYPE IF EXISTS %I CASCADE',
+                        enum_record.typname
+                    );
+                END LOOP;
+            END
+            $$
+            """
+        )

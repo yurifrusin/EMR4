@@ -1,0 +1,70 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "maintenance_implementation",
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "extra_high_stage2_technical_maintenance_postcompaction_rehydration",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree"
+      ]
+    }]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The maintenance surfaces share CI, migration, receipt, verification, and protected-integration invariants; Sol retains the tranche under the worker-lane economy rule."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No provider-backed worker or prompt is used."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No independent provider veto is required for bounded developer-tooling and historical migration maintenance."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri explicitly approved execution of the non-production Stage 2 technical recommendations.",
+        "Authorized scope is opt-in GitHub auto-merge under unchanged protections, pinned Ruff developer/CI parity, canonical verification, LF receipt output, historical empty-database Alembic repair, and risk-proportional wrapper timeouts.",
+        "Production database-role/GUC and field-encryption design remains deferred because its recommendation was conditional on production planning authority.",
+        "Protected holdouts v1-v10 remain sealed; provider, PII, production, deployment, release, product behavior, Stage 3, event runtime, and new mutation gates remain closed.",
+        "After context restoration, HEAD, master, handoff/current, origin/master, and origin/handoff/current remain aligned at 26dbdf15b636fa0ae6719c216db9cdf00fab86cc; only the tranche receipt artifacts are untracked."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent assigned."]
+    }
+  ],
+  "worker_slots": [{
+    "resource_id": "deepseek-flash-workers",
+    "active_instance_ids": [],
+    "stale_instance_ids": []
+  }],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

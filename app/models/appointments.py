@@ -3,7 +3,7 @@ import enum
 from datetime import timedelta
 from sqlalchemy import (
     Column, String, Boolean, DateTime, Integer, Enum, ForeignKey, Date,
-    Time, Index, Text, CheckConstraint, UniqueConstraint,
+    Time, Index, CheckConstraint, UniqueConstraint,
     ForeignKeyConstraint,
 )
 from sqlalchemy.dialects.postgresql import UUID, JSONB
