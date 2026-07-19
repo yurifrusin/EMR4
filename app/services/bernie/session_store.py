@@ -1123,6 +1123,8 @@ class DatabaseBernieSessionStore:
                     try:
                         identity_updates[record_key] = uuid.UUID(value)
                     except ValueError:
+                        # Optional projection ignores a non-UUID token; the
+                        # append still retains the screened event evidence.
                         pass
             if identity_updates:
                 updated = updated.model_copy(update=identity_updates, deep=True)

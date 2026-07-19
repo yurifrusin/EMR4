@@ -488,6 +488,8 @@ def run_acceptance(database_url: str) -> dict[str, Any]:
                 try:
                     connection.execute(text("RESET ROLE"))
                 except DBAPIError:
+                    # A failed probe may abort the transaction before RESET;
+                    # the unconditional outer rollback still restores state.
                     pass
                 outer.rollback()
 

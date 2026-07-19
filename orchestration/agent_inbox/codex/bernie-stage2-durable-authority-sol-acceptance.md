@@ -147,7 +147,7 @@ migration; it did not prevent the frozen upgrade/downgrade/re-upgrade gate from
 the current accepted head.
 
 The restricted-role acceptance script SHA-256 is
-`0815581578c7b8b0dfd5a8a6a04911856b2a412d0f010c018aae5c25a8cfba52`.
+`2283c83413d12820a64c097e040566b6fd21974c01d363713d74e1a742ce15e0`.
 Its fresh result is `status=pass`:
 
 - missing tenant context returned zero rows on all five tables;
@@ -231,17 +231,29 @@ protected/user boundaries, and every test-required certification fact. The
 live handover is now 436 lines and all five handover archive/authority tests
 pass. This changes no product or Stage 2 acceptance meaning.
 
+During protected integration, GitHub Advanced Security opened three mechanical
+review threads: two `except` blocks needed explanatory comments and one test
+import was unused. The exception handlers now state their bounded fail-safe
+behavior and the unused import is removed. Focused durable-store/recovery tests
+pass 9/9; the restricted-role database probe, exact two-item Bandit baseline,
+historical-diary leakage lint, compilation, and whitespace checks pass again.
+The review-fix pre-commit receipt passes at
+`orchestration/agent_inbox/codex/bernie-stage2-review-fix-precommit-receipt.json`,
+SHA-256
+`451d12450f222ab5d497054c6da80c171e30975d4afca285ca8ad2bf812721da`.
+The correction changes no product behavior, acceptance meaning, or authority.
+
 ## Exact critical hashes
 
 | Artifact | SHA-256 |
 |---|---|
 | `app/models/bernie_sessions.py` | `a0d5d750aead77ea64c2d9375785f61b2612eee0b0c0119e318941365057f53e` |
 | `app/models/appointments.py` | `0a6be841ffe69907a889163f111892fec289ddcc9d77dfa22e4f671dbf3a2c67` |
-| `app/services/bernie/session_store.py` | `63a5557980b2edd557a527a789238d36f48fdf5c981885568471be7ce01cfd36` |
+| `app/services/bernie/session_store.py` | `99ef407a346fa03a03c21a79583681e705497178b5fd8747f20f41fb28dbe2d3` |
 | `app/services/appointment_idempotency.py` | `87212e458e65d291810bbb7d289e1151f2c53ac29cfdc73354bf16dbbc754cc8` |
 | `app/routers/appointments.py` | `6246eb0799aea71cd3aa1fa2f1a78667ecb3f011c7e32e624c40f71cc5c40446` |
 | `tests/test_bernie_stage2_durable_session_store.py` | `8e968be3a3b3f7ec74c473538fd8c5339eb1e40b80c686db481d67601f366ba8` |
-| `tests/test_bernie_stage2_confirmation_recovery.py` | `8db8725a409635abbdf4ceeedaf95053d847b5b77acd3c37360f5fa64afb34e7` |
+| `tests/test_bernie_stage2_confirmation_recovery.py` | `ed1f4f49385986545127c213fed8856352d5927fd837b249629fef04b8880b22` |
 | `tests/test_bernie_stage2_database_contract.py` | `7c876a738878cfc53f4efee163a41be4f47b413dd386ab739150495ed2566292` |
 
 ## Worker mix, integration, and next boundary

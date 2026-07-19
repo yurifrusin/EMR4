@@ -19,7 +19,6 @@ from app.models.tenancy import User
 from app.services.bernie import DatabaseBernieSessionStore
 from tests.conftest import make_token
 from tests.test_api_spine_bernie_create_confirm_idempotency_route_contract import (
-    _auth,
     _bound_confirm_payload,
 )
 
