@@ -168,6 +168,17 @@ browser, backend, database, API Spine, security, and regression gates. Worker
 and subagent dispatch would not add a separable implementation artifact or
 independent authority to this serial acceptance.
 
+During protected integration, PR 36's Python Security job exposed a mechanical
+annotation mismatch in the new local harness: four fixed-loopback `urlopen`
+calls carried Ruff's `# noqa: S310` form, which Bandit does not consume. The
+reviewed Bandit baseline remains unchanged at exactly its two historical B324
+Git-identity findings. Only those four annotations changed to the scoped
+`# nosec B310` form; all URLs remain hard-coded to loopback. The complete
+Bandit gate then passed with exactly two reviewed findings, the two security-
+tooling contract tests passed, Python compilation passed, and
+`git diff --check` passed. This correction changes no Stage 1 behavior,
+acceptance meaning, database state, provider boundary, or protected evidence.
+
 Stage 1 is complete with `stage1_pass`. Stage 2 does not begin automatically.
 Its durable session, migration, concurrency, structural security, retention,
 recovery, and complete command/audit-correlation scope requires a new Yuri

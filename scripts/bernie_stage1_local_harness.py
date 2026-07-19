@@ -528,7 +528,7 @@ def start_runtime() -> dict[str, object]:
             if ready[name]:
                 continue
             try:
-                with urlopen(url, timeout=0.5) as response:  # noqa: S310 - locked loopback URLs
+                with urlopen(url, timeout=0.5) as response:  # nosec B310 - locked loopback URLs
                     ready[name] = response.status == 200
             except Exception:
                 pass
@@ -567,7 +567,7 @@ def probe_interpretation() -> dict[str, object]:
         headers={"Content-Type": "application/x-www-form-urlencoded"},
         method="POST",
     )
-    with urlopen(login_request, timeout=5) as response:  # noqa: S310 - locked loopback URL
+    with urlopen(login_request, timeout=5) as response:  # nosec B310 - locked loopback URL
         token = json.loads(response.read())["access_token"]
     body = {
         "instruction": (
@@ -592,7 +592,7 @@ def probe_interpretation() -> dict[str, object]:
         },
         method="POST",
     )
-    with urlopen(interpret_request, timeout=10) as response:  # noqa: S310 - locked loopback URL
+    with urlopen(interpret_request, timeout=10) as response:  # nosec B310 - locked loopback URL
         payload = json.loads(response.read())
         status_code = response.status
     supervised_body = {
@@ -609,7 +609,7 @@ def probe_interpretation() -> dict[str, object]:
         },
         method="POST",
     )
-    with urlopen(supervised_request, timeout=10) as response:  # noqa: S310 - locked loopback URL
+    with urlopen(supervised_request, timeout=10) as response:  # nosec B310 - locked loopback URL
         supervised = json.loads(response.read())
         supervised_status = response.status
     command = payload.get("command_candidate") or {}
