@@ -1,0 +1,26 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "integration",
+  "context_health": {"agent_contexts": [{
+    "agent_id": "orchestrator",
+    "measurement_source": "stage1_pr36_merged_closeout_carrier",
+    "rehydrated_from_receipt": true,
+    "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+  }]},
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No worker integration authority."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Unselected fallback."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No external integration authority."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No external reviewer has integration authority."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": [
+      "Protected PR 36 passed all required checks and squash-merged to master as dcb4f9d54ce63b8dbfad882979a32292bf8b6289.",
+      "The closeout carrier changes only the authoritative handover and final acceptance integration record.",
+      "Origin handoff/current remains at 2d3fa717d612add9d1f871daf9e899751c5d210c until the check-gated closeout carrier merges."
+    ]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent assigned."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
