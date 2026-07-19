@@ -2,7 +2,19 @@
 
 Date: 2026-07-18
 
-Status: **frozen_for_execution — approved by Yuri on 2026-07-18**
+Status: **stage1_pass_accepted** — originally frozen and approved by Yuri on
+2026-07-18; reasoning-level closeout amendment approved on 2026-07-19; fresh
+Tranche D resolved S7's exact-node scope, the bounded Extra High maintenance
+tranche repaired all nine historical G10 harness failures without weakening
+product checks, and fresh Extra High Tranche D reacceptance passed every frozen
+gate on 2026-07-19. The accepted claim remains local, synthetic,
+provider-free, and development-only.
+
+Closeout-protocol amendment: on 2026-07-19 Yuri decided that a second Sol
+Extra High pass is not required merely because bounded work was executed at
+High. The frozen product claim and safety gates are unchanged; reasoning now
+escalates by materiality under `AGENTS.md`, and each tranche uses a fresh chat
+with full rehydration.
 
 Authority source: Yuri accepted the strategic transition recommendation and
 authorized Stage 1 on 2026-07-18, then explicitly approved candidate SHA-256
@@ -338,17 +350,27 @@ worker starts.
   mechanical correction receives at most the bounded loop permitted by
   `AGENTS.md`.
 
-Planning and final acceptance use Extra High reasoning. Bounded execution and
-orchestration use High reasoning unless a material architecture, safety, or
-acceptance fork requires escalation.
+Reasoning level follows the materiality rule in `AGENTS.md`. High owns bounded
+planning, execution, evidence review, and check-gated closeout. A second Extra
+High pass is not required merely because High performed the work. Extra High is
+required only for a material architecture, authority, policy, privacy,
+security, migration, production/release, contradictory-evidence, failed-gate,
+or acceptance-meaning fork, or when Yuri explicitly names it for that decision.
 
-### Tranche D — Independent acceptance and closeout
+### Tranche D — Fresh-context acceptance and closeout
 
-Sol reproduces the evidence on the exact candidate, applies the API Spine and
-security gates, and obtains an independent fresh-context review if material code
-changed. Only a final `stage1_pass` can support a recommendation for the next
-product stage. Commit, push, baton movement, and Pushover occur only in the
-separate accepted closeout flow required by `AGENTS.md`.
+Open a fresh chat and rehydrate from all five mandatory sources. Sol High may
+review and accept the exact bounded candidate it executed, apply the API Spine
+and security gates, and complete the normal check-gated commit/push/baton
+closeout without a ceremonial Extra High handoff. Obtain an independent
+fresh-context review when code or evidence changes are material under the
+active risk rule. Only a final `stage1_pass` can support a recommendation for
+the next product stage. A partial result may be committed to a task branch/PR
+when accurately labelled, but it cannot move the baton as a Stage 1 pass.
+
+Stage 2 is not automatic after Stage 1. It is the strategic review's durable
+authority, recovery, and security foundation and requires a new Yuri decision
+covering migration, structural security, audit retention, and recovery period.
 
 ## 9. Stop and escalation rules
 

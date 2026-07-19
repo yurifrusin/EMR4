@@ -28,8 +28,20 @@ EXPECTED_AUDIT_EVIDENCE = [
     "source_slot_selection_proposal",
     "source_create_proposal",
 ]
-EXPECTED_CONFIRMED_AUDIT_EVIDENCE = [
+EXPECTED_SIGNED_AUDIT_EVIDENCE = [
     *EXPECTED_AUDIT_EVIDENCE,
+    "bernie_signed_confirmation_evidence_verified",
+]
+EXPECTED_SIGNED_CONFIRMED_AUDIT_EVIDENCE = [
+    *EXPECTED_SIGNED_AUDIT_EVIDENCE,
+    "bernie_identity_confidence_medium",
+]
+EXPECTED_LEGACY_AUDIT_EVIDENCE = [
+    *EXPECTED_AUDIT_EVIDENCE,
+    "legacy_unsigned_confirmation_compat",
+]
+EXPECTED_LEGACY_CONFIRMED_AUDIT_EVIDENCE = [
+    *EXPECTED_LEGACY_AUDIT_EVIDENCE,
     "bernie_identity_confidence_medium",
 ]
 
@@ -54,6 +66,14 @@ def _install_forbidden_ai_provider_guard(monkeypatch) -> None:
         raise AssertionError("Bernie wrapper confirmation harness must not call AI providers")
 
     monkeypatch.setattr(ai_service, "_get_default_provider", forbidden_provider)
+
+
+def _pin_clinic_fixture_time(monkeypatch) -> None:
+    monkeypatch.setattr(
+        appointments_router,
+        "_clinic_local_now",
+        lambda tz: datetime(2026, 6, 22, 9, 0, 0, tzinfo=tz),
+    )
 
 
 def _wrapper_body(practitioner, **overrides) -> dict:
@@ -84,7 +104,10 @@ def _confirm(client, token: str, selection: dict, confirmed: bool = True):
             "confirmed": confirmed,
             "selection_proposal": selection,
         },
-        headers=_auth(token),
+        headers={
+            **_auth(token),
+            "Idempotency-Key": "wrapper-confirmation-review-harness",
+        },
     )
 
 
@@ -150,6 +173,7 @@ def _make_conflicting_appointment(db, practice, practitioner, patient) -> Appoin
     )
     db.add(appt)
     db.flush()
+    db.commit()
     return appt
 
 
@@ -183,6 +207,7 @@ def test_wrapper_confirmation_ready_evidence_confirms_exactly_one_write(
     monkeypatch,
 ):
     _install_forbidden_ai_provider_guard(monkeypatch)
+    _pin_clinic_fixture_time(monkeypatch)
     token = make_token(gp_user)
     selection = _wrapper_confirmation_ready_selection(
         client,
@@ -207,7 +232,7 @@ def test_wrapper_confirmation_ready_evidence_confirms_exactly_one_write(
     assert data["appointment"]["practitioner_id"] == str(practitioner.id)
     assert data["appointment"]["appointment_date"] == REFERENCE_DATE
     assert data["appointment"]["start_time_local"] == "09:00:00"
-    assert data["audit_evidence"] == EXPECTED_CONFIRMED_AUDIT_EVIDENCE
+    assert data["audit_evidence"] == EXPECTED_LEGACY_CONFIRMED_AUDIT_EVIDENCE
     assert db.query(Appointment).count() == appointment_before + 1
     assert db.query(AppointmentAuditLog).count() == audit_before + 1
 
@@ -215,7 +240,7 @@ def test_wrapper_confirmation_ready_evidence_confirms_exactly_one_write(
         AppointmentAuditLog.appointment_id == data["appointment"]["id"]
     ).one()
     assert audit.action.value == "create"
-    assert audit.confirmed_warnings == EXPECTED_CONFIRMED_AUDIT_EVIDENCE
+    assert audit.confirmed_warnings == EXPECTED_LEGACY_CONFIRMED_AUDIT_EVIDENCE
 
 
 def test_wrapper_staff_review_confirm_payload_confirms_after_explicit_approval(
@@ -228,6 +253,7 @@ def test_wrapper_staff_review_confirm_payload_confirms_after_explicit_approval(
     monkeypatch,
 ):
     _install_forbidden_ai_provider_guard(monkeypatch)
+    _pin_clinic_fixture_time(monkeypatch)
     token = make_token(gp_user)
     wrapper_resp = _post_wrapper(
         client,
@@ -249,20 +275,25 @@ def test_wrapper_staff_review_confirm_payload_confirms_after_explicit_approval(
     confirm_payload = review["confirm_payload"]
     assert confirm_payload["confirmed"] is False
     assert confirm_payload["selection_proposal"] == wrapper["selection_proposal"]
+    assert confirm_payload["signed_confirmation_evidence_required"] is True
+    assert confirm_payload["signed_confirmation_evidence"] is not None
     appointment_before, audit_before = _row_counts(db)
 
     confirm_payload["confirmed"] = True
     confirm_resp = client.post(
         CONFIRM_URL,
         json=confirm_payload,
-        headers=_auth(token),
+        headers={
+            **_auth(token),
+            "Idempotency-Key": "wrapper-staff-review-confirm-harness",
+        },
     )
 
     assert confirm_resp.status_code == 200, confirm_resp.text
     data = confirm_resp.json()
     assert data["safe"] is True
     assert data["autonomy_tier"] == "confirmed_write"
-    assert data["audit_evidence"] == EXPECTED_CONFIRMED_AUDIT_EVIDENCE
+    assert data["audit_evidence"] == EXPECTED_SIGNED_CONFIRMED_AUDIT_EVIDENCE
     assert db.query(Appointment).count() == appointment_before + 1
     assert db.query(AppointmentAuditLog).count() == audit_before + 1
 
@@ -277,6 +308,7 @@ def test_wrapper_confirmation_ready_but_confirmed_false_writes_nothing(
     monkeypatch,
 ):
     _install_forbidden_ai_provider_guard(monkeypatch)
+    _pin_clinic_fixture_time(monkeypatch)
     token = make_token(gp_user)
     selection = _wrapper_confirmation_ready_selection(
         client,
@@ -296,6 +328,7 @@ def test_wrapper_confirmation_ready_but_confirmed_false_writes_nothing(
     assert data["autonomy_tier"] == "blocked"
     assert data["appointment"] is None
     assert data["blocks"][0]["code"] == "explicit_confirmation_required"
+    assert data["audit_evidence"] == EXPECTED_LEGACY_AUDIT_EVIDENCE
     _assert_row_counts_unchanged(db, expected_counts)
 
 
@@ -310,6 +343,7 @@ def test_wrapper_confirmation_stale_conflict_revalidates_and_writes_nothing(
     monkeypatch,
 ):
     _install_forbidden_ai_provider_guard(monkeypatch)
+    _pin_clinic_fixture_time(monkeypatch)
     token = make_token(gp_user)
     selection = _wrapper_confirmation_ready_selection(
         client,
@@ -331,6 +365,7 @@ def test_wrapper_confirmation_stale_conflict_revalidates_and_writes_nothing(
     assert data["appointment"] is None
     assert data["blocks"][0]["code"] == "create_proposal_revalidation_blocked"
     assert data["blocks"][1]["code"] == "appointment_conflict"
+    assert data["audit_evidence"] == EXPECTED_LEGACY_AUDIT_EVIDENCE
     _assert_row_counts_unchanged(db, expected_counts)
 
 
@@ -343,6 +378,7 @@ def test_candidate_selection_required_wrapper_output_is_non_mutating(
     monkeypatch,
 ):
     _install_forbidden_ai_provider_guard(monkeypatch)
+    _pin_clinic_fixture_time(monkeypatch)
     token = make_token(gp_user)
     expected_counts = _row_counts(db)
 
@@ -365,6 +401,7 @@ def test_blocked_normalization_wrapper_output_is_non_mutating(
     monkeypatch,
 ):
     _install_forbidden_ai_provider_guard(monkeypatch)
+    _pin_clinic_fixture_time(monkeypatch)
     token = make_token(gp_user)
     expected_counts = _row_counts(db)
 
@@ -398,6 +435,7 @@ def test_non_confirmation_ready_selection_evidence_cannot_write(
     monkeypatch,
 ):
     _install_forbidden_ai_provider_guard(monkeypatch)
+    _pin_clinic_fixture_time(monkeypatch)
     token = make_token(gp_user)
     expected_counts = _row_counts(db)
 
@@ -416,6 +454,7 @@ def test_non_confirmation_ready_selection_evidence_cannot_write(
     assert data["blocks"][0]["code"] == "slot_selection_not_safe"
     assert data["blocks"][1]["code"] == "selected_candidate_required"
     assert data["blocks"][2]["code"] == "create_proposal_required"
+    assert data["audit_evidence"] == EXPECTED_LEGACY_AUDIT_EVIDENCE
     _assert_row_counts_unchanged(db, expected_counts)
 
 

@@ -1,0 +1,61 @@
+{
+  "schema_version": "bernie.stage1.tranche-c.correction-evidence.v1",
+  "recorded_on": "2026-07-19",
+  "decision": "bounded_correction_verified_ready_for_clean_tranche_b_restart",
+  "source_commit": "2d3fa717d612add9d1f871daf9e899751c5d210c",
+  "database": "gp_pms_stage1_2d3fa717_20260719_r2",
+  "failure_reproduction": {
+    "evidence_label": "live_local_backend_postgres",
+    "instruction_unchanged": true,
+    "reference_date": "2026-07-20",
+    "candidate_count": 7,
+    "outcome": "clarification_required",
+    "reason_code": "context_reference_date_stale",
+    "appointments": 0,
+    "appointment_audits": 0,
+    "appointment_command_idempotency": 0
+  },
+  "correction": {
+    "path": "app/routers/appointments.py",
+    "affected_ordinary_paths": [
+      "interpretation_context",
+      "supervised_booking_context"
+    ],
+    "rule": "reference_date is stale only when earlier than clinic-local today",
+    "new_policy_or_authority": false
+  },
+  "focused_tests": {
+    "command": ".venv\\Scripts\\python.exe -m pytest tests/test_bernie_reference_date_freshness.py::test_interpret_context_freshness_allows_today_and_future_but_stales_past tests/test_bernie_reference_date_freshness.py::test_supervised_context_freshness_allows_today_and_future_but_stales_past -q",
+    "passed": 6,
+    "failed": 0,
+    "past_stale": true,
+    "today_stale": false,
+    "future_stale": false,
+    "product_writes": 0
+  },
+  "post_correction_reproduction": {
+    "evidence_label": "live_local_backend_postgres",
+    "candidate_count": 7,
+    "outcome": "candidate_selection_required",
+    "reason_code": "context_reference_date_fresh",
+    "appointments_before_browser_confirmation": 0,
+    "appointment_audits_before_browser_confirmation": 0,
+    "appointment_command_idempotency_before_browser_confirmation": 0
+  },
+  "browser_vertical_supporting_proof": {
+    "evidence_label": "live_local_browser_backend_postgres",
+    "diary_date": "2026-07-20",
+    "proposal": "Margaret Thompson with Alex Shera at 14:00 for 15 minutes",
+    "explicit_confirmation_action": true,
+    "appointments_after_confirmation": 1,
+    "appointment_audits_after_confirmation": 1,
+    "appointment_command_idempotency_after_confirmation": 1,
+    "receipt_schema": "appointment.confirmation_receipt.v1",
+    "receipt_result_kind": "confirmed_write",
+    "screenshots": [
+      "docs/stage1-evidence/stage1-r2-s1-proposal-before-confirmation.png",
+      "docs/stage1-evidence/stage1-r2-s2-confirmed-receipt.png"
+    ],
+    "claim_scope": "correction verification only; final Tranche B restarts from a clean disposable database"
+  }
+}

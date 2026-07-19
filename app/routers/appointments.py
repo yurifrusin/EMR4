@@ -4296,11 +4296,11 @@ def _resolve_bernie_interpretation_context(
             context_freshness_val = BernieContextFreshness(
                 reference_date=request_ref_date,
                 generated_at=patient_booking_ctx.generated_at,
-                stale=request_ref_date != _clinic_today,
+                stale=request_ref_date < _clinic_today,
                 basis=(
-                    "reference_date matches clinic-local today"
-                    if request_ref_date == _clinic_today
-                    else "reference_date differs from clinic-local today; context may be stale"
+                    "reference_date predates clinic-local today; context is stale"
+                    if request_ref_date < _clinic_today
+                    else "reference_date is clinic-local today or later; context is current"
                 ),
             )
         except (TypeError, ValueError):
@@ -6167,11 +6167,11 @@ def propose_bernie_supervised_booking(
         _sb_context_freshness = BernieContextFreshness(
             reference_date=request_reference_date,
             generated_at=_sb_patient_ctx.generated_at,
-            stale=request_reference_date != clinic_today,
+            stale=request_reference_date < clinic_today,
             basis=(
-                "reference_date matches clinic-local today"
-                if request_reference_date == clinic_today
-                else "reference_date differs from clinic-local today; context may be stale"
+                "reference_date predates clinic-local today; context is stale"
+                if request_reference_date < clinic_today
+                else "reference_date is clinic-local today or later; context is current"
             ),
         )
         # Fast path: compact context catches in-cap collisions when there is no

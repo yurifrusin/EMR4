@@ -49,6 +49,29 @@ write authorities; manifest literacy is an interpretation aid only.
   calls to the intended backend. If the browser/API path is intercepted, call it
   route-intercepted even when the UI is rendered in a real browser.
 
+## Browser Driver and Automation Protocol
+
+The browser driver does not determine the evidence class. Interactive browser
+control and a task-scoped Playwright script are equally valid when they exercise
+the same visible UI and backend boundary. For repeatable S0-S7-style acceptance,
+prefer Playwright when it can encode stable selectors, serial synthetic fixture
+transitions, screenshots, sanitized request/outcome summaries, and database
+readback more economically than manual control.
+
+A Playwright run is `live_local_browser_backend_postgres` only when the Diary
+runs in a real browser and its API calls reach the real local FastAPI and
+isolated PostgreSQL path without `page.route(...)`, proxy interception, fixture
+responses, or mocked transport. Direct HTTP support is separately labelled
+`live_local_backend_postgres`. Any intercepted browser path is labelled
+`route_intercepted_browser`, even if Playwright renders the full UI.
+
+Automation must click the visible explicit confirmation control, must not call
+page internals to simulate staff authority, and must validate backend-owned
+appointment, audit, idempotency, typed-receipt, and readback evidence. Saved
+artifacts must exclude credentials, bearer tokens, raw headers, or secret-bearing
+traces. Protected-safe runs use exact allowlisted paths and exact pytest node IDs
+only; browser scripting does not authorize repository-wide discovery.
+
 ## Provider-Free Interpretation Harness Gate
 
 The provider-free Bernie Interpretation Harness is not runtime or provider

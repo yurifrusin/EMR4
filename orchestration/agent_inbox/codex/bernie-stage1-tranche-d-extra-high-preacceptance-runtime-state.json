@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh_stage1_tranche_d_extra_high_five_source_rehydration_and_exact_gate_results",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No worker dispatched for this serial final acceptance."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external implementation worker selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No additional independent veto is required because Tranche C was a bounded two-expression product correction, the later maintenance changed historical tests only, and the exact API Spine, security, browser, database, and regression gates were directly reproduced by Sol Extra High."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The complete explicit G10 batches pass 63/63, 63/63, and 81/81 with no failed or deselected node.",
+        "All 115 explicitly named protected-safe Diary functions expanded to 139 route-intercepted cases and passed 139/139.",
+        "All fourteen R2 artifact bindings and all three maintenance file bindings reproduce exactly.",
+        "Python compilation, Node syntax, high-severity Bandit, readiness, provider-boundary, and whitespace checks pass.",
+        "The preserved synthetic database remains exactly one appointment, one linked audit, and one completed confirmed-write idempotency result targeting that appointment.",
+        "The optional idempotency audit_log_id remains null and is disclosed as the separately unauthorized Stage 2 complete-correlation gap, not treated as new Stage 1 evidence.",
+        "Visual review confirms S1 proposal, S2 authoritative receipt/readback, S3 duplicate, S4 ambiguity, and S5 no-slot screenshots; S6 remains explicitly supported by terminal sanitized outcome/database counts because its screenshot shows the staged pre-confirmation proposal."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent assigned; acceptance and protected integration remain Sol-owned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

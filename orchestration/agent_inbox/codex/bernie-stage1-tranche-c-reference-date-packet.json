@@ -1,0 +1,77 @@
+{
+  "schema_version": "bernie.stage1.tranche-c.packet.v1",
+  "frozen_on": "2026-07-19",
+  "decision": "bounded_correction_authorized_after_reproduction",
+  "source_commit": "2d3fa717d612add9d1f871daf9e899751c5d210c",
+  "database": "gp_pms_stage1_2d3fa717_20260719_r2",
+  "evidence_label": "live_local_backend_postgres",
+  "failure": {
+    "instruction": "Make an appointment for Margaret Thompson with Dr Shera today after 2 pm but before 3:45.",
+    "reference_date": "2026-07-20",
+    "interpret_http_status": 200,
+    "supervised_booking_http_status": 200,
+    "patient_and_practitioner_resolved": true,
+    "candidate_count": 7,
+    "confirmation_ready": false,
+    "outcome": "clarification_required",
+    "reason_code": "context_reference_date_stale",
+    "zero_write_baseline": {
+      "appointments": 0,
+      "appointment_audits": 0,
+      "appointment_command_idempotency": 0
+    }
+  },
+  "ordinary_source_cause": [
+    {
+      "path": "app/routers/appointments.py",
+      "line": 4296,
+      "path_role": "interpretation_context",
+      "cause": "reference dates were marked stale whenever they differed from clinic-local today"
+    },
+    {
+      "path": "app/routers/appointments.py",
+      "line": 6167,
+      "path_role": "supervised_booking_context",
+      "cause": "reference dates were marked stale whenever they differed from clinic-local today"
+    }
+  ],
+  "correction_contract": {
+    "mechanical": true,
+    "new_policy_or_authority": false,
+    "rule": "A pinned reference date is stale only when it is earlier than clinic-local today; today and future pinned dates are current.",
+    "past_date_staleness_preserved": true,
+    "today_allowed": true,
+    "future_allowed": true
+  },
+  "owned_files": [
+    "app/routers/appointments.py",
+    "tests/test_bernie_reference_date_freshness.py",
+    "orchestration/agent_inbox/codex/bernie-stage1-tranche-c-reference-date-packet.json"
+  ],
+  "exact_tests": [
+    "tests/test_bernie_reference_date_freshness.py::test_interpret_context_freshness_allows_today_and_future_but_stales_past",
+    "tests/test_bernie_reference_date_freshness.py::test_supervised_context_freshness_allows_today_and_future_but_stales_past"
+  ],
+  "forbidden_surfaces": [
+    "provider_or_external_prompt",
+    "cloud_or_adc_or_gcloud",
+    "non_synthetic_data",
+    "external_corpus",
+    "historical_diary_material",
+    "new_corpus_or_holdout",
+    "migration_or_schema_change",
+    "durable_session",
+    "graphql_mutation",
+    "new_mutation_family",
+    "autonomous_confirmation",
+    "deployment_or_production_or_release",
+    "memory_or_rag"
+  ],
+  "acceptance": {
+    "both_ordinary_backend_paths_covered": true,
+    "past_today_future_cases_required": true,
+    "unchanged_instruction_reproduces_without_stale_reason": true,
+    "candidate_search_remains_non_mutating": true,
+    "product_command_counts_remain_zero_before_confirmation": true
+  }
+}

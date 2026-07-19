@@ -1,0 +1,65 @@
+{
+  "schema_version": "bernie.stage1.tranche-b.stop.v1",
+  "recorded_at_utc": "2026-07-18T14:50:00Z",
+  "decision": "blocked_for_user_decision",
+  "source_commit": "2d3fa717d612add9d1f871daf9e899751c5d210c",
+  "stage": "tranche_b_existing_product_acceptance_run",
+  "stop_reason": "protected_evidence_boundary_breach",
+  "incident": {
+    "kind": "unintentional_search_traversal",
+    "description": "A broad repository test search used exclusion globs that did not exclude a Windows protected-holdout path. The search returned protected holdout content to the terminal.",
+    "protected_material_used_for_product_reasoning": false,
+    "protected_material_used_for_code_change": false,
+    "protected_material_persisted_in_stage1_artifacts": false,
+    "response": [
+      "stopped further diagnosis and execution immediately",
+      "did not inspect, search, summarize, infer from, test, or reuse the returned protected material",
+      "closed the in-app Browser run",
+      "stopped the loopback FastAPI and static Diary processes",
+      "preserved the disposable database and named Stage 1 artifacts"
+    ]
+  },
+  "last_verified_safe_state": {
+    "database": "gp_pms_stage1_2d3fa717_20260719",
+    "database_target": "127.0.0.1:5434",
+    "synthetic_only": true,
+    "appointments": 0,
+    "appointment_audits": 0,
+    "appointment_command_idempotency": 0,
+    "candidate_selected": false,
+    "confirmation_action_performed": false,
+    "confirm_bernie_request_sent": false,
+    "appointment_receipt_created": false,
+    "provider_calls": 0,
+    "cloud_operations": 0,
+    "external_transmissions": 0,
+    "runtime_stopped": true,
+    "browser_closed": true
+  },
+  "pre_incident_stage1_evidence": {
+    "evidence_label": "live_local_backend_postgres",
+    "diary_date": "2026-07-20",
+    "instruction_submitted_unchanged": true,
+    "authenticated_pilot_eligible": true,
+    "interpret_http_status": 200,
+    "supervised_booking_http_status": 200,
+    "identity_resolution": "patient and practitioner resolved",
+    "time_window": "14:00-15:45",
+    "candidate_count": 7,
+    "browser_outcome": "clarification_required_before_candidate_selection",
+    "typed_reason_code": "context_reference_date_stale",
+    "reproducible_unchanged_product_defect_observed": true,
+    "defect_correction_started": false
+  },
+  "implementation_state": {
+    "product_source_changes": 0,
+    "harness_artifact": "scripts/bernie_stage1_local_harness.py",
+    "harness_setup_amendments": [
+      "added repository-root import path after the first empty setup stopped",
+      "ordered synthetic fixture flushes after the second setup transaction rolled back",
+      "added sanitized loopback readiness and interpretation diagnostics"
+    ],
+    "failed_setup_cleanup": "Two exact disposable setup attempts were removed only after proving that the first database had zero public tables and the second had zero rows. No product-command counts were involved."
+  },
+  "resume_boundary": "Do not resume Tranche B or enter Tranche C without Yuri's direction after this protected-evidence stop. Any resumed run requires a fresh clean context, full mandatory rehydration, new five-source Ariadne receipt, and protected-safe exact-path test selection."
+}
