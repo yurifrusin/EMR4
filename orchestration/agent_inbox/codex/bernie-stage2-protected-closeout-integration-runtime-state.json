@@ -1,0 +1,40 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "integration",
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "stage2_pass_protected_pr38_closeout_carrier",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree"
+      ]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No worker owns protected closeout integration."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Unselected fallback."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No external implementation lane selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No external reviewer receives integration authority."]},
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Protected PR 38 passed all four required contexts plus the aggregate CodeQL gate and squash-merged as 60940f27d50410172f4132416df5e8a20623815b.",
+        "GitHub Advanced Security automatically resolved all three review threads on final branch head 7874271aea160e7539bf61cf238d919c9250dc61; no check, conversation, alert, or policy was bypassed.",
+        "The closeout carrier changes only AGENTS.md, the Stage 2 acceptance/closeout records, and Ariadne closeout receipts.",
+        "Stage 2 returns stage2_pass; Stage 3 and all provider, protected, historical, PII, production, deployment, release, new-action, GraphQL-mutation, production-role/encryption, and autonomous-confirmation authority remain closed."
+      ]
+    },
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent assigned."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
