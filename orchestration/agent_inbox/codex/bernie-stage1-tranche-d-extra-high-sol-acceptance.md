@@ -208,6 +208,11 @@ source binding:
 - pre-push: SHA-256
   `5cc3bc885b25ba1a47eae7d6b41f5908e35447099bbe126cefa9281cb59270b8`.
 
-Git integration uses `codex/stage1-final-acceptance` and the normal check-gated
-protected-branch workflow. Final PR, commit, ref-alignment, and notification
-evidence will be added by the closeout carrier after successful integration.
+Protected PR 36 used `codex/stage1-final-acceptance` and passed Python
+Security, the Node/Office baseline, both CodeQL language analyses, and the
+aggregate CodeQL gate without dismissal or bypass. It squash-merged to
+`master` as `dcb4f9d54ce63b8dbfad882979a32292bf8b6289` on 2026-07-19. The
+documentation-only closeout carrier records that integration, returns the
+baton to Yuri's Stage 2 boundary, and aligns `master` with `handoff/current`.
+The final non-PHI notification is sent operationally after that ref alignment;
+it is not treated as product or acceptance evidence.
