@@ -84,6 +84,24 @@ claim the exactly-one appointment/audit/command/receipt invariant.
 The rendered validation used the local browser against a static localhost
 server. It is fixture evidence, not live backend evidence.
 
+## Protected integration
+
+Candidate commits `4b043f3a3762d26daba7176dc1dafedfc1403e4c` and
+`0d90c1804448730e0cd8f83c3d643fd5ff033658` were pushed only to
+`codex/bernie-stage3a-yuri-study`. Protected PR 45 then passed:
+
+- Python Security;
+- Node and Office add-in manifest/security validation;
+- Diary smoke review;
+- CodeQL Python;
+- CodeQL JavaScript/TypeScript; and
+- the aggregate CodeQL context.
+
+The PR had no reviews, comments, or unresolved review threads. It was promoted
+from draft only after every required context passed and squash-merged without
+admin bypass, check dismissal, review dismissal, force push, or direct protected
+branch write as `25f8d4e61cf5ee5ca3726d4eed5fc99bb4e895da`.
+
 ## How Yuri begins
 
 From `C:\Users\sarashera\emr4`:
