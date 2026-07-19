@@ -4,7 +4,7 @@ Date: 2026-07-19
 
 Owner: GPT Sol / Extra High
 
-Decision: `stage2_pass_ready_for_protected_integration`
+Decision: `stage2_pass`
 
 ## Outcome
 
@@ -81,11 +81,35 @@ Stage 3 receptionist workflow validation does not begin automatically. It
 requires a fresh Yuri decision covering participants, synthetic observation
 protocol, and acceptance thresholds. Provider work remains paused.
 
-## Integration state
+## Protected integration
 
-The candidate is on `codex/bernie-stage2-durable-authority`, based on protected
-Stage 1 closeout head `8cadc64c56d014a7f3fbd70d82ac5c041e63fed8`.
-Its accepted implementation/evidence commit is
-`cd3a9e056d8553da9ae339896dd28222b6554a57`.
-Protected PR/check evidence, merge SHA, final ref alignment, and the non-PHI
-closeout notification will be appended only after they occur.
+The accepted candidate was published as
+`codex/bernie-stage2-durable-authority`, based on protected Stage 1 closeout
+head `8cadc64c56d014a7f3fbd70d82ac5c041e63fed8`. Its implementation/evidence
+commit was `cd3a9e056d8553da9ae339896dd28222b6554a57`.
+
+PR 38's first green check cycle exposed three required-conversation threads
+from GitHub Advanced Security: two empty `except` handlers needed explanatory
+comments and one test import was unused. The bounded corrections passed 9/9
+focused tests, the complete restricted-role database probe, the exact Bandit
+gate, leakage lint, compilation, and whitespace checks. On final branch head
+`7874271aea160e7539bf61cf238d919c9250dc61`, GitHub automatically resolved all
+three threads and the required Python Security, Node/Office baseline, Python
+CodeQL, JavaScript/TypeScript CodeQL, and aggregate CodeQL contexts all passed.
+No policy or alert was bypassed or dismissed.
+
+Protected PR 38 squash-merged as
+`60940f27d50410172f4132416df5e8a20623815b` on 2026-07-19. This
+documentation-only closeout carrier records that integration. After its own
+required checks and protected merge, `master` and `handoff/current` are aligned
+to the carrier head and the required non-PHI notification is delivered
+operationally; neither step changes product acceptance.
+
+Its Ariadne integration and pre-commit receipts both pass and explicitly bind
+the live baton, current allocation, active plan/acceptance, protected evidence,
+and Git/worktree sources. Their SHA-256 values are respectively
+`9b589c638bcabe034603df62972da9ea015b17a2e650453510b62d7727a95be8`
+and `451d12450f222ab5d497054c6da80c171e30975d4afca285ca8ad2bf812721da`.
+The closeout commit is `3c35de865f5af3a3b7b0fa03fae3e3cc56dd8f18`;
+its pre-push receipt passes with SHA-256
+`e7f080008230b47a12ed08bcd4cae692bedd13d6f6502e177576a783823bed75`.

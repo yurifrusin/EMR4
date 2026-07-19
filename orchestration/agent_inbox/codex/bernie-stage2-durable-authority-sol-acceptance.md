@@ -4,7 +4,7 @@ Date: 2026-07-19
 
 Reasoning level: `Sol Extra High`
 
-Decision: `stage2_pass_ready_for_protected_integration`
+Decision: `stage2_pass`
 
 Claim scope: `local_synthetic_provider_free_appointment_create_durable_authority`
 
@@ -270,11 +270,37 @@ native subagent would not have saved a meaningful cycle. No provider call or
 external prompt occurred.
 
 The accepted implementation/evidence commit is
-`cd3a9e056d8553da9ae339896dd28222b6554a57`. The candidate may now enter the
-ordinary protected pull-request path.
-This decision becomes final `stage2_pass` only after required GitHub checks pass
-without bypass and protected integration/closeout align `master` and
-`handoff/current`.
+`cd3a9e056d8553da9ae339896dd28222b6554a57`; the final bounded review-fix branch
+head is `7874271aea160e7539bf61cf238d919c9250dc61`. Protected PR 38 passed Python
+Security, the Node/Office baseline, both CodeQL language analyses, and the
+aggregate CodeQL gate on that exact head. GitHub Advanced Security automatically
+resolved all three review threads after the fixes reproduced. No check,
+conversation, alert, or branch policy was dismissed or bypassed.
+
+PR 38 squash-merged to protected `master` as
+`60940f27d50410172f4132416df5e8a20623815b` on 2026-07-19. Stage 2 therefore
+returns final `stage2_pass`. The documentation-only closeout carrier records
+that integration and is the sole remaining step before `master` and
+`handoff/current` are operationally aligned.
+
+The closeout-carrier integration and pre-commit receipts pass with the same
+five-source binding:
+
+- integration:
+  `orchestration/agent_inbox/codex/bernie-stage2-protected-closeout-integration-receipt.json`,
+  SHA-256
+  `9b589c638bcabe034603df62972da9ea015b17a2e650453510b62d7727a95be8`;
+- pre-commit:
+  `orchestration/agent_inbox/codex/bernie-stage2-protected-closeout-precommit-receipt.json`,
+  SHA-256
+  `451d12450f222ab5d497054c6da80c171e30975d4afca285ca8ad2bf812721da`.
+- pre-push:
+  `orchestration/agent_inbox/codex/bernie-stage2-protected-closeout-prepush-receipt.json`,
+  SHA-256
+  `e7f080008230b47a12ed08bcd4cae692bedd13d6f6502e177576a783823bed75`.
+
+The documentation-only closeout commit is
+`3c35de865f5af3a3b7b0fa03fae3e3cc56dd8f18`.
 
 Even after integration, Stage 3 and every production/provider/PII/deployment
 boundary remain a new Yuri decision.
