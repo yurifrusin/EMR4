@@ -531,6 +531,7 @@ def start_runtime() -> dict[str, object]:
                 with urlopen(url, timeout=0.5) as response:  # nosec B310 - locked loopback URLs
                     ready[name] = response.status == 200
             except Exception:
+                # Connection refusal is expected while the local child starts.
                 pass
         if all(ready.values()):
             break
@@ -772,7 +773,10 @@ def main() -> int:
             serve_static(args.host, args.port)
             return 0
     except Exception as exc:
-        print(json.dumps({"ready": False, "error": str(exc)}), file=sys.stderr)
+        print(
+            json.dumps({"ready": False, "error_type": type(exc).__name__}),
+            file=sys.stderr,
+        )
         return 1
     print(json.dumps(report, indent=2, sort_keys=True))
     return 0 if report.get("ready", True) else 1

@@ -179,6 +179,14 @@ tooling contract tests passed, Python compilation passed, and
 `git diff --check` passed. This correction changes no Stage 1 behavior,
 acceptance meaning, database state, provider boundary, or protected evidence.
 
+The rerun then surfaced one genuine high-severity CodeQL finding in the local
+harness: its top-level failure path emitted `str(exc)`, which could propagate a
+synthetic credential from a failed request into stderr. The handler now emits
+only `type(exc).__name__`; it does not serialize exception text. The readiness
+poll's transient connection-refusal handler also carries an explanatory
+comment, clearing CodeQL's accompanying empty-except note. Both changes remain
+inside the local synthetic harness and preserve fail-closed command behavior.
+
 Stage 1 is complete with `stage1_pass`. Stage 2 does not begin automatically.
 Its durable session, migration, concurrency, structural security, retention,
 recovery, and complete command/audit-correlation scope requires a new Yuri
