@@ -1,0 +1,70 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "push",
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "accepted_intent_projected_event_aware_design_push",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree"
+      ]
+    }]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No worker push or integration authority."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Fable remains a deferred design preference only."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external reviewer has push or integration authority."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Push is limited to codex/bernie-proactive-event-awareness for a documentation and non-runtime prototype pull request.",
+        "Accepted design commit is 8a314793cb9f1c39912739cc0112dc526f1f2a96.",
+        "The focused handover/API Spine population passes 41 tests; compilation, whitespace, compactness, and exact-path scope checks pass.",
+        "Protected master and handoff refs remain aligned at f7ac809d455b69db34de30a5f3bb9af7174020d1.",
+        "Stage 3, Fable, provider, subscription, participant, voice, PII, production, deployment, release, event runtime, and new mutation gates remain closed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent assigned."]
+    }
+  ],
+  "worker_slots": [{
+    "resource_id": "deepseek-flash-workers",
+    "active_instance_ids": [],
+    "stale_instance_ids": []
+  }],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

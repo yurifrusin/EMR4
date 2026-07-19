@@ -5,6 +5,7 @@ source_safety:
   phi: none
   examples: authored_synthetic
   runtime_wiring: blocked
+  proactive_diary_delivery_runtime: blocked
   provider_calls: blocked
   historical_diary_trove_access: blocked
   h15_or_h_series_runtime_imports: blocked
@@ -36,6 +37,11 @@ agents:
       - frame: availability_context
         authority_label: Live API fact
         max_scope: requested_date_time_resource_window
+      - frame: committed_diary_event_context
+        authority_label: Live API fact
+        max_scope: one_committed_typed_event_after_practice_role_resource_filter
+        committed_only: true
+        fresh_scoped_read_before_display: true
       - frame: appointment_policy
         authority_label: Manifest policy
         max_scope: backend_evaluated_affordances
@@ -48,6 +54,9 @@ agents:
       - prepare_appointment_proposal
       - surface_candidate_slots_for_staff_review
       - stage_pending_proposal_for_human_confirmation
+      - construct_reversible_intent_projected_diary_view
+      - surface_low_interruption_committed_diary_change
+      - offer_fresh_context_or_proposal_from_committed_event
     must_require_staff_confirmation_for:
       - appointment_confirm
       - appointment_cancel
@@ -64,7 +73,13 @@ agents:
       - read_raw_historical_diary_trove_or_h15_payloads
       - persist_memory_or_graphrag_state
       - use_graphql_as_a_command_tunnel
+      - treat_event_as_command_authority
+      - surface_uncommitted_rolled_back_or_foreign_practice_event
+      - use_event_payload_as_substitute_for_fresh_authorized_read
+      - create_duplicate_visible_effect_from_replayed_event
+      - speak_phi_automatically_from_event_context
     blocked_gates:
+      proactive_diary_delivery_runtime: blocked
       live_provider_runtime: blocked
       broad_historical_trove_mining: blocked
       h15_h_series_runtime_imports: blocked

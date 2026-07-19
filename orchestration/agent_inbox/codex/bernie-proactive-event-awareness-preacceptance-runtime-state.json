@@ -1,0 +1,70 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "acceptance",
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "extra_high_intent_projected_event_aware_design_acceptance",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree"
+      ]
+    }]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No worker candidate exists; Sol owns acceptance."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Fable remains a deferred preference only; no subscription, provider call, prompt, or transmission occurred."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external veto is required to accept Yuri's explicit product direction and runtime-blocked prototypes."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "All reviewed notepad entries are promoted into one canonical intent-projected and event-aware Diary-twin design.",
+        "Committed-event awareness is foundational; runtime production, delivery, consumption, and notification remain blocked.",
+        "The API Spine prototype requires post-commit publication, fresh scoped reads, deduplication, deterministic attention filtering, and explicit command/confirmation separation.",
+        "The handover and API Spine artifact population passes 41 tests; AGENTS.md remains 437 lines and whitespace validation passes.",
+        "Stage 3, Claude Fable, provider, subscription, participant, voice, PII, production, deployment, release, GraphQL mutation, and autonomous-confirmation authority remain closed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent assigned."]
+    }
+  ],
+  "worker_slots": [{
+    "resource_id": "deepseek-flash-workers",
+    "active_instance_ids": [],
+    "stale_instance_ids": []
+  }],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

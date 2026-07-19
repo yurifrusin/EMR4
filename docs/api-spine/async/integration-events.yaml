@@ -5,6 +5,7 @@ source_safety:
   phi: none
   examples: authored_synthetic
   runtime_wiring: blocked
+  proactive_diary_delivery_runtime: blocked
   provider_calls: blocked
   external_clients: blocked
   historical_diary_trove_access: blocked
@@ -49,6 +50,69 @@ common_envelope:
     phi_in_metadata: forbidden
 
 event_families:
+  - family_id: diary
+    research_status: foundational_design_runtime_blocked
+    direction: emit
+    event_types:
+      - diary.appointment_created
+      - diary.appointment_rescheduled
+      - diary.appointment_cancelled
+      - diary.appointment_status_changed
+      - diary.proposal_staged
+      - diary.proposal_expired
+      - diary.waiting_state_changed
+      - diary.roster_changed
+    allowed_payload_fields:
+      - aggregate_id
+      - aggregate_revision
+      - appointment_id
+      - proposal_id
+      - session_id
+      - practitioner_id
+      - location_id
+      - starts_at
+      - ends_at
+      - previous_status_code
+      - current_status_code
+      - reason_codes
+    prohibited_payload_fields:
+      - patient_name
+      - phone_number
+      - date_of_birth
+      - medicare_number
+      - appointment_reason_text
+      - appointment_note
+      - raw_instruction
+      - free_text_transcript
+      - provider_output
+      - credential
+    delivery_semantics:
+      publish_after_commit_only: true
+      transactional_outbox_or_equivalent_required: true
+      at_least_once_transport_permitted: true
+      stable_event_identity_required: true
+      aggregate_revision_required: true
+      user_visible_deduplication_required: true
+      fresh_scoped_read_before_display: true
+    attention_boundary:
+      low_interruption_filter_required: true
+      practice_role_resource_recheck_required: true
+      unrelated_event_suppression_required: true
+      explain_why_required: true
+      user_controls:
+        - dismiss
+        - snooze
+        - mute_event_family
+        - show_context
+      automatic_spoken_phi: false
+    command_boundary:
+      event_is_command_authority: false
+      may_refresh_authorized_read_context: true
+      may_offer_intent_projected_view: true
+      may_prepare_proposal_only: true
+      appointment_mutation_requires_rest_command: true
+      staff_confirmation_required_for_mutation: true
+
   - family_id: caller_id
     research_status: placeholder
     direction: ingest
@@ -183,6 +247,7 @@ event_families:
       citations_required_when_opened: true
 
 blocked_gates:
+  proactive_diary_delivery_runtime: blocked
   live_provider_runtime: blocked
   regulated_external_integrations: blocked
   historical_diary_trove_or_h15_runtime_imports: blocked

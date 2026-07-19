@@ -12,12 +12,18 @@ Make routine Diary work possible without finding a screen, scanning a grid, or
 entering a form.
 
 *bernie* should become the continuously available conversational interface to
-the living practice Diary: able to answer, clarify, prepare, confirm, and
-explain scheduling work in ordinary receptionist language while the
-FastAPI/PostgreSQL Diary remains the sole source of appointment truth.
+the living practice Diary: able to answer, clarify, prepare, confirm, explain,
+refigure the visual workspace around the user's intent, and quietly surface
+relevant committed changes while the FastAPI/PostgreSQL Diary remains the sole
+source of appointment truth.
 
 The intended “death of the Diary” is therefore the death of the Diary as an
 interaction burden—not the death of the authoritative scheduling system.
+
+The canonical interaction design is
+`docs/bernie-intent-projected-event-aware-diary-design.md`: an
+**intent-projected Diary** paired from the outset with a low-interruption,
+committed-event nervous system.
 
 ## Product inheritance
 
@@ -38,6 +44,10 @@ mandatory doorway to every answer and action.
 - a receptionist-facing interface over live, practice-scoped Diary facts;
 - conversationally fluent in patients, practitioners, dates, relative time,
   appointment types, availability, changes, and prior turns;
+- able to construct a precise, reversible Diary projection for the user's
+  current question rather than requiring manual grid navigation;
+- selectively aware of relevant committed typed events without treating an
+  event as command authority;
 - able to distinguish an authoritative answer, a proposed action, and a
   committed action with receipt evidence;
 - durable across restart and retry without becoming a second source of truth;
@@ -65,8 +75,8 @@ The accepted mixed API Spine is the product architecture:
 - scoped GraphQL/read models answer connected questions about appointments,
   patients, practitioners, availability, sessions, permissions, and audit;
 - explicit REST/OpenAPI commands own every auditable or state-changing action;
-- typed events report what actually committed and support future proactive
-  awareness;
+- typed events report what actually committed and form the foundational input
+  to filtered proactive awareness;
 - durable session/event state carries conversational continuity; and
 - PostgreSQL tenancy, RLS, conflicts, freshness, idempotency, audit, and
   receipts remain authoritative.
@@ -83,9 +93,10 @@ For writes, the enduring pattern is:
 
 ## Experience principles
 
-1. **Conversation first, grid optional.** Supported work should begin from
-   ordinary language and finish without a grid unless the user asks for one or
-   the system cannot safely proceed.
+1. **Conversation first, fixed grid optional.** Supported work should begin
+   from ordinary language. When a visual view helps, the Diary should refigure
+   itself around the user's precise intent rather than require manual grid
+   navigation.
 2. **Answers are not proposals; proposals are not actions.** Every response
    makes that state unmistakable in words, sound, and any supporting visual.
 3. **Clarification is the safe interface.** Ambiguous people, dates, recurrence,
@@ -97,6 +108,9 @@ For writes, the enduring pattern is:
    work or contradictory state.
 6. **The user may always escape to the Diary.** Grid use is measured as useful
    fallback, not treated as failure when spatial reasoning is the better tool.
+7. **The twin notices without nagging or acting.** Only committed, typed,
+   authorised changes may reach the attention filter; notices are relevant,
+   explainable, deduplicated, controllable, and never mutation authority.
 
 ## Ambient does not mean indiscriminate recording
 
@@ -136,12 +150,24 @@ If conversation itself proves useful, test explicit activation separately from
 speech recognition quality. Do not let microphone technology obscure whether
 the product interaction is valuable.
 
-### Proactive twin — later
+### Proactive twin — foundational design, runtime later
 
-Typed events may eventually allow *bernie* to surface relevant changes,
-conflicts, callbacks, arrivals, and schedule pressure without requiring a grid
-scan. Proactivity must be role-scoped, interruptible, explainable, and silent by
-default where attention is not warranted.
+The product is designed from the outset with a carefully filtered nervous
+system connected to committed typed Diary events. *bernie* should eventually
+surface relevant changes, conflicts, arrivals, proposal expiry, and schedule
+pressure without requiring a grid scan. Proactivity must be role-scoped,
+fresh-read-backed, deduplicated, interruptible, explainable, and silent by
+default where attention is not warranted. No event delivery runtime is
+authorized by this design.
+
+### Fluid meta-grid — dedicated visual-design tranche
+
+The fixed grid should become a family of just-in-time practitioner-, patient-,
+date-, time-, location-, availability-, and event-centred projections. The
+complete interaction language deserves its own visual-design tranche. Yuri's
+current preference is to defer that work until an explicit future decision on
+a focused Claude Fable engagement and subscription; no model use or cost is
+authorized now.
 
 ### Provider intelligence — observed need only
 
@@ -161,6 +187,9 @@ Supporting measures include:
 - safe clarification and recovery;
 - time to answer or confirmed completion;
 - grid/form escape rate and the reasons for escape;
+- correctness, scope, reversibility, and usefulness of intent-projected views;
+- relevant-event notice precision, suppression of unrelated/uncommitted events,
+  duplicate-visible-effect rate, and interruption burden;
 - comprehension of answer versus proposal versus committed action;
 - duplicate/unsafe-write rate;
 - interruption recovery and trust; and
@@ -183,7 +212,12 @@ Stage 3 should determine which deeper branch has evidence:
   capability.
 - **Modality gap:** run an explicit-activation voice feasibility tranche before
   any ambient design.
-- **Awareness gap:** design event-driven, low-interruption proactive assistance.
+- **Projection evidence:** freeze the dedicated fluid UX meta-grid design
+  tranche and its implementation handoff when the Claude Fable/cost decision is
+  explicitly opened.
+- **Event-awareness evidence:** order a bounded committed-event producer,
+  attention-filter, and authorised-consumer design/implementation tranche; the
+  product principle is accepted, while runtime authority remains separate.
 - **No demonstrated value:** preserve the safe foundation and do not manufacture
   provider, corpus, voice, or UI work for momentum.
 
