@@ -1,0 +1,43 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "extra_high_conversational_diary_north_star_and_stage3_decision_verification",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree"
+      ]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No implementation worker was dispatched for the user-authorized strategic synthesis."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Unselected fallback."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No provider-backed worker or prompt was used."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No independent external veto was needed for the user-owned north-star clarification."]},
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The north star preserves the Diary as authoritative backend truth while displacing grid/form interaction burden through a conversation-first receptionist interface.",
+        "The reshaped Stage 3 decision is explicit, evidence-first, local, synthetic, provider-disabled, typed-first, and not authorized until Yuri decides six named protocol points.",
+        "The deeper post-Stage-3 branches are evidence-conditioned: read/context, specific workflow command, observed language, explicit voice activation, proactive event awareness, or no further work.",
+        "Auto-merge is recommended only as opt-in after acceptance under unchanged strict checks and required conversation resolution; no repository setting changed.",
+        "Ruff is recommended only through a pinned reproducible dev/CI tooling tranche; no package or configuration changed.",
+        "Stage 2 Sol Extra High ownership is recorded as deliberate and efficient for its serial, tightly coupled database/transaction/acceptance lifecycle; future delegation remains leverage-based.",
+        "Handover/API Spine artifact tests pass 36/36, AGENTS.md remains 437 lines, and git diff whitespace validation passes."
+      ]
+    },
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent assigned."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

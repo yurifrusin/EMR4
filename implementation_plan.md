@@ -11,6 +11,17 @@ The name **"Centaur"** reflects the design philosophy: the GP and AI work as one
 
 At maturity, the system becomes a **living clinical intelligence network** — every consultation across every participating practice feeds a shared, de-identified "Hive Mind" that makes the AI smarter for all. A new practice in Darwin gets the benefit of ten thousand tropical medicine encounters on day one. A First Nations health service inherits the collective wisdom of every Aboriginal health centre that opted in.
 
+### Product north star — the conversational Diary twin
+
+For receptionist scheduling, the controlling product direction is
+[`docs/bernie-conversational-diary-north-star.md`](docs/bernie-conversational-diary-north-star.md).
+The aim is to make routine Diary work possible without scanning a grid or
+entering a form. *bernie* becomes the conversational interface to the living
+Diary while FastAPI/PostgreSQL remains authoritative for identity,
+availability, conflicts, confirmation, writes, audit, and receipts. The visual
+Diary remains an optional spatial overview, verification, exception-handling,
+and fallback surface.
+
 ### 1.1 Business & Licensing Model
 
 | Aspect | Decision |
@@ -76,6 +87,12 @@ Bernie is the internal receptionist copilot: a supervised staff assistant embedd
 in the diary/waiting-room surface. Bernie should help reception staff find suitable
 appointment times, interpret scheduling constraints, draft admin messages, and prepare
 safe actions for human confirmation.
+
+The longer-term interaction goal is not to polish the grid into the primary
+interface indefinitely. It is to let reception staff ask and complete supported
+Diary work conversationally, with the grid available when spatial review is
+useful. The north-star document and the separately authorized Stage 3 workflow
+decision govern that progression.
 
 Bernie is deliberately not the first patient-facing autonomous agent. The first
 implementation should be an internal copilot that acts through controlled backend
