@@ -1,10 +1,10 @@
 # Reception One committed-event vertical plan
 
-**Status:** frozen for bounded implementation  
-**Decision owner:** Yuri  
-**Conductor, architecture and acceptance owner:** GPT Sol Extra High  
-**Date:** 2026-07-21  
-**Source head:** `be5e01d00b23ef43f7aab8b30f6dbdfa6e858c45`  
+**Status:** frozen for bounded implementation
+**Decision owner:** Yuri
+**Conductor, architecture and acceptance owner:** GPT Sol Extra High
+**Date:** 2026-07-21
+**Source head:** `be5e01d00b23ef43f7aab8b30f6dbdfa6e858c45`
 **Task branch:** `codex/reception-one-committed-event-vertical`
 
 ## 1. Decision and purpose

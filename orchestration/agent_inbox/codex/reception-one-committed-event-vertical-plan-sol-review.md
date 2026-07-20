@@ -1,7 +1,7 @@
 # Reception One committed-event vertical — Sol plan review
 
-**Reviewer:** GPT Sol Extra High  
-**Date:** 2026-07-21  
+**Reviewer:** GPT Sol Extra High
+**Date:** 2026-07-21
 **Decision:** `accepted_for_bounded_implementation`
 
 ## Reviewed authority

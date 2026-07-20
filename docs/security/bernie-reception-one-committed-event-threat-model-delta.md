@@ -1,8 +1,8 @@
 # Reception One committed-event runtime threat-model delta
 
-**Status:** frozen for bounded local implementation  
-**Date:** 2026-07-21  
-**Parent controls:** `docs/security/bernie-stage2-threat-model-delta.md` and the API Spine security baseline  
+**Status:** frozen for bounded local implementation
+**Date:** 2026-07-21
+**Parent controls:** `docs/security/bernie-stage2-threat-model-delta.md` and the API Spine security baseline
 **Authorized event:** `diary.appointment_rescheduled` only
 
 ## Scope
