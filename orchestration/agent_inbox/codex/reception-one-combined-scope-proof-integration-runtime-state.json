@@ -1,0 +1,36 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "integration",
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "reception_one_combined_scope_protected_integration",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree"
+      ]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No external implementation worker candidate exists to integrate."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Unselected fallback."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No provider or external design-model output is being integrated."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["A fresh Gemini veto passed the exact amended product candidate after Sol independently found and repaired stale selection across refinement."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": [
+      "Sol accepted the bounded tranche at reception_one_combined_scope_pass.",
+      "PR 57 is mergeable and all UI smoke, manifest/security, Python security and CodeQL checks passed on product-bearing head 5471631ea0547f607aa20f2be5d8011591ea6bfb.",
+      "The intended integration is limited to the accepted proposal-only client proof, authored-synthetic browser evidence, tests, continuity, closeout and baton documentation.",
+      "Master, handoff/current and both origin protected refs remain aligned at source 1d0442845974a46e12f5963ed9afb14beb4fd381.",
+      "No API, database schema, write, event runtime, provider, PII, Stage 3B, deployment or release boundary is opened."
+    ]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent contributed changes."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
