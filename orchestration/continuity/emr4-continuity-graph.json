@@ -37,7 +37,7 @@
       "voice"
     ]
   },
-  "graph_revision": 2,
+  "graph_revision": 3,
   "harvests": [],
   "nodes": [
     {
@@ -396,6 +396,7 @@
           "docs/ariadne-continuity-engine-increment1-plan.md"
         ],
         "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-integration-receipt.json",
           "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-preacceptance-receipt.json",
           "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-rehydration-receipt.json"
         ],
@@ -417,10 +418,10 @@
         "Increment 2 requires a fresh Yuri decision.",
         "Plugin installation, workflow hooks and a visual branch map remain deferred."
       ],
-      "updated_at": "2026-07-20T10:30:00Z"
+      "updated_at": "2026-07-20T13:45:00Z"
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-07-20T10:30:00Z"
+  "updated_at": "2026-07-20T13:45:00Z"
 }
