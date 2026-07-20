@@ -890,6 +890,11 @@
       next = await buildFocused(practitioners[0], current.root_request, context);
     } else if (current.family === "availability_slots" && practitioners[0]) {
       next = await buildAvailability(practitioners[0], current.root_request, context);
+    } else if (current.family === "proposal_review" && practitioners[0]) {
+      // Proposal and patient selection are deliberately discarded on
+      // interruption. Recover the exact underlying availability scope with a
+      // fresh backend read; never reconstruct or retain the stale proposal.
+      next = await buildAvailability(practitioners[0], current.root_request, context);
     } else if (current.family === "aligned_comparison" && practitioners.length >= 2) {
       next = await buildComparison(practitioners, current.root_request, context);
     } else if (current.family === "patient_timeline") {

@@ -1,0 +1,79 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "bernie_meta_grid_live_local_integration_preacceptance_five_source_readback",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not dispatched: the shared browser/database sequence was serial, stateful and Sol-owned under the economy rule."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external design provider, subscription, prompt transmission or provider call was authorised or used."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["A fresh Gemini Flash read-only veto is the next planned acceptance action."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The five-source rehydration and pre-plan receipts passed before the plan or implementation was frozen.",
+        "The real authenticated Diary and meta-grid passed at desktop 1440x900, tablet 1024x768 and 768x1024, and smartphone 390x844 and 844x390 using visible UI actions and no API interception.",
+        "The corrected desktop PNG is 1440x900, has DOM/document/host width 1440, painted extent ratio 1.0 and rightmost-20-percent non-black ratio 1.0.",
+        "Plain-language practitioner focus and time refinement, patient timeline, backend availability, touch/keyboard selection, supervised proposal review, privacy, interruption recovery, comparison and ordinary fallback passed.",
+        "The final browser request population was loopback-only with no failed API response, confirmation route, session/event route, provider call or unexpected path.",
+        "Before/after PostgreSQL counts and hashes are identical: six seeded appointments and zero appointment-audit, command-idempotency, Bernie booking-session and Bernie session-event rows.",
+        "The combined live-local, functional-client, API Spine, proposal, Stage 3A, handover and Ariadne population passed 180 tests.",
+        "The 139-case Diary smoke population had one isolated 3-second timing failure, the exact node passed immediately, and a complete clean rerun passed 139 of 139.",
+        "Node syntax, focused Ruff, artifact hashing and git diff checks pass; protected holdouts and historical Diary material were not accessed.",
+        "HEAD is the uncommitted task branch codex/bernie-meta-grid-live-local-integration at source 1fdf4035341edda62765b8e11f9b0175ec1a3919; master, handoff/current, origin/master and origin/handoff/current remain aligned at that source before integration."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
