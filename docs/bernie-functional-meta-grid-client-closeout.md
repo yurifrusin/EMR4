@@ -134,7 +134,7 @@ action. The acceptance control is hidden unless both `smoke=true` and
 
 ## 6. Deterministic and regression evidence
 
-The final serial population passed **101 tests**:
+The final serial population passed **102 tests**:
 
 - functional meta-grid artifact, boundary, accessibility and evidence guards;
 - API Spine artifacts and existing confirmation-client checkpoint;
@@ -147,6 +147,10 @@ The final serial population passed **101 tests**:
 Node syntax checks passed for the two Diary JavaScript files. Focused Ruff and
 `git diff --check` passed. Exact blocked-primitive and closed API/database diff
 scans were clean.
+
+The repository's complete Diary smoke review also passed **139 tests** after
+the client smoke gate was decoupled from the legacy Bernie pilot eligibility
+gate.
 
 The final browser screenshots and their SHA-256 hashes are committed with the
 canonical browser evidence. They contain authored-synthetic names only.
@@ -167,8 +171,12 @@ Rendered validation found and Sol corrected these bounded mechanical defects:
 6. cancelled rows were initially present in the focused projection despite its
    stated omission;
 7. the tablet-landscape breakpoint initially stacked rather than retaining
-   rail plus canvas; and
-8. phone-landscape comparison initially hid its next/previous controls.
+   rail plus canvas;
+8. phone-landscape comparison initially hid its next/previous controls; and
+9. the initial authored-synthetic meta-grid smoke shortcut also forced the
+   legacy Bernie pilot eligible, bypassing the pilot's existing eligibility
+   route. The gates are now independent, with a focused static guard and the
+   complete 139-test Diary smoke review passing.
 
 Every correction stayed inside the frozen client contract and was followed by
 focused and combined reruns.

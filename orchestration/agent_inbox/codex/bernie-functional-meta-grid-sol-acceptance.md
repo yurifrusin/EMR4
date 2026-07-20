@@ -28,7 +28,9 @@ database, production or release artifact changed.
 
 - mandatory five-source rehydration passed before planning;
 - preacceptance Ariadne receipt passed with all five rehydration sources;
-- the final protected-safe serial population passed 101 tests;
+- the final protected-safe serial population passed 102 tests;
+- the complete existing Diary smoke review passed 139 tests after its legacy
+  pilot eligibility gate was decoupled from meta-grid smoke visibility;
 - Node syntax, focused Ruff, blocked-primitive scan, closed API/database diff
   scan and `git diff --check` passed;
 - desktop 1440×900, tablet 1024×768 and 768×1024, and phone 390×844 and

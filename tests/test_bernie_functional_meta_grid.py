@@ -27,11 +27,20 @@ def test_functional_meta_grid_files_are_wired_into_the_existing_diary():
     html = _read(HTML)
 
     assert '<link rel="stylesheet" href="meta-grid.css?v=5"' in html
+    assert '<script src="diary.js?v=188" defer>' in html
     assert '<script src="meta-grid.js?v=6" defer>' in html
     assert 'id="btn-meta-grid-launch"' in html
     assert 'id="bernie-meta-grid"' in html
     assert 'id="meta-grid-request-form"' in html
     assert 'id="meta-grid-canvas"' in html
+
+
+def test_smoke_meta_grid_visibility_does_not_bypass_legacy_pilot_eligibility():
+    source = _read(DIARY_JS)
+
+    assert "if (isSmoke) setMetaGridLaunchAvailability(true);" in source
+    assert "if (!token && !isSmoke)" in source
+    assert "if (isSmoke) {\n    isBerniePilotEligible = true;" not in source
 
 
 def test_projection_contract_has_all_accepted_functional_families_and_reversible_state():

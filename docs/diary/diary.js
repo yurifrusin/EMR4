@@ -6588,15 +6588,9 @@ async function checkBerniePilotEligibility() {
     return;
   }
 
-  if (isSmoke) {
-    isBerniePilotEligible = true;
-    setMetaGridLaunchAvailability(true);
-    const bernieLaunch = document.getElementById("btn-bernie-pilot-launch");
-    if (bernieLaunch) bernieLaunch.classList.remove("hidden");
-    return;
-  }
+  if (isSmoke) setMetaGridLaunchAvailability(true);
 
-  if (!token) {
+  if (!token && !isSmoke) {
     return;
   }
 
