@@ -1,0 +1,78 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "accept",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "reception_one_committed_event_vertical_final_preacceptance",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker owned the tightly coupled transaction, feed, client, browser and disposable-database vertical."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No product provider, external design model, subscription or prompt transmission was authorised or used."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh Gemini 3.5 Flash High reviewed clean candidate 705582b7719bce6f1c5fe5833c1703354b5fa1a3, returned pass with no material finding, and reran all 20 focused tests plus Node and Ruff."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "All five mandatory rehydration sources were restored before planning, implementation, dispatch and acceptance; protected holdouts and historical Diary material were not used.",
+        "The existing signed update-confirm path atomically persists appointment, audit, idempotency completion and the single authorised reschedule event, with rollback and replay tests passing.",
+        "The authenticated practice-scoped default-off feed, signed opaque cursor, forced RLS, append-only trigger and payload allowlist pass deterministic and real PostgreSQL evidence.",
+        "The real authenticated Diary passed desktop, two tablet and two smartphone viewports with keyboard, privacy, interruption, attention controls, zero overflow, 44-pixel controls and clean console/network evidence without interception.",
+        "Readback proves exactly two synthetic reschedules, two correlated audits, two completed commands, two events, one replay with no duplicate, own-practice two and foreign-practice zero, then marker-verified cleanup of the exact database and probe role.",
+        "The current 213-test focused/API/client population passes; the known three-second Diary reanchor node passed immediately in isolation and the full 139/139 rerun passed without source change.",
+        "A detached untouched-baton comparison reproduced every deliberately over-broad historical test failure exactly, proving no candidate regression; those obsolete nodes were not altered or treated as passing evidence.",
+        "Node, Ruff, compilation, frontend version integrity, Alembic single-head, blocked-new-primitive and whitespace checks pass.",
+        "HEAD is 705582b7719bce6f1c5fe5833c1703354b5fa1a3 on codex/reception-one-committed-event-vertical; protected local/origin master and handoff/current remain at be5e01d00b23ef43f7aab8b30f6dbdfa6e858c45 before integration."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent contributed changes."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

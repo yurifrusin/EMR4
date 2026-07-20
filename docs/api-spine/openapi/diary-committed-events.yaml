@@ -1,0 +1,121 @@
+openapi: 3.1.0
+info:
+  title: EMR4 Reception One committed-event read
+  version: 0.1.0
+  summary: Bounded local read-only delivery of committed appointment reschedules.
+  description: >
+    Additive authenticated read contract for the Yuri-authorised provider-free,
+    authored-synthetic Reception One runtime. The capability is disabled by
+    default and adds no acknowledgement, event command, GraphQL mutation,
+    subscription, provider, external transport, production, deployment, or
+    release authority.
+servers:
+  - url: http://127.0.0.1:8001/api/v1
+    description: Loopback development evidence only.
+paths:
+  /diary/events/committed:
+    get:
+      operationId: readCommittedDiaryEvents
+      summary: Establish a baseline or read later committed reschedule signals.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: cursor
+          in: query
+          required: false
+          description: Signed, opaque, practice-bound time/event coordinate.
+          schema:
+            type: string
+            maxLength: 256
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 20
+            default: 10
+      responses:
+        "200":
+          description: Default-off capability state, new baseline, or ordered later events.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CommittedEventFeed"
+        "401":
+          description: Missing or invalid staff authentication.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    CommittedEventFeed:
+      type: object
+      additionalProperties: false
+      required: [schema_version, enabled, baseline_established, cursor, events]
+      properties:
+        schema_version:
+          const: diary.committed_event_feed.v1
+        enabled:
+          type: boolean
+        baseline_established:
+          type: boolean
+        cursor:
+          type: [string, "null"]
+          maxLength: 256
+        events:
+          type: array
+          maxItems: 20
+          items:
+            $ref: "#/components/schemas/AppointmentRescheduledEvent"
+    AppointmentRescheduledEvent:
+      type: object
+      additionalProperties: false
+      required:
+        - event_id
+        - event_type
+        - schema_version
+        - source_system
+        - aggregate_id
+        - aggregate_revision
+        - occurred_at
+        - received_at
+        - evidence_mode
+        - payload
+      properties:
+        event_id: {type: string, format: uuid}
+        event_type: {const: diary.appointment_rescheduled}
+        schema_version: {const: diary.appointment_rescheduled.v1}
+        source_system: {const: emr4-diary}
+        aggregate_id: {type: string, format: uuid}
+        aggregate_revision: {type: integer, minimum: 1}
+        occurred_at: {type: string, format: date-time}
+        received_at: {type: string, format: date-time}
+        evidence_mode: {const: authored_synthetic_local}
+        payload:
+          $ref: "#/components/schemas/AppointmentRescheduledPayload"
+    AppointmentRescheduledPayload:
+      type: object
+      additionalProperties: false
+      required:
+        - appointment_id
+        - practitioner_id
+        - location_id
+        - start_time
+        - end_time
+        - reason_codes
+      properties:
+        appointment_id: {type: string, format: uuid}
+        practitioner_id: {type: string, format: uuid}
+        location_id: {type: [string, "null"], format: uuid}
+        start_time: {type: string, format: date-time}
+        end_time: {type: string, format: date-time}
+        reason_codes:
+          type: array
+          minItems: 1
+          maxItems: 1
+          prefixItems:
+            - const: appointment_time_changed
+          items: false

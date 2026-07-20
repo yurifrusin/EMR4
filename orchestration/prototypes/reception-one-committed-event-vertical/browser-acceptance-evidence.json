@@ -1,0 +1,367 @@
+{
+  "api_interception": false,
+  "attention": {
+    "dismiss": true,
+    "duplicate_visible_effect": false,
+    "mute_until_reload": true,
+    "no_auto_focus_or_speech": true,
+    "show_changed_appointment": true,
+    "snooze_five_minutes": true,
+    "unrelated_event_suppressed": true
+  },
+  "authority": {
+    "event_acknowledgement_route": false,
+    "event_command_authority": false,
+    "existing_signed_update_confirmation_only": true,
+    "new_appointment_command_added": false,
+    "production_or_deployment_changed": false,
+    "provider_called": false
+  },
+  "browser_console_warnings_or_errors": [],
+  "browser_page_errors": [],
+  "claims_not_made": [
+    "provider",
+    "PII",
+    "Stage 3B",
+    "representative usability",
+    "voice",
+    "external event transport",
+    "production",
+    "deployment",
+    "release"
+  ],
+  "database_readback": {
+    "aggregate_revisions_positive": true,
+    "correlated_event_rows": 2,
+    "counts": {
+      "appointment_audit_log": 2,
+      "appointment_command_idempotency": 2,
+      "appointments": 6,
+      "bernie_booking_sessions": 0,
+      "bernie_session_events": 0,
+      "diary_committed_events": 2
+    },
+    "database": "gp_pms_reception_one_event_runtime_5e2c91a7_20260721",
+    "event_schema_versions": [
+      "diary.appointment_rescheduled.v1",
+      "diary.appointment_rescheduled.v1"
+    ],
+    "event_types": [
+      "diary.appointment_rescheduled",
+      "diary.appointment_rescheduled"
+    ],
+    "identifiers_recorded": false,
+    "patient_details_recorded": false,
+    "payload_keys_exact": true,
+    "prohibited_payload_keys_present": [],
+    "schema_version": "reception-one.committed-event.database-readback.v1",
+    "synthetic_only": true,
+    "target_windows": {
+      "in_scope_target": "10:00:00",
+      "out_of_scope_target": "15:30:00"
+    }
+  },
+  "database_security": {
+    "append_only_delete": "append_only_rejected",
+    "append_only_update": "append_only_rejected",
+    "non_bypass_probe_role": true,
+    "rls_foreign_practice_event_count": 0,
+    "rls_own_practice_event_count": 2,
+    "role_name_recorded": false,
+    "schema_version": "reception-one.committed-event.database-security.v1"
+  },
+  "evidence_mode": "live_local_browser_backend_postgres",
+  "interruption": {
+    "event_payload_used_as_display_truth": false,
+    "fresh_appointment_read": true,
+    "fresh_projection_read": true,
+    "method": "standards_dom_blur_event_headless_fallback"
+  },
+  "keyboard": {
+    "escape_dismiss_and_focus_restore": true,
+    "native_tab_sequence": [
+      "meta-grid-request",
+      "meta-grid-submit",
+      "meta-grid-privacy",
+      "Dr Shera today",
+      "patient timeline example",
+      "Availability after 2 pm",
+      "Compare practitioners",
+      "Tue, 21 July 2026 \u00b7 Meta-grid Live-local Synthetic Practice \u00b7 ordinary overview",
+      "meta-grid-overview",
+      "meta-grid-explain",
+      "meta-grid-event-show"
+    ],
+    "show_context_focus_target": true
+  },
+  "network": {
+    "browser_api_method_path_counts": [
+      {
+        "count": 15,
+        "method": "GET",
+        "path": "/api/v1/appointments"
+      },
+      {
+        "count": 5,
+        "method": "GET",
+        "path": "/api/v1/appointments/bernie/pilot-eligibility"
+      },
+      {
+        "count": 5,
+        "method": "GET",
+        "path": "/api/v1/appointments/types"
+      },
+      {
+        "count": 5,
+        "method": "GET",
+        "path": "/api/v1/appointments/{appointment_id}"
+      },
+      {
+        "count": 96,
+        "method": "GET",
+        "path": "/api/v1/diary/events/committed"
+      },
+      {
+        "count": 10,
+        "method": "GET",
+        "path": "/api/v1/diary/locations"
+      },
+      {
+        "count": 5,
+        "method": "GET",
+        "path": "/api/v1/diary/roster"
+      },
+      {
+        "count": 5,
+        "method": "GET",
+        "path": "/api/v1/diary/template"
+      },
+      {
+        "count": 5,
+        "method": "GET",
+        "path": "/api/v1/diary/waiting-areas"
+      },
+      {
+        "count": 5,
+        "method": "GET",
+        "path": "/api/v1/patients/search"
+      },
+      {
+        "count": 5,
+        "method": "POST",
+        "path": "/api/v1/auth/login"
+      },
+      {
+        "count": 5,
+        "method": "POST",
+        "path": "/api/v1/graphql"
+      }
+    ],
+    "browser_failed_api_responses": [],
+    "browser_forbidden_requests": [],
+    "browser_mutation_requests": [],
+    "browser_only_loopback": true,
+    "support_command_routes": [
+      "POST /api/v1/appointments/proposals/update/{appointment_id}",
+      "POST /api/v1/appointments/proposals/update/confirm"
+    ]
+  },
+  "privacy": {
+    "changed_item_detail_masked": true,
+    "patient_free_live_region": true,
+    "time_comparison_masked": true
+  },
+  "recorded_at": "2026-07-20T22:11:54.996622Z",
+  "result": "browser_pass",
+  "route_interception": false,
+  "runtime": {
+    "cloud_credentials_present": false,
+    "credential_recorded": false,
+    "database": "gp_pms_reception_one_event_runtime_5e2c91a7_20260721",
+    "feature_enabled_only_in_exact_harness": true,
+    "loopback_family": "ipv6",
+    "provider": "disabled",
+    "token_recorded": false
+  },
+  "schema_version": "reception-one.committed-event.browser-evidence.v1",
+  "screenshots": [
+    {
+      "file": "desktop-event-cue-1440x900.png",
+      "raster_integrity": {
+        "height": 900,
+        "painted_extent_ratio": 1.0,
+        "passes": true,
+        "rightmost_20_percent_nonblack_ratio": 1.0,
+        "width": 1440
+      },
+      "sha256": "ed201a96f813d5b38cdfa1743020cd70becfdd704488d789f48ad0d4b316a96c"
+    },
+    {
+      "file": "tablet-landscape-event-cue-1024x768.png",
+      "raster_integrity": {
+        "height": 768,
+        "painted_extent_ratio": 1.0,
+        "passes": true,
+        "rightmost_20_percent_nonblack_ratio": 1.0,
+        "width": 1024
+      },
+      "sha256": "9359b7666f8fd9a540b3e4bf617d3335d0254eb2f86e8bd14e5743e57cfc57be"
+    },
+    {
+      "file": "tablet-portrait-event-cue-768x1024.png",
+      "raster_integrity": {
+        "height": 1024,
+        "painted_extent_ratio": 1.0,
+        "passes": true,
+        "rightmost_20_percent_nonblack_ratio": 1.0,
+        "width": 768
+      },
+      "sha256": "3b30f19d475f5ca428fd82d4cb5816d4c9cc22a2797383f9dfae52cfd76baf2e"
+    },
+    {
+      "file": "smartphone-portrait-private-event-390x844.png",
+      "raster_integrity": {
+        "height": 844,
+        "painted_extent_ratio": 1.0,
+        "passes": true,
+        "rightmost_20_percent_nonblack_ratio": 1.0,
+        "width": 390
+      },
+      "sha256": "d620dd895d3168e839ccf6a90567a7aae65056148b8b12c45e821c7c8cd2e1d5"
+    },
+    {
+      "file": "smartphone-landscape-interruption-event-844x390.png",
+      "raster_integrity": {
+        "height": 390,
+        "painted_extent_ratio": 1.0,
+        "passes": true,
+        "rightmost_20_percent_nonblack_ratio": 1.0,
+        "width": 844
+      },
+      "sha256": "3f5215d3297a2d6a1c6c420284f19f967f1be7ee4fc50018dc829f77b6b07797"
+    }
+  ],
+  "support_command_evidence_mode": "live_local_backend_postgres",
+  "support_commands": {
+    "confirmed_reschedules": 2,
+    "idempotent_replays": 1,
+    "in_scope": 1,
+    "other_mutations": 0,
+    "out_of_scope": 1
+  },
+  "viewports": [
+    {
+      "body_client_width": 1440,
+      "document_client_width": 1440,
+      "enabled_controls_below_44px": [],
+      "error_overlay_visible": false,
+      "height": 900,
+      "host_horizontal_overflow_px": 0,
+      "host_width": 1440,
+      "id": "desktop_landscape",
+      "page_horizontal_overflow_px": 0,
+      "scenario_results": {
+        "fresh_time_reconciliation": "pass",
+        "keyboard_escape_dismiss_and_focus_restore": "pass",
+        "native_tab_sequence": [
+          "meta-grid-request",
+          "meta-grid-submit",
+          "meta-grid-privacy",
+          "Dr Shera today",
+          "patient timeline example",
+          "Availability after 2 pm",
+          "Compare practitioners",
+          "Tue, 21 July 2026 \u00b7 Meta-grid Live-local Synthetic Practice \u00b7 ordinary overview",
+          "meta-grid-overview",
+          "meta-grid-explain",
+          "meta-grid-event-show"
+        ],
+        "show_changed_appointment": "pass",
+        "unrelated_suppression": "pass"
+      },
+      "shell_width": 1440,
+      "width": 1440,
+      "window_inner_width": 1440,
+      "workspace_right": 1422
+    },
+    {
+      "body_client_width": 1024,
+      "document_client_width": 1024,
+      "enabled_controls_below_44px": [],
+      "error_overlay_visible": false,
+      "height": 768,
+      "host_horizontal_overflow_px": 0,
+      "host_width": 1024,
+      "id": "tablet_landscape",
+      "page_horizontal_overflow_px": 0,
+      "scenario_results": {
+        "fresh_time_reconciliation": "pass",
+        "snooze_five_minutes": "pass"
+      },
+      "shell_width": 1024,
+      "width": 1024,
+      "window_inner_width": 1024,
+      "workspace_right": 1006
+    },
+    {
+      "body_client_width": 768,
+      "document_client_width": 768,
+      "enabled_controls_below_44px": [],
+      "error_overlay_visible": false,
+      "height": 1024,
+      "host_horizontal_overflow_px": 0,
+      "host_width": 768,
+      "id": "tablet_portrait",
+      "page_horizontal_overflow_px": 0,
+      "scenario_results": {
+        "dismiss_focus_restore": "pass",
+        "fresh_time_reconciliation": "pass",
+        "ordinary_diary_fallback": "pass"
+      },
+      "shell_width": 768,
+      "width": 768,
+      "window_inner_width": 768,
+      "workspace_right": 756
+    },
+    {
+      "body_client_width": 390,
+      "document_client_width": 390,
+      "enabled_controls_below_44px": [],
+      "error_overlay_visible": false,
+      "height": 844,
+      "host_horizontal_overflow_px": 0,
+      "host_width": 390,
+      "id": "smartphone_portrait",
+      "page_horizontal_overflow_px": 0,
+      "scenario_results": {
+        "mute_until_reload": "pass",
+        "privacy_masks_time_and_detail": "pass",
+        "show_context_disabled_while_private": "pass"
+      },
+      "shell_width": 390,
+      "width": 390,
+      "window_inner_width": 390,
+      "workspace_right": 382
+    },
+    {
+      "body_client_width": 844,
+      "document_client_width": 844,
+      "enabled_controls_below_44px": [],
+      "error_overlay_visible": false,
+      "height": 390,
+      "host_horizontal_overflow_px": 0,
+      "host_width": 844,
+      "id": "smartphone_landscape",
+      "page_horizontal_overflow_px": 0,
+      "scenario_results": {
+        "fresh_time_reconciliation": "pass",
+        "interruption_resume": "pass; standards_dom_blur_event_headless_fallback",
+        "keyboard_escape": "pass"
+      },
+      "shell_width": 844,
+      "width": 844,
+      "window_inner_width": 844,
+      "workspace_right": 832
+    }
+  ]
+}

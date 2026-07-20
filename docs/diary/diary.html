@@ -7,9 +7,9 @@
   <title>EMR — Diary</title>
   <script src="office-bootstrap.js?v=2"></script>
   <link rel="stylesheet" href="diary.css?v=138" />
-  <link rel="stylesheet" href="meta-grid.css?v=5" />
-  <script src="diary.js?v=189" defer></script>
-  <script src="meta-grid.js?v=8" defer></script>
+  <link rel="stylesheet" href="meta-grid.css?v=6" />
+  <script src="diary.js?v=190" defer></script>
+  <script src="meta-grid.js?v=9" defer></script>
 </head>
 <body>
 
@@ -206,6 +206,21 @@
         </section>
 
         <div id="meta-grid-announcer" class="meta-grid-visually-hidden" aria-live="polite" aria-atomic="true"></div>
+
+        <section id="meta-grid-event-cue" class="meta-grid-event-cue hidden" aria-labelledby="meta-grid-event-cue-heading" data-testid="meta-grid-event-cue">
+          <div class="meta-grid-event-cue-copy">
+            <p class="meta-grid-event-cue-kicker">Reception One change</p>
+            <h2 id="meta-grid-event-cue-heading">An appointment time in this view changed</h2>
+            <p id="meta-grid-event-cue-summary"></p>
+            <p id="meta-grid-event-cue-reason">The Diary committed the change, then Reception One refreshed this exact view before showing the notice.</p>
+          </div>
+          <div class="meta-grid-event-cue-actions">
+            <button id="meta-grid-event-show" type="button" data-testid="meta-grid-event-show">Show changed appointment</button>
+            <button id="meta-grid-event-dismiss" type="button" data-testid="meta-grid-event-dismiss">Dismiss</button>
+            <button id="meta-grid-event-snooze" type="button" data-testid="meta-grid-event-snooze">Snooze 5 min</button>
+            <button id="meta-grid-event-mute" type="button" data-testid="meta-grid-event-mute">Mute until reload</button>
+          </div>
+        </section>
 
         <section id="meta-grid-canvas" class="meta-grid-canvas" tabindex="-1" aria-labelledby="meta-grid-canvas-heading">
           <h2 id="meta-grid-canvas-heading" class="meta-grid-visually-hidden">Intent-projected Diary view</h2>

@@ -6,6 +6,14 @@ source_safety:
   examples: authored_synthetic
   runtime_wiring: blocked
   proactive_diary_delivery_runtime: blocked
+  bounded_local_runtime_exception:
+    decision_owner: Yuri
+    authorised_on: "2026-07-21"
+    event_type: diary.appointment_rescheduled
+    evidence_mode: authored_synthetic_local
+    delivery: authenticated_practice_scoped_polling
+    feature_default: disabled
+    broader_runtime_wiring: blocked
   provider_calls: blocked
   external_clients: blocked
   historical_diary_trove_access: blocked
@@ -13,6 +21,7 @@ source_safety:
   memory_rag_graphrag: blocked
 notes:
   - Async integrations observe or ingest typed events; they do not bypass command endpoints.
+  - The Reception One exception reads the same committed PostgreSQL event row as an outbox-equivalent; it has no publisher, broker, acknowledgement, or command consumer.
   - Every real integration endpoint will require an integration principal, idempotency, signature verification, tenancy checks, and audit.
   - Payload examples here are placeholders and intentionally omit patient names, phone numbers, Medicare, DOB, result text, invoice details, and provider secrets.
 
@@ -51,7 +60,7 @@ common_envelope:
 
 event_families:
   - family_id: diary
-    research_status: foundational_design_runtime_blocked
+    research_status: bounded_local_reschedule_runtime_authorised_broader_family_blocked
     direction: emit
     event_types:
       - diary.appointment_created
@@ -62,6 +71,17 @@ event_families:
       - diary.proposal_expired
       - diary.waiting_state_changed
       - diary.roster_changed
+    authorised_runtime_subset:
+      event_type: diary.appointment_rescheduled
+      schema_version: diary.appointment_rescheduled.v1
+      producer: existing_signed_update_confirmation_only
+      write_transaction: appointment_plus_audit_plus_idempotency_plus_event
+      read_route: GET /api/v1/diary/events/committed
+      cursor: signed_practice_bound_opaque_coordinate
+      event_payload_phi: none
+      fresh_appointment_and_projection_read_required: true
+      local_authored_synthetic_only: true
+      enabled_by_default: false
     allowed_payload_fields:
       - aggregate_id
       - aggregate_revision
@@ -247,7 +267,7 @@ event_families:
       citations_required_when_opened: true
 
 blocked_gates:
-  proactive_diary_delivery_runtime: blocked
+  proactive_diary_delivery_runtime: blocked_except_reception_one_local_reschedule
   live_provider_runtime: blocked
   regulated_external_integrations: blocked
   historical_diary_trove_or_h15_runtime_imports: blocked

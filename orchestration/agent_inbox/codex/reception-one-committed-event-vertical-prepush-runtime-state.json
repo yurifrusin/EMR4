@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "push",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "reception_one_committed_event_vertical_prepush",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation-worker branch is being pushed."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No provider or external design model was used."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["The independent Gemini veto is preserved as read-only evidence; its temporary worktree was clean and removed, and no verifier branch is being pushed."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The accepted clean task branch contains only the authorized event vertical, tests, authored-synthetic evidence, acceptance/closeout, Continuity Engine and baton records.",
+        "All local gates and the fresh independent veto pass; the untouched-baton comparison accounts for unrelated historical test debt.",
+        "Origin was fetched immediately before this receipt. Task HEAD is 520637bc6d4ee8ce6983cae6e173231257ba3a8e; local/origin master and handoff/current remain aligned at be5e01d00b23ef43f7aab8b30f6dbdfa6e858c45 pending check-gated integration.",
+        "The push targets only codex/reception-one-committed-event-vertical and grants no protected integration until required PR checks pass."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent contributed changes."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

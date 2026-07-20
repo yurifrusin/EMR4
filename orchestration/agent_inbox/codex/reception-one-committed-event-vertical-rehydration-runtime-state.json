@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "new_session",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "reception_one_committed_event_vertical_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker is dispatched before the plan and acceptance contract are frozen."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external design model or provider is authorised."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["A fresh independent veto remains required near acceptance; no reviewer is dispatched before plan freeze."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri explicitly authorised the bounded event-runtime changes on 2026-07-21 after the Reception One combined-scope proof.",
+        "The live handover, current allocation, relevant functional/live-local/combined-scope acceptance, event-aware north star, protected boundaries and Git state were re-read before planning.",
+        "The new clean worktree is C:/Users/sarashera/EMR4-worktrees/reception-one-committed-event-vertical on codex/reception-one-committed-event-vertical at be5e01d00b23ef43f7aab8b30f6dbdfa6e858c45.",
+        "Local and origin master and handoff/current are aligned at be5e01d00b23ef43f7aab8b30f6dbdfa6e858c45.",
+        "The existing C:/Users/sarashera/emr4 review worktree remains on codex/bernie-reception-one-review-session with four pre-existing untracked receipt/runtime files and is out of scope.",
+        "Authority is limited to one provider-free local authored-synthetic committed appointment-reschedule event vertical; PII, protected evidence, Stage 3B, production, deployment, release, voice, providers and autonomous action remain closed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned before the worker-economy decision in the frozen plan."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
