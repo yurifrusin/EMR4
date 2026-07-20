@@ -10,6 +10,7 @@ source_safety:
     decision_owner: Yuri
     authorised_on: "2026-07-21"
     event_type: diary.appointment_rescheduled
+    consumer_reconciliation: exact_active_practitioner_availability_selection_proposal
     feature_default: disabled
     broader_proactive_runtime: blocked
   provider_calls: blocked
@@ -67,8 +68,10 @@ agents:
       event_type: diary.appointment_rescheduled
       producer: existing_signed_update_confirmation_only
       delivery: authenticated_practice_scoped_polling
-      relevance: deterministic_active_projection_membership
+      relevance: deterministic_appointment_membership_or_active_practitioner_availability
       display_source: fresh_authorized_appointment_and_projection_reads
+      availability_reconciliation: fresh_backend_candidate_comparison
+      automatic_proposal_from_event: false
       attention_state: in_memory_only
       appointment_write_authority: false
       evidence_mode: authored_synthetic_local

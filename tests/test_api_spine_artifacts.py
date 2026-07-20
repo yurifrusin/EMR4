@@ -359,6 +359,10 @@ class TestBernieCommittedEventAwarenessDesign:
         assert events["source_safety"]["proactive_diary_delivery_runtime"] == "blocked"
         event_exception = events["source_safety"]["bounded_local_runtime_exception"]
         assert event_exception["event_type"] == "diary.appointment_rescheduled"
+        assert (
+            event_exception["consumer_reconciliation"]
+            == "exact_active_practitioner_availability_selection_proposal"
+        )
         assert event_exception["feature_default"] == "disabled"
         assert event_exception["broader_runtime_wiring"] == "blocked"
         assert (
@@ -368,6 +372,10 @@ class TestBernieCommittedEventAwarenessDesign:
         assert charters["source_safety"]["proactive_diary_delivery_runtime"] == "blocked"
         charter_exception = charters["source_safety"]["bounded_local_runtime_exception"]
         assert charter_exception["event_type"] == "diary.appointment_rescheduled"
+        assert (
+            charter_exception["consumer_reconciliation"]
+            == "exact_active_practitioner_availability_selection_proposal"
+        )
         assert charter_exception["feature_default"] == "disabled"
         assert charter_exception["broader_proactive_runtime"] == "blocked"
         assert (
@@ -397,6 +405,8 @@ class TestBernieCommittedEventAwarenessDesign:
         assert attention["low_interruption_filter_required"] is True
         assert attention["practice_role_resource_recheck_required"] is True
         assert attention["unrelated_event_suppression_required"] is True
+        assert attention["unchanged_availability_silent"] is True
+        assert attention["invalid_selected_or_proposed_slot_cleared"] is True
         assert attention["explain_why_required"] is True
         assert attention["automatic_spoken_phi"] is False
         assert {
@@ -439,6 +449,13 @@ class TestBernieCommittedEventAwarenessDesign:
             "use_event_payload_as_substitute_for_fresh_authorized_read"
             in bernie["must_not"]
         )
+        runtime = bernie["bounded_runtime_authority"]
+        assert (
+            runtime["relevance"]
+            == "deterministic_appointment_membership_or_active_practitioner_availability"
+        )
+        assert runtime["availability_reconciliation"] == "fresh_backend_candidate_comparison"
+        assert runtime["automatic_proposal_from_event"] is False
 
 
 class TestSecurityPermissionArtifacts:

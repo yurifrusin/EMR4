@@ -17,6 +17,24 @@
       ],
       "source_node": "stage1-combined-intent-foundation",
       "title": "Combined appointment-intent parity"
+    },
+    {
+      "applies_to_kinds": [
+        "implementation",
+        "integration"
+      ],
+      "description": "A descendant of the accepted committed-reschedule vertical that acts on combined availability must prove that fresh backend candidate comparison preserves a still-valid selection or proposal, clears an occupied one, suppresses irrelevant changes, and never turns an event into command authority.",
+      "evidence": [
+        "docs/bernie-reception-one-committed-event-vertical-closeout.md",
+        "docs/bernie-reception-one-availability-reconciliation-plan.md"
+      ],
+      "id": "committed-reschedule-availability-reconciliation",
+      "required_evidence_types": [
+        "tests",
+        "closeouts"
+      ],
+      "source_node": "reception-one-committed-event-vertical",
+      "title": "Committed-reschedule availability reconciliation"
     }
   ],
   "governance": {
@@ -37,7 +55,7 @@
       "voice"
     ]
   },
-  "graph_revision": 12,
+  "graph_revision": 13,
   "harvests": [],
   "nodes": [
     {
@@ -625,9 +643,98 @@
       "title": "Stage 1 combined appointment-intent foundation",
       "unresolved_gates": [],
       "updated_at": "2026-07-18T00:00:00Z"
+    },
+    {
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "event-runtime",
+            "scope": "Extend the accepted default-off local reschedule consumer only to fresh-read combined availability, selection and non-committing proposal reconciliation.",
+            "source": "docs/bernie-reception-one-availability-reconciliation-plan.md"
+          }
+        ],
+        "notes": [
+          "Yuri explicitly authorized the recommended bounded availability/selection/proposal reconciliation proof on 2026-07-21.",
+          "The opening reuses only diary.appointment_rescheduled and existing reads/proposals; other events, API/database changes, commands, providers, PII, protected/historical evidence, Stage 3B, production, deployment and release remain closed."
+        ]
+      },
+      "claim_scope": [
+        "Bounded Reception One fresh-read reconciliation of the combined availability, selection and non-committing proposal flow after an existing committed reschedule.",
+        "Authored-synthetic loopback desktop, tablet, smartphone, keyboard, privacy, interruption, state and zero-browser-write evidence only."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "evidence": [
+            "orchestration/prototypes/bernie-reception-one-combined-scope-proof/browser-acceptance-evidence.json",
+            "tests/test_bernie_reception_one_combined_scope.py"
+          ],
+          "note": "The accepted ancestor proves the combined request; this tranche must preserve it while adding reconciliation.",
+          "status": "satisfied"
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "evidence": [
+            "docs/bernie-reception-one-availability-reconciliation-plan.md"
+          ],
+          "note": "Implementation and live-local evidence do not yet exist; the reconciliation contract remains deliberately open.",
+          "status": "gap"
+        }
+      ],
+      "coordinates": {
+        "git_ref": "codex/reception-one-availability-reconciliation",
+        "source_head": "e469fd60d37ab536152eda8e2cc4997431817110",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "created_at": "2026-07-20T22:55:00Z",
+      "decisions": [
+        {
+          "id": "availability-reconciliation-authorized",
+          "source": "docs/bernie-reception-one-availability-reconciliation-plan.md",
+          "status": "accepted",
+          "summary": "Reuse the accepted reschedule signal to reconcile one combined availability, selection and non-committing proposal flow without broadening event or write authority."
+        }
+      ],
+      "evidence": {
+        "acceptances": [],
+        "closeouts": [
+          "orchestration/prototypes/bernie-reception-one-combined-scope-proof/browser-acceptance-evidence.json"
+        ],
+        "findings": [
+          "docs/security/bernie-reception-one-availability-reconciliation-threat-model-delta.md",
+          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-plan-sol-review.md"
+        ],
+        "plans": [
+          "docs/bernie-reception-one-availability-reconciliation-plan.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-preplan-receipt.json",
+          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-rehydration-receipt.json"
+        ],
+        "tests": [
+          "tests/test_bernie_reception_one_combined_scope.py"
+        ]
+      },
+      "id": "reception-one-availability-reconciliation",
+      "kind": "implementation",
+      "relationships": [
+        {
+          "node_id": "reception-one-committed-event-vertical",
+          "relation": "builds_on"
+        }
+      ],
+      "status": "active",
+      "title": "Reception One committed-reschedule availability reconciliation",
+      "unresolved_gates": [
+        "The committed-reschedule availability-reconciliation contract remains a gap until focused tests and real local browser/backend/PostgreSQL evidence both pass.",
+        "Other event families, automatic proposal work, external transport, production delivery/retention, representative participants, voice, providers, PII, deployment and release remain closed.",
+        "Final visual and interaction synthesis remains a later Yuri decision."
+      ],
+      "updated_at": "2026-07-20T22:55:00Z"
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-07-20T22:00:00Z"
+  "updated_at": "2026-07-20T22:55:00Z"
 }
