@@ -426,6 +426,9 @@
       state.trail.push(state.current);
     }
     state.current = projection;
+    if (!["selection_only", "proposal_not_committed"].includes(projection.state)) {
+      state.selectedItem = null;
+    }
     state.proposalResult = projection.proposal_result || null;
     render();
     if (focusCanvas) elements.canvas?.focus();

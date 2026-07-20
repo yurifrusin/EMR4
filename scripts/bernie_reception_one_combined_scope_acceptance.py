@@ -236,13 +236,18 @@ def run_tablet_portrait(browser: Browser, output: Path, evidence: shared.Browser
     screenshots: list[dict[str, object]] = []
     try:
         _submit_combined(page)
+        page.get_by_test_id("meta-grid-slot").first.tap()
+        expect(page.locator("#meta-grid-state-label")).to_have_text("Selection")
+        shared._submit(page, "after 3", "availability_slots")
+        _assert_combined_scope(page, time_fragment="3:00 pm")
+        expect(page.get_by_test_id("meta-grid-prepare-scoped-proposal")).to_have_count(0)
         prior = page.locator("#meta-grid-scope-summary").inner_text()
         shared._submit(page, "make it 45 minutes", "availability_slots", previous_scope=prior)
-        _assert_combined_scope(page, duration=45)
+        _assert_combined_scope(page, time_fragment="3:00 pm", duration=45)
         page.get_by_test_id("meta-grid-slot").first.tap()
         page.locator("#meta-grid-back").tap()
         shared._wait_family(page, "availability_slots")
-        _assert_combined_scope(page, duration=45)
+        _assert_combined_scope(page, time_fragment="3:00 pm", duration=45)
         screenshots.append(
             shared._save_screenshot(page, output, "tablet-portrait-refined-back-768x1024.png")
         )
@@ -255,6 +260,7 @@ def run_tablet_portrait(browser: Browser, output: Path, evidence: shared.Browser
                 height=1024,
                 results={
                     "combined_scope": "pass",
+                    "refinement_clears_stale_selection": "pass",
                     "duration_refinement": "pass",
                     "selection_back_reversible": "pass",
                 },

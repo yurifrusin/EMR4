@@ -96,7 +96,7 @@
   "network": {
     "api_method_path_counts": [
       {
-        "count": 66,
+        "count": 65,
         "method": "GET",
         "path": "/api/v1/appointments"
       },
@@ -141,7 +141,7 @@
         "path": "/api/v1/appointments/proposals/bernie/supervised-booking"
       },
       {
-        "count": 11,
+        "count": 12,
         "method": "POST",
         "path": "/api/v1/appointments/proposals/slot-search"
       },
@@ -165,7 +165,7 @@
     "private_live_region_sanitized": true,
     "proposal_summary_masked": true
   },
-  "recorded_at": "2026-07-20T14:25:27.610041Z",
+  "recorded_at": "2026-07-20T14:38:33.544164Z",
   "result": "browser_pass",
   "route": "http://[::1]:3000/diary/diary.html?reference_date=2026-07-27&bernie_session=false&standalone_diary=true",
   "route_interception": false,
@@ -189,7 +189,7 @@
         "rightmost_20_percent_nonblack_ratio": 1.0,
         "width": 1440
       },
-      "sha256": "5a8a00171213c0242dcc7f7c10f7c1728b007f6b2015cc6a5699f46b5b09aa4f"
+      "sha256": "2aa45d60003a840d92491a1a737b4b2b44adcb7d4a114ac4ae1cbe4870c4e987"
     },
     {
       "file": "tablet-landscape-proposal-1024x768.png",
@@ -200,7 +200,7 @@
         "rightmost_20_percent_nonblack_ratio": 1.0,
         "width": 1024
       },
-      "sha256": "993d8bfb598928a234a90cf6ad4cc45501969236fcc5b5054b2ed0219f121a11"
+      "sha256": "58d9cf61bbb952944d2232b5dfc48536841eea3e247d743540225225911f302f"
     },
     {
       "file": "tablet-portrait-refined-back-768x1024.png",
@@ -211,7 +211,7 @@
         "rightmost_20_percent_nonblack_ratio": 1.0,
         "width": 768
       },
-      "sha256": "697ee539b260fa20db2d19c423ea535cef510dd96029e19784340492e3ea6100"
+      "sha256": "94379503738eb1be6bac2430969ac2c3bf8a1e77ed5e2ca1968b640bd93da6e8"
     },
     {
       "file": "phone-portrait-private-proposal-390x844.png",
@@ -222,7 +222,7 @@
         "rightmost_20_percent_nonblack_ratio": 1.0,
         "width": 390
       },
-      "sha256": "d45649dede785f2dfd322ee6f7c82ea2184afba672df766238b58a9a6925c0aa"
+      "sha256": "4d23b2dfe870f0841a2a80934a65d0f706834721ad35f367c5422ddd531a3a49"
     },
     {
       "file": "phone-portrait-interruption-390x844.png",
@@ -233,7 +233,7 @@
         "rightmost_20_percent_nonblack_ratio": 1.0,
         "width": 390
       },
-      "sha256": "7e9bcdc975fdf6bf56b998717a8ba0ba6173c0ec633ab67c9a93b420073d1e60"
+      "sha256": "32e234cc5cc596b3a860bd57a2dd9b128057881dcab9a9c1874997f8260080b1"
     },
     {
       "file": "phone-landscape-refined-844x390.png",
@@ -244,7 +244,7 @@
         "rightmost_20_percent_nonblack_ratio": 1.0,
         "width": 844
       },
-      "sha256": "8158b429afad22148770a3f32cd276ebdc6bf9bdc55d30c1d61649595c5b170d"
+      "sha256": "a46cef5d7198deda5839fbadb3217c396900b339550121ca49423322bf00890d"
     }
   ],
   "viewports": [
@@ -319,6 +319,7 @@
       "scenario_results": {
         "combined_scope": "pass",
         "duration_refinement": "pass",
+        "refinement_clears_stale_selection": "pass",
         "selection_back_reversible": "pass"
       },
       "shell_width": 768,

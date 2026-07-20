@@ -62,6 +62,7 @@ def test_combined_scope_parser_retains_explicit_patient_without_root_reuse():
     assert "patient_display: patient?.display_name || null" in source
     assert "state.patientContexts.get(String(id))" in source
     assert "const id = projection?.scope?.patient_ids?.[0];" in source
+    assert 'if (!["selection_only", "proposal_not_committed"].includes(projection.state))' in source
     assert "state.selectedItem = null;" in source
     assert "state.proposalResult = null;" in source
 
@@ -201,6 +202,10 @@ def test_live_local_browser_evidence_is_responsive_sanitized_and_zero_write():
         assert row["window_inner_width"] == row["width"]
         assert row["host_width"] == row["width"]
         assert row["scenario_results"]["combined_scope"] == "pass"
+    tablet_portrait = next(
+        row for row in evidence["viewports"] if row["id"] == "tablet_portrait"
+    )
+    assert tablet_portrait["scenario_results"]["refinement_clears_stale_selection"] == "pass"
 
     assert evidence["keyboard"]["space_slot_selection"].startswith("pass")
     assert evidence["keyboard"]["enter_scoped_proposal"].startswith("pass")
