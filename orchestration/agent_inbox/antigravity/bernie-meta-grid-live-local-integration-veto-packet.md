@@ -12,7 +12,7 @@ Return exactly one decision: `pass`, `revision_required`, or `blocked`.
 
 - worktree: `C:\Users\sarashera\emr4`
 - branch: `codex/bernie-meta-grid-live-local-integration`
-- source HEAD: `1fdf4035341edda62765b8e11f9b0175ec1a3919`
+- source implementation/evidence HEAD: `1b1687fd48ca54fa6925c321cea4850a610b45c9`
 - owned files: none; this is read-only review
 - durable output: the launcher-owned file
   `orchestration/agent_inbox/antigravity/bernie-meta-grid-live-local-integration-veto.md`

@@ -1,7 +1,7 @@
 {
   "schema_version": "ariadne.orchestrator_runtime_state.v1",
-  "continuation_event": "pre_dispatch",
-  "planned_action": "dispatch",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
   "context_health": {
     "agent_contexts": [
       {
@@ -17,7 +17,7 @@
         ]
       },
       {
-        "agent_id": "gemini-veto",
+        "agent_id": "antigravity",
         "measurement_source": "fresh_antigravity_read_only_veto_packet",
         "rehydrated_from_receipt": true,
         "rehydration_sources": [
@@ -51,7 +51,7 @@
     },
     {
       "adapter_id": "antigravity_cli_print",
-      "method": "fresh_context_read_only_veto",
+      "method": "agy_cli_observation",
       "reachability": "reachable",
       "evidence": ["Bounded packet names exact files, source head, no owned files, forbidden surfaces, optional exact tests, durable output and pass/revision_required/blocked format."]
     },
@@ -61,7 +61,7 @@
       "reachability": "reachable",
       "evidence": [
         "Preacceptance evidence is complete and the independent veto is additive, not a transfer of acceptance authority.",
-        "The worktree is the task branch at source 1fdf4035341edda62765b8e11f9b0175ec1a3919 with intended uncommitted tranche changes; protected refs remain aligned at source.",
+        "The clean verifier worktree is bound to candidate implementation/evidence head 1b1687fd48ca54fa6925c321cea4850a610b45c9, which descends directly from baton source 1fdf4035341edda62765b8e11f9b0175ec1a3919; protected refs remain at the baton source.",
         "The reviewer is forbidden from protected evidence, historical Diary material, secrets, providers, writes, browser/database reruns, edits, commits, pushes or baton movement."
       ]
     },
@@ -79,6 +79,15 @@
       "stale_instance_ids": []
     }
   ],
-  "workspace_receipts": [],
-  "assigned_agent_ids": ["gemini-veto"]
+  "workspace_receipts": [
+    {
+      "agent_id": "antigravity",
+      "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\meta-grid-live-local-gemini-veto",
+      "branch": "antigravity/bernie-meta-grid-live-local-veto",
+      "clean": true,
+      "at_handoff_current": true,
+      "recorded_at": "2026-07-20T17:00:59+10:00"
+    }
+  ],
+  "assigned_agent_ids": ["antigravity"]
 }
