@@ -186,6 +186,12 @@ fresh identity and availability checks, idempotent write, audit, and visible
 receipt. Touch selection is staff input to a proposal; it is never commitment
 by itself.
 
+Smartphones should reuse this same projection grammar rather than become a
+separate Diary product, but tablet evidence does not automatically prove phone
+ergonomics. Narrow one-column and sequential-comparison layouts, one-handed
+reach, software-keyboard occlusion, interruption/resume and small-screen
+privacy require a bounded phone population during functional implementation.
+
 This portability is not a concession to a small screen. It is the intended
 consequence of projecting only what the current task needs: the receptionist
 can move through the practice while retaining direct visual control whenever

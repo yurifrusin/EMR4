@@ -83,6 +83,8 @@ class TestMetaGridConceptScope:
             "receipt",
             "event cannot",
             "fresh scoped read",
+            "smartphone ux",
+            "not fully subsumed by tablet acceptance",
         }
         missing = sorted(term for term in required if term not in text)
         assert not missing, f"Design missing API Spine terms: {missing}"

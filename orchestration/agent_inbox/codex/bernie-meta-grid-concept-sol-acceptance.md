@@ -31,10 +31,10 @@ deployment or release claim.
   `90ffca6e2bfb0a8661eaba212de9bb2038dcc2979758c51f138953af36c86c74`;
 - canonical design and implementation handoff:
   `docs/bernie-fluid-meta-grid-concept-design.md`, SHA-256
-  `86430626398c5c928823db24ba7d9ee9f7405d45d7b2a3a1f7cf548a5f6fd8a4`;
+  `35c805ac9f4c42127f39a4010d89a5d8272bad3cefbd2d6053488ae02a3c5fcd`;
 - closeout:
   `docs/bernie-fluid-meta-grid-concept-closeout.md`, SHA-256
-  `0003d088929a50fbe3f437f0ce9cc1aa012ec59be05bcf2af15fae6f682f22b9`;
+  `4c2a4a34e1e8097051c3a1e6114bb1f7d90ba8e557299c8608fa3da594476bfd`;
 - projection schema:
   `orchestration/prototypes/bernie-meta-grid-concept/projection-contract.schema.json`,
   SHA-256
@@ -89,6 +89,12 @@ synthesize a native Enter/Space button activation; that tooling limitation is
 preserved, and the next functional tranche must add a real-browser keyboard
 smoke test before broader accessibility acceptance.
 
+Smartphones use the same projection and authority grammar but are not included
+in this tablet acceptance. The narrow CSS breakpoint is concept evidence only;
+the next functional tranche must prove one-column and sequential-comparison
+behavior, one-handed reach, software-keyboard occlusion, interruption/resume
+and small-screen privacy at representative phone widths.
+
 No worker or subagent was used. The tranche was architecture- and interaction-
 coupled, provider-neutral, relatively small and acceptance-sensitive, so Sol
 retained it under the worker-lane economy rule.
@@ -103,7 +109,8 @@ read and proposal boundaries.
 
 That tranche must freeze its exact client surface, read-model inputs, proposal
 handoff, browser keyboard/tablet population and API regression boundary before
-implementation. Stage 3B should wait until that functional surface is
+implementation. The browser population must also include the bounded phone
+states named in the canonical design. Stage 3B should wait until that functional surface is
 implemented and corrected.
 
 Functional product implementation, event runtime, high-fidelity styling,

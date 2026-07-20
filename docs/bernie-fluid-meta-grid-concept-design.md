@@ -370,6 +370,28 @@ The conceptual layout uses one stable shell with an adaptive canvas:
 Desktop may show more context, but it must not introduce a different authority
 or interaction model.
 
+### 10.1 Smartphone boundary
+
+Smartphone UX is a responsive variant of the same meta-grid grammar, not a
+second Diary interaction language. It inherits the same typed projection,
+scope, state, history, selection, proposal, attention and command boundaries.
+
+It is not fully subsumed by tablet acceptance, however. A phone must normally
+use one column; an aligned comparison should become an explicit sequential
+summary with drill-in rather than two unreadably narrow lanes. It must reduce
+visible content without removing identity, time, location, omissions,
+freshness, state or the route back. A functional design must also account for
+one-handed reach, software-keyboard occlusion, portrait/landscape change,
+interruption and resume, and privacy on a small screen used in shared spaces.
+
+The low-fidelity lab contains a narrow-layout breakpoint so the component
+grammar does not preclude phones. This tranche did not run a smartphone browser
+or usability population and makes no claim that tablet evidence proves phone
+operation. The next functional client tranche should add representative narrow
+viewport checks for focused view, patient timeline, availability/selection,
+proposal review, clarification, quiet change attention, return to overview and
+the sequential comparison variant.
+
 ## 11. Concept component model
 
 The future implementation can remain framework-neutral while using these

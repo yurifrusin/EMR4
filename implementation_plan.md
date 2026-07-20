@@ -110,6 +110,11 @@ The provider-neutral in-house fluid meta-grid concept tranche then passed on
 Functional implementation and Stage 3B representative-staff evidence remain
 separate later decisions.
 
+Smartphone use should reuse the same projection grammar rather than create a
+second product. Tablet acceptance does not prove phone ergonomics; the first
+functional tranche should add narrow one-column and sequential-comparison
+evidence for one-handed, software-keyboard, interruption and privacy concerns.
+
 Bernie is deliberately not the first patient-facing autonomous agent. The first
 implementation should be an internal copilot that acts through controlled backend
 tools, such as `search_patient`, `find_slots`, `create_booking`,

@@ -75,6 +75,12 @@ overflow and no enabled control below 44 pixels. Landscape comparison lanes
 were equal width. Browser console warnings and errors were zero. Transient
 screenshots were inspected locally and not retained.
 
+Smartphones inherit this projection grammar but are not claimed by the tablet
+pass. The lab has a narrow breakpoint; one-column projection, sequential
+comparison, one-handed reach, software-keyboard occlusion, interruption/resume
+and small-screen privacy still require their own browser and functional
+evidence in the next tranche.
+
 Native semantic buttons, chronological DOM order, visible focus, live-region
 scope/state announcements and reduced-motion styling provide the conceptual
 keyboard/accessibility contract. The in-app browser automation's locator
@@ -124,6 +130,8 @@ The following are no longer open conceptual questions:
 - event awareness reconciles through current state and stays quiet by default;
   and
 - tablet ergonomics are a primary constraint, not a later responsive patch.
+- smartphone UX is a responsive variant of the same grammar, but tablet
+  evidence does not substitute for a bounded phone population.
 
 ## Exact next decision boundary
 
@@ -138,7 +146,8 @@ tablet, API-boundary and regression evidence.
 That implementation is not opened by this closeout. Before it begins, Yuri
 must approve its exact client surface, first projection families, read-model
 inputs, whether the existing proposal handoff is in or out, and its acceptance
-population. A committed-event runtime should remain a separate later tranche;
+population, including the narrow-phone states named in the canonical design. A
+committed-event runtime should remain a separate later tranche;
 until then, change-context behavior uses fixtures only. Stage 3B should follow
 functional implementation and correction, not this low-fidelity concept alone.
 
