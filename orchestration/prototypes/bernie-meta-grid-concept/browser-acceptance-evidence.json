@@ -1,0 +1,87 @@
+{
+  "schema_version": "bernie.meta_grid_browser_acceptance.v1",
+  "recorded_at": "2026-07-20",
+  "result": "pass",
+  "evidence_mode": "authored_synthetic_local_static_prototype",
+  "browser_surface": "Codex in-app browser",
+  "local_origin": "http://127.0.0.1:4173/",
+  "contains_real_patient_or_practice_data": false,
+  "runtime_integrations_exercised": [],
+  "console_warnings_or_errors": 0,
+  "viewports": [
+    {
+      "name": "desktop",
+      "width": 1280,
+      "height": 720,
+      "horizontal_page_overflow": false,
+      "minimum_enabled_button_height_px": 45.96875,
+      "scenarios": [
+        "MG-01",
+        "MG-02",
+        "MG-03",
+        "MG-04",
+        "MG-05",
+        "MG-06",
+        "MG-07",
+        "MG-08",
+        "MG-09",
+        "MG-10"
+      ]
+    },
+    {
+      "name": "tablet_portrait",
+      "width": 768,
+      "height": 1024,
+      "horizontal_page_overflow": false,
+      "minimum_enabled_button_height_px": 44,
+      "scenarios": ["MG-03", "MG-04", "MG-10"]
+    },
+    {
+      "name": "tablet_landscape",
+      "width": 1024,
+      "height": 768,
+      "horizontal_page_overflow": false,
+      "minimum_enabled_button_height_px": 45.96875,
+      "scenarios": ["MG-05", "MG-10"],
+      "comparison_lane_widths_px": [279.71875, 279.71875]
+    }
+  ],
+  "observed_contracts": {
+    "chronological_appointment_and_slot_order": true,
+    "persistent_scope_and_omission_cues": true,
+    "clean_new_root_state": true,
+    "recent_root_restore_is_explicit": true,
+    "clarification_precedes_diary_projection": true,
+    "slot_selection_is_reversible_and_non_committing": true,
+    "proposal_is_visibly_not_committed": true,
+    "authoritative_confirmation_is_disabled": true,
+    "relevant_event_uses_fresh_synthetic_read": true,
+    "replay_stale_and_unrelated_events_are_suppressed": true,
+    "native_semantic_buttons_and_visible_focus_contract_present": true
+  },
+  "corrections_during_acceptance": [
+    {
+      "finding": "Recent-root history controls were 36 pixels high in tablet portrait.",
+      "correction": "Raised the scoped minimum height to 44 pixels and added a deterministic guard.",
+      "recheck": "No enabled control below 44 pixels at any tested viewport."
+    },
+    {
+      "finding": "Selected projection time scope was derived from display text instead of the typed instant.",
+      "correction": "Derive 24-hour local time_from and time_to values from starts_at and ends_at using the projection timezone.",
+      "recheck": "Node syntax, projection artifact and interaction gates pass."
+    },
+    {
+      "finding": "Slot labels used an HTML-string insertion even though the fixtures are authored synthetic.",
+      "correction": "Construct strong and span nodes with textContent.",
+      "recheck": "The application contains no innerHTML assignment."
+    }
+  ],
+  "tooling_note": "The browser automation locator press operation did not synthesize the native button default action for Enter or Space. Keyboard affordance is therefore evidenced at this conceptual stage by native button semantics, DOM order, focus-visible styling and deterministic artifact guards; the pointer flow was exercised end to end. A future product implementation tranche should include a full browser keyboard smoke test.",
+  "screenshot_retention": "Transient desktop and tablet screenshots were visually inspected in the local Codex session and were not persisted.",
+  "runtime_cleanup": {
+    "browser_tabs_finalized": true,
+    "local_server_pid": 62472,
+    "local_server_stopped": true,
+    "port_4173_free_after_stop": true
+  }
+}

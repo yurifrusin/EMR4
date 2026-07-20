@@ -1,0 +1,77 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "bernie_meta_grid_concept_post_compaction_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The interaction design remains serial, tightly coupled conceptual work retained by Sol under the worker-lane economy rule."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The authorised tranche is provider-neutral and in-house; no external design model or subscription is authorised."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external reviewer or provider lane is opened by this tranche."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "After context compaction, the live handover/current baton, authority allocation, active meta-grid plan and Stage 3A acceptance, protected-evidence and user-decision boundaries, and all five Git/worktree sources were restored.",
+        "The authorised scope remains a typed non-authoritative projection grammar, local authored-synthetic low-fidelity lab, accessibility and browser evidence, and an implementation/evidence handoff.",
+        "Protected holdouts, historical Diary material, providers, PII, production, deployment, release, Stage 3B, representative participants, voice, runtime events, GraphQL mutations, new commands, and autonomous confirmation remain closed.",
+        "HEAD, master, handoff/current, origin/master, and origin/handoff/current remain aligned at 0d1474f0bfa156184c16b056e4188f6eb741109d; only current-tranche files are untracked."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

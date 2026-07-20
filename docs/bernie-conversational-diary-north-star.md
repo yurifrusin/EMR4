@@ -168,11 +168,13 @@ fresh-read-backed, deduplicated, interruptible, explainable, and silent by
 default where attention is not warranted. No event delivery runtime is
 authorized by this design.
 
-### Fluid meta-grid — dedicated visual-design tranche
+### Fluid meta-grid — concept accepted, implementation later
 
 The fixed grid should become a family of just-in-time practitioner-, patient-,
-date-, time-, location-, availability-, and event-centred projections. The
-complete interaction language deserves its own visual-design tranche.
+date-, time-, location-, availability-, and event-centred projections. Yuri's
+provider-neutral in-house concept tranche accepted the first complete
+interaction language on 2026-07-20; its canonical specification is
+`docs/bernie-fluid-meta-grid-concept-design.md`.
 
 Tablet use is a first-class design target for that tranche. A receptionist
 should be able to ask for Dr Shera's afternoon availability, receive only the
@@ -187,10 +189,10 @@ by itself.
 This portability is not a concession to a small screen. It is the intended
 consequence of projecting only what the current task needs: the receptionist
 can move through the practice while retaining direct visual control whenever
-it is useful. The conceptual interaction language should now be developed
-in-house and remain provider-neutral. High-fidelity styling may be refined
-later; no named design model, subscription, provider use, or cost is a
-prerequisite or is authorized here.
+it is useful. The accepted conceptual interaction language is provider-neutral
+and owned in-house. Functional implementation and high-fidelity styling remain
+separate later decisions; no named design model, subscription, provider use,
+or cost is a prerequisite or is authorized here.
 
 ### Provider intelligence — observed need only
 
@@ -235,10 +237,9 @@ Stage 3 should determine which deeper branch has evidence:
   capability.
 - **Modality gap:** run an explicit-activation voice feasibility tranche before
   any ambient design.
-- **Projection evidence:** freeze a provider-neutral, in-house fluid UX
-  meta-grid concept tranche and its implementation handoff; defer any optional
-  external visual-design model and cost decision until the interaction grammar
-  is stable.
+- **Projection implementation:** use the accepted provider-neutral fluid
+  meta-grid grammar to freeze a bounded functional client tranche, while
+  deferring any optional external visual-design model and cost decision.
 - **Event-awareness evidence:** order a bounded committed-event producer,
   attention-filter, and authorised-consumer design/implementation tranche; the
   product principle is accepted, while runtime authority remains separate.

@@ -17,6 +17,13 @@ design and north star without changing the frozen Stage 3A protocol. The
 entries remain here as provenance and do not independently grant runtime
 authority.
 
+Yuri authorised the provider-neutral in-house concept tranche anticipated by
+Entry 005 on 2026-07-20. Its accepted interaction grammar, projection contract,
+tablet/browser evidence and implementation handoff are recorded in
+`docs/bernie-fluid-meta-grid-concept-design.md` and
+`docs/bernie-fluid-meta-grid-concept-closeout.md`. This promotion opens no
+functional product implementation or deferred authority.
+
 ## Notepad convention
 
 - Give every entry a stable sequential identifier and date.
@@ -345,7 +352,7 @@ Date: 2026-07-20
 
 Source: Yuri, during Stage 3A final closeout
 
-State: `integrated_product_direction_future_tranche_not_yet_authorized`
+State: `promoted_to_completed_in_house_concept_tranche`
 
 ### Refinement
 
@@ -374,6 +381,9 @@ The recommended sequence is now:
 4. fine-tune visual styling later, optionally using whichever design resource
    is then demonstrably suitable and economical.
 
-This decision removes a provider dependency; it does not itself authorize the
-next design tranche, a subscription, provider call, prompt transmission,
-tablet implementation, production, deployment, or release.
+Yuri subsequently authorised and completed the bounded conceptual tranche. The
+accepted result defines the typed projection grammar, stable orientation shell,
+reversible state model, tablet constraints and non-authoritative proposal/event
+boundaries. It does not authorize the recommended functional implementation,
+a subscription, provider call, prompt transmission, runtime event system,
+production, deployment or release.

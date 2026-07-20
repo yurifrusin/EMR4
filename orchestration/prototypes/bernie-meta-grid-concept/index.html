@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Bernie fluid meta-grid concept lab</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#projection-canvas">Skip to projected Diary view</a>
+
+    <header class="product-header">
+      <div>
+        <h1>Bernie fluid meta-grid</h1>
+        <p>Local interaction concept using authored synthetic Diary data</p>
+      </div>
+      <p class="safety-label">No API · no provider · no appointment writes</p>
+    </header>
+
+    <div class="app-shell">
+      <aside class="request-rail" aria-labelledby="request-heading">
+        <h2 id="request-heading">Ask for the view you need</h2>
+        <form id="request-form">
+          <label for="request-input">Typed request</label>
+          <textarea id="request-input" rows="3">Show Dr Shera's afternoon appointments on Friday week.</textarea>
+          <button class="primary" type="submit">Project this view</button>
+        </form>
+
+        <section aria-labelledby="examples-heading">
+          <h3 id="examples-heading">Concept scenarios</h3>
+          <div class="scenario-list">
+            <button type="button" data-projection="sheraFocus">MG-01 · practitioner window</button>
+            <button type="button" data-projection="margaretTimeline">MG-02 · patient timeline</button>
+            <button type="button" data-projection="availability">MG-03 · availability and selection</button>
+            <button type="button" data-projection="comparison">MG-05 · aligned comparison</button>
+            <button type="button" data-projection="clarification">MG-06 · safe clarification</button>
+          </div>
+        </section>
+
+        <section aria-labelledby="history-heading">
+          <h3 id="history-heading">Recent root views</h3>
+          <ol id="root-history" class="root-history">
+            <li>No previous root view in this in-memory session.</li>
+          </ol>
+        </section>
+      </aside>
+
+      <main class="workspace">
+        <nav class="view-controls" aria-label="Projection navigation">
+          <button id="back-button" type="button">Back one view</button>
+          <button id="overview-button" type="button">Ordinary overview</button>
+          <button id="explain-button" type="button" aria-expanded="false" aria-controls="evidence-panel">Why this view?</button>
+        </nav>
+
+        <section class="orientation" aria-labelledby="scope-heading">
+          <h2 id="scope-heading">Current scope</h2>
+          <p id="scope-summary" class="scope-summary"></p>
+          <p id="scope-omissions" class="scope-omissions"></p>
+          <p id="freshness-summary" class="freshness-summary"></p>
+        </section>
+
+        <section class="state-header" aria-labelledby="state-heading">
+          <p id="state-label" class="state-label"></p>
+          <h2 id="state-heading"></h2>
+          <p id="state-explanation"></p>
+        </section>
+
+        <div id="state-announcer" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+
+        <section id="projection-canvas" class="projection-canvas" tabindex="-1" aria-labelledby="canvas-heading">
+          <h2 id="canvas-heading" class="visually-hidden">Intent-projected Diary view</h2>
+          <div id="projection-content"></div>
+        </section>
+
+        <section id="projection-actions" class="projection-actions" aria-label="Available view actions"></section>
+
+        <section id="evidence-panel" class="evidence-panel" hidden aria-labelledby="evidence-heading">
+          <h2 id="evidence-heading" tabindex="-1">Why this view appeared</h2>
+          <dl>
+            <div><dt>Projection family</dt><dd id="evidence-family"></dd></div>
+            <div><dt>Trigger</dt><dd id="evidence-trigger"></dd></div>
+            <div><dt>Reason</dt><dd id="evidence-reason"></dd></div>
+            <div><dt>Changed dimensions</dt><dd id="evidence-changes"></dd></div>
+            <div><dt>Evidence label</dt><dd id="evidence-mode"></dd></div>
+            <div><dt>Action boundary</dt><dd id="evidence-boundary"></dd></div>
+          </dl>
+        </section>
+
+        <section class="attention-lab" aria-labelledby="attention-heading">
+          <div>
+            <h2 id="attention-heading">Committed-change attention concepts</h2>
+            <p>Authored fixtures test suppression and reconciliation only. They are not a live event runtime.</p>
+          </div>
+          <div class="attention-controls">
+            <button type="button" data-event-index="0">Relevant committed reschedule</button>
+            <button type="button" data-event-index="1">Unrelated roster change</button>
+            <button type="button" data-event-index="2">Replay relevant event</button>
+            <button type="button" data-event-index="3">Delayed older revision</button>
+          </div>
+          <ol id="attention-log" class="attention-log" aria-live="polite">
+            <li>No event fixture has been exercised in this root view.</li>
+          </ol>
+        </section>
+      </main>
+    </div>
+
+    <footer>
+      <p>Concept evidence: <code>authored_synthetic_local_static_prototype</code>. Reloading clears all state.</p>
+    </footer>
+
+    <script src="fixtures.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

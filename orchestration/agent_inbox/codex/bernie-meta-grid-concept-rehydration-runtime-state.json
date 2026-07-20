@@ -1,0 +1,78 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "sprint_planning",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "bernie_meta_grid_concept_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The tranche is conceptually coupled architecture and interaction design; Sol retains ownership under the worker-lane economy rule."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Yuri selected an in-house provider-neutral concept tranche; no external design model or subscription is authorized."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external reviewer or provider lane is opened by this authorization."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri explicitly authorized the bounded provider-neutral in-house conceptual meta-grid tranche on 2026-07-20.",
+        "AGENTS.md, Stage 3A final acceptance, the conversational Diary north star, the intent-projected/event-aware design, the Stage 3 decision, and API Spine boundaries were restored before planning.",
+        "Protected holdouts v1-v10, historical Diary material, providers, PII, production, deployment, release, Stage 3B, representative participants, voice, committed-event runtime, GraphQL mutations, new command families, and autonomous confirmation remain closed.",
+        "The authorized work is a provider-neutral conceptual interaction language, typed non-authoritative projection contract, low-fidelity local authored-synthetic prototype, accessibility/usability design review, and implementation/evidence handoff.",
+        "HEAD, master, handoff/current, origin/master, and origin/handoff/current are clean and aligned at 0d1474f0bfa156184c16b056e4188f6eb741109d."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,207 @@
+{
+  "schema_version": "bernie.meta-grid-projection-examples.v0",
+  "evidence_mode": "authored_synthetic_local_static_prototype",
+  "contains_real_patient_or_practice_data": false,
+  "projections": [
+    {
+      "contract_version": "bernie.meta-grid-projection.v0",
+      "projection_id": "projection-shera-friday-afternoon",
+      "projection_revision": 1,
+      "root_intent_id": "intent-shera-friday-afternoon",
+      "family": "focused_schedule_lane",
+      "state": "answer",
+      "scope": {
+        "practice_id": "synthetic-practice-brisbane",
+        "timezone": "Australia/Brisbane",
+        "patient_ids": [],
+        "practitioner_ids": ["synthetic-practitioner-shera"],
+        "date_from": "2026-07-31",
+        "date_to": "2026-07-31",
+        "time_from": "12:00",
+        "time_to": "17:00",
+        "location_ids": ["synthetic-location-brisbane"],
+        "room_ids": [],
+        "waiting_area_ids": [],
+        "status_allowlist": ["booked", "available", "break"],
+        "appointment_type_ids": [],
+        "duration_minutes": null,
+        "result_limit": 20
+      },
+      "scope_summary": "Dr Shera · Friday 31 July 2026 · 12 pm–5 pm · Brisbane Clinic",
+      "omissions": ["Other practitioners hidden", "Times outside 12 pm–5 pm hidden"],
+      "freshness": {
+        "source": "authorised_diary_read",
+        "observed_at": "2026-07-20T04:00:00Z",
+        "expires_at": "2026-07-20T04:05:00Z",
+        "stale": false,
+        "reason": "Fresh authored synthetic Diary read for the requested practitioner window"
+      },
+      "items": [
+        {
+          "item_id": "appointment-john-1300",
+          "kind": "appointment",
+          "display": "John Ellis · 1:00 pm–1:30 pm",
+          "date": "2026-07-31",
+          "starts_at": "2026-07-31T03:00:00Z",
+          "ends_at": "2026-07-31T03:30:00Z",
+          "patient_display": "John Ellis",
+          "practitioner_display": "Dr Michael Shera",
+          "location_display": "Brisbane Clinic",
+          "status": "booked",
+          "warnings": [],
+          "selectable": false,
+          "changed": false,
+          "comparison_group": null
+        },
+        {
+          "item_id": "appointment-margaret-1415",
+          "kind": "appointment",
+          "display": "Margaret Thompson · 2:15 pm–2:45 pm",
+          "date": "2026-07-31",
+          "starts_at": "2026-07-31T04:15:00Z",
+          "ends_at": "2026-07-31T04:45:00Z",
+          "patient_display": "Margaret Thompson",
+          "practitioner_display": "Dr Michael Shera",
+          "location_display": "Brisbane Clinic",
+          "status": "booked",
+          "warnings": [],
+          "selectable": false,
+          "changed": false,
+          "comparison_group": null
+        },
+        {
+          "item_id": "appointment-amy-1530",
+          "kind": "appointment",
+          "display": "Amy Wright · 3:30 pm–4:00 pm",
+          "date": "2026-07-31",
+          "starts_at": "2026-07-31T05:30:00Z",
+          "ends_at": "2026-07-31T06:00:00Z",
+          "patient_display": "Amy Wright",
+          "practitioner_display": "Dr Michael Shera",
+          "location_display": "Brisbane Clinic",
+          "status": "booked",
+          "warnings": [],
+          "selectable": false,
+          "changed": false,
+          "comparison_group": null
+        }
+      ],
+      "layout_hint": "time_lane",
+      "affordances": ["inspect", "refine", "broaden", "compare", "back", "reset", "explain"],
+      "parent_projection_id": null,
+      "transition": {
+        "operation": "project",
+        "trigger": "conversation",
+        "reason": "User requested one practitioner's Friday-week afternoon view",
+        "changed_dimensions": ["practitioner", "date", "time", "location"]
+      },
+      "action_boundary": {
+        "posture": "none",
+        "appointment_write_authority": false,
+        "operational_command_available": false,
+        "required_backend_pattern": null
+      },
+      "evidence_mode": "authored_synthetic_local_static_prototype"
+    },
+    {
+      "contract_version": "bernie.meta-grid-projection.v0",
+      "projection_id": "projection-margaret-upcoming",
+      "projection_revision": 1,
+      "root_intent_id": "intent-margaret-upcoming",
+      "family": "patient_timeline",
+      "state": "answer",
+      "scope": {
+        "practice_id": "synthetic-practice-brisbane",
+        "timezone": "Australia/Brisbane",
+        "patient_ids": ["synthetic-patient-margaret"],
+        "practitioner_ids": [],
+        "date_from": "2026-07-20",
+        "date_to": "2027-07-20",
+        "time_from": null,
+        "time_to": null,
+        "location_ids": ["synthetic-location-brisbane"],
+        "room_ids": [],
+        "waiting_area_ids": [],
+        "status_allowlist": ["booked", "confirmed"],
+        "appointment_type_ids": [],
+        "duration_minutes": null,
+        "result_limit": 20
+      },
+      "scope_summary": "Margaret Thompson · upcoming appointments · Brisbane Clinic · next 12 months",
+      "omissions": ["Cancelled appointments hidden", "Past appointments hidden"],
+      "freshness": {
+        "source": "authorised_patient_read",
+        "observed_at": "2026-07-20T04:00:00Z",
+        "expires_at": "2026-07-20T04:05:00Z",
+        "stale": false,
+        "reason": "Fresh authored synthetic patient appointment read"
+      },
+      "items": [
+        {
+          "item_id": "margaret-20260731",
+          "kind": "appointment",
+          "display": "Friday 31 July 2026 · 2:15 pm · Dr Shera",
+          "date": "2026-07-31",
+          "starts_at": "2026-07-31T04:15:00Z",
+          "ends_at": "2026-07-31T04:45:00Z",
+          "patient_display": "Margaret Thompson",
+          "practitioner_display": "Dr Michael Shera",
+          "location_display": "Brisbane Clinic",
+          "status": "booked",
+          "warnings": [],
+          "selectable": false,
+          "changed": false,
+          "comparison_group": null
+        },
+        {
+          "item_id": "margaret-20260814",
+          "kind": "appointment",
+          "display": "Friday 14 August 2026 · 10:00 am · Dr Patel",
+          "date": "2026-08-14",
+          "starts_at": "2026-08-14T00:00:00Z",
+          "ends_at": "2026-08-14T00:30:00Z",
+          "patient_display": "Margaret Thompson",
+          "practitioner_display": "Dr Anika Patel",
+          "location_display": "Brisbane Clinic",
+          "status": "confirmed",
+          "warnings": [],
+          "selectable": false,
+          "changed": false,
+          "comparison_group": null
+        },
+        {
+          "item_id": "margaret-20270120",
+          "kind": "appointment",
+          "display": "Wednesday 20 January 2027 · 2:30 pm · Dr Shera",
+          "date": "2027-01-20",
+          "starts_at": "2027-01-20T04:30:00Z",
+          "ends_at": "2027-01-20T05:00:00Z",
+          "patient_display": "Margaret Thompson",
+          "practitioner_display": "Dr Michael Shera",
+          "location_display": "Brisbane Clinic",
+          "status": "booked",
+          "warnings": [],
+          "selectable": false,
+          "changed": false,
+          "comparison_group": null
+        }
+      ],
+      "layout_hint": "timeline",
+      "affordances": ["inspect", "refine", "broaden", "back", "reset", "explain"],
+      "parent_projection_id": null,
+      "transition": {
+        "operation": "project",
+        "trigger": "conversation",
+        "reason": "User requested one patient's future appointments",
+        "changed_dimensions": ["patient", "date_range", "status"]
+      },
+      "action_boundary": {
+        "posture": "none",
+        "appointment_write_authority": false,
+        "operational_command_available": false,
+        "required_backend_pattern": null
+      },
+      "evidence_mode": "authored_synthetic_local_static_prototype"
+    }
+  ]
+}
