@@ -4,7 +4,7 @@ Date: 2026-07-19
 
 Owner: GPT Sol Extra High
 
-Decision status: `stage3a_pass_meta_grid_concept_pass_stage3b_deferred`
+Decision status: `stage3a_pass_meta_grid_concept_pass_functional_client_pass_stage3b_deferred`
 
 ## Reshaped purpose
 
@@ -49,8 +49,11 @@ Status update, 2026-07-20: Stage 3A passed and Yuri's subsequent bounded
 provider-neutral in-house meta-grid concept tranche also passed. Its accepted
 grammar and implementation handoff are
 `docs/bernie-fluid-meta-grid-concept-design.md` and
-`docs/bernie-fluid-meta-grid-concept-closeout.md`. Functional implementation
-and Stage 3B remain fresh decisions.
+`docs/bernie-fluid-meta-grid-concept-closeout.md`. Yuri then authorised the
+bounded functional client tranche, which passed as
+`functional_meta_grid_client_pass` in
+`docs/bernie-functional-meta-grid-client-closeout.md`. Live-local integration
+evidence, high-fidelity styling and Stage 3B remain fresh decisions.
 
 ## Frozen Stage 3 task population
 
@@ -202,10 +205,11 @@ boundary above remain paused.
   AI decision based on the exact observed capability.
 - If explicit voice adds value: a privacy-first activation and local-discard
   feasibility tranche before ambient listening.
-- A bounded functional client tranche implementing the accepted
-  provider-neutral fluid UX meta-grid grammar, with high-fidelity styling and
-  any optional external design-model, synthetic context, subscription,
-  transmission, and cost decision still deferred.
+- A bounded provider-free live-local synthetic integration/evaluation tranche
+  for the accepted functional meta-grid client over existing read and
+  proposal-only boundaries, with confirmation/write authority, high-fidelity
+  styling and any optional external design-model, subscription, transmission,
+  and cost decision still deferred.
 - A bounded committed-event runtime tranche ordered by the observed event
   families and interruption patterns. Event awareness is already foundational;
   Stage 3 determines safe implementation shape and priority, not whether the
