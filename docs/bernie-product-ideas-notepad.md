@@ -21,8 +21,11 @@ Yuri authorised the provider-neutral in-house concept tranche anticipated by
 Entry 005 on 2026-07-20. Its accepted interaction grammar, projection contract,
 tablet/browser evidence and implementation handoff are recorded in
 `docs/bernie-fluid-meta-grid-concept-design.md` and
-`docs/bernie-fluid-meta-grid-concept-closeout.md`. This promotion opens no
-functional product implementation or deferred authority.
+`docs/bernie-fluid-meta-grid-concept-closeout.md`. Yuri then authorised the
+bounded functional client tranche, which passed on 2026-07-20 and is recorded
+in `docs/bernie-functional-meta-grid-client-closeout.md`. That implementation
+opens no confirmation/write, event-runtime, provider, PII, Stage 3B,
+production, deployment or release authority.
 
 ## Notepad convention
 

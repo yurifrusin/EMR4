@@ -4746,6 +4746,13 @@ async function loadDiaryData(silent = false, options = {}, smokeMode = false) {
 
     const total = visibleAppointments.length;
     setStatus(`${total} appointment${total !== 1 ? "s" : ""} · ${formatDateLabel(diaryDate)}${smokeMode ? " [SMOKE MODE]" : ""}`);
+    window.dispatchEvent(new CustomEvent("emr4:diary-read-complete", {
+      detail: {
+        date: localDateKey(diaryDate),
+        location_id: activeLocationId || null,
+        evidence_mode: smokeMode ? "authored_synthetic_client_fixture" : "live_local_read_model"
+      }
+    }));
   } catch (e) {
     if (isAuthBannerVisible()) {
       return;
@@ -6185,6 +6192,392 @@ function renderBerniePilotContextForm(blocks = []) {
   contentEl.insertBefore(form, contentEl.firstChild);
 }
 
+function metaGridPractitionerDisplay(appt) {
+  const direct = appt?.practitioner;
+  const directName = direct
+    ? `${direct.first_name || ""} ${direct.last_name || ""}`.trim()
+    : "";
+  if (directName) return directName;
+  const ahpra = direct?.ahpra_number || appt?.practitioner_ahpra;
+  const mapped = ahpra ? ahpraToPractitionerMap[ahpra] : null;
+  const mappedName = mapped
+    ? `${mapped.first_name || ""} ${mapped.last_name || ""}`.trim()
+    : "";
+  if (mappedName) return mappedName;
+  const column = activeTemplate?.columns?.find(col => (
+    col.practitioner_id === appt?.practitioner_id ||
+    (ahpra && col.practitioner_ahpra === ahpra)
+  ));
+  return column?.assignment || "Practitioner";
+}
+
+function metaGridPatientDisplay(appt) {
+  if (appt?.patient) {
+    const name = `${appt.patient.first_name || ""} ${appt.patient.last_name || ""}`.trim();
+    if (name) return name;
+  }
+  return provisionalPatientName(appt) || "Patient";
+}
+
+function metaGridPractitionerId(appt) {
+  if (appt?.practitioner_id) return String(appt.practitioner_id);
+  if (appt?.practitioner?.id) return String(appt.practitioner.id);
+  const ahpra = appt?.practitioner?.ahpra_number || appt?.practitioner_ahpra;
+  if (ahpra && ahpraToPractitionerMap[ahpra]?.id) {
+    return String(ahpraToPractitionerMap[ahpra].id);
+  }
+  const column = ahpra
+    ? activeTemplate?.columns?.find(item => item.practitioner_ahpra === ahpra)
+    : null;
+  if (column?.practitioner_id) return String(column.practitioner_id);
+  if (isSmokeMode() && ahpra === "MED0001234567") return "meta-grid-smoke-prac-shera";
+  if (isSmokeMode() && ahpra === "MED999") return "meta-grid-smoke-prac-nurse";
+  return "";
+}
+
+function metaGridAppointmentView(appt, fallbackDate = localDateKey(diaryDate)) {
+  const date = appt?.appointment_date || fallbackDate;
+  const start = String(appt?.start_time_local || apptTimeKey(appt) || "").slice(0, 5);
+  const duration = Number(appt?.duration_minutes) || 15;
+  const end = start && /^\d{2}:\d{2}$/.test(start)
+    ? fromMins(toMins(start) + duration)
+    : "";
+  return {
+    id: String(appt?.id || ""),
+    appointment_date: date,
+    start_time_local: start,
+    end_time_local: end,
+    duration_minutes: duration,
+    status: String(appt?.status || "Booked"),
+    patient_id: appt?.patient_id || appt?.patient?.id || null,
+    patient_display: metaGridPatientDisplay(appt),
+    practitioner_id: metaGridPractitionerId(appt),
+    practitioner_display: metaGridPractitionerDisplay(appt),
+    location_id: appt?.location_id || activeLocationId || null,
+    location_display: activeTemplate?.practice_name || "Current practice"
+  };
+}
+
+function metaGridShiftDate(dateText, days) {
+  const parsed = dateFromLocalKey(dateText);
+  if (!parsed) return dateText;
+  parsed.setDate(parsed.getDate() + days);
+  return localDateKey(parsed);
+}
+
+function metaGridSmokeAppointments() {
+  const baseDate = localDateKey(diaryDate);
+  const current = getMockAppointments().map(appt => metaGridAppointmentView(appt, baseDate));
+  const sheraId = ahpraToPractitionerMap["MED0001234567"]?.id ||
+    activeTemplate?.columns?.find(item => item.practitioner_ahpra === "MED0001234567")?.practitioner_id ||
+    "meta-grid-smoke-prac-shera";
+  return [
+    ...current,
+    {
+      id: "meta-grid-smoke-margaret-follow-up",
+      appointment_date: metaGridShiftDate(baseDate, 28),
+      start_time_local: "14:15",
+      end_time_local: "14:45",
+      duration_minutes: 30,
+      status: "Booked",
+      patient_id: "smoke-pat-1",
+      patient_display: "Margaret Thompson",
+      practitioner_id: sheraId,
+      practitioner_display: "Dr Alex Shera",
+      location_id: activeLocationId || "loc-1",
+      location_display: "Main Clinic"
+    },
+    {
+      id: "meta-grid-smoke-margaret-six-month",
+      appointment_date: metaGridShiftDate(baseDate, 182),
+      start_time_local: "09:30",
+      end_time_local: "10:00",
+      duration_minutes: 30,
+      status: "Booked",
+      patient_id: "smoke-pat-1",
+      patient_display: "Margaret Thompson",
+      practitioner_id: sheraId,
+      practitioner_display: "Dr Alex Shera",
+      location_id: activeLocationId || "loc-1",
+      location_display: "Main Clinic"
+    }
+  ];
+}
+
+function metaGridDirectorySnapshot() {
+  const rows = activePractitionerDirectory.map(row => ({
+    id: row.id,
+    display_name: row.displayName,
+    location_id: row.defaultLocationId || activeLocationId || null,
+    location_display: row.defaultLocationName || activeTemplate?.practice_name || "Current practice"
+  }));
+  activeTemplate?.columns?.forEach(col => {
+    const id = col.practitioner_id || (
+      col.practitioner_ahpra ? ahpraToPractitionerMap[col.practitioner_ahpra]?.id : null
+    );
+    if (!id || !col.assignment || rows.some(row => row.id === String(id))) return;
+    rows.push({
+      id: String(id),
+      display_name: col.assignment,
+      location_id: activeLocationId || null,
+      location_display: activeTemplate?.practice_name || "Current practice"
+    });
+  });
+  if (isSmokeMode()) {
+    const fixtures = [
+      { id: "meta-grid-smoke-prac-shera", display_name: "Dr Alex Shera", location_id: "loc-1", location_display: "Main Clinic" },
+      { id: "meta-grid-smoke-prac-patel", display_name: "Dr Anika Patel", location_id: "loc-1", location_display: "Main Clinic" },
+      { id: "meta-grid-smoke-prac-chen", display_name: "Dr Alex Chen", location_id: "loc-1", location_display: "Main Clinic" }
+    ];
+    fixtures.forEach(row => {
+      const fixtureName = row.display_name.toLowerCase().replace(/^dr\s+/, "");
+      const exists = rows.some(existing => (
+        existing.id === row.id ||
+        existing.display_name.toLowerCase().replace(/^dr\s+/, "") === fixtureName
+      ));
+      if (!exists) rows.push(row);
+    });
+  }
+  return rows;
+}
+
+function metaGridAppointmentMatches(appt, filters) {
+  if (filters.practitioner_id && appt.practitioner_id !== filters.practitioner_id) return false;
+  if (filters.patient_id && appt.patient_id !== filters.patient_id) return false;
+  if (filters.location_id && appt.location_id && appt.location_id !== filters.location_id) return false;
+  if (filters.date_from && appt.appointment_date < filters.date_from) return false;
+  if (filters.date_to && appt.appointment_date > filters.date_to) return false;
+  return true;
+}
+
+async function metaGridReadAppointments(filters = {}) {
+  if (isSmokeMode()) {
+    return metaGridSmokeAppointments()
+      .filter(appt => metaGridAppointmentMatches(appt, filters))
+      .sort((a, b) => `${a.appointment_date}T${a.start_time_local}`.localeCompare(`${b.appointment_date}T${b.start_time_local}`));
+  }
+  const params = new URLSearchParams();
+  if (filters.date_from) params.set("date_from", `${filters.date_from}T00:00:00`);
+  if (filters.date_to) params.set("date_to", `${metaGridShiftDate(filters.date_to, 1)}T00:00:00`);
+  if (filters.practitioner_id) params.set("practitioner_id", filters.practitioner_id);
+  if (filters.patient_id) params.set("patient_id", filters.patient_id);
+  if (filters.location_id) params.set("location_id", filters.location_id);
+  const response = await apiFetch(`/appointments?${params.toString()}`);
+  if (!response.ok) throw new Error(await apiErrorMessage(response, "Appointment read"));
+  const rows = await response.json();
+  return (Array.isArray(rows) ? rows : []).map(appt => metaGridAppointmentView(appt));
+}
+
+async function metaGridSearchPatients(query) {
+  const normalized = String(query || "").trim();
+  if (!normalized) return [];
+  if (isSmokeMode()) {
+    const tokens = normalized.toLowerCase().split(/\s+/).filter(Boolean);
+    return searchMockPatients(tokens[0])
+      .filter(patient => {
+        const display = `${patient.first_name} ${patient.last_name}`.toLowerCase();
+        return tokens.every(token => display.includes(token));
+      })
+      .map(patient => ({
+        id: patient.id,
+        display_name: `${patient.first_name} ${patient.last_name}`.trim(),
+        date_of_birth: patient.date_of_birth || null
+      }));
+  }
+  const response = await apiFetch(`/patients/search?q=${encodeURIComponent(normalized)}`);
+  if (!response.ok) throw new Error(await apiErrorMessage(response, "Patient search"));
+  const rows = await response.json();
+  return (Array.isArray(rows) ? rows : []).map(patient => ({
+    id: String(patient.id),
+    display_name: `${patient.first_name || ""} ${patient.last_name || ""}`.trim(),
+    date_of_birth: patient.date_of_birth || null
+  }));
+}
+
+function metaGridSmokeAvailability(input) {
+  const startMins = toMins(input.earliest_time || "09:00");
+  const endMins = toMins(input.latest_time || "17:00");
+  const duration = Number(input.duration_minutes) || 30;
+  const booked = metaGridSmokeAppointments().filter(appt => (
+    appt.practitioner_id === input.practitioner_id &&
+    appt.appointment_date === input.date_from &&
+    !["Cancelled", "NoShow", "DNA"].includes(appt.status)
+  ));
+  const candidates = [];
+  for (let start = startMins; start + duration <= endMins && candidates.length < (input.limit || 20); start += 15) {
+    const overlaps = booked.some(appt => {
+      const bookedStart = toMins(appt.start_time_local);
+      const bookedEnd = bookedStart + appt.duration_minutes;
+      return start < bookedEnd && start + duration > bookedStart;
+    });
+    if (!overlaps) {
+      candidates.push({
+        appointment_date: input.date_from,
+        start_time: `${input.date_from}T${fromMins(start)}:00+10:00`,
+        end_time: `${input.date_from}T${fromMins(start + duration)}:00+10:00`,
+        start_time_local: fromMins(start),
+        duration_minutes: duration,
+        warnings: [],
+        candidate_freshness_id: `smoke-${input.practitioner_id}-${input.date_from}-${fromMins(start)}`
+      });
+    }
+  }
+  return {
+    safe: true,
+    autonomy_tier: "execute_with_report",
+    summary: `Found ${candidates.length} authored synthetic candidate slots.`,
+    resolved_duration_minutes: duration,
+    candidates,
+    warnings: [],
+    blocks: [],
+    evidence_mode: "authored_synthetic_client_fixture"
+  };
+}
+
+async function metaGridReadAvailability(input) {
+  if (isSmokeMode()) return metaGridSmokeAvailability(input);
+  const response = await apiFetch("/appointments/proposals/slot-search", {
+    method: "POST",
+    body: JSON.stringify(input)
+  });
+  if (!response.ok) throw new Error(await apiErrorMessage(response, "Availability read"));
+  return response.json();
+}
+
+async function metaGridPrepareProposal(input) {
+  if (isSmokeMode()) {
+    return {
+      operational: false,
+      evidence_mode: "authored_synthetic_client_fixture",
+      summary: "Authored synthetic proposal review prepared. Nothing has been booked.",
+      staff_review: {
+        status: "confirmation_ready",
+        confirmation_ready: true,
+        selected_slot: input.selected_candidate,
+        patient_evidence: {
+          patient_id: input.patient_id,
+          patient_label: input.patient_display,
+          confidence: "high"
+        },
+        practitioner_evidence: {
+          practitioner_id: input.practitioner_id,
+          display_name: input.practitioner_display
+        },
+        warning_summary: "Authored synthetic fixture only.",
+        evidence_summary: "No backend proposal or confirmation command was called.",
+        confirm_endpoint: null,
+        confirm_payload: null,
+        blocks: []
+      }
+    };
+  }
+  const command = {
+    practitioner_id: input.practitioner_id,
+    patient_id: input.patient_id,
+    date_from: input.selected_candidate.appointment_date,
+    date_to: input.selected_candidate.appointment_date,
+    duration_minutes: input.selected_candidate.duration_minutes,
+    earliest_time: input.selected_candidate.start_time_local,
+    latest_time: input.latest_time,
+    location_id: input.location_id || undefined,
+    limit: 20
+  };
+  const serverSessionFields = await bernieServerSessionRequestFields(
+    "supervised",
+    `meta-grid:${input.selected_candidate.candidate_freshness_id || input.selected_candidate.start_time_local}`
+  );
+  const body = {
+    command,
+    reference_date: input.reference_date,
+    context_frames: buildBernieContextFrames({ command }),
+    selected_candidate: input.selected_candidate,
+    practitioner_id: input.practitioner_id,
+    patient_id: input.patient_id,
+    location_id: input.location_id || undefined,
+    reason: "Bernie functional meta-grid proposal review",
+    ...bernieTurnRequestFields(),
+    ...serverSessionFields
+  };
+  const response = await apiFetch("/appointments/proposals/bernie/supervised-booking", {
+    method: "POST",
+    body: JSON.stringify(body)
+  });
+  if (!response.ok) {
+    await handleBernieServerRouteConflict(response);
+    throw new Error(await apiErrorMessage(response, "Proposal review"));
+  }
+  const payload = await response.json();
+  captureBernieTurnRef(payload);
+  captureBernieServerSessionSnapshot(payload);
+  return {
+    operational: true,
+    evidence_mode: "live_local_non_mutating_proposal",
+    summary: payload.summary,
+    payload
+  };
+}
+
+function metaGridHandoffProposal(result) {
+  if (!result?.operational || !result.payload?.staff_review) return false;
+  const data = result.payload;
+  const payload = attachBernieUiViewModelToStaffReview(data, data.staff_review);
+  if (data.reception_policy) payload.reception_policy = data.reception_policy;
+  if (data.suggestions) payload.suggestions = data.suggestions;
+  isBerniePilotActive = true;
+  bernieInterpretResult = {
+    safe: true,
+    result: "interpreted",
+    summary: "Proposal prepared from the functional meta-grid selection.",
+    command_candidate: data.normalization?.constraint || null,
+    request_reference_date: data.request_reference_date || localDateKey(diaryDate)
+  };
+  bernieSession.interpretEnvelope = bernieInterpretResult;
+  bernieSession.latestReviewPayload = payload;
+  if (payload.status === "confirmation_ready") {
+    bernieSession.transitionTo("SLOT_PREVIEW");
+  } else if (payload.status === "candidate_selection_required") {
+    bernieSession.candidateSnapshot = payload;
+    bernieSession.transitionTo("CANDIDATE_SELECTION");
+  }
+  bernieSession.syncToLegacy();
+  const panel = document.getElementById("bernie-review-panel");
+  panel?.classList.remove("hidden");
+  renderBernieReview(payload, bernieInterpretResult);
+  return true;
+}
+
+function setMetaGridLaunchAvailability(available) {
+  const button = document.getElementById("btn-meta-grid-launch");
+  if (button) button.classList.toggle("hidden", !available);
+}
+
+window.EMR4DiaryMetaGridBridge = Object.freeze({
+  getSnapshot() {
+    return {
+      date: localDateKey(diaryDate),
+      location_id: activeLocationId || null,
+      location_display: activeTemplate?.practice_name || "Current practice",
+      practice_display: activeTemplate?.practice_name || "EMR4 Diary",
+      timezone: "Australia/Brisbane",
+      evidence_mode: isSmokeMode() ? "authored_synthetic_client_fixture" : "live_local_read_model",
+      practitioners: metaGridDirectorySnapshot(),
+      appointments: (isSmokeMode() ? metaGridSmokeAppointments() : activeAppointments.map(appt => metaGridAppointmentView(appt)))
+    };
+  },
+  readAppointments: metaGridReadAppointments,
+  searchPatients: metaGridSearchPatients,
+  readAvailability: metaGridReadAvailability,
+  prepareProposal: metaGridPrepareProposal,
+  handoffProposal: metaGridHandoffProposal,
+  setLaunchAvailable: setMetaGridLaunchAvailability,
+  showBookingReview() {
+    document.body.classList.remove("meta-grid-open");
+    document.getElementById("bernie-meta-grid")?.classList.add("hidden");
+    document.getElementById("diary-grid-container")?.classList.remove("hidden");
+    document.getElementById("bernie-review-panel")?.classList.remove("hidden");
+  }
+});
+
 async function checkBerniePilotEligibility() {
   const urlParams = new URLSearchParams(window.location.search);
   const isSmoke = isSmokeMode();
@@ -6195,7 +6588,15 @@ async function checkBerniePilotEligibility() {
     return;
   }
 
-  if (!token && !isSmoke) {
+  if (isSmoke) {
+    isBerniePilotEligible = true;
+    setMetaGridLaunchAvailability(true);
+    const bernieLaunch = document.getElementById("btn-bernie-pilot-launch");
+    if (bernieLaunch) bernieLaunch.classList.remove("hidden");
+    return;
+  }
+
+  if (!token) {
     return;
   }
 
@@ -6205,6 +6606,7 @@ async function checkBerniePilotEligibility() {
       const data = await res.json();
       if (data && data.eligible) {
         isBerniePilotEligible = true;
+        setMetaGridLaunchAvailability(true);
         const launchBtn = document.getElementById("btn-bernie-pilot-launch");
         if (launchBtn) {
           launchBtn.classList.remove("hidden");

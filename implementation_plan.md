@@ -107,13 +107,17 @@ Yuri-only formative Stage 3A under
 The provider-neutral in-house fluid meta-grid concept tranche then passed on
 2026-07-20 with its canonical interaction grammar in
 [`docs/bernie-fluid-meta-grid-concept-design.md`](docs/bernie-fluid-meta-grid-concept-design.md).
-Functional implementation and Stage 3B representative-staff evidence remain
-separate later decisions.
+Yuri then authorised the bounded functional native Diary client, which passed
+on 2026-07-20 under
+[`docs/bernie-functional-meta-grid-client-closeout.md`](docs/bernie-functional-meta-grid-client-closeout.md).
+Live-local integration evidence, high-fidelity visual refinement and Stage 3B
+representative-staff evidence remain separate later decisions.
 
-Smartphone use should reuse the same projection grammar rather than create a
-second product. Tablet acceptance does not prove phone ergonomics; the first
-functional tranche should add narrow one-column and sequential-comparison
-evidence for one-handed, software-keyboard, interruption and privacy concerns.
+Smartphone use reuses the same projection grammar rather than creating a second
+product. The bounded functional tranche now supplies narrow one-column,
+sequential-comparison, software-keyboard reachability, interruption and privacy
+evidence. It does not yet prove representative phone ergonomics or production
+readiness.
 
 Bernie is deliberately not the first patient-facing autonomous agent. The first
 implementation should be an internal copilot that acts through controlled backend
@@ -733,10 +737,12 @@ export mapping canonical.
   user-visible effects must deduplicate replay.
 - Treat the full fluid UX meta-grid as staged conceptual, functional and later
   visual-refinement work. The provider-neutral in-house concept tranche passed
-  on 2026-07-20; its typed projection grammar and stable-shell design now govern
-  any future implementation. Functional client work and high-fidelity styling
-  remain separately authorised tranches. No named design model, subscription,
-  provider call, cost or external transmission is authorised by this plan entry.
+  on 2026-07-20; its typed projection grammar and stable-shell design govern
+  implementation. The bounded functional client also passed on 2026-07-20 over
+  existing read and proposal-only boundaries. Live-local integration evidence,
+  high-fidelity styling and representative evaluation remain separately
+  authorised tranches. No named design model, subscription, provider call, cost
+  or external transmission is authorised by this plan entry.
 - Use the formal command/proposal pattern for new mutating workflows: intent,
   typed command, warnings, blocks, confirmation requirement, result report, and
   audit context. Existing direct UI mutations should be retrofitted in risk

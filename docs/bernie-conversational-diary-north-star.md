@@ -168,13 +168,21 @@ fresh-read-backed, deduplicated, interruptible, explainable, and silent by
 default where attention is not warranted. No event delivery runtime is
 authorized by this design.
 
-### Fluid meta-grid — concept accepted, implementation later
+### Fluid meta-grid — bounded functional client accepted
 
 The fixed grid should become a family of just-in-time practitioner-, patient-,
 date-, time-, location-, availability-, and event-centred projections. Yuri's
 provider-neutral in-house concept tranche accepted the first complete
 interaction language on 2026-07-20; its canonical specification is
 `docs/bernie-fluid-meta-grid-concept-design.md`.
+
+Yuri subsequently authorised the bounded functional client tranche on
+2026-07-20. It passed as `functional_meta_grid_client_pass`; its plan and exact
+result are `docs/bernie-functional-meta-grid-client-plan.md` and
+`docs/bernie-functional-meta-grid-client-closeout.md`. The native Diary now
+implements the ordinary, focused-practitioner, patient-timeline,
+availability/selection, aligned-comparison, proposal-review and clarification
+families over existing read and proposal-only boundaries.
 
 Tablet use is a first-class design target for that tranche. A receptionist
 should be able to ask for Dr Shera's afternoon availability, receive only the
@@ -186,19 +194,21 @@ fresh identity and availability checks, idempotent write, audit, and visible
 receipt. Touch selection is staff input to a proposal; it is never commitment
 by itself.
 
-Smartphones should reuse this same projection grammar rather than become a
-separate Diary product, but tablet evidence does not automatically prove phone
-ergonomics. Narrow one-column and sequential-comparison layouts, one-handed
-reach, software-keyboard occlusion, interruption/resume and small-screen
-privacy require a bounded phone population during functional implementation.
+Smartphones reuse this same projection grammar rather than becoming a separate
+Diary product. The bounded functional tranche now supplies authored-synthetic
+browser evidence for narrow one-column and sequential-comparison layouts,
+software-keyboard reachability, interruption/resume and small-screen privacy.
+That evidence does not claim representative usability, live-backend operation
+or production phone readiness.
 
 This portability is not a concession to a small screen. It is the intended
 consequence of projecting only what the current task needs: the receptionist
 can move through the practice while retaining direct visual control whenever
 it is useful. The accepted conceptual interaction language is provider-neutral
-and owned in-house. Functional implementation and high-fidelity styling remain
-separate later decisions; no named design model, subscription, provider use,
-or cost is a prerequisite or is authorized here.
+and owned in-house. The bounded functional shell is now accepted.
+High-fidelity styling, live-local integration evidence and any later
+representative evaluation remain separate decisions; no named design model,
+subscription, provider use, or cost is a prerequisite or is authorized here.
 
 ### Provider intelligence — observed need only
 
@@ -243,9 +253,11 @@ Stage 3 should determine which deeper branch has evidence:
   capability.
 - **Modality gap:** run an explicit-activation voice feasibility tranche before
   any ambient design.
-- **Projection implementation:** use the accepted provider-neutral fluid
-  meta-grid grammar to freeze a bounded functional client tranche, while
-  deferring any optional external visual-design model and cost decision.
+- **Projection integration/evaluation:** use the accepted functional
+  meta-grid client to decide whether a provider-free live-local synthetic
+  integration/evaluation tranche over existing reads and proposal-only
+  boundaries is warranted, while deferring confirmation/write authority,
+  Stage 3B and any optional external visual-design model or cost decision.
 - **Event-awareness evidence:** order a bounded committed-event producer,
   attention-filter, and authorised-consumer design/implementation tranche; the
   product principle is accepted, while runtime authority remains separate.

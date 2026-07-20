@@ -1,0 +1,81 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "sprint_planning",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "bernie_functional_meta_grid_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No worker dispatch is planned before the exact client surface, read-model inputs, proposal handoff and browser/API regression population are frozen."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The authorised tranche is provider-neutral; no external design model, provider call, subscription, prompt transmission or cost is authorised."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external verifier lane is opened before the bounded implementation contract is frozen."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri explicitly authorised the bounded functional meta-grid client tranche on 2026-07-20, including plain-language refinement and desktop, tablet, smartphone and keyboard evidence.",
+        "AGENTS.md, the accepted meta-grid plan/design/closeout/Sol acceptance, Stage 3A final boundary, conversational Diary north star, intent-projected design, Stage 1 and Stage 2 command/authority plans, and API Spine contracts were restored before planning.",
+        "The authorised implementation is a bounded local functional client using the accepted non-authoritative projection grammar over existing read and proposal boundaries, with focused practitioner, patient timeline, availability/selection, proposal review and ordinary overview/fallback as the initial families.",
+        "Plain-language refinement must preserve exact structured scope changes, fresh-read provenance, reversible history and answer/selection/proposal/receipt distinctions.",
+        "Protected holdouts v1-v10, historical Diary material, providers, PII, Stage 3B, representative participants, voice, committed-event runtime, GraphQL mutations, new commands, database migrations, production, deployment, release and autonomous confirmation remain closed.",
+        "HEAD, master, handoff/current, origin/master and origin/handoff/current were clean and aligned at 7a037ce5a96a09fd0d7a3671498fcef12d0d0e32 after a fresh fetch."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was assigned before planning."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

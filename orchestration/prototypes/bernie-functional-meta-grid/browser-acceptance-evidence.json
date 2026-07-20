@@ -1,0 +1,161 @@
+{
+  "schema_version": "bernie.functional-meta-grid.browser-evidence.v1",
+  "recorded_at": "2026-07-20T04:25:30Z",
+  "result": "browser_pass",
+  "evidence_mode": "authored_synthetic_client_fixture_browser",
+  "route": "http://127.0.0.1:3000/docs/diary/diary.html?smoke=true&meta_grid_open=true&reference_date=2026-07-20",
+  "interruption_acceptance_route": "http://127.0.0.1:3000/docs/diary/diary.html?smoke=true&meta_grid_open=true&meta_grid_acceptance=true&reference_date=2026-07-20",
+  "route_interception": false,
+  "api_interception": false,
+  "network_evidence_claim": "The native Diary route ran in its existing local smoke mode; this tranche added no API interception and makes no live-backend claim from browser evidence.",
+  "authority": {
+    "appointment_write_authority": false,
+    "proposal_handoff_enabled_in_smoke": false,
+    "confirmation_control_in_meta_grid": false,
+    "operational_receipt_produced": false
+  },
+  "viewports": [
+    {
+      "id": "desktop_landscape",
+      "width": 1440,
+      "height": 900,
+      "flows": {
+        "practitioner_root": "focused_schedule_lane with 3 visible non-cancelled appointments",
+        "plain_language_refinement": "after 2 pm changed the named time window to 14:00-17:00 and returned an explicit empty result",
+        "patient_timeline": "Margaret Thompson resolved by full name with 3 chronological upcoming appointments",
+        "ordinary_fallback": "meta-grid hidden and the existing Diary grid visible"
+      },
+      "page_horizontal_overflow_px": 0,
+      "host_horizontal_overflow_px": 0,
+      "enabled_controls_below_44px": [],
+      "console_warnings_or_errors": []
+    },
+    {
+      "id": "tablet_landscape",
+      "width": 1024,
+      "height": 768,
+      "shell_columns": "340px 615px",
+      "flows": {
+        "availability": "11 deterministic candidate slots after 2 pm",
+        "touch_selection": "selection_only; nothing booked",
+        "proposal_review": "proposal_not_committed with operational handoff disabled",
+        "aligned_comparison": "2 of 2 practitioner lanes visible on one date/time/location/duration basis"
+      },
+      "page_horizontal_overflow_px": 0,
+      "host_horizontal_overflow_px": 0,
+      "enabled_controls_below_44px": [],
+      "console_warnings_or_errors": []
+    },
+    {
+      "id": "tablet_portrait",
+      "width": 768,
+      "height": 1024,
+      "shell_columns": "729px",
+      "flows": {
+        "stacked_shell": "single column",
+        "refinement": "after 10 am changed 08:00-17:00 to 10:00-17:00",
+        "back": "restored the exact 08:00-17:00 parent projection"
+      },
+      "page_horizontal_overflow_px": 0,
+      "host_horizontal_overflow_px": 0,
+      "enabled_controls_below_44px": [],
+      "console_warnings_or_errors": []
+    },
+    {
+      "id": "phone_portrait",
+      "width": 390,
+      "height": 844,
+      "shell_columns": "359px",
+      "flows": {
+        "patient_timeline": "3 chronological upcoming appointments",
+        "availability": "11 candidate slots",
+        "keyboard_selection": "Space produced selection_only",
+        "proposal_review": "Enter prepared proposal_not_committed; handoff disabled",
+        "clarification": "Show Dr Alex today returned exactly Dr Alex Shera and Dr Alex Chen before sensitive projection",
+        "privacy": "2 sensitive clarification cards masked and privacy status visible",
+        "composer": "sticky, focused and visible at 72px high; visualViewport inset hook active",
+        "interruption": "acceptance-only smoke control invoked the same blur/visibility handler, masked immediately, cleared selection/proposal state and required refresh",
+        "resume": "fresh scoped read restored the focused practitioner projection",
+        "ordinary_fallback": "existing Diary grid visible after close"
+      },
+      "page_horizontal_overflow_px": 0,
+      "host_horizontal_overflow_px": 0,
+      "enabled_controls_below_44px": [],
+      "console_warnings_or_errors": []
+    },
+    {
+      "id": "phone_landscape",
+      "width": 844,
+      "height": 390,
+      "shell_columns": "805px",
+      "flows": {
+        "aligned_comparison": "2 practitioner lanes present, exactly 1 visible",
+        "sequential_navigation": "2 next/previous controls visible in a grid",
+        "orientation": "scope and current projection preserved"
+      },
+      "page_horizontal_overflow_px": 0,
+      "host_horizontal_overflow_px": 0,
+      "enabled_controls_below_44px": [],
+      "console_warnings_or_errors": []
+    }
+  ],
+  "keyboard": {
+    "enter_request_submit": "pass on desktop and phone",
+    "space_slot_selection": "pass on tablet and phone",
+    "escape_explanation_dismissal": "pass; focus returned to Why this view?",
+    "computed_native_tab_sequence": [
+      "skip link",
+      "ordinary Diary",
+      "plain-language request",
+      "show this view",
+      "privacy",
+      "ordinary overview",
+      "why this view",
+      "visible projection controls",
+      "sequential comparison navigation",
+      "return to full Diary grid"
+    ],
+    "tab_index_contract": "All recorded sequential controls used native tabIndex 0; disabled controls were excluded."
+  },
+  "screenshots": [
+    {
+      "file": "desktop-1440x900.png",
+      "sha256": "358eab6353d437a42ccacddf0ca66638ab1b8448b5c0da92e8482220c2463ec2"
+    },
+    {
+      "file": "tablet-landscape-1024x768.png",
+      "sha256": "6528cb1f05b7875bc61a0796514a100d8c7a57a6c3e56aef0a381cf58e5bc636"
+    },
+    {
+      "file": "tablet-portrait-768x1024.png",
+      "sha256": "03ca4829835228300ce7c0b589fb6ce4b6d3bcd0f58b9c4f735def50d5a673d6"
+    },
+    {
+      "file": "phone-portrait-390x844.png",
+      "sha256": "f935b3ef71277652851ba1b95e0f17e28839804559528944bd2acb84b874b838"
+    },
+    {
+      "file": "phone-landscape-844x390.png",
+      "sha256": "c116304e3e6cfaea78dc14cd59f120b77e7791a320ac5afba57e9f7cafd162ce"
+    },
+    {
+      "file": "phone-interruption-390x844.png",
+      "sha256": "3f2b744637d097a54626537a9746c76181b6e61b6c04823b746de5e25055f43f",
+      "note": "Acceptance-only authored-synthetic interruption trigger; never exposed without both smoke and meta_grid_acceptance query flags."
+    }
+  ],
+  "browser_console_final": [],
+  "browser_error_overlay": false,
+  "claims_not_made": [
+    "live backend",
+    "PostgreSQL",
+    "production",
+    "PII",
+    "provider",
+    "event runtime",
+    "Stage 3B",
+    "deployment",
+    "release",
+    "representative usability"
+  ]
+}
