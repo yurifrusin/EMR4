@@ -101,11 +101,19 @@ The longer-term interaction goal is not to polish the grid into the primary
 interface indefinitely. It is to let reception staff ask and complete supported
 Diary work conversationally, with the grid available when spatial review is
 useful. The north-star document and the Stage 3 workflow decision govern that
-progression. Yuri authorized a typed, local, provider-disabled, Yuri-only
-formative Stage 3A on 2026-07-19 under
+progression. Yuri authorized and completed a typed, local, provider-disabled,
+Yuri-only formative Stage 3A under
 [`docs/bernie-stage3a-yuri-formative-validation-plan.md`](docs/bernie-stage3a-yuri-formative-validation-plan.md).
-Stage 3B representative-staff evidence remains a later decision after the
-dedicated fluid UX design tranche.
+The provider-neutral in-house fluid meta-grid concept tranche then passed on
+2026-07-20 with its canonical interaction grammar in
+[`docs/bernie-fluid-meta-grid-concept-design.md`](docs/bernie-fluid-meta-grid-concept-design.md).
+Functional implementation and Stage 3B representative-staff evidence remain
+separate later decisions.
+
+Smartphone use should reuse the same projection grammar rather than create a
+second product. Tablet acceptance does not prove phone ergonomics; the first
+functional tranche should add narrow one-column and sequential-comparison
+evidence for one-handed, software-keyboard, interruption and privacy concerns.
 
 Bernie is deliberately not the first patient-facing autonomous agent. The first
 implementation should be an internal copilot that acts through controlled backend
@@ -723,10 +731,12 @@ export mapping canonical.
   UI runtime without a dedicated reviewed tranche. Publication must follow
   commit; consumption must recheck tenancy/role and perform a fresh scoped read;
   user-visible effects must deduplicate replay.
-- Treat the full fluid UX meta-grid as a dedicated visual-design tranche. Yuri's
-  current preference is a future focused Claude Fable engagement after an
-  explicit subscription, cost, synthetic-context, and transmission decision;
-  no provider work is authorized by this plan entry.
+- Treat the full fluid UX meta-grid as staged conceptual, functional and later
+  visual-refinement work. The provider-neutral in-house concept tranche passed
+  on 2026-07-20; its typed projection grammar and stable-shell design now govern
+  any future implementation. Functional client work and high-fidelity styling
+  remain separately authorised tranches. No named design model, subscription,
+  provider call, cost or external transmission is authorised by this plan entry.
 - Use the formal command/proposal pattern for new mutating workflows: intent,
   typed command, warnings, blocks, confirmation requirement, result report, and
   audit context. Existing direct UI mutations should be retrofitted in risk

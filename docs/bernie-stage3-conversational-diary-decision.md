@@ -4,7 +4,7 @@ Date: 2026-07-19
 
 Owner: GPT Sol Extra High
 
-Decision status: `stage3a_authorized_stage3b_deferred`
+Decision status: `stage3a_pass_meta_grid_concept_pass_stage3b_deferred`
 
 ## Reshaped purpose
 
@@ -44,6 +44,13 @@ automatically authorize them, new appointment actions, providers, voice
 capture, PII, production, deployment, release, or autonomous confirmation.
 It also does not authorize an event broker, outbox migration, background
 consumer, proactive UI runtime, or Claude Fable engagement.
+
+Status update, 2026-07-20: Stage 3A passed and Yuri's subsequent bounded
+provider-neutral in-house meta-grid concept tranche also passed. Its accepted
+grammar and implementation handoff are
+`docs/bernie-fluid-meta-grid-concept-design.md` and
+`docs/bernie-fluid-meta-grid-concept-closeout.md`. Functional implementation
+and Stage 3B remain fresh decisions.
 
 ## Frozen Stage 3 task population
 
@@ -182,8 +189,8 @@ Yuri accepted the following package on 2026-07-19:
    event runtime, provider, privacy, voice, or autonomous behavior returns to
    Yuri.
 
-The Stage 3A preparation and Yuri-only run may proceed. Stage 3B and every
-deferred boundary above remain paused.
+The Stage 3A Yuri-only run is complete and passed. Stage 3B and every deferred
+boundary above remain paused.
 
 ## What Stage 3 may unlock
 
@@ -195,10 +202,10 @@ deferred boundary above remain paused.
   AI decision based on the exact observed capability.
 - If explicit voice adds value: a privacy-first activation and local-discard
   feasibility tranche before ambient listening.
-- A dedicated provider-neutral, in-house fluid UX meta-grid concept tranche,
-  with high-fidelity styling and any optional external design-model, synthetic
-  context, subscription, transmission, and cost decision deferred until the
-  interaction grammar is stable.
+- A bounded functional client tranche implementing the accepted
+  provider-neutral fluid UX meta-grid grammar, with high-fidelity styling and
+  any optional external design-model, synthetic context, subscription,
+  transmission, and cost decision still deferred.
 - A bounded committed-event runtime tranche ordered by the observed event
   families and interruption patterns. Event awareness is already foundational;
   Stage 3 determines safe implementation shape and priority, not whether the

@@ -1,0 +1,375 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/bernie.meta-grid-projection.v0.json",
+  "title": "Bernie Meta-Grid Projection Concept Contract",
+  "description": "Non-authoritative presentation-state concept. It grants no read or write authority.",
+  "type": "object",
+  "required": [
+    "contract_version",
+    "projection_id",
+    "projection_revision",
+    "root_intent_id",
+    "family",
+    "state",
+    "scope",
+    "scope_summary",
+    "omissions",
+    "freshness",
+    "items",
+    "layout_hint",
+    "affordances",
+    "parent_projection_id",
+    "transition",
+    "action_boundary",
+    "evidence_mode"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {
+      "const": "bernie.meta-grid-projection.v0"
+    },
+    "projection_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 96
+    },
+    "projection_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "root_intent_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 96
+    },
+    "family": {
+      "enum": [
+        "focused_schedule_lane",
+        "patient_timeline",
+        "availability_slots",
+        "aligned_comparison",
+        "change_context",
+        "proposal_review",
+        "ordinary_overview",
+        "clarification"
+      ]
+    },
+    "state": {
+      "enum": [
+        "answer",
+        "clarification_required",
+        "selection_only",
+        "proposal_not_committed",
+        "committed_change_notice",
+        "reconciliation_required",
+        "blocked",
+        "committed_receipt",
+        "overview"
+      ]
+    },
+    "scope": {
+      "$ref": "#/$defs/scope"
+    },
+    "scope_summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 320
+    },
+    "omissions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 160
+      },
+      "uniqueItems": true
+    },
+    "freshness": {
+      "$ref": "#/$defs/freshness"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/item"
+      }
+    },
+    "layout_hint": {
+      "enum": [
+        "time_lane",
+        "timeline",
+        "slot_list",
+        "aligned_lanes",
+        "change_diff",
+        "proposal_summary",
+        "overview_grid",
+        "clarification_list"
+      ]
+    },
+    "affordances": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "inspect",
+          "refine",
+          "broaden",
+          "compare",
+          "select",
+          "prepare_proposal",
+          "clarify",
+          "reconcile",
+          "back",
+          "reset",
+          "explain"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "parent_projection_id": {
+      "type": ["string", "null"],
+      "maxLength": 96
+    },
+    "transition": {
+      "$ref": "#/$defs/transition"
+    },
+    "action_boundary": {
+      "$ref": "#/$defs/actionBoundary"
+    },
+    "evidence_mode": {
+      "enum": [
+        "conceptual_design_artifact",
+        "authored_synthetic_local_static_prototype",
+        "authored_synthetic_event_fixture"
+      ]
+    }
+  },
+  "$defs": {
+    "scope": {
+      "type": "object",
+      "required": [
+        "practice_id",
+        "timezone",
+        "patient_ids",
+        "practitioner_ids",
+        "location_ids",
+        "room_ids",
+        "waiting_area_ids",
+        "status_allowlist"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "practice_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "timezone": {
+          "type": "string",
+          "minLength": 1
+        },
+        "patient_ids": {
+          "type": "array",
+          "items": {"type": "string"},
+          "uniqueItems": true
+        },
+        "practitioner_ids": {
+          "type": "array",
+          "items": {"type": "string"},
+          "uniqueItems": true
+        },
+        "date_from": {
+          "type": ["string", "null"],
+          "format": "date"
+        },
+        "date_to": {
+          "type": ["string", "null"],
+          "format": "date"
+        },
+        "time_from": {
+          "type": ["string", "null"],
+          "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
+        },
+        "time_to": {
+          "type": ["string", "null"],
+          "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
+        },
+        "location_ids": {
+          "type": "array",
+          "items": {"type": "string"},
+          "uniqueItems": true
+        },
+        "room_ids": {
+          "type": "array",
+          "items": {"type": "string"},
+          "uniqueItems": true
+        },
+        "waiting_area_ids": {
+          "type": "array",
+          "items": {"type": "string"},
+          "uniqueItems": true
+        },
+        "status_allowlist": {
+          "type": "array",
+          "items": {"type": "string"},
+          "uniqueItems": true
+        },
+        "appointment_type_ids": {
+          "type": "array",
+          "items": {"type": "string"},
+          "uniqueItems": true
+        },
+        "duration_minutes": {
+          "type": ["integer", "null"],
+          "minimum": 1
+        },
+        "result_limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        }
+      }
+    },
+    "freshness": {
+      "type": "object",
+      "required": ["source", "observed_at", "stale", "reason"],
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "enum": [
+            "authorised_diary_read",
+            "authorised_patient_read",
+            "deterministic_availability_read",
+            "authorised_comparison_read",
+            "fresh_read_after_event_fixture",
+            "concept_overview"
+          ]
+        },
+        "observed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expires_at": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "stale": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      }
+    },
+    "item": {
+      "type": "object",
+      "required": [
+        "item_id",
+        "kind",
+        "display",
+        "date",
+        "starts_at",
+        "ends_at",
+        "status",
+        "selectable",
+        "changed"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "item_id": {"type": "string", "minLength": 1},
+        "kind": {
+          "enum": [
+            "appointment",
+            "available_slot",
+            "break",
+            "roster_window",
+            "comparison_slot",
+            "proposal_summary",
+            "overview_entry"
+          ]
+        },
+        "display": {"type": "string", "minLength": 1},
+        "date": {"type": ["string", "null"], "format": "date"},
+        "starts_at": {"type": ["string", "null"], "format": "date-time"},
+        "ends_at": {"type": ["string", "null"], "format": "date-time"},
+        "patient_display": {"type": ["string", "null"]},
+        "practitioner_display": {"type": ["string", "null"]},
+        "location_display": {"type": ["string", "null"]},
+        "status": {"type": "string", "minLength": 1},
+        "warnings": {
+          "type": "array",
+          "items": {"type": "string"},
+          "uniqueItems": true
+        },
+        "selectable": {"type": "boolean"},
+        "changed": {"type": "boolean"},
+        "comparison_group": {"type": ["string", "null"]}
+      }
+    },
+    "transition": {
+      "type": "object",
+      "required": ["operation", "trigger", "reason", "changed_dimensions"],
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "enum": [
+            "project",
+            "refine",
+            "broaden",
+            "pivot",
+            "compare",
+            "inspect",
+            "select",
+            "prepare_proposal",
+            "clarify",
+            "reconcile",
+            "back",
+            "reset",
+            "external_command_readback"
+          ]
+        },
+        "trigger": {
+          "enum": [
+            "conversation",
+            "touch",
+            "keyboard",
+            "event_fixture",
+            "history",
+            "system_freshness"
+          ]
+        },
+        "reason": {"type": "string", "minLength": 1, "maxLength": 200},
+        "changed_dimensions": {
+          "type": "array",
+          "items": {"type": "string"},
+          "uniqueItems": true
+        }
+      }
+    },
+    "actionBoundary": {
+      "type": "object",
+      "required": ["posture", "appointment_write_authority", "operational_command_available"],
+      "additionalProperties": false,
+      "properties": {
+        "posture": {
+          "enum": [
+            "none",
+            "selection_only",
+            "proposal_only",
+            "confirm_command_handoff",
+            "committed_receipt_readback"
+          ]
+        },
+        "appointment_write_authority": {
+          "const": false
+        },
+        "operational_command_available": {
+          "type": "boolean"
+        },
+        "required_backend_pattern": {
+          "type": ["string", "null"],
+          "maxLength": 240
+        }
+      }
+    }
+  }
+}
