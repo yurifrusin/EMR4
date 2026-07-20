@@ -49,7 +49,8 @@ surface.
   rows;
 - the exact marker-verified disposable database was removed after final
   readback;
-- 19 focused tests, the 180-test combined population and a complete clean
+- 20 focused tests after the CLI non-disclosure guard, the 180-test combined
+  population and a complete clean
   139/139 Diary smoke rerun passed, with the preceding isolated timing failure
   and exact-node recovery recorded; and
 - a fresh Gemini 3.5 Flash (High) veto returned `pass`, no findings, boundaries
@@ -60,6 +61,11 @@ surface.
 This is local authored-synthetic browser/backend/PostgreSQL integration
 evidence. It is not provider, PII, committed-event, representative-usability,
 Stage 3B, production, deployment, release or appointment-write evidence.
+
+PR 52's initial Advanced Security high finding on generic database-report CLI
+serialization was treated as a blocking gate. The accepted correction emits
+only a fixed non-sensitive CLI status envelope and leaves imported evidence
+readback unchanged.
 
 No protected holdout or historical Diary material was accessed. No API,
 GraphQL, OpenAPI/Pydantic, database model/migration, confirmation, provider,

@@ -147,7 +147,8 @@ desktop review without rewriting the historical artifact.
 
 The final serial populations passed:
 
-- **19** focused live-local/functional artifact tests after cleanup evidence was
+- **20** focused live-local/functional artifact tests after cleanup and CLI
+  non-disclosure evidence was
   added;
 - **180** combined live-local, functional meta-grid, API Spine, slot-search,
   supervised-booking, provider-disabled zero-write, Stage 3A, accessible
@@ -190,6 +191,13 @@ receipt and extracted decision are:
    dispatch.
 7. One complete Diary smoke run had the isolated timing failure described
    above; exact and full reruns passed.
+8. PR 52's first GitHub Advanced Security gate raised high-severity alert 492
+   because the harness convenience CLI serialized its generic database-derived
+   report. Although the values were authored-synthetic counts and hashes, the
+   sink was unnecessary. The CLI now emits only a fixed non-sensitive
+   completion envelope; imported evidence helpers and canonical evidence are
+   unchanged. The adjacent readiness-loop empty-except note was also resolved
+   with an explicit expected-exception retry and fail-closed comment.
 
 All corrections stayed within the frozen client/harness/evidence contract.
 

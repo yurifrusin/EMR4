@@ -1,0 +1,76 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "bernie_meta_grid_live_local_integration_ci_repair_precommit_five_source_readback",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The two-file mechanical security correction remained Sol-owned under the correction-loop and economy rules."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external design provider was used."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["The accepted Gemini product/boundary veto remains intact; this correction only removes generic CLI serialization of database-derived report values."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "PR 52 substantive workflows passed, but GitHub Advanced Security created alert 492, py/clear-text-logging-sensitive-data, at the generic harness report print and blocked integration.",
+        "The report contained authored-synthetic counts and hashes rather than credentials or PII, but the generic CLI sink was unnecessary and has been removed.",
+        "The CLI now emits only a fixed non-sensitive completion envelope; importable evidence helpers and canonical browser evidence remain unchanged.",
+        "The readiness retry now catches expected local URL failures with an explanatory fail-closed comment, resolving the adjacent empty-except note without changing readiness semantics.",
+        "Eight live-local tests and the 20-test live-local plus functional population pass; Ruff, py_compile and git diff checks pass.",
+        "No product client, API, write, event-runtime, provider, PII, protected, Stage 3B, deployment or release surface changed.",
+        "Task HEAD before this repair commit is fb4932b4a9808c0af6e90f1ba60f034f8fa792ed; protected refs remain aligned at 1fdf4035341edda62765b8e11f9b0175ec1a3919."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -22,6 +22,7 @@ from datetime import date, datetime, time, timezone
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from urllib.error import URLError
 from urllib.parse import urlsplit
 from urllib.request import urlopen
 from zoneinfo import ZoneInfo
@@ -623,8 +624,10 @@ def launch_runtime() -> tuple[dict[str, object], list[subprocess.Popen[bytes]]]:
             try:
                 with urlopen(url, timeout=0.5) as response:  # nosec B310 - locked loopback URLs
                     ready[name] = response.status == 200
-            except Exception:
-                pass
+            except (OSError, URLError):
+                # The bounded readiness loop retries while the local child
+                # process starts; the final guard below still fails closed.
+                continue
         if all(ready.values()):
             break
         if any(process.poll() is not None for process in processes):
@@ -724,21 +727,37 @@ def main() -> int:
             password = f"MetaGrid-{secrets.token_urlsafe(24)}!"
             create_database()
             create_schema_and_seed(password)
-            report = readiness_report()
+            if not readiness_report()["ready"]:
+                raise RuntimeError("Live-local database did not pass readiness")
         elif args.command == "status":
-            report = readiness_report()
+            if not readiness_report()["ready"]:
+                raise RuntimeError("Live-local database did not pass readiness")
         elif args.command == "readback":
-            report = database_readback()
+            database_readback()
         elif args.command == "cleanup":
-            report = cleanup_database()
+            cleanup_database()
         else:
             serve_static(args.host, args.port)
             return 0
     except Exception as exc:
         print(json.dumps({"ready": False, "error_type": type(exc).__name__}), file=sys.stderr)
         return 1
-    print(json.dumps(report, indent=2, sort_keys=True))
-    return 0 if report.get("ready", True) else 1
+    # Never serialize database-derived report values through this convenience
+    # CLI. The acceptance runner consumes the importable helpers directly and
+    # applies its own bounded, hashed evidence schema.
+    print(
+        json.dumps(
+            {
+                "schema_version": "bernie.meta-grid-live-local.cli-status.v1",
+                "command": args.command,
+                "completed": True,
+                "report_values_recorded": False,
+            },
+            indent=2,
+            sort_keys=True,
+        )
+    )
+    return 0
 
 
 if __name__ == "__main__":

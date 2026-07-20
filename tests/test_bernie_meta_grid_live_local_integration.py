@@ -94,6 +94,13 @@ def test_playwright_runner_has_no_route_interception_or_closed_command_activatio
     assert '"/api/v1/appointments/proposals/create/confirm' not in source
 
 
+def test_harness_cli_never_logs_database_derived_report_values():
+    source = _read(HARNESS)
+    assert "print(json.dumps(report" not in source
+    assert '"report_values_recorded": False' in source
+    assert '"bernie.meta-grid-live-local.cli-status.v1"' in source
+
+
 def test_disposable_database_cleanup_is_exact_and_marker_verified():
     cleanup = json.loads(_read(CLEANUP_EVIDENCE))
     assert cleanup == {
