@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "stage3a_final_closeout_postcompaction_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No worker was dispatched; the browser/database acceptance was serial and stateful."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Future meta-grid design is provider-neutral; no external design model was used or selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external reviewer received acceptance, browser, database, provider, or protected authority."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "AGENTS.md, the frozen Stage 3A plan, final closeout and Sol acceptance were restored after compaction.",
+        "Protected holdouts, historical Diary data, external corpora, providers, PII, production, deployment, release, voice, event runtime, Stage 3B, and the next meta-grid tranche remain closed.",
+        "HEAD, master, handoff/current, origin/master, and origin/handoff/current are aligned at 3af7c33c94183f728cb0c8af965815e4442e1e94 before protected integration; the working tree contains only the bounded Stage 3A final-closeout changes.",
+        "Yuri's corrected seven-scenario v2 export is bound at sha256:55146de6b7ad2743acf5ce9505230a39c5ff8a641f366d5018d2689282359ffb and contains no prompt or transcript text.",
+        "The visible non-intercepted Diary confirmation against isolated PostgreSQL produced exactly one appointment, linked audit, completed command result, stored typed receipt, and reloaded Diary appointment.",
+        "The final affected populations pass 73 functional/confirmation tests and 60 Stage 3A/API Spine/handover/Ariadne tests plus Node, Ruff, compilation, browser-console, runtime-cleanup, and whitespace gates.",
+        "Yuri's in-house provider-neutral design sequencing is durable; high-fidelity styling and any external design-model decision remain deferred."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

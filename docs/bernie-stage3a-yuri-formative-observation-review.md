@@ -117,3 +117,16 @@ After Yuri downloads and returns the new v2 export, Sol runs the separate
 S3A-06 `live_local_browser_backend_postgres` check. Only then can the final
 Stage 3A decision be `stage3a_pass`, `stage3a_partial`, or a continuing
 `revision_required`.
+
+## Final addendum — 2026-07-20
+
+Yuri returned the exact corrected v2 export at SHA-256
+`55146de6b7ad2743acf5ce9505230a39c5ff8a641f366d5018d2689282359ffb`.
+The seven-scenario rerun and separate visible local confirmation/database check
+both passed. Yuri's immediate post-export correction of S3A-06 from
+`suppressed_events` to `Separate safety check — not run here` is preserved as a
+facilitator clarification and wording finding; the raw export was not altered.
+
+The final authoritative decision is `stage3a_pass` in
+`docs/bernie-stage3a-final-validation-closeout.md` and
+`orchestration/agent_inbox/codex/bernie-stage3a-final-sol-acceptance.md`.

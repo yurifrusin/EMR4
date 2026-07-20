@@ -206,11 +206,13 @@ This creates mobility without loss of visual control. A receptionist can work
 away from a fixed multi-screen desk, yet summon spatial Diary context whenever
 it helps and inspect the exact proposal before any mutation.
 
-The full fluid UX meta-grid remains a dedicated design tranche. Yuri's current
-preference is to defer that visual-design work until an explicit future
-decision can consider a focused Claude Fable engagement and one-month
-subscription. No subscription, model use, external transmission, or cost is
-authorized here.
+The full fluid UX meta-grid remains a dedicated design tranche, but its
+conceptual work should be owned in-house and remain provider-neutral. Projection
+grammar, orientation, refinement, attention, proposal, and confirmation
+semantics come before high-fidelity styling. A later decision may evaluate
+Claude Fable, Kimi, or another design resource as an optional tool, but no
+subscription, model use, external transmission, or cost is authorized here and
+none is a prerequisite.
 
 ## 8. Stage 3 binding
 

@@ -145,7 +145,7 @@ Date: 2026-07-19
 
 Source: Yuri
 
-State: `integrated_deferred_programme_dependency_pending_explicit_claude_fable_decision`
+State: `superseded_by_entry_005_provider_neutral_in_house_sequence`
 
 ### Originating insight
 
@@ -157,6 +157,11 @@ Yuri’s current assessment is that Claude Fable is the preferred model for this
 visual-design problem. The design tranche should therefore remain deferred
 until EMR4 is ready to consider a dedicated one-month Claude subscription for
 that purpose.
+
+This records the view held on 2026-07-19. Yuri revised the sequencing decision
+on 2026-07-20 in Entry 005: the conceptual interaction design is now intended
+to proceed in-house and no named design model or subscription is a programme
+dependency.
 
 This is a sequencing preference and product note. It does not authorize a
 subscription, cost, provider call, external prompt, content transmission,
@@ -333,3 +338,42 @@ constraint rather than a responsive afterthought. It should explore:
 The frozen Stage 3A study remains unchanged. This entry does not authorise a
 tablet implementation, voice, Claude Fable, a subscription, provider calls,
 new mutation routes, production, deployment, or release.
+
+## Entry 005 — In-house, provider-neutral meta-grid design sequencing
+
+Date: 2026-07-20
+
+Source: Yuri, during Stage 3A final closeout
+
+State: `integrated_product_direction_future_tranche_not_yet_authorized`
+
+### Refinement
+
+The fluid meta-grid should not depend on the availability, price, or reputation
+of any named visual-design model. EMR4 should develop the important conceptual
+abstractions in-house first: the projection grammar, persistent scope and
+orientation, conversational and touch refinement, reversible navigation,
+attention behaviour, proposal formation, and confirmation boundary.
+
+High-fidelity styling can be refined after those semantics are stable. Claude
+Fable, Kimi, or any later design-capable model may be evaluated as an optional
+tool at that time, but none is selected, subscribed to, transmitted data, or
+made a prerequisite by this decision. Any future external-model engagement
+still requires its own exact product, cost, privacy, synthetic-context, and
+transmission approval.
+
+### Programme implication
+
+The recommended sequence is now:
+
+1. define and test the meta-grid's conceptual interaction language in-house;
+2. validate that the abstractions preserve orientation, control, safety, and
+   task usefulness with deliberately synthetic evidence;
+3. implement the functional visual system without waiting for a named design
+   provider; and
+4. fine-tune visual styling later, optionally using whichever design resource
+   is then demonstrably suitable and economical.
+
+This decision removes a provider dependency; it does not itself authorize the
+next design tranche, a subscription, provider call, prompt transmission,
+tablet implementation, production, deployment, or release.
