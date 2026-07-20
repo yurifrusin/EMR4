@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "bernie_meta_grid_live_local_integration_preplan",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not dispatched: the frozen runtime and browser population is serial and stateful."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external design provider is authorised or used."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Reserved for a fresh read-only independent veto after implementation evidence exists."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The mandatory five-source rehydration receipt passed before inventory or planning.",
+        "The exact client bridge, existing route handlers, API Spine contracts, local runtime pattern and database write/event tables were inspected.",
+        "The plan freezes one provider-disabled loopback runtime, one authored-synthetic PostgreSQL database, visible Playwright actions, route allowlists and exact before/after database hashes.",
+        "The stale half-black desktop PNG is treated as a historical capture defect and a new painted-width guard is required in this tranche.",
+        "API, write, event-runtime, provider, PII, Stage 3B, deployment and release authority remain closed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

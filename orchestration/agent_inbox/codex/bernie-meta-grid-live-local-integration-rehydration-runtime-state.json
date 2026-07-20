@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "bernie_meta_grid_live_local_integration_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker is dispatched before the new plan is frozen."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external design provider is authorised or used."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Gemini remains available only for a later fresh-context independent veto after the plan is frozen and implementation evidence exists."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri authorised the provider-free live-local synthetic integration/evaluation tranche recommended by the functional meta-grid closeout.",
+        "AGENTS.md was read completely and the current baton, authority allocation, protected boundaries and user-decision boundaries were restored.",
+        "The functional client plan, closeout, Sol acceptance, browser evidence, product north star, Stage 3 decision and relevant API Spine sources were read before planning.",
+        "HEAD, master, handoff/current, origin/master and origin/handoff/current are clean and aligned at 1fdf4035341edda62765b8e11f9b0175ec1a3919.",
+        "The authorised tranche may exercise only existing read and proposal-only routes with local synthetic data; API/write/event-runtime/provider/PII/Stage 3B/deployment/release authority remains closed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

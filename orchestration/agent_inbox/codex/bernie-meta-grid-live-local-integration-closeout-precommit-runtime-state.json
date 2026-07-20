@@ -1,0 +1,73 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "bernie_meta_grid_live_local_integration_closeout_precommit_readback",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No worker-authored closeout is being committed."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external design provider was used."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Only the read-only Gemini veto receipt and extracted decision are included."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The closeout commit contains the accepted final evidence, exact cleanup record, independent veto, Sol acceptance, passing final receipts, handover update and deterministic cleanup assertion.",
+        "Twenty-four final focused and handover tests, Node syntax, focused Ruff and git diff checks pass.",
+        "The closeout makes no product behavior change beyond the two already tested and accepted implementation commits.",
+        "Protected refs remain unchanged and aligned pending the normal pull-request workflow."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
