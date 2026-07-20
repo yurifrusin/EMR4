@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "stage3a_final_acceptance_verified_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No worker was dispatched; the final browser and database run was serial, stateful, and acceptance-sensitive."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Future visual design is provider-neutral; no external model or subscription was used or selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external reviewer received acceptance, protected, browser, or database authority."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "All five mandatory sources remain restored; protected holdouts, historical Diary data, external corpora, providers, PII, production, deployment, release, voice, event runtime, and Stage 3B remain closed.",
+        "Yuri's corrected seven-scenario v2 export is bound at sha256:55146de6b7ad2743acf5ce9505230a39c5ff8a641f366d5018d2689282359ffb with no prompt or transcript text.",
+        "The non-intercepted visible Diary confirmation used fake provider and isolated database gp_pms_stage3a_3af7c33c_20260720_s3a06 and produced exactly one appointment, linked audit, completed command result, stored typed receipt, and reloaded Diary appointment.",
+        "Yuri's S3A-06 self-correction is preserved without changing the raw export and final comprehension is correct.",
+        "The final affected populations pass 73 functional and confirmation tests plus 60 Stage 3A, API Spine, handover, and Ariadne tests; Node, Ruff, compilation, browser-console, runtime-cleanup, and whitespace gates pass.",
+        "HEAD, master, handoff/current, origin/master, and origin/handoff/current remain aligned at 3af7c33c94183f728cb0c8af965815e4442e1e94 before protected integration."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

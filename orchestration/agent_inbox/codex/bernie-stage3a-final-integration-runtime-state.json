@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "integration",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "stage3a_final_integration_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No worker was dispatched for this serial acceptance closeout."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external design model was used; the future design direction is provider-neutral."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No independent provider review was required or assigned."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "All five mandatory sources are restored; the final closeout and Sol acceptance classify stage3a_pass without overriding a failed gate.",
+        "Protected holdouts, historical Diary material, provider calls, PII, production, deployment, release, Stage 3B, event runtime, voice, and the next meta-grid tranche remain closed.",
+        "The corrected v2 export is bound at sha256:55146de6b7ad2743acf5ce9505230a39c5ff8a641f366d5018d2689282359ffb and contains no prompt or transcript text.",
+        "The separate visible local confirmation produced exactly one appointment, linked audit, completed command result, stored typed receipt, and reloaded appointment against an isolated synthetic database.",
+        "The affected populations pass 73 functional/confirmation tests and 60 Stage 3A/API Spine/handover/Ariadne tests plus Node, Ruff, compilation, browser-console, runtime-cleanup, and whitespace gates.",
+        "HEAD, master, handoff/current, origin/master, and origin/handoff/current are aligned at 3af7c33c94183f728cb0c8af965815e4442e1e94 before branch integration; every worktree change is task-scoped."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

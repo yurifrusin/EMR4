@@ -11,7 +11,6 @@ import inspect
 
 from app.models.appointments import Appointment, AppointmentAuditLog, AppointmentStatus, BookingChannel
 from app.models.patients import Patient
-from app.models.tenancy import Practitioner
 from app.schemas.appointments import SlotCandidate, SlotSearchProposalOut
 import app.routers.appointments as appointments_router
 from tests.conftest import make_token
@@ -468,7 +467,12 @@ def test_supervised_booking_source_has_no_llm_confirmation_or_mutation_calls():
     assert "AiService" not in source
     assert "_get_default_provider" not in source
     assert "db.add" not in source
-    assert "db.commit" not in source
+    # Stage 2 deliberately persists bounded server-owned session transitions.
+    # The one commit is guarded by a durable session snapshot and does not own
+    # an appointment, confirmation, audit, or provider action.
+    assert source.count("db.commit()") == 1
+    assert "if server_session_snapshot is not None:" in source
+    assert "_append_bernie_route_outcome_event" in source
     assert "_write_audit" not in source
 
 

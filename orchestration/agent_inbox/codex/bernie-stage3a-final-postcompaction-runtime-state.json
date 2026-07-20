@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "stage3a_final_acceptance_postcompaction_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external worker is appropriate for this serial browser/database acceptance run."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude Fable and all provider-backed work remain closed."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external reviewer receives acceptance or database authority."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "AGENTS.md, the frozen Stage 3A plan, the formative correction review and acceptance, and the accepted local appointment-confirmation boundary were restored after compaction.",
+        "Protected holdouts v1-v10, historical Diary data, external corpora, providers, PII, production, deployment, release, event runtime, voice, and Stage 3B remain closed.",
+        "HEAD, master, handoff/current, origin/master, and origin/handoff/current are aligned at 3af7c33c94183f728cb0c8af965815e4442e1e94; only task-scoped final-acceptance receipt files are uncommitted.",
+        "Yuri's v2 export sha256:55146de6b7ad2743acf5ce9505230a39c5ff8a641f366d5018d2689282359ffb contains exactly seven approved structured observations and no prompt or transcript text.",
+        "Yuri's immediate post-export correction identifies S3A-06 as separate_safety_check_not_run_here; the raw export remains unchanged and the clarification is preserved as facilitator evidence.",
+        "The remaining in-scope action is the separately labelled real local visible S3A-06 confirmation against isolated PostgreSQL database gp_pms_stage3a_3af7c33c_20260720_s3a06."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

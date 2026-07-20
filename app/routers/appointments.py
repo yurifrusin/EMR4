@@ -6141,13 +6141,14 @@ def propose_bernie_supervised_booking(
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
 ):
-    """Compose deterministic Bernie booking proposal steps without side effects.
+    """Compose deterministic Bernie booking steps without appointment side effects.
 
     This wrapper is a typed intake/proposal surface for future Bernie UI/runtime
     callers. It normalizes a command, searches slots only when normalization is
     safe, and optionally converts a supervised selected candidate into existing
-    create-proposal evidence. It never confirms, creates, audits, calls LLMs, or
-    invokes provider integrations.
+    create-proposal evidence. It may persist bounded backend-owned session
+    transitions, but it never confirms, creates or audits an appointment, calls
+    LLMs, or invokes provider integrations.
     """
     # Capture the immutable reference date once; echoed in every response branch.
     request_reference_date = body.reference_date

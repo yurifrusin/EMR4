@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "stage3a_final_acceptance_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external worker is appropriate for this serial browser/database acceptance run."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Fable and all provider-backed work remain closed."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external reviewer receives acceptance or database authority."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "AGENTS.md, the frozen Stage 3A plan, the formative correction review/acceptance, and the appointment-first API Spine boundaries were restored.",
+        "Protected holdouts v1-v10, historical Diary data, external corpora, providers, PII, production, deployment, release, event runtime, voice, and Stage 3B remain closed.",
+        "HEAD, master, handoff/current, origin/master, and origin/handoff/current are clean and aligned at 3af7c33c94183f728cb0c8af965815e4442e1e94.",
+        "Yuri's v2 export sha256:55146de6b7ad2743acf5ce9505230a39c5ff8a641f366d5018d2689282359ffb contains exactly seven approved structured observations and no prompt/transcript text.",
+        "The remaining in-scope action is the separately labelled real local visible S3A-06 confirmation and exact isolated PostgreSQL readback."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -187,9 +187,10 @@ by itself.
 This portability is not a concession to a small screen. It is the intended
 consequence of projecting only what the current task needs: the receptionist
 can move through the practice while retaining direct visual control whenever
-it is useful. Yuri's current preference is to defer the full design work until
-an explicit future decision on a focused Claude Fable engagement and
-subscription; no model use or cost is authorized now.
+it is useful. The conceptual interaction language should now be developed
+in-house and remain provider-neutral. High-fidelity styling may be refined
+later; no named design model, subscription, provider use, or cost is a
+prerequisite or is authorized here.
 
 ### Provider intelligence — observed need only
 
@@ -234,9 +235,10 @@ Stage 3 should determine which deeper branch has evidence:
   capability.
 - **Modality gap:** run an explicit-activation voice feasibility tranche before
   any ambient design.
-- **Projection evidence:** freeze the dedicated fluid UX meta-grid design
-  tranche and its implementation handoff when the Claude Fable/cost decision is
-  explicitly opened.
+- **Projection evidence:** freeze a provider-neutral, in-house fluid UX
+  meta-grid concept tranche and its implementation handoff; defer any optional
+  external visual-design model and cost decision until the interaction grammar
+  is stable.
 - **Event-awareness evidence:** order a bounded committed-event producer,
   attention-filter, and authorised-consumer design/implementation tranche; the
   product principle is accepted, while runtime authority remains separate.

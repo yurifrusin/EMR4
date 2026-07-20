@@ -195,8 +195,10 @@ deferred boundary above remain paused.
   AI decision based on the exact observed capability.
 - If explicit voice adds value: a privacy-first activation and local-discard
   feasibility tranche before ambient listening.
-- A dedicated fluid UX meta-grid tranche when Yuri explicitly opens the Claude
-  Fable, subscription, synthetic design-context, and cost decisions.
+- A dedicated provider-neutral, in-house fluid UX meta-grid concept tranche,
+  with high-fidelity styling and any optional external design-model, synthetic
+  context, subscription, transmission, and cost decision deferred until the
+  interaction grammar is stable.
 - A bounded committed-event runtime tranche ordered by the observed event
   families and interruption patterns. Event awareness is already foundational;
   Stage 3 determines safe implementation shape and priority, not whether the
