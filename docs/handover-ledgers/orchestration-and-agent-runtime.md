@@ -71,3 +71,27 @@ candidate heads, decisions, recovery authority, and canonical unresolved-
 finding severity. Workers still cannot accept, integrate, or push protected
 refs. See `docs/ariadne-secure-sdlc-red-blue-protocol.md` and the 2026-07-17
 security closeout.
+
+## 2026-07-20 Ariadne Continuity Engine Increment 1
+
+Yuri authorised an incremental continuity layer so agentic branch exploration
+would not lose EMR4 product obligations. Increment 1 passes as repository-local,
+metadata-only tooling: a valid Codex plugin/skill, a standard-library CLI, JSON
+Schema, canonical directed graph and deterministic tests. It records evidence
+pointers and multi-parent lineage; inherits behavioural contracts through
+`builds_on`, `implements`, `validates`, `forked_from` and `synthesizes`; keeps
+harvests candidate-only; and globally preserves closed authority boundaries.
+
+The canonical six-node lineage keeps the active Reception One review connected
+to the Stage 1 combined appointment-intent foundation. It reports the functional
+client and live-local evaluation as historically accepted for their original
+scopes while returning an exact open contract for the not-yet-proved combined
+patient, practitioner, duration and bounded-time request. The tool's separate
+`protects` relationship does not inherit product contracts or displace the
+review baton.
+
+Increment 1 does not install the plugin, add task/thread hooks, create Git refs,
+import transcripts, call a provider or alter product code. A possible Increment
+2 read-only pre-plan continuity packet and the separate Reception One combined-
+scope proof both require fresh bounded decisions. See
+`docs/ariadne-continuity-engine-increment1-closeout.md`.

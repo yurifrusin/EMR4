@@ -1,0 +1,51 @@
+{
+  "authority_boundary": "local_metadata_tooling_only",
+  "canonical_audit": {
+    "status": "revision_required",
+    "expected_reasons": [
+      "contract_gap_open:functional-meta-grid-client:combined-patient-practitioner-time-duration-intent",
+      "contract_gap_open:meta-grid-live-local-integration:combined-patient-practitioner-time-duration-intent"
+    ],
+    "interpretation": "The graph is structurally valid and accurately reports a product-continuity obligation outside Increment 1; historical tranche acceptance remains unchanged."
+  },
+  "canonical_validation": {
+    "contract_count": 1,
+    "harvest_count": 0,
+    "node_count": 6,
+    "status": "passed"
+  },
+  "closed_boundaries_preserved": [
+    "api-change",
+    "appointment-write",
+    "autonomous-action",
+    "deployment",
+    "event-runtime",
+    "historical-diary",
+    "pii",
+    "production",
+    "protected-evidence",
+    "provider-call",
+    "release",
+    "stage-3b",
+    "voice"
+  ],
+  "plugin_validation": "passed",
+  "result": "continuity_increment1_pass",
+  "schema_version": "ariadne.continuity_increment_evidence.v1",
+  "skill_validation": "passed",
+  "static_checks": {
+    "python_compile": "passed",
+    "ruff": "passed"
+  },
+  "tests": {
+    "combined_ariadne_handover_population": {
+      "passed": 33,
+      "status": "passed"
+    },
+    "focused_continuity_population": {
+      "passed": 14,
+      "status": "passed"
+    }
+  },
+  "tooling_node_audit": "passed"
+}
