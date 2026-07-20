@@ -92,6 +92,10 @@ class Settings(BaseSettings):
     # Ordinary reception staff should never see raw scores or snake_case codes.
     bernie_interpreter_debug_disclosure: bool = False
 
+    # Default-off local Reception One committed-event proof. This does not
+    # authorize a production event runtime or any event beyond reschedule.
+    reception_one_committed_event_runtime_enabled: bool = False
+
     # Raw appointment compatibility endpoint guard.
     #   "audit" - attach raw_compat_* audit evidence tags only.
     #   "header" - attach raw_compat_* audit evidence tags AND set

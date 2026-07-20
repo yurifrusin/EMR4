@@ -4,6 +4,9 @@
   const CONTRACT_VERSION = "bernie.meta-grid-projection.v1";
   const MAX_PATIENT_HORIZON_DAYS = 730;
   const DEFAULT_DURATION_MINUTES = 30;
+  const EVENT_POLL_INTERVAL_MS = 1800;
+  const EVENT_ATTENTION_LIMIT = 100;
+  const EVENT_SNOOZE_MS = 5 * 60 * 1000;
   const bridge = window.EMR4DiaryMetaGridBridge;
 
   if (!bridge) {
@@ -31,6 +34,12 @@
     stateHeading: document.getElementById("meta-grid-state-heading"),
     stateExplanation: document.getElementById("meta-grid-state-explanation"),
     announcer: document.getElementById("meta-grid-announcer"),
+    eventCue: document.getElementById("meta-grid-event-cue"),
+    eventCueSummary: document.getElementById("meta-grid-event-cue-summary"),
+    eventShow: document.getElementById("meta-grid-event-show"),
+    eventDismiss: document.getElementById("meta-grid-event-dismiss"),
+    eventSnooze: document.getElementById("meta-grid-event-snooze"),
+    eventMute: document.getElementById("meta-grid-event-mute"),
     canvas: document.getElementById("meta-grid-canvas"),
     content: document.getElementById("meta-grid-content"),
     actions: document.getElementById("meta-grid-actions"),
@@ -56,7 +65,18 @@
     interrupted: false,
     comparisonIndex: 0,
     isOpen: false,
-    requestSequence: 0
+    requestSequence: 0,
+    eventRuntime: {
+      cursor: null,
+      enabled: null,
+      timer: null,
+      inFlight: false,
+      deliveredEventIds: new Set(),
+      aggregateRevisions: new Map(),
+      snoozedUntil: 0,
+      muted: false,
+      cue: null
+    }
   };
 
   const stateCopy = {
@@ -422,6 +442,7 @@
       state.selectedItem = null;
       state.proposalResult = null;
       state.comparisonIndex = 0;
+      state.eventRuntime.cue = null;
     } else if (pushCurrent && state.current) {
       state.trail.push(state.current);
     }
@@ -1170,6 +1191,223 @@
     }
   }
 
+  function rememberBoundedSet(set, value) {
+    set.add(value);
+    while (set.size > EVENT_ATTENTION_LIMIT) {
+      set.delete(set.values().next().value);
+    }
+  }
+
+  function rememberBoundedRevision(aggregateId, revision) {
+    const revisions = state.eventRuntime.aggregateRevisions;
+    revisions.delete(aggregateId);
+    revisions.set(aggregateId, revision);
+    while (revisions.size > EVENT_ATTENTION_LIMIT) {
+      revisions.delete(revisions.keys().next().value);
+    }
+  }
+
+  function projectionAppointment(projection, appointmentId) {
+    return projection?.items?.find(item => (
+      item.kind === "appointment" && String(item.id) === String(appointmentId)
+    )) || null;
+  }
+
+  async function freshProjectionForCommittedEvent(current) {
+    const context = {
+      operation: "reconcile",
+      trigger: "committed_event",
+      reason: "Fresh scoped read after a committed appointment-time change",
+      changedDimensions: ["appointment_time", "freshness"],
+      rootIntentId: current.root_intent_id,
+      parentProjectionId: current.projection_id,
+      rootRequest: current.root_request
+    };
+    if (current.family === "patient_timeline") {
+      const patient = patientForProjection(current);
+      if (!patient) return null;
+      return buildPatientTimeline(patient, current.root_request, {
+        dateFrom: current.scope.date_from,
+        dateTo: current.scope.date_to,
+        ...context
+      });
+    }
+    if (current.family === "focused_schedule_lane") {
+      const practitioner = (snapshot().practitioners || [])
+        .find(row => row.id === current.scope.practitioner_ids?.[0]);
+      if (!practitioner) return null;
+      return buildFocused(practitioner, current.root_request, {
+        date: current.scope.date_from,
+        window: {
+          valid: true,
+          from: current.scope.time_from || "08:00",
+          to: current.scope.time_to || "17:00",
+          changed: ["freshness"]
+        },
+        ...context
+      });
+    }
+    return null;
+  }
+
+  function validCommittedEvent(event) {
+    if (!event || event.event_type !== "diary.appointment_rescheduled") return false;
+    if (event.schema_version !== "diary.appointment_rescheduled.v1") return false;
+    if (event.source_system !== "emr4-diary") return false;
+    if (!event.event_id || !event.aggregate_id || !Number.isInteger(event.aggregate_revision)) return false;
+    if (event.aggregate_revision < 1) return false;
+    if (String(event.payload?.appointment_id || "") !== String(event.aggregate_id)) return false;
+    return Array.isArray(event.payload?.reason_codes) &&
+      event.payload.reason_codes.length === 1 &&
+      event.payload.reason_codes[0] === "appointment_time_changed";
+  }
+
+  async function consumeCommittedEvent(event) {
+    if (!validCommittedEvent(event)) return;
+    const eventId = String(event.event_id);
+    const aggregateId = String(event.aggregate_id);
+    if (state.eventRuntime.deliveredEventIds.has(eventId)) return;
+    const previousRevision = state.eventRuntime.aggregateRevisions.get(aggregateId) || 0;
+    if (event.aggregate_revision <= previousRevision) {
+      rememberBoundedSet(state.eventRuntime.deliveredEventIds, eventId);
+      return;
+    }
+    rememberBoundedSet(state.eventRuntime.deliveredEventIds, eventId);
+    rememberBoundedRevision(aggregateId, event.aggregate_revision);
+
+    const current = state.current;
+    const previousItem = projectionAppointment(current, aggregateId);
+    if (!state.isOpen || !previousItem) return;
+
+    let freshAppointment;
+    try {
+      freshAppointment = await bridge.readAppointment(aggregateId);
+    } catch (_) {
+      return;
+    }
+    if (!freshAppointment || String(freshAppointment.id) !== aggregateId) return;
+
+    const next = await freshProjectionForCommittedEvent(current);
+    if (!next) return;
+    const currentItem = projectionAppointment(next, aggregateId);
+    if (!currentItem) return;
+    if (
+      previousItem.starts_at === currentItem.starts_at &&
+      previousItem.ends_at === currentItem.ends_at
+    ) return;
+
+    state.interrupted = false;
+    setProjection(next, { newRoot: false, pushCurrent: false, focusCanvas: false });
+    if (
+      state.eventRuntime.muted ||
+      state.eventRuntime.snoozedUntil > Date.now()
+    ) return;
+
+    const existingCue = state.eventRuntime.cue;
+    state.eventRuntime.cue = {
+      eventId,
+      aggregateId,
+      oldWindow: previousItem.display,
+      newWindow: currentItem.display,
+      coalescedCount: existingCue ? existingCue.coalescedCount + 1 : 1
+    };
+    renderEventCue();
+  }
+
+  function stopEventPolling() {
+    if (state.eventRuntime.timer !== null) {
+      clearTimeout(state.eventRuntime.timer);
+      state.eventRuntime.timer = null;
+    }
+  }
+
+  function scheduleEventPoll(delay = EVENT_POLL_INTERVAL_MS) {
+    stopEventPolling();
+    if (
+      !state.isOpen ||
+      document.hidden ||
+      state.eventRuntime.enabled === false
+    ) return;
+    state.eventRuntime.timer = setTimeout(pollCommittedEvents, delay);
+  }
+
+  async function pollCommittedEvents() {
+    state.eventRuntime.timer = null;
+    if (
+      state.eventRuntime.inFlight ||
+      !state.isOpen ||
+      document.hidden ||
+      state.eventRuntime.enabled === false
+    ) return;
+    state.eventRuntime.inFlight = true;
+    try {
+      const feed = await bridge.readCommittedEvents(state.eventRuntime.cursor, 10);
+      state.eventRuntime.enabled = feed?.enabled === true;
+      if (!state.eventRuntime.enabled) return;
+      if (typeof feed.cursor === "string" && feed.cursor) {
+        state.eventRuntime.cursor = feed.cursor;
+      }
+      for (const event of Array.isArray(feed.events) ? feed.events : []) {
+        await consumeCommittedEvent(event);
+      }
+    } catch (_) {
+      // A failed signal read never creates a notice from stale or partial data.
+    } finally {
+      state.eventRuntime.inFlight = false;
+      scheduleEventPoll();
+    }
+  }
+
+  function startEventPolling() {
+    if (state.eventRuntime.enabled === false) return;
+    scheduleEventPoll(0);
+  }
+
+  function renderEventCue() {
+    const cue = state.eventRuntime.cue;
+    elements.eventCue?.classList.toggle("hidden", !cue);
+    if (!cue) return;
+    if (elements.eventCueSummary) {
+      elements.eventCueSummary.textContent = state.private
+        ? "Time and appointment details are hidden while privacy mode is on."
+        : `${cue.oldWindow} changed to ${cue.newWindow}. The current projection now shows the committed time.`;
+    }
+    if (elements.eventShow) elements.eventShow.disabled = state.private;
+    if (elements.announcer) {
+      elements.announcer.textContent = "An appointment time in the current view changed. Reception One refreshed the view from the current Diary.";
+    }
+  }
+
+  function dismissEventCue({ restoreFocus = true } = {}) {
+    if (!state.eventRuntime.cue) return false;
+    state.eventRuntime.cue = null;
+    renderEventCue();
+    if (restoreFocus) elements.request?.focus();
+    return true;
+  }
+
+  function showChangedAppointment() {
+    const cue = state.eventRuntime.cue;
+    if (!cue || state.private) return;
+    const row = [...elements.content.querySelectorAll("[data-appointment-id]")]
+      .find(item => item.dataset.appointmentId === cue.aggregateId);
+    if (!row) return;
+    row.classList.add("meta-grid-event-target");
+    row.scrollIntoView({ block: "center", inline: "nearest" });
+    row.focus({ preventScroll: true });
+    setTimeout(() => row.classList.remove("meta-grid-event-target"), 2200);
+  }
+
+  function snoozeEventCue() {
+    state.eventRuntime.snoozedUntil = Date.now() + EVENT_SNOOZE_MS;
+    dismissEventCue();
+  }
+
+  function muteEventCue() {
+    state.eventRuntime.muted = true;
+    dismissEventCue();
+  }
+
   function goBack() {
     const previous = state.trail.pop();
     if (!previous) return;
@@ -1192,11 +1430,14 @@
     } else {
       render();
     }
+    startEventPolling();
     setTimeout(() => elements.request?.focus(), 0);
   }
 
   function closeMetaGrid() {
     state.isOpen = false;
+    stopEventPolling();
+    state.eventRuntime.cue = null;
     state.selectedItem = null;
     state.proposalResult = null;
     if (state.current && ["selection_only", "proposal_not_committed"].includes(state.current.state)) {
@@ -1222,6 +1463,7 @@
       const copy = stateCopy[state.current.state] || stateCopy.answer;
       elements.announcer.textContent = `${copy.label}. ${state.current.scope_summary}`;
     }
+    renderEventCue();
   }
 
   function markInterrupted() {
@@ -1276,6 +1518,10 @@
     }
     projection.items.forEach(item => {
       const row = createElement("li", className === "meta-grid-timeline" ? "meta-grid-timeline-item" : "meta-grid-item");
+      if (item.kind === "appointment" && item.id) {
+        row.dataset.appointmentId = String(item.id);
+        row.tabIndex = -1;
+      }
       if (item.sensitive) row.classList.add("meta-grid-sensitive");
       const heading = createElement("h3", "", item.date && projection.family === "patient_timeline"
         ? `${dateLabel(item.date)} · ${item.display}`
@@ -1485,6 +1731,7 @@
     }
 
     renderActions(projection);
+    renderEventCue();
     elements.evidenceFamily.textContent = projection.family;
     elements.evidenceTrigger.textContent = projection.transition.trigger;
     elements.evidenceReason.textContent = projection.transition.reason;
@@ -1545,9 +1792,13 @@
       }
     });
     document.addEventListener("keydown", event => {
-      if (event.key !== "Escape" || !closeExplanation()) return;
-      event.preventDefault();
+      if (event.key !== "Escape") return;
+      if (dismissEventCue() || closeExplanation()) event.preventDefault();
     });
+    elements.eventShow?.addEventListener("click", showChangedAppointment);
+    elements.eventDismiss?.addEventListener("click", () => dismissEventCue());
+    elements.eventSnooze?.addEventListener("click", snoozeEventCue);
+    elements.eventMute?.addEventListener("click", muteEventCue);
     elements.request.addEventListener("focus", () => {
       updateVisualViewport();
       setTimeout(() => elements.request.scrollIntoView({ block: "nearest", inline: "nearest" }), 0);
@@ -1557,7 +1808,12 @@
     });
     window.addEventListener("blur", markInterrupted);
     document.addEventListener("visibilitychange", () => {
-      if (document.hidden) markInterrupted();
+      if (document.hidden) {
+        stopEventPolling();
+        markInterrupted();
+      } else {
+        startEventPolling();
+      }
     });
     window.addEventListener("emr4:diary-read-complete", () => {
       if (state.current?.freshness?.stale) return;

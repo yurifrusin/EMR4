@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from app.graphql.router import graphql_router
 from app.middleware.error_handler import ErrorHandlerMiddleware
-from app.routers import auth, consultation, search, patients, clinical, letters, appointments, diary, bernie_dev, practice
+from app.routers import auth, consultation, search, patients, clinical, letters, appointments, diary, diary_events, bernie_dev, practice
 from app.config import settings
 
 app = FastAPI(title="EMR4 Centaur API", version="0.1.0")
@@ -31,6 +31,7 @@ app.include_router(consultation.router)
 app.include_router(search.router)
 app.include_router(appointments.router)
 app.include_router(diary.router)
+app.include_router(diary_events.router)
 app.include_router(bernie_dev.router)
 app.include_router(practice.router)
 app.include_router(graphql_router)

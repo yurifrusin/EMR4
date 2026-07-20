@@ -1,0 +1,38 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "reception_one_committed_event_vertical_preplan",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Worker allocation remains undecided until Sol freezes the event, transaction, consumer and evidence contract."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Unselected fallback."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No external design model or provider is in scope."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["A fresh independent veto is reserved for the completed candidate and sanitized evidence."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": [
+      "The five-source rehydration receipt passed before this pre-plan continuation.",
+      "The accepted sequence is authorised command, PostgreSQL commit with transactional event persistence, authenticated practice-scoped event read, deterministic relevance and deduplication, fresh scoped Diary read, and a quiet non-authoritative Reception One cue.",
+      "The plan will freeze one appointment-reschedule producer and one local polling consumer; it will not open other event families, GraphQL mutations/subscriptions, external brokers, background workers, providers, PII, Stage 3B, deployment, production, release, voice or autonomous action.",
+      "The existing signed update confirmation remains the only mutation authority, and an event cannot confirm or mutate.",
+      "The task worktree is clean apart from the two passed rehydration artifacts and this pre-plan state; protected refs remain aligned at be5e01d00b23ef43f7aab8b30f6dbdfa6e858c45."
+    ]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is assigned."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

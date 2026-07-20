@@ -352,14 +352,28 @@ class TestBernieCommittedEventAwarenessDesign:
         assert len(agents) == 1
         return data, agents[0]
 
-    def test_proactive_diary_runtime_remains_blocked(self):
+    def test_broader_proactive_diary_runtime_remains_blocked_around_exact_local_exception(self):
         events, _ = self._diary_family()
         charters, bernie = self._bernie_charter()
 
         assert events["source_safety"]["proactive_diary_delivery_runtime"] == "blocked"
-        assert events["blocked_gates"]["proactive_diary_delivery_runtime"] == "blocked"
+        event_exception = events["source_safety"]["bounded_local_runtime_exception"]
+        assert event_exception["event_type"] == "diary.appointment_rescheduled"
+        assert event_exception["feature_default"] == "disabled"
+        assert event_exception["broader_runtime_wiring"] == "blocked"
+        assert (
+            events["blocked_gates"]["proactive_diary_delivery_runtime"]
+            == "blocked_except_reception_one_local_reschedule"
+        )
         assert charters["source_safety"]["proactive_diary_delivery_runtime"] == "blocked"
-        assert bernie["blocked_gates"]["proactive_diary_delivery_runtime"] == "blocked"
+        charter_exception = charters["source_safety"]["bounded_local_runtime_exception"]
+        assert charter_exception["event_type"] == "diary.appointment_rescheduled"
+        assert charter_exception["feature_default"] == "disabled"
+        assert charter_exception["broader_proactive_runtime"] == "blocked"
+        assert (
+            bernie["blocked_gates"]["proactive_diary_delivery_runtime"]
+            == "blocked_except_local_reschedule_exception"
+        )
 
     def test_diary_events_are_committed_typed_signals_not_commands(self):
         _, diary = self._diary_family()

@@ -6371,6 +6371,36 @@ async function metaGridReadAppointments(filters = {}) {
   return (Array.isArray(rows) ? rows : []).map(appt => metaGridAppointmentView(appt));
 }
 
+async function metaGridReadAppointment(appointmentId) {
+  const normalized = String(appointmentId || "").trim();
+  if (!normalized) throw new Error("Appointment id is required for a fresh read.");
+  if (isSmokeMode()) {
+    const appointment = metaGridSmokeAppointments().find(item => item.id === normalized);
+    if (!appointment) throw new Error("Appointment is no longer available in this scope.");
+    return appointment;
+  }
+  const response = await apiFetch(`/appointments/${encodeURIComponent(normalized)}`);
+  if (!response.ok) throw new Error(await apiErrorMessage(response, "Appointment read"));
+  return metaGridAppointmentView(await response.json());
+}
+
+async function metaGridReadCommittedEvents(cursor = null, limit = 10) {
+  if (isSmokeMode()) {
+    return {
+      schema_version: "diary.committed_event_feed.v1",
+      enabled: false,
+      baseline_established: false,
+      cursor: null,
+      events: []
+    };
+  }
+  const params = new URLSearchParams({ limit: String(Math.max(1, Math.min(20, Number(limit) || 10))) });
+  if (cursor) params.set("cursor", cursor);
+  const response = await apiFetch(`/diary/events/committed?${params.toString()}`);
+  if (!response.ok) throw new Error(await apiErrorMessage(response, "Diary change read"));
+  return response.json();
+}
+
 async function metaGridSearchPatients(query) {
   const normalized = String(query || "").trim();
   if (!normalized) return [];
@@ -6568,6 +6598,8 @@ window.EMR4DiaryMetaGridBridge = Object.freeze({
     };
   },
   readAppointments: metaGridReadAppointments,
+  readAppointment: metaGridReadAppointment,
+  readCommittedEvents: metaGridReadCommittedEvents,
   searchPatients: metaGridSearchPatients,
   readAvailability: metaGridReadAvailability,
   prepareProposal: metaGridPrepareProposal,

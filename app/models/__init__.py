@@ -11,6 +11,7 @@ from app.models.appointments import (
     AppointmentCommandIdempotency,
 )
 from app.models.bernie_sessions import BernieBookingSession, BernieSessionEventRow
+from app.models.diary_events import DiaryCommittedEvent
 from app.models.results import (
     TestRequest, Result, ResultItem, Referral, Reminder, ScannedDocument,
 )
@@ -31,6 +32,7 @@ __all__ = [
     "Appointment", "AppointmentType", "PractitionerSchedule", "ScheduleOverride",
     "AppointmentCommandIdempotency",
     "BernieBookingSession", "BernieSessionEventRow",
+    "DiaryCommittedEvent",
     "TestRequest", "Result", "ResultItem", "Referral", "Reminder", "ScannedDocument",
     "MbsClaim", "Invoice", "MbsDirectory", "SnomedDirectory",
     "DiaryTemplate", "DiaryColumn", "DiaryBreak", "Room", "DiaryRoster",

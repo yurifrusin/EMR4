@@ -126,6 +126,7 @@ from app.services.appointment_idempotency import (
     claim_appointment_command,
     complete_appointment_command,
 )
+from app.services.diary_committed_events import record_appointment_rescheduled_event
 from app.services.practice_knowledge import (
     InMemoryPracticeKnowledgeRetriever,
     PracticeKnowledgeQuery,
@@ -1601,17 +1602,39 @@ def confirm_update_proposal_route(
     if mapped_decision is not None:
         return mapped_decision
 
+    # Serialize signed confirmations for the same appointment before freshness
+    # revalidation so aggregate revisions remain meaningful across distinct keys.
+    command_appointment_id = body.update_proposal.command.appointment_id
+    (
+        db.query(Appointment.id)
+        .filter(
+            Appointment.id == command_appointment_id,
+            Appointment.practice_id == current_user.practice_id,
+        )
+        .with_for_update()
+        .one_or_none()
+    )
+
     response_body = confirm_update_proposal(
         body,
         db,
         current_user,
         raw_idempotency_key=normalized_idempotency_key,
+        command_id=decision.record.id,
         commit=False,
     )
     if response_body.safe is not True or response_body.appointment is None:
         db.rollback()
         return response_body
 
+    update_audit = (
+        db.query(AppointmentAuditLog)
+        .filter(
+            AppointmentAuditLog.practice_id == current_user.practice_id,
+            AppointmentAuditLog.command_id == decision.record.id,
+        )
+        .one()
+    )
     complete_appointment_command(
         db,
         decision.record,
@@ -1619,6 +1642,7 @@ def confirm_update_proposal_route(
         response_body=response_body.model_dump(mode="json"),
         result_kind="confirmed_write",
         target_appointment_id=response_body.appointment.id,
+        audit_log_id=update_audit.id,
     )
     db.commit()
     return response_body
@@ -2119,6 +2143,7 @@ def confirm_update_proposal(
     current_user: User,
     *,
     raw_idempotency_key: str,
+    command_id: Optional[uuid.UUID] = None,
     commit: bool = True,
 ):
     """Confirm a backend-prepared Bernie update proposal with signed evidence."""
@@ -2262,6 +2287,7 @@ def confirm_update_proposal(
         db,
         current_user,
         audit_evidence=audit_evidence,
+        command_id=command_id,
         commit=commit,
     )
     return AppointmentConfirmUpdateProposalOut(
@@ -4391,12 +4417,15 @@ def _apply_appointment_update(
     current_user: User,
     *,
     audit_evidence: Optional[list[str]] = None,
+    command_id: Optional[uuid.UUID] = None,
     commit: bool = True,
 ) -> AppointmentOut:
     practice_id = current_user.practice_id
     practice_tz = _practice_zoneinfo(db, practice_id)
     appt = _get_appointment(appointment_id, practice_id, db)
     status_before_update = appt.status
+    start_before_update = appt.start_time
+    duration_before_update = appt.duration_minutes
     values = body.model_dump(exclude_unset=True, exclude={"confirmed_warnings"})
 
     practitioner_id = values.get("practitioner_id", appt.practitioner_id)
@@ -4470,7 +4499,7 @@ def _apply_appointment_update(
 
     for field, value in values.items():
         setattr(appt, field, value)
-    _write_audit(
+    audit = _write_audit(
         db,
         practice_id=practice_id,
         appointment_id=appointment_id,
@@ -4479,7 +4508,24 @@ def _apply_appointment_update(
         status_before=status_before_update,
         confirmed_warnings=body.confirmed_warnings,
         audit_evidence=audit_evidence,
+        command_id=command_id,
     )
+    temporal_change = (
+        appt.start_time != start_before_update
+        or appt.duration_minutes != duration_before_update
+    )
+    if (
+        settings.reception_one_committed_event_runtime_enabled
+        and command_id is not None
+        and temporal_change
+    ):
+        record_appointment_rescheduled_event(
+            db,
+            appointment=appt,
+            audit=audit,
+            actor=current_user,
+            command_id=command_id,
+        )
     if commit:
         db.commit()
     else:

@@ -1,0 +1,38 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "execute",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "reception_one_committed_event_vertical_preimplementation",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No worker dispatched: the migration, transaction, feed, client reconciliation, and one disposable database form a tightly coupled serial vertical."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Unselected fallback."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No external design model or provider is in scope."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["A fresh independent Gemini veto remains reserved for the completed candidate and sanitized evidence."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": [
+      "The five-source rehydration, pre-plan receipt, frozen plan, Sol plan review, and threat-model delta are complete before implementation.",
+      "Yuri authorized the bounded committed-event changes, limited to diary.appointment_rescheduled from the existing signed update-confirm command.",
+      "The event is patient-free, append-only, practice-scoped, atomic with appointment/audit/idempotency state, default-disabled, and used only to trigger fresh authorized reads.",
+      "No provider, PII, protected or historical evidence, Stage 3B, voice, GraphQL mutation/subscription, external broker, background worker, new command, production, deployment, or release surface is open.",
+      "The task worktree remains isolated on codex/reception-one-committed-event-vertical at protected source be5e01d00b23ef43f7aab8b30f6dbdfa6e858c45."
+    ]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is assigned."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

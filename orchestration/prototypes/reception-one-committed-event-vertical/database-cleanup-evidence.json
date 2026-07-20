@@ -1,0 +1,9 @@
+{
+  "cleanup": "dropped_exact_verified_disposable_database",
+  "database": "gp_pms_reception_one_event_runtime_5e2c91a7_20260721",
+  "ownership_marker_verified": true,
+  "probe_role_removed": true,
+  "recoverable": false,
+  "schema_version": "reception-one.committed-event.database-cleanup.v1",
+  "scope": "authored_synthetic_disposable_database_and_exact_probe_role_only"
+}
