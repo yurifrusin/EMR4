@@ -61,3 +61,21 @@ The migration profile creates only a generated database name matching
 uses the configured PostgreSQL server without printing credentials, and removes
 the database in a `finally` path. It never downgrades the configured development
 database.
+
+## Deferred Office bootstrap maintenance
+
+The accepted live-local meta-grid tranche introduced
+`docs/diary/office-bootstrap.js`. Off loopback it uses `document.write` with a
+fixed, source-controlled Office.js URL to preserve parser-time loading before
+the deferred Diary scripts. GitHub CodeQL raised an informational eval-like-call
+review note; the reviewed call has no user-controlled input, the substantive
+CodeQL gate passes, and the thread was resolved without suppressing a security
+finding.
+
+Leave the current loader unchanged until a bounded Office-bootstrap maintenance
+tranche. That tranche should replace the call with a deterministic readiness
+promise and ordered script loading, then verify normal Office-hosted loading,
+loopback standalone mode, network/load failure, the full Diary smoke population,
+and responsive/keyboard paths. Prefer completing it before deployment/release
+hardening or the next material Office bootstrap change. This maintenance note
+grants no deployment or release authority.
