@@ -15,6 +15,7 @@ HARNESS = ROOT / "scripts" / "bernie_meta_grid_live_local_harness.py"
 RUNNER = ROOT / "scripts" / "bernie_meta_grid_live_local_acceptance.py"
 EVIDENCE_DIR = ROOT / "orchestration" / "prototypes" / "bernie-meta-grid-live-local-integration"
 EVIDENCE = EVIDENCE_DIR / "browser-acceptance-evidence.json"
+CLEANUP_EVIDENCE = EVIDENCE_DIR / "database-cleanup-evidence.json"
 
 
 def _read(path: Path) -> str:
@@ -91,6 +92,19 @@ def test_playwright_runner_has_no_route_interception_or_closed_command_activatio
     assert "markInterrupted()" not in source
     assert '"/api/v1/appointments/bernie/sessions' not in source
     assert '"/api/v1/appointments/proposals/create/confirm' not in source
+
+
+def test_disposable_database_cleanup_is_exact_and_marker_verified():
+    cleanup = json.loads(_read(CLEANUP_EVIDENCE))
+    assert cleanup == {
+        "schema_version": "bernie.meta-grid-live-local.database-cleanup.v1",
+        "recorded_at": "2026-07-20T17:06:15+10:00",
+        "database": "gp_pms_meta_grid_live_local_7f3c2a91_20260720",
+        "ownership_marker_verified": True,
+        "cleanup": "dropped_exact_verified_disposable_database",
+        "recoverable": False,
+        "scope": "authored_synthetic_disposable_database_only",
+    }
 
 
 def test_live_local_browser_evidence_is_complete_hashed_and_zero_write():

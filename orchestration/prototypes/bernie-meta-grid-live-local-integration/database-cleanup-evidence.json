@@ -1,0 +1,9 @@
+{
+  "schema_version": "bernie.meta-grid-live-local.database-cleanup.v1",
+  "recorded_at": "2026-07-20T17:06:15+10:00",
+  "database": "gp_pms_meta_grid_live_local_7f3c2a91_20260720",
+  "ownership_marker_verified": true,
+  "cleanup": "dropped_exact_verified_disposable_database",
+  "recoverable": false,
+  "scope": "authored_synthetic_disposable_database_only"
+}
