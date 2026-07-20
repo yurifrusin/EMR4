@@ -417,6 +417,14 @@ system identity and its unity; meta-grid names the interaction language that
 can refigure that one Diary around a practitioner's, patient's, time window's,
 availability search's or proposal review's immediate purpose.
 
+EMR4 remains internal programme/version nomenclature. Yuri's candidate public
+hierarchy uses **electronic medical records** as the explanatory category line,
+**RECEPTION ONE** as the distinctive system wordmark, **EMR** as the concise
+umbrella, and **v4** as quiet technical/version information. A rough black and
+white serif reference places lower-case `electronic medical records` above
+large upper-case `RECEPTION ONE™`. This is review material, not accepted visual
+identity or public trademark use.
+
 ### Product principle
 
 `Many views. One diary.`

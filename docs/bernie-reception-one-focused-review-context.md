@@ -26,6 +26,24 @@ No source file, user-facing label, repository identifier or public brand is
 renamed by this note. Final naming, visual identity and trademark action remain
 later decisions.
 
+### Candidate public hierarchy
+
+EMR4 is also internal programme/version nomenclature. The candidate public
+hierarchy is:
+
+1. **electronic medical records** — a plain-English category line that explains
+   `EMR` for people who do not already know the abbreviation;
+2. **RECEPTION ONE** — the distinctive user-facing system wordmark;
+3. **EMR** — the concise umbrella identity; and
+4. **v4** — quiet technical/version information for people who need it, rather
+   than a required part of the public name.
+
+Yuri's rough visual reference places a restrained lower-case serif
+`electronic medical records` line above a much larger upper-case
+`RECEPTION ONE™` wordmark in black on white. The contrast feels institutional,
+calm and established rather than conventionally "software-branded". It is a
+focused-review direction only, not accepted typography, layout or artwork.
+
 ## 2. Product meaning
 
 The intended invariant is **many views, one Diary**.
@@ -45,6 +63,11 @@ Candidate explanatory language for the focused review includes:
 - `One live diary, shaped to the work in front of you.`
 
 These are review prompts, not accepted interface copy.
+
+The brand hierarchy and the projection vocabulary should remain distinct but
+coherent: the public may enter through electronic medical records / Reception
+One, while meta-grid remains available to explain the interaction model and to
+name the underlying design/engineering system.
 
 ## 3. Historical provenance
 
@@ -102,6 +125,13 @@ protect against another party's trademark; see
 
 This note authorises no application, professional service, fee, domain purchase
 or public trademark claim.
+
+IP Australia states that `™` may be used to signal a claimed registered or
+unregistered trade mark, but it does not establish that rights exist or that
+the mark is registrable or enforceable. `®` may be used only after registration.
+The candidate wordmark may therefore explore `RECEPTION ONE™` during private
+review, but public adoption should follow the clearance decision above. See
+[IP Australia's symbol guidance](https://ipaustralia.gov.au/trade-marks/what-are-trade-marks).
 
 ## 6. Boundaries preserved
 
