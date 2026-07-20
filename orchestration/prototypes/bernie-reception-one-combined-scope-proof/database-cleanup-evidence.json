@@ -1,0 +1,8 @@
+{
+  "cleanup": "dropped_exact_verified_disposable_database",
+  "database": "gp_pms_reception_one_combined_scope_9c41b7e2_20260721",
+  "ownership_marker_verified": true,
+  "recoverable": false,
+  "schema_version": "bernie.reception-one-combined-scope.database-cleanup.v1",
+  "scope": "authored_synthetic_disposable_database_only"
+}

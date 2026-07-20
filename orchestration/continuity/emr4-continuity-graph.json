@@ -37,116 +37,80 @@
       "voice"
     ]
   },
-  "graph_revision": 4,
+  "graph_revision": 10,
   "harvests": [],
   "nodes": [
     {
       "authority": {
         "authorized_openings": [],
         "notes": [
-          "Historical Stage 1 authority is recorded as evidence only; this graph cannot exercise or broaden it."
+          "The engine records metadata and evidence pointers only.",
+          "It cannot accept work, grant authority, move the baton, spawn agents, mutate product data or alter protected refs."
         ]
       },
       "claim_scope": [
-        "Accepted local synthetic provider-free supervised booking foundation.",
-        "Combined patient, practitioner, time and duration intent precedes explicit confirmation."
+        "Local developer continuity tooling and canonical metadata graph only.",
+        "Increment 1 validates lineage, inherited contracts, candidate harvests and branch dispositions."
       ],
       "contract_evidence": [],
       "coordinates": {
-        "git_ref": "master",
-        "source_head": "dcb4f9d54ce63b8dbfad882979a32292bf8b6289",
+        "git_ref": "codex/ariadne-continuity-engine-increment-1",
+        "source_head": "152e917a3ab32006438dab9c0169d77256e18d63",
         "thread_id": null,
-        "worktree_role": "historical"
+        "worktree_role": "task"
       },
-      "created_at": "2026-07-18T00:00:00Z",
+      "created_at": "2026-07-20T09:00:00Z",
       "decisions": [
         {
-          "id": "stage1-combined-intent-accepted",
-          "source": "orchestration/agent_inbox/codex/bernie-stage1-tranche-d-extra-high-sol-acceptance.md",
+          "id": "increment-one-scope-frozen",
+          "source": "docs/ariadne-continuity-engine-increment1-plan.md",
           "status": "accepted",
-          "summary": "Preserve the combined-scope appointment-intent interaction as an inherited product contract."
+          "summary": "Build a bounded local metadata continuity engine before considering orchestration hooks or visual branch maps."
+        },
+        {
+          "id": "increment-one-accepted",
+          "source": "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the bounded local metadata engine while preserving the two reported combined-scope product gaps."
         }
       ],
       "evidence": {
         "acceptances": [
-          "orchestration/agent_inbox/codex/bernie-stage1-tranche-d-extra-high-sol-acceptance.md"
-        ],
-        "closeouts": [],
-        "findings": [],
-        "plans": [
-          "docs/bernie-stage1-provider-free-supervised-booking-acceptance-plan.md"
-        ],
-        "receipts": [],
-        "tests": [
-          "docs/bernie-stage1-r2-execution-evidence.json",
-          "tests/test_bernie_sprint98_release_gates.py"
-        ]
-      },
-      "id": "stage1-combined-intent-foundation",
-      "kind": "foundation",
-      "relationships": [],
-      "status": "accepted",
-      "title": "Stage 1 combined appointment-intent foundation",
-      "unresolved_gates": [],
-      "updated_at": "2026-07-18T00:00:00Z"
-    },
-    {
-      "authority": {
-        "authorized_openings": [],
-        "notes": [
-          "Concept evidence is non-authoritative and provider-neutral."
-        ]
-      },
-      "claim_scope": [
-        "Accepted typed, reversible, non-authoritative meta-grid projection grammar.",
-        "No functional client or write authority is claimed."
-      ],
-      "contract_evidence": [],
-      "coordinates": {
-        "git_ref": "master",
-        "source_head": "7a037ce5a96a09fd0d7a3671498fcef12d0d0e32",
-        "thread_id": null,
-        "worktree_role": "historical"
-      },
-      "created_at": "2026-07-20T01:00:00Z",
-      "decisions": [
-        {
-          "id": "meta-grid-concept-accepted",
-          "source": "orchestration/agent_inbox/codex/bernie-meta-grid-concept-sol-acceptance.md",
-          "status": "accepted",
-          "summary": "Use the accepted projection grammar as the functional client foundation."
-        }
-      ],
-      "evidence": {
-        "acceptances": [
-          "orchestration/agent_inbox/codex/bernie-meta-grid-concept-sol-acceptance.md"
+          "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-sol-acceptance.md"
         ],
         "closeouts": [
-          "docs/bernie-fluid-meta-grid-concept-closeout.md"
+          "docs/ariadne-continuity-engine-increment1-closeout.md",
+          "orchestration/continuity/ariadne-continuity-increment1-evidence.json"
         ],
         "findings": [],
         "plans": [
-          "docs/bernie-meta-grid-concept-tranche-plan.md"
+          "docs/ariadne-continuity-engine-increment1-plan.md"
         ],
         "receipts": [
-          "orchestration/agent_inbox/codex/bernie-meta-grid-concept-rehydration-receipt.json"
+          "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-final-prepush-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-integration-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-rehydration-receipt.json"
         ],
         "tests": [
-          "tests/test_bernie_meta_grid_concept_artifacts.py"
+          "tests/test_ariadne_continuity_engine.py"
         ]
       },
-      "id": "meta-grid-concept",
-      "kind": "concept",
+      "id": "ariadne-continuity-engine-increment1",
+      "kind": "tooling",
       "relationships": [
         {
-          "node_id": "stage1-combined-intent-foundation",
-          "relation": "builds_on"
+          "node_id": "reception-one-focused-review",
+          "relation": "protects"
         }
       ],
       "status": "accepted",
-      "title": "Provider-neutral meta-grid concept",
-      "unresolved_gates": [],
-      "updated_at": "2026-07-20T01:00:00Z"
+      "title": "Ariadne Continuity Engine Increment 1",
+      "unresolved_gates": [
+        "Increment 2 requires a fresh Yuri decision.",
+        "Plugin installation, workflow hooks and a visual branch map remain deferred."
+      ],
+      "updated_at": "2026-07-20T13:50:00Z"
     },
     {
       "authority": {
@@ -231,6 +195,64 @@
       "authority": {
         "authorized_openings": [],
         "notes": [
+          "Concept evidence is non-authoritative and provider-neutral."
+        ]
+      },
+      "claim_scope": [
+        "Accepted typed, reversible, non-authoritative meta-grid projection grammar.",
+        "No functional client or write authority is claimed."
+      ],
+      "contract_evidence": [],
+      "coordinates": {
+        "git_ref": "master",
+        "source_head": "7a037ce5a96a09fd0d7a3671498fcef12d0d0e32",
+        "thread_id": null,
+        "worktree_role": "historical"
+      },
+      "created_at": "2026-07-20T01:00:00Z",
+      "decisions": [
+        {
+          "id": "meta-grid-concept-accepted",
+          "source": "orchestration/agent_inbox/codex/bernie-meta-grid-concept-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Use the accepted projection grammar as the functional client foundation."
+        }
+      ],
+      "evidence": {
+        "acceptances": [
+          "orchestration/agent_inbox/codex/bernie-meta-grid-concept-sol-acceptance.md"
+        ],
+        "closeouts": [
+          "docs/bernie-fluid-meta-grid-concept-closeout.md"
+        ],
+        "findings": [],
+        "plans": [
+          "docs/bernie-meta-grid-concept-tranche-plan.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/bernie-meta-grid-concept-rehydration-receipt.json"
+        ],
+        "tests": [
+          "tests/test_bernie_meta_grid_concept_artifacts.py"
+        ]
+      },
+      "id": "meta-grid-concept",
+      "kind": "concept",
+      "relationships": [
+        {
+          "node_id": "stage1-combined-intent-foundation",
+          "relation": "builds_on"
+        }
+      ],
+      "status": "accepted",
+      "title": "Provider-neutral meta-grid concept",
+      "unresolved_gates": [],
+      "updated_at": "2026-07-20T01:00:00Z"
+    },
+    {
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
           "Live-local evidence used existing read and proposal paths and did not open confirmation or write authority."
         ]
       },
@@ -300,6 +322,105 @@
       "authority": {
         "authorized_openings": [],
         "notes": [
+          "Yuri authorised the one visible combined patient, practitioner, date, time and duration proof on 2026-07-20.",
+          "The opening is client-only over existing read and proposal routes and grants no API, write, confirmation, event-runtime, provider, PII, Stage 3B, production, deployment or release authority."
+        ]
+      },
+      "claim_scope": [
+        "Bounded Reception One client proof of one combined appointment-availability intent over existing authorised reads and proposal routes.",
+        "Proposal-only interaction ending before booking-review handoff or confirmation."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "evidence": [
+            "orchestration/prototypes/bernie-reception-one-combined-scope-proof/browser-acceptance-evidence.json",
+            "tests/test_bernie_reception_one_combined_scope.py"
+          ],
+          "note": "The exact combined request, refinements, proposal-only boundary and stale-selection reset passed focused tests plus real local browser/backend/PostgreSQL evidence.",
+          "status": "satisfied"
+        }
+      ],
+      "coordinates": {
+        "git_ref": "codex/reception-one-combined-scope-proof",
+        "source_head": "e675e7d21a8eb7b0fbc514773bb875c97269e5ac",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "created_at": "2026-07-20T14:04:50Z",
+      "decisions": [
+        {
+          "id": "combined-scope-proof-authorised",
+          "source": "docs/bernie-reception-one-combined-scope-proof-plan.md",
+          "status": "accepted",
+          "summary": "Implement and evidence one proposal-only combined patient, practitioner, date, time and duration interaction while preserving every closed boundary."
+        },
+        {
+          "id": "post-veto-stale-selection-recovered",
+          "source": "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-post-veto-sol-amendment.md",
+          "status": "accepted",
+          "summary": "Supersede the first veto for acceptance, clear refined-away selected state, extend the real-browser population and require a fresh amended-candidate veto."
+        },
+        {
+          "id": "combined-scope-proof-accepted",
+          "source": "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the bounded combined-scope proposal-only client proof and close its inherited continuity contract."
+        }
+      ],
+      "evidence": {
+        "acceptances": [
+          "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-sol-acceptance.md"
+        ],
+        "closeouts": [
+          "docs/bernie-reception-one-combined-scope-proof-closeout.md",
+          "orchestration/prototypes/bernie-reception-one-combined-scope-proof/browser-acceptance-evidence.json",
+          "orchestration/prototypes/bernie-reception-one-combined-scope-proof/database-cleanup-evidence.json"
+        ],
+        "findings": [
+          "orchestration/agent_inbox/antigravity/reception-one-combined-scope-proof-gemini-veto.md",
+          "orchestration/agent_inbox/antigravity/reception-one-combined-scope-proof-gemini-veto-2.md",
+          "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-post-veto-sol-amendment.md"
+        ],
+        "plans": [
+          "docs/bernie-reception-one-combined-scope-proof-plan.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-amendment-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-candidate-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-closeout-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-predispatch-2-receipt.json",
+          "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-rehydration-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_continuity_engine.py",
+          "tests/test_bernie_functional_meta_grid.py",
+          "tests/test_bernie_meta_grid_live_local_integration.py",
+          "tests/test_bernie_reception_one_combined_scope.py"
+        ]
+      },
+      "id": "reception-one-combined-scope-proof",
+      "kind": "implementation",
+      "relationships": [
+        {
+          "node_id": "functional-meta-grid-client",
+          "relation": "builds_on"
+        }
+      ],
+      "status": "accepted",
+      "title": "Reception One combined-scope product proof",
+      "unresolved_gates": [
+        "Final visual and interaction design remains a later Yuri decision.",
+        "Stage 3B, confirmation-path expansion, representative participants, voice, provider, production, deployment and release remain separately closed."
+      ],
+      "updated_at": "2026-07-20T15:20:00Z"
+    },
+    {
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
           "Yuri's focused review is observational and must not be converted into implementation authority by this graph."
         ]
       },
@@ -353,76 +474,54 @@
       "authority": {
         "authorized_openings": [],
         "notes": [
-          "The engine records metadata and evidence pointers only.",
-          "It cannot accept work, grant authority, move the baton, spawn agents, mutate product data or alter protected refs."
+          "Historical Stage 1 authority is recorded as evidence only; this graph cannot exercise or broaden it."
         ]
       },
       "claim_scope": [
-        "Local developer continuity tooling and canonical metadata graph only.",
-        "Increment 1 validates lineage, inherited contracts, candidate harvests and branch dispositions."
+        "Accepted local synthetic provider-free supervised booking foundation.",
+        "Combined patient, practitioner, time and duration intent precedes explicit confirmation."
       ],
       "contract_evidence": [],
       "coordinates": {
-        "git_ref": "codex/ariadne-continuity-engine-increment-1",
-        "source_head": "152e917a3ab32006438dab9c0169d77256e18d63",
+        "git_ref": "master",
+        "source_head": "dcb4f9d54ce63b8dbfad882979a32292bf8b6289",
         "thread_id": null,
-        "worktree_role": "task"
+        "worktree_role": "historical"
       },
-      "created_at": "2026-07-20T09:00:00Z",
+      "created_at": "2026-07-18T00:00:00Z",
       "decisions": [
         {
-          "id": "increment-one-scope-frozen",
-          "source": "docs/ariadne-continuity-engine-increment1-plan.md",
+          "id": "stage1-combined-intent-accepted",
+          "source": "orchestration/agent_inbox/codex/bernie-stage1-tranche-d-extra-high-sol-acceptance.md",
           "status": "accepted",
-          "summary": "Build a bounded local metadata continuity engine before considering orchestration hooks or visual branch maps."
-        },
-        {
-          "id": "increment-one-accepted",
-          "source": "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-sol-acceptance.md",
-          "status": "accepted",
-          "summary": "Accept the bounded local metadata engine while preserving the two reported combined-scope product gaps."
+          "summary": "Preserve the combined-scope appointment-intent interaction as an inherited product contract."
         }
       ],
       "evidence": {
         "acceptances": [
-          "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-sol-acceptance.md"
+          "orchestration/agent_inbox/codex/bernie-stage1-tranche-d-extra-high-sol-acceptance.md"
         ],
-        "closeouts": [
-          "docs/ariadne-continuity-engine-increment1-closeout.md",
-          "orchestration/continuity/ariadne-continuity-increment1-evidence.json"
-        ],
+        "closeouts": [],
         "findings": [],
         "plans": [
-          "docs/ariadne-continuity-engine-increment1-plan.md"
+          "docs/bernie-stage1-provider-free-supervised-booking-acceptance-plan.md"
         ],
-        "receipts": [
-          "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-final-prepush-receipt.json",
-          "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-integration-receipt.json",
-          "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-preacceptance-receipt.json",
-          "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-rehydration-receipt.json"
-        ],
+        "receipts": [],
         "tests": [
-          "tests/test_ariadne_continuity_engine.py"
+          "docs/bernie-stage1-r2-execution-evidence.json",
+          "tests/test_bernie_sprint98_release_gates.py"
         ]
       },
-      "id": "ariadne-continuity-engine-increment1",
-      "kind": "tooling",
-      "relationships": [
-        {
-          "node_id": "reception-one-focused-review",
-          "relation": "protects"
-        }
-      ],
+      "id": "stage1-combined-intent-foundation",
+      "kind": "foundation",
+      "relationships": [],
       "status": "accepted",
-      "title": "Ariadne Continuity Engine Increment 1",
-      "unresolved_gates": [
-        "Increment 2 requires a fresh Yuri decision.",
-        "Plugin installation, workflow hooks and a visual branch map remain deferred."
-      ],
-      "updated_at": "2026-07-20T13:50:00Z"
+      "title": "Stage 1 combined appointment-intent foundation",
+      "unresolved_gates": [],
+      "updated_at": "2026-07-18T00:00:00Z"
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-07-20T13:50:00Z"
+  "updated_at": "2026-07-20T15:30:00Z"
 }

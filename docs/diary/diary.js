@@ -8,8 +8,11 @@
 // ═══════════════════════════════════════════════════════════
 
 const NGROK_URL   = "https://property-cinch-backfield.ngrok-free.dev";
+const LOOPBACK_BACKEND_URL = ["::1", "[::1]"].includes(window.location.hostname)
+  ? "http://[::1]:8001"
+  : "http://localhost:8001";
 const BACKEND_URL = (window.location.port === "3000")
-  ? "http://localhost:8001"
+  ? LOOPBACK_BACKEND_URL
   : isApprovedNgrokHostname(window.location.hostname)
     ? window.location.origin
     : NGROK_URL;

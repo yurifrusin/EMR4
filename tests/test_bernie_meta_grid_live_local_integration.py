@@ -48,7 +48,7 @@ def test_plan_freezes_live_local_scope_and_closed_gates():
 def test_standalone_office_bootstrap_is_loopback_only_and_preserves_office_loading():
     html = _read(DIARY / "diary.html")
     bootstrap = _read(DIARY / "office-bootstrap.js")
-    assert '<script src="office-bootstrap.js?v=1"></script>' in html
+    assert '<script src="office-bootstrap.js?v=2"></script>' in html
     assert "appsforoffice.microsoft.com" not in html
     assert '["127.0.0.1", "localhost"]' in bootstrap
     assert 'params.get("standalone_diary") === "true"' in bootstrap
@@ -63,7 +63,7 @@ def test_interrupted_proposal_recovers_fresh_availability_not_stale_proposal():
     assert 'current.family === "proposal_review" && practitioners[0]' in refresh
     assert "next = await buildAvailability" in refresh
     assert "Proposal and patient selection are deliberately discarded" in refresh
-    assert '<script src="meta-grid.js?v=7" defer>' in _read(DIARY / "diary.html")
+    assert '<script src="meta-grid.js?v=8" defer>' in _read(DIARY / "diary.html")
 
 
 def test_harness_is_exact_disposable_synthetic_and_provider_disabled():

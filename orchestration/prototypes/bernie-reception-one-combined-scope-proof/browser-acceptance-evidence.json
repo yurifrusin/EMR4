@@ -1,0 +1,374 @@
+{
+  "api_interception": false,
+  "authority": {
+    "appointment_write_authority": false,
+    "confirmation_control_activated": false,
+    "event_runtime_activated": false,
+    "operational_receipt_produced": false,
+    "proposal_handoff_activated": false
+  },
+  "browser_actions": "visible UI actions only; no page.route and no page-internal projection or command functions",
+  "browser_console_warnings_or_errors": [],
+  "browser_page_errors": [],
+  "claims_not_made": [
+    "provider",
+    "PII",
+    "committed event",
+    "Stage 3B",
+    "representative usability",
+    "production",
+    "deployment",
+    "release",
+    "final visual design"
+  ],
+  "database_readback": {
+    "after": {
+      "counts": {
+        "appointment_audit_log": 0,
+        "appointment_command_idempotency": 0,
+        "appointments": 6,
+        "bernie_booking_sessions": 0,
+        "bernie_session_events": 0
+      },
+      "database": "gp_pms_reception_one_combined_scope_9c41b7e2_20260721",
+      "identifiers_recorded": false,
+      "patient_details_recorded": false,
+      "schema_version": "bernie.meta-grid-live-local.database-readback.v1",
+      "sha256": {
+        "appointment_audit_log": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "appointment_command_idempotency": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "appointments": "3e3c05e6aa79618ee442e897bc597b10bc4ba63187d57721a7dc84ff8f75dc9a",
+        "bernie_booking_sessions": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "bernie_session_events": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "synthetic_only": true
+    },
+    "before": {
+      "counts": {
+        "appointment_audit_log": 0,
+        "appointment_command_idempotency": 0,
+        "appointments": 6,
+        "bernie_booking_sessions": 0,
+        "bernie_session_events": 0
+      },
+      "database": "gp_pms_reception_one_combined_scope_9c41b7e2_20260721",
+      "identifiers_recorded": false,
+      "patient_details_recorded": false,
+      "schema_version": "bernie.meta-grid-live-local.database-readback.v1",
+      "sha256": {
+        "appointment_audit_log": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "appointment_command_idempotency": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "appointments": "3e3c05e6aa79618ee442e897bc597b10bc4ba63187d57721a7dc84ff8f75dc9a",
+        "bernie_booking_sessions": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "bernie_session_events": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "synthetic_only": true
+    },
+    "counts_identical": true,
+    "sha256_identical": true
+  },
+  "evidence_mode": "live_local_browser_backend_postgres",
+  "interruption": {
+    "fresh_availability_read_required": true,
+    "fresh_patient_read_required": true,
+    "stale_proposal_reused": false
+  },
+  "keyboard": {
+    "enter_request_submit": "pass on desktop and both smartphone orientations",
+    "enter_scoped_proposal": "pass on smartphone portrait",
+    "escape_explanation_dismissal": "pass with focus returned",
+    "native_tab_sequence": [
+      "meta-grid-request",
+      "meta-grid-submit",
+      "meta-grid-privacy",
+      "Dr Shera today",
+      "patient timeline example",
+      "Availability after 2 pm",
+      "Compare practitioners",
+      "meta-grid-overview",
+      "meta-grid-explain",
+      "Return to full Diary grid",
+      "EMR \u2014 Diary\n      \n        Meta-grid Live-local Synthetic Practice\n        |\n   "
+    ],
+    "page_internal_command_invocation": false,
+    "space_slot_selection": "pass on smartphone portrait"
+  },
+  "network": {
+    "api_method_path_counts": [
+      {
+        "count": 65,
+        "method": "GET",
+        "path": "/api/v1/appointments"
+      },
+      {
+        "count": 5,
+        "method": "GET",
+        "path": "/api/v1/appointments/bernie/pilot-eligibility"
+      },
+      {
+        "count": 35,
+        "method": "GET",
+        "path": "/api/v1/appointments/types"
+      },
+      {
+        "count": 40,
+        "method": "GET",
+        "path": "/api/v1/diary/locations"
+      },
+      {
+        "count": 35,
+        "method": "GET",
+        "path": "/api/v1/diary/roster"
+      },
+      {
+        "count": 35,
+        "method": "GET",
+        "path": "/api/v1/diary/template"
+      },
+      {
+        "count": 35,
+        "method": "GET",
+        "path": "/api/v1/diary/waiting-areas"
+      },
+      {
+        "count": 8,
+        "method": "GET",
+        "path": "/api/v1/patients/search"
+      },
+      {
+        "count": 2,
+        "method": "POST",
+        "path": "/api/v1/appointments/proposals/bernie/supervised-booking"
+      },
+      {
+        "count": 12,
+        "method": "POST",
+        "path": "/api/v1/appointments/proposals/slot-search"
+      },
+      {
+        "count": 5,
+        "method": "POST",
+        "path": "/api/v1/auth/login"
+      },
+      {
+        "count": 35,
+        "method": "POST",
+        "path": "/api/v1/graphql"
+      }
+    ],
+    "failed_api_responses": [],
+    "forbidden_requests": [],
+    "only_loopback": true
+  },
+  "privacy": {
+    "patient_scope_masked": true,
+    "private_live_region_sanitized": true,
+    "proposal_summary_masked": true
+  },
+  "recorded_at": "2026-07-20T14:38:33.544164Z",
+  "result": "browser_pass",
+  "route": "http://[::1]:3000/diary/diary.html?reference_date=2026-07-27&bernie_session=false&standalone_diary=true",
+  "route_interception": false,
+  "runtime": {
+    "active_ipv4_review_session_contacted": false,
+    "cloud_credentials_present": false,
+    "credential_recorded": false,
+    "database": "gp_pms_reception_one_combined_scope_9c41b7e2_20260721",
+    "loopback_family": "ipv6",
+    "provider": "disabled",
+    "token_recorded": false
+  },
+  "schema_version": "bernie.reception-one-combined-scope.browser-evidence.v1",
+  "screenshots": [
+    {
+      "file": "desktop-combined-scope-1440x900.png",
+      "raster_integrity": {
+        "height": 900,
+        "painted_extent_ratio": 1.0,
+        "passes": true,
+        "rightmost_20_percent_nonblack_ratio": 1.0,
+        "width": 1440
+      },
+      "sha256": "2aa45d60003a840d92491a1a737b4b2b44adcb7d4a114ac4ae1cbe4870c4e987"
+    },
+    {
+      "file": "tablet-landscape-proposal-1024x768.png",
+      "raster_integrity": {
+        "height": 768,
+        "painted_extent_ratio": 1.0,
+        "passes": true,
+        "rightmost_20_percent_nonblack_ratio": 1.0,
+        "width": 1024
+      },
+      "sha256": "58d9cf61bbb952944d2232b5dfc48536841eea3e247d743540225225911f302f"
+    },
+    {
+      "file": "tablet-portrait-refined-back-768x1024.png",
+      "raster_integrity": {
+        "height": 1024,
+        "painted_extent_ratio": 1.0,
+        "passes": true,
+        "rightmost_20_percent_nonblack_ratio": 1.0,
+        "width": 768
+      },
+      "sha256": "94379503738eb1be6bac2430969ac2c3bf8a1e77ed5e2ca1968b640bd93da6e8"
+    },
+    {
+      "file": "phone-portrait-private-proposal-390x844.png",
+      "raster_integrity": {
+        "height": 844,
+        "painted_extent_ratio": 1.0,
+        "passes": true,
+        "rightmost_20_percent_nonblack_ratio": 1.0,
+        "width": 390
+      },
+      "sha256": "4d23b2dfe870f0841a2a80934a65d0f706834721ad35f367c5422ddd531a3a49"
+    },
+    {
+      "file": "phone-portrait-interruption-390x844.png",
+      "raster_integrity": {
+        "height": 844,
+        "painted_extent_ratio": 1.0,
+        "passes": true,
+        "rightmost_20_percent_nonblack_ratio": 1.0,
+        "width": 390
+      },
+      "sha256": "32e234cc5cc596b3a860bd57a2dd9b128057881dcab9a9c1874997f8260080b1"
+    },
+    {
+      "file": "phone-landscape-refined-844x390.png",
+      "raster_integrity": {
+        "height": 390,
+        "painted_extent_ratio": 1.0,
+        "passes": true,
+        "rightmost_20_percent_nonblack_ratio": 1.0,
+        "width": 844
+      },
+      "sha256": "a46cef5d7198deda5839fbadb3217c396900b339550121ca49423322bf00890d"
+    }
+  ],
+  "viewports": [
+    {
+      "body_client_width": 1440,
+      "document_client_width": 1440,
+      "enabled_controls_below_44px": [],
+      "error_overlay_visible": false,
+      "full_diary_fallback": "pass",
+      "height": 900,
+      "host_horizontal_overflow_px": 0,
+      "host_width": 1440,
+      "id": "desktop_landscape",
+      "page_horizontal_overflow_px": 0,
+      "scenario_results": {
+        "combined_scope": "pass",
+        "contextual_date_refinement": "pass",
+        "contextual_duration_refinement": "pass",
+        "contextual_time_refinement": "pass",
+        "escape_explanation": "pass",
+        "keyboard_tab_sequence": [
+          "meta-grid-request",
+          "meta-grid-submit",
+          "meta-grid-privacy",
+          "Dr Shera today",
+          "patient timeline example",
+          "Availability after 2 pm",
+          "Compare practitioners",
+          "meta-grid-overview",
+          "meta-grid-explain",
+          "Return to full Diary grid",
+          "EMR \u2014 Diary\n      \n        Meta-grid Live-local Synthetic Practice\n        |\n   "
+        ],
+        "ordinary_overview_and_back": "pass"
+      },
+      "shell_width": 1440,
+      "width": 1440,
+      "window_inner_width": 1440,
+      "workspace_right": 1422
+    },
+    {
+      "body_client_width": 1024,
+      "document_client_width": 1024,
+      "enabled_controls_below_44px": [],
+      "error_overlay_visible": false,
+      "height": 768,
+      "host_horizontal_overflow_px": 0,
+      "host_width": 1024,
+      "id": "tablet_landscape",
+      "page_horizontal_overflow_px": 0,
+      "scenario_results": {
+        "combined_scope": "pass",
+        "proposal_handoff_activated": false,
+        "scoped_patient_proposal": "pass; not committed",
+        "touch_slot_selection": "pass"
+      },
+      "shell_width": 1024,
+      "width": 1024,
+      "window_inner_width": 1024,
+      "workspace_right": 1006
+    },
+    {
+      "body_client_width": 768,
+      "document_client_width": 768,
+      "enabled_controls_below_44px": [],
+      "error_overlay_visible": false,
+      "height": 1024,
+      "host_horizontal_overflow_px": 0,
+      "host_width": 768,
+      "id": "tablet_portrait",
+      "page_horizontal_overflow_px": 0,
+      "scenario_results": {
+        "combined_scope": "pass",
+        "duration_refinement": "pass",
+        "refinement_clears_stale_selection": "pass",
+        "selection_back_reversible": "pass"
+      },
+      "shell_width": 768,
+      "width": 768,
+      "window_inner_width": 768,
+      "workspace_right": 756
+    },
+    {
+      "body_client_width": 390,
+      "document_client_width": 390,
+      "enabled_controls_below_44px": [],
+      "error_overlay_visible": false,
+      "height": 844,
+      "host_horizontal_overflow_px": 0,
+      "host_width": 390,
+      "id": "phone_portrait",
+      "page_horizontal_overflow_px": 0,
+      "scenario_results": {
+        "combined_scope": "pass",
+        "fresh_patient_and_availability_recovery": "pass",
+        "interruption": "pass; standards_dom_blur_event_headless_fallback",
+        "keyboard_enter_scoped_proposal": "pass; not committed",
+        "keyboard_space_selection": "pass",
+        "privacy_mask_and_live_region": "pass"
+      },
+      "shell_width": 390,
+      "width": 390,
+      "window_inner_width": 390,
+      "workspace_right": 382
+    },
+    {
+      "body_client_width": 844,
+      "document_client_width": 844,
+      "enabled_controls_below_44px": [],
+      "error_overlay_visible": false,
+      "height": 390,
+      "host_horizontal_overflow_px": 0,
+      "host_width": 844,
+      "id": "phone_landscape",
+      "page_horizontal_overflow_px": 0,
+      "scenario_results": {
+        "combined_scope": "pass",
+        "keyboard_enter_request": "pass",
+        "time_refinement": "pass"
+      },
+      "shell_width": 844,
+      "width": 844,
+      "window_inner_width": 844,
+      "workspace_right": 832
+    }
+  ]
+}

@@ -51,6 +51,7 @@
     recentRoots: [],
     selectedItem: null,
     proposalResult: null,
+    patientContexts: new Map(),
     private: false,
     interrupted: false,
     comparisonIndex: 0,
@@ -187,6 +188,9 @@
     const meridiem = (match[3] || "").toLowerCase();
     if (meridiem === "pm" && hour < 12) hour += 12;
     if (meridiem === "am" && hour === 12) hour = 0;
+    // Reception One is a daytime Diary. In that bounded context an
+    // unqualified one-through-six means afternoon; explicit am/pm always wins.
+    if (!meridiem && hour >= 1 && hour <= 6) hour += 12;
     if (hour > 23 || minute > 59) return null;
     return `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
   }
@@ -244,6 +248,20 @@
     return { valid: true, from, to, changed };
   }
 
+  function parseDuration(text, fallback = DEFAULT_DURATION_MINUTES) {
+    const source = normaliseText(text);
+    let value = null;
+    if (/\b(?:a\s+)?half[- ]hour\b/.test(source)) value = 30;
+    const minutes = source.match(/\b(\d{1,3})\s*(?:minutes?|mins?)\b/);
+    if (minutes) value = Number(minutes[1]);
+    if (/\b(?:an|one|1)\s+hour\b/.test(source)) value = 60;
+    if (value === null) return { valid: true, value: fallback, changed: [] };
+    if (!Number.isInteger(value) || value < 5 || value > 240) {
+      return { valid: false, value, changed: ["duration_invalid"] };
+    }
+    return { valid: true, value, changed: [`duration_minutes: ${value}`] };
+  }
+
   function snapshot() {
     return bridge.getSnapshot();
   }
@@ -268,6 +286,7 @@
       .filter(name => normaliseText(source).includes(normaliseText(name)));
     if (knownMatches.length === 1) return knownMatches[0];
     const patterns = [
+      /(?:appointment|booking|slot)\s+(?:for|with)\s+([a-z][a-z'\-]+\s+[a-z][a-z'\-]+?)(?:\s+(?:after|before|today|tomorrow)|$)/i,
       /(?:show|find|add|book|for)\s+([a-z][a-z'\-]+\s+[a-z][a-z'\-]+?)(?:'s|\s+(?:to|upcoming|appointment|appointments|booking|bookings|slot|today|tomorrow)|$)/i,
       /([a-z][a-z'\-]+\s+[a-z][a-z'\-]+)'s\s+(?:upcoming\s+)?appointments?/i
     ];
@@ -286,6 +305,22 @@
     if (exact.length === 1) return { status: "resolved", query, patient: exact[0], rows: exact };
     if (rows.length === 1) return { status: "resolved", query, patient: rows[0], rows };
     return { status: rows.length ? "ambiguous" : "missing", query, rows };
+  }
+
+  function rememberPatient(patient) {
+    if (!patient?.id || !patient?.display_name) return null;
+    const remembered = { id: String(patient.id), display_name: String(patient.display_name) };
+    state.patientContexts.set(remembered.id, remembered);
+    return remembered;
+  }
+
+  function patientForProjection(projection = state.current) {
+    const id = projection?.scope?.patient_ids?.[0];
+    if (!id) return null;
+    const remembered = state.patientContexts.get(String(id));
+    if (remembered) return remembered;
+    const display = projection.items?.find(item => item.patient_display)?.patient_display;
+    return display ? rememberPatient({ id, display_name: display }) : null;
   }
 
   function baseScope() {
@@ -374,7 +409,8 @@
     state.recentRoots.unshift({
       root_intent_id: state.current.root_intent_id,
       request: state.current.root_request,
-      label: state.current.scope_summary
+      label: state.current.scope_summary,
+      sensitive: Boolean(state.current.scope?.patient_ids?.length)
     });
     state.recentRoots = state.recentRoots.slice(0, 5);
   }
@@ -390,6 +426,9 @@
       state.trail.push(state.current);
     }
     state.current = projection;
+    if (!["selection_only", "proposal_not_committed"].includes(projection.state)) {
+      state.selectedItem = null;
+    }
     state.proposalResult = projection.proposal_result || null;
     render();
     if (focusCanvas) elements.canvas?.focus();
@@ -577,10 +616,27 @@
   async function buildAvailability(practitioner, requestText, context = {}) {
     const current = snapshot();
     const scope = { ...baseScope() };
+    const patient = context.patient ? rememberPatient(context.patient) : null;
+    if (patient) scope.patient_ids = [patient.id];
     scope.practitioner_ids = [practitioner.id];
     scope.date_from = context.date || resolveDate(requestText, current.date);
     scope.date_to = scope.date_from;
-    scope.duration_minutes = context.duration || DEFAULT_DURATION_MINUTES;
+    const duration = context.duration !== undefined
+      ? {
+          valid: Number.isInteger(Number(context.duration)) && Number(context.duration) >= 5 && Number(context.duration) <= 240,
+          value: Number(context.duration),
+          changed: []
+        }
+      : parseDuration(requestText, DEFAULT_DURATION_MINUTES);
+    if (!duration.valid) {
+      return clarificationProjection(
+        "Use an appointment duration from 5 to 240 minutes.",
+        [],
+        requestText,
+        { rootIntentId: context.rootIntentId, parentProjectionId: context.parentProjectionId }
+      );
+    }
+    scope.duration_minutes = duration.value;
     const window = context.window || parseWindow(requestText, scope);
     if (!window.valid) {
       return clarificationProjection(
@@ -616,10 +672,11 @@
       location_id: current.location_id || practitioner.location_id || null,
       location_display: current.location_display,
       duration_minutes: candidate.duration_minutes,
+      patient_display: patient?.display_name || null,
       selectable: true,
       raw_candidate: candidate
     }));
-    return newProjection({
+    const projection = newProjection({
       family: "availability_slots",
       projectionState: "answer",
       scope,
@@ -639,6 +696,17 @@
       parentProjectionId: context.parentProjectionId,
       rootRequest: context.rootRequest || requestText
     });
+    if (patient) {
+      projection.scope_summary = `${patient.display_name} · ${projection.scope_summary}`;
+      projection.omissions.push("Patient is proposal context only; no appointment exists");
+      if (!context.reason) {
+        projection.transition.reason = "Plain-language combined patient, practitioner, date, time and duration request";
+      }
+      if (!context.changedDimensions) {
+        projection.transition.changed_dimensions = ["patient", ...projection.transition.changed_dimensions];
+      }
+    }
+    return projection;
   }
 
   async function buildComparison(practitioners, requestText, context = {}) {
@@ -798,6 +866,8 @@
     const source = normaliseText(text);
     return Boolean(state.current) && (
       /^(after|before|from|morning|afternoon|whole day|full day|only booked|show all|broaden|narrow|refine)\b/.test(source) ||
+      /^(today|tomorrow)(?:\s+instead)?\b/.test(source) ||
+      /^(?:make\s+it\s+)?(?:a\s+)?(?:half[- ]hour|\d{1,3}\s*(?:minutes?|mins?)|(?:an|one|1)\s+hour)\b/.test(source) ||
       /^next\s+\d+\s+days?\b/.test(source)
     );
   }
@@ -805,9 +875,18 @@
   async function refineCurrent(text) {
     const current = state.current;
     const window = parseWindow(text, current.scope);
+    const duration = parseDuration(text, current.scope.duration_minutes || DEFAULT_DURATION_MINUTES);
     if (!window.valid) {
       return clarificationProjection(
         "The refinement would create an invalid time window.",
+        [],
+        current.root_request,
+        { rootIntentId: current.root_intent_id, parentProjectionId: current.projection_id }
+      );
+    }
+    if (!duration.valid) {
+      return clarificationProjection(
+        "Use an appointment duration from 5 to 240 minutes.",
         [],
         current.root_request,
         { rootIntentId: current.root_intent_id, parentProjectionId: current.projection_id }
@@ -817,14 +896,24 @@
     const practitioners = current.scope.practitioner_ids
       .map(id => directory.find(row => row.id === id))
       .filter(Boolean);
+    const dateRequested = /\b(?:today|tomorrow)\b/.test(normaliseText(text));
+    const nextDate = dateRequested
+      ? resolveDate(text, snapshot().date)
+      : current.scope.date_from;
+    const changedDimensions = [
+      ...window.changed,
+      ...duration.changed,
+      ...(dateRequested ? [`date: ${nextDate}`] : [])
+    ];
     const context = {
-      date: current.scope.date_from,
+      date: nextDate,
       window,
-      duration: current.scope.duration_minutes || DEFAULT_DURATION_MINUTES,
+      duration: duration.value,
+      patient: patientForProjection(current),
       operation: /\b(whole|full|show all|broaden)\b/.test(normaliseText(text)) ? "broaden" : "refine",
       trigger: "conversation",
       reason: `Plain-language refinement: ${text}`,
-      changedDimensions: window.changed.length ? window.changed : ["display_filter"],
+      changedDimensions: changedDimensions.length ? [...new Set(changedDimensions)] : ["display_filter"],
       rootIntentId: current.root_intent_id,
       parentProjectionId: current.projection_id,
       rootRequest: current.root_request
@@ -873,10 +962,29 @@
     const practitioners = current.scope.practitioner_ids
       .map(id => directory.find(row => row.id === id))
       .filter(Boolean);
+    let patient = patientForProjection(current);
+    if (patient && ["availability_slots", "proposal_review"].includes(current.family)) {
+      const refreshedPatient = await resolvePatient(patient.display_name);
+      if (refreshedPatient.status !== "resolved") {
+        const clarification = clarificationProjection(
+          refreshedPatient.status === "ambiguous"
+            ? `More than one patient matches ${refreshedPatient.query}. Choose the intended person.`
+            : "The patient must be resolved again after the interruption.",
+          refreshedPatient.rows,
+          current.root_request,
+          { rootIntentId: current.root_intent_id, parentProjectionId: current.projection_id }
+        );
+        state.interrupted = false;
+        setProjection(clarification, { newRoot: false, pushCurrent: true });
+        return;
+      }
+      patient = rememberPatient(refreshedPatient.patient);
+    }
     const context = {
       date: current.scope.date_from,
       window: { valid: true, from: current.scope.time_from || "08:00", to: current.scope.time_to || "17:00", changed: ["freshness"] },
       duration: current.scope.duration_minutes || DEFAULT_DURATION_MINUTES,
+      patient,
       operation: "reconcile",
       trigger: "system_freshness",
       reason: "Fresh scoped read after interruption",
@@ -892,8 +1000,9 @@
       next = await buildAvailability(practitioners[0], current.root_request, context);
     } else if (current.family === "proposal_review" && practitioners[0]) {
       // Proposal and patient selection are deliberately discarded on
-      // interruption. Recover the exact underlying availability scope with a
-      // fresh backend read; never reconstruct or retain the stale proposal.
+      // interruption. Recover the exact underlying availability scope only
+      // after fresh patient resolution and a fresh backend availability read;
+      // never reconstruct or retain the stale slot or proposal.
       next = await buildAvailability(practitioners[0], current.root_request, context);
     } else if (current.family === "aligned_comparison" && practitioners.length >= 2) {
       next = await buildComparison(practitioners, current.root_request, context);
@@ -980,7 +1089,29 @@
           text
         );
       }
-      return buildAvailability(practitioners[0], text);
+      const patientQuery = patientNameFromRequest(text);
+      let patient = null;
+      if (patientQuery) {
+        const patientResolution = await resolvePatient(text);
+        if (patientResolution.status !== "resolved") {
+          return clarificationProjection(
+            patientResolution.status === "ambiguous"
+              ? `More than one patient matches ${patientResolution.query}. Choose the intended person.`
+              : "Which patient is this availability for? Use their full name.",
+            patientResolution.rows,
+            text
+          );
+        }
+        patient = rememberPatient(patientResolution.patient);
+      }
+      const duration = parseDuration(text, DEFAULT_DURATION_MINUTES);
+      if (!duration.valid) {
+        return clarificationProjection("Use an appointment duration from 5 to 240 minutes.", [], text);
+      }
+      return buildAvailability(practitioners[0], text, {
+        patient,
+        duration: duration.value
+      });
     }
     if (practitioners.length === 1) {
       return buildFocused(practitioners[0], text);
@@ -1085,6 +1216,12 @@
     elements.privacyBanner?.classList.toggle("hidden", !next);
     elements.privacy?.setAttribute("aria-pressed", next ? "true" : "false");
     if (elements.privacy) elements.privacy.textContent = next ? "Show patient details" : "Hide patient details";
+    if (next && elements.announcer) {
+      elements.announcer.textContent = "Patient-sensitive details are hidden.";
+    } else if (!next && state.current && elements.announcer) {
+      const copy = stateCopy[state.current.state] || stateCopy.answer;
+      elements.announcer.textContent = `${copy.label}. ${state.current.scope_summary}`;
+    }
   }
 
   function markInterrupted() {
@@ -1122,6 +1259,7 @@
       const item = createElement("li");
       const button = createElement("button", "", root.label);
       button.type = "button";
+      if (root.sensitive) button.classList.add("meta-grid-sensitive");
       button.addEventListener("click", () => submitRequest(root.request, { restore: true }));
       item.appendChild(button);
       elements.rootHistory.appendChild(item);
@@ -1273,12 +1411,21 @@
       return;
     }
     if (projection.state === "selection_only") {
-      const addPatient = createElement("button", "meta-grid-primary", "Add a patient to this slot");
+      const patient = patientForProjection(projection);
+      const addPatient = createElement(
+        "button",
+        patient ? "meta-grid-primary meta-grid-sensitive" : "meta-grid-primary",
+        patient ? `Prepare proposal for ${patient.display_name}` : "Add a patient to this slot"
+      );
       addPatient.type = "button";
-      addPatient.setAttribute("data-testid", "meta-grid-add-patient");
+      addPatient.setAttribute("data-testid", patient ? "meta-grid-prepare-scoped-proposal" : "meta-grid-add-patient");
       addPatient.addEventListener("click", () => {
-        elements.request.placeholder = "For example: Add Margaret Thompson to the selected slot";
-        elements.request.focus();
+        if (patient) {
+          submitRequest(`Prepare proposal for ${patient.display_name}`);
+        } else {
+          elements.request.placeholder = "For example: Add Margaret Thompson to the selected slot";
+          elements.request.focus();
+        }
       });
       elements.actions.appendChild(addPatient);
     }
@@ -1305,6 +1452,7 @@
     const projection = state.current;
     if (!projection) return;
     const copy = stateCopy[projection.state] || stateCopy.answer;
+    elements.scope.classList.toggle("meta-grid-sensitive", Boolean(projection.scope?.patient_ids?.length));
     elements.scope.textContent = projection.scope_summary;
     elements.omissions.textContent = projection.omissions.length
       ? `Deliberately left out: ${projection.omissions.join(" · ")}`
@@ -1313,7 +1461,9 @@
     elements.state.dataset.state = projection.state;
     elements.stateLabel.textContent = copy.label;
     elements.stateHeading.textContent = copy.heading;
-    elements.stateExplanation.textContent = copy.explanation;
+    elements.stateExplanation.textContent = projection.state === "selection_only" && patientForProjection(projection)
+      ? "Selection is staff input only. The resolved patient remains in scope for proposal preparation; nothing has been booked."
+      : copy.explanation;
     elements.announcer.textContent = `${copy.label}. ${projection.scope_summary}`;
     elements.back.disabled = state.trail.length === 0;
 

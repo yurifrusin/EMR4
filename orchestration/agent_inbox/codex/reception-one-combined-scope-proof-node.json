@@ -1,0 +1,99 @@
+{
+  "authority": {
+    "authorized_openings": [],
+    "notes": [
+      "Yuri authorised the one visible combined patient, practitioner, date, time and duration proof on 2026-07-20.",
+      "The opening is client-only over existing read and proposal routes and grants no API, write, confirmation, event-runtime, provider, PII, Stage 3B, production, deployment or release authority."
+    ]
+  },
+  "claim_scope": [
+    "Bounded Reception One client proof of one combined appointment-availability intent over existing authorised reads and proposal routes.",
+    "Proposal-only interaction ending before booking-review handoff or confirmation."
+  ],
+  "contract_evidence": [
+    {
+      "contract_id": "combined-patient-practitioner-time-duration-intent",
+      "evidence": [
+        "orchestration/prototypes/bernie-reception-one-combined-scope-proof/browser-acceptance-evidence.json",
+        "tests/test_bernie_reception_one_combined_scope.py"
+      ],
+      "note": "The exact combined request, refinements, proposal-only boundary and stale-selection reset passed focused tests plus real local browser/backend/PostgreSQL evidence.",
+      "status": "satisfied"
+    }
+  ],
+  "coordinates": {
+    "git_ref": "codex/reception-one-combined-scope-proof",
+    "source_head": "e675e7d21a8eb7b0fbc514773bb875c97269e5ac",
+    "thread_id": null,
+    "worktree_role": "task"
+  },
+  "created_at": "2026-07-20T14:04:50Z",
+  "decisions": [
+    {
+      "id": "combined-scope-proof-authorised",
+      "source": "docs/bernie-reception-one-combined-scope-proof-plan.md",
+      "status": "accepted",
+      "summary": "Implement and evidence one proposal-only combined patient, practitioner, date, time and duration interaction while preserving every closed boundary."
+    },
+    {
+      "id": "post-veto-stale-selection-recovered",
+      "source": "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-post-veto-sol-amendment.md",
+      "status": "accepted",
+      "summary": "Supersede the first veto for acceptance, clear refined-away selected state, extend the real-browser population and require a fresh amended-candidate veto."
+    },
+    {
+      "id": "combined-scope-proof-accepted",
+      "source": "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-sol-acceptance.md",
+      "status": "accepted",
+      "summary": "Accept the bounded combined-scope proposal-only client proof and close its inherited continuity contract."
+    }
+  ],
+  "evidence": {
+    "acceptances": [
+      "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-sol-acceptance.md"
+    ],
+    "closeouts": [
+      "docs/bernie-reception-one-combined-scope-proof-closeout.md",
+      "orchestration/prototypes/bernie-reception-one-combined-scope-proof/browser-acceptance-evidence.json",
+      "orchestration/prototypes/bernie-reception-one-combined-scope-proof/database-cleanup-evidence.json"
+    ],
+    "findings": [
+      "orchestration/agent_inbox/antigravity/reception-one-combined-scope-proof-gemini-veto.md",
+      "orchestration/agent_inbox/antigravity/reception-one-combined-scope-proof-gemini-veto-2.md",
+      "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-post-veto-sol-amendment.md"
+    ],
+    "plans": [
+      "docs/bernie-reception-one-combined-scope-proof-plan.md"
+    ],
+    "receipts": [
+      "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-amendment-precommit-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-candidate-precommit-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-closeout-precommit-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-preacceptance-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-predispatch-2-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-predispatch-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-rehydration-receipt.json"
+    ],
+    "tests": [
+      "tests/test_ariadne_continuity_engine.py",
+      "tests/test_bernie_functional_meta_grid.py",
+      "tests/test_bernie_meta_grid_live_local_integration.py",
+      "tests/test_bernie_reception_one_combined_scope.py"
+    ]
+  },
+  "id": "reception-one-combined-scope-proof",
+  "kind": "implementation",
+  "relationships": [
+    {
+      "node_id": "functional-meta-grid-client",
+      "relation": "builds_on"
+    }
+  ],
+  "status": "accepted",
+  "title": "Reception One combined-scope product proof",
+  "unresolved_gates": [
+    "Final visual and interaction design remains a later Yuri decision.",
+    "Stage 3B, confirmation-path expansion, representative participants, voice, provider, production, deployment and release remain separately closed."
+  ],
+  "updated_at": "2026-07-20T15:20:00Z"
+}
