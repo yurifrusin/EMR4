@@ -37,7 +37,7 @@
       "voice"
     ]
   },
-  "graph_revision": 10,
+  "graph_revision": 12,
   "harvests": [],
   "nodes": [
     {
@@ -419,6 +419,112 @@
     },
     {
       "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "event-runtime",
+            "source": "docs/bernie-reception-one-committed-event-vertical-plan.md"
+          }
+        ],
+        "notes": [
+          "Yuri explicitly authorized the bounded event-runtime changes on 2026-07-21.",
+          "The opening is limited to one default-off authored-synthetic local appointment-reschedule signal over the existing signed update command; broader event, provider, PII, protected/historical, Stage 3B, production, deployment and release gates remain closed."
+        ]
+      },
+      "claim_scope": [
+        "Atomic committed appointment-reschedule signal, authenticated practice-scoped delivery and fresh-read Reception One cue for active patient-timeline or focused-practitioner projections.",
+        "Desktop, tablet, smartphone, keyboard, privacy, interruption, RLS, append-only, replay, rollback and cleanup evidence over authored-synthetic loopback FastAPI/PostgreSQL."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "evidence": [
+            "orchestration/prototypes/bernie-reception-one-combined-scope-proof/browser-acceptance-evidence.json",
+            "tests/test_bernie_reception_one_combined_scope.py",
+            "tests/test_reception_one_committed_event_client.py"
+          ],
+          "note": "The accepted ancestor proves the combined-scope interaction; the current descendant regression population passes and the committed-event consumer does not weaken selection or proposal-only state.",
+          "status": "satisfied"
+        }
+      ],
+      "coordinates": {
+        "git_ref": "codex/reception-one-committed-event-vertical",
+        "source_head": "705582b7719bce6f1c5fe5833c1703354b5fa1a3",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "created_at": "2026-07-20T22:00:00Z",
+      "decisions": [
+        {
+          "id": "reception-one-committed-event-authorized",
+          "source": "docs/bernie-reception-one-committed-event-vertical-plan.md",
+          "status": "accepted",
+          "summary": "Open one bounded default-off local appointment-reschedule committed-event vertical while preserving every wider closed boundary."
+        },
+        {
+          "id": "reception-one-committed-event-accepted",
+          "source": "orchestration/agent_inbox/codex/reception-one-committed-event-vertical-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the atomic reschedule signal, practice-scoped read feed, fresh-read quiet cue and exact authored-synthetic evidence."
+        }
+      ],
+      "evidence": {
+        "acceptances": [
+          "orchestration/agent_inbox/codex/reception-one-committed-event-vertical-sol-acceptance.md"
+        ],
+        "closeouts": [
+          "docs/bernie-reception-one-committed-event-vertical-closeout.md",
+          "orchestration/prototypes/bernie-reception-one-combined-scope-proof/browser-acceptance-evidence.json",
+          "orchestration/prototypes/reception-one-committed-event-vertical/browser-acceptance-evidence.json",
+          "orchestration/prototypes/reception-one-committed-event-vertical/database-cleanup-evidence.json"
+        ],
+        "findings": [
+          "docs/security/bernie-reception-one-committed-event-threat-model-delta.md",
+          "orchestration/agent_inbox/antigravity/reception-one-committed-event-vertical-veto.md",
+          "orchestration/agent_inbox/antigravity/reception-one-committed-event-vertical-veto-decision.md",
+          "orchestration/agent_inbox/codex/reception-one-committed-event-vertical-baseline-regression-comparison.md"
+        ],
+        "plans": [
+          "docs/bernie-reception-one-committed-event-vertical-plan.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/reception-one-committed-event-vertical-candidate-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/reception-one-committed-event-vertical-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/reception-one-committed-event-vertical-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/reception-one-committed-event-vertical-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/reception-one-committed-event-vertical-preimplementation-receipt.json",
+          "orchestration/agent_inbox/codex/reception-one-committed-event-vertical-preplan-receipt.json",
+          "orchestration/agent_inbox/codex/reception-one-committed-event-vertical-rehydration-receipt.json"
+        ],
+        "tests": [
+          "review/test_diary_smoke.py",
+          "tests/test_ariadne_continuity_engine.py",
+          "tests/test_bernie_functional_meta_grid.py",
+          "tests/test_bernie_meta_grid_live_local_integration.py",
+          "tests/test_bernie_reception_one_combined_scope.py",
+          "tests/test_reception_one_committed_event_client.py",
+          "tests/test_reception_one_committed_event_evidence.py",
+          "tests/test_reception_one_committed_event_runtime.py"
+        ]
+      },
+      "id": "reception-one-committed-event-vertical",
+      "kind": "implementation",
+      "relationships": [
+        {
+          "node_id": "reception-one-combined-scope-proof",
+          "relation": "builds_on"
+        }
+      ],
+      "status": "accepted",
+      "title": "Reception One committed appointment-reschedule event vertical",
+      "unresolved_gates": [
+        "Availability, selection and proposal invalidation after a slot-affecting committed reschedule requires a separately authorized proof.",
+        "Other event families, production delivery/retention, representative participants, voice, providers, PII, deployment and release remain closed.",
+        "Final visual and interaction synthesis remains a later Yuri decision."
+      ],
+      "updated_at": "2026-07-20T22:00:00Z"
+    },
+    {
+      "authority": {
         "authorized_openings": [],
         "notes": [
           "Yuri's focused review is observational and must not be converted into implementation authority by this graph."
@@ -523,5 +629,5 @@
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-07-20T15:30:00Z"
+  "updated_at": "2026-07-20T22:00:00Z"
 }
