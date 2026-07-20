@@ -1,0 +1,25 @@
+{
+  "name": "ariadne-continuity-engine",
+  "version": "0.1.0",
+  "description": "Local, evidence-linked branch continuity for long-running EMR4 work.",
+  "author": {
+    "name": "EMR4 Project"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Ariadne Continuity Engine",
+    "shortDescription": "Trace branches, obligations, and evidence.",
+    "longDescription": "Maintain a local metadata graph of EMR4 work branches, inherited contracts, evidence pointers, unresolved gates, and candidate knowledge harvests without granting product or integration authority.",
+    "developerName": "EMR4 Project",
+    "category": "Productivity",
+    "capabilities": [
+      "Local lineage",
+      "Evidence audit"
+    ],
+    "defaultPrompt": [
+      "Audit continuity before this EMR4 tranche.",
+      "Show the active branch and inherited obligations.",
+      "Compare these EMR4 work branches."
+    ]
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "ariadne_continuity_engine_increment1_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The first continuity-engine increment is architecture-coupled, small and acceptance-sensitive, so Sol retains it under the worker-lane economy rule."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external model, provider prompt, subscription or cost is authorised or used."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Independent veto disposition will be frozen in the plan; no worker is dispatched before planning."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri explicitly authorised incremental construction of the Ariadne Continuity Engine without displacing the active Reception One product work.",
+        "AGENTS.md was read completely; the live baton, authority allocation, protected evidence and user-decision boundaries were restored.",
+        "The accepted functional meta-grid plan, closeout and Sol acceptance, the accepted live-local plan, closeout and Sol acceptance, and the Reception One focused-review context were read before planning.",
+        "HEAD, master, handoff/current, origin/master and origin/handoff/current were aligned at 152e917a3ab32006438dab9c0169d77256e18d63 before the isolated task worktree was created.",
+        "The implementation worktree is C:\\Users\\sarashera\\EMR4-worktrees\\ariadne-continuity-engine-increment-1 on codex/ariadne-continuity-engine-increment-1 at the aligned source head.",
+        "The increment is local developer tooling only and opens no product API, write, event-runtime, provider, PII, protected, historical, Stage 3B, deployment, production, release, rename, artwork or trademark authority."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
