@@ -196,6 +196,7 @@ input {
 
 select {
   padding: 0.55rem 2.2rem 0.55rem 0.7rem;
+  max-width: 100%;
 }
 
 input {
@@ -328,6 +329,12 @@ input {
   border-color: var(--accent);
   background: var(--accent-pale);
   color: var(--accent-strong);
+}
+
+.route-tab:disabled,
+.fixture-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
 }
 
 .primary-button {
@@ -522,6 +529,19 @@ input {
   text-align: left;
 }
 
+.grid-availability {
+  display: block;
+  width: 100%;
+  min-height: 2.3rem;
+  padding: 0.55rem;
+  border: 1px dashed #94b7a7;
+  border-radius: 0.4rem;
+  background: #f8fbf9;
+  color: var(--accent-strong);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
 .grid-detail {
   padding: 0.75rem;
   border-radius: 0.55rem;
@@ -537,6 +557,18 @@ input {
   margin-top: 1rem;
 }
 
+.route-guidance {
+  margin-top: 0.75rem;
+  padding: 0.7rem 0.8rem;
+  border-left: 4px solid var(--accent);
+  border-radius: 0.45rem;
+  background: var(--accent-pale);
+  color: var(--accent-strong);
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
 .fixture-button {
   min-height: 3.4rem;
   text-align: left;
@@ -547,6 +579,11 @@ input {
   margin-top: 0.15rem;
   color: var(--muted);
   font-weight: 500;
+}
+
+.fixture-button.is-completed {
+  border-color: var(--accent);
+  background: var(--accent-pale);
 }
 
 .attention-output-grid {
@@ -588,6 +625,65 @@ input {
   align-items: end;
   gap: 0.7rem;
   margin-top: 1rem;
+}
+
+.observation-controls label,
+.observation-controls select {
+  min-width: 0;
+}
+
+.observation-controls select {
+  width: 100%;
+}
+
+.field-help {
+  min-height: 2.3rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.observation-flags {
+  min-width: 0;
+  margin: 0.85rem 0 0;
+  padding: 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 0.6rem;
+}
+
+.observation-flags legend {
+  padding: 0 0.35rem;
+  font-weight: 750;
+}
+
+.flag-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.8rem;
+  margin-top: 0.7rem;
+}
+
+.flag-options label {
+  display: inline-flex;
+  grid-template-columns: none;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.flag-options input {
+  width: 1rem;
+  min-height: 1rem;
+}
+
+.observation-status {
+  min-height: 1.35rem;
+  margin: 0.65rem 0 0;
+  color: var(--accent-strong);
+  font-size: 0.78rem;
+  font-weight: 700;
 }
 
 .export-row {
@@ -657,6 +753,11 @@ input {
 
   .projection-actions {
     justify-content: flex-start;
+  }
+
+  .flag-options {
+    display: grid;
+    grid-template-columns: 1fr;
   }
 
   .ordinary-grid {
