@@ -1,0 +1,78 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "accept",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "reception_one_combined_scope_final_preacceptance",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker owned the serial client/runtime tranche."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No product provider or external design model was used."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The first fresh Gemini pass is preserved but superseded for acceptance by Sol's post-veto stale-selection amendment.",
+        "A second clean-worktree Gemini 3.5 Flash/high review covers exact amended candidate e675e7d21a8eb7b0fbc514773bb875c97269e5ac and returns pass with no material state, privacy, evidence or authority finding."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The exact combined request and all three refinements pass visibly over existing patient, practitioner, appointment and proposal boundaries.",
+        "The final select-then-refine path proves stale selection is cleared before any later proposal attempt.",
+        "Five viewport and six screenshot evidence passes keyboard, touch, privacy, interruption, fallback, overflow, control size, console and network gates without interception.",
+        "Before/after database counts and hashes are identical and the exact authored-synthetic database was marker-verified and dropped.",
+        "Post-amendment populations pass at 30 focused meta-grid, 95 focused/API/continuity and 211 Diary tests; Node, Ruff and continuity validation pass.",
+        "The Sol acceptance narrows the reviewer wording: only the bounded combined-scope proposal-only proof passes; no stage, provider, write, production, deployment or release gate moves."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent contributed changes."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
