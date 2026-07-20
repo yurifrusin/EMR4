@@ -2,6 +2,8 @@
 
 Date: 2026-07-19
 
+Refined: 2026-07-20 — tablet-first mobility and direct visual control
+
 Owner: Yuri / GPT Sol Extra High
 
 Status: `product_north_star_accepted_for_strategy_stage3_not_authorized`
@@ -97,18 +99,24 @@ For writes, the enduring pattern is:
    from ordinary language. When a visual view helps, the Diary should refigure
    itself around the user's precise intent rather than require manual grid
    navigation.
-2. **Answers are not proposals; proposals are not actions.** Every response
+2. **Mobile without surrendering visual control.** A just-in-time Diary
+   projection should be a first-class tablet workspace, not a diminished
+   desktop grid. Conversation scopes the view; touch selects a patient, slot,
+   appointment, or refinement within it; and the user remains able to inspect
+   exactly what will happen before explicitly confirming it. A multi-screen
+   reception workstation becomes optional rather than assumed.
+3. **Answers are not proposals; proposals are not actions.** Every response
    makes that state unmistakable in words, sound, and any supporting visual.
-3. **Clarification is the safe interface.** Ambiguous people, dates, recurrence,
+4. **Clarification is the safe interface.** Ambiguous people, dates, recurrence,
    duration, or practitioners become concise questions rather than guesses.
-4. **Show less, reveal more on demand.** The default answer is brief; provenance,
+5. **Show less, reveal more on demand.** The default answer is brief; provenance,
    alternatives, warnings, audit, and the relevant Diary view remain available.
-5. **Conversation must survive interruption.** Durable state, revisions,
+6. **Conversation must survive interruption.** Durable state, revisions,
    idempotency, and receipts allow a receptionist to resume without duplicate
    work or contradictory state.
-6. **The user may always escape to the Diary.** Grid use is measured as useful
+7. **The user may always escape to the Diary.** Grid use is measured as useful
    fallback, not treated as failure when spatial reasoning is the better tool.
-7. **The twin notices without nagging or acting.** Only committed, typed,
+8. **The twin notices without nagging or acting.** Only committed, typed,
    authorised changes may reach the attention filter; notices are relevant,
    explainable, deduplicated, controllable, and never mutation authority.
 
@@ -164,10 +172,24 @@ authorized by this design.
 
 The fixed grid should become a family of just-in-time practitioner-, patient-,
 date-, time-, location-, availability-, and event-centred projections. The
-complete interaction language deserves its own visual-design tranche. Yuri's
-current preference is to defer that work until an explicit future decision on
-a focused Claude Fable engagement and subscription; no model use or cost is
-authorized now.
+complete interaction language deserves its own visual-design tranche.
+
+Tablet use is a first-class design target for that tranche. A receptionist
+should be able to ask for Dr Shera's afternoon availability, receive only the
+relevant touch-sized slots, tap one, identify the patient by typing or a future
+deliberate voice interaction, review the resulting proposal, and explicitly
+confirm either through the visible control or through conversation. Both
+confirmation modalities must invoke the same backend-owned confirmation path:
+fresh identity and availability checks, idempotent write, audit, and visible
+receipt. Touch selection is staff input to a proposal; it is never commitment
+by itself.
+
+This portability is not a concession to a small screen. It is the intended
+consequence of projecting only what the current task needs: the receptionist
+can move through the practice while retaining direct visual control whenever
+it is useful. Yuri's current preference is to defer the full design work until
+an explicit future decision on a focused Claude Fable engagement and
+subscription; no model use or cost is authorized now.
 
 ### Provider intelligence — observed need only
 

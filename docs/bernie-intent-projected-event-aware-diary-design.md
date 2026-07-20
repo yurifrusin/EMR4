@@ -2,6 +2,8 @@
 
 Date: 2026-07-19
 
+Refined: 2026-07-20 — tablet-first just-in-time projection and touch control
+
 Owner: Yuri / GPT Sol Extra High
 
 Decision: `foundational_product_design_accepted_runtime_not_authorized`
@@ -173,6 +175,37 @@ The projection must preserve orientation through:
 - safe ambiguity and identity-resolution states; and
 - keyboard, accessibility, density, responsiveness, and reduced-motion design.
 
+### Tablet-first direct manipulation
+
+The intent-projected Diary should make a tablet a first-class reception
+workstation rather than compressing a desktop Diary onto a smaller screen. At
+a word or a swipe, the surface should project exactly the practitioner,
+patient, date, time window, availability, or change context needed for the
+current task. The user can then act directly on that narrow visual context with
+touch while remaining in control of Diary truth.
+
+A canonical tablet booking sequence is:
+
+`spoken or typed request → scoped availability projection → staff taps a slot → patient identity is resolved or clarified → proposal is displayed → explicit button or conversational confirmation → backend revalidation → idempotent commit → audit and receipt`
+
+The interaction contract is:
+
+- conversation determines or refines the authorised projection;
+- a tap is an explicit staff selection, but selecting a slot does not write;
+- typing or deliberately speaking a patient name supplies identity evidence,
+  and ambiguity still requires clarification;
+- a confirmation button and an explicit conversational confirmation are two
+  interfaces to the same REST/OpenAPI confirmation command and authority
+  checks;
+- the backend rechecks current identity, practice scope, role, availability,
+  conflict, freshness, and idempotency immediately before writing; and
+- the projection reconciles from a fresh read and shows a committed receipt,
+  rather than trusting optimistic client or model state.
+
+This creates mobility without loss of visual control. A receptionist can work
+away from a fixed multi-screen desk, yet summon spatial Diary context whenever
+it helps and inspect the exact proposal before any mutation.
+
 The full fluid UX meta-grid remains a dedicated design tranche. Yuri's current
 preference is to defer that visual-design work until an explicit future
 decision can consider a focused Claude Fable engagement and one-month
@@ -219,6 +252,9 @@ production event system.
 9. Every projection is visibly scoped and reversible.
 10. The user can control low-consequence attention without suppressing a future
     separately defined safety obligation.
+11. Touch, typing, and conversation may select or confirm through different
+    interfaces, but they never create parallel write authorities or bypass the
+    single backend proposal/confirmation contract.
 
 ## 10. Threats a runtime tranche must address
 

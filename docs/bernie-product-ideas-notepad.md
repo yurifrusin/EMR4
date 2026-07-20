@@ -12,6 +12,8 @@ Promotion record: Yuri completed review of Entries 001-002 on 2026-07-19. They
 are integrated, together with Entry 003, into
 `docs/bernie-intent-projected-event-aware-diary-design.md`, the product north
 star, the reshaped Stage 3 decision, and the implementation blueprint. The
+tablet-first refinement in Entry 004 is integrated into the canonical product
+design and north star without changing the frozen Stage 3A protocol. The
 entries remain here as provenance and do not independently grant runtime
 authority.
 
@@ -270,3 +272,64 @@ Stage 3 should test safe attention patterns and implementation priority, not
 ask whether the foundational product property is valuable. Runtime event
 production, delivery, consumption, notification, and UI authority remain a
 separate future tranche.
+
+## Entry 004 — The tablet as a portable Diary projection console
+
+Date: 2026-07-20
+
+Source: Yuri, during the Stage 3A formative run
+
+State: `integrated_product_refinement_fluid_ux_tranche_not_authorized`
+
+### Originating insight
+
+The just-in-time Diary makes the traditional multi-screen reception workstation
+optional. A receptionist carrying a tablet could ask *bernie* to show Dr
+Shera's available afternoon appointments, receive precisely that view, tap the
+chosen slot, identify the patient, and explicitly confirm the booking without
+losing direct visual control of the Diary.
+
+The science-fiction reference is the transparent portable tablet that projects
+exactly the view its user needs at a word or a swipe. The important design
+lesson is not visual futurism for its own sake. It is that the interface has no
+fixed home screen which the user must repeatedly navigate: intent summons the
+right operational surface, and touch manipulates it immediately.
+
+### Product refinement
+
+The intent-projected Diary should be **tablet-first without becoming
+tablet-only**:
+
+- conversation summons and scopes the just-in-time view;
+- the view contains touch-sized, directly manipulable appointments and slots;
+- the receptionist may type a patient name or, in a separately authorised
+  future voice mode, deliberately ask *bernie* to identify the patient;
+- ambiguous identity always produces clarification rather than a guessed
+  selection;
+- tapping a slot produces or updates a proposal, not an appointment write;
+- the receptionist can confirm through a visible button or an explicit
+  conversational instruction; and
+- both confirmation methods converge on the same backend revalidation,
+  idempotency, audit, commit, and receipt path.
+
+This is **mobility without surrendering control**. The user is freed from a
+fixed desk and from constant grid scanning, but not from the ability to see,
+touch, review, and deliberately confirm the exact Diary action.
+
+### Design-tranche implication
+
+The future fluid UX meta-grid tranche should treat tablet ergonomics as a core
+constraint rather than a responsive afterthought. It should explore:
+
+- rapid word-to-view and swipe-to-refinement transitions;
+- touch targets, one-handed operation, orientation, density, and accessibility;
+- how a selected slot visibly becomes a proposal;
+- how patient clarification and confirmation appear without losing the scoped
+  Diary context;
+- handoff and continuity between desktop and tablet sessions; and
+- fresh-read reconciliation after another user or committed event changes the
+  visible Diary state.
+
+The frozen Stage 3A study remains unchanged. This entry does not authorise a
+tablet implementation, voice, Claude Fable, a subscription, provider calls,
+new mutation routes, production, deployment, or release.
