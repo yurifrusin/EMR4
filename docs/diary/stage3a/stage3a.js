@@ -27,6 +27,7 @@
     ordinaryGrid: document.getElementById("ordinary-grid"),
     gridDetail: document.getElementById("grid-detail"),
     attentionFixtures: document.getElementById("attention-fixtures"),
+    attentionGuidance: document.getElementById("attention-guidance"),
     visibleNotices: document.getElementById("visible-notices"),
     filterResults: document.getElementById("filter-results"),
     resetAttention: document.getElementById("reset-attention"),
@@ -37,6 +38,8 @@
     taskOutcome: document.getElementById("task-outcome"),
     stateComprehension: document.getElementById("state-comprehension"),
     projectionRating: document.getElementById("projection-rating"),
+    observationFlags: Array.from(document.querySelectorAll("#observation-flags input[type='checkbox']")),
+    observationStatus: document.getElementById("observation-status"),
     recordObservation: document.getElementById("record-observation"),
     observationCount: document.getElementById("observation-count"),
     downloadObservations: document.getElementById("download-observations"),
@@ -57,7 +60,9 @@
     observations: [],
     recordedScenarioIds: new Set(),
     attentionState: core.createAttentionState(),
-    attentionDecisions: []
+    attentionDecisions: [],
+    attentionFixtureIds: [],
+    gridDatesVisited: new Set()
   };
 
   function createSessionId() {
@@ -121,26 +126,57 @@
 
   function startScenario(index) {
     state.activeScenarioIndex = index;
-    state.routeOrder = core.routeOrderFor(data.scenarios[index], index, elements.counterbalance.value);
+    const active = scenario();
+    state.routeOrder = core.routeOrderFor(active, index, elements.counterbalance.value);
     state.routeVisits = {};
-    state.taskStartedAt = performance.now();
     state.clarificationCount = 0;
     state.projectionReturnCount = 0;
     state.attentionDecisions = [];
+    state.attentionFixtureIds = [];
+    state.gridDatesVisited = new Set();
     elements.taskOutcome.value = "not_recorded";
     elements.stateComprehension.value = "not_recorded";
     elements.projectionRating.value = "not_recorded";
+    elements.observationFlags.forEach((flag) => { flag.checked = false; });
+    elements.observationStatus.textContent = "";
 
-    const active = scenario();
     elements.activeTaskId.textContent = active.id;
     elements.activeTaskTitle.textContent = active.title;
     elements.activeTaskGoal.textContent = active.goal;
     elements.routeOrder.textContent = `Order: ${state.routeOrder.join(" → ")}`;
     elements.promptHint.textContent = `Suggested authored request: “${active.hint}”`;
     elements.conversationInput.placeholder = active.hint;
+    elements.conversationInput.value = "";
     elements.answerRegion.replaceChildren(emptyState("No answer yet", "Type the suggested request or your own equivalent wording."));
+    resetProjection();
+    resetAttention();
+    configureRouteTabs(active);
+    if (active.gridDate) elements.gridDate.value = active.gridDate;
+    renderGrid();
+    renderAttentionGuidance(active);
     switchRoute(state.routeOrder[0]);
+    state.taskStartedAt = performance.now();
     renderScenarioList();
+  }
+
+  function configureRouteTabs(active) {
+    elements.routeTabs.forEach((tab) => {
+      const allowed = active ? active.routes.includes(tab.dataset.route) : tab.dataset.route === "conversation";
+      tab.disabled = !allowed;
+      tab.setAttribute("aria-disabled", String(!allowed));
+    });
+  }
+
+  function renderAttentionGuidance(active) {
+    if (!active || !Array.isArray(active.attentionSteps)) {
+      elements.attentionGuidance.textContent = "This scenario does not use event fixtures.";
+      return;
+    }
+    const labels = active.attentionSteps.map((fixtureId) => {
+      const event = data.events.find((item) => item.fixture_id === fixtureId);
+      return event ? event.label : fixtureId;
+    });
+    elements.attentionGuidance.textContent = `Required order: ${labels.join(" → ")}. Buttons unlock one step at a time.`;
   }
 
   function emptyState(title, detail) {
@@ -150,6 +186,9 @@
   }
 
   function switchRoute(route) {
+    const active = scenario();
+    const allowed = active ? active.routes.includes(route) : route === "conversation";
+    if (!allowed) return;
     state.activeRoute = route;
     state.routeVisits[route] = (state.routeVisits[route] || 0) + 1;
     elements.routeTabs.forEach((tab) => {
@@ -161,6 +200,10 @@
     elements.gridRoute.classList.toggle("hidden", route !== "grid");
     elements.attentionRoute.classList.toggle("hidden", route !== "attention");
     if (route === "conversation") elements.conversationInput.focus();
+    if (route === "grid") {
+      state.gridDatesVisited.add(elements.gridDate.value);
+      renderGrid();
+    }
   }
 
   function renderAnswer(result) {
@@ -256,7 +299,11 @@
   function renderGrid() {
     const selectedDate = elements.gridDate.value;
     const dayAppointments = data.appointments.filter((item) => item.date === selectedDate);
-    const times = [...new Set(dayAppointments.map((item) => item.startsAt))].sort();
+    const dayAvailability = data.availability.filter((item) => item.date === selectedDate);
+    const times = [...new Set([
+      ...dayAppointments.map((item) => item.startsAt),
+      ...dayAvailability.map((item) => item.startsAt)
+    ])].sort();
     const rows = times.length ? times : ["09:00", "10:00", "11:00", "14:00", "15:00"];
     elements.ordinaryGrid.replaceChildren();
     elements.ordinaryGrid.append(node("div", "grid-cell grid-header", "Time"));
@@ -275,11 +322,19 @@
           button.type = "button";
           button.addEventListener("click", () => showGridDetail(appointment));
           cell.append(button);
+        } else {
+          const available = dayAvailability.find((item) => item.startsAt === time && item.practitionerId === practitioner.id);
+          if (available) {
+            cell.append(node("span", "grid-availability", `Available · ${formatTime(available.startsAt)}–${formatTime(available.endsAt)}`));
+          }
         }
         elements.ordinaryGrid.append(cell);
       });
     });
-    elements.gridDetail.textContent = `Showing the authored synthetic grid for ${formatDate(selectedDate)}.`;
+    const dateInstruction = scenario()?.id === "S3A-11"
+      ? " Use the date selector to inspect each authored upcoming date."
+      : "";
+    elements.gridDetail.textContent = `Showing the authored synthetic grid for ${formatDate(selectedDate)}.${dateInstruction}`;
   }
 
   function showGridDetail(appointment) {
@@ -290,9 +345,16 @@
 
   function renderAttentionFixtures() {
     elements.attentionFixtures.replaceChildren();
+    const active = scenario();
+    const steps = active && Array.isArray(active.attentionSteps) ? active.attentionSteps : [];
+    const nextFixtureId = steps[state.attentionFixtureIds.length] || null;
     data.events.forEach((event, index) => {
       const button = node("button", "fixture-button");
       button.type = "button";
+      const completed = state.attentionFixtureIds.includes(event.fixture_id);
+      button.disabled = event.fixture_id !== nextFixtureId;
+      button.classList.toggle("is-completed", completed);
+      button.setAttribute("aria-describedby", "attention-guidance");
       button.append(node("span", "", event.label), node("small", "", `${event.event_type} · fixture ${index + 1}`));
       button.addEventListener("click", () => runAttentionFixture(event));
       elements.attentionFixtures.append(button);
@@ -307,12 +369,14 @@
       data
     );
     state.attentionDecisions.push({
+      fixture_id: event.fixture_id,
       event_id: decision.eventId,
       event_type: decision.eventType,
       attention: decision.attention,
       visible: decision.visible,
       reason_code: decision.reasonCode
     });
+    state.attentionFixtureIds.push(event.fixture_id);
 
     const filterCard = node("article", "filter-card");
     filterCard.append(
@@ -336,13 +400,53 @@
       elements.visibleNotices.querySelector(".empty-copy")?.remove();
       elements.visibleNotices.prepend(notice);
     }
+    renderAttentionFixtures();
   }
 
   function resetAttention() {
     state.attentionState = core.createAttentionState();
     state.attentionDecisions = [];
+    state.attentionFixtureIds = [];
     elements.visibleNotices.replaceChildren(node("p", "empty-copy", "No notice has been surfaced."));
     elements.filterResults.replaceChildren(node("p", "empty-copy", "Run a fixture to inspect its deterministic decision."));
+    renderAttentionFixtures();
+  }
+
+  function observationBlockReason(active) {
+    const missingRoutes = active.routes.filter((route) => !state.routeVisits[route]);
+    if (missingRoutes.length) {
+      return `Visit the remaining required route${missingRoutes.length === 1 ? "" : "s"}: ${missingRoutes.join(", ")}.`;
+    }
+
+    if (Array.isArray(active.attentionSteps)) {
+      const completed = state.attentionFixtureIds.join("|");
+      const required = active.attentionSteps.join("|");
+      if (completed !== required) {
+        return "Complete the displayed event-fixture sequence before recording.";
+      }
+    }
+
+    if (["S3A-12", "S3A-14"].includes(active.id) && state.currentProjection?.type !== "event_context") {
+      return "Click Show current context before recording this event-attention scenario.";
+    }
+
+    if (active.id === "S3A-13" && state.attentionDecisions.some((decision) => decision.visible)) {
+      return "S3A-13 cannot be recorded because a suppression fixture created a visible notice.";
+    }
+
+    if (active.id === "S3A-11") {
+      const requiredDates = [...new Set(
+        data.appointments
+          .filter((item) => item.patientId === "patient-margaret-thompson")
+          .map((item) => item.date)
+      )];
+      const missingDates = requiredDates.filter((date) => !state.gridDatesVisited.has(date));
+      if (missingDates.length) {
+        return "Use the grid date selector to inspect every authored Margaret Thompson appointment date before recording.";
+      }
+    }
+
+    return null;
   }
 
   function recordObservation() {
@@ -351,9 +455,14 @@
       elements.activeTaskGoal.textContent = "Choose a scenario before recording an outcome.";
       return;
     }
+    const blockReason = observationBlockReason(active);
+    if (blockReason) {
+      elements.observationStatus.textContent = blockReason;
+      return;
+    }
     const elapsedMs = state.taskStartedAt === null ? null : Math.round(performance.now() - state.taskStartedAt);
-    state.observations.push({
-      schema_version: "bernie.stage3a.structured-observation.v1",
+    const observation = {
+      schema_version: "bernie.stage3a.structured-observation.v2",
       study_session_id: state.sessionId,
       recorded_at: new Date().toISOString(),
       scenario_id: active.id,
@@ -367,9 +476,22 @@
       clarification_count: state.clarificationCount,
       return_to_context_count: state.projectionReturnCount,
       projection_id: state.currentProjection ? state.currentProjection.id : null,
-      event_decisions: state.attentionDecisions.slice()
-    });
+      grid_dates_visited: [...state.gridDatesVisited].sort(),
+      event_decisions: state.attentionDecisions.slice(),
+      observation_flags: elements.observationFlags
+        .filter((flag) => flag.checked)
+        .map((flag) => flag.value)
+    };
+    const existingIndex = state.observations.findIndex((item) => item.scenario_id === active.id);
+    if (existingIndex >= 0) {
+      state.observations[existingIndex] = observation;
+    } else {
+      state.observations.push(observation);
+    }
     state.recordedScenarioIds.add(active.id);
+    elements.observationStatus.textContent = existingIndex >= 0
+      ? `${active.id} structured outcome updated.`
+      : `${active.id} structured outcome recorded.`;
     updateObservationReadback();
     renderScenarioList();
   }
@@ -381,7 +503,7 @@
 
   function downloadObservations() {
     const payload = {
-      schema_version: "bernie.stage3a.study-export.v1",
+      schema_version: "bernie.stage3a.study-export.v2",
       evidence_mode: "authored_synthetic_fixture_browser",
       participant_scope: "yuri_only",
       reference_date: data.referenceDate,
@@ -410,17 +532,23 @@
     state.observations = [];
     state.recordedScenarioIds = new Set();
     state.attentionDecisions = [];
+    state.attentionFixtureIds = [];
+    state.gridDatesVisited = new Set();
     elements.activeTaskId.textContent = "Choose a scenario";
     elements.activeTaskTitle.textContent = "The active task will appear here";
     elements.activeTaskGoal.textContent = "Select any scenario from the left. The study records structured outcomes, never your typed words.";
     elements.routeOrder.textContent = "No route assigned";
     elements.promptHint.textContent = "Start a scenario to see its suggested synthetic request.";
     elements.conversationInput.value = "";
+    elements.observationFlags.forEach((flag) => { flag.checked = false; });
+    elements.observationStatus.textContent = "";
     elements.answerRegion.replaceChildren(emptyState("No answer yet", "Bernie will label an answer, clarification, proposal, or block explicitly."));
     resetProjection();
     resetAttention();
     updateObservationReadback();
     renderScenarioList();
+    configureRouteTabs(null);
+    renderAttentionGuidance(null);
     switchRoute("conversation");
   }
 
@@ -440,8 +568,14 @@
   elements.counterbalance.addEventListener("change", () => {
     if (state.activeScenarioIndex >= 0) startScenario(state.activeScenarioIndex);
   });
-  elements.gridDate.addEventListener("change", renderGrid);
-  elements.resetAttention.addEventListener("click", resetAttention);
+  elements.gridDate.addEventListener("change", () => {
+    if (state.activeRoute === "grid") state.gridDatesVisited.add(elements.gridDate.value);
+    renderGrid();
+  });
+  elements.resetAttention.addEventListener("click", () => {
+    resetAttention();
+    if (state.currentProjection?.type === "event_context") resetProjection();
+  });
   elements.projectionBack.addEventListener("click", returnProjection);
   elements.projectionReset.addEventListener("click", resetProjection);
   elements.recordObservation.addEventListener("click", recordObservation);
@@ -450,6 +584,8 @@
 
   renderScenarioList();
   initialiseGridDates();
+  configureRouteTabs(null);
+  renderAttentionGuidance(null);
   renderAttentionFixtures();
   updateObservationReadback();
 }());

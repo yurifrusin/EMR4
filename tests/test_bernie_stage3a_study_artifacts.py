@@ -113,6 +113,66 @@ def test_stage3a_deterministic_interpreter_preserves_answer_proposal_and_block_s
     ]
 
 
+def test_stage3a_appointment_projections_are_chronological():
+    results = _node_json(
+        "const d=require('./docs/diary/stage3a/stage3a-data.js');"
+        "const c=require('./docs/diary/stage3a/stage3a-core.js');"
+        "const practitioner=c.interpretTask('S3A-03','Open Dr Shera afternoon on Friday week.',d);"
+        "const patient=c.interpretTask('S3A-11','Show me all of Margaret Thompson upcoming appointments.',d);"
+        "console.log(JSON.stringify({"
+        "practitioner:practitioner.projection.items.map(x=>`${x.date}T${x.startsAt}`),"
+        "patient:patient.projection.items.map(x=>`${x.date}T${x.startsAt}`)}));"
+    )
+
+    assert results == {
+        "practitioner": [
+            "2026-07-31T13:00",
+            "2026-07-31T14:15",
+            "2026-07-31T15:30",
+        ],
+        "patient": [
+            "2026-07-31T14:15",
+            "2026-08-14T09:00",
+            "2027-01-20T14:30",
+        ],
+    }
+
+
+def test_stage3a_scenario_baselines_and_attention_sequences_are_explicit():
+    data = _node_json(
+        "const d=require('./docs/diary/stage3a/stage3a-data.js');"
+        "console.log(JSON.stringify({"
+        "gridDates:Object.fromEntries(d.scenarios.filter(x=>x.gridDate).map(x=>[x.id,x.gridDate])),"
+        "attention:Object.fromEntries(d.scenarios.filter(x=>x.attentionSteps).map(x=>[x.id,x.attentionSteps])),"
+        "fixtureIds:d.events.map(x=>x.fixture_id),"
+        "eventSummary:d.currentReads['read-margaret-friday-week-v2'].summary}));"
+    )
+
+    assert data["gridDates"] == {
+        "S3A-01": "2027-01-20",
+        "S3A-02": "2027-01-20",
+        "S3A-03": "2026-07-31",
+        "S3A-04": "2026-07-31",
+        "S3A-10": "2026-07-31",
+        "S3A-11": "2026-07-31",
+    }
+    assert data["attention"] == {
+        "S3A-12": ["fixture-relevant-reschedule"],
+        "S3A-13": [
+            "fixture-unrelated-roster",
+            "fixture-foreign-practice",
+            "fixture-rolled-back",
+        ],
+        "S3A-14": [
+            "fixture-relevant-reschedule",
+            "fixture-replay-reschedule",
+            "fixture-delayed-reschedule",
+        ],
+    }
+    assert len(data["fixtureIds"]) == len(set(data["fixtureIds"])) == 6
+    assert "Friday 31 July 2026" in data["eventSummary"]
+
+
 def test_stage3a_attention_filter_surfaces_once_and_never_interrupts():
     results = _node_json(
         "const d=require('./docs/diary/stage3a/stage3a-data.js');"
@@ -169,11 +229,31 @@ def test_stage3a_counterbalance_reverses_paired_route_order():
 def test_stage3a_export_schema_omits_prompt_and_transcript_fields():
     app_source = APP_JS.read_text(encoding="utf-8")
 
+    assert 'schema_version: "bernie.stage3a.study-export.v2"' in app_source
+    assert 'schema_version: "bernie.stage3a.structured-observation.v2"' in app_source
     assert "contains_prompt_or_transcript_text: false" in app_source
     assert "\n      typed_request:" not in app_source
     assert "\n      prompt_text:" not in app_source
     assert "\n      transcript_text:" not in app_source
     assert "observations: state.observations" in app_source
+    assert "observation_flags:" in app_source
+    assert "grid_dates_visited:" in app_source
+
+
+def test_stage3a_scenario_transition_and_recording_guards_prevent_state_leakage():
+    html = HTML.read_text(encoding="utf-8")
+    app_source = APP_JS.read_text(encoding="utf-8")
+
+    assert "resetProjection();\n    resetAttention();" in app_source
+    assert "configureRouteTabs(active);" in app_source
+    assert "button.disabled = event.fixture_id !== nextFixtureId" in app_source
+    assert "Complete the displayed event-fixture sequence before recording." in app_source
+    assert "Visit the remaining required route" in app_source
+    assert "Use the grid date selector to inspect every authored" in app_source
+    assert "Optional structured observation flags" in html
+    assert "No free text is retained" in html
+    assert "Committed-change notice" in html
+    assert "Separate safety check" in html
 
 
 def test_stage3a_plan_keeps_fixture_and_authoritative_confirmation_evidence_separate():

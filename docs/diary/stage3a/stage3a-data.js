@@ -88,24 +88,25 @@
   ];
 
   const scenarios = [
-    { id: "S3A-01", title: "Relative-time appointment recall", goal: "Find Margaret Thompson's appointment about six months from the reference date with Dr Shera.", hint: "What time and date is Margaret Thompson's appointment in six months with Dr Shera?", routes: ["conversation", "grid"] },
-    { id: "S3A-02", title: "Authoritative appointment details", goal: "State the date, time, location, practitioner and status of Margaret's six-month appointment.", hint: "Tell me the details of Margaret Thompson's six-month appointment with Dr Shera.", routes: ["conversation", "grid"] },
-    { id: "S3A-03", title: "Practitioner time-window view", goal: "Inspect Dr Shera's bounded afternoon on Friday week.", hint: "Open Dr Shera's afternoon appointments on Friday week.", routes: ["conversation", "grid"] },
-    { id: "S3A-04", title: "Availability without a write", goal: "Find suitable Dr Shera availability on Friday week after 2 pm without booking.", hint: "Show Dr Shera's availability on Friday week after 2 pm.", routes: ["conversation", "grid"] },
+    { id: "S3A-01", title: "Relative-time appointment recall", goal: "Find Margaret Thompson's appointment about six months from the reference date with Dr Shera.", hint: "What time and date is Margaret Thompson's appointment in six months with Dr Shera?", routes: ["conversation", "grid"], gridDate: "2027-01-20" },
+    { id: "S3A-02", title: "Authoritative appointment details", goal: "State the date, time, location, practitioner and status of Margaret's six-month appointment.", hint: "Tell me the details of Margaret Thompson's six-month appointment with Dr Shera.", routes: ["conversation", "grid"], gridDate: "2027-01-20" },
+    { id: "S3A-03", title: "Practitioner time-window view", goal: "Inspect Dr Shera's bounded afternoon on Friday week. The appointment projection must be chronological.", hint: "Open Dr Shera's afternoon appointments on Friday week.", routes: ["conversation", "grid"], gridDate: "2026-07-31" },
+    { id: "S3A-04", title: "Availability without a write", goal: "Find suitable Dr Shera availability on Friday week after 2 pm without booking.", hint: "Show Dr Shera's availability on Friday week after 2 pm.", routes: ["conversation", "grid"], gridDate: "2026-07-31" },
     { id: "S3A-05", title: "Proposal, not action", goal: "Prepare a synthetic booking proposal and verify that it is labelled as unwritten.", hint: "Prepare an appointment for Margaret Thompson with Dr Shera on Friday week after 2 pm.", routes: ["conversation"] },
-    { id: "S3A-06", title: "Explicit confirmed create", goal: "Run separately through the accepted local Diary/FastAPI/PostgreSQL path; this fixture page cannot commit.", hint: "This safety check is deliberately unavailable in the fixture harness.", routes: ["conversation"] },
+    { id: "S3A-06", title: "Explicit confirmed create", goal: "Verify that this fixture refuses to commit. Sol runs the real visible confirmation and exact database check separately after the formative study.", hint: "Why can’t this study page confirm the appointment?", routes: ["conversation"] },
     { id: "S3A-07", title: "Identity ambiguity", goal: "Ask for Margaret without a surname and require a choice between two synthetic candidates.", hint: "Show me Margaret's upcoming appointments.", routes: ["conversation"] },
     { id: "S3A-08", title: "Stale or blocked request", goal: "Explain a stale proposal safely without claiming a mutation.", hint: "Confirm the old appointment proposal again.", routes: ["conversation"] },
     { id: "S3A-09", title: "Interrupted-session resume", goal: "Resume retained synthetic context without repeating a committed action.", hint: "Resume my appointment task.", routes: ["conversation"] },
-    { id: "S3A-10", title: "Friday-week focused projection", goal: "Open only Dr Shera's afternoon on Friday week and return to the overview.", hint: "Bernie, open the Diary page for Dr Shera's afternoon appointments on Friday week.", routes: ["conversation", "grid"] },
-    { id: "S3A-11", title: "Patient upcoming projection", goal: "Show every authored future appointment for Margaret Thompson.", hint: "Show me all of Margaret Thompson's upcoming appointments.", routes: ["conversation", "grid"] },
-    { id: "S3A-12", title: "Relevant committed-change attention", goal: "Surface one relevant committed fixture at a low-interruption level and offer its current view.", hint: "Use the event attention lab.", routes: ["attention"] },
-    { id: "S3A-13", title: "Unsafe and unrelated suppression", goal: "Suppress unrelated, foreign-practice, uncommitted and rolled-back fixtures.", hint: "Use the event attention lab.", routes: ["attention"] },
-    { id: "S3A-14", title: "Replay and ordering reconciliation", goal: "Show one effect for replay and keep the newest aggregate revision after delayed delivery.", hint: "Use the event attention lab.", routes: ["attention"] }
+    { id: "S3A-10", title: "Friday-week focused projection", goal: "Open only Dr Shera's afternoon on Friday week and return to the overview.", hint: "Bernie, open the Diary page for Dr Shera's afternoon appointments on Friday week.", routes: ["conversation", "grid"], gridDate: "2026-07-31" },
+    { id: "S3A-11", title: "Patient upcoming projection", goal: "Show every authored future appointment for Margaret Thompson in chronological order. In the grid comparison, inspect each date offered by the date control.", hint: "Show me all of Margaret Thompson's upcoming appointments.", routes: ["conversation", "grid"], gridDate: "2026-07-31" },
+    { id: "S3A-12", title: "Relevant committed-change attention", goal: "Click Relevant committed reschedule once, verify one concise notice, then click Show current context.", hint: "Follow the event-attention steps shown below.", routes: ["attention"], attentionSteps: ["fixture-relevant-reschedule"] },
+    { id: "S3A-13", title: "Unsafe and unrelated suppression", goal: "Click the unrelated roster, foreign-practice and rolled-back fixtures in the displayed order; none may create a user-visible notice.", hint: "Follow the event-attention steps shown below.", routes: ["attention"], attentionSteps: ["fixture-unrelated-roster", "fixture-foreign-practice", "fixture-rolled-back"] },
+    { id: "S3A-14", title: "Replay and ordering reconciliation", goal: "Click relevant reschedule, replay and delayed older revision in the displayed order; only the first may create a visible effect.", hint: "Follow the event-attention steps shown below.", routes: ["attention"], attentionSteps: ["fixture-relevant-reschedule", "fixture-replay-reschedule", "fixture-delayed-reschedule"] }
   ];
 
   const events = [
     {
+      fixture_id: "fixture-relevant-reschedule",
       id: "event-relevant-reschedule-v2",
       label: "Relevant committed reschedule",
       event_type: "diary.appointment_rescheduled",
@@ -119,6 +120,7 @@
       current_read_id: "read-margaret-friday-week-v2"
     },
     {
+      fixture_id: "fixture-unrelated-roster",
       id: "event-unrelated-roster-v1",
       label: "Unrelated committed roster change",
       event_type: "diary.roster_changed",
@@ -132,6 +134,7 @@
       current_read_id: "read-roster-chen-v1"
     },
     {
+      fixture_id: "fixture-foreign-practice",
       id: "event-foreign-practice-v1",
       label: "Foreign-practice event",
       event_type: "diary.appointment_cancelled",
@@ -145,6 +148,7 @@
       current_read_id: "read-foreign"
     },
     {
+      fixture_id: "fixture-rolled-back",
       id: "event-rolled-back-v1",
       label: "Rolled-back change",
       event_type: "diary.appointment_rescheduled",
@@ -158,6 +162,7 @@
       current_read_id: null
     },
     {
+      fixture_id: "fixture-replay-reschedule",
       id: "event-relevant-reschedule-v2",
       label: "Replay of relevant reschedule",
       event_type: "diary.appointment_rescheduled",
@@ -171,6 +176,7 @@
       current_read_id: "read-margaret-friday-week-v2"
     },
     {
+      fixture_id: "fixture-delayed-reschedule",
       id: "event-delayed-reschedule-v1",
       label: "Delayed older revision",
       event_type: "diary.appointment_rescheduled",
@@ -189,7 +195,7 @@
     "read-margaret-friday-week-v2": {
       projectionId: "projection-event-margaret-friday-week-v2",
       scope: "Margaret Thompson · Dr Shera · Friday 31 July 2026 · Brisbane Clinic",
-      summary: "Margaret Thompson's appointment is now 2:45 pm–3:15 pm with Dr Shera.",
+      summary: "Margaret Thompson's appointment on Friday 31 July 2026 is now 2:45 pm–3:15 pm with Dr Shera.",
       asOf: "2026-07-20T10:30:00+10:00"
     },
     "read-roster-chen-v1": {

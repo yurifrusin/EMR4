@@ -36,21 +36,33 @@
     };
   }
 
+  function chronologicalAppointments(appointments) {
+    return appointments.slice().sort((left, right) => {
+      const leftKey = `${left.date}T${left.startsAt}`;
+      const rightKey = `${right.date}T${right.startsAt}`;
+      return leftKey.localeCompare(rightKey) || left.id.localeCompare(right.id);
+    });
+  }
+
   function interpretTask(taskId, rawText, data) {
     const text = normalize(rawText);
     if (!text) {
       return { kind: "clarification", code: "empty_request", message: "What would you like to know about the synthetic Diary?" };
     }
 
-    const future = data.appointments.filter((item) => item.patientId === "patient-margaret-thompson");
+    const future = chronologicalAppointments(
+      data.appointments.filter((item) => item.patientId === "patient-margaret-thompson")
+    );
     const sixMonth = data.appointments.find((item) => item.id === "appointment-margaret-six-months");
-    const fridayWeek = data.appointments.filter((item) => item.practitionerId === "practitioner-shera" && item.date === "2026-07-31");
+    const fridayWeek = chronologicalAppointments(
+      data.appointments.filter((item) => item.practitionerId === "practitioner-shera" && item.date === "2026-07-31")
+    );
 
     if (taskId === "S3A-06") {
       return {
         kind: "boundary",
         code: "authoritative_confirmation_separate",
-        message: "This fixture surface cannot confirm or commit. Run S3A-06 separately through the visible local Diary confirmation path."
+        message: "This fixture has correctly refused to confirm or commit. Sol will run the visible local Diary confirmation and exact PostgreSQL readback separately after the formative study."
       };
     }
 
@@ -249,6 +261,7 @@
 
   return {
     normalize,
+    chronologicalAppointments,
     interpretTask,
     createAttentionState,
     evaluateAttentionEvent,

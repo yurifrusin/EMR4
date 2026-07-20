@@ -113,6 +113,9 @@
         <p class="help-text">
           Fixtures test filtering semantics only. There is no outbox, broker, subscription, background consumer or live event.
         </p>
+        <div id="attention-guidance" class="route-guidance" aria-live="polite">
+          Start S3A-12, S3A-13 or S3A-14 to receive an exact fixture sequence.
+        </div>
         <div id="attention-fixtures" class="attention-fixtures"></div>
         <div class="attention-output-grid">
           <section aria-labelledby="visible-notices-title">
@@ -160,6 +163,7 @@
         </div>
         <div class="observation-controls">
           <label>Task outcome
+            <span class="field-help">“Completed with clarification” means Bernie asked for missing information and the task then completed.</span>
             <select id="task-outcome">
               <option value="not_recorded">Not recorded</option>
               <option value="completed">Completed</option>
@@ -169,16 +173,21 @@
               <option value="failed">Failed</option>
             </select>
           </label>
-          <label>State understood
+          <label>Interaction state understood
+            <span class="field-help">Describe what Bernie showed. Appointment status such as “confirmed” is not itself a new Diary write.</span>
             <select id="state-comprehension">
               <option value="not_recorded">Not recorded</option>
-              <option value="answer">Answer</option>
-              <option value="proposal">Proposal</option>
-              <option value="committed_action">Committed action</option>
+              <option value="answer">Answer · read-only fact</option>
+              <option value="proposal">Proposal · not written</option>
+              <option value="committed_action">Confirmed Diary change · write completed</option>
+              <option value="committed_change_notice">Committed-change notice · completed elsewhere</option>
+              <option value="suppressed_events">Suppressed event fixtures</option>
+              <option value="separate_safety_check">Separate safety check · not run here</option>
               <option value="uncertain">Uncertain</option>
             </select>
           </label>
           <label>Projection usefulness
+            <span class="field-help">Rate the just-in-time view for this scenario, not a view retained from another scenario.</span>
             <select id="projection-rating">
               <option value="not_recorded">Not recorded</option>
               <option value="useful">Useful</option>
@@ -188,6 +197,20 @@
           </label>
           <button id="record-observation" class="primary-button" type="button">Record structured outcome</button>
         </div>
+        <fieldset id="observation-flags" class="observation-flags">
+          <legend>Optional structured observation flags</legend>
+          <p class="help-text">No free text is retained. Select every issue that affected this scenario.</p>
+          <div class="flag-options">
+            <label><input type="checkbox" value="chronology_issue" /> Incorrect ordering</label>
+            <label><input type="checkbox" value="carried_over_context" /> Carried-over context</label>
+            <label><input type="checkbox" value="instructions_unclear" /> Instructions unclear</label>
+            <label><input type="checkbox" value="interaction_label_unclear" /> Interaction label unclear</label>
+            <label><input type="checkbox" value="projection_hard_to_scan" /> Projection difficult to scan</label>
+            <label><input type="checkbox" value="route_comparison_issue" /> Route comparison issue</label>
+            <label><input type="checkbox" value="other_structured_issue" /> Other structured issue</label>
+          </div>
+        </fieldset>
+        <p id="observation-status" class="observation-status" role="status" aria-live="polite"></p>
         <div class="export-row">
           <button id="download-observations" class="secondary-button" type="button">Download structured observations</button>
           <button id="reset-study" class="danger-quiet-button" type="button">Clear in-memory study</button>
