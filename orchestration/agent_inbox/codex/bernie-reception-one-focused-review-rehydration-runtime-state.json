@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "bernie_reception_one_focused_review_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker is needed for the small Sol-owned durable product-note update."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external design model, subscription, prompt transmission or cost is authorised or used."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No independent veto is required for recording a provisional name and focused-review context without implementation authority."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri asked to preserve the Reception One and retained meta-grid terminology discussion with the next focused review.",
+        "AGENTS.md was read completely and the current baton, authority allocation, protected evidence boundaries and user-decision boundaries were restored.",
+        "The accepted live-local plan, closeout and Sol acceptance plus the product ideas notepad, intent-projected design and development-verification record were read before the durable update.",
+        "HEAD, master, handoff/current, origin/master and origin/handoff/current are clean and aligned at ae713f8d39840a0f7861bb560fbe58939a7ccc67.",
+        "The update may record Reception One only as the leading provisional user-facing name, retain meta-grid as architectural/product vocabulary, preserve the one-diary/many-projections and page metaphors, and defer document.write replacement to bounded maintenance.",
+        "It does not authorise a product rename, trademark filing, visual redesign, API/write/event runtime/provider/PII/Stage 3B/deployment/release change or another implementation tranche."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

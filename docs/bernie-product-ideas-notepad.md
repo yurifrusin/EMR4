@@ -27,6 +27,11 @@ in `docs/bernie-functional-meta-grid-client-closeout.md`. That implementation
 opens no confirmation/write, event-runtime, provider, PII, Stage 3B,
 production, deployment or release authority.
 
+The provider-free live-local integration/evaluation subsequently passed on
+2026-07-20. Entry 006 preserves the leading provisional **Reception One** name,
+the decision to retain **meta-grid** terminology, and the exact context to carry
+into Yuri's next focused review. It grants no rename or trademark authority.
+
 ## Notepad convention
 
 - Give every entry a stable sequential identifier and date.
@@ -390,3 +395,59 @@ reversible state model, tablet constraints and non-authoritative proposal/event
 boundaries. It does not authorize the recommended functional implementation,
 a subscription, provider call, prompt transmission, runtime event system,
 production, deployment or release.
+
+## Entry 006 — Reception One and the unity of the meta-grid Diary
+
+Date: 2026-07-20
+
+Source: Yuri, after the provider-free live-local meta-grid integration closeout
+
+State: `leading_provisional_name_focused_review_pending_no_rename_authority`
+
+### Originating insight
+
+**Reception One** may become the user-facing name of the meta-grid Diary
+system. The name connects the historical Reception 1 station — where the real
+Bernie served as an elder stateswoman of the reception team and where current
+daily-booking truth was once operationally concentrated — with the modern
+product's one authoritative Diary beneath many fluid projections.
+
+The name does not replace **meta-grid**. Reception One names the possible
+system identity and its unity; meta-grid names the interaction language that
+can refigure that one Diary around a practitioner's, patient's, time window's,
+availability search's or proposal review's immediate purpose.
+
+EMR4 remains internal programme/version nomenclature. Yuri's candidate public
+hierarchy uses **electronic medical records** as the explanatory category line,
+**RECEPTION ONE** as the distinctive system wordmark, **EMR** as the concise
+umbrella, and **v4** as quiet technical/version information. A rough black and
+white serif reference places lower-case `electronic medical records` above
+large upper-case `RECEPTION ONE™`. This is review material, not accepted visual
+identity or public trademark use.
+
+### Product principle
+
+`Many views. One diary.`
+
+Each projection should feel like opening a real diary to the page or section
+needed for the task. Attention and layout change, but authoritative truth does
+not split. The ordinary fixed grid is one possible page and fallback rather
+than the Diary's only real form.
+
+### Next use
+
+Carry this terminology and metaphor into Yuri's next focused review of the
+accepted live-local working client. Test whether the name, retained meta-grid
+language, persistent scope, reversibility and page metaphor help the system
+feel unified rather than fragmented.
+
+The detailed review context is
+`docs/bernie-reception-one-focused-review-context.md`.
+
+### Reserved decisions
+
+This entry does not finalise the name, authorise interface or repository
+renaming, approve trademark or business-name action, accept cost, or open
+high-fidelity visual design. Formal clearance should precede material public
+brand investment. Every implementation and authority boundary remains as
+closed in the live baton.
