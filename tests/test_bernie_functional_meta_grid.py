@@ -27,8 +27,8 @@ def test_functional_meta_grid_files_are_wired_into_the_existing_diary():
     html = _read(HTML)
 
     assert '<link rel="stylesheet" href="meta-grid.css?v=5"' in html
-    assert '<script src="diary.js?v=188" defer>' in html
-    assert '<script src="meta-grid.js?v=7" defer>' in html
+    assert '<script src="diary.js?v=189" defer>' in html
+    assert '<script src="meta-grid.js?v=8" defer>' in html
     assert 'id="btn-meta-grid-launch"' in html
     assert 'id="bernie-meta-grid"' in html
     assert 'id="meta-grid-request-form"' in html

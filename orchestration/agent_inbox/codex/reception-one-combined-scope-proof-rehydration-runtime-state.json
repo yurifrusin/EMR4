@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "reception_one_combined_scope_proof_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The product proof is tightly coupled to one client state machine and one serial disposable browser/backend/PostgreSQL runtime, so Sol retains implementation and test execution under the worker-lane economy rule."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external design model, provider prompt, subscription or cost is authorised or used."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "A fresh Gemini veto is a candidate acceptance gate because this tranche changes user-visible combined-scope interpretation; no reviewer is dispatched before the plan freezes the evidence packet."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri explicitly authorised the next bounded Reception One product tranche: one visible proposal-only request that combines Margaret Thompson, Dr Shera, a half-hour duration and after-2-today availability.",
+        "AGENTS.md was read completely; the live baton, current authority allocation, protected evidence and user-decision boundaries were restored.",
+        "The Stage 1 acceptance and Sol closeout, functional meta-grid plan/closeout/acceptance, live-local integration plan/closeout/acceptance, Reception One focused-review context, Continuity Engine Increment 1 closeout/acceptance and canonical continuity graph were read before planning.",
+        "The API Spine ADR, programme, release gates, appointment read inventory, OpenAPI appointment command contract, read-only GraphQL diary SDL, permission matrix, proposal idempotency design and artifact tests were inspected before planning.",
+        "HEAD, master, handoff/current, origin/master and origin/handoff/current were aligned at 1d0442845974a46e12f5963ed9afb14beb4fd381 before the isolated task worktree was created.",
+        "The implementation worktree is C:\\Users\\sarashera\\EMR4-worktrees\\reception-one-combined-scope-proof on codex/reception-one-combined-scope-proof at the aligned source head.",
+        "The live review workspace remains on codex/bernie-reception-one-review-session with its four pre-existing untracked continuity receipts preserved and untouched.",
+        "The tranche may reuse existing read and proposal routes only; API, GraphQL, OpenAPI/Pydantic, database/migration, confirmation/write, event runtime, provider, PII/protected/historical, Stage 3B, production, deployment, release, voice, autonomous action, branding artwork and trademark authority remain closed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is assigned; the implementation and shared runtime acceptance path are serial and tightly coupled."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

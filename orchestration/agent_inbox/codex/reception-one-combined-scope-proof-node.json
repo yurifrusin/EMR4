@@ -1,0 +1,66 @@
+{
+  "authority": {
+    "authorized_openings": [],
+    "notes": [
+      "Yuri authorised the one visible combined patient, practitioner, date, time and duration proof on 2026-07-20.",
+      "The opening is client-only over existing read and proposal routes and grants no API, write, confirmation, event-runtime, provider, PII, Stage 3B, production, deployment or release authority."
+    ]
+  },
+  "claim_scope": [
+    "Bounded Reception One client proof of one combined appointment-availability intent over existing authorised reads and proposal routes.",
+    "Proposal-only interaction ending before booking-review handoff or confirmation."
+  ],
+  "contract_evidence": [
+    {
+      "contract_id": "combined-patient-practitioner-time-duration-intent",
+      "evidence": [
+        "docs/bernie-reception-one-combined-scope-proof-plan.md"
+      ],
+      "note": "The plan freezes the required proof, but the inherited contract remains a gap until focused and live-local test evidence passes.",
+      "status": "gap"
+    }
+  ],
+  "coordinates": {
+    "git_ref": "codex/reception-one-combined-scope-proof",
+    "source_head": "1d0442845974a46e12f5963ed9afb14beb4fd381",
+    "thread_id": null,
+    "worktree_role": "task"
+  },
+  "created_at": "2026-07-20T14:04:50Z",
+  "decisions": [
+    {
+      "id": "combined-scope-proof-authorised",
+      "source": "docs/bernie-reception-one-combined-scope-proof-plan.md",
+      "status": "accepted",
+      "summary": "Implement and evidence one proposal-only combined patient, practitioner, date, time and duration interaction while preserving every closed boundary."
+    }
+  ],
+  "evidence": {
+    "acceptances": [],
+    "closeouts": [],
+    "findings": [],
+    "plans": [
+      "docs/bernie-reception-one-combined-scope-proof-plan.md"
+    ],
+    "receipts": [
+      "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-candidate-precommit-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-rehydration-receipt.json"
+    ],
+    "tests": []
+  },
+  "id": "reception-one-combined-scope-proof",
+  "kind": "implementation",
+  "relationships": [
+    {
+      "node_id": "functional-meta-grid-client",
+      "relation": "builds_on"
+    }
+  ],
+  "status": "active",
+  "title": "Reception One combined-scope product proof",
+  "unresolved_gates": [
+    "Prove the exact combined request and refinements through focused and live-local test evidence.",
+    "Pass independent Gemini veto and Sol acceptance before integration."
+  ],
+  "updated_at": "2026-07-20T14:04:50Z"
+}

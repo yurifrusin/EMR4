@@ -8,7 +8,8 @@
   "use strict";
 
   const params = new URLSearchParams(window.location.search);
-  const isLoopback = ["127.0.0.1", "localhost"].includes(window.location.hostname);
+  const isLoopback = ["127.0.0.1", "localhost"].includes(window.location.hostname) ||
+    ["::1", "[::1]"].includes(window.location.hostname);
   const standalone = isLoopback && params.get("standalone_diary") === "true";
   if (standalone) {
     window.Office = Object.freeze({
