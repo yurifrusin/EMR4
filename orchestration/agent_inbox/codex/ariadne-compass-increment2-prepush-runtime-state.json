@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "push",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "ariadne_compass_increment2_prepush",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker was dispatched."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The clean-worktree Node PTY dependency baseline is recorded outside the frozen acceptance population."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external planning or implementation model was used."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh Gemini 3.5 Flash High returned pass over reviewed implementation head dacae0b865c99cf565831e3842f5f2b2bc481105."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The five-source rehydration remains current.",
+        "Accepted Compass map revision 2 and continuity graph revision 15 validate and the Compass node audit passes.",
+        "The frozen 43-test population, all static checks, skill/plugin validators and Git whitespace checks pass.",
+        "The task worktree is clean and contains only the accepted bounded Compass tranche.",
+        "No product or executive authority boundary changed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent contributed changes."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

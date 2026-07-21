@@ -1,0 +1,84 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "ariadne_compass_increment2_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is selected before the Compass plan is frozen."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external planning model or provider call is authorised or required for pre-plan rehydration."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Independent review allocation remains a plan decision."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri explicitly authorised beginning Ariadne's Compass as the navigation-first precursor to any workflow executive.",
+        "The five-source pass restored the current live baton, Sol authority allocation, active Ariadne and Reception One plans and acceptances, protected boundaries, and exact Git/worktree state.",
+        "The isolated task worktree is clean on codex/ariadne-compass-increment2 at 54c094c2fa9f0885268041ae4497ed9a1ba8ad78; local and origin master and handoff/current were aligned at that source commit before worktree creation.",
+        "The bounded direction is repository-local, metadata-only and read-only with respect to product and external systems: no agent dispatch, autonomous execution, API, write, event-runtime, provider, PII, protected/historical, Stage 3B, production, deployment or release authority is opened.",
+        "The integration worktree's four pre-existing untracked Reception One receipt files remain untouched."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent has been assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

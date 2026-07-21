@@ -1,0 +1,84 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "ariadne_compass_increment2_candidate_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker contributed to the candidate."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The exploratory broad-test PTY dependency observation is recorded; the adapter was not used for implementation."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external planning or implementation model was used."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fresh independent Gemini veto remains required after the clean candidate commit."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The five-source rehydration receipt passed before planning and implementation.",
+        "The frozen Compass plan, schema, canonical map, read-only validator/renderer, current Markdown report, continuity node, skill guidance and focused tests are complete in the isolated task worktree.",
+        "Canonical Compass, Continuity Engine, preflight, operating-model and handover tests pass 43/43; skill/plugin validators, compilation, Ruff, graph/Compass validation, node audit and diff checks pass.",
+        "The Compass preserves the real combined-scope fork, requires a continuity-clean accepted terminal product node, labels all horizon entries as candidates and retains Yuri-owned decisions.",
+        "No product code, API, database, event runtime, provider, PII, protected/historical evidence, Stage 3B, production, deployment, release, agent dispatch or workflow executor surface changed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent contributed changes."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

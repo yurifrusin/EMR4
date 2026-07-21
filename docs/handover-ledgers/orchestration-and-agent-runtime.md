@@ -95,3 +95,29 @@ import transcripts, call a provider or alter product code. A possible Increment
 2 read-only pre-plan continuity packet and the separate Reception One combined-
 scope proof both require fresh bounded decisions. See
 `docs/ariadne-continuity-engine-increment1-closeout.md`.
+
+## 2026-07-21 Ariadne Compass Increment 2
+
+Yuri authorised a navigation-first Compass to make EMR4's strategic position
+and the relationship among accepted tranches continuously legible. Increment 2
+passes as repository-local, read-only metadata navigation over the Continuity
+Engine. A revision-bound JSON map and deterministic human report state the EMR4
+north star, place Reception One in Phase 2B, preserve the real seven-step
+product journey, explain the current capability and distinguish candidates from
+Yuri-owned decisions.
+
+The canonical map is deliberately partial: it covers the active Reception One
+lineage and Ariadne tooling, not every EMR4 domain. Validation fails closed on
+stale graph revisions, fabricated lineage, unsafe evidence, sensitive fields,
+unknown boundaries, an unauditable current node or malformed decision metadata.
+The frozen 43-test population and all validators pass; fresh Gemini 3.5 Flash
+High independently returns `pass`. The wider 236-pass/14-failure Deep Code PTY
+observation remains an explicitly labelled clean-worktree Node dependency
+baseline.
+
+The Compass has no plan compiler, hook, model/provider call, dispatch, Git,
+worktree, PR or product-command actuator. Its product horizon lists visual/
+interaction synthesis and another exact typed Diary event family as candidates;
+workflow-executive maturation is a separate programme-support candidate. All
+three require fresh Yuri decisions. See `docs/ariadne-compass-current.md` and
+`docs/ariadne-compass-increment2-closeout.md`.

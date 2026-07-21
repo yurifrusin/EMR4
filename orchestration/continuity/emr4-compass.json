@@ -1,0 +1,204 @@
+{
+  "schema_version": "ariadne.compass.v1",
+  "project_id": "emr4",
+  "map_revision": 2,
+  "updated_at": "2026-07-21T05:30:00Z",
+  "source_graph_revision": 15,
+  "orientation_statement": "EMR4 is currently deepening Phase 2B through Reception One: the latest accepted proof shows that one combined receptionist request can remain safely oriented when committed Diary truth changes. This is a working local capability foundation, not a finished Reception One experience or a production-ready EMR.",
+  "north_star": {
+    "title": "A complete AI-native Australian general-practice management system",
+    "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
+    "evidence": [
+      "implementation_plan.md",
+      "docs/bernie-conversational-diary-north-star.md",
+      "docs/bernie-intent-projected-event-aware-diary-design.md"
+    ]
+  },
+  "programme": {
+    "id": "reception-one",
+    "title": "Reception One scheduling intelligence",
+    "master_plan_phase": "Phase 2B — Bernie Receptionist Copilot",
+    "summary": "Reception One is the current internal receptionist-copilot programme. Its purpose is to let staff express scheduling intent, see the relevant projection of one authoritative Diary, prepare safe proposals and understand committed changes while the backend retains identity, availability, conflict, write and audit authority.",
+    "evidence": [
+      "implementation_plan.md",
+      "docs/bernie-current-strategic-transition-review.md",
+      "docs/bernie-conversational-diary-north-star.md"
+    ]
+  },
+  "journey": [
+    {
+      "node_id": "stage1-combined-intent-foundation",
+      "lineage_parent": null,
+      "strategic_role": "Authority foundation",
+      "outcome": "Established the supervised patient, practitioner, time and duration proposal/confirmation path while keeping booking truth and writes in the backend.",
+      "evidence": [
+        "docs/bernie-stage1-provider-free-supervised-booking-acceptance-plan.md",
+        "orchestration/agent_inbox/codex/bernie-stage1-tranche-d-sol-acceptance.md"
+      ]
+    },
+    {
+      "node_id": "meta-grid-concept",
+      "lineage_parent": "stage1-combined-intent-foundation",
+      "strategic_role": "Interaction grammar",
+      "outcome": "Defined one Diary that can be projected into focused, reversible views instead of forcing every task through a full grid.",
+      "evidence": [
+        "docs/bernie-fluid-meta-grid-concept-design.md",
+        "docs/bernie-fluid-meta-grid-concept-closeout.md"
+      ]
+    },
+    {
+      "node_id": "functional-meta-grid-client",
+      "lineage_parent": "meta-grid-concept",
+      "strategic_role": "Functional client proof",
+      "outcome": "Made the projection grammar interactive across desktop, tablet, smartphone and keyboard paths without opening a booking write.",
+      "evidence": [
+        "docs/bernie-functional-meta-grid-client-closeout.md",
+        "orchestration/agent_inbox/codex/bernie-functional-meta-grid-sol-acceptance.md"
+      ]
+    },
+    {
+      "node_id": "meta-grid-live-local-integration",
+      "lineage_parent": "functional-meta-grid-client",
+      "strategic_role": "Real local plumbing proof",
+      "outcome": "Connected the visible client to real local FastAPI/PostgreSQL reads and proposal boundaries using authored-synthetic data and no provider.",
+      "evidence": [
+        "docs/bernie-meta-grid-live-local-integration-evaluation-closeout.md",
+        "orchestration/agent_inbox/codex/bernie-meta-grid-live-local-integration-sol-acceptance.md"
+      ]
+    },
+    {
+      "node_id": "reception-one-combined-scope-proof",
+      "lineage_parent": "functional-meta-grid-client",
+      "strategic_role": "Whole-request continuity proof",
+      "outcome": "Proved patient, practitioner, half-hour duration and after-2 constraints together in one request, repairing the continuity gap found by Ariadne without carrying identity into the Compass.",
+      "evidence": [
+        "docs/bernie-reception-one-combined-scope-proof-closeout.md",
+        "orchestration/agent_inbox/codex/reception-one-combined-scope-proof-sol-acceptance.md"
+      ]
+    },
+    {
+      "node_id": "reception-one-committed-event-vertical",
+      "lineage_parent": "reception-one-combined-scope-proof",
+      "strategic_role": "Nervous-system foundation",
+      "outcome": "Proved a bounded committed appointment-reschedule signal, authenticated fresh reads and a quiet Reception One cue without making the event a command.",
+      "evidence": [
+        "docs/bernie-reception-one-committed-event-vertical-closeout.md",
+        "orchestration/agent_inbox/codex/reception-one-committed-event-vertical-sol-acceptance.md"
+      ]
+    },
+    {
+      "node_id": "reception-one-availability-reconciliation",
+      "lineage_parent": "reception-one-committed-event-vertical",
+      "strategic_role": "Context-preserving change reconciliation",
+      "outcome": "Proved that a committed reschedule can refresh the active availability projection, preserve a still-valid proposal and clear an invalid one without widening write authority.",
+      "evidence": [
+        "docs/bernie-reception-one-availability-reconciliation-closeout.md",
+        "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md"
+      ]
+    }
+  ],
+  "current_position": {
+    "node_id": "reception-one-availability-reconciliation",
+    "strategic_role": "First joined proof of projected intent and committed-change attention",
+    "why_now": "The combined request and the committed-reschedule signal had each been proved separately. The next necessary question was whether Reception One could preserve or withdraw an in-progress availability/proposal context when authoritative Diary truth changed.",
+    "outcome": "A fresh backend slot search now reconciles the active one-practitioner projection after the accepted reschedule event. Valid state survives with fresh candidate data; invalid state and stale navigation history clear; irrelevant or consequence-free changes remain quiet.",
+    "unlocks": [
+      "A grounded visual/interaction synthesis using a real end-to-end Reception One behaviour rather than a static concept alone.",
+      "A separately authorised decision about whether another typed Diary event family would add enough receptionist value to justify widening the bounded nervous system.",
+      "A concrete programme position from which the Compass can distinguish product advancement from tooling or exploratory work."
+    ],
+    "does_not_solve": [
+      "The final Reception One visual language, information density or production interaction design.",
+      "Representative receptionist usability, Stage 3B, voice or real-world operational evidence.",
+      "Other Diary event families, general autonomous workflow, provider selection, PII handling, deployment or release.",
+      "The clinical, billing, results, prescribing, patient-portal and other wider EMR4 programme phases."
+    ],
+    "evidence": [
+      "docs/bernie-reception-one-availability-reconciliation-plan.md",
+      "docs/bernie-reception-one-availability-reconciliation-closeout.md",
+      "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md"
+    ]
+  },
+  "decision_horizon": [
+    {
+      "id": "reception-one-visual-synthesis",
+      "title": "Reception One visual and interaction synthesis",
+      "status": "candidate",
+      "strategic_question": "How should the proven conversational, projected and event-aware behaviour be presented as a coherent, uncluttered Reception One experience?",
+      "why_it_matters": "The plumbing now supports a realistic interaction, but the final visual hierarchy and balance between conversation, focused projection and full-Diary fallback remain intentionally unresolved.",
+      "prerequisites": [
+        "A fresh Yuri decision on scope, participants/models and whether the work is exploratory design or implementation.",
+        "Preservation of the accepted projection, proposal, privacy, keyboard and ordinary-Diary fallback contracts."
+      ],
+      "boundary_changes": [],
+      "evidence": [
+        "docs/bernie-reception-one-availability-reconciliation-closeout.md",
+        "docs/bernie-fluid-meta-grid-concept-design.md",
+        "docs/bernie-reception-one-focused-review-context.md"
+      ]
+    },
+    {
+      "id": "next-typed-diary-event-family",
+      "title": "Another typed Diary event family",
+      "status": "candidate",
+      "strategic_question": "Is there another committed Diary change whose receptionist value and attention contract justify extending the bounded nervous system?",
+      "why_it_matters": "The reschedule vertical proves the pattern, but breadth should follow an explicit value and threat review rather than event coverage for its own sake.",
+      "prerequisites": [
+        "A fresh Yuri authority decision naming the exact event family and product value.",
+        "A bounded event, fresh-read, relevance, privacy, deduplication and evidence plan."
+      ],
+      "boundary_changes": [
+        "event-runtime"
+      ],
+      "evidence": [
+        "docs/bernie-reception-one-availability-reconciliation-closeout.md",
+        "docs/bernie-intent-projected-event-aware-diary-design.md"
+      ]
+    }
+  ],
+  "programme_support_horizon": [
+    {
+      "id": "ariadne-workflow-executive",
+      "title": "Ariadne workflow-executive maturation",
+      "status": "candidate",
+      "strategic_question": "After the Compass proves useful, should Ariadne compile typed plans and execute bounded worktree, test, review and PR steps through a capability broker?",
+      "why_it_matters": "Routine orchestration could move to deterministic code and modest models, preserving Sol and Yuri attention for programme and product judgment.",
+      "prerequisites": [
+        "Evidence that the Compass improves orientation and that a dry-run plan compiler reduces coordination cost without hiding decisions.",
+        "A separate authority design for capabilities, retries, audit, failure escalation and protected integration."
+      ],
+      "boundary_changes": [
+        "autonomous-action"
+      ],
+      "evidence": [
+        "docs/ariadne-compass-increment2-plan.md",
+        "docs/ariadne-continuity-engine-increment1-closeout.md"
+      ]
+    }
+  ],
+  "user_owned_decisions": [
+    {
+      "id": "choose-next-reception-one-direction",
+      "question": "Should the next Reception One tranche pursue visual/interaction synthesis, another exact event family, or pause product expansion?",
+      "required_before": "Any new Reception One implementation or external design-model dispatch.",
+      "evidence": [
+        "docs/bernie-reception-one-availability-reconciliation-closeout.md"
+      ]
+    },
+    {
+      "id": "authorize-workflow-executive",
+      "question": "Should Ariadne progress from a read-only Compass to a dry-run Plan Compiler and later a capability-brokered executor?",
+      "required_before": "Any automatic hook, LLM Conductor call, worker dispatch, worktree action, PR action or protected-ref operation by Ariadne software.",
+      "evidence": [
+        "docs/ariadne-compass-increment2-plan.md",
+        "docs/ariadne-continuity-engine-increment1-closeout.md"
+      ]
+    }
+  ],
+  "map_limits": [
+    "The canonical continuity graph currently maps the active Reception One lineage and Ariadne tooling, not every EMR4 phase or historical sprint.",
+    "The master implementation plan is a strategic blueprint; phase labels do not prove implementation or readiness.",
+    "Accepted Reception One evidence is local and authored-synthetic unless its source says otherwise; it is not production, release or representative-staff evidence.",
+    "The decision horizon records candidates and gates. It neither recommends a winner nor grants authority."
+  ]
+}
