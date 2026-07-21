@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/ariadne-compass.v1.json",
+  "title": "Ariadne Compass",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project_id",
+    "map_revision",
+    "updated_at",
+    "source_graph_revision",
+    "orientation_statement",
+    "north_star",
+    "programme",
+    "journey",
+    "current_position",
+    "decision_horizon",
+    "programme_support_horizon",
+    "user_owned_decisions",
+    "map_limits"
+  ],
+  "properties": {
+    "schema_version": { "const": "ariadne.compass.v1" },
+    "project_id": { "type": "string", "minLength": 1 },
+    "map_revision": { "type": "integer", "minimum": 1 },
+    "updated_at": { "$ref": "#/$defs/timestamp" },
+    "source_graph_revision": { "type": "integer", "minimum": 1 },
+    "orientation_statement": { "type": "string", "minLength": 1 },
+    "north_star": { "$ref": "#/$defs/northStar" },
+    "programme": { "$ref": "#/$defs/programme" },
+    "journey": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/journeyStep" }
+    },
+    "current_position": { "$ref": "#/$defs/currentPosition" },
+    "decision_horizon": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/horizonItem" }
+    },
+    "programme_support_horizon": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/horizonItem" }
+    },
+    "user_owned_decisions": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/userDecision" }
+    },
+    "map_limits": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "repoPath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*://)[^\\\\]+$"
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/repoPath" }
+    },
+    "northStar": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "summary", "evidence"],
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "summary": { "type": "string", "minLength": 1 },
+        "evidence": { "$ref": "#/$defs/evidence" }
+      }
+    },
+    "programme": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "master_plan_phase", "summary", "evidence"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "master_plan_phase": { "type": "string", "minLength": 1 },
+        "summary": { "type": "string", "minLength": 1 },
+        "evidence": { "$ref": "#/$defs/evidence" }
+      }
+    },
+    "journeyStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_id", "lineage_parent", "strategic_role", "outcome", "evidence"],
+      "properties": {
+        "node_id": { "$ref": "#/$defs/id" },
+        "lineage_parent": {
+          "oneOf": [
+            { "$ref": "#/$defs/id" },
+            { "type": "null" }
+          ]
+        },
+        "strategic_role": { "type": "string", "minLength": 1 },
+        "outcome": { "type": "string", "minLength": 1 },
+        "evidence": { "$ref": "#/$defs/evidence" }
+      }
+    },
+    "currentPosition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "node_id",
+        "strategic_role",
+        "why_now",
+        "outcome",
+        "unlocks",
+        "does_not_solve",
+        "evidence"
+      ],
+      "properties": {
+        "node_id": { "$ref": "#/$defs/id" },
+        "strategic_role": { "type": "string", "minLength": 1 },
+        "why_now": { "type": "string", "minLength": 1 },
+        "outcome": { "type": "string", "minLength": 1 },
+        "unlocks": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "does_not_solve": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "evidence": { "$ref": "#/$defs/evidence" }
+      }
+    },
+    "horizonItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "status",
+        "strategic_question",
+        "why_it_matters",
+        "prerequisites",
+        "boundary_changes",
+        "evidence"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["candidate", "deferred", "blocked"] },
+        "strategic_question": { "type": "string", "minLength": 1 },
+        "why_it_matters": { "type": "string", "minLength": 1 },
+        "prerequisites": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "boundary_changes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" }
+        },
+        "evidence": { "$ref": "#/$defs/evidence" }
+      }
+    },
+    "userDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "question", "required_before", "evidence"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "question": { "type": "string", "minLength": 1 },
+        "required_before": { "type": "string", "minLength": 1 },
+        "evidence": { "$ref": "#/$defs/evidence" }
+      }
+    }
+  }
+}

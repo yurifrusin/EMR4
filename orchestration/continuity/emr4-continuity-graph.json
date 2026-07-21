@@ -55,7 +55,7 @@
       "voice"
     ]
   },
-  "graph_revision": 13,
+  "graph_revision": 14,
   "harvests": [],
   "nodes": [
     {
@@ -129,6 +129,72 @@
         "Plugin installation, workflow hooks and a visual branch map remain deferred."
       ],
       "updated_at": "2026-07-20T13:50:00Z"
+    },
+    {
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri authorised a navigation-first Ariadne Compass on 2026-07-21.",
+          "The Compass is repository-local and read-only: it cannot select a tranche, dispatch a worker, execute a workflow, grant authority, alter Git state, call a provider or issue an EMR command."
+        ]
+      },
+      "claim_scope": [
+        "A deterministic human and machine-readable programme-position report over committed continuity metadata.",
+        "Current canonical navigation covers the active Reception One lineage and explicitly does not claim an exhaustive map of every EMR4 domain."
+      ],
+      "contract_evidence": [],
+      "coordinates": {
+        "git_ref": "codex/ariadne-compass-increment2",
+        "source_head": "54c094c2fa9f0885268041ae4497ed9a1ba8ad78",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "created_at": "2026-07-21T02:00:00Z",
+      "decisions": [
+        {
+          "id": "compass-increment-two-scope-frozen",
+          "source": "docs/ariadne-compass-increment2-plan.md",
+          "status": "accepted",
+          "summary": "Build the read-only programme-navigation Compass before considering a plan compiler or workflow executor."
+        }
+      ],
+      "evidence": {
+        "acceptances": [],
+        "closeouts": [],
+        "findings": [
+          "orchestration/agent_inbox/codex/ariadne-compass-increment2-broad-regression-observation.md",
+          "orchestration/agent_inbox/codex/ariadne-compass-increment2-plan-sol-review.md"
+        ],
+        "plans": [
+          "docs/ariadne-compass-increment2-plan.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-compass-increment2-candidate-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-compass-increment2-rehydration-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_compass.py"
+        ]
+      },
+      "id": "ariadne-compass-increment2",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "ariadne-continuity-engine-increment1",
+          "relation": "builds_on"
+        },
+        {
+          "node_id": "reception-one-availability-reconciliation",
+          "relation": "protects"
+        }
+      ],
+      "status": "active",
+      "title": "Ariadne Compass Increment 2",
+      "unresolved_gates": [
+        "The canonical map, renderer, deterministic tests and independent review must pass before acceptance.",
+        "Plan compilation, hooks, model invocation, workflow execution and product commands remain deferred."
+      ],
+      "updated_at": "2026-07-21T02:00:00Z"
     },
     {
       "authority": {
@@ -763,5 +829,5 @@
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-07-21T00:10:00Z"
+  "updated_at": "2026-07-21T02:00:00Z"
 }
