@@ -675,10 +675,13 @@
         {
           "contract_id": "committed-reschedule-availability-reconciliation",
           "evidence": [
-            "docs/bernie-reception-one-availability-reconciliation-plan.md"
+            "docs/bernie-reception-one-availability-reconciliation-plan.md",
+            "docs/bernie-reception-one-availability-reconciliation-closeout.md",
+            "orchestration/prototypes/reception-one-availability-reconciliation/browser-acceptance-evidence.json",
+            "tests/test_reception_one_availability_reconciliation.py"
           ],
-          "note": "Implementation and live-local evidence do not yet exist; the reconciliation contract remains deliberately open.",
-          "status": "gap"
+          "note": "Focused tests, real local browser/backend/PostgreSQL evidence, fresh independent veto and Sol acceptance prove the bounded reconciliation contract.",
+          "status": "satisfied"
         }
       ],
       "coordinates": {
@@ -694,26 +697,51 @@
           "source": "docs/bernie-reception-one-availability-reconciliation-plan.md",
           "status": "accepted",
           "summary": "Reuse the accepted reschedule signal to reconcile one combined availability, selection and non-committing proposal flow without broadening event or write authority."
+        },
+        {
+          "id": "availability-reconciliation-accepted",
+          "source": "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept fresh candidate comparison, valid-state preservation, invalid-state and stale-Back expiry, quiet attention and exact authored-synthetic evidence."
         }
       ],
       "evidence": {
-        "acceptances": [],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md"
+        ],
         "closeouts": [
-          "orchestration/prototypes/bernie-reception-one-combined-scope-proof/browser-acceptance-evidence.json"
+          "docs/bernie-reception-one-availability-reconciliation-closeout.md",
+          "orchestration/prototypes/bernie-reception-one-combined-scope-proof/browser-acceptance-evidence.json",
+          "orchestration/prototypes/reception-one-availability-reconciliation/browser-acceptance-evidence.json",
+          "orchestration/prototypes/reception-one-availability-reconciliation/database-cleanup-evidence.json"
         ],
         "findings": [
           "docs/security/bernie-reception-one-availability-reconciliation-threat-model-delta.md",
-          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-plan-sol-review.md"
+          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-plan-sol-review.md",
+          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-baseline-regression-comparison.md",
+          "orchestration/agent_inbox/antigravity/reception-one-availability-reconciliation-final-review.md",
+          "orchestration/agent_inbox/antigravity/reception-one-availability-reconciliation-veto-decision.md"
         ],
         "plans": [
           "docs/bernie-reception-one-availability-reconciliation-plan.md"
         ],
         "receipts": [
+          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-candidate-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-preimplementation-receipt.json",
           "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-preplan-receipt.json",
           "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-rehydration-receipt.json"
         ],
         "tests": [
-          "tests/test_bernie_reception_one_combined_scope.py"
+          "review/test_diary_smoke.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_ariadne_continuity_engine.py",
+          "tests/test_bernie_functional_meta_grid.py",
+          "tests/test_bernie_meta_grid_live_local_integration.py",
+          "tests/test_bernie_reception_one_combined_scope.py",
+          "tests/test_reception_one_availability_reconciliation.py",
+          "tests/test_reception_one_committed_event_client.py"
         ]
       },
       "id": "reception-one-availability-reconciliation",
@@ -724,17 +752,16 @@
           "relation": "builds_on"
         }
       ],
-      "status": "active",
+      "status": "accepted",
       "title": "Reception One committed-reschedule availability reconciliation",
       "unresolved_gates": [
-        "The committed-reschedule availability-reconciliation contract remains a gap until focused tests and real local browser/backend/PostgreSQL evidence both pass.",
         "Other event families, automatic proposal work, external transport, production delivery/retention, representative participants, voice, providers, PII, deployment and release remain closed.",
         "Final visual and interaction synthesis remains a later Yuri decision."
       ],
-      "updated_at": "2026-07-20T22:55:00Z"
+      "updated_at": "2026-07-21T00:10:00Z"
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-07-20T22:55:00Z"
+  "updated_at": "2026-07-21T00:10:00Z"
 }

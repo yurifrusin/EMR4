@@ -220,7 +220,7 @@ def test_threat_delta_covers_stale_state_noise_races_privacy_and_escalation():
         assert required in threat
 
 
-def test_ariadne_records_open_descendant_contract_until_evidence_exists():
+def test_ariadne_records_accepted_descendant_contract_and_exact_evidence():
     graph = json.loads(_read(GRAPH))
     node = json.loads(_read(NODE))
 
@@ -232,7 +232,7 @@ def test_ariadne_records_open_descendant_contract_until_evidence_exists():
     )
     assert contract["source_node"] == "reception-one-committed-event-vertical"
     assert contract["required_evidence_types"] == ["tests", "closeouts"]
-    assert node["status"] == "active"
+    assert node["status"] == "accepted"
     assert node["relationships"] == [
         {"node_id": "reception-one-committed-event-vertical", "relation": "builds_on"}
     ]
@@ -241,7 +241,13 @@ def test_ariadne_records_open_descendant_contract_until_evidence_exists():
         for row in node["contract_evidence"]
         if row["contract_id"] == "committed-reschedule-availability-reconciliation"
     )
-    assert reconciliation["status"] == "gap"
+    assert reconciliation["status"] == "satisfied"
+    assert reconciliation["evidence"] == [
+        "docs/bernie-reception-one-availability-reconciliation-plan.md",
+        "docs/bernie-reception-one-availability-reconciliation-closeout.md",
+        "orchestration/prototypes/reception-one-availability-reconciliation/browser-acceptance-evidence.json",
+        "tests/test_reception_one_availability_reconciliation.py",
+    ]
 
 
 def test_exact_harness_and_runner_preserve_runtime_and_write_boundaries():
