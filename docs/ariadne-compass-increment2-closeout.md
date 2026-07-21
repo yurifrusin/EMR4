@@ -1,10 +1,15 @@
 # Ariadne Compass Increment 2 closeout
 
-**Result:** `ariadne_compass_increment2_pass`  
-**Decision owner:** Yuri  
-**Acceptance owner:** GPT Sol  
-**Date:** 2026-07-21  
-**Source head:** `54c094c2fa9f0885268041ae4497ed9a1ba8ad78`  
+**Result:** `ariadne_compass_increment2_pass`
+
+**Decision owner:** Yuri
+
+**Acceptance owner:** GPT Sol
+
+**Date:** 2026-07-21
+
+**Source head:** `54c094c2fa9f0885268041ae4497ed9a1ba8ad78`
+
 **Reviewed implementation:** `dacae0b865c99cf565831e3842f5f2b2bc481105`
 
 ## 1. Accepted result
@@ -69,4 +74,3 @@ maturation as a separate programme-support candidate.
 
 Return the baton to Yuri. A later dry-run Plan Compiler or capability-brokered
 Workflow Executor requires a fresh decision and a separate authority design.
-

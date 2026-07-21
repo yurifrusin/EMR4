@@ -1,8 +1,11 @@
 # Sol acceptance — Ariadne Compass Increment 2
 
-**Decision:** `ariadne_compass_increment2_pass`  
-**Accepted candidate:** `587da23e`  
-**Reviewed implementation:** `dacae0b865c99cf565831e3842f5f2b2bc481105`  
+**Decision:** `ariadne_compass_increment2_pass`
+
+**Accepted candidate:** `587da23e`
+
+**Reviewed implementation:** `dacae0b865c99cf565831e3842f5f2b2bc481105`
+
 **Date:** 2026-07-21
 
 ## Acceptance finding
@@ -39,4 +42,3 @@ production, deployment or release authority.
 
 The Ariadne node may now become `accepted`. The visual-synthesis, next-event and
 workflow-executive horizons remain candidates requiring fresh Yuri decisions.
-
