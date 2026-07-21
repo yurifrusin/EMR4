@@ -801,8 +801,8 @@
     });
   }
 
-  function selectionProjection(item, trigger = "touch") {
-    const current = state.current;
+  function selectionProjection(item, trigger = "touch", sourceProjection = state.current, context = {}) {
+    const current = sourceProjection;
     const items = current.items.map(existing => ({ ...existing, selected: existing.id === item.id }));
     return newProjection({
       family: current.family,
@@ -816,8 +816,8 @@
       affordances: ["prepare_proposal", "back", "reset", "explain"],
       operation: "select",
       trigger,
-      reason: "Staff selected one candidate slot",
-      changedDimensions: ["selected_item"],
+      reason: context.reason || "Staff selected one candidate slot",
+      changedDimensions: context.changedDimensions || ["selected_item"],
       posture: "selection_only",
       operationalCommandAvailable: false,
       rootIntentId: current.root_intent_id,
@@ -832,6 +832,7 @@
     if (!selected) {
       return clarificationProjection("Select one available slot before adding a patient.", [], requestText);
     }
+    const availabilityBasis = availabilitySignature(state.current);
     const current = snapshot();
     const result = await bridge.prepareProposal({
       practitioner_id: selected.practitioner_id,
@@ -857,7 +858,7 @@
       location_display: selected.location_display || current.location_display,
       sensitive: true
     }];
-    return newProjection({
+    const projection = newProjection({
       family: "proposal_review",
       projectionState: "proposal_not_committed",
       scope,
@@ -881,6 +882,8 @@
       evidenceMode: result.evidence_mode,
       proposalResult: result
     });
+    projection.availability_signature = availabilityBasis;
+    return projection;
   }
 
   function isRefinement(text) {
@@ -1213,6 +1216,72 @@
     )) || null;
   }
 
+  function availabilitySlotIdentity(item) {
+    if (!item) return null;
+    const candidate = item.raw_candidate || {};
+    const date = item.date || candidate.appointment_date || "";
+    const startsAt = item.starts_at || candidate.start_time_local || "";
+    const duration = Number(item.duration_minutes || candidate.duration_minutes || 0);
+    const practitionerId = item.practitioner_id || candidate.practitioner_id || "";
+    const locationId = item.location_id || candidate.location_id || "";
+    if (!date || !startsAt || !duration || !practitionerId) return null;
+    return [
+      String(practitionerId),
+      String(locationId),
+      String(date),
+      String(startsAt).slice(0, 5),
+      String(duration)
+    ].join("|");
+  }
+
+  function availabilityCandidateMap(projection) {
+    const candidates = new Map();
+    (projection?.items || []).forEach(item => {
+      if (item.kind !== "available_slot") return;
+      const identity = availabilitySlotIdentity(item);
+      if (identity) candidates.set(identity, item);
+    });
+    return candidates;
+  }
+
+  function availabilitySignature(projection) {
+    return [...availabilityCandidateMap(projection).keys()].sort().join("\n");
+  }
+
+  function currentAvailabilityProjectionEligible(current) {
+    return Boolean(
+      current &&
+      !state.interrupted &&
+      current.state !== "reconciliation_required" &&
+      ["availability_slots", "proposal_review"].includes(current.family) &&
+      current.scope?.practitioner_ids?.length === 1
+    );
+  }
+
+  async function freshAvailabilityForCommittedEvent(current) {
+    const practitioner = (snapshot().practitioners || [])
+      .find(row => row.id === current.scope.practitioner_ids[0]);
+    if (!practitioner) return null;
+    return buildAvailability(practitioner, current.root_request, {
+      date: current.scope.date_from,
+      window: {
+        valid: true,
+        from: current.scope.time_from || "08:00",
+        to: current.scope.time_to || "17:00",
+        changed: ["freshness"]
+      },
+      duration: current.scope.duration_minutes || DEFAULT_DURATION_MINUTES,
+      patient: patientForProjection(current),
+      operation: "reconcile",
+      trigger: "committed_event",
+      reason: "Fresh availability read after a committed appointment-time change",
+      changedDimensions: ["availability", "freshness"],
+      rootIntentId: current.root_intent_id,
+      parentProjectionId: current.projection_id,
+      rootRequest: current.root_request
+    });
+  }
+
   async function freshProjectionForCommittedEvent(current) {
     const context = {
       operation: "reconcile",
@@ -1276,8 +1345,10 @@
     rememberBoundedRevision(aggregateId, event.aggregate_revision);
 
     const current = state.current;
+    const initiatingProjectionId = current?.projection_id;
     const previousItem = projectionAppointment(current, aggregateId);
-    if (!state.isOpen || !previousItem) return;
+    const availabilityEligible = currentAvailabilityProjectionEligible(current);
+    if (!state.isOpen || (!previousItem && !availabilityEligible)) return;
 
     let freshAppointment;
     try {
@@ -1287,8 +1358,125 @@
     }
     if (!freshAppointment || String(freshAppointment.id) !== aggregateId) return;
 
+    if (
+      !state.isOpen ||
+      state.interrupted ||
+      state.current?.projection_id !== initiatingProjectionId
+    ) return;
+
+    if (availabilityEligible && !previousItem) {
+      const scopedPractitionerId = String(current.scope.practitioner_ids[0]);
+      if (String(freshAppointment.practitioner_id || "") !== scopedPractitionerId) return;
+
+      const previousSelection = state.selectedItem;
+      const previousSelectionIdentity = availabilitySlotIdentity(previousSelection);
+      const previousSignature = current.family === "proposal_review"
+        ? String(current.availability_signature || "")
+        : availabilitySignature(current);
+      const next = await freshAvailabilityForCommittedEvent(current);
+      if (!next) return;
+      if (
+        !state.isOpen ||
+        state.interrupted ||
+        state.current?.projection_id !== initiatingProjectionId
+      ) return;
+
+      const nextCandidates = availabilityCandidateMap(next);
+      const freshSelection = previousSelectionIdentity
+        ? nextCandidates.get(previousSelectionIdentity) || null
+        : null;
+      const nextSignature = availabilitySignature(next);
+      const candidateSetChanged = !previousSignature || previousSignature !== nextSignature;
+      if (candidateSetChanged) {
+        // Earlier projections in this root were built over the superseded
+        // candidate set. Do not let Back resurrect a stale selection or
+        // non-committing proposal after reconciliation.
+        state.trail = [];
+      }
+      let cueOutcome = null;
+      let cueContextProjection = next;
+      let cueContextSelection = freshSelection;
+
+      if (previousSelection && freshSelection) {
+        state.selectedItem = freshSelection;
+        if (current.family === "proposal_review") {
+          const preservedProposal = {
+            ...current,
+            projection_id: secureId("projection"),
+            parent_projection_id: current.projection_id,
+            created_at: new Date().toISOString(),
+            freshness: {
+              ...next.freshness,
+              reason: "Fresh availability reconciliation confirmed the proposed time remains available"
+            },
+            transition: {
+              operation: "reconcile",
+              trigger: "committed_event",
+              reason: "The candidate set changed but the proposed time remains available",
+              changed_dimensions: ["availability", "freshness"]
+            },
+            availability_signature: nextSignature
+          };
+          setProjection(preservedProposal, { newRoot: false, pushCurrent: false, focusCanvas: false });
+          if (candidateSetChanged) cueOutcome = "proposal_preserved";
+        } else {
+          const preservedSelection = selectionProjection(
+            freshSelection,
+            "committed_event",
+            next,
+            {
+              reason: candidateSetChanged
+                ? "The candidate set changed but the selected time remains available"
+                : "Fresh availability reconciliation confirmed the selected time remains available",
+              changedDimensions: candidateSetChanged
+                ? ["availability", "selected_item", "freshness"]
+                : ["freshness"]
+            }
+          );
+          setProjection(preservedSelection, { newRoot: false, pushCurrent: false, focusCanvas: false });
+          if (candidateSetChanged) cueOutcome = "selection_preserved";
+        }
+      } else {
+        setProjection(next, { newRoot: false, pushCurrent: false, focusCanvas: false });
+        if (previousSelection) {
+          cueOutcome = current.family === "proposal_review"
+            ? "proposal_unavailable"
+            : "selection_unavailable";
+          cueContextSelection = null;
+        } else if (candidateSetChanged) {
+          cueOutcome = "availability_changed";
+          cueContextSelection = null;
+        }
+      }
+
+      if (
+        !cueOutcome ||
+        state.eventRuntime.muted ||
+        state.eventRuntime.snoozedUntil > Date.now()
+      ) return;
+
+      const existingCue = state.eventRuntime.cue;
+      state.eventRuntime.cue = {
+        eventId,
+        aggregateId,
+        kind: "availability_reconciliation",
+        outcome: cueOutcome,
+        selectedWindow: previousSelection?.display || null,
+        contextProjection: cueContextProjection,
+        contextSelection: cueContextSelection,
+        coalescedCount: existingCue ? existingCue.coalescedCount + 1 : 1
+      };
+      renderEventCue();
+      return;
+    }
+
     const next = await freshProjectionForCommittedEvent(current);
     if (!next) return;
+    if (
+      !state.isOpen ||
+      state.interrupted ||
+      state.current?.projection_id !== initiatingProjectionId
+    ) return;
     const currentItem = projectionAppointment(next, aggregateId);
     if (!currentItem) return;
     if (
@@ -1307,6 +1495,7 @@
     state.eventRuntime.cue = {
       eventId,
       aggregateId,
+      kind: "appointment_time_change",
       oldWindow: previousItem.display,
       newWindow: currentItem.display,
       coalescedCount: existingCue ? existingCue.coalescedCount + 1 : 1
@@ -1368,13 +1557,34 @@
     elements.eventCue?.classList.toggle("hidden", !cue);
     if (!cue) return;
     if (elements.eventCueSummary) {
-      elements.eventCueSummary.textContent = state.private
-        ? "Time and appointment details are hidden while privacy mode is on."
-        : `${cue.oldWindow} changed to ${cue.newWindow}. The current projection now shows the committed time.`;
+      if (state.private) {
+        elements.eventCueSummary.textContent = cue.kind === "availability_reconciliation"
+          ? "The affected time, patient and appointment details are hidden while privacy mode is on."
+          : "Time and appointment details are hidden while privacy mode is on.";
+      } else if (cue.kind === "availability_reconciliation") {
+        const summaries = {
+          availability_changed: "Availability in this view changed. Reception One refreshed the current options.",
+          selection_preserved: "Availability in this view changed, but your selected time is still available.",
+          proposal_preserved: "Availability in this view changed, but your proposed time is still available.",
+          selection_unavailable: "That time is no longer available. Reception One refreshed the remaining options.",
+          proposal_unavailable: "That proposed time is no longer available. Reception One cleared the proposal and refreshed the remaining options."
+        };
+        elements.eventCueSummary.textContent = summaries[cue.outcome] || "Reception One refreshed current availability.";
+      } else {
+        elements.eventCueSummary.textContent = `${cue.oldWindow} changed to ${cue.newWindow}. The current projection now shows the committed time.`;
+      }
     }
-    if (elements.eventShow) elements.eventShow.disabled = state.private;
+    if (elements.eventShow) {
+      elements.eventShow.disabled = state.private;
+      elements.eventShow.textContent = cue.kind === "availability_reconciliation"
+        ? "Review current availability"
+        : "Show changed appointment";
+    }
     if (elements.announcer) {
       elements.announcer.textContent = "An appointment time in the current view changed. Reception One refreshed the view from the current Diary.";
+      if (cue.kind === "availability_reconciliation") {
+        elements.announcer.textContent = "Availability in the current view changed. Reception One refreshed the view from the current Diary.";
+      }
     }
   }
 
@@ -1386,9 +1596,30 @@
     return true;
   }
 
-  function showChangedAppointment() {
+  function showEventContext() {
     const cue = state.eventRuntime.cue;
     if (!cue || state.private) return;
+    if (cue.kind === "availability_reconciliation") {
+      if (cue.contextProjection && state.current?.family === "proposal_review") {
+        const projection = cue.contextSelection
+          ? selectionProjection(
+              cue.contextSelection,
+              "touch",
+              cue.contextProjection,
+              {
+                reason: "Staff chose to review freshly reconciled availability",
+                changedDimensions: ["projection_family", "freshness"]
+              }
+            )
+          : cue.contextProjection;
+        state.selectedItem = cue.contextSelection || null;
+        setProjection(projection, { newRoot: false, pushCurrent: true, focusCanvas: true });
+      } else {
+        elements.canvas?.focus();
+      }
+      dismissEventCue({ restoreFocus: false });
+      return;
+    }
     const row = [...elements.content.querySelectorAll("[data-appointment-id]")]
       .find(item => item.dataset.appointmentId === cue.aggregateId);
     if (!row) return;
@@ -1474,6 +1705,7 @@
     state.current = {
       ...state.current,
       state: "reconciliation_required",
+      items: (state.current.items || []).map(item => ({ ...item, selected: false })),
       freshness: {
         ...state.current.freshness,
         stale: true,
@@ -1488,6 +1720,7 @@
     };
     state.selectedItem = null;
     state.proposalResult = null;
+    state.trail = [];
     render();
   }
 
@@ -1795,7 +2028,7 @@
       if (event.key !== "Escape") return;
       if (dismissEventCue() || closeExplanation()) event.preventDefault();
     });
-    elements.eventShow?.addEventListener("click", showChangedAppointment);
+    elements.eventShow?.addEventListener("click", showEventContext);
     elements.eventDismiss?.addEventListener("click", () => dismissEventCue());
     elements.eventSnooze?.addEventListener("click", snoozeEventCue);
     elements.eventMute?.addEventListener("click", muteEventCue);

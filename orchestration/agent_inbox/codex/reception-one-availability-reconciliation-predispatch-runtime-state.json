@@ -1,0 +1,95 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "reception_one_availability_reconciliation_predispatch",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      },
+      {
+        "agent_id": "antigravity",
+        "measurement_source": "fresh_read_only_availability_reconciliation_veto_packet",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Fresh Gemini 3.5 Flash High is the independent veto required by the frozen plan and live handover."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "All five authoritative rehydration sources were restored before dispatch.",
+        "Candidate 41ecb386bcb0a6f25a56febbc9fe754ebd7af1d3 and its real local browser/PostgreSQL evidence are complete and clean.",
+        "The reviewer is read-only and allowlisted and cannot accept, integrate, commit, push, move the baton, deploy or release."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker was used for this serial stateful client tranche."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external design model or provider is authorised."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "agent_id": "antigravity",
+      "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\reception-one-availability-reconciliation-veto",
+      "branch": "antigravity/reception-one-availability-reconciliation-veto",
+      "clean": true,
+      "at_handoff_current": true,
+      "recorded_at": "2026-07-21T09:56:12+10:00"
+    }
+  ],
+  "assigned_agent_ids": ["antigravity"]
+}

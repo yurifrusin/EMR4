@@ -1,0 +1,83 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "reception_one_availability_reconciliation_preplan",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The likely change is one tightly coupled client/event-consumer state machine and serial browser database run; allocation will be frozen in the plan."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Provider and external design-model lanes remain closed."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "A fresh independent veto remains the appropriate post-candidate use; it receives no planning or acceptance authority."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The accepted combined-scope and committed-event plans, closeouts, threat delta, product north star, API Spine ADR/programme/contracts, release gates and implementation code were inspected before planning.",
+        "The frozen direction will reuse only diary.appointment_rescheduled plus the existing appointment, patient, practitioner, slot-search and supervised-proposal reads; no API, model, migration or producer change is required.",
+        "Because the event lacks an old-time coordinate, deterministic prefiltering will use exact active-practitioner scope and fresh availability comparison; only a confirmed candidate-set or selected-slot consequence may produce a visible availability notice.",
+        "Task HEAD and all four protected refs are e469fd60d37ab536152eda8e2cc4997431817110; the isolated task worktree is clean apart from this tranche's two rehydration artifacts."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -12,6 +12,7 @@ source_safety:
     event_type: diary.appointment_rescheduled
     evidence_mode: authored_synthetic_local
     delivery: authenticated_practice_scoped_polling
+    consumer_reconciliation: exact_active_practitioner_availability_selection_proposal
     feature_default: disabled
     broader_runtime_wiring: blocked
   provider_calls: blocked
@@ -80,6 +81,7 @@ event_families:
       cursor: signed_practice_bound_opaque_coordinate
       event_payload_phi: none
       fresh_appointment_and_projection_read_required: true
+      availability_reconciliation: fresh_slot_search_candidate_comparison
       local_authored_synthetic_only: true
       enabled_by_default: false
     allowed_payload_fields:
@@ -118,6 +120,8 @@ event_families:
       low_interruption_filter_required: true
       practice_role_resource_recheck_required: true
       unrelated_event_suppression_required: true
+      unchanged_availability_silent: true
+      invalid_selected_or_proposed_slot_cleared: true
       explain_why_required: true
       user_controls:
         - dismiss
@@ -130,6 +134,7 @@ event_families:
       may_refresh_authorized_read_context: true
       may_offer_intent_projected_view: true
       may_prepare_proposal_only: true
+      automatic_proposal_from_event: false
       appointment_mutation_requires_rest_command: true
       staff_confirmation_required_for_mutation: true
 
