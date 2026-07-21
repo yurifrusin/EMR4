@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "ariadne_compass_increment2_preacceptance",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker was dispatched under the frozen worker-lane economy decision."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The worktree-only Node PTY dependency observation is recorded and does not affect the frozen Compass population."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external planning or implementation model was used."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Fresh Gemini 3.5 Flash High independently reviewed implementation head dacae0b865c99cf565831e3842f5f2b2bc481105 and returned DECISION: pass with no material finding.",
+        "The reviewer reran the 43-test frozen population, Ruff, graph validation, Compass validation, Compass node audit and Git whitespace check."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The mandatory five-source rehydration passed before planning and implementation.",
+        "The schema, canonical map, read-only validator/renderer, current Markdown report, continuity node, skill guidance and negative-path tests satisfy the frozen plan.",
+        "The current product node is accepted, terminal and continuity-clean; the journey preserves the real combined-scope fork and all horizon entries remain candidate/deferred/blocked.",
+        "The frozen Compass, Continuity Engine, preflight, operating-model and handover population passes 43/43; plugin/skill validation, compilation, Ruff and deterministic graph/Compass audits pass.",
+        "No product code, workflow executor, agent dispatch, API, database, event-runtime expansion, provider, PII, protected/historical evidence, Stage 3B, production, deployment or release surface changed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent contributed changes."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

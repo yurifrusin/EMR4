@@ -118,7 +118,11 @@ def test_stale_revision_fabricated_lineage_and_unknown_boundary_fail_closed() ->
 
     stale = load_compass()
     stale["source_graph_revision"] -= 1
-    assert "compass_graph_revision_mismatch:13:14" in compass.validate_compass(
+    expected = (
+        "compass_graph_revision_mismatch:"
+        f"{stale['source_graph_revision']}:{graph['graph_revision']}"
+    )
+    assert expected in compass.validate_compass(
         stale, graph, repo_root=REPO_ROOT, require_evidence_files=False
     )
 

@@ -1,0 +1,63 @@
+{
+  "schema_version": "ariadne.compass_increment_evidence.v1",
+  "result": "ariadne_compass_increment2_pass",
+  "evidence_label": "repository_local_metadata_navigation",
+  "coordinates": {
+    "source_head": "54c094c2fa9f0885268041ae4497ed9a1ba8ad78",
+    "implementation_head": "dacae0b865c99cf565831e3842f5f2b2bc481105",
+    "review_carrier_head": "09f8636b975eaf3e13a8f16f5955fe293709eb8c",
+    "reviewer_commit": "8d8f591b37ce9da8dedcae0a9e31ed9c3de3a32e"
+  },
+  "canonical_state": {
+    "map_revision": 2,
+    "graph_revision": 15,
+    "journey_steps": 7,
+    "current_product_node": "reception-one-availability-reconciliation",
+    "current_node_audit": "passed"
+  },
+  "tests": {
+    "frozen_serial_population": {
+      "passed": 43,
+      "failed": 0,
+      "status": "passed"
+    },
+    "broader_observation": {
+      "passed": 236,
+      "failed": 14,
+      "status": "environment_baseline_observed",
+      "scope": "pre-existing Deep Code PTY nodes in a clean worktree without the installed Node PTY dependency tree"
+    }
+  },
+  "validation": {
+    "python_compile": "passed",
+    "ruff": "passed",
+    "json_parse": "passed",
+    "continuity_graph": "passed",
+    "compass": "passed",
+    "tooling_node_audit": "passed",
+    "skill": "passed",
+    "plugin": "passed",
+    "git_diff_check": "passed"
+  },
+  "independent_review": {
+    "reviewer": "Gemini 3.5 Flash High through a fresh Antigravity project",
+    "decision": "pass",
+    "protected_evidence_accessed": false
+  },
+  "authority_boundary": "repository_local_read_only_navigation",
+  "closed_boundaries_preserved": [
+    "api-change",
+    "appointment-write",
+    "autonomous-action",
+    "deployment",
+    "event-runtime",
+    "historical-diary",
+    "pii",
+    "production",
+    "protected-evidence",
+    "provider-call",
+    "release",
+    "stage-3b",
+    "voice"
+  ]
+}
