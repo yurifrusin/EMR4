@@ -1,0 +1,194 @@
+{
+  "schema_version": "ariadne.scripted_cognitive_work_cell_rehearsal.v1",
+  "rehearsal_id": "ariadne-scripted-cognitive-work-cell-rehearsal",
+  "revision": 1,
+  "title": "Finite authored-synthetic cognitive work-cell rehearsal",
+  "as_of": "2026-07-23",
+  "source_protocol": {
+    "path": "orchestration/continuity/ariadne-bounded-cognitive-work-cell-example.json",
+    "canonical_sha256": "sha256:46150b7afe4f24178cb7fcab98a47b152cf985b126274eb3fcdd8fdd17b905e3",
+    "required_result": "ariadne_bounded_cognitive_work_cell_protocol_pass"
+  },
+  "authority": {
+    "evidence_label": "authored_synthetic_repository_local_in_memory_rehearsal",
+    "rehearsal_execution_enabled": true,
+    "external_effects_enabled": false,
+    "adaptive_agent_attached": false,
+    "container_started": false,
+    "persistence_enabled": false,
+    "human_action_performed": false,
+    "command_authority": false,
+    "closed_connections": [
+      "adaptive-agent",
+      "api-change",
+      "appointment-write",
+      "autonomous-action",
+      "concurrency",
+      "container-runtime",
+      "database-connectivity",
+      "deployment",
+      "event-feed-connectivity",
+      "filesystem-write",
+      "historical-diary",
+      "human-gate-runtime",
+      "live-mailbox",
+      "model-provider",
+      "network",
+      "persistence",
+      "pii",
+      "product-api",
+      "production",
+      "protected-evidence",
+      "release",
+      "stage-3b",
+      "subprocess",
+      "thread-timer-scheduler"
+    ]
+  },
+  "limits": {
+    "max_scenarios": 8,
+    "max_steps_per_scenario": 32,
+    "max_total_steps": 256
+  },
+  "step_vocabulary": [
+    "submit-attempt",
+    "verify-drafts",
+    "apply-verdict-disposition",
+    "record-verified-release",
+    "record-human-gate-delivery",
+    "record-bounded-correction-request",
+    "bind-inert-fresh-read-grant",
+    "supersede-declared-attempt",
+    "reject-stale-completion",
+    "abort-declared-edge",
+    "finish-scenario"
+  ],
+  "scenarios": [
+    {
+      "id": "scenario-primary-five-port-release",
+      "purpose_code": "primary-multi-output-release-and-human-route",
+      "initial_state": "ready",
+      "terminal_state": "awaiting-human-authority",
+      "steps": [
+        {"sequence": 1, "action": "submit-attempt", "from_state": "ready", "to_state": "attempt-submitted", "attempt_id": "work-cell-attempt1"},
+        {"sequence": 2, "action": "verify-drafts", "from_state": "attempt-submitted", "to_state": "verdict-computed", "verification_case_id": "case-primary-multi-output", "expected_disposition": "release-verified-outputs"},
+        {"sequence": 3, "action": "apply-verdict-disposition", "from_state": "verdict-computed", "to_state": "disposition-applied", "expected_disposition": "release-verified-outputs"},
+        {"sequence": 4, "action": "record-verified-release", "from_state": "disposition-applied", "to_state": "release-recorded", "draft_ids": ["draft-ux-primary", "draft-human-primary", "draft-audit-primary", "draft-orchestrator-primary", "draft-advisory-primary"]},
+        {"sequence": 5, "action": "record-human-gate-delivery", "from_state": "release-recorded", "to_state": "human-gate-recorded", "draft_ids": ["draft-human-primary", "draft-advisory-primary"]},
+        {"sequence": 6, "action": "finish-scenario", "from_state": "human-gate-recorded", "to_state": "awaiting-human-authority"}
+      ]
+    },
+    {
+      "id": "scenario-repair-downstream",
+      "purpose_code": "canonical-repair-to-downstream",
+      "initial_state": "ready",
+      "terminal_state": "completed",
+      "steps": [
+        {"sequence": 1, "action": "submit-attempt", "from_state": "ready", "to_state": "attempt-submitted", "attempt_id": "work-cell-attempt2"},
+        {"sequence": 2, "action": "verify-drafts", "from_state": "attempt-submitted", "to_state": "verdict-computed", "verification_case_id": "case-repair-downstream", "expected_disposition": "release-verified-outputs"},
+        {"sequence": 3, "action": "apply-verdict-disposition", "from_state": "verdict-computed", "to_state": "disposition-applied", "expected_disposition": "release-verified-outputs"},
+        {"sequence": 4, "action": "record-verified-release", "from_state": "disposition-applied", "to_state": "release-recorded", "draft_ids": ["draft-ux-repair"]},
+        {"sequence": 5, "action": "finish-scenario", "from_state": "release-recorded", "to_state": "completed"}
+      ]
+    },
+    {
+      "id": "scenario-repair-human-gate",
+      "purpose_code": "canonical-repair-to-inert-human-gate",
+      "initial_state": "ready",
+      "terminal_state": "awaiting-human-authority",
+      "steps": [
+        {"sequence": 1, "action": "submit-attempt", "from_state": "ready", "to_state": "attempt-submitted", "attempt_id": "work-cell-attempt3"},
+        {"sequence": 2, "action": "verify-drafts", "from_state": "attempt-submitted", "to_state": "verdict-computed", "verification_case_id": "case-repair-human", "expected_disposition": "release-verified-outputs"},
+        {"sequence": 3, "action": "apply-verdict-disposition", "from_state": "verdict-computed", "to_state": "disposition-applied", "expected_disposition": "release-verified-outputs"},
+        {"sequence": 4, "action": "record-verified-release", "from_state": "disposition-applied", "to_state": "release-recorded", "draft_ids": ["draft-human-repair"]},
+        {"sequence": 5, "action": "record-human-gate-delivery", "from_state": "release-recorded", "to_state": "human-gate-recorded", "draft_ids": ["draft-human-repair"]},
+        {"sequence": 6, "action": "finish-scenario", "from_state": "human-gate-recorded", "to_state": "awaiting-human-authority"}
+      ]
+    },
+    {
+      "id": "scenario-schema-retry-success",
+      "purpose_code": "bounded-schema-retry-to-inert-human-gate",
+      "initial_state": "ready",
+      "terminal_state": "awaiting-human-authority",
+      "steps": [
+        {"sequence": 1, "action": "submit-attempt", "from_state": "ready", "to_state": "attempt-submitted", "attempt_id": "work-cell-attempt4"},
+        {"sequence": 2, "action": "verify-drafts", "from_state": "attempt-submitted", "to_state": "verdict-computed", "verification_case_id": "case-schema-retry", "expected_disposition": "request-new-attempt"},
+        {"sequence": 3, "action": "apply-verdict-disposition", "from_state": "verdict-computed", "to_state": "disposition-applied", "expected_disposition": "request-new-attempt"},
+        {"sequence": 4, "action": "record-bounded-correction-request", "from_state": "disposition-applied", "to_state": "correction-requested", "draft_ids": ["draft-schema-invalid"], "retry_trace_id": "retry-schema-correction", "expected_to_attempt_id": "work-cell-attempt5"},
+        {"sequence": 5, "action": "submit-attempt", "from_state": "correction-requested", "to_state": "attempt-submitted", "attempt_id": "work-cell-attempt5"},
+        {"sequence": 6, "action": "verify-drafts", "from_state": "attempt-submitted", "to_state": "verdict-computed", "verification_case_id": "case-schema-retry-success", "expected_disposition": "release-verified-outputs"},
+        {"sequence": 7, "action": "apply-verdict-disposition", "from_state": "verdict-computed", "to_state": "disposition-applied", "expected_disposition": "release-verified-outputs"},
+        {"sequence": 8, "action": "record-verified-release", "from_state": "disposition-applied", "to_state": "release-recorded", "draft_ids": ["draft-schema-corrected"]},
+        {"sequence": 9, "action": "record-human-gate-delivery", "from_state": "release-recorded", "to_state": "human-gate-recorded", "draft_ids": ["draft-schema-corrected"]},
+        {"sequence": 10, "action": "finish-scenario", "from_state": "human-gate-recorded", "to_state": "awaiting-human-authority"}
+      ]
+    },
+    {
+      "id": "scenario-grounding-budget-abort",
+      "purpose_code": "bounded-grounding-retry-then-edge-abort",
+      "initial_state": "ready",
+      "terminal_state": "aborted",
+      "steps": [
+        {"sequence": 1, "action": "submit-attempt", "from_state": "ready", "to_state": "attempt-submitted", "attempt_id": "work-cell-attempt6"},
+        {"sequence": 2, "action": "verify-drafts", "from_state": "attempt-submitted", "to_state": "verdict-computed", "verification_case_id": "case-grounding-retry", "expected_disposition": "request-new-attempt"},
+        {"sequence": 3, "action": "apply-verdict-disposition", "from_state": "verdict-computed", "to_state": "disposition-applied", "expected_disposition": "request-new-attempt"},
+        {"sequence": 4, "action": "record-bounded-correction-request", "from_state": "disposition-applied", "to_state": "correction-requested", "draft_ids": ["draft-grounding-invalid"], "retry_trace_id": "retry-grounding-budget", "expected_to_attempt_id": "work-cell-attempt7"},
+        {"sequence": 5, "action": "submit-attempt", "from_state": "correction-requested", "to_state": "attempt-submitted", "attempt_id": "work-cell-attempt7"},
+        {"sequence": 6, "action": "verify-drafts", "from_state": "attempt-submitted", "to_state": "verdict-computed", "verification_case_id": "case-grounding-budget-abort", "expected_disposition": "abort-edge"},
+        {"sequence": 7, "action": "apply-verdict-disposition", "from_state": "verdict-computed", "to_state": "disposition-applied", "expected_disposition": "abort-edge"},
+        {"sequence": 8, "action": "abort-declared-edge", "from_state": "disposition-applied", "to_state": "edge-aborted", "draft_ids": ["draft-grounding-repeat"]},
+        {"sequence": 9, "action": "finish-scenario", "from_state": "edge-aborted", "to_state": "aborted"}
+      ]
+    },
+    {
+      "id": "scenario-stale-context-supersession",
+      "purpose_code": "stale-context-inert-grant-and-supersession",
+      "initial_state": "ready",
+      "terminal_state": "awaiting-fresh-context",
+      "steps": [
+        {"sequence": 1, "action": "submit-attempt", "from_state": "ready", "to_state": "attempt-submitted", "attempt_id": "work-cell-attempt8"},
+        {"sequence": 2, "action": "verify-drafts", "from_state": "attempt-submitted", "to_state": "verdict-computed", "verification_case_id": "case-stale-context", "expected_disposition": "fresh-read-and-supersede"},
+        {"sequence": 3, "action": "apply-verdict-disposition", "from_state": "verdict-computed", "to_state": "disposition-applied", "expected_disposition": "fresh-read-and-supersede"},
+        {"sequence": 4, "action": "bind-inert-fresh-read-grant", "from_state": "disposition-applied", "to_state": "fresh-read-grant-bound", "fresh_read_grant_id": "grant-booking-context-v2"},
+        {"sequence": 5, "action": "supersede-declared-attempt", "from_state": "fresh-read-grant-bound", "to_state": "attempt-superseded", "retry_trace_id": "supersession-stale-context"},
+        {"sequence": 6, "action": "reject-stale-completion", "from_state": "attempt-superseded", "to_state": "stale-completion-rejected", "retry_trace_id": "supersession-stale-context"},
+        {"sequence": 7, "action": "finish-scenario", "from_state": "stale-completion-rejected", "to_state": "awaiting-fresh-context"}
+      ]
+    },
+    {
+      "id": "scenario-authority-abort",
+      "purpose_code": "authority-rejection-immediate-edge-abort",
+      "initial_state": "ready",
+      "terminal_state": "aborted",
+      "steps": [
+        {"sequence": 1, "action": "submit-attempt", "from_state": "ready", "to_state": "attempt-submitted", "attempt_id": "work-cell-attempt10"},
+        {"sequence": 2, "action": "verify-drafts", "from_state": "attempt-submitted", "to_state": "verdict-computed", "verification_case_id": "case-authority-abort", "expected_disposition": "abort-edge"},
+        {"sequence": 3, "action": "apply-verdict-disposition", "from_state": "verdict-computed", "to_state": "disposition-applied", "expected_disposition": "abort-edge"},
+        {"sequence": 4, "action": "abort-declared-edge", "from_state": "disposition-applied", "to_state": "edge-aborted", "draft_ids": ["draft-authority-claim"]},
+        {"sequence": 5, "action": "finish-scenario", "from_state": "edge-aborted", "to_state": "aborted"}
+      ]
+    },
+    {
+      "id": "scenario-atomic-correction-request",
+      "purpose_code": "atomic-inconsistency-no-partial-release",
+      "initial_state": "ready",
+      "terminal_state": "correction-requested",
+      "steps": [
+        {"sequence": 1, "action": "submit-attempt", "from_state": "ready", "to_state": "attempt-submitted", "attempt_id": "work-cell-attempt11"},
+        {"sequence": 2, "action": "verify-drafts", "from_state": "attempt-submitted", "to_state": "verdict-computed", "verification_case_id": "case-atomic-inconsistency", "expected_disposition": "request-new-attempt"},
+        {"sequence": 3, "action": "apply-verdict-disposition", "from_state": "verdict-computed", "to_state": "disposition-applied", "expected_disposition": "request-new-attempt"},
+        {"sequence": 4, "action": "record-bounded-correction-request", "from_state": "disposition-applied", "to_state": "correction-requested", "draft_ids": ["draft-ux-atomic", "draft-human-atomic"]},
+        {"sequence": 5, "action": "finish-scenario", "from_state": "correction-requested", "to_state": "correction-requested"}
+      ]
+    }
+  ],
+  "evidence": [
+    "docs/ariadne-scripted-cognitive-work-cell-rehearsal-plan.md",
+    "docs/ariadne-scripted-cognitive-work-cell-rehearsal-design.md",
+    "docs/security/ariadne-scripted-cognitive-work-cell-rehearsal-threat-model-delta.md",
+    "docs/ariadne-bounded-cognitive-work-cell-protocol-closeout.md",
+    "docs/ariadne-bounded-cognitive-work-cell-protocol-design.md",
+    "orchestration/continuity/ariadne-bounded-cognitive-work-cell-example.json",
+    "scripts/ariadne_scripted_cognitive_work_cell_rehearsal.py"
+  ]
+}

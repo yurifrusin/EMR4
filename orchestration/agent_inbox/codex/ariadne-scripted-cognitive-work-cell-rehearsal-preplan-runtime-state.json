@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "sprint_planning",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_ariadne_scripted_cognitive_work_cell_rehearsal_preplan",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No worker is selected under the worker-lane economy rule; the bounded runner and inherited proofreader state machine remain tightly coupled architecture work."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No model or provider is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external veto is selected or claimed."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The five-source rehydration receipt passed and task branch codex/ariadne-scripted-cognitive-work-cell-rehearsal was created from aligned protected commit 14860bafa68ab4df06951264f49c586a4152d507.",
+        "The rehearsal will consume only the accepted work-cell protocol document plus one finite pre-authored authored-synthetic script; it will not generate, infer or fetch a draft.",
+        "The in-memory control plane may verify, release inert envelopes, request a declared later attempt, abort an edge, bind an inert fresh-read grant, supersede a declared attempt and record an inert human-gate delivery.",
+        "Every step is finite, forward-only, source-hashed and bounded; there is no wall-clock scheduling, concurrency, persistence, network, database, product, provider, model, real-container, live-mailbox or command capability.",
+        "API Spine posture remains read/context-only and non-authoritative: GraphQL and REST/OpenAPI are unused, manifests remain declarative, and no product source or API contract change is planned.",
+        "Protected holdouts and historical Diary material remain sealed; four unrelated untracked Bernie receipt/runtime-state files remain excluded and preserved."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

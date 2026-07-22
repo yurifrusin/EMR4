@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "sprint_planning",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_ariadne_scripted_cognitive_work_cell_rehearsal_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is selected; the finite scripted state machine, inherited proofreader contract and negative-path evidence are tightly coupled Sol-owned architecture work."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external model or provider is selected or authorised for the rehearsal."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external model review is selected or claimed; acceptance will remain deterministic local Sol evidence unless Yuri later changes the boundary."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "On 2026-07-23 Yuri gave fresh authority to work on the recorded in-memory scripted cognitive work-cell rehearsal candidate.",
+        "The authority is interpreted as the smallest recorded descendant: finite pre-authored synthetic input and draft scripts held in memory, immutable attempts, inherited proofreader verification and explicit control-plane transitions only.",
+        "The complete live handover/current baton, authority allocation, accepted work-cell plan/design/threat-model/closeout, Compass candidate, API Spine ADR/programme/manifest/release gates and protected-evidence/user-decision boundaries were restored before planning.",
+        "HEAD, master, handoff/current, origin/master and origin/handoff/current are aligned at 14860bafa68ab4df06951264f49c586a4152d507.",
+        "Four unrelated pre-existing Bernie receipt/runtime-state files remain untracked, preserved and excluded.",
+        "No model, provider, real container, PostgreSQL, event feed, product API, GraphQL/REST call, live mailbox, persistence, human-gate UI, external worker, command adapter, PII, protected holdout or historical Diary material is authorised or accessed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

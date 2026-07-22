@@ -1,0 +1,269 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/ariadne-scripted-cognitive-work-cell-rehearsal.schema.json",
+  "title": "Ariadne Scripted Cognitive Work Cell Rehearsal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "rehearsal_id",
+    "revision",
+    "title",
+    "as_of",
+    "source_protocol",
+    "authority",
+    "limits",
+    "step_vocabulary",
+    "scenarios",
+    "evidence"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "ariadne.scripted_cognitive_work_cell_rehearsal.v1"
+    },
+    "rehearsal_id": {"type": "string", "minLength": 1},
+    "revision": {"type": "integer", "minimum": 1},
+    "title": {"type": "string", "minLength": 1},
+    "as_of": {"type": "string", "format": "date"},
+    "source_protocol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "canonical_sha256", "required_result"],
+      "properties": {
+        "path": {
+          "const": "orchestration/continuity/ariadne-bounded-cognitive-work-cell-example.json"
+        },
+        "canonical_sha256": {"$ref": "#/$defs/sha256"},
+        "required_result": {
+          "const": "ariadne_bounded_cognitive_work_cell_protocol_pass"
+        }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_label",
+        "rehearsal_execution_enabled",
+        "external_effects_enabled",
+        "adaptive_agent_attached",
+        "container_started",
+        "persistence_enabled",
+        "human_action_performed",
+        "command_authority",
+        "closed_connections"
+      ],
+      "properties": {
+        "evidence_label": {
+          "const": "authored_synthetic_repository_local_in_memory_rehearsal"
+        },
+        "rehearsal_execution_enabled": {"const": true},
+        "external_effects_enabled": {"const": false},
+        "adaptive_agent_attached": {"const": false},
+        "container_started": {"const": false},
+        "persistence_enabled": {"const": false},
+        "human_action_performed": {"const": false},
+        "command_authority": {"const": false},
+        "closed_connections": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_scenarios",
+        "max_steps_per_scenario",
+        "max_total_steps"
+      ],
+      "properties": {
+        "max_scenarios": {"type": "integer", "minimum": 1, "maximum": 8},
+        "max_steps_per_scenario": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32
+        },
+        "max_total_steps": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 256
+        }
+      }
+    },
+    "step_vocabulary": {
+      "type": "array",
+      "prefixItems": [
+        {"const": "submit-attempt"},
+        {"const": "verify-drafts"},
+        {"const": "apply-verdict-disposition"},
+        {"const": "record-verified-release"},
+        {"const": "record-human-gate-delivery"},
+        {"const": "record-bounded-correction-request"},
+        {"const": "bind-inert-fresh-read-grant"},
+        {"const": "supersede-declared-attempt"},
+        {"const": "reject-stale-completion"},
+        {"const": "abort-declared-edge"},
+        {"const": "finish-scenario"}
+      ],
+      "items": false,
+      "minItems": 11,
+      "maxItems": 11
+    },
+    "scenarios": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "items": {"$ref": "#/$defs/scenario"}
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/repoPath"}
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "repoPath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(docs|orchestration|scripts|tests)/[A-Za-z0-9._/-]+$"
+    },
+    "draftIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/identifier"}
+    },
+    "step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sequence", "action", "from_state", "to_state"],
+      "properties": {
+        "sequence": {"type": "integer", "minimum": 1, "maximum": 32},
+        "action": {
+          "enum": [
+            "submit-attempt",
+            "verify-drafts",
+            "apply-verdict-disposition",
+            "record-verified-release",
+            "record-human-gate-delivery",
+            "record-bounded-correction-request",
+            "bind-inert-fresh-read-grant",
+            "supersede-declared-attempt",
+            "reject-stale-completion",
+            "abort-declared-edge",
+            "finish-scenario"
+          ]
+        },
+        "from_state": {"$ref": "#/$defs/identifier"},
+        "to_state": {"$ref": "#/$defs/identifier"},
+        "attempt_id": {"$ref": "#/$defs/identifier"},
+        "verification_case_id": {"$ref": "#/$defs/identifier"},
+        "expected_disposition": {"$ref": "#/$defs/identifier"},
+        "draft_ids": {"$ref": "#/$defs/draftIds"},
+        "retry_trace_id": {"$ref": "#/$defs/identifier"},
+        "expected_to_attempt_id": {"$ref": "#/$defs/identifier"},
+        "fresh_read_grant_id": {"$ref": "#/$defs/identifier"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"action": {"const": "submit-attempt"}}},
+          "then": {"required": ["attempt_id"]}
+        },
+        {
+          "if": {"properties": {"action": {"const": "verify-drafts"}}},
+          "then": {
+            "required": ["verification_case_id", "expected_disposition"]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "action": {"const": "apply-verdict-disposition"}
+            }
+          },
+          "then": {"required": ["expected_disposition"]}
+        },
+        {
+          "if": {
+            "properties": {
+              "action": {
+                "enum": [
+                  "record-verified-release",
+                  "record-human-gate-delivery",
+                  "record-bounded-correction-request",
+                  "abort-declared-edge"
+                ]
+              }
+            }
+          },
+          "then": {"required": ["draft_ids"]}
+        },
+        {
+          "if": {
+            "properties": {
+              "action": {"const": "bind-inert-fresh-read-grant"}
+            }
+          },
+          "then": {"required": ["fresh_read_grant_id"]}
+        },
+        {
+          "if": {
+            "properties": {
+              "action": {
+                "enum": [
+                  "supersede-declared-attempt",
+                  "reject-stale-completion"
+                ]
+              }
+            }
+          },
+          "then": {"required": ["retry_trace_id"]}
+        }
+      ]
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "purpose_code",
+        "initial_state",
+        "terminal_state",
+        "steps"
+      ],
+      "properties": {
+        "id": {"$ref": "#/$defs/identifier"},
+        "purpose_code": {"$ref": "#/$defs/identifier"},
+        "initial_state": {"const": "ready"},
+        "terminal_state": {
+          "enum": [
+            "completed",
+            "awaiting-human-authority",
+            "awaiting-fresh-context",
+            "aborted",
+            "correction-requested"
+          ]
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "items": {"$ref": "#/$defs/step"}
+        }
+      }
+    }
+  }
+}
