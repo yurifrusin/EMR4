@@ -1,0 +1,1231 @@
+{
+  "schema_version": "ariadne.bounded_cognitive_work_cell.v1",
+  "protocol_id": "ariadne-bounded-cognitive-work-cell",
+  "workflow_id": "synthetic-appointment-availability",
+  "operational_graph_revision": 3,
+  "revision": 1,
+  "title": "Authored-synthetic bounded booking work cell with deterministic proofreader and human gate",
+  "as_of": "2026-07-23T00:00:00+10:00",
+  "authority": {
+    "authored_synthetic_only": true,
+    "advisory_only": true,
+    "execution_enabled": false,
+    "default_decision": "deny",
+    "evidence_label": "authored_synthetic_repository_local_non_executing",
+    "closed_boundaries": [
+      "api-change",
+      "appointment-write",
+      "autonomous-action",
+      "container-runtime",
+      "database-connectivity",
+      "deployment",
+      "event-feed-connectivity",
+      "historical-diary",
+      "human-gate-runtime",
+      "live-mailbox",
+      "model-provider",
+      "pii",
+      "product-api",
+      "production",
+      "protected-evidence",
+      "release",
+      "stage-3b"
+    ]
+  },
+  "node_granularity_policy": {
+    "principle": "coarse-cognition-fine-authority",
+    "cognitive_unit": "one-coherent-bounded-task",
+    "topology_is_not_isolation": true,
+    "agent_eligibility_does_not_start_container": true,
+    "future_agentisation_requires_new_generation": true,
+    "split_triggers": [
+      "authority-boundary-change",
+      "freshness-or-transaction-boundary-change",
+      "irreversible-or-regulated-action",
+      "persistence-or-idempotency-lifecycle-change",
+      "practice-or-principal-change",
+      "privacy-co-presence-change",
+      "sensitivity-or-purpose-change"
+    ]
+  },
+  "execution_classes": [
+    {
+      "id": "deterministic-ingress",
+      "agent_eligible": false,
+      "container_required_if_executed": false,
+      "authority_ceiling": "context-envelope"
+    },
+    {
+      "id": "agent-sandbox",
+      "agent_eligible": true,
+      "container_required_if_executed": true,
+      "authority_ceiling": "candidate"
+    },
+    {
+      "id": "deterministic-verifier",
+      "agent_eligible": false,
+      "container_required_if_executed": false,
+      "authority_ceiling": "verification-evidence"
+    },
+    {
+      "id": "deterministic-sink",
+      "agent_eligible": false,
+      "container_required_if_executed": false,
+      "authority_ceiling": "display-or-evidence"
+    },
+    {
+      "id": "human-authority-gate",
+      "agent_eligible": false,
+      "container_required_if_executed": false,
+      "authority_ceiling": "confirmation-evidence"
+    },
+    {
+      "id": "control-plane",
+      "agent_eligible": false,
+      "container_required_if_executed": false,
+      "authority_ceiling": "frozen-transition-policy"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "ingress-v1",
+      "role": "authenticated-ingress",
+      "instance": "ingress",
+      "topological_role": "source",
+      "execution_class": "deterministic-ingress",
+      "agent_eligible": false,
+      "agent_attached": false,
+      "container_policy": null,
+      "state": "complete"
+    },
+    {
+      "id": "booking-work-cell-v1",
+      "role": "bounded-cognitive-work-cell",
+      "instance": "booking-work-cell",
+      "topological_role": "interior",
+      "execution_class": "agent-sandbox",
+      "agent_eligible": true,
+      "agent_attached": false,
+      "container_policy": {
+        "dry_run": true,
+        "container_started": false,
+        "generation": 1,
+        "policy_revision": 1,
+        "isolation_requirement": "dedicated-sandbox-if-separately-authorised"
+      },
+      "state": "inert-protocol-only"
+    },
+    {
+      "id": "proofreader-v1",
+      "role": "deterministic-egress-proofreader",
+      "instance": "proofreader",
+      "topological_role": "interior",
+      "execution_class": "deterministic-verifier",
+      "agent_eligible": false,
+      "agent_attached": false,
+      "container_policy": null,
+      "state": "inert-protocol-only"
+    },
+    {
+      "id": "ux-projection-v1",
+      "role": "reversible-ux-projection-sink",
+      "instance": "ux-projection",
+      "topological_role": "leaf",
+      "execution_class": "deterministic-sink",
+      "agent_eligible": false,
+      "agent_attached": false,
+      "container_policy": null,
+      "state": "inert-protocol-only"
+    },
+    {
+      "id": "human-gate-v1",
+      "role": "staff-human-authority-gate",
+      "instance": "human-gate",
+      "topological_role": "leaf",
+      "execution_class": "human-authority-gate",
+      "agent_eligible": false,
+      "agent_attached": false,
+      "container_policy": null,
+      "state": "awaiting-authority-only"
+    },
+    {
+      "id": "audit-sink-v1",
+      "role": "non-command-evidence-sink",
+      "instance": "audit-sink",
+      "topological_role": "leaf",
+      "execution_class": "deterministic-sink",
+      "agent_eligible": false,
+      "agent_attached": false,
+      "container_policy": null,
+      "state": "inert-protocol-only"
+    },
+    {
+      "id": "orchestrator-v1",
+      "role": "control-plane",
+      "instance": "orchestrator",
+      "topological_role": "sink",
+      "execution_class": "control-plane",
+      "agent_eligible": false,
+      "agent_attached": false,
+      "container_policy": null,
+      "state": "inert-protocol-only"
+    }
+  ],
+  "input_frames": [
+    {
+      "id": "input-request-scope",
+      "frame_type": "synthetic-request-scope.v1",
+      "authority_label": "staff-authored-synthetic",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "sensitivity": "internal",
+      "payload": {
+        "request_kind": "appointment-availability",
+        "duration_minutes": 30,
+        "earliest_local_time": "14:00",
+        "latest_local_time": "16:00",
+        "request_text": "Find a 30 minute appointment after 14:00 with the selected practitioner."
+      },
+      "freshness": {
+        "status": "current",
+        "observed_at": "2026-07-23T09:00:00+10:00",
+        "maximum_age_seconds": 300
+      }
+    },
+    {
+      "id": "input-principal-scope",
+      "frame_type": "principal-scope.v1",
+      "authority_label": "authenticated-scope-fixture",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "sensitivity": "internal",
+      "payload": {
+        "role": "reception-staff",
+        "allowed_task": "prepare-appointment-availability-candidate"
+      },
+      "freshness": {
+        "status": "current",
+        "observed_at": "2026-07-23T09:00:00+10:00",
+        "maximum_age_seconds": 300
+      }
+    },
+    {
+      "id": "input-patient-candidates",
+      "frame_type": "patient-candidate-context.v1",
+      "authority_label": "fixture-authoritative-candidate-set",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "sensitivity": "restricted",
+      "payload": {
+        "candidate_ids": [
+          "patient-candidate-a",
+          "patient-candidate-b"
+        ],
+        "identity_verified": false
+      },
+      "freshness": {
+        "status": "current",
+        "observed_at": "2026-07-23T09:00:00+10:00",
+        "maximum_age_seconds": 300
+      }
+    },
+    {
+      "id": "input-practitioner",
+      "frame_type": "practitioner-context.v1",
+      "authority_label": "fixture-authoritative-selection",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "sensitivity": "internal",
+      "payload": {
+        "practitioner_ids": [
+          "practitioner-a"
+        ],
+        "selected_practitioner_id": "practitioner-a"
+      },
+      "freshness": {
+        "status": "current",
+        "observed_at": "2026-07-23T09:00:00+10:00",
+        "maximum_age_seconds": 300
+      }
+    },
+    {
+      "id": "input-availability",
+      "frame_type": "availability-context.v1",
+      "authority_label": "fixture-authoritative-availability",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "sensitivity": "internal",
+      "payload": {
+        "slot_ids": [
+          "slot-1430",
+          "slot-1500",
+          "slot-1530"
+        ],
+        "practitioner_id": "practitioner-a",
+        "duration_minutes": 30,
+        "availability_revision": 7
+      },
+      "freshness": {
+        "status": "current",
+        "observed_at": "2026-07-23T09:00:00+10:00",
+        "maximum_age_seconds": 300
+      }
+    },
+    {
+      "id": "input-policy",
+      "frame_type": "evaluated-appointment-policy.v1",
+      "authority_label": "fixture-evaluated-policy",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "sensitivity": "internal",
+      "payload": {
+        "allowed_duration_minutes": [
+          30
+        ],
+        "human_confirmation_required": true,
+        "command_authority": false
+      },
+      "freshness": {
+        "status": "current",
+        "observed_at": "2026-07-23T09:00:00+10:00",
+        "maximum_age_seconds": 300
+      }
+    }
+  ],
+  "output_ports": [
+    {
+      "id": "port-ux",
+      "frame_type": "booking-ux-projection-candidate.v1",
+      "recipient_node_id": "ux-projection-v1",
+      "channel": "data",
+      "authority_ceiling": "candidate",
+      "human_gate_required": false,
+      "required_payload_fields": [
+        "patient_candidate_id",
+        "practitioner_id",
+        "candidate_slot_ids",
+        "selected_slot_id",
+        "duration_minutes",
+        "projection_code",
+        "context_revision"
+      ],
+      "allowed_payload_fields": [
+        "patient_candidate_id",
+        "practitioner_id",
+        "candidate_slot_ids",
+        "selected_slot_id",
+        "duration_minutes",
+        "projection_code",
+        "context_revision"
+      ],
+      "atomic_group_id": "booking-review"
+    },
+    {
+      "id": "port-human-review",
+      "frame_type": "booking-human-review-candidate.v1",
+      "recipient_node_id": "human-gate-v1",
+      "channel": "control",
+      "authority_ceiling": "candidate",
+      "human_gate_required": true,
+      "required_payload_fields": [
+        "patient_candidate_id",
+        "practitioner_id",
+        "candidate_slot_ids",
+        "selected_slot_id",
+        "duration_minutes",
+        "review_reason_codes",
+        "confirmation_required",
+        "context_revision"
+      ],
+      "allowed_payload_fields": [
+        "patient_candidate_id",
+        "practitioner_id",
+        "candidate_slot_ids",
+        "selected_slot_id",
+        "duration_minutes",
+        "review_reason_codes",
+        "confirmation_required",
+        "context_revision"
+      ],
+      "atomic_group_id": "booking-review"
+    },
+    {
+      "id": "port-audit",
+      "frame_type": "work-cell-audit-evidence.v1",
+      "recipient_node_id": "audit-sink-v1",
+      "channel": "evidence",
+      "authority_ceiling": "evidence",
+      "human_gate_required": false,
+      "required_payload_fields": [
+        "outcome_code",
+        "attempt_id",
+        "evidence_codes",
+        "context_revision"
+      ],
+      "allowed_payload_fields": [
+        "outcome_code",
+        "attempt_id",
+        "evidence_codes",
+        "context_revision"
+      ],
+      "atomic_group_id": null
+    },
+    {
+      "id": "port-orchestrator",
+      "frame_type": "work-cell-outcome.v1",
+      "recipient_node_id": "orchestrator-v1",
+      "channel": "control",
+      "authority_ceiling": "evidence",
+      "human_gate_required": false,
+      "required_payload_fields": [
+        "status",
+        "completed_port_ids",
+        "context_revision"
+      ],
+      "allowed_payload_fields": [
+        "status",
+        "completed_port_ids",
+        "context_revision"
+      ],
+      "atomic_group_id": null
+    },
+    {
+      "id": "port-advisory",
+      "frame_type": "booking-explanation-advisory.v1",
+      "recipient_node_id": "human-gate-v1",
+      "channel": "data",
+      "authority_ceiling": "advisory",
+      "human_gate_required": true,
+      "required_payload_fields": [
+        "advisory_code",
+        "grounding_ids",
+        "context_revision"
+      ],
+      "allowed_payload_fields": [
+        "advisory_code",
+        "grounding_ids",
+        "context_revision"
+      ],
+      "atomic_group_id": null
+    }
+  ],
+  "work_cell_attempts": [
+    {
+      "id": "work-cell-attempt1",
+      "instance": "booking-work-cell",
+      "attempt": 1,
+      "container_generation": 1,
+      "policy_revision": 1,
+      "checkpoint_id": "checkpoint-request-start",
+      "context_revision": 7,
+      "state": "draft-complete",
+      "retry_of": null,
+      "superseded_from": null,
+      "emitted_draft_ids": [
+        "draft-ux-primary",
+        "draft-human-primary",
+        "draft-audit-primary",
+        "draft-orchestrator-primary",
+        "draft-advisory-primary"
+      ]
+    },
+    {
+      "id": "work-cell-attempt2",
+      "instance": "booking-work-cell",
+      "attempt": 2,
+      "container_generation": 1,
+      "policy_revision": 1,
+      "checkpoint_id": "checkpoint-request-start",
+      "context_revision": 7,
+      "state": "draft-complete",
+      "retry_of": null,
+      "superseded_from": null,
+      "emitted_draft_ids": [
+        "draft-ux-repair"
+      ]
+    },
+    {
+      "id": "work-cell-attempt3",
+      "instance": "booking-work-cell",
+      "attempt": 3,
+      "container_generation": 1,
+      "policy_revision": 1,
+      "checkpoint_id": "checkpoint-request-start",
+      "context_revision": 7,
+      "state": "draft-complete",
+      "retry_of": null,
+      "superseded_from": null,
+      "emitted_draft_ids": [
+        "draft-human-repair"
+      ]
+    },
+    {
+      "id": "work-cell-attempt4",
+      "instance": "booking-work-cell",
+      "attempt": 4,
+      "container_generation": 1,
+      "policy_revision": 1,
+      "checkpoint_id": "checkpoint-request-start",
+      "context_revision": 7,
+      "state": "rejected-retryable",
+      "retry_of": null,
+      "superseded_from": null,
+      "emitted_draft_ids": [
+        "draft-schema-invalid"
+      ]
+    },
+    {
+      "id": "work-cell-attempt5",
+      "instance": "booking-work-cell",
+      "attempt": 5,
+      "container_generation": 1,
+      "policy_revision": 1,
+      "checkpoint_id": "checkpoint-request-start",
+      "context_revision": 7,
+      "state": "draft-complete",
+      "retry_of": "work-cell-attempt4",
+      "superseded_from": null,
+      "emitted_draft_ids": [
+        "draft-schema-corrected"
+      ]
+    },
+    {
+      "id": "work-cell-attempt6",
+      "instance": "booking-work-cell",
+      "attempt": 6,
+      "container_generation": 1,
+      "policy_revision": 1,
+      "checkpoint_id": "checkpoint-request-start",
+      "context_revision": 7,
+      "state": "rejected-retryable",
+      "retry_of": null,
+      "superseded_from": null,
+      "emitted_draft_ids": [
+        "draft-grounding-invalid"
+      ]
+    },
+    {
+      "id": "work-cell-attempt7",
+      "instance": "booking-work-cell",
+      "attempt": 7,
+      "container_generation": 1,
+      "policy_revision": 1,
+      "checkpoint_id": "checkpoint-request-start",
+      "context_revision": 7,
+      "state": "edge-aborted",
+      "retry_of": "work-cell-attempt6",
+      "superseded_from": null,
+      "emitted_draft_ids": [
+        "draft-grounding-repeat"
+      ]
+    },
+    {
+      "id": "work-cell-attempt8",
+      "instance": "booking-work-cell",
+      "attempt": 8,
+      "container_generation": 1,
+      "policy_revision": 1,
+      "checkpoint_id": "checkpoint-request-start",
+      "context_revision": 6,
+      "state": "superseded",
+      "retry_of": null,
+      "superseded_from": null,
+      "emitted_draft_ids": [
+        "draft-stale-context"
+      ]
+    },
+    {
+      "id": "work-cell-attempt9",
+      "instance": "booking-work-cell",
+      "attempt": 9,
+      "container_generation": 2,
+      "policy_revision": 2,
+      "checkpoint_id": "checkpoint-request-start",
+      "context_revision": 7,
+      "state": "awaiting-fresh-context",
+      "retry_of": null,
+      "superseded_from": "work-cell-attempt8",
+      "emitted_draft_ids": []
+    },
+    {
+      "id": "work-cell-attempt10",
+      "instance": "booking-work-cell",
+      "attempt": 10,
+      "container_generation": 1,
+      "policy_revision": 1,
+      "checkpoint_id": "checkpoint-request-start",
+      "context_revision": 7,
+      "state": "edge-aborted",
+      "retry_of": null,
+      "superseded_from": null,
+      "emitted_draft_ids": [
+        "draft-authority-claim"
+      ]
+    },
+    {
+      "id": "work-cell-attempt11",
+      "instance": "booking-work-cell",
+      "attempt": 11,
+      "container_generation": 1,
+      "policy_revision": 1,
+      "checkpoint_id": "checkpoint-request-start",
+      "context_revision": 7,
+      "state": "rejected-retryable",
+      "retry_of": null,
+      "superseded_from": null,
+      "emitted_draft_ids": [
+        "draft-ux-atomic",
+        "draft-human-atomic"
+      ]
+    }
+  ],
+  "draft_frames": [
+    {
+      "id": "draft-ux-primary",
+      "batch_id": "batch-primary",
+      "attempt_id": "work-cell-attempt1",
+      "output_port_id": "port-ux",
+      "frame_type": "booking-ux-projection-candidate.v1",
+      "authority_class": "candidate",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "source_frame_ids": ["input-request-scope", "input-patient-candidates", "input-practitioner", "input-availability", "input-policy"],
+      "payload": {
+        "patient_candidate_id": "patient-candidate-a",
+        "practitioner_id": "practitioner-a",
+        "candidate_slot_ids": ["slot-1430", "slot-1500"],
+        "selected_slot_id": "slot-1430",
+        "duration_minutes": 30,
+        "projection_code": "show-ranked-slots",
+        "context_revision": 7
+      },
+      "provenance": {"kind": "authored-synthetic-draft", "source": "work-cell-attempt1"},
+      "freshness": {"status": "current", "observed_at": "2026-07-23T09:00:10+10:00", "maximum_age_seconds": 300}
+    },
+    {
+      "id": "draft-human-primary",
+      "batch_id": "batch-primary",
+      "attempt_id": "work-cell-attempt1",
+      "output_port_id": "port-human-review",
+      "frame_type": "booking-human-review-candidate.v1",
+      "authority_class": "candidate",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "source_frame_ids": ["input-request-scope", "input-patient-candidates", "input-practitioner", "input-availability", "input-policy"],
+      "payload": {
+        "patient_candidate_id": "patient-candidate-a",
+        "practitioner_id": "practitioner-a",
+        "candidate_slot_ids": ["slot-1430", "slot-1500"],
+        "selected_slot_id": "slot-1430",
+        "duration_minutes": 30,
+        "review_reason_codes": ["identity-candidate-requires-staff-review", "appointment-write-requires-separate-command"],
+        "confirmation_required": true,
+        "context_revision": 7
+      },
+      "provenance": {"kind": "authored-synthetic-draft", "source": "work-cell-attempt1"},
+      "freshness": {"status": "current", "observed_at": "2026-07-23T09:00:10+10:00", "maximum_age_seconds": 300}
+    },
+    {
+      "id": "draft-audit-primary",
+      "batch_id": "batch-primary",
+      "attempt_id": "work-cell-attempt1",
+      "output_port_id": "port-audit",
+      "frame_type": "work-cell-audit-evidence.v1",
+      "authority_class": "evidence",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "source_frame_ids": ["input-request-scope", "input-principal-scope"],
+      "payload": {
+        "outcome_code": "candidate-prepared",
+        "attempt_id": "work-cell-attempt1",
+        "evidence_codes": ["grounded-context", "human-authority-required"],
+        "context_revision": 7
+      },
+      "provenance": {"kind": "authored-synthetic-draft", "source": "work-cell-attempt1"},
+      "freshness": {"status": "current", "observed_at": "2026-07-23T09:00:10+10:00", "maximum_age_seconds": 300}
+    },
+    {
+      "id": "draft-orchestrator-primary",
+      "batch_id": "batch-primary",
+      "attempt_id": "work-cell-attempt1",
+      "output_port_id": "port-orchestrator",
+      "frame_type": "work-cell-outcome.v1",
+      "authority_class": "evidence",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "source_frame_ids": ["input-request-scope", "input-principal-scope"],
+      "payload": {
+        "status": "candidate-prepared",
+        "completed_port_ids": ["port-ux", "port-human-review", "port-audit", "port-orchestrator", "port-advisory"],
+        "context_revision": 7
+      },
+      "provenance": {"kind": "authored-synthetic-draft", "source": "work-cell-attempt1"},
+      "freshness": {"status": "current", "observed_at": "2026-07-23T09:00:10+10:00", "maximum_age_seconds": 300}
+    },
+    {
+      "id": "draft-advisory-primary",
+      "batch_id": "batch-primary",
+      "attempt_id": "work-cell-attempt1",
+      "output_port_id": "port-advisory",
+      "frame_type": "booking-explanation-advisory.v1",
+      "authority_class": "advisory",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "source_frame_ids": ["input-practitioner", "input-availability"],
+      "payload": {
+        "advisory_code": "candidate-ranking-explanation-available",
+        "grounding_ids": ["slot-1430", "practitioner-a"],
+        "context_revision": 7
+      },
+      "provenance": {"kind": "authored-synthetic-draft", "source": "work-cell-attempt1"},
+      "freshness": {"status": "current", "observed_at": "2026-07-23T09:00:10+10:00", "maximum_age_seconds": 300}
+    },
+    {
+      "id": "draft-ux-repair",
+      "batch_id": "batch-repair-ux",
+      "attempt_id": "work-cell-attempt2",
+      "output_port_id": "port-ux",
+      "frame_type": "booking-ux-projection-candidate.v1",
+      "authority_class": "candidate",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "source_frame_ids": ["input-request-scope", "input-patient-candidates", "input-practitioner", "input-availability", "input-policy"],
+      "payload": {
+        "patient_candidate_id": "patient-candidate-a",
+        "practitioner_id": "practitioner-a",
+        "candidate_slot_ids": ["slot-1530", "slot-1430", "slot-1430"],
+        "selected_slot_id": "slot-1430",
+        "duration_minutes": 30,
+        "projection_code": "show-ranked-slots",
+        "context_revision": 7
+      },
+      "provenance": {"kind": "authored-synthetic-draft", "source": "work-cell-attempt2"},
+      "freshness": {"status": "current", "observed_at": "2026-07-23T09:00:20+10:00", "maximum_age_seconds": 300}
+    },
+    {
+      "id": "draft-human-repair",
+      "batch_id": "batch-repair-human",
+      "attempt_id": "work-cell-attempt3",
+      "output_port_id": "port-human-review",
+      "frame_type": "booking-human-review-candidate.v1",
+      "authority_class": "candidate",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "source_frame_ids": ["input-request-scope", "input-patient-candidates", "input-practitioner", "input-availability", "input-policy"],
+      "payload": {
+        "patient_candidate_id": "patient-candidate-a",
+        "practitioner_id": "practitioner-a",
+        "candidate_slot_ids": ["slot-1500", "slot-1430", "slot-1430"],
+        "selected_slot_id": "slot-1430",
+        "duration_minutes": 30,
+        "review_reason_codes": ["identity-candidate-requires-staff-review"],
+        "confirmation_required": true,
+        "context_revision": 7
+      },
+      "provenance": {"kind": "authored-synthetic-draft", "source": "work-cell-attempt3"},
+      "freshness": {"status": "current", "observed_at": "2026-07-23T09:00:30+10:00", "maximum_age_seconds": 300}
+    },
+    {
+      "id": "draft-schema-invalid",
+      "batch_id": "batch-schema-invalid",
+      "attempt_id": "work-cell-attempt4",
+      "output_port_id": "port-human-review",
+      "frame_type": "booking-human-review-candidate.v1",
+      "authority_class": "candidate",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "source_frame_ids": ["input-request-scope", "input-patient-candidates", "input-practitioner", "input-availability", "input-policy"],
+      "payload": {
+        "patient_candidate_id": "patient-candidate-a",
+        "practitioner_id": "practitioner-a",
+        "candidate_slot_ids": ["slot-1430"],
+        "duration_minutes": 30,
+        "review_reason_codes": ["identity-candidate-requires-staff-review"],
+        "confirmation_required": true,
+        "context_revision": 7
+      },
+      "provenance": {"kind": "authored-synthetic-draft", "source": "work-cell-attempt4"},
+      "freshness": {"status": "current", "observed_at": "2026-07-23T09:00:40+10:00", "maximum_age_seconds": 300}
+    },
+    {
+      "id": "draft-schema-corrected",
+      "batch_id": "batch-schema-corrected",
+      "attempt_id": "work-cell-attempt5",
+      "output_port_id": "port-human-review",
+      "frame_type": "booking-human-review-candidate.v1",
+      "authority_class": "candidate",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "source_frame_ids": ["input-request-scope", "input-patient-candidates", "input-practitioner", "input-availability", "input-policy"],
+      "payload": {
+        "patient_candidate_id": "patient-candidate-a",
+        "practitioner_id": "practitioner-a",
+        "candidate_slot_ids": ["slot-1430"],
+        "selected_slot_id": "slot-1430",
+        "duration_minutes": 30,
+        "review_reason_codes": ["identity-candidate-requires-staff-review"],
+        "confirmation_required": true,
+        "context_revision": 7
+      },
+      "provenance": {"kind": "authored-synthetic-draft", "source": "work-cell-attempt5"},
+      "freshness": {"status": "current", "observed_at": "2026-07-23T09:00:50+10:00", "maximum_age_seconds": 300}
+    },
+    {
+      "id": "draft-grounding-invalid",
+      "batch_id": "batch-grounding-invalid",
+      "attempt_id": "work-cell-attempt6",
+      "output_port_id": "port-human-review",
+      "frame_type": "booking-human-review-candidate.v1",
+      "authority_class": "candidate",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "source_frame_ids": ["input-request-scope", "input-patient-candidates", "input-practitioner", "input-availability", "input-policy"],
+      "payload": {
+        "patient_candidate_id": "patient-candidate-a",
+        "practitioner_id": "practitioner-a",
+        "candidate_slot_ids": ["slot-unknown"],
+        "selected_slot_id": "slot-unknown",
+        "duration_minutes": 30,
+        "review_reason_codes": ["identity-candidate-requires-staff-review"],
+        "confirmation_required": true,
+        "context_revision": 7
+      },
+      "provenance": {"kind": "authored-synthetic-draft", "source": "work-cell-attempt6"},
+      "freshness": {"status": "current", "observed_at": "2026-07-23T09:01:00+10:00", "maximum_age_seconds": 300}
+    },
+    {
+      "id": "draft-grounding-repeat",
+      "batch_id": "batch-grounding-repeat",
+      "attempt_id": "work-cell-attempt7",
+      "output_port_id": "port-human-review",
+      "frame_type": "booking-human-review-candidate.v1",
+      "authority_class": "candidate",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "source_frame_ids": ["input-request-scope", "input-patient-candidates", "input-practitioner", "input-availability", "input-policy"],
+      "payload": {
+        "patient_candidate_id": "patient-candidate-a",
+        "practitioner_id": "practitioner-a",
+        "candidate_slot_ids": ["slot-unknown"],
+        "selected_slot_id": "slot-unknown",
+        "duration_minutes": 30,
+        "review_reason_codes": ["identity-candidate-requires-staff-review"],
+        "confirmation_required": true,
+        "context_revision": 7
+      },
+      "provenance": {"kind": "authored-synthetic-draft", "source": "work-cell-attempt7"},
+      "freshness": {"status": "current", "observed_at": "2026-07-23T09:01:10+10:00", "maximum_age_seconds": 300}
+    },
+    {
+      "id": "draft-stale-context",
+      "batch_id": "batch-stale",
+      "attempt_id": "work-cell-attempt8",
+      "output_port_id": "port-human-review",
+      "frame_type": "booking-human-review-candidate.v1",
+      "authority_class": "candidate",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 6,
+      "source_frame_ids": ["input-request-scope", "input-patient-candidates", "input-practitioner", "input-availability", "input-policy"],
+      "payload": {
+        "patient_candidate_id": "patient-candidate-a",
+        "practitioner_id": "practitioner-a",
+        "candidate_slot_ids": ["slot-1430"],
+        "selected_slot_id": "slot-1430",
+        "duration_minutes": 30,
+        "review_reason_codes": ["identity-candidate-requires-staff-review"],
+        "confirmation_required": true,
+        "context_revision": 6
+      },
+      "provenance": {"kind": "authored-synthetic-draft", "source": "work-cell-attempt8"},
+      "freshness": {"status": "stale", "observed_at": "2026-07-23T08:50:00+10:00", "maximum_age_seconds": 300}
+    },
+    {
+      "id": "draft-authority-claim",
+      "batch_id": "batch-authority",
+      "attempt_id": "work-cell-attempt10",
+      "output_port_id": "port-human-review",
+      "frame_type": "booking-human-review-candidate.v1",
+      "authority_class": "command",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "source_frame_ids": ["input-request-scope", "input-patient-candidates", "input-practitioner", "input-availability", "input-policy"],
+      "payload": {
+        "patient_candidate_id": "patient-candidate-a",
+        "practitioner_id": "practitioner-a",
+        "candidate_slot_ids": ["slot-1430"],
+        "selected_slot_id": "slot-1430",
+        "duration_minutes": 30,
+        "review_reason_codes": ["identity-candidate-requires-staff-review"],
+        "confirmation_required": true,
+        "context_revision": 7
+      },
+      "provenance": {"kind": "authored-synthetic-negative-draft", "source": "work-cell-attempt10"},
+      "freshness": {"status": "current", "observed_at": "2026-07-23T09:01:20+10:00", "maximum_age_seconds": 300}
+    },
+    {
+      "id": "draft-ux-atomic",
+      "batch_id": "batch-atomic-inconsistent",
+      "attempt_id": "work-cell-attempt11",
+      "output_port_id": "port-ux",
+      "frame_type": "booking-ux-projection-candidate.v1",
+      "authority_class": "candidate",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "source_frame_ids": ["input-request-scope", "input-patient-candidates", "input-practitioner", "input-availability", "input-policy"],
+      "payload": {
+        "patient_candidate_id": "patient-candidate-a",
+        "practitioner_id": "practitioner-a",
+        "candidate_slot_ids": ["slot-1430", "slot-1500"],
+        "selected_slot_id": "slot-1430",
+        "duration_minutes": 30,
+        "projection_code": "show-ranked-slots",
+        "context_revision": 7
+      },
+      "provenance": {"kind": "authored-synthetic-negative-draft", "source": "work-cell-attempt11"},
+      "freshness": {"status": "current", "observed_at": "2026-07-23T09:01:30+10:00", "maximum_age_seconds": 300}
+    },
+    {
+      "id": "draft-human-atomic",
+      "batch_id": "batch-atomic-inconsistent",
+      "attempt_id": "work-cell-attempt11",
+      "output_port_id": "port-human-review",
+      "frame_type": "booking-human-review-candidate.v1",
+      "authority_class": "candidate",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "source_frame_ids": ["input-request-scope", "input-patient-candidates", "input-practitioner", "input-availability", "input-policy"],
+      "payload": {
+        "patient_candidate_id": "patient-candidate-a",
+        "practitioner_id": "practitioner-a",
+        "candidate_slot_ids": ["slot-1430", "slot-1500"],
+        "selected_slot_id": "slot-1500",
+        "duration_minutes": 30,
+        "review_reason_codes": ["identity-candidate-requires-staff-review"],
+        "confirmation_required": true,
+        "context_revision": 7
+      },
+      "provenance": {"kind": "authored-synthetic-negative-draft", "source": "work-cell-attempt11"},
+      "freshness": {"status": "current", "observed_at": "2026-07-23T09:01:30+10:00", "maximum_age_seconds": 300}
+    }
+  ],
+  "verification_policy": {
+    "id": "proofreader-policy-v1",
+    "proofreader_node_id": "proofreader-v1",
+    "current_context_revision": 7,
+    "default_decision": "deny",
+    "checks_in_order": [
+      "port-and-frame-schema",
+      "practice-principal-correlation",
+      "declared-source-and-sensitivity",
+      "freshness-and-context-revision",
+      "authority-ceiling",
+      "referential-grounding",
+      "candidate-selection-consistency",
+      "atomic-output-consistency"
+    ],
+    "authority_order": ["evidence", "advisory", "candidate", "verified-fact", "command"],
+    "repair_allowlist": ["deduplicate-opaque-references", "stable-sort-opaque-references"],
+    "repair_forbidden": [
+      "create-missing-reference",
+      "elevate-authority",
+      "infer-human-approval",
+      "refresh-stale-context",
+      "resolve-ambiguity",
+      "select-unknown-slot"
+    ],
+    "retry_policy": {
+      "max_same_reason_attempts": 2,
+      "feedback_frame_type": "proofreader-correction-request.v1",
+      "feedback_includes_draft_content": false,
+      "same_policy_retry_allowed": true,
+      "policy_change_requires_new_generation": true
+    },
+    "verdict_dispositions": {
+      "pass_to_downstream": "release-to-declared-recipient",
+      "pass_to_human_gate": "release-to-human-gate",
+      "pass_with_canonical_repair": "release-repaired-to-declared-recipient",
+      "pass_with_repair_to_human_gate": "release-repaired-to-human-gate",
+      "retryable_schema_reject": "request-new-attempt-unless-budget-exhausted",
+      "retryable_grounding_reject": "request-new-attempt-unless-budget-exhausted",
+      "stale_context_reject": "fresh-read-and-supersede",
+      "authority_reject": "abort-edge"
+    }
+  },
+  "verification_cases": [
+    {
+      "id": "case-primary-multi-output",
+      "draft_ids": ["draft-ux-primary", "draft-human-primary", "draft-audit-primary", "draft-orchestrator-primary", "draft-advisory-primary"],
+      "prior_same_failure_count": 0,
+      "expected": {
+        "status": "passed",
+        "disposition": "release-verified-outputs",
+        "frame_verdicts": [
+          {"draft_id": "draft-ux-primary", "verdict": "pass_to_downstream"},
+          {"draft_id": "draft-human-primary", "verdict": "pass_to_human_gate"},
+          {"draft_id": "draft-audit-primary", "verdict": "pass_to_downstream"},
+          {"draft_id": "draft-orchestrator-primary", "verdict": "pass_to_downstream"},
+          {"draft_id": "draft-advisory-primary", "verdict": "pass_to_human_gate"}
+        ],
+        "reason_codes": ["advisory-human-review-required", "verified"],
+        "repair_rules": []
+      }
+    },
+    {
+      "id": "case-repair-downstream",
+      "draft_ids": ["draft-ux-repair"],
+      "prior_same_failure_count": 0,
+      "expected": {
+        "status": "passed",
+        "disposition": "release-verified-outputs",
+        "frame_verdicts": [{"draft_id": "draft-ux-repair", "verdict": "pass_with_canonical_repair"}],
+        "reason_codes": ["canonical-repair-applied"],
+        "repair_rules": ["deduplicate-opaque-references", "stable-sort-opaque-references"]
+      }
+    },
+    {
+      "id": "case-repair-human",
+      "draft_ids": ["draft-human-repair"],
+      "prior_same_failure_count": 0,
+      "expected": {
+        "status": "passed",
+        "disposition": "release-verified-outputs",
+        "frame_verdicts": [{"draft_id": "draft-human-repair", "verdict": "pass_with_repair_to_human_gate"}],
+        "reason_codes": ["canonical-repair-applied"],
+        "repair_rules": ["deduplicate-opaque-references", "stable-sort-opaque-references"]
+      }
+    },
+    {
+      "id": "case-schema-retry",
+      "draft_ids": ["draft-schema-invalid"],
+      "prior_same_failure_count": 0,
+      "expected": {
+        "status": "rejected",
+        "disposition": "request-new-attempt",
+        "frame_verdicts": [{"draft_id": "draft-schema-invalid", "verdict": "retryable_schema_reject"}],
+        "reason_codes": ["payload-required-missing:selected_slot_id"],
+        "repair_rules": []
+      }
+    },
+    {
+      "id": "case-schema-retry-success",
+      "draft_ids": ["draft-schema-corrected"],
+      "prior_same_failure_count": 0,
+      "expected": {
+        "status": "passed",
+        "disposition": "release-verified-outputs",
+        "frame_verdicts": [{"draft_id": "draft-schema-corrected", "verdict": "pass_to_human_gate"}],
+        "reason_codes": ["verified"],
+        "repair_rules": []
+      }
+    },
+    {
+      "id": "case-grounding-retry",
+      "draft_ids": ["draft-grounding-invalid"],
+      "prior_same_failure_count": 0,
+      "expected": {
+        "status": "rejected",
+        "disposition": "request-new-attempt",
+        "frame_verdicts": [{"draft_id": "draft-grounding-invalid", "verdict": "retryable_grounding_reject"}],
+        "reason_codes": ["slot-not-grounded:slot-unknown"],
+        "repair_rules": []
+      }
+    },
+    {
+      "id": "case-grounding-budget-abort",
+      "draft_ids": ["draft-grounding-repeat"],
+      "prior_same_failure_count": 1,
+      "expected": {
+        "status": "rejected",
+        "disposition": "abort-edge",
+        "frame_verdicts": [{"draft_id": "draft-grounding-repeat", "verdict": "retryable_grounding_reject"}],
+        "reason_codes": ["slot-not-grounded:slot-unknown"],
+        "repair_rules": []
+      }
+    },
+    {
+      "id": "case-stale-context",
+      "draft_ids": ["draft-stale-context"],
+      "prior_same_failure_count": 0,
+      "expected": {
+        "status": "rejected",
+        "disposition": "fresh-read-and-supersede",
+        "frame_verdicts": [{"draft_id": "draft-stale-context", "verdict": "stale_context_reject"}],
+        "reason_codes": ["context-revision-stale:6:7"],
+        "repair_rules": []
+      }
+    },
+    {
+      "id": "case-authority-abort",
+      "draft_ids": ["draft-authority-claim"],
+      "prior_same_failure_count": 0,
+      "expected": {
+        "status": "rejected",
+        "disposition": "abort-edge",
+        "frame_verdicts": [{"draft_id": "draft-authority-claim", "verdict": "authority_reject"}],
+        "reason_codes": ["authority-ceiling-exceeded:command:candidate"],
+        "repair_rules": []
+      }
+    },
+    {
+      "id": "case-atomic-inconsistency",
+      "draft_ids": ["draft-ux-atomic", "draft-human-atomic"],
+      "prior_same_failure_count": 0,
+      "expected": {
+        "status": "rejected",
+        "disposition": "request-new-attempt",
+        "frame_verdicts": [
+          {"draft_id": "draft-ux-atomic", "verdict": "retryable_grounding_reject"},
+          {"draft_id": "draft-human-atomic", "verdict": "retryable_grounding_reject"}
+        ],
+        "reason_codes": ["atomic-group-field-mismatch:booking-review:selected_slot_id"],
+        "repair_rules": []
+      }
+    }
+  ],
+  "fresh_read_grants": [
+    {
+      "id": "grant-booking-context-v2",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "role": "reception-staff",
+      "action": "read-scoped-context",
+      "resource_selectors": [
+        "availability/current-request-window",
+        "patient-candidates/current-request",
+        "policy/current-request",
+        "practitioner/current-request"
+      ],
+      "context_frame_type": "booking-context-bundle.v2",
+      "basis_case_id": "case-stale-context",
+      "minimum_context_revision": 7,
+      "issued_at": "2026-07-23T09:02:00+10:00",
+      "expires_at": "2026-07-23T09:07:00+10:00",
+      "execution_enabled": false,
+      "returns_data": false
+    }
+  ],
+  "retry_traces": [
+    {
+      "id": "retry-schema-correction",
+      "kind": "same-generation-bounded-retry",
+      "from_attempt_id": "work-cell-attempt4",
+      "to_attempt_id": "work-cell-attempt5",
+      "reason_code": "payload-required-missing:selected_slot_id",
+      "feedback_frame": {
+        "frame_type": "proofreader-correction-request.v1",
+        "includes_draft_content": false,
+        "reason_codes": ["payload-required-missing:selected_slot_id"]
+      },
+      "final_disposition": "released-to-human-gate"
+    },
+    {
+      "id": "retry-grounding-budget",
+      "kind": "same-generation-budget-exhaustion",
+      "from_attempt_id": "work-cell-attempt6",
+      "to_attempt_id": "work-cell-attempt7",
+      "reason_code": "slot-not-grounded:slot-unknown",
+      "feedback_frame": {
+        "frame_type": "proofreader-correction-request.v1",
+        "includes_draft_content": false,
+        "reason_codes": ["slot-not-grounded:slot-unknown"]
+      },
+      "final_disposition": "edge-aborted"
+    },
+    {
+      "id": "supersession-stale-context",
+      "kind": "fresh-context-supersession",
+      "from_attempt_id": "work-cell-attempt8",
+      "to_attempt_id": "work-cell-attempt9",
+      "reason_code": "context-revision-stale:6:7",
+      "fresh_read_grant_id": "grant-booking-context-v2",
+      "stale_completion_disposition": "rejected-stale-generation",
+      "final_disposition": "awaiting-fresh-context"
+    }
+  ],
+  "human_gate_policy": {
+    "id": "human-gate-policy-v1",
+    "node_id": "human-gate-v1",
+    "required_role": "reception-staff",
+    "accepted_frame_types": [
+      "booking-explanation-advisory.v1",
+      "booking-human-review-candidate.v1"
+    ],
+    "accepted_verdicts": [
+      "pass_to_human_gate",
+      "pass_with_repair_to_human_gate"
+    ],
+    "allowed_actions": [
+      "approve-candidate",
+      "cancel-workflow",
+      "provide-clarification",
+      "reject-candidate",
+      "request-fresh-context",
+      "select-alternative"
+    ],
+    "execution_enabled": false,
+    "command_authority": false,
+    "confirmation_evidence_only": true,
+    "backend_revalidation_required": true,
+    "rejected_frame_can_be_rehabilitated": false
+  },
+  "atomic_output_groups": [
+    {
+      "id": "booking-review",
+      "member_port_ids": ["port-ux", "port-human-review"],
+      "consistency_fields": [
+        "patient_candidate_id",
+        "practitioner_id",
+        "selected_slot_id",
+        "duration_minutes",
+        "context_revision"
+      ],
+      "release_mode": "all-or-none"
+    }
+  ],
+  "evidence": [
+    "docs/ariadne-bounded-cognitive-work-cell-protocol-plan.md",
+    "docs/security/ariadne-bounded-cognitive-work-cell-threat-model-delta.md"
+  ]
+}

@@ -203,3 +203,46 @@ live mailboxes, models, containers, commands, additional event families, PII,
 protected/historical data, Stage 3B, production, deployment, release and
 autonomous action remain closed. See
 `docs/ariadne-synaptic-event-router-protocol-closeout.md`.
+
+## 2026-07-23 Ariadne Bounded Cognitive Work Cell and Proofreader Gate
+
+Yuri authorised the repository-local authored-synthetic non-executing protocol
+tranche to formalise the architecture discussion about node granularity and
+deterministic egress. It passes as
+`ariadne_bounded_cognitive_work_cell_protocol_pass`.
+
+The accepted rule is `coarse-cognition-fine-authority`: node, topological leaf,
+container and agent are independent concepts. Deterministic leaves are not
+pre-containerised merely because they might later change implementation. One
+agent-eligible but unoccupied booking work cell can retain a coherent bounded
+request and emit five typed UX, human-review, audit, orchestrator and advisory
+drafts while practice, principal, sensitivity, freshness and authority remain
+constant. Material boundary changes still force a node split.
+
+The deterministic proofreader is the sole egress route. It proves exact schema,
+scope, source, freshness, authority, grounding and atomic consistency; its only
+repairs are duplicate removal and stable sorting of opaque references with
+immutable before/after hashes. The canonical proof covers all eight verdicts,
+bounded retry and repeated-failure edge abortion, inert fresh-read
+supersession, stale-completion rejection, all-or-none UX/human output and a
+verified but non-command human gate.
+
+The first draft-PR CodeQL aggregate check then caught a document-derived trace
+echo path and one unused assignment. Yuri approved the contained repair: the
+public trace now exposes fixed verdict labels and aggregate counts only, while
+caller-selected identifiers, values and rejection details remain internal.
+The repaired security and regression gates pass.
+
+Twenty focused and 126 combined tests pass with Sandbox DAG, Event Router, API
+Spine, Continuity, Compass, Ruff, compilation, JSON and whitespace gates. No
+external worker, subagent or model reviewer was used because the semantics are
+tightly coupled and Yuri closed model/provider connections; no independent-
+veto claim is made. The Continuity graph advances to revision 19 and Compass
+revision 7 records a separately closed in-memory scripted-rehearsal decision
+without changing the seven-step Reception One product journey.
+
+No PostgreSQL, event feed, product API, model, provider, real container, live
+mailbox, persistent retry, human-gate UI, command, PII, protected/historical
+data, Stage 3B, production, deployment, release or autonomous-action gate
+opened. See
+`docs/ariadne-bounded-cognitive-work-cell-protocol-closeout.md`.

@@ -1,0 +1,83 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_ariadne_bounded_cognitive_work_cell_protocol_postcompaction_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is selected; the schema, proofreader state machine, traces and negative tests remain tightly coupled Sol-owned architecture work."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Yuri explicitly closed model and provider connections for this tranche."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external model review is authorised or claimed; acceptance remains deterministic local Sol evidence."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "After context compaction, the complete live handover/current baton, authority allocation, active Bounded Cognitive Work Cell plan and threat-model delta, accepted Sandbox DAG and Synaptic Event Router design/closeout evidence, protected-evidence and user-decision boundaries, and all five Git/worktree sources were restored.",
+        "The authorised scope remains repository-local authored-synthetic non-executing protocol work for node granularity, multi-output work cells, deterministic egress verification and allowlisted repair, bounded retry, fresh-read supersession, human-gate routing, edge abortion and dry-run manifests.",
+        "HEAD, master, handoff/current, origin/master and origin/handoff/current remain aligned at df7f902f37926358c9f68b64af10697629202718; the task branch preserves four unrelated pre-existing Bernie receipt/runtime-state files.",
+        "PostgreSQL, event feeds, product APIs, models, providers, real containers, live mailboxes, command adapters, PII, protected holdouts and historical Diary material remain closed and were not accessed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

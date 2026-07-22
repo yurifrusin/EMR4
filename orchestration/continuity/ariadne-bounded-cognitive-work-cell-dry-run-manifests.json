@@ -1,0 +1,290 @@
+{
+  "atomic_group_manifest": [
+    {
+      "consistency_fields": [
+        "patient_candidate_id",
+        "practitioner_id",
+        "selected_slot_id",
+        "duration_minutes",
+        "context_revision"
+      ],
+      "id": "booking-review",
+      "member_port_ids": [
+        "port-ux",
+        "port-human-review"
+      ],
+      "release_mode": "all-or-none"
+    }
+  ],
+  "authority": {
+    "adapters_configured": false,
+    "agent_attached": false,
+    "container_started": false,
+    "default_decision": "deny",
+    "dry_run": true,
+    "execution_enabled": false
+  },
+  "closed_connections": [
+    "api-change",
+    "appointment-write",
+    "autonomous-action",
+    "container-runtime",
+    "database-connectivity",
+    "deployment",
+    "event-feed-connectivity",
+    "historical-diary",
+    "human-gate-runtime",
+    "live-mailbox",
+    "model-provider",
+    "pii",
+    "product-api",
+    "production",
+    "protected-evidence",
+    "release",
+    "stage-3b"
+  ],
+  "human_gate_manifest": {
+    "accepted_frame_types": [
+      "booking-explanation-advisory.v1",
+      "booking-human-review-candidate.v1"
+    ],
+    "accepted_verdicts": [
+      "pass_to_human_gate",
+      "pass_with_repair_to_human_gate"
+    ],
+    "allowed_actions": [
+      "approve-candidate",
+      "cancel-workflow",
+      "provide-clarification",
+      "reject-candidate",
+      "request-fresh-context",
+      "select-alternative"
+    ],
+    "backend_revalidation_required": true,
+    "command_authority": false,
+    "confirmation_evidence_only": true,
+    "execution_enabled": false,
+    "node_id": "human-gate-v1",
+    "required_role": "reception-staff"
+  },
+  "node_manifest": {
+    "execution_classes": [
+      {
+        "agent_eligible": false,
+        "authority_ceiling": "context-envelope",
+        "container_required_if_executed": false,
+        "id": "deterministic-ingress"
+      },
+      {
+        "agent_eligible": true,
+        "authority_ceiling": "candidate",
+        "container_required_if_executed": true,
+        "id": "agent-sandbox"
+      },
+      {
+        "agent_eligible": false,
+        "authority_ceiling": "verification-evidence",
+        "container_required_if_executed": false,
+        "id": "deterministic-verifier"
+      },
+      {
+        "agent_eligible": false,
+        "authority_ceiling": "display-or-evidence",
+        "container_required_if_executed": false,
+        "id": "deterministic-sink"
+      },
+      {
+        "agent_eligible": false,
+        "authority_ceiling": "confirmation-evidence",
+        "container_required_if_executed": false,
+        "id": "human-authority-gate"
+      },
+      {
+        "agent_eligible": false,
+        "authority_ceiling": "frozen-transition-policy",
+        "container_required_if_executed": false,
+        "id": "control-plane"
+      }
+    ],
+    "future_agentisation_requires_new_generation": true,
+    "granularity_principle": "coarse-cognition-fine-authority",
+    "nodes": [
+      {
+        "agent_attached": false,
+        "agent_eligible": false,
+        "container_declared": false,
+        "container_started": false,
+        "execution_class": "deterministic-ingress",
+        "node_id": "ingress-v1",
+        "topological_role": "source"
+      },
+      {
+        "agent_attached": false,
+        "agent_eligible": true,
+        "container_declared": true,
+        "container_started": false,
+        "execution_class": "agent-sandbox",
+        "node_id": "booking-work-cell-v1",
+        "topological_role": "interior"
+      },
+      {
+        "agent_attached": false,
+        "agent_eligible": false,
+        "container_declared": false,
+        "container_started": false,
+        "execution_class": "deterministic-verifier",
+        "node_id": "proofreader-v1",
+        "topological_role": "interior"
+      },
+      {
+        "agent_attached": false,
+        "agent_eligible": false,
+        "container_declared": false,
+        "container_started": false,
+        "execution_class": "deterministic-sink",
+        "node_id": "ux-projection-v1",
+        "topological_role": "leaf"
+      },
+      {
+        "agent_attached": false,
+        "agent_eligible": false,
+        "container_declared": false,
+        "container_started": false,
+        "execution_class": "human-authority-gate",
+        "node_id": "human-gate-v1",
+        "topological_role": "leaf"
+      },
+      {
+        "agent_attached": false,
+        "agent_eligible": false,
+        "container_declared": false,
+        "container_started": false,
+        "execution_class": "deterministic-sink",
+        "node_id": "audit-sink-v1",
+        "topological_role": "leaf"
+      },
+      {
+        "agent_attached": false,
+        "agent_eligible": false,
+        "container_declared": false,
+        "container_started": false,
+        "execution_class": "control-plane",
+        "node_id": "orchestrator-v1",
+        "topological_role": "sink"
+      }
+    ]
+  },
+  "operational_graph_revision": 3,
+  "proofreader_manifest": {
+    "checks_in_order": [
+      "port-and-frame-schema",
+      "practice-principal-correlation",
+      "declared-source-and-sensitivity",
+      "freshness-and-context-revision",
+      "authority-ceiling",
+      "referential-grounding",
+      "candidate-selection-consistency",
+      "atomic-output-consistency"
+    ],
+    "node_id": "proofreader-v1",
+    "original_draft_immutable": true,
+    "repair_allowlist": [
+      "deduplicate-opaque-references",
+      "stable-sort-opaque-references"
+    ],
+    "repair_forbidden": [
+      "create-missing-reference",
+      "elevate-authority",
+      "infer-human-approval",
+      "refresh-stale-context",
+      "resolve-ambiguity",
+      "select-unknown-slot"
+    ],
+    "verdict_dispositions": {
+      "authority_reject": "abort-edge",
+      "pass_to_downstream": "release-to-declared-recipient",
+      "pass_to_human_gate": "release-to-human-gate",
+      "pass_with_canonical_repair": "release-repaired-to-declared-recipient",
+      "pass_with_repair_to_human_gate": "release-repaired-to-human-gate",
+      "retryable_grounding_reject": "request-new-attempt-unless-budget-exhausted",
+      "retryable_schema_reject": "request-new-attempt-unless-budget-exhausted",
+      "stale_context_reject": "fresh-read-and-supersede"
+    }
+  },
+  "protocol_id": "ariadne-bounded-cognitive-work-cell",
+  "retry_manifest": {
+    "feedback_frame_type": "proofreader-correction-request.v1",
+    "feedback_includes_draft_content": false,
+    "max_same_reason_attempts": 2,
+    "policy_change_requires_new_generation": true,
+    "same_policy_retry_allowed": true,
+    "stale_completion_disposition": "rejected-stale-generation",
+    "stale_context_requires_supersession": true
+  },
+  "schema_version": "ariadne.bounded_cognitive_work_cell_manifests.v1",
+  "source_document_sha256": "sha256:46150b7afe4f24178cb7fcab98a47b152cf985b126274eb3fcdd8fdd17b905e3",
+  "work_cell_manifest": {
+    "agent_attached": false,
+    "agent_eligible": true,
+    "authority_ceiling": "candidate",
+    "container_started": false,
+    "context_frame_types": [
+      "availability-context.v1",
+      "evaluated-appointment-policy.v1",
+      "patient-candidate-context.v1",
+      "practitioner-context.v1",
+      "principal-scope.v1",
+      "synthetic-request-scope.v1"
+    ],
+    "execution_class": "agent-sandbox",
+    "node_id": "booking-work-cell-v1",
+    "output_ports": [
+      {
+        "atomic_group_id": "booking-review",
+        "authority_ceiling": "candidate",
+        "channel": "data",
+        "frame_type": "booking-ux-projection-candidate.v1",
+        "human_gate_required": false,
+        "port_id": "port-ux",
+        "recipient_node_id": "ux-projection-v1"
+      },
+      {
+        "atomic_group_id": "booking-review",
+        "authority_ceiling": "candidate",
+        "channel": "control",
+        "frame_type": "booking-human-review-candidate.v1",
+        "human_gate_required": true,
+        "port_id": "port-human-review",
+        "recipient_node_id": "human-gate-v1"
+      },
+      {
+        "atomic_group_id": null,
+        "authority_ceiling": "evidence",
+        "channel": "evidence",
+        "frame_type": "work-cell-audit-evidence.v1",
+        "human_gate_required": false,
+        "port_id": "port-audit",
+        "recipient_node_id": "audit-sink-v1"
+      },
+      {
+        "atomic_group_id": null,
+        "authority_ceiling": "evidence",
+        "channel": "control",
+        "frame_type": "work-cell-outcome.v1",
+        "human_gate_required": false,
+        "port_id": "port-orchestrator",
+        "recipient_node_id": "orchestrator-v1"
+      },
+      {
+        "atomic_group_id": null,
+        "authority_ceiling": "advisory",
+        "channel": "data",
+        "frame_type": "booking-explanation-advisory.v1",
+        "human_gate_required": true,
+        "port_id": "port-advisory",
+        "recipient_node_id": "human-gate-v1"
+      }
+    ]
+  },
+  "workflow_id": "synthetic-appointment-availability"
+}
