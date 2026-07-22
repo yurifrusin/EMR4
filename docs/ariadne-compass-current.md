@@ -97,24 +97,41 @@ Prerequisites:
 - Evidence that the Compass improves orientation and that a dry-run plan compiler reduces coordination cost without hiding decisions.
 - A separate authority design for capabilities, retries, audit, failure escalation and protected integration.
 
+### Ariadne Synaptic Event Router — candidate
+
+Should a future per-practice operational DAG receive bounded steering notices when committed domain events intersect the declared scopes of live nodes?
+
+A deterministic scope router could keep several isolated workers aligned with changing practice truth without sending every value through the orchestrator or giving an event command authority.
+
+Prerequisites:
+
+- A fresh Yuri decision on a frozen non-executing protocol tranche before any operational event or container adapter.
+- A separate operational-DAG schema, minimal live scope leases, bilateral routing policy, fresh-read reconciliation and privacy-safe replay evidence.
+- Strict separation from the development Continuity graph and preservation of the existing default-off local reschedule exception.
+
 ## Decisions that remain Yuri's
 
 - **Should the next Reception One tranche pursue visual/interaction synthesis, another exact event family, or pause product expansion?**
   Required before: Any new Reception One implementation or external design-model dispatch.
 - **Should Ariadne progress from a read-only Compass to a dry-run Plan Compiler and later a capability-brokered executor?**
   Required before: Any automatic hook, LLM Conductor call, worker dispatch, worktree action, PR action or protected-ref operation by Ariadne software.
+- **Should Ariadne begin a non-executing Synaptic Event Router tranche that models live node scopes, deterministic event intersection and bounded conversation-style steering?**
+  Required before: Any operational-DAG scope registry, database/event-feed connection, node mailbox delivery, listener, broker, background worker or event-driven reconciliation beyond the existing bounded Reception One exception.
 
 ## Map limits
 
 - The canonical continuity graph currently maps the active Reception One lineage and Ariadne tooling, not every EMR4 phase or historical sprint.
 - The master implementation plan is a strategic blueprint; phase labels do not prove implementation or readiness.
 - Accepted Reception One evidence is local and authored-synthetic unless its source says otherwise; it is not production, release or representative-staff evidence.
+- A future per-practice operational DAG must remain separate from the development Continuity graph; this candidate records no patient, practice or live-node state.
 - The decision horizon records candidates and gates. It neither recommends a winner nor grants authority.
 
 ## Evidence index
 
 - `docs/ariadne-compass-increment2-plan.md`
 - `docs/ariadne-continuity-engine-increment1-closeout.md`
+- `docs/ariadne-sandbox-dag-protocol-design.md`
+- `docs/ariadne-synaptic-event-router-candidate-plan.md`
 - `docs/bernie-conversational-diary-north-star.md`
 - `docs/bernie-current-strategic-transition-review.md`
 - `docs/bernie-fluid-meta-grid-concept-closeout.md`
@@ -136,4 +153,4 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/reception-one-combined-scope-proof-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-committed-event-vertical-sol-acceptance.md`
 
-_Compass map revision 4; continuity graph revision 17._
+_Compass map revision 5; continuity graph revision 17._

@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "strategic_planning",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_ariadne_synaptic_event_router_candidate_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is selected for this bounded planning-only record."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No provider-backed planning or implementation call is authorised."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No independent veto is required merely to preserve an unstarted candidate idea."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri requested that the scope-aware committed-event-to-DAG steering idea be recorded durably before deciding whether to start a new tranche.",
+        "The isolated planning worktree is C:/Users/sarashera/EMR4-worktrees/ariadne-synaptic-event-router-candidate on codex/ariadne-synaptic-event-router-candidate from 17e9300076c17bbea7ea44573e30523d1f07262a.",
+        "The accepted sandbox-DAG fork remains non-executing and the existing Reception One runtime remains limited to the default-off local authored-synthetic diary.appointment_rescheduled exception.",
+        "This planning record cannot start a database watcher, event consumer, model, container, product read, command, broker, background worker or deployment.",
+        "GraphQL mutations and subscriptions, other event families, providers, PII, Stage 3B, production, deployment, release and autonomous action remain closed.",
+        "Protected holdouts v1-v10 and historical Diary material remain sealed and were not opened, enumerated, searched or used."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

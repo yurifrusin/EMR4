@@ -144,3 +144,26 @@ Compass retains the same seven-step Reception One journey and current product
 position. No model, real container, API, database, event runtime, EMR command,
 provider, PII, protected/historical, production, deployment or release surface
 opened. See `docs/ariadne-sandbox-dag-fork-closeout.md`.
+
+## 2026-07-22 Ariadne Synaptic Event Router candidate
+
+Yuri asked to preserve a possible scope-aware bridge between committed practice
+events and a future operational sandbox DAG before deciding whether to begin a
+new tranche. The recorded Synaptic Event Router would deterministically compare
+a minimal committed domain event with declared live node-scope leases and send
+bounded conversation-style steering notices only to intersecting nodes. The
+orchestrator remains the control plane and need not relay every event or value.
+
+The candidate explicitly separates the development Continuity graph from any
+future per-practice operational DAG. Events remain hints to invalidate context,
+not row truth or command authority; a receiving node must reconcile at a
+declared boundary through fresh authorized reads, deduplicate replay and prevent
+stale generations from overwriting newer work. The first recommended tranche is
+repository-local and non-executing and would incorporate the earlier dry-run
+policy compiler as inspectable scope, subscription and restart manifests.
+
+This planning record opens no database watcher, event consumer, event family,
+listener, broker, node mailbox, container, model, product read, API mutation,
+PII, autonomous action, production, deployment or release gate. The existing
+default-off local `diary.appointment_rescheduled` exception remains unchanged.
+See `docs/ariadne-synaptic-event-router-candidate-plan.md`.
