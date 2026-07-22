@@ -53,6 +53,7 @@
       "orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-postcompaction-receipt.json",
       "orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-preacceptance-receipt.json",
       "orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-precommit-receipt.json",
+      "orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-prepush-receipt.json",
       "orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-rehydration-receipt.json"
     ],
     "tests": [
