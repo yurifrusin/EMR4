@@ -1,0 +1,577 @@
+{
+  "schema_version": "ariadne.sandbox_dag.v1",
+  "workflow_id": "synthetic-appointment-proposal",
+  "graph_revision": 1,
+  "title": "Authored-synthetic proposal trace with a declared sandbox peer link",
+  "authority": {
+    "advisory_only": true,
+    "execution_enabled": false,
+    "final_authority": "human",
+    "closed_boundaries": [
+      "api-change",
+      "appointment-write",
+      "autonomous-action",
+      "deployment",
+      "event-runtime",
+      "historical-diary",
+      "pii",
+      "production",
+      "protected-evidence",
+      "provider-call",
+      "release",
+      "stage-3b",
+      "voice"
+    ]
+  },
+  "capability_catalog": [
+    {
+      "id": "inspect-typed-frame",
+      "effect": "descriptive-only",
+      "description": "Inspect only properties present in a received typed frame."
+    },
+    {
+      "id": "request-typed-context",
+      "effect": "descriptive-only",
+      "description": "Return a bounded request for one declared input frame."
+    },
+    {
+      "id": "evaluate-predicate",
+      "effect": "descriptive-only",
+      "description": "Evaluate an authored-synthetic predicate over received values."
+    },
+    {
+      "id": "emit-candidate-transition",
+      "effect": "descriptive-only",
+      "description": "Describe a candidate transition without executing it."
+    },
+    {
+      "id": "record-evidence",
+      "effect": "descriptive-only",
+      "description": "Emit a non-command evidence summary."
+    }
+  ],
+  "frame_catalog": [
+    {
+      "id": "request-scope",
+      "description": "A bounded authored-synthetic scheduling scope.",
+      "properties": [
+        { "name": "date-relation", "type": "string", "sensitivity": "public", "required": true },
+        { "name": "duration-minutes", "type": "integer", "sensitivity": "public", "required": true },
+        { "name": "earliest-time", "type": "string", "sensitivity": "public", "required": true }
+      ]
+    },
+    {
+      "id": "patient-reference",
+      "description": "A non-real authored-synthetic subject reference.",
+      "properties": [
+        { "name": "subject-ref", "type": "string", "sensitivity": "authored-synthetic", "required": true }
+      ]
+    },
+    {
+      "id": "identity-reference",
+      "description": "A synthetic identity-resolution result.",
+      "properties": [
+        { "name": "match-status", "type": "string", "sensitivity": "operational-metadata", "required": true },
+        { "name": "subject-ref", "type": "string", "sensitivity": "authored-synthetic", "required": true }
+      ]
+    },
+    {
+      "id": "availability-query",
+      "description": "A typed synthetic availability request.",
+      "properties": [
+        { "name": "duration-minutes", "type": "integer", "sensitivity": "public", "required": true },
+        { "name": "earliest-time", "type": "string", "sensitivity": "public", "required": true },
+        { "name": "practitioner-ref", "type": "string", "sensitivity": "authored-synthetic", "required": true },
+        { "name": "subject-ref", "type": "string", "sensitivity": "authored-synthetic", "required": true }
+      ]
+    },
+    {
+      "id": "availability-candidates",
+      "description": "Authored-synthetic slot candidates, not a product read.",
+      "properties": [
+        { "name": "candidate-times", "type": "string-list", "sensitivity": "authored-synthetic", "required": true },
+        { "name": "practitioner-ref", "type": "string", "sensitivity": "authored-synthetic", "required": true }
+      ]
+    },
+    {
+      "id": "policy-constraints",
+      "description": "Non-executing confirmation and proposal constraints.",
+      "properties": [
+        { "name": "proposal-only", "type": "boolean", "sensitivity": "operational-metadata", "required": true },
+        { "name": "staff-confirmation-required", "type": "boolean", "sensitivity": "operational-metadata", "required": true }
+      ]
+    },
+    {
+      "id": "ranked-candidates",
+      "description": "A leaf-derived ordering of the authored-synthetic candidates.",
+      "properties": [
+        { "name": "candidate-times", "type": "string-list", "sensitivity": "authored-synthetic", "required": true },
+        { "name": "ranking-basis", "type": "string", "sensitivity": "operational-metadata", "required": true }
+      ]
+    },
+    {
+      "id": "proposal-candidate",
+      "description": "A non-committing candidate presented to the human-authority gate.",
+      "properties": [
+        { "name": "candidate-state", "type": "string", "sensitivity": "operational-metadata", "required": true },
+        { "name": "candidate-times", "type": "string-list", "sensitivity": "authored-synthetic", "required": true },
+        { "name": "confirmation-required", "type": "boolean", "sensitivity": "operational-metadata", "required": true },
+        { "name": "write-permitted", "type": "boolean", "sensitivity": "operational-metadata", "required": true }
+      ]
+    },
+    {
+      "id": "evidence-summary",
+      "description": "A non-command summary of protocol predicates.",
+      "properties": [
+        { "name": "assertions", "type": "string-list", "sensitivity": "operational-metadata", "required": true }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "orchestrator-v1",
+      "role": "orchestrator",
+      "instance": "orchestrator",
+      "attempt": 1,
+      "state": "complete",
+      "accepts": [],
+      "emits": ["request-scope"],
+      "capability_descriptor": ["inspect-typed-frame"],
+      "container": null,
+      "communication_policy": null
+    },
+    {
+      "id": "identity-attempt1",
+      "role": "sandbox",
+      "instance": "identity",
+      "attempt": 1,
+      "state": "needs-context",
+      "accepts": ["patient-reference", "request-scope"],
+      "emits": ["identity-reference"],
+      "capability_descriptor": ["inspect-typed-frame", "request-typed-context"],
+      "container": { "generation": 1, "restarted_from": null },
+      "communication_policy": {
+        "mode": "declared-peers-only",
+        "revision": 1,
+        "immutable_for_container_generation": true,
+        "inbound_rules": [
+          { "peer_instance": "orchestrator", "channels": ["data"], "frame_types": ["patient-reference", "request-scope"] }
+        ],
+        "outbound_rules": [
+          { "peer_instance": "orchestrator", "channels": ["control"], "frame_types": ["patient-reference"] },
+          { "peer_instance": "orchestrator", "channels": ["data"], "frame_types": ["identity-reference"] }
+        ]
+      }
+    },
+    {
+      "id": "context-source-v1",
+      "role": "human-context-source",
+      "instance": "context-source",
+      "attempt": 1,
+      "state": "complete",
+      "accepts": ["patient-reference"],
+      "emits": ["patient-reference"],
+      "capability_descriptor": [],
+      "container": null,
+      "communication_policy": null
+    },
+    {
+      "id": "orchestrator-v2",
+      "role": "orchestrator",
+      "instance": "orchestrator",
+      "attempt": 2,
+      "state": "complete",
+      "accepts": ["patient-reference"],
+      "emits": ["patient-reference"],
+      "capability_descriptor": ["inspect-typed-frame"],
+      "container": null,
+      "communication_policy": null
+    },
+    {
+      "id": "identity-attempt2",
+      "role": "sandbox",
+      "instance": "identity",
+      "attempt": 2,
+      "state": "complete",
+      "accepts": ["patient-reference", "request-scope"],
+      "emits": ["identity-reference"],
+      "capability_descriptor": ["inspect-typed-frame", "request-typed-context"],
+      "container": { "generation": 1, "restarted_from": null },
+      "communication_policy": {
+        "mode": "declared-peers-only",
+        "revision": 1,
+        "immutable_for_container_generation": true,
+        "inbound_rules": [
+          { "peer_instance": "orchestrator", "channels": ["data"], "frame_types": ["patient-reference", "request-scope"] }
+        ],
+        "outbound_rules": [
+          { "peer_instance": "orchestrator", "channels": ["control"], "frame_types": ["patient-reference"] },
+          { "peer_instance": "orchestrator", "channels": ["data"], "frame_types": ["identity-reference"] }
+        ]
+      }
+    },
+    {
+      "id": "orchestrator-v3",
+      "role": "orchestrator",
+      "instance": "orchestrator",
+      "attempt": 3,
+      "state": "complete",
+      "accepts": ["patient-reference"],
+      "emits": ["patient-reference"],
+      "capability_descriptor": ["inspect-typed-frame"],
+      "container": null,
+      "communication_policy": null
+    },
+    {
+      "id": "orchestrator-v4",
+      "role": "orchestrator",
+      "instance": "orchestrator",
+      "attempt": 4,
+      "state": "complete",
+      "accepts": ["identity-reference"],
+      "emits": ["availability-query", "policy-constraints"],
+      "capability_descriptor": ["inspect-typed-frame"],
+      "container": null,
+      "communication_policy": null
+    },
+    {
+      "id": "availability-attempt1",
+      "role": "sandbox",
+      "instance": "availability",
+      "attempt": 1,
+      "state": "complete",
+      "accepts": ["availability-query"],
+      "emits": ["availability-candidates"],
+      "capability_descriptor": ["inspect-typed-frame", "evaluate-predicate"],
+      "container": { "generation": 1, "restarted_from": null },
+      "communication_policy": {
+        "mode": "declared-peers-only",
+        "revision": 1,
+        "immutable_for_container_generation": true,
+        "inbound_rules": [
+          { "peer_instance": "orchestrator", "channels": ["data"], "frame_types": ["availability-query"] }
+        ],
+        "outbound_rules": [
+          { "peer_instance": "ranking", "channels": ["data"], "frame_types": ["availability-candidates"] }
+        ]
+      }
+    },
+    {
+      "id": "policy-attempt1",
+      "role": "sandbox",
+      "instance": "policy",
+      "attempt": 1,
+      "state": "complete",
+      "accepts": ["policy-constraints"],
+      "emits": ["policy-constraints"],
+      "capability_descriptor": ["inspect-typed-frame", "evaluate-predicate"],
+      "container": { "generation": 1, "restarted_from": null },
+      "communication_policy": {
+        "mode": "declared-peers-only",
+        "revision": 1,
+        "immutable_for_container_generation": true,
+        "inbound_rules": [
+          { "peer_instance": "orchestrator", "channels": ["data"], "frame_types": ["policy-constraints"] }
+        ],
+        "outbound_rules": [
+          { "peer_instance": "join", "channels": ["data"], "frame_types": ["policy-constraints"] }
+        ]
+      }
+    },
+    {
+      "id": "ranking-attempt1",
+      "role": "sandbox",
+      "instance": "ranking",
+      "attempt": 1,
+      "state": "complete",
+      "accepts": ["availability-candidates"],
+      "emits": ["ranked-candidates"],
+      "capability_descriptor": ["inspect-typed-frame", "evaluate-predicate"],
+      "container": { "generation": 1, "restarted_from": null },
+      "communication_policy": {
+        "mode": "declared-peers-only",
+        "revision": 1,
+        "immutable_for_container_generation": true,
+        "inbound_rules": [
+          { "peer_instance": "availability", "channels": ["data"], "frame_types": ["availability-candidates"] }
+        ],
+        "outbound_rules": [
+          { "peer_instance": "join", "channels": ["data"], "frame_types": ["ranked-candidates"] }
+        ]
+      }
+    },
+    {
+      "id": "join-v1",
+      "role": "join",
+      "instance": "join",
+      "attempt": 1,
+      "state": "complete",
+      "accepts": ["policy-constraints", "ranked-candidates"],
+      "emits": ["evidence-summary", "proposal-candidate"],
+      "capability_descriptor": ["emit-candidate-transition", "record-evidence"],
+      "container": null,
+      "communication_policy": null
+    },
+    {
+      "id": "human-gate-v1",
+      "role": "human-authority-gate",
+      "instance": "human-gate",
+      "attempt": 1,
+      "state": "awaiting-human-authority",
+      "accepts": ["proposal-candidate"],
+      "emits": [],
+      "capability_descriptor": [],
+      "container": null,
+      "communication_policy": null
+    },
+    {
+      "id": "evidence-sink-v1",
+      "role": "evidence-sink",
+      "instance": "evidence-sink",
+      "attempt": 1,
+      "state": "complete",
+      "accepts": ["evidence-summary"],
+      "emits": [],
+      "capability_descriptor": ["record-evidence"],
+      "container": null,
+      "communication_policy": null
+    }
+  ],
+  "exchanges": [
+    {
+      "message_id": "message-01-scope",
+      "workflow_id": "synthetic-appointment-proposal",
+      "graph_revision": 1,
+      "sender": "orchestrator-v1",
+      "recipient": "identity-attempt1",
+      "channel": "data",
+      "kind": "input",
+      "correlation_id": "scope-flow",
+      "frame_type": "request-scope",
+      "bindings": [
+        { "name": "date-relation", "value": "today" },
+        { "name": "duration-minutes", "value": 30 },
+        { "name": "earliest-time", "value": "14:00" }
+      ],
+      "reason": "Start the authored-synthetic scope without an identifying reference.",
+      "provenance": { "kind": "authored-synthetic", "source": "plan-example", "source_message_ids": [] },
+      "freshness": { "status": "not-applicable", "observed_at": "2026-07-22T00:00:00Z", "maximum_age_seconds": 0 }
+    },
+    {
+      "message_id": "message-02-context-request",
+      "workflow_id": "synthetic-appointment-proposal",
+      "graph_revision": 1,
+      "sender": "identity-attempt1",
+      "recipient": "orchestrator-v2",
+      "channel": "control",
+      "kind": "context-request",
+      "correlation_id": "identity-context",
+      "frame_type": "patient-reference",
+      "bindings": [],
+      "reason": "A synthetic subject reference is required to continue identity matching.",
+      "provenance": { "kind": "derived", "source": "identity-attempt1", "source_message_ids": ["message-01-scope"] },
+      "freshness": { "status": "not-applicable", "observed_at": "2026-07-22T00:00:01Z", "maximum_age_seconds": 0 }
+    },
+    {
+      "message_id": "message-03-context-source-request",
+      "workflow_id": "synthetic-appointment-proposal",
+      "graph_revision": 1,
+      "sender": "orchestrator-v2",
+      "recipient": "context-source-v1",
+      "channel": "control",
+      "kind": "context-source-request",
+      "correlation_id": "identity-context",
+      "frame_type": "patient-reference",
+      "bindings": [],
+      "reason": "Ask the declared human context source for only the requested frame.",
+      "provenance": { "kind": "derived", "source": "orchestrator-v2", "source_message_ids": ["message-02-context-request"] },
+      "freshness": { "status": "not-applicable", "observed_at": "2026-07-22T00:00:02Z", "maximum_age_seconds": 0 }
+    },
+    {
+      "message_id": "message-03-context-source",
+      "workflow_id": "synthetic-appointment-proposal",
+      "graph_revision": 1,
+      "sender": "context-source-v1",
+      "recipient": "orchestrator-v3",
+      "channel": "data",
+      "kind": "input",
+      "correlation_id": "identity-context",
+      "frame_type": "patient-reference",
+      "bindings": [
+        { "name": "subject-ref", "value": "synthetic-subject-001" }
+      ],
+      "reason": "Supply the requested authored-synthetic reference to the control plane.",
+      "provenance": { "kind": "human-supplied", "source": "authored-synthetic-context", "source_message_ids": ["message-02-context-request"] },
+      "freshness": { "status": "fresh", "observed_at": "2026-07-22T00:00:02Z", "maximum_age_seconds": 60 }
+    },
+    {
+      "message_id": "message-04-context-grant",
+      "workflow_id": "synthetic-appointment-proposal",
+      "graph_revision": 1,
+      "sender": "orchestrator-v3",
+      "recipient": "identity-attempt2",
+      "channel": "data",
+      "kind": "context-grant",
+      "correlation_id": "identity-context",
+      "frame_type": "patient-reference",
+      "bindings": [
+        { "name": "subject-ref", "value": "synthetic-subject-001" }
+      ],
+      "reason": "Grant only the declared frame to the later immutable identity attempt.",
+      "provenance": { "kind": "derived", "source": "orchestrator-v3", "source_message_ids": ["message-02-context-request", "message-03-context-source"] },
+      "freshness": { "status": "fresh", "observed_at": "2026-07-22T00:00:03Z", "maximum_age_seconds": 60 }
+    },
+    {
+      "message_id": "message-05-identity-result",
+      "workflow_id": "synthetic-appointment-proposal",
+      "graph_revision": 1,
+      "sender": "identity-attempt2",
+      "recipient": "orchestrator-v4",
+      "channel": "data",
+      "kind": "result",
+      "correlation_id": "identity-result",
+      "frame_type": "identity-reference",
+      "bindings": [
+        { "name": "match-status", "value": "synthetic-match" },
+        { "name": "subject-ref", "value": "synthetic-subject-001" }
+      ],
+      "reason": "Return a typed synthetic match result to the control plane.",
+      "provenance": { "kind": "derived", "source": "identity-attempt2", "source_message_ids": ["message-04-context-grant"] },
+      "freshness": { "status": "fresh", "observed_at": "2026-07-22T00:00:04Z", "maximum_age_seconds": 60 }
+    },
+    {
+      "message_id": "message-06-availability-input",
+      "workflow_id": "synthetic-appointment-proposal",
+      "graph_revision": 1,
+      "sender": "orchestrator-v4",
+      "recipient": "availability-attempt1",
+      "channel": "data",
+      "kind": "input",
+      "correlation_id": "availability-flow",
+      "frame_type": "availability-query",
+      "bindings": [
+        { "name": "duration-minutes", "value": 30 },
+        { "name": "earliest-time", "value": "14:00" },
+        { "name": "practitioner-ref", "value": "synthetic-practitioner-001" },
+        { "name": "subject-ref", "value": "synthetic-subject-001" }
+      ],
+      "reason": "Fan out only the bounded availability fields.",
+      "provenance": { "kind": "derived", "source": "orchestrator-v4", "source_message_ids": ["message-01-scope", "message-05-identity-result"] },
+      "freshness": { "status": "fresh", "observed_at": "2026-07-22T00:00:05Z", "maximum_age_seconds": 60 }
+    },
+    {
+      "message_id": "message-07-policy-input",
+      "workflow_id": "synthetic-appointment-proposal",
+      "graph_revision": 1,
+      "sender": "orchestrator-v4",
+      "recipient": "policy-attempt1",
+      "channel": "data",
+      "kind": "input",
+      "correlation_id": "policy-flow",
+      "frame_type": "policy-constraints",
+      "bindings": [
+        { "name": "proposal-only", "value": true },
+        { "name": "staff-confirmation-required", "value": true }
+      ],
+      "reason": "Fan out the non-executing authority constraints.",
+      "provenance": { "kind": "authored-synthetic", "source": "closed-authority-boundaries", "source_message_ids": ["message-05-identity-result"] },
+      "freshness": { "status": "not-applicable", "observed_at": "2026-07-22T00:00:05Z", "maximum_age_seconds": 0 }
+    },
+    {
+      "message_id": "message-08-peer-candidates",
+      "workflow_id": "synthetic-appointment-proposal",
+      "graph_revision": 1,
+      "sender": "availability-attempt1",
+      "recipient": "ranking-attempt1",
+      "channel": "data",
+      "kind": "result",
+      "correlation_id": "availability-flow",
+      "frame_type": "availability-candidates",
+      "bindings": [
+        { "name": "candidate-times", "value": ["14:30", "15:30"] },
+        { "name": "practitioner-ref", "value": "synthetic-practitioner-001" }
+      ],
+      "reason": "Use the bilateral declared peer edge instead of relaying candidates through the orchestrator.",
+      "provenance": { "kind": "derived", "source": "availability-attempt1", "source_message_ids": ["message-06-availability-input"] },
+      "freshness": { "status": "fresh", "observed_at": "2026-07-22T00:00:06Z", "maximum_age_seconds": 60 }
+    },
+    {
+      "message_id": "message-09-ranked-join",
+      "workflow_id": "synthetic-appointment-proposal",
+      "graph_revision": 1,
+      "sender": "ranking-attempt1",
+      "recipient": "join-v1",
+      "channel": "data",
+      "kind": "join-input",
+      "correlation_id": "proposal-join",
+      "frame_type": "ranked-candidates",
+      "bindings": [
+        { "name": "candidate-times", "value": ["14:30", "15:30"] },
+        { "name": "ranking-basis", "value": "earliest-first" }
+      ],
+      "reason": "Return the peer-derived ordering to the explicit join.",
+      "provenance": { "kind": "derived", "source": "ranking-attempt1", "source_message_ids": ["message-08-peer-candidates"] },
+      "freshness": { "status": "fresh", "observed_at": "2026-07-22T00:00:07Z", "maximum_age_seconds": 60 }
+    },
+    {
+      "message_id": "message-10-policy-join",
+      "workflow_id": "synthetic-appointment-proposal",
+      "graph_revision": 1,
+      "sender": "policy-attempt1",
+      "recipient": "join-v1",
+      "channel": "data",
+      "kind": "join-input",
+      "correlation_id": "proposal-join",
+      "frame_type": "policy-constraints",
+      "bindings": [
+        { "name": "proposal-only", "value": true },
+        { "name": "staff-confirmation-required", "value": true }
+      ],
+      "reason": "Converge the separately evaluated authority constraints.",
+      "provenance": { "kind": "derived", "source": "policy-attempt1", "source_message_ids": ["message-07-policy-input"] },
+      "freshness": { "status": "not-applicable", "observed_at": "2026-07-22T00:00:07Z", "maximum_age_seconds": 0 }
+    },
+    {
+      "message_id": "message-11-human-gate",
+      "workflow_id": "synthetic-appointment-proposal",
+      "graph_revision": 1,
+      "sender": "join-v1",
+      "recipient": "human-gate-v1",
+      "channel": "control",
+      "kind": "candidate-transition",
+      "correlation_id": "proposal-candidate-flow",
+      "frame_type": "proposal-candidate",
+      "bindings": [
+        { "name": "candidate-state", "value": "proposal-ready" },
+        { "name": "candidate-times", "value": ["14:30", "15:30"] },
+        { "name": "confirmation-required", "value": true },
+        { "name": "write-permitted", "value": false }
+      ],
+      "reason": "Present a candidate and stop at the human-authority boundary.",
+      "provenance": { "kind": "derived", "source": "join-v1", "source_message_ids": ["message-09-ranked-join", "message-10-policy-join"] },
+      "freshness": { "status": "fresh", "observed_at": "2026-07-22T00:00:08Z", "maximum_age_seconds": 60 }
+    },
+    {
+      "message_id": "message-12-evidence",
+      "workflow_id": "synthetic-appointment-proposal",
+      "graph_revision": 1,
+      "sender": "join-v1",
+      "recipient": "evidence-sink-v1",
+      "channel": "evidence",
+      "kind": "evidence-receipt",
+      "correlation_id": "proposal-evidence",
+      "frame_type": "evidence-summary",
+      "bindings": [
+        { "name": "assertions", "value": ["peer-policy-bilateral", "proposal-only", "human-gate-terminal"] }
+      ],
+      "reason": "Record non-command protocol assertions separately from the human candidate.",
+      "provenance": { "kind": "derived", "source": "join-v1", "source_message_ids": ["message-09-ranked-join", "message-10-policy-join"] },
+      "freshness": { "status": "not-applicable", "observed_at": "2026-07-22T00:00:08Z", "maximum_age_seconds": 0 }
+    }
+  ],
+  "evidence": [
+    "docs/ariadne-sandbox-dag-protocol-design.md",
+    "docs/ariadne-sandbox-dag-fork-plan.md",
+    "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-plan-sol-review.md"
+  ]
+}

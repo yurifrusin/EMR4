@@ -121,3 +121,26 @@ interaction synthesis and another exact typed Diary event family as candidates;
 workflow-executive maturation is a separate programme-support candidate. All
 three require fresh Yuri decisions. See `docs/ariadne-compass-current.md` and
 `docs/ariadne-compass-increment2-closeout.md`.
+
+## 2026-07-22 Ariadne sandbox-DAG first fork
+
+Yuri authorised the first real Continuity Engine fork to explore a DAG of
+sandboxed leaves without changing accepted Reception One or Compass work. The
+fork passes as a repository-local, authored-synthetic and non-executing
+protocol. It records typed frames, provenance, freshness, immutable attempts,
+fan-out/fan-in and one terminal human-authority gate.
+
+During implementation Yuri refined the topology: the orchestrator is the
+control plane, not a compulsory relay. A leaf may send typed data directly to a
+peer when both immutable start-up policies name the peer, channel and frame.
+Unilateral, ambient or peer-control communication fails closed. A policy change
+requires a later container generation, higher revision and explicit restart
+lineage; the prototype describes but does not perform that restart.
+
+The 12-test focused and 55-test combined populations and all validators pass;
+fresh Gemini 3.5 Flash High returns `pass`. The continuity graph records the
+accepted exploration through `forked_from` while the mechanically rebound
+Compass retains the same seven-step Reception One journey and current product
+position. No model, real container, API, database, event runtime, EMR command,
+provider, PII, protected/historical, production, deployment or release surface
+opened. See `docs/ariadne-sandbox-dag-fork-closeout.md`.

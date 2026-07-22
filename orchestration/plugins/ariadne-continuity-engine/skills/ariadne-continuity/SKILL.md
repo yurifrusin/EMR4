@@ -1,6 +1,6 @@
 ---
 name: ariadne-continuity
-description: Preserve and inspect EMR4 work lineage and programme position with the local Ariadne Continuity Engine and read-only Compass. Use for checkpointing or comparing work branches, recording a fork or candidate knowledge harvest, closing a branch with evidence, auditing inherited obligations and closed authority boundaries, or explaining where the active programme sits and which decisions remain open. Do not use it as a substitute for the mandatory EMR4 rehydration, acceptance, integration, planning authority, workflow execution, or product runtime.
+description: Preserve and inspect EMR4 work lineage, programme position, and non-executing sandbox-DAG protocol designs with the local Ariadne Continuity Engine and read-only Compass. Use for checkpointing or comparing work branches, recording a fork or candidate knowledge harvest, closing a branch with evidence, auditing inherited obligations and closed authority boundaries, explaining where the active programme sits, or validating typed communication among sandbox leaves. Do not use it as a substitute for mandatory EMR4 rehydration, acceptance, integration, planning authority, workflow execution, container runtime, or product runtime.
 ---
 
 # Ariadne Continuity
@@ -24,6 +24,8 @@ python scripts\ariadne_continuity.py audit
 python scripts\ariadne_continuity.py show
 python scripts\ariadne_compass.py validate
 python scripts\ariadne_compass.py show --format markdown
+python scripts\ariadne_sandbox_dag.py validate
+python scripts\ariadne_sandbox_dag.py trace --format markdown
 ```
 
 Stop on `revision_required`. Route each reason to the missing artifact, contract evidence, authority source, or lineage correction. Never override a failing audit by changing historical acceptance status.
@@ -55,6 +57,26 @@ horizon from programme-support work and labels every horizon item `candidate`,
 The Compass does not recommend or select a winner. Do not treat the last journey
 node as an instruction to continue expanding that branch. Every Yuri-owned
 question and every boundary-changing candidate remains a fresh decision.
+
+## Explore a sandbox DAG safely
+
+Use `ariadne_sandbox_dag.py` only for authored-synthetic, non-executing protocol
+documents. Its nodes, capabilities, communication policies and container
+generations are descriptors; they do not spawn a container, call a model, read
+product data or grant authority.
+
+Treat the orchestrator as the control plane, not a compulsory relay. A direct
+sandbox edge is valid only when both endpoints' start-up policies declare the
+peer instance, channel and frame. Do not add ambient discovery, shared mutable
+memory, unilateral links or peer authority-control messages. Keep a policy
+immutable for the lifetime of its container generation. Represent an amendment
+as a later generation with a higher policy revision and explicit restart
+lineage, preserving the earlier generation as evidence.
+
+Represent a context round trip with later immutable attempts so every message
+still points forward in the DAG. End command-shaped candidates at a terminal
+human-authority gate. Never describe a candidate as confirmed, committed,
+dispatched or executed.
 
 ## Record bounded changes
 

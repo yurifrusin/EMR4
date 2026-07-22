@@ -1,0 +1,379 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/ariadne-sandbox-dag.schema.json",
+  "title": "Ariadne non-executing sandbox DAG",
+  "description": "An authored-synthetic protocol trace of immutable sandbox attempts, bilateral peer policies and typed exchanges. It grants no runtime authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "workflow_id",
+    "graph_revision",
+    "title",
+    "authority",
+    "capability_catalog",
+    "frame_catalog",
+    "nodes",
+    "exchanges",
+    "evidence"
+  ],
+  "properties": {
+    "schema_version": { "const": "ariadne.sandbox_dag.v1" },
+    "workflow_id": { "$ref": "#/$defs/id" },
+    "graph_revision": { "type": "integer", "minimum": 1 },
+    "title": { "type": "string", "minLength": 1 },
+    "authority": { "$ref": "#/$defs/authority" },
+    "capability_catalog": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/capability" }
+    },
+    "frame_catalog": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/frame" }
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/node" }
+    },
+    "exchanges": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/exchange" }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/repoPath" }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "repoPath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*://)(?!.*\\\\).+$"
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "advisory_only",
+        "execution_enabled",
+        "final_authority",
+        "closed_boundaries"
+      ],
+      "properties": {
+        "advisory_only": { "const": true },
+        "execution_enabled": { "const": false },
+        "final_authority": { "const": "human" },
+        "closed_boundaries": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" }
+        }
+      }
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "effect", "description"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "effect": { "const": "descriptive-only" },
+        "description": { "type": "string", "minLength": 1 }
+      }
+    },
+    "frameProperty": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "type", "sensitivity", "required"],
+      "properties": {
+        "name": { "$ref": "#/$defs/id" },
+        "type": {
+          "enum": ["string", "number", "integer", "boolean", "string-list"]
+        },
+        "sensitivity": {
+          "enum": ["public", "authored-synthetic", "operational-metadata"]
+        },
+        "required": { "type": "boolean" }
+      }
+    },
+    "frame": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "description", "properties"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "description": { "type": "string", "minLength": 1 },
+        "properties": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/frameProperty" }
+        }
+      }
+    },
+    "peerRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["peer_instance", "channels", "frame_types"],
+      "properties": {
+        "peer_instance": { "$ref": "#/$defs/id" },
+        "channels": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "enum": ["data", "control", "evidence"] }
+        },
+        "frame_types": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" }
+        }
+      }
+    },
+    "communicationPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "revision",
+        "immutable_for_container_generation",
+        "inbound_rules",
+        "outbound_rules"
+      ],
+      "properties": {
+        "mode": { "const": "declared-peers-only" },
+        "revision": { "type": "integer", "minimum": 1 },
+        "immutable_for_container_generation": { "const": true },
+        "inbound_rules": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/peerRule" }
+        },
+        "outbound_rules": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/peerRule" }
+        }
+      }
+    },
+    "container": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["generation", "restarted_from"],
+      "properties": {
+        "generation": { "type": "integer", "minimum": 1 },
+        "restarted_from": {
+          "oneOf": [
+            { "$ref": "#/$defs/id" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "role",
+        "instance",
+        "attempt",
+        "state",
+        "accepts",
+        "emits",
+        "capability_descriptor",
+        "container",
+        "communication_policy"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "role": {
+          "enum": [
+            "orchestrator",
+            "sandbox",
+            "join",
+            "human-context-source",
+            "human-authority-gate",
+            "evidence-sink"
+          ]
+        },
+        "instance": { "$ref": "#/$defs/id" },
+        "attempt": { "type": "integer", "minimum": 1 },
+        "state": {
+          "enum": [
+            "ready",
+            "complete",
+            "needs-context",
+            "blocked",
+            "awaiting-human-authority"
+          ]
+        },
+        "accepts": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" }
+        },
+        "emits": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" }
+        },
+        "capability_descriptor": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" }
+        },
+        "container": {
+          "oneOf": [
+            { "$ref": "#/$defs/container" },
+            { "type": "null" }
+          ]
+        },
+        "communication_policy": {
+          "oneOf": [
+            { "$ref": "#/$defs/communicationPolicy" },
+            { "type": "null" }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "role": { "const": "sandbox" } } },
+          "then": {
+            "properties": {
+              "container": { "$ref": "#/$defs/container" },
+              "communication_policy": { "$ref": "#/$defs/communicationPolicy" }
+            }
+          },
+          "else": {
+            "properties": {
+              "container": { "type": "null" },
+              "communication_policy": { "type": "null" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "role": { "const": "human-authority-gate" } } },
+          "then": {
+            "properties": {
+              "state": { "const": "awaiting-human-authority" }
+            }
+          }
+        }
+      ]
+    },
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "value"],
+      "properties": {
+        "name": { "$ref": "#/$defs/id" },
+        "value": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "number" },
+            { "type": "boolean" },
+            {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          ]
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "source", "source_message_ids"],
+      "properties": {
+        "kind": { "enum": ["authored-synthetic", "derived", "human-supplied"] },
+        "source": { "type": "string", "minLength": 1 },
+        "source_message_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" }
+        }
+      }
+    },
+    "freshness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "observed_at", "maximum_age_seconds"],
+      "properties": {
+        "status": { "enum": ["fresh", "not-applicable"] },
+        "observed_at": { "$ref": "#/$defs/timestamp" },
+        "maximum_age_seconds": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "exchange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "message_id",
+        "workflow_id",
+        "graph_revision",
+        "sender",
+        "recipient",
+        "channel",
+        "kind",
+        "correlation_id",
+        "frame_type",
+        "bindings",
+        "reason",
+        "provenance",
+        "freshness"
+      ],
+      "properties": {
+        "message_id": { "$ref": "#/$defs/id" },
+        "workflow_id": { "$ref": "#/$defs/id" },
+        "graph_revision": { "type": "integer", "minimum": 1 },
+        "sender": { "$ref": "#/$defs/id" },
+        "recipient": { "$ref": "#/$defs/id" },
+        "channel": { "enum": ["data", "control", "evidence"] },
+        "kind": {
+          "enum": [
+            "input",
+            "context-grant",
+            "result",
+            "join-input",
+            "context-request",
+            "context-source-request",
+            "context-denial",
+            "candidate-transition",
+            "authority-gate",
+            "evidence-receipt"
+          ]
+        },
+        "correlation_id": { "$ref": "#/$defs/id" },
+        "frame_type": { "$ref": "#/$defs/id" },
+        "bindings": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/binding" }
+        },
+        "reason": { "type": "string", "minLength": 1 },
+        "provenance": { "$ref": "#/$defs/provenance" },
+        "freshness": { "$ref": "#/$defs/freshness" }
+      }
+    }
+  }
+}
