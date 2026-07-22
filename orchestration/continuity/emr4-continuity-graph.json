@@ -116,6 +116,7 @@
           "orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-codeql-repair-prepush-receipt.json",
           "orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-integration-receipt.json",
           "orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-integration-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-integration-prepush-receipt.json",
           "orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-postcompaction-receipt.json",
           "orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-preacceptance-receipt.json",
           "orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-precommit-receipt.json",
