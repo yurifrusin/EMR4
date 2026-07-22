@@ -55,81 +55,9 @@
       "voice"
     ]
   },
-  "graph_revision": 17,
+  "graph_revision": 18,
   "harvests": [],
   "nodes": [
-    {
-      "authority": {
-        "authorized_openings": [],
-        "notes": [
-          "The engine records metadata and evidence pointers only.",
-          "It cannot accept work, grant authority, move the baton, spawn agents, mutate product data or alter protected refs."
-        ]
-      },
-      "claim_scope": [
-        "Local developer continuity tooling and canonical metadata graph only.",
-        "Increment 1 validates lineage, inherited contracts, candidate harvests and branch dispositions."
-      ],
-      "contract_evidence": [],
-      "coordinates": {
-        "git_ref": "codex/ariadne-continuity-engine-increment-1",
-        "source_head": "152e917a3ab32006438dab9c0169d77256e18d63",
-        "thread_id": null,
-        "worktree_role": "task"
-      },
-      "created_at": "2026-07-20T09:00:00Z",
-      "decisions": [
-        {
-          "id": "increment-one-scope-frozen",
-          "source": "docs/ariadne-continuity-engine-increment1-plan.md",
-          "status": "accepted",
-          "summary": "Build a bounded local metadata continuity engine before considering orchestration hooks or visual branch maps."
-        },
-        {
-          "id": "increment-one-accepted",
-          "source": "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-sol-acceptance.md",
-          "status": "accepted",
-          "summary": "Accept the bounded local metadata engine while preserving the two reported combined-scope product gaps."
-        }
-      ],
-      "evidence": {
-        "acceptances": [
-          "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-sol-acceptance.md"
-        ],
-        "closeouts": [
-          "docs/ariadne-continuity-engine-increment1-closeout.md",
-          "orchestration/continuity/ariadne-continuity-increment1-evidence.json"
-        ],
-        "findings": [],
-        "plans": [
-          "docs/ariadne-continuity-engine-increment1-plan.md"
-        ],
-        "receipts": [
-          "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-final-prepush-receipt.json",
-          "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-integration-receipt.json",
-          "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-preacceptance-receipt.json",
-          "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-rehydration-receipt.json"
-        ],
-        "tests": [
-          "tests/test_ariadne_continuity_engine.py"
-        ]
-      },
-      "id": "ariadne-continuity-engine-increment1",
-      "kind": "tooling",
-      "relationships": [
-        {
-          "node_id": "reception-one-focused-review",
-          "relation": "protects"
-        }
-      ],
-      "status": "accepted",
-      "title": "Ariadne Continuity Engine Increment 1",
-      "unresolved_gates": [
-        "Increment 2 requires a fresh Yuri decision.",
-        "Plugin installation, workflow hooks and a visual branch map remain deferred."
-      ],
-      "updated_at": "2026-07-20T13:50:00Z"
-    },
     {
       "authority": {
         "authorized_openings": [],
@@ -214,6 +142,229 @@
         "The current Reception One map is deliberately partial; expansion to other EMR4 domains requires separately evidenced metadata work."
       ],
       "updated_at": "2026-07-21T05:30:00Z"
+    },
+    {
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The engine records metadata and evidence pointers only.",
+          "It cannot accept work, grant authority, move the baton, spawn agents, mutate product data or alter protected refs."
+        ]
+      },
+      "claim_scope": [
+        "Local developer continuity tooling and canonical metadata graph only.",
+        "Increment 1 validates lineage, inherited contracts, candidate harvests and branch dispositions."
+      ],
+      "contract_evidence": [],
+      "coordinates": {
+        "git_ref": "codex/ariadne-continuity-engine-increment-1",
+        "source_head": "152e917a3ab32006438dab9c0169d77256e18d63",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "created_at": "2026-07-20T09:00:00Z",
+      "decisions": [
+        {
+          "id": "increment-one-scope-frozen",
+          "source": "docs/ariadne-continuity-engine-increment1-plan.md",
+          "status": "accepted",
+          "summary": "Build a bounded local metadata continuity engine before considering orchestration hooks or visual branch maps."
+        },
+        {
+          "id": "increment-one-accepted",
+          "source": "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the bounded local metadata engine while preserving the two reported combined-scope product gaps."
+        }
+      ],
+      "evidence": {
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-sol-acceptance.md"
+        ],
+        "closeouts": [
+          "docs/ariadne-continuity-engine-increment1-closeout.md",
+          "orchestration/continuity/ariadne-continuity-increment1-evidence.json"
+        ],
+        "findings": [],
+        "plans": [
+          "docs/ariadne-continuity-engine-increment1-plan.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-final-prepush-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-integration-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-continuity-engine-increment1-rehydration-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_continuity_engine.py"
+        ]
+      },
+      "id": "ariadne-continuity-engine-increment1",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "reception-one-focused-review",
+          "relation": "protects"
+        }
+      ],
+      "status": "accepted",
+      "title": "Ariadne Continuity Engine Increment 1",
+      "unresolved_gates": [
+        "Increment 2 requires a fresh Yuri decision.",
+        "Plugin installation, workflow hooks and a visual branch map remain deferred."
+      ],
+      "updated_at": "2026-07-20T13:50:00Z"
+    },
+    {
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri authorized the first real Continuity Engine fork on 2026-07-22 as a bounded, provider-free and non-executing sandbox-DAG exploration.",
+          "Capabilities, container generations and bilateral communication policies are inert descriptors. The tool cannot start a container, call a model, read product data, issue an EMR command or grant authority."
+        ]
+      },
+      "claim_scope": [
+        "Repository-local authored-synthetic protocol validation and deterministic trace rendering only.",
+        "Typed context round trips, bilateral direct sandbox data exchange, fan-out/fan-in and a terminal human-authority gate are represented without runtime execution."
+      ],
+      "contract_evidence": [],
+      "coordinates": {
+        "git_ref": "codex/ariadne-sandbox-dag-fork",
+        "source_head": "ec6d0145376f7c945b43b1fbf4338e4cb78e3000",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "created_at": "2026-07-22T02:00:00Z",
+      "decisions": [
+        {
+          "id": "sandbox-dag-fork-scope-frozen",
+          "source": "docs/ariadne-sandbox-dag-fork-plan.md",
+          "status": "accepted",
+          "summary": "Explore a synaptic DAG whose orchestrator controls declared policies while bilaterally authorized leaves exchange bounded typed data directly."
+        },
+        {
+          "id": "sandbox-dag-fork-accepted",
+          "source": "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the non-executing protocol proof with bilateral peer data, restart-only policy amendment and terminal human authority."
+        }
+      ],
+      "evidence": {
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-sol-acceptance.md"
+        ],
+        "closeouts": [
+          "docs/ariadne-sandbox-dag-fork-closeout.md",
+          "docs/ariadne-sandbox-dag-protocol-design.md",
+          "orchestration/continuity/ariadne-sandbox-dag-fork-evidence.json"
+        ],
+        "findings": [
+          "orchestration/agent_inbox/antigravity/ariadne-sandbox-dag-fork-final-review.md",
+          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-plan-sol-review.md"
+        ],
+        "plans": [
+          "docs/ariadne-sandbox-dag-fork-plan.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-candidate-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-closeout-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-gemini-run-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-rehydration-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_sandbox_dag.py"
+        ]
+      },
+      "id": "ariadne-sandbox-dag-fork",
+      "kind": "exploration",
+      "relationships": [
+        {
+          "node_id": "ariadne-compass-increment2",
+          "relation": "forked_from"
+        }
+      ],
+      "status": "accepted",
+      "title": "Ariadne sandbox-DAG first fork",
+      "unresolved_gates": [
+        "Real models, containers, policy enforcement, workflow execution, EMR reads or commands, providers, PII, production, deployment and release remain separately closed."
+      ],
+      "updated_at": "2026-07-22T03:00:00Z"
+    },
+    {
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri authorised the repository-local authored-synthetic non-executing Synaptic Event Router protocol tranche on 2026-07-22.",
+          "Scope leases, route decisions, mailbox notices, fresh-read grants, supersession and compiled manifests are inert protocol data. The tool cannot connect to PostgreSQL, the event feed, product APIs, models, containers, live mailboxes or commands."
+        ]
+      },
+      "claim_scope": [
+        "Repository-local authored-synthetic protocol validation, deterministic route projection, trace rendering and dry-run manifest compilation only.",
+        "The proof extends the accepted Sandbox DAG typed-exchange grammar while preserving immutable policy, forward-only attempts and terminal human authority."
+      ],
+      "contract_evidence": [],
+      "coordinates": {
+        "git_ref": "codex/ariadne-synaptic-event-router-protocol",
+        "source_head": "af0f6d740363d20402339668f420360bbb4469b6",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "created_at": "2026-07-22T04:30:00Z",
+      "decisions": [
+        {
+          "id": "synaptic-event-router-protocol-scope-frozen",
+          "source": "docs/ariadne-synaptic-event-router-protocol-plan.md",
+          "status": "accepted",
+          "summary": "Prove deterministic event-to-scope steering, mailbox boundaries, fresh-read grants, supersession and dry-run policy manifests without attaching a runtime."
+        },
+        {
+          "id": "synaptic-event-router-protocol-accepted",
+          "source": "orchestration/agent_inbox/codex/ariadne-synaptic-event-router-protocol-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the non-executing protocol proof with exact bilateral exchange policy, default-deny routing and no database, feed, product, model, container or command connection."
+        }
+      ],
+      "evidence": {
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-synaptic-event-router-protocol-sol-acceptance.md"
+        ],
+        "closeouts": [
+          "docs/ariadne-synaptic-event-router-protocol-closeout.md",
+          "docs/ariadne-synaptic-event-router-protocol-design.md",
+          "orchestration/continuity/ariadne-synaptic-event-router-dry-run-manifests.json",
+          "orchestration/continuity/ariadne-synaptic-event-router-evidence.json"
+        ],
+        "findings": [
+          "docs/security/ariadne-synaptic-event-router-threat-model-delta.md"
+        ],
+        "plans": [
+          "docs/ariadne-synaptic-event-router-protocol-plan.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-synaptic-event-router-protocol-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-synaptic-event-router-protocol-rehydration-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_synaptic_event_router.py"
+        ]
+      },
+      "id": "ariadne-synaptic-event-router-protocol",
+      "kind": "exploration",
+      "relationships": [
+        {
+          "node_id": "ariadne-sandbox-dag-fork",
+          "relation": "builds_on"
+        }
+      ],
+      "status": "accepted",
+      "title": "Ariadne Synaptic Event Router protocol",
+      "unresolved_gates": [
+        "PostgreSQL, event-feed adapters, product APIs, operational persistence, live mailbox delivery, models, containers and commands require a fresh Yuri decision.",
+        "Additional event families, PII, Stage 3B, production, deployment, release and autonomous action remain separately closed."
+      ],
+      "updated_at": "2026-07-22T04:30:00Z"
     },
     {
       "authority": {
@@ -420,6 +571,122 @@
         "Combined-scope parity remains unproven by the accepted scenario population."
       ],
       "updated_at": "2026-07-20T08:00:00Z"
+    },
+    {
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "event-runtime",
+            "scope": "Extend the accepted default-off local reschedule consumer only to fresh-read combined availability, selection and non-committing proposal reconciliation.",
+            "source": "docs/bernie-reception-one-availability-reconciliation-plan.md"
+          }
+        ],
+        "notes": [
+          "Yuri explicitly authorized the recommended bounded availability/selection/proposal reconciliation proof on 2026-07-21.",
+          "The opening reuses only diary.appointment_rescheduled and existing reads/proposals; other events, API/database changes, commands, providers, PII, protected/historical evidence, Stage 3B, production, deployment and release remain closed."
+        ]
+      },
+      "claim_scope": [
+        "Bounded Reception One fresh-read reconciliation of the combined availability, selection and non-committing proposal flow after an existing committed reschedule.",
+        "Authored-synthetic loopback desktop, tablet, smartphone, keyboard, privacy, interruption, state and zero-browser-write evidence only."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "evidence": [
+            "orchestration/prototypes/bernie-reception-one-combined-scope-proof/browser-acceptance-evidence.json",
+            "tests/test_bernie_reception_one_combined_scope.py"
+          ],
+          "note": "The accepted ancestor proves the combined request; this tranche must preserve it while adding reconciliation.",
+          "status": "satisfied"
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "evidence": [
+            "docs/bernie-reception-one-availability-reconciliation-plan.md",
+            "docs/bernie-reception-one-availability-reconciliation-closeout.md",
+            "orchestration/prototypes/reception-one-availability-reconciliation/browser-acceptance-evidence.json",
+            "tests/test_reception_one_availability_reconciliation.py"
+          ],
+          "note": "Focused tests, real local browser/backend/PostgreSQL evidence, fresh independent veto and Sol acceptance prove the bounded reconciliation contract.",
+          "status": "satisfied"
+        }
+      ],
+      "coordinates": {
+        "git_ref": "codex/reception-one-availability-reconciliation",
+        "source_head": "e469fd60d37ab536152eda8e2cc4997431817110",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "created_at": "2026-07-20T22:55:00Z",
+      "decisions": [
+        {
+          "id": "availability-reconciliation-authorized",
+          "source": "docs/bernie-reception-one-availability-reconciliation-plan.md",
+          "status": "accepted",
+          "summary": "Reuse the accepted reschedule signal to reconcile one combined availability, selection and non-committing proposal flow without broadening event or write authority."
+        },
+        {
+          "id": "availability-reconciliation-accepted",
+          "source": "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept fresh candidate comparison, valid-state preservation, invalid-state and stale-Back expiry, quiet attention and exact authored-synthetic evidence."
+        }
+      ],
+      "evidence": {
+        "acceptances": [
+          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md"
+        ],
+        "closeouts": [
+          "docs/bernie-reception-one-availability-reconciliation-closeout.md",
+          "orchestration/prototypes/bernie-reception-one-combined-scope-proof/browser-acceptance-evidence.json",
+          "orchestration/prototypes/reception-one-availability-reconciliation/browser-acceptance-evidence.json",
+          "orchestration/prototypes/reception-one-availability-reconciliation/database-cleanup-evidence.json"
+        ],
+        "findings": [
+          "docs/security/bernie-reception-one-availability-reconciliation-threat-model-delta.md",
+          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-plan-sol-review.md",
+          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-baseline-regression-comparison.md",
+          "orchestration/agent_inbox/antigravity/reception-one-availability-reconciliation-final-review.md",
+          "orchestration/agent_inbox/antigravity/reception-one-availability-reconciliation-veto-decision.md"
+        ],
+        "plans": [
+          "docs/bernie-reception-one-availability-reconciliation-plan.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-candidate-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-preimplementation-receipt.json",
+          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-preplan-receipt.json",
+          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-rehydration-receipt.json"
+        ],
+        "tests": [
+          "review/test_diary_smoke.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_ariadne_continuity_engine.py",
+          "tests/test_bernie_functional_meta_grid.py",
+          "tests/test_bernie_meta_grid_live_local_integration.py",
+          "tests/test_bernie_reception_one_combined_scope.py",
+          "tests/test_reception_one_availability_reconciliation.py",
+          "tests/test_reception_one_committed_event_client.py"
+        ]
+      },
+      "id": "reception-one-availability-reconciliation",
+      "kind": "implementation",
+      "relationships": [
+        {
+          "node_id": "reception-one-committed-event-vertical",
+          "relation": "builds_on"
+        }
+      ],
+      "status": "accepted",
+      "title": "Reception One committed-reschedule availability reconciliation",
+      "unresolved_gates": [
+        "Other event families, automatic proposal work, external transport, production delivery/retention, representative participants, voice, providers, PII, deployment and release remain closed.",
+        "Final visual and interaction synthesis remains a later Yuri decision."
+      ],
+      "updated_at": "2026-07-21T00:10:00Z"
     },
     {
       "authority": {
@@ -728,202 +995,9 @@
       "title": "Stage 1 combined appointment-intent foundation",
       "unresolved_gates": [],
       "updated_at": "2026-07-18T00:00:00Z"
-    },
-    {
-      "authority": {
-        "authorized_openings": [
-          {
-            "boundary": "event-runtime",
-            "scope": "Extend the accepted default-off local reschedule consumer only to fresh-read combined availability, selection and non-committing proposal reconciliation.",
-            "source": "docs/bernie-reception-one-availability-reconciliation-plan.md"
-          }
-        ],
-        "notes": [
-          "Yuri explicitly authorized the recommended bounded availability/selection/proposal reconciliation proof on 2026-07-21.",
-          "The opening reuses only diary.appointment_rescheduled and existing reads/proposals; other events, API/database changes, commands, providers, PII, protected/historical evidence, Stage 3B, production, deployment and release remain closed."
-        ]
-      },
-      "claim_scope": [
-        "Bounded Reception One fresh-read reconciliation of the combined availability, selection and non-committing proposal flow after an existing committed reschedule.",
-        "Authored-synthetic loopback desktop, tablet, smartphone, keyboard, privacy, interruption, state and zero-browser-write evidence only."
-      ],
-      "contract_evidence": [
-        {
-          "contract_id": "combined-patient-practitioner-time-duration-intent",
-          "evidence": [
-            "orchestration/prototypes/bernie-reception-one-combined-scope-proof/browser-acceptance-evidence.json",
-            "tests/test_bernie_reception_one_combined_scope.py"
-          ],
-          "note": "The accepted ancestor proves the combined request; this tranche must preserve it while adding reconciliation.",
-          "status": "satisfied"
-        },
-        {
-          "contract_id": "committed-reschedule-availability-reconciliation",
-          "evidence": [
-            "docs/bernie-reception-one-availability-reconciliation-plan.md",
-            "docs/bernie-reception-one-availability-reconciliation-closeout.md",
-            "orchestration/prototypes/reception-one-availability-reconciliation/browser-acceptance-evidence.json",
-            "tests/test_reception_one_availability_reconciliation.py"
-          ],
-          "note": "Focused tests, real local browser/backend/PostgreSQL evidence, fresh independent veto and Sol acceptance prove the bounded reconciliation contract.",
-          "status": "satisfied"
-        }
-      ],
-      "coordinates": {
-        "git_ref": "codex/reception-one-availability-reconciliation",
-        "source_head": "e469fd60d37ab536152eda8e2cc4997431817110",
-        "thread_id": null,
-        "worktree_role": "task"
-      },
-      "created_at": "2026-07-20T22:55:00Z",
-      "decisions": [
-        {
-          "id": "availability-reconciliation-authorized",
-          "source": "docs/bernie-reception-one-availability-reconciliation-plan.md",
-          "status": "accepted",
-          "summary": "Reuse the accepted reschedule signal to reconcile one combined availability, selection and non-committing proposal flow without broadening event or write authority."
-        },
-        {
-          "id": "availability-reconciliation-accepted",
-          "source": "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md",
-          "status": "accepted",
-          "summary": "Accept fresh candidate comparison, valid-state preservation, invalid-state and stale-Back expiry, quiet attention and exact authored-synthetic evidence."
-        }
-      ],
-      "evidence": {
-        "acceptances": [
-          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md"
-        ],
-        "closeouts": [
-          "docs/bernie-reception-one-availability-reconciliation-closeout.md",
-          "orchestration/prototypes/bernie-reception-one-combined-scope-proof/browser-acceptance-evidence.json",
-          "orchestration/prototypes/reception-one-availability-reconciliation/browser-acceptance-evidence.json",
-          "orchestration/prototypes/reception-one-availability-reconciliation/database-cleanup-evidence.json"
-        ],
-        "findings": [
-          "docs/security/bernie-reception-one-availability-reconciliation-threat-model-delta.md",
-          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-plan-sol-review.md",
-          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-baseline-regression-comparison.md",
-          "orchestration/agent_inbox/antigravity/reception-one-availability-reconciliation-final-review.md",
-          "orchestration/agent_inbox/antigravity/reception-one-availability-reconciliation-veto-decision.md"
-        ],
-        "plans": [
-          "docs/bernie-reception-one-availability-reconciliation-plan.md"
-        ],
-        "receipts": [
-          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-candidate-precommit-receipt.json",
-          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-preacceptance-receipt.json",
-          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-predispatch-receipt.json",
-          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-preimplementation-receipt.json",
-          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-preplan-receipt.json",
-          "orchestration/agent_inbox/codex/reception-one-availability-reconciliation-rehydration-receipt.json"
-        ],
-        "tests": [
-          "review/test_diary_smoke.py",
-          "tests/test_api_spine_artifacts.py",
-          "tests/test_ariadne_continuity_engine.py",
-          "tests/test_bernie_functional_meta_grid.py",
-          "tests/test_bernie_meta_grid_live_local_integration.py",
-          "tests/test_bernie_reception_one_combined_scope.py",
-          "tests/test_reception_one_availability_reconciliation.py",
-          "tests/test_reception_one_committed_event_client.py"
-        ]
-      },
-      "id": "reception-one-availability-reconciliation",
-      "kind": "implementation",
-      "relationships": [
-        {
-          "node_id": "reception-one-committed-event-vertical",
-          "relation": "builds_on"
-        }
-      ],
-      "status": "accepted",
-      "title": "Reception One committed-reschedule availability reconciliation",
-      "unresolved_gates": [
-        "Other event families, automatic proposal work, external transport, production delivery/retention, representative participants, voice, providers, PII, deployment and release remain closed.",
-        "Final visual and interaction synthesis remains a later Yuri decision."
-      ],
-      "updated_at": "2026-07-21T00:10:00Z"
-    },
-    {
-      "authority": {
-        "authorized_openings": [],
-        "notes": [
-          "Yuri authorized the first real Continuity Engine fork on 2026-07-22 as a bounded, provider-free and non-executing sandbox-DAG exploration.",
-          "Capabilities, container generations and bilateral communication policies are inert descriptors. The tool cannot start a container, call a model, read product data, issue an EMR command or grant authority."
-        ]
-      },
-      "claim_scope": [
-        "Repository-local authored-synthetic protocol validation and deterministic trace rendering only.",
-        "Typed context round trips, bilateral direct sandbox data exchange, fan-out/fan-in and a terminal human-authority gate are represented without runtime execution."
-      ],
-      "contract_evidence": [],
-      "coordinates": {
-        "git_ref": "codex/ariadne-sandbox-dag-fork",
-        "source_head": "ec6d0145376f7c945b43b1fbf4338e4cb78e3000",
-        "thread_id": null,
-        "worktree_role": "task"
-      },
-      "created_at": "2026-07-22T02:00:00Z",
-      "decisions": [
-        {
-          "id": "sandbox-dag-fork-scope-frozen",
-          "source": "docs/ariadne-sandbox-dag-fork-plan.md",
-          "status": "accepted",
-          "summary": "Explore a synaptic DAG whose orchestrator controls declared policies while bilaterally authorized leaves exchange bounded typed data directly."
-        },
-        {
-          "id": "sandbox-dag-fork-accepted",
-          "source": "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-sol-acceptance.md",
-          "status": "accepted",
-          "summary": "Accept the non-executing protocol proof with bilateral peer data, restart-only policy amendment and terminal human authority."
-        }
-      ],
-      "evidence": {
-        "acceptances": [
-          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-sol-acceptance.md"
-        ],
-        "closeouts": [
-          "docs/ariadne-sandbox-dag-fork-closeout.md",
-          "docs/ariadne-sandbox-dag-protocol-design.md",
-          "orchestration/continuity/ariadne-sandbox-dag-fork-evidence.json"
-        ],
-        "findings": [
-          "orchestration/agent_inbox/antigravity/ariadne-sandbox-dag-fork-final-review.md",
-          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-plan-sol-review.md"
-        ],
-        "plans": [
-          "docs/ariadne-sandbox-dag-fork-plan.md"
-        ],
-        "receipts": [
-          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-candidate-precommit-receipt.json",
-          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-closeout-precommit-receipt.json",
-          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-gemini-run-receipt.json",
-          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-predispatch-receipt.json",
-          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-preacceptance-receipt.json",
-          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-rehydration-receipt.json"
-        ],
-        "tests": [
-          "tests/test_ariadne_sandbox_dag.py"
-        ]
-      },
-      "id": "ariadne-sandbox-dag-fork",
-      "kind": "exploration",
-      "relationships": [
-        {
-          "node_id": "ariadne-compass-increment2",
-          "relation": "forked_from"
-        }
-      ],
-      "status": "accepted",
-      "title": "Ariadne sandbox-DAG first fork",
-      "unresolved_gates": [
-        "Real models, containers, policy enforcement, workflow execution, EMR reads or commands, providers, PII, production, deployment and release remain separately closed."
-      ],
-      "updated_at": "2026-07-22T03:00:00Z"
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-07-22T03:00:00Z"
+  "updated_at": "2026-07-22T04:30:00Z"
 }

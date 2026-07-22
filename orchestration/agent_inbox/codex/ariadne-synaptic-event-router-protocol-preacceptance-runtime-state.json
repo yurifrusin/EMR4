@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "extra_high_ariadne_synaptic_event_router_protocol_preacceptance",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker was dispatched under the worker-lane economy decision."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external planning, implementation or review model was used."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external independent veto was requested because Yuri explicitly closed model connections for this tranche; the substitution is deterministic local verification under Sol acceptance authority."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The mandatory five-source rehydration passed before planning and implementation.",
+        "The accepted Sandbox DAG Protocol Design, complete 13-node/13-exchange canonical example and closeout were read in full and are exercised unchanged by the extension tests.",
+        "The new route notice extends the accepted typed exchange grammar with immutable sender/recipient, control channel, kind, correlation, provenance, freshness and bilateral start-up declarations.",
+        "Fifteen focused tests pass, including deterministic routing, fan-out, suppression, lease narrowing, mailbox deduplication, fresh-read grants, forward-only supersession, stale-completion rejection, schema, manifest and actuator isolation checks.",
+        "The earlier 105-test combined Ariadne, API Spine and handover population passed before the final added ambiguity/time-window test; the complete final population remains to be rerun after continuity and Compass closeout updates.",
+        "No product source, API contract, database, event feed, model, provider, container, command, PII, protected/historical evidence, Stage 3B, production, deployment or release surface changed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent contributed changes."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

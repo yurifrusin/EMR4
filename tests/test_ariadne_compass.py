@@ -66,8 +66,9 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     )
     assert router["status"] == "candidate"
     assert router["boundary_changes"] == ["event-runtime"]
+    assert "existing default-off local" in router["strategic_question"]
     assert any(
-        decision["id"] == "authorize-synaptic-event-router-tranche"
+        decision["id"] == "authorize-synaptic-event-router-runtime-adapter"
         for decision in report["user_owned_decisions"]
     )
     assert report["user_owned_decisions"]

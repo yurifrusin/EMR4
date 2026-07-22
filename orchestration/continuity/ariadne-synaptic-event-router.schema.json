@@ -1,0 +1,670 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/ariadne-synaptic-event-router.schema.json",
+  "title": "Ariadne non-executing Synaptic Event Router protocol",
+  "description": "A strict authored-synthetic scope-lease, deterministic routing, inert mailbox steering, supersession and dry-run manifest source document. It grants no runtime authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "protocol_id",
+    "workflow_id",
+    "operational_graph_revision",
+    "revision",
+    "title",
+    "as_of",
+    "authority",
+    "route_policy",
+    "nodes",
+    "scope_leases",
+    "committed_events",
+    "fresh_read_grants",
+    "route_attempts",
+    "expected_mailbox_deliveries",
+    "reconciliation_traces",
+    "evidence"
+  ],
+  "properties": {
+    "schema_version": { "const": "ariadne.synaptic_event_router.v1" },
+    "protocol_id": { "$ref": "#/$defs/id" },
+    "workflow_id": { "$ref": "#/$defs/id" },
+    "operational_graph_revision": { "type": "integer", "minimum": 1 },
+    "revision": { "type": "integer", "minimum": 1 },
+    "title": { "type": "string", "minLength": 1 },
+    "as_of": { "$ref": "#/$defs/timestamp" },
+    "authority": { "$ref": "#/$defs/authority" },
+    "route_policy": { "$ref": "#/$defs/routePolicy" },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/node" }
+    },
+    "scope_leases": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/scopeLease" }
+    },
+    "committed_events": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/event" }
+    },
+    "fresh_read_grants": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/freshReadGrant" }
+    },
+    "route_attempts": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/routeAttempt" }
+    },
+    "expected_mailbox_deliveries": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/mailboxDelivery" }
+    },
+    "reconciliation_traces": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/reconciliationTrace" }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/repoPath" }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "repoPath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\)(?!.*://).+$"
+    },
+    "sensitivity": {
+      "enum": ["public", "internal", "restricted"]
+    },
+    "idList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/id" }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authored_synthetic_only",
+        "advisory_only",
+        "execution_enabled",
+        "default_decision",
+        "closed_boundaries"
+      ],
+      "properties": {
+        "authored_synthetic_only": { "const": true },
+        "advisory_only": { "const": true },
+        "execution_enabled": { "const": false },
+        "default_decision": { "const": "deny" },
+        "closed_boundaries": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" }
+        }
+      }
+    },
+    "routeRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "event_type",
+        "schema_versions",
+        "steering_frame_type",
+        "sensitivity_max"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "event_type": { "type": "string", "pattern": "^[a-z][a-z0-9_.]+$" },
+        "schema_versions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "integer", "minimum": 1 }
+        },
+        "steering_frame_type": { "const": "scope-change-notice" },
+        "sensitivity_max": { "$ref": "#/$defs/sensitivity" }
+      }
+    },
+    "routePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "revision",
+        "practice_id",
+        "principal_id",
+        "sender_instance",
+        "channel",
+        "kind",
+        "default_decision",
+        "rules"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "revision": { "type": "integer", "minimum": 1 },
+        "practice_id": { "$ref": "#/$defs/id" },
+        "principal_id": { "$ref": "#/$defs/id" },
+        "sender_instance": { "const": "synaptic-router" },
+        "channel": { "const": "control" },
+        "kind": { "const": "scope-change-notice" },
+        "default_decision": { "const": "deny" },
+        "rules": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/routeRule" }
+        }
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "instance",
+        "attempt",
+        "practice_id",
+        "principal_id",
+        "container_generation",
+        "policy_revision",
+        "mailbox_id",
+        "checkpoint_id",
+        "state"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "instance": { "$ref": "#/$defs/id" },
+        "attempt": { "type": "integer", "minimum": 1 },
+        "practice_id": { "$ref": "#/$defs/id" },
+        "principal_id": { "$ref": "#/$defs/id" },
+        "container_generation": { "type": "integer", "minimum": 1 },
+        "policy_revision": { "type": "integer", "minimum": 1 },
+        "mailbox_id": { "$ref": "#/$defs/id" },
+        "checkpoint_id": { "$ref": "#/$defs/id" },
+        "state": { "enum": ["active", "superseded"] }
+      }
+    },
+    "acceptedEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["event_type", "schema_versions"],
+      "properties": {
+        "event_type": { "type": "string", "pattern": "^[a-z][a-z0-9_.]+$" },
+        "schema_versions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "integer", "minimum": 1 }
+        }
+      }
+    },
+    "timeWindow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["starts_at", "ends_at"],
+      "properties": {
+        "starts_at": { "$ref": "#/$defs/timestamp" },
+        "ends_at": { "$ref": "#/$defs/timestamp" }
+      }
+    },
+    "selectors": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "aggregate_ids",
+        "practitioner_ids",
+        "location_ids",
+        "projection_ids",
+        "proposal_ids",
+        "time_window"
+      ],
+      "properties": {
+        "aggregate_ids": { "$ref": "#/$defs/idList" },
+        "practitioner_ids": { "$ref": "#/$defs/idList" },
+        "location_ids": { "$ref": "#/$defs/idList" },
+        "projection_ids": { "$ref": "#/$defs/idList" },
+        "proposal_ids": { "$ref": "#/$defs/idList" },
+        "time_window": {
+          "anyOf": [
+            { "$ref": "#/$defs/timeWindow" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "scopeLease": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "revision",
+        "state",
+        "narrowed_from",
+        "practice_id",
+        "principal_id",
+        "node_id",
+        "instance",
+        "attempt",
+        "container_generation",
+        "policy_revision",
+        "mailbox_id",
+        "checkpoint_id",
+        "handling_policy",
+        "accepted_router_instance",
+        "accepted_channel",
+        "accepted_kind",
+        "accepted_events",
+        "accepted_steering_frames",
+        "selectors",
+        "minimum_aggregate_revision",
+        "mailbox_checkpoint_revision",
+        "sensitivity_ceiling",
+        "expires_at",
+        "fresh_read_grant_id"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "revision": { "type": "integer", "minimum": 1 },
+        "state": { "enum": ["current", "superseded"] },
+        "narrowed_from": {
+          "anyOf": [
+            { "$ref": "#/$defs/id" },
+            { "type": "null" }
+          ]
+        },
+        "practice_id": { "$ref": "#/$defs/id" },
+        "principal_id": { "$ref": "#/$defs/id" },
+        "node_id": { "$ref": "#/$defs/id" },
+        "instance": { "$ref": "#/$defs/id" },
+        "attempt": { "type": "integer", "minimum": 1 },
+        "container_generation": { "type": "integer", "minimum": 1 },
+        "policy_revision": { "type": "integer", "minimum": 1 },
+        "mailbox_id": { "$ref": "#/$defs/id" },
+        "checkpoint_id": { "$ref": "#/$defs/id" },
+        "handling_policy": {
+          "enum": ["reconcile-at-boundary", "cancel-and-supersede"]
+        },
+        "accepted_router_instance": { "const": "synaptic-router" },
+        "accepted_channel": { "const": "control" },
+        "accepted_kind": { "const": "scope-change-notice" },
+        "accepted_events": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/acceptedEvent" }
+        },
+        "accepted_steering_frames": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" }
+        },
+        "selectors": { "$ref": "#/$defs/selectors" },
+        "minimum_aggregate_revision": { "type": "integer", "minimum": 0 },
+        "mailbox_checkpoint_revision": { "type": "integer", "minimum": 0 },
+        "sensitivity_ceiling": { "$ref": "#/$defs/sensitivity" },
+        "expires_at": { "$ref": "#/$defs/timestamp" },
+        "fresh_read_grant_id": { "$ref": "#/$defs/id" }
+      }
+    },
+    "coordinates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "aggregate_id",
+        "practitioner_id",
+        "location_id",
+        "starts_at",
+        "ends_at",
+        "projection_id",
+        "proposal_id"
+      ],
+      "properties": {
+        "aggregate_id": { "$ref": "#/$defs/id" },
+        "practitioner_id": { "$ref": "#/$defs/id" },
+        "location_id": { "$ref": "#/$defs/id" },
+        "starts_at": { "$ref": "#/$defs/timestamp" },
+        "ends_at": { "$ref": "#/$defs/timestamp" },
+        "projection_id": { "$ref": "#/$defs/id" },
+        "proposal_id": { "$ref": "#/$defs/id" }
+      }
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "event_type",
+        "schema_version",
+        "committed",
+        "practice_id",
+        "principal_id",
+        "aggregate_id",
+        "aggregate_revision",
+        "occurred_at",
+        "sensitivity",
+        "coordinates"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "event_type": { "type": "string", "pattern": "^[a-z][a-z0-9_.]+$" },
+        "schema_version": { "type": "integer", "minimum": 1 },
+        "committed": { "const": true },
+        "practice_id": { "$ref": "#/$defs/id" },
+        "principal_id": { "$ref": "#/$defs/id" },
+        "aggregate_id": { "$ref": "#/$defs/id" },
+        "aggregate_revision": { "type": "integer", "minimum": 1 },
+        "occurred_at": { "$ref": "#/$defs/timestamp" },
+        "sensitivity": { "$ref": "#/$defs/sensitivity" },
+        "coordinates": { "$ref": "#/$defs/coordinates" }
+      }
+    },
+    "freshReadGrant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "lease_id",
+        "event_id",
+        "practice_id",
+        "principal_id",
+        "role",
+        "action",
+        "resource_selectors",
+        "context_frame_type",
+        "aggregate_revision",
+        "issued_at",
+        "expires_at",
+        "execution_enabled",
+        "returns_data"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "lease_id": { "$ref": "#/$defs/id" },
+        "event_id": { "$ref": "#/$defs/id" },
+        "practice_id": { "$ref": "#/$defs/id" },
+        "principal_id": { "$ref": "#/$defs/id" },
+        "role": { "$ref": "#/$defs/id" },
+        "action": { "const": "read-scoped-context" },
+        "resource_selectors": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "context_frame_type": { "$ref": "#/$defs/id" },
+        "aggregate_revision": { "type": "integer", "minimum": 1 },
+        "issued_at": { "$ref": "#/$defs/timestamp" },
+        "expires_at": { "$ref": "#/$defs/timestamp" },
+        "execution_enabled": { "const": false },
+        "returns_data": { "const": false }
+      }
+    },
+    "routeAttempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "event_id",
+        "lease_id",
+        "evaluated_at",
+        "expected_decision",
+        "expected_reason"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "event_id": { "$ref": "#/$defs/id" },
+        "lease_id": { "$ref": "#/$defs/id" },
+        "evaluated_at": { "$ref": "#/$defs/timestamp" },
+        "expected_decision": { "enum": ["deliver", "suppress"] },
+        "expected_reason": { "$ref": "#/$defs/id" }
+      }
+    },
+    "mailboxDelivery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "workflow_id",
+        "operational_graph_revision",
+        "sender_instance",
+        "recipient_node_id",
+        "channel",
+        "kind",
+        "correlation_id",
+        "mailbox_id",
+        "event_id",
+        "event_type",
+        "event_schema_version",
+        "lease_id",
+        "lease_revision",
+        "node_id",
+        "container_generation",
+        "steering_frame_type",
+        "aggregate_id",
+        "aggregate_revision",
+        "affected_coordinates",
+        "freshness_required",
+        "route_reason",
+        "fresh_read_grant_id",
+        "provenance",
+        "freshness",
+        "execution_enabled"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "workflow_id": { "$ref": "#/$defs/id" },
+        "operational_graph_revision": { "type": "integer", "minimum": 1 },
+        "sender_instance": { "const": "synaptic-router" },
+        "recipient_node_id": { "$ref": "#/$defs/id" },
+        "channel": { "const": "control" },
+        "kind": { "const": "scope-change-notice" },
+        "correlation_id": { "$ref": "#/$defs/id" },
+        "mailbox_id": { "$ref": "#/$defs/id" },
+        "event_id": { "$ref": "#/$defs/id" },
+        "event_type": { "type": "string", "pattern": "^[a-z][a-z0-9_.]+$" },
+        "event_schema_version": { "type": "integer", "minimum": 1 },
+        "lease_id": { "$ref": "#/$defs/id" },
+        "lease_revision": { "type": "integer", "minimum": 1 },
+        "node_id": { "$ref": "#/$defs/id" },
+        "container_generation": { "type": "integer", "minimum": 1 },
+        "steering_frame_type": { "const": "scope-change-notice" },
+        "aggregate_id": { "$ref": "#/$defs/id" },
+        "aggregate_revision": { "type": "integer", "minimum": 1 },
+        "affected_coordinates": { "$ref": "#/$defs/coordinatesWithoutAggregate" },
+        "freshness_required": { "const": true },
+        "route_reason": { "const": "exact-scope-intersection" },
+        "fresh_read_grant_id": { "$ref": "#/$defs/id" },
+        "provenance": { "$ref": "#/$defs/provenance" },
+        "freshness": { "$ref": "#/$defs/freshness" },
+        "execution_enabled": { "const": false }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "source",
+        "source_message_ids",
+        "source_route_attempt_id"
+      ],
+      "properties": {
+        "kind": { "const": "authored-synthetic-committed-event" },
+        "source": { "$ref": "#/$defs/id" },
+        "source_message_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" }
+        },
+        "source_route_attempt_id": { "$ref": "#/$defs/id" }
+      }
+    },
+    "freshness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "observed_at", "maximum_age_seconds"],
+      "properties": {
+        "status": { "const": "requires-fresh-read" },
+        "observed_at": { "$ref": "#/$defs/timestamp" },
+        "maximum_age_seconds": { "const": 0 }
+      }
+    },
+    "coordinatesWithoutAggregate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "practitioner_id",
+        "location_id",
+        "starts_at",
+        "ends_at",
+        "projection_id",
+        "proposal_id"
+      ],
+      "properties": {
+        "practitioner_id": { "$ref": "#/$defs/id" },
+        "location_id": { "$ref": "#/$defs/id" },
+        "starts_at": { "$ref": "#/$defs/timestamp" },
+        "ends_at": { "$ref": "#/$defs/timestamp" },
+        "projection_id": { "$ref": "#/$defs/id" },
+        "proposal_id": { "$ref": "#/$defs/id" }
+      }
+    },
+    "supersession": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "node_id",
+        "instance",
+        "attempt",
+        "practice_id",
+        "principal_id",
+        "container_generation",
+        "policy_revision",
+        "superseded_from",
+        "checkpoint_id",
+        "notice_delivery_id",
+        "fresh_read_grant_id",
+        "state"
+      ],
+      "properties": {
+        "node_id": { "$ref": "#/$defs/id" },
+        "instance": { "$ref": "#/$defs/id" },
+        "attempt": { "type": "integer", "minimum": 2 },
+        "practice_id": { "$ref": "#/$defs/id" },
+        "principal_id": { "$ref": "#/$defs/id" },
+        "container_generation": { "type": "integer", "minimum": 2 },
+        "policy_revision": { "type": "integer", "minimum": 2 },
+        "superseded_from": { "$ref": "#/$defs/id" },
+        "checkpoint_id": { "$ref": "#/$defs/id" },
+        "notice_delivery_id": { "$ref": "#/$defs/id" },
+        "fresh_read_grant_id": { "$ref": "#/$defs/id" },
+        "state": { "const": "awaiting-fresh-read" }
+      }
+    },
+    "staleCompletion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_id", "container_generation", "disposition"],
+      "properties": {
+        "node_id": { "$ref": "#/$defs/id" },
+        "container_generation": { "type": "integer", "minimum": 1 },
+        "disposition": { "const": "rejected-stale-generation" }
+      }
+    },
+    "reconciliationTrace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "route_attempt_id",
+        "handling_policy",
+        "boundary",
+        "fresh_read_grant_id",
+        "stale_context_coordinates",
+        "outcome",
+        "command_authority",
+        "supersession",
+        "stale_completion"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "route_attempt_id": { "$ref": "#/$defs/id" },
+        "handling_policy": {
+          "enum": ["reconcile-at-boundary", "cancel-and-supersede"]
+        },
+        "boundary": { "const": "mailbox-checkpoint-boundary" },
+        "fresh_read_grant_id": { "$ref": "#/$defs/id" },
+        "stale_context_coordinates": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "outcome": {
+          "enum": ["awaiting-fresh-read", "superseded-awaiting-fresh-read"]
+        },
+        "command_authority": { "const": false },
+        "supersession": {
+          "anyOf": [
+            { "$ref": "#/$defs/supersession" },
+            { "type": "null" }
+          ]
+        },
+        "stale_completion": {
+          "anyOf": [
+            { "$ref": "#/$defs/staleCompletion" },
+            { "type": "null" }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "handling_policy": { "const": "reconcile-at-boundary" }
+            }
+          },
+          "then": {
+            "properties": {
+              "outcome": { "const": "awaiting-fresh-read" },
+              "supersession": { "type": "null" },
+              "stale_completion": { "type": "null" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "handling_policy": { "const": "cancel-and-supersede" }
+            }
+          },
+          "then": {
+            "properties": {
+              "outcome": { "const": "superseded-awaiting-fresh-read" },
+              "supersession": { "$ref": "#/$defs/supersession" },
+              "stale_completion": { "$ref": "#/$defs/staleCompletion" }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

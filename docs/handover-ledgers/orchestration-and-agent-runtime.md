@@ -167,3 +167,39 @@ listener, broker, node mailbox, container, model, product read, API mutation,
 PII, autonomous action, production, deployment or release gate. The existing
 default-off local `diary.appointment_rescheduled` exception remains unchanged.
 See `docs/ariadne-synaptic-event-router-candidate-plan.md`.
+
+## 2026-07-22 Ariadne Synaptic Event Router protocol
+
+Yuri authorised the candidate's bounded repository-local, non-executing first
+tranche. It passes as `ariadne_synaptic_event_router_protocol_pass` with a
+separate operational-DAG schema, one authored-synthetic event, versioned scope
+leases, deterministic route decisions, typed mailbox notices, exact fresh-read
+grants, forward-only supersession and source-hashed dry-run start-up,
+subscription and restart-policy manifests.
+
+The implementation explicitly extends the accepted Sandbox DAG exchange
+grammar. Router outbound policy and node inbound lease must bilaterally name the
+router, control channel, notice kind and frame; every notice carries
+workflow/graph revision, immutable sender/recipient, correlation, provenance
+and freshness. The predecessor 13-node/13-exchange trace validates unchanged.
+
+The canonical extension evaluates 11 route attempts: two deliveries fan out to
+availability and ranking mailboxes, while nine replay, cross-practice,
+non-intersecting, superseded, expired, non-newer, sensitivity and undeclared
+cases are suppressed. Same-generation lease changes only narrow. A
+cancel-and-supersede trace creates a later immutable attempt and rejects stale
+completion. Fresh-read grants execute no read and return no data.
+
+Fifteen focused and 106 combined tests pass with API Spine, Continuity, Compass,
+Ruff, compilation, JSON and whitespace gates. No external review model was used
+because Yuri closed model connections for the tranche; no independent-veto
+claim is made. The Continuity graph advances to revision 18 and Compass revision
+6 replaces the consumed protocol decision with a separately closed candidate
+runtime-adapter decision while preserving the Reception One journey and current
+product position.
+
+PostgreSQL, the existing event feed, product APIs, operational persistence,
+live mailboxes, models, containers, commands, additional event families, PII,
+protected/historical data, Stage 3B, production, deployment, release and
+autonomous action remain closed. See
+`docs/ariadne-synaptic-event-router-protocol-closeout.md`.
