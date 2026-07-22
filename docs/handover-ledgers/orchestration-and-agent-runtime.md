@@ -246,3 +246,37 @@ mailbox, persistent retry, human-gate UI, command, PII, protected/historical
 data, Stage 3B, production, deployment, release or autonomous-action gate
 opened. See
 `docs/ariadne-bounded-cognitive-work-cell-protocol-closeout.md`.
+
+## 2026-07-23 Ariadne scripted cognitive work-cell rehearsal
+
+Yuri authorised the smallest executable descendant of the accepted Bounded
+Cognitive Work Cell protocol: a finite repository-local process-memory
+rehearsal over pre-authored synthetic attempts and drafts. It passes as
+`ariadne_scripted_cognitive_work_cell_rehearsal_pass`.
+
+Eight independent scenarios advance through 53 immutable hash-chained
+transitions. The runner reuses the accepted deterministic proofreader and
+cannot override its verdict or disposition. It records eight process-local
+verified releases, four inert human-gate deliveries, two observed allowlisted
+repairs, three bounded correction requests, two edge abortions, one inert
+fresh-context supersession and one stale-completion rejection. Retry follows
+declared attempt lineage; atomic output releases all-or-none; stale and rejected
+frames cannot be routed to the gate.
+
+Twenty-three focused and 149 combined tests pass with the predecessor work-cell
+protocol, Event Router, Sandbox DAG, Continuity, Compass, orchestrator,
+operating-model, API Spine and handover populations. Draft 2020-12 schema,
+semantic validation, deterministic evidence, Ruff, compilation, JSON and
+whitespace gates pass. No external worker, subagent or model reviewer was used;
+the result claims deterministic local Sol acceptance, not an independent veto.
+
+The Continuity graph advances to revision 20 and Compass revision 8 replaces
+the consumed in-memory-rehearsal decision with a separately closed disposable
+real-isolation candidate. The seven-step Reception One journey and current
+product node remain unchanged.
+
+No draft was generated and no adaptive agent, model, provider, real container,
+network sandbox, persistence, PostgreSQL, event feed, product API, live mailbox,
+human-gate UI, command, PII, protected/historical data, Stage 3B, production,
+deployment, release or autonomous-action gate opened. See
+`docs/ariadne-scripted-cognitive-work-cell-rehearsal-closeout.md`.

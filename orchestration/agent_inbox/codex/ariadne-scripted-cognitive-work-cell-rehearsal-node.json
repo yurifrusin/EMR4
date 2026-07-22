@@ -1,0 +1,76 @@
+{
+  "authority": {
+    "authorized_openings": [],
+    "notes": [
+      "Yuri authorised the repository-local in-memory authored-synthetic scripted cognitive work-cell rehearsal on 2026-07-23.",
+      "The finite runner may apply accepted proofreader dispositions in process memory only. It cannot generate a draft or connect an adaptive agent, model, provider, real container, database, event feed, product API, live mailbox, persistence, human-gate UI or command."
+    ]
+  },
+  "claim_scope": [
+    "Repository-local in-memory rehearsal over pre-authored synthetic attempts, drafts and exact accepted proofreader results only.",
+    "The proof covers finite forward-only control-plane transitions, immutable evidence chaining and authority-negative paths without claiming cognition, isolation or product-runtime behaviour."
+  ],
+  "contract_evidence": [],
+  "coordinates": {
+    "git_ref": "codex/ariadne-scripted-cognitive-work-cell-rehearsal",
+    "source_head": "14860bafa68ab4df06951264f49c586a4152d507",
+    "thread_id": null,
+    "worktree_role": "task"
+  },
+  "created_at": "2026-07-22T21:58:02Z",
+  "decisions": [
+    {
+      "id": "scripted-cognitive-work-cell-rehearsal-scope-frozen",
+      "source": "docs/ariadne-scripted-cognitive-work-cell-rehearsal-plan.md",
+      "status": "accepted",
+      "summary": "Rehearse the accepted work-cell proofreader and control-plane grammar through a finite authored-synthetic in-memory tape with no adaptive agent or external effect."
+    },
+    {
+      "id": "scripted-cognitive-work-cell-rehearsal-accepted",
+      "source": "orchestration/agent_inbox/codex/ariadne-scripted-cognitive-work-cell-rehearsal-sol-acceptance.md",
+      "status": "accepted",
+      "summary": "Accept eight deterministic scenarios and 53 hash-chained transitions that preserve exact verifier, retry, supersession, abortion, atomic and inert human-gate authority semantics."
+    }
+  ],
+  "evidence": {
+    "acceptances": [
+      "orchestration/agent_inbox/codex/ariadne-scripted-cognitive-work-cell-rehearsal-sol-acceptance.md"
+    ],
+    "closeouts": [
+      "docs/ariadne-scripted-cognitive-work-cell-rehearsal-closeout.md",
+      "docs/ariadne-scripted-cognitive-work-cell-rehearsal-design.md",
+      "orchestration/continuity/ariadne-scripted-cognitive-work-cell-rehearsal-evidence.json"
+    ],
+    "findings": [
+      "docs/security/ariadne-scripted-cognitive-work-cell-rehearsal-threat-model-delta.md"
+    ],
+    "plans": [
+      "docs/ariadne-scripted-cognitive-work-cell-rehearsal-plan.md"
+    ],
+    "receipts": [
+      "orchestration/agent_inbox/codex/ariadne-scripted-cognitive-work-cell-rehearsal-postcompaction-receipt.json",
+      "orchestration/agent_inbox/codex/ariadne-scripted-cognitive-work-cell-rehearsal-preacceptance-receipt.json",
+      "orchestration/agent_inbox/codex/ariadne-scripted-cognitive-work-cell-rehearsal-precommit-receipt.json",
+      "orchestration/agent_inbox/codex/ariadne-scripted-cognitive-work-cell-rehearsal-preplan-receipt.json",
+      "orchestration/agent_inbox/codex/ariadne-scripted-cognitive-work-cell-rehearsal-rehydration-receipt.json"
+    ],
+    "tests": [
+      "tests/test_ariadne_scripted_cognitive_work_cell_rehearsal.py"
+    ]
+  },
+  "id": "ariadne-scripted-cognitive-work-cell-rehearsal",
+  "kind": "exploration",
+  "relationships": [
+    {
+      "node_id": "ariadne-bounded-cognitive-work-cell-protocol",
+      "relation": "builds_on"
+    }
+  ],
+  "status": "accepted",
+  "title": "Ariadne Scripted Cognitive Work Cell Rehearsal",
+  "unresolved_gates": [
+    "Adaptive or generated drafts, models, providers, real containers, network enforcement, persistence, live mailboxes, product reads and commands require a fresh Yuri decision.",
+    "PII, protected/historical evidence, human-gate UI, Stage 3B, production, deployment, release and autonomous action remain separately closed."
+  ],
+  "updated_at": "2026-07-22T21:58:02Z"
+}

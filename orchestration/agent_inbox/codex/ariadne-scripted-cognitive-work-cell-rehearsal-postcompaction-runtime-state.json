@@ -1,0 +1,83 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_ariadne_scripted_cognitive_work_cell_rehearsal_postcompaction_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is selected; the finite state machine, inherited proofreader contract, evidence projection and negative-path tests remain tightly coupled Sol-owned work."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external model or provider is selected or authorised for the rehearsal."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external model review is selected or claimed; acceptance remains deterministic local Sol evidence."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "After context compaction, the complete live handover/current baton, authority allocation, active rehearsal plan/design/threat model, accepted work-cell, router and sandbox-DAG plan/closeout evidence, API Spine boundary, protected-evidence/user-decision boundaries and all five Git/worktree sources were restored.",
+        "The authorised scope remains a repository-local finite in-memory state machine over pre-authored synthetic attempts and drafts, inherited deterministic proofreader outcomes, immutable transitions, bounded correction, inert fresh-read grant binding, supersession, verified release, inert human routing and edge abortion.",
+        "HEAD, master, handoff/current, origin/master and origin/handoff/current remain aligned at 14860bafa68ab4df06951264f49c586a4152d507; the task branch preserves four unrelated pre-existing Bernie receipt/runtime-state files.",
+        "Models, providers, adaptive agents, real containers, PostgreSQL, event feeds, product APIs, GraphQL/REST calls, live mailboxes, persistence, human-gate UI, command adapters, PII, protected holdouts and historical Diary material remain closed and were not accessed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,84 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_ariadne_scripted_cognitive_work_cell_rehearsal_preacceptance_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker was used; the tightly coupled finite state machine, inherited proofreader contract and negative-path evidence remained Sol-owned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external model or provider was selected or authorised."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external model review was used or claimed; acceptance is deterministic local Sol evidence."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The complete five-source rehydration and post-compaction receipt pass on the task branch from aligned protected source 14860bafa68ab4df06951264f49c586a4152d507.",
+        "The canonical finite tape passes eight authored-synthetic scenarios and 53 hash-chained transitions with eight verified process-local releases, four inert human deliveries, two observed canonical repairs, three bounded correction requests, two aborted edges, one supersession and one stale-completion rejection.",
+        "Twenty-three focused tests and the 149-test combined Ariadne, API Spine and handover population pass serially; schema, semantic validation, exact evidence, Continuity revision 20, Compass revision 8, Ruff, compilation, JSON parsing and whitespace gates pass.",
+        "Four unrelated pre-existing Bernie receipt/runtime-state files remain preserved and excluded.",
+        "No generated draft, adaptive agent, model, provider, real container, PostgreSQL, event feed, product API, GraphQL/REST call, live mailbox, persistence, human-gate UI, command adapter, PII, protected holdout or historical Diary material was accessed or enabled."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
