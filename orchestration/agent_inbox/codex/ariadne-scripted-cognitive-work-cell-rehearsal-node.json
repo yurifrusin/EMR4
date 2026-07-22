@@ -52,6 +52,7 @@
       "orchestration/agent_inbox/codex/ariadne-scripted-cognitive-work-cell-rehearsal-preacceptance-receipt.json",
       "orchestration/agent_inbox/codex/ariadne-scripted-cognitive-work-cell-rehearsal-precommit-receipt.json",
       "orchestration/agent_inbox/codex/ariadne-scripted-cognitive-work-cell-rehearsal-preplan-receipt.json",
+      "orchestration/agent_inbox/codex/ariadne-scripted-cognitive-work-cell-rehearsal-prepush-receipt.json",
       "orchestration/agent_inbox/codex/ariadne-scripted-cognitive-work-cell-rehearsal-rehydration-receipt.json"
     ],
     "tests": [
