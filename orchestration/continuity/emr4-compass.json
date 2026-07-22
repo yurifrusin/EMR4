@@ -1,8 +1,8 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 4,
-  "updated_at": "2026-07-22T03:00:00Z",
+  "map_revision": 5,
+  "updated_at": "2026-07-22T03:15:00Z",
   "source_graph_revision": 17,
   "orientation_statement": "EMR4 is currently deepening Phase 2B through Reception One: the latest accepted proof shows that one combined receptionist request can remain safely oriented when committed Diary truth changes. This is a working local capability foundation, not a finished Reception One experience or a production-ready EMR.",
   "north_star": {
@@ -174,6 +174,27 @@
         "docs/ariadne-compass-increment2-plan.md",
         "docs/ariadne-continuity-engine-increment1-closeout.md"
       ]
+    },
+    {
+      "id": "ariadne-synaptic-event-router",
+      "title": "Ariadne Synaptic Event Router",
+      "status": "candidate",
+      "strategic_question": "Should a future per-practice operational DAG receive bounded steering notices when committed domain events intersect the declared scopes of live nodes?",
+      "why_it_matters": "A deterministic scope router could keep several isolated workers aligned with changing practice truth without sending every value through the orchestrator or giving an event command authority.",
+      "prerequisites": [
+        "A fresh Yuri decision on a frozen non-executing protocol tranche before any operational event or container adapter.",
+        "A separate operational-DAG schema, minimal live scope leases, bilateral routing policy, fresh-read reconciliation and privacy-safe replay evidence.",
+        "Strict separation from the development Continuity graph and preservation of the existing default-off local reschedule exception."
+      ],
+      "boundary_changes": [
+        "event-runtime"
+      ],
+      "evidence": [
+        "docs/ariadne-synaptic-event-router-candidate-plan.md",
+        "docs/ariadne-sandbox-dag-protocol-design.md",
+        "docs/bernie-reception-one-committed-event-vertical-closeout.md",
+        "docs/bernie-reception-one-availability-reconciliation-closeout.md"
+      ]
     }
   ],
   "user_owned_decisions": [
@@ -193,12 +214,21 @@
         "docs/ariadne-compass-increment2-plan.md",
         "docs/ariadne-continuity-engine-increment1-closeout.md"
       ]
+    },
+    {
+      "id": "authorize-synaptic-event-router-tranche",
+      "question": "Should Ariadne begin a non-executing Synaptic Event Router tranche that models live node scopes, deterministic event intersection and bounded conversation-style steering?",
+      "required_before": "Any operational-DAG scope registry, database/event-feed connection, node mailbox delivery, listener, broker, background worker or event-driven reconciliation beyond the existing bounded Reception One exception.",
+      "evidence": [
+        "docs/ariadne-synaptic-event-router-candidate-plan.md"
+      ]
     }
   ],
   "map_limits": [
     "The canonical continuity graph currently maps the active Reception One lineage and Ariadne tooling, not every EMR4 phase or historical sprint.",
     "The master implementation plan is a strategic blueprint; phase labels do not prove implementation or readiness.",
     "Accepted Reception One evidence is local and authored-synthetic unless its source says otherwise; it is not production, release or representative-staff evidence.",
+    "A future per-practice operational DAG must remain separate from the development Continuity graph; this candidate records no patient, practice or live-node state.",
     "The decision horizon records candidates and gates. It neither recommends a winner nor grants authority."
   ]
 }

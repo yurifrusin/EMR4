@@ -57,6 +57,19 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     assert report["current_position"]["unlocks"]
     assert report["current_position"]["does_not_solve"]
     assert {item["status"] for item in report["decision_horizon"]} == {"candidate"}
+    support_ids = {item["id"] for item in report["programme_support_horizon"]}
+    assert "ariadne-synaptic-event-router" in support_ids
+    router = next(
+        item
+        for item in report["programme_support_horizon"]
+        if item["id"] == "ariadne-synaptic-event-router"
+    )
+    assert router["status"] == "candidate"
+    assert router["boundary_changes"] == ["event-runtime"]
+    assert any(
+        decision["id"] == "authorize-synaptic-event-router-tranche"
+        for decision in report["user_owned_decisions"]
+    )
     assert report["user_owned_decisions"]
 
 
