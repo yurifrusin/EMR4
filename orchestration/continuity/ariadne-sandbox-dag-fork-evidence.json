@@ -1,0 +1,69 @@
+{
+  "schema_version": "ariadne.sandbox_dag_evidence.v1",
+  "result": "candidate_pass",
+  "evidence_label": "repository_local_authored_synthetic_protocol_trace",
+  "authority": {
+    "advisory_only": true,
+    "execution_enabled": false,
+    "terminal_state": "awaiting-human-authority",
+    "closed_boundaries_preserved": [
+      "api-change",
+      "appointment-write",
+      "autonomous-action",
+      "deployment",
+      "event-runtime",
+      "historical-diary",
+      "pii",
+      "production",
+      "protected-evidence",
+      "provider-call",
+      "release",
+      "stage-3b",
+      "voice"
+    ]
+  },
+  "protocol_population": {
+    "node_count": 13,
+    "exchange_count": 13,
+    "context_round_trip_count": 1,
+    "direct_bilateral_peer_exchange_count": 1,
+    "join_count": 1,
+    "terminal_human_gate_count": 1,
+    "real_container_count": 0,
+    "model_call_count": 0,
+    "product_read_count": 0,
+    "product_write_count": 0
+  },
+  "verification": {
+    "focused_tests": {
+      "command": "python -m pytest tests/test_ariadne_sandbox_dag.py -q",
+      "passed": 12,
+      "failed": 0
+    },
+    "combined_ariadne_tests": {
+      "command": "python -m pytest tests/test_ariadne_sandbox_dag.py tests/test_ariadne_continuity_engine.py tests/test_ariadne_compass.py tests/test_ariadne_orchestrator_preflight.py tests/test_ariadne_operating_model.py tests/test_agents_handover_archive.py -q",
+      "passed": 55,
+      "failed": 0
+    },
+    "continuity_validation": "passed_at_graph_revision_16",
+    "fork_node_audit": "passed_with_no_required_product_contracts",
+    "compass_validation": "passed_at_map_revision_3_without_product_position_change",
+    "ruff": "passed",
+    "python_compilation": "passed",
+    "json_schema_and_documents": "passed",
+    "plugin_validator": "passed",
+    "skill_validator": "passed",
+    "git_diff_check": "passed"
+  },
+  "artifact_hashes": {
+    "scripts/ariadne_sandbox_dag.py": "sha256:0a3385cb24352eb01484f89a86f5ec3dbd029e7bcd2ddc01ead5449ac5a4992e",
+    "orchestration/continuity/ariadne-sandbox-dag.schema.json": "sha256:bcb5b739c6bcae1ae80dcd65448d1c7cf89027e62acf87d4d24bfb40e03597f5",
+    "orchestration/continuity/ariadne-sandbox-dag-example.json": "sha256:579b16fa1fd451ab8b3955777ce2754292f155cb3b41645614e1945dcc3f9ec1",
+    "tests/test_ariadne_sandbox_dag.py": "sha256:fc71d04a6b766a43e2ab9c2a0d2b27a7914c8a4b7acf28e65f7e0e61b105a7e0"
+  },
+  "independent_review": {
+    "status": "pending",
+    "reviewer": "Gemini 3.5 Flash",
+    "artifact": "orchestration/agent_inbox/antigravity/ariadne-sandbox-dag-fork-final-review.md"
+  }
+}

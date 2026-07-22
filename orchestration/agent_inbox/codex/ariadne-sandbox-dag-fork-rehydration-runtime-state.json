@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "strategic_planning",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "extra_high_ariadne_sandbox_dag_fork_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external implementation worker is selected for this small, tightly coupled protocol-design fork."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No provider-backed implementation call or prompt is authorised."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "A fresh Gemini review may be requested only after the bounded candidate is complete; this receipt makes no external call."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri authorised a first real Continuity Engine fork to explore a DAG of sandboxed leaves while building on, but not affecting, accepted work.",
+        "The fork is isolated at C:/Users/sarashera/EMR4-worktrees/ariadne-sandbox-dag-fork on codex/ariadne-sandbox-dag-fork from ec6d0145376f7c945b43b1fbf4338e4cb78e3000.",
+        "The active accepted Ariadne foundation remains ariadne_compass_increment2_pass and the Reception One product journey remains unchanged.",
+        "The exploration is provider-free and non-executing: it cannot issue EMR commands, write product data, call event runtime, or grant authority.",
+        "GraphQL mutations, production writes, Stage 3B, PII, provider, deployment, and release surfaces remain closed.",
+        "Protected holdouts v1-v10 and historical diary material remain sealed and are not opened, enumerated, searched, or used."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

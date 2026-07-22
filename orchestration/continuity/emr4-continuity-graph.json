@@ -55,7 +55,7 @@
       "voice"
     ]
   },
-  "graph_revision": 15,
+  "graph_revision": 16,
   "harvests": [],
   "nodes": [
     {
@@ -844,9 +844,69 @@
         "Final visual and interaction synthesis remains a later Yuri decision."
       ],
       "updated_at": "2026-07-21T00:10:00Z"
+    },
+    {
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri authorized the first real Continuity Engine fork on 2026-07-22 as a bounded, provider-free and non-executing sandbox-DAG exploration.",
+          "Capabilities, container generations and bilateral communication policies are inert descriptors. The tool cannot start a container, call a model, read product data, issue an EMR command or grant authority."
+        ]
+      },
+      "claim_scope": [
+        "Repository-local authored-synthetic protocol validation and deterministic trace rendering only.",
+        "Typed context round trips, bilateral direct sandbox data exchange, fan-out/fan-in and a terminal human-authority gate are represented without runtime execution."
+      ],
+      "contract_evidence": [],
+      "coordinates": {
+        "git_ref": "codex/ariadne-sandbox-dag-fork",
+        "source_head": "ec6d0145376f7c945b43b1fbf4338e4cb78e3000",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "created_at": "2026-07-22T02:00:00Z",
+      "decisions": [
+        {
+          "id": "sandbox-dag-fork-scope-frozen",
+          "source": "docs/ariadne-sandbox-dag-fork-plan.md",
+          "status": "accepted",
+          "summary": "Explore a synaptic DAG whose orchestrator controls declared policies while bilaterally authorized leaves exchange bounded typed data directly."
+        }
+      ],
+      "evidence": {
+        "acceptances": [],
+        "closeouts": [],
+        "findings": [
+          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-plan-sol-review.md"
+        ],
+        "plans": [
+          "docs/ariadne-sandbox-dag-fork-plan.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-rehydration-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_sandbox_dag.py"
+        ]
+      },
+      "id": "ariadne-sandbox-dag-fork",
+      "kind": "exploration",
+      "relationships": [
+        {
+          "node_id": "ariadne-compass-increment2",
+          "relation": "forked_from"
+        }
+      ],
+      "status": "active",
+      "title": "Ariadne sandbox-DAG first fork",
+      "unresolved_gates": [
+        "Fresh independent veto, exact closeout and Sol acceptance remain required before this exploration can be accepted.",
+        "Real models, containers, policy enforcement, workflow execution, EMR reads or commands, providers, PII, production, deployment and release remain separately closed."
+      ],
+      "updated_at": "2026-07-22T02:00:00Z"
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-07-21T05:30:00Z"
+  "updated_at": "2026-07-22T02:00:00Z"
 }
