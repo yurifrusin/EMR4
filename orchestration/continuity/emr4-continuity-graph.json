@@ -55,7 +55,7 @@
       "voice"
     ]
   },
-  "graph_revision": 16,
+  "graph_revision": 17,
   "harvests": [],
   "nodes": [
     {
@@ -871,18 +871,36 @@
           "source": "docs/ariadne-sandbox-dag-fork-plan.md",
           "status": "accepted",
           "summary": "Explore a synaptic DAG whose orchestrator controls declared policies while bilaterally authorized leaves exchange bounded typed data directly."
+        },
+        {
+          "id": "sandbox-dag-fork-accepted",
+          "source": "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the non-executing protocol proof with bilateral peer data, restart-only policy amendment and terminal human authority."
         }
       ],
       "evidence": {
-        "acceptances": [],
-        "closeouts": [],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-sol-acceptance.md"
+        ],
+        "closeouts": [
+          "docs/ariadne-sandbox-dag-fork-closeout.md",
+          "docs/ariadne-sandbox-dag-protocol-design.md",
+          "orchestration/continuity/ariadne-sandbox-dag-fork-evidence.json"
+        ],
         "findings": [
+          "orchestration/agent_inbox/antigravity/ariadne-sandbox-dag-fork-final-review.md",
           "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-plan-sol-review.md"
         ],
         "plans": [
           "docs/ariadne-sandbox-dag-fork-plan.md"
         ],
         "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-candidate-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-closeout-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-gemini-run-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-predispatch-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-preacceptance-receipt.json",
           "orchestration/agent_inbox/codex/ariadne-sandbox-dag-fork-rehydration-receipt.json"
         ],
         "tests": [
@@ -897,16 +915,15 @@
           "relation": "forked_from"
         }
       ],
-      "status": "active",
+      "status": "accepted",
       "title": "Ariadne sandbox-DAG first fork",
       "unresolved_gates": [
-        "Fresh independent veto, exact closeout and Sol acceptance remain required before this exploration can be accepted.",
         "Real models, containers, policy enforcement, workflow execution, EMR reads or commands, providers, PII, production, deployment and release remain separately closed."
       ],
-      "updated_at": "2026-07-22T02:00:00Z"
+      "updated_at": "2026-07-22T03:00:00Z"
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-07-22T02:00:00Z"
+  "updated_at": "2026-07-22T03:00:00Z"
 }

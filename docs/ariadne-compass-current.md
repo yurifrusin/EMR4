@@ -136,4 +136,4 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/reception-one-combined-scope-proof-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-committed-event-vertical-sol-acceptance.md`
 
-_Compass map revision 3; continuity graph revision 16._
+_Compass map revision 4; continuity graph revision 17._

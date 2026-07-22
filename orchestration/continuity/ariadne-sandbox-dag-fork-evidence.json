@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.sandbox_dag_evidence.v1",
-  "result": "candidate_pass",
+  "result": "ariadne_sandbox_dag_fork_pass",
   "evidence_label": "repository_local_authored_synthetic_protocol_trace",
   "authority": {
     "advisory_only": true,
@@ -62,8 +62,10 @@
     "tests/test_ariadne_sandbox_dag.py": "sha256:fc71d04a6b766a43e2ab9c2a0d2b27a7914c8a4b7acf28e65f7e0e61b105a7e0"
   },
   "independent_review": {
-    "status": "pending",
+    "status": "passed",
     "reviewer": "Gemini 3.5 Flash",
-    "artifact": "orchestration/agent_inbox/antigravity/ariadne-sandbox-dag-fork-final-review.md"
+    "artifact": "orchestration/agent_inbox/antigravity/ariadne-sandbox-dag-fork-final-review.md",
+    "decision": "pass",
+    "material_findings": 0
   }
 }
