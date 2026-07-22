@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "strategic_planning",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_ariadne_synaptic_event_router_protocol_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external implementation worker is selected; this tightly coupled repository-local protocol tranche remains Sol-owned under the worker-lane economy rule."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No provider-backed planning or implementation call is authorised."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "A fresh independent veto may be sought only after the authored-synthetic protocol candidate is complete; no current provider or model call is authorised by this receipt."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri authorised the bounded repository-local non-executing Ariadne Synaptic Event Router protocol tranche on 2026-07-22.",
+        "Authority is limited to authored-synthetic operational-DAG scope leases, deterministic event routing, node-mailbox steering, supersession and inspectable dry-run policy manifests.",
+        "The accepted sandbox-DAG protocol, candidate plan, API Spine async-event and manifest boundaries, protected-evidence rules and user-decision gates were re-read before planning.",
+        "The integration worktree is C:/Users/sarashera/emr4 on master at af0f6d740363d20402339668f420360bbb4469b6; master, handoff/current and both origin refs are aligned.",
+        "Four unrelated pre-existing untracked receipt/runtime-state files are preserved and excluded from tranche ownership.",
+        "No PostgreSQL connection, existing event-feed connection, product API, model, container, command, subprocess worker, runtime service or provider is authorised.",
+        "Protected holdouts v1-v10 and historical Diary material remain sealed and were not opened, enumerated, searched or used."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

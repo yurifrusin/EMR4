@@ -1,0 +1,867 @@
+{
+  "schema_version": "ariadne.synaptic_event_router.v1",
+  "protocol_id": "ariadne-synaptic-event-router-proof",
+  "workflow_id": "synthetic-appointment-proposal",
+  "operational_graph_revision": 2,
+  "revision": 1,
+  "title": "Authored-synthetic appointment reschedule scope steering proof",
+  "as_of": "2026-07-22T14:10:00+10:00",
+  "authority": {
+    "authored_synthetic_only": true,
+    "advisory_only": true,
+    "execution_enabled": false,
+    "default_decision": "deny",
+    "closed_boundaries": [
+      "api-change",
+      "appointment-write",
+      "autonomous-action",
+      "container-runtime",
+      "database-connectivity",
+      "deployment",
+      "event-feed-connectivity",
+      "historical-diary",
+      "model-provider",
+      "pii",
+      "product-api",
+      "production",
+      "protected-evidence",
+      "release",
+      "stage-3b"
+    ]
+  },
+  "route_policy": {
+    "id": "policy-synthetic-practice-a",
+    "revision": 1,
+    "practice_id": "practice-synth-a",
+    "principal_id": "principal-reception",
+    "sender_instance": "synaptic-router",
+    "channel": "control",
+    "kind": "scope-change-notice",
+    "default_decision": "deny",
+    "rules": [
+      {
+        "id": "route-rescheduled-v1",
+        "event_type": "diary.appointment_rescheduled",
+        "schema_versions": [1],
+        "steering_frame_type": "scope-change-notice",
+        "sensitivity_max": "restricted"
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "availability-v1",
+      "instance": "availability",
+      "attempt": 1,
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "container_generation": 1,
+      "policy_revision": 1,
+      "mailbox_id": "mailbox-availability",
+      "checkpoint_id": "checkpoint-availability-1",
+      "state": "active"
+    },
+    {
+      "id": "ranking-v1",
+      "instance": "ranking",
+      "attempt": 1,
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "container_generation": 1,
+      "policy_revision": 1,
+      "mailbox_id": "mailbox-ranking",
+      "checkpoint_id": "checkpoint-ranking-1",
+      "state": "active"
+    },
+    {
+      "id": "retired-v1",
+      "instance": "retired",
+      "attempt": 1,
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "container_generation": 1,
+      "policy_revision": 1,
+      "mailbox_id": "mailbox-retired",
+      "checkpoint_id": "checkpoint-retired-1",
+      "state": "superseded"
+    },
+    {
+      "id": "expired-v1",
+      "instance": "expired",
+      "attempt": 1,
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "container_generation": 1,
+      "policy_revision": 1,
+      "mailbox_id": "mailbox-expired",
+      "checkpoint_id": "checkpoint-expired-1",
+      "state": "active"
+    },
+    {
+      "id": "mismatch-v1",
+      "instance": "mismatch",
+      "attempt": 1,
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "container_generation": 1,
+      "policy_revision": 1,
+      "mailbox_id": "mailbox-mismatch",
+      "checkpoint_id": "checkpoint-mismatch-1",
+      "state": "active"
+    },
+    {
+      "id": "revision-v1",
+      "instance": "revision",
+      "attempt": 1,
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "container_generation": 1,
+      "policy_revision": 1,
+      "mailbox_id": "mailbox-revision",
+      "checkpoint_id": "checkpoint-revision-1",
+      "state": "active"
+    },
+    {
+      "id": "sensitive-v1",
+      "instance": "sensitive",
+      "attempt": 1,
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "container_generation": 1,
+      "policy_revision": 1,
+      "mailbox_id": "mailbox-sensitive",
+      "checkpoint_id": "checkpoint-sensitive-1",
+      "state": "active"
+    },
+    {
+      "id": "undeclared-v1",
+      "instance": "undeclared",
+      "attempt": 1,
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "container_generation": 1,
+      "policy_revision": 1,
+      "mailbox_id": "mailbox-undeclared",
+      "checkpoint_id": "checkpoint-undeclared-1",
+      "state": "active"
+    }
+  ],
+  "scope_leases": [
+    {
+      "id": "lease-availability-v1",
+      "revision": 1,
+      "state": "superseded",
+      "narrowed_from": null,
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "node_id": "availability-v1",
+      "instance": "availability",
+      "attempt": 1,
+      "container_generation": 1,
+      "policy_revision": 1,
+      "mailbox_id": "mailbox-availability",
+      "checkpoint_id": "checkpoint-availability-1",
+      "handling_policy": "reconcile-at-boundary",
+      "accepted_router_instance": "synaptic-router",
+      "accepted_channel": "control",
+      "accepted_kind": "scope-change-notice",
+      "accepted_events": [
+        {
+          "event_type": "diary.appointment_rescheduled",
+          "schema_versions": [1]
+        }
+      ],
+      "accepted_steering_frames": ["scope-change-notice"],
+      "selectors": {
+        "aggregate_ids": ["appointment-100"],
+        "practitioner_ids": ["practitioner-1", "practitioner-2"],
+        "location_ids": ["location-1"],
+        "projection_ids": ["diary-week"],
+        "proposal_ids": ["proposal-1"],
+        "time_window": {
+          "starts_at": "2026-07-23T14:00:00+10:00",
+          "ends_at": "2026-07-23T18:00:00+10:00"
+        }
+      },
+      "minimum_aggregate_revision": 10,
+      "mailbox_checkpoint_revision": 10,
+      "sensitivity_ceiling": "restricted",
+      "expires_at": "2026-07-22T15:00:00+10:00",
+      "fresh_read_grant_id": "grant-availability"
+    },
+    {
+      "id": "lease-availability-v2",
+      "revision": 2,
+      "state": "current",
+      "narrowed_from": "lease-availability-v1",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "node_id": "availability-v1",
+      "instance": "availability",
+      "attempt": 1,
+      "container_generation": 1,
+      "policy_revision": 1,
+      "mailbox_id": "mailbox-availability",
+      "checkpoint_id": "checkpoint-availability-1",
+      "handling_policy": "reconcile-at-boundary",
+      "accepted_router_instance": "synaptic-router",
+      "accepted_channel": "control",
+      "accepted_kind": "scope-change-notice",
+      "accepted_events": [
+        {
+          "event_type": "diary.appointment_rescheduled",
+          "schema_versions": [1]
+        }
+      ],
+      "accepted_steering_frames": ["scope-change-notice"],
+      "selectors": {
+        "aggregate_ids": ["appointment-100"],
+        "practitioner_ids": ["practitioner-1"],
+        "location_ids": ["location-1"],
+        "projection_ids": ["diary-week"],
+        "proposal_ids": ["proposal-1"],
+        "time_window": {
+          "starts_at": "2026-07-23T14:00:00+10:00",
+          "ends_at": "2026-07-23T16:00:00+10:00"
+        }
+      },
+      "minimum_aggregate_revision": 10,
+      "mailbox_checkpoint_revision": 10,
+      "sensitivity_ceiling": "restricted",
+      "expires_at": "2026-07-22T15:00:00+10:00",
+      "fresh_read_grant_id": "grant-availability"
+    },
+    {
+      "id": "lease-ranking-v1",
+      "revision": 1,
+      "state": "current",
+      "narrowed_from": null,
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "node_id": "ranking-v1",
+      "instance": "ranking",
+      "attempt": 1,
+      "container_generation": 1,
+      "policy_revision": 1,
+      "mailbox_id": "mailbox-ranking",
+      "checkpoint_id": "checkpoint-ranking-1",
+      "handling_policy": "cancel-and-supersede",
+      "accepted_router_instance": "synaptic-router",
+      "accepted_channel": "control",
+      "accepted_kind": "scope-change-notice",
+      "accepted_events": [
+        {
+          "event_type": "diary.appointment_rescheduled",
+          "schema_versions": [1]
+        }
+      ],
+      "accepted_steering_frames": ["scope-change-notice"],
+      "selectors": {
+        "aggregate_ids": ["appointment-100"],
+        "practitioner_ids": ["practitioner-1"],
+        "location_ids": ["location-1"],
+        "projection_ids": ["diary-week"],
+        "proposal_ids": ["proposal-1"],
+        "time_window": {
+          "starts_at": "2026-07-23T14:00:00+10:00",
+          "ends_at": "2026-07-23T16:00:00+10:00"
+        }
+      },
+      "minimum_aggregate_revision": 10,
+      "mailbox_checkpoint_revision": 10,
+      "sensitivity_ceiling": "restricted",
+      "expires_at": "2026-07-22T15:00:00+10:00",
+      "fresh_read_grant_id": "grant-ranking"
+    },
+    {
+      "id": "lease-retired-v1",
+      "revision": 1,
+      "state": "superseded",
+      "narrowed_from": null,
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "node_id": "retired-v1",
+      "instance": "retired",
+      "attempt": 1,
+      "container_generation": 1,
+      "policy_revision": 1,
+      "mailbox_id": "mailbox-retired",
+      "checkpoint_id": "checkpoint-retired-1",
+      "handling_policy": "reconcile-at-boundary",
+      "accepted_router_instance": "synaptic-router",
+      "accepted_channel": "control",
+      "accepted_kind": "scope-change-notice",
+      "accepted_events": [
+        {
+          "event_type": "diary.appointment_rescheduled",
+          "schema_versions": [1]
+        }
+      ],
+      "accepted_steering_frames": ["scope-change-notice"],
+      "selectors": {
+        "aggregate_ids": ["appointment-100"],
+        "practitioner_ids": ["practitioner-1"],
+        "location_ids": ["location-1"],
+        "projection_ids": ["diary-week"],
+        "proposal_ids": ["proposal-1"],
+        "time_window": {
+          "starts_at": "2026-07-23T14:00:00+10:00",
+          "ends_at": "2026-07-23T16:00:00+10:00"
+        }
+      },
+      "minimum_aggregate_revision": 10,
+      "mailbox_checkpoint_revision": 10,
+      "sensitivity_ceiling": "restricted",
+      "expires_at": "2026-07-22T15:00:00+10:00",
+      "fresh_read_grant_id": "grant-unavailable"
+    },
+    {
+      "id": "lease-expired-v1",
+      "revision": 1,
+      "state": "current",
+      "narrowed_from": null,
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "node_id": "expired-v1",
+      "instance": "expired",
+      "attempt": 1,
+      "container_generation": 1,
+      "policy_revision": 1,
+      "mailbox_id": "mailbox-expired",
+      "checkpoint_id": "checkpoint-expired-1",
+      "handling_policy": "reconcile-at-boundary",
+      "accepted_router_instance": "synaptic-router",
+      "accepted_channel": "control",
+      "accepted_kind": "scope-change-notice",
+      "accepted_events": [
+        {
+          "event_type": "diary.appointment_rescheduled",
+          "schema_versions": [1]
+        }
+      ],
+      "accepted_steering_frames": ["scope-change-notice"],
+      "selectors": {
+        "aggregate_ids": ["appointment-100"],
+        "practitioner_ids": ["practitioner-1"],
+        "location_ids": ["location-1"],
+        "projection_ids": ["diary-week"],
+        "proposal_ids": ["proposal-1"],
+        "time_window": {
+          "starts_at": "2026-07-23T14:00:00+10:00",
+          "ends_at": "2026-07-23T16:00:00+10:00"
+        }
+      },
+      "minimum_aggregate_revision": 10,
+      "mailbox_checkpoint_revision": 10,
+      "sensitivity_ceiling": "restricted",
+      "expires_at": "2026-07-22T14:09:00+10:00",
+      "fresh_read_grant_id": "grant-unavailable"
+    },
+    {
+      "id": "lease-mismatch-v1",
+      "revision": 1,
+      "state": "current",
+      "narrowed_from": null,
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "node_id": "mismatch-v1",
+      "instance": "mismatch",
+      "attempt": 1,
+      "container_generation": 1,
+      "policy_revision": 1,
+      "mailbox_id": "mailbox-mismatch",
+      "checkpoint_id": "checkpoint-mismatch-1",
+      "handling_policy": "reconcile-at-boundary",
+      "accepted_router_instance": "synaptic-router",
+      "accepted_channel": "control",
+      "accepted_kind": "scope-change-notice",
+      "accepted_events": [
+        {
+          "event_type": "diary.appointment_rescheduled",
+          "schema_versions": [1]
+        }
+      ],
+      "accepted_steering_frames": ["scope-change-notice"],
+      "selectors": {
+        "aggregate_ids": ["appointment-999"],
+        "practitioner_ids": ["practitioner-1"],
+        "location_ids": ["location-1"],
+        "projection_ids": ["diary-week"],
+        "proposal_ids": ["proposal-1"],
+        "time_window": {
+          "starts_at": "2026-07-23T14:00:00+10:00",
+          "ends_at": "2026-07-23T16:00:00+10:00"
+        }
+      },
+      "minimum_aggregate_revision": 10,
+      "mailbox_checkpoint_revision": 10,
+      "sensitivity_ceiling": "restricted",
+      "expires_at": "2026-07-22T15:00:00+10:00",
+      "fresh_read_grant_id": "grant-unavailable"
+    },
+    {
+      "id": "lease-revision-v1",
+      "revision": 1,
+      "state": "current",
+      "narrowed_from": null,
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "node_id": "revision-v1",
+      "instance": "revision",
+      "attempt": 1,
+      "container_generation": 1,
+      "policy_revision": 1,
+      "mailbox_id": "mailbox-revision",
+      "checkpoint_id": "checkpoint-revision-1",
+      "handling_policy": "reconcile-at-boundary",
+      "accepted_router_instance": "synaptic-router",
+      "accepted_channel": "control",
+      "accepted_kind": "scope-change-notice",
+      "accepted_events": [
+        {
+          "event_type": "diary.appointment_rescheduled",
+          "schema_versions": [1]
+        }
+      ],
+      "accepted_steering_frames": ["scope-change-notice"],
+      "selectors": {
+        "aggregate_ids": ["appointment-100"],
+        "practitioner_ids": ["practitioner-1"],
+        "location_ids": ["location-1"],
+        "projection_ids": ["diary-week"],
+        "proposal_ids": ["proposal-1"],
+        "time_window": {
+          "starts_at": "2026-07-23T14:00:00+10:00",
+          "ends_at": "2026-07-23T16:00:00+10:00"
+        }
+      },
+      "minimum_aggregate_revision": 12,
+      "mailbox_checkpoint_revision": 12,
+      "sensitivity_ceiling": "restricted",
+      "expires_at": "2026-07-22T15:00:00+10:00",
+      "fresh_read_grant_id": "grant-unavailable"
+    },
+    {
+      "id": "lease-sensitive-v1",
+      "revision": 1,
+      "state": "current",
+      "narrowed_from": null,
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "node_id": "sensitive-v1",
+      "instance": "sensitive",
+      "attempt": 1,
+      "container_generation": 1,
+      "policy_revision": 1,
+      "mailbox_id": "mailbox-sensitive",
+      "checkpoint_id": "checkpoint-sensitive-1",
+      "handling_policy": "reconcile-at-boundary",
+      "accepted_router_instance": "synaptic-router",
+      "accepted_channel": "control",
+      "accepted_kind": "scope-change-notice",
+      "accepted_events": [
+        {
+          "event_type": "diary.appointment_rescheduled",
+          "schema_versions": [1]
+        }
+      ],
+      "accepted_steering_frames": ["scope-change-notice"],
+      "selectors": {
+        "aggregate_ids": ["appointment-100"],
+        "practitioner_ids": ["practitioner-1"],
+        "location_ids": ["location-1"],
+        "projection_ids": ["diary-week"],
+        "proposal_ids": ["proposal-1"],
+        "time_window": {
+          "starts_at": "2026-07-23T14:00:00+10:00",
+          "ends_at": "2026-07-23T16:00:00+10:00"
+        }
+      },
+      "minimum_aggregate_revision": 10,
+      "mailbox_checkpoint_revision": 10,
+      "sensitivity_ceiling": "internal",
+      "expires_at": "2026-07-22T15:00:00+10:00",
+      "fresh_read_grant_id": "grant-unavailable"
+    },
+    {
+      "id": "lease-undeclared-v1",
+      "revision": 1,
+      "state": "current",
+      "narrowed_from": null,
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "node_id": "undeclared-v1",
+      "instance": "undeclared",
+      "attempt": 1,
+      "container_generation": 1,
+      "policy_revision": 1,
+      "mailbox_id": "mailbox-undeclared",
+      "checkpoint_id": "checkpoint-undeclared-1",
+      "handling_policy": "reconcile-at-boundary",
+      "accepted_router_instance": "synaptic-router",
+      "accepted_channel": "control",
+      "accepted_kind": "scope-change-notice",
+      "accepted_events": [
+        {
+          "event_type": "diary.appointment_rescheduled",
+          "schema_versions": [1]
+        }
+      ],
+      "accepted_steering_frames": ["different-notice"],
+      "selectors": {
+        "aggregate_ids": ["appointment-100"],
+        "practitioner_ids": ["practitioner-1"],
+        "location_ids": ["location-1"],
+        "projection_ids": ["diary-week"],
+        "proposal_ids": ["proposal-1"],
+        "time_window": {
+          "starts_at": "2026-07-23T14:00:00+10:00",
+          "ends_at": "2026-07-23T16:00:00+10:00"
+        }
+      },
+      "minimum_aggregate_revision": 10,
+      "mailbox_checkpoint_revision": 10,
+      "sensitivity_ceiling": "restricted",
+      "expires_at": "2026-07-22T15:00:00+10:00",
+      "fresh_read_grant_id": "grant-unavailable"
+    }
+  ],
+  "committed_events": [
+    {
+      "id": "event-reschedule-001",
+      "event_type": "diary.appointment_rescheduled",
+      "schema_version": 1,
+      "committed": true,
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "aggregate_id": "appointment-100",
+      "aggregate_revision": 12,
+      "occurred_at": "2026-07-22T14:05:00+10:00",
+      "sensitivity": "restricted",
+      "coordinates": {
+        "aggregate_id": "appointment-100",
+        "practitioner_id": "practitioner-1",
+        "location_id": "location-1",
+        "starts_at": "2026-07-23T14:30:00+10:00",
+        "ends_at": "2026-07-23T15:00:00+10:00",
+        "projection_id": "diary-week",
+        "proposal_id": "proposal-1"
+      }
+    },
+    {
+      "id": "event-cross-practice-001",
+      "event_type": "diary.appointment_rescheduled",
+      "schema_version": 1,
+      "committed": true,
+      "practice_id": "practice-synth-b",
+      "principal_id": "principal-reception",
+      "aggregate_id": "appointment-100",
+      "aggregate_revision": 12,
+      "occurred_at": "2026-07-22T14:05:00+10:00",
+      "sensitivity": "restricted",
+      "coordinates": {
+        "aggregate_id": "appointment-100",
+        "practitioner_id": "practitioner-1",
+        "location_id": "location-1",
+        "starts_at": "2026-07-23T14:30:00+10:00",
+        "ends_at": "2026-07-23T15:00:00+10:00",
+        "projection_id": "diary-week",
+        "proposal_id": "proposal-1"
+      }
+    },
+    {
+      "id": "event-undeclared-type-001",
+      "event_type": "diary.appointment_created",
+      "schema_version": 1,
+      "committed": true,
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "aggregate_id": "appointment-100",
+      "aggregate_revision": 13,
+      "occurred_at": "2026-07-22T14:06:00+10:00",
+      "sensitivity": "restricted",
+      "coordinates": {
+        "aggregate_id": "appointment-100",
+        "practitioner_id": "practitioner-1",
+        "location_id": "location-1",
+        "starts_at": "2026-07-23T14:30:00+10:00",
+        "ends_at": "2026-07-23T15:00:00+10:00",
+        "projection_id": "diary-week",
+        "proposal_id": "proposal-1"
+      }
+    }
+  ],
+  "fresh_read_grants": [
+    {
+      "id": "grant-availability",
+      "lease_id": "lease-availability-v2",
+      "event_id": "event-reschedule-001",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "role": "diary-projection-reader",
+      "action": "read-scoped-context",
+      "resource_selectors": [
+        "appointment/appointment-100",
+        "projection/diary-week"
+      ],
+      "context_frame_type": "fresh-appointment-projection",
+      "aggregate_revision": 12,
+      "issued_at": "2026-07-22T14:06:00+10:00",
+      "expires_at": "2026-07-22T14:20:00+10:00",
+      "execution_enabled": false,
+      "returns_data": false
+    },
+    {
+      "id": "grant-ranking",
+      "lease_id": "lease-ranking-v1",
+      "event_id": "event-reschedule-001",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "role": "diary-projection-reader",
+      "action": "read-scoped-context",
+      "resource_selectors": [
+        "appointment/appointment-100",
+        "projection/diary-week"
+      ],
+      "context_frame_type": "fresh-appointment-projection",
+      "aggregate_revision": 12,
+      "issued_at": "2026-07-22T14:06:00+10:00",
+      "expires_at": "2026-07-22T14:20:00+10:00",
+      "execution_enabled": false,
+      "returns_data": false
+    }
+  ],
+  "route_attempts": [
+    {
+      "id": "route-01-availability",
+      "event_id": "event-reschedule-001",
+      "lease_id": "lease-availability-v2",
+      "evaluated_at": "2026-07-22T14:10:00+10:00",
+      "expected_decision": "deliver",
+      "expected_reason": "exact-scope-intersection"
+    },
+    {
+      "id": "route-02-ranking",
+      "event_id": "event-reschedule-001",
+      "lease_id": "lease-ranking-v1",
+      "evaluated_at": "2026-07-22T14:10:00+10:00",
+      "expected_decision": "deliver",
+      "expected_reason": "exact-scope-intersection"
+    },
+    {
+      "id": "route-03-replay",
+      "event_id": "event-reschedule-001",
+      "lease_id": "lease-availability-v2",
+      "evaluated_at": "2026-07-22T14:11:00+10:00",
+      "expected_decision": "suppress",
+      "expected_reason": "replay-duplicate-coordinate"
+    },
+    {
+      "id": "route-04-cross-practice",
+      "event_id": "event-cross-practice-001",
+      "lease_id": "lease-availability-v2",
+      "evaluated_at": "2026-07-22T14:10:00+10:00",
+      "expected_decision": "suppress",
+      "expected_reason": "practice-boundary-mismatch"
+    },
+    {
+      "id": "route-05-no-intersection",
+      "event_id": "event-reschedule-001",
+      "lease_id": "lease-mismatch-v1",
+      "evaluated_at": "2026-07-22T14:10:00+10:00",
+      "expected_decision": "suppress",
+      "expected_reason": "scope-no-intersection-aggregate"
+    },
+    {
+      "id": "route-06-stale-generation",
+      "event_id": "event-reschedule-001",
+      "lease_id": "lease-retired-v1",
+      "evaluated_at": "2026-07-22T14:10:00+10:00",
+      "expected_decision": "suppress",
+      "expected_reason": "lease-superseded"
+    },
+    {
+      "id": "route-07-expired",
+      "event_id": "event-reschedule-001",
+      "lease_id": "lease-expired-v1",
+      "evaluated_at": "2026-07-22T14:10:00+10:00",
+      "expected_decision": "suppress",
+      "expected_reason": "lease-expired"
+    },
+    {
+      "id": "route-08-revision",
+      "event_id": "event-reschedule-001",
+      "lease_id": "lease-revision-v1",
+      "evaluated_at": "2026-07-22T14:10:00+10:00",
+      "expected_decision": "suppress",
+      "expected_reason": "aggregate-revision-not-newer"
+    },
+    {
+      "id": "route-09-sensitive",
+      "event_id": "event-reschedule-001",
+      "lease_id": "lease-sensitive-v1",
+      "evaluated_at": "2026-07-22T14:10:00+10:00",
+      "expected_decision": "suppress",
+      "expected_reason": "lease-sensitivity-denied"
+    },
+    {
+      "id": "route-10-undeclared-frame",
+      "event_id": "event-reschedule-001",
+      "lease_id": "lease-undeclared-v1",
+      "evaluated_at": "2026-07-22T14:10:00+10:00",
+      "expected_decision": "suppress",
+      "expected_reason": "steering-frame-not-bilateral"
+    },
+    {
+      "id": "route-11-undeclared-event",
+      "event_id": "event-undeclared-type-001",
+      "lease_id": "lease-availability-v2",
+      "evaluated_at": "2026-07-22T14:10:00+10:00",
+      "expected_decision": "suppress",
+      "expected_reason": "event-type-or-version-not-declared"
+    }
+  ],
+  "expected_mailbox_deliveries": [
+    {
+      "id": "delivery-event-reschedule-001-lease-availability-v2",
+      "workflow_id": "synthetic-appointment-proposal",
+      "operational_graph_revision": 2,
+      "sender_instance": "synaptic-router",
+      "recipient_node_id": "availability-v1",
+      "channel": "control",
+      "kind": "scope-change-notice",
+      "correlation_id": "steer-event-reschedule-001-lease-availability-v2",
+      "mailbox_id": "mailbox-availability",
+      "event_id": "event-reschedule-001",
+      "event_type": "diary.appointment_rescheduled",
+      "event_schema_version": 1,
+      "lease_id": "lease-availability-v2",
+      "lease_revision": 2,
+      "node_id": "availability-v1",
+      "container_generation": 1,
+      "steering_frame_type": "scope-change-notice",
+      "aggregate_id": "appointment-100",
+      "aggregate_revision": 12,
+      "affected_coordinates": {
+        "practitioner_id": "practitioner-1",
+        "location_id": "location-1",
+        "starts_at": "2026-07-23T14:30:00+10:00",
+        "ends_at": "2026-07-23T15:00:00+10:00",
+        "projection_id": "diary-week",
+        "proposal_id": "proposal-1"
+      },
+      "freshness_required": true,
+      "route_reason": "exact-scope-intersection",
+      "fresh_read_grant_id": "grant-availability",
+      "provenance": {
+        "kind": "authored-synthetic-committed-event",
+        "source": "event-reschedule-001",
+        "source_message_ids": [],
+        "source_route_attempt_id": "route-01-availability"
+      },
+      "freshness": {
+        "status": "requires-fresh-read",
+        "observed_at": "2026-07-22T14:05:00+10:00",
+        "maximum_age_seconds": 0
+      },
+      "execution_enabled": false
+    },
+    {
+      "id": "delivery-event-reschedule-001-lease-ranking-v1",
+      "workflow_id": "synthetic-appointment-proposal",
+      "operational_graph_revision": 2,
+      "sender_instance": "synaptic-router",
+      "recipient_node_id": "ranking-v1",
+      "channel": "control",
+      "kind": "scope-change-notice",
+      "correlation_id": "steer-event-reschedule-001-lease-ranking-v1",
+      "mailbox_id": "mailbox-ranking",
+      "event_id": "event-reschedule-001",
+      "event_type": "diary.appointment_rescheduled",
+      "event_schema_version": 1,
+      "lease_id": "lease-ranking-v1",
+      "lease_revision": 1,
+      "node_id": "ranking-v1",
+      "container_generation": 1,
+      "steering_frame_type": "scope-change-notice",
+      "aggregate_id": "appointment-100",
+      "aggregate_revision": 12,
+      "affected_coordinates": {
+        "practitioner_id": "practitioner-1",
+        "location_id": "location-1",
+        "starts_at": "2026-07-23T14:30:00+10:00",
+        "ends_at": "2026-07-23T15:00:00+10:00",
+        "projection_id": "diary-week",
+        "proposal_id": "proposal-1"
+      },
+      "freshness_required": true,
+      "route_reason": "exact-scope-intersection",
+      "fresh_read_grant_id": "grant-ranking",
+      "provenance": {
+        "kind": "authored-synthetic-committed-event",
+        "source": "event-reschedule-001",
+        "source_message_ids": [],
+        "source_route_attempt_id": "route-02-ranking"
+      },
+      "freshness": {
+        "status": "requires-fresh-read",
+        "observed_at": "2026-07-22T14:05:00+10:00",
+        "maximum_age_seconds": 0
+      },
+      "execution_enabled": false
+    }
+  ],
+  "reconciliation_traces": [
+    {
+      "id": "reconciliation-availability",
+      "route_attempt_id": "route-01-availability",
+      "handling_policy": "reconcile-at-boundary",
+      "boundary": "mailbox-checkpoint-boundary",
+      "fresh_read_grant_id": "grant-availability",
+      "stale_context_coordinates": [
+        "appointment/appointment-100",
+        "projection/diary-week"
+      ],
+      "outcome": "awaiting-fresh-read",
+      "command_authority": false,
+      "supersession": null,
+      "stale_completion": null
+    },
+    {
+      "id": "reconciliation-ranking",
+      "route_attempt_id": "route-02-ranking",
+      "handling_policy": "cancel-and-supersede",
+      "boundary": "mailbox-checkpoint-boundary",
+      "fresh_read_grant_id": "grant-ranking",
+      "stale_context_coordinates": [
+        "appointment/appointment-100",
+        "projection/diary-week"
+      ],
+      "outcome": "superseded-awaiting-fresh-read",
+      "command_authority": false,
+      "supersession": {
+        "node_id": "ranking-v2",
+        "instance": "ranking",
+        "attempt": 2,
+        "practice_id": "practice-synth-a",
+        "principal_id": "principal-reception",
+        "container_generation": 2,
+        "policy_revision": 2,
+        "superseded_from": "ranking-v1",
+        "checkpoint_id": "checkpoint-ranking-1",
+        "notice_delivery_id": "delivery-event-reschedule-001-lease-ranking-v1",
+        "fresh_read_grant_id": "grant-ranking",
+        "state": "awaiting-fresh-read"
+      },
+      "stale_completion": {
+        "node_id": "ranking-v1",
+        "container_generation": 1,
+        "disposition": "rejected-stale-generation"
+      }
+    }
+  ],
+  "evidence": [
+    "docs/ariadne-synaptic-event-router-protocol-plan.md",
+    "docs/security/ariadne-synaptic-event-router-threat-model-delta.md"
+  ]
+}

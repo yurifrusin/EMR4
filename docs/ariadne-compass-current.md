@@ -97,17 +97,17 @@ Prerequisites:
 - Evidence that the Compass improves orientation and that a dry-run plan compiler reduces coordination cost without hiding decisions.
 - A separate authority design for capabilities, retries, audit, failure escalation and protected integration.
 
-### Ariadne Synaptic Event Router — candidate
+### Ariadne Synaptic Event Router runtime adapter — candidate
 
-Should a future per-practice operational DAG receive bounded steering notices when committed domain events intersect the declared scopes of live nodes?
+Should the accepted non-executing Synaptic Event Router protocol connect to only the existing default-off local appointment-reschedule feed?
 
-A deterministic scope router could keep several isolated workers aligned with changing practice truth without sending every value through the orchestrator or giving an event command authority.
+The protocol now proves deterministic scope intersection, mailbox steering, replay suppression and supersession. A real adapter would be the smallest runtime test, but it would newly open authentication, persistence, delivery, failure and retention risks.
 
 Prerequisites:
 
-- A fresh Yuri decision on a frozen non-executing protocol tranche before any operational event or container adapter.
-- A separate operational-DAG schema, minimal live scope leases, bilateral routing policy, fresh-read reconciliation and privacy-safe replay evidence.
-- Strict separation from the development Continuity graph and preservation of the existing default-off local reschedule exception.
+- The accepted repository-local protocol proof remains the frozen source for scope leases, bilateral routing, fresh-read reconciliation, replay and supersession.
+- A fresh Yuri decision naming the exact existing local feed adapter and a runtime threat model before any connection or persistent mailbox.
+- Explicit authentication, durable deduplication, persistence, failure, dead-letter and retention decisions while preserving separation from the development Continuity graph.
 
 ## Decisions that remain Yuri's
 
@@ -115,15 +115,15 @@ Prerequisites:
   Required before: Any new Reception One implementation or external design-model dispatch.
 - **Should Ariadne progress from a read-only Compass to a dry-run Plan Compiler and later a capability-brokered executor?**
   Required before: Any automatic hook, LLM Conductor call, worker dispatch, worktree action, PR action or protected-ref operation by Ariadne software.
-- **Should Ariadne begin a non-executing Synaptic Event Router tranche that models live node scopes, deterministic event intersection and bounded conversation-style steering?**
-  Required before: Any operational-DAG scope registry, database/event-feed connection, node mailbox delivery, listener, broker, background worker or event-driven reconciliation beyond the existing bounded Reception One exception.
+- **Should the accepted Synaptic Event Router protocol connect to the existing default-off local appointment-reschedule feed?**
+  Required before: Any operational-DAG scope registry, database/event-feed connection, persistent node mailbox, listener, broker, retry worker or event-driven reconciliation beyond the existing bounded Reception One exception.
 
 ## Map limits
 
 - The canonical continuity graph currently maps the active Reception One lineage and Ariadne tooling, not every EMR4 phase or historical sprint.
 - The master implementation plan is a strategic blueprint; phase labels do not prove implementation or readiness.
 - Accepted Reception One evidence is local and authored-synthetic unless its source says otherwise; it is not production, release or representative-staff evidence.
-- A future per-practice operational DAG must remain separate from the development Continuity graph; this candidate records no patient, practice or live-node state.
+- The accepted Synaptic Event Router proof is repository-local authored-synthetic protocol evidence only; a future per-practice operational DAG must remain separate from the development Continuity graph.
 - The decision horizon records candidates and gates. It neither recommends a winner nor grants authority.
 
 ## Evidence index
@@ -132,6 +132,8 @@ Prerequisites:
 - `docs/ariadne-continuity-engine-increment1-closeout.md`
 - `docs/ariadne-sandbox-dag-protocol-design.md`
 - `docs/ariadne-synaptic-event-router-candidate-plan.md`
+- `docs/ariadne-synaptic-event-router-protocol-closeout.md`
+- `docs/ariadne-synaptic-event-router-protocol-plan.md`
 - `docs/bernie-conversational-diary-north-star.md`
 - `docs/bernie-current-strategic-transition-review.md`
 - `docs/bernie-fluid-meta-grid-concept-closeout.md`
@@ -146,6 +148,7 @@ Prerequisites:
 - `docs/bernie-reception-one-focused-review-context.md`
 - `docs/bernie-stage1-provider-free-supervised-booking-acceptance-plan.md`
 - `implementation_plan.md`
+- `orchestration/agent_inbox/codex/ariadne-synaptic-event-router-protocol-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/bernie-functional-meta-grid-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/bernie-meta-grid-live-local-integration-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/bernie-stage1-tranche-d-sol-acceptance.md`
@@ -153,4 +156,4 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/reception-one-combined-scope-proof-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-committed-event-vertical-sol-acceptance.md`
 
-_Compass map revision 5; continuity graph revision 17._
+_Compass map revision 6; continuity graph revision 18._

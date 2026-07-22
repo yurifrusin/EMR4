@@ -1,0 +1,51 @@
+{
+  "closed_connections": [
+    "api-change",
+    "appointment-write",
+    "autonomous-action",
+    "container-runtime",
+    "database-connectivity",
+    "deployment",
+    "event-feed-connectivity",
+    "historical-diary",
+    "model-provider",
+    "pii",
+    "product-api",
+    "production",
+    "protected-evidence",
+    "release",
+    "stage-3b"
+  ],
+  "delivery_count": 2,
+  "evidence_label": "authored_synthetic_repository_local_non_executing",
+  "manifest_sha256": "sha256:30d5e2c3e88b67fac94b832aed8ffc8089522f0ebb942f574d04dec772c1532b",
+  "proofs": {
+    "cross_practice_suppressed": true,
+    "exact_match": true,
+    "fan_out": true,
+    "fresh_read_grants_non_executing": true,
+    "manifests_default_deny_and_non_executing": true,
+    "replay_suppressed": true,
+    "stale_generation_suppressed": true,
+    "supersession_rejects_stale_completion": true,
+    "typed_exchange_grammar_preserved": true
+  },
+  "result": "ariadne_synaptic_event_router_protocol_pass",
+  "route_attempt_count": 11,
+  "schema_version": "ariadne.synaptic_event_router_evidence.v1",
+  "source_protocol_id": "ariadne-synaptic-event-router-proof",
+  "source_revision": 1,
+  "source_sha256": "sha256:6f50e58a4af1e064cd2b3cf15472fde895ed74eea4016802a1dd29140ed22a2b",
+  "suppression_count": 9,
+  "suppression_reasons": [
+    "aggregate-revision-not-newer",
+    "event-type-or-version-not-declared",
+    "lease-expired",
+    "lease-sensitivity-denied",
+    "lease-superseded",
+    "practice-boundary-mismatch",
+    "replay-duplicate-coordinate",
+    "scope-no-intersection-aggregate",
+    "steering-frame-not-bilateral"
+  ]
+}

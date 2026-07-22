@@ -1,0 +1,74 @@
+{
+  "authority": {
+    "authorized_openings": [],
+    "notes": [
+      "Yuri authorised the repository-local authored-synthetic non-executing Synaptic Event Router protocol tranche on 2026-07-22.",
+      "Scope leases, route decisions, mailbox notices, fresh-read grants, supersession and compiled manifests are inert protocol data. The tool cannot connect to PostgreSQL, the event feed, product APIs, models, containers, live mailboxes or commands."
+    ]
+  },
+  "claim_scope": [
+    "Repository-local authored-synthetic protocol validation, deterministic route projection, trace rendering and dry-run manifest compilation only.",
+    "The proof extends the accepted Sandbox DAG typed-exchange grammar while preserving immutable policy, forward-only attempts and terminal human authority."
+  ],
+  "contract_evidence": [],
+  "coordinates": {
+    "git_ref": "codex/ariadne-synaptic-event-router-protocol",
+    "source_head": "af0f6d740363d20402339668f420360bbb4469b6",
+    "thread_id": null,
+    "worktree_role": "task"
+  },
+  "created_at": "2026-07-22T04:30:00Z",
+  "decisions": [
+    {
+      "id": "synaptic-event-router-protocol-scope-frozen",
+      "source": "docs/ariadne-synaptic-event-router-protocol-plan.md",
+      "status": "accepted",
+      "summary": "Prove deterministic event-to-scope steering, mailbox boundaries, fresh-read grants, supersession and dry-run policy manifests without attaching a runtime."
+    },
+    {
+      "id": "synaptic-event-router-protocol-accepted",
+      "source": "orchestration/agent_inbox/codex/ariadne-synaptic-event-router-protocol-sol-acceptance.md",
+      "status": "accepted",
+      "summary": "Accept the non-executing protocol proof with exact bilateral exchange policy, default-deny routing and no database, feed, product, model, container or command connection."
+    }
+  ],
+  "evidence": {
+    "acceptances": [
+      "orchestration/agent_inbox/codex/ariadne-synaptic-event-router-protocol-sol-acceptance.md"
+    ],
+    "closeouts": [
+      "docs/ariadne-synaptic-event-router-protocol-closeout.md",
+      "docs/ariadne-synaptic-event-router-protocol-design.md",
+      "orchestration/continuity/ariadne-synaptic-event-router-dry-run-manifests.json",
+      "orchestration/continuity/ariadne-synaptic-event-router-evidence.json"
+    ],
+    "findings": [
+      "docs/security/ariadne-synaptic-event-router-threat-model-delta.md"
+    ],
+    "plans": [
+      "docs/ariadne-synaptic-event-router-protocol-plan.md"
+    ],
+    "receipts": [
+      "orchestration/agent_inbox/codex/ariadne-synaptic-event-router-protocol-preacceptance-receipt.json",
+      "orchestration/agent_inbox/codex/ariadne-synaptic-event-router-protocol-rehydration-receipt.json"
+    ],
+    "tests": [
+      "tests/test_ariadne_synaptic_event_router.py"
+    ]
+  },
+  "id": "ariadne-synaptic-event-router-protocol",
+  "kind": "exploration",
+  "relationships": [
+    {
+      "node_id": "ariadne-sandbox-dag-fork",
+      "relation": "builds_on"
+    }
+  ],
+  "status": "accepted",
+  "title": "Ariadne Synaptic Event Router protocol",
+  "unresolved_gates": [
+    "PostgreSQL, event-feed adapters, product APIs, operational persistence, live mailbox delivery, models, containers and commands require a fresh Yuri decision.",
+    "Additional event families, PII, Stage 3B, production, deployment, release and autonomous action remain separately closed."
+  ],
+  "updated_at": "2026-07-22T04:30:00Z"
+}
