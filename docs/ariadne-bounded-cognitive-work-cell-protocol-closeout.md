@@ -116,6 +116,12 @@ payload smuggling, manifest execution and evidence overclaim.
 - Ruff and Python compilation: passed; and
 - JSON parsing and `git diff --check`: passed.
 
+The draft PR's first CodeQL pass identified one high-severity diagnostic-echo
+path and one unused local assignment. The approved bounded repair removed the
+dead assignment and changed the public trace from per-document identifiers and
+rejection details to fixed verdict labels plus aggregate edge/repair counts.
+The repaired focused/combined populations and GitHub CodeQL checks pass.
+
 The two warnings are existing Starlette and Google GenAI dependency
 deprecations and are unrelated to this tranche.
 

@@ -465,7 +465,6 @@ def _verify_single(
                 if grounding_errors:
                     verdict = "retryable_grounding_reject"
                     reasons = sorted(set(grounding_errors))
-                    repair_rules = []
                     released_frame = copy.deepcopy(draft)
                 else:
                     if repair_rules:
@@ -1217,6 +1216,15 @@ def build_evidence(document: dict[str, Any], *, repo_root: Path) -> dict[str, An
 
 def render_markdown(document: dict[str, Any], *, repo_root: Path) -> str:
     verification = build_verification(document, repo_root=repo_root)
+    frame_results = [
+        frame
+        for case in verification["case_results"]
+        for frame in case["frame_results"]
+    ]
+    verdict_counts = {
+        verdict: sum(frame["verdict"] == verdict for frame in frame_results)
+        for verdict in sorted(REQUIRED_VERDICTS)
+    }
     lines = [
         "# Ariadne Bounded Cognitive Work Cell - Authored-Synthetic Trace",
         "",
@@ -1226,30 +1234,25 @@ def render_markdown(document: dict[str, Any], *, repo_root: Path) -> str:
         "The deterministic proofreader releases, repairs, retries, supersedes or",
         "aborts edges under frozen policy; it starts no runtime and issues no command.",
         "",
-        "## Verification decisions",
+        "## Verification summary",
         "",
-        "| Case | Draft | Verdict | Disposition | Reasons |",
-        "|---|---|---|---|---|",
+        "The public trace exposes only fixed protocol labels and aggregate counts.",
+        "Source-document identifiers, payload values and rejection details are not echoed.",
+        "",
     ]
-    for case in verification["case_results"]:
-        for frame in case["frame_results"]:
-            lines.append(
-                f"| {case['case_id']} | {frame['draft_id']} | {frame['verdict']} | "
-                f"{frame['disposition']} | {', '.join(frame['reason_codes'])} |"
-            )
+    for verdict, count in verdict_counts.items():
+        lines.append(f"- `{verdict}`: **{count}**")
     lines.extend(
         [
             "",
             "## Repair evidence",
             "",
+            f"Verified edge count: **{len(verification['released_edges'])}**",
+            f"Canonical repair receipt count: **{len(verification['repair_receipts'])}**",
+            "Original drafts remain immutable; repairs are limited to duplicate",
+            "removal and stable sorting of opaque references.",
         ]
     )
-    for receipt in verification["repair_receipts"]:
-        lines.append(
-            f"- `{receipt['source_draft_id']}` remains immutable; "
-            f"`{receipt['repaired_frame_id']}` applies "
-            f"{', '.join(receipt['repair_rules'])}."
-        )
     lines.extend(
         [
             "",

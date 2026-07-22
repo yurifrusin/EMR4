@@ -43,13 +43,15 @@
       "orchestration/continuity/ariadne-bounded-cognitive-work-cell-evidence.json"
     ],
     "findings": [
-      "docs/security/ariadne-bounded-cognitive-work-cell-threat-model-delta.md"
+      "docs/security/ariadne-bounded-cognitive-work-cell-threat-model-delta.md",
+      "orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-codeql-repair.md"
     ],
     "plans": [
       "docs/ariadne-bounded-cognitive-work-cell-protocol-plan.md"
     ],
     "receipts": [
       "orchestration/agent_inbox/codex/ariadne-agent-node-granularity-architecture-review-rehydration-receipt.json",
+      "orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-codeql-repair-precommit-receipt.json",
       "orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-postcompaction-receipt.json",
       "orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-preacceptance-receipt.json",
       "orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-precommit-receipt.json",

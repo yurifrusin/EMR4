@@ -53,6 +53,7 @@ repaired derived frame may reach a declared downstream or human-gate edge.
 | Advisory-to-authority flow | Unverifiable explanation feeds a calculation or command | Advisory authority class routes only to a human surface and is excluded from authoritative ports |
 | Sensitive-context aggregation | A coarse work cell accumulates contexts with different purposes | Split triggers require a new node at practice, principal, sensitivity, purpose or authority changes |
 | Output smuggling | Undeclared properties carry secrets, prompts, content or connection details | Exact per-port payload allowlists plus recursive forbidden-key/value inspection fail closed |
+| Diagnostic echo | A caller supplies an arbitrary document whose identifiers or rejection values reach terminal logs | Public trace output contains fixed protocol labels and aggregate counts only; document identifiers, values and rejection details are not emitted |
 | Manifest execution | A dry-run declaration is interpreted as runnable configuration | Source hash, `dry_run: true`, `execution_enabled: false`, no adapter/endpoint/image/command and static tests |
 | Evidence overclaim | Synthetic proof is described as live model/container/product behavior | Exact evidence label and explicit closed-connection inventory are required |
 

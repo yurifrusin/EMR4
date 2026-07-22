@@ -227,6 +227,12 @@ bounded retry and repeated-failure edge abortion, inert fresh-read
 supersession, stale-completion rejection, all-or-none UX/human output and a
 verified but non-command human gate.
 
+The first draft-PR CodeQL aggregate check then caught a document-derived trace
+echo path and one unused assignment. Yuri approved the contained repair: the
+public trace now exposes fixed verdict labels and aggregate counts only, while
+caller-selected identifiers, values and rejection details remain internal.
+The repaired security and regression gates pass.
+
 Twenty focused and 126 combined tests pass with Sandbox DAG, Event Router, API
 Spine, Continuity, Compass, Ruff, compilation, JSON and whitespace gates. No
 external worker, subagent or model reviewer was used because the semantics are

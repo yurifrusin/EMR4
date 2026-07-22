@@ -33,6 +33,12 @@ tests and the 126-test combined acceptance population pass serially. Draft
 2020-12 schema, semantic validation, exact generated artifacts, API Spine
 compatibility, Ruff, compilation, JSON and whitespace gates pass.
 
+The initial draft-PR CodeQL gate found that the public trace could echo
+document-derived labels/details and noted one unused local assignment. Yuri
+approved the contained recovery. The final trace emits only fixed protocol
+labels and aggregate counts, the dead assignment is removed, adversarial label
+non-echo is tested, and the repaired CodeQL gate passes.
+
 ## Boundary finding
 
 There is no PostgreSQL, event-feed, product API, GraphQL, REST/OpenAPI, model,

@@ -496,10 +496,24 @@ def test_markdown_trace_is_deterministic_plain_language_and_non_executing() -> N
     first = work_cell.render_markdown(document, repo_root=REPO_ROOT)
     second = work_cell.render_markdown(document, repo_root=REPO_ROOT)
 
+    labelled = load_document()
+    labelled["protocol_id"] = "private-marker"
+    labelled["workflow_id"] = "private-workflow"
+    labelled["title"] = "Confidential marker"
+    minimised = work_cell.render_markdown(labelled, repo_root=REPO_ROOT)
+
     assert first == second
     assert "Execution enabled: **no**" in first
-    assert "case-primary-multi-output" in first
+    assert "Source-document identifiers, payload values and rejection details" in first
+    assert "Verified edge count: **8**" in first
+    assert "Canonical repair receipt count: **2**" in first
+    assert "pass_to_downstream" in first
     assert "pass_with_repair_to_human_gate" in first
-    assert "fresh-read-and-supersede" in first
-    assert "abort-edge" in first
+    assert "stale_context_reject" in first
+    assert "authority_reject" in first
+    assert "case-primary-multi-output" not in first
+    assert "slot-unknown" not in first
+    assert "private-marker" not in minimised
+    assert "private-workflow" not in minimised
+    assert "Confidential marker" not in minimised
     assert "can confirm, write, call\na product surface" in first

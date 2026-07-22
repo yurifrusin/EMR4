@@ -208,6 +208,10 @@ The manifests are byte-deterministic, default-deny and explicitly set
 `adapters_configured: false` and `execution_enabled: false`. They contain no
 endpoint, DSN, topic, image, credential or command.
 
+The public Markdown trace follows the same minimisation rule. It emits only
+fixed verdict labels and aggregate edge/repair counts; source-document
+identifiers, payload values and rejection details are never echoed to stdout.
+
 ## API Spine result
 
 Boundary classification:
