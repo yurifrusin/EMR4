@@ -1,0 +1,81 @@
+{
+  "authority": {
+    "authorized_openings": [],
+    "notes": [
+      "Yuri authorised the repository-local authored-synthetic non-executing Bounded Cognitive Work Cell and Proofreader Gate protocol tranche on 2026-07-23.",
+      "Agent eligibility, typed drafts, proofreader verdicts, safe repair, retries, supersession, human gates and compiled manifests are inert protocol data. The tranche cannot connect to PostgreSQL, event feeds, product APIs, models, providers, real containers, live mailboxes or commands."
+    ]
+  },
+  "claim_scope": [
+    "Repository-local authored-synthetic protocol validation, deterministic egress proof, trace rendering and dry-run manifest compilation only.",
+    "The proof formalises coarse cognition under fine-grained typed egress authority while preserving the accepted Sandbox DAG and Synaptic Event Router results."
+  ],
+  "contract_evidence": [],
+  "coordinates": {
+    "git_ref": "codex/ariadne-bounded-cognitive-work-cell-protocol",
+    "source_head": "df7f902f37926358c9f68b64af10697629202718",
+    "thread_id": null,
+    "worktree_role": "task"
+  },
+  "created_at": "2026-07-22T15:55:00Z",
+  "decisions": [
+    {
+      "id": "bounded-cognitive-work-cell-protocol-scope-frozen",
+      "source": "docs/ariadne-bounded-cognitive-work-cell-protocol-plan.md",
+      "status": "accepted",
+      "summary": "Prove node granularity, one multi-output bounded work cell, deterministic egress verification and safe repair, bounded retry, supersession, human routing, edge abortion and dry-run manifests without attaching a runtime."
+    },
+    {
+      "id": "bounded-cognitive-work-cell-protocol-accepted",
+      "source": "orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-sol-acceptance.md",
+      "status": "accepted",
+      "summary": "Accept the non-executing protocol proof with coarse cognition, fine typed authority, all-or-none verified egress and no database, feed, product, model, container, mailbox or command connection."
+    }
+  ],
+  "evidence": {
+    "acceptances": [
+      "orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-sol-acceptance.md"
+    ],
+    "closeouts": [
+      "docs/ariadne-bounded-cognitive-work-cell-protocol-closeout.md",
+      "docs/ariadne-bounded-cognitive-work-cell-protocol-design.md",
+      "orchestration/continuity/ariadne-bounded-cognitive-work-cell-dry-run-manifests.json",
+      "orchestration/continuity/ariadne-bounded-cognitive-work-cell-evidence.json"
+    ],
+    "findings": [
+      "docs/security/ariadne-bounded-cognitive-work-cell-threat-model-delta.md"
+    ],
+    "plans": [
+      "docs/ariadne-bounded-cognitive-work-cell-protocol-plan.md"
+    ],
+    "receipts": [
+      "orchestration/agent_inbox/codex/ariadne-agent-node-granularity-architecture-review-rehydration-receipt.json",
+      "orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-postcompaction-receipt.json",
+      "orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-preacceptance-receipt.json",
+      "orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-precommit-receipt.json",
+      "orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-rehydration-receipt.json"
+    ],
+    "tests": [
+      "tests/test_ariadne_bounded_cognitive_work_cell.py"
+    ]
+  },
+  "id": "ariadne-bounded-cognitive-work-cell-protocol",
+  "kind": "exploration",
+  "relationships": [
+    {
+      "node_id": "ariadne-sandbox-dag-fork",
+      "relation": "builds_on"
+    },
+    {
+      "node_id": "ariadne-synaptic-event-router-protocol",
+      "relation": "builds_on"
+    }
+  ],
+  "status": "accepted",
+  "title": "Ariadne Bounded Cognitive Work Cell and Proofreader Gate protocol",
+  "unresolved_gates": [
+    "Models, providers, real containers, PostgreSQL, event-feed or product adapters, live context reads, persistent mailboxes and commands require a fresh Yuri decision.",
+    "PII, protected/historical evidence, human-gate UI, Stage 3B, production, deployment, release and autonomous action remain separately closed."
+  ],
+  "updated_at": "2026-07-22T15:55:00Z"
+}

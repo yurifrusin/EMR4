@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "sprint_planning",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_ariadne_bounded_cognitive_work_cell_protocol_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is selected; the schema, verifier state machine, traces and negative tests are tightly coupled architecture work retained by Sol under the worker-lane economy rule."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Yuri explicitly closed model and provider connections for this tranche."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external model review is authorised or claimed; acceptance will be deterministic local Sol evidence."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "On 2026-07-23 Yuri authorised the bounded repository-local non-executing Ariadne Bounded Cognitive Work Cell and Proofreader Gate protocol tranche using authored-synthetic data only.",
+        "Authority includes node granularity, multi-output agent work cells, deterministic egress verification and safe repair, bounded retry, fresh-read supersession, human-gate routing, edge abortion and dry-run policy manifests.",
+        "The accepted Sandbox DAG and Synaptic Event Router designs and closeouts, API Spine ADR/programme, Access AI design, Bernie release gates, agent charter, async contracts and artifact tests were reread before planning.",
+        "The integration worktree is C:/Users/sarashera/emr4 on master at df7f902f37926358c9f68b64af10697629202718; master, handoff/current and both origin refs are aligned.",
+        "Four unrelated pre-existing Bernie receipt/runtime-state files are preserved and excluded; two Sol-authored architecture-review rehydration artifacts are adopted only as context evidence.",
+        "No PostgreSQL, event feed, product API, GraphQL, REST/OpenAPI, product module, model, provider, real container, live mailbox, command adapter, browser, server or external worker is authorised.",
+        "Protected holdouts v1-v10 and historical Diary material remain sealed and were not opened, enumerated, searched or used."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

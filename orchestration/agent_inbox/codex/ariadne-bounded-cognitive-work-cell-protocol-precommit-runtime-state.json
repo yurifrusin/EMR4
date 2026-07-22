@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "extra_high_ariadne_bounded_cognitive_work_cell_protocol_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker was dispatched; Sol owns the complete staged candidate."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external planning, implementation or review model was used."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external veto was requested because Yuri explicitly closed model/provider connections; the acceptance makes no independent-review claim."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The final 20-test focused and 126-test combined populations pass after Continuity graph revision 19, Compass revision 7 and handover updates.",
+        "Protocol, node-record equality, Continuity, Compass, API Spine, Ruff, compilation, JSON and whitespace gates pass.",
+        "The intended scope contains only the Bounded Cognitive Work Cell protocol tranche, its preceding Sol architecture receipt and mechanical continuity/handover descendants on codex/ariadne-bounded-cognitive-work-cell-protocol.",
+        "Four unrelated pre-existing Bernie receipt/runtime-state files remain unstaged and preserved.",
+        "The exact result is ariadne_bounded_cognitive_work_cell_protocol_pass with seven nodes, five typed output ports, ten verifier cases, eight verified edges and two allowlisted repair receipts.",
+        "No database, event feed, product API, model, provider, real container, live mailbox, command, PII, protected/historical, Stage 3B, production, deployment or release surface changed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent contributed changes."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

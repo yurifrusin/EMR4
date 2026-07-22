@@ -59,6 +59,7 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     assert {item["status"] for item in report["decision_horizon"]} == {"candidate"}
     support_ids = {item["id"] for item in report["programme_support_horizon"]}
     assert "ariadne-synaptic-event-router" in support_ids
+    assert "ariadne-scripted-work-cell-rehearsal" in support_ids
     router = next(
         item
         for item in report["programme_support_horizon"]
@@ -69,6 +70,20 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     assert "existing default-off local" in router["strategic_question"]
     assert any(
         decision["id"] == "authorize-synaptic-event-router-runtime-adapter"
+        for decision in report["user_owned_decisions"]
+    )
+    rehearsal = next(
+        item
+        for item in report["programme_support_horizon"]
+        if item["id"] == "ariadne-scripted-work-cell-rehearsal"
+    )
+    assert rehearsal["status"] == "candidate"
+    assert rehearsal["boundary_changes"] == []
+    assert "no model, real container or product connection" in rehearsal[
+        "strategic_question"
+    ]
+    assert any(
+        decision["id"] == "authorize-scripted-work-cell-rehearsal"
         for decision in report["user_owned_decisions"]
     )
     assert report["user_owned_decisions"]

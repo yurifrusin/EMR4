@@ -109,6 +109,18 @@ Prerequisites:
 - A fresh Yuri decision naming the exact existing local feed adapter and a runtime threat model before any connection or persistent mailbox.
 - Explicit authentication, durable deduplication, persistence, failure, dead-letter and retention decisions while preserving separation from the development Continuity graph.
 
+### Ariadne scripted cognitive work-cell rehearsal — candidate
+
+Should the accepted work-cell and proofreader protocol be exercised by an in-memory scripted synthetic rehearsal with no model, real container or product connection?
+
+The protocol now proves the static type, authority and transition grammar. A scripted rehearsal could test multi-attempt control-plane behaviour before deciding whether any adaptive agent or runtime isolation surface is justified.
+
+Prerequisites:
+
+- The accepted Bounded Cognitive Work Cell and Proofreader Gate protocol remains the frozen source for ports, verdicts, repair, retry, supersession, atomic release and human routing.
+- A fresh Yuri decision limiting the rehearsal to pre-authored synthetic input and draft scripts held in memory.
+- No model, provider, real container, database, event feed, product API, live mailbox, persistence, human-gate UI or command adapter.
+
 ## Decisions that remain Yuri's
 
 - **Should the next Reception One tranche pursue visual/interaction synthesis, another exact event family, or pause product expansion?**
@@ -117,6 +129,8 @@ Prerequisites:
   Required before: Any automatic hook, LLM Conductor call, worker dispatch, worktree action, PR action or protected-ref operation by Ariadne software.
 - **Should the accepted Synaptic Event Router protocol connect to the existing default-off local appointment-reschedule feed?**
   Required before: Any operational-DAG scope registry, database/event-feed connection, persistent node mailbox, listener, broker, retry worker or event-driven reconciliation beyond the existing bounded Reception One exception.
+- **Should Ariadne run an in-memory scripted authored-synthetic rehearsal of the accepted cognitive work-cell and proofreader transition grammar?**
+  Required before: Any fake or scripted agent executor, attempt scheduler, active retry/supersession loop or programmatic human-gate simulation beyond static protocol verification.
 
 ## Map limits
 
@@ -124,10 +138,14 @@ Prerequisites:
 - The master implementation plan is a strategic blueprint; phase labels do not prove implementation or readiness.
 - Accepted Reception One evidence is local and authored-synthetic unless its source says otherwise; it is not production, release or representative-staff evidence.
 - The accepted Synaptic Event Router proof is repository-local authored-synthetic protocol evidence only; a future per-practice operational DAG must remain separate from the development Continuity graph.
+- The accepted Bounded Cognitive Work Cell proof describes an unoccupied agent-eligible node and deterministic egress gate; it is not evidence of model, container or product-runtime behaviour.
 - The decision horizon records candidates and gates. It neither recommends a winner nor grants authority.
 
 ## Evidence index
 
+- `docs/ariadne-bounded-cognitive-work-cell-protocol-closeout.md`
+- `docs/ariadne-bounded-cognitive-work-cell-protocol-design.md`
+- `docs/ariadne-bounded-cognitive-work-cell-protocol-plan.md`
 - `docs/ariadne-compass-increment2-plan.md`
 - `docs/ariadne-continuity-engine-increment1-closeout.md`
 - `docs/ariadne-sandbox-dag-protocol-design.md`
@@ -148,6 +166,7 @@ Prerequisites:
 - `docs/bernie-reception-one-focused-review-context.md`
 - `docs/bernie-stage1-provider-free-supervised-booking-acceptance-plan.md`
 - `implementation_plan.md`
+- `orchestration/agent_inbox/codex/ariadne-bounded-cognitive-work-cell-protocol-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-synaptic-event-router-protocol-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/bernie-functional-meta-grid-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/bernie-meta-grid-live-local-integration-sol-acceptance.md`
@@ -156,4 +175,4 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/reception-one-combined-scope-proof-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-committed-event-vertical-sol-acceptance.md`
 
-_Compass map revision 6; continuity graph revision 18._
+_Compass map revision 7; continuity graph revision 19._
