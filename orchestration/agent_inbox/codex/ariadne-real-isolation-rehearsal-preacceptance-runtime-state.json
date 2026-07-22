@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_ariadne_real_isolation_rehearsal_preacceptance_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No worker was selected; the plan, image provenance, effective isolation inspection, single run and cleanup remained one Sol-owned surface."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external model or provider was selected or called."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external model review was selected or claimed."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The fresh Yuri authority, five-source rehydration, accepted predecessor, frozen real-isolation plan/design/threat delta and repository/API Spine boundaries remain current.",
+        "One official digest-pinned linux/amd64 image was acquired, one derived local image was built from 14 allowlisted authored-synthetic sources and one fixed container was run.",
+        "Pre-start inspection proved network none, read-only root, UID/GID 65532, all capabilities dropped, no-new-privileges, no mounts, no secrets, no ports and exact memory/CPU/PID/nofile limits.",
+        "The payload observed loopback only, EROFS with no write residue and byte-identical accepted 8-scenario/53-transition evidence; exit code was zero with no OOM or engine error.",
+        "The container, derived image, run-acquired base reference and temporary context were explicitly removed and independently rechecked absent.",
+        "Four unrelated pre-existing Bernie receipt/runtime-state files remain preserved and excluded."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

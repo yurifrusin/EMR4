@@ -113,7 +113,7 @@ def test_continuity_node_is_exact_metadata_only_descendant() -> None:
         if item["id"] == "ariadne-scripted-cognitive-work-cell-rehearsal"
     )
 
-    assert graph["graph_revision"] == 20
+    assert graph["graph_revision"] == 21
     assert graph_node == node
     assert node["relationships"] == [
         {

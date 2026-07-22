@@ -1,0 +1,397 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/ariadne-real-isolation-rehearsal-evidence.schema.json",
+  "title": "Ariadne real-isolation rehearsal evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "evidence_label",
+    "manifest_sha256",
+    "allowlisted_source_count",
+    "allowlisted_sources_sha256",
+    "engine",
+    "image",
+    "effective_policy",
+    "payload",
+    "stopped_state",
+    "closed_connections",
+    "cleanup"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "ariadne.real_isolation_rehearsal_evidence.v1"
+    },
+    "result": {
+      "const": "ariadne_real_isolation_rehearsal_pass"
+    },
+    "evidence_label": {
+      "const": "authored_synthetic_disposable_local_container_isolation_rehearsal"
+    },
+    "manifest_sha256": {
+      "$ref": "#/$defs/digest"
+    },
+    "allowlisted_source_count": {
+      "const": 14
+    },
+    "allowlisted_sources_sha256": {
+      "$ref": "#/$defs/digest"
+    },
+    "engine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "os",
+        "architecture",
+        "version_major_minor"
+      ],
+      "properties": {
+        "os": {
+          "const": "linux"
+        },
+        "architecture": {
+          "const": "amd64"
+        },
+        "version_major_minor": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+$"
+        }
+      }
+    },
+    "image": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "base_reference",
+        "base_index_digest",
+        "platform",
+        "platform_manifest_digest",
+        "source_revision",
+        "registry_provenance_verified",
+        "base_reference_preexisting",
+        "derived_selected_config_sha256"
+      ],
+      "properties": {
+        "base_reference": {
+          "const": "docker.io/library/python@sha256:a190708a2dec1bd18b1decb539f8e8f5407abaa9bf39cacda583f7f8c11db322"
+        },
+        "base_index_digest": {
+          "const": "sha256:a190708a2dec1bd18b1decb539f8e8f5407abaa9bf39cacda583f7f8c11db322"
+        },
+        "platform": {
+          "const": "linux/amd64"
+        },
+        "platform_manifest_digest": {
+          "const": "sha256:9381e50cc82f4279b949fcd2d2f5e57cf97b1da2399eb956502364ceea2f4e83"
+        },
+        "source_revision": {
+          "const": "3362634339580d3232e65a66dd5a36c47ae7ff14"
+        },
+        "registry_provenance_verified": {
+          "const": true
+        },
+        "base_reference_preexisting": {
+          "type": "boolean"
+        },
+        "derived_selected_config_sha256": {
+          "$ref": "#/$defs/digest"
+        }
+      }
+    },
+    "effective_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "inspect_before_start",
+        "selected_config_sha256",
+        "network_mode",
+        "read_only_rootfs",
+        "user",
+        "all_capabilities_dropped",
+        "no_new_privileges",
+        "privileged",
+        "mount_count",
+        "secret_count",
+        "published_port_count",
+        "host_environment_forwarded",
+        "memory_bytes",
+        "memory_swap_bytes",
+        "nano_cpus",
+        "pids_limit",
+        "nofile_soft",
+        "nofile_hard"
+      ],
+      "properties": {
+        "inspect_before_start": {
+          "const": true
+        },
+        "selected_config_sha256": {
+          "$ref": "#/$defs/digest"
+        },
+        "network_mode": {
+          "const": "none"
+        },
+        "read_only_rootfs": {
+          "const": true
+        },
+        "user": {
+          "const": "65532:65532"
+        },
+        "all_capabilities_dropped": {
+          "const": true
+        },
+        "no_new_privileges": {
+          "const": true
+        },
+        "privileged": {
+          "const": false
+        },
+        "mount_count": {
+          "const": 0
+        },
+        "secret_count": {
+          "const": 0
+        },
+        "published_port_count": {
+          "const": 0
+        },
+        "host_environment_forwarded": {
+          "const": false
+        },
+        "memory_bytes": {
+          "const": 134217728
+        },
+        "memory_swap_bytes": {
+          "const": 134217728
+        },
+        "nano_cpus": {
+          "const": 500000000
+        },
+        "pids_limit": {
+          "const": 32
+        },
+        "nofile_soft": {
+          "const": 64
+        },
+        "nofile_hard": {
+          "const": 64
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "status",
+        "result",
+        "evidence_label",
+        "isolation_observation",
+        "allowlisted_source_count",
+        "allowlisted_sources_sha256",
+        "predecessor_projection_sha256",
+        "predecessor_runs_byte_identical",
+        "predecessor_result",
+        "scenario_count",
+        "transition_count",
+        "released_edge_count",
+        "human_gate_delivery_count",
+        "aborted_edge_count",
+        "supersession_count",
+        "adaptive_agent_attached",
+        "external_effects_enabled",
+        "command_authority"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "ariadne.real_isolation_payload.v1"
+        },
+        "status": {
+          "const": "passed"
+        },
+        "result": {
+          "const": "ariadne_real_isolation_payload_pass"
+        },
+        "evidence_label": {
+          "const": "authored_synthetic_disposable_local_container_payload"
+        },
+        "isolation_observation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "uid",
+            "gid",
+            "network_interfaces",
+            "loopback_only",
+            "write_probe_blocked",
+            "write_probe_errno",
+            "write_probe_residue"
+          ],
+          "properties": {
+            "uid": {
+              "const": 65532
+            },
+            "gid": {
+              "const": 65532
+            },
+            "network_interfaces": {
+              "const": [
+                "lo"
+              ]
+            },
+            "loopback_only": {
+              "const": true
+            },
+            "write_probe_blocked": {
+              "const": true
+            },
+            "write_probe_errno": {
+              "const": "EROFS"
+            },
+            "write_probe_residue": {
+              "const": false
+            }
+          }
+        },
+        "allowlisted_source_count": {
+          "const": 14
+        },
+        "allowlisted_sources_sha256": {
+          "$ref": "#/$defs/digest"
+        },
+        "predecessor_projection_sha256": {
+          "$ref": "#/$defs/digest"
+        },
+        "predecessor_runs_byte_identical": {
+          "const": true
+        },
+        "predecessor_result": {
+          "const": "ariadne_scripted_cognitive_work_cell_rehearsal_pass"
+        },
+        "scenario_count": {
+          "const": 8
+        },
+        "transition_count": {
+          "const": 53
+        },
+        "released_edge_count": {
+          "const": 8
+        },
+        "human_gate_delivery_count": {
+          "const": 4
+        },
+        "aborted_edge_count": {
+          "const": 2
+        },
+        "supersession_count": {
+          "const": 1
+        },
+        "adaptive_agent_attached": {
+          "const": false
+        },
+        "external_effects_enabled": {
+          "const": false
+        },
+        "command_authority": {
+          "const": false
+        }
+      }
+    },
+    "stopped_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "running",
+        "paused",
+        "restarting",
+        "oom_killed",
+        "dead",
+        "exit_code",
+        "error_empty"
+      ],
+      "properties": {
+        "status": {
+          "const": "exited"
+        },
+        "running": {
+          "const": false
+        },
+        "paused": {
+          "const": false
+        },
+        "restarting": {
+          "const": false
+        },
+        "oom_killed": {
+          "const": false
+        },
+        "dead": {
+          "const": false
+        },
+        "exit_code": {
+          "const": 0
+        },
+        "error_empty": {
+          "const": true
+        }
+      }
+    },
+    "closed_connections": {
+      "const": [
+        "adaptive-agent",
+        "appointment-command",
+        "database",
+        "event-feed",
+        "human-gate-runtime",
+        "live-mailbox",
+        "model",
+        "network-egress",
+        "persistence",
+        "product-api",
+        "provider",
+        "secret",
+        "writable-input"
+      ]
+    },
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "container_absent",
+        "derived_image_absent",
+        "base_reference_state_preserved",
+        "temporary_context_absent",
+        "daemon_wide_prune_performed",
+        "possible_unreferenced_layer_cache"
+      ],
+      "properties": {
+        "container_absent": {
+          "const": true
+        },
+        "derived_image_absent": {
+          "const": true
+        },
+        "base_reference_state_preserved": {
+          "const": true
+        },
+        "temporary_context_absent": {
+          "const": true
+        },
+        "daemon_wide_prune_performed": {
+          "const": false
+        },
+        "possible_unreferenced_layer_cache": {
+          "const": true
+        }
+      }
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}
