@@ -47,6 +47,7 @@
       "deployment",
       "event-runtime",
       "historical-diary",
+      "model-runtime",
       "production",
       "protected-evidence",
       "provider-call",
@@ -56,9 +57,92 @@
       "voice"
     ]
   },
-  "graph_revision": 21,
+  "graph_revision": 22,
   "harvests": [],
   "nodes": [
+    {
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri authorised the provider-neutral bounded agent-admission design on 2026-07-23.",
+          "The authority permits repository-local authored-synthetic design and deterministic validation only. It opens no model, provider, transport, prompt transmission, container, network, secret, product, mailbox or command runtime."
+        ]
+      },
+      "claim_scope": [
+        "A non-executing admission envelope separates immutable instruction policy from minimal typed evidence and preserves draft-only deterministic proofreader egress.",
+        "Three future topology candidates are risk-catalogued but unselected; model-specific behaviour, token accounting and runtime isolation remain unproved."
+      ],
+      "contract_evidence": [],
+      "coordinates": {
+        "git_ref": "codex/ariadne-bounded-agent-admission-design",
+        "source_head": "a41297a6022eb4f6fdf710e014889ba84320b3a1",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "created_at": "2026-07-23T00:30:00Z",
+      "decisions": [
+        {
+          "id": "bounded-agent-admission-design-scope-frozen",
+          "source": "docs/ariadne-bounded-agent-admission-design-plan.md",
+          "status": "accepted",
+          "summary": "Design an unoccupied provider-neutral cognition adapter with minimal context, fixed model-independent limits, terminal cancellation and proofreader-only draft egress without selecting or invoking a model or transport."
+        },
+        {
+          "id": "bounded-agent-admission-design-accepted",
+          "source": "orchestration/agent_inbox/codex/ariadne-bounded-agent-admission-design-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the structural policy/evidence separation, exact predecessor port inheritance, fifteen deterministic cases and six inert manifests without widening runtime authority."
+        }
+      ],
+      "evidence": {
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-bounded-agent-admission-design-sol-acceptance.md"
+        ],
+        "closeouts": [
+          "docs/ariadne-bounded-agent-admission-design-closeout.md",
+          "docs/ariadne-bounded-agent-admission-design.md",
+          "orchestration/continuity/ariadne-bounded-agent-admission-dry-run-manifests.json",
+          "orchestration/continuity/ariadne-bounded-agent-admission-evidence.json"
+        ],
+        "findings": [
+          "docs/security/ariadne-bounded-agent-admission-threat-model-delta.md"
+        ],
+        "plans": [
+          "docs/ariadne-bounded-agent-admission-design-plan.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-bounded-agent-admission-design-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-bounded-agent-admission-design-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-bounded-agent-admission-design-rehydration-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_bounded_agent_admission.py"
+        ]
+      },
+      "id": "ariadne-bounded-agent-admission-design",
+      "kind": "exploration",
+      "relationships": [
+        {
+          "node_id": "ariadne-bounded-cognitive-work-cell-protocol",
+          "relation": "builds_on"
+        },
+        {
+          "node_id": "ariadne-scripted-cognitive-work-cell-rehearsal",
+          "relation": "builds_on"
+        },
+        {
+          "node_id": "ariadne-real-isolation-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "status": "accepted",
+      "title": "Ariadne Bounded Agent-Admission Design",
+      "unresolved_gates": [
+        "Any topology or model selection, token budget, weights/image use, provider/broker connection, prompt/context transmission or generated draft requires a fresh Yuri decision.",
+        "Product reads, databases, event feeds, live mailboxes, human-gate UI, PII, protected/historical evidence, Stage 3B, production, deployment, release, commands and autonomous action remain separately closed."
+      ],
+      "updated_at": "2026-07-23T00:30:00Z"
+    },
     {
       "authority": {
         "authorized_openings": [],
@@ -1249,5 +1333,5 @@
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-07-22T23:38:10Z"
+  "updated_at": "2026-07-23T00:30:00Z"
 }

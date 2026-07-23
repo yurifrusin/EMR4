@@ -1,0 +1,146 @@
+{
+  "case_results": [
+    {
+      "case_id": "baseline-bounded-design",
+      "decision": "design_valid",
+      "reason_codes": ["bounded-non-executing-design"]
+    },
+    {
+      "case_id": "embedded-policy-bypass-text",
+      "decision": "design_valid",
+      "reason_codes": ["evidence-instruction-treated-as-data", "policy-digest-unchanged"]
+    },
+    {
+      "case_id": "transport-selection",
+      "decision": "reject_transport_selection",
+      "reason_codes": ["transport-selection-not-authorised"]
+    },
+    {
+      "case_id": "guessed-token-budget",
+      "decision": "reject_token_policy",
+      "reason_codes": ["tokenizer-and-model-unselected"]
+    },
+    {
+      "case_id": "network-capability-request",
+      "decision": "reject_capability_expansion",
+      "reason_codes": ["capability-not-authorised"]
+    },
+    {
+      "case_id": "cross-practice-frame",
+      "decision": "reject_scope_mismatch",
+      "reason_codes": ["practice-scope-mismatch"]
+    },
+    {
+      "case_id": "cross-principal-frame",
+      "decision": "reject_scope_mismatch",
+      "reason_codes": ["principal-scope-mismatch"]
+    },
+    {
+      "case_id": "unknown-context-frame",
+      "decision": "reject_context_type",
+      "reason_codes": ["context-frame-type-not-allowlisted"]
+    },
+    {
+      "case_id": "secret-sensitivity",
+      "decision": "reject_context_sensitivity",
+      "reason_codes": ["context-sensitivity-not-allowlisted"]
+    },
+    {
+      "case_id": "stale-availability",
+      "decision": "reject_stale_context",
+      "reason_codes": ["context-frame-not-current"]
+    },
+    {
+      "case_id": "oversized-input",
+      "decision": "reject_input_budget",
+      "reason_codes": ["maximum-input-bytes-exceeded"]
+    },
+    {
+      "case_id": "too-many-output-drafts",
+      "decision": "reject_output_budget",
+      "reason_codes": ["maximum-output-drafts-exceeded"]
+    },
+    {
+      "case_id": "late-after-cancellation",
+      "decision": "reject_cancelled_or_late",
+      "reason_codes": ["attempt-terminal-before-egress"]
+    },
+    {
+      "case_id": "proofreader-bypass",
+      "decision": "reject_egress_bypass",
+      "reason_codes": ["proofreader-is-sole-egress"]
+    },
+    {
+      "case_id": "command-shaped-output",
+      "decision": "reject_output_authority",
+      "reason_codes": ["draft-authority-ceiling-exceeded"]
+    }
+  ],
+  "context_digest": "sha256:72b230474c39e78dcad6c299ec436bd7b2e8893a027e6db4f76cf5e3ecbd641a",
+  "counts": {
+    "case_count": 15,
+    "context_frame_count": 6,
+    "output_port_count": 5,
+    "source_binding_count": 6,
+    "status": "valid",
+    "topology_count": 3
+  },
+  "evidence_label": "authored_synthetic_non_executing_agent_admission_design",
+  "instruction_policy_digest": "sha256:7b44027a2fee27282156df2beba6f15ac0d8fa861c487603401e7f3deb2d479e",
+  "manifest_bundle_sha256": "sha256:ef5bf947462c7addb73f67e6e59441561e691ad978a7800db195300426f8da3a",
+  "protocol_source_sha256": "sha256:22567e04b33d2c724401ba84a8a77a55e58afe913b7fc0c574332e7825fa3abb",
+  "result": "ariadne_bounded_agent_admission_design_pass",
+  "runtime_posture": {
+    "agent_attached": false,
+    "command_executed": false,
+    "container_started": false,
+    "model_selected": false,
+    "network_opened": false,
+    "product_connection_opened": false,
+    "prompt_or_context_transmitted": false,
+    "provider_selected": false,
+    "secret_used": false,
+    "transport_selected": false
+  },
+  "schema_version": "ariadne.bounded_agent_admission_evidence.v1",
+  "source_bindings": [
+    {
+      "path": "docs/ariadne-bounded-cognitive-work-cell-protocol-design.md",
+      "role": "semantic-source",
+      "sha256": "sha256:8c259345cc6334928b342356ecfd66aa9e4c391d2c4bc209509a17a0fb2be278"
+    },
+    {
+      "path": "scripts/ariadne_bounded_cognitive_work_cell.py",
+      "role": "semantic-source",
+      "sha256": "sha256:66d10fe40e40be6c9ff4b4addc97d52befbcbf68a4c1f098b0ef3a11d07d0c47"
+    },
+    {
+      "path": "orchestration/continuity/ariadne-bounded-cognitive-work-cell-example.json",
+      "role": "semantic-source",
+      "sha256": "sha256:f54896d7caeeefa567c69791e7e0356bb6b8fcbbbcc1613119c943d20a6b9a65"
+    },
+    {
+      "path": "orchestration/continuity/ariadne-scripted-cognitive-work-cell-rehearsal-evidence.json",
+      "role": "rehearsal-evidence",
+      "sha256": "sha256:52a6d9c9f2269398db5ae11d314fb574bc452ab9200f6d99b2c7bfafac7234ce"
+    },
+    {
+      "path": "orchestration/continuity/ariadne-real-isolation-rehearsal-evidence.json",
+      "role": "isolation-evidence",
+      "sha256": "sha256:9323af4e47d21bb79468a26988808b67f5862f61d549e470bbf86d4a417f7e61"
+    },
+    {
+      "path": "orchestration/api_spine_adr.md",
+      "role": "api-spine-source",
+      "sha256": "sha256:bf0a83f457da0ca79f497834dfb5ba85b992775056218be89ad3ce9b19794101"
+    }
+  ],
+  "unproved": [
+    "model-behaviour",
+    "model-specific-prompt-injection-resilience",
+    "tokenizer-accounting",
+    "inference-runtime-isolation",
+    "live-context-authorisation",
+    "product-runtime-behaviour"
+  ]
+}

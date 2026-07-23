@@ -482,7 +482,7 @@ def test_continuity_node_is_exact_metadata_only_descendant() -> None:
         item for item in graph["nodes"] if item["id"] == node["id"]
     )
 
-    assert graph["graph_revision"] == 21
+    assert graph["graph_revision"] >= 21
     assert graph_node == node
     assert node["kind"] == "exploration"
     assert node["relationships"] == [

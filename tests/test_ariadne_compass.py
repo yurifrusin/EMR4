@@ -59,7 +59,7 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     assert {item["status"] for item in report["decision_horizon"]} == {"candidate"}
     support_ids = {item["id"] for item in report["programme_support_horizon"]}
     assert "ariadne-synaptic-event-router" in support_ids
-    assert "ariadne-agent-admission-design" in support_ids
+    assert "ariadne-first-generated-draft-rehearsal" in support_ids
     router = next(
         item
         for item in report["programme_support_horizon"]
@@ -75,13 +75,13 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     admission = next(
         item
         for item in report["programme_support_horizon"]
-        if item["id"] == "ariadne-agent-admission-design"
+        if item["id"] == "ariadne-first-generated-draft-rehearsal"
     )
     assert admission["status"] == "candidate"
-    assert admission["boundary_changes"] == []
-    assert "generated cognition" in admission["strategic_question"]
+    assert admission["boundary_changes"] == ["model-runtime"]
+    assert "generated-draft" in admission["strategic_question"]
     assert any(
-        decision["id"] == "authorize-agent-admission-design"
+        decision["id"] == "authorize-first-generated-draft-rehearsal"
         for decision in report["user_owned_decisions"]
     )
     assert report["user_owned_decisions"]

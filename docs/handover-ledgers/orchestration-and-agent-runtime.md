@@ -333,3 +333,47 @@ event feed, product API, live mailbox, human-gate UI, command, PII,
 protected/historical data, Stage 3B, production, deployment, release or
 autonomous-action gate remains open. See
 `docs/ariadne-real-isolation-rehearsal-closeout.md`.
+
+## 2026-07-23 Ariadne bounded agent-admission design
+
+Yuri authorised the provider-neutral design descendant of the accepted work
+cell, scripted rehearsal and one-shot isolation proof. It passes as
+`ariadne_bounded_agent_admission_design_pass` without occupying the cognition
+adapter or selecting a model, provider or transport.
+
+The admission envelope binds six typed, minimal, source-labelled and
+freshness-bound authored-synthetic frames to the exact five accepted draft
+ports. The canonical payload is 660 bytes under finite frame/input/output and
+two-attempt caps. Token accounting remains explicitly unresolved until a model
+and tokenizer are selected. Tool, secret, network, filesystem, process,
+database, event, mailbox, product and command capabilities are empty or false;
+cancellation and supersession are terminal; and every draft must pass through
+the accepted deterministic proofreader.
+
+Fifteen cases treat embedded policy-bypass text as evidence data while
+rejecting transport selection, guessed token authority, capability expansion,
+scope drift, unknown or secret-class frames, stale context, budget overflow,
+late completion, proofreader bypass and command-shaped output. Six source-
+hashed dry-run manifests remain default-deny and non-executing. The three
+catalogued topologies - in-cell local, host-brokered local and remote-provider
+broker - are all unselected and unconfigured.
+
+Forty-two focused and 219 combined tests pass with the real isolation,
+scripted/bounded work-cell, Event Router, Sandbox DAG, Continuity, Compass,
+orchestrator, operating-model, API Spine and handover populations. Draft
+2020-12 schema, semantic validation, artifact equality, Ruff, compilation,
+JSON and whitespace gates pass. Sol retained the tightly coupled authority and
+negative-case design; no worker, subagent or external model reviewer was used
+and no independent-veto claim is made.
+
+The Continuity graph advances to revision 22 and Compass revision 10 replaces
+the consumed design decision with a separately closed first generated-draft
+rehearsal candidate. The seven-step Reception One product journey and current
+product node remain unchanged.
+
+No model selection/call/mount, prompt/context transmission, provider/broker,
+container action, network, secret, generated draft, persistence, PostgreSQL,
+event feed, product API, live mailbox, human-gate UI, command, PII,
+protected/historical data, Stage 3B, production, deployment, release or
+autonomous-action gate opened. See
+`docs/ariadne-bounded-agent-admission-design-closeout.md`.
