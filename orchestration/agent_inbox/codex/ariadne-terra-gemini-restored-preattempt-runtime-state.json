@@ -1,0 +1,49 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "provider_scope_restoration_preattempt",
+  "planned_action": "sequential-terra-then-gemini-work-cell-rehearsal",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_ariadne_two_lane_restored_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "On 2026-07-24 Yuri restored the original sequential Terra-then-Gemini run before either provider authority was consumed.",
+        "Machine-level OPENAI_API_KEY and GEMINI_API_KEY presence checks passed; values were not printed, hashed or recorded.",
+        "The transient Terra-only amendment is superseded before work-cell start, prompt transmission, provider call, cost or ledger consumption.",
+        "Terra remains limited to one gpt-5.6-terra Responses API provider-generating request, followed by verified teardown.",
+        "Gemini remains limited to one gemini-3.5-flash generateContent provider-generating request after Terra teardown.",
+        "Both lanes receive byte-identical provider-neutral authored-synthetic task and schema projections; neither receives tools, repository/product access, a provider credential, fallback, retry or the other lane's output.",
+        "AGENTS.md, current baton and authority allocation, active plan/readiness/restoration/security documents, protected evidence and user decision boundaries, and Git refs/worktree were freshly restored.",
+        "HEAD, master, handoff/current, origin/master and origin/handoff/current remain aligned at 4974075b31035d599e081d68e3b85e04a897baa1.",
+        "The worktree remains on codex/ariadne-terra-gemini-comparative-rehearsal; four unrelated Bernie receipt/runtime-state files remain preserved and excluded.",
+        "PII, protected holdouts, historical Diary material, PostgreSQL, GraphQL, REST/OpenAPI product commands, event feeds, live mailboxes, human-gate actions, production, deployment and autonomous action remain closed."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

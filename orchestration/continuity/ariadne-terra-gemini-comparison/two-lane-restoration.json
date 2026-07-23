@@ -1,0 +1,20 @@
+{
+  "schema_version": "ariadne.two_lane_restoration.v1",
+  "restoration_id": "two-lane-restoration-2026-07-24",
+  "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+  "authority": "yuri-explicit-return-to-both-models",
+  "status": "active_before_consumption",
+  "supersedes": "terra-only-2026-07-24",
+  "run_order": ["terra", "gemini"],
+  "both_credentials_required_before_terra": true,
+  "terra_cleanup_required_before_gemini": true,
+  "maximum_provider_calls": {
+    "terra": 1,
+    "gemini": 1
+  },
+  "retry": false,
+  "fallback": false,
+  "cross_model_input": false,
+  "voting": false,
+  "closed_surfaces_unchanged": true
+}

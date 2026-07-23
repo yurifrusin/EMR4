@@ -1,0 +1,64 @@
+{
+  "schema_version": "ariadne.comparative_failure_analysis.v1",
+  "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+  "result": "ariadne_terra_gemini_comparative_rehearsal_revision_required",
+  "failure_stage": "terra-internal-broker-sealed-request-gate",
+  "terra": {
+    "work_cell_started": true,
+    "authority_consumed": true,
+    "broker_request_received": true,
+    "provider_call_performed": false,
+    "external_prompt_transmitted": false,
+    "provider_usage_or_cost": false,
+    "generated_draft_count": 0,
+    "proofreader_invoked": false
+  },
+  "gemini": {
+    "suppressed_by": "terra-boundary-stop",
+    "authority_consumed": false,
+    "provider_call_performed": false,
+    "external_prompt_transmitted": false,
+    "ledger_state": "available"
+  },
+  "hash_diagnostic": {
+    "shared_task_match": true,
+    "provider_output_schema_match": true,
+    "system_prompt_match": true,
+    "prompt_match": true,
+    "full_output_schema_match": false,
+    "expected_full_output_schema_sha256": "sha256:7efd3644329807462b3efcd3b16552d923a9262b43876432c21698656cde8a6e",
+    "executed_full_output_schema_sha256": "sha256:036e54c1d708255ba6ab68be858074025b71b9a467d9da9540698ac11cbaa5da",
+    "cause": "Windows-text-write-translated-lf-to-crlf-after-expected-byte-hash-was-computed"
+  },
+  "runtime_provenance": {
+    "comparison_evidence_sha256": "sha256:7f879a5e5aca0acd2690652cc70f0351c3b4f83bf2462620be3cd8d8bea8cea4",
+    "executed_runner_reconstructed_sha256": "sha256:fb3c3703fa2f84f9f117fcc1bb39b975f6f52ac4fe2b4f169cccfbd1e3b3b9f5",
+    "broker_image_id": "sha256:b7a47154d4bbd952c866a07ed56f7eeee333ce564d68c538f18d2ae488c02d55",
+    "cell_image_id": "sha256:1cabb506a26d176abc89254f31fc82973738d55415135903c7ddee620de8640d"
+  },
+  "postfailure_source_correction": {
+    "performed": true,
+    "scope": "write-derived-full-schema-as-explicit-utf8-bytes-with-lf",
+    "provider_call_performed": false,
+    "container_started": false,
+    "retry_performed": false,
+    "regression_test": "test_build_context_preserves_every_expected_sealed_hash_byte_for_byte",
+    "all_five_sealed_hashes_match_after_correction": true,
+    "correction_executed_in_live_attempt": false
+  },
+  "cleanup": {
+    "terra_cell_removed": true,
+    "terra_broker_removed": true,
+    "terra_network_removed": true,
+    "terra_image_tags_removed": true,
+    "unused_gemini_image_tags_removed_after_suppression": true,
+    "container_residue_count": 0,
+    "network_residue_count": 0,
+    "comparison_image_tag_residue_count": 0
+  },
+  "raw_prompt_recorded": false,
+  "raw_provider_response_recorded": false,
+  "draft_payload_recorded": false,
+  "provider_secret_recorded": false,
+  "retry_authorised": false
+}

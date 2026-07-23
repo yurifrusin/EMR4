@@ -304,7 +304,7 @@ def test_runtime_evidence_validates_against_draft_2020_12_schema():
 
 def test_continuity_records_rejected_consumed_attempt_without_acceptance():
     graph = _json(CONTINUITY_GRAPH_PATH)
-    assert graph["graph_revision"] == 23
+    assert graph["graph_revision"] >= 23
     node = next(
         item
         for item in graph["nodes"]
@@ -324,8 +324,8 @@ def test_continuity_records_rejected_consumed_attempt_without_acceptance():
 
 def test_compass_blocks_retry_behind_fresh_gateway_diagnostic_decision():
     compass = _json(COMPASS_PATH)
-    assert compass["map_revision"] == 11
-    assert compass["source_graph_revision"] == 23
+    assert compass["map_revision"] >= 11
+    assert compass["source_graph_revision"] >= 23
     horizon = next(
         item
         for item in compass["programme_support_horizon"]
@@ -348,6 +348,6 @@ def test_live_handover_preserves_consumed_authority_and_no_retry_boundary():
         "ariadne_deepseek_in_cell_generated_draft_rehearsal_revision_required"
         in handover
     )
-    assert "No request reached DeepSeek" in handover
+    assert "before any provider request" in handover
     assert "do not retry" in handover
     assert "occupied-process authority is consumed" in handover

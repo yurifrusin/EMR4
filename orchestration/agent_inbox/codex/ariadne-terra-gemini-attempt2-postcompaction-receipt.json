@@ -1,0 +1,55 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "status": "passed",
+  "continuation_event": "post_compaction",
+  "planned_action": "verifier_acceptance",
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md sections 2-3 and Current Baton",
+    "current_authority_allocation": "AGENTS.md section 4 plus Yuri's fresh-attempt instruction",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-deepseek-in-cell-generated-draft-rehearsal-plan.md",
+      "docs/ariadne-deepseek-in-cell-generated-draft-rehearsal-closeout.md",
+      "docs/ariadne-terra-gemini-comparative-rehearsal-plan.md",
+      "docs/ariadne-terra-gemini-comparative-rehearsal-design.md",
+      "docs/security/ariadne-terra-gemini-comparative-rehearsal-threat-model-delta.md",
+      "docs/ariadne-terra-gemini-two-lane-restoration.md",
+      "docs/ariadne-terra-gemini-comparative-rehearsal-attempt2-plan.md",
+      "docs/ariadne-terra-gemini-comparative-rehearsal-attempt2-closeout.md",
+      "orchestration/continuity/ariadne-terra-gemini-comparison/fresh-attempt-002.json",
+      "orchestration/continuity/ariadne-terra-gemini-comparison/attempt-002-preflight-evidence.json",
+      "orchestration/continuity/ariadne-terra-gemini-comparison/attempt-002-comparison-evidence.json",
+      "orchestration/continuity/ariadne-terra-gemini-comparison/attempt-002-failure-analysis.json",
+      "orchestration/agent_inbox/codex/ariadne-terra-gemini-attempt2-sol-review.md"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5-6",
+    "git_refs_and_worktree": {
+      "HEAD": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "unrelated_user_changes_preserved": true
+    }
+  },
+  "attempt": {
+    "runtime_attempt_id": "comparative-runtime-attempt-002",
+    "result": "ariadne_terra_gemini_comparative_rehearsal_attempt2_revision_required",
+    "terra_new_ledger_state": "consumed",
+    "gemini_new_ledger_state": "consumed",
+    "terra_provider_call_count": 1,
+    "gemini_provider_call_count": 1,
+    "retry": false,
+    "fallback": false
+  },
+  "reasons": []
+}

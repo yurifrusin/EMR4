@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "fresh_provider_attempt_preattempt",
+  "planned_action": "comparative-runtime-attempt-002",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_ariadne_attempt2_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Attempt 001 is closed revision_required: Terra process consumed, zero provider calls, Gemini suppressed and unconsumed.",
+        "Yuri explicitly authorised a fresh attempt when ready with no further pause.",
+        "Attempt 002 uses new single-use Terra and Gemini process ledgers; attempt 001 ledgers are not reset or reused.",
+        "The LF/CRLF cause is corrected by explicit UTF-8 byte output and the five-sealed-hash regression passes.",
+        "The same provider-neutral authored-synthetic task, typed output schemas, proofreader, isolation and no-retry/no-fallback boundaries remain frozen.",
+        "Machine-level OPENAI_API_KEY and GEMINI_API_KEY presence passed without recording values.",
+        "HEAD, master, handoff/current, origin/master and origin/handoff/current remain aligned at 4974075b31035d599e081d68e3b85e04a897baa1.",
+        "PII, protected/historical evidence, product APIs, databases, event feeds, mailboxes, commands, production, deployment and autonomous action remain closed."
+      ]
+    }
+  ],
+  "worker_slots": [],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

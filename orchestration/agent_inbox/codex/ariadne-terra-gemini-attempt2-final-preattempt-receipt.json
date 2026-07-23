@@ -1,0 +1,48 @@
+{
+  "schema_version": "ariadne.comparative_final_preattempt_receipt.v2",
+  "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+  "runtime_attempt_id": "comparative-runtime-attempt-002",
+  "as_of": "2026-07-24",
+  "status": "passed",
+  "authority": "yuri-explicit-fresh-two-lane-attempt-after-local-correction",
+  "run_order": ["terra", "gemini"],
+  "credentials": {
+    "OPENAI_API_KEY_machine_present": true,
+    "GEMINI_API_KEY_machine_present": true,
+    "values_recorded": false
+  },
+  "preflight": {
+    "status": "passed",
+    "focused_tests_passed": 18,
+    "provider_call_performed": false,
+    "prompt_transmitted": false,
+    "container_residue_count": 0,
+    "network_residue_count": 0,
+    "terra_attempt2_ledger_state": "available",
+    "gemini_attempt2_ledger_state": "available",
+    "attempt1_terra_ledger_state": "consumed"
+  },
+  "sealed_input": {
+    "shared_task_sha256": "sha256:1a537292ad029fd49ae3d9706120606547c1ddeaa7404b7bdd9047573ea69cc8",
+    "full_output_schema_sha256": "sha256:7efd3644329807462b3efcd3b16552d923a9262b43876432c21698656cde8a6e",
+    "provider_output_schema_sha256": "sha256:12eadca2cca9798f386b796e1740fd3468030c97e54f5883061f6fcea979c65d",
+    "system_prompt_sha256": "sha256:876a1ef5bd03675d0d83dbc6cb66bc64bdcc2a088daae59aacc8e914803afd2c",
+    "prompt_sha256": "sha256:6102ebb2db7ff42b07f0d1ba7abbec9c2dc333398923030b39076a4aa055d9ea",
+    "all_actual_build_context_hashes_match": true,
+    "derived_schema_crlf_present": false
+  },
+  "images": {
+    "broker_image_id": "sha256:0e0da0598b16268ab4ecbe2f1fde2064ae55a81252d6d7998da16174dddace70",
+    "cell_image_id": "sha256:d10084db7d323a304600958b8dd2d40301102d80c22988772d0e8804b4739ebe",
+    "provider_secret_in_image": false
+  },
+  "limits": {
+    "maximum_provider_calls_per_lane": 1,
+    "maximum_output_tokens_per_lane": 2048,
+    "retry": false,
+    "fallback": false,
+    "cross_model_input": false,
+    "voting": false
+  },
+  "closed_surfaces_unchanged": true
+}

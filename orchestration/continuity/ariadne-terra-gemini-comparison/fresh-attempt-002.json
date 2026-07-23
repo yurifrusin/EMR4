@@ -1,0 +1,34 @@
+{
+  "schema_version": "ariadne.comparative_fresh_attempt_authority.v1",
+  "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+  "runtime_attempt_id": "comparative-runtime-attempt-002",
+  "cognition_contract_attempt_id": "generated-attempt-001",
+  "authority": "yuri-explicit-fresh-two-lane-attempt-after-local-correction",
+  "status": "authorised_preattempt",
+  "predecessor": {
+    "runtime_attempt_id": "comparative-runtime-attempt-001",
+    "result": "ariadne_terra_gemini_comparative_rehearsal_revision_required",
+    "terra_ledger_state": "consumed",
+    "gemini_lane_state": "suppressed",
+    "provider_calls": 0
+  },
+  "required_correction": {
+    "id": "explicit-utf8-lf-derived-schema-write",
+    "regression_required": true,
+    "five_sealed_hashes_must_match": true
+  },
+  "run_order": ["terra", "gemini"],
+  "maximum_provider_calls": {
+    "terra": 1,
+    "gemini": 1
+  },
+  "retry": false,
+  "fallback": false,
+  "cross_model_input": false,
+  "voting": false,
+  "result_rule": {
+    "pass": "ariadne_terra_gemini_comparative_rehearsal_attempt2_pass",
+    "revision_required": "ariadne_terra_gemini_comparative_rehearsal_attempt2_revision_required"
+  },
+  "closed_surfaces_unchanged": true
+}

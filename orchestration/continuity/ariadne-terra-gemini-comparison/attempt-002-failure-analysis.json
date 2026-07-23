@@ -1,0 +1,69 @@
+{
+  "schema_version": "ariadne.comparative_failure_analysis.v2",
+  "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+  "runtime_attempt_id": "comparative-runtime-attempt-002",
+  "result": "ariadne_terra_gemini_comparative_rehearsal_attempt2_revision_required",
+  "shared_hash_match": true,
+  "attempt1_crlf_defect_recurred": false,
+  "terra": {
+    "authority_consumed": true,
+    "provider_call_count": 1,
+    "provider_status": 500,
+    "request_bytes": 18259,
+    "request_sha256": "sha256:35394237346af2c8fc8c2446cca9a060ec69ddd241ffe3a25b2db9ec85538ff8",
+    "response_bytes": 369,
+    "response_sha256": "sha256:70da52ae18cc091b1db30c1c9d3a467f7d3289ae227f6404a9aed98c3581b75a",
+    "generated_draft_count": 0,
+    "provider_schema_status": "not-presented",
+    "full_schema_status": "not-presented",
+    "proofreader_invoked": false,
+    "exact_provider_error_cause": "not-retained"
+  },
+  "gemini": {
+    "authority_consumed": true,
+    "provider_call_count": 1,
+    "provider_status": 400,
+    "request_bytes": 18287,
+    "request_sha256": "sha256:c1fd25839ef4cbf9dc1c8453bc48634ff983283a49ce997f71503488185c7d70",
+    "response_bytes": 127,
+    "response_sha256": "sha256:b01105ed229707571186fdc753a734401dcd3dca044538c55285824604725bd3",
+    "generated_draft_count": 0,
+    "provider_schema_status": "not-presented",
+    "full_schema_status": "not-presented",
+    "proofreader_invoked": false,
+    "exact_provider_error_cause": "not-retained"
+  },
+  "diagnostic_limits": {
+    "raw_provider_error_body_retained": false,
+    "provider_error_type_or_code_retained": false,
+    "provider_request_id_retained": false,
+    "terra_cause_may_be_inferred": false,
+    "gemini_cause_may_be_inferred": false,
+    "future_candidate": "allowlisted-non-content-provider-error-metadata-and-local-contract-validation"
+  },
+  "runtime_provenance": {
+    "comparison_evidence_sha256": "sha256:d52511061e61539979e22c4bbc8350c70461c9fa288403af76f5da356bfbce33",
+    "executed_runner_sha256": "sha256:63515f5e3688d14f665691428937faf42ad9225e3cc5ae2ae58adec1b15875cc",
+    "executed_broker_sha256": "sha256:6716a034dc9765fe5f128680d0f0c9c2f3ee3bd89aeeca00f81de948a34a9543",
+    "executed_launcher_sha256": "sha256:97eab934798a1236d15eb863ffeb3354a0109d921e31d781c7134f49eece10b8"
+  },
+  "cleanup": {
+    "terra_cell_removed": true,
+    "terra_broker_removed": true,
+    "terra_network_removed": true,
+    "terra_image_tags_removed": true,
+    "gemini_cell_removed": true,
+    "gemini_broker_removed": true,
+    "gemini_network_removed": true,
+    "gemini_image_tags_removed": true,
+    "container_residue_count": 0,
+    "network_residue_count": 0,
+    "comparison_image_tag_residue_count": 0
+  },
+  "raw_prompt_recorded": false,
+  "raw_provider_response_recorded": false,
+  "draft_payload_recorded": false,
+  "provider_secret_recorded": false,
+  "retry_performed": false,
+  "retry_authorised": false
+}

@@ -57,7 +57,7 @@
       "voice"
     ]
   },
-  "graph_revision": 23,
+  "graph_revision": 25,
   "harvests": [],
   "nodes": [
     {
@@ -238,6 +238,134 @@
         "Generated drafts, proofreader acceptance, PII, product reads, databases, event feeds, mailboxes, human-gate action, commands, production, deployment, release and autonomous action remain unproved or closed."
       ],
       "updated_at": "2026-07-23T10:00:00Z"
+    },
+    {
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "model-runtime",
+            "source": "docs/ariadne-terra-gemini-comparative-rehearsal-plan.md"
+          },
+          {
+            "boundary": "provider-call",
+            "source": "docs/ariadne-terra-gemini-comparative-rehearsal-plan.md"
+          }
+        ],
+        "notes": [
+          "Yuri authorised one sequential Terra-then-Gemini authored-synthetic comparison on 2026-07-24.",
+          "Attempt 001 consumed Terra at a sealed-input rejection before any provider call and suppressed Gemini.",
+          "Yuri then authorised fresh attempt 002 after the local byte-stability correction.",
+          "Attempt 002 consumed both fresh process ledgers: Terra made one provider request and received HTTP 500; Gemini made one provider request and received HTTP 400.",
+          "No retry, fallback, continuation or further provider attempt is authorised."
+        ]
+      },
+      "claim_scope": [
+        "Attempt 001 failed closed at a local CRLF-induced sealed-input mismatch before provider inference; its provider-free correction is regression evidence only.",
+        "Attempt 002 proved byte-identical sealed inputs and sequential one-use transport through both isolated lanes.",
+        "Terra HTTP 500 and Gemini HTTP 400 produced no draft, schema candidate or proofreader input; exact provider causes are unresolved because provider error bodies were not retained.",
+        "The result proves effective isolation, one-call enforcement, cross-lane teardown and cleanup only; it proves no model behaviour, generated-draft quality or proofreader handling of model output."
+      ],
+      "contract_evidence": [],
+      "coordinates": {
+        "git_ref": "codex/ariadne-terra-gemini-comparative-rehearsal",
+        "source_head": "4974075b31035d599e081d68e3b85e04a897baa1",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "created_at": "2026-07-23T14:55:00Z",
+      "decisions": [
+        {
+          "id": "ariadne-terra-gemini-comparison-authorised",
+          "source": "docs/ariadne-terra-gemini-comparative-rehearsal-plan.md",
+          "status": "accepted",
+          "summary": "Authorise one sequential provider-neutral Terra-then-Gemini authored-synthetic work-cell comparison with one provider-generating call maximum per lane."
+        },
+        {
+          "id": "ariadne-terra-gemini-comparison-revision-required",
+          "source": "orchestration/agent_inbox/codex/ariadne-terra-gemini-comparative-rehearsal-sol-review.md",
+          "status": "rejected",
+          "summary": "Reject model, generated-draft, proofreader and comparison claims because Terra stopped at an internal sealed-schema byte mismatch before a provider call and Gemini was suppressed."
+        },
+        {
+          "id": "ariadne-terra-gemini-fresh-attempt-002-authorised",
+          "source": "docs/ariadne-terra-gemini-comparative-rehearsal-attempt2-plan.md",
+          "status": "accepted",
+          "summary": "Authorise one fresh corrected Terra-then-Gemini attempt with new single-use ledgers and no retry or fallback."
+        },
+        {
+          "id": "ariadne-terra-gemini-attempt-002-revision-required",
+          "source": "orchestration/agent_inbox/codex/ariadne-terra-gemini-attempt2-sol-review.md",
+          "status": "rejected",
+          "summary": "Reject generated-draft, proofreader and comparative-model claims because Terra returned HTTP 500 and Gemini returned HTTP 400 without presenting a draft."
+        }
+      ],
+      "evidence": {
+        "acceptances": [],
+        "closeouts": [
+          "docs/ariadne-terra-gemini-comparative-rehearsal-closeout.md",
+          "docs/ariadne-terra-gemini-comparative-rehearsal-design.md",
+          "orchestration/continuity/ariadne-terra-gemini-comparison/comparison-evidence.json",
+          "orchestration/continuity/ariadne-terra-gemini-comparison/failure-analysis.json",
+          "orchestration/continuity/ariadne-terra-gemini-comparison/preflight-evidence.json",
+          "orchestration/continuity/ariadne-terra-gemini-comparison/terra-single-use-ledger.json",
+          "orchestration/continuity/ariadne-terra-gemini-comparison/gemini-single-use-ledger.json",
+          "docs/ariadne-terra-gemini-comparative-rehearsal-attempt2-closeout.md",
+          "orchestration/continuity/ariadne-terra-gemini-comparison/attempt-002-comparison-evidence.json",
+          "orchestration/continuity/ariadne-terra-gemini-comparison/attempt-002-failure-analysis.json",
+          "orchestration/continuity/ariadne-terra-gemini-comparison/attempt-002-preflight-evidence.json",
+          "orchestration/continuity/ariadne-terra-gemini-comparison/terra-attempt-002-single-use-ledger.json",
+          "orchestration/continuity/ariadne-terra-gemini-comparison/gemini-attempt-002-single-use-ledger.json"
+        ],
+        "findings": [
+          "docs/security/ariadne-terra-gemini-comparative-rehearsal-threat-model-delta.md",
+          "orchestration/agent_inbox/codex/ariadne-terra-gemini-comparative-rehearsal-sol-review.md",
+          "orchestration/agent_inbox/codex/ariadne-terra-gemini-attempt2-sol-review.md"
+        ],
+        "plans": [
+          "docs/ariadne-terra-gemini-comparative-rehearsal-plan.md",
+          "docs/ariadne-terra-gemini-two-lane-restoration.md",
+          "docs/ariadne-terra-gemini-comparative-rehearsal-attempt2-plan.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-terra-gemini-comparative-rehearsal-rehydration-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-terra-gemini-restored-preattempt-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-terra-gemini-final-preattempt-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-terra-gemini-attempt2-rehydration-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-terra-gemini-attempt2-final-preattempt-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-terra-gemini-attempt2-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-terra-gemini-attempt2-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-terra-gemini-attempt2-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-terra-gemini-attempt2-prepush-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_terra_gemini_comparative_rehearsal.py"
+        ]
+      },
+      "id": "ariadne-terra-gemini-comparative-rehearsal",
+      "kind": "exploration",
+      "relationships": [
+        {
+          "node_id": "ariadne-bounded-agent-admission-design",
+          "relation": "builds_on"
+        },
+        {
+          "node_id": "ariadne-real-isolation-rehearsal",
+          "relation": "builds_on"
+        },
+        {
+          "node_id": "ariadne-deepseek-in-cell-generated-draft-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "status": "rejected",
+      "title": "Ariadne Terra/Gemini comparative work-cell rehearsal",
+      "unresolved_gates": [
+        "Both fresh attempt 002 process ledgers are consumed; no retry, fallback or lane continuation is authorised.",
+        "Exact Terra HTTP 500 and Gemini HTTP 400 causes remain unresolved because the sanitised evidence retained no provider error type/code/parameter or request identifier.",
+        "A provider-contract diagnostic design and any later occupied attempt require fresh Yuri decisions.",
+        "Generated drafts, proofreader acceptance, comparative model evidence, PII, product reads, databases, event feeds, mailboxes, human-gate action, commands, production, deployment, release and autonomous action remain unproved or closed."
+      ],
+      "updated_at": "2026-07-23T15:20:00Z"
     },
     {
       "authority": {

@@ -121,6 +121,19 @@ Prerequisites:
 - A fresh Yuri decision for a provider-blocked gateway-shape diagnostic that cannot forward requests to DeepSeek and records only method plus normalised path.
 - Only after that diagnostic, a further fresh decision and revised allowlist/threat plan before another occupied provider-generating attempt; product APIs, databases, event feeds, live mailboxes and commands remain closed.
 
+### Terra/Gemini provider-contract diagnostic design — blocked
+
+Should Ariadne design a provider-free contract diagnostic with allowlisted non-content error metadata before considering any later occupied model attempt?
+
+Fresh attempt 002 proved byte-stable common inputs and isolated one-use transport, but Terra returned HTTP 500 and Gemini returned HTTP 400 without drafts. The current sanitisation is safe but retains too little error metadata to diagnose either provider response exactly.
+
+Prerequisites:
+
+- Treat both fresh attempt 002 process ledgers as consumed and revision-required; do not retry either lane.
+- Preserve HTTP status, byte count and response hashes as the exact evidence; do not infer or reconstruct discarded error bodies.
+- A fresh Yuri decision for a repository-local, provider-free contract-diagnostic design.
+- Any later container, credential mount, prompt transmission or provider request remains a separate fresh decision.
+
 ## Decisions that remain Yuri's
 
 - **Should the next Reception One tranche pursue visual/interaction synthesis, another exact event family, or pause product expansion?**
@@ -133,6 +146,8 @@ Prerequisites:
   Required before: Historical decision satisfied for the single 2026-07-23 attempt only; that authority is consumed and cannot authorise a retry.
 - **Should Ariadne run a provider-blocked Claude Code gateway-shape diagnostic, and only later consider a separately authorised retry?**
   Required before: Any diagnostic container/process that inspects the rejected gateway method/path, any broker allowlist change, or any second occupied model/provider attempt.
+- **Should Ariadne design a provider-free Terra/Gemini contract diagnostic with narrowly allowlisted error metadata?**
+  Required before: Any provider-contract diagnostic implementation, request-envelope amendment, error-metadata policy change, new model process, provider request, prompt transmission, credential mount or image rebuild for this branch.
 
 ## Map limits
 
@@ -145,6 +160,7 @@ Prerequisites:
 - The accepted real-isolation rehearsal covers one disposable local container and the unchanged finite tape only; it is not evidence of adaptive cognition, model safety, daemon/kernel invulnerability, live authorization or product-runtime behaviour.
 - The accepted bounded agent-admission design proves a provider-neutral, unoccupied, non-executing context and egress contract only; it is not evidence of model behaviour, tokenizer accounting, inference isolation or generated-draft quality.
 - The consumed DeepSeek in-cell attempt proves only that the inspected work-cell and credential-broker boundary failed closed and cleaned up; no request reached DeepSeek, so it is not evidence of provider inference, generated-draft quality or proofreader handling of model output.
+- The two consumed Terra/Gemini attempts prove byte-stable isolated one-use transport and cleanup only: attempt 001 stopped locally, while attempt 002 received Terra HTTP 500 and Gemini HTTP 400 without drafts. They are not model-quality, proofreader or comparative evidence.
 - The decision horizon records candidates and gates. It neither recommends a winner nor grants authority.
 
 ## Evidence index
@@ -158,6 +174,8 @@ Prerequisites:
 - `docs/ariadne-synaptic-event-router-candidate-plan.md`
 - `docs/ariadne-synaptic-event-router-protocol-closeout.md`
 - `docs/ariadne-synaptic-event-router-protocol-plan.md`
+- `docs/ariadne-terra-gemini-comparative-rehearsal-attempt2-closeout.md`
+- `docs/ariadne-terra-gemini-comparative-rehearsal-attempt2-plan.md`
 - `docs/bernie-conversational-diary-north-star.md`
 - `docs/bernie-current-strategic-transition-review.md`
 - `docs/bernie-fluid-meta-grid-concept-closeout.md`
@@ -172,9 +190,11 @@ Prerequisites:
 - `docs/bernie-reception-one-focused-review-context.md`
 - `docs/bernie-stage1-provider-free-supervised-booking-acceptance-plan.md`
 - `docs/security/ariadne-deepseek-in-cell-generated-draft-threat-model-delta.md`
+- `docs/security/ariadne-terra-gemini-comparative-rehearsal-threat-model-delta.md`
 - `implementation_plan.md`
 - `orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-generated-draft-sol-review.md`
 - `orchestration/agent_inbox/codex/ariadne-synaptic-event-router-protocol-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/ariadne-terra-gemini-attempt2-sol-review.md`
 - `orchestration/agent_inbox/codex/bernie-functional-meta-grid-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/bernie-meta-grid-live-local-integration-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/bernie-stage1-tranche-d-sol-acceptance.md`
@@ -182,5 +202,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/reception-one-combined-scope-proof-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-committed-event-vertical-sol-acceptance.md`
 - `orchestration/continuity/ariadne-deepseek-in-cell/rehearsal-evidence.json`
+- `orchestration/continuity/ariadne-terra-gemini-comparison/attempt-002-comparison-evidence.json`
+- `orchestration/continuity/ariadne-terra-gemini-comparison/attempt-002-failure-analysis.json`
 
-_Compass map revision 11; continuity graph revision 23._
+_Compass map revision 13; continuity graph revision 25._

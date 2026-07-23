@@ -418,3 +418,41 @@ paths. Yuri approved the focused CI-only correction; two justified
 `nosec B108` annotations make the boundary explicit, and the exact Bandit
 profile plus focused checks pass without changing the executed runtime or its
 evidence.
+
+## 2026-07-24 Ariadne Terra/Gemini comparative rehearsals
+
+Yuri authorised a provider-neutral direct-API comparison using one byte-
+identical authored-synthetic task, a locked five-port draft schema, separate
+tool-less work cells and broker-only credentials. Terra was first, followed by
+complete teardown and Gemini. Each lane had one process and one provider-call
+maximum with no retry, fallback, tools, cross-model input or voting.
+
+Attempt 001 consumed Terra when its internal broker rejected the sealed full
+schema before provider forwarding. The host had hashed explicit UTF-8/LF bytes
+but then used a Windows text write that translated the derived schema to CRLF.
+Gemini was suppressed by the boundary-stop rule. No provider received a
+request. The local preparation was corrected to explicit bytes and a focused
+regression proved all five actual build-context hashes.
+
+Yuri then explicitly authorised fresh attempt 002 with new single-use ledgers.
+Both credential, test, corrected-hash and real-isolation preattempt gates
+passed. Terra made exactly one `gpt-5.6-terra` Responses API request and
+received HTTP 500. After complete Terra teardown, Gemini made exactly one
+`gemini-3.5-flash` GenerateContent request and received HTTP 400. Neither
+provider presented a draft, so provider-schema, full-schema and deterministic
+proofreader gates were not reached.
+
+The broker retained status, byte count and response hash but no raw error body,
+error type/code/parameter or provider request identifier. The exact causes are
+therefore unresolved and no model-quality conclusion is permitted. Both fresh
+process ledgers are consumed, no retry or fallback occurred, and final
+container, network and derived image-tag residue is zero.
+
+The authoritative latest result is
+`ariadne_terra_gemini_comparative_rehearsal_attempt2_revision_required`.
+Continuity graph revision 25 and Compass revision 13 pause the branch behind a
+fresh provider-contract diagnostic-design decision. No diagnostic, envelope
+change, new occupied process, provider call, credential mount, prompt
+transmission, product/database/event/mailbox/command surface, PII,
+protected/historical evidence, production, deployment, release or autonomous
+action is authorised.
