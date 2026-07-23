@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_ariadne_deepseek_in_cell_rehearsal_preacceptance",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "unknown",
+      "evidence": [
+        "The single authorised Claude Code model process was started and consumed.",
+        "The one-use broker rejected a non-allowlisted preliminary method/path before forwarding, so DeepSeek received zero requests and produced no generation or usage.",
+        "The provider key remained outside the work cell and all runtime resources and derived image tags were removed.",
+        "No retry, diagnostic or second attempt is authorised."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Anthropic-hosted Claude model was selected; Claude Code was the pinned control process for the consumed DeepSeek topology."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external veto reviewer was assigned and no independent-veto claim is made."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The authoritative outcome is ariadne_deepseek_in_cell_generated_draft_rehearsal_revision_required, not an acceptance.",
+        "The focused 59-test and combined 242-test populations pass with schemas, semantic validators, Ruff, compilation, Node syntax, JSON and whitespace checks.",
+        "Continuity revision 23 records a rejected exploration node and Compass revision 11 blocks retry behind a fresh provider-blocked gateway diagnostic decision.",
+        "Product APIs, databases, event feeds, live mailboxes, commands, PII, protected evidence, production and deployment remained closed.",
+        "Four unrelated pre-existing Bernie receipt/runtime-state files remain untracked, preserved and excluded."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was used."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

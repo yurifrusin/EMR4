@@ -109,17 +109,17 @@ Prerequisites:
 - A fresh Yuri decision naming the exact existing local feed adapter and a runtime threat model before any connection or persistent mailbox.
 - Explicit authentication, durable deduplication, persistence, failure, dead-letter and retention decisions while preserving separation from the development Continuity graph.
 
-### Ariadne first generated-draft rehearsal — candidate
+### Ariadne generated-draft rehearsal gateway repair — blocked
 
-Should Ariadne select one exact cognition topology and model for one disposable authored-synthetic generated-draft attempt whose only egress is the deterministic proofreader?
+Should Ariadne first run a provider-blocked diagnostic of Claude Code's gateway preflight shape before Yuri considers authorising another occupied generated-draft attempt?
 
-The provider-neutral admission contract now passes, but all topology candidates remain deliberately unselected and no model has received context or produced a draft. The next material step would test one occupied cognition slot without granting tools, product reads, command authority or proofreader bypass.
+The one authorised occupied process failed closed at the credential broker before any request reached DeepSeek. The isolation boundary behaved as intended, but no generated draft or proofreader input existed, and the exact rejected method/path was deliberately not retained.
 
 Prerequisites:
 
-- The accepted bounded agent-admission design remains the frozen source for instruction/evidence separation, minimal context, model-independent caps, cancellation and proofreader-only egress.
-- A fresh Yuri decision selecting exactly one of the catalogued topologies, concrete model provenance and tokenizer-specific limits, including any licence, cost, weights/image, IPC/network or secret implications.
-- A one-attempt threat and evidence plan for model-specific instruction injection, output schema failure, cancellation, resource enforcement and complete cleanup, with product APIs, databases, event feeds, live mailboxes and commands still closed.
+- Treat the 2026-07-23 DeepSeek V4 Flash work-cell attempt as consumed and revision-required; do not retry it under the earlier authority.
+- A fresh Yuri decision for a provider-blocked gateway-shape diagnostic that cannot forward requests to DeepSeek and records only method plus normalised path.
+- Only after that diagnostic, a further fresh decision and revised allowlist/threat plan before another occupied provider-generating attempt; product APIs, databases, event feeds, live mailboxes and commands remain closed.
 
 ## Decisions that remain Yuri's
 
@@ -130,7 +130,9 @@ Prerequisites:
 - **Should the accepted Synaptic Event Router protocol connect to the existing default-off local appointment-reschedule feed?**
   Required before: Any operational-DAG scope registry, database/event-feed connection, persistent node mailbox, listener, broker, retry worker or event-driven reconciliation beyond the existing bounded Reception One exception.
 - **Should Ariadne select one exact topology and model for a single disposable authored-synthetic generated-draft rehearsal?**
-  Required before: Any model selection/call/mount, prompt or context transmission, provider or broker connection, model-specific token budget, agent-generated draft or occupied work-cell run.
+  Required before: Historical decision satisfied for the single 2026-07-23 attempt only; that authority is consumed and cannot authorise a retry.
+- **Should Ariadne run a provider-blocked Claude Code gateway-shape diagnostic, and only later consider a separately authorised retry?**
+  Required before: Any diagnostic container/process that inspects the rejected gateway method/path, any broker allowlist change, or any second occupied model/provider attempt.
 
 ## Map limits
 
@@ -142,15 +144,16 @@ Prerequisites:
 - The accepted scripted work-cell rehearsal executes only a finite authored tape in process memory; it is not evidence of adaptive cognition, real isolation, persistence, live delivery or product-runtime behaviour.
 - The accepted real-isolation rehearsal covers one disposable local container and the unchanged finite tape only; it is not evidence of adaptive cognition, model safety, daemon/kernel invulnerability, live authorization or product-runtime behaviour.
 - The accepted bounded agent-admission design proves a provider-neutral, unoccupied, non-executing context and egress contract only; it is not evidence of model behaviour, tokenizer accounting, inference isolation or generated-draft quality.
+- The consumed DeepSeek in-cell attempt proves only that the inspected work-cell and credential-broker boundary failed closed and cleaned up; no request reached DeepSeek, so it is not evidence of provider inference, generated-draft quality or proofreader handling of model output.
 - The decision horizon records candidates and gates. It neither recommends a winner nor grants authority.
 
 ## Evidence index
 
 - `docs/ariadne-bounded-agent-admission-design-closeout.md`
-- `docs/ariadne-bounded-agent-admission-design-plan.md`
-- `docs/ariadne-bounded-agent-admission-design.md`
 - `docs/ariadne-compass-increment2-plan.md`
 - `docs/ariadne-continuity-engine-increment1-closeout.md`
+- `docs/ariadne-deepseek-in-cell-generated-draft-rehearsal-closeout.md`
+- `docs/ariadne-deepseek-in-cell-generated-draft-rehearsal-plan.md`
 - `docs/ariadne-sandbox-dag-protocol-design.md`
 - `docs/ariadne-synaptic-event-router-candidate-plan.md`
 - `docs/ariadne-synaptic-event-router-protocol-closeout.md`
@@ -168,9 +171,9 @@ Prerequisites:
 - `docs/bernie-reception-one-committed-event-vertical-closeout.md`
 - `docs/bernie-reception-one-focused-review-context.md`
 - `docs/bernie-stage1-provider-free-supervised-booking-acceptance-plan.md`
-- `docs/security/ariadne-bounded-agent-admission-threat-model-delta.md`
+- `docs/security/ariadne-deepseek-in-cell-generated-draft-threat-model-delta.md`
 - `implementation_plan.md`
-- `orchestration/agent_inbox/codex/ariadne-bounded-agent-admission-design-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-generated-draft-sol-review.md`
 - `orchestration/agent_inbox/codex/ariadne-synaptic-event-router-protocol-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/bernie-functional-meta-grid-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/bernie-meta-grid-live-local-integration-sol-acceptance.md`
@@ -178,6 +181,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-combined-scope-proof-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-committed-event-vertical-sol-acceptance.md`
-- `orchestration/continuity/ariadne-bounded-agent-admission-evidence.json`
+- `orchestration/continuity/ariadne-deepseek-in-cell/rehearsal-evidence.json`
 
-_Compass map revision 10; continuity graph revision 22._
+_Compass map revision 11; continuity graph revision 23._

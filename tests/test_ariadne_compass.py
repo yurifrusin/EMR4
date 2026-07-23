@@ -77,11 +77,11 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
         for item in report["programme_support_horizon"]
         if item["id"] == "ariadne-first-generated-draft-rehearsal"
     )
-    assert admission["status"] == "candidate"
+    assert admission["status"] == "blocked"
     assert admission["boundary_changes"] == ["model-runtime"]
-    assert "generated-draft" in admission["strategic_question"]
+    assert "provider-blocked diagnostic" in admission["strategic_question"]
     assert any(
-        decision["id"] == "authorize-first-generated-draft-rehearsal"
+        decision["id"] == "authorize-generated-draft-gateway-diagnostic-or-retry"
         for decision in report["user_owned_decisions"]
     )
     assert report["user_owned_decisions"]

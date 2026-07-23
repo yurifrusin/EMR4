@@ -1,0 +1,36 @@
+{
+  "schema_version": "ariadne.deepseek_in_cell_image_build_evidence.v1",
+  "protocol_id": "ariadne-deepseek-in-cell-generated-draft-rehearsal",
+  "status": "passed",
+  "build_context_files": [
+    "Dockerfile",
+    "ariadne_deepseek_one_use_broker.mjs",
+    "ariadne_deepseek_work_cell_launcher.mjs",
+    "attempt.json",
+    "output.schema.json"
+  ],
+  "build_context_source_hashes": {
+    "Dockerfile": "sha256:810d6df2d46621c5ba682954ba439db307ec2061ed9c8d01ab767294ccbcb53c",
+    "ariadne_deepseek_one_use_broker.mjs": "sha256:498fb9df8ff376ec5f55004f24b3c64d90855ef72d31bb82919d8eef48e6a694",
+    "ariadne_deepseek_work_cell_launcher.mjs": "sha256:479a6e9ff029992d716710f75473176e84b9e3c015edc878d5e749a24ec6f200",
+    "attempt.json": "sha256:af45aba852f4eaed9c54a859ac14aefa0ecc3d8f437120f4f6ee3ebe97e57e5a",
+    "output.schema.json": "sha256:87b2f714071f9c081ff261a7ac2d97078d1af176930009db70069062b053c5bf"
+  },
+  "node_image_resolved": "node@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d",
+  "claude_code_package": "@anthropic-ai/claude-code",
+  "claude_code_version": "2.1.201",
+  "broker_image": {
+    "tag": "emr4/ariadne-deepseek-broker:tranche1",
+    "image_id": "sha256:61a6385d7be5cd43813ca915a3194874311d983e416266274acecdc99dee0ef7",
+    "role_label": "broker"
+  },
+  "cell_image": {
+    "tag": "emr4/ariadne-deepseek-cell:tranche1",
+    "image_id": "sha256:129af6436f945a01a58c8a02da3f142bd08e2a4cf9c1a4f3da0e8878b3e08005",
+    "role_label": "work-cell",
+    "claude_code_version_label": "2.1.201"
+  },
+  "provider_call_performed": false,
+  "prompt_transmitted": false,
+  "provider_secret_in_image": false
+}

@@ -1,0 +1,11 @@
+{
+  "schema_version": "ariadne.deepseek_in_cell_single_use_ledger.v1",
+  "protocol_id": "ariadne-deepseek-in-cell-generated-draft-rehearsal",
+  "attempt_id": "generated-attempt-001",
+  "state": "consumed",
+  "authority": "yuri-one-authored-synthetic-model-attempt",
+  "model_id": "deepseek-v4-flash",
+  "maximum_provider_calls": 1,
+  "retry_authorised": false,
+  "consumption_point": "immediately-before-work-cell-model-process-start"
+}

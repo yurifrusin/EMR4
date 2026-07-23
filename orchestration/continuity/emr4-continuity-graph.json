@@ -57,7 +57,7 @@
       "voice"
     ]
   },
-  "graph_revision": 22,
+  "graph_revision": 23,
   "harvests": [],
   "nodes": [
     {
@@ -143,6 +143,97 @@
         "Product reads, databases, event feeds, live mailboxes, human-gate UI, PII, protected/historical evidence, Stage 3B, production, deployment, release, commands and autonomous action remain separately closed."
       ],
       "updated_at": "2026-07-23T00:30:00Z"
+    },
+    {
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "model-runtime",
+            "source": "docs/ariadne-deepseek-in-cell-generated-draft-rehearsal-plan.md"
+          },
+          {
+            "boundary": "provider-call",
+            "source": "docs/ariadne-deepseek-in-cell-generated-draft-rehearsal-plan.md"
+          }
+        ],
+        "notes": [
+          "Yuri selected the tool-less Claude Code in-cell DeepSeek V4 Flash scenario on 2026-07-23.",
+          "Authority was limited to one occupied authored-synthetic attempt and one possible provider-generating request; the occupied attempt is consumed.",
+          "No provider request was forwarded and no retry, diagnostic or second attempt is authorised."
+        ]
+      },
+      "claim_scope": [
+        "One inspected occupied work-cell model process reached a credential-isolating one-use broker and failed closed before remote provider inference.",
+        "The result proves the effective cell/broker isolation and a missing gateway-shape prerequisite; it proves no generated-draft or model-quality property."
+      ],
+      "contract_evidence": [],
+      "coordinates": {
+        "git_ref": "codex/ariadne-deepseek-in-cell-rehearsal",
+        "source_head": "02d189c6620ebb083c8f70d09e994792bf9bf42a",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "created_at": "2026-07-23T10:00:00Z",
+      "decisions": [
+        {
+          "id": "deepseek-in-cell-rehearsal-authorised",
+          "source": "docs/ariadne-deepseek-in-cell-generated-draft-rehearsal-plan.md",
+          "status": "accepted",
+          "summary": "Authorise one tool-less Claude Code in-cell model-process attempt with DeepSeek V4 Flash behind a credential-isolating one-use broker and deterministic-proofreader-only draft egress."
+        },
+        {
+          "id": "deepseek-in-cell-rehearsal-revision-required",
+          "source": "orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-generated-draft-sol-review.md",
+          "status": "rejected",
+          "summary": "Reject a generated-draft acceptance claim because the consumed model process failed at the broker gateway shape before any provider request or proofreader input."
+        }
+      ],
+      "evidence": {
+        "acceptances": [],
+        "closeouts": [
+          "docs/ariadne-deepseek-in-cell-generated-draft-rehearsal-closeout.md",
+          "docs/ariadne-deepseek-in-cell-generated-draft-rehearsal-design.md",
+          "orchestration/continuity/ariadne-deepseek-in-cell/image-build-evidence.json",
+          "orchestration/continuity/ariadne-deepseek-in-cell/rehearsal-evidence.json",
+          "orchestration/continuity/ariadne-deepseek-in-cell/single-use-ledger.json"
+        ],
+        "findings": [
+          "docs/security/ariadne-deepseek-in-cell-generated-draft-threat-model-delta.md",
+          "orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-generated-draft-sol-review.md"
+        ],
+        "plans": [
+          "docs/ariadne-deepseek-in-cell-generated-draft-rehearsal-plan.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-rehearsal-rehydration-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-rehearsal-preattempt-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-rehearsal-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-rehearsal-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_deepseek_in_cell_rehearsal.py"
+        ]
+      },
+      "id": "ariadne-deepseek-in-cell-generated-draft-rehearsal",
+      "kind": "exploration",
+      "relationships": [
+        {
+          "node_id": "ariadne-bounded-agent-admission-design",
+          "relation": "builds_on"
+        },
+        {
+          "node_id": "ariadne-real-isolation-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "status": "rejected",
+      "title": "Ariadne DeepSeek in-cell generated-draft rehearsal",
+      "unresolved_gates": [
+        "The exact Claude Code preliminary gateway method/path remains unproved because the sanitised broker retained only the rejection reason.",
+        "Any provider-blocked gateway diagnostic or another occupied model attempt requires a fresh Yuri decision.",
+        "Generated drafts, proofreader acceptance, PII, product reads, databases, event feeds, mailboxes, human-gate action, commands, production, deployment, release and autonomous action remain unproved or closed."
+      ],
+      "updated_at": "2026-07-23T10:00:00Z"
     },
     {
       "authority": {
@@ -1334,5 +1425,5 @@
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-07-23T00:30:00Z"
+  "updated_at": "2026-07-23T10:00:00Z"
 }
