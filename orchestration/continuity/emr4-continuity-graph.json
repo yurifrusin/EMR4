@@ -111,6 +111,7 @@
           "docs/ariadne-bounded-agent-admission-design-plan.md"
         ],
         "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-bounded-agent-admission-design-prepush-receipt.json",
           "orchestration/agent_inbox/codex/ariadne-bounded-agent-admission-design-precommit-receipt.json",
           "orchestration/agent_inbox/codex/ariadne-bounded-agent-admission-design-preacceptance-receipt.json",
           "orchestration/agent_inbox/codex/ariadne-bounded-agent-admission-design-rehydration-receipt.json"
