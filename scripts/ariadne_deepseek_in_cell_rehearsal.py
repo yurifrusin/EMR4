@@ -586,7 +586,8 @@ def rehearse(*, authorised: bool) -> dict[str, Any]:
                 "broker",
                 "--read-only",
                 "--tmpfs",
-                "/tmp:rw,noexec,nosuid,nodev,size=33554432",
+                # Container-internal memory-only scratch; no host temp path.
+                "/tmp:rw,noexec,nosuid,nodev,size=33554432",  # nosec B108
                 "--cap-drop",
                 "ALL",
                 "--security-opt",
@@ -621,7 +622,8 @@ def rehearse(*, authorised: bool) -> dict[str, Any]:
                 NETWORK_NAME,
                 "--read-only",
                 "--tmpfs",
-                "/tmp:rw,noexec,nosuid,nodev,size=67108864",
+                # Container-internal memory-only scratch; no host temp path.
+                "/tmp:rw,noexec,nosuid,nodev,size=67108864",  # nosec B108
                 "--cap-drop",
                 "ALL",
                 "--security-opt",

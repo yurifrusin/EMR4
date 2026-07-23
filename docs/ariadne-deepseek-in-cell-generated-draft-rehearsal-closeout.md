@@ -116,6 +116,15 @@ revision 11 blocks the generated-draft direction behind a fresh
 provider-blocked gateway-diagnostic decision while preserving the seven-step
 Reception One journey and current product node.
 
+The first protected-PR Python Security run flagged Bandit B108 on the two
+literal `/tmp` targets supplied to Docker `--tmpfs`. Both are
+container-internal, memory-only scratch mounts rather than host temporary-file
+paths. Yuri approved a focused CI-only correction; justified `nosec B108`
+annotations now make that distinction explicit. The exact `ci-bandit` profile,
+Ruff, compilation, whitespace and 59 focused tests pass after the correction.
+No runtime input, executed image, evidence observation or consumed-attempt
+state changed.
+
 ## API Spine result
 
 Boundary classification:

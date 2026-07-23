@@ -410,3 +410,11 @@ Compass revision 11 marks the generated-draft direction blocked. Any
 provider-blocked gateway-shape diagnostic, broker allowlist change or second
 occupied model/provider attempt requires a fresh Yuri decision; the consumed
 authority cannot be retried.
+
+The first protected-PR Python Security run later reported two Bandit B108
+findings on the literal `/tmp` targets in the Docker `--tmpfs` arguments.
+These are container-internal memory-only scratch mounts, not host temporary
+paths. Yuri approved the focused CI-only correction; two justified
+`nosec B108` annotations make the boundary explicit, and the exact Bandit
+profile plus focused checks pass without changing the executed runtime or its
+evidence.

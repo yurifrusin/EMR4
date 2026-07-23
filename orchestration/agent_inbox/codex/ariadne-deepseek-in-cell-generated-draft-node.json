@@ -63,7 +63,8 @@
       "orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-rehearsal-preattempt-receipt.json",
       "orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-rehearsal-preacceptance-receipt.json",
       "orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-rehearsal-precommit-receipt.json",
-      "orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-rehearsal-prepush-receipt.json"
+      "orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-rehearsal-prepush-receipt.json",
+      "orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-rehearsal-ci-repair-precommit-receipt.json"
     ],
     "tests": [
       "tests/test_ariadne_deepseek_in_cell_rehearsal.py"
