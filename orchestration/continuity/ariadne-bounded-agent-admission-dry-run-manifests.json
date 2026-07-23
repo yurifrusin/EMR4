@@ -1,0 +1,113 @@
+{
+  "manifest_count": 6,
+  "manifests": [
+    {
+      "agent_attached": false,
+      "container_started": false,
+      "default_decision": "deny",
+      "dry_run": true,
+      "execution_enabled": false,
+      "manifest_id": "agent-admission-posture-v1",
+      "model_selected": false,
+      "provider_selected": false,
+      "source_document_sha256": "sha256:22567e04b33d2c724401ba84a8a77a55e58afe913b7fc0c574332e7825fa3abb",
+      "transport_selected": false
+    },
+    {
+      "allowed_frame_types": [
+        "synthetic-request-scope.v1",
+        "principal-scope.v1",
+        "patient-candidate-context.v1",
+        "practitioner-context.v1",
+        "availability-context.v1",
+        "evaluated-appointment-policy.v1"
+      ],
+      "context_digest": "sha256:72b230474c39e78dcad6c299ec436bd7b2e8893a027e6db4f76cf5e3ecbd641a",
+      "context_revision": 7,
+      "default_decision": "deny",
+      "dry_run": true,
+      "evidence_semantics": "data_only_never_policy_or_capability",
+      "execution_enabled": false,
+      "manifest_id": "agent-context-contract-v1",
+      "maximum_context_frames": 8,
+      "maximum_input_bytes": 4096,
+      "purpose": "prepare-authored-synthetic-appointment-availability-drafts",
+      "source_document_sha256": "sha256:22567e04b33d2c724401ba84a8a77a55e58afe913b7fc0c574332e7825fa3abb"
+    },
+    {
+      "candidates": [
+        {
+          "configured": false,
+          "execution_enabled": false,
+          "selected": false,
+          "topology_id": "in-cell-local"
+        },
+        {
+          "configured": false,
+          "execution_enabled": false,
+          "selected": false,
+          "topology_id": "host-brokered-local"
+        },
+        {
+          "configured": false,
+          "execution_enabled": false,
+          "selected": false,
+          "topology_id": "remote-provider-broker"
+        }
+      ],
+      "default_decision": "deny",
+      "dry_run": true,
+      "execution_enabled": false,
+      "manifest_id": "agent-topology-catalogue-v1",
+      "source_document_sha256": "sha256:22567e04b33d2c724401ba84a8a77a55e58afe913b7fc0c574332e7825fa3abb"
+    },
+    {
+      "default_decision": "deny",
+      "dry_run": true,
+      "execution_enabled": false,
+      "manifest_id": "agent-resource-budget-v1",
+      "maximum_attempts_per_context_revision": 2,
+      "maximum_output_bytes": 8192,
+      "maximum_output_drafts": 5,
+      "source_document_sha256": "sha256:22567e04b33d2c724401ba84a8a77a55e58afe913b7fc0c574332e7825fa3abb",
+      "token_budget_status": "unresolved-until-model-and-tokenizer-selected",
+      "token_budget_value": null
+    },
+    {
+      "default_decision": "deny",
+      "dry_run": true,
+      "execution_enabled": false,
+      "fresh_context_requires_new_attempt": true,
+      "late_completion_decision": "reject-before-proofreader",
+      "manifest_id": "agent-cancellation-v1",
+      "source_document_sha256": "sha256:22567e04b33d2c724401ba84a8a77a55e58afe913b7fc0c574332e7825fa3abb",
+      "terminal_states": [
+        "cancelled",
+        "expired",
+        "superseded"
+      ]
+    },
+    {
+      "allowed_output_ports": [
+        "port-ux",
+        "port-human-review",
+        "port-audit",
+        "port-orchestrator",
+        "port-advisory"
+      ],
+      "command_authority": false,
+      "default_decision": "deny",
+      "direct_downstream_delivery": false,
+      "direct_human_gate_delivery": false,
+      "dry_run": true,
+      "execution_enabled": false,
+      "manifest_id": "agent-egress-v1",
+      "output_authority": "draft-only",
+      "sole_egress_route": "deterministic-proofreader-v1",
+      "source_document_sha256": "sha256:22567e04b33d2c724401ba84a8a77a55e58afe913b7fc0c574332e7825fa3abb"
+    }
+  ],
+  "protocol_id": "ariadne-bounded-agent-admission-design",
+  "schema_version": "ariadne.bounded_agent_admission_manifests.v1",
+  "source_document_sha256": "sha256:22567e04b33d2c724401ba84a8a77a55e58afe913b7fc0c574332e7825fa3abb"
+}

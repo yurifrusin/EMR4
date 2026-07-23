@@ -1,0 +1,231 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/ariadne-bounded-agent-admission.schema.json",
+  "title": "Ariadne bounded agent-admission design",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "protocol_id",
+    "revision",
+    "as_of",
+    "boundary_classification",
+    "source_bindings",
+    "closed_connections",
+    "instruction_policy",
+    "instruction_policy_digest",
+    "topology_catalogue",
+    "context_frames",
+    "admission_envelope",
+    "validation_cases",
+    "evidence_posture"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.bounded_agent_admission.v1"},
+    "protocol_id": {"const": "ariadne-bounded-agent-admission-design"},
+    "revision": {"type": "integer", "minimum": 1},
+    "as_of": {"type": "string", "format": "date-time"},
+    "boundary_classification": {
+      "const": "provider_neutral_non_executing_generated_cognition_admission_design"
+    },
+    "source_bindings": {
+      "type": "array",
+      "minItems": 6,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256", "role"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+          "role": {"enum": ["semantic-source", "rehearsal-evidence", "isolation-evidence", "api-spine-source"]}
+        }
+      }
+    },
+    "closed_connections": {
+      "type": "object",
+      "minProperties": 12,
+      "additionalProperties": {"const": false}
+    },
+    "instruction_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "policy_id",
+        "policy_revision",
+        "implementation_generation",
+        "evidence_semantics",
+        "allowed_context_frame_types",
+        "allowed_output_ports",
+        "forbidden_output_authorities",
+        "sole_egress_route"
+      ],
+      "properties": {
+        "policy_id": {"const": "agent-admission-policy-v1"},
+        "policy_revision": {"type": "integer", "minimum": 1},
+        "implementation_generation": {"type": "integer", "minimum": 1},
+        "evidence_semantics": {"const": "data_only_never_policy_or_capability"},
+        "allowed_context_frame_types": {
+          "type": "array", "minItems": 6, "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "allowed_output_ports": {
+          "type": "array", "minItems": 5, "maxItems": 5, "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["port_id", "frame_type", "authority_ceiling"],
+            "properties": {
+              "port_id": {"type": "string"},
+              "frame_type": {"type": "string"},
+              "authority_ceiling": {"enum": ["candidate", "evidence", "advisory"]}
+            }
+          }
+        },
+        "forbidden_output_authorities": {
+          "type": "array", "minItems": 5, "uniqueItems": true,
+          "items": {"type": "string"}
+        },
+        "sole_egress_route": {"const": "deterministic-proofreader-v1"}
+      }
+    },
+    "instruction_policy_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "topology_catalogue": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["topology_id", "selected", "configured", "execution_enabled", "new_boundaries", "required_future_decisions"],
+        "properties": {
+          "topology_id": {"enum": ["in-cell-local", "host-brokered-local", "remote-provider-broker"]},
+          "selected": {"const": false},
+          "configured": {"const": false},
+          "execution_enabled": {"const": false},
+          "new_boundaries": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "required_future_decisions": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+        }
+      }
+    },
+    "context_frames": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 8,
+      "items": {"$ref": "#/$defs/contextFrame"}
+    },
+    "admission_envelope": {"$ref": "#/$defs/admissionEnvelope"},
+    "validation_cases": {
+      "type": "array",
+      "minItems": 12,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["case_id", "mutation", "expected_decision", "expected_reason_codes"],
+        "properties": {
+          "case_id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+          "mutation": {"type": "object", "minProperties": 1},
+          "expected_decision": {
+            "enum": [
+              "design_valid",
+              "reject_transport_selection",
+              "reject_token_policy",
+              "reject_capability_expansion",
+              "reject_scope_mismatch",
+              "reject_context_type",
+              "reject_context_sensitivity",
+              "reject_stale_context",
+              "reject_input_budget",
+              "reject_output_budget",
+              "reject_cancelled_or_late",
+              "reject_egress_bypass",
+              "reject_output_authority"
+            ]
+          },
+          "expected_reason_codes": {
+            "type": "array", "minItems": 1, "uniqueItems": true,
+            "items": {"type": "string", "pattern": "^[a-z0-9-]+$"}
+          }
+        }
+      }
+    },
+    "evidence_posture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_label", "raw_context_logged", "raw_generation_logged", "chain_of_thought_logged", "runtime_claim"],
+      "properties": {
+        "evidence_label": {"const": "authored_synthetic_non_executing_agent_admission_design"},
+        "raw_context_logged": {"const": false},
+        "raw_generation_logged": {"const": false},
+        "chain_of_thought_logged": {"const": false},
+        "runtime_claim": {"const": false}
+      }
+    }
+  },
+  "$defs": {
+    "contextFrame": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "frame_id", "frame_type", "source_label", "purpose", "practice_id",
+        "principal_id", "correlation_id", "context_revision", "sensitivity",
+        "freshness", "payload", "canonical_bytes", "payload_sha256"
+      ],
+      "properties": {
+        "frame_id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+        "frame_type": {"type": "string", "minLength": 1},
+        "source_label": {"enum": ["staff_selected", "authenticated_scope_fixture", "fixture_authoritative_fact", "fixture_evaluated_policy"]},
+        "purpose": {"const": "prepare-authored-synthetic-appointment-availability-drafts"},
+        "practice_id": {"const": "practice-synth-a"},
+        "principal_id": {"const": "principal-reception"},
+        "correlation_id": {"const": "booking-request-001"},
+        "context_revision": {"const": 7},
+        "sensitivity": {"enum": ["authored-synthetic-internal", "authored-synthetic-restricted"]},
+        "freshness": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "valid_from", "valid_until"],
+          "properties": {
+            "status": {"const": "current"},
+            "valid_from": {"type": "string", "format": "date-time"},
+            "valid_until": {"type": "string", "format": "date-time"}
+          }
+        },
+        "payload": {"type": "object"},
+        "canonical_bytes": {"type": "integer", "minimum": 2},
+        "payload_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+      }
+    },
+    "admissionEnvelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "envelope_id", "mode", "execution_enabled", "agent_attached",
+        "model_selected", "provider_selected", "transport_selected",
+        "container_started", "scope", "policy_binding", "context_binding",
+        "budgets", "token_budget", "capabilities", "attempt_state",
+        "output_contract"
+      ],
+      "properties": {
+        "envelope_id": {"const": "admission-envelope-synth-001"},
+        "mode": {"const": "design-only"},
+        "execution_enabled": {"const": false},
+        "agent_attached": {"const": false},
+        "model_selected": {"const": false},
+        "provider_selected": {"const": false},
+        "transport_selected": {"const": false},
+        "container_started": {"const": false},
+        "scope": {"type": "object"},
+        "policy_binding": {"type": "object"},
+        "context_binding": {"type": "object"},
+        "budgets": {"type": "object"},
+        "token_budget": {"type": "object"},
+        "capabilities": {"type": "object"},
+        "attempt_state": {"type": "object"},
+        "output_contract": {"type": "object"}
+      }
+    }
+  }
+}

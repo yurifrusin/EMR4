@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "sprint_planning",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_ariadne_bounded_agent_admission_design_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is selected; admission semantics, context minimisation, deterministic egress and negative evidence form one tightly coupled Sol-owned design surface."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external model, provider, transport or generated-draft execution is selected or authorised."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external model review is selected or claimed; acceptance will remain deterministic local Sol evidence."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "On 2026-07-23 Yuri authorised carrying on to the recorded bounded agent-admission design candidate.",
+        "The authority is interpreted as provider-neutral, repository-local, non-executing design using authored-synthetic data only; it may describe an unoccupied cognition adapter but may not select or invoke a model, provider, transport or container.",
+        "The complete live handover/current baton, authority allocation, accepted work-cell, scripted rehearsal and real-isolation plan/design/threat/closeout sources, recorded Compass candidate, API Spine boundary and protected-evidence/user-decision boundaries were restored before planning.",
+        "HEAD, master, handoff/current, origin/master and origin/handoff/current are aligned at a41297a6022eb4f6fdf710e014889ba84320b3a1.",
+        "Four unrelated pre-existing Bernie receipt/runtime-state files remain untracked, preserved and excluded.",
+        "Model calls, prompt or context transmission, model mounting, provider secrets, another container action, PostgreSQL, event feeds, product APIs, live mailboxes, persistent state, human-gate UI, appointment commands, PII, protected holdouts and historical Diary material remain closed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
