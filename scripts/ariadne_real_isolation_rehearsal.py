@@ -112,7 +112,8 @@ class CommandRunner(Protocol):
         *,
         timeout: int = 120,
         allowed_returncodes: frozenset[int] = frozenset({0}),
-    ) -> CommandResult: ...
+    ) -> CommandResult:
+        pass
 
 
 class DockerClient:

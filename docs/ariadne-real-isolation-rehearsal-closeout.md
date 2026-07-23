@@ -100,6 +100,11 @@ overclaim.
 The two warnings are existing Starlette and Google GenAI dependency
 deprecations and are unrelated to this tranche.
 
+The first protected-PR CodeQL review flagged the ellipsis body of the structural
+`CommandRunner` protocol as a no-effect statement. It was replaced with
+`pass`, which changes no runtime behaviour; focused gates and all required PR
+checks were rerun before integration.
+
 ## Allocation and review
 
 Sol High owned architecture, implementation, the single real lifecycle,

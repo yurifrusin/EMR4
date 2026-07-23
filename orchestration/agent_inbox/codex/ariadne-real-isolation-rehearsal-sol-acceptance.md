@@ -39,6 +39,10 @@ Accept the result because:
 9. 28 focused and 177 combined tests, schema/semantic validation, Ruff,
    compilation, JSON and whitespace gates pass.
 
+The protected-PR CodeQL no-effect comment on the structural protocol ellipsis
+was repaired mechanically with `pass`; no lifecycle or authority semantics
+changed.
+
 ## Claim boundary
 
 This accepts one local effective-isolation rehearsal only. It is not evidence

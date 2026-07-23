@@ -317,6 +317,11 @@ compilation, JSON and whitespace gates pass. Sol retained the tightly coupled
 image/provenance/run/cleanup surface; no worker, subagent or model reviewer was
 used and no independent-veto claim is made.
 
+The first protected-PR CodeQL review flagged the structural `CommandRunner`
+protocol ellipsis as a no-effect statement. Replacing it with `pass` was a
+mechanical, behaviour-neutral correction; focused and required PR gates were
+rerun.
+
 The Continuity graph advances to revision 21 and Compass revision 9 replaces
 the consumed isolation decision with a separately closed bounded
 agent-admission design candidate. The seven-step Reception One product journey
