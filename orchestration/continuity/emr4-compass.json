@@ -1,9 +1,9 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 10,
-  "updated_at": "2026-07-23T00:30:00Z",
-  "source_graph_revision": 22,
+  "map_revision": 11,
+  "updated_at": "2026-07-23T10:00:00Z",
+  "source_graph_revision": 23,
   "orientation_statement": "EMR4 is currently deepening Phase 2B through Reception One: the latest accepted proof shows that one combined receptionist request can remain safely oriented when committed Diary truth changes. This is a working local capability foundation, not a finished Reception One experience or a production-ready EMR.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
@@ -201,25 +201,24 @@
     },
     {
       "id": "ariadne-first-generated-draft-rehearsal",
-      "title": "Ariadne first generated-draft rehearsal",
-      "status": "candidate",
-      "strategic_question": "Should Ariadne select one exact cognition topology and model for one disposable authored-synthetic generated-draft attempt whose only egress is the deterministic proofreader?",
-      "why_it_matters": "The provider-neutral admission contract now passes, but all topology candidates remain deliberately unselected and no model has received context or produced a draft. The next material step would test one occupied cognition slot without granting tools, product reads, command authority or proofreader bypass.",
+      "title": "Ariadne generated-draft rehearsal gateway repair",
+      "status": "blocked",
+      "strategic_question": "Should Ariadne first run a provider-blocked diagnostic of Claude Code's gateway preflight shape before Yuri considers authorising another occupied generated-draft attempt?",
+      "why_it_matters": "The one authorised occupied process failed closed at the credential broker before any request reached DeepSeek. The isolation boundary behaved as intended, but no generated draft or proofreader input existed, and the exact rejected method/path was deliberately not retained.",
       "prerequisites": [
-        "The accepted bounded agent-admission design remains the frozen source for instruction/evidence separation, minimal context, model-independent caps, cancellation and proofreader-only egress.",
-        "A fresh Yuri decision selecting exactly one of the catalogued topologies, concrete model provenance and tokenizer-specific limits, including any licence, cost, weights/image, IPC/network or secret implications.",
-        "A one-attempt threat and evidence plan for model-specific instruction injection, output schema failure, cancellation, resource enforcement and complete cleanup, with product APIs, databases, event feeds, live mailboxes and commands still closed."
+        "Treat the 2026-07-23 DeepSeek V4 Flash work-cell attempt as consumed and revision-required; do not retry it under the earlier authority.",
+        "A fresh Yuri decision for a provider-blocked gateway-shape diagnostic that cannot forward requests to DeepSeek and records only method plus normalised path.",
+        "Only after that diagnostic, a further fresh decision and revised allowlist/threat plan before another occupied provider-generating attempt; product APIs, databases, event feeds, live mailboxes and commands remain closed."
       ],
       "boundary_changes": [
         "model-runtime"
       ],
       "evidence": [
-        "docs/ariadne-bounded-agent-admission-design-plan.md",
-        "docs/ariadne-bounded-agent-admission-design.md",
-        "docs/ariadne-bounded-agent-admission-design-closeout.md",
-        "docs/security/ariadne-bounded-agent-admission-threat-model-delta.md",
-        "orchestration/continuity/ariadne-bounded-agent-admission-evidence.json",
-        "orchestration/agent_inbox/codex/ariadne-bounded-agent-admission-design-sol-acceptance.md"
+        "docs/ariadne-deepseek-in-cell-generated-draft-rehearsal-plan.md",
+        "docs/ariadne-deepseek-in-cell-generated-draft-rehearsal-closeout.md",
+        "docs/security/ariadne-deepseek-in-cell-generated-draft-threat-model-delta.md",
+        "orchestration/continuity/ariadne-deepseek-in-cell/rehearsal-evidence.json",
+        "orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-generated-draft-sol-review.md"
       ]
     }
   ],
@@ -253,10 +252,21 @@
     {
       "id": "authorize-first-generated-draft-rehearsal",
       "question": "Should Ariadne select one exact topology and model for a single disposable authored-synthetic generated-draft rehearsal?",
-      "required_before": "Any model selection/call/mount, prompt or context transmission, provider or broker connection, model-specific token budget, agent-generated draft or occupied work-cell run.",
+      "required_before": "Historical decision satisfied for the single 2026-07-23 attempt only; that authority is consumed and cannot authorise a retry.",
       "evidence": [
         "docs/ariadne-bounded-agent-admission-design-closeout.md",
-        "orchestration/agent_inbox/codex/ariadne-bounded-agent-admission-design-sol-acceptance.md"
+        "docs/ariadne-deepseek-in-cell-generated-draft-rehearsal-plan.md",
+        "orchestration/continuity/ariadne-deepseek-in-cell/rehearsal-evidence.json"
+      ]
+    },
+    {
+      "id": "authorize-generated-draft-gateway-diagnostic-or-retry",
+      "question": "Should Ariadne run a provider-blocked Claude Code gateway-shape diagnostic, and only later consider a separately authorised retry?",
+      "required_before": "Any diagnostic container/process that inspects the rejected gateway method/path, any broker allowlist change, or any second occupied model/provider attempt.",
+      "evidence": [
+        "docs/ariadne-deepseek-in-cell-generated-draft-rehearsal-closeout.md",
+        "orchestration/continuity/ariadne-deepseek-in-cell/rehearsal-evidence.json",
+        "orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-generated-draft-sol-review.md"
       ]
     }
   ],
@@ -269,6 +279,7 @@
     "The accepted scripted work-cell rehearsal executes only a finite authored tape in process memory; it is not evidence of adaptive cognition, real isolation, persistence, live delivery or product-runtime behaviour.",
     "The accepted real-isolation rehearsal covers one disposable local container and the unchanged finite tape only; it is not evidence of adaptive cognition, model safety, daemon/kernel invulnerability, live authorization or product-runtime behaviour.",
     "The accepted bounded agent-admission design proves a provider-neutral, unoccupied, non-executing context and egress contract only; it is not evidence of model behaviour, tokenizer accounting, inference isolation or generated-draft quality.",
+    "The consumed DeepSeek in-cell attempt proves only that the inspected work-cell and credential-broker boundary failed closed and cleaned up; no request reached DeepSeek, so it is not evidence of provider inference, generated-draft quality or proofreader handling of model output.",
     "The decision horizon records candidates and gates. It neither recommends a winner nor grants authority."
   ]
 }

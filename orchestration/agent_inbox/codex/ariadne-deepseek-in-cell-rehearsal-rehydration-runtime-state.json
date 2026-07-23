@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "sprint_planning",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_ariadne_deepseek_in_cell_rehearsal_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Yuri selected DeepSeek V4 Flash through Claude Code for one bounded authored-synthetic generated-draft rehearsal.",
+        "The selected topology places a purpose-built tool-less Claude Code control process in one disposable work-cell container while inference remains a remote-provider operation through a narrow host broker.",
+        "No provider call or container action has occurred during rehydration."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude Code is selected only as the DeepSeek V4 Flash transport inside the future disposable cell; no standalone Claude model is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external veto reviewer is assigned before the one-attempt plan is frozen."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "On 2026-07-23 Yuri said to try the purpose-built first scenario after reviewing its exact launcher permissions.",
+        "Authority is bounded to one authored-synthetic attempt, the six accepted context-frame types, five draft-only output ports, deterministic-proofreader-only egress, fixed deadline, no generic Claude tools, no product/database/event/mailbox/command access, no persistence and no autonomous retry.",
+        "The complete live handover, current baton, authority allocation, bounded agent-admission plan/design/threat/closeout/acceptance, API Spine boundary and protected-evidence/user-decision boundaries were restored before planning.",
+        "HEAD, master, handoff/current, origin/master and origin/handoff/current are aligned at 02d189c6620ebb083c8f70d09e994792bf9bf42a.",
+        "Four unrelated pre-existing Bernie receipt/runtime-state files remain untracked, preserved and excluded.",
+        "PII, protected holdouts, historical Diary material, product reads, GraphQL, REST/OpenAPI commands, PostgreSQL, event feeds, live mailboxes, human-gate actions, deployment, production and autonomous action remain closed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

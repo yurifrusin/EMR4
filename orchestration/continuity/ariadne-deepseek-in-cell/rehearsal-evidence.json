@@ -1,0 +1,175 @@
+{
+  "schema_version": "ariadne.deepseek_in_cell_rehearsal_evidence.v1",
+  "protocol_id": "ariadne-deepseek-in-cell-generated-draft-rehearsal",
+  "result": "ariadne_deepseek_in_cell_generated_draft_rehearsal_revision_required",
+  "status": "revision_required",
+  "reason_codes": [
+    "claude-process-failed",
+    "provider-call-count-not-exactly-one"
+  ],
+  "evidence_label": "provider_transport_attempt_authored_synthetic_no_provider_call",
+  "evidence_correction": {
+    "kind": "metadata-only-evidence-labelling-correction",
+    "original_evidence_sha256": "sha256:7058228c3a3cce7db7c9cd8d1417612e6f72735def25e6a326dacf5c41ee0973",
+    "executed_host_runner_sha256": "sha256:0785438f802e81ca9e8c2f8b94280d8f3039b288ebb08b36a0837ad85c8986fe",
+    "corrected_fields": [
+      "evidence_label",
+      "topology.inference_location",
+      "attempt.provider_call_start_possible"
+    ],
+    "runtime_observations_changed": false
+  },
+  "source_hashes": {
+    "Dockerfile": "sha256:810d6df2d46621c5ba682954ba439db307ec2061ed9c8d01ab767294ccbcb53c",
+    "ariadne_deepseek_one_use_broker.mjs": "sha256:498fb9df8ff376ec5f55004f24b3c64d90855ef72d31bb82919d8eef48e6a694",
+    "ariadne_deepseek_work_cell_launcher.mjs": "sha256:479a6e9ff029992d716710f75473176e84b9e3c015edc878d5e749a24ec6f200",
+    "attempt.json": "sha256:af45aba852f4eaed9c54a859ac14aefa0ecc3d8f437120f4f6ee3ebe97e57e5a",
+    "output.schema.json": "sha256:87b2f714071f9c081ff261a7ac2d97078d1af176930009db70069062b053c5bf"
+  },
+  "image_build_evidence_sha256": "sha256:f5dfa1e2c6d8be00707ba2c9e0b9ec6844f65dbd98da4b3ea07c785ff566effb",
+  "topology": {
+    "topology_id": "in_cell_claude_code_remote_provider_broker_v1",
+    "model_process_location": "work-cell-container",
+    "selected_inference_location": "deepseek-remote-provider",
+    "provider_request_forwarded": false,
+    "provider_inference_completed": false,
+    "provider_key_present_in_cell": false,
+    "cell_general_internet_access": false,
+    "broker_host_ports": 0
+  },
+  "model": {
+    "provider": "deepseek",
+    "provider_declared_model_id": "deepseek-v4-flash",
+    "immutable_provider_weights_proved": false,
+    "transport": "claude_code_bare",
+    "claude_code_version": "2.1.201"
+  },
+  "attempt": {
+    "attempt_id": "generated-attempt-001",
+    "authority_consumed": true,
+    "model_process_started": true,
+    "provider_call_count": 0,
+    "retry_authorised": false,
+    "launcher_status": "failed",
+    "launcher_reason_code": "claude-process-failed",
+    "prompt_sha256": null,
+    "prompt_bytes": null,
+    "generated_output_sha256": null,
+    "generated_output_bytes": null,
+    "generated_draft_count": null
+  },
+  "broker_events": [
+    {
+      "event": "broker-ready",
+      "listen_port": 8080,
+      "allowed_path": "/anthropic/v1/messages",
+      "maximum_provider_calls": 1,
+      "maximum_request_bytes": 65536,
+      "maximum_output_tokens": 2048
+    },
+    {
+      "event": "broker-request-rejected",
+      "reason_code": "method-or-path-not-allowlisted"
+    }
+  ],
+  "usage": {},
+  "cost_context": {
+    "pricing_observed_date": "2026-07-23",
+    "currency": "USD",
+    "cache_miss_input_per_million": 0.14,
+    "output_per_million": 0.28,
+    "conservative_adapter_estimate_usd": null,
+    "adapter_estimate_authoritative": false,
+    "provider_billing_authoritative": true
+  },
+  "generated_draft_hashes": [],
+  "generated_draft_bodies_committed": false,
+  "raw_prompt_committed": false,
+  "raw_provider_response_committed": false,
+  "chain_of_thought_committed": false,
+  "schema_validation": "not-presented",
+  "proofreader": null,
+  "effective_policy": {
+    "broker": {
+      "user": "node",
+      "read_only_root": true,
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges"
+      ],
+      "mount_count": 0,
+      "published_port_count": 0,
+      "network_mode": "ariadne-deepseek-internal-tranche1",
+      "memory_bytes": 268435456,
+      "memory_swap_bytes": 268435456,
+      "nano_cpus": 500000000,
+      "pids_limit": 32,
+      "environment_keys": [
+        "BROKER_TOKEN",
+        "DEEPSEEK_API_KEY",
+        "NODE_VERSION",
+        "PATH",
+        "YARN_VERSION"
+      ]
+    },
+    "work_cell": {
+      "user": "node",
+      "read_only_root": true,
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges"
+      ],
+      "mount_count": 0,
+      "published_port_count": 0,
+      "network_mode": "ariadne-deepseek-internal-tranche1",
+      "memory_bytes": 805306368,
+      "memory_swap_bytes": 805306368,
+      "nano_cpus": 1000000000,
+      "pids_limit": 64,
+      "environment_keys": [
+        "BROKER_TOKEN",
+        "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC",
+        "DISABLE_AUTOUPDATER",
+        "DISABLE_ERROR_REPORTING",
+        "DISABLE_TELEMETRY",
+        "NODE_VERSION",
+        "PATH",
+        "YARN_VERSION"
+      ]
+    },
+    "internal_network": {
+      "internal": true,
+      "driver": "bridge",
+      "container_count": 1
+    }
+  },
+  "cleanup": {
+    "cell_removed": true,
+    "broker_removed": true,
+    "internal_network_removed": true,
+    "cell_image_tag_removed": true,
+    "broker_image_tag_removed": true
+  },
+  "product_connections": {
+    "postgresql": false,
+    "graphql": false,
+    "rest_openapi": false,
+    "product_api": false,
+    "event_feed": false,
+    "mailbox": false,
+    "human_action": false,
+    "command": false
+  },
+  "claim_limits": [
+    "one-provider-labelled-model-attempt",
+    "authored-synthetic-context-only",
+    "no-immutable-provider-weight-claim",
+    "no-general-model-quality-claim",
+    "no-product-runtime-claim",
+    "no-command-or-autonomous-action-claim"
+  ]
+}

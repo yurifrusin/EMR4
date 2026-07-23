@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_ariadne_deepseek_in_cell_rehearsal_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri selected exactly one DeepSeek V4 Flash authored-synthetic generated-draft attempt through a tool-less Claude Code 2.1.201 process inside a disposable work-cell container.",
+        "The allowlisted five-file image build passed with resolved Node base node@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d.",
+        "The broker and work-cell images exist with recorded local image IDs; build evidence records provider_call_performed=false, prompt_transmitted=false and provider_secret_in_image=false.",
+        "The static/schema/proofreader/API boundary gate passes and the single-use attempt ledger remains absent."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Anthropic-hosted Claude model is selected; Claude Code is only the pinned DeepSeek transport."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external veto reviewer is assigned for the one-attempt execution."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The fresh five-source receipt passed before plan compilation.",
+        "The frozen plan permits one occupied attempt and one provider request using only authored-synthetic opaque frames, five draft-only ports and deterministic-proofreader-only egress.",
+        "Provider key exposure to the cell, repository mounts, general cell Internet, tools, persistence, retries, product/database/event/mailbox/human/command connections, PII, protected evidence and historical Diary material remain forbidden.",
+        "Four unrelated pre-existing Bernie receipt/runtime-state files remain untracked, preserved and excluded."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

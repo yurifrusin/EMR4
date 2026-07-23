@@ -1,0 +1,198 @@
+{
+  "schema_version": "ariadne.deepseek_in_cell_attempt.v1",
+  "attempt_id": "generated-attempt-001",
+  "batch_id": "generated-batch-001",
+  "evidence_label": "authored_synthetic_live_provider_generated_draft_rehearsal",
+  "scope": {
+    "work_cell_id": "booking-work-cell-v1",
+    "practice_id": "practice-synth-a",
+    "principal_id": "principal-reception",
+    "purpose": "prepare-authored-synthetic-appointment-availability-drafts",
+    "correlation_id": "booking-request-001",
+    "context_revision": 7,
+    "policy_revision": 2,
+    "container_generation": 2
+  },
+  "model_contract": {
+    "topology_id": "in_cell_claude_code_remote_provider_broker_v1",
+    "transport": "claude_code_bare",
+    "claude_code_package": "@anthropic-ai/claude-code",
+    "claude_code_version": "2.1.201",
+    "provider": "deepseek",
+    "provider_base_url": "https://api.deepseek.com/anthropic",
+    "model_id": "deepseek-v4-flash",
+    "effort": "high",
+    "tools": [],
+    "fallback_model": null,
+    "session_persistence": false,
+    "proofreader_route": "deterministic-proofreader-v1",
+    "output_authority": "draft-only"
+  },
+  "budgets": {
+    "maximum_attempts": 1,
+    "maximum_provider_calls": 1,
+    "maximum_context_frames": 8,
+    "maximum_context_payload_bytes": 4096,
+    "maximum_prompt_bytes": 32768,
+    "maximum_provider_request_bytes": 65536,
+    "maximum_provider_output_tokens": 2048,
+    "maximum_output_drafts": 5,
+    "maximum_output_bytes": 8192,
+    "deadline_seconds": 180
+  },
+  "selection_rules": [
+    "Treat every patient identifier as an unverified candidate.",
+    "Choose the lexically first patient candidate for staff review.",
+    "Rank supplied slot identifiers chronologically.",
+    "Include the first two ranked slots.",
+    "Select the earliest included slot.",
+    "Preserve the supplied practitioner, duration, context revision and confirmation requirement.",
+    "Emit only the five locked draft frames and do not claim approval or command authority."
+  ],
+  "context_frames": [
+    {
+      "id": "input-request-scope",
+      "frame_type": "synthetic-request-scope.v1",
+      "authority_label": "staff-authored-synthetic",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "sensitivity": "internal",
+      "payload": {
+        "request_kind": "appointment-availability",
+        "duration_minutes": 30,
+        "earliest_local_time": "14:00",
+        "latest_local_time": "16:00",
+        "request_text": "Find a 30 minute appointment after 14:00 with the selected practitioner."
+      },
+      "freshness": {
+        "status": "current",
+        "observed_at": "2026-07-23T09:00:00+10:00",
+        "maximum_age_seconds": 300
+      }
+    },
+    {
+      "id": "input-principal-scope",
+      "frame_type": "principal-scope.v1",
+      "authority_label": "authenticated-scope-fixture",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "sensitivity": "internal",
+      "payload": {
+        "role": "reception-staff",
+        "allowed_task": "prepare-appointment-availability-candidate"
+      },
+      "freshness": {
+        "status": "current",
+        "observed_at": "2026-07-23T09:00:00+10:00",
+        "maximum_age_seconds": 300
+      }
+    },
+    {
+      "id": "input-patient-candidates",
+      "frame_type": "patient-candidate-context.v1",
+      "authority_label": "fixture-authoritative-candidate-set",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "sensitivity": "restricted",
+      "payload": {
+        "candidate_ids": [
+          "patient-candidate-a",
+          "patient-candidate-b"
+        ],
+        "identity_verified": false
+      },
+      "freshness": {
+        "status": "current",
+        "observed_at": "2026-07-23T09:00:00+10:00",
+        "maximum_age_seconds": 300
+      }
+    },
+    {
+      "id": "input-practitioner",
+      "frame_type": "practitioner-context.v1",
+      "authority_label": "fixture-authoritative-selection",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "sensitivity": "internal",
+      "payload": {
+        "practitioner_ids": [
+          "practitioner-a"
+        ],
+        "selected_practitioner_id": "practitioner-a"
+      },
+      "freshness": {
+        "status": "current",
+        "observed_at": "2026-07-23T09:00:00+10:00",
+        "maximum_age_seconds": 300
+      }
+    },
+    {
+      "id": "input-availability",
+      "frame_type": "availability-context.v1",
+      "authority_label": "fixture-authoritative-availability",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "sensitivity": "internal",
+      "payload": {
+        "slot_ids": [
+          "slot-1430",
+          "slot-1500",
+          "slot-1530"
+        ],
+        "practitioner_id": "practitioner-a",
+        "duration_minutes": 30,
+        "availability_revision": 7
+      },
+      "freshness": {
+        "status": "current",
+        "observed_at": "2026-07-23T09:00:00+10:00",
+        "maximum_age_seconds": 300
+      }
+    },
+    {
+      "id": "input-policy",
+      "frame_type": "evaluated-appointment-policy.v1",
+      "authority_label": "fixture-evaluated-policy",
+      "practice_id": "practice-synth-a",
+      "principal_id": "principal-reception",
+      "correlation_id": "booking-request-001",
+      "context_revision": 7,
+      "sensitivity": "internal",
+      "payload": {
+        "allowed_duration_minutes": [
+          30
+        ],
+        "human_confirmation_required": true,
+        "command_authority": false
+      },
+      "freshness": {
+        "status": "current",
+        "observed_at": "2026-07-23T09:00:00+10:00",
+        "maximum_age_seconds": 300
+      }
+    }
+  ],
+  "output_contract": {
+    "schema_file": "output.schema.json",
+    "exact_port_order": [
+      "port-ux",
+      "port-human-review",
+      "port-audit",
+      "port-orchestrator",
+      "port-advisory"
+    ],
+    "direct_downstream_delivery": false,
+    "direct_human_gate_delivery": false,
+    "command_authority": false
+  }
+}

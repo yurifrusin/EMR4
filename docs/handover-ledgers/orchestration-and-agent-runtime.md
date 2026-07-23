@@ -377,3 +377,44 @@ event feed, product API, live mailbox, human-gate UI, command, PII,
 protected/historical data, Stage 3B, production, deployment, release or
 autonomous-action gate opened. See
 `docs/ariadne-bounded-agent-admission-design-closeout.md`.
+
+## 2026-07-23 Ariadne DeepSeek in-cell generated-draft rehearsal
+
+Yuri selected the first admission topology: Claude Code 2.1.201 running
+tool-less and sessionless inside a disposable work-cell container, with
+authored-synthetic context only, DeepSeek V4 Flash behind a separate one-use
+credential broker, and deterministic-proofreader-only egress.
+
+The inspected cell was read-only, unmounted, non-root, capability-free,
+resource-capped and attached only to an internal network. The provider key
+existed in the broker environment, not the cell. The exact five-file build
+context excluded the repository and the product, database, event, mailbox and
+command surfaces remained disconnected.
+
+The single authorised model process started and consumed its attempt. Claude
+Code then made a preliminary request whose method or path was outside the
+frozen broker allowlist. The broker rejected it before forwarding; DeepSeek
+received zero requests, so no provider inference or cost occurred, no
+generated draft existed, and the deterministic proofreader received nothing.
+The sanitised broker retained the rejection reason but deliberately did not
+retain the method or path, so the exact gateway prerequisite remains unproved.
+
+All work-cell, broker, internal-network and derived-image-tag cleanup checks
+passed. The authoritative result is
+`ariadne_deepseek_in_cell_generated_draft_rehearsal_revision_required`, not an
+acceptance. The attempted architecture proved only that the inspected
+cell/broker boundary failed closed and cleaned up.
+
+The Continuity graph advances to revision 23 with a rejected exploration node.
+Compass revision 11 marks the generated-draft direction blocked. Any
+provider-blocked gateway-shape diagnostic, broker allowlist change or second
+occupied model/provider attempt requires a fresh Yuri decision; the consumed
+authority cannot be retried.
+
+The first protected-PR Python Security run later reported two Bandit B108
+findings on the literal `/tmp` targets in the Docker `--tmpfs` arguments.
+These are container-internal memory-only scratch mounts, not host temporary
+paths. Yuri approved the focused CI-only correction; two justified
+`nosec B108` annotations make the boundary explicit, and the exact Bandit
+profile plus focused checks pass without changing the executed runtime or its
+evidence.
