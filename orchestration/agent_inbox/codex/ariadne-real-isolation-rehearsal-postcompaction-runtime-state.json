@@ -1,0 +1,84 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "sprint_planning",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_ariadne_real_isolation_rehearsal_postcompaction_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is selected; the disposable container lifecycle is one tightly coupled Sol-owned acceptance surface."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external model or provider is selected or authorised."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external model review is selected or claimed."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Post-compaction on 2026-07-23, the complete live handover/current baton, authority allocation, accepted scripted rehearsal plan/design/threat-model/closeout, recorded Compass candidate, API Spine boundary and protected-evidence/user-decision boundaries were restored before planning continued.",
+        "Yuri's fresh authority remains bounded to one disposable local container running the unchanged accepted finite tape with networking disabled, read-only inputs and root filesystem, no secrets, bounded resources, inspectable evidence and explicit cleanup.",
+        "HEAD, master, handoff/current, origin/master and origin/handoff/current remain aligned at 59c3ffaef2513b50de9466e4a5382238d6c58331 before tranche changes.",
+        "Four unrelated pre-existing Bernie receipt/runtime-state files remain untracked, preserved and excluded.",
+        "Adaptive agents, generated drafts, models, providers, PostgreSQL, event feeds, product APIs, live mailboxes, persistent state, human-gate UI, appointment commands, PII, protected holdouts and historical Diary material remain closed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

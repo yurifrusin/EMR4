@@ -1,0 +1,156 @@
+{
+  "schema_version": "ariadne.real_isolation_manifest.v1",
+  "rehearsal_id": "ariadne-real-isolation-rehearsal-v1",
+  "result": "ariadne_real_isolation_rehearsal_pass",
+  "evidence_label": "authored_synthetic_disposable_local_container_isolation_rehearsal",
+  "authority": {
+    "one_container_run": true,
+    "adaptive_agent_attached": false,
+    "generated_drafts": false,
+    "product_connections": false,
+    "command_authority": false
+  },
+  "base_image": {
+    "observed_tag": "python:3.12.13-alpine3.22",
+    "reference": "docker.io/library/python@sha256:a190708a2dec1bd18b1decb539f8e8f5407abaa9bf39cacda583f7f8c11db322",
+    "index_digest": "sha256:a190708a2dec1bd18b1decb539f8e8f5407abaa9bf39cacda583f7f8c11db322",
+    "platform": "linux/amd64",
+    "platform_manifest_digest": "sha256:9381e50cc82f4279b949fcd2d2f5e57cf97b1da2399eb956502364ceea2f4e83",
+    "source": "https://github.com/docker-library/python.git",
+    "source_revision": "3362634339580d3232e65a66dd5a36c47ae7ff14",
+    "created": "2026-04-17T00:30:54Z"
+  },
+  "derived_image": {
+    "tag": "ariadne-real-isolation-rehearsal:v1",
+    "dockerfile": "orchestration/continuity/ariadne-real-isolation/Dockerfile",
+    "working_dir": "/workspace",
+    "user": "65532:65532",
+    "entrypoint": [
+      "python",
+      "/workspace/scripts/ariadne_real_isolation_payload.py"
+    ],
+    "environment": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+      "PYTHON_VERSION=3.12.13",
+      "PYTHON_SHA256=c08bc65a81971c1dd5783182826503369466c7e67374d1646519adf05207b684",
+      "PYTHONDONTWRITEBYTECODE=1",
+      "PYTHONUNBUFFERED=1"
+    ]
+  },
+  "build_context": {
+    "kind": "temporary_exact_allowlist",
+    "repository_root_is_context": false,
+    "manifest_path": "orchestration/continuity/ariadne-real-isolation-rehearsal-manifest.json",
+    "allowlist": [
+      {
+        "path": "orchestration/continuity/ariadne-real-isolation/Dockerfile",
+        "sha256": "sha256:c1eda723b3bcae2415e124f8c8bcd64cb9262719dcdfa66765a484aecd8027a5"
+      },
+      {
+        "path": "scripts/ariadne_real_isolation_payload.py",
+        "sha256": "sha256:ea0c51c860c69caa0a68c5587241004e0129acda90fe103f07946b6fa7087bd5"
+      },
+      {
+        "path": "scripts/ariadne_scripted_cognitive_work_cell_rehearsal.py",
+        "sha256": "sha256:64c775b21bc5f9cac7d3378cfd38c2d99b4704f78ae6edaab4622d3915df133f"
+      },
+      {
+        "path": "scripts/ariadne_bounded_cognitive_work_cell.py",
+        "sha256": "sha256:66d10fe40e40be6c9ff4b4addc97d52befbcbf68a4c1f098b0ef3a11d07d0c47"
+      },
+      {
+        "path": "orchestration/continuity/ariadne-scripted-cognitive-work-cell-rehearsal-example.json",
+        "sha256": "sha256:1eedaa859f4e0f97fe0e6b345055f680820f405e9c5ed780833fefaf74d89031"
+      },
+      {
+        "path": "orchestration/continuity/ariadne-bounded-cognitive-work-cell-example.json",
+        "sha256": "sha256:f54896d7caeeefa567c69791e7e0356bb6b8fcbbbcc1613119c943d20a6b9a65"
+      },
+      {
+        "path": "orchestration/continuity/ariadne-scripted-cognitive-work-cell-rehearsal-evidence.json",
+        "sha256": "sha256:52a6d9c9f2269398db5ae11d314fb574bc452ab9200f6d99b2c7bfafac7234ce"
+      },
+      {
+        "path": "docs/ariadne-scripted-cognitive-work-cell-rehearsal-plan.md",
+        "sha256": "sha256:e7c5a7390d68657e821fc6e7507cd889ce1f2688a3aa26a641f5592746aa734d"
+      },
+      {
+        "path": "docs/ariadne-scripted-cognitive-work-cell-rehearsal-design.md",
+        "sha256": "sha256:b97e57eee1d8cd4e978b4b2670605c72c3523bbdc0239f049cfbb8429e76c07d"
+      },
+      {
+        "path": "docs/security/ariadne-scripted-cognitive-work-cell-rehearsal-threat-model-delta.md",
+        "sha256": "sha256:aa283a2e0b925aadab420db89bb079179ca02906dca22bf3dc12023beaab9415"
+      },
+      {
+        "path": "docs/ariadne-bounded-cognitive-work-cell-protocol-closeout.md",
+        "sha256": "sha256:4ba879e571fdf8d25d03837f8a391ce304d589a48a3f148ceeffa1a9e242a856"
+      },
+      {
+        "path": "docs/ariadne-bounded-cognitive-work-cell-protocol-design.md",
+        "sha256": "sha256:8c259345cc6334928b342356ecfd66aa9e4c391d2c4bc209509a17a0fb2be278"
+      },
+      {
+        "path": "docs/ariadne-bounded-cognitive-work-cell-protocol-plan.md",
+        "sha256": "sha256:516417059ea2a658e0d58bf66bef444fcb97504880a096662e1698fc111220f9"
+      },
+      {
+        "path": "docs/security/ariadne-bounded-cognitive-work-cell-threat-model-delta.md",
+        "sha256": "sha256:0ed2cfe9cdf42656fe418a1775e816d13343303b51b9fcc6303adfe04eba5940"
+      }
+    ]
+  },
+  "container": {
+    "name": "ariadne-real-isolation-rehearsal-v1",
+    "hostname": "ariadne-rehearsal",
+    "network_mode": "none",
+    "read_only_rootfs": true,
+    "user": "65532:65532",
+    "cap_drop": [
+      "ALL"
+    ],
+    "cap_add": [],
+    "security_opt": [
+      "no-new-privileges=true"
+    ],
+    "privileged": false,
+    "mounts": [],
+    "published_ports": [],
+    "host_environment_forwarded": false,
+    "secrets": [],
+    "restart_policy": "no"
+  },
+  "resources": {
+    "memory_bytes": 134217728,
+    "memory_swap_bytes": 134217728,
+    "nano_cpus": 500000000,
+    "pids_limit": 32,
+    "nofile_soft": 64,
+    "nofile_hard": 64
+  },
+  "cleanup": {
+    "remove_container": true,
+    "remove_derived_image": true,
+    "remove_base_reference_if_acquired": true,
+    "remove_temporary_context": true,
+    "daemon_wide_prune": false,
+    "possible_unreferenced_layer_cache": true
+  },
+  "closed_connections": [
+    "adaptive-agent",
+    "appointment-command",
+    "database",
+    "event-feed",
+    "human-gate-runtime",
+    "live-mailbox",
+    "model",
+    "network-egress",
+    "persistence",
+    "product-api",
+    "provider",
+    "secret",
+    "writable-input"
+  ]
+}

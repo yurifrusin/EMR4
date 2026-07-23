@@ -56,7 +56,7 @@
       "voice"
     ]
   },
-  "graph_revision": 20,
+  "graph_revision": 21,
   "harvests": [],
   "nodes": [
     {
@@ -304,6 +304,88 @@
         "Plugin installation, workflow hooks and a visual branch map remain deferred."
       ],
       "updated_at": "2026-07-20T13:50:00Z"
+    },
+    {
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "container-runtime",
+            "source": "docs/ariadne-real-isolation-rehearsal-plan.md"
+          }
+        ],
+        "notes": [
+          "Yuri authorised one disposable local real-isolation rehearsal on 2026-07-23.",
+          "The consumed opening permits only the exact digest-pinned image and one fixed authored-synthetic lifecycle. Models, providers, networking, writable or mounted inputs, secrets, persistence, product connections, PII and commands remain closed."
+        ]
+      },
+      "claim_scope": [
+        "One local linux/amd64 container ran the unchanged accepted eight-scenario, 53-transition tape under an inspected network-none, read-only, non-root, no-mount, capability-dropped and resource-bounded policy.",
+        "The claim covers exact image provenance, workload observations, deterministic predecessor equality and scoped cleanup; it does not prove adaptive cognition, daemon or kernel invulnerability, product behaviour or production safety."
+      ],
+      "contract_evidence": [],
+      "coordinates": {
+        "git_ref": "codex/ariadne-real-isolation-rehearsal",
+        "source_head": "59c3ffaef2513b50de9466e4a5382238d6c58331",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "created_at": "2026-07-22T23:38:10Z",
+      "decisions": [
+        {
+          "id": "real-isolation-rehearsal-scope-frozen",
+          "source": "docs/ariadne-real-isolation-rehearsal-plan.md",
+          "status": "accepted",
+          "summary": "Run the unchanged accepted finite tape once in one digest-pinned, disposable, network-disabled, read-only, no-secret and resource-bounded local container."
+        },
+        {
+          "id": "real-isolation-rehearsal-accepted",
+          "source": "orchestration/agent_inbox/codex/ariadne-real-isolation-rehearsal-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the inspected effective isolation policy, exact predecessor result, stopped-state proof and explicit scoped cleanup without widening model or product authority."
+        }
+      ],
+      "evidence": {
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-real-isolation-rehearsal-sol-acceptance.md"
+        ],
+        "closeouts": [
+          "docs/ariadne-real-isolation-rehearsal-closeout.md",
+          "docs/ariadne-real-isolation-rehearsal-design.md",
+          "orchestration/continuity/ariadne-real-isolation-rehearsal-evidence.json"
+        ],
+        "findings": [
+          "docs/security/ariadne-real-isolation-rehearsal-threat-model-delta.md"
+        ],
+        "plans": [
+          "docs/ariadne-real-isolation-rehearsal-plan.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-real-isolation-rehearsal-integration-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-real-isolation-rehearsal-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-real-isolation-rehearsal-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-real-isolation-rehearsal-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-real-isolation-rehearsal-prepush-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-real-isolation-rehearsal-rehydration-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_real_isolation_rehearsal.py"
+        ]
+      },
+      "id": "ariadne-real-isolation-rehearsal",
+      "kind": "exploration",
+      "relationships": [
+        {
+          "node_id": "ariadne-scripted-cognitive-work-cell-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "status": "accepted",
+      "title": "Ariadne Real-Isolation Rehearsal",
+      "unresolved_gates": [
+        "Any adaptive/generated cognition, model, provider, repeated or long-lived container, networking, writable or mounted runtime input, secret/workload identity, persistence, product read or command requires a fresh Yuri decision.",
+        "PII, protected/historical evidence, human-gate UI, Stage 3B, production, deployment, release and autonomous action remain separately closed."
+      ],
+      "updated_at": "2026-07-22T23:38:10Z"
     },
     {
       "authority": {
@@ -1167,5 +1249,5 @@
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-07-22T21:58:02Z"
+  "updated_at": "2026-07-22T23:38:10Z"
 }

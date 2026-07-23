@@ -109,17 +109,17 @@ Prerequisites:
 - A fresh Yuri decision naming the exact existing local feed adapter and a runtime threat model before any connection or persistent mailbox.
 - Explicit authentication, durable deduplication, persistence, failure, dead-letter and retention decisions while preserving separation from the development Continuity graph.
 
-### Ariadne disposable real-isolation rehearsal — candidate
+### Ariadne bounded agent-admission design — candidate
 
-Should the accepted finite work-cell tape be rehearsed inside one disposable network-disabled, read-only, no-secret local container with no model or product connection?
+Should Ariadne design the least authority-widening way to admit generated cognition into the now-isolated work cell while keeping every output draft-only and proofreader-controlled?
 
-The in-memory rehearsal now proves deterministic control-plane transitions. A real-isolation rehearsal could next test whether declared container policy matches effective isolation before any adaptive reasoner is considered.
+The finite tape and one effective isolation envelope now pass, but no adaptive agent has received context or produced a draft. The next design must decide local versus provider transport, context and secret boundaries, resource budgets, model failure semantics and adversarial evidence before any model call.
 
 Prerequisites:
 
-- The accepted scripted in-memory rehearsal and Bounded Cognitive Work Cell protocol remain the frozen sources for the tape, proofreader and authority grammar.
-- A fresh Yuri decision opening only a disposable real local container plus the exact commands required to build, inspect, run and remove it.
-- A threat plan for image provenance, network disablement, read-only inputs, no secrets, resource limits, evidence capture and cleanup, with models, databases, event feeds, product APIs, live mailboxes and commands inside the work cell still closed.
+- The accepted Bounded Cognitive Work Cell protocol, scripted rehearsal and real-isolation evidence remain frozen sources for typed drafts, proofreader sovereignty and container posture.
+- A fresh Yuri decision stating whether the tranche is design-only or may name a concrete local/model-provider transport; no call is implied by this candidate.
+- An exact threat and evidence plan for context minimisation, prompt injection, model provenance, tokens/resources, networking or model mounting, secrets, cancellation, deterministic egress and cleanup, with product APIs, databases, event feeds, live mailboxes and commands still closed.
 
 ## Decisions that remain Yuri's
 
@@ -129,8 +129,8 @@ Prerequisites:
   Required before: Any automatic hook, LLM Conductor call, worker dispatch, worktree action, PR action or protected-ref operation by Ariadne software.
 - **Should the accepted Synaptic Event Router protocol connect to the existing default-off local appointment-reschedule feed?**
   Required before: Any operational-DAG scope registry, database/event-feed connection, persistent node mailbox, listener, broker, retry worker or event-driven reconciliation beyond the existing bounded Reception One exception.
-- **Should Ariadne run the accepted finite tape in a disposable network-disabled, read-only local container to test real isolation policy?**
-  Required before: Any container image build/pull, container command, runtime namespace, mounted rehearsal input or effective-isolation evidence run.
+- **Should Ariadne design the first bounded agent-admission envelope, and should that design remain provider-neutral or name a concrete model transport?**
+  Required before: Any agent-generated draft, model selection/call/mount, prompt or context transmission, provider secret, model network path, token/resource budget or adaptive work-cell run.
 
 ## Map limits
 
@@ -140,17 +140,16 @@ Prerequisites:
 - The accepted Synaptic Event Router proof is repository-local authored-synthetic protocol evidence only; a future per-practice operational DAG must remain separate from the development Continuity graph.
 - The accepted Bounded Cognitive Work Cell proof describes an unoccupied agent-eligible node and deterministic egress gate; it is not evidence of model, container or product-runtime behaviour.
 - The accepted scripted work-cell rehearsal executes only a finite authored tape in process memory; it is not evidence of adaptive cognition, real isolation, persistence, live delivery or product-runtime behaviour.
+- The accepted real-isolation rehearsal covers one disposable local container and the unchanged finite tape only; it is not evidence of adaptive cognition, model safety, daemon/kernel invulnerability, live authorization or product-runtime behaviour.
 - The decision horizon records candidates and gates. It neither recommends a winner nor grants authority.
 
 ## Evidence index
 
-- `docs/ariadne-bounded-cognitive-work-cell-protocol-closeout.md`
-- `docs/ariadne-bounded-cognitive-work-cell-protocol-plan.md`
+- `docs/ariadne-bounded-cognitive-work-cell-protocol-design.md`
 - `docs/ariadne-compass-increment2-plan.md`
 - `docs/ariadne-continuity-engine-increment1-closeout.md`
+- `docs/ariadne-real-isolation-rehearsal-closeout.md`
 - `docs/ariadne-sandbox-dag-protocol-design.md`
-- `docs/ariadne-scripted-cognitive-work-cell-rehearsal-closeout.md`
-- `docs/ariadne-scripted-cognitive-work-cell-rehearsal-design.md`
 - `docs/ariadne-scripted-cognitive-work-cell-rehearsal-plan.md`
 - `docs/ariadne-synaptic-event-router-candidate-plan.md`
 - `docs/ariadne-synaptic-event-router-protocol-closeout.md`
@@ -168,8 +167,9 @@ Prerequisites:
 - `docs/bernie-reception-one-committed-event-vertical-closeout.md`
 - `docs/bernie-reception-one-focused-review-context.md`
 - `docs/bernie-stage1-provider-free-supervised-booking-acceptance-plan.md`
+- `docs/security/ariadne-real-isolation-rehearsal-threat-model-delta.md`
 - `implementation_plan.md`
-- `orchestration/agent_inbox/codex/ariadne-scripted-cognitive-work-cell-rehearsal-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/ariadne-real-isolation-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-synaptic-event-router-protocol-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/bernie-functional-meta-grid-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/bernie-meta-grid-live-local-integration-sol-acceptance.md`
@@ -177,5 +177,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-combined-scope-proof-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-committed-event-vertical-sol-acceptance.md`
+- `orchestration/continuity/ariadne-real-isolation-rehearsal-evidence.json`
 
-_Compass map revision 8; continuity graph revision 20._
+_Compass map revision 9; continuity graph revision 21._

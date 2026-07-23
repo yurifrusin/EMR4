@@ -280,3 +280,56 @@ network sandbox, persistence, PostgreSQL, event feed, product API, live mailbox,
 human-gate UI, command, PII, protected/historical data, Stage 3B, production,
 deployment, release or autonomous-action gate opened. See
 `docs/ariadne-scripted-cognitive-work-cell-rehearsal-closeout.md`.
+
+## 2026-07-23 Ariadne real-isolation rehearsal
+
+Yuri authorised the recorded one-shot real-isolation candidate. It passes as
+`ariadne_real_isolation_rehearsal_pass` after one local Docker lifecycle around
+the unchanged accepted authored-synthetic tape.
+
+The Docker Official Python 3.12.13 Alpine 3.22 image is pinned to OCI index
+`sha256:a190708a2dec1bd18b1decb539f8e8f5407abaa9bf39cacda583f7f8c11db322`
+and linux/amd64 manifest
+`sha256:9381e50cc82f4279b949fcd2d2f5e57cf97b1da2399eb956502364ceea2f4e83`.
+The repository was neither build context nor mount: a temporary context
+contained exactly 14 hash-bound authored-synthetic sources plus its fixed
+manifest, and the Dockerfile ran no build command.
+
+Pre-start effective inspection proved network none, a read-only root,
+UID/GID 65532, all capabilities dropped, no-new-privileges, no mounts,
+devices, secrets, forwarded host environment or ports, and exact 128 MiB
+memory/swap, 0.5 CPU, 32-PID and 64-file limits. Inside the container the
+payload observed loopback only and an `EROFS` write stop with no residue. It
+ran the accepted eight-scenario, 53-transition tape twice through the unchanged
+proofreader and exactly reproduced the predecessor evidence. The container
+exited zero without OOM or engine error.
+
+The fixed container, derived image, run-acquired base reference and temporary
+context were explicitly removed and independently rechecked absent. No
+daemon-wide prune was run; possible unreferenced Docker layer/BuildKit cache
+contains only the official base and allowlisted synthetic bundle and is
+recorded as residual rather than called erased.
+
+Twenty-eight focused and 177 combined tests pass with predecessor work-cell,
+Event Router, Sandbox DAG, Continuity, Compass, orchestrator, operating-model,
+API Spine and handover populations. Schema/semantic validation, Ruff,
+compilation, JSON and whitespace gates pass. Sol retained the tightly coupled
+image/provenance/run/cleanup surface; no worker, subagent or model reviewer was
+used and no independent-veto claim is made.
+
+The first protected-PR CodeQL review flagged the structural `CommandRunner`
+protocol ellipsis as a no-effect statement. Replacing it with `pass` was a
+mechanical, behaviour-neutral correction; focused and required PR gates were
+rerun.
+
+The Continuity graph advances to revision 21 and Compass revision 9 replaces
+the consumed isolation decision with a separately closed bounded
+agent-admission design candidate. The seven-step Reception One product journey
+and current product node remain unchanged.
+
+No adaptive agent, generated draft, model, provider, networking, writable or
+mounted runtime input, secret/workload identity, persistence, PostgreSQL,
+event feed, product API, live mailbox, human-gate UI, command, PII,
+protected/historical data, Stage 3B, production, deployment, release or
+autonomous-action gate remains open. See
+`docs/ariadne-real-isolation-rehearsal-closeout.md`.

@@ -14,3 +14,4 @@
 *.xml text eol=lf
 *.yml text eol=lf
 *.yaml text eol=lf
+orchestration/continuity/ariadne-real-isolation/Dockerfile text eol=lf

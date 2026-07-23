@@ -1,0 +1,107 @@
+{
+  "schema_version": "ariadne.real_isolation_rehearsal_evidence.v1",
+  "result": "ariadne_real_isolation_rehearsal_pass",
+  "evidence_label": "authored_synthetic_disposable_local_container_isolation_rehearsal",
+  "manifest_sha256": "sha256:49a39bcc9b8f493def9e4817dae8a24bc03040832af6563d9dbcc3a46858f07b",
+  "allowlisted_source_count": 14,
+  "allowlisted_sources_sha256": "sha256:f7322fea8359eaf3b5054d572cafb9f607a0e6f52c25cdffacaa184600d44b90",
+  "engine": {
+    "os": "linux",
+    "architecture": "amd64",
+    "version_major_minor": "29.5"
+  },
+  "image": {
+    "base_reference": "docker.io/library/python@sha256:a190708a2dec1bd18b1decb539f8e8f5407abaa9bf39cacda583f7f8c11db322",
+    "base_index_digest": "sha256:a190708a2dec1bd18b1decb539f8e8f5407abaa9bf39cacda583f7f8c11db322",
+    "platform": "linux/amd64",
+    "platform_manifest_digest": "sha256:9381e50cc82f4279b949fcd2d2f5e57cf97b1da2399eb956502364ceea2f4e83",
+    "source_revision": "3362634339580d3232e65a66dd5a36c47ae7ff14",
+    "registry_provenance_verified": true,
+    "base_reference_preexisting": false,
+    "derived_selected_config_sha256": "sha256:c3fe26835b82b732648dd2bcdd3337c411673cca3832032bfae09067a70eb81e"
+  },
+  "effective_policy": {
+    "inspect_before_start": true,
+    "selected_config_sha256": "sha256:01565821d7e028547c546fd33d76c227745f07bfaf97a51d59812ff64d71988e",
+    "network_mode": "none",
+    "read_only_rootfs": true,
+    "user": "65532:65532",
+    "all_capabilities_dropped": true,
+    "no_new_privileges": true,
+    "privileged": false,
+    "mount_count": 0,
+    "secret_count": 0,
+    "published_port_count": 0,
+    "host_environment_forwarded": false,
+    "memory_bytes": 134217728,
+    "memory_swap_bytes": 134217728,
+    "nano_cpus": 500000000,
+    "pids_limit": 32,
+    "nofile_soft": 64,
+    "nofile_hard": 64
+  },
+  "payload": {
+    "schema_version": "ariadne.real_isolation_payload.v1",
+    "status": "passed",
+    "result": "ariadne_real_isolation_payload_pass",
+    "evidence_label": "authored_synthetic_disposable_local_container_payload",
+    "isolation_observation": {
+      "uid": 65532,
+      "gid": 65532,
+      "network_interfaces": [
+        "lo"
+      ],
+      "loopback_only": true,
+      "write_probe_blocked": true,
+      "write_probe_errno": "EROFS",
+      "write_probe_residue": false
+    },
+    "allowlisted_source_count": 14,
+    "allowlisted_sources_sha256": "sha256:f7322fea8359eaf3b5054d572cafb9f607a0e6f52c25cdffacaa184600d44b90",
+    "predecessor_projection_sha256": "sha256:1724f3e804ebe3ef7fe033e2f3f4feaf0c7897054960979a7451735ff15d1566",
+    "predecessor_runs_byte_identical": true,
+    "predecessor_result": "ariadne_scripted_cognitive_work_cell_rehearsal_pass",
+    "scenario_count": 8,
+    "transition_count": 53,
+    "released_edge_count": 8,
+    "human_gate_delivery_count": 4,
+    "aborted_edge_count": 2,
+    "supersession_count": 1,
+    "adaptive_agent_attached": false,
+    "external_effects_enabled": false,
+    "command_authority": false
+  },
+  "stopped_state": {
+    "status": "exited",
+    "running": false,
+    "paused": false,
+    "restarting": false,
+    "oom_killed": false,
+    "dead": false,
+    "exit_code": 0,
+    "error_empty": true
+  },
+  "closed_connections": [
+    "adaptive-agent",
+    "appointment-command",
+    "database",
+    "event-feed",
+    "human-gate-runtime",
+    "live-mailbox",
+    "model",
+    "network-egress",
+    "persistence",
+    "product-api",
+    "provider",
+    "secret",
+    "writable-input"
+  ],
+  "cleanup": {
+    "container_absent": true,
+    "derived_image_absent": true,
+    "base_reference_state_preserved": true,
+    "temporary_context_absent": true,
+    "daemon_wide_prune_performed": false,
+    "possible_unreferenced_layer_cache": true
+  }
+}
