@@ -1,0 +1,75 @@
+{
+  "authority_boundary": "receipt_only_repository_local_postgresql_schema_migration_and_disposable_authored_synthetic_acceptance_no_routes_cookies_external_identity_product_reads_deployment_production_release_commit_push_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "accept_the_authorised_repository_local_postgresql_shared_application_auth_persistence_tranche_after_serial_disposable_authored_synthetic_verification_without_routes_cookies_external_identity_product_reads_deployment_production_release_commit_or_push",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. raisa_shared_application_auth_runtime_foundation_pass at Continuity revision 182 and Compass revision 163 is the accepted parent; Yuri authorised the exact PostgreSQL persistence/migration candidate now under acceptance.",
+    "current_authority_allocation": "GPT Sol retained this serial, tightly coupled disposable-database tranche under the worker-lane economy rule. No worker, subagent, provider, external reviewer, identity provider or cloud control plane was selected or dispatched.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-shared-application-auth-postgresql-persistence-plan.md",
+      "docs/security/raisa-shared-application-auth-postgresql-persistence-threat-model-delta.md",
+      "app/models/application_auth.py",
+      "alembic/versions/o4p5q6r7s8t9_add_application_auth_persistence.py",
+      "app/services/application_auth_persistence.py",
+      "scripts/raisa_shared_application_auth_postgresql_persistence_acceptance.py",
+      "orchestration/continuity/raisa-shared-application-auth-postgresql-persistence/live-local-backend-postgres-evidence.json",
+      "tests/test_raisa_shared_application_auth_postgresql_persistence.py",
+      "docs/raisa-shared-application-auth-runtime-foundation-closeout.md",
+      "orchestration/continuity/emr4-continuity-graph.json revision 182 parent",
+      "orchestration/continuity/emr4-compass.json revision 163 parent",
+      "docs/ariadne-compass-current.md rendered revision 163 parent"
+    ],
+    "protected_evidence_boundaries": "Only disposable authored-synthetic identity metadata was written. Protected holdouts and raw historical Diary material were not inspected. Routes, cookies, external identity, Microsoft/Office authority, product-derived, patient, health, clinical and historical data, providers, commands, microphone capture, document mutation, cloud/IAM changes, deployment, production and release remained closed.",
+    "git_refs_and_worktree": {
+      "HEAD": "8fa732592fbee4f57c322b13d9d8ff89fcc7fa33",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "12fb7800ea285561b5ea50cbfe328b4d3d0fc1f8",
+      "codex/current": "12fb7800ea285561b5ea50cbfe328b4d3d0fc1f8",
+      "claude/current": "12fb7800ea285561b5ea50cbfe328b4d3d0fc1f8",
+      "antigravity/current": "12fb7800ea285561b5ea50cbfe328b4d3d0fc1f8",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/codex/ariadne-terra-gemini-comparative-rehearsal": "8fa732592fbee4f57c322b13d9d8ff89fcc7fa33",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "upstream": "origin/codex/ariadne-terra-gemini-comparative-rehearsal",
+      "upstream_ahead": 0,
+      "upstream_behind": 0,
+      "all_unrelated_and_accepted_uncommitted_changes_preserved": true,
+      "durable_worker_worktrees_clean": true,
+      "all_named_protected_refs_are_ancestors_of_HEAD": true,
+      "protected_refs_unchanged_after_fetch": true
+    }
+  },
+  "verification": {
+    "standalone_live_local_postgresql_result": "raisa_shared_application_auth_postgresql_persistence_pass",
+    "focused_cases_passed": 60,
+    "expanded_no_conftest_cases_passed": 156,
+    "database_fixture_cases_passed_serially": 12,
+    "concurrent_redemption_success_count": 1,
+    "concurrent_redemption_denial": "exchange_already_consumed",
+    "forced_audit_outage_state_unchanged": true,
+    "raw_secret_matches": 0,
+    "rls_probe_passed": true,
+    "disposable_database_absent_after": true,
+    "all_recorded_external_and_product_side_effect_counts_zero": true
+  },
+  "revision_binding": {
+    "continuity_graph_revision_expected": 183,
+    "compass_map_revision_expected": 164,
+    "compass_source_graph_revision_expected": 183,
+    "rendered_compass_exact_validation_required": true
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

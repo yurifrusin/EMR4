@@ -59,7 +59,7 @@
       "voice"
     ]
   },
-  "graph_revision": 180,
+  "graph_revision": 183,
   "harvests": [],
   "nodes": [
     {
@@ -8866,12 +8866,12 @@
         {
           "contract_id": "committed-reschedule-availability-reconciliation",
           "status": "satisfied",
-        "evidence": [
-          "orchestration/continuity/raisa-word-online-authenticated-companion-verification/browser-word-online-evidence.json",
-          "orchestration/continuity/raisa-word-online-authenticated-companion-verification/final-residue-evidence.json",
-          "docs/raisa-word-online-authenticated-companion-verification-closeout.md",
-          "tests/test_raisa_office_web_dev_context.py"
-        ],
+          "evidence": [
+            "orchestration/continuity/raisa-word-online-authenticated-companion-verification/browser-word-online-evidence.json",
+            "orchestration/continuity/raisa-word-online-authenticated-companion-verification/final-residue-evidence.json",
+            "docs/raisa-word-online-authenticated-companion-verification-closeout.md",
+            "tests/test_raisa_office_web_dev_context.py"
+          ],
           "note": "No backend, database, committed event, availability or Diary truth path was contacted or changed."
         }
       ],
@@ -8908,9 +8908,359 @@
         "Provider, backend, database, microphone, appointment command, document write, production and release remain closed.",
         "This evidence makes no Microsoft or Google physical or sovereign processing claim."
       ]
+    },
+    {
+      "id": "raisa-shared-application-auth-clinician-role-boundary",
+      "title": "Raisa Shared Application Authentication and Clinician-Role Boundary",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-07-31T12:30:00Z",
+      "updated_at": "2026-07-31T12:30:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-terra-gemini-comparative-rehearsal",
+        "source_head": "8fa732592fbee4f57c322b13d9d8ff89fcc7fa33",
+        "thread_id": null,
+        "worktree_role": "integration"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-word-online-authenticated-companion-verification",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri authorized the repository-local, provider-free shared architecture defined in docs/raisa-shared-application-auth-clinician-role-boundary-plan.md.",
+          "No runtime authentication, identity-provider, cloud, IAM, deployment or production change was authorized.",
+          "Provider calls, product-derived data, clinical authority, database reads or writes, appointment commands, microphone capture and document mutation remained closed.",
+          "Microsoft or Office identity is explicitly separate from EMR4 application authority."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-shared-backend-auth-boundary-181",
+          "source": "orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/auth-boundary-policy.json",
+          "status": "accepted",
+          "summary": "Accept one backend-owned identity, session, clinician role, practice-scope and required-audit decision across all three surfaces."
+        },
+        {
+          "id": "accept-bound-cross-surface-session-exchange-181",
+          "source": "docs/security/raisa-shared-application-auth-clinician-role-boundary-threat-model-delta.md",
+          "status": "accepted",
+          "summary": "Accept an opaque server-side session model and a short-lived single-use origin, audience, state, nonce, generation and PKCE-bound exchange without bearer or clinical payload transport."
+        },
+        {
+          "id": "keep-auth-runtime-and-product-reads-closed-181",
+          "source": "docs/raisa-shared-application-auth-clinician-role-boundary-closeout.md",
+          "status": "accepted",
+          "summary": "Keep runtime authentication, external identity, product reads, clinical authority, persistence, deployment, production and release outside this architecture pass."
+        }
+      ],
+      "claim_scope": [
+        "One typed backend-owned clinician-read policy is equivalent across desktop Word, Word Online and the native Diary.",
+        "Microsoft or Office sign-in and client role, practice, document or host claims cannot create or modify authority.",
+        "The initial clinician-read rule requires a fresh active GP, an active same-practice practitioner link, same-practice resource scope, current sessions and successful required audit before data access.",
+        "Twenty-three authorization and thirteen cross-surface exchange cases pass with all external and product side effect counts zero."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/auth-boundary-policy.json",
+            "orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/provider-free-acceptance-evidence.json",
+            "tests/test_raisa_shared_application_auth_boundary.py"
+          ],
+          "note": "The architecture adds no proposal, confirmation or command authority; every later protected operation must re-enter the same backend authorization boundary."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-shared-application-auth-clinician-role-boundary-design.md",
+            "orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/provider-free-acceptance-evidence.json",
+            "docs/raisa-shared-application-auth-clinician-role-boundary-closeout.md"
+          ],
+          "note": "No backend, database, committed event or Diary truth path ran or changed in this architecture-only tranche."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-shared-application-auth-clinician-role-boundary-plan.md",
+          "docs/raisa-shared-application-auth-clinician-role-boundary-design.md",
+          "docs/security/raisa-shared-application-auth-clinician-role-boundary-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/auth-boundary-policy.json",
+          "orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/acceptance-cases.json",
+          "orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/provider-free-acceptance-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-shared-application-auth-clinician-role-boundary-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-clinician-role-boundary-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-clinician-role-boundary-rehydration-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-clinician-role-boundary-preacceptance-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_shared_application_auth_boundary.py"
+        ]
+      },
+      "unresolved_gates": [
+        "No live EMR4 application session, secure cookie, database-backed revocation or required-audit persistence has been implemented.",
+        "External identity-provider and Microsoft or Office federation remain unselected and unauthorized.",
+        "Product-derived, patient, health, clinical and historical reads remain closed.",
+        "Database writes, appointment commands, microphone capture, document mutation, organisational Office deployment, production and release remain closed."
+      ]
+    },
+    {
+      "id": "raisa-shared-application-auth-runtime-foundation",
+      "title": "Raisa Shared Application Authentication Runtime Foundation",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-07-31T13:45:00Z",
+      "updated_at": "2026-07-31T13:45:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-terra-gemini-comparative-rehearsal",
+        "source_head": "8fa732592fbee4f57c322b13d9d8ff89fcc7fa33",
+        "thread_id": null,
+        "worktree_role": "integration"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-shared-application-auth-clinician-role-boundary",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri explicitly authorized the repository-local runtime-foundation candidate defined in docs/raisa-shared-application-auth-runtime-foundation-plan.md.",
+          "The implementation was limited to an unmounted service and authored-synthetic in-memory state.",
+          "FastAPI/GraphQL routes, cookies, databases, external identity, product reads and deployment remained closed.",
+          "No worker, subagent, provider or external control plane was selected."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-hash-only-bounded-sessions-182",
+          "source": "app/services/application_auth_runtime.py",
+          "status": "accepted",
+          "summary": "Accept explicit authored-synthetic opaque parent and surface sessions with hash-only state, bounded expiry and centralized principal-generation revocation."
+        },
+        {
+          "id": "accept-atomic-single-use-exchange-182",
+          "source": "orchestration/continuity/raisa-shared-application-auth-runtime-foundation/provider-free-acceptance-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the route-free Word-to-Diary single-use exchange after exact binding, concurrency and replay acceptance passed."
+        },
+        {
+          "id": "accept-audit-before-mutation-182",
+          "source": "docs/security/raisa-shared-application-auth-runtime-foundation-threat-model-delta.md",
+          "status": "accepted",
+          "summary": "Accept required metadata audit admission before each successful in-memory mutation, with tested no-change failure closure."
+        },
+        {
+          "id": "keep-auth-persistence-routes-and-product-closed-182",
+          "source": "docs/raisa-shared-application-auth-runtime-foundation-closeout.md",
+          "status": "accepted",
+          "summary": "Keep database persistence, routes, cookies, external identity, product reads, deployment, production and release outside this pass."
+        }
+      ],
+      "claim_scope": [
+        "All three surfaces can validate a bounded opaque authored-synthetic parent/surface session whose server state contains only hash references.",
+        "Explicit and generation revocation, idle/absolute expiry and exact surface/origin/audience checks fail closed.",
+        "Word desktop and Word Online each create one native-Diary binding through the exact single-use exchange contract.",
+        "A two-thread redemption admits exactly one consumer and audit failure leaves create, redeem and revoke state unchanged.",
+        "Thirty-two focused and 145 corrected expanded no-conftest cases pass with every external and product side-effect count zero."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/auth-boundary-policy.json",
+            "app/services/application_auth_runtime.py",
+            "orchestration/continuity/raisa-shared-application-auth-runtime-foundation/provider-free-acceptance-evidence.json"
+          ],
+          "note": "The runtime creates no product read, proposal, confirmation or command authority."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-shared-application-auth-clinician-role-boundary-design.md",
+            "orchestration/continuity/raisa-shared-application-auth-runtime-foundation/provider-free-acceptance-evidence.json",
+            "docs/raisa-shared-application-auth-runtime-foundation-closeout.md"
+          ],
+          "note": "No database, committed event or Diary truth path ran or changed."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-shared-application-auth-runtime-foundation-plan.md",
+          "docs/security/raisa-shared-application-auth-runtime-foundation-threat-model-delta.md",
+          "docs/raisa-shared-application-auth-clinician-role-boundary-design.md"
+        ],
+        "findings": [
+          "app/services/application_auth_runtime.py",
+          "orchestration/continuity/raisa-shared-application-auth-runtime-foundation/provider-free-acceptance-evidence.json",
+          "orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/auth-boundary-policy.json"
+        ],
+        "closeouts": [
+          "docs/raisa-shared-application-auth-runtime-foundation-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-runtime-foundation-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-runtime-foundation-rehydration-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-runtime-foundation-preacceptance-receipt.json"
+        ],
+        "tests": [
+          "scripts/raisa_shared_application_auth_runtime_foundation_acceptance.py",
+          "tests/test_raisa_shared_application_auth_runtime_foundation.py"
+        ]
+      },
+      "unresolved_gates": [
+        "No FastAPI/GraphQL login or exchange route, secure cookie or same-origin BFF transport has been implemented.",
+        "No database-backed or distributed session, generation, single-use exchange or audit transaction exists.",
+        "External identity-provider and Microsoft or Office federation remain unselected and unauthorized.",
+        "Product-derived, patient, health, clinical and historical reads remain closed.",
+        "Database changes, appointment commands, microphone capture, document mutation, organisational Office deployment, production and release remain closed."
+      ]
+    },
+    {
+      "id": "raisa-shared-application-auth-postgresql-persistence",
+      "title": "Raisa Shared Application Authentication PostgreSQL Persistence",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-07-31T21:58:00Z",
+      "updated_at": "2026-07-31T21:58:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-terra-gemini-comparative-rehearsal",
+        "source_head": "8fa732592fbee4f57c322b13d9d8ff89fcc7fa33",
+        "thread_id": null,
+        "worktree_role": "integration"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-shared-application-auth-runtime-foundation",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-shared-application-auth-postgresql-persistence-plan.md",
+            "scope": "Five authored-synthetic auth tables, one reversible local migration and uniquely named disposable test writes only."
+          }
+        ],
+        "notes": [
+          "Yuri explicitly authorised the exact PostgreSQL persistence/migration candidate defined in docs/raisa-shared-application-auth-postgresql-persistence-plan.md.",
+          "The implementation remained route-free and accepted only authored-synthetic identity metadata.",
+          "Routes, cookies, runtime database roles, external identity, product reads and deployment remained closed.",
+          "No worker, subagent, provider or external control plane was selected."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-normalized-hash-only-auth-persistence-183",
+          "source": "alembic/versions/o4p5q6r7s8t9_add_application_auth_persistence.py",
+          "status": "accepted",
+          "summary": "Accept five normalized authored-synthetic tables with hash-only opaque references and no product-table link."
+        },
+        {
+          "id": "accept-principal-lock-and-audit-transaction-183",
+          "source": "app/services/application_auth_persistence.py",
+          "status": "accepted",
+          "summary": "Accept one principal-generation row lock and one transaction for required metadata audit plus state."
+        },
+        {
+          "id": "accept-database-single-use-and-rls-183",
+          "source": "orchestration/continuity/raisa-shared-application-auth-postgresql-persistence/live-local-backend-postgres-evidence.json",
+          "status": "accepted",
+          "summary": "Accept database-level one-use exchange, exact-practice RLS and immutable guard behavior after live-local proof."
+        },
+        {
+          "id": "keep-auth-transport-identity-and-product-closed-183",
+          "source": "docs/raisa-shared-application-auth-postgresql-persistence-closeout.md",
+          "status": "accepted",
+          "summary": "Keep routes, cookies, runtime roles, external identity, product reads, deployment, production and release outside this pass."
+        }
+      ],
+      "claim_scope": [
+        "A reversible migration and matching ORM define exactly five normalized authored-synthetic application-auth tables.",
+        "Parent/surface state, principal generation and exchange consumption survive fresh SQLAlchemy sessions without raw opaque value persistence.",
+        "Two independent transactions admit exactly one exchange consumer, while required-audit failure rolls back all state.",
+        "Forced practice RLS, append-only audit, monotonic generation and terminal exchange-consumption guards pass.",
+        "Sixty focused, 156 corrected expanded no-conftest and 12 serial legacy database cases pass with zero external or product side effects."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "app/services/application_auth_runtime.py",
+            "app/services/application_auth_persistence.py",
+            "orchestration/continuity/raisa-shared-application-auth-postgresql-persistence/live-local-backend-postgres-evidence.json"
+          ],
+          "note": "The persistence layer creates no product read, proposal, confirmation or command authority."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-shared-application-auth-postgresql-persistence-plan.md",
+            "orchestration/continuity/raisa-shared-application-auth-postgresql-persistence/live-local-backend-postgres-evidence.json",
+            "docs/raisa-shared-application-auth-postgresql-persistence-closeout.md"
+          ],
+          "note": "Only task-created authored-synthetic auth rows existed; no Diary truth, committed event or product table ran."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-shared-application-auth-postgresql-persistence-plan.md",
+          "docs/security/raisa-shared-application-auth-postgresql-persistence-threat-model-delta.md"
+        ],
+        "findings": [
+          "app/models/application_auth.py",
+          "alembic/versions/o4p5q6r7s8t9_add_application_auth_persistence.py",
+          "app/services/application_auth_persistence.py",
+          "orchestration/continuity/raisa-shared-application-auth-postgresql-persistence/live-local-backend-postgres-evidence.json",
+          "app/services/application_auth_runtime.py"
+        ],
+        "closeouts": [
+          "docs/raisa-shared-application-auth-postgresql-persistence-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-postgresql-persistence-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-postgresql-persistence-rehydration-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-postgresql-persistence-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-postgresql-persistence-preacceptance-receipt.json"
+        ],
+        "tests": [
+          "scripts/raisa_shared_application_auth_postgresql_persistence_acceptance.py",
+          "tests/test_raisa_shared_application_auth_postgresql_persistence.py"
+        ]
+      },
+      "unresolved_gates": [
+        "No least-privilege runtime database role or token-to-practice bootstrap boundary has been implemented.",
+        "No FastAPI/GraphQL login or exchange route, Secure HttpOnly cookie, CSRF control or same-origin BFF transport exists.",
+        "External identity-provider and Microsoft or Office federation remain unselected and unauthorized.",
+        "Product-derived, patient, health, clinical and historical reads remain closed.",
+        "Appointment or arrival commands, microphone capture, document mutation, organisational deployment, production and release remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-07-31T11:08:30Z"
+  "updated_at": "2026-07-31T21:58:00Z"
 }

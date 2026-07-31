@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "new_session",
+  "planned_action": "define_and_verify_a_repository_local_provider_free_shared_emr4_application_authentication_and_clinician_role_boundary_for_desktop_word_word_online_and_native_diary_without_external_or_product_authority",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_cross_pc_shared_auth_boundary_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: AGENTS.md was read completely; raisa_word_online_authenticated_companion_verification_pass at Continuity revision 180 and Compass revision 161 is the current accepted result, and the next implementation is the shared EMR4 application-authentication and clinician-role boundary.",
+        "current_authority_allocation: GPT Sol owns architecture, acceptance and protected integration; this tightly coupled repository-local tranche remains Sol-owned with no external worker or provider selected.",
+        "active_plan_and_acceptance: the authenticated Word Online plan, threat-model delta, complete continuity evidence directory, closeout, Sol acceptance, Continuity revision 180, Compass revision 161 and rendered Compass report were read and reconciled.",
+        "protected_evidence_boundaries: protected holdouts and raw historical Diary material remain sealed; Microsoft or Office identity is not EMR4 identity; provider calls, patient or product-derived data, clinical authority, database reads or writes, appointment commands, microphone capture, document mutation, organisational Office deployment, production and release remain closed.",
+        "git_refs_and_worktree: the clean required branch codex/ariadne-terra-gemini-comparative-rehearsal and its upstream are exactly 8fa732592fbee4f57c322b13d9d8ff89fcc7fa33 after fetch; master and origin/master and origin/handoff/current are 4974075b31035d599e081d68e3b85e04a897baa1; local handoff/current and clean durable worker mirrors are 12fb7800ea285561b5ea50cbfe328b4d3d0fc1f8; every protected ref is an ancestor of HEAD and no ref movement is authorised.",
+        "The repository-local tranche may define typed architecture, deterministic synthetic fixtures, audit and fail-closed acceptance only; it may not establish a live session, contact an identity provider, read product data or mutate any external system."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is selected for this tightly coupled architecture and acceptance tranche."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected interactive fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external reviewer, Microsoft identity service, cloud service or model provider is selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

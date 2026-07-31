@@ -1,0 +1,48 @@
+{
+  "authority_boundary": "receipt_only_repository_local_provider_free_architecture_and_acceptance_no_worker_control_external_identity_product_data_write_deployment_production_or_integration_authority",
+  "continuation_event": "new_session",
+  "planned_action": "define_and_verify_a_repository_local_provider_free_shared_emr4_application_authentication_and_clinician_role_boundary_for_desktop_word_word_online_and_native_diary_without_external_or_product_authority",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. raisa_word_online_authenticated_companion_verification_pass at Continuity revision 180 and Compass revision 161 is current; the next implementation is the shared EMR4 application-authentication and clinician-role boundary.",
+    "current_authority_allocation": "GPT Sol owns architecture and acceptance. This tightly coupled repository-local tranche is Sol-owned; no worker, provider, identity provider, cloud control plane or external system is selected.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-word-online-authenticated-companion-verification-plan.md",
+      "docs/security/raisa-word-online-authenticated-companion-verification-threat-model-delta.md",
+      "docs/raisa-word-online-authenticated-companion-verification-closeout.md",
+      "orchestration/continuity/raisa-word-online-authenticated-companion-verification/browser-word-online-evidence.json",
+      "orchestration/continuity/raisa-word-online-authenticated-companion-verification/external-audit-analysis.json",
+      "orchestration/continuity/raisa-word-online-authenticated-companion-verification/final-residue-evidence.json",
+      "orchestration/agent_inbox/codex/raisa-word-online-authenticated-companion-verification-sol-acceptance.md",
+      "orchestration/continuity/emr4-continuity-graph.json revision 180",
+      "orchestration/continuity/emr4-compass.json revision 161",
+      "docs/ariadne-compass-current.md rendered revision 161"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 were restored. Protected holdouts and raw historical Diary material remain sealed. Microsoft or Office identity is not EMR4 identity. Provider calls, patient or product-derived data, clinical authority, database reads or writes, appointment commands, microphone capture, document mutation, organisational Office deployment, production and release remain closed.",
+    "git_refs_and_worktree": {
+      "HEAD": "8fa732592fbee4f57c322b13d9d8ff89fcc7fa33",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "12fb7800ea285561b5ea50cbfe328b4d3d0fc1f8",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/codex/ariadne-terra-gemini-comparative-rehearsal": "8fa732592fbee4f57c322b13d9d8ff89fcc7fa33",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "upstream_aligned": true,
+      "worktree_clean_before_receipt": true,
+      "all_protected_refs_are_ancestors_of_HEAD": true,
+      "protected_refs_unchanged": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

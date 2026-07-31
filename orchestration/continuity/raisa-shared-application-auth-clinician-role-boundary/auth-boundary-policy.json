@@ -1,0 +1,193 @@
+{
+  "schema_version": "emr4.shared-application-auth-boundary.v1",
+  "policy_version": "clinician-workspace-read.v1",
+  "status": "architecture_only_provider_free",
+  "authority_owner": "emr4_backend",
+  "surfaces": {
+    "word_desktop": {
+      "audience": "emr4-api",
+      "origin_class": "emr4_controlled_word_taskpane"
+    },
+    "word_online": {
+      "audience": "emr4-api",
+      "origin_class": "emr4_controlled_word_taskpane"
+    },
+    "native_diary": {
+      "audience": "emr4-api",
+      "origin_class": "emr4_controlled_native_diary"
+    }
+  },
+  "identity": {
+    "canonical_principal_source": "fresh_emr4_backend_user_record",
+    "microsoft_office_identity": "authentication_input_only_never_application_authority",
+    "future_federation_boundary": "external_assertion_must_map_to_one_active_emr4_user_and_practice_before_session_creation",
+    "required_server_facts": [
+      "active_user",
+      "active_practice_membership",
+      "current_backend_role"
+    ],
+    "forbidden_authority_inputs": [
+      "office_signed_in_state",
+      "microsoft_account_identifier",
+      "microsoft_tenant_identifier",
+      "document_identifier",
+      "client_asserted_role",
+      "client_asserted_practice",
+      "office_host_capability_profile"
+    ]
+  },
+  "session_policy": {
+    "parent_session_storage": "opaque_server_side",
+    "surface_session_storage": "opaque_server_side",
+    "browser_transport": "secure_httponly_samesite_cookie_or_same_origin_bff",
+    "javascript_secret_storage": "forbidden",
+    "application_session_absolute_ttl_seconds_max": 28800,
+    "surface_session_idle_ttl_seconds_max": 1800,
+    "surface_expiry_must_not_exceed_parent": true,
+    "authorization_decision_reuse": "forbidden_current_request_only",
+    "revocation_checks": [
+      "parent_session_status",
+      "parent_session_generation",
+      "surface_session_status",
+      "user_active",
+      "current_role",
+      "current_practice",
+      "current_practitioner_link"
+    ],
+    "cross_surface_exchange": {
+      "maximum_ttl_seconds": 60,
+      "single_use": true,
+      "atomic_consumption": true,
+      "pkce_method": "S256",
+      "requires_state": true,
+      "requires_nonce": true,
+      "binds": [
+        "parent_session",
+        "parent_generation",
+        "source_surface",
+        "target_surface",
+        "source_origin",
+        "target_origin",
+        "audience"
+      ],
+      "forbidden_payloads": [
+        "bearer_token",
+        "cookie",
+        "password",
+        "office_identity",
+        "patient_data",
+        "clinical_data",
+        "document_content"
+      ]
+    }
+  },
+  "clinician_policy": {
+    "action": "clinician_workspace.read",
+    "resource_type": "clinical_context",
+    "allowed_current_backend_roles": [
+      "GP"
+    ],
+    "requires_active_user": true,
+    "requires_active_practitioner_link": true,
+    "requires_practitioner_same_practice": true,
+    "requires_resource_same_practice": true,
+    "not_implied_by_roles": [
+      "Receptionist",
+      "Nurse",
+      "Admin",
+      "PracticeOwner"
+    ],
+    "not_implied_by": [
+      "office_identity",
+      "office_host_readiness",
+      "client_affordance",
+      "client_role_claim"
+    ]
+  },
+  "authorization_policy": {
+    "decision_function": "backend_authorize_request",
+    "endpoint_policy_owner": "server",
+    "generic_client_selected_policy_api": false,
+    "evaluate_before_data_access": true,
+    "re_evaluate_commands_independently": true,
+    "allow_decision_is_capability_token": false,
+    "unknown_state": "deny",
+    "decision_authority_source": "emr4_backend"
+  },
+  "audit_policy": {
+    "required_before_clinical_product_release": true,
+    "event_types": [
+      "auth.login_succeeded",
+      "auth.login_failed",
+      "auth.session_created",
+      "auth.session_refreshed",
+      "auth.session_expired",
+      "auth.session_revoked",
+      "auth.surface_bound",
+      "auth.exchange_issued",
+      "auth.exchange_redeemed",
+      "auth.exchange_rejected",
+      "auth.authorization_allowed",
+      "auth.authorization_denied",
+      "auth.audit_unavailable"
+    ],
+    "required_fields": [
+      "event_type",
+      "occurred_at",
+      "correlation_id",
+      "session_reference_hash",
+      "user_id",
+      "practice_id",
+      "current_backend_role",
+      "surface",
+      "action",
+      "resource_type",
+      "policy_version",
+      "decision",
+      "reason_codes"
+    ],
+    "forbidden_fields": [
+      "password",
+      "bearer_token",
+      "cookie",
+      "exchange_code",
+      "pkce_verifier",
+      "microsoft_account_identifier",
+      "microsoft_tenant_identifier",
+      "document_identifier",
+      "request_content",
+      "patient_data",
+      "clinical_data"
+    ]
+  },
+  "migration_gates": {
+    "local_storage_bearer_token": "inadmissible_for_product_derived_read",
+    "client_decoded_role": "affordance_hint_only_inadmissible_as_authority",
+    "office_dialog_bearer_relay": "inadmissible_for_product_derived_read",
+    "stateless_token_without_server_revocation": "inadmissible_for_product_derived_read",
+    "office_signed_in_state": "never_emr4_application_identity"
+  },
+  "failure_closure": {
+    "missing_invalid_expired_or_revoked_session_http_status": 401,
+    "authenticated_but_unauthorized_http_status": 403,
+    "required_audit_unavailable_http_status": 503,
+    "fallbacks": []
+  },
+  "closed_authority": [
+    "live_identity_provider",
+    "external_iam",
+    "cloud_mutation",
+    "product_derived_data",
+    "patient_data",
+    "clinical_authority",
+    "database_read",
+    "database_write",
+    "appointment_command",
+    "microphone_capture",
+    "document_mutation",
+    "office_organisation_deployment",
+    "provider_call",
+    "production",
+    "release"
+  ]
+}

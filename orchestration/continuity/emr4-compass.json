@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 161,
-  "updated_at": "2026-07-31T11:08:30Z",
-  "source_graph_revision": 180,
-  "orientation_statement": "Reception One now has an accepted provider-free compact companion exercised in the installed Word desktop host. One task-created blank document loaded a disposable HTTPS-loopback sideload, opened the native Diary with one authored-synthetic request and received only the generic proofreader-admitted summary while all detail remained in the Diary. A repository-local initialization-order race was repaired without entering normal backend initialization. Provider, credential, backend, database, confirmation, command and write counts were zero and cleanup is complete. Continuity 170 / Compass 151 bind the result. Word Online remains platform-blocked; Office tenant identity, provider interpretation, live product context, real data, voice, writes, production, deployment and release remain closed.",
+  "map_revision": 164,
+  "updated_at": "2026-07-31T21:58:00Z",
+  "source_graph_revision": 183,
+  "orientation_statement": "Raisa now has an accepted route-free authored-synthetic PostgreSQL transaction boundary beneath its shared application-authentication runtime. Five normalized hash-only tables, a reversible migration, principal-row locking, durable one-use Word-to-Diary exchange, same-transaction required audit, forced practice RLS and immutable database guards pass in a completely removed disposable database. Sixty focused, 156 corrected expanded and 12 serial legacy database cases pass with zero external or product side effects. Continuity 183 / Compass 164 bind the result. Routes, cookies, runtime roles, external identity, product data, deployment, production and release remain closed.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -1080,35 +1080,100 @@
         "orchestration/continuity/raisa-word-online-authenticated-companion-verification/final-residue-evidence.json",
         "docs/raisa-word-online-authenticated-companion-verification-closeout.md"
       ]
+    },
+    {
+      "node_id": "raisa-shared-application-auth-clinician-role-boundary",
+      "lineage_parent": "raisa-word-online-authenticated-companion-verification",
+      "strategic_role": "Shared backend-owned application-authentication and clinician-role architecture",
+      "outcome": "Desktop Word, Word Online and the native Diary now share one frozen EMR4-backend authorization contract with separate Office identity, opaque bounded sessions, centralized revocation, short-lived cross-surface exchange, required audit and fail-closed semantics. The result is provider-free architecture evidence only; runtime and product reads remain closed.",
+      "evidence": [
+        "docs/raisa-shared-application-auth-clinician-role-boundary-plan.md",
+        "docs/raisa-shared-application-auth-clinician-role-boundary-design.md",
+        "docs/security/raisa-shared-application-auth-clinician-role-boundary-threat-model-delta.md",
+        "orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/auth-boundary-policy.json",
+        "orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/provider-free-acceptance-evidence.json",
+        "docs/raisa-shared-application-auth-clinician-role-boundary-closeout.md"
+      ]
+    },
+    {
+      "node_id": "raisa-shared-application-auth-runtime-foundation",
+      "lineage_parent": "raisa-shared-application-auth-clinician-role-boundary",
+      "strategic_role": "Route-free authored-synthetic shared authentication runtime foundation",
+      "outcome": "The frozen backend-owned session architecture now has one explicit unmounted in-memory implementation: hash-only parent and surface sessions, bounded expiry, generation revocation, atomic single-use Word-to-Diary exchange and audit-before-mutation all pass against authored-synthetic metadata. Routes, cookies, persistence, external identity and product reads remain closed.",
+      "evidence": [
+        "docs/raisa-shared-application-auth-runtime-foundation-plan.md",
+        "docs/security/raisa-shared-application-auth-runtime-foundation-threat-model-delta.md",
+        "app/services/application_auth_runtime.py",
+        "orchestration/continuity/raisa-shared-application-auth-runtime-foundation/provider-free-acceptance-evidence.json",
+        "docs/raisa-shared-application-auth-runtime-foundation-closeout.md"
+      ]
+    },
+    {
+      "node_id": "raisa-shared-application-auth-postgresql-persistence",
+      "lineage_parent": "raisa-shared-application-auth-runtime-foundation",
+      "strategic_role": "Route-free authored-synthetic shared-auth PostgreSQL transaction boundary",
+      "outcome": "The accepted session foundation now has one reversible PostgreSQL schema and route-free coordinator. Principal-row locking, hash-only state, durable one-use Word-to-Diary exchange, same-transaction required audit, forced practice RLS and database guards pass in a disposable live-local database. Routes, cookies, runtime roles, external identity and product reads remain closed.",
+      "evidence": [
+        "docs/raisa-shared-application-auth-postgresql-persistence-plan.md",
+        "docs/security/raisa-shared-application-auth-postgresql-persistence-threat-model-delta.md",
+        "app/models/application_auth.py",
+        "alembic/versions/o4p5q6r7s8t9_add_application_auth_persistence.py",
+        "app/services/application_auth_persistence.py",
+        "orchestration/continuity/raisa-shared-application-auth-postgresql-persistence/live-local-backend-postgres-evidence.json",
+        "docs/raisa-shared-application-auth-postgresql-persistence-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-word-online-authenticated-companion-verification",
-    "strategic_role": "Signed-in Word Online companion verified with native-only detail and generic typed release",
-    "why_now": "Yuri enabled the documented file-upload prerequisite and selected the already validated manifest, allowing the final bounded Word Online gate to run. Its one repository-local mismatch was repaired on only the exact existing Sydney service.",
-    "outcome": "One provider-free authored-synthetic Word-to-Diary exchange now passes in Word Online. Three synthetic matches stayed in the Diary, Word retained only the admitted generic count, no backend or provider path ran, and task cleanup is complete.",
+    "node_id": "raisa-shared-application-auth-postgresql-persistence",
+    "strategic_role": "Route-free authored-synthetic shared-auth PostgreSQL transaction boundary",
+    "why_now": "The accepted in-memory runtime could not prove restart durability, cross-process single-use or audit crash consistency. Yuri authorised the exact synthetic-only migration and transaction descendant.",
+    "outcome": "The accepted session foundation now has one reversible PostgreSQL schema and route-free coordinator. Principal-row locking, hash-only state, durable one-use Word-to-Diary exchange, same-transaction required audit, forced practice RLS and database guards pass in a disposable live-local database. Routes, cookies, runtime roles, external identity and product reads remain closed.",
     "unlocks": [
-      "Use the accepted local, desktop and Word Online companion contracts as the dual-host interaction baseline.",
-      "Plan a separately authorised EMR4 application-authentication and clinician-role boundary before any product-derived read.",
-      "Retain the hosted zero-authority synthetic lane for regression testing while product, provider and write authority stay closed."
+      "Review a separately authorised least-privilege runtime database role and token-to-practice bootstrap architecture.",
+      "Design provider-free synthetic login and exchange routes with non-enumerating errors, CSRF and opaque Secure HttpOnly cookie or same-origin BFF transport.",
+      "Keep the same backend-owned policy engine and PostgreSQL unit of work when a later transport is authorised."
     ],
     "does_not_solve": [
-      "EMR4 application authentication or clinician-role authorization.",
-      "Organisational Office tenant deployment or central add-in management.",
-      "Safety for real, product-derived, patient, health, clinical or historical data.",
-      "Backend, database, provider, microphone, appointment command or document-write readiness.",
-      "Microsoft or Google physical or sovereign processing location.",
-      "Production or release readiness."
+      "Live EMR4 identity establishment, routes, cookies or browser transport.",
+      "A least-privilege runtime database role, token-to-practice bootstrap or operational retention/backup policy.",
+      "External identity-provider or Microsoft/Office federation.",
+      "Safety or authority for product-derived, patient, health, clinical or historical data.",
+      "Appointment commands, microphone capture, document mutation, deployment, production or release."
     ],
     "evidence": [
-      "docs/raisa-word-online-authenticated-companion-verification-plan.md",
-      "orchestration/continuity/raisa-word-online-authenticated-companion-verification/browser-word-online-evidence.json",
-      "orchestration/continuity/raisa-word-online-authenticated-companion-verification/external-audit-analysis.json",
-      "orchestration/continuity/raisa-word-online-authenticated-companion-verification/final-residue-evidence.json",
-      "docs/raisa-word-online-authenticated-companion-verification-closeout.md"
+      "docs/raisa-shared-application-auth-postgresql-persistence-plan.md",
+      "docs/security/raisa-shared-application-auth-postgresql-persistence-threat-model-delta.md",
+      "app/models/application_auth.py",
+      "alembic/versions/o4p5q6r7s8t9_add_application_auth_persistence.py",
+      "app/services/application_auth_persistence.py",
+      "orchestration/continuity/raisa-shared-application-auth-postgresql-persistence/live-local-backend-postgres-evidence.json",
+      "docs/raisa-shared-application-auth-postgresql-persistence-closeout.md"
     ]
   },
   "decision_horizon": [
+    {
+      "id": "shared-application-auth-runtime-role-secure-transport",
+      "title": "Shared auth runtime role and secure synthetic transport",
+      "status": "candidate",
+      "strategic_question": "Should EMR4 define the least-privilege runtime database role and secure provider-free synthetic session transport, including token-to-practice bootstrap, non-enumerating routes, CSRF and opaque Secure HttpOnly cookie or same-origin BFF handling, while product reads remain closed?",
+      "why_it_matters": "Durable state is now proven locally, but a live transport cannot safely use a table owner or expose detailed internal denials.",
+      "prerequisites": [
+        "Fresh Yuri authority for the exact runtime-role and route/cookie architecture scope.",
+        "Authored-synthetic identities only; no product or patient data.",
+        "One backend-owned authorization policy and the accepted PostgreSQL unit of work.",
+        "No external identity provider, Microsoft/Office authority, product read, deployment or production change."
+      ],
+      "boundary_changes": [
+        "api-change"
+      ],
+      "evidence": [
+        "docs/raisa-shared-application-auth-postgresql-persistence-plan.md",
+        "docs/security/raisa-shared-application-auth-postgresql-persistence-threat-model-delta.md",
+        "orchestration/continuity/raisa-shared-application-auth-postgresql-persistence/live-local-backend-postgres-evidence.json",
+        "docs/raisa-shared-application-auth-postgresql-persistence-closeout.md"
+      ]
+    },
     {
       "id": "reception-one-stage3b-participant-execution",
       "title": "Reception One representative-staff formative sessions",
@@ -1668,9 +1733,45 @@
         "orchestration/continuity/ariadne-vertex-sydney-gemini-25/repair-002-occupied-evidence.json",
         "docs/ariadne-vertex-sydney-gemini-25-repaired-request-run-closeout.md"
       ]
+    },
+    {
+      "id": "authorize-shared-application-auth-runtime-foundation",
+      "question": "Should EMR4 implement the frozen backend-owned session, revocation, cross-surface exchange and required-audit primitives using only authored-synthetic test state while product reads remain closed?",
+      "required_before": "Satisfied on 2026-07-31 for the unmounted authored-synthetic in-memory foundation only. Database persistence, routes, cookies, external identity, product-derived reads, deployment, production and release remain new authority decisions.",
+      "evidence": [
+        "docs/raisa-shared-application-auth-runtime-foundation-plan.md",
+        "docs/security/raisa-shared-application-auth-runtime-foundation-threat-model-delta.md",
+        "orchestration/continuity/raisa-shared-application-auth-runtime-foundation/provider-free-acceptance-evidence.json",
+        "docs/raisa-shared-application-auth-runtime-foundation-closeout.md"
+      ]
+    },
+    {
+      "id": "authorize-shared-application-auth-postgresql-persistence",
+      "question": "Should EMR4 implement a PostgreSQL-backed transaction and migration for parent/surface sessions, principal generation, single-use exchange and metadata-only audit using disposable authored-synthetic fixtures while routes, cookies and product reads remain closed?",
+      "required_before": "Satisfied on 2026-08-01 for the reversible authored-synthetic PostgreSQL schema, route-free coordinator and disposable local acceptance only. Runtime roles, routes, cookies, external identity, product reads, deployment, production and release remain new authority decisions.",
+      "evidence": [
+        "docs/raisa-shared-application-auth-postgresql-persistence-plan.md",
+        "docs/security/raisa-shared-application-auth-postgresql-persistence-threat-model-delta.md",
+        "orchestration/continuity/raisa-shared-application-auth-postgresql-persistence/live-local-backend-postgres-evidence.json",
+        "docs/raisa-shared-application-auth-postgresql-persistence-closeout.md"
+      ]
+    },
+    {
+      "id": "authorize-shared-application-auth-runtime-role-secure-transport",
+      "question": "Should EMR4 define the least-privilege runtime database role and secure provider-free synthetic session transport, including token-to-practice bootstrap, non-enumerating routes, CSRF and opaque Secure HttpOnly cookie or same-origin BFF handling, while product reads remain closed?",
+      "required_before": "Any runtime database privilege grant, token lookup bootstrap, login or exchange route, cookie/BFF transport, CSRF behavior or browser session wiring.",
+      "evidence": [
+        "docs/raisa-shared-application-auth-postgresql-persistence-plan.md",
+        "docs/security/raisa-shared-application-auth-postgresql-persistence-threat-model-delta.md",
+        "orchestration/continuity/raisa-shared-application-auth-postgresql-persistence/live-local-backend-postgres-evidence.json",
+        "docs/raisa-shared-application-auth-postgresql-persistence-closeout.md"
+      ]
     }
   ],
   "map_limits": [
+    "The accepted PostgreSQL shared-auth descendant proves reversible local schema creation, hash-only authored-synthetic persistence, principal-row serialization, database single-use exchange, same-transaction metadata audit, forced practice RLS and complete cleanup. It does not prove live identity, routes, cookies, a runtime database role, product-data safety, deployment, production or release.",
+    "The accepted shared-auth runtime foundation proves one unmounted authored-synthetic in-memory implementation with hash-only state, bounded expiry, generation revocation, one-use exchange and audit-before-mutation. It does not prove live routes or cookies, durable/database/distributed atomicity, external identity, product data safety, deployment, production or release.",
+    "The shared application-authentication descendant proves one provider-free typed backend authorization architecture across desktop Word, Word Online and the native Diary. It does not prove a live session, revocation store, external identity integration, product-derived read, real-data safety, deployment, production or release.",
     "The accepted Word Online descendant proves one task-specific ReadDocument manifest and provider-free authored-synthetic Word-to-Diary exchange in a signed-in personal session, with native-only detail and generic typed release. It does not prove EMR4 application authentication, clinician-role authorization, organisational deployment, real-data safety, backend or provider readiness, processing geography, production or release.",
     "The public-access descendant proves the exact service-only Cloud Run access mechanism, public static route/policy/header behavior and manifest URL availability. It does not prove Word Online add-in execution: no manifest was uploaded and no synthetic request was submitted because Chrome file-URL access is not enabled.",
     "The deployment descendant proves a ready private Sydney service with the exact immutable image and bounded runtime posture. It does not prove public reachability, browser or Word Online behavior. Domain Restricted Sharing rejected the allUsers binding, and no alternative access-control mechanism was applied.",

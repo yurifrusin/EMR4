@@ -15570,3 +15570,106 @@ clarification. A later holdout must be genuinely fresh and separately approved.
   result. EMR4 application authentication, clinician-role authorization,
   organisational Office deployment, real-data safety, processing geography,
   production and release remain unproved and closed.
+
+## Raisa Shared Application Authentication and Clinician-Role Boundary — 2026-07-31
+
+- Result:
+  `raisa_shared_application_auth_clinician_role_boundary_architecture_pass`.
+- One EMR4-backend decision owns fresh application identity, active opaque
+  parent and surface sessions, expiry, centralized revocation, current role,
+  active same-practice practitioner/resource scope and required audit across
+  desktop Word, Word Online and the native Diary.
+- Microsoft or Office signed-in state and all client role, practice, document
+  and host claims remain non-authoritative.
+- The initial protected clinician-read rule admits only a fresh active `GP`
+  with an active same-practice practitioner link and successful required audit
+  before data access.
+- Word-to-Diary trust uses a 60-second maximum, single-use, atomically consumed,
+  exact-origin/audience/state/nonce/generation and S256-PKCE-bound metadata
+  exchange without bearer, cookie, Office-identity or clinical payload relay.
+- All 23 authorization and 13 exchange cases match their frozen outcomes. All
+  16 focused tests pass with repository database fixtures disabled.
+- The expanded 165-test no-database-fixture auth, API Spine, dual-host,
+  Clinician One, Word companion, Continuity and Compass suite also passes.
+- Provider, external identity, Microsoft/Office identity, cloud/IAM, backend,
+  database, product-data, patient/clinical-field, command, microphone,
+  document-mutation and deployment counts are zero.
+- Continuity revision 181 and Compass revision 162 bind this architecture-only
+  result. Live authentication, external identity, product-derived reads,
+  persistence, deployment, production and release remain separately closed.
+- The recommended next increment is a separately authorized repository-local
+  server-side session/revocation/exchange/audit foundation using only
+  authored-synthetic test state and still permitting no product read.
+- The required non-PHI Pushover closeout notification was attempted and failed
+  with `no active devices to send to`; nothing was delivered.
+
+## Raisa Shared Application Authentication Runtime Foundation — 2026-07-31
+
+- Result: `raisa_shared_application_auth_runtime_foundation_pass`.
+- Added one unmounted service-layer runtime and explicit authored-synthetic
+  in-memory store; no router, dependency, cookie, database or module-level
+  runtime binding was added.
+- Opaque parent, surface and exchange values are retained only as SHA-256
+  references. Parent absolute and surface/parent idle lifetime remain bounded
+  by the frozen eight-hour and 30-minute maxima.
+- Explicit parent/surface revocation and centralized principal-generation
+  advancement fail closed across desktop Word, Word Online and native Diary.
+- Word desktop and Word Online each create one native-Diary binding through the
+  exact 60-second maximum, single-use, origin/audience/state/nonce/generation
+  and S256-PKCE-bound exchange.
+- One concurrent two-thread redemption admits exactly one consumer; the other
+  receives the terminal replay denial.
+- Required audit admission precedes successful in-memory mutations. Synthetic
+  audit failure leaves create, redeem and revoke state unchanged.
+- The provider-free evidence passes all ten checks. All 32 focused tests and
+  the corrected 145-case no-`conftest` suite pass. An initial expanded
+  selection named seven database-fixture-dependent cases unavailable by design;
+  no runtime assertion failed.
+- Provider, identity-provider, Office, cloud/IAM, route, cookie, database,
+  product-data, patient/clinical-field, command, microphone, document-mutation
+  and deployment counts are zero.
+- Continuity revision 182 and Compass revision 163 bind the accepted result.
+- The frozen Sydney service revision `raisa-office-web-dev-00006-xf9`, digest,
+  zero-authority posture and resource limits are unchanged.
+- The next safe candidate is a separately authorised PostgreSQL transaction and
+  migration tranche using disposable authored-synthetic fixtures, still with
+  routes, cookies, external identity and product reads closed.
+- The required non-PHI Pushover closeout notification was attempted with the
+  sprint engine paused for that fresh authority and failed with
+  `no active devices to send to`; nothing was delivered.
+
+## Raisa Shared Application Authentication PostgreSQL Persistence — 2026-08-01
+
+- Result: `raisa_shared_application_auth_postgresql_persistence_pass`.
+- Added five normalized authored-synthetic application-auth tables through the
+  reversible Alembic revision `o4p5q6r7s8t9`; the accepted in-memory runtime
+  remains the sole policy engine and its frozen source/evidence stayed
+  unchanged.
+- The route-free coordinator locks one composite principal-generation row,
+  hydrates only that principal's hash-only state, and commits required typed
+  metadata audit plus state in one PostgreSQL transaction.
+- Full upgrade, downgrade to `n3o4p5q6r7s8`, re-upgrade, exact-head and
+  autogenerate-drift checks pass on a uniquely named local database.
+- Two independent database sessions admit exactly one exchange consumer. A
+  forced audit insert outage rolls back all state; audit mutation, generation
+  rollback/skip and exchange-consumption reset/rewrite return SQLSTATE `55000`.
+- Forced RLS hides all rows without context and every foreign-practice row from
+  a transactional non-login, non-superuser, non-bypass role. That role is
+  absent after rollback.
+- Seven raw issued values match no persisted row across all five tables. The
+  exact acceptance database was terminated, dropped and proved absent.
+- All 60 focused, corrected 156-case expanded no-`conftest`, and 12 serial
+  legacy database tests pass. Compilation, Ruff, JSON, Alembic and whitespace
+  gates pass.
+- Every provider, external identity, Microsoft/Office identity, cloud/IAM,
+  product/clinical read, command, microphone, document, deployment and
+  production count is zero.
+- Continuity revision 183 and Compass revision 164 bind the accepted result.
+- The frozen Sydney service revision `raisa-office-web-dev-00006-xf9`, digest,
+  zero-authority posture and resource limits are unchanged.
+- The next safe candidate is a separately authorised least-privilege runtime
+  database-role and secure synthetic session-transport architecture. Routes,
+  cookies, external identity and product reads remain closed.
+- The required non-PHI Pushover closeout notification was attempted with the
+  sprint engine paused for that fresh authority and failed with
+  `no active devices to send to`; nothing was delivered.

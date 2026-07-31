@@ -1,0 +1,644 @@
+{
+  "schema_version": "emr4.shared-application-auth-acceptance-cases.v1",
+  "data_class": "authored_synthetic_metadata_only",
+  "base_authorization_context": {
+    "now": "2026-07-31T12:00:00Z",
+    "surface": "word_desktop",
+    "request_origin": "https://word.emr4.invalid",
+    "request_audience": "emr4-api",
+    "application_session": {
+      "exists": true,
+      "session_id": "session-parent-001",
+      "status": "active",
+      "user_id": "11111111-1111-4111-8111-111111111111",
+      "practice_id": "22222222-2222-4222-8222-222222222222",
+      "generation": 7,
+      "idle_expires_at": "2026-07-31T12:30:00Z",
+      "expires_at": "2026-07-31T18:00:00Z"
+    },
+    "surface_binding": {
+      "exists": true,
+      "status": "active",
+      "parent_session_id": "session-parent-001",
+      "surface": "word_desktop",
+      "origin": "https://word.emr4.invalid",
+      "audience": "emr4-api",
+      "parent_generation": 7,
+      "idle_expires_at": "2026-07-31T12:30:00Z",
+      "expires_at": "2026-07-31T12:30:00Z"
+    },
+    "server_principal": {
+      "user_id": "11111111-1111-4111-8111-111111111111",
+      "active": true,
+      "practice_id": "22222222-2222-4222-8222-222222222222",
+      "current_role": "GP",
+      "practitioner_id": "33333333-3333-4333-8333-333333333333",
+      "practitioner_active": true,
+      "practitioner_practice_id": "22222222-2222-4222-8222-222222222222"
+    },
+    "request": {
+      "action": "clinician_workspace.read",
+      "resource_type": "clinical_context",
+      "resource_practice_id": "22222222-2222-4222-8222-222222222222"
+    },
+    "audit": {
+      "required": true,
+      "available": true
+    },
+    "untrusted_client_hints": {
+      "office_signed_in": true,
+      "asserted_role": "GP",
+      "asserted_practice_id": "22222222-2222-4222-8222-222222222222"
+    }
+  },
+  "authorization_cases": [
+    {
+      "id": "allow-word-desktop-gp",
+      "overrides": {},
+      "expected": {
+        "decision": "allow",
+        "http_status": 200,
+        "reason_codes": [
+          "authorized"
+        ]
+      }
+    },
+    {
+      "id": "allow-word-online-gp",
+      "overrides": {
+        "surface": "word_online",
+        "request_origin": "https://word.emr4.invalid",
+        "surface_binding": {
+          "surface": "word_online"
+        }
+      },
+      "expected": {
+        "decision": "allow",
+        "http_status": 200,
+        "reason_codes": [
+          "authorized"
+        ]
+      }
+    },
+    {
+      "id": "allow-native-diary-gp",
+      "overrides": {
+        "surface": "native_diary",
+        "request_origin": "https://diary.emr4.invalid",
+        "surface_binding": {
+          "surface": "native_diary",
+          "origin": "https://diary.emr4.invalid"
+        }
+      },
+      "expected": {
+        "decision": "allow",
+        "http_status": 200,
+        "reason_codes": [
+          "authorized"
+        ]
+      }
+    },
+    {
+      "id": "deny-office-signin-without-emr4-session",
+      "overrides": {
+        "application_session": {
+          "exists": false
+        },
+        "surface_binding": {
+          "exists": false
+        },
+        "untrusted_client_hints": {
+          "office_signed_in": true,
+          "asserted_role": "GP"
+        }
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 401,
+        "reason_codes": [
+          "application_session_required"
+        ]
+      }
+    },
+    {
+      "id": "deny-client-asserted-gp-for-receptionist",
+      "overrides": {
+        "server_principal": {
+          "current_role": "Receptionist",
+          "practitioner_id": null,
+          "practitioner_active": false,
+          "practitioner_practice_id": null
+        },
+        "untrusted_client_hints": {
+          "asserted_role": "GP"
+        }
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 403,
+        "reason_codes": [
+          "clinician_role_required"
+        ]
+      }
+    },
+    {
+      "id": "allow-server-gp-despite-client-receptionist-hint",
+      "overrides": {
+        "untrusted_client_hints": {
+          "asserted_role": "Receptionist",
+          "asserted_practice_id": "99999999-9999-4999-8999-999999999999"
+        }
+      },
+      "expected": {
+        "decision": "allow",
+        "http_status": 200,
+        "reason_codes": [
+          "authorized"
+        ]
+      }
+    },
+    {
+      "id": "deny-nurse-clinician-policy",
+      "overrides": {
+        "server_principal": {
+          "current_role": "Nurse"
+        }
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 403,
+        "reason_codes": [
+          "clinician_role_required"
+        ]
+      }
+    },
+    {
+      "id": "deny-practice-owner-clinician-policy",
+      "overrides": {
+        "server_principal": {
+          "current_role": "PracticeOwner"
+        }
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 403,
+        "reason_codes": [
+          "clinician_role_required"
+        ]
+      }
+    },
+    {
+      "id": "deny-inactive-user",
+      "overrides": {
+        "server_principal": {
+          "active": false
+        }
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 401,
+        "reason_codes": [
+          "user_inactive"
+        ]
+      }
+    },
+    {
+      "id": "deny-missing-practitioner-link",
+      "overrides": {
+        "server_principal": {
+          "practitioner_id": null,
+          "practitioner_active": false,
+          "practitioner_practice_id": null
+        }
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 403,
+        "reason_codes": [
+          "active_same_practice_practitioner_required"
+        ]
+      }
+    },
+    {
+      "id": "deny-inactive-practitioner",
+      "overrides": {
+        "server_principal": {
+          "practitioner_active": false
+        }
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 403,
+        "reason_codes": [
+          "active_same_practice_practitioner_required"
+        ]
+      }
+    },
+    {
+      "id": "deny-cross-practice-practitioner-link",
+      "overrides": {
+        "server_principal": {
+          "practitioner_practice_id": "99999999-9999-4999-8999-999999999999"
+        }
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 403,
+        "reason_codes": [
+          "active_same_practice_practitioner_required"
+        ]
+      }
+    },
+    {
+      "id": "deny-cross-practice-resource",
+      "overrides": {
+        "request": {
+          "resource_practice_id": "99999999-9999-4999-8999-999999999999"
+        }
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 403,
+        "reason_codes": [
+          "resource_practice_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "deny-expired-parent-session",
+      "overrides": {
+        "application_session": {
+          "expires_at": "2026-07-31T11:59:59Z"
+        }
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 401,
+        "reason_codes": [
+          "application_session_expired"
+        ]
+      }
+    },
+    {
+      "id": "deny-idle-expired-parent-session",
+      "overrides": {
+        "application_session": {
+          "idle_expires_at": "2026-07-31T11:59:59Z"
+        }
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 401,
+        "reason_codes": [
+          "application_session_idle_expired"
+        ]
+      }
+    },
+    {
+      "id": "deny-revoked-parent-session",
+      "overrides": {
+        "application_session": {
+          "status": "revoked"
+        }
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 401,
+        "reason_codes": [
+          "application_session_revoked"
+        ]
+      }
+    },
+    {
+      "id": "deny-surface-generation-mismatch",
+      "overrides": {
+        "surface_binding": {
+          "parent_generation": 6
+        }
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 401,
+        "reason_codes": [
+          "surface_session_generation_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "deny-surface-kind-mismatch",
+      "overrides": {
+        "surface_binding": {
+          "surface": "word_online"
+        }
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 401,
+        "reason_codes": [
+          "surface_session_surface_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "deny-surface-origin-mismatch",
+      "overrides": {
+        "request_origin": "https://attacker.invalid"
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 401,
+        "reason_codes": [
+          "surface_session_origin_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "deny-surface-audience-mismatch",
+      "overrides": {
+        "request_audience": "attacker-api"
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 401,
+        "reason_codes": [
+          "surface_session_audience_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "deny-parent-principal-mismatch",
+      "overrides": {
+        "application_session": {
+          "user_id": "99999999-9999-4999-8999-999999999999"
+        }
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 401,
+        "reason_codes": [
+          "session_principal_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "error-required-audit-unavailable",
+      "overrides": {
+        "audit": {
+          "available": false
+        }
+      },
+      "expected": {
+        "decision": "error",
+        "http_status": 503,
+        "reason_codes": [
+          "required_audit_unavailable"
+        ]
+      }
+    },
+    {
+      "id": "deny-unknown-surface",
+      "overrides": {
+        "surface": "unknown",
+        "surface_binding": {
+          "surface": "unknown"
+        }
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 401,
+        "reason_codes": [
+          "surface_not_allowed"
+        ]
+      }
+    }
+  ],
+  "base_exchange_context": {
+    "now": "2026-07-31T12:00:00Z",
+    "source_surface": "word_desktop",
+    "target_surface": "native_diary",
+    "source_origin": "https://word.emr4.invalid",
+    "target_origin": "https://diary.emr4.invalid",
+    "audience": "emr4-session-exchange",
+    "parent_session": {
+      "session_id": "session-parent-001",
+      "status": "active",
+      "generation": 7,
+      "expires_at": "2026-07-31T18:00:00Z"
+    },
+    "grant": {
+      "exists": true,
+      "grant_id": "grant-001",
+      "status": "issued",
+      "parent_session_id": "session-parent-001",
+      "parent_generation": 7,
+      "source_surface": "word_desktop",
+      "target_surface": "native_diary",
+      "source_origin": "https://word.emr4.invalid",
+      "target_origin": "https://diary.emr4.invalid",
+      "audience": "emr4-session-exchange",
+      "expires_at": "2026-07-31T12:00:30Z",
+      "used": false,
+      "pkce_method": "S256",
+      "pkce_challenge": "sha256:pkce-challenge-001",
+      "state_hash": "sha256:state-001",
+      "nonce_hash": "sha256:nonce-001"
+    },
+    "redemption": {
+      "pkce_method": "S256",
+      "pkce_challenge": "sha256:pkce-challenge-001",
+      "state_hash": "sha256:state-001",
+      "nonce_hash": "sha256:nonce-001"
+    },
+    "untrusted_client_hints": {
+      "office_signed_in": true,
+      "asserted_role": "GP"
+    }
+  },
+  "exchange_cases": [
+    {
+      "id": "admit-word-desktop-to-native-diary-once",
+      "overrides": {},
+      "expected": {
+        "decision": "admit",
+        "http_status": 200,
+        "reason_codes": [
+          "exchange_admitted"
+        ]
+      }
+    },
+    {
+      "id": "admit-word-online-to-native-diary-once",
+      "overrides": {
+        "source_surface": "word_online",
+        "grant": {
+          "grant_id": "grant-002",
+          "source_surface": "word_online"
+        }
+      },
+      "expected": {
+        "decision": "admit",
+        "http_status": 200,
+        "reason_codes": [
+          "exchange_admitted"
+        ]
+      }
+    },
+    {
+      "id": "deny-expired-exchange",
+      "overrides": {
+        "grant": {
+          "expires_at": "2026-07-31T11:59:59Z"
+        }
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 401,
+        "reason_codes": [
+          "exchange_expired"
+        ]
+      }
+    },
+    {
+      "id": "deny-replayed-exchange",
+      "overrides": {
+        "grant": {
+          "used": true
+        }
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 401,
+        "reason_codes": [
+          "exchange_already_consumed"
+        ]
+      }
+    },
+    {
+      "id": "deny-exchange-pkce-mismatch",
+      "overrides": {
+        "redemption": {
+          "pkce_challenge": "sha256:wrong-pkce"
+        }
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 401,
+        "reason_codes": [
+          "exchange_pkce_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "deny-exchange-state-mismatch",
+      "overrides": {
+        "redemption": {
+          "state_hash": "sha256:wrong-state"
+        }
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 401,
+        "reason_codes": [
+          "exchange_state_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "deny-exchange-nonce-mismatch",
+      "overrides": {
+        "redemption": {
+          "nonce_hash": "sha256:wrong-nonce"
+        }
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 401,
+        "reason_codes": [
+          "exchange_nonce_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "deny-exchange-source-origin-mismatch",
+      "overrides": {
+        "source_origin": "https://attacker.invalid"
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 401,
+        "reason_codes": [
+          "exchange_source_origin_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "deny-exchange-target-origin-mismatch",
+      "overrides": {
+        "target_origin": "https://attacker.invalid"
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 401,
+        "reason_codes": [
+          "exchange_target_origin_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "deny-exchange-audience-mismatch",
+      "overrides": {
+        "audience": "attacker-exchange"
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 401,
+        "reason_codes": [
+          "exchange_audience_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "deny-exchange-target-surface-mismatch",
+      "overrides": {
+        "target_surface": "word_online"
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 401,
+        "reason_codes": [
+          "exchange_target_surface_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "deny-exchange-revoked-parent",
+      "overrides": {
+        "parent_session": {
+          "status": "revoked"
+        }
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 401,
+        "reason_codes": [
+          "exchange_parent_session_inactive"
+        ]
+      }
+    },
+    {
+      "id": "deny-exchange-parent-generation-mismatch",
+      "overrides": {
+        "parent_session": {
+          "generation": 8
+        }
+      },
+      "expected": {
+        "decision": "deny",
+        "http_status": 401,
+        "reason_codes": [
+          "exchange_parent_generation_mismatch"
+        ]
+      }
+    }
+  ]
+}

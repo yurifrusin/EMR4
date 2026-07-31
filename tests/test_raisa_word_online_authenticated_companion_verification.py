@@ -108,9 +108,9 @@ def test_cleanup_and_revision_binding_are_terminal() -> None:
     assert cleanup["recoverable"] is True
     assert cleanup["active_storage_residue"] == 0
 
-    assert graph["graph_revision"] == 180
-    assert compass["map_revision"] == 161
-    assert compass["source_graph_revision"] == 180
+    assert graph["graph_revision"] >= 180
+    assert compass["map_revision"] >= 161
+    assert compass["source_graph_revision"] == graph["graph_revision"]
     node = next(
         item
         for item in graph["nodes"]
@@ -123,5 +123,13 @@ def test_cleanup_and_revision_binding_are_terminal() -> None:
             "relation": "builds_on",
         }
     ]
-    assert compass["journey"][-1]["node_id"] == node["id"]
-    assert compass["current_position"]["node_id"] == node["id"]
+    journey = {item["node_id"]: item for item in compass["journey"]}
+    architecture_id = "raisa-shared-application-auth-clinician-role-boundary"
+    runtime_id = "raisa-shared-application-auth-runtime-foundation"
+    persistence_id = "raisa-shared-application-auth-postgresql-persistence"
+    assert journey[architecture_id]["lineage_parent"] == node["id"]
+    assert journey[runtime_id]["lineage_parent"] == architecture_id
+    assert journey[persistence_id]["lineage_parent"] == runtime_id
+    assert compass["current_position"]["node_id"] == (
+        persistence_id
+    )

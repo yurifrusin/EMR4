@@ -1,0 +1,401 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/shared-application-auth-boundary-v1.json",
+  "title": "EMR4 shared application authentication boundary",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "policy_version",
+    "status",
+    "authority_owner",
+    "surfaces",
+    "identity",
+    "session_policy",
+    "clinician_policy",
+    "authorization_policy",
+    "audit_policy",
+    "migration_gates",
+    "failure_closure",
+    "closed_authority"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "emr4.shared-application-auth-boundary.v1"
+    },
+    "policy_version": {
+      "const": "clinician-workspace-read.v1"
+    },
+    "status": {
+      "const": "architecture_only_provider_free"
+    },
+    "authority_owner": {
+      "const": "emr4_backend"
+    },
+    "surfaces": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "word_desktop",
+        "word_online",
+        "native_diary"
+      ],
+      "properties": {
+        "word_desktop": {
+          "$ref": "#/$defs/surface"
+        },
+        "word_online": {
+          "$ref": "#/$defs/surface"
+        },
+        "native_diary": {
+          "$ref": "#/$defs/surface"
+        }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "required": [
+        "canonical_principal_source",
+        "microsoft_office_identity",
+        "future_federation_boundary",
+        "required_server_facts",
+        "forbidden_authority_inputs"
+      ],
+      "properties": {
+        "canonical_principal_source": {
+          "const": "fresh_emr4_backend_user_record"
+        },
+        "microsoft_office_identity": {
+          "const": "authentication_input_only_never_application_authority"
+        },
+        "future_federation_boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "required_server_facts": {
+          "type": "array",
+          "minItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "forbidden_authority_inputs": {
+          "type": "array",
+          "minItems": 7,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "session_policy": {
+      "type": "object",
+      "required": [
+        "parent_session_storage",
+        "surface_session_storage",
+        "browser_transport",
+        "javascript_secret_storage",
+        "application_session_absolute_ttl_seconds_max",
+        "surface_session_idle_ttl_seconds_max",
+        "surface_expiry_must_not_exceed_parent",
+        "authorization_decision_reuse",
+        "revocation_checks",
+        "cross_surface_exchange"
+      ],
+      "properties": {
+        "parent_session_storage": {
+          "const": "opaque_server_side"
+        },
+        "surface_session_storage": {
+          "const": "opaque_server_side"
+        },
+        "browser_transport": {
+          "const": "secure_httponly_samesite_cookie_or_same_origin_bff"
+        },
+        "javascript_secret_storage": {
+          "const": "forbidden"
+        },
+        "application_session_absolute_ttl_seconds_max": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 28800
+        },
+        "surface_session_idle_ttl_seconds_max": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1800
+        },
+        "surface_expiry_must_not_exceed_parent": {
+          "const": true
+        },
+        "authorization_decision_reuse": {
+          "const": "forbidden_current_request_only"
+        },
+        "revocation_checks": {
+          "type": "array",
+          "minItems": 7,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "cross_surface_exchange": {
+          "type": "object",
+          "required": [
+            "maximum_ttl_seconds",
+            "single_use",
+            "atomic_consumption",
+            "pkce_method",
+            "requires_state",
+            "requires_nonce",
+            "binds",
+            "forbidden_payloads"
+          ],
+          "properties": {
+            "maximum_ttl_seconds": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 60
+            },
+            "single_use": {
+              "const": true
+            },
+            "atomic_consumption": {
+              "const": true
+            },
+            "pkce_method": {
+              "const": "S256"
+            },
+            "requires_state": {
+              "const": true
+            },
+            "requires_nonce": {
+              "const": true
+            },
+            "binds": {
+              "type": "array",
+              "minItems": 7,
+              "uniqueItems": true,
+              "items": {
+                "type": "string"
+              }
+            },
+            "forbidden_payloads": {
+              "type": "array",
+              "minItems": 7,
+              "uniqueItems": true,
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "clinician_policy": {
+      "type": "object",
+      "required": [
+        "action",
+        "resource_type",
+        "allowed_current_backend_roles",
+        "requires_active_user",
+        "requires_active_practitioner_link",
+        "requires_practitioner_same_practice",
+        "requires_resource_same_practice",
+        "not_implied_by_roles",
+        "not_implied_by"
+      ],
+      "properties": {
+        "action": {
+          "const": "clinician_workspace.read"
+        },
+        "resource_type": {
+          "const": "clinical_context"
+        },
+        "allowed_current_backend_roles": {
+          "const": [
+            "GP"
+          ]
+        },
+        "requires_active_user": {
+          "const": true
+        },
+        "requires_active_practitioner_link": {
+          "const": true
+        },
+        "requires_practitioner_same_practice": {
+          "const": true
+        },
+        "requires_resource_same_practice": {
+          "const": true
+        },
+        "not_implied_by_roles": {
+          "type": "array",
+          "minItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "not_implied_by": {
+          "type": "array",
+          "minItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "authorization_policy": {
+      "type": "object",
+      "required": [
+        "decision_function",
+        "endpoint_policy_owner",
+        "generic_client_selected_policy_api",
+        "evaluate_before_data_access",
+        "re_evaluate_commands_independently",
+        "allow_decision_is_capability_token",
+        "unknown_state",
+        "decision_authority_source"
+      ],
+      "properties": {
+        "decision_function": {
+          "const": "backend_authorize_request"
+        },
+        "endpoint_policy_owner": {
+          "const": "server"
+        },
+        "generic_client_selected_policy_api": {
+          "const": false
+        },
+        "evaluate_before_data_access": {
+          "const": true
+        },
+        "re_evaluate_commands_independently": {
+          "const": true
+        },
+        "allow_decision_is_capability_token": {
+          "const": false
+        },
+        "unknown_state": {
+          "const": "deny"
+        },
+        "decision_authority_source": {
+          "const": "emr4_backend"
+        }
+      },
+      "additionalProperties": false
+    },
+    "audit_policy": {
+      "type": "object",
+      "required": [
+        "required_before_clinical_product_release",
+        "event_types",
+        "required_fields",
+        "forbidden_fields"
+      ],
+      "properties": {
+        "required_before_clinical_product_release": {
+          "const": true
+        },
+        "event_types": {
+          "type": "array",
+          "minItems": 10,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "required_fields": {
+          "type": "array",
+          "minItems": 10,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "forbidden_fields": {
+          "type": "array",
+          "minItems": 10,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "migration_gates": {
+      "type": "object",
+      "required": [
+        "local_storage_bearer_token",
+        "client_decoded_role",
+        "office_dialog_bearer_relay",
+        "stateless_token_without_server_revocation",
+        "office_signed_in_state"
+      ],
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "failure_closure": {
+      "type": "object",
+      "required": [
+        "missing_invalid_expired_or_revoked_session_http_status",
+        "authenticated_but_unauthorized_http_status",
+        "required_audit_unavailable_http_status",
+        "fallbacks"
+      ],
+      "properties": {
+        "missing_invalid_expired_or_revoked_session_http_status": {
+          "const": 401
+        },
+        "authenticated_but_unauthorized_http_status": {
+          "const": 403
+        },
+        "required_audit_unavailable_http_status": {
+          "const": 503
+        },
+        "fallbacks": {
+          "const": []
+        }
+      },
+      "additionalProperties": false
+    },
+    "closed_authority": {
+      "type": "array",
+      "minItems": 15,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "surface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "audience",
+        "origin_class"
+      ],
+      "properties": {
+        "audience": {
+          "const": "emr4-api"
+        },
+        "origin_class": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

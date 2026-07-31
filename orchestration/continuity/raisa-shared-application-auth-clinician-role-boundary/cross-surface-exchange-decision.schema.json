@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/cross-surface-exchange-decision-v1.json",
+  "title": "EMR4 cross-surface exchange decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "decision_id",
+    "correlation_id",
+    "case_id",
+    "authority_source",
+    "source_surface",
+    "target_surface",
+    "decision",
+    "http_status",
+    "reason_codes",
+    "evaluated_at",
+    "grant_consumed",
+    "surface_session_created",
+    "bearer_material_transported",
+    "office_identity_used",
+    "product_data_released"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "emr4.cross-surface-exchange-decision.v1"
+    },
+    "decision_id": {
+      "type": "string",
+      "pattern": "^exchange-decision-[a-z0-9-]+$"
+    },
+    "correlation_id": {
+      "type": "string",
+      "pattern": "^exchange-correlation-[a-z0-9-]+$"
+    },
+    "case_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "authority_source": {
+      "const": "emr4_backend"
+    },
+    "source_surface": {
+      "enum": [
+        "word_desktop",
+        "word_online",
+        "native_diary",
+        "unknown"
+      ]
+    },
+    "target_surface": {
+      "enum": [
+        "word_desktop",
+        "word_online",
+        "native_diary",
+        "unknown"
+      ]
+    },
+    "decision": {
+      "enum": [
+        "admit",
+        "deny"
+      ]
+    },
+    "http_status": {
+      "enum": [
+        200,
+        401
+      ]
+    },
+    "reason_codes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9_]+$"
+      }
+    },
+    "evaluated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "grant_consumed": {
+      "type": "boolean"
+    },
+    "surface_session_created": {
+      "type": "boolean"
+    },
+    "bearer_material_transported": {
+      "const": false
+    },
+    "office_identity_used": {
+      "const": false
+    },
+    "product_data_released": {
+      "const": false
+    }
+  }
+}
