@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "push_the_verified_cross_pc_checkpoint_on_the_existing_codex_ariadne_terra_gemini_comparative_rehearsal_task_branch_without_moving_protected_refs_or_opening_a_pull_request",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_cross_pc_checkpoint_prepush",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: AGENTS.md identifies raisa_word_online_authenticated_companion_verification_pass at Continuity revision 180 and Compass revision 161 as the terminal current product result.",
+        "current_authority_allocation: Yuri explicitly requested the necessary checkpoint commit and push before moving to another PC; only the existing task branch may be pushed while master, handoff/current and pull-request state remain unchanged.",
+        "active_plan_and_acceptance: the authenticated Word Online companion plan, evidence, external audit, closeout and Sol acceptance are complete and validated.",
+        "protected_evidence_boundaries: protected holdouts and historical raw Diary material remain sealed and excluded from content inspection; provider, patient, product-derived, write, production and release authority remain closed.",
+        "git_refs_and_worktree: checkpoint commit a7ffe38a37428eff6699b9d028885e0f4cbfd052 is on codex/ariadne-terra-gemini-comparative-rehearsal; after a fresh origin fetch the remote task branch remains at 5b1ea7952fb08eea333da0e63f166d3895ccea32 and is exactly one commit behind; master, handoff/current, origin/master and origin/handoff/current remain aligned at 4974075b31035d599e081d68e3b85e04a897baa1.",
+        "The complete 65-module changed-test population passes 723 tests with zero failures, errors or skips; staged JSON, JSONL, XML, Python, JavaScript, Ruff, Continuity, Compass, secret-scan and whitespace gates pass, and no temporary test residue remains."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is selected for this protected checkpoint operation."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected interactive fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external reviewer or provider is selected for this checkpoint operation."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
