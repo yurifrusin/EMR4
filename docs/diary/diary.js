@@ -51,7 +51,41 @@ const BERNIE_DEV_QUERY_PARAM_ALLOWLIST = [
   "practitioner_id",
   "patient_id",
   "reference_date",
+  "reception_one_companion_demo",
   "selected_candidate_index"
+];
+const RECEPTION_ONE_WORD_LAUNCH_CONTEXT_KEYS = [
+  "command_authority",
+  "contract_version",
+  "correlation_id",
+  "evidence_mode",
+  "open_projection",
+  "patient_context_authority",
+  "planner_mode",
+  "provider_authority",
+  "reference_date",
+  "source_surface",
+  "target_surface",
+  "type"
+];
+const RECEPTION_ONE_WORD_COMPANION_REQUEST_KEYS = [
+  "appointment_context_authority",
+  "appointment_write_authority",
+  "command_authority",
+  "contract_version",
+  "correlation_id",
+  "data_class",
+  "evidence_mode",
+  "patient_context_authority",
+  "planner_mode",
+  "projection_intent",
+  "provider_authority",
+  "reference_date",
+  "request_id",
+  "request_text",
+  "source_surface",
+  "target_surface",
+  "type"
 ];
 const BERNIE_SESSION_SURFACE_ID = "diary-main";
 const STATUS_REASON_CODE_LABELS = {
@@ -125,6 +159,34 @@ function isLocalHarnessHost() {
   return ["127.0.0.1", "localhost", "[::1]"].includes(window.location.hostname);
 }
 
+const HOSTED_SYNTHETIC_CAPABILITY_ALLOWLIST = new Set([
+  "reception_one_companion_demo",
+  "smoke",
+]);
+
+function isHostedSyntheticOnlyModeEnabled() {
+  const policy = window.RAISA_PUBLIC_HOSTING_POLICY;
+  if (!policy || typeof policy !== "object") return false;
+  const exactFalseFields = [
+    "provider_authority",
+    "backend_authority",
+    "credential_authority",
+    "microphone_authority",
+    "command_authority",
+    "document_write_authority",
+    "production_authority",
+  ];
+  return (
+    policy.contract_version === "raisa.public-hosting-policy.v1"
+    && policy.mode === "public_https_development"
+    && policy.data_class === "authored_synthetic"
+    && policy.expected_origin === window.location.origin
+    && window.location.protocol === "https:"
+    && window.location.hostname.endsWith(".run.app")
+    && exactFalseFields.every(field => policy[field] === false)
+  );
+}
+
 function isApprovedNgrokHostname(hostname) {
   const normalized = String(hostname || "").toLowerCase().replace(/\.$/, "");
   return [".ngrok-free.dev", ".ngrok-free.app", ".ngrok.app", ".ngrok.io"]
@@ -132,7 +194,13 @@ function isApprovedNgrokHostname(hostname) {
 }
 
 function isLocalHarnessCapabilityEnabled(param) {
-  return isLocalHarnessHost() && new URLSearchParams(window.location.search).get(param) === "true";
+  const requested = new URLSearchParams(window.location.search).get(param) === "true";
+  if (!requested) return false;
+  if (isLocalHarnessHost()) return true;
+  return (
+    isHostedSyntheticOnlyModeEnabled()
+    && HOSTED_SYNTHETIC_CAPABILITY_ALLOWLIST.has(param)
+  );
 }
 
 function secureClientIdentifier(prefix) {
@@ -2541,10 +2609,25 @@ function getColumnBreaks(col) {
 }
 
 // ─── STATE ────────────────────────────────────────────────
+function initialDiaryDate() {
+  const raw = new URLSearchParams(window.location.search).get("reference_date");
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(String(raw || ""))) return new Date();
+  const parts = raw.split("-").map(Number);
+  const candidate = new Date(parts[0], parts[1] - 1, parts[2]);
+  if (
+    candidate.getFullYear() !== parts[0] ||
+    candidate.getMonth() !== parts[1] - 1 ||
+    candidate.getDate() !== parts[2]
+  ) {
+    return new Date();
+  }
+  return candidate;
+}
+
 let token      = localStorage.getItem("emr4_token");
 let currentUserRole = null;
 let currentUserRoleToken = null;
-let diaryDate  = new Date();
+let diaryDate  = initialDiaryDate();
 let refreshTimer = null;
 const REFRESH_INTERVAL_MS = 60_000;
 let editingColIndex = null;  // which column's breaks are being edited
@@ -4853,6 +4936,159 @@ function shiftDay(delta) {
 }
 
 // ─── AUTO-REFRESH ──────────────────────────────────────────
+function validateReceptionOneWordLaunchContext(value) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+  const keys = Object.keys(value).sort();
+  if (
+    keys.length !== RECEPTION_ONE_WORD_LAUNCH_CONTEXT_KEYS.length
+    || keys.some((key, index) => key !== RECEPTION_ONE_WORD_LAUNCH_CONTEXT_KEYS[index])
+  ) {
+    return null;
+  }
+  if (
+    value.contract_version !== "reception.one.word-launch-context.v1"
+    || value.type !== "reception_one_launch_context"
+    || value.source_surface !== "word_taskpane"
+    || value.target_surface !== "native_diary_bureau"
+    || value.open_projection !== true
+    || value.planner_mode !== "deterministic"
+    || value.patient_context_authority !== false
+    || value.command_authority !== false
+    || value.provider_authority !== false
+    || value.evidence_mode !== "local_development_context_frame"
+    || !/^word-launch-[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(String(value.correlation_id || ""))
+    || !/^\d{4}-\d{2}-\d{2}$/.test(String(value.reference_date || ""))
+  ) {
+    return null;
+  }
+  const parts = value.reference_date.split("-").map(Number);
+  const candidate = new Date(parts[0], parts[1] - 1, parts[2]);
+  if (
+    candidate.getFullYear() !== parts[0]
+    || candidate.getMonth() !== parts[1] - 1
+    || candidate.getDate() !== parts[2]
+  ) {
+    return null;
+  }
+  return Object.freeze({ ...value });
+}
+
+function validateReceptionOneWordCompanionRequest(value) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+  const keys = Object.keys(value).sort();
+  if (
+    keys.length !== RECEPTION_ONE_WORD_COMPANION_REQUEST_KEYS.length
+    || keys.some(
+      (key, index) => (
+        key !== RECEPTION_ONE_WORD_COMPANION_REQUEST_KEYS[index]
+      )
+    )
+  ) {
+    return null;
+  }
+  if (
+    value.contract_version !== "reception.one.word-companion-request.v1"
+    || value.type !== "reception_one_companion_request"
+    || value.source_surface !== "word_taskpane"
+    || value.target_surface !== "native_diary_bureau"
+    || value.data_class !== "authored_synthetic"
+    || value.planner_mode !== "deterministic"
+    || value.projection_intent !== "view"
+    || value.patient_context_authority !== false
+    || value.appointment_context_authority !== false
+    || value.appointment_write_authority !== false
+    || value.command_authority !== false
+    || value.provider_authority !== false
+    || value.evidence_mode !== "local_authored_synthetic_companion"
+    || !/^word-launch-[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(
+      String(value.correlation_id || "")
+    )
+    || !/^word-request-[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(
+      String(value.request_id || "")
+    )
+    || !/^\d{4}-\d{2}-\d{2}$/.test(String(value.reference_date || ""))
+    || typeof value.request_text !== "string"
+    || value.request_text !== value.request_text.trim()
+    || value.request_text.length < 1
+    || value.request_text.length > 280
+    || /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/.test(
+      value.request_text
+    )
+  ) {
+    return null;
+  }
+  const parts = value.reference_date.split("-").map(Number);
+  const candidate = new Date(parts[0], parts[1] - 1, parts[2]);
+  if (
+    candidate.getFullYear() !== parts[0]
+    || candidate.getMonth() !== parts[1] - 1
+    || candidate.getDate() !== parts[2]
+  ) {
+    return null;
+  }
+  return Object.freeze({ ...value });
+}
+
+async function navigateDiaryForProjection(targetDateKey) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(String(targetDateKey || ""))) {
+    return { changed: false, verified: false, reason: "invalid_date" };
+  }
+  const parts = targetDateKey.split("-").map(Number);
+  const target = new Date(parts[0], parts[1] - 1, parts[2]);
+  if (
+    target.getFullYear() !== parts[0] ||
+    target.getMonth() !== parts[1] - 1 ||
+    target.getDate() !== parts[2]
+  ) {
+    return { changed: false, verified: false, reason: "invalid_date" };
+  }
+
+  const currentKey = localDateKey(diaryDate);
+  if (currentKey === targetDateKey) {
+    return { changed: false, verified: true, direction: "none", date: currentKey };
+  }
+
+  const direction = target.getTime() > diaryDate.getTime() ? "forward" : "backward";
+  const container = document.getElementById("diary-grid-container");
+  const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+  const minimumMotionMs = reducedMotion ? 0 : 260;
+  const startedAt = performance.now();
+  let readVerified = false;
+  const onReadComplete = event => {
+    if (event.detail?.date === targetDateKey) readVerified = true;
+  };
+
+  window.addEventListener("emr4:diary-read-complete", onReadComplete);
+  container?.classList.remove("diary-page-turn-forward", "diary-page-turn-backward");
+  container?.classList.add(direction === "forward" ? "diary-page-turn-forward" : "diary-page-turn-backward");
+  container?.setAttribute("data-diary-turn-target", targetDateKey);
+
+  try {
+    diaryDate = target;
+    updateDateLabel();
+    clearStaleBernieBookingState("reception_one_date_first");
+    await loadDiary();
+    const remaining = minimumMotionMs - (performance.now() - startedAt);
+    if (remaining > 0) {
+      await new Promise(resolve => setTimeout(resolve, remaining));
+    }
+  } finally {
+    window.removeEventListener("emr4:diary-read-complete", onReadComplete);
+    container?.classList.remove("diary-page-turn-forward", "diary-page-turn-backward");
+    container?.removeAttribute("data-diary-turn-target");
+  }
+
+  const verified = readVerified && localDateKey(diaryDate) === targetDateKey;
+  window.dispatchEvent(new CustomEvent("emr4:diary-page-settled", {
+    detail: {
+      date: targetDateKey,
+      direction,
+      verified
+    }
+  }));
+  return { changed: true, verified, direction, date: targetDateKey };
+}
+
 function scheduleRefresh() {
   if (refreshTimer) clearTimeout(refreshTimer);
   refreshTimer = setTimeout(() => { loadDiary(true); scheduleRefresh(); }, REFRESH_INTERVAL_MS);
@@ -6270,6 +6506,12 @@ function metaGridShiftDate(dateText, days) {
 
 function metaGridSmokeAppointments() {
   const baseDate = localDateKey(diaryDate);
+  const query = new URLSearchParams(window.location.search);
+  const extendedSelectedAppointmentId = (
+    query.get("product_context_live_local") === "true"
+      ? query.get("extended_selected_appointment_id")
+      : null
+  );
   const current = getMockAppointments().map(appt => metaGridAppointmentView(appt, baseDate));
   const sheraId = ahpraToPractitionerMap["MED0001234567"]?.id ||
     activeTemplate?.columns?.find(item => item.practitioner_ahpra === "MED0001234567")?.practitioner_id ||
@@ -6277,7 +6519,7 @@ function metaGridSmokeAppointments() {
   return [
     ...current,
     {
-      id: "meta-grid-smoke-margaret-follow-up",
+      id: extendedSelectedAppointmentId || "meta-grid-smoke-margaret-follow-up",
       appointment_date: metaGridShiftDate(baseDate, 28),
       start_time_local: "14:15",
       end_time_local: "14:45",
@@ -6477,6 +6719,102 @@ async function metaGridReadAvailability(input) {
   return response.json();
 }
 
+async function metaGridComposeProductContext(input) {
+  const query = new URLSearchParams(window.location.search);
+  const acceptanceEnabled = (
+    isSmokeMode() &&
+    query.get("product_context_acceptance") === "true"
+  );
+  const liveLocalEnabled = (
+    isSmokeMode() &&
+    query.get("product_context_live_local") === "true"
+  );
+  if (acceptanceEnabled) {
+    return {
+      contract_version: "reception.one.product-context-proposal.v1",
+      result: "proposal_ready",
+      safe: true,
+      summary: "Prepared two current authored-synthetic options for staff review. Nothing has been booked.",
+      request_id: "synthetic-request-browser-acceptance",
+      correlation_id: input.correlation_id,
+      context_revision: 1,
+      data_class: "authored_synthetic",
+      patient_handle: "synthetic-patient-browser-acceptance",
+      patient_display: "Margaret Thompson",
+      practitioner_handle: "synthetic-practitioner-browser-acceptance",
+      practitioner_display: "Dr Alex Shera",
+      goal: "create",
+      operation_id: "proposeAppointmentCreate",
+      candidate_slots: [
+        {
+          slot_handle: "synthetic-slot-browser-0930",
+          appointment_date: input.reference_date,
+          start_time_local: "09:30",
+          duration_minutes: 15,
+          warning_codes: ["no_reservation"]
+        },
+        {
+          slot_handle: "synthetic-slot-browser-0945",
+          appointment_date: input.reference_date,
+          start_time_local: "09:45",
+          duration_minutes: 15,
+          warning_codes: ["no_reservation"]
+        }
+      ],
+      warning_codes: ["staff_confirmation_required", "staff_selection_required"],
+      review: {
+        disposition: "admit",
+        plan_hash: "synthetic-browser-acceptance-plan-hash",
+        operator_ids: [
+          "resolve_patient_reference",
+          "resolve_practitioner_reference",
+          "resolve_date_expression",
+          "search_available_slots",
+          "prepare_create_proposal"
+        ],
+        safe_repairs: [],
+        violation_paths: [],
+        context_revision: 1
+      },
+      requires_confirmation: true,
+      proposal_only: true,
+      write_performed: false,
+      confirmation_performed: false,
+      provider_calls: 0,
+      planner_mode: input.planner_mode === "isolated_vertex"
+        ? "isolated_vertex"
+        : "deterministic",
+      runtime_audit_ref: null,
+      model_database_access: false,
+      database_reads_performed: true,
+      legacy_interpreter_gate_changed: false
+    };
+  }
+  if (isSmokeMode() && !acceptanceEnabled && !liveLocalEnabled) return null;
+  const response = await apiFetch("/appointments/proposals/reception-one/compose", {
+    method: "POST",
+    body: JSON.stringify({
+      contract_version: "reception.one.product-context-request.v1",
+      instruction: String(input.instruction || "").trim(),
+      reference_date: input.reference_date,
+      surface_id: input.surface_id || "diary-main",
+      correlation_id: input.correlation_id,
+      data_class: "authored_synthetic",
+      planner_mode: input.planner_mode === "isolated_vertex"
+        ? "isolated_vertex"
+        : "deterministic",
+      ...(input.selected_appointment_id
+        ? { selected_appointment_id: input.selected_appointment_id }
+        : {})
+    })
+  });
+  if (response.status === 404) return null;
+  if (!response.ok) {
+    throw new Error(await apiErrorMessage(response, "Reception One typed plan"));
+  }
+  return response.json();
+}
+
 async function metaGridPrepareProposal(input) {
   if (isSmokeMode()) {
     return {
@@ -6602,8 +6940,10 @@ window.EMR4DiaryMetaGridBridge = Object.freeze({
   readCommittedEvents: metaGridReadCommittedEvents,
   searchPatients: metaGridSearchPatients,
   readAvailability: metaGridReadAvailability,
+  composeProductContext: metaGridComposeProductContext,
   prepareProposal: metaGridPrepareProposal,
   handoffProposal: metaGridHandoffProposal,
+  navigateDiaryDate: navigateDiaryForProjection,
   setLaunchAvailable: setMetaGridLaunchAvailability,
   showBookingReview() {
     document.body.classList.remove("meta-grid-open");
@@ -6623,9 +6963,12 @@ async function checkBerniePilotEligibility() {
     return;
   }
 
-  if (isSmoke) setMetaGridLaunchAvailability(true);
+  if (isSmoke) {
+    setMetaGridLaunchAvailability(true);
+    return;
+  }
 
-  if (!token && !isSmoke) {
+  if (!token) {
     return;
   }
 
@@ -7764,6 +8107,35 @@ Office.onReady(() => {
             updateAdminButtonVisibility();
             loadDiary();
             scheduleRefresh();
+          } else if (msg.type === "reception_one_launch_context") {
+            const launchContext = validateReceptionOneWordLaunchContext(msg);
+            if (!launchContext) {
+              setStatus("Reception One launch context was rejected.");
+              return;
+            }
+            window.EMR4ReceptionOneLaunchContext = launchContext;
+            window.dispatchEvent(new CustomEvent("emr4:reception-one-launch-context", {
+              detail: launchContext
+            }));
+          } else if (msg.type === "reception_one_companion_request") {
+            if (
+              !isLocalHarnessCapabilityEnabled(
+                "reception_one_companion_demo"
+              )
+            ) {
+              setStatus("Reception One companion request was rejected.");
+              return;
+            }
+            const companionRequest = validateReceptionOneWordCompanionRequest(msg);
+            if (!companionRequest) {
+              setStatus("Reception One companion request was rejected.");
+              return;
+            }
+            window.dispatchEvent(
+              new CustomEvent("emr4:reception-one-companion-request", {
+                detail: companionRequest
+              })
+            );
           } else if (msg.type === "focus") {
             focusDiaryWindow();
           }

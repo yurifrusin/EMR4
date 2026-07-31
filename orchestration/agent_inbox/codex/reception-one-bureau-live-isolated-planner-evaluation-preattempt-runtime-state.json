@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "make_exactly_one_visible_ui_authored_synthetic_gemini_25_flash_sydney_vertex_proposal_request_bound_to_continuity_158_and_compass_139_with_no_retry_or_fallback_then_close_out",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_rehydration_exact_one_call_gates_and_fresh_cloud_preflight",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external implementation worker is selected."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external peer worker is selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The five-source rehydration and fresh exact one-call authority receipts pass.",
+        "The visible Bureau UI, one-call ceiling, provider-free dual-planner, proofreader, API Spine, inherited product-contract and real-isolation gates pass.",
+        "Continuity revision 158 and Compass map 139 validate together, the contract audit passes and the rendered Compass report is current.",
+        "Fresh read-only preflight verifies the exact Bernie impersonated ADC, project, service account, prediction-only role, audit logging, absent request-response logging, disabled in-memory cache, API, billing, model catalogue and Sydney endpoint controls.",
+        "Pre-attempt owned database, IPv6 ports, runtime directory, container, image, network and request-artifact residue is clear.",
+        "The request is authored-synthetic and proposal-only with an absolute one-provider-call ceiling, no correction retry, no fallback and no appointment write or confirmation.",
+        "No subagent or external worker is selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

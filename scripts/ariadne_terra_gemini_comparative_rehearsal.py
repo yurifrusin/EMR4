@@ -31,12 +31,17 @@ MANIFEST_PATH = SOURCE_DIR / "comparison-manifest.json"
 TERRA_AMENDMENT_PATH = SOURCE_DIR / "terra-only-amendment.json"
 TWO_LANE_RESTORATION_PATH = SOURCE_DIR / "two-lane-restoration.json"
 FRESH_ATTEMPT_PATH = SOURCE_DIR / "fresh-attempt-002.json"
+ATTEMPT3_AUTHORITY_PATH = SOURCE_DIR / "fresh-attempt-003.json"
+ATTEMPT4_AUTHORITY_PATH = SOURCE_DIR / "fresh-attempt-004.json"
 PROVIDER_SCHEMA_PATH = SOURCE_DIR / "provider-output.schema.json"
+PROVIDER_PROFILES_PATH = SOURCE_DIR / "provider-contract-profiles.json"
+AUDIT_TRACK_POLICY_PATH = SOURCE_DIR / "external-audit-track-policy.json"
 DOCKERFILE_PATH = SOURCE_DIR / "Dockerfile"
 SOURCE_ATTEMPT_PATH = PRIOR_DIR / "attempt.json"
 FULL_SCHEMA_PATH = PRIOR_DIR / "output.schema.json"
 LAUNCHER_PATH = ROOT / "scripts" / "ariadne_comparative_work_cell_launcher.mjs"
 BROKER_PATH = ROOT / "scripts" / "ariadne_comparative_one_use_broker.mjs"
+PROVIDER_CONTRACT_MODULE_PATH = ROOT / "scripts" / "ariadne_provider_contracts.mjs"
 WORK_CELL_DOCUMENT_PATH = (
     ROOT
     / "orchestration"
@@ -52,6 +57,18 @@ FRESH_PREFLIGHT_EVIDENCE_PATH = (
 FRESH_COMPARISON_EVIDENCE_PATH = (
     SOURCE_DIR / "attempt-002-comparison-evidence.json"
 )
+ATTEMPT3_PREFLIGHT_EVIDENCE_PATH = (
+    SOURCE_DIR / "attempt-003-preflight-evidence.json"
+)
+ATTEMPT3_COMPARISON_EVIDENCE_PATH = (
+    SOURCE_DIR / "attempt-003-comparison-evidence.json"
+)
+ATTEMPT3_AUDIT_ANALYSIS_PATH = SOURCE_DIR / "attempt-003-audit-analysis.json"
+ATTEMPT4_PREFLIGHT_EVIDENCE_PATH = (
+    SOURCE_DIR / "attempt-004-preflight-evidence.json"
+)
+ATTEMPT4_EVIDENCE_PATH = SOURCE_DIR / "attempt-004-gemini-evidence.json"
+ATTEMPT4_AUDIT_ANALYSIS_PATH = SOURCE_DIR / "attempt-004-audit-analysis.json"
 TERRA_LEDGER_PATH = SOURCE_DIR / "terra-single-use-ledger.json"
 GEMINI_LEDGER_PATH = SOURCE_DIR / "gemini-single-use-ledger.json"
 FRESH_TERRA_LEDGER_PATH = (
@@ -59,6 +76,15 @@ FRESH_TERRA_LEDGER_PATH = (
 )
 FRESH_GEMINI_LEDGER_PATH = (
     SOURCE_DIR / "gemini-attempt-002-single-use-ledger.json"
+)
+ATTEMPT3_TERRA_LEDGER_PATH = (
+    SOURCE_DIR / "terra-attempt-003-single-use-ledger.json"
+)
+ATTEMPT3_GEMINI_LEDGER_PATH = (
+    SOURCE_DIR / "gemini-attempt-003-single-use-ledger.json"
+)
+ATTEMPT4_GEMINI_LEDGER_PATH = (
+    SOURCE_DIR / "gemini-attempt-004-single-use-ledger.json"
 )
 NODE_IMAGE = "node:24-bookworm-slim"
 IMAGE_TAGS = {
@@ -79,6 +105,10 @@ PRIMARY_DRAFT_IDS = {
     "draft-advisory-primary",
 }
 PUBLIC_EVENT_FIELDS = {
+    "allowed_path",
+    "audit_sequence",
+    "previous_event_sha256",
+    "event_sha256",
     "event",
     "lane_id",
     "provider",
@@ -89,8 +119,18 @@ PUBLIC_EVENT_FIELDS = {
     "request_sha256",
     "response_bytes",
     "response_sha256",
+    "provider_schema_profile_sha256",
+    "provider_error_status",
+    "provider_error_type",
+    "provider_error_code",
+    "provider_error_parameter",
+    "provider_request_id",
+    "typed_output_manifest",
     "maximum_output_tokens",
+    "maximum_provider_calls",
     "reason_code",
+    "upstream_host",
+    "upstream_path",
 }
 
 
@@ -98,6 +138,16 @@ class RehearsalError(RuntimeError):
     def __init__(self, reason_code: str):
         super().__init__(reason_code)
         self.reason_code = reason_code
+
+
+def export_public_audit_event(event: dict[str, Any]) -> dict[str, Any]:
+    """Copy a trusted broker event without silently dropping any field."""
+    if not isinstance(event, dict):
+        raise RehearsalError("audit-event-export-invalid")
+    unknown_fields = sorted(set(event) - PUBLIC_EVENT_FIELDS)
+    if unknown_fields:
+        raise RehearsalError("audit-event-export-field-not-allowlisted")
+    return copy.deepcopy(event)
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -125,6 +175,154 @@ def canonical_json(value: Any) -> str:
 def js_json(value: Any) -> str:
     # All sealed inputs are ASCII and retain insertion order after json.loads.
     return json.dumps(value, ensure_ascii=False, separators=(",", ":"))
+
+
+def _value_matches_schema_type(value: Any, schema_type: str) -> bool:
+    if schema_type == "string":
+        return isinstance(value, str)
+    if schema_type == "boolean":
+        return isinstance(value, bool)
+    if schema_type == "integer":
+        return isinstance(value, int) and not isinstance(value, bool)
+    if schema_type == "number":
+        return isinstance(value, (int, float)) and not isinstance(value, bool)
+    return False
+
+
+def provider_contract_violations(
+    schema: dict[str, Any], lane: str
+) -> list[str]:
+    profiles = load_json(PROVIDER_PROFILES_PATH).get("profiles", {})
+    profile = profiles.get(lane)
+    if not isinstance(profile, dict):
+        return ["profile-missing"]
+    allowed_keywords = set(profile.get("allowed_schema_keywords", []))
+    enum_allowed_types = set(profile.get("enum_allowed_types", []))
+    violations: list[str] = []
+    total_properties = 0
+    total_enum_values = 0
+    maximum_depth = 0
+
+    def walk(node: Any, path: str, depth: int) -> None:
+        nonlocal maximum_depth, total_enum_values, total_properties
+        maximum_depth = max(maximum_depth, depth)
+        if not isinstance(node, dict):
+            violations.append(f"{path}:schema-node-invalid")
+            return
+        for keyword in node:
+            if keyword not in allowed_keywords:
+                violations.append(f"{path}:keyword-{keyword}-unsupported")
+        if "enum" in node:
+            enum_values = node.get("enum")
+            schema_type = node.get("type")
+            if (
+                profile.get("enum_requires_explicit_type") is True
+                and not isinstance(schema_type, str)
+            ):
+                violations.append(f"{path}:enum-type-missing")
+            if schema_type not in enum_allowed_types:
+                violations.append(f"{path}:enum-type-unsupported")
+            if not isinstance(enum_values, list) or not enum_values:
+                violations.append(f"{path}:enum-empty-or-invalid")
+            else:
+                total_enum_values += len(enum_values)
+                if isinstance(schema_type, str) and any(
+                    not _value_matches_schema_type(value, schema_type)
+                    for value in enum_values
+                ):
+                    violations.append(f"{path}:enum-value-type-mismatch")
+            if (
+                schema_type == "boolean"
+                and profile.get("boolean_enum_allowed") is not True
+            ):
+                violations.append(f"{path}:boolean-enum-unsupported")
+        if node.get("type") == "object":
+            properties = node.get("properties")
+            required = node.get("required")
+            if node.get("additionalProperties") is not False:
+                violations.append(f"{path}:additional-properties-not-false")
+            if not isinstance(properties, dict):
+                violations.append(f"{path}:properties-invalid")
+            else:
+                total_properties += len(properties)
+                if (
+                    profile.get("all_object_properties_required") is True
+                    and (
+                        not isinstance(required, list)
+                        or set(required) != set(properties)
+                        or len(required) != len(properties)
+                    )
+                ):
+                    violations.append(f"{path}:required-properties-incomplete")
+                for key, child in properties.items():
+                    walk(child, f"{path}.properties.{key}", depth + 1)
+        if node.get("type") == "array":
+            walk(node.get("items"), f"{path}.items", depth + 1)
+        if "anyOf" in node:
+            branches = node.get("anyOf")
+            if not isinstance(branches, list) or not branches:
+                violations.append(f"{path}:anyof-invalid")
+            else:
+                for index, child in enumerate(branches):
+                    walk(child, f"{path}.anyOf[{index}]", depth + 1)
+
+    if schema.get("type") != profile.get("root_type"):
+        violations.append("$:root-type-invalid")
+    if "anyOf" in schema and profile.get("root_any_of_allowed") is not True:
+        violations.append("$:root-anyof-unsupported")
+    walk(schema, "$", 1)
+    if maximum_depth > int(profile.get("maximum_schema_depth", 0)):
+        violations.append("$:maximum-depth-exceeded")
+    if total_properties > int(profile.get("maximum_total_properties", 0)):
+        violations.append("$:maximum-properties-exceeded")
+    if total_enum_values > int(profile.get("maximum_total_enum_values", 0)):
+        violations.append("$:maximum-enum-values-exceeded")
+    return sorted(set(violations))
+
+
+def provider_contract_report(
+    schema: dict[str, Any], lane: str
+) -> dict[str, Any]:
+    violations = provider_contract_violations(schema, lane)
+    if violations:
+        raise RehearsalError(f"{lane}-provider-schema-profile-invalid")
+
+    maximum_depth = 0
+    total_properties = 0
+    total_enum_values = 0
+    boolean_enum_count = 0
+
+    def measure(node: Any, depth: int) -> None:
+        nonlocal maximum_depth, total_properties
+        nonlocal total_enum_values, boolean_enum_count
+        if not isinstance(node, dict):
+            return
+        maximum_depth = max(maximum_depth, depth)
+        if isinstance(node.get("enum"), list):
+            total_enum_values += len(node["enum"])
+            if node.get("type") == "boolean":
+                boolean_enum_count += 1
+        if isinstance(node.get("properties"), dict):
+            total_properties += len(node["properties"])
+            for child in node["properties"].values():
+                measure(child, depth + 1)
+        if isinstance(node.get("items"), dict):
+            measure(node["items"], depth + 1)
+        if isinstance(node.get("anyOf"), list):
+            for child in node["anyOf"]:
+                measure(child, depth + 1)
+
+    measure(schema, 1)
+    return {
+        "status": "passed",
+        "lane_id": lane,
+        "schema_sha256": sha256_bytes(js_json(schema).encode()),
+        "maximum_depth": maximum_depth,
+        "total_properties": total_properties,
+        "total_enum_values": total_enum_values,
+        "boolean_enum_count": boolean_enum_count,
+        "provider_call_performed": False,
+    }
 
 
 def run_command(
@@ -212,9 +410,12 @@ def source_hashes() -> dict[str, str]:
     paths = {
         "Dockerfile": DOCKERFILE_PATH,
         "ariadne_comparative_one_use_broker.mjs": BROKER_PATH,
+        "ariadne_provider_contracts.mjs": PROVIDER_CONTRACT_MODULE_PATH,
         "ariadne_comparative_work_cell_launcher.mjs": LAUNCHER_PATH,
         "comparison-manifest.json": MANIFEST_PATH,
         "provider-output.schema.json": PROVIDER_SCHEMA_PATH,
+        "provider-contract-profiles.json": PROVIDER_PROFILES_PATH,
+        "external-audit-track-policy.json": AUDIT_TRACK_POLICY_PATH,
         "source-attempt.json": SOURCE_ATTEMPT_PATH,
         "full-output.schema.json": FULL_SCHEMA_PATH,
     }
@@ -227,12 +428,17 @@ def validate_static() -> dict[str, Any]:
         TERRA_AMENDMENT_PATH,
         TWO_LANE_RESTORATION_PATH,
         FRESH_ATTEMPT_PATH,
+        ATTEMPT3_AUTHORITY_PATH,
+        ATTEMPT4_AUTHORITY_PATH,
         PROVIDER_SCHEMA_PATH,
+        PROVIDER_PROFILES_PATH,
+        AUDIT_TRACK_POLICY_PATH,
         DOCKERFILE_PATH,
         SOURCE_ATTEMPT_PATH,
         FULL_SCHEMA_PATH,
         LAUNCHER_PATH,
         BROKER_PATH,
+        PROVIDER_CONTRACT_MODULE_PATH,
         WORK_CELL_DOCUMENT_PATH,
     ):
         if not path.is_file():
@@ -317,6 +523,67 @@ def validate_static() -> dict[str, Any]:
         or fresh_attempt.get("cross_model_input") is not False
     ):
         raise RehearsalError("fresh-attempt-authority-invalid")
+    attempt3 = load_json(ATTEMPT3_AUTHORITY_PATH)
+    if (
+        attempt3.get("runtime_attempt_id")
+        != "comparative-runtime-attempt-003"
+        or attempt3.get("authority")
+        != "yuri-explicit-fresh-two-lane-attempt-with-external-audit-check"
+        or attempt3.get("status") != "authorised_preattempt"
+        or attempt3.get("run_order") != ["terra", "gemini"]
+        or attempt3.get("required_hardening", {}).get(
+            "external_hash_chained_audit"
+        )
+        is not True
+        or attempt3.get("required_hardening", {}).get(
+            "typed_output_manifest_without_values"
+        )
+        is not True
+        or attempt3.get("required_hardening", {}).get(
+            "raw_reasoning_recorded"
+        )
+        is not False
+        or attempt3.get("retry") is not False
+        or attempt3.get("fallback") is not False
+        or attempt3.get("cross_model_input") is not False
+    ):
+        raise RehearsalError("attempt3-authority-invalid")
+    attempt4 = load_json(ATTEMPT4_AUTHORITY_PATH)
+    if (
+        attempt4.get("runtime_attempt_id")
+        != "comparative-runtime-attempt-004"
+        or attempt4.get("authority")
+        != "yuri-explicit-gemini-only-attempt-after-request-contract-repair"
+        or attempt4.get("status") != "authorised_preattempt"
+        or attempt4.get("run_order") != ["gemini"]
+        or attempt4.get("maximum_provider_calls")
+        != {"gemini": 1, "terra": 0}
+        or attempt4.get("required_repairs", {}).get(
+            "gemini_candidate_count_omitted"
+        )
+        is not True
+        or attempt4.get("required_repairs", {}).get(
+            "shared_request_constructor_used"
+        )
+        is not True
+        or attempt4.get("required_repairs", {}).get(
+            "lossless_fail_closed_audit_exporter_used"
+        )
+        is not True
+        or attempt4.get("provider_route", {}).get("api")
+        != "gemini-developer-api"
+        or attempt4.get("provider_route", {}).get(
+            "australian_processing_claim"
+        )
+        is not False
+        or attempt4.get("provider_route", {}).get("data_class")
+        != "authored-synthetic-non-pii"
+        or attempt4.get("retry") is not False
+        or attempt4.get("fallback") is not False
+        or attempt4.get("cross_model_input") is not False
+        or attempt4.get("voting") is not False
+    ):
+        raise RehearsalError("attempt4-authority-invalid")
     budgets = manifest.get("budgets", {})
     if (
         budgets.get("maximum_attempts_per_lane") != 1
@@ -329,9 +596,28 @@ def validate_static() -> dict[str, Any]:
     ):
         raise RehearsalError("budget-or-sequence-policy-invalid")
     provider_schema = load_json(PROVIDER_SCHEMA_PATH)
+    audit_policy = load_json(AUDIT_TRACK_POLICY_PATH)
     full_schema = load_json(FULL_SCHEMA_PATH)
     jsonschema.Draft202012Validator.check_schema(provider_schema)
     jsonschema.Draft202012Validator.check_schema(full_schema)
+    provider_contracts = {
+        lane: provider_contract_report(provider_schema, lane)
+        for lane in ("terra", "gemini")
+    }
+    if (
+        audit_policy.get("owner")
+        != "trusted_broker_and_orchestrator_control_plane"
+        or audit_policy.get("sandbox_append_authority") is not False
+        or audit_policy.get("sandbox_rewrite_or_delete_authority") is not False
+        or audit_policy.get("current_implementation", {}).get(
+            "provider_call_performed_by_this_policy"
+        )
+        is not False
+        or "hidden_reasoning" not in audit_policy.get("never_record", [])
+        or "typed_bounded_decision_rationale_with_evidence_and_rule_references"
+        != audit_policy.get("rationale_contract", {}).get("allowed")
+    ):
+        raise RehearsalError("external-audit-track-policy-invalid")
     material = prompt_material()
     prompt_bytes = len(material["prompt"].encode())
     if prompt_bytes > budgets["maximum_prompt_bytes"]:
@@ -341,6 +627,9 @@ def validate_static() -> dict[str, Any]:
         ("gemini", GEMINI_LEDGER_PATH),
         ("terra", FRESH_TERRA_LEDGER_PATH),
         ("gemini", FRESH_GEMINI_LEDGER_PATH),
+        ("terra", ATTEMPT3_TERRA_LEDGER_PATH),
+        ("gemini", ATTEMPT3_GEMINI_LEDGER_PATH),
+        ("gemini", ATTEMPT4_GEMINI_LEDGER_PATH),
     ):
         ledger = load_json(ledger_path)
         if (
@@ -355,6 +644,13 @@ def validate_static() -> dict[str, Any]:
         "context_frame_count": 6,
         "prompt_bytes": prompt_bytes,
         "shared_hashes": material["hashes"],
+        "provider_contracts": provider_contracts,
+        "external_audit_track_policy": {
+            "status": "passed",
+            "sandbox_append_authority": False,
+            "raw_reasoning_recorded": False,
+            "provider_call_performed": False,
+        },
         "source_hashes": source_hashes(),
         "provider_call_performed": False,
         "prompt_transmitted": False,
@@ -365,6 +661,9 @@ def _copy_build_context(target: Path) -> None:
     material = prompt_material()
     shutil.copy2(DOCKERFILE_PATH, target / "Dockerfile")
     shutil.copy2(BROKER_PATH, target / "ariadne_comparative_one_use_broker.mjs")
+    shutil.copy2(
+        PROVIDER_CONTRACT_MODULE_PATH, target / "ariadne_provider_contracts.mjs"
+    )
     shutil.copy2(
         LAUNCHER_PATH, target / "ariadne_comparative_work_cell_launcher.mjs"
     )
@@ -377,6 +676,7 @@ def _copy_build_context(target: Path) -> None:
     expected = {
         "Dockerfile",
         "ariadne_comparative_one_use_broker.mjs",
+        "ariadne_provider_contracts.mjs",
         "ariadne_comparative_work_cell_launcher.mjs",
         "comparison-manifest.json",
         "provider-output.schema.json",
@@ -387,8 +687,14 @@ def _copy_build_context(target: Path) -> None:
         raise RehearsalError("build-context-allowlist-invalid")
 
 
-def build_images() -> dict[str, Any]:
+def build_images(
+    lanes: tuple[str, ...] = ("terra", "gemini"),
+) -> dict[str, Any]:
     static = validate_static()
+    if not lanes or len(set(lanes)) != len(lanes) or any(
+        lane not in IMAGE_TAGS for lane in lanes
+    ):
+        raise RehearsalError("build-lane-set-invalid")
     if shutil.which("docker") is None:
         raise RehearsalError("docker-not-found")
     run_command(["docker", "pull", NODE_IMAGE], timeout=600)
@@ -406,6 +712,7 @@ def build_images() -> dict[str, Any]:
     with tempfile.TemporaryDirectory(prefix="ariadne-comparison-build-") as raw:
         context = Path(raw)
         _copy_build_context(context)
+        primary_lane = lanes[0]
         for role, target in (("broker", "broker"), ("cell", "work-cell")):
             run_command(
                 [
@@ -416,25 +723,27 @@ def build_images() -> dict[str, Any]:
                     "--target",
                     target,
                     "--tag",
-                    IMAGE_TAGS["terra"][role],
+                    IMAGE_TAGS[primary_lane][role],
                     str(context),
                 ],
                 timeout=900,
             )
-            run_command(
-                [
-                    "docker",
-                    "tag",
-                    IMAGE_TAGS["terra"][role],
-                    IMAGE_TAGS["gemini"][role],
-                ]
-            )
+            for lane in lanes[1:]:
+                run_command(
+                    [
+                        "docker",
+                        "tag",
+                        IMAGE_TAGS[primary_lane][role],
+                        IMAGE_TAGS[lane][role],
+                    ]
+                )
     evidence = {
         "status": "passed",
         "node_image_resolved": digest,
         "build_context_files": [
             "Dockerfile",
             "ariadne_comparative_one_use_broker.mjs",
+            "ariadne_provider_contracts.mjs",
             "ariadne_comparative_work_cell_launcher.mjs",
             "comparison-manifest.json",
             "provider-output.schema.json",
@@ -448,6 +757,7 @@ def build_images() -> dict[str, Any]:
                 for role, tag in tags.items()
             }
             for lane, tags in IMAGE_TAGS.items()
+            if lane in lanes
         },
         "provider_secret_in_image": False,
         "provider_call_performed": False,
@@ -694,6 +1004,8 @@ def preflight(
                 )
                 _assert_policy(broker, cell, network)
                 events = _broker_events(names["broker"])
+                if not _validate_broker_audit_chain(events):
+                    raise RehearsalError("broker-audit-chain-invalid")
                 if any(event.get("event") == "provider-call-started" for event in events):
                     raise RehearsalError("provider-call-during-preflight")
                 lane_policies[lane] = {
@@ -701,7 +1013,7 @@ def preflight(
                     "cell": cell,
                     "network": network,
                     "broker_events": [
-                        {key: value for key, value in event.items() if key in PUBLIC_EVENT_FIELDS}
+                        export_public_audit_event(event)
                         for event in events
                     ],
                 }
@@ -736,6 +1048,65 @@ def preflight(
     return evidence
 
 
+def preflight_attempt4() -> dict[str, Any]:
+    static = validate_static()
+    build = build_images(("gemini",))
+    lane = "gemini"
+    names = _names(lane, "attempt4-preflight")
+    with tempfile.TemporaryDirectory(
+        prefix="ariadne-gemini-attempt4-preflight-"
+    ) as raw:
+        try:
+            broker, cell, network = _start_skeleton(
+                lane,
+                names,
+                Path(raw),
+                provider_key="synthetic-non-provider-secret-gemini",
+            )
+            _assert_policy(broker, cell, network)
+            events = _broker_events(names["broker"])
+            if not _validate_broker_audit_chain(events):
+                raise RehearsalError("broker-audit-chain-invalid")
+            if any(
+                event.get("event") == "provider-call-started"
+                for event in events
+            ):
+                raise RehearsalError("provider-call-during-preflight")
+            lane_policy = {
+                "broker": broker,
+                "cell": cell,
+                "network": network,
+                "broker_events": [
+                    export_public_audit_event(event) for event in events
+                ],
+            }
+        finally:
+            cleanup = _cleanup(names, remove_images=False, lane=lane)
+    if not all(cleanup.values()):
+        raise RehearsalError("preflight-cleanup-incomplete")
+    evidence = {
+        "schema_version": "ariadne.gemini_preflight_evidence.v1",
+        "protocol_id": PROTOCOL_ID,
+        "runtime_attempt_id": "comparative-runtime-attempt-004",
+        "status": "passed",
+        "static": static,
+        "build": build,
+        "lane_policy": lane_policy,
+        "cleanup": cleanup,
+        "credential_gate": {
+            "gemini_present": bool(os.environ.get("GEMINI_API_KEY")),
+            "openai_credential_read": False,
+            "credential_value_recorded": False,
+        },
+        "provider_call_performed": False,
+        "prompt_transmitted": False,
+        "australian_processing_evidence": False,
+        "data_class": "authored-synthetic-non-pii",
+    }
+    write_json(ATTEMPT4_PREFLIGHT_EVIDENCE_PATH, evidence)
+    return evidence
+
+
 def _broker_events(container_name: str) -> list[dict[str, Any]]:
     completed = run_command(
         ["docker", "logs", container_name], timeout=30, check=False
@@ -749,6 +1120,152 @@ def _broker_events(container_name: str) -> list[dict[str, Any]]:
         if isinstance(value, dict):
             events.append(value)
     return events
+
+
+def _validate_broker_audit_chain(events: list[dict[str, Any]]) -> bool:
+    previous = f"sha256:{'0' * 64}"
+    for expected_sequence, event in enumerate(events, start=1):
+        if (
+            event.get("audit_sequence") != expected_sequence
+            or event.get("previous_event_sha256") != previous
+            or not isinstance(event.get("event_sha256"), str)
+        ):
+            return False
+        claimed = event["event_sha256"]
+        payload = {
+            key: value for key, value in event.items() if key != "event_sha256"
+        }
+        if sha256_bytes(canonical_json(payload).encode()) != claimed:
+            return False
+        previous = claimed
+    return bool(events)
+
+
+def _reconstruct_broker_ready_fields(
+    events: list[dict[str, Any]], lane: str
+) -> list[dict[str, Any]]:
+    reconstructed = copy.deepcopy(events)
+    manifest_lane = next(
+        item
+        for item in load_json(MANIFEST_PATH)["lanes"]
+        if item["lane_id"] == lane
+    )
+    if reconstructed and reconstructed[0].get("event") == "broker-ready":
+        reconstructed[0].update(
+            {
+                "allowed_path": "/infer",
+                "upstream_host": manifest_lane["host"],
+                "upstream_path": manifest_lane["path"],
+                "maximum_provider_calls": 1,
+            }
+        )
+    return reconstructed
+
+
+def audit_attempt3() -> dict[str, Any]:
+    evidence = load_json(ATTEMPT3_COMPARISON_EVIDENCE_PATH)
+    if evidence.get("runtime_attempt_id") != "comparative-runtime-attempt-003":
+        raise RehearsalError("attempt3-evidence-invalid")
+    expected_broker_ready_fields = {
+        "allowed_path",
+        "upstream_host",
+        "upstream_path",
+        "maximum_provider_calls",
+    }
+    lane_checks: dict[str, Any] = {}
+    for lane in ("terra", "gemini"):
+        lane_evidence = evidence["lanes"][lane]
+        events = lane_evidence.get("broker_events", [])
+        first_event_fields = set(events[0]) if events else set()
+        omitted = sorted(expected_broker_ready_fields - first_event_fields)
+        reconstructed = _reconstruct_broker_ready_fields(events, lane)
+        starts = [
+            item for item in events if item.get("event") == "provider-call-started"
+        ]
+        completions = [
+            item
+            for item in events
+            if item.get("event") == "provider-call-completed"
+        ]
+        lane_checks[lane] = {
+            "runtime_host_chain_status_reported": lane_evidence.get(
+                "external_audit_track", {}
+            ).get("hash_chain_status"),
+            "original_durable_sanitised_chain_verifies": (
+                _validate_broker_audit_chain(events)
+            ),
+            "omitted_hashed_broker_ready_fields": omitted,
+            "deterministic_reconstruction_sources": {
+                "allowed_path": "frozen broker constant",
+                "upstream_host": "comparison manifest lane host",
+                "upstream_path": "comparison manifest lane path",
+                "maximum_provider_calls": "frozen broker call budget",
+            },
+            "reconstructed_chain_verifies": _validate_broker_audit_chain(
+                reconstructed
+            ),
+            "provider_call_start_count": len(starts),
+            "provider_call_completion_count": len(completions),
+            "provider_status": (
+                completions[0].get("provider_status")
+                if len(completions) == 1
+                else None
+            ),
+            "typed_output_manifest_recorded": lane_evidence.get(
+                "external_audit_track", {}
+            ).get("typed_output_manifest_recorded"),
+            "proofreader_disposition": lane_evidence.get(
+                "external_audit_track", {}
+            ).get("proofreader_disposition"),
+            "cleanup_complete": all(
+                lane_evidence.get("cleanup", {}).values()
+            ),
+        }
+    original_exports_verify = all(
+        item["original_durable_sanitised_chain_verifies"]
+        for item in lane_checks.values()
+    )
+    reconstructed_exports_verify = all(
+        item["reconstructed_chain_verifies"]
+        for item in lane_checks.values()
+    )
+    analysis = {
+        "schema_version": "ariadne.attempt3_external_audit_analysis.v1",
+        "protocol_id": PROTOCOL_ID,
+        "runtime_attempt_id": "comparative-runtime-attempt-003",
+        "result": (
+            "ariadne_terra_gemini_attempt3_external_audit_pass"
+            if original_exports_verify
+            else "ariadne_terra_gemini_attempt3_external_audit_revision_required"
+        ),
+        "attempt_evidence_sha256": sha256_bytes(
+            ATTEMPT3_COMPARISON_EVIDENCE_PATH.read_bytes()
+        ),
+        "original_durable_exports_verify": original_exports_verify,
+        "reconstructed_exports_verify": reconstructed_exports_verify,
+        "incident": {
+            "reason_code": "sanitised-audit-export-omitted-hashed-fields",
+            "scope": "broker-ready-event-only",
+            "historical_evidence_rewritten": False,
+            "future_export_allowlist_corrected": True,
+        },
+        "lane_checks": lane_checks,
+        "gemini_diagnostic_limit": {
+            "observed": "http-400-invalid-argument-before-typed-output",
+            "exact_rejected_field_known": False,
+            "reason": "raw-provider-error-message-is-intentionally-excluded",
+            "retry_performed": False,
+        },
+        "security_exclusions": {
+            "raw_reasoning_recorded": False,
+            "raw_prompt_recorded": False,
+            "raw_provider_response_recorded": False,
+            "draft_payload_recorded": False,
+            "provider_secret_recorded": False,
+        },
+    }
+    write_json(ATTEMPT3_AUDIT_ANALYSIS_PATH, analysis)
+    return analysis
 
 
 def _consume_ledger(
@@ -892,6 +1409,8 @@ def _run_lane(
             except (RehearsalError, json.JSONDecodeError):
                 cell_result = {"status": "failed", "reason_code": "cell-result-invalid"}
             events = _broker_events(names["broker"])
+            if not _validate_broker_audit_chain(events):
+                reason_codes.append("broker-audit-chain-invalid")
             if cell_result.get("status") != "completed":
                 reason_codes.append(
                     str(cell_result.get("reason_code", "cell-attempt-failed"))
@@ -899,6 +1418,9 @@ def _run_lane(
             else:
                 envelope = {"drafts": cell_result.get("drafts")}
                 try:
+                    provider_contract_report(
+                        load_json(PROVIDER_SCHEMA_PATH), lane
+                    )
                     jsonschema.Draft202012Validator(
                         load_json(PROVIDER_SCHEMA_PATH)
                     ).validate(envelope)
@@ -982,9 +1504,28 @@ def _run_lane(
             "network": network_policy,
         },
         "broker_events": [
-            {key: value for key, value in event.items() if key in PUBLIC_EVENT_FIELDS}
+            export_public_audit_event(event)
             for event in events
         ],
+        "external_audit_track": {
+            "owner": "trusted-broker-and-orchestrator",
+            "sandbox_append_authority": False,
+            "hash_chain_status": (
+                "passed"
+                if _validate_broker_audit_chain(events)
+                else "failed"
+            ),
+            "raw_reasoning_recorded": False,
+            "typed_output_manifest_recorded": any(
+                event.get("event") == "typed-output-observed"
+                for event in events
+            ),
+            "proofreader_disposition": (
+                proofreader.get("disposition")
+                if isinstance(proofreader, dict)
+                else None
+            ),
+        },
         "cleanup": cleanup,
         "raw_prompt_recorded": False,
         "raw_provider_response_recorded": False,
@@ -1260,7 +1801,330 @@ def run_fresh_attempt(*, authorised: bool) -> dict[str, Any]:
     return evidence
 
 
+def run_attempt3(*, authorised: bool) -> dict[str, Any]:
+    if not authorised:
+        raise RehearsalError("explicit-attempt3-authorisation-required")
+    authority = load_json(ATTEMPT3_AUTHORITY_PATH)
+    if (
+        authority.get("status") != "authorised_preattempt"
+        or authority.get("runtime_attempt_id")
+        != "comparative-runtime-attempt-003"
+        or authority.get("run_order") != ["terra", "gemini"]
+        or authority.get("retry") is not False
+        or authority.get("fallback") is not False
+        or authority.get("cross_model_input") is not False
+    ):
+        raise RehearsalError("attempt3-authority-invalid")
+    openai_key = os.environ.get("OPENAI_API_KEY", "")
+    gemini_key = os.environ.get("GEMINI_API_KEY", "")
+    if not openai_key or not gemini_key:
+        raise RehearsalError(
+            "both-provider-credentials-required-before-attempt3-consumption"
+        )
+    preflight_evidence = load_json(ATTEMPT3_PREFLIGHT_EVIDENCE_PATH)
+    if (
+        preflight_evidence.get("status") != "passed"
+        or preflight_evidence.get("provider_call_performed") is not False
+        or preflight_evidence.get("prompt_transmitted") is not False
+        or preflight_evidence.get("credential_gates", {}).get("both_present")
+        is not True
+    ):
+        raise RehearsalError("attempt3-preflight-not-passed")
+    for ledger_path in (
+        ATTEMPT3_TERRA_LEDGER_PATH,
+        ATTEMPT3_GEMINI_LEDGER_PATH,
+    ):
+        if load_json(ledger_path).get("state") != "available":
+            raise RehearsalError("attempt3-lane-authority-not-available")
+
+    terra = _run_lane(
+        "terra",
+        openai_key,
+        ledger_path=ATTEMPT3_TERRA_LEDGER_PATH,
+        name_suffix="attempt3-live",
+    )
+    terra_boundary_stop = (
+        not all(terra["cleanup"].values())
+        or any(
+            code
+            in {
+                "work-cell-effective-policy-invalid",
+                "broker-effective-policy-invalid",
+                "sealed-request-mismatch",
+                "referenced-source-hash-mismatch",
+                "broker-audit-chain-invalid",
+                "cleanup-incomplete",
+            }
+            for code in terra["reason_codes"]
+        )
+    )
+    if terra_boundary_stop:
+        gemini = {
+            "lane_id": "gemini",
+            "status": "suppressed",
+            "reason_codes": ["terra-boundary-stop"],
+            "provider_call_performed": False,
+            "authority_consumed": False,
+        }
+    else:
+        gemini = _run_lane(
+            "gemini",
+            gemini_key,
+            ledger_path=ATTEMPT3_GEMINI_LEDGER_PATH,
+            name_suffix="attempt3-live",
+        )
+    shared_hash_match = (
+        terra.get("shared_hashes") == gemini.get("shared_hashes")
+        if gemini.get("status") != "suppressed"
+        else False
+    )
+    passed = (
+        terra.get("status") == "passed"
+        and gemini.get("status") == "passed"
+        and shared_hash_match
+    )
+    evidence = {
+        "schema_version": "ariadne.terra_gemini_comparison_evidence.v3",
+        "protocol_id": PROTOCOL_ID,
+        "runtime_attempt_id": "comparative-runtime-attempt-003",
+        "result": (
+            "ariadne_terra_gemini_comparative_rehearsal_attempt3_pass"
+            if passed
+            else "ariadne_terra_gemini_comparative_rehearsal_attempt3_revision_required"
+        ),
+        "run_order": ["terra", "gemini"],
+        "shared_hash_match": shared_hash_match,
+        "cross_model_input": False,
+        "voting": False,
+        "retry_performed": False,
+        "fallback_performed": False,
+        "lanes": {"terra": terra, "gemini": gemini},
+        "external_audit_checked": True,
+        "raw_reasoning_recorded": False,
+        "raw_prompt_recorded": False,
+        "raw_provider_response_recorded": False,
+        "draft_payload_recorded": False,
+        "provider_secret_recorded": False,
+        "product_or_database_access": False,
+        "downstream_delivery": False,
+    }
+    write_json(ATTEMPT3_COMPARISON_EVIDENCE_PATH, evidence)
+    return evidence
+
+
+def run_attempt4(*, authorised: bool) -> dict[str, Any]:
+    if not authorised:
+        raise RehearsalError("explicit-attempt4-authorisation-required")
+    authority = load_json(ATTEMPT4_AUTHORITY_PATH)
+    if (
+        authority.get("status") != "authorised_preattempt"
+        or authority.get("runtime_attempt_id")
+        != "comparative-runtime-attempt-004"
+        or authority.get("run_order") != ["gemini"]
+        or authority.get("maximum_provider_calls")
+        != {"gemini": 1, "terra": 0}
+        or authority.get("retry") is not False
+        or authority.get("fallback") is not False
+        or authority.get("cross_model_input") is not False
+    ):
+        raise RehearsalError("attempt4-authority-invalid")
+    gemini_key = os.environ.get("GEMINI_API_KEY", "")
+    if not gemini_key:
+        raise RehearsalError(
+            "gemini-credential-required-before-attempt4-consumption"
+        )
+    preflight_evidence = load_json(ATTEMPT4_PREFLIGHT_EVIDENCE_PATH)
+    if (
+        preflight_evidence.get("status") != "passed"
+        or preflight_evidence.get("provider_call_performed") is not False
+        or preflight_evidence.get("prompt_transmitted") is not False
+        or preflight_evidence.get("credential_gate", {}).get(
+            "gemini_present"
+        )
+        is not True
+        or preflight_evidence.get("credential_gate", {}).get(
+            "openai_credential_read"
+        )
+        is not False
+        or preflight_evidence.get("australian_processing_evidence")
+        is not False
+    ):
+        raise RehearsalError("attempt4-preflight-not-passed")
+    if load_json(ATTEMPT4_GEMINI_LEDGER_PATH).get("state") != "available":
+        raise RehearsalError("attempt4-gemini-authority-not-available")
+
+    gemini = _run_lane(
+        "gemini",
+        gemini_key,
+        ledger_path=ATTEMPT4_GEMINI_LEDGER_PATH,
+        name_suffix="attempt4-live",
+    )
+    passed = gemini.get("status") == "passed"
+    evidence = {
+        "schema_version": "ariadne.gemini_single_lane_rehearsal_evidence.v1",
+        "protocol_id": PROTOCOL_ID,
+        "runtime_attempt_id": "comparative-runtime-attempt-004",
+        "result": (
+            "ariadne_gemini_repaired_request_attempt4_pass"
+            if passed
+            else "ariadne_gemini_repaired_request_attempt4_revision_required"
+        ),
+        "run_order": ["gemini"],
+        "lane": gemini,
+        "provider_route": {
+            "api": "gemini-developer-api",
+            "host": "generativelanguage.googleapis.com",
+            "australian_processing_evidence": False,
+            "data_class": "authored-synthetic-non-pii",
+        },
+        "retry_performed": False,
+        "fallback_performed": False,
+        "terra_or_other_provider_call_performed": False,
+        "cross_model_input": False,
+        "voting": False,
+        "external_audit_checked_by_host": True,
+        "raw_reasoning_recorded": False,
+        "raw_prompt_recorded": False,
+        "raw_provider_response_recorded": False,
+        "draft_payload_recorded": False,
+        "provider_secret_recorded": False,
+        "product_or_database_access": False,
+        "downstream_delivery": False,
+    }
+    write_json(ATTEMPT4_EVIDENCE_PATH, evidence)
+    return evidence
+
+
+def audit_attempt4() -> dict[str, Any]:
+    evidence = load_json(ATTEMPT4_EVIDENCE_PATH)
+    if (
+        evidence.get("schema_version")
+        != "ariadne.gemini_single_lane_rehearsal_evidence.v1"
+        or evidence.get("runtime_attempt_id")
+        != "comparative-runtime-attempt-004"
+        or evidence.get("run_order") != ["gemini"]
+    ):
+        raise RehearsalError("attempt4-evidence-invalid")
+    lane = evidence.get("lane", {})
+    events = lane.get("broker_events", [])
+    starts = [
+        event
+        for event in events
+        if event.get("event") == "provider-call-started"
+    ]
+    completions = [
+        event
+        for event in events
+        if event.get("event") == "provider-call-completed"
+    ]
+    typed = [
+        event
+        for event in events
+        if event.get("event") == "typed-output-observed"
+    ]
+    exclusions = {
+        key: evidence.get(key)
+        for key in (
+            "raw_reasoning_recorded",
+            "raw_prompt_recorded",
+            "raw_provider_response_recorded",
+            "draft_payload_recorded",
+            "provider_secret_recorded",
+            "product_or_database_access",
+            "downstream_delivery",
+        )
+    }
+    chain_verifies = _validate_broker_audit_chain(events)
+    cleanup_complete = all(lane.get("cleanup", {}).values())
+    audit_passed = (
+        chain_verifies
+        and len(starts) == 1
+        and len(completions) == 1
+        and lane.get("external_audit_track", {}).get("hash_chain_status")
+        == "passed"
+        and lane.get("ledger", {}).get("state") == "consumed"
+        and cleanup_complete
+        and all(value is False for value in exclusions.values())
+        and evidence.get("terra_or_other_provider_call_performed") is False
+        and evidence.get("provider_route", {}).get(
+            "australian_processing_evidence"
+        )
+        is False
+    )
+    analysis = {
+        "schema_version": "ariadne.gemini_attempt4_external_audit_analysis.v1",
+        "protocol_id": PROTOCOL_ID,
+        "runtime_attempt_id": "comparative-runtime-attempt-004",
+        "attempt_result": evidence["result"],
+        "audit_result": (
+            "ariadne_gemini_attempt4_external_audit_pass"
+            if audit_passed
+            else "ariadne_gemini_attempt4_external_audit_revision_required"
+        ),
+        "durable_hash_chain_verifies": chain_verifies,
+        "provider_call_start_count": len(starts),
+        "provider_call_completion_count": len(completions),
+        "provider_status": (
+            completions[0].get("provider_status")
+            if len(completions) == 1
+            else None
+        ),
+        "typed_output_manifest_count": len(typed),
+        "typed_output_manifest_recorded": len(typed) == 1,
+        "provider_schema_status": lane.get("provider_schema_status"),
+        "full_schema_status": lane.get("full_schema_status"),
+        "proofreader_disposition": (
+            lane.get("proofreader", {}).get("disposition")
+            if isinstance(lane.get("proofreader"), dict)
+            else None
+        ),
+        "cleanup_complete": cleanup_complete,
+        "exclusions": exclusions,
+        "australian_processing_evidence": False,
+        "historical_attempt_evidence_rewritten": False,
+        "retry_performed": False,
+    }
+    write_json(ATTEMPT4_AUDIT_ANALYSIS_PATH, analysis)
+    return analysis
+
+
 def public_summary(value: dict[str, Any]) -> dict[str, Any]:
+    if (
+        value.get("schema_version")
+        == "ariadne.gemini_attempt4_external_audit_analysis.v1"
+    ):
+        return {
+            "attempt_result": value["attempt_result"],
+            "audit_result": value["audit_result"],
+            "durable_hash_chain_verifies": value[
+                "durable_hash_chain_verifies"
+            ],
+        }
+    if (
+        value.get("schema_version")
+        == "ariadne.gemini_single_lane_rehearsal_evidence.v1"
+    ):
+        return {
+            "result": value["result"],
+            "gemini_status": value["lane"].get("status"),
+            "gemini_reason_codes": value["lane"].get("reason_codes"),
+            "australian_processing_evidence": value["provider_route"].get(
+                "australian_processing_evidence"
+            ),
+        }
+    if (
+        value.get("schema_version")
+        == "ariadne.attempt3_external_audit_analysis.v1"
+    ):
+        return {
+            "result": value["result"],
+            "original_durable_exports_verify": value[
+                "original_durable_exports_verify"
+            ],
+            "reconstructed_exports_verify": value[
+                "reconstructed_exports_verify"
+            ],
+        }
     if value.get("schema_version") == "ariadne.terra_gemini_comparison_evidence.v2":
         return {
             "result": value["result"],
@@ -1302,12 +2166,20 @@ def build_parser() -> argparse.ArgumentParser:
     subparsers.add_parser("validate")
     subparsers.add_parser("preflight")
     subparsers.add_parser("preflight-fresh")
+    subparsers.add_parser("preflight-attempt3")
+    subparsers.add_parser("preflight-attempt4")
+    subparsers.add_parser("audit-attempt3")
+    subparsers.add_parser("audit-attempt4")
     run = subparsers.add_parser("run")
     run.add_argument("--authorised", action="store_true")
     run_terra = subparsers.add_parser("run-terra")
     run_terra.add_argument("--authorised", action="store_true")
     run_fresh = subparsers.add_parser("run-fresh")
     run_fresh.add_argument("--authorised", action="store_true")
+    run_attempt3_parser = subparsers.add_parser("run-attempt3")
+    run_attempt3_parser.add_argument("--authorised", action="store_true")
+    run_attempt4_parser = subparsers.add_parser("run-attempt4")
+    run_attempt4_parser.add_argument("--authorised", action="store_true")
     return parser
 
 
@@ -1323,12 +2195,27 @@ def main(argv: list[str] | None = None) -> int:
                 evidence_path=FRESH_PREFLIGHT_EVIDENCE_PATH,
                 name_suffix="attempt2-preflight",
             )
+        elif arguments.command == "preflight-attempt3":
+            result = preflight(
+                evidence_path=ATTEMPT3_PREFLIGHT_EVIDENCE_PATH,
+                name_suffix="attempt3-preflight",
+            )
+        elif arguments.command == "preflight-attempt4":
+            result = preflight_attempt4()
+        elif arguments.command == "audit-attempt3":
+            result = audit_attempt3()
+        elif arguments.command == "audit-attempt4":
+            result = audit_attempt4()
         elif arguments.command == "run":
             result = run_live(authorised=arguments.authorised)
         elif arguments.command == "run-terra":
             result = run_terra_only(authorised=arguments.authorised)
-        else:
+        elif arguments.command == "run-fresh":
             result = run_fresh_attempt(authorised=arguments.authorised)
+        elif arguments.command == "run-attempt3":
+            result = run_attempt3(authorised=arguments.authorised)
+        else:
+            result = run_attempt4(authorised=arguments.authorised)
     except RehearsalError as error:
         print(json.dumps({"status": "failed", "reason_code": error.reason_code}))
         return 2

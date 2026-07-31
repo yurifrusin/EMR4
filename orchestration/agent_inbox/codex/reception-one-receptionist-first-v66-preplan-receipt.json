@@ -1,0 +1,20 @@
+{
+  "schema_version": "ariadne.preplan_receipt.v1",
+  "receipt_id": "reception-one-receptionist-first-v66-preplan-20260730",
+  "created_at": "2026-07-30T10:58:00Z",
+  "status": "passed",
+  "authority_source": "orchestration/continuity/reception-one-receptionist-first-v66/occupied-authority.json",
+  "active_plan": "docs/bernie-reception-one-receptionist-first-v66-deidentified-note-plan.md",
+  "predecessor": {
+    "node_id": "reception-one-receptionist-first-v65-semantic-role",
+    "result": "reception_one_receptionist_first_v65_full_cohort_fail_closed",
+    "exact_safe_outcome_count": 23,
+    "provider_calls": 28,
+    "all_ledgers_consumed": true,
+    "residue_clear": true,
+    "no_further_v65_call": true
+  },
+  "historical_nodes_revised": false,
+  "complete_raw_cohort_required": true,
+  "repair_scope": "deidentified_decision_note_instruction_only"
+}

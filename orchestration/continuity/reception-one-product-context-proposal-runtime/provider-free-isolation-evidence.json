@@ -1,0 +1,51 @@
+{
+  "boundary": {
+    "api_key_authentication_used": false,
+    "appointment_writes_performed": 0,
+    "confirmation_performed": false,
+    "credential_reads_performed": 0,
+    "database_access_performed": false,
+    "network_access_performed": false,
+    "product_delivery_performed": false,
+    "provider_calls_performed": 0
+  },
+  "candidate_sha256": "sha256:e86a00523eda5a391d0007f1f53bbd94938b2d3b7764d20e3c875db9b25c5b4b",
+  "cell_isolation_observation": {
+    "credential_environment_present": false,
+    "gid": 65532,
+    "loopback_only": true,
+    "network_interfaces": [
+      "lo"
+    ],
+    "read_only_root_filesystem": true,
+    "uid": 65532
+  },
+  "container_policy_checks": {
+    "capabilities_dropped": true,
+    "cpu_bounded": true,
+    "memory_bounded": true,
+    "memory_swap_bounded": true,
+    "network_none": true,
+    "no_mounts": true,
+    "no_new_privileges": true,
+    "no_published_ports": true,
+    "non_root_user": true,
+    "pids_bounded": true,
+    "privileged_false": true,
+    "read_only_rootfs": true
+  },
+  "evidence_mode": "authored_synthetic_provider_free_fixture",
+  "execution_status": "executed",
+  "model_input_sha256": "sha256:009578333483ab989c697918518f8ec76dbdd326050e50262c0c9136d2a8585c",
+  "normalized_plan_sha256": "sha256:d22867d79cedec588e996efff9587156b10d62672f8f3976f74ad8e3c4d2ffc5",
+  "released_proposal_family": "create",
+  "residue": {
+    "container_present": false,
+    "image_present": false,
+    "temporary_context_present": false
+  },
+  "result": "reception_one_bureau_model_text_lane_real_isolation_pass",
+  "review_disposition": "admit",
+  "schema_version": "reception.one.bureau.model_text_isolation_evidence.v1",
+  "source_manifest_sha256": "sha256:22b246f2446c8a306ed05a6e435b86ae79068fe71830a83607cb1b2184409db7"
+}

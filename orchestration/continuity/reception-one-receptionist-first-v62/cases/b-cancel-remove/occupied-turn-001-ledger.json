@@ -1,0 +1,10 @@
+{
+  "attempt_id": "reception-one-receptionist-first-v62-eval-b-cancel-remove-turn-001",
+  "fallback_permitted": false,
+  "ledger_id": "reception-one-receptionist-first-v62-eval-b-cancel-remove-ledger-001",
+  "maximum_provider_calls": 1,
+  "policy_id": "reception-one-receptionist-first-v62-vertex-sydney-v1",
+  "provider_calls_consumed": 1,
+  "schema_version": "reception.one.bureau.model_text_single_use_ledger.v1",
+  "status": "consumed"
+}

@@ -1,0 +1,137 @@
+{
+  "schema_version": "raisa.cloud_run_public_https_dev_host_readiness_evidence.v1",
+  "recorded_at": "2026-07-31T07:00:00Z",
+  "result": "pass",
+  "authority": {
+    "class": "repository_local_readiness_only",
+    "external_cloud_mutations": 0,
+    "credential_reads": 0,
+    "provider_calls": 0,
+    "backend_calls": 0,
+    "database_reads": 0,
+    "database_writes": 0,
+    "document_writes": 0,
+    "microphone_uses": 0,
+    "production_actions": 0,
+    "release_actions": 0
+  },
+  "candidate_deployment": {
+    "project": "bernie-emr4-dev",
+    "service": "raisa-office-web-dev",
+    "region": "australia-southeast1",
+    "hostname_class": "exact_run_app_origin",
+    "status": "not_created_not_deployed"
+  },
+  "build": {
+    "base_image": "node:24-bookworm-slim@sha256:235600a8101ab264e117b1768e925532262668dc9b581ef1dd7d96ced463b8e7",
+    "content_manifest_sha256": "6aaefcf2819aef7cb1e1398f70060f1150a64eb4f5ce7da54579e541f58b1135",
+    "closed_context_file_count": 20,
+    "two_generation_byte_identity": true,
+    "source_maps_packaged": false,
+    "repository_root_packaged": false,
+    "credential_or_environment_files_packaged": false,
+    "production_taskpane_duplicate_execution_repaired": true,
+    "obsolete_contoso_origin_removed": true
+  },
+  "container": {
+    "image_built": true,
+    "image_digest_observed_before_cleanup": "sha256:cfcb821c0502a4547b1f036e5227891b8ee2ff679e34b3032ddffd394d664156",
+    "user": "65532:65532",
+    "read_only_root_filesystem": true,
+    "capabilities_dropped": [
+      "ALL"
+    ],
+    "no_new_privileges": true,
+    "memory_bytes": 268435456,
+    "nano_cpus": 500000000,
+    "process_limit": 64,
+    "mounted_host_paths": 0,
+    "internal_network": true,
+    "host_network": false,
+    "processes": [
+      "node server.mjs"
+    ]
+  },
+  "http_contract": {
+    "passed_checks": [
+      "health_200",
+      "taskpane_200",
+      "hosting_policy_200",
+      "diary_200",
+      "image_200",
+      "unknown_404",
+      "api_404",
+      "source_map_404",
+      "traversal_404",
+      "post_405",
+      "wrong_host_421",
+      "wrong_forwarded_protocol_421",
+      "content_security_policy_present",
+      "cache_control_no_store",
+      "x_content_type_options_nosniff"
+    ],
+    "public_mode_simulation": {
+      "origin": "https://raisa-office-web-dev-123456789012.australia-southeast1.run.app",
+      "policy_mode": "public_https_development",
+      "data_class": "authored_synthetic",
+      "exact_origin_bound": true,
+      "zero_authority_field_count": 7,
+      "actual_cloud_endpoint": false
+    }
+  },
+  "browser": {
+    "surface": "in_app_browser",
+    "flow": "taskpane_load_to_synthetic_attestation_to_fail_closed_action",
+    "viewports": [
+      {
+        "width": 480,
+        "height": 720,
+        "result": "pass"
+      },
+      {
+        "width": 360,
+        "height": 780,
+        "result": "pass"
+      }
+    ],
+    "page_title": "EMR",
+    "only_bounded_clinician_card_visible": true,
+    "synthetic_attestation_toggled": true,
+    "selection_action_disabled_without_word_host": true,
+    "console_errors_or_warnings": 0,
+    "observed_same_origin_assets": [
+      "/taskpane.css",
+      "/hosting-policy.js",
+      "/polyfill.js",
+      "/taskpane.js",
+      "/assets/emr_cube1.png"
+    ],
+    "observed_microsoft_office_runtime_assets": [
+      "https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js",
+      "https://appsforoffice.microsoft.com/lib/1.1/hosted/o15apptofilemappingtable.js",
+      "https://telemetryservice.firstpartyapps.oaspapps.com/telemetryservice/telemetryproxy.html"
+    ],
+    "observed_emr_backend_requests": 0,
+    "observed_vertex_or_other_provider_requests": 0,
+    "observed_non_microsoft_external_requests": 0
+  },
+  "office_manifest": {
+    "template_permission": "ReadDocument",
+    "materialized_https_run_app_fixture": true,
+    "microsoft_manifest_validator": "passed",
+    "real_service_origin_used": false
+  },
+  "focused_verification": {
+    "pytest_files": [
+      "tests/test_raisa_office_web_dev_context.py",
+      "tests/test_raisa_dual_host_foundation.py",
+      "tests/test_clinician_one_word_desktop_selection_check.py",
+      "tests/test_reception_one_word_hybrid_contextual_launch.py",
+      "tests/test_reception_one_word_compact_companion_shell.py",
+      "tests/test_api_spine_artifacts.py"
+    ],
+    "tests_passed": 98,
+    "tests_failed": 0
+  },
+  "candid_limit": "This proves a local Cloud Run-compatible synthetic-only static package and origin-bound policy. It does not prove Cloud Run entitlement, deployment, public IAM, authenticated Word Online behavior, Office identity, vendor processing geography, real-data safety, production fitness or release readiness."
+}

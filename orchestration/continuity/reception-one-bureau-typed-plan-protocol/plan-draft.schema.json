@@ -1,0 +1,239 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/reception-one-bureau-plan-draft.v1.json",
+  "title": "Reception One Bureau untrusted typed plan draft",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "catalog_version",
+    "request_id",
+    "practice_ref",
+    "correlation_id",
+    "context_revision",
+    "attempt",
+    "revision_limit",
+    "planner_class",
+    "goal",
+    "effect_ceiling",
+    "steps"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "reception.one.bureau.plan-draft.v1"
+    },
+    "catalog_version": {
+      "const": "reception-one-bureau-catalog-1"
+    },
+    "request_id": {
+      "$ref": "#/$defs/syntheticRef"
+    },
+    "practice_ref": {
+      "$ref": "#/$defs/syntheticRef"
+    },
+    "correlation_id": {
+      "$ref": "#/$defs/syntheticRef"
+    },
+    "context_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "attempt": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 2
+    },
+    "revision_limit": {
+      "const": 2
+    },
+    "planner_class": {
+      "enum": [
+        "deterministic_semantic_adapter",
+        "untrusted_model_candidate"
+      ]
+    },
+    "goal": {
+      "enum": [
+        "create",
+        "move",
+        "resize",
+        "cancel",
+        "status_change",
+        "squeeze_in_assessment",
+        "clarification"
+      ]
+    },
+    "effect_ceiling": {
+      "const": "proposal_only"
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 12,
+      "items": {
+        "$ref": "#/$defs/step"
+      }
+    }
+  },
+  "$defs": {
+    "syntheticRef": {
+      "type": "string",
+      "pattern": "^synthetic-[a-z0-9][a-z0-9-]{2,95}$"
+    },
+    "stepId": {
+      "type": "string",
+      "pattern": "^step-[a-z0-9][a-z0-9-]{0,47}$"
+    },
+    "semanticBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "field"
+      ],
+      "properties": {
+        "kind": {
+          "const": "semantic_ref"
+        },
+        "field": {
+          "enum": [
+            "appointment_date",
+            "earliest_time",
+            "latest_time",
+            "duration_minutes",
+            "intended_action"
+          ]
+        }
+      }
+    },
+    "utteranceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "entity_type",
+        "utterance_index",
+        "start",
+        "end",
+        "text"
+      ],
+      "properties": {
+        "kind": {
+          "const": "utterance_ref"
+        },
+        "entity_type": {
+          "enum": [
+            "patient",
+            "practitioner",
+            "status"
+          ]
+        },
+        "utterance_index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 511
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 512
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        }
+      }
+    },
+    "contextBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "field"
+      ],
+      "properties": {
+        "kind": {
+          "const": "context_ref"
+        },
+        "field": {
+          "enum": [
+            "selected_appointment",
+            "squeeze_policy",
+            "default_duration_minutes"
+          ]
+        }
+      }
+    },
+    "stepBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "step_id",
+        "output"
+      ],
+      "properties": {
+        "kind": {
+          "const": "step_output"
+        },
+        "step_id": {
+          "$ref": "#/$defs/stepId"
+        },
+        "output": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        }
+      }
+    },
+    "binding": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/semanticBinding"
+        },
+        {
+          "$ref": "#/$defs/utteranceBinding"
+        },
+        {
+          "$ref": "#/$defs/contextBinding"
+        },
+        {
+          "$ref": "#/$defs/stepBinding"
+        }
+      ]
+    },
+    "step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "operator",
+        "args"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/stepId"
+        },
+        "operator": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "args": {
+          "type": "object",
+          "maxProperties": 8,
+          "propertyNames": {
+            "pattern": "^[a-z][a-z0-9_]{0,63}$"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/binding"
+          }
+        }
+      }
+    }
+  }
+}

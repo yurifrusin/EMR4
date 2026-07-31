@@ -2,15 +2,36 @@
 //  EMR4 Centaur — Taskpane SPA
 // ═══════════════════════════════════════════════════════════
 
-// Dev server (port 3000) → local FastAPI; ngrok URL → same origin; GitHub Pages → ngrok.
-const NGROK_URL   = "https://property-cinch-backfield.ngrok-free.dev";
+// When served by Node dev server (localhost:3000), hit the local FastAPI directly.
+// When served by FastAPI itself (via ngrok or production), use the same origin.
 const BACKEND_URL = (window.location.port === "3000")
   ? "http://localhost:8001"
-  : window.location.hostname.includes("ngrok")
-    ? window.location.origin
-    : NGROK_URL;
+  : window.location.origin;
 const API_BASE    = BACKEND_URL + "/api/v1";
 const SESSION_ID  = "word_" + crypto.randomUUID().substring(0, 8);
+
+function isHostedSyntheticOnlyModeEnabled() {
+  const policy = window.RAISA_PUBLIC_HOSTING_POLICY;
+  if (!policy || typeof policy !== "object") return false;
+  const exactFalseFields = [
+    "provider_authority",
+    "backend_authority",
+    "credential_authority",
+    "microphone_authority",
+    "command_authority",
+    "document_write_authority",
+    "production_authority",
+  ];
+  return (
+    policy.contract_version === "raisa.public-hosting-policy.v1"
+    && policy.mode === "public_https_development"
+    && policy.data_class === "authored_synthetic"
+    && policy.expected_origin === window.location.origin
+    && window.location.protocol === "https:"
+    && window.location.hostname.endsWith(".run.app")
+    && exactFalseFields.every(field => policy[field] === false)
+  );
+}
 
 // ─── STATE ──────────────────────────────────────────────────
 let token          = localStorage.getItem("emr4_token");
@@ -67,6 +88,8 @@ let mediaRecorder  = null;
 let audioChunks    = [];
 let isRecording    = false;
 let currentAudioUrl = null;
+let officeHostRuntimeProfile = null;
+let clinicianOneDocumentContextAdapter = null;
 
 // ═══════════════════════════════════════════════════════════
 // UTILITIES
@@ -88,6 +111,50 @@ function formatDate(iso) {
 function setStatus(msg) {
   const el = document.getElementById("status-msg");
   if (el) el.textContent = msg;
+}
+
+function configureOfficeHostRuntime(info) {
+  const runtime = window.EMR4OfficeHostRuntime;
+  const recordButton = document.getElementById("btn-record");
+  if (!runtime || typeof runtime.createCurrentOfficeHostProfile !== "function") {
+    document.documentElement.dataset.officeHostKind = "unknown";
+    document.documentElement.dataset.officeHostProfile = "unavailable";
+    if (recordButton) {
+      recordButton.disabled = true;
+      recordButton.title = "Audio capture is unavailable in this Word host.";
+    }
+    return null;
+  }
+
+  try {
+    officeHostRuntimeProfile = runtime.createCurrentOfficeHostProfile(info);
+    window.emr4HostRuntimeProfile = officeHostRuntimeProfile;
+    document.documentElement.dataset.officeHostKind =
+      officeHostRuntimeProfile.host_kind;
+    document.documentElement.dataset.officeHostProfile = "ready";
+
+    const scribeDecision =
+      officeHostRuntimeProfile.features["clinician_one.scribe_capture"];
+    if (recordButton) {
+      const hostReady = scribeDecision.status === "host_ready";
+      recordButton.disabled = !hostReady;
+      recordButton.dataset.hostCapabilityStatus = scribeDecision.status;
+      if (!hostReady) {
+        recordButton.title =
+          "Audio capture is unavailable in this Word host.";
+      }
+    }
+    return officeHostRuntimeProfile;
+  } catch (error) {
+    console.warn("[EMR4] Office host profile failed closed:", error);
+    document.documentElement.dataset.officeHostKind = "unknown";
+    document.documentElement.dataset.officeHostProfile = "invalid";
+    if (recordButton) {
+      recordButton.disabled = true;
+      recordButton.title = "Audio capture is unavailable in this Word host.";
+    }
+    return null;
+  }
 }
 
 function updateSyncDebug(patch = {}) {
@@ -1023,7 +1090,7 @@ async function approveAndFinalize() {
 // Dev server (port 3000) → local diary via npm dev server serving docs/.
 // Everything else (Pages, ngrok, unknown) → deployed Pages diary (safe fallback).
 function resolveDiaryUrl(location) {
-  if (location.port === "3000") {
+  if (location.port === "3000" || isHostedSyntheticOnlyModeEnabled()) {
     return location.origin + "/diary/diary.html";
   }
   return "https://yurifrusin.github.io/EMR4/diary/diary.html";
@@ -1031,6 +1098,396 @@ function resolveDiaryUrl(location) {
 
 const DIARY_URL = resolveDiaryUrl(window.location);
 let diaryDialogRef = null;
+let pendingDiaryLaunchContext = null;
+let pendingDiaryCompanionRequest = null;
+let activeDiaryCompanionRequest = null;
+let companionSummaryTimeout = null;
+
+const RECEPTION_ONE_COMPANION_SUMMARY_KEYS = [
+  "appointment_context_included",
+  "appointment_write_authority",
+  "command_authority",
+  "contract_version",
+  "correlation_id",
+  "detail_fields_released",
+  "details_surface",
+  "evidence_mode",
+  "patient_context_included",
+  "planner_mode",
+  "projection_family",
+  "proofreader_disposition",
+  "provider_authority",
+  "reference_date",
+  "request_id",
+  "request_text_included",
+  "result_count",
+  "source_surface",
+  "status",
+  "summary_code",
+  "target_surface",
+  "type",
+];
+
+const RECEPTION_ONE_COMPANION_FAMILIES = new Set([
+  "focused_schedule_lane",
+  "patient_timeline",
+  "availability_slots",
+  "aligned_comparison",
+  "ordinary_overview",
+  "clarification",
+  "proposal_review",
+]);
+
+function wordLaunchDateKey(value = new Date()) {
+  const year = value.getFullYear();
+  const month = String(value.getMonth() + 1).padStart(2, "0");
+  const day = String(value.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function createReceptionOneLaunchContext(referenceDate = wordLaunchDateKey()) {
+  return Object.freeze({
+    contract_version: "reception.one.word-launch-context.v1",
+    type: "reception_one_launch_context",
+    source_surface: "word_taskpane",
+    target_surface: "native_diary_bureau",
+    reference_date: referenceDate,
+    correlation_id: `word-launch-${crypto.randomUUID()}`,
+    open_projection: true,
+    planner_mode: "deterministic",
+    patient_context_authority: false,
+    command_authority: false,
+    provider_authority: false,
+    evidence_mode: "local_development_context_frame",
+  });
+}
+
+// Office displayDialogAsync error codes and their receptionist-readable messages.
+function isReceptionOneCompanionDemoEnabled() {
+  const localHost = ["127.0.0.1", "localhost", "[::1]"].includes(
+    window.location.hostname
+  );
+  return (
+    (localHost || isHostedSyntheticOnlyModeEnabled())
+    && new URLSearchParams(window.location.search)
+      .get("reception_one_companion_demo") === "true"
+  );
+}
+
+function isClinicianOneDocumentContextDemoEnabled() {
+  const localHost = ["127.0.0.1", "localhost", "[::1]"].includes(
+    window.location.hostname
+  );
+  return (
+    (localHost || isHostedSyntheticOnlyModeEnabled())
+    && new URLSearchParams(window.location.search)
+      .get("clinician_one_context_demo") === "true"
+  );
+}
+
+function clinicianOneContextStatus(message, state = "idle") {
+  const element = document.getElementById("clinician-one-context-status");
+  if (!element) return;
+  element.textContent = message;
+  element.dataset.state = state;
+}
+
+function clinicianOneDocumentContextBlockedCopy(reasonCode) {
+  const copy = {
+    already_consumed: "That one-use request has already been consumed.",
+    grant_denied: "The local authored-synthetic grant was not admitted.",
+    host_not_ready: "This Word host is not ready for the bounded selection read.",
+    host_not_supported: "This bounded check currently supports Word desktop and web only.",
+    invalid_request: "The typed selection request was not admitted.",
+    selection_empty: "Select some authored-synthetic text and try again.",
+    selection_read_failed: "Word could not read the current selection.",
+    selection_too_large: "The selection is over the 1,200-character limit.",
+    selection_too_many_lines: "The selection is over the 40-line limit.",
+  };
+  return copy[reasonCode] || "The selection was not released.";
+}
+
+async function readClinicianOneDocumentContext() {
+  if (
+    !isClinicianOneDocumentContextDemoEnabled()
+    || !clinicianOneDocumentContextAdapter
+  ) {
+    return;
+  }
+  const runtime = window.EMR4ClinicianOneDocumentContext;
+  const button = document.getElementById(
+    "btn-clinician-one-read-selection"
+  );
+  if (!runtime || !button) return;
+  button.disabled = true;
+  clinicianOneContextStatus("Reading the current selection once\u2026", "working");
+  const request = runtime.createLocalFixtureRequest(
+    `clinician-context-${crypto.randomUUID()}`
+  );
+  const response = await clinicianOneDocumentContextAdapter.read(
+    request,
+    officeHostRuntimeProfile
+  );
+  if (response.status !== "admitted") {
+    clinicianOneContextStatus(
+      clinicianOneDocumentContextBlockedCopy(response.reason_code),
+      "blocked"
+    );
+  } else {
+    const frame = response.context_frame;
+    clinicianOneContextStatus(
+      `Selection ready: ${frame.character_count} characters, `
+        + `${frame.line_count} ${frame.line_count === 1 ? "line" : "lines"}; `
+        + `${frame.source_label}; ${frame.host_kind} fixture.`,
+      "ready"
+    );
+  }
+  const attestation = document.getElementById(
+    "clinician-one-synthetic-attestation"
+  );
+  button.disabled = !attestation?.checked;
+}
+
+function configureClinicianOneDocumentContext() {
+  const card = document.getElementById("clinician-one-document-context");
+  if (!card || !isClinicianOneDocumentContextDemoEnabled()) return;
+  if (card.dataset.configured === "true") return;
+  card.classList.remove("hidden");
+
+  const runtime = window.EMR4ClinicianOneDocumentContext;
+  const button = document.getElementById(
+    "btn-clinician-one-read-selection"
+  );
+  const attestation = document.getElementById(
+    "clinician-one-synthetic-attestation"
+  );
+  const workspace = officeHostRuntimeProfile
+    ?.features?.["clinician_one.workspace"];
+  if (
+    !runtime
+    || !button
+    || !attestation
+    || workspace?.status !== "host_ready"
+  ) {
+    if (button) button.disabled = true;
+    clinicianOneContextStatus(
+      "This Word host is not ready for the bounded selection read.",
+      "blocked"
+    );
+    return;
+  }
+
+  card.dataset.configured = "true";
+  clinicianOneDocumentContextAdapter =
+    runtime.createClinicianDocumentContextAdapter({
+      readSelectionText: runtime.createWordSelectionReader(window.Word),
+    });
+  button.disabled = !attestation.checked;
+  clinicianOneContextStatus(
+    attestation.checked
+      ? "Select authored-synthetic text, then press Check selected text."
+      : "Waiting for the synthetic-data acknowledgement.",
+    "idle"
+  );
+  attestation.onchange = () => {
+    button.disabled = !attestation.checked;
+    clinicianOneContextStatus(
+      attestation.checked
+        ? "Select authored-synthetic text, then press Check selected text."
+        : "Waiting for the synthetic-data acknowledgement.",
+      "idle"
+    );
+  };
+  button.onclick = readClinicianOneDocumentContext;
+}
+
+function presentClinicianOneDocumentContextDemo() {
+  if (!isClinicianOneDocumentContextDemoEnabled()) return;
+  document.body.classList.add("clinician-one-context-demo");
+  showView("view-app");
+  configureClinicianOneDocumentContext();
+}
+
+if (isClinicianOneDocumentContextDemoEnabled()) {
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      presentClinicianOneDocumentContextDemo,
+      { once: true }
+    );
+  } else {
+    presentClinicianOneDocumentContextDemo();
+  }
+}
+
+function createReceptionOneCompanionRequest(requestText, launchContext) {
+  const normalized = String(requestText || "").trim();
+  if (
+    !launchContext
+    || normalized.length < 1
+    || normalized.length > 280
+    || /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/.test(normalized)
+  ) {
+    return null;
+  }
+  return Object.freeze({
+    contract_version: "reception.one.word-companion-request.v1",
+    type: "reception_one_companion_request",
+    source_surface: "word_taskpane",
+    target_surface: "native_diary_bureau",
+    correlation_id: launchContext.correlation_id,
+    request_id: `word-request-${crypto.randomUUID()}`,
+    reference_date: launchContext.reference_date,
+    data_class: "authored_synthetic",
+    request_text: normalized,
+    planner_mode: "deterministic",
+    projection_intent: "view",
+    patient_context_authority: false,
+    appointment_context_authority: false,
+    appointment_write_authority: false,
+    command_authority: false,
+    provider_authority: false,
+    evidence_mode: "local_authored_synthetic_companion",
+  });
+}
+
+function diaryDialogUrl(companionRequest = null) {
+  if (!companionRequest) return DIARY_URL;
+  const url = new URL(DIARY_URL);
+  url.searchParams.set("reception_one_companion_demo", "true");
+  url.searchParams.set("smoke", "true");
+  return url.toString();
+}
+
+function companionStatus(message, state = "idle") {
+  const element = document.getElementById("reception-one-companion-status");
+  if (!element) return;
+  element.textContent = message;
+  element.dataset.state = state;
+}
+
+function validateReceptionOneCompanionSummary(value, request) {
+  if (!value || typeof value !== "object" || Array.isArray(value) || !request) {
+    return null;
+  }
+  const keys = Object.keys(value).sort();
+  if (
+    keys.length !== RECEPTION_ONE_COMPANION_SUMMARY_KEYS.length
+    || keys.some(
+      (key, index) => key !== RECEPTION_ONE_COMPANION_SUMMARY_KEYS[index]
+    )
+    || value.contract_version
+      !== "reception.one.word-companion-summary.v1"
+    || value.type !== "reception_one_companion_summary"
+    || value.source_surface !== "native_diary_bureau"
+    || value.target_surface !== "word_taskpane"
+    || value.correlation_id !== request.correlation_id
+    || value.request_id !== request.request_id
+    || value.reference_date !== request.reference_date
+    || !RECEPTION_ONE_COMPANION_FAMILIES.has(value.projection_family)
+    || value.planner_mode !== "deterministic"
+    || value.details_surface !== "native_diary_bureau"
+    || value.detail_fields_released !== false
+    || value.request_text_included !== false
+    || value.patient_context_included !== false
+    || value.appointment_context_included !== false
+    || value.appointment_write_authority !== false
+    || value.command_authority !== false
+    || value.provider_authority !== false
+    || value.evidence_mode !== "local_authored_synthetic_companion"
+    || !Number.isInteger(value.result_count)
+    || value.result_count < 0
+    || value.result_count > 100
+  ) {
+    return null;
+  }
+  const admitted = (
+    value.status === "admitted"
+    && value.proofreader_disposition === "admit"
+    && (
+      (
+        value.result_count > 0
+        && value.summary_code === "results_ready"
+      )
+      || (
+        value.result_count === 0
+        && value.summary_code === "no_results"
+      )
+    )
+  );
+  const clarification = (
+    value.status === "clarification_required"
+    && value.projection_family === "clarification"
+    && value.result_count === 0
+    && value.proofreader_disposition === "human_gate"
+    && value.summary_code === "clarification_required"
+  );
+  const blocked = (
+    value.status === "blocked"
+    && value.result_count === 0
+    && value.proofreader_disposition === "edge_abort"
+    && value.summary_code === "request_blocked"
+  );
+  return admitted || clarification || blocked
+    ? Object.freeze({ ...value })
+    : null;
+}
+
+function renderReceptionOneCompanionSummary(summary) {
+  const count = summary.result_count;
+  const copy = {
+    results_ready: (
+      `${count} ${count === 1 ? "result is" : "results are"} ready in the Diary.`
+    ),
+    no_results: "No matching results were found. The Diary view is ready.",
+    clarification_required: "Reception One needs one detail in the Diary.",
+    request_blocked: "The request was not released. Review it in the Diary.",
+  };
+  const state = summary.status === "blocked" ? "blocked" : "ready";
+  companionStatus(copy[summary.summary_code], state);
+  const button = document.getElementById("btn-reception-one-prepare");
+  if (button) button.disabled = false;
+}
+
+function prepareReceptionOneFromWord() {
+  if (!isReceptionOneCompanionDemoEnabled()) return;
+  const input = document.getElementById("reception-one-companion-request");
+  const launchContext = createReceptionOneLaunchContext();
+  const companionRequest = createReceptionOneCompanionRequest(
+    input?.value,
+    launchContext
+  );
+  if (!companionRequest) {
+    companionStatus(
+      "Enter one short synthetic request before opening the Diary.",
+      "blocked"
+    );
+    input?.focus();
+    return;
+  }
+  const button = document.getElementById("btn-reception-one-prepare");
+  if (button) button.disabled = true;
+  if (input) input.value = "";
+  companionStatus("Opening the Diary and preparing the view\u2026", "working");
+  openDiary(launchContext, companionRequest);
+}
+
+function configureReceptionOneCompanion() {
+  const companion = document.getElementById("reception-one-companion");
+  if (!companion || !isReceptionOneCompanionDemoEnabled()) return;
+  if (companion.dataset.configured === "true") return;
+  companion.dataset.configured = "true";
+  companion.classList.remove("hidden");
+  const input = document.getElementById("reception-one-companion-request");
+  const button = document.getElementById("btn-reception-one-prepare");
+  if (button) button.onclick = prepareReceptionOneFromWord;
+  input?.addEventListener("keydown", event => {
+    if (event.key === "Enter" && (event.ctrlKey || event.metaKey)) {
+      event.preventDefault();
+      prepareReceptionOneFromWord();
+    }
+  });
+}
 
 // Office displayDialogAsync error codes and their receptionist-readable messages.
 const DIARY_ERROR_MAP = {
@@ -1062,7 +1519,9 @@ function hideDiaryError() {
 
 // NOTE: synchronous within the click gesture — same rule as openCommandCentre.
 // No patient guard — the diary is practice/day-scoped, not patient-scoped.
-function openDiary() {
+function openDiary(launchContext = null, companionRequest = null) {
+  pendingDiaryLaunchContext = launchContext;
+  pendingDiaryCompanionRequest = companionRequest;
   hideDiaryError();
   if (diaryDialogRef) {
     try {
@@ -1071,10 +1530,13 @@ function openDiary() {
       // If Office already considers the handle closed, just open a fresh dialog.
     }
     diaryDialogRef = null;
-    setStatus("Opening Diary window\u2026");
   }
 
-  Office.context.ui.displayDialogAsync(DIARY_URL, { height: 90, width: 90 }, result => {
+  setStatus(launchContext ? "Opening Reception One in the Diary\u2026" : "Opening Diary window\u2026");
+  const dialogUrl = diaryDialogUrl(companionRequest);
+  Office.context.ui.displayDialogAsync(DIARY_URL === dialogUrl ? DIARY_URL : dialogUrl,
+    { height: 90, width: 90 },
+    result => {
     if (result.status === Office.AsyncResultStatus.Failed) {
       const code = result.error.code;
       const raw = result.error.message;
@@ -1088,15 +1550,19 @@ function openDiary() {
           if (diaryDialogRef) diaryDialogRef.close();
         } catch (_) {}
         diaryDialogRef = null;
-        setStatus("Retrying Diary window\u2026");
-        Office.context.ui.displayDialogAsync(DIARY_URL, { height: 90, width: 90 }, retryResult => {
+        setStatus(launchContext ? "Retrying Reception One window\u2026" : "Retrying Diary window\u2026");
+        Office.context.ui.displayDialogAsync(dialogUrl, { height: 90, width: 90 }, retryResult => {
           if (retryResult.status === Office.AsyncResultStatus.Failed) {
             const retryCode = retryResult.error.code;
             const retryRaw = retryResult.error.message;
             const retryInfo = getDiaryErrorMessage(retryCode, retryRaw);
             showDiaryError(retryInfo.message);
           } else {
-            _setupDiaryDialog(retryResult.value);
+            _setupDiaryDialog(
+              retryResult.value,
+              launchContext,
+              companionRequest
+            );
           }
         });
         return;
@@ -1105,11 +1571,20 @@ function openDiary() {
       showDiaryError(message);
       return;
     }
-    _setupDiaryDialog(result.value);
-  });
+    _setupDiaryDialog(result.value, launchContext, companionRequest);
+    }
+  );
 }
 
-function _setupDiaryDialog(dialog) {
+function openReceptionOne() {
+  openDiary(createReceptionOneLaunchContext());
+}
+
+function _setupDiaryDialog(
+  dialog,
+  launchContext = null,
+  companionRequest = null
+) {
   diaryDialogRef = dialog;
   hideDiaryError();
 
@@ -1118,18 +1593,83 @@ function _setupDiaryDialog(dialog) {
       const msg = JSON.parse(arg.message);
       if (msg.type === "ready") {
         diaryDialogRef.messageChild(JSON.stringify({ type: "auth", token }));
+        if (launchContext) {
+          diaryDialogRef.messageChild(JSON.stringify(launchContext));
+          if (companionRequest) {
+            diaryDialogRef.messageChild(JSON.stringify(companionRequest));
+            activeDiaryCompanionRequest = companionRequest;
+            companionStatus(
+              "Reception One is checking the Diary\u2026",
+              "working"
+            );
+            clearTimeout(companionSummaryTimeout);
+            companionSummaryTimeout = setTimeout(() => {
+              if (
+                activeDiaryCompanionRequest?.request_id
+                === companionRequest.request_id
+              ) {
+                companionStatus(
+                  "The Diary did not return a verified summary.",
+                  "blocked"
+                );
+                const button = document.getElementById(
+                  "btn-reception-one-prepare"
+                );
+                if (button) button.disabled = false;
+                activeDiaryCompanionRequest = null;
+              }
+            }, 10000);
+          }
+          setStatus(
+            companionRequest
+              ? "Reception One is preparing the request in the Diary."
+              : "Reception One opened in the Diary."
+          );
+        } else {
+          setStatus("Diary window opened.");
+        }
+        pendingDiaryLaunchContext = null;
+        pendingDiaryCompanionRequest = null;
+      } else if (msg.type === "reception_one_companion_summary") {
+        const summary = validateReceptionOneCompanionSummary(
+          msg,
+          activeDiaryCompanionRequest
+        );
+        if (!summary) {
+          companionStatus(
+            "The Diary returned an unverified summary.",
+            "blocked"
+          );
+          const button = document.getElementById(
+            "btn-reception-one-prepare"
+          );
+          if (button) button.disabled = false;
+          return;
+        }
+        clearTimeout(companionSummaryTimeout);
+        companionSummaryTimeout = null;
+        renderReceptionOneCompanionSummary(summary);
+        activeDiaryCompanionRequest = null;
       }
     } catch (_) {}
   });
 
   diaryDialogRef.addEventHandler(Office.EventType.DialogEventReceived, () => {
     diaryDialogRef = null;
+    clearTimeout(companionSummaryTimeout);
+    companionSummaryTimeout = null;
+    if (activeDiaryCompanionRequest) {
+      companionStatus("The Diary window closed before completion.", "blocked");
+      activeDiaryCompanionRequest = null;
+      const button = document.getElementById("btn-reception-one-prepare");
+      if (button) button.disabled = false;
+    }
   });
 }
 
 window.retryOpenDiary = function () {
   hideDiaryError();
-  openDiary();
+  openDiary(pendingDiaryLaunchContext, pendingDiaryCompanionRequest);
 };
 
 // ═══════════════════════════════════════════════════════════
@@ -2491,6 +3031,7 @@ function updatePatientEditButton() {
 // ═══════════════════════════════════════════════════════════
 
 Office.onReady(info => {
+  configureOfficeHostRuntime(info);
   if (info.host !== Office.HostType.Word) return;
 
   // ── Global keyboard shortcut (Ctrl+Alt+N) ─────────────
@@ -2532,7 +3073,9 @@ Office.onReady(info => {
 
   document.getElementById("btn-new-patient").onclick = showNewPatientForm;
   document.getElementById("btn-edit-patient").onclick = showPatientEditForm;
-  document.getElementById("btn-diary").onclick = openDiary;
+  document.getElementById("btn-diary").onclick = () => openDiary();
+  document.getElementById("btn-reception-one").onclick = openReceptionOne;
+  configureReceptionOneCompanion();
   configureIdentityInputHelpers();
   window.addEventListener("resize", updatePatientOverlayOffset);
 
@@ -2645,10 +3188,25 @@ Office.onReady(info => {
   });
 
   // ── Resume session or show login ─────────────────────────
-  if (token) {
+  // The closed local companion is deliberately provider-free and carries no
+  // backend authority. Keep it out of the normal authentication branch so
+  // Office.onReady cannot overwrite the already configured companion shell
+  // with the sign-in view.
+  if (isReceptionOneCompanionDemoEnabled()) {
+    showView("view-app");
+    configureReceptionOneCompanion();
+  } else if (isClinicianOneDocumentContextDemoEnabled()) {
+    showView("view-app");
+    configureClinicianOneDocumentContext();
+  } else if (token) {
     showView("view-app");
     initApp();
   } else {
     showView("view-login");
   }
 });
+
+if (isReceptionOneCompanionDemoEnabled()) {
+  showView("view-app");
+  configureReceptionOneCompanion();
+}

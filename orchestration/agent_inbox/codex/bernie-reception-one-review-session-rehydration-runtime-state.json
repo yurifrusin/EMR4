@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "bernie_reception_one_review_session_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is needed for the short serial live-browser review setup sharing one disposable authored-synthetic database."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external design model, subscription, prompt transmission or cost is authorised or used."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The accepted live-local implementation already has an independent Gemini veto; this review setup adds no implementation or acceptance claim."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri authorised preparation of an interactive page for the focused Reception One review.",
+        "AGENTS.md was read completely and the current baton, authority allocation, protected evidence boundaries and user-decision boundaries were restored.",
+        "The frozen live-local plan, closeout, Sol acceptance and Reception One focused-review context were read before runtime preparation.",
+        "HEAD, master, handoff/current, origin/master and origin/handoff/current were clean and aligned at 152e917a3ab32006438dab9c0169d77256e18d63 before the task branch was created.",
+        "The review may recreate only the exact existing disposable loopback PostgreSQL fixture, run the existing provider-disabled backend/static harness, and exercise the visible authenticated Diary and Project view.",
+        "The setup opens no API, write, confirmation, event-runtime, provider, PII, protected, historical, Stage 3B, deployment, production, release, rename, artwork or trademark authority."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "prepare_yuri_only_internal_stage3b_walkthrough_and_record_holistic_bureau_direction",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_complete_live_handover_stage3b_meta_grid_work_cell_and_product_direction_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external implementation worker is selected for this tightly coupled local study preparation."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external design model is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external reviewer is selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "AGENTS.md was read completely and protected evidence and Yuri-owned decision boundaries were restored.",
+        "The Stage 3B readiness, visual synthesis, conversational Diary, fluid meta-grid and bounded cognitive work-cell materials were read completely.",
+        "Yuri authorised saving the holistic Bureau conclusions and preparing the first Yuri-only internal walkthrough for later on 2026-07-29.",
+        "The work remains provider-free, authored-synthetic, local, no-write, no-participant-recruitment, no-voice and non-production."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No subagent is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/codex/reception-one-yuri-internal-walkthrough-rehydration-receipt.json"
+  ],
+  "assigned_agent_ids": []
+}

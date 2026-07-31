@@ -1,0 +1,96 @@
+{
+  "schema_version": "ariadne.vertex_sydney_gemini_25_repair_pre_attempt_evidence.v1",
+  "recorded_at": "2026-07-24T08:00:59Z",
+  "result": "ariadne_vertex_sydney_gemini_25_repair_pre_attempt_gates_pass",
+  "authority": {
+    "source": "Yuri: Please repair and run again.",
+    "historical_occupied_calls_consumed": 1,
+    "new_occupied_calls_authorised": 1,
+    "absolute_lineage_call_ceiling": 2,
+    "retry_after_new_call_permitted": false,
+    "application_cost_ceiling_usd": 1
+  },
+  "repair_gate": {
+    "field_path": "generationConfig.responseSchema.properties.total_tiles.enum[0]",
+    "representation": "string_5",
+    "full_official_local_protobuf_parse": "passed",
+    "provider_schema_hash": "sha256:5e82379501740ab1b4050978fa3229cd943cde81764289d7a51c93873c54eb27",
+    "provider_request_hash": "sha256:1aab6fd182e82112998895b2c96c70279164d3eb57abcfa2ad1a24f7e3905290",
+    "historical_request_hash_still_reconstructed": "sha256:6710af194aba6a2731008475e5509fa27ba12c8b58e995e1952faa036ecba61c",
+    "historical_artifacts_modified": false
+  },
+  "provider_blocked_gate": {
+    "result": "passed",
+    "evidence": "repair-provider-blocked-evidence.json",
+    "repository_only_ariadne_verifier": "passed",
+    "focused_vertex_api_spine_and_compass_tests": "110_passed",
+    "provider_calls": 0,
+    "credential_or_cloud_control_operations": 0
+  },
+  "official_documentary_gate": {
+    "model_id": "gemini-2.5-flash",
+    "launch_stage": "GA",
+    "model_availability_australia_southeast1": true,
+    "ml_processing_australia_southeast1": true,
+    "retirement_on": "2026-10-16",
+    "source_last_updated": "2026-07-22",
+    "provider_call": false
+  },
+  "tranche_3": {
+    "result": "ariadne_vertex_sydney_gemini_25_adc_preflight_pass",
+    "evidence": "repair-tranche-3-preflight-evidence.json",
+    "all_controls_passed": true,
+    "external_state_changed": false,
+    "model_inference_called": false,
+    "provider_prompt_transmitted": false
+  },
+  "tranche_4": {
+    "result": "ariadne_vertex_sydney_gemini_25_real_isolation_dry_run_pass",
+    "evidence": "repair-tranche-4-dry-run-evidence.json",
+    "attempt_id": "gemini-25-repair-dry-run-001",
+    "ledger_id": "gemini-25-repair-dry-run-ledger-001",
+    "ledger_status": "consumed",
+    "provider_calls": 0,
+    "provider_contacted": false,
+    "audit_event_count": 7,
+    "audit_hash_chain_valid": true,
+    "proofreader_disposition": "released",
+    "cleanup_all_scoped_residue_absent": true
+  },
+  "revision_binding": {
+    "continuity_graph_revision": 46,
+    "compass_source_graph_revision": 46,
+    "compass_map_revision": 33,
+    "rendered_compass_exact": true,
+    "compass_validation": "passed"
+  },
+  "static_and_format_checks": {
+    "json_and_schema_validation": "passed_after_bounded_schema_id_extension",
+    "python_compilation": "passed",
+    "javascript_syntax": "passed",
+    "git_diff_check": "passed",
+    "ruff": "not_available_in_existing_workspace"
+  },
+  "independent_residue": {
+    "task_scoped_containers": 0,
+    "task_scoped_networks": 0,
+    "task_scoped_images": 0,
+    "broker_processes": 0,
+    "temporary_roots": 0
+  },
+  "occupied_call_binding": {
+    "attempt_id": "gemini-25-repair-001",
+    "ledger_id": "gemini-25-repair-ledger-001",
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "data_classification": "authored_synthetic_only",
+    "provider_tools": false,
+    "fallback": false
+  },
+  "disposition": "one_fresh_occupied_call_gate_open_no_retry"
+}

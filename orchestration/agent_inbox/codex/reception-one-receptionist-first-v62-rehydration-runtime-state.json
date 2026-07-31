@@ -1,0 +1,84 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "design_prove_and_evaluate_the_reception_one_receptionist_first_v62_typed_desk_context_over_all_twenty_four_frozen_v6_authored_synthetic_cases",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is selected; this context-contract, proofreader and one-use-ledger tranche remains Sol-owned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude provider or transport is selected or authorised."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external peer worker is selected; acceptance remains deterministic local Sol evidence."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri directed progression to v6.2 and authorised evaluation of all twenty-four original authored-synthetic v6 requests, including prior passes.",
+        "Yuri identified that the model should receive the same decision-relevant local Diary and dialogue context as the deterministic parser.",
+        "AGENTS.md and the active v6.1 plans, threat model, authority, evidence, node and acceptance were read.",
+        "AGENTS.md sections 5 and 6 restore protected-holdout, historical-diary, real-data, product, database, confirmation, write, deployment and release boundaries.",
+        "The API Spine requires agent context frames to remain typed, minimal, source-labelled, freshness-bound and non-authoritative."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No subagent or external worker is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

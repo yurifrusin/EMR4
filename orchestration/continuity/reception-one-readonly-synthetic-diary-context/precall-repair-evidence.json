@@ -1,0 +1,28 @@
+{
+  "schema_version": "reception.one.readonly_synthetic_diary_context.precall_repair.v1",
+  "result": "reception_one_readonly_synthetic_diary_context_precall_authority_contract_repair_pass",
+  "provider_calls_before_repair": 0,
+  "ledgers_opened_before_repair": 0,
+  "reason_code": "occupied_authority_not_exact",
+  "repair": {
+    "nested_exact_boundary_fields_added": [
+      "provider",
+      "model",
+      "project",
+      "service_account",
+      "authentication",
+      "location",
+      "endpoint_hostname",
+      "database_access"
+    ],
+    "provider_changed": false,
+    "model_changed": false,
+    "project_changed": false,
+    "identity_changed": false,
+    "authentication_changed": false,
+    "region_or_endpoint_changed": false,
+    "authority_widened": false
+  },
+  "updated_authority_sha256": "sha256:2773b60b3d337c4f6c8963cdb344565906f4e7590cb5b61cc669f20c6a9f2fef",
+  "credential_or_api_key_information_retained": false
+}

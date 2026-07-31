@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "accept_and_close_the_provider_free_raisa_dual_host_foundation_integrated_reception_one_and_cloud_first_delivery_directions",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_raisa_dual_host_foundation_preacceptance",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker was selected; this provider-free repository-local foundation remained Sol-owned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport was selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external provider or reviewer was selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: the supervised provider-free Word desktop dialog proof at Continuity graph revision 170 and Compass map revision 151 is the accepted predecessor; the Word Online localhost attempt remains platform-blocked and immutable.",
+        "current_authority_allocation: Yuri authorised a dual-host foundation covering the earlier clinician taskpane and medical scribe work plus Reception One, with Raisa and Clinician One retained as candidate names only.",
+        "active_plan_and_acceptance: the foundation freezes a pure immutable host-capability profile, inventories both product surfaces, preserves Reception One as one backend-owned role-scoped domain and records cloud-first practice management as a service with any future local model restricted to a subordinate edge.",
+        "protected_evidence_boundaries: protected holdouts, historical Diary material, real or product-derived patient, health and clinical data, provider material, credentials, document content, microphone audio and hidden reasoning remained unopened and unused.",
+        "git_refs_and_worktree: HEAD remains 5b1ea7952fb08eea333da0e63f166d3895ccea32 on codex/ariadne-terra-gemini-comparative-rehearsal; master, handoff/current, origin/master and origin/handoff/current remain 4974075b31035d599e081d68e3b85e04a897baa1; unrelated worktree changes are preserved.",
+        "The deterministic profile matrix, schema validation, focused Word/Reception/API Spine suite, local browser-rendered check and development build passed with zero capability invocations and every data, provider, command and write authority false."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

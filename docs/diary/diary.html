@@ -5,11 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR — Diary</title>
+  <script src="../hosting-policy.js?v=1"></script>
   <script src="office-bootstrap.js?v=2"></script>
   <link rel="stylesheet" href="diary.css?v=138" />
-  <link rel="stylesheet" href="meta-grid.css?v=6" />
-  <script src="diary.js?v=190" defer></script>
-  <script src="meta-grid.js?v=10" defer></script>
+  <link rel="stylesheet" href="meta-grid.css?v=11" />
+  <script src="diary.js?v=194" defer></script>
+  <script src="meta-grid.js?v=16" defer></script>
 </head>
 <body>
 
@@ -18,7 +19,10 @@
   <div class="diary-logo">
     <img src="../images/emr_cube1.png" width="28" height="28" alt="" />
     <div>
-      <div class="diary-logo-text">EMR — Diary</div>
+      <div class="diary-logo-text">
+        <span class="diary-brand-default">EMR — Diary</span>
+        <span class="meta-grid-brand-label" aria-hidden="true">RECEPTION ONE</span>
+      </div>
       <div class="diary-logo-sub-row">
         <span class="diary-logo-sub" id="diary-practice-name">Loading…</span>
         <span class="diary-location-divider">|</span>
@@ -141,27 +145,48 @@
     </div>
   </div>
 
-  <section id="bernie-meta-grid" class="meta-grid hidden" aria-labelledby="meta-grid-title" data-testid="meta-grid-workspace">
+  <section id="bernie-meta-grid" class="meta-grid hidden" role="dialog" aria-modal="false" aria-labelledby="meta-grid-title" aria-describedby="meta-grid-bureau-status" data-testid="meta-grid-workspace">
     <a class="meta-grid-skip-link" href="#meta-grid-canvas">Skip to projected Diary view</a>
     <div class="meta-grid-shell">
+      <header class="meta-grid-window-bar">
+        <div class="meta-grid-window-title">
+          <p>Synthetic demo</p>
+          <h1 id="meta-grid-title">Reception One</h1>
+        </div>
+        <div class="meta-grid-bureau-progress" aria-hidden="true"><span></span></div>
+        <p id="meta-grid-bureau-status" class="meta-grid-bureau-status" role="status" aria-live="polite">Checked against the Diary</p>
+        <div class="meta-grid-window-actions">
+          <button id="meta-grid-expand" type="button" aria-label="Expand Bureau" aria-pressed="false" title="Expand Bureau" data-testid="meta-grid-expand"><span aria-hidden="true">&#10530;</span></button>
+          <button id="meta-grid-return" type="button" data-testid="meta-grid-return">Return to Diary</button>
+          <button id="meta-grid-close" type="button" aria-label="Close Reception One" title="Close Reception One" data-testid="meta-grid-close"><span aria-hidden="true">&times;</span></button>
+        </div>
+      </header>
+
       <aside class="meta-grid-rail" aria-labelledby="meta-grid-title">
         <div class="meta-grid-rail-heading">
           <div>
-            <p class="meta-grid-kicker">Bernie · intent-projected Diary</p>
-            <h1 id="meta-grid-title">Ask for the view you need</h1>
+            <p class="meta-grid-kicker">At the typewriter</p>
+            <h2>What would you like to find or prepare?</h2>
+            <p class="meta-grid-rail-subtitle">Ask naturally. Reception One will check the Diary before showing a view.</p>
           </div>
-          <button id="meta-grid-close" type="button" data-testid="meta-grid-close">Ordinary Diary</button>
         </div>
 
-        <form id="meta-grid-request-form" class="meta-grid-request-form">
-          <label for="meta-grid-request">Plain-language request or refinement</label>
-          <textarea id="meta-grid-request" rows="3" autocomplete="off" spellcheck="true" placeholder="For example: Show Dr Shera today, then after 2 pm"></textarea>
-          <div class="meta-grid-request-actions">
-            <button class="meta-grid-primary" type="submit" data-testid="meta-grid-submit">Show this view</button>
-            <button id="meta-grid-privacy" type="button" aria-pressed="false" data-testid="meta-grid-privacy">Hide patient details</button>
-            <button id="meta-grid-interruption-test" class="hidden" type="button" data-testid="meta-grid-interruption-test">Exercise interruption state</button>
+        <section class="meta-grid-intent" aria-labelledby="meta-grid-intent-heading">
+          <p id="meta-grid-intent-heading" class="meta-grid-section-label">Looking for</p>
+          <div id="meta-grid-intent-tokens" class="meta-grid-intent-tokens" aria-live="polite"></div>
+        </section>
+
+        <section class="meta-grid-conversation" aria-labelledby="meta-grid-conversation-heading">
+          <h2 id="meta-grid-conversation-heading">Conversation</h2>
+          <div class="meta-grid-conversation-line">
+            <span>You</span>
+            <p id="meta-grid-conversation-request"></p>
           </div>
-        </form>
+          <div class="meta-grid-conversation-line meta-grid-conversation-line-current">
+            <span>Desk</span>
+            <p id="meta-grid-conversation-response"></p>
+          </div>
+        </section>
 
         <section class="meta-grid-examples" aria-labelledby="meta-grid-examples-heading">
           <h2 id="meta-grid-examples-heading">Try a focused view</h2>
@@ -178,25 +203,26 @@
           <ol id="meta-grid-root-history"><li>No earlier root view in this in-memory session.</li></ol>
         </section>
 
-        <p class="meta-grid-retention-note">This workspace keeps no prompt, transcript, projection or selection in browser storage.</p>
+        <p class="meta-grid-retention-note"><strong>Synthetic demo.</strong> These fictional details do not affect a real Diary.</p>
       </aside>
 
       <main class="meta-grid-workspace">
         <nav class="meta-grid-view-controls" aria-label="Projection navigation">
-          <button id="meta-grid-back" type="button" data-testid="meta-grid-back">Back one view</button>
-          <button id="meta-grid-overview" type="button" data-testid="meta-grid-overview">Ordinary overview</button>
-          <button id="meta-grid-explain" type="button" aria-expanded="false" aria-controls="meta-grid-evidence" data-testid="meta-grid-explain">Why this view?</button>
+          <button id="meta-grid-back" type="button" data-testid="meta-grid-back">Back</button>
+          <button id="meta-grid-overview" type="button" data-testid="meta-grid-overview">Diary overview</button>
+          <button id="meta-grid-explain" type="button" aria-expanded="false" aria-controls="meta-grid-evidence" data-testid="meta-grid-explain">How was this found?</button>
         </nav>
 
         <div id="meta-grid-privacy-banner" class="meta-grid-privacy-banner hidden" role="status">
-          Patient-sensitive details are hidden. The current projection remains non-authoritative and in memory only.
+          Patient details are hidden until you choose to show them.
         </div>
 
         <section class="meta-grid-orientation" aria-labelledby="meta-grid-scope-heading">
-          <h2 id="meta-grid-scope-heading">Current scope</h2>
+          <h2 id="meta-grid-scope-heading">Looking at</h2>
           <p id="meta-grid-scope-summary" class="meta-grid-scope-summary"></p>
           <p id="meta-grid-omissions" class="meta-grid-omissions"></p>
           <p id="meta-grid-freshness" class="meta-grid-freshness"></p>
+          <div id="meta-grid-planner-provenance" class="meta-grid-planner-provenance hidden" role="status" aria-live="polite" data-testid="meta-grid-planner-provenance"></div>
         </section>
 
         <section id="meta-grid-state" class="meta-grid-state" aria-labelledby="meta-grid-state-heading">
@@ -229,18 +255,41 @@
 
         <section id="meta-grid-actions" class="meta-grid-actions" aria-label="Available view actions"></section>
 
+        <footer class="meta-grid-keyboard-hints" aria-label="Keyboard shortcuts">
+          <span><kbd>&uarr;</kbd><kbd>&darr;</kbd> move</span>
+          <span><kbd>Enter</kbd> select</span>
+          <span><kbd>Esc</kbd> ordinary Diary</span>
+        </footer>
+
         <section id="meta-grid-evidence" class="meta-grid-evidence" hidden aria-labelledby="meta-grid-evidence-heading">
-          <h2 id="meta-grid-evidence-heading" tabindex="-1">Why this view appeared</h2>
+          <h2 id="meta-grid-evidence-heading" tabindex="-1">How Reception One prepared this view</h2>
           <dl>
-            <div><dt>Projection family</dt><dd id="meta-grid-evidence-family"></dd></div>
-            <div><dt>Trigger</dt><dd id="meta-grid-evidence-trigger"></dd></div>
-            <div><dt>Reason</dt><dd id="meta-grid-evidence-reason"></dd></div>
-            <div><dt>Changed scope</dt><dd id="meta-grid-evidence-changes"></dd></div>
-            <div><dt>Read source</dt><dd id="meta-grid-evidence-source"></dd></div>
-            <div><dt>Action boundary</dt><dd id="meta-grid-evidence-boundary"></dd></div>
+            <div><dt>View</dt><dd id="meta-grid-evidence-family"></dd></div>
+            <div><dt>Started by</dt><dd id="meta-grid-evidence-trigger"></dd></div>
+            <div><dt>Why</dt><dd id="meta-grid-evidence-reason"></dd></div>
+            <div><dt>What changed</dt><dd id="meta-grid-evidence-changes"></dd></div>
+            <div><dt>Diary check</dt><dd id="meta-grid-evidence-source"></dd></div>
+            <div><dt>Available next step</dt><dd id="meta-grid-evidence-boundary"></dd></div>
           </dl>
         </section>
       </main>
+
+      <form id="meta-grid-request-form" class="meta-grid-request-form">
+        <label class="meta-grid-visually-hidden" for="meta-grid-request">What would you like to find or prepare?</label>
+        <textarea id="meta-grid-request" rows="1" autocomplete="off" spellcheck="true" placeholder="What would you like to find or prepare?"></textarea>
+        <div class="meta-grid-request-actions">
+          <label id="meta-grid-planner-control" class="meta-grid-planner-control hidden" for="meta-grid-planner-mode">
+            <span>Planner</span>
+            <select id="meta-grid-planner-mode" data-testid="meta-grid-planner-mode">
+              <option value="deterministic" selected>Standard</option>
+              <option value="isolated_vertex">Isolated model</option>
+            </select>
+          </label>
+          <button class="meta-grid-primary" type="submit" data-testid="meta-grid-submit">Find or prepare</button>
+          <button id="meta-grid-privacy" type="button" aria-pressed="false" data-testid="meta-grid-privacy">Hide patient details</button>
+          <button id="meta-grid-interruption-test" class="hidden" type="button" data-testid="meta-grid-interruption-test">Exercise interruption state</button>
+        </div>
+      </form>
     </div>
   </section>
 

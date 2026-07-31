@@ -1,0 +1,31 @@
+{
+  "schema_version": "raisa.clinician-one-readonly-document-context-browser-evidence.v1",
+  "result": "pass",
+  "evidence_mode": "ordinary_browser_fail_closed_rendered_check",
+  "route": "https://localhost:3000/taskpane.html?clinician_one_context_demo=true&preview_revision=1",
+  "page_identity": {
+    "title": "EMR",
+    "meaningful_content_present": true,
+    "framework_error_overlay_present": false,
+    "relevant_console_error_or_warning_count": 0
+  },
+  "rendered_contract": {
+    "clinician_one_label_visible": true,
+    "check_selected_text_heading_visible": true,
+    "task_created_synthetic_instruction_visible": true,
+    "authored_synthetic_attestation_visible": true,
+    "selection_text_visible": false
+  },
+  "interaction": {
+    "action": "check_authored_synthetic_attestation_in_ordinary_browser",
+    "attestation_checked": true,
+    "read_button_disabled_after_action": true,
+    "status": "This Word host is not ready for the bounded selection read.",
+    "document_read_count": 0
+  },
+  "screenshot": {
+    "visually_inspected": true,
+    "persisted_in_repository": false
+  },
+  "candid_limit": "This proves a rendered fail-closed ordinary-browser state only. It is not desktop Word, Word Online, Office authentication or document-read evidence."
+}

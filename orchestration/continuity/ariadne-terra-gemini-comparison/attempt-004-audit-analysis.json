@@ -1,0 +1,29 @@
+{
+  "schema_version": "ariadne.gemini_attempt4_external_audit_analysis.v1",
+  "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+  "runtime_attempt_id": "comparative-runtime-attempt-004",
+  "attempt_result": "ariadne_gemini_repaired_request_attempt4_revision_required",
+  "audit_result": "ariadne_gemini_attempt4_external_audit_pass",
+  "durable_hash_chain_verifies": true,
+  "provider_call_start_count": 1,
+  "provider_call_completion_count": 1,
+  "provider_status": 400,
+  "typed_output_manifest_count": 0,
+  "typed_output_manifest_recorded": false,
+  "provider_schema_status": "not-presented",
+  "full_schema_status": "not-presented",
+  "proofreader_disposition": null,
+  "cleanup_complete": true,
+  "exclusions": {
+    "raw_reasoning_recorded": false,
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "draft_payload_recorded": false,
+    "provider_secret_recorded": false,
+    "product_or_database_access": false,
+    "downstream_delivery": false
+  },
+  "australian_processing_evidence": false,
+  "historical_attempt_evidence_rewritten": false,
+  "retry_performed": false
+}

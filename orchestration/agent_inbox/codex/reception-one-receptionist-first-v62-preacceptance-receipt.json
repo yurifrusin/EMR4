@@ -1,0 +1,72 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v2",
+  "receipt_id": "reception-one-receptionist-first-v62-preacceptance-20260730",
+  "created_at": "2026-07-30T08:50:50Z",
+  "status": "passed",
+  "rehydrated_from_receipt": false,
+  "sources": {
+    "live_handover_current_baton": {
+      "path": "AGENTS.md",
+      "restored": true
+    },
+    "current_authority_allocation": {
+      "path": "orchestration/continuity/reception-one-receptionist-first-v62/occupied-authority.json",
+      "restored": true
+    },
+    "active_plan_and_acceptance": {
+      "path": "docs/bernie-reception-one-receptionist-first-v62-desk-context-plan.md",
+      "restored": true
+    },
+    "protected_evidence_boundaries": {
+      "path": "AGENTS.md#5-protected-evidence",
+      "user_decision_path": "AGENTS.md#6-user-decision-boundaries",
+      "restored": true
+    },
+    "git_refs_and_worktree": {
+      "head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff_current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin_master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin_handoff_current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "unrelated_user_changes_preserved": true
+    }
+  },
+  "provider_free_acceptance": {
+    "all_original_v6_cases": 24,
+    "v61_historical_wrong_forms_revalidated": 14,
+    "v6_prior_passes_covered": 9,
+    "focused_and_regression_tests_passed": 233,
+    "provider_calls_performed": 0,
+    "credential_reads_performed": 0,
+    "real_isolation_result": "reception_one_receptionist_first_v62_real_isolation_pass",
+    "real_isolation_residue_clear": true,
+    "runtime_or_provider_wiring_ready": false,
+    "default_provider": "disabled"
+  },
+  "exact_boundary": {
+    "provider": "google_cloud_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "data_class": "authored_synthetic",
+    "maximum_primary_calls": 24,
+    "maximum_terminal_second_calls": 24,
+    "absolute_call_ceiling": 48,
+    "cost_ceiling_usd": 1,
+    "api_key_authentication": false,
+    "global_fallback": false,
+    "product_or_database_access": false,
+    "appointment_write_authority": false
+  },
+  "continuity_preacceptance_binding": {
+    "graph_revision": 112,
+    "compass_map_revision": 98,
+    "compass_source_graph_revision": 112,
+    "rendered_compass_validated": true,
+    "accepted_position_remains_v61_until_checkpoint": true
+  }
+}

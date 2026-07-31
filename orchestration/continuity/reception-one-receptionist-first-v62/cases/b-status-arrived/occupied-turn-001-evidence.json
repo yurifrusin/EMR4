@@ -1,0 +1,230 @@
+{
+  "attempt_id": "reception-one-receptionist-first-v62-eval-b-status-arrived-turn-001",
+  "broker": {
+    "api_key_authentication_used": false,
+    "environment_forwarded_names": [
+      "APPDATA",
+      "COMSPEC",
+      "LOCALAPPDATA",
+      "PATH",
+      "PATHEXT",
+      "SYSTEMDRIVE",
+      "SYSTEMROOT",
+      "TEMP",
+      "TMP",
+      "USERPROFILE",
+      "WINDIR"
+    ],
+    "google_application_credentials_forwarded": false,
+    "host_purpose_built_one_use_process": true,
+    "process_exit_code": 0
+  },
+  "build_context": {
+    "repository_root_used": false,
+    "source_hashes": {
+      "generated:cell-request.json": "sha256:59869a2bd4f70fb259094f3ab9b505096de1e975304ffa026c82b7a29c545e1d",
+      "orchestration/continuity/reception-one-bureau-model-text-lane/LiveDockerfile": "sha256:45767035f2130a1f697b86c24cae2d825e1af7275592953f5deac4bf59f5cc20",
+      "scripts/ariadne_vertex_sydney_gemini_25_cell.py": "sha256:530d6f91e841aa41dd4fd87f07f45c360c728e7ca5847586bab5d19b604a6a71",
+      "scripts/ariadne_vertex_sydney_gemini_25_relay.py": "sha256:97dabf78cf4e78c440aee6587c94c6312e8cba1bae6b023b6e7110673b2fb61f"
+    },
+    "temporary_exact_allowlist": true
+  },
+  "cell_effective_policy": {
+    "cap_drop": [
+      "ALL"
+    ],
+    "credential_environment_present": false,
+    "memory_bytes": 134217728,
+    "memory_swap_bytes": 134217728,
+    "mount_count": 0,
+    "nano_cpus": 500000000,
+    "network_names": [
+      "reception-one-model-text-vertex-internal"
+    ],
+    "pids_limit": 64,
+    "port_binding_count": 0,
+    "privileged": false,
+    "read_only_rootfs": true,
+    "security_opt": [
+      "no-new-privileges=true"
+    ],
+    "user": "65532:65532"
+  },
+  "cleanup": {
+    "base_image_state_preserved": true,
+    "broker_process_absent": true,
+    "cell_container_absent": true,
+    "cell_image_absent": true,
+    "daemon_wide_prune_performed": false,
+    "internal_network_absent": true,
+    "relay_container_absent": true,
+    "relay_image_absent": true,
+    "temporary_context_absent": true,
+    "temporary_token_absent": true
+  },
+  "evidence_hash": "sha256:1cf22b3ee7ffb706dfbf336b619890e76cc8628d4ed59764659b1ba8c2c36b01",
+  "exact_binding": {
+    "api_key_authentication_used": false,
+    "authentication": "keyless_impersonated_service_account_adc",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "location": "australia-southeast1",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "provider": "google_vertex_ai",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"
+  },
+  "exchange": {
+    "audit_event_count": 11,
+    "audit_event_types": [
+      "broker_ready",
+      "request_admitted",
+      "ledger_consumed",
+      "provider_request_constructed",
+      "provider_call_started",
+      "provider_call_received",
+      "provider_call_completed",
+      "receptionist_response_evaluated",
+      "operator_note_evaluated",
+      "proofreader_completed",
+      "release_committed"
+    ],
+    "audit_hash_chain_valid": true,
+    "audit_terminal_hash": "sha256:a4405c372daf7b1fc3b448cf8c28de098a0e79993311d0edd812e74516008ea1",
+    "cell_exit_code": 0,
+    "cell_status": "completed",
+    "contract_mode": "receptionist-v62",
+    "correction_ticket": null,
+    "correction_ticket_hash": null,
+    "model_input_hash": "sha256:698207c25346bc60c95e440de313ec431b55c0bbd59b165284557f1eb66f36bb",
+    "operator_note": {
+      "audit_only": true,
+      "disposition": "admit",
+      "note_sha256": "sha256:d0bde6f469f2dc67f76be9f46670e7eb4b523d2294cad67b9ff0a57c8c7206df",
+      "parsed_into_plan": false,
+      "product_delivered": false,
+      "reason_codes": [],
+      "retained_utf8_bytes": 44
+    },
+    "proofreader": {
+      "admitted_operator_ids": [
+        "prepare_status_proposal"
+      ],
+      "context_frame_review": {
+        "command_authority": false,
+        "desk_context_sha256": "sha256:b3f1e6576086b6d131243d44451650162bba42f3506d505e6a9d72733c13de9c",
+        "disposition": "admit",
+        "reviewed_context_revision": 62,
+        "same_packet_seen_by_model_and_proofreader": true,
+        "source_labels": [
+          "fixture_intercepted",
+          "staff_selected",
+          "staff_selected"
+        ],
+        "task_sha256": "sha256:9ce5cbd816787e7a95b41ac02724e43f8c2ee8962d0640f6b33dcd76021928aa"
+      },
+      "disposition": "admit",
+      "normalized_plan_sha256": "6994eafb71cbc1bc892cb3620b8e0cf177b801c40de8a2779c50bf7d262e003f",
+      "operator_note_disposition": "admit",
+      "safe_repairs": [],
+      "violations": [],
+      "wire_safe_repairs": []
+    },
+    "proofreader_feedback_hash": null,
+    "receptionist_output": {
+      "decision_note": "Intent status_change: All necessary information for a status change proposal is present.",
+      "disposition": "admit",
+      "evidence_utterance_indices": [
+        0
+      ],
+      "natural_response_parsed_into_form": false,
+      "product_delivered": false,
+      "receptionist_response": "I'm preparing a proposal to update Margaret Thompson's appointment status to arrived for your review. No booking was changed.",
+      "violations": []
+    },
+    "release": {
+      "api_spine_operation_id": "proposeAppointmentStatus",
+      "appointment_ref": "synthetic-appointment-margaret",
+      "candidate_slot_ids": [],
+      "duration_minutes": 15,
+      "kind": "proposal_candidate",
+      "patient_ref": "synthetic-patient-margaret",
+      "practitioner_ref": "synthetic-practitioner-shera",
+      "proposal_family": "status_change",
+      "requires_human_confirmation": true,
+      "status": "arrived",
+      "warning_codes": [
+        "staff_confirmation_required"
+      ],
+      "write_performed": false
+    },
+    "schema_hash": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c"
+  },
+  "explicit_exclusions": {
+    "api_key_information_recorded": false,
+    "chain_of_thought_recorded": false,
+    "command_authority": false,
+    "credential_or_token_recorded": false,
+    "human_or_product_delivery": false,
+    "operator_note_parsed_into_plan": false,
+    "operator_note_product_delivered": false,
+    "product_or_database_access": false,
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "thinking_token_count_only": true,
+    "thought_summary_requested": false
+  },
+  "fallback_performed": false,
+  "ledger": {
+    "attempt_id": "reception-one-receptionist-first-v62-eval-b-status-arrived-turn-001",
+    "fallback_permitted": false,
+    "ledger_id": "reception-one-receptionist-first-v62-eval-b-status-arrived-ledger-001",
+    "maximum_provider_calls": 1,
+    "policy_id": "reception-one-receptionist-first-v62-vertex-sydney-v1",
+    "provider_calls_consumed": 1,
+    "schema_version": "reception.one.bureau.model_text_single_use_ledger.v1",
+    "status": "consumed"
+  },
+  "ledger_id": "reception-one-receptionist-first-v62-eval-b-status-arrived-ledger-001",
+  "network": {
+    "attachable": false,
+    "driver": "bridge",
+    "ingress": false,
+    "internal": true,
+    "name": "reception-one-model-text-vertex-internal"
+  },
+  "precall_gate": {
+    "all_cloud_controls_passed": true,
+    "authority_sha256": "sha256:725b835b16ae108080f694e5918c0c2001b598e23e6f64834e9712867ffded8a",
+    "compass_map_revision": 100,
+    "compass_source_graph_revision": 115,
+    "continuity_graph_revision": 115,
+    "preflight_sha256": "sha256:c0128c7d138e943b80c7bd41cf81a0d5f9eab17c11158e85d0d6cce4d2182886"
+  },
+  "provider_call_count": 1,
+  "provider_contacted": true,
+  "relay_effective_policy": {
+    "broker_alias_present": true,
+    "cap_drop": [
+      "ALL"
+    ],
+    "memory_bytes": 67108864,
+    "memory_swap_bytes": 67108864,
+    "mount_count": 1,
+    "nano_cpus": 250000000,
+    "network_names": [
+      "bridge",
+      "reception-one-model-text-vertex-internal"
+    ],
+    "pids_limit": 32,
+    "port_binding_count": 0,
+    "privileged": false,
+    "read_only_rootfs": true,
+    "security_opt": [
+      "no-new-privileges=true"
+    ],
+    "token_mount_exact": true,
+    "user": "65532:65532"
+  },
+  "result": "reception_one_receptionist_first_v62_turn_pass",
+  "schema_version": "reception.one.receptionist_first_v62.turn_evidence.v1"
+}

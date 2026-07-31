@@ -1,0 +1,386 @@
+{
+  "catalogue": {
+    "catalog_sha256": "dbdc6c91de68c7d40e4d1d667131b6a4305e1f1b2b8d3b1ce631b5d955114b52",
+    "catalog_version": "reception-one-bureau-catalog-1",
+    "effect_classes": [
+      "pure",
+      "authorised_read",
+      "proposal_only"
+    ],
+    "operator_count": 14
+  },
+  "evidence_mode": "authored_synthetic_provider_free_repository_contract",
+  "evidence_version": "reception.one.bureau.typed-plan-protocol-evidence.v1",
+  "explicit_exclusions": [
+    "live provider or model interpretation",
+    "credentials or provider authentication",
+    "network or database access",
+    "raw historical Diary material",
+    "patient, health, clinical or product-derived data",
+    "appointment confirmation or mutation",
+    "production, deployment or release"
+  ],
+  "negative_cases": [
+    {
+      "case_id": "unknown-forbidden-operator",
+      "disposition": "reject",
+      "execution_blocked": true,
+      "violation_codes": [
+        "effect_escalation",
+        "forbidden_operator",
+        "forward_reference",
+        "unknown_operator"
+      ]
+    },
+    {
+      "case_id": "fabricated-entity-reference",
+      "disposition": "reject",
+      "execution_blocked": true,
+      "violation_codes": [
+        "binding_type_mismatch",
+        "ungrounded_binding"
+      ]
+    },
+    {
+      "case_id": "forward-dataflow-reference",
+      "disposition": "reject",
+      "execution_blocked": true,
+      "violation_codes": [
+        "forward_reference"
+      ]
+    },
+    {
+      "case_id": "stale-context-revision",
+      "disposition": "reject",
+      "execution_blocked": true,
+      "violation_codes": [
+        "stale_context"
+      ]
+    },
+    {
+      "case_id": "write-effect-escalation",
+      "disposition": "reject",
+      "execution_blocked": true,
+      "violation_codes": [
+        "effect_escalation",
+        "forbidden_operator",
+        "schema_invalid"
+      ]
+    },
+    {
+      "case_id": "revision-budget-exhausted",
+      "disposition": "reject",
+      "execution_blocked": true,
+      "violation_codes": [
+        "revision_budget_exhausted",
+        "signature_mismatch"
+      ]
+    }
+  ],
+  "positive_cases": [
+    {
+      "boundary": {
+        "confirmation_performed": false,
+        "database_access": false,
+        "network_access": false,
+        "product_delivery": false,
+        "provider_calls": 0,
+        "write_performed": false
+      },
+      "case_id": "known-create",
+      "final_output": {
+        "api_spine_operation_id": "proposeAppointmentCreate",
+        "appointment_ref": null,
+        "candidate_slot_ids": [
+          "synthetic-slot-july28-1430"
+        ],
+        "duration_minutes": 15,
+        "kind": "proposal_candidate",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "create",
+        "requires_human_confirmation": true,
+        "status": null,
+        "warning_codes": [
+          "no_reservation",
+          "staff_confirmation_required",
+          "staff_selection_required"
+        ],
+        "write_performed": false
+      },
+      "goal": "create",
+      "operator_trace": [
+        "resolve_patient_reference",
+        "resolve_practitioner_reference",
+        "resolve_date_expression",
+        "search_available_slots",
+        "prepare_create_proposal"
+      ],
+      "plan_sha256": "60af552f897769dc4966b5cb9153f5cc363ac0871fb1c8bbd07384788d6ed2d3",
+      "planner_class": "deterministic_semantic_adapter",
+      "review_disposition": "admit",
+      "safe_repairs": []
+    },
+    {
+      "boundary": {
+        "confirmation_performed": false,
+        "database_access": false,
+        "network_access": false,
+        "product_delivery": false,
+        "provider_calls": 0,
+        "write_performed": false
+      },
+      "case_id": "known-move",
+      "final_output": {
+        "api_spine_operation_id": "proposeAppointmentUpdate",
+        "appointment_ref": "synthetic-appointment-margaret",
+        "candidate_slot_ids": [
+          "synthetic-slot-july28-1500"
+        ],
+        "duration_minutes": 15,
+        "kind": "proposal_candidate",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "move",
+        "requires_human_confirmation": true,
+        "status": null,
+        "warning_codes": [
+          "no_reservation",
+          "staff_confirmation_required",
+          "staff_selection_required"
+        ],
+        "write_performed": false
+      },
+      "goal": "move",
+      "operator_trace": [
+        "resolve_patient_reference",
+        "read_selected_appointment",
+        "resolve_date_expression",
+        "search_available_slots",
+        "prepare_move_proposal"
+      ],
+      "plan_sha256": "8000e361844e87a01109fdad6db7501a26ab45b37e0ec654d6a93eea12f870a6",
+      "planner_class": "deterministic_semantic_adapter",
+      "review_disposition": "admit",
+      "safe_repairs": []
+    },
+    {
+      "boundary": {
+        "confirmation_performed": false,
+        "database_access": false,
+        "network_access": false,
+        "product_delivery": false,
+        "provider_calls": 0,
+        "write_performed": false
+      },
+      "case_id": "known-resize",
+      "final_output": {
+        "api_spine_operation_id": "proposeAppointmentUpdate",
+        "appointment_ref": "synthetic-appointment-margaret",
+        "candidate_slot_ids": [],
+        "duration_minutes": 30,
+        "kind": "proposal_candidate",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "resize",
+        "requires_human_confirmation": true,
+        "status": null,
+        "warning_codes": [
+          "staff_confirmation_required"
+        ],
+        "write_performed": false
+      },
+      "goal": "resize",
+      "operator_trace": [
+        "resolve_patient_reference",
+        "read_selected_appointment",
+        "prepare_resize_proposal"
+      ],
+      "plan_sha256": "98cd8c20792dc5e33c4f78a4e09491275764cd9ff7240454e3fae31f8e02d9f9",
+      "planner_class": "deterministic_semantic_adapter",
+      "review_disposition": "admit",
+      "safe_repairs": []
+    },
+    {
+      "boundary": {
+        "confirmation_performed": false,
+        "database_access": false,
+        "network_access": false,
+        "product_delivery": false,
+        "provider_calls": 0,
+        "write_performed": false
+      },
+      "case_id": "known-cancel",
+      "final_output": {
+        "api_spine_operation_id": "proposeAppointmentDelete",
+        "appointment_ref": "synthetic-appointment-margaret",
+        "candidate_slot_ids": [],
+        "duration_minutes": 15,
+        "kind": "proposal_candidate",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "cancel",
+        "requires_human_confirmation": true,
+        "status": null,
+        "warning_codes": [
+          "staff_confirmation_required"
+        ],
+        "write_performed": false
+      },
+      "goal": "cancel",
+      "operator_trace": [
+        "resolve_patient_reference",
+        "read_selected_appointment",
+        "prepare_cancel_proposal"
+      ],
+      "plan_sha256": "e6826a447eb19484ef63d80dcf781ffff4f0f550951b124451f175440f01d221",
+      "planner_class": "deterministic_semantic_adapter",
+      "review_disposition": "admit",
+      "safe_repairs": []
+    },
+    {
+      "boundary": {
+        "confirmation_performed": false,
+        "database_access": false,
+        "network_access": false,
+        "product_delivery": false,
+        "provider_calls": 0,
+        "write_performed": false
+      },
+      "case_id": "known-status",
+      "final_output": {
+        "api_spine_operation_id": "proposeAppointmentStatus",
+        "appointment_ref": "synthetic-appointment-margaret",
+        "candidate_slot_ids": [],
+        "duration_minutes": 15,
+        "kind": "proposal_candidate",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "status_change",
+        "requires_human_confirmation": true,
+        "status": "arrived",
+        "warning_codes": [
+          "staff_confirmation_required"
+        ],
+        "write_performed": false
+      },
+      "goal": "status_change",
+      "operator_trace": [
+        "resolve_patient_reference",
+        "read_selected_appointment",
+        "prepare_status_proposal"
+      ],
+      "plan_sha256": "669b765d05a4330a85be213ff284363489187e8038d2e92f6158cef1eead8466",
+      "planner_class": "deterministic_semantic_adapter",
+      "review_disposition": "admit",
+      "safe_repairs": []
+    },
+    {
+      "boundary": {
+        "confirmation_performed": false,
+        "database_access": false,
+        "network_access": false,
+        "product_delivery": false,
+        "provider_calls": 0,
+        "write_performed": false
+      },
+      "case_id": "novel-squeeze-in",
+      "final_output": {
+        "api_spine_operation_id": null,
+        "appointment_ref": null,
+        "candidate_slot_ids": [
+          "synthetic-slot-july27-1215"
+        ],
+        "duration_minutes": 15,
+        "kind": "squeeze_in_assessment",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "squeeze_in_assessment",
+        "requires_human_confirmation": true,
+        "status": null,
+        "warning_codes": [
+          "adjacent_to_break",
+          "manual_squeeze_in_review",
+          "no_reservation",
+          "staff_confirmation_required",
+          "staff_selection_required"
+        ],
+        "write_performed": false
+      },
+      "goal": "squeeze_in_assessment",
+      "operator_trace": [
+        "resolve_patient_reference",
+        "resolve_practitioner_reference",
+        "resolve_date_expression",
+        "read_practitioner_schedule",
+        "assess_squeeze_in_options"
+      ],
+      "plan_sha256": "140642ab4296a846a9bc0cf8983ef8216370ec8720913a541c623ddb95a1a3e9",
+      "planner_class": "untrusted_model_candidate",
+      "review_disposition": "admit",
+      "safe_repairs": []
+    }
+  ],
+  "product_boundary": {
+    "appointment_write": false,
+    "confirmation": false,
+    "database_access": false,
+    "new_api_route": false,
+    "new_event_family": false,
+    "product_data_access": false,
+    "product_delivery": false
+  },
+  "provider_boundary": {
+    "credentials_requested": false,
+    "execution_enabled": false,
+    "network_access": false,
+    "provider_calls": 0,
+    "raw_prompt_persisted": false,
+    "raw_response_persisted": false
+  },
+  "status": "pass",
+  "typed_dialogue": {
+    "first_attempt": {
+      "attempt": 1,
+      "disposition": "revision_required",
+      "execution_authorized": false,
+      "violation_codes": [
+        "signature_mismatch"
+      ]
+    },
+    "revision_count": 1,
+    "revision_limit": 2,
+    "second_attempt": {
+      "attempt": 2,
+      "disposition": "admit",
+      "execution_authorized": true,
+      "final_output": {
+        "api_spine_operation_id": "proposeAppointmentCreate",
+        "appointment_ref": null,
+        "candidate_slot_ids": [
+          "synthetic-slot-july28-1430"
+        ],
+        "duration_minutes": 15,
+        "kind": "proposal_candidate",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "create",
+        "requires_human_confirmation": true,
+        "status": null,
+        "warning_codes": [
+          "no_reservation",
+          "staff_confirmation_required",
+          "staff_selection_required"
+        ],
+        "write_performed": false
+      },
+      "plan_sha256": "fbf496f021301df2bc968ec2e8ff88c5de6f70fe580ca1cbc758ba28140f3790"
+    }
+  },
+  "watcher_supersession_seam": {
+    "context_revision_required": true,
+    "event_runtime_changed": false,
+    "fresh_read_performed": false,
+    "stale_plan_disposition": "reject"
+  }
+}

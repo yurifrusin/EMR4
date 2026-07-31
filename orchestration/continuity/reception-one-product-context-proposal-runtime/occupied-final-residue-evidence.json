@@ -1,0 +1,21 @@
+{
+  "schema_version": "reception.one.product_context_proposal_runtime.final_residue.v1",
+  "recorded_at": "2026-07-29T15:02:00Z",
+  "cell_container_absent": true,
+  "relay_container_absent": true,
+  "internal_network_absent": true,
+  "cell_image_absent": true,
+  "relay_image_absent": true,
+  "provider_free_container_absent": true,
+  "provider_free_image_absent": true,
+  "broker_process_absent": true,
+  "occupied_temporary_roots_absent": true,
+  "provider_free_temporary_roots_absent": true,
+  "live_local_ipv6_listeners_absent": true,
+  "live_local_database_absent": true,
+  "live_local_processes_absent": true,
+  "live_local_temporary_root_absent": true,
+  "unrelated_ipv4_preview_and_backend_preserved": true,
+  "daemon_wide_prune_performed": false,
+  "provider_calls_after_first_admitted_result": 0
+}

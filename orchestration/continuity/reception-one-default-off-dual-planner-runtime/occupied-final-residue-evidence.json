@@ -1,0 +1,22 @@
+{
+  "clear": true,
+  "owned_backend_port_available": true,
+  "owned_containers_present": {
+    "reception-one-model-text-vertex-cell": false,
+    "reception-one-model-text-vertex-relay": false
+  },
+  "owned_database_present": false,
+  "owned_images_present": {
+    "reception-one-model-text-vertex-cell:v1": false,
+    "reception-one-model-text-vertex-relay:v1": false
+  },
+  "owned_network_present": false,
+  "owned_runtime_directory_present": false,
+  "phase": "post_attempt",
+  "recorded_at": "2026-07-30T13:45:11.502138Z",
+  "request_artifact_directories": [
+    "runtime-957dfe6a394bb55d"
+  ],
+  "schema_version": "reception.one.default_off_dual_planner.residue.v1",
+  "unexpected_request_artifact_directories": []
+}

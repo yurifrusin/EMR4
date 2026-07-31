@@ -1,0 +1,84 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "implement_the_provider_free_reception_one_bureau_typed_plan_protocol_and_deterministic_proofreader",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "live_handover_integrated_bureau_bounded_work_cell_api_spine_protected_boundaries_and_git_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external implementation worker is selected for this tightly coupled protocol tranche."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external design worker is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external reviewer or provider call is selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "AGENTS.md was read completely and sections 5 and 6 were restored.",
+        "The accepted integrated Bureau plan and closeout, Bounded Cognitive Work Cell plan, design and closeout, API Spine ADR, Access AI design and release gates were restored.",
+        "HEAD, master, handoff/current, origin/master, origin/handoff/current and the dirty shared worktree were inspected; unrelated changes and protected refs remain preserved."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No subagent is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/codex/reception-one-bureau-typed-plan-protocol-rehydration-receipt.json"
+  ],
+  "assigned_agent_ids": []
+}

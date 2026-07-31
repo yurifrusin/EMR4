@@ -2,6 +2,13 @@ import http from "node:http";
 import https from "node:https";
 import { createHash, timingSafeEqual } from "node:crypto";
 import { readFileSync } from "node:fs";
+import {
+  buildGeminiGenerateContentRequest,
+  compileProviderSchema,
+  sanitiseProviderErrorMetadata,
+  sealAuditEvent,
+  typedOutputAuditManifest,
+} from "./ariadne_provider_contracts.mjs";
 
 const LISTEN_HOST = "0.0.0.0";
 const LISTEN_PORT = 8080;
@@ -24,6 +31,8 @@ const expectedHashes = {
 const brokerToken = readSecret("/run/secrets/broker_token");
 const providerKey = readSecret("/run/secrets/provider_key");
 let providerCallCount = 0;
+let auditSequence = 0;
+let previousEventHash = `sha256:${"0".repeat(64)}`;
 
 const lanes = {
   terra: {
@@ -54,7 +63,15 @@ function hash(value) {
 }
 
 function logEvent(event) {
-  process.stdout.write(`${JSON.stringify(event)}\n`);
+  auditSequence += 1;
+  const sealed = sealAuditEvent(
+    event,
+    auditSequence,
+    previousEventHash,
+    hash,
+  );
+  previousEventHash = sealed.event_sha256;
+  process.stdout.write(`${JSON.stringify(sealed)}\n`);
 }
 
 function equalSecret(left, right) {
@@ -109,7 +126,7 @@ function hashesMatch(actual) {
   );
 }
 
-function openAIRequest(payload) {
+function openAIRequest(payload, providerSchema) {
   return {
     model: lane.model,
     instructions: payload.system_prompt,
@@ -124,24 +141,9 @@ function openAIRequest(payload) {
         type: "json_schema",
         name: "ariadne_common_provider_draft_envelope",
         strict: true,
-        schema: payload.provider_output_schema,
+        schema: providerSchema,
       },
     },
-  };
-}
-
-function geminiRequest(payload) {
-  return {
-    systemInstruction: { parts: [{ text: payload.system_prompt }] },
-    contents: [{ role: "user", parts: [{ text: payload.prompt }] }],
-    generationConfig: {
-      candidateCount: 1,
-      maxOutputTokens: MAX_OUTPUT_TOKENS,
-      responseMimeType: "application/json",
-      responseJsonSchema: payload.provider_output_schema,
-      thinkingConfig: { thinkingLevel: "MEDIUM", includeThoughts: false },
-    },
-    store: false,
   };
 }
 
@@ -185,6 +187,7 @@ function callProvider(body) {
           resolve({
             statusCode: providerResponse.statusCode ?? 502,
             body: Buffer.concat(chunks),
+            headers: providerResponse.headers,
           }),
         );
         providerResponse.on("error", () =>
@@ -308,7 +311,31 @@ const server = http.createServer(async (request, response) => {
     return;
   }
 
-  const outbound = laneId === "terra" ? openAIRequest(payload) : geminiRequest(payload);
+  let providerSchema;
+  try {
+    providerSchema = compileProviderSchema(
+      payload.provider_output_schema,
+      laneId,
+    );
+  } catch {
+    logEvent({
+      event: "broker-request-rejected",
+      reason_code: "provider-schema-profile-invalid",
+    });
+    respond(response, 400, {
+      status: "failed",
+      reason_code: "provider-schema-profile-invalid",
+    });
+    return;
+  }
+  const outbound =
+    laneId === "terra"
+      ? openAIRequest(payload, providerSchema)
+      : buildGeminiGenerateContentRequest(
+          payload,
+          providerSchema,
+          MAX_OUTPUT_TOKENS,
+        );
   const outboundBody = Buffer.from(JSON.stringify(outbound));
   if (outboundBody.length > MAX_REQUEST_BYTES) {
     respond(response, 413, {
@@ -327,11 +354,22 @@ const server = http.createServer(async (request, response) => {
     provider_call_count: providerCallCount,
     request_bytes: outboundBody.length,
     request_sha256: hash(outboundBody),
+    provider_schema_profile_sha256: hash(
+      Buffer.from(JSON.stringify(providerSchema)),
+    ),
     maximum_output_tokens: MAX_OUTPUT_TOKENS,
   });
 
   try {
     const upstream = await callProvider(outboundBody);
+    const providerErrorMetadata =
+      upstream.statusCode < 200 || upstream.statusCode >= 300
+        ? sanitiseProviderErrorMetadata(
+            laneId,
+            upstream.body,
+            upstream.headers,
+          )
+        : {};
     logEvent({
       event: "provider-call-completed",
       lane_id: laneId,
@@ -339,6 +377,7 @@ const server = http.createServer(async (request, response) => {
       provider_status: upstream.statusCode,
       response_bytes: upstream.body.length,
       response_sha256: hash(upstream.body),
+      ...providerErrorMetadata,
     });
     if (upstream.statusCode < 200 || upstream.statusCode >= 300) {
       respond(response, 502, {
@@ -370,6 +409,15 @@ const server = http.createServer(async (request, response) => {
       });
       return;
     }
+    logEvent({
+      event: "typed-output-observed",
+      lane_id: laneId,
+      provider_call_count: providerCallCount,
+      typed_output_manifest: typedOutputAuditManifest(
+        extracted.generated.drafts,
+        hash,
+      ),
+    });
     respond(response, 200, {
       status: "completed",
       drafts: extracted.generated.drafts,

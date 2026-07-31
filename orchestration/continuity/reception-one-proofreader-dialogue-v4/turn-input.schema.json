@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/reception-one-proofreader-dialogue-turn-input-v4.json",
+  "title": "Reception One proofreader dialogue turn input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "data_class",
+    "effect_ceiling",
+    "turn_code",
+    "task_sha256",
+    "task",
+    "correction_ticket"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "reception.one.bureau.proofreader-dialogue.v4"
+    },
+    "data_class": {
+      "const": "authored_synthetic"
+    },
+    "effect_ceiling": {
+      "const": "proposal_only"
+    },
+    "turn_code": {
+      "enum": [
+        1,
+        2
+      ]
+    },
+    "task_sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contract_version",
+        "data_class",
+        "utterances",
+        "effect_ceiling",
+        "source_reference_contract",
+        "goal_table",
+        "binding_table",
+        "operator_table"
+      ],
+      "properties": {
+        "contract_version": {},
+        "data_class": {},
+        "utterances": {},
+        "effect_ceiling": {},
+        "source_reference_contract": {},
+        "goal_table": {},
+        "binding_table": {},
+        "operator_table": {}
+      }
+    },
+    "correction_ticket": {
+      "type": [
+        "object",
+        "null"
+      ]
+    }
+  }
+}

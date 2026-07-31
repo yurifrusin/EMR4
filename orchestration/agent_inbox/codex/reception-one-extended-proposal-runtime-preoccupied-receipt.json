@@ -1,0 +1,77 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "recorded_at": "2026-07-29T23:34:27Z",
+  "continuation_event": "occupied_provider_call",
+  "planned_action": "run_one_authored_synthetic_move_interpretation_in_the_exact_bounded_sydney_vertex_cell",
+  "status": "passed",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md names the accepted product-context proposal runtime as the parent result and preserves the exact successful Bernie keyless-ADC Sydney Vertex precedent.",
+    "current_authority_allocation": [
+      "Yuri authorised the necessary Reception One runtime tranches through their live Vertex denouement.",
+      "The opening is limited to one primary and at most one deterministic request-contract repair, USD 1 cumulative, with immediate stop after the first proofreader-admitted result.",
+      "Provider, model, project, service account, keyless ADC, region, endpoint, authored-synthetic classification, isolation, audit, no-fallback and no-write boundaries are frozen."
+    ],
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-extended-proposal-runtime-plan.md",
+      "docs/security/bernie-reception-one-extended-proposal-runtime-threat-model-delta.md",
+      "orchestration/agent_inbox/codex/reception-one-extended-proposal-runtime-plan-sol-acceptance.md",
+      "orchestration/continuity/reception-one-extended-proposal-runtime/runtime-policy.json",
+      "orchestration/continuity/reception-one-extended-proposal-runtime/provider-free-gate-evidence.json",
+      "orchestration/continuity/reception-one-extended-proposal-runtime/occupied-preflight-evidence.json",
+      "orchestration/continuity/reception-one-extended-proposal-runtime/occupied-authority-request.json"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 remain restored. The call may retain only bounded audit metadata and proofreader-admitted authored-synthetic typed values. No raw prompt, raw provider response, credential, token, API-key information, hidden reasoning, rejected draft, product identifier or protected evidence may be retained or revised.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true
+    }
+  },
+  "revision_binding": {
+    "continuity_graph_revision": 73,
+    "compass_map_revision": 60,
+    "rendered_compass_validated": true
+  },
+  "gate_hashes": {
+    "provider_free_gate_sha256": "48b6c976e96806333e56dfe9553924c65af54beecd9bd072bfa2d3233b116eef",
+    "occupied_preflight_sha256": "144a18eec4753b9b1bded1cf04215d8d72bd9f6ba99d62ea9b7d4144594b9bcc",
+    "occupied_authority_sha256": "794c3148d309e9e4d59ba854238119ac6adda8f484ed14d7962a3d57fbc6efbe",
+    "authored_synthetic_frame_sha256": "af2df3905d6f8f36ddfca13d52b979707fbfb142d63e6c635b5da37baece2d66"
+  },
+  "exact_lane": {
+    "provider": "google_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "region": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "automatic_fallback": false,
+    "api_key_authentication": false
+  },
+  "call_budget": {
+    "calls_consumed_before_attempt": 0,
+    "primary_calls_remaining": 1,
+    "conditional_request_contract_repair_calls_remaining": 1,
+    "cumulative_cost_ceiling_usd": 1
+  },
+  "admission": {
+    "provider_free_gates_passed": true,
+    "exact_adc_and_control_preflight_passed": true,
+    "occupied_call_permitted": true
+  }
+}

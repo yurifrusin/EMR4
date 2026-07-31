@@ -1,0 +1,144 @@
+{
+  "absolute_provider_call_ceiling": 2,
+  "actual_provider_call_count": 2,
+  "assembled_response_contract": "reception.one.bureau.plan-program.v3",
+  "attempt_ids": [
+    "reception-one-receptionist-first-v61-repair-b-move-change-turn-001",
+    "reception-one-receptionist-first-v61-repair-b-move-change-turn-002"
+  ],
+  "baseline": {
+    "demonstration_answers": false,
+    "few_shot_examples": false,
+    "fine_tuning": false,
+    "paired_development_not_holdout": true,
+    "prompt_optimisation": true,
+    "targeted_grounded_binding_repair": true
+  },
+  "candid_limit": "This sequence can prove only bounded authored-synthetic form completion through the configured and observed Sydney Vertex locational request path. It cannot prove Australian physical or sovereign processing, general model reliability, production fitness, training need or safety for real, product, patient, health, clinical or historical data.",
+  "correction_ticket_hash": "sha256:d1fa20aa180231cfb64f716134bc5a2d280d5820fd47998b5b38a6c61a06e1d2",
+  "data_class": "authored_synthetic",
+  "dialogue_protocol": "reception.one.bureau.receptionist-first.v6.1",
+  "effect_ceiling": "proposal_only",
+  "evidence_hash": "sha256:8fe97c1876881603f4d975657aa40e2dcd442b56c5a1a36085c9fefbb7f3bfa7",
+  "exact_binding": {
+    "api_key_authentication_used": false,
+    "authentication": "keyless_impersonated_service_account_adc",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "location": "australia-southeast1",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "provider": "google_vertex_ai",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"
+  },
+  "explicit_exclusions": {
+    "api_key_information_recorded": false,
+    "broker_judgement_repair": false,
+    "chain_of_thought_recorded": false,
+    "command_authority": false,
+    "credential_or_token_recorded": false,
+    "fallback": false,
+    "human_or_product_delivery": false,
+    "product_or_database_access": false,
+    "proofreader_selected_replacement": false,
+    "raw_model_form_body_recorded": false,
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "rejected_operator_note_recorded": false
+  },
+  "incremental_cost_ceiling_usd": 1,
+  "ledger_ids": [
+    "reception-one-receptionist-first-v61-repair-b-move-change-ledger-001",
+    "reception-one-receptionist-first-v61-repair-b-move-change-ledger-002"
+  ],
+  "model_authored_fields": [
+    "receptionist_response",
+    "decision_note",
+    "evidence_utterance_indices",
+    "typed_form"
+  ],
+  "model_response_contract": "reception.one.bureau.receptionist-and-form.v6.1",
+  "no_call_after_admission": true,
+  "parent_audit_chain": {
+    "event_count": 6,
+    "terminal_hash": "sha256:9ad3779afd987b1abc2e436bd80238693cf71e2921f3451d41afe4ff0c68bd0d",
+    "valid": true
+  },
+  "preprinted_fields": {
+    "version_code": 3
+  },
+  "release": {
+    "api_spine_operation_id": "proposeAppointmentUpdate",
+    "appointment_ref": "synthetic-appointment-margaret",
+    "candidate_slot_ids": [
+      "synthetic-slot-july28-1500"
+    ],
+    "duration_minutes": 15,
+    "kind": "proposal_candidate",
+    "patient_ref": "synthetic-patient-margaret",
+    "practitioner_ref": "synthetic-practitioner-shera",
+    "proposal_family": "move",
+    "requires_human_confirmation": true,
+    "status": null,
+    "warning_codes": [
+      "no_reservation",
+      "staff_confirmation_required",
+      "staff_selection_required"
+    ],
+    "write_performed": false
+  },
+  "request_contract_repair_competed_for_call_two": false,
+  "result": "reception_one_receptionist_first_v61_occupied_pass",
+  "schema_version": "reception.one.receptionist_first_v61.parent_evidence.v1",
+  "terminal_status": "admitted_after_correction",
+  "turn_two_terminal": true,
+  "turns": [
+    {
+      "attempt_id": "reception-one-receptionist-first-v61-repair-b-move-change-turn-001",
+      "audit_terminal_hash": "sha256:5971538f74ffa0781819fa4ec5474df983b130248981e8a36204c86782e41239",
+      "cleanup": {
+        "base_image_state_preserved": true,
+        "broker_process_absent": true,
+        "cell_container_absent": true,
+        "cell_image_absent": true,
+        "daemon_wide_prune_performed": false,
+        "internal_network_absent": true,
+        "relay_container_absent": true,
+        "relay_image_absent": true,
+        "temporary_context_absent": true,
+        "temporary_token_absent": true
+      },
+      "correction_ticket_issued": true,
+      "ledger_id": "reception-one-receptionist-first-v61-repair-b-move-change-ledger-001",
+      "model_input_hash": "sha256:3f81c36ef542df2079116b631e5dbb64fc8bb1d877d68822cc87c1be674a9694",
+      "proofreader_disposition": "revision_required",
+      "released": false,
+      "result": "reception_one_receptionist_first_v61_turn_revision_required",
+      "schema_hash": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "turn_code": 1
+    },
+    {
+      "attempt_id": "reception-one-receptionist-first-v61-repair-b-move-change-turn-002",
+      "audit_terminal_hash": "sha256:6044799760744acc4df78ca3417e0b9604343fc908598009137e9f12f1a9ca0b",
+      "cleanup": {
+        "base_image_state_preserved": true,
+        "broker_process_absent": true,
+        "cell_container_absent": true,
+        "cell_image_absent": true,
+        "daemon_wide_prune_performed": false,
+        "internal_network_absent": true,
+        "relay_container_absent": true,
+        "relay_image_absent": true,
+        "temporary_context_absent": true,
+        "temporary_token_absent": true
+      },
+      "correction_ticket_issued": false,
+      "ledger_id": "reception-one-receptionist-first-v61-repair-b-move-change-ledger-002",
+      "model_input_hash": "sha256:a7a10036c46169e45be1e398293580065013fe91ca508bd9fe8d0d0822c5a473",
+      "proofreader_disposition": "admit",
+      "released": true,
+      "result": "reception_one_receptionist_first_v61_turn_pass",
+      "schema_hash": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "turn_code": 2
+    }
+  ]
+}

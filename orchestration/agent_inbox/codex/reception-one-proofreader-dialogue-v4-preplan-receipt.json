@@ -1,0 +1,47 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "receipt_id": "reception-one-proofreader-dialogue-v4-preplan-20260730",
+  "generated_at": "2026-07-30T02:17:09Z",
+  "result": "rehydrated",
+  "rehydrated_from_receipt": true,
+  "authority_source": "Yuri: Ok let's start v4.",
+  "sources": {
+    "live_handover_current_baton": {
+      "path": "AGENTS.md",
+      "read_completely": true,
+      "restored_result": "Structured Source Language v3 is a zero-call provider-free descendant at graph revision 85 and Compass revision 72; historical provider attempts and ledgers remain immutable."
+    },
+    "current_authority_allocation": {
+      "paths": [
+        "orchestration/continuity/reception-one-proofreader-dialogue-v4/occupied-authority-request.json",
+        "docs/bernie-reception-one-proofreader-dialogue-v4-plan.md"
+      ],
+      "restored_result": "One primary and at most one closed correction or competing request-contract repair call, never three, using only the exact Gemini 2.5 Flash Bernie keyless-ADC Sydney lane under USD 1."
+    },
+    "active_plan_and_acceptance": {
+      "paths": [
+        "docs/bernie-reception-one-proofreader-dialogue-v4-plan.md",
+        "docs/security/bernie-reception-one-proofreader-dialogue-v4-threat-model-delta.md",
+        "docs/bernie-reception-one-structured-source-language-plan.md",
+        "orchestration/continuity/reception-one-structured-source-language/provider-blocked-evidence.json",
+        "orchestration/continuity/reception-one-structured-source-language/real-isolation-evidence.json"
+      ],
+      "restored_result": "V4 wraps unchanged PlanProgram v3 in a closed two-turn dialogue; turn two is a complete replacement and terminal."
+    },
+    "protected_evidence_boundaries": {
+      "path": "AGENTS.md#5-and-6",
+      "restored_result": "Holdouts remain sealed. Real, product-derived, patient, health, clinical, protected and historical Diary data; product/database access; writes; Word; voice; production; deployment and release remain closed."
+    },
+    "git_refs_and_worktree": {
+      "head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff_current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin_master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin_handoff_current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "worktree_dirty": true,
+      "unrelated_user_changes_preserved": true
+    }
+  },
+  "stop_conditions_restored": true
+}

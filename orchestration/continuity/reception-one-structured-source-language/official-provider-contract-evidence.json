@@ -1,0 +1,30 @@
+{
+  "schema_version": "reception.one.structured_source_language.official_provider_contract.v1",
+  "checked_at": "2026-07-30T01:41:02Z",
+  "provider_contacted": false,
+  "provider_calls_performed": 0,
+  "credential_reads_performed": 0,
+  "official_sources": [
+    {
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/2-5-flash",
+      "claim": "Google publishes gemini-2.5-flash as supporting structured output and lists australia-southeast1 under Asia-Pacific ML processing."
+    },
+    {
+      "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/samples/generativeaionvertexai-gemini-controlled-generation-response-schema-2",
+      "claim": "Google documents response_mime_type plus response_schema for controlled JSON output on Vertex AI."
+    },
+    {
+      "url": "https://docs.cloud.google.com/java/docs/reference/google-cloud-vertexai/latest/com.google.cloud.vertexai.api.Schema",
+      "claim": "The official Vertex Schema reference exposes nested object properties, required fields, array items and limits, numeric minimum and maximum, string enums and property ordering."
+    }
+  ],
+  "admission": {
+    "model": "gemini-2.5-flash",
+    "location": "australia-southeast1",
+    "structured_output_supported": true,
+    "nested_fixed_shape_source_reference_supported_by_published_schema_contract": true,
+    "provider_schema_is_semantic_authority": false,
+    "deterministic_local_cross_field_validation_required": true
+  },
+  "residency_claim_limit": "published_regional_support_and_configured_or_observed_sydney_locational_endpoint_only_not_australian_physical_or_sovereign_processing"
+}

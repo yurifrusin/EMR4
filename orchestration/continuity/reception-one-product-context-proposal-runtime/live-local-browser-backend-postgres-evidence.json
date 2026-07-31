@@ -1,0 +1,82 @@
+{
+  "api_key_authentication_used": false,
+  "appointment_confirmation_performed": false,
+  "appointment_write_performed": false,
+  "browser_result": {
+    "candidate_slot_count": 8,
+    "contract_version": "reception.one.product-context-proposal.v1",
+    "database_reads_performed": true,
+    "goal": "create",
+    "http_status": 200,
+    "model_database_access": false,
+    "operation_id": "proposeAppointmentCreate",
+    "proofreader_disposition": "admit",
+    "proposal_only": true,
+    "provider_calls": 0,
+    "requires_confirmation": true,
+    "result": "proposal_ready",
+    "write_performed": false
+  },
+  "data_class": "authored_synthetic",
+  "database": "gp_pms_reception_one_product_context_4e731ad9_20260729",
+  "database_after": {
+    "counts": {
+      "appointment_audit_log": 0,
+      "appointment_command_idempotency": 0,
+      "appointments": 6,
+      "bernie_booking_sessions": 0,
+      "bernie_session_events": 0
+    },
+    "database": "gp_pms_reception_one_product_context_4e731ad9_20260729",
+    "identifiers_recorded": false,
+    "patient_details_recorded": false,
+    "schema_version": "bernie.meta-grid-live-local.database-readback.v1",
+    "sha256": {
+      "appointment_audit_log": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "appointment_command_idempotency": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "appointments": "3e3c05e6aa79618ee442e897bc597b10bc4ba63187d57721a7dc84ff8f75dc9a",
+      "bernie_booking_sessions": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bernie_session_events": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "synthetic_only": true
+  },
+  "database_before": {
+    "counts": {
+      "appointment_audit_log": 0,
+      "appointment_command_idempotency": 0,
+      "appointments": 6,
+      "bernie_booking_sessions": 0,
+      "bernie_session_events": 0
+    },
+    "database": "gp_pms_reception_one_product_context_4e731ad9_20260729",
+    "identifiers_recorded": false,
+    "patient_details_recorded": false,
+    "schema_version": "bernie.meta-grid-live-local.database-readback.v1",
+    "sha256": {
+      "appointment_audit_log": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "appointment_command_idempotency": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "appointments": "3e3c05e6aa79618ee442e897bc597b10bc4ba63187d57721a7dc84ff8f75dc9a",
+      "bernie_booking_sessions": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bernie_session_events": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "synthetic_only": true
+  },
+  "forbidden_write_surfaces_unchanged": true,
+  "legacy_interpreter_gate_changed": false,
+  "loopback_family": "ipv6",
+  "network": {
+    "allowed_hosts": [
+      "::1",
+      "127.0.0.1",
+      "localhost"
+    ],
+    "external_host_count": 0,
+    "route_call_count": 1
+  },
+  "provider_calls": 0,
+  "provider_environment_forwarded": false,
+  "request_interception_used": false,
+  "result": "live_local_browser_backend_postgres_provider_free_pass",
+  "schema_version": "reception.one.product_context.live_local_acceptance.v1",
+  "screenshot": "orchestration/continuity/reception-one-product-context-proposal-runtime/live-local-browser-backend-postgres.png"
+}

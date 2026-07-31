@@ -1,0 +1,273 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/reception-one-shared-typed-model-input-v3.json",
+  "title": "Reception One shared typed language model input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "data_class",
+    "utterances",
+    "effect_ceiling",
+    "source_encoding",
+    "goal_table",
+    "binding_table",
+    "operator_table"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "reception.one.bureau.shared-model-input.v3"
+    },
+    "data_class": {
+      "const": "authored_synthetic"
+    },
+    "utterances": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 512
+      }
+    },
+    "effect_ceiling": {
+      "const": "proposal_only"
+    },
+    "source_encoding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "external_binding",
+        "prior_step_output",
+        "prior_output_validity",
+        "prior_output_examples",
+        "optional_omission"
+      ],
+      "properties": {
+        "external_binding": {
+          "const": "binding_table_code"
+        },
+        "prior_step_output": {
+          "const": "1000_plus_step_index_times_16_plus_output_index"
+        },
+        "prior_output_validity": {
+          "const": "zero_based_output_index_must_exist_on_selected_earlier_operator"
+        },
+        "prior_output_examples": {
+          "const": [
+            {
+              "source_step_index": 0,
+              "output_index": 0,
+              "source_code": 1000
+            },
+            {
+              "source_step_index": 1,
+              "output_index": 0,
+              "source_code": 1016
+            },
+            {
+              "source_step_index": 1,
+              "output_index": 2,
+              "source_code": 1018
+            }
+          ]
+        },
+        "optional_omission": {
+          "const": -1
+        }
+      }
+    },
+    "goal_table": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {
+        "$ref": "#/$defs/codeName"
+      }
+    },
+    "binding_table": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "$ref": "#/$defs/binding"
+      }
+    },
+    "operator_table": {
+      "type": "array",
+      "minItems": 14,
+      "maxItems": 14,
+      "items": {
+        "$ref": "#/$defs/operator"
+      }
+    },
+    "proofreader_feedback": {
+      "$ref": "#/$defs/proofreaderFeedback"
+    }
+  },
+  "$defs": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{0,63}$"
+    },
+    "semanticType": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{0,63}$"
+    },
+    "codeName": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "name"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 15
+        },
+        "name": {
+          "$ref": "#/$defs/name"
+        }
+      }
+    },
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "source_handle",
+        "semantic_type"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9
+        },
+        "source_handle": {
+          "type": "string",
+          "pattern": "^binding:[a-z][a-z0-9_]{0,63}$"
+        },
+        "semantic_type": {
+          "$ref": "#/$defs/semanticType"
+        }
+      }
+    },
+    "slot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "position",
+        "name",
+        "semantic_type"
+      ],
+      "properties": {
+        "position": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 7
+        },
+        "name": {
+          "$ref": "#/$defs/name"
+        },
+        "semantic_type": {
+          "$ref": "#/$defs/semanticType"
+        },
+        "required": {
+          "type": "boolean"
+        }
+      }
+    },
+    "operator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "name",
+        "effect",
+        "input_slots",
+        "output_slots"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 13
+        },
+        "name": {
+          "$ref": "#/$defs/name"
+        },
+        "effect": {
+          "enum": [
+            "pure",
+            "authorised_read",
+            "proposal_only"
+          ]
+        },
+        "input_slots": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/slot"
+          }
+        },
+        "output_slots": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "items": {
+            "$ref": "#/$defs/slot"
+          }
+        }
+      }
+    },
+    "proofreaderFeedback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version_code",
+        "previous_program_hash",
+        "replacement_required",
+        "violations"
+      ],
+      "properties": {
+        "version_code": {
+          "const": 1
+        },
+        "previous_program_hash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "replacement_required": {
+          "const": true
+        },
+        "violations": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "violation_code",
+              "path_code"
+            ],
+            "properties": {
+              "violation_code": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 5
+              },
+              "path_code": {
+                "const": 0
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

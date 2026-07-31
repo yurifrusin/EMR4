@@ -1,0 +1,47 @@
+{
+  "authority_boundary": "receipt_only_frozen_provider_free_integrated_bureau_and_zero_call_provider_blocked_contract_no_occupied_provider_voice_new_write_real_data_production_deployment_or_release_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_and_execute_reception_one_integrated_bureau_baseline_with_zero_call_provider_blocked_lane",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md Current product correction, Current result and Next implementation ground the new descendant without revising the accepted walkthrough or earlier provider nodes.",
+    "current_authority_allocation": [
+      "Yuri authorised beginning the integrated Bureau tranche.",
+      "The product baseline is provider-free and authored-synthetic.",
+      "The typed future lane is repository-only and provider-blocked; an occupied call remains a fresh Yuri decision."
+    ],
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-integrated-bureau-plan.md",
+      "docs/bernie-reception-one-yuri-internal-walkthrough-findings.md",
+      "docs/bernie-reception-one-holistic-bureau-direction.md",
+      "docs/bernie-intent-projected-event-aware-diary-design.md",
+      "docs/bernie-conversational-diary-north-star.md",
+      "docs/ariadne-bounded-cognitive-work-cell-protocol-design.md",
+      "orchestration/continuity/emr4-continuity-graph.json revision 59",
+      "orchestration/continuity/emr4-compass.json map revision 46"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 remain binding: no protected holdout or historical Diary access; authored-synthetic data only; no occupied provider, voice, participants, new write, real data, production, deployment or release.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

@@ -1,0 +1,71 @@
+{
+  "schema_version": "ariadne.preacceptance_receipt.v1",
+  "receipt_id": "reception-one-preprinted-form-v5-preacceptance-20260730t040020z",
+  "recorded_at": "2026-07-30T04:00:20Z",
+  "result": "passed",
+  "rehydrated_from_receipt": true,
+  "mandatory_rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "terminal_result": {
+    "result": "reception_one_preprinted_form_v5_occupied_pass",
+    "actual_provider_call_count": 1,
+    "second_call_performed": false,
+    "proofreader_disposition": "admit",
+    "safe_repairs": [],
+    "write_performed": false,
+    "fallback_performed": false
+  },
+  "evidence_hashes": [
+    {
+      "path": "orchestration/continuity/reception-one-preprinted-form-v5/occupied-dialogue-evidence.json",
+      "sha256": "sha256:ea611062db12c7ed0c6d5eac164aa4cef05deec47ac1a81bafce13f3756bf5d5"
+    },
+    {
+      "path": "orchestration/continuity/reception-one-preprinted-form-v5/occupied-turn-001-external-audit.json",
+      "sha256": "sha256:91c14a6abfe4f86ae68c576f6dc53b91aaa781b1800c8a4c83bf60326e13a089"
+    },
+    {
+      "path": "orchestration/continuity/reception-one-preprinted-form-v5/occupied-final-audit-analysis.json",
+      "sha256": "sha256:7ab33cd4cf30a2f3982ad6b5fdfc7c021f7eaf797277cab3629c519cd899a78a"
+    },
+    {
+      "path": "orchestration/continuity/reception-one-preprinted-form-v5/occupied-final-residue-evidence.json",
+      "sha256": "sha256:4ed79e37d38677b76060bfe417f473421e140e8eafb834e08ce46fdd3d711ad2"
+    },
+    {
+      "path": "docs/bernie-reception-one-preprinted-form-v5-closeout.md",
+      "sha256": "sha256:ffaba42d9ef143355cb4ce03a37d265d054d7d75d893bc1e28c72f4db904d17f"
+    }
+  ],
+  "revision_binding": {
+    "continuity_graph_revision": 94,
+    "continuity_graph_sha256": "sha256:661af47b85ad1e47de24c96cecb2b4bb37060417ea2446e8910ffd78e3fa0bf1",
+    "compass_map_revision": 81,
+    "compass_source_graph_revision": 94,
+    "compass_map_sha256": "sha256:718ee1439da32f41748fad74145c25e71084c965c72c144dde869d6233f11aec",
+    "rendered_compass_sha256": "sha256:c1943dfc7ea2204bb0e116261466034fe9dbcc5a04b3d2d9b1513f659f3d6e20"
+  },
+  "git_boundary": {
+    "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+    "head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+    "handoff_current": "4974075b31035d599e081d68e3b85e04a897baa1",
+    "origin_master": "4974075b31035d599e081d68e3b85e04a897baa1",
+    "origin_handoff_current": "4974075b31035d599e081d68e3b85e04a897baa1",
+    "unrelated_changes_preserved": true,
+    "commit_push_or_ref_move_performed": false
+  },
+  "protected_boundaries": {
+    "historical_nodes_revised": false,
+    "protected_evidence_opened": false,
+    "product_or_database_access": false,
+    "write_or_command_authority": false,
+    "prompt_context_training_performed": false,
+    "voice_production_deployment_or_release": false
+  }
+}

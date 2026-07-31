@@ -1,0 +1,47 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "replace_arithmetic_prior_output_codes_with_explicit_typed_source_references_and_conditionally_rehearse_the_new_contract_in_the_existing_exact_sydney_vertex_lane",
+  "status": "passed",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "authority_boundary": "new_versioned_authored_synthetic_proposal_only_source_reference_contract_with_a_strictly_bounded_audit_only_operator_note_then_one_primary_and_at_most_one_deterministic_request_contract_repair_through_gemini_2_5_flash_project_bernie_emr4_dev_exact_bernie_impersonated_adc_australia_southeast1_and_no_provider_region_identity_credential_data_isolation_proofreader_cost_or_residency_fallback",
+  "worker_dispatch_permitted": false,
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records reception_one_shared_typed_language_fail_closed_call_ceiling_exhausted at Continuity graph revision 83 and Compass map revision 70. Its two HTTP 200 responses, invalid arithmetic prior-output references, consumed ledgers, no release and complete cleanup remain immutable historical evidence.",
+    "current_authority_allocation": "Yuri accepted the recommended redesign and rehearsal. This opens a fresh descendant only: explicit provider-constrainable typed source-reference fields replace arithmetic prior-output encoding while the same closed operator language, independently proofread audit-only operator_note, proposal-only effect ceiling and deterministic proofreader remain. After all repository, isolation, Continuity, Compass, rendered-report and read-only ADC/control gates pass, the descendant may make one primary and at most one deterministic request-contract repair in the exact existing Gemini 2.5 Flash Bernie keyless-ADC Sydney lane, under USD 1 total and stopping after the first admitted result.",
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-shared-typed-language-plan.md",
+      "docs/bernie-reception-one-shared-typed-language-proofreader-feedback-repair.md",
+      "docs/bernie-reception-one-shared-typed-language-closeout.md",
+      "docs/security/bernie-reception-one-shared-typed-language-threat-model-delta.md",
+      "orchestration/agent_inbox/codex/reception-one-shared-typed-language-sol-acceptance.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "orchestration/access_ai_api_design.md",
+      "orchestration/bernie_release_gates.md",
+      "docs/ariadne-compass-current.md"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 were restored. Protected holdouts remain sealed. No real, product-derived, patient, health, clinical, historical Diary or protected data may enter the contract or provider lane. Backend identity, availability, conflicts, confirmation, writes, idempotency and audit remain authoritative. No GraphQL mutation, REST write, appointment confirmation, product delivery, Word wiring, voice, production, deployment or release is opened. Historical failed programs and ledgers are not revised.",
+    "git_refs_and_worktree": {
+      "checked_at": "2026-07-30T01:41:02Z",
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_entry_count": 351,
+      "worktree_dirty_and_preserved": true,
+      "unrelated_user_changes_preserved": true,
+      "protected_refs_unchanged": true
+    }
+  }
+}

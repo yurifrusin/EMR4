@@ -1,0 +1,8 @@
+{
+  "context_revision": 964642629,
+  "data_class": "authored_synthetic",
+  "raw_frame_retained": false,
+  "raw_prompt_retained": false,
+  "request_sha256": "sha256:03f2c51f8b02d4879d064aa0ed442647c442a48e7f2a08d9843b7baf9cfe1586",
+  "schema_version": "reception.one.isolated_vertex.runtime_frame_manifest.v1"
+}

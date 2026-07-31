@@ -1,0 +1,55 @@
+{
+  "schema_version": "reception.one.bureau.cost_bounded_occupied_retry.audit_analysis.v1",
+  "result": "reception_one_bureau_cost_bounded_retry_preprovider_failure_audited",
+  "attempt_disposition": "failed_closed_before_provider_transport",
+  "diagnosed_reason_code": "occupied_authority_missing",
+  "provider_call_count": 0,
+  "provider_call_claim_basis": [
+    "The exact inner pre-call gate deterministically reproduces occupied_authority_missing.",
+    "The pre-call gate runs before single-use ledger creation, broker start, container start and provider transport.",
+    "The artifact directory contains only the two-event parent audit and the sanitized frame manifest.",
+    "No provider ledger, broker audit, external audit, provider outcome or usage exists."
+  ],
+  "audit_chain": {
+    "parent_event_count": 2,
+    "parent_terminal_hash": "sha256:ec14cf153a720d46546bbac3fa451d7bd2ac4c6b38fefcc71482489500827f6d",
+    "cost_terminal_hash": "sha256:caebdd93ef17c9598d7bfa7dd088b0a00f8482ce55254c3fcb6822450eb49bff",
+    "single_use_provider_ledgers_opened": 0,
+    "all_opened_ledgers_terminal": true
+  },
+  "cost": {
+    "cumulative_ceiling_usd": 1.0,
+    "conservative_accounted_usd": 0.0238049,
+    "outstanding_reservation_usd": 0.0,
+    "credit_or_refund_claimed": false
+  },
+  "security": {
+    "authored_synthetic_only": true,
+    "api_key_authentication_used": false,
+    "service_account_key_used": false,
+    "credential_material_retained": false,
+    "raw_prompt_retained": false,
+    "raw_provider_response_retained": false,
+    "chain_of_thought_retained": false,
+    "fallback_performed": false,
+    "appointment_confirmation_performed": false,
+    "appointment_write_performed": false
+  },
+  "cleanup": {
+    "passed": true,
+    "disposable_database_removed": true,
+    "runtime_processes_absent": true,
+    "runtime_directory_absent": true,
+    "container_image_network_residue_clear": true,
+    "ports_available": true
+  },
+  "repair_eligibility": {
+    "eligible": true,
+    "repository_local": true,
+    "focused_regression_required": true,
+    "distinct_successor_attempt_required": true,
+    "frozen_provider_boundary_changes_required": false,
+    "cost_treatment": "carry_forward_full_usd_0_02_reservation"
+  },
+  "candid_limit": "This audit proves a deterministic local rejection before provider transport. It does not prove a successful Vertex request, model behavior or Australian processing."
+}

@@ -1,0 +1,1077 @@
+{
+  "boundary": {
+    "api_key_information_retained": false,
+    "appointment_write": false,
+    "chain_of_thought_retained": false,
+    "credentials_or_tokens_retained": false,
+    "fallback": false,
+    "product_delivery": false,
+    "product_or_database_access": false,
+    "provider_tools": false,
+    "raw_provider_request_retained": false,
+    "raw_provider_response_retained": false,
+    "thinking_token_count_only": true
+  },
+  "case_oracles": [
+    {
+      "case_code": "b-create-arrange",
+      "expected_final_output": {
+        "api_spine_operation_id": "proposeAppointmentCreate",
+        "appointment_ref": null,
+        "candidate_slot_ids": [
+          "synthetic-slot-july28-1430"
+        ],
+        "duration_minutes": 15,
+        "kind": "proposal_candidate",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "create",
+        "requires_human_confirmation": true,
+        "status": null,
+        "warning_codes": [
+          "no_reservation",
+          "staff_confirmation_required",
+          "staff_selection_required"
+        ],
+        "write_performed": false
+      },
+      "expected_proposal_release": true,
+      "frame_sha256": "sha256:ac575477b8def0c58ce7a661ff19d780179aeef585e44ba520c1a18ff4c569b7",
+      "oracle_goal": "create",
+      "oracle_program_sha256": "sha256:e1c77a991f09b4c58026790843fb30efb9c44db612dc1a61c4fa2fab6498bbce",
+      "oracle_typed_form_sha256": "sha256:8dcb4a538922d6c4229d467b0c24269582c66fcd9c952d9aa553b1291bf91813",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:3029364a46de18f7d59a5680a1febcc855ce52d03acc510c34d1e3fcdc9acd87",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:d023913838b8c7d99b0102bc4b38843b5fcebebbe1af1efbafc98be2ccef313f"
+    },
+    {
+      "case_code": "b-create-alias",
+      "expected_final_output": {
+        "api_spine_operation_id": "proposeAppointmentCreate",
+        "appointment_ref": null,
+        "candidate_slot_ids": [
+          "synthetic-slot-july28-1500"
+        ],
+        "duration_minutes": 15,
+        "kind": "proposal_candidate",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "create",
+        "requires_human_confirmation": true,
+        "status": null,
+        "warning_codes": [
+          "no_reservation",
+          "staff_confirmation_required",
+          "staff_selection_required"
+        ],
+        "write_performed": false
+      },
+      "expected_proposal_release": true,
+      "frame_sha256": "sha256:0dc8d68c8b8d970ab34fc993008b079bf562b1c05eab425b7ab2bd624accd8f1",
+      "oracle_goal": "create",
+      "oracle_program_sha256": "sha256:e1c77a991f09b4c58026790843fb30efb9c44db612dc1a61c4fa2fab6498bbce",
+      "oracle_typed_form_sha256": "sha256:8dcb4a538922d6c4229d467b0c24269582c66fcd9c952d9aa553b1291bf91813",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:4527531aa06984abe91204cac6eba2ac91723f04747b90f3a4f86781834fbe7c",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:7079483e11040b9fe98b9796228a6ff2d4468a6f54b828afa1cc79a4804c8709"
+    },
+    {
+      "case_code": "b-create-preface",
+      "expected_final_output": {
+        "api_spine_operation_id": "proposeAppointmentCreate",
+        "appointment_ref": null,
+        "candidate_slot_ids": [
+          "synthetic-slot-july28-1430"
+        ],
+        "duration_minutes": 15,
+        "kind": "proposal_candidate",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "create",
+        "requires_human_confirmation": true,
+        "status": null,
+        "warning_codes": [
+          "no_reservation",
+          "staff_confirmation_required",
+          "staff_selection_required"
+        ],
+        "write_performed": false
+      },
+      "expected_proposal_release": true,
+      "frame_sha256": "sha256:9991065a46d735773fe3f55ab0bb749d5e3d576a45c76ad03d2a063a8976b1ce",
+      "oracle_goal": "create",
+      "oracle_program_sha256": "sha256:e1c77a991f09b4c58026790843fb30efb9c44db612dc1a61c4fa2fab6498bbce",
+      "oracle_typed_form_sha256": "sha256:8dcb4a538922d6c4229d467b0c24269582c66fcd9c952d9aa553b1291bf91813",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:00023d33225f4461dde0b3f478854ac914173e4104069d322606761416b0e675",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:a6772084a8826d99445064b43bee24697a283d9b59aa22039d74042e8c8c636c"
+    },
+    {
+      "case_code": "b-create-correct",
+      "expected_final_output": {
+        "api_spine_operation_id": "proposeAppointmentCreate",
+        "appointment_ref": null,
+        "candidate_slot_ids": [
+          "synthetic-slot-july28-1500"
+        ],
+        "duration_minutes": 15,
+        "kind": "proposal_candidate",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "create",
+        "requires_human_confirmation": true,
+        "status": null,
+        "warning_codes": [
+          "no_reservation",
+          "staff_confirmation_required",
+          "staff_selection_required"
+        ],
+        "write_performed": false
+      },
+      "expected_proposal_release": true,
+      "frame_sha256": "sha256:8d800808dc6d0f87eb7c4ffbd33eb5b35c6a007778ec92bc539a241b9dcd61d2",
+      "oracle_goal": "create",
+      "oracle_program_sha256": "sha256:e1c77a991f09b4c58026790843fb30efb9c44db612dc1a61c4fa2fab6498bbce",
+      "oracle_typed_form_sha256": "sha256:8dcb4a538922d6c4229d467b0c24269582c66fcd9c952d9aa553b1291bf91813",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:c8865ced03d75ce79f9734c60a6d20a820a684868b8b25ecf335d09138e95567",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:9f206e7f7067cfdb26aa523613e4debc3fdbbfa593d921c30a88a0110188c911"
+    },
+    {
+      "case_code": "b-move-resched",
+      "expected_final_output": {
+        "api_spine_operation_id": "proposeAppointmentUpdate",
+        "appointment_ref": "synthetic-appointment-margaret",
+        "candidate_slot_ids": [
+          "synthetic-slot-july28-1500"
+        ],
+        "duration_minutes": 15,
+        "kind": "proposal_candidate",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "move",
+        "requires_human_confirmation": true,
+        "status": null,
+        "warning_codes": [
+          "no_reservation",
+          "staff_confirmation_required",
+          "staff_selection_required"
+        ],
+        "write_performed": false
+      },
+      "expected_proposal_release": true,
+      "frame_sha256": "sha256:a4fbe58cdcc24c19ec6f5e7d33f6443ce5f8aeb9f91b63c56e68b319d5a8b562",
+      "oracle_goal": "move",
+      "oracle_program_sha256": "sha256:4dfbf5a458731d591d46e1d71ba57f2853cde0df2cdf1e41c70fc5e80dd87f7f",
+      "oracle_typed_form_sha256": "sha256:4ccb05fa81cccdf0d6945458e1301dba5dba69a350697614efe5d42d45b6b31f",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:4b4b2212afc0c1ab13a2a783e832b504d4b735ac7ee57453014e1de18783ba25",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:52a9e54730debe9f5db5bb4d02959098e927c17bc29d3424f4eefe654ce578b9"
+    },
+    {
+      "case_code": "b-move-shift",
+      "expected_final_output": {
+        "api_spine_operation_id": "proposeAppointmentUpdate",
+        "appointment_ref": "synthetic-appointment-margaret",
+        "candidate_slot_ids": [
+          "synthetic-slot-july28-1430"
+        ],
+        "duration_minutes": 15,
+        "kind": "proposal_candidate",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "move",
+        "requires_human_confirmation": true,
+        "status": null,
+        "warning_codes": [
+          "no_reservation",
+          "staff_confirmation_required",
+          "staff_selection_required"
+        ],
+        "write_performed": false
+      },
+      "expected_proposal_release": true,
+      "frame_sha256": "sha256:9aad4031476b7feebf14b4eafaafb27f37a4387fef4f7b4b02acfa25440335bd",
+      "oracle_goal": "move",
+      "oracle_program_sha256": "sha256:4dfbf5a458731d591d46e1d71ba57f2853cde0df2cdf1e41c70fc5e80dd87f7f",
+      "oracle_typed_form_sha256": "sha256:4ccb05fa81cccdf0d6945458e1301dba5dba69a350697614efe5d42d45b6b31f",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:b447a3195fec8a32cdefa72557cf858edece975a62d6ce5814093c772f299e3d",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:0d914092ba0d90b3c35220b7d3ec3e8eee94e4dc50ac02eb99d3553bcfa1faf3"
+    },
+    {
+      "case_code": "b-move-change",
+      "expected_final_output": {
+        "api_spine_operation_id": "proposeAppointmentUpdate",
+        "appointment_ref": "synthetic-appointment-margaret",
+        "candidate_slot_ids": [
+          "synthetic-slot-july28-1500"
+        ],
+        "duration_minutes": 15,
+        "kind": "proposal_candidate",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "move",
+        "requires_human_confirmation": true,
+        "status": null,
+        "warning_codes": [
+          "no_reservation",
+          "staff_confirmation_required",
+          "staff_selection_required"
+        ],
+        "write_performed": false
+      },
+      "expected_proposal_release": true,
+      "frame_sha256": "sha256:8e4c42714a5cc6081f7ce6cc0fc216abfdc3d8fd1a0964795001cc4dfa740068",
+      "oracle_goal": "move",
+      "oracle_program_sha256": "sha256:4dfbf5a458731d591d46e1d71ba57f2853cde0df2cdf1e41c70fc5e80dd87f7f",
+      "oracle_typed_form_sha256": "sha256:4ccb05fa81cccdf0d6945458e1301dba5dba69a350697614efe5d42d45b6b31f",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:4832fe9bab3c573a8796e52b44e734d8cb79afa06b18f3d1a6c6d27d93411d7f",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:9a1792a23590de1e6d271fd1b9b1145204d138c5132be5570f51d6612fd66220"
+    },
+    {
+      "case_code": "b-move-correct",
+      "expected_final_output": {
+        "api_spine_operation_id": "proposeAppointmentUpdate",
+        "appointment_ref": "synthetic-appointment-margaret",
+        "candidate_slot_ids": [
+          "synthetic-slot-july28-1500"
+        ],
+        "duration_minutes": 15,
+        "kind": "proposal_candidate",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "move",
+        "requires_human_confirmation": true,
+        "status": null,
+        "warning_codes": [
+          "no_reservation",
+          "staff_confirmation_required",
+          "staff_selection_required"
+        ],
+        "write_performed": false
+      },
+      "expected_proposal_release": true,
+      "frame_sha256": "sha256:2839f3e9491ffc9177fa6ed136cbd95e97c533cc8a27c783145f8cb89ff2c96b",
+      "oracle_goal": "move",
+      "oracle_program_sha256": "sha256:4dfbf5a458731d591d46e1d71ba57f2853cde0df2cdf1e41c70fc5e80dd87f7f",
+      "oracle_typed_form_sha256": "sha256:4ccb05fa81cccdf0d6945458e1301dba5dba69a350697614efe5d42d45b6b31f",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:ef9cbbd6c42908aea2cfc49d13497788498385ff72680e975d71fe1eb3ad16ba",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:18b6e322d25e1b1f222b08000e3446258d58fc50a6d4552b36ee89a6664a0308"
+    },
+    {
+      "case_code": "b-resize-long",
+      "expected_final_output": {
+        "api_spine_operation_id": "proposeAppointmentUpdate",
+        "appointment_ref": "synthetic-appointment-margaret",
+        "candidate_slot_ids": [],
+        "duration_minutes": 30,
+        "kind": "proposal_candidate",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "resize",
+        "requires_human_confirmation": true,
+        "status": null,
+        "warning_codes": [
+          "staff_confirmation_required"
+        ],
+        "write_performed": false
+      },
+      "expected_proposal_release": true,
+      "frame_sha256": "sha256:e1f6af232756dbe8e930b50b69003ef59b14f65500e94348beb6c75c5b16a98b",
+      "oracle_goal": "resize",
+      "oracle_program_sha256": "sha256:6667d9907a701572972a27dc88ee2f0e69e986ac8098512e38cbbcc6ef958bad",
+      "oracle_typed_form_sha256": "sha256:637333c5ae120f2bf632131d49e459ed64f5b1e6265011021f2c1a690925a8b1",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:07913b218ee125282a2237b176cf9a0f32a0f8ae9fe5fb2e2eb30b99e214bcdb",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:d4dd494919a714c3652f27d1916f71493371676c3d5a0091b528a64b288eb078"
+    },
+    {
+      "case_code": "b-resize-short",
+      "expected_final_output": {
+        "api_spine_operation_id": "proposeAppointmentUpdate",
+        "appointment_ref": "synthetic-appointment-margaret",
+        "candidate_slot_ids": [],
+        "duration_minutes": 10,
+        "kind": "proposal_candidate",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "resize",
+        "requires_human_confirmation": true,
+        "status": null,
+        "warning_codes": [
+          "staff_confirmation_required"
+        ],
+        "write_performed": false
+      },
+      "expected_proposal_release": true,
+      "frame_sha256": "sha256:837fce4489ee6e20a9045164aabe83ca3b222fa573af61283707cd0961805498",
+      "oracle_goal": "resize",
+      "oracle_program_sha256": "sha256:6667d9907a701572972a27dc88ee2f0e69e986ac8098512e38cbbcc6ef958bad",
+      "oracle_typed_form_sha256": "sha256:637333c5ae120f2bf632131d49e459ed64f5b1e6265011021f2c1a690925a8b1",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:91f57521212f78c90c53ec10fb0c86c284fd91279f0bda0cba060955faaf6814",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:89cc79d5b27f4b1f31a3c5b9080f6884a60fd31b91c464694ace6aeddd719afe"
+    },
+    {
+      "case_code": "b-resize-give",
+      "expected_final_output": {
+        "api_spine_operation_id": "proposeAppointmentUpdate",
+        "appointment_ref": "synthetic-appointment-margaret",
+        "candidate_slot_ids": [],
+        "duration_minutes": 30,
+        "kind": "proposal_candidate",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "resize",
+        "requires_human_confirmation": true,
+        "status": null,
+        "warning_codes": [
+          "staff_confirmation_required"
+        ],
+        "write_performed": false
+      },
+      "expected_proposal_release": true,
+      "frame_sha256": "sha256:187f973367e2b9a8a04851d83ee8bc98383112cf45ee2ef8afed9ce04254e307",
+      "oracle_goal": "resize",
+      "oracle_program_sha256": "sha256:6667d9907a701572972a27dc88ee2f0e69e986ac8098512e38cbbcc6ef958bad",
+      "oracle_typed_form_sha256": "sha256:637333c5ae120f2bf632131d49e459ed64f5b1e6265011021f2c1a690925a8b1",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:2f0fad930f2b05ee32cab3adcfa5a0865297ff6802b3ff54057018763a1b8f75",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:667fef0339b638203528a6c0449ef2ec2edec42241270e5c24cd8af2036898e8"
+    },
+    {
+      "case_code": "b-resize-explicit",
+      "expected_final_output": {
+        "api_spine_operation_id": "proposeAppointmentUpdate",
+        "appointment_ref": "synthetic-appointment-margaret",
+        "candidate_slot_ids": [],
+        "duration_minutes": 30,
+        "kind": "proposal_candidate",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "resize",
+        "requires_human_confirmation": true,
+        "status": null,
+        "warning_codes": [
+          "staff_confirmation_required"
+        ],
+        "write_performed": false
+      },
+      "expected_proposal_release": true,
+      "frame_sha256": "sha256:264d1d973c4573f5f522cdfa2f8e05231a37de7e0e15a6b059590c5eb91e2d03",
+      "oracle_goal": "resize",
+      "oracle_program_sha256": "sha256:6667d9907a701572972a27dc88ee2f0e69e986ac8098512e38cbbcc6ef958bad",
+      "oracle_typed_form_sha256": "sha256:637333c5ae120f2bf632131d49e459ed64f5b1e6265011021f2c1a690925a8b1",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:1299a7cf098586e44cb8bf11ec14081ef6d303645a3566e0eb97bf1b92b5d2b2",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:bfc9238f5c1e60c9ade96e7d84a4e8a01a951176ffb2c0bc1f472499adde3a89"
+    },
+    {
+      "case_code": "b-cancel-remove",
+      "expected_final_output": {
+        "api_spine_operation_id": "proposeAppointmentDelete",
+        "appointment_ref": "synthetic-appointment-margaret",
+        "candidate_slot_ids": [],
+        "duration_minutes": 15,
+        "kind": "proposal_candidate",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "cancel",
+        "requires_human_confirmation": true,
+        "status": null,
+        "warning_codes": [
+          "staff_confirmation_required"
+        ],
+        "write_performed": false
+      },
+      "expected_proposal_release": true,
+      "frame_sha256": "sha256:1cd164a738eb1ea15b3440a50201f567c8254373e30b87b1bcfa19bb8dc1e39d",
+      "oracle_goal": "cancel",
+      "oracle_program_sha256": "sha256:57ab5a13e7096354c68a6f940392daff06db6beff9e29a951db535b973ed8530",
+      "oracle_typed_form_sha256": "sha256:3f61b713dda3d7d86edc374bd2eb060dc06303c804b78f5e35d78542a7744d48",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:c4c52a8ae977558a90e6b37715049d172ec8ac8eb8c21d47889ce04a48d2c248",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:b0070c232477f6db64d0b1f79501f6f3a5f7998017528a816344d7d20a0171df"
+    },
+    {
+      "case_code": "b-cancel-calloff",
+      "expected_final_output": {
+        "api_spine_operation_id": "proposeAppointmentDelete",
+        "appointment_ref": "synthetic-appointment-margaret",
+        "candidate_slot_ids": [],
+        "duration_minutes": 15,
+        "kind": "proposal_candidate",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "cancel",
+        "requires_human_confirmation": true,
+        "status": null,
+        "warning_codes": [
+          "staff_confirmation_required"
+        ],
+        "write_performed": false
+      },
+      "expected_proposal_release": true,
+      "frame_sha256": "sha256:a1d22e185e800aa655c19aecc1a678af83bb3397c52a63d15df5d49576305d5f",
+      "oracle_goal": "cancel",
+      "oracle_program_sha256": "sha256:57ab5a13e7096354c68a6f940392daff06db6beff9e29a951db535b973ed8530",
+      "oracle_typed_form_sha256": "sha256:3f61b713dda3d7d86edc374bd2eb060dc06303c804b78f5e35d78542a7744d48",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:dec8ebebd82a59c27c6c014af995ecd15f440c001d95cd725c6a80a72f9daca7",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:4787cc3688d7aef4a5dc763a221f6b53f671d47cc7ae3f9b7cf70a13138413b6"
+    },
+    {
+      "case_code": "b-cancel-takeout",
+      "expected_final_output": {
+        "api_spine_operation_id": "proposeAppointmentDelete",
+        "appointment_ref": "synthetic-appointment-margaret",
+        "candidate_slot_ids": [],
+        "duration_minutes": 15,
+        "kind": "proposal_candidate",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "cancel",
+        "requires_human_confirmation": true,
+        "status": null,
+        "warning_codes": [
+          "staff_confirmation_required"
+        ],
+        "write_performed": false
+      },
+      "expected_proposal_release": true,
+      "frame_sha256": "sha256:a69c8fedcad3684b93ce311c88ee22e7233daeb3aa6ebe0de51341554543ff31",
+      "oracle_goal": "cancel",
+      "oracle_program_sha256": "sha256:57ab5a13e7096354c68a6f940392daff06db6beff9e29a951db535b973ed8530",
+      "oracle_typed_form_sha256": "sha256:3f61b713dda3d7d86edc374bd2eb060dc06303c804b78f5e35d78542a7744d48",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:54b44424ac5ecd8bf49a62c0e6bc0bd319b70f145522f47999843ad8d8afe473",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:a4c1b345096f1c257b1da7f32cb27b258e3656fd5bbb62bedca0034748341d10"
+    },
+    {
+      "case_code": "b-status-complete",
+      "expected_final_output": {
+        "api_spine_operation_id": "proposeAppointmentStatus",
+        "appointment_ref": "synthetic-appointment-margaret",
+        "candidate_slot_ids": [],
+        "duration_minutes": 15,
+        "kind": "proposal_candidate",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "status_change",
+        "requires_human_confirmation": true,
+        "status": "completed",
+        "warning_codes": [
+          "staff_confirmation_required"
+        ],
+        "write_performed": false
+      },
+      "expected_proposal_release": true,
+      "frame_sha256": "sha256:11d747ddc138365a6c853f40489b1eba3424c999d149bc82bae3a738b958af23",
+      "oracle_goal": "status_change",
+      "oracle_program_sha256": "sha256:af1b3c280953c26b4c2ad73f84bb678e05555b66ddcfe7b29b6a619be1ce27fb",
+      "oracle_typed_form_sha256": "sha256:4128fd6eae5779e019ad4c219d3a5b6b75c6c9bfa47ee81c54501c7eb9733b02",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:17c66088946cc8fb7ce01c3e7018b6410a3ee5069f0921e779d1eaacde15ef2f",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:ee367f44b6db1922b6400c130e3b347956d903c6fe8ac689817bffb21cbf6d07"
+    },
+    {
+      "case_code": "b-status-arrived",
+      "expected_final_output": {
+        "api_spine_operation_id": "proposeAppointmentStatus",
+        "appointment_ref": "synthetic-appointment-margaret",
+        "candidate_slot_ids": [],
+        "duration_minutes": 15,
+        "kind": "proposal_candidate",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "status_change",
+        "requires_human_confirmation": true,
+        "status": "arrived",
+        "warning_codes": [
+          "staff_confirmation_required"
+        ],
+        "write_performed": false
+      },
+      "expected_proposal_release": true,
+      "frame_sha256": "sha256:24e6c910bbc2a5cf8d75910cc210ccc41ac34fbf83fd5a967498d8192cdcb911",
+      "oracle_goal": "status_change",
+      "oracle_program_sha256": "sha256:af1b3c280953c26b4c2ad73f84bb678e05555b66ddcfe7b29b6a619be1ce27fb",
+      "oracle_typed_form_sha256": "sha256:4128fd6eae5779e019ad4c219d3a5b6b75c6c9bfa47ee81c54501c7eb9733b02",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:867370addeabaa6a59be12cee6c188e1b8403bc83cfc0dd1c2233b444cb47fa1",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:a1d4ce881fca463439ceeae0b368a0ca65ca860b2c9cb1175ab4c1a1a05a4424"
+    },
+    {
+      "case_code": "b-status-noshow-gap",
+      "expected_final_output": {
+        "api_spine_operation_id": null,
+        "appointment_ref": null,
+        "candidate_slot_ids": [],
+        "duration_minutes": null,
+        "kind": "clarification",
+        "patient_ref": null,
+        "practitioner_ref": null,
+        "proposal_family": "clarification",
+        "requires_human_confirmation": false,
+        "status": null,
+        "warning_codes": [],
+        "write_performed": false
+      },
+      "expected_proposal_release": false,
+      "frame_sha256": "sha256:ad9fa4bb0dc0af3c1bd7d52e944236fb48181e5ac3a0bc2f903b0f4b72eda534",
+      "oracle_goal": "clarification",
+      "oracle_program_sha256": "sha256:4c3360b206db4f84878bfabb0ee372062aacda8f5af973bfa50d14f656b74ac8",
+      "oracle_typed_form_sha256": "sha256:a8d6429b4add501fa2119bccc126f76308161a383cde7d1b97f8b65dc7cb3873",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:eda11d9f8988be254cf70315ad1dfea292633ae6a676923ead5f977a85b153ad",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:9c052ecc2f4af2e1953305cf28248d023b297a67bc262191f974d9e83ca02883"
+    },
+    {
+      "case_code": "b-squeeze-without",
+      "expected_final_output": {
+        "api_spine_operation_id": null,
+        "appointment_ref": null,
+        "candidate_slot_ids": [
+          "synthetic-slot-july27-1215"
+        ],
+        "duration_minutes": 15,
+        "kind": "squeeze_in_assessment",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "squeeze_in_assessment",
+        "requires_human_confirmation": true,
+        "status": null,
+        "warning_codes": [
+          "adjacent_to_break",
+          "manual_squeeze_in_review",
+          "no_reservation",
+          "staff_confirmation_required",
+          "staff_selection_required"
+        ],
+        "write_performed": false
+      },
+      "expected_proposal_release": true,
+      "frame_sha256": "sha256:3ccea057c87c92f76bc4af5adf2fbfe1fc9086147cb7ac9c767cd0fda40ada7c",
+      "oracle_goal": "squeeze_in_assessment",
+      "oracle_program_sha256": "sha256:bdf4552d0371091d9aa06067365ad2eefbad59ebb68c11f28067544140c5a693",
+      "oracle_typed_form_sha256": "sha256:308668af21453019559a1cee00a2b065a4a5868c972288559df29d7e5181c326",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:a4ca54cd85ac95a5fac98dc35907338a36e15cf17748bd8755f2b884c0f7d3f4",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:d2a54e1bc616bed4b395011955e5ca4ff8ca98e90cc4d38533e09c76abca28d6"
+    },
+    {
+      "case_code": "b-squeeze-negated-move",
+      "expected_final_output": {
+        "api_spine_operation_id": null,
+        "appointment_ref": null,
+        "candidate_slot_ids": [
+          "synthetic-slot-july27-1215"
+        ],
+        "duration_minutes": 15,
+        "kind": "squeeze_in_assessment",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "proposal_family": "squeeze_in_assessment",
+        "requires_human_confirmation": true,
+        "status": null,
+        "warning_codes": [
+          "adjacent_to_break",
+          "manual_squeeze_in_review",
+          "no_reservation",
+          "staff_confirmation_required",
+          "staff_selection_required"
+        ],
+        "write_performed": false
+      },
+      "expected_proposal_release": true,
+      "frame_sha256": "sha256:1e4cb643b452e7ef8efa17f6dbc2eee853fba2a0ad63119cb81012648b26f118",
+      "oracle_goal": "squeeze_in_assessment",
+      "oracle_program_sha256": "sha256:bdf4552d0371091d9aa06067365ad2eefbad59ebb68c11f28067544140c5a693",
+      "oracle_typed_form_sha256": "sha256:308668af21453019559a1cee00a2b065a4a5868c972288559df29d7e5181c326",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:50ac93009a4d226488c508b0b771497693ef41b7f989c2febb8a90861cad335e",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:96946a266de17e0e2ae9d6aa998f34d5176a09d4d66a8b1cbd50736927b76699"
+    },
+    {
+      "case_code": "b-clarify-sort",
+      "expected_final_output": {
+        "api_spine_operation_id": null,
+        "appointment_ref": null,
+        "candidate_slot_ids": [],
+        "duration_minutes": null,
+        "kind": "clarification",
+        "patient_ref": null,
+        "practitioner_ref": null,
+        "proposal_family": "clarification",
+        "requires_human_confirmation": false,
+        "status": null,
+        "warning_codes": [],
+        "write_performed": false
+      },
+      "expected_proposal_release": false,
+      "frame_sha256": "sha256:03636121982a64f6970bf24e2b743f3580c4e42f63d9992c94bce5460ca133bf",
+      "oracle_goal": "clarification",
+      "oracle_program_sha256": "sha256:4c3360b206db4f84878bfabb0ee372062aacda8f5af973bfa50d14f656b74ac8",
+      "oracle_typed_form_sha256": "sha256:a8d6429b4add501fa2119bccc126f76308161a383cde7d1b97f8b65dc7cb3873",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:6e57cf4411d91ec3cf25a6ba73ee45a4113b4347fd70227fe7773c8ec90bab7f",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:02ea797b6b3ed86ca0f02f1aaa497704d389d32b31e8754779dbd3b0506daa74"
+    },
+    {
+      "case_code": "b-clarify-different",
+      "expected_final_output": {
+        "api_spine_operation_id": null,
+        "appointment_ref": null,
+        "candidate_slot_ids": [],
+        "duration_minutes": null,
+        "kind": "clarification",
+        "patient_ref": null,
+        "practitioner_ref": null,
+        "proposal_family": "clarification",
+        "requires_human_confirmation": false,
+        "status": null,
+        "warning_codes": [],
+        "write_performed": false
+      },
+      "expected_proposal_release": false,
+      "frame_sha256": "sha256:625ddfe6e32ba88de58845ba558158baca592b8f6c2eb1f2c42f5bfbd8f29444",
+      "oracle_goal": "clarification",
+      "oracle_program_sha256": "sha256:4c3360b206db4f84878bfabb0ee372062aacda8f5af973bfa50d14f656b74ac8",
+      "oracle_typed_form_sha256": "sha256:a8d6429b4add501fa2119bccc126f76308161a383cde7d1b97f8b65dc7cb3873",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:6e0be2788cfee4a8656543b483869021b64aafa05d21e8e28f78a85b473f163a",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:e32b04c4c220e85ce3de33be5357d46b64eb350f4b76acc612a265350dab4a4f"
+    },
+    {
+      "case_code": "b-clarify-details",
+      "expected_final_output": {
+        "api_spine_operation_id": null,
+        "appointment_ref": null,
+        "candidate_slot_ids": [],
+        "duration_minutes": null,
+        "kind": "clarification",
+        "patient_ref": null,
+        "practitioner_ref": null,
+        "proposal_family": "clarification",
+        "requires_human_confirmation": false,
+        "status": null,
+        "warning_codes": [],
+        "write_performed": false
+      },
+      "expected_proposal_release": false,
+      "frame_sha256": "sha256:f1b69708f240885abaf54f1d8499a48deae1cf9241bec52beaa09eef2b1a9aa9",
+      "oracle_goal": "clarification",
+      "oracle_program_sha256": "sha256:4c3360b206db4f84878bfabb0ee372062aacda8f5af973bfa50d14f656b74ac8",
+      "oracle_typed_form_sha256": "sha256:a8d6429b4add501fa2119bccc126f76308161a383cde7d1b97f8b65dc7cb3873",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:ca134d45d874e22c3a00020198c4ed114de8bcb69bbc628a0a0f98ecfddb47dc",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:3fdf4a439f454602293932a9eba64605642814bd68f3822dab73fa503b2cc028"
+    },
+    {
+      "case_code": "b-clarify-fit",
+      "expected_final_output": {
+        "api_spine_operation_id": null,
+        "appointment_ref": null,
+        "candidate_slot_ids": [],
+        "duration_minutes": null,
+        "kind": "clarification",
+        "patient_ref": null,
+        "practitioner_ref": null,
+        "proposal_family": "clarification",
+        "requires_human_confirmation": false,
+        "status": null,
+        "warning_codes": [],
+        "write_performed": false
+      },
+      "expected_proposal_release": false,
+      "frame_sha256": "sha256:e58124eb5b0d7787e250d3524822f90e3904dbf4029a7ee60d7452f7a3bd024a",
+      "oracle_goal": "clarification",
+      "oracle_program_sha256": "sha256:4c3360b206db4f84878bfabb0ee372062aacda8f5af973bfa50d14f656b74ac8",
+      "oracle_typed_form_sha256": "sha256:a8d6429b4add501fa2119bccc126f76308161a383cde7d1b97f8b65dc7cb3873",
+      "proofreader_disposition": "admit",
+      "provider_request_sha256": "sha256:8882081463060ad29eaf4a0aadf090eba9e935bf20f177b8a2956629d1759644",
+      "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "task_sha256": "sha256:a5d23405258e0e8b3a77121ecb6d801e49dac16b912c7524b947020b32e5d00f"
+    }
+  ],
+  "contract": {
+    "broker_judgement_repair": false,
+    "correction_ticket_schema_file_sha256": "sha256:ace35e01913bd01a6f5b6d55921b1c3fa56107a3f94262f356420cbff5bcae38",
+    "include_thoughts": false,
+    "maximum_output_tokens": 2048,
+    "model_output_schema_file_sha256": "sha256:b46d426eb081e1d953849bdd6630e7018f38073de6622dde8f278c34308ad4d5",
+    "natural_response_parsed_into_form": false,
+    "prompt_or_schema_change_within_cohort": false,
+    "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+    "system_instruction_sha256": "sha256:82f8f43c18319e4e15036442d49ac8899e101116920df1bbf78f9e3b3a853868",
+    "temperature": 0,
+    "thinking_budget": 1024,
+    "turn_input_schema_file_sha256": "sha256:c35ab8ec0676f039623476373e8e081c5e1ce46957b4fbca550a76da1ee47ea3"
+  },
+  "credential_reads_performed": 0,
+  "data_class": "authored_synthetic",
+  "effect_ceiling": "proposal_only",
+  "evidence_hash": "sha256:c6409db966743b5830ed363787a13c9110d7c316be364fd743dcdff992ab5e16",
+  "module_provider_blocked_gate": {
+    "boundary": {
+      "api_key_information_retained": false,
+      "appointment_write": false,
+      "credentials_or_tokens_retained": false,
+      "fallback": false,
+      "product_delivery": false,
+      "product_or_database_access": false,
+      "provider_tools": false,
+      "raw_prompt_retained": false,
+      "raw_provider_response_retained": false
+    },
+    "credential_reads_performed": 0,
+    "dual_output": {
+      "agreement_gate_passed": true,
+      "assembled_program_exact": true,
+      "mismatch_correction_ticket_issued": true,
+      "natural_response_parsed_into_form": false,
+      "natural_response_separate": true,
+      "ticket_retains_rejected_text": false,
+      "ticket_sha256": "sha256:c455c096dd9bc21cb77d7018d1f8c1abb4d4adbfbd3cbb946aa815993314dcf1",
+      "typed_form_separate": true
+    },
+    "provider_calls_performed": 0,
+    "provider_contacted": false,
+    "response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+    "result": "reception_one_receptionist_first_v6_provider_blocked_pass",
+    "schema_version": "reception.one.receptionist_first_v6.provider_blocked.v1",
+    "system_instruction_sha256": "sha256:82f8f43c18319e4e15036442d49ac8899e101116920df1bbf78f9e3b3a853868",
+    "thinking": {
+      "budget": 1024,
+      "hidden_reasoning_retained": false,
+      "include_thoughts": false,
+      "thought_token_count_fixture": 20
+    }
+  },
+  "paired_development_not_holdout": true,
+  "provider_calls_performed": 0,
+  "provider_contacted": false,
+  "result": "reception_one_receptionist_first_v6_cohort_provider_blocked_pass",
+  "schema_version": "reception.one.receptionist_first_v6.cohort_provider_blocked.v1",
+  "single_use_identifiers": [
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-create-arrange-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-create-arrange-turn-002"
+      ],
+      "case_code": "b-create-arrange",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-create-arrange-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-create-arrange-ledger-002"
+      ]
+    },
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-create-alias-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-create-alias-turn-002"
+      ],
+      "case_code": "b-create-alias",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-create-alias-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-create-alias-ledger-002"
+      ]
+    },
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-create-preface-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-create-preface-turn-002"
+      ],
+      "case_code": "b-create-preface",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-create-preface-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-create-preface-ledger-002"
+      ]
+    },
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-create-correct-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-create-correct-turn-002"
+      ],
+      "case_code": "b-create-correct",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-create-correct-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-create-correct-ledger-002"
+      ]
+    },
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-move-resched-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-move-resched-turn-002"
+      ],
+      "case_code": "b-move-resched",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-move-resched-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-move-resched-ledger-002"
+      ]
+    },
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-move-shift-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-move-shift-turn-002"
+      ],
+      "case_code": "b-move-shift",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-move-shift-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-move-shift-ledger-002"
+      ]
+    },
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-move-change-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-move-change-turn-002"
+      ],
+      "case_code": "b-move-change",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-move-change-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-move-change-ledger-002"
+      ]
+    },
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-move-correct-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-move-correct-turn-002"
+      ],
+      "case_code": "b-move-correct",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-move-correct-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-move-correct-ledger-002"
+      ]
+    },
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-resize-long-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-resize-long-turn-002"
+      ],
+      "case_code": "b-resize-long",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-resize-long-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-resize-long-ledger-002"
+      ]
+    },
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-resize-short-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-resize-short-turn-002"
+      ],
+      "case_code": "b-resize-short",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-resize-short-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-resize-short-ledger-002"
+      ]
+    },
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-resize-give-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-resize-give-turn-002"
+      ],
+      "case_code": "b-resize-give",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-resize-give-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-resize-give-ledger-002"
+      ]
+    },
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-resize-explicit-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-resize-explicit-turn-002"
+      ],
+      "case_code": "b-resize-explicit",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-resize-explicit-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-resize-explicit-ledger-002"
+      ]
+    },
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-cancel-remove-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-cancel-remove-turn-002"
+      ],
+      "case_code": "b-cancel-remove",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-cancel-remove-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-cancel-remove-ledger-002"
+      ]
+    },
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-cancel-calloff-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-cancel-calloff-turn-002"
+      ],
+      "case_code": "b-cancel-calloff",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-cancel-calloff-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-cancel-calloff-ledger-002"
+      ]
+    },
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-cancel-takeout-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-cancel-takeout-turn-002"
+      ],
+      "case_code": "b-cancel-takeout",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-cancel-takeout-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-cancel-takeout-ledger-002"
+      ]
+    },
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-status-complete-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-status-complete-turn-002"
+      ],
+      "case_code": "b-status-complete",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-status-complete-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-status-complete-ledger-002"
+      ]
+    },
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-status-arrived-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-status-arrived-turn-002"
+      ],
+      "case_code": "b-status-arrived",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-status-arrived-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-status-arrived-ledger-002"
+      ]
+    },
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-status-noshow-gap-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-status-noshow-gap-turn-002"
+      ],
+      "case_code": "b-status-noshow-gap",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-status-noshow-gap-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-status-noshow-gap-ledger-002"
+      ]
+    },
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-squeeze-without-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-squeeze-without-turn-002"
+      ],
+      "case_code": "b-squeeze-without",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-squeeze-without-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-squeeze-without-ledger-002"
+      ]
+    },
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-squeeze-negated-move-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-squeeze-negated-move-turn-002"
+      ],
+      "case_code": "b-squeeze-negated-move",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-squeeze-negated-move-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-squeeze-negated-move-ledger-002"
+      ]
+    },
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-clarify-sort-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-clarify-sort-turn-002"
+      ],
+      "case_code": "b-clarify-sort",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-clarify-sort-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-clarify-sort-ledger-002"
+      ]
+    },
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-clarify-different-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-clarify-different-turn-002"
+      ],
+      "case_code": "b-clarify-different",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-clarify-different-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-clarify-different-ledger-002"
+      ]
+    },
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-clarify-details-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-clarify-details-turn-002"
+      ],
+      "case_code": "b-clarify-details",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-clarify-details-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-clarify-details-ledger-002"
+      ]
+    },
+    {
+      "attempt_ids": [
+        "reception-one-receptionist-first-v6-eval-b-clarify-fit-turn-001",
+        "reception-one-receptionist-first-v6-eval-b-clarify-fit-turn-002"
+      ],
+      "case_code": "b-clarify-fit",
+      "ledger_ids": [
+        "reception-one-receptionist-first-v6-eval-b-clarify-fit-ledger-001",
+        "reception-one-receptionist-first-v6-eval-b-clarify-fit-ledger-002"
+      ]
+    }
+  ],
+  "source_v5_case_codes": [
+    "b-create-arrange",
+    "b-create-alias",
+    "b-create-preface",
+    "b-create-correct",
+    "b-move-resched",
+    "b-move-shift",
+    "b-move-change",
+    "b-move-correct",
+    "b-resize-long",
+    "b-resize-short",
+    "b-resize-give",
+    "b-resize-explicit",
+    "b-cancel-remove",
+    "b-cancel-calloff",
+    "b-cancel-takeout",
+    "b-status-complete",
+    "b-status-arrived",
+    "b-status-noshow-gap",
+    "b-squeeze-without",
+    "b-squeeze-negated-move",
+    "b-clarify-sort",
+    "b-clarify-different",
+    "b-clarify-details",
+    "b-clarify-fit"
+  ],
+  "source_v5_case_count": 24,
+  "source_v5_manifest_content_sha256": "sha256:3cee93c660da5024ba47795e6d994efa62eccd3b6909f1c0cbc90d915548403f",
+  "source_v5_manifest_file_sha256": "sha256:7e68939d4fb951519434b1c5462f8721bc9fc4671abc174edfeda8c938ac5f87"
+}

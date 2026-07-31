@@ -1,0 +1,79 @@
+{
+  "schema_version": "ariadne.rehydration_receipt.v1",
+  "receipt_id": "reception-one-receptionist-first-v62-preplan-20260730",
+  "recorded_at": "2026-07-30T08:36:50Z",
+  "result": "passed",
+  "rehydrated_from_receipt": true,
+  "mandatory_rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "live_handover_current_baton": {
+    "source": "AGENTS.md",
+    "read_completely": true,
+    "current_result": "reception_one_receptionist_first_v61_targeted_repair_fourteen_exact_one_pre_schema_no_release",
+    "new_descendant": "reception-one-receptionist-first-v62-desk-context"
+  },
+  "current_authority_allocation": {
+    "source": "Yuri's v6.2 and all-twenty-four-request instructions",
+    "conductor_and_implementation_owner": "GPT Sol",
+    "external_worker_or_subagent_selected": false
+  },
+  "active_plan_and_acceptance": {
+    "sources": [
+      "docs/bernie-reception-one-receptionist-first-v62-desk-context-plan.md",
+      "docs/security/bernie-reception-one-receptionist-first-v62-threat-model-delta.md",
+      "orchestration/continuity/reception-one-receptionist-first-v62/runtime-policy.json",
+      "orchestration/continuity/reception-one-receptionist-first-v62/occupied-authority.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v62-node.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v62-rehydration-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v62-orchestrator-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v61-provider-free-sol-acceptance.md",
+      "orchestration/continuity/reception-one-receptionist-first-v61/occupied-repair-cohort-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v61/occupied-continuation-evidence.json"
+    ],
+    "cohort": "all_twenty_four_frozen_v6_authored_synthetic_cases",
+    "historical_results_remain_immutable": true
+  },
+  "protected_evidence_boundaries": {
+    "source": "AGENTS.md sections 5 and 6",
+    "protected_holdouts_opened": false,
+    "historical_diary_material_opened": false,
+    "full_practice_diary_context": false,
+    "product_or_database_data": false,
+    "patient_health_or_clinical_data": false,
+    "write_or_confirmation_authority": false,
+    "raw_provider_response_retention": false,
+    "chain_of_thought_retention": false,
+    "fallback": false
+  },
+  "git_refs_and_worktree": {
+    "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+    "head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+    "handoff_current": "4974075b31035d599e081d68e3b85e04a897baa1",
+    "origin_master": "4974075b31035d599e081d68e3b85e04a897baa1",
+    "origin_handoff_current": "4974075b31035d599e081d68e3b85e04a897baa1",
+    "worktree_dirty": true,
+    "unrelated_user_changes_must_be_preserved": true,
+    "commit_push_pr_or_ref_move_authorized": false
+  },
+  "plan_boundary": {
+    "provider": "google_cloud_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "maximum_primary_calls": 24,
+    "maximum_terminal_second_calls": 24,
+    "absolute_call_ceiling": 48,
+    "incremental_cost_ceiling_usd": 1,
+    "data_class": "authored_synthetic",
+    "effect_ceiling": "proposal_only"
+  }
+}

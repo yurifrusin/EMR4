@@ -18,6 +18,8 @@ tags:
     description: Staff-confirmed scheduling commands and proposal preparation.
   - name: SlotSearchCommands
     description: Non-mutating command-style reads that prepare executable proposals.
+  - name: ReceptionOneRuntime
+    description: Default-off authored-synthetic proposal composition.
 
 x-emr4-current-backend-alignment:
   sprint: 123
@@ -375,6 +377,44 @@ paths:
               examples:
                 candidates:
                   $ref: "#/components/examples/SlotSearchProposalEnvelope"
+
+  /appointments/proposals/reception-one/compose:
+    post:
+      tags: [ReceptionOneRuntime]
+      operationId: composeReceptionOneProductContextProposal
+      summary: Compose one typed Reception One proposal from bounded context.
+      description: >
+        Default-off development-only command-style read for an explicitly
+        allowlisted authored-synthetic practice. The trusted backend performs
+        bounded practice-scoped context and slot reads, exposes only
+        request-scoped opaque handles to the planner, and releases only a
+        proofread proposal or clarification. The deterministic planner remains
+        the default. A separately gated isolated_vertex mode may call the exact
+        approved Sydney Vertex lane through the one-use broker and deterministic
+        proofreader, with no provider, model, project, identity, region or
+        deterministic-planner fallback. Neither mode confirms or writes an
+        appointment or changes the legacy interpreter gate.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReceptionOneProductContextRequest"
+      responses:
+        "200":
+          description: Typed proposal, clarification, revision request, or block.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReceptionOneProductContextProposal"
+        "403":
+          description: Environment or practice was not admitted.
+        "404":
+          description: The default-off runtime is not enabled.
+        "502":
+          description: >
+            The separately gated isolated planner failed closed before a
+            proofreader-admitted proposal could be returned.
 
   /appointments/proposals/slot-search/select:
     post:
@@ -1366,6 +1406,292 @@ components:
           maxLength: 64
         verification:
           $ref: "#/components/schemas/ConfirmationReceiptVerification"
+
+    ReceptionOneProductContextRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - contract_version
+        - instruction
+        - reference_date
+        - surface_id
+        - correlation_id
+        - data_class
+      properties:
+        contract_version:
+          const: reception.one.product-context-request.v1
+        instruction:
+          type: string
+          minLength: 1
+          maxLength: 512
+        reference_date:
+          $ref: "#/components/schemas/ClinicDate"
+        surface_id:
+          type: string
+          minLength: 1
+          maxLength: 100
+        correlation_id:
+          type: string
+          minLength: 3
+          maxLength: 100
+        data_class:
+          const: authored_synthetic
+        planner_mode:
+          type: string
+          enum: [deterministic, isolated_vertex]
+          default: deterministic
+        selected_appointment_id:
+          oneOf:
+            - $ref: "#/components/schemas/Uuid"
+            - type: "null"
+
+    ReceptionOneProductContextSlot:
+      type: object
+      additionalProperties: false
+      required:
+        - slot_handle
+        - appointment_date
+        - start_time_local
+        - duration_minutes
+        - warning_codes
+      properties:
+        slot_handle:
+          type: string
+          pattern: "^synthetic-[a-z0-9][a-z0-9-]{2,95}$"
+        appointment_date:
+          $ref: "#/components/schemas/ClinicDate"
+        start_time_local:
+          $ref: "#/components/schemas/ClinicTime"
+        duration_minutes:
+          type: integer
+          minimum: 5
+          maximum: 180
+        warning_codes:
+          type: array
+          maxItems: 8
+          items:
+            type: string
+
+    ReceptionOneProductContextReview:
+      type: object
+      additionalProperties: false
+      required:
+        - disposition
+        - operator_ids
+        - safe_repairs
+        - violation_paths
+        - context_revision
+      properties:
+        disposition:
+          type: string
+          enum: [admit, revision_required, clarification_required, reject]
+        plan_hash:
+          type: [string, "null"]
+        operator_ids:
+          type: array
+          maxItems: 12
+          items:
+            type: string
+        safe_repairs:
+          type: array
+          maxItems: 12
+          items:
+            type: string
+        violation_paths:
+          type: array
+          maxItems: 20
+          items:
+            type: string
+        context_revision:
+          type: integer
+          minimum: 1
+
+    ReceptionOneProductContextAppointment:
+      type: object
+      additionalProperties: false
+      required:
+        - appointment_handle
+        - appointment_date
+        - start_time_local
+        - duration_minutes
+        - status
+      properties:
+        appointment_handle:
+          type: string
+          minLength: 3
+          maxLength: 100
+        appointment_date:
+          $ref: "#/components/schemas/ClinicDate"
+        start_time_local:
+          $ref: "#/components/schemas/ClinicTime"
+        duration_minutes:
+          type: integer
+          minimum: 5
+          maximum: 480
+        status:
+          type: string
+          enum: [booked, arrived, completed, dna]
+
+    ReceptionOneProductContextAdapterReview:
+      type: object
+      additionalProperties: false
+      required:
+        - adapter_kind
+        - performed
+        - safe
+        - summary
+        - warning_codes
+        - block_codes
+        - candidate_count
+        - freshness_verified
+        - confirmation_evidence_released
+        - write_performed
+      properties:
+        adapter_kind:
+          type: string
+          enum: [update_proposal, delete_proposal, squeeze_in_assessment]
+        performed:
+          const: true
+        safe:
+          type: boolean
+        summary:
+          type: string
+          minLength: 1
+          maxLength: 500
+        warning_codes:
+          type: array
+          maxItems: 20
+          items:
+            type: string
+        block_codes:
+          type: array
+          maxItems: 20
+          items:
+            type: string
+        candidate_count:
+          type: integer
+          minimum: 0
+          maximum: 24
+        freshness_verified:
+          type: boolean
+        confirmation_evidence_released:
+          const: false
+        write_performed:
+          const: false
+
+    ReceptionOneProductContextProposal:
+      type: object
+      additionalProperties: false
+      required:
+        - contract_version
+        - result
+        - safe
+        - summary
+        - request_id
+        - correlation_id
+        - context_revision
+        - data_class
+        - candidate_slots
+        - warning_codes
+        - review
+        - requires_confirmation
+        - proposal_only
+        - write_performed
+        - confirmation_performed
+        - planner_mode
+        - provider_calls
+        - model_database_access
+        - database_reads_performed
+        - legacy_interpreter_gate_changed
+      properties:
+        contract_version:
+          const: reception.one.product-context-proposal.v1
+        result:
+          type: string
+          enum: [proposal_ready, clarification_required, revision_required, blocked]
+        safe:
+          type: boolean
+        summary:
+          type: string
+          minLength: 1
+          maxLength: 500
+        request_id:
+          type: string
+        correlation_id:
+          type: string
+        context_revision:
+          type: integer
+          minimum: 1
+        data_class:
+          const: authored_synthetic
+        patient_handle:
+          type: [string, "null"]
+        patient_display:
+          type: [string, "null"]
+        practitioner_handle:
+          type: [string, "null"]
+        practitioner_display:
+          type: [string, "null"]
+        goal:
+          type: [string, "null"]
+        operation_id:
+          type: [string, "null"]
+        selected_appointment:
+          oneOf:
+            - $ref: "#/components/schemas/ReceptionOneProductContextAppointment"
+            - type: "null"
+        proposed_appointment_date:
+          oneOf:
+            - $ref: "#/components/schemas/ClinicDate"
+            - type: "null"
+        proposed_start_time_local:
+          oneOf:
+            - $ref: "#/components/schemas/ClinicTime"
+            - type: "null"
+        proposed_duration_minutes:
+          type: [integer, "null"]
+          minimum: 5
+          maximum: 480
+        adapter_review:
+          oneOf:
+            - $ref: "#/components/schemas/ReceptionOneProductContextAdapterReview"
+            - type: "null"
+        candidate_slots:
+          type: array
+          maxItems: 24
+          items:
+            $ref: "#/components/schemas/ReceptionOneProductContextSlot"
+        warning_codes:
+          type: array
+          maxItems: 20
+          items:
+            type: string
+        review:
+          $ref: "#/components/schemas/ReceptionOneProductContextReview"
+        requires_confirmation:
+          const: true
+        proposal_only:
+          const: true
+        write_performed:
+          const: false
+        confirmation_performed:
+          const: false
+        planner_mode:
+          type: string
+          enum: [deterministic, isolated_vertex]
+        provider_calls:
+          type: integer
+          minimum: 0
+          maximum: 2
+        runtime_audit_ref:
+          type: [string, "null"]
+          maxLength: 100
+        model_database_access:
+          const: false
+        database_reads_performed:
+          type: boolean
+        legacy_interpreter_gate_changed:
+          const: false
 
   examples:
     AppointmentCreateProposalCommand:

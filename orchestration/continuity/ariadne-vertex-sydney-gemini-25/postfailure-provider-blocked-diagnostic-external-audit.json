@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.vertex_sydney_gemini_25_postfailure_external_audit.v1",
+  "reviewed_on": "2026-07-24",
+  "review_mode": "provider_blocked_repository_local_and_public_official_contract_review",
+  "result": "ariadne_vertex_sydney_gemini_25_postfailure_external_audit_pass",
+  "diagnostic_result": "ariadne_vertex_sydney_gemini_25_postfailure_diagnostic_pass",
+  "historical_binding": {
+    "attempt_id": "gemini-25-primary-001",
+    "terminal_rehearsal_result": "ariadne_vertex_sydney_gemini_25_occupied_rehearsal_revision_required",
+    "occupied_primary_calls": 1,
+    "occupied_retries": 0,
+    "occupied_ledger_status": "consumed",
+    "provider_request_hash": "sha256:6710af194aba6a2731008475e5509fa27ba12c8b58e995e1952faa036ecba61c",
+    "historical_artifacts_modified": false
+  },
+  "frozen_provider_binding": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "fallback": false
+  },
+  "artifact_hashes": {
+    "diagnostic_plan": "sha256:ce3eaa414edebed2042018b44813b2778b998e096f37c7aa6f95a433c6253fba",
+    "diagnostic_script": "sha256:83cfc0258320157ab30df3305bf35447429315b849999b124685d2c5e4cd8673",
+    "diagnostic_test": "sha256:7999ad28a56577da10abaa88abb9159731c3c002fa401c519471e4c5b0c9e469",
+    "diagnostic_evidence": "sha256:0a4c1ae8b40105bee1c99c8eb5ec18daaed9b0ecf26dee8cf09678839e11f701",
+    "diagnostic_closeout": "sha256:0d3e130edd926ac7a8f0914f2e82e98090a0a7e0d2090eb92e49e3c8ade9521c",
+    "sol_review": "sha256:b3e4ac68978e15c9665c65b515847b64ffcce14ec2933bc2fae25021b2041167"
+  },
+  "verified": {
+    "exact_historical_request_hash_reconstructed": true,
+    "raw_prompt_retained": false,
+    "raw_provider_error_retained_or_recovered": false,
+    "identified_field_path": "generationConfig.responseSchema.properties.total_tiles.enum[0]",
+    "actual_json_type": "integer",
+    "official_required_json_type": "string",
+    "installed_official_proto_field_type": "TYPE_STRING",
+    "original_full_local_protobuf_parse": "failed",
+    "single_field_counterfactual_local_parse": "passed",
+    "counterfactual_transmitted": false,
+    "deterministic_request_contract_defect_proved": true,
+    "request_constructor_modified": false,
+    "historical_server_named_field_proved": false,
+    "future_provider_acceptance_proved": false
+  },
+  "official_contract_sources": [
+    "https://docs.cloud.google.com/gemini-enterprise-agent-platform/reference/rest/v1/projects.locations.endpoints/generateContent",
+    "https://docs.cloud.google.com/gemini-enterprise-agent-platform/reference/rest/v1/Schema",
+    "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/capabilities/control-generated-output",
+    "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/thinking"
+  ],
+  "authority_accounting": {
+    "provider_calls": 0,
+    "credential_operations": 0,
+    "cloud_control_reads": 0,
+    "prompt_transmissions": 0,
+    "occupied_ledgers_opened": 0,
+    "request_constructor_modified": false,
+    "retry_or_fallback_performed": false,
+    "retry_authorized": false,
+    "external_state_changed": false,
+    "product_database_clinical_patient_command_or_release_authority": false
+  },
+  "proof_limits": [
+    "The discarded provider message prevents proving which field the historical Vertex response named.",
+    "The deterministic enum-type defect is sufficient to invalidate the exact retained request and is the leading explanation for the HTTP 400, but the diagnosis cannot prove that it was the server's only validation failure.",
+    "The single-field counterfactual proves complete local official-protobuf parsing only; it was not sent and does not prove provider acceptance, model inference or typed output.",
+    "The configured and observed Sydney locational endpoint does not prove Australian physical processing or sovereign processing."
+  ],
+  "disposition": "diagnosis_accepted_no_request_revision_retry_or_provider_call_authority"
+}

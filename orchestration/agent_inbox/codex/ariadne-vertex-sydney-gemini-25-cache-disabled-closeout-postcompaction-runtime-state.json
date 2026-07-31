@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "finalize_fail_closed_external_audit_continuity_compass_and_handover",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_closeout_postcompaction_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "DeepSeek is outside the exact Google Vertex route and receives no continuation authority."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude is not selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external worker transport is authorised."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Tranches 1 through 4 passed under the exact Gemini 2.5 Flash Sydney and Bernie impersonated-ADC binding.",
+        "Exactly one occupied authored-synthetic request returned bounded HTTP 400 INVALID_ARGUMENT before a candidate.",
+        "The occupied ledger is consumed, no deterministic request-contract defect was identified, and the conditional retry is closed.",
+        "No proofreader release or fallback occurred, cleanup is recorded complete, and no further provider call is authorised."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The explicitly required independent repository-only audit passed and received no cloud, provider, credential, Docker, Git, integration or baton authority."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/codex/ariadne-vertex-sydney-gemini-25-cache-disabled-preattempt-receipt.json"
+  ],
+  "assigned_agent_ids": []
+}

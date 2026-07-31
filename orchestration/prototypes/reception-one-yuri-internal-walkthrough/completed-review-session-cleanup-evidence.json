@@ -1,0 +1,13 @@
+{
+  "schema_version": "reception_one.yuri_internal_walkthrough_session_cleanup.v1",
+  "observed_at": "2026-07-28T23:59:22Z",
+  "review_id": "yuri-walkthrough-20260728232225",
+  "owned_database": "gp_pms_reception_one_combined_scope_9c41b7e2_20260721",
+  "owned_python_processes_present": false,
+  "walkthrough_port_3000_listener_present": false,
+  "walkthrough_port_8001_listener_present": false,
+  "owned_database_present": false,
+  "provider_used": false,
+  "note": "A disconnected user Chrome tab remained open; it is not a walkthrough runtime process and was preserved.",
+  "status": "passed"
+}

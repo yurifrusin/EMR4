@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan_provider_blocked_diagnosis_of_closed_vertex_http_400",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_rehydration_and_fresh_yuri_diagnostic_authority",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external implementation worker is needed for the serial repository-local diagnostic."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude is not selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external worker transport is authorised."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The occupied rehearsal is closed and immutable with one consumed call, zero retries, no candidate and bounded HTTP 400 INVALID_ARGUMENT.",
+        "Yuri has now separately authorised diagnosis of that failure after closeout.",
+        "The new authority is interpreted as provider-blocked request-contract diagnosis only: no model call, occupied ledger, credential refresh, cloud mutation, retry, prompt transmission or broader error disclosure.",
+        "Any actual request revision or further occupied call remains a separate Yuri decision after the diagnostic result."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No subagent is selected; the diagnostic is serial and tightly coupled to the immutable retained request evidence."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/codex/ariadne-vertex-sydney-gemini-25-cache-disabled-preacceptance-receipt.json"
+  ],
+  "assigned_agent_ids": []
+}

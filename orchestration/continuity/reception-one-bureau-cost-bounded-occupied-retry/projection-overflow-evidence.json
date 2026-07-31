@@ -1,0 +1,153 @@
+{
+  "blocked_external_hosts": [
+    "appsforoffice.microsoft.com"
+  ],
+  "bounded_after_scroll": {
+    "canvas": {
+      "bottom": 546,
+      "client_height": 276,
+      "overflow_y": "auto",
+      "scroll_height": 686,
+      "scroll_top": 410,
+      "scrollbar_color": "rgb(120, 149, 143) rgb(238, 241, 237)",
+      "scrollbar_gutter": "stable",
+      "top": 270
+    },
+    "canvas_clear_of_form": true,
+    "family": "availability_slots",
+    "first_slot_visible": false,
+    "form_visible": true,
+    "horizontal_overflow_px": 0,
+    "last_slot_visible": true,
+    "shell": {
+      "bottom": 618,
+      "height": 546,
+      "top": 72
+    },
+    "slot_count": 11,
+    "viewport": {
+      "height": 650,
+      "width": 1024
+    }
+  },
+  "bounded_initial": {
+    "canvas": {
+      "bottom": 546,
+      "client_height": 276,
+      "overflow_y": "auto",
+      "scroll_height": 686,
+      "scroll_top": 232,
+      "scrollbar_color": "rgb(120, 149, 143) rgb(238, 241, 237)",
+      "scrollbar_gutter": "stable",
+      "top": 270
+    },
+    "canvas_clear_of_form": true,
+    "family": "availability_slots",
+    "first_slot_visible": false,
+    "form_visible": true,
+    "horizontal_overflow_px": 0,
+    "last_slot_visible": false,
+    "shell": {
+      "bottom": 618,
+      "height": 546,
+      "top": 72
+    },
+    "slot_count": 11,
+    "viewport": {
+      "height": 650,
+      "width": 1024
+    }
+  },
+  "browser_path": "repository_playwright_after_in_app_browser_dom_inspection_timeout",
+  "candid_limit": "This provider-free fixture proves only projection sizing, bounded internal scrolling and result reachability in Chromium. It does not prove provider, production or clinical behavior.",
+  "checks": {
+    "availability_family_rendered": true,
+    "bounded_last_result_reachable": true,
+    "bounded_scroll_is_available": true,
+    "canvas_owns_vertical_overflow": true,
+    "composer_remains_visible_and_separate": true,
+    "desktop_last_result_reachable": true,
+    "desktop_projection_grew_beyond_old_690px_cap": true,
+    "desktop_projection_within_viewport": true,
+    "desktop_scroll_is_available_when_needed": true,
+    "no_horizontal_overflow": true,
+    "no_provider_request": true,
+    "no_relevant_console_error": true,
+    "only_office_bootstrap_was_blocked": true,
+    "result_cohort_is_scroll_worthy": true
+  },
+  "credential_reads": 0,
+  "data_class": "authored_synthetic",
+  "database_reads": 0,
+  "database_writes": 0,
+  "desktop_after_scroll": {
+    "canvas": {
+      "bottom": 779,
+      "client_height": 454,
+      "overflow_y": "auto",
+      "scroll_height": 686,
+      "scroll_top": 232,
+      "scrollbar_color": "rgb(120, 149, 143) rgb(238, 241, 237)",
+      "scrollbar_gutter": "stable",
+      "top": 324
+    },
+    "canvas_clear_of_form": true,
+    "family": "availability_slots",
+    "first_slot_visible": false,
+    "form_visible": true,
+    "horizontal_overflow_px": 0,
+    "last_slot_visible": true,
+    "shell": {
+      "bottom": 851,
+      "height": 756,
+      "top": 95
+    },
+    "slot_count": 11,
+    "viewport": {
+      "height": 900,
+      "width": 1440
+    }
+  },
+  "desktop_initial": {
+    "canvas": {
+      "bottom": 779,
+      "client_height": 454,
+      "overflow_y": "auto",
+      "scroll_height": 686,
+      "scroll_top": 0,
+      "scrollbar_color": "rgb(120, 149, 143) rgb(238, 241, 237)",
+      "scrollbar_gutter": "stable",
+      "top": 324
+    },
+    "canvas_clear_of_form": true,
+    "family": "availability_slots",
+    "first_slot_visible": true,
+    "form_visible": true,
+    "horizontal_overflow_px": 0,
+    "last_slot_visible": false,
+    "shell": {
+      "bottom": 851,
+      "height": 756,
+      "top": 95
+    },
+    "slot_count": 11,
+    "viewport": {
+      "height": 900,
+      "width": 1440
+    }
+  },
+  "evidence_hash": "sha256:4d95a93d22e3aed273b2388530d4a0899bd72877ba0645183142141f496fc659",
+  "expected_aborted_resource_error_count": 1,
+  "network_request_count": 8,
+  "provider_calls": 0,
+  "provider_hosts": [],
+  "relevant_console_errors": [],
+  "request_hash": "sha256:57236cf70556070a5c800da64f46372636dcec38f4979f9816a707261d009f5b",
+  "request_text_retained": false,
+  "result": "reception_one_projection_overflow_acceptance_pass",
+  "schema_version": "reception.one.projection_overflow_acceptance.v1",
+  "screenshots": [
+    "orchestration/continuity/reception-one-bureau-cost-bounded-occupied-retry/projection-overflow-desktop.png",
+    "orchestration/continuity/reception-one-bureau-cost-bounded-occupied-retry/projection-overflow-bounded-scroll.png"
+  ]
+}

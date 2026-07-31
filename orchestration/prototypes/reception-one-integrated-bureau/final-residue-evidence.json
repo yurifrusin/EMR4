@@ -1,0 +1,22 @@
+{
+  "evidence_version": "reception.one.integrated-bureau-final-residue.v1",
+  "observed_at": "2026-07-29T01:00:48Z",
+  "result": "pass",
+  "checks": {
+    "acceptance_browser_closed": true,
+    "owned_processes_absent": true,
+    "owned_static_server_removed": true,
+    "port_3000_listener_absent": true,
+    "owned_containers_absent": true,
+    "owned_networks_absent": true,
+    "owned_images_absent": true,
+    "temporary_credentials_created": false
+  },
+  "scope": "Task-owned Reception One integrated Bureau browser, static-server, process and Docker residue only.",
+  "explicit_exclusions": [
+    "unrelated user browser processes",
+    "unrelated containers, networks and images",
+    "provider credentials",
+    "provider execution"
+  ]
+}

@@ -7,6 +7,7 @@ LABEL org.opencontainers.image.title="EMR4 Ariadne comparative one-use broker" \
       emr4.ariadne.protocol="terra-gemini-comparative-rehearsal-v1"
 WORKDIR /opt/ariadne
 COPY ariadne_comparative_one_use_broker.mjs /opt/ariadne/broker.mjs
+COPY ariadne_provider_contracts.mjs /opt/ariadne/ariadne_provider_contracts.mjs
 USER node
 CMD ["node", "/opt/ariadne/broker.mjs"]
 

@@ -1,0 +1,64 @@
+{
+  "schema_version": "reception.one.extended_proposal_runtime.policy.v1",
+  "status": "authorised_frozen",
+  "environment": "dev",
+  "feature_default": "disabled",
+  "data_class": "authored_synthetic",
+  "proposal_families": [
+    "move",
+    "cancellation_review",
+    "duration_change",
+    "squeeze_in_assessment"
+  ],
+  "api_spine": {
+    "graphql_mutation_allowed": false,
+    "confirmation_allowed": false,
+    "appointment_write_allowed": false,
+    "update_proposal_operation": "proposeAppointmentUpdate",
+    "delete_proposal_operation": "proposeAppointmentDelete",
+    "squeeze_in_operation": null
+  },
+  "context": {
+    "authentication_required": true,
+    "practice_scope_required": true,
+    "opaque_request_scoped_handles": true,
+    "selected_appointment_uuid_visible_to_planner": false,
+    "clinical_or_free_note_fields_allowed": false,
+    "real_or_product_derived_data_allowed": false
+  },
+  "planner": {
+    "default": "provider_blocked",
+    "effect_ceiling": "proposal_only",
+    "closed_operator_catalogue": true,
+    "deterministic_proofreader_required": true,
+    "raw_draft_product_delivery": false
+  },
+  "occupied_gate": {
+    "provider": "google_cloud_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "provider_fallback": false,
+    "provider_tools": false,
+    "grounding": false,
+    "retrieval": false,
+    "cache_creation": false,
+    "cumulative_cost_ceiling_usd": 1,
+    "absolute_call_ceiling": 2,
+    "retry_policy": "one_primary_plus_at_most_one_deterministic_request_contract_repair_stop_after_first_admitted_result"
+  },
+  "closed": [
+    "real_patient_or_product_derived_data",
+    "appointment_confirmation_or_write",
+    "word_runtime_wiring",
+    "production",
+    "deployment",
+    "release",
+    "provider_or_regional_substitution",
+    "api_key_or_static_key_authentication",
+    "commit_push_pull_request_or_protected_ref_movement"
+  ]
+}

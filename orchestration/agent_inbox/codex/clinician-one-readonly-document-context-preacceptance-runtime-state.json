@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "accept_and_close_one_provider_free_typed_read_only_clinician_one_document_context_adapter",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_clinician_one_document_context_preacceptance",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker was selected; this bounded repository-local increment remained Sol-owned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport was selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external provider or reviewer was selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: raisa_dual_host_foundation_pass at Continuity revision 172 and Compass revision 153 is the accepted predecessor.",
+        "current_authority_allocation: Yuri chose to continue here with the recommended provider-free typed read-only Clinician One document-context increment.",
+        "active_plan_and_acceptance: one exact local authored-synthetic fixture grant permits a single current-selection read under a 1,200-character and 40-line ceiling; no whole-document read or truncation is admitted.",
+        "protected_evidence_boundaries: protected holdouts, historical Diary material, existing real documents, patient, health and clinical data, credentials, provider material, microphone audio and hidden reasoning remained unopened and unused.",
+        "git_refs_and_worktree: HEAD remains 5b1ea7952fb08eea333da0e63f166d3895ccea32 on codex/ariadne-terra-gemini-comparative-rehearsal; master, handoff/current, origin/master and origin/handoff/current remain 4974075b31035d599e081d68e3b85e04a897baa1; unrelated worktree changes are preserved.",
+        "Dependency-injected desktop and web selection fixtures admitted exact typed frames; replay, mobile, unknown, missing host, empty, oversized, over-line and read-error cases failed closed.",
+        "The ordinary-browser card rendered with zero relevant console warnings or errors and remained disabled after attestation because Word capability was absent.",
+        "Provider, backend, database, network, microphone, document-write, patient-context, clinical-command and write counts are zero; task-owned residue is absent."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

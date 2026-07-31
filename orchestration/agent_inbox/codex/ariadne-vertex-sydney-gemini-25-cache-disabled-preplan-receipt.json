@@ -1,0 +1,68 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_integration_cloud_mutation_or_provider_call_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "execute_cache_disabled_continuation_from_complete_read_only_tranche_3",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md Current Baton and exact cache-control continuation requirement",
+    "current_authority_allocation": [
+      "docs/ariadne-vertex-sydney-bounded-work-cell-authority.md",
+      "docs/ariadne-vertex-sydney-gemini-25-flash-authority-delta.md",
+      "Yuri sanitized cache-control verification"
+    ],
+    "active_plan_and_acceptance": [
+      "docs/ariadne-vertex-sydney-gemini-25-cache-disabled-continuation-plan.md",
+      "orchestration/continuity/ariadne-vertex-sydney-gemini-25/cache-disabled-operator-evidence.json",
+      "orchestration/continuity/emr4-continuity-graph.json revision 39",
+      "orchestration/continuity/emr4-compass.json map revision 26",
+      "docs/ariadne-compass-current.md exact rendered report"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5-6 and exact authored-synthetic, Sydney inference, keyless ADC, no-fallback, isolation, audit, USD 1, two-call, product/database/PII/command and external-mutation stops",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true
+    }
+  },
+  "frozen_plan_binding": {
+    "continuity_node": "ariadne-vertex-sydney-gemini-25-cache-disabled-continuation",
+    "continuity_graph_revision": 39,
+    "compass_map_revision": 26,
+    "rendered_compass_validated": true,
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "inference_endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "cache_management_endpoint_hostname": "us-central1-aiplatform.googleapis.com",
+    "data_classification": "authored_synthetic_only",
+    "isolation": "occupied_cell_without_adc_oauth_api_key_gcloud_or_unrestricted_network",
+    "audit": "external_hash_chained_typewriter_keys_without_raw_prompt_response_or_reasoning",
+    "primary_call_ceiling": 1,
+    "conditional_request_contract_retry_ceiling": 1,
+    "absolute_occupied_call_ceiling": 2,
+    "application_cost_ceiling_usd": 1,
+    "first_open_gate": "complete_read_only_tranche_3",
+    "external_state_change_authority": false,
+    "provider_call_authority_at_receipt": false
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

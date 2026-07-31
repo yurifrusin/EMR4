@@ -1,0 +1,255 @@
+{
+  "attempt_id": "gemini-25-repair-dry-run-visual-003",
+  "broker": {
+    "api_key_authentication_used": false,
+    "endpoint_policy_hash": "sha256:96c95024b6b8d2968914ffbf393f04c7791b8e634ef1bfbe966a4054b6af5e16",
+    "environment_forwarded_names": [
+      "APPDATA",
+      "COMSPEC",
+      "LOCALAPPDATA",
+      "PATH",
+      "PATHEXT",
+      "SYSTEMDRIVE",
+      "SYSTEMROOT",
+      "TEMP",
+      "TMP",
+      "USERPROFILE",
+      "WINDIR"
+    ],
+    "google_application_credentials_forwarded": false,
+    "host_purpose_built_one_use_process": true,
+    "process_exit_code": 0
+  },
+  "build_context": {
+    "file_count": 5,
+    "manifest_hash": "sha256:875c804251820b254180c78ab47da1fdef87c18efeaf1b9481f169dbc8951a06",
+    "repository_root_used": false,
+    "source_hashes": {
+      "orchestration/continuity/reception-one-visual-synthesis/Dockerfile": "sha256:7a3b0bbfc14a7a3742782db01e8e5461a654c7afe00b616c053ed9ee376c3acf",
+      "orchestration/continuity/reception-one-visual-synthesis/design-candidate.schema.json": "sha256:fe915b84a72f6a0064f17f1eeb98ee31c14c69e9a41e2990026b05dd5f60b44f",
+      "orchestration/continuity/reception-one-visual-synthesis/dry-run-003-cell-request.json": "sha256:22523283b18cc0d8ed72711a32b2ca2753d5fd06122aafa40436bd0f72f498b8",
+      "scripts/ariadne_vertex_sydney_gemini_25_cell.py": "sha256:3e4a758296ad014e5a05ea8be77c7a8b9362a44809bdeb7a4fa0652a53648028",
+      "scripts/ariadne_vertex_sydney_gemini_25_relay.py": "sha256:a3aa57e891c50ff1bde03154dbe3a40ae2780b19d384eb4685100d7b945dbbc2"
+    },
+    "temporary_exact_allowlist": true
+  },
+  "cell_effective_policy": {
+    "cap_add": [],
+    "cap_drop": [
+      "ALL"
+    ],
+    "hostname": "ariadne-vertex-cell",
+    "memory_bytes": 134217728,
+    "memory_swap_bytes": 134217728,
+    "mount_count": 0,
+    "nano_cpus": 500000000,
+    "network_names": [
+      "reception-one-visual-synthesis-internal"
+    ],
+    "nofile_exact": true,
+    "pids_limit": 64,
+    "port_binding_count": 0,
+    "privileged": false,
+    "publish_all_ports": false,
+    "read_only_rootfs": true,
+    "security_opt": [
+      "no-new-privileges=true"
+    ],
+    "tmpfs": {
+      "/tmp": "rw,noexec,nosuid,size=8m"
+    },
+    "user": "65532:65532"
+  },
+  "cleanup": {
+    "base_image_state_preserved": true,
+    "broker_process_absent": true,
+    "cell_container_absent": true,
+    "cell_image_absent": true,
+    "daemon_wide_prune_performed": false,
+    "internal_network_absent": true,
+    "relay_container_absent": true,
+    "relay_image_absent": true,
+    "temporary_context_absent": true,
+    "temporary_token_absent": true
+  },
+  "evidence_hash": "sha256:ebb18ad38c9382961deb69e589322b33fc06146c701cf5eb92b15aee3f44a2f3",
+  "exact_binding": {
+    "api_key_authentication_used": false,
+    "authentication": "keyless_impersonated_service_account_adc",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "location": "australia-southeast1",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "provider": "google_vertex_ai",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"
+  },
+  "exchange": {
+    "audit_event_count": 7,
+    "audit_event_types": [
+      "broker_ready",
+      "request_admitted",
+      "ledger_consumed",
+      "provider_request_constructed",
+      "provider_call_simulated",
+      "proofreader_completed",
+      "release_committed"
+    ],
+    "audit_hash_chain_valid": true,
+    "audit_terminal_hash": "sha256:16ae9a8fe42fd3e8eca80cd742e779ec6cb9ffacb53676cd9a67bec272e05f62",
+    "cell_exit_code": 0,
+    "cell_state": {
+      "dead": false,
+      "error_empty": true,
+      "exit_code": 0,
+      "oom_killed": false,
+      "running": false,
+      "status": "exited"
+    },
+    "proofreader": {
+      "disposition": "released",
+      "findings": [],
+      "released_field_manifest": [
+        "design_thesis",
+        "visual_direction",
+        "composition",
+        "density",
+        "typography",
+        "palette",
+        "priority_order",
+        "responsive_strategy",
+        "state_treatments",
+        "interaction_recommendations",
+        "risk_ids",
+        "evidence_ids",
+        "authority_class"
+      ],
+      "safe_repairs": [
+        "evidence_ids_deterministically_ordered",
+        "risk_ids_deterministically_ordered"
+      ]
+    },
+    "relay_state": {
+      "dead": false,
+      "error_empty": true,
+      "exit_code": 0,
+      "oom_killed": false,
+      "running": true,
+      "status": "running"
+    },
+    "release": {
+      "authority_class": "design_candidate_only",
+      "composition": "conversation_rail_plus_projection_canvas",
+      "density": "balanced",
+      "design_thesis": "A calm editorial workspace keeps scope and state above a focused projection while actions remain explicit and reversible.",
+      "evidence_ids": [
+        "authority_boundary",
+        "one_source",
+        "ordinary_escape",
+        "privacy_resume",
+        "quiet_change",
+        "scope_visible",
+        "state_distinct",
+        "tablet_primary"
+      ],
+      "interaction_recommendations": [
+        "Keep the scope ribbon and state label anchored above the active projection.",
+        "Let the primary action follow the selected item while the ordinary schedule escape stays persistent.",
+        "Use restrained emphasis so proposal and changed-state cues remain unmistakable without dominating the work."
+      ],
+      "palette": "paper_ink_eucalyptus",
+      "priority_order": [
+        "scope",
+        "state",
+        "projection",
+        "primary_action",
+        "history",
+        "ordinary_diary"
+      ],
+      "responsive_strategy": {
+        "phone": "single_column_sequential",
+        "tablet_landscape": "rail_canvas",
+        "tablet_portrait": "stacked_composer_scope_canvas"
+      },
+      "risk_ids": [
+        "dense_metadata_competes_with_task",
+        "phone_comparison_loses_alignment",
+        "proposal_state_could_resemble_commitment"
+      ],
+      "state_treatments": {
+        "answer": "quiet",
+        "blocked": "warning",
+        "notice": "warning",
+        "proposal": "accent",
+        "receipt": "success",
+        "selection": "accent"
+      },
+      "typography": "serif_wordmark_humanist_sans_ui",
+      "visual_direction": "editorial_clinical"
+    },
+    "request_hash": "sha256:b4caed12c06ea32e2cee054a7cf364868ee5f690fae7efdb15d1a910e8f93b40",
+    "schema_hash": "sha256:254f0b950c613f596f0a8b1b563f50eec5094f4d41f7446c00936f8663181df4"
+  },
+  "explicit_exclusions": {
+    "api_key_information_recorded": false,
+    "chain_of_thought_recorded": false,
+    "command_authority": false,
+    "credential_or_token_recorded": false,
+    "human_or_product_delivery": false,
+    "product_or_database_access": false,
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false
+  },
+  "fallback_performed": false,
+  "ledger": {
+    "attempt_id": "gemini-25-repair-dry-run-visual-003",
+    "fallback_permitted": false,
+    "ledger_id": "gemini-25-repair-dry-run-visual-ledger-003",
+    "maximum_provider_calls": 0,
+    "policy_id": "reception-one-visual-synthesis-vertex-sydney-v1",
+    "provider_calls_consumed": 0,
+    "schema_version": "ariadne.vertex_sydney_single_use_ledger.v1",
+    "status": "consumed"
+  },
+  "ledger_id": "gemini-25-repair-dry-run-visual-ledger-003",
+  "mode": "dry-run",
+  "network": {
+    "attachable": false,
+    "driver": "bridge",
+    "ingress": false,
+    "internal": true,
+    "name": "reception-one-visual-synthesis-internal"
+  },
+  "provider_call_count_reserved": 0,
+  "provider_contacted": false,
+  "relay_effective_policy": {
+    "broker_alias_present": true,
+    "cap_add": [],
+    "cap_drop": [
+      "ALL"
+    ],
+    "memory_bytes": 67108864,
+    "memory_swap_bytes": 67108864,
+    "mount_count": 1,
+    "nano_cpus": 250000000,
+    "network_names": [
+      "bridge",
+      "reception-one-visual-synthesis-internal"
+    ],
+    "nofile_exact": true,
+    "pids_limit": 32,
+    "port_binding_count": 0,
+    "privileged": false,
+    "publish_all_ports": false,
+    "read_only_rootfs": true,
+    "security_opt": [
+      "no-new-privileges=true"
+    ],
+    "tmpfs": {
+      "/tmp": "rw,noexec,nosuid,size=8m"
+    },
+    "token_mount_destination_exact": true,
+    "user": "65532:65532"
+  },
+  "result": "reception_one_visual_synthesis_real_isolation_dry_run_pass",
+  "schema_version": "ariadne.reception_one_visual_synthesis_isolation_evidence.v1"
+}

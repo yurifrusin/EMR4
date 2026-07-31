@@ -1,0 +1,88 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "validate_accept_and_close_the_provider_free_authored_synthetic_word_companion_request_and_generic_summary_shell",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_word_companion_preacceptance",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker was dispatched; the tightly coupled Word and native-Diary contract remained Sol-owned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport was selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external reviewer or provider was selected for this provider-free companion increment."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: the accepted Hybrid contextual launch at Continuity 168 / Compass 149 supplied the separate auth and zero-authority native-Diary handoff.",
+        "current_authority_allocation: Yuri accepted the Hybrid recommendation and instructed work to continue with the compact Word companion; authority remains provider-free, authored-synthetic, no-write and local-development-only.",
+        "active_plan_and_acceptance: the companion plan freezes exact request and summary schemas, native-Diary detail ownership, deterministic proofreading and generic Word-only status.",
+        "protected_evidence_boundaries: protected holdouts, historical Diary material, real/product-derived patient, health and clinical data, credentials, provider material and hidden reasoning remain unopened and unused.",
+        "git_refs_and_worktree: HEAD remains 5b1ea7952fb08eea333da0e63f166d3895ccea32 on codex/ariadne-terra-gemini-comparative-rehearsal; master, handoff/current, origin/master and origin/handoff/current remain 4974075b31035d599e081d68e3b85e04a897baa1; unrelated dirty changes remain preserved.",
+        "In-app Browser inspection passed at default and 360x780 taskpane sizes without overflow, overlap, console error or warning.",
+        "The route-intercepted Chromium round trip passed with exact auth/launch/request order, verified date-before-request processing, three detailed results retained in the Diary and one exact generic admitted Word summary.",
+        "Provider calls, credential reads, backend calls, database reads/writes, confirmations, commands and appointment writes are all zero.",
+        "Focused and inherited Hybrid, Bureau, projection, availability, meta-grid and API Spine tests pass; both schemas and JavaScript/Python syntax validate; source and published taskpane copies are byte-identical."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

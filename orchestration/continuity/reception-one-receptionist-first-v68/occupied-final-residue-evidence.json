@@ -1,0 +1,22 @@
+{
+  "schema_version": "reception.one.receptionist_first_v68.final_residue.v1",
+  "recorded_at": "2026-07-30T12:17:36Z",
+  "result": "reception_one_receptionist_first_v68_final_residue_clear",
+  "containers_present": false,
+  "container_count": 0,
+  "networks_present": false,
+  "network_count": 0,
+  "images_present": false,
+  "image_count": 0,
+  "broker_or_cell_processes_present": false,
+  "broker_or_cell_process_count": 0,
+  "all_opened_ledgers_consumed": true,
+  "opened_ledger_count": 24,
+  "provider_calls_after_terminal_result": 0,
+  "temporary_run_logs_present": false,
+  "durable_sanitized_progress_log_retained": true,
+  "durable_empty_stderr_log_retained": true,
+  "daemon_wide_prune_performed": false,
+  "credential_material_inspected": false,
+  "api_key_information_observed_or_recorded": false
+}

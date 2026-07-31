@@ -1,0 +1,58 @@
+{
+  "schema_version": "reception.one.bureau.precall_failure_diagnostic.v1",
+  "result": "preprovider_authority_compatibility_defect_confirmed",
+  "reason_code": "occupied_authority_missing",
+  "outer_reported_reason_code": "runtime_audit_ref_invalid",
+  "data_class": "authored_synthetic",
+  "diagnosis": {
+    "missing_fields": [
+      "decision=authorised_by_yuri",
+      "requested_exact_boundary"
+    ],
+    "deterministic_reproduction": "Calling the inner _precall_gate with the exact attempt authority, preflight and Continuity 163 / Compass 144 returns occupied_authority_missing.",
+    "execution_order": "_precall_gate executes before Docker inspection, request construction, temporary credential creation, single-use ledger creation, broker start, cell start or provider transport.",
+    "masking_defect": "The outer occupied UI harness attempted runtime-audit validation on the HTTP 502 error object and replaced the earlier bounded code with runtime_audit_ref_invalid."
+  },
+  "provider": {
+    "provider_call_observed": false,
+    "provider_call_possible_after_failure_point": false,
+    "model_inference_observed": false,
+    "single_use_provider_ledger_opened": false,
+    "external_provider_audit_created": false,
+    "credential_refresh_observed": false
+  },
+  "evidence": {
+    "parent_audit_path": "orchestration/continuity/reception-one-bureau-cost-bounded-occupied-retry/runtime-f024c8cdeef781a6/occupied-dialogue-parent-audit.jsonl",
+    "parent_audit_event_count": 2,
+    "parent_audit_terminal_hash": "sha256:ec14cf153a720d46546bbac3fa451d7bd2ac4c6b38fefcc71482489500827f6d",
+    "runtime_manifest_path": "orchestration/continuity/reception-one-bureau-cost-bounded-occupied-retry/runtime-f024c8cdeef781a6/runtime-frame-manifest.json",
+    "single_use_ledger_paths": [],
+    "provider_external_audit_paths": [],
+    "route_failure_path": "orchestration/continuity/reception-one-bureau-cost-bounded-occupied-retry/occupied-ui-route-failure-evidence.json",
+    "cost_ledger_path": "orchestration/continuity/reception-one-bureau-cost-bounded-occupied-retry/cumulative-cost-ledger.json",
+    "cleanup_path": "orchestration/continuity/reception-one-bureau-cost-bounded-occupied-retry/occupied-ui-cleanup-evidence.json",
+    "residue_path": "orchestration/continuity/reception-one-bureau-cost-bounded-occupied-retry/occupied-final-residue-evidence.json"
+  },
+  "cost_disposition": {
+    "predecessor_estimate_usd": 0.0038049,
+    "failed_attempt_reservation_charged_usd": 0.02,
+    "cumulative_accounted_usd": 0.0238049,
+    "reservation_refunded": false,
+    "successor_must_carry_full_accounted_amount": true,
+    "cost_ledger_terminal_hash": "sha256:caebdd93ef17c9598d7bfa7dd088b0a00f8482ce55254c3fcb6822450eb49bff"
+  },
+  "cleanup": {
+    "database_truth_changed": false,
+    "disposable_database_removed": true,
+    "runtime_processes_absent": true,
+    "runtime_directory_absent": true,
+    "container_image_network_residue_clear": true,
+    "ports_available": true
+  },
+  "explicit_exclusions": [
+    "No prompt or model payload reached Vertex.",
+    "No provider response, token usage or chain-of-thought exists.",
+    "No API key, service-account key or credential material was read or retained.",
+    "No fallback, appointment confirmation or appointment write occurred."
+  ]
+}

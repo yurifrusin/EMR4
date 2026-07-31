@@ -1,0 +1,285 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/ariadne-vertex-sydney-provider-admission-policy.v1.json",
+  "title": "Ariadne Vertex Sydney Provider Admission Policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "policy_id",
+    "status",
+    "subject",
+    "data_classes",
+    "geography",
+    "provider_controls",
+    "required_admission_checks",
+    "rejected_routes",
+    "claim_boundary",
+    "decision"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "ariadne.vertex_sydney_provider_admission_policy.v1"
+    },
+    "policy_id": {
+      "const": "ariadne-vertex-sydney-provider-admission"
+    },
+    "status": {
+      "enum": [
+        "admitted",
+        "blocked"
+      ]
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "model_id",
+        "project",
+        "service_account",
+        "authentication",
+        "location",
+        "endpoint_hostname",
+        "automatic_fallback"
+      ],
+      "properties": {
+        "provider": {
+          "const": "google_vertex_ai"
+        },
+        "model_id": {
+          "const": "gemini-3.5-flash"
+        },
+        "project": {
+          "const": "bernie-emr4-dev"
+        },
+        "service_account": {
+          "const": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"
+        },
+        "authentication": {
+          "const": "keyless_impersonated_service_account_adc"
+        },
+        "location": {
+          "const": "australia-southeast1"
+        },
+        "endpoint_hostname": {
+          "const": "australia-southeast1-aiplatform.googleapis.com"
+        },
+        "automatic_fallback": {
+          "const": false
+        }
+      }
+    },
+    "data_classes": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/dataClassRule"
+      },
+      "required": [
+        "authored_synthetic",
+        "product_derived",
+        "patient_or_health_information"
+      ]
+    },
+    "geography": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "australian_regional_processing",
+        "regional_storage",
+        "global_endpoint",
+        "container_effect"
+      ],
+      "properties": {
+        "australian_regional_processing": {
+          "$ref": "#/$defs/geographyRule"
+        },
+        "regional_storage": {
+          "$ref": "#/$defs/geographyRule"
+        },
+        "global_endpoint": {
+          "$ref": "#/$defs/geographyRule"
+        },
+        "container_effect": {
+          "const": "constrains_local_capabilities_but_does_not_determine_remote_provider_processing_geography"
+        }
+      }
+    },
+    "provider_controls": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "training",
+        "abuse_monitoring_retention",
+        "request_response_logging",
+        "in_memory_cache"
+      ],
+      "properties": {
+        "training": {
+          "$ref": "#/$defs/providerControl"
+        },
+        "abuse_monitoring_retention": {
+          "$ref": "#/$defs/providerControl"
+        },
+        "request_response_logging": {
+          "$ref": "#/$defs/providerControl"
+        },
+        "in_memory_cache": {
+          "$ref": "#/$defs/providerControl"
+        }
+      }
+    },
+    "required_admission_checks": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "rejected_routes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "independently_observed_evidence",
+        "provider_contractual_residency_evidence",
+        "allowed_claims",
+        "prohibited_claims"
+      ],
+      "properties": {
+        "independently_observed_evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "provider_contractual_residency_evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "allowed_claims": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "prohibited_claims": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "admitted",
+        "result",
+        "blocking_reasons",
+        "next_action"
+      ],
+      "properties": {
+        "admitted": {
+          "type": "boolean"
+        },
+        "result": {
+          "enum": [
+            "ariadne_vertex_sydney_provider_admission_pass",
+            "ariadne_vertex_sydney_provider_admission_blocked"
+          ]
+        },
+        "blocking_reasons": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "next_action": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  },
+  "$defs": {
+    "dataClassRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "admitted",
+        "definition"
+      ],
+      "properties": {
+        "admitted": {
+          "type": "boolean"
+        },
+        "definition": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "geographyRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "meaning",
+        "admission_requirement",
+        "current_evidence"
+      ],
+      "properties": {
+        "meaning": {
+          "type": "string",
+          "minLength": 1
+        },
+        "admission_requirement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "current_evidence": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "providerControl": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider_contract",
+        "local_requirement"
+      ],
+      "properties": {
+        "provider_contract": {
+          "type": "string",
+          "minLength": 1
+        },
+        "local_requirement": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

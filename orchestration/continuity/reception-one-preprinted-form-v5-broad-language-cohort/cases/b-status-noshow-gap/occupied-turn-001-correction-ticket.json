@@ -1,0 +1,60 @@
+{
+  "attempts_remaining": 1,
+  "previous_program_sha256": "sha256:61d0402114d92a676b8d3b7e3ad3d279f7d738b02dd154b671eb4a79ca566fb5",
+  "previous_typed_form": {
+    "goal_code": 4,
+    "steps": [
+      {
+        "operator_code": 0,
+        "source_refs": [
+          {
+            "binding_code": 1,
+            "kind": "binding",
+            "prior_output_name": "none",
+            "prior_step_index": -1
+          }
+        ]
+      },
+      {
+        "operator_code": 4,
+        "source_refs": [
+          {
+            "binding_code": -1,
+            "kind": "prior_output",
+            "prior_output_name": "patient",
+            "prior_step_index": 0
+          }
+        ]
+      },
+      {
+        "operator_code": 12,
+        "source_refs": [
+          {
+            "binding_code": 2,
+            "kind": "binding",
+            "prior_output_name": "none",
+            "prior_step_index": -1
+          },
+          {
+            "binding_code": -1,
+            "kind": "binding",
+            "prior_output_name": "none",
+            "prior_step_index": -1
+          }
+        ]
+      }
+    ]
+  },
+  "replacement_required": true,
+  "target_turn_code": 2,
+  "version_code": 1,
+  "violations": [
+    {
+      "allowed_output_names": [],
+      "field_code": "source_ref",
+      "source_index": 1,
+      "step_index": 2,
+      "violation_code": "external_binding_invalid"
+    }
+  ]
+}

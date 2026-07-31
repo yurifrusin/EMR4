@@ -1,0 +1,30 @@
+{
+  "schema_version": "ariadne.preacceptance_receipt.v1",
+  "receipt_id": "reception-one-receptionist-first-v64-preacceptance-20260730",
+  "created_at": "2026-07-30T09:55:00Z",
+  "status": "passed",
+  "candidate": {
+    "node_id": "reception-one-receptionist-first-v64-exact-constraint",
+    "source_head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "provider_calls_performed": 0
+  },
+  "acceptance_contract": "docs/bernie-reception-one-receptionist-first-v64-exact-constraint-plan.md",
+  "provider_blocked_evidence": "orchestration/continuity/reception-one-receptionist-first-v64/provider-blocked-evidence.json",
+  "real_isolation_evidence": "orchestration/continuity/reception-one-receptionist-first-v64/real-isolation-evidence.json",
+  "checks": {
+    "all_24_reference_forms_admitted": true,
+    "omitted_corrected_time_rejected": true,
+    "exact_replacement_admitted": true,
+    "historical_wrong_forms_rejected": true,
+    "focused_and_broad_tests_passed": true,
+    "api_spine_passed": true,
+    "continuity_and_compass_passed": true,
+    "repository_readiness_passed": true,
+    "real_isolation_passed": true,
+    "json_compilation_ruff_javascript_and_diff_checks_passed": true,
+    "product_provider_enabled": false,
+    "credential_reads_performed": 0,
+    "provider_calls_performed": 0
+  },
+  "unrelated_user_changes_preserved": true
+}

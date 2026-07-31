@@ -1,0 +1,44 @@
+{
+  "authority_boundary": "receipt_only_local_provider_free_authored_synthetic_preview_refresh_no_provider_credentials_voice_write_real_data_production_deployment_or_release_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "restore_and_verify_the_accepted_provider_free_reception_one_preview",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records reception_one_integrated_bureau_baseline_pass as the current provider-free authored-synthetic product result, bound by Continuity graph revision 62 and Compass map revision 49.",
+    "current_authority_allocation": [
+      "Yuri requested a fresh local preview of the accepted Reception One appointment sheet.",
+      "The task may start a repository-local static server and exercise the authored-synthetic browser fixture.",
+      "No occupied provider, credential, voice, participant, write, real-data, production, deployment or release boundary is opened."
+    ],
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-integrated-bureau-plan.md",
+      "docs/bernie-reception-one-integrated-bureau-closeout.md",
+      "orchestration/agent_inbox/codex/reception-one-integrated-bureau-sol-acceptance.md",
+      "orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 remain binding: protected holdouts and historical Diary material remain excluded; the preview uses authored-synthetic fixtures only; no command-shaped release or product authority is granted.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "worktree_entry_count_before_this_receipt": 236,
+      "protected_refs_unchanged": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

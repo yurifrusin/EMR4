@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.preplan_receipt.v1",
+  "receipt_id": "reception-one-receptionist-first-v68-preplan-20260730",
+  "created_at": "2026-07-30T11:57:54Z",
+  "status": "passed",
+  "authority_source": "orchestration/continuity/reception-one-receptionist-first-v68/occupied-authority.json",
+  "active_plan": "docs/bernie-reception-one-receptionist-first-v68-move-pattern-plan.md",
+  "predecessor": {
+    "node_id": "reception-one-receptionist-first-v67-clarification-pattern",
+    "result": "reception_one_receptionist_first_v67_full_cohort_fail_closed",
+    "exact_safe_outcome_count": 23,
+    "provider_calls": 25,
+    "all_ledgers_consumed": true,
+    "residue_clear": true,
+    "no_further_v67_call": true
+  },
+  "historical_nodes_revised": false,
+  "complete_raw_cohort_required": true,
+  "repair_scope": "exact_move_response_instruction_only",
+  "generic_preflight_receipt": "orchestration/agent_inbox/codex/reception-one-receptionist-first-v68-generic-preplan-receipt.json"
+}

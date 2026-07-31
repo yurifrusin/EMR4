@@ -1,0 +1,108 @@
+{
+  "boundaries": {
+    "appointment_write_authority": false,
+    "cell_credential_access": false,
+    "confirmation_authority": false,
+    "full_diary_exposed": false,
+    "model_database_access": false,
+    "product_delivery": false,
+    "provider_execution_in_frame": false,
+    "unselected_appointments_exposed": false
+  },
+  "credential_reads": 0,
+  "data_class": "authored_synthetic",
+  "database": {
+    "kind": "exact_owned_disposable_postgresql",
+    "practice_scoped": true,
+    "readback_sha256_unchanged": true,
+    "reads_performed": true,
+    "truth_counts_after": {
+      "appointment_audit_logs": 0,
+      "appointment_command_idempotency": 0,
+      "appointments": 6,
+      "diary_committed_events": 0
+    },
+    "truth_counts_before": {
+      "appointment_audit_logs": 0,
+      "appointment_command_idempotency": 0,
+      "appointments": 6,
+      "diary_committed_events": 0
+    },
+    "writes_performed_after_seed": false
+  },
+  "evidence_hash": "sha256:6a8b49ee4c88fd51d5bbc9cd859a79e1132418a5457619a21eee8be4ffad89c1",
+  "frame": {
+    "content_sha256": "sha256:7d9992fb345aba7c48feb4803eeac8ef21e8402948fe9f647e4e9a002e86f5b6",
+    "context_revision": 3616517295,
+    "contract_version": "reception.one.bureau.plan-input.v1",
+    "expires_at": "2026-07-29T00:31:30Z",
+    "file_sha256": "sha256:387c48b135e1399f34ade0b8a1da1b63ca3ff519c3ee727bb002be22d2a85745",
+    "handle_map_serialized": false,
+    "observed_at": "2026-07-29T00:29:30Z",
+    "opaque_handle_count": 3,
+    "path": "orchestration/continuity/reception-one-readonly-synthetic-diary-context/context-frame.json",
+    "raw_database_ids_serialized": false
+  },
+  "frozen_v68": {
+    "context_frame_review": {
+      "command_authority": false,
+      "desk_context_sha256": "sha256:15a84eef16207267e90ddb13c4b20b51b48c550800319daf1ae29426d067ac38",
+      "disposition": "admit",
+      "reviewed_context_revision": 3616517295,
+      "same_packet_seen_by_model_and_proofreader": true,
+      "source_labels": [
+        "fixture_intercepted",
+        "staff_selected",
+        "staff_selected"
+      ],
+      "task_sha256": "sha256:8d66b2a19a0301f4af2806f8923f76a33d10e44e2d3195d725b42c1f660b41ff"
+    },
+    "desk_context_sha256": "sha256:15a84eef16207267e90ddb13c4b20b51b48c550800319daf1ae29426d067ac38",
+    "expected_final_output": {
+      "api_spine_operation_id": "proposeAppointmentUpdate",
+      "appointment_ref": "synthetic-appointment-bacf6cb959f7753e40f9",
+      "candidate_slot_ids": [],
+      "duration_minutes": 45,
+      "kind": "proposal_candidate",
+      "patient_ref": "synthetic-patient-a1fd28f8386ec5713f7a",
+      "practitioner_ref": "synthetic-practitioner-34fa3ad118ff3e9d19d0",
+      "proposal_family": "resize",
+      "requires_human_confirmation": true,
+      "status": null,
+      "warning_codes": [
+        "staff_confirmation_required"
+      ],
+      "write_performed": false
+    },
+    "frame_sha256": "sha256:7d9992fb345aba7c48feb4803eeac8ef21e8402948fe9f647e4e9a002e86f5b6",
+    "goal": "resize",
+    "model_visible_context_keys": [
+      "authority",
+      "contract_version",
+      "current_diary",
+      "data_class",
+      "effect_ceiling",
+      "excluded_context",
+      "freshness",
+      "grounded_mentions",
+      "recent_dialogue",
+      "resolution_precedence",
+      "selected_appointment"
+    ],
+    "model_visible_full_diary": false,
+    "model_visible_selected_appointment": true,
+    "model_visible_unselected_appointments": false,
+    "program_sha256": "sha256:e661d104b8ddcd83ce137578c57b2e9d3c5281cc11b6eec796aceadb36ead5fd",
+    "proofreader_disposition": "admit",
+    "provider_request_sha256": "sha256:dbf5ba0f4a1feeb1df963fb87b9b6644640937efa0d9d9ea6578b14e411a7cf9",
+    "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+    "system_instruction_sha256": "sha256:ea2ee027f4c82788168c306c39dc2babd278649a4f483197677941c1073e5b0c",
+    "task_sha256": "sha256:8d66b2a19a0301f4af2806f8923f76a33d10e44e2d3195d725b42c1f660b41ff",
+    "turn_input_sha256": "sha256:b26cbdbbc4f8828658b3a19e03abec5550dfd1a9d264e4683946934bf98fca7b"
+  },
+  "provider_calls": 0,
+  "provider_contacted": false,
+  "result": "reception_one_readonly_synthetic_diary_context_provider_blocked_pass",
+  "schema_version": "reception.one.readonly_synthetic_diary_context.provider_blocked.v1",
+  "trusted_context_builder": "app.services.reception_one_proposal_runtime.build_product_context_frame"
+}

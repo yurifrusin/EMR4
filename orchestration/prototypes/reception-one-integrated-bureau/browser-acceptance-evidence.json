@@ -1,0 +1,230 @@
+{
+  "authority": {
+    "appointment_write_authority": false,
+    "command_authority": false,
+    "product_delivery_enabled": false,
+    "provider_runtime_in_ui": false
+  },
+  "console_warnings_or_errors": [],
+  "date_first_flow": {
+    "active_element": "meta-grid-canvas",
+    "bureau_status": "Checked against the Diary",
+    "date_set_before_projection": true,
+    "date_turn_direction": "forward",
+    "diary_date": "Tuesday 28 July 2026",
+    "focus_after_escape": "btn-meta-grid-launch",
+    "focus_after_return": "btn-meta-grid-launch",
+    "scope": "Dr Alex Shera \u00b7 Tue, 28 July 2026 \u00b7 8:00 am\u20135:00 pm \u00b7 EMR4 Dev Clinic (Smoke Test)",
+    "shell_scroll_top": 0,
+    "titlebar_inside_shell": true
+  },
+  "evidence_mode": "authored_synthetic_client_fixture_browser",
+  "expanded_bureau_flow": {
+    "collapsed": {
+      "accessible_name": "Expand Bureau",
+      "aria_pressed": "false",
+      "rail_visible": false,
+      "shell_width": 650
+    },
+    "expanded": {
+      "accessible_name": "Return to compact view",
+      "aria_pressed": "true",
+      "diary_visible": true,
+      "horizontal_overflow_px": 0,
+      "rail_visible": true,
+      "shell_right": 1391,
+      "shell_width": 1080
+    }
+  },
+  "expected_office_bootstrap_warning_count": 6,
+  "explicit_exclusions": [
+    "No provider call",
+    "No credential discovery or refresh",
+    "No API interception",
+    "No database or product data",
+    "No appointment mutation",
+    "No representative usability claim",
+    "No production, deployment or release claim"
+  ],
+  "network": {
+    "provider_hosts_observed": [],
+    "requests": [
+      {
+        "count": 3,
+        "host": "127.0.0.1",
+        "method": "GET",
+        "path": "/diary/diary.css"
+      },
+      {
+        "count": 3,
+        "host": "127.0.0.1",
+        "method": "GET",
+        "path": "/diary/diary.html"
+      },
+      {
+        "count": 3,
+        "host": "127.0.0.1",
+        "method": "GET",
+        "path": "/diary/diary.js"
+      },
+      {
+        "count": 3,
+        "host": "127.0.0.1",
+        "method": "GET",
+        "path": "/diary/meta-grid.css"
+      },
+      {
+        "count": 3,
+        "host": "127.0.0.1",
+        "method": "GET",
+        "path": "/diary/meta-grid.js"
+      },
+      {
+        "count": 3,
+        "host": "127.0.0.1",
+        "method": "GET",
+        "path": "/diary/office-bootstrap.js"
+      },
+      {
+        "count": 3,
+        "host": "127.0.0.1",
+        "method": "GET",
+        "path": "/images/emr_cube1.png"
+      },
+      {
+        "count": 3,
+        "host": "appsforoffice.microsoft.com",
+        "method": "GET",
+        "path": "/lib/1/hosted/o15apptofilemappingtable.js"
+      },
+      {
+        "count": 3,
+        "host": "appsforoffice.microsoft.com",
+        "method": "GET",
+        "path": "/lib/1/hosted/office.js"
+      }
+    ]
+  },
+  "page_errors": [],
+  "reference_date": "2026-07-27",
+  "request": "Show Dr Shera tomorrow",
+  "result": "browser_pass",
+  "schema_version": "reception.one.integrated-bureau.browser-evidence.v1",
+  "screenshots": [
+    {
+      "bytes": 136443,
+      "file": "desktop-1440x900.png",
+      "height": 900,
+      "sha256": "eb59e3d93fb877be156b4bcc5665beffc23c1bd85b32c69d3e01f07a2b7d241b",
+      "width": 1440
+    },
+    {
+      "bytes": 143691,
+      "file": "desktop-expanded-1440x900.png",
+      "height": 900,
+      "sha256": "745cf4922cde5ea60a412131b33bdf9714da722c5096902f2b924d69e41fcd3a",
+      "width": 1440
+    },
+    {
+      "bytes": 111533,
+      "file": "tablet-834x1112.png",
+      "height": 1112,
+      "sha256": "8e39245344a7a7f7fe75c3070f303c478121248fe0cf8736d313bbaae56ec14d",
+      "width": 834
+    },
+    {
+      "bytes": 44195,
+      "file": "phone-390x844.png",
+      "height": 844,
+      "sha256": "95a28d8167adf653c3d208d6ca833150cba46eb75a7c806b479eccb6dcffd66d",
+      "width": 390
+    }
+  ],
+  "target_date": "2026-07-28",
+  "viewports": [
+    {
+      "aria_modal": "false",
+      "bureau_status": "Checked against the Diary",
+      "close_control": {
+        "height": 44,
+        "width": 44
+      },
+      "diary_visible": true,
+      "height": 900,
+      "horizontal_overflow_px": 0,
+      "id": "desktop",
+      "reference_date_label": "Monday 27 July 2026",
+      "return_control": {
+        "height": 44,
+        "width": 104
+      },
+      "shell": {
+        "bottom": 779,
+        "height": 612,
+        "right": 1339,
+        "width": 650,
+        "x": 689,
+        "y": 167
+      },
+      "shell_scroll_top": 0,
+      "visible_bureau_copy_contains_grid": false,
+      "width": 1440
+    },
+    {
+      "aria_modal": "false",
+      "bureau_status": "Checked against the Diary",
+      "close_control": {
+        "height": 44,
+        "width": 44
+      },
+      "diary_visible": true,
+      "height": 1112,
+      "horizontal_overflow_px": 0,
+      "id": "tablet",
+      "reference_date_label": "Monday 27 July 2026",
+      "return_control": {
+        "height": 44,
+        "width": 104
+      },
+      "shell": {
+        "bottom": 921,
+        "height": 680,
+        "right": 816,
+        "width": 700,
+        "x": 116,
+        "y": 241
+      },
+      "shell_scroll_top": 0,
+      "visible_bureau_copy_contains_grid": false,
+      "width": 834
+    },
+    {
+      "aria_modal": "false",
+      "bureau_status": "Checked against the Diary",
+      "close_control": {
+        "height": 44,
+        "width": 44
+      },
+      "diary_visible": true,
+      "height": 844,
+      "horizontal_overflow_px": 0,
+      "id": "phone",
+      "reference_date_label": "Monday 27 July 2026",
+      "return_control": {
+        "height": 44,
+        "width": 91
+      },
+      "shell": {
+        "bottom": 838,
+        "height": 830,
+        "right": 384,
+        "width": 378,
+        "x": 6,
+        "y": 8
+      },
+      "shell_scroll_top": 0,
+      "visible_bureau_copy_contains_grid": false,
+      "width": 390
+    }
+  ]
+}

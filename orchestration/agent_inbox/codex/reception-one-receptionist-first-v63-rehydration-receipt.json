@@ -1,0 +1,59 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v2",
+  "receipt_id": "reception-one-receptionist-first-v63-rehydration-20260730",
+  "created_at": "2026-07-30T09:10:00Z",
+  "status": "passed",
+  "sources": {
+    "live_handover_current_baton": {
+      "path": "AGENTS.md",
+      "restored": true
+    },
+    "current_authority_allocation": {
+      "path": "orchestration/continuity/reception-one-receptionist-first-v63/occupied-authority.json",
+      "restored": true
+    },
+    "active_plan_and_acceptance": {
+      "path": "docs/bernie-reception-one-receptionist-first-v63-form-toolkit-plan.md",
+      "parent_closeout": "docs/bernie-reception-one-receptionist-first-v62-closeout.md",
+      "restored": true
+    },
+    "protected_evidence_boundaries": {
+      "path": "AGENTS.md#5-protected-evidence",
+      "user_decision_path": "AGENTS.md#6-user-decision-boundaries",
+      "restored": true
+    },
+    "git_refs_and_worktree": {
+      "head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff_current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin_master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin_handoff_current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "unrelated_user_changes_preserved": true
+    }
+  },
+  "parent_result": {
+    "node": "reception-one-receptionist-first-v62-desk-context",
+    "result": "reception_one_receptionist_first_v62_full_cohort_fail_closed",
+    "exact_safe_outcomes": 21,
+    "case_count": 24,
+    "all_ledgers_consumed": true,
+    "residue_clear": true
+  },
+  "exact_boundary": {
+    "provider": "google_cloud_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "data_class": "authored_synthetic",
+    "absolute_call_ceiling": 48,
+    "cost_ceiling_usd": 1,
+    "api_key_authentication": false,
+    "provider_or_regional_fallback": false,
+    "product_or_database_access": false,
+    "appointment_write_authority": false
+  }
+}

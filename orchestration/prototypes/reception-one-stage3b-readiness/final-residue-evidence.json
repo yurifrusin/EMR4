@@ -1,0 +1,48 @@
+{
+  "schema_version": "reception_one.stage3b.final_residue_evidence.v1",
+  "checked_at": "2026-07-24T13:36:42Z",
+  "result": "pass",
+  "task_owned_processes": [],
+  "task_owned_ipv6_listeners": [],
+  "task_owned_browser_processes": [],
+  "task_owned_containers": [],
+  "task_owned_networks": [],
+  "task_owned_images": [],
+  "exact_disposable_database": {
+    "name": "gp_pms_reception_one_combined_scope_9c41b7e2_20260721",
+    "present": false
+  },
+  "preserved_pre_existing_listeners": [
+    {
+      "address": "127.0.0.1",
+      "port": 8765,
+      "process_id": 56084,
+      "classification": "pre_existing_static_server"
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 8001,
+      "process_id": 45020,
+      "classification": "pre_existing_uvicorn_review_server"
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 3000,
+      "process_id": 19288,
+      "classification": "pre_existing_meta_grid_review_server"
+    }
+  ],
+  "checks": {
+    "task_process_name_and_command_scan": "zero_matches",
+    "task_ipv6_port_3000_and_8001_scan": "zero_matches",
+    "playwright_or_stage3b_browser_process_scan": "zero_matches",
+    "docker_container_network_image_name_scan": "zero_matches",
+    "exact_database_catalog_lookup": "absent",
+    "pre_existing_ipv4_listener_identity_check": "preserved"
+  },
+  "explicit_exclusions": [
+    "No credential values or host API-key information was inspected or recorded.",
+    "Pre-existing user processes and listeners were observed read-only and were not stopped or modified.",
+    "This is task-residue evidence, not participant, production, deployment or release evidence."
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "schema_version": "reception.one.default_off_dual_planner.occupied_audit_analysis.v1",
+  "result": "reception_one_default_off_dual_planner_occupied_audit_accepted_with_cleanup_recovery_caveat",
+  "reviewed_evidence": "orchestration/continuity/reception-one-default-off-dual-planner-runtime/occupied-route-evidence.json",
+  "reviewed_evidence_hash": "sha256:72f7b359e81af33f0f30c0ce5bcb6e5c5beaf94d55541aa137bb1f7be2d1cfe0",
+  "evidence_hash_recomputed_and_matched": true,
+  "continuity_binding": {
+    "graph_revision": 152,
+    "compass_revision": 133,
+    "compass_source_graph_revision": 152
+  },
+  "attempt": {
+    "attempt_id": "reception-one-receptionist-first-v68-eval-runtime-957dfe6a394bb55d-turn-001",
+    "ledger_id": "reception-one-receptionist-first-v68-eval-runtime-957dfe6a394bb55d-ledger-001",
+    "runtime_audit_ref": "runtime-957dfe6a394bb55d",
+    "actual_provider_calls": 1,
+    "provider_http_status": 200,
+    "provider_status": "completed",
+    "latency_ms": 5183,
+    "usage": {
+      "prompt_tokens": 4820,
+      "candidate_tokens": 239,
+      "thinking_tokens": 901,
+      "total_tokens": 5960
+    },
+    "retry_performed": false,
+    "further_call_after_admission": false
+  },
+  "exact_binding": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "api_key_authentication_used": false
+  },
+  "request_and_schema": {
+    "provider_request_hash": "sha256:9fc13a0834b57a6c5866aff7a4a589635431ffdc475f2912d7003231ff377635",
+    "response_schema_hash": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+    "raw_prompt_retained": false,
+    "raw_provider_response_retained": false,
+    "chain_of_thought_retained": false
+  },
+  "durable_hash_chain": {
+    "event_count": 11,
+    "terminal_hash": "sha256:a6105148096a66b1b5ff92a210ad6fb2778c842d92079bc6d7f379f2af9642a0",
+    "valid": true,
+    "event_types": [
+      "broker_ready",
+      "request_admitted",
+      "ledger_consumed",
+      "provider_request_constructed",
+      "provider_call_started",
+      "provider_call_received",
+      "provider_call_completed",
+      "receptionist_response_evaluated",
+      "operator_note_evaluated",
+      "proofreader_completed",
+      "release_committed"
+    ]
+  },
+  "proofreader": {
+    "disposition": "admit",
+    "admitted_operator_ids": [
+      "prepare_resize_proposal"
+    ],
+    "violations": [],
+    "safe_repairs": [],
+    "same_packet_seen_by_model_and_proofreader": true,
+    "freshness": "fresh",
+    "command_authority": false
+  },
+  "release": {
+    "atomic": true,
+    "proposal_family": "resize",
+    "api_spine_operation_id": "proposeAppointmentUpdate",
+    "duration_minutes": 45,
+    "requires_human_confirmation": true,
+    "write_performed": false,
+    "released_field_count": 12
+  },
+  "route_recovery": {
+    "reason": "windows_closed_log_handle_cleanup_race_after_the_occupied_dialogue",
+    "additional_provider_calls": 0,
+    "authenticated_http_replay_status": 200,
+    "replay_planner_mode": "deterministic",
+    "replay_provider_calls": 0,
+    "proposal_adapter": "update_proposal",
+    "adapter_safe": true,
+    "freshness_verified": true,
+    "database_truth_unchanged": true,
+    "appointment_write_performed": false,
+    "confirmation_performed": false
+  },
+  "ledger_and_cleanup": {
+    "single_use_ledger_consumed": true,
+    "provider_calls_consumed": 1,
+    "raw_request_frame_removed": true,
+    "hash_only_frame_manifest_retained": true,
+    "broker_process_absent": true,
+    "cell_container_absent": true,
+    "relay_container_absent": true,
+    "cell_image_absent": true,
+    "relay_image_absent": true,
+    "internal_network_absent": true,
+    "temporary_token_absent": true,
+    "disposable_database_absent": true,
+    "backend_process_absent": true,
+    "runtime_directory_absent": true,
+    "post_attempt_residue_clear": true
+  },
+  "vertex_audit_control_posture": {
+    "prediction_only_role_and_binding_exact": true,
+    "aiplatform_endpoints_predict_permission_exact": true,
+    "vertex_data_read_and_write_audit_enabled": true,
+    "request_response_logging_disabled_or_absent": true,
+    "provider_in_memory_cache_disabled": true,
+    "no_user_managed_service_account_key": true
+  },
+  "explicit_exclusions": {
+    "global_endpoint": false,
+    "provider_or_regional_fallback": false,
+    "deterministic_fallback_after_isolated_selection": false,
+    "api_key_or_static_key_authentication": false,
+    "provider_tools": false,
+    "grounding_or_retrieval": false,
+    "cache_creation": false,
+    "real_product_patient_health_clinical_or_historical_data": false,
+    "appointment_write_or_confirmation": false,
+    "product_delivery": false,
+    "production_deployment_or_release": false
+  },
+  "candid_assessment": "The occupied provider, model, proofreader, ledger and atomic typed release passed on one call. The first outer harness did not durably retain its HTTP response because a closed Windows log handle blocked post-response directory removal. A zero-provider authenticated replay proved the same route and proposal-only adapter, after which all residue cleared. The evidence therefore proves the occupied cognitive lane and the product route/adapter as a composed recovered result, not a second independently persisted end-to-end occupied HTTP response.",
+  "claim_limits": [
+    "The configured and observed Sydney locational endpoint path does not prove Australian physical or sovereign processing.",
+    "One authored-synthetic pass does not prove general reliability, real-data safety, production suitability, appointment-write safety, deployment readiness or release readiness."
+  ]
+}

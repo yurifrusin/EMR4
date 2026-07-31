@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/reception-one-stage3b-study-export-v1.json",
+  "title": "Reception One Stage 3B structured study export",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_mode",
+    "participant_scope",
+    "exported_at",
+    "session",
+    "exclusions",
+    "observations",
+    "score"
+  ],
+  "properties": {
+    "schema_version": { "const": "reception_one.stage3b.study_export.v1" },
+    "evidence_mode": { "const": "authored_synthetic_participant_session" },
+    "participant_scope": { "const": "representative_reception_staff_formative" },
+    "exported_at": { "type": "string", "format": "date-time" },
+    "session": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["session_id", "participant_code", "practice_bucket", "counterbalance_arm", "started_at", "consent"],
+      "properties": {
+        "session_id": { "type": "string", "pattern": "^stage3b-p0[1-8]-[0-9]{14}$" },
+        "participant_code": { "enum": ["P01", "P02", "P03", "P04", "P05", "P06", "P07", "P08"] },
+        "practice_bucket": { "enum": ["practice-a", "practice-b"] },
+        "counterbalance_arm": { "enum": ["A", "B"] },
+        "started_at": { "type": "string", "format": "date-time" },
+        "consent": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["voluntary", "authored_synthetic_only", "no_prompt_transcript_or_recording", "no_appointment_write"],
+          "properties": {
+            "voluntary": { "const": true },
+            "authored_synthetic_only": { "const": true },
+            "no_prompt_transcript_or_recording": { "const": true },
+            "no_appointment_write": { "const": true }
+          }
+        }
+      }
+    },
+    "exclusions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contains_real_patient_data",
+        "contains_prompt_or_transcript_text",
+        "contains_free_text",
+        "contains_audio_or_video",
+        "contains_screen_recording",
+        "contains_provider_or_credential_data",
+        "appointment_write_available"
+      ],
+      "properties": {
+        "contains_real_patient_data": { "const": false },
+        "contains_prompt_or_transcript_text": { "const": false },
+        "contains_free_text": { "const": false },
+        "contains_audio_or_video": { "const": false },
+        "contains_screen_recording": { "const": false },
+        "contains_provider_or_credential_data": { "const": false },
+        "appointment_write_available": { "const": false }
+      }
+    },
+    "observations": {
+      "type": "array",
+      "maxItems": 8,
+      "items": { "$ref": "#/$defs/observation" }
+    },
+    "score": { "type": "object" }
+  },
+  "$defs": {
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "session_id",
+        "participant_code",
+        "practice_bucket",
+        "counterbalance_arm",
+        "task_id",
+        "assigned_route",
+        "route_visits",
+        "elapsed_ms",
+        "task_outcome",
+        "correctness",
+        "state_comprehension",
+        "confidence",
+        "assistance_count",
+        "ordinary_diary_fallback",
+        "safe_ambiguity",
+        "proposal_boundary",
+        "issue_flags",
+        "recorded_at"
+      ],
+      "properties": {
+        "schema_version": { "const": "reception_one.stage3b.structured_observation.v1" },
+        "session_id": { "type": "string" },
+        "participant_code": { "enum": ["P01", "P02", "P03", "P04", "P05", "P06", "P07", "P08"] },
+        "practice_bucket": { "enum": ["practice-a", "practice-b"] },
+        "counterbalance_arm": { "enum": ["A", "B"] },
+        "task_id": { "pattern": "^S3B-0[1-8]$" },
+        "assigned_route": { "enum": ["reception_one", "ordinary_diary"] },
+        "route_visits": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["reception_one", "ordinary_diary"],
+          "properties": {
+            "reception_one": { "type": "boolean" },
+            "ordinary_diary": { "type": "boolean" }
+          }
+        },
+        "elapsed_ms": { "type": "integer", "minimum": 0, "maximum": 3600000 },
+        "task_outcome": { "enum": ["completed", "completed_with_assistance", "aborted", "not_attempted"] },
+        "correctness": { "enum": ["correct", "partly_correct", "incorrect", "not_applicable"] },
+        "state_comprehension": { "enum": ["clear", "uncertain", "incorrect", "not_applicable"] },
+        "confidence": { "enum": ["high", "medium", "low", "not_recorded"] },
+        "assistance_count": { "type": "integer", "minimum": 0, "maximum": 9 },
+        "ordinary_diary_fallback": { "type": "boolean" },
+        "safe_ambiguity": { "enum": ["safe_clarification", "unsafe_assumption", "not_applicable"] },
+        "proposal_boundary": { "enum": ["understood_not_committed", "mistaken_as_committed", "not_applicable"] },
+        "issue_flags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "could_not_find_entry",
+              "route_not_obvious",
+              "scope_not_understood",
+              "blank_space_mistaken_for_availability",
+              "selection_mistaken_for_booking",
+              "proposal_mistaken_for_booking",
+              "identity_assumed",
+              "back_path_not_found",
+              "ordinary_diary_escape_not_found",
+              "facilitator_intervention",
+              "participant_stopped"
+            ]
+          }
+        },
+        "recorded_at": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}

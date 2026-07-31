@@ -1,0 +1,37 @@
+{
+  "schema_version": "ariadne.vertex_sydney_gemini_25_tranche_1_admission_evidence.v1",
+  "tranche": 1,
+  "result": "ariadne_vertex_sydney_gemini_25_provider_admission_pass",
+  "policy_valid": true,
+  "admitted": true,
+  "model_id": "gemini-2.5-flash",
+  "required_location": "australia-southeast1",
+  "model_published_for_required_location": true,
+  "retirement_on": "2026-10-16",
+  "blocking_reasons": [],
+  "next_tranche_opened": true,
+  "next_action": "open_provider_blocked_contract_tranche_only",
+  "artifact_hashes": {
+    "policy": "sha256:359be72189d6a1926cef4d4ba585e39043318840060426003c77644ee847d091",
+    "policy_schema": "sha256:abc0e645314a2617b5b1a533a20df2da6bfaf1976d9cfedd6ec40394982efe0b",
+    "official_source_observation": "sha256:61cb5f27ce99af684d0fac167038303c53221eaf8acc12d3aa56ef46d4f05a3f"
+  },
+  "external_actions": {
+    "adc_inspection": false,
+    "credential_read": false,
+    "token_refresh": false,
+    "cloud_control_plane_read": false,
+    "provider_call": false,
+    "prompt_transmission": false,
+    "container_start": false,
+    "external_cloud_mutation": false
+  },
+  "call_accounting": {
+    "occupied_calls_authorized": 2,
+    "occupied_calls_consumed": 0,
+    "occupied_calls_remaining": 2,
+    "retry_performed": false,
+    "fallback_performed": false
+  },
+  "claim_limit": "Current official Google documentation publishes gemini-2.5-flash for australia-southeast1 model availability and ML processing. This does not prove project entitlement, ADC usability, control posture, provider training or abuse-retention controls, provider acceptance, inference, or Australian physical or sovereign processing."
+}

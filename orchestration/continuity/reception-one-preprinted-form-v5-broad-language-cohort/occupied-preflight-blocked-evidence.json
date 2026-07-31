@@ -1,0 +1,25 @@
+{
+  "schema_version": "reception.one.preprinted_form_v5.broad_language_preflight_blocked.v1",
+  "recorded_at": "2026-07-30T05:26:39Z",
+  "result": "reception_one_preprinted_form_v5_broad_language_adc_preflight_blocked",
+  "gate": "existing_bernie_impersonated_adc_noninteractive_refresh",
+  "reason_code": "impersonated_adc_refresh_failed",
+  "provider_calls_performed": 0,
+  "model_inference_called": false,
+  "provider_prompt_transmitted": false,
+  "credential_reconfiguration_attempted": false,
+  "interactive_login_attempted": false,
+  "api_key_authentication_used": false,
+  "fallback_attempted": false,
+  "external_state_changed": false,
+  "occupied_ledgers_opened": 0,
+  "occupied_cells_started": 0,
+  "authority_disposition": "yuri_intervention_required",
+  "required_intervention": "restore_the_existing_bernie_keyless_impersonated_adc_outside_the_occupied_runtime_then_request_a_fresh_read_only_preflight",
+  "sensitive_exclusions": {
+    "credential_or_token_recorded": false,
+    "raw_authentication_response_recorded": false,
+    "human_account_identifier_recorded": false,
+    "api_key_information_recorded": false
+  }
+}

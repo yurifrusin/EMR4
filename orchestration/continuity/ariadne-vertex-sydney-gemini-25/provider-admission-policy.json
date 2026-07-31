@@ -1,0 +1,120 @@
+{
+  "schema_version": "ariadne.vertex_sydney_gemini_25_provider_admission_policy.v1",
+  "policy_id": "ariadne-vertex-sydney-gemini-25-provider-admission",
+  "status": "admitted",
+  "subject": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "automatic_fallback": false
+  },
+  "data_classes": {
+    "authored_synthetic": {
+      "admitted": true,
+      "definition": "Content deliberately authored for this rehearsal and not derived from product, patient, practice, historical, protected or external-corpus data."
+    },
+    "product_derived": {
+      "admitted": false,
+      "definition": "Any value copied, transformed, summarized or inferred from product state, databases, logs, audits or operational traffic."
+    },
+    "patient_or_health_information": {
+      "admitted": false,
+      "definition": "Any identified, identifiable, pseudonymized or real patient, health, clinical, Medicare, contact, appointment or practice information."
+    }
+  },
+  "geography": {
+    "australian_regional_processing": "The provider contract for the exact model and australia-southeast1 locational endpoint binds ML processing to the associated Australian country jurisdiction.",
+    "regional_storage": "At-rest storage is a separate resource/location claim; no provider storage resource or retained prompt/response is authorised.",
+    "global_endpoint": "A hostname without the exact region may process globally and provides no regional isolation or data-residency guarantee; it is rejected.",
+    "container_effect": "constrains_local_capabilities_but_does_not_determine_remote_provider_processing_geography"
+  },
+  "provider_controls": {
+    "training": "Provider-contract training use was not independently verified in this tranche. Only authored-synthetic content is admitted, and no permission or instruction is granted for training or fine-tuning.",
+    "abuse_monitoring_retention": "Provider abuse-monitoring retention was not independently verified in this tranche. Authored-synthetic content only is admitted; no zero-data-retention claim is made and no grounding or provider tool is permitted.",
+    "request_response_logging": "A later read-only preflight must verify disabled or absent configuration before content transmission.",
+    "in_memory_cache": "Google documents project-isolated, not-at-rest, 24-hour in-memory caching enabled by default; the frozen no-cache boundary requires a later read-only check proving disabled or a stop for Yuri without mutation."
+  },
+  "lifecycle": {
+    "launch_stage": "GA",
+    "retirement_on": "2026-10-16",
+    "accepted_scope": "one_bounded_authored_synthetic_rehearsal_only"
+  },
+  "required_admission_checks": [
+    "authored_synthetic_only",
+    "provider_is_google_vertex_ai",
+    "model_is_gemini_2_5_flash",
+    "model_published_for_australia_southeast1",
+    "project_exact",
+    "impersonated_service_account_exact",
+    "keyless_adc_exact",
+    "cloud_platform_scope",
+    "prediction_only_role_and_binding",
+    "aiplatform_endpoints_predict_exact",
+    "vertex_data_access_audit_enabled",
+    "request_response_logging_disabled_or_absent",
+    "in_memory_cache_disabled",
+    "regional_endpoint_exact",
+    "no_automatic_fallback",
+    "no_api_key",
+    "no_service_account_key",
+    "no_provider_tools",
+    "cost_and_call_ceiling",
+    "isolation_and_external_audit"
+  ],
+  "rejected_routes": [
+    "generativelanguage.googleapis.com",
+    "gemini_developer_api",
+    "aiplatform.googleapis.com_global",
+    "automatic_cross_region_fallback",
+    "api_key_authentication",
+    "service_account_json_key",
+    "openai",
+    "terra",
+    "deepseek",
+    "another_provider",
+    "another_model",
+    "another_project",
+    "another_service_account",
+    "another_region",
+    "model_without_published_sydney_support"
+  ],
+  "claim_boundary": {
+    "independently_observed_evidence": [
+      "Current official model card publishes gemini-2.5-flash as GA, structured-output capable and available for model availability and ML processing in australia-southeast1.",
+      "Current official lifecycle documentation publishes retirement on 2026-10-16.",
+      "Historical T3R7 evidence observed the exact alias through the Sydney endpoint; it is context and does not grant current entitlement.",
+      "No credential, cloud project state or provider request is inspected by this documentary tranche."
+    ],
+    "provider_contractual_residency_evidence": [
+      "Google states that locational endpoints bind ML processing to the associated broader multi-region or country jurisdiction.",
+      "Google states that global endpoints provide no regional isolation or data-residency guarantee.",
+      "The exact model card and per-model matrix publish the model for australia-southeast1."
+    ],
+    "allowed_claims": [
+      "gemini-2.5-flash is the current published GA model identifier",
+      "the model is published for australia-southeast1 availability and ML processing",
+      "the documentary model-location gate passes"
+    ],
+    "prohibited_claims": [
+      "Australian physical processing occurred",
+      "Australian sovereign processing is guaranteed",
+      "current project entitlement or provider acceptance is proved",
+      "container isolation proves remote provider geography",
+      "zero data retention applies",
+      "provider training controls were verified",
+      "provider abuse-monitoring retention was verified",
+      "in-memory caching is disabled for bernie-emr4-dev",
+      "the occupied call path is ready"
+    ]
+  },
+  "decision": {
+    "admitted": true,
+    "result": "ariadne_vertex_sydney_gemini_25_provider_admission_pass",
+    "blocking_reasons": [],
+    "next_action": "open_provider_blocked_contract_tranche_only"
+  }
+}

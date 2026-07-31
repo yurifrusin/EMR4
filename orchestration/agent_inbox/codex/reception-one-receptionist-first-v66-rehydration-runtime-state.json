@@ -1,0 +1,84 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "plan_and_execute_a_fresh_reception_one_receptionist_first_v66_descendant_with_one_deidentified_decision_note_prompt_repair_and_the_full_twenty_four_case_cohort",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is selected; the tightly coupled v6.6 prompt, proofreader regression and cohort remain Sol-owned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude provider or transport is selected or authorised."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external peer worker is selected; acceptance remains deterministic local Sol evidence."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri authorised continued bounded Sydney Vertex retries and requested that every raw request be rerun.",
+        "AGENTS.md and the active v6.5 closeout and final review were read completely after compaction.",
+        "AGENTS.md sections 5 and 6 restore protected-holdout, historical-diary, real-data, product, database, confirmation, write, deployment and release boundaries.",
+        "HEAD and all four protected local and origin refs were verified; unrelated dirty-worktree changes remain preserved.",
+        "The proposed v6.6 repair changes only de-identified decision-note instructions and keeps context typed, minimal, source-labelled, freshness-bound and non-authoritative."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No subagent or external worker is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

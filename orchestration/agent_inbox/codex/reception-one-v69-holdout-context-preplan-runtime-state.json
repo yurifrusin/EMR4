@@ -1,0 +1,84 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_v68_evaluate_an_untouched_authored_synthetic_holdout_and_conditionally_connect_the_frozen_lane_to_minimal_read_only_authored_synthetic_diary_context",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No worker is selected; the holdout seal, live one-use ledgers and conditional product-context runtime are tightly coupled and Sol-owned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external peer worker is selected; deterministic acceptance remains local."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri authorised uninterrupted work through v6.8 synchronisation, freeze, untouched authored-synthetic holdout evaluation and conditional read-only authored-synthetic Diary-context integration.",
+        "AGENTS.md and its sections 5 and 6 were read completely.",
+        "The v6.3-v6.8 plans and closeouts, v6.8 audit, residue and final review were read.",
+        "The API Spine ADR, programme, Access AI design, Bernie release gates, artifact tests, read graph, charters, permission matrix and existing product-context/extended-runtime plans and closeouts were inspected under the API Steward checklist.",
+        "HEAD and all four protected refs were verified; unrelated dirty-worktree changes remain preserved."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No subagent or external worker is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

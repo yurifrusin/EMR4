@@ -1,0 +1,155 @@
+{
+  "schema_version": "reception_one.yuri_internal_walkthrough.export.v1",
+  "evidence_mode": "authored_synthetic_yuri_internal_formative",
+  "review_scope": "single_owner_internal_product_critique",
+  "exported_at": "2026-07-28T23:51:01.483Z",
+  "session": {
+    "review_id": "yuri-walkthrough-20260728232225",
+    "reviewer_scope": "yuri_internal_product_critique",
+    "acknowledgement": {
+      "authored_synthetic_only": true,
+      "no_real_diary_effect": true,
+      "no_real_person_or_practice_details_in_notes": true
+    },
+    "started_at": "2026-07-28T23:22:25.948Z"
+  },
+  "exclusions": {
+    "representative_participant_evidence": false,
+    "usability_threshold_claim": false,
+    "contains_real_patient_or_practice_data": false,
+    "contains_prompt_or_transcript_text": false,
+    "contains_audio_video_or_screen_recording": false,
+    "contains_provider_or_credential_data": false,
+    "contains_free_form_product_notes": true,
+    "appointment_write_available": false
+  },
+  "task_reviews": [
+    {
+      "schema_version": "reception_one.yuri_internal_walkthrough.task_review.v1",
+      "task_id": "S3B-01",
+      "result": "worked",
+      "orientation": "clear",
+      "relative_value": "not_compared",
+      "ordinary_diary_fallback_used": false,
+      "issue_flags": [],
+      "product_note": "I needed to select Monday 27 July to proceed.",
+      "recorded_at": "2026-07-28T23:25:14.737Z"
+    },
+    {
+      "schema_version": "reception_one.yuri_internal_walkthrough.task_review.v1",
+      "task_id": "S3B-02",
+      "result": "partly_worked",
+      "orientation": "mixed",
+      "relative_value": "reception_one_better",
+      "ordinary_diary_fallback_used": false,
+      "issue_flags": [
+        "back_path_unclear",
+        "diary_context_lost",
+        "wording_too_technical"
+      ],
+      "product_note": "The Reception One window completely replaced the Diary and the browser navigation buttons were greyed out. I had to use the custom return to Diary affordances like Esc but this was not immediately clear (probably because my eyes had to navigate across so much space on the screen). Too much space was used in this window occupying the entire maximised browser space with only a small space within this actually used for relevant information. This is what I mean about the need to resize the projected view to fit the information that is output. For a request like this, most of the diary grid ought to be still visible behind the projection. The user's psychological connection to the real diary will this be not broken. Wording is still too technical and legalistic, maybe the visual user interface is as well in a way.",
+      "recorded_at": "2026-07-28T23:36:37.522Z"
+    },
+    {
+      "schema_version": "reception_one.yuri_internal_walkthrough.task_review.v1",
+      "task_id": "S3B-03",
+      "result": "partly_worked",
+      "orientation": "mixed",
+      "relative_value": "reception_one_better",
+      "ordinary_diary_fallback_used": false,
+      "issue_flags": [
+        "back_path_unclear",
+        "diary_context_lost",
+        "wording_too_technical"
+      ],
+      "product_note": "Same as for 02.",
+      "recorded_at": "2026-07-28T23:37:18.787Z"
+    },
+    {
+      "schema_version": "reception_one.yuri_internal_walkthrough.task_review.v1",
+      "task_id": "S3B-04",
+      "result": "worked",
+      "orientation": "clear",
+      "relative_value": "reception_one_better",
+      "ordinary_diary_fallback_used": false,
+      "issue_flags": [],
+      "product_note": "Same criticisms as before but I was impressed by the complete flow from listing available appointments in the R1 view to seeing a proposed booking slot back in the Diary grid so that was impressive. The UI of the flow of this projected view does need some kind of visual improvement, however as it is a little bit too bland right now and needs to be jazzed up somehow without going overboard.",
+      "recorded_at": "2026-07-28T23:40:58.433Z"
+    },
+    {
+      "schema_version": "reception_one.yuri_internal_walkthrough.task_review.v1",
+      "task_id": "S3B-05",
+      "result": "worked",
+      "orientation": "clear",
+      "relative_value": "reception_one_better",
+      "ordinary_diary_fallback_used": false,
+      "issue_flags": [
+        "projection_less_helpful_than_grid"
+      ],
+      "product_note": "I've commented on this in the previous task, this process technically worked really weell, visually needs some improvement as I have discussed.",
+      "recorded_at": "2026-07-28T23:42:25.479Z"
+    },
+    {
+      "schema_version": "reception_one.yuri_internal_walkthrough.task_review.v1",
+      "task_id": "S3B-06",
+      "result": "worked",
+      "orientation": "clear",
+      "relative_value": "not_compared",
+      "ordinary_diary_fallback_used": false,
+      "issue_flags": [
+        "wording_too_technical"
+      ],
+      "product_note": "Way too technical. The main issue ought to be presented to the user in a far more conversational tone.",
+      "recorded_at": "2026-07-28T23:44:08.302Z"
+    },
+    {
+      "schema_version": "reception_one.yuri_internal_walkthrough.task_review.v1",
+      "task_id": "S3B-07",
+      "result": "partly_worked",
+      "orientation": "mixed",
+      "relative_value": "not_compared",
+      "ordinary_diary_fallback_used": false,
+      "issue_flags": [
+        "back_path_unclear",
+        "diary_context_lost",
+        "task_not_supported"
+      ],
+      "product_note": "The only route back to the diary was via Esc or the Return to full Diary grid button. The browser back and forward buttons were disabled. The R1 window could not be closed without closing the entire browser and losing the Diary grid itself. Btw we should not refer to it as a \"grid\" in the final UI.",
+      "recorded_at": "2026-07-28T23:47:25.833Z"
+    },
+    {
+      "schema_version": "reception_one.yuri_internal_walkthrough.task_review.v1",
+      "task_id": "S3B-08",
+      "result": "worked",
+      "orientation": "clear",
+      "relative_value": "reception_one_better",
+      "ordinary_diary_fallback_used": false,
+      "issue_flags": [],
+      "product_note": "THis worked but same issues as have already been discussed.",
+      "recorded_at": "2026-07-28T23:48:44.034Z"
+    }
+  ],
+  "final_review": {
+    "schema_version": "reception_one.yuri_internal_walkthrough.final_review.v1",
+    "overall_value": "promising_needs_revision",
+    "design_partner_readiness": "not_ready",
+    "directions": {
+      "foreground_projection_window": "concern",
+      "date_first_page_turn": "concern",
+      "bureau_workflow": "supports",
+      "text_before_push_to_talk": "not_assessed"
+    },
+    "product_note": "There is still a lot of revision needed. The technical aspects of the bureau work appear to be going well but the UX is lagging.",
+    "recorded_at": "2026-07-28T23:50:58.425Z"
+  },
+  "summary": {
+    "tasks_available": 8,
+    "tasks_recorded": 8,
+    "worked": 5,
+    "partly_worked": 3,
+    "did_not_work": 0,
+    "skipped": 0,
+    "ordinary_diary_fallback_count": 0,
+    "threshold_claim": "not_applicable_internal_formative"
+  }
+}

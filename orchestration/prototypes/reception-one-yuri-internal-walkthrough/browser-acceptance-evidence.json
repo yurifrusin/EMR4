@@ -1,0 +1,49 @@
+{
+  "schema_version": "reception_one.yuri_internal_walkthrough_browser_evidence.v1",
+  "observed_at": "2026-07-28T23:04:00Z",
+  "surface": "docs/diary/stage3b/yuri.html",
+  "runtime": {
+    "transport": "repository_local_static_http",
+    "provider_used": false,
+    "product_write_used": false,
+    "participant_session": false
+  },
+  "target_flow": [
+    "the local walkthrough opens behind one concise authored-synthetic acknowledgement",
+    "the acknowledgement unlocks the internal workspace",
+    "Yuri can record one task and advance progress from zero to one of eight",
+    "the explicit local JSON export remains available"
+  ],
+  "desktop": {
+    "viewport_css_pixels": {
+      "width": 1440,
+      "height": 900
+    },
+    "gate_visible": true,
+    "gate_required_before_workspace": true,
+    "single_required_acknowledgement": true,
+    "task_recorded": true,
+    "progress_after_recording": "1 / 8",
+    "horizontal_overflow": false,
+    "relevant_console_errors": [],
+    "relevant_console_warnings": []
+  },
+  "phone": {
+    "viewport_css_pixels": {
+      "width": 390,
+      "height": 844
+    },
+    "gate_visible": true,
+    "workspace_visible_after_acknowledgement": true,
+    "task_navigation_count": 8,
+    "horizontal_overflow": false,
+    "interactive_controls_below_40_css_pixels": [],
+    "relevant_console_errors": [],
+    "relevant_console_warnings": []
+  },
+  "notes": [
+    "The browser screenshots were kept outside the repository as disposable QA aids.",
+    "This is implementation-readiness evidence, not participant or usability-threshold evidence."
+  ],
+  "status": "passed"
+}

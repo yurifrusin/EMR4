@@ -1,0 +1,61 @@
+{
+  "schema_version": "ariadne.external_work_cell_audit_track_policy.v1",
+  "status": "repository_local_provider_free",
+  "owner": "trusted_broker_and_orchestrator_control_plane",
+  "sandbox_append_authority": false,
+  "sandbox_rewrite_or_delete_authority": false,
+  "tamper_evidence": {
+    "sequence_required": true,
+    "previous_event_sha256_required": true,
+    "event_sha256_required": true,
+    "host_verification_required": true
+  },
+  "observable_typewriter_mechanics": [
+    "sealed_input_and_policy_hashes",
+    "provider_and_model_identifier",
+    "provider_request_hash",
+    "provider_schema_profile_hash",
+    "provider_status_and_allowlisted_error_metadata",
+    "typed_draft_identifier",
+    "output_port_identifier",
+    "frame_type",
+    "top_level_field_names",
+    "payload_field_names",
+    "draft_hash",
+    "proofreader_rule_and_disposition",
+    "repair_before_and_after_hashes",
+    "retry_human_gate_abort_or_release_disposition"
+  ],
+  "never_record": [
+    "hidden_reasoning",
+    "raw_prompt",
+    "raw_provider_response",
+    "provider_error_message",
+    "arbitrary_provider_headers",
+    "provider_secret",
+    "unapproved_pii",
+    "protected_or_historical_evidence"
+  ],
+  "rationale_contract": {
+    "allowed": "typed_bounded_decision_rationale_with_evidence_and_rule_references",
+    "not_equivalent_to": "hidden_reasoning_or_chain_of_thought"
+  },
+  "typed_output_value_policy": {
+    "ordinary_operational_track": "field_names_and_hashes_only",
+    "bounded_values": "only_when_separately_allowlisted_by_field_and_evidence_class",
+    "protected_values": "separate_practice_scoped_encrypted_audit_authority_required"
+  },
+  "current_implementation": {
+    "broker_hash_chained_events": true,
+    "host_chain_verification": true,
+    "allowlisted_provider_error_metadata": true,
+    "typed_output_field_manifest": true,
+    "proofreader_disposition_in_host_evidence": true,
+    "durable_sanitised_event_allowlist_complete": true,
+    "durable_sanitised_event_export_lossless_for_allowlisted_fields": true,
+    "unallowlisted_event_field_disposition": "fail_closed_without_export",
+    "attempt_003_original_durable_export_revalidation": "failed_omitted_broker_ready_fields",
+    "durable_product_audit_store": false,
+    "provider_call_performed_by_this_policy": false
+  }
+}

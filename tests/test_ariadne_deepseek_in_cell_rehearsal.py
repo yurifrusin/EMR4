@@ -288,7 +288,16 @@ def test_runtime_policy_kept_provider_key_out_of_cell_and_all_products_closed():
 
 def test_runtime_source_hashes_still_match_executed_container_inputs():
     evidence = _json(rehearsal.EVIDENCE_PATH)
-    assert evidence["source_hashes"] == rehearsal.source_hashes()
+    # Git may materialise these text-only sources with CRLF on Windows even
+    # though the executed, committed build context was LF. Compare the logical
+    # LF bytes so a checkout policy cannot invalidate immutable run evidence.
+    logical_source_hashes = {
+        name: rehearsal.sha256_bytes(
+            path.read_bytes().replace(b"\r\n", b"\n")
+        )
+        for name, path in sorted(rehearsal.BUILD_CONTEXT_ALLOWLIST.items())
+    }
+    assert evidence["source_hashes"] == logical_source_hashes
     assert (
         evidence["evidence_correction"]["runtime_observations_changed"] is False
     )

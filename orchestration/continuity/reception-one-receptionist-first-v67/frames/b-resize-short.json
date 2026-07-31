@@ -1,0 +1,136 @@
+{
+  "authority": {
+    "appointment_write_authority": false,
+    "confirmation_authority": false,
+    "database_access": false,
+    "effect_ceiling": "proposal_only",
+    "network_access": false,
+    "product_delivery": false,
+    "provider_execution": false
+  },
+  "context": {
+    "allowed_statuses": [
+      "arrived",
+      "completed",
+      "dna"
+    ],
+    "appointments": [
+      {
+        "date": "2026-07-27",
+        "duration_minutes": 15,
+        "id": "synthetic-appointment-margaret",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "start_time": "10:00",
+        "status": "booked"
+      },
+      {
+        "date": "2026-07-27",
+        "duration_minutes": 15,
+        "id": "synthetic-appointment-liam",
+        "patient_ref": "synthetic-patient-liam",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "start_time": "11:00",
+        "status": "booked"
+      }
+    ],
+    "candidate_slots": [
+      {
+        "classification": "available",
+        "date": "2026-07-28",
+        "duration_minutes": 15,
+        "id": "synthetic-slot-july28-1430",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "start_time": "14:30",
+        "warning_codes": [
+          "no_reservation"
+        ]
+      },
+      {
+        "classification": "available",
+        "date": "2026-07-28",
+        "duration_minutes": 15,
+        "id": "synthetic-slot-july28-1500",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "start_time": "15:00",
+        "warning_codes": [
+          "no_reservation"
+        ]
+      },
+      {
+        "classification": "squeeze_in_review",
+        "date": "2026-07-27",
+        "duration_minutes": 15,
+        "id": "synthetic-slot-july27-1215",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "start_time": "12:15",
+        "warning_codes": [
+          "manual_squeeze_in_review",
+          "adjacent_to_break",
+          "no_reservation"
+        ]
+      }
+    ],
+    "default_duration_minutes": 15,
+    "patients": [
+      {
+        "aliases": [
+          "Margaret"
+        ],
+        "display": "Margaret Thompson",
+        "id": "synthetic-patient-margaret"
+      },
+      {
+        "aliases": [
+          "Liam"
+        ],
+        "display": "Liam Scott",
+        "id": "synthetic-patient-liam"
+      }
+    ],
+    "practitioners": [
+      {
+        "aliases": [
+          "Shera"
+        ],
+        "display": "Dr Shera",
+        "id": "synthetic-practitioner-shera"
+      },
+      {
+        "aliases": [
+          "Patel"
+        ],
+        "display": "Dr Patel",
+        "id": "synthetic-practitioner-patel"
+      }
+    ],
+    "selected_appointment": {
+      "date": "2026-07-27",
+      "duration_minutes": 15,
+      "id": "synthetic-appointment-margaret",
+      "patient_ref": "synthetic-patient-margaret",
+      "practitioner_ref": "synthetic-practitioner-shera",
+      "start_time": "10:00",
+      "status": "booked"
+    },
+    "squeeze_policy": {
+      "allow_move_existing": false,
+      "allow_overbook": false,
+      "assessment_enabled": true,
+      "id": "synthetic-policy-squeeze-review",
+      "requires_human_review": true
+    }
+  },
+  "context_revision": 62,
+  "contract_version": "reception.one.bureau.plan-input.v1",
+  "correlation_id": "synthetic-broad-correlation-resize-shorten",
+  "data_class": "authored_synthetic",
+  "expires_at": "2026-07-29T02:00:00Z",
+  "observed_at": "2026-07-29T00:00:00Z",
+  "practice_ref": "synthetic-practice-main",
+  "reference_date": "2026-07-27",
+  "request_id": "synthetic-broad-resize-shorten",
+  "utterances": [
+    "Shorten Margaret's appointment to 10 minutes."
+  ]
+}

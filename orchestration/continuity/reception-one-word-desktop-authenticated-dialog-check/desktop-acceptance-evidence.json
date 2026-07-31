@@ -1,0 +1,77 @@
+{
+  "schema_version": "reception.one.word-desktop-dialog-evidence.v1",
+  "attempt_id": "reception-one-word-desktop-dialog-001",
+  "observed_at": "2026-07-31T05:45:00Z",
+  "result": "reception_one_word_desktop_supervised_dialog_check_pass",
+  "host": {
+    "application": "Microsoft Word desktop",
+    "platform": "Windows",
+    "task_window_count": 1,
+    "new_blank_document_only": true,
+    "existing_document_contents_inspected": false,
+    "document_body_read_count": 0,
+    "document_body_write_count": 0,
+    "office_account_or_credential_inspected": false
+  },
+  "sideload": {
+    "class": "disposable_local_development_manifest",
+    "manifest_product_id": "258df182-513c-4a11-8a10-0d3503310bf7",
+    "manifest_distinct_from_canonical": true,
+    "manifest_schema_valid": true,
+    "source_origin": "https://localhost:3000",
+    "listener_address": "127.0.0.1",
+    "lan_listener": false
+  },
+  "repair": {
+    "defect": "office_onready_normal_authentication_branch_overwrote_the_default_off_companion_view",
+    "classification": "repository_local_initialization_order",
+    "authority_or_external_state_change": false,
+    "repair": "companion_mode_is_now_checked_before_the_normal_token_or_login_branch_without_calling_initApp",
+    "focused_regression_test_added": true,
+    "post_repair_focused_tests_passed": 27
+  },
+  "exchange": {
+    "data_class": "authored_synthetic",
+    "request_count": 1,
+    "request_content_retained": false,
+    "message_sequence": [
+      "reception_one_auth",
+      "reception_one_launch_context",
+      "reception_one_companion_request",
+      "reception_one_companion_summary"
+    ],
+    "application_constructed_dialog_flags": [
+      "reception_one_companion_demo=true",
+      "smoke=true"
+    ],
+    "office_appended_host_metadata_observed": true,
+    "diary_reference_date_verified_before_projection": true,
+    "native_diary_result_count": 3,
+    "native_diary_retained_appointment_detail": true,
+    "proofreader_disposition": "admit",
+    "word_visible_summary": "3 results are ready in the Diary.",
+    "request_text_returned_to_word": false,
+    "appointment_detail_returned_to_word": false,
+    "dialog_closed": true,
+    "word_focus_restored": true
+  },
+  "zero_authority_counts": {
+    "provider_calls": 0,
+    "credential_reads": 0,
+    "backend_calls": 0,
+    "database_reads": 0,
+    "database_writes": 0,
+    "confirmations": 0,
+    "commands": 0,
+    "appointment_writes": 0
+  },
+  "sensitive_exclusions": {
+    "office_account_identifier_retained": false,
+    "credential_retained": false,
+    "document_identifier_retained": false,
+    "raw_request_retained": false,
+    "patient_or_health_data_used": false,
+    "screenshot_retained": false
+  },
+  "candid_limit": "This proves one provider-free authored-synthetic exchange in the installed Word desktop host through a disposable HTTPS-loopback sideload. It does not establish Office tenant identity, authenticated Word Online interoperability, production deployment, live backend authorization, provider interpretation, or safety for real or product-derived patient, health, clinical or historical data."
+}

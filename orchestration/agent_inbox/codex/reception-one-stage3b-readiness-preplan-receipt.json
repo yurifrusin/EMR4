@@ -1,0 +1,48 @@
+{
+  "authority_boundary": "provider_free_authored_synthetic_representative_staff_readiness_only_no_participant_result_contact_product_write_provider_production_deployment_or_release",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "implement_and_validate_provider_free_reception_one_stage3b_representative_staff_readiness",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. The accepted Reception One visual synthesis is the product parent; Stage 3B had remained closed pending a fresh Yuri decision.",
+    "current_authority_allocation": [
+      "Yuri replied 'Let's do it' to the proposed provider-free representative-staff evaluation.",
+      "The implementation scope is a study-readiness sidecar and local rehearsal. Yuri retains participant nomination and scheduling."
+    ],
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-stage3b-representative-staff-readiness-plan.md",
+      "docs/bernie-stage3a-yuri-formative-validation-plan.md",
+      "docs/bernie-stage3a-yuri-formative-observation-review.md",
+      "docs/bernie-stage3a-final-validation-closeout.md",
+      "docs/bernie-reception-one-visual-interaction-synthesis-plan.md",
+      "docs/bernie-reception-one-visual-interaction-synthesis-closeout.md",
+      "orchestration/agent_inbox/codex/reception-one-visual-synthesis-sol-acceptance.md",
+      "orchestration/continuity/emr4-continuity-graph.json revision 54",
+      "orchestration/continuity/emr4-compass.json map revision 41"
+    ],
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 remain sealed; historical diary material remains local and excluded. Only authored-synthetic product fixtures and anonymous structured observations are allowed. No free text, transcript, recording, provider, credential, PII, write, production, deployment or release path is opened.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "worktree_entry_count": 186,
+      "protected_refs_unchanged": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

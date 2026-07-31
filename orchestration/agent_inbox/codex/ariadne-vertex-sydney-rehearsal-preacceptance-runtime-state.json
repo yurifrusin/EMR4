@@ -1,0 +1,89 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_fresh_five_source_rehydration_and_tranche_1_evidence",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "DeepSeek and external worker dispatch remained outside the sequence."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code was not selected or contacted."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude was not selected or contacted."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external worker was dispatched."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "All five mandatory rehydration sources are named in the fresh rehydration receipt.",
+        "Yuri's exact Sydney Vertex, Bernie impersonated-ADC, authored-synthetic, isolation, audit, call-ceiling and stop boundaries are preserved in the authority, plan and pre-plan receipt.",
+        "Current official Google model-location documentation does not publish gemini-3.5-flash for australia-southeast1.",
+        "The Tranche 1 provider-admission policy therefore rejects the route and closes every successor tranche.",
+        "No ADC, credential, token, API-key, Cloud control plane, container, provider or prompt path was opened.",
+        "Zero occupied calls and zero retries were made; no single-use occupied ledger was opened.",
+        "The blocked result does not revise consumed Terra/Gemini history or claim physical or sovereign Australian processing."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "One repository-read-only independent reviewer was used for the documentary gate and was forbidden from editing files or accessing credentials, Cloud control plane or provider runtime."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/codex/ariadne-vertex-sydney-rehearsal-rehydration-receipt.json",
+    "orchestration/agent_inbox/codex/ariadne-vertex-sydney-rehearsal-preplan-receipt.json"
+  ],
+  "assigned_agent_ids": []
+}

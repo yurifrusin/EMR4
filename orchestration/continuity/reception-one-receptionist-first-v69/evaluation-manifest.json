@@ -1,0 +1,192 @@
+{
+  "schema_version": "reception.one.preprinted_form_v5.broad_language_manifest.v1",
+  "evaluation_id": "reception-one-receptionist-first-v69-untouched-holdout-001",
+  "data_class": "authored_synthetic",
+  "effect_ceiling": "proposal_only",
+  "holdout": {
+    "previously_sent_to_provider": false,
+    "may_be_used_for_prompt_or_proofreader_tuning": false,
+    "sealed_before_first_provider_call": true,
+    "source": "newly_authored_for_v69"
+  },
+  "historical_anchor": {
+    "case_id": "reception-one-preprinted-form-v5-multicase-active",
+    "source_result": "reception_one_preprinted_form_v5_multicase_occupied_pass",
+    "replayed": false
+  },
+  "frozen_condition": {
+    "few_shot_examples": false,
+    "demonstration_answers": false,
+    "prompt_optimisation": false,
+    "fine_tuning": false,
+    "temperature": 0,
+    "thinking_budget": 0,
+    "mid_cohort_prompt_or_schema_change": false
+  },
+  "frozen_v68_runtime_condition": {
+    "source_result": "reception_one_receptionist_first_v68_full_cohort_pass",
+    "temperature": 0,
+    "thinking_budget": 1024,
+    "include_thoughts": false,
+    "maximum_output_tokens": 3072,
+    "prompt_schema_or_proofreader_tuning_permitted": false
+  },
+  "maximum_primary_calls": 12,
+  "maximum_correction_calls": 12,
+  "absolute_call_ceiling": 24,
+  "incremental_cost_ceiling_usd": 1,
+  "cases": [
+    {
+      "case_code": "h-create-book",
+      "source_case_id": null,
+      "request_id": "synthetic-holdout-create-book",
+      "correlation_id": "synthetic-holdout-correlation-create-book",
+      "utterances": ["Please book Margaret Thompson with Dr Shera tomorrow at 2:30 pm for 15 minutes."],
+      "expected_goal": "create",
+      "expected_proposal_family": "create",
+      "expected_api_spine_operation_id": "proposeAppointmentCreate",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "h-create-correction",
+      "source_case_id": null,
+      "request_id": "synthetic-holdout-create-correction",
+      "correlation_id": "synthetic-holdout-correlation-create-correction",
+      "utterances": ["Arrange Margaret Thompson with Dr Shera tomorrow at 2:30 pm for 15 minutes.", "Correction: make that 3 pm instead."],
+      "expected_goal": "create",
+      "expected_proposal_family": "create",
+      "expected_api_spine_operation_id": "proposeAppointmentCreate",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "h-move-plain",
+      "source_case_id": null,
+      "request_id": "synthetic-holdout-move-plain",
+      "correlation_id": "synthetic-holdout-correlation-move-plain",
+      "utterances": ["Please move Margaret Thompson's appointment to tomorrow at 2:30 pm."],
+      "expected_goal": "move",
+      "expected_proposal_family": "move",
+      "expected_api_spine_operation_id": "proposeAppointmentUpdate",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "h-move-reschedule",
+      "source_case_id": null,
+      "request_id": "synthetic-holdout-move-reschedule",
+      "correlation_id": "synthetic-holdout-correlation-move-reschedule",
+      "utterances": ["Reschedule Margaret's booking for tomorrow at 3 pm."],
+      "expected_goal": "move",
+      "expected_proposal_family": "move",
+      "expected_api_spine_operation_id": "proposeAppointmentUpdate",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "h-resize-extend",
+      "source_case_id": null,
+      "request_id": "synthetic-holdout-resize-extend",
+      "correlation_id": "synthetic-holdout-correlation-resize-extend",
+      "utterances": ["Extend Margaret Thompson's appointment to 30 minutes."],
+      "expected_goal": "resize",
+      "expected_proposal_family": "resize",
+      "expected_api_spine_operation_id": "proposeAppointmentUpdate",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "h-resize-ten",
+      "source_case_id": null,
+      "request_id": "synthetic-holdout-resize-ten",
+      "correlation_id": "synthetic-holdout-correlation-resize-ten",
+      "utterances": ["Make Margaret's appointment 10 minutes long."],
+      "expected_goal": "resize",
+      "expected_proposal_family": "resize",
+      "expected_api_spine_operation_id": "proposeAppointmentUpdate",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "h-cancel-direct",
+      "source_case_id": null,
+      "request_id": "synthetic-holdout-cancel-direct",
+      "correlation_id": "synthetic-holdout-correlation-cancel-direct",
+      "utterances": ["Cancel Margaret Thompson's appointment."],
+      "expected_goal": "cancel",
+      "expected_proposal_family": "cancel",
+      "expected_api_spine_operation_id": "proposeAppointmentDelete",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "h-cancel-diary",
+      "source_case_id": null,
+      "request_id": "synthetic-holdout-cancel-diary",
+      "correlation_id": "synthetic-holdout-correlation-cancel-diary",
+      "utterances": ["Please remove Margaret's booking from the diary."],
+      "expected_goal": "cancel",
+      "expected_proposal_family": "cancel",
+      "expected_api_spine_operation_id": "proposeAppointmentDelete",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "h-status-arrived",
+      "source_case_id": null,
+      "request_id": "synthetic-holdout-status-arrived",
+      "correlation_id": "synthetic-holdout-correlation-status-arrived",
+      "utterances": ["Mark Margaret Thompson's appointment as arrived."],
+      "expected_goal": "status_change",
+      "expected_proposal_family": "status_change",
+      "expected_api_spine_operation_id": "proposeAppointmentStatus",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "h-squeeze-review",
+      "source_case_id": null,
+      "request_id": "synthetic-holdout-squeeze-review",
+      "correlation_id": "synthetic-holdout-correlation-squeeze-review",
+      "utterances": ["Can you squeeze Margaret Thompson in with Dr Shera today for 15 minutes without moving anyone?"],
+      "expected_goal": "squeeze_in_assessment",
+      "expected_proposal_family": "squeeze_in_assessment",
+      "expected_api_spine_operation_id": null,
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "h-clarify-details",
+      "source_case_id": null,
+      "request_id": "synthetic-holdout-clarify-details",
+      "correlation_id": "synthetic-holdout-correlation-clarify-details",
+      "utterances": ["Margaret Thompson and Dr Shera tomorrow at 3 pm."],
+      "expected_goal": "clarification",
+      "expected_proposal_family": "clarification",
+      "expected_api_spine_operation_id": null,
+      "expected_proposal_release": false,
+      "expected_typed_output_kind": "clarification"
+    },
+    {
+      "case_code": "h-clarify-change",
+      "source_case_id": null,
+      "request_id": "synthetic-holdout-clarify-change",
+      "correlation_id": "synthetic-holdout-correlation-clarify-change",
+      "utterances": ["Please change Margaret's appointment."],
+      "expected_goal": "clarification",
+      "expected_proposal_family": "clarification",
+      "expected_api_spine_operation_id": null,
+      "expected_proposal_release": false,
+      "expected_typed_output_kind": "clarification"
+    }
+  ],
+  "provider_boundary": {
+    "provider": "google_cloud_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "fallback_permitted": false
+  },
+  "authority": {
+    "product_or_database_access": false,
+    "patient_health_or_clinical_data": false,
+    "confirmation_authority": false,
+    "appointment_write_authority": false,
+    "provider_tools": false,
+    "product_delivery": false
+  }
+}

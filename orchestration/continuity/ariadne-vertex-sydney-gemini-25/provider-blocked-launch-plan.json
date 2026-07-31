@@ -1,0 +1,219 @@
+{
+  "schema_version": "ariadne.vertex_sydney_blocked_launch_plan.v1",
+  "plan_id": "ariadne-vertex-sydney-gemini-25-provider-blocked-v1",
+  "execution_performed": false,
+  "provider_contacted": false,
+  "credential_read": false,
+  "build_context": {
+    "kind": "temporary_exact_allowlist",
+    "repository_root_is_context": false,
+    "files": [
+      {
+        "source": "orchestration/continuity/ariadne-vertex-sydney-gemini-25/Dockerfile",
+        "target": "Dockerfile"
+      },
+      {
+        "source": "scripts/ariadne_vertex_sydney_gemini_25_relay.py",
+        "target": "relay.py"
+      },
+      {
+        "source": "scripts/ariadne_vertex_sydney_gemini_25_cell.py",
+        "target": "cell.py"
+      },
+      {
+        "source": "orchestration/continuity/ariadne-vertex-sydney-gemini-25/cell-request.json",
+        "target": "cell-request.json"
+      },
+      {
+        "source": "orchestration/continuity/ariadne-vertex-sydney-gemini-25/release-output.schema.json",
+        "target": "release-output.schema.json"
+      }
+    ]
+  },
+  "docker_commands": {
+    "build_relay": [
+      "docker",
+      "build",
+      "--target",
+      "relay",
+      "--tag",
+      "ariadne-vertex-sydney-gemini-25-relay:v1",
+      "<temporary_exact_context>"
+    ],
+    "build_cell": [
+      "docker",
+      "build",
+      "--target",
+      "work-cell",
+      "--tag",
+      "ariadne-vertex-sydney-gemini-25-cell:v1",
+      "<temporary_exact_context>"
+    ],
+    "create_internal_network": [
+      "docker",
+      "network",
+      "create",
+      "--internal",
+      "ariadne-vertex-sydney-gemini-25-internal"
+    ],
+    "create_relay": [
+      "docker",
+      "create",
+      "--name",
+      "ariadne-vertex-sydney-gemini-25-relay",
+      "--network",
+      "ariadne-vertex-sydney-gemini-25-internal",
+      "--network-alias",
+      "broker",
+      "--read-only",
+      "--user",
+      "65532:65532",
+      "--tmpfs",
+      "/tmp:rw,noexec,nosuid,size=8m",
+      "--memory",
+      "64m",
+      "--memory-swap",
+      "64m",
+      "--cpus",
+      "0.25",
+      "--pids-limit",
+      "32",
+      "--ulimit",
+      "nofile=64:64",
+      "--cap-drop",
+      "ALL",
+      "--security-opt",
+      "no-new-privileges=true",
+      "--mount",
+      "type=bind,src=<ephemeral_broker_token>,dst=/run/secrets/broker_token,readonly",
+      "--env",
+      "BROKER_HOST_PORT=<ephemeral_port>",
+      "ariadne-vertex-sydney-gemini-25-relay:v1"
+    ],
+    "connect_relay_egress": [
+      "docker",
+      "network",
+      "connect",
+      "bridge",
+      "ariadne-vertex-sydney-gemini-25-relay"
+    ],
+    "create_cell": [
+      "docker",
+      "create",
+      "--name",
+      "ariadne-vertex-sydney-gemini-25-cell",
+      "--hostname",
+      "ariadne-vertex-cell",
+      "--network",
+      "ariadne-vertex-sydney-gemini-25-internal",
+      "--read-only",
+      "--user",
+      "65532:65532",
+      "--tmpfs",
+      "/tmp:rw,noexec,nosuid,size=8m",
+      "--memory",
+      "128m",
+      "--memory-swap",
+      "128m",
+      "--cpus",
+      "0.50",
+      "--pids-limit",
+      "64",
+      "--ulimit",
+      "nofile=64:64",
+      "--cap-drop",
+      "ALL",
+      "--security-opt",
+      "no-new-privileges=true",
+      "ariadne-vertex-sydney-gemini-25-cell:v1"
+    ],
+    "start_cell": [
+      "docker",
+      "start",
+      "--attach",
+      "ariadne-vertex-sydney-gemini-25-cell"
+    ],
+    "cleanup": [
+      [
+        "docker",
+        "rm",
+        "--force",
+        "ariadne-vertex-sydney-gemini-25-cell"
+      ],
+      [
+        "docker",
+        "rm",
+        "--force",
+        "ariadne-vertex-sydney-gemini-25-relay"
+      ],
+      [
+        "docker",
+        "network",
+        "rm",
+        "ariadne-vertex-sydney-gemini-25-internal"
+      ],
+      [
+        "docker",
+        "image",
+        "rm",
+        "ariadne-vertex-sydney-gemini-25-cell:v1",
+        "ariadne-vertex-sydney-gemini-25-relay:v1"
+      ]
+    ]
+  },
+  "broker_process": {
+    "runtime": "host_purpose_built_one_use_process",
+    "script": "scripts/ariadne_vertex_sydney_gemini_25_broker.py",
+    "environment_allowlist": [
+      "APPDATA",
+      "COMSPEC",
+      "LOCALAPPDATA",
+      "PATH",
+      "PATHEXT",
+      "SYSTEMDRIVE",
+      "SYSTEMROOT",
+      "TEMP",
+      "TMP",
+      "USERPROFILE",
+      "WINDIR"
+    ],
+    "api_key_environment_forwarded": false,
+    "google_application_credentials_forwarded": false,
+    "mode": "<dry-run-or-live-after-gate>",
+    "one_use_ledger_required": true,
+    "endpoint_policy": "orchestration/continuity/ariadne-vertex-sydney-gemini-25/broker-policy.json"
+  },
+  "cell_boundary": {
+    "networks": [
+      "ariadne-vertex-sydney-gemini-25-internal"
+    ],
+    "published_ports": 0,
+    "environment": [],
+    "mounts": [],
+    "credential_material": false,
+    "provider_or_service_account_details": false
+  },
+  "relay_boundary": {
+    "networks": [
+      "ariadne-vertex-sydney-gemini-25-internal",
+      "bridge"
+    ],
+    "published_ports": 0,
+    "mounts": [
+      "/run/secrets/broker_token:read_only"
+    ],
+    "forward_host": "host.docker.internal",
+    "forward_path": "/v1/execute",
+    "arbitrary_proxy": false
+  },
+  "negative_routes": {
+    "unapproved_provider": "broker_reject",
+    "unapproved_identity": "broker_reject",
+    "unapproved_project": "broker_reject",
+    "unapproved_model": "broker_reject",
+    "unapproved_hostname": "broker_reject",
+    "unapproved_region": "broker_reject",
+    "global_endpoint": "broker_reject",
+    "automatic_fallback": "broker_reject"
+  }
+}

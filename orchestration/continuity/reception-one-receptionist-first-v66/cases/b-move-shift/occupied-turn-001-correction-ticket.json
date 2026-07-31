@@ -1,0 +1,114 @@
+{
+  "attempts_remaining": 1,
+  "previous_output_sha256": "sha256:67fbd997a882101ad4f702296c7d5cfc281b5bdaee99397f4bf992ba61031e3f",
+  "previous_typed_form": {
+    "goal_code": 1,
+    "steps": [
+      {
+        "operator_code": 0,
+        "source_refs": [
+          {
+            "binding_code": 4,
+            "kind": "binding",
+            "prior_output_name": "none",
+            "prior_step_index": -1
+          }
+        ]
+      },
+      {
+        "operator_code": 3,
+        "source_refs": [
+          {
+            "binding_code": -1,
+            "kind": "prior_output",
+            "prior_output_name": "patient",
+            "prior_step_index": 0
+          },
+          {
+            "binding_code": 5,
+            "kind": "binding",
+            "prior_output_name": "none",
+            "prior_step_index": -1
+          }
+        ]
+      },
+      {
+        "operator_code": 2,
+        "source_refs": [
+          {
+            "binding_code": 0,
+            "kind": "binding",
+            "prior_output_name": "none",
+            "prior_step_index": -1
+          }
+        ]
+      },
+      {
+        "operator_code": 6,
+        "source_refs": [
+          {
+            "binding_code": -1,
+            "kind": "prior_output",
+            "prior_output_name": "practitioner",
+            "prior_step_index": 1
+          },
+          {
+            "binding_code": -1,
+            "kind": "prior_output",
+            "prior_output_name": "date",
+            "prior_step_index": 2
+          },
+          {
+            "binding_code": 2,
+            "kind": "binding",
+            "prior_output_name": "none",
+            "prior_step_index": -1
+          },
+          {
+            "binding_code": 3,
+            "kind": "binding",
+            "prior_output_name": "none",
+            "prior_step_index": -1
+          },
+          {
+            "binding_code": -1,
+            "kind": "prior_output",
+            "prior_output_name": "duration_minutes",
+            "prior_step_index": 1
+          }
+        ]
+      },
+      {
+        "operator_code": 9,
+        "source_refs": [
+          {
+            "binding_code": -1,
+            "kind": "prior_output",
+            "prior_output_name": "appointment",
+            "prior_step_index": 1
+          },
+          {
+            "binding_code": -1,
+            "kind": "prior_output",
+            "prior_output_name": "candidates",
+            "prior_step_index": 3
+          }
+        ]
+      }
+    ]
+  },
+  "replacement_required": true,
+  "target_turn_code": 2,
+  "version_code": 2,
+  "violations": [
+    {
+      "allowed_output_names": [
+        "move"
+      ],
+      "field_code": "receptionist_response",
+      "source_index": -1,
+      "step_index": -1,
+      "violation_code": "receptionist_response_goal_mismatch"
+    }
+  ]
+}

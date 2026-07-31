@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "exercise_the_existing_reception_one_companion_contract_in_an_authenticated_word_online_development_session_with_authored_synthetic_data_and_no_provider_backend_mutation_or_write_authority",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_word_online_dialog_preplan",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is selected; the supervised Office-session exercise remains Sol-owned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external reviewer or provider is selected for this provider-free Office exercise."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: the compact Word companion is the accepted current product result at Continuity graph revision 169 and Compass map revision 150.",
+        "current_authority_allocation: Yuri instructed the next supervised authenticated Word Online dialog check to proceed using authored-synthetic data and the accepted provider-free no-write boundary.",
+        "active_plan_and_acceptance: the accepted compact companion freezes separate auth, zero-authority launch and request messages, native-only detail, generic proofreader-admitted summary and local Word rendering.",
+        "protected_evidence_boundaries: protected holdouts, historical Diary material, real/product-derived patient, health and clinical data, credentials, provider material and hidden reasoning remain excluded.",
+        "git_refs_and_worktree: HEAD is 5b1ea7952fb08eea333da0e63f166d3895ccea32 on codex/ariadne-terra-gemini-comparative-rehearsal; master, handoff/current, origin/master and origin/handoff/current are 4974075b31035d599e081d68e3b85e04a897baa1; 753 existing worktree status lines are preserved.",
+        "The exercise may inspect the existing Office add-in manifest, development-server posture and authenticated Word Online UI, but may not change tenant settings, credentials, IAM, deployment, provider, backend mutation or appointment authority."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

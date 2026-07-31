@@ -1,0 +1,101 @@
+{
+  "schema_version": "ariadne.reception_one_visual_synthesis_external_audit.v1",
+  "recorded_at": "2026-07-24T09:55:00Z",
+  "attempt_id": "gemini-25-repair-visual-001",
+  "ledger_id": "gemini-25-repair-visual-ledger-001",
+  "result": "revision_required",
+  "provider": "google_vertex_ai",
+  "model_id": "gemini-2.5-flash",
+  "configured_project": "bernie-emr4-dev",
+  "impersonated_service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+  "authentication_class": "keyless_impersonated_service_account_adc",
+  "api_key_authentication_used": false,
+  "configured_region": "australia-southeast1",
+  "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+  "request_hash": "sha256:9cedf71e73f6f827bf27a1a013bfc2ddfeadfa27feb5770cf62f805f357f305b",
+  "schema_hash": "sha256:254f0b950c613f596f0a8b1b563f50eec5094f4d41f7446c00936f8663181df4",
+  "event_sequence": [
+    "broker_ready",
+    "request_admitted",
+    "ledger_consumed",
+    "provider_request_constructed",
+    "provider_call_started",
+    "provider_call_completed",
+    "proofreader_completed",
+    "broker_rejected"
+  ],
+  "durable_hash_chain": {
+    "valid": true,
+    "event_count": 8,
+    "terminal_hash": "sha256:eabdababc968d39032e8265a26f92a5c89413be6876d0341c1134022898e8963"
+  },
+  "provider_observation": {
+    "http_status": 200,
+    "latency_ms": 2986,
+    "model_version": "gemini-2.5-flash",
+    "usage": {
+      "prompt_tokens": 693,
+      "candidate_tokens": 493,
+      "total_tokens": 1186
+    }
+  },
+  "proofreader": {
+    "disposition": "edge_aborted",
+    "findings": [
+      "priority_order_invalid"
+    ],
+    "safe_repairs": [
+      "evidence_ids_deterministically_ordered",
+      "risk_ids_deterministically_ordered"
+    ],
+    "released_field_manifest": [],
+    "released_values": {},
+    "freshness": "fresh",
+    "supersession": "current",
+    "retry_count": 0,
+    "human_gate": true
+  },
+  "retry_decision": {
+    "retry_performed": false,
+    "reason": "The provider returned HTTP 200, but the generated output failed the frozen semantic output contract. The conditional second call permits only a deterministic request-contract repair, so it is not available for this failure class."
+  },
+  "ledger": {
+    "status": "consumed",
+    "maximum_provider_calls": 1,
+    "provider_calls_consumed": 1,
+    "fallback_permitted": false
+  },
+  "cleanup": {
+    "cell_container_absent": true,
+    "relay_container_absent": true,
+    "internal_network_absent": true,
+    "cell_image_absent": true,
+    "relay_image_absent": true,
+    "broker_process_absent": true,
+    "temporary_context_absent": true,
+    "temporary_token_absent": true,
+    "base_image_state_preserved": true,
+    "daemon_wide_prune_performed": false
+  },
+  "independent_residue_evidence": "orchestration/continuity/reception-one-visual-synthesis/postcall-residue-evidence.json",
+  "vertex_audit_control_posture": {
+    "source": "orchestration/continuity/reception-one-visual-synthesis/tranche-3-preflight-evidence.json",
+    "data_access_audit_logging": "passed_read_and_write",
+    "request_response_logging": "disabled_or_absent",
+    "project_cache": "disabled",
+    "service_account_key": "not_used"
+  },
+  "residency_claim": "The evidence proves the configured australia-southeast1 locational endpoint, observed regional hostname and Google's applicable published contractual posture. It does not prove stronger physical or sovereign locality.",
+  "explicit_exclusions": {
+    "credentials_or_access_tokens_recorded": false,
+    "api_key_information_recorded": false,
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "chain_of_thought_recorded": false,
+    "rejected_candidate_fields_recorded": false,
+    "product_or_database_data_used": false,
+    "command_authority_granted": false,
+    "provider_or_regional_fallback_performed": false,
+    "human_or_product_delivery_performed": false
+  }
+}

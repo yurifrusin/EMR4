@@ -1,0 +1,75 @@
+{
+  "schema_version": "reception.one.receptionist_first_v68.external_audit_analysis.v1",
+  "recorded_at": "2026-07-30T12:17:36Z",
+  "result": "reception_one_receptionist_first_v68_external_audit_complete",
+  "cohort_result": "reception_one_receptionist_first_v68_full_cohort_pass",
+  "case_count": 24,
+  "exact_safe_outcome_count": 24,
+  "nonmatching_terminal_case_count": 0,
+  "nonmatching_terminal_cases": [],
+  "provider_calls": {
+    "actual": 24,
+    "absolute_ceiling": 48,
+    "primary": 24,
+    "terminal_second": 0,
+    "after_terminal_result": 0
+  },
+  "provider_outcomes": {
+    "completed_http_200": 24,
+    "response_rejected_before_candidate": 0,
+    "raw_provider_text_retained": false
+  },
+  "usage": {
+    "prompt_tokens": 111962,
+    "visible_candidate_tokens": 12260,
+    "thinking_tokens": 16428,
+    "total_tokens": 140650,
+    "hidden_thought_content_retained": false
+  },
+  "latency_ms": {
+    "sum": 119183,
+    "minimum": 2645,
+    "maximum": 7886,
+    "mean": 4965.96
+  },
+  "prior_failure_repair": {
+    "case_code": "b-move-shift",
+    "actual_provider_calls": 1,
+    "typed_form_exact": true,
+    "proofreader_disposition": "admit",
+    "violation_codes": [],
+    "correction_used": false
+  },
+  "exact_binding": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "api_key_authentication_used": false,
+    "fallback_performed": false
+  },
+  "audit_controls": {
+    "all_ledgers_consumed": true,
+    "opened_ledger_count": 24,
+    "all_cleanup_passed": true,
+    "durable_turn_hash_chains_valid": true,
+    "durable_turn_hash_chain_count": 24,
+    "durable_turn_audit_event_count": 264,
+    "durable_case_hash_chains_valid": true,
+    "case_audit_chain_count": 24,
+    "case_audit_event_count": 96,
+    "model_and_proofreader_context_hash_recorded": true,
+    "raw_prompts_recorded": false,
+    "raw_provider_responses_recorded": false,
+    "credentials_or_tokens_recorded": false,
+    "api_key_information_recorded": false,
+    "chain_of_thought_recorded": false,
+    "product_or_database_access": false,
+    "appointment_write": false,
+    "human_or_product_delivery": false
+  },
+  "claim_limit": "The evidence proves twenty-four exact safe outcomes over a reused authored-synthetic development cohort through the configured and observed Sydney locational request path. It proves that the narrow v6.8 move-response teaching closed the sole v6.7 mismatch under the unchanged deterministic proofreader. It does not prove independent generalisation, production fitness, Australian physical or sovereign processing, or safety for real data."
+}

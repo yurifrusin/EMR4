@@ -1,0 +1,359 @@
+{
+  "api_key_authentication_used": false,
+  "attempt_id": "reception-one-receptionist-first-v64-eval-b-clarify-details-turn-001",
+  "authentication": "keyless_impersonated_service_account_adc",
+  "candid_limit": "The first call proves only the configured Sydney regional request path and a schema-admitted typed form that the proofreader rejected. One closed correction ticket was issued; nothing was released, and no claim of successful correction, general reliability, Australian physical or sovereign processing, product suitability or real-data safety is made.",
+  "cleanup": {
+    "base_image_state_preserved": true,
+    "broker_process_absent": true,
+    "cell_container_absent": true,
+    "cell_image_absent": true,
+    "daemon_wide_prune_performed": false,
+    "internal_network_absent": true,
+    "relay_container_absent": true,
+    "relay_image_absent": true,
+    "temporary_context_absent": true,
+    "temporary_token_absent": true
+  },
+  "correction_ticket": {
+    "attempts_remaining": 1,
+    "complete_replacement_required": true,
+    "proofreader_selected_replacement": false,
+    "target_turn_code": 2,
+    "ticket": {
+      "attempts_remaining": 1,
+      "previous_output_sha256": "sha256:f080e93d90fa4ba32a807b736bffb54354a48d10945c6a310979612e6ff54dd7",
+      "previous_typed_form": {
+        "goal_code": 6,
+        "steps": [
+          {
+            "operator_code": 0,
+            "source_refs": [
+              {
+                "binding_code": 5,
+                "kind": "binding",
+                "prior_output_name": "none",
+                "prior_step_index": -1
+              }
+            ]
+          },
+          {
+            "operator_code": 1,
+            "source_refs": [
+              {
+                "binding_code": 6,
+                "kind": "binding",
+                "prior_output_name": "none",
+                "prior_step_index": -1
+              }
+            ]
+          },
+          {
+            "operator_code": 2,
+            "source_refs": [
+              {
+                "binding_code": 0,
+                "kind": "binding",
+                "prior_output_name": "none",
+                "prior_step_index": -1
+              }
+            ]
+          },
+          {
+            "operator_code": 13,
+            "source_refs": []
+          }
+        ]
+      },
+      "replacement_required": true,
+      "target_turn_code": 2,
+      "version_code": 2,
+      "violations": [
+        {
+          "allowed_output_names": [],
+          "field_code": "receptionist_response",
+          "source_index": -1,
+          "step_index": -1,
+          "violation_code": "receptionist_response_missing_review_boundary"
+        },
+        {
+          "allowed_output_names": [],
+          "field_code": "receptionist_response",
+          "source_index": -1,
+          "step_index": -1,
+          "violation_code": "receptionist_response_goal_mismatch"
+        }
+      ]
+    },
+    "ticket_hash": "sha256:a75286751b27f3793353b86855264db1b0388c8a635aaf53228518a1de10c45e"
+  },
+  "durable_hash_chain": {
+    "event_count": 12,
+    "terminal_hash": "sha256:37a4558316e2ea268b6f7933ab11441a8c0c5a01ff648e70015d9a3d3e9b454d",
+    "valid": true
+  },
+  "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+  "event_sequence": [
+    {
+      "event_hash": "sha256:42b09b556f640eb130813fb56fe061bd2cbcfdcf1f738887a9cdeecae1530815",
+      "event_type": "broker_ready",
+      "previous_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "sequence": 1
+    },
+    {
+      "event_hash": "sha256:64ee134dfdf2db8539b84278612d4a9933788ea4610804bdb69813e87d36ca38",
+      "event_type": "request_admitted",
+      "previous_hash": "sha256:42b09b556f640eb130813fb56fe061bd2cbcfdcf1f738887a9cdeecae1530815",
+      "sequence": 2
+    },
+    {
+      "event_hash": "sha256:46fc813a9c8766f9565545fa830122f286013fcf51c904d76cd7712ab81bf4b1",
+      "event_type": "ledger_consumed",
+      "previous_hash": "sha256:64ee134dfdf2db8539b84278612d4a9933788ea4610804bdb69813e87d36ca38",
+      "sequence": 3
+    },
+    {
+      "event_hash": "sha256:701e2f3326a579d6a72ee20dd06305132c9511f1a4dd201021a179b0aaa4102b",
+      "event_type": "provider_request_constructed",
+      "previous_hash": "sha256:46fc813a9c8766f9565545fa830122f286013fcf51c904d76cd7712ab81bf4b1",
+      "sequence": 4
+    },
+    {
+      "event_hash": "sha256:df19be24bee99dcc933ea6eee1bc5c8fc27eecf8de917107d4bfc42e4e20b2f2",
+      "event_type": "provider_call_started",
+      "previous_hash": "sha256:701e2f3326a579d6a72ee20dd06305132c9511f1a4dd201021a179b0aaa4102b",
+      "sequence": 5
+    },
+    {
+      "event_hash": "sha256:c95e04c0e4eb49162ec7278e5d66876cdbba2c4a883b53dc77afd6143f8e7c18",
+      "event_type": "provider_call_received",
+      "previous_hash": "sha256:df19be24bee99dcc933ea6eee1bc5c8fc27eecf8de917107d4bfc42e4e20b2f2",
+      "sequence": 6
+    },
+    {
+      "event_hash": "sha256:6035cce1a5cf9875415452ad243602f2f88b5f4a45e7950f1fa75d92b6580ee0",
+      "event_type": "provider_call_completed",
+      "previous_hash": "sha256:c95e04c0e4eb49162ec7278e5d66876cdbba2c4a883b53dc77afd6143f8e7c18",
+      "sequence": 7
+    },
+    {
+      "event_hash": "sha256:91616cc3352b1d5245a00b005112659ac0f7a5137e4a2b58e004a637924744f4",
+      "event_type": "receptionist_response_evaluated",
+      "previous_hash": "sha256:6035cce1a5cf9875415452ad243602f2f88b5f4a45e7950f1fa75d92b6580ee0",
+      "sequence": 8
+    },
+    {
+      "event_hash": "sha256:7fde25dda5d59e8c2cc1ddb15858adbb0bb2809682e1a678c6af8ef99b9bfbc4",
+      "event_type": "operator_note_evaluated",
+      "previous_hash": "sha256:91616cc3352b1d5245a00b005112659ac0f7a5137e4a2b58e004a637924744f4",
+      "sequence": 9
+    },
+    {
+      "event_hash": "sha256:88631aec8d7306898e04090a15574fb90138dcf3fc68f08062ac5f0b279e6498",
+      "event_type": "correction_ticket_issued",
+      "previous_hash": "sha256:7fde25dda5d59e8c2cc1ddb15858adbb0bb2809682e1a678c6af8ef99b9bfbc4",
+      "sequence": 10
+    },
+    {
+      "event_hash": "sha256:f06d154060f4ae724ceb33556f32f655c6149ecfe4fc1d701b6a61330d5ed75a",
+      "event_type": "proofreader_completed",
+      "previous_hash": "sha256:88631aec8d7306898e04090a15574fb90138dcf3fc68f08062ac5f0b279e6498",
+      "sequence": 11
+    },
+    {
+      "event_hash": "sha256:37a4558316e2ea268b6f7933ab11441a8c0c5a01ff648e70015d9a3d3e9b454d",
+      "event_type": "broker_rejected",
+      "previous_hash": "sha256:f06d154060f4ae724ceb33556f32f655c6149ecfe4fc1d701b6a61330d5ed75a",
+      "sequence": 12
+    }
+  ],
+  "explicit_exclusions": {
+    "api_key_information_recorded": false,
+    "chain_of_thought_recorded": false,
+    "command_authority": false,
+    "credential_or_token_recorded": false,
+    "human_or_product_delivery": false,
+    "operator_note_parsed_into_plan": false,
+    "operator_note_product_delivered": false,
+    "product_or_database_access": false,
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "thinking_token_count_only": true,
+    "thought_summary_requested": false
+  },
+  "freshness": "fresh",
+  "ledger_id": "reception-one-receptionist-first-v64-eval-b-clarify-details-ledger-001",
+  "location": "australia-southeast1",
+  "model_id": "gemini-2.5-flash",
+  "model_input_hash": "sha256:9f4cdc56edf242c3f0dad483c5c7d1ca3baef179b63e8c6f34ddeefb46949b3c",
+  "operator_note": {
+    "audit_only": true,
+    "disposition": "admit",
+    "note_sha256": "sha256:f5241390af3ff4a632af478c2982a864f196467ce918145efcd0377953e53343",
+    "operator_note": "Proposal for clarification is being prepared for review; no booking was changed.",
+    "parsed_into_plan": false,
+    "product_delivered": false,
+    "reason_codes": [],
+    "retained_utf8_bytes": 80
+  },
+  "preprinted_form": {
+    "broker_judgement_repair": false,
+    "broker_owned_field_manifest": [
+      "version_code"
+    ],
+    "model_authored_field_manifest": [
+      "receptionist_response",
+      "decision_note",
+      "evidence_utterance_indices",
+      "typed_form"
+    ],
+    "model_form_body_hash": "sha256:f080e93d90fa4ba32a807b736bffb54354a48d10945c6a310979612e6ff54dd7",
+    "preprinted_field_manifest_hash": "sha256:2a1f45caa1aeee47a1ab25e5ff886ac2e149e404d0c322e020db4338d6015d3e",
+    "raw_model_form_body_recorded": false
+  },
+  "project": "bernie-emr4-dev",
+  "proofreader": {
+    "admitted_operator_ids": [],
+    "context_frame_review": {
+      "command_authority": false,
+      "desk_context_sha256": "sha256:c53142facbbc7a1ffb0a6a3747b4f314ffa9197615cbc21275cd002d2533f1f6",
+      "disposition": "admit",
+      "reviewed_context_revision": 62,
+      "same_packet_seen_by_model_and_proofreader": true,
+      "source_labels": [
+        "fixture_intercepted",
+        "staff_selected",
+        "staff_selected"
+      ],
+      "task_sha256": "sha256:c6c54c3142349cc1bdc1ba6ff023b4527bb6123fbac0d9dfe32c17ed9e9d269b"
+    },
+    "disposition": "revision_required",
+    "safe_repairs": [],
+    "violations": [
+      {
+        "code": "receptionist_response_missing_review_boundary",
+        "path": "$.receptionist_response"
+      },
+      {
+        "code": "receptionist_response_goal_mismatch",
+        "path": "$.receptionist_response"
+      }
+    ],
+    "wire_safe_repairs": []
+  },
+  "provider": "google_vertex_ai",
+  "provider_outcome": {
+    "bounded_completion_metadata": {
+      "candidate_count": 1,
+      "candidate_count_truncated": false,
+      "finish_reasons": [
+        "STOP"
+      ],
+      "part_counts": [
+        1
+      ],
+      "provider_text_inspected_for_diagnosis": false,
+      "provider_text_retained": false
+    },
+    "bounded_error": null,
+    "http_status": 200,
+    "latency_ms": 5956,
+    "status": "completed",
+    "usage": {
+      "candidatesTokenCount": 398,
+      "promptTokenCount": 4113,
+      "thoughtsTokenCount": 952,
+      "totalTokenCount": 5463
+    }
+  },
+  "receptionist_output": {
+    "decision_note": null,
+    "disposition": "revision_required",
+    "evidence_utterance_indices": [],
+    "hidden_reasoning": false,
+    "natural_response_parsed_into_form": false,
+    "product_delivered": false,
+    "raw_provider_response": false,
+    "receptionist_response": null,
+    "violations": [
+      {
+        "code": "receptionist_response_missing_review_boundary",
+        "path": "$.receptionist_response"
+      },
+      {
+        "code": "receptionist_response_goal_mismatch",
+        "path": "$.receptionist_response"
+      }
+    ]
+  },
+  "release": null,
+  "request_hash": "sha256:4fd8fd9628c7e0d1047fe72927307a652799e2055d814ecaf0087f69cc29370a",
+  "result": "reception_one_receptionist_first_v64_turn_revision_required",
+  "retry": {
+    "actual_provider_call_ordinal": 1,
+    "authorised": false,
+    "count": 0,
+    "lifecycle_sequence": 1,
+    "performed": false,
+    "reason": "one_closed_correction_turn_authorised"
+  },
+  "schema_hash": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+  "schema_version": "reception.one.receptionist_first_v64.turn_external_audit.v1",
+  "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+  "supersession": "current",
+  "typed_program": {
+    "explicit_source_form": {
+      "goal_code": 6,
+      "steps": [
+        {
+          "operator_code": 0,
+          "source_refs": [
+            {
+              "binding_code": 5,
+              "kind": "binding",
+              "prior_output_name": "none",
+              "prior_step_index": -1
+            }
+          ]
+        },
+        {
+          "operator_code": 1,
+          "source_refs": [
+            {
+              "binding_code": 6,
+              "kind": "binding",
+              "prior_output_name": "none",
+              "prior_step_index": -1
+            }
+          ]
+        },
+        {
+          "operator_code": 2,
+          "source_refs": [
+            {
+              "binding_code": 0,
+              "kind": "binding",
+              "prior_output_name": "none",
+              "prior_step_index": -1
+            }
+          ]
+        },
+        {
+          "operator_code": 13,
+          "source_refs": []
+        }
+      ],
+      "version_code": 3
+    },
+    "operator_note_excluded": true,
+    "program_hash": "sha256:846f4ba843fcd14caebcf66dadf4b3d50188e159c35f831ff94d88309e1d8c2c",
+    "raw_provider_response": false
+  },
+  "vertex_audit_control_posture": {
+    "no_user_managed_service_account_key": true,
+    "provider_in_memory_cache_disabled": true,
+    "request_response_logging_disabled_or_absent": true,
+    "vertex_data_read_audit_enabled": true,
+    "vertex_data_write_audit_enabled": true
+  }
+}

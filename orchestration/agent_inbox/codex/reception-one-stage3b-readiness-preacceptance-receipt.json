@@ -1,0 +1,47 @@
+{
+  "authority_boundary": "accept_readiness_only_no_participant_threshold_product_write_provider_production_deployment_or_release_claim",
+  "continuation_event": "pre_acceptance",
+  "planned_action": "accept_reception_one_stage3b_study_readiness_awaiting_participants",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. The accepted visual synthesis remains the product parent and the current Stage 3B authority is bounded to readiness and voluntary authored-synthetic evaluation.",
+    "current_authority_allocation": [
+      "Yuri's 'Let's do it' authorises the provider-free representative-staff evaluation sequence.",
+      "Codex may close the readiness tranche but may not nominate, contact or fabricate participants."
+    ],
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-stage3b-representative-staff-readiness-plan.md",
+      "docs/bernie-reception-one-stage3b-readiness-closeout.md",
+      "orchestration/prototypes/reception-one-stage3b-readiness/browser-acceptance-evidence.json",
+      "orchestration/prototypes/reception-one-stage3b-readiness/product-task-acceptance-evidence.json",
+      "orchestration/prototypes/reception-one-stage3b-readiness/readiness-audit-analysis.json",
+      "orchestration/agent_inbox/codex/reception-one-stage3b-readiness-sol-review.md",
+      "orchestration/continuity/emr4-continuity-graph.json revision 55",
+      "orchestration/continuity/emr4-compass.json map revision 42"
+    ],
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 remain sealed; historical diary material remains local and excluded. The accepted result contains no real or product-derived patient data, prompt, transcript, recording, provider key, product write or participant performance claim.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "worktree_entry_count": 196,
+      "protected_refs_unchanged": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

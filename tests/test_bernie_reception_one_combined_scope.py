@@ -76,7 +76,7 @@ def test_scoped_selection_prepares_proposal_without_retyping_or_writing():
     assert 'projectionState: "proposal_not_committed"' in source
     assert "appointment_write_authority: false" in source
     assert "No appointment has been created" in source
-    assert "Confirmation is not available inside the meta-grid" in source
+    assert "Reception One cannot confirm this appointment" in source
 
 
 def test_refinement_privacy_and_interruption_require_fresh_scoped_reads():

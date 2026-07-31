@@ -1,0 +1,131 @@
+{
+  "absolute_provider_call_ceiling": 2,
+  "actual_provider_call_count": 2,
+  "assembled_response_contract": "reception.one.bureau.plan-program.v3",
+  "attempt_ids": [
+    "reception-one-receptionist-first-v64-eval-b-cancel-remove-turn-001",
+    "reception-one-receptionist-first-v64-eval-b-cancel-remove-turn-002"
+  ],
+  "baseline": {
+    "demonstration_answers": false,
+    "exact_recognized_constraint_gate": true,
+    "few_shot_examples": false,
+    "fine_tuning": false,
+    "form_toolkit_guidance": true,
+    "minimal_desk_context": true,
+    "natural_typed_same_goal_prompt": true,
+    "paired_development_not_holdout": true,
+    "prompt_optimisation": true,
+    "response_ceiling_repair": true,
+    "shared_model_proofreader_context_hash": true,
+    "targeted_grounded_binding_repair": true
+  },
+  "candid_limit": "This sequence can prove only bounded authored-synthetic form completion through the configured and observed Sydney Vertex locational request path. It cannot prove Australian physical or sovereign processing, general model reliability, production fitness, training need or safety for real, product, patient, health, clinical or historical data.",
+  "correction_ticket_hash": "sha256:3578b52918a529519aebb381b888a04529a890aa059eae376852cdef9ea1391e",
+  "data_class": "authored_synthetic",
+  "dialogue_protocol": "reception.one.bureau.receptionist-first.v6.4",
+  "effect_ceiling": "proposal_only",
+  "evidence_hash": "sha256:72a6f15f3a85d64622aae235e37e05106184ed5bc0879f071cd24ffa886045e2",
+  "exact_binding": {
+    "api_key_authentication_used": false,
+    "authentication": "keyless_impersonated_service_account_adc",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "location": "australia-southeast1",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "provider": "google_vertex_ai",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"
+  },
+  "explicit_exclusions": {
+    "api_key_information_recorded": false,
+    "broker_judgement_repair": false,
+    "chain_of_thought_recorded": false,
+    "command_authority": false,
+    "credential_or_token_recorded": false,
+    "fallback": false,
+    "human_or_product_delivery": false,
+    "product_or_database_access": false,
+    "proofreader_selected_replacement": false,
+    "raw_model_form_body_recorded": false,
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "rejected_operator_note_recorded": false
+  },
+  "incremental_cost_ceiling_usd": 1,
+  "ledger_ids": [
+    "reception-one-receptionist-first-v64-eval-b-cancel-remove-ledger-001",
+    "reception-one-receptionist-first-v64-eval-b-cancel-remove-ledger-002"
+  ],
+  "model_authored_fields": [
+    "receptionist_response",
+    "decision_note",
+    "evidence_utterance_indices",
+    "typed_form"
+  ],
+  "model_response_contract": "reception.one.bureau.receptionist-and-form.v6.4",
+  "no_call_after_admission": true,
+  "parent_audit_chain": {
+    "event_count": 6,
+    "terminal_hash": "sha256:2e6e68ce445b49e9924ca329815221583a3c371be300488e2164ddbc7d50f400",
+    "valid": true
+  },
+  "preprinted_fields": {
+    "version_code": 3
+  },
+  "release": null,
+  "request_contract_repair_competed_for_call_two": false,
+  "result": "reception_one_receptionist_first_v64_occupied_no_release",
+  "schema_version": "reception.one.receptionist_first_v64.parent_evidence.v1",
+  "terminal_status": "terminal_no_release",
+  "turn_two_terminal": true,
+  "turns": [
+    {
+      "attempt_id": "reception-one-receptionist-first-v64-eval-b-cancel-remove-turn-001",
+      "audit_terminal_hash": "sha256:3e0e5ba7f63742e024117c3623816c2be317989ed904dceb9d49b8b15a3b44f7",
+      "cleanup": {
+        "base_image_state_preserved": true,
+        "broker_process_absent": true,
+        "cell_container_absent": true,
+        "cell_image_absent": true,
+        "daemon_wide_prune_performed": false,
+        "internal_network_absent": true,
+        "relay_container_absent": true,
+        "relay_image_absent": true,
+        "temporary_context_absent": true,
+        "temporary_token_absent": true
+      },
+      "correction_ticket_issued": true,
+      "ledger_id": "reception-one-receptionist-first-v64-eval-b-cancel-remove-ledger-001",
+      "model_input_hash": "sha256:aacfcd5f9be28b8117066a448eb28ae0d144228e96872cf4b2bfded7562bf55b",
+      "proofreader_disposition": "revision_required",
+      "released": false,
+      "result": "reception_one_receptionist_first_v64_turn_revision_required",
+      "schema_hash": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "turn_code": 1
+    },
+    {
+      "attempt_id": "reception-one-receptionist-first-v64-eval-b-cancel-remove-turn-002",
+      "audit_terminal_hash": "sha256:0ddf8db2aa4aa6342f320d77c14d8bfbc0579f63f88257e7e3882d24c441f9bf",
+      "cleanup": {
+        "base_image_state_preserved": true,
+        "broker_process_absent": true,
+        "cell_container_absent": true,
+        "cell_image_absent": true,
+        "daemon_wide_prune_performed": false,
+        "internal_network_absent": true,
+        "relay_container_absent": true,
+        "relay_image_absent": true,
+        "temporary_context_absent": true,
+        "temporary_token_absent": true
+      },
+      "correction_ticket_issued": false,
+      "ledger_id": "reception-one-receptionist-first-v64-eval-b-cancel-remove-ledger-002",
+      "model_input_hash": "sha256:b65217dc30cc56b537d3f70c62fd2cf59f3c3fb2735e5a81765916716af62710",
+      "proofreader_disposition": "edge_abort",
+      "released": false,
+      "result": "reception_one_receptionist_first_v64_turn_revision_required",
+      "schema_hash": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "turn_code": 2
+    }
+  ]
+}

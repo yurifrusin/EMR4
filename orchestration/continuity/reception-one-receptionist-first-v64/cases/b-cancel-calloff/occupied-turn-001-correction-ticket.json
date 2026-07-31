@@ -1,0 +1,60 @@
+{
+  "attempts_remaining": 1,
+  "previous_output_sha256": "sha256:dd5d113429f4f6288ce57d32b173093241f661f700164fc7503d9b8e74a8c9dd",
+  "previous_typed_form": {
+    "goal_code": 3,
+    "steps": [
+      {
+        "operator_code": 0,
+        "source_refs": [
+          {
+            "binding_code": 1,
+            "kind": "binding",
+            "prior_output_name": "none",
+            "prior_step_index": -1
+          }
+        ]
+      },
+      {
+        "operator_code": 3,
+        "source_refs": [
+          {
+            "binding_code": -1,
+            "kind": "prior_output",
+            "prior_output_name": "patient",
+            "prior_step_index": 0
+          },
+          {
+            "binding_code": 2,
+            "kind": "binding",
+            "prior_output_name": "none",
+            "prior_step_index": -1
+          }
+        ]
+      },
+      {
+        "operator_code": 11,
+        "source_refs": [
+          {
+            "binding_code": -1,
+            "kind": "prior_output",
+            "prior_output_name": "appointment",
+            "prior_step_index": 1
+          }
+        ]
+      }
+    ]
+  },
+  "replacement_required": true,
+  "target_turn_code": 2,
+  "version_code": 2,
+  "violations": [
+    {
+      "allowed_output_names": [],
+      "field_code": "receptionist_response",
+      "source_index": -1,
+      "step_index": -1,
+      "violation_code": "receptionist_response_ungrounded_person"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": "ariadne.pre_attempt_receipt.v1",
+  "receipt_id": "reception-one-receptionist-first-v69-preattempt-20260730",
+  "created_at": "2026-07-30T12:43:54Z",
+  "status": "passed",
+  "candidate": {
+    "node_id": "reception-one-receptionist-first-v69-untouched-holdout",
+    "source_head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "continuity_graph_revision": 146,
+    "compass_map_revision": 127,
+    "compass_source_graph_revision": 146,
+    "rendered_compass_exact": true,
+    "rendered_compass_sha256": "sha256:522551aa0f41b2adc92569b06afbabb72677a8dfdadbc24414b334804218bafb",
+    "provider_calls_already_performed": 0,
+    "single_use_ledgers_already_opened": 0
+  },
+  "frozen_holdout": {
+    "frozen_contract_sha256": "sha256:0fd6a9355db941acb80770e8db5b5c6ef2b32209d62f3d7226532e419cb1cec0",
+    "authority_manifest_sha256": "sha256:55813da8189f752b718896194f8c90781278d9734e928b8400c9f391c81d1ac0",
+    "provider_blocked_evidence_sha256": "sha256:8c18575f9e609ef7761894165c9fac54f1a54d2c0a368d67fde689fe9f29ed75",
+    "real_isolation_evidence_sha256": "sha256:4b417bf10502bd5d01d92513553aec63311215128cbcf972fcfd3f97dea5295b",
+    "sealed_before_provider_exposure": true,
+    "prompt_schema_proofreader_or_oracle_tuning_after_seal": false,
+    "focused_regression_passed": true,
+    "provider_blocked_all_oracles_passed": true,
+    "real_isolation_passed": true,
+    "repository_only_verifier_passed": true,
+    "api_spine_continuity_compass_static_checks_passed": true
+  },
+  "read_only_cloud_preflight": {
+    "path": "orchestration/continuity/reception-one-receptionist-first-v69/occupied-preflight-evidence.json",
+    "sha256": "sha256:bdcdc904b6362d874d6fb2588f5bce423ffea623bb43f1e78ec96d026418c889",
+    "result": "ariadne_vertex_sydney_gemini_25_adc_preflight_pass",
+    "all_controls_passed": true,
+    "model_inference_called": false,
+    "provider_prompt_transmitted": false,
+    "external_state_changed": false
+  },
+  "residue": {
+    "path": "orchestration/continuity/reception-one-receptionist-first-v69/pre-attempt-residue-evidence.json",
+    "sha256": "sha256:2261f953935902ca205b7cc3e7ae37cab4e8fb9924a7f8c50b6e3f97bfa9998a",
+    "containers": 0,
+    "networks": 0,
+    "images": 0,
+    "broker_or_cell_processes": 0,
+    "opened_ledgers": 0
+  },
+  "exact_boundary_unchanged": true,
+  "unrelated_user_changes_preserved": true
+}

@@ -1,0 +1,118 @@
+{
+  "absolute_provider_call_ceiling": 2,
+  "actual_provider_call_count": 1,
+  "assembled_response_contract": "reception.one.bureau.plan-program.v3",
+  "attempt_ids": [
+    "reception-one-receptionist-first-v63-eval-b-resize-explicit-turn-001"
+  ],
+  "baseline": {
+    "demonstration_answers": false,
+    "few_shot_examples": false,
+    "fine_tuning": false,
+    "form_toolkit_guidance": true,
+    "minimal_desk_context": true,
+    "paired_development_not_holdout": true,
+    "prompt_optimisation": true,
+    "response_ceiling_repair": true,
+    "shared_model_proofreader_context_hash": true,
+    "targeted_grounded_binding_repair": true
+  },
+  "candid_limit": "This sequence can prove only bounded authored-synthetic form completion through the configured and observed Sydney Vertex locational request path. It cannot prove Australian physical or sovereign processing, general model reliability, production fitness, training need or safety for real, product, patient, health, clinical or historical data.",
+  "correction_ticket_hash": null,
+  "data_class": "authored_synthetic",
+  "dialogue_protocol": "reception.one.bureau.receptionist-first.v6.3",
+  "effect_ceiling": "proposal_only",
+  "evidence_hash": "sha256:23cbcba2c812c93552285c7933263ddc196e42110e9e1e61b3bb6d7bba6de1db",
+  "exact_binding": {
+    "api_key_authentication_used": false,
+    "authentication": "keyless_impersonated_service_account_adc",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "location": "australia-southeast1",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "provider": "google_vertex_ai",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"
+  },
+  "explicit_exclusions": {
+    "api_key_information_recorded": false,
+    "broker_judgement_repair": false,
+    "chain_of_thought_recorded": false,
+    "command_authority": false,
+    "credential_or_token_recorded": false,
+    "fallback": false,
+    "human_or_product_delivery": false,
+    "product_or_database_access": false,
+    "proofreader_selected_replacement": false,
+    "raw_model_form_body_recorded": false,
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "rejected_operator_note_recorded": false
+  },
+  "incremental_cost_ceiling_usd": 1,
+  "ledger_ids": [
+    "reception-one-receptionist-first-v63-eval-b-resize-explicit-ledger-001"
+  ],
+  "model_authored_fields": [
+    "receptionist_response",
+    "decision_note",
+    "evidence_utterance_indices",
+    "typed_form"
+  ],
+  "model_response_contract": "reception.one.bureau.receptionist-and-form.v6.3",
+  "no_call_after_admission": true,
+  "parent_audit_chain": {
+    "event_count": 4,
+    "terminal_hash": "sha256:6c0b2569070795494f2f1823d7db6640201bd3ad70e6741e4d8f3da8baa960a3",
+    "valid": true
+  },
+  "preprinted_fields": {
+    "version_code": 3
+  },
+  "release": {
+    "api_spine_operation_id": "proposeAppointmentUpdate",
+    "appointment_ref": "synthetic-appointment-margaret",
+    "candidate_slot_ids": [],
+    "duration_minutes": 30,
+    "kind": "proposal_candidate",
+    "patient_ref": "synthetic-patient-margaret",
+    "practitioner_ref": "synthetic-practitioner-shera",
+    "proposal_family": "resize",
+    "requires_human_confirmation": true,
+    "status": null,
+    "warning_codes": [
+      "staff_confirmation_required"
+    ],
+    "write_performed": false
+  },
+  "request_contract_repair_competed_for_call_two": false,
+  "result": "reception_one_receptionist_first_v63_occupied_pass",
+  "schema_version": "reception.one.receptionist_first_v63.parent_evidence.v1",
+  "terminal_status": "admitted",
+  "turn_two_terminal": false,
+  "turns": [
+    {
+      "attempt_id": "reception-one-receptionist-first-v63-eval-b-resize-explicit-turn-001",
+      "audit_terminal_hash": "sha256:f5964e2d3d1eff3ea020c724dcd7b7b15c9ab6ff2a931e14d1b244b96012011f",
+      "cleanup": {
+        "base_image_state_preserved": true,
+        "broker_process_absent": true,
+        "cell_container_absent": true,
+        "cell_image_absent": true,
+        "daemon_wide_prune_performed": false,
+        "internal_network_absent": true,
+        "relay_container_absent": true,
+        "relay_image_absent": true,
+        "temporary_context_absent": true,
+        "temporary_token_absent": true
+      },
+      "correction_ticket_issued": false,
+      "ledger_id": "reception-one-receptionist-first-v63-eval-b-resize-explicit-ledger-001",
+      "model_input_hash": "sha256:bef0e612f9dc18f19b145c9db8c92b53cc66ff78ff5f7e59797311964efef547",
+      "proofreader_disposition": "admit",
+      "released": true,
+      "result": "reception_one_receptionist_first_v63_turn_pass",
+      "schema_hash": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "turn_code": 1
+    }
+  ]
+}

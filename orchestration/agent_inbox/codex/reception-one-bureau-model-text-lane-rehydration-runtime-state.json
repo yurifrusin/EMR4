@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "new_session",
+  "planned_action": "prepare_and_verify_the_provider_blocked_reception_one_bureau_model_text_lane",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete_live_handover_current_typed_plan_acceptance_api_spine_and_consumed_vertex_authority",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No worker dispatch is selected."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude is not selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Antigravity is not selected and no live Gemini invocation is authorised."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri directed the programme to continue to the next logical tranche and through repository-local work until intervention is required.",
+        "The accepted Typed Plan Protocol is the immutable predecessor at Continuity graph revision 64 and Compass map revision 51.",
+        "The prior Sydney Vertex rehearsal and all occupied ledgers are consumed.",
+        "The current authority permits provider-blocked contracts, implementation, tests and provider-free isolation only.",
+        "An occupied provider call still requires a fresh exact grant naming every provider, model, project, identity, authentication, region, endpoint, isolation, audit, cost, call, data and stop boundary."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No subagent is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/codex/reception-one-bureau-model-text-lane-rehydration-receipt.json"
+  ],
+  "assigned_agent_ids": []
+}

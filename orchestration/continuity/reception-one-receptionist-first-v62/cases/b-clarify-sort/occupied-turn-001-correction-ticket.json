@@ -1,0 +1,25 @@
+{
+  "attempts_remaining": 1,
+  "previous_output_sha256": "sha256:9c2a57e845077b137760c4fe5bb82204e7f183b3bcbd0ebc949019bddbee404e",
+  "previous_typed_form": {
+    "goal_code": 6,
+    "steps": [
+      {
+        "operator_code": 13,
+        "source_refs": []
+      }
+    ]
+  },
+  "replacement_required": true,
+  "target_turn_code": 2,
+  "version_code": 2,
+  "violations": [
+    {
+      "allowed_output_names": [],
+      "field_code": "receptionist_response",
+      "source_index": -1,
+      "step_index": -1,
+      "violation_code": "receptionist_response_ungrounded_person"
+    }
+  ]
+}

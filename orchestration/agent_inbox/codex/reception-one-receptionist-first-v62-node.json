@@ -1,0 +1,137 @@
+{
+  "id": "reception-one-receptionist-first-v62-desk-context",
+  "title": "Reception One Receptionist-first v6.2 Desk Context",
+  "kind": "implementation",
+  "status": "accepted",
+  "created_at": "2026-07-30T08:31:47Z",
+  "updated_at": "2026-07-30T09:08:06Z",
+  "relationships": [
+    {
+      "node_id": "reception-one-receptionist-first-v61-targeted-repair",
+      "relation": "builds_on"
+    }
+  ],
+  "coordinates": {
+    "thread_id": null,
+    "git_ref": "codex/ariadne-terra-gemini-comparative-rehearsal",
+    "source_head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "worktree_role": "integration"
+  },
+  "evidence": {
+    "acceptances": [
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v62-provider-free-sol-acceptance.md"
+    ],
+    "closeouts": [
+      "orchestration/continuity/reception-one-receptionist-first-v62/provider-blocked-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v62/real-isolation-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v62/occupied-preflight-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v62/pre-attempt-residue-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v62/occupied-cohort-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v62/occupied-final-residue-evidence.json",
+      "docs/bernie-reception-one-receptionist-first-v62-closeout.md"
+    ],
+    "findings": [
+      "docs/security/bernie-reception-one-receptionist-first-v62-threat-model-delta.md"
+      ,
+      "orchestration/continuity/reception-one-receptionist-first-v62/occupied-final-audit-analysis.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v62-final-sol-review.md"
+    ],
+    "plans": [
+      "docs/bernie-reception-one-receptionist-first-v62-desk-context-plan.md",
+      "orchestration/continuity/reception-one-receptionist-first-v62/runtime-policy.json",
+      "orchestration/continuity/reception-one-receptionist-first-v62/occupied-authority.json"
+    ],
+    "receipts": [
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v62-rehydration-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v62-orchestrator-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v62-preplan-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v62-preacceptance-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v62-preattempt-receipt.json"
+    ],
+    "tests": [
+      "scripts/reception_one_receptionist_first_v62.py",
+      "scripts/reception_one_receptionist_first_v62_cohort.py",
+      "scripts/reception_one_receptionist_first_v62_cell.py",
+      "scripts/reception_one_receptionist_first_v62_isolation.py",
+      "tests/test_reception_one_receptionist_first_v62.py"
+    ]
+  },
+  "authority": {
+    "authorized_openings": [
+      {
+        "boundary": "container-runtime",
+        "scope": "One credential-free network-none work cell per turn for the twenty-four-case authored-synthetic v6.2 development cohort.",
+        "source": "orchestration/continuity/reception-one-receptionist-first-v62/occupied-authority.json"
+      },
+      {
+        "boundary": "model-runtime",
+        "scope": "Gemini 2.5 Flash may interpret the typed minimal desk context and complete the existing proposal-only receptionist packet with hidden thought content excluded.",
+        "source": "orchestration/continuity/reception-one-receptionist-first-v62/occupied-authority.json"
+      },
+      {
+        "boundary": "provider-call",
+        "scope": "Twenty-four primaries and at most one terminal second call per case through the exact Bernie keyless-ADC Sydney Vertex lane, with a forty-eight-call and USD 1 ceiling.",
+        "source": "orchestration/continuity/reception-one-receptionist-first-v62/occupied-authority.json"
+      }
+    ],
+    "notes": [
+      "Yuri directed progression to v6.2 and evaluation of all twenty-four original authored-synthetic v6 requests, including prior passes.",
+      "The desk context is typed, minimal, source-labelled, freshness-bound and context-only; it grants no read, command, confirmation or write authority.",
+      "Historical v6 and v6.1 nodes and their consumed ledgers remain immutable.",
+      "Provider, model, project, service account, keyless ADC, Sydney endpoint, authored-synthetic, isolation, no-fallback, no-tool, no-write, forty-eight-call and USD 1 boundaries are exact."
+    ]
+  },
+  "contract_evidence": [
+    {
+      "contract_id": "combined-patient-practitioner-time-duration-intent",
+      "status": "satisfied",
+      "evidence": [
+        "orchestration/continuity/reception-one-receptionist-first-v62/provider-blocked-evidence.json",
+        "tests/test_reception_one_receptionist_first_v62.py"
+      ],
+      "note": "All twenty-four deterministic reference forms pass against one hash-bound minimal desk context; occupied model performance remains pending."
+    },
+    {
+      "contract_id": "committed-reschedule-availability-reconciliation",
+      "status": "satisfied",
+      "evidence": [
+        "orchestration/continuity/reception-one-receptionist-first-v62/provider-blocked-evidence.json",
+        "orchestration/continuity/reception-one-receptionist-first-v62/real-isolation-evidence.json",
+        "tests/test_reception_one_receptionist_first_v62.py"
+      ],
+      "note": "Freshness, context revision and model/proofreader symmetry are deterministic gates; no product event, database or write path is opened."
+    }
+  ],
+  "decisions": [
+    {
+      "id": "authorise-reception-one-receptionist-first-v62-111",
+      "status": "accepted",
+      "summary": "Add a minimal readable desk context shared and hash-bound between model and proofreader, then evaluate all twenty-four frozen v6 authored-synthetic cases.",
+      "source": "orchestration/continuity/reception-one-receptionist-first-v62/occupied-authority.json"
+    },
+    {
+      "id": "accept-reception-one-receptionist-first-v62-provider-free-112",
+      "status": "accepted",
+      "summary": "Accept all twenty-four desk contexts, deterministic reference forms, historical vetoes, prior-pass coverage and the two-turn residue-free real-isolation result.",
+      "source": "orchestration/agent_inbox/codex/reception-one-receptionist-first-v62-provider-free-sol-acceptance.md"
+    },
+    {
+      "id": "close-reception-one-receptionist-first-v62-115",
+      "status": "accepted",
+      "summary": "Close the complete thirty-call occupied cohort candidly at twenty-one of twenty-four exact outcomes, with three fail-closed no-release terminals and complete cleanup.",
+      "source": "docs/bernie-reception-one-receptionist-first-v62-closeout.md"
+    }
+  ],
+  "unresolved_gates": [
+    "A separately versioned repair is required for the output-ceiling and typed source-wiring defects; no further v6.2 call is permitted.",
+    "Yuri must decide whether the colloquial status 'no-show' should deterministically bind to the existing 'dna' status before that semantic alias can be admitted.",
+    "A fresh untouched authored-synthetic cohort is still required for independent post-teaching evaluation.",
+    "Real, product-derived, patient, health, clinical, protected or historical data, product/database access, writes, Word, voice, production, deployment and release remain closed."
+  ],
+  "claim_scope": [
+    "The occupied reused development cohort proves twenty-one of twenty-four exact safe outcomes; three terminal mismatches released nothing.",
+    "The desk context fixed local reference visibility but did not by itself solve output truncation, low-level typed source wiring or unstamped colloquial status semantics.",
+    "The cohort is reused authored-synthetic development evidence, not an independent holdout.",
+    "A configured and observed Sydney locational request path cannot prove Australian physical or sovereign processing."
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "boundary": {
+    "api_key_authentication_used": false,
+    "appointment_writes_performed": 0,
+    "confirmation_performed": false,
+    "credential_reads_performed": 0,
+    "database_access_performed": false,
+    "network_access_performed": false,
+    "operator_note_parsed_into_plan": false,
+    "operator_note_product_delivered": false,
+    "product_delivery_performed": false,
+    "provider_calls_performed": 0
+  },
+  "candidate_sha256": "sha256:8fa233b79b93f33d0ad6f8d63eadd6527bf8a8f63bf41df7706bbb9af09aa1e7",
+  "cell_isolation_observation": {
+    "credential_environment_present": false,
+    "gid": 65532,
+    "loopback_only": true,
+    "network_interfaces": [
+      "lo"
+    ],
+    "read_only_root_filesystem": true,
+    "uid": 65532
+  },
+  "container_policy_checks": {
+    "capabilities_dropped": true,
+    "cpu_bounded": true,
+    "memory_bounded": true,
+    "memory_swap_bounded": true,
+    "network_none": true,
+    "no_mounts": true,
+    "no_new_privileges": true,
+    "no_published_ports": true,
+    "non_root_user": true,
+    "pids_bounded": true,
+    "privileged_false": true,
+    "read_only_rootfs": true
+  },
+  "evidence_mode": "authored_synthetic_provider_free_fixture",
+  "execution_status": "executed",
+  "model_input_sha256": "sha256:5598259effc15fb2b9aff36ba62a9686dd3be02e27c900bdb7e57ac864305fbd",
+  "normalized_plan_sha256": "sha256:5101a09bb9629022ec0244813161aad642257a746ec1bfceefb383db7f45fab0",
+  "operator_note": {
+    "disposition": "admit",
+    "note_sha256": "sha256:e489d323aeee2c03a9eefcbf410fdf13fc5b0c12922ab6ae13a971d1378220d6",
+    "reason_codes": [],
+    "retained_text": "Prepared a move proposal for review; no booking was changed.",
+    "retained_utf8_bytes": 60,
+    "schema_version": "reception.one.operator_note_review.v1"
+  },
+  "program_sha256": "sha256:4dfbf5a458731d591d46e1d71ba57f2853cde0df2cdf1e41c70fc5e80dd87f7f",
+  "released_proposal_family": "move",
+  "residue": {
+    "container_present": false,
+    "image_present": false,
+    "temporary_context_present": false
+  },
+  "result": "reception_one_structured_source_language_real_isolation_pass",
+  "review_disposition": "admit",
+  "schema_version": "reception.one.structured_source.isolation_evidence.v1",
+  "source_manifest_sha256": "sha256:469a11148402c5fa64627c8b8dbc0376fb0a1d4a0c3c021e058f5c86d0a34a50"
+}

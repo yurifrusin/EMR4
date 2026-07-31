@@ -1,0 +1,41 @@
+{
+  "schema_version": "reception.one.shared_typed.zero_call_diagnostic.v1",
+  "result": "reception_one_shared_typed_language_occupied_003_zero_call_closed_and_repaired",
+  "attempt_id": "reception-one-shared-typed-occupied-003",
+  "ledger_id": "reception-one-shared-typed-ledger-003",
+  "failure_stage": "broker_pre_ready_validation",
+  "reason_code": "model_input_frame_mismatch",
+  "root_cause": "The host intentionally added the closed proofreader_feedback field to model input v3, but broker start-up reconstructed model input without passing that field and therefore rejected the otherwise exact request before broker_ready.",
+  "repair": "Broker start-up now validates the supplied v3 model input and reconstructs the frame-bound expected value with the exact supplied proofreader_feedback object before equality comparison.",
+  "regression": "test_one_use_broker_audits_admitted_note_but_releases_only_typed_fields now starts the broker with a closed proofreader-feedback packet and completes the typed proofreader path.",
+  "provider_contacted": false,
+  "provider_calls_consumed": 0,
+  "fallback_performed": false,
+  "release_performed": false,
+  "ledger": {
+    "status": "consumed",
+    "closure_reason": "lifecycle_closed_before_broker_consumption",
+    "sha256": "sha256:52a2a35b3a87493afda396a44ef338bb88bdd361bacdd5468bda08981c2e1d06"
+  },
+  "proofreader_feedback_sha256": "sha256:92059d24d6ef90c26067bdca49eb0cfd1cda451f5fb9dc3dc14e1495d64dd62b",
+  "preflight_sha256": "sha256:fcfa009518cf7216d31acd5acefc2f1a2cddcaead0fd3c841f06c7426e12f099",
+  "cleanup": {
+    "cell_container_absent": true,
+    "relay_container_absent": true,
+    "internal_network_absent": true,
+    "cell_image_absent": true,
+    "relay_image_absent": true,
+    "broker_process_absent": true,
+    "temporary_context_absent": true,
+    "temporary_token_absent": true
+  },
+  "boundary": {
+    "actual_provider_calls_previously_consumed_in_descendant": 1,
+    "actual_provider_calls_remaining": 1,
+    "absolute_actual_provider_call_ceiling": 2,
+    "api_key_authentication_used": false,
+    "external_state_changed": false,
+    "product_or_database_access": false,
+    "appointment_write_or_confirmation": false
+  }
+}

@@ -1,5 +1,6 @@
 import uuid
 import re
+import secrets
 import hashlib
 import json
 from datetime import date as date_type, datetime, time, timedelta, timezone
@@ -43,6 +44,9 @@ from app.schemas.appointments import (
     BernieIdentityEvidence, BerniePractitionerEvidence, BerniePatientEvidence,
     BernieStaffReviewPayload, BernieStaffReviewSlotSummary,
     BernieSupervisedBookingIn, BernieSupervisedBookingOut,
+    ReceptionOneProductContextRequestIn,
+    ReceptionOneProductContextAdapterReviewOut,
+    ReceptionOneProductContextProposalOut,
     BernieCreateProposalConfirmationIn, BerniePilotEligibilityOut,
     BernieBookingInstructionInterpretIn, BernieBookingInstructionInterpretOut,
     BernieBookingOutcomeOut,
@@ -134,6 +138,18 @@ from app.services.practice_knowledge import (
     to_advisory_frame,
 )
 from app.services.practice_knowledge.examples import DEV_CLINIC_FACTS
+from app.services.reception_one_proposal_runtime import (
+    ReceptionOneRuntimeError,
+    build_reviewed_proposal_result,
+    build_product_context_frame,
+    build_slot_search_input,
+    practice_is_allowlisted,
+    proofread_provider_blocked_plan,
+)
+from app.services.reception_one_isolated_vertex_planner import (
+    IsolatedVertexPlannerError,
+    run_isolated_vertex_planner,
+)
 
 router = APIRouter(prefix="/api/v1/appointments", tags=["appointments"])
 
@@ -1391,6 +1407,172 @@ def _handle_create_confirm_idempotency_decision(
             status.HTTP_503_SERVICE_UNAVAILABLE,
             "idempotency_key_failed_transient",
             "A prior confirmation with this Idempotency-Key failed transiently and needs staff review.",
+        )
+    return None
+
+
+def _reception_one_adapter_review(
+    *,
+    execution: dict[str, Any],
+    frame: dict[str, Any],
+    selected_appointment_id: uuid.UUID | None,
+    db: Session,
+    current_user: User,
+) -> ReceptionOneProductContextAdapterReviewOut | None:
+    """Revalidate one admitted plan through named proposal-only adapters.
+
+    Signed confirmation evidence created by the existing proposal services is
+    deliberately discarded here. This route releases findings, never a
+    confirmation capability.
+    """
+
+    final_output = execution["final_output"]
+    family = final_output.get("proposal_family")
+    idempotency_prefix = f"reception-one-{frame['request_id']}"
+    if family == "move":
+        if selected_appointment_id is None:
+            return ReceptionOneProductContextAdapterReviewOut(
+                adapter_kind="update_proposal",
+                safe=False,
+                summary="Select the appointment to review before preparing a move.",
+                block_codes=["selected_appointment_required"],
+                freshness_verified=False,
+            )
+        slots_by_id = {
+            item["id"]: item for item in frame["context"]["candidate_slots"]
+        }
+        proposals = []
+        for index, slot_id in enumerate(
+            final_output.get("candidate_slot_ids", [])
+        ):
+            slot = slots_by_id.get(slot_id)
+            if slot is None:
+                continue
+            proposals.append(
+                propose_update_appointment(
+                    selected_appointment_id,
+                    AppointmentUpdateProposalIn(
+                        appointment_date=date_type.fromisoformat(slot["date"]),
+                        start_time_local=time.fromisoformat(slot["start_time"]),
+                    ),
+                    idempotency_key=f"{idempotency_prefix}-move-{index}",
+                    db=db,
+                    current_user=current_user,
+                )
+            )
+        warning_codes = sorted(
+            {
+                issue.code
+                for proposal in proposals
+                for issue in proposal.warnings
+            }
+        )
+        block_codes = sorted(
+            {
+                issue.code
+                for proposal in proposals
+                for issue in proposal.blocks
+            }
+        )
+        safe = bool(proposals) and all(item.safe for item in proposals)
+        return ReceptionOneProductContextAdapterReviewOut(
+            adapter_kind="update_proposal",
+            safe=safe,
+            summary=(
+                f"Prepared {len(proposals)} fresh reschedule option"
+                f"{'' if len(proposals) == 1 else 's'} for staff review. "
+                "No appointment has changed."
+                if safe
+                else "The fresh update-proposal check blocked this reschedule."
+            ),
+            warning_codes=warning_codes,
+            block_codes=block_codes,
+            candidate_count=len(proposals),
+            freshness_verified=safe,
+        )
+    if family == "resize":
+        if selected_appointment_id is None:
+            return ReceptionOneProductContextAdapterReviewOut(
+                adapter_kind="update_proposal",
+                safe=False,
+                summary="Select the appointment to review before changing its duration.",
+                block_codes=["selected_appointment_required"],
+                freshness_verified=False,
+            )
+        proposal = propose_update_appointment(
+            selected_appointment_id,
+            AppointmentUpdateProposalIn(
+                duration_minutes=final_output.get("duration_minutes")
+            ),
+            idempotency_key=f"{idempotency_prefix}-resize",
+            db=db,
+            current_user=current_user,
+        )
+        return ReceptionOneProductContextAdapterReviewOut(
+            adapter_kind="update_proposal",
+            safe=proposal.safe,
+            summary=(
+                f"Prepared a fresh {proposal.command.duration_minutes}-minute "
+                "duration-change proposal for staff review. "
+                "No appointment has changed."
+                if proposal.safe
+                else "The fresh update-proposal check blocked this duration change."
+            ),
+            warning_codes=sorted(item.code for item in proposal.warnings),
+            block_codes=sorted(item.code for item in proposal.blocks),
+            candidate_count=1,
+            freshness_verified=bool(
+                proposal.safe and proposal.update_proposal_freshness_id
+            ),
+        )
+    if family == "cancel":
+        if selected_appointment_id is None:
+            return ReceptionOneProductContextAdapterReviewOut(
+                adapter_kind="delete_proposal",
+                safe=False,
+                summary="Select the appointment to review before cancellation.",
+                block_codes=["selected_appointment_required"],
+                freshness_verified=False,
+            )
+        proposal = propose_delete_appointment(
+            selected_appointment_id,
+            idempotency_key=f"{idempotency_prefix}-cancel",
+            body=None,
+            db=db,
+            current_user=current_user,
+        )
+        return ReceptionOneProductContextAdapterReviewOut(
+            adapter_kind="delete_proposal",
+            safe=proposal.safe,
+            summary=(
+                "Prepared a fresh cancellation review. "
+                "The appointment remains booked until a separate staff confirmation."
+                if proposal.safe
+                else "The fresh delete-proposal check blocked this cancellation."
+            ),
+            warning_codes=sorted(item.code for item in proposal.warnings),
+            block_codes=sorted(item.code for item in proposal.blocks),
+            candidate_count=1,
+            freshness_verified=bool(
+                proposal.safe and proposal.delete_proposal_freshness_id
+            ),
+        )
+    if family == "squeeze_in_assessment":
+        candidate_count = len(final_output.get("candidate_slot_ids", []))
+        return ReceptionOneProductContextAdapterReviewOut(
+            adapter_kind="squeeze_in_assessment",
+            safe=True,
+            summary=(
+                f"Prepared {candidate_count} bounded squeeze-in review "
+                f"option{'' if candidate_count == 1 else 's'}. "
+                "No appointment was moved, overbooked or changed."
+            ),
+            warning_codes=sorted(
+                set(final_output.get("warning_codes", []))
+                | {"manual_squeeze_in_review"}
+            ),
+            candidate_count=candidate_count,
+            freshness_verified=True,
         )
     return None
 
@@ -5335,6 +5517,145 @@ def _build_slot_search_proposal(
         resolved_duration_minutes=resolved_duration,
         candidates=candidates,
         warnings=warnings,
+    )
+
+
+@router.post(
+    "/proposals/reception-one/compose",
+    response_model=ReceptionOneProductContextProposalOut,
+    operation_id="composeReceptionOneProductContextProposal",
+)
+def compose_reception_one_product_context_proposal(
+    body: ReceptionOneProductContextRequestIn,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_role(*MUTATING_APPOINTMENT_ROLES)),
+):
+    """Build one default-off, proposal-only Reception One typed plan.
+
+    The trusted context desk performs bounded practice-scoped reads and exposes
+    only request-scoped opaque handles to the selected planner. Deterministic
+    planning remains the default. The separately gated isolated Vertex mode
+    has no fallback and can release only the same proofread proposal shape.
+    This route never confirms or writes an appointment.
+    """
+    if not settings.reception_one_product_context_runtime_enabled:
+        raise HTTPException(status_code=404, detail="Runtime not enabled")
+    if settings.environment.lower() != "dev":
+        raise HTTPException(status_code=403, detail="Development runtime only")
+    if not practice_is_allowlisted(
+        current_user.practice_id,
+        settings.reception_one_product_context_synthetic_practice_ids,
+    ):
+        raise HTTPException(status_code=403, detail="Practice not admitted")
+    if (
+        body.planner_mode == "isolated_vertex"
+        and not settings.reception_one_product_context_vertex_planner_enabled
+    ):
+        raise HTTPException(
+            status_code=403,
+            detail="Isolated planner not admitted",
+        )
+
+    observed_at = datetime.now(timezone.utc)
+    handle_key = secrets.token_bytes(32)
+    try:
+        frame, displays, handle_map = build_product_context_frame(
+            db,
+            practice_id=current_user.practice_id,
+            instruction=body.instruction,
+            reference_date=body.reference_date,
+            correlation_id=body.correlation_id,
+            slot_proposal=None,
+            selected_appointment_id=body.selected_appointment_id,
+            observed_at=observed_at,
+            handle_key=handle_key,
+        )
+    except ReceptionOneRuntimeError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail={"code": str(exc)},
+        ) from exc
+    slot_search = build_slot_search_input(frame, handle_map)
+    slot_proposal = (
+        _build_slot_search_proposal(
+            slot_search,
+            db,
+            current_user.practice_id,
+        )
+        if slot_search is not None
+        else None
+    )
+    frame, displays, _ = build_product_context_frame(
+        db,
+        practice_id=current_user.practice_id,
+        instruction=body.instruction,
+        reference_date=body.reference_date,
+        correlation_id=body.correlation_id,
+        slot_proposal=slot_proposal,
+        selected_appointment_id=body.selected_appointment_id,
+        observed_at=observed_at,
+        handle_key=handle_key,
+    )
+    provider_calls = 0
+    runtime_audit_ref = None
+    if body.planner_mode == "deterministic":
+        review, normalized_plan, execution = proofread_provider_blocked_plan(
+            frame=frame,
+            now=observed_at,
+        )
+    else:
+        try:
+            planner_result = run_isolated_vertex_planner(
+                frame=frame,
+                observed_at=observed_at,
+                authority_path=(
+                    settings
+                    .reception_one_product_context_vertex_authority_path
+                ),
+                preflight_path=(
+                    settings
+                    .reception_one_product_context_vertex_preflight_path
+                ),
+                evidence_dir=(
+                    settings
+                    .reception_one_product_context_vertex_evidence_dir
+                ),
+            )
+        except IsolatedVertexPlannerError as exc:
+            raise HTTPException(
+                status_code=status.HTTP_502_BAD_GATEWAY,
+                detail={"code": str(exc)},
+            ) from exc
+        review = planner_result.review
+        normalized_plan = planner_result.normalized_plan
+        execution = (
+            {"final_output": planner_result.final_output}
+            if planner_result.final_output is not None
+            else None
+        )
+        provider_calls = planner_result.provider_calls
+        runtime_audit_ref = planner_result.runtime_audit_ref
+    adapter_review = (
+        _reception_one_adapter_review(
+            execution=execution,
+            frame=frame,
+            selected_appointment_id=body.selected_appointment_id,
+            db=db,
+            current_user=current_user,
+        )
+        if execution is not None and review["disposition"] == "admit"
+        else None
+    )
+    return build_reviewed_proposal_result(
+        frame=frame,
+        displays=displays,
+        normalized_plan=normalized_plan,
+        review=review,
+        execution=execution,
+        adapter_review=adapter_review,
+        planner_mode=body.planner_mode,
+        provider_calls=provider_calls,
+        runtime_audit_ref=runtime_audit_ref,
     )
 
 

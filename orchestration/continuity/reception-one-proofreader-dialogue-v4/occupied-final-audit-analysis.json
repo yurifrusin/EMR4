@@ -1,0 +1,105 @@
+{
+  "schema_version": "reception.one.proofreader_dialogue_v4.final_audit_analysis.v1",
+  "recorded_at": "2026-07-30T02:53:29Z",
+  "result": "reception_one_proofreader_dialogue_v4_terminal_no_release_call_ceiling_exhausted",
+  "independent_repository_audit": true,
+  "provider_calls": {
+    "actual_total": 2,
+    "absolute_ceiling": 2,
+    "remaining": 0,
+    "third_call_performed": false,
+    "fallback_performed": false
+  },
+  "primary": {
+    "attempt_id": "reception-one-proofreader-dialogue-v4-turn-001",
+    "ledger_id": "reception-one-proofreader-dialogue-v4-ledger-001",
+    "ledger_status": "consumed",
+    "http_status": 400,
+    "normalized_status": "INVALID_ARGUMENT",
+    "diagnosis": "provider_response_schema_had_too_many_serving_states",
+    "candidate_reached_proofreader": false,
+    "release": false,
+    "cleanup_complete": true,
+    "turn_audit_terminal_hash": "sha256:fc021249aa4317fd5d16dba042f98d419cc0ab6060e40a702c5c4f35591d443b",
+    "parent_audit_terminal_hash": "sha256:6786bfd4f608554022099ac483a8629b7e10f90d40eb8a3f78c914d21e4f84e8",
+    "ledger_file_sha256": "sha256:2f89e754e31738fcb6ab98d51c8853a00f9c1ca22efe17574e15441a2267d482",
+    "external_audit_file_sha256": "sha256:02000bbf790814a3a4fda9ba25b5e76c048d746a0997a4e4f868a3f2694134c7",
+    "evidence_file_sha256": "sha256:a0b24c49772e89438d78a82199cbdd928147c9bf800e93eb2f988ab1049af201"
+  },
+  "request_contract_repair": {
+    "attempt_id": "reception-one-proofreader-dialogue-v4-request-repair-002",
+    "ledger_id": "reception-one-proofreader-dialogue-v4-request-repair-ledger-002",
+    "ledger_status": "consumed",
+    "http_status": 200,
+    "latency_ms": 2109,
+    "model_version_observed": "gemini-2.5-flash",
+    "provider_outcome": "response_rejected_before_candidate",
+    "bounded_reason_code": "schema_invalid",
+    "bounded_field_paths": [
+      "$.version_code"
+    ],
+    "candidate_reached_proofreader": false,
+    "proofreader_disposition": "not_reached",
+    "release": false,
+    "cleanup_complete": true,
+    "turn_audit_terminal_hash": "sha256:d9bb98634be383ed7a3e5af479cf7b5f2610e6b09bd33c8c959128160c771d7a",
+    "sequence_audit_terminal_hash": "sha256:33aeea5b9064f4c617d27d7d9c4335716c3518737aec2cf7cd4f899107f0dbae",
+    "ledger_file_sha256": "sha256:7ed19c73f0492f9ae9ea202fe6be6e0c16ecb028b6b879090912600a1247f381",
+    "external_audit_file_sha256": "sha256:4003d21e14bc34704cc395c57e1f218b1d87b508ecca13e98e38be643d57c60f",
+    "consolidated_evidence_file_sha256": "sha256:b64d5a6740d2bddd91b9a4b3849f15be3756a4d8d4944e3cc7206141e3d1a8c4"
+  },
+  "diagnosis": {
+    "established": [
+      "The repaired provider request was accepted and returned HTTP 200 through the exact Sydney endpoint.",
+      "The bounded broker rejected the structured response at $.version_code before PlanProgram construction or proofreading.",
+      "The local PlanProgram-v3 schema requires version_code to equal integer 3.",
+      "The repaired provider schema constrained version_code only to INTEGER after provider-only numeric bounds were removed."
+    ],
+    "leading_inference": "The provider returned an integer version code that did not satisfy the local constant 3. This is an inference from the accepted provider schema and retained local validator path, not a retained observation of the discarded value.",
+    "not_established": [
+      "The exact discarded version_code value.",
+      "Any other raw provider field or response text.",
+      "Whether a future enum-string or broker-injected protocol version would succeed.",
+      "Any proofreader finding, because no complete candidate reached the proofreader."
+    ],
+    "future_design_candidate": "A future separately authorised descendant should remove protocol version authorship from the model, for example by deterministically injecting the local version after parsing or by using a provider-supported closed string token mapped locally. V4 has no call budget to test that design."
+  },
+  "exact_binding": {
+    "provider": "google_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "api_key_authentication_used": false
+  },
+  "audit_posture": {
+    "all_opened_ledgers_consumed": true,
+    "all_four_hash_chains_recomputed_valid": true,
+    "all_three_evidence_hashes_recomputed_valid": true,
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "credential_or_token_recorded": false,
+    "api_key_information_recorded": false,
+    "chain_of_thought_recorded": false,
+    "task_containers_present": false,
+    "task_networks_present": false,
+    "task_images_present": false,
+    "task_processes_present": false,
+    "temporary_credentials_present": false
+  },
+  "what_the_evidence_proves": [
+    "The provider-free two-turn ticket protocol and proofreader state machine work in credential-free real isolation.",
+    "Both occupied calls used the configured and observed Gemini 2.5 Flash Bernie keyless-ADC Sydney locational request path.",
+    "The system failed closed before proofreading or release on both occupied failures.",
+    "The two-call ceiling, no-fallback boundary, ledger consumption, durable audit and cleanup controls held."
+  ],
+  "what_the_evidence_does_not_prove": [
+    "A live model can complete or correct the PlanProgram-v3 form.",
+    "A live multi-turn agent-proofreader correction exchange occurred.",
+    "Australian physical or sovereign processing.",
+    "General reliability, production suitability or safety for real, product-derived, patient, health, clinical, protected or historical data.",
+    "Appointment, database, clinical, command, product, Word, voice, deployment or release authority."
+  ]
+}

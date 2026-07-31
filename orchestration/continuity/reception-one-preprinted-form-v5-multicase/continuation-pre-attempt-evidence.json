@@ -1,0 +1,26 @@
+{
+  "schema_version": "reception.one.preprinted_form_v5.multicase_continuation_pre_attempt.v1",
+  "recorded_at": "2026-07-30T04:46:28Z",
+  "result": "reception_one_preprinted_form_v5_multicase_continuation_gate_pass",
+  "provider_calls_already_consumed": 1,
+  "provider_calls_performed_by_continuation_gate": 0,
+  "closed_create_case_replayed": false,
+  "frozen_prompt_schema_proofreader_and_frames_unchanged": true,
+  "coordinator_repair_evidence": "orchestration/continuity/reception-one-preprinted-form-v5-multicase/coordinator-repair-evidence.json",
+  "exact_provider_binding_unchanged": true,
+  "fresh_exact_preflight_still_bound": true,
+  "closed_create_ledger_and_audit_chain_valid": true,
+  "closed_create_cleanup_passed": true,
+  "focused_repair_regression_passed": true,
+  "revision_binding": {
+    "continuity_graph_revision": 98,
+    "compass_map_revision": 85,
+    "compass_source_graph_revision": 98
+  },
+  "remaining_budget": {
+    "remaining_primary_cases": 5,
+    "remaining_absolute_call_capacity": 11,
+    "incremental_cost_ceiling_usd": 1
+  },
+  "closed_boundaries_unchanged": true
+}

@@ -1,0 +1,101 @@
+{
+  "boundary": {
+    "api_key_authentication_used": false,
+    "appointment_writes_performed": 0,
+    "broker_judgement_repair": false,
+    "confirmation_performed": false,
+    "credential_reads_performed": 0,
+    "database_access_performed": false,
+    "hidden_reasoning_retained": false,
+    "natural_response_parsed_into_form": false,
+    "network_access_performed": false,
+    "product_delivery_performed": false,
+    "proofreader_selected_replacement": false,
+    "provider_calls_performed": 0
+  },
+  "broker_owned_fields": {
+    "version_code": 3
+  },
+  "cell_isolation_observations": [
+    {
+      "credential_environment_present": false,
+      "gid": 65532,
+      "loopback_only": true,
+      "network_interfaces": [
+        "lo"
+      ],
+      "read_only_root_filesystem": true,
+      "uid": 65532
+    },
+    {
+      "credential_environment_present": false,
+      "gid": 65532,
+      "loopback_only": true,
+      "network_interfaces": [
+        "lo"
+      ],
+      "read_only_root_filesystem": true,
+      "uid": 65532
+    }
+  ],
+  "container_policy_checks": [
+    {
+      "capabilities_dropped": true,
+      "cpu_bounded": true,
+      "memory_bounded": true,
+      "memory_swap_bounded": true,
+      "network_none": true,
+      "no_mounts": true,
+      "no_new_privileges": true,
+      "no_published_ports": true,
+      "non_root_user": true,
+      "pids_bounded": true,
+      "privileged_false": true,
+      "read_only_rootfs": true
+    },
+    {
+      "capabilities_dropped": true,
+      "cpu_bounded": true,
+      "memory_bounded": true,
+      "memory_swap_bounded": true,
+      "network_none": true,
+      "no_mounts": true,
+      "no_new_privileges": true,
+      "no_published_ports": true,
+      "non_root_user": true,
+      "pids_bounded": true,
+      "privileged_false": true,
+      "read_only_rootfs": true
+    }
+  ],
+  "correction_ticket_sha256": "sha256:f2d5723e01d58fd49751c9a46fc37b5a24ac2e775373dc7715a44ffcf5bb011c",
+  "desk_context_sha256": "sha256:215cd4983fe8a0b8b499a786557b559de5ceac27b001468f048b3f50e6c394c7",
+  "evidence_mode": "authored_synthetic_provider_free_two_turn_fixture",
+  "first_disposition": "revision_required",
+  "first_model_form_body_sha256": "sha256:ab5fa14f9dde0413790d67e0d25c2392daef7a87a621574bcbdda56580e46d66",
+  "first_violation_codes": [
+    "recognized_intent_goal_mismatch"
+  ],
+  "full_diary_exposed": false,
+  "model_authored_fields": [
+    "receptionist_response",
+    "decision_note",
+    "evidence_utterance_indices",
+    "typed_form"
+  ],
+  "recognized_constraint_gate": true,
+  "released_proposal_family": "move",
+  "residue": {
+    "containers_present": false,
+    "images_present": false,
+    "temporary_context_present": false
+  },
+  "result": "reception_one_receptionist_first_v64_real_isolation_pass",
+  "same_context_packet_proofread": true,
+  "schema_version": "reception.one.receptionist_first_v64.isolation_evidence.v1",
+  "second_disposition": "admit",
+  "second_model_form_body_sha256": "sha256:cc2c1254e725450a3a56b7625b9aa0cf6175b318a50dc30f4a55b841bd81b61f",
+  "source_manifest_sha256": "sha256:16adfc6114f903bb7d02befd19308b3591b5175b44cfbb537a1db297457cc82b",
+  "task_sha256": "sha256:9c0ed10f48e165c61b3f0fe8c236db1c6b4f9ad0b76071aaaced0bd7d7570a8c",
+  "unselected_appointments_exposed": false
+}

@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/reception-one-bureau-plan-review.v1.json",
+  "title": "Reception One Bureau deterministic plan review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "request_id",
+    "attempt",
+    "reviewed_context_revision",
+    "normalized_plan_sha256",
+    "disposition",
+    "checks",
+    "safe_repairs",
+    "violations",
+    "admitted_operator_ids",
+    "revision_allowed",
+    "execution_authorized",
+    "effect_ceiling"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "reception.one.bureau.plan-review.v1"
+    },
+    "request_id": {
+      "$ref": "#/$defs/syntheticRef"
+    },
+    "attempt": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 2
+    },
+    "reviewed_context_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "normalized_plan_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "disposition": {
+      "enum": [
+        "admit",
+        "revision_required",
+        "clarification_required",
+        "reject"
+      ]
+    },
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_exact",
+        "scope_bound",
+        "context_revision_current",
+        "authored_synthetic",
+        "catalogue_bound",
+        "step_budget_bounded",
+        "unique_step_ids",
+        "operators_known",
+        "topological_order",
+        "signatures_exact",
+        "binding_types_exact",
+        "bindings_grounded",
+        "effect_ceiling_preserved",
+        "semantic_action_consistent",
+        "authority_boundary_closed"
+      ],
+      "properties": {
+        "schema_exact": {
+          "type": "boolean"
+        },
+        "scope_bound": {
+          "type": "boolean"
+        },
+        "context_revision_current": {
+          "type": "boolean"
+        },
+        "authored_synthetic": {
+          "type": "boolean"
+        },
+        "catalogue_bound": {
+          "type": "boolean"
+        },
+        "step_budget_bounded": {
+          "type": "boolean"
+        },
+        "unique_step_ids": {
+          "type": "boolean"
+        },
+        "operators_known": {
+          "type": "boolean"
+        },
+        "topological_order": {
+          "type": "boolean"
+        },
+        "signatures_exact": {
+          "type": "boolean"
+        },
+        "binding_types_exact": {
+          "type": "boolean"
+        },
+        "bindings_grounded": {
+          "type": "boolean"
+        },
+        "effect_ceiling_preserved": {
+          "type": "boolean"
+        },
+        "semantic_action_consistent": {
+          "type": "boolean"
+        },
+        "authority_boundary_closed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "safe_repairs": {
+      "type": "array",
+      "maxItems": 3,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "trim_whitespace",
+          "canonical_identifier_casing",
+          "deterministic_nonsemantic_ordering"
+        ]
+      }
+    },
+    "violations": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "$ref": "#/$defs/violation"
+      }
+    },
+    "admitted_operator_ids": {
+      "type": "array",
+      "maxItems": 12,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,63}$"
+      }
+    },
+    "revision_allowed": {
+      "type": "boolean"
+    },
+    "execution_authorized": {
+      "type": "boolean"
+    },
+    "effect_ceiling": {
+      "const": "proposal_only"
+    }
+  },
+  "$defs": {
+    "syntheticRef": {
+      "type": "string",
+      "pattern": "^synthetic-[a-z0-9][a-z0-9-]{2,95}$"
+    },
+    "violation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "code"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^\\$([.][a-z0-9_\\[\\]-]+)*$",
+          "maxLength": 160
+        },
+        "code": {
+          "enum": [
+            "schema_invalid",
+            "scope_mismatch",
+            "stale_context",
+            "data_class_not_admitted",
+            "catalogue_mismatch",
+            "step_budget_exceeded",
+            "duplicate_step_id",
+            "unknown_operator",
+            "forward_reference",
+            "signature_mismatch",
+            "binding_type_mismatch",
+            "ungrounded_binding",
+            "semantic_value_missing",
+            "effect_escalation",
+            "forbidden_operator",
+            "semantic_action_mismatch",
+            "clarification_required",
+            "revision_budget_exhausted",
+            "authority_boundary_open"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "context_frame_review": {
+    "command_authority": false,
+    "desk_context_sha256": "sha256:008bda75fdf3afc360888aa0260408452b95701189e8947e631eb9f3b6b9114e",
+    "disposition": "admit",
+    "reviewed_context_revision": 62,
+    "same_packet_seen_by_model_and_proofreader": true,
+    "source_labels": [
+      "fixture_intercepted",
+      "staff_selected",
+      "staff_selected"
+    ],
+    "task_sha256": "sha256:20f4cd19e52355cb2d84912fbadb4e52039d2a3e8310db637875384c2d511ee7"
+  },
+  "continuity_binding": {
+    "compass_revision": 145,
+    "compass_source_graph_revision": 164,
+    "graph_revision": 164
+  },
+  "credential_reads_performed": 0,
+  "cumulative_cost_contract_exercised": false,
+  "desk_context_sha256": "sha256:008bda75fdf3afc360888aa0260408452b95701189e8947e631eb9f3b6b9114e",
+  "provider_call_authority_consumed": false,
+  "provider_calls_performed": 0,
+  "provider_contacted": false,
+  "recognized_constraint_assertion": {
+    "constraint_count": 4,
+    "disposition": "admit",
+    "manifest_sha256": "sha256:b2ce797f202398762f228e6c95c1607f68fe58c57c18f300f9f404b123333ce4",
+    "matching_mode": "typed_semantic_argument_role",
+    "omitted_count": 0
+  },
+  "repair": {
+    "decision_note_identifier_safe_repair": false,
+    "deidentified_decision_note_taught": true,
+    "deterministic_operator_sequence_required": false,
+    "exact_clarification_response_pattern_taught": true,
+    "exact_move_response_pattern_taught": true,
+    "maximum_output_tokens": 3072,
+    "no_show_to_dna_alias_added": false,
+    "output_schema_changed": false,
+    "proofreader_clarification_markers_changed": false,
+    "proofreader_move_markers_changed": false,
+    "required_goal_typed_feedback": true,
+    "semantic_role_constraint_gate": true
+  },
+  "response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+  "result": "reception_one_bureau_cost_bounded_retry_provider_blocked_pass",
+  "schema_version": "reception.one.bureau.cost_bounded_retry.provider_blocked_evidence.v1",
+  "system_instruction_sha256": "sha256:ea2ee027f4c82788168c306c39dc2babd278649a4f483197677941c1073e5b0c",
+  "task_sha256": "sha256:20f4cd19e52355cb2d84912fbadb4e52039d2a3e8310db637875384c2d511ee7",
+  "thinking": {
+    "budget": 1024,
+    "hidden_reasoning_retained": false,
+    "include_thoughts": false,
+    "thought_token_count_fixture": 20
+  },
+  "turn_input_sha256": "sha256:b71aa519b05f22e3b917ae53abe7f35ccaba433e46d1a28eccd8653499c5cf30"
+}

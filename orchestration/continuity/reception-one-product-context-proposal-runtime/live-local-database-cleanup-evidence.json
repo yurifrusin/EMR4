@@ -1,0 +1,12 @@
+{
+  "cleanup": {
+    "cleanup": "dropped_exact_verified_disposable_database",
+    "database": "gp_pms_reception_one_product_context_4e731ad9_20260729",
+    "recoverable": false
+  },
+  "ownership_marker_verified": true,
+  "runtime_processes_absent": true,
+  "runtime_temporary_root_absent": true,
+  "schema_version": "reception.one.product_context.live_local_database_cleanup.v1",
+  "scope": "exact_disposable_authored_synthetic_database"
+}

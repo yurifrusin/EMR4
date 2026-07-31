@@ -1,0 +1,62 @@
+{
+  "schema_version": "ariadne.pre_attempt_receipt.v1",
+  "receipt_id": "reception-one-bureau-cost-bounded-occupied-retry-preattempt-20260731",
+  "created_at": "2026-07-31T01:35:00Z",
+  "status": "passed",
+  "candidate": {
+    "node_id": "reception-one-bureau-cost-bounded-occupied-retry",
+    "source_head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "continuity_graph_revision": 163,
+    "compass_map_revision": 144,
+    "compass_source_graph_revision": 163,
+    "rendered_compass_exact": true,
+    "rendered_compass_sha256": "sha256:67d2107fbf287c3fb514761c3aef3c37c91047fb9ac6a2cfad1835ac3b02ed30",
+    "fresh_provider_calls_already_performed": 0,
+    "fresh_single_use_ledgers_already_opened": 0
+  },
+  "frozen_contract": {
+    "plan_sha256": "sha256:07be9c2788a7cc4e7df882f42982ee9fc6ada6157122a40d8c32bf7a098e2549",
+    "authority_manifest_sha256": "sha256:1551d97a9688e7068fd80bc33346b168e3f8379b2fb4e6f362a66f5e53453546",
+    "cost_policy_sha256": "sha256:34f12abd027320b9bb531ef8025cb125ea0156af8a71b4a7caa38ed454cbab67",
+    "provider_blocked_evidence_path": "orchestration/continuity/reception-one-bureau-cost-bounded-occupied-retry/provider-blocked-evidence-rerun-001.json",
+    "provider_blocked_evidence_sha256": "sha256:e1841522ab19231ddb7bac1a12f5e9015902c1a03262b9c1a6bf460d978134ec",
+    "real_isolation_evidence_sha256": "sha256:f54ce1b8a7280eb2692c5ac787d9b80b97f198f620a2624076e6e1175b6ef0a9",
+    "projection_overflow_evidence_sha256": "sha256:204acd41e1174164706472af8dbc0fe13b60a6fddfa674d31fc9c770f32d004c",
+    "focused_tests_passed": 87,
+    "repository_only_verifier_passed": true,
+    "api_spine_tests_passed": true,
+    "continuity_graph_validated": true,
+    "compass_validated_and_rendered": true
+  },
+  "read_only_cloud_preflight": {
+    "path": "orchestration/continuity/reception-one-bureau-cost-bounded-occupied-retry/occupied-preflight-evidence.json",
+    "sha256": "sha256:1af98924c992a687a181adf6f9c705eaf2af849fe58354f0500eb549e555eed0",
+    "result": "ariadne_vertex_sydney_gemini_25_adc_preflight_pass",
+    "all_controls_passed": true,
+    "model_inference_called": false,
+    "provider_prompt_transmitted": false,
+    "external_state_changed": false
+  },
+  "cost": {
+    "cumulative_ceiling_usd": 1.0,
+    "predecessor_accounted_cost_usd": 0.0038049,
+    "fresh_call_reservation_usd": 0.02,
+    "reservation_not_yet_opened": true,
+    "unchanged_duplicate_call_prohibited": true,
+    "stop_after_first_admitted_proposal": true
+  },
+  "residue": {
+    "path": "orchestration/continuity/reception-one-bureau-cost-bounded-occupied-retry/pre-attempt-residue-evidence.json",
+    "sha256": "sha256:24ff5c7f197da999f14fda3f0e5daf3725878f08bd7dbfbb45fd7687957b2562",
+    "containers": 0,
+    "networks": 0,
+    "images": 0,
+    "broker_or_cell_processes": 0,
+    "opened_ledgers": 0,
+    "database_present": false,
+    "runtime_directory_present": false,
+    "ports_available": true
+  },
+  "exact_boundary_unchanged": true,
+  "unrelated_user_changes_preserved": true
+}

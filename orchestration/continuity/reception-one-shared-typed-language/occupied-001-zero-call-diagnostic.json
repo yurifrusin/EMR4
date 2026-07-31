@@ -1,0 +1,69 @@
+{
+  "schema_version": "reception.one.shared_typed.zero_call_diagnostic.v1",
+  "result": "deterministic_local_transport_defect_identified_and_repaired",
+  "attempt_id": "reception-one-shared-typed-occupied-001",
+  "ledger_id": "reception-one-shared-typed-ledger-001",
+  "provider_contacted": false,
+  "provider_calls_consumed": 0,
+  "provider_prompt_transmitted": false,
+  "model_inference_observed": false,
+  "audit": {
+    "audit_file_sha256": "sha256:fb8bd5dadc5be4d12ea16423f3e788f2cab72fb0cc8ea6a93da0f49e535f9cbe",
+    "event_count": 1,
+    "event_types": [
+      "broker_ready"
+    ],
+    "hash_chain_valid": true,
+    "terminal_hash": "sha256:26618246da519246e74dc8390c855c00ef6e8668ebe4639ebf118be3d3f43559"
+  },
+  "ledger": {
+    "ledger_file_sha256": "sha256:11adae9342af136e426da028772cb09a2671bcbc28b01739c532c4cef92be9f5",
+    "status": "consumed",
+    "closure_reason": "lifecycle_closed_before_broker_consumption",
+    "maximum_provider_calls": 1,
+    "provider_calls_consumed": 0,
+    "fallback_permitted": false
+  },
+  "diagnosis": {
+    "reason_code": "cell_request_pretty_serialization_exceeded_relay_cap",
+    "pretty_request_bytes": 11273,
+    "canonical_compact_request_bytes": 6251,
+    "relay_maximum_request_bytes": 8192,
+    "causal_sequence": [
+      "the_work_cell_read_the_pretty_printed_request_file_as_raw_bytes",
+      "the_relay_rejected_the_11273_byte_body_before_forwarding",
+      "the_host_broker_remained_ready_and_received_no_request",
+      "the_lifecycle_join_timed_out_and_cleanup_closed_the_zero_call_ledger"
+    ],
+    "provider_request_contract_reached": false
+  },
+  "repair": {
+    "class": "deterministic_local_request_transport_contract",
+    "change": "serialize_the_cell_request_as_canonical_compact_json",
+    "meaning_changed": false,
+    "model_provider_project_identity_region_or_endpoint_changed": false,
+    "credential_or_iam_changed": false,
+    "data_class_or_isolation_changed": false,
+    "proofreader_output_or_cost_ceiling_changed": false,
+    "focused_regression": "test_shared_cell_request_uses_compact_serialization_within_relay_cap"
+  },
+  "residue": {
+    "cell_container_absent": true,
+    "relay_container_absent": true,
+    "network_absent": true,
+    "cell_image_absent": true,
+    "relay_image_absent": true,
+    "broker_process_absent": true,
+    "temporary_context_absent": true
+  },
+  "explicit_exclusions": {
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "credential_or_token_recorded": false,
+    "api_key_information_recorded": false,
+    "operator_note_generated": false,
+    "chain_of_thought_recorded": false,
+    "fallback_performed": false,
+    "external_state_changed": false
+  }
+}

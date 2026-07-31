@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v2",
+  "receipt_id": "reception-one-receptionist-first-v68-rehydration-20260730",
+  "created_at": "2026-07-30T11:57:54Z",
+  "status": "passed",
+  "rehydrated_from_receipt": false,
+  "sources": {
+    "live_handover_current_baton": {
+      "path": "AGENTS.md",
+      "sha256": "33a26cd29045466a348ee30098f9d39c26d12812fde3307c66d93f10a89800d0",
+      "restored": true
+    },
+    "current_authority_allocation": {
+      "path": "AGENTS.md#6-user-decision-boundaries",
+      "predecessor_final_review": "orchestration/agent_inbox/codex/reception-one-receptionist-first-v67-final-sol-review.md",
+      "predecessor_final_review_sha256": "8060c7b20990d7049cf961ba488d7bf668be21c5f396e3ea900c7a68bcd70373",
+      "restored": true
+    },
+    "active_plan_and_acceptance": {
+      "path": "docs/bernie-reception-one-receptionist-first-v67-closeout.md",
+      "sha256": "48e519538e224a570a92bbd620c66e8dcf4dc6df7110887437548bdff91332f2",
+      "next_descendant": "reception-one-receptionist-first-v68",
+      "restored": true
+    },
+    "protected_evidence_boundaries": {
+      "path": "AGENTS.md#5-protected-evidence-and-closed-gates",
+      "user_decision_path": "AGENTS.md#6-user-decision-boundaries",
+      "restored": true
+    },
+    "git_refs_and_worktree": {
+      "head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff_current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin_master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin_handoff_current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "unrelated_user_changes_preserved": true
+    }
+  },
+  "generic_preflight_receipt": "orchestration/agent_inbox/codex/reception-one-receptionist-first-v68-rehydration-receipt.json"
+}

@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/reception-one-word-companion-request.v1.json",
+  "title": "Reception One Word companion authored-synthetic request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "type",
+    "source_surface",
+    "target_surface",
+    "correlation_id",
+    "request_id",
+    "reference_date",
+    "data_class",
+    "request_text",
+    "planner_mode",
+    "projection_intent",
+    "patient_context_authority",
+    "appointment_context_authority",
+    "appointment_write_authority",
+    "command_authority",
+    "provider_authority",
+    "evidence_mode"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "reception.one.word-companion-request.v1"
+    },
+    "type": {
+      "const": "reception_one_companion_request"
+    },
+    "source_surface": {
+      "const": "word_taskpane"
+    },
+    "target_surface": {
+      "const": "native_diary_bureau"
+    },
+    "correlation_id": {
+      "type": "string",
+      "pattern": "^word-launch-[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^word-request-[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "reference_date": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "data_class": {
+      "const": "authored_synthetic"
+    },
+    "request_text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 280,
+      "pattern": "^(?!\\s*$)[^\\u0000-\\u0008\\u000B\\u000C\\u000E-\\u001F\\u007F]+$"
+    },
+    "planner_mode": {
+      "const": "deterministic"
+    },
+    "projection_intent": {
+      "const": "view"
+    },
+    "patient_context_authority": {
+      "const": false
+    },
+    "appointment_context_authority": {
+      "const": false
+    },
+    "appointment_write_authority": {
+      "const": false
+    },
+    "command_authority": {
+      "const": false
+    },
+    "provider_authority": {
+      "const": false
+    },
+    "evidence_mode": {
+      "const": "local_authored_synthetic_companion"
+    }
+  }
+}

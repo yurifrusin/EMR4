@@ -1,0 +1,88 @@
+{
+  "schema_version": "reception.one.structured_source_language.runtime_policy.v1",
+  "policy_id": "reception-one-structured-source-plan-vertex-sydney-v1",
+  "status": "frozen_preimplementation",
+  "data_class": "authored_synthetic",
+  "effect_ceiling": "proposal_only",
+  "plan_contract": "reception.one.bureau.plan-program.v3",
+  "source_reference_contract": {
+    "fixed_shape": true,
+    "kinds": [
+      "binding",
+      "prior_output",
+      "omit"
+    ],
+    "external_binding": "request_local_binding_code",
+    "prior_step": "explicit_zero_based_step_index",
+    "prior_output": "frozen_operator_output_property_enum",
+    "unused_integer_sentinel": -1,
+    "unused_output_name_sentinel": "none",
+    "provider_cross_field_semantic_authority": false,
+    "deterministic_compiler_required": true,
+    "semantic_repair": false
+  },
+  "operator_note": {
+    "purpose": "audit_and_troubleshooting_only",
+    "maximum_utf8_bytes": 320,
+    "maximum_lines": 1,
+    "independently_proofread": true,
+    "parsed_into_plan": false,
+    "product_delivered": false,
+    "retained_only_if_admitted": true,
+    "rejected_text_discarded": true,
+    "raw_provider_response_retained": false,
+    "hidden_reasoning_retained": false
+  },
+  "api_spine": {
+    "graphql_mutation": false,
+    "rest_route_change": false,
+    "rest_write": false,
+    "database_access": false,
+    "frontend_provider_call": false,
+    "proposal_only": true,
+    "backend_confirmation_path_unchanged": true
+  },
+  "provider": {
+    "name": "google_cloud_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "global_endpoint": false,
+    "automatic_fallback": false,
+    "api_key_authentication": false,
+    "provider_tools": false,
+    "function_calling": false,
+    "grounding": false,
+    "retrieval": false,
+    "explicit_cache": false,
+    "request_response_logging": false
+  },
+  "occupied_gate": {
+    "primary_call_ceiling": 1,
+    "deterministic_request_contract_retry_ceiling": 1,
+    "absolute_call_ceiling": 2,
+    "incremental_cost_ceiling_usd": 1,
+    "stop_after_first_admitted_result": true,
+    "semantic_output_retry": false
+  },
+  "closed": [
+    "real_data",
+    "product_derived_data",
+    "patient_or_health_data",
+    "clinical_data",
+    "protected_evidence",
+    "historical_diary_data",
+    "appointment_confirmation",
+    "appointment_write",
+    "product_delivery",
+    "word_wiring",
+    "voice",
+    "production",
+    "deployment",
+    "release",
+    "provider_or_regional_fallback"
+  ]
+}

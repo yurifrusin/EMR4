@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.vertex_sydney_gemini_25_repair_closeout_residue.v2",
+  "recorded_at": "2026-07-24T08:32:00Z",
+  "result": "ariadne_vertex_sydney_gemini_25_repair_closeout_residue_pass",
+  "task_scoped": {
+    "containers": 0,
+    "networks": 0,
+    "images": 0,
+    "broker_processes": 0,
+    "temporary_roots": 0,
+    "temporary_tokens": 0,
+    "temporary_contexts": 0
+  },
+  "preserved_unrelated_processes": {
+    "count": 3,
+    "classification": "preexisting_repository_local_development_servers_not_task_residue",
+    "modified_or_terminated": false
+  },
+  "ledgers": [
+    {
+      "ledger_id": "gemini-25-repair-dry-run-ledger-001",
+      "status": "consumed",
+      "provider_calls_consumed": 0,
+      "disposition": "provider_free_pass"
+    },
+    {
+      "ledger_id": "gemini-25-repair-ledger-001",
+      "status": "consumed",
+      "provider_calls_consumed": 1,
+      "disposition": "bounded_http_400_before_candidate"
+    },
+    {
+      "ledger_id": "gemini-25-repair-dry-run-ledger-002",
+      "status": "consumed",
+      "provider_calls_consumed": 0,
+      "disposition": "provider_free_relay_readiness_setup_failure"
+    },
+    {
+      "ledger_id": "gemini-25-repair-dry-run-ledger-003",
+      "status": "consumed",
+      "provider_calls_consumed": 0,
+      "disposition": "provider_free_pass_after_readiness_repair"
+    },
+    {
+      "ledger_id": "gemini-25-repair-ledger-002",
+      "status": "consumed",
+      "provider_calls_consumed": 1,
+      "disposition": "occupied_typed_release_pass"
+    }
+  ],
+  "audit_chains": [
+    {
+      "ledger_id": "gemini-25-repair-dry-run-ledger-001",
+      "valid": true,
+      "event_count": 7,
+      "chain_head": "sha256:4642296aad909e7cd15f6f00d3c4e6815a98c658756e97dc63c76bd53a5cc2bc"
+    },
+    {
+      "ledger_id": "gemini-25-repair-ledger-001",
+      "valid": true,
+      "event_count": 7,
+      "chain_head": "sha256:a467686fb84c1a946981c9c1728fe3c4dd8d58a9fbf12699e802cfe035655268"
+    },
+    {
+      "ledger_id": "gemini-25-repair-dry-run-ledger-002",
+      "valid": true,
+      "event_count": 2,
+      "chain_head": "sha256:39706c975da7c3e2cc606fd6318d08720044a2c2f356ea0d90bc8c34bb9fb80d"
+    },
+    {
+      "ledger_id": "gemini-25-repair-dry-run-ledger-003",
+      "valid": true,
+      "event_count": 7,
+      "chain_head": "sha256:ba21b76b9c453c8416feb5a1b743f1af73e4e586ce58d420c58080a31f68e74a"
+    },
+    {
+      "ledger_id": "gemini-25-repair-ledger-002",
+      "valid": true,
+      "event_count": 8,
+      "chain_head": "sha256:763b600bdfdb69af25347f1b0e2b66acb1c7f796a7fc438fd5a353c8538db8ec"
+    }
+  ],
+  "daemon_wide_prune_performed": false,
+  "external_cloud_state_changed": false,
+  "provider_calls_after_success": 0,
+  "fallback_performed": false
+}

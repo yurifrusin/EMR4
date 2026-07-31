@@ -1,0 +1,76 @@
+{
+  "schema_version": "ariadne.attempt3_external_audit_analysis.v1",
+  "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+  "runtime_attempt_id": "comparative-runtime-attempt-003",
+  "result": "ariadne_terra_gemini_attempt3_external_audit_revision_required",
+  "attempt_evidence_sha256": "sha256:fb721c08bff6f14ac71002146428b967c71448778a6e01d211a40930c3d06110",
+  "original_durable_exports_verify": false,
+  "reconstructed_exports_verify": true,
+  "incident": {
+    "reason_code": "sanitised-audit-export-omitted-hashed-fields",
+    "scope": "broker-ready-event-only",
+    "historical_evidence_rewritten": false,
+    "future_export_allowlist_corrected": true
+  },
+  "lane_checks": {
+    "terra": {
+      "runtime_host_chain_status_reported": "passed",
+      "original_durable_sanitised_chain_verifies": false,
+      "omitted_hashed_broker_ready_fields": [
+        "allowed_path",
+        "maximum_provider_calls",
+        "upstream_host",
+        "upstream_path"
+      ],
+      "deterministic_reconstruction_sources": {
+        "allowed_path": "frozen broker constant",
+        "upstream_host": "comparison manifest lane host",
+        "upstream_path": "comparison manifest lane path",
+        "maximum_provider_calls": "frozen broker call budget"
+      },
+      "reconstructed_chain_verifies": true,
+      "provider_call_start_count": 1,
+      "provider_call_completion_count": 1,
+      "provider_status": 200,
+      "typed_output_manifest_recorded": true,
+      "proofreader_disposition": "release-verified-outputs",
+      "cleanup_complete": true
+    },
+    "gemini": {
+      "runtime_host_chain_status_reported": "passed",
+      "original_durable_sanitised_chain_verifies": false,
+      "omitted_hashed_broker_ready_fields": [
+        "allowed_path",
+        "maximum_provider_calls",
+        "upstream_host",
+        "upstream_path"
+      ],
+      "deterministic_reconstruction_sources": {
+        "allowed_path": "frozen broker constant",
+        "upstream_host": "comparison manifest lane host",
+        "upstream_path": "comparison manifest lane path",
+        "maximum_provider_calls": "frozen broker call budget"
+      },
+      "reconstructed_chain_verifies": true,
+      "provider_call_start_count": 1,
+      "provider_call_completion_count": 1,
+      "provider_status": 400,
+      "typed_output_manifest_recorded": false,
+      "proofreader_disposition": null,
+      "cleanup_complete": true
+    }
+  },
+  "gemini_diagnostic_limit": {
+    "observed": "http-400-invalid-argument-before-typed-output",
+    "exact_rejected_field_known": false,
+    "reason": "raw-provider-error-message-is-intentionally-excluded",
+    "retry_performed": false
+  },
+  "security_exclusions": {
+    "raw_reasoning_recorded": false,
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "draft_payload_recorded": false,
+    "provider_secret_recorded": false
+  }
+}

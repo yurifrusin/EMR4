@@ -1,0 +1,50 @@
+{
+  "authority_boundary": "receipt_only_architecture_proposal_no_provider_route_database_product_data_write_deployment_release_or_external_action_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "propose_the_authority_bounded_path_from_the_accepted_reception_one_baseline_to_a_running_bureau",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records the provider-free integrated Bureau baseline as accepted and identifies a model-connected text lane, product data, writes, production, deployment and release as separately gated.",
+    "current_authority_allocation": [
+      "Yuri requested an architecture proposal for turning the Bureau into a running system while incorporating the previous deterministic work.",
+      "This request authorises analysis and a proposed sequence, not provider execution, runtime wiring, database mutation, product-data use, deployment or release."
+    ],
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-integrated-bureau-plan.md",
+      "docs/bernie-reception-one-integrated-bureau-closeout.md",
+      "docs/bernie-conversational-diary-north-star.md",
+      "docs/bernie-intent-projected-event-aware-diary-design.md",
+      "docs/bernie-stage2-durable-authority-recovery-security-closeout.md",
+      "docs/bernie-reception-one-combined-scope-proof-closeout.md",
+      "docs/bernie-reception-one-committed-event-vertical-closeout.md",
+      "docs/bernie-reception-one-availability-reconciliation-closeout.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/access_ai_api_design.md",
+      "orchestration/bernie_release_gates.md"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 remain binding: protected holdouts and historical Diary material remain excluded; no new provider call, product/patient/clinical data transmission, write authority, participant action, production, deployment or release is implied by this proposal.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "worktree_entry_count_before_this_receipt": 238,
+      "protected_refs_unchanged": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

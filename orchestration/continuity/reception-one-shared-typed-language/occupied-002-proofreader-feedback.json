@@ -1,0 +1,11 @@
+{
+  "version_code": 1,
+  "previous_program_hash": "sha256:39194c895833b0fb28fd7fefea64f717229eedea78e467c4234ed25809443150",
+  "replacement_required": true,
+  "violations": [
+    {
+      "violation_code": 3,
+      "path_code": 0
+    }
+  ]
+}

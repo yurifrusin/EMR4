@@ -1,0 +1,88 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "disable_the_invoker_iam_check_on_only_the_exact_raisa_service_then_run_bounded_public_and_word_online_verification",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_raisa_public_access_word_online_continuation",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No worker was selected; the cloud mutation and supervised browser sequence are short, serial and Sol-owned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport was selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No model provider or external reviewer was selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: the exact private Sydney service and Domain Restricted Sharing block are accepted at Continuity graph revision 178 and Compass map revision 159.",
+        "current_authority_allocation: Yuri explicitly authorises --no-invoker-iam-check only on raisa-office-web-dev in bernie-emr4-dev/australia-southeast1 and the bounded public HTTPS, browser, manifest and Word Online gates; no other service, IAM policy or organisation policy may change.",
+        "active_plan_and_acceptance: docs/raisa-cloud-run-public-access-word-online-verification-plan.md builds on the frozen operator packet, private-deployment evidence and accepted Word companion contracts.",
+        "protected_evidence_boundaries: protected holdouts, historical Diary material, real, product-derived, patient, health and clinical data, provider material, backend, database, microphone, commands, document writes, production and release remain unopened and unused.",
+        "git_refs_and_worktree: HEAD is 5b1ea7952fb08eea333da0e63f166d3895ccea32; master, handoff/current, origin/master and origin/handoff/current are 4974075b31035d599e081d68e3b85e04a897baa1; all unrelated worktree changes are preserved.",
+        "The only authorised cloud mutation is disabling the Invoker IAM check on the exact service; the allUsers binding remains absent and no tenant catalogue or central deployment change is authorised.",
+        "The exact Cloud Run mutation and public route, policy, content-manifest, hosted-browser and Office manifest validation gates passed. The final service is revision raisa-office-web-dev-00005-w82 at the exact frozen URL, with the Invoker IAM check disabled and zero allUsers IAM bindings.",
+        "The Word Online developer upload dialog was reached in a fresh blank personal document, but the Chrome extension did not expose the direct manifest file chooser. No manifest, synthetic request, document content, provider payload, backend request or database request was transmitted. Yuri must enable the documented task-local Chrome extension file-URL access setting before the Word gate can resume.",
+        "Task-owned local build directories, local repair image tags, containers and networks were removed. The Cloud Run service and one blank Word Online handoff tab remain intentionally available for the exact retry. Two blank task-created Word documents contain no authored content; one is the live handoff and one closed document may remain in personal storage, so both require deletion after the terminal Word result."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

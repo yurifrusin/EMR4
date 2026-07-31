@@ -1,0 +1,27 @@
+{
+  "schema_version": "reception.one.proofreader_dialogue_v4.final_residue_evidence.v1",
+  "recorded_at": "2026-07-30T02:53:29Z",
+  "result": "reception_one_proofreader_dialogue_v4_final_residue_pass",
+  "actual_provider_calls": 2,
+  "absolute_provider_call_ceiling": 2,
+  "all_opened_ledgers_consumed": true,
+  "turn_audit_chains_recomputed_valid": 2,
+  "parent_audit_chains_recomputed_valid": 2,
+  "evidence_hashes_recomputed_valid": 3,
+  "residue": {
+    "task_containers_present": false,
+    "task_relays_present": false,
+    "task_networks_present": false,
+    "task_images_present": false,
+    "task_broker_processes_present": false,
+    "task_cell_processes_present": false,
+    "temporary_build_contexts_present": false,
+    "temporary_token_files_present": false,
+    "temporary_credentials_present": false
+  },
+  "cleanup_scope": "task_scoped_only",
+  "daemon_wide_prune_performed": false,
+  "fallback_performed": false,
+  "third_call_performed": false,
+  "external_state_changed_by_cleanup": false
+}

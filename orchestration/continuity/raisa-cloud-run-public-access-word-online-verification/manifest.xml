@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OfficeApp
+  xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:type="TaskPaneApp">
+  <Id>719cfd65-e2e8-4b49-bf3f-b76bf3a346c1</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>Raisa Healthcare development</ProviderName>
+  <DefaultLocale>en-AU</DefaultLocale>
+  <DisplayName DefaultValue="Raisa Reception One public check"/>
+  <Description DefaultValue="Bounded authored-synthetic Word Online companion check."/>
+  <IconUrl DefaultValue="https://raisa-office-web-dev-nnbntbx5yq-ts.a.run.app/assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://raisa-office-web-dev-nnbntbx5yq-ts.a.run.app/assets/icon-80.png"/>
+  <SupportUrl DefaultValue="https://github.com/emr4/emr4"/>
+  <AppDomains>
+    <AppDomain>https://raisa-office-web-dev-nnbntbx5yq-ts.a.run.app</AppDomain>
+  </AppDomains>
+  <Hosts>
+    <Host Name="Document"/>
+  </Hosts>
+  <DefaultSettings>
+    <SourceLocation DefaultValue="https://raisa-office-web-dev-nnbntbx5yq-ts.a.run.app/taskpane.html?reception_one_companion_demo=true"/>
+  </DefaultSettings>
+  <Permissions>ReadDocument</Permissions>
+</OfficeApp>

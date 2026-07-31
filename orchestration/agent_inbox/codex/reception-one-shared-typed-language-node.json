@@ -1,0 +1,179 @@
+{
+  "authority": {
+    "authorized_openings": [
+      {
+        "boundary": "provider-call",
+        "scope": "Consumed. The descendant made exactly two actual gemini-2.5-flash calls through the exact Bernie keyless-ADC australia-southeast1 Vertex lane. Both failed closed at the deterministic proofreader and no further call is authorised.",
+        "source": "docs/bernie-reception-one-shared-typed-language-plan.md"
+      }
+    ],
+    "notes": [
+      "Yuri authorised the agent and proofreader to use one shared typed language.",
+      "Yuri authorised a strictly bounded natural-language operator note for audit and troubleshooting.",
+      "The note is independently proofread, audit-only, never parsed into the typed plan and never product-delivered.",
+      "No raw provider response, hidden reasoning, credentials, identifiers, real/product/patient/health/clinical/historical data, confirmation, write, production, deployment or release is authorised."
+    ]
+  },
+  "claim_scope": [
+    "The provider-blocked shared PlanProgram implementation passes all six authored-synthetic proposal goals through one coded goal/operator/source representation consumed directly by the deterministic proofreader.",
+    "The independently proofread 320-byte operator note is admitted into audit only, cannot alter the compiled plan and is absent from the released proposal.",
+    "The credential-free non-root read-only network-none container rehearsal passes with bounded resources, zero provider/credential/database/write effects and complete owned cleanup.",
+    "Current official Google documentation lists gemini-2.5-flash and australia-southeast1 model availability/ML processing and documents structured arrays of objects with integer fields.",
+    "The fresh read-only preflight verifies the exact existing impersonated Bernie ADC, project, target, scope, Vertex API/billing/model entitlement, prediction-only role/permission, Data Access audit, absent request-response logging, disabled provider cache and no key/API-key path without changing external state.",
+    "Occupied lifecycle 001 closed before the broker consumed its request because pretty-printed cell JSON exceeded the relay cap; its ledger is consumed at zero provider calls and residue is absent.",
+    "Canonical compact cell-request serialization repairs that exact local transport defect without changing any semantic or external boundary, and a focused regression passes.",
+    "After that repair, the complete repository, provider-blocked, real-isolation, Continuity, Compass and exact read-only ADC/control gates passed again.",
+    "Occupied lifecycle 002 then made the descendant's first actual provider call: HTTP 200 through the exact Sydney lane. The independently bounded operator note passed, but the PlanProgram failed closed on output_index_invalid; no proposal or other value was released.",
+    "Model input v3 adds closed proofreader feedback and concrete zero-based output-code examples. Future audit retains only the integer typed form, separately from the bounded note. Complete provider-free and exact read-only controls pass again.",
+    "Lifecycle 003 then failed before broker_ready because the broker reconstructed v3 input without its feedback packet. Its ledger is consumed at zero calls; the exact host-side validation defect is repaired and all gates pass again.",
+    "Lifecycle 004 made the second and final actual provider call. Its bounded note passed, but the integer audit form proves the final move step referenced nonexistent output index 8 on the date-resolution step; the proofreader released nothing.",
+    "The absolute two-call ceiling is exhausted, every ledger is consumed and cleanup is complete. This is useful shared-language, audit and fail-closed evidence, not a successful live planner or reliable model-quality, real-data, production, deployment or release evidence."
+  ],
+  "contract_evidence": [],
+  "coordinates": {
+    "git_ref": "codex/ariadne-terra-gemini-comparative-rehearsal",
+    "source_head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "thread_id": null,
+    "worktree_role": "integration"
+  },
+  "created_at": "2026-07-30T00:14:29Z",
+  "decisions": [
+    {
+      "id": "authorise-reception-one-shared-typed-language-75",
+      "source": "docs/bernie-reception-one-shared-typed-language-plan.md",
+      "status": "accepted",
+      "summary": "Proceed with one common model-proofreader PlanProgram and a separately bounded audit-only operator note, conditionally through the exact existing authored-synthetic Gemini 2.5 Flash Sydney lane."
+    },
+    {
+      "id": "accept-reception-one-shared-typed-language-provider-free-76",
+      "source": "orchestration/continuity/reception-one-shared-typed-language/provider-blocked-evidence.json",
+      "status": "accepted",
+      "summary": "Accept the mechanically lossless shared language, independently bounded operator note and zero-call real-isolation evidence; the occupied gate remains conditional on fresh exact ADC controls."
+    },
+    {
+      "id": "admit-reception-one-shared-typed-language-occupied-gate-77",
+      "source": "orchestration/continuity/reception-one-shared-typed-language/occupied-preflight-evidence.json",
+      "status": "accepted",
+      "summary": "The fresh exact read-only Bernie ADC and cloud-control preflight passes, so one primary authored-synthetic occupied call is admitted under the frozen Sydney lane."
+    },
+    {
+      "id": "close-reception-one-shared-typed-zero-call-001-and-repair-78",
+      "source": "orchestration/continuity/reception-one-shared-typed-language/occupied-001-zero-call-diagnostic.json",
+      "status": "accepted",
+      "summary": "Close the first lifecycle at zero provider calls, preserve its consumed ledger and one-event audit, and accept compact canonical serialization as a bounded local transport repair before a distinct rerun."
+    },
+    {
+      "id": "admit-reception-one-shared-typed-language-rerun-79",
+      "source": "orchestration/continuity/reception-one-shared-typed-language/occupied-002-preflight-evidence.json",
+      "status": "accepted",
+      "summary": "The compact-transport regression, complete provider-free gates and fresh exact read-only Bernie ADC/control preflight all pass, admitting one distinct authored-synthetic occupied rerun under the unchanged Sydney lane."
+    },
+    {
+      "id": "close-reception-one-shared-typed-002-and-admit-feedback-retry-80",
+      "source": "orchestration/continuity/reception-one-shared-typed-language/occupied-002-external-audit.json",
+      "status": "accepted",
+      "summary": "Close the first actual call fail-closed after its typed program used an invalid output index, accept closed proofreader feedback and integer-form audit retention, and admit the one remaining exact-lane call after all gates pass again."
+    },
+    {
+      "id": "close-reception-one-shared-typed-zero-call-003-and-readmit-final-81",
+      "source": "orchestration/continuity/reception-one-shared-typed-language/occupied-003-zero-call-diagnostic.json",
+      "status": "accepted",
+      "summary": "Close lifecycle 003 at zero provider calls, repair exact broker reconstruction of the feedback-bound v3 input, and readmit the one remaining actual call after complete gates pass again."
+    },
+    {
+      "id": "close-reception-one-shared-typed-provider-sequence-82",
+      "source": "orchestration/continuity/reception-one-shared-typed-language/occupied-004-external-audit.json",
+      "status": "accepted",
+      "summary": "Accept the shared language and bounded-note implementation, close the second actual call fail-closed after an invalid typed dependency, exhaust the call ceiling and stop with zero release and complete cleanup."
+    }
+  ],
+  "evidence": {
+    "acceptances": [
+      "orchestration/agent_inbox/codex/reception-one-shared-typed-language-plan-sol-acceptance.md",
+      "orchestration/agent_inbox/codex/reception-one-shared-typed-language-sol-acceptance.md"
+    ],
+    "closeouts": [
+      "docs/bernie-reception-one-shared-typed-language-closeout.md"
+    ],
+    "findings": [
+      "docs/security/bernie-reception-one-shared-typed-language-threat-model-delta.md"
+    ],
+    "plans": [
+      "docs/bernie-reception-one-shared-typed-language-plan.md",
+      "orchestration/continuity/reception-one-shared-typed-language/runtime-policy.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-authority-request.json",
+      "orchestration/continuity/reception-one-shared-typed-language/official-provider-contract-evidence.json"
+      ,
+      "docs/bernie-reception-one-shared-typed-language-zero-call-repair.md"
+      ,
+      "docs/bernie-reception-one-shared-typed-language-proofreader-feedback-repair.md"
+    ],
+    "receipts": [
+      "orchestration/agent_inbox/codex/reception-one-shared-typed-language-rehydration-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-shared-typed-language-preplan-receipt.json"
+      ,
+      "orchestration/agent_inbox/codex/reception-one-shared-typed-language-preacceptance-receipt.json"
+      ,
+      "orchestration/agent_inbox/codex/reception-one-shared-typed-language-occupied-001-independent-audit.md"
+      ,
+      "orchestration/agent_inbox/codex/reception-one-shared-typed-language-occupied-002-independent-audit.md"
+      ,
+      "orchestration/agent_inbox/codex/reception-one-shared-typed-language-occupied-003-independent-audit.md"
+      ,
+      "orchestration/agent_inbox/codex/reception-one-shared-typed-language-occupied-004-independent-audit.md"
+    ],
+    "tests": [
+      "orchestration/continuity/reception-one-shared-typed-language/model-input.schema.json",
+      "orchestration/continuity/reception-one-shared-typed-language/plan-program.schema.json",
+      "orchestration/continuity/reception-one-shared-typed-language/provider-blocked-evidence.json",
+      "orchestration/continuity/reception-one-shared-typed-language/provider-free-isolation-evidence.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-preflight-evidence.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-002-preflight-evidence.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-002-evidence.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-002-ledger.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-002-audit.jsonl",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-002-external-audit.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-002-proofreader-feedback.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-003-preflight-evidence.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-003-zero-call-diagnostic.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-003-ledger.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-004-preflight-evidence.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-004-evidence.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-004-ledger.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-004-audit.jsonl",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-004-external-audit.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-final-residue-evidence.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-001-zero-call-diagnostic.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-001-ledger.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-001-audit.jsonl",
+      "scripts/reception_one_shared_typed_plan_language.py",
+      "scripts/reception_one_shared_typed_plan_cell.py",
+      "scripts/reception_one_shared_typed_plan_isolation.py",
+      "tests/test_reception_one_shared_typed_plan_language.py",
+      "tests/test_reception_one_bureau_model_text_lane.py",
+      "tests/test_reception_one_bureau_typed_plan_protocol.py",
+      "tests/test_reception_one_extended_proposal_runtime.py",
+      "tests/test_api_spine_artifacts.py",
+      "tests/test_api_spine_appointment_openapi_drift_guard.py",
+      "tests/test_ariadne_continuity_engine.py",
+      "tests/test_ariadne_compass.py"
+    ]
+  },
+  "id": "reception-one-shared-typed-language-active",
+  "kind": "review",
+  "relationships": [
+    {
+      "node_id": "reception-one-extended-proposal-runtime-active",
+      "relation": "builds_on"
+    }
+  ],
+  "status": "accepted",
+  "title": "Reception One Shared Typed Language",
+  "unresolved_gates": [
+    "No further occupied provider call is authorised; the absolute two-call ceiling is exhausted.",
+    "No proofreader-admitted model-generated PlanProgram exists in this descendant.",
+    "Any future occupied study of a revised prior-output representation or model-guidance approach requires a new Yuri decision and new call budget.",
+    "Real/product/patient/health/clinical/historical data, appointment confirmation/write, Word/voice, production, deployment and release remain separately closed."
+  ],
+  "updated_at": "2026-07-30T01:21:19Z"
+}

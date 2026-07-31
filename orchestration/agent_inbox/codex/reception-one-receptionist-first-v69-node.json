@@ -1,0 +1,113 @@
+{
+  "id": "reception-one-receptionist-first-v69-untouched-holdout",
+  "title": "Reception One Receptionist-first v6.9 Untouched Holdout",
+  "kind": "implementation",
+  "status": "accepted",
+  "created_at": "2026-07-30T12:26:00Z",
+  "updated_at": "2026-07-30T12:35:00Z",
+  "relationships": [
+    {
+      "node_id": "reception-one-receptionist-first-v68-move-pattern",
+      "relation": "builds_on"
+    }
+  ],
+  "coordinates": {
+    "thread_id": null,
+    "git_ref": "codex/ariadne-terra-gemini-comparative-rehearsal",
+    "source_head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "worktree_role": "integration"
+  },
+  "evidence": {
+    "acceptances": [
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v69-provider-free-sol-acceptance.md"
+    ],
+    "closeouts": [
+      "docs/bernie-reception-one-receptionist-first-v68-closeout.md"
+    ],
+    "findings": [
+      "orchestration/continuity/reception-one-receptionist-first-v68/occupied-final-audit-analysis.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v68-final-sol-review.md"
+    ],
+    "plans": [
+      "docs/bernie-reception-one-v69-holdout-readonly-context-authority.md",
+      "docs/bernie-reception-one-receptionist-first-v69-untouched-holdout-plan.md",
+      "orchestration/continuity/reception-one-receptionist-first-v69/evaluation-manifest.json",
+      "orchestration/continuity/reception-one-receptionist-first-v69/occupied-authority.json",
+      "orchestration/continuity/reception-one-receptionist-first-v69/frozen-contract.json"
+    ],
+    "receipts": [
+      "orchestration/agent_inbox/codex/reception-one-v69-holdout-context-preplan-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-v69-holdout-context-preplan-five-source-receipt.json"
+    ],
+    "tests": [
+      "orchestration/continuity/reception-one-receptionist-first-v69/provider-blocked-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v69/real-isolation-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v69/occupied-preflight-evidence.json",
+      "tests/test_reception_one_receptionist_first_v69.py"
+    ]
+  },
+  "authority": {
+    "authorized_openings": [
+      {
+        "boundary": "container-runtime",
+        "scope": "Credential-free isolated work cells for twelve sealed authored-synthetic holdout cases.",
+        "source": "docs/bernie-reception-one-v69-holdout-readonly-context-authority.md"
+      },
+      {
+        "boundary": "model-runtime",
+        "scope": "The byte-frozen v6.8 form-filling lane may evaluate the sealed v6.9 holdout without tuning against it.",
+        "source": "docs/bernie-reception-one-v69-holdout-readonly-context-authority.md"
+      },
+      {
+        "boundary": "provider-call",
+        "scope": "Twelve primary and at most one bounded correction per case through the exact Bernie keyless-ADC Sydney lane, within twenty-four calls and USD 1.",
+        "source": "orchestration/continuity/reception-one-receptionist-first-v69/occupied-authority.json"
+      }
+    ],
+    "notes": [
+      "v6.8 is immutable and frozen.",
+      "The sealed holdout may not be used to tune the prompt, schema, proofreader or oracle.",
+      "Real/product data, database access, confirmation, writes, Word, voice, production, deployment and release remain closed."
+    ]
+  },
+  "contract_evidence": [
+    {
+      "contract_id": "combined-patient-practitioner-time-duration-intent",
+      "status": "satisfied",
+      "evidence": [
+        "orchestration/continuity/reception-one-receptionist-first-v69/provider-blocked-evidence.json",
+        "orchestration/continuity/reception-one-receptionist-first-v69/frozen-contract.json"
+      ],
+      "note": "All twelve deterministic oracles admit under the frozen typed semantic-role proofreader before provider exposure."
+    },
+    {
+      "contract_id": "committed-reschedule-availability-reconciliation",
+      "status": "satisfied",
+      "evidence": [
+        "docs/bernie-reception-one-receptionist-first-v69-untouched-holdout-plan.md",
+        "orchestration/continuity/reception-one-receptionist-first-v69/occupied-authority.json",
+        "docs/bernie-reception-one-receptionist-first-v68-closeout.md",
+        "orchestration/continuity/reception-one-receptionist-first-v69/provider-blocked-evidence.json"
+      ],
+      "note": "The holdout remains proposal-only and opens no product event, database, confirmation or mutation path."
+    }
+  ],
+  "decisions": [
+    {
+      "id": "authorise-reception-one-v69-holdout-context-145",
+      "status": "accepted",
+      "summary": "Evaluate a sealed untouched authored-synthetic holdout and proceed to minimal read-only synthetic Diary context only after a pass.",
+      "source": "docs/bernie-reception-one-v69-holdout-readonly-context-authority.md"
+    }
+  ],
+  "unresolved_gates": [
+    "The sealed holdout has not yet been exposed to the provider.",
+    "Only a 12/12 exact holdout pass may unlock read-only authored-synthetic Diary-context integration.",
+    "Real/product data, writes, Word, voice, production, deployment and release remain closed."
+  ],
+  "claim_scope": [
+    "The provider-free readiness result is accepted: oracles and isolation pass for twelve newly authored sealed cases.",
+    "No occupied v6.9 result exists yet.",
+    "Sydney endpoint configuration does not prove Australian physical or sovereign processing."
+  ]
+}

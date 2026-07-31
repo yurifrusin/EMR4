@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ariadne.vertex_sydney_isolation_rehearsal_evidence.v1",
+  "title": "Ariadne Vertex Sydney isolation rehearsal evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "mode",
+    "attempt_id",
+    "ledger_id",
+    "provider_contacted",
+    "provider_call_count_reserved",
+    "fallback_performed",
+    "exact_binding",
+    "build_context",
+    "network",
+    "cell_effective_policy",
+    "relay_effective_policy",
+    "broker",
+    "exchange",
+    "ledger",
+    "explicit_exclusions",
+    "cleanup",
+    "evidence_hash"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "ariadne.vertex_sydney_isolation_rehearsal_evidence.v1"
+    },
+    "result": {"type": "string"},
+    "mode": {"enum": ["dry-run", "live"]},
+    "attempt_id": {
+      "enum": [
+        "gemini-25-primary-001",
+        "gemini-25-repair-dry-run-001",
+        "gemini-25-repair-dry-run-002",
+        "gemini-25-repair-dry-run-003",
+        "gemini-25-repair-001",
+        "gemini-25-repair-002"
+      ]
+    },
+    "ledger_id": {
+      "enum": [
+        "gemini-25-primary-ledger-001",
+        "gemini-25-repair-dry-run-ledger-001",
+        "gemini-25-repair-dry-run-ledger-002",
+        "gemini-25-repair-dry-run-ledger-003",
+        "gemini-25-repair-ledger-001",
+        "gemini-25-repair-ledger-002"
+      ]
+    },
+    "provider_contacted": {"type": "boolean"},
+    "provider_call_count_reserved": {"type": "integer", "minimum": 0, "maximum": 1},
+    "fallback_performed": {"const": false},
+    "exact_binding": {"type": "object"},
+    "build_context": {"type": "object"},
+    "network": {"type": "object"},
+    "cell_effective_policy": {"type": "object"},
+    "relay_effective_policy": {"type": "object"},
+    "broker": {"type": "object"},
+    "exchange": {"type": "object"},
+    "ledger": {"type": "object"},
+    "explicit_exclusions": {"type": "object"},
+    "cleanup": {"type": "object"},
+    "evidence_hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

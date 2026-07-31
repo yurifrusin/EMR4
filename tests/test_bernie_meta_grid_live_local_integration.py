@@ -63,7 +63,7 @@ def test_interrupted_proposal_recovers_fresh_availability_not_stale_proposal():
     assert 'current.family === "proposal_review" && practitioners[0]' in refresh
     assert "next = await buildAvailability" in refresh
     assert "Proposal and patient selection are deliberately discarded" in refresh
-    assert '<script src="meta-grid.js?v=10" defer>' in _read(DIARY / "diary.html")
+    assert '<script src="meta-grid.js?v=16" defer>' in _read(DIARY / "diary.html")
 
 
 def test_harness_is_exact_disposable_synthetic_and_provider_disabled():

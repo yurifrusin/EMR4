@@ -1,0 +1,37 @@
+{
+  "boundary": {
+    "credential_reads_performed": 0,
+    "external_state_changed": false,
+    "network_access_performed": false,
+    "provider_calls_performed": 0,
+    "retry_authorised": true,
+    "retry_performed": false
+  },
+  "bounded_provider_error": {
+    "field_paths": [
+      "$.goal"
+    ],
+    "reason_code": "schema_invalid"
+  },
+  "diagnosis": "The provider returned a response through the exact lane, but the low-state provider schema allowed a string representation which the stricter local wire schema rejected before the proofreader. The exact discarded field value was not retained. The safe repair therefore only strengthens the exact-goal instruction and applies allowlisted enum-casing and separator-whitespace normalization before the unchanged strict schema.",
+  "historical_attempt_id": "reception-one-extended-runtime-occupied-001",
+  "historical_request_hash": "sha256:f5283ca6c13e9a78fae556fb3c5d6231a8d0d273217e9c88818bc1b66c24cb96",
+  "historical_schema_hash": "sha256:d5b9cceeef961dca7f8e035f8e95b8f7531c00b52736a9eff7257cefbee85f87",
+  "repository_local_repair": {
+    "array_schema_count": 1,
+    "decoded_candidate_schema_unchanged": true,
+    "deterministic_proofreader_unchanged": true,
+    "enum_keyword_count": 0,
+    "local_wire_schema": "orchestration/continuity/reception-one-bureau-model-text-lane/provider-wire-response.schema.json",
+    "mechanical_wire_normalization_only": true,
+    "nested_object_items": false,
+    "new_schema_hash": "sha256:d5b9cceeef961dca7f8e035f8e95b8f7531c00b52736a9eff7257cefbee85f87",
+    "provider_model_project_identity_region_unchanged": true,
+    "semantic_reinterpretation_permitted": false,
+    "source_reference_transformation_permitted": false,
+    "step_reference_instruction_only": false,
+    "wire_contract": "goal plus an array of compact typed plan-line strings"
+  },
+  "result": "reception_one_bureau_model_text_wire_normalization_diagnostic_pass",
+  "schema_version": "reception.one.bureau.model_text_provider_blocked_diagnostic.v1"
+}

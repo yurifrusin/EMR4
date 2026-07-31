@@ -1,0 +1,43 @@
+{
+  "version_code": 2,
+  "operator_note": "Prepared a move proposal for review; no booking was changed.",
+  "goal_code": 1,
+  "steps": [
+    {
+      "operator_code": 0,
+      "source_codes": [
+        4
+      ]
+    },
+    {
+      "operator_code": 3,
+      "source_codes": [
+        1000,
+        5
+      ]
+    },
+    {
+      "operator_code": 2,
+      "source_codes": [
+        0
+      ]
+    },
+    {
+      "operator_code": 6,
+      "source_codes": [
+        1017,
+        1032,
+        2,
+        3,
+        1018
+      ]
+    },
+    {
+      "operator_code": 9,
+      "source_codes": [
+        1016,
+        1048
+      ]
+    }
+  ]
+}

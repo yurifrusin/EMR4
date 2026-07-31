@@ -1,0 +1,22 @@
+{
+  "schema_version": "reception.one.preprinted_form_v5.multicase_precall_residue.v1",
+  "recorded_at": "2026-07-30T04:43:18Z",
+  "result": "reception_one_preprinted_form_v5_multicase_precall_residue_pass",
+  "owned_runtime_absent": {
+    "live_cell_container": true,
+    "live_relay_container": true,
+    "live_internal_network": true,
+    "live_cell_image": true,
+    "live_relay_image": true,
+    "fixture_turn_one_container": true,
+    "fixture_turn_two_container": true,
+    "fixture_turn_one_image": true,
+    "fixture_turn_two_image": true,
+    "one_use_broker_process": true
+  },
+  "temporary_credential_or_token_material_created": false,
+  "credential_material_inspected_or_recorded": false,
+  "api_key_information_inspected_or_recorded": false,
+  "daemon_wide_prune_performed": false,
+  "provider_calls_performed": 0
+}

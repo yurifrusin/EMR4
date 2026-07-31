@@ -1,0 +1,51 @@
+{
+  "case_version": "reception.one.integrated-bureau-case.v1",
+  "input": {
+    "contract_version": "reception.one.intent-input.v1",
+    "request_id": "synthetic-request-show-shera-tomorrow",
+    "data_class": "authored_synthetic",
+    "utterance": "Show Dr Shera tomorrow",
+    "context": {
+      "context_revision": "synthetic-diary-revision-monday-001",
+      "reference_date": "2026-07-27",
+      "timezone": "Australia/Brisbane",
+      "location_id": "synthetic-location-main-clinic",
+      "observed_at": "2026-07-27T00:00:00Z",
+      "expires_at": "2026-07-29T00:00:00Z",
+      "allowed_practitioners": [
+        {
+          "id": "synthetic-practitioner-alex-shera",
+          "display_name": "Dr Alex Shera",
+          "aliases": ["Dr Shera", "Alex Shera"]
+        }
+      ]
+    },
+    "authority": {
+      "read_only": true,
+      "appointment_write_authority": false,
+      "command_authority": false,
+      "product_delivery_enabled": false
+    }
+  },
+  "draft": {
+    "contract_version": "reception.one.intent-draft.v1",
+    "request_id": "synthetic-request-show-shera-tomorrow",
+    "context_revision": "synthetic-diary-revision-monday-001",
+    "family": "focused_schedule_lane",
+    "operation": "view",
+    "date_relation": "tomorrow",
+    "target_date": "2026-07-28",
+    "practitioner_ids": ["synthetic-practitioner-alex-shera"],
+    "time_window": {
+      "from": "08:00",
+      "to": "17:00"
+    },
+    "duration_minutes": null,
+    "source_evidence_paths": [
+      "$.context.allowed_practitioners",
+      "$.context.context_revision",
+      "$.context.reference_date",
+      "$.utterance"
+    ]
+  }
+}

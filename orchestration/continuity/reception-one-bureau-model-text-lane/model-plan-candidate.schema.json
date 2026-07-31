@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/reception-one-bureau-model-plan-candidate-v1.json",
+  "title": "Reception One Bureau Model Plan Candidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "goal",
+    "steps"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "reception.one.bureau.model-plan-candidate.v1"
+    },
+    "goal": {
+      "enum": [
+        "create",
+        "move",
+        "resize",
+        "cancel",
+        "status_change",
+        "squeeze_in_assessment",
+        "clarification"
+      ]
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 12,
+      "items": {
+        "$ref": "#/$defs/step"
+      }
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "anyOf": [
+        {
+          "enum": [
+            "binding:patient",
+            "binding:practitioner",
+            "binding:status",
+            "binding:appointment_date",
+            "binding:earliest_time",
+            "binding:latest_time",
+            "binding:duration_minutes",
+            "binding:selected_appointment",
+            "binding:squeeze_policy",
+            "binding:default_duration_minutes"
+          ]
+        },
+        {
+          "pattern": "^step:step-[a-z0-9][a-z0-9-]{0,47}:[a-z][a-z0-9_]{0,63}$"
+        }
+      ]
+    },
+    "argument": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "source"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "source": {
+          "$ref": "#/$defs/source"
+        }
+      }
+    },
+    "step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "operator",
+        "arguments"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^step-[a-z0-9][a-z0-9-]{0,47}$"
+        },
+        "operator": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "arguments": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/argument"
+          }
+        }
+      }
+    }
+  }
+}

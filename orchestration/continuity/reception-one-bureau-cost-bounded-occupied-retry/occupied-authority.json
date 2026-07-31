@@ -1,0 +1,61 @@
+{
+  "schema_version": "reception.one.bureau.cost_bounded_occupied_retry.authority.v1",
+  "authority_granted": true,
+  "authority_source": {
+    "author": "Yuri",
+    "recorded_at": "2026-07-31",
+    "statements": [
+      "Fresh authority for the next retry and further provider calls needed to complete the tranche, while total provider calls remain capped by the USD 1 boundary.",
+      "After a successful call, continue through the next appropriate workflows without interruption unless a substantial direction choice or existing intervention boundary is reached.",
+      "Further fresh calls are authorised only when they progress the work forward and remain bounded by the USD 1 ceiling."
+    ]
+  },
+  "provider": "google_vertex_ai",
+  "model_id": "gemini-2.5-flash",
+  "project": "bernie-emr4-dev",
+  "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+  "authentication": "keyless_impersonated_service_account_adc",
+  "location": "australia-southeast1",
+  "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+  "data_class": "authored_synthetic",
+  "absolute_call_ceiling": 1,
+  "terminal_correction_call_ceiling": 0,
+  "per_dialogue_absolute_call_ceiling": 1,
+  "further_fresh_attempts_permitted": true,
+  "unchanged_duplicate_calls_permitted": false,
+  "call_after_first_admission_permitted": false,
+  "cumulative_cost_ceiling_usd": 1.0,
+  "pre_call_reservation_usd": 0.02,
+  "include_predecessor_http_200_call": true,
+  "provider_tools_enabled": false,
+  "grounding_enabled": false,
+  "retrieval_enabled": false,
+  "cache_creation_enabled": false,
+  "api_key_authentication_permitted": false,
+  "service_account_key_permitted": false,
+  "provider_fallback_permitted": false,
+  "regional_fallback_permitted": false,
+  "deterministic_fallback_permitted": false,
+  "appointment_confirmation_authority": false,
+  "appointment_write_authority": false,
+  "product_delivery_authority": false,
+  "production_authority": false,
+  "deployment_authority": false,
+  "release_authority": false,
+  "continuity_binding": {
+    "graph_revision": 163,
+    "compass_revision": 144,
+    "compass_source_graph_revision": 163
+  },
+  "stop_conditions": [
+    "cumulative_cost_reservation_would_exceed_usd_1",
+    "usage_or_pricing_ambiguity",
+    "provider_model_project_identity_region_or_endpoint_change_required",
+    "iam_adc_api_billing_or_service_account_change_required",
+    "api_key_static_key_global_or_fallback_path_required",
+    "real_product_patient_health_clinical_or_historical_data_required",
+    "isolation_audit_proofreader_or_cleanup_boundary_cannot_be_maintained",
+    "confirmation_write_production_deployment_or_release_authority_required",
+    "substantial_product_direction_choice_required"
+  ]
+}

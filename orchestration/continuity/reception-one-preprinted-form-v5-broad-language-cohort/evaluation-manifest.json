@@ -1,0 +1,313 @@
+{
+  "schema_version": "reception.one.preprinted_form_v5.broad_language_manifest.v1",
+  "evaluation_id": "reception-one-preprinted-form-v5-broad-language-001",
+  "data_class": "authored_synthetic",
+  "effect_ceiling": "proposal_only",
+  "historical_anchor": {
+    "case_id": "reception-one-preprinted-form-v5-multicase-active",
+    "source_result": "reception_one_preprinted_form_v5_multicase_occupied_pass",
+    "replayed": false
+  },
+  "frozen_condition": {
+    "few_shot_examples": false,
+    "demonstration_answers": false,
+    "prompt_optimisation": false,
+    "fine_tuning": false,
+    "temperature": 0,
+    "thinking_budget": 0,
+    "mid_cohort_prompt_or_schema_change": false
+  },
+  "maximum_primary_calls": 24,
+  "maximum_correction_calls": 24,
+  "absolute_call_ceiling": 48,
+  "incremental_cost_ceiling_usd": 1,
+  "cases": [
+    {
+      "case_code": "b-create-arrange",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-create-arrange",
+      "correlation_id": "synthetic-broad-correlation-create-arrange",
+      "utterances": ["Arrange an appointment for Margaret Thompson with Dr Shera tomorrow at 2:30 pm for 15 minutes."],
+      "expected_goal": "create",
+      "expected_proposal_family": "create",
+      "expected_api_spine_operation_id": "proposeAppointmentCreate",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "b-create-alias",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-create-alias",
+      "correlation_id": "synthetic-broad-correlation-create-alias",
+      "utterances": ["Could you book Margaret with Shera tomorrow at 3 pm for 15 minutes?"],
+      "expected_goal": "create",
+      "expected_proposal_family": "create",
+      "expected_api_spine_operation_id": "proposeAppointmentCreate",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "b-create-preface",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-create-preface",
+      "correlation_id": "synthetic-broad-correlation-create-preface",
+      "utterances": ["Diary request; details may need clarifying.", "Please schedule an appointment for Margaret Thompson with Dr Shera tomorrow at 2:30 pm for 15 minutes."],
+      "expected_goal": "create",
+      "expected_proposal_family": "create",
+      "expected_api_spine_operation_id": "proposeAppointmentCreate",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "b-create-correct",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-create-correction",
+      "correlation_id": "synthetic-broad-correlation-create-correction",
+      "utterances": ["Book an appointment for Margaret Thompson with Dr Shera tomorrow at 2:30 pm for 15 minutes.", "Actually, make it 3 pm instead."],
+      "expected_goal": "create",
+      "expected_proposal_family": "create",
+      "expected_api_spine_operation_id": "proposeAppointmentCreate",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "b-move-resched",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-move-reschedule",
+      "correlation_id": "synthetic-broad-correlation-move-reschedule",
+      "utterances": ["Reschedule Margaret Thompson's appointment to tomorrow at 3 pm."],
+      "expected_goal": "move",
+      "expected_proposal_family": "move",
+      "expected_api_spine_operation_id": "proposeAppointmentUpdate",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "b-move-shift",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-move-shift",
+      "correlation_id": "synthetic-broad-correlation-move-shift",
+      "utterances": ["Shift Margaret's appointment to tomorrow at 2:30 pm."],
+      "expected_goal": "move",
+      "expected_proposal_family": "move",
+      "expected_api_spine_operation_id": "proposeAppointmentUpdate",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "b-move-change",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-move-change-time",
+      "correlation_id": "synthetic-broad-correlation-move-change-time",
+      "utterances": ["Change the time of Margaret Thompson's appointment to tomorrow at 3 pm."],
+      "expected_goal": "move",
+      "expected_proposal_family": "move",
+      "expected_api_spine_operation_id": "proposeAppointmentUpdate",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "b-move-correct",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-move-correction",
+      "correlation_id": "synthetic-broad-correlation-move-correction",
+      "utterances": ["Move Margaret Thompson's appointment to tomorrow at 2:30 pm.", "Actually, make it 3 pm instead."],
+      "expected_goal": "move",
+      "expected_proposal_family": "move",
+      "expected_api_spine_operation_id": "proposeAppointmentUpdate",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "b-resize-long",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-resize-longer",
+      "correlation_id": "synthetic-broad-correlation-resize-longer",
+      "utterances": ["Make Margaret Thompson's appointment longer, 30 minutes."],
+      "expected_goal": "resize",
+      "expected_proposal_family": "resize",
+      "expected_api_spine_operation_id": "proposeAppointmentUpdate",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "b-resize-short",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-resize-shorten",
+      "correlation_id": "synthetic-broad-correlation-resize-shorten",
+      "utterances": ["Shorten Margaret's appointment to 10 minutes."],
+      "expected_goal": "resize",
+      "expected_proposal_family": "resize",
+      "expected_api_spine_operation_id": "proposeAppointmentUpdate",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "b-resize-give",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-resize-give-time",
+      "correlation_id": "synthetic-broad-correlation-resize-give-time",
+      "utterances": ["Give them 30 minutes for Margaret Thompson's appointment."],
+      "expected_goal": "resize",
+      "expected_proposal_family": "resize",
+      "expected_api_spine_operation_id": "proposeAppointmentUpdate",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "b-resize-explicit",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-resize-explicit",
+      "correlation_id": "synthetic-broad-correlation-resize-explicit",
+      "utterances": ["Resize Margaret Thompson's booking to 30 minutes."],
+      "expected_goal": "resize",
+      "expected_proposal_family": "resize",
+      "expected_api_spine_operation_id": "proposeAppointmentUpdate",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "b-cancel-remove",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-cancel-remove",
+      "correlation_id": "synthetic-broad-correlation-cancel-remove",
+      "utterances": ["Remove Margaret Thompson's appointment from the diary."],
+      "expected_goal": "cancel",
+      "expected_proposal_family": "cancel",
+      "expected_api_spine_operation_id": "proposeAppointmentDelete",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "b-cancel-calloff",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-cancel-call-off",
+      "correlation_id": "synthetic-broad-correlation-cancel-call-off",
+      "utterances": ["Call off Margaret's appointment."],
+      "expected_goal": "cancel",
+      "expected_proposal_family": "cancel",
+      "expected_api_spine_operation_id": "proposeAppointmentDelete",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "b-cancel-takeout",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-cancel-take-out",
+      "correlation_id": "synthetic-broad-correlation-cancel-take-out",
+      "utterances": ["Take Margaret Thompson's appointment out."],
+      "expected_goal": "cancel",
+      "expected_proposal_family": "cancel",
+      "expected_api_spine_operation_id": "proposeAppointmentDelete",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "b-status-complete",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-status-completed",
+      "correlation_id": "synthetic-broad-correlation-status-completed",
+      "utterances": ["Set Margaret Thompson's appointment to completed."],
+      "expected_goal": "status_change",
+      "expected_proposal_family": "status_change",
+      "expected_api_spine_operation_id": "proposeAppointmentStatus",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "b-status-arrived",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-status-arrived",
+      "correlation_id": "synthetic-broad-correlation-status-arrived",
+      "utterances": ["Update Margaret Thompson's status to arrived."],
+      "expected_goal": "status_change",
+      "expected_proposal_family": "status_change",
+      "expected_api_spine_operation_id": "proposeAppointmentStatus",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "b-status-noshow-gap",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-status-no-show-gap",
+      "correlation_id": "synthetic-broad-correlation-status-no-show-gap",
+      "utterances": ["Mark Margaret's appointment as a no-show."],
+      "expected_goal": "clarification",
+      "expected_proposal_family": "clarification",
+      "expected_api_spine_operation_id": null,
+      "expected_proposal_release": false,
+      "expected_typed_output_kind": "clarification"
+    },
+    {
+      "case_code": "b-squeeze-without",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-squeeze-without-moving",
+      "correlation_id": "synthetic-broad-correlation-squeeze-without-moving",
+      "utterances": ["Could we squeeze Margaret in with Shera today for 15 minutes without moving anyone?"],
+      "expected_goal": "squeeze_in_assessment",
+      "expected_proposal_family": "squeeze_in_assessment",
+      "expected_api_spine_operation_id": null,
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "b-squeeze-negated-move",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-squeeze-do-not-move",
+      "correlation_id": "synthetic-broad-correlation-squeeze-do-not-move",
+      "utterances": ["Squeeze Margaret Thompson in with Dr Shera today for 15 minutes; do not move anyone else."],
+      "expected_goal": "squeeze_in_assessment",
+      "expected_proposal_family": "squeeze_in_assessment",
+      "expected_api_spine_operation_id": null,
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "b-clarify-sort",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-clarify-sort-out",
+      "correlation_id": "synthetic-broad-correlation-clarify-sort-out",
+      "utterances": ["Please sort out Margaret Thompson's appointment."],
+      "expected_goal": "clarification",
+      "expected_proposal_family": "clarification",
+      "expected_api_spine_operation_id": null,
+      "expected_proposal_release": false,
+      "expected_typed_output_kind": "clarification"
+    },
+    {
+      "case_code": "b-clarify-different",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-clarify-different-appointment",
+      "correlation_id": "synthetic-broad-correlation-clarify-different-appointment",
+      "utterances": ["Margaret Thompson needs a different appointment."],
+      "expected_goal": "clarification",
+      "expected_proposal_family": "clarification",
+      "expected_api_spine_operation_id": null,
+      "expected_proposal_release": false,
+      "expected_typed_output_kind": "clarification"
+    },
+    {
+      "case_code": "b-clarify-details",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-clarify-details-only",
+      "correlation_id": "synthetic-broad-correlation-clarify-details-only",
+      "utterances": ["Margaret Thompson with Dr Shera tomorrow at 2:30 pm for 15 minutes."],
+      "expected_goal": "clarification",
+      "expected_proposal_family": "clarification",
+      "expected_api_spine_operation_id": null,
+      "expected_proposal_release": false,
+      "expected_typed_output_kind": "clarification"
+    },
+    {
+      "case_code": "b-clarify-fit",
+      "source_case_id": null,
+      "request_id": "synthetic-broad-clarify-fit-in",
+      "correlation_id": "synthetic-broad-correlation-clarify-fit-in",
+      "utterances": ["Can you fit Margaret Thompson in with Dr Shera tomorrow at 2:30 pm for 15 minutes?"],
+      "expected_goal": "clarification",
+      "expected_proposal_family": "clarification",
+      "expected_api_spine_operation_id": null,
+      "expected_proposal_release": false,
+      "expected_typed_output_kind": "clarification"
+    }
+  ],
+  "provider_boundary": {
+    "provider": "google_cloud_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "fallback_permitted": false
+  },
+  "authority": {
+    "product_or_database_access": false,
+    "patient_health_or_clinical_data": false,
+    "confirmation_authority": false,
+    "appointment_write_authority": false,
+    "provider_tools": false,
+    "product_delivery": false
+  }
+}

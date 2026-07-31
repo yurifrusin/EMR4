@@ -51,15 +51,41 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     assert report["programme"]["id"] == "reception-one"
     assert report["programme"]["master_plan_phase"].startswith("Phase 2B")
     assert report["current_position"]["node_id"] == (
-        "reception-one-availability-reconciliation"
+        "raisa-word-online-authenticated-companion-verification"
     )
     assert report["current_position"]["why_now"]
     assert report["current_position"]["unlocks"]
     assert report["current_position"]["does_not_solve"]
-    assert {item["status"] for item in report["decision_horizon"]} == {"candidate"}
+    horizon_by_id = {item["id"]: item for item in report["decision_horizon"]}
+    assert "reception-one-yuri-internal-walkthrough-completion" not in horizon_by_id
+    assert "reception-one-product-context-proposal-runtime" not in horizon_by_id
+    assert "reception-one-bounded-model-text-lane" not in horizon_by_id
+    assert horizon_by_id["reception-one-stage3b-participant-execution"]["status"] == (
+        "deferred"
+    )
+    assert horizon_by_id["next-typed-diary-event-family"]["status"] == "candidate"
+    assert "reception-one-word-online-authenticated-dialog-check" not in horizon_by_id
+    assert "resume-raisa-word-online-manifest-upload" not in horizon_by_id
+    assert not any(
+        decision["id"] == "enable-chatgpt-chrome-file-url-access"
+        for decision in report["user_owned_decisions"]
+    )
+    assert not any(
+        item["id"] == "reception-one-visual-synthesis"
+        for item in report["decision_horizon"]
+    )
     support_ids = {item["id"] for item in report["programme_support_horizon"]}
     assert "ariadne-synaptic-event-router" in support_ids
     assert "ariadne-first-generated-draft-rehearsal" in support_ids
+    assert "ariadne-vertex-sydney-bounded-work-cell-rehearsal" in support_ids
+    assert (
+        "ariadne-vertex-sydney-gemini-25-bounded-work-cell-rehearsal"
+        in support_ids
+    )
+    assert (
+        "ariadne-vertex-sydney-gemini-25-adc-restored-continuation"
+        in support_ids
+    )
     router = next(
         item
         for item in report["programme_support_horizon"]
@@ -84,7 +110,82 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
         decision["id"] == "authorize-generated-draft-gateway-diagnostic-or-retry"
         for decision in report["user_owned_decisions"]
     )
+    vertex = next(
+        item
+        for item in report["programme_support_horizon"]
+        if item["id"] == "ariadne-vertex-sydney-bounded-work-cell-rehearsal"
+    )
+    assert vertex["status"] == "blocked"
+    assert vertex["boundary_changes"] == [
+        "container-runtime",
+        "model-runtime",
+        "provider-call",
+    ]
+    assert "documentary gate" in vertex["strategic_question"]
+    vertex_25 = next(
+        item
+        for item in report["programme_support_horizon"]
+        if item["id"]
+        == "ariadne-vertex-sydney-gemini-25-bounded-work-cell-rehearsal"
+    )
+    assert vertex_25["status"] == "blocked"
+    assert vertex_25["boundary_changes"] == [
+        "container-runtime",
+        "model-runtime",
+        "provider-call",
+    ]
+    assert "restored" in vertex_25["strategic_question"]
+    assert "could not refresh non-interactively" in vertex_25["why_it_matters"]
+    vertex_25_continuation = next(
+        item
+        for item in report["programme_support_horizon"]
+        if item["id"]
+        == "ariadne-vertex-sydney-gemini-25-adc-restored-continuation"
+    )
+    assert vertex_25_continuation["status"] == "blocked"
+    assert vertex_25_continuation["boundary_changes"] == [
+        "container-runtime",
+        "model-runtime",
+        "provider-call",
+    ]
+    assert "external cache-control action" in (
+        vertex_25_continuation["strategic_question"]
+    )
+    assert "in-memory caching was not verified disabled" in (
+        vertex_25_continuation["why_it_matters"]
+    )
+    continuation_node = find_node(
+        load_graph(),
+        "ariadne-vertex-sydney-gemini-25-adc-restored-continuation",
+    )
+    assert continuation_node["relationships"][0] == {
+        "node_id": (
+            "ariadne-vertex-sydney-gemini-25-bounded-work-cell-rehearsal"
+        ),
+        "relation": "builds_on",
+    }
+    vertex_decision = next(
+        decision
+        for decision in report["user_owned_decisions"]
+        if decision["id"] == "authorize-next-residency-safe-model-tranche"
+    )
+    assert "Historical decision satisfied" in vertex_decision["required_before"]
+    assert any(
+        decision["id"] == "authorize-gemini-25-sydney-reorientation"
+        for decision in report["user_owned_decisions"]
+    )
+    assert any(
+        decision["id"] == "resume-gemini-25-sydney-after-adc-reauthentication"
+        for decision in report["user_owned_decisions"]
+    )
     assert report["user_owned_decisions"]
+    runtime_decision = next(
+        decision
+        for decision in report["user_owned_decisions"]
+        if decision["id"]
+        == "authorize-reception-one-product-context-proposal-runtime"
+    )
+    assert runtime_decision["required_before"].startswith("Satisfied on 2026-07-29")
 
 
 def test_journey_preserves_real_fork_instead_of_inventing_linear_history() -> None:
@@ -115,29 +216,34 @@ def test_current_position_must_be_terminal_accepted_and_continuity_clean() -> No
     assert "current_position_not_journey_terminal:functional-meta-grid-client" in errors
 
     not_accepted = load_compass()
-    find_node(graph, "reception-one-availability-reconciliation")["status"] = "active"
+    current_id = not_accepted["current_position"]["node_id"]
+    find_node(graph, current_id)["status"] = "active"
     errors = compass.validate_compass(
         not_accepted, graph, repo_root=REPO_ROOT, require_evidence_files=False
     )
     assert (
-        "current_position_not_accepted:reception-one-availability-reconciliation:active"
-        in errors
+        "current_position_not_accepted:"
+        f"{current_id}:active" in errors
     )
 
-    graph = load_graph()
-    record = find_node(graph, "reception-one-availability-reconciliation")[
-        "contract_evidence"
-    ][1]
-    record["status"] = "gap"
-    errors = compass.validate_compass(
-        load_compass(), graph, repo_root=REPO_ROOT, require_evidence_files=False
+    current_audit = continuity.audit_graph(
+        load_graph(),
+        repo_root=REPO_ROOT,
+        node_id="reception-one-bureau-model-text-lane",
     )
-    assert (
-        "current_position_continuity:contract_gap_open:"
-        "reception-one-availability-reconciliation:"
-        "committed-reschedule-availability-reconciliation"
-        in errors
-    )
+    assert current_audit["status"] == "passed"
+    assert current_audit["nodes"][0]["required_contracts"] == [
+        {
+            "contract_id": "combined-patient-practitioner-time-duration-intent",
+            "status": "satisfied",
+            "reasons": [],
+        },
+        {
+            "contract_id": "committed-reschedule-availability-reconciliation",
+            "status": "satisfied",
+            "reasons": [],
+        },
+    ]
 
 
 def test_stale_revision_fabricated_lineage_and_unknown_boundary_fail_closed() -> None:
@@ -164,11 +270,14 @@ def test_stale_revision_fabricated_lineage_and_unknown_boundary_fail_closed() ->
     )
 
     unknown_boundary = load_compass()
-    unknown_boundary["decision_horizon"][0]["boundary_changes"] = [
-        "invented-authority"
-    ]
+    target = next(
+        item
+        for item in unknown_boundary["decision_horizon"]
+        if item["id"] == "next-typed-diary-event-family"
+    )
+    target["boundary_changes"] = ["invented-authority"]
     assert (
-        "horizon_boundary_unknown:reception-one-visual-synthesis:invented-authority"
+        "horizon_boundary_unknown:next-typed-diary-event-family:invented-authority"
         in compass.validate_compass(
             unknown_boundary, graph, repo_root=REPO_ROOT, require_evidence_files=False
         )
@@ -236,7 +345,7 @@ def test_cli_emits_valid_json_and_plain_language(capsys: pytest.CaptureFixture[s
     assert compass.main(["--repo-root", str(REPO_ROOT), "validate"]) == 0
     validation = json.loads(capsys.readouterr().out)
     assert validation["status"] == "passed"
-    assert validation["journey_count"] == 7
+    assert validation["journey_count"] == 59
 
     assert (
         compass.main(
@@ -247,7 +356,7 @@ def test_cli_emits_valid_json_and_plain_language(capsys: pytest.CaptureFixture[s
     rendered = capsys.readouterr().out
     assert rendered.startswith("# Ariadne Compass — EMR4")
     assert "where" not in rendered[:80].casefold()
-    assert "working local capability foundation" in rendered
+    assert "compact reference-aligned" in rendered
 
 
 def test_runtime_has_no_network_process_or_write_actuator() -> None:

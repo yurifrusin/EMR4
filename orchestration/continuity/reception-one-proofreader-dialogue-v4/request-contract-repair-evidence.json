@@ -1,0 +1,77 @@
+{
+  "schema_version": "reception.one.proofreader_dialogue_v4.request_contract_repair_evidence.v1",
+  "recorded_at": "2026-07-30T02:38:50Z",
+  "result": "reception_one_proofreader_dialogue_v4_request_contract_repair_provider_blocked_pass",
+  "provider_contacted_during_diagnosis_or_repair": false,
+  "provider_calls_performed_during_diagnosis_or_repair": 0,
+  "credential_reads_performed_during_diagnosis_or_repair": 0,
+  "closed_primary": {
+    "attempt_id": "reception-one-proofreader-dialogue-v4-turn-001",
+    "ledger_id": "reception-one-proofreader-dialogue-v4-ledger-001",
+    "provider_call_count": 1,
+    "ledger_consumed": true,
+    "provider_http_status": 400,
+    "provider_normalized_status": "INVALID_ARGUMENT",
+    "candidate_reached_proofreader": false,
+    "release": false,
+    "cleanup_complete": true,
+    "turn_audit_terminal_hash": "sha256:fc021249aa4317fd5d16dba042f98d419cc0ab6060e40a702c5c4f35591d443b",
+    "parent_audit_terminal_hash": "sha256:6786bfd4f608554022099ac483a8629b7e10f90d40eb8a3f78c914d21e4f84e8",
+    "parent_evidence_file_sha256": "sha256:a0b24c49772e89438d78a82199cbdd928147c9bf800e93eb2f988ab1049af201",
+    "external_audit_file_sha256": "sha256:02000bbf790814a3a4fda9ba25b5e76c048d746a0997a4e4f868a3f2694134c7",
+    "ledger_file_sha256": "sha256:2f89e754e31738fcb6ab98d51c8853a00f9c1ca22efe17574e15441a2267d482"
+  },
+  "diagnosis": {
+    "class": "deterministic_provider_request_contract_defect",
+    "bounded_provider_message_class": "response_schema_constraint_has_too_many_serving_states",
+    "old_request_hash": "sha256:88294e55a9ce4fd2243e2e145ca6423ab7a9c0cbe1e73dfbe0b92d90ca0f8e56",
+    "old_provider_schema_hash": "sha256:9a51825464fa4e1e7c6e21d4c70754b29db7672be9ae2dc867811df0d76b7550",
+    "old_provider_schema_bytes": 1207,
+    "old_state_bound_keyword_counts": {
+      "minimum": 5,
+      "maximum": 5,
+      "minLength": 1,
+      "maxLength": 1,
+      "minItems": 1,
+      "maxItems": 2
+    },
+    "raw_provider_error_retained": false
+  },
+  "repair": {
+    "new_provider_schema_hash": "sha256:89f90dac8d7279b17be5521f63d1ea54e0034c0924202575b43cc8627f2544b9",
+    "new_provider_request_hash": "sha256:75e7451343cb431cf13a47ba40309fc4c444bf4ef87dd67020f2151f1058f1ed",
+    "new_provider_schema_bytes": 1013,
+    "removed_provider_only_keywords": [
+      "minimum",
+      "maximum",
+      "minLength",
+      "maxLength",
+      "minItems",
+      "maxItems"
+    ],
+    "retained_provider_constraints": [
+      "object_and_array_shape",
+      "required_fields",
+      "field_types",
+      "property_ordering",
+      "closed_kind_enum",
+      "closed_prior_output_name_enum"
+    ],
+    "local_planprogram_v3_schema_changed": false,
+    "deterministic_compiler_changed": false,
+    "semantic_proofreader_changed": false,
+    "correction_ticket_contract_changed": false,
+    "data_class_changed": false,
+    "provider_or_model_changed": false,
+    "project_region_identity_or_authentication_changed": false,
+    "residency_assurance_changed": false,
+    "cost_or_call_ceiling_changed": false
+  },
+  "remaining_call_budget": {
+    "actual_calls_consumed": 1,
+    "actual_calls_remaining": 1,
+    "repair_call_ordinal": 2,
+    "semantic_correction_after_repair": false,
+    "third_call": false
+  }
+}

@@ -1,0 +1,220 @@
+{
+  "api_interception": false,
+  "authority": {
+    "appointment_write_authority": false,
+    "confirmation_control_activated": false,
+    "operational_receipt_produced": false,
+    "proposal_handoff_activated": false,
+    "provider_runtime_in_ui": false
+  },
+  "browser_console_expected_default_off_probe_count": 4,
+  "browser_console_unexpected_warnings_or_errors": [],
+  "browser_page_errors": [],
+  "database_readback_performed": false,
+  "evidence_mode": "authenticated_local_authored_synthetic_fixture_browser",
+  "explicit_exclusions": [
+    "No provider call from the UI",
+    "No appointment confirmation",
+    "No command-shaped release",
+    "No production, deployment or release claim",
+    "No representative-staff usability claim"
+  ],
+  "keyboard": {
+    "arrow_moved_to_next_candidate": true,
+    "enter_selected_focused_candidate": true,
+    "escape_returned_to_ordinary_diary": true,
+    "selection_suffix_not_accumulated": true
+  },
+  "network": {
+    "confirmation_or_session_routes_observed": false,
+    "expected_default_off_committed_event_feed_404_count": 4,
+    "forbidden_external_hosts": [],
+    "method_path_counts": [
+      {
+        "count": 12,
+        "method": "GET",
+        "path": "/api/v1/appointments"
+      },
+      {
+        "count": 4,
+        "method": "GET",
+        "path": "/api/v1/appointments/bernie/pilot-eligibility"
+      },
+      {
+        "count": 8,
+        "method": "GET",
+        "path": "/api/v1/appointments/types"
+      },
+      {
+        "count": 4,
+        "method": "GET",
+        "path": "/api/v1/diary/events/committed"
+      },
+      {
+        "count": 12,
+        "method": "GET",
+        "path": "/api/v1/diary/locations"
+      },
+      {
+        "count": 8,
+        "method": "GET",
+        "path": "/api/v1/diary/roster"
+      },
+      {
+        "count": 8,
+        "method": "GET",
+        "path": "/api/v1/diary/template"
+      },
+      {
+        "count": 8,
+        "method": "GET",
+        "path": "/api/v1/diary/waiting-areas"
+      },
+      {
+        "count": 4,
+        "method": "GET",
+        "path": "/diary/diary.css"
+      },
+      {
+        "count": 4,
+        "method": "GET",
+        "path": "/diary/diary.html"
+      },
+      {
+        "count": 4,
+        "method": "GET",
+        "path": "/diary/diary.js"
+      },
+      {
+        "count": 4,
+        "method": "GET",
+        "path": "/diary/meta-grid.css"
+      },
+      {
+        "count": 4,
+        "method": "GET",
+        "path": "/diary/meta-grid.js"
+      },
+      {
+        "count": 4,
+        "method": "GET",
+        "path": "/diary/office-bootstrap.js"
+      },
+      {
+        "count": 4,
+        "method": "GET",
+        "path": "/images/emr_cube1.png"
+      },
+      {
+        "count": 4,
+        "method": "GET",
+        "path": "/meta-grid-auth.html"
+      },
+      {
+        "count": 4,
+        "method": "POST",
+        "path": "/api/v1/appointments/proposals/slot-search"
+      },
+      {
+        "count": 4,
+        "method": "POST",
+        "path": "/api/v1/auth/login"
+      },
+      {
+        "count": 8,
+        "method": "POST",
+        "path": "/api/v1/graphql"
+      }
+    ],
+    "unexpected_http_responses": []
+  },
+  "reference_date": "2026-07-27",
+  "request_class": "authored_synthetic",
+  "result": "browser_pass",
+  "route_interception": false,
+  "schema_version": "reception_one.visual_synthesis.browser_evidence.v1",
+  "screenshots": [
+    {
+      "bytes": 92917,
+      "file": "desktop-landscape-selected-1440x900.png",
+      "height": 900,
+      "sha256": "28cad860c61dab171f7b2eeb8e38b696178f066c9e335a8510881df9868d0abd",
+      "width": 1440
+    },
+    {
+      "bytes": 76243,
+      "file": "tablet-landscape-selected-1024x768.png",
+      "height": 768,
+      "sha256": "80c1259a9e7b6372403e6620ddabab7edcb1fc28ef24d44e75fc2af1a4ea6adc",
+      "width": 1024
+    },
+    {
+      "bytes": 67463,
+      "file": "tablet-portrait-selected-768x1024.png",
+      "height": 1024,
+      "sha256": "bafeb46019fdfd0e7c2bbe7cb26fdc737759dca90ca9bbd2aa78d7c9c0da6017",
+      "width": 768
+    },
+    {
+      "bytes": 36413,
+      "file": "phone-portrait-selected-390x844.png",
+      "height": 844,
+      "sha256": "28e5e6c7d36e84db48a80e44ad663c91b7e44eadd1f1d0f4b2a9566353066bab",
+      "width": 390
+    }
+  ],
+  "viewports": [
+    {
+      "appointment_write_authority": true,
+      "distinct_card_tops": 8,
+      "enabled_controls_below_44px": [],
+      "height": 900,
+      "host_horizontal_overflow_px": 0,
+      "id": "desktop_landscape",
+      "page_horizontal_overflow_px": 0,
+      "selected_count": 1,
+      "selection_panel_visible": true,
+      "slot_count": 8,
+      "width": 1440
+    },
+    {
+      "appointment_write_authority": true,
+      "distinct_card_tops": 8,
+      "enabled_controls_below_44px": [],
+      "height": 768,
+      "host_horizontal_overflow_px": 0,
+      "id": "tablet_landscape",
+      "page_horizontal_overflow_px": 0,
+      "selected_count": 1,
+      "selection_panel_visible": true,
+      "slot_count": 8,
+      "width": 1024
+    },
+    {
+      "appointment_write_authority": true,
+      "distinct_card_tops": 8,
+      "enabled_controls_below_44px": [],
+      "height": 1024,
+      "host_horizontal_overflow_px": 0,
+      "id": "tablet_portrait",
+      "page_horizontal_overflow_px": 0,
+      "selected_count": 1,
+      "selection_panel_visible": true,
+      "slot_count": 8,
+      "width": 768
+    },
+    {
+      "appointment_write_authority": true,
+      "distinct_card_tops": 8,
+      "enabled_controls_below_44px": [],
+      "height": 844,
+      "host_horizontal_overflow_px": 0,
+      "id": "phone_portrait",
+      "page_horizontal_overflow_px": 0,
+      "selected_count": 1,
+      "selection_panel_visible": true,
+      "slot_count": 8,
+      "width": 390
+    }
+  ]
+}

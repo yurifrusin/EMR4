@@ -1,0 +1,40 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "continuation_event": "pre_plan_acceptance",
+  "planned_action": "accept_the_shared_typed_language_and_bounded_operator_note_contract_before_implementation",
+  "status": "passed",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "authority_boundary": "exact_shared_typed_program_and_independently_proofread_audit_note_then_conditional_exact_sydney_vertex_attempt_authored_synthetic_proposal_only_no_fallback_or_write",
+  "worker_dispatch_permitted": false,
+  "source_evidence": {
+    "live_handover_current_baton": "Continuity graph revision 74 and Compass map revision 61 close the extended proposal runtime with deterministic local success and two immutable occupied wire failures.",
+    "current_authority_allocation": "Yuri's three current instructions authorise the shared agent-proofreader language, a bounded natural-language audit/troubleshooting channel and continued agent intelligence within that strict channel. The plan freezes a new descendant with one primary and at most one contract-only repair under the unchanged exact Sydney lane and USD 1 ceiling.",
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-shared-typed-language-plan.md",
+      "docs/security/bernie-reception-one-shared-typed-language-threat-model-delta.md",
+      "orchestration/continuity/reception-one-shared-typed-language/runtime-policy.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-authority-request.json"
+    ],
+    "protected_evidence_boundaries": "No raw provider response or hidden reasoning is authorised. The only retainable speech is a separately schema-bounded, secret/name/identifier/command-scanned operator_note which is never parsed, executed or product-delivered. All protected data and write boundaries remain closed.",
+    "git_refs_and_worktree": {
+      "checked_at": "2026-07-30T00:14:29Z",
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_entry_count_at_rehydration": 327,
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true
+    }
+  }
+}

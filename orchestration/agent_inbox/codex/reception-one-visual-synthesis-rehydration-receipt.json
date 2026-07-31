@@ -1,0 +1,65 @@
+{
+  "authority_boundary": "bounded_reception_one_visual_synthesis_with_disposable_sydney_vertex_design_cell_no_ui_agent_product_data_command_or_release_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_and_execute_bounded_reception_one_visual_interaction_synthesis",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md read completely, including the accepted Reception One lineage, consumed Sydney Vertex rehearsal, current visual-synthesis decision horizon and exact next-work statement.",
+    "current_authority_allocation": [
+      "Yuri: I'm happy to authorise live Vertex to be involved in this week where it needs to be, seeing as it is a vital element in the architecture.",
+      "Yuri accepted the clarified separation in which the agent occupies only a disposable design-synthesis work cell and the UI node remains deterministic and unoccupied.",
+      "Yuri: OK sounds good so carry on."
+    ],
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-visual-interaction-synthesis-plan.md",
+      "docs/bernie-reception-one-availability-reconciliation-closeout.md",
+      "docs/bernie-fluid-meta-grid-concept-design.md",
+      "docs/bernie-reception-one-focused-review-context.md",
+      "docs/ariadne-bounded-cognitive-work-cell-protocol-design.md",
+      "docs/ariadne-real-isolation-rehearsal-design.md",
+      "docs/ariadne-vertex-sydney-gemini-25-repaired-request-run-closeout.md",
+      "orchestration/continuity/ariadne-vertex-sydney-gemini-25/repair-external-audit.json"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 restored. Protected holdouts and historical Diary material remain inaccessible. Vertex receives only a newly authored fictional design brief. The UI node remains deterministic; no product/database/clinical/patient/command/production/deployment/release authority is opened.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "worktree_entry_count": 161,
+      "protected_refs_unchanged": true
+    }
+  },
+  "visual_synthesis_boundary": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "target_service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "data_classification": "newly_authored_fictional_design_brief_only",
+    "ui_node_agent_attached": false,
+    "primary_vertex_calls_authorised": 1,
+    "deterministic_request_contract_repair_calls_authorised": 1,
+    "absolute_vertex_call_ceiling": 2,
+    "application_cost_ceiling_usd": 1,
+    "fallback_permitted": false,
+    "product_database_clinical_patient_command_or_release_authority": false
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

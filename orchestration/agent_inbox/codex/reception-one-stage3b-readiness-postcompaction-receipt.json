@@ -1,0 +1,49 @@
+{
+  "authority_boundary": "complete_readiness_acceptance_only_no_participant_threshold_product_write_provider_production_deployment_release_or_external_outreach",
+  "continuation_event": "post_compaction",
+  "planned_action": "complete_reception_one_stage3b_readiness_acceptance_and_handover",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after context restoration, including the current visual-synthesis parent, authority allocation and sections 5 and 6.",
+    "current_authority_allocation": [
+      "Yuri's 'Let's do it' authorises the bounded provider-free Stage 3B representative-staff readiness and evaluation sequence.",
+      "The remaining action may accept readiness but may not contact participants, fabricate observations or claim a Stage 3B outcome."
+    ],
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-stage3b-representative-staff-readiness-plan.md",
+      "docs/bernie-reception-one-stage3b-readiness-closeout.md",
+      "docs/bernie-reception-one-visual-interaction-synthesis-closeout.md",
+      "orchestration/prototypes/reception-one-stage3b-readiness/browser-acceptance-evidence.json",
+      "orchestration/prototypes/reception-one-stage3b-readiness/product-task-acceptance-evidence.json",
+      "orchestration/prototypes/reception-one-stage3b-readiness/readiness-audit-analysis.json",
+      "orchestration/agent_inbox/codex/reception-one-stage3b-readiness-sol-review.md",
+      "orchestration/continuity/emr4-continuity-graph.json revision 55",
+      "orchestration/continuity/emr4-compass.json map revision 42",
+      "docs/ariadne-compass-current.md"
+    ],
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 remain sealed and historical diary material remains local and excluded. The tranche is authored-synthetic and provider-free, opens no product write, and contains no participant, production, deployment or release evidence.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "worktree_entry_count": 200,
+      "protected_refs_unchanged": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

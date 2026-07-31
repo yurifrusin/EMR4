@@ -1,0 +1,68 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "continuation_event": "pre_acceptance_after_provider_sequence_closeout",
+  "planned_action": "accept_fail_closed_shared_language_result_and_handoff_without_commit_push_or_further_provider_call",
+  "status": "passed",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "authority_boundary": "accept_local_shared_language_and_fail_closed_two_call_vertex_result_only_no_further_call_no_product_write_deployment_release_commit_push_or_protected_ref_change",
+  "worker_dispatch_permitted": false,
+  "source_evidence": {
+    "live_handover_current_baton": "The terminal descendant is bound at Continuity graph revision 82 and Compass map revision 69. The shared language passes locally; the live planner remains unadmitted after two proofreader failures. All ledgers are consumed and cleanup is complete.",
+    "current_authority_allocation": "The authorised actual-call ceiling is exhausted at two. No retry, fallback, provider substitution, external mutation, commit, push, PR or protected-ref action remains authorised.",
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-shared-typed-language-plan.md",
+      "docs/bernie-reception-one-shared-typed-language-closeout.md",
+      "docs/security/bernie-reception-one-shared-typed-language-threat-model-delta.md",
+      "orchestration/agent_inbox/codex/reception-one-shared-typed-language-plan-sol-acceptance.md",
+      "orchestration/agent_inbox/codex/reception-one-shared-typed-language-sol-acceptance.md",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-002-external-audit.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-004-external-audit.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-final-residue-evidence.json",
+      "docs/ariadne-compass-current.md"
+    ],
+    "protected_evidence_boundaries": "Protected historical nodes and ledgers remain unchanged. Only the schema-admitted integer form and separately admitted short note are retained from live output. No raw prompt, raw response, rejected unbounded draft, credential, token, API-key information, hidden reasoning, product data or patient information is recorded. No proposal, command or product field was released.",
+    "git_refs_and_worktree": {
+      "checked_at": "2026-07-30T01:21:19Z",
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_entry_count": 350,
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true,
+      "continuity_graph_revision": 82,
+      "compass_map_revision": 69,
+      "compass_source_graph_revision": 82,
+      "rendered_compass_exact": true
+    }
+  },
+  "gates": {
+    "shared_language_and_note_contract": "passed",
+    "provider_blocked_and_real_isolation": "passed",
+    "actual_provider_calls_consumed": 2,
+    "absolute_provider_call_ceiling": 2,
+    "all_ledgers_consumed": true,
+    "proofreader_release_count": 0,
+    "fallback_count": 0,
+    "audit_hash_chains": "passed",
+    "final_residue": "passed",
+    "repository_only_ariadne_verifier": "passed",
+    "focused_and_api_spine_tests": "passed",
+    "json_and_schema_validation": "passed",
+    "python_compile_and_static_checks": "passed",
+    "continuity_validation": "passed",
+    "compass_validation_and_render_binding": "passed",
+    "git_diff_check": "passed",
+    "commit_push_pr_or_protected_ref_change": false
+  }
+}

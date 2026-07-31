@@ -1,0 +1,49 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "status": "passed",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "verifier_acceptance",
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "worker_dispatch_permitted": true,
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md sections 2-3 and Current Baton",
+    "current_authority_allocation": "AGENTS.md section 4 plus Yuri's fresh repository-only follow-up instruction",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-terra-gemini-comparative-rehearsal-plan.md",
+      "docs/ariadne-terra-gemini-comparative-rehearsal-attempt2-plan.md",
+      "docs/ariadne-terra-gemini-provider-contract-diagnostic-hardening-plan.md",
+      "docs/ariadne-terra-gemini-provider-contract-diagnostic-hardening-closeout.md",
+      "orchestration/continuity/ariadne-terra-gemini-comparison/diagnostic-hardening-evidence.json",
+      "docs/ariadne-terra-gemini-diagnostic-hardening-fresh-closeout-plan.md"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5-6",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "unrelated_user_changes_preserved": true
+    }
+  },
+  "closed_authority": {
+    "terra_attempt_002_ledger": "consumed",
+    "gemini_attempt_002_ledger": "consumed",
+    "provider_retry_authorised": false,
+    "credential_read_authorised": false,
+    "container_start_authorised": false,
+    "postgresql_authorised": false,
+    "product_or_runtime_authority": false
+  },
+  "reasons": []
+}

@@ -1,0 +1,607 @@
+{
+  "schema_version": "ariadne.terra_gemini_comparison_evidence.v3",
+  "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+  "runtime_attempt_id": "comparative-runtime-attempt-003",
+  "result": "ariadne_terra_gemini_comparative_rehearsal_attempt3_revision_required",
+  "run_order": [
+    "terra",
+    "gemini"
+  ],
+  "shared_hash_match": false,
+  "cross_model_input": false,
+  "voting": false,
+  "retry_performed": false,
+  "fallback_performed": false,
+  "lanes": {
+    "terra": {
+      "lane_id": "terra",
+      "status": "passed",
+      "reason_codes": [],
+      "ledger": {
+        "schema_version": "ariadne.comparative_single_use_ledger.v2",
+        "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+        "runtime_attempt_id": "comparative-runtime-attempt-003",
+        "cognition_contract_attempt_id": "generated-attempt-001",
+        "lane_id": "terra",
+        "model_id": "gpt-5.6-terra",
+        "state": "consumed",
+        "maximum_provider_calls": 1,
+        "retry_authorised": false,
+        "consumption_point": "immediately-before-work-cell-start"
+      },
+      "shared_hashes": {
+        "shared_task_sha256": "sha256:1a537292ad029fd49ae3d9706120606547c1ddeaa7404b7bdd9047573ea69cc8",
+        "full_output_schema_sha256": "sha256:7efd3644329807462b3efcd3b16552d923a9262b43876432c21698656cde8a6e",
+        "provider_output_schema_sha256": "sha256:39a0f6da352a8da5f8291291a8f87abaa6aa9daa6b7359a8221341ebb756f1e2",
+        "system_prompt_sha256": "sha256:876a1ef5bd03675d0d83dbc6cb66bc64bdcc2a088daae59aacc8e914803afd2c",
+        "prompt_sha256": "sha256:6102ebb2db7ff42b07f0d1ba7abbec9c2dc333398923030b39076a4aa055d9ea"
+      },
+      "prompt_bytes": 11693,
+      "generated_output_sha256": "sha256:40c28a65f6d9d62c47ccaebd74061433af0728b63f6e4036f2cf3b4c5fa19c24",
+      "generated_output_bytes": 4131,
+      "generated_draft_count": 5,
+      "draft_hashes": [
+        {
+          "draft_id": "draft-ux-primary",
+          "draft_sha256": "sha256:857e25b9a0ee189f3d7676e5d2c3b4c76380fe812dfa5f7c50e394cc3fe54057"
+        },
+        {
+          "draft_id": "draft-human-primary",
+          "draft_sha256": "sha256:8122cdac88baf4624e679fee253f240b61082073d4d9e2d8d7de0260dedd80a7"
+        },
+        {
+          "draft_id": "draft-audit-primary",
+          "draft_sha256": "sha256:51613fe9c329c3a05687b8e108c26d33234262f353b071fb5328b1d387bd871f"
+        },
+        {
+          "draft_id": "draft-orchestrator-primary",
+          "draft_sha256": "sha256:1c8451098b1566dbf325825e1cf98c62945eace7288851b487387e29c5082c26"
+        },
+        {
+          "draft_id": "draft-advisory-primary",
+          "draft_sha256": "sha256:cb3b9ac9b094228f4ce49b3f6fb20034f3f10b938947dfcf3b238ab5e24bcd6d"
+        }
+      ],
+      "provider_schema_status": "passed",
+      "full_schema_status": "passed",
+      "proofreader": {
+        "status": "passed",
+        "disposition": "release-verified-outputs",
+        "reason_codes": [
+          "advisory-human-review-required",
+          "verified"
+        ],
+        "released_edge_count": 5,
+        "repair_receipt_count": 0,
+        "frame_verdicts": [
+          {
+            "draft_id": "draft-ux-primary",
+            "verdict": "pass_to_downstream",
+            "disposition": "release-to-declared-recipient",
+            "reason_codes": [
+              "verified"
+            ]
+          },
+          {
+            "draft_id": "draft-human-primary",
+            "verdict": "pass_to_human_gate",
+            "disposition": "release-to-human-gate",
+            "reason_codes": [
+              "verified"
+            ]
+          },
+          {
+            "draft_id": "draft-audit-primary",
+            "verdict": "pass_to_downstream",
+            "disposition": "release-to-declared-recipient",
+            "reason_codes": [
+              "verified"
+            ]
+          },
+          {
+            "draft_id": "draft-orchestrator-primary",
+            "verdict": "pass_to_downstream",
+            "disposition": "release-to-declared-recipient",
+            "reason_codes": [
+              "verified"
+            ]
+          },
+          {
+            "draft_id": "draft-advisory-primary",
+            "verdict": "pass_to_human_gate",
+            "disposition": "release-to-human-gate",
+            "reason_codes": [
+              "advisory-human-review-required"
+            ]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 3944,
+        "input_tokens_details": {
+          "cache_write_tokens": 3941,
+          "cached_tokens": 0
+        },
+        "output_tokens": 1108,
+        "output_tokens_details": {
+          "reasoning_tokens": 53
+        },
+        "total_tokens": 5052
+      },
+      "cost_estimate": {
+        "currency": "USD",
+        "pricing_observed_date": "2026-07-24",
+        "input_per_million": 2.5,
+        "output_per_million": 15.0,
+        "estimated_cost_usd": 0.02648,
+        "estimate_authoritative": false,
+        "provider_billing_authoritative": true
+      },
+      "container_policy": {
+        "broker": {
+          "user": "node",
+          "read_only_root": true,
+          "cap_drop": [
+            "ALL"
+          ],
+          "security_opt": [
+            "no-new-privileges"
+          ],
+          "mounts": [
+            {
+              "type": "bind",
+              "destination": "/run/secrets/broker_token",
+              "read_only": true
+            },
+            {
+              "type": "bind",
+              "destination": "/run/secrets/provider_key",
+              "read_only": true
+            }
+          ],
+          "published_port_count": 0,
+          "network_mode": "ariadne-comparison-terra-attempt3-live",
+          "memory_bytes": 268435456,
+          "memory_swap_bytes": 268435456,
+          "nano_cpus": 500000000,
+          "pids_limit": 32,
+          "environment_keys": [
+            "ARIADNE_LANE_ID",
+            "EXPECTED_FULL_OUTPUT_SCHEMA_SHA256",
+            "EXPECTED_PROMPT_SHA256",
+            "EXPECTED_PROVIDER_OUTPUT_SCHEMA_SHA256",
+            "EXPECTED_SHARED_TASK_SHA256",
+            "EXPECTED_SYSTEM_PROMPT_SHA256",
+            "NODE_VERSION",
+            "PATH",
+            "YARN_VERSION"
+          ]
+        },
+        "cell": {
+          "user": "node",
+          "read_only_root": true,
+          "cap_drop": [
+            "ALL"
+          ],
+          "security_opt": [
+            "no-new-privileges"
+          ],
+          "mounts": [
+            {
+              "type": "bind",
+              "destination": "/run/secrets/broker_token",
+              "read_only": true
+            }
+          ],
+          "published_port_count": 0,
+          "network_mode": "ariadne-comparison-terra-attempt3-live",
+          "memory_bytes": 268435456,
+          "memory_swap_bytes": 268435456,
+          "nano_cpus": 500000000,
+          "pids_limit": 32,
+          "environment_keys": [
+            "NODE_VERSION",
+            "PATH",
+            "YARN_VERSION"
+          ]
+        },
+        "network": {
+          "internal": true,
+          "driver": "bridge",
+          "container_count": 1
+        }
+      },
+      "broker_events": [
+        {
+          "audit_sequence": 1,
+          "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+          "event": "broker-ready",
+          "lane_id": "terra",
+          "model_id": "gpt-5.6-terra",
+          "event_sha256": "sha256:97b2699c8306a944cbb945795a4522dc3d5bddd5c593579bf4fbdccdebfb1cfa"
+        },
+        {
+          "audit_sequence": 2,
+          "previous_event_sha256": "sha256:97b2699c8306a944cbb945795a4522dc3d5bddd5c593579bf4fbdccdebfb1cfa",
+          "event": "provider-call-started",
+          "lane_id": "terra",
+          "provider": "openai",
+          "model_id": "gpt-5.6-terra",
+          "provider_call_count": 1,
+          "request_bytes": 18911,
+          "request_sha256": "sha256:29d587e336db52fcdf7c687a0842d2514a30c4c9ca432b7df2f27db4159863ba",
+          "provider_schema_profile_sha256": "sha256:39a0f6da352a8da5f8291291a8f87abaa6aa9daa6b7359a8221341ebb756f1e2",
+          "maximum_output_tokens": 2048,
+          "event_sha256": "sha256:b9aed94d795a3335f92095efb3ebb622b4dd9a8729345370c095a4f1437621c9"
+        },
+        {
+          "audit_sequence": 3,
+          "previous_event_sha256": "sha256:b9aed94d795a3335f92095efb3ebb622b4dd9a8729345370c095a4f1437621c9",
+          "event": "provider-call-completed",
+          "lane_id": "terra",
+          "provider_call_count": 1,
+          "provider_status": 200,
+          "response_bytes": 24175,
+          "response_sha256": "sha256:494dd724f7077f20d26806fbc4e56fe5c0b43be31f9312e241804607c008c6e5",
+          "event_sha256": "sha256:cfe3f80d75c1d591e5c7ac1dea5f69d13cd2c68228e0af75976187037141d682"
+        },
+        {
+          "audit_sequence": 4,
+          "previous_event_sha256": "sha256:cfe3f80d75c1d591e5c7ac1dea5f69d13cd2c68228e0af75976187037141d682",
+          "event": "typed-output-observed",
+          "lane_id": "terra",
+          "provider_call_count": 1,
+          "typed_output_manifest": [
+            {
+              "draft_sha256": "sha256:857e25b9a0ee189f3d7676e5d2c3b4c76380fe812dfa5f7c50e394cc3fe54057",
+              "top_level_field_names": [
+                "attempt_id",
+                "authority_class",
+                "batch_id",
+                "context_revision",
+                "correlation_id",
+                "frame_type",
+                "freshness",
+                "id",
+                "output_port_id",
+                "payload",
+                "practice_id",
+                "principal_id",
+                "provenance",
+                "source_frame_ids"
+              ],
+              "payload_field_names": [
+                "candidate_slot_ids",
+                "context_revision",
+                "duration_minutes",
+                "patient_candidate_id",
+                "practitioner_id",
+                "projection_code",
+                "selected_slot_id"
+              ],
+              "id": "draft-ux-primary",
+              "output_port_id": "port-ux",
+              "frame_type": "booking-ux-projection-candidate.v1"
+            },
+            {
+              "draft_sha256": "sha256:8122cdac88baf4624e679fee253f240b61082073d4d9e2d8d7de0260dedd80a7",
+              "top_level_field_names": [
+                "attempt_id",
+                "authority_class",
+                "batch_id",
+                "context_revision",
+                "correlation_id",
+                "frame_type",
+                "freshness",
+                "id",
+                "output_port_id",
+                "payload",
+                "practice_id",
+                "principal_id",
+                "provenance",
+                "source_frame_ids"
+              ],
+              "payload_field_names": [
+                "candidate_slot_ids",
+                "confirmation_required",
+                "context_revision",
+                "duration_minutes",
+                "patient_candidate_id",
+                "practitioner_id",
+                "review_reason_codes",
+                "selected_slot_id"
+              ],
+              "id": "draft-human-primary",
+              "output_port_id": "port-human-review",
+              "frame_type": "booking-human-review-candidate.v1"
+            },
+            {
+              "draft_sha256": "sha256:51613fe9c329c3a05687b8e108c26d33234262f353b071fb5328b1d387bd871f",
+              "top_level_field_names": [
+                "attempt_id",
+                "authority_class",
+                "batch_id",
+                "context_revision",
+                "correlation_id",
+                "frame_type",
+                "freshness",
+                "id",
+                "output_port_id",
+                "payload",
+                "practice_id",
+                "principal_id",
+                "provenance",
+                "source_frame_ids"
+              ],
+              "payload_field_names": [
+                "attempt_id",
+                "context_revision",
+                "evidence_codes",
+                "outcome_code"
+              ],
+              "id": "draft-audit-primary",
+              "output_port_id": "port-audit",
+              "frame_type": "work-cell-audit-evidence.v1"
+            },
+            {
+              "draft_sha256": "sha256:1c8451098b1566dbf325825e1cf98c62945eace7288851b487387e29c5082c26",
+              "top_level_field_names": [
+                "attempt_id",
+                "authority_class",
+                "batch_id",
+                "context_revision",
+                "correlation_id",
+                "frame_type",
+                "freshness",
+                "id",
+                "output_port_id",
+                "payload",
+                "practice_id",
+                "principal_id",
+                "provenance",
+                "source_frame_ids"
+              ],
+              "payload_field_names": [
+                "completed_port_ids",
+                "context_revision",
+                "status"
+              ],
+              "id": "draft-orchestrator-primary",
+              "output_port_id": "port-orchestrator",
+              "frame_type": "work-cell-outcome.v1"
+            },
+            {
+              "draft_sha256": "sha256:cb3b9ac9b094228f4ce49b3f6fb20034f3f10b938947dfcf3b238ab5e24bcd6d",
+              "top_level_field_names": [
+                "attempt_id",
+                "authority_class",
+                "batch_id",
+                "context_revision",
+                "correlation_id",
+                "frame_type",
+                "freshness",
+                "id",
+                "output_port_id",
+                "payload",
+                "practice_id",
+                "principal_id",
+                "provenance",
+                "source_frame_ids"
+              ],
+              "payload_field_names": [
+                "advisory_code",
+                "context_revision",
+                "grounding_ids"
+              ],
+              "id": "draft-advisory-primary",
+              "output_port_id": "port-advisory",
+              "frame_type": "booking-explanation-advisory.v1"
+            }
+          ],
+          "event_sha256": "sha256:638e2cc15bcc2b4436d5a9c0fae1697d1e11c185ce2b6b6a05df53fd61f2abe2"
+        }
+      ],
+      "external_audit_track": {
+        "owner": "trusted-broker-and-orchestrator",
+        "sandbox_append_authority": false,
+        "hash_chain_status": "passed",
+        "raw_reasoning_recorded": false,
+        "typed_output_manifest_recorded": true,
+        "proofreader_disposition": "release-verified-outputs"
+      },
+      "cleanup": {
+        "cell_removed": true,
+        "broker_removed": true,
+        "network_removed": true,
+        "cell_image_tag_removed": true,
+        "broker_image_tag_removed": true
+      },
+      "raw_prompt_recorded": false,
+      "raw_provider_response_recorded": false,
+      "draft_payload_recorded": false,
+      "provider_secret_recorded": false
+    },
+    "gemini": {
+      "lane_id": "gemini",
+      "status": "revision_required",
+      "reason_codes": [
+        "provider-non-success"
+      ],
+      "ledger": {
+        "schema_version": "ariadne.comparative_single_use_ledger.v2",
+        "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+        "runtime_attempt_id": "comparative-runtime-attempt-003",
+        "cognition_contract_attempt_id": "generated-attempt-001",
+        "lane_id": "gemini",
+        "model_id": "gemini-3.5-flash",
+        "state": "consumed",
+        "maximum_provider_calls": 1,
+        "retry_authorised": false,
+        "consumption_point": "immediately-before-work-cell-start"
+      },
+      "shared_hashes": {
+        "shared_task_sha256": null,
+        "full_output_schema_sha256": null,
+        "provider_output_schema_sha256": null,
+        "system_prompt_sha256": null,
+        "prompt_sha256": null
+      },
+      "prompt_bytes": null,
+      "generated_output_sha256": null,
+      "generated_output_bytes": null,
+      "generated_draft_count": 0,
+      "draft_hashes": [],
+      "provider_schema_status": "not-presented",
+      "full_schema_status": "not-presented",
+      "proofreader": null,
+      "usage": {},
+      "cost_estimate": {
+        "currency": "USD",
+        "pricing_observed_date": "2026-07-24",
+        "input_per_million": 1.5,
+        "output_per_million": 9.0,
+        "estimated_cost_usd": null,
+        "estimate_authoritative": false,
+        "provider_billing_authoritative": true
+      },
+      "container_policy": {
+        "broker": {
+          "user": "node",
+          "read_only_root": true,
+          "cap_drop": [
+            "ALL"
+          ],
+          "security_opt": [
+            "no-new-privileges"
+          ],
+          "mounts": [
+            {
+              "type": "bind",
+              "destination": "/run/secrets/broker_token",
+              "read_only": true
+            },
+            {
+              "type": "bind",
+              "destination": "/run/secrets/provider_key",
+              "read_only": true
+            }
+          ],
+          "published_port_count": 0,
+          "network_mode": "ariadne-comparison-gemini-attempt3-live",
+          "memory_bytes": 268435456,
+          "memory_swap_bytes": 268435456,
+          "nano_cpus": 500000000,
+          "pids_limit": 32,
+          "environment_keys": [
+            "ARIADNE_LANE_ID",
+            "EXPECTED_FULL_OUTPUT_SCHEMA_SHA256",
+            "EXPECTED_PROMPT_SHA256",
+            "EXPECTED_PROVIDER_OUTPUT_SCHEMA_SHA256",
+            "EXPECTED_SHARED_TASK_SHA256",
+            "EXPECTED_SYSTEM_PROMPT_SHA256",
+            "NODE_VERSION",
+            "PATH",
+            "YARN_VERSION"
+          ]
+        },
+        "cell": {
+          "user": "node",
+          "read_only_root": true,
+          "cap_drop": [
+            "ALL"
+          ],
+          "security_opt": [
+            "no-new-privileges"
+          ],
+          "mounts": [
+            {
+              "type": "bind",
+              "destination": "/run/secrets/broker_token",
+              "read_only": true
+            }
+          ],
+          "published_port_count": 0,
+          "network_mode": "ariadne-comparison-gemini-attempt3-live",
+          "memory_bytes": 268435456,
+          "memory_swap_bytes": 268435456,
+          "nano_cpus": 500000000,
+          "pids_limit": 32,
+          "environment_keys": [
+            "NODE_VERSION",
+            "PATH",
+            "YARN_VERSION"
+          ]
+        },
+        "network": {
+          "internal": true,
+          "driver": "bridge",
+          "container_count": 1
+        }
+      },
+      "broker_events": [
+        {
+          "audit_sequence": 1,
+          "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+          "event": "broker-ready",
+          "lane_id": "gemini",
+          "model_id": "gemini-3.5-flash",
+          "event_sha256": "sha256:3dd917aa5b6a4360301390aa6e80ba7b2aa15ff2ff310a01482d90e2cfa9542a"
+        },
+        {
+          "audit_sequence": 2,
+          "previous_event_sha256": "sha256:3dd917aa5b6a4360301390aa6e80ba7b2aa15ff2ff310a01482d90e2cfa9542a",
+          "event": "provider-call-started",
+          "lane_id": "gemini",
+          "provider": "google",
+          "model_id": "gemini-3.5-flash",
+          "provider_call_count": 1,
+          "request_bytes": 18939,
+          "request_sha256": "sha256:0e4467dac289fb044434ab6aca0b97e81ac0308886441a68b375d80fe18cdb8c",
+          "provider_schema_profile_sha256": "sha256:39a0f6da352a8da5f8291291a8f87abaa6aa9daa6b7359a8221341ebb756f1e2",
+          "maximum_output_tokens": 2048,
+          "event_sha256": "sha256:30bdec214dcf2495b765751830743d9ea305c83cb28449e670405736636cdaa3"
+        },
+        {
+          "audit_sequence": 3,
+          "previous_event_sha256": "sha256:30bdec214dcf2495b765751830743d9ea305c83cb28449e670405736636cdaa3",
+          "event": "provider-call-completed",
+          "lane_id": "gemini",
+          "provider_call_count": 1,
+          "provider_status": 400,
+          "response_bytes": 127,
+          "response_sha256": "sha256:b01105ed229707571186fdc753a734401dcd3dca044538c55285824604725bd3",
+          "provider_error_status": "INVALID_ARGUMENT",
+          "provider_error_code": 400,
+          "event_sha256": "sha256:c38427f3d38535652738957d20b6ccc502edfa498fa3ba889f4a1f9c8b04cc1f"
+        }
+      ],
+      "external_audit_track": {
+        "owner": "trusted-broker-and-orchestrator",
+        "sandbox_append_authority": false,
+        "hash_chain_status": "passed",
+        "raw_reasoning_recorded": false,
+        "typed_output_manifest_recorded": false,
+        "proofreader_disposition": null
+      },
+      "cleanup": {
+        "cell_removed": true,
+        "broker_removed": true,
+        "network_removed": true,
+        "cell_image_tag_removed": true,
+        "broker_image_tag_removed": true
+      },
+      "raw_prompt_recorded": false,
+      "raw_provider_response_recorded": false,
+      "draft_payload_recorded": false,
+      "provider_secret_recorded": false
+    }
+  },
+  "external_audit_checked": true,
+  "raw_reasoning_recorded": false,
+  "raw_prompt_recorded": false,
+  "raw_provider_response_recorded": false,
+  "draft_payload_recorded": false,
+  "provider_secret_recorded": false,
+  "product_or_database_access": false,
+  "downstream_delivery": false
+}

@@ -1,0 +1,44 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan_the_bounded_reception_one_product_context_proposal_runtime_descendant",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records the accepted authored-synthetic Model Text Lane result and identifies product-context proposal runtime as the next separately bounded candidate.",
+    "current_authority_allocation": "Yuri authorised continued necessary runtime tranches without routine pauses. This opening is interpreted narrowly as authored-synthetic/dev, scoped-read, proposal-only runtime work; no patient data, appointment write, production, deployment or release authority.",
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-bureau-typed-plan-protocol-plan.md",
+      "docs/bernie-reception-one-bureau-typed-plan-protocol-design.md",
+      "docs/bernie-reception-one-bureau-typed-plan-protocol-closeout.md",
+      "docs/bernie-reception-one-bureau-model-text-lane-iterative-retry-plan.md",
+      "docs/bernie-reception-one-bureau-model-text-lane-iterative-retry-closeout.md",
+      "orchestration/agent_inbox/codex/reception-one-bureau-model-text-lane-iterative-retry-sol-acceptance.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/access_ai_api_design.md",
+      "orchestration/bernie_release_gates.md"
+    ],
+    "protected_evidence_boundaries": "Protected holdouts remain sealed; historical Diary material remains local and closed; raw prompts, raw provider responses, credentials and reasoning remain excluded; backend identity, availability, confirmation, writes and audit remain authoritative.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

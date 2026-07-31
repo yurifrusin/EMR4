@@ -1,0 +1,63 @@
+{
+  "schema_version": "reception.one.product_context_proposal_runtime.policy.v1",
+  "status": "authorised_frozen",
+  "environment": "dev",
+  "feature_default": "disabled",
+  "evidence_data_class": "authored_synthetic",
+  "api_spine": {
+    "boundary": "authenticated_default_off_command_style_read_and_proposal_runtime",
+    "graphql_mutation_allowed": false,
+    "confirmation_allowed": false,
+    "appointment_write_allowed": false,
+    "model_to_database_write_allowed": false
+  },
+  "context": {
+    "practice_scope_required": true,
+    "role_check_required": true,
+    "opaque_request_scoped_handles": true,
+    "freshness_and_expiry_required": true,
+    "source_labels_required": true,
+    "free_notes_allowed": false,
+    "clinical_data_allowed": false,
+    "historical_diary_allowed": false,
+    "real_or_product_derived_data_allowed": false
+  },
+  "planner": {
+    "default": "provider_blocked",
+    "effect_ceiling": "proposal_only",
+    "closed_operator_catalogue": true,
+    "deterministic_proofreader_required": true,
+    "raw_draft_product_delivery": false
+  },
+  "legacy_gate": {
+    "path": "docs/bernie-interpretation-harness-runtime-gate.json",
+    "must_remain_blocked": true,
+    "default_provider_must_remain_disabled": true
+  },
+  "occupied_gate": {
+    "provider": "google_cloud_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "provider_fallback": false,
+    "provider_tools": false,
+    "grounding": false,
+    "retrieval": false,
+    "cache_creation": false,
+    "cumulative_cost_ceiling_usd": 1,
+    "retry_policy": "distinct_ledger_focused_repair_stop_after_first_admitted_runtime_result"
+  },
+  "closed": [
+    "real_patient_or_product_derived_data",
+    "appointment_confirmation_or_write",
+    "production",
+    "deployment",
+    "release",
+    "provider_or_regional_substitution",
+    "api_key_or_static_key_authentication",
+    "commit_push_pull_request_or_protected_ref_movement"
+  ]
+}

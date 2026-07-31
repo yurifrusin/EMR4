@@ -1,0 +1,39 @@
+{
+  "schema_version": "ariadne.vertex_sydney_independent_audit_analysis.v1",
+  "reviewed_on": "2026-07-24",
+  "review_mode": "independent_repository_read_only_no_cloud_or_credential_access",
+  "result": "ariadne_vertex_sydney_gemini_25_independent_audit_pass",
+  "terminal_result_accepted": "ariadne_vertex_sydney_gemini_25_adc_preflight_blocked",
+  "verified": {
+    "provider_blocked_tests_passed": 24,
+    "preflight_tests_passed": 6,
+    "compass_tests_passed": 10,
+    "tranche_2_bound_artifact_hashes_match": 11,
+    "continuity_graph_revision": 34,
+    "compass_map_revision": 21,
+    "continuity_compass_revision_bound": true,
+    "rendered_compass_exact": true,
+    "provider_calls": 0,
+    "retries": 0,
+    "durable_rehearsal_or_occupied_ledgers_opened": 0,
+    "temporary_provider_free_test_ledgers_consumed": 1,
+    "task_residue_clear": true
+  },
+  "repaired_before_acceptance": [
+    "discard_all_free_form_provider_error_messages",
+    "bound_provider_error_code_and_status",
+    "hash_complete_provider_error_stream_while_parsing_only_a_bounded_prefix",
+    "reduce_adc_discovery_and_refresh_exceptions_to_safe_codes",
+    "mark_provider_training_and_abuse_retention_controls_unverified",
+    "add_inert_provider_blocked_launcher_contract_and_exact_launch_plan",
+    "bind_and_verify_all_tranche_2_artifact_hashes",
+    "distinguish_temporary_test_ledger_from_durable_rehearsal_ledgers",
+    "add_task_scoped_container_network_image_process_and_temporary_credential_residue_evidence"
+  ],
+  "proof_limits": [
+    "The provider-blocked launcher proves command-plan shape only; it does not prove Docker sequencing, broker startup, teardown or real isolation.",
+    "The durable Tranche 3 record is a sanitized operator attestation. Independent review did not repeat credential operations or independently establish the underlying cloud response.",
+    "No entitlement, IAM/audit/logging/cache posture, provider acceptance, inference, typed release, Australian physical processing or sovereign processing is proved."
+  ],
+  "required_next_action": "Yuri restores or makes usable the existing exact Bernie impersonated ADC, followed by fresh five-source rehydration and the complete read-only Tranche 3 preflight."
+}

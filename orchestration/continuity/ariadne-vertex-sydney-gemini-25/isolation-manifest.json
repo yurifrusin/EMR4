@@ -1,0 +1,51 @@
+{
+  "schema_version": "ariadne.vertex_sydney_isolation_manifest.v1",
+  "rehearsal_id": "ariadne-vertex-sydney-gemini-25-v1",
+  "base_image": "docker.io/library/python@sha256:a190708a2dec1bd18b1decb539f8e8f5407abaa9bf39cacda583f7f8c11db322",
+  "cell": {
+    "user": "65532:65532",
+    "read_only_root": true,
+    "tmpfs": "/tmp:rw,noexec,nosuid,size=8m",
+    "memory": "128m",
+    "memory_swap": "128m",
+    "cpus": "0.50",
+    "pids_limit": 64,
+    "nofile": "64:64",
+    "cap_drop": ["ALL"],
+    "security_opt": ["no-new-privileges"],
+    "network": "task_internal_only",
+    "published_ports": 0,
+    "docker_socket": false,
+    "host_network": false,
+    "product_or_database_mount": false,
+    "credential_mount": false,
+    "environment_allowlist": [
+      "PYTHONDONTWRITEBYTECODE",
+      "PYTHONUNBUFFERED"
+    ]
+  },
+  "relay": {
+    "user": "65532:65532",
+    "read_only_root": true,
+    "tmpfs": "/tmp:rw,noexec,nosuid,size=8m",
+    "memory": "64m",
+    "memory_swap": "64m",
+    "cpus": "0.25",
+    "pids_limit": 32,
+    "nofile": "64:64",
+    "cap_drop": ["ALL"],
+    "security_opt": ["no-new-privileges"],
+    "networks": ["task_internal_only", "bridge_egress"],
+    "published_ports": 0,
+    "forward_host": "host.docker.internal",
+    "forward_path": "/v1/execute"
+  },
+  "broker": {
+    "runtime": "host_purpose_built_one_use_process",
+    "listen_scope": "ephemeral_token_authenticated",
+    "credential_source": "google.auth.default_existing_impersonated_adc",
+    "api_key_environment_forwarded": false,
+    "provider_endpoint_allowlist_enforced": true,
+    "one_use_ledger_required": true
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "evidence_mode": "provider_blocked_repository_contract",
+  "evidence_version": "reception.one.integrated-bureau-provider-blocked-evidence.v1",
+  "explicit_exclusions": [
+    "provider execution",
+    "credential discovery or refresh",
+    "network access",
+    "raw provider prompt or response",
+    "product delivery",
+    "appointment write",
+    "command authority",
+    "patient, health, clinical or product-derived data"
+  ],
+  "input_sha256": "a4a2f04ea75f170e074f9b55f247ccd276c32a811008191395cb5a7c8442086b",
+  "negative_cases": [
+    {
+      "case_id": "unknown-authority-field",
+      "decision": "reject",
+      "reason_codes": [
+        "schema-invalid",
+        "unknown-field-rejected"
+      ]
+    },
+    {
+      "case_id": "ungrounded-practitioner",
+      "decision": "reject",
+      "reason_codes": [
+        "ungrounded-practitioner"
+      ]
+    },
+    {
+      "case_id": "write-shaped-operation",
+      "decision": "reject",
+      "reason_codes": [
+        "command-authority-rejected",
+        "schema-invalid",
+        "unknown-field-rejected"
+      ]
+    },
+    {
+      "case_id": "nonallowlisted-date-repair",
+      "decision": "reject",
+      "reason_codes": [
+        "schema-invalid",
+        "ungrounded-date",
+        "unknown-field-rejected"
+      ]
+    },
+    {
+      "case_id": "stale-context",
+      "decision": "reject",
+      "reason_codes": [
+        "stale-context"
+      ]
+    }
+  ],
+  "normalized_draft_sha256": "d398146f6c6924e303a53bdf9751c289b99a8bd4f680e9bec6f98e88eb26cf89",
+  "policy_sha256": "e5735cbe4f1af54c75e067f2f76c4e9478cf224148cbd0d2e9138160f9c9aa87",
+  "positive_case": {
+    "admitted_field_paths": [
+      "$.family",
+      "$.operation",
+      "$.date_relation",
+      "$.target_date",
+      "$.practitioner_ids",
+      "$.time_window",
+      "$.duration_minutes"
+    ],
+    "decision": "admit",
+    "request_id": "synthetic-request-show-shera-tomorrow",
+    "safe_repairs": [],
+    "typesetter_instruction": {
+      "action_boundary": {
+        "appointment_write_authority": false,
+        "command_authority": false,
+        "product_delivery_enabled": false
+      },
+      "context_revision": "synthetic-diary-revision-monday-001",
+      "contract_version": "reception.one.typesetter-instruction.v1",
+      "diary_target_date": "2026-07-28",
+      "evidence_mode": "provider_blocked_repository_contract",
+      "projection_family": "focused_schedule_lane",
+      "proofreader_sha256": "c26ae8b9a01fc1cc36c94c834187d97159ece7c56b915d463f6f344cb4759712",
+      "read_action": "authorised_diary_read",
+      "released_field_paths": [
+        "$.family",
+        "$.operation",
+        "$.date_relation",
+        "$.target_date",
+        "$.practitioner_ids",
+        "$.time_window",
+        "$.duration_minutes"
+      ],
+      "request_id": "synthetic-request-show-shera-tomorrow",
+      "scope": {
+        "duration_minutes": null,
+        "practitioner_ids": [
+          "synthetic-practitioner-alex-shera"
+        ],
+        "time_from": "08:00",
+        "time_to": "17:00"
+      },
+      "set_diary_date_before_projection": true,
+      "source_draft_sha256": "d398146f6c6924e303a53bdf9751c289b99a8bd4f680e9bec6f98e88eb26cf89"
+    }
+  },
+  "proofreader_sha256": "c26ae8b9a01fc1cc36c94c834187d97159ece7c56b915d463f6f344cb4759712",
+  "provider_boundary": {
+    "credentials_requested": false,
+    "execution_enabled": false,
+    "network_requested": false,
+    "product_delivery_enabled": false,
+    "provider_call_count": 0,
+    "raw_prompt_persisted": false,
+    "raw_response_persisted": false
+  },
+  "schema_files": {
+    "draft": "orchestration/continuity/reception-one-integrated-bureau/intent-draft.schema.json",
+    "input": "orchestration/continuity/reception-one-integrated-bureau/intent-input.schema.json",
+    "proofreader": "orchestration/continuity/reception-one-integrated-bureau/proofreader-result.schema.json",
+    "typesetter": "orchestration/continuity/reception-one-integrated-bureau/typesetter-instruction.schema.json"
+  },
+  "status": "pass",
+  "typesetter_sha256": "01577dd266008667afd10d533c198806d93f062665809740d1f0b317c6b54b48"
+}

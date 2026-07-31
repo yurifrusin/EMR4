@@ -1,0 +1,18 @@
+{
+  "schema_version": "reception.one.readonly_synthetic_diary_context.pre_attempt_residue.v1",
+  "recorded_at": "2026-07-30T13:03:50Z",
+  "result": "reception_one_readonly_synthetic_diary_context_pre_attempt_residue_clear",
+  "containers_present": false,
+  "container_count": 0,
+  "networks_present": false,
+  "network_count": 0,
+  "images_present": false,
+  "image_count": 0,
+  "broker_or_cell_processes_present": false,
+  "broker_or_cell_process_count": 0,
+  "opened_ledger_count": 0,
+  "disposable_database_present": false,
+  "daemon_wide_prune_performed": false,
+  "credential_material_inspected": false,
+  "api_key_information_observed_or_recorded": false
+}

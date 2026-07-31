@@ -1,0 +1,70 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "recorded_at": "2026-07-29T23:44:46Z",
+  "continuation_event": "verifier_acceptance",
+  "planned_action": "accept_and_close_the_mixed_extended_proposal_runtime_result",
+  "status": "passed",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md Current Baton records the provider-free four-family runtime pass, two fail-closed occupied responses, consumed ledgers, exhausted call ceiling and the remaining closed product/provider boundaries at Continuity graph 74 and Compass map 61.",
+    "current_authority_allocation": [
+      "Yuri authorised the extended runtime through one primary and one deterministic request-contract repair call in the exact Bernie keyless-ADC Sydney Vertex lane.",
+      "The local API change was limited to default-off authored-synthetic proposal preparation and existing non-mutating adapters.",
+      "The two-call authority is fully consumed. No further retry, fallback, real data, confirmation, write, Word wiring, voice, production, deployment or release authority remains."
+    ],
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-extended-proposal-runtime-plan.md",
+      "docs/security/bernie-reception-one-extended-proposal-runtime-threat-model-delta.md",
+      "docs/bernie-reception-one-extended-proposal-runtime-closeout.md",
+      "orchestration/continuity/reception-one-extended-proposal-runtime/provider-free-gate-evidence.json",
+      "orchestration/continuity/reception-one-extended-proposal-runtime/occupied-001-external-audit.json",
+      "orchestration/continuity/reception-one-extended-proposal-runtime/occupied-001-repair-gate-evidence.json",
+      "orchestration/continuity/reception-one-extended-proposal-runtime/occupied-002-external-audit.json",
+      "orchestration/continuity/reception-one-extended-proposal-runtime/occupied-final-independent-audit-analysis.json",
+      "orchestration/continuity/reception-one-extended-proposal-runtime/occupied-final-residue-evidence.json",
+      "orchestration/agent_inbox/codex/reception-one-extended-proposal-runtime-sol-acceptance.md"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 remain restored. Both rejected provider representations were discarded; no raw prompt, raw response, rejected draft, credential, access token, API-key information or hidden reasoning is retained. Historical nodes and consumed ledgers remain immutable. No model-generated value was released.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true,
+      "commit_push_pr_or_ref_move_performed": false
+    }
+  },
+  "revision_binding": {
+    "continuity_graph_revision": 74,
+    "continuity_graph_sha256": "5f9e5d7051a3b649a24b879b50c095f8f0e977cc176f2cddb91bd4986939eb77",
+    "compass_map_revision": 61,
+    "compass_map_sha256": "50b054323791f8cd39d8b15a50a6510c580ef958a849e9fcd4764fcdf6dab418",
+    "rendered_compass_sha256": "e43a672f18312e05da448297a61808bf937065ea6e1d697612572425e0d21b30"
+  },
+  "closeout_hashes": {
+    "closeout_sha256": "287f97b05b467965db35cd83c59afe5fbebefc5cdacfaaf7834bc54faa4bb62c",
+    "independent_audit_sha256": "dbe42e1a40461006870f2dc8837137fb48a4a612a0f4eca13958237f57d69302",
+    "residue_evidence_sha256": "b873bcf76148afdbbbfa8fdd6581d9b74734ba9dcd4dc97767ec6cac38a0c118"
+  },
+  "terminal_result": {
+    "result": "reception_one_extended_proposal_runtime_local_pass_live_vertex_unadmitted",
+    "provider_free_runtime": "passed",
+    "occupied_model_candidate_admitted": false,
+    "occupied_calls": 2,
+    "all_ledgers_consumed": true,
+    "fallback": false,
+    "cleanup": "passed",
+    "unresolved_gate": "A future live extended-family planner requires a separately authorised request-and-wire-contract design descendant."
+  }
+}

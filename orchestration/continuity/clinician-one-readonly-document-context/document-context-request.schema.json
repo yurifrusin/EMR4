@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/clinician-one-document-context-request.schema.json",
+  "title": "Clinician One read-only document-context request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "request_id",
+    "operation",
+    "data_classification",
+    "source_scope",
+    "user_gesture",
+    "single_use",
+    "limits",
+    "grant"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "emr4.clinician-one-document-context-request.v1"
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^clinician-context-[a-z0-9-]{8,80}$"
+    },
+    "operation": {
+      "const": "read_selected_authored_synthetic_text"
+    },
+    "data_classification": {
+      "const": "authored_synthetic"
+    },
+    "source_scope": {
+      "const": "current_word_selection"
+    },
+    "user_gesture": {
+      "const": "explicit_clinician_click"
+    },
+    "single_use": {
+      "const": true
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "maximum_characters",
+        "maximum_lines",
+        "truncate"
+      ],
+      "properties": {
+        "maximum_characters": {
+          "const": 1200
+        },
+        "maximum_lines": {
+          "const": 40
+        },
+        "truncate": {
+          "const": false
+        }
+      }
+    },
+    "grant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "principal_role",
+        "document_read",
+        "document_write",
+        "patient_context",
+        "provider_invocation",
+        "network_access",
+        "microphone_capture",
+        "command",
+        "write"
+      ],
+      "properties": {
+        "mode": {
+          "const": "local_authored_synthetic_fixture"
+        },
+        "principal_role": {
+          "const": "clinician_fixture"
+        },
+        "document_read": {
+          "const": true
+        },
+        "document_write": {
+          "const": false
+        },
+        "patient_context": {
+          "const": false
+        },
+        "provider_invocation": {
+          "const": false
+        },
+        "network_access": {
+          "const": false
+        },
+        "microphone_capture": {
+          "const": false
+        },
+        "command": {
+          "const": false
+        },
+        "write": {
+          "const": false
+        }
+      }
+    }
+  }
+}

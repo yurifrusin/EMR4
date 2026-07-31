@@ -1,0 +1,143 @@
+{
+  "id": "reception-one-receptionist-first-v64-exact-constraint",
+  "title": "Reception One Receptionist-first v6.4 Exact Constraint",
+  "kind": "implementation",
+  "status": "accepted",
+  "created_at": "2026-07-30T09:38:50Z",
+  "updated_at": "2026-07-30T10:10:09Z",
+  "relationships": [
+    {
+      "node_id": "reception-one-receptionist-first-v63-form-toolkit",
+      "relation": "builds_on"
+    }
+  ],
+  "coordinates": {
+    "thread_id": null,
+    "git_ref": "codex/ariadne-terra-gemini-comparative-rehearsal",
+    "source_head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "worktree_role": "integration"
+  },
+  "evidence": {
+    "acceptances": [
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v64-provider-free-sol-acceptance.md"
+    ],
+    "closeouts": [
+      "orchestration/continuity/reception-one-receptionist-first-v64/provider-blocked-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v64/real-isolation-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v64/occupied-preflight-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v64/pre-attempt-residue-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v64/occupied-cohort-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v64/occupied-final-residue-evidence.json",
+      "docs/bernie-reception-one-receptionist-first-v64-closeout.md"
+    ],
+    "findings": [
+      "orchestration/continuity/reception-one-receptionist-first-v63/occupied-final-audit-analysis.json",
+      "orchestration/continuity/reception-one-receptionist-first-v64/occupied-final-audit-analysis.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v64-final-sol-review.md"
+    ],
+    "plans": [
+      "docs/bernie-reception-one-receptionist-first-v64-exact-constraint-plan.md",
+      "orchestration/continuity/reception-one-receptionist-first-v64/runtime-policy.json",
+      "orchestration/continuity/reception-one-receptionist-first-v64/occupied-authority.json"
+    ],
+    "receipts": [
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v64-rehydration-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v64-preplan-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v64-postcompaction-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v64-postcompaction-five-source-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v64-preacceptance-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v64-preattempt-receipt.json"
+    ],
+    "tests": [
+      "scripts/reception_one_receptionist_first_v64.py",
+      "scripts/reception_one_receptionist_first_v64_cohort.py",
+      "scripts/reception_one_receptionist_first_v64_cell.py",
+      "scripts/reception_one_receptionist_first_v64_isolation.py",
+      "tests/test_reception_one_receptionist_first_v64.py"
+    ]
+  },
+  "authority": {
+    "authorized_openings": [
+      {
+        "boundary": "container-runtime",
+        "scope": "Credential-free network-none work cells for the complete twenty-four-request authored-synthetic v6.4 cohort.",
+        "source": "orchestration/continuity/reception-one-receptionist-first-v64/occupied-authority.json"
+      },
+      {
+        "boundary": "model-runtime",
+        "scope": "Gemini 2.5 Flash may complete the unchanged typed output form after deterministic exact-constraint and natural/form consistency repairs.",
+        "source": "orchestration/continuity/reception-one-receptionist-first-v64/occupied-authority.json"
+      },
+      {
+        "boundary": "provider-call",
+        "scope": "Twenty-four primaries and at most one terminal second call per case through the exact Bernie keyless-ADC Sydney lane, within forty-eight calls and USD 1.",
+        "source": "orchestration/continuity/reception-one-receptionist-first-v64/occupied-authority.json"
+      }
+    ],
+    "notes": [
+      "v6.3 is immutable and consumed; v6.4 is separately versioned.",
+      "No no-show-to-DNA alias is added.",
+      "Provider, model, project, service account, keyless ADC, region, authored-synthetic, isolation, no-fallback, no-write and cost boundaries are unchanged."
+    ]
+  },
+  "contract_evidence": [
+    {
+      "contract_id": "combined-patient-practitioner-time-duration-intent",
+      "evidence": [
+        "docs/bernie-reception-one-receptionist-first-v64-exact-constraint-plan.md",
+        "orchestration/continuity/reception-one-receptionist-first-v64/provider-blocked-evidence.json",
+        "tests/test_reception_one_receptionist_first_v64.py"
+      ],
+      "note": "All twenty-four reference forms pass and a deliberately broadened corrected-time form is rejected before release.",
+      "status": "satisfied"
+    },
+    {
+      "contract_id": "committed-reschedule-availability-reconciliation",
+      "evidence": [
+        "docs/bernie-reception-one-receptionist-first-v64-exact-constraint-plan.md",
+        "orchestration/continuity/reception-one-receptionist-first-v64/real-isolation-evidence.json",
+        "tests/test_reception_one_receptionist_first_v64.py"
+      ],
+      "note": "The same minimal hash-bound context packet is proofread in two isolated cells; no product, event, database or write path opens.",
+      "status": "satisfied"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "authorise-reception-one-receptionist-first-v64-120",
+      "status": "accepted",
+      "summary": "Strengthen exact recognized-constraint proofreader coverage and natural/form same-goal consistency, then rerun all twenty-four requests.",
+      "source": "orchestration/continuity/reception-one-receptionist-first-v64/occupied-authority.json"
+    },
+    {
+      "id": "accept-reception-one-receptionist-first-v64-provider-free-121",
+      "status": "accepted",
+      "summary": "Accept the exact-constraint gate, complete reference cohort, unchanged model contract and residue-free two-turn real-isolation evidence before read-only cloud preflight.",
+      "source": "orchestration/agent_inbox/codex/reception-one-receptionist-first-v64-provider-free-sol-acceptance.md"
+    },
+    {
+      "id": "bind-reception-one-receptionist-first-v64-occupied-122",
+      "status": "accepted",
+      "summary": "Bind the passing exact ADC and Sydney cloud-control preflight, zero residue and frozen forty-eight-call/USD 1 cohort to Continuity 123 and Compass 108.",
+      "source": "orchestration/agent_inbox/codex/reception-one-receptionist-first-v64-preattempt-receipt.json"
+    },
+    {
+      "id": "close-reception-one-receptionist-first-v64-123",
+      "status": "accepted",
+      "summary": "Close the thirty-one-call cohort at eighteen of twenty-four exact outcomes with six no-release terminals, every ledger consumed and complete cleanup.",
+      "source": "docs/bernie-reception-one-receptionist-first-v64-closeout.md"
+    }
+  ],
+  "unresolved_gates": [
+    "A separately versioned proofreader/correction-feedback repair is required before another occupied cohort; no further v6.4 call is permitted.",
+    "Constraint preservation must follow typed semantic argument roles without requiring the deterministic operator sequence.",
+    "Clarification correction feedback and the bounded natural channel require focused repair.",
+    "Real/product/clinical/historical data, database access, writes, Word, voice, production, deployment and release remain closed."
+  ],
+  "claim_scope": [
+    "The occupied reused cohort proves eighteen of twenty-four exact outcomes and no release from six fail-closed mismatches.",
+    "Both v6.3 defects are repaired, while four proofreader false rejections and two clarification-channel failures remain.",
+    "The reused cohort is development evidence, not an independent holdout.",
+    "Sydney endpoint evidence does not prove Australian physical or sovereign processing."
+  ]
+}

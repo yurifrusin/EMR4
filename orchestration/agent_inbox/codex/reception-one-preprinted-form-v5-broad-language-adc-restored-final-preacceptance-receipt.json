@@ -1,0 +1,91 @@
+{
+  "schema_version": "ariadne.pre_acceptance_receipt.v1",
+  "receipt_id": "reception-one-preprinted-form-v5-broad-language-adc-restored-final-preacceptance-20260730t064000z",
+  "recorded_at": "2026-07-30T06:40:00Z",
+  "result": "passed",
+  "rehydrated_from_receipt": true,
+  "mandatory_rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md",
+    "current_authority_allocation": "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/occupied-authority.json",
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-preprinted-form-v5-broad-language-cohort-plan.md",
+      "docs/bernie-reception-one-preprinted-form-v5-broad-language-adc-restored-continuation-plan.md",
+      "orchestration/agent_inbox/codex/reception-one-preprinted-form-v5-broad-language-adc-restored-final-sol-acceptance.md"
+    ],
+    "protected_evidence_boundaries": [
+      "AGENTS.md#5-protected-evidence-boundary",
+      "AGENTS.md#6-user-decision-boundary"
+    ],
+    "git_refs_and_worktree": {
+      "head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff_current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin_master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin_handoff_current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "unrelated_user_changes_preserved": true
+    }
+  },
+  "revision_binding": {
+    "continuity_graph_revision": 103,
+    "continuity_graph_sha256": "sha256:89680f25b1ad7936172e75345c6c302c2352b2a1edc7712c0f3dfdbbbc23df00",
+    "compass_map_revision": 90,
+    "compass_sha256": "sha256:ad30c5e904689082e149e63c27c7a6a99bc10ad3a81922f127076c269ad716b8",
+    "rendered_compass_sha256": "sha256:089bcd5fffc41009ed527825f5cf024132246c9729dbb62213c2d43e09e34e36",
+    "continuity_validation": "passed",
+    "continuity_audit": "passed",
+    "compass_validation": "passed",
+    "rendered_compass_exact": true
+  },
+  "occupied_result": {
+    "result": "reception_one_preprinted_form_v5_broad_language_capability_threshold_fail_closed",
+    "case_count": 24,
+    "exact_oracle_case_count": 14,
+    "unexpected_outcome_case_count": 10,
+    "correction_turn_case_count": 8,
+    "released_case_count": 19,
+    "terminal_no_release_case_count": 5,
+    "provider_calls": 32,
+    "absolute_provider_call_ceiling": 48,
+    "prompt_tokens": 74390,
+    "candidate_tokens": 10766,
+    "total_tokens": 85156,
+    "estimated_cost_usd": 0.0176181,
+    "cost_ceiling_usd": 1,
+    "all_http_statuses": 200,
+    "all_ledgers_consumed": true,
+    "open_ledgers": 0,
+    "provider_fallback": false,
+    "product_or_database_access": false,
+    "confirmation_or_write": false
+  },
+  "verification": {
+    "focused_typed_language_vertex_continuity_and_compass_tests_passed": 248,
+    "api_spine_and_proposal_tests_passed": 73,
+    "repository_only_verifier_tests_passed": 266,
+    "ruff": "passed",
+    "python_compilation": "passed",
+    "task_json_files_parsed": 179,
+    "task_json_parse_failures": 0,
+    "git_diff_check": "passed_with_pre_existing_line_ending_warnings",
+    "containers_present": 0,
+    "networks_present": 0,
+    "task_images_present": 0,
+    "temporary_credential_contexts_present": 0,
+    "cohort_processes_present": 0
+  },
+  "evidence_hashes": {
+    "occupied_cohort_evidence": "sha256:21f5e149b1ab5adda7d9d72b7037433e5cf694d137d2b784509feebf450493ce",
+    "external_audit_analysis": "sha256:6642cbed0895d359c41808fa34983b77561e88e83978a53c1d17b36726e83af7",
+    "closeout": "sha256:04c991aca0d0cb98edc39c21e199e984b8cb9de9b4cb763f68ccb544b7c28846"
+  },
+  "commit_push_pr_or_ref_move_performed": false,
+  "external_worker_dispatched": false
+}

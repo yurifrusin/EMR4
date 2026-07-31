@@ -1,0 +1,176 @@
+{
+  "schema_version": "ariadne.vertex_sydney_gemini_25_repair_external_audit.v2",
+  "recorded_at": "2026-07-24T08:34:00Z",
+  "audit_result": "ariadne_vertex_sydney_gemini_25_repair_external_audit_pass",
+  "terminal_rehearsal_result": "ariadne_vertex_sydney_gemini_25_occupied_rehearsal_pass",
+  "attempt": {
+    "successful_attempt_id": "gemini-25-repair-002",
+    "successful_ledger_id": "gemini-25-repair-ledger-002",
+    "successful_attempt_provider_calls": 1,
+    "evidence_backed_occupied_reruns_after_repair_001": 1,
+    "blind_identical_retries": 0,
+    "calls_after_success": 0,
+    "fallbacks": 0,
+    "terminal_disposition": "success_stop_no_further_provider_call"
+  },
+  "binding": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "oauth_scope": "https://www.googleapis.com/auth/cloud-platform",
+    "required_prediction_permission": "aiplatform.endpoints.predict",
+    "api_key_authentication_used": false,
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "request_path": "/v1/projects/bernie-emr4-dev/locations/australia-southeast1/publishers/google/models/gemini-2.5-flash:generateContent",
+    "automatic_fallback": false,
+    "provider_tools": false
+  },
+  "typewriter_keys": {
+    "cell_request_hash": "sha256:92ec4d5e0949e91dccf10db195495f786b109fde1a32e3f842787efd55f7f77f",
+    "provider_request_hash": "sha256:784a68a5d4f45d62d2dbe8ab3b0388585d5938abdb8185ead99952eb41375357",
+    "provider_schema_hash": "sha256:21a2208ab1dc4b73f6134bd378eb532a6b5c974e822985e23c5aa7ecc5d37621",
+    "event_sequence": [
+      "broker_ready",
+      "request_admitted",
+      "ledger_consumed",
+      "provider_request_constructed",
+      "provider_call_started",
+      "provider_call_completed",
+      "proofreader_completed",
+      "release_committed"
+    ],
+    "event_count": 8,
+    "hash_chain_valid": true,
+    "chain_head": "sha256:763b600bdfdb69af25347f1b0e2b66acb1c7f796a7fc438fd5a353c8538db8ec"
+  },
+  "provider_result": {
+    "http_status": 200,
+    "latency_ms": 1108,
+    "model_version": "gemini-2.5-flash",
+    "token_usage": {
+      "prompt_tokens": 176,
+      "candidate_tokens": 50,
+      "total_tokens": 226
+    },
+    "cost_accounting": {
+      "application_ceiling_usd": 1,
+      "frozen_input_price_per_million_tokens_usd": 0.15,
+      "frozen_output_price_per_million_tokens_usd": 0.6,
+      "successful_call_usage_estimate_usd": 0.0000564,
+      "actual_provider_billing": "not_supplied",
+      "ceiling_exceeded": false
+    }
+  },
+  "proofreader": {
+    "disposition": "released",
+    "findings": [],
+    "safe_repairs": [],
+    "released_field_manifest": [
+      "summary",
+      "total_tiles",
+      "risk_level",
+      "evidence_ids"
+    ],
+    "released_authored_synthetic_values": {
+      "summary": "Project Lark has 5 tiles: 3 blue and 2 green.",
+      "total_tiles": 5,
+      "risk_level": "none",
+      "evidence_ids": [
+        "fact_alpha",
+        "fact_beta"
+      ]
+    },
+    "grounding": "exact_authored_synthetic_evidence",
+    "command_authority": false,
+    "freshness": "fresh",
+    "supersession": "current",
+    "request_retry_count": 0,
+    "human_gate": false,
+    "edge_aborted": false,
+    "atomic_release": true
+  },
+  "lineage": {
+    "historical_primary_ledger": {
+      "ledger_id": "gemini-25-primary-ledger-001",
+      "status": "consumed",
+      "provider_calls_consumed": 1,
+      "disposition": "bounded_http_400_before_candidate"
+    },
+    "repair_001_occupied_ledger": {
+      "ledger_id": "gemini-25-repair-ledger-001",
+      "status": "consumed",
+      "provider_calls_consumed": 1,
+      "disposition": "bounded_http_400_before_candidate"
+    },
+    "repair_002_occupied_ledger": {
+      "ledger_id": "gemini-25-repair-ledger-002",
+      "status": "consumed",
+      "provider_calls_consumed": 1,
+      "disposition": "typed_release_pass"
+    },
+    "total_occupied_calls": 3,
+    "provider_free_ledgers_opened_in_repair_run": 3,
+    "all_opened_ledgers_consumed": true,
+    "further_call_disposition": "closed_on_success"
+  },
+  "vertex_control_posture": {
+    "usable_exact_impersonated_adc_verified": true,
+    "cloud_platform_scope_verified": true,
+    "prediction_only_role_binding_and_permission_verified": true,
+    "vertex_data_access_audit_verified": true,
+    "request_response_logging_disabled_or_absent_verified": true,
+    "project_cache_disablement_verified": true,
+    "zero_user_managed_service_account_keys_verified": true,
+    "regional_model_catalogue_presence_verified": true,
+    "regional_endpoint_exact": true,
+    "automatic_fallback_disabled": true,
+    "external_state_changed": false
+  },
+  "cleanup": {
+    "task_containers": 0,
+    "task_networks": 0,
+    "task_images": 0,
+    "task_broker_processes": 0,
+    "task_temporary_tokens": 0,
+    "task_temporary_contexts": 0,
+    "daemon_wide_prune_performed": false
+  },
+  "artifact_hashes": {
+    "successful_occupied_evidence": "sha256:7b6d8b024d3422096acc2163747f627ead89f3537bb676910b583bfe53249240",
+    "successful_occupied_ledger": "sha256:baf706c5a4e723408f0601dfd3abf26d67b6cf9e2127554f1e4c417b982484d2",
+    "successful_occupied_hash_chain": "sha256:f9a8fc7ee8164f9bff208517da9a5438107be0a28636ae46d5d9193b09c11956",
+    "successful_precall_gate": "sha256:0382d3d750de6973e8b3034451d91671a45e0924ffdcc460b9e9317f9da6f842",
+    "successful_dry_run_evidence": "sha256:6c95f5b98683eb6a73c9ebd5a9dddc9c86b02f75474448c0a1c401ac36ef6fca",
+    "successful_dry_run_ledger": "sha256:e6286ecbc1dc586702f98f1d334a18bf445d73e9b4e9543a6a8790c5aa09e136",
+    "successful_dry_run_hash_chain": "sha256:6745217b86739530261bc3d1128acc4e7371097d0487fe6db2d15aae78e9756e",
+    "failed_setup_dry_run_ledger": "sha256:bfc6e75499f2571f282023938bd9f3abc1d869bdaf89e88c8de37b7929253ecf",
+    "failed_setup_dry_run_hash_chain": "sha256:7088d68eeada09ee4bb31b765c2951a878a41c1ed4a01cd2d70accfd4fbfef80",
+    "same_session_tranche_3_evidence": "sha256:2700012dd097258986a433dda96367dad3af2b309f39296923c9e2b85bb3c0f5",
+    "iterative_authority_contract": "sha256:01f262dd0a160e285eda41c6e341351200f61c16970ac8f4c06f170d233f087b",
+    "closeout_residue_evidence": "sha256:5a52c57980af4cc3b5639e8d4f51724dd6a41ad9bd6ec24c962e6cc33dc7f19f",
+    "prior_failed_occupied_evidence": "sha256:de4331a4ef5d494203c1201b5cad5256c19520bf0d493d16f52697d2cc3d4d50",
+    "prior_failed_occupied_ledger": "sha256:ce0167f737a2b7051f54ec03f049f99b86fd71bfd4c30c89d1daf61a8b4ce612",
+    "prior_failed_occupied_hash_chain": "sha256:d9634e34a9e05361f4db04615fb52fa1cfe5389edec1af02e2b91714e77e4e1e"
+  },
+  "explicit_exclusions": [
+    "credentials",
+    "access_tokens",
+    "refresh_tokens",
+    "api_key_information",
+    "raw_authentication_responses",
+    "raw_cloud_control_responses",
+    "raw_prompts",
+    "raw_provider_responses",
+    "free_form_provider_messages",
+    "rejected_draft_payloads",
+    "hidden_reasoning",
+    "chain_of_thought",
+    "product_or_database_data",
+    "patient_or_health_information",
+    "human_or_product_delivery"
+  ],
+  "claim_limit": "The audit proves one small authored-synthetic typed request was accepted and answered by gemini-2.5-flash through the configured australia-southeast1 Vertex locational endpoint using the verified keyless Bernie impersonated-ADC boundary; the deterministic proofreader admitted exactly four grounded fields, all opened ledgers are consumed, no fallback or post-success call occurred, and task-scoped cleanup is complete. It does not prove Australian physical or sovereign processing, provider internals, exact provider billing, production suitability, or safety on product-derived, patient, health or clinical data."
+}

@@ -1,0 +1,132 @@
+{
+  "api_key_authentication_used": false,
+  "appointment_confirmation_performed": false,
+  "appointment_write_performed": false,
+  "data_class": "authored_synthetic",
+  "database_after": {
+    "counts": {
+      "appointment_audit_log": 0,
+      "appointment_command_idempotency": 0,
+      "appointments": 6,
+      "bernie_booking_sessions": 0,
+      "bernie_session_events": 0,
+      "diary_committed_events": 0
+    },
+    "database": "gp_pms_reception_one_extended_runtime_7c37b24a_20260730",
+    "identifiers_recorded": false,
+    "patient_details_recorded": false,
+    "schema_version": "bernie.meta-grid-live-local.database-readback.v1",
+    "sha256": {
+      "appointment_audit_log": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "appointment_command_idempotency": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "appointments": "3e3c05e6aa79618ee442e897bc597b10bc4ba63187d57721a7dc84ff8f75dc9a",
+      "bernie_booking_sessions": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bernie_session_events": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "diary_committed_events": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "synthetic_only": true
+  },
+  "database_before": {
+    "counts": {
+      "appointment_audit_log": 0,
+      "appointment_command_idempotency": 0,
+      "appointments": 6,
+      "bernie_booking_sessions": 0,
+      "bernie_session_events": 0,
+      "diary_committed_events": 0
+    },
+    "database": "gp_pms_reception_one_extended_runtime_7c37b24a_20260730",
+    "identifiers_recorded": false,
+    "patient_details_recorded": false,
+    "schema_version": "bernie.meta-grid-live-local.database-readback.v1",
+    "sha256": {
+      "appointment_audit_log": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "appointment_command_idempotency": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "appointments": "3e3c05e6aa79618ee442e897bc597b10bc4ba63187d57721a7dc84ff8f75dc9a",
+      "bernie_booking_sessions": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bernie_session_events": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "diary_committed_events": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "synthetic_only": true
+  },
+  "database_identifier_recorded": false,
+  "family_results": [
+    {
+      "adapter_kind": "update_proposal",
+      "adapter_safe": true,
+      "candidate_count": 4,
+      "goal": "move",
+      "operation_id": "proposeAppointmentUpdate",
+      "proofreader_disposition": "admit",
+      "proposal_only": true,
+      "provider_calls": 0,
+      "requires_confirmation": true,
+      "result": "proposal_ready",
+      "screenshot": "orchestration/continuity/reception-one-extended-proposal-runtime/live-local-1-move.png",
+      "screenshot_sha256": "a63487cb9db6dd0d847a848b373233072b39a347f1e6e5b9c194240521dd7d91",
+      "write_performed": false
+    },
+    {
+      "adapter_kind": "update_proposal",
+      "adapter_safe": true,
+      "candidate_count": 0,
+      "goal": "resize",
+      "operation_id": "proposeAppointmentUpdate",
+      "proofreader_disposition": "admit",
+      "proposal_only": true,
+      "provider_calls": 0,
+      "requires_confirmation": true,
+      "result": "proposal_ready",
+      "screenshot": "orchestration/continuity/reception-one-extended-proposal-runtime/live-local-2-resize.png",
+      "screenshot_sha256": "49869106f7690fa94506c6009ae1baadce2e593d06edbaadc00bba0e5a04a8cd",
+      "write_performed": false
+    },
+    {
+      "adapter_kind": "delete_proposal",
+      "adapter_safe": true,
+      "candidate_count": 0,
+      "goal": "cancel",
+      "operation_id": "proposeAppointmentDelete",
+      "proofreader_disposition": "admit",
+      "proposal_only": true,
+      "provider_calls": 0,
+      "requires_confirmation": true,
+      "result": "proposal_ready",
+      "screenshot": "orchestration/continuity/reception-one-extended-proposal-runtime/live-local-3-cancel.png",
+      "screenshot_sha256": "bf8dc36414347755c46d67237ef4716accaf1cb88b320d93672e86dc9283ca22",
+      "write_performed": false
+    },
+    {
+      "adapter_kind": "squeeze_in_assessment",
+      "adapter_safe": true,
+      "candidate_count": 8,
+      "goal": "squeeze_in_assessment",
+      "operation_id": null,
+      "proofreader_disposition": "admit",
+      "proposal_only": true,
+      "provider_calls": 0,
+      "requires_confirmation": true,
+      "result": "proposal_ready",
+      "screenshot": "orchestration/continuity/reception-one-extended-proposal-runtime/live-local-4-squeeze_in_assessment.png",
+      "screenshot_sha256": "7ef8ca5a6ef403ae95861c4353d2207d8bde1fc5503f5f132c0cb5fec9f82748",
+      "write_performed": false
+    }
+  ],
+  "forbidden_write_surfaces_unchanged": true,
+  "loopback_family": "ipv6",
+  "network": {
+    "allowed_hosts": [
+      "::1",
+      "127.0.0.1",
+      "localhost"
+    ],
+    "external_host_count": 0,
+    "route_call_count": 4
+  },
+  "provider_calls": 0,
+  "provider_environment_forwarded": false,
+  "raw_database_identifiers_retained": false,
+  "request_interception_used": false,
+  "result": "extended_runtime_live_local_browser_backend_postgres_pass",
+  "schema_version": "reception.one.extended_proposal_runtime.live_local.v1"
+}

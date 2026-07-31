@@ -1,0 +1,13 @@
+{
+  "backend_process_absent": true,
+  "database_cleanup": {
+    "cleanup": "dropped_exact_verified_disposable_database",
+    "database": "gp_pms_reception_one_dual_planner_6f4e29c1_20260730",
+    "recoverable": false
+  },
+  "ownership_marker_verified": true,
+  "post_attempt_residue_clear": true,
+  "recovery_kind": "provider_free_cleanup_and_adapter_replay",
+  "runtime_directory_absent": true,
+  "schema_version": "reception.one.default_off_dual_planner.cleanup.v1"
+}

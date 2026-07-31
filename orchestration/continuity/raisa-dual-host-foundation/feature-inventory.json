@@ -1,0 +1,182 @@
+{
+  "schema_version": "raisa.dual-host-feature-inventory.v1",
+  "recorded_on": "2026-07-31",
+  "candidate_nomenclature": {
+    "master_brand": "Raisa",
+    "clinician_workspace": "Clinician One",
+    "reception_workspace": "Reception One",
+    "status": "candidate_only_no_public_rename",
+    "internal_technical_identity": "EMR4"
+  },
+  "evidence_labels": {
+    "source_inventory": "repository_local_read_only",
+    "host_profile_matrix": "authored_synthetic_deterministic_fixture",
+    "word_desktop": "accepted_existing_supervised_host_evidence",
+    "word_online": "platform_blocked_before_taskpane_execution"
+  },
+  "integrated_reception_domain": {
+    "invariant": "one_backend_owned_reception_truth_with_role_scoped_surfaces",
+    "staff_surface": "reception_one_full_authorised_workflow",
+    "clinician_surface": "clinician_role_scoped_view_and_coordination",
+    "future_online_booking_surface": "patient_role_scoped_booking_contract_only",
+    "future_arrival_surface": "rayleen_patient_role_scoped_arrival_contract_only",
+    "third_party_primary_reception_product": "not_selected",
+    "external_integrations": "future_subordinate_typed_adapters_only",
+    "current_external_patient_authority": false,
+    "current_online_booking_authority": false,
+    "current_rayleen_authority": false,
+    "current_arrival_write_authority": false
+  },
+  "delivery_direction": {
+    "primary_model": "cloud_first_practice_management_as_a_service",
+    "practice_setup_goal": "minimal_local_infrastructure",
+    "shared_contract_consumers": [
+      "word_desktop",
+      "word_online",
+      "native_diary",
+      "reception_one",
+      "future_online_booking",
+      "future_rayleen_arrival"
+    ],
+    "future_local_model_role": "optional_subordinate_privacy_or_latency_edge",
+    "parallel_clinical_or_reception_truth_permitted": false,
+    "current_cloud_resource_authority": false,
+    "current_deployment_authority": false,
+    "current_production_authority": false
+  },
+  "features": [
+    {
+      "feature_id": "clinician.patient_file_context",
+      "candidate_surface": "clinician_one",
+      "source_state": "implemented",
+      "host_prerequisites": [
+        "word_runtime",
+        "custom_xml_parts_or_document_title_fallback"
+      ],
+      "application_authority": "authenticated_product_context_required",
+      "desktop_evidence": "legacy_source_present_not_reverified_by_this_increment",
+      "word_online_evidence": "legacy_fallback_present_not_reverified_by_this_increment",
+      "foundation_action": "inventory_only"
+    },
+    {
+      "feature_id": "clinician.consultation_start_and_bounded_note_read",
+      "candidate_surface": "clinician_one",
+      "source_state": "implemented",
+      "host_prerequisites": [
+        "word_runtime"
+      ],
+      "application_authority": "explicit_clinician_start_and_patient_context_required",
+      "desktop_evidence": "legacy_source_present_not_reverified_by_this_increment",
+      "word_online_evidence": "not_reverified",
+      "foundation_action": "host_profile_only"
+    },
+    {
+      "feature_id": "clinician.background_analysis",
+      "candidate_surface": "clinician_one",
+      "source_state": "implemented_direct_backend_call",
+      "host_prerequisites": [
+        "word_runtime",
+        "network"
+      ],
+      "application_authority": "access_ai_product_entitlement_and_clinical_context_required",
+      "desktop_evidence": "not_reverified",
+      "word_online_evidence": "not_reverified",
+      "foundation_action": "closed_requires_access_ai_migration"
+    },
+    {
+      "feature_id": "clinician.scribe_capture",
+      "candidate_surface": "clinician_one",
+      "source_state": "implemented_direct_browser_media",
+      "host_prerequisites": [
+        "media_devices",
+        "media_recorder",
+        "host_specific_microphone_permission"
+      ],
+      "application_authority": "explicit_clinician_gesture_and_voice_authority_required",
+      "desktop_evidence": "not_reverified",
+      "word_online_evidence": "not_reverified",
+      "foundation_action": "classify_capability_only_no_capture"
+    },
+    {
+      "feature_id": "clinician.scribe_submission",
+      "candidate_surface": "clinician_one",
+      "source_state": "implemented_direct_backend_call",
+      "host_prerequisites": [
+        "network"
+      ],
+      "application_authority": "access_ai_clinical_entitlement_audit_and_provider_policy_required",
+      "desktop_evidence": "not_reverified",
+      "word_online_evidence": "not_reverified",
+      "foundation_action": "closed_requires_access_ai_migration"
+    },
+    {
+      "feature_id": "clinician.review_and_finalise",
+      "candidate_surface": "clinician_one",
+      "source_state": "implemented_command_path",
+      "host_prerequisites": [
+        "word_runtime",
+        "network"
+      ],
+      "application_authority": "explicit_clinician_review_typed_command_audit_and_idempotency_required",
+      "desktop_evidence": "not_reverified",
+      "word_online_evidence": "not_reverified",
+      "foundation_action": "inventory_only_no_command"
+    },
+    {
+      "feature_id": "reception.ordinary_diary_launch",
+      "candidate_surface": "reception_one",
+      "source_state": "implemented",
+      "host_prerequisites": [
+        "dialog_api"
+      ],
+      "application_authority": "existing_auth_message_separate",
+      "desktop_evidence": "supported_by_existing_dialog_descendant",
+      "word_online_evidence": "localhost_platform_blocked",
+      "foundation_action": "shared_host_profile"
+    },
+    {
+      "feature_id": "reception.contextual_launch",
+      "candidate_surface": "reception_one",
+      "source_state": "accepted_closed_contract",
+      "host_prerequisites": [
+        "dialog_api",
+        "crypto_random_uuid"
+      ],
+      "application_authority": "zero_authority_navigation_context",
+      "desktop_evidence": "accepted_existing_supervised_host_evidence",
+      "word_online_evidence": "localhost_platform_blocked",
+      "foundation_action": "shared_host_profile"
+    },
+    {
+      "feature_id": "reception.compact_companion",
+      "candidate_surface": "reception_one",
+      "source_state": "accepted_default_off_authored_synthetic_contract",
+      "host_prerequisites": [
+        "dialog_api",
+        "crypto_random_uuid"
+      ],
+      "application_authority": "provider_false_command_false_write_false",
+      "desktop_evidence": "accepted_existing_supervised_host_evidence",
+      "word_online_evidence": "localhost_platform_blocked",
+      "foundation_action": "shared_host_profile"
+    }
+  ],
+  "closed_boundaries": [
+    "public_rename",
+    "artwork_or_trademark_action",
+    "external_patient_client",
+    "online_booking_runtime",
+    "rayleen_arrival_runtime",
+    "third_party_primary_booking_product",
+    "provider_call",
+    "microphone_capture",
+    "document_content_access_by_host_runtime",
+    "patient_or_clinical_context",
+    "backend_or_database_access",
+    "clinical_or_appointment_command",
+    "write",
+    "production",
+    "deployment",
+    "release"
+  ]
+}

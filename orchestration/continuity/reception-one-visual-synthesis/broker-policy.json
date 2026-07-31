@@ -1,0 +1,47 @@
+{
+  "schema_version": "ariadne.vertex_sydney_broker_policy.v1",
+  "policy_id": "reception-one-visual-synthesis-vertex-sydney-v1",
+  "provider": "google_vertex_ai",
+  "model_id": "gemini-2.5-flash",
+  "project": "bernie-emr4-dev",
+  "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+  "authentication": "keyless_impersonated_service_account_adc",
+  "oauth_scope": "https://www.googleapis.com/auth/cloud-platform",
+  "location": "australia-southeast1",
+  "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+  "request_path": "/v1/projects/bernie-emr4-dev/locations/australia-southeast1/publishers/google/models/gemini-2.5-flash:generateContent",
+  "allowed_identity_hosts": [
+    "oauth2.googleapis.com",
+    "iamcredentials.googleapis.com"
+  ],
+  "allowed_data_plane_hosts": [
+    "australia-southeast1-aiplatform.googleapis.com"
+  ],
+  "rejected_hosts": [
+    "generativelanguage.googleapis.com",
+    "aiplatform.googleapis.com",
+    "api.openai.com",
+    "api.deepseek.com",
+    "chat.deepseek.com",
+    "api.buildwithfern.com"
+  ],
+  "automatic_fallback": false,
+  "api_key_authentication": false,
+  "service_account_key_authentication": false,
+  "provider_tools": false,
+  "function_calling": false,
+  "grounding": false,
+  "retrieval": false,
+  "explicit_context_cache": false,
+  "thinking_budget": 0,
+  "temperature": 0,
+  "max_output_tokens": 1024,
+  "maximum_provider_calls": 1,
+  "maximum_request_bytes": 16384,
+  "maximum_provider_response_bytes": 32768,
+  "maximum_provider_error_bytes": 65536,
+  "maximum_sanitized_error_message_bytes": 2048,
+  "application_cost_ceiling_usd": 1.0,
+  "input_price_per_million_tokens_usd": 0.15,
+  "output_price_per_million_tokens_usd": 0.6
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "validate_and_close_the_default_off_dual_planner_occupied_result_then_continue_with_provider_free_development_only_bureau_runtime_ui_wiring",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external implementation worker is selected for the tightly coupled closeout and UI wiring continuation."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external peer worker is selected; deterministic acceptance remains local."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "AGENTS.md was reread completely after compaction, including protected-evidence section 5 and user-decision section 6.",
+        "The default-off dual-planner plan, threat model, provider-free acceptance, occupied closeout and final Sol review were reread.",
+        "The API Spine ADR, programme, Access AI design, Bernie release gates, artifact tests and API Steward checklist were reread.",
+        "HEAD is 5b1ea7952fb08eea333da0e63f166d3895ccea32; master, handoff/current, origin/master and origin/handoff/current are 4974075b31035d599e081d68e3b85e04a897baa1.",
+        "The dirty worktree was enumerated and all unrelated user changes remain preserved.",
+        "The occupied result consumed exactly one Sydney Vertex call and permits no further provider call for its closeout.",
+        "The next work is limited to provider-free, development-only, authored-synthetic UI wiring over the existing proposal-only route."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

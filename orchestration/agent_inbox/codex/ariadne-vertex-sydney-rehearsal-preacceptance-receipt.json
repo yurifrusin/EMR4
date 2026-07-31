@@ -1,0 +1,53 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "verifier_acceptance",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md Current Baton plus the new fail-closed Sydney Vertex descendant",
+    "current_authority_allocation": "docs/ariadne-vertex-sydney-bounded-work-cell-authority.md",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-vertex-sydney-bounded-work-cell-rehearsal-plan.md",
+      "orchestration/continuity/ariadne-vertex-sydney/provider-admission-policy.json",
+      "orchestration/continuity/ariadne-vertex-sydney/tranche-1-admission-evidence.json",
+      "docs/ariadne-vertex-sydney-bounded-work-cell-rehearsal-closeout.md"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5-6 and the preserved no-substitution, no-credential, no-cloud-mutation and no-product authority",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true
+    }
+  },
+  "acceptance_disposition": {
+    "result": "ariadne_vertex_sydney_provider_admission_blocked",
+    "failed_gate": "gemini_3_5_flash_not_published_for_australia_southeast1",
+    "successor_tranches_opened": false,
+    "credentials_or_cloud_state_inspected": false,
+    "provider_calls": 0,
+    "provider_retries": 0,
+    "provider_or_regional_fallbacks": 0,
+    "occupied_ledgers_opened": 0,
+    "occupied_ledgers_unconsumed": 0,
+    "containers_or_networks_started": 0,
+    "external_state_mutations": 0,
+    "fresh_yuri_intervention_required": true
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

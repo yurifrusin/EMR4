@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "design_and_run_a_revision_bound_receptionist_first_v6_paired_development_study_over_the_closed_twenty_four_case_authored_synthetic_cohort",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is selected; this serial prompt, schema, proofreader and one-use-ledger tranche remains Sol-owned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude provider or transport is selected or authorised."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external peer worker is selected; acceptance remains deterministic local Sol evidence."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri authorised the receptionist-first prompt, bounded thinking budget and rerun of the closed twenty-four-case authored-synthetic cohort.",
+        "Yuri requested both schema-admitted natural receptionist output and the typed bureau form for comparison in a live local notebook.",
+        "Yuri authorised retention of thinking-token counts but accepted that hidden chain-of-thought content will not be requested or retained.",
+        "AGENTS.md, the active v5 broad-language plan, continuation closeout, authority, audit analysis and Sol acceptance were read completely.",
+        "AGENTS.md sections 5 and 6 restore protected-holdout, historical-diary, real-data, product, database, confirmation, write, deployment and release boundaries.",
+        "The API Spine ADR, programme, Access AI design, Bernie release gates and API Spine artifact tests were read before design."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No subagent or external worker is selected; the tranche is serial and tightly coupled to revision binding and one-use ledgers."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

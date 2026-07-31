@@ -1,0 +1,126 @@
+{
+  "schema_version": "raisa.cloud_run_public_access_and_route_evidence.v1",
+  "observed_at": "2026-07-31T19:32:27.7506405+10:00",
+  "result": "pass",
+  "scope": {
+    "project": "bernie-emr4-dev",
+    "region": "australia-southeast1",
+    "service": "raisa-office-web-dev",
+    "hostname": "raisa-office-web-dev-nnbntbx5yq-ts.a.run.app"
+  },
+  "cloud_run_control": {
+    "invoker_iam_check_disabled": true,
+    "all_users_iam_binding_count": 0,
+    "latest_ready_revision": "raisa-office-web-dev-00005-w82",
+    "traffic_percent_to_latest_revision": 100,
+    "image_digest": "sha256:66613f83cf996fe31ae0255997ad306b4e98b4519b56c14d4d88ed211cdc8f1b",
+    "runtime_service_account": "raisa-office-web-runtime@bernie-emr4-dev.iam.gserviceaccount.com"
+  },
+  "route_matrix": [
+    {
+      "route_class": "health",
+      "method": "GET",
+      "path": "/health",
+      "expected_status": 200,
+      "observed_status": 200
+    },
+    {
+      "route_class": "hosting_policy",
+      "method": "GET",
+      "path": "/hosting-policy.json",
+      "expected_status": 200,
+      "observed_status": 200
+    },
+    {
+      "route_class": "word_taskpane",
+      "method": "GET",
+      "path": "/taskpane.html",
+      "expected_status": 200,
+      "observed_status": 200
+    },
+    {
+      "route_class": "synthetic_diary",
+      "method": "GET",
+      "path": "/diary/diary.html?smoke=true",
+      "expected_status": 200,
+      "observed_status": 200
+    },
+    {
+      "route_class": "content_manifest",
+      "method": "GET",
+      "path": "/content-manifest.json",
+      "expected_status": 200,
+      "observed_status": 200
+    },
+    {
+      "route_class": "head_static",
+      "method": "HEAD",
+      "path": "/taskpane.html",
+      "expected_status": 200,
+      "observed_status": 200
+    },
+    {
+      "route_class": "unknown",
+      "method": "GET",
+      "path": "/not-a-route",
+      "expected_status": 404,
+      "observed_status": 404
+    },
+    {
+      "route_class": "api",
+      "method": "GET",
+      "path": "/api/v1/appointments",
+      "expected_status": 404,
+      "observed_status": 404
+    },
+    {
+      "route_class": "source_map",
+      "method": "GET",
+      "path": "/taskpane.js.map",
+      "expected_status": 404,
+      "observed_status": 404
+    },
+    {
+      "route_class": "unsupported_method",
+      "method": "POST",
+      "path": "/taskpane.html",
+      "expected_status": 405,
+      "observed_status": 405
+    },
+    {
+      "route_class": "encoded_traversal",
+      "method": "GET",
+      "path": "/%2e%2e/server.mjs",
+      "same_origin_redirect_status": 302,
+      "final_expected_status": 404,
+      "final_observed_status": 404
+    }
+  ],
+  "header_and_policy_findings": {
+    "cache_control": "no-store",
+    "content_security_policy_self_only": true,
+    "word_frame_ancestors_present": true,
+    "connect_src_closed": true,
+    "microphone_disabled": true,
+    "referrer_policy": "no-referrer",
+    "x_content_type_options": "nosniff",
+    "authored_synthetic_only": true,
+    "all_product_authorities_false": true
+  },
+  "manifest_validation": {
+    "manifest_path": "orchestration/continuity/raisa-cloud-run-public-access-word-online-verification/manifest.xml",
+    "office_addin_manifest_validation": "pass",
+    "source_location_status": 200,
+    "app_domain_status": 200,
+    "icon_32_status": 200,
+    "icon_80_status": 200,
+    "permissions": "ReadDocument"
+  },
+  "explicit_exclusions": [
+    "No allUsers IAM binding was added.",
+    "No IAM policy or organisation policy was changed.",
+    "No other Cloud Run service was changed.",
+    "No provider, backend, database, product, patient, health or clinical data path was opened.",
+    "This evidence does not prove Word Online add-in execution."
+  ]
+}

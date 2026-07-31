@@ -1,0 +1,30 @@
+{
+  "schema_version": "ariadne.preacceptance_receipt.v1",
+  "receipt_id": "reception-one-preprinted-form-v5-broad-language-cohort-preacceptance-20260730t052639z",
+  "recorded_at": "2026-07-30T05:26:39Z",
+  "result": "blocked_external_intervention_required",
+  "rehydrated_from_receipt": true,
+  "mandatory_rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "provider_free_result": "passed_24_cases",
+  "occupied_result": "not_run",
+  "blocking_gate": "existing_bernie_impersonated_adc_noninteractive_refresh",
+  "reason_code": "impersonated_adc_refresh_failed",
+  "provider_calls_performed": 0,
+  "occupied_ledgers_opened": 0,
+  "typed_releases": 0,
+  "fallback": false,
+  "external_state_changed": false,
+  "cleanup_complete": true,
+  "revision_binding_before_blocked_preflight": {
+    "continuity_graph_revision": 100,
+    "compass_map_revision": 87
+  },
+  "required_intervention": "Yuri restores the existing Bernie keyless impersonated ADC and requests a fresh read-only preflight.",
+  "commit_push_pr_or_ref_move_authorized": false
+}

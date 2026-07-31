@@ -1,0 +1,148 @@
+{
+  "schema_version": "reception.one.product_context_proposal_runtime.independent_audit_analysis.v1",
+  "result": "reception_one_product_context_proposal_runtime_pass_with_closed_sequencing_deviation",
+  "attempt_id": "reception-one-product-context-occupied-001",
+  "ledger_id": "reception-one-product-context-ledger-001",
+  "provider_call_count": 1,
+  "calls_after_first_admitted_result": 0,
+  "exact_binding": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com"
+  },
+  "provider_outcome": {
+    "http_status": 200,
+    "status": "completed",
+    "latency_ms": 1634,
+    "usage": {
+      "prompt_tokens": 1298,
+      "candidate_tokens": 209,
+      "total_tokens": 1507
+    }
+  },
+  "cost_guard": {
+    "application_ceiling_usd": 1,
+    "maximum_provider_calls": 1,
+    "request_input_token_ceiling": 65536,
+    "request_output_token_ceiling": 1024,
+    "conservative_upper_bound_usd": 0.0104448,
+    "actual_usage_estimate_usd": 0.0003201,
+    "invoice_cost_observed": false,
+    "official_pricing_basis": {
+      "input_usd_per_million_tokens": 0.15,
+      "output_usd_per_million_tokens": 0.6,
+      "source": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+      "basis_recorded_at": "2026-07-29"
+    }
+  },
+  "proofreader": {
+    "disposition": "admit",
+    "admitted_operator_ids": [
+      "resolve_patient_reference",
+      "resolve_practitioner_reference",
+      "resolve_date_expression",
+      "search_available_slots",
+      "prepare_create_proposal"
+    ],
+    "safe_repairs": [],
+    "wire_safe_repairs": [],
+    "violations": []
+  },
+  "release": {
+    "atomic_release": true,
+    "human_gate": true,
+    "released_field_manifest": [
+      "$.final_output.api_spine_operation_id",
+      "$.final_output.appointment_ref",
+      "$.final_output.candidate_slot_ids",
+      "$.final_output.duration_minutes",
+      "$.final_output.kind",
+      "$.final_output.patient_ref",
+      "$.final_output.practitioner_ref",
+      "$.final_output.proposal_family",
+      "$.final_output.requires_human_confirmation",
+      "$.final_output.status",
+      "$.final_output.warning_codes",
+      "$.final_output.write_performed"
+    ],
+    "released_values": {
+      "api_spine_operation_id": "proposeAppointmentCreate",
+      "appointment_ref": null,
+      "candidate_slot_ids": [
+        "synthetic-slot-product-context-1415",
+        "synthetic-slot-product-context-1445"
+      ],
+      "duration_minutes": 15,
+      "kind": "proposal_candidate",
+      "patient_ref": "synthetic-patient-product-context",
+      "practitioner_ref": "synthetic-practitioner-product-context",
+      "proposal_family": "create",
+      "requires_human_confirmation": true,
+      "status": null,
+      "warning_codes": [
+        "no_reservation",
+        "staff_confirmation_required",
+        "staff_selection_required"
+      ],
+      "write_performed": false
+    },
+    "write_performed": false
+  },
+  "durable_audit": {
+    "event_count": 9,
+    "hash_chain_valid": true,
+    "event_types": [
+      "broker_ready",
+      "request_admitted",
+      "ledger_consumed",
+      "provider_request_constructed",
+      "provider_call_started",
+      "provider_call_received",
+      "provider_call_completed",
+      "proofreader_completed",
+      "release_committed"
+    ]
+  },
+  "freshness": "fresh",
+  "supersession": "current",
+  "retry": {
+    "authorised": false,
+    "performed": false,
+    "count": 0,
+    "reason": "single_call_ceiling_consumed"
+  },
+  "cleanup_and_residue_passed": true,
+  "sequencing_control": {
+    "required": "The exact live-local browser to FastAPI to PostgreSQL provider-free proof had to pass before the occupied gate.",
+    "observed_at_occupied_call": "The evidence then available combined a real API/PostgreSQL test with a separate browser fixture; it did not prove one uninterrupted browser-to-PostgreSQL request.",
+    "deviation": true,
+    "historical_sequence_rewritten": false,
+    "occupied_call_repeated": false,
+    "remediation": {
+      "result": "live_local_browser_backend_postgres_provider_free_pass",
+      "evidence": "orchestration/continuity/reception-one-product-context-proposal-runtime/live-local-browser-backend-postgres-evidence.json",
+      "request_interception_used": false,
+      "route_call_count": 1,
+      "external_host_count": 0,
+      "provider_calls": 0,
+      "forbidden_write_surfaces_unchanged": true,
+      "database_cleanup": "dropped_exact_verified_disposable_database"
+    },
+    "risk_limit": "The out-of-order occupied call still used only the separately authored-synthetic static frame, exact approved Vertex lane, consumed ledger and isolated proofreader path. It received no live-local database content and opened no product or write authority."
+  },
+  "explicit_exclusions": {
+    "api_key_authentication_used": false,
+    "provider_or_regional_fallback": false,
+    "product_or_database_access_by_model": false,
+    "appointment_write_or_confirmation": false,
+    "credentials_or_tokens_retained": false,
+    "raw_prompt_or_response_retained": false,
+    "chain_of_thought_retained": false,
+    "human_or_product_delivery": false
+  },
+  "candid_limit": "This proves one default-off authored-synthetic product-context-shaped proposal path, the configured and observed Sydney Vertex locational request path, bounded Gemini composition, deterministic proofreader admission, and typed proposal-only release. It does not prove Australian physical or sovereign processing, safety for real or product-derived data, general language coverage, appointment mutation, production fitness, deployment or release readiness."
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "reception.one.receptionist_first_v69.frozen_contract.v1",
+  "recorded_at": "2026-07-30T12:32:00Z",
+  "result": "reception_one_receptionist_first_v69_contract_frozen",
+  "predecessor_result": "reception_one_receptionist_first_v68_full_cohort_pass",
+  "system_instruction_sha256": "sha256:ea2ee027f4c82788168c306c39dc2babd278649a4f483197677941c1073e5b0c",
+  "model_output_schema_file_sha256": "sha256:b46d426eb081e1d953849bdd6630e7018f38073de6622dde8f278c34308ad4d5",
+  "turn_input_schema_file_sha256": "sha256:f5563fb49fec9c53bf03e5f5c823aab4eb57cce0d9764afcbf59689ad6940671",
+  "desk_context_schema_file_sha256": "sha256:689b690c5ff02ab6966d0d0850f7b700a8f0d235ac35f7208e5190c981f85a8e",
+  "correction_ticket_schema_file_sha256": "sha256:ace35e01913bd01a6f5b6d55921b1c3fa56107a3f94262f356420cbff5bcae38",
+  "provider_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+  "holdout_manifest_file_sha256": "sha256:997fe396aabe73a15e064a26641c049ebd44a4ddadfe20194ade7e0860ce3156",
+  "holdout_manifest_content_sha256": "sha256:e2d4e20bd172c255180a6178cd08cf717e4bb8415b9acec9245b93e212460347",
+  "provider_blocked_evidence_hash": "sha256:c2862dd1a26c5b9dc9822110c9b4dc2496fe2a695ce54149fe307ad6aac24efd",
+  "generation": {
+    "temperature": 0,
+    "thinking_budget": 1024,
+    "include_thoughts": false,
+    "maximum_output_tokens": 3072
+  },
+  "holdout": {
+    "case_count": 12,
+    "sealed_before_first_provider_call": true,
+    "previously_sent_to_provider": false,
+    "may_be_used_for_prompt_or_proofreader_tuning": false
+  },
+  "frozen_components_may_change_during_evaluation": false
+}

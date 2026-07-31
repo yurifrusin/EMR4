@@ -1,0 +1,45 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "design_and_verify_one_shared_agent_proofreader_language_with_a_bounded_audit_only_operator_note",
+  "status": "passed",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "authority_boundary": "authored_synthetic_default_off_proposal_only_shared_typed_language_and_independently_proofread_audit_note_with_one_primary_and_at_most_one_contract_only_repair_in_the_exact_existing_gemini_2_5_flash_bernie_keyless_adc_sydney_lane_no_product_data_write_production_deployment_or_release",
+  "worker_dispatch_permitted": false,
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records the accepted graph-74/map-61 extended proposal runtime. Its deterministic four-family runtime passes, while its two occupied responses remain immutable fail-closed evidence because the former free-form wire failed before proofreading.",
+    "current_authority_allocation": "Yuri authorised continuation with the agent and proofreader using the same typed language. Yuri also authorised a strictly bounded natural-language communication channel alongside the typed form for auditing and troubleshooting. This opens a fresh contract-design descendant and, only after every repository, isolation, Continuity and Compass gate passes, one primary and at most one deterministic request-contract repair in the exact existing Gemini 2.5 Flash Bernie keyless-ADC Sydney lane. The natural-language field is audit-only, independently proofread, never parsed into the typed plan, never command authority and never raw provider-response logging.",
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-extended-proposal-runtime-plan.md",
+      "docs/bernie-reception-one-extended-proposal-runtime-closeout.md",
+      "docs/bernie-reception-one-bureau-typed-plan-protocol-design.md",
+      "docs/bernie-reception-one-bureau-model-text-lane-iterative-retry-closeout.md",
+      "docs/ariadne-vertex-sydney-gemini-25-occupied-rehearsal-closeout.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "orchestration/access_ai_api_design.md",
+      "orchestration/bernie_release_gates.md"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 were restored. Protected holdouts remain sealed; historical Diary material remains local and closed; no real, product-derived, patient, health, clinical or historical data may enter the shared language or provider lane. Backend truth, identity, availability, conflicts, confirmation, writes, idempotency and audit remain authoritative. The operator note may contain only generic authored-synthetic operational speech and may not contain credentials, identifiers, hidden reasoning, unsupported facts or commands.",
+    "git_refs_and_worktree": {
+      "checked_at": "2026-07-30T00:14:29Z",
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_entry_count": 327,
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true
+    }
+  }
+}

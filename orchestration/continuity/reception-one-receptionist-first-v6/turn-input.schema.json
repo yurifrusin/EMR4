@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/reception-one-receptionist-first-v6-turn-input.json",
+  "title": "Reception One receptionist-first v6 turn input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "data_class",
+    "effect_ceiling",
+    "turn_code",
+    "task_sha256",
+    "bureau_packet",
+    "task",
+    "correction_ticket"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "reception.one.bureau.receptionist-first.v6"
+    },
+    "data_class": {
+      "const": "authored_synthetic"
+    },
+    "effect_ceiling": {
+      "const": "proposal_only"
+    },
+    "turn_code": {
+      "enum": [1, 2]
+    },
+    "task_sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "bureau_packet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "broker_owned_fields",
+        "model_authored_sections"
+      ],
+      "properties": {
+        "broker_owned_fields": {
+          "const": {
+            "version_code": 3
+          }
+        },
+        "model_authored_sections": {
+          "const": [
+            "receptionist_response",
+            "decision_note",
+            "evidence_utterance_indices",
+            "typed_form"
+          ]
+        }
+      }
+    },
+    "task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contract_version",
+        "data_class",
+        "utterances",
+        "effect_ceiling",
+        "source_reference_contract",
+        "goal_table",
+        "binding_table",
+        "operator_table"
+      ],
+      "properties": {
+        "contract_version": {},
+        "data_class": {},
+        "utterances": {},
+        "effect_ceiling": {},
+        "source_reference_contract": {},
+        "goal_table": {},
+        "binding_table": {},
+        "operator_table": {}
+      }
+    },
+    "correction_ticket": {
+      "type": ["object", "null"]
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "schema_version": "reception.one.preprinted_form_v5.broad_language_external_audit_analysis.v1",
+  "recorded_at": "2026-07-30T05:26:39Z",
+  "result": "reception_one_preprinted_form_v5_broad_language_external_audit_zero_call_pass",
+  "independence": {
+    "analysis_source": "provider_blocked_oracles_read_only_preflight_disposition_and_independent_residue_observation",
+    "raw_prompt_used": false,
+    "raw_provider_response_used": false,
+    "chain_of_thought_used": false,
+    "model_self_assessment_used": false
+  },
+  "frozen_cohort": {
+    "case_count": 24,
+    "action_or_assessment_oracle_count": 19,
+    "clarification_only_oracle_count": 5,
+    "provider_blocked_result": "reception_one_preprinted_form_v5_broad_language_provider_blocked_pass",
+    "prompt_or_schema_changed": false,
+    "prompt_teaching_added": false
+  },
+  "occupied_outcome": {
+    "preflight_result": "reception_one_preprinted_form_v5_broad_language_adc_preflight_blocked",
+    "reason_code": "impersonated_adc_refresh_failed",
+    "provider_call_count": 0,
+    "http_response_count": 0,
+    "prompt_tokens": 0,
+    "candidate_tokens": 0,
+    "occupied_ledgers_opened": 0,
+    "typed_releases": 0,
+    "incremental_model_cost_usd": 0
+  },
+  "exact_requested_binding": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "api_key_authentication_used": false
+  },
+  "cleanup": {
+    "all_opened_ledgers_consumed": true,
+    "opened_ledger_count": 0,
+    "owned_residue_absent": true
+  },
+  "training_disposition": {
+    "decision": "not_evaluated",
+    "reason": "No occupied model output exists, so the cohort provides no new evidence for or against prompt-context teaching."
+  },
+  "explicit_exclusions": {
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "credential_or_token_recorded": false,
+    "api_key_information_recorded": false,
+    "product_or_database_access": false,
+    "appointment_confirmation_or_write": false,
+    "provider_or_regional_fallback": false
+  },
+  "candid_limit": "The provider-free cohort is ready, but no occupied model evaluation occurred because the existing impersonated ADC could not refresh non-interactively. This proves neither model performance nor a Sydney inference path for the new cohort."
+}

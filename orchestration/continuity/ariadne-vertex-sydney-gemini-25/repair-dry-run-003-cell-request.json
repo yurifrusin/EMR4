@@ -1,0 +1,25 @@
+{
+  "protocol_version": "ariadne.vertex_sydney_work_cell.v1",
+  "policy_id": "vertex-sydney-gemini-25-authored-synthetic-v1",
+  "attempt_id": "gemini-25-repair-dry-run-003",
+  "ledger_id": "gemini-25-repair-dry-run-ledger-003",
+  "task": {
+    "task_type": "authored_synthetic_tile_summary",
+    "evidence": [
+      {
+        "fact_id": "fact_alpha",
+        "value": "Project Lark has 3 blue tiles."
+      },
+      {
+        "fact_id": "fact_beta",
+        "value": "Project Lark has 2 green tiles."
+      }
+    ],
+    "requested_fields": [
+      "summary",
+      "total_tiles",
+      "risk_level",
+      "evidence_ids"
+    ]
+  }
+}

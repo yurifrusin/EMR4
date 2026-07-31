@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/reception-one-preprinted-model-form-body-v5.json",
+  "title": "Reception One model-authored pre-printed form body",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "operator_note",
+    "goal_code",
+    "steps"
+  ],
+  "properties": {
+    "operator_note": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 320
+    },
+    "goal_code": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 6
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "operator_code",
+          "source_refs"
+        ],
+        "properties": {
+          "operator_code": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 13
+          },
+          "source_refs": {
+            "type": "array",
+            "maxItems": 8,
+            "items": {
+              "$ref": "#/$defs/sourceRef"
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sourceRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "binding_code",
+        "prior_step_index",
+        "prior_output_name"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "binding",
+            "prior_output",
+            "omit"
+          ]
+        },
+        "binding_code": {
+          "type": "integer",
+          "minimum": -1,
+          "maximum": 9
+        },
+        "prior_step_index": {
+          "type": "integer",
+          "minimum": -1,
+          "maximum": 11
+        },
+        "prior_output_name": {
+          "enum": [
+            "none",
+            "patient",
+            "practitioner",
+            "date",
+            "appointment",
+            "duration_minutes",
+            "appointments",
+            "schedule",
+            "candidates",
+            "proposal",
+            "clarification"
+          ]
+        }
+      }
+    }
+  }
+}

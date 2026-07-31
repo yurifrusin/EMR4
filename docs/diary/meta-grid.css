@@ -707,3 +707,2234 @@ body.meta-grid-open #btn-meta-grid-launch {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Reception One visual and interaction synthesis */
+
+:root {
+  --meta-grid-bg: #f3f1eb;
+  --meta-grid-surface: #fffefa;
+  --meta-grid-ink: #102a32;
+  --meta-grid-muted: #607075;
+  --meta-grid-border: #d8d4ca;
+  --meta-grid-strong: #096a67;
+  --meta-grid-strong-hover: #075451;
+  --meta-grid-soft: #e1efeb;
+  --meta-grid-warning: #8a5c21;
+  --meta-grid-warning-soft: #faf2e6;
+  --meta-grid-danger: #923b37;
+  --meta-grid-focus: #087f8c;
+  --meta-grid-radius: 12px;
+}
+
+.meta-grid-brand-label {
+  display: none;
+}
+
+body.meta-grid-open #diary-header {
+  background: #062b3a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  min-height: 60px;
+  padding: 8px 22px;
+}
+
+body.meta-grid-open #diary-header .diary-logo {
+  align-items: center;
+  display: flex;
+  flex: 1 1 260px;
+  gap: 11px;
+}
+
+body.meta-grid-open #diary-header .diary-logo img {
+  filter: brightness(0) invert(1);
+  height: 24px;
+  opacity: 0.9;
+  width: 24px;
+}
+
+body.meta-grid-open .diary-brand-default {
+  display: none;
+}
+
+body.meta-grid-open .meta-grid-brand-label {
+  display: inline;
+  font-size: 13px;
+  font-weight: 750;
+  letter-spacing: 0.22em;
+}
+
+body.meta-grid-open #diary-header .diary-logo-sub-row {
+  margin-top: 3px;
+}
+
+body.meta-grid-open #diary-header .diary-date-nav {
+  display: flex !important;
+  flex: 0 1 330px;
+}
+
+body.meta-grid-open #diary-header .date-picker-wrapper {
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 8px;
+  min-height: 40px;
+}
+
+body.meta-grid-open #btn-today,
+body.meta-grid-open #btn-now,
+body.meta-grid-open #btn-meta-grid-launch,
+body.meta-grid-open #diary-header .diary-actions {
+  display: none !important;
+}
+
+.meta-grid {
+  background: var(--meta-grid-bg);
+  font-size: 13px;
+}
+
+.meta-grid button {
+  border-radius: 9px;
+  font-weight: 650;
+}
+
+.meta-grid-shell {
+  gap: 0;
+  grid-template-columns: minmax(280px, 316px) minmax(0, 1fr);
+  margin: 0;
+  max-width: none;
+  padding: 0;
+}
+
+.meta-grid-rail,
+.meta-grid-orientation,
+.meta-grid-state,
+.meta-grid-canvas,
+.meta-grid-evidence {
+  box-shadow: none;
+}
+
+.meta-grid-rail {
+  align-content: start;
+  background: #fbfaf6;
+  border: 0;
+  border-radius: 0;
+  border-right: 1px solid var(--meta-grid-border);
+  gap: 20px;
+  min-height: 100%;
+  padding: 24px 20px 18px;
+  position: relative;
+  top: auto;
+}
+
+.meta-grid-rail-heading {
+  align-items: start;
+  border-bottom: 1px solid var(--meta-grid-border);
+  padding-bottom: 18px;
+}
+
+.meta-grid-rail h1 {
+  font-size: 21px;
+  font-weight: 690;
+  letter-spacing: -0.025em;
+}
+
+.meta-grid-kicker,
+.meta-grid-section-label,
+.meta-grid-selection-kicker {
+  color: var(--meta-grid-strong);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.meta-grid-rail-subtitle {
+  color: var(--meta-grid-muted);
+  font-size: 11px;
+  margin-top: 5px !important;
+}
+
+#meta-grid-close {
+  background: transparent;
+  border: 0;
+  color: var(--meta-grid-muted);
+  font-size: 11px;
+  min-height: 44px;
+  min-width: auto;
+  padding: 4px 0 4px 8px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.meta-grid-intent {
+  display: grid;
+  gap: 10px;
+}
+
+.meta-grid-intent-tokens {
+  display: grid;
+  gap: 7px;
+}
+
+.meta-grid-intent-token {
+  align-items: center;
+  background: var(--meta-grid-surface);
+  border: 1px solid var(--meta-grid-border);
+  border-radius: 8px;
+  display: flex;
+  font-size: 12px;
+  font-weight: 650;
+  min-height: 39px;
+  padding: 8px 11px;
+}
+
+.meta-grid-intent-token::before {
+  background: var(--meta-grid-strong);
+  border-radius: 999px;
+  content: "";
+  flex: 0 0 6px;
+  height: 6px;
+  margin-right: 10px;
+}
+
+.meta-grid-conversation {
+  border-top: 1px solid var(--meta-grid-border);
+  display: grid;
+  gap: 10px;
+  padding-top: 18px;
+}
+
+.meta-grid-conversation h2 {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.meta-grid-conversation-line {
+  display: grid;
+  gap: 3px;
+  grid-template-columns: 38px minmax(0, 1fr);
+}
+
+.meta-grid-conversation-line > span {
+  color: var(--meta-grid-muted);
+  font-size: 10px;
+  font-weight: 800;
+  padding-top: 2px;
+  text-transform: uppercase;
+}
+
+.meta-grid-conversation-line p {
+  color: var(--meta-grid-muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.meta-grid-conversation-line-current p {
+  color: var(--meta-grid-ink);
+  font-weight: 700;
+}
+
+.meta-grid-request-form {
+  border-top: 1px solid var(--meta-grid-border);
+  gap: 8px;
+  padding-top: 18px;
+}
+
+#meta-grid-request {
+  background: var(--meta-grid-surface);
+  border-color: #a9b7b3;
+  min-height: 70px;
+  resize: none;
+}
+
+.meta-grid-request-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.meta-grid-request-actions > * {
+  flex-basis: auto;
+}
+
+.meta-grid-examples {
+  border-top: 1px solid var(--meta-grid-border);
+  padding-top: 16px;
+}
+
+.meta-grid-example-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.meta-grid-example-list button {
+  align-items: start;
+  background: transparent;
+  border-color: transparent;
+  color: var(--meta-grid-muted);
+  font-size: 11px;
+  min-height: 44px;
+  padding: 6px 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.meta-grid-history,
+.meta-grid-retention-note {
+  font-size: 10px;
+}
+
+.meta-grid-workspace {
+  align-content: start;
+  background: var(--meta-grid-surface);
+  gap: 0;
+  grid-template-rows: auto auto auto auto minmax(0, 1fr) auto auto auto;
+}
+
+.meta-grid-view-controls {
+  align-items: center;
+  border-bottom: 1px solid var(--meta-grid-border);
+  gap: 8px;
+  min-height: 58px;
+  padding: 8px 22px;
+}
+
+.meta-grid-view-controls button {
+  background: transparent;
+  border-color: transparent;
+  color: var(--meta-grid-muted);
+  font-size: 11px;
+}
+
+.meta-grid-view-controls button:first-child {
+  margin-right: auto;
+}
+
+.meta-grid-privacy-banner {
+  border-radius: 0;
+  padding: 10px 22px;
+}
+
+.meta-grid-orientation {
+  align-items: center;
+  border: 0;
+  border-bottom: 1px solid var(--meta-grid-border);
+  border-radius: 0;
+  display: grid;
+  gap: 4px 18px;
+  grid-template-columns: 92px minmax(0, 1fr);
+  padding: 16px 22px;
+}
+
+.meta-grid-orientation h2 {
+  grid-row: 1 / span 2;
+  margin: 0;
+}
+
+.meta-grid-scope-summary {
+  background: transparent;
+  color: var(--meta-grid-ink);
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  margin: 0 !important;
+  padding: 0;
+}
+
+.meta-grid-omissions {
+  display: none;
+}
+
+.meta-grid-freshness {
+  color: var(--meta-grid-strong);
+  font-size: 11px;
+}
+
+.meta-grid-state {
+  border: 0;
+  border-bottom: 1px solid var(--meta-grid-border);
+  border-left: 0;
+  border-radius: 0;
+  display: grid;
+  gap: 2px 12px;
+  grid-template-columns: auto minmax(0, 1fr);
+  padding: 12px 22px;
+}
+
+.meta-grid-state[data-state="answer"],
+.meta-grid-state[data-state="overview"] {
+  display: none;
+}
+
+.meta-grid-state[data-state="selection_only"],
+.meta-grid-state[data-state="proposal_not_committed"] {
+  background: #f8f2e9;
+  border-left: 0;
+}
+
+.meta-grid-state-label {
+  align-self: center;
+  grid-row: 1 / span 2;
+  margin: 0 !important;
+}
+
+.meta-grid-state h2 {
+  font-size: 15px;
+  margin: 0;
+}
+
+.meta-grid-state p:last-child {
+  font-size: 11px;
+}
+
+.meta-grid-event-cue {
+  background: #edf6f2;
+  border: 0;
+  border-bottom: 1px solid #bdd8d0;
+  border-radius: 0;
+  padding: 11px 22px;
+}
+
+.meta-grid-event-cue h2 {
+  font-size: 14px;
+}
+
+.meta-grid-event-cue-reason {
+  display: none;
+}
+
+.meta-grid-event-cue-actions {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.meta-grid-event-cue-actions button {
+  font-size: 11px;
+  min-height: 38px;
+}
+
+.meta-grid-canvas {
+  background: #fffefa;
+  border: 0;
+  border-radius: 0;
+  min-height: 420px;
+  padding: 0;
+}
+
+#meta-grid-content {
+  min-height: 100%;
+}
+
+.meta-grid-schedule-layout {
+  display: grid;
+  min-height: 100%;
+}
+
+.meta-grid-schedule-layout.has-selection {
+  grid-template-columns: minmax(0, 1fr) minmax(245px, 29%);
+}
+
+.meta-grid-schedule {
+  min-width: 0;
+  padding: 0 22px 24px;
+}
+
+.meta-grid-schedule-header {
+  align-items: baseline;
+  border-bottom: 1px solid var(--meta-grid-border);
+  display: flex;
+  gap: 16px;
+  min-height: 62px;
+  padding: 20px 0 12px;
+}
+
+.meta-grid-schedule-heading {
+  font-size: 17px;
+  font-weight: 760;
+  letter-spacing: -0.02em;
+}
+
+.meta-grid-schedule-basis {
+  color: var(--meta-grid-muted);
+  font-size: 11px;
+}
+
+.meta-grid-time-grid {
+  display: grid;
+  grid-template-columns: 60px minmax(0, 1fr);
+  grid-template-rows: repeat(var(--meta-grid-time-rows), 50px) 0;
+  padding-top: 12px;
+  position: relative;
+}
+
+.meta-grid-time-label {
+  align-self: start;
+  color: var(--meta-grid-muted);
+  font-size: 11px;
+  grid-column: 1;
+  padding-right: 11px;
+  text-align: right;
+  transform: translateY(-7px);
+}
+
+.meta-grid-time-rule {
+  align-self: start;
+  border-top: 1px solid #e6e2da;
+  grid-column: 2;
+  height: 1px;
+}
+
+.meta-grid-time-grid .meta-grid-slot-button {
+  align-self: stretch;
+  background: #fffefa;
+  border: 1px solid #cdd8d4;
+  display: grid !important;
+  grid-column: 2;
+  grid-template-columns: minmax(105px, auto) 1fr;
+  margin: 5px 8px;
+  min-height: 48px;
+  padding: 9px 13px;
+  position: relative;
+  z-index: 2;
+}
+
+.meta-grid-time-grid .meta-grid-slot-button:hover {
+  background: #f3f8f6;
+}
+
+.meta-grid-time-grid .meta-grid-slot-button[aria-pressed="true"] {
+  background: #edf6f2;
+  border: 2px solid var(--meta-grid-strong);
+  box-shadow: inset 4px 0 0 var(--meta-grid-strong);
+}
+
+.meta-grid-slot-button strong {
+  font-size: 13px;
+}
+
+.meta-grid-slot-status {
+  color: var(--meta-grid-muted);
+  font-size: 10px;
+  justify-self: end;
+}
+
+.meta-grid-selection-panel {
+  align-content: start;
+  border-left: 1px solid var(--meta-grid-border);
+  display: grid;
+  gap: 16px;
+  padding: 34px 24px;
+}
+
+.meta-grid-selection-time {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(26px, 2.5vw, 36px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+
+.meta-grid-selection-practitioner {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.meta-grid-selection-boundary {
+  background: var(--meta-grid-warning-soft);
+  border: 1px solid #d9c5a8;
+  border-radius: 8px;
+  color: #5d4932;
+  font-size: 11px;
+  line-height: 1.55;
+  padding: 12px;
+}
+
+.meta-grid-actions {
+  border-top: 1px solid var(--meta-grid-border);
+  justify-content: flex-end;
+  padding: 14px 22px;
+}
+
+.meta-grid-actions .meta-grid-primary {
+  min-width: 190px;
+}
+
+.meta-grid-proposal {
+  gap: 18px;
+  margin: 28px auto;
+  max-width: 620px;
+  padding: 24px;
+}
+
+.meta-grid-proposal-summary {
+  background: #edf6f2;
+  border: 1px solid #b9d4cc;
+  border-left: 5px solid var(--meta-grid-strong);
+  border-radius: 10px;
+  padding: 18px;
+}
+
+.meta-grid-keyboard-hints {
+  align-items: center;
+  background: #f8f6f0;
+  border-top: 1px solid var(--meta-grid-border);
+  color: var(--meta-grid-muted);
+  display: flex;
+  font-size: 10px;
+  gap: 28px;
+  min-height: 46px;
+  padding: 8px 22px;
+}
+
+.meta-grid-keyboard-hints span {
+  align-items: center;
+  display: inline-flex;
+  gap: 5px;
+}
+
+.meta-grid-keyboard-hints kbd {
+  background: var(--meta-grid-surface);
+  border: 1px solid #aab4b2;
+  border-radius: 5px;
+  color: var(--meta-grid-ink);
+  font-family: inherit;
+  font-size: 10px;
+  min-width: 25px;
+  padding: 4px 6px;
+  text-align: center;
+}
+
+.meta-grid-evidence {
+  border: 0;
+  border-radius: 0;
+  border-top: 1px solid var(--meta-grid-border);
+  margin: 0;
+}
+
+@media (max-width: 1080px) {
+  .meta-grid-shell {
+    grid-template-columns: 270px minmax(0, 1fr);
+  }
+
+  .meta-grid-rail {
+    padding-inline: 16px;
+  }
+
+  .meta-grid-conversation,
+  .meta-grid-history,
+  .meta-grid-retention-note {
+    display: none;
+  }
+
+  .meta-grid-schedule-layout.has-selection {
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 32%);
+  }
+}
+
+@media (max-width: 900px) {
+  body.meta-grid-open #diary-header {
+    padding-inline: 14px;
+  }
+
+  body.meta-grid-open #diary-header .diary-logo {
+    flex-basis: 220px;
+  }
+
+  .meta-grid-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .meta-grid-rail {
+    border-bottom: 1px solid var(--meta-grid-border);
+    border-right: 0;
+    gap: 14px;
+    grid-template-columns: minmax(180px, 0.8fr) minmax(0, 1.7fr);
+    min-height: auto;
+    padding: 16px;
+  }
+
+  .meta-grid-rail-heading,
+  .meta-grid-intent {
+    grid-column: 1;
+  }
+
+  .meta-grid-request-form {
+    border-top: 0;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    padding-top: 0;
+  }
+
+  .meta-grid-examples,
+  .meta-grid-history,
+  .meta-grid-retention-note {
+    display: none;
+  }
+
+  .meta-grid-intent-tokens {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .meta-grid-intent-token {
+    min-height: 34px;
+  }
+
+  .meta-grid-schedule {
+    padding-inline: 16px;
+  }
+}
+
+@media (max-width: 620px) {
+  body.meta-grid-open #diary-header {
+    min-height: 50px;
+  }
+
+  body.meta-grid-open #diary-header .diary-logo {
+    flex: none;
+    height: auto;
+    width: 100%;
+  }
+
+  body.meta-grid-open #diary-header .diary-logo-sub-row {
+    display: none !important;
+  }
+
+  body.meta-grid-open #diary-header .diary-date-nav {
+    flex: none;
+    height: auto;
+    width: 100%;
+  }
+
+  body.meta-grid-open #diary-header .date-picker-wrapper {
+    min-width: 130px;
+  }
+
+  body.meta-grid-open #diary-header #btn-prev-day,
+  body.meta-grid-open #diary-header #btn-next-day {
+    display: none;
+  }
+
+  .meta-grid-shell {
+    gap: 0;
+    padding: 0;
+  }
+
+  .meta-grid-rail {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 1fr;
+    padding: 14px;
+  }
+
+  .meta-grid-rail-heading,
+  .meta-grid-intent,
+  .meta-grid-request-form {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .meta-grid-rail h1 {
+    font-size: 18px;
+  }
+
+  .meta-grid-rail-heading {
+    align-items: start;
+    flex-direction: row;
+  }
+
+  .meta-grid-intent-tokens {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 3px;
+    scrollbar-width: none;
+  }
+
+  .meta-grid-intent-tokens::-webkit-scrollbar {
+    display: none;
+  }
+
+  .meta-grid-intent-token {
+    flex: 0 0 auto;
+    min-height: 34px;
+  }
+
+  .meta-grid-request-form {
+    background: #fbfaf6;
+    border-top: 1px solid var(--meta-grid-border);
+    padding-top: 12px;
+  }
+
+  #meta-grid-request {
+    min-height: 58px;
+  }
+
+  .meta-grid-view-controls {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-inline: 12px;
+  }
+
+  .meta-grid-view-controls button:first-child {
+    margin-right: 0;
+  }
+
+  .meta-grid-orientation {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+
+  .meta-grid-orientation h2 {
+    grid-row: auto;
+    writing-mode: initial;
+  }
+
+  .meta-grid-scope-summary {
+    font-size: 13px;
+  }
+
+  .meta-grid-state {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+
+  .meta-grid-state-label {
+    grid-row: auto;
+  }
+
+  .meta-grid-schedule-layout.has-selection {
+    grid-template-columns: 1fr;
+  }
+
+  .meta-grid-schedule {
+    padding-inline: 10px;
+  }
+
+  .meta-grid-schedule-header {
+    align-items: start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .meta-grid-time-grid {
+    grid-template-columns: 48px minmax(0, 1fr);
+    grid-template-rows: repeat(var(--meta-grid-time-rows), 54px) 0;
+  }
+
+  .meta-grid-time-grid .meta-grid-slot-button {
+    grid-template-columns: 1fr;
+    margin-right: 0;
+  }
+
+  .meta-grid-slot-status {
+    display: none;
+  }
+
+  .meta-grid-selection-panel {
+    border-left: 0;
+    border-top: 1px solid var(--meta-grid-border);
+    gap: 10px;
+    padding: 18px;
+  }
+
+  .meta-grid-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+
+  .meta-grid-actions .meta-grid-primary {
+    min-width: 0;
+  }
+
+  .meta-grid-keyboard-hints {
+    gap: 12px;
+    justify-content: space-between;
+    overflow-x: auto;
+    padding-inline: 12px;
+    white-space: nowrap;
+  }
+}
+
+@media (max-height: 470px) and (orientation: landscape) {
+  .meta-grid-rail {
+    grid-template-columns: minmax(170px, 0.7fr) minmax(250px, 1.3fr);
+  }
+
+  .meta-grid-intent {
+    grid-column: 1;
+  }
+
+  .meta-grid-request-form {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+
+  .meta-grid-schedule-layout.has-selection {
+    grid-template-columns: minmax(0, 1fr) minmax(210px, 30%);
+  }
+}
+
+/* Reception One integrated Bureau baseline */
+
+:root {
+  --bureau-navy: #062f4a;
+  --bureau-navy-deep: #03263d;
+  --bureau-paper: #fffefa;
+  --bureau-paper-warm: #f7f3ea;
+  --bureau-eucalyptus: #176b5b;
+  --bureau-eucalyptus-soft: #e6f1ed;
+  --bureau-terracotta: #b84e2d;
+  --bureau-rule: #d5d2c9;
+  --bureau-shadow: 0 18px 46px rgba(5, 28, 42, 0.2), 0 3px 10px rgba(5, 28, 42, 0.12);
+}
+
+body.meta-grid-open #diary-grid-container {
+  display: block !important;
+}
+
+body.meta-grid-open #diary-flow-panel:not(.hidden) {
+  display: flex !important;
+}
+
+body.meta-grid-open #diary-header {
+  background: var(--blue-dark);
+  border-bottom: 0;
+  min-height: 46px;
+  padding: 8px 14px;
+}
+
+body.meta-grid-open #diary-header .diary-logo {
+  display: block;
+  flex: 1 1 140px;
+}
+
+body.meta-grid-open #diary-header .diary-logo img {
+  filter: none;
+  height: 28px;
+  opacity: 1;
+  width: 28px;
+}
+
+body.meta-grid-open .diary-brand-default {
+  display: inline;
+}
+
+body.meta-grid-open .meta-grid-brand-label {
+  display: none;
+}
+
+body.meta-grid-open #diary-header .diary-logo-sub-row {
+  display: flex !important;
+  margin-top: 1px;
+}
+
+body.meta-grid-open #diary-header .diary-date-nav {
+  display: flex !important;
+  flex: 2 1 260px;
+}
+
+body.meta-grid-open #diary-header .date-picker-wrapper {
+  border: 0;
+  border-radius: 4px;
+  min-height: auto;
+}
+
+body.meta-grid-open #diary-header .diary-actions {
+  display: flex !important;
+}
+
+body.meta-grid-open #diary-header .diary-actions > button:not(.hidden),
+body.meta-grid-open #btn-today,
+body.meta-grid-open #btn-now,
+body.meta-grid-open #btn-meta-grid-launch {
+  display: inline-flex !important;
+}
+
+body.meta-grid-open #diary-header #diary-search-container {
+  display: flex !important;
+}
+
+body.meta-grid-open #diary-status {
+  display: inline !important;
+}
+
+#diary-grid-container.diary-page-turn-forward {
+  animation: diary-page-turn-forward 260ms cubic-bezier(0.25, 0.7, 0.25, 1);
+  transform-origin: right center;
+}
+
+#diary-grid-container.diary-page-turn-backward {
+  animation: diary-page-turn-backward 260ms cubic-bezier(0.25, 0.7, 0.25, 1);
+  transform-origin: left center;
+}
+
+@keyframes diary-page-turn-forward {
+  0% { opacity: 1; transform: perspective(1400px) rotateY(0deg) translateX(0); }
+  42% { opacity: 0.78; transform: perspective(1400px) rotateY(-3deg) translateX(-10px); }
+  100% { opacity: 1; transform: perspective(1400px) rotateY(0deg) translateX(0); }
+}
+
+@keyframes diary-page-turn-backward {
+  0% { opacity: 1; transform: perspective(1400px) rotateY(0deg) translateX(0); }
+  42% { opacity: 0.78; transform: perspective(1400px) rotateY(3deg) translateX(10px); }
+  100% { opacity: 1; transform: perspective(1400px) rotateY(0deg) translateX(0); }
+}
+
+.meta-grid {
+  align-items: center;
+  background: transparent;
+  display: grid;
+  inset: 0;
+  justify-items: end;
+  overflow: visible;
+  padding: clamp(58px, 8vh, 90px) clamp(18px, 3.4vw, 54px) clamp(18px, 3vh, 34px);
+  pointer-events: none;
+  position: fixed;
+  z-index: 90;
+}
+
+.meta-grid-shell {
+  background: var(--bureau-paper);
+  border: 1px solid rgba(6, 47, 74, 0.34);
+  border-radius: 7px;
+  box-shadow: var(--bureau-shadow);
+  display: grid;
+  gap: 0;
+  grid-template-columns: minmax(220px, 256px) minmax(0, 1fr);
+  grid-template-rows: 58px minmax(0, 1fr);
+  height: min(72vh, 690px);
+  margin: 0;
+  max-width: none;
+  min-height: 520px;
+  overflow: hidden;
+  padding: 0;
+  pointer-events: auto;
+  position: relative;
+  width: min(900px, calc(100vw - clamp(96px, 12vw, 190px)));
+}
+
+.meta-grid[data-family="patient_timeline"] .meta-grid-shell,
+.meta-grid[data-family="focused_schedule_lane"] .meta-grid-shell {
+  height: min(66vh, 630px);
+  width: min(850px, calc(100vw - clamp(96px, 13vw, 210px)));
+}
+
+.meta-grid[data-family="availability_slots"] .meta-grid-shell,
+.meta-grid[data-family="aligned_comparison"] .meta-grid-shell,
+.meta-grid[data-family="proposal_review"] .meta-grid-shell {
+  height: min(80vh, 760px);
+  width: min(1080px, calc(100vw - clamp(80px, 9vw, 150px)));
+}
+
+.meta-grid-window-bar {
+  align-items: center;
+  background: var(--bureau-navy);
+  color: white;
+  display: grid;
+  gap: 14px;
+  grid-column: 1 / -1;
+  grid-template-columns: auto minmax(70px, 1fr) auto auto;
+  min-width: 0;
+  padding: 7px 12px 7px 17px;
+  position: relative;
+}
+
+.meta-grid-window-title {
+  min-width: 0;
+}
+
+.meta-grid-window-title p,
+.meta-grid-window-title h1 {
+  margin: 0;
+}
+
+.meta-grid-window-title p {
+  color: #b9d7dd;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.meta-grid-window-title h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.meta-grid-bureau-progress {
+  background: rgba(255, 255, 255, 0.18);
+  height: 2px;
+  min-width: 70px;
+  overflow: hidden;
+}
+
+.meta-grid-bureau-progress span {
+  background: #92cbb9;
+  display: block;
+  height: 100%;
+  transition: width 180ms ease;
+  width: 100%;
+}
+
+.meta-grid[data-bureau-phase="understanding"] .meta-grid-bureau-progress span {
+  width: 24%;
+}
+
+.meta-grid[data-bureau-phase="checking"] .meta-grid-bureau-progress span {
+  width: 54%;
+}
+
+.meta-grid[data-bureau-phase="preparing"] .meta-grid-bureau-progress span {
+  width: 82%;
+}
+
+.meta-grid[data-bureau-phase="clarify"] .meta-grid-bureau-progress span {
+  background: #e3a28b;
+  width: 100%;
+}
+
+.meta-grid-bureau-status {
+  color: #d7e8e8;
+  font-size: 10px;
+  font-weight: 700;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.meta-grid-window-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.meta-grid-window-actions button {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.48);
+  border-radius: 4px;
+  color: white;
+  font-size: 11px;
+  justify-content: center;
+  min-height: 44px;
+  padding: 7px 11px;
+}
+
+.meta-grid-window-actions button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: white;
+}
+
+#meta-grid-close {
+  font-size: 22px;
+  min-width: 44px;
+  padding: 0;
+  text-decoration: none;
+}
+
+.meta-grid-rail {
+  align-content: start;
+  background: var(--bureau-paper-warm);
+  border: 0;
+  border-radius: 0;
+  border-right: 1px solid var(--bureau-rule);
+  gap: 16px;
+  grid-column: 1;
+  grid-row: 2;
+  min-height: 0;
+  overflow: auto;
+  padding: 18px 16px;
+  position: static;
+}
+
+.meta-grid-rail-heading {
+  border-bottom: 1px solid var(--bureau-rule);
+  padding-bottom: 14px;
+}
+
+.meta-grid-rail h2 {
+  color: var(--bureau-navy-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.24;
+  margin: 0;
+}
+
+.meta-grid-rail-subtitle {
+  font-size: 11px;
+  line-height: 1.45;
+  margin-top: 6px !important;
+}
+
+.meta-grid-kicker,
+.meta-grid-section-label,
+.meta-grid-selection-kicker {
+  color: var(--bureau-eucalyptus);
+}
+
+.meta-grid-intent-tokens {
+  gap: 5px;
+}
+
+.meta-grid-intent-token {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #dfdbd1;
+  border-radius: 0;
+  min-height: 34px;
+  padding: 6px 2px;
+}
+
+.meta-grid-intent-token::before {
+  border-radius: 1px;
+  height: 8px;
+  margin-right: 8px;
+  width: 3px;
+}
+
+.meta-grid-conversation {
+  gap: 7px;
+  padding-top: 14px;
+}
+
+.meta-grid-request-form {
+  gap: 7px;
+  padding-top: 14px;
+}
+
+#meta-grid-request {
+  border-color: #aab7b5;
+  border-radius: 5px;
+  min-height: 66px;
+}
+
+.meta-grid-request-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.meta-grid-request-actions button {
+  border-radius: 5px;
+}
+
+.meta-grid-examples,
+.meta-grid-history {
+  display: none;
+}
+
+.meta-grid-retention-note {
+  border-left: 2px solid var(--bureau-eucalyptus);
+  line-height: 1.45;
+  margin-top: 2px !important;
+}
+
+.meta-grid-workspace {
+  background: var(--bureau-paper);
+  gap: 0;
+  grid-column: 2;
+  grid-row: 2;
+  grid-template-rows: auto auto auto auto minmax(0, 1fr) auto auto auto;
+  min-height: 0;
+  overflow: auto;
+}
+
+.meta-grid-view-controls {
+  min-height: 52px;
+  padding: 6px 16px;
+}
+
+.meta-grid-view-controls button {
+  min-height: 40px;
+}
+
+.meta-grid-orientation {
+  grid-template-columns: 78px minmax(0, 1fr);
+  padding: 12px 17px;
+}
+
+.meta-grid-scope-summary {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.meta-grid-freshness {
+  color: var(--bureau-eucalyptus);
+}
+
+.meta-grid-state {
+  padding: 10px 17px;
+}
+
+.meta-grid-state-label {
+  color: var(--bureau-eucalyptus);
+}
+
+.meta-grid-state[data-state="selection_only"],
+.meta-grid-state[data-state="proposal_not_committed"] {
+  background: #fff8ed;
+}
+
+.meta-grid-state[data-state="proposal_not_committed"] .meta-grid-state-label {
+  color: var(--bureau-terracotta);
+}
+
+.meta-grid-canvas {
+  min-height: 240px;
+  overflow: auto;
+}
+
+.meta-grid-timeline,
+.meta-grid-list,
+.meta-grid-overview-list {
+  padding: 8px 18px 16px;
+}
+
+.meta-grid-timeline-item,
+.meta-grid-item,
+.meta-grid-overview-item {
+  gap: 4px;
+  padding: 13px 6px;
+}
+
+.meta-grid-timeline-item h3,
+.meta-grid-item h3,
+.meta-grid-overview-item h3 {
+  color: var(--bureau-navy-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.meta-grid-schedule {
+  padding: 0 17px 18px;
+}
+
+.meta-grid-schedule-header {
+  min-height: 56px;
+  padding: 16px 0 10px;
+}
+
+.meta-grid-selection-panel {
+  padding: 26px 18px;
+}
+
+.meta-grid-selection-boundary {
+  border-radius: 5px;
+}
+
+.meta-grid-actions {
+  padding: 10px 17px;
+}
+
+.meta-grid-actions button {
+  border-radius: 5px;
+}
+
+.meta-grid-keyboard-hints {
+  min-height: 42px;
+  padding: 6px 17px;
+}
+
+.meta-grid-evidence {
+  background: #f9f7f1;
+  font-size: 11px;
+  padding: 14px 17px;
+}
+
+.meta-grid-evidence dl {
+  gap: 8px;
+}
+
+@media (max-width: 900px) {
+  .meta-grid {
+    padding: 64px 14px 14px;
+  }
+
+  .meta-grid-shell,
+  .meta-grid[data-family="patient_timeline"] .meta-grid-shell,
+  .meta-grid[data-family="focused_schedule_lane"] .meta-grid-shell,
+  .meta-grid[data-family="availability_slots"] .meta-grid-shell,
+  .meta-grid[data-family="aligned_comparison"] .meta-grid-shell,
+  .meta-grid[data-family="proposal_review"] .meta-grid-shell {
+    grid-template-columns: minmax(190px, 230px) minmax(0, 1fr);
+    height: min(82vh, 760px);
+    min-height: 520px;
+    width: calc(100vw - 28px);
+  }
+
+  .meta-grid-rail {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 1fr;
+    padding: 14px;
+  }
+
+  .meta-grid-rail-heading,
+  .meta-grid-intent,
+  .meta-grid-request-form {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 700px) {
+  body.meta-grid-open #diary-header .diary-logo-sub-row,
+  body.meta-grid-open #diary-header .diary-actions,
+  body.meta-grid-open #diary-header #btn-prev-day,
+  body.meta-grid-open #diary-header #btn-next-day {
+    display: none !important;
+  }
+
+  .meta-grid {
+    align-items: stretch;
+    padding: 8px 6px 6px;
+  }
+
+  .meta-grid-shell,
+  .meta-grid[data-family="patient_timeline"] .meta-grid-shell,
+  .meta-grid[data-family="focused_schedule_lane"] .meta-grid-shell,
+  .meta-grid[data-family="availability_slots"] .meta-grid-shell,
+  .meta-grid[data-family="aligned_comparison"] .meta-grid-shell,
+  .meta-grid[data-family="proposal_review"] .meta-grid-shell {
+    border-radius: 5px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto minmax(0, 1fr);
+    height: calc(100vh - 14px);
+    min-height: 0;
+    width: calc(100vw - 12px);
+  }
+
+  .meta-grid-window-bar {
+    gap: 8px;
+    grid-column: 1;
+    grid-template-columns: minmax(120px, 1fr) auto;
+    min-height: 58px;
+    padding: 6px 8px 6px 12px;
+  }
+
+  .meta-grid-bureau-progress,
+  .meta-grid-bureau-status {
+    display: none;
+  }
+
+  .meta-grid-window-actions {
+    gap: 4px;
+  }
+
+  #meta-grid-return {
+    font-size: 10px;
+    padding-inline: 8px;
+  }
+
+  .meta-grid-rail {
+    border-bottom: 1px solid var(--bureau-rule);
+    border-right: 0;
+    display: grid;
+    gap: 10px;
+    grid-column: 1;
+    grid-row: 2;
+    grid-template-columns: minmax(0, 1fr);
+    max-height: 230px;
+    overflow: auto;
+    padding: 10px 12px;
+  }
+
+  .meta-grid-rail-heading,
+  .meta-grid-conversation,
+  .meta-grid-retention-note {
+    display: none;
+  }
+
+  .meta-grid-intent-tokens {
+    display: flex;
+  }
+
+  .meta-grid-request-form {
+    background: var(--bureau-paper-warm);
+    border-top: 0;
+    padding-top: 0;
+    position: static;
+  }
+
+  #meta-grid-request {
+    min-height: 50px;
+  }
+
+  .meta-grid-request-actions {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .meta-grid-workspace {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .meta-grid-view-controls {
+    padding-inline: 8px;
+  }
+
+  .meta-grid-orientation,
+  .meta-grid-state,
+  .meta-grid-actions,
+  .meta-grid-evidence {
+    padding-inline: 11px;
+  }
+
+  .meta-grid-keyboard-hints {
+    display: none;
+  }
+}
+
+@media (max-height: 470px) and (orientation: landscape) {
+  .meta-grid {
+    padding: 5px;
+  }
+
+  .meta-grid-shell,
+  .meta-grid[data-family="patient_timeline"] .meta-grid-shell,
+  .meta-grid[data-family="focused_schedule_lane"] .meta-grid-shell,
+  .meta-grid[data-family="availability_slots"] .meta-grid-shell,
+  .meta-grid[data-family="aligned_comparison"] .meta-grid-shell,
+  .meta-grid[data-family="proposal_review"] .meta-grid-shell {
+    grid-template-columns: minmax(190px, 235px) minmax(0, 1fr);
+    grid-template-rows: 52px minmax(0, 1fr);
+    height: calc(100vh - 10px);
+    width: calc(100vw - 10px);
+  }
+
+  .meta-grid-window-bar {
+    grid-column: 1 / -1;
+    min-height: 52px;
+  }
+
+  .meta-grid-rail {
+    grid-column: 1;
+    grid-row: 2;
+    max-height: none;
+  }
+
+  .meta-grid-workspace {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #diary-grid-container.diary-page-turn-forward,
+  #diary-grid-container.diary-page-turn-backward {
+    animation: diary-page-dissolve 1ms linear;
+  }
+
+  .meta-grid-bureau-progress span {
+    transition: none;
+  }
+}
+
+@keyframes diary-page-dissolve {
+  from { opacity: 0.94; }
+  to { opacity: 1; }
+}
+
+/* Reception One reference-window alignment.
+   The Bureau machinery remains typed and inspectable, but the receptionist
+   sees a compact detail sheet lifted from the still-visible Diary. */
+
+.meta-grid {
+  padding: clamp(72px, 10vh, 112px) clamp(34px, 7vw, 112px) clamp(28px, 5vh, 54px);
+}
+
+.meta-grid-shell,
+.meta-grid[data-family="patient_timeline"] .meta-grid-shell,
+.meta-grid[data-family="focused_schedule_lane"] .meta-grid-shell,
+.meta-grid[data-family="availability_slots"] .meta-grid-shell,
+.meta-grid[data-family="aligned_comparison"] .meta-grid-shell,
+.meta-grid[data-family="proposal_review"] .meta-grid-shell {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 54px minmax(0, 1fr) auto;
+  height: min(68vh, 620px);
+  min-height: 470px;
+  width: min(700px, calc(100vw - clamp(140px, 22vw, 330px)));
+}
+
+.meta-grid[data-family="patient_timeline"] .meta-grid-shell,
+.meta-grid[data-family="focused_schedule_lane"] .meta-grid-shell {
+  height: min(68vh, 620px);
+  width: min(650px, calc(100vw - clamp(150px, 24vw, 350px)));
+}
+
+.meta-grid[data-family="availability_slots"] .meta-grid-shell,
+.meta-grid[data-family="aligned_comparison"] .meta-grid-shell,
+.meta-grid[data-family="proposal_review"] .meta-grid-shell {
+  height: min(84vh, 760px);
+  width: min(820px, calc(100vw - clamp(120px, 18vw, 280px)));
+}
+
+.meta-grid-window-bar {
+  gap: 10px;
+  grid-column: 1;
+  grid-row: 1;
+  grid-template-columns: minmax(0, 1fr) auto;
+  min-height: 54px;
+  padding: 6px 10px 6px 15px;
+}
+
+.meta-grid-window-title h1 {
+  font-size: 19px;
+}
+
+.meta-grid-window-title p {
+  font-size: 8px;
+}
+
+.meta-grid-bureau-progress {
+  display: none;
+}
+
+.meta-grid-bureau-status {
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.meta-grid-window-actions {
+  align-items: center;
+}
+
+.meta-grid-window-actions button {
+  min-height: 44px;
+}
+
+#meta-grid-close {
+  border-color: transparent;
+}
+
+#meta-grid-expand {
+  border-color: transparent;
+  font-size: 17px;
+  min-width: 44px;
+  padding: 0;
+}
+
+.meta-grid-rail {
+  display: none;
+}
+
+.meta-grid-workspace {
+  grid-column: 1;
+  grid-row: 2;
+  grid-template-rows: auto auto auto auto minmax(0, 1fr) auto auto auto;
+}
+
+.meta-grid-view-controls {
+  background: #fff;
+  border-bottom: 1px solid var(--bureau-rule);
+  justify-content: flex-end;
+  min-height: 48px;
+  padding: 4px 14px;
+}
+
+#meta-grid-back {
+  margin-right: auto;
+}
+
+.meta-grid-view-controls button {
+  min-height: 40px;
+}
+
+.meta-grid-orientation {
+  grid-template-columns: 92px minmax(0, 1fr);
+  padding: 14px 18px 12px;
+}
+
+.meta-grid-scope-summary {
+  font-size: 19px;
+}
+
+.meta-grid-state {
+  padding: 10px 18px;
+}
+
+.meta-grid-canvas {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: #78958f #eef1ed;
+  scrollbar-gutter: stable;
+  scrollbar-width: auto;
+}
+
+.meta-grid-canvas::-webkit-scrollbar {
+  width: 12px;
+}
+
+.meta-grid-canvas::-webkit-scrollbar-track {
+  background: #eef1ed;
+  border-left: 1px solid #d5ddda;
+}
+
+.meta-grid-canvas::-webkit-scrollbar-thumb {
+  background: #78958f;
+  border: 3px solid #eef1ed;
+  border-radius: 8px;
+}
+
+.meta-grid-timeline,
+.meta-grid-list,
+.meta-grid-overview-list {
+  padding: 6px 18px 14px;
+}
+
+.meta-grid-timeline-item,
+.meta-grid-item,
+.meta-grid-overview-item {
+  padding: 12px 7px;
+}
+
+.meta-grid-actions {
+  padding: 10px 18px;
+}
+
+.meta-grid-actions.is-return-only {
+  display: none;
+}
+
+.meta-grid-keyboard-hints {
+  display: none;
+}
+
+.meta-grid-request-form {
+  align-items: center;
+  background: #f8f7f3;
+  border-top: 1px solid var(--bureau-rule);
+  display: grid;
+  gap: 10px;
+  grid-column: 1;
+  grid-row: 3;
+  grid-template-columns: minmax(0, 1fr) auto;
+  margin: 0;
+  padding: 12px 14px;
+  position: static;
+}
+
+#meta-grid-request {
+  height: 52px;
+  line-height: 1.35;
+  min-height: 52px;
+  overflow-y: hidden;
+  padding: 8px 12px;
+  resize: none;
+}
+
+.meta-grid-request-actions {
+  align-items: center;
+  display: flex;
+  gap: 7px;
+}
+
+.meta-grid-request-actions .meta-grid-primary {
+  order: 2;
+  white-space: nowrap;
+}
+
+#meta-grid-privacy {
+  background: transparent;
+  border-color: transparent;
+  color: #38515d;
+  font-size: 10px;
+  min-height: 44px;
+  order: 1;
+  padding-inline: 8px;
+  white-space: nowrap;
+}
+
+#meta-grid-privacy:hover:not(:disabled) {
+  background: #eef3f0;
+  border-color: #cbd9d5;
+}
+
+@media (max-width: 900px) {
+  .meta-grid {
+    padding: 68px 18px 18px;
+  }
+
+  .meta-grid-shell,
+  .meta-grid[data-family="patient_timeline"] .meta-grid-shell,
+  .meta-grid[data-family="focused_schedule_lane"] .meta-grid-shell,
+  .meta-grid[data-family="availability_slots"] .meta-grid-shell,
+  .meta-grid[data-family="aligned_comparison"] .meta-grid-shell,
+  .meta-grid[data-family="proposal_review"] .meta-grid-shell {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 54px minmax(0, 1fr) auto;
+    height: min(72vh, 680px);
+    min-height: 500px;
+    width: min(700px, calc(100vw - 36px));
+  }
+
+  .meta-grid-workspace {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .meta-grid-request-form {
+    grid-column: 1;
+    grid-row: 3;
+  }
+}
+
+@media (max-width: 700px) {
+  .meta-grid {
+    padding: 8px 6px 6px;
+  }
+
+  .meta-grid-shell,
+  .meta-grid[data-family="patient_timeline"] .meta-grid-shell,
+  .meta-grid[data-family="focused_schedule_lane"] .meta-grid-shell,
+  .meta-grid[data-family="availability_slots"] .meta-grid-shell,
+  .meta-grid[data-family="aligned_comparison"] .meta-grid-shell,
+  .meta-grid[data-family="proposal_review"] .meta-grid-shell {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 58px minmax(0, 1fr) auto;
+    height: calc(100vh - 14px);
+    min-height: 0;
+    width: calc(100vw - 12px);
+  }
+
+  .meta-grid-window-bar {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .meta-grid-workspace {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .meta-grid-request-form {
+    gap: 7px;
+    grid-column: 1;
+    grid-row: 3;
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: 8px 10px;
+  }
+
+  #meta-grid-request {
+    height: 52px;
+    min-height: 52px;
+  }
+
+  #meta-grid-privacy {
+    display: none;
+  }
+
+  .meta-grid-request-actions {
+    display: block;
+  }
+
+  .meta-grid-request-actions .meta-grid-primary {
+    min-height: 48px;
+  }
+
+  .meta-grid-actions.is-return-only {
+    display: flex;
+  }
+
+  .meta-grid-orientation {
+    grid-template-columns: 82px minmax(0, 1fr);
+  }
+}
+
+@media (max-height: 470px) and (orientation: landscape) {
+  .meta-grid {
+    padding: 5px;
+  }
+
+  .meta-grid-shell,
+  .meta-grid[data-family="patient_timeline"] .meta-grid-shell,
+  .meta-grid[data-family="focused_schedule_lane"] .meta-grid-shell,
+  .meta-grid[data-family="availability_slots"] .meta-grid-shell,
+  .meta-grid[data-family="aligned_comparison"] .meta-grid-shell,
+  .meta-grid[data-family="proposal_review"] .meta-grid-shell {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 52px minmax(0, 1fr) 60px;
+    height: calc(100vh - 10px);
+    width: min(760px, calc(100vw - 10px));
+  }
+
+  .meta-grid-window-bar {
+    grid-column: 1;
+  }
+
+  .meta-grid-workspace {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .meta-grid-request-form {
+    grid-column: 1;
+    grid-row: 3;
+    padding-block: 6px;
+  }
+}
+
+@media (min-width: 701px) {
+  .meta-grid.is-expanded {
+    padding-inline: clamp(18px, 3.4vw, 54px);
+  }
+
+  .meta-grid.is-expanded .meta-grid-shell {
+    grid-template-columns: minmax(220px, 270px) minmax(0, 1fr);
+    grid-template-rows: 54px minmax(0, 1fr) auto;
+    height: min(78vh, 750px);
+    width: min(1080px, calc(100vw - clamp(72px, 10vw, 150px)));
+  }
+
+  .meta-grid.is-expanded .meta-grid-rail {
+    border-bottom: 0;
+    border-right: 1px solid var(--bureau-rule);
+    display: grid;
+    gap: 15px;
+    grid-column: 1;
+    grid-row: 2;
+    max-height: none;
+    overflow: auto;
+    padding: 17px 15px;
+  }
+
+  .meta-grid.is-expanded .meta-grid-window-bar {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .meta-grid.is-expanded .meta-grid-workspace {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .meta-grid.is-expanded .meta-grid-request-form {
+    grid-column: 1 / -1;
+    grid-row: 3;
+  }
+}
+
+@media (max-width: 700px) {
+  #meta-grid-expand {
+    display: none;
+  }
+}
+
+/* Appointment-sheet hierarchy.
+   Expansion adds an adjoining Bureau rail; the projected paper keeps the
+   same date/detail/status reading order at every supported width. */
+
+.meta-grid-orientation {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: minmax(0, 1fr);
+  padding: 15px 18px 13px;
+}
+
+.meta-grid-orientation h2 {
+  color: var(--bureau-eucalyptus);
+  font-size: 9px;
+  letter-spacing: 0.09em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.meta-grid-scope-summary {
+  color: var(--bureau-navy-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(20px, 2.2vw, 25px);
+  font-weight: 600;
+  line-height: 1.18;
+}
+
+.meta-grid-omissions {
+  display: none;
+}
+
+.meta-grid-freshness {
+  color: var(--bureau-eucalyptus);
+  font-size: 11px;
+}
+
+.meta-grid-timeline,
+.meta-grid-list,
+.meta-grid-overview-list {
+  display: grid;
+  gap: 9px;
+  list-style: none;
+  margin: 0;
+  padding: 10px 18px 14px;
+}
+
+.meta-grid-timeline-item.meta-grid-appointment-card,
+.meta-grid-item.meta-grid-appointment-card,
+.meta-grid-overview-item.meta-grid-appointment-card {
+  align-items: stretch;
+  background: #fff;
+  border: 1px solid #d8dee1;
+  box-shadow: 0 1px 2px rgb(7 47 68 / 5%);
+  display: grid;
+  gap: 0;
+  grid-template-columns: 76px minmax(0, 1fr) 110px;
+  margin: 0;
+  min-height: 78px;
+  padding: 0;
+}
+
+.meta-grid-appointment-card[role="button"] {
+  cursor: pointer;
+}
+
+.meta-grid-appointment-card[role="button"]:focus-visible,
+.meta-grid-appointment-card[aria-selected="true"] {
+  border-color: var(--bureau-eucalyptus);
+  box-shadow: 0 0 0 2px rgb(47 139 109 / 18%);
+  outline: none;
+}
+
+.meta-grid-proposed-change {
+  color: var(--bureau-terracotta);
+  font-size: 11px;
+  font-weight: 750;
+  margin: 6px 0 0;
+}
+
+.meta-grid-appointment-date {
+  align-content: center;
+  border-right: 1px solid #d8dee1;
+  color: #38515d;
+  display: grid;
+  font-size: 9px;
+  line-height: 1.25;
+  padding: 10px 11px;
+  text-transform: uppercase;
+}
+
+.meta-grid-appointment-date strong {
+  color: var(--bureau-navy-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 12px;
+}
+
+.meta-grid-appointment-details {
+  align-content: center;
+  display: grid;
+  padding: 10px 13px;
+}
+
+.meta-grid-appointment-details h3 {
+  color: var(--bureau-navy-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 3px;
+}
+
+.meta-grid-appointment-details .meta-grid-item-meta,
+.meta-grid-appointment-patient {
+  color: #38515d;
+  font-size: 10px;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.meta-grid-appointment-patient {
+  color: var(--bureau-navy-deep);
+  font-weight: 700;
+  margin-top: 3px;
+}
+
+.meta-grid-appointment-status {
+  align-content: center;
+  color: var(--bureau-eucalyptus);
+  display: grid;
+  font-size: 10px;
+  gap: 5px;
+  grid-template-columns: 7px auto;
+  justify-content: end;
+  padding: 10px 13px;
+  text-align: right;
+}
+
+.meta-grid-status-dot {
+  align-self: center;
+  background: #2f8b6d;
+  border-radius: 50%;
+  height: 6px;
+  width: 6px;
+}
+
+.meta-grid-actions {
+  background: #fffefa;
+  display: flex;
+  padding: 10px 18px;
+}
+
+.meta-grid-read-next {
+  align-items: center;
+  display: grid;
+  flex: 1 1 auto;
+  gap: 11px;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
+}
+
+.meta-grid-read-next-icon {
+  align-items: center;
+  border: 1px solid #b7c8c5;
+  border-radius: 50%;
+  color: var(--bureau-eucalyptus);
+  display: flex;
+  font-size: 19px;
+  height: 34px;
+  justify-content: center;
+  width: 34px;
+}
+
+.meta-grid-read-next-copy {
+  display: grid;
+  gap: 2px;
+}
+
+.meta-grid-read-next-copy strong {
+  color: var(--bureau-terracotta);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 12px;
+}
+
+.meta-grid-read-next-copy span {
+  color: #526770;
+  font-size: 9px;
+}
+
+.meta-grid-read-next-button {
+  background: #fff;
+  border-color: #c7d2d5;
+  color: var(--bureau-navy-deep);
+  white-space: nowrap;
+}
+
+.meta-grid-actions .meta-grid-bottom-return {
+  display: none;
+}
+
+.meta-grid-request-actions .meta-grid-primary {
+  background: #c6431c;
+  border-color: #ad3512;
+  box-shadow: 0 2px 4px rgb(125 42 18 / 22%);
+  color: #fff;
+}
+
+.meta-grid-request-actions .meta-grid-primary:hover:not(:disabled) {
+  background: #a93616;
+  border-color: #8e2b10;
+}
+
+.meta-grid-planner-control {
+  align-items: center;
+  color: #526770;
+  display: inline-flex;
+  font-size: 9px;
+  gap: 5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.meta-grid-planner-control select {
+  background: #fff;
+  border: 1px solid #c7d2d5;
+  border-radius: 4px;
+  color: var(--bureau-navy-deep);
+  font: inherit;
+  min-height: 32px;
+  padding: 5px 22px 5px 7px;
+  text-transform: none;
+}
+
+.meta-grid-planner-control select:focus-visible {
+  outline: 2px solid var(--bureau-eucalyptus);
+  outline-offset: 2px;
+}
+
+.meta-grid-planner-provenance {
+  align-items: center;
+  color: #315d54;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 10px;
+  gap: 5px 10px;
+  margin-top: 3px;
+}
+
+.meta-grid-planner-provenance span {
+  align-items: center;
+  display: inline-flex;
+  gap: 4px;
+}
+
+.meta-grid-planner-provenance span + span::before {
+  color: #95a6a1;
+  content: "·";
+  margin-right: 5px;
+}
+
+.meta-grid-planner-provenance code {
+  color: inherit;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 9px;
+}
+
+@media (max-width: 700px) {
+  .meta-grid-planner-control {
+    justify-content: flex-end;
+    margin-bottom: 4px;
+  }
+
+  .meta-grid-planner-control select {
+    max-width: 116px;
+  }
+}
+
+@media (max-width: 700px) {
+  .meta-grid-timeline-item.meta-grid-appointment-card,
+  .meta-grid-item.meta-grid-appointment-card,
+  .meta-grid-overview-item.meta-grid-appointment-card {
+    grid-template-columns: 62px minmax(0, 1fr);
+  }
+
+  .meta-grid-appointment-date {
+    padding-inline: 8px;
+  }
+
+  .meta-grid-appointment-status {
+    border-top: 1px solid #e1e5e7;
+    grid-column: 2;
+    padding: 7px 11px;
+  }
+
+  .meta-grid-read-next {
+    grid-template-columns: 32px minmax(0, 1fr);
+  }
+
+  .meta-grid-read-next-icon {
+    height: 30px;
+    width: 30px;
+  }
+
+  .meta-grid-read-next-button {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .meta-grid-actions .meta-grid-bottom-return {
+    display: inline-flex;
+  }
+}

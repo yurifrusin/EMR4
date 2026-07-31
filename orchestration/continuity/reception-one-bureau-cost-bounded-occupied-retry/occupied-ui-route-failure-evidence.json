@@ -1,0 +1,13 @@
+{
+  "appointment_write_performed": false,
+  "credential_material_retained": false,
+  "fallback_performed": false,
+  "post_attempt_residue_clear": true,
+  "provider_calls_performed": null,
+  "raw_prompt_retained": false,
+  "raw_provider_response_retained": false,
+  "reason_code": "runtime_audit_ref_invalid",
+  "result": "reception_one_bureau_live_isolated_planner_failed_closed",
+  "retry_performed": false,
+  "schema_version": "reception.one.bureau_live_isolated_planner.occupied_failure.v1"
+}

@@ -1,0 +1,11 @@
+{
+  "attempt_id": "gemini-25-primary-001",
+  "fallback_permitted": false,
+  "ledger_id": "gemini-25-primary-ledger-001",
+  "maximum_provider_calls": 0,
+  "policy_id": "vertex-sydney-gemini-25-authored-synthetic-v1",
+  "provider_calls_consumed": 0,
+  "schema_version": "ariadne.vertex_sydney_single_use_ledger.v1",
+  "status": "consumed",
+  "closure_reason": "provider_free_relay_start_race"
+}

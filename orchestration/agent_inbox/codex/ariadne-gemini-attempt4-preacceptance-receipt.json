@@ -1,0 +1,51 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "verifier_acceptance",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md sections 2-3 and Current Baton updated for attempt 004",
+    "current_authority_allocation": "AGENTS.md section 4; Sol remains acceptance owner and no external worker was used",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-gemini-repaired-request-attempt4-plan.md",
+      "docs/ariadne-gemini-repaired-request-attempt4-closeout.md",
+      "orchestration/continuity/ariadne-terra-gemini-comparison/attempt-004-gemini-evidence.json",
+      "orchestration/continuity/ariadne-terra-gemini-comparison/attempt-004-audit-analysis.json",
+      "orchestration/agent_inbox/codex/ariadne-gemini-attempt4-sol-review.md"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5-6: the attempt is consumed; no retry, further provider call, PII, database/product data, protected evidence or runtime authority remains open",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_from_authorised_ariadne_tranches": true,
+      "unrelated_user_changes_preserved": true
+    }
+  },
+  "live_authority": {
+    "attempt_004_consumed": true,
+    "gemini_provider_calls_performed": 1,
+    "further_provider_calls_authorised": false,
+    "retry_or_fallback_authorised": false,
+    "australian_processing_claim": false,
+    "postgresql_or_product_authority": false,
+    "pii_or_protected_data_authorised": false,
+    "worker_dispatch_selected": false,
+    "git_integration_authorised": false
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

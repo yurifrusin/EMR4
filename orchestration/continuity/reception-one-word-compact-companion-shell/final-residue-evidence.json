@@ -1,0 +1,20 @@
+{
+  "schema_version": "reception.one.word_companion.residue_evidence.v1",
+  "result": "passed",
+  "scope": "reception-one-word-compact-companion-shell",
+  "checked_at": "2026-07-31T05:45:00Z",
+  "browser_tabs_finalized": true,
+  "task_processes_remaining": 0,
+  "task_listeners_remaining": 0,
+  "task_containers_remaining": 0,
+  "task_networks_remaining": 0,
+  "task_images_remaining": 0,
+  "temporary_credential_artifacts_created": 0,
+  "provider_calls": 0,
+  "notes": [
+    "The owned loopback preview server was stopped after browser acceptance.",
+    "After the final repeat acceptance run, task-scoped process, port 3000, container, network and image checks returned zero residue.",
+    "Pre-existing unrelated development processes were left untouched.",
+    "The tranche did not read, create, copy, mount or persist credentials."
+  ]
+}

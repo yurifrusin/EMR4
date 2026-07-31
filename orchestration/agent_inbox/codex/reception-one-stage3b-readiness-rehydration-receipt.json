@@ -1,0 +1,48 @@
+{
+  "authority_boundary": "receipt_only_provider_free_authored_synthetic_representative_staff_study_readiness_no_participant_result_product_write_production_or_release_claim",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "author_reception_one_stage3b_representative_staff_readiness_plan",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely, including the current visual-synthesis result, current next-work decision, authority allocation and sections 5 and 6.",
+    "current_authority_allocation": [
+      "Yuri replied 'Let's do it' to the recommended provider-free Reception One representative-staff evaluation sequence.",
+      "The authorization opens bounded preparation and representative-staff usability evaluation with authored-synthetic scenarios; it does not silently supply participants or permit fabricated observations."
+    ],
+    "active_plan_and_acceptance": [
+      "docs/bernie-stage3a-yuri-formative-validation-plan.md",
+      "docs/bernie-stage3a-yuri-formative-observation-review.md",
+      "docs/bernie-stage3a-final-validation-closeout.md",
+      "docs/bernie-reception-one-focused-review-context.md",
+      "docs/bernie-reception-one-visual-interaction-synthesis-plan.md",
+      "docs/bernie-reception-one-visual-interaction-synthesis-closeout.md",
+      "orchestration/agent_inbox/codex/reception-one-visual-synthesis-sol-acceptance.md",
+      "orchestration/continuity/emr4-continuity-graph.json revision 54",
+      "orchestration/continuity/emr4-compass.json map revision 41"
+    ],
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 remain sealed; historical diary material remains local and excluded; the study may use only authored-synthetic data and structured de-identified observations. No provider, PII, transcript, product write, production, deployment or release authority is inferred.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "worktree_entry_count": 186,
+      "protected_refs_unchanged": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

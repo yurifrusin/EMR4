@@ -1,0 +1,98 @@
+{
+  "schema_version": "reception.one.preprinted_form_v5.multicase_manifest.v1",
+  "evaluation_id": "reception-one-preprinted-form-v5-multicase-001",
+  "data_class": "authored_synthetic",
+  "effect_ceiling": "proposal_only",
+  "historical_anchor": {
+    "case_id": "known-move",
+    "source_result": "reception_one_preprinted_form_v5_occupied_pass",
+    "replayed": false
+  },
+  "frozen_condition": {
+    "few_shot_examples": false,
+    "demonstration_answers": false,
+    "prompt_optimisation": false,
+    "fine_tuning": false,
+    "temperature": 0,
+    "thinking_budget": 0,
+    "mid_cohort_prompt_or_schema_change": false
+  },
+  "maximum_primary_calls": 6,
+  "maximum_correction_calls": 6,
+  "absolute_call_ceiling": 12,
+  "incremental_cost_ceiling_usd": 1,
+  "cases": [
+    {
+      "case_code": "create",
+      "source_case_id": "known-create",
+      "expected_goal": "create",
+      "expected_proposal_family": "create",
+      "expected_api_spine_operation_id": "proposeAppointmentCreate",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "resize",
+      "source_case_id": "known-resize",
+      "expected_goal": "resize",
+      "expected_proposal_family": "resize",
+      "expected_api_spine_operation_id": "proposeAppointmentUpdate",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "cancel",
+      "source_case_id": "known-cancel",
+      "expected_goal": "cancel",
+      "expected_proposal_family": "cancel",
+      "expected_api_spine_operation_id": "proposeAppointmentDelete",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "status",
+      "source_case_id": "known-status",
+      "expected_goal": "status_change",
+      "expected_proposal_family": "status_change",
+      "expected_api_spine_operation_id": "proposeAppointmentStatus",
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "squeeze",
+      "source_case_id": "novel-squeeze-in",
+      "expected_goal": "squeeze_in_assessment",
+      "expected_proposal_family": "squeeze_in_assessment",
+      "expected_api_spine_operation_id": null,
+      "expected_proposal_release": true
+    },
+    {
+      "case_code": "clarify",
+      "source_case_id": null,
+      "request_id": "synthetic-request-clarify",
+      "correlation_id": "synthetic-correlation-clarify",
+      "utterances": [
+        "Please help Margaret Thompson with her appointment."
+      ],
+      "expected_goal": "clarification",
+      "expected_proposal_family": "clarification",
+      "expected_api_spine_operation_id": null,
+      "expected_proposal_release": false,
+      "expected_typed_output_kind": "clarification"
+    }
+  ],
+  "provider_boundary": {
+    "provider": "google_cloud_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "fallback_permitted": false
+  },
+  "authority": {
+    "product_or_database_access": false,
+    "patient_health_or_clinical_data": false,
+    "confirmation_authority": false,
+    "appointment_write_authority": false,
+    "provider_tools": false,
+    "product_delivery": false
+  }
+}

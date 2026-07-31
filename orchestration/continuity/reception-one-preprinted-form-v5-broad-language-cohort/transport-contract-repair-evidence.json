@@ -1,0 +1,53 @@
+{
+  "schema_version": "reception.one.preprinted_form_v5.transport_contract_repair.v1",
+  "result": "local_request_transport_repaired",
+  "failed_case": "b-move-resched",
+  "failed_turn": 2,
+  "provider_calls_before_diagnosis": 5,
+  "zero_call_failed_ledgers": 8,
+  "provider_calls_consumed_by_failed_relay_attempts": 0,
+  "diagnosis": {
+    "typed_correction_request_bytes": 9095,
+    "former_relay_max_bytes": 8192,
+    "existing_broker_max_bytes": 32768,
+    "bounded_cell_observation": "edge_aborted_invalid_json",
+    "provider_broker_audit_events": [
+      "broker_ready"
+    ],
+    "root_cause": "The relay rejected the typed correction packet with HTTP 413 before the host broker or Vertex received it; the cell normalized the non-JSON relay error body to invalid_json."
+  },
+  "repairs": [
+    "The cohort coordinator records a semantically safe-but-oracle-wrong case and continues instead of aborting the remaining cohort.",
+    "The cell and relay retry only pre-connect connection refusal; no sent request is replayed.",
+    "Relay readiness checks the listening socket table without consuming the one-use connection.",
+    "The relay is bridge-primary and attaches to the internal cell network with only the broker alias.",
+    "Local failure diagnostics retain only bounded status codes, byte counts and hashes, never raw cell or relay output.",
+    "The relay request ceiling now equals the pre-existing 32768-byte broker ceiling."
+  ],
+  "unchanged_boundaries": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "data_class": "authored_synthetic",
+    "effect_ceiling": "proposal_only",
+    "absolute_provider_call_ceiling": 48,
+    "cost_ceiling_usd": 1,
+    "provider_fallback": false,
+    "product_or_database_access": false,
+    "confirmation_or_write_authority": false
+  },
+  "source_hashes": {
+    "scripts/ariadne_vertex_sydney_gemini_25_relay.py": "sha256:97dabf78cf4e78c440aee6587c94c6312e8cba1bae6b023b6e7110673b2fb61f",
+    "scripts/ariadne_vertex_sydney_gemini_25_cell.py": "sha256:530d6f91e841aa41dd4fd87f07f45c360c728e7ca5847586bab5d19b604a6a71",
+    "scripts/reception_one_bureau_model_text_lane_live.py": "sha256:898ef48652002cd7b2edead7fcbe2177d2de3b6526767e6419dc9377fcb58f5f",
+    "scripts/reception_one_preprinted_form_v5_multicase.py": "sha256:3a0edf9b88f05d65b4814480595a5b39b27fdead8753818129fde0f98ae044b"
+  },
+  "focused_regressions_passed": 60,
+  "provider_blocked_reruns_passed": true,
+  "real_isolation_reruns_passed": true,
+  "adc_and_cloud_control_preflight_reruns_passed": true
+}

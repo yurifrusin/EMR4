@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "enable_exactly_cloud_run_and_artifact_registry_apis_create_the_exact_zero_project_role_runtime_identity_and_repeat_read_only_resource_checks",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_raisa_cloud_api_identity_enablement_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No worker was selected; the short serial cloud-control sequence remains Sol-owned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport was selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No model provider or external reviewer was selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: raisa_cloud_run_public_https_dev_host_readiness_pass remains the accepted product result at Continuity graph revision 176 and Compass map revision 157; its subsequent read-only preflight observed both required APIs disabled and the exact runtime identity absent.",
+        "current_authority_allocation: Yuri explicitly authorises enabling run.googleapis.com and artifactregistry.googleapis.com, creating the exact dedicated zero-project-role runtime identity, and repeating the read-only resource checks.",
+        "active_plan_and_acceptance: docs/raisa-cloud-run-api-runtime-identity-enablement-plan.md narrows execution to project bernie-emr4-dev, region australia-southeast1, the two exact APIs and raisa-office-web-runtime@bernie-emr4-dev.iam.gserviceaccount.com with zero project roles.",
+        "protected_evidence_boundaries: protected holdouts, historical Diary material, patient, health, clinical and product-derived data, provider payloads, operator identities and credentials remain unopened and unrecorded; repository creation, Cloud Run service creation, public IAM, image push, deployment, backend, provider, production and release remain closed.",
+        "git_refs_and_worktree: HEAD is 5b1ea7952fb08eea333da0e63f166d3895ccea32 on codex/ariadne-terra-gemini-comparative-rehearsal; master, handoff/current, origin/master and origin/handoff/current are 4974075b31035d599e081d68e3b85e04a897baa1; all 3388 observed worktree entries are preserved.",
+        "No interactive authentication, project switch, billing mutation, service-account key, runtime project-role grant or other external resource is authorised."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

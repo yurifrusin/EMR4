@@ -1,0 +1,119 @@
+{
+  "id": "reception-one-word-hybrid-contextual-launch",
+  "title": "Reception One Word Hybrid Contextual Launch Foundation",
+  "kind": "implementation",
+  "status": "accepted",
+  "created_at": "2026-07-31T04:00:00Z",
+  "updated_at": "2026-07-31T04:30:00Z",
+  "coordinates": {
+    "git_ref": "codex/ariadne-terra-gemini-comparative-rehearsal",
+    "source_head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "thread_id": null,
+    "worktree_role": "integration"
+  },
+  "relationships": [
+    {
+      "node_id": "reception-one-bureau-post-admission-runtime-hardening",
+      "relation": "builds_on"
+    },
+    {
+      "node_id": "reception-one-integrated-bureau",
+      "relation": "validates"
+    },
+    {
+      "node_id": "reception-one-bureau-runtime-ui-wiring",
+      "relation": "validates"
+    }
+  ],
+  "authority": {
+    "authorized_openings": [
+      {
+        "boundary": "api-change",
+        "scope": "Provider-free local development of a closed zero-authority Word-to-native-Diary navigation context plus the Reception One request-input visual repair; no patient context, provider call, backend command, confirmation or write.",
+        "source": "docs/bernie-reception-one-word-hybrid-contextual-launch-plan.md"
+      }
+    ],
+    "notes": [
+      "Yuri selected the Hybrid direction: Word remains the clinical workspace, a later compact companion may summarize admitted work, and detailed Diary work opens in the native Bureau.",
+      "The new action is distinct from the ordinary Diary launcher and reuses the existing Office dialog and authentication handshake.",
+      "The launch context is kept out of the URL and contains no patient, appointment, request, token, clinical or command field.",
+      "The native Diary verifies the requested date before opening Reception One.",
+      "Provider, ADC, real/product-derived data, voice, confirmation, writes, production, deployment and release remain closed."
+    ]
+  },
+  "decisions": [
+    {
+      "id": "adopt-reception-one-word-native-diary-hybrid-direction-168",
+      "source": "docs/bernie-reception-one-word-hybrid-contextual-launch-plan.md",
+      "status": "accepted",
+      "summary": "Preserve Word as the clinical workspace, add a compact Reception One launch surface, and hand detailed work to the authoritative native Diary/Bureau through a closed typed context."
+    }
+  ],
+  "claim_scope": [
+    "Provider-free Word taskpane launcher and native Diary contextual handoff using one exact non-authoritative typed message.",
+    "Verified Diary date movement before Reception One projection opening.",
+    "Bounded responsive request-input auto-growth without one- or two-line clipping.",
+    "Route-intercepted authored-synthetic local Chromium evidence only; no actual authenticated Word Online, provider, database or production result."
+  ],
+  "contract_evidence": [
+    {
+      "contract_id": "combined-patient-practitioner-time-duration-intent",
+      "status": "satisfied",
+      "evidence": [
+        "tests/test_reception_one_word_hybrid_contextual_launch.py",
+        "tests/test_reception_one_bureau_runtime_ui_wiring.py",
+        "orchestration/continuity/reception-one-word-hybrid-contextual-launch/browser-acceptance-evidence.json"
+      ],
+      "note": "The contextual launch adds no request or patient scope; it preserves the existing Bureau typed-intent and proposal-only contracts."
+    },
+    {
+      "contract_id": "committed-reschedule-availability-reconciliation",
+      "status": "satisfied",
+      "evidence": [
+        "tests/test_reception_one_availability_reconciliation.py",
+        "tests/test_reception_one_word_hybrid_contextual_launch.py",
+        "docs/bernie-reception-one-word-hybrid-contextual-launch-closeout.md"
+      ],
+      "note": "The launch navigates through the existing verified Diary read path, and the inherited availability reconciliation suite remains green."
+    }
+  ],
+  "evidence": {
+    "plans": [
+      "docs/bernie-reception-one-word-hybrid-contextual-launch-plan.md",
+      "docs/security/bernie-reception-one-word-hybrid-contextual-launch-threat-model-delta.md"
+    ],
+    "receipts": [
+      "orchestration/agent_inbox/codex/reception-one-word-hybrid-contextual-launch-preplan-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-word-hybrid-contextual-launch-preacceptance-receipt.json"
+    ],
+    "tests": [
+      "tests/test_reception_one_word_hybrid_contextual_launch.py",
+      "tests/test_reception_one_integrated_bureau.py",
+      "tests/test_reception_one_bureau_runtime_ui_wiring.py",
+      "tests/test_reception_one_bureau_post_admission_runtime_hardening.py",
+      "tests/test_reception_one_projection_overflow.py",
+      "tests/test_reception_one_availability_reconciliation.py",
+      "tests/test_bernie_functional_meta_grid.py",
+      "tests/test_bernie_meta_grid_live_local_integration.py",
+      "tests/test_api_spine_artifacts.py"
+    ],
+    "findings": [
+      "orchestration/continuity/reception-one-word-hybrid-contextual-launch/browser-acceptance-evidence.json",
+      "orchestration/continuity/reception-one-word-hybrid-contextual-launch/word-launch-context.schema.json",
+      "orchestration/continuity/reception-one-word-hybrid-contextual-launch/word-companion-launcher.png",
+      "orchestration/continuity/reception-one-word-hybrid-contextual-launch/contextual-launch-desktop.png",
+      "orchestration/continuity/reception-one-word-hybrid-contextual-launch/contextual-launch-narrow.png"
+    ],
+    "closeouts": [
+      "docs/bernie-reception-one-word-hybrid-contextual-launch-closeout.md"
+    ],
+    "acceptances": [
+      "orchestration/agent_inbox/codex/reception-one-word-hybrid-contextual-launch-sol-acceptance.md"
+    ]
+  },
+  "unresolved_gates": [
+    "Actual authenticated Word Online dialog, tenant popup policy and focus restoration require a later supervised product exercise.",
+    "The compact conversational Word companion is not implemented by this foundation.",
+    "Patient/product-derived context, provider use, voice, confirmation, writes, production, deployment and release remain closed."
+  ]
+}

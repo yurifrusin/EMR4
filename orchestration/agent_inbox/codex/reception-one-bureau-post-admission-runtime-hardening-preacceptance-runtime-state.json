@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "accept_provider_free_post_admission_runtime_hardening_after_browser_and_regression_gates",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_post_admission_preacceptance",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external worker was selected for the serial provider-free client hardening."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport was selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external peer worker was selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: the accepted occupied Bureau result remains current at Continuity 166 / Compass 147 while its provider-free post-admission hardening descendant awaits acceptance.",
+        "current_authority_allocation: this descendant uses only local authored-synthetic fixtures and the existing UI contract; provider calls, ADC reads, external workers, confirmation, writes, production, deployment and release remain closed.",
+        "active_plan_and_acceptance: docs/bernie-reception-one-bureau-post-admission-runtime-hardening-plan.md and its threat-model delta require exact planner/proofreader/call-count/audit binding and immediate stale-state clearing.",
+        "protected_evidence_boundaries: no protected holdout, historical Diary material, raw prompt, raw provider response, credential, hidden reasoning or unverified draft was opened or retained.",
+        "git_refs_and_worktree: HEAD is 5b1ea7952fb08eea333da0e63f166d3895ccea32; master, handoff/current, origin/master and origin/handoff/current are 4974075b31035d599e081d68e3b85e04a897baa1; unrelated user changes remain preserved.",
+        "The route-intercepted Chromium evidence passes Standard and Isolated admitted presentation, mode-switch clearing, four malformed-contract abortions, zero provider/credential/database access and zero writes."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

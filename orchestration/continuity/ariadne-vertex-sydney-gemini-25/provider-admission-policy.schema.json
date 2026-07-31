@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/ariadne-vertex-sydney-gemini-25-provider-admission.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "policy_id",
+    "status",
+    "subject",
+    "data_classes",
+    "geography",
+    "provider_controls",
+    "lifecycle",
+    "required_admission_checks",
+    "rejected_routes",
+    "claim_boundary",
+    "decision"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "ariadne.vertex_sydney_gemini_25_provider_admission_policy.v1"
+    },
+    "policy_id": {
+      "const": "ariadne-vertex-sydney-gemini-25-provider-admission"
+    },
+    "status": {
+      "const": "admitted"
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "model_id",
+        "project",
+        "service_account",
+        "authentication",
+        "location",
+        "endpoint_hostname",
+        "automatic_fallback"
+      ],
+      "properties": {
+        "provider": {"const": "google_vertex_ai"},
+        "model_id": {"const": "gemini-2.5-flash"},
+        "project": {"const": "bernie-emr4-dev"},
+        "service_account": {
+          "const": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"
+        },
+        "authentication": {
+          "const": "keyless_impersonated_service_account_adc"
+        },
+        "location": {"const": "australia-southeast1"},
+        "endpoint_hostname": {
+          "const": "australia-southeast1-aiplatform.googleapis.com"
+        },
+        "automatic_fallback": {"const": false}
+      }
+    },
+    "data_classes": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/rule"},
+      "required": [
+        "authored_synthetic",
+        "product_derived",
+        "patient_or_health_information"
+      ]
+    },
+    "geography": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "australian_regional_processing",
+        "regional_storage",
+        "global_endpoint",
+        "container_effect"
+      ],
+      "properties": {
+        "australian_regional_processing": {"type": "string", "minLength": 1},
+        "regional_storage": {"type": "string", "minLength": 1},
+        "global_endpoint": {"type": "string", "minLength": 1},
+        "container_effect": {
+          "const": "constrains_local_capabilities_but_does_not_determine_remote_provider_processing_geography"
+        }
+      }
+    },
+    "provider_controls": {
+      "type": "object",
+      "additionalProperties": {"type": "string", "minLength": 1},
+      "required": [
+        "training",
+        "abuse_monitoring_retention",
+        "request_response_logging",
+        "in_memory_cache"
+      ]
+    },
+    "lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "launch_stage",
+        "retirement_on",
+        "accepted_scope"
+      ],
+      "properties": {
+        "launch_stage": {"const": "GA"},
+        "retirement_on": {"const": "2026-10-16"},
+        "accepted_scope": {"const": "one_bounded_authored_synthetic_rehearsal_only"}
+      }
+    },
+    "required_admission_checks": {"$ref": "#/$defs/strings"},
+    "rejected_routes": {"$ref": "#/$defs/strings"},
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "independently_observed_evidence",
+        "provider_contractual_residency_evidence",
+        "allowed_claims",
+        "prohibited_claims"
+      ],
+      "properties": {
+        "independently_observed_evidence": {"$ref": "#/$defs/strings"},
+        "provider_contractual_residency_evidence": {"$ref": "#/$defs/strings"},
+        "allowed_claims": {"$ref": "#/$defs/strings"},
+        "prohibited_claims": {"$ref": "#/$defs/strings"}
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["admitted", "result", "blocking_reasons", "next_action"],
+      "properties": {
+        "admitted": {"const": true},
+        "result": {
+          "const": "ariadne_vertex_sydney_gemini_25_provider_admission_pass"
+        },
+        "blocking_reasons": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "next_action": {
+          "const": "open_provider_blocked_contract_tranche_only"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["admitted", "definition"],
+      "properties": {
+        "admitted": {"type": "boolean"},
+        "definition": {"type": "string", "minLength": 1}
+      }
+    },
+    "strings": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  }
+}

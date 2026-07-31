@@ -1,0 +1,53 @@
+{
+  "authority_boundary": "provider_free_authored_synthetic_typed_plan_protocol_only_no_provider_product_data_database_write_deployment_release_or_protected_ref_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "implement_the_provider_free_reception_one_bureau_typed_plan_protocol_and_deterministic_proofreader",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records the provider-free integrated Bureau baseline as accepted at Continuity revision 62 and Compass revision 49, while model-connected text, product data, writes, production, deployment and release remain separately gated.",
+    "current_authority_allocation": [
+      "Yuri authorised starting the proposed Bureau Typed Plan Protocol tranche.",
+      "The immediate authority is interpreted narrowly as provider-free authored-synthetic contract, proofreader and bounded-executor work.",
+      "No external worker, model call, protected-ref change, historical Diary processing, product-data use, database mutation, deployment or release is authorised by this receipt."
+    ],
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-integrated-bureau-plan.md",
+      "docs/bernie-reception-one-integrated-bureau-closeout.md",
+      "docs/ariadne-bounded-cognitive-work-cell-protocol-plan.md",
+      "docs/ariadne-bounded-cognitive-work-cell-protocol-design.md",
+      "docs/ariadne-bounded-cognitive-work-cell-protocol-closeout.md",
+      "docs/bernie-reception-one-committed-event-vertical-closeout.md",
+      "docs/bernie-reception-one-availability-reconciliation-closeout.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "orchestration/access_ai_api_design.md",
+      "orchestration/bernie_release_gates.md",
+      "docs/api-spine/openapi/appointment-commands.yaml",
+      "docs/api-spine/openapi/diary-committed-events.yaml"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 remain binding: protected holdouts are sealed; raw historical Diary material remains local, ignored and excluded; provider calls and model-connected product runtime require a fresh exact authority; backend commands retain all write authority.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "worktree_entry_count_before_this_receipt": 240,
+      "protected_refs_unchanged": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

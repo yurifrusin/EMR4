@@ -1,0 +1,69 @@
+{
+  "schema_version": "ariadne.pre_attempt_receipt.v1",
+  "receipt_id": "reception-one-bureau-cost-bounded-occupied-retry-002-preattempt-20260731",
+  "created_at": "2026-07-31T01:50:00Z",
+  "status": "passed",
+  "candidate": {
+    "node_id": "reception-one-bureau-cost-bounded-occupied-retry-002",
+    "source_head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "continuity_graph_revision": 164,
+    "compass_map_revision": 145,
+    "compass_source_graph_revision": 164,
+    "rendered_compass_exact": true,
+    "rendered_compass_sha256": "sha256:ab2b230d20706184871aac07b57c7eba3fc825da39a6c419e16d3627675a796a",
+    "successor_provider_calls_already_performed": 0,
+    "successor_single_use_ledgers_already_opened": 0
+  },
+  "predecessor_closeout": {
+    "audit_sha256": "sha256:cc73e59fb9121469e3e22b11837376fb4fff9f49f41a1932ba5693e964463dc2",
+    "provider_calls": 0,
+    "cost_reservation_refunded": false,
+    "conservative_cost_carried_forward_usd": 0.0238049,
+    "cleanup_passed": true
+  },
+  "frozen_contract": {
+    "plan_sha256": "sha256:7ba79277b9517b87bd2cf0ebcd26e488fb151ed20b04ca053fcc95d62c3f5410",
+    "authority_manifest_sha256": "sha256:4bc036e5d6c5d3f17ebdfd511ec7d4645732f94c7d8a1d1853102ddf22093db8",
+    "cost_policy_sha256": "sha256:d3f5fd7ce16ba7a9efcd7911628a613aae00d353f6f65252dfe2185319695b6b",
+    "provider_blocked_evidence_sha256": "sha256:e04b18cefbf1825428ac7f9224c1b63c3b11f98645799dcdc177d58e9b7b753a",
+    "real_isolation_evidence_sha256": "sha256:f54ce1b8a7280eb2692c5ac787d9b80b97f198f620a2624076e6e1175b6ef0a9",
+    "projection_overflow_evidence_sha256": "sha256:204acd41e1174164706472af8dbc0fe13b60a6fddfa674d31fc9c770f32d004c",
+    "focused_tests_passed": 90,
+    "actual_inner_precall_gate_passed": true,
+    "repository_only_verifier_required_before_call": true,
+    "api_spine_tests_passed": true,
+    "continuity_graph_validated": true,
+    "compass_validated_and_rendered": true
+  },
+  "read_only_cloud_preflight": {
+    "path": "orchestration/continuity/reception-one-bureau-cost-bounded-occupied-retry-002/occupied-preflight-evidence.json",
+    "sha256": "sha256:36dbcc71933faf0c9cf8eda0cb14dd512ea9d36219c5c438f6cfddaa76e33ee1",
+    "result": "ariadne_vertex_sydney_gemini_25_adc_preflight_pass",
+    "all_controls_passed": true,
+    "model_inference_called": false,
+    "provider_prompt_transmitted": false,
+    "external_state_changed": false
+  },
+  "cost": {
+    "cumulative_ceiling_usd": 1.0,
+    "accounted_before_reservation_usd": 0.0238049,
+    "fresh_call_reservation_usd": 0.02,
+    "maximum_before_call_usd": 0.0438049,
+    "reservation_not_yet_opened": true,
+    "stop_after_first_admitted_proposal": true
+  },
+  "residue": {
+    "path": "orchestration/continuity/reception-one-bureau-cost-bounded-occupied-retry-002/pre-attempt-residue-evidence.json",
+    "sha256": "sha256:babecd2f05a41fab5abfe16473e2244499bf1245b9f17a09427bc712af58b728",
+    "containers": 0,
+    "networks": 0,
+    "images": 0,
+    "broker_or_cell_processes": 0,
+    "opened_ledgers": 0,
+    "database_present": false,
+    "runtime_directory_present": false,
+    "ports_available": true
+  },
+  "exact_boundary_unchanged": true,
+  "unrelated_user_changes_preserved": true
+}

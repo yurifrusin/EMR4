@@ -1,0 +1,124 @@
+{
+  "schema_version": "ariadne.terra_gemini_provider_contract_diagnostic_hardening_evidence.v1",
+  "recorded_at": "2026-07-24",
+  "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+  "result": "ariadne_terra_gemini_provider_contract_diagnostic_hardening_revision_required",
+  "implementation_status": "local_artifacts_pass",
+  "acceptance_status": "revision_required",
+  "acceptance_reason_codes": [
+    "verification-boundary-unexpected-local-test-postgresql-fixture-connection"
+  ],
+  "provider_contracts": {
+    "terra": {
+      "status": "passed",
+      "maximum_depth": 7,
+      "total_properties": 45,
+      "total_enum_values": 76,
+      "boolean_enum_count": 0
+    },
+    "gemini": {
+      "status": "passed",
+      "maximum_depth": 7,
+      "total_properties": 45,
+      "total_enum_values": 76,
+      "boolean_enum_count": 0
+    },
+    "every_enum_has_explicit_type": true,
+    "gemini_boolean_enum_present": false,
+    "full_deterministic_schema_remains_authoritative": true
+  },
+  "provider_error_diagnostics": {
+    "authored_synthetic_terra_fixture": "passed",
+    "authored_synthetic_gemini_fixture": "passed",
+    "unsafe_metadata_rejection": "passed",
+    "allowlisted_fields": [
+      "provider_status",
+      "provider_error_status",
+      "provider_error_type",
+      "provider_error_code",
+      "provider_error_parameter",
+      "provider_request_id"
+    ],
+    "error_message_recorded": false,
+    "response_body_recorded": false,
+    "arbitrary_headers_recorded": false
+  },
+  "external_audit_track": {
+    "status": "instrumented_for_future_rehearsal",
+    "owner": "trusted_broker_and_orchestrator_control_plane",
+    "sandbox_append_authority": false,
+    "sandbox_rewrite_or_delete_authority": false,
+    "sequenced_hash_chain": true,
+    "host_chain_verification": true,
+    "typed_output_field_manifest": true,
+    "proofreader_disposition_in_host_evidence": true,
+    "tamper_detection_authored_synthetic_test": "passed",
+    "raw_reasoning_recorded": false,
+    "typed_bounded_rationale_permitted": true,
+    "durable_product_audit_store": false,
+    "retroactive_attempt_002_coverage": false
+  },
+  "verification": {
+    "focused_comparative_tests": {
+      "passed": 28,
+      "failed": 0,
+      "postgresql_disabled_with_noconftest": true
+    },
+    "api_spine_artifact_tests": {
+      "passed": 36,
+      "failed": 0,
+      "postgresql_disabled_with_noconftest": true
+    },
+    "broader_selected_ariadne_and_api_population": {
+      "collected": 227,
+      "passed": 226,
+      "failed": 1,
+      "postgresql_disabled_with_noconftest": true,
+      "failure": {
+        "test": "tests/test_ariadne_deepseek_in_cell_rehearsal.py::test_runtime_source_hashes_still_match_executed_container_inputs",
+        "reason": "historical DeepSeek evidence hashes do not match current committed DeepSeek runtime sources",
+        "touched_by_this_tranche": false
+      }
+    },
+    "static_validate": "passed",
+    "python_compile": "passed",
+    "node_syntax": "passed",
+    "ruff": "passed",
+    "bandit_medium_or_higher": "passed",
+    "json_parse": "passed",
+    "git_diff_check": "passed"
+  },
+  "boundary_incident": {
+    "status": "acceptance_blocking",
+    "description": "An initial concurrent pytest invocation omitted --noconftest. The repository autouse session fixture connected to the configured local PostgreSQL test database and failed during fixture setup on duplicate enum userrole before the scoped test bodies ran.",
+    "possible_effect": "Fixture setup may have performed local test-database DDL before the collision.",
+    "response": [
+      "stopped using the repository conftest for this tranche",
+      "performed no database inspection or cleanup without authority",
+      "reran all scoped verification with --noconftest",
+      "retained revision_required rather than erasing the boundary deviation"
+    ],
+    "provider_or_model_call": false,
+    "credential_read": false,
+    "container_started": false,
+    "product_api_access": false,
+    "event_feed_access": false
+  },
+  "source_hashes": {
+    "provider_output_schema_file_sha256": "sha256:0399384e845dcb7c623634d3359f850783fbad32bd4bf9c47e149c35e5fd52a9",
+    "provider_contract_profiles_sha256": "sha256:635b3580e3d3aad04a2fbaeb968329b542bf3a1493a7d9d0467476e5644a4141",
+    "external_audit_track_policy_sha256": "sha256:fb5124a78c8930af55917e7e18df7c57f24c8a8ecd038df305d4e047f825af8f",
+    "provider_contract_module_sha256": "sha256:b331b813682dc284a38aac850708fbf98a996bcdf2769de84da364777ebb9987",
+    "broker_sha256": "sha256:937f5d9696f70aa9ab8ecea927b5886fe7a98fe92f563d7915c6b5838f90c5c1",
+    "rehearsal_sha256": "sha256:47621bcc68ca8aa96833b4ad653560de136382ce8c57fe3260ca4cd6cb75f54e"
+  },
+  "authority": {
+    "provider_call_performed": false,
+    "provider_retry_authorised": false,
+    "provider_retry_performed": false,
+    "prompt_transmitted": false,
+    "model_output_generated": false,
+    "git_integration_authorised": false,
+    "product_or_database_authority_granted": false
+  }
+}

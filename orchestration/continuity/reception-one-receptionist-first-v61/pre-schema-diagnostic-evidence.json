@@ -1,0 +1,27 @@
+{
+  "schema_version": "reception.one.receptionist_first_v61.pre_schema_diagnostic.v1",
+  "result": "reception_one_receptionist_first_v61_pre_schema_diagnostic_pass",
+  "historical_case_code": "b-move-shift",
+  "historical_provider_outcome": "response_rejected_before_candidate",
+  "historical_http_status": 200,
+  "bounded_reason_code": "provider_text_not_json",
+  "provider_error_contract_used": true,
+  "raw_provider_text_retained": false,
+  "candidate_reached_proofreader": false,
+  "typed_form_retained": false,
+  "release": null,
+  "diagnosis": "The failure occurred at the local JSON admission boundary before a typed candidate or proofreader disposition existed. The same case previously produced schema-admitted JSON under v6, and the unchanged v6.1 contract admitted sixteen other calls, so the retained evidence does not support a deterministic request-schema defect.",
+  "repository_local_contract_change": false,
+  "prompt_change": false,
+  "schema_change": false,
+  "proofreader_change": false,
+  "eligible_action": "one distinct same-contract authored-synthetic continuation under Yuri's standing retry authority",
+  "ineligible_actions": [
+    "reinterpret_the_discarded_provider_text",
+    "repair_or_synthesize_a_typed_form",
+    "reuse_the_consumed_ledger",
+    "change_provider_model_project_identity_region_or_authentication",
+    "use_api_key_or_global_endpoint",
+    "fallback"
+  ]
+}

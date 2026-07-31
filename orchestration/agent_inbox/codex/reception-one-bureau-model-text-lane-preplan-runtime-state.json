@@ -1,0 +1,44 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "implement_verify_and_conditionally_occupy_the_exact_reception_one_bureau_vertex_model_text_lane",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete_live_handover_current_typed_plan_acceptance_new_exact_yuri_authority_and_git_state",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri directly authorised continuation through and past the occupied Vertex gate in this session.",
+        "The authority incorporates the exact occupied-authority packet and provider-blocked plan.",
+        "All provider, model, project, identity, authentication, Sydney endpoint, authored-synthetic, isolation, proofreader, audit, USD 1, one-call, no-fallback, no-write and stop boundaries remain exact."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/codex/reception-one-bureau-model-text-lane-rehydration-receipt.json"
+  ],
+  "assigned_agent_ids": []
+}

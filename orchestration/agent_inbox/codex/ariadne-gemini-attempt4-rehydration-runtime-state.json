@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "gemini_repaired_request_fresh_attempt_004",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_fresh_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "DeepSeek is not selected for this single-lane Gemini attempt."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The Deep Code fallback is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude provider or worker lane is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The fresh request uses the purpose-built one-use broker, not Antigravity."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri explicitly instructed one fresh Gemini retry after the provider-blocked request-contract repair.",
+        "The occupied attempt is limited to the unchanged authored-synthetic work-cell task.",
+        "The attempt permits one Gemini Developer API request, one distinct single-use ledger and one disposable real-isolation lifecycle.",
+        "No Terra or other provider request, retry, fallback, model substitution or cross-model input is authorised.",
+        "The direct Gemini Developer API attempt is not evidence of Australian-local processing and remains barred from PII, product data and database copies.",
+        "PostgreSQL, event feeds, product APIs, live mailboxes, EMR commands, protected holdouts and historical Diary material remain closed.",
+        "No worker or subagent is selected.",
+        "The four unrelated Bernie receipt/runtime-state files remain preserved."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is used."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

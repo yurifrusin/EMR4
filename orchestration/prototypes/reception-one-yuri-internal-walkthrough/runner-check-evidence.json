@@ -1,0 +1,12 @@
+{
+  "schema_version": "reception_one.yuri_internal_walkthrough_runner_check.v1",
+  "observed_at": "2026-07-28T23:04:00Z",
+  "command": ".venv\\Scripts\\python.exe scripts\\run_reception_one_yuri_walkthrough.py --check --no-open",
+  "runtime_url": "http://[::1]:3000/diary/stage3b/yuri.html",
+  "provider_used": false,
+  "appointment_write_used": false,
+  "database_truth_unchanged": true,
+  "owned_database_cleanup_complete": true,
+  "external_host_contacted": false,
+  "status": "passed"
+}

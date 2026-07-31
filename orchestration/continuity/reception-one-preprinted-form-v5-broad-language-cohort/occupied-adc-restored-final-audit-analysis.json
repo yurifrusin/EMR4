@@ -1,0 +1,155 @@
+{
+  "schema_version": "reception.one.preprinted_form_v5.broad_language_external_audit_analysis.v1",
+  "result": "reception_one_preprinted_form_v5_broad_language_capability_threshold_fail_closed",
+  "evidence_sha256": "sha256:21f5e149b1ab5adda7d9d72b7037433e5cf694d137d2b784509feebf450493ce",
+  "provider_binding": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "api_key_authentication_used": false,
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "global_endpoint_used": false,
+    "provider_or_regional_fallback": false
+  },
+  "request_and_schema_binding": {
+    "data_class": "authored_synthetic",
+    "effect_ceiling": "proposal_only",
+    "contract": "reception.one.bureau.preprinted-form.v5",
+    "broker_owned_version_code": 3,
+    "prompt_or_schema_change_within_cohort": false,
+    "request_hashes_recorded_per_call": true,
+    "schema_hashes_recorded_per_call": true,
+    "raw_prompts_recorded": false,
+    "raw_provider_responses_recorded": false,
+    "chain_of_thought_recorded": false
+  },
+  "attempt_and_ledger_audit": {
+    "case_count": 24,
+    "provider_call_attempts": 32,
+    "provider_call_ledgers": 32,
+    "zero_call_closed_ledgers": 8,
+    "total_ledger_files": 40,
+    "consumed_ledger_files": 40,
+    "open_ledger_files": 0,
+    "provider_calls_consumed": 32,
+    "absolute_provider_call_ceiling": 48,
+    "exact_attempt_and_ledger_identifiers_recorded": true,
+    "identifier_sources": [
+      "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/cases/*/occupied-dialogue-evidence.json",
+      "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/cases/*/occupied-turn-*-external-audit.json",
+      "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/cases/b-move-resched/occupied-turn-002-recovery-*-ledger.json"
+    ],
+    "durable_hash_chains_valid": true,
+    "single_use_ledger_replay_observed": false
+  },
+  "provider_outcomes": {
+    "http_200_count": 32,
+    "completed_count": 32,
+    "provider_error_count": 0,
+    "latency_ms_total": 63392,
+    "latency_ms_max": 3477,
+    "prompt_tokens": 74390,
+    "candidate_tokens": 10766,
+    "total_tokens": 85156,
+    "frozen_input_price_per_million_tokens_usd": 0.15,
+    "frozen_output_price_per_million_tokens_usd": 0.6,
+    "estimated_cost_usd": 0.0176181,
+    "cost_ceiling_usd": 1,
+    "cost_ceiling_passed": true
+  },
+  "proofreader_and_oracle_findings": {
+    "primary_oracle_exact_case_count": 14,
+    "unexpected_outcome_case_count": 10,
+    "correction_turn_case_count": 8,
+    "released_case_count": 19,
+    "terminal_no_release_case_count": 5,
+    "unexpected_outcome_cases": [
+      "b-create-preface",
+      "b-move-resched",
+      "b-move-shift",
+      "b-move-correct",
+      "b-cancel-calloff",
+      "b-cancel-takeout",
+      "b-status-arrived",
+      "b-status-noshow-gap",
+      "b-clarify-details",
+      "b-clarify-fit"
+    ],
+    "repeated_correctable_error_clusters": {
+      "operator_arity_invalid": [
+        "b-cancel-takeout",
+        "b-clarify-sort"
+      ],
+      "source_type_mismatch": [
+        "b-move-resched",
+        "b-move-shift",
+        "b-move-change",
+        "b-status-arrived"
+      ]
+    },
+    "isolated_correctable_error_clusters": {
+      "external_binding_invalid": [
+        "b-status-noshow-gap"
+      ],
+      "required_source_omitted": [
+        "b-move-correct"
+      ]
+    },
+    "safe_repairs": "Only frozen deterministic mechanical repairs were available; no semantic repair, evidence invention or broker judgement repair occurred.",
+    "training_disposition": "nominate_minimal_prompt_context_teaching",
+    "capability_threshold_passed": false
+  },
+  "released_typed_value_manifest": {
+    "values_recorded_per_admitted_case": true,
+    "value_sources": [
+      "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/cases/*/occupied-turn-*-external-audit.json"
+    ],
+    "proposal_family_counts": {
+      "create": 5,
+      "move": 1,
+      "resize": 4,
+      "cancel": 1,
+      "clarification": 4,
+      "status_change": 1,
+      "squeeze_in_assessment": 3
+    },
+    "atomic_typed_release_only": true,
+    "requires_human_confirmation": true,
+    "write_performed": false,
+    "product_delivered": false
+  },
+  "vertex_audit_control_posture": {
+    "preflight_result": "passed",
+    "preflight_evidence_sha256": "sha256:0b7264315412d6959fff941d35d87961dfe36224ee5c27a1723b1bb940ec4768",
+    "prediction_only_custom_role": true,
+    "required_prediction_permission": "aiplatform.endpoints.predict",
+    "vertex_data_access_audit_logging": true,
+    "request_response_logging_disabled_or_absent": true,
+    "provider_in_memory_cache_disabled": true,
+    "service_account_key_used": false
+  },
+  "cleanup_and_residue": {
+    "all_case_cleanup_passed": true,
+    "containers_present": 0,
+    "networks_present": 0,
+    "task_images_present": 0,
+    "temporary_credential_contexts_present": 0,
+    "cohort_processes_present": 0
+  },
+  "explicit_exclusions": {
+    "credentials_or_access_tokens_recorded": false,
+    "api_key_information_recorded": false,
+    "raw_prompts_recorded": false,
+    "raw_provider_responses_recorded": false,
+    "chain_of_thought_recorded": false,
+    "product_or_database_access": false,
+    "appointment_confirmation_or_write": false,
+    "human_or_product_delivery": false,
+    "provider_or_regional_fallback": false,
+    "real_or_historical_data": false
+  },
+  "candid_conclusion": "The configured and observed Sydney Vertex locational request path, exact keyless Bernie impersonation boundary, typed form exchange, deterministic proofreader, single-use ledgers and cleanup all held. The model reached only 14 of 24 frozen exact oracles; five semantically unexpected typed releases passed the current proofreader and five other cases correctly released nothing. This is useful training evidence and a fail-closed capability result, not production readiness. It does not prove Australian physical or sovereign processing, exhaustive language reliability, safety for product-derived or health data, or authority for product access, appointment mutation, deployment or release."
+}

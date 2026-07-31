@@ -1,0 +1,96 @@
+{
+  "schema_version": "reception.one.receptionist_first_v63.external_audit_analysis.v1",
+  "recorded_at": "2026-07-30T09:35:29Z",
+  "result": "reception_one_receptionist_first_v63_external_audit_complete",
+  "cohort_result": "reception_one_receptionist_first_v63_full_cohort_fail_closed",
+  "case_count": 24,
+  "exact_safe_outcome_count": 22,
+  "nonmatching_terminal_case_count": 2,
+  "nonmatching_terminal_cases": [
+    {
+      "case_code": "b-create-correct",
+      "failure_class": "proofreader_specific_time_constraint_omission",
+      "provider_status": "completed",
+      "http_status": 200,
+      "proofreader_disposition": "admit",
+      "recognized_goal": "create",
+      "expected_candidate_slot_ids": [
+        "synthetic-slot-july28-1500"
+      ],
+      "released_candidate_slot_ids": [
+        "synthetic-slot-july28-1430",
+        "synthetic-slot-july28-1500"
+      ],
+      "write_performed": false,
+      "product_or_human_delivery": false,
+      "study_release_was_nonexact": true,
+      "repair_hypothesis": "The deterministic proofreader must reject a typed form that omits an explicitly recognized time constraint or broadens the exact oracle candidate set. This is a proofreader coverage repair, not a model-only prompt repair."
+    },
+    {
+      "case_code": "b-move-shift",
+      "failure_class": "natural_response_typed_form_goal_mismatch",
+      "primary_violation_codes": [
+        "receptionist_response_goal_mismatch"
+      ],
+      "terminal_violation_codes": [
+        "receptionist_response_goal_mismatch"
+      ],
+      "typed_goal_selected": "move",
+      "desk_context_hash_matched": true,
+      "release": null,
+      "repair_hypothesis": "Require the receptionist response and decision note to describe the same goal as the completed typed form, including after a correction ticket; do not weaken the natural-language audit channel."
+    }
+  ],
+  "provider_calls": {
+    "actual": 29,
+    "absolute_ceiling": 48,
+    "primary": 24,
+    "terminal_second": 5,
+    "after_terminal_result": 0
+  },
+  "provider_outcomes": {
+    "completed": 29,
+    "response_rejected_before_candidate": 0,
+    "raw_provider_text_retained": false
+  },
+  "usage": {
+    "prompt_tokens": 113676,
+    "visible_candidate_tokens": 15235,
+    "thinking_tokens": 19095,
+    "total_tokens": 148006,
+    "hidden_thought_content_retained": false
+  },
+  "latency_ms": {
+    "sum": 169505,
+    "minimum": 2650,
+    "maximum": 9079,
+    "mean": 5845.0
+  },
+  "exact_binding": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "api_key_authentication_used": false,
+    "fallback_performed": false
+  },
+  "audit_controls": {
+    "all_ledgers_consumed": true,
+    "all_cleanup_passed": true,
+    "durable_turn_hash_chains_valid": true,
+    "turn_external_audit_count": 29,
+    "model_and_proofreader_context_hash_recorded": true,
+    "raw_prompts_recorded": false,
+    "raw_provider_responses_recorded": false,
+    "credentials_or_tokens_recorded": false,
+    "api_key_information_recorded": false,
+    "chain_of_thought_recorded": false,
+    "product_or_database_access": false,
+    "appointment_write": false,
+    "human_or_product_delivery": false
+  },
+  "claim_limit": "The evidence proves a configured and observed Sydney locational request path and twenty-two exact safe outcomes over a reused authored-synthetic development cohort. It also exposes one deterministic proofreader coverage defect and one model natural-response/form consistency failure. It does not prove independent generalisation, production fitness, Australian physical or sovereign processing, or safety for real data."
+}

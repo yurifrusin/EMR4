@@ -1196,6 +1196,125 @@ class BernieSupervisedBookingOut(BaseModel):
     outcome: Optional["BernieBookingOutcomeOut"] = None
 
 
+class ReceptionOneProductContextRequestIn(BaseModel):
+    """Default-off authored-synthetic request for the Reception One planner."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    contract_version: Literal[
+        "reception.one.product-context-request.v1"
+    ] = "reception.one.product-context-request.v1"
+    instruction: str = Field(min_length=1, max_length=512)
+    reference_date: date
+    surface_id: str = Field(default="diary-main", min_length=1, max_length=100)
+    correlation_id: str = Field(min_length=3, max_length=100)
+    data_class: Literal["authored_synthetic"] = "authored_synthetic"
+    selected_appointment_id: Optional[uuid.UUID] = None
+    planner_mode: Literal["deterministic", "isolated_vertex"] = "deterministic"
+
+
+class ReceptionOneProductContextReviewOut(BaseModel):
+    disposition: Literal[
+        "admit",
+        "revision_required",
+        "clarification_required",
+        "reject",
+    ]
+    plan_hash: Optional[str] = None
+    operator_ids: list[str] = Field(default_factory=list, max_length=12)
+    safe_repairs: list[str] = Field(default_factory=list, max_length=12)
+    violation_paths: list[str] = Field(default_factory=list, max_length=20)
+    context_revision: int = Field(ge=1)
+
+
+class ReceptionOneProductContextSlotOut(BaseModel):
+    slot_handle: str = Field(min_length=3, max_length=100)
+    appointment_date: date
+    start_time_local: time
+    duration_minutes: int = Field(ge=5, le=180)
+    warning_codes: list[str] = Field(default_factory=list, max_length=8)
+
+
+class ReceptionOneProductContextAppointmentOut(BaseModel):
+    appointment_handle: str = Field(min_length=3, max_length=100)
+    appointment_date: date
+    start_time_local: time
+    duration_minutes: int = Field(ge=5, le=480)
+    status: Literal["booked", "arrived", "completed", "dna"]
+
+
+class ReceptionOneProductContextAdapterReviewOut(BaseModel):
+    adapter_kind: Literal[
+        "update_proposal",
+        "delete_proposal",
+        "squeeze_in_assessment",
+    ]
+    performed: Literal[True] = True
+    safe: bool
+    summary: str = Field(min_length=1, max_length=500)
+    warning_codes: list[str] = Field(default_factory=list, max_length=20)
+    block_codes: list[str] = Field(default_factory=list, max_length=20)
+    candidate_count: int = Field(default=0, ge=0, le=24)
+    freshness_verified: bool
+    confirmation_evidence_released: Literal[False] = False
+    write_performed: Literal[False] = False
+
+
+class ReceptionOneProductContextProposalOut(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    contract_version: Literal[
+        "reception.one.product-context-proposal.v1"
+    ] = "reception.one.product-context-proposal.v1"
+    result: Literal[
+        "proposal_ready",
+        "clarification_required",
+        "revision_required",
+        "blocked",
+    ]
+    safe: bool
+    summary: str = Field(min_length=1, max_length=500)
+    request_id: str = Field(min_length=3, max_length=100)
+    correlation_id: str = Field(min_length=3, max_length=100)
+    context_revision: int = Field(ge=1)
+    data_class: Literal["authored_synthetic"] = "authored_synthetic"
+    patient_handle: Optional[str] = Field(default=None, max_length=100)
+    patient_display: Optional[str] = Field(default=None, max_length=80)
+    practitioner_handle: Optional[str] = Field(default=None, max_length=100)
+    practitioner_display: Optional[str] = Field(default=None, max_length=80)
+    goal: Optional[str] = Field(default=None, max_length=80)
+    operation_id: Optional[str] = Field(default=None, max_length=100)
+    candidate_slots: list[ReceptionOneProductContextSlotOut] = Field(
+        default_factory=list,
+        max_length=24,
+    )
+    selected_appointment: Optional[
+        ReceptionOneProductContextAppointmentOut
+    ] = None
+    proposed_appointment_date: Optional[date] = None
+    proposed_start_time_local: Optional[time] = None
+    proposed_duration_minutes: Optional[int] = Field(
+        default=None,
+        ge=5,
+        le=480,
+    )
+    adapter_review: Optional[
+        ReceptionOneProductContextAdapterReviewOut
+    ] = None
+    warning_codes: list[str] = Field(default_factory=list, max_length=20)
+    review: ReceptionOneProductContextReviewOut
+    requires_confirmation: Literal[True] = True
+    proposal_only: Literal[True] = True
+    write_performed: Literal[False] = False
+    confirmation_performed: Literal[False] = False
+    planner_mode: Literal["deterministic", "isolated_vertex"] = "deterministic"
+    provider_calls: int = Field(default=0, ge=0, le=2)
+    runtime_audit_ref: Optional[str] = Field(default=None, max_length=100)
+    model_database_access: Literal[False] = False
+    database_reads_performed: bool
+    legacy_interpreter_gate_changed: Literal[False] = False
+
+
 class BernieCreateProposalConfirmationIn(BaseModel):
     """Explicit staff confirmation for supervised Bernie create-proposal evidence."""
     confirmed: bool = False

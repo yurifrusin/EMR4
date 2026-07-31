@@ -1,0 +1,100 @@
+{
+  "attempts_remaining": 1,
+  "previous_output_sha256": "sha256:7b1b3c4779a67177835fab1d227ec2a898c2d7e9f3b604f6e5f8420fe4cfd86f",
+  "previous_typed_form": {
+    "goal_code": 5,
+    "steps": [
+      {
+        "operator_code": 0,
+        "source_refs": [
+          {
+            "binding_code": 3,
+            "kind": "binding",
+            "prior_output_name": "none",
+            "prior_step_index": -1
+          }
+        ]
+      },
+      {
+        "operator_code": 1,
+        "source_refs": [
+          {
+            "binding_code": 4,
+            "kind": "binding",
+            "prior_output_name": "none",
+            "prior_step_index": -1
+          }
+        ]
+      },
+      {
+        "operator_code": 2,
+        "source_refs": [
+          {
+            "binding_code": 0,
+            "kind": "binding",
+            "prior_output_name": "none",
+            "prior_step_index": -1
+          }
+        ]
+      },
+      {
+        "operator_code": 5,
+        "source_refs": [
+          {
+            "binding_code": -1,
+            "kind": "prior_output",
+            "prior_output_name": "practitioner",
+            "prior_step_index": 1
+          },
+          {
+            "binding_code": -1,
+            "kind": "prior_output",
+            "prior_output_name": "date",
+            "prior_step_index": 2
+          }
+        ]
+      },
+      {
+        "operator_code": 7,
+        "source_refs": [
+          {
+            "binding_code": -1,
+            "kind": "prior_output",
+            "prior_output_name": "patient",
+            "prior_step_index": 0
+          },
+          {
+            "binding_code": -1,
+            "kind": "prior_output",
+            "prior_output_name": "schedule",
+            "prior_step_index": 3
+          },
+          {
+            "binding_code": 2,
+            "kind": "binding",
+            "prior_output_name": "none",
+            "prior_step_index": -1
+          },
+          {
+            "binding_code": 6,
+            "kind": "binding",
+            "prior_output_name": "none",
+            "prior_step_index": -1
+          }
+        ]
+      }
+    ]
+  },
+  "replacement_required": true,
+  "target_turn_code": 2,
+  "version_code": 2,
+  "violations": [
+    {
+      "allowed_output_names": [],
+      "field_code": "decision_note",
+      "source_index": -1,
+      "step_index": -1,
+      "violation_code": "decision_note_identifier"
+    }
+  ]
+}

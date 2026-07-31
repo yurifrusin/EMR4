@@ -1,0 +1,48 @@
+{
+  "schema_version": "ariadne.vertex_sydney_gemini_25_precall_gate.v1",
+  "result": "ariadne_vertex_sydney_gemini_25_repair_002_precall_gate_pass",
+  "attempt_id": "gemini-25-repair-002",
+  "ledger_id": "gemini-25-repair-ledger-002",
+  "binding": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "api_key_authentication_used": false,
+    "fallback_permitted": false
+  },
+  "request_contract": {
+    "request_file_hash": "sha256:2ac06676e874b024180de2b7bcda2da45d8eac47911abd3c2b0805be72446898",
+    "provider_request_hash": "sha256:784a68a5d4f45d62d2dbe8ab3b0388585d5938abdb8185ead99952eb41375357",
+    "provider_schema_hash": "sha256:21a2208ab1dc4b73f6134bd378eb532a6b5c974e822985e23c5aa7ecc5d37621",
+    "official_local_vertex_protobuf_parse": "passed",
+    "raw_prompt_retained": false
+  },
+  "predecessor_gates": {
+    "same_session_tranche_3_preflight_result": "ariadne_vertex_sydney_gemini_25_adc_preflight_pass",
+    "same_session_tranche_3_preflight_hash": "sha256:2700012dd097258986a433dda96367dad3af2b309f39296923c9e2b85bb3c0f5",
+    "provider_free_isolation_result": "ariadne_vertex_sydney_gemini_25_real_isolation_dry_run_pass",
+    "provider_free_isolation_hash": "sha256:6c95f5b98683eb6a73c9ebd5a9dddc9c86b02f75474448c0a1c401ac36ef6fca",
+    "independent_runtime_residue_absent": true
+  },
+  "continuity_binding": {
+    "graph_revision": 48,
+    "graph_hash": "sha256:6685ff7559c185544a1056b428150c3bd5d83ded5a9436a8f9ae55a09038a656",
+    "map_revision": 35,
+    "source_graph_revision": 48,
+    "compass_hash": "sha256:af4fa864470e57fa62d69b049694e016b7be94233b74fc0f652069bfd476b57b",
+    "rendered_compass_hash": "sha256:d2d8e8b396a6a9c126242cadd8cb8fe4822138bbc99d2dc27a34aa58a5928987",
+    "compass_validation": "passed",
+    "rendered_compass_exact": true
+  },
+  "authority_accounting": {
+    "provider_calls_during_gate": 0,
+    "credential_mutations": 0,
+    "cloud_state_mutations": 0,
+    "retry_kind": "evidence_backed_distinct_request",
+    "usd_application_ceiling": 1
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "schema_version": "reception.one.preprinted_form_v5.broad_language_coordinator_repair.v1",
+  "recorded_at": "2026-07-30T05:59:32Z",
+  "result": "reception_one_preprinted_form_v5_broad_language_coordinator_repair_pass",
+  "diagnosis": {
+    "reason_code": "case_expected_safe_outcome_missing",
+    "case_code": "b-create-preface",
+    "provider_http_status": 200,
+    "proofreader_disposition": "admit",
+    "expected_safe_outcome": false,
+    "bounded_difference": "the admitted proposal selected both authored-synthetic candidate slots while the exact-time frozen oracle selected only the 14:30 slot",
+    "write_performed": false,
+    "product_or_database_access": false
+  },
+  "repair": {
+    "surface": "batch_coordinator_reporting_only",
+    "change": "record_a_fully_closed_safe_oracle_mismatch_as_expected_safe_outcome_false_and_continue_the_remaining_frozen_cases",
+    "focused_regression_added": true,
+    "prompt_changed": false,
+    "provider_schema_changed": false,
+    "compiler_changed": false,
+    "proofreader_changed": false,
+    "oracle_changed": false,
+    "model_or_cloud_binding_changed": false,
+    "call_or_cost_ceiling_changed": false,
+    "fallback_changed": false
+  },
+  "closed_prefix": {
+    "case_count": 3,
+    "provider_call_count": 3,
+    "consumed_ledger_count": 3,
+    "valid_parent_hash_chain_count": 3,
+    "cleanup_passed": true,
+    "calls_replayed": 0,
+    "ledgers_reopened": 0,
+    "typed_release_count": 3,
+    "appointment_write_count": 0
+  },
+  "continuation": {
+    "resume_only_from_fully_closed_cases": true,
+    "partial_case_resume_forbidden": true,
+    "same_revision_binding": {
+      "continuity_graph_revision": 102,
+      "compass_map_revision": 89
+    },
+    "same_preflight_required": true,
+    "rerun_repository_provider_blocked_and_residue_gates": true
+  },
+  "explicit_exclusions": {
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "credential_or_token_recorded": false,
+    "api_key_information_recorded": false,
+    "chain_of_thought_recorded": false
+  }
+}

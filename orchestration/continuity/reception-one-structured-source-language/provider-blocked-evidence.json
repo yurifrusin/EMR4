@@ -1,0 +1,136 @@
+{
+  "schema_version": "reception.one.structured_source.provider_blocked_evidence.v1",
+  "result": "reception_one_structured_source_language_provider_blocked_pass",
+  "provider_contacted": false,
+  "provider_calls_performed": 0,
+  "credential_reads_performed": 0,
+  "data_class": "authored_synthetic",
+  "effect_ceiling": "proposal_only",
+  "contract": {
+    "model_input_version": "reception.one.bureau.structured-source-model-input.v4",
+    "plan_program_version_code": 3,
+    "goal_code_count": 7,
+    "operator_code_count": 14,
+    "output_name_count": 10,
+    "source_kinds": [
+      "binding",
+      "prior_output",
+      "omit"
+    ],
+    "arithmetic_prior_output_codes": false,
+    "provider_response_schema_sha256": "sha256:9a51825464fa4e1e7c6e21d4c70754b29db7672be9ae2dc867811df0d76b7550",
+    "model_input_sha256": "sha256:5598259effc15fb2b9aff36ba62a9686dd3be02e27c900bdb7e57ac864305fbd",
+    "provider_request_sha256": "sha256:0ef74a8137f17e6d2c9bc29393c30c622f6519527d04121c0626d55ce846e6d9",
+    "free_form_plan_identifiers": false,
+    "semantic_safe_repairs": false
+  },
+  "operator_note_policy": {
+    "maximum_utf8_bytes": 320,
+    "independently_proofread": true,
+    "audit_only": true,
+    "parsed_into_plan": false,
+    "product_delivered": false,
+    "rejected_text_discarded": true,
+    "raw_provider_response_retained": false,
+    "hidden_reasoning_retained": false
+  },
+  "positive_cases": [
+    {
+      "case_id": "known-create",
+      "goal": "create",
+      "program_sha256": "sha256:e1c77a991f09b4c58026790843fb30efb9c44db612dc1a61c4fa2fab6498bbce",
+      "candidate_sha256": "sha256:0e1e4ea1515547dea40676e1f044628875b2b9f37c7a577be903521849e93f8f",
+      "normalized_plan_sha256": "sha256:efcb6a6a5a51ef82c7f6f611d0995cb142443fe446fcaaf5da75ba1a32a0770a",
+      "operator_note_disposition": "admit",
+      "operator_note_sha256": "sha256:f4aa674ffb82af9886afe5b599b340c7a5aaf9ffca0665488b5bb8638019e764",
+      "proofreader_disposition": "admit",
+      "released_proposal_family": "create",
+      "write_performed": false
+    },
+    {
+      "case_id": "known-move",
+      "goal": "move",
+      "program_sha256": "sha256:4dfbf5a458731d591d46e1d71ba57f2853cde0df2cdf1e41c70fc5e80dd87f7f",
+      "candidate_sha256": "sha256:8fa233b79b93f33d0ad6f8d63eadd6527bf8a8f63bf41df7706bbb9af09aa1e7",
+      "normalized_plan_sha256": "sha256:faeea151885df371ed58300c83903e41ba2b711de595850f25398ed0ee64f181",
+      "operator_note_disposition": "admit",
+      "operator_note_sha256": "sha256:e489d323aeee2c03a9eefcbf410fdf13fc5b0c12922ab6ae13a971d1378220d6",
+      "proofreader_disposition": "admit",
+      "released_proposal_family": "move",
+      "write_performed": false
+    },
+    {
+      "case_id": "known-resize",
+      "goal": "resize",
+      "program_sha256": "sha256:6667d9907a701572972a27dc88ee2f0e69e986ac8098512e38cbbcc6ef958bad",
+      "candidate_sha256": "sha256:f589529e54eadbb61fc15420c64d868976b696f4a04fe9dfa6f3f55347e5425f",
+      "normalized_plan_sha256": "sha256:5ea2846edce8f2bb5dcac09743c5566f93f554198685cc765eba7f8ec18e923c",
+      "operator_note_disposition": "admit",
+      "operator_note_sha256": "sha256:5493ebaebcdcc8a3b18ad61fc3b11652b5f395e805180eefb46a352c9011cbbb",
+      "proofreader_disposition": "admit",
+      "released_proposal_family": "resize",
+      "write_performed": false
+    },
+    {
+      "case_id": "known-cancel",
+      "goal": "cancel",
+      "program_sha256": "sha256:57ab5a13e7096354c68a6f940392daff06db6beff9e29a951db535b973ed8530",
+      "candidate_sha256": "sha256:cf2a1f2f181d1fcb740b894aee91c9b9a7e094827a0b5a2d2110bc14b422b7d3",
+      "normalized_plan_sha256": "sha256:0cfb2fbfab764d93f1387a7d889009fab24fccddcde4418d2de219bd7b9252fc",
+      "operator_note_disposition": "admit",
+      "operator_note_sha256": "sha256:091d37957266124640821a933944f6258201f86c60244d9abb1bb2b8af2b1cb5",
+      "proofreader_disposition": "admit",
+      "released_proposal_family": "cancel",
+      "write_performed": false
+    },
+    {
+      "case_id": "known-status",
+      "goal": "status_change",
+      "program_sha256": "sha256:af1b3c280953c26b4c2ad73f84bb678e05555b66ddcfe7b29b6a619be1ce27fb",
+      "candidate_sha256": "sha256:ec340a51d2067c099e81d37985ba27378bde688c2446e01258ca7b7f6615b915",
+      "normalized_plan_sha256": "sha256:587d8beaf15e20b2c29bb7e1453b09f6e28744b493dd92bda33e66871d66410f",
+      "operator_note_disposition": "admit",
+      "operator_note_sha256": "sha256:3a35e7b90f1a63effbdcec46a097d50f7b133e31d690502841989ab93a839a3a",
+      "proofreader_disposition": "admit",
+      "released_proposal_family": "status_change",
+      "write_performed": false
+    },
+    {
+      "case_id": "novel-squeeze-in",
+      "goal": "squeeze_in_assessment",
+      "program_sha256": "sha256:bdf4552d0371091d9aa06067365ad2eefbad59ebb68c11f28067544140c5a693",
+      "candidate_sha256": "sha256:b1afbef9a057e58f019f7f8bb0de54ec8b50392b09c105491130a337512d22b4",
+      "normalized_plan_sha256": "sha256:2bd711432cf9d9a8984231d45590f3402dc4e72f66129b9564edb1c264bf67ff",
+      "operator_note_disposition": "admit",
+      "operator_note_sha256": "sha256:bcca4e89b0428960e38796bca53e9eed12953edcec647f94d8e3dc052b042296",
+      "proofreader_disposition": "admit",
+      "released_proposal_family": "squeeze_in_assessment",
+      "write_performed": false
+    }
+  ],
+  "negative_contract_classes": [
+    "operator_arity_invalid",
+    "binding_sentinel_invalid",
+    "prior_output_sentinel_invalid",
+    "omit_sentinel_invalid",
+    "required_source_omitted",
+    "forward_or_self_reference",
+    "output_name_invalid",
+    "source_type_mismatch",
+    "external_binding_invalid",
+    "note_rejected",
+    "legacy_arithmetic_program_schema_invalid"
+  ],
+  "boundary": {
+    "api_key_authentication_used": false,
+    "provider_tools": false,
+    "function_calling": false,
+    "grounding": false,
+    "retrieval": false,
+    "cache_creation": false,
+    "database_access": false,
+    "appointment_write_authority": false,
+    "product_delivery": false,
+    "fallback": false
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "close_the_zero_call_preprovider_failure_and_regate_distinct_cost_bounded_retry_002_before_any_successor_provider_call",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_successor_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external worker is selected for the serial occupied attempt."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external peer worker is selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: the first cost-bounded node is rejected before provider transport and the distinct corrected successor is active at Continuity 164 / Compass 145.",
+        "current_authority_allocation: Yuri permits further fresh progress-bearing calls under the cumulative USD 1 ceiling; retry 002 permits one call in one dialogue and stops after admission.",
+        "active_plan_and_acceptance: docs/bernie-reception-one-bureau-cost-bounded-occupied-retry-002-plan.md, its threat-model delta, exact successor authority and cost policy freeze the compatibility, provider, cost, isolation, proofreader and no-write contracts.",
+        "protected_evidence_boundaries: the failed node, blocked cost ledger, historical nodes and sealed evidence remain immutable; real/product/patient/health/clinical data, confirmation, writes, Word, voice, participants, production, deployment and release remain closed.",
+        "git_refs_and_worktree: HEAD is 5b1ea7952fb08eea333da0e63f166d3895ccea32; master, handoff/current, origin/master and origin/handoff/current are 4974075b31035d599e081d68e3b85e04a897baa1; 706 unrelated or in-scope dirty-worktree entries remain preserved.",
+        "The predecessor audit proves zero provider transport, complete cleanup and no cost refund. Retry 002 carries USD 0.0238049 forward, and the actual inner pre-call gate now passes the exact compatibility authority."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

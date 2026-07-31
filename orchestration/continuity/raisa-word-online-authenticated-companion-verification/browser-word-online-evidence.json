@@ -1,0 +1,101 @@
+{
+  "schema_version": "raisa.word_online_authenticated_companion_browser_evidence.v1",
+  "observed_at": "2026-07-31T21:08:30+10:00",
+  "result": "pass",
+  "scope": {
+    "project": "bernie-emr4-dev",
+    "region": "australia-southeast1",
+    "service": "raisa-office-web-dev",
+    "hostname": "raisa-office-web-dev-nnbntbx5yq-ts.a.run.app",
+    "word_host_class": "signed_in_personal_word_online_session",
+    "data_class": "authored_synthetic"
+  },
+  "service_repair": {
+    "pre_repair_revision": "raisa-office-web-dev-00005-w82",
+    "post_repair_revision": "raisa-office-web-dev-00006-xf9",
+    "post_repair_image_digest": "sha256:8e06f07e4efd393f38275348d8bd7b136e664c2797c399a89207b66116839324",
+    "traffic_percent_to_post_repair_revision": 100,
+    "runtime_service_account": "raisa-office-web-runtime@bernie-emr4-dev.iam.gserviceaccount.com",
+    "runtime_identity_project_role_count": 0,
+    "runtime_identity_user_managed_key_count": 0,
+    "invoker_iam_check_disabled": true,
+    "all_users_iam_binding_count": 0,
+    "same_origin_preserved": true,
+    "same_service_only": true,
+    "iam_or_organisation_policy_changes": 0
+  },
+  "manifest_gate": {
+    "task_specific_manifest_selected": true,
+    "manifest_uploaded": true,
+    "add_in_loaded": true,
+    "permissions": "ReadDocument",
+    "manifest_sha256": "sha256:69edb5cb00bee5cd8a3da6d7845150cc183ff9f42114027e5c63297c715874ec"
+  },
+  "attempts": [
+    {
+      "attempt": "pre_repair",
+      "disposition": "fail_closed",
+      "office_dialog_opened": true,
+      "typed_request_admitted": false,
+      "generic_summary_released": false,
+      "reason_code": "hosted_diary_capability_mismatch"
+    },
+    {
+      "attempt": "post_repair",
+      "disposition": "pass",
+      "office_dialog_opened": true,
+      "typed_request_admitted": true,
+      "native_diary_projection_opened": true,
+      "native_diary_result_count": 3,
+      "generic_summary_released": true,
+      "generic_summary_result_count": 3,
+      "dialog_closed": true,
+      "word_summary_retained_after_close": true
+    }
+  ],
+  "typed_contracts": {
+    "request_contract": "reception.one.word-companion-request.v1",
+    "request_hash": "sha256:f3dce15a84d40d07f435dc7900285360209b160457586810351630df9bcce6d4",
+    "request_schema_sha256": "sha256:162ee76147d2e47235e6e7928925996866166d87f523fb460c15b41edbc98be7",
+    "summary_contract": "reception.one.word-companion-summary.v1",
+    "summary_schema_sha256": "sha256:650af7e4c229b4bfec1b27aacfa589e16901c7390712ba2bfb1068906d16aca8",
+    "proofreader_disposition": "admit",
+    "summary_code": "results_ready",
+    "raw_request_retained": false,
+    "raw_response_retained": false
+  },
+  "detail_isolation": {
+    "synthetic_patient_detail_visible_in_native_diary": true,
+    "synthetic_patient_detail_visible_in_word_summary": false,
+    "request_text_visible_in_word_summary": false,
+    "word_summary_exact_generic_copy": true,
+    "document_body_read": false,
+    "document_body_written": false
+  },
+  "network_observation": {
+    "taskpane_api_path_requests": 0,
+    "taskpane_credential_endpoint_requests": 0,
+    "taskpane_provider_requests": 0,
+    "diary_api_path_requests": 0,
+    "diary_credential_endpoint_requests": 0,
+    "diary_provider_requests": 0
+  },
+  "console_observation": {
+    "taskpane_application_error_or_warning_count": 0,
+    "diary_browser_extension_async_message_channel_errors": 3,
+    "errors_affecting_companion_result": 0
+  },
+  "authority_and_privacy": {
+    "account_identifier_persisted": false,
+    "tenant_identifier_persisted": false,
+    "document_identifier_persisted": false,
+    "document_filename_persisted": false,
+    "provider_calls": 0,
+    "backend_calls": 0,
+    "database_reads": 0,
+    "database_writes": 0,
+    "appointment_commands": 0,
+    "confirmations": 0,
+    "microphone_access": 0
+  }
+}

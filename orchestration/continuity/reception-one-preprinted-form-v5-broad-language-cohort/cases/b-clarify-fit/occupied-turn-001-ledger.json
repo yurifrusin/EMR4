@@ -1,0 +1,10 @@
+{
+  "attempt_id": "reception-one-preprinted-form-v5-eval-b-clarify-fit-turn-001",
+  "fallback_permitted": false,
+  "ledger_id": "reception-one-preprinted-form-v5-eval-b-clarify-fit-ledger-001",
+  "maximum_provider_calls": 1,
+  "policy_id": "reception-one-preprinted-form-v5-vertex-sydney-v1",
+  "provider_calls_consumed": 1,
+  "schema_version": "reception.one.bureau.model_text_single_use_ledger.v1",
+  "status": "consumed"
+}

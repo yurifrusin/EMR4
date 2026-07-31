@@ -1,0 +1,91 @@
+{
+  "schema_version": "reception_one.extended_proposal_runtime.independent_audit.v1",
+  "recorded_at": "2026-07-29T23:40:45Z",
+  "result": "mixed_result_accepted_with_live_model_unadmitted",
+  "provider_free_runtime": {
+    "result": "passed",
+    "families": [
+      "move",
+      "resize",
+      "cancel",
+      "squeeze_in_assessment"
+    ],
+    "real_browser_fastapi_postgresql_route_calls": 4,
+    "provider_calls": 0,
+    "appointment_writes": 0,
+    "forbidden_write_hashes_preserved": true,
+    "cleanup": "passed"
+  },
+  "occupied_sequence": {
+    "configured_lane": {
+      "provider": "google_vertex_ai",
+      "model": "gemini-2.5-flash",
+      "project": "bernie-emr4-dev",
+      "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+      "authentication": "keyless_impersonated_service_account_adc",
+      "location": "australia-southeast1",
+      "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com"
+    },
+    "attempts": [
+      {
+        "attempt_id": "reception-one-extended-runtime-occupied-001",
+        "http_status": 200,
+        "latency_ms": 921,
+        "bounded_rejection_paths": [
+          "$.goal"
+        ],
+        "proofreader": "not_reached",
+        "release": null,
+        "evidence_sha256": "55f5680ab3ef641ca8a3b36de79112e124aff610c4f796c6749bf1dd81b37a26",
+        "audit_log_sha256": "d62bfb5406f7ee86ca94f680ec695ac9e4b0c2958ef346aa0c43abfcf0187ae6",
+        "external_audit_sha256": "e1ecd0fac06719232d8ccad5aa1e12722cfb2fc90e8a315165ae1940257a7c3b"
+      },
+      {
+        "attempt_id": "reception-one-extended-runtime-occupied-002",
+        "http_status": 200,
+        "latency_ms": 1114,
+        "bounded_rejection_paths": [
+          "$.goal",
+          "$.plan_lines[0]"
+        ],
+        "proofreader": "not_reached",
+        "release": null,
+        "evidence_sha256": "bfe2a18f201941c5e5e9e71e4bfeff4e14f259250af88bddd9c463db8f954301",
+        "audit_log_sha256": "6da23964e68396eaa06d272e838595f7174f8858e081c5c8e32f5d25574e3ad0",
+        "external_audit_sha256": "3df41984369f0aae29270b789c1b5b0ab46128b1dbf6a38c07fcb941d3f9fa0e",
+        "diagnostic_sha256": "497ee5d30868ab0dec3a85d6c4ee51f9b49b2ab9eba9d2e4e37ec40fbe5bd88a"
+      }
+    ],
+    "provider_calls_total": 2,
+    "absolute_call_ceiling": 2,
+    "all_ledgers_consumed": true,
+    "candidate_admitted": false,
+    "proofreader_release": false,
+    "fallback": false,
+    "cleanup": "passed"
+  },
+  "audit_findings": [
+    {
+      "severity": "closed_gate",
+      "finding": "The extended move request did not produce a locally schema-valid candidate in either authorised call.",
+      "effect": "No model-generated extended-family proposal is admitted into the Bureau runtime."
+    },
+    {
+      "severity": "informational",
+      "finding": "Both provider calls returned HTTP 200 through the configured Sydney locational endpoint.",
+      "effect": "This observes the configured request path, not Australian physical or sovereign processing."
+    },
+    {
+      "severity": "pass",
+      "finding": "The strict broker rejected both responses before proofreading or release and every isolation and cleanup control held.",
+      "effect": "No unverified draft reached a user, product route or write path."
+    }
+  ],
+  "cost_control": {
+    "cumulative_application_ceiling_usd": 1,
+    "conservative_two_request_bound_usd": 0.0208896,
+    "bound_below_ceiling": true,
+    "exact_billing_proved": false
+  },
+  "candid_claim": "The deterministic authored-synthetic extended Bureau runtime is technically complete and passes over real local browser, FastAPI and PostgreSQL plumbing without writes. The separately occupied Gemini 2.5 Flash move cell failed closed twice before the proofreader, so live model interpretation of the extended move family remains unproved and unwired. The evidence proves only the configured and observed Sydney locational request path, not Australian physical or sovereign processing."
+}

@@ -1,0 +1,53 @@
+{
+  "attempts_remaining": 1,
+  "previous_output_sha256": "sha256:76b2f9d9b8469324558a361a1e09ec5635b509b71d028b8d7d225b51148ca7ab",
+  "previous_typed_form": {
+    "goal_code": 6,
+    "steps": [
+      {
+        "operator_code": 0,
+        "source_refs": [
+          {
+            "binding_code": 1,
+            "kind": "binding",
+            "prior_output_name": "none",
+            "prior_step_index": -1
+          }
+        ]
+      },
+      {
+        "operator_code": 3,
+        "source_refs": [
+          {
+            "binding_code": -1,
+            "kind": "prior_output",
+            "prior_output_name": "patient",
+            "prior_step_index": 0
+          },
+          {
+            "binding_code": 2,
+            "kind": "binding",
+            "prior_output_name": "none",
+            "prior_step_index": -1
+          }
+        ]
+      },
+      {
+        "operator_code": 13,
+        "source_refs": []
+      }
+    ]
+  },
+  "replacement_required": true,
+  "target_turn_code": 2,
+  "version_code": 2,
+  "violations": [
+    {
+      "allowed_output_names": [],
+      "field_code": "decision_note",
+      "source_index": -1,
+      "step_index": -1,
+      "violation_code": "decision_note_goal_mismatch"
+    }
+  ]
+}

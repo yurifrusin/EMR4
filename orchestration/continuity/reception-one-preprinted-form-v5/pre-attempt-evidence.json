@@ -1,0 +1,122 @@
+{
+  "schema_version": "reception.one.preprinted_form_v5.pre_attempt_evidence.v1",
+  "result": "reception_one_preprinted_form_v5_occupied_gate_pass",
+  "recorded_at": "2026-07-30T03:54:05Z",
+  "baseline": {
+    "few_shot_examples": false,
+    "demonstration_answers": false,
+    "prompt_optimisation": false,
+    "fine_tuning": false,
+    "weight_change": false
+  },
+  "form_boundary": {
+    "broker_owned_fields": {
+      "version_code": 3
+    },
+    "model_authored_fields": [
+      "operator_note",
+      "goal_code",
+      "steps"
+    ],
+    "broker_judgement_repair": false,
+    "unchanged_planprogram_v3_validation": true,
+    "unchanged_compiler_and_proofreader": true
+  },
+  "gates": {
+    "five_source_rehydration_receipt": true,
+    "preplan_receipt": true,
+    "plan_and_threat_delta_frozen": true,
+    "provider_blocked_evidence_passed": true,
+    "two_cell_real_isolation_passed": true,
+    "focused_and_inherited_lane_tests_passed": true,
+    "repository_only_ariadne_verifier_passed": true,
+    "relevant_api_spine_tests_passed": true,
+    "continuity_validation_passed": true,
+    "compass_validation_passed": true,
+    "rendered_compass_matches": true,
+    "python_compilation_passed": true,
+    "static_checks_passed": true,
+    "git_diff_check_passed": true,
+    "exact_read_only_cloud_preflight_passed": true,
+    "owned_residue_absent": true
+  },
+  "verification_counts": {
+    "v5_focused_tests": 13,
+    "focused_and_inherited_lane_tests": 146,
+    "repository_only_ariadne_verifier_tests": 266,
+    "relevant_api_spine_tests": 60
+  },
+  "evidence": [
+    {
+      "path": "orchestration/continuity/reception-one-preprinted-form-v5/provider-blocked-evidence.json",
+      "sha256": "sha256:d2d754bfae06c41d25f6ed75127a2badfed22487a7115ae97b94482c4f72b5e8"
+    },
+    {
+      "path": "orchestration/continuity/reception-one-preprinted-form-v5/real-isolation-evidence.json",
+      "sha256": "sha256:24cc1c5fa2a6d243726569f0144bbcdb9c83abec5419d4c618e980e7e1300be8"
+    },
+    {
+      "path": "orchestration/continuity/reception-one-preprinted-form-v5/occupied-preflight-evidence.json",
+      "sha256": "sha256:2b603c1033ad98b2fe47eb60598eb7dbce7b9d71f80a81335383fd177540af3d"
+    },
+    {
+      "path": "orchestration/continuity/reception-one-extended-proposal-runtime/occupied-move-frame.json",
+      "sha256": "sha256:af2df3905d6f8f36ddfca13d52b979707fbfb142d63e6c635b5da37baece2d66"
+    }
+  ],
+  "exact_lane": {
+    "provider": "google_cloud_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "api_key_authentication": false,
+    "service_account_key_authentication": false,
+    "global_endpoint": false,
+    "automatic_regional_fallback": false,
+    "provider_tools": false,
+    "function_calling": false,
+    "grounding": false,
+    "retrieval": false,
+    "cache_creation": false
+  },
+  "occupied_budget": {
+    "maximum_actual_provider_calls": 2,
+    "primary_call": 1,
+    "maximum_correction_or_request_repair_calls": 1,
+    "third_call": false,
+    "cost_ceiling_usd": 1,
+    "stop_after_first_admitted_result": true
+  },
+  "closed": [
+    "product_derived_data",
+    "patient_or_health_data",
+    "clinical_data",
+    "protected_or_historical_evidence",
+    "database_access",
+    "appointment_confirmation_or_write",
+    "product_delivery",
+    "voice",
+    "production",
+    "deployment",
+    "release",
+    "prompt_context_training",
+    "provider_or_regional_fallback"
+  ],
+  "revision_binding_before_admission": {
+    "continuity_graph_revision": 92,
+    "compass_map_revision": 79,
+    "compass_source_graph_revision": 92,
+    "continuity_graph_sha256": "sha256:03d2d205158ced87a0d11c17fa0b600a2d020921210353804ae763993ac16cc3",
+    "compass_map_sha256": "sha256:b55c5205574eb52b43eb1860e0860bf9a9d350cc3f7b33b02c24e994d099a684",
+    "rendered_compass_sha256": "sha256:dbdd5cba91f30617595219bedf99356e8d87459e15d657cd569e65f1d97b3d6a"
+  },
+  "unrelated_api_spine_observation": {
+    "broad_sweep_completed": false,
+    "reason": "pre_existing_collection_import_of_removed_private_bernie_session_store",
+    "v5_files_involved": false,
+    "existing_user_work_modified": false
+  }
+}

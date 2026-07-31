@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.rehydration_receipt.v1",
+  "receipt_id": "reception-one-receptionist-first-v6-20260730",
+  "recorded_at": "2026-07-30T07:07:37Z",
+  "result": "passed",
+  "rehydrated_from_receipt": true,
+  "mandatory_rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "live_handover_current_baton": {
+    "source": "AGENTS.md",
+    "read_completely": true,
+    "current_result": "reception_one_preprinted_form_v5_broad_language_capability_threshold_fail_closed",
+    "next_implementation": "fresh_receptionist_first_prompt_context_and_semantic_proofreader_descendant"
+  },
+  "current_authority_allocation": {
+    "source": "AGENTS.md section 4",
+    "conductor_and_acceptance_owner": "GPT Sol",
+    "implementation_owner": "GPT Sol",
+    "external_worker_or_subagent_selected": false,
+    "reasoning_level": "high"
+  },
+  "active_plan_and_acceptance": {
+    "sources": [
+      "docs/bernie-reception-one-preprinted-form-v5-broad-language-cohort-plan.md",
+      "docs/bernie-reception-one-preprinted-form-v5-broad-language-adc-restored-continuation-plan.md",
+      "docs/bernie-reception-one-preprinted-form-v5-broad-language-adc-restored-continuation-closeout.md",
+      "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/occupied-authority.json",
+      "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/occupied-adc-restored-final-audit-analysis.json",
+      "orchestration/agent_inbox/codex/reception-one-preprinted-form-v5-broad-language-adc-restored-final-sol-acceptance.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "orchestration/access_ai_api_design.md",
+      "orchestration/bernie_release_gates.md",
+      "tests/test_api_spine_artifacts.py"
+    ],
+    "user_authority_source": [
+      "Yuri requested a receptionist-first prompt, bounded thinking budget and a rerun of the last cohort.",
+      "Yuri requested access to both natural-language and typed-form outputs for comparison.",
+      "Yuri requested a running notepad with each test input and admitted output.",
+      "Yuri authorised retention of thinking-token counts while accepting that chain-of-thought content is excluded."
+    ],
+    "historical_results_remain_immutable": true
+  },
+  "protected_evidence_boundaries": {
+    "source": "AGENTS.md sections 5 and 6",
+    "protected_holdouts_opened": false,
+    "historical_diary_material_opened": false,
+    "product_or_database_data": false,
+    "patient_health_or_clinical_data": false,
+    "write_or_confirmation_authority": false,
+    "provider_family_project_identity_region_or_auth_change": false,
+    "raw_provider_response_retention": false,
+    "chain_of_thought_retention": false,
+    "fallback": false
+  },
+  "git_refs_and_worktree": {
+    "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+    "head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+    "handoff_current": "4974075b31035d599e081d68e3b85e04a897baa1",
+    "origin_master": "4974075b31035d599e081d68e3b85e04a897baa1",
+    "origin_handoff_current": "4974075b31035d599e081d68e3b85e04a897baa1",
+    "worktree_dirty": true,
+    "worktree_entry_count_before_tranche": 434,
+    "worktree_status_sha256": "sha256:5df1b72fd1b8db87efad3d3ff6b83e2b13bb645835a53f2c5e3464e30b702589",
+    "unrelated_user_changes_must_be_preserved": true,
+    "commit_push_pr_or_ref_move_authorized": false
+  },
+  "planned_action": "design_and_execute_a_revision_bound_v6_paired_development_rerun_with_receptionist_natural_response_typed_form_semantic_proofreading_thinking_token_counts_and_a_live_sanitized_notebook"
+}

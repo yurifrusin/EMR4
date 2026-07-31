@@ -8,6 +8,7 @@ from types import SimpleNamespace
 
 import pytest
 
+from app.services.ai.evals import bernie_vertex_sydney_live_pilot as pilot_module
 from app.services.ai.evals.bernie_vertex_sydney_live_pilot import (
     DEFAULT_OBSERVATION_PATH,
     DEFAULT_REPORT_PATH,
@@ -26,6 +27,18 @@ from app.services.ai.evals.bernie_vertex_sydney_live_pilot import (
     validate_observations,
 )
 from scripts import bernie_t3r7_vertex_sydney_live_pilot as live_script
+
+
+@pytest.fixture(autouse=True)
+def _freeze_consumed_t3r7_approval_date(monkeypatch):
+    """Keep immutable historical-reducer tests independent of wall time."""
+
+    class HistoricalDate(date):
+        @classmethod
+        def today(cls):
+            return cls(2026, 7, 18)
+
+    monkeypatch.setattr(pilot_module, "date", HistoricalDate)
 
 
 def _payload(case):

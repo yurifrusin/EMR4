@@ -1,0 +1,50 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "implement_and_conditionally_rehearse_the_reception_one_preprinted_form_v5_descendant",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely. Proofreader Dialogue v4 remains the immutable active predecessor: its provider-free correction protocol passed, its two occupied calls are consumed, no candidate reached proofreading and no value was released.",
+    "current_authority_allocation": "Yuri authorised the recommended v5 pre-printed-form descendant and baseline assessment of untuned Gemini 2.5 Flash before prompt-context teaching or weight tuning. This opens a fresh authored-synthetic proposal-only descendant under the exact existing Bernie keyless-ADC Sydney Vertex boundary, with at most two calls and USD 1; it does not open product data, writes, tuning, IAM, deployment or release.",
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-proofreader-dialogue-v4-plan.md",
+      "docs/bernie-reception-one-proofreader-dialogue-v4-request-contract-repair.md",
+      "docs/bernie-reception-one-proofreader-dialogue-v4-closeout.md",
+      "docs/security/bernie-reception-one-proofreader-dialogue-v4-threat-model-delta.md",
+      "orchestration/continuity/reception-one-proofreader-dialogue-v4/provider-blocked-evidence.json",
+      "orchestration/continuity/reception-one-proofreader-dialogue-v4/real-isolation-evidence.json",
+      "orchestration/continuity/reception-one-proofreader-dialogue-v4/occupied-final-audit-analysis.json",
+      "orchestration/agent_inbox/codex/reception-one-proofreader-dialogue-v4-final-sol-review.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "orchestration/access_ai_api_design.md",
+      "orchestration/bernie_release_gates.md"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 were restored. Protected holdouts remain sealed; historical Diary material remains closed; only newly authored-synthetic data may enter the cell. The model remains an untrusted proposal-only form filler. The broker may add only immutable protocol metadata. Backend identity, practice scope, truth, availability, conflicts, confirmation, idempotency, writes and audit remain authoritative. No raw prompt or response, credentials, API-key information, rejected note, hidden reasoning, product data, patient data or command authority may be retained or released.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_modified_count": 35,
+      "worktree_untracked_count_before_v5": 345,
+      "worktree_dirty_and_preserved": true,
+      "unrelated_user_changes_preserved": true,
+      "protected_refs_unchanged": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

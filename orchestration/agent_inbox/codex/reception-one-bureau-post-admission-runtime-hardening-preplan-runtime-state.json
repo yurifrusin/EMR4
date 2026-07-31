@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "plan_and_execute_provider_free_post_admission_runtime_hardening_without_replaying_vertex",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_post_admission_preplan",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The next increment is serial, tightly coupled to the current Bureau UI and small enough to remain Sol-owned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external peer worker is selected for this bounded provider-free UI hardening."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: the cost-bounded Sydney Vertex Bureau successor is accepted at Continuity 166 / Compass 147, and the next active work is provider-free post-admission runtime hardening.",
+        "current_authority_allocation: Sol may execute tightly coupled provider-free development work; no provider call, ADC read, external worker, confirmation, write, production, deployment or release is selected.",
+        "active_plan_and_acceptance: the accepted Bureau runtime UI plan/closeout and cost-bounded occupied retry 002 plan/closeout define the shared proposal, proofreader, provenance, stale-state and closed write boundaries.",
+        "protected_evidence_boundaries: protected holdouts and historical Diary material remain untouched; only schema-admitted authored-synthetic evidence may be used; raw prompts, raw provider responses, credentials and hidden reasoning remain excluded.",
+        "git_refs_and_worktree: HEAD is 5b1ea7952fb08eea333da0e63f166d3895ccea32; master, handoff/current, origin/master and origin/handoff/current are 4974075b31035d599e081d68e3b85e04a897baa1; unrelated user changes remain preserved.",
+        "The new descendant may harden only provider-free proposal presentation, mode-switch clearing and bounded provenance over the existing deterministic command boundary."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

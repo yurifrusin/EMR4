@@ -13,7 +13,28 @@ source_safety:
     consumer_reconciliation: exact_active_practitioner_availability_selection_proposal
     feature_default: disabled
     broader_proactive_runtime: blocked
-  provider_calls: blocked
+  provider_calls: blocked_except_exact_default_off_synthetic_product_context
+  bounded_synthetic_vertex_runtime_exception:
+    decision_owner: Yuri
+    authorised_on: "2026-07-30"
+    operation_id: composeReceptionOneProductContextProposal
+    route: POST /api/v1/appointments/proposals/reception-one/compose
+    planner_mode: isolated_vertex
+    data_class: authored_synthetic
+    provider: google_vertex_ai
+    model: gemini-2.5-flash
+    project: bernie-emr4-dev
+    impersonated_service_account: emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com
+    authentication: keyless_impersonated_service_account_adc
+    location: australia-southeast1
+    endpoint_hostname: australia-southeast1-aiplatform.googleapis.com
+    feature_default: disabled
+    proofreader_release_required: true
+    maximum_provider_calls_per_request: 2
+    provider_fallback: blocked
+    deterministic_planner_fallback: blocked
+    appointment_write_authority: false
+    broader_live_provider_runtime: blocked
   historical_diary_trove_access: blocked
   h15_or_h_series_runtime_imports: blocked
   memory_rag_graphrag: blocked
@@ -76,6 +97,18 @@ agents:
       appointment_write_authority: false
       evidence_mode: authored_synthetic_local
       enabled_by_default: false
+    bounded_model_planner_authority:
+      operation_id: composeReceptionOneProductContextProposal
+      planner_mode: isolated_vertex
+      data_class: authored_synthetic
+      provider_binding: exact_sydney_vertex_gemini_2_5_flash_bernie_impersonated_adc
+      context: request_scoped_opaque_handles_only
+      release: deterministic_proofreader_admitted_typed_fields_only
+      maximum_provider_calls_per_request: 2
+      provider_fallback: false
+      deterministic_planner_fallback: false
+      appointment_write_authority: false
+      enabled_by_default: false
     must_require_staff_confirmation_for:
       - appointment_confirm
       - appointment_cancel
@@ -99,7 +132,7 @@ agents:
       - speak_phi_automatically_from_event_context
     blocked_gates:
       proactive_diary_delivery_runtime: blocked_except_local_reschedule_exception
-      live_provider_runtime: blocked
+      live_provider_runtime: blocked_except_exact_default_off_synthetic_product_context
       broad_historical_trove_mining: blocked
       h15_h_series_runtime_imports: blocked
       memory_rag_graphrag_runtime: blocked

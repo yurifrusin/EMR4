@@ -1,0 +1,248 @@
+{
+  "authority_counts": {
+    "clinical_context_read": 0,
+    "command": 0,
+    "document_read": 0,
+    "document_write": 0,
+    "microphone_capture": 0,
+    "network_access": 0,
+    "patient_context_read": 0,
+    "provider_invocation": 0,
+    "write": 0
+  },
+  "candid_limit": "This is deterministic host-capability fixture evidence. It does not prove authenticated Word Online, microphone behavior, scribe correctness, backend/provider authorization, public branding, production, deployment or release.",
+  "capability_invocation_count": 0,
+  "evidence_mode": "authored_synthetic_deterministic_fixture",
+  "profiles": {
+    "word_desktop_windows": {
+      "authority": {
+        "clinical_context": false,
+        "command": false,
+        "document_read": false,
+        "document_write": false,
+        "microphone_capture": false,
+        "network_access": false,
+        "patient_context": false,
+        "provider_invocation": false,
+        "write": false
+      },
+      "capabilities": {
+        "crypto_random_uuid": true,
+        "custom_xml_parts": true,
+        "dialog_api": true,
+        "media_devices": true,
+        "media_recorder": true,
+        "office_actions": true,
+        "office_device_permission": true,
+        "word_runtime": true
+      },
+      "contract_version": "emr4.office-host-runtime-profile.v1",
+      "features": {
+        "clinician_one.scribe_capture": {
+          "authorization": "product_authorization_not_evaluated",
+          "decision_basis": "host_capability_only",
+          "missing_capabilities": [],
+          "status": "host_ready"
+        },
+        "clinician_one.workspace": {
+          "authorization": "product_authorization_not_evaluated",
+          "decision_basis": "host_capability_only",
+          "missing_capabilities": [],
+          "status": "host_ready"
+        },
+        "reception_one.companion": {
+          "authorization": "product_authorization_not_evaluated",
+          "decision_basis": "host_capability_only",
+          "missing_capabilities": [],
+          "status": "host_ready"
+        },
+        "reception_one.dialog": {
+          "authorization": "product_authorization_not_evaluated",
+          "decision_basis": "host_capability_only",
+          "missing_capabilities": [],
+          "status": "host_ready"
+        }
+      },
+      "host": "word",
+      "host_kind": "desktop",
+      "microphone_permission_strategy": "browser_media_prompt",
+      "office_initialized": true,
+      "platform": "desktop_windows"
+    },
+    "word_mobile_without_media": {
+      "authority": {
+        "clinical_context": false,
+        "command": false,
+        "document_read": false,
+        "document_write": false,
+        "microphone_capture": false,
+        "network_access": false,
+        "patient_context": false,
+        "provider_invocation": false,
+        "write": false
+      },
+      "capabilities": {
+        "crypto_random_uuid": true,
+        "custom_xml_parts": true,
+        "dialog_api": true,
+        "media_devices": false,
+        "media_recorder": false,
+        "office_actions": true,
+        "office_device_permission": true,
+        "word_runtime": true
+      },
+      "contract_version": "emr4.office-host-runtime-profile.v1",
+      "features": {
+        "clinician_one.scribe_capture": {
+          "authorization": "product_authorization_not_evaluated",
+          "decision_basis": "host_capability_only",
+          "missing_capabilities": [
+            "media_devices",
+            "media_recorder"
+          ],
+          "status": "host_blocked"
+        },
+        "clinician_one.workspace": {
+          "authorization": "product_authorization_not_evaluated",
+          "decision_basis": "host_capability_only",
+          "missing_capabilities": [],
+          "status": "host_ready"
+        },
+        "reception_one.companion": {
+          "authorization": "product_authorization_not_evaluated",
+          "decision_basis": "host_capability_only",
+          "missing_capabilities": [],
+          "status": "host_ready"
+        },
+        "reception_one.dialog": {
+          "authorization": "product_authorization_not_evaluated",
+          "decision_basis": "host_capability_only",
+          "missing_capabilities": [],
+          "status": "host_ready"
+        }
+      },
+      "host": "word",
+      "host_kind": "mobile",
+      "microphone_permission_strategy": "unavailable",
+      "office_initialized": true,
+      "platform": "mobile"
+    },
+    "word_online": {
+      "authority": {
+        "clinical_context": false,
+        "command": false,
+        "document_read": false,
+        "document_write": false,
+        "microphone_capture": false,
+        "network_access": false,
+        "patient_context": false,
+        "provider_invocation": false,
+        "write": false
+      },
+      "capabilities": {
+        "crypto_random_uuid": true,
+        "custom_xml_parts": true,
+        "dialog_api": true,
+        "media_devices": true,
+        "media_recorder": true,
+        "office_actions": true,
+        "office_device_permission": true,
+        "word_runtime": true
+      },
+      "contract_version": "emr4.office-host-runtime-profile.v1",
+      "features": {
+        "clinician_one.scribe_capture": {
+          "authorization": "product_authorization_not_evaluated",
+          "decision_basis": "host_capability_only",
+          "missing_capabilities": [],
+          "status": "host_ready"
+        },
+        "clinician_one.workspace": {
+          "authorization": "product_authorization_not_evaluated",
+          "decision_basis": "host_capability_only",
+          "missing_capabilities": [],
+          "status": "host_ready"
+        },
+        "reception_one.companion": {
+          "authorization": "product_authorization_not_evaluated",
+          "decision_basis": "host_capability_only",
+          "missing_capabilities": [],
+          "status": "host_ready"
+        },
+        "reception_one.dialog": {
+          "authorization": "product_authorization_not_evaluated",
+          "decision_basis": "host_capability_only",
+          "missing_capabilities": [],
+          "status": "host_ready"
+        }
+      },
+      "host": "word",
+      "host_kind": "web",
+      "microphone_permission_strategy": "office_device_permission_then_browser_media",
+      "office_initialized": true,
+      "platform": "word_online"
+    },
+    "word_online_without_device_permission": {
+      "authority": {
+        "clinical_context": false,
+        "command": false,
+        "document_read": false,
+        "document_write": false,
+        "microphone_capture": false,
+        "network_access": false,
+        "patient_context": false,
+        "provider_invocation": false,
+        "write": false
+      },
+      "capabilities": {
+        "crypto_random_uuid": true,
+        "custom_xml_parts": true,
+        "dialog_api": true,
+        "media_devices": true,
+        "media_recorder": true,
+        "office_actions": true,
+        "office_device_permission": false,
+        "word_runtime": true
+      },
+      "contract_version": "emr4.office-host-runtime-profile.v1",
+      "features": {
+        "clinician_one.scribe_capture": {
+          "authorization": "product_authorization_not_evaluated",
+          "decision_basis": "host_capability_only",
+          "missing_capabilities": [
+            "office_device_permission"
+          ],
+          "status": "host_blocked"
+        },
+        "clinician_one.workspace": {
+          "authorization": "product_authorization_not_evaluated",
+          "decision_basis": "host_capability_only",
+          "missing_capabilities": [],
+          "status": "host_ready"
+        },
+        "reception_one.companion": {
+          "authorization": "product_authorization_not_evaluated",
+          "decision_basis": "host_capability_only",
+          "missing_capabilities": [],
+          "status": "host_ready"
+        },
+        "reception_one.dialog": {
+          "authorization": "product_authorization_not_evaluated",
+          "decision_basis": "host_capability_only",
+          "missing_capabilities": [],
+          "status": "host_ready"
+        }
+      },
+      "host": "word",
+      "host_kind": "web",
+      "microphone_permission_strategy": "unavailable",
+      "office_initialized": true,
+      "platform": "word_online"
+    }
+  },
+  "profiles_deeply_frozen": true,
+  "result": "raisa_dual_host_foundation_pass",
+  "runtime_sha256": "sha256:98d589f1135f06d092bc4996d3c578932f14390ae75933cf88cce0fd2158879b",
+  "schema_version": "raisa.dual-host-foundation-evidence.v1",
+  "source_published_runtime_equal": true
+}

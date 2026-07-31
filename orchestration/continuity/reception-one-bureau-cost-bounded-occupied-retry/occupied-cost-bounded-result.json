@@ -1,0 +1,33 @@
+{
+  "appointment_confirmation_performed": false,
+  "appointment_write_performed": false,
+  "candid_limit": "This result can prove only one authored-synthetic UI-to-route-to-proofreader proposal through the configured and observed Sydney Vertex locational endpoint. It does not prove Australian physical or sovereign processing, production fitness or safety for real patient, health or clinical data.",
+  "cost": {
+    "accounted_cost": 0.0238049,
+    "calls_accounted_including_predecessor": 2,
+    "cumulative_ceiling": 1.0,
+    "fresh_calls_accounted": 1,
+    "ledger_terminal_hash": "sha256:caebdd93ef17c9598d7bfa7dd088b0a00f8482ce55254c3fcb6822450eb49bff",
+    "outstanding_reservation": 0.0,
+    "terminal_success": false
+  },
+  "data_class": "authored_synthetic",
+  "database_truth_unchanged": false,
+  "evidence_hash": "sha256:609371a2dff52a2d22628f38b51e6303594eab024121cc7374a1aa454d11ea7f",
+  "fallback_performed": false,
+  "occupied_route_result": null,
+  "post_attempt_residue_clear": false,
+  "provider_calls_this_attempt": null,
+  "reason_code": "runtime_audit_ref_invalid",
+  "result": "reception_one_bureau_cost_bounded_occupied_retry_failed_closed",
+  "retry_performed_within_dialogue": false,
+  "runtime_audit_ref": null,
+  "schema_version": "reception.one.bureau.cost_bounded_occupied_retry.result.v1",
+  "selection": {
+    "aria_selected_verified_before_submit": false,
+    "exact_appointment_row_clicked": false,
+    "raw_database_identifier_text_absent": true,
+    "selected_appointment_id_present_in_request": false,
+    "selected_appointment_id_retained": false
+  }
+}

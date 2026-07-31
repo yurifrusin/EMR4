@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Reception One — Stage 3B formative study</title>
+  <link rel="stylesheet" href="stage3b.css">
+</head>
+<body>
+  <a class="skip-link" href="#study-main">Skip to study task</a>
+  <header class="study-header">
+    <div>
+      <p class="eyebrow">Reception One · Stage 3B readiness</p>
+      <h1>A quiet test of the work, not the person.</h1>
+      <p>Eight authored-synthetic reception tasks. No real patient data, no appointment write, no model provider and no recording.</p>
+    </div>
+    <div class="boundary-card" aria-label="Study boundary">
+      <strong>Provider-free · synthetic only</strong>
+      <span>The instrument keeps structured results in this tab until you explicitly download them.</span>
+    </div>
+  </header>
+
+  <main id="study-main" class="study-shell">
+    <section id="consent-panel" class="panel consent-panel" aria-labelledby="consent-title">
+      <div class="section-heading">
+        <p class="eyebrow">Before the session</p>
+        <h2 id="consent-title">Anonymous consent and counterbalance</h2>
+        <p>Choose codes only. Never enter a participant name, email, practice name or real patient detail.</p>
+      </div>
+      <div class="setup-grid">
+        <label>Participant code
+          <select id="participant-code" required></select>
+        </label>
+        <label>Practice bucket
+          <select id="practice-bucket" required></select>
+        </label>
+        <label>Counterbalance arm
+          <select id="counterbalance-arm" required></select>
+        </label>
+      </div>
+      <fieldset class="consent-list">
+        <legend>Confirm all four statements</legend>
+        <label><input type="checkbox" data-consent="voluntary"> Participation is voluntary and may stop at any time.</label>
+        <label><input type="checkbox" data-consent="synthetic"> Every displayed name and appointment is authored-synthetic.</label>
+        <label><input type="checkbox" data-consent="recording"> No typed words, free text, audio, video or screen recording will be retained.</label>
+        <label><input type="checkbox" data-consent="write"> This session cannot create or alter an appointment.</label>
+      </fieldset>
+      <div class="action-row">
+        <button id="start-session" class="primary-button" type="button">Begin anonymous session</button>
+        <p id="consent-status" class="status-copy" role="status"></p>
+      </div>
+    </section>
+
+    <section id="workspace" class="workspace" hidden>
+      <aside class="study-sidebar">
+        <section class="panel session-card">
+          <p class="eyebrow">Live in this tab only</p>
+          <h2 id="session-label">Session</h2>
+          <dl>
+            <div><dt>Arm</dt><dd id="session-arm"></dd></div>
+            <div><dt>Recorded</dt><dd id="record-count">0 / 8</dd></div>
+          </dl>
+          <a id="open-product" class="primary-button product-link" href="http://127.0.0.1:3000/meta-grid-auth.html" target="_blank" rel="noopener noreferrer">Open assigned surface</a>
+          <p class="microcopy">The product opens in a separate tab. Return here to record the structured outcome.</p>
+        </section>
+        <nav class="panel task-nav" aria-label="Study tasks">
+          <div class="panel-title-row">
+            <h2>Tasks</h2>
+            <span id="active-route-chip" class="route-chip">—</span>
+          </div>
+          <ol id="task-list"></ol>
+        </nav>
+      </aside>
+
+      <div class="study-content">
+        <section class="panel task-card" aria-labelledby="task-title">
+          <div class="task-meta">
+            <span id="task-id" class="task-id">S3B-01</span>
+            <span id="task-route" class="route-chip"></span>
+          </div>
+          <h2 id="task-title" tabindex="-1"></h2>
+          <p id="task-goal" class="task-goal"></p>
+          <div class="instruction-grid">
+            <div>
+              <span class="instruction-label">Assigned route</span>
+              <p id="route-instruction"></p>
+            </div>
+            <div>
+              <span class="instruction-label">Success looks like</span>
+              <p id="task-success"></p>
+            </div>
+          </div>
+          <details id="request-hint-block">
+            <summary>Show the authored-synthetic request wording</summary>
+            <p id="request-hint"></p>
+          </details>
+          <div class="timer-row">
+            <button id="start-task" class="primary-button" type="button">Start task timer</button>
+            <button id="mark-product-visit" class="secondary-button" type="button">Mark assigned surface visited</button>
+            <output id="timer-output" aria-live="polite">Not started</output>
+          </div>
+        </section>
+
+        <form id="observation-form" class="panel observation-card">
+          <div class="section-heading">
+            <p class="eyebrow">Structured facilitator record</p>
+            <h2>Outcome</h2>
+            <p>No notes field is provided. Do not retain what the participant typed or said.</p>
+          </div>
+          <div class="observation-grid">
+            <label>Task outcome
+              <select id="task-outcome" required>
+                <option value="completed">Completed</option>
+                <option value="completed_with_assistance">Completed with assistance</option>
+                <option value="aborted">Aborted</option>
+                <option value="not_attempted">Not attempted</option>
+              </select>
+            </label>
+            <label>Correctness
+              <select id="correctness" required>
+                <option value="correct">Correct</option>
+                <option value="partly_correct">Partly correct</option>
+                <option value="incorrect">Incorrect</option>
+                <option value="not_applicable">Not applicable</option>
+              </select>
+            </label>
+            <label>State comprehension
+              <select id="state-comprehension" required>
+                <option value="clear">Clear</option>
+                <option value="uncertain">Uncertain</option>
+                <option value="incorrect">Incorrect</option>
+                <option value="not_applicable">Not applicable</option>
+              </select>
+            </label>
+            <label>Confidence
+              <select id="confidence" required>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+                <option value="not_recorded">Not recorded</option>
+              </select>
+            </label>
+            <label>Facilitator assists
+              <input id="assistance-count" type="number" min="0" max="9" step="1" value="0" required>
+            </label>
+            <label>Safe ambiguity
+              <select id="safe-ambiguity" required>
+                <option value="not_applicable">Not applicable</option>
+                <option value="safe_clarification">Stopped for clarification</option>
+                <option value="unsafe_assumption">Assumed identity</option>
+              </select>
+            </label>
+            <label>Proposal boundary
+              <select id="proposal-boundary" required>
+                <option value="not_applicable">Not applicable</option>
+                <option value="understood_not_committed">Understood: not committed</option>
+                <option value="mistaken_as_committed">Mistaken as committed</option>
+              </select>
+            </label>
+            <label class="toggle-label"><input id="ordinary-fallback" type="checkbox"> Used ordinary Diary as fallback</label>
+          </div>
+          <fieldset class="issue-fieldset">
+            <legend>Observed issue flags</legend>
+            <div id="issue-flags" class="issue-grid"></div>
+          </fieldset>
+          <div class="action-row">
+            <button class="primary-button" type="submit">Record this task</button>
+            <button id="next-task" class="secondary-button" type="button">Next task</button>
+            <p id="observation-status" class="status-copy" role="status"></p>
+          </div>
+        </form>
+
+        <section class="panel export-card">
+          <div>
+            <p class="eyebrow">Explicit export only</p>
+            <h2>Review and finish</h2>
+            <p id="score-summary">Thresholds remain not measured until structured observations exist.</p>
+          </div>
+          <div class="export-actions">
+            <button id="download-export" class="primary-button" type="button">Download structured JSON</button>
+            <button id="reset-session" class="danger-button" type="button">Destroy in-memory session</button>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <noscript>This study instrument requires local JavaScript. It makes no network request.</noscript>
+  <script src="stage3b-data.js"></script>
+  <script src="stage3b-core.js"></script>
+  <script src="stage3b.js"></script>
+</body>
+</html>

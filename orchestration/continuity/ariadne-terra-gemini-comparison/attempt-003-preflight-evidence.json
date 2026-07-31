@@ -1,0 +1,291 @@
+{
+  "schema_version": "ariadne.terra_gemini_preflight_evidence.v1",
+  "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+  "status": "passed",
+  "static": {
+    "status": "passed",
+    "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+    "context_frame_count": 6,
+    "prompt_bytes": 11693,
+    "shared_hashes": {
+      "shared_task_sha256": "sha256:1a537292ad029fd49ae3d9706120606547c1ddeaa7404b7bdd9047573ea69cc8",
+      "full_output_schema_sha256": "sha256:7efd3644329807462b3efcd3b16552d923a9262b43876432c21698656cde8a6e",
+      "provider_output_schema_sha256": "sha256:39a0f6da352a8da5f8291291a8f87abaa6aa9daa6b7359a8221341ebb756f1e2",
+      "system_prompt_sha256": "sha256:876a1ef5bd03675d0d83dbc6cb66bc64bdcc2a088daae59aacc8e914803afd2c",
+      "prompt_sha256": "sha256:6102ebb2db7ff42b07f0d1ba7abbec9c2dc333398923030b39076a4aa055d9ea"
+    },
+    "provider_contracts": {
+      "terra": {
+        "status": "passed",
+        "lane_id": "terra",
+        "schema_sha256": "sha256:39a0f6da352a8da5f8291291a8f87abaa6aa9daa6b7359a8221341ebb756f1e2",
+        "maximum_depth": 7,
+        "total_properties": 45,
+        "total_enum_values": 76,
+        "boolean_enum_count": 0,
+        "provider_call_performed": false
+      },
+      "gemini": {
+        "status": "passed",
+        "lane_id": "gemini",
+        "schema_sha256": "sha256:39a0f6da352a8da5f8291291a8f87abaa6aa9daa6b7359a8221341ebb756f1e2",
+        "maximum_depth": 7,
+        "total_properties": 45,
+        "total_enum_values": 76,
+        "boolean_enum_count": 0,
+        "provider_call_performed": false
+      }
+    },
+    "external_audit_track_policy": {
+      "status": "passed",
+      "sandbox_append_authority": false,
+      "raw_reasoning_recorded": false,
+      "provider_call_performed": false
+    },
+    "source_hashes": {
+      "Dockerfile": "sha256:e2781b8cb9681845258aba3964770cd3eab34af9cae4cd5c78b39dd00d8cbae6",
+      "ariadne_comparative_one_use_broker.mjs": "sha256:937f5d9696f70aa9ab8ecea927b5886fe7a98fe92f563d7915c6b5838f90c5c1",
+      "ariadne_provider_contracts.mjs": "sha256:b331b813682dc284a38aac850708fbf98a996bcdf2769de84da364777ebb9987",
+      "ariadne_comparative_work_cell_launcher.mjs": "sha256:97eab934798a1236d15eb863ffeb3354a0109d921e31d781c7134f49eece10b8",
+      "comparison-manifest.json": "sha256:1dacdb8be9c0341e18bc12847893f0b8e5b6f1a1d5c38882a0b2fb20f945746e",
+      "provider-output.schema.json": "sha256:0399384e845dcb7c623634d3359f850783fbad32bd4bf9c47e149c35e5fd52a9",
+      "provider-contract-profiles.json": "sha256:635b3580e3d3aad04a2fbaeb968329b542bf3a1493a7d9d0467476e5644a4141",
+      "external-audit-track-policy.json": "sha256:fb5124a78c8930af55917e7e18df7c57f24c8a8ecd038df305d4e047f825af8f",
+      "source-attempt.json": "sha256:af45aba852f4eaed9c54a859ac14aefa0ecc3d8f437120f4f6ee3ebe97e57e5a",
+      "full-output.schema.json": "sha256:87b2f714071f9c081ff261a7ac2d97078d1af176930009db70069062b053c5bf"
+    },
+    "provider_call_performed": false,
+    "prompt_transmitted": false
+  },
+  "build": {
+    "status": "passed",
+    "node_image_resolved": "node@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d",
+    "build_context_files": [
+      "Dockerfile",
+      "ariadne_comparative_one_use_broker.mjs",
+      "ariadne_provider_contracts.mjs",
+      "ariadne_comparative_work_cell_launcher.mjs",
+      "comparison-manifest.json",
+      "provider-output.schema.json",
+      "full-output.schema.json",
+      "shared-task.json"
+    ],
+    "source_hashes": {
+      "Dockerfile": "sha256:e2781b8cb9681845258aba3964770cd3eab34af9cae4cd5c78b39dd00d8cbae6",
+      "ariadne_comparative_one_use_broker.mjs": "sha256:937f5d9696f70aa9ab8ecea927b5886fe7a98fe92f563d7915c6b5838f90c5c1",
+      "ariadne_provider_contracts.mjs": "sha256:b331b813682dc284a38aac850708fbf98a996bcdf2769de84da364777ebb9987",
+      "ariadne_comparative_work_cell_launcher.mjs": "sha256:97eab934798a1236d15eb863ffeb3354a0109d921e31d781c7134f49eece10b8",
+      "comparison-manifest.json": "sha256:1dacdb8be9c0341e18bc12847893f0b8e5b6f1a1d5c38882a0b2fb20f945746e",
+      "provider-output.schema.json": "sha256:0399384e845dcb7c623634d3359f850783fbad32bd4bf9c47e149c35e5fd52a9",
+      "provider-contract-profiles.json": "sha256:635b3580e3d3aad04a2fbaeb968329b542bf3a1493a7d9d0467476e5644a4141",
+      "external-audit-track-policy.json": "sha256:fb5124a78c8930af55917e7e18df7c57f24c8a8ecd038df305d4e047f825af8f",
+      "source-attempt.json": "sha256:af45aba852f4eaed9c54a859ac14aefa0ecc3d8f437120f4f6ee3ebe97e57e5a",
+      "full-output.schema.json": "sha256:87b2f714071f9c081ff261a7ac2d97078d1af176930009db70069062b053c5bf"
+    },
+    "image_ids": {
+      "terra": {
+        "broker": "sha256:02bd4b9472567b683a395401cba1ff4fa7e83f6d3c5170e04dc5267a8d35def2",
+        "cell": "sha256:5ac0f53d150ff8eaf1fa899046540812c68769b2dcf4e54fe707d630d08eac5c"
+      },
+      "gemini": {
+        "broker": "sha256:02bd4b9472567b683a395401cba1ff4fa7e83f6d3c5170e04dc5267a8d35def2",
+        "cell": "sha256:5ac0f53d150ff8eaf1fa899046540812c68769b2dcf4e54fe707d630d08eac5c"
+      }
+    },
+    "provider_secret_in_image": false,
+    "provider_call_performed": false,
+    "prompt_transmitted": false
+  },
+  "lane_policies": {
+    "terra": {
+      "broker": {
+        "user": "node",
+        "read_only_root": true,
+        "cap_drop": [
+          "ALL"
+        ],
+        "security_opt": [
+          "no-new-privileges"
+        ],
+        "mounts": [
+          {
+            "type": "bind",
+            "destination": "/run/secrets/broker_token",
+            "read_only": true
+          },
+          {
+            "type": "bind",
+            "destination": "/run/secrets/provider_key",
+            "read_only": true
+          }
+        ],
+        "published_port_count": 0,
+        "network_mode": "ariadne-comparison-terra-attempt3-preflight",
+        "memory_bytes": 268435456,
+        "memory_swap_bytes": 268435456,
+        "nano_cpus": 500000000,
+        "pids_limit": 32,
+        "environment_keys": [
+          "ARIADNE_LANE_ID",
+          "EXPECTED_FULL_OUTPUT_SCHEMA_SHA256",
+          "EXPECTED_PROMPT_SHA256",
+          "EXPECTED_PROVIDER_OUTPUT_SCHEMA_SHA256",
+          "EXPECTED_SHARED_TASK_SHA256",
+          "EXPECTED_SYSTEM_PROMPT_SHA256",
+          "NODE_VERSION",
+          "PATH",
+          "YARN_VERSION"
+        ]
+      },
+      "cell": {
+        "user": "node",
+        "read_only_root": true,
+        "cap_drop": [
+          "ALL"
+        ],
+        "security_opt": [
+          "no-new-privileges"
+        ],
+        "mounts": [
+          {
+            "type": "bind",
+            "destination": "/run/secrets/broker_token",
+            "read_only": true
+          }
+        ],
+        "published_port_count": 0,
+        "network_mode": "ariadne-comparison-terra-attempt3-preflight",
+        "memory_bytes": 268435456,
+        "memory_swap_bytes": 268435456,
+        "nano_cpus": 500000000,
+        "pids_limit": 32,
+        "environment_keys": [
+          "NODE_VERSION",
+          "PATH",
+          "YARN_VERSION"
+        ]
+      },
+      "network": {
+        "internal": true,
+        "driver": "bridge",
+        "container_count": 1
+      },
+      "broker_events": [
+        {
+          "audit_sequence": 1,
+          "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+          "event": "broker-ready",
+          "lane_id": "terra",
+          "model_id": "gpt-5.6-terra",
+          "event_sha256": "sha256:97b2699c8306a944cbb945795a4522dc3d5bddd5c593579bf4fbdccdebfb1cfa"
+        }
+      ]
+    },
+    "gemini": {
+      "broker": {
+        "user": "node",
+        "read_only_root": true,
+        "cap_drop": [
+          "ALL"
+        ],
+        "security_opt": [
+          "no-new-privileges"
+        ],
+        "mounts": [
+          {
+            "type": "bind",
+            "destination": "/run/secrets/broker_token",
+            "read_only": true
+          },
+          {
+            "type": "bind",
+            "destination": "/run/secrets/provider_key",
+            "read_only": true
+          }
+        ],
+        "published_port_count": 0,
+        "network_mode": "ariadne-comparison-gemini-attempt3-preflight",
+        "memory_bytes": 268435456,
+        "memory_swap_bytes": 268435456,
+        "nano_cpus": 500000000,
+        "pids_limit": 32,
+        "environment_keys": [
+          "ARIADNE_LANE_ID",
+          "EXPECTED_FULL_OUTPUT_SCHEMA_SHA256",
+          "EXPECTED_PROMPT_SHA256",
+          "EXPECTED_PROVIDER_OUTPUT_SCHEMA_SHA256",
+          "EXPECTED_SHARED_TASK_SHA256",
+          "EXPECTED_SYSTEM_PROMPT_SHA256",
+          "NODE_VERSION",
+          "PATH",
+          "YARN_VERSION"
+        ]
+      },
+      "cell": {
+        "user": "node",
+        "read_only_root": true,
+        "cap_drop": [
+          "ALL"
+        ],
+        "security_opt": [
+          "no-new-privileges"
+        ],
+        "mounts": [
+          {
+            "type": "bind",
+            "destination": "/run/secrets/broker_token",
+            "read_only": true
+          }
+        ],
+        "published_port_count": 0,
+        "network_mode": "ariadne-comparison-gemini-attempt3-preflight",
+        "memory_bytes": 268435456,
+        "memory_swap_bytes": 268435456,
+        "nano_cpus": 500000000,
+        "pids_limit": 32,
+        "environment_keys": [
+          "NODE_VERSION",
+          "PATH",
+          "YARN_VERSION"
+        ]
+      },
+      "network": {
+        "internal": true,
+        "driver": "bridge",
+        "container_count": 1
+      },
+      "broker_events": [
+        {
+          "audit_sequence": 1,
+          "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+          "event": "broker-ready",
+          "lane_id": "gemini",
+          "model_id": "gemini-3.5-flash",
+          "event_sha256": "sha256:3dd917aa5b6a4360301390aa6e80ba7b2aa15ff2ff310a01482d90e2cfa9542a"
+        }
+      ]
+    }
+  },
+  "cleanup": {
+    "terra": {
+      "cell_removed": true,
+      "broker_removed": true,
+      "network_removed": true
+    },
+    "gemini": {
+      "cell_removed": true,
+      "broker_removed": true,
+      "network_removed": true
+    }
+  },
+  "credential_gates": {
+    "both_present": true,
+    "lane_presence": {
+      "terra": true,
+      "gemini": true
+    },
+    "credential_values_recorded": false
+  },
+  "provider_call_performed": false,
+  "prompt_transmitted": false
+}

@@ -1,0 +1,138 @@
+{
+  "appointment_confirmation_performed": false,
+  "appointment_write_performed": false,
+  "blocked_external_hosts": [
+    "appsforoffice.microsoft.com"
+  ],
+  "candid_limit": "This route-intercepted authored-synthetic fixture proves only client-side planner/proofreader/provenance binding, shared typed presentation and stale-state clearing. It is not a new backend or provider result.",
+  "checks": {
+    "isolated_switch_clears_stale_state": true,
+    "isolated_uses_shared_admitted_renderer": true,
+    "mismatched_contracts_fail_closed": true,
+    "no_provider_request": true,
+    "one_local_fixture_response_per_case": true,
+    "only_office_bootstrap_was_blocked": true,
+    "standard_switch_clears_stale_state": true,
+    "standard_uses_shared_admitted_renderer": true
+  },
+  "credential_reads": 0,
+  "data_class": "authored_synthetic",
+  "database_reads": 0,
+  "database_writes": 0,
+  "evidence_hash": "sha256:cf535192371e4ac38ae26c20e9a7ef4b3b422bd077141cfe01a831303f9d8d9d",
+  "evidence_label": "route_intercepted_browser",
+  "isolated": {
+    "after_switch": {
+      "announcement": "Standard planner selected for the next development request. The previous proposal was cleared; select the exact appointment and submit again.",
+      "audit_visible": false,
+      "proposal_visible": false,
+      "provenance_visible": false,
+      "request_retained": true,
+      "selected_mode": "deterministic"
+    },
+    "audit_visible": true,
+    "blocked_external_hosts": [
+      "appsforoffice.microsoft.com"
+    ],
+    "projection_state": "answer",
+    "proposal_visible": true,
+    "provenance_text": "Isolated model\nProofreader admitted\n1 provider call\nAudit\nruntime-synthetic-admitted-001",
+    "provenance_visible": true,
+    "requested_mode": "isolated_vertex",
+    "submitted_modes": [
+      "isolated_vertex"
+    ]
+  },
+  "local_fixture_response_count": 6,
+  "mismatch_cases": {
+    "audit_reference_mismatch": {
+      "audit_visible": false,
+      "blocked_external_hosts": [
+        "appsforoffice.microsoft.com"
+      ],
+      "projection_state": "blocked",
+      "proposal_visible": false,
+      "provenance_text": "",
+      "provenance_visible": false,
+      "requested_mode": "isolated_vertex",
+      "submitted_modes": [
+        "isolated_vertex"
+      ]
+    },
+    "call_count_mismatch": {
+      "audit_visible": false,
+      "blocked_external_hosts": [
+        "appsforoffice.microsoft.com"
+      ],
+      "projection_state": "blocked",
+      "proposal_visible": false,
+      "provenance_text": "",
+      "provenance_visible": false,
+      "requested_mode": "isolated_vertex",
+      "submitted_modes": [
+        "isolated_vertex"
+      ]
+    },
+    "planner_mismatch": {
+      "audit_visible": false,
+      "blocked_external_hosts": [
+        "appsforoffice.microsoft.com"
+      ],
+      "projection_state": "blocked",
+      "proposal_visible": false,
+      "provenance_text": "",
+      "provenance_visible": false,
+      "requested_mode": "isolated_vertex",
+      "submitted_modes": [
+        "isolated_vertex"
+      ]
+    },
+    "proofreader_mismatch": {
+      "audit_visible": false,
+      "blocked_external_hosts": [
+        "appsforoffice.microsoft.com"
+      ],
+      "projection_state": "blocked",
+      "proposal_visible": false,
+      "provenance_text": "",
+      "provenance_visible": false,
+      "requested_mode": "isolated_vertex",
+      "submitted_modes": [
+        "isolated_vertex"
+      ]
+    }
+  },
+  "provider_calls": 0,
+  "provider_hosts": [],
+  "request_hash": "sha256:4afa8c7258c33ec84e2ebc09d59378a7b33fb812efa61717a9b486e68181509c",
+  "request_text_retained": false,
+  "result": "reception_one_bureau_post_admission_runtime_hardening_pass",
+  "schema_version": "reception.one.bureau_post_admission_runtime_hardening.v1",
+  "screenshots": [
+    "orchestration/continuity/reception-one-bureau-post-admission-runtime-hardening/standard-admitted.png",
+    "orchestration/continuity/reception-one-bureau-post-admission-runtime-hardening/isolated-admitted.png",
+    "orchestration/continuity/reception-one-bureau-post-admission-runtime-hardening/planner-change-cleared.png"
+  ],
+  "standard": {
+    "after_switch": {
+      "announcement": "Isolated model selected for the next development request. The previous proposal was cleared; select the exact appointment and submit again.",
+      "audit_visible": false,
+      "proposal_visible": false,
+      "provenance_visible": false,
+      "request_retained": true,
+      "selected_mode": "isolated_vertex"
+    },
+    "audit_visible": false,
+    "blocked_external_hosts": [
+      "appsforoffice.microsoft.com"
+    ],
+    "projection_state": "answer",
+    "proposal_visible": true,
+    "provenance_text": "Standard planner\nProofreader admitted\n0 provider calls",
+    "provenance_visible": true,
+    "requested_mode": "deterministic",
+    "submitted_modes": [
+      "deterministic"
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": "raisa.word_online_authenticated_companion_external_audit.v1",
+  "recorded_at": "2026-07-31T11:08:30Z",
+  "result": "pass",
+  "audit_subject": "raisa_word_online_authenticated_companion_verification",
+  "findings": [
+    {
+      "id": "manifest_and_host",
+      "disposition": "pass",
+      "analysis": "The task-specific ReadDocument manifest loaded from the exact public Sydney development service in a signed-in Word Online session."
+    },
+    {
+      "id": "pre_repair_failure",
+      "disposition": "pass_fail_closed",
+      "analysis": "The first Office dialog released no Word summary because the Diary did not admit the hosted companion capability. No backend, database, credential or provider fallback occurred."
+    },
+    {
+      "id": "repair_scope",
+      "disposition": "pass",
+      "analysis": "The repair admits only smoke and reception_one_companion_demo when the exact origin-bound authored-synthetic policy and all seven false authority fields validate. Other harness and product capabilities remain closed."
+    },
+    {
+      "id": "typed_exchange",
+      "disposition": "pass",
+      "analysis": "The post-repair request reached the native Diary, produced three authored-synthetic matches, passed the existing deterministic summary proofreader and returned only the generic result count to Word."
+    },
+    {
+      "id": "detail_boundary",
+      "disposition": "pass",
+      "analysis": "Synthetic appointment detail remained visible only in the native Diary. Word contained neither the synthetic patient detail nor the request text."
+    },
+    {
+      "id": "network_and_authority",
+      "disposition": "pass",
+      "analysis": "Observed taskpane and Diary resource timing contained zero API, credential or provider requests. No document-body, database, command, confirmation or microphone path ran."
+    },
+    {
+      "id": "cleanup",
+      "disposition": "pass",
+      "analysis": "Both task-created blank documents were moved to the recoverable OneDrive Recycle Bin, task-created browser tabs were closed and local build, image, container, network and temporary Docker credential residue is zero."
+    }
+  ],
+  "candid_claim": {
+    "proves": [
+      "Task-specific manifest loading in one signed-in personal Word Online session.",
+      "One bounded authored-synthetic Word-to-Diary typed exchange.",
+      "Native-Diary-only detail and generic proofreader-admitted Word release.",
+      "The exact public service repair and observed zero-authority network posture."
+    ],
+    "does_not_prove": [
+      "EMR4 application authentication or clinician-role authorization.",
+      "Organisational Office tenant deployment or central add-in administration.",
+      "Safety for real, product-derived, patient, health, clinical or historical data.",
+      "Backend, database, provider, microphone, appointment command or document-write readiness.",
+      "Microsoft or Google physical or sovereign processing location.",
+      "Production fitness or release readiness."
+    ]
+  },
+  "explicit_exclusions": [
+    "No raw request or raw response is retained.",
+    "No account, tenant, document URL, document identifier or filename is retained.",
+    "No credential, cookie, token or authentication response was inspected or persisted.",
+    "No provider reasoning or chain-of-thought exists in this provider-free exercise."
+  ]
+}

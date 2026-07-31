@@ -1,0 +1,32 @@
+{
+  "attempts_remaining": 1,
+  "previous_output_sha256": "sha256:b836556f892dd81d673c1158ef91aae76c561eeddac3afda433847b2b76a8af2",
+  "previous_typed_form": {
+    "goal_code": 6,
+    "steps": [
+      {
+        "operator_code": 13,
+        "source_refs": []
+      }
+    ]
+  },
+  "replacement_required": true,
+  "target_turn_code": 2,
+  "version_code": 2,
+  "violations": [
+    {
+      "allowed_output_names": [],
+      "field_code": "receptionist_response",
+      "source_index": -1,
+      "step_index": -1,
+      "violation_code": "receptionist_response_missing_review_boundary"
+    },
+    {
+      "allowed_output_names": [],
+      "field_code": "receptionist_response",
+      "source_index": -1,
+      "step_index": -1,
+      "violation_code": "receptionist_response_goal_mismatch"
+    }
+  ]
+}

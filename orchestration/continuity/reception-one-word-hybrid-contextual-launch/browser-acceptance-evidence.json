@@ -1,0 +1,148 @@
+{
+  "blocked_external_hosts": [],
+  "candid_limit": "This provider-free route-intercepted Chromium evidence proves the local Word taskpane launcher contract, date-before-projection ordering, and responsive request-input layout. It does not prove the Office dialog in an authenticated Word Online session, a provider path, production behavior, or authority over patient, appointment, clinical, command, or database data.",
+  "checks": {
+    "auth_and_context_are_separate": true,
+    "context_has_exact_zero_authority_shape": true,
+    "context_not_disclosed_in_url": true,
+    "desktop_input_not_clipped": true,
+    "diary_moved_to_requested_date": true,
+    "diary_read_verified_before_projection_open": true,
+    "long_input_growth_is_bounded": true,
+    "narrow_input_not_clipped": true,
+    "native_diary_accepted_exact_context": true,
+    "no_console_error": true,
+    "no_provider_request": true,
+    "no_unexpected_external_host": true,
+    "office_bootstrap_was_locally_intercepted": true,
+    "projection_opened_only_after_context_admission": true,
+    "word_launcher_opened_native_diary_contract": true
+  },
+  "console_errors": [],
+  "credential_reads": 0,
+  "data_class": "authored_synthetic",
+  "database_reads": 0,
+  "database_writes": 0,
+  "evidence_hash": "sha256:8d785364cd8ed2d3a2ed7beed9e0edbe31edaee23d3df08e0345da765fd8dca3",
+  "explicit_exclusions": [
+    "patient_context",
+    "appointment_context",
+    "request_text_in_launch_context",
+    "access_token_in_launch_context",
+    "command_authority",
+    "provider_authority",
+    "provider_call",
+    "database_read",
+    "database_write",
+    "production",
+    "deployment",
+    "release"
+  ],
+  "intercepted_external_hosts": [
+    "appsforoffice.microsoft.com"
+  ],
+  "launch_context_field_manifest": [
+    "command_authority",
+    "contract_version",
+    "correlation_id",
+    "evidence_mode",
+    "open_projection",
+    "patient_context_authority",
+    "planner_mode",
+    "provider_authority",
+    "reference_date",
+    "source_surface",
+    "target_surface",
+    "type"
+  ],
+  "launch_context_hash": "sha256:bc2e0bf2ea4f3ec3eeb7f92a806b859992fdb1ffc71e5d113d8330fe89780896",
+  "launch_reference_date": "2026-07-31",
+  "launcher": {
+    "auth_message_has_null_token": true,
+    "context_absent_from_url": true,
+    "context_separate_from_auth": true,
+    "dialog_options": {
+      "height": 90,
+      "width": 90
+    },
+    "dialog_url": "https://yurifrusin.github.io/EMR4/diary/diary.html",
+    "message_types": [
+      "auth",
+      "reception_one_launch_context"
+    ]
+  },
+  "native": {
+    "desktop_input": {
+      "client_height": 50,
+      "height": 52,
+      "line_height": "17.55px",
+      "overflow_y": "hidden",
+      "padding_bottom": "8px",
+      "padding_top": "8px",
+      "scroll_height": 50,
+      "width": 418
+    },
+    "displayed_date": "2026-07-31",
+    "long_input": {
+      "client_height": 94,
+      "height": 96,
+      "line_height": "17.55px",
+      "overflow_y": "auto",
+      "padding_bottom": "8px",
+      "padding_top": "8px",
+      "scroll_height": 104,
+      "width": 224
+    },
+    "narrow_input": {
+      "client_height": 50,
+      "height": 52,
+      "line_height": "17.55px",
+      "overflow_y": "hidden",
+      "padding_bottom": "8px",
+      "padding_top": "8px",
+      "scroll_height": 51,
+      "width": 224
+    },
+    "projection_open": true,
+    "stored_context": {
+      "command_authority": false,
+      "contract_version": "reception.one.word-launch-context.v1",
+      "correlation_id": "word-launch-3d5b508c-6dac-4a18-9a5b-47f6a983d18b",
+      "evidence_mode": "local_development_context_frame",
+      "open_projection": true,
+      "patient_context_authority": false,
+      "planner_mode": "deterministic",
+      "provider_authority": false,
+      "reference_date": "2026-07-31",
+      "source_surface": "word_taskpane",
+      "target_surface": "native_diary_bureau",
+      "type": "reception_one_launch_context"
+    },
+    "timeline": [
+      {
+        "date": "2026-07-31",
+        "event": "diary_read_complete"
+      },
+      {
+        "date": "2026-07-31",
+        "event": "projection_open"
+      }
+    ]
+  },
+  "network_request_count": 13,
+  "planner_mode": "deterministic",
+  "provider_calls": 0,
+  "provider_hosts": [],
+  "request_hashes": [
+    "sha256:ea7dbeebd35c5315b95d725da72bd6ecd9febed4e82a5e779d29fe6832fc5834",
+    "sha256:438dc55bc375db1f5d5c939c00e9369430a4d20cfc1bfe1f53a580d50c20e2bc"
+  ],
+  "request_text_retained_in_json": false,
+  "result": "reception_one_word_hybrid_contextual_launch_pass",
+  "schema_version": "reception.one.word_hybrid_contextual_launch_acceptance.v1",
+  "screenshots": [
+    "orchestration/continuity/reception-one-word-hybrid-contextual-launch/word-companion-launcher.png",
+    "orchestration/continuity/reception-one-word-hybrid-contextual-launch/contextual-launch-desktop.png",
+    "orchestration/continuity/reception-one-word-hybrid-contextual-launch/contextual-launch-narrow.png"
+  ]
+}

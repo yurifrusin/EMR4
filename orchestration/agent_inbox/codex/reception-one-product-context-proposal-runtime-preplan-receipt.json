@@ -1,0 +1,50 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_the_bounded_reception_one_product_context_proposal_runtime_plan",
+  "status": "passed",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "authority_boundary": "authored_synthetic_dev_default_off_scoped_read_and_proposal_only_runtime_no_real_data_confirmation_write_production_deployment_or_release",
+  "worker_dispatch_permitted": false,
+  "source_evidence": {
+    "live_handover_current_baton": "The accepted model-text lane is closed at the first admitted result and identifies product-context proposal runtime as the next separately bounded candidate.",
+    "current_authority_allocation": "Yuri authorised the necessary next runtime tranches without routine pauses. The frozen plan limits this to a default-off authored-synthetic/dev product-context proposal runtime and a conditionally eligible exact Sydney Vertex cell.",
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-product-context-proposal-runtime-plan.md",
+      "docs/security/bernie-reception-one-product-context-proposal-runtime-threat-model-delta.md",
+      "orchestration/continuity/reception-one-product-context-proposal-runtime/runtime-policy.json",
+      "docs/bernie-reception-one-bureau-model-text-lane-iterative-retry-closeout.md",
+      "docs/bernie-reception-one-bureau-typed-plan-protocol-design.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/access_ai_api_design.md",
+      "orchestration/bernie_release_gates.md"
+    ],
+    "protected_evidence_boundaries": "Protected holdouts and historical Diary material remain closed. Real, product-derived, patient, health and clinical data cannot enter the runtime or provider lane. Raw prompts, raw responses, credentials and reasoning remain excluded from durable evidence.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true
+    },
+    "readiness": {
+      "legacy_runtime_or_provider_wiring_ready": false,
+      "legacy_raw_trove_access_ready": false,
+      "legacy_runtime_gate_decision": "blocked",
+      "legacy_default_provider": "disabled",
+      "legacy_provider_calls_performed": false,
+      "proposal_surface_guard": "passed"
+    }
+  }
+}

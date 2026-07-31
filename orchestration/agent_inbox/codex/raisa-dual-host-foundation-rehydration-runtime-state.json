@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "begin_the_provider_free_raisa_candidate_dual_host_foundation_by_inventorying_and_freezing_clinician_one_and_reception_one_word_desktop_and_word_online_contracts_then_implementing_the_first_shared_host_neutral_office_runtime_without_public_rename_or_new_authority",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_raisa_dual_host_foundation_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is selected; the shared Office host boundary is tightly coupled to the existing dirty taskpane state and remains Sol-owned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external reviewer or provider is selected for this provider-free product foundation."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: the current accepted product result is the provider-free installed-Word Reception One dialog pass at Continuity graph revision 170 and Compass map revision 151; Word Online localhost remains platform-blocked before taskpane execution.",
+        "current_authority_allocation: Yuri authorised beginning the recommended dual-host foundation covering both the earlier clinician taskpane and scribe work and the newer Reception One companion while retaining Raisa, Clinician One and Reception One as candidate nomenclature only.",
+        "active_plan_and_acceptance: the Hybrid launch, compact companion and Word desktop dialog contracts keep authentication, zero-authority navigation and companion messages separate; the API Spine keeps GraphQL read-only and every clinical, scheduling or external effect behind an explicit typed command and product entitlement.",
+        "protected_evidence_boundaries: protected holdouts, historical Diary material, real or product-derived patient, health and clinical data, Office credentials, provider material, hidden reasoning, public rename, artwork, trademark action, provider calls, voice capture, writes, production, deployment and release remain excluded.",
+        "git_refs_and_worktree: HEAD is 5b1ea7952fb08eea333da0e63f166d3895ccea32 on codex/ariadne-terra-gemini-comparative-rehearsal; master, handoff/current, origin/master and origin/handoff/current are 4974075b31035d599e081d68e3b85e04a897baa1; 772 pre-existing status lines are preserved.",
+        "The new foundation may add repository-local authored-synthetic contracts and focused tests, but it must not realign branches, discard unrelated changes, inspect protected fixtures or reinterpret historical nodes."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

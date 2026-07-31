@@ -1,0 +1,339 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/reception-one-bureau-plan-input.v1.json",
+  "title": "Reception One Bureau typed plan input frame",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "request_id",
+    "practice_ref",
+    "correlation_id",
+    "context_revision",
+    "observed_at",
+    "expires_at",
+    "data_class",
+    "utterances",
+    "reference_date",
+    "context",
+    "authority"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "reception.one.bureau.plan-input.v1"
+    },
+    "request_id": {
+      "$ref": "#/$defs/syntheticRef"
+    },
+    "practice_ref": {
+      "$ref": "#/$defs/syntheticRef"
+    },
+    "correlation_id": {
+      "$ref": "#/$defs/syntheticRef"
+    },
+    "context_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "data_class": {
+      "const": "authored_synthetic"
+    },
+    "utterances": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 512
+      }
+    },
+    "reference_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "context": {
+      "$ref": "#/$defs/context"
+    },
+    "authority": {
+      "$ref": "#/$defs/authority"
+    }
+  },
+  "$defs": {
+    "syntheticRef": {
+      "type": "string",
+      "pattern": "^synthetic-[a-z0-9][a-z0-9-]{2,95}$"
+    },
+    "entity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "display",
+        "aliases"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/syntheticRef"
+        },
+        "display": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "aliases": {
+          "type": "array",
+          "maxItems": 6,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          }
+        }
+      }
+    },
+    "appointment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "patient_ref",
+        "practitioner_ref",
+        "date",
+        "start_time",
+        "duration_minutes",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/syntheticRef"
+        },
+        "patient_ref": {
+          "$ref": "#/$defs/syntheticRef"
+        },
+        "practitioner_ref": {
+          "$ref": "#/$defs/syntheticRef"
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "start_time": {
+          "$ref": "#/$defs/time"
+        },
+        "duration_minutes": {
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 180
+        },
+        "status": {
+          "enum": [
+            "booked",
+            "arrived",
+            "completed",
+            "dna"
+          ]
+        }
+      }
+    },
+    "candidateSlot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "practitioner_ref",
+        "date",
+        "start_time",
+        "duration_minutes",
+        "classification",
+        "warning_codes"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/syntheticRef"
+        },
+        "practitioner_ref": {
+          "$ref": "#/$defs/syntheticRef"
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "start_time": {
+          "$ref": "#/$defs/time"
+        },
+        "duration_minutes": {
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 180
+        },
+        "classification": {
+          "enum": [
+            "available",
+            "squeeze_in_review"
+          ]
+        },
+        "warning_codes": {
+          "type": "array",
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "manual_squeeze_in_review",
+              "adjacent_to_break",
+              "no_reservation"
+            ]
+          }
+        }
+      }
+    },
+    "squeezePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "assessment_enabled",
+        "allow_move_existing",
+        "allow_overbook",
+        "requires_human_review"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/syntheticRef"
+        },
+        "assessment_enabled": {
+          "const": true
+        },
+        "allow_move_existing": {
+          "const": false
+        },
+        "allow_overbook": {
+          "const": false
+        },
+        "requires_human_review": {
+          "const": true
+        }
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "patients",
+        "practitioners",
+        "selected_appointment",
+        "appointments",
+        "candidate_slots",
+        "squeeze_policy",
+        "default_duration_minutes",
+        "allowed_statuses"
+      ],
+      "properties": {
+        "patients": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/entity"
+          }
+        },
+        "practitioners": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/entity"
+          }
+        },
+        "selected_appointment": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/appointment"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "appointments": {
+          "type": "array",
+          "maxItems": 24,
+          "items": {
+            "$ref": "#/$defs/appointment"
+          }
+        },
+        "candidate_slots": {
+          "type": "array",
+          "maxItems": 24,
+          "items": {
+            "$ref": "#/$defs/candidateSlot"
+          }
+        },
+        "squeeze_policy": {
+          "$ref": "#/$defs/squeezePolicy"
+        },
+        "default_duration_minutes": {
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 180
+        },
+        "allowed_statuses": {
+          "type": "array",
+          "const": [
+            "arrived",
+            "completed",
+            "dna"
+          ]
+        }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "effect_ceiling",
+        "appointment_write_authority",
+        "confirmation_authority",
+        "provider_execution",
+        "network_access",
+        "database_access",
+        "product_delivery"
+      ],
+      "properties": {
+        "effect_ceiling": {
+          "const": "proposal_only"
+        },
+        "appointment_write_authority": {
+          "const": false
+        },
+        "confirmation_authority": {
+          "const": false
+        },
+        "provider_execution": {
+          "const": false
+        },
+        "network_access": {
+          "const": false
+        },
+        "database_access": {
+          "const": false
+        },
+        "product_delivery": {
+          "const": false
+        }
+      }
+    },
+    "time": {
+      "type": "string",
+      "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+    }
+  }
+}

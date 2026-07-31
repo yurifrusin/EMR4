@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "create_the_exact_sydney_repository_build_push_and_deploy_the_immutable_static_image_then_verify_and_open_only_public_static_invocation",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_raisa_cloud_run_deployment_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No worker was selected; deployment is a short serial operator-controlled sequence."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport was selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No model provider or external reviewer was selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: raisa_cloud_run_api_runtime_identity_enablement_pass is accepted at Continuity graph revision 177 and Compass map revision 158; the two exact APIs are enabled, the exact zero-project-role runtime identity exists, and the frozen repository and service are absent.",
+        "current_authority_allocation: Yuri grants the required authority to proceed through the operator packet's exact repository creation, immutable image push, bounded public Cloud Run development deployment and post-deployment verification.",
+        "active_plan_and_acceptance: docs/raisa-cloud-run-public-https-dev-host-deployment-plan.md and docs/raisa-cloud-run-public-https-dev-host-operator-packet.md freeze project bernie-emr4-dev, Sydney, repository and service raisa-office-web-dev, the existing zero-project-role runtime identity, request-based min-zero/max-one static hosting and authored-synthetic data.",
+        "protected_evidence_boundaries: protected holdouts, historical Diary material, patient, health, clinical and product-derived data, provider payloads, operator identities and credentials remain unopened and unrecorded; backend, database, provider, microphone, command, document-write, custom-domain, production and release remain closed.",
+        "git_refs_and_worktree: HEAD is 5b1ea7952fb08eea333da0e63f166d3895ccea32 on codex/ariadne-terra-gemini-comparative-rehearsal; master, handoff/current, origin/master and origin/handoff/current are 4974075b31035d599e081d68e3b85e04a897baa1; all 3396 observed worktree entries are preserved.",
+        "The deployment must remain private until exact origin, digest, configuration and runtime identity are verified; public invocation is the only authorised service IAM grant."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
