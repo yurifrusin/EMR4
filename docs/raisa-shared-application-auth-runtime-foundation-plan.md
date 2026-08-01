@@ -152,4 +152,3 @@ authored-synthetic in-memory service. It cannot prove live login, cookie
 security, durable or distributed revocation, database transaction behavior,
 external federation, browser behavior, product-data safety, deployment,
 production fitness or release readiness.
-

@@ -221,4 +221,3 @@ complete disposable cleanup. It cannot prove live identity establishment,
 product-role freshness, secure cookies, a runtime database role, retained audit
 operations, backup/restore, multi-region behavior, external federation,
 product-data safety, deployment, production fitness or release readiness.
-

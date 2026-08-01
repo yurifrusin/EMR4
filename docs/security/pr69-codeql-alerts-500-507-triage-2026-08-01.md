@@ -85,5 +85,10 @@ The affected shared-auth suites pass 100 selected tests. The immutable
 `test_provider_free_acceptance_evidence_matches_runtime` historical-report
 equality node was intentionally deselected because its accepted artifact hashes
 the runtime source file; the accepted historical evidence was not regenerated.
-Ruff and `git diff --check` also pass. Alerts 533, 537 and 538 must close as
-fixed on the task-branch CodeQL rerun before protected integration.
+Ruff and `git diff --check` also pass. Alerts 533, 537 and 538 closed as fixed
+on the task-branch CodeQL rerun before protected integration.
+
+The subsequent full-PR integration hygiene check removed six final blank lines
+from already accepted plan, threat-model, handoff and migration files. This was
+a whitespace-only repair; no frozen evidence content or runtime behavior
+changed.

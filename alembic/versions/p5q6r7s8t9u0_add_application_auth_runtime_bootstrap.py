@@ -76,4 +76,3 @@ def upgrade() -> None:
 
 def downgrade() -> None:
     op.execute(f"DROP FUNCTION IF EXISTS {_RESOLVER}")
-
