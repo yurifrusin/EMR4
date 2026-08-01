@@ -33,11 +33,12 @@ lifecycle nor failure-closed behavior.
 
 ## Disposition and proof
 
-Both instances are patched on the task branch without dismissal or other
-native alert mutation. Focused tests, JavaScript syntax, canonical lint and a
-fresh remote CodeQL analysis are required before alert 544 may be marked
-remediated. Until then its register row remains open with desired state
-`fixed`. Alert 543 is tracked in the linked instance-preserving ledger.
+Both instances were patched on the task branch without dismissal or other
+native alert mutation. Focused tests, JavaScript syntax and canonical
+lint/Bandit passed. Fresh CodeQL workflow run `30693354428` then passed both
+language analyses and wrapper check; native instances 543 and 544 each report
+`fixed`. Alert 544 is remediated as `SF-0021`, and alert 543 remains preserved
+in the linked instance ledger as a fixed quality finding.
 
 No authentication, authorization, product, document, identity, provider,
 deployment, production or release boundary changes.

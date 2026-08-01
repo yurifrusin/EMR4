@@ -95,14 +95,14 @@ def test_register_schema_inventory_owners_and_slas() -> None:
     assert (pr70_alert["source"], pr70_alert["native_id"]) == ("codeql", 544)
     assert pr70_alert["severity"] == "high"
     assert pr70_alert["triage_verdict"] == "confirmed"
-    assert pr70_alert["status"] == "open"
-    assert pr70_alert["observed_native_state"] == "open"
+    assert pr70_alert["status"] == "remediated"
+    assert pr70_alert["observed_native_state"] == "fixed"
     assert pr70_alert["desired_native_state"] == "fixed"
-    assert pr70_alert["native_disposition_at"] is None
+    assert pr70_alert["native_disposition_at"] == "2026-08-01T09:17:35Z"
     assert pr70_alert["risk_acceptance"] is None
 
 
-def test_pr70_codeql_candidates_are_instance_preserving_and_pending_readback() -> None:
+def test_pr70_codeql_candidates_are_instance_preserving_and_fixed() -> None:
     ledger_path = (
         ROOT
         / "docs"
@@ -112,13 +112,29 @@ def test_pr70_codeql_candidates_are_instance_preserving_and_pending_readback() -
     rows = [json.loads(line) for line in ledger_path.read_text().splitlines()]
     assert [row["candidate_id"] for row in rows] == ["codeql-543", "codeql-544"]
     assert len({row["instance_key"] for row in rows}) == 2
-    assert {row["disposition"] for row in rows} == {
-        "patched_pending_codeql_readback"
+    assert {row["disposition"] for row in rows} == {"fixed_by_fresh_codeql_analysis"}
+    assert {row["survives"] for row in rows} == {"no"}
+    readback_path = (
+        ROOT
+        / "orchestration"
+        / "continuity"
+        / "shared-application-auth-office-cookie-compatibility"
+        / "codeql-pr70-alerts-readback.json"
+    )
+    readback = _load(readback_path)
+    assert readback["fixed_head"] == "a4262cbc5a251f3213b2453d6906eb83aba21c52"
+    assert readback["fresh_analysis"] == {
+        "workflow_run_id": 30693354428,
+        "wrapper_check_run_id": 91352017011,
+        "javascript_typescript": "success",
+        "python": "success",
+        "wrapper": "success",
     }
-    assert {row["survives"] for row in rows} == {
-        "yes_quality_only",
-        "yes_confirmed_narrow_test_boundary",
+    assert {(item["number"], item["state"]) for item in readback["native_instances"]} == {
+        (543, "fixed"),
+        (544, "fixed"),
     }
+    assert readback["external_side_effects"]["native_alert_mutations"] == 0
 
 
 def test_post_snapshot_alert_17_triage_and_readback_remain_open_and_zero_mutation() -> None:

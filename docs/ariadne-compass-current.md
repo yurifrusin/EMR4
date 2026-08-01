@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 shared application authentication now has a real Office-host cookie compatibility proof in installed Word and Word Online. Continuity 187 / Compass 168 bind the result and the post-snapshot development-only Dependabot alert 17 remains registered open/needs_review without mutation. Real identity, Microsoft federation, product data, organisational deployment, production, release and protected integration remain closed.
+> EMR4 shared application authentication now has a real Office-host cookie compatibility proof in installed Word and Word Online. Continuity 187 / Compass 168 bind the result and the post-snapshot development-only Dependabot alert 17 remains registered open/needs_review without mutation. PR 70 CodeQL instances 543 and 544 are fixed without dismissal. Real identity, Microsoft federation, product data, organisational deployment, production, release and protected integration remain closed.
 
 ## North star
 
@@ -147,7 +147,7 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
 65. **Durable security-finding governance — EMR4 Security-Finding Governance**
    EMR4 now has one schema-validated owner/SLA register joining 12 native security alerts to evidence and exact GitHub disposition, with zero open Dependabot or security-high CodeQL alerts in the reconciled queues. The 14 Bandit and 10 CodeQL validation rows remain linked. Python and Node workflow definitions now carry staggered daily schedules; activation on the default branch still awaits protected integration. Lineage parent: `raisa-shared-application-auth-operational-hardening`.
 66. **Real Office-host cookie compatibility proof — Raisa Shared Application-Auth Office Cookie Compatibility**
-   The accepted default-off authored-synthetic session-cookie lifecycle passed once in installed Word and once in Word Online through the exact development origin. Both independent sessions rotated, logged out and then denied validation; no product, identity, document, provider, cloud or deployment path ran, and task listeners and registration are absent. Publication exposed development-only Dependabot alert 17, which is registered open/needs_review without native or dependency mutation. Lineage parent: `raisa-shared-application-auth-operational-hardening`.
+   The accepted default-off authored-synthetic session-cookie lifecycle passed once in installed Word and once in Word Online through the exact development origin. Both independent sessions rotated, logged out and then denied validation; no product, identity, document, provider, cloud or deployment path ran, and task listeners and registration are absent. Publication exposed development-only Dependabot alert 17, which is registered open/needs_review without native or dependency mutation. PR 70 warning 543 and high alert 544 were repaired and fresh CodeQL marks both fixed without dismissal. Lineage parent: `raisa-shared-application-auth-operational-hardening`.
 
 ## Current position
 
@@ -155,7 +155,7 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
 
 **Why this proof came next:** The protected shared-auth and governance foundations were integrated, leaving real Office host cookie carriage as the leading bounded gap.
 
-The accepted default-off authored-synthetic session-cookie lifecycle passed once in installed Word and once in Word Online through the exact development origin. Both independent sessions rotated, logged out and then denied validation; no product, identity, document, provider, cloud or deployment path ran, and task listeners and registration are absent. Publication exposed development-only Dependabot alert 17, which is registered open/needs_review without native or dependency mutation.
+The accepted default-off authored-synthetic session-cookie lifecycle passed once in installed Word and once in Word Online through the exact development origin. Both independent sessions rotated, logged out and then denied validation; no product, identity, document, provider, cloud or deployment path ran, and task listeners and registration are absent. Publication exposed development-only Dependabot alert 17, which is registered open/needs_review without native or dependency mutation. PR 70 warning 543 and high alert 544 were repaired and fresh CodeQL marks both fixed without dismissal.
 
 ### What this unlocks
 
@@ -613,6 +613,7 @@ Prerequisites:
 - `docs/security/bernie-reception-one-structured-source-language-threat-model-delta.md`
 - `docs/security/dependabot-alert-17-triage-2026-08-01.md`
 - `docs/security/dependabot-alerts-8-15-triage-2026-08-01.md`
+- `docs/security/pr70-codeql-alerts-543-544-triage-2026-08-01.md`
 - `docs/security/raisa-clinician-one-readonly-document-context-threat-model-delta.md`
 - `docs/security/raisa-clinician-one-word-desktop-selection-check-threat-model-delta.md`
 - `docs/security/raisa-cloud-run-public-https-dev-host-readiness-threat-model-delta.md`
@@ -1071,6 +1072,7 @@ Prerequisites:
 - `orchestration/continuity/security-finding-governance/acceptance-evidence.json`
 - `orchestration/continuity/security-finding-governance/native-alert-disposition-evidence.json`
 - `orchestration/continuity/shared-application-auth-office-cookie-compatibility/acceptance-evidence.json`
+- `orchestration/continuity/shared-application-auth-office-cookie-compatibility/codeql-pr70-alerts-readback.json`
 - `orchestration/continuity/shared-application-auth-office-cookie-compatibility/dependabot-alert-17-readback.json`
 - `orchestration/continuity/shared-application-auth-office-cookie-compatibility/final-residue-evidence.json`
 - `orchestration/continuity/shared-application-auth-office-cookie-compatibility/live-office-host-evidence.json`

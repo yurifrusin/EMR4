@@ -9659,7 +9659,7 @@
       "kind": "integration",
       "status": "accepted",
       "created_at": "2026-08-01T07:11:00Z",
-      "updated_at": "2026-08-01T07:55:53Z",
+      "updated_at": "2026-08-01T09:18:15Z",
       "coordinates": {
         "git_ref": "codex/shared-auth-office-cookie-compatibility",
         "source_head": "30d5e0116148529da3c41c728504c69d8833f544",
@@ -9688,7 +9688,8 @@
           "Yuri authorised the leading Compass 167 Office cookie-compatibility candidate.",
           "Yuri separately permitted the supplied Raisa branding direction in future UI renders; the concurrent brand assets remained untouched and excluded.",
           "No Trust Center, catalogue, tenant, Office policy, cloud/IAM, deployment or protected-ref change occurred.",
-          "Task-branch publication exposed post-snapshot Dependabot alert 17; it is registered open/needs_review and neither the native alert nor the dependency graph was mutated."
+          "Task-branch publication exposed post-snapshot Dependabot alert 17; it is registered open/needs_review and neither the native alert nor the dependency graph was mutated.",
+          "PR 70 CodeQL alerts 543 and 544 were fixed by narrow source and regression changes; fresh language analyses and the wrapper passed without dismissal or native alert mutation."
         ]
       },
       "decisions": [
@@ -9721,6 +9722,12 @@
           "source": "orchestration/continuity/shared-application-auth-office-cookie-compatibility/dependabot-alert-17-readback.json",
           "status": "accepted",
           "summary": "Register development-only high alert 17 as SF-0020 with a not_actionable static verdict while retaining its native-open state pending explicit disposition authority."
+        },
+        {
+          "id": "remediate-pr70-codeql-alerts-543-544-187",
+          "source": "orchestration/continuity/shared-application-auth-office-cookie-compatibility/codeql-pr70-alerts-readback.json",
+          "status": "accepted",
+          "summary": "Accept exact CSP directive equality and removal of an ineffective local-variable assignment after fresh CodeQL marks both PR instances fixed."
         }
       ],
       "claim_scope": [
@@ -9728,7 +9735,8 @@
         "Each host used an independent authored-synthetic principal, one-use bootstrap and result channel; both logged out and proved the ordinary post-logout denial.",
         "The desktop admission failure occurred before page delivery; direct developer debugging repaired only host admission and was fully unregistered.",
         "No document, product, patient, clinical, external identity, provider, cloud, deployment or production path ran.",
-        "Dependabot alert 17 reaches only an optional development-lint project-service/default-project glob matcher absent from the supported configuration; SF-0020 remains open/needs_review."
+        "Dependabot alert 17 reaches only an optional development-lint project-service/default-project glob matcher absent from the supported configuration; SF-0020 remains open/needs_review.",
+        "Fresh PR 70 CodeQL readback marks warning 543 and high alert 544 fixed at head a4262cbc without dismissal; all five PR checks pass."
       ],
       "contract_evidence": [
         {
@@ -9764,7 +9772,9 @@
           "orchestration/continuity/shared-application-auth-office-cookie-compatibility/final-residue-evidence.json",
           "orchestration/continuity/shared-application-auth-office-cookie-compatibility/acceptance-evidence.json",
           "docs/security/dependabot-alert-17-triage-2026-08-01.md",
-          "orchestration/continuity/shared-application-auth-office-cookie-compatibility/dependabot-alert-17-readback.json"
+          "orchestration/continuity/shared-application-auth-office-cookie-compatibility/dependabot-alert-17-readback.json",
+          "docs/security/pr70-codeql-alerts-543-544-triage-2026-08-01.md",
+          "orchestration/continuity/shared-application-auth-office-cookie-compatibility/codeql-pr70-alerts-readback.json"
         ],
         "closeouts": [
           "docs/raisa-shared-application-auth-office-cookie-compatibility-closeout.md"
@@ -9795,5 +9805,5 @@
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-01T07:55:53Z"
+  "updated_at": "2026-08-01T09:18:15Z"
 }
