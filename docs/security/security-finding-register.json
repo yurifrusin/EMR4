@@ -1,8 +1,8 @@
 {
   "schema_version": "emr4.security-finding-register.v1",
-  "register_revision": 6,
+  "register_revision": 7,
   "policy_effective_at": "2026-08-01T00:00:00+10:00",
-  "last_verified_at": "2026-08-01T09:18:15Z",
+  "last_verified_at": "2026-08-01T21:07:28Z",
   "owner": "@yurifrusin",
   "native_findings": [
     {
@@ -568,6 +568,14 @@
       "row_count": 2,
       "disposition": "Both PR 70 instances are fixed by fresh CodeQL analysis without dismissal; alert 544 is indexed above as remediated.",
       "verified_at": "2026-08-01T19:18:15+10:00"
+    },
+    {
+      "ledger_id": "codeql-pr74-quality-candidates-2026-08-02",
+      "scanner": "CodeQL",
+      "path": "docs/security/pr74-codeql-alerts-546-548-validation-ledger.jsonl",
+      "row_count": 3,
+      "disposition": "Three note-severity Protocol-stub quality instances are source-repaired pending fresh CodeQL fixed readback; static triage finds no product security boundary crossing.",
+      "verified_at": "2026-08-02T07:07:28+10:00"
     }
   ]
 }

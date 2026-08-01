@@ -187,7 +187,8 @@ class ExternalIdentityBindingStore(Protocol):
         provider: str,
         tenant_id: str,
         object_id: str,
-    ) -> Sequence[ExternalIdentityBinding]: ...
+    ) -> Sequence[ExternalIdentityBinding]:
+        raise NotImplementedError
 
 
 class InternalPrincipalStore(Protocol):
@@ -196,11 +197,13 @@ class InternalPrincipalStore(Protocol):
         *,
         user_ref: str,
         practice_ref: str,
-    ) -> SyntheticInternalPrincipal | None: ...
+    ) -> SyntheticInternalPrincipal | None:
+        raise NotImplementedError
 
 
 class FederationAuditSink(Protocol):
-    def record(self, event: FederationAuditEvent) -> None: ...
+    def record(self, event: FederationAuditEvent) -> None:
+        raise NotImplementedError
 
 
 class InMemoryExternalIdentityBindingStore:
