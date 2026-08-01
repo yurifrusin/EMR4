@@ -1073,7 +1073,7 @@ function bernieReviewTransitionFromViewModel(payload, viewModel, candidateSlots,
   const copyMode = bernieUiNodeValue(viewModel, "copy_mode");
   const freshness = bernieUiNodeValue(viewModel, "freshness_state");
 
-  let state = "blocked";
+  let state;
   if (payload.status === "existing_booking_found" || payload.outcome?.kind === "existing_booking_found" || payload.result === "existing_booking_found") {
     state = "existing_booking_found";
   } else if (confirmation === "confirmed" || copyMode === "success" || flags.show_success_copy === true) {
@@ -1104,7 +1104,7 @@ function bernieReviewTransitionFromViewModel(payload, viewModel, candidateSlots,
     clarification === "identity_ambiguous"
   ) {
     state = "clarification";
-  } else if (proposal === "blocked" || confirmation === "blocked" || copyMode === "blocked") {
+  } else {
     state = "blocked";
   }
 

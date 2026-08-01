@@ -199,7 +199,11 @@ def _json_safe(value: Any) -> Any:
 
 def _session_evidence() -> dict[str, Any]:
     outcomes = []
-    for surface in Surface:
+    for surface in (
+        Surface.WORD_DESKTOP,
+        Surface.WORD_ONLINE,
+        Surface.NATIVE_DIARY,
+    ):
         runtime, store, audit, _clock = _runtime()
         created = _create(runtime, surface)
         context = runtime.validate_surface_session(
