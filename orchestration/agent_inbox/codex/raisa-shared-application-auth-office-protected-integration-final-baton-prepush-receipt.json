@@ -1,0 +1,36 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "push_the_no_docs_final_office_protected_integration_baton_branch_and_open_its_check_gated_pr",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "Commit ac4b4ca8 removes the final pending and paused descriptions from the already completed Office protected integration.",
+    "current_authority_allocation": "Yuri authorized the necessary task-branch commit and protected closeout; GPT Sol owns the check-gated no-docs PR and final ref alignment.",
+    "active_plan_and_acceptance": [
+      "AGENTS.md",
+      "orchestration/agent_inbox/codex/raisa-shared-application-auth-office-protected-integration-final-postcompaction-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-shared-application-auth-office-protected-integration-final-baton-precommit-receipt.json"
+    ],
+    "protected_evidence_boundaries": "The branch changes handover wording and orchestration receipts only. It contains no docs path and opens no second deployment, identity, federation, product-data, production, release or alert-disposition authority.",
+    "git_refs_and_worktree": {
+      "HEAD": "ac4b4ca87e0b42b6c964a4916838176ed42f3d6b",
+      "branch": "codex/office-protected-integration-final-baton",
+      "origin/master": "41d04e6ee9bb3b3a98c6fbd4985a6a30d3f508b8",
+      "origin/handoff/current": "41d04e6ee9bb3b3a98c6fbd4985a6a30d3f508b8",
+      "index_empty_before_receipt": true,
+      "concurrent_branding_assets_present_untracked_untouched_and_excluded": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

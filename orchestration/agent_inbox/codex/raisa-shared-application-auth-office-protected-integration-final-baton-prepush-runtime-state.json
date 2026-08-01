@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "push_the_no_docs_final_office_protected_integration_baton_branch_and_open_its_check_gated_pr",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_office_protected_integration_final_baton_prepush",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: ac4b4ca8 removes the final pending and paused descriptions from the already completed Office protected integration.",
+        "current_authority_allocation: Yuri authorized the necessary task-branch commit and protected closeout; the branch contains no docs path and cannot trigger Pages before or after merge.",
+        "active_plan_and_acceptance: the accepted Office stack and exact protected-integration outcome remain unchanged.",
+        "protected_evidence_boundaries: the branch changes handover wording and orchestration receipts only and opens no second deployment, identity, federation, product-data, production, release or alert-disposition authority.",
+        "git_refs_and_worktree: source protected refs are aligned at 41d04e6e, task HEAD is ac4b4ca8, the index is empty and the user-owned docs/branding directory remains untracked, untouched and excluded.",
+        "The compact handover test, JSON parsing and git diff check pass."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent assigned."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external worker ran."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external planning lane ran."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external reviewer ran."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
