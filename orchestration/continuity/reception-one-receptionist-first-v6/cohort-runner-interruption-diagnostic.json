@@ -1,0 +1,24 @@
+{
+  "schema_version": "reception.one.receptionist_first_v6.runner_interruption.v1",
+  "result": "closed_case_resume_required",
+  "failure_class": "desktop_command_wrapper_terminated_between_cases",
+  "provider_request_contract_defect": false,
+  "prompt_or_schema_defect": false,
+  "proofreader_defect": false,
+  "provider_or_identity_change_required": false,
+  "closed_cases_before_interruption": [
+    "b-create-arrange",
+    "b-create-alias"
+  ],
+  "provider_calls_consumed_before_resume": 2,
+  "closed_ledgers_consumed": true,
+  "open_ledgers_present": false,
+  "partial_next_case_present": false,
+  "task_scoped_container_or_network_residue_present": false,
+  "broker_or_cohort_process_present_after_interruption": false,
+  "replay_of_closed_calls_permitted": false,
+  "repair": "verify and reuse only exact fully closed case evidence, then continue at the first absent case",
+  "focused_resume_regression_test_added": true,
+  "provider_fallback": false,
+  "external_state_changed": false
+}

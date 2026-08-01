@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "accept_the_exact_private_deployment_and_close_the_domain_restricted_sharing_public_invocation_block_without_bypass",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_raisa_cloud_run_deployment_preacceptance",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker was selected; the deployment remained Sol-owned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport was selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No model provider or external reviewer was selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: the ready private Cloud Run service and its Domain Restricted Sharing public-invocation block are recorded at Continuity graph revision 178 and Compass map revision 159.",
+        "current_authority_allocation: Yuri authorised the exact repository, immutable image push and bounded public development-service deployment; the frozen operator packet requires a new user choice at organisation-policy conflict.",
+        "active_plan_and_acceptance: docs/raisa-cloud-run-public-https-dev-host-deployment-plan.md and docs/raisa-cloud-run-public-https-dev-host-operator-packet.md freeze the exact project, region, repository, service, identity and public-IAM route.",
+        "protected_evidence_boundaries: protected holdouts, historical Diary material, patient, health, clinical and product-derived data, providers, backend, database, microphone, document writes, commands, production and release remained unopened and unused.",
+        "git_refs_and_worktree: HEAD remains 5b1ea7952fb08eea333da0e63f166d3895ccea32; master, handoff/current, origin/master and origin/handoff/current remain 4974075b31035d599e081d68e3b85e04a897baa1; all unrelated worktree changes are preserved.",
+        "The exact service remains private: the allUsers binding count is zero and the Invoker IAM check has not been disabled.",
+        "Twenty deployment/Compass tests and 137 broader Word, Reception One and API Spine tests pass; continuity, Compass, JSON, Python, JavaScript and diff checks pass.",
+        "Task-owned local containers, networks, image tags, contexts, temporary Docker credentials and raw error working files are absent."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

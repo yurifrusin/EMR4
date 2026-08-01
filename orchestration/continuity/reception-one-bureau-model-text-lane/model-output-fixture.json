@@ -1,0 +1,72 @@
+{
+  "contract_version": "reception.one.bureau.model-plan-candidate.v1",
+  "goal": "squeeze_in_assessment",
+  "steps": [
+    {
+      "id": "step-patient",
+      "operator": "resolve_patient_reference",
+      "arguments": [
+        {
+          "name": "mention",
+          "source": "binding:patient"
+        }
+      ]
+    },
+    {
+      "id": "step-practitioner",
+      "operator": "resolve_practitioner_reference",
+      "arguments": [
+        {
+          "name": "mention",
+          "source": "binding:practitioner"
+        }
+      ]
+    },
+    {
+      "id": "step-date",
+      "operator": "resolve_date_expression",
+      "arguments": [
+        {
+          "name": "date",
+          "source": "binding:appointment_date"
+        }
+      ]
+    },
+    {
+      "id": "step-schedule",
+      "operator": "read_practitioner_schedule",
+      "arguments": [
+        {
+          "name": "practitioner",
+          "source": "step:step-practitioner:practitioner"
+        },
+        {
+          "name": "date",
+          "source": "step:step-date:date"
+        }
+      ]
+    },
+    {
+      "id": "step-assess",
+      "operator": "assess_squeeze_in_options",
+      "arguments": [
+        {
+          "name": "patient",
+          "source": "step:step-patient:patient"
+        },
+        {
+          "name": "schedule",
+          "source": "step:step-schedule:schedule"
+        },
+        {
+          "name": "duration_minutes",
+          "source": "binding:duration_minutes"
+        },
+        {
+          "name": "policy",
+          "source": "binding:squeeze_policy"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "api_key_authentication_used": false,
+  "appointment_confirmation_performed": false,
+  "appointment_write_performed": false,
+  "base_evidence_sha256": "sha256:7dc8c78f7a5d6ffb67c0c9714b4293e9c267c8b782939095710d4ece05049bbb",
+  "browser": {
+    "aria_selected_verified_before_submit": true,
+    "exact_appointment_row_clicked": true,
+    "external_host_count": 0,
+    "request_interception_used": false,
+    "route_call_count": 1,
+    "selected_appointment_id_present_in_request": true,
+    "selected_appointment_id_retained": false
+  },
+  "cleanup": {
+    "database_absent": true,
+    "ownership_marker_verified": true,
+    "runtime_processes_absent": true,
+    "runtime_temporary_root_absent": true
+  },
+  "cleanup_evidence_sha256": "sha256:c185a37b7614892f35d88a5d09148d5bcb5e86dd72d85d677bb6fd0229e065f9",
+  "credential_reads": 0,
+  "data_class": "authored_synthetic",
+  "database_truth_unchanged": true,
+  "evidence_hash": "sha256:f1a67a121b0606a1291783b8ad521b75d90e3b6920909567f63ff481a0ca864f",
+  "next_gate": "fresh_user_authority_required_before_any_provider_retry",
+  "proposal": {
+    "adapter_kind": "update_proposal",
+    "adapter_safe": true,
+    "goal": "resize",
+    "operation_id": "proposeAppointmentUpdate",
+    "planner_mode": "deterministic",
+    "proofreader_disposition": "admit",
+    "proposal_only": true,
+    "proposed_duration_minutes": 45,
+    "requires_confirmation": true,
+    "result": "proposal_ready",
+    "write_performed": false
+  },
+  "provider_calls": 0,
+  "provider_environment_forwarded": false,
+  "raw_database_identifiers_retained": false,
+  "result": "reception_one_bureau_explicit_selection_provider_free_pass",
+  "schema_version": "reception.one.bureau_explicit_selection.retry_readiness_evidence.v1",
+  "screenshot": "orchestration/continuity/reception-one-bureau-explicit-selection-retry-readiness/live-local-1-resize.png",
+  "screenshot_sha256": "sha256:c2662b0f79e79628d411687ff025a0d4c8379901ee25cc65c6f9dd4946be8d9a"
+}

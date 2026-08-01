@@ -1,0 +1,54 @@
+{
+  "schema_version": "reception.one.product_context_proposal_runtime.provider_free_evidence.v1",
+  "recorded_at": "2026-07-29T14:43:58Z",
+  "result": "reception_one_product_context_proposal_runtime_provider_free_pass",
+  "data_class": "authored_synthetic",
+  "api": {
+    "route": "POST /api/v1/appointments/proposals/reception-one/compose",
+    "authentication_required": true,
+    "default_off": true,
+    "development_only": true,
+    "practice_allowlist_required": true,
+    "context_handles_request_scoped": true,
+    "provider_calls": 0,
+    "appointment_writes": 0,
+    "appointment_audit_writes": 0,
+    "confirmation_performed": false,
+    "legacy_interpreter_gate_changed": false,
+    "focused_tests": 7,
+    "status": "passed"
+  },
+  "proofreader": {
+    "ordinary_create_result": "admit",
+    "unknown_patient_result": "typed_clarification",
+    "default_duration_minutes": 15,
+    "free_duration_invention": false,
+    "released_operation_id": "proposeAppointmentCreate",
+    "effect_ceiling": "proposal_only"
+  },
+  "isolation": {
+    "evidence": "orchestration/continuity/reception-one-product-context-proposal-runtime/provider-free-isolation-evidence.json",
+    "status": "passed",
+    "provider_calls": 0,
+    "credential_reads": 0,
+    "network_access": false,
+    "residue_absent": true
+  },
+  "browser": {
+    "url_class": "loopback_static_authored_synthetic_acceptance_harness",
+    "route_interception_used": false,
+    "rendered_result": "two_typed_candidate_times",
+    "selection_result": "selected_not_reserved",
+    "proposal_prepare_affordance_present": true,
+    "positive_booking_claim_present": false,
+    "console_errors_or_warnings": 0,
+    "status": "passed"
+  },
+  "explicit_limits": [
+    "The rendered browser proof used the authored-synthetic acceptance bridge fixture while the PostgreSQL-backed route was proven separately through the real FastAPI test application.",
+    "This evidence does not claim one end-to-end browser-to-PostgreSQL transaction.",
+    "No live provider was used in this provider-free gate.",
+    "No real, product-derived, patient, health, clinical or historical data was used.",
+    "No appointment was reserved, confirmed, created or changed."
+  ]
+}

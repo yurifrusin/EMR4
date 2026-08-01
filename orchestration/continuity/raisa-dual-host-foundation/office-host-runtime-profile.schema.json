@@ -1,0 +1,205 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/office-host-runtime-profile.schema.json",
+  "title": "EMR4 Office host runtime profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "host",
+    "platform",
+    "host_kind",
+    "office_initialized",
+    "capabilities",
+    "microphone_permission_strategy",
+    "features",
+    "authority"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "emr4.office-host-runtime-profile.v1"
+    },
+    "host": {
+      "enum": [
+        "word",
+        "unknown"
+      ]
+    },
+    "platform": {
+      "enum": [
+        "desktop_windows",
+        "desktop_mac",
+        "word_online",
+        "mobile",
+        "unknown"
+      ]
+    },
+    "host_kind": {
+      "enum": [
+        "desktop",
+        "web",
+        "mobile",
+        "unknown"
+      ]
+    },
+    "office_initialized": {
+      "type": "boolean"
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "word_runtime",
+        "dialog_api",
+        "office_actions",
+        "custom_xml_parts",
+        "media_devices",
+        "media_recorder",
+        "office_device_permission",
+        "crypto_random_uuid"
+      ],
+      "properties": {
+        "word_runtime": {
+          "type": "boolean"
+        },
+        "dialog_api": {
+          "type": "boolean"
+        },
+        "office_actions": {
+          "type": "boolean"
+        },
+        "custom_xml_parts": {
+          "type": "boolean"
+        },
+        "media_devices": {
+          "type": "boolean"
+        },
+        "media_recorder": {
+          "type": "boolean"
+        },
+        "office_device_permission": {
+          "type": "boolean"
+        },
+        "crypto_random_uuid": {
+          "type": "boolean"
+        }
+      }
+    },
+    "microphone_permission_strategy": {
+      "enum": [
+        "office_device_permission_then_browser_media",
+        "browser_media_prompt",
+        "unavailable"
+      ]
+    },
+    "features": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "clinician_one.workspace",
+        "clinician_one.scribe_capture",
+        "reception_one.dialog",
+        "reception_one.companion"
+      ],
+      "properties": {
+        "clinician_one.workspace": {
+          "$ref": "#/$defs/featureDecision"
+        },
+        "clinician_one.scribe_capture": {
+          "$ref": "#/$defs/featureDecision"
+        },
+        "reception_one.dialog": {
+          "$ref": "#/$defs/featureDecision"
+        },
+        "reception_one.companion": {
+          "$ref": "#/$defs/featureDecision"
+        }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "document_read",
+        "document_write",
+        "microphone_capture",
+        "network_access",
+        "provider_invocation",
+        "patient_context",
+        "clinical_context",
+        "command",
+        "write"
+      ],
+      "properties": {
+        "document_read": {
+          "const": false
+        },
+        "document_write": {
+          "const": false
+        },
+        "microphone_capture": {
+          "const": false
+        },
+        "network_access": {
+          "const": false
+        },
+        "provider_invocation": {
+          "const": false
+        },
+        "patient_context": {
+          "const": false
+        },
+        "clinical_context": {
+          "const": false
+        },
+        "command": {
+          "const": false
+        },
+        "write": {
+          "const": false
+        }
+      }
+    }
+  },
+  "$defs": {
+    "featureDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "missing_capabilities",
+        "decision_basis",
+        "authorization"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "host_ready",
+            "host_blocked"
+          ]
+        },
+        "missing_capabilities": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "word_runtime",
+              "word_host",
+              "dialog_api",
+              "media_devices",
+              "media_recorder",
+              "office_device_permission",
+              "crypto_random_uuid"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "decision_basis": {
+          "const": "host_capability_only"
+        },
+        "authorization": {
+          "const": "product_authorization_not_evaluated"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "authority_boundary": "receipt_only_and_existing_task_branch_checkpoint_commit_no_worker_pull_request_protected_ref_integration_deployment_product_or_external_identity_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit_the_authorised_partial_cross_pc_checkpoint_to_the_existing_task_branch_only",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md identifies the accepted PostgreSQL parent and the authorised but incomplete cross-PC transport descendant.",
+    "current_authority_allocation": "GPT Sol owns this checkpoint; no worker or subagent was dispatched; Yuri requested the pause and cross-PC save.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-shared-application-auth-runtime-role-secure-transport-cross-pc-handoff.md",
+      "docs/raisa-shared-application-auth-runtime-role-secure-transport-plan.md",
+      "docs/security/raisa-shared-application-auth-runtime-role-secure-transport-threat-model-delta.md",
+      "docs/api-spine/openapi/application-auth-synthetic-transport.yaml",
+      "orchestration/agent_inbox/codex/raisa-shared-application-auth-runtime-role-secure-transport-postcompaction-receipt.json"
+    ],
+    "protected_evidence_boundaries": "Protected holdouts and raw historical Diary material remain sealed; product/patient/clinical data, providers, commands, cloud/IAM, deployment, production and release remain closed.",
+    "git_refs_and_worktree": {
+      "HEAD": "8fa732592fbee4f57c322b13d9d8ff89fcc7fa33",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "upstream": "origin/codex/ariadne-terra-gemini-comparative-rehearsal",
+      "upstream_ahead": 0,
+      "upstream_behind": 0,
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "12fb7800ea285561b5ea50cbfe328b4d3d0fc1f8",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "all_named_protected_refs_are_ancestors_of_HEAD": true,
+      "staged_changes_before_checkpoint": false,
+      "durable_worker_worktrees_clean": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

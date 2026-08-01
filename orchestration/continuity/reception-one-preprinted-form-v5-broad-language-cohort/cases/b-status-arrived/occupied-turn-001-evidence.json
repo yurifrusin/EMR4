@@ -1,0 +1,261 @@
+{
+  "attempt_id": "reception-one-preprinted-form-v5-eval-b-status-arrived-turn-001",
+  "broker": {
+    "api_key_authentication_used": false,
+    "environment_forwarded_names": [
+      "APPDATA",
+      "COMSPEC",
+      "LOCALAPPDATA",
+      "PATH",
+      "PATHEXT",
+      "SYSTEMDRIVE",
+      "SYSTEMROOT",
+      "TEMP",
+      "TMP",
+      "USERPROFILE",
+      "WINDIR"
+    ],
+    "google_application_credentials_forwarded": false,
+    "host_purpose_built_one_use_process": true,
+    "process_exit_code": 0
+  },
+  "build_context": {
+    "repository_root_used": false,
+    "source_hashes": {
+      "generated:cell-request.json": "sha256:ee331572c608b76b0bae292fef9aa08a5ef37693c4934931bfa4f4374ea06ce0",
+      "orchestration/continuity/reception-one-bureau-model-text-lane/LiveDockerfile": "sha256:45767035f2130a1f697b86c24cae2d825e1af7275592953f5deac4bf59f5cc20",
+      "scripts/ariadne_vertex_sydney_gemini_25_cell.py": "sha256:530d6f91e841aa41dd4fd87f07f45c360c728e7ca5847586bab5d19b604a6a71",
+      "scripts/ariadne_vertex_sydney_gemini_25_relay.py": "sha256:97dabf78cf4e78c440aee6587c94c6312e8cba1bae6b023b6e7110673b2fb61f"
+    },
+    "temporary_exact_allowlist": true
+  },
+  "cell_effective_policy": {
+    "cap_drop": [
+      "ALL"
+    ],
+    "credential_environment_present": false,
+    "memory_bytes": 134217728,
+    "memory_swap_bytes": 134217728,
+    "mount_count": 0,
+    "nano_cpus": 500000000,
+    "network_names": [
+      "reception-one-model-text-vertex-internal"
+    ],
+    "pids_limit": 64,
+    "port_binding_count": 0,
+    "privileged": false,
+    "read_only_rootfs": true,
+    "security_opt": [
+      "no-new-privileges=true"
+    ],
+    "user": "65532:65532"
+  },
+  "cleanup": {
+    "base_image_state_preserved": true,
+    "broker_process_absent": true,
+    "cell_container_absent": true,
+    "cell_image_absent": true,
+    "daemon_wide_prune_performed": false,
+    "internal_network_absent": true,
+    "relay_container_absent": true,
+    "relay_image_absent": true,
+    "temporary_context_absent": true,
+    "temporary_token_absent": true
+  },
+  "evidence_hash": "sha256:c5d1ace4700d58455a8ec624f2fe8d2557f4215f2e383c022f8aa9ccf36067af",
+  "exact_binding": {
+    "api_key_authentication_used": false,
+    "authentication": "keyless_impersonated_service_account_adc",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "location": "australia-southeast1",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "provider": "google_vertex_ai",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"
+  },
+  "exchange": {
+    "audit_event_count": 11,
+    "audit_event_types": [
+      "broker_ready",
+      "request_admitted",
+      "ledger_consumed",
+      "provider_request_constructed",
+      "provider_call_started",
+      "provider_call_received",
+      "provider_call_completed",
+      "operator_note_evaluated",
+      "correction_ticket_issued",
+      "proofreader_completed",
+      "broker_rejected"
+    ],
+    "audit_hash_chain_valid": true,
+    "audit_terminal_hash": "sha256:a7b0403e45b01bb2fa951dd92c49debbd83150a5179ff50a57aad72747e2737e",
+    "cell_exit_code": 2,
+    "cell_status": "edge_aborted",
+    "contract_mode": "preprinted-v5",
+    "correction_ticket": {
+      "attempts_remaining": 1,
+      "previous_program_sha256": "sha256:f11aa1fa4d87e181c1daaef5db6edc90dfd5cda2d458454352200eb6a3ae5e71",
+      "previous_typed_form": {
+        "goal_code": 4,
+        "steps": [
+          {
+            "operator_code": 0,
+            "source_refs": [
+              {
+                "binding_code": 1,
+                "kind": "binding",
+                "prior_output_name": "none",
+                "prior_step_index": -1
+              }
+            ]
+          },
+          {
+            "operator_code": 4,
+            "source_refs": [
+              {
+                "binding_code": -1,
+                "kind": "prior_output",
+                "prior_output_name": "patient",
+                "prior_step_index": 0
+              }
+            ]
+          },
+          {
+            "operator_code": 12,
+            "source_refs": [
+              {
+                "binding_code": -1,
+                "kind": "prior_output",
+                "prior_output_name": "appointments",
+                "prior_step_index": 1
+              },
+              {
+                "binding_code": 4,
+                "kind": "binding",
+                "prior_output_name": "none",
+                "prior_step_index": -1
+              }
+            ]
+          }
+        ]
+      },
+      "replacement_required": true,
+      "target_turn_code": 2,
+      "version_code": 1,
+      "violations": [
+        {
+          "allowed_output_names": [
+            "appointments"
+          ],
+          "field_code": "source_ref",
+          "source_index": 0,
+          "step_index": 2,
+          "violation_code": "source_type_mismatch"
+        }
+      ]
+    },
+    "correction_ticket_hash": "sha256:320f5458b9dd8bc1ffd9dcd3d6fb4cc84048807a1502c2b5cc87fcb44ab1e96b",
+    "model_input_hash": "sha256:fe32ff9c93ed44ce0a4d1460f5f8bd3332401cebc365b3bef8e7a6da7ddc0097",
+    "operator_note": {
+      "audit_only": true,
+      "disposition": "admit",
+      "note_sha256": "sha256:5c2d921a149afc25d0dcbea6fe2e6ffe7f4c6704a9525e5d25ec01c673e65fbc",
+      "parsed_into_plan": false,
+      "product_delivered": false,
+      "reason_codes": [],
+      "retained_utf8_bytes": 57
+    },
+    "proofreader": {
+      "admitted_operator_ids": [],
+      "context_revision": 62,
+      "correction_eligible": true,
+      "disposition": "revision_required",
+      "edge_aborted": true,
+      "freshness": "fresh",
+      "location": "australia-southeast1",
+      "model_id": "gemini-2.5-flash",
+      "project": "bernie-emr4-dev",
+      "retry_count": 0,
+      "safe_repairs": [],
+      "supersession": "current",
+      "turn_terminal": false,
+      "violations": [
+        {
+          "code": "source_type_mismatch",
+          "path": "$.steps[2].source_refs[0]"
+        }
+      ],
+      "wire_safe_repairs": []
+    },
+    "proofreader_feedback_hash": null,
+    "release": null,
+    "schema_hash": "sha256:d1631d34502009156789965e4f841202988b20835d9d993ca80ecccd59a59f21"
+  },
+  "explicit_exclusions": {
+    "api_key_information_recorded": false,
+    "chain_of_thought_recorded": false,
+    "command_authority": false,
+    "credential_or_token_recorded": false,
+    "human_or_product_delivery": false,
+    "operator_note_parsed_into_plan": false,
+    "operator_note_product_delivered": false,
+    "product_or_database_access": false,
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false
+  },
+  "fallback_performed": false,
+  "ledger": {
+    "attempt_id": "reception-one-preprinted-form-v5-eval-b-status-arrived-turn-001",
+    "fallback_permitted": false,
+    "ledger_id": "reception-one-preprinted-form-v5-eval-b-status-arrived-ledger-001",
+    "maximum_provider_calls": 1,
+    "policy_id": "reception-one-preprinted-form-v5-vertex-sydney-v1",
+    "provider_calls_consumed": 1,
+    "schema_version": "reception.one.bureau.model_text_single_use_ledger.v1",
+    "status": "consumed"
+  },
+  "ledger_id": "reception-one-preprinted-form-v5-eval-b-status-arrived-ledger-001",
+  "network": {
+    "attachable": false,
+    "driver": "bridge",
+    "ingress": false,
+    "internal": true,
+    "name": "reception-one-model-text-vertex-internal"
+  },
+  "precall_gate": {
+    "all_cloud_controls_passed": true,
+    "authority_sha256": "sha256:75c61829a9f828d807d872472f4d7819f691353f942bf165b0ae85a96c2e12b6",
+    "compass_map_revision": 89,
+    "compass_source_graph_revision": 102,
+    "continuity_graph_revision": 102,
+    "preflight_sha256": "sha256:0b7264315412d6959fff941d35d87961dfe36224ee5c27a1723b1bb940ec4768"
+  },
+  "provider_call_count": 1,
+  "provider_contacted": true,
+  "relay_effective_policy": {
+    "broker_alias_present": true,
+    "cap_drop": [
+      "ALL"
+    ],
+    "memory_bytes": 67108864,
+    "memory_swap_bytes": 67108864,
+    "mount_count": 1,
+    "nano_cpus": 250000000,
+    "network_names": [
+      "bridge",
+      "reception-one-model-text-vertex-internal"
+    ],
+    "pids_limit": 32,
+    "port_binding_count": 0,
+    "privileged": false,
+    "read_only_rootfs": true,
+    "security_opt": [
+      "no-new-privileges=true"
+    ],
+    "token_mount_exact": true,
+    "user": "65532:65532"
+  },
+  "result": "reception_one_preprinted_form_v5_turn_revision_required",
+  "schema_version": "reception.one.preprinted_form_v5.turn_evidence.v1"
+}

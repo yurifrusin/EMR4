@@ -1,0 +1,106 @@
+{
+  "schema_version": "reception.one.receptionist_first_v64.external_audit_analysis.v1",
+  "recorded_at": "2026-07-30T10:10:09Z",
+  "result": "reception_one_receptionist_first_v64_external_audit_complete",
+  "cohort_result": "reception_one_receptionist_first_v64_full_cohort_fail_closed",
+  "case_count": 24,
+  "exact_safe_outcome_count": 18,
+  "nonmatching_terminal_case_count": 6,
+  "nonmatching_terminal_cases": [
+    {
+      "case_codes": [
+        "b-resize-short",
+        "b-resize-explicit",
+        "b-cancel-remove",
+        "b-cancel-takeout"
+      ],
+      "failure_class": "proofreader_operator_path_false_rejection",
+      "terminal_violation_code": "recognized_constraint_path_missing",
+      "proofreader_disposition": "edge_abort",
+      "release": null,
+      "diagnostic_replay_without_v64_path_gate": "all_four_typed_forms_admit_with_exact_expected_proposal_values",
+      "repair_hypothesis": "Preserve each recognized source kind, field and semantic argument role across the normalized source graph without requiring the deterministic reference operator sequence."
+    },
+    {
+      "case_code": "b-clarify-details",
+      "failure_class": "correction_ticket_goal_target_underspecified",
+      "primary_violation_codes": [
+        "receptionist_response_goal_mismatch",
+        "receptionist_response_missing_review_boundary"
+      ],
+      "terminal_violation_codes": [
+        "recognized_intent_goal_mismatch"
+      ],
+      "release": null,
+      "repair_hypothesis": "A goal-mismatch correction ticket should state the deterministic required goal in its existing bounded allowed-output field, and the prompt should explain that bare appointment details do not themselves authorize an inferred booking goal."
+    },
+    {
+      "case_code": "b-clarify-fit",
+      "failure_class": "clarification_natural_channel_inconsistent",
+      "primary_violation_codes": [
+        "receptionist_response_goal_mismatch"
+      ],
+      "terminal_violation_codes": [
+        "receptionist_response_goal_mismatch",
+        "receptionist_response_missing_review_boundary"
+      ],
+      "typed_goal_selected": "clarification",
+      "release": null,
+      "repair_hypothesis": "Teach the clarification desk form explicitly: ask one focused question, describe the ambiguity, and state that no booking was changed. The correction ticket should name the typed goal for the bounded natural channel."
+    }
+  ],
+  "provider_calls": {
+    "actual": 31,
+    "absolute_ceiling": 48,
+    "primary": 24,
+    "terminal_second": 7,
+    "after_terminal_result": 0
+  },
+  "provider_outcomes": {
+    "completed_http_200": 31,
+    "response_rejected_before_candidate": 0,
+    "raw_provider_text_retained": false
+  },
+  "usage": {
+    "prompt_tokens": 126304,
+    "visible_candidate_tokens": 15078,
+    "thinking_tokens": 22239,
+    "total_tokens": 163621,
+    "hidden_thought_content_retained": false
+  },
+  "latency_ms": {
+    "sum": 165771,
+    "minimum": 2361,
+    "maximum": 7892,
+    "mean": 5347.0
+  },
+  "exact_binding": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "api_key_authentication_used": false,
+    "fallback_performed": false
+  },
+  "audit_controls": {
+    "all_ledgers_consumed": true,
+    "opened_ledger_count": 31,
+    "all_cleanup_passed": true,
+    "durable_case_hash_chains_valid": true,
+    "case_audit_chain_count": 24,
+    "case_audit_event_count": 110,
+    "model_and_proofreader_context_hash_recorded": true,
+    "raw_prompts_recorded": false,
+    "raw_provider_responses_recorded": false,
+    "credentials_or_tokens_recorded": false,
+    "api_key_information_recorded": false,
+    "chain_of_thought_recorded": false,
+    "product_or_database_access": false,
+    "appointment_write": false,
+    "human_or_product_delivery": false
+  },
+  "claim_limit": "The evidence proves a configured and observed Sydney locational request path and eighteen exact safe outcomes over a reused authored-synthetic development cohort. It also proves both v6.3 defects repaired, while exposing four deterministic false rejections and two clarification-channel failures. It does not prove independent generalisation, production fitness, Australian physical or sovereign processing, or safety for real data."
+}

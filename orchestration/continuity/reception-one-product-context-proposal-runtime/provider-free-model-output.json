@@ -1,0 +1,84 @@
+{
+  "contract_version": "reception.one.bureau.model-plan-candidate.v1",
+  "goal": "create",
+  "steps": [
+    {
+      "id": "step-patient",
+      "operator": "resolve_patient_reference",
+      "arguments": [
+        {
+          "name": "mention",
+          "source": "binding:patient"
+        }
+      ]
+    },
+    {
+      "id": "step-practitioner",
+      "operator": "resolve_practitioner_reference",
+      "arguments": [
+        {
+          "name": "mention",
+          "source": "binding:practitioner"
+        }
+      ]
+    },
+    {
+      "id": "step-date",
+      "operator": "resolve_date_expression",
+      "arguments": [
+        {
+          "name": "date",
+          "source": "binding:appointment_date"
+        }
+      ]
+    },
+    {
+      "id": "step-slots",
+      "operator": "search_available_slots",
+      "arguments": [
+        {
+          "name": "practitioner",
+          "source": "step:step-practitioner:practitioner"
+        },
+        {
+          "name": "date",
+          "source": "step:step-date:date"
+        },
+        {
+          "name": "earliest_time",
+          "source": "binding:earliest_time"
+        },
+        {
+          "name": "latest_time",
+          "source": "binding:latest_time"
+        },
+        {
+          "name": "duration_minutes",
+          "source": "binding:default_duration_minutes"
+        }
+      ]
+    },
+    {
+      "id": "step-proposal",
+      "operator": "prepare_create_proposal",
+      "arguments": [
+        {
+          "name": "patient",
+          "source": "step:step-patient:patient"
+        },
+        {
+          "name": "practitioner",
+          "source": "step:step-practitioner:practitioner"
+        },
+        {
+          "name": "candidates",
+          "source": "step:step-slots:candidates"
+        },
+        {
+          "name": "duration_minutes",
+          "source": "binding:default_duration_minutes"
+        }
+      ]
+    }
+  ]
+}

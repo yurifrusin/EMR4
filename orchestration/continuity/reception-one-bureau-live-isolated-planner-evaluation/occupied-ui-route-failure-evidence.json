@@ -1,0 +1,10 @@
+{
+  "appointment_write_performed": false,
+  "fallback_performed": false,
+  "post_attempt_residue_clear": true,
+  "provider_calls_performed": 1,
+  "reason_code": "proofreader_or_route_not_admitted",
+  "result": "reception_one_bureau_live_isolated_planner_failed_closed",
+  "retry_performed": false,
+  "schema_version": "reception.one.bureau_live_isolated_planner.occupied_failure.v1"
+}

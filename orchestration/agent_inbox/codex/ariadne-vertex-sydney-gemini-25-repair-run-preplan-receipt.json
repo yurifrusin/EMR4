@@ -1,0 +1,73 @@
+{
+  "authority_boundary": "receipt_only_exact_repair_and_conditional_one_call_no_retry_no_fallback_no_external_mutation_or_product_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "execute_bound_repair_repository_preflight_isolation_and_single_occupied_call",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md complete Current Baton and accepted post-failure diagnostic state",
+    "current_authority_allocation": [
+      "Yuri: Please repair and run again.",
+      "docs/ariadne-vertex-sydney-bounded-work-cell-authority.md",
+      "docs/ariadne-vertex-sydney-gemini-25-flash-authority-delta.md"
+    ],
+    "active_plan_and_acceptance": [
+      "docs/ariadne-vertex-sydney-gemini-25-repaired-request-run-plan.md",
+      "orchestration/continuity/emr4-continuity-graph.json revision 45",
+      "orchestration/continuity/emr4-compass.json map revision 32 source graph revision 45",
+      "docs/ariadne-compass-current.md exact rendered report",
+      "docs/ariadne-vertex-sydney-gemini-25-postfailure-provider-blocked-diagnostic-closeout.md"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5-6; exact one-field repair only; historical evidence immutable; exact Sydney Vertex, Gemini 2.5 Flash, Bernie project/service account/keyless ADC, authored-synthetic, isolation and external-audit binding; lineage total at most two calls with one historical call already consumed and one fresh call authorised; no retry, fallback, provider substitution, external mutation, product, database, clinical, patient, command, production, deployment or release authority",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true
+    }
+  },
+  "repair_and_call_contract": {
+    "repair_field": "generationConfig.responseSchema.properties.total_tiles.enum[0]",
+    "repair_value": "5",
+    "historical_artifacts_immutable": true,
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "target_service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "oauth_scope": "https://www.googleapis.com/auth/cloud-platform",
+    "permission": "aiplatform.endpoints.predict",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "data_classification": "authored_synthetic_only",
+    "isolation": "credential_free_cell_exact_path_one_use_broker",
+    "audit": "bounded_external_hash_chain_no_raw_prompt_response_error_or_reasoning",
+    "historical_calls": 1,
+    "new_calls_maximum": 1,
+    "absolute_calls_maximum": 2,
+    "retry_after_new_call": false,
+    "cost_ceiling_usd": 1,
+    "stop_conditions_in_plan": true
+  },
+  "revision_binding": {
+    "continuity_graph_revision": 45,
+    "compass_source_graph_revision": 45,
+    "compass_map_revision": 32,
+    "rendered_compass_exact": true
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

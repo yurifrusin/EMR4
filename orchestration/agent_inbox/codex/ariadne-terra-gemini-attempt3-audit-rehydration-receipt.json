@@ -1,0 +1,57 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "fresh_two_lane_audited_rehearsal",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md sections 2-3 and Current Baton",
+    "current_authority_allocation": "AGENTS.md section 4 plus Yuri's explicit fresh Terra/Gemini audit-run instruction",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-terra-gemini-comparative-rehearsal-plan.md",
+      "docs/ariadne-terra-gemini-comparative-rehearsal-attempt2-plan.md",
+      "docs/ariadne-terra-gemini-provider-contract-diagnostic-hardening-plan.md",
+      "docs/ariadne-terra-gemini-provider-contract-diagnostic-hardening-closeout.md",
+      "docs/ariadne-terra-gemini-diagnostic-hardening-fresh-closeout.md",
+      "docs/ariadne-terra-gemini-comparative-rehearsal-attempt3-audit-plan.md",
+      "orchestration/continuity/ariadne-terra-gemini-comparison/fresh-attempt-003.json"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5-6",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "unrelated_user_changes_preserved": true
+    }
+  },
+  "live_authority": {
+    "runtime_attempt_id": "comparative-runtime-attempt-003",
+    "run_order": [
+      "terra",
+      "gemini"
+    ],
+    "maximum_provider_calls_per_lane": 1,
+    "retry_authorised": false,
+    "fallback_authorised": false,
+    "terra_attempt_003_ledger": "available",
+    "gemini_attempt_003_ledger": "available",
+    "container_start_authorised_after_gates": true,
+    "provider_calls_authorised_after_gates": true,
+    "postgresql_authorised": false,
+    "product_or_runtime_authority": false
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

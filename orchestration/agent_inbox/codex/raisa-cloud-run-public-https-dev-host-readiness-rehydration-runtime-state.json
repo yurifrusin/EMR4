@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "prepare_and_locally_verify_a_synthetic_only_cloud_run_public_https_development_host_package_without_external_mutation",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_raisa_cloud_run_dev_host_readiness_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker was selected; the repository-local hosting-readiness tranche remains Sol-owned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport was selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external provider or reviewer was selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: clinician_one_word_desktop_selection_check_pass is the accepted terminal product result at Continuity graph revision 175 and Compass map revision 156.",
+        "current_authority_allocation: Yuri elected to await exact hosted-development instructions after accepting Cloud Run as the recommended resource; only repository-local preparation and verification are presently authorised.",
+        "active_plan_and_acceptance: the accepted desktop closeout recommends a bounded public-HTTPS development-host contract for the compiled Office taskpane and native Diary assets before any external resource or deployment.",
+        "protected_evidence_boundaries: protected holdouts, historical Diary material, existing documents, product-derived, patient, health and clinical data, credentials, provider material, microphone audio and hidden reasoning remain unopened and unused; provider, backend write, production and release gates remain closed.",
+        "git_refs_and_worktree: HEAD is 5b1ea7952fb08eea333da0e63f166d3895ccea32 on codex/ariadne-terra-gemini-comparative-rehearsal; master, handoff/current, origin/master and origin/handoff/current are 4974075b31035d599e081d68e3b85e04a897baa1; all 815 existing worktree entries are preserved.",
+        "No Cloud Run or Artifact Registry resource, API enablement, IAM change, public endpoint, build submission, image push, billing change, custom domain, deployment or release is authorised in this tranche."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

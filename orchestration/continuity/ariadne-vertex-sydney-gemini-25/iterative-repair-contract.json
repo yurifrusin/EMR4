@@ -1,0 +1,38 @@
+{
+  "schema_version": "ariadne.vertex_sydney_gemini_25_iterative_repair_contract.v1",
+  "authority_sources": [
+    "Yuri: Can we go straight to diagnosis and repair and retry please?",
+    "Yuri: keep running, diagnosing, repairing and retrying until we exhaust options and/or succeed, then closeout properly.",
+    "Yuri: The tranche should be composed of necessary reruns until we succeed."
+  ],
+  "supersedes": {
+    "absolute_two_call_ceiling": true,
+    "no_retry_after_repair_001": true
+  },
+  "unchanged": {
+    "application_cost_ceiling_usd": 1,
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "data_classification": "authored_synthetic_only",
+    "fallback_permitted": false,
+    "product_database_clinical_patient_command_or_release_authority": false
+  },
+  "rules": {
+    "blind_identical_retry_permitted": false,
+    "focused_regression_required": true,
+    "distinct_request_attempt_and_consumed_ledger_required": true,
+    "provider_free_isolation_rerun_required_for_constructor_change": true,
+    "repeat_unchanged_external_control_preflight_each_call": false,
+    "stop_on_success_or_exhausted_evidence_backed_options": true
+  },
+  "attempt_002_diagnosis": {
+    "finding": "Gemini structured output supports only string-typed enums; the total_tiles INTEGER enum is replaced by supported exact numeric minimum and maximum constraints.",
+    "official_contract_basis": "structured_output_supported_schema_fields",
+    "semantic_output_contract_changed": false
+  }
+}

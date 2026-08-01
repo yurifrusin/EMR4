@@ -1,0 +1,69 @@
+{
+  "authority_boundary": "one_primary_authored_synthetic_sydney_vertex_design_call_only_no_ui_agent_product_data_command_fallback_or_release_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "make_one_bounded_reception_one_vertex_design_synthesis_call",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md complete current baton, protected boundaries and active visual-synthesis next work.",
+    "current_authority_allocation": [
+      "Yuri authorised live Vertex involvement in the Reception One visual/interaction synthesis.",
+      "Yuri accepted the disposable synthesis-cell and deterministic unoccupied UI-node separation."
+    ],
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-visual-interaction-synthesis-plan.md",
+      "orchestration/continuity/reception-one-visual-synthesis/tranche-3-preflight-evidence.json",
+      "orchestration/continuity/reception-one-visual-synthesis/dry-run-003-evidence.json",
+      "orchestration/continuity/reception-one-visual-synthesis/precall-residue-evidence.json",
+      "orchestration/continuity/emr4-continuity-graph.json revision 52",
+      "orchestration/continuity/emr4-compass.json revision 39",
+      "docs/ariadne-compass-current.md exact rendered report"
+    ],
+    "protected_evidence_boundaries": "Only the exact fictional Project Lantern design request may be transmitted. Protected, historical, product, patient, health, clinical, credential and command data remain excluded; the UI node is unoccupied and receives no provider output automatically.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true
+    }
+  },
+  "precall_gates": {
+    "typed_contract_and_official_protobuf_parse": "passed",
+    "exact_adc_and_control_preflight": "passed",
+    "provider_free_real_isolation": "passed",
+    "all_opened_zero_call_ledgers_consumed": true,
+    "continuity_graph_revision": 52,
+    "compass_map_revision": 39,
+    "rendered_compass_exact": true,
+    "task_scoped_residue_zero": true
+  },
+  "occupied_binding": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "target_service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "request_data": "newly_authored_fictional_design_brief_only",
+    "primary_calls_remaining": 1,
+    "conditional_request_contract_repair_calls_remaining": 1,
+    "application_cost_ceiling_usd": 1,
+    "fallback_permitted": false
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

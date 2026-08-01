@@ -1,0 +1,68 @@
+{
+  "schema_version": "raisa.cloud_run_api_runtime_identity_enablement_evidence.v1",
+  "recorded_at": "2026-07-31T08:26:36Z",
+  "result": "raisa_cloud_run_api_runtime_identity_enablement_pass",
+  "authority": {
+    "source": "docs/raisa-cloud-run-api-runtime-identity-enablement-plan.md",
+    "class": "exact_external_api_and_identity_mutation_then_read_only_resource_preflight",
+    "project": "bernie-emr4-dev",
+    "region": "australia-southeast1"
+  },
+  "mutations": {
+    "apis_enabled": [
+      "run.googleapis.com",
+      "artifactregistry.googleapis.com"
+    ],
+    "runtime_service_accounts_created": [
+      "raisa-office-web-runtime@bernie-emr4-dev.iam.gserviceaccount.com"
+    ],
+    "runtime_project_roles_granted": [],
+    "service_account_keys_created": 0,
+    "artifact_registry_repositories_created": 0,
+    "cloud_run_services_created": 0,
+    "public_invoker_bindings_created": 0,
+    "images_built_or_pushed": 0,
+    "deployments": 0,
+    "billing_changes": 0,
+    "interactive_authentication_actions": 0,
+    "provider_managed_service_agent_side_effects": "not_enumerated"
+  },
+  "post_mutation_verification": {
+    "project_lifecycle_state": "ACTIVE",
+    "project_number": "295602838018",
+    "billing_enabled": true,
+    "cloud_run_admin_api_enabled": true,
+    "artifact_registry_api_enabled": true,
+    "runtime_service_account_exists": true,
+    "runtime_service_account_disabled": false,
+    "runtime_service_account_project_role_count": 0,
+    "runtime_service_account_user_managed_key_count": 0,
+    "artifact_registry_repository": {
+      "name": "raisa-office-web-dev",
+      "location": "australia-southeast1",
+      "exists": false,
+      "observation": "not_found"
+    },
+    "cloud_run_service": {
+      "name": "raisa-office-web-dev",
+      "location": "australia-southeast1",
+      "exists": false,
+      "matching_service_count": 0
+    },
+    "public_invocation": "not_applicable_service_absent"
+  },
+  "privacy": {
+    "active_human_identity_queried_or_recorded": false,
+    "credential_or_token_recorded": false,
+    "raw_authentication_response_recorded": false,
+    "raw_google_error_recorded": false,
+    "patient_or_product_data_used": false
+  },
+  "unresolved_gates": [
+    "The Sydney Artifact Registry repository raisa-office-web-dev is absent.",
+    "The Sydney Cloud Run service raisa-office-web-dev is absent.",
+    "Repository creation, image push, Cloud Run service creation, public invocation and deployment require new explicit authority.",
+    "Authenticated Word Online, Office identity, role authorization, real-data safety, production and release remain unproven and closed."
+  ],
+  "candid_limit": "This proves the two exact service APIs are enabled and the exact dedicated runtime identity exists, is active, has zero project roles and has no user-managed key. It does not prove deployment, public IAM compatibility, authenticated Word Online behavior, processing geography, real-data safety, production or release readiness."
+}

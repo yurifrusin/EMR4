@@ -1,0 +1,312 @@
+{
+  "api_key_authentication_used": false,
+  "attempt_id": "reception-one-receptionist-first-v67-eval-b-resize-long-turn-001",
+  "authentication": "keyless_impersonated_service_account_adc",
+  "candid_limit": "The call proves the configured Sydney regional request path, one-use isolation lifecycle and admitted typed release; it does not prove Australian physical or sovereign processing, product suitability or safety for real data.",
+  "cleanup": {
+    "base_image_state_preserved": true,
+    "broker_process_absent": true,
+    "cell_container_absent": true,
+    "cell_image_absent": true,
+    "daemon_wide_prune_performed": false,
+    "internal_network_absent": true,
+    "relay_container_absent": true,
+    "relay_image_absent": true,
+    "temporary_context_absent": true,
+    "temporary_token_absent": true
+  },
+  "correction_ticket": null,
+  "durable_hash_chain": {
+    "event_count": 11,
+    "terminal_hash": "sha256:84ea961419fcccc32caadd38ce45e7da60bd9abe695cecfc9526caf34d2c0b97",
+    "valid": true
+  },
+  "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+  "event_sequence": [
+    {
+      "event_hash": "sha256:2376c16cfd5fdfddfeca12a22a05924ce07cde9826f95d8906cf480895748954",
+      "event_type": "broker_ready",
+      "previous_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "sequence": 1
+    },
+    {
+      "event_hash": "sha256:bd2fe3c707d471f2b69edb460a55ef660bf03dc50f22488f46583e8fc8537c1e",
+      "event_type": "request_admitted",
+      "previous_hash": "sha256:2376c16cfd5fdfddfeca12a22a05924ce07cde9826f95d8906cf480895748954",
+      "sequence": 2
+    },
+    {
+      "event_hash": "sha256:84f02d2be7a9adb250ea3a1b6179695c5fe368e72899cf57c5e368812ffd67eb",
+      "event_type": "ledger_consumed",
+      "previous_hash": "sha256:bd2fe3c707d471f2b69edb460a55ef660bf03dc50f22488f46583e8fc8537c1e",
+      "sequence": 3
+    },
+    {
+      "event_hash": "sha256:846e74996899d5eac45d596c1e7d0cc41bfeea0f4796620be678708fe797fe0a",
+      "event_type": "provider_request_constructed",
+      "previous_hash": "sha256:84f02d2be7a9adb250ea3a1b6179695c5fe368e72899cf57c5e368812ffd67eb",
+      "sequence": 4
+    },
+    {
+      "event_hash": "sha256:ea33435cb18f1dbcb3d251c34feed643421a64b7b14fccfb1435f67547c20e0f",
+      "event_type": "provider_call_started",
+      "previous_hash": "sha256:846e74996899d5eac45d596c1e7d0cc41bfeea0f4796620be678708fe797fe0a",
+      "sequence": 5
+    },
+    {
+      "event_hash": "sha256:565d11ec71457520f3ba6c12ab152d251ad9e992f2e3e0006c27603c00a52114",
+      "event_type": "provider_call_received",
+      "previous_hash": "sha256:ea33435cb18f1dbcb3d251c34feed643421a64b7b14fccfb1435f67547c20e0f",
+      "sequence": 6
+    },
+    {
+      "event_hash": "sha256:137a090ef347ff8e6c2802791dcf684576041a8fc867bfa55db7d32cdd865f3c",
+      "event_type": "provider_call_completed",
+      "previous_hash": "sha256:565d11ec71457520f3ba6c12ab152d251ad9e992f2e3e0006c27603c00a52114",
+      "sequence": 7
+    },
+    {
+      "event_hash": "sha256:72aa275cf627ec3d623e5d1de27445c0f52c27e98fadc72bb6180b260eec6c69",
+      "event_type": "receptionist_response_evaluated",
+      "previous_hash": "sha256:137a090ef347ff8e6c2802791dcf684576041a8fc867bfa55db7d32cdd865f3c",
+      "sequence": 8
+    },
+    {
+      "event_hash": "sha256:ec9ae0b6bee10ee7fd636afe2d9d30e4bbfa5224b77c2985775b3a00930fb7b4",
+      "event_type": "operator_note_evaluated",
+      "previous_hash": "sha256:72aa275cf627ec3d623e5d1de27445c0f52c27e98fadc72bb6180b260eec6c69",
+      "sequence": 9
+    },
+    {
+      "event_hash": "sha256:6c7418183f87d5c9882f735fa72c10cff3e3b7d6b0056a82479a7037a48a0d45",
+      "event_type": "proofreader_completed",
+      "previous_hash": "sha256:ec9ae0b6bee10ee7fd636afe2d9d30e4bbfa5224b77c2985775b3a00930fb7b4",
+      "sequence": 10
+    },
+    {
+      "event_hash": "sha256:84ea961419fcccc32caadd38ce45e7da60bd9abe695cecfc9526caf34d2c0b97",
+      "event_type": "release_committed",
+      "previous_hash": "sha256:6c7418183f87d5c9882f735fa72c10cff3e3b7d6b0056a82479a7037a48a0d45",
+      "sequence": 11
+    }
+  ],
+  "explicit_exclusions": {
+    "api_key_information_recorded": false,
+    "chain_of_thought_recorded": false,
+    "command_authority": false,
+    "credential_or_token_recorded": false,
+    "human_or_product_delivery": false,
+    "operator_note_parsed_into_plan": false,
+    "operator_note_product_delivered": false,
+    "product_or_database_access": false,
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "thinking_token_count_only": true,
+    "thought_summary_requested": false
+  },
+  "freshness": "fresh",
+  "ledger_id": "reception-one-receptionist-first-v67-eval-b-resize-long-ledger-001",
+  "location": "australia-southeast1",
+  "model_id": "gemini-2.5-flash",
+  "model_input_hash": "sha256:6da3d453379e6f72cb5ce6907b1cc7350d890b5b3ee3ff5fd791cc055636f78a",
+  "operator_note": {
+    "audit_only": true,
+    "disposition": "admit",
+    "note_sha256": "sha256:8e29ae1d1471b111e6a2c2befc54feb4292764830feb09811635ae6c66bb53d0",
+    "operator_note": "Proposal for review; no booking was changed.",
+    "parsed_into_plan": false,
+    "product_delivered": false,
+    "reason_codes": [],
+    "retained_utf8_bytes": 44
+  },
+  "preprinted_form": {
+    "broker_judgement_repair": false,
+    "broker_owned_field_manifest": [
+      "version_code"
+    ],
+    "model_authored_field_manifest": [
+      "receptionist_response",
+      "decision_note",
+      "evidence_utterance_indices",
+      "typed_form"
+    ],
+    "model_form_body_hash": "sha256:1beb43318628f42062bc90713c32db6498bf885787d6bfa7df3231ff5dd96efe",
+    "preprinted_field_manifest_hash": "sha256:2a1f45caa1aeee47a1ab25e5ff886ac2e149e404d0c322e020db4338d6015d3e",
+    "raw_model_form_body_recorded": false
+  },
+  "project": "bernie-emr4-dev",
+  "proofreader": {
+    "admitted_operator_ids": [
+      "resolve_patient_reference",
+      "read_selected_appointment",
+      "prepare_resize_proposal"
+    ],
+    "context_frame_review": {
+      "command_authority": false,
+      "desk_context_sha256": "sha256:3428760c18f41cf37e2709c6be14543d639ec365855c6a10040e7f52f2f11f9b",
+      "disposition": "admit",
+      "reviewed_context_revision": 62,
+      "same_packet_seen_by_model_and_proofreader": true,
+      "source_labels": [
+        "fixture_intercepted",
+        "staff_selected",
+        "staff_selected"
+      ],
+      "task_sha256": "sha256:07bc591a61766f74bc1d10c038dd67404aa7ddd813d5745a5938b59ed73f7e3b"
+    },
+    "disposition": "admit",
+    "safe_repairs": [],
+    "violations": [],
+    "wire_safe_repairs": []
+  },
+  "provider": "google_vertex_ai",
+  "provider_outcome": {
+    "bounded_completion_metadata": {
+      "candidate_count": 1,
+      "candidate_count_truncated": false,
+      "finish_reasons": [
+        "STOP"
+      ],
+      "part_counts": [
+        1
+      ],
+      "provider_text_inspected_for_diagnosis": false,
+      "provider_text_retained": false
+    },
+    "bounded_error": null,
+    "http_status": 200,
+    "latency_ms": 3913,
+    "status": "completed",
+    "usage": {
+      "candidatesTokenCount": 444,
+      "promptTokenCount": 4539,
+      "thoughtsTokenCount": 405,
+      "totalTokenCount": 5388
+    }
+  },
+  "receptionist_output": {
+    "decision_note": "Intent resize: staff requested to make an appointment longer.",
+    "disposition": "admit",
+    "evidence_utterance_indices": [
+      0
+    ],
+    "hidden_reasoning": false,
+    "natural_response_parsed_into_form": false,
+    "product_delivered": false,
+    "raw_provider_response": false,
+    "receptionist_response": "I am preparing a proposal to make Margaret Thompson's appointment longer by 30 minutes for your review.",
+    "violations": []
+  },
+  "release": {
+    "atomic_release": true,
+    "human_gate": true,
+    "released_field_manifest": [
+      "$.final_output.api_spine_operation_id",
+      "$.final_output.appointment_ref",
+      "$.final_output.candidate_slot_ids",
+      "$.final_output.duration_minutes",
+      "$.final_output.kind",
+      "$.final_output.patient_ref",
+      "$.final_output.practitioner_ref",
+      "$.final_output.proposal_family",
+      "$.final_output.requires_human_confirmation",
+      "$.final_output.status",
+      "$.final_output.warning_codes",
+      "$.final_output.write_performed"
+    ],
+    "released_values": {
+      "api_spine_operation_id": "proposeAppointmentUpdate",
+      "appointment_ref": "synthetic-appointment-margaret",
+      "candidate_slot_ids": [],
+      "duration_minutes": 30,
+      "kind": "proposal_candidate",
+      "patient_ref": "synthetic-patient-margaret",
+      "practitioner_ref": "synthetic-practitioner-shera",
+      "proposal_family": "resize",
+      "requires_human_confirmation": true,
+      "status": null,
+      "warning_codes": [
+        "staff_confirmation_required"
+      ],
+      "write_performed": false
+    },
+    "write_performed": false
+  },
+  "request_hash": "sha256:ebe42044757e664f60f52e8bfff8b930f46bb9c924d3c9c519fef84162b38ee5",
+  "result": "reception_one_receptionist_first_v67_turn_pass",
+  "retry": {
+    "actual_provider_call_ordinal": 1,
+    "authorised": false,
+    "count": 0,
+    "lifecycle_sequence": 1,
+    "performed": false,
+    "reason": "sequence_stopped_after_first_admitted_result"
+  },
+  "schema_hash": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+  "schema_version": "reception.one.receptionist_first_v67.turn_external_audit.v1",
+  "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+  "supersession": "current",
+  "typed_program": {
+    "explicit_source_form": {
+      "goal_code": 2,
+      "steps": [
+        {
+          "operator_code": 0,
+          "source_refs": [
+            {
+              "binding_code": 2,
+              "kind": "binding",
+              "prior_output_name": "none",
+              "prior_step_index": -1
+            }
+          ]
+        },
+        {
+          "operator_code": 3,
+          "source_refs": [
+            {
+              "binding_code": -1,
+              "kind": "prior_output",
+              "prior_output_name": "patient",
+              "prior_step_index": 0
+            },
+            {
+              "binding_code": 3,
+              "kind": "binding",
+              "prior_output_name": "none",
+              "prior_step_index": -1
+            }
+          ]
+        },
+        {
+          "operator_code": 10,
+          "source_refs": [
+            {
+              "binding_code": -1,
+              "kind": "prior_output",
+              "prior_output_name": "appointment",
+              "prior_step_index": 1
+            },
+            {
+              "binding_code": 1,
+              "kind": "binding",
+              "prior_output_name": "none",
+              "prior_step_index": -1
+            }
+          ]
+        }
+      ],
+      "version_code": 3
+    },
+    "operator_note_excluded": true,
+    "program_hash": "sha256:ff26289d7d6701443f94a2ad23c148081c52a180d9f141a70a172e217332b9c0",
+    "raw_provider_response": false
+  },
+  "vertex_audit_control_posture": {
+    "no_user_managed_service_account_key": true,
+    "provider_in_memory_cache_disabled": true,
+    "request_response_logging_disabled_or_absent": true,
+    "vertex_data_read_audit_enabled": true,
+    "vertex_data_write_audit_enabled": true
+  }
+}

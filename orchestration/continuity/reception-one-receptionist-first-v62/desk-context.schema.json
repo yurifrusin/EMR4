@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/reception-one-receptionist-first-v62-desk-context.json",
+  "title": "Reception One receptionist-first v6.2 minimal desk context",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "data_class",
+    "effect_ceiling",
+    "authority",
+    "current_diary",
+    "recent_dialogue",
+    "selected_appointment",
+    "grounded_mentions",
+    "freshness",
+    "resolution_precedence",
+    "excluded_context"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "reception.one.bureau.desk-context.v1"
+    },
+    "data_class": {
+      "const": "authored_synthetic"
+    },
+    "effect_ceiling": {
+      "const": "proposal_only"
+    },
+    "authority": {
+      "const": "context_only_no_command_authority"
+    },
+    "current_diary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authority_label",
+        "source",
+        "practice_ref",
+        "reference_date"
+      ],
+      "properties": {
+        "authority_label": {"const": "fixture_intercepted"},
+        "source": {"const": "diary"},
+        "practice_ref": {"type": "string", "minLength": 1, "maxLength": 128},
+        "reference_date": {"type": "string", "format": "date"}
+      }
+    },
+    "recent_dialogue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authority_label", "source", "turns"],
+      "properties": {
+        "authority_label": {"const": "staff_selected"},
+        "source": {"const": "bernie_session"},
+        "turns": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["utterance_index", "speaker", "text"],
+            "properties": {
+              "utterance_index": {"type": "integer", "minimum": 0, "maximum": 3},
+              "speaker": {"const": "reception_staff"},
+              "text": {"type": "string", "minLength": 1, "maxLength": 1000}
+            }
+          }
+        }
+      }
+    },
+    "selected_appointment": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "authority_label",
+            "source",
+            "binding_code",
+            "appointment_ref",
+            "patient_ref",
+            "patient_display",
+            "practitioner_ref",
+            "practitioner_display",
+            "date",
+            "start_time",
+            "duration_minutes",
+            "status"
+          ],
+          "properties": {
+            "authority_label": {"const": "staff_selected"},
+            "source": {"const": "appointment"},
+            "binding_code": {"type": "integer", "minimum": 0, "maximum": 9},
+            "appointment_ref": {"type": "string", "minLength": 1, "maxLength": 128},
+            "patient_ref": {"type": "string", "minLength": 1, "maxLength": 128},
+            "patient_display": {"type": "string", "minLength": 1, "maxLength": 160},
+            "practitioner_ref": {"type": "string", "minLength": 1, "maxLength": 128},
+            "practitioner_display": {"type": "string", "minLength": 1, "maxLength": 160},
+            "date": {"type": "string", "format": "date"},
+            "start_time": {"type": "string", "pattern": "^[0-2][0-9]:[0-5][0-9]$"},
+            "duration_minutes": {"type": "integer", "minimum": 5, "maximum": 480},
+            "status": {"type": "string", "minLength": 1, "maxLength": 64}
+          }
+        }
+      ]
+    },
+    "grounded_mentions": {
+      "type": "array",
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "authority_label",
+          "source",
+          "entity_type",
+          "entity_ref",
+          "display",
+          "utterance_index",
+          "text"
+        ],
+        "properties": {
+          "authority_label": {"const": "fixture_intercepted"},
+          "source": {"const": "utterance"},
+          "entity_type": {"enum": ["patient", "practitioner"]},
+          "entity_ref": {"type": "string", "minLength": 1, "maxLength": 128},
+          "display": {"type": "string", "minLength": 1, "maxLength": 160},
+          "utterance_index": {"type": "integer", "minimum": 0, "maximum": 3},
+          "text": {"type": "string", "minLength": 1, "maxLength": 160}
+        }
+      }
+    },
+    "freshness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "context_revision",
+        "observed_at",
+        "expires_at",
+        "clock"
+      ],
+      "properties": {
+        "context_revision": {"type": "integer", "minimum": 1},
+        "observed_at": {"type": "string", "format": "date-time"},
+        "expires_at": {"type": "string", "format": "date-time"},
+        "clock": {"const": "frozen_authored_synthetic_scenario"}
+      }
+    },
+    "resolution_precedence": {
+      "const": [
+        "latest_staff_utterance",
+        "explicit_correction",
+        "earlier_staff_utterance",
+        "selected_diary_context",
+        "clarify_if_still_ambiguous"
+      ]
+    },
+    "excluded_context": {
+      "const": [
+        "unselected_appointments",
+        "full_diary",
+        "patient_history",
+        "clinical_data",
+        "database_access",
+        "command_authority"
+      ]
+    }
+  }
+}

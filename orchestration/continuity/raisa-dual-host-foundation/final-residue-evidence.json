@@ -1,0 +1,21 @@
+{
+  "schema_version": "raisa.dual-host-foundation-residue.v1",
+  "result": "pass",
+  "checked_on": "2026-07-31",
+  "checks": {
+    "task_browser_tab_open": false,
+    "task_listener_present": false,
+    "task_process_present": false,
+    "task_container_present": false,
+    "task_network_present": false,
+    "task_image_present": false,
+    "task_temporary_log_present": false,
+    "credential_material_created_or_copied": false
+  },
+  "observations": [
+    "The in-app Browser QA tab was closed.",
+    "The verified task-owned webpack development listener and its command wrapper exited.",
+    "The two exact task-owned temporary webpack log files were sent to the Windows Recycle Bin after their resolved paths were verified beneath the user temporary directory.",
+    "The pre-existing gp-pms-postgres container and ordinary Docker networks were observed but were not created, changed or removed by this increment."
+  ]
+}

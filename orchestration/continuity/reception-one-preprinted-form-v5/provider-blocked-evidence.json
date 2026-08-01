@@ -1,0 +1,58 @@
+{
+  "baseline": {
+    "demonstration_answers": false,
+    "few_shot_examples": false,
+    "fine_tuning": false,
+    "prompt_optimisation": false
+  },
+  "boundary": {
+    "database_access": false,
+    "fallback": false,
+    "hidden_reasoning_retained": false,
+    "product_delivery": false,
+    "provider_tools": false,
+    "raw_prompt_retained": false,
+    "raw_provider_response_retained": false,
+    "write_performed": false
+  },
+  "credential_reads_performed": 0,
+  "data_class": "authored_synthetic",
+  "dialogue": {
+    "complete_replacement_required": true,
+    "first_disposition": "revision_required",
+    "maximum_actual_provider_calls": 2,
+    "second_disposition": "admit",
+    "second_turn_input_sha256": "sha256:6d53d8bd2d9dcdaa57c1893134c2d1ca54088e0eb70828d760b1ce4157a37b6f",
+    "third_turn_allowed": false,
+    "ticket_contains_rejected_note": false,
+    "ticket_contains_version_code_3": false,
+    "ticket_sha256": "sha256:0d0030e672173761706be3d6a4c7d390d1add6e5263d8603ee9bf2ddb719fd60"
+  },
+  "effect_ceiling": "proposal_only",
+  "form_boundary": {
+    "additional_model_field_rejected": true,
+    "assembled_planprogram_exact": true,
+    "assembled_program_sha256": "sha256:4dfbf5a458731d591d46e1d71ba57f2853cde0df2cdf1e41c70fc5e80dd87f7f",
+    "broker_judgement_repair": false,
+    "invalid_body_rejected_before_injection": true,
+    "model_authored_fields": [
+      "operator_note",
+      "goal_code",
+      "steps"
+    ],
+    "model_body_sha256": "sha256:4ccb05fa81cccdf0d6945458e1301dba5dba69a350697614efe5d42d45b6b31f",
+    "preprinted_field_manifest_sha256": "sha256:2a1f45caa1aeee47a1ab25e5ff886ac2e149e404d0c322e020db4338d6015d3e",
+    "preprinted_fields": {
+      "version_code": 3
+    }
+  },
+  "provider_calls_performed": 0,
+  "provider_contacted": false,
+  "result": "reception_one_preprinted_form_v5_provider_blocked_pass",
+  "schema_version": "reception.one.preprinted_form_v5.provider_blocked_evidence.v1",
+  "usage_fixture": {
+    "candidatesTokenCount": 40,
+    "promptTokenCount": 100,
+    "totalTokenCount": 140
+  }
+}

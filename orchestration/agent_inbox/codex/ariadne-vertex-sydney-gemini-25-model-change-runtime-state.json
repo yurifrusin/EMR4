@@ -1,0 +1,88 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "new_session",
+  "planned_action": "freeze_gemini_25_flash_sydney_reorientation",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_model_change_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "DeepSeek is outside the reoriented provider path."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude is not selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external worker dispatch is authorised."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "AGENTS.md was reread completely after Yuri changed the selected model.",
+        "The active Sydney Vertex authority, plan, Gemini 3.5 Flash blocked closeout, provider-admission policy, T3R5 and T3R7 Vertex evidence were reread.",
+        "AGENTS.md sections 5 and 6 restore the protected-holdout, historical-data, product, provider, PII, write and release boundaries.",
+        "Yuri's new decision authorises gemini-2.5-flash only; every other exact Sydney Vertex and Bernie impersonated-ADC boundary remains unchanged.",
+        "The Gemini 3.5 Flash blocked node and its zero-call accounting remain immutable.",
+        "HEAD and all required protected refs were reverified; the pre-existing dirty worktree is preserved."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No subagent is selected for the model-change plan."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/codex/ariadne-vertex-sydney-rehearsal-rehydration-receipt.json",
+    "orchestration/agent_inbox/codex/ariadne-vertex-sydney-rehearsal-preacceptance-receipt.json"
+  ],
+  "assigned_agent_ids": []
+}

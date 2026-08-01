@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "query_only_the_frozen_raisa_cloud_run_development_host_project_apis_identities_resources_and_iam_posture_without_external_state_change",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_raisa_cloud_run_readonly_preflight_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker was selected; the short, serial, read-only cloud preflight remains Sol-owned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport was selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No model provider or external reviewer was selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: raisa_cloud_run_public_https_dev_host_readiness_pass is the accepted terminal product result at Continuity graph revision 176 and Compass map revision 157.",
+        "current_authority_allocation: Yuri explicitly authorised a read-only Google Cloud preflight for the frozen Raisa development host and required no changes plus a report of missing APIs, identities or resources.",
+        "active_plan_and_acceptance: docs/raisa-cloud-run-public-https-dev-host-readiness-plan.md, docs/security/raisa-cloud-run-public-https-dev-host-readiness-threat-model-delta.md, docs/raisa-cloud-run-public-https-dev-host-operator-packet.md, docs/raisa-cloud-run-public-https-dev-host-readiness-closeout.md and the Sol acceptance freeze project bernie-emr4-dev, region australia-southeast1, service and repository raisa-office-web-dev, and the dedicated zero-project-role runtime identity.",
+        "protected_evidence_boundaries: protected holdouts, historical Diary material, patient, health, clinical and product-derived data, provider payloads, credentials, operator account identifiers and authentication responses remain unopened and unrecorded; deployment, resource creation, API enablement, IAM mutation, billing mutation, provider, backend, production and release remain closed.",
+        "git_refs_and_worktree: HEAD is 5b1ea7952fb08eea333da0e63f166d3895ccea32 on codex/ariadne-terra-gemini-comparative-rehearsal; master, handoff/current, origin/master and origin/handoff/current are 4974075b31035d599e081d68e3b85e04a897baa1; all 3385 observed worktree entries are preserved.",
+        "The preflight may issue only read-only Google Cloud describe, list and IAM-policy queries with the project and region passed explicitly; it must not inspect or print active human identities, credentials or raw authentication responses."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

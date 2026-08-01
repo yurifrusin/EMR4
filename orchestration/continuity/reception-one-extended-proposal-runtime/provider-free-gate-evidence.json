@@ -1,0 +1,76 @@
+{
+  "schema_version": "reception_one.extended_proposal_runtime.provider_free_gate.v1",
+  "recorded_at": "2026-07-29T23:32:59Z",
+  "result": "passed",
+  "continuity_binding": {
+    "graph_revision": 73,
+    "graph_sha256": "45ed13b40fde8edb40bbb82bbc0bf5197f01efcd97e62bc571052917730ff670",
+    "compass_revision": 60,
+    "compass_sha256": "8109a2da1b470df88fedbf2749a1caa0d2997686e2e5398bf1afdc040ee82687",
+    "rendered_compass_sha256": "04af4d540ca425db81d6f6eb9b1c6d26c2b9aee3538af855317f18e192ec7696",
+    "continuity_validation": "passed",
+    "current_node_audit": "passed",
+    "compass_validation": "passed",
+    "rendered_compass_exact_match": true
+  },
+  "runtime_evidence": {
+    "live_local_browser_backend_postgres": {
+      "result": "extended_runtime_live_local_browser_backend_postgres_pass",
+      "sha256": "52d101cbdd6eb701305fc44c7fc86a869738e7b9689cb58c2e3dda0cb7199e37",
+      "families": [
+        "move",
+        "resize",
+        "cancel",
+        "squeeze_in_assessment"
+      ],
+      "route_calls": 4,
+      "appointment_writes": 0,
+      "provider_calls": 0
+    },
+    "database_cleanup": {
+      "result": "passed",
+      "sha256": "c817b9b07d916458f3ebe7f792e478427e1e58a295d36ce91efdefc1d6447352"
+    },
+    "provider_blocked_model_lane": {
+      "result": "passed",
+      "sha256": "5cef6fd1f6f4faf42a227a8e0ae940412c967ceeefd687834126f53bec29fec1",
+      "provider_calls": 0
+    },
+    "real_isolation": {
+      "result": "passed",
+      "sha256": "0aaba595cb609fa2f6cc9b7ec84a7c32dc5eb4d0951df54e60ded223b18070ed",
+      "provider_calls": 0,
+      "credential_material_in_cell": false,
+      "network_mode": "none",
+      "residue": "absent"
+    }
+  },
+  "verification": {
+    "focused_runtime_tests": "passed",
+    "api_spine_tests": "passed",
+    "continuity_and_compass_tests": "passed",
+    "repository_only_ariadne_verifier": "passed",
+    "json_parse_validation": "passed",
+    "python_compilation": "passed",
+    "ruff_static_checks": "passed",
+    "javascript_syntax": "passed",
+    "git_diff_check": "passed",
+    "task_container_network_image_credential_process_residue": "absent"
+  },
+  "legacy_boundary_observation": {
+    "default_provider": "disabled",
+    "legacy_interpretation_runtime_gate": "blocked",
+    "meaning": "The existing general provider runtime remains closed. The separately authorised one-use exact Vertex cell is the only occupied lane admitted by this descendant."
+  },
+  "admission": {
+    "occupied_preflight_may_begin": true,
+    "occupied_call_may_begin": false,
+    "reason": "The exact read-only Bernie ADC, control-posture and regional entitlement preflight remains required."
+  },
+  "explicit_exclusions": [
+    "No provider call was made by this gate.",
+    "No real, product-derived, patient, health, clinical or historical data was used.",
+    "No appointment confirmation or mutation occurred.",
+    "No Word wiring, production, deployment or release was performed."
+  ]
+}

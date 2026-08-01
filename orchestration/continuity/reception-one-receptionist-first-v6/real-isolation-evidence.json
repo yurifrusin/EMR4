@@ -1,0 +1,96 @@
+{
+  "boundary": {
+    "api_key_authentication_used": false,
+    "appointment_writes_performed": 0,
+    "broker_judgement_repair": false,
+    "confirmation_performed": false,
+    "credential_reads_performed": 0,
+    "database_access_performed": false,
+    "hidden_reasoning_retained": false,
+    "natural_response_parsed_into_form": false,
+    "network_access_performed": false,
+    "product_delivery_performed": false,
+    "proofreader_selected_replacement": false,
+    "provider_calls_performed": 0
+  },
+  "broker_owned_fields": {
+    "version_code": 3
+  },
+  "cell_isolation_observations": [
+    {
+      "credential_environment_present": false,
+      "gid": 65532,
+      "loopback_only": true,
+      "network_interfaces": [
+        "lo"
+      ],
+      "read_only_root_filesystem": true,
+      "uid": 65532
+    },
+    {
+      "credential_environment_present": false,
+      "gid": 65532,
+      "loopback_only": true,
+      "network_interfaces": [
+        "lo"
+      ],
+      "read_only_root_filesystem": true,
+      "uid": 65532
+    }
+  ],
+  "container_policy_checks": [
+    {
+      "capabilities_dropped": true,
+      "cpu_bounded": true,
+      "memory_bounded": true,
+      "memory_swap_bounded": true,
+      "network_none": true,
+      "no_mounts": true,
+      "no_new_privileges": true,
+      "no_published_ports": true,
+      "non_root_user": true,
+      "pids_bounded": true,
+      "privileged_false": true,
+      "read_only_rootfs": true
+    },
+    {
+      "capabilities_dropped": true,
+      "cpu_bounded": true,
+      "memory_bounded": true,
+      "memory_swap_bounded": true,
+      "network_none": true,
+      "no_mounts": true,
+      "no_new_privileges": true,
+      "no_published_ports": true,
+      "non_root_user": true,
+      "pids_bounded": true,
+      "privileged_false": true,
+      "read_only_rootfs": true
+    }
+  ],
+  "correction_ticket_sha256": "sha256:e4154de8d4c0b699d632f47ef3c64b4968d615e77fd97d25ef017aacfce61826",
+  "evidence_mode": "authored_synthetic_provider_free_two_turn_fixture",
+  "first_disposition": "revision_required",
+  "first_model_form_body_sha256": "sha256:7669f71637893de155b484d30ba62a0d8782008e5254e66fa0b86c4762edf38c",
+  "first_violation_codes": [
+    "receptionist_response_claims_completed_effect"
+  ],
+  "model_authored_fields": [
+    "receptionist_response",
+    "decision_note",
+    "evidence_utterance_indices",
+    "typed_form"
+  ],
+  "released_proposal_family": "move",
+  "residue": {
+    "containers_present": false,
+    "images_present": false,
+    "temporary_context_present": false
+  },
+  "result": "reception_one_receptionist_first_v6_real_isolation_pass",
+  "schema_version": "reception.one.receptionist_first_v6.isolation_evidence.v1",
+  "second_disposition": "admit",
+  "second_model_form_body_sha256": "sha256:cc2c1254e725450a3a56b7625b9aa0cf6175b318a50dc30f4a55b841bd81b61f",
+  "source_manifest_sha256": "sha256:d1478a22b559f4c58533309def6e4fb645f5b1fd5fcd77e0ddeae3cf04fa2eba",
+  "task_sha256": "sha256:52a9e54730debe9f5db5bb4d02959098e927c17bc29d3424f4eefe654ce578b9"
+}

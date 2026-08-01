@@ -50,6 +50,15 @@ _ALLOW_SECTION_MARKERS = frozenset({
     "must_not:", "blocked_gates:", "forbidden:",
 })
 
+# Exact provider identity is permitted only as policy metadata inside the
+# separately authorised, default-off synthetic planner exception. This does
+# not permit prompts, responses, model output, provider clients, or provider
+# capability fields anywhere else in the manifests.
+_BOUNDED_PROVIDER_METADATA_SECTION_MARKERS = frozenset({
+    "bounded_synthetic_vertex_runtime_exception:",
+    "bounded_model_planner_authority:",
+})
+
 # Terms on the same line that prove the line declares an exclusion.
 _SAME_LINE_EXCLUSION_TERMS = frozenset({
     "blocked", "deny", "denied", "gate_closed",
@@ -85,6 +94,23 @@ def _is_under_blocking_section(lines, idx):
     return False
 
 
+def _is_under_bounded_provider_metadata_section(lines, idx):
+    """Return True only for children of an exact bounded provider exception."""
+    line = lines[idx]
+    if not line.strip():
+        return False
+    indent = len(line) - len(line.lstrip())
+    for j in range(idx - 1, -1, -1):
+        prev = lines[j]
+        if not prev.strip():
+            continue
+        prev_indent = len(prev) - len(prev.lstrip())
+        if prev_indent >= indent:
+            continue
+        return prev.strip() in _BOUNDED_PROVIDER_METADATA_SECTION_MARKERS
+    return False
+
+
 def _strip_comments(text, lang="graphql"):
     tq = chr(34) * 3
     if lang == "graphql":
@@ -116,6 +142,12 @@ def _check_no_forbidden(path, lang="graphql"):
             continue
         for pat in BANNED:
             if pat.lower() in line_lower:
+                if (
+                    lang in ("yaml", "yml")
+                    and pat == "gemini"
+                    and _is_under_bounded_provider_metadata_section(lines, i)
+                ):
+                    continue
                 hits.append((line.strip()[:80], pat))
                 break
 
@@ -182,6 +214,9 @@ class TestOpenAPICommandArtifact:
     OPENAPI_DIRS = ("openapi", "async")
 
     def _find_openapi(self):
+        command_contract = SPINE_DIR / "openapi" / "appointment-commands.yaml"
+        if command_contract.is_file():
+            return command_contract
         for sub in self.OPENAPI_DIRS:
             dirpath = SPINE_DIR / sub
             if dirpath.is_dir():

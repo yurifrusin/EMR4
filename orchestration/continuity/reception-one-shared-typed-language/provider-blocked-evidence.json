@@ -1,0 +1,131 @@
+{
+  "boundary": {
+    "api_key_authentication_used": false,
+    "appointment_write_authority": false,
+    "cache_creation": false,
+    "database_access": false,
+    "fallback": false,
+    "grounding": false,
+    "product_delivery": false,
+    "provider_tools": false,
+    "retrieval": false
+  },
+  "credential_reads_performed": 0,
+  "data_class": "authored_synthetic",
+  "effect_ceiling": "proposal_only",
+  "negative_contract_classes": [
+    "operator_arity_invalid",
+    "required_source_omitted",
+    "forward_or_self_reference",
+    "output_index_invalid",
+    "source_type_mismatch",
+    "external_source_code_invalid",
+    "note_person_name",
+    "note_secret_identity_or_hidden_reasoning",
+    "note_claims_command_effect",
+    "note_missing_bounded_purpose",
+    "note_missing_no_change_statement",
+    "note_multiline",
+    "note_oversized",
+    "legacy_free_form_wire_schema_invalid"
+  ],
+  "operator_note_policy": {
+    "audit_only": true,
+    "hidden_reasoning_retained": false,
+    "independently_proofread": true,
+    "maximum_utf8_bytes": 320,
+    "parsed_into_plan": false,
+    "product_delivered": false,
+    "raw_provider_response_retained": false,
+    "rejected_text_discarded": true
+  },
+  "positive_cases": [
+    {
+      "candidate_sha256": "sha256:0e1e4ea1515547dea40676e1f044628875b2b9f37c7a577be903521849e93f8f",
+      "case_id": "known-create",
+      "goal": "create",
+      "normalized_plan_sha256": "sha256:efcb6a6a5a51ef82c7f6f611d0995cb142443fe446fcaaf5da75ba1a32a0770a",
+      "operator_note_disposition": "admit",
+      "operator_note_sha256": "sha256:f4aa674ffb82af9886afe5b599b340c7a5aaf9ffca0665488b5bb8638019e764",
+      "program_sha256": "sha256:6638ac939a54c48e7c780b749d03664755d118c50c191a986bfc61294471fb0e",
+      "proofreader_disposition": "admit",
+      "released_proposal_family": "create",
+      "write_performed": false
+    },
+    {
+      "candidate_sha256": "sha256:8fa233b79b93f33d0ad6f8d63eadd6527bf8a8f63bf41df7706bbb9af09aa1e7",
+      "case_id": "known-move",
+      "goal": "move",
+      "normalized_plan_sha256": "sha256:faeea151885df371ed58300c83903e41ba2b711de595850f25398ed0ee64f181",
+      "operator_note_disposition": "admit",
+      "operator_note_sha256": "sha256:e489d323aeee2c03a9eefcbf410fdf13fc5b0c12922ab6ae13a971d1378220d6",
+      "program_sha256": "sha256:68a7595c3ae8204018aa8d76f233553f064639b5ff1abb36779c4cabdb7284b0",
+      "proofreader_disposition": "admit",
+      "released_proposal_family": "move",
+      "write_performed": false
+    },
+    {
+      "candidate_sha256": "sha256:f589529e54eadbb61fc15420c64d868976b696f4a04fe9dfa6f3f55347e5425f",
+      "case_id": "known-resize",
+      "goal": "resize",
+      "normalized_plan_sha256": "sha256:5ea2846edce8f2bb5dcac09743c5566f93f554198685cc765eba7f8ec18e923c",
+      "operator_note_disposition": "admit",
+      "operator_note_sha256": "sha256:5493ebaebcdcc8a3b18ad61fc3b11652b5f395e805180eefb46a352c9011cbbb",
+      "program_sha256": "sha256:e9e6fd8639904fa220ead5c954c2a4b27d16d4ac87a847f4643c8bbf07a07d2a",
+      "proofreader_disposition": "admit",
+      "released_proposal_family": "resize",
+      "write_performed": false
+    },
+    {
+      "candidate_sha256": "sha256:cf2a1f2f181d1fcb740b894aee91c9b9a7e094827a0b5a2d2110bc14b422b7d3",
+      "case_id": "known-cancel",
+      "goal": "cancel",
+      "normalized_plan_sha256": "sha256:0cfb2fbfab764d93f1387a7d889009fab24fccddcde4418d2de219bd7b9252fc",
+      "operator_note_disposition": "admit",
+      "operator_note_sha256": "sha256:091d37957266124640821a933944f6258201f86c60244d9abb1bb2b8af2b1cb5",
+      "program_sha256": "sha256:b046e526aaa541c566e014dc55e52811426bd7668257ae7c47e8f04dc2f239ea",
+      "proofreader_disposition": "admit",
+      "released_proposal_family": "cancel",
+      "write_performed": false
+    },
+    {
+      "candidate_sha256": "sha256:ec340a51d2067c099e81d37985ba27378bde688c2446e01258ca7b7f6615b915",
+      "case_id": "known-status",
+      "goal": "status_change",
+      "normalized_plan_sha256": "sha256:587d8beaf15e20b2c29bb7e1453b09f6e28744b493dd92bda33e66871d66410f",
+      "operator_note_disposition": "admit",
+      "operator_note_sha256": "sha256:3a35e7b90f1a63effbdcec46a097d50f7b133e31d690502841989ab93a839a3a",
+      "program_sha256": "sha256:9fbaf43bbcdf6f8ea3384450d46e97222f9a27687bc538992d359047a2a7e63a",
+      "proofreader_disposition": "admit",
+      "released_proposal_family": "status_change",
+      "write_performed": false
+    },
+    {
+      "candidate_sha256": "sha256:b1afbef9a057e58f019f7f8bb0de54ec8b50392b09c105491130a337512d22b4",
+      "case_id": "novel-squeeze-in",
+      "goal": "squeeze_in_assessment",
+      "normalized_plan_sha256": "sha256:2bd711432cf9d9a8984231d45590f3402dc4e72f66129b9564edb1c264bf67ff",
+      "operator_note_disposition": "admit",
+      "operator_note_sha256": "sha256:bcca4e89b0428960e38796bca53e9eed12953edcec647f94d8e3dc052b042296",
+      "program_sha256": "sha256:d6c67fd6eb611e111b25108801327f790077114b2e9241c48fba3cfaeadb7027",
+      "proofreader_disposition": "admit",
+      "released_proposal_family": "squeeze_in_assessment",
+      "write_performed": false
+    }
+  ],
+  "provider_calls_performed": 0,
+  "provider_contacted": false,
+  "result": "reception_one_shared_typed_language_provider_blocked_pass",
+  "schema_version": "reception.one.shared_typed.provider_blocked_evidence.v1",
+  "shared_contract": {
+    "free_form_plan_identifiers": false,
+    "goal_code_count": 7,
+    "model_input_sha256": "sha256:5e51ba8496cafb770f47ce4f54f83cc4987bbb6316639a8ad12d64be6df60ca9",
+    "model_input_version": "reception.one.bureau.shared-model-input.v3",
+    "operator_code_count": 14,
+    "plan_program_version_code": 2,
+    "provider_request_sha256": "sha256:d075226c51e72fd82013362653b64d65ec09febe11946de138822ea35b698961",
+    "provider_response_schema_sha256": "sha256:7848a1c1083a6ffa09e5f70141f4b0c4912f218632574363939bc358e593d30d",
+    "semantic_safe_repairs": false
+  }
+}

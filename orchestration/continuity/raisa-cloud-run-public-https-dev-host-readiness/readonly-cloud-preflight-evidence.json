@@ -1,0 +1,56 @@
+{
+  "schema_version": "raisa.cloud_run_readonly_preflight_evidence.v1",
+  "recorded_at": "2026-07-31T07:18:47Z",
+  "result": "blocked_missing_external_prerequisites",
+  "authority": {
+    "class": "read_only_google_cloud_preflight",
+    "external_cloud_mutations": 0,
+    "api_enablements": 0,
+    "resources_created_or_changed": 0,
+    "identities_created_or_changed": 0,
+    "iam_changes": 0,
+    "billing_changes": 0,
+    "deployments": 0,
+    "images_pushed": 0,
+    "interactive_authentication_actions": 0
+  },
+  "frozen_target": {
+    "project": "bernie-emr4-dev",
+    "project_number": "295602838018",
+    "project_lifecycle_state": "ACTIVE",
+    "billing_enabled": true,
+    "region": "australia-southeast1",
+    "artifact_registry_repository": "raisa-office-web-dev",
+    "cloud_run_service": "raisa-office-web-dev",
+    "runtime_service_account": "raisa-office-web-runtime@bernie-emr4-dev.iam.gserviceaccount.com"
+  },
+  "observations": {
+    "cloud_run_admin_api_enabled": false,
+    "artifact_registry_api_enabled": false,
+    "runtime_service_account_exists": false,
+    "runtime_service_account_project_roles": [],
+    "runtime_service_account_zero_role_observation_is_vacuous": true,
+    "artifact_registry_repository_presence": "indeterminate_while_artifact_registry_api_disabled",
+    "cloud_run_service_presence": "indeterminate_while_cloud_run_api_disabled",
+    "public_invocation_posture": "not_applicable_until_service_is_determinable",
+    "cloud_asset_inventory_api_enabled": false
+  },
+  "missing_prerequisites": [
+    "run.googleapis.com",
+    "artifactregistry.googleapis.com",
+    "raisa-office-web-runtime@bernie-emr4-dev.iam.gserviceaccount.com"
+  ],
+  "unresolved_resource_checks": [
+    "australia-southeast1 Artifact Registry repository raisa-office-web-dev",
+    "australia-southeast1 Cloud Run service raisa-office-web-dev",
+    "Cloud Run public invoker binding and frozen service posture"
+  ],
+  "privacy": {
+    "active_human_identity_queried_or_recorded": false,
+    "credentials_or_tokens_printed_or_recorded": false,
+    "raw_authentication_responses_recorded": false,
+    "raw_google_error_messages_recorded": false
+  },
+  "next_gate": "Yuri must separately authorise API enablement and runtime-service-account creation before those missing prerequisites may be repaired. Resource creation remains separately closed; after API enablement, repeat the read-only repository and service checks before deciding whether either resource must be created.",
+  "candid_limit": "The preflight proves the observed project lifecycle, billing flag, required API enablement state and absence of the exact runtime service account. Disabled service APIs prevent a current authoritative existence check for the frozen repository and Cloud Run service; their absence is not claimed."
+}

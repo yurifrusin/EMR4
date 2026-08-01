@@ -56,6 +56,12 @@ EXPECTED_ROUTE_INVENTORY = (
     ),
     ("POST", "/proposals/slot-search/normalized", "propose_normalized_slot_search", "command-style read"),
     ("POST", "/proposals/slot-search/selection", "propose_slot_selection_for_create", "command-style read"),
+    (
+        "POST",
+        "/proposals/reception-one/compose",
+        "compose_reception_one_product_context_proposal",
+        "command-style read",
+    ),
     ("POST", "/proposals/bernie/supervised-booking", "propose_bernie_supervised_booking", "command-style read"),
     ("POST", "/proposals/create/confirm-bernie", "confirm_bernie_create_proposal", "confirm command"),
     (
@@ -78,6 +84,7 @@ EXPECTED_OPENAPI_PATHS = {
     "/appointments/proposals/slot-search/normalize",
     "/appointments/proposals/slot-search",
     "/appointments/proposals/slot-search/select",
+    "/appointments/proposals/reception-one/compose",
 }
 
 DELIBERATE_OPENAPI_DRIFT = (

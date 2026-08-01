@@ -1,0 +1,70 @@
+{
+  "schema_version": "ariadne.rehydration_receipt.v1",
+  "receipt_id": "reception-one-preprinted-form-v5-multicase-rehydration-20260730t042618z",
+  "recorded_at": "2026-07-30T04:26:18Z",
+  "result": "passed",
+  "rehydrated_from_receipt": true,
+  "mandatory_rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "live_handover_current_baton": {
+    "source": "AGENTS.md",
+    "read_completely": true,
+    "current_result": "reception_one_preprinted_form_v5_occupied_pass",
+    "continuity_graph_revision": 94,
+    "compass_map_revision": 81
+  },
+  "current_authority_allocation": {
+    "source": "AGENTS.md section 4",
+    "conductor_and_acceptance_owner": "GPT Sol",
+    "implementation_owner": "GPT Sol",
+    "external_worker_or_subagent_selected": false,
+    "reasoning_level": "high"
+  },
+  "active_plan_and_acceptance": {
+    "sources": [
+      "docs/bernie-reception-one-preprinted-form-v5-plan.md",
+      "docs/bernie-reception-one-preprinted-form-v5-design.md",
+      "docs/bernie-reception-one-preprinted-form-v5-closeout.md",
+      "docs/security/bernie-reception-one-preprinted-form-v5-threat-model-delta.md",
+      "orchestration/agent_inbox/codex/reception-one-preprinted-form-v5-final-sol-acceptance.md",
+      "orchestration/agent_inbox/codex/reception-one-preprinted-form-v5-preacceptance-receipt.json",
+      "docs/bernie-reception-one-bureau-typed-plan-protocol-plan.md",
+      "docs/bernie-reception-one-bureau-typed-plan-protocol-design.md",
+      "docs/bernie-reception-one-bureau-typed-plan-protocol-closeout.md",
+      "orchestration/continuity/reception-one-bureau-typed-plan-protocol/operator-catalog.json"
+    ],
+    "user_authority_source": "Yuri: Great let's keep evaluating it.",
+    "authority_interpretation": "continue_the_recommended_frozen_authored_synthetic_multicase_form_filling_evaluation_before_any_prompt_context_teaching",
+    "historical_v5_result_remains_immutable": true
+  },
+  "protected_evidence_boundaries": {
+    "source": "AGENTS.md sections 5 and 6",
+    "protected_holdouts_opened": false,
+    "historical_diary_material_opened": false,
+    "product_or_database_data": false,
+    "patient_health_or_clinical_data": false,
+    "write_or_confirmation_authority": false,
+    "prompt_examples_or_training_added": false,
+    "provider_family_project_identity_region_or_auth_change": false,
+    "fallback": false
+  },
+  "git_refs_and_worktree": {
+    "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+    "head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+    "handoff_current": "4974075b31035d599e081d68e3b85e04a897baa1",
+    "origin_master": "4974075b31035d599e081d68e3b85e04a897baa1",
+    "origin_handoff_current": "4974075b31035d599e081d68e3b85e04a897baa1",
+    "worktree_dirty": true,
+    "worktree_entry_count": 397,
+    "worktree_status_sha256": "sha256:359eefdd8a8125020f915cba0dc08c8e7c8071fc90232c3788a4d45a0e14e63e",
+    "unrelated_user_changes_must_be_preserved": true,
+    "commit_push_pr_or_ref_move_authorized": false
+  },
+  "planned_action": "freeze_and_run_a_no_teaching_authored_synthetic_multicase_evaluation_of_the_v5_preprinted_form_under_the_existing_exact_sydney_vertex_boundary"
+}

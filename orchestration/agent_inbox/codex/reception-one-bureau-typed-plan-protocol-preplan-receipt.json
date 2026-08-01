@@ -1,0 +1,61 @@
+{
+  "authority_boundary": "execute_frozen_provider_free_authored_synthetic_typed_plan_protocol_no_provider_product_data_database_write_deployment_release_or_protected_ref_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "execute_the_frozen_provider_free_reception_one_bureau_typed_plan_protocol_plan",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "The accepted integrated Bureau remains the predecessor and no historical node is revised.",
+    "current_authority_allocation": [
+      "Yuri authorised starting the proposed Bureau Typed Plan Protocol.",
+      "GPT Sol retains architecture, implementation and acceptance for the tightly coupled provider-free tranche.",
+      "No worker, provider, database, product-data, deployment, release, commit, push or protected-ref authority is allocated."
+    ],
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-bureau-typed-plan-protocol-plan.md",
+      "docs/bernie-reception-one-integrated-bureau-plan.md",
+      "docs/bernie-reception-one-integrated-bureau-closeout.md",
+      "docs/ariadne-bounded-cognitive-work-cell-protocol-plan.md",
+      "docs/ariadne-bounded-cognitive-work-cell-protocol-design.md",
+      "docs/ariadne-bounded-cognitive-work-cell-protocol-closeout.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/access_ai_api_design.md",
+      "orchestration/bernie_release_gates.md"
+    ],
+    "protected_evidence_boundaries": "Protected holdouts, raw historical Diary material, live providers, product data, database writes, confirmation commands, production, deployment and release remain closed.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true
+    },
+    "readiness_and_surface_guards": {
+      "default_provider": "disabled",
+      "runtime_or_provider_wiring_ready": false,
+      "live_provider_enabled": false,
+      "provider_calls_performed": false,
+      "route_behavior_changed": false,
+      "database_access_performed": false,
+      "memory_or_rag_access_performed": false,
+      "historical_diary_material_access_performed": false,
+      "raw_trove_access_ready": false,
+      "runtime_gate_decision": "blocked",
+      "proposal_surface_guard": "passed"
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

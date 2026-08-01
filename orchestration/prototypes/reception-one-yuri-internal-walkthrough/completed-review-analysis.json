@@ -1,0 +1,95 @@
+{
+  "schema_version": "reception_one.yuri_internal_walkthrough.analysis.v1",
+  "source_review_id": "yuri-walkthrough-20260728232225",
+  "source_sha256": "12bc0b8cbcb1b4df2011d6a4c5ac406778b1a285944fd583f55525a6ba11089a",
+  "analysed_at": "2026-07-28T23:52:20Z",
+  "schema_validation": "passed",
+  "evidence_class": "single_owner_internal_product_critique",
+  "duration_seconds": 1715,
+  "task_counts": {
+    "available": 8,
+    "recorded": 8,
+    "worked": 5,
+    "partly_worked": 3,
+    "did_not_work": 0,
+    "skipped": 0
+  },
+  "orientation_counts": {
+    "clear": 5,
+    "mixed": 3,
+    "unclear": 0
+  },
+  "relative_value_counts": {
+    "reception_one_better": 5,
+    "about_the_same": 0,
+    "ordinary_diary_better": 0,
+    "not_compared": 3
+  },
+  "issue_flag_counts": {
+    "back_path_unclear": 3,
+    "diary_context_lost": 3,
+    "wording_too_technical": 3,
+    "projection_less_helpful_than_grid": 1,
+    "task_not_supported": 1
+  },
+  "observed_startup_defect": {
+    "id": "reference_date_not_applied_to_initial_diary_view",
+    "effect": "The ordinary Diary opened on the actual calendar date with zero appointments instead of the populated authored-synthetic reference date.",
+    "workaround_observed": "Yuri manually selected Monday 27 July 2026.",
+    "status": "confirmed_open"
+  },
+  "accepted_findings": [
+    {
+      "id": "bureau-technical-flow-promising",
+      "disposition": "preserve",
+      "basis": "Five tasks were rated Reception One better; the combined availability-to-proposal flow was specifically described as impressive; Bureau workflow was supported."
+    },
+    {
+      "id": "foreground-projection-breaks-diary-continuity",
+      "disposition": "revise",
+      "basis": "The full-window projection replaced the Diary, used excessive empty space and made return affordances unclear."
+    },
+    {
+      "id": "date-first-choreography-not-yet-realised",
+      "disposition": "revise",
+      "basis": "The initial Diary ignored the frozen reference date and required a manual date correction."
+    },
+    {
+      "id": "language-too-technical",
+      "disposition": "revise",
+      "basis": "Wording was repeatedly described as technical or legalistic and should become conversational."
+    },
+    {
+      "id": "return-and-close-paths-unclear",
+      "disposition": "revise",
+      "basis": "Back-path and Diary-context-loss flags each occurred three times; Escape and the custom return control were not immediately discoverable."
+    },
+    {
+      "id": "projection-needs-purposeful-visual-character",
+      "disposition": "revise",
+      "basis": "The interaction worked technically but was described as bland and in need of restrained visual improvement."
+    },
+    {
+      "id": "avoid-grid-in-final-user-language",
+      "disposition": "revise",
+      "basis": "Yuri explicitly rejected use of the word grid in the final user interface."
+    }
+  ],
+  "final_disposition": {
+    "overall_value": "promising_needs_revision",
+    "design_partner_readiness": "not_ready",
+    "foreground_projection_window": "concern",
+    "date_first_page_turn": "concern",
+    "bureau_workflow": "supports",
+    "text_before_push_to_talk": "not_assessed"
+  },
+  "explicit_exclusions": [
+    "No representative-participant evidence.",
+    "No usability-threshold claim.",
+    "No voice or text-model assessment.",
+    "No production-readiness claim.",
+    "No real patient, practitioner or practice data.",
+    "No appointment write, provider call or credential evidence."
+  ],
+  "status": "accepted_internal_formative_result"
+}

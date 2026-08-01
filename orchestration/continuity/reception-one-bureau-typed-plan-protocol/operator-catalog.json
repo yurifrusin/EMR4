@@ -1,0 +1,370 @@
+{
+  "schema_version": "reception.one.bureau.operator-catalog.v1",
+  "catalog_version": "reception-one-bureau-catalog-1",
+  "effect_classes": [
+    "pure",
+    "authorised_read",
+    "proposal_only"
+  ],
+  "operators": [
+    {
+      "id": "resolve_patient_reference",
+      "effect": "pure",
+      "inputs": [
+        {
+          "name": "mention",
+          "type": "patient_mention",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "patient",
+          "type": "patient_ref",
+          "required": true
+        }
+      ],
+      "api_spine_operation_id": null,
+      "human_confirmation_required": false
+    },
+    {
+      "id": "resolve_practitioner_reference",
+      "effect": "pure",
+      "inputs": [
+        {
+          "name": "mention",
+          "type": "practitioner_mention",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "practitioner",
+          "type": "practitioner_ref",
+          "required": true
+        }
+      ],
+      "api_spine_operation_id": null,
+      "human_confirmation_required": false
+    },
+    {
+      "id": "resolve_date_expression",
+      "effect": "pure",
+      "inputs": [
+        {
+          "name": "date",
+          "type": "date",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "date",
+          "type": "date",
+          "required": true
+        }
+      ],
+      "api_spine_operation_id": null,
+      "human_confirmation_required": false
+    },
+    {
+      "id": "read_selected_appointment",
+      "effect": "authorised_read",
+      "inputs": [
+        {
+          "name": "patient",
+          "type": "patient_ref",
+          "required": true
+        },
+        {
+          "name": "appointment",
+          "type": "appointment_ref",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "appointment",
+          "type": "appointment_ref",
+          "required": true
+        },
+        {
+          "name": "practitioner",
+          "type": "practitioner_ref",
+          "required": true
+        },
+        {
+          "name": "duration_minutes",
+          "type": "integer",
+          "required": true
+        }
+      ],
+      "api_spine_operation_id": null,
+      "human_confirmation_required": false
+    },
+    {
+      "id": "read_patient_appointment_timeline",
+      "effect": "authorised_read",
+      "inputs": [
+        {
+          "name": "patient",
+          "type": "patient_ref",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "appointments",
+          "type": "appointment_set",
+          "required": true
+        }
+      ],
+      "api_spine_operation_id": null,
+      "human_confirmation_required": false
+    },
+    {
+      "id": "read_practitioner_schedule",
+      "effect": "authorised_read",
+      "inputs": [
+        {
+          "name": "practitioner",
+          "type": "practitioner_ref",
+          "required": true
+        },
+        {
+          "name": "date",
+          "type": "date",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "schedule",
+          "type": "schedule_ref",
+          "required": true
+        }
+      ],
+      "api_spine_operation_id": null,
+      "human_confirmation_required": false
+    },
+    {
+      "id": "search_available_slots",
+      "effect": "authorised_read",
+      "inputs": [
+        {
+          "name": "practitioner",
+          "type": "practitioner_ref",
+          "required": true
+        },
+        {
+          "name": "date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "earliest_time",
+          "type": "time",
+          "required": false
+        },
+        {
+          "name": "latest_time",
+          "type": "time",
+          "required": false
+        },
+        {
+          "name": "duration_minutes",
+          "type": "integer",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "candidates",
+          "type": "candidate_slot_set",
+          "required": true
+        }
+      ],
+      "api_spine_operation_id": "proposeSlotSearch",
+      "human_confirmation_required": false
+    },
+    {
+      "id": "assess_squeeze_in_options",
+      "effect": "proposal_only",
+      "inputs": [
+        {
+          "name": "patient",
+          "type": "patient_ref",
+          "required": true
+        },
+        {
+          "name": "schedule",
+          "type": "schedule_ref",
+          "required": true
+        },
+        {
+          "name": "duration_minutes",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "name": "policy",
+          "type": "squeeze_policy_ref",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "proposal",
+          "type": "proposal_candidate",
+          "required": true
+        }
+      ],
+      "api_spine_operation_id": null,
+      "human_confirmation_required": true
+    },
+    {
+      "id": "prepare_create_proposal",
+      "effect": "proposal_only",
+      "inputs": [
+        {
+          "name": "patient",
+          "type": "patient_ref",
+          "required": true
+        },
+        {
+          "name": "practitioner",
+          "type": "practitioner_ref",
+          "required": true
+        },
+        {
+          "name": "candidates",
+          "type": "candidate_slot_set",
+          "required": true
+        },
+        {
+          "name": "duration_minutes",
+          "type": "integer",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "proposal",
+          "type": "proposal_candidate",
+          "required": true
+        }
+      ],
+      "api_spine_operation_id": "proposeAppointmentCreate",
+      "human_confirmation_required": true
+    },
+    {
+      "id": "prepare_move_proposal",
+      "effect": "proposal_only",
+      "inputs": [
+        {
+          "name": "appointment",
+          "type": "appointment_ref",
+          "required": true
+        },
+        {
+          "name": "candidates",
+          "type": "candidate_slot_set",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "proposal",
+          "type": "proposal_candidate",
+          "required": true
+        }
+      ],
+      "api_spine_operation_id": "proposeAppointmentUpdate",
+      "human_confirmation_required": true
+    },
+    {
+      "id": "prepare_resize_proposal",
+      "effect": "proposal_only",
+      "inputs": [
+        {
+          "name": "appointment",
+          "type": "appointment_ref",
+          "required": true
+        },
+        {
+          "name": "duration_minutes",
+          "type": "integer",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "proposal",
+          "type": "proposal_candidate",
+          "required": true
+        }
+      ],
+      "api_spine_operation_id": "proposeAppointmentUpdate",
+      "human_confirmation_required": true
+    },
+    {
+      "id": "prepare_cancel_proposal",
+      "effect": "proposal_only",
+      "inputs": [
+        {
+          "name": "appointment",
+          "type": "appointment_ref",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "proposal",
+          "type": "proposal_candidate",
+          "required": true
+        }
+      ],
+      "api_spine_operation_id": "proposeAppointmentDelete",
+      "human_confirmation_required": true
+    },
+    {
+      "id": "prepare_status_proposal",
+      "effect": "proposal_only",
+      "inputs": [
+        {
+          "name": "appointment",
+          "type": "appointment_ref",
+          "required": true
+        },
+        {
+          "name": "status",
+          "type": "status_mention",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "proposal",
+          "type": "proposal_candidate",
+          "required": true
+        }
+      ],
+      "api_spine_operation_id": "proposeAppointmentStatus",
+      "human_confirmation_required": true
+    },
+    {
+      "id": "request_clarification",
+      "effect": "pure",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "clarification",
+          "type": "clarification",
+          "required": true
+        }
+      ],
+      "api_spine_operation_id": null,
+      "human_confirmation_required": false
+    }
+  ]
+}

@@ -1,0 +1,233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/reception-one-structured-source-model-input-v4.json",
+  "title": "Reception One structured-source model input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "data_class",
+    "utterances",
+    "effect_ceiling",
+    "source_reference_contract",
+    "goal_table",
+    "binding_table",
+    "operator_table"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "reception.one.bureau.structured-source-model-input.v4"
+    },
+    "data_class": {
+      "const": "authored_synthetic"
+    },
+    "utterances": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 512
+      }
+    },
+    "effect_ceiling": {
+      "const": "proposal_only"
+    },
+    "source_reference_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "field_order",
+        "binding",
+        "prior_output",
+        "omit",
+        "examples"
+      ],
+      "properties": {
+        "field_order": {
+          "const": [
+            "kind",
+            "binding_code",
+            "prior_step_index",
+            "prior_output_name"
+          ]
+        },
+        "binding": {
+          "const": "kind_binding_uses_request_local_binding_code_and_requires_other_coordinates_to_be_sentinels"
+        },
+        "prior_output": {
+          "const": "kind_prior_output_uses_an_earlier_zero_based_step_and_an_output_name_exposed_by_that_steps_operator"
+        },
+        "omit": {
+          "const": "kind_omit_is_valid_only_for_an_optional_input_and_requires_all_coordinates_to_be_sentinels"
+        },
+        "examples": {
+          "const": [
+            {
+              "kind": "binding",
+              "binding_code": 4,
+              "prior_step_index": -1,
+              "prior_output_name": "none"
+            },
+            {
+              "kind": "prior_output",
+              "binding_code": -1,
+              "prior_step_index": 3,
+              "prior_output_name": "candidates"
+            },
+            {
+              "kind": "omit",
+              "binding_code": -1,
+              "prior_step_index": -1,
+              "prior_output_name": "none"
+            }
+          ]
+        }
+      }
+    },
+    "goal_table": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {
+        "$ref": "#/$defs/codeName"
+      }
+    },
+    "binding_table": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "$ref": "#/$defs/binding"
+      }
+    },
+    "operator_table": {
+      "type": "array",
+      "minItems": 14,
+      "maxItems": 14,
+      "items": {
+        "$ref": "#/$defs/operator"
+      }
+    }
+  },
+  "$defs": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{0,63}$"
+    },
+    "semanticType": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{0,63}$"
+    },
+    "codeName": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "name"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 15
+        },
+        "name": {
+          "$ref": "#/$defs/name"
+        }
+      }
+    },
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "source_handle",
+        "semantic_type"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9
+        },
+        "source_handle": {
+          "type": "string",
+          "pattern": "^binding:[a-z][a-z0-9_]{0,63}$"
+        },
+        "semantic_type": {
+          "$ref": "#/$defs/semanticType"
+        }
+      }
+    },
+    "slot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "position",
+        "name",
+        "semantic_type"
+      ],
+      "properties": {
+        "position": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 7
+        },
+        "name": {
+          "$ref": "#/$defs/name"
+        },
+        "semantic_type": {
+          "$ref": "#/$defs/semanticType"
+        },
+        "required": {
+          "type": "boolean"
+        }
+      }
+    },
+    "operator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "name",
+        "effect",
+        "input_slots",
+        "output_slots"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 13
+        },
+        "name": {
+          "$ref": "#/$defs/name"
+        },
+        "effect": {
+          "enum": [
+            "pure",
+            "authorised_read",
+            "proposal_only"
+          ]
+        },
+        "input_slots": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/slot"
+          }
+        },
+        "output_slots": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "items": {
+            "$ref": "#/$defs/slot"
+          }
+        }
+      }
+    }
+  }
+}

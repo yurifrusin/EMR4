@@ -1,0 +1,22 @@
+{
+  "schema_version": "reception.one.receptionist_first_v6.final_residue.v1",
+  "recorded_at": "2026-07-30T07:49:03Z",
+  "result": "reception_one_receptionist_first_v6_final_residue_clear",
+  "case_directories": 24,
+  "single_use_ledgers": 27,
+  "consumed_single_use_ledgers": 27,
+  "provider_calls_consumed": 27,
+  "open_ledgers_present": false,
+  "containers_present": false,
+  "container_count": 0,
+  "networks_present": false,
+  "network_count": 0,
+  "images_present": false,
+  "image_count": 0,
+  "broker_or_cohort_processes_present": false,
+  "broker_or_cohort_process_count": 0,
+  "temporary_credentials_present": false,
+  "credential_material_inspected": false,
+  "api_key_information_observed_or_recorded": false,
+  "daemon_wide_prune_performed": false
+}

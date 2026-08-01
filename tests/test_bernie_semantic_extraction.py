@@ -30,7 +30,6 @@ import pytest
 
 from app.services.bernie.language_normalization import NormalizedUtterance
 from app.services.bernie.semantic_extraction import (
-    SemanticExtraction,
     extract_semantics,
 )
 
@@ -531,6 +530,59 @@ class TestTemporalRelations:
             ["Book Margaret Thompson at 15:15"], "2026-07-13"
         )
         assert result.earliest_time == "15:15"
+
+    @pytest.mark.parametrize("separator", [" ", "   ", "\t", "\n"])
+    def test_or_later_whitespace_is_normalized_without_backtracking(
+        self, separator: str
+    ) -> None:
+        phrase = separator.join(["3pm", "or", "later"])
+        result = extract_semantics(
+            [f"Book Margaret Thompson tomorrow at {phrase}"], "2026-07-13"
+        )
+        assert result.temporal_relation == "not_before"
+        assert result.earliest_time == "15:00"
+        assert result.latest_time is None
+
+    def test_or_later_adversarial_whitespace_stays_bounded(self) -> None:
+        result = extract_semantics(
+            ["Book Margaret Thompson tomorrow at 3pm" + (" " * 100_000) + "never"],
+            "2026-07-13",
+        )
+        assert result.temporal_relation == "exact"
+        assert result.earliest_time == "15:00"
+
+    @pytest.mark.parametrize(
+        ("target", "canonical"),
+        [
+            ("2pm", "14:00"),
+            ("2 pm", "14:00"),
+            ("2:30pm", "14:30"),
+        ],
+    )
+    def test_move_target_time_uses_compact_linear_grammar(
+        self, target: str, canonical: str
+    ) -> None:
+        result = extract_semantics(
+            [f"Move Margaret Thompson's appointment to tomorrow at {target}"],
+            "2026-07-13",
+        )
+        assert result.intended_action == "move"
+        assert result.normalized_values["appointment_date"] == "2026-07-14"
+        assert result.normalized_values["earliest_time"] == canonical
+        assert result.normalized_values["latest_time"] == canonical
+
+    def test_move_target_time_adversarial_whitespace_stays_bounded(self) -> None:
+        result = extract_semantics(
+            [
+                "Move Margaret Thompson's appointment to tomorrow"
+                + (" " * 100_000)
+                + "never"
+            ],
+            "2026-07-13",
+        )
+        assert result.intended_action == "move"
+        assert result.normalized_values["appointment_date"] == "2026-07-14"
+        assert result.normalized_values.get("earliest_time") is None
 
 
 # ============================================================

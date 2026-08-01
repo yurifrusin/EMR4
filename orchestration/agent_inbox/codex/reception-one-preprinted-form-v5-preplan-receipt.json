@@ -1,0 +1,81 @@
+{
+  "schema_version": "ariadne.preplan_receipt.v1",
+  "receipt_id": "reception-one-preprinted-form-v5-preplan-20260730t033249z",
+  "recorded_at": "2026-07-30T03:32:49Z",
+  "result": "passed",
+  "rehydrated_from_receipt": true,
+  "authority_source": {
+    "user_instruction": "Continue with the recommended pre-printed-form baseline and consider prompt-context training only after measuring whether it is needed.",
+    "occupied_authority": "orchestration/continuity/reception-one-preprinted-form-v5/occupied-authority-request.json",
+    "occupied_authority_sha256": "sha256:1037769608c4c13767aa8eb4f12f93e59d8de318adb169e76cdd414aeafea5fd"
+  },
+  "mandatory_rehydration": {
+    "receipt": "orchestration/agent_inbox/codex/reception-one-preprinted-form-v5-rehydration-receipt.json",
+    "receipt_sha256": "sha256:df2fcb69d82b76f392192a105cb591eb985360628ccabaefaf6059e1a6c8f242",
+    "five_sources_present": [
+      "live_handover_current_baton",
+      "current_authority_allocation",
+      "active_plan_and_acceptance",
+      "protected_evidence_boundaries",
+      "git_refs_and_worktree"
+    ]
+  },
+  "frozen_contracts": [
+    {
+      "path": "docs/bernie-reception-one-preprinted-form-v5-plan.md",
+      "sha256": "sha256:57d0ac4dffc4679c3c4692a8a4e3c3a7ef46f01fa8a6a835d013cb66442c65ad"
+    },
+    {
+      "path": "docs/security/bernie-reception-one-preprinted-form-v5-threat-model-delta.md",
+      "sha256": "sha256:94bd0d48c3d6281e25e0ae9c168e8162b769cb558b7a7182014df708516398da"
+    },
+    {
+      "path": "orchestration/continuity/reception-one-preprinted-form-v5/model-form-body.schema.json",
+      "sha256": "sha256:6661b3571249c23c90a068e77dba3f306ee72becd5f4d94e2ac66f3ce2a82564"
+    },
+    {
+      "path": "orchestration/continuity/reception-one-preprinted-form-v5/turn-input.schema.json",
+      "sha256": "sha256:fc0bdfa7aacd0fc9afe32a08144d1f7c141cb05a934f9f7b8d1eedd9023263a1"
+    },
+    {
+      "path": "orchestration/continuity/reception-one-preprinted-form-v5/runtime-policy.json",
+      "sha256": "sha256:f34ea4a20887d4df598e3fbf843a1d9068eed564a4349630e64a1564e98c1492"
+    }
+  ],
+  "baseline": {
+    "few_shot_examples": false,
+    "demonstration_answers": false,
+    "prompt_optimisation": false,
+    "fine_tuning": false,
+    "broker_owned_fields": {
+      "version_code": 3
+    },
+    "model_authored_fields": [
+      "operator_note",
+      "goal_code",
+      "steps"
+    ]
+  },
+  "exact_lane": {
+    "provider": "google_cloud_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "data_class": "authored_synthetic",
+    "effect_ceiling": "proposal_only",
+    "cost_ceiling_usd": 1,
+    "occupied_call_ceiling": 2,
+    "fallback": false
+  },
+  "protected_boundaries": {
+    "historical_nodes_revised": false,
+    "protected_evidence_opened": false,
+    "product_or_database_access": false,
+    "write_or_command_authority": false,
+    "voice_production_deployment_or_release": false,
+    "unrelated_user_changes_preserved": true
+  }
+}

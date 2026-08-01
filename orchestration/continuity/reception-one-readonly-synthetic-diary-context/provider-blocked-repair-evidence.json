@@ -1,0 +1,27 @@
+{
+  "schema_version": "reception.one.readonly_synthetic_diary_context.provider_blocked_repair.v1",
+  "result": "reception_one_readonly_synthetic_diary_context_frozen_clock_repair_pass",
+  "failed_attempts_before_provider_contact": 5,
+  "provider_calls_performed": 0,
+  "credential_reads_performed": 0,
+  "ordinary_repository_local_defects": [
+    "synthetic_fixture_selected_appointment_time_mismatch",
+    "opaque_handle_count_expected_four_instead_of_three",
+    "trusted_product_context_wall_clock_not_aligned_to_frozen_v68_proofreader_clock"
+  ],
+  "repair": {
+    "selected_appointment_time": "09:00",
+    "expected_opaque_handle_count": 3,
+    "freshness_clock": "frozen_authored_synthetic_scenario",
+    "proofreader_evidence_now_in_window": true,
+    "prompt_changed": false,
+    "model_schema_changed": false,
+    "proofreader_semantics_changed": false,
+    "provider_identity_region_or_authentication_changed": false
+  },
+  "focused_regression": "tests/test_reception_one_readonly_synthetic_context_bridge.py",
+  "database_cleanup_after_every_attempt": true,
+  "raw_prompt_retained": false,
+  "raw_provider_response_retained": false,
+  "credential_or_api_key_information_retained": false
+}

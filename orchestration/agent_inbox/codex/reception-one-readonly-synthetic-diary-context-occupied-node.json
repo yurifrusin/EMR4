@@ -1,0 +1,107 @@
+{
+  "id": "reception-one-readonly-synthetic-diary-context-occupied-result",
+  "title": "Reception One Read-only Synthetic Diary Context Occupied Result",
+  "kind": "implementation",
+  "status": "accepted",
+  "created_at": "2026-07-30T13:07:58Z",
+  "updated_at": "2026-07-30T13:07:58Z",
+  "relationships": [
+    {
+      "node_id": "reception-one-readonly-synthetic-diary-context",
+      "relation": "builds_on"
+    }
+  ],
+  "coordinates": {
+    "thread_id": null,
+    "git_ref": "codex/ariadne-terra-gemini-comparative-rehearsal",
+    "source_head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "worktree_role": "integration"
+  },
+  "evidence": {
+    "acceptances": [
+      "orchestration/agent_inbox/codex/reception-one-readonly-synthetic-diary-context-final-sol-acceptance.md"
+    ],
+    "closeouts": [
+      "docs/bernie-reception-one-readonly-synthetic-diary-context-closeout.md"
+    ],
+    "findings": [
+      "orchestration/continuity/reception-one-readonly-synthetic-diary-context/precall-repair-evidence.json",
+      "orchestration/continuity/reception-one-readonly-synthetic-diary-context/occupied-final-audit-analysis.json",
+      "orchestration/continuity/reception-one-readonly-synthetic-diary-context/occupied-final-residue-evidence.json"
+    ],
+    "plans": [
+      "docs/bernie-reception-one-readonly-synthetic-diary-context-plan.md",
+      "docs/security/bernie-reception-one-readonly-synthetic-diary-context-threat-model-delta.md",
+      "orchestration/continuity/reception-one-readonly-synthetic-diary-context/occupied-authority.json"
+    ],
+    "receipts": [
+      "orchestration/agent_inbox/codex/reception-one-readonly-synthetic-diary-context-preattempt-receipt.json"
+    ],
+    "tests": [
+      "orchestration/continuity/reception-one-readonly-synthetic-diary-context/context-frame.json",
+      "orchestration/continuity/reception-one-readonly-synthetic-diary-context/provider-blocked-evidence.json",
+      "orchestration/continuity/reception-one-readonly-synthetic-diary-context/database-cleanup-evidence.json",
+      "orchestration/continuity/reception-one-readonly-synthetic-diary-context/real-isolation-evidence.json",
+      "orchestration/continuity/reception-one-readonly-synthetic-diary-context/occupied-preflight-evidence.json",
+      "orchestration/continuity/reception-one-readonly-synthetic-diary-context/occupied-evidence.json",
+      "tests/test_reception_one_readonly_synthetic_context_bridge.py"
+    ]
+  },
+  "authority": {
+    "authorized_openings": [
+      {
+        "boundary": "provider-call",
+        "scope": "One primary call consumed through the exact Bernie Sydney lane; no correction call was needed.",
+        "source": "orchestration/continuity/reception-one-readonly-synthetic-diary-context/occupied-authority.json"
+      },
+      {
+        "boundary": "container-runtime",
+        "scope": "Credential-free isolated cell consumed only the minimal trusted-backend-built synthetic turn packet.",
+        "source": "docs/bernie-reception-one-readonly-synthetic-diary-context-plan.md"
+      }
+    ],
+    "notes": [
+      "The disposable database was absent before provider contact.",
+      "The model had no database access and released no write, confirmation or product action.",
+      "Real/product data, production, deployment and release remain closed."
+    ]
+  },
+  "contract_evidence": [
+    {
+      "contract_id": "combined-patient-practitioner-time-duration-intent",
+      "status": "satisfied",
+      "evidence": [
+        "orchestration/continuity/reception-one-readonly-synthetic-diary-context/occupied-evidence.json",
+        "docs/bernie-reception-one-readonly-synthetic-diary-context-closeout.md"
+      ],
+      "note": "The frozen lane and proofreader admitted the exact selected appointment and requested 45-minute resize proposal on the primary call."
+    },
+    {
+      "contract_id": "committed-reschedule-availability-reconciliation",
+      "status": "satisfied",
+      "evidence": [
+        "docs/bernie-reception-one-readonly-synthetic-diary-context-closeout.md",
+        "orchestration/continuity/reception-one-readonly-synthetic-diary-context/occupied-evidence.json"
+      ],
+      "note": "The result remained proposal-only; database truth was unchanged and no committed event, confirmation or write occurred."
+    }
+  ],
+  "decisions": [
+    {
+      "id": "accept-readonly-synthetic-context-occupied-149",
+      "status": "accepted",
+      "summary": "Accept the primary-call synthetic context bridge pass and proceed to a default-off development-only route adapter with explicit planner mode and wall-clock freshness.",
+      "source": "orchestration/agent_inbox/codex/reception-one-readonly-synthetic-diary-context-final-sol-acceptance.md"
+    }
+  ],
+  "unresolved_gates": [
+    "The authenticated product-context route does not yet invoke the isolated model lane.",
+    "The frozen proofreader clock is not yet adapted to request wall time.",
+    "Real/product data, writes, production, deployment and release remain closed."
+  ],
+  "claim_scope": [
+    "One trusted-backend-built authored-synthetic frame passed the isolated model and deterministic proofreader on the primary call.",
+    "The model never had database access and the disposable database was absent during provider contact.",
+    "The Sydney request path does not prove Australian physical or sovereign processing."
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/ariadne-vertex-sydney-gemini-25-release.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "summary",
+    "total_tiles",
+    "risk_level",
+    "evidence_ids"
+  ],
+  "properties": {
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160
+    },
+    "total_tiles": {
+      "type": "integer",
+      "const": 5
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": ["none"]
+    },
+    "evidence_ids": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": ["fact_alpha", "fact_beta"]
+      }
+    }
+  }
+}

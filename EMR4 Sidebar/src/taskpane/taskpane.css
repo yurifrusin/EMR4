@@ -97,12 +97,149 @@ html, body {
   min-height: 52px;
 }
 #command-center-bar {
+  display: grid;
+  gap: 6px;
   padding: 6px 10px;
   background: var(--grey-1);
   border-bottom: 1px solid var(--grey-2);
 }
 #command-center-bar .btn { font-size: 12px; padding: 5px 10px; }
 #command-center-bar .btn:disabled { opacity: 0.55; cursor: default; }
+
+.btn-reception-one {
+  align-items: center;
+  background: #f8f7f3;
+  border: 1px solid #b9c9c5;
+  color: #113b54;
+  display: flex;
+  justify-content: space-between;
+  min-height: 34px;
+  text-align: left;
+}
+
+.btn-reception-one:hover:not(:disabled) {
+  background: #eef3f0;
+  border-color: #78958f;
+}
+
+.reception-one-launch-name {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.reception-one-launch-action {
+  color: #b33e1c;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.reception-one-companion {
+  background: #fffefa;
+  border: 1px solid #c7d3cf;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(17, 59, 84, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+}
+
+.reception-one-companion-heading {
+  align-items: flex-start;
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.reception-one-companion-heading h2 {
+  color: #113b54;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 16px;
+  line-height: 1.15;
+}
+
+.reception-one-companion-heading p,
+.reception-one-companion-footer,
+.reception-one-companion-status {
+  color: #64726f;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.reception-one-companion-desk {
+  color: #59756e;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding-top: 2px;
+  text-transform: uppercase;
+}
+
+.reception-one-companion-request {
+  line-height: 1.35;
+  min-height: 58px;
+  padding: 8px 9px;
+  resize: vertical;
+}
+
+.reception-one-companion-footer {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.reception-one-companion-footer > span {
+  min-width: 0;
+}
+
+.btn-reception-one-prepare {
+  background: #b94723;
+  color: var(--white);
+  flex: 0 0 auto;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 7px 9px;
+}
+
+.btn-reception-one-prepare:hover:not(:disabled) {
+  background: #963619;
+}
+
+.reception-one-companion-status {
+  color: #315c55;
+  min-height: 14px;
+}
+
+.reception-one-companion-status[data-state="blocked"] {
+  color: #a13025;
+}
+
+.reception-one-companion-status[data-state="working"] {
+  color: #725b24;
+}
+
+.sr-only {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+@media (max-width: 330px) {
+  .reception-one-companion-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .btn-reception-one-prepare {
+    width: 100%;
+  }
+}
 
 .banner-logo {
   width: 28px;
@@ -727,3 +864,98 @@ select.input { cursor: pointer; }
   flex-shrink: 0;
 }
 .btn-diary-retry:hover { background: #78350f; }
+
+/* Clinician One default-off authored-synthetic selection adapter */
+.clinician-one-context {
+  margin: 0 0 14px;
+  padding: 14px;
+  border: 1px solid #cbd7e5;
+  border-radius: 8px;
+  background: #f7fafc;
+}
+
+.clinician-one-context-kicker {
+  margin-bottom: 3px;
+  color: #285f88;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.clinician-one-context h2 {
+  margin: 0 0 6px;
+  color: #17324d;
+  font-size: 15px;
+}
+
+.clinician-one-context p {
+  margin: 0 0 10px;
+  color: #526577;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.clinician-one-context-attestation {
+  display: flex;
+  gap: 7px;
+  align-items: flex-start;
+  margin: 0 0 10px;
+  color: #31475b;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.clinician-one-context-attestation input {
+  margin: 2px 0 0;
+  flex: 0 0 auto;
+}
+
+.clinician-one-context-status {
+  min-height: 30px;
+  margin-top: 9px;
+  padding: 7px 8px;
+  border-radius: 5px;
+  background: #eaf1f7;
+  color: #31475b;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.clinician-one-context-status[data-state="ready"] {
+  background: #e5f4ec;
+  color: #155d3e;
+}
+
+.clinician-one-context-status[data-state="blocked"] {
+  background: #fae9e7;
+  color: #8b2e24;
+}
+
+.clinician-one-context-status[data-state="working"] {
+  background: #fff4d8;
+  color: #775514;
+}
+
+/* Public development-host surface: expose only the bounded synthetic card. */
+body.clinician-one-context-demo #view-login,
+body.clinician-one-context-demo #patient-banner,
+body.clinician-one-context-demo #command-center-bar,
+body.clinician-one-context-demo #patient-sidebar,
+body.clinician-one-context-demo #tab-nav,
+body.clinician-one-context-demo #panel-consult .panel-scroll > :not(#clinician-one-document-context),
+body.clinician-one-context-demo #panels > :not(#panel-consult) {
+  display: none !important;
+}
+
+body.clinician-one-context-demo #view-app,
+body.clinician-one-context-demo #panels,
+body.clinician-one-context-demo #panel-consult,
+body.clinician-one-context-demo #panel-consult .panel-scroll {
+  display: block;
+  min-height: 100%;
+}
+
+body.clinician-one-context-demo #panel-consult .panel-scroll {
+  padding: 14px;
+}

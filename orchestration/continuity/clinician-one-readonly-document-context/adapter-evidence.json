@@ -1,0 +1,89 @@
+{
+  "adapter_sha256": "sha256:db39de6cda1cfd39b9c945b30bde15904e11a36b95113f34bdea4771dd3b2eb0",
+  "candid_limit": "Dependency-injected desktop and web fixtures do not prove real Word selection semantics, authenticated Word Online, Office identity, role authorization, clinical-data safety or production fitness.",
+  "cases": {
+    "desktop": {
+      "audit": {
+        "command_count": 0,
+        "document_read_count": 1,
+        "document_write_count": 0,
+        "network_call_count": 0,
+        "provider_call_count": 0,
+        "raw_text_logged": false,
+        "raw_text_persisted": false,
+        "write_count": 0
+      },
+      "authority": {
+        "clinical_finalization": false,
+        "command": false,
+        "diagnostic": false,
+        "document_write": false,
+        "network_access": false,
+        "patient_context": false,
+        "prescribing": false,
+        "provider_invocation": false,
+        "write": false
+      },
+      "character_count": 46,
+      "disposition": "context_frame_ready",
+      "host_kind": "desktop",
+      "line_count": 2,
+      "platform": "desktop_windows",
+      "selection_sha256": "sha256:b3a72d387256276b81d463a69487f0dc6cd4f88437d41e6d1ac99ee6c3bf9868",
+      "source_label": "word_current_selection",
+      "status": "admitted",
+      "truncated": false
+    },
+    "web": {
+      "audit": {
+        "command_count": 0,
+        "document_read_count": 1,
+        "document_write_count": 0,
+        "network_call_count": 0,
+        "provider_call_count": 0,
+        "raw_text_logged": false,
+        "raw_text_persisted": false,
+        "write_count": 0
+      },
+      "authority": {
+        "clinical_finalization": false,
+        "command": false,
+        "diagnostic": false,
+        "document_write": false,
+        "network_access": false,
+        "patient_context": false,
+        "prescribing": false,
+        "provider_invocation": false,
+        "write": false
+      },
+      "character_count": 24,
+      "disposition": "context_frame_ready",
+      "host_kind": "web",
+      "line_count": 1,
+      "platform": "word_online",
+      "selection_sha256": "sha256:de73302b17d34979fa4cc5cc5dfb6647de0c21223f340edb5e0fe08b7199565a",
+      "source_label": "word_current_selection",
+      "status": "admitted",
+      "truncated": false
+    }
+  },
+  "durable_exclusions": {
+    "credentials": false,
+    "document_body": false,
+    "patient_context": false,
+    "provider_material": false,
+    "raw_office_error": false,
+    "raw_selection_text": false
+  },
+  "evidence_mode": "authored_synthetic_dependency_injected_fixture",
+  "result": "clinician_one_readonly_document_context_adapter_pass",
+  "schema_version": "raisa.clinician-one-readonly-document-context-evidence.v1",
+  "single_use": {
+    "first_document_read_count": 1,
+    "replay_document_read_count": 0,
+    "replay_reason_code": "already_consumed",
+    "replay_status": "blocked",
+    "total_desktop_reader_invocations": 1
+  },
+  "source_published_adapter_equal": true
+}

@@ -15,3 +15,4 @@
 *.yml text eol=lf
 *.yaml text eol=lf
 orchestration/continuity/ariadne-real-isolation/Dockerfile text eol=lf
+docs/ariadne-vertex-sydney-gemini-25-adc-restored-continuation-plan.md text eol=lf -whitespace

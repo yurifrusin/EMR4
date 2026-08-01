@@ -1,0 +1,67 @@
+{
+  "schema_version": "raisa.clinician-one-word-desktop-selection-evidence.v1",
+  "attempt_id": "clinician-one-word-desktop-selection-001",
+  "observed_at": "2026-07-31T06:12:39Z",
+  "result": "clinician_one_word_desktop_selection_check_pass",
+  "evidence_mode": "installed_word_desktop_authored_synthetic",
+  "host": {
+    "application": "Microsoft Word desktop",
+    "platform": "Windows",
+    "new_unsaved_blank_document_only": true,
+    "existing_document_inspected": false,
+    "office_account_or_credential_inspected": false,
+    "taskpane_loaded_from_https_loopback": true
+  },
+  "sideload": {
+    "class": "disposable_local_development_manifest",
+    "manifest_product_id": "8a31560a-b9f2-4876-bc00-61f814ad2489",
+    "manifest_distinct_from_canonical_and_predecessor": true,
+    "manifest_schema_valid": true,
+    "manifest_permission": "ReadDocument",
+    "taskpane_flag": "clinician_one_context_demo=true",
+    "listener_address": "127.0.0.1",
+    "lan_listener": false
+  },
+  "selection": {
+    "request_count": 1,
+    "status": "admitted",
+    "disposition": "context_frame_ready",
+    "frame_type": "current_consult_note",
+    "authority_label": "staff_selected",
+    "source_scope": "active_document_selection",
+    "source_label": "word_current_selection",
+    "data_classification": "authored_synthetic",
+    "host_kind": "desktop",
+    "platform": "desktop_windows",
+    "single_use": true,
+    "character_count": 92,
+    "line_count": 3,
+    "visible_fixture_line_count": 2,
+    "word_terminal_paragraph_marker_observed": true,
+    "truncated": false,
+    "selection_sha256": "sha256:c82bf9b1c972fbce4c504d25047c4d13fd27a9c3f62e4d2aee9c716815e394be",
+    "raw_text_retained": false,
+    "raw_text_rendered": false
+  },
+  "zero_authority_counts": {
+    "provider_calls": 0,
+    "credential_reads": 0,
+    "backend_calls": 0,
+    "database_reads": 0,
+    "database_writes": 0,
+    "microphone_captures": 0,
+    "diagnostic_actions": 0,
+    "clinical_actions": 0,
+    "commands": 0,
+    "document_writes": 0,
+    "application_data_network_calls": 0
+  },
+  "cleanup": {
+    "disposable_sideload_stopped": true,
+    "task_listener_stopped": true,
+    "task_temp_logs_recycled": true,
+    "task_document_discard_confirmed_by_user": true,
+    "task_document_recycled_after_safe_close": true
+  },
+  "candid_limit": "This proves one provider-free authored-synthetic current-selection read in installed Word desktop through a disposable ReadDocument-only local sideload. It does not prove authenticated Word Online, Office identity or role enforcement, clinical-data safety, backend or provider integration, production deployment or release."
+}

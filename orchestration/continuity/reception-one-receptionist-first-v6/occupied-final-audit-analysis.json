@@ -1,0 +1,144 @@
+{
+  "schema_version": "reception.one.receptionist_first_v6.external_audit_analysis.v1",
+  "result": "reception_one_receptionist_first_v6_paired_development_fail_closed",
+  "study_class": "paired_development_not_holdout",
+  "provider": "google_cloud_vertex_ai",
+  "model": "gemini-2.5-flash",
+  "project": "bernie-emr4-dev",
+  "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+  "authentication": "keyless_impersonated_service_account_adc",
+  "location": "australia-southeast1",
+  "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+  "api_key_authentication_used": false,
+  "configured_temperature": 0,
+  "configured_thinking_budget": 1024,
+  "thought_content_requested_or_retained": false,
+  "case_count": 24,
+  "actual_provider_calls": 27,
+  "absolute_call_ceiling": 48,
+  "exact_oracle_matches": 9,
+  "exact_oracle_misses": 15,
+  "schema_admitted_releases": 23,
+  "terminal_no_release_cases": 1,
+  "correction_turns_used": 3,
+  "usage": {
+    "prompt_tokens": 69776,
+    "visible_candidate_tokens": 9368,
+    "thinking_tokens": 16699,
+    "total_tokens": 95843,
+    "estimated_application_cost_usd": 0.1017009,
+    "pricing_formula": "prompt_tokens*0.15_per_million_plus_visible_candidate_and_thinking_tokens*3.50_per_million"
+  },
+  "family_results": {
+    "create": {
+      "cases": 4,
+      "exact": 3,
+      "calls": 4,
+      "corrections": 0,
+      "releases": 3
+    },
+    "move": {
+      "cases": 4,
+      "exact": 0,
+      "calls": 5,
+      "corrections": 1,
+      "releases": 4
+    },
+    "resize": {
+      "cases": 4,
+      "exact": 0,
+      "calls": 5,
+      "corrections": 1,
+      "releases": 4
+    },
+    "cancel": {
+      "cases": 3,
+      "exact": 0,
+      "calls": 4,
+      "corrections": 1,
+      "releases": 3
+    },
+    "status": {
+      "cases": 3,
+      "exact": 1,
+      "calls": 3,
+      "corrections": 0,
+      "releases": 3
+    },
+    "squeeze": {
+      "cases": 2,
+      "exact": 2,
+      "calls": 2,
+      "corrections": 0,
+      "releases": 2
+    },
+    "clarify": {
+      "cases": 4,
+      "exact": 3,
+      "calls": 4,
+      "corrections": 0,
+      "releases": 4
+    }
+  },
+  "failure_classes": {
+    "provider_text_not_json_no_release": [
+      "b-create-correct"
+    ],
+    "self_consistent_over_clarification_admitted": [
+      "b-move-resched",
+      "b-move-shift",
+      "b-move-change",
+      "b-move-correct",
+      "b-resize-long",
+      "b-resize-short",
+      "b-resize-give",
+      "b-resize-explicit",
+      "b-cancel-remove",
+      "b-cancel-calloff",
+      "b-cancel-takeout",
+      "b-status-complete",
+      "b-status-arrived"
+    ],
+    "self_consistent_ungrounded_create_action_admitted": [
+      "b-clarify-details"
+    ]
+  },
+  "diagnosis": [
+    "The prompt did not state strongly enough that each binding_table row is already grounded request-local evidence. The model therefore ignored the available selected_appointment binding and asked for an appointment identifier in thirteen explicit move, resize, cancel and status requests.",
+    "The natural response and typed form usually agreed, but agreement only proved internal consistency. It did not prove that either channel matched the staff request.",
+    "The deterministic proofreader validated schema, source types, operator arity, grounding and prose/form consistency, but had no one-way semantic assertion for explicit recognised intent cues or noun-only no-action input. It therefore admitted fourteen semantically wrong but structurally valid releases.",
+    "The noun-only details case shows the converse problem: the model inferred a create action that the user did not state.",
+    "One HTTP 200 response was rejected before candidate admission because its single text part was not JSON. No raw provider response or thought content was retained."
+  ],
+  "v5_comparison": {
+    "v5_exact_oracle_matches": 14,
+    "v6_exact_oracle_matches": 9,
+    "difference": -5,
+    "interpretation": "The receptionist-first framing improved the auditable natural channel but reduced exact typed performance on this reused development cohort; it is not evidence of generalisation."
+  },
+  "recommended_repair": {
+    "prompt_context": [
+      "Describe binding_table rows as broker-grounded stamped facts that the receptionist must use rather than re-litigate.",
+      "State that selected_appointment resolves which appointment is meant for move, resize, cancel and status work.",
+      "Retain the rule that noun-only details without an action remain clarification-only."
+    ],
+    "proofreader": [
+      "Add a one-way recognised-intent assertion: when the deterministic adapter recognises an explicit non-clarification goal, the typed goal must agree.",
+      "Reject creation from a noun-only details utterance under the frozen no-action rule.",
+      "Keep unknown or novel action language eligible for model composition when no contradictory recognised cue is present."
+    ],
+    "next_evaluation": "Run a separately versioned targeted development repair over the fifteen misses; do not relabel it as a holdout."
+  },
+  "explicit_exclusions": {
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "credential_or_access_token_recorded": false,
+    "api_key_information_recorded": false,
+    "chain_of_thought_recorded": false,
+    "thought_summary_requested": false,
+    "product_or_database_access": false,
+    "appointment_write": false,
+    "human_or_product_delivery": false,
+    "provider_or_regional_fallback": false
+  }
+}

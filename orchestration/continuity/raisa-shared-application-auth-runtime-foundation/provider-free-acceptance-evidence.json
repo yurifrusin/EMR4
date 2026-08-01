@@ -1,0 +1,216 @@
+{
+  "authority_and_side_effects": {
+    "appointment_commands": 0,
+    "cloud_or_iam_mutations": 0,
+    "cookie_issuances": 0,
+    "database_reads": 0,
+    "database_writes": 0,
+    "deployments": 0,
+    "document_mutations": 0,
+    "fastapi_or_graphql_route_calls": 0,
+    "identity_provider_calls": 0,
+    "microphone_accesses": 0,
+    "microsoft_graph_or_office_identity_calls": 0,
+    "patient_or_clinical_data_fields": 0,
+    "product_data_reads": 0,
+    "provider_calls": 0
+  },
+  "checks": {
+    "all_three_surfaces_admitted": true,
+    "audit_failure_atomic": true,
+    "concurrent_exactly_one": true,
+    "exchange_material_hash_only": true,
+    "exchange_mismatches_fail_closed": true,
+    "exchange_single_use": true,
+    "revocation_fails_closed": true,
+    "route_database_provider_cookie_wiring_absent": true,
+    "sessions_hash_only": true,
+    "surface_expiry_bounded": true
+  },
+  "claim_boundary": {
+    "does_not_prove": [
+      "A live login, route, cookie, database-backed or distributed session and revocation implementation.",
+      "External identity or Microsoft/Office federation.",
+      "Product-derived, patient, health or clinical data safety or authority.",
+      "Deployment, production fitness or release readiness."
+    ],
+    "proves": [
+      "An explicit authored-synthetic in-memory service enforces bounded opaque parent and surface sessions across all three surfaces.",
+      "Explicit and generation revocation, time bounds and exact surface bindings fail closed.",
+      "Word desktop and Word Online exchanges create one native-Diary binding under exact origin, audience, state, nonce, generation and S256-PKCE checks.",
+      "Concurrent redemption admits exactly one consumer and required-audit failure leaves state unchanged."
+    ]
+  },
+  "cross_surface_exchange": {
+    "admitted": [
+      {
+        "decision": "admit_once",
+        "grant_consumed": true,
+        "raw_exchange_code_stored_or_audited": false,
+        "raw_nonce_stored_or_audited": false,
+        "raw_state_stored_or_audited": false,
+        "raw_verifier_stored_or_audited": false,
+        "replay_reason": "exchange_already_consumed",
+        "source_surface": "word_desktop",
+        "surface_session_count": 2,
+        "target_surface": "native_diary"
+      },
+      {
+        "decision": "admit_once",
+        "grant_consumed": true,
+        "raw_exchange_code_stored_or_audited": false,
+        "raw_nonce_stored_or_audited": false,
+        "raw_state_stored_or_audited": false,
+        "raw_verifier_stored_or_audited": false,
+        "replay_reason": "exchange_already_consumed",
+        "source_surface": "word_online",
+        "surface_session_count": 2,
+        "target_surface": "native_diary"
+      }
+    ],
+    "admitted_case_count": 2,
+    "all_admitted_exactly_once": true,
+    "all_binding_mismatches_leave_store_unchanged": true,
+    "all_exchange_material_hash_only": true,
+    "binding_mismatch_case_count": 8,
+    "binding_mismatches": [
+      {
+        "case_id": "source_surface",
+        "reason": "exchange_source_surface_mismatch",
+        "store_unchanged": true
+      },
+      {
+        "case_id": "target_surface",
+        "reason": "exchange_target_surface_mismatch",
+        "store_unchanged": true
+      },
+      {
+        "case_id": "source_origin",
+        "reason": "exchange_source_origin_mismatch",
+        "store_unchanged": true
+      },
+      {
+        "case_id": "target_origin",
+        "reason": "exchange_target_origin_mismatch",
+        "store_unchanged": true
+      },
+      {
+        "case_id": "audience",
+        "reason": "exchange_audience_mismatch",
+        "store_unchanged": true
+      },
+      {
+        "case_id": "state",
+        "reason": "exchange_state_mismatch",
+        "store_unchanged": true
+      },
+      {
+        "case_id": "nonce",
+        "reason": "exchange_nonce_mismatch",
+        "store_unchanged": true
+      },
+      {
+        "case_id": "pkce",
+        "reason": "exchange_pkce_mismatch",
+        "store_unchanged": true
+      }
+    ],
+    "concurrent_redemption": {
+      "denial_reasons": [
+        "exchange_already_consumed"
+      ],
+      "grant_consumed": true,
+      "success_count": 1,
+      "surface_session_count": 2
+    }
+  },
+  "data_class": "authored_synthetic",
+  "mode": "repository_local_route_free_database_free_provider_free",
+  "recorded_at": "2026-07-31T13:00:00Z",
+  "required_audit_failure": {
+    "all_fail_required_audit_unavailable_without_mutation": true,
+    "case_count": 3,
+    "create": {
+      "reason": "required_audit_unavailable",
+      "store_unchanged": true
+    },
+    "redeem": {
+      "reason": "required_audit_unavailable",
+      "store_unchanged": true
+    },
+    "revoke": {
+      "reason": "required_audit_unavailable",
+      "store_unchanged": true
+    }
+  },
+  "result": "pass",
+  "revocation": {
+    "all_fail_closed": true,
+    "case_count": 3,
+    "generation_parent_status": "revoked",
+    "generation_revocation_reason": "application_session_revoked",
+    "new_generation": 2,
+    "parent_revocation_reason": "application_session_revoked",
+    "surface_revocation_reason": "surface_session_revoked"
+  },
+  "schema_version": "emr4.shared-application-auth-runtime-foundation-evidence.v1",
+  "sessions": {
+    "admitted_surfaces": [
+      "native_diary",
+      "word_desktop",
+      "word_online"
+    ],
+    "all_hash_only": true,
+    "all_surface_expiry_bounded_by_parent": true,
+    "case_count": 3,
+    "outcomes": [
+      {
+        "authority_source": "emr4_backend",
+        "decision": "admit",
+        "generation": 1,
+        "parent_ttl_seconds": 28800,
+        "raw_parent_stored_or_audited": false,
+        "raw_surface_stored_or_audited": false,
+        "surface": "word_desktop",
+        "surface_idle_ttl_seconds": 1800,
+        "surface_not_after_parent": true
+      },
+      {
+        "authority_source": "emr4_backend",
+        "decision": "admit",
+        "generation": 1,
+        "parent_ttl_seconds": 28800,
+        "raw_parent_stored_or_audited": false,
+        "raw_surface_stored_or_audited": false,
+        "surface": "word_online",
+        "surface_idle_ttl_seconds": 1800,
+        "surface_not_after_parent": true
+      },
+      {
+        "authority_source": "emr4_backend",
+        "decision": "admit",
+        "generation": 1,
+        "parent_ttl_seconds": 28800,
+        "raw_parent_stored_or_audited": false,
+        "raw_surface_stored_or_audited": false,
+        "surface": "native_diary",
+        "surface_idle_ttl_seconds": 1800,
+        "surface_not_after_parent": true
+      }
+    ]
+  },
+  "source_hashes": {
+    "parent_policy": "sha256:7b56b87494f02a3e36da998537e4cd9eefd3e772101843204a28208645a37d3d",
+    "plan": "sha256:56524ddb7c7b84ab9e205b4049168a20f31b235886196dde1006208407cbb034",
+    "runtime": "sha256:20da334297ad63dfd1df324944102f0a5892ed66cbf6fc665efa414b59397b5f",
+    "threat_model_delta": "sha256:beea6d86a2ca667db85e77df0d3b9ed6b1132e210ef855112f236b54b913e872"
+  },
+  "static_boundary": {
+    "api_router_present": false,
+    "cookie_mutation_present": false,
+    "database_session_present": false,
+    "forbidden_imports_present": [],
+    "module_level_runtime_wiring_present": false,
+    "router_import_present": false
+  }
+}

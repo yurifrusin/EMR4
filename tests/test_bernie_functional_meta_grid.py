@@ -26,9 +26,9 @@ def _read(path: Path) -> str:
 def test_functional_meta_grid_files_are_wired_into_the_existing_diary():
     html = _read(HTML)
 
-    assert '<link rel="stylesheet" href="meta-grid.css?v=6"' in html
-    assert '<script src="diary.js?v=190" defer>' in html
-    assert '<script src="meta-grid.js?v=10" defer>' in html
+    assert '<link rel="stylesheet" href="meta-grid.css?v=11"' in html
+    assert '<script src="diary.js?v=194" defer>' in html
+    assert '<script src="meta-grid.js?v=16" defer>' in html
     assert 'id="btn-meta-grid-launch"' in html
     assert 'id="bernie-meta-grid"' in html
     assert 'id="meta-grid-request-form"' in html
@@ -38,8 +38,8 @@ def test_functional_meta_grid_files_are_wired_into_the_existing_diary():
 def test_smoke_meta_grid_visibility_does_not_bypass_legacy_pilot_eligibility():
     source = _read(DIARY_JS)
 
-    assert "if (isSmoke) setMetaGridLaunchAvailability(true);" in source
-    assert "if (!token && !isSmoke)" in source
+    assert "if (isSmoke) {\n    setMetaGridLaunchAvailability(true);\n    return;" in source
+    assert "if (!token)" in source
     assert "if (isSmoke) {\n    isBerniePilotEligible = true;" not in source
 
 
@@ -95,6 +95,7 @@ def test_bridge_reuses_only_existing_read_and_proposal_boundaries():
         "/appointments?${params.toString()}",
         "/patients/search?q=${encodeURIComponent(normalized)}",
         "/appointments/proposals/slot-search",
+        "/appointments/proposals/reception-one/compose",
         "/appointments/proposals/bernie/supervised-booking",
     ):
         assert route in source
@@ -103,9 +104,32 @@ def test_bridge_reuses_only_existing_read_and_proposal_boundaries():
     assert "readAppointments: metaGridReadAppointments" in bridge
     assert "searchPatients: metaGridSearchPatients" in bridge
     assert "readAvailability: metaGridReadAvailability" in bridge
+    assert "composeProductContext: metaGridComposeProductContext" in bridge
+    assert 'query.get("product_context_live_local") === "true"' in source
+    assert "extended_selected_appointment_id" in source
+    assert "selected_appointment_id: input.selected_appointment_id" in source
     assert "prepareProposal: metaGridPrepareProposal" in bridge
     assert "handoffProposal: metaGridHandoffProposal" in bridge
     assert "confirm_endpoint: null" in source
+
+
+def test_extended_proposal_runtime_selection_and_typesetter_remain_non_mutating():
+    source = _read(META_JS)
+
+    assert "selectedAppointment: null" in source
+    assert "state.selectedAppointment = item" in source
+    assert "selected_appointment_id: selectedAppointment?.id || null" in source
+    assert (
+        "move|reschedule|cancel|extend|shorten|resize|squeeze"
+        in source
+    )
+    assert '["resize", "cancel"].includes(payload.goal)' in source
+    assert "Reschedule options only; the selected appointment is unchanged" in source
+    assert (
+        "Manual squeeze-in review only; no overbooking or appointment movement"
+        in source
+    )
+    assert "operationalCommandAvailable: false" in source
 
 
 def test_plain_language_supports_roots_refinements_and_safe_clarification():
@@ -128,7 +152,7 @@ def test_plain_language_supports_roots_refinements_and_safe_clarification():
 
     assert "More than one patient matches" in source
     assert "Choose exactly two practitioners" in source
-    assert "No person or command target has been silently selected" in source
+    assert "Reception One will not guess between people, dates or clinicians" in source
     assert "Plain-language refinement:" in source
     assert '!["Cancelled", "NoShow", "DNA"].includes(item.status)' in source
 
@@ -138,7 +162,7 @@ def test_proposal_review_is_not_committed_and_smoke_handoff_is_inoperable():
 
     assert 'projectionState: "proposal_not_committed"' in source
     assert "No appointment has been created" in source
-    assert "Confirmation is not available inside the meta-grid" in source
+    assert "Reception One cannot confirm this appointment" in source
     assert "handoff.disabled = !projection.action_boundary.operational_command_available" in source
     assert "no operational booking review or confirmation handoff is available" in source
     assert "no receipt can be produced" in source

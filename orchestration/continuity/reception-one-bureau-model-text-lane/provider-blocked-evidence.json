@@ -1,0 +1,98 @@
+{
+  "boundary": {
+    "api_key_authentication_used": false,
+    "appointment_writes_performed": 0,
+    "confirmation_performed": false,
+    "credential_reads_performed": 0,
+    "database_access_performed": false,
+    "historical_diary_material_access_performed": false,
+    "network_access_performed": false,
+    "product_data_used": false,
+    "product_delivery_performed": false,
+    "provider_calls_performed": 0
+  },
+  "bounded_revision": {
+    "feedback_fields": [
+      "attempt",
+      "contract_version",
+      "revision_allowed",
+      "violations"
+    ],
+    "feedback_sha256": "sha256:9e48d596732a328edafe2255fed8f295d16b47cbcb4a2ffbf20c77b04eabbf33",
+    "first_disposition": "revision_required",
+    "second_attempt": 2,
+    "second_disposition": "admit"
+  },
+  "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+  "evidence_mode": "authored_synthetic_provider_blocked",
+  "location": "australia-southeast1",
+  "model": "gemini-2.5-flash",
+  "negative_cases": [
+    {
+      "case_id": "unknown-write-operator",
+      "disposition": "reject"
+    },
+    {
+      "case_id": "free-literal",
+      "disposition": "schema_invalid"
+    },
+    {
+      "case_id": "forward-reference",
+      "disposition": "reject"
+    },
+    {
+      "case_id": "forged-scope-field",
+      "disposition": "schema_invalid"
+    },
+    {
+      "case_id": "step-budget",
+      "disposition": "schema_invalid"
+    },
+    {
+      "case_id": "duplicate-argument",
+      "disposition": "duplicate_argument"
+    }
+  ],
+  "positive_cases": [
+    {
+      "candidate_sha256": "sha256:da5955e698a4e62ce9a23c60a2c738c3a98ae99e944a475655386ca2008257f7",
+      "case_id": "known-create",
+      "effect_ceiling": "proposal_only",
+      "execution_disposition": "executed",
+      "model_input_sha256": "sha256:a53b34b3e9aa6eb115a1b63a822f1c44ef570c4e55813f1fe30e38133320eb21",
+      "plan_sha256": "sha256:f8f9280a28d73149bfe5f19430d857a0e701cf5984cb8be7dc912bd1c6381c4f",
+      "provider_request_sha256": "sha256:99681ee01f5e8fe1af01723e5f7f9b8cde84b9a6fee8c7d39edb5424495d708d",
+      "review_disposition": "admit",
+      "write_performed": false
+    },
+    {
+      "candidate_sha256": "sha256:a5dc8b22fff11afb591ff9f9882895495aacacd98ca9d1823c1a33ee76674f2a",
+      "case_id": "novel-squeeze-in",
+      "effect_ceiling": "proposal_only",
+      "execution_disposition": "executed",
+      "model_input_sha256": "sha256:5a3ff6a69305efe6b6c5b5109baa56aaa819ac5e5352eee0451adc8c20ed2fa9",
+      "plan_sha256": "sha256:140642ab4296a846a9bc0cf8983ef8216370ec8720913a541c623ddb95a1a3e9",
+      "provider_request_sha256": "sha256:f7ae3a9f15c1db2bc062849dcfbb122923b6cba1a448b8934f416ab20f1ee8b8",
+      "review_disposition": "admit",
+      "write_performed": false
+    }
+  ],
+  "provider": "google_cloud_vertex_ai",
+  "provider_profile_sha256": "sha256:56b4f11159e969f38b0c08c92483563d38429468bebb60a0c88faddea66ad0db",
+  "provider_request_contract": {
+    "automatic_fallback": false,
+    "cache_reference_sent": false,
+    "candidate_count_sent": false,
+    "function_calling_sent": false,
+    "global_endpoint": false,
+    "grounding_sent": false,
+    "max_output_tokens": 1024,
+    "retrieval_sent": false,
+    "structured_json": true,
+    "temperature": 0,
+    "thinking_budget": 0,
+    "tools_sent": false
+  },
+  "result": "reception_one_bureau_model_text_lane_provider_blocked_pass",
+  "schema_version": "reception.one.bureau.model_text_lane_evidence.v1"
+}

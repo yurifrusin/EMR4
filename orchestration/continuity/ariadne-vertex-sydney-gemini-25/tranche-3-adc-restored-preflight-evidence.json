@@ -1,0 +1,94 @@
+{
+  "schema_version": "ariadne.vertex_sydney_adc_restored_preflight_evidence.v1",
+  "recorded_on": "2026-07-24",
+  "tranche": 3,
+  "continuation_node": "ariadne-vertex-sydney-gemini-25-adc-restored-continuation",
+  "result": "ariadne_vertex_sydney_gemini_25_cache_control_blocked",
+  "reason_code": "provider_in_memory_cache_disabled_not_verified",
+  "binding": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "oauth_scope": "https://www.googleapis.com/auth/cloud-platform",
+    "required_prediction_permission": "aiplatform.endpoints.predict",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "automatic_fallback": false
+  },
+  "checks": {
+    "credentials_are_impersonated": true,
+    "adc_project_exact": true,
+    "target_service_account_exact": true,
+    "cloud_platform_scope_exact": true,
+    "noninteractive_refresh_passed": true,
+    "billing_enabled": true,
+    "vertex_ai_api_enabled": true,
+    "service_account_enabled_and_exact": true,
+    "prediction_only_custom_role_exact": true,
+    "prediction_only_binding_exact": true,
+    "required_prediction_permission_exact": true,
+    "vertex_data_read_audit_enabled": true,
+    "vertex_data_write_audit_enabled": true,
+    "request_response_logging_disabled_or_absent": true,
+    "provider_in_memory_cache_disabled": false,
+    "no_user_managed_service_account_key": true,
+    "model_present_in_publisher_catalogue": true,
+    "official_sydney_model_admission_bound": true,
+    "regional_endpoint_exact": true,
+    "automatic_fallback_disabled": true,
+    "api_key_authentication_not_used": true,
+    "service_account_key_authentication_not_used": true
+  },
+  "local_preflight_repair": {
+    "initial_failure_code": "model_catalogue_control_read_failed",
+    "cause_class": "repository_local_read_only_quota_project_argument_missing",
+    "repair": "bind_single_model_catalogue_read_to_exact_target_quota_project",
+    "focused_regression_added": true,
+    "external_configuration_changed": false,
+    "provider_prompt_transmitted": false,
+    "model_inference_called": false
+  },
+  "privacy_controls": {
+    "credential_value_printed_or_persisted": false,
+    "access_or_refresh_token_printed_or_persisted": false,
+    "raw_authentication_response_persisted": false,
+    "api_key_authentication_used": false,
+    "api_key_information_recorded": false,
+    "service_account_key_material_used_or_inspected": false,
+    "service_account_key_inventory_metadata_read": true,
+    "raw_cloud_control_response_persisted": false
+  },
+  "activity": {
+    "read_only_control_inspection_performed": true,
+    "rehearsal_prompt_transmitted": false,
+    "provider_data_plane_inference_contacted": false,
+    "model_inference_calls": 0,
+    "single_use_rehearsal_ledgers_opened": 0,
+    "containers_started": 0,
+    "external_state_changed": false
+  },
+  "successor_gates": {
+    "real_isolation_dry_run_open": false,
+    "occupied_provider_call_open": false,
+    "proofreader_release_open": false
+  },
+  "call_accounting": {
+    "occupied_calls_consumed_before_continuation": 0,
+    "occupied_calls_consumed_in_continuation": 0,
+    "retries_consumed": 0,
+    "application_model_call_cost_usd": 0
+  },
+  "required_intervention": "An externally authorised operator must determine the current Vertex provider-managed in-memory cache state for bernie-emr4-dev and establish explicit disableCache: true if needed, without weakening or changing any other frozen boundary; then a fresh five-source rehydration and complete read-only Tranche 3 preflight are required.",
+  "prohibited_repairs": [
+    "cache_configuration_change_by_codex",
+    "api_billing_iam_project_or_service_account_change_by_codex",
+    "credential_reconfiguration_by_codex",
+    "api_key_or_static_key_fallback",
+    "provider_model_project_identity_region_or_endpoint_substitution",
+    "global_endpoint_or_automatic_regional_fallback",
+    "occupied_call_before_all_predecessor_gates_pass"
+  ],
+  "claim_limit": "This evidence proves that the restored exact impersonated ADC refreshed and that every recorded control except provider in-memory cache disablement passed. It proves no real isolation, occupied provider call, inference, typed draft, proofreader release, Australian physical processing or sovereign processing."
+}

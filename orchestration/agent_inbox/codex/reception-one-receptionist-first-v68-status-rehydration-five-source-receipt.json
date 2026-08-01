@@ -1,0 +1,45 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v2",
+  "receipt_id": "reception-one-receptionist-first-v68-status-rehydration-20260730",
+  "created_at": "2026-07-30T12:20:53Z",
+  "status": "passed",
+  "rehydrated_from_receipt": false,
+  "sources": {
+    "live_handover_current_baton": {
+      "path": "AGENTS.md",
+      "sha256": "33a26cd29045466a348ee30098f9d39c26d12812fde3307c66d93f10a89800d0",
+      "restored": true
+    },
+    "current_authority_allocation": {
+      "path": "AGENTS.md#4-authority-allocation",
+      "user_decision_path": "AGENTS.md#6-user-decision-boundaries",
+      "restored": true
+    },
+    "active_plan_and_acceptance": {
+      "plan_path": "docs/bernie-reception-one-receptionist-first-v68-move-pattern-plan.md",
+      "plan_sha256": "2fb9e484499f2e2a7919904d1935f96116cf40c6fdeb58273c211cef0bc1322b",
+      "closeout_path": "docs/bernie-reception-one-receptionist-first-v68-closeout.md",
+      "closeout_sha256": "f35422489cd254a8a9b53e44dd61e4b97541e31b674dc66186232af1fa35106e",
+      "final_review_path": "orchestration/agent_inbox/codex/reception-one-receptionist-first-v68-final-sol-review.md",
+      "final_review_sha256": "4b8d467663ed5235e15a3a24eb8165ab10b6b58f390ea34819b963eb7e99bc59",
+      "audit_path": "orchestration/continuity/reception-one-receptionist-first-v68/occupied-final-audit-analysis.json",
+      "audit_sha256": "4c7de6c716a0977dcc35c3fcfb3d7cb70515d76ef8d3b9ba60891c5ca9e06369",
+      "restored": true
+    },
+    "protected_evidence_boundaries": {
+      "path": "AGENTS.md#5-protected-evidence-and-closed-gates",
+      "user_decision_path": "AGENTS.md#6-user-decision-boundaries",
+      "restored": true
+    },
+    "git_refs_and_worktree": {
+      "head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff_current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin_master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin_handoff_current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "unrelated_user_changes_preserved": true
+    }
+  },
+  "generic_preflight_receipt": "orchestration/agent_inbox/codex/reception-one-receptionist-first-v68-status-rehydration-receipt.json"
+}

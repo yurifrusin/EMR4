@@ -1,0 +1,70 @@
+{
+  "schema_version": "reception.one.preprinted_form_v5.multicase_coordinator_repair.v1",
+  "recorded_at": "2026-07-30T04:46:28Z",
+  "result": "reception_one_preprinted_form_v5_multicase_coordinator_repair_pass",
+  "provider_calls_consumed_before_repair": 1,
+  "provider_calls_performed_by_repair": 0,
+  "affected_case": "create",
+  "closed_case": {
+    "attempt_id": "reception-one-preprinted-form-v5-eval-create-turn-001",
+    "ledger_id": "reception-one-preprinted-form-v5-eval-create-ledger-001",
+    "ledger_status": "consumed",
+    "http_status": 200,
+    "proofreader_disposition": "admit",
+    "released_proposal_family": "create",
+    "write_performed": false,
+    "cleanup_passed": true,
+    "dialogue_evidence_file_sha256": "sha256:cd934bdedfd4d4fc6114f0248e43938af8c10b25984ffff1396892dfa2271cf6",
+    "turn_evidence_file_sha256": "sha256:a84d917440975262261d1484dea68ab28878fcf7abdb2e846ab0fcbd428f49f7",
+    "ledger_file_sha256": "sha256:bde1437b6a747916301af8fb221dfbd7ebc4c4800d220789535c43ae7d6c15e8",
+    "audit_file_sha256": "sha256:7ff61da850fcbe2f211e17a4f6b6a46e194b57bda105abe60eb5b39fc00addf0"
+  },
+  "diagnosis": {
+    "reason_code": "multicase_attempt_not_classified_by_external_audit_renderer",
+    "provider_request_defect": false,
+    "model_form_defect": false,
+    "proofreader_defect": false,
+    "isolation_or_cleanup_defect": false,
+    "credential_or_cloud_control_defect": false,
+    "coordinator_inspection_defect": true
+  },
+  "repository_local_repair": {
+    "audit_renderer_accepts_case_bound_preprinted_attempt_ids": true,
+    "closed_case_external_audit_regenerated_from_immutable_turn_evidence_and_hash_chain": true,
+    "coordinator_resumes_only_a_fully_closed_case_with_exact_attempt_ledger_and_parent_chain_binding": true,
+    "partial_case_resume_forbidden": true,
+    "closed_case_provider_call_replayed": false,
+    "closed_case_ledger_reopened": false,
+    "runner_file_sha256": "sha256:f5959ac92a400c3af04e9e9eae97c97847e85874eb0e62bac62f48c73ead70ae",
+    "audit_renderer_file_sha256": "sha256:ec6e12b300ab38ab13689843e8c43c0fc722bd50559a32797898f52209e9c613"
+  },
+  "frozen_cohort_preserved": {
+    "system_instruction_sha256": "sha256:99a7e4c0349b535df7100846dc980a29a641f298446e4275d67ba43d88e7b96a",
+    "provider_response_schema_sha256": "sha256:d1631d34502009156789965e4f841202988b20835d9d993ca80ecccd59a59f21",
+    "model_authored_fields": [
+      "operator_note",
+      "goal_code",
+      "steps"
+    ],
+    "broker_owned_version_code": 3,
+    "prompt_changed": false,
+    "schema_changed": false,
+    "proofreader_changed": false,
+    "case_frame_changed": false,
+    "provider_project_identity_region_changed": false,
+    "cost_or_call_ceiling_changed": false
+  },
+  "verification": {
+    "python_compilation_passed": true,
+    "ruff_passed": true,
+    "focused_tests_passed": 47,
+    "create_external_audit_preprinted_manifest_restored": true
+  },
+  "continuation_boundary": {
+    "remaining_primary_case_count": 5,
+    "create_call_replay_permitted": false,
+    "remaining_absolute_call_capacity": 11,
+    "incremental_cost_ceiling_usd": 1,
+    "fallback": false
+  }
+}

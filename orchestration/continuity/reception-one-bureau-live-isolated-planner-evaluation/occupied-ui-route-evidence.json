@@ -1,0 +1,155 @@
+{
+  "api_key_authentication_used": false,
+  "appointment_confirmation_performed": false,
+  "appointment_write_performed": false,
+  "browser": {
+    "external_hosts": [],
+    "http_status": 200,
+    "rendered_provenance": null,
+    "request_interception_used": false,
+    "route_call_count": 1,
+    "route_request_hashes": [
+      "sha256:6f80da623d263de5945507999b2131b14f18ae26c97b421e0655c40d2dafe95b"
+    ],
+    "submitted_modes": [
+      "isolated_vertex"
+    ]
+  },
+  "candid_limit": "This evidence can establish one authored-synthetic UI-to-route-to-proofreader exchange through the configured and observed Sydney Vertex locational endpoint. It does not establish Australian physical or sovereign processing, production fitness, or authority for real patient, health or clinical data.",
+  "controls": {
+    "authority_sha256": "sha256:e3400e240d68835cc0c781d23486ea825f5e8df98d3ee400e04c38a5058ad619",
+    "continuity_binding": {
+      "compass_revision": 139,
+      "compass_source_graph_revision": 158,
+      "graph_revision": 158
+    },
+    "isolation_sha256": "sha256:e71ff1781547837d717474e1d249168ba4f602387a6998693b8f57c4a0cae499",
+    "preflight_sha256": "sha256:6ca95faf436c9365ef4c17f37ac80bbdc955ba501e6da1dd843ef7f84445d81b",
+    "provider_free_sha256": "sha256:68a42bd3b58f1a028628f7e48f13515b5ebaa16b01a51e246fa271a9ab06dd26"
+  },
+  "data_class": "authored_synthetic",
+  "database_after": {
+    "counts": {
+      "appointment_audit_log": 0,
+      "appointment_command_idempotency": 0,
+      "appointments": 6,
+      "bernie_booking_sessions": 0,
+      "bernie_session_events": 0
+    },
+    "database": "gp_pms_reception_one_bureau_isolated_9c6f41e7_20260731",
+    "identifiers_recorded": false,
+    "patient_details_recorded": false,
+    "schema_version": "bernie.meta-grid-live-local.database-readback.v1",
+    "sha256": {
+      "appointment_audit_log": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "appointment_command_idempotency": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "appointments": "3e3c05e6aa79618ee442e897bc597b10bc4ba63187d57721a7dc84ff8f75dc9a",
+      "bernie_booking_sessions": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bernie_session_events": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "synthetic_only": true
+  },
+  "database_before": {
+    "counts": {
+      "appointment_audit_log": 0,
+      "appointment_command_idempotency": 0,
+      "appointments": 6,
+      "bernie_booking_sessions": 0,
+      "bernie_session_events": 0
+    },
+    "database": "gp_pms_reception_one_bureau_isolated_9c6f41e7_20260731",
+    "identifiers_recorded": false,
+    "patient_details_recorded": false,
+    "schema_version": "bernie.meta-grid-live-local.database-readback.v1",
+    "sha256": {
+      "appointment_audit_log": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "appointment_command_idempotency": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "appointments": "3e3c05e6aa79618ee442e897bc597b10bc4ba63187d57721a7dc84ff8f75dc9a",
+      "bernie_booking_sessions": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bernie_session_events": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "synthetic_only": true
+  },
+  "database_unchanged": true,
+  "evidence_hash": "sha256:b28b88ec7fef8c574876cdf3c1adcd79067705eddc6b4b5e05fee89fc3ee7c6d",
+  "evidence_label": "live_local_browser_backend_postgres_and_live_provider",
+  "fallback_performed": false,
+  "post_attempt_residue_clear": true,
+  "provider_environment_forwarded_to_cell": false,
+  "recorded_at": "2026-07-30T21:21:45.995217Z",
+  "result": "reception_one_bureau_live_isolated_planner_failed_closed",
+  "retry_performed": false,
+  "route_release": {
+    "confirmation_performed": false,
+    "goal": null,
+    "operation_id": null,
+    "planner_mode": "isolated_vertex",
+    "proofreader_disposition": "revision_required",
+    "proposal_only": true,
+    "proposed_duration_minutes": null,
+    "provider_calls": 1,
+    "requires_confirmation": true,
+    "result": "revision_required",
+    "runtime_audit_ref": "runtime-65d49792ef59742b",
+    "write_performed": false
+  },
+  "runtime_audit": {
+    "absolute_provider_call_ceiling": 1,
+    "actual_provider_call_count": 1,
+    "attempt_ids": [
+      "reception-one-receptionist-first-v68-eval-runtime-65d49792ef59742b-turn-001"
+    ],
+    "audit_ref": "runtime-65d49792ef59742b",
+    "chain_of_thought_retained": false,
+    "cleanup": {
+      "base_image_state_preserved": true,
+      "broker_process_absent": true,
+      "cell_container_absent": true,
+      "cell_image_absent": true,
+      "daemon_wide_prune_performed": false,
+      "internal_network_absent": true,
+      "relay_container_absent": true,
+      "relay_image_absent": true,
+      "temporary_context_absent": true,
+      "temporary_token_absent": true
+    },
+    "credential_material_retained": false,
+    "exact_binding": {
+      "api_key_authentication_used": false,
+      "authentication": "keyless_impersonated_service_account_adc",
+      "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+      "location": "australia-southeast1",
+      "model_id": "gemini-2.5-flash",
+      "project": "bernie-emr4-dev",
+      "provider": "google_vertex_ai",
+      "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"
+    },
+    "external_audit_hash_chain_valid": true,
+    "ledger_ids": [
+      "reception-one-receptionist-first-v68-eval-runtime-65d49792ef59742b-ledger-001"
+    ],
+    "parent_hash_chain": {
+      "event_count": 4,
+      "terminal_hash": "sha256:56032520c6138e9e93e56d7e8c6caf2c6060406a5bd6e12ad3a1f20ec81e1fc6",
+      "valid": true
+    },
+    "proofreader": {
+      "admitted_operator_ids": [],
+      "disposition": "revision_required",
+      "safe_repairs": [],
+      "violations": [
+        {
+          "code": "recognized_intent_goal_mismatch",
+          "path": "$.typed_form.goal_code"
+        }
+      ]
+    },
+    "raw_frame_retained": false,
+    "raw_prompt_retained": false,
+    "raw_provider_response_retained": false,
+    "release_present": false,
+    "terminal_status": "terminal_call_ceiling_no_release"
+  },
+  "schema_version": "reception.one.bureau_live_isolated_planner.occupied_ui_route_evidence.v1",
+  "screenshot": "orchestration/continuity/reception-one-bureau-live-isolated-planner-evaluation/occupied-isolated-planner-result.png"
+}

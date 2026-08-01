@@ -1,0 +1,62 @@
+{
+  "schema_version": "reception.one.default_off_dual_planner_runtime_policy.v1",
+  "status": "authorised_provider_free_implementation",
+  "predecessor_node_id": "reception-one-readonly-synthetic-diary-context-occupied-result",
+  "route": {
+    "operation_id": "composeReceptionOneProductContextProposal",
+    "feature_default": "disabled",
+    "environment": "dev_only",
+    "data_class": "authored_synthetic",
+    "practice_scope": "exact_allowlist",
+    "planner_modes": [
+      "deterministic",
+      "isolated_vertex"
+    ],
+    "default_planner_mode": "deterministic",
+    "isolated_vertex_separate_gate_default": "disabled"
+  },
+  "exact_vertex_boundary": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "api_key_authentication_used": false,
+    "global_fallback": false,
+    "provider_or_region_fallback": false,
+    "provider_tools": false,
+    "grounding": false,
+    "retrieval": false,
+    "cache_creation": false
+  },
+  "effect_boundary": {
+    "proposal_only": true,
+    "requires_human_confirmation": true,
+    "appointment_write_authority": false,
+    "confirmation_authority": false,
+    "model_database_access": false,
+    "frontend_provider_access": false
+  },
+  "occupied_ceiling": {
+    "primary_calls": 1,
+    "proofreader_corrections": 1,
+    "absolute_calls": 2,
+    "cost_usd": 1
+  },
+  "closed": [
+    "real_or_product_derived_data",
+    "patient_or_health_information",
+    "historical_diary_material",
+    "appointment_confirmation_or_mutation",
+    "word",
+    "voice",
+    "representative_sessions",
+    "production",
+    "deployment",
+    "release",
+    "provider_model_project_identity_or_region_substitution",
+    "physical_or_sovereign_locality_claim"
+  ]
+}

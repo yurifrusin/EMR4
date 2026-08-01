@@ -1,0 +1,49 @@
+{
+  "schema_version": "reception.one.preprinted_form_v5.multicase_authority.v1",
+  "decision": "authorised_by_yuri",
+  "authority_granted": true,
+  "executable_after_all_frozen_gates": true,
+  "recorded_at": "2026-07-30T04:28:49Z",
+  "authorisation_source": [
+    "Yuri: Great let's keep evaluating it.",
+    "docs/bernie-reception-one-preprinted-form-v5-multicase-evaluation-plan.md",
+    "orchestration/agent_inbox/codex/reception-one-preprinted-form-v5-multicase-rehydration-receipt.json"
+  ],
+  "purpose": "measure_untaught_preprinted_form_completion_across_six_additional_authored_synthetic_cases",
+  "requested_exact_boundary": {
+    "provider": "google_cloud_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "data_class": "authored_synthetic",
+    "isolation": "credential_free_work_cell_with_one_use_host_broker",
+    "dialogue_protocol": "reception.one.bureau.preprinted-form.v5",
+    "model_response_contract": "operator_note_goal_code_and_steps_only",
+    "broker_owned_fields": {
+      "version_code": 3
+    },
+    "baseline_teaching": "none",
+    "cost_ceiling_usd": 1,
+    "occupied_call_ceiling": 12,
+    "primary_call_ceiling": 6,
+    "correction_turn_ceiling": 6,
+    "fallback": false,
+    "automatic_regional_fallback": false,
+    "global_endpoint": false,
+    "api_key_authentication": false,
+    "provider_tools": false,
+    "function_calling": false,
+    "grounding": false,
+    "retrieval": false,
+    "cache_creation": false,
+    "database_access": false,
+    "product_delivery": false,
+    "appointment_write_authority": false
+  },
+  "stop_each_case_after_first_admitted_or_terminal_safe_result": true,
+  "mid_cohort_prompt_or_schema_repair": false,
+  "does_not_revise_historical_nodes": true
+}

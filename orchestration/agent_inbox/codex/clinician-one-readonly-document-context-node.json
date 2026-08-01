@@ -1,0 +1,106 @@
+{
+  "authority": {
+    "authorized_openings": [
+      {
+        "boundary": "api-change",
+        "scope": "One provider-free local typed Clinician One adapter may read only the current selection from a task-created authored-synthetic Word fixture after an explicit click and exact single-use grant; no existing document, patient/clinical data, whole-document read, provider, backend, microphone, write, deployment or release authority.",
+        "source": "docs/raisa-clinician-one-readonly-document-context-plan.md"
+      }
+    ],
+    "notes": [
+      "The adapter is a non-authoritative client-local context frame, not GraphQL, a REST command, Access AI or an agent action.",
+      "The accepted Office host profile establishes capability only and retains document_read=false; the exact local fixture grant remains separate.",
+      "Authenticated Word Online and real installed-Word selection behavior remain unproven.",
+      "Provider, patient, clinical, backend, database, microphone, document-write, command, production, deployment and release gates remain closed."
+    ]
+  },
+  "claim_scope": [
+    "Dependency-injected Word desktop and web fixtures each admitted one exact authored-synthetic current selection as a typed deeply immutable current_consult_note frame.",
+    "The adapter reads only context.document.getSelection().text, rejects instead of truncating, consumes a request identifier before access and performs no second read on replay.",
+    "Mobile, unknown, missing-host, invalid request/grant, empty, oversized, over-line and sanitized read-error cases fail closed.",
+    "The default-off localhost taskpane card requires authored-synthetic acknowledgement and renders only source, host and counts; selected text is not rendered or durably retained.",
+    "An ordinary-browser rendered check remained disabled after attestation because Word capability was absent; it made zero document reads and is not Office-host evidence."
+  ],
+  "contract_evidence": [
+    {
+      "contract_id": "combined-patient-practitioner-time-duration-intent",
+      "evidence": [
+        "tests/test_reception_one_word_compact_companion_shell.py",
+        "tests/test_clinician_one_readonly_document_context.py"
+      ],
+      "note": "The clinician adapter adds no appointment context, proposal or command path and leaves the accepted Reception One intent contract unchanged.",
+      "status": "satisfied"
+    },
+    {
+      "contract_id": "committed-reschedule-availability-reconciliation",
+      "evidence": [
+        "tests/test_reception_one_word_hybrid_contextual_launch.py",
+        "docs/raisa-clinician-one-readonly-document-context-closeout.md"
+      ],
+      "note": "The selection-only client adapter neither reads nor alters Diary events, freshness, availability or reconciliation behavior.",
+      "status": "satisfied"
+    }
+  ],
+  "coordinates": {
+    "git_ref": "codex/ariadne-terra-gemini-comparative-rehearsal",
+    "source_head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "thread_id": null,
+    "worktree_role": "integration"
+  },
+  "created_at": "2026-07-31T07:15:00Z",
+  "decisions": [
+    {
+      "id": "accept-clinician-one-readonly-document-context-173",
+      "source": "docs/raisa-clinician-one-readonly-document-context-plan.md",
+      "status": "accepted",
+      "summary": "Accept one provider-free single-use current-selection adapter and counts-only default-off card while every real-data, provider, backend and write boundary remains closed."
+    }
+  ],
+  "evidence": {
+    "acceptances": [
+      "orchestration/agent_inbox/codex/clinician-one-readonly-document-context-sol-acceptance.md"
+    ],
+    "closeouts": [
+      "docs/raisa-clinician-one-readonly-document-context-closeout.md"
+    ],
+    "findings": [
+      "orchestration/continuity/clinician-one-readonly-document-context/adapter-evidence.json",
+      "orchestration/continuity/clinician-one-readonly-document-context/browser-acceptance-evidence.json",
+      "orchestration/continuity/clinician-one-readonly-document-context/final-residue-evidence.json"
+    ],
+    "plans": [
+      "docs/raisa-clinician-one-readonly-document-context-plan.md",
+      "docs/security/raisa-clinician-one-readonly-document-context-threat-model-delta.md"
+    ],
+    "receipts": [
+      "orchestration/agent_inbox/codex/clinician-one-readonly-document-context-rehydration-receipt.json",
+      "orchestration/agent_inbox/codex/clinician-one-readonly-document-context-preacceptance-receipt.json"
+    ],
+    "tests": [
+      "tests/test_clinician_one_readonly_document_context.py",
+      "tests/test_raisa_dual_host_foundation.py",
+      "tests/test_reception_one_word_hybrid_contextual_launch.py",
+      "tests/test_reception_one_word_compact_companion_shell.py",
+      "tests/test_reception_one_word_desktop_authenticated_dialog_check.py",
+      "tests/test_reception_one_word_online_authenticated_dialog_check.py",
+      "tests/test_api_spine_artifacts.py"
+    ]
+  },
+  "id": "clinician-one-readonly-document-context",
+  "kind": "integration",
+  "relationships": [
+    {
+      "node_id": "raisa-dual-host-foundation",
+      "relation": "builds_on"
+    }
+  ],
+  "status": "accepted",
+  "title": "Clinician One Read-only Document Context",
+  "unresolved_gates": [
+    "No real installed-Word selection or authenticated Word Online behavior is proven.",
+    "The local authored-synthetic fixture grant is not production authentication or clinician-role authorization.",
+    "Real/product-derived patient, health and clinical text remain closed.",
+    "Provider, Access AI, backend, database, microphone, document-write, clinical-command, production, deployment and release remain closed."
+  ],
+  "updated_at": "2026-07-31T07:20:00Z"
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "bind_the_completed_terminal_word_online_companion_result_into_a_new_continuity_and_compass_descendant_then_validate_closeout_without_further_browser_or_cloud_mutation",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_word_online_terminal_closeout_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is selected; the terminal evidence binding and validation remain Sol-owned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external reviewer or provider is selected for this completed provider-free Word Online closeout."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: the accepted partial Cloud Run public-access node is bound to Continuity graph revision 179 and Compass map revision 160; its supervised Word Online gate is now complete.",
+        "current_authority_allocation: Yuri authorised only the exact raisa-office-web-dev service in bernie-emr4-dev/australia-southeast1, the existing signed-in Word Online session, authored-synthetic input and ordinary repository-local repair without broader service, IAM, organisation, provider, backend, command, document-write, production or release authority.",
+        "active_plan_and_acceptance: docs/raisa-cloud-run-public-access-word-online-verification-plan.md and docs/raisa-word-online-authenticated-companion-verification-plan.md freeze the exact origin, zero-authority policy, typed companion request and generic proofreader-admitted Word summary.",
+        "protected_evidence_boundaries: protected holdouts, historical Diary material, real or product-derived patient, health and clinical data, credentials, provider material and hidden reasoning remain excluded.",
+        "git_refs_and_worktree: HEAD is 5b1ea7952fb08eea333da0e63f166d3895ccea32 on codex/ariadne-terra-gemini-comparative-rehearsal; master, handoff/current, origin/master and origin/handoff/current are 4974075b31035d599e081d68e3b85e04a897baa1; the existing dirty worktree is preserved without moving protected refs.",
+        "The terminal browser evidence and cleanup are complete; no further browser action or cloud mutation is planned."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,198 @@
+{
+  "schema_version": "reception.one.bureau.cost_bounded_occupied_retry_002.audit_analysis.v1",
+  "result": "reception_one_bureau_cost_bounded_occupied_retry_002_audit_pass",
+  "attempt_id": "reception-one-receptionist-first-v68-eval-runtime-984fddadede8bff9-turn-001",
+  "ledger_id": "reception-one-receptionist-first-v68-eval-runtime-984fddadede8bff9-ledger-001",
+  "runtime_audit_ref": "runtime-984fddadede8bff9",
+  "data_class": "authored_synthetic",
+  "provider_binding": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "api_key_authentication_used": false,
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com"
+  },
+  "request_contract": {
+    "request_hash": "sha256:818ca84600cfffa50067f0605a4227a25497de902d2ef79aef97651b4e9d0358",
+    "model_input_hash": "sha256:c8d58cd2e19f047de14eb36d828803196959876961b4c232847c9066521633a6",
+    "schema_hash": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+    "program_hash": "sha256:197b76a0a9eacacccddce9355a26841f345adfdc36034c450d2e21330a99350b",
+    "provider_tools": false,
+    "grounding": false,
+    "retrieval": false,
+    "cache_creation": false
+  },
+  "provider_outcome": {
+    "http_status": 200,
+    "status": "completed",
+    "latency_ms": 6039,
+    "finish_reasons": [
+      "STOP"
+    ],
+    "usage": {
+      "prompt_tokens": 4820,
+      "response_tokens": 236,
+      "reasoning_tokens": 1036,
+      "total_tokens": 6092
+    },
+    "provider_text_retained": false,
+    "provider_text_inspected_for_diagnosis": false
+  },
+  "api_typewriter_keys": {
+    "model_authored_field_manifest": [
+      "receptionist_response",
+      "decision_note",
+      "evidence_utterance_indices",
+      "typed_form"
+    ],
+    "broker_owned_field_manifest": [
+      "version_code"
+    ],
+    "receptionist_response": "I can prepare a resize proposal for the requested appointment and duration for staff review. No booking was changed.",
+    "decision_note": "Intent resize: resize appointment.",
+    "evidence_utterance_indices": [
+      0
+    ],
+    "operator_note": "Proposal for review; no booking was changed.",
+    "operator_note_parsed_into_plan": false,
+    "operator_note_product_delivered": false,
+    "raw_model_form_body_recorded": false,
+    "natural_response_parsed_into_form": false
+  },
+  "proofreader": {
+    "disposition": "admit",
+    "admitted_operator_ids": [
+      "prepare_resize_proposal"
+    ],
+    "violations": [],
+    "safe_repairs": [],
+    "wire_safe_repairs": [],
+    "same_packet_seen_by_model_and_proofreader": true,
+    "reviewed_context_revision": 427965765,
+    "command_authority": false
+  },
+  "release": {
+    "atomic_release": true,
+    "human_gate": true,
+    "released_field_manifest": [
+      "$.final_output.api_spine_operation_id",
+      "$.final_output.appointment_ref",
+      "$.final_output.candidate_slot_ids",
+      "$.final_output.duration_minutes",
+      "$.final_output.kind",
+      "$.final_output.patient_ref",
+      "$.final_output.practitioner_ref",
+      "$.final_output.proposal_family",
+      "$.final_output.requires_human_confirmation",
+      "$.final_output.status",
+      "$.final_output.warning_codes",
+      "$.final_output.write_performed"
+    ],
+    "released_values": {
+      "api_spine_operation_id": "proposeAppointmentUpdate",
+      "appointment_ref": "synthetic-appointment-e5604b6f2f100700d01a",
+      "candidate_slot_ids": [],
+      "duration_minutes": 45,
+      "kind": "proposal_candidate",
+      "patient_ref": "synthetic-patient-56dac7d10a72e44e90fe",
+      "practitioner_ref": "synthetic-practitioner-8da554313627d459a651",
+      "proposal_family": "resize",
+      "requires_human_confirmation": true,
+      "status": null,
+      "warning_codes": [
+        "staff_confirmation_required"
+      ],
+      "write_performed": false
+    }
+  },
+  "browser_and_route": {
+    "http_status": 200,
+    "route_call_count": 1,
+    "request_interception_used": false,
+    "external_hosts": [],
+    "exact_appointment_row_clicked": true,
+    "aria_selected_verified_before_submit": true,
+    "selected_appointment_id_present_in_request": true,
+    "selected_appointment_id_retained": false,
+    "rendered_provenance": [
+      "Isolated model",
+      "Proofreader admitted",
+      "1 provider call",
+      "Audit runtime-984fddadede8bff9"
+    ]
+  },
+  "freshness_and_retry": {
+    "freshness": "fresh",
+    "supersession": "current",
+    "provider_calls": 1,
+    "retry_count_within_dialogue": 0,
+    "retry_performed": false,
+    "sequence_stopped_after_first_admitted_result": true,
+    "fallback_performed": false
+  },
+  "cost": {
+    "cumulative_ceiling_usd": 1.0,
+    "predecessor_http_200_estimate_usd": 0.0038049,
+    "preprovider_reservation_carried_forward_usd": 0.02,
+    "current_call_estimate_usd": 0.004626,
+    "cumulative_accounted_usd": 0.0284309,
+    "outstanding_reservation_usd": 0.0,
+    "terminal_success": true,
+    "terminal_hash": "sha256:296efd513189732a90c2c49426b14a30b743b6b34b1d3a1fa9fe1f3ff03f2678"
+  },
+  "audit_chains": {
+    "turn_event_count": 11,
+    "turn_terminal_hash": "sha256:54f1d17830648c58f92b33648953a66d84ad946b932b08efd98cd5005b1ee8e0",
+    "turn_chain_valid": true,
+    "parent_event_count": 4,
+    "parent_terminal_hash": "sha256:1a6d450e1610dd3d4a8c575a6ea4cd3b65caaab04b27e68b39847ce71662eeab",
+    "parent_chain_valid": true,
+    "external_audit_chain_valid": true,
+    "single_use_ledger_status": "consumed",
+    "provider_calls_consumed": 1
+  },
+  "isolation_and_cleanup": {
+    "cell_non_root": true,
+    "cell_read_only": true,
+    "cell_mount_count": 0,
+    "cell_credential_environment_present": false,
+    "cell_network_internal_only": true,
+    "relay_token_mount_exact": true,
+    "provider_environment_forwarded_to_cell": false,
+    "broker_process_absent": true,
+    "cell_container_absent": true,
+    "relay_container_absent": true,
+    "cell_image_absent": true,
+    "relay_image_absent": true,
+    "internal_network_absent": true,
+    "temporary_context_absent": true,
+    "temporary_token_absent": true,
+    "disposable_database_removed": true,
+    "database_truth_unchanged": true,
+    "post_attempt_residue_clear": true
+  },
+  "vertex_audit_control_posture": {
+    "vertex_data_read_audit_enabled": true,
+    "vertex_data_write_audit_enabled": true,
+    "request_response_logging_disabled_or_absent": true,
+    "provider_in_memory_cache_disabled": true,
+    "no_user_managed_service_account_key": true
+  },
+  "explicit_exclusions": {
+    "credential_or_token_recorded": false,
+    "api_key_information_recorded": false,
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "chain_of_thought_recorded": false,
+    "thinking_token_count_only": true,
+    "thought_summary_requested": false,
+    "command_authority": false,
+    "appointment_confirmation": false,
+    "appointment_write": false,
+    "human_or_product_delivery": false
+  },
+  "candid_limit": "The evidence proves one authored-synthetic, proofreader-admitted proposal through the configured and observed Sydney Vertex locational endpoint. It does not prove Australian physical or sovereign processing, general model reliability, production suitability or safety for real patient, health, clinical, product-derived or historical data."
+}

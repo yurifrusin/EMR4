@@ -1,0 +1,35 @@
+{
+  "schema_version": "ariadne.gemini_request_contract_observation.v1",
+  "runtime_attempt_id": "comparative-runtime-attempt-003",
+  "lane_id": "gemini",
+  "model_id": "gemini-3.5-flash",
+  "source_path": "scripts/ariadne_comparative_one_use_broker.mjs",
+  "source_function": "geminiRequest",
+  "observed_before_repair": {
+    "top_level_fields": [
+      "contents",
+      "generationConfig",
+      "store",
+      "systemInstruction"
+    ],
+    "generation_config_fields": [
+      "candidateCount",
+      "maxOutputTokens",
+      "responseJsonSchema",
+      "responseMimeType",
+      "thinkingConfig"
+    ],
+    "candidate_count_value": 1
+  },
+  "attempt_003_audit_observation": {
+    "provider_status": 400,
+    "provider_error_status": "INVALID_ARGUMENT",
+    "provider_error_code": 400,
+    "request_bytes": 18939,
+    "request_sha256": "sha256:0e4467dac289fb044434ab6aca0b97e81ac0308886441a68b375d80fe18cdb8c",
+    "raw_provider_error_message_retained": false
+  },
+  "content_values_recorded": false,
+  "credential_value_recorded": false,
+  "provider_call_performed_by_observation": false
+}

@@ -1,0 +1,219 @@
+{
+  "schema_version": "ariadne.vertex_sydney_adc_restored_external_audit.v1",
+  "audit_result": "ariadne_vertex_sydney_gemini_25_adc_restored_external_audit_pass",
+  "terminal_rehearsal_result": "ariadne_vertex_sydney_gemini_25_cache_control_blocked",
+  "attempt": {
+    "attempt_id": "gemini-25-adc-restored-preflight-001",
+    "status": "control_preflight_closed_no_occupied_attempt",
+    "occupied_call_started": false
+  },
+  "ledger": {
+    "ledger_id": "gemini-25-adc-restored-primary-ledger-001",
+    "status": "planned_not_opened",
+    "durable_rehearsal_ledgers_opened": 0,
+    "temporary_test_ledgers_consumed": 0
+  },
+  "binding": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "api_key_authentication_used": false,
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "automatic_fallback": false
+  },
+  "contract_hashes": {
+    "cell_request_hash": "sha256:0270f808e4f1abc123f8e4b917e340623286e0ba4e6ac0b3ee0ab94a624b7526",
+    "vertex_request_hash": "sha256:6710af194aba6a2731008475e5509fa27ba12c8b58e995e1952faa036ecba61c",
+    "provider_schema_hash": "sha256:8efe86a55b850ea0b9c6e2679ac51f54706e3971ccee488b497ec1ea689a7cdb",
+    "continuation_plan_file_hash": "sha256:60a5f91b6ba54062787432bf0a819891f23da203c80417afa045291199461709",
+    "preflight_evidence_file_hash": "sha256:ccb08ac4cb6f0a1a3eca9682bb8e7979c867dec3522a321e4eb5fa23e34557d2",
+    "residue_evidence_file_hash": "sha256:fc4a2c2e325bd86b8e19a3b76d22cdf01aef460b43d9050310177dc2f1522d2e",
+    "preflight_source_file_hash": "sha256:4fb0ccca4eac8e89a6c6aa1c392b33b8d3ce179680c09037fd680e8593bf6f3b",
+    "preflight_test_file_hash": "sha256:cf85a0c2de419644e43d9d1bb86a8fd03e5246c18f50c6564b02762a133fb873"
+  },
+  "events": [
+    {
+      "sequence": 1,
+      "recorded_at": "2026-07-24T20:21:00Z",
+      "event_type": "continuation_authority_bound",
+      "previous_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "fields": {
+        "continuation_node": "ariadne-vertex-sydney-gemini-25-adc-restored-continuation",
+        "model_id": "gemini-2.5-flash",
+        "project": "bernie-emr4-dev",
+        "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+        "authentication": "keyless_impersonated_service_account_adc",
+        "api_key_authentication_used": false,
+        "location": "australia-southeast1",
+        "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+        "fallback": false
+      },
+      "event_hash": "sha256:17b8e7c9d1b0aabe2a3a46e44f83696eca936a5f1e43c7c328c2650e1c46d792"
+    },
+    {
+      "sequence": 2,
+      "recorded_at": "2026-07-24T20:22:00Z",
+      "event_type": "five_source_rehydration_verified",
+      "previous_hash": "sha256:17b8e7c9d1b0aabe2a3a46e44f83696eca936a5f1e43c7c328c2650e1c46d792",
+      "fields": {
+        "receipt_status": "passed",
+        "continuity_graph_revision": 35,
+        "compass_map_revision": 22,
+        "rendered_compass_exact": true,
+        "provider_call_open": false
+      },
+      "event_hash": "sha256:fcca50583927965ea445fe8b1055238467817690e6c6d42133f8f3962ec2b797"
+    },
+    {
+      "sequence": 3,
+      "recorded_at": "2026-07-24T20:23:00Z",
+      "event_type": "preflight_reader_defect_detected",
+      "previous_hash": "sha256:fcca50583927965ea445fe8b1055238467817690e6c6d42133f8f3962ec2b797",
+      "fields": {
+        "reason_code": "model_catalogue_control_read_failed",
+        "cause_class": "repository_local_read_only_quota_project_argument_missing",
+        "provider_call": false,
+        "external_state_changed": false
+      },
+      "event_hash": "sha256:bce0a8eb10a1404bbf3e244605a9daa8365279d117a8d3b0b485b53d64723e8b"
+    },
+    {
+      "sequence": 4,
+      "recorded_at": "2026-07-24T20:24:00Z",
+      "event_type": "preflight_reader_repaired",
+      "previous_hash": "sha256:bce0a8eb10a1404bbf3e244605a9daa8365279d117a8d3b0b485b53d64723e8b",
+      "fields": {
+        "repair": "bind_single_model_catalogue_read_to_exact_target_quota_project",
+        "focused_tests_passed": 7,
+        "external_configuration_changed": false,
+        "provider_prompt_transmitted": false
+      },
+      "event_hash": "sha256:a2a96dd6f8b67c21eb460255c01a5082cede65a5fb262dfedd5bdf59028b6880"
+    },
+    {
+      "sequence": 5,
+      "recorded_at": "2026-07-24T20:25:00Z",
+      "event_type": "adc_and_cloud_controls_observed",
+      "previous_hash": "sha256:a2a96dd6f8b67c21eb460255c01a5082cede65a5fb262dfedd5bdf59028b6880",
+      "fields": {
+        "credentials_are_impersonated": true,
+        "adc_project_exact": true,
+        "target_service_account_exact": true,
+        "cloud_platform_scope_exact": true,
+        "noninteractive_refresh_passed": true,
+        "billing_enabled": true,
+        "vertex_ai_api_enabled": true,
+        "prediction_only_custom_role_exact": true,
+        "prediction_only_binding_exact": true,
+        "required_prediction_permission_exact": true,
+        "vertex_data_read_audit_enabled": true,
+        "vertex_data_write_audit_enabled": true,
+        "request_response_logging_disabled_or_absent": true,
+        "no_user_managed_service_account_key": true,
+        "model_present_in_publisher_catalogue": true,
+        "regional_endpoint_exact": true,
+        "automatic_fallback_disabled": true
+      },
+      "event_hash": "sha256:3f0f0e999dca1132e6c22b674be9d8990b3237553be081e1efca09cbef88fa23"
+    },
+    {
+      "sequence": 6,
+      "recorded_at": "2026-07-24T20:26:00Z",
+      "event_type": "cache_gate_failed_closed",
+      "previous_hash": "sha256:3f0f0e999dca1132e6c22b674be9d8990b3237553be081e1efca09cbef88fa23",
+      "fields": {
+        "provider_in_memory_cache_disabled": false,
+        "reason_code": "provider_in_memory_cache_disabled_not_verified",
+        "occupied_calls": 0,
+        "retries": 0,
+        "external_state_changed": false
+      },
+      "event_hash": "sha256:2d03edf5084a51ff13082c185f2bad1df827e21c820f1484f0e2150fe4e3418d"
+    },
+    {
+      "sequence": 7,
+      "recorded_at": "2026-07-24T20:27:00Z",
+      "event_type": "successor_gates_closed",
+      "previous_hash": "sha256:2d03edf5084a51ff13082c185f2bad1df827e21c820f1484f0e2150fe4e3418d",
+      "fields": {
+        "real_isolation_opened": false,
+        "occupied_call_opened": false,
+        "proofreader_opened": false,
+        "single_use_rehearsal_ledgers_opened": 0,
+        "model_call_cost_usd": 0
+      },
+      "event_hash": "sha256:22f7c2843d461a08c61ec965650261fbc7c1eef3cbd9cedc11500fdb04e17b9d"
+    },
+    {
+      "sequence": 8,
+      "recorded_at": "2026-07-24T20:28:00Z",
+      "event_type": "residue_verified",
+      "previous_hash": "sha256:22f7c2843d461a08c61ec965650261fbc7c1eef3cbd9cedc11500fdb04e17b9d",
+      "fields": {
+        "task_containers": 0,
+        "task_networks": 0,
+        "task_images": 0,
+        "task_broker_processes": 0,
+        "task_temporary_credential_files": 0
+      },
+      "event_hash": "sha256:19f61ad6bae0bf239e11d1b0b345325fe291f4c0516acecaedfb27ef1b2f6d74"
+    }
+  ],
+  "chain_head": "sha256:19f61ad6bae0bf239e11d1b0b345325fe291f4c0516acecaedfb27ef1b2f6d74",
+  "provider_result": {
+    "http_status": null,
+    "latency_ms": null,
+    "token_usage": null,
+    "provider_call_made": false
+  },
+  "proofreader": {
+    "disposition": "not_reached",
+    "safe_repairs": [],
+    "released_field_manifest": [],
+    "released_values": null,
+    "freshness": "not_applicable",
+    "supersession": "not_applicable",
+    "human_gate": false,
+    "edge_aborted": false
+  },
+  "vertex_control_posture": {
+    "usable_exact_impersonated_adc_proved": true,
+    "prediction_role_and_binding_verified": true,
+    "vertex_data_access_audit_verified": true,
+    "request_response_logging_disabled_or_absent_verified": true,
+    "provider_in_memory_cache_disabled_verified": false,
+    "no_user_managed_service_account_key_verified": true,
+    "regional_model_catalogue_presence_verified": true,
+    "regional_endpoint_exact": true,
+    "automatic_fallback_disabled": true
+  },
+  "cleanup": {
+    "task_containers": 0,
+    "task_networks": 0,
+    "task_images": 0,
+    "task_broker_processes": 0,
+    "task_temporary_credential_files": 0
+  },
+  "explicit_exclusions": [
+    "credentials",
+    "access_tokens",
+    "refresh_tokens",
+    "api_key_information",
+    "raw_authentication_responses",
+    "raw_cloud_control_responses",
+    "billing_identifiers",
+    "raw_prompts",
+    "raw_provider_responses",
+    "provider_free_form_messages",
+    "hidden_reasoning",
+    "chain_of_thought",
+    "rejected_draft_payloads",
+    "product_or_database_data",
+    "patient_or_health_information"
+  ],
+  "required_intervention": "An externally authorised operator determines the current Vertex provider-managed in-memory cache state for bernie-emr4-dev and establishes explicit disableCache: true if needed, without changing any other frozen boundary; fresh five-source rehydration and a complete repeated Tranche 3 preflight then follow.",
+  "claim_limit": "This audit proves the exact restored impersonated ADC refreshed, the recorded controls passed except cache disablement, the cache gate failed closed, no occupied call or rehearsal ledger opened and task-scoped residue is zero. It does not prove real isolation, provider acceptance, inference, a typed release, Australian physical processing or sovereign processing."
+}

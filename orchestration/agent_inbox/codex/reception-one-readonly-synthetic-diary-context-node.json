@@ -1,0 +1,112 @@
+{
+  "id": "reception-one-readonly-synthetic-diary-context",
+  "title": "Reception One Read-only Synthetic Diary Context",
+  "kind": "implementation",
+  "status": "accepted",
+  "created_at": "2026-07-30T13:01:36Z",
+  "updated_at": "2026-07-30T13:01:36Z",
+  "relationships": [
+    {
+      "node_id": "reception-one-receptionist-first-v69-occupied-holdout-result",
+      "relation": "builds_on"
+    }
+  ],
+  "coordinates": {
+    "thread_id": null,
+    "git_ref": "codex/ariadne-terra-gemini-comparative-rehearsal",
+    "source_head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "worktree_role": "integration"
+  },
+  "evidence": {
+    "acceptances": [
+      "orchestration/agent_inbox/codex/reception-one-readonly-synthetic-diary-context-provider-free-sol-acceptance.md"
+    ],
+    "closeouts": [
+      "docs/bernie-reception-one-receptionist-first-v69-closeout.md"
+    ],
+    "findings": [
+      "orchestration/continuity/reception-one-readonly-synthetic-diary-context/provider-blocked-diagnostic.json",
+      "orchestration/continuity/reception-one-readonly-synthetic-diary-context/provider-blocked-repair-evidence.json"
+    ],
+    "plans": [
+      "docs/bernie-reception-one-v69-holdout-readonly-context-authority.md",
+      "docs/bernie-reception-one-readonly-synthetic-diary-context-plan.md",
+      "docs/security/bernie-reception-one-readonly-synthetic-diary-context-threat-model-delta.md",
+      "orchestration/continuity/reception-one-readonly-synthetic-diary-context/occupied-authority.json"
+    ],
+    "receipts": [
+      "orchestration/agent_inbox/codex/reception-one-v69-holdout-context-preplan-receipt.json"
+    ],
+    "tests": [
+      "orchestration/continuity/reception-one-readonly-synthetic-diary-context/context-frame.json",
+      "orchestration/continuity/reception-one-readonly-synthetic-diary-context/provider-blocked-evidence.json",
+      "orchestration/continuity/reception-one-readonly-synthetic-diary-context/database-cleanup-evidence.json",
+      "orchestration/continuity/reception-one-readonly-synthetic-diary-context/real-isolation-evidence.json",
+      "tests/test_reception_one_readonly_synthetic_context_bridge.py",
+      "tests/test_reception_one_product_context_proposal_runtime.py",
+      "tests/test_reception_one_extended_proposal_runtime.py",
+      "tests/test_api_spine_artifacts.py"
+    ]
+  },
+  "authority": {
+    "authorized_openings": [
+      {
+        "boundary": "container-runtime",
+        "scope": "Credential-free isolated work cell receiving only one frozen, authored-synthetic request-local turn packet.",
+        "source": "docs/bernie-reception-one-v69-holdout-readonly-context-authority.md"
+      },
+      {
+        "boundary": "model-runtime",
+        "scope": "Frozen v6.8 interpretation and proofreader lane over one trusted-backend-built synthetic context frame.",
+        "source": "docs/bernie-reception-one-readonly-synthetic-diary-context-plan.md"
+      },
+      {
+        "boundary": "provider-call",
+        "scope": "One primary and one terminal correction call within USD 1 through the exact Bernie Sydney lane after all gates pass.",
+        "source": "orchestration/continuity/reception-one-readonly-synthetic-diary-context/occupied-authority.json"
+      }
+    ],
+    "notes": [
+      "The trusted backend alone performs practice-scoped reads and retains the opaque-handle map.",
+      "The cell receives no database, product or credential access.",
+      "Real/product data, writes, Word, voice, production, deployment and release remain closed."
+    ]
+  },
+  "contract_evidence": [
+    {
+      "contract_id": "combined-patient-practitioner-time-duration-intent",
+      "status": "satisfied",
+      "evidence": [
+        "orchestration/continuity/reception-one-readonly-synthetic-diary-context/provider-blocked-evidence.json",
+        "docs/bernie-reception-one-readonly-synthetic-diary-context-plan.md"
+      ],
+      "note": "The trusted backend frame resolves the selected synthetic patient, practitioner, appointment and requested 45-minute duration; the frozen proofreader admits the exact resize proposal."
+    },
+    {
+      "contract_id": "committed-reschedule-availability-reconciliation",
+      "status": "satisfied",
+      "evidence": [
+        "docs/bernie-reception-one-receptionist-first-v69-closeout.md",
+        "orchestration/continuity/reception-one-readonly-synthetic-diary-context/provider-blocked-evidence.json"
+      ],
+      "note": "All database truth surfaces remain unchanged and the bridge releases only a proposal requiring human confirmation."
+    }
+  ],
+  "decisions": [
+    {
+      "id": "accept-readonly-synthetic-context-readiness-148",
+      "status": "accepted",
+      "summary": "Accept the provider-free read-only synthetic context bridge and permit its separately gated occupied call.",
+      "source": "orchestration/agent_inbox/codex/reception-one-readonly-synthetic-diary-context-provider-free-sol-acceptance.md"
+    }
+  ],
+  "unresolved_gates": [
+    "The trusted-backend-built frame has not yet completed an occupied Sydney call.",
+    "Real/product data, writes, Word, voice, production, deployment and release remain closed."
+  ],
+  "claim_scope": [
+    "The provider-free trusted-backend frame, deterministic proofreader, database cleanup and real isolation pass.",
+    "No occupied bridge result exists yet.",
+    "The frozen authored-synthetic evidence clock is not an operational wall-clock freshness proof."
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "gemini_repaired_request_fresh_attempt_004",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md sections 2-3 and Current Baton",
+    "current_authority_allocation": "AGENTS.md section 4 plus Yuri's explicit instruction to run Gemini again",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-terra-gemini-comparative-rehearsal-plan.md",
+      "docs/ariadne-terra-gemini-comparative-rehearsal-design.md",
+      "docs/ariadne-terra-gemini-comparative-rehearsal-attempt3-audit-plan.md",
+      "docs/ariadne-terra-gemini-comparative-rehearsal-attempt3-audit-closeout.md",
+      "docs/ariadne-gemini-provider-blocked-request-contract-diagnostic-plan.md",
+      "docs/ariadne-gemini-provider-blocked-request-contract-diagnostic-closeout.md",
+      "orchestration/continuity/ariadne-terra-gemini-comparison/external-audit-track-policy.json"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5-6: protected holdouts, PII, historical Diary data, product/database/runtime surfaces and every provider except one authored-synthetic Gemini request remain closed",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_from_authorised_ariadne_tranches": true,
+      "unrelated_user_changes_preserved": true
+    }
+  },
+  "live_authority": {
+    "gemini_attempt_004_authorised": true,
+    "authored_synthetic_data_only": true,
+    "maximum_gemini_provider_calls": 1,
+    "gemini_credential_presence_and_mount_authorised": true,
+    "sealed_synthetic_prompt_transmission_authorised": true,
+    "one_disposable_container_lifecycle_authorised": true,
+    "retry_or_fallback_authorised": false,
+    "terra_or_other_provider_calls_authorised": false,
+    "australian_processing_claim_authorised": false,
+    "postgresql_authorised": false,
+    "product_or_runtime_authority": false,
+    "pii_or_protected_data_authorised": false,
+    "worker_dispatch_selected": false,
+    "git_integration_authorised": false
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,70 @@
+{
+  "schema_version": "reception.one.shared_typed_language.runtime_policy.v1",
+  "policy_id": "reception-one-shared-typed-plan-vertex-sydney-v1",
+  "status": "frozen_preimplementation",
+  "data_class": "authored_synthetic",
+  "effect_ceiling": "proposal_only",
+  "plan_contract": "reception.one.bureau.plan-program.v2",
+  "operator_note": {
+    "purpose": "audit_and_troubleshooting_only",
+    "maximum_utf8_bytes": 320,
+    "maximum_lines": 1,
+    "independently_proofread": true,
+    "parsed_into_plan": false,
+    "product_delivered": false,
+    "retained_only_if_admitted": true,
+    "rejected_text_discarded": true,
+    "rejected_text_hash_retained": true,
+    "raw_provider_response_retained": false,
+    "hidden_reasoning_retained": false
+  },
+  "typed_program": {
+    "goal_codes": 7,
+    "operator_codes": 14,
+    "external_sources": "request_local_binding_table",
+    "step_output_encoding": "1000_plus_step_index_times_16_plus_output_index",
+    "optional_input_sentinel": -1,
+    "free_form_identifiers": false,
+    "semantic_repairs": false
+  },
+  "provider": {
+    "name": "google_cloud_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "global_endpoint": false,
+    "automatic_fallback": false,
+    "api_key_authentication": false,
+    "provider_tools": false,
+    "grounding": false,
+    "retrieval": false,
+    "explicit_cache": false,
+    "request_response_logging": false
+  },
+  "occupied_gate": {
+    "primary_call_ceiling": 1,
+    "deterministic_request_contract_retry_ceiling": 1,
+    "absolute_call_ceiling": 2,
+    "incremental_cost_ceiling_usd": 1,
+    "stop_after_first_admitted_result": true
+  },
+  "closed": [
+    "real_data",
+    "product_derived_data",
+    "patient_or_health_data",
+    "clinical_data",
+    "historical_diary_data",
+    "appointment_confirmation",
+    "appointment_write",
+    "product_delivery",
+    "word_wiring",
+    "voice",
+    "production",
+    "deployment",
+    "release",
+    "provider_or_regional_fallback"
+  ]
+}

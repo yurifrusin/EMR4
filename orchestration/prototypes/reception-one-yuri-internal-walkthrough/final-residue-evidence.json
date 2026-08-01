@@ -1,0 +1,14 @@
+{
+  "schema_version": "reception_one.yuri_internal_walkthrough_residue.v1",
+  "observed_at": "2026-07-28T23:11:22Z",
+  "owned_database": "gp_pms_reception_one_combined_scope_9c41b7e2_20260721",
+  "owned_database_present": false,
+  "task_port_listeners_present": false,
+  "owned_walkthrough_processes_present": false,
+  "owned_containers_present": false,
+  "owned_networks_present": false,
+  "owned_images_present": false,
+  "temporary_static_qa_server_present": false,
+  "provider_used": false,
+  "status": "passed"
+}

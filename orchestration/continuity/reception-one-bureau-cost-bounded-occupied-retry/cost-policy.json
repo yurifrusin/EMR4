@@ -1,0 +1,41 @@
+{
+  "schema_version": "reception.one.vertex_cost_policy.v1",
+  "currency": "USD",
+  "pricing_source": {
+    "publisher": "Google Cloud",
+    "retrieved_at": "2026-07-31",
+    "url": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing?hl=en",
+    "service_class": "Gemini 2.5 Flash Standard",
+    "only_http_200_token_billed": true
+  },
+  "rates_per_million_tokens": {
+    "input_text_image_video": 0.3,
+    "output_response_and_reasoning": 2.5
+  },
+  "cumulative_ceiling": 1.0,
+  "pre_call_reservation": 0.02,
+  "bounded_request_maximums": {
+    "input_tokens": 16384,
+    "output_response_and_reasoning_tokens": 3072,
+    "computed_maximum_cost": 0.0125952
+  },
+  "predecessor_accounting": {
+    "attempt_id": "reception-one-receptionist-first-v68-eval-runtime-65d49792ef59742b-turn-001",
+    "http_status": 200,
+    "input_tokens": 4633,
+    "response_tokens": 147,
+    "reasoning_tokens": 819,
+    "output_response_and_reasoning_tokens": 966,
+    "estimated_cost": 0.0038049,
+    "source": "orchestration/continuity/reception-one-bureau-live-isolated-planner-evaluation/occupied-final-audit-analysis.json"
+  },
+  "fail_closed_conditions": [
+    "missing_or_malformed_usage",
+    "negative_or_non_integer_token_count",
+    "observed_input_tokens_above_16384",
+    "observed_output_tokens_above_3072",
+    "reservation_would_cross_cumulative_ceiling",
+    "accounted_cost_at_or_above_cumulative_ceiling",
+    "pricing_source_or_rate_ambiguity"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": "raisa.browser_word_online_evidence.v1",
+  "observed_at": "2026-07-31T19:32:27.7506405+10:00",
+  "result": "intervention_required",
+  "public_browser_gate": {
+    "result": "pass",
+    "hostname": "raisa-office-web-dev-nnbntbx5yq-ts.a.run.app",
+    "companion_present": true,
+    "companion_visible": true,
+    "login_surface_present": false,
+    "request_control_present": true,
+    "prepare_control_present": true,
+    "console_warning_count": 0,
+    "console_error_count": 0,
+    "declared_external_resource_origins": [
+      "https://appsforoffice.microsoft.com"
+    ]
+  },
+  "word_online_gate": {
+    "result": "blocked_before_manifest_transmission",
+    "host_class": "signed_in_personal_word_online_blank_document",
+    "task_specific_manifest_selected": false,
+    "manifest_uploaded": false,
+    "add_in_loaded": false,
+    "synthetic_request_submitted": false,
+    "office_dialog_opened": false,
+    "generic_summary_released": false,
+    "blocker_code": "chrome_extension_file_url_access_required",
+    "blocker_description": "Word Online exposed its developer Upload Add-in dialog and one direct file input, but Chrome did not expose the file chooser to the controlled session. The documented Chrome extension file-upload prerequisite must be enabled by Yuri before retry."
+  },
+  "privacy_and_authority": {
+    "document_body_read": false,
+    "document_body_written": false,
+    "raw_synthetic_request_persisted": false,
+    "account_identifier_persisted": false,
+    "tenant_identifier_persisted": false,
+    "document_identifier_persisted": false,
+    "provider_calls": 0,
+    "backend_calls": 0,
+    "database_reads": 0,
+    "database_writes": 0,
+    "commands_or_confirmations": 0
+  },
+  "next_gate": {
+    "required_user_action": "Enable Allow access to file URLs for the ChatGPT Chrome Extension, then return to the preserved blank Word Online document.",
+    "cloud_mutation_required": false,
+    "iam_change_required": false,
+    "manifest_change_required": false,
+    "service_redeployment_required": false
+  }
+}

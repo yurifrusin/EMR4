@@ -22,7 +22,7 @@ except ModuleNotFoundError:  # Direct execution from the scripts directory.
 
 SCHEMA_VERSION = "ariadne.compass.v1"
 REPORT_VERSION = "ariadne.compass_report.v1"
-HORIZON_STATUSES = {"candidate", "deferred", "blocked"}
+HORIZON_STATUSES = {"active", "candidate", "deferred", "blocked"}
 
 
 class CompassError(ValueError):

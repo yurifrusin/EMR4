@@ -1,0 +1,46 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "status": "passed",
+  "continuation_event": "provider_contract_diagnostic_hardening",
+  "planned_action": "repository_local_provider_free_diagnostic_repair",
+  "authority_boundary": "no_provider_call_no_retry_no_container_no_product_or_command_authority",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md sections 2-3 and Current Baton",
+    "current_authority_allocation": "AGENTS.md section 4 plus Yuri's provider-free diagnostic repair instruction",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-terra-gemini-comparative-rehearsal-plan.md",
+      "docs/ariadne-terra-gemini-comparative-rehearsal-design.md",
+      "docs/ariadne-terra-gemini-comparative-rehearsal-attempt2-plan.md",
+      "docs/ariadne-terra-gemini-comparative-rehearsal-attempt2-closeout.md",
+      "docs/security/ariadne-terra-gemini-comparative-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/ariadne-terra-gemini-comparison/attempt-002-comparison-evidence.json",
+      "orchestration/continuity/ariadne-terra-gemini-comparison/attempt-002-failure-analysis.json",
+      "docs/ariadne-terra-gemini-provider-contract-diagnostic-hardening-plan.md"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5-6",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "unrelated_user_changes_preserved": true
+    }
+  },
+  "attempt_002": {
+    "terra_ledger_state": "consumed",
+    "gemini_ledger_state": "consumed",
+    "retry_authorised": false,
+    "provider_call_authorised": false
+  },
+  "reasons": []
+}

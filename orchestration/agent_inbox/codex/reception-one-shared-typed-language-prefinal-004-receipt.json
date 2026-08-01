@@ -1,0 +1,69 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "continuation_event": "pre_final_occupied_call_after_zero_call_broker_repair",
+  "planned_action": "make_the_second_and_final_actual_authored_synthetic_shared_plan_program_call_through_the_exact_bernie_sydney_vertex_lane",
+  "status": "passed",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "authority_boundary": "second_and_final_actual_call_shared_plan_program_v2_model_input_v3_closed_proofreader_feedback_and_bounded_operator_note_gemini_2_5_flash_bernie_keyless_adc_australia_southeast1_authored_synthetic_proposal_only_no_fallback_write_or_product_delivery",
+  "worker_dispatch_permitted": false,
+  "source_evidence": {
+    "live_handover_current_baton": "Continuity graph revision 81 and Compass map revision 68 bind lifecycle 003's consumed zero-call ledger, exact broker reconstruction repair, repeated complete gates and final-call admission. Historical nodes and consumed ledgers remain unchanged.",
+    "current_authority_allocation": "Yuri authorised the shared typed language, bounded audit-only speaking channel and continued exact-lane diagnose-repair-rerun work. Lifecycles 001 and 003 consumed zero calls; lifecycle 002 consumed one actual call and released nothing. Exactly one actual call remains under the absolute two-call and USD 1 ceilings.",
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-shared-typed-language-plan.md",
+      "docs/bernie-reception-one-shared-typed-language-proofreader-feedback-repair.md",
+      "orchestration/agent_inbox/codex/reception-one-shared-typed-language-plan-sol-acceptance.md",
+      "orchestration/agent_inbox/codex/reception-one-shared-typed-language-occupied-002-independent-audit.md",
+      "orchestration/agent_inbox/codex/reception-one-shared-typed-language-occupied-003-independent-audit.md",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-002-external-audit.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-002-proofreader-feedback.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-003-zero-call-diagnostic.json",
+      "orchestration/continuity/reception-one-shared-typed-language/provider-blocked-evidence.json",
+      "orchestration/continuity/reception-one-shared-typed-language/provider-free-isolation-evidence.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-004-preflight-evidence.json"
+    ],
+    "protected_evidence_boundaries": "Only authored-synthetic text enters the provider lane. The cell receives no credentials. The broker alone uses exact impersonated ADC and the Sydney data-plane endpoint. Feedback contains only closed codes and a hash. The separately proofread note and integer-only typed form are audit evidence, never command inputs or product delivery. No raw prompt, raw response, rejected draft, credential, token, API-key information or hidden reasoning is retained.",
+    "git_refs_and_worktree": {
+      "checked_at": "2026-07-30T01:11:54Z",
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_entry_count": 346,
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true,
+      "continuity_graph_revision": 81,
+      "compass_map_revision": 68,
+      "compass_source_graph_revision": 81,
+      "rendered_compass_exact": true
+    }
+  },
+  "gates": {
+    "occupied_003_zero_call_ledger_closed": "passed",
+    "feedback_bound_broker_reconstruction_regression": "passed",
+    "focused_and_legacy_runtime_tests": "passed",
+    "api_spine_tests": "passed",
+    "repository_only_ariadne_verifier": "passed",
+    "python_compile_and_static_checks": "passed",
+    "json_and_schema_validation": "passed",
+    "git_diff_check": "passed",
+    "continuity_validation": "passed",
+    "compass_validation_and_render_binding": "passed",
+    "provider_blocked_contract": "passed",
+    "provider_free_real_isolation": "passed",
+    "fresh_exact_adc_and_cloud_controls": "passed",
+    "actual_provider_calls_already_made_in_this_descendant": 1,
+    "actual_provider_calls_remaining": 1,
+    "fresh_single_use_ledger_required": true
+  }
+}

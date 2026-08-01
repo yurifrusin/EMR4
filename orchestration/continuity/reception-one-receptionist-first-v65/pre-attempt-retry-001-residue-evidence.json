@@ -1,0 +1,18 @@
+{
+  "schema_version": "reception.one.receptionist_first_v65.pre_attempt_residue.v1",
+  "recorded_at": "2026-07-30T10:40:23Z",
+  "result": "reception_one_receptionist_first_v65_retry_001_pre_attempt_residue_clear",
+  "predecessor_failure": "orchestration/continuity/reception-one-receptionist-first-v65/precall-failure-001-evidence.json",
+  "containers_present": false,
+  "container_count": 0,
+  "networks_present": false,
+  "network_count": 0,
+  "images_present": false,
+  "image_count": 0,
+  "broker_or_cell_processes_present": false,
+  "broker_or_cell_process_count": 0,
+  "occupied_cohort_output_present": false,
+  "case_directories_present": false,
+  "credential_material_inspected": false,
+  "api_key_information_observed_or_recorded": false
+}

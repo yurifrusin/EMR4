@@ -1,0 +1,35 @@
+{
+  "boundary": {
+    "credential_reads_performed": 0,
+    "external_state_changed": false,
+    "network_access_performed": false,
+    "provider_calls_performed": 0,
+    "retry_authorised": false,
+    "retry_performed": false
+  },
+  "bounded_provider_error": {
+    "discarded_raw_error_hash": "sha256:fabc0a7ccfb26a8c3a8f07296a948dff603a8423e976704fc1ff9c25672b4fa4",
+    "field_violation_paths": [],
+    "http_status": 400,
+    "normalized_status": "INVALID_ARGUMENT",
+    "provider_error_code": 400,
+    "sanitized_message": "The specified schema produces a constraint that has too many states for serving.  Typical causes of this error are schemas with lots of text (for example, very long property or enum names), schemas with long array length limits (especially when nested), or schemas using complex value matchers (for example, integers or numbers with minimum/maximum bounds or strings with complex formats like date-time)"
+  },
+  "diagnosis": "The provider explicitly rejected the former deeply nested structured-output schema because its constraint generated too many serving states.",
+  "historical_attempt_id": "reception-one-model-text-occupied-001",
+  "historical_request_hash": "sha256:d9e7ac78e23e1187a4ed4f47e62b6d0b671793f0b63cfa3a5cedf86d44ced6c7",
+  "historical_schema_hash": "sha256:53ca81e8d9e75dce9732c9de6678da73e9695533dcfc8a482766945966a47bbd",
+  "repository_local_repair": {
+    "array_schema_count": 1,
+    "decoded_candidate_schema_unchanged": true,
+    "deterministic_proofreader_unchanged": true,
+    "enum_keyword_count": 0,
+    "local_wire_schema": "orchestration/continuity/reception-one-bureau-model-text-lane/provider-wire-response.schema.json",
+    "nested_object_items": false,
+    "new_schema_hash": "sha256:d5b9cceeef961dca7f8e035f8e95b8f7531c00b52736a9eff7257cefbee85f87",
+    "provider_model_project_identity_region_unchanged": true,
+    "wire_contract": "goal plus an array of compact typed plan-line strings"
+  },
+  "result": "reception_one_bureau_model_text_schema_state_diagnostic_pass",
+  "schema_version": "reception.one.bureau.model_text_provider_blocked_diagnostic.v1"
+}

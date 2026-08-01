@@ -1,0 +1,36 @@
+{
+  "policy_version": "reception.one.provider-blocked-policy.v1",
+  "evidence_mode": "provider_blocked_repository_contract",
+  "execution_enabled": false,
+  "provider_call_count": 0,
+  "credentials_requested": false,
+  "network_requested": false,
+  "raw_prompt_persisted": false,
+  "raw_response_persisted": false,
+  "product_delivery_enabled": false,
+  "provider_runtime_imports_allowed": false,
+  "future_lane_reference_only": {
+    "provider": "google_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication_class": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint": "https://australia-southeast1-aiplatform.googleapis.com",
+    "data_class": "authored_synthetic",
+    "isolation": "bounded_cognitive_work_cell",
+    "egress": "deterministic_proofreader_only",
+    "audit": "external_hash_chained_audit",
+    "provider_fallback": false,
+    "regional_fallback": false,
+    "command_authority": false
+  },
+  "fresh_authority_required_for": [
+    "occupied_provider_call",
+    "credential_preflight",
+    "cloud_control_read",
+    "provider_network_access",
+    "container_with_broker_credentials",
+    "product_delivery"
+  ]
+}

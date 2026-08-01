@@ -1,0 +1,52 @@
+{
+  "schema_version": "reception.one.preprinted_form_v5.occupied_authority.v1",
+  "decision": "authorised_by_yuri",
+  "authority_granted": true,
+  "executable_after_all_frozen_gates": true,
+  "recorded_at": "2026-07-30T03:32:49Z",
+  "authorisation_source": [
+    "Yuri: Yes you are right. Let's carry on then as you recommend, and look at training methods once we see how well it actually does fill in pre-printed forms, if any kind of tuning is in fact needed, starting at the prompt-context level.",
+    "docs/bernie-reception-one-preprinted-form-v5-plan.md",
+    "orchestration/agent_inbox/codex/reception-one-preprinted-form-v5-rehydration-receipt.json"
+  ],
+  "purpose": "measure_an_untaught_gemini_2_5_flash_baseline_filling_only_the_judgement_bearing_blanks_of_a_broker_versioned_planprogram_form",
+  "requested_exact_boundary": {
+    "provider": "google_cloud_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "data_class": "authored_synthetic",
+    "isolation": "credential_free_work_cell_with_one_use_host_broker",
+    "dialogue_protocol": "reception.one.bureau.preprinted-form.v5",
+    "model_response_contract": "operator_note_goal_code_and_steps_only",
+    "broker_owned_fields": {
+      "version_code": 3
+    },
+    "proofreader": "unchanged_form_compiler_semantic_freshness_authority_and_note_gate",
+    "baseline_teaching": "none",
+    "audit": "per_turn_and_parent_hash_chains_without_raw_prompt_response_credentials_rejected_note_or_hidden_reasoning",
+    "cost_ceiling_usd": 1,
+    "occupied_call_ceiling": 2,
+    "primary_call_ceiling": 1,
+    "correction_turn_ceiling": 1,
+    "request_contract_repair_competes_for_second_call": true,
+    "third_call": false,
+    "fallback": false,
+    "automatic_regional_fallback": false,
+    "global_endpoint": false,
+    "api_key_authentication": false,
+    "provider_tools": false,
+    "function_calling": false,
+    "grounding": false,
+    "retrieval": false,
+    "cache_creation": false,
+    "database_access": false,
+    "product_delivery": false,
+    "appointment_write_authority": false
+  },
+  "stop_after_first_admitted_result": true,
+  "does_not_revise_historical_nodes": true
+}

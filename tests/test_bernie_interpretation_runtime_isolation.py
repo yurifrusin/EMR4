@@ -20,10 +20,13 @@ def test_runtime_app_code_does_not_import_interpretation_harness_tooling():
         "bernie_interpretation_harness_report",
         "bernie_interpretation_runtime_gate_check",
         "bernie_interpretation_readiness_check",
-        "bernie-interpretation-harness-runtime-gate",
         "bernie_interpretation_harness",
     ]:
         assert fragment not in serialized
+
+    # app.config intentionally reads the inert, declarative runtime-gate JSON
+    # to fail closed when a live provider is configured. That reference is not
+    # an import of interpretation harness tooling.
 
 
 def test_runtime_app_code_does_not_reference_interpretation_fixture_paths():

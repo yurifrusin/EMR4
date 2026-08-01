@@ -1,0 +1,263 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/clinician-one-document-context-response.schema.json",
+  "title": "Clinician One read-only document-context response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "request_id",
+    "status",
+    "disposition",
+    "reason_code",
+    "context_frame",
+    "audit"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "emr4.clinician-one-document-context-response.v1"
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^clinician-context-[a-z0-9-]{8,80}$"
+    },
+    "status": {
+      "enum": [
+        "admitted",
+        "blocked"
+      ]
+    },
+    "disposition": {
+      "enum": [
+        "context_frame_ready",
+        "edge_aborted"
+      ]
+    },
+    "reason_code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "invalid_request",
+        "grant_denied",
+        "host_not_ready",
+        "host_not_supported",
+        "already_consumed",
+        "selection_empty",
+        "selection_too_large",
+        "selection_too_many_lines",
+        "selection_read_failed"
+      ]
+    },
+    "context_frame": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/contextFrame"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "audit": {
+      "$ref": "#/$defs/audit"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "admitted"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "disposition": {
+            "const": "context_frame_ready"
+          },
+          "reason_code": {
+            "const": null
+          },
+          "context_frame": {
+            "$ref": "#/$defs/contextFrame"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "disposition": {
+            "const": "edge_aborted"
+          },
+          "reason_code": {
+            "type": "string"
+          },
+          "context_frame": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "contextFrame": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "frame_type",
+        "authority_label",
+        "source_scope",
+        "source_label",
+        "data_classification",
+        "text",
+        "character_count",
+        "line_count",
+        "truncated",
+        "host_kind",
+        "platform",
+        "single_use",
+        "authority"
+      ],
+      "properties": {
+        "frame_type": {
+          "const": "current_consult_note"
+        },
+        "authority_label": {
+          "const": "staff_selected"
+        },
+        "source_scope": {
+          "const": "active_document_selection"
+        },
+        "source_label": {
+          "const": "word_current_selection"
+        },
+        "data_classification": {
+          "const": "authored_synthetic"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "character_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1200
+        },
+        "line_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 40
+        },
+        "truncated": {
+          "const": false
+        },
+        "host_kind": {
+          "enum": [
+            "desktop",
+            "web"
+          ]
+        },
+        "platform": {
+          "enum": [
+            "desktop_windows",
+            "desktop_mac",
+            "word_online"
+          ]
+        },
+        "single_use": {
+          "const": true
+        },
+        "authority": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "diagnostic",
+            "prescribing",
+            "clinical_finalization",
+            "patient_context",
+            "document_write",
+            "provider_invocation",
+            "network_access",
+            "command",
+            "write"
+          ],
+          "properties": {
+            "diagnostic": {
+              "const": false
+            },
+            "prescribing": {
+              "const": false
+            },
+            "clinical_finalization": {
+              "const": false
+            },
+            "patient_context": {
+              "const": false
+            },
+            "document_write": {
+              "const": false
+            },
+            "provider_invocation": {
+              "const": false
+            },
+            "network_access": {
+              "const": false
+            },
+            "command": {
+              "const": false
+            },
+            "write": {
+              "const": false
+            }
+          }
+        }
+      }
+    },
+    "audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "document_read_count",
+        "document_write_count",
+        "provider_call_count",
+        "network_call_count",
+        "command_count",
+        "write_count",
+        "raw_text_persisted",
+        "raw_text_logged"
+      ],
+      "properties": {
+        "document_read_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "document_write_count": {
+          "const": 0
+        },
+        "provider_call_count": {
+          "const": 0
+        },
+        "network_call_count": {
+          "const": 0
+        },
+        "command_count": {
+          "const": 0
+        },
+        "write_count": {
+          "const": 0
+        },
+        "raw_text_persisted": {
+          "const": false
+        },
+        "raw_text_logged": {
+          "const": false
+        }
+      }
+    }
+  }
+}

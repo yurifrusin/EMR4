@@ -1,0 +1,44 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "continuation_event": "verifier_acceptance",
+  "planned_action": "accept_the_bounded_provider_blocked_occupied_failure_and_postfailure_diagnostic_results",
+  "status": "passed",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "authority_boundary": "single_occupied_call_consumed_no_retry_provider_blocked_diagnostic_only",
+  "worker_dispatch_permitted": false,
+  "source_evidence": {
+    "live_handover_current_baton": "The Typed Plan Protocol predecessor and historical consumed Vertex authorities remain immutable.",
+    "current_authority_allocation": [
+      "Yuri's exact one-call authority was exercised once and is consumed.",
+      "The post-failure work is provider-blocked and grants no retry, product, database, write, deployment, release, commit, push or protected-ref authority."
+    ],
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-bureau-model-text-lane-provider-blocked-plan.md",
+      "docs/bernie-reception-one-bureau-model-text-lane-provider-blocked-closeout.md",
+      "docs/bernie-reception-one-bureau-model-text-lane-occupied-closeout.md",
+      "docs/bernie-reception-one-bureau-model-text-lane-postfailure-diagnostic-plan.md",
+      "docs/bernie-reception-one-bureau-model-text-lane-postfailure-diagnostic-closeout.md",
+      "orchestration/agent_inbox/codex/reception-one-bureau-model-text-lane-independent-audit-analysis.md",
+      "orchestration/agent_inbox/codex/reception-one-bureau-model-text-lane-sol-acceptance.md"
+    ],
+    "protected_evidence_boundaries": "No raw prompt, raw provider response, credential, token, API-key information or reasoning is retained. Holdouts and raw historical Diary material remain sealed; no candidate or proposal was released.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true
+    }
+  }
+}

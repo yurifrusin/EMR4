@@ -1,0 +1,37 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "verifier_acceptance",
+  "planned_action": "accept_and_close_the_first_proofreader_admitted_reception_one_model_text_result",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete_live_handover_authority_plan_protected_boundaries_verified_git_state_and_terminal_retry_evidence",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Occupied retry 003 is the first proofreader-admitted result and therefore closes the continuing retry authority.",
+        "Retries 001 and 002 failed closed and all three one-use ledgers are consumed.",
+        "No provider call followed the admitted result.",
+        "Product-context reads, database access, writes, production, deployment and release remain separately closed."
+      ]
+    }
+  ],
+  "worker_slots": [],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

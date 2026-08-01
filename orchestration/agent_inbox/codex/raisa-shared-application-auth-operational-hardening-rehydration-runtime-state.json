@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan_and_implement_the_authorised_repository_local_provider_free_authored_synthetic_shared_auth_operational_hardening_and_audit_durable_security_tracking_without_external_identity_product_reads_cloud_mutation_deployment_production_release_commit_or_push",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_shared_auth_operational_hardening_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: AGENTS.md was read completely; raisa_shared_application_auth_runtime_role_secure_transport_pass at Continuity 184 and Compass 165 is the accepted parent, and Yuri has now authorised the exact shared-application-auth-operational-hardening candidate.",
+        "current_authority_allocation: GPT Sol retains the tightly coupled architecture, security-inventory and implementation tranche; no worker, subagent, provider, external reviewer or cloud control plane is selected or dispatched.",
+        "active_plan_and_acceptance: the accepted runtime-role/transport plan, threat delta, evidence, closeout, Sol acceptance, Continuity 184 node and Compass 165 candidate were read; the new plan must freeze deployment-role isolation, proxy trust, rate limiting, retained denial audit and bounded pool behavior.",
+        "protected_evidence_boundaries: authored-synthetic repository-local work only; protected holdouts and raw historical Diary material remain sealed, while external identity, Office federation, product/patient/clinical data, providers, cloud/IAM mutation, deployment, production and release remain closed.",
+        "git_refs_and_worktree: the required task branch remains at 2ae8f2173276147e59be361e0182f6cb4b7453fa with upstream divergence 0/0; master, handoff/current and their origin refs remain aligned at 4974075b31035d599e081d68e3b85e04a897baa1; the accepted uncommitted parent worktree is preserved and unstaged."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No worker was selected or dispatched."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected interactive fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude transport was selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No independent provider or reviewer was selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

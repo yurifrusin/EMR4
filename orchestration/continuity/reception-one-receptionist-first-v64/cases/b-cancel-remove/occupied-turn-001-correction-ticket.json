@@ -1,0 +1,43 @@
+{
+  "attempts_remaining": 1,
+  "previous_output_sha256": "sha256:f1a5d875817d9ac51135b2140a918523fce3f65c84c3adc8d51c6e06abede728",
+  "previous_typed_form": {
+    "goal_code": 3,
+    "steps": [
+      {
+        "operator_code": 0,
+        "source_refs": [
+          {
+            "binding_code": 1,
+            "kind": "binding",
+            "prior_output_name": "none",
+            "prior_step_index": -1
+          }
+        ]
+      },
+      {
+        "operator_code": 11,
+        "source_refs": [
+          {
+            "binding_code": 2,
+            "kind": "binding",
+            "prior_output_name": "none",
+            "prior_step_index": -1
+          }
+        ]
+      }
+    ]
+  },
+  "replacement_required": true,
+  "target_turn_code": 2,
+  "version_code": 2,
+  "violations": [
+    {
+      "allowed_output_names": [],
+      "field_code": "goal_code",
+      "source_index": -1,
+      "step_index": -1,
+      "violation_code": "recognized_constraint_path_missing"
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "schema_version": "reception.one.preprinted_form_v5.final_audit_analysis.v1",
+  "result": "reception_one_preprinted_form_v5_audit_pass",
+  "attempt": {
+    "attempt_id": "reception-one-preprinted-form-v5-turn-001",
+    "ledger_id": "reception-one-preprinted-form-v5-ledger-001",
+    "provider_call_ordinal": 1,
+    "ledger_consumed": true,
+    "second_attempt_opened": false
+  },
+  "exact_binding": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "api_key_authentication_used": false,
+    "fallback": false
+  },
+  "provider_outcome": {
+    "status": "completed",
+    "http_status": 200,
+    "latency_ms": 2574,
+    "model_version": "gemini-2.5-flash",
+    "usage": {
+      "promptTokenCount": 2229,
+      "candidatesTokenCount": 535,
+      "totalTokenCount": 2764
+    },
+    "bounded_error": null
+  },
+  "form_ownership": {
+    "model_authored_field_manifest": [
+      "operator_note",
+      "goal_code",
+      "steps"
+    ],
+    "model_form_body_hash": "sha256:a404a93cbeafb67c6320c8db738cc0038b293df3b7aa954db157364cf5b13f01",
+    "broker_owned_field_manifest": [
+      "version_code"
+    ],
+    "preprinted_field_manifest_hash": "sha256:2a1f45caa1aeee47a1ab25e5ff886ac2e149e404d0c322e020db4338d6015d3e",
+    "assembled_program_hash": "sha256:4dfd89f3e6b9f718e3e1ddcc8690ff6745215cf4d9650b8c7777eab72d8a5444",
+    "broker_judgement_repair": false,
+    "raw_model_form_body_recorded": false
+  },
+  "proofreader": {
+    "disposition": "admit",
+    "violation_count": 0,
+    "safe_repairs": [],
+    "wire_safe_repairs": [],
+    "admitted_operator_ids": [
+      "resolve_patient_reference",
+      "resolve_date_expression",
+      "read_patient_appointment_timeline",
+      "read_selected_appointment",
+      "search_available_slots",
+      "prepare_move_proposal"
+    ],
+    "freshness": "fresh",
+    "supersession": "current",
+    "correction_eligible": false
+  },
+  "release": {
+    "atomic": true,
+    "proposal_family": "move",
+    "api_spine_operation_id": "proposeAppointmentUpdate",
+    "requires_human_confirmation": true,
+    "write_performed": false,
+    "released_field_count": 12
+  },
+  "audit_chains": {
+    "turn_event_count": 10,
+    "turn_terminal_hash": "sha256:28e3c7f4b8a2acbb1a5a50f4ac26ad84088126bbb1e64ae7ee21ff0455bc32c3",
+    "turn_valid": true,
+    "parent_event_count": 4,
+    "parent_terminal_hash": "sha256:19e703587522506b10adc4de6b9f4625f1184364f269d24dab80ef81b49a5050",
+    "parent_valid": true
+  },
+  "cleanup": {
+    "all_task_owned_runtime_absent": true,
+    "temporary_token_absent": true,
+    "temporary_context_absent": true,
+    "daemon_wide_prune_performed": false
+  },
+  "explicit_exclusions": {
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "credential_or_token_recorded": false,
+    "api_key_information_recorded": false,
+    "chain_of_thought_recorded": false,
+    "database_access": false,
+    "product_delivery": false,
+    "command_or_write_authority": false,
+    "provider_or_regional_fallback": false
+  },
+  "candid_limit": "This proves one untaught authored-synthetic pre-printed form completion, deterministic proofreader admission and proposal-only release through the configured and observed Sydney locational request path. It does not prove general form-filling reliability, that prompt-context teaching is unnecessary, Australian physical or sovereign processing, product-data safety, appointment mutation, production suitability, deployment or release readiness."
+}

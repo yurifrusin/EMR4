@@ -1,0 +1,83 @@
+{
+  "schema_version": "ariadne.vertex_sydney_gemini_25_official_source_observation.v1",
+  "observed_at": "2026-07-24",
+  "observation_method": "current_official_google_documentation",
+  "provider": "google_vertex_ai",
+  "model_id": "gemini-2.5-flash",
+  "required_location": "australia-southeast1",
+  "sources": [
+    {
+      "id": "gemini_2_5_flash_model_card",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/2-5-flash?hl=en",
+      "last_updated": "2026-07-23",
+      "observations": {
+        "model_id": "gemini-2.5-flash",
+        "launch_stage": "GA",
+        "structured_output_supported": true,
+        "candidate_count_range": "1-8",
+        "model_availability_australia_southeast1": true,
+        "ml_processing_australia_southeast1": true,
+        "retirement_on": "2026-10-16"
+      }
+    },
+    {
+      "id": "model_data_residency",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/data-residency?hl=en",
+      "last_updated": "2026-07-21",
+      "observations": {
+        "locational_endpoint_contract": "ML processing remains within the broader multi-regional or country jurisdiction associated with the selected locational endpoint.",
+        "global_endpoint_contract": "Global endpoints may process data anywhere globally and provide no regional isolation or data-residency guarantee.",
+        "gemini_2_5_flash_australia_supported": true
+      }
+    },
+    {
+      "id": "model_lifecycle",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions?hl=en",
+      "last_updated": "2026-07-23",
+      "observations": {
+        "release_date": "2025-06-17",
+        "retirement_date": "2026-10-16",
+        "replacement_models_do_not_change_this_authority": true
+      }
+    },
+    {
+      "id": "zero_data_retention",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/zero-data-retention?hl=en",
+      "observations": {
+        "request_response_logging_default": "disabled",
+        "published_gemini_in_memory_cache_default": "enabled",
+        "published_gemini_in_memory_cache_scope": "project_isolated_not_at_rest",
+        "published_gemini_in_memory_cache_ttl_hours": 24,
+        "published_gemini_in_memory_cache_can_be_disabled_at_project_level": true,
+        "project_cache_setting_inspected": false
+      }
+    },
+    {
+      "id": "service_endpoints",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/reference/rest",
+      "observations": {
+        "regional_service_endpoint": "https://australia-southeast1-aiplatform.googleapis.com",
+        "endpoint_existence_alone_does_not_prove_model_support": true
+      }
+    }
+  ],
+  "result": {
+    "model_identifier_resolved": "gemini-2.5-flash",
+    "model_published_for_required_location": true,
+    "documentary_admission_gate": "passed",
+    "provider_call_authorized_by_observation": false
+  },
+  "unverified_provider_controls": {
+    "provider_training_control": "not_verified",
+    "provider_abuse_monitoring_retention": "not_verified"
+  },
+  "explicit_exclusions": {
+    "cloud_control_plane_read": false,
+    "credential_read": false,
+    "token_refresh": false,
+    "provider_call": false,
+    "prompt_transmission": false,
+    "project_entitlement_inferred": false,
+    "physical_or_sovereign_processing_claimed": false
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "id": "reception-one-receptionist-first-v67-clarification-pattern",
+  "title": "Reception One Receptionist-first v6.7 Clarification Pattern",
+  "kind": "implementation",
+  "status": "accepted",
+  "created_at": "2026-07-30T11:31:00Z",
+  "updated_at": "2026-07-30T11:53:06Z",
+  "relationships": [
+    {
+      "node_id": "reception-one-receptionist-first-v66-deidentified-note",
+      "relation": "builds_on"
+    }
+  ],
+  "coordinates": {
+    "thread_id": null,
+    "git_ref": "codex/ariadne-terra-gemini-comparative-rehearsal",
+    "source_head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "worktree_role": "integration"
+  },
+  "evidence": {
+    "acceptances": [
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v67-provider-free-sol-acceptance.md"
+    ],
+    "closeouts": [
+      "docs/bernie-reception-one-receptionist-first-v66-closeout.md",
+      "orchestration/continuity/reception-one-receptionist-first-v67/occupied-cohort-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v67/occupied-final-residue-evidence.json",
+      "docs/bernie-reception-one-receptionist-first-v67-closeout.md"
+    ],
+    "findings": [
+      "orchestration/continuity/reception-one-receptionist-first-v66/occupied-final-audit-analysis.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v66-final-sol-review.md",
+      "orchestration/continuity/reception-one-receptionist-first-v67/occupied-final-audit-analysis.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v67-final-sol-review.md"
+    ],
+    "plans": [
+      "docs/bernie-reception-one-receptionist-first-v67-clarification-pattern-plan.md",
+      "orchestration/continuity/reception-one-receptionist-first-v67/runtime-policy.json",
+      "orchestration/continuity/reception-one-receptionist-first-v67/occupied-authority.json"
+    ],
+    "receipts": [
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v67-rehydration-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v67-rehydration-five-source-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v67-preplan-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v67-preacceptance-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v67-preattempt-receipt.json"
+    ],
+    "tests": [
+      "orchestration/continuity/reception-one-receptionist-first-v67/turn-input.schema.json",
+      "orchestration/continuity/reception-one-receptionist-first-v67/provider-blocked-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v67/real-isolation-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v67/occupied-preflight-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v67/pre-attempt-residue-evidence.json",
+      "tests/test_reception_one_receptionist_first_v67.py"
+    ]
+  },
+  "authority": {
+    "authorized_openings": [
+      {
+        "boundary": "container-runtime",
+        "scope": "Credential-free network-none work cells for the complete twenty-four-request authored-synthetic v6.7 cohort.",
+        "source": "orchestration/continuity/reception-one-receptionist-first-v67/occupied-authority.json"
+      },
+      {
+        "boundary": "model-runtime",
+        "scope": "Gemini 2.5 Flash may complete the unchanged typed output form after one exact clarification-response instruction repair.",
+        "source": "orchestration/continuity/reception-one-receptionist-first-v67/occupied-authority.json"
+      },
+      {
+        "boundary": "provider-call",
+        "scope": "Twenty-four primaries and at most one terminal second call per case through the exact Bernie keyless-ADC Sydney lane, within forty-eight calls and USD 1.",
+        "source": "orchestration/continuity/reception-one-receptionist-first-v67/occupied-authority.json"
+      }
+    ],
+    "notes": [
+      "v6.6 is immutable and consumed; v6.7 is separately versioned.",
+      "The deterministic proofreader and its clarification markers remain unchanged.",
+      "Provider, model, project, service account, keyless ADC, region, authored-synthetic, isolation, no-fallback, no-write and cost boundaries are unchanged."
+    ]
+  },
+  "contract_evidence": [
+    {
+      "contract_id": "combined-patient-practitioner-time-duration-intent",
+      "status": "satisfied",
+      "evidence": [
+        "docs/bernie-reception-one-receptionist-first-v67-clarification-pattern-plan.md",
+        "orchestration/continuity/reception-one-receptionist-first-v67/runtime-policy.json",
+        "orchestration/continuity/reception-one-receptionist-first-v67/turn-input.schema.json"
+      ],
+      "note": "The repair changes only the natural clarification instruction; the exact typed semantic form and proofreader remain frozen."
+    },
+    {
+      "contract_id": "committed-reschedule-availability-reconciliation",
+      "status": "satisfied",
+      "evidence": [
+        "docs/bernie-reception-one-receptionist-first-v67-clarification-pattern-plan.md",
+        "docs/bernie-reception-one-receptionist-first-v66-closeout.md",
+        "orchestration/continuity/reception-one-receptionist-first-v67/turn-input.schema.json"
+      ],
+      "note": "The descendant remains proposal-only and opens no product, event, database, confirmation or write path."
+    }
+  ],
+  "decisions": [
+    {
+      "id": "authorise-reception-one-receptionist-first-v67-138",
+      "status": "accepted",
+      "summary": "Teach one exact proofreader-compatible clarification response pattern without weakening the proofreader, then rerun all twenty-four requests.",
+      "source": "orchestration/continuity/reception-one-receptionist-first-v67/occupied-authority.json"
+    }
+  ],
+  "unresolved_gates": [
+    "v6.7 is closed at twenty-three of twenty-four exact outcomes and may not be called again.",
+    "A separately versioned descendant may teach one proofreader-compatible move response pattern without weakening the proofreader.",
+    "Real/product/clinical/historical data, database access, writes, Word, voice, production, deployment and release remain closed."
+  ],
+  "claim_scope": [
+    "v6.7 proves twenty-three exact safe outcomes and one fail-closed move natural-channel vocabulary mismatch over the reused authored-synthetic development cohort.",
+    "All twenty-five ledgers are consumed, no value was released for the mismatch and task-scoped residue is zero.",
+    "Sydney endpoint configuration does not prove Australian physical or sovereign processing."
+  ]
+}

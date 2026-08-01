@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.vertex_sydney_gemini_25_repair_run_contract.v1",
+  "authority_source": "Yuri: Please repair and run again.",
+  "historical_artifacts_immutable": true,
+  "repair": {
+    "field_path": "generationConfig.responseSchema.properties.total_tiles.enum[0]",
+    "historical_json_type": "integer",
+    "repaired_json_type": "string",
+    "repaired_value": "5",
+    "other_request_contract_changes_permitted": false
+  },
+  "dry_run": {
+    "request": "repair-dry-run-cell-request.json",
+    "attempt_id": "gemini-25-repair-dry-run-001",
+    "ledger_id": "gemini-25-repair-dry-run-ledger-001",
+    "maximum_provider_calls": 0
+  },
+  "occupied_run": {
+    "request": "repair-occupied-cell-request.json",
+    "attempt_id": "gemini-25-repair-001",
+    "ledger_id": "gemini-25-repair-ledger-001",
+    "maximum_provider_calls": 1,
+    "retry_permitted": false
+  },
+  "lineage_call_accounting": {
+    "historical_occupied_calls_consumed": 1,
+    "fresh_occupied_calls_authorised": 1,
+    "absolute_occupied_call_ceiling": 2
+  },
+  "binding": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "data_classification": "authored_synthetic_only",
+    "fallback_permitted": false,
+    "application_cost_ceiling_usd": 1
+  }
+}

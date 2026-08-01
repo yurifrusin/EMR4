@@ -1,0 +1,78 @@
+{
+  "authority": {
+    "appointment_write_authority": false,
+    "confirmation_authority": false,
+    "database_access": false,
+    "effect_ceiling": "proposal_only",
+    "network_access": false,
+    "product_delivery": false,
+    "provider_execution": false
+  },
+  "context": {
+    "allowed_statuses": [
+      "arrived",
+      "completed",
+      "dna"
+    ],
+    "appointments": [
+      {
+        "date": "2026-07-27",
+        "duration_minutes": 30,
+        "id": "synthetic-appointment-bacf6cb959f7753e40f9",
+        "patient_ref": "synthetic-patient-a1fd28f8386ec5713f7a",
+        "practitioner_ref": "synthetic-practitioner-34fa3ad118ff3e9d19d0",
+        "start_time": "09:00",
+        "status": "booked"
+      }
+    ],
+    "candidate_slots": [],
+    "default_duration_minutes": 15,
+    "patients": [
+      {
+        "aliases": [
+          "Margaret"
+        ],
+        "display": "Margaret Thompson",
+        "id": "synthetic-patient-a1fd28f8386ec5713f7a"
+      }
+    ],
+    "practitioners": [
+      {
+        "aliases": [
+          "Dr Alex Shera",
+          "Shera"
+        ],
+        "display": "Dr Alex Shera",
+        "id": "synthetic-practitioner-34fa3ad118ff3e9d19d0"
+      }
+    ],
+    "selected_appointment": {
+      "date": "2026-07-27",
+      "duration_minutes": 30,
+      "id": "synthetic-appointment-bacf6cb959f7753e40f9",
+      "patient_ref": "synthetic-patient-a1fd28f8386ec5713f7a",
+      "practitioner_ref": "synthetic-practitioner-34fa3ad118ff3e9d19d0",
+      "start_time": "09:00",
+      "status": "booked"
+    },
+    "squeeze_policy": {
+      "allow_move_existing": false,
+      "allow_overbook": false,
+      "assessment_enabled": true,
+      "id": "synthetic-policy-squeeze-review",
+      "requires_human_review": true
+    }
+  },
+  "context_revision": 3616517295,
+  "contract_version": "reception.one.bureau.plan-input.v1",
+  "correlation_id": "synthetic-correlation-7f886dfe907fedf46eda",
+  "data_class": "authored_synthetic",
+  "expires_at": "2026-07-29T00:31:30Z",
+  "observed_at": "2026-07-29T00:29:30Z",
+  "practice_ref": "synthetic-practice-9be293e5de4782bdab0d",
+  "reference_date": "2026-07-27",
+  "request_id": "synthetic-request-9c461e297d73c7e5bb45",
+  "utterances": [
+    "Extend Margaret Thompson's appointment with Dr Alex Shera to 45 minutes."
+  ]
+}

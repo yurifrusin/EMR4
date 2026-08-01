@@ -1,0 +1,85 @@
+{
+  "schema_version": "reception.one.receptionist_first_v67.external_audit_analysis.v1",
+  "recorded_at": "2026-07-30T11:53:06Z",
+  "result": "reception_one_receptionist_first_v67_external_audit_complete",
+  "cohort_result": "reception_one_receptionist_first_v67_full_cohort_fail_closed",
+  "case_count": 24,
+  "exact_safe_outcome_count": 23,
+  "nonmatching_terminal_case_count": 1,
+  "nonmatching_terminal_cases": [
+    {
+      "case_code": "b-move-shift",
+      "failure_class": "move_natural_channel_vocabulary_mismatch_after_correction",
+      "expected_goal": "move",
+      "primary_typed_form_exact": true,
+      "terminal_typed_form_exact": true,
+      "primary_violation_codes": [
+        "receptionist_response_goal_mismatch"
+      ],
+      "terminal_violation_codes": [
+        "receptionist_response_goal_mismatch"
+      ],
+      "proofreader_disposition": "edge_abort",
+      "release": null,
+      "bounded_diagnosis": "The primary and terminal typed move forms and operator notes were exact. The natural channel used none of the frozen deterministic move markers on either call. The discarded response text was not retained, so no stronger claim about its wording is made.",
+      "repair_hypothesis": "Teach one explicit proofreader-compatible move response pattern while retaining the exact no-booking boundary. Do not loosen the natural-channel proofreader or alter the typed form, oracle, safe-repair boundary or provider lane."
+    }
+  ],
+  "provider_calls": {
+    "actual": 25,
+    "absolute_ceiling": 48,
+    "primary": 24,
+    "terminal_second": 1,
+    "after_terminal_result": 0
+  },
+  "provider_outcomes": {
+    "completed_http_200": 25,
+    "response_rejected_before_candidate": 0,
+    "raw_provider_text_retained": false
+  },
+  "usage": {
+    "prompt_tokens": 115173,
+    "visible_candidate_tokens": 12627,
+    "thinking_tokens": 15237,
+    "total_tokens": 143037,
+    "hidden_thought_content_retained": false
+  },
+  "latency_ms": {
+    "sum": 121741,
+    "minimum": 2905,
+    "maximum": 7159,
+    "mean": 4869.64
+  },
+  "exact_binding": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "api_key_authentication_used": false,
+    "fallback_performed": false
+  },
+  "audit_controls": {
+    "all_ledgers_consumed": true,
+    "opened_ledger_count": 25,
+    "all_cleanup_passed": true,
+    "durable_turn_hash_chains_valid": true,
+    "durable_turn_hash_chain_count": 25,
+    "durable_turn_audit_event_count": 276,
+    "durable_case_hash_chains_valid": true,
+    "case_audit_chain_count": 24,
+    "case_audit_event_count": 98,
+    "model_and_proofreader_context_hash_recorded": true,
+    "raw_prompts_recorded": false,
+    "raw_provider_responses_recorded": false,
+    "credentials_or_tokens_recorded": false,
+    "api_key_information_recorded": false,
+    "chain_of_thought_recorded": false,
+    "product_or_database_access": false,
+    "appointment_write": false,
+    "human_or_product_delivery": false
+  },
+  "claim_limit": "The evidence proves a configured and observed Sydney locational request path and twenty-three exact safe outcomes over a reused authored-synthetic development cohort. It proves the v6.7 clarification response repair while exposing one bounded move-channel vocabulary mismatch. It does not prove independent generalisation, production fitness, Australian physical or sovereign processing, or safety for real data."
+}

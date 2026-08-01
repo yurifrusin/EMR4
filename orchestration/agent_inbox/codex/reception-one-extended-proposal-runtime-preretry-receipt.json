@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "recorded_at": "2026-07-29T23:38:52Z",
+  "continuation_event": "deterministic_request_contract_repair_retry",
+  "planned_action": "run_the_one_remaining_exact_lane_repaired_authored_synthetic_move_call",
+  "status": "passed",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md preserves the exact Bernie keyless-ADC Sydney lane and all historical consumed ledgers. The current extended descendant remains bound to Continuity graph 73 and Compass 60.",
+    "current_authority_allocation": [
+      "Yuri authorised one primary and one deterministic request-contract repair within two total occupied calls and USD 1.",
+      "Attempt 001 consumed the primary ledger and failed at $.goal before proofreading or release.",
+      "The repair changes only the closed intent-to-goal instruction, and the retry must close the sequence whether it passes or fails."
+    ],
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-extended-proposal-runtime-plan.md",
+      "orchestration/continuity/reception-one-extended-proposal-runtime/occupied-authority-request.json",
+      "orchestration/continuity/reception-one-extended-proposal-runtime/occupied-001-external-audit.json",
+      "orchestration/continuity/reception-one-extended-proposal-runtime/occupied-001-provider-blocked-diagnostic.json",
+      "orchestration/continuity/reception-one-extended-proposal-runtime/occupied-001-repair-gate-evidence.json",
+      "orchestration/agent_inbox/codex/reception-one-extended-proposal-runtime-occupied-001-independent-audit.md",
+      "orchestration/continuity/reception-one-extended-proposal-runtime/repair-provider-blocked-model-lane-evidence.json",
+      "orchestration/continuity/reception-one-extended-proposal-runtime/repair-provider-free-isolation-evidence.json",
+      "orchestration/continuity/reception-one-extended-proposal-runtime/repair-occupied-preflight-evidence.json"
+    ],
+    "protected_evidence_boundaries": "No rejected provider value, raw response, raw prompt, credential, token, API-key information, hidden reasoning or rejected draft is retained. The immutable attempt-001 evidence and consumed ledger are not revised. Only an independently admitted authored-synthetic typed proposal may be released.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true
+    }
+  },
+  "revision_binding": {
+    "continuity_graph_revision": 73,
+    "compass_map_revision": 60,
+    "rendered_compass_validated": true
+  },
+  "gate_hashes": {
+    "repair_gate_sha256": "a90f33183e5805931cf59d12b181a876e5ad621bb79c0b516b79a96e47a1a576",
+    "repeated_preflight_sha256": "864ce29dc94e619daa757fbd8a9848f4628d375f80c2b3fc80221a7356a6baf0",
+    "authority_sha256": "794c3148d309e9e4d59ba854238119ac6adda8f484ed14d7962a3d57fbc6efbe"
+  },
+  "retry_budget": {
+    "attempt_id": "reception-one-extended-runtime-occupied-002",
+    "ledger_id": "reception-one-extended-runtime-ledger-002",
+    "calls_consumed": 1,
+    "calls_remaining": 1,
+    "absolute_call_ceiling": 2,
+    "cumulative_cost_ceiling_usd": 1,
+    "any_further_retry_permitted": false
+  },
+  "admission": {
+    "attempt_001_closed_and_audited": true,
+    "deterministic_request_contract_defect_identified": true,
+    "focused_regression_passed": true,
+    "all_repository_only_and_provider_blocked_gates_repeated": true,
+    "distinct_single_use_ledger": true,
+    "exact_lane_unchanged": true,
+    "repaired_retry_permitted": true
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": "ariadne.vertex_sydney_cache_disabled_operator_evidence.v1",
+  "recorded_on": "2026-07-24",
+  "evidence_source": "yuri_supplied_sanitized_external_operator_observation",
+  "project": "bernie-emr4-dev",
+  "control_resource": "projects/bernie-emr4-dev/cacheConfig",
+  "management_hostname": "us-central1-aiplatform.googleapis.com",
+  "control_scope": "project_level_all_google_cloud_regions",
+  "disable_cache_field_present": true,
+  "disable_cache": true,
+  "rehearsal_prompt_or_model_payload_transmitted": false,
+  "inference_endpoint_contacted": false,
+  "inference_region_changed": false,
+  "raw_terminal_image_retained": false,
+  "raw_control_response_retained": false,
+  "access_token_or_credential_recorded": false,
+  "api_key_information_recorded": false,
+  "human_account_identifier_recorded": false,
+  "claim_limit": "This evidence records the allowlisted project cache-control result supplied by Yuri. The complete read-only Tranche 3 preflight must independently repeat the control before any successor gate opens."
+}

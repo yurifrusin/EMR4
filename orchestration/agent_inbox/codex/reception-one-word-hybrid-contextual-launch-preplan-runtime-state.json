@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "record_yuri_hybrid_word_direction_repair_request_input_alignment_and_build_provider_free_contextual_native_diary_launch_foundation",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_word_hybrid_preplan",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The access-surface decision, task-pane/native-window boundary and visual repair are tightly coupled and remain Sol-owned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external peer worker or provider is selected for this provider-free access-surface tranche."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: the visible Bureau passes Standard, one bounded Isolated result, projection overflow repair and shared post-admission hardening at Continuity 167 / Compass 148; Word access was the next explicit Yuri decision.",
+        "current_authority_allocation: Yuri selected the recommended Hybrid direction: a compact Word companion will eventually hand detailed work to the full native Diary/Bureau window; this tranche may establish the contextual native-window foundation and repair the visible request input.",
+        "active_plan_and_acceptance: the integrated Bureau, occupied retry 002 and post-admission hardening plans/closeouts preserve one authoritative native Diary, proposal-only typed release, deterministic proofreader admission and no silent planner fallback.",
+        "protected_evidence_boundaries: protected holdouts, historical Diary material, real/product-derived patient or clinical data, raw provider material, credentials and hidden reasoning remain excluded; only local authored-synthetic development evidence is admitted.",
+        "git_refs_and_worktree: HEAD is 5b1ea7952fb08eea333da0e63f166d3895ccea32 on codex/ariadne-terra-gemini-comparative-rehearsal; master, handoff/current, origin/master and origin/handoff/current are 4974075b31035d599e081d68e3b85e04a897baa1; 724 pre-existing worktree status lines are preserved.",
+        "The descendant may add only a typed, non-authoritative Word-to-native-Diary launch handoff and a visual input alignment repair. It grants no provider call, ADC read, embedded Word model runtime, product write, confirmation, deployment, production or release authority."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

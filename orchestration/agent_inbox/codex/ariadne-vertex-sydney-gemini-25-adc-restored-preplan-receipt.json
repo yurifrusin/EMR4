@@ -1,0 +1,72 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_integration_cloud_mutation_or_provider_call_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "bind_adc_restored_gemini_25_sydney_continuation_before_repeated_tranche_3",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md Current Baton and the immutable prior Gemini 2.5 Flash ADC-preflight stop",
+    "current_authority_allocation": [
+      "docs/ariadne-vertex-sydney-bounded-work-cell-authority.md",
+      "docs/ariadne-vertex-sydney-gemini-25-flash-authority-delta.md",
+      "Yuri task instruction: exact Bernie impersonated ADC authenticated externally; retry Tranche 3 preflight and conditionally continue"
+    ],
+    "active_plan_and_acceptance": [
+      "docs/ariadne-vertex-sydney-gemini-25-adc-restored-continuation-plan.md",
+      "docs/ariadne-vertex-sydney-gemini-25-provider-admission-policy.md",
+      "docs/ariadne-vertex-sydney-gemini-25-provider-blocked-contract-closeout.md",
+      "docs/ariadne-vertex-sydney-gemini-25-bounded-work-cell-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-vertex-sydney-gemini-25-sol-review.md"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5-6 and the exact frozen provider/model/project/identity/credential/Sydney/authored-synthetic/isolation/audit/cost/call/product/database/PII/command stops",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true
+    }
+  },
+  "exact_boundary": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "oauth_scope": "https://www.googleapis.com/auth/cloud-platform",
+    "required_permission": "aiplatform.endpoints.predict",
+    "location": "australia-southeast1",
+    "base_url": "https://australia-southeast1-aiplatform.googleapis.com",
+    "data_classification": "authored_synthetic_only",
+    "isolation": "credential_free_internal_only_work_cell_with_one_use_broker",
+    "audit": "bounded_external_typewriter_key_hash_chain_no_raw_prompt_response_or_reasoning",
+    "primary_call_ceiling": 1,
+    "conditional_request_contract_retry_ceiling": 1,
+    "absolute_call_ceiling": 2,
+    "occupied_calls_consumed": 0,
+    "application_cost_ceiling_usd": 1,
+    "fallback": false,
+    "product_database_clinical_patient_command_authority": false
+  },
+  "first_gate": {
+    "tranche": 3,
+    "mode": "complete_read_only_control_preflight",
+    "provider_prompt_transmitted": false,
+    "model_inference_call": false,
+    "external_state_change": false
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

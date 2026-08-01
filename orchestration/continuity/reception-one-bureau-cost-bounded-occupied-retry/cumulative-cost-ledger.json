@@ -1,0 +1,51 @@
+{
+  "accounted_cost": 0.0238049,
+  "blocked": true,
+  "calls_accounted": 2,
+  "ceiling": 1.0,
+  "cost_policy_sha256": "sha256:57b47f3d7ce3ada1894fe24abb0e29e6206ae1ef2a40e498c802f1572dc54d2a",
+  "currency": "USD",
+  "events": [
+    {
+      "attempt_id": "reception-one-receptionist-first-v68-eval-runtime-65d49792ef59742b-turn-001",
+      "estimated_cost": 0.0038049,
+      "event_hash": "sha256:5d3e5ed53a4fd57d6ea44bd03eeef44801041cdec28590fd1590d9865509ccea",
+      "event_type": "predecessor_http_200_accounted",
+      "http_status": 200,
+      "previous_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "sequence": 1,
+      "usage": {
+        "input_tokens": 4633,
+        "reasoning_tokens": 819,
+        "response_tokens": 147
+      }
+    },
+    {
+      "accounted_cost_before": 0.0038049,
+      "event_hash": "sha256:f21a4ba178471d448dd926ea37c7bcf94282fe114b3dc40e6c0ca80cb08b52a3",
+      "event_type": "fresh_call_reserved",
+      "maximum_after_reservation": 0.0238049,
+      "previous_hash": "sha256:5d3e5ed53a4fd57d6ea44bd03eeef44801041cdec28590fd1590d9865509ccea",
+      "purpose_hash": "sha256:b519fe71b30969149a97ed39027eda45378db30db96fe9b2e048196b6dcc4c10",
+      "reservation": 0.02,
+      "reservation_id": "bureau-cost-bounded-occupied-retry-001",
+      "sequence": 2
+    },
+    {
+      "accounted_cost_after": 0.0238049,
+      "estimated_cost": 0.02,
+      "event_hash": "sha256:caebdd93ef17c9598d7bfa7dd088b0a00f8482ce55254c3fcb6822450eb49bff",
+      "event_type": "unknown_usage_reservation_consumed_and_blocked",
+      "previous_hash": "sha256:f21a4ba178471d448dd926ea37c7bcf94282fe114b3dc40e6c0ca80cb08b52a3",
+      "reason_code": "provider_external_audit_missing",
+      "reservation_id": "bureau-cost-bounded-occupied-retry-001",
+      "sequence": 3
+    }
+  ],
+  "fresh_calls_accounted": 1,
+  "outstanding_reservation": 0.0,
+  "reservation_per_call": 0.02,
+  "schema_version": "reception.one.vertex_cumulative_cost_ledger.v1",
+  "terminal_event_hash": "sha256:caebdd93ef17c9598d7bfa7dd088b0a00f8482ce55254c3fcb6822450eb49bff",
+  "terminal_success": false
+}

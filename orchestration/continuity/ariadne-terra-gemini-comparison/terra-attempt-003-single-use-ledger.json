@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.comparative_single_use_ledger.v2",
+  "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+  "runtime_attempt_id": "comparative-runtime-attempt-003",
+  "cognition_contract_attempt_id": "generated-attempt-001",
+  "lane_id": "terra",
+  "model_id": "gpt-5.6-terra",
+  "state": "consumed",
+  "maximum_provider_calls": 1,
+  "retry_authorised": false,
+  "consumption_point": "immediately-before-work-cell-start"
+}

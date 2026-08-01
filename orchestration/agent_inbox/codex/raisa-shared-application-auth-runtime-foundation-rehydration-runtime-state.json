@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "implement_and_verify_the_repository_local_route_free_database_free_shared_application_auth_runtime_foundation_using_authored_synthetic_state_only_without_external_identity_product_data_deployment_production_or_release_authority",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_shared_auth_runtime_foundation_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: AGENTS.md was read completely; the accepted shared application-authentication architecture at Continuity revision 181 and Compass revision 162 is the current parent, and Yuri explicitly authorised its repository-local runtime-foundation candidate.",
+        "current_authority_allocation: GPT Sol owns the tightly coupled implementation and acceptance tranche; no worker, provider, external reviewer, identity provider or cloud control plane is selected.",
+        "active_plan_and_acceptance: the shared-auth plan, design, threat-model delta, policy and schemas, all 23 authorization cases, all 13 exchange cases, provider-free evidence, closeout, acceptance, Continuity revision 181, Compass revision 162 and rendered report were reconciled.",
+        "protected_evidence_boundaries: protected holdouts remain sealed; only authored-synthetic identity metadata is permitted; product-derived, patient, health, clinical and historical data, routes, cookies, database access, external identity, providers, commands, microphone, document mutation, deployment, production and release remain closed.",
+        "git_refs_and_worktree: HEAD is the required 8fa732592fbee4f57c322b13d9d8ff89fcc7fa33 on codex/ariadne-terra-gemini-comparative-rehearsal, its upstream divergence is 0/0, all named protected refs are ancestors of HEAD and only the prior accepted task-local architecture artifacts are uncommitted.",
+        "The implementation target is an explicit, unmounted service-layer in-memory adapter with injected time, tokens and audit, not a live authentication route or persistence mechanism."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker was selected or dispatched."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected interactive fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport was selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external reviewer or provider was selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

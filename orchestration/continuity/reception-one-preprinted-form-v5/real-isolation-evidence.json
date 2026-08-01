@@ -1,0 +1,95 @@
+{
+  "boundary": {
+    "api_key_authentication_used": false,
+    "appointment_writes_performed": 0,
+    "broker_judgement_repair": false,
+    "confirmation_performed": false,
+    "credential_reads_performed": 0,
+    "database_access_performed": false,
+    "network_access_performed": false,
+    "operator_note_product_delivered": false,
+    "product_delivery_performed": false,
+    "proofreader_selected_replacement": false,
+    "provider_calls_performed": 0
+  },
+  "cell_isolation_observations": [
+    {
+      "credential_environment_present": false,
+      "gid": 65532,
+      "loopback_only": true,
+      "network_interfaces": [
+        "lo"
+      ],
+      "read_only_root_filesystem": true,
+      "uid": 65532
+    },
+    {
+      "credential_environment_present": false,
+      "gid": 65532,
+      "loopback_only": true,
+      "network_interfaces": [
+        "lo"
+      ],
+      "read_only_root_filesystem": true,
+      "uid": 65532
+    }
+  ],
+  "container_policy_checks": [
+    {
+      "capabilities_dropped": true,
+      "cpu_bounded": true,
+      "memory_bounded": true,
+      "memory_swap_bounded": true,
+      "network_none": true,
+      "no_mounts": true,
+      "no_new_privileges": true,
+      "no_published_ports": true,
+      "non_root_user": true,
+      "pids_bounded": true,
+      "privileged_false": true,
+      "read_only_rootfs": true
+    },
+    {
+      "capabilities_dropped": true,
+      "cpu_bounded": true,
+      "memory_bounded": true,
+      "memory_swap_bounded": true,
+      "network_none": true,
+      "no_mounts": true,
+      "no_new_privileges": true,
+      "no_published_ports": true,
+      "non_root_user": true,
+      "pids_bounded": true,
+      "privileged_false": true,
+      "read_only_rootfs": true
+    }
+  ],
+  "correction_ticket_sha256": "sha256:0d0030e672173761706be3d6a4c7d390d1add6e5263d8603ee9bf2ddb719fd60",
+  "evidence_mode": "authored_synthetic_provider_free_two_turn_fixture",
+  "execution_status": "executed",
+  "first_disposition": "revision_required",
+  "first_model_form_body_sha256": "sha256:f075585cd82a3127e0e71d02a588e39df607d7d980c9f52ab430e829120bac0b",
+  "first_program_sha256": "sha256:b6425bdeab6e9bc4de13705e51bb80ffaa7c1e4e6190d0262ece6305f0d9783e",
+  "model_authored_fields": [
+    "operator_note",
+    "goal_code",
+    "steps"
+  ],
+  "normalized_plan_sha256": "sha256:45887fd83f609366cdbc7087c0b66b728e5f66aabffc176bfaa2b8215375e970",
+  "preprinted_fields": {
+    "version_code": 3
+  },
+  "released_proposal_family": "move",
+  "residue": {
+    "containers_present": false,
+    "images_present": false,
+    "temporary_context_present": false
+  },
+  "result": "reception_one_preprinted_form_v5_real_isolation_pass",
+  "schema_version": "reception.one.preprinted_form_v5.isolation_evidence.v1",
+  "second_disposition": "admit",
+  "second_model_form_body_sha256": "sha256:4ccb05fa81cccdf0d6945458e1301dba5dba69a350697614efe5d42d45b6b31f",
+  "second_program_sha256": "sha256:4dfbf5a458731d591d46e1d71ba57f2853cde0df2cdf1e41c70fc5e80dd87f7f",
+  "source_manifest_sha256": "sha256:526ad34ffc5fd84c2bd879442fdab891029bea18d36e0a56669f99a45c1ba2a9",
+  "task_sha256": "sha256:5598259effc15fb2b9aff36ba62a9686dd3be02e27c900bdb7e57ac864305fbd"
+}

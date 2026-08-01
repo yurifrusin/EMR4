@@ -1,0 +1,118 @@
+{
+  "schema_version": "reception_one.extended_proposal_runtime.repair_gate.v1",
+  "recorded_at": "2026-07-29T23:38:17Z",
+  "result": "deterministic_request_contract_repair_retry_admitted",
+  "failed_attempt": {
+    "attempt_id": "reception-one-extended-runtime-occupied-001",
+    "ledger_id": "reception-one-extended-runtime-ledger-001",
+    "provider_calls_consumed": 1,
+    "ledger_consumed": true,
+    "http_status": 200,
+    "latency_ms": 921,
+    "bounded_failure": {
+      "reason_code": "schema_invalid",
+      "field_paths": [
+        "$.goal"
+      ]
+    },
+    "proofreader_reached": false,
+    "release": null,
+    "cleanup_passed": true,
+    "external_audit_sha256": "e1ecd0fac06719232d8ccad5aa1e12722cfb2fc90e8a315165ae1940257a7c3b",
+    "diagnostic_sha256": "c79a014e59baee3bba1f5d26c25458a138dbae34c50561e32d0dd2e02d2ba862",
+    "evidence_sha256": "55f5680ab3ef641ca8a3b36de79112e124aff610c4f796c6749bf1dd81b37a26",
+    "ledger_sha256": "51102eae10a11ad4535d0362dc45642a793b4c846c4fac33d9951b1990a9c020"
+  },
+  "diagnosis": {
+    "established": [
+      "The exact regional provider returned one response with HTTP 200.",
+      "The low-state provider response schema constrained goal only to STRING.",
+      "The unchanged local wire schema rejected the discarded goal value at $.goal before candidate construction.",
+      "No rejected value, draft or raw provider response was retained."
+    ],
+    "not_established": [
+      "The exact discarded goal value.",
+      "That the discarded value was a particular synonym.",
+      "That a repaired request will be accepted."
+    ],
+    "defect_class": "deterministic_request_contract_underspecification",
+    "defect": "The provider instruction listed the closed goal vocabulary but did not explicitly map ordinary move/reschedule/rebook language to the exact move token while the low-state schema could not enforce the local enum."
+  },
+  "repair": {
+    "kind": "request_instruction_only",
+    "description": "Add a literal closed intent-to-goal mapping and explicit forbidden move synonyms to the provider instruction. Do not alter or repair the discarded output.",
+    "source_sha256": "d8a371ead3368ce2ef5b00174e97e1b6dd36dedf5fb4b789f09b019ae39ef108",
+    "provider_response_schema_changed": false,
+    "local_wire_schema_changed": false,
+    "candidate_schema_changed": false,
+    "proofreader_changed": false,
+    "output_contract_changed": false,
+    "semantic_reinterpretation_of_rejected_output": false
+  },
+  "regression_and_gate_rerun": {
+    "focused_goal_mapping_regression": "passed",
+    "model_lane_and_typed_protocol_tests": "passed",
+    "extended_and_product_context_runtime_tests": "passed",
+    "api_spine_tests": "passed",
+    "continuity_graph_revision": 73,
+    "compass_map_revision": 60,
+    "continuity_validation": "passed",
+    "current_node_audit": "passed",
+    "compass_and_rendered_report_validation": "passed",
+    "repository_only_ariadne_verifier": "passed",
+    "provider_blocked_model_lane": {
+      "result": "passed",
+      "sha256": "2e5711a773b9281126dab9654584f9a705e47587b24e809eb7e84eb6ded23236"
+    },
+    "real_isolation": {
+      "result": "passed",
+      "sha256": "0aaba595cb609fa2f6cc9b7ec84a7c32dc5eb4d0951df54e60ded223b18070ed"
+    },
+    "live_local_browser_backend_postgres": {
+      "result": "passed",
+      "sha256": "413ff03af7132467636b225a848681ef82deb780fcf4ff26d0dd9040862cf4bd",
+      "provider_calls": 0,
+      "writes": 0
+    },
+    "database_cleanup": {
+      "result": "passed",
+      "sha256": "c817b9b07d916458f3ebe7f792e478427e1e58a295d36ce91efdefc1d6447352"
+    },
+    "exact_adc_and_control_preflight": {
+      "result": "passed",
+      "sha256": "864ce29dc94e619daa757fbd8a9848f4628d375f80c2b3fc80221a7356a6baf0"
+    },
+    "python_compilation": "passed",
+    "ruff_static_checks": "passed",
+    "javascript_syntax": "passed",
+    "git_diff_check": "passed",
+    "task_residue": "absent"
+  },
+  "frozen_boundary_comparison": {
+    "provider_unchanged": true,
+    "model_family_unchanged": true,
+    "project_unchanged": true,
+    "region_unchanged": true,
+    "service_account_unchanged": true,
+    "iam_unchanged": true,
+    "credential_mechanism_unchanged": true,
+    "data_classification_unchanged": true,
+    "isolation_boundary_unchanged": true,
+    "output_contract_unchanged": true,
+    "cost_ceiling_unchanged": true,
+    "residency_assurance_unchanged": true
+  },
+  "retry_budget": {
+    "calls_consumed": 1,
+    "absolute_call_ceiling": 2,
+    "repaired_retry_remaining": 1,
+    "cumulative_cost_ceiling_usd": 1,
+    "cost_ceiling_expected_to_hold": true,
+    "no_call_after_first_admitted_result": true
+  },
+  "admission": {
+    "distinct_single_use_ledger_required": true,
+    "repaired_retry_permitted": true,
+    "any_further_retry_permitted": false
+  }
+}

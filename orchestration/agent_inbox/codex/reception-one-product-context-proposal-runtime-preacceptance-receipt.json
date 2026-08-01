@@ -1,0 +1,46 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "continuation_event": "verifier_acceptance",
+  "planned_action": "accept_and_close_the_default_off_authored_synthetic_product_context_proposal_runtime_with_recorded_sequencing_deviation",
+  "status": "passed",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "authority_boundary": "default_off_authored_synthetic_product_context_reads_and_proposal_only_release_one_consumed_sydney_vertex_call_no_product_model_wiring_no_write",
+  "worker_dispatch_permitted": false,
+  "source_evidence": {
+    "live_handover_current_baton": "Continuity graph revision 72 and Compass map revision 59 record the accepted technical runtime and preserve the closed sequencing deviation.",
+    "current_authority_allocation": [
+      "Yuri authorised continued necessary runtime tranches and the exact authored-synthetic Gemini 2.5 Flash Bernie keyless-ADC Sydney lane.",
+      "The sole product-context occupied ledger is consumed and no call followed success.",
+      "No authority was granted for real or product-derived data, live-model product-context wiring, confirmation, writes, production, deployment, release, commit, push or protected-ref movement."
+    ],
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-product-context-proposal-runtime-plan.md",
+      "docs/bernie-reception-one-product-context-proposal-runtime-closeout.md",
+      "docs/security/bernie-reception-one-product-context-proposal-runtime-threat-model-delta.md",
+      "orchestration/continuity/reception-one-product-context-proposal-runtime/runtime-policy.json",
+      "orchestration/continuity/reception-one-product-context-proposal-runtime/live-local-browser-backend-postgres-evidence.json",
+      "orchestration/continuity/reception-one-product-context-proposal-runtime/occupied-external-audit.json",
+      "orchestration/continuity/reception-one-product-context-proposal-runtime/occupied-independent-audit-analysis.json",
+      "orchestration/agent_inbox/codex/reception-one-product-context-proposal-runtime-sol-acceptance.md"
+    ],
+    "protected_evidence_boundaries": "No raw prompt, raw provider response, credential, access token, API-key information, chain-of-thought or product data is retained. Historical nodes and consumed ledgers remain immutable. The out-of-order live-local gate is recorded rather than rewritten. Only admitted authored-synthetic typed proposal fields are released.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true
+    }
+  }
+}

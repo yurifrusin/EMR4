@@ -1,0 +1,21 @@
+{
+  "schema_version": "reception.one.default_off_dual_planner_runtime.generic_readiness_baseline.v1",
+  "observed_on": "2026-07-30",
+  "interpretation_readiness": {
+    "runtime_or_provider_wiring_ready": false,
+    "raw_trove_access_ready": false,
+    "runtime_gate_decision": "blocked",
+    "sprint_engine_state": "continuing"
+  },
+  "provider_boundary": {
+    "default_provider": "disabled",
+    "runtime_or_provider_wiring_ready": false,
+    "live_provider_enabled": false,
+    "provider_calls_performed": false,
+    "route_behavior_changed": false,
+    "database_access_performed": false,
+    "memory_or_rag_access_performed": false,
+    "historical_diary_material_access_performed": false
+  },
+  "separate_exact_exception": "yuri_authorised_default_off_authored_synthetic_product_context_route_only"
+}

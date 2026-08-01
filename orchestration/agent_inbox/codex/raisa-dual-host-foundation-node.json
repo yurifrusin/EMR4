@@ -1,0 +1,126 @@
+{
+  "authority": {
+    "authorized_openings": [
+      {
+        "boundary": "api-change",
+        "scope": "One provider-free repository-local dual-host Office foundation covering the existing clinician taskpane, medical scribe capability prerequisites and Reception One companion; candidate nomenclature and an integrated role-scoped Reception One product direction may be recorded, but no public rename, patient surface, provider, data access, microphone capture, backend, command, write, deployment or release is authorised.",
+        "source": "docs/raisa-dual-host-foundation-plan.md"
+      }
+    ],
+    "notes": [
+      "Raisa and Clinician One remain candidate names; EMR4 remains the repository and technical identity.",
+      "Reception One is one backend-owned reception domain exposed through role-scoped receptionist, doctor and future patient surfaces, including future online booking and Rayleen arrival registration.",
+      "A third-party service is not selected as the primary booking or arrival product; any future external integration remains subordinate to typed Reception One contracts.",
+      "The candidate Raisa delivery direction is cloud-first practice management as a service; any future on-premises or local-model capability is a subordinate edge and may not create parallel clinical, reception or audit truth.",
+      "Word Online localhost remains platform-blocked; provider, protected data, voice, clinical actions, patient clients, production, deployment and release remain closed."
+    ]
+  },
+  "claim_scope": [
+    "One pure runtime classifies authored desktop, web, mobile and unknown Word host fixtures by capability without invoking any observed capability.",
+    "Every generated profile is deeply immutable, distinguishes host readiness from product authority and leaves document, microphone, network, provider, patient, clinical, command and write authority false.",
+    "The runtime loads before the existing taskpane in source and published copies, initializes during Office.onReady and preserves the accepted Reception One request and summary seam.",
+    "A feature inventory binds the earlier clinician taskpane and scribe paths to the newer Reception One work without reclassifying historical evidence or opening legacy direct-backend paths.",
+    "Cloud-first delivery is recorded as architecture direction only, with explicit practice scoping and no cloud resource, tenancy, deployment, billing or production mutation.",
+    "A local ordinary-browser rendered check and development build passed, but no authenticated Word Online execution, microphone behavior, document operation, backend or provider path was exercised."
+  ],
+  "contract_evidence": [
+    {
+      "contract_id": "combined-patient-practitioner-time-duration-intent",
+      "evidence": [
+        "tests/test_raisa_dual_host_foundation.py",
+        "tests/test_reception_one_word_compact_companion_shell.py",
+        "orchestration/continuity/raisa-dual-host-foundation/host-profile-matrix-evidence.json"
+      ],
+      "note": "The foundation preserves the inherited view-only companion seam and opens no proposal or command authority.",
+      "status": "satisfied"
+    },
+    {
+      "contract_id": "committed-reschedule-availability-reconciliation",
+      "evidence": [
+        "tests/test_reception_one_word_hybrid_contextual_launch.py",
+        "docs/raisa-dual-host-foundation-closeout.md"
+      ],
+      "note": "The host capability layer neither reads nor alters Diary state, event freshness or reconciliation behavior.",
+      "status": "satisfied"
+    }
+  ],
+  "coordinates": {
+    "git_ref": "codex/ariadne-terra-gemini-comparative-rehearsal",
+    "source_head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "thread_id": null,
+    "worktree_role": "integration"
+  },
+  "created_at": "2026-07-31T06:30:00Z",
+  "decisions": [
+    {
+      "id": "accept-raisa-dual-host-foundation-171",
+      "source": "docs/raisa-dual-host-foundation-plan.md",
+      "status": "accepted",
+      "summary": "Accept the pure shared Office host profile and exact clinician/reception inventory while retaining all data and action gates."
+    },
+    {
+      "id": "record-integrated-reception-one-direction-171",
+      "source": "docs/raisa-dual-host-foundation-plan.md",
+      "status": "accepted",
+      "summary": "Record Reception One as one role-scoped reception domain spanning staff, doctors and future online-booking and Rayleen patient surfaces, without granting authority to build or release those future surfaces."
+    },
+    {
+      "id": "record-cloud-first-raisa-direction-172",
+      "source": "docs/raisa-dual-host-foundation-plan.md",
+      "status": "accepted",
+      "summary": "Record cloud-first practice management as a service as the primary delivery direction, while restricting any future local-model or on-premises capability to a subordinate edge with no parallel source of truth."
+    }
+  ],
+  "evidence": {
+    "acceptances": [
+      "orchestration/agent_inbox/codex/raisa-dual-host-foundation-sol-acceptance.md"
+    ],
+    "closeouts": [
+      "docs/raisa-dual-host-foundation-closeout.md"
+    ],
+    "findings": [
+      "orchestration/continuity/raisa-dual-host-foundation/feature-inventory.json",
+      "orchestration/continuity/raisa-dual-host-foundation/host-profile-matrix-evidence.json",
+      "orchestration/continuity/raisa-dual-host-foundation/final-residue-evidence.json"
+    ],
+    "plans": [
+      "docs/raisa-dual-host-foundation-plan.md",
+      "docs/security/raisa-dual-host-foundation-threat-model-delta.md"
+    ],
+    "receipts": [
+      "orchestration/agent_inbox/codex/raisa-dual-host-foundation-rehydration-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-dual-host-foundation-preacceptance-receipt.json"
+    ],
+    "tests": [
+      "tests/test_raisa_dual_host_foundation.py",
+      "tests/test_reception_one_word_hybrid_contextual_launch.py",
+      "tests/test_reception_one_word_compact_companion_shell.py",
+      "tests/test_reception_one_word_desktop_authenticated_dialog_check.py",
+      "tests/test_reception_one_word_online_authenticated_dialog_check.py",
+      "tests/test_api_spine_artifacts.py"
+    ]
+  },
+  "id": "raisa-dual-host-foundation",
+  "kind": "integration",
+  "relationships": [
+    {
+      "node_id": "reception-one-word-desktop-authenticated-dialog-check",
+      "relation": "builds_on"
+    },
+    {
+      "node_id": "reception-one-word-compact-companion-shell",
+      "relation": "validates"
+    }
+  ],
+  "status": "accepted",
+  "title": "Raisa Candidate Dual-host Foundation",
+  "unresolved_gates": [
+    "Raisa and Clinician One are candidate names only; public naming, artwork, domain, ASIC and trade-mark actions remain separately gated.",
+    "Authenticated Word Online remains unproven because the accepted localhost development route is blocked before taskpane execution.",
+    "The legacy clinician scribe and direct backend paths are inventoried but not yet migrated behind Access AI or revalidated in desktop and web hosts.",
+    "Future online booking, Rayleen arrival registration, patient identity, patient writes and external patient clients remain separately gated.",
+    "Cloud tenancy, infrastructure, data residency, deployment, billing, production and any local-model edge remain separately gated.",
+    "Provider interpretation, protected or product-derived data, voice capture, clinical action, appointment command, production, deployment and release remain closed."
+  ],
+  "updated_at": "2026-07-31T06:45:00Z"
+}

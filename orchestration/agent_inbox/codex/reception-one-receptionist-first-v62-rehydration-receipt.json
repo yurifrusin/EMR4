@@ -1,0 +1,84 @@
+{
+  "schema_version": "ariadne.rehydration_receipt.v1",
+  "receipt_id": "reception-one-receptionist-first-v62-20260730",
+  "recorded_at": "2026-07-30T08:31:47Z",
+  "result": "passed",
+  "rehydrated_from_receipt": true,
+  "mandatory_rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "live_handover_current_baton": {
+    "source": "AGENTS.md",
+    "read_completely": true,
+    "current_result": "reception_one_receptionist_first_v61_targeted_repair_fourteen_exact_one_pre_schema_no_release",
+    "next_implementation": "separately_versioned_v62_typed_desk_context_full_twenty_four_case_regression"
+  },
+  "current_authority_allocation": {
+    "source": "AGENTS.md sections 4 and 6 plus Yuri's current v6.2 and full-cohort instructions",
+    "conductor_and_acceptance_owner": "GPT Sol",
+    "implementation_owner": "GPT Sol",
+    "external_worker_or_subagent_selected": false,
+    "reasoning_level": "high"
+  },
+  "active_plan_and_acceptance": {
+    "sources": [
+      "docs/bernie-reception-one-receptionist-first-v61-repair-plan.md",
+      "docs/bernie-reception-one-receptionist-first-v61-pre-schema-continuation-plan.md",
+      "docs/bernie-reception-one-receptionist-first-v61-completion-metadata-diagnostic-plan.md",
+      "docs/security/bernie-reception-one-receptionist-first-v61-threat-model-delta.md",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v61-provider-free-sol-acceptance.md",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v61-node.json",
+      "orchestration/continuity/reception-one-receptionist-first-v61/runtime-policy.json",
+      "orchestration/continuity/reception-one-receptionist-first-v61/occupied-repair-cohort-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v61/occupied-continuation-evidence.json",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "orchestration/access_ai_api_design.md",
+      "orchestration/bernie_release_gates.md",
+      "docs/api-spine/graphql/appointment-diary-read.graphql",
+      "docs/api-spine/manifests/agent-capability-charters.yaml",
+      "tests/test_api_spine_artifacts.py"
+    ],
+    "user_authority_source": [
+      "Yuri directed progression to v6.2.",
+      "Yuri required the model to receive the same decision-relevant local Diary and recent-dialogue context available to the deterministic parser.",
+      "Yuri authorised rerunning all twenty-four original authored-synthetic v6 requests, including those that passed v6.0.",
+      "Yuri's standing bounded Sydney Vertex retry authority retains the exact provider, model, project, identity, keyless ADC, region, authored-synthetic, isolation, audit, no-fallback, no-write and USD 1 boundaries."
+    ],
+    "historical_results_remain_immutable": true
+  },
+  "protected_evidence_boundaries": {
+    "source": "AGENTS.md sections 5 and 6",
+    "protected_holdouts_opened": false,
+    "historical_diary_material_opened": false,
+    "product_or_database_data": false,
+    "patient_health_or_clinical_data": false,
+    "write_or_confirmation_authority": false,
+    "provider_family_project_identity_region_or_auth_change": false,
+    "raw_provider_response_retention": false,
+    "chain_of_thought_retention": false,
+    "fallback": false,
+    "full_practice_diary_context": false,
+    "memory_rag_or_graphrag": false
+  },
+  "git_refs_and_worktree": {
+    "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+    "head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+    "handoff_current": "4974075b31035d599e081d68e3b85e04a897baa1",
+    "origin_master": "4974075b31035d599e081d68e3b85e04a897baa1",
+    "origin_handoff_current": "4974075b31035d599e081d68e3b85e04a897baa1",
+    "worktree_dirty": true,
+    "worktree_entry_count": 466,
+    "worktree_status_sha256": "sha256:429e865fc15044f9bdc13ad960a3348cfd7a62554a338d27bde5e6e2b249ee63",
+    "continuity_graph_revision": 110,
+    "compass_map_revision": 97,
+    "unrelated_user_changes_must_be_preserved": true,
+    "commit_push_pr_or_ref_move_authorized": false
+  },
+  "planned_action": "freeze_and_prove_a_minimal_source_labelled_freshness_bound_v62_desk_context_then_evaluate_all_twenty_four_frozen_v6_authored_synthetic_cases"
+}

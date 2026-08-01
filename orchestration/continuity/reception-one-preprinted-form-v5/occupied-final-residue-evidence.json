@@ -1,0 +1,47 @@
+{
+  "schema_version": "reception.one.preprinted_form_v5.final_residue_evidence.v1",
+  "recorded_at": "2026-07-30T03:57:00Z",
+  "result": "reception_one_preprinted_form_v5_final_residue_pass",
+  "attempt_id": "reception-one-preprinted-form-v5-turn-001",
+  "ledger_id": "reception-one-preprinted-form-v5-ledger-001",
+  "provider_calls_consumed": 1,
+  "second_attempt_opened": false,
+  "second_ledger_created": false,
+  "provider_calls_after_first_admitted_result": 0,
+  "owned_runtime_absent": {
+    "live_cell_container": true,
+    "live_relay_container": true,
+    "live_internal_network": true,
+    "live_cell_image": true,
+    "live_relay_image": true,
+    "fixture_turn_one_container": true,
+    "fixture_turn_two_container": true,
+    "fixture_turn_one_image": true,
+    "fixture_turn_two_image": true,
+    "one_use_broker_process": true,
+    "temporary_context": true,
+    "temporary_token": true
+  },
+  "durable_evidence": {
+    "turn_audit_event_count": 10,
+    "turn_audit_terminal_hash": "sha256:28e3c7f4b8a2acbb1a5a50f4ac26ad84088126bbb1e64ae7ee21ff0455bc32c3",
+    "parent_audit_event_count": 4,
+    "parent_audit_terminal_hash": "sha256:19e703587522506b10adc4de6b9f4625f1184364f269d24dab80ef81b49a5050",
+    "turn_hash_chain_valid": true,
+    "parent_hash_chain_valid": true,
+    "ledger_consumed": true,
+    "release_committed": true,
+    "write_performed": false
+  },
+  "caller_observation": {
+    "initial_shell_wait_timed_out_before_result_was_returned": true,
+    "underlying_lifecycle_completed": true,
+    "evidence_reconstructed": false,
+    "provider_call_replayed": false,
+    "retry_performed": false
+  },
+  "credential_material_inspected_or_recorded": false,
+  "api_key_information_inspected_or_recorded": false,
+  "daemon_wide_prune_performed": false,
+  "external_state_changed_after_call": false
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": "reception.one.word-desktop-residue.v1",
+  "checked_at": "2026-07-31T05:45:00Z",
+  "result": "pass",
+  "checks": {
+    "office_addin_debugging_stopped": true,
+    "task_word_process_present": false,
+    "port_3000_listener_present": false,
+    "task_dev_server_process_present": false,
+    "task_dev_server_child_process_present": false,
+    "task_blank_document_temp_file_present": false,
+    "task_stdout_log_present": false,
+    "task_stderr_log_present": false,
+    "container_residue_present": false,
+    "network_residue_present": false
+  },
+  "cleanup": {
+    "disposable_sideload_removed": true,
+    "task_created_blank_word_window_closed": true,
+    "task_owned_word_process_stopped_after_hidden_window_residue": true,
+    "task_owned_loopback_server_stopped": true,
+    "task_owned_temp_files_removed": true,
+    "unrelated_word_documents_or_processes_touched": false
+  }
+}

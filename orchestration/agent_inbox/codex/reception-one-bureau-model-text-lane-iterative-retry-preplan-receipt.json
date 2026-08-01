@@ -1,0 +1,41 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_the_iterative_retry_contract_and_first_compact_wire_occupied_attempt",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "authority": "orchestration/continuity/reception-one-bureau-model-text-lane/iterative-retry-authority.json",
+    "plan": "docs/bernie-reception-one-bureau-model-text-lane-iterative-retry-plan.md",
+    "exact_lane": {
+      "provider": "google_cloud_vertex_ai",
+      "model": "gemini-2.5-flash",
+      "project": "bernie-emr4-dev",
+      "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+      "authentication": "keyless_impersonated_service_account_adc",
+      "location": "australia-southeast1",
+      "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+      "data_class": "authored_synthetic",
+      "isolation": "credential_free_work_cell_with_one_use_host_broker",
+      "proofreader": "deterministic_closed_operator_plan_gate",
+      "release": "in_memory_proposal_only",
+      "audit": "external_hash_chained_no_raw_prompt_response_or_reasoning",
+      "cumulative_cost_ceiling_usd": 1,
+      "fallback": false,
+      "product_or_write_authority": false
+    },
+    "retry_boundary": "One distinct ledger and one call per attempt; diagnose, regression-test and rerun all blocked gates before another call; stop immediately after the first admitted proofreader result.",
+    "historical_boundary": "No historical node or consumed ledger is revised."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

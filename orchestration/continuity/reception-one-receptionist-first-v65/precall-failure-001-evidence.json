@@ -1,0 +1,26 @@
+{
+  "schema_version": "reception.one.receptionist_first_v65.precall_failure.v1",
+  "attempt_id": "reception-one-receptionist-first-v65-precall-failure-001",
+  "recorded_at": "2026-07-30T10:38:31Z",
+  "result": "reception_one_receptionist_first_v65_precall_gate_rejected",
+  "failure_phase": "local_pre_call_authority_contract",
+  "reason_code": "occupied_authority_missing",
+  "diagnosis": "The v6.5 authority manifest did not expose the inherited live gate's authority_granted, decision and nested exact_boundary fields.",
+  "provider_calls_performed": 0,
+  "single_use_ledgers_opened": 0,
+  "provider_prompt_transmitted": false,
+  "credential_material_retained": false,
+  "api_key_information_observed_or_recorded": false,
+  "fallback_performed": false,
+  "released_value": false,
+  "parent_audit_path": "orchestration/continuity/reception-one-receptionist-first-v65/precall-failure-001/occupied-dialogue-parent-audit.jsonl",
+  "parent_audit_sha256": "sha256:036a1fe053d54c971280e06dc23fab8b6182f9cf0ffb274439063d201a7313de",
+  "audit_chain_closed": true,
+  "repair": {
+    "scope": "repository_local_authority_manifest_contract_only",
+    "provider_model_project_identity_region_and_controls_changed": false,
+    "focused_regression": "tests/test_reception_one_receptionist_first_v65.py::test_v65_authority_is_admitted_by_the_inherited_live_gate",
+    "fresh_provider_free_regating_required": true,
+    "fresh_revision_binding_required": true
+  }
+}

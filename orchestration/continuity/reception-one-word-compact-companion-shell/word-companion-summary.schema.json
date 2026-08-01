@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/reception-one-word-companion-summary.v1.json",
+  "title": "Reception One native Diary to Word generic companion summary",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "type",
+    "source_surface",
+    "target_surface",
+    "correlation_id",
+    "request_id",
+    "reference_date",
+    "status",
+    "projection_family",
+    "result_count",
+    "planner_mode",
+    "proofreader_disposition",
+    "summary_code",
+    "details_surface",
+    "detail_fields_released",
+    "request_text_included",
+    "patient_context_included",
+    "appointment_context_included",
+    "appointment_write_authority",
+    "command_authority",
+    "provider_authority",
+    "evidence_mode"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "reception.one.word-companion-summary.v1"
+    },
+    "type": {
+      "const": "reception_one_companion_summary"
+    },
+    "source_surface": {
+      "const": "native_diary_bureau"
+    },
+    "target_surface": {
+      "const": "word_taskpane"
+    },
+    "correlation_id": {
+      "type": "string",
+      "pattern": "^word-launch-[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^word-request-[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "reference_date": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "status": {
+      "enum": [
+        "admitted",
+        "clarification_required",
+        "blocked"
+      ]
+    },
+    "projection_family": {
+      "enum": [
+        "focused_schedule_lane",
+        "patient_timeline",
+        "availability_slots",
+        "aligned_comparison",
+        "ordinary_overview",
+        "clarification",
+        "proposal_review"
+      ]
+    },
+    "result_count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "planner_mode": {
+      "const": "deterministic"
+    },
+    "proofreader_disposition": {
+      "enum": [
+        "admit",
+        "human_gate",
+        "edge_abort"
+      ]
+    },
+    "summary_code": {
+      "enum": [
+        "results_ready",
+        "no_results",
+        "clarification_required",
+        "request_blocked"
+      ]
+    },
+    "details_surface": {
+      "const": "native_diary_bureau"
+    },
+    "detail_fields_released": {
+      "const": false
+    },
+    "request_text_included": {
+      "const": false
+    },
+    "patient_context_included": {
+      "const": false
+    },
+    "appointment_context_included": {
+      "const": false
+    },
+    "appointment_write_authority": {
+      "const": false
+    },
+    "command_authority": {
+      "const": false
+    },
+    "provider_authority": {
+      "const": false
+    },
+    "evidence_mode": {
+      "const": "local_authored_synthetic_companion"
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "status": {
+          "const": "admitted"
+        },
+        "result_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "proofreader_disposition": {
+          "const": "admit"
+        },
+        "summary_code": {
+          "const": "results_ready"
+        }
+      }
+    },
+    {
+      "properties": {
+        "status": {
+          "const": "admitted"
+        },
+        "result_count": {
+          "const": 0
+        },
+        "proofreader_disposition": {
+          "const": "admit"
+        },
+        "summary_code": {
+          "const": "no_results"
+        }
+      }
+    },
+    {
+      "properties": {
+        "status": {
+          "const": "clarification_required"
+        },
+        "projection_family": {
+          "const": "clarification"
+        },
+        "result_count": {
+          "const": 0
+        },
+        "proofreader_disposition": {
+          "const": "human_gate"
+        },
+        "summary_code": {
+          "const": "clarification_required"
+        }
+      }
+    },
+    {
+      "properties": {
+        "status": {
+          "const": "blocked"
+        },
+        "result_count": {
+          "const": 0
+        },
+        "proofreader_disposition": {
+          "const": "edge_abort"
+        },
+        "summary_code": {
+          "const": "request_blocked"
+        }
+      }
+    }
+  ]
+}

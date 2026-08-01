@@ -1,0 +1,86 @@
+{
+  "schema_version": "reception.one.readonly_synthetic_diary_context.external_audit_analysis.v1",
+  "recorded_at": "2026-07-30T13:07:07Z",
+  "result": "reception_one_readonly_synthetic_diary_context_external_audit_complete",
+  "occupied_result": "reception_one_readonly_synthetic_diary_context_occupied_pass",
+  "provider_calls": {
+    "actual": 1,
+    "absolute_ceiling": 2,
+    "primary": 1,
+    "terminal_correction": 0,
+    "after_terminal_result": 0
+  },
+  "provider_outcome": {
+    "status": "completed",
+    "http_status": 200,
+    "latency_ms": 5440,
+    "prompt_tokens": 4805,
+    "visible_candidate_tokens": 514,
+    "thinking_tokens": 736,
+    "total_tokens": 6055,
+    "raw_provider_text_retained": false,
+    "hidden_thought_content_retained": false
+  },
+  "typed_result": {
+    "goal": "resize",
+    "proposal_family": "resize",
+    "operation_id": "proposeAppointmentUpdate",
+    "duration_minutes": 45,
+    "proofreader_disposition": "admit",
+    "proofreader_violation_codes": [],
+    "requires_human_confirmation": true,
+    "write_performed": false,
+    "product_delivered": false
+  },
+  "context_binding": {
+    "trusted_backend_frame_sha256": "sha256:7d9992fb345aba7c48feb4803eeac8ef21e8402948fe9f647e4e9a002e86f5b6",
+    "task_sha256": "sha256:8d66b2a19a0301f4af2806f8923f76a33d10e44e2d3195d725b42c1f660b41ff",
+    "desk_context_sha256": "sha256:15a84eef16207267e90ddb13c4b20b51b48c550800319daf1ae29426d067ac38",
+    "reviewed_context_revision": 3616517295,
+    "same_packet_seen_by_model_and_proofreader": true,
+    "source_labels": [
+      "fixture_intercepted",
+      "staff_selected",
+      "staff_selected"
+    ],
+    "command_authority": false,
+    "database_absent_before_provider_call": true,
+    "model_database_access": false,
+    "opaque_handle_map_in_cell": false,
+    "full_diary_exposed": false,
+    "unselected_appointments_exposed": false
+  },
+  "exact_binding": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "api_key_authentication_used": false,
+    "fallback_performed": false
+  },
+  "audit_controls": {
+    "all_ledgers_consumed": true,
+    "opened_ledger_count": 1,
+    "turn_hash_chain_valid": true,
+    "turn_audit_event_count": 11,
+    "case_hash_chain_valid": true,
+    "case_audit_event_count": 4,
+    "cleanup_passed": true,
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "credentials_or_tokens_recorded": false,
+    "api_key_information_recorded": false,
+    "chain_of_thought_recorded": false
+  },
+  "precall_failure": {
+    "provider_calls": 0,
+    "ledgers_opened": 0,
+    "reason_code": "occupied_authority_not_exact",
+    "partial_parent_audit_sha256": "sha256:26e76f756a3f6c54e3ce933d7b703161e09acd1e56d26bf9fa871db2ba74fc28",
+    "distinct_retry_identifiers_used": true
+  },
+  "claim_limit": "This proves one authored-synthetic trusted-backend context frame can traverse the frozen isolated lane and produce an exact proposal-only resize result through the configured and observed Sydney locational endpoint. It does not prove wall-clock production freshness, real-data safety, autonomous booking authority, production fitness, or Australian physical or sovereign processing."
+}

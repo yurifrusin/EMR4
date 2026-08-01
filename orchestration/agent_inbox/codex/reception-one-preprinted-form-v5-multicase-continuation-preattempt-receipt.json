@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "receipt_id": "reception-one-preprinted-form-v5-multicase-continuation-preattempt-20260730",
+  "recorded_at": "2026-07-30T04:46:28Z",
+  "result": "pass",
+  "rehydrated_from_receipt": true,
+  "sources": {
+    "live_handover_current_baton": [
+      "AGENTS.md",
+      "Reception One v5 multi-case occupied gate and consumed create case"
+    ],
+    "current_authority_allocation": [
+      "Yuri: Great let's keep evaluating it.",
+      "orchestration/continuity/reception-one-preprinted-form-v5-multicase/occupied-authority.json"
+    ],
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-preprinted-form-v5-multicase-evaluation-plan.md",
+      "orchestration/continuity/reception-one-preprinted-form-v5-multicase/coordinator-repair-evidence.json",
+      "orchestration/continuity/reception-one-preprinted-form-v5-multicase/continuation-pre-attempt-evidence.json"
+    ],
+    "protected_evidence_boundaries": [
+      "AGENTS.md section 5",
+      "AGENTS.md section 6",
+      "No protected evidence or user-decision boundary changed"
+    ],
+    "git_refs_and_worktree": [
+      "HEAD 5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master 4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current 4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master 4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current 4974075b31035d599e081d68e3b85e04a897baa1",
+      "Dirty integration worktree preserved; no unrelated file may be altered"
+    ]
+  },
+  "revision_binding": {
+    "continuity_graph_revision": 98,
+    "compass_map_revision": 85,
+    "compass_source_graph_revision": 98
+  },
+  "continuation_gate": "admitted_without_replaying_closed_create_call",
+  "provider_calls_consumed_at_receipt": 1
+}

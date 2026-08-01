@@ -1,0 +1,105 @@
+{
+  "bounded_pool": {
+    "checkout_timeout_configured_seconds": 0.25,
+    "checkout_timeout_elapsed_ms": 257,
+    "checkout_timeout_observed": true,
+    "checkout_timeout_within_bound": true,
+    "current_user_is_capability": true,
+    "identities_separate": true,
+    "login_connection_limit": 2,
+    "login_direct_table_read_denied": true,
+    "max_overflow": 1,
+    "passed": true,
+    "pool_lifo": true,
+    "pool_maximum": 2,
+    "pool_pre_ping": true,
+    "pool_reset_on_return": "rollback",
+    "pool_size": 1,
+    "session_user_is_login": true
+  },
+  "claim_limits": [
+    "The limiter is per process and proves no distributed or production abuse resistance.",
+    "The deployment credential was disposable, was not recorded and proves no secret-manager or rotation path.",
+    "No real identity, Office federation, product data, deployment, production or release is established."
+  ],
+  "cleanup": {
+    "capability_role_absent_after": true,
+    "capability_role_drop_attempted": true,
+    "database_absent_after": true,
+    "database_drop_attempted": true,
+    "login_role_absent_after": true,
+    "login_role_drop_attempted": true,
+    "passed": true
+  },
+  "data_class": "authored_synthetic",
+  "database": {
+    "loopback_only": true,
+    "name_recorded": false,
+    "preexisting": false
+  },
+  "deployment_role_isolation": {
+    "cannot_bypass_rls": true,
+    "cannot_create_database": true,
+    "cannot_create_role": true,
+    "cannot_replicate": true,
+    "capability_membership": true,
+    "connection_limit": 2,
+    "direct_audit_select_grant": false,
+    "login_enabled": true,
+    "noinherit": true,
+    "not_superuser": true,
+    "passed": true,
+    "password_recorded": false
+  },
+  "evidence_label": "live_local_backend_postgres_operational",
+  "evidence_raw_or_target_match_count": 0,
+  "migration": {
+    "current_head_exact": true,
+    "head_revision": "p5q6r7s8t9u0",
+    "orm_migration_drift_absent": true,
+    "passed": true
+  },
+  "passed": true,
+  "proxy_rate_and_route_denials": {
+    "audit_outage_generic_503": true,
+    "first_rate_denial": true,
+    "initial_request_admitted": true,
+    "origin_denial": true,
+    "passed": true,
+    "repeated_rate_denial_same_generic_response": true,
+    "response_raw_value_match_count": 0,
+    "untrusted_forwarded_header_denial": true
+  },
+  "result": "raisa_shared_application_auth_operational_hardening_pass",
+  "retained_denial_audit": {
+    "append_only_update_rejected": true,
+    "exact_expected_row_count": true,
+    "metadata_only_shape": true,
+    "passed": true,
+    "rate_denial_coalesced_to_one_row": true,
+    "raw_value_match_count": 0,
+    "request_denial_rows": true,
+    "rls_exact_context_row_count": 3,
+    "rls_no_context_row_count": 0,
+    "rls_passed": true,
+    "row_count": 3
+  },
+  "roles": {
+    "capability_preexisting": false,
+    "login_preexisting": false,
+    "names_recorded": false,
+    "password_recorded": false
+  },
+  "schema_version": "raisa.shared-auth-operational-hardening.evidence.v1",
+  "side_effect_counts": {
+    "appointment_or_arrival_commands": 0,
+    "cloud_or_iam_mutations": 0,
+    "deployments": 0,
+    "external_identity_calls": 0,
+    "microsoft_or_office_identity_calls": 0,
+    "patient_health_or_clinical_reads": 0,
+    "product_data_reads": 0,
+    "production_changes": 0,
+    "provider_calls": 0
+  }
+}

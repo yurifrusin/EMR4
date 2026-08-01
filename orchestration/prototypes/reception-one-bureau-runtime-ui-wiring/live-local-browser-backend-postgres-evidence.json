@@ -1,0 +1,114 @@
+{
+  "api_key_authentication_used": false,
+  "appointment_confirmation_performed": false,
+  "appointment_write_performed": false,
+  "browser_result": {
+    "compact_control_visible": true,
+    "default_mode": "deterministic",
+    "deterministic": {
+      "confirmation_performed": false,
+      "http_status": 200,
+      "model_database_access": false,
+      "planner_mode": "deterministic",
+      "proofreader_disposition": "admit",
+      "proposal_only": true,
+      "provider_calls": 0,
+      "rendered_provenance": "Standard planner\nProofreader admitted\n0 provider calls",
+      "requires_confirmation": true,
+      "result": "proposal_ready",
+      "runtime_audit_ref": null,
+      "write_performed": false
+    },
+    "development_control_visible": true,
+    "isolated_gate_closed": {
+      "http_status": 403,
+      "stale_provenance_visible": false
+    },
+    "ordinary_control_hidden": true,
+    "submitted_modes": [
+      "deterministic",
+      "isolated_vertex"
+    ]
+  },
+  "checks": {
+    "closed_modes_submitted": true,
+    "compact_control_visible": true,
+    "database_unchanged": true,
+    "deterministic_admitted": true,
+    "deterministic_default": true,
+    "deterministic_http_200": true,
+    "deterministic_zero_provider_calls": true,
+    "development_control_visible": true,
+    "exact_route_call_count": true,
+    "failure_clears_provenance": true,
+    "isolated_gate_closed_before_provider": true,
+    "loopback_only": true,
+    "ordinary_control_hidden": true,
+    "proposal_only": true,
+    "provenance_rendered": true
+  },
+  "credential_reads": 0,
+  "data_class": "authored_synthetic",
+  "database_after": {
+    "counts": {
+      "appointment_audit_log": 0,
+      "appointment_command_idempotency": 0,
+      "appointments": 6,
+      "bernie_booking_sessions": 0,
+      "bernie_session_events": 0
+    },
+    "database": "gp_pms_reception_one_bureau_ui_8f03a9c2_20260730",
+    "identifiers_recorded": false,
+    "patient_details_recorded": false,
+    "schema_version": "bernie.meta-grid-live-local.database-readback.v1",
+    "sha256": {
+      "appointment_audit_log": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "appointment_command_idempotency": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "appointments": "3e3c05e6aa79618ee442e897bc597b10bc4ba63187d57721a7dc84ff8f75dc9a",
+      "bernie_booking_sessions": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bernie_session_events": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "synthetic_only": true
+  },
+  "database_before": {
+    "counts": {
+      "appointment_audit_log": 0,
+      "appointment_command_idempotency": 0,
+      "appointments": 6,
+      "bernie_booking_sessions": 0,
+      "bernie_session_events": 0
+    },
+    "database": "gp_pms_reception_one_bureau_ui_8f03a9c2_20260730",
+    "identifiers_recorded": false,
+    "patient_details_recorded": false,
+    "schema_version": "bernie.meta-grid-live-local.database-readback.v1",
+    "sha256": {
+      "appointment_audit_log": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "appointment_command_idempotency": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "appointments": "3e3c05e6aa79618ee442e897bc597b10bc4ba63187d57721a7dc84ff8f75dc9a",
+      "bernie_booking_sessions": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bernie_session_events": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "synthetic_only": true
+  },
+  "evidence_label": "live_local_browser_backend_postgres",
+  "network": {
+    "allowed_hosts": [
+      "::1",
+      "127.0.0.1",
+      "localhost"
+    ],
+    "external_host_count": 0,
+    "route_call_count": 2
+  },
+  "provider_calls": 0,
+  "provider_environment_forwarded": false,
+  "request_interception_used": false,
+  "result": "reception_one_bureau_runtime_ui_provider_free_pass",
+  "schema_version": "reception.one.bureau_runtime_ui.live_local_acceptance.v1",
+  "screenshots": [
+    "orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/deterministic-admitted-desktop.png",
+    "orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/deterministic-admitted-compact.png",
+    "orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/isolated-gate-closed.png"
+  ]
+}

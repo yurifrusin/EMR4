@@ -1,0 +1,231 @@
+{
+  "api_key_authentication_used": false,
+  "attempt_id": "reception-one-preprinted-form-v5-eval-b-clarify-sort-turn-002",
+  "authentication": "keyless_impersonated_service_account_adc",
+  "candid_limit": "The call proves the configured Sydney regional request path, one-use isolation lifecycle and admitted typed release; it does not prove Australian physical or sovereign processing, product suitability or safety for real data.",
+  "cleanup": {
+    "base_image_state_preserved": true,
+    "broker_process_absent": true,
+    "cell_container_absent": true,
+    "cell_image_absent": true,
+    "daemon_wide_prune_performed": false,
+    "internal_network_absent": true,
+    "relay_container_absent": true,
+    "relay_image_absent": true,
+    "temporary_context_absent": true,
+    "temporary_token_absent": true
+  },
+  "correction_ticket": null,
+  "durable_hash_chain": {
+    "event_count": 10,
+    "terminal_hash": "sha256:a461b1c7ac71b26b6b442960686c95551033bffe6b6fab9341c18b6df15166c0",
+    "valid": true
+  },
+  "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+  "event_sequence": [
+    {
+      "event_hash": "sha256:73087e6655b7bc0b871eec782ba55ae291a9f4b093d264fa32aa32d2009b6f1a",
+      "event_type": "broker_ready",
+      "previous_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "sequence": 1
+    },
+    {
+      "event_hash": "sha256:f23abea1ab50c3a048b41e77cdd3f6aa217026149df986325b01bcf86ac7b214",
+      "event_type": "request_admitted",
+      "previous_hash": "sha256:73087e6655b7bc0b871eec782ba55ae291a9f4b093d264fa32aa32d2009b6f1a",
+      "sequence": 2
+    },
+    {
+      "event_hash": "sha256:1c2030d65e10e231583b980ae4365ab395580ca3d2a671393d88fb8dd395a88e",
+      "event_type": "ledger_consumed",
+      "previous_hash": "sha256:f23abea1ab50c3a048b41e77cdd3f6aa217026149df986325b01bcf86ac7b214",
+      "sequence": 3
+    },
+    {
+      "event_hash": "sha256:177cfffffc9d05b165b6c651e94f0c8b13720a91df15b0343ad39c6b66691bf0",
+      "event_type": "provider_request_constructed",
+      "previous_hash": "sha256:1c2030d65e10e231583b980ae4365ab395580ca3d2a671393d88fb8dd395a88e",
+      "sequence": 4
+    },
+    {
+      "event_hash": "sha256:61edeaf4d46566a11ca13b3a966de85652b0194adc2a6dc29bd6015d32695781",
+      "event_type": "provider_call_started",
+      "previous_hash": "sha256:177cfffffc9d05b165b6c651e94f0c8b13720a91df15b0343ad39c6b66691bf0",
+      "sequence": 5
+    },
+    {
+      "event_hash": "sha256:ae5c02e83c663fe27f937e2f4b85e735d7b50e8aa33a6df4e886076fb8e6933c",
+      "event_type": "provider_call_received",
+      "previous_hash": "sha256:61edeaf4d46566a11ca13b3a966de85652b0194adc2a6dc29bd6015d32695781",
+      "sequence": 6
+    },
+    {
+      "event_hash": "sha256:0ba33e6a4092357fb35f90f2a6c4000159e8c7d046fbd82472e9dda1f643c02a",
+      "event_type": "provider_call_completed",
+      "previous_hash": "sha256:ae5c02e83c663fe27f937e2f4b85e735d7b50e8aa33a6df4e886076fb8e6933c",
+      "sequence": 7
+    },
+    {
+      "event_hash": "sha256:1afb7687bbfb1f1123e021737fa5436d25365722cb4b3420c1db2ca6623b62fe",
+      "event_type": "operator_note_evaluated",
+      "previous_hash": "sha256:0ba33e6a4092357fb35f90f2a6c4000159e8c7d046fbd82472e9dda1f643c02a",
+      "sequence": 8
+    },
+    {
+      "event_hash": "sha256:7071c948b33b4faf44e306f199970076a7a8e26f01b5e229840efcb13fac60f8",
+      "event_type": "proofreader_completed",
+      "previous_hash": "sha256:1afb7687bbfb1f1123e021737fa5436d25365722cb4b3420c1db2ca6623b62fe",
+      "sequence": 9
+    },
+    {
+      "event_hash": "sha256:a461b1c7ac71b26b6b442960686c95551033bffe6b6fab9341c18b6df15166c0",
+      "event_type": "release_committed",
+      "previous_hash": "sha256:7071c948b33b4faf44e306f199970076a7a8e26f01b5e229840efcb13fac60f8",
+      "sequence": 10
+    }
+  ],
+  "explicit_exclusions": {
+    "api_key_information_recorded": false,
+    "chain_of_thought_recorded": false,
+    "command_authority": false,
+    "credential_or_token_recorded": false,
+    "human_or_product_delivery": false,
+    "operator_note_parsed_into_plan": false,
+    "operator_note_product_delivered": false,
+    "product_or_database_access": false,
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false
+  },
+  "freshness": "fresh",
+  "ledger_id": "reception-one-preprinted-form-v5-eval-b-clarify-sort-ledger-002",
+  "location": "australia-southeast1",
+  "model_id": "gemini-2.5-flash",
+  "model_input_hash": "sha256:307bf27b19914e4516f8fc230cdc1f16a2c23d8cfd68b9d0c01a3fd11f9fd3b6",
+  "operator_note": {
+    "audit_only": true,
+    "disposition": "admit",
+    "note_sha256": "sha256:2441482a5e7090924287e0dde95287f57005d0f76b9fb8d2625ddd402aa310c7",
+    "operator_note": "Review complete, no booking was changed.",
+    "parsed_into_plan": false,
+    "product_delivered": false,
+    "reason_codes": [],
+    "retained_utf8_bytes": 40
+  },
+  "preprinted_form": {
+    "broker_judgement_repair": false,
+    "broker_owned_field_manifest": [
+      "version_code"
+    ],
+    "model_authored_field_manifest": [
+      "operator_note",
+      "goal_code",
+      "steps"
+    ],
+    "model_form_body_hash": "sha256:d5ce58a73451d85d27f590b160dd55791752d10712c5cfd2ec9ffd27b14599fe",
+    "preprinted_field_manifest_hash": "sha256:2a1f45caa1aeee47a1ab25e5ff886ac2e149e404d0c322e020db4338d6015d3e",
+    "raw_model_form_body_recorded": false
+  },
+  "project": "bernie-emr4-dev",
+  "proofreader": {
+    "admitted_operator_ids": [
+      "resolve_patient_reference",
+      "request_clarification"
+    ],
+    "disposition": "admit",
+    "safe_repairs": [],
+    "violations": [],
+    "wire_safe_repairs": []
+  },
+  "provider": "google_vertex_ai",
+  "provider_outcome": {
+    "bounded_error": null,
+    "http_status": 200,
+    "latency_ms": 1261,
+    "status": "completed",
+    "usage": {
+      "candidatesTokenCount": 74,
+      "promptTokenCount": 2397,
+      "totalTokenCount": 2471
+    }
+  },
+  "release": {
+    "atomic_release": true,
+    "human_gate": true,
+    "released_field_manifest": [
+      "$.final_output.api_spine_operation_id",
+      "$.final_output.appointment_ref",
+      "$.final_output.candidate_slot_ids",
+      "$.final_output.duration_minutes",
+      "$.final_output.kind",
+      "$.final_output.patient_ref",
+      "$.final_output.practitioner_ref",
+      "$.final_output.proposal_family",
+      "$.final_output.requires_human_confirmation",
+      "$.final_output.status",
+      "$.final_output.warning_codes",
+      "$.final_output.write_performed"
+    ],
+    "released_values": {
+      "api_spine_operation_id": null,
+      "appointment_ref": null,
+      "candidate_slot_ids": [],
+      "duration_minutes": null,
+      "kind": "clarification",
+      "patient_ref": null,
+      "practitioner_ref": null,
+      "proposal_family": "clarification",
+      "requires_human_confirmation": false,
+      "status": null,
+      "warning_codes": [],
+      "write_performed": false
+    },
+    "write_performed": false
+  },
+  "request_hash": "sha256:384e5737be7912020dc7c8d572d4e198065d09fe09b0e2082173c9e973c7d43d",
+  "result": "reception_one_preprinted_form_v5_turn_pass",
+  "retry": {
+    "actual_provider_call_ordinal": 2,
+    "authorised": true,
+    "count": 1,
+    "lifecycle_sequence": 2,
+    "performed": true,
+    "reason": "sequence_stopped_after_first_admitted_result"
+  },
+  "schema_hash": "sha256:d1631d34502009156789965e4f841202988b20835d9d993ca80ecccd59a59f21",
+  "schema_version": "reception.one.preprinted_form_v5.turn_external_audit.v1",
+  "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+  "supersession": "current",
+  "typed_program": {
+    "explicit_source_form": {
+      "goal_code": 6,
+      "steps": [
+        {
+          "operator_code": 0,
+          "source_refs": [
+            {
+              "binding_code": 1,
+              "kind": "binding",
+              "prior_output_name": "none",
+              "prior_step_index": -1
+            }
+          ]
+        },
+        {
+          "operator_code": 13,
+          "source_refs": []
+        }
+      ],
+      "version_code": 3
+    },
+    "operator_note_excluded": true,
+    "program_hash": "sha256:cec609701d061859adedeece995ed6539ebce84c8ecf553b3ede9a45972ce7b2",
+    "raw_provider_response": false
+  },
+  "vertex_audit_control_posture": {
+    "no_user_managed_service_account_key": true,
+    "provider_in_memory_cache_disabled": true,
+    "request_response_logging_disabled_or_absent": true,
+    "vertex_data_read_audit_enabled": true,
+    "vertex_data_write_audit_enabled": true
+  }
+}

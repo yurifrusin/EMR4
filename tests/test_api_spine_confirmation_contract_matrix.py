@@ -238,7 +238,10 @@ def test_each_handler_completes_before_commit():
 
         # complete_appointment_command must appear before db.commit in the handler
         complete_pos = route_compact.index("complete_appointment_command(")
-        commit_pos = route_compact.index("db.commit()")
+        # Handlers may contain bounded early-exit helpers that commit an
+        # independently recorded blocked outcome.  The command completion
+        # invariant concerns the handler's final confirmed-write commit.
+        commit_pos = route_compact.rindex("db.commit()")
         assert complete_pos < commit_pos, (
             f"{details['handler']}: complete_appointment_command is not before db.commit()"
         )

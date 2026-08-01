@@ -1,0 +1,31 @@
+{
+  "schema_version": "raisa.interim_residue_evidence.v1",
+  "observed_at": "2026-07-31T19:32:27.7506405+10:00",
+  "result": "local_cleanup_pass_with_word_handoff_and_blank_document_residue",
+  "local_cleanup": {
+    "task_build_directories_remaining": 0,
+    "task_local_image_tags_remaining": 0,
+    "task_containers_remaining": 0,
+    "task_networks_remaining": 0,
+    "temporary_docker_auth_directories_remaining": 0
+  },
+  "cloud_state_preserved": {
+    "service": "raisa-office-web-dev",
+    "latest_ready_revision": "raisa-office-web-dev-00005-w82",
+    "traffic_percent_to_latest_revision": 100,
+    "invoker_iam_check_disabled": true,
+    "all_users_iam_binding_count": 0
+  },
+  "intentional_handoff": {
+    "blank_word_online_document_tab_preserved": true,
+    "purpose": "Resume the authorised task-specific manifest upload after the required Chrome extension setting is enabled.",
+    "no_document_content_written": true
+  },
+  "external_blank_document_residue": {
+    "blank_documents_created_during_verification": 2,
+    "documents_with_authored_content": 0,
+    "preserved_as_active_handoff": 1,
+    "closed_but_may_remain_in_personal_storage": 1,
+    "cleanup_disposition": "Remove both task-created blank documents after the Word Online gate reaches a terminal result."
+  }
+}

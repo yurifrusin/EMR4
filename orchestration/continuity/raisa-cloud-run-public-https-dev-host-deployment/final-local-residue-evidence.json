@@ -1,0 +1,23 @@
+{
+  "schema_version": "raisa.cloud_run_public_https_dev_host_deployment_residue.v1",
+  "recorded_at": "2026-07-31T08:47:48Z",
+  "result": "pass_with_authorized_cloud_resources_retained",
+  "local_task_containers": 0,
+  "local_task_networks": 0,
+  "local_task_image_tags": 0,
+  "local_task_temporary_contexts": 0,
+  "local_task_docker_credential_directories": 0,
+  "local_raw_error_files": 0,
+  "credentials_or_tokens_persisted": 0,
+  "cloud_resources_intentionally_retained": [
+    "australia-southeast1 Artifact Registry repository raisa-office-web-dev",
+    "Artifact Registry image digest sha256:6696b3c97682ba8d02d3b18bab3d5d3d131f8c56c613c1adfca32400f94b3f5d",
+    "private Cloud Run service raisa-office-web-dev",
+    "private ready revision raisa-office-web-dev-00003-9vg"
+  ],
+  "notes": [
+    "The task-owned temporary Docker configuration, build contexts and sanitized-error working files were removed.",
+    "Both task-owned local image tags and their local image layers were removed.",
+    "The Cloud Run service remains private with minimum instances zero pending Yuri's public-access decision."
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "schema_version": "reception.one.bureau_live_isolated_planner.external_audit_analysis.v1",
+  "result": "reception_one_bureau_live_isolated_planner_failed_closed",
+  "attempt_id": "reception-one-receptionist-first-v68-eval-runtime-65d49792ef59742b-turn-001",
+  "ledger_id": "reception-one-receptionist-first-v68-eval-runtime-65d49792ef59742b-ledger-001",
+  "runtime_audit_ref": "runtime-65d49792ef59742b",
+  "provider": "google_vertex_ai",
+  "model_id": "gemini-2.5-flash",
+  "project": "bernie-emr4-dev",
+  "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+  "authentication": "keyless_impersonated_service_account_adc",
+  "api_key_authentication_used": false,
+  "location": "australia-southeast1",
+  "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+  "provider_outcome": {
+    "status": "completed",
+    "http_status": 200,
+    "latency_ms": 5110,
+    "finish_reason": "STOP",
+    "usage": {
+      "prompt_tokens": 4633,
+      "candidate_tokens": 147,
+      "thinking_tokens": 819,
+      "total_tokens": 5599
+    }
+  },
+  "request_hash": "sha256:9f6cf415fbb7641e39d88b3bc4e4d41674914f1ef34de7452f0a4cc5701f59fd",
+  "schema_hash": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+  "model_form_body_hash": "sha256:2bd567834f76051da47693cdb37db7691783302b83cfb9c1f4298199c923a76a",
+  "typed_form": {
+    "goal_code": 6,
+    "operator_codes": [
+      13
+    ],
+    "released": false
+  },
+  "proofreader": {
+    "disposition": "revision_required",
+    "violations": [
+      {
+        "code": "recognized_intent_goal_mismatch",
+        "path": "$.typed_form.goal_code"
+      }
+    ],
+    "safe_repairs": [],
+    "admitted_operator_ids": [],
+    "correction_ticket_issued": true,
+    "correction_retry_authorised_by_current_authority": false
+  },
+  "diagnosis": {
+    "classification": "local_ui_harness_context_binding_defect",
+    "observed_context_label": "selected_appointment_absent",
+    "model_disposition": "clarification",
+    "model_response_summary": "The receptionist asked which specific Margaret Thompson appointment should be extended and stated that no booking changed.",
+    "deterministic_conflict": "The utterance classifier required resize while the model correctly declined to invent a missing appointment selection.",
+    "root_cause": "The occupied browser harness opened the overview and submitted the resize utterance without first selecting the exact authored-synthetic appointment. The current overview projection does not expose a selectable appointment row, so selected_appointment_id was null.",
+    "repair_direction": "Bind the existing exact disposable appointment into the smoke projection, click that appointment visibly, verify aria-selected before submission, and prove the same route provider-free before seeking fresh retry authority."
+  },
+  "call_budget": {
+    "absolute_provider_call_ceiling": 1,
+    "provider_calls_consumed": 1,
+    "retry_performed": false,
+    "fallback_performed": false,
+    "further_call_authorised": false
+  },
+  "release": {
+    "typed_fields_released": [],
+    "browser_provenance_rendered": false,
+    "appointment_write_performed": false,
+    "appointment_confirmation_performed": false,
+    "database_truth_unchanged": true
+  },
+  "audit": {
+    "broker_hash_chain_valid": true,
+    "parent_hash_chain_valid": true,
+    "all_opened_ledgers_consumed": true,
+    "freshness": "fresh",
+    "supersession": "current"
+  },
+  "cleanup": {
+    "cell_container_absent": true,
+    "relay_container_absent": true,
+    "cell_image_absent": true,
+    "relay_image_absent": true,
+    "internal_network_absent": true,
+    "temporary_context_absent": true,
+    "temporary_token_absent": true,
+    "broker_process_absent": true,
+    "disposable_database_absent": true,
+    "owned_runtime_directory_absent": true,
+    "owned_ports_available": true,
+    "independent_residue_check_passed": true
+  },
+  "vertex_audit_control_posture": {
+    "vertex_data_read_audit_enabled": true,
+    "vertex_data_write_audit_enabled": true,
+    "request_response_logging_disabled_or_absent": true,
+    "provider_in_memory_cache_disabled": true,
+    "no_user_managed_service_account_key": true
+  },
+  "explicit_exclusions": {
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "credential_or_token_recorded": false,
+    "api_key_information_recorded": false,
+    "chain_of_thought_recorded": false,
+    "unverified_typed_draft_released": false,
+    "product_or_database_access_by_model": false,
+    "command_authority": false,
+    "provider_or_regional_fallback": false
+  },
+  "candid_limit": "The evidence proves one bounded authored-synthetic call through the configured and observed Sydney Vertex locational endpoint and a correct fail-closed proofreader disposition. It does not prove an admitted end-to-end proposal, Australian physical or sovereign processing, production fitness, or safety for real patient, health or clinical data."
+}

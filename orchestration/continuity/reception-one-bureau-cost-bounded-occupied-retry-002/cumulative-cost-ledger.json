@@ -1,0 +1,73 @@
+{
+  "accounted_cost": 0.0284309,
+  "blocked": false,
+  "calls_accounted": 3,
+  "ceiling": 1.0,
+  "cost_policy_sha256": "sha256:c473acf8b60fd8a4c116951493ed8c49ff4c7b0925930cf2b3b74ff3af594f10",
+  "currency": "USD",
+  "events": [
+    {
+      "attempt_id": "reception-one-receptionist-first-v68-eval-runtime-65d49792ef59742b-turn-001",
+      "estimated_cost": 0.0038049,
+      "event_hash": "sha256:5d3e5ed53a4fd57d6ea44bd03eeef44801041cdec28590fd1590d9865509ccea",
+      "event_type": "predecessor_http_200_accounted",
+      "http_status": 200,
+      "previous_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "sequence": 1,
+      "usage": {
+        "input_tokens": 4633,
+        "reasoning_tokens": 819,
+        "response_tokens": 147
+      }
+    },
+    {
+      "accounted_cost_after": 0.0238049,
+      "amount": 0.02,
+      "event_hash": "sha256:d8ccb27325c7e1b0764814223b0dd66a9cb4a9bf539abbd608127da497566f57",
+      "event_type": "preprovider_reservation_conservatively_carried_forward",
+      "previous_hash": "sha256:5d3e5ed53a4fd57d6ea44bd03eeef44801041cdec28590fd1590d9865509ccea",
+      "provider_call_observed": false,
+      "reason_code": "occupied_authority_missing",
+      "reservation_refunded": false,
+      "sequence": 2,
+      "source_attempt_id": "bureau-cost-bounded-occupied-retry-001",
+      "source_ledger_terminal_hash": "sha256:caebdd93ef17c9598d7bfa7dd088b0a00f8482ce55254c3fcb6822450eb49bff"
+    },
+    {
+      "accounted_cost_before": 0.0238049,
+      "event_hash": "sha256:a020c0b9b1d5df0a206d942f3e12159307433559b6ba7e99272b38034e9f6715",
+      "event_type": "fresh_call_reserved",
+      "maximum_after_reservation": 0.0438049,
+      "previous_hash": "sha256:d8ccb27325c7e1b0764814223b0dd66a9cb4a9bf539abbd608127da497566f57",
+      "purpose_hash": "sha256:35bef9ac0ceeff36baac374d0250e052475b5446aa52ce37cc0d5f2672b0c6e6",
+      "reservation": 0.02,
+      "reservation_id": "bureau-cost-bounded-occupied-retry-002",
+      "sequence": 3
+    },
+    {
+      "accounted_cost_after": 0.0284309,
+      "admitted": true,
+      "attempt_id": "reception-one-receptionist-first-v68-eval-runtime-984fddadede8bff9-turn-001",
+      "estimated_cost": 0.004626,
+      "event_hash": "sha256:296efd513189732a90c2c49426b14a30b743b6b34b1d3a1fa9fe1f3ff03f2678",
+      "event_type": "fresh_call_settled",
+      "http_status": 200,
+      "ledger_id": "reception-one-receptionist-first-v68-eval-runtime-984fddadede8bff9-ledger-001",
+      "previous_hash": "sha256:a020c0b9b1d5df0a206d942f3e12159307433559b6ba7e99272b38034e9f6715",
+      "reservation_id": "bureau-cost-bounded-occupied-retry-002",
+      "sequence": 4,
+      "usage": {
+        "input_tokens": 4820,
+        "reasoning_tokens": 1036,
+        "response_tokens": 236,
+        "total_tokens": 6092
+      }
+    }
+  ],
+  "fresh_calls_accounted": 2,
+  "outstanding_reservation": 0.0,
+  "reservation_per_call": 0.02,
+  "schema_version": "reception.one.vertex_cumulative_cost_ledger.v1",
+  "terminal_event_hash": "sha256:296efd513189732a90c2c49426b14a30b743b6b34b1d3a1fa9fe1f3ff03f2678",
+  "terminal_success": true
+}

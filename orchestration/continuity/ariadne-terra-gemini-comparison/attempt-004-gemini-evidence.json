@@ -1,0 +1,206 @@
+{
+  "schema_version": "ariadne.gemini_single_lane_rehearsal_evidence.v1",
+  "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+  "runtime_attempt_id": "comparative-runtime-attempt-004",
+  "result": "ariadne_gemini_repaired_request_attempt4_revision_required",
+  "run_order": [
+    "gemini"
+  ],
+  "lane": {
+    "lane_id": "gemini",
+    "status": "revision_required",
+    "reason_codes": [
+      "provider-non-success"
+    ],
+    "ledger": {
+      "schema_version": "ariadne.comparative_single_use_ledger.v2",
+      "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+      "runtime_attempt_id": "comparative-runtime-attempt-004",
+      "cognition_contract_attempt_id": "generated-attempt-001",
+      "lane_id": "gemini",
+      "model_id": "gemini-3.5-flash",
+      "state": "consumed",
+      "maximum_provider_calls": 1,
+      "retry_authorised": false,
+      "consumption_point": "immediately-before-work-cell-start"
+    },
+    "shared_hashes": {
+      "shared_task_sha256": null,
+      "full_output_schema_sha256": null,
+      "provider_output_schema_sha256": null,
+      "system_prompt_sha256": null,
+      "prompt_sha256": null
+    },
+    "prompt_bytes": null,
+    "generated_output_sha256": null,
+    "generated_output_bytes": null,
+    "generated_draft_count": 0,
+    "draft_hashes": [],
+    "provider_schema_status": "not-presented",
+    "full_schema_status": "not-presented",
+    "proofreader": null,
+    "usage": {},
+    "cost_estimate": {
+      "currency": "USD",
+      "pricing_observed_date": "2026-07-24",
+      "input_per_million": 1.5,
+      "output_per_million": 9.0,
+      "estimated_cost_usd": null,
+      "estimate_authoritative": false,
+      "provider_billing_authoritative": true
+    },
+    "container_policy": {
+      "broker": {
+        "user": "node",
+        "read_only_root": true,
+        "cap_drop": [
+          "ALL"
+        ],
+        "security_opt": [
+          "no-new-privileges"
+        ],
+        "mounts": [
+          {
+            "type": "bind",
+            "destination": "/run/secrets/broker_token",
+            "read_only": true
+          },
+          {
+            "type": "bind",
+            "destination": "/run/secrets/provider_key",
+            "read_only": true
+          }
+        ],
+        "published_port_count": 0,
+        "network_mode": "ariadne-comparison-gemini-attempt4-live",
+        "memory_bytes": 268435456,
+        "memory_swap_bytes": 268435456,
+        "nano_cpus": 500000000,
+        "pids_limit": 32,
+        "environment_keys": [
+          "ARIADNE_LANE_ID",
+          "EXPECTED_FULL_OUTPUT_SCHEMA_SHA256",
+          "EXPECTED_PROMPT_SHA256",
+          "EXPECTED_PROVIDER_OUTPUT_SCHEMA_SHA256",
+          "EXPECTED_SHARED_TASK_SHA256",
+          "EXPECTED_SYSTEM_PROMPT_SHA256",
+          "NODE_VERSION",
+          "PATH",
+          "YARN_VERSION"
+        ]
+      },
+      "cell": {
+        "user": "node",
+        "read_only_root": true,
+        "cap_drop": [
+          "ALL"
+        ],
+        "security_opt": [
+          "no-new-privileges"
+        ],
+        "mounts": [
+          {
+            "type": "bind",
+            "destination": "/run/secrets/broker_token",
+            "read_only": true
+          }
+        ],
+        "published_port_count": 0,
+        "network_mode": "ariadne-comparison-gemini-attempt4-live",
+        "memory_bytes": 268435456,
+        "memory_swap_bytes": 268435456,
+        "nano_cpus": 500000000,
+        "pids_limit": 32,
+        "environment_keys": [
+          "NODE_VERSION",
+          "PATH",
+          "YARN_VERSION"
+        ]
+      },
+      "network": {
+        "internal": true,
+        "driver": "bridge",
+        "container_count": 1
+      }
+    },
+    "broker_events": [
+      {
+        "audit_sequence": 1,
+        "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+        "event": "broker-ready",
+        "lane_id": "gemini",
+        "allowed_path": "/infer",
+        "upstream_host": "generativelanguage.googleapis.com",
+        "upstream_path": "/v1beta/models/gemini-3.5-flash:generateContent",
+        "model_id": "gemini-3.5-flash",
+        "maximum_provider_calls": 1,
+        "event_sha256": "sha256:3dd917aa5b6a4360301390aa6e80ba7b2aa15ff2ff310a01482d90e2cfa9542a"
+      },
+      {
+        "audit_sequence": 2,
+        "previous_event_sha256": "sha256:3dd917aa5b6a4360301390aa6e80ba7b2aa15ff2ff310a01482d90e2cfa9542a",
+        "event": "provider-call-started",
+        "lane_id": "gemini",
+        "provider": "google",
+        "model_id": "gemini-3.5-flash",
+        "provider_call_count": 1,
+        "request_bytes": 18920,
+        "request_sha256": "sha256:134ce27c465c2ea62bce234a52d84cdad77cf23082d85e3bbc1bf462ae993c46",
+        "provider_schema_profile_sha256": "sha256:39a0f6da352a8da5f8291291a8f87abaa6aa9daa6b7359a8221341ebb756f1e2",
+        "maximum_output_tokens": 2048,
+        "event_sha256": "sha256:1005d0b738af4061742cfbf60f3e40b1802c95adef5966e954f1434bf37e56ae"
+      },
+      {
+        "audit_sequence": 3,
+        "previous_event_sha256": "sha256:1005d0b738af4061742cfbf60f3e40b1802c95adef5966e954f1434bf37e56ae",
+        "event": "provider-call-completed",
+        "lane_id": "gemini",
+        "provider_call_count": 1,
+        "provider_status": 400,
+        "response_bytes": 127,
+        "response_sha256": "sha256:b01105ed229707571186fdc753a734401dcd3dca044538c55285824604725bd3",
+        "provider_error_status": "INVALID_ARGUMENT",
+        "provider_error_code": 400,
+        "event_sha256": "sha256:9f3b48cd0d4d4f997fb4a63555ba70392e537ec7fb3593c65a5e019656b8acdb"
+      }
+    ],
+    "external_audit_track": {
+      "owner": "trusted-broker-and-orchestrator",
+      "sandbox_append_authority": false,
+      "hash_chain_status": "passed",
+      "raw_reasoning_recorded": false,
+      "typed_output_manifest_recorded": false,
+      "proofreader_disposition": null
+    },
+    "cleanup": {
+      "cell_removed": true,
+      "broker_removed": true,
+      "network_removed": true,
+      "cell_image_tag_removed": true,
+      "broker_image_tag_removed": true
+    },
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "draft_payload_recorded": false,
+    "provider_secret_recorded": false
+  },
+  "provider_route": {
+    "api": "gemini-developer-api",
+    "host": "generativelanguage.googleapis.com",
+    "australian_processing_evidence": false,
+    "data_class": "authored-synthetic-non-pii"
+  },
+  "retry_performed": false,
+  "fallback_performed": false,
+  "terra_or_other_provider_call_performed": false,
+  "cross_model_input": false,
+  "voting": false,
+  "external_audit_checked_by_host": true,
+  "raw_reasoning_recorded": false,
+  "raw_prompt_recorded": false,
+  "raw_provider_response_recorded": false,
+  "draft_payload_recorded": false,
+  "provider_secret_recorded": false,
+  "product_or_database_access": false,
+  "downstream_delivery": false
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": "reception.one.shared_typed.final_residue_evidence.v1",
+  "result": "reception_one_shared_typed_language_final_residue_pass",
+  "checked_at": "2026-07-30T01:14:07Z",
+  "actual_provider_calls_consumed": 2,
+  "absolute_provider_call_ceiling": 2,
+  "all_ledgers_consumed": true,
+  "fallback_performed": false,
+  "residue": {
+    "cell_container_absent": true,
+    "relay_container_absent": true,
+    "internal_network_absent": true,
+    "cell_image_absent": true,
+    "relay_image_absent": true,
+    "broker_process_absent": true,
+    "temporary_context_absent": true,
+    "temporary_token_absent": true,
+    "daemon_wide_prune_performed": false
+  },
+  "final_attempt": {
+    "attempt_id": "reception-one-shared-typed-occupied-004",
+    "ledger_id": "reception-one-shared-typed-ledger-004",
+    "audit_event_count": 10,
+    "audit_terminal_hash": "sha256:ef69bff4829b8df465f5a804798aa739e8e0956b876eff03cf84abae1b9830a9",
+    "audit_chain_valid": true,
+    "evidence_sha256": "sha256:68d72beb91cc382f004f400758992693982fe489a066f76efb95e7aa9c724abe",
+    "ledger_sha256": "sha256:66b7a6ca02a7e787b1bc1274fbe394e436777933a1b1bebd34b0101dbdf85643",
+    "audit_log_sha256": "sha256:4b8b5129058abc8250f647fd6f4b39782f59160dbbc471d2e11d6a52f8e47a55",
+    "external_audit_sha256": "sha256:25dbc13920f1309623e27ba1c465807e1bbaff820cd395941f24eb6a2e8c7285"
+  },
+  "explicit_exclusions": {
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "rejected_unbounded_draft_recorded": false,
+    "credentials_or_tokens_recorded": false,
+    "api_key_information_recorded": false,
+    "hidden_reasoning_recorded": false,
+    "product_or_database_access": false,
+    "appointment_write_or_confirmation": false,
+    "human_or_product_delivery": false
+  }
+}

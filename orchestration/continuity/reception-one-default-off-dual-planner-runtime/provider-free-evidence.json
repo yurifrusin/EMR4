@@ -1,0 +1,82 @@
+{
+  "artifact_hashes": {
+    "app/services/reception_one_isolated_vertex_planner.py": "sha256:d05f140ebadbfe40ff08da6449a14672ddac1ba7fd7931228f217da4a92489b7",
+    "docs/api-spine/manifests/agent-capability-charters.yaml": "sha256:d1bbe02ae85722d958bb8f770fb3dc8609a07775fa5ac1b915b46bfa977f1875",
+    "docs/api-spine/openapi/appointment-commands.yaml": "sha256:7089b6a647f4af35b71735639e4c9773b24da48632f08187ebc21492ae17087e",
+    "orchestration/continuity/reception-one-default-off-dual-planner-runtime/generic-readiness-baseline.json": "sha256:833e22394887df2e4770cad3c67b920aac39e48163b4d6d1022bc3c9dda937b8",
+    "orchestration/continuity/reception-one-default-off-dual-planner-runtime/real-isolation-evidence.json": "sha256:f54ce1b8a7280eb2692c5ac787d9b80b97f198f620a2624076e6e1175b6ef0a9",
+    "orchestration/continuity/reception-one-default-off-dual-planner-runtime/runtime-policy.json": "sha256:69762142ee09325f43079ba091bc263747d654ba6e8c6b9300576589a2e3d174",
+    "scripts/reception_one_receptionist_first_v68_runtime.py": "sha256:dd4c3808b45aa3c15ef96b87166952f2ae5cf8a9e64389a575c58272ffadec53"
+  },
+  "cell_boundary": {
+    "credential_material_present": false,
+    "database_access": false,
+    "full_diary_exposed": false,
+    "network_access_in_provider_free_isolation": false,
+    "project_present": false,
+    "provider_api_keys_present": false,
+    "provider_hostname_present": false,
+    "service_account_present": false,
+    "unselected_appointments_exposed": false
+  },
+  "claim_limits": [
+    "No provider was contacted by this acceptance run.",
+    "No production, real-data, patient, clinical, write, confirmation, deployment or release claim is made.",
+    "The exact Sydney Vertex lane remains separately gated until Continuity, Compass, authority, ADC and residue preflight pass."
+  ],
+  "credential_reads": 0,
+  "data_class": "authored_synthetic",
+  "evidence_hash": "sha256:86d4d9405c40a0518cb6a9f2c7ecba6134fd884fbcb48e9b09dce026d5ea810f",
+  "exact_future_provider_binding": {
+    "api_key_authentication_used": false,
+    "authentication": "keyless_impersonated_service_account_adc",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "location": "australia-southeast1",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "provider": "google_vertex_ai",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"
+  },
+  "generic_interpreter_lane": {
+    "historical_trove_access": false,
+    "provider_calls": false,
+    "runtime_wiring": false,
+    "status": "blocked"
+  },
+  "provider_calls": 0,
+  "provider_contacted": false,
+  "result": "reception_one_default_off_dual_planner_provider_free_pass",
+  "route": {
+    "deterministic_default": true,
+    "deterministic_fallback_after_isolated_selection": false,
+    "isolated_vertex_separately_gated": true,
+    "operation_id": "composeReceptionOneProductContextProposal",
+    "planner_mode_closed_enum": [
+      "deterministic",
+      "isolated_vertex"
+    ],
+    "provider_fallback": false,
+    "same_proposal_only_adapter": true,
+    "write_or_confirmation_authority": false
+  },
+  "runtime_contract": {
+    "contract_mode": "receptionist-v68-runtime",
+    "expired_release_performed": false,
+    "frozen_request_sha256": "sha256:dbf5ba0f4a1feeb1df963fb87b9b6644640937efa0d9d9ea6578b14e411a7cf9",
+    "frozen_response_schema_sha256": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+    "frozen_system_instruction_sha256": "sha256:ea2ee027f4c82788168c306c39dc2babd278649a4f483197677941c1073e5b0c",
+    "packet_contract_reused": true,
+    "policy_id": "reception-one-receptionist-first-v68-runtime-vertex-sydney-v1",
+    "runtime_wall_clock_current_disposition": "admit",
+    "runtime_wall_clock_expired_disposition": "edge_abort"
+  },
+  "schema_version": "reception.one.default_off_dual_planner.provider_free.v1",
+  "validation": {
+    "api_spine_tests": "25 passed",
+    "focused_dual_planner_tests": "8 passed",
+    "inherited_route_proofreader_context_tests": "23 passed",
+    "python_compilation": "passed",
+    "real_isolation": "passed",
+    "yaml_validation": "passed"
+  }
+}

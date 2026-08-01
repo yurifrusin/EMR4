@@ -1,0 +1,59 @@
+{
+  "schema_version": "ariadne.vertex_sydney_tranche_1_independent_audit.v1",
+  "audit_id": "ariadne-vertex-sydney-tranche-1-independent-audit",
+  "audited_at": "2026-07-24",
+  "result": "ariadne_vertex_sydney_tranche_1_external_audit_pass_with_closeout_revisions_required",
+  "independence": {
+    "reviewer_role": "repository_read_only_independent_reviewer",
+    "implementation_edits": false,
+    "credential_or_cloud_access": false,
+    "provider_call": false
+  },
+  "provider_documentation_findings": {
+    "published_ga_model_id": "gemini-3.5-flash",
+    "required_location": "australia-southeast1",
+    "required_location_listed_for_model_availability_or_ml_processing": false,
+    "regional_service_endpoint_published": "https://australia-southeast1-aiplatform.googleapis.com",
+    "endpoint_existence_proves_model_support": false,
+    "global_endpoint_regional_guarantee": false,
+    "published_gemini_in_memory_cache_default": "enabled",
+    "published_gemini_in_memory_cache_ttl_hours": 24,
+    "published_gemini_in_memory_cache_scope": "project_isolated_not_at_rest",
+    "project_cache_setting_inspected": false
+  },
+  "artifact_integrity": {
+    "canonical_hashes_reproduced": true,
+    "policy_hash": "sha256:188f950f6c2d5fbea365b722b153f2b0e6e51258fba6140f45e9deb7bb7aaeb9",
+    "policy_schema_hash": "sha256:e72703c193895260b0429372858f8c506225bb42266a45a7b41d7fc2265e4397",
+    "official_source_observation_hash": "sha256:879227c785b858b20dc1355fd794402c329b441f4079d30cf58abab65fa501f7",
+    "local_verifier_limit": "validates_internal_schema_semantics_and_frozen_hashes_but_does_not_refetch_or_authenticate_source_freshness"
+  },
+  "findings": [
+    {
+      "severity": "major",
+      "id": "continuity_compass_stale_active_state",
+      "disposition": "required_before_durable_closeout",
+      "repair": "increment_continuity_and_compass_together_and_mark_route_blocked"
+    },
+    {
+      "severity": "major",
+      "id": "default_in_memory_cache_missing_from_future_admission_gate",
+      "disposition": "required_before_durable_closeout",
+      "repair": "record_default_24_hour_in_memory_cache_and_require_verified_disabled_state_or_yuri_stop"
+    },
+    {
+      "severity": "minor",
+      "id": "local_verifier_does_not_prove_source_freshness",
+      "disposition": "claim_language_limited",
+      "repair": "state_that_current_official_documents_were_independently_checked"
+    }
+  ],
+  "stop_assessment": {
+    "provider_admission_decision_correct": true,
+    "result": "ariadne_vertex_sydney_provider_admission_blocked",
+    "later_tranches_must_remain_closed": true,
+    "occupied_calls_consumed": 0,
+    "fresh_yuri_intervention_required": true
+  },
+  "claim_limit": "This independent audit proves the current documentary model-location gap and internal artifact/hash consistency. It does not prove project entitlement, ADC usability, provider acceptance, inference, Australian physical or sovereign processing, zero data retention or the project cache setting."
+}

@@ -1,0 +1,130 @@
+{
+  "absolute_provider_call_ceiling": 2,
+  "actual_provider_call_count": 1,
+  "assembled_response_contract": "reception.one.bureau.plan-program.v3",
+  "attempt_ids": [
+    "reception-one-receptionist-first-v68-eval-b-cancel-remove-turn-001"
+  ],
+  "baseline": {
+    "clarification_desk_form_taught": true,
+    "decision_note_identifier_safe_repair": false,
+    "deidentified_decision_note_taught": true,
+    "demonstration_answers": false,
+    "deterministic_operator_sequence_required": false,
+    "exact_clarification_response_pattern_taught": true,
+    "exact_move_response_pattern_taught": true,
+    "exact_recognized_constraint_gate": true,
+    "few_shot_examples": false,
+    "fine_tuning": false,
+    "form_toolkit_guidance": true,
+    "minimal_desk_context": true,
+    "natural_typed_same_goal_prompt": true,
+    "paired_development_not_holdout": true,
+    "prompt_optimisation": true,
+    "proofreader_clarification_markers_changed": false,
+    "proofreader_move_markers_changed": false,
+    "required_goal_typed_feedback": true,
+    "response_ceiling_repair": true,
+    "semantic_role_constraint_gate": true,
+    "shared_model_proofreader_context_hash": true,
+    "targeted_grounded_binding_repair": true
+  },
+  "candid_limit": "This sequence can prove only bounded authored-synthetic form completion through the configured and observed Sydney Vertex locational request path. It cannot prove Australian physical or sovereign processing, general model reliability, production fitness, training need or safety for real, product, patient, health, clinical or historical data.",
+  "correction_ticket_hash": null,
+  "data_class": "authored_synthetic",
+  "dialogue_protocol": "reception.one.bureau.receptionist-first.v6.8",
+  "effect_ceiling": "proposal_only",
+  "evidence_hash": "sha256:ef01440de9b43bd23bc9df573be5049dad6ce6daa9a3c8e9a96e8e0d0d942108",
+  "exact_binding": {
+    "api_key_authentication_used": false,
+    "authentication": "keyless_impersonated_service_account_adc",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "location": "australia-southeast1",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "provider": "google_vertex_ai",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"
+  },
+  "explicit_exclusions": {
+    "api_key_information_recorded": false,
+    "broker_judgement_repair": false,
+    "chain_of_thought_recorded": false,
+    "command_authority": false,
+    "credential_or_token_recorded": false,
+    "fallback": false,
+    "human_or_product_delivery": false,
+    "product_or_database_access": false,
+    "proofreader_selected_replacement": false,
+    "raw_model_form_body_recorded": false,
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "rejected_operator_note_recorded": false
+  },
+  "incremental_cost_ceiling_usd": 1,
+  "ledger_ids": [
+    "reception-one-receptionist-first-v68-eval-b-cancel-remove-ledger-001"
+  ],
+  "model_authored_fields": [
+    "receptionist_response",
+    "decision_note",
+    "evidence_utterance_indices",
+    "typed_form"
+  ],
+  "model_response_contract": "reception.one.bureau.receptionist-and-form.v6.8",
+  "no_call_after_admission": true,
+  "parent_audit_chain": {
+    "event_count": 4,
+    "terminal_hash": "sha256:dc1f98ca786e32b8f44ee04d1aa66202375f195b86c47ffa4afa34907bf5e584",
+    "valid": true
+  },
+  "preprinted_fields": {
+    "version_code": 3
+  },
+  "release": {
+    "api_spine_operation_id": "proposeAppointmentDelete",
+    "appointment_ref": "synthetic-appointment-margaret",
+    "candidate_slot_ids": [],
+    "duration_minutes": 15,
+    "kind": "proposal_candidate",
+    "patient_ref": "synthetic-patient-margaret",
+    "practitioner_ref": "synthetic-practitioner-shera",
+    "proposal_family": "cancel",
+    "requires_human_confirmation": true,
+    "status": null,
+    "warning_codes": [
+      "staff_confirmation_required"
+    ],
+    "write_performed": false
+  },
+  "request_contract_repair_competed_for_call_two": false,
+  "result": "reception_one_receptionist_first_v68_occupied_pass",
+  "schema_version": "reception.one.receptionist_first_v68.parent_evidence.v1",
+  "terminal_status": "admitted",
+  "turn_two_terminal": false,
+  "turns": [
+    {
+      "attempt_id": "reception-one-receptionist-first-v68-eval-b-cancel-remove-turn-001",
+      "audit_terminal_hash": "sha256:db8aadc41c6ae2eaf9147e8fe5f7223b8ed453a8990a30b764c508c7a64c30d6",
+      "cleanup": {
+        "base_image_state_preserved": true,
+        "broker_process_absent": true,
+        "cell_container_absent": true,
+        "cell_image_absent": true,
+        "daemon_wide_prune_performed": false,
+        "internal_network_absent": true,
+        "relay_container_absent": true,
+        "relay_image_absent": true,
+        "temporary_context_absent": true,
+        "temporary_token_absent": true
+      },
+      "correction_ticket_issued": false,
+      "ledger_id": "reception-one-receptionist-first-v68-eval-b-cancel-remove-ledger-001",
+      "model_input_hash": "sha256:0b232568918f3bd52b010a9bcfe37bf85e5cfa9bbf245ff1570217e6dafc53eb",
+      "proofreader_disposition": "admit",
+      "released": true,
+      "result": "reception_one_receptionist_first_v68_turn_pass",
+      "schema_hash": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+      "turn_code": 1
+    }
+  ]
+}

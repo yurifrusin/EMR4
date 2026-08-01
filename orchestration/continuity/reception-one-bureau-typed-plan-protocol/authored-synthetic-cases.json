@@ -1,0 +1,296 @@
+{
+  "schema_version": "reception.one.bureau.authored-synthetic-cases.v1",
+  "evidence_mode": "authored_synthetic_repository_contract",
+  "shared_input": {
+    "contract_version": "reception.one.bureau.plan-input.v1",
+    "practice_ref": "synthetic-practice-main",
+    "context_revision": 62,
+    "observed_at": "2026-07-29T00:00:00Z",
+    "expires_at": "2026-07-29T02:00:00Z",
+    "data_class": "authored_synthetic",
+    "reference_date": "2026-07-27",
+    "context": {
+      "patients": [
+        {
+          "id": "synthetic-patient-margaret",
+          "display": "Margaret Thompson",
+          "aliases": [
+            "Margaret"
+          ]
+        },
+        {
+          "id": "synthetic-patient-liam",
+          "display": "Liam Scott",
+          "aliases": [
+            "Liam"
+          ]
+        }
+      ],
+      "practitioners": [
+        {
+          "id": "synthetic-practitioner-shera",
+          "display": "Dr Shera",
+          "aliases": [
+            "Shera"
+          ]
+        },
+        {
+          "id": "synthetic-practitioner-patel",
+          "display": "Dr Patel",
+          "aliases": [
+            "Patel"
+          ]
+        }
+      ],
+      "selected_appointment": {
+        "id": "synthetic-appointment-margaret",
+        "patient_ref": "synthetic-patient-margaret",
+        "practitioner_ref": "synthetic-practitioner-shera",
+        "date": "2026-07-27",
+        "start_time": "10:00",
+        "duration_minutes": 15,
+        "status": "booked"
+      },
+      "appointments": [
+        {
+          "id": "synthetic-appointment-margaret",
+          "patient_ref": "synthetic-patient-margaret",
+          "practitioner_ref": "synthetic-practitioner-shera",
+          "date": "2026-07-27",
+          "start_time": "10:00",
+          "duration_minutes": 15,
+          "status": "booked"
+        },
+        {
+          "id": "synthetic-appointment-liam",
+          "patient_ref": "synthetic-patient-liam",
+          "practitioner_ref": "synthetic-practitioner-shera",
+          "date": "2026-07-27",
+          "start_time": "11:00",
+          "duration_minutes": 15,
+          "status": "booked"
+        }
+      ],
+      "candidate_slots": [
+        {
+          "id": "synthetic-slot-july28-1430",
+          "practitioner_ref": "synthetic-practitioner-shera",
+          "date": "2026-07-28",
+          "start_time": "14:30",
+          "duration_minutes": 15,
+          "classification": "available",
+          "warning_codes": [
+            "no_reservation"
+          ]
+        },
+        {
+          "id": "synthetic-slot-july28-1500",
+          "practitioner_ref": "synthetic-practitioner-shera",
+          "date": "2026-07-28",
+          "start_time": "15:00",
+          "duration_minutes": 15,
+          "classification": "available",
+          "warning_codes": [
+            "no_reservation"
+          ]
+        },
+        {
+          "id": "synthetic-slot-july27-1215",
+          "practitioner_ref": "synthetic-practitioner-shera",
+          "date": "2026-07-27",
+          "start_time": "12:15",
+          "duration_minutes": 15,
+          "classification": "squeeze_in_review",
+          "warning_codes": [
+            "manual_squeeze_in_review",
+            "adjacent_to_break",
+            "no_reservation"
+          ]
+        }
+      ],
+      "squeeze_policy": {
+        "id": "synthetic-policy-squeeze-review",
+        "assessment_enabled": true,
+        "allow_move_existing": false,
+        "allow_overbook": false,
+        "requires_human_review": true
+      },
+      "default_duration_minutes": 15,
+      "allowed_statuses": [
+        "arrived",
+        "completed",
+        "dna"
+      ]
+    },
+    "authority": {
+      "effect_ceiling": "proposal_only",
+      "appointment_write_authority": false,
+      "confirmation_authority": false,
+      "provider_execution": false,
+      "network_access": false,
+      "database_access": false,
+      "product_delivery": false
+    }
+  },
+  "cases": [
+    {
+      "case_id": "known-create",
+      "request_id": "synthetic-request-create",
+      "correlation_id": "synthetic-correlation-create",
+      "utterances": [
+        "Make an appointment for Margaret Thompson with Dr Shera tomorrow at 2:30 pm for 15 minutes."
+      ],
+      "planner_class": "deterministic_semantic_adapter",
+      "expected_goal": "create",
+      "expected_operation_id": "proposeAppointmentCreate"
+    },
+    {
+      "case_id": "known-move",
+      "request_id": "synthetic-request-move",
+      "correlation_id": "synthetic-correlation-move",
+      "utterances": [
+        "Move Margaret Thompson's appointment to tomorrow at 3 pm."
+      ],
+      "planner_class": "deterministic_semantic_adapter",
+      "expected_goal": "move",
+      "expected_operation_id": "proposeAppointmentUpdate"
+    },
+    {
+      "case_id": "known-resize",
+      "request_id": "synthetic-request-resize",
+      "correlation_id": "synthetic-correlation-resize",
+      "utterances": [
+        "Extend Margaret Thompson's appointment to 30 minutes."
+      ],
+      "planner_class": "deterministic_semantic_adapter",
+      "expected_goal": "resize",
+      "expected_operation_id": "proposeAppointmentUpdate"
+    },
+    {
+      "case_id": "known-cancel",
+      "request_id": "synthetic-request-cancel",
+      "correlation_id": "synthetic-correlation-cancel",
+      "utterances": [
+        "Cancel Margaret Thompson's appointment."
+      ],
+      "planner_class": "deterministic_semantic_adapter",
+      "expected_goal": "cancel",
+      "expected_operation_id": "proposeAppointmentDelete"
+    },
+    {
+      "case_id": "known-status",
+      "request_id": "synthetic-request-status",
+      "correlation_id": "synthetic-correlation-status",
+      "utterances": [
+        "Mark Margaret Thompson's appointment as arrived."
+      ],
+      "planner_class": "deterministic_semantic_adapter",
+      "expected_goal": "status_change",
+      "expected_operation_id": "proposeAppointmentStatus"
+    },
+    {
+      "case_id": "novel-squeeze-in",
+      "request_id": "synthetic-request-squeeze",
+      "correlation_id": "synthetic-correlation-squeeze",
+      "utterances": [
+        "Can we squeeze Margaret Thompson in with Dr Shera today for 15 minutes without moving anyone?"
+      ],
+      "planner_class": "untrusted_model_candidate",
+      "expected_goal": "squeeze_in_assessment",
+      "expected_operation_id": null,
+      "plan": {
+        "contract_version": "reception.one.bureau.plan-draft.v1",
+        "catalog_version": "reception-one-bureau-catalog-1",
+        "request_id": "synthetic-request-squeeze",
+        "practice_ref": "synthetic-practice-main",
+        "correlation_id": "synthetic-correlation-squeeze",
+        "context_revision": 62,
+        "attempt": 1,
+        "revision_limit": 2,
+        "planner_class": "untrusted_model_candidate",
+        "goal": "squeeze_in_assessment",
+        "effect_ceiling": "proposal_only",
+        "steps": [
+          {
+            "id": "step-patient",
+            "operator": "resolve_patient_reference",
+            "args": {
+              "mention": {
+                "kind": "utterance_ref",
+                "entity_type": "patient",
+                "utterance_index": 0,
+                "start": 15,
+                "end": 32,
+                "text": "Margaret Thompson"
+              }
+            }
+          },
+          {
+            "id": "step-practitioner",
+            "operator": "resolve_practitioner_reference",
+            "args": {
+              "mention": {
+                "kind": "utterance_ref",
+                "entity_type": "practitioner",
+                "utterance_index": 0,
+                "start": 41,
+                "end": 49,
+                "text": "Dr Shera"
+              }
+            }
+          },
+          {
+            "id": "step-date",
+            "operator": "resolve_date_expression",
+            "args": {
+              "date": {
+                "kind": "semantic_ref",
+                "field": "appointment_date"
+              }
+            }
+          },
+          {
+            "id": "step-schedule",
+            "operator": "read_practitioner_schedule",
+            "args": {
+              "practitioner": {
+                "kind": "step_output",
+                "step_id": "step-practitioner",
+                "output": "practitioner"
+              },
+              "date": {
+                "kind": "step_output",
+                "step_id": "step-date",
+                "output": "date"
+              }
+            }
+          },
+          {
+            "id": "step-assess",
+            "operator": "assess_squeeze_in_options",
+            "args": {
+              "patient": {
+                "kind": "step_output",
+                "step_id": "step-patient",
+                "output": "patient"
+              },
+              "schedule": {
+                "kind": "step_output",
+                "step_id": "step-schedule",
+                "output": "schedule"
+              },
+              "duration_minutes": {
+                "kind": "semantic_ref",
+                "field": "duration_minutes"
+              },
+              "policy": {
+                "kind": "context_ref",
+                "field": "squeeze_policy"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

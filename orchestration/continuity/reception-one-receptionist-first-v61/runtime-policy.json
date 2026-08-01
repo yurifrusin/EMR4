@@ -1,0 +1,77 @@
+{
+  "schema_version": "reception.one.receptionist_first_v61.runtime_policy.v1",
+  "policy_id": "reception-one-receptionist-first-v61-vertex-sydney-v1",
+  "status": "frozen_preoccupied",
+  "dialogue_protocol": "reception.one.bureau.receptionist-first.v6.1",
+  "model_response_contract": "reception.one.bureau.receptionist-and-form.v6.1",
+  "assembled_response_contract": "reception.one.bureau.plan-program.v3",
+  "data_class": "authored_synthetic",
+  "effect_ceiling": "proposal_only",
+  "targeted_development_not_holdout": true,
+  "generation": {
+    "temperature": 0,
+    "thinking_budget": 1024,
+    "include_thoughts": false,
+    "thinking_token_count_recorded_when_supplied": true,
+    "hidden_reasoning_retained": false,
+    "maximum_output_tokens": 2048
+  },
+  "outputs": {
+    "natural_receptionist_response": true,
+    "bounded_decision_note": true,
+    "evidence_utterance_indices": true,
+    "typed_form": true,
+    "broker_owned_version_code": 3,
+    "broker_parses_natural_response_into_form": false,
+    "raw_provider_response_retained": false
+  },
+  "semantic_assertion": {
+    "recognized_supported_action_is_one_way_binding": true,
+    "grounded_noun_fragment_requires_clarification": true,
+    "unknown_novel_composition_closed": false,
+    "proofreader_selects_replacement": false
+  },
+  "provider": {
+    "name": "google_cloud_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "global_endpoint": false,
+    "automatic_fallback": false,
+    "api_key_authentication": false,
+    "provider_tools": false,
+    "function_calling": false,
+    "grounding": false,
+    "retrieval": false,
+    "explicit_cache": false
+  },
+  "occupied_gate": {
+    "target_case_count": 15,
+    "maximum_primary_calls": 15,
+    "maximum_correction_calls": 15,
+    "absolute_actual_call_ceiling": 30,
+    "incremental_cost_ceiling_usd": 1,
+    "stop_each_case_after_first_admitted_or_terminal_result": true,
+    "distinct_one_use_ledger_per_call": true
+  },
+  "closed": [
+    "real_data",
+    "product_derived_data",
+    "patient_or_health_data",
+    "clinical_data",
+    "protected_evidence",
+    "historical_diary_data",
+    "appointment_confirmation",
+    "appointment_write",
+    "product_delivery",
+    "word_wiring",
+    "voice",
+    "production",
+    "deployment",
+    "release",
+    "provider_or_regional_fallback"
+  ]
+}

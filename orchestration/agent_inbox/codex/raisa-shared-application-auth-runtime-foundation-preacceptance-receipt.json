@@ -1,0 +1,63 @@
+{
+  "authority_boundary": "receipt_only_repository_local_route_free_database_free_authored_synthetic_auth_runtime_acceptance_no_worker_control_external_identity_product_data_deployment_production_release_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "accept_the_repository_local_route_free_database_free_shared_application_auth_runtime_foundation_without_external_identity_product_data_deployment_production_release_or_integration_authority",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. The shared application-authentication architecture at Continuity revision 181 and Compass revision 162 is the accepted parent; Yuri authorised the exact authored-synthetic runtime-foundation candidate now under acceptance.",
+    "current_authority_allocation": "GPT Sol owns this tightly coupled implementation and acceptance tranche. No worker, subagent, provider, external reviewer, identity provider or cloud control plane was selected or dispatched.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-shared-application-auth-runtime-foundation-plan.md",
+      "docs/security/raisa-shared-application-auth-runtime-foundation-threat-model-delta.md",
+      "app/services/application_auth_runtime.py",
+      "scripts/raisa_shared_application_auth_runtime_foundation_acceptance.py",
+      "orchestration/continuity/raisa-shared-application-auth-runtime-foundation/provider-free-acceptance-evidence.json",
+      "tests/test_raisa_shared_application_auth_runtime_foundation.py",
+      "docs/raisa-shared-application-auth-clinician-role-boundary-design.md",
+      "orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/auth-boundary-policy.json",
+      "orchestration/continuity/emr4-continuity-graph.json revision 181 parent",
+      "orchestration/continuity/emr4-compass.json revision 162 parent",
+      "docs/ariadne-compass-current.md rendered revision 162 parent"
+    ],
+    "protected_evidence_boundaries": "Protected holdouts and historical raw Diary material remained sealed. Only authored-synthetic identity metadata was accepted. Product-derived, patient, health, clinical and historical data, FastAPI/GraphQL routes, cookies, database access, external identity, providers, commands, microphone, document mutation, deployment, production and release remained closed.",
+    "git_refs_and_worktree": {
+      "HEAD": "8fa732592fbee4f57c322b13d9d8ff89fcc7fa33",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "12fb7800ea285561b5ea50cbfe328b4d3d0fc1f8",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/codex/ariadne-terra-gemini-comparative-rehearsal": "8fa732592fbee4f57c322b13d9d8ff89fcc7fa33",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "upstream_ahead": 0,
+      "upstream_behind": 0,
+      "task_local_architecture_and_runtime_changes_preserved": true,
+      "all_named_protected_refs_are_ancestors_of_HEAD": true,
+      "protected_refs_unchanged": true
+    }
+  },
+  "verification": {
+    "focused_cases_passed": 32,
+    "expanded_no_conftest_cases_passed": 145,
+    "initial_expanded_selection_note": "Seven database-fixture-dependent tests were unavailable by design under --noconftest; no runtime assertion failed, and the corrected 145-case selection passed.",
+    "provider_free_evidence_result": "pass",
+    "all_recorded_external_and_product_side_effect_counts_zero": true
+  },
+  "revision_binding": {
+    "continuity_graph_revision_expected": 182,
+    "compass_map_revision_expected": 163,
+    "compass_source_graph_revision_expected": 182,
+    "rendered_compass_exact_validation_required": true
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": "reception.one.preprinted_form_v5.broad_language_residue.v1",
+  "recorded_at": "2026-07-30T06:28:00Z",
+  "result": "clear",
+  "containers_present": 0,
+  "internal_networks_present": 0,
+  "relay_images_present": 0,
+  "cell_images_present": 0,
+  "temporary_credential_contexts_present": 0,
+  "cohort_processes_present": 0,
+  "ledger_files": 40,
+  "consumed_ledgers": 40,
+  "open_ledgers": 0,
+  "provider_calls_consumed": 32,
+  "zero_call_ledgers_consumed": 8,
+  "unrelated_preview_processes_preserved": true,
+  "credential_material_recorded": false,
+  "api_key_information_recorded": false
+}

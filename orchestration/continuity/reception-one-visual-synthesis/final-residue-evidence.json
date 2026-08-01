@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.reception_one_visual_synthesis_residue.v1",
+  "checked_at": "2026-07-24T10:41:25Z",
+  "scope": "reception_one_visual_synthesis_task_resources",
+  "task_containers": 0,
+  "task_networks": 0,
+  "task_images": 0,
+  "task_processes": 0,
+  "all_zero": true
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": "reception.one.preprinted_form_v5.broad_language_residue.v1",
+  "recorded_at": "2026-07-30T05:26:39Z",
+  "result": "reception_one_preprinted_form_v5_broad_language_residue_clear",
+  "owned_containers_present": false,
+  "owned_networks_present": false,
+  "owned_images_present": false,
+  "broker_processes_present": false,
+  "cell_processes_present": false,
+  "occupied_case_directories_present": false,
+  "occupied_ledgers_present": false,
+  "provider_free_frame_count": 24,
+  "provider_calls_performed": 0,
+  "daemon_wide_prune_performed": false,
+  "credential_material_created_copied_mounted_or_persisted": false
+}

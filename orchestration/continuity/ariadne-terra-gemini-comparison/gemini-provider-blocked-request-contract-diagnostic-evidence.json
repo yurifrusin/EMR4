@@ -1,0 +1,104 @@
+{
+  "schema_version": "ariadne.gemini_provider_blocked_request_contract_diagnostic_evidence.v1",
+  "recorded_at": "2026-07-24",
+  "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+  "result": "ariadne_gemini_provider_blocked_request_contract_diagnostic_pass",
+  "diagnosis": {
+    "finding_code": "gemini_3x_candidate_count_unsupported",
+    "attempt_003_field": "generationConfig.candidateCount",
+    "attempt_003_value": 1,
+    "provider_status": 400,
+    "provider_error_status": "INVALID_ARGUMENT",
+    "field_capable_of_observed_error": true,
+    "exact_historical_cause_proven": false,
+    "raw_provider_error_message_retained": false,
+    "remaining_uncertainty": [
+      "schema_complexity",
+      "other_provider_side_validation"
+    ]
+  },
+  "repaired_request_contract": {
+    "shared_constructor": "scripts/ariadne_provider_contracts.mjs#buildGeminiGenerateContentRequest",
+    "broker_uses_shared_constructor": true,
+    "candidate_count_present": false,
+    "generation_config_fields": [
+      "maxOutputTokens",
+      "responseJsonSchema",
+      "responseMimeType",
+      "thinkingConfig"
+    ],
+    "provider_schema_sha256": "sha256:39a0f6da352a8da5f8291291a8f87abaa6aa9daa6b7359a8221341ebb756f1e2",
+    "provider_schema_changed": false,
+    "maximum_output_tokens": 2048,
+    "thinking_level": "MEDIUM",
+    "thoughts_included": false,
+    "provider_storage_requested": false,
+    "prompt_or_schema_values_recorded": false
+  },
+  "audit_export_repair": {
+    "known_event_fields_copied_losslessly": true,
+    "complete_synthetic_broker_ready_event_hash_chain_revalidated": true,
+    "historically_omitted_fields_present": [
+      "allowed_path",
+      "maximum_provider_calls",
+      "upstream_host",
+      "upstream_path"
+    ],
+    "synthetic_unallowlisted_field_rejected": true,
+    "failure_reason": "audit-event-export-field-not-allowlisted",
+    "attempt_003_original_evidence_rewritten": false,
+    "attempt_003_original_audit_result": "ariadne_terra_gemini_attempt3_external_audit_revision_required"
+  },
+  "verification": {
+    "provider_blocked_diagnostic": "passed",
+    "focused_test_count": 39,
+    "focused_passed": 39,
+    "focused_continuity_and_compass_test_count": 63,
+    "focused_continuity_and_compass_passed": 63,
+    "fixed_repository_only_test_count": 262,
+    "fixed_repository_only_passed": 262,
+    "python_compile": "passed",
+    "node_syntax": "passed",
+    "ruff": "passed",
+    "bandit_medium_or_higher": "passed",
+    "json_parse": "passed",
+    "continuity_and_compass_schema": "passed",
+    "git_diff_check": "passed"
+  },
+  "source_hashes": {
+    "provider_contract_module_sha256": "sha256:494a90dd04fdc17f74a60656689b77f7c755264c41237fb4bccfbb752070fe23",
+    "broker_sha256": "sha256:d41209b098131ab7f0394a04c5fb5d5c72ef19acf24eddfe667d6ace5f496ea1",
+    "rehearsal_sha256": "sha256:71020f1fcd5dcd781d6b8e7f9061e1d597a7d1001470bd6a1313be47f886e0a7",
+    "diagnostic_sha256": "sha256:2c7e4ef363e2fd1ee70cf63b84fecc096865b2e944b2e6478ae4310f3a89010e",
+    "comparative_tests_sha256": "sha256:12175a2b687f2d9745469619622a617c74599bc5aac87d1470c7ce0c4ffc99a0",
+    "provider_contract_profiles_sha256": "sha256:9f0ee6ec095fea2db7958ba9974051b2e15495377e1ea830571c48be9537f086",
+    "external_audit_track_policy_sha256": "sha256:23e5b7ca8727dd0b26860efe35d49e6f2b77fcae4144b0f1cb6a7788b86f6deb",
+    "attempt_003_request_observation_sha256": "sha256:f095dbd9aa21225163db74c3ae0e1116fb1228bb55a500e28ecd59f1ef000549",
+    "attempt_003_terra_ledger_sha256": "sha256:ff9d7a95ab9bc3f71a08022371e3e6390915251a0adadfbd62178c86f49da9da",
+    "attempt_003_gemini_ledger_sha256": "sha256:73790f687c14527c5e37f807df570cd51593265e34804f774803a9ea139ceee3",
+    "attempt_003_comparison_evidence_sha256": "sha256:fb721c08bff6f14ac71002146428b967c71448778a6e01d211a40930c3d06110",
+    "continuity_graph_sha256": "sha256:df2f72abaeedc29b0f7d941277c7f5ee07624b3c44898e7871665a10c4eca01b",
+    "compass_sha256": "sha256:31315a2d9cc0f959d9b297cb0605c8492455473bdbd8f5502b81a1d24dd6c4d8"
+  },
+  "boundaries": {
+    "authored_synthetic_sentinels_only": true,
+    "provider_or_model_call_performed": false,
+    "credential_read_performed": false,
+    "prompt_transmitted": false,
+    "network_opened": false,
+    "container_started": false,
+    "postgresql_or_other_database_accessed": false,
+    "product_api_or_event_feed_accessed": false,
+    "attempt_003_ledgers_mutated": false,
+    "git_integration_performed": false
+  },
+  "remaining_closed_authority": {
+    "provider_retry_authorised": false,
+    "provider_call_authorised": false,
+    "credential_mount_authorised": false,
+    "prompt_transmission_authorised": false,
+    "model_or_container_runtime_authorised": false,
+    "database_or_product_runtime_authorised": false,
+    "durable_audit_sink_authorised": false
+  }
+}

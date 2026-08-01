@@ -1,0 +1,102 @@
+{
+  "authority": {
+    "authorized_openings": [
+      {
+        "boundary": "api-change",
+        "scope": "One provider-free authored-synthetic current-selection check may run in one task-created unsaved installed-Word document through a disposable ReadDocument-only localhost sideload; no existing document, account, protected data, provider, backend, microphone, write, deployment or release authority.",
+        "source": "docs/raisa-clinician-one-word-desktop-selection-check-plan.md"
+      }
+    ],
+    "notes": [
+      "The exercise is real-host evidence for the existing non-authoritative client-local context frame, not a new GraphQL, REST, Access AI or async contract.",
+      "Authenticated Word Online and any public HTTPS development resource remain separately gated.",
+      "Provider, patient, clinical, backend, database, microphone, document-write, command, production, deployment and release gates remain closed."
+    ]
+  },
+  "claim_scope": [
+    "One installed Microsoft Word desktop taskpane read one authored-synthetic exact current selection after an explicit click and local attestation.",
+    "The accepted adapter emitted only a typed in-memory current_consult_note frame and the taskpane rendered source, host and counts.",
+    "The disposable manifest requested ReadDocument, the server was loopback-only and no existing document or Office account material was inspected.",
+    "The unsaved task document, sideload, listener and exact task logs were removed with no task-owned credential, container, network, image or raw-selection residue."
+  ],
+  "contract_evidence": [
+    {
+      "contract_id": "combined-patient-practitioner-time-duration-intent",
+      "evidence": [
+        "tests/test_reception_one_word_compact_companion_shell.py",
+        "tests/test_clinician_one_word_desktop_selection_check.py"
+      ],
+      "note": "The real-host selection check introduces no appointment context, proposal or command and leaves the Reception One intent contract unchanged.",
+      "status": "satisfied"
+    },
+    {
+      "contract_id": "committed-reschedule-availability-reconciliation",
+      "evidence": [
+        "tests/test_reception_one_word_hybrid_contextual_launch.py",
+        "docs/raisa-clinician-one-word-desktop-selection-check-closeout.md"
+      ],
+      "note": "The client-local selection read neither reads nor alters Diary events, availability, freshness or reconciliation.",
+      "status": "satisfied"
+    }
+  ],
+  "coordinates": {
+    "git_ref": "codex/ariadne-terra-gemini-comparative-rehearsal",
+    "source_head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "thread_id": null,
+    "worktree_role": "integration"
+  },
+  "created_at": "2026-07-31T06:00:00Z",
+  "decisions": [
+    {
+      "id": "accept-clinician-one-word-desktop-selection-check-175",
+      "source": "docs/raisa-clinician-one-word-desktop-selection-check-plan.md",
+      "status": "accepted",
+      "summary": "Accept one provider-free authored-synthetic installed-Word current-selection observation while all protected-data, provider, backend and write boundaries remain closed."
+    }
+  ],
+  "evidence": {
+    "acceptances": [
+      "orchestration/agent_inbox/codex/clinician-one-word-desktop-selection-check-sol-acceptance.md"
+    ],
+    "closeouts": [
+      "docs/raisa-clinician-one-word-desktop-selection-check-closeout.md"
+    ],
+    "findings": [
+      "orchestration/continuity/clinician-one-word-desktop-selection-check/desktop-selection-evidence.json",
+      "orchestration/continuity/clinician-one-word-desktop-selection-check/final-residue-evidence.json"
+    ],
+    "plans": [
+      "docs/raisa-clinician-one-word-desktop-selection-check-plan.md",
+      "docs/security/raisa-clinician-one-word-desktop-selection-check-threat-model-delta.md"
+    ],
+    "receipts": [
+      "orchestration/agent_inbox/codex/clinician-one-word-desktop-selection-check-rehydration-receipt.json",
+      "orchestration/agent_inbox/codex/clinician-one-word-desktop-selection-check-preacceptance-receipt.json"
+    ],
+    "tests": [
+      "tests/test_clinician_one_word_desktop_selection_check.py",
+      "tests/test_clinician_one_readonly_document_context.py",
+      "tests/test_raisa_dual_host_foundation.py",
+      "tests/test_reception_one_word_hybrid_contextual_launch.py",
+      "tests/test_reception_one_word_compact_companion_shell.py",
+      "tests/test_api_spine_artifacts.py"
+    ]
+  },
+  "id": "clinician-one-word-desktop-selection-check",
+  "kind": "integration",
+  "relationships": [
+    {
+      "node_id": "clinician-one-readonly-document-context",
+      "relation": "builds_on"
+    }
+  ],
+  "status": "accepted",
+  "title": "Clinician One Word Desktop Selection Check",
+  "unresolved_gates": [
+    "Authenticated Word Online behavior, Office identity and clinician-role authorization remain unproven.",
+    "Real, product-derived, patient, health, clinical and historical text remain closed.",
+    "Any public HTTPS cloud resource and deployment require separate external authority.",
+    "Provider, Access AI, backend, database, microphone, document-write, clinical-command, production and release remain closed."
+  ],
+  "updated_at": "2026-07-31T06:30:00Z"
+}

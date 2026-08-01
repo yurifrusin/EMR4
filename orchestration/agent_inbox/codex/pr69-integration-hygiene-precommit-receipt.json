@@ -1,0 +1,20 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely; protected PR publication precedes the newly authorised cookie-compatibility tranche.",
+    "current_authority_allocation": "GPT Sol owns review and protected integration; no worker is selected.",
+    "active_plan_and_acceptance": ["docs/security/security-finding-governance-plan.md", "docs/security/security-finding-governance-closeout-2026-08-01.md", "docs/security/pr69-codeql-alerts-500-507-triage-2026-08-01.md"],
+    "protected_evidence_boundaries": "Protected evidence, provider, real identity, federation, product-data, deployment, production, release, public rename, domain and trademark gates remain closed.",
+    "git_refs_and_worktree": {"HEAD":"91c2b4e8978e64095bc750fe204f4c7e2f2534a2","master_and_handoff_local_and_origin":"4974075b31035d599e081d68e3b85e04a897baa1","concurrent_branding_assets":"present_untracked_untouched_and_excluded","protected_refs_unchanged":true}
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true,
+  "worker_dispatch_selected": false
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "accept_the_repository_local_provider_free_raisa_shared_application_authentication_and_clinician_role_architecture_descendant_without_runtime_external_identity_product_data_write_deployment_production_or_release_authority",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_shared_auth_boundary_preacceptance",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: AGENTS.md remains the live handover; the Word Online authenticated companion pass is the accepted parent and the new shared application-authentication architecture is the bounded descendant under review.",
+        "current_authority_allocation: GPT Sol retains architecture and acceptance authority; no worker, provider, external reviewer, identity provider or cloud control plane was selected.",
+        "active_plan_and_acceptance: the shared-auth plan, design, threat-model delta, closed policy and schemas, 23 authorization cases, 13 exchange cases, deterministic pass evidence, closeout, focused tests, Continuity revision 181 and Compass revision 162 were reconciled.",
+        "protected_evidence_boundaries: protected holdouts remained sealed; no patient, product-derived, health, clinical or historical data was used; runtime authentication, external identity, backend/database access, commands, microphone, document mutation, deployment, production and release remain closed.",
+        "git_refs_and_worktree: HEAD remains the required 8fa732592fbee4f57c322b13d9d8ff89fcc7fa33 on codex/ariadne-terra-gemini-comparative-rehearsal; protected refs have not moved; only task-local uncommitted repository artifacts are present.",
+        "All 16 focused tests passed with conftest disabled, so the database engine and autouse database-write fixture did not run. All recorded side-effect counts are zero."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker was selected or dispatched."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected interactive fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport was selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external reviewer or provider was selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

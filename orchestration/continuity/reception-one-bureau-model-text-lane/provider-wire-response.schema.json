@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/reception-one-bureau-provider-wire-response-v1.json",
+  "title": "Reception One Bureau Provider Wire Response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "goal",
+    "plan_lines"
+  ],
+  "properties": {
+    "goal": {
+      "enum": [
+        "create",
+        "move",
+        "resize",
+        "cancel",
+        "status_change",
+        "squeeze_in_assessment",
+        "clarification"
+      ]
+    },
+    "plan_lines": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 12,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 512,
+        "pattern": "^step-[a-z0-9][a-z0-9-]{0,47}\\|[a-z][a-z0-9_]{0,63}\\|[a-z0-9_:=,.-]*$"
+      }
+    }
+  }
+}

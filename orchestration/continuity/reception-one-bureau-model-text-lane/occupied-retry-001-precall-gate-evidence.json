@@ -1,0 +1,14 @@
+{
+  "attempt_id": "reception-one-model-text-occupied-retry-001",
+  "gate": {
+    "all_cloud_controls_passed": true,
+    "authority_sha256": "sha256:546378532296968f843a557ef33799134592983d0498de29e5dded32b936d771",
+    "compass_map_revision": 54,
+    "compass_source_graph_revision": 67,
+    "continuity_graph_revision": 67,
+    "preflight_sha256": "sha256:2f8eaffb9dd8a2d4146c28c4bb8576bf6758494884dbf89faa83d5c05bda94b3"
+  },
+  "ledger_id": "reception-one-model-text-ledger-retry-001",
+  "provider_calls_performed": 0,
+  "schema_version": "reception.one.bureau.model_text_precall_gate.v1"
+}

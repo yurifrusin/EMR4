@@ -1,0 +1,49 @@
+{
+  "schema_version": "ariadne.vertex_sydney_adc_preflight_evidence.v1",
+  "recorded_on": "2026-07-24",
+  "tranche": 3,
+  "result": "ariadne_vertex_sydney_gemini_25_adc_preflight_blocked",
+  "reason_code": "existing_impersonated_adc_noninteractive_refresh_failed",
+  "configured_binding_checks": {
+    "credentials_are_impersonated": true,
+    "adc_project_exact": true,
+    "target_service_account_exact": true,
+    "cloud_platform_scope_exact": true
+  },
+  "refresh_checks": {
+    "google_auth_default_noninteractive_refresh_passed": false,
+    "gcloud_application_default_noninteractive_refresh_passed": false
+  },
+  "privacy_controls": {
+    "credential_value_printed_or_persisted": false,
+    "raw_authentication_response_printed_or_persisted": false,
+    "api_key_authentication_used": false,
+    "api_key_information_recorded": false,
+    "service_account_key_used_or_inspected": false,
+    "human_account_identifier_recorded": false
+  },
+  "activity": {
+    "identity_refresh_attempts": 2,
+    "cloud_control_metadata_reads": 0,
+    "rehearsal_prompt_transmitted": false,
+    "provider_data_plane_contacted": false,
+    "model_inference_calls": 0,
+    "single_use_ledgers_opened": 0,
+    "external_state_changed": false
+  },
+  "successor_gates": {
+    "real_isolation_dry_run_open": false,
+    "occupied_provider_call_open": false,
+    "proofreader_release_open": false
+  },
+  "required_intervention": "restore_or_noninteractively_refresh_the_existing_exact_bernie_impersonated_adc_without_changing_any_other_frozen_boundary",
+  "prohibited_repairs": [
+    "interactive_login_by_codex",
+    "adc_revoke_or_replace_by_codex",
+    "api_key_or_static_key_fallback",
+    "service_account_key_creation_or_use",
+    "human_account_change",
+    "iam_project_service_account_api_or_billing_change",
+    "provider_model_region_or_endpoint_substitution"
+  ]
+}

@@ -12,7 +12,7 @@ action-completion or write authority is emitted.
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import date, timedelta
 from typing import Any
 
@@ -763,8 +763,8 @@ _NEGATED_BOUND_TIME = re.compile(
 )
 
 _OR_LATER_TIME = re.compile(
-    r"\b(?P<time>(?:[01]?\d|2[0-3])(?:[:.][0-5]\d)?\s*(?:am|pm)?)"
-    r"\s+or\s+later\b",
+    r"\b(?P<time>(?:[01]?\d|2[0-3])(?:[:.][0-5]\d)? ?(?:am|pm)?)"
+    r" or later\b",
     re.I,
 )
 
@@ -822,7 +822,11 @@ def _extract_temporal(
         if parsed is not None:
             return "approximate", parsed, parsed
 
-    or_later = _OR_LATER_TIME.search(text)
+    # Collapse user-controlled whitespace once before applying this phrase
+    # matcher. The resulting expression has no adjacent unbounded repeats,
+    # while retaining support for tabs, newlines, and repeated spaces.
+    or_later_text = " ".join(text.split())
+    or_later = _OR_LATER_TIME.search(or_later_text)
     if or_later:
         parsed = parse_time_fragment(or_later.group("time"))
         if parsed is not None:
@@ -993,8 +997,6 @@ def _determine_clarification(
     Negated required entities (patient, practitioner, duration) fail closed
     into clarification.
     """
-    from app.services.diary.temporal import parse_time_fragment
-
     if intended_action is None:
         return True, ()  # Unknown action -> clarify
 
@@ -1616,9 +1618,12 @@ def extract_semantics(
             if target_date_str:
                 normalized_values["appointment_date"] = target_date_str
             # Extract target time after the target date mention
-            after_target = all_text[target_m.end():]
+            # Normalise user-controlled whitespace before matching the compact
+            # target-time grammar. This keeps the search linear while
+            # preserving compact forms such as "2 pm" and "2:30pm".
+            after_target = " ".join(all_text[target_m.end():].split())
             target_time = re.search(
-                r"\b(\d{1,2})(?:\s*(:?)\s*(\d{2}))?\s*(am|pm)\b",
+                r"\b(\d{1,2})(?:([:. ]?)(\d{2}))? ?(am|pm)\b",
                 after_target, re.I,
             )
             if target_time:

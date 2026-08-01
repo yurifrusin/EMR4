@@ -1,0 +1,175 @@
+{
+  "api_interception": false,
+  "appointment_confirmation_activated": false,
+  "cleanup": {
+    "ownership_marker_verified": true,
+    "status": "dropped_exact_verified_disposable_database"
+  },
+  "database_readback": {
+    "counts_identical": true,
+    "sha256_identical": true,
+    "write_surface_counts": {
+      "appointment_audit_log": 0,
+      "appointment_command_idempotency": 0,
+      "bernie_booking_sessions": 0,
+      "bernie_session_events": 0
+    }
+  },
+  "evidence_mode": "authenticated_local_authored_synthetic_fixture_browser",
+  "explicit_exclusions": [
+    "No participant evidence",
+    "No real patient or product-derived data",
+    "No appointment confirmation",
+    "No provider or model call",
+    "No production, deployment or release claim"
+  ],
+  "network": {
+    "confirmation_or_session_routes": [],
+    "forbidden_external_hosts": [],
+    "method_path_counts": [
+      {
+        "count": 22,
+        "method": "GET",
+        "path": "/api/v1/appointments"
+      },
+      {
+        "count": 4,
+        "method": "GET",
+        "path": "/api/v1/appointments/bernie/pilot-eligibility"
+      },
+      {
+        "count": 12,
+        "method": "GET",
+        "path": "/api/v1/appointments/types"
+      },
+      {
+        "count": 4,
+        "method": "GET",
+        "path": "/api/v1/diary/events/committed"
+      },
+      {
+        "count": 16,
+        "method": "GET",
+        "path": "/api/v1/diary/locations"
+      },
+      {
+        "count": 12,
+        "method": "GET",
+        "path": "/api/v1/diary/roster"
+      },
+      {
+        "count": 12,
+        "method": "GET",
+        "path": "/api/v1/diary/template"
+      },
+      {
+        "count": 12,
+        "method": "GET",
+        "path": "/api/v1/diary/waiting-areas"
+      },
+      {
+        "count": 3,
+        "method": "GET",
+        "path": "/api/v1/patients/search"
+      },
+      {
+        "count": 4,
+        "method": "GET",
+        "path": "/diary/diary.css"
+      },
+      {
+        "count": 4,
+        "method": "GET",
+        "path": "/diary/diary.html"
+      },
+      {
+        "count": 4,
+        "method": "GET",
+        "path": "/diary/diary.js"
+      },
+      {
+        "count": 4,
+        "method": "GET",
+        "path": "/diary/meta-grid.css"
+      },
+      {
+        "count": 4,
+        "method": "GET",
+        "path": "/diary/meta-grid.js"
+      },
+      {
+        "count": 4,
+        "method": "GET",
+        "path": "/diary/office-bootstrap.js"
+      },
+      {
+        "count": 4,
+        "method": "GET",
+        "path": "/images/emr_cube1.png"
+      },
+      {
+        "count": 4,
+        "method": "GET",
+        "path": "/meta-grid-auth.html"
+      },
+      {
+        "count": 1,
+        "method": "POST",
+        "path": "/api/v1/appointments/proposals/bernie/supervised-booking"
+      },
+      {
+        "count": 1,
+        "method": "POST",
+        "path": "/api/v1/appointments/proposals/slot-search"
+      },
+      {
+        "count": 4,
+        "method": "POST",
+        "path": "/api/v1/auth/login"
+      },
+      {
+        "count": 12,
+        "method": "POST",
+        "path": "/api/v1/graphql"
+      }
+    ]
+  },
+  "provider_used": false,
+  "reference_date": "2026-07-27",
+  "result": "pass",
+  "results": {
+    "identity_ambiguity": {
+      "candidate_manifest": [
+        "Alex Chen",
+        "Alex Shera"
+      ],
+      "disposition": "clarification_required",
+      "status": "pass"
+    },
+    "ordinary_diary_fallback": {
+      "ordinary_diary_visible": true,
+      "reception_one_hidden": true,
+      "status": "pass"
+    },
+    "patient_timeline": {
+      "appointment_count": 4,
+      "chronological": true,
+      "status": "pass"
+    },
+    "proposal_boundary": {
+      "appointment_created": false,
+      "confirmation_handoff_activated": false,
+      "confirmation_handoff_available": true,
+      "status": "pass"
+    }
+  },
+  "route_interception": false,
+  "runtime": {
+    "active_ipv4_review_session_contacted": false,
+    "cloud_credentials_present": false,
+    "database": "gp_pms_reception_one_combined_scope_9c41b7e2_20260721",
+    "loopback_family": "ipv6",
+    "provider": "disabled"
+  },
+  "schema_version": "reception_one.stage3b.product_task_acceptance.v1"
+}

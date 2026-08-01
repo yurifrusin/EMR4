@@ -1,0 +1,160 @@
+{
+  "attempt_id": "reception-one-model-text-occupied-001",
+  "broker": {
+    "api_key_authentication_used": false,
+    "environment_forwarded_names": [
+      "APPDATA",
+      "COMSPEC",
+      "LOCALAPPDATA",
+      "PATH",
+      "PATHEXT",
+      "SYSTEMDRIVE",
+      "SYSTEMROOT",
+      "TEMP",
+      "TMP",
+      "USERPROFILE",
+      "WINDIR"
+    ],
+    "google_application_credentials_forwarded": false,
+    "host_purpose_built_one_use_process": true,
+    "process_exit_code": 0
+  },
+  "build_context": {
+    "repository_root_used": false,
+    "source_hashes": {
+      "generated:cell-request.json": "sha256:7a21ba1a1cc722931e539aa9c6c2920bbe9db6cb869c98b0ec360fc1f22dc861",
+      "orchestration/continuity/reception-one-bureau-model-text-lane/LiveDockerfile": "sha256:45767035f2130a1f697b86c24cae2d825e1af7275592953f5deac4bf59f5cc20",
+      "scripts/ariadne_vertex_sydney_gemini_25_cell.py": "sha256:3e4a758296ad014e5a05ea8be77c7a8b9362a44809bdeb7a4fa0652a53648028",
+      "scripts/ariadne_vertex_sydney_gemini_25_relay.py": "sha256:a3aa57e891c50ff1bde03154dbe3a40ae2780b19d384eb4685100d7b945dbbc2"
+    },
+    "temporary_exact_allowlist": true
+  },
+  "cell_effective_policy": {
+    "cap_drop": [
+      "ALL"
+    ],
+    "credential_environment_present": false,
+    "memory_bytes": 134217728,
+    "memory_swap_bytes": 134217728,
+    "mount_count": 0,
+    "nano_cpus": 500000000,
+    "network_names": [
+      "reception-one-model-text-vertex-internal"
+    ],
+    "pids_limit": 64,
+    "port_binding_count": 0,
+    "privileged": false,
+    "read_only_rootfs": true,
+    "security_opt": [
+      "no-new-privileges=true"
+    ],
+    "user": "65532:65532"
+  },
+  "cleanup": {
+    "base_image_state_preserved": true,
+    "broker_process_absent": true,
+    "cell_container_absent": true,
+    "cell_image_absent": true,
+    "daemon_wide_prune_performed": false,
+    "internal_network_absent": true,
+    "relay_container_absent": true,
+    "relay_image_absent": true,
+    "temporary_context_absent": true,
+    "temporary_token_absent": true
+  },
+  "evidence_hash": "sha256:44a0a757453aad1a784872751fa6099eec9b6f7043bb07da40735c1b1e55695d",
+  "exact_binding": {
+    "api_key_authentication_used": false,
+    "authentication": "keyless_impersonated_service_account_adc",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "location": "australia-southeast1",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "provider": "google_vertex_ai",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"
+  },
+  "exchange": {
+    "audit_event_count": 7,
+    "audit_event_types": [
+      "broker_ready",
+      "request_admitted",
+      "ledger_consumed",
+      "provider_request_constructed",
+      "provider_call_started",
+      "provider_call_failed",
+      "broker_rejected"
+    ],
+    "audit_hash_chain_valid": true,
+    "audit_terminal_hash": "sha256:53d092949fe181bdbcf6d19479ac7b9290c3d6855aeb684cc4a37d1f29aefcbb",
+    "cell_exit_code": 2,
+    "cell_status": "edge_aborted",
+    "model_input_hash": "sha256:5a3ff6a69305efe6b6c5b5109baa56aaa819ac5e5352eee0451adc8c20ed2fa9",
+    "proofreader": null,
+    "release": null,
+    "schema_hash": "sha256:53ca81e8d9e75dce9732c9de6678da73e9695533dcfc8a482766945966a47bbd"
+  },
+  "explicit_exclusions": {
+    "api_key_information_recorded": false,
+    "chain_of_thought_recorded": false,
+    "command_authority": false,
+    "credential_or_token_recorded": false,
+    "human_or_product_delivery": false,
+    "product_or_database_access": false,
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false
+  },
+  "fallback_performed": false,
+  "ledger": {
+    "attempt_id": "reception-one-model-text-occupied-001",
+    "fallback_permitted": false,
+    "ledger_id": "reception-one-model-text-ledger-001",
+    "maximum_provider_calls": 1,
+    "policy_id": "reception-one-bureau-model-text-vertex-sydney-v1",
+    "provider_calls_consumed": 1,
+    "schema_version": "reception.one.bureau.model_text_single_use_ledger.v1",
+    "status": "consumed"
+  },
+  "ledger_id": "reception-one-model-text-ledger-001",
+  "network": {
+    "attachable": false,
+    "driver": "bridge",
+    "ingress": false,
+    "internal": true,
+    "name": "reception-one-model-text-vertex-internal"
+  },
+  "precall_gate": {
+    "all_cloud_controls_passed": true,
+    "authority_sha256": "sha256:d143eca6bd0636103c6929a732d95b33cd7493aed175d6d038a69aef9087aaf4",
+    "compass_map_revision": 52,
+    "compass_source_graph_revision": 65,
+    "continuity_graph_revision": 65,
+    "preflight_sha256": "sha256:cc5c4fae2e6b843c4d1b63d64833d81dfd4b4edb336896f0297cef63e92c1a11"
+  },
+  "provider_call_count": 1,
+  "provider_contacted": true,
+  "relay_effective_policy": {
+    "broker_alias_present": true,
+    "cap_drop": [
+      "ALL"
+    ],
+    "memory_bytes": 67108864,
+    "memory_swap_bytes": 67108864,
+    "mount_count": 1,
+    "nano_cpus": 250000000,
+    "network_names": [
+      "bridge",
+      "reception-one-model-text-vertex-internal"
+    ],
+    "pids_limit": 32,
+    "port_binding_count": 0,
+    "privileged": false,
+    "read_only_rootfs": true,
+    "security_opt": [
+      "no-new-privileges=true"
+    ],
+    "token_mount_exact": true,
+    "user": "65532:65532"
+  },
+  "result": "reception_one_bureau_model_text_lane_occupied_revision_required",
+  "schema_version": "reception.one.bureau.model_text_occupied_evidence.v1"
+}

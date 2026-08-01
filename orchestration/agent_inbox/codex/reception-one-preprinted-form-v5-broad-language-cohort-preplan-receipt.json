@@ -1,0 +1,57 @@
+{
+  "schema_version": "ariadne.preplan_receipt.v1",
+  "receipt_id": "reception-one-preprinted-form-v5-broad-language-cohort-preplan-20260730t052005z",
+  "recorded_at": "2026-07-30T05:20:05Z",
+  "result": "passed",
+  "rehydrated_from_receipt": true,
+  "mandatory_rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "rehydration_receipt": "orchestration/agent_inbox/codex/reception-one-preprinted-form-v5-broad-language-cohort-rehydration-receipt.json",
+  "authority_source": "Yuri: I agree. Let's carry on with a broader cohort of synthetic user utterances.",
+  "active_plan": "docs/bernie-reception-one-preprinted-form-v5-broad-language-cohort-plan.md",
+  "threat_model_delta": "docs/security/bernie-reception-one-preprinted-form-v5-broad-language-cohort-threat-model-delta.md",
+  "manifest": "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/evaluation-manifest.json",
+  "frozen_scope": {
+    "new_occupied_cases": 24,
+    "historical_cases_replayed": false,
+    "maximum_primary_calls": 24,
+    "maximum_correction_calls": 24,
+    "absolute_call_ceiling": 48,
+    "maximum_incremental_cost_usd": 1,
+    "prompt_or_schema_change_inside_cohort": false,
+    "prompt_context_teaching_inside_cohort": false,
+    "data_class": "authored_synthetic",
+    "effect_ceiling": "proposal_only"
+  },
+  "exact_provider_boundary": {
+    "provider": "google_cloud_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "fallback_permitted": false
+  },
+  "api_spine_boundary": {
+    "classification": "live_provider_authored_synthetic_admin_proposal_language_evaluation",
+    "graphql_used": false,
+    "rest_route_invoked": false,
+    "database_access": false,
+    "confirmation_authority": false,
+    "write_authority": false,
+    "product_delivery": false
+  },
+  "revision_binding_after_plan": {
+    "continuity_graph_revision": 100,
+    "compass_map_revision": 87
+  },
+  "historical_nodes_revised": false,
+  "unrelated_user_changes_preserved": true,
+  "commit_push_pr_or_ref_move_authorized": false
+}

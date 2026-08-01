@@ -1,0 +1,12 @@
+{
+  "database_cleanup": {
+    "cleanup": "dropped_exact_verified_disposable_database",
+    "database": "gp_pms_reception_one_cost_retry_4f2d8a31_20260731",
+    "recoverable": false
+  },
+  "ownership_marker_verified": true,
+  "post_attempt_residue_clear": true,
+  "runtime_directory_absent": true,
+  "runtime_processes_absent": true,
+  "schema_version": "reception.one.bureau_live_isolated_planner.cleanup.v1"
+}

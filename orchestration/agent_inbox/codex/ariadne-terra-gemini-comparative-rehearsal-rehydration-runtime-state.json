@@ -1,0 +1,88 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "sprint_planning",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_ariadne_terra_gemini_comparative_rehearsal_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "On 2026-07-24 Yuri authorised the proposed sequential Terra and Gemini authored-synthetic work-cell comparison.",
+        "The selected comparison is bounded to one direct gpt-5.6-terra Responses API request followed only after verified Terra cleanup by one direct gemini-3.5-flash generateContent request.",
+        "Both lanes receive the same sealed authored-synthetic evidence and typed output contract; neither lane receives tools, product access, repository access, a credential, a fallback, a retry or the other lane's output.",
+        "The complete live handover, current baton, authority allocation, active DeepSeek result and parent work-cell designs, API Spine boundary, and protected-evidence/user-decision boundaries were restored before planning.",
+        "HEAD, master, handoff/current, origin/master and origin/handoff/current are aligned at 4974075b31035d599e081d68e3b85e04a897baa1.",
+        "Four unrelated pre-existing Bernie receipt/runtime-state files remain untracked, preserved and excluded.",
+        "The prior DeepSeek model-process attempt remains consumed and is not retried or modified.",
+        "No provider credential is currently present in the process, user or machine environment; no provider call, prompt transmission, container start or attempt consumption occurred during rehydration.",
+        "PII, protected holdouts, historical Diary material, PostgreSQL, GraphQL, REST/OpenAPI product commands, event feeds, live mailboxes, human-gate actions, production, deployment and autonomous action remain closed."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Gemini is selected as untrusted cognition through a direct provider broker, not as an Antigravity implementation worker or acceptance reviewer."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The earlier DeepSeek process authority is consumed and excluded from this tranche."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude model or Claude Code transport is selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

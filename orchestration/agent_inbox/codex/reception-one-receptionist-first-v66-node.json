@@ -1,0 +1,120 @@
+{
+  "id": "reception-one-receptionist-first-v66-deidentified-note",
+  "title": "Reception One Receptionist-first v6.6 De-identified Note",
+  "kind": "implementation",
+  "status": "accepted",
+  "created_at": "2026-07-30T10:58:00Z",
+  "updated_at": "2026-07-30T11:19:55Z",
+  "relationships": [
+    {
+      "node_id": "reception-one-receptionist-first-v65-semantic-role",
+      "relation": "builds_on"
+    }
+  ],
+  "coordinates": {
+    "thread_id": null,
+    "git_ref": "codex/ariadne-terra-gemini-comparative-rehearsal",
+    "source_head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "worktree_role": "integration"
+  },
+  "evidence": {
+    "acceptances": [
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v66-provider-free-sol-acceptance.md"
+    ],
+    "closeouts": [
+      "docs/bernie-reception-one-receptionist-first-v65-closeout.md",
+      "orchestration/continuity/reception-one-receptionist-first-v66/occupied-cohort-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v66/occupied-final-residue-evidence.json",
+      "docs/bernie-reception-one-receptionist-first-v66-closeout.md"
+    ],
+    "findings": [
+      "orchestration/continuity/reception-one-receptionist-first-v65/occupied-final-audit-analysis.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v65-final-sol-review.md",
+      "orchestration/continuity/reception-one-receptionist-first-v66/occupied-final-audit-analysis.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v66-final-sol-review.md"
+    ],
+    "plans": [
+      "docs/bernie-reception-one-receptionist-first-v66-deidentified-note-plan.md",
+      "orchestration/continuity/reception-one-receptionist-first-v66/runtime-policy.json",
+      "orchestration/continuity/reception-one-receptionist-first-v66/occupied-authority.json"
+    ],
+    "receipts": [
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v66-rehydration-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v66-rehydration-five-source-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v66-preplan-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v66-preattempt-receipt.json"
+    ],
+    "tests": [
+      "orchestration/continuity/reception-one-receptionist-first-v66/turn-input.schema.json",
+      "orchestration/continuity/reception-one-receptionist-first-v66/provider-blocked-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v66/real-isolation-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v66/occupied-preflight-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v66/pre-attempt-residue-evidence.json",
+      "tests/test_reception_one_receptionist_first_v66.py"
+    ]
+  },
+  "authority": {
+    "authorized_openings": [
+      {
+        "boundary": "container-runtime",
+        "scope": "Credential-free network-none work cells for the complete twenty-four-request authored-synthetic v6.6 cohort.",
+        "source": "orchestration/continuity/reception-one-receptionist-first-v66/occupied-authority.json"
+      },
+      {
+        "boundary": "model-runtime",
+        "scope": "Gemini 2.5 Flash may complete the unchanged typed output form after one de-identified decision-note instruction repair.",
+        "source": "orchestration/continuity/reception-one-receptionist-first-v66/occupied-authority.json"
+      },
+      {
+        "boundary": "provider-call",
+        "scope": "Twenty-four primaries and at most one terminal second call per case through the exact Bernie keyless-ADC Sydney lane, within forty-eight calls and USD 1.",
+        "source": "orchestration/continuity/reception-one-receptionist-first-v66/occupied-authority.json"
+      }
+    ],
+    "notes": [
+      "v6.5 is immutable and consumed; v6.6 is separately versioned.",
+      "The deterministic proofreader will not redact or safe-repair a person-identifying decision note.",
+      "Provider, model, project, service account, keyless ADC, region, authored-synthetic, isolation, no-fallback, no-write and cost boundaries are unchanged."
+    ]
+  },
+  "contract_evidence": [
+    {
+      "contract_id": "combined-patient-practitioner-time-duration-intent",
+      "status": "satisfied",
+      "evidence": [
+        "docs/bernie-reception-one-receptionist-first-v66-deidentified-note-plan.md",
+        "orchestration/continuity/reception-one-receptionist-first-v66/runtime-policy.json",
+        "orchestration/continuity/reception-one-receptionist-first-v66/turn-input.schema.json"
+      ],
+      "note": "The repair changes only the audit-only decision-note instruction; the exact typed semantic form and proofreader remain frozen."
+    },
+    {
+      "contract_id": "committed-reschedule-availability-reconciliation",
+      "status": "satisfied",
+      "evidence": [
+        "docs/bernie-reception-one-receptionist-first-v66-deidentified-note-plan.md",
+        "docs/bernie-reception-one-receptionist-first-v65-closeout.md",
+        "orchestration/continuity/reception-one-receptionist-first-v66/turn-input.schema.json"
+      ],
+      "note": "The descendant remains proposal-only and opens no product, event, database, confirmation or write path."
+    }
+  ],
+  "decisions": [
+    {
+      "id": "authorise-reception-one-receptionist-first-v66-125",
+      "status": "accepted",
+      "summary": "Teach the de-identified internal decision-note rule without weakening the proofreader, then rerun all twenty-four requests.",
+      "source": "orchestration/continuity/reception-one-receptionist-first-v66/occupied-authority.json"
+    }
+  ],
+  "unresolved_gates": [
+    "v6.6 is closed at twenty-three of twenty-four exact outcomes and may not be called again.",
+    "Any clarification-vocabulary repair and full cohort rerun require a separately versioned descendant.",
+    "Real/product/clinical/historical data, database access, writes, Word, voice, production, deployment and release remain closed."
+  ],
+  "claim_scope": [
+    "v6.6 proves twenty-three exact outcomes and one fail-closed clarification-channel vocabulary mismatch; it is not a capability pass.",
+    "The reused cohort is development evidence, not an independent holdout.",
+    "Sydney endpoint evidence does not prove Australian physical or sovereign processing."
+  ]
+}

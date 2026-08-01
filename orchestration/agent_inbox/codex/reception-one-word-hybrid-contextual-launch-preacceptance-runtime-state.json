@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "validate_and_close_the_provider_free_word_hybrid_contextual_native_diary_launch_descendant",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_word_hybrid_preacceptance",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker was dispatched; the tightly coupled access-surface and visual tranche remained Sol-owned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport was selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external peer worker or provider was selected for this provider-free access-surface tranche."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: the accepted post-admission Bureau remained current at Continuity 167 / Compass 148 when the Hybrid descendant began.",
+        "current_authority_allocation: Yuri selected the recommended Hybrid direction and authorised this first provider-free Word-to-native-Diary foundation plus the visible request-input repair.",
+        "active_plan_and_acceptance: the new plan freezes an exact zero-authority context frame, keeps ordinary Diary and Reception One actions distinct, and requires date verification before projection.",
+        "protected_evidence_boundaries: protected fixtures and all real, product-derived, patient, appointment, clinical, credential, provider and hidden-reasoning material remain excluded. One over-broad read-only search touched a protected fixture path; the result was not analysed, reused, copied, transmitted or made part of this evidence.",
+        "git_refs_and_worktree: HEAD remains 5b1ea7952fb08eea333da0e63f166d3895ccea32 on codex/ariadne-terra-gemini-comparative-rehearsal; master, handoff/current, origin/master and origin/handoff/current remain 4974075b31035d599e081d68e3b85e04a897baa1; all unrelated dirty-worktree material is preserved.",
+        "In-app Browser visual inspection passed at desktop and 390x844 widths without clipping or console errors.",
+        "Route-intercepted Chromium acceptance passed with exact auth/context separation, context absent from the URL, verified date-before-projection ordering, zero provider calls, zero credential reads and zero database writes.",
+        "The focused and relevant integration suite passed 117 tests, including the integrated Bureau, UI wiring, overflow, availability reconciliation, functional/live-local meta-grid and API Spine artifact gates."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

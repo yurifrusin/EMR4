@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/reception-one-receptionist-first-v6-correction-ticket.json",
+  "title": "Reception One receptionist-first v6 correction ticket",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version_code",
+    "target_turn_code",
+    "previous_output_sha256",
+    "previous_typed_form",
+    "replacement_required",
+    "attempts_remaining",
+    "violations"
+  ],
+  "properties": {
+    "version_code": {"const": 2},
+    "target_turn_code": {"const": 2},
+    "previous_output_sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "previous_typed_form": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["goal_code", "steps"],
+      "properties": {
+        "goal_code": {"type": "integer", "minimum": 0, "maximum": 6},
+        "steps": {"type": "array", "minItems": 1, "maxItems": 12}
+      }
+    },
+    "replacement_required": {"const": true},
+    "attempts_remaining": {"const": 1},
+    "violations": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "violation_code",
+          "field_code",
+          "step_index",
+          "source_index",
+          "allowed_output_names"
+        ],
+        "properties": {
+          "violation_code": {"type": "string", "minLength": 1, "maxLength": 80},
+          "field_code": {
+            "enum": [
+              "receptionist_response",
+              "decision_note",
+              "evidence_utterance_indices",
+              "operator_note",
+              "goal_code",
+              "steps",
+              "operator_code",
+              "source_ref",
+              "program"
+            ]
+          },
+          "step_index": {"type": "integer", "minimum": -1, "maximum": 11},
+          "source_index": {"type": "integer", "minimum": -1, "maximum": 7},
+          "allowed_output_names": {
+            "type": "array",
+            "maxItems": 10,
+            "uniqueItems": true,
+            "items": {"type": "string"}
+          }
+        }
+      }
+    }
+  }
+}

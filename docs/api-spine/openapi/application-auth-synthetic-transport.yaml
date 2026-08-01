@@ -1,0 +1,514 @@
+openapi: 3.1.0
+info:
+  title: EMR4 Authored-Synthetic Application Authentication Transport
+  version: 0.1.0
+  summary: Default-off cookie and exchange transport above the shared backend auth policy.
+  description: >
+    Repository-local provider-free contract for authored-synthetic identity and
+    session metadata only. It defines no live EMR4 identity, Microsoft/Office
+    authority, product read, clinical authority, command, deployment or release.
+servers:
+  - url: https://auth.example.invalid/api/v1/application-auth
+    description: Documentation placeholder; not a live EMR4 endpoint.
+tags:
+  - name: ApplicationAuthTransport
+
+x-emr4-authority-boundary:
+  status: default_off_authored_synthetic_only
+  backend_policy: app.services.application_auth_runtime.ApplicationAuthRuntime
+  database_unit_of_work: app.services.application_auth_persistence.PostgresApplicationAuthRuntime
+  parent_result: raisa_shared_application_auth_postgresql_persistence_pass
+  closed:
+    - live_emr4_identity
+    - microsoft_or_office_identity_authority
+    - product_or_clinical_reads
+    - graphql
+    - appointment_or_arrival_commands
+    - provider_calls
+    - deployment
+    - production
+    - release
+
+x-emr4-cookie-contract:
+  session_cookie: __Host-emr4-application-session
+  csrf_cookie: __Host-emr4-application-csrf
+  attributes:
+    secure: true
+    http_only: true
+    path: /
+    domain: absent
+    same_site: None
+    partitioned: true
+  raw_parent_in_client: false
+  raw_surface_in_json: false
+  csrf_header: X-EMR4-CSRF
+
+x-emr4-operational-hardening:
+  status: repository_local_authored_synthetic_only
+  deployment_role:
+    login_role: separate_LOGIN_NOINHERIT_no_direct_table_grants
+    capability_role: exact_NOLOGIN_NOBYPASSRLS
+    credential_in_repository: false
+  proxy:
+    default_trusted_networks: []
+    forwarded_contract: one_allowlisted_hop_and_https_only
+    forwarded_identity_grants_auth_authority: false
+  rate_limit:
+    implementation: bounded_per_process_fixed_window
+    first_blocked_request_per_key_window_requires_audit: true
+    distributed_or_production_proof: false
+  denial_audit:
+    data_class: authored_synthetic
+    raw_network_or_authentication_values: prohibited
+    required_audit_failure: fail_closed_503
+  database_pool:
+    pool_size: 2
+    max_overflow: 1
+    checkout_timeout_seconds: 1
+    production_proof: false
+
+paths:
+  /csrf:
+    post:
+      tags: [ApplicationAuthTransport]
+      operationId: issueApplicationAuthCsrf
+      summary: Issue one exact-origin pre-authentication CSRF pair.
+      parameters:
+        - $ref: "#/components/parameters/Origin"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SurfaceRequest"
+      responses:
+        "200":
+          description: CSRF cookie and in-memory header value issued.
+          headers:
+            Set-Cookie:
+              $ref: "#/components/headers/CsrfSetCookie"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CsrfResponse"
+        "403":
+          $ref: "#/components/responses/RequestNotAdmitted"
+        "429":
+          $ref: "#/components/responses/RequestRateLimited"
+        "404":
+          $ref: "#/components/responses/TransportUnavailable"
+
+  /synthetic/session:
+    post:
+      tags: [ApplicationAuthTransport]
+      operationId: createSyntheticApplicationSession
+      summary: Consume one authored-synthetic bootstrap credential.
+      parameters:
+        - $ref: "#/components/parameters/Origin"
+        - $ref: "#/components/parameters/CsrfHeader"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SyntheticSessionRequest"
+      responses:
+        "200":
+          description: Surface cookie and rotated CSRF pair issued.
+          headers:
+            Set-Cookie:
+              $ref: "#/components/headers/SessionAndCsrfSetCookie"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionResponse"
+        "401":
+          $ref: "#/components/responses/AuthenticationFailed"
+        "403":
+          $ref: "#/components/responses/RequestNotAdmitted"
+        "429":
+          $ref: "#/components/responses/RequestRateLimited"
+        "503":
+          $ref: "#/components/responses/AuthenticationUnavailable"
+
+  /session/validate:
+    post:
+      tags: [ApplicationAuthTransport]
+      operationId: validateApplicationSession
+      summary: Validate and refresh one cookie-bound surface session.
+      parameters:
+        - $ref: "#/components/parameters/Origin"
+        - $ref: "#/components/parameters/CsrfHeader"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SurfaceRequest"
+      responses:
+        "200":
+          description: Current authored-synthetic backend context.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidatedSessionResponse"
+        "401":
+          $ref: "#/components/responses/AuthenticationFailed"
+        "403":
+          $ref: "#/components/responses/RequestNotAdmitted"
+        "429":
+          $ref: "#/components/responses/RequestRateLimited"
+        "503":
+          $ref: "#/components/responses/AuthenticationUnavailable"
+
+  /session/rotate:
+    post:
+      tags: [ApplicationAuthTransport]
+      operationId: rotateApplicationSession
+      summary: Atomically revoke and replace one surface bearer.
+      parameters:
+        - $ref: "#/components/parameters/Origin"
+        - $ref: "#/components/parameters/CsrfHeader"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SurfaceRequest"
+      responses:
+        "200":
+          description: Replacement surface cookie and CSRF pair issued.
+          headers:
+            Set-Cookie:
+              $ref: "#/components/headers/SessionAndCsrfSetCookie"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionResponse"
+        "401":
+          $ref: "#/components/responses/AuthenticationFailed"
+        "403":
+          $ref: "#/components/responses/RequestNotAdmitted"
+        "429":
+          $ref: "#/components/responses/RequestRateLimited"
+        "503":
+          $ref: "#/components/responses/AuthenticationUnavailable"
+
+  /session/logout:
+    post:
+      tags: [ApplicationAuthTransport]
+      operationId: logoutApplicationSession
+      summary: Revoke the surface session, then expire both cookies.
+      parameters:
+        - $ref: "#/components/parameters/Origin"
+        - $ref: "#/components/parameters/CsrfHeader"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SurfaceRequest"
+      responses:
+        "204":
+          description: Revocation committed and cookies expired.
+        "401":
+          $ref: "#/components/responses/AuthenticationFailed"
+        "403":
+          $ref: "#/components/responses/RequestNotAdmitted"
+        "429":
+          $ref: "#/components/responses/RequestRateLimited"
+        "503":
+          $ref: "#/components/responses/AuthenticationUnavailable"
+
+  /exchange/issue:
+    post:
+      tags: [ApplicationAuthTransport]
+      operationId: issueApplicationSessionExchange
+      summary: Issue one short-lived Word-to-native-Diary exchange.
+      parameters:
+        - $ref: "#/components/parameters/Origin"
+        - $ref: "#/components/parameters/CsrfHeader"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExchangeIssueRequest"
+      responses:
+        "200":
+          description: One short-lived opaque exchange code.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExchangeIssueResponse"
+        "401":
+          $ref: "#/components/responses/AuthenticationFailed"
+        "403":
+          $ref: "#/components/responses/RequestNotAdmitted"
+        "429":
+          $ref: "#/components/responses/RequestRateLimited"
+        "503":
+          $ref: "#/components/responses/AuthenticationUnavailable"
+
+  /exchange/redeem:
+    post:
+      tags: [ApplicationAuthTransport]
+      operationId: redeemApplicationSessionExchange
+      summary: Redeem once into a native-Diary cookie partition.
+      parameters:
+        - $ref: "#/components/parameters/Origin"
+        - $ref: "#/components/parameters/CsrfHeader"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExchangeRedeemRequest"
+      responses:
+        "200":
+          description: Target cookie and rotated CSRF pair issued.
+          headers:
+            Set-Cookie:
+              $ref: "#/components/headers/SessionAndCsrfSetCookie"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionResponse"
+        "401":
+          $ref: "#/components/responses/AuthenticationFailed"
+        "403":
+          $ref: "#/components/responses/RequestNotAdmitted"
+        "429":
+          $ref: "#/components/responses/RequestRateLimited"
+        "503":
+          $ref: "#/components/responses/AuthenticationUnavailable"
+
+components:
+  parameters:
+    Origin:
+      name: Origin
+      in: header
+      required: true
+      schema:
+        type: string
+        format: uri
+        maxLength: 255
+    CsrfHeader:
+      name: X-EMR4-CSRF
+      in: header
+      required: true
+      schema:
+        $ref: "#/components/schemas/OpaqueValue"
+
+  headers:
+    CsrfSetCookie:
+      description: __Host-emr4-application-csrf with the frozen cookie attributes.
+      schema:
+        type: string
+    SessionAndCsrfSetCookie:
+      description: Separate session and CSRF Set-Cookie header fields.
+      schema:
+        type: string
+
+  responses:
+    AuthenticationFailed:
+      description: Unknown, expired, revoked, mismatched or replayed authentication material.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          example:
+            detail: application_authentication_failed
+    RequestNotAdmitted:
+      description: Origin or CSRF admission failed.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          example:
+            detail: request_not_admitted
+    AuthenticationUnavailable:
+      description: Required audit or database transaction unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          example:
+            detail: authentication_temporarily_unavailable
+    RequestRateLimited:
+      description: Bounded per-client transport rate was exceeded.
+      headers:
+        Retry-After:
+          description: Whole seconds until the local fixed window resets.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 3600
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          example:
+            detail: request_rate_limited
+    TransportUnavailable:
+      description: The default-off transport dependency is not configured.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          example:
+            detail: application_auth_transport_unavailable
+
+  schemas:
+    Surface:
+      type: string
+      enum: [word_desktop, word_online, native_diary]
+    OpaqueValue:
+      type: string
+      pattern: "^[A-Za-z0-9._~-]{43,128}$"
+    CorrelationId:
+      type: string
+      pattern: "^correlation-[a-z0-9-]{1,64}$"
+    SurfaceRequest:
+      type: object
+      additionalProperties: false
+      required: [surface]
+      properties:
+        surface:
+          $ref: "#/components/schemas/Surface"
+        correlation_id:
+          $ref: "#/components/schemas/CorrelationId"
+    SyntheticSessionRequest:
+      allOf:
+        - $ref: "#/components/schemas/SurfaceRequest"
+        - type: object
+          additionalProperties: false
+          required: [bootstrap_credential]
+          properties:
+            bootstrap_credential:
+              $ref: "#/components/schemas/OpaqueValue"
+    CsrfResponse:
+      type: object
+      additionalProperties: false
+      required: [csrf_token, surface]
+      properties:
+        csrf_token:
+          $ref: "#/components/schemas/OpaqueValue"
+        surface:
+          $ref: "#/components/schemas/Surface"
+    SessionResponse:
+      type: object
+      additionalProperties: false
+      required: [status, surface, csrf_token, surface_idle_expires_at]
+      properties:
+        status:
+          const: authenticated
+        surface:
+          $ref: "#/components/schemas/Surface"
+        csrf_token:
+          $ref: "#/components/schemas/OpaqueValue"
+        surface_idle_expires_at:
+          type: string
+          format: date-time
+    ValidatedSessionResponse:
+      type: object
+      additionalProperties: false
+      required: [status, surface, current_backend_role, authority_source, data_class, surface_idle_expires_at]
+      properties:
+        status:
+          const: authenticated
+        surface:
+          $ref: "#/components/schemas/Surface"
+        current_backend_role:
+          type: string
+          enum: [GP, Receptionist, Nurse, Admin, PracticeOwner]
+        authority_source:
+          const: emr4_backend
+        data_class:
+          const: authored_synthetic
+        surface_idle_expires_at:
+          type: string
+          format: date-time
+    ExchangeIssueRequest:
+      type: object
+      additionalProperties: false
+      required: [source_surface, target_surface, target_origin, state, nonce, pkce_challenge]
+      properties:
+        source_surface:
+          type: string
+          enum: [word_desktop, word_online]
+        target_surface:
+          type: string
+          const: native_diary
+        target_origin:
+          type: string
+          format: uri
+          maxLength: 255
+        state:
+          type: string
+          minLength: 16
+          maxLength: 256
+        nonce:
+          type: string
+          minLength: 16
+          maxLength: 256
+        pkce_challenge:
+          type: string
+          pattern: "^[A-Za-z0-9_-]{43}$"
+        correlation_id:
+          $ref: "#/components/schemas/CorrelationId"
+    ExchangeIssueResponse:
+      type: object
+      additionalProperties: false
+      required: [exchange_code, target_surface, expires_at]
+      properties:
+        exchange_code:
+          $ref: "#/components/schemas/OpaqueValue"
+        target_surface:
+          type: string
+          const: native_diary
+        expires_at:
+          type: string
+          format: date-time
+    ExchangeRedeemRequest:
+      type: object
+      additionalProperties: false
+      required: [exchange_code, source_surface, target_surface, source_origin, state, nonce, pkce_verifier]
+      properties:
+        exchange_code:
+          $ref: "#/components/schemas/OpaqueValue"
+        source_surface:
+          type: string
+          enum: [word_desktop, word_online]
+        target_surface:
+          type: string
+          const: native_diary
+        source_origin:
+          type: string
+          format: uri
+          maxLength: 255
+        state:
+          type: string
+          minLength: 16
+          maxLength: 256
+        nonce:
+          type: string
+          minLength: 16
+          maxLength: 256
+        pkce_verifier:
+          $ref: "#/components/schemas/OpaqueValue"
+        correlation_id:
+          $ref: "#/components/schemas/CorrelationId"
+    ErrorResponse:
+      type: object
+      additionalProperties: false
+      required: [detail]
+      properties:
+        detail:
+          type: string
+          enum:
+            - application_authentication_failed
+            - request_not_admitted
+            - authentication_temporarily_unavailable
+            - application_auth_transport_unavailable
+            - request_rate_limited

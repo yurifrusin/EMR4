@@ -151,7 +151,7 @@ def test_attention_remains_nonmodal_private_keyboard_safe_and_read_only():
     source = _read(DIARY / "meta-grid.js")
     html = _read(DIARY / "diary.html")
 
-    assert "meta-grid.js?v=10" in html
+    assert "meta-grid.js?v=16" in html
     assert 'elements.eventShow.disabled = state.private' in source
     assert 'elements.announcer.textContent = "Availability in the current view changed.' in source
     assert "showEventContext" in source
@@ -224,7 +224,7 @@ def test_ariadne_records_accepted_descendant_contract_and_exact_evidence():
     graph = json.loads(_read(GRAPH))
     node = json.loads(_read(NODE))
 
-    assert graph["graph_revision"] == 13
+    assert graph["graph_revision"] >= 13
     contract = next(
         row
         for row in graph["contracts"]

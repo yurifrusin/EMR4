@@ -1,0 +1,250 @@
+{
+  "schema_version": "ariadne.terra_gemini_preflight_evidence.v1",
+  "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+  "status": "passed",
+  "static": {
+    "status": "passed",
+    "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+    "context_frame_count": 6,
+    "prompt_bytes": 11693,
+    "shared_hashes": {
+      "shared_task_sha256": "sha256:1a537292ad029fd49ae3d9706120606547c1ddeaa7404b7bdd9047573ea69cc8",
+      "full_output_schema_sha256": "sha256:7efd3644329807462b3efcd3b16552d923a9262b43876432c21698656cde8a6e",
+      "provider_output_schema_sha256": "sha256:12eadca2cca9798f386b796e1740fd3468030c97e54f5883061f6fcea979c65d",
+      "system_prompt_sha256": "sha256:876a1ef5bd03675d0d83dbc6cb66bc64bdcc2a088daae59aacc8e914803afd2c",
+      "prompt_sha256": "sha256:6102ebb2db7ff42b07f0d1ba7abbec9c2dc333398923030b39076a4aa055d9ea"
+    },
+    "source_hashes": {
+      "Dockerfile": "sha256:1ba65be62f5503d83618bba8a3ced11fd6bac9deccac09157164e1a9674bc23c",
+      "ariadne_comparative_one_use_broker.mjs": "sha256:6716a034dc9765fe5f128680d0f0c9c2f3ee3bd89aeeca00f81de948a34a9543",
+      "ariadne_comparative_work_cell_launcher.mjs": "sha256:97eab934798a1236d15eb863ffeb3354a0109d921e31d781c7134f49eece10b8",
+      "comparison-manifest.json": "sha256:958500497a2e03660228f1ff0532197998a4bfe0d9f62cc865a861ebc7ab27d5",
+      "provider-output.schema.json": "sha256:f273b872196aadeff606a7a5bcd04717ecc1ae08c7a1c176589c8f046452a72d",
+      "source-attempt.json": "sha256:af45aba852f4eaed9c54a859ac14aefa0ecc3d8f437120f4f6ee3ebe97e57e5a",
+      "full-output.schema.json": "sha256:87b2f714071f9c081ff261a7ac2d97078d1af176930009db70069062b053c5bf"
+    },
+    "provider_call_performed": false,
+    "prompt_transmitted": false
+  },
+  "build": {
+    "status": "passed",
+    "node_image_resolved": "node@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d",
+    "build_context_files": [
+      "Dockerfile",
+      "ariadne_comparative_one_use_broker.mjs",
+      "ariadne_comparative_work_cell_launcher.mjs",
+      "comparison-manifest.json",
+      "provider-output.schema.json",
+      "full-output.schema.json",
+      "shared-task.json"
+    ],
+    "source_hashes": {
+      "Dockerfile": "sha256:1ba65be62f5503d83618bba8a3ced11fd6bac9deccac09157164e1a9674bc23c",
+      "ariadne_comparative_one_use_broker.mjs": "sha256:6716a034dc9765fe5f128680d0f0c9c2f3ee3bd89aeeca00f81de948a34a9543",
+      "ariadne_comparative_work_cell_launcher.mjs": "sha256:97eab934798a1236d15eb863ffeb3354a0109d921e31d781c7134f49eece10b8",
+      "comparison-manifest.json": "sha256:958500497a2e03660228f1ff0532197998a4bfe0d9f62cc865a861ebc7ab27d5",
+      "provider-output.schema.json": "sha256:f273b872196aadeff606a7a5bcd04717ecc1ae08c7a1c176589c8f046452a72d",
+      "source-attempt.json": "sha256:af45aba852f4eaed9c54a859ac14aefa0ecc3d8f437120f4f6ee3ebe97e57e5a",
+      "full-output.schema.json": "sha256:87b2f714071f9c081ff261a7ac2d97078d1af176930009db70069062b053c5bf"
+    },
+    "image_ids": {
+      "terra": {
+        "broker": "sha256:b7a47154d4bbd952c866a07ed56f7eeee333ce564d68c538f18d2ae488c02d55",
+        "cell": "sha256:1cabb506a26d176abc89254f31fc82973738d55415135903c7ddee620de8640d"
+      },
+      "gemini": {
+        "broker": "sha256:b7a47154d4bbd952c866a07ed56f7eeee333ce564d68c538f18d2ae488c02d55",
+        "cell": "sha256:1cabb506a26d176abc89254f31fc82973738d55415135903c7ddee620de8640d"
+      }
+    },
+    "provider_secret_in_image": false,
+    "provider_call_performed": false,
+    "prompt_transmitted": false
+  },
+  "lane_policies": {
+    "terra": {
+      "broker": {
+        "user": "node",
+        "read_only_root": true,
+        "cap_drop": [
+          "ALL"
+        ],
+        "security_opt": [
+          "no-new-privileges"
+        ],
+        "mounts": [
+          {
+            "type": "bind",
+            "destination": "/run/secrets/broker_token",
+            "read_only": true
+          },
+          {
+            "type": "bind",
+            "destination": "/run/secrets/provider_key",
+            "read_only": true
+          }
+        ],
+        "published_port_count": 0,
+        "network_mode": "ariadne-comparison-terra-preflight",
+        "memory_bytes": 268435456,
+        "memory_swap_bytes": 268435456,
+        "nano_cpus": 500000000,
+        "pids_limit": 32,
+        "environment_keys": [
+          "ARIADNE_LANE_ID",
+          "EXPECTED_FULL_OUTPUT_SCHEMA_SHA256",
+          "EXPECTED_PROMPT_SHA256",
+          "EXPECTED_PROVIDER_OUTPUT_SCHEMA_SHA256",
+          "EXPECTED_SHARED_TASK_SHA256",
+          "EXPECTED_SYSTEM_PROMPT_SHA256",
+          "NODE_VERSION",
+          "PATH",
+          "YARN_VERSION"
+        ]
+      },
+      "cell": {
+        "user": "node",
+        "read_only_root": true,
+        "cap_drop": [
+          "ALL"
+        ],
+        "security_opt": [
+          "no-new-privileges"
+        ],
+        "mounts": [
+          {
+            "type": "bind",
+            "destination": "/run/secrets/broker_token",
+            "read_only": true
+          }
+        ],
+        "published_port_count": 0,
+        "network_mode": "ariadne-comparison-terra-preflight",
+        "memory_bytes": 268435456,
+        "memory_swap_bytes": 268435456,
+        "nano_cpus": 500000000,
+        "pids_limit": 32,
+        "environment_keys": [
+          "NODE_VERSION",
+          "PATH",
+          "YARN_VERSION"
+        ]
+      },
+      "network": {
+        "internal": true,
+        "driver": "bridge",
+        "container_count": 1
+      },
+      "broker_events": [
+        {
+          "event": "broker-ready",
+          "lane_id": "terra",
+          "model_id": "gpt-5.6-terra"
+        }
+      ]
+    },
+    "gemini": {
+      "broker": {
+        "user": "node",
+        "read_only_root": true,
+        "cap_drop": [
+          "ALL"
+        ],
+        "security_opt": [
+          "no-new-privileges"
+        ],
+        "mounts": [
+          {
+            "type": "bind",
+            "destination": "/run/secrets/broker_token",
+            "read_only": true
+          },
+          {
+            "type": "bind",
+            "destination": "/run/secrets/provider_key",
+            "read_only": true
+          }
+        ],
+        "published_port_count": 0,
+        "network_mode": "ariadne-comparison-gemini-preflight",
+        "memory_bytes": 268435456,
+        "memory_swap_bytes": 268435456,
+        "nano_cpus": 500000000,
+        "pids_limit": 32,
+        "environment_keys": [
+          "ARIADNE_LANE_ID",
+          "EXPECTED_FULL_OUTPUT_SCHEMA_SHA256",
+          "EXPECTED_PROMPT_SHA256",
+          "EXPECTED_PROVIDER_OUTPUT_SCHEMA_SHA256",
+          "EXPECTED_SHARED_TASK_SHA256",
+          "EXPECTED_SYSTEM_PROMPT_SHA256",
+          "NODE_VERSION",
+          "PATH",
+          "YARN_VERSION"
+        ]
+      },
+      "cell": {
+        "user": "node",
+        "read_only_root": true,
+        "cap_drop": [
+          "ALL"
+        ],
+        "security_opt": [
+          "no-new-privileges"
+        ],
+        "mounts": [
+          {
+            "type": "bind",
+            "destination": "/run/secrets/broker_token",
+            "read_only": true
+          }
+        ],
+        "published_port_count": 0,
+        "network_mode": "ariadne-comparison-gemini-preflight",
+        "memory_bytes": 268435456,
+        "memory_swap_bytes": 268435456,
+        "nano_cpus": 500000000,
+        "pids_limit": 32,
+        "environment_keys": [
+          "NODE_VERSION",
+          "PATH",
+          "YARN_VERSION"
+        ]
+      },
+      "network": {
+        "internal": true,
+        "driver": "bridge",
+        "container_count": 1
+      },
+      "broker_events": [
+        {
+          "event": "broker-ready",
+          "lane_id": "gemini",
+          "model_id": "gemini-3.5-flash"
+        }
+      ]
+    }
+  },
+  "cleanup": {
+    "terra": {
+      "cell_removed": true,
+      "broker_removed": true,
+      "network_removed": true
+    },
+    "gemini": {
+      "cell_removed": true,
+      "broker_removed": true,
+      "network_removed": true
+    }
+  },
+  "credential_gates": {
+    "both_present": true,
+    "lane_presence": {
+      "terra": true,
+      "gemini": true
+    },
+    "credential_values_recorded": false
+  },
+  "provider_call_performed": false,
+  "prompt_transmitted": false
+}

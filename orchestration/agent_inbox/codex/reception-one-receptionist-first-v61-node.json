@@ -1,0 +1,157 @@
+{
+  "id": "reception-one-receptionist-first-v61-targeted-repair",
+  "title": "Reception One Receptionist-first v6.1 Targeted Repair",
+  "kind": "implementation",
+  "status": "accepted",
+  "created_at": "2026-07-30T08:05:18Z",
+  "updated_at": "2026-07-30T08:08:44Z",
+  "relationships": [
+    {
+      "node_id": "reception-one-receptionist-first-v6-paired-study",
+      "relation": "builds_on"
+    }
+  ],
+  "coordinates": {
+    "thread_id": null,
+    "git_ref": "codex/ariadne-terra-gemini-comparative-rehearsal",
+    "source_head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "worktree_role": "integration"
+  },
+  "evidence": {
+    "acceptances": [
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v61-provider-free-sol-acceptance.md"
+    ],
+    "closeouts": [
+      "orchestration/continuity/reception-one-receptionist-first-v61/provider-blocked-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v61/real-isolation-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v61/occupied-preflight-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v61/pre-attempt-residue-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v61/occupied-repair-cohort-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v61/occupied-initial-residue-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v61/continuation-preflight-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v61/occupied-continuation-evidence.json"
+    ],
+    "findings": [
+      "docs/security/bernie-reception-one-receptionist-first-v61-threat-model-delta.md",
+      "orchestration/continuity/reception-one-receptionist-first-v61/occupied-initial-audit-analysis.json",
+      "orchestration/continuity/reception-one-receptionist-first-v61/pre-schema-diagnostic-evidence.json"
+    ],
+    "plans": [
+      "docs/bernie-reception-one-receptionist-first-v61-repair-plan.md",
+      "docs/bernie-reception-one-receptionist-first-v61-pre-schema-continuation-plan.md",
+      "docs/bernie-reception-one-receptionist-first-v61-completion-metadata-diagnostic-plan.md",
+      "orchestration/continuity/reception-one-receptionist-first-v61/runtime-policy.json",
+      "orchestration/continuity/reception-one-receptionist-first-v61/occupied-authority.json",
+      "orchestration/continuity/reception-one-receptionist-first-v61/continuation-authority.json",
+      "orchestration/continuity/reception-one-receptionist-first-v61/completion-metadata-diagnostic-authority.json"
+    ],
+    "receipts": [
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v61-rehydration-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v61-preattempt-receipt.json"
+    ],
+    "tests": [
+      "scripts/reception_one_receptionist_first_v61.py",
+      "scripts/reception_one_receptionist_first_v61_repair.py",
+      "scripts/reception_one_receptionist_first_v61_continuation.py",
+      "scripts/reception_one_receptionist_first_v61_isolation.py",
+      "tests/test_reception_one_receptionist_first_v61.py"
+    ]
+  },
+  "authority": {
+    "authorized_openings": [
+      {
+        "boundary": "container-runtime",
+        "scope": "One credential-free, network-none work cell per turn for the exact fifteen-case authored-synthetic v6.1 repair cohort.",
+        "source": "orchestration/continuity/reception-one-receptionist-first-v61/occupied-authority.json"
+      },
+      {
+        "boundary": "model-runtime",
+        "scope": "Gemini 2.5 Flash may act as a medical receptionist and separately complete the typed form with a 1024-token thinking budget while thought content remains excluded.",
+        "source": "orchestration/continuity/reception-one-receptionist-first-v61/occupied-authority.json"
+      },
+      {
+        "boundary": "provider-call",
+        "scope": "Fifteen primaries and at most one closed correction per case through the exact Bernie keyless-ADC Sydney Vertex lane, with an absolute thirty-call and USD 1 ceiling.",
+        "source": "orchestration/continuity/reception-one-receptionist-first-v61/occupied-authority.json"
+      },
+      {
+        "boundary": "provider-call",
+        "scope": "One distinct same-contract primary plus at most one proofreader-ticket correction for the sole b-move-shift pre-schema no-release result, with new ledgers and USD 1 ceiling.",
+        "source": "orchestration/continuity/reception-one-receptionist-first-v61/continuation-authority.json"
+      },
+      {
+        "boundary": "provider-call",
+        "scope": "One same-request diagnostic primary plus at most one proofreader-ticket correction while retaining only allowlisted finish enums, bounded structural counts and usage integers.",
+        "source": "orchestration/continuity/reception-one-receptionist-first-v61/completion-metadata-diagnostic-authority.json"
+      }
+    ],
+    "notes": [
+      "Yuri authorised continued diagnose-repair-evaluate cycles over authored-synthetic Reception One work through the exact bounded Sydney Vertex lane.",
+      "The API JSON response remains the paper packet containing natural receptionist speech and a distinct typed form; the natural channel is never parsed into typed fields.",
+      "v6.1 targets only the fifteen closed v6 misses and does not revise or rescore the historical v6 node.",
+      "The one-way semantic assertion binds only explicit actions already recognized by the deterministic adapter and the grounded noun-fragment boundary; unknown novel typed composition remains eligible for the unchanged proofreader.",
+      "Provider, model, project, service account, keyless ADC, Sydney endpoint, authored-synthetic, isolation, no-fallback, no-tool, no-write, thirty-call and USD 1 boundaries are exact."
+      ,
+      "The frozen fifteen-case cohort closed fourteen exact and one pre-schema no-release result in seventeen calls. The separate continuation changes no prompt, schema, proofreader or provider control."
+      ,
+      "The first continuation reproduced the no-release result. Audit-only metadata instrumentation may record allowlisted finish enums, bounded structural counts and usage integers, never response text."
+    ]
+  },
+  "contract_evidence": [
+    {
+      "contract_id": "combined-patient-practitioner-time-duration-intent",
+      "status": "satisfied",
+      "evidence": [
+        "orchestration/continuity/reception-one-receptionist-first-v61/provider-blocked-evidence.json",
+        "tests/test_reception_one_receptionist_first_v61.py"
+      ],
+      "note": "The inherited typed compiler and proofreader remain authoritative; the repair adds only a bounded one-way recognized-intent assertion."
+    },
+    {
+      "contract_id": "committed-reschedule-availability-reconciliation",
+      "status": "satisfied",
+      "evidence": [
+        "orchestration/continuity/reception-one-receptionist-first-v61/provider-blocked-evidence.json",
+        "tests/test_reception_one_receptionist_first_v61.py"
+      ],
+      "note": "Freshness and supersession remain deterministic typed gates; no product event, database or write path is opened."
+    }
+  ],
+  "decisions": [
+    {
+      "id": "authorise-reception-one-receptionist-first-v61-106",
+      "status": "accepted",
+      "summary": "Evaluate the narrow grounded-binding and one-way semantic assertion repair over exactly the fifteen closed v6 misses through the unchanged bounded Sydney Vertex lane.",
+      "source": "orchestration/continuity/reception-one-receptionist-first-v61/occupied-authority.json"
+    },
+    {
+      "id": "accept-reception-one-receptionist-first-v61-provider-free-106",
+      "status": "accepted",
+      "summary": "Accept the fifteen deterministic oracles, fourteen historical wrong-form vetoes, novel-composition opening, noun-fragment boundary and two-turn real-isolation result.",
+      "source": "orchestration/agent_inbox/codex/reception-one-receptionist-first-v61-provider-free-sol-acceptance.md"
+    },
+    {
+      "id": "continue-reception-one-receptionist-first-v61-pre-schema-109",
+      "status": "accepted",
+      "summary": "Preserve the immutable fourteen-of-fifteen cohort result and permit one same-contract continuation for the sole HTTP-200 non-JSON no-release case with a distinct ledger.",
+      "source": "orchestration/continuity/reception-one-receptionist-first-v61/continuation-authority.json"
+    },
+    {
+      "id": "diagnose-reception-one-receptionist-first-v61-completion-110",
+      "status": "accepted",
+      "summary": "After two HTTP-200 non-JSON no-release results, permit one same-request diagnostic sequence that retains only allowlisted finish metadata and changes no request or proofreader contract.",
+      "source": "orchestration/continuity/reception-one-receptionist-first-v61/completion-metadata-diagnostic-authority.json"
+    }
+  ],
+  "unresolved_gates": [
+    "The exact existing Bernie ADC and cloud-control preflight, revision-bound Compass render and task-scoped residue checks must pass before the first occupied call.",
+    "The b-move-shift completion-metadata diagnostic must close every ledger, preserve the frozen request and proofreader contract, and retain no provider text.",
+    "A fresh untouched authored-synthetic cohort is still required for independent post-teaching evaluation.",
+    "Real, product-derived, patient, health, clinical, protected or historical data, product/database access, writes, Word, voice, production, deployment and release remain closed."
+  ],
+  "claim_scope": [
+    "The frozen occupied cohort proves fourteen of fifteen known v6 misses now match exactly; the sole remaining case produced no JSON candidate and released nothing.",
+    "Real isolation proves two credential-free, network-none, read-only non-root cells can exchange a coded correction ticket and typed replacement without residue.",
+    "No occupied capability, holdout generalisation, production fitness, product-data safety or Australian physical or sovereign processing claim exists before the bounded live cohort closes."
+  ]
+}

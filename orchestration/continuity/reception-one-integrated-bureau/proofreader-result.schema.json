@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/reception.one.proofreader-result.v1.json",
+  "title": "Reception One deterministic proofreader result",
+  "type": "object",
+  "required": [
+    "contract_version",
+    "request_id",
+    "context_revision",
+    "decision",
+    "checks",
+    "safe_repairs",
+    "admitted_field_paths",
+    "rejected_field_paths",
+    "reason_codes"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {"const": "reception.one.proofreader-result.v1"},
+    "request_id": {"type": "string", "pattern": "^synthetic-request-[a-z0-9-]{1,64}$"},
+    "context_revision": {"type": "string", "pattern": "^synthetic-diary-revision-[a-z0-9-]{1,48}$"},
+    "decision": {"enum": ["admit", "reject", "human_gate", "edge_abort"]},
+    "checks": {
+      "type": "object",
+      "required": [
+        "schema_exact",
+        "authored_synthetic",
+        "request_binding",
+        "context_revision_binding",
+        "fresh_context",
+        "grounded_date",
+        "grounded_practitioners",
+        "bounded_time_window",
+        "no_command_authority",
+        "no_unknown_fields"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "schema_exact": {"type": "boolean"},
+        "authored_synthetic": {"type": "boolean"},
+        "request_binding": {"type": "boolean"},
+        "context_revision_binding": {"type": "boolean"},
+        "fresh_context": {"type": "boolean"},
+        "grounded_date": {"type": "boolean"},
+        "grounded_practitioners": {"type": "boolean"},
+        "bounded_time_window": {"type": "boolean"},
+        "no_command_authority": {"type": "boolean"},
+        "no_unknown_fields": {"type": "boolean"}
+      }
+    },
+    "safe_repairs": {
+      "type": "array",
+      "items": {"enum": ["trim_whitespace", "canonical_enum_casing", "deterministic_ordering"]},
+      "uniqueItems": true
+    },
+    "admitted_field_paths": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^\\$\\.[a-z_]+(?:\\.[a-z_]+)?$"},
+      "uniqueItems": true
+    },
+    "rejected_field_paths": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1, "maxLength": 160},
+      "uniqueItems": true
+    },
+    "reason_codes": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^[a-z0-9-]{1,64}$"},
+      "uniqueItems": true
+    }
+  }
+}

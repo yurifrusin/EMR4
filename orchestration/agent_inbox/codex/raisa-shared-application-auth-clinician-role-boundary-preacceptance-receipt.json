@@ -1,0 +1,54 @@
+{
+  "authority_boundary": "receipt_only_repository_local_provider_free_architecture_acceptance_no_worker_control_runtime_external_identity_product_data_write_deployment_production_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "accept_the_repository_local_provider_free_raisa_shared_application_authentication_and_clinician_role_architecture_descendant_without_runtime_external_identity_product_data_write_deployment_production_or_release_authority",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. The accepted Word Online authenticated companion pass is the parent; the shared EMR4 application-authentication and clinician-role architecture is the bounded descendant under acceptance.",
+    "current_authority_allocation": "GPT Sol owns architecture and acceptance. No worker, provider, external reviewer, identity provider or cloud control plane was selected, and this receipt grants no dispatch or runtime authority.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-shared-application-auth-clinician-role-boundary-plan.md",
+      "docs/raisa-shared-application-auth-clinician-role-boundary-design.md",
+      "docs/security/raisa-shared-application-auth-clinician-role-boundary-threat-model-delta.md",
+      "orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/auth-boundary-policy.json",
+      "orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/acceptance-cases.json",
+      "orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/provider-free-acceptance-evidence.json",
+      "docs/raisa-shared-application-auth-clinician-role-boundary-closeout.md",
+      "orchestration/continuity/emr4-continuity-graph.json revision 181",
+      "orchestration/continuity/emr4-compass.json revision 162",
+      "docs/ariadne-compass-current.md rendered revision 162"
+    ],
+    "protected_evidence_boundaries": "Protected holdouts and historical raw Diary material remained sealed. No patient, product-derived, health, clinical or historical data was used. Runtime authentication, external identity, backend or database access, clinical authority, appointment commands, microphone capture, document mutation, organisational Office deployment, production and release remain closed.",
+    "git_refs_and_worktree": {
+      "HEAD": "8fa732592fbee4f57c322b13d9d8ff89fcc7fa33",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "12fb7800ea285561b5ea50cbfe328b4d3d0fc1f8",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/codex/ariadne-terra-gemini-comparative-rehearsal": "8fa732592fbee4f57c322b13d9d8ff89fcc7fa33",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "upstream_aligned": true,
+      "task_local_worktree_changes_preserved": true,
+      "all_protected_refs_are_ancestors_of_HEAD": true,
+      "protected_refs_unchanged": true
+    }
+  },
+  "revision_binding": {
+    "continuity_graph_revision": 181,
+    "compass_map_revision": 162,
+    "compass_source_graph_revision": 181,
+    "rendered_compass_exact_validation_required": true
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

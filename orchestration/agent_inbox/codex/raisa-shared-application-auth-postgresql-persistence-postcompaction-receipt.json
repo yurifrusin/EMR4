@@ -1,0 +1,56 @@
+{
+  "authority_boundary": "receipt_only_repository_local_postgresql_schema_migration_and_disposable_authored_synthetic_test_writes_no_routes_cookies_external_identity_product_reads_deployment_production_release_commit_push_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "resume_implementation_and_serial_disposable_postgresql_acceptance_for_the_authorised_shared_application_auth_persistence_tranche_without_routes_cookies_external_identity_product_reads_deployment_production_release_commit_or_push",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction. raisa_shared_application_auth_runtime_foundation_pass at Continuity revision 182 and Compass revision 163 remains the accepted parent. Yuri explicitly authorised the exact PostgreSQL persistence/migration candidate on 2026-08-01.",
+    "current_authority_allocation": "GPT Sol owns this serial, tightly coupled disposable-database tranche under the worker-lane economy rule. No worker, subagent, provider, external reviewer, identity provider or cloud control plane is selected or dispatched.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-shared-application-auth-runtime-foundation-plan.md",
+      "docs/security/raisa-shared-application-auth-runtime-foundation-threat-model-delta.md",
+      "app/services/application_auth_runtime.py",
+      "orchestration/continuity/raisa-shared-application-auth-runtime-foundation/provider-free-acceptance-evidence.json",
+      "docs/raisa-shared-application-auth-runtime-foundation-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-shared-application-auth-runtime-foundation-sol-acceptance.md",
+      "docs/raisa-shared-application-auth-postgresql-persistence-plan.md",
+      "docs/security/raisa-shared-application-auth-postgresql-persistence-threat-model-delta.md",
+      "orchestration/continuity/emr4-continuity-graph.json revision 182",
+      "orchestration/continuity/emr4-compass.json revision 163",
+      "docs/ariadne-compass-current.md rendered revision 163",
+      "user authority on 2026-08-01 for the next PostgreSQL persistence/migration tranche"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 were restored after compaction. Protected holdouts and raw historical Diary material remain sealed. Only disposable authored-synthetic identity and metadata fixtures may be written. Routes, cookies, external identity, Microsoft/Office authority, product-derived, patient, health, clinical and historical data, providers, commands, microphone capture, document mutation, deployment, production and release remain closed.",
+    "git_refs_and_worktree": {
+      "HEAD": "8fa732592fbee4f57c322b13d9d8ff89fcc7fa33",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "12fb7800ea285561b5ea50cbfe328b4d3d0fc1f8",
+      "codex/current": "12fb7800ea285561b5ea50cbfe328b4d3d0fc1f8",
+      "claude/current": "12fb7800ea285561b5ea50cbfe328b4d3d0fc1f8",
+      "antigravity/current": "12fb7800ea285561b5ea50cbfe328b4d3d0fc1f8",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/codex/ariadne-terra-gemini-comparative-rehearsal": "8fa732592fbee4f57c322b13d9d8ff89fcc7fa33",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "upstream": "origin/codex/ariadne-terra-gemini-comparative-rehearsal",
+      "upstream_ahead": 0,
+      "upstream_behind": 0,
+      "accepted_uncommitted_architecture_and_runtime_changes_preserved": true,
+      "durable_worker_worktrees_clean": true,
+      "all_named_protected_refs_are_ancestors_of_HEAD": true,
+      "protected_refs_unchanged_after_fetch": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

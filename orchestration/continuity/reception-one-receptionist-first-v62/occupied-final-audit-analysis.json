@@ -1,0 +1,100 @@
+{
+  "schema_version": "reception.one.receptionist_first_v62.external_audit_analysis.v1",
+  "recorded_at": "2026-07-30T09:08:06Z",
+  "result": "reception_one_receptionist_first_v62_external_audit_complete",
+  "cohort_result": "reception_one_receptionist_first_v62_full_cohort_fail_closed",
+  "case_count": 24,
+  "exact_safe_outcome_count": 21,
+  "nonmatching_terminal_case_count": 3,
+  "nonmatching_terminal_cases": [
+    {
+      "case_code": "b-create-alias",
+      "failure_class": "provider_response_rejected_before_candidate",
+      "primary_finish_reason": "MAX_TOKENS",
+      "terminal_finish_reason": "MAX_TOKENS",
+      "bounded_reason_code": "provider_text_not_json",
+      "proofreader_reached": false,
+      "release": null,
+      "repair_hypothesis": "Raise the response-token ceiling in a separately versioned request contract while retaining the same thinking budget and cost ceiling."
+    },
+    {
+      "case_code": "b-move-shift",
+      "failure_class": "typed_source_wiring",
+      "primary_violation_codes": [
+        "required_source_omitted"
+      ],
+      "terminal_violation_codes": [
+        "source_type_mismatch"
+      ],
+      "correct_goal_selected": true,
+      "desk_context_hash_matched": true,
+      "release": null,
+      "repair_hypothesis": "Clarify that mention bindings must first pass through their resolver and that readable selected-appointment context does not change closed source types."
+    },
+    {
+      "case_code": "b-status-noshow-gap",
+      "failure_class": "colloquial_status_without_grounded_binding",
+      "primary_violation_codes": [
+        "external_binding_invalid"
+      ],
+      "terminal_violation_codes": [
+        "external_binding_invalid"
+      ],
+      "model_interpreted_no_show_as_status_change": true,
+      "grounded_no_show_to_dna_alias_present": false,
+      "release": null,
+      "repair_hypothesis": "Until product semantics explicitly admit a no-show-to-DNA alias, instruct the model to clarify whenever a requested status lacks a stamped binding."
+    }
+  ],
+  "provider_calls": {
+    "actual": 30,
+    "absolute_ceiling": 48,
+    "primary": 24,
+    "terminal_second": 6,
+    "after_terminal_result": 0
+  },
+  "provider_outcomes": {
+    "completed": 28,
+    "response_rejected_before_candidate": 2,
+    "raw_provider_text_retained": false
+  },
+  "usage": {
+    "prompt_tokens": 110027,
+    "visible_candidate_tokens": 13778,
+    "thinking_tokens": 20275,
+    "total_tokens": 144080,
+    "hidden_thought_content_retained": false
+  },
+  "latency_ms": {
+    "sum": 148947,
+    "minimum": 2208,
+    "maximum": 7931,
+    "mean": 4964.9
+  },
+  "exact_binding": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "api_key_authentication_used": false,
+    "fallback_performed": false
+  },
+  "audit_controls": {
+    "all_ledgers_consumed": true,
+    "all_cleanup_passed": true,
+    "durable_turn_hash_chains_valid": true,
+    "model_and_proofreader_context_hash_recorded_when_proofreader_reached": true,
+    "raw_prompts_recorded": false,
+    "raw_provider_responses_recorded": false,
+    "credentials_or_tokens_recorded": false,
+    "api_key_information_recorded": false,
+    "chain_of_thought_recorded": false,
+    "product_or_database_access": false,
+    "appointment_write": false,
+    "human_or_product_delivery": false
+  },
+  "claim_limit": "The evidence proves a configured and observed Sydney locational request path and twenty-one exact safe outcomes over a reused authored-synthetic development cohort. It does not prove independent generalisation, production fitness, Australian physical or sovereign processing, or safety for real data."
+}

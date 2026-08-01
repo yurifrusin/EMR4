@@ -1,0 +1,54 @@
+{
+  "schema_version": "emr4.security-finding-governance.acceptance.v1",
+  "result": "security_finding_governance_pass",
+  "passed": true,
+  "register": {
+    "revision": 1,
+    "native_finding_count": 12,
+    "unique_native_finding_count": 12,
+    "owner": "@yurifrusin",
+    "schema_valid": true
+  },
+  "schedules": {
+    "python": "17 18 * * *",
+    "node": "47 18 * * *",
+    "staggered": true,
+    "push_and_pull_request_preserved": true,
+    "blocking_dependency_gates_preserved": true
+  },
+  "native_alerts": {
+    "dependabot_disposition_count": 9,
+    "codeql_disposition_count": 3,
+    "open_dependabot_count": 0,
+    "open_codeql_security_high_count": 0,
+    "register_matches_readback": true
+  },
+  "linked_local_ledgers": [
+    {
+      "ledger_id": "bandit-candidates-2026-08-01",
+      "expected_rows": 14,
+      "actual_rows": 14,
+      "passed": true
+    },
+    {
+      "ledger_id": "codeql-high-candidates-2026-07-17",
+      "expected_rows": 10,
+      "actual_rows": 10,
+      "passed": true
+    }
+  ],
+  "security_policy": {
+    "owner_present": true,
+    "sla_matrix_present": true,
+    "laptop_ingestion_rule_present": true,
+    "accepted_risk_expiry_rule_present": true
+  },
+  "closed_boundaries": {
+    "dependency_force_override_count": 0,
+    "product_or_patient_data_access_count": 0,
+    "provider_call_count": 0,
+    "cloud_or_iam_mutation_count": 0,
+    "deployment_or_production_change_count": 0,
+    "protected_ref_movement_count": 0
+  }
+}

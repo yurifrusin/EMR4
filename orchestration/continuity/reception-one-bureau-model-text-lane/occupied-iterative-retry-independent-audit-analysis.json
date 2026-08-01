@@ -1,0 +1,101 @@
+{
+  "attempt_ids": [
+    "reception-one-model-text-occupied-retry-001",
+    "reception-one-model-text-occupied-retry-002",
+    "reception-one-model-text-occupied-retry-003"
+  ],
+  "calls_after_first_admitted_result": 0,
+  "candid_limit": "This proves the configured and observed Sydney locational request path, bounded model composition, deterministic proofreader admission and in-memory proposal release for one authored-synthetic case. It does not prove Australian physical or sovereign processing, product-data safety, production fitness or authority for any product or clinical write.",
+  "cleanup_and_hash_chains_passed": true,
+  "cost_guard": {
+    "application_ceiling_usd": 1,
+    "assumption": "three calls, each charged as at most 65536 input tokens and 1024 no-thinking output tokens",
+    "conservative_upper_bound_usd": 0.0313344,
+    "invoice_cost_observed": false,
+    "official_pricing_basis": {
+      "input_usd_per_million_tokens": 0.15,
+      "output_no_thinking_usd_per_million_tokens": 0.6,
+      "source": "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+    }
+  },
+  "exact_binding": {
+    "authentication": "keyless_impersonated_service_account_adc",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "location": "australia-southeast1",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "provider": "google_vertex_ai",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"
+  },
+  "explicit_exclusions": {
+    "chain_of_thought_retained": false,
+    "command_or_write_authority": false,
+    "credentials_or_tokens_retained": false,
+    "product_or_database_access": false,
+    "provider_or_regional_fallback": false,
+    "raw_prompt_or_response_retained": false
+  },
+  "failed_closed_before_terminal_success": 2,
+  "ledger_ids": [
+    "reception-one-model-text-ledger-retry-001",
+    "reception-one-model-text-ledger-retry-002",
+    "reception-one-model-text-ledger-retry-003"
+  ],
+  "provider_call_count": 3,
+  "result": "reception_one_bureau_model_text_iterative_retry_pass",
+  "schema_version": "reception.one.bureau.model_text_iterative_audit_analysis.v1",
+  "terminal_proofreader": {
+    "admitted_operator_ids": [
+      "resolve_patient_reference",
+      "resolve_practitioner_reference",
+      "resolve_date_expression",
+      "read_practitioner_schedule",
+      "assess_squeeze_in_options"
+    ],
+    "disposition": "admit",
+    "safe_repairs": [],
+    "violations": [],
+    "wire_safe_repairs": []
+  },
+  "terminal_release": {
+    "atomic_release": true,
+    "human_gate": true,
+    "released_field_manifest": [
+      "$.final_output.api_spine_operation_id",
+      "$.final_output.appointment_ref",
+      "$.final_output.candidate_slot_ids",
+      "$.final_output.duration_minutes",
+      "$.final_output.kind",
+      "$.final_output.patient_ref",
+      "$.final_output.practitioner_ref",
+      "$.final_output.proposal_family",
+      "$.final_output.requires_human_confirmation",
+      "$.final_output.status",
+      "$.final_output.warning_codes",
+      "$.final_output.write_performed"
+    ],
+    "released_values": {
+      "api_spine_operation_id": null,
+      "appointment_ref": null,
+      "candidate_slot_ids": [
+        "synthetic-slot-july27-1215"
+      ],
+      "duration_minutes": 15,
+      "kind": "squeeze_in_assessment",
+      "patient_ref": "synthetic-patient-margaret",
+      "practitioner_ref": "synthetic-practitioner-shera",
+      "proposal_family": "squeeze_in_assessment",
+      "requires_human_confirmation": true,
+      "status": null,
+      "warning_codes": [
+        "adjacent_to_break",
+        "manual_squeeze_in_review",
+        "no_reservation",
+        "staff_confirmation_required",
+        "staff_selection_required"
+      ],
+      "write_performed": false
+    },
+    "write_performed": false
+  }
+}

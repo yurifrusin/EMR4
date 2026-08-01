@@ -1,0 +1,68 @@
+{
+  "schema_version": "reception.one.preprinted_form_v5.multicase_pre_attempt.v1",
+  "recorded_at": "2026-07-30T04:43:18Z",
+  "result": "reception_one_preprinted_form_v5_multicase_occupied_gate_pass",
+  "provider_calls_performed": 0,
+  "credential_reads_outside_exact_preflight": 0,
+  "data_class": "authored_synthetic",
+  "effect_ceiling": "proposal_only",
+  "historical_anchor_replayed": false,
+  "frozen_contract": {
+    "evaluation_manifest_file_sha256": "sha256:74b8f19548ae63dad29279eadf655171492909a7706b7e283c38239b6e0f5627",
+    "provider_blocked_evidence_file_sha256": "sha256:44edad6817fa06aea90009df8097a69c148d2da88f9d5eb6061fa14b590f544f",
+    "real_isolation_evidence_file_sha256": "sha256:24cc1c5fa2a6d243726569f0144bbcdb9c83abec5419d4c618e980e7e1300be8",
+    "occupied_preflight_file_sha256": "sha256:263e7ab04c7f9ec83be71b4bf121928f4073bd08e18d57d5cc825f60ce15f7ab",
+    "occupied_authority_file_sha256": "sha256:98bece9f7c9a31e0b656127c9dc75766cc706cd69b6281a0b82bdb0c1ff798f3",
+    "multicase_runner_file_sha256": "sha256:795e157618cc52bbcb7f9ac8b361b35129e1572296557f73c9b1bed213575e94",
+    "v5_contract_file_sha256": "sha256:47679be6a3b1ab6e746ae1dd52ad57b9ab80bf0f7ef3738a912d983abf962645",
+    "mid_cohort_prompt_or_schema_change_permitted": false
+  },
+  "exact_provider_binding": {
+    "provider": "google_cloud_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "api_key_authentication": false,
+    "global_endpoint": false,
+    "automatic_regional_fallback": false
+  },
+  "admission_checks": {
+    "provider_blocked_six_case_oracles_passed": true,
+    "distinct_case_bound_ledgers_passed": true,
+    "real_isolation_passed": true,
+    "focused_and_inherited_typed_tests_passed": true,
+    "relevant_api_spine_tests_passed": true,
+    "repository_only_ariadne_verifier_passed": true,
+    "python_compilation_passed": true,
+    "ruff_passed": true,
+    "continuity_validation_passed": true,
+    "compass_validation_passed": true,
+    "rendered_compass_exact": true,
+    "fresh_exact_adc_and_cloud_controls_passed": true,
+    "provider_in_memory_cache_disabled": true,
+    "precall_owned_residue_absent": true
+  },
+  "revision_binding": {
+    "continuity_graph_revision": 97,
+    "compass_map_revision": 84,
+    "compass_source_graph_revision": 97
+  },
+  "occupied_budget": {
+    "primary_calls": 6,
+    "maximum_correction_calls": 6,
+    "absolute_call_ceiling": 12,
+    "incremental_cost_ceiling_usd": 1,
+    "one_use_ledger_per_call": true
+  },
+  "closed": {
+    "product_or_database_access": true,
+    "real_patient_health_clinical_or_historical_data": true,
+    "appointment_confirmation_or_write": true,
+    "provider_tools_grounding_retrieval_or_cache_creation": true,
+    "provider_or_regional_fallback": true,
+    "word_voice_production_deployment_or_release": true
+  }
+}

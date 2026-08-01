@@ -1,0 +1,59 @@
+{
+  "schema_version": "ariadne.pre_attempt_receipt.v1",
+  "receipt_id": "reception-one-preprinted-form-v5-broad-language-adc-restored-preattempt-20260730t055514z",
+  "recorded_at": "2026-07-30T05:55:14Z",
+  "result": "passed",
+  "rehydrated_from_receipt": true,
+  "mandatory_rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "rehydration_receipt": "orchestration/agent_inbox/codex/reception-one-preprinted-form-v5-broad-language-adc-restored-rehydration-receipt.json",
+  "plan": "docs/bernie-reception-one-preprinted-form-v5-broad-language-adc-restored-continuation-plan.md",
+  "authority": "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/occupied-authority.json",
+  "revision_binding": {
+    "continuity_graph_revision": 102,
+    "compass_map_revision": 89,
+    "compass_validation": "passed",
+    "rendered_compass_exact": true
+  },
+  "frozen_gate_results": {
+    "provider_blocked_case_count": 24,
+    "provider_blocked_result": "passed",
+    "provider_blocked_evidence_sha256": "sha256:ae1c8b01871b1e788073ac0d06c7e50578fc16152a09b14669bd05b89e3a066f",
+    "real_isolation_result": "passed",
+    "real_isolation_evidence_sha256": "sha256:24cc1c5fa2a6d243726569f0144bbcdb9c83abec5419d4c618e980e7e1300be8",
+    "adc_and_cloud_controls_result": "passed",
+    "adc_preflight_evidence_sha256": "sha256:37f396d466f652926bd76d1dd33e427ee1a6db3337e6ecc4f074cb62614f2bf8",
+    "focused_and_inherited_tests_passed": 208,
+    "api_spine_and_proposal_tests_passed": 73,
+    "repository_only_verifier_tests_passed": 266,
+    "python_compilation": "passed",
+    "ruff": "passed",
+    "json_validation": "passed",
+    "git_diff_check": "passed_with_pre_existing_line_ending_warnings",
+    "pre_attempt_residue": "clear"
+  },
+  "exact_provider_boundary": {
+    "provider": "google_cloud_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "data_class": "authored_synthetic",
+    "cost_ceiling_usd": 1,
+    "absolute_call_ceiling": 48,
+    "fallback": false,
+    "product_or_database_access": false,
+    "confirmation_or_write_authority": false
+  },
+  "provider_calls_before_attempt": 0,
+  "occupied_ledgers_before_attempt": 0,
+  "unrelated_user_changes_preserved": true,
+  "commit_push_pr_or_ref_move_authorized": false
+}

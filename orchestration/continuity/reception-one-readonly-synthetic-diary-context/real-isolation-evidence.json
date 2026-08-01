@@ -1,0 +1,109 @@
+{
+  "boundary": {
+    "api_key_authentication_used": false,
+    "appointment_writes_performed": 0,
+    "broker_judgement_repair": false,
+    "confirmation_performed": false,
+    "credential_reads_performed": 0,
+    "database_access_performed": false,
+    "hidden_reasoning_retained": false,
+    "natural_response_parsed_into_form": false,
+    "network_access_performed": false,
+    "product_delivery_performed": false,
+    "proofreader_selected_replacement": false,
+    "provider_calls_performed": 0
+  },
+  "broker_owned_fields": {
+    "version_code": 3
+  },
+  "cell_isolation_observations": [
+    {
+      "credential_environment_present": false,
+      "gid": 65532,
+      "loopback_only": true,
+      "network_interfaces": [
+        "lo"
+      ],
+      "read_only_root_filesystem": true,
+      "uid": 65532
+    },
+    {
+      "credential_environment_present": false,
+      "gid": 65532,
+      "loopback_only": true,
+      "network_interfaces": [
+        "lo"
+      ],
+      "read_only_root_filesystem": true,
+      "uid": 65532
+    }
+  ],
+  "container_policy_checks": [
+    {
+      "capabilities_dropped": true,
+      "cpu_bounded": true,
+      "memory_bounded": true,
+      "memory_swap_bounded": true,
+      "network_none": true,
+      "no_mounts": true,
+      "no_new_privileges": true,
+      "no_published_ports": true,
+      "non_root_user": true,
+      "pids_bounded": true,
+      "privileged_false": true,
+      "read_only_rootfs": true
+    },
+    {
+      "capabilities_dropped": true,
+      "cpu_bounded": true,
+      "memory_bounded": true,
+      "memory_swap_bounded": true,
+      "network_none": true,
+      "no_mounts": true,
+      "no_new_privileges": true,
+      "no_published_ports": true,
+      "non_root_user": true,
+      "pids_bounded": true,
+      "privileged_false": true,
+      "read_only_rootfs": true
+    }
+  ],
+  "correction_ticket_sha256": "sha256:f7608391ffa422b1554f64fbc43b51f5e6b115f2ed25431c743e87f0592389ac",
+  "database_present_during_isolation": false,
+  "deidentified_decision_note_taught": true,
+  "desk_context_sha256": "sha256:15a84eef16207267e90ddb13c4b20b51b48c550800319daf1ae29426d067ac38",
+  "evidence_mode": "authored_synthetic_provider_free_two_turn_fixture",
+  "exact_clarification_response_pattern_taught": true,
+  "exact_move_response_pattern_taught": true,
+  "first_disposition": "revision_required",
+  "first_model_form_body_sha256": "sha256:0af66bc953fe478e2fbad273c12a903a84e78fc18212a0adedc2726984164d99",
+  "first_violation_codes": [
+    "recognized_intent_goal_mismatch"
+  ],
+  "full_diary_exposed": false,
+  "model_authored_fields": [
+    "receptionist_response",
+    "decision_note",
+    "evidence_utterance_indices",
+    "typed_form"
+  ],
+  "opaque_handle_map_present_in_cell": false,
+  "proofreader_goal_markers_changed": false,
+  "released_proposal_family": "resize",
+  "required_goal_typed_feedback": true,
+  "residue": {
+    "containers_present": false,
+    "images_present": false,
+    "temporary_context_present": false
+  },
+  "result": "reception_one_readonly_synthetic_diary_context_real_isolation_pass",
+  "same_context_packet_proofread": true,
+  "schema_version": "reception.one.readonly_synthetic_diary_context.real_isolation.v1",
+  "second_disposition": "admit",
+  "second_model_form_body_sha256": "sha256:0d45f5342405966dc43bf54512eae6f6bc23e47bf18f0707e666f2d201332288",
+  "semantic_role_constraint_gate": true,
+  "source_manifest_sha256": "sha256:07f02d7d663b790e3c8bf2c82f1a332fc17c5db38aca47c098b9286c0bc8e89f",
+  "task_sha256": "sha256:8d66b2a19a0301f4af2806f8923f76a33d10e44e2d3195d725b42c1f660b41ff",
+  "trusted_backend_frame_sha256": "sha256:7d9992fb345aba7c48feb4803eeac8ef21e8402948fe9f647e4e9a002e86f5b6",
+  "unselected_appointments_exposed": false
+}

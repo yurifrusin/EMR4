@@ -1,0 +1,19 @@
+{
+  "audit_event_types": [
+    "broker_ready"
+  ],
+  "cell_reason_code": "invalid_json",
+  "cell_returncode": 2,
+  "cell_status_code": "edge_aborted",
+  "cell_stderr_bytes": 0,
+  "cell_stderr_sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "cell_stdout_bytes": 53,
+  "cell_stdout_sha256": "sha256:27c86a5e845758394f49a861cdea3a0f3a2c02790d590f62482b4a5331050ef0",
+  "ledger_status": "open",
+  "phase": "cell_relay_broker_exchange",
+  "provider_calls_consumed": 0,
+  "raw_cell_error_retained": false,
+  "raw_cell_output_retained": false,
+  "result": "broker_did_not_exit",
+  "schema_version": "reception.one.bureau.local_failure_diagnostic.v1"
+}

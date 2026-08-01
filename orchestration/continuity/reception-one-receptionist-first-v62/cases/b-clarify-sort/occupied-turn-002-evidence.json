@@ -1,0 +1,228 @@
+{
+  "attempt_id": "reception-one-receptionist-first-v62-eval-b-clarify-sort-turn-002",
+  "broker": {
+    "api_key_authentication_used": false,
+    "environment_forwarded_names": [
+      "APPDATA",
+      "COMSPEC",
+      "LOCALAPPDATA",
+      "PATH",
+      "PATHEXT",
+      "SYSTEMDRIVE",
+      "SYSTEMROOT",
+      "TEMP",
+      "TMP",
+      "USERPROFILE",
+      "WINDIR"
+    ],
+    "google_application_credentials_forwarded": false,
+    "host_purpose_built_one_use_process": true,
+    "process_exit_code": 0
+  },
+  "build_context": {
+    "repository_root_used": false,
+    "source_hashes": {
+      "generated:cell-request.json": "sha256:c176ecee5be768a192b6d0e2b04b4562cbdc141ed824f1e6ca9ea052237e8cd5",
+      "orchestration/continuity/reception-one-bureau-model-text-lane/LiveDockerfile": "sha256:45767035f2130a1f697b86c24cae2d825e1af7275592953f5deac4bf59f5cc20",
+      "scripts/ariadne_vertex_sydney_gemini_25_cell.py": "sha256:530d6f91e841aa41dd4fd87f07f45c360c728e7ca5847586bab5d19b604a6a71",
+      "scripts/ariadne_vertex_sydney_gemini_25_relay.py": "sha256:97dabf78cf4e78c440aee6587c94c6312e8cba1bae6b023b6e7110673b2fb61f"
+    },
+    "temporary_exact_allowlist": true
+  },
+  "cell_effective_policy": {
+    "cap_drop": [
+      "ALL"
+    ],
+    "credential_environment_present": false,
+    "memory_bytes": 134217728,
+    "memory_swap_bytes": 134217728,
+    "mount_count": 0,
+    "nano_cpus": 500000000,
+    "network_names": [
+      "reception-one-model-text-vertex-internal"
+    ],
+    "pids_limit": 64,
+    "port_binding_count": 0,
+    "privileged": false,
+    "read_only_rootfs": true,
+    "security_opt": [
+      "no-new-privileges=true"
+    ],
+    "user": "65532:65532"
+  },
+  "cleanup": {
+    "base_image_state_preserved": true,
+    "broker_process_absent": true,
+    "cell_container_absent": true,
+    "cell_image_absent": true,
+    "daemon_wide_prune_performed": false,
+    "internal_network_absent": true,
+    "relay_container_absent": true,
+    "relay_image_absent": true,
+    "temporary_context_absent": true,
+    "temporary_token_absent": true
+  },
+  "evidence_hash": "sha256:8c30bd4fcb42cbb78b4d7a4e285026974a5c89bfcbdb005539a98d8cf07cff11",
+  "exact_binding": {
+    "api_key_authentication_used": false,
+    "authentication": "keyless_impersonated_service_account_adc",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "location": "australia-southeast1",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "provider": "google_vertex_ai",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"
+  },
+  "exchange": {
+    "audit_event_count": 11,
+    "audit_event_types": [
+      "broker_ready",
+      "request_admitted",
+      "ledger_consumed",
+      "provider_request_constructed",
+      "provider_call_started",
+      "provider_call_received",
+      "provider_call_completed",
+      "receptionist_response_evaluated",
+      "operator_note_evaluated",
+      "proofreader_completed",
+      "release_committed"
+    ],
+    "audit_hash_chain_valid": true,
+    "audit_terminal_hash": "sha256:7d1f65e2df5ee902841f02f4a43cfa6369fc7845d915f70daf979d4324a167a1",
+    "cell_exit_code": 0,
+    "cell_status": "completed",
+    "contract_mode": "receptionist-v62",
+    "correction_ticket": null,
+    "correction_ticket_hash": null,
+    "model_input_hash": "sha256:8f19a32027c7ac6e4795666fa698c3c912fd87388192245e739f05c540ac2352",
+    "operator_note": {
+      "audit_only": true,
+      "disposition": "admit",
+      "note_sha256": "sha256:8e29ae1d1471b111e6a2c2befc54feb4292764830feb09811635ae6c66bb53d0",
+      "parsed_into_plan": false,
+      "product_delivered": false,
+      "reason_codes": [],
+      "retained_utf8_bytes": 44
+    },
+    "proofreader": {
+      "admitted_operator_ids": [
+        "request_clarification"
+      ],
+      "context_frame_review": {
+        "command_authority": false,
+        "desk_context_sha256": "sha256:741ef917c4947b88405648836a7d7933c9a10efa94b59461a1240dd44be6815f",
+        "disposition": "admit",
+        "reviewed_context_revision": 62,
+        "same_packet_seen_by_model_and_proofreader": true,
+        "source_labels": [
+          "fixture_intercepted",
+          "staff_selected",
+          "staff_selected"
+        ],
+        "task_sha256": "sha256:a1a10c1633851b93572a56645c145eb0604a05f525004c9079ff582c4e3a65a7"
+      },
+      "disposition": "admit",
+      "normalized_plan_sha256": "9cd8d62a57af85291878ef95ccc9e3264004a659547cff9e8002cc8f7af1e52b",
+      "operator_note_disposition": "admit",
+      "safe_repairs": [],
+      "violations": [],
+      "wire_safe_repairs": []
+    },
+    "proofreader_feedback_hash": null,
+    "receptionist_output": {
+      "decision_note": "Intent clarification: The request \"sort out\" is ambiguous and does not specify an action.",
+      "disposition": "admit",
+      "evidence_utterance_indices": [
+        0
+      ],
+      "natural_response_parsed_into_form": false,
+      "product_delivered": false,
+      "receptionist_response": "I can help with that. Could you please tell me what you'd like to do with the appointment?",
+      "violations": []
+    },
+    "release": {
+      "api_spine_operation_id": null,
+      "appointment_ref": null,
+      "candidate_slot_ids": [],
+      "duration_minutes": null,
+      "kind": "clarification",
+      "patient_ref": null,
+      "practitioner_ref": null,
+      "proposal_family": "clarification",
+      "requires_human_confirmation": false,
+      "status": null,
+      "warning_codes": [],
+      "write_performed": false
+    },
+    "schema_hash": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c"
+  },
+  "explicit_exclusions": {
+    "api_key_information_recorded": false,
+    "chain_of_thought_recorded": false,
+    "command_authority": false,
+    "credential_or_token_recorded": false,
+    "human_or_product_delivery": false,
+    "operator_note_parsed_into_plan": false,
+    "operator_note_product_delivered": false,
+    "product_or_database_access": false,
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "thinking_token_count_only": true,
+    "thought_summary_requested": false
+  },
+  "fallback_performed": false,
+  "ledger": {
+    "attempt_id": "reception-one-receptionist-first-v62-eval-b-clarify-sort-turn-002",
+    "fallback_permitted": false,
+    "ledger_id": "reception-one-receptionist-first-v62-eval-b-clarify-sort-ledger-002",
+    "maximum_provider_calls": 1,
+    "policy_id": "reception-one-receptionist-first-v62-vertex-sydney-v1",
+    "provider_calls_consumed": 1,
+    "schema_version": "reception.one.bureau.model_text_single_use_ledger.v1",
+    "status": "consumed"
+  },
+  "ledger_id": "reception-one-receptionist-first-v62-eval-b-clarify-sort-ledger-002",
+  "network": {
+    "attachable": false,
+    "driver": "bridge",
+    "ingress": false,
+    "internal": true,
+    "name": "reception-one-model-text-vertex-internal"
+  },
+  "precall_gate": {
+    "all_cloud_controls_passed": true,
+    "authority_sha256": "sha256:725b835b16ae108080f694e5918c0c2001b598e23e6f64834e9712867ffded8a",
+    "compass_map_revision": 100,
+    "compass_source_graph_revision": 115,
+    "continuity_graph_revision": 115,
+    "preflight_sha256": "sha256:c0128c7d138e943b80c7bd41cf81a0d5f9eab17c11158e85d0d6cce4d2182886"
+  },
+  "provider_call_count": 1,
+  "provider_contacted": true,
+  "relay_effective_policy": {
+    "broker_alias_present": true,
+    "cap_drop": [
+      "ALL"
+    ],
+    "memory_bytes": 67108864,
+    "memory_swap_bytes": 67108864,
+    "mount_count": 1,
+    "nano_cpus": 250000000,
+    "network_names": [
+      "bridge",
+      "reception-one-model-text-vertex-internal"
+    ],
+    "pids_limit": 32,
+    "port_binding_count": 0,
+    "privileged": false,
+    "read_only_rootfs": true,
+    "security_opt": [
+      "no-new-privileges=true"
+    ],
+    "token_mount_exact": true,
+    "user": "65532:65532"
+  },
+  "result": "reception_one_receptionist_first_v62_turn_pass",
+  "schema_version": "reception.one.receptionist_first_v62.turn_evidence.v1"
+}

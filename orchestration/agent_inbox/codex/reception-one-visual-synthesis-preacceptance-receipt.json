@@ -1,0 +1,62 @@
+{
+  "authority_boundary": "accept_deterministic_authored_synthetic_reception_one_visual_synthesis_with_vertex_candidate_rejected_no_further_provider_product_command_or_release_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "verifier_acceptance",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md complete current baton, protected boundaries and Reception One product lineage.",
+    "current_authority_allocation": [
+      "Yuri authorised the Reception One visual and interaction synthesis with bounded live Vertex involvement.",
+      "Yuri accepted the disposable synthesis-cell and deterministic unoccupied UI-node separation."
+    ],
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-visual-interaction-synthesis-plan.md",
+      "docs/bernie-reception-one-visual-interaction-synthesis-closeout.md",
+      "orchestration/agent_inbox/codex/reception-one-visual-synthesis-sol-review.md",
+      "orchestration/agent_inbox/codex/reception-one-visual-synthesis-sol-acceptance.md",
+      "orchestration/continuity/reception-one-visual-synthesis/occupied-external-audit.json",
+      "orchestration/prototypes/reception-one-visual-synthesis/browser-acceptance-evidence.json",
+      "orchestration/continuity/emr4-continuity-graph.json revision 54",
+      "orchestration/continuity/emr4-compass.json revision 41",
+      "docs/ariadne-compass-current.md exact rendered report"
+    ],
+    "protected_evidence_boundaries": "The provider received only the fictional design brief. Its proofreader-rejected candidate remains unreleased and unused. The deterministic UI contains no model, provider transport, credentials, product write, command authority or protected data.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true
+    }
+  },
+  "acceptance_gates": {
+    "compound_result": "reception_one_visual_interaction_synthesis_pass_with_vertex_candidate_rejected",
+    "vertex_candidate": "proofreader_rejected_unreleased_unused",
+    "vertex_retry": "not_eligible_not_attempted",
+    "visual_concept_complete": true,
+    "deterministic_ui_node_unoccupied": true,
+    "exact_raster_browser_evidence": "passed",
+    "focused_and_inherited_tests": "142_passed",
+    "repository_only_verifier": "266_passed",
+    "static_and_schema_checks": "passed",
+    "continuity_graph_revision": 54,
+    "compass_map_revision": 41,
+    "rendered_compass_exact": true,
+    "task_scoped_residue_zero": true
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

@@ -1,0 +1,11 @@
+{
+  "attempt_id": "reception-one-preprinted-form-v5-eval-b-move-resched-r1-turn-002",
+  "closure_reason": "lifecycle_closed_before_broker_consumption",
+  "fallback_permitted": false,
+  "ledger_id": "reception-one-preprinted-form-v5-eval-b-move-resched-r1-ledger-002",
+  "maximum_provider_calls": 1,
+  "policy_id": "reception-one-preprinted-form-v5-vertex-sydney-v1",
+  "provider_calls_consumed": 0,
+  "schema_version": "reception.one.bureau.model_text_single_use_ledger.v1",
+  "status": "consumed"
+}

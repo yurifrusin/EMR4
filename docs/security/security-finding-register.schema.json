@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.dev/schemas/security-finding-register.schema.json",
+  "title": "EMR4 security finding register",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "register_revision",
+    "policy_effective_at",
+    "owner",
+    "native_findings",
+    "linked_local_ledgers"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.security-finding-register.v1"},
+    "register_revision": {"type": "integer", "minimum": 1},
+    "policy_effective_at": {"type": "string", "format": "date-time"},
+    "last_verified_at": {"type": "string", "format": "date-time"},
+    "owner": {"type": "string", "pattern": "^@[A-Za-z0-9-]+$"},
+    "native_findings": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/nativeFinding"}
+    },
+    "linked_local_ledgers": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/localLedger"}
+    }
+  },
+  "$defs": {
+    "nativeFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "finding_id",
+        "source",
+        "native_id",
+        "native_url",
+        "title",
+        "severity",
+        "owner",
+        "first_observed_at",
+        "acknowledged_at",
+        "triaged_at",
+        "triage_due_at",
+        "triage_verdict",
+        "status",
+        "affected_surface",
+        "evidence",
+        "repository_disposition",
+        "native_disposition_reason",
+        "native_disposition_comment",
+        "observed_native_state",
+        "desired_native_state",
+        "review_at",
+        "risk_acceptance"
+      ],
+      "properties": {
+        "finding_id": {"type": "string", "pattern": "^SF-[0-9]{4}$"},
+        "source": {"enum": ["dependabot", "codeql"]},
+        "native_id": {"type": "integer", "minimum": 1},
+        "native_url": {"type": "string", "format": "uri"},
+        "title": {"type": "string", "minLength": 1, "maxLength": 240},
+        "severity": {"enum": ["critical", "high", "medium", "low"]},
+        "owner": {"type": "string", "pattern": "^@[A-Za-z0-9-]+$"},
+        "first_observed_at": {"type": "string", "format": "date-time"},
+        "acknowledged_at": {"type": "string", "format": "date-time"},
+        "triaged_at": {"type": "string", "format": "date-time"},
+        "triage_due_at": {"type": "string", "format": "date-time"},
+        "triage_verdict": {"enum": ["confirmed", "not_actionable", "needs_review"]},
+        "status": {"enum": ["open", "accepted_risk", "closed_not_actionable", "remediated", "needs_review"]},
+        "affected_surface": {"type": "string", "minLength": 1},
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "repository_disposition": {"type": "string", "minLength": 1},
+        "native_disposition_reason": {"enum": ["tolerable_risk", "not_used", "false_positive", "fixed"]},
+        "native_disposition_comment": {"type": "string", "minLength": 1, "maxLength": 500},
+        "observed_native_state": {"enum": ["open", "dismissed", "fixed"]},
+        "desired_native_state": {"enum": ["open", "dismissed", "fixed"]},
+        "native_disposition_at": {"type": ["string", "null"], "format": "date-time"},
+        "review_at": {"type": "string", "format": "date-time"},
+        "risk_acceptance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["accepted_by", "rationale", "expires_at", "reopen_condition"],
+          "properties": {
+            "accepted_by": {"type": "string", "pattern": "^@[A-Za-z0-9-]+$"},
+            "rationale": {"type": "string", "minLength": 1},
+            "expires_at": {"type": "string", "format": "date-time"},
+            "reopen_condition": {"type": "string", "minLength": 1}
+          }
+        }
+      }
+    },
+    "localLedger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ledger_id", "scanner", "path", "row_count", "disposition", "verified_at"],
+      "properties": {
+        "ledger_id": {"type": "string", "minLength": 1},
+        "scanner": {"type": "string", "minLength": 1},
+        "path": {"type": "string", "minLength": 1},
+        "row_count": {"type": "integer", "minimum": 1},
+        "disposition": {"type": "string", "minLength": 1},
+        "verified_at": {"type": "string", "format": "date-time"}
+      }
+    }
+  }
+}

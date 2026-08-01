@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_and_implement_the_authorised_repository_local_provider_free_shared_application_auth_runtime_role_and_secure_authored_synthetic_session_transport_with_product_reads_external_identity_deployment_commit_and_push_closed",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_shared_auth_runtime_role_secure_transport_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: AGENTS.md and the current orchestration truth sources were reread; raisa_shared_application_auth_postgresql_persistence_pass at Continuity revision 183 and Compass revision 164 is the accepted parent.",
+        "current_authority_allocation: GPT Sol owns the serial security-sensitive role, route, cookie and disposable-database tranche; no worker, subagent, provider, external reviewer, identity provider or cloud control plane is selected or dispatched.",
+        "active_plan_and_acceptance: the accepted PostgreSQL plan, threat delta, live-local evidence, closeout and Sol acceptance were reconciled with Continuity 183, Compass 164, the exact shared-application-auth-runtime-role-secure-transport candidate and Yuri's fresh authority.",
+        "protected_evidence_boundaries: protected holdouts and raw historical Diary material remain sealed; only authored-synthetic identity/session metadata may be used; product-derived, patient, health, clinical and historical data, providers, commands, microphone, document mutation, deployment, production and release remain closed.",
+        "git_refs_and_worktree: after fetch and agent-worktree audit, HEAD remains 8fa732592fbee4f57c322b13d9d8ff89fcc7fa33 on codex/ariadne-terra-gemini-comparative-rehearsal with upstream divergence 0/0; all named protected refs are ancestors of HEAD, durable worker worktrees are clean, no changes are staged and all 59 prior accepted or user-owned worktree entries are preserved.",
+        "The new authority permits the exact repository-local runtime database privilege, token-to-practice bootstrap, non-enumerating provider-free synthetic route, CSRF, Secure HttpOnly cookie or same-origin BFF, rotation and logout boundary only; external identity, product reads, cloud/IAM, deployment, production, release, commit, push and pull request remain closed."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker was selected because the migration, runtime-role probe, route transport and disposable database acceptance are tightly coupled and serial."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected interactive fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport was selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external reviewer or provider was selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

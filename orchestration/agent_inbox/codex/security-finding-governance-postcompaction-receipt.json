@@ -1,0 +1,52 @@
+{
+  "authority_boundary": "repository_local_security_finding_governance_acceptance_and_task_branch_publication_only_no_dependency_force_override_product_data_provider_cloud_deployment_production_release_or_protected_ref_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "verify_accept_close_and_publish_the_authorised_security_finding_governance_descendant_as_one_task_branch_commit_and_draft_pull_request_without_moving_protected_refs",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after context restoration. raisa_shared_application_auth_operational_hardening_pass at Continuity 185 and Compass 166 remains the accepted parent; security-finding-governance is the authorised active descendant.",
+    "current_authority_allocation": "GPT Sol owns architecture, acceptance and the authorised one-commit task-branch publication. Luna is not callable and no substitute worker, subagent, external reviewer or provider was selected.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-shared-application-auth-runtime-role-secure-transport-cross-pc-handoff.md",
+      "docs/raisa-shared-application-auth-operational-hardening-plan.md",
+      "docs/security/raisa-shared-application-auth-operational-hardening-threat-model-delta.md",
+      "docs/raisa-shared-application-auth-operational-hardening-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-shared-application-auth-operational-hardening-sol-acceptance.md",
+      "docs/security/security-finding-governance-plan.md",
+      "docs/security/security-finding-governance-threat-model-delta.md",
+      "docs/security/dependabot-alerts-8-15-triage-2026-08-01.md",
+      "docs/security/security-finding-register.schema.json",
+      "docs/security/security-finding-register.json",
+      "orchestration/continuity/security-finding-governance/native-alert-disposition-evidence.json",
+      "SECURITY.md",
+      "orchestration/continuity/emr4-continuity-graph.json revision 185",
+      "orchestration/continuity/emr4-compass.json revision 166"
+    ],
+    "protected_evidence_boundaries": "Yuri authorised SECURITY.md edits, exact native GitHub alert dismissals and publication through one task-branch commit, push and draft PR. Protected holdouts and raw historical Diary material remain sealed. Dependency force overrides, real identity, product or patient/clinical data, providers, cloud/IAM, deployment, production, release and protected-ref movement remain closed.",
+    "git_refs_and_worktree": {
+      "HEAD": "2ae8f2173276147e59be361e0182f6cb4b7453fa",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/codex/ariadne-terra-gemini-comparative-rehearsal": "2ae8f2173276147e59be361e0182f6cb4b7453fa",
+      "upstream_ahead": 0,
+      "upstream_behind": 0,
+      "staged_files": 0,
+      "protected_refs_unchanged": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

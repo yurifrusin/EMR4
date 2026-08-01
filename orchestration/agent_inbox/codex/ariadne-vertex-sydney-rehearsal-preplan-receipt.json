@@ -1,0 +1,83 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_ariadne_vertex_sydney_rehearsal_plan_and_continuity_descendant",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md Current Baton retains consumed attempts 001-004 and the Sydney Vertex route at Yuri's gate",
+    "current_authority_allocation": "docs/ariadne-vertex-sydney-bounded-work-cell-authority.md",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-vertex-sydney-bounded-work-cell-authority.md",
+      "docs/ariadne-vertex-sydney-bounded-work-cell-rehearsal-plan.md",
+      "orchestration/agent_inbox/codex/ariadne-vertex-sydney-rehearsal-rehydration-receipt.json"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5-6 plus the exact stop and closed-surface clauses in the preserved Yuri authority",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true
+    }
+  },
+  "frozen_authority": {
+    "continuity_parent": "ariadne-terra-gemini-comparative-rehearsal",
+    "historical_nodes_revised": false,
+    "provider": "Google Vertex AI",
+    "model_family": "Gemini 3.5 Flash",
+    "model_identifier_resolution": "official_fully_qualified_identifier_or_stable_alias_only",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "data_classification": "authored_synthetic_only",
+    "region": "australia-southeast1",
+    "endpoint": "https://australia-southeast1-aiplatform.googleapis.com",
+    "credential_holder": "one_use_broker_only",
+    "work_cell_credentials": false,
+    "global_or_cross_region_fallback": false,
+    "api_key_authentication": false,
+    "external_cloud_mutation": false,
+    "product_database_clinical_or_command_authority": false,
+    "primary_call_ceiling": 1,
+    "conditional_repair_retry_ceiling": 1,
+    "absolute_call_ceiling": 2,
+    "application_cost_ceiling_usd": 1,
+    "independent_external_audit_required": true,
+    "complete_isolation_cleanup_required": true,
+    "continuity_compass_revision_binding_required": true,
+    "rendered_compass_validation_required_before_call": true
+  },
+  "stop_conditions": [
+    "missing_or_unrefreshable_existing_impersonated_adc",
+    "interactive_adc_or_credential_reconfiguration_required",
+    "api_billing_iam_project_service_account_or_human_account_change_required",
+    "prediction_role_missing_or_broader_than_exact_permission",
+    "vertex_data_access_audit_unavailable",
+    "request_response_logging_not_confirmed_disabled_or_absent",
+    "gemini_3_5_flash_not_supported_in_australia_southeast1",
+    "provider_model_project_identity_region_or_credential_substitution_required",
+    "global_endpoint_or_regional_fallback_required",
+    "api_key_or_static_key_required",
+    "non_synthetic_or_protected_data_required",
+    "cost_or_call_ceiling_may_be_exceeded",
+    "credential_exposure_possible",
+    "isolation_or_external_audit_boundary_not_maintainable",
+    "unexpected_external_charge_possible",
+    "authority_expansion_required"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

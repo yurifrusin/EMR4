@@ -1,0 +1,63 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_integration_cloud_mutation_or_provider_call_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "resume_complete_read_only_tranche_3_after_external_operator_verified_disable_cache_true",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md Current Baton, including the immutable ADC-restored cache-control stop and exact continuation requirement",
+    "current_authority_allocation": [
+      "docs/ariadne-vertex-sydney-bounded-work-cell-authority.md",
+      "docs/ariadne-vertex-sydney-gemini-25-flash-authority-delta.md",
+      "Yuri supplied sanitized external operator evidence that disableCache is explicitly true for bernie-emr4-dev"
+    ],
+    "active_plan_and_acceptance": [
+      "docs/ariadne-vertex-sydney-gemini-25-flash-rehearsal-plan.md",
+      "docs/ariadne-vertex-sydney-gemini-25-adc-restored-continuation-plan.md",
+      "docs/ariadne-vertex-sydney-gemini-25-adc-restored-continuation-closeout.md",
+      "docs/ariadne-vertex-sydney-gemini-25-cache-disabled-continuation-plan.md",
+      "orchestration/continuity/ariadne-vertex-sydney-gemini-25/cache-disabled-operator-evidence.json"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5-6 and the unchanged authored-synthetic, exact keyless ADC, Sydney inference, no-fallback, isolation, audit, USD 1, two-call, product, database, PII, command and external-mutation stops",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true
+    }
+  },
+  "continuation_boundary": {
+    "historical_failed_nodes_revised": false,
+    "reported_external_state_change": "project_cache_control_disable_cache_true",
+    "first_permitted_action": "complete_read_only_tranche_3_preflight",
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "inference_endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "cache_management_endpoint_hostname": "us-central1-aiplatform.googleapis.com",
+    "data_classification": "authored_synthetic_only",
+    "application_cost_ceiling_usd": 1,
+    "occupied_calls_consumed_before_continuation": 0,
+    "absolute_occupied_call_ceiling": 2,
+    "external_state_change_authority": false,
+    "provider_call_authority_at_receipt": false
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

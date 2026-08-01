@@ -1,0 +1,88 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "ariadne_vertex_sydney_bounded_cognitive_work_cell_rehearsal",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_fresh_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "DeepSeek is prohibited for this exact Sydney Vertex tranche."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The Deep Code fallback is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude provider or worker lane is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Antigravity is not the occupied provider path; any independent review must remain read-only and cannot invoke a provider."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri authorised a conditional seven-tranche sequence toward one authored-synthetic Gemini Flash call through the Sydney australia-southeast1 Vertex endpoint.",
+        "The exact project is bernie-emr4-dev and the exact target is emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com through keyless impersonated ADC.",
+        "The occupied work cell must not receive ADC files, OAuth credentials, provider keys, gcloud configuration, product data, database access or unrestricted network access.",
+        "The broker alone may refresh existing impersonated ADC non-interactively and call australia-southeast1-aiplatform.googleapis.com.",
+        "Gemini Developer API, global Vertex endpoints, regional fallback, API keys, OpenAI, Terra, DeepSeek and other providers or regions are prohibited.",
+        "The primary call ceiling is one; one repaired retry is conditional on an exact deterministic request-contract defect, and the absolute occupied-call ceiling is two with a USD 1 application ceiling.",
+        "Missing or unusable ADC, IAM/API/billing/account changes, unavailable Sydney Gemini 3.5 Flash support, weakened residency, credential reconfiguration, broader access or higher cost require Yuri intervention.",
+        "Protected holdouts, PII, historical Diary data, product APIs, databases, commands, provider tools, production, deployment and release remain closed.",
+        "The current dirty task branch and all unrelated user changes are preserved; no commit, push, PR or protected-ref movement is authorised."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No subagent is used during protected rehydration or authority freezing."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

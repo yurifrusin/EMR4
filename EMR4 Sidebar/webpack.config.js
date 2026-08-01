@@ -6,7 +6,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const urlDev = "https://localhost:3000/";
-const urlProd = "https://www.contoso.com/"; // CHANGE THIS TO YOUR PRODUCTION DEPLOYMENT LOCATION
+const urlProd = "__RAISA_PUBLIC_ORIGIN__/";
 
 async function getHttpsOptions() {
   const httpsOptions = await devCerts.getHttpsServerOptions();
@@ -16,10 +16,14 @@ async function getHttpsOptions() {
 module.exports = async (env, options) => {
   const dev = options.mode === "development";
   const config = {
-    devtool: "source-map",
+    devtool: dev ? "source-map" : false,
     entry: {
       polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
-      taskpane: ["./src/taskpane/taskpane.js", "./src/taskpane/taskpane.html"],
+      taskpane: [
+        "./src/taskpane/office-host-runtime.js",
+        "./src/taskpane/clinician-one-document-context.js",
+        "./src/taskpane/taskpane.js",
+      ],
       commands: "./src/commands/commands.js",
     },
     output: {
@@ -36,11 +40,6 @@ module.exports = async (env, options) => {
           use: {
             loader: "babel-loader",
           },
-        },
-        {
-          test: /\.html$/,
-          exclude: /node_modules/,
-          use: "html-loader",
         },
         {
           test: /\.(png|jpg|jpeg|gif|ico)$/,
@@ -60,7 +59,15 @@ module.exports = async (env, options) => {
       new CopyWebpackPlugin({
         patterns: [
           {
-            from: "assets/*",
+            from: "src/taskpane/assets/emr_cube1.png",
+            to: "assets/emr_cube1.png",
+          },
+          {
+            from: "assets/icon-32.png",
+            to: "assets/icon-32.png",
+          },
+          {
+            from: "assets/icon-80.png",
             to: "assets/[name][ext][query]",
           },
           {
@@ -73,6 +80,14 @@ module.exports = async (env, options) => {
                 return content.toString().replace(new RegExp(urlDev, "g"), urlProd);
               }
             },
+          },
+          {
+            from: "src/taskpane/taskpane.css",
+            to: "taskpane.css",
+          },
+          {
+            from: "src/taskpane/hosting-policy.js",
+            to: "hosting-policy.js",
           },
         ],
       }),
@@ -100,6 +115,7 @@ module.exports = async (env, options) => {
         type: "https",
         options: env.WEBPACK_BUILD || options.https !== undefined ? options.https : await getHttpsOptions(),
       },
+      host: "127.0.0.1",
       port: process.env.npm_package_config_dev_server_port || 3000,
     },
   };

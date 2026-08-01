@@ -1,0 +1,46 @@
+{
+  "schema_version": "ariadne.vertex_sydney_adc_restored_independent_audit_analysis.v1",
+  "reviewed_on": "2026-07-24",
+  "review_mode": "independent_repository_read_only_no_cloud_credential_provider_or_docker_lifecycle_access",
+  "result": "ariadne_vertex_sydney_gemini_25_adc_restored_independent_audit_pass",
+  "terminal_result_accepted": "ariadne_vertex_sydney_gemini_25_cache_control_blocked",
+  "reviewed_revision_binding": {
+    "continuity_graph_revision": 37,
+    "compass_map_revision": 24,
+    "continuity_compass_revision_bound": true,
+    "rendered_compass_exact": true
+  },
+  "verified": {
+    "repository_only_tests_passed": 36,
+    "preflight_tests_passed": 7,
+    "audit_tests_passed": 5,
+    "compass_tests_passed": 10,
+    "continuity_tests_passed": 14,
+    "external_audit_chain_valid": true,
+    "external_audit_chain_head_exact": true,
+    "bound_contract_and_artifact_hashes_valid": true,
+    "restored_audit_bound_in_continuity": true,
+    "restored_audit_bound_in_compass": true,
+    "historical_rejected_nodes_immutable": true,
+    "provider_calls": 0,
+    "retries": 0,
+    "durable_rehearsal_or_occupied_ledgers_opened": 0,
+    "task_containers": 0,
+    "task_networks": 0,
+    "task_images": 0,
+    "task_broker_processes": 0,
+    "task_temporary_credential_files": 0,
+    "sensitive_raw_content_identified": false
+  },
+  "repaired_before_acceptance": [
+    "bind_adc_restored_external_audit_in_continuity_and_compass",
+    "state_only_that_explicit_disable_cache_true_was_not_verified",
+    "distinguish_service_account_key_material_from_read_only_key_inventory_metadata"
+  ],
+  "proof_limits": [
+    "Independent review did not reproduce credential refresh or cloud-control reads and does not independently establish the underlying Google Cloud observations.",
+    "The read-only cache check did not verify explicit disableCache: true; it does not prove that caching was positively observed enabled.",
+    "No provider inference, real isolated lifecycle, typed draft, proofreader release, Australian physical processing or sovereign processing is proved."
+  ],
+  "required_next_action": "An externally authorised operator determines the current Vertex provider-managed in-memory cache state for bernie-emr4-dev and establishes explicit disableCache: true if needed without changing any other frozen boundary, followed by fresh five-source rehydration and the complete read-only Tranche 3 preflight."
+}

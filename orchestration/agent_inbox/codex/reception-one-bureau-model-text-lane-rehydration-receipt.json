@@ -1,0 +1,50 @@
+{
+  "authority_boundary": "provider_blocked_authored_synthetic_model_text_lane_preparation_no_occupied_call_product_data_database_write_deployment_release_or_protected_ref_authority",
+  "continuation_event": "new_session",
+  "planned_action": "prepare_and_verify_the_provider_blocked_reception_one_bureau_model_text_lane",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md names the accepted provider-free Bureau Typed Plan Protocol as the current product result at Continuity graph revision 64 and Compass map revision 51, and requires fresh exact authority before an occupied model lane.",
+    "current_authority_allocation": [
+      "Yuri directed the programme to continue through the next logical tranche and subsequent repository-local work until intervention is genuinely required.",
+      "GPT Sol owns the tightly coupled provider-blocked preparation and verification.",
+      "No worker, occupied provider, product-context, database, write, deployment, release, commit, push or protected-ref authority is allocated."
+    ],
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-bureau-typed-plan-protocol-plan.md",
+      "docs/bernie-reception-one-bureau-typed-plan-protocol-design.md",
+      "docs/bernie-reception-one-bureau-typed-plan-protocol-closeout.md",
+      "orchestration/agent_inbox/codex/reception-one-bureau-typed-plan-protocol-sol-acceptance.md",
+      "docs/ariadne-bounded-cognitive-work-cell-protocol-plan.md",
+      "docs/ariadne-bounded-cognitive-work-cell-protocol-design.md",
+      "docs/ariadne-vertex-sydney-gemini-25-repaired-request-run-closeout.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/access_ai_api_design.md",
+      "orchestration/bernie_release_gates.md"
+    ],
+    "protected_evidence_boundaries": "Protected holdouts and raw historical Diary material remain sealed; product/patient/clinical data, live providers, credentials, API/database reads, confirmation, writes, production, deployment and release remain closed.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "worktree_entries_at_rehydration": 255,
+      "protected_refs_unchanged": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

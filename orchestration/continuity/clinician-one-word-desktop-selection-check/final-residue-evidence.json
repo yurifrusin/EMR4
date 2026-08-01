@@ -1,0 +1,24 @@
+{
+  "schema_version": "raisa.clinician-one-word-desktop-selection-check-residue.v1",
+  "result": "pass",
+  "checked_on": "2026-07-31",
+  "residue": {
+    "task_document_present": false,
+    "task_listener_present": false,
+    "task_process_present": false,
+    "task_container_present": false,
+    "task_network_present": false,
+    "task_image_present": false,
+    "task_temporary_log_present": false,
+    "credential_material_created_or_copied": false,
+    "raw_selection_text_persisted": false
+  },
+  "observations": [
+    "Yuri confirmed that the task-created Word document was closed safely without saving.",
+    "The uniquely identified task document was then sent from the Windows Temp directory to the Recycle Bin.",
+    "Microsoft Word remained open with the generic window title Word; no task document remained open.",
+    "The disposable sideload and exact task-owned loopback listener were stopped.",
+    "The exact task-owned webpack logs were sent to the Windows Recycle Bin after their resolved paths were verified.",
+    "No task container, network, image, credential or raw-selection artifact was created."
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit",
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "sol_pr69_integration_hygiene_five_source_rehydration",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree"
+      ]
+    }]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "PR 69 is ready for review and all six checks pass at task head 91c2b4e8978e64095bc750fe204f4c7e2f2534a2.",
+        "All review threads are resolved and CodeQL alerts 533, 537 and 538 read fixed with no security severity.",
+        "The full integration diff check identified six final blank lines only; they were removed without changing frozen evidence meaning or runtime behavior.",
+        "Concurrent branding assets remain untracked, untouched and excluded. Protected refs remain aligned at 4974075b31035d599e081d68e3b85e04a897baa1."
+      ]
+    },
+    {"adapter_id":"antigravity_cli_print","method":"synthetic_fixture","reachability":"unknown","evidence":["No worker selected."]},
+    {"adapter_id":"deepseek_via_claude_code_bare","method":"synthetic_fixture","reachability":"unknown","evidence":["No worker selected."]},
+    {"adapter_id":"deepcode_cli","method":"synthetic_fixture","reachability":"unknown","evidence":["Unselected fallback."]},
+    {"adapter_id":"claude_cli_print","method":"synthetic_fixture","reachability":"unknown","evidence":["No Claude transport selected."]},
+    {"adapter_id":"codex_subagent_spawn","method":"synthetic_fixture","reachability":"unknown","evidence":["No native subagent assigned."]}
+  ],
+  "worker_slots": [{"resource_id":"deepseek-flash-workers","active_instance_ids":[],"stale_instance_ids":[]}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

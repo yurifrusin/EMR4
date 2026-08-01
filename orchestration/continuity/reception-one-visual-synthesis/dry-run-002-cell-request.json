@@ -1,0 +1,59 @@
+{
+  "protocol_version": "ariadne.reception_one_visual_synthesis_work_cell.v1",
+  "policy_id": "reception-one-visual-synthesis-vertex-sydney-v1",
+  "attempt_id": "gemini-25-repair-dry-run-visual-002",
+  "ledger_id": "gemini-25-repair-dry-run-visual-ledger-002",
+  "task": {
+    "task_type": "authored_synthetic_scheduling_workspace_design",
+    "fictional_workspace_id": "project-lantern",
+    "evidence": [
+      {
+        "evidence_id": "authority_boundary",
+        "statement": "The fictional workspace may present answers, selections and proposals but never commits scheduling state."
+      },
+      {
+        "evidence_id": "one_source",
+        "statement": "Every focused view remains a temporary projection of one fictional authoritative schedule."
+      },
+      {
+        "evidence_id": "scope_visible",
+        "statement": "Scope, omissions, freshness and the route back remain visible in every focused view."
+      },
+      {
+        "evidence_id": "state_distinct",
+        "statement": "Answer, selection, proposal, notice, block and receipt require distinct plain-language states."
+      },
+      {
+        "evidence_id": "tablet_primary",
+        "statement": "Landscape and portrait tablet layouts are first-class workspaces, not compressed desktop screens."
+      },
+      {
+        "evidence_id": "quiet_change",
+        "statement": "A committed change uses restrained, nonmodal attention and fresh reconciliation."
+      },
+      {
+        "evidence_id": "privacy_resume",
+        "statement": "Sensitive display content can be masked immediately and resumption requires refreshed state."
+      },
+      {
+        "evidence_id": "ordinary_escape",
+        "statement": "An ordinary schedule view remains an immediate and reversible escape."
+      }
+    ],
+    "requested_fields": [
+      "design_thesis",
+      "visual_direction",
+      "composition",
+      "density",
+      "typography",
+      "palette",
+      "priority_order",
+      "responsive_strategy",
+      "state_treatments",
+      "interaction_recommendations",
+      "risk_ids",
+      "evidence_ids",
+      "authority_class"
+    ]
+  }
+}

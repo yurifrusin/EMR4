@@ -1,0 +1,40 @@
+{
+  "boundary": {
+    "credential_reads_performed": 0,
+    "external_state_changed": false,
+    "network_access_performed": false,
+    "provider_calls_performed": 0,
+    "retry_authorised": true,
+    "retry_performed": false
+  },
+  "bounded_provider_error": {
+    "field_paths": [
+      "$.steps[3].arguments[0].source",
+      "$.steps[3].arguments[1].source",
+      "$.steps[4].arguments[0].source",
+      "$.steps[4].arguments[1].source"
+    ],
+    "reason_code": "schema_invalid"
+  },
+  "diagnosis": "The exact Sydney response passed the goal and compact-line framing but failed the closed candidate schema only at prior-step argument source paths. The discarded source values were not retained. The safe repair adds one canonical three-segment step-reference example and explicitly forbids omitted prefixes and dot notation; it does not transform or guess a reference.",
+  "historical_attempt_id": "reception-one-model-text-occupied-retry-002",
+  "historical_request_hash": "sha256:e6fcfbda66ce92dfbf03c03c4d4aa4169485beacb822e639841897b97627427e",
+  "historical_schema_hash": "sha256:d5b9cceeef961dca7f8e035f8e95b8f7531c00b52736a9eff7257cefbee85f87",
+  "repository_local_repair": {
+    "array_schema_count": 1,
+    "decoded_candidate_schema_unchanged": true,
+    "deterministic_proofreader_unchanged": true,
+    "enum_keyword_count": 0,
+    "local_wire_schema": "orchestration/continuity/reception-one-bureau-model-text-lane/provider-wire-response.schema.json",
+    "mechanical_wire_normalization_only": true,
+    "nested_object_items": false,
+    "new_schema_hash": "sha256:d5b9cceeef961dca7f8e035f8e95b8f7531c00b52736a9eff7257cefbee85f87",
+    "provider_model_project_identity_region_unchanged": true,
+    "semantic_reinterpretation_permitted": false,
+    "source_reference_transformation_permitted": false,
+    "step_reference_instruction_only": true,
+    "wire_contract": "goal plus an array of compact typed plan-line strings"
+  },
+  "result": "reception_one_bureau_model_text_step_reference_grammar_diagnostic_pass",
+  "schema_version": "reception.one.bureau.model_text_provider_blocked_diagnostic.v1"
+}

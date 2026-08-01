@@ -1,0 +1,264 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/reception-one-yuri-internal-walkthrough-v1.json",
+  "title": "Reception One Yuri-only internal walkthrough export",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_mode",
+    "review_scope",
+    "exported_at",
+    "session",
+    "exclusions",
+    "task_reviews",
+    "final_review",
+    "summary"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "reception_one.yuri_internal_walkthrough.export.v1"
+    },
+    "evidence_mode": {
+      "const": "authored_synthetic_yuri_internal_formative"
+    },
+    "review_scope": {
+      "const": "single_owner_internal_product_critique"
+    },
+    "exported_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "session": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "review_id",
+        "reviewer_scope",
+        "acknowledgement",
+        "started_at"
+      ],
+      "properties": {
+        "review_id": {
+          "type": "string",
+          "pattern": "^yuri-walkthrough-[0-9]{14}$"
+        },
+        "reviewer_scope": {
+          "const": "yuri_internal_product_critique"
+        },
+        "acknowledgement": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "authored_synthetic_only",
+            "no_real_diary_effect",
+            "no_real_person_or_practice_details_in_notes"
+          ],
+          "properties": {
+            "authored_synthetic_only": { "const": true },
+            "no_real_diary_effect": { "const": true },
+            "no_real_person_or_practice_details_in_notes": { "const": true }
+          }
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "exclusions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "representative_participant_evidence",
+        "usability_threshold_claim",
+        "contains_real_patient_or_practice_data",
+        "contains_prompt_or_transcript_text",
+        "contains_audio_video_or_screen_recording",
+        "contains_provider_or_credential_data",
+        "contains_free_form_product_notes",
+        "appointment_write_available"
+      ],
+      "properties": {
+        "representative_participant_evidence": { "const": false },
+        "usability_threshold_claim": { "const": false },
+        "contains_real_patient_or_practice_data": { "const": false },
+        "contains_prompt_or_transcript_text": { "const": false },
+        "contains_audio_video_or_screen_recording": { "const": false },
+        "contains_provider_or_credential_data": { "const": false },
+        "contains_free_form_product_notes": { "type": "boolean" },
+        "appointment_write_available": { "const": false }
+      }
+    },
+    "task_reviews": {
+      "type": "array",
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/taskReview" }
+    },
+    "final_review": {
+      "oneOf": [
+        { "$ref": "#/$defs/finalReview" },
+        { "type": "null" }
+      ]
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tasks_available",
+        "tasks_recorded",
+        "worked",
+        "partly_worked",
+        "did_not_work",
+        "skipped",
+        "ordinary_diary_fallback_count",
+        "threshold_claim"
+      ],
+      "properties": {
+        "tasks_available": { "const": 8 },
+        "tasks_recorded": { "type": "integer", "minimum": 0, "maximum": 8 },
+        "worked": { "type": "integer", "minimum": 0, "maximum": 8 },
+        "partly_worked": { "type": "integer", "minimum": 0, "maximum": 8 },
+        "did_not_work": { "type": "integer", "minimum": 0, "maximum": 8 },
+        "skipped": { "type": "integer", "minimum": 0, "maximum": 8 },
+        "ordinary_diary_fallback_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8
+        },
+        "threshold_claim": {
+          "const": "not_applicable_internal_formative"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "taskReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "task_id",
+        "result",
+        "orientation",
+        "relative_value",
+        "ordinary_diary_fallback_used",
+        "issue_flags",
+        "product_note",
+        "recorded_at"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "reception_one.yuri_internal_walkthrough.task_review.v1"
+        },
+        "task_id": {
+          "type": "string",
+          "pattern": "^S3B-0[1-8]$"
+        },
+        "result": {
+          "enum": ["worked", "partly_worked", "did_not_work", "skipped"]
+        },
+        "orientation": {
+          "enum": ["clear", "mixed", "unclear", "not_applicable"]
+        },
+        "relative_value": {
+          "enum": [
+            "reception_one_better",
+            "about_same",
+            "ordinary_diary_better",
+            "not_compared"
+          ]
+        },
+        "ordinary_diary_fallback_used": { "type": "boolean" },
+        "issue_flags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "entry_not_obvious",
+              "wording_too_technical",
+              "scope_unclear",
+              "diary_context_lost",
+              "date_orientation_unclear",
+              "projection_less_helpful_than_grid",
+              "selection_or_proposal_unclear",
+              "back_path_unclear",
+              "visual_density",
+              "ordinary_diary_fallback_needed",
+              "task_not_supported"
+            ]
+          }
+        },
+        "product_note": {
+          "type": "string",
+          "maxLength": 1200
+        },
+        "recorded_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "finalReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "overall_value",
+        "design_partner_readiness",
+        "directions",
+        "product_note",
+        "recorded_at"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "reception_one.yuri_internal_walkthrough.final_review.v1"
+        },
+        "overall_value": {
+          "enum": [
+            "clear_advance",
+            "promising_needs_revision",
+            "not_yet_useful",
+            "not_assessed"
+          ]
+        },
+        "design_partner_readiness": {
+          "enum": [
+            "not_ready",
+            "ready_after_revision",
+            "ready_now",
+            "not_assessed"
+          ]
+        },
+        "directions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "foreground_projection_window",
+            "date_first_page_turn",
+            "bureau_workflow",
+            "text_before_push_to_talk"
+          ],
+          "properties": {
+            "foreground_projection_window": { "$ref": "#/$defs/direction" },
+            "date_first_page_turn": { "$ref": "#/$defs/direction" },
+            "bureau_workflow": { "$ref": "#/$defs/direction" },
+            "text_before_push_to_talk": { "$ref": "#/$defs/direction" }
+          }
+        },
+        "product_note": {
+          "type": "string",
+          "maxLength": 1200
+        },
+        "recorded_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "direction": {
+      "enum": ["supports", "neutral", "concern", "not_assessed"]
+    }
+  }
+}

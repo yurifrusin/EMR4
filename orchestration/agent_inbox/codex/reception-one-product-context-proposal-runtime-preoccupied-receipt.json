@@ -1,0 +1,52 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_one_exact_sydney_vertex_product_context_shaped_authored_synthetic_cell",
+  "status": "passed",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "authority_boundary": "one_authored_synthetic_product_context_shaped_gemini_25_flash_sydney_vertex_call_keyless_bernie_adc_no_fallback_no_product_data_no_write",
+  "worker_dispatch_permitted": false,
+  "source_evidence": {
+    "live_handover_current_baton": "The completed model-text sequence remains immutable and closed. This is the separately authorised product-context proposal-runtime descendant.",
+    "current_authority_allocation": "Yuri authorised continued necessary runtime tranches and previously authorised future same-lane occupied-cell retries. The new occupied authority limits this descendant to one authored-synthetic call and stops after its first admitted result.",
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-product-context-proposal-runtime-plan.md",
+      "docs/security/bernie-reception-one-product-context-proposal-runtime-threat-model-delta.md",
+      "orchestration/continuity/reception-one-product-context-proposal-runtime/runtime-policy.json",
+      "orchestration/continuity/reception-one-product-context-proposal-runtime/occupied-authority-request.json",
+      "orchestration/continuity/reception-one-product-context-proposal-runtime/provider-free-isolation-evidence.json",
+      "orchestration/continuity/reception-one-product-context-proposal-runtime/occupied-preflight-evidence.json"
+    ],
+    "protected_evidence_boundaries": "Only repository-authored synthetic names, times and typed operator metadata may enter the cell. Product-derived, real patient, health, clinical and historical data; credentials; raw responses; reasoning; confirmation; writes and product delivery remain excluded.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true
+    },
+    "gates": {
+      "continuity_graph_revision": 71,
+      "compass_map_revision": 58,
+      "compass_source_graph_revision": 71,
+      "compass_validation": "passed",
+      "provider_free_isolation": "passed",
+      "proofreader_disposition": "admit",
+      "cloud_control_preflight": "passed",
+      "provider_calls_before_occupied_gate": 0,
+      "appointment_writes": 0,
+      "fallback_permitted": false
+    }
+  }
+}

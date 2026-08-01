@@ -1,0 +1,47 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "provider_change_preattempt",
+  "planned_action": "one-shot-terra-work-cell-rehearsal",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_ariadne_terra_only_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "On 2026-07-24 Yuri narrowed the live run to Terra only and stated that the OpenAI API key had been added as a system environment variable.",
+        "The machine-level OPENAI_API_KEY presence check passed; its value was not printed, hashed or recorded.",
+        "Terra is limited to one gpt-5.6-terra Responses API provider-generating request through the prepared broker and provider-neutral work cell.",
+        "Gemini is excluded from this tranche and its single-use ledger must remain available.",
+        "AGENTS.md, the current baton and authority allocation, the active comparative plan/readiness/security documents, protected evidence and user decision boundaries, and Git refs/worktree were freshly restored.",
+        "HEAD, master, handoff/current, origin/master and origin/handoff/current remain aligned at 4974075b31035d599e081d68e3b85e04a897baa1.",
+        "The worktree remains on codex/ariadne-terra-gemini-comparative-rehearsal with the intentional untracked tranche artifacts and four unrelated Bernie receipt/runtime-state files preserved.",
+        "PII, protected holdouts, historical Diary material, PostgreSQL, GraphQL, REST/OpenAPI product commands, event feeds, live mailboxes, provider tools, human-gate actions, production, deployment and autonomous action remain closed."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

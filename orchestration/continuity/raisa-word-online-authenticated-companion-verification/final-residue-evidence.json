@@ -1,0 +1,65 @@
+{
+  "schema_version": "raisa.word_online_authenticated_companion_residue.v1",
+  "recorded_at": "2026-07-31T11:08:30Z",
+  "result": "pass_with_authorized_cloud_service_and_recoverable_document_deletions",
+  "local_residue": {
+    "task_build_directories": 0,
+    "task_local_image_tags": 0,
+    "task_containers": 0,
+    "task_networks": 0,
+    "task_temporary_docker_credential_directories": 0,
+    "task_listener_processes": 0
+  },
+  "browser_residue": {
+    "task_created_dialog_tabs": 0,
+    "task_created_cleanup_tabs": 0,
+    "pre_existing_named_synthetic_document_preserved": true
+  },
+  "word_document_cleanup": {
+    "task_created_blank_documents": 2,
+    "documents_with_authored_content": 0,
+    "moved_to_onedrive_recycle_bin": 2,
+    "recoverable": true,
+    "active_storage_residue": 0
+  },
+  "authorized_cloud_resources_retained": {
+    "project": "bernie-emr4-dev",
+    "region": "australia-southeast1",
+    "service": "raisa-office-web-dev",
+    "latest_ready_revision": "raisa-office-web-dev-00006-xf9",
+    "image_digest": "sha256:8e06f07e4efd393f38275348d8bd7b136e664c2797c399a89207b66116839324",
+    "traffic_percent_to_latest_revision": 100,
+    "minimum_instances": 0,
+    "maximum_instances": 1,
+    "invoker_iam_check_disabled": true,
+    "all_users_iam_binding_count": 0,
+    "secret_count": 0,
+    "volume_count": 0,
+    "vpc_connector_count": 0
+  },
+  "post_closeout_readonly_reverification": {
+    "recorded_at": "2026-07-31T11:20:53Z",
+    "result": "pass",
+    "latest_ready_revision": "raisa-office-web-dev-00006-xf9",
+    "image_digest": "sha256:8e06f07e4efd393f38275348d8bd7b136e664c2797c399a89207b66116839324",
+    "traffic_percent_to_latest_revision": 100,
+    "runtime_identity_project_role_count": 0,
+    "runtime_identity_user_managed_key_count": 0,
+    "invoker_iam_check_disabled": true,
+    "all_users_iam_binding_count": 0,
+    "minimum_instances": 0,
+    "maximum_instances": 1,
+    "cpu": "1",
+    "memory": "256Mi",
+    "concurrency": 20,
+    "timeout_seconds": 60,
+    "secret_count": 0,
+    "volume_count": 0,
+    "vpc_or_cloud_sql_configuration_count": 0,
+    "task_container_matches": 0,
+    "task_local_image_tag_matches": 0,
+    "task_network_matches": 0,
+    "task_temporary_directory_matches": 0
+  },
+  "credentials_or_tokens_persisted": 0
+}

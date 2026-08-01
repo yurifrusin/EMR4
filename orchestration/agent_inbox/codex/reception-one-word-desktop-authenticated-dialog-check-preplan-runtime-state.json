@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "replace_the_platform_blocked_word_online_localhost_host_check_with_one_authenticated_word_desktop_provider_free_authored_synthetic_dialog_check_using_the_same_closed_companion_contract",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_word_desktop_dialog_preplan",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is selected; the serial supervised Office desktop exercise remains Sol-owned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external reviewer or provider is selected for this provider-free Office exercise."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: the compact Word companion remains the accepted current product result at Continuity graph revision 169 and Compass map revision 150; the authenticated Word Online descendant is platform-blocked before taskpane code by Chromium Local Network Access subframe policy.",
+        "current_authority_allocation: Yuri explicitly selected the Word desktop route after the Word Online localhost check failed closed, authorising one supervised desktop sideload and authored-synthetic provider-free dialog check without changing provider, backend, database, command, write, tenant, IAM or deployment boundaries.",
+        "active_plan_and_acceptance: the accepted compact companion freezes separate auth, zero-authority launch and closed request messages, native-Diary-only detail, exact generic proofreader-admitted summary and local Word rendering; the desktop descendant must keep those contracts unchanged.",
+        "protected_evidence_boundaries: protected holdouts, historical Diary material, real or product-derived patient, health and clinical data, existing document contents, Office credentials, provider material and hidden reasoning remain excluded.",
+        "git_refs_and_worktree: HEAD is 5b1ea7952fb08eea333da0e63f166d3895ccea32 on codex/ariadne-terra-gemini-comparative-rehearsal; master, handoff/current, origin/master and origin/handoff/current are 4974075b31035d599e081d68e3b85e04a897baa1; 762 existing worktree status lines are preserved.",
+        "The Word Online task-owned loopback listener was stopped after the platform gate; the desktop check may restart only a strictly loopback listener and must remove its disposable sideload and owned processes at closeout."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

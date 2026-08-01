@@ -1,0 +1,58 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_integration_credential_cloud_mutation_or_provider_call_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan_provider_blocked_diagnosis_of_closed_vertex_http_400",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md sections 1-10 read completely, including graph 42 and Compass 29 terminal occupied result",
+    "current_authority_allocation": [
+      "Yuri: Please go ahead and run a diagnosis of the failure after closeout.",
+      "docs/ariadne-vertex-sydney-bounded-work-cell-authority.md",
+      "docs/ariadne-vertex-sydney-gemini-25-flash-authority-delta.md"
+    ],
+    "active_plan_and_acceptance": [
+      "docs/ariadne-vertex-sydney-gemini-25-cache-disabled-continuation-plan.md",
+      "docs/ariadne-vertex-sydney-gemini-25-cache-disabled-continuation-closeout.md",
+      "orchestration/continuity/ariadne-vertex-sydney-gemini-25/cache-disabled-external-audit.json",
+      "orchestration/continuity/ariadne-vertex-sydney-gemini-25/occupied-primary-independent-audit-analysis.json",
+      "orchestration/agent_inbox/codex/ariadne-vertex-sydney-gemini-25-cache-disabled-sol-review.md"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5-6; closed occupied result remains immutable; diagnosis is provider-blocked and may use only retained hashes, authored-synthetic local constructors and public official contract metadata; no raw provider error recovery, prompt transmission, credential read or refresh, provider call, occupied ledger, request revision, retry, fallback, cloud mutation, product, database, PII, clinical, command or release authority",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "worktree_entry_count": 137,
+      "protected_refs_unchanged": true
+    }
+  },
+  "diagnostic_boundary": {
+    "mode": "provider_blocked_repository_and_public_official_contract_metadata_only",
+    "historical_node_revision_permitted": false,
+    "raw_error_recovery_permitted": false,
+    "credential_or_cloud_control_access_permitted": false,
+    "provider_prompt_transmission_permitted": false,
+    "provider_inference_call_permitted": false,
+    "occupied_ledger_permitted": false,
+    "request_revision_permitted": false,
+    "retry_or_fallback_permitted": false,
+    "external_state_change_permitted": false,
+    "result_must_distinguish_proved_defect_from_ranked_hypothesis": true
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

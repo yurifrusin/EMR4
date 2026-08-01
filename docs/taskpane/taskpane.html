@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EMR</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
-  <link rel="stylesheet" href="taskpane.css?v=55" />
-  <script src="taskpane.js?v=58" defer></script>
+  <link rel="stylesheet" href="taskpane.css?v=57" />
+  <script src="hosting-policy.js?v=1" defer></script>
 </head>
 <body>
 
@@ -51,8 +51,52 @@
     </div>
   </div>
 
-  <!-- Command Center launcher -->
+  <!-- Workspace launchers -->
   <div id="command-center-bar">
+    <button id="btn-reception-one" class="btn btn-full btn-sm btn-reception-one" title="Open Reception One in the native Diary">
+      <span class="reception-one-launch-name">Reception One</span>
+      <span class="reception-one-launch-action">Open in Diary&nbsp;&rarr;</span>
+    </button>
+    <section
+      id="reception-one-companion"
+      class="reception-one-companion hidden"
+      aria-labelledby="reception-one-companion-title"
+    >
+      <div class="reception-one-companion-heading">
+        <div>
+          <h2 id="reception-one-companion-title">Reception One</h2>
+          <p>Development preview &middot; synthetic names only</p>
+        </div>
+        <span class="reception-one-companion-desk" aria-hidden="true">Bureau</span>
+      </div>
+      <label class="sr-only" for="reception-one-companion-request">
+        What should Reception One prepare in the Diary?
+      </label>
+      <textarea
+        id="reception-one-companion-request"
+        class="input reception-one-companion-request"
+        rows="2"
+        maxlength="280"
+        placeholder="What should I prepare in the Diary?"
+        aria-describedby="reception-one-companion-help reception-one-companion-status"
+      ></textarea>
+      <div class="reception-one-companion-footer">
+        <span id="reception-one-companion-help">Detailed work opens in the Diary.</span>
+        <button
+          id="btn-reception-one-prepare"
+          class="btn btn-sm btn-reception-one-prepare"
+          type="button"
+        >
+          Prepare in Diary&nbsp;&rarr;
+        </button>
+      </div>
+      <p
+        id="reception-one-companion-status"
+        class="reception-one-companion-status"
+        role="status"
+        aria-live="polite"
+      ></p>
+    </section>
     <button id="btn-command-center" class="btn btn-primary btn-full btn-sm" disabled title="Coming soon">
       🎤🖥️ Open Command Centre &amp; Scribe
     </button>
@@ -287,6 +331,31 @@
         <div class="consult-header">
           <div id="status-msg" class="status-msg">Initializing…</div>
         </div>
+
+        <section id="clinician-one-document-context" class="clinician-one-context hidden"
+                 aria-labelledby="clinician-one-context-title">
+          <div class="clinician-one-context-kicker">Clinician One</div>
+          <h2 id="clinician-one-context-title">Check selected text</h2>
+          <p>
+            In a task-created synthetic document, select the exact text you
+            want to make available as a read-only context frame.
+          </p>
+          <label class="clinician-one-context-attestation">
+            <input id="clinician-one-synthetic-attestation" type="checkbox" />
+            <span>This document and selection are authored-synthetic.</span>
+          </label>
+          <button id="btn-clinician-one-read-selection"
+                  class="btn btn-primary btn-full btn-sm" disabled>
+            Check selected text
+          </button>
+          <div id="clinician-one-context-status"
+               class="clinician-one-context-status"
+               data-state="idle"
+               role="status"
+               aria-live="polite">
+            Waiting for the synthetic-data acknowledgement.
+          </div>
+        </section>
 
         <!-- Start Consultation (F2-style; also Ctrl+Alt+N) -->
         <div class="field-group">

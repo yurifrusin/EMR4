@@ -1,0 +1,309 @@
+{
+  "schema_version": "ariadne.vertex_sydney_gemini_25_postfailure_diagnostic.v1",
+  "result": "ariadne_vertex_sydney_gemini_25_postfailure_diagnostic_pass",
+  "mode": "provider_blocked_repository_and_public_official_contracts",
+  "historical_binding": {
+    "attempt_id": "gemini-25-primary-001",
+    "terminal_rehearsal_result": "ariadne_vertex_sydney_gemini_25_occupied_rehearsal_revision_required",
+    "occupied_primary_calls": 1,
+    "occupied_retries": 0,
+    "ledger_status": "consumed",
+    "historical_request_hash": "sha256:6710af194aba6a2731008475e5509fa27ba12c8b58e995e1952faa036ecba61c",
+    "reconstructed_request_hash": "sha256:6710af194aba6a2731008475e5509fa27ba12c8b58e995e1952faa036ecba61c",
+    "request_hash_exact": true,
+    "historical_artifacts_modified": false
+  },
+  "exact_endpoint_contract": {
+    "method": "POST",
+    "hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "model_resource": "projects/bernie-emr4-dev/locations/australia-southeast1/publishers/google/models/gemini-2.5-flash",
+    "normalized_path": "/v1/projects/bernie-emr4-dev/locations/australia-southeast1/publishers/google/models/gemini-2.5-flash:generateContent",
+    "method_and_path_admitted": true,
+    "fallback": false
+  },
+  "request_structure": {
+    "top_level_fields": [
+      "contents",
+      "generationConfig",
+      "systemInstruction"
+    ],
+    "generation_config_fields": [
+      "maxOutputTokens",
+      "responseMimeType",
+      "responseSchema",
+      "temperature",
+      "thinkingConfig"
+    ],
+    "tools_present": false,
+    "cached_content_present": false,
+    "raw_prompt_retained": false,
+    "manifest": [
+      {
+        "path": "$",
+        "json_type": "object"
+      },
+      {
+        "path": "$.contents",
+        "json_type": "array"
+      },
+      {
+        "path": "$.contents[0]",
+        "json_type": "object"
+      },
+      {
+        "path": "$.contents[0].parts",
+        "json_type": "array"
+      },
+      {
+        "path": "$.contents[0].parts[0]",
+        "json_type": "object"
+      },
+      {
+        "path": "$.contents[0].parts[0].text",
+        "json_type": "string"
+      },
+      {
+        "path": "$.contents[0].role",
+        "json_type": "string"
+      },
+      {
+        "path": "$.generationConfig",
+        "json_type": "object"
+      },
+      {
+        "path": "$.generationConfig.maxOutputTokens",
+        "json_type": "integer"
+      },
+      {
+        "path": "$.generationConfig.responseMimeType",
+        "json_type": "string"
+      },
+      {
+        "path": "$.generationConfig.responseSchema",
+        "json_type": "object"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.properties",
+        "json_type": "object"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.properties.evidence_ids",
+        "json_type": "object"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.properties.evidence_ids.items",
+        "json_type": "object"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.properties.evidence_ids.items.enum",
+        "json_type": "array"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.properties.evidence_ids.items.enum[0]",
+        "json_type": "string"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.properties.evidence_ids.items.enum[1]",
+        "json_type": "string"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.properties.evidence_ids.items.type",
+        "json_type": "string"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.properties.evidence_ids.maxItems",
+        "json_type": "integer"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.properties.evidence_ids.minItems",
+        "json_type": "integer"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.properties.evidence_ids.type",
+        "json_type": "string"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.properties.risk_level",
+        "json_type": "object"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.properties.risk_level.enum",
+        "json_type": "array"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.properties.risk_level.enum[0]",
+        "json_type": "string"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.properties.risk_level.type",
+        "json_type": "string"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.properties.summary",
+        "json_type": "object"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.properties.summary.description",
+        "json_type": "string"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.properties.summary.type",
+        "json_type": "string"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.properties.total_tiles",
+        "json_type": "object"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.properties.total_tiles.enum",
+        "json_type": "array"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.properties.total_tiles.enum[0]",
+        "json_type": "integer"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.properties.total_tiles.type",
+        "json_type": "string"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.propertyOrdering",
+        "json_type": "array"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.propertyOrdering[0]",
+        "json_type": "string"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.propertyOrdering[1]",
+        "json_type": "string"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.propertyOrdering[2]",
+        "json_type": "string"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.propertyOrdering[3]",
+        "json_type": "string"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.required",
+        "json_type": "array"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.required[0]",
+        "json_type": "string"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.required[1]",
+        "json_type": "string"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.required[2]",
+        "json_type": "string"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.required[3]",
+        "json_type": "string"
+      },
+      {
+        "path": "$.generationConfig.responseSchema.type",
+        "json_type": "string"
+      },
+      {
+        "path": "$.generationConfig.temperature",
+        "json_type": "integer"
+      },
+      {
+        "path": "$.generationConfig.thinkingConfig",
+        "json_type": "object"
+      },
+      {
+        "path": "$.generationConfig.thinkingConfig.thinkingBudget",
+        "json_type": "integer"
+      },
+      {
+        "path": "$.systemInstruction",
+        "json_type": "object"
+      },
+      {
+        "path": "$.systemInstruction.parts",
+        "json_type": "array"
+      },
+      {
+        "path": "$.systemInstruction.parts[0]",
+        "json_type": "object"
+      },
+      {
+        "path": "$.systemInstruction.parts[0].text",
+        "json_type": "string"
+      }
+    ]
+  },
+  "deterministic_findings": [
+    {
+      "finding_id": "vertex_schema_enum_member_not_string",
+      "field_path": "generationConfig.responseSchema.properties.total_tiles.enum[0]",
+      "actual_json_type": "integer",
+      "required_json_type": "string",
+      "official_contract": "Schema.enum[] is repeated string",
+      "installed_proto_field_type": "TYPE_STRING",
+      "installed_proto_repeated": true,
+      "original_full_request_local_proto_parse": "failed",
+      "single_field_type_counterfactual_full_local_proto_parse": "passed",
+      "classification": "proved_deterministic_request_contract_defect"
+    }
+  ],
+  "ruled_out_by_official_contract": [
+    "publisher_model_generate_content_method_or_path_shape",
+    "contents_system_instruction_and_generation_config_top_level_shape",
+    "response_mime_type_and_response_schema_pairing",
+    "thinking_budget_zero_for_gemini_2_5_flash",
+    "provider_tool_or_cached_content_presence"
+  ],
+  "remaining_limits": [
+    "The discarded provider message prevents proving which field the server named in its historical diagnostic.",
+    "The proved enum-type defect is sufficient to make the exact retained request invalid under the official v1 contract and official local protobuf parser; it is the leading and deterministic explanation for the HTTP 400.",
+    "The single-field local counterfactual parses completely but was not sent and proves neither provider acceptance nor that no later provider/model validation would fail."
+  ],
+  "official_sources": [
+    {
+      "contract": "generate_content_method",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/reference/rest/v1/projects.locations.endpoints/generateContent",
+      "observed_rule": "POST /v1/{model}:generateContent accepts the fully qualified publisher-model resource and the retained body fields."
+    },
+    {
+      "contract": "schema_rest_type",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/reference/rest/v1/Schema",
+      "observed_rule": "Schema.enum is a repeated string field; the official INTEGER example encodes enum values as strings."
+    },
+    {
+      "contract": "structured_output_subset",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/capabilities/control-generated-output",
+      "observed_rule": "Only string enum values are supported."
+    },
+    {
+      "contract": "gemini_25_thinking",
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/thinking",
+      "observed_rule": "Gemini 2.5 Flash supports thinkingBudget 0 to turn thinking off."
+    }
+  ],
+  "local_contract_runtime": {
+    "google_cloud_aiplatform_version": "1.156.0",
+    "schema_enum_annotation": "repeated_string",
+    "network_or_provider_operation": false,
+    "credential_operation": false
+  },
+  "authority_accounting": {
+    "provider_calls": 0,
+    "credential_reads_or_refreshes": 0,
+    "cloud_control_reads": 0,
+    "prompt_transmissions": 0,
+    "occupied_ledgers_opened": 0,
+    "request_constructor_modified": false,
+    "retry_or_fallback_performed": false,
+    "external_state_changed": false,
+    "product_database_clinical_patient_command_or_release_authority": false
+  },
+  "disposition": "deterministic_defect_identified_diagnosis_only_no_retry_authority"
+}

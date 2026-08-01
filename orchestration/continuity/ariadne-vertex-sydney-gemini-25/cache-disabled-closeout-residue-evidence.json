@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.vertex_sydney_closeout_residue_evidence.v1",
+  "recorded_at": "2026-07-24T21:31:00Z",
+  "result": "ariadne_vertex_sydney_gemini_25_closeout_residue_pass",
+  "inspection_scope": "exact_task_scoped_names_and_prefixes_only",
+  "task_containers": 0,
+  "task_networks": 0,
+  "task_images": 0,
+  "task_broker_processes": 0,
+  "task_temporary_roots_or_tokens": 0,
+  "docker_socket_mounted_into_cell": false,
+  "adc_or_oauth_mounted_into_cell": false,
+  "database_or_product_mount_present": false,
+  "daemon_wide_prune_performed": false,
+  "credential_value_inspected": false,
+  "credential_value_recorded": false
+}

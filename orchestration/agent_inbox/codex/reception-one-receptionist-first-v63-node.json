@@ -1,0 +1,133 @@
+{
+  "id": "reception-one-receptionist-first-v63-form-toolkit",
+  "title": "Reception One Receptionist-first v6.3 Form Toolkit",
+  "kind": "implementation",
+  "status": "accepted",
+  "created_at": "2026-07-30T09:10:00Z",
+  "updated_at": "2026-07-30T09:35:29Z",
+  "relationships": [
+    {
+      "node_id": "reception-one-receptionist-first-v62-desk-context",
+      "relation": "builds_on"
+    }
+  ],
+  "coordinates": {
+    "thread_id": null,
+    "git_ref": "codex/ariadne-terra-gemini-comparative-rehearsal",
+    "source_head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "worktree_role": "integration"
+  },
+  "evidence": {
+    "acceptances": [
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v63-provider-free-sol-acceptance.md"
+    ],
+    "closeouts": [
+      "orchestration/continuity/reception-one-receptionist-first-v63/provider-blocked-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v63/real-isolation-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v63/occupied-preflight-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v63/pre-attempt-residue-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v63/occupied-cohort-evidence.json",
+      "orchestration/continuity/reception-one-receptionist-first-v63/occupied-final-residue-evidence.json",
+      "docs/bernie-reception-one-receptionist-first-v63-closeout.md"
+    ],
+    "findings": [
+      "orchestration/continuity/reception-one-receptionist-first-v62/occupied-final-audit-analysis.json",
+      "orchestration/continuity/reception-one-receptionist-first-v63/occupied-final-audit-analysis.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v63-final-sol-review.md"
+    ],
+    "plans": [
+      "docs/bernie-reception-one-receptionist-first-v63-form-toolkit-plan.md",
+      "orchestration/continuity/reception-one-receptionist-first-v63/runtime-policy.json",
+      "orchestration/continuity/reception-one-receptionist-first-v63/occupied-authority.json"
+    ],
+    "receipts": [
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v63-rehydration-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v63-preacceptance-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-receptionist-first-v63-preattempt-receipt.json"
+    ],
+    "tests": [
+      "scripts/reception_one_receptionist_first_v63.py",
+      "scripts/reception_one_receptionist_first_v63_cohort.py",
+      "scripts/reception_one_receptionist_first_v63_cell.py",
+      "scripts/reception_one_receptionist_first_v63_isolation.py",
+      "tests/test_reception_one_receptionist_first_v63.py"
+    ]
+  },
+  "authority": {
+    "authorized_openings": [
+      {
+        "boundary": "container-runtime",
+        "scope": "Credential-free network-none work cells for the complete twenty-four-case authored-synthetic v6.3 cohort.",
+        "source": "orchestration/continuity/reception-one-receptionist-first-v63/occupied-authority.json"
+      },
+      {
+        "boundary": "model-runtime",
+        "scope": "Gemini 2.5 Flash may complete the unchanged typed output form with a 3072 response ceiling and hidden thought content excluded.",
+        "source": "orchestration/continuity/reception-one-receptionist-first-v63/occupied-authority.json"
+      },
+      {
+        "boundary": "provider-call",
+        "scope": "Twenty-four primaries and at most one terminal second call per case through the exact Bernie keyless-ADC Sydney lane, within forty-eight calls and USD 1.",
+        "source": "orchestration/continuity/reception-one-receptionist-first-v63/occupied-authority.json"
+      }
+    ],
+    "notes": [
+      "v6.2 is immutable and consumed; v6.3 is separately versioned.",
+      "No no-show-to-DNA alias is added; an unstamped status remains clarification.",
+      "Provider, model, project, service account, keyless ADC, region, authored-synthetic, isolation, no-fallback, no-write and cost boundaries are unchanged."
+    ]
+  },
+  "contract_evidence": [
+    {
+      "contract_id": "combined-patient-practitioner-time-duration-intent",
+      "status": "satisfied",
+      "evidence": [
+        "orchestration/continuity/reception-one-receptionist-first-v63/provider-blocked-evidence.json",
+        "tests/test_reception_one_receptionist_first_v63.py"
+      ],
+      "note": "All twenty-four deterministic reference forms pass with explicit typed source-resolution guidance; occupied model performance remains pending."
+    },
+    {
+      "contract_id": "committed-reschedule-availability-reconciliation",
+      "status": "satisfied",
+      "evidence": [
+        "orchestration/continuity/reception-one-receptionist-first-v63/provider-blocked-evidence.json",
+        "orchestration/continuity/reception-one-receptionist-first-v63/real-isolation-evidence.json",
+        "tests/test_reception_one_receptionist_first_v63.py"
+      ],
+      "note": "The same freshness-bound packet is proofread in isolated cells; no product event, database or write path is opened."
+    }
+  ],
+  "decisions": [
+    {
+      "id": "authorise-reception-one-receptionist-first-v63-116",
+      "status": "accepted",
+      "summary": "Repair the response ceiling and typed form instructions without adding the unresolved no-show-to-DNA product alias, then rerun the complete cohort.",
+      "source": "orchestration/continuity/reception-one-receptionist-first-v63/occupied-authority.json"
+    },
+    {
+      "id": "accept-reception-one-receptionist-first-v63-provider-free-117",
+      "status": "accepted",
+      "summary": "Accept the twenty-four provider-free reference forms, explicit form-toolkit repair, closed no-show alias and residue-free two-turn real-isolation result.",
+      "source": "orchestration/agent_inbox/codex/reception-one-receptionist-first-v63-provider-free-sol-acceptance.md"
+    },
+    {
+      "id": "close-reception-one-receptionist-first-v63-119",
+      "status": "accepted",
+      "summary": "Close the twenty-nine-call cohort at twenty-two of twenty-four exact outcomes, preserving one proofreader-admitted non-exact study release and one no-release natural/form mismatch as distinct defects.",
+      "source": "docs/bernie-reception-one-receptionist-first-v63-closeout.md"
+    }
+  ],
+  "unresolved_gates": [
+    "A separately versioned proofreader repair is required before another occupied cohort; no further v6.3 call is permitted.",
+    "The recognized exact-time constraint must become a deterministic proofreader invariant before any product-connected model lane can be considered.",
+    "The natural receptionist response must remain bounded and agree with the typed form; it must not be dropped merely to obtain a pass.",
+    "Real/product/clinical/historical data, database access, writes, Word, voice, production, deployment and release remain closed."
+  ],
+  "claim_scope": [
+    "The occupied reused cohort proves twenty-two of twenty-four exact outcomes; one non-exact proposal-only study release and one no-release terminal remain.",
+    "The v6.3 result exposes a deterministic proofreader coverage defect and therefore is not a capability pass.",
+    "The reused cohort is development evidence, not an independent holdout.",
+    "Sydney endpoint evidence does not prove Australian physical or sovereign processing."
+  ]
+}

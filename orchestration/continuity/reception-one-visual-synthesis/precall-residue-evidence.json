@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.reception_one_visual_synthesis_residue.v1",
+  "recorded_at": "2026-07-24T09:45:25Z",
+  "result": "reception_one_visual_synthesis_precall_residue_pass",
+  "task_containers": 0,
+  "task_networks": 0,
+  "task_images": 0,
+  "task_broker_or_rehearsal_processes": 0,
+  "temporary_token_or_context_observed": false,
+  "daemon_wide_prune_performed": false,
+  "unrelated_process_or_runtime_changed": false
+}

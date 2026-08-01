@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "accept_and_close_one_supervised_provider_free_authored_synthetic_word_desktop_dialog_exchange_after_complete_disposable_cleanup",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_word_desktop_dialog_preacceptance",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker was selected; the supervised Office desktop exercise remained Sol-owned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport was selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external provider or reviewer was selected for this provider-free Office exercise."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: the accepted compact companion at Continuity graph revision 169 and Compass map revision 150 is the predecessor; the Word Online localhost attempt remains platform-blocked and immutable.",
+        "current_authority_allocation: Yuri explicitly selected the Word desktop route for one supervised provider-free authored-synthetic dialog check without provider, backend, database, command, write, tenant, IAM, deployment or release authority.",
+        "active_plan_and_acceptance: the desktop plan preserves separate auth, zero-authority launch and closed request messages, native-Diary-only detail, the exact generic proofreader-admitted summary and local Word rendering.",
+        "protected_evidence_boundaries: no existing document content, Office account or credential, raw request, screenshot, protected fixture, historical Diary material, real/product-derived patient, health or clinical data, provider material or hidden reasoning is retained.",
+        "git_refs_and_worktree: HEAD remains 5b1ea7952fb08eea333da0e63f166d3895ccea32 on codex/ariadne-terra-gemini-comparative-rehearsal; master, handoff/current, origin/master and origin/handoff/current remain 4974075b31035d599e081d68e3b85e04a897baa1; unrelated worktree changes are preserved.",
+        "The real Word desktop exchange passed after one repository-local initialization-order repair; all task-owned Word, sideload, listener, server and temporary-file residue is absent."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

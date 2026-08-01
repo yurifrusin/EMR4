@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "build_default_off_provider_free_authored_synthetic_word_companion_request_and_admitted_summary_shell_over_the_existing_native_diary_bureau",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_word_companion_preplan",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The Word companion and native Diary contract remain one tightly coupled Sol-owned product increment."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external reviewer or model provider is selected for this provider-free increment."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: the provider-free integrated Bureau baseline passes at Continuity graph revision 62 and Compass map revision 49; the later Hybrid contextual native-Diary launch foundation and Bureau post-admission hardening are accepted active descendants.",
+        "current_authority_allocation: Yuri accepted the recommended Hybrid direction and instructed work to continue; this authorises a compact provider-free Word companion that hands detailed authored-synthetic work to the existing native Diary Bureau.",
+        "active_plan_and_acceptance: the integrated Bureau, Word Hybrid contextual-launch and post-admission hardening plans preserve one authoritative native Diary, separate auth and context messages, exact date-before-projection verification, deterministic proofreader admission, proposal-only output and no silent planner fallback.",
+        "protected_evidence_boundaries: protected holdouts, historical Diary material, real or product-derived patient and clinical data, credentials, raw provider material and hidden reasoning remain excluded. The companion uses authored-synthetic local development input only.",
+        "git_refs_and_worktree: HEAD is 5b1ea7952fb08eea333da0e63f166d3895ccea32 on codex/ariadne-terra-gemini-comparative-rehearsal; master, handoff/current, origin/master and origin/handoff/current are 4974075b31035d599e081d68e3b85e04a897baa1; 742 existing worktree status lines are preserved.",
+        "The descendant may add a separately typed default-off request and generic admitted-summary exchange between Word and the native Diary. It grants no provider call, credential access, patient-context authority, command or appointment write, database access, voice, production, deployment or release authority."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

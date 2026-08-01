@@ -1,0 +1,40 @@
+{
+  "schema_version": "reception.one.shared_typed.official_provider_contract_evidence.v1",
+  "checked_at": "2026-07-30T00:14:29Z",
+  "provider_contacted": false,
+  "provider_prompt_transmitted": false,
+  "sources": [
+    {
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/2-5-flash",
+      "official": true,
+      "page_last_updated": "2026-07-22",
+      "observations": [
+        "model_id_gemini_2_5_flash",
+        "launch_stage_ga",
+        "model_availability_includes_australia_southeast1",
+        "ml_processing_includes_australia_southeast1",
+        "structured_output_supported",
+        "scheduled_discontinuation_2026_10_16"
+      ]
+    },
+    {
+      "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/samples/generativeaionvertexai-gemini-controlled-generation-response-schema-2",
+      "official": true,
+      "observations": [
+        "response_mime_type_application_json_supported",
+        "response_schema_supported",
+        "nested_array_of_objects_supported",
+        "integer_properties_supported",
+        "locational_aiplatform_endpoint_pattern_supported"
+      ]
+    }
+  ],
+  "admission": {
+    "model": "gemini-2.5-flash",
+    "location": "australia-southeast1",
+    "structured_plan_program_shape_officially_supported": true,
+    "global_endpoint_required": false,
+    "provider_or_model_substitution_required": false
+  },
+  "candid_limit": "Official documentation supports the model, Sydney location and structured-output primitives. It does not itself prove project entitlement, a successful request, Australian physical or sovereign processing, or the safety of a generated plan."
+}

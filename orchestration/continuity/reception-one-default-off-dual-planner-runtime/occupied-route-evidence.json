@@ -1,0 +1,152 @@
+{
+  "call_budget": {
+    "absolute_call_ceiling": 2,
+    "actual_provider_calls": 1,
+    "additional_call_during_recovery": false,
+    "application_cost_ceiling_usd": 1,
+    "further_call_after_admission": false
+  },
+  "candid_limit": "The occupied model, proofreader, one-use ledger and Sydney provider response passed. The first harness did not durably retain its outer HTTP response because Windows held a closed backend log handle during post-response cleanup. A zero-provider authenticated replay then proved the same route and proposal-only adapter. This composed evidence is not a second occupied call.",
+  "claim_limits": [
+    "This proves one authored-synthetic provider completion through the configured Sydney locational endpoint plus a zero-provider route/adapter recovery, not Australian physical or sovereign processing.",
+    "It does not prove real-data, production, general reliability, appointment-write, deployment or release suitability."
+  ],
+  "cleanup": {
+    "backend_process_removed": true,
+    "containers_removed": true,
+    "database_removed": true,
+    "images_removed": true,
+    "network_removed": true,
+    "post_attempt_residue_clear": true,
+    "runtime_directory_removed": true
+  },
+  "continuity_binding": {
+    "compass_revision": 133,
+    "compass_source_graph_revision": 152,
+    "graph_revision": 152
+  },
+  "data_class": "authored_synthetic",
+  "database": {
+    "appointment_write_performed": false,
+    "confirmation_performed": false,
+    "database_identifier_retained": false,
+    "model_database_access": false,
+    "post_occupied_state_matched_prior_canonical_seed": true,
+    "provider_free_replay_counts_unchanged": true,
+    "provider_free_replay_hashes_unchanged": true,
+    "trusted_backend_reads_performed": true
+  },
+  "evidence_hash": "sha256:72f7b359e81af33f0f30c0ce5bcb6e5c5beaf94d55541aa137bb1f7be2d1cfe0",
+  "explicit_exclusions": {
+    "api_key_authentication_used": false,
+    "appointment_write_or_confirmation_performed": false,
+    "cache_created": false,
+    "chain_of_thought_retained": false,
+    "deterministic_planner_fallback_used": false,
+    "global_endpoint_used": false,
+    "grounding_or_retrieval_used": false,
+    "product_delivery_performed": false,
+    "provider_tools_used": false,
+    "raw_prompt_retained": false,
+    "raw_provider_response_retained": false,
+    "real_or_product_data_used": false,
+    "regional_or_provider_fallback_used": false,
+    "service_account_key_used": false
+  },
+  "frame_audit": {
+    "context_revision": 2940668009,
+    "raw_frame_retained": false,
+    "raw_prompt_retained": false,
+    "request_sha256": "sha256:43b1cc0895dcb25df32867c511bfabe01b29b0bc03636e001a7516ebd7d24012"
+  },
+  "occupied_attempt": {
+    "api_spine_operation_id": "proposeAppointmentUpdate",
+    "duration_minutes": 45,
+    "outer_harness_interruption": "windows_closed_log_handle_cleanup_race",
+    "proofreader_disposition": "admit",
+    "proofreader_violation_paths": [],
+    "proposal_family": "resize",
+    "provider_calls": 1,
+    "provider_http_status": 200,
+    "provider_latency_ms": 5183,
+    "provider_request_hash": "sha256:9fc13a0834b57a6c5866aff7a4a589635431ffdc475f2912d7003231ff377635",
+    "provider_status": "completed",
+    "provider_usage": {
+      "candidatesTokenCount": 239,
+      "promptTokenCount": 4820,
+      "thoughtsTokenCount": 901,
+      "totalTokenCount": 5960
+    },
+    "raw_outer_http_response_retained": false,
+    "requires_human_confirmation": true,
+    "runtime_audit_ref": "runtime-957dfe6a394bb55d",
+    "safe_repairs": [],
+    "schema_hash": "sha256:365fadcc6dcb32837a89eb289efda7dda1a4f81228f574bebba96848d667886c",
+    "terminal_status": "admitted",
+    "write_performed": false
+  },
+  "provider": {
+    "api_key_authentication_used": false,
+    "authentication": "keyless_impersonated_service_account_adc",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "location": "australia-southeast1",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "provider": "google_vertex_ai",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"
+  },
+  "provider_free_route_recovery": {
+    "adapter_kind": "update_proposal",
+    "adapter_safe": true,
+    "api_spine_operation_id": "proposeAppointmentUpdate",
+    "confirmation_performed": false,
+    "freshness_verified": true,
+    "goal": "resize",
+    "http_status": 200,
+    "new_provider_audit_created": false,
+    "planner_mode": "deterministic",
+    "proposal_only": true,
+    "proposed_duration_minutes": 45,
+    "provider_calls": 0,
+    "purpose": "verify_authenticated_http_route_and_existing_proposal_only_adapter_without_another_provider_call",
+    "request_sha256": "sha256:f83c8ed81bd2f3af70fdd2448946a921e4800041c1a0875ad899683f3b45bb3f",
+    "requires_confirmation": true,
+    "result": "proposal_ready",
+    "write_performed": false
+  },
+  "recorded_at": "2026-07-30T13:45:11.532058Z",
+  "result": "reception_one_default_off_dual_planner_occupied_model_and_recovered_route_pass",
+  "runtime_audit": {
+    "all_ledgers_consumed": true,
+    "chain_of_thought_retained": false,
+    "cleanup": {
+      "base_image_state_preserved": true,
+      "broker_process_absent": true,
+      "cell_container_absent": true,
+      "cell_image_absent": true,
+      "daemon_wide_prune_performed": false,
+      "internal_network_absent": true,
+      "relay_container_absent": true,
+      "relay_image_absent": true,
+      "temporary_context_absent": true,
+      "temporary_token_absent": true
+    },
+    "exact_binding": {
+      "api_key_authentication_used": false,
+      "authentication": "keyless_impersonated_service_account_adc",
+      "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+      "location": "australia-southeast1",
+      "model_id": "gemini-2.5-flash",
+      "project": "bernie-emr4-dev",
+      "provider": "google_vertex_ai",
+      "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"
+    },
+    "ledger_count": 1,
+    "proofreader_disposition": "admit",
+    "proofreader_violation_paths": [],
+    "raw_prompt_scan_passed": true,
+    "raw_response_retained": false,
+    "safe_repairs": []
+  },
+  "schema_version": "reception.one.default_off_dual_planner.occupied_route.v1"
+}

@@ -1,0 +1,140 @@
+{
+  "schema_version": "ariadne.vertex_sydney_provider_admission_policy.v1",
+  "policy_id": "ariadne-vertex-sydney-provider-admission",
+  "status": "blocked",
+  "subject": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-3.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "automatic_fallback": false
+  },
+  "data_classes": {
+    "authored_synthetic": {
+      "admitted": true,
+      "definition": "Content deliberately authored for this rehearsal and not derived from product, patient, practice, historical, protected or external-corpus data."
+    },
+    "product_derived": {
+      "admitted": false,
+      "definition": "Any value copied, transformed, summarized or inferred from EMR4 product state, database state, logs, audit records or operational traffic."
+    },
+    "patient_or_health_information": {
+      "admitted": false,
+      "definition": "Any identified, identifiable, pseudonymized or real patient, health, clinical, Medicare, contact, appointment or practice information."
+    }
+  },
+  "geography": {
+    "australian_regional_processing": {
+      "meaning": "Provider-contractual ML inference processing within the country jurisdiction associated with australia-southeast1.",
+      "admission_requirement": "The exact model must be explicitly published as supporting ML processing in australia-southeast1 and the request must use only the locational endpoint with no fallback.",
+      "current_evidence": "The locational endpoint contract exists, but the exact Gemini 3.5 Flash model is not published as supported in australia-southeast1."
+    },
+    "regional_storage": {
+      "meaning": "Data intentionally stored at rest in a selected Google Cloud location.",
+      "admission_requirement": "Storage claims require a separately verified storage resource and location; inference endpoint selection alone is insufficient.",
+      "current_evidence": "No storage resource, cache or persisted provider payload is authorised or created by this tranche."
+    },
+    "global_endpoint": {
+      "meaning": "An endpoint without a region in the hostname that may route and process data globally.",
+      "admission_requirement": "Always reject; global endpoints provide no regional processing or data-residency guarantee.",
+      "current_evidence": "The global endpoint and every automatic fallback path are prohibited."
+    },
+    "container_effect": "constrains_local_capabilities_but_does_not_determine_remote_provider_processing_geography"
+  },
+  "provider_controls": {
+    "training": {
+      "provider_contract": "Google states that customer data is not used to train or fine-tune managed models without prior permission or instruction.",
+      "local_requirement": "No permission or instruction to train or fine-tune is granted."
+    },
+    "abuse_monitoring_retention": {
+      "provider_contract": "Google may log prompts for abuse monitoring for customers in scope unless an approved exception applies; some advanced features can have additional retention.",
+      "local_requirement": "Use authored-synthetic content only, no grounding or tools, and make no zero-data-retention claim without separately verified eligibility."
+    },
+    "request_response_logging": {
+      "provider_contract": "Request-response logging is disabled by default but can be enabled by project/model or endpoint configuration.",
+      "local_requirement": "A later preflight must verify disabled or absent configuration before content transmission."
+    },
+    "in_memory_cache": {
+      "provider_contract": "Google states that published Gemini models cache inputs, outputs and derived customer data in memory by default, isolated at project level with a 24-hour TTL and not stored at rest; the setting can be disabled at project level.",
+      "local_requirement": "Because Yuri authorised no cache creation, a later preflight must verify the exact project reports in-memory caching disabled. If that read requires broader permission or the setting is enabled, stop for Yuri without changing it."
+    }
+  },
+  "required_admission_checks": [
+    "authored_synthetic_only",
+    "provider_is_google_vertex_ai",
+    "model_is_gemini_3_5_flash",
+    "model_published_for_australia_southeast1",
+    "project_exact",
+    "impersonated_service_account_exact",
+    "keyless_adc_exact",
+    "cloud_platform_scope",
+    "prediction_only_role_and_binding",
+    "aiplatform_endpoints_predict_exact",
+    "vertex_data_access_audit_enabled",
+    "request_response_logging_disabled_or_absent",
+    "in_memory_cache_disabled",
+    "regional_endpoint_exact",
+    "no_automatic_fallback",
+    "no_api_key",
+    "no_service_account_key",
+    "no_provider_tools",
+    "cost_and_call_ceiling",
+    "isolation_and_external_audit"
+  ],
+  "rejected_routes": [
+    "generativelanguage.googleapis.com",
+    "gemini_developer_api",
+    "aiplatform.googleapis.com_global",
+    "automatic_cross_region_fallback",
+    "api_key_authentication",
+    "service_account_json_key",
+    "openai",
+    "terra",
+    "deepseek",
+    "another_provider",
+    "another_model_family",
+    "another_project",
+    "another_service_account",
+    "another_region",
+    "model_without_published_sydney_support"
+  ],
+  "claim_boundary": {
+    "independently_observed_evidence": [
+      "Official model card lists the stable model ID and supported locations.",
+      "Official per-model residency matrix leaves Gemini 3.5 Flash unsupported for Australia.",
+      "The Australia regional service hostname exists independently of support for this model.",
+      "No credential, cloud project state or provider request was inspected."
+    ],
+    "provider_contractual_residency_evidence": [
+      "Google states that locational endpoints bind ML processing to the associated broader multi-region or country jurisdiction.",
+      "Google states that global endpoints do not provide regional isolation or data-residency guarantees.",
+      "The exact per-model location matrix controls whether that general locational contract is available for a model."
+    ],
+    "allowed_claims": [
+      "gemini-3.5-flash is the current stable model identifier",
+      "the australia-southeast1 Vertex service endpoint exists",
+      "the exact model-location admission gate is blocked by current official documentation"
+    ],
+    "prohibited_claims": [
+      "Australian physical processing occurred",
+      "Australian sovereign processing is guaranteed",
+      "Australian model entitlement exists for bernie-emr4-dev",
+      "the regional endpoint can serve gemini-3.5-flash",
+      "container isolation proves remote provider geography",
+      "zero data retention applies",
+      "in-memory caching is disabled for bernie-emr4-dev",
+      "the provider call path is ready"
+    ]
+  },
+  "decision": {
+    "admitted": false,
+    "result": "ariadne_vertex_sydney_provider_admission_blocked",
+    "blocking_reasons": [
+      "gemini_3_5_flash_not_published_for_australia_southeast1"
+    ],
+    "next_action": "stop_for_yuri_without_adc_inspection_provider_call_model_substitution_or_external_cloud_change"
+  }
+}

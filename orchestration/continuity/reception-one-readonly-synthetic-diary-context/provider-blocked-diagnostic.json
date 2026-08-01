@@ -1,0 +1,13 @@
+{
+  "context_disposition": "admit",
+  "disposition": "edge_abort",
+  "raw_prompt_retained": false,
+  "raw_response_retained": false,
+  "schema_version": "reception.one.readonly_synthetic_diary_context.provider_blocked_diagnostic.v1",
+  "violation_codes": [
+    "stale_context"
+  ],
+  "violation_paths": [
+    "$.context_revision"
+  ]
+}

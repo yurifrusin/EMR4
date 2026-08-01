@@ -96,6 +96,18 @@ class Settings(BaseSettings):
     # authorize a production event runtime or any event beyond reschedule.
     reception_one_committed_event_runtime_enabled: bool = False
 
+    # Separate default-off authored-synthetic product-context proposal runtime.
+    # This does not enable the legacy Bernie provider/runtime gate. The exact
+    # practice allowlist must also contain the authenticated practice id.
+    reception_one_product_context_runtime_enabled: bool = False
+    reception_one_product_context_synthetic_practice_ids: str = ""
+    # Separate exact gate for the isolated Gemini 2.5 Flash Sydney planner.
+    # Empty paths fail closed; routine deterministic planning is unaffected.
+    reception_one_product_context_vertex_planner_enabled: bool = False
+    reception_one_product_context_vertex_authority_path: str = ""
+    reception_one_product_context_vertex_preflight_path: str = ""
+    reception_one_product_context_vertex_evidence_dir: str = ""
+
     # Raw appointment compatibility endpoint guard.
     #   "audit" - attach raw_compat_* audit evidence tags only.
     #   "header" - attach raw_compat_* audit evidence tags AND set

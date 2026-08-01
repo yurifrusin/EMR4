@@ -1,0 +1,89 @@
+{
+  "absolute_continuation_call_ceiling": 2,
+  "actual_provider_calls": 1,
+  "all_cleanup_passed": true,
+  "all_ledgers_consumed": true,
+  "continuity_binding": {
+    "compass_revision": 96,
+    "graph_revision": 109
+  },
+  "contract_changed": false,
+  "evidence_hash": "sha256:c013aa78760d847bb95efd6332899b502e68d9d9fdd4dc58942301b295433c8d",
+  "explicit_exclusions": {
+    "api_key_information_recorded": false,
+    "appointment_write": false,
+    "chain_of_thought_recorded": false,
+    "credential_or_token_recorded": false,
+    "human_or_product_delivery": false,
+    "natural_response_parsed_into_form": false,
+    "product_or_database_access": false,
+    "provider_or_regional_fallback": false,
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false
+  },
+  "historical_failure": {
+    "case_code": "b-move-shift",
+    "ledger_consumed": true,
+    "provider_status": "response_rejected_before_candidate",
+    "reason_code": "provider_text_not_json",
+    "release": null
+  },
+  "incremental_cost_ceiling_usd": 1,
+  "observation": {
+    "actual_provider_calls": 1,
+    "admitted_operator_ids": [],
+    "case_code": "b-move-shift",
+    "cleanup_passed": true,
+    "correction_used": false,
+    "exact_binding": {
+      "api_key_authentication_used": false,
+      "authentication": "keyless_impersonated_service_account_adc",
+      "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+      "location": "australia-southeast1",
+      "model_id": "gemini-2.5-flash",
+      "project": "bernie-emr4-dev",
+      "provider": "google_vertex_ai",
+      "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"
+    },
+    "expected_goal": "move",
+    "expected_proposal_family": "move",
+    "expected_proposal_release": true,
+    "expected_safe_outcome": false,
+    "final_proofreader_disposition": null,
+    "final_violation_codes": [
+      "provider_text_not_json"
+    ],
+    "operator_note": null,
+    "parent_audit_chain": {
+      "event_count": 4,
+      "terminal_hash": "sha256:c5365c71fefe6a5da347d25ed3336cd03802e43e197a4cf6d42d68d22f5fa0ca",
+      "valid": true
+    },
+    "primary_exact_body_accepted": false,
+    "primary_proofreader_disposition": null,
+    "primary_violation_codes": [
+      "provider_text_not_json"
+    ],
+    "provider_outcomes": [
+      {
+        "bounded_error": {
+          "field_paths": [],
+          "reason_code": "provider_text_not_json"
+        },
+        "http_status": 200,
+        "latency_ms": 8023,
+        "status": "response_rejected_before_candidate",
+        "usage": {}
+      }
+    ],
+    "receptionist_output": null,
+    "release": null,
+    "source_case_id": null,
+    "terminal_status": "terminal_no_release",
+    "typed_program": null
+  },
+  "provider_blocked_evidence_hash": "sha256:62a896e29e8702ccbee06d453a7c6117ae797e5c2176b16ec502204233f5a908",
+  "result": "reception_one_receptionist_first_v61_continuation_fail_closed",
+  "schema_version": "reception.one.receptionist_first_v61.pre_schema_continuation.v1",
+  "source": "new_occupied_dialogue"
+}

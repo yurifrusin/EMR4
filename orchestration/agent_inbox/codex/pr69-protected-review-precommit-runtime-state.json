@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_pr69_protected_review_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri authorised completing PR 69 protected review and moving to the provider-free authored-synthetic Office cookie-compatibility tranche.",
+        "Three unresolved note-severity CodeQL review threads received behavior-preserving fixes and 100 selected shared-auth tests pass.",
+        "The immutable runtime-foundation historical evidence equality node was excluded because its accepted artifact hashes the repaired source; that evidence was not regenerated.",
+        "PR 69 task HEAD and origin were aligned at 2d63dcef72cfdc9c3a2433c5e876fdfc7ea8d3bd before this review-follow-up commit.",
+        "Master and handoff/current, local and origin, remain aligned at 4974075b31035d599e081d68e3b85e04a897baa1.",
+        "Concurrent branding assets remain untracked, untouched and excluded from PR 69. Their later use in UI renders is authorised, but public rename, deployment, release, domain and trademark actions remain closed."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external reviewer is assigned for this mechanical review cleanup."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker is assigned for this mechanical review cleanup."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude model or Claude Code transport is selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

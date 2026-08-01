@@ -1,0 +1,49 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "implement_verify_and_conditionally_occupy_the_exact_reception_one_bureau_vertex_model_text_lane",
+  "status": "passed",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "authority_boundary": "one_exact_conditional_authored_synthetic_gemini_2_5_flash_sydney_vertex_call_after_all_provider_blocked_isolation_adc_entitlement_cache_logging_and_audit_gates_pass",
+  "worker_dispatch_permitted": false,
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md names the accepted provider-free Bureau Typed Plan Protocol at Continuity graph revision 64 and Compass map revision 51; historical occupied authorities and ledgers remain consumed.",
+    "current_authority_allocation": [
+      "Yuri directly authorised continuation through and past the occupied Vertex gate in the active session on 2026-07-29.",
+      "orchestration/continuity/reception-one-bureau-model-text-lane/occupied-authority-request.json records the exact incorporated boundary.",
+      "No product-derived, patient, health, clinical or historical data; database; command; write; deployment; release; commit; push or protected-ref authority is allocated."
+    ],
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-bureau-model-text-lane-provider-blocked-plan.md",
+      "docs/security/bernie-reception-one-bureau-model-text-lane-threat-model-delta.md",
+      "orchestration/continuity/reception-one-bureau-model-text-lane/occupied-authority-request.json",
+      "docs/bernie-reception-one-bureau-typed-plan-protocol-plan.md",
+      "docs/bernie-reception-one-bureau-typed-plan-protocol-design.md",
+      "docs/bernie-reception-one-bureau-typed-plan-protocol-closeout.md",
+      "docs/ariadne-bounded-cognitive-work-cell-protocol-design.md",
+      "docs/ariadne-vertex-sydney-gemini-25-repaired-request-run-closeout.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/access_ai_api_design.md"
+    ],
+    "protected_evidence_boundaries": "Holdouts and raw historical Diary material remain sealed. The lane is authored-synthetic, proposal-only, proofreader-gated, no-fallback and no-product-delivery. No credential may enter the cell and no raw prompt, response, provider error or reasoning may enter durable audit.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "worktree_entries_at_rehydration": 255,
+      "protected_refs_unchanged": true
+    }
+  }
+}

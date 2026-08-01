@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "bind_the_frozen_cost_bounded_explicit_selection_occupied_retry_plan_to_continuity_162_and_compass_143_before_any_provider_call",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_preplan_review",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external worker is selected for the serial occupied browser and disposable database sequence."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external peer worker is selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: the accepted explicit-selection retry-readiness node at Continuity 161 / Compass 142 is the direct predecessor.",
+        "current_authority_allocation: the fresh Yuri authority permits progress-bearing calls and autonomous post-success continuation while cumulative accounted and reserved provider cost remains below USD 1.",
+        "active_plan_and_acceptance: docs/bernie-reception-one-bureau-cost-bounded-occupied-retry-plan.md, its threat-model delta, occupied authority and cost policy freeze the exact browser, Vertex, proofreader, proposal-only, audit, cost and stop contracts.",
+        "protected_evidence_boundaries: sealed holdouts, historical Diary material, real/product/patient/health/clinical data, confirmation, writes, Word, voice, participants, production, deployment and release remain closed.",
+        "git_refs_and_worktree: HEAD remains 5b1ea7952fb08eea333da0e63f166d3895ccea32; master, handoff/current, origin/master and origin/handoff/current remain 4974075b31035d599e081d68e3b85e04a897baa1; unrelated dirty-worktree entries remain preserved.",
+        "Official Google Cloud pricing retrieved 2026-07-31 fixes USD 0.30/M input and USD 2.50/M response-plus-reasoning output. The predecessor call accounts for USD 0.0038049 and every new call must first reserve USD 0.02."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

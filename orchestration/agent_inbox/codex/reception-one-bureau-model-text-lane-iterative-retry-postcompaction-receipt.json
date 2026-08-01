@@ -1,0 +1,52 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "bind_and_execute_the_authorised_compact_wire_vertex_retry_sequence",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md names the fail-closed Reception One Bureau Model Text Lane at Continuity graph revision 66 and Compass map revision 53; its compact wire repair is provider-unvalidated.",
+    "current_authority_allocation": [
+      "Yuri expressly authorised the compact-wire retry and future retries of the same occupied Vertex cell until the work reaches a positive conclusion.",
+      "The authority preserves Gemini 2.5 Flash, bernie-emr4-dev, the exact Bernie service account, keyless impersonated ADC, australia-southeast1, the Sydney locational endpoint, authored-synthetic input, isolation, deterministic proofreader, external audit, no fallback, and no product or write authority.",
+      "Each call requires a distinct consumed one-use ledger, the cumulative application cost ceiling remains USD 1, and calls stop immediately after the first admitted proofreader result.",
+      "GPT Sol owns this tightly coupled execution; no external worker or subagent is selected."
+    ],
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-bureau-model-text-lane-provider-blocked-plan.md",
+      "docs/bernie-reception-one-bureau-model-text-lane-provider-blocked-closeout.md",
+      "docs/bernie-reception-one-bureau-model-text-lane-occupied-closeout.md",
+      "docs/bernie-reception-one-bureau-model-text-lane-postfailure-diagnostic-plan.md",
+      "docs/bernie-reception-one-bureau-model-text-lane-postfailure-diagnostic-closeout.md",
+      "docs/security/bernie-reception-one-bureau-model-text-lane-threat-model-delta.md",
+      "orchestration/agent_inbox/codex/reception-one-bureau-model-text-lane-sol-acceptance.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "orchestration/access_ai_api_design.md",
+      "orchestration/bernie_release_gates.md"
+    ],
+    "protected_evidence_boundaries": "Protected holdouts and raw historical Diary material remain sealed. Product-derived, patient, health, clinical and historical data; product/database context; confirmation; commands; appointment writes; voice; participants; production; deployment; release; commit; push and protected-ref movement remain closed.",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "worktree_entries_at_rehydration": 277,
+      "protected_refs_unchanged": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.comparative_single_use_ledger.v1",
+  "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+  "lane_id": "gemini",
+  "model_id": "gemini-3.5-flash",
+  "attempt_id": "generated-attempt-001",
+  "state": "available",
+  "maximum_provider_calls": 1,
+  "retry_authorised": false
+}

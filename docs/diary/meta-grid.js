@@ -7,6 +7,17 @@
   const EVENT_POLL_INTERVAL_MS = 1800;
   const EVENT_ATTENTION_LIMIT = 100;
   const EVENT_SNOOZE_MS = 5 * 60 * 1000;
+  const REQUEST_INPUT_MIN_HEIGHT_PX = 52;
+  const REQUEST_INPUT_MAX_HEIGHT_PX = 96;
+  const WORD_COMPANION_ALLOWED_FAMILIES = new Set([
+    "focused_schedule_lane",
+    "patient_timeline",
+    "availability_slots",
+    "aligned_comparison",
+    "ordinary_overview",
+    "clarification",
+    "proposal_review"
+  ]);
   const bridge = window.EMR4DiaryMetaGridBridge;
 
   if (!bridge) {
@@ -16,17 +27,29 @@
 
   const elements = {
     host: document.getElementById("bernie-meta-grid"),
+    shell: document.querySelector("#bernie-meta-grid .meta-grid-shell"),
     launch: document.getElementById("btn-meta-grid-launch"),
     close: document.getElementById("meta-grid-close"),
+    expand: document.getElementById("meta-grid-expand"),
+    returnToDiary: document.getElementById("meta-grid-return"),
+    bureauStatus: document.getElementById("meta-grid-bureau-status"),
+    bureauProgress: document.querySelector(".meta-grid-bureau-progress span"),
     form: document.getElementById("meta-grid-request-form"),
     request: document.getElementById("meta-grid-request"),
+    plannerControl: document.getElementById("meta-grid-planner-control"),
+    plannerMode: document.getElementById("meta-grid-planner-mode"),
+    plannerProvenance: document.getElementById("meta-grid-planner-provenance"),
     privacy: document.getElementById("meta-grid-privacy"),
     interruptionTest: document.getElementById("meta-grid-interruption-test"),
     privacyBanner: document.getElementById("meta-grid-privacy-banner"),
     back: document.getElementById("meta-grid-back"),
     overview: document.getElementById("meta-grid-overview"),
     explain: document.getElementById("meta-grid-explain"),
+    scopeHeading: document.getElementById("meta-grid-scope-heading"),
     scope: document.getElementById("meta-grid-scope-summary"),
+    intentTokens: document.getElementById("meta-grid-intent-tokens"),
+    conversationRequest: document.getElementById("meta-grid-conversation-request"),
+    conversationResponse: document.getElementById("meta-grid-conversation-response"),
     omissions: document.getElementById("meta-grid-omissions"),
     freshness: document.getElementById("meta-grid-freshness"),
     state: document.getElementById("meta-grid-state"),
@@ -54,18 +77,30 @@
     rootHistory: document.getElementById("meta-grid-root-history")
   };
 
+  function focusCanvasWithoutWindowScroll() {
+    elements.canvas?.focus({ preventScroll: true });
+    if (elements.shell) elements.shell.scrollTop = 0;
+  }
+
   const state = {
     current: null,
     trail: [],
     recentRoots: [],
     selectedItem: null,
+    selectedAppointment: null,
     proposalResult: null,
     patientContexts: new Map(),
     private: false,
     interrupted: false,
     comparisonIndex: 0,
     isOpen: false,
+    busy: false,
     requestSequence: 0,
+    plannerUiEnabled: false,
+    plannerMode: "deterministic",
+    handledLaunchCorrelationIds: new Set(),
+    wordLaunchTasks: new Map(),
+    consumedWordCompanionRequestIds: new Set(),
     eventRuntime: {
       cursor: null,
       enabled: null,
@@ -81,41 +116,69 @@
 
   const stateCopy = {
     overview: {
-      label: "Overview",
-      heading: "Ordinary Diary overview remains the safe fallback",
-      explanation: "This summary is read-only. Return to the full Diary whenever spatial context is more useful."
+      label: "Diary",
+      heading: "Today’s Diary is ready",
+      explanation: "This is a focused summary. Return to the Diary whenever the full day is more useful."
     },
     answer: {
-      label: "Answer",
-      heading: "Current Diary facts for this request",
-      explanation: "The view is a reversible projection over a fresh authorised read."
+      label: "Found",
+      heading: "Here’s what I found",
+      explanation: "Reception One checked the current Diary before preparing this view."
     },
     selection_only: {
-      label: "Selection",
-      heading: "A slot is selected; nothing has been booked",
-      explanation: "Selection is staff input only. Add a patient to prepare a proposal for review."
+      label: "Selected — not reserved",
+      heading: "That time is selected",
+      explanation: "Add the patient to prepare a proposal. Nothing has been booked."
     },
     proposal_not_committed: {
-      label: "Proposal · not committed",
-      heading: "Review the exact proposal before any confirmation handoff",
-      explanation: "The meta-grid cannot confirm an appointment. The existing booking review owns that explicit step."
+      label: "Proposal only — nothing booked",
+      heading: "Ready for you to review",
+      explanation: "Reception One cannot confirm this appointment. The normal booking review owns that step."
     },
     clarification_required: {
-      label: "Clarification needed",
-      heading: "One detail needs to be made unambiguous",
-      explanation: "No person or command target has been silently selected."
+      label: "I need one detail",
+      heading: "Which one did you mean?",
+      explanation: "Reception One will not guess between people, dates or clinicians."
     },
     reconciliation_required: {
-      label: "Refresh required",
-      heading: "This projection may be stale after an interruption",
-      explanation: "Patient details remain hidden and proposal preparation is disabled until a fresh scoped read completes."
+      label: "Checking the Diary",
+      heading: "This view needs a fresh check",
+      explanation: "Patient details remain hidden and proposal preparation waits for the current Diary."
+    },
+    planner_reselection_required: {
+      label: "Planner changed",
+      heading: "Choose the appointment again",
+      explanation: "The previous proposal was cleared. Select the exact appointment before submitting this request with the new planner."
     },
     blocked: {
-      label: "Blocked",
-      heading: "This request cannot be shown safely",
-      explanation: "Change the scope, clarify the request or return to the ordinary Diary."
+      label: "I need one detail",
+      heading: "I couldn’t prepare that view",
+      explanation: "Try a clearer person, date or clinician, or return to the Diary."
     }
   };
+
+  const viewLabels = Object.freeze({
+    ordinary_overview: "Diary overview",
+    focused_schedule_lane: "Clinician’s day",
+    patient_timeline: "Patient appointments",
+    availability_slots: "Available times",
+    aligned_comparison: "Clinician comparison",
+    proposal_review: "Proposal review",
+    clarification: "Clarification"
+  });
+
+  const triggerLabels = Object.freeze({
+    conversation: "Your request",
+    touch: "Your selection",
+    keyboard: "Your keyboard selection",
+    committed_event: "A current Diary change",
+    system_freshness: "A fresh Diary check"
+  });
+
+  function setBureauStatus(message, phase = "ready") {
+    if (elements.bureauStatus) elements.bureauStatus.textContent = message;
+    elements.host?.setAttribute("data-bureau-phase", phase);
+  }
 
   function createElement(tag, className, text) {
     const node = document.createElement(tag);
@@ -174,7 +237,7 @@
   }
 
   function minutesFromTime(value) {
-    const match = String(value || "").match(/^(\d{1,2}):(\d{2})$/);
+    const match = String(value || "").match(/^(\d{1,2}):(\d{2})(?::\d{2})?$/);
     if (!match) return null;
     const hours = Number(match[1]);
     const minutes = Number(match[2]);
@@ -381,6 +444,7 @@
     parentProjectionId,
     rootRequest,
     evidenceMode,
+    plannerProvenance = null,
     proposalResult = null
   }) {
     return {
@@ -418,6 +482,7 @@
       },
       evidence_mode: evidenceMode || snapshot().evidence_mode,
       root_request: rootRequest || "",
+      planner_provenance: plannerProvenance,
       proposal_result: proposalResult
     };
   }
@@ -440,6 +505,7 @@
       rememberRoot();
       state.trail = [];
       state.selectedItem = null;
+      state.selectedAppointment = null;
       state.proposalResult = null;
       state.comparisonIndex = 0;
       state.eventRuntime.cue = null;
@@ -447,12 +513,22 @@
       state.trail.push(state.current);
     }
     state.current = projection;
+    elements.host?.setAttribute("data-family", projection.family || "ordinary_overview");
+    elements.host?.setAttribute("data-projection-state", projection.state || "answer");
     if (!["selection_only", "proposal_not_committed"].includes(projection.state)) {
       state.selectedItem = null;
     }
     state.proposalResult = projection.proposal_result || null;
     render();
-    if (focusCanvas) elements.canvas?.focus();
+    if (!state.busy) {
+      setBureauStatus(
+        ["clarification_required", "blocked"].includes(projection.state)
+          ? "I need one detail"
+          : "Checked against the Diary",
+        ["clarification_required", "blocked"].includes(projection.state) ? "clarify" : "ready"
+      );
+    }
+    if (focusCanvas) focusCanvasWithoutWindowScroll();
   }
 
   function clarificationProjection(message, candidates, rootRequest, { rootIntentId = null, parentProjectionId = null } = {}) {
@@ -507,7 +583,7 @@
       projectionState: "overview",
       scope,
       scopeSummary: `${dateLabel(current.date)} · ${current.location_display} · ordinary overview`,
-      omissions: ["Compact summary only; full spatial grid remains available"],
+      omissions: ["Compact summary only; the full Diary remains available"],
       freshnessSource: current.evidence_mode,
       freshnessReason: "Current loaded Diary read",
       items,
@@ -612,11 +688,15 @@
       location_id: current.location_id
     });
     const items = appointmentItems(rows.filter(item => !["Cancelled", "NoShow", "DNA"].includes(item.status)));
+    const practitioners = [...new Set(items.map(item => item.practitioner_display).filter(Boolean))];
+    const scopeSummary = practitioners.length === 1
+      ? `${patient.display_name} with ${practitioners[0]}`
+      : `${patient.display_name}'s upcoming appointments`;
     return newProjection({
       family: "patient_timeline",
       projectionState: "answer",
       scope,
-      scopeSummary: `${patient.display_name} · upcoming appointments · ${current.location_display}`,
+      scopeSummary,
       omissions: ["Past, cancelled and DNA appointments hidden", "Future horizon limited to two years"],
       freshnessSource: current.evidence_mode,
       freshnessReason: "Bounded patient appointment read",
@@ -730,6 +810,274 @@
     return projection;
   }
 
+  async function buildTypedProductContextProjection(requestText) {
+    if (typeof bridge.composeProductContext !== "function") return null;
+    const source = normaliseText(requestText);
+    const requestedPlannerMode = state.plannerUiEnabled
+      ? state.plannerMode
+      : "deterministic";
+    const selectedAppointment = state.selectedAppointment || (() => {
+      const matches = (state.current?.items || []).filter(item => (
+        item.kind === "appointment"
+        && (!item.patient_display || source.includes(normaliseText(item.patient_display)))
+        && (!item.practitioner_display || source.includes(normaliseText(item.practitioner_display)))
+      ));
+      return matches.length === 1 ? matches[0] : null;
+    })();
+    const payload = await bridge.composeProductContext({
+      instruction: requestText,
+      reference_date: snapshot().date,
+      surface_id: "diary-main",
+      correlation_id: secureId("synthetic-correlation"),
+      planner_mode: requestedPlannerMode,
+      selected_appointment_id: selectedAppointment?.id || null
+    });
+    if (!payload) return null;
+    if (payload.result === "clarification_required") {
+      return clarificationProjection(payload.summary, [], requestText);
+    }
+    if (payload.result !== "proposal_ready") {
+      return newProjection({
+        family: "clarification",
+        projectionState: "blocked",
+        scope: baseScope(),
+        scopeSummary: "The typed plan did not pass the release gate",
+        omissions: ["No draft plan or partial result displayed"],
+        freshnessSource: "live_local_typed_product_context_proposal",
+        freshnessReason: "Deterministic proofreader failed closed",
+        items: [],
+        operation: "clarify",
+        trigger: "conversation",
+        reason: payload.summary,
+        changedDimensions: ["typed_plan_disposition"],
+        posture: "none",
+        operationalCommandAvailable: false,
+        rootRequest: requestText
+      });
+    }
+
+    const responsePlannerMode = payload.planner_mode === "isolated_vertex"
+      ? "isolated_vertex"
+      : payload.planner_mode === "deterministic"
+        ? "deterministic"
+        : null;
+    const providerCalls = Number.isInteger(payload.provider_calls)
+      ? payload.provider_calls
+      : null;
+    const runtimeAuditRef = (
+      typeof payload.runtime_audit_ref === "string"
+      && /^[A-Za-z0-9._:-]{3,100}$/.test(payload.runtime_audit_ref)
+    )
+      ? payload.runtime_audit_ref
+      : null;
+    const provenanceContractAdmitted = (
+      payload.review?.disposition === "admit"
+      && responsePlannerMode === requestedPlannerMode
+      && (
+        (
+          requestedPlannerMode === "deterministic"
+          && providerCalls === 0
+          && runtimeAuditRef === null
+        )
+        || (
+          requestedPlannerMode === "isolated_vertex"
+          && providerCalls === 1
+          && runtimeAuditRef !== null
+        )
+      )
+    );
+    if (!provenanceContractAdmitted) {
+      return newProjection({
+        family: "clarification",
+        projectionState: "blocked",
+        scope: baseScope(),
+        scopeSummary: "The proposal did not match the requested planner contract",
+        omissions: ["No proposal, provenance or partial result displayed"],
+        freshnessSource: "live_local_typed_product_context_proposal",
+        freshnessReason: "Planner, proofreader or provenance binding failed closed",
+        items: [],
+        operation: "clarify",
+        trigger: "system_freshness",
+        reason: "The admitted proposal boundary could not be verified.",
+        changedDimensions: ["planner_contract"],
+        posture: "none",
+        operationalCommandAvailable: false,
+        rootRequest: requestText
+      });
+    }
+
+    const practitionerMatches = (snapshot().practitioners || []).filter(
+      item => normaliseText(item.display_name) === normaliseText(payload.practitioner_display)
+    );
+    const patientRows = payload.patient_display
+      ? await bridge.searchPatients(payload.patient_display)
+      : [];
+    const patientMatches = patientRows.filter(
+      item => normaliseText(item.display_name) === normaliseText(payload.patient_display)
+    );
+    if (practitionerMatches.length !== 1 || patientMatches.length !== 1) {
+      return clarificationProjection(
+        "The admitted typed plan could not be bound uniquely to the current Diary.",
+        [],
+        requestText
+      );
+    }
+
+    const practitioner = practitionerMatches[0];
+    const patient = rememberPatient(patientMatches[0]);
+    const runtimeProvenance = {
+      planner_mode: responsePlannerMode,
+      proofreader_disposition: "admit",
+      provider_calls: providerCalls,
+      runtime_audit_ref: runtimeAuditRef
+    };
+    const slots = payload.candidate_slots || [];
+    const selected = payload.selected_appointment;
+    if (["resize", "cancel"].includes(payload.goal) && selected) {
+      const proposedDuration = payload.proposed_duration_minutes;
+      const changeLabel = payload.goal === "cancel"
+        ? "Cancellation review"
+        : `Change duration to ${proposedDuration} minutes`;
+      const item = {
+        id: selected.appointment_handle,
+        kind: "appointment",
+        display: `${timeLabel(selected.start_time_local)}\u2013${timeLabel(addHours(selected.start_time_local, selected.duration_minutes))}`,
+        secondary: `${payload.patient_display} \u00b7 ${selected.status}`,
+        tertiary: changeLabel,
+        date: selected.appointment_date,
+        starts_at: selected.start_time_local,
+        ends_at: addHours(selected.start_time_local, selected.duration_minutes),
+        patient_display: payload.patient_display,
+        practitioner_display: payload.practitioner_display,
+        status: selected.status,
+        proposed_change: changeLabel,
+        sensitive: true
+      };
+      const projection = newProjection({
+        family: "proposal_review",
+        projectionState: "proposal_not_committed",
+        scope: {
+          ...baseScope(),
+          patient_ids: [patient.id],
+          practitioner_ids: [practitioner.id],
+          date_from: selected.appointment_date,
+          date_to: selected.appointment_date,
+          time_from: selected.start_time_local,
+          time_to: addHours(selected.start_time_local, selected.duration_minutes),
+          duration_minutes: proposedDuration || selected.duration_minutes
+        },
+        scopeSummary: `${payload.patient_display} \u00b7 ${payload.practitioner_display} \u00b7 ${changeLabel}`,
+        omissions: [
+          "Proposal review only; the appointment is unchanged",
+          "A separate staff confirmation would be required",
+          "Only proofreader-admitted fields displayed"
+        ],
+        freshnessSource: "live_local_typed_product_context_proposal",
+        freshnessReason: "Backend proposal adapter revalidated current authored-synthetic Diary truth",
+        items: [item],
+        affordances: ["back", "reset", "explain"],
+        operation: "prepare_proposal",
+        trigger: "conversation",
+        reason: "Typed plan, deterministic proofreader and backend proposal adapter",
+        changedDimensions: payload.goal === "cancel" ? ["cancellation_review"] : ["duration"],
+        posture: "proposal_only",
+        operationalCommandAvailable: false,
+        rootRequest: requestText,
+        evidenceMode: "live_local_typed_product_context_proposal",
+        plannerProvenance: runtimeProvenance
+      });
+      projection.typed_plan_review = payload.review;
+      projection.adapter_review = payload.adapter_review;
+      projection.typed_plan_request_id = payload.request_id;
+      return projection;
+    }
+    const duration = slots[0]?.duration_minutes || DEFAULT_DURATION_MINUTES;
+    const slotStarts = slots.map(slot => String(slot.start_time_local).slice(0, 5));
+    const slotEnds = slots.map(slot => addHours(slot.start_time_local, slot.duration_minutes));
+    const scope = {
+      ...baseScope(),
+      patient_ids: [patient.id],
+      practitioner_ids: [practitioner.id],
+      date_from: slots[0]?.appointment_date || resolveDate(requestText, snapshot().date),
+      date_to: slots[0]?.appointment_date || resolveDate(requestText, snapshot().date),
+      time_from: slotStarts.sort()[0] || "08:00",
+      time_to: slotEnds.sort().at(-1) || "17:00",
+      duration_minutes: duration
+    };
+    const items = slots.map(slot => {
+      const warningLabels = (slot.warning_codes || []).map(code => (
+        code === "no_reservation"
+          ? "Selection does not reserve this time"
+          : code.replaceAll("_", " ")
+      ));
+      const rawCandidate = {
+        appointment_date: slot.appointment_date,
+        start_time_local: slot.start_time_local,
+        duration_minutes: slot.duration_minutes,
+        warnings: (slot.warning_codes || []).map((code, index) => ({
+          code,
+          message: warningLabels[index]
+        })),
+        candidate_freshness_id: slot.slot_handle
+      };
+      return {
+        id: slot.slot_handle,
+        kind: "available_slot",
+        display: `${timeLabel(slot.start_time_local)}\u2013${timeLabel(addHours(slot.start_time_local, slot.duration_minutes))}`,
+        secondary: `${practitioner.display_name} \u00b7 ${slot.duration_minutes} minutes \u00b7 available at read time`,
+        tertiary: warningLabels.join(" \u00b7 "),
+        date: slot.appointment_date,
+        starts_at: slot.start_time_local,
+        ends_at: addHours(slot.start_time_local, slot.duration_minutes),
+        practitioner_id: practitioner.id,
+        practitioner_display: practitioner.display_name,
+        location_id: snapshot().location_id || practitioner.location_id || null,
+        location_display: snapshot().location_display,
+        duration_minutes: slot.duration_minutes,
+        patient_display: patient.display_name,
+        selectable: true,
+        raw_candidate: rawCandidate
+      };
+    });
+    const isMove = payload.goal === "move";
+    const isSqueeze = payload.goal === "squeeze_in_assessment";
+    const projection = newProjection({
+      family: "availability_slots",
+      projectionState: "answer",
+      scope,
+      scopeSummary: `${patient.display_name} \u00b7 ${practitioner.display_name} \u00b7 ${dateLabel(scope.date_from)} \u00b7 ${scope.duration_minutes} minutes`,
+      omissions: [
+        isMove
+          ? "Reschedule options only; the selected appointment is unchanged"
+          : isSqueeze
+            ? "Manual squeeze-in review only; no overbooking or appointment movement"
+            : "Typed proposal only; nothing reserved or booked",
+        "Only proofreader-admitted fields displayed"
+      ],
+      freshnessSource: "live_local_typed_product_context_proposal",
+      freshnessReason: "Backend typed plan admitted against current authored-synthetic Diary context",
+      items,
+      affordances: ["select", "back", "reset", "explain"],
+      operation: "project",
+      trigger: "conversation",
+      reason: "Backend typed plan, deterministic proofreader and fresh proposal adapter",
+      changedDimensions: isMove
+        ? ["selected_appointment", "date", "candidate_slots"]
+        : isSqueeze
+          ? ["patient", "practitioner", "squeeze_in_review"]
+          : ["patient", "practitioner", "date", "candidate_slots"],
+      posture: "selection_only",
+      operationalCommandAvailable: false,
+      rootRequest: requestText,
+      evidenceMode: "live_local_typed_product_context_proposal",
+      plannerProvenance: runtimeProvenance
+    });
+    projection.typed_plan_review = payload.review;
+    projection.adapter_review = payload.adapter_review;
+    projection.typed_plan_request_id = payload.request_id;
+    return projection;
+  }
+
   async function buildComparison(practitioners, requestText, context = {}) {
     const current = snapshot();
     const scope = { ...baseScope() };
@@ -804,11 +1152,12 @@
   function selectionProjection(item, trigger = "touch", sourceProjection = state.current, context = {}) {
     const current = sourceProjection;
     const items = current.items.map(existing => ({ ...existing, selected: existing.id === item.id }));
+    const baseScopeSummary = String(current.scope_summary || "").replace(/(?: · [^·]+ selected)+$/, "");
     return newProjection({
       family: current.family,
       projectionState: "selection_only",
       scope: { ...current.scope },
-      scopeSummary: `${current.scope_summary} · ${timeLabel(item.starts_at)} selected`,
+      scopeSummary: `${baseScopeSummary} · ${timeLabel(item.starts_at)} selected`,
       omissions: [...current.omissions, "Nothing is reserved or booked"],
       freshnessSource: current.freshness.source,
       freshnessReason: current.freshness.reason,
@@ -863,7 +1212,7 @@
       projectionState: "proposal_not_committed",
       scope,
       scopeSummary: `${patient.display_name} · ${selected.practitioner_display} · ${dateLabel(selectedSlot.appointment_date)} · ${timeLabel(selectedSlot.start_time_local)}`,
-      omissions: ["No appointment has been created", "Confirmation is not available inside the meta-grid"],
+      omissions: ["No appointment has been created", "Confirmation remains in the normal booking review"],
       freshnessSource: result.evidence_mode,
       freshnessReason: result.operational
         ? "Existing supervised-booking proposal envelope"
@@ -1077,6 +1426,10 @@
       }
       return buildProposal(patient.patient, text);
     }
+    if (/\b(book|make|create|schedule|arrange|organise|organize|move|reschedule|cancel|extend|shorten|resize|squeeze)\b/.test(source)) {
+      const typedProjection = await buildTypedProductContextProjection(text);
+      if (typedProjection) return typedProjection;
+    }
     if (/\bupcoming\b/.test(source) || /\bpatient\b.*\bappointments?\b/.test(source) || /'s\s+(?:upcoming\s+)?appointments?\b/.test(source)) {
       const patient = await resolvePatient(text);
       if (patient.status !== "resolved") {
@@ -1154,14 +1507,35 @@
     );
   }
 
+  async function setDiaryPageBeforeProjection(projection) {
+    const targetDate = projection?.scope?.date_from;
+    const currentDate = snapshot().date;
+    if (!targetDate || targetDate === currentDate) return;
+    if (typeof bridge.navigateDiaryDate !== "function") {
+      throw new Error("The Diary cannot move to the requested date.");
+    }
+    setBureauStatus("Checking the Diary", "checking");
+    const result = await bridge.navigateDiaryDate(targetDate);
+    if (!result?.verified || snapshot().date !== targetDate) {
+      throw new Error("The Diary did not confirm the requested date.");
+    }
+  }
+
   async function submitRequest(text, { restore = false } = {}) {
     setBusy(true);
     try {
+      setBureauStatus("Understanding your request", "understanding");
+      await Promise.resolve();
+      setBureauStatus("Checking the Diary", "checking");
       const projection = await routeRequest(text, { restore });
       if (!projection) return;
+      await setDiaryPageBeforeProjection(projection);
+      setBureauStatus("Preparing the view", "preparing");
       const sameRoot = projection.root_intent_id === state.current?.root_intent_id;
       setProjection(projection, { newRoot: !sameRoot, pushCurrent: sameRoot });
       elements.request.value = "";
+      resizeRequestInput();
+      return projection;
     } catch (error) {
       const projection = newProjection({
         family: "clarification",
@@ -1181,17 +1555,43 @@
         rootRequest: text
       });
       setProjection(projection, { newRoot: true });
+      return projection;
     } finally {
       setBusy(false);
+      if (state.current) {
+        const needsDetail = ["clarification_required", "blocked"].includes(state.current.state);
+        setBureauStatus(
+          needsDetail ? "I need one detail" : "Checked against the Diary",
+          needsDetail ? "clarify" : "ready"
+        );
+      }
     }
   }
 
   function setBusy(busy) {
+    state.busy = busy;
     const submit = elements.form?.querySelector('[type="submit"]');
     if (submit) {
       submit.disabled = busy;
-      submit.textContent = busy ? "Reading current Diary…" : "Show this view";
+      if (elements.plannerMode) {
+        elements.plannerMode.disabled = busy || !state.plannerUiEnabled;
+      }
+      submit.textContent = busy ? "Checking the Diary…" : "Find or prepare";
     }
+  }
+
+  function resizeRequestInput() {
+    if (!elements.request) return;
+    elements.request.style.height = "auto";
+    const contentHeight = Math.max(
+      REQUEST_INPUT_MIN_HEIGHT_PX,
+      elements.request.scrollHeight
+    );
+    const nextHeight = Math.min(contentHeight, REQUEST_INPUT_MAX_HEIGHT_PX);
+    elements.request.style.height = `${nextHeight}px`;
+    elements.request.style.overflowY = contentHeight > REQUEST_INPUT_MAX_HEIGHT_PX
+      ? "auto"
+      : "hidden";
   }
 
   function rememberBoundedSet(set, value) {
@@ -1615,7 +2015,7 @@
         state.selectedItem = cue.contextSelection || null;
         setProjection(projection, { newRoot: false, pushCurrent: true, focusCanvas: true });
       } else {
-        elements.canvas?.focus();
+        focusCanvasWithoutWindowScroll();
       }
       dismissEventCue({ restoreFocus: false });
       return;
@@ -1648,18 +2048,31 @@
       : null;
     state.proposalResult = previous.proposal_result || null;
     render();
-    elements.canvas?.focus();
+    focusCanvasWithoutWindowScroll();
   }
 
-  function openMetaGrid() {
+  async function openMetaGrid() {
     state.isOpen = true;
     document.body.classList.add("meta-grid-open");
     elements.host?.classList.remove("hidden");
     document.getElementById("bernie-review-panel")?.classList.add("hidden");
-    if (!state.current) {
-      buildOverview().then(projection => setProjection(projection, { newRoot: true, focusCanvas: false }));
-    } else {
-      render();
+    setBusy(true);
+    setBureauStatus("Checking the Diary", "checking");
+    try {
+      if (!state.current) {
+        const projection = await buildOverview();
+        setBureauStatus("Preparing the view", "preparing");
+        setProjection(projection, { newRoot: true, focusCanvas: false });
+      } else {
+        render();
+      }
+    } finally {
+      setBusy(false);
+      const needsDetail = ["clarification_required", "blocked"].includes(state.current?.state);
+      setBureauStatus(
+        needsDetail ? "I need one detail" : "Checked against the Diary",
+        needsDetail ? "clarify" : "ready"
+      );
     }
     startEventPolling();
     setTimeout(() => elements.request?.focus(), 0);
@@ -1679,6 +2092,65 @@
     elements.host?.classList.add("hidden");
     document.getElementById("diary-grid-container")?.classList.remove("hidden");
     elements.launch?.focus();
+  }
+
+  function toggleExpandedBureau() {
+    const expanded = !elements.host?.classList.contains("is-expanded");
+    elements.host?.classList.toggle("is-expanded", expanded);
+    elements.expand?.setAttribute("aria-pressed", expanded ? "true" : "false");
+    elements.expand?.setAttribute(
+      "aria-label",
+      expanded ? "Return to compact view" : "Expand Bureau"
+    );
+    elements.expand?.setAttribute(
+      "title",
+      expanded ? "Return to compact view" : "Expand Bureau"
+    );
+    if (elements.announcer) {
+      elements.announcer.textContent = expanded
+        ? "The Bureau console is expanded. The Diary and current projection are unchanged."
+        : "The compact projection is restored. The Diary and current projection are unchanged.";
+    }
+    elements.expand?.focus({ preventScroll: true });
+  }
+
+  function clearPlannerScopedResultForModeChange() {
+    if (!state.current?.planner_provenance) return false;
+    const previousRequest = state.current.root_request || "";
+    const cleared = newProjection({
+      family: "clarification",
+      projectionState: "planner_reselection_required",
+      scope: baseScope(),
+      scopeSummary: "Planner changed; select the exact appointment and submit again",
+      omissions: [
+        "The previous planner-scoped proposal and provenance were discarded",
+        "No confirmation or appointment change occurred"
+      ],
+      freshnessSource: snapshot().evidence_mode,
+      freshnessReason: "Planner selection changed after an admitted proposal",
+      items: [],
+      operation: "clarify",
+      trigger: "touch",
+      reason: "A fresh exact selection is required for the newly selected planner.",
+      changedDimensions: ["planner_mode", "proposal_cleared", "selection_cleared"],
+      posture: "none",
+      operationalCommandAvailable: false,
+      rootRequest: previousRequest
+    });
+    state.trail = [];
+    state.selectedItem = null;
+    state.selectedAppointment = null;
+    state.proposalResult = null;
+    setProjection(cleared, {
+      newRoot: true,
+      pushCurrent: false,
+      focusCanvas: false
+    });
+    if (elements.request) {
+      elements.request.value = previousRequest;
+      resizeRequestInput();
+    }
+    return true;
   }
 
   function togglePrivacy(force) {
@@ -1753,27 +2225,115 @@
       const row = createElement("li", className === "meta-grid-timeline" ? "meta-grid-timeline-item" : "meta-grid-item");
       if (item.kind === "appointment" && item.id) {
         row.dataset.appointmentId = String(item.id);
-        row.tabIndex = -1;
+        const selectableAppointment = !String(item.id).startsWith("synthetic-");
+        row.tabIndex = selectableAppointment ? 0 : -1;
+        row.setAttribute("aria-selected", String(
+          String(state.selectedAppointment?.id || "") === String(item.id)
+        ));
+        if (selectableAppointment) {
+          row.setAttribute("role", "button");
+          const selectAppointment = () => {
+            state.selectedAppointment = item;
+            if (elements.announcer) {
+              elements.announcer.textContent = "Appointment selected for proposal review. Nothing has changed.";
+            }
+            render();
+          };
+          row.addEventListener("click", selectAppointment);
+          row.addEventListener("keydown", event => {
+            if (!["Enter", " "].includes(event.key)) return;
+            event.preventDefault();
+            selectAppointment();
+          });
+        }
       }
       if (item.sensitive) row.classList.add("meta-grid-sensitive");
-      const heading = createElement("h3", "", item.date && projection.family === "patient_timeline"
-        ? `${dateLabel(item.date)} · ${item.display}`
-        : item.display);
-      row.appendChild(heading);
-      if (item.secondary) row.appendChild(createElement("p", "meta-grid-item-meta", item.secondary));
-      if (item.tertiary) row.appendChild(createElement("p", "meta-grid-item-meta", item.tertiary));
+      if (item.kind === "appointment" && item.date) {
+        row.classList.add("meta-grid-appointment-card");
+        const [year, month, day] = item.date.split("-").map(Number);
+        const calendarDate = new Date(Date.UTC(year, month - 1, day));
+        const dateColumn = createElement("div", "meta-grid-appointment-date");
+        dateColumn.append(
+          createElement("span", "", calendarDate.toLocaleDateString("en-AU", {
+            weekday: "short",
+            timeZone: "UTC"
+          }).toUpperCase()),
+          createElement("strong", "", `${String(day).padStart(2, "0")} ${calendarDate.toLocaleDateString("en-AU", {
+            month: "short",
+            timeZone: "UTC"
+          }).toUpperCase()}`),
+          createElement("span", "", String(year))
+        );
+        const details = createElement("div", "meta-grid-appointment-details");
+        details.appendChild(createElement("h3", "", item.display));
+        if (item.practitioner_display) {
+          details.appendChild(createElement("p", "meta-grid-item-meta", item.practitioner_display));
+        }
+        if (item.location_display) {
+          details.appendChild(createElement("p", "meta-grid-item-meta", item.location_display));
+        }
+        if (projection.family !== "patient_timeline" && item.patient_display) {
+          details.appendChild(createElement("p", "meta-grid-appointment-patient", item.patient_display));
+        }
+        if (item.proposed_change) {
+          details.appendChild(createElement("p", "meta-grid-proposed-change", item.proposed_change));
+        }
+        const status = createElement("div", "meta-grid-appointment-status");
+        status.append(
+          createElement("span", "meta-grid-status-dot"),
+          createElement("strong", "", item.status || "Scheduled")
+        );
+        row.append(dateColumn, details, status);
+      } else {
+        row.appendChild(createElement("h3", "", item.display));
+        if (item.secondary) row.appendChild(createElement("p", "meta-grid-item-meta", item.secondary));
+        if (item.tertiary) row.appendChild(createElement("p", "meta-grid-item-meta", item.tertiary));
+      }
       list.appendChild(row);
     });
     elements.content.appendChild(list);
   }
 
   function renderSlots(projection) {
-    const list = createElement("div", "meta-grid-slot-list");
+    const layout = createElement("div", "meta-grid-schedule-layout");
+    const schedule = createElement("section", "meta-grid-schedule");
+    schedule.setAttribute("aria-label", "Available times");
+    const scheduleHeader = createElement("header", "meta-grid-schedule-header");
+    const scheduleHeading = createElement(
+      "div",
+      "meta-grid-schedule-heading",
+      `${projection.items.length} matching ${projection.items.length === 1 ? "time" : "times"}`
+    );
+    const practitioner = projection.items.find(item => item.practitioner_display)?.practitioner_display || "Scoped practitioner";
+    scheduleHeader.append(
+      scheduleHeading,
+      createElement("p", "meta-grid-schedule-basis", `${practitioner} · ${dateLabel(projection.scope.date_from)} · ${projection.scope.duration_minutes} minutes`)
+    );
+    schedule.appendChild(scheduleHeader);
     if (projection.items.length === 0) {
-      list.appendChild(createElement("p", "meta-grid-empty-copy", "No candidate slots were returned for this exact scope. Try another time or date."));
-      elements.content.appendChild(list);
+      schedule.appendChild(createElement("p", "meta-grid-empty-copy", "No candidate slots were returned for this exact scope. Try another time or date."));
+      layout.appendChild(schedule);
+      elements.content.appendChild(layout);
       return;
     }
+    const itemStarts = projection.items.map(item => minutesFromTime(item.starts_at)).filter(Number.isFinite);
+    const itemEnds = projection.items.map(item => minutesFromTime(item.ends_at)).filter(Number.isFinite);
+    const start = minutesFromTime(projection.scope.time_from) ?? Math.min(...itemStarts);
+    const end = minutesFromTime(projection.scope.time_to) ?? Math.max(...itemEnds);
+    const increment = 15;
+    const rowCount = Math.max(1, Math.ceil((end - start) / increment));
+    const grid = createElement("div", "meta-grid-time-grid");
+    grid.style.setProperty("--meta-grid-time-rows", String(rowCount));
+    for (let index = 0; index <= rowCount; index += 1) {
+      const minute = start + (index * increment);
+      const rawTime = `${String(Math.floor(minute / 60)).padStart(2, "0")}:${String(minute % 60).padStart(2, "0")}`;
+      const label = createElement("span", "meta-grid-time-label", timeLabel(rawTime));
+      label.style.gridRow = `${index + 1}`;
+      const rule = createElement("span", "meta-grid-time-rule");
+      rule.style.gridRow = `${index + 1}`;
+      grid.append(label, rule);
+    }
+    const slotButtons = [];
     projection.items.forEach(item => {
       const button = createElement("button", "meta-grid-slot-button");
       button.type = "button";
@@ -1781,21 +2341,85 @@
       button.setAttribute("data-testid", "meta-grid-slot");
       button.setAttribute("aria-label", `${item.selected ? "Selected" : "Select"} ${item.display} with ${item.practitioner_display || "practitioner"}`);
       button.appendChild(createElement("strong", "", item.display));
-      if (item.secondary) button.appendChild(createElement("span", "", item.secondary));
+      button.appendChild(createElement("span", "meta-grid-slot-status", "Available at read time"));
       if (item.tertiary) button.appendChild(createElement("span", "meta-grid-item-warning", item.tertiary));
+      const startIndex = Math.max(0, Math.floor(((minutesFromTime(item.starts_at) ?? start) - start) / increment));
+      const span = 1;
+      button.style.gridRow = `${startIndex + 1} / span ${span}`;
       const activate = trigger => {
         state.selectedItem = item;
         setProjection(selectionProjection(item, trigger), { newRoot: false, pushCurrent: true });
       };
       button.addEventListener("click", () => activate("touch"));
       button.addEventListener("keydown", event => {
-        if (!["Enter", " "].includes(event.key)) return;
+        if (["Enter", " "].includes(event.key)) {
+          event.preventDefault();
+          activate("keyboard");
+          return;
+        }
+        if (!["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)) return;
         event.preventDefault();
-        activate("keyboard");
+        const delta = ["ArrowUp", "ArrowLeft"].includes(event.key) ? -1 : 1;
+        const index = slotButtons.indexOf(button);
+        slotButtons[Math.max(0, Math.min(slotButtons.length - 1, index + delta))]?.focus();
       });
-      list.appendChild(button);
+      slotButtons.push(button);
+      grid.appendChild(button);
     });
-    elements.content.appendChild(list);
+    schedule.appendChild(grid);
+    layout.appendChild(schedule);
+    const selected = projection.items.find(item => item.selected);
+    if (selected) {
+      layout.classList.add("has-selection");
+      const panel = createElement("aside", "meta-grid-selection-panel");
+      panel.setAttribute("aria-label", "Selected time");
+      panel.append(
+        createElement("p", "meta-grid-selection-kicker", "Selected · not reserved"),
+        createElement("strong", "meta-grid-selection-time", selected.display),
+        createElement("p", "meta-grid-selection-practitioner", selected.practitioner_display || practitioner),
+        createElement("p", "meta-grid-selection-boundary", "Ready to prepare a proposal. No appointment has been booked or changed.")
+      );
+      layout.appendChild(panel);
+    }
+    elements.content.appendChild(layout);
+  }
+
+  function renderIntentSummary(projection, copy) {
+    if (!elements.intentTokens) return;
+    elements.intentTokens.replaceChildren();
+    const familyLabels = {
+      ordinary_overview: "Diary overview",
+      focused_schedule_lane: "Focused schedule",
+      patient_timeline: "Upcoming appointments",
+      availability_slots: "Find availability",
+      aligned_comparison: "Compare availability",
+      proposal_review: "Review proposal",
+      clarification: "Clarify request"
+    };
+    const labels = [familyLabels[projection.family] || "Projected view"];
+    const patient = patientForProjection(projection);
+    if (patient?.display_name) labels.push(patient.display_name);
+    const practitioners = [...new Set((projection.items || [])
+      .map(item => item.practitioner_display || item.comparison_group)
+      .filter(Boolean))];
+    labels.push(...practitioners.slice(0, 2));
+    if (projection.scope?.date_from) labels.push(dateLabel(projection.scope.date_from));
+    if (projection.scope?.time_from && projection.scope?.time_to) {
+      labels.push(`${timeLabel(projection.scope.time_from)}–${timeLabel(projection.scope.time_to)}`);
+    }
+    if (projection.scope?.duration_minutes) labels.push(`${projection.scope.duration_minutes} min`);
+    labels.forEach((label, index) => {
+      const token = createElement("span", "meta-grid-intent-token", label);
+      if (patient && index === 1) token.classList.add("meta-grid-sensitive");
+      elements.intentTokens.appendChild(token);
+    });
+    if (elements.conversationRequest) {
+      elements.conversationRequest.textContent = projection.root_request || "Ordinary overview";
+      elements.conversationRequest.classList.toggle("meta-grid-sensitive", Boolean(patient));
+    }
+    if (elements.conversationResponse) {
+      elements.conversationResponse.textContent = copy.heading;
+    }
   }
 
   function renderComparison(projection) {
@@ -1881,6 +2505,7 @@
 
   function renderActions(projection) {
     elements.actions.replaceChildren();
+    elements.actions.classList.remove("is-return-only");
     if (projection.state === "reconciliation_required") {
       const refresh = createElement("button", "meta-grid-primary", "Refresh current view");
       refresh.type = "button";
@@ -1921,22 +2546,98 @@
       });
       elements.actions.appendChild(handoff);
     }
-    const fullGrid = createElement("button", "", "Return to full Diary grid");
-    fullGrid.type = "button";
-    fullGrid.addEventListener("click", closeMetaGrid);
-    elements.actions.appendChild(fullGrid);
+    if (
+      ["patient_timeline", "focused_schedule_lane"].includes(projection.family) &&
+      projection.state === "answer"
+    ) {
+      const nextStep = createElement("div", "meta-grid-read-next");
+      const icon = createElement("span", "meta-grid-read-next-icon", "+");
+      icon.setAttribute("aria-hidden", "true");
+      const nextStepCopy = createElement("div", "meta-grid-read-next-copy");
+      nextStepCopy.append(
+        createElement("strong", "", "Proposal only — nothing booked"),
+        createElement("span", "", "Prepare an option for the patient before booking review.")
+      );
+      const prepare = createElement("button", "meta-grid-read-next-button", "Add proposal +");
+      prepare.type = "button";
+      prepare.addEventListener("click", () => {
+        elements.request.placeholder = "Describe the appointment option to prepare";
+        elements.request.focus();
+      });
+      nextStep.append(icon, nextStepCopy, prepare);
+      elements.actions.appendChild(nextStep);
+    }
+    const returnToDiary = createElement("button", "meta-grid-bottom-return", "Return to Diary");
+    returnToDiary.type = "button";
+    returnToDiary.addEventListener("click", closeMetaGrid);
+    elements.actions.appendChild(returnToDiary);
+    elements.actions.classList.toggle("is-return-only", elements.actions.children.length === 1);
+  }
+
+  function renderPlannerProvenance(projection) {
+    if (!elements.plannerProvenance) return;
+    const provenance = projection?.planner_provenance;
+    const visible = (
+      state.plannerUiEnabled
+      && provenance
+      && provenance.proofreader_disposition === "admit"
+    );
+    elements.plannerProvenance.classList.toggle("hidden", !visible);
+    elements.plannerProvenance.replaceChildren();
+    if (!visible) return;
+
+    const planner = createElement(
+      "span",
+      "",
+      provenance.planner_mode === "isolated_vertex"
+        ? "Isolated model"
+        : "Standard planner"
+    );
+    planner.dataset.testid = "meta-grid-planner-provenance-mode";
+    const proofreader = createElement("span", "", "Proofreader admitted");
+    proofreader.dataset.testid = "meta-grid-planner-provenance-proofreader";
+    const callCount = createElement(
+      "span",
+      "",
+      `${provenance.provider_calls} provider ${provenance.provider_calls === 1 ? "call" : "calls"}`
+    );
+    callCount.dataset.testid = "meta-grid-planner-provenance-calls";
+    elements.plannerProvenance.append(planner, proofreader, callCount);
+
+    if (provenance.runtime_audit_ref) {
+      const audit = createElement("span");
+      audit.dataset.testid = "meta-grid-planner-provenance-audit";
+      audit.append("Audit ", createElement("code", "", provenance.runtime_audit_ref));
+      elements.plannerProvenance.appendChild(audit);
+    }
   }
 
   function render() {
     const projection = state.current;
     if (!projection) return;
+    elements.host?.setAttribute("data-family", projection.family || "ordinary_overview");
+    elements.host?.setAttribute("data-projection-state", projection.state || "answer");
     const copy = stateCopy[projection.state] || stateCopy.answer;
+    renderIntentSummary(projection, copy);
+    if (elements.scopeHeading) {
+      elements.scopeHeading.textContent = ({
+        ordinary_overview: "Diary overview",
+        focused_schedule_lane: "Appointments found",
+        patient_timeline: "Appointments found",
+        availability_slots: "Times found",
+        aligned_comparison: "Comparison",
+        proposal_review: "Proposal",
+        clarification: "One detail needed"
+      })[projection.family] || "Looking at";
+    }
     elements.scope.classList.toggle("meta-grid-sensitive", Boolean(projection.scope?.patient_ids?.length));
     elements.scope.textContent = projection.scope_summary;
     elements.omissions.textContent = projection.omissions.length
       ? `Deliberately left out: ${projection.omissions.join(" · ")}`
       : "No material scope omissions.";
-    elements.freshness.textContent = `${projection.freshness.stale ? "Stale" : "As of"} ${new Date(projection.freshness.observed_at).toLocaleTimeString("en-AU", { hour: "numeric", minute: "2-digit" })} · ${projection.freshness.reason}`;
+    const resultLabel = projection.items.length === 1 ? "result" : "results";
+    elements.freshness.textContent = `${projection.items.length} ${resultLabel} · ${projection.freshness.stale ? "Stale" : "Checked against the Diary"} · ${new Date(projection.freshness.observed_at).toLocaleTimeString("en-AU", { hour: "numeric", minute: "2-digit" })}`;
+    renderPlannerProvenance(projection);
     elements.state.dataset.state = projection.state;
     elements.stateLabel.textContent = copy.label;
     elements.stateHeading.textContent = copy.heading;
@@ -1965,12 +2666,18 @@
 
     renderActions(projection);
     renderEventCue();
-    elements.evidenceFamily.textContent = projection.family;
-    elements.evidenceTrigger.textContent = projection.transition.trigger;
+    elements.evidenceFamily.textContent = viewLabels[projection.family] || "Focused Diary view";
+    elements.evidenceTrigger.textContent = triggerLabels[projection.transition.trigger] || "Your Reception One session";
     elements.evidenceReason.textContent = projection.transition.reason;
-    elements.evidenceChanges.textContent = projection.transition.changed_dimensions.join(" · ") || "No scope dimension changed";
-    elements.evidenceSource.textContent = `${projection.freshness.source} · ${projection.evidence_mode}`;
-    elements.evidenceBoundary.textContent = `${projection.action_boundary.posture}; appointment write authority: false`;
+    elements.evidenceChanges.textContent = projection.transition.changed_dimensions.length
+      ? "The requested focus changed"
+      : "The focus stayed the same";
+    elements.evidenceSource.textContent = projection.freshness.stale
+      ? "Waiting for a fresh Diary check"
+      : "Checked against the current Diary";
+    elements.evidenceBoundary.textContent = projection.action_boundary.operational_command_available
+      ? "Continue to the normal booking review"
+      : "View only — no Diary change is available here";
     renderRootHistory();
     togglePrivacy(state.private);
   }
@@ -1989,10 +2696,173 @@
     return true;
   }
 
+  async function applyWordLaunchContext(context) {
+    const correlationId = context?.correlation_id;
+    if (
+      context?.contract_version !== "reception.one.word-launch-context.v1"
+      || context?.source_surface !== "word_taskpane"
+      || context?.target_surface !== "native_diary_bureau"
+      || context?.open_projection !== true
+      || context?.planner_mode !== "deterministic"
+      || !correlationId
+    ) {
+      return Promise.resolve(false);
+    }
+    if (state.wordLaunchTasks.has(correlationId)) {
+      return state.wordLaunchTasks.get(correlationId);
+    }
+    const task = (async () => {
+      state.handledLaunchCorrelationIds.add(correlationId);
+      bridge.setLaunchAvailable(true);
+      try {
+        const navigation = await bridge.navigateDiaryDate(context.reference_date);
+        if (!navigation?.verified) {
+          elements.announcer.textContent = "Reception One stayed closed because the requested Diary date could not be verified.";
+          return false;
+        }
+        await openMetaGrid();
+        elements.announcer.textContent = `Reception One opened from Word after the Diary verified ${context.reference_date}.`;
+        return true;
+      } catch (_) {
+        elements.announcer.textContent = "Reception One stayed closed because the Word launch context could not be applied.";
+        return false;
+      }
+    })();
+    state.wordLaunchTasks.set(correlationId, task);
+    while (state.wordLaunchTasks.size > 16) {
+      const oldestCorrelationId = state.wordLaunchTasks.keys().next().value;
+      if (oldestCorrelationId === correlationId) break;
+      state.wordLaunchTasks.delete(oldestCorrelationId);
+    }
+    return task;
+  }
+
+  function buildWordCompanionSummary(request, projection) {
+    const base = {
+      contract_version: "reception.one.word-companion-summary.v1",
+      type: "reception_one_companion_summary",
+      source_surface: "native_diary_bureau",
+      target_surface: "word_taskpane",
+      correlation_id: request.correlation_id,
+      request_id: request.request_id,
+      reference_date: request.reference_date,
+      status: "blocked",
+      projection_family: "clarification",
+      result_count: 0,
+      planner_mode: "deterministic",
+      proofreader_disposition: "edge_abort",
+      summary_code: "request_blocked",
+      details_surface: "native_diary_bureau",
+      detail_fields_released: false,
+      request_text_included: false,
+      patient_context_included: false,
+      appointment_context_included: false,
+      appointment_write_authority: false,
+      command_authority: false,
+      provider_authority: false,
+      evidence_mode: "local_authored_synthetic_companion"
+    };
+    if (
+      !projection
+      || projection.contract_version !== CONTRACT_VERSION
+      || !WORD_COMPANION_ALLOWED_FAMILIES.has(projection.family)
+      || !Array.isArray(projection.items)
+      || projection.items.length > 100
+      || projection.freshness?.stale !== false
+      || projection.action_boundary?.appointment_write_authority !== false
+      || projection.action_boundary?.operational_command_available !== false
+    ) {
+      return Object.freeze(base);
+    }
+    if (projection.state === "clarification_required") {
+      return Object.freeze({
+        ...base,
+        status: "clarification_required",
+        projection_family: "clarification",
+        proofreader_disposition: "human_gate",
+        summary_code: "clarification_required"
+      });
+    }
+    if (projection.state === "blocked") {
+      return Object.freeze({
+        ...base,
+        projection_family: projection.family
+      });
+    }
+    if (
+      ![
+        "overview",
+        "answer",
+        "selection_only",
+        "proposal_not_committed"
+      ].includes(projection.state)
+    ) {
+      return Object.freeze({
+        ...base,
+        projection_family: projection.family
+      });
+    }
+    return Object.freeze({
+      ...base,
+      status: "admitted",
+      projection_family: projection.family,
+      result_count: projection.items.length,
+      proofreader_disposition: "admit",
+      summary_code: (
+        projection.items.length > 0 ? "results_ready" : "no_results"
+      )
+    });
+  }
+
+  function sendWordCompanionSummary(summary) {
+    try {
+      window.Office?.context?.ui?.messageParent(JSON.stringify(summary));
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  async function applyWordCompanionRequest(request) {
+    const launchContext = window.EMR4ReceptionOneLaunchContext;
+    if (
+      request?.contract_version
+        !== "reception.one.word-companion-request.v1"
+      || request?.type !== "reception_one_companion_request"
+      || request?.planner_mode !== "deterministic"
+      || request?.projection_intent !== "view"
+      || request?.data_class !== "authored_synthetic"
+      || request?.patient_context_authority !== false
+      || request?.appointment_context_authority !== false
+      || request?.appointment_write_authority !== false
+      || request?.command_authority !== false
+      || request?.provider_authority !== false
+      || !launchContext
+      || request.correlation_id !== launchContext.correlation_id
+      || request.reference_date !== launchContext.reference_date
+      || state.consumedWordCompanionRequestIds.has(request.request_id)
+    ) {
+      return false;
+    }
+    state.consumedWordCompanionRequestIds.add(request.request_id);
+    const launchApplied = await applyWordLaunchContext(launchContext);
+    if (!launchApplied) {
+      return sendWordCompanionSummary(
+        buildWordCompanionSummary(request, null)
+      );
+    }
+    const projection = await submitRequest(request.request_text);
+    return sendWordCompanionSummary(
+      buildWordCompanionSummary(request, projection)
+    );
+  }
+
   function init() {
     if (!elements.host || !elements.form || !elements.request) return;
     elements.launch?.addEventListener("click", openMetaGrid);
     elements.close?.addEventListener("click", closeMetaGrid);
+    elements.expand?.addEventListener("click", toggleExpandedBureau);
+    elements.returnToDiary?.addEventListener("click", closeMetaGrid);
     elements.back?.addEventListener("click", goBack);
     elements.overview?.addEventListener("click", async () => {
       const projection = await buildOverview("Ordinary overview", {
@@ -2018,6 +2888,8 @@
       event.preventDefault();
       submitRequest(elements.request.value);
     });
+    elements.request.addEventListener("input", resizeRequestInput);
+    resizeRequestInput();
     elements.request.addEventListener("keydown", event => {
       if (event.key === "Enter" && !event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey) {
         event.preventDefault();
@@ -2026,7 +2898,14 @@
     });
     document.addEventListener("keydown", event => {
       if (event.key !== "Escape") return;
-      if (dismissEventCue() || closeExplanation()) event.preventDefault();
+      if (dismissEventCue() || closeExplanation()) {
+        event.preventDefault();
+        return;
+      }
+      if (state.isOpen) {
+        event.preventDefault();
+        closeMetaGrid();
+      }
     });
     elements.eventShow?.addEventListener("click", showEventContext);
     elements.eventDismiss?.addEventListener("click", () => dismissEventCue());
@@ -2034,7 +2913,9 @@
     elements.eventMute?.addEventListener("click", muteEventCue);
     elements.request.addEventListener("focus", () => {
       updateVisualViewport();
-      setTimeout(() => elements.request.scrollIntoView({ block: "nearest", inline: "nearest" }), 0);
+      if (window.matchMedia("(max-width: 700px)").matches) {
+        setTimeout(() => elements.request.scrollIntoView({ block: "nearest", inline: "nearest" }), 0);
+      }
     });
     document.querySelectorAll("[data-meta-grid-request]").forEach(button => {
       button.addEventListener("click", () => submitRequest(button.getAttribute("data-meta-grid-request")));
@@ -2061,12 +2942,53 @@
         }).then(projection => setProjection(projection, { newRoot: false, pushCurrent: false, focusCanvas: false }));
       }
     });
+    window.addEventListener("emr4:reception-one-launch-context", event => {
+      applyWordLaunchContext(event.detail);
+    });
+    window.addEventListener(
+      "emr4:reception-one-companion-request",
+      event => {
+        applyWordCompanionRequest(event.detail);
+      }
+    );
     if (window.visualViewport) {
       window.visualViewport.addEventListener("resize", updateVisualViewport);
       window.visualViewport.addEventListener("scroll", updateVisualViewport);
     }
     updateVisualViewport();
     const params = new URLSearchParams(window.location.search);
+    const productContextUiRouteEnabled = (
+      params.get("product_context_live_local") === "true"
+      || params.get("product_context_acceptance") === "true"
+    );
+    state.plannerUiEnabled = (
+      params.get("smoke") === "true"
+      && params.get("bureau_runtime_ui") === "true"
+      && productContextUiRouteEnabled
+    );
+    state.plannerMode = "deterministic";
+    if (elements.plannerControl) {
+      elements.plannerControl.classList.toggle(
+        "hidden",
+        !state.plannerUiEnabled
+      );
+    }
+    if (elements.plannerMode) {
+      elements.plannerMode.value = "deterministic";
+      elements.plannerMode.disabled = !state.plannerUiEnabled;
+      elements.plannerMode.addEventListener("change", () => {
+        state.plannerMode = elements.plannerMode.value === "isolated_vertex"
+          ? "isolated_vertex"
+          : "deterministic";
+        const clearedPreviousResult = clearPlannerScopedResultForModeChange();
+        const selectionMessage = state.plannerMode === "isolated_vertex"
+          ? "Isolated model selected for the next development request."
+          : "Standard planner selected for the next development request.";
+        elements.announcer.textContent = clearedPreviousResult
+          ? `${selectionMessage} The previous proposal was cleared; select the exact appointment and submit again.`
+          : selectionMessage;
+      });
+    }
     if (params.get("smoke") === "true" && params.get("meta_grid_acceptance") === "true") {
       elements.interruptionTest.classList.remove("hidden");
       elements.interruptionTest.addEventListener("click", markInterrupted);
@@ -2074,7 +2996,18 @@
     if (params.get("smoke") === "true") bridge.setLaunchAvailable(true);
     if (params.get("meta_grid_open") === "true") {
       bridge.setLaunchAvailable(true);
-      setTimeout(openMetaGrid, 0);
+      setTimeout(async () => {
+        await openMetaGrid();
+        if (
+          params.get("smoke") === "true" &&
+          params.get("reception_one_demo") === "appointment_sheet"
+        ) {
+          await submitRequest("Show Margaret Thompson's upcoming appointments");
+        }
+      }, 0);
+    }
+    if (window.EMR4ReceptionOneLaunchContext) {
+      setTimeout(() => applyWordLaunchContext(window.EMR4ReceptionOneLaunchContext), 0);
     }
   }
 

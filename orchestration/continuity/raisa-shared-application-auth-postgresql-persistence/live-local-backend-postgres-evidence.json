@@ -1,0 +1,120 @@
+{
+  "claim_limits": [
+    "No live identity, route, cookie, runtime database role or product authorization is established.",
+    "Only a uniquely named disposable local authored-synthetic PostgreSQL database was exercised.",
+    "External identity, Microsoft or Office authority, product-derived data, commands, deployment, production and release remain closed."
+  ],
+  "cleanup": {
+    "database_absent_after": true,
+    "exact_database_drop_attempted": true,
+    "passed": true
+  },
+  "data_class": "authored_synthetic",
+  "database": {
+    "loopback_only": true,
+    "name_recorded": false,
+    "preexisting": false,
+    "unique_allowlisted_name_used": true
+  },
+  "evidence_label": "live_local_backend_postgres",
+  "migration": {
+    "base_revision": "n3o4p5q6r7s8",
+    "current_head_exact": true,
+    "downgrade_passed": true,
+    "head_revision": "o4p5q6r7s8t9",
+    "initial_upgrade_log_nonempty": true,
+    "migration_log_recorded": false,
+    "orm_migration_drift_absent": true,
+    "reupgrade_passed": true,
+    "upgrade_passed": true
+  },
+  "passed": true,
+  "result": "raisa_shared_application_auth_postgresql_persistence_pass",
+  "runtime": {
+    "audit_atomicity": {
+      "denial_reason": "required_audit_unavailable",
+      "passed": true,
+      "state_and_audit_unchanged": true
+    },
+    "concurrency": {
+      "denial_reasons": [
+        "exchange_already_consumed"
+      ],
+      "exactly_one_consumer": true,
+      "independent_database_sessions": 2,
+      "success_count": 1
+    },
+    "durability": {
+      "generation_after_advance": 2,
+      "post_generation_denial": "application_session_revoked",
+      "target_validated_after_fresh_database_session": true,
+      "validated_after_fresh_database_session": true
+    },
+    "passed": true,
+    "postgres_guards": {
+      "passed": true,
+      "sqlstates": {
+        "audit_delete": "55000",
+        "audit_update": "55000",
+        "exchange_consumption_reset": "55000",
+        "exchange_consumption_rewrite": "55000",
+        "generation_rollback": "55000",
+        "generation_skip": "55000"
+      }
+    },
+    "raw_secret_scan": {
+      "matched_raw_value_count": 0,
+      "passed": true,
+      "raw_value_count": 7,
+      "scanned_row_count": 20,
+      "scanned_table_count": 5
+    },
+    "rls": {
+      "foreign_insert_sqlstate": "42501",
+      "foreign_update_rows": 0,
+      "foreign_visible_rows": 0,
+      "no_context_all_zero": true,
+      "own_context_nonzero_tables": 5,
+      "passed": true,
+      "role_absent_after_rollback": true,
+      "role_properties": {
+        "bypass_rls": false,
+        "login": false,
+        "superuser": false
+      }
+    }
+  },
+  "schema_contract": {
+    "constraint_count": 61,
+    "exact_tables_present": true,
+    "forced_rls_table_count": 5,
+    "index_count": 20,
+    "model_database_column_matches": {
+      "application_auth_audit_events": true,
+      "application_auth_exchange_grants": true,
+      "application_auth_parent_sessions": true,
+      "application_auth_principal_generations": true,
+      "application_auth_surface_sessions": true
+    },
+    "passed": true,
+    "policy_count": 6,
+    "trigger_event_count": 4
+  },
+  "schema_version": "raisa.shared-auth-postgresql-persistence.evidence.v1",
+  "side_effect_counts": {
+    "appointment_or_arrival_commands": 0,
+    "cloud_or_iam_mutations": 0,
+    "database_migrations_disposable": 3,
+    "database_reads_disposable": "performed",
+    "database_writes_disposable": "performed",
+    "deployments": 0,
+    "document_mutations": 0,
+    "external_identity_calls": 0,
+    "microphone_captures": 0,
+    "microsoft_office_identity_calls": 0,
+    "patient_or_clinical_field_reads": 0,
+    "product_data_reads": 0,
+    "production_changes": 0,
+    "provider_calls": 0
+  }
+}

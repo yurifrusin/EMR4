@@ -1,0 +1,19 @@
+{
+  "schema_version": "raisa.cloud_run_public_https_dev_host_readiness_residue.v1",
+  "recorded_at": "2026-07-31T07:00:00Z",
+  "result": "pass",
+  "owned_containers": 0,
+  "owned_networks": 0,
+  "owned_images": 0,
+  "owned_listeners": 0,
+  "owned_temporary_contexts": 0,
+  "owned_browser_tabs": 0,
+  "credential_artifacts": 0,
+  "external_cloud_resources_created_or_changed": 0,
+  "notes": [
+    "The exact readiness container, internal network, image tag and generated contexts were removed.",
+    "The in-app browser task tab was closed and its temporary viewport override was reset.",
+    "The official digest-pinned Node base may remain in Docker's shared cache and is not a task-specific image.",
+    "No Cloud Run, Artifact Registry, Cloud Build, IAM, billing, DNS or Office tenant state was changed."
+  ]
+}

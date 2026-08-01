@@ -1,0 +1,14 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_and_push_the_verified_accumulated_ariadne_reception_one_and_raisa_programme_checkpoint_to_the_existing_task_branch_without_moving_protected_refs_or_opening_a_pull_request",
+  "reasons": [
+    "continuation_event_missing_or_unapproved",
+    "adapter_observation_missing:deepcode_cli",
+    "adapter_observation_missing:claude_cli_print"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "revision_required",
+  "worker_dispatch_permitted": false
+}

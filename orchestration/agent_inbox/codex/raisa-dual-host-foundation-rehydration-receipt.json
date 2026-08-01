@@ -1,0 +1,10 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "begin_the_provider_free_raisa_candidate_dual_host_foundation_by_inventorying_and_freezing_clinician_one_and_reception_one_word_desktop_and_word_online_contracts_then_implementing_the_first_shared_host_neutral_office_runtime_without_public_rename_or_new_authority",
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "continuation_event": "pre_plan_acceptance",
+  "planned_action": "accept_the_versioned_structured_source_reference_contract_and_fresh_exact_sydney_call_budget_before_implementation",
+  "status": "passed",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "authority_boundary": "fixed_shape_closed_source_references_and_independently_proofread_audit_note_then_one_primary_and_at_most_one_contract_only_repair_in_the_exact_gemini_2_5_flash_bernie_keyless_adc_sydney_lane_authored_synthetic_proposal_only_no_fallback_or_write",
+  "worker_dispatch_permitted": false,
+  "source_evidence": {
+    "live_handover_current_baton": "Continuity graph revision 83 and Compass map revision 70 close the arithmetic-reference shared language with two immutable proofreader failures, no release, consumed ledgers and complete cleanup.",
+    "current_authority_allocation": "Yuri authorised the proposed redesign and rehearsal. The fresh descendant replaces arithmetic prior-output codes only, preserves the existing note/proofreader/proposal boundaries and freezes one primary plus at most one deterministic request-contract repair under USD 1. A semantic model-output failure is not retry-eligible.",
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-structured-source-language-plan.md",
+      "docs/security/bernie-reception-one-structured-source-language-threat-model-delta.md",
+      "orchestration/continuity/reception-one-structured-source-language/model-input.schema.json",
+      "orchestration/continuity/reception-one-structured-source-language/plan-program.schema.json",
+      "orchestration/continuity/reception-one-structured-source-language/runtime-policy.json",
+      "orchestration/continuity/reception-one-structured-source-language/occupied-authority-request.json",
+      "orchestration/continuity/reception-one-structured-source-language/official-provider-contract-evidence.json"
+    ],
+    "protected_evidence_boundaries": "Protected holdouts and historical Diary material remain sealed. No real, product-derived, patient, health, clinical, protected or historical data is admitted. The new form carries only authored-synthetic utterances and closed typed references. It adds no GraphQL mutation, REST route/write, database access, confirmation, product delivery, Word/voice, production, deployment or release authority.",
+    "git_refs_and_worktree": {
+      "checked_at": "2026-07-30T01:41:02Z",
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_entry_count_at_rehydration": 351,
+      "worktree_dirty_and_preserved": true,
+      "unrelated_user_changes_preserved": true,
+      "protected_refs_unchanged": true
+    }
+  }
+}

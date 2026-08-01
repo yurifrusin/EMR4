@@ -1,0 +1,126 @@
+{
+  "id": "reception-one-preprinted-form-v5-broad-language-adc-restored-final",
+  "title": "Reception One v5 Broad Language Occupied Capability Result",
+  "kind": "implementation",
+  "status": "accepted",
+  "created_at": "2026-07-30T06:35:00Z",
+  "updated_at": "2026-07-30T06:35:00Z",
+  "coordinates": {
+    "git_ref": "codex/ariadne-terra-gemini-comparative-rehearsal",
+    "source_head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "worktree_role": "integration",
+    "thread_id": null
+  },
+  "relationships": [
+    {
+      "node_id": "reception-one-preprinted-form-v5-broad-language-adc-restored-continuation",
+      "relation": "builds_on"
+    }
+  ],
+  "claim_scope": [
+    "All twenty-four frozen authored-synthetic cases completed through the exact Gemini 2.5 Flash Sydney Vertex and Bernie keyless impersonated-ADC boundary.",
+    "Thirty-two HTTP 200 provider calls, forty consumed ledgers, exact per-call external audits and complete owned cleanup are recorded below the forty-eight-call and USD 1 ceilings.",
+    "Fourteen cases matched their exact oracle; eight used a bounded correction turn; nineteen released an in-memory human-gated typed value and five released nothing.",
+    "Ten cases missed their frozen exact oracle, including five semantically unexpected typed releases admitted by the current deterministic proofreader.",
+    "The capability threshold failed closed and nominates minimal prompt-context teaching plus stronger semantic proofreader assertions in a new tranche."
+  ],
+  "authority": {
+    "authorized_openings": [
+      {
+        "boundary": "container-runtime",
+        "source": "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/occupied-authority.json",
+        "scope": "Run the credential-free v5 work cell independently for the same twenty-four frozen authored-synthetic cases."
+      },
+      {
+        "boundary": "model-runtime",
+        "source": "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/occupied-authority.json",
+        "scope": "Evaluate the unchanged untaught v5 form through Gemini 2.5 Flash in the existing Bernie Sydney lane."
+      },
+      {
+        "boundary": "provider-call",
+        "source": "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/occupied-authority.json",
+        "scope": "Twenty-four primaries and at most one proofreader-ticket correction per case, bounded by forty-eight calls and USD 1."
+      }
+    ],
+    "notes": [
+      "Yuri restored the approved Bernie impersonated ADC and authorised continued occupied evaluation.",
+      "The exact model, project, service account, keyless ADC, region, endpoint, authored-synthetic, isolation, audit, cost, call-ceiling, no-fallback and no-product boundaries remained unchanged.",
+      "The relay request ceiling repair aligns with the pre-existing 32 KiB broker ceiling and consumed no provider call during its failed zero-call diagnoses.",
+      "No prompt teaching or schema change was introduced within the frozen cohort.",
+      "Real, product-derived, patient, health, clinical, protected and historical data, product/database access, confirmation, writes, Word, voice, production, deployment and release remain closed."
+    ]
+  },
+  "decisions": [
+    {
+      "id": "accept-reception-one-v5-broad-language-capability-fail-103",
+      "status": "accepted",
+      "source": "docs/bernie-reception-one-preprinted-form-v5-broad-language-adc-restored-continuation-closeout.md",
+      "summary": "Accept the complete bounded occupied cohort as a capability-threshold failure with useful prompt-teaching and semantic-proofreader evidence, not as production readiness."
+    }
+  ],
+  "contract_evidence": [
+    {
+      "contract_id": "combined-patient-practitioner-time-duration-intent",
+      "status": "satisfied",
+      "evidence": [
+        "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/occupied-cohort-evidence.json",
+        "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/occupied-adc-restored-final-audit-analysis.json",
+        "tests/test_reception_one_preprinted_form_v5_broad_language_cohort.py"
+      ],
+      "note": "The frozen create and squeeze-in oracles remained proposal-only and revision-bound; no confirmation or write path opened."
+    },
+    {
+      "contract_id": "committed-reschedule-availability-reconciliation",
+      "status": "satisfied",
+      "evidence": [
+        "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/occupied-cohort-evidence.json",
+        "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/occupied-adc-restored-final-residue-evidence.json",
+        "tests/test_reception_one_preprinted_form_v5_broad_language_cohort.py"
+      ],
+      "note": "Every case remained isolated from product events, database routes and command execution."
+    }
+  ],
+  "evidence": {
+    "plans": [
+      "docs/bernie-reception-one-preprinted-form-v5-broad-language-cohort-plan.md",
+      "docs/bernie-reception-one-preprinted-form-v5-broad-language-adc-restored-continuation-plan.md",
+      "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/evaluation-manifest.json",
+      "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/occupied-authority.json"
+    ],
+    "tests": [
+      "scripts/ariadne_vertex_sydney_gemini_25_relay.py",
+      "scripts/reception_one_bureau_model_text_lane_live.py",
+      "scripts/reception_one_preprinted_form_v5_broad_language_cohort.py",
+      "tests/test_ariadne_vertex_sydney_gemini_25_rehearsal.py",
+      "tests/test_reception_one_bureau_model_text_lane.py",
+      "tests/test_reception_one_preprinted_form_v5_broad_language_cohort.py"
+    ],
+    "findings": [
+      "docs/security/bernie-reception-one-preprinted-form-v5-broad-language-cohort-threat-model-delta.md",
+      "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/occupied-adc-restored-final-audit-analysis.json",
+      "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/transport-contract-repair-evidence.json"
+    ],
+    "closeouts": [
+      "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/provider-blocked-evidence.json",
+      "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/real-isolation-evidence.json",
+      "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/occupied-preflight-restored-evidence.json",
+      "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/occupied-cohort-evidence.json",
+      "orchestration/continuity/reception-one-preprinted-form-v5-broad-language-cohort/occupied-adc-restored-final-residue-evidence.json",
+      "docs/bernie-reception-one-preprinted-form-v5-broad-language-adc-restored-continuation-closeout.md"
+    ],
+    "receipts": [
+      "orchestration/agent_inbox/codex/reception-one-preprinted-form-v5-broad-language-adc-restored-rehydration-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-preprinted-form-v5-broad-language-adc-restored-orchestrator-receipt.json",
+      "orchestration/agent_inbox/codex/reception-one-preprinted-form-v5-broad-language-adc-restored-preattempt-receipt.json"
+    ],
+    "acceptances": [
+      "orchestration/agent_inbox/codex/reception-one-preprinted-form-v5-broad-language-adc-restored-preattempt-sol-acceptance.md",
+      "orchestration/agent_inbox/codex/reception-one-preprinted-form-v5-broad-language-adc-restored-final-sol-acceptance.md"
+    ]
+  },
+  "unresolved_gates": [
+    "A fresh prompt-context teaching tranche must preserve an untouched evaluation holdout and strengthen semantic proofreader assertions before any further occupied evaluation.",
+    "The current proofreader admitted five typed values that missed their frozen exact semantic oracle; production use remains closed.",
+    "Real, product-derived, patient, health, clinical, protected or historical data, product/database access, writes, Word, voice, production, deployment and release remain closed."
+  ]
+}

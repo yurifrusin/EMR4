@@ -1,0 +1,185 @@
+{
+  "attempt_id": "gemini-25-repair-visual-001",
+  "broker": {
+    "api_key_authentication_used": false,
+    "endpoint_policy_hash": "sha256:96c95024b6b8d2968914ffbf393f04c7791b8e634ef1bfbe966a4054b6af5e16",
+    "environment_forwarded_names": [
+      "APPDATA",
+      "COMSPEC",
+      "LOCALAPPDATA",
+      "PATH",
+      "PATHEXT",
+      "SYSTEMDRIVE",
+      "SYSTEMROOT",
+      "TEMP",
+      "TMP",
+      "USERPROFILE",
+      "WINDIR"
+    ],
+    "google_application_credentials_forwarded": false,
+    "host_purpose_built_one_use_process": true,
+    "process_exit_code": 0
+  },
+  "build_context": {
+    "file_count": 5,
+    "manifest_hash": "sha256:875c804251820b254180c78ab47da1fdef87c18efeaf1b9481f169dbc8951a06",
+    "repository_root_used": false,
+    "source_hashes": {
+      "orchestration/continuity/reception-one-visual-synthesis/Dockerfile": "sha256:7a3b0bbfc14a7a3742782db01e8e5461a654c7afe00b616c053ed9ee376c3acf",
+      "orchestration/continuity/reception-one-visual-synthesis/design-candidate.schema.json": "sha256:fe915b84a72f6a0064f17f1eeb98ee31c14c69e9a41e2990026b05dd5f60b44f",
+      "orchestration/continuity/reception-one-visual-synthesis/occupied-cell-request.json": "sha256:37ada84afb194729fcdb6c3895dfa279412ab2709405f56adb8683b6f3f3f76a",
+      "scripts/ariadne_vertex_sydney_gemini_25_cell.py": "sha256:3e4a758296ad014e5a05ea8be77c7a8b9362a44809bdeb7a4fa0652a53648028",
+      "scripts/ariadne_vertex_sydney_gemini_25_relay.py": "sha256:a3aa57e891c50ff1bde03154dbe3a40ae2780b19d384eb4685100d7b945dbbc2"
+    },
+    "temporary_exact_allowlist": true
+  },
+  "cell_effective_policy": {
+    "cap_add": [],
+    "cap_drop": [
+      "ALL"
+    ],
+    "hostname": "ariadne-vertex-cell",
+    "memory_bytes": 134217728,
+    "memory_swap_bytes": 134217728,
+    "mount_count": 0,
+    "nano_cpus": 500000000,
+    "network_names": [
+      "reception-one-visual-synthesis-internal"
+    ],
+    "nofile_exact": true,
+    "pids_limit": 64,
+    "port_binding_count": 0,
+    "privileged": false,
+    "publish_all_ports": false,
+    "read_only_rootfs": true,
+    "security_opt": [
+      "no-new-privileges=true"
+    ],
+    "tmpfs": {
+      "/tmp": "rw,noexec,nosuid,size=8m"
+    },
+    "user": "65532:65532"
+  },
+  "cleanup": {
+    "base_image_state_preserved": true,
+    "broker_process_absent": true,
+    "cell_container_absent": true,
+    "cell_image_absent": true,
+    "daemon_wide_prune_performed": false,
+    "internal_network_absent": true,
+    "relay_container_absent": true,
+    "relay_image_absent": true,
+    "temporary_context_absent": true,
+    "temporary_token_absent": true
+  },
+  "evidence_hash": "sha256:d4bcd4cfb62ae45440e523bff620e8cf5e137eeb34403c652356f1b029f305d5",
+  "exact_binding": {
+    "api_key_authentication_used": false,
+    "authentication": "keyless_impersonated_service_account_adc",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "location": "australia-southeast1",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "provider": "google_vertex_ai",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"
+  },
+  "exchange": {
+    "audit_event_count": 8,
+    "audit_event_types": [
+      "broker_ready",
+      "request_admitted",
+      "ledger_consumed",
+      "provider_request_constructed",
+      "provider_call_started",
+      "provider_call_completed",
+      "proofreader_completed",
+      "broker_rejected"
+    ],
+    "audit_hash_chain_valid": true,
+    "audit_terminal_hash": "sha256:eabdababc968d39032e8265a26f92a5c89413be6876d0341c1134022898e8963",
+    "cell_exit_code": 2,
+    "cell_state": {
+      "dead": false,
+      "error_empty": true,
+      "exit_code": 2,
+      "oom_killed": false,
+      "running": false,
+      "status": "exited"
+    },
+    "proofreader": null,
+    "relay_state": {
+      "dead": false,
+      "error_empty": true,
+      "exit_code": 0,
+      "oom_killed": false,
+      "running": true,
+      "status": "running"
+    },
+    "release": null,
+    "request_hash": "sha256:9cedf71e73f6f827bf27a1a013bfc2ddfeadfa27feb5770cf62f805f357f305b",
+    "schema_hash": "sha256:254f0b950c613f596f0a8b1b563f50eec5094f4d41f7446c00936f8663181df4"
+  },
+  "explicit_exclusions": {
+    "api_key_information_recorded": false,
+    "chain_of_thought_recorded": false,
+    "command_authority": false,
+    "credential_or_token_recorded": false,
+    "human_or_product_delivery": false,
+    "product_or_database_access": false,
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false
+  },
+  "fallback_performed": false,
+  "ledger": {
+    "attempt_id": "gemini-25-repair-visual-001",
+    "fallback_permitted": false,
+    "ledger_id": "gemini-25-repair-visual-ledger-001",
+    "maximum_provider_calls": 1,
+    "policy_id": "reception-one-visual-synthesis-vertex-sydney-v1",
+    "provider_calls_consumed": 1,
+    "schema_version": "ariadne.vertex_sydney_single_use_ledger.v1",
+    "status": "consumed"
+  },
+  "ledger_id": "gemini-25-repair-visual-ledger-001",
+  "mode": "live",
+  "network": {
+    "attachable": false,
+    "driver": "bridge",
+    "ingress": false,
+    "internal": true,
+    "name": "reception-one-visual-synthesis-internal"
+  },
+  "provider_call_count_reserved": 1,
+  "provider_contacted": true,
+  "relay_effective_policy": {
+    "broker_alias_present": true,
+    "cap_add": [],
+    "cap_drop": [
+      "ALL"
+    ],
+    "memory_bytes": 67108864,
+    "memory_swap_bytes": 67108864,
+    "mount_count": 1,
+    "nano_cpus": 250000000,
+    "network_names": [
+      "bridge",
+      "reception-one-visual-synthesis-internal"
+    ],
+    "nofile_exact": true,
+    "pids_limit": 32,
+    "port_binding_count": 0,
+    "privileged": false,
+    "publish_all_ports": false,
+    "read_only_rootfs": true,
+    "security_opt": [
+      "no-new-privileges=true"
+    ],
+    "tmpfs": {
+      "/tmp": "rw,noexec,nosuid,size=8m"
+    },
+    "token_mount_destination_exact": true,
+    "user": "65532:65532"
+  },
+  "result": "reception_one_visual_synthesis_vertex_candidate_revision_required",
+  "schema_version": "ariadne.reception_one_visual_synthesis_isolation_evidence.v1"
+}

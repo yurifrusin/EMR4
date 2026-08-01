@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/reception-one-visual-synthesis-design-candidate.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "design_thesis",
+    "visual_direction",
+    "composition",
+    "density",
+    "typography",
+    "palette",
+    "priority_order",
+    "responsive_strategy",
+    "state_treatments",
+    "interaction_recommendations",
+    "risk_ids",
+    "evidence_ids",
+    "authority_class"
+  ],
+  "properties": {
+    "design_thesis": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240
+    },
+    "visual_direction": {
+      "type": "string",
+      "enum": ["editorial_clinical", "quiet_operations", "warm_institutional"]
+    },
+    "composition": {
+      "type": "string",
+      "enum": [
+        "balanced_split_workspace",
+        "command_bar_over_projection_canvas",
+        "conversation_rail_plus_projection_canvas"
+      ]
+    },
+    "density": {
+      "type": "string",
+      "enum": ["balanced", "compact", "restrained"]
+    },
+    "typography": {
+      "type": "string",
+      "enum": [
+        "all_humanist_sans",
+        "humanist_sans_with_mono_metadata",
+        "serif_wordmark_humanist_sans_ui"
+      ]
+    },
+    "palette": {
+      "type": "string",
+      "enum": [
+        "paper_ink_eucalyptus",
+        "warm_white_navy_ochre",
+        "white_charcoal_cobalt"
+      ]
+    },
+    "priority_order": {
+      "const": [
+        "scope",
+        "state",
+        "projection",
+        "primary_action",
+        "history",
+        "ordinary_diary"
+      ]
+    },
+    "responsive_strategy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tablet_landscape", "tablet_portrait", "phone"],
+      "properties": {
+        "tablet_landscape": {
+          "type": "string",
+          "enum": ["balanced_split", "rail_canvas"]
+        },
+        "tablet_portrait": {
+          "type": "string",
+          "enum": ["compact_header_then_canvas", "stacked_composer_scope_canvas"]
+        },
+        "phone": {
+          "type": "string",
+          "enum": ["single_column_cards", "single_column_sequential"]
+        }
+      }
+    },
+    "state_treatments": {
+      "const": {
+        "answer": "quiet",
+        "selection": "accent",
+        "proposal": "accent",
+        "notice": "warning",
+        "blocked": "warning",
+        "receipt": "success"
+      }
+    },
+    "interaction_recommendations": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 180
+      }
+    },
+    "risk_ids": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "dense_metadata_competes_with_task",
+          "ordinary_diary_escape_becomes_secondary",
+          "phone_comparison_loses_alignment",
+          "proposal_state_could_resemble_commitment",
+          "quiet_notice_becomes_invisible",
+          "scope_ribbon_wraps_poorly"
+        ]
+      }
+    },
+    "evidence_ids": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "authority_boundary",
+          "one_source",
+          "ordinary_escape",
+          "privacy_resume",
+          "quiet_change",
+          "scope_visible",
+          "state_distinct",
+          "tablet_primary"
+        ]
+      }
+    },
+    "authority_class": {
+      "const": "design_candidate_only"
+    }
+  }
+}

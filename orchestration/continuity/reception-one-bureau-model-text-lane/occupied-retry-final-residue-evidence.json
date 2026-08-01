@@ -1,0 +1,13 @@
+{
+    "schema_version":  "reception.one.bureau.model_text_final_residue.v1",
+    "recorded_at":  "2026-07-29T14:04:04.8842403Z",
+    "cell_container_absent":  true,
+    "relay_container_absent":  true,
+    "internal_network_absent":  true,
+    "cell_image_absent":  true,
+    "relay_image_absent":  true,
+    "broker_process_absent":  true,
+    "task_temporary_roots_absent":  true,
+    "daemon_wide_prune_performed":  false,
+    "provider_calls_after_first_admitted_result":  0
+}

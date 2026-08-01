@@ -1,0 +1,45 @@
+{
+  "schema_version": "ariadne.pre_attempt_receipt.v1",
+  "receipt_id": "reception-one-receptionist-first-v65-retry-001-preattempt-20260730",
+  "created_at": "2026-07-30T10:40:23Z",
+  "status": "passed",
+  "candidate": {
+    "node_id": "reception-one-receptionist-first-v65-semantic-role",
+    "source_head": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+    "provider_calls_already_performed": 0,
+    "single_use_ledgers_already_opened": 0
+  },
+  "predecessor_failure": {
+    "path": "orchestration/continuity/reception-one-receptionist-first-v65/precall-failure-001-evidence.json",
+    "phase": "local_pre_call_authority_contract",
+    "audit_chain_closed": true,
+    "provider_calls_performed": 0,
+    "single_use_ledgers_opened": 0
+  },
+  "repair": {
+    "authority_manifest_sha256": "sha256:12376a30ffdd7ecedd7e0ebffa1f13fd21db955174791f7622b9e9ab5b53c80a",
+    "focused_regression_passed": true,
+    "provider_blocked_full_cohort_passed": true,
+    "real_isolation_passed": true,
+    "repository_only_verifier_passed": true,
+    "api_spine_continuity_compass_static_checks_passed": true
+  },
+  "read_only_cloud_preflight": {
+    "path": "orchestration/continuity/reception-one-receptionist-first-v65/occupied-preflight-evidence.json",
+    "sha256": "sha256:d775829ab52f2b2111a997c0ab647d4f4cc97d128161d6a902a8e0fb57188070",
+    "result": "ariadne_vertex_sydney_gemini_25_adc_preflight_pass",
+    "model_inference_called": false,
+    "provider_prompt_transmitted": false,
+    "external_state_changed": false
+  },
+  "residue": {
+    "path": "orchestration/continuity/reception-one-receptionist-first-v65/pre-attempt-retry-001-residue-evidence.json",
+    "containers": 0,
+    "networks": 0,
+    "images": 0,
+    "broker_or_cell_processes": 0,
+    "opened_ledgers": 0
+  },
+  "exact_boundary_unchanged": true,
+  "unrelated_user_changes_preserved": true
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "new_session",
+  "planned_action": "freeze_and_prepare_one_fresh_authored_synthetic_end_to_end_occupied_request_through_the_visible_reception_one_isolated_model_selector",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external implementation worker is selected for the occupied UI-path seam."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external peer worker is selected; deterministic proofreader and audit acceptance remain local."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: AGENTS.md names the accepted provider-free Bureau UI result at Continuity 155 and Compass 136 and requires fresh authority for a live isolated UI request.",
+        "current_authority_allocation: Yuri explicitly granted the requested authority for one fresh authored-synthetic end-to-end occupied request through the visible Isolated model selector using the exact existing Sydney/Bernie/proofreader/no-fallback/proposal-only/no-write boundary.",
+        "active_plan_and_acceptance: the Bureau UI plan, closeout and Sol acceptance plus the default-off dual-planner plan, closeouts, runtime policy, authority, audit and final acceptance were read.",
+        "protected_evidence_boundaries: AGENTS.md sections 5 and 6 were restored; protected holdouts, historical Diary material, real/product/patient/clinical data, writes, confirmation, Word, voice, production, deployment and release remain closed.",
+        "git_refs_and_worktree: HEAD is 5b1ea7952fb08eea333da0e63f166d3895ccea32 on codex/ariadne-terra-gemini-comparative-rehearsal; master, handoff/current, origin/master and origin/handoff/current are 4974075b31035d599e081d68e3b85e04a897baa1; the existing dirty worktree is preserved.",
+        "The exact occupied call is not yet opened; no ADC, provider, container or database action occurred during rehydration."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

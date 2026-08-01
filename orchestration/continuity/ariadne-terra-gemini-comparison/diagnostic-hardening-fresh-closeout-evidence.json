@@ -1,0 +1,90 @@
+{
+  "schema_version": "ariadne.terra_gemini_diagnostic_hardening_fresh_closeout_evidence.v1",
+  "recorded_at": "2026-07-24",
+  "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+  "result": "ariadne_terra_gemini_provider_contract_diagnostic_hardening_fresh_closeout_pass",
+  "superseding_acceptance_for": "ariadne_terra_gemini_provider_contract_diagnostic_hardening_revision_required",
+  "historical_result_relabelled": false,
+  "fresh_boundary": {
+    "status": "passed",
+    "repository_only": true,
+    "repository_conftest_disabled": true,
+    "pytest_plugin_autoload_disabled": true,
+    "fixed_test_allowlist": true,
+    "arbitrary_pytest_arguments_allowed": false,
+    "child_environment_allowlist": [
+      "PATH",
+      "PATHEXT",
+      "SYSTEMROOT",
+      "TEMP",
+      "TMP",
+      "WINDIR"
+    ],
+    "database_environment_forwarded": false,
+    "provider_environment_forwarded": false,
+    "postgresql_connection_performed": false,
+    "provider_or_model_call_performed": false,
+    "credential_read_performed": false,
+    "container_or_network_started": false,
+    "product_api_or_event_feed_access": false
+  },
+  "verification": {
+    "fixed_verifier": {
+      "entry_point": "scripts/ariadne_terra_gemini_repository_only_verify.py",
+      "test_file_count": 11,
+      "test_count": 255,
+      "passed": 255,
+      "failed": 0,
+      "status": "passed"
+    },
+    "static_validate": "passed",
+    "python_compile": "passed",
+    "node_syntax": "passed",
+    "ruff": "passed",
+    "bandit_medium_or_higher": "passed",
+    "json_parse": "passed",
+    "continuity_and_compass_schema": "passed",
+    "git_diff_check": "passed"
+  },
+  "deepseek_historical_hash_drift": {
+    "status": "resolved_without_historical_evidence_rewrite",
+    "cause": "Git materialised three text sources with CRLF while immutable execution evidence hashes the committed LF bytes.",
+    "logical_lf_hashes_match_historical_evidence": true,
+    "runtime_observations_changed": false,
+    "historical_evidence_rewritten": false
+  },
+  "accepted_local_capability": {
+    "provider_schema_profiles": true,
+    "explicit_enum_types": true,
+    "gemini_boolean_enum_absent": true,
+    "allowlisted_non_content_error_metadata": true,
+    "external_hash_chained_audit_track_mechanics": true,
+    "typed_output_field_manifest": true,
+    "bounded_typed_rationale_not_hidden_reasoning": true,
+    "durable_product_audit_store": false,
+    "attempt_002_retrofit": false
+  },
+  "source_hashes": {
+    "provider_output_schema_file_sha256": "sha256:0399384e845dcb7c623634d3359f850783fbad32bd4bf9c47e149c35e5fd52a9",
+    "provider_contract_profiles_sha256": "sha256:635b3580e3d3aad04a2fbaeb968329b542bf3a1493a7d9d0467476e5644a4141",
+    "external_audit_track_policy_sha256": "sha256:fb5124a78c8930af55917e7e18df7c57f24c8a8ecd038df305d4e047f825af8f",
+    "comparison_manifest_sha256": "sha256:1dacdb8be9c0341e18bc12847893f0b8e5b6f1a1d5c38882a0b2fb20f945746e",
+    "provider_contract_module_sha256": "sha256:b331b813682dc284a38aac850708fbf98a996bcdf2769de84da364777ebb9987",
+    "broker_sha256": "sha256:937f5d9696f70aa9ab8ecea927b5886fe7a98fe92f563d7915c6b5838f90c5c1",
+    "rehearsal_sha256": "sha256:47621bcc68ca8aa96833b4ad653560de136382ce8c57fe3260ca4cd6cb75f54e",
+    "repository_only_verifier_sha256": "sha256:329cc2f2dc97251c39cb678f111511ef571e28857141c699565c08c29f58f256",
+    "comparative_tests_sha256": "sha256:0f25f4b42073489f6a45b2c2a24dd04320365ea31d4ff389b97e9741cd6ab679",
+    "deepseek_tests_sha256": "sha256:ec6e93cf0870718f22b32db29d7b6eb808506447ddb43d7470ee2d64d4852a49",
+    "continuity_graph_sha256": "sha256:6c7458d241196258ae4da67bdcbf4c643e1a533daee701a318fff1359e96efe9",
+    "compass_sha256": "sha256:2ba3e2aea0c2bce8d60f7076baae235cd83cac3dbc8775770b4bbd9725a8f901"
+  },
+  "remaining_closed_authority": {
+    "attempt_002_ledgers_consumed": true,
+    "provider_retry_authorised": false,
+    "provider_call_authorised": false,
+    "model_or_container_runtime_authorised": false,
+    "database_or_product_runtime_authorised": false,
+    "durable_audit_sink_authorised": false,
+    "git_integration_authorised": false
+  }
+}

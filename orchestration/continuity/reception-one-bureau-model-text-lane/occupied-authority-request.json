@@ -1,0 +1,39 @@
+{
+  "schema_version": "reception.one.bureau.occupied-authority-request.v1",
+  "decision": "authorised_by_yuri",
+  "executable": true,
+  "authorisation_source": "Yuri direct instruction in the active Codex session on 2026-07-29 to continue through and past the occupied Vertex gate, incorporating the exact frozen packet and unchanged plan boundaries",
+  "purpose": "one authored-synthetic Reception One model-text interpretation rehearsal",
+  "requested_exact_boundary": {
+    "provider": "google_cloud_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "data_class": "authored_synthetic",
+    "isolation": "credential_free_work_cell_with_one_use_host_broker",
+    "proofreader": "deterministic_closed_operator_plan_gate",
+    "audit": "external_hash_chained_no_raw_prompt_response_or_reasoning",
+    "cost_ceiling_usd": 1,
+    "occupied_call_ceiling": 1,
+    "fallback": false,
+    "provider_tools": false,
+    "database_access": false,
+    "product_delivery": false,
+    "appointment_write_authority": false
+  },
+  "stop_conditions": [
+    "credential_or_noninteractive_refresh_unavailable",
+    "project_identity_region_or_endpoint_mismatch",
+    "model_unavailable_in_australia_southeast1",
+    "cache_or_audit_control_posture_not_verified",
+    "global_or_cross_region_fallback_required",
+    "api_key_or_static_key_required",
+    "product_patient_health_clinical_or_historical_data_required",
+    "isolation_or_external_audit_boundary_unavailable",
+    "cost_or_call_ceiling_would_be_exceeded"
+  ],
+  "authority_granted": true
+}

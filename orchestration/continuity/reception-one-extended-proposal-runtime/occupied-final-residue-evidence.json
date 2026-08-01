@@ -1,0 +1,72 @@
+{
+  "schema_version": "reception_one.extended_proposal_runtime.final_residue.v1",
+  "recorded_at": "2026-07-29T23:40:45Z",
+  "result": "passed",
+  "opened_ledgers": [
+    {
+      "attempt_id": "reception-one-extended-runtime-occupied-001",
+      "ledger_id": "reception-one-extended-runtime-ledger-001",
+      "status": "consumed",
+      "provider_calls_consumed": 1,
+      "ledger_sha256": "51102eae10a11ad4535d0362dc45642a793b4c846c4fac33d9951b1990a9c020"
+    },
+    {
+      "attempt_id": "reception-one-extended-runtime-occupied-002",
+      "ledger_id": "reception-one-extended-runtime-ledger-002",
+      "status": "consumed",
+      "provider_calls_consumed": 1,
+      "ledger_sha256": "c9aae12a95d1b8cc0490d1f647e786449b34a16b3f562397f6217ed1bce9ee12"
+    }
+  ],
+  "provider_call_accounting": {
+    "primary_calls": 1,
+    "deterministic_request_contract_repair_calls": 1,
+    "total_calls": 2,
+    "absolute_call_ceiling": 2,
+    "calls_after_ceiling": 0,
+    "fallback_calls": 0,
+    "other_provider_or_region_calls": 0
+  },
+  "attempt_cleanup": {
+    "attempt_001": {
+      "cell_container_absent": true,
+      "relay_container_absent": true,
+      "internal_network_absent": true,
+      "cell_image_absent": true,
+      "relay_image_absent": true,
+      "broker_process_absent": true,
+      "temporary_context_absent": true,
+      "temporary_token_absent": true
+    },
+    "attempt_002": {
+      "cell_container_absent": true,
+      "relay_container_absent": true,
+      "internal_network_absent": true,
+      "cell_image_absent": true,
+      "relay_image_absent": true,
+      "broker_process_absent": true,
+      "temporary_context_absent": true,
+      "temporary_token_absent": true
+    }
+  },
+  "independent_post_run_checks": {
+    "task_containers_absent": true,
+    "task_networks_absent": true,
+    "task_images_absent": true,
+    "task_broker_processes_absent": true,
+    "task_listener_ports_absent": true,
+    "temporary_credentials_absent": true,
+    "daemon_wide_prune_performed": false,
+    "unrelated_user_runtime_changed": false
+  },
+  "database_cleanup": {
+    "disposable_authored_synthetic_database_absent": true,
+    "appointment_truth_restored": true,
+    "writes_performed": 0
+  },
+  "explicit_exclusions": [
+    "The existing host ADC was not revoked, replaced or altered.",
+    "No service-account key, API key or static credential was created, copied, mounted, inspected or persisted.",
+    "No user-owned container, image, network, database or process was removed."
+  ]
+}

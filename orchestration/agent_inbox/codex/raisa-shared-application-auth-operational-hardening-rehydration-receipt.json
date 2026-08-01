@@ -1,0 +1,47 @@
+{
+  "authority_boundary": "receipt_only_repository_local_provider_free_authored_synthetic_operational_hardening_no_external_identity_product_reads_cloud_mutation_deployment_production_release_commit_push_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan_and_implement_the_authorised_repository_local_provider_free_authored_synthetic_shared_auth_operational_hardening_and_audit_durable_security_tracking_without_external_identity_product_reads_cloud_mutation_deployment_production_release_commit_or_push",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. raisa_shared_application_auth_runtime_role_secure_transport_pass at Continuity 184 and Compass 165 is the accepted parent; Yuri has now authorised the exact shared-application-auth-operational-hardening candidate.",
+    "current_authority_allocation": "GPT Sol retains this tightly coupled architecture, security-inventory and implementation tranche. No worker, subagent, provider, external reviewer or cloud control plane was selected or dispatched.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-shared-application-auth-runtime-role-secure-transport-plan.md",
+      "docs/security/raisa-shared-application-auth-runtime-role-secure-transport-threat-model-delta.md",
+      "orchestration/continuity/raisa-shared-application-auth-runtime-role-secure-transport/live-local-backend-postgres-transport-evidence.json",
+      "docs/raisa-shared-application-auth-runtime-role-secure-transport-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-shared-application-auth-runtime-role-secure-transport-sol-acceptance.md",
+      "orchestration/continuity/emr4-continuity-graph.json revision 184",
+      "orchestration/continuity/emr4-compass.json revision 165 shared-application-auth-operational-hardening candidate",
+      "docs/ariadne-compass-current.md rendered revision 165"
+    ],
+    "protected_evidence_boundaries": "Authored-synthetic repository-local work only. Protected holdouts and raw historical Diary material remain sealed. External identity, Microsoft/Office federation, product-derived/patient/health/clinical/historical data, providers, cloud/IAM mutation, deployment, production and release remain closed.",
+    "git_refs_and_worktree": {
+      "HEAD": "2ae8f2173276147e59be361e0182f6cb4b7453fa",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/codex/ariadne-terra-gemini-comparative-rehearsal": "2ae8f2173276147e59be361e0182f6cb4b7453fa",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "upstream_ahead": 0,
+      "upstream_behind": 0,
+      "accepted_uncommitted_parent_worktree_preserved": true,
+      "staged_files": 0,
+      "protected_refs_unchanged": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

@@ -1,0 +1,79 @@
+{
+  "absolute_provider_call_ceiling": 2,
+  "actual_provider_call_count": 1,
+  "attempt_ids": [
+    "reception-one-proofreader-dialogue-v4-turn-001"
+  ],
+  "candid_limit": "This sequence can prove only bounded authored-synthetic form completion through the configured and observed Sydney Vertex locational request path. It cannot prove Australian physical or sovereign processing, general model reliability, production fitness or safety for real, product, patient, health, clinical or historical data.",
+  "correction_ticket_hash": null,
+  "data_class": "authored_synthetic",
+  "dialogue_protocol": "reception.one.bureau.proofreader-dialogue.v4",
+  "effect_ceiling": "proposal_only",
+  "evidence_hash": "sha256:9546d01fc71759f95b6818e0d33dc67f34fec0478053949a0ae4058da97863d8",
+  "exact_binding": {
+    "api_key_authentication_used": false,
+    "authentication": "keyless_impersonated_service_account_adc",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "location": "australia-southeast1",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "provider": "google_vertex_ai",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"
+  },
+  "explicit_exclusions": {
+    "api_key_information_recorded": false,
+    "chain_of_thought_recorded": false,
+    "command_authority": false,
+    "credential_or_token_recorded": false,
+    "fallback": false,
+    "human_or_product_delivery": false,
+    "product_or_database_access": false,
+    "proofreader_selected_replacement": false,
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "rejected_operator_note_recorded": false
+  },
+  "incremental_cost_ceiling_usd": 1,
+  "ledger_ids": [
+    "reception-one-proofreader-dialogue-v4-ledger-001"
+  ],
+  "no_call_after_admission": true,
+  "parent_audit_chain": {
+    "event_count": 4,
+    "terminal_hash": "sha256:6786bfd4f608554022099ac483a8629b7e10f90d40eb8a3f78c914d21e4f84e8",
+    "valid": true
+  },
+  "release": null,
+  "request_contract_repair_competed_for_call_two": false,
+  "response_contract": "reception.one.bureau.plan-program.v3",
+  "result": "reception_one_proofreader_dialogue_v4_occupied_no_release",
+  "schema_version": "reception.one.proofreader_dialogue_v4.parent_evidence.v1",
+  "terminal_status": "terminal_no_release",
+  "turn_two_terminal": false,
+  "turns": [
+    {
+      "attempt_id": "reception-one-proofreader-dialogue-v4-turn-001",
+      "audit_terminal_hash": "sha256:fc021249aa4317fd5d16dba042f98d419cc0ab6060e40a702c5c4f35591d443b",
+      "cleanup": {
+        "base_image_state_preserved": true,
+        "broker_process_absent": true,
+        "cell_container_absent": true,
+        "cell_image_absent": true,
+        "daemon_wide_prune_performed": false,
+        "internal_network_absent": true,
+        "relay_container_absent": true,
+        "relay_image_absent": true,
+        "temporary_context_absent": true,
+        "temporary_token_absent": true
+      },
+      "correction_ticket_issued": false,
+      "ledger_id": "reception-one-proofreader-dialogue-v4-ledger-001",
+      "model_input_hash": "sha256:459f10009685c2906245e556a78d28113f88401463fcd9c14067630328cbfd71",
+      "proofreader_disposition": null,
+      "released": false,
+      "result": "reception_one_proofreader_dialogue_v4_turn_revision_required",
+      "schema_hash": "sha256:9a51825464fa4e1e7c6e21d4c70754b29db7672be9ae2dc867811df0d76b7550",
+      "turn_code": 1
+    }
+  ]
+}

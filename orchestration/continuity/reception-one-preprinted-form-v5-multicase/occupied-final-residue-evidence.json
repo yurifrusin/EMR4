@@ -1,0 +1,43 @@
+{
+  "schema_version": "reception.one.preprinted_form_v5.multicase_final_residue.v1",
+  "recorded_at": "2026-07-30T04:49:33Z",
+  "result": "reception_one_preprinted_form_v5_multicase_final_residue_pass",
+  "provider_calls_consumed": 7,
+  "opened_ledgers": 7,
+  "consumed_ledgers": 7,
+  "unopened_authorised_call_capacity": 5,
+  "calls_after_case_admission": 0,
+  "unauthorised_retry_or_fallback": false,
+  "owned_runtime_absent": {
+    "live_cell_container": true,
+    "live_relay_container": true,
+    "live_internal_network": true,
+    "live_cell_image": true,
+    "live_relay_image": true,
+    "fixture_turn_one_container": true,
+    "fixture_turn_two_container": true,
+    "fixture_turn_one_image": true,
+    "fixture_turn_two_image": true,
+    "one_use_broker_process": true,
+    "temporary_contexts": true,
+    "temporary_tokens": true
+  },
+  "durable_evidence": {
+    "occupied_cohort_file_sha256": "sha256:bcbab04489e543f0dd07a3cd5310abf32269cb151ca4e91c3e2576e6615ca68a",
+    "turn_hash_chains_valid": 7,
+    "parent_hash_chains_valid": 6,
+    "external_audits_present": 7,
+    "all_ledgers_consumed": true,
+    "all_cleanup_passed": true,
+    "write_performed": false
+  },
+  "coordinator_repair": {
+    "create_call_replayed": false,
+    "create_ledger_reopened": false,
+    "provider_calls_performed_by_repair": 0
+  },
+  "credential_material_inspected_or_recorded": false,
+  "api_key_information_inspected_or_recorded": false,
+  "daemon_wide_prune_performed": false,
+  "external_cloud_state_changed_after_calls": false
+}

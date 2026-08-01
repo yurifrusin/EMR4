@@ -1,0 +1,106 @@
+{
+  "schema_version": "raisa.cloud_run_public_https_dev_host_deployment_evidence.v1",
+  "recorded_at": "2026-07-31T08:47:48Z",
+  "result": "blocked_organization_policy_public_invocation",
+  "authority": {
+    "source": "docs/raisa-cloud-run-public-https-dev-host-deployment-plan.md",
+    "project": "bernie-emr4-dev",
+    "region": "australia-southeast1",
+    "data_class": "authored_synthetic",
+    "provider_calls": 0,
+    "backend_calls": 0,
+    "database_calls": 0,
+    "patient_or_product_data_used": false
+  },
+  "artifact_registry": {
+    "repository": "raisa-office-web-dev",
+    "location": "australia-southeast1",
+    "format": "DOCKER",
+    "mode": "STANDARD_REPOSITORY",
+    "created": true,
+    "image": "raisa-office-web-dev",
+    "digest": "sha256:6696b3c97682ba8d02d3b18bab3d5d3d131f8c56c613c1adfca32400f94b3f5d",
+    "tags": [
+      "deploy-20260731083937",
+      "deploy-20260731083937-final"
+    ],
+    "base_image": "node:24-bookworm-slim@sha256:235600a8101ab264e117b1768e925532262668dc9b581ef1dd7d96ced463b8e7",
+    "closed_context_file_count": 20,
+    "content_manifest_sha256": "6aaefcf2819aef7cb1e1398f70060f1150a64eb4f5ce7da54579e541f58b1135"
+  },
+  "cloud_run": {
+    "service": "raisa-office-web-dev",
+    "location": "australia-southeast1",
+    "url": "https://raisa-office-web-dev-nnbntbx5yq-ts.a.run.app",
+    "created": true,
+    "latest_ready_revision": "raisa-office-web-dev-00003-9vg",
+    "traffic_to_latest_revision_percent": 100,
+    "image_reference": "australia-southeast1-docker.pkg.dev/bernie-emr4-dev/raisa-office-web-dev/raisa-office-web-dev@sha256:6696b3c97682ba8d02d3b18bab3d5d3d131f8c56c613c1adfca32400f94b3f5d",
+    "runtime_service_account": "raisa-office-web-runtime@bernie-emr4-dev.iam.gserviceaccount.com",
+    "runtime_service_account_project_role_count": 0,
+    "runtime_service_account_user_managed_key_count": 0,
+    "ready": true,
+    "private": true,
+    "configuration": {
+      "service_min_instances": 0,
+      "service_max_instances": 1,
+      "revision_min_instances": 0,
+      "revision_max_instances": 1,
+      "cpu": "1",
+      "memory": "256Mi",
+      "concurrency": 20,
+      "timeout_seconds": 60,
+      "cpu_throttling": true,
+      "startup_cpu_boost": false,
+      "ingress": "all",
+      "session_affinity": false,
+      "protocol": "http1",
+      "hosting_mode": "public_https_development",
+      "expected_public_origin_matches_url": true,
+      "secret_reference_count": 0,
+      "volume_count": 0,
+      "vpc_configuration_present": false,
+      "cloud_sql_configuration_present": false
+    }
+  },
+  "origin_repair": {
+    "precomputed_origin": "https://raisa-office-web-dev-295602838018.australia-southeast1.run.app",
+    "returned_origin": "https://raisa-office-web-dev-nnbntbx5yq-ts.a.run.app",
+    "first_revision_kept_private": true,
+    "exact_returned_origin_context_materialized": true,
+    "rebuilt_image_digest_unchanged": true,
+    "final_private_revision_exactly_bound": true
+  },
+  "public_invocation_gate": {
+    "attempted_member": "allUsers",
+    "attempted_role": "roles/run.invoker",
+    "provider_status": "FAILED_PRECONDITION",
+    "classification": "domain_restricted_sharing_organization_policy",
+    "binding_created": false,
+    "all_users_binding_count_after_attempt": 0,
+    "service_remains_private": true,
+    "alternative": "disable_cloud_run_invoker_iam_check",
+    "alternative_executed": false,
+    "alternative_requires_user_authority": true,
+    "official_reference": "https://docs.cloud.google.com/run/docs/authenticating/public"
+  },
+  "unexecuted_gates": [
+    "Unauthenticated HTTPS route verification",
+    "Ordinary public browser load and request observation",
+    "Final public Office manifest exercise",
+    "Authenticated Word Online check"
+  ],
+  "privacy": {
+    "active_human_identity_recorded": false,
+    "credential_or_token_recorded": false,
+    "raw_authentication_response_recorded": false,
+    "raw_google_error_recorded": false
+  },
+  "cost_posture": {
+    "request_based": true,
+    "minimum_instances": 0,
+    "ongoing_artifact_storage_possible": true,
+    "public_request_traffic_possible": false
+  },
+  "candid_limit": "The evidence proves a ready, private, exact-digest Sydney Cloud Run service and least-privilege runtime identity, not public reachability or Word Online interoperability. The allUsers IAM route is blocked by effective Domain Restricted Sharing. No organization-policy bypass or alternative public-access mechanism was applied."
+}

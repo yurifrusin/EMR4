@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/reception-one-word-launch-context.v1.json",
+  "title": "Reception One Word-to-native-Diary launch context",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "type",
+    "source_surface",
+    "target_surface",
+    "reference_date",
+    "correlation_id",
+    "open_projection",
+    "planner_mode",
+    "patient_context_authority",
+    "command_authority",
+    "provider_authority",
+    "evidence_mode"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "reception.one.word-launch-context.v1"
+    },
+    "type": {
+      "const": "reception_one_launch_context"
+    },
+    "source_surface": {
+      "const": "word_taskpane"
+    },
+    "target_surface": {
+      "const": "native_diary_bureau"
+    },
+    "reference_date": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "correlation_id": {
+      "type": "string",
+      "pattern": "^word-launch-[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "open_projection": {
+      "const": true
+    },
+    "planner_mode": {
+      "const": "deterministic"
+    },
+    "patient_context_authority": {
+      "const": false
+    },
+    "command_authority": {
+      "const": false
+    },
+    "provider_authority": {
+      "const": false
+    },
+    "evidence_mode": {
+      "const": "local_development_context_frame"
+    }
+  }
+}

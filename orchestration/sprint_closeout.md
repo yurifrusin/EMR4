@@ -24,13 +24,13 @@ Every closeout entry should record:
 
 | Item | Value |
 |---|---|
-| Batch | S8H DeepCode Runtime Hardening |
-| Integrated through | Sol implementation and deterministic adapter/settings verification |
-| Status | Implemented and pushed; live detached acceptance assigned to S9 planning |
-| Commit | `cb45eb1d` |
-| Push | `master` and `handoff/current` pushed successfully |
-| Final status | `## master...origin/master` before S8H documentation commit |
-| Last updated | 2026-07-13 |
+| Batch | Reception One shared typed language and bounded speaking channel |
+| Integrated through | Local implementation, provider-free verification, two exact-lane occupied calls, external audit and fail-closed Sol acceptance |
+| Status | Local-only closeout; provider call ceiling exhausted; no commit or push by Yuri instruction |
+| Commit | None |
+| Push | Not attempted |
+| Final status | Dirty integration worktree preserved; protected refs unchanged |
+| Last updated | 2026-07-30 |
 
 ## S8H What Changed
 
@@ -15306,3 +15306,476 @@ clarification. A later holdout must be genuinely fresh and separately approved.
   `sha256:1c08d7bce492cdc94be5fa032498356cd1cb1283e2d5d387df86d1565f2de5a4`.
 - Pause before any live synthetic comparison; provider/model choice, cost,
   privacy/retention, kill switch, and evidence rules require Yuri approval.
+
+## Reception One Product-Context Proposal Runtime Closeout — 2026-07-29
+
+- Result:
+  `reception_one_product_context_proposal_runtime_pass_with_closed_sequencing_deviation`.
+- A separate default-off development route now performs authenticated,
+  practice-scoped authored-synthetic patient/practitioner reads, issues
+  request-scoped opaque handles, reuses fresh backend availability search and
+  releases only deterministic-proofreader-admitted proposal envelopes.
+- A real non-intercepted IPv6-loopback browser request crossed FastAPI and a
+  disposable PostgreSQL database, returned eight typed candidate slots,
+  preserved every appointment and forbidden-write count/hash, made zero
+  provider calls or writes, and cleaned up all owned state.
+- One separate occupied `gemini-2.5-flash` cell used the exact Bernie keyless
+  impersonated-ADC Sydney lane, returned HTTP 200, and produced five typed
+  operators admitted without repair. Its single-use ledger is consumed; no
+  later call or fallback occurred.
+- The occupied call preceded the exact uninterrupted live-local proof. That
+  ordering defect is retained as a closed control deviation; it is not
+  rewritten, and the occupied call was not repeated.
+- Continuity revision 72 and Compass revision 59 bind the result. The model is
+  not connected to product context. Real/product data, confirmation, writes,
+  voice, production, deployment and release remain closed.
+
+## Reception One Read-only Synthetic Diary-context Bridge — 2026-07-30
+
+- Result: `reception_one_readonly_synthetic_diary_context_occupied_pass`.
+- The trusted backend alone read a disposable authored-synthetic PostgreSQL
+  fixture and built the typed context frame; the cell received only minimal
+  source-labelled context and request-scoped opaque handles.
+- The disposable database was absent before provider contact. The cell received
+  no database or cloud credential, raw UUID, handle map, full Diary or
+  unselected appointment.
+- One exact Bernie keyless-ADC Gemini 2.5 Flash Sydney call returned HTTP 200.
+  The frozen proofreader admitted a 45-minute appointment-update proposal that
+  still requires human confirmation.
+- The single ledger is consumed and owned container, network, image, process
+  and database residue is zero. No write, confirmation, delivery, fallback,
+  provider tool, grounding, retrieval or cache occurred.
+- Continuity revision 149 and Compass revision 130 bind the result. The next
+  authorised work is the default-off, development-only, authored-synthetic
+  dual-planner product route with explicit wall-clock freshness. Real/product
+  data, production, deployment and release remain closed.
+
+## Reception One Default-off Dual-planner Runtime — 2026-07-30
+
+- Result:
+  `reception_one_default_off_dual_planner_occupied_model_and_recovered_route_pass`.
+- The authenticated authored-synthetic product-context route now accepts the
+  closed planner modes `deterministic` and `isolated_vertex`. Deterministic is
+  the zero-provider default; isolated mode has a separate default-off gate.
+- Both modes terminate at the same deterministic proofreader and existing
+  proposal-only API Spine adapters. Human confirmation remains required; no
+  appointment write or confirmation path was opened.
+- Exactly one Gemini 2.5 Flash request used the exact Bernie keyless-ADC Sydney
+  Vertex lane, returned HTTP 200 and was admitted as one grounded 45-minute
+  resize with no violation or repair. The ledger is consumed and no retry or
+  fallback followed.
+- The first outer HTTP response was not durably retained because Windows held a
+  closed backend log handle during cleanup. The provider/cell/proofreader audit
+  was already complete. A bounded cleanup repair and zero-provider
+  authenticated deterministic replay re-proved the route, proposal adapter and
+  unchanged database truth without spending another model call.
+- Continuity revision 153 and Compass revision 134 bind the candid composed
+  result. All owned database, process, container, image, network and temporary
+  residue is absent.
+- The result does not prove a second occupied response, real-data safety,
+  production fitness or Australian physical or sovereign processing. The next
+  work is provider-free, development-only Bureau UI wiring; real/product data,
+  writes, voice, Word, production, deployment and release remain closed.
+
+## Reception One Bureau Runtime UI Wiring — 2026-07-30
+
+- Result: `reception_one_bureau_runtime_ui_provider_free_pass`.
+- The authored-synthetic development Bureau now exposes a compact planner
+  selector. Standard deterministic planning remains the default and only the
+  closed planner mode crosses the UI bridge.
+- The browser displays only proofreader-admitted typed proposal fields and
+  planner mode, proofreader disposition, bounded provider-call count and an
+  opaque audit reference.
+- A non-intercepted browser/FastAPI/PostgreSQL Standard request returned HTTP
+  200, proofreader admission and zero provider calls. It remained
+  proposal-only and database truth was unchanged.
+- Selecting Isolated model while its separate backend gate was disabled
+  returned HTTP 403 before context or provider use, removed prior provenance
+  and made no deterministic fallback.
+- The combined UI, runtime, API Spine and Compass matrix passed 136 tests;
+  independent visual QA reproduced the intended sheet and provenance.
+- No provider call, credential read, confirmation, write, real/product data,
+  deployment or release occurred. Exact disposable database and runtime
+  cleanup passed.
+- Continuity revision 155 and Compass revision 136 bind the result. A fresh
+  occupied UI-path evaluation requires new exact provider-call authority and
+  pre-attempt gates.
+
+## Raisa Candidate Dual-host Foundation — 2026-07-31
+
+- Result: `raisa_dual_host_foundation_pass`.
+- Added one pure, deeply immutable Word host-capability profile shared by the
+  clinician and Reception One taskpane surfaces.
+- Profile construction invokes no Office, document, media, network, provider
+  or storage capability and grants no product authority.
+- Inventoried the earlier clinician and medical-scribe paths without
+  reclassifying or activating their legacy direct-backend behavior.
+- Recorded Reception One as one backend-owned role-scoped system for staff,
+  doctors and future online-booking and Rayleen patient surfaces; no
+  third-party primary booking or arrival product was selected.
+- Raisa and Clinician One remain candidate names only.
+- Deterministic schema/profile checks, focused Word/Reception/API Spine tests,
+  a local rendered taskpane check and the development build passed.
+- Task-owned browser, listener, process, container, network, image and
+  temporary-log residue is absent.
+- Cloud-first practice management as a service is the primary delivery
+  direction; any future local model is a subordinate edge and cannot own
+  parallel clinical, reception or audit truth.
+- Continuity revision 172 and Compass revision 153 bind the result. No cloud
+  resource, tenancy, provider, protected data, microphone capture, patient
+  client, backend operation, command, write, production, deployment or release
+  was opened.
+
+## Clinician One Read-only Document Context — 2026-07-31
+
+- Result: `clinician_one_readonly_document_context_adapter_pass`.
+- Added one single-use adapter that reads only the exact current Word selection
+  after an explicit action and authored-synthetic attestation.
+- The admitted output is a typed, deeply immutable, in-memory
+  `current_consult_note` frame; no whole-document or paragraph read exists.
+- Empty, oversized, over-line, malformed, replayed, mobile, unknown and
+  not-ready cases fail closed without truncation or a second read.
+- The taskpane renders only source, host and counts; raw selection text is not
+  logged or persisted, and the ordinary-browser path remains disabled.
+- Dependency-injected desktop/web fixtures, schemas, replay/boundary checks,
+  the focused Word/Reception/API Spine suite, a fail-closed browser render and
+  the development build passed.
+- Provider, backend, database, network, microphone, patient, diagnostic,
+  command, document-write and clinical-finalisation authority remain zero.
+- Task-owned browser, listener, process, container, network, image and
+  temporary-log residue is absent.
+- Continuity revision 174 and Compass revision 155 bind the result. Real Word
+  selection semantics, authenticated Word Online, Office identity/role,
+  clinical-data safety, provider use, production, deployment and release are
+  not proved or authorised.
+
+## Clinician One Word Desktop Selection Check — 2026-07-31
+
+- Result: `clinician_one_word_desktop_selection_check_pass`.
+- One disposable `ReadDocument`-only HTTPS-loopback sideload loaded the
+  accepted taskpane in installed Microsoft Word desktop.
+- One new unsaved blank task document contained only authored-synthetic text,
+  and one explicit click read the exact current selection once.
+- The taskpane released only source, host and counts. Word's returned
+  selection included its terminal paragraph marker; the exact 92-character,
+  three-line host result was retained as hashed/count evidence without raw
+  text.
+- No existing document, Office account, tenant, credential, provider,
+  backend, database, microphone, diagnostic, clinical, command or write path
+  was accessed.
+- Yuri confirmed the document was closed without saving. The exact task
+  document, sideload, listener and task logs were removed; remaining task
+  residue is zero.
+- Continuity revision 175 and Compass revision 156 bind the result.
+  Authenticated Word Online, public HTTPS hosting, identity and role
+  authorization, real-data safety, production, deployment and release remain
+  unproven and separately gated.
+
+## Raisa Cloud Run Public-HTTPS Dev-Host Readiness — 2026-07-31
+
+- Result: `raisa_cloud_run_public_https_dev_host_readiness_pass`.
+- A deterministic 20-file allowlist generates the complete static Docker
+  context without repository, credential, source-map or unrelated-study
+  material.
+- The production taskpane duplicate-runtime path and placeholder deployment
+  origin were repaired.
+- The digest-pinned Node image passes non-root, read-only,
+  all-capabilities-dropped, no-new-privileges, resource-bound and
+  internal-network checks.
+- Local and simulated exact Sydney `run.app` policies pass with seven exact
+  zero-authority fields; wrong host/protocol, API, source-map, traversal,
+  unknown and non-GET requests fail closed.
+- The in-app browser renders only the bounded synthetic card at 480×720 and
+  360×780, with zero console errors, EMR backend requests or provider
+  requests.
+- The generated HTTPS fixture manifest passes Microsoft validation with
+  `ReadDocument`; 98 focused Word, Raisa, Reception One and API Spine tests
+  pass.
+- Every owned container, network, image, listener, context and browser tab is
+  removed. No external cloud, IAM, API, billing, tenant, deployment or release
+  mutation occurred.
+- Continuity revision 176 and Compass revision 157 bind the result. External
+  resource creation and the later supervised Word Online check require fresh
+  authority.
+
+## Raisa Cloud Run Private Deployment / Public-Policy Block — 2026-07-31
+
+- Result: `blocked_organization_policy_public_invocation`.
+- Created the exact Docker-format `raisa-office-web-dev` repository in
+  `australia-southeast1`.
+- Pushed the accepted closed context at immutable digest
+  `sha256:6696b3c97682ba8d02d3b18bab3d5d3d131f8c56c613c1adfca32400f94b3f5d`.
+- Created the ready private Cloud Run service at
+  `https://raisa-office-web-dev-nnbntbx5yq-ts.a.run.app`.
+- Final revision `raisa-office-web-dev-00003-9vg` retains the exact runtime
+  identity, origin, min-zero/max-one, CPU/memory/concurrency limits and no
+  secret, volume, VPC or Cloud SQL configuration.
+- Effective Domain Restricted Sharing rejected the exact `allUsers` /
+  `roles/run.invoker` binding with `FAILED_PRECONDITION`; no binding was
+  created and no alternate mechanism was applied.
+- Public route, browser, manifest and Word Online gates were not run.
+- All task-owned local tags, layers, contexts, temporary Docker credentials and
+  raw error working files were removed. The authorised repository, image and
+  private min-zero service remain; artifact storage can incur ongoing cost.
+- Continuity revision 178 and Compass revision 159 bind the accepted blocked
+  closeout. Yuri must explicitly choose the exact-service
+  `--no-invoker-iam-check` mechanism or obtain a narrow organisation-policy
+  exception before public verification.
+
+## Raisa Public Access / Word Online Upload Intervention — 2026-07-31
+
+- Result: accepted partial integration; Word execution remains blocked.
+- Disabled the Cloud Run Invoker IAM check only for
+  `raisa-office-web-dev` in `bernie-emr4-dev/australia-southeast1`.
+- No `allUsers` IAM binding exists and no other service, IAM policy or
+  organisation policy changed.
+- Public revision `raisa-office-web-dev-00005-w82` passes the exact route
+  matrix, security headers, hosting policy, hosted companion and Office
+  manifest resource gates.
+- Word Online reached the developer Upload Add-in dialog in a task-created
+  blank personal document, but the Chrome extension did not expose local file
+  selection. No manifest, synthetic request, document content, provider,
+  backend, database, confirmation or command was transmitted.
+- All task-owned local build directories, repair image tags, containers and
+  networks were removed. Two content-free task-created Word documents require
+  deletion after the terminal Word result.
+- Continuity revision 179 and Compass revision 160 bind the result. Yuri must
+  enable **Allow access to file URLs** for the ChatGPT Chrome Extension before
+  the exact Word gate resumes.
+
+## Raisa Word Online Authenticated Companion Verification — 2026-07-31
+
+- Result: `raisa_word_online_authenticated_companion_verification_pass`.
+- The task-specific `ReadDocument` manifest loaded in one signed-in personal
+  Word Online session.
+- The first Office-dialog attempt failed closed on an exact hosted-Diary
+  capability mismatch and released no Word summary.
+- The repair admits only `smoke` and `reception_one_companion_demo` when the
+  exact public origin, authored-synthetic classification and seven false
+  authority fields validate.
+- The closed image was deployed only to `raisa-office-web-dev` as revision
+  `raisa-office-web-dev-00006-xf9`, immutable digest
+  `sha256:8e06f07e4efd393f38275348d8bd7b136e664c2797c399a89207b66116839324`.
+- The rerun retained three synthetic appointment matches in the native Diary
+  and returned only `3 results are ready in the Diary.` to Word.
+- Observed taskpane and Diary traffic contained zero API, credential and
+  provider requests. No document body, backend, database, appointment command,
+  confirmation or microphone path ran.
+- Both task-created blank documents were moved to the recoverable OneDrive
+  Recycle Bin; the pre-existing named synthetic document was preserved.
+- Task-local build directories, image tags, containers, networks, listeners
+  and temporary Docker credential directories are absent. The authorised
+  min-zero Cloud Run service and immutable image remain.
+- Continuity revision 180 and Compass revision 161 bind the accepted terminal
+  result. EMR4 application authentication, clinician-role authorization,
+  organisational Office deployment, real-data safety, processing geography,
+  production and release remain unproved and closed.
+
+## Raisa Shared Application Authentication and Clinician-Role Boundary — 2026-07-31
+
+- Result:
+  `raisa_shared_application_auth_clinician_role_boundary_architecture_pass`.
+- One EMR4-backend decision owns fresh application identity, active opaque
+  parent and surface sessions, expiry, centralized revocation, current role,
+  active same-practice practitioner/resource scope and required audit across
+  desktop Word, Word Online and the native Diary.
+- Microsoft or Office signed-in state and all client role, practice, document
+  and host claims remain non-authoritative.
+- The initial protected clinician-read rule admits only a fresh active `GP`
+  with an active same-practice practitioner link and successful required audit
+  before data access.
+- Word-to-Diary trust uses a 60-second maximum, single-use, atomically consumed,
+  exact-origin/audience/state/nonce/generation and S256-PKCE-bound metadata
+  exchange without bearer, cookie, Office-identity or clinical payload relay.
+- All 23 authorization and 13 exchange cases match their frozen outcomes. All
+  16 focused tests pass with repository database fixtures disabled.
+- The expanded 165-test no-database-fixture auth, API Spine, dual-host,
+  Clinician One, Word companion, Continuity and Compass suite also passes.
+- Provider, external identity, Microsoft/Office identity, cloud/IAM, backend,
+  database, product-data, patient/clinical-field, command, microphone,
+  document-mutation and deployment counts are zero.
+- Continuity revision 181 and Compass revision 162 bind this architecture-only
+  result. Live authentication, external identity, product-derived reads,
+  persistence, deployment, production and release remain separately closed.
+- The recommended next increment is a separately authorized repository-local
+  server-side session/revocation/exchange/audit foundation using only
+  authored-synthetic test state and still permitting no product read.
+- The required non-PHI Pushover closeout notification was attempted and failed
+  with `no active devices to send to`; nothing was delivered.
+
+## Raisa Shared Application Authentication Runtime Foundation — 2026-07-31
+
+- Result: `raisa_shared_application_auth_runtime_foundation_pass`.
+- Added one unmounted service-layer runtime and explicit authored-synthetic
+  in-memory store; no router, dependency, cookie, database or module-level
+  runtime binding was added.
+- Opaque parent, surface and exchange values are retained only as SHA-256
+  references. Parent absolute and surface/parent idle lifetime remain bounded
+  by the frozen eight-hour and 30-minute maxima.
+- Explicit parent/surface revocation and centralized principal-generation
+  advancement fail closed across desktop Word, Word Online and native Diary.
+- Word desktop and Word Online each create one native-Diary binding through the
+  exact 60-second maximum, single-use, origin/audience/state/nonce/generation
+  and S256-PKCE-bound exchange.
+- One concurrent two-thread redemption admits exactly one consumer; the other
+  receives the terminal replay denial.
+- Required audit admission precedes successful in-memory mutations. Synthetic
+  audit failure leaves create, redeem and revoke state unchanged.
+- The provider-free evidence passes all ten checks. All 32 focused tests and
+  the corrected 145-case no-`conftest` suite pass. An initial expanded
+  selection named seven database-fixture-dependent cases unavailable by design;
+  no runtime assertion failed.
+- Provider, identity-provider, Office, cloud/IAM, route, cookie, database,
+  product-data, patient/clinical-field, command, microphone, document-mutation
+  and deployment counts are zero.
+- Continuity revision 182 and Compass revision 163 bind the accepted result.
+- The frozen Sydney service revision `raisa-office-web-dev-00006-xf9`, digest,
+  zero-authority posture and resource limits are unchanged.
+- The next safe candidate is a separately authorised PostgreSQL transaction and
+  migration tranche using disposable authored-synthetic fixtures, still with
+  routes, cookies, external identity and product reads closed.
+- The required non-PHI Pushover closeout notification was attempted with the
+  sprint engine paused for that fresh authority and failed with
+  `no active devices to send to`; nothing was delivered.
+
+## Raisa Shared Application Authentication PostgreSQL Persistence — 2026-08-01
+
+- Result: `raisa_shared_application_auth_postgresql_persistence_pass`.
+- Added five normalized authored-synthetic application-auth tables through the
+  reversible Alembic revision `o4p5q6r7s8t9`; the accepted in-memory runtime
+  remains the sole policy engine and its frozen source/evidence stayed
+  unchanged.
+- The route-free coordinator locks one composite principal-generation row,
+  hydrates only that principal's hash-only state, and commits required typed
+  metadata audit plus state in one PostgreSQL transaction.
+- Full upgrade, downgrade to `n3o4p5q6r7s8`, re-upgrade, exact-head and
+  autogenerate-drift checks pass on a uniquely named local database.
+- Two independent database sessions admit exactly one exchange consumer. A
+  forced audit insert outage rolls back all state; audit mutation, generation
+  rollback/skip and exchange-consumption reset/rewrite return SQLSTATE `55000`.
+- Forced RLS hides all rows without context and every foreign-practice row from
+  a transactional non-login, non-superuser, non-bypass role. That role is
+  absent after rollback.
+- Seven raw issued values match no persisted row across all five tables. The
+  exact acceptance database was terminated, dropped and proved absent.
+- All 60 focused, corrected 156-case expanded no-`conftest`, and 12 serial
+  legacy database tests pass. Compilation, Ruff, JSON, Alembic and whitespace
+  gates pass.
+- Every provider, external identity, Microsoft/Office identity, cloud/IAM,
+  product/clinical read, command, microphone, document, deployment and
+  production count is zero.
+- Continuity revision 183 and Compass revision 164 bind the accepted result.
+- The frozen Sydney service revision `raisa-office-web-dev-00006-xf9`, digest,
+  zero-authority posture and resource limits are unchanged.
+- The next safe candidate is a separately authorised least-privilege runtime
+  database-role and secure synthetic session-transport architecture. Routes,
+  cookies, external identity and product reads remain closed.
+- The required non-PHI Pushover closeout notification was attempted with the
+  sprint engine paused for that fresh authority and failed with
+  `no active devices to send to`; nothing was delivered.
+
+## Raisa Shared Application Authentication Runtime Role and Secure Transport — 2026-08-01
+
+- Result: `raisa_shared_application_auth_runtime_role_secure_transport_pass`.
+- Added one narrow security-definer SHA-256 reference resolver at Alembic head
+  `p5q6r7s8t9u0` and one parameterised NOLOGIN, non-owner, non-bypass-RLS
+  capability-role contract.
+- The capability role has only the frozen operation matrix over five auth
+  tables, one audit sequence and the exact resolver, with zero privilege hits
+  across 50 observed product tables.
+- Mounted seven application-auth POST routes behind a default-off dependency;
+  no environment switch enables them and the closed application opens no
+  database session.
+- Exact HTTPS origins, independent cookie/header CSRF equality, generic
+  external errors and partitioned Secure HttpOnly `__Host-` cookies govern the
+  authored-synthetic protocol without JSON parent/surface bearers.
+- One-use login, validation, atomic rotation, Word-to-native-Diary exchange and
+  logout pass through the accepted single policy engine and PostgreSQL
+  coordinator. Replays, binding mismatches and old bearers fail generically.
+- Forced audit outage returns generic 503, releases no cookie and preserves all
+  state. Thirty-one raw values match no persisted row or evidence field.
+- The uniquely named disposable database and cluster capability role were
+  dropped and proved absent.
+- All 83 focused, 177 expanded no-`conftest`, and 12 serial legacy database
+  tests pass. Compilation, Ruff, JSON/YAML, API Spine, Alembic and whitespace
+  gates pass.
+- Every provider, external identity, Microsoft/Office identity, cloud/IAM,
+  product/clinical read, command, microphone, document, deployment and
+  production count is zero.
+- Continuity revision 184 and Compass revision 165 bind the accepted result.
+- The frozen Sydney service revision `raisa-office-web-dev-00006-xf9`, digest,
+  zero-authority posture and resource limits are unchanged.
+- The next safe candidate is a separately authorised repository-local,
+  provider-free operational-hardening architecture. Real identity, federation,
+  product reads, deployment, production and release remain closed.
+- The required non-PHI Pushover closeout notification was attempted with the
+  sprint engine paused for that fresh authority and failed with
+  `no active devices to send to`; nothing was delivered.
+
+## Raisa Shared Application Authentication Operational Hardening — 2026-08-01
+
+- Result: `raisa_shared_application_auth_operational_hardening_pass`.
+- Separated the exact finite-connection deployment LOGIN from the accepted
+  NOLOGIN capability role; the login has no direct auth-table grants and the
+  bounded pool executes exact `SET ROLE` on each new physical connection.
+- Added strict one-hop trusted-proxy parsing, finite per-process fixed-window
+  rate admission and required HMAC-only metadata denial audit to all seven
+  still-default-off routes.
+- Disposable PostgreSQL proof establishes distinct `session_user` and
+  `current_user`, direct-login denial, 0.25-second bounded pool exhaustion,
+  forced RLS, append-only denial rows and generic 429/503 behavior.
+- Exactly three denial rows were retained; raw/target scans found zero matches,
+  and the unique database plus both roles were dropped and proved absent.
+- All 151 focused, 193 expanded no-`conftest` and 12 serial legacy database
+  cases pass. Compilation, Ruff, JSON/YAML, Bandit, pip audit, migration and
+  whitespace gates pass with every external/product side-effect count zero.
+- GitHub CodeQL and Dependabot provide laptop-independent detection, but one
+  durable owner/SLA/native-disposition lifecycle is missing. Nine Dependabot
+  alerts and three repository-validated but GitHub-open CodeQL highs remain;
+  no alert or GitHub setting changed.
+- Continuity revision 185 and Compass revision 166 bind the accepted result.
+- The frozen Sydney service revision and digest, zero-authority posture and
+  resource limits are unchanged.
+- Security-finding governance and supervised Office cookie compatibility are
+  fresh candidates. Real identity, federation, product reads, distributed
+  abuse resistance, credential lifecycle, deployment, production and release
+  remain closed.
+- The non-PHI closeout notification was not attempted because this tranche's
+  frozen plan prohibits network egress beyond disposable local PostgreSQL.
+
+## EMR4 Security-Finding Governance — 2026-08-01
+
+- Result: `security_finding_governance_pass`.
+- Added one sanitized, schema-validated register joining nine Dependabot and
+  three CodeQL alert IDs to owner, SLA, evidence, exact native disposition,
+  review, expiry and reopening conditions.
+- Linked the existing 14-row Bandit and 10-row CodeQL instance-preserving
+  validation ledgers so laptop-generated findings cannot disappear into local
+  conversation state.
+- Static tracing preserves Dependabot alerts 8-15 as genuine upstream defects
+  while establishing that every resolution is development-only and the exact
+  supported advisory sink is absent. No package, lockfile, override or force
+  fix changed.
+- Exact GitHub REST readback confirms alerts 5 and 8-15 plus CodeQL 295, 272
+  and 268 are dismissed with the register's evidence comments and zero open
+  alerts remain in the reconciled queues.
+- The approved root `SECURITY.md` names `@yurifrusin`, defines acknowledgement,
+  triage and resolution targets, requires durable ingestion and makes accepted
+  risk expire back to review.
+- Python and Node security workflows preserve their push/PR triggers and
+  blocking dependency gates while defining staggered daily schedules. GitHub
+  activates scheduled workflows from the default branch, so activation and an
+  actual scheduled-run result await protected integration.
+- The deterministic acceptance and all 183 selected serial cross-checkpoint
+  cases pass. Ruff, reviewed Bandit, pip-audit, blocking production npm audit,
+  Office manifest, structured-data and whitespace gates pass.
+- Continuity revision 186 and Compass revision 167 bind the accepted result.
+- No protected evidence, product/patient/clinical data, external identity,
+  provider, cloud/IAM, deployment, production or protected ref was accessed or
+  changed. Native alert disposition is the only external mutation.
+- Luna was not callable in the current subagent interface and no substitute
+  worker ran. Yuri authorised one intentional task-branch commit, push and
+  draft PR; protected integration remains separate.
+- The leading next candidate is supervised authored-synthetic Office cookie
+  compatibility. It requires fresh authority and keeps real identity,
+  Microsoft/Office federation authority and every product read closed.

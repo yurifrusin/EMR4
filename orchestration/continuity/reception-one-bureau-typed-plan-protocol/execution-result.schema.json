@@ -1,0 +1,245 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/reception-one-bureau-plan-execution-result.v1.json",
+  "title": "Reception One Bureau bounded in-memory execution result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "request_id",
+    "context_revision",
+    "reviewed_plan_sha256",
+    "status",
+    "operator_trace",
+    "final_output",
+    "released_field_paths",
+    "boundary"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "reception.one.bureau.execution-result.v1"
+    },
+    "request_id": {
+      "$ref": "#/$defs/syntheticRef"
+    },
+    "context_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "reviewed_plan_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "status": {
+      "const": "executed"
+    },
+    "operator_trace": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "step_id",
+          "operator"
+        ],
+        "properties": {
+          "step_id": {
+            "type": "string",
+            "pattern": "^step-[a-z0-9][a-z0-9-]{0,47}$"
+          },
+          "operator": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$"
+          }
+        }
+      }
+    },
+    "final_output": {
+      "$ref": "#/$defs/finalOutput"
+    },
+    "released_field_paths": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 12,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^\\$[.][a-z0-9_.]+$"
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "write_performed",
+        "confirmation_performed",
+        "provider_calls",
+        "network_access",
+        "database_access",
+        "product_delivery"
+      ],
+      "properties": {
+        "write_performed": {
+          "const": false
+        },
+        "confirmation_performed": {
+          "const": false
+        },
+        "provider_calls": {
+          "const": 0
+        },
+        "network_access": {
+          "const": false
+        },
+        "database_access": {
+          "const": false
+        },
+        "product_delivery": {
+          "const": false
+        }
+      }
+    }
+  },
+  "$defs": {
+    "syntheticRef": {
+      "type": "string",
+      "pattern": "^synthetic-[a-z0-9][a-z0-9-]{2,95}$"
+    },
+    "finalOutput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "proposal_family",
+        "api_spine_operation_id",
+        "patient_ref",
+        "practitioner_ref",
+        "appointment_ref",
+        "candidate_slot_ids",
+        "duration_minutes",
+        "status",
+        "warning_codes",
+        "requires_human_confirmation",
+        "write_performed"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "proposal_candidate",
+            "squeeze_in_assessment",
+            "clarification"
+          ]
+        },
+        "proposal_family": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "create",
+            "move",
+            "resize",
+            "cancel",
+            "status_change",
+            "squeeze_in_assessment",
+            "clarification",
+            null
+          ]
+        },
+        "api_spine_operation_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "proposeAppointmentCreate",
+            "proposeAppointmentUpdate",
+            "proposeAppointmentDelete",
+            "proposeAppointmentStatus",
+            null
+          ]
+        },
+        "patient_ref": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/syntheticRef"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "practitioner_ref": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/syntheticRef"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "appointment_ref": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/syntheticRef"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "candidate_slot_ids": {
+          "type": "array",
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/syntheticRef"
+          }
+        },
+        "duration_minutes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 5,
+          "maximum": 180
+        },
+        "status": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "arrived",
+            "completed",
+            "dna",
+            null
+          ]
+        },
+        "warning_codes": {
+          "type": "array",
+          "maxItems": 6,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "manual_squeeze_in_review",
+              "adjacent_to_break",
+              "no_reservation",
+              "staff_selection_required",
+              "staff_confirmation_required"
+            ]
+          }
+        },
+        "requires_human_confirmation": {
+          "type": "boolean"
+        },
+        "write_performed": {
+          "const": false
+        }
+      }
+    }
+  }
+}

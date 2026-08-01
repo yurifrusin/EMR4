@@ -1,0 +1,89 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_ariadne_vertex_sydney_rehearsal_plan_and_continuity_descendant",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_fresh_five_source_rehydration_and_preserved_yuri_authority",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "DeepSeek provider and worker dispatch are outside this plan."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude is not selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external worker dispatch is authorised."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The complete Yuri authority is preserved in docs/ariadne-vertex-sydney-bounded-work-cell-authority.md.",
+        "The plan binds Gemini 3.5 Flash to project bernie-emr4-dev, exact Bernie service-account impersonation, australia-southeast1 and the regional Vertex hostname.",
+        "Only authored-synthetic data, a credential-free occupied cell, broker-only ADC, typed output, deterministic proofreader, hash-chained external audit and complete cleanup are permitted.",
+        "One primary call is permitted only after all pre-call gates pass; one repaired retry is conditional and the absolute ceiling is two occupied calls and USD 1.",
+        "Every provider/model/project/identity/region/credential/fallback substitution is prohibited.",
+        "Named ADC, IAM, API, billing, logging, regional entitlement, cost, credential-exposure, isolation and authority stop conditions require Yuri.",
+        "The planned Continuity descendant does not revise the consumed Terra/Gemini node.",
+        "Continuity and Compass must be revision-bound and the rendered Compass must validate before any occupied call."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No subagent is selected for plan freezing."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/codex/ariadne-vertex-sydney-rehearsal-rehydration-receipt.json"
+  ],
+  "assigned_agent_ids": []
+}

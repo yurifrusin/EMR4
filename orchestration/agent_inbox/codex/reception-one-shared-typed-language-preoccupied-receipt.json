@@ -1,0 +1,62 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "continuation_event": "pre_occupied_provider_call",
+  "planned_action": "make_one_primary_authored_synthetic_shared_plan_program_call_through_the_exact_bernie_sydney_vertex_lane",
+  "status": "passed",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "authority_boundary": "one_primary_shared_plan_program_and_bounded_operator_note_call_gemini_2_5_flash_bernie_keyless_adc_australia_southeast1_authored_synthetic_proposal_only_no_fallback_write_or_product_delivery",
+  "worker_dispatch_permitted": false,
+  "source_evidence": {
+    "live_handover_current_baton": "The new active descendant is bound at Continuity graph revision 77 and Compass map revision 64. Historical extended-runtime failures and consumed ledgers remain unchanged.",
+    "current_authority_allocation": "Yuri authorised one shared agent-proofreader typed language, a strictly bounded audit/troubleshooting speech channel and continuation through the exact live Vertex denouement. The frozen primary call is the only call currently eligible; any repaired retry remains conditional on a deterministic request-contract defect and a complete closed first-attempt audit.",
+    "active_plan_and_acceptance": [
+      "docs/bernie-reception-one-shared-typed-language-plan.md",
+      "docs/security/bernie-reception-one-shared-typed-language-threat-model-delta.md",
+      "orchestration/agent_inbox/codex/reception-one-shared-typed-language-plan-sol-acceptance.md",
+      "orchestration/continuity/reception-one-shared-typed-language/runtime-policy.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-authority-request.json",
+      "orchestration/continuity/reception-one-shared-typed-language/official-provider-contract-evidence.json",
+      "orchestration/continuity/reception-one-shared-typed-language/provider-blocked-evidence.json",
+      "orchestration/continuity/reception-one-shared-typed-language/provider-free-isolation-evidence.json",
+      "orchestration/continuity/reception-one-shared-typed-language/occupied-preflight-evidence.json"
+    ],
+    "protected_evidence_boundaries": "Only authored-synthetic text enters the provider lane. The cell receives no credentials. The broker alone uses exact impersonated ADC and the Sydney Vertex data-plane endpoint. The operator note is at most 320 bytes, independently proofread, audit-only and never parsed or product-delivered. Raw prompts, raw responses, rejected note text, credentials, tokens, API-key information and hidden reasoning are not retained.",
+    "git_refs_and_worktree": {
+      "checked_at": "2026-07-30T00:41:22Z",
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_entry_count": 338,
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true,
+      "continuity_graph_revision": 77,
+      "compass_map_revision": 64,
+      "compass_source_graph_revision": 77,
+      "rendered_compass_exact": true
+    }
+  },
+  "gates": {
+    "focused_shared_language_tests": "passed",
+    "legacy_model_lane_regression": "passed",
+    "typed_plan_protocol_regression": "passed",
+    "extended_runtime_regression": "passed",
+    "api_spine_tests": "passed",
+    "continuity_validation": "passed",
+    "compass_validation_and_render_binding": "passed",
+    "provider_blocked_contract": "passed",
+    "provider_free_real_isolation": "passed",
+    "fresh_exact_adc_and_cloud_controls": "passed",
+    "provider_calls_already_made_in_this_descendant": 0
+  }
+}

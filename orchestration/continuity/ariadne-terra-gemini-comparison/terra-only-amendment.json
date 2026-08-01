@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.terra_only_amendment.v1",
+  "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+  "amendment_id": "terra-only-2026-07-24",
+  "status": "superseded_before_consumption",
+  "superseded_by": "two-lane-restoration-2026-07-24",
+  "authority": "yuri-explicit-terra-only-live-rehearsal",
+  "overrides": [
+    "sequence_policy.both_credentials_required_before_first_consumption",
+    "two-lane-acceptance-rule"
+  ],
+  "lane": {
+    "lane_id": "terra",
+    "provider": "openai",
+    "model_id": "gpt-5.6-terra",
+    "method": "POST",
+    "host": "api.openai.com",
+    "path": "/v1/responses",
+    "reasoning_effort": "medium",
+    "maximum_provider_calls": 1,
+    "maximum_output_tokens": 2048,
+    "retry": false,
+    "fallback": false
+  },
+  "gemini": {
+    "excluded": true,
+    "credential_check_permitted": false,
+    "broker_start_permitted": false,
+    "work_cell_start_permitted": false,
+    "prompt_transmission_permitted": false,
+    "provider_call_permitted": false,
+    "ledger_consumption_permitted": false,
+    "required_ledger_state_after_run": "available"
+  },
+  "result_rule": {
+    "pass": "ariadne_terra_only_rehearsal_pass",
+    "revision_required": "ariadne_terra_only_rehearsal_revision_required",
+    "preattempt_gate": "ariadne_terra_only_rehearsal_preattempt_gate_closed"
+  },
+  "closed_surfaces_unchanged": true
+}

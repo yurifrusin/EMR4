@@ -21,6 +21,13 @@ from app.models.messaging import InternalMessage, SmsLog
 from app.models.kiosk import CheckinEvent, PatientQrToken, CallLog
 from app.models.rag import CommunityEncounter, RagFeedback, IhiRecord, MhrUpload
 from app.models.ai_audit import AccessAiAuditLog
+from app.models.application_auth import (
+    ApplicationAuthAuditEvent,
+    ApplicationAuthExchangeGrant,
+    ApplicationAuthParentSession,
+    ApplicationAuthPrincipalGeneration,
+    ApplicationAuthSurfaceSession,
+)
 
 __all__ = [
     "Base",
@@ -40,4 +47,9 @@ __all__ = [
     "CheckinEvent", "PatientQrToken", "CallLog",
     "CommunityEncounter", "RagFeedback", "IhiRecord", "MhrUpload",
     "AccessAiAuditLog",
+    "ApplicationAuthAuditEvent",
+    "ApplicationAuthExchangeGrant",
+    "ApplicationAuthParentSession",
+    "ApplicationAuthPrincipalGeneration",
+    "ApplicationAuthSurfaceSession",
 ]

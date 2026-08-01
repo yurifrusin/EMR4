@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OfficeApp
+  xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:type="TaskPaneApp">
+  <Id>4eb9d6e4-42a2-4aa7-a72b-6689ca9fb35a</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>Raisa Healthcare development</ProviderName>
+  <DefaultLocale>en-AU</DefaultLocale>
+  <DisplayName DefaultValue="Clinician One synthetic check"/>
+  <Description DefaultValue="Bounded authored-synthetic Word selection check."/>
+  <IconUrl DefaultValue="__RAISA_PUBLIC_ORIGIN__/assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="__RAISA_PUBLIC_ORIGIN__/assets/icon-80.png"/>
+  <SupportUrl DefaultValue="https://github.com/emr4/emr4"/>
+  <AppDomains>
+    <AppDomain>__RAISA_PUBLIC_ORIGIN__</AppDomain>
+  </AppDomains>
+  <Hosts>
+    <Host Name="Document"/>
+  </Hosts>
+  <DefaultSettings>
+    <SourceLocation DefaultValue="__RAISA_PUBLIC_ORIGIN__/taskpane.html?clinician_one_context_demo=true"/>
+  </DefaultSettings>
+  <Permissions>ReadDocument</Permissions>
+</OfficeApp>

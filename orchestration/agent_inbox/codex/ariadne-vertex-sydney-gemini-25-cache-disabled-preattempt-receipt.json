@@ -1,0 +1,82 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_integration_cloud_mutation_or_independent_provider_call_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "open_exactly_one_primary_authored_synthetic_gemini_25_flash_sydney_vertex_call",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md complete Current Baton and historical immutable stops",
+    "current_authority_allocation": [
+      "docs/ariadne-vertex-sydney-bounded-work-cell-authority.md",
+      "docs/ariadne-vertex-sydney-gemini-25-flash-authority-delta.md",
+      "Yuri's sanitized external operator cache-control evidence"
+    ],
+    "active_plan_and_acceptance": [
+      "docs/ariadne-vertex-sydney-gemini-25-cache-disabled-continuation-plan.md",
+      "orchestration/continuity/ariadne-vertex-sydney-gemini-25/pre-attempt-tranche-3-evidence.json",
+      "orchestration/continuity/ariadne-vertex-sydney-gemini-25/tranche-4-real-isolation-evidence.json",
+      "orchestration/continuity/emr4-continuity-graph.json",
+      "orchestration/continuity/emr4-compass.json",
+      "docs/ariadne-compass-current.md"
+    ],
+    "protected_evidence_boundaries": "AGENTS.md sections 5-6 and exact authored-synthetic, keyless impersonated ADC, Sydney inference, no-fallback, isolation, audit, USD 1, two-call, no-product, no-database, no-PII, no-command and no-external-mutation boundaries",
+    "git_refs_and_worktree": {
+      "HEAD": "5b1ea7952fb08eea333da0e63f166d3895ccea32",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "worktree_dirty_and_preserved": true,
+      "protected_refs_unchanged": true
+    }
+  },
+  "deterministic_gates": {
+    "complete_read_only_preflight": "passed",
+    "provider_free_real_isolation": "passed",
+    "all_opened_provider_free_ledgers_consumed": true,
+    "task_scoped_residue_absent": true,
+    "repository_only_verifier": "passed",
+    "focused_rehearsal_tests_passed": 77,
+    "relevant_api_spine_tests_passed": 43,
+    "python_compile_and_ruff": "passed",
+    "javascript_syntax": "passed",
+    "json_and_schema_validation": "passed",
+    "git_diff_check": "passed",
+    "continuity_graph_revision": 41,
+    "continuity_graph_sha256": "sha256:714f1315e5121b197bc8fb1d856c1140b145bf0ff5ca9cbfd91110edd5ed67ef",
+    "compass_map_revision": 28,
+    "compass_sha256": "sha256:a932f64bd05368bf7566a4403e2db9f6ae0d96be92295a98785a9a1763949a2a",
+    "rendered_compass_exact": true,
+    "rendered_compass_sha256": "sha256:cb2457d8d59ef0d04b6e2be964c50da7e9afbef9bb32805e11555e37505721ca"
+  },
+  "occupied_boundary": {
+    "authority_source": "Yuri's conditional bounded Sydney Vertex sequence and Gemini 2.5 Flash reorientation",
+    "first_permitted_action": "create_one_distinct_open_occupied_ledger_then_launch_one_primary_lifecycle",
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "data_classification": "authored_synthetic_only",
+    "application_cost_ceiling_usd": 1,
+    "occupied_calls_consumed": 0,
+    "absolute_occupied_call_ceiling": 2,
+    "primary_call_admitted": true,
+    "retry_admitted_now": false,
+    "external_state_change_authority": false
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

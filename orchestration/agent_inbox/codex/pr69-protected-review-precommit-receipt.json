@@ -1,0 +1,38 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md and its current PR-publication and Office-cookie next-step baton were read completely.",
+    "current_authority_allocation": "GPT Sol retains protected review and integration ownership. No worker or subagent is selected.",
+    "active_plan_and_acceptance": [
+      "docs/security/security-finding-governance-plan.md",
+      "docs/security/security-finding-governance-threat-model-delta.md",
+      "docs/security/security-finding-governance-closeout-2026-08-01.md",
+      "orchestration/agent_inbox/codex/security-finding-governance-sol-acceptance.md",
+      "docs/security/pr69-codeql-alerts-500-507-triage-2026-08-01.md"
+    ],
+    "protected_evidence_boundaries": "Protected holdouts and raw historical Diary material remain sealed. Provider, credential, real identity, federation, product/patient data, deployment, production, release, public rename, domain and trademark boundaries remain closed.",
+    "git_refs_and_worktree": {
+      "HEAD": "2d63dcef72cfdc9c3a2433c5e876fdfc7ea8d3bd",
+      "origin_task_branch": "2d63dcef72cfdc9c3a2433c5e876fdfc7ea8d3bd",
+      "master_and_handoff_local_and_origin": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "concurrent_branding_assets": "present_untracked_untouched_and_excluded",
+      "protected_refs_unchanged": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true,
+  "worker_dispatch_selected": false
+}

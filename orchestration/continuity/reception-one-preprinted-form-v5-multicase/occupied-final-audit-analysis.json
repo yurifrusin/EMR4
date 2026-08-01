@@ -1,0 +1,165 @@
+{
+  "schema_version": "reception.one.preprinted_form_v5.multicase_external_audit_analysis.v1",
+  "recorded_at": "2026-07-30T04:51:21Z",
+  "result": "reception_one_preprinted_form_v5_multicase_external_audit_pass",
+  "source_evidence_file_sha256": "sha256:bcbab04489e543f0dd07a3cd5310abf32269cb151ca4e91c3e2576e6615ca68a",
+  "coordinator_repair_file_sha256": "sha256:71e03eef95d7ec01c3680670914deb9b26fb62fc79b7557b7c00430776e27e70",
+  "independence": {
+    "analysis_source": "durable_external_audits_ledgers_parent_chains_and_residue_observation",
+    "raw_prompt_used": false,
+    "raw_provider_response_used": false,
+    "chain_of_thought_used": false,
+    "model_self_assessment_used": false
+  },
+  "exact_binding": {
+    "provider": "google_vertex_ai",
+    "model_id": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "keyless_impersonated_service_account_adc",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "api_key_authentication_used": false
+  },
+  "aggregate": {
+    "case_count": 6,
+    "actual_provider_call_count": 7,
+    "http_200_count": 7,
+    "external_audit_count": 7,
+    "valid_turn_hash_chain_count": 7,
+    "valid_parent_hash_chain_count": 6,
+    "consumed_ledger_count": 7,
+    "total_latency_ms": 12540,
+    "prompt_tokens": 15642,
+    "candidate_tokens": 1821,
+    "total_tokens": 17463,
+    "correction_turn_count": 1,
+    "provider_or_request_contract_error_count": 0,
+    "broker_judgement_repair_count": 0,
+    "semantic_safe_repair_count": 0,
+    "appointment_write_count": 0,
+    "fallback_count": 0
+  },
+  "cases": [
+    {
+      "case_code": "create",
+      "provider_calls": 1,
+      "primary_disposition": "admit",
+      "final_disposition": "admit",
+      "released_kind": "proposal_candidate",
+      "released_proposal_family": "create",
+      "api_spine_operation_id": "proposeAppointmentCreate",
+      "write_performed": false
+    },
+    {
+      "case_code": "resize",
+      "provider_calls": 1,
+      "primary_disposition": "admit",
+      "final_disposition": "admit",
+      "released_kind": "proposal_candidate",
+      "released_proposal_family": "resize",
+      "api_spine_operation_id": "proposeAppointmentUpdate",
+      "write_performed": false
+    },
+    {
+      "case_code": "cancel",
+      "provider_calls": 1,
+      "primary_disposition": "admit",
+      "final_disposition": "admit",
+      "released_kind": "proposal_candidate",
+      "released_proposal_family": "cancel",
+      "api_spine_operation_id": "proposeAppointmentDelete",
+      "write_performed": false
+    },
+    {
+      "case_code": "status",
+      "provider_calls": 1,
+      "primary_disposition": "admit",
+      "final_disposition": "admit",
+      "released_kind": "proposal_candidate",
+      "released_proposal_family": "status_change",
+      "api_spine_operation_id": "proposeAppointmentStatus",
+      "write_performed": false
+    },
+    {
+      "case_code": "squeeze",
+      "provider_calls": 1,
+      "primary_disposition": "admit",
+      "final_disposition": "admit",
+      "released_kind": "squeeze_in_assessment",
+      "released_proposal_family": "squeeze_in_assessment",
+      "api_spine_operation_id": null,
+      "write_performed": false
+    },
+    {
+      "case_code": "clarify",
+      "provider_calls": 2,
+      "primary_disposition": "revision_required",
+      "primary_violation_codes": [
+        "operator_arity_invalid"
+      ],
+      "correction_ticket_issued": true,
+      "final_disposition": "admit",
+      "released_kind": "clarification",
+      "released_proposal_family": "clarification",
+      "api_spine_operation_id": null,
+      "write_performed": false
+    }
+  ],
+  "proofreader_dialogue_finding": {
+    "only_correctable_error_cluster": "operator_arity_invalid",
+    "affected_cases": [
+      "clarify"
+    ],
+    "repeated_across_cases": false,
+    "correction_was_complete_replacement": true,
+    "proofreader_selected_replacement": false,
+    "final_clarification_added_grounded_pure_resolution_before_request_clarification": true,
+    "proposal_released_for_ambiguous_request": false
+  },
+  "training_disposition": {
+    "decision": "diagnose_without_teaching",
+    "reason": "The only correctable form error occurred in one case, so it does not meet the predeclared repeated-error threshold for prompt-context teaching.",
+    "prompt_context_change_authorised": false,
+    "fine_tuning_or_weight_change_authorised": false
+  },
+  "coordinator_repair": {
+    "affected_provider_call": "reception-one-preprinted-form-v5-eval-create-turn-001",
+    "call_replayed": false,
+    "ledger_reopened": false,
+    "external_audit_regenerated_from_immutable_closed_evidence": true,
+    "prompt_schema_proofreader_frame_and_provider_binding_unchanged": true
+  },
+  "cost_guard": {
+    "application_ceiling_usd": 1,
+    "invoice_cost_observed": false,
+    "token_based_estimate_usd": 0.0034389,
+    "pricing_inputs": {
+      "input_usd_per_million_tokens": 0.15,
+      "no_thinking_output_usd_per_million_tokens": 0.6,
+      "prompt_tokens": 15642,
+      "candidate_tokens": 1821
+    },
+    "official_pricing_source": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+    "ceiling_exceeded": false
+  },
+  "vertex_audit_control_posture": {
+    "vertex_data_read_audit_enabled": true,
+    "vertex_data_write_audit_enabled": true,
+    "request_response_logging_disabled_or_absent": true,
+    "provider_in_memory_cache_disabled": true,
+    "no_user_managed_service_account_key": true
+  },
+  "explicit_exclusions": {
+    "raw_prompt_recorded": false,
+    "raw_provider_response_recorded": false,
+    "credential_or_token_recorded": false,
+    "api_key_information_recorded": false,
+    "chain_of_thought_recorded": false,
+    "product_or_database_access": false,
+    "appointment_confirmation_or_write": false,
+    "human_or_product_delivery": false,
+    "provider_or_regional_fallback": false
+  },
+  "candid_limit": "This establishes six frozen authored-synthetic form tasks, deterministic proofreading and bounded typed output through the configured and observed Sydney Vertex locational request path. It does not prove Australian physical or sovereign processing, general language coverage, production fitness or safety for real, product, patient, health, clinical or historical data."
+}

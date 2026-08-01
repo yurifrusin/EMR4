@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "freeze_and_execute_fresh_cost_bounded_explicit_selection_occupied_retries_until_one_proposal_is_admitted_or_the_usd_1_or_existing_safety_boundary_stops_the_tranche_then_continue_bounded_product_work",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_rehydration_and_fresh_yuri_authority",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external implementation worker is selected for the serial occupied browser and disposable database path."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport is selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external peer worker is selected; independent deterministic audit remains local."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: AGENTS.md names the failed-closed occupied predecessor and accepted explicit-selection provider-free repair at Continuity 161 and Compass 142.",
+        "current_authority_allocation: Yuri freshly authorised the next retry and further fresh calls that progress this tranche, subject to the same cumulative USD 1 ceiling, and authorised autonomous continuation after success unless a substantial direction choice or existing stop boundary is reached.",
+        "active_plan_and_acceptance: the occupied predecessor closeout, external audit analysis and Sol review plus the explicit-selection plan, evidence, closeout and Sol acceptance were read; the API Spine provider, context, proposal, proofreader, confirmation and write boundaries were inspected.",
+        "protected_evidence_boundaries: AGENTS.md sections 5 and 6 were restored; protected holdouts, historical Diary material, real/product/patient/clinical data, confirmation, writes, Word, voice, production, deployment and release remain closed.",
+        "git_refs_and_worktree: HEAD is 5b1ea7952fb08eea333da0e63f166d3895ccea32 on codex/ariadne-terra-gemini-comparative-rehearsal; master, handoff/current, origin/master and origin/handoff/current are 4974075b31035d599e081d68e3b85e04a897baa1; all 681 existing dirty-worktree entries are preserved.",
+        "The consumed predecessor ledger remains immutable. The new descendant includes its HTTP 200 token usage in the cumulative USD 1 accounting and opens no call before official pricing, cost reservation, ADC, provider, regional, isolation, proofreader, audit and residue gates pass."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

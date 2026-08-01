@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "verify_accept_close_and_publish_the_authorised_security_finding_governance_descendant_as_one_task_branch_commit_and_draft_pull_request_without_moving_protected_refs",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_security_finding_governance_postcompaction_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: AGENTS.md was reread completely after context restoration; raisa_shared_application_auth_operational_hardening_pass at Continuity 185 and Compass 166 remains the accepted parent.",
+        "current_authority_allocation: GPT Sol retains architecture, acceptance and task-branch publication ownership. Luna is not callable in the current interface and no substitute worker or provider was selected.",
+        "active_plan_and_acceptance: the inherited runtime-role, PostgreSQL and operational-hardening constraints plus the frozen security-finding-governance plan, threat delta, triage, register, native evidence and approved SECURITY.md policy were reread.",
+        "protected_evidence_boundaries: Yuri authorised SECURITY.md edits, native GitHub alert dismissals and publication through one task-branch commit, push and draft PR. Protected holdouts, raw historical Diary material, dependency force overrides, real identity, product data, providers, cloud/IAM, deployment, production, release and protected-ref movement remain closed.",
+        "git_refs_and_worktree: branch and HEAD match the required published checkpoint, upstream divergence is zero, protected refs remain aligned at 4974075b31035d599e081d68e3b85e04a897baa1 and all accepted uncommitted work is preserved and unstaged."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Luna is not callable in the current task interface; no substitute subagent was selected."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker was selected."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected real-TTY fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude transport was selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No provider or independent external reviewer was selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

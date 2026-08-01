@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.vertex_sydney_provider_blocked_evidence.v1",
+  "recorded_on": "2026-07-24",
+  "tranche": 2,
+  "result": "ariadne_vertex_sydney_gemini_25_provider_blocked_contract_pass",
+  "provider_contacted": false,
+  "adc_inspected": false,
+  "external_cloud_state_read": false,
+  "provider_calls": 0,
+  "artifacts": {
+    "broker_policy": {
+      "path": "orchestration/continuity/ariadne-vertex-sydney-gemini-25/broker-policy.json",
+      "sha256": "sha256:94a412a1bf77c8402067729c3976e19ea3d2c322d30392a9c4e707cea9a115cc"
+    },
+    "cell_request": {
+      "path": "orchestration/continuity/ariadne-vertex-sydney-gemini-25/cell-request.json",
+      "sha256": "sha256:5639760c497351444338f50cb8f0addf9d3588ffe0c27f40f00d9e6331fdcd97"
+    },
+    "release_schema": {
+      "path": "orchestration/continuity/ariadne-vertex-sydney-gemini-25/release-output.schema.json",
+      "sha256": "sha256:54737f6c815be4e61ef7679974e28b7fd1adad25efba5ef8d2c1430ee6967171"
+    },
+    "isolation_manifest": {
+      "path": "orchestration/continuity/ariadne-vertex-sydney-gemini-25/isolation-manifest.json",
+      "sha256": "sha256:af95ed93c568bde0f2a92eeef074673be89497221383ea3af26a0821d1d267f1"
+    },
+    "dockerfile": {
+      "path": "orchestration/continuity/ariadne-vertex-sydney-gemini-25/Dockerfile",
+      "sha256": "sha256:9549988821ccd4de01822e68d2c0b16444ca3ad6b03b61498639909a47309356"
+    },
+    "contract_source": {
+      "path": "scripts/ariadne_vertex_sydney_gemini_25_contracts.py",
+      "sha256": "sha256:fdeec40554151fa897420b3a3425b3a902c252b51feda22d00f8919f5f0ed53e"
+    },
+    "broker_source": {
+      "path": "scripts/ariadne_vertex_sydney_gemini_25_broker.py",
+      "sha256": "sha256:7143a94a54f5f3329b9819f1eb160fcb0dc3c191af18e4609bebd2715c6bea4d"
+    },
+    "relay_source": {
+      "path": "scripts/ariadne_vertex_sydney_gemini_25_relay.py",
+      "sha256": "sha256:a3aa57e891c50ff1bde03154dbe3a40ae2780b19d384eb4685100d7b945dbbc2"
+    },
+    "cell_source": {
+      "path": "scripts/ariadne_vertex_sydney_gemini_25_cell.py",
+      "sha256": "sha256:d800963bbcd01829c5f96596326833f8c46ff287da92ad5bcbdb39e243bc8e30"
+    },
+    "launcher_source": {
+      "path": "scripts/ariadne_vertex_sydney_gemini_25_launcher.py",
+      "sha256": "sha256:145e2027015eea30fb5b96671f5ee053a402cb15b70da235f5b0d889fd8e688b"
+    },
+    "provider_blocked_launch_plan": {
+      "path": "orchestration/continuity/ariadne-vertex-sydney-gemini-25/provider-blocked-launch-plan.json",
+      "sha256": "sha256:9b20ce2ddaaa744810d50ef7fb076b68c9c29ad9a2631e338975ac51b2be1288"
+    }
+  },
+  "contract_checks": {
+    "typed_authored_synthetic_request_exact": true,
+    "cell_provider_and_credential_fields_absent": true,
+    "vertex_request_constructor_exact": true,
+    "regional_hostname_and_path_pinned": true,
+    "global_and_alternate_provider_routes_rejected": true,
+    "api_key_path_absent": true,
+    "provider_tools_absent": true,
+    "thinking_disabled": true,
+    "output_schema_exact": true,
+    "proofreader_fail_closed": true,
+    "safe_repair_mechanical_only": true,
+    "bounded_error_contract_passed": true,
+    "single_use_ledger_passed": true,
+    "durable_hash_chain_passed": true
+  },
+  "verification": {
+    "focused_tests": {
+      "command": "python -m pytest --noconftest -p no:cacheprovider tests/test_ariadne_vertex_sydney_gemini_25_admission.py tests/test_ariadne_vertex_sydney_gemini_25_contracts.py -q",
+      "tests_passed": 24,
+      "tests_failed": 0
+    }
+  },
+  "next_gate": "existing_adc_and_entitlement_preflight"
+}

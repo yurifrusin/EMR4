@@ -1,0 +1,198 @@
+{
+  "schema_version": "ariadne.gemini_preflight_evidence.v1",
+  "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+  "runtime_attempt_id": "comparative-runtime-attempt-004",
+  "status": "passed",
+  "static": {
+    "status": "passed",
+    "protocol_id": "ariadne-terra-gemini-comparative-rehearsal",
+    "context_frame_count": 6,
+    "prompt_bytes": 11693,
+    "shared_hashes": {
+      "shared_task_sha256": "sha256:1a537292ad029fd49ae3d9706120606547c1ddeaa7404b7bdd9047573ea69cc8",
+      "full_output_schema_sha256": "sha256:7efd3644329807462b3efcd3b16552d923a9262b43876432c21698656cde8a6e",
+      "provider_output_schema_sha256": "sha256:39a0f6da352a8da5f8291291a8f87abaa6aa9daa6b7359a8221341ebb756f1e2",
+      "system_prompt_sha256": "sha256:876a1ef5bd03675d0d83dbc6cb66bc64bdcc2a088daae59aacc8e914803afd2c",
+      "prompt_sha256": "sha256:6102ebb2db7ff42b07f0d1ba7abbec9c2dc333398923030b39076a4aa055d9ea"
+    },
+    "provider_contracts": {
+      "terra": {
+        "status": "passed",
+        "lane_id": "terra",
+        "schema_sha256": "sha256:39a0f6da352a8da5f8291291a8f87abaa6aa9daa6b7359a8221341ebb756f1e2",
+        "maximum_depth": 7,
+        "total_properties": 45,
+        "total_enum_values": 76,
+        "boolean_enum_count": 0,
+        "provider_call_performed": false
+      },
+      "gemini": {
+        "status": "passed",
+        "lane_id": "gemini",
+        "schema_sha256": "sha256:39a0f6da352a8da5f8291291a8f87abaa6aa9daa6b7359a8221341ebb756f1e2",
+        "maximum_depth": 7,
+        "total_properties": 45,
+        "total_enum_values": 76,
+        "boolean_enum_count": 0,
+        "provider_call_performed": false
+      }
+    },
+    "external_audit_track_policy": {
+      "status": "passed",
+      "sandbox_append_authority": false,
+      "raw_reasoning_recorded": false,
+      "provider_call_performed": false
+    },
+    "source_hashes": {
+      "Dockerfile": "sha256:e2781b8cb9681845258aba3964770cd3eab34af9cae4cd5c78b39dd00d8cbae6",
+      "ariadne_comparative_one_use_broker.mjs": "sha256:d41209b098131ab7f0394a04c5fb5d5c72ef19acf24eddfe667d6ace5f496ea1",
+      "ariadne_provider_contracts.mjs": "sha256:494a90dd04fdc17f74a60656689b77f7c755264c41237fb4bccfbb752070fe23",
+      "ariadne_comparative_work_cell_launcher.mjs": "sha256:97eab934798a1236d15eb863ffeb3354a0109d921e31d781c7134f49eece10b8",
+      "comparison-manifest.json": "sha256:1dacdb8be9c0341e18bc12847893f0b8e5b6f1a1d5c38882a0b2fb20f945746e",
+      "provider-output.schema.json": "sha256:0399384e845dcb7c623634d3359f850783fbad32bd4bf9c47e149c35e5fd52a9",
+      "provider-contract-profiles.json": "sha256:9f0ee6ec095fea2db7958ba9974051b2e15495377e1ea830571c48be9537f086",
+      "external-audit-track-policy.json": "sha256:23e5b7ca8727dd0b26860efe35d49e6f2b77fcae4144b0f1cb6a7788b86f6deb",
+      "source-attempt.json": "sha256:af45aba852f4eaed9c54a859ac14aefa0ecc3d8f437120f4f6ee3ebe97e57e5a",
+      "full-output.schema.json": "sha256:87b2f714071f9c081ff261a7ac2d97078d1af176930009db70069062b053c5bf"
+    },
+    "provider_call_performed": false,
+    "prompt_transmitted": false
+  },
+  "build": {
+    "status": "passed",
+    "node_image_resolved": "node@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d",
+    "build_context_files": [
+      "Dockerfile",
+      "ariadne_comparative_one_use_broker.mjs",
+      "ariadne_provider_contracts.mjs",
+      "ariadne_comparative_work_cell_launcher.mjs",
+      "comparison-manifest.json",
+      "provider-output.schema.json",
+      "full-output.schema.json",
+      "shared-task.json"
+    ],
+    "source_hashes": {
+      "Dockerfile": "sha256:e2781b8cb9681845258aba3964770cd3eab34af9cae4cd5c78b39dd00d8cbae6",
+      "ariadne_comparative_one_use_broker.mjs": "sha256:d41209b098131ab7f0394a04c5fb5d5c72ef19acf24eddfe667d6ace5f496ea1",
+      "ariadne_provider_contracts.mjs": "sha256:494a90dd04fdc17f74a60656689b77f7c755264c41237fb4bccfbb752070fe23",
+      "ariadne_comparative_work_cell_launcher.mjs": "sha256:97eab934798a1236d15eb863ffeb3354a0109d921e31d781c7134f49eece10b8",
+      "comparison-manifest.json": "sha256:1dacdb8be9c0341e18bc12847893f0b8e5b6f1a1d5c38882a0b2fb20f945746e",
+      "provider-output.schema.json": "sha256:0399384e845dcb7c623634d3359f850783fbad32bd4bf9c47e149c35e5fd52a9",
+      "provider-contract-profiles.json": "sha256:9f0ee6ec095fea2db7958ba9974051b2e15495377e1ea830571c48be9537f086",
+      "external-audit-track-policy.json": "sha256:23e5b7ca8727dd0b26860efe35d49e6f2b77fcae4144b0f1cb6a7788b86f6deb",
+      "source-attempt.json": "sha256:af45aba852f4eaed9c54a859ac14aefa0ecc3d8f437120f4f6ee3ebe97e57e5a",
+      "full-output.schema.json": "sha256:87b2f714071f9c081ff261a7ac2d97078d1af176930009db70069062b053c5bf"
+    },
+    "image_ids": {
+      "gemini": {
+        "broker": "sha256:2a420179e4fb13749302dbf55e43a214352fcaf0ffbf8c7ef32c3009b83f75a9",
+        "cell": "sha256:a96ca04be0934111885d43f96955f93e83f012ab762b315d72831f7b5ff9ea44"
+      }
+    },
+    "provider_secret_in_image": false,
+    "provider_call_performed": false,
+    "prompt_transmitted": false
+  },
+  "lane_policy": {
+    "broker": {
+      "user": "node",
+      "read_only_root": true,
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges"
+      ],
+      "mounts": [
+        {
+          "type": "bind",
+          "destination": "/run/secrets/broker_token",
+          "read_only": true
+        },
+        {
+          "type": "bind",
+          "destination": "/run/secrets/provider_key",
+          "read_only": true
+        }
+      ],
+      "published_port_count": 0,
+      "network_mode": "ariadne-comparison-gemini-attempt4-preflight",
+      "memory_bytes": 268435456,
+      "memory_swap_bytes": 268435456,
+      "nano_cpus": 500000000,
+      "pids_limit": 32,
+      "environment_keys": [
+        "ARIADNE_LANE_ID",
+        "EXPECTED_FULL_OUTPUT_SCHEMA_SHA256",
+        "EXPECTED_PROMPT_SHA256",
+        "EXPECTED_PROVIDER_OUTPUT_SCHEMA_SHA256",
+        "EXPECTED_SHARED_TASK_SHA256",
+        "EXPECTED_SYSTEM_PROMPT_SHA256",
+        "NODE_VERSION",
+        "PATH",
+        "YARN_VERSION"
+      ]
+    },
+    "cell": {
+      "user": "node",
+      "read_only_root": true,
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges"
+      ],
+      "mounts": [
+        {
+          "type": "bind",
+          "destination": "/run/secrets/broker_token",
+          "read_only": true
+        }
+      ],
+      "published_port_count": 0,
+      "network_mode": "ariadne-comparison-gemini-attempt4-preflight",
+      "memory_bytes": 268435456,
+      "memory_swap_bytes": 268435456,
+      "nano_cpus": 500000000,
+      "pids_limit": 32,
+      "environment_keys": [
+        "NODE_VERSION",
+        "PATH",
+        "YARN_VERSION"
+      ]
+    },
+    "network": {
+      "internal": true,
+      "driver": "bridge",
+      "container_count": 1
+    },
+    "broker_events": [
+      {
+        "audit_sequence": 1,
+        "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+        "event": "broker-ready",
+        "lane_id": "gemini",
+        "allowed_path": "/infer",
+        "upstream_host": "generativelanguage.googleapis.com",
+        "upstream_path": "/v1beta/models/gemini-3.5-flash:generateContent",
+        "model_id": "gemini-3.5-flash",
+        "maximum_provider_calls": 1,
+        "event_sha256": "sha256:3dd917aa5b6a4360301390aa6e80ba7b2aa15ff2ff310a01482d90e2cfa9542a"
+      }
+    ]
+  },
+  "cleanup": {
+    "cell_removed": true,
+    "broker_removed": true,
+    "network_removed": true
+  },
+  "credential_gate": {
+    "gemini_present": true,
+    "openai_credential_read": false,
+    "credential_value_recorded": false
+  },
+  "provider_call_performed": false,
+  "prompt_transmitted": false,
+  "australian_processing_evidence": false,
+  "data_class": "authored-synthetic-non-pii"
+}

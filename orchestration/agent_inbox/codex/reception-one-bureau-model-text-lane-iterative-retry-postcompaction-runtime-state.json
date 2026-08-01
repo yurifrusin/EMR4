@@ -1,0 +1,83 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "bind_and_execute_the_authorised_compact_wire_vertex_retry_sequence",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete_live_handover_current_model_text_acceptance_protected_boundaries_and_verified_git_state",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No worker dispatch is selected."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Deep Code is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude is not selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Antigravity is not selected; the only authorised model use is the purpose-built occupied Vertex broker."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Yuri expressly authorised the compact-wire occupied retry and continuing future retries until the Reception One model-text work reaches a positive conclusion.",
+        "The retry authority remains fixed to Gemini 2.5 Flash, bernie-emr4-dev, the exact Bernie service account, keyless impersonated ADC, australia-southeast1, the Sydney locational endpoint, authored-synthetic input, the isolated credential-free cell, deterministic proofreader, external audit, no fallback and no product or write authority.",
+        "Each occupied attempt requires a distinct consumed one-use ledger and the sequence stops immediately after the first proofreader-admitted result.",
+        "The cumulative application cost ceiling remains USD 1; an external IAM, billing, API, credential, cache, audit, provider, model, project, identity, region, data-class, isolation or authority change requires Yuri."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No subagent is selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

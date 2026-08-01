@@ -1,0 +1,43 @@
+{
+  "attempts_remaining": 1,
+  "previous_program_sha256": "sha256:7ab3bae5d7d684f0c241baef0728850fb75d16db3b70798b15c7a7a261ba26b2",
+  "previous_typed_form": {
+    "goal_code": 6,
+    "steps": [
+      {
+        "operator_code": 0,
+        "source_refs": [
+          {
+            "binding_code": 1,
+            "kind": "binding",
+            "prior_output_name": "none",
+            "prior_step_index": -1
+          }
+        ]
+      },
+      {
+        "operator_code": 13,
+        "source_refs": [
+          {
+            "binding_code": -1,
+            "kind": "omit",
+            "prior_output_name": "none",
+            "prior_step_index": -1
+          }
+        ]
+      }
+    ]
+  },
+  "replacement_required": true,
+  "target_turn_code": 2,
+  "version_code": 1,
+  "violations": [
+    {
+      "allowed_output_names": [],
+      "field_code": "steps",
+      "source_index": -1,
+      "step_index": 1,
+      "violation_code": "operator_arity_invalid"
+    }
+  ]
+}

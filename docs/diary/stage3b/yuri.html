@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Reception One - Yuri internal walkthrough</title>
+  <link rel="stylesheet" href="stage3b-yuri.css">
+</head>
+<body>
+  <a class="skip-link" href="#walkthrough-main">Skip to the current task</a>
+
+  <dialog id="acknowledgement-dialog" class="acknowledgement-dialog" aria-labelledby="acknowledgement-title">
+    <form id="acknowledgement-form" class="acknowledgement-card">
+      <p class="kicker">Before you begin</p>
+      <h1 id="acknowledgement-title">Internal synthetic walkthrough</h1>
+      <p>All patients, clinicians and appointments in this demonstration are fictional. Nothing you do will affect a real Diary.</p>
+      <p class="quiet-copy">Please keep the optional notes to product criticism and do not enter real names, identifiers or practice details.</p>
+      <label class="acknowledgement-check">
+        <input id="acknowledgement-check" type="checkbox">
+        <span>I understand and will use fictional details only.</span>
+      </label>
+      <button id="begin-walkthrough" class="button button-primary" type="submit" disabled>Begin walkthrough</button>
+    </form>
+  </dialog>
+
+  <header class="page-header">
+    <div class="brand-lockup">
+      <span class="brand-mark" aria-hidden="true">R1</span>
+      <div>
+        <p class="kicker">Reception One</p>
+        <h1>Internal product walkthrough</h1>
+      </div>
+    </div>
+    <span class="mode-badge">Internal · synthetic</span>
+  </header>
+
+  <main id="walkthrough-main" class="walkthrough-shell is-locked">
+    <aside class="walkthrough-sidebar" aria-label="Walkthrough progress">
+      <section class="sidebar-intro">
+        <p class="kicker">Purpose</p>
+        <h2>Test whether this is genuinely helpful.</h2>
+        <p>Work through the present interface as a receptionist would. Record what feels useful, confusing or inferior to the ordinary Diary.</p>
+        <a id="open-reception-one" class="button button-primary product-link" href="http://[::1]:3000/meta-grid-auth.html" target="_blank" rel="noopener noreferrer">
+          Open Reception One
+          <span aria-hidden="true">↗</span>
+        </a>
+        <p class="small-copy">The authored-synthetic Diary opens in a separate tab. Leave this walkthrough open for your observations.</p>
+      </section>
+
+      <section class="progress-card" aria-labelledby="progress-title">
+        <div class="progress-heading">
+          <h2 id="progress-title">Tasks</h2>
+          <span id="progress-count">0 / 8</span>
+        </div>
+        <div class="progress-track" aria-hidden="true">
+          <span id="progress-fill"></span>
+        </div>
+        <ol id="task-list" class="task-list"></ol>
+      </section>
+
+      <details class="details-card">
+        <summary>About this internal review</summary>
+        <p>Nothing is sent anywhere. Your selections and notes stay in memory until you download the JSON. Reloading the page discards them.</p>
+        <p>This is formative criticism, not representative receptionist evidence and not a pass/fail usability test.</p>
+      </details>
+    </aside>
+
+    <div class="walkthrough-content">
+      <section class="task-panel" aria-labelledby="task-title">
+        <div class="task-heading">
+          <div>
+            <p id="task-id" class="kicker">S3B-01</p>
+            <h2 id="task-title" tabindex="-1">Understand the current state</h2>
+          </div>
+          <span id="task-saved" class="saved-badge" hidden>Saved</span>
+        </div>
+
+        <p id="task-goal" class="task-goal"></p>
+
+        <div class="task-support">
+          <div>
+            <span>Try this</span>
+            <p id="task-action"></p>
+          </div>
+          <div>
+            <span>Look for</span>
+            <p id="task-success"></p>
+          </div>
+        </div>
+
+        <details id="request-hint-block" class="request-hint">
+          <summary>Suggested request wording</summary>
+          <p id="request-hint"></p>
+        </details>
+      </section>
+
+      <form id="task-review-form" class="review-panel">
+        <div class="section-heading">
+          <p class="kicker">Your observation</p>
+          <h2>How did this task feel?</h2>
+        </div>
+
+        <div class="field-grid">
+          <label>
+            <span>Did the task work?</span>
+            <select id="task-result" required>
+              <option value="worked">Worked</option>
+              <option value="partly_worked">Partly worked</option>
+              <option value="did_not_work">Did not work</option>
+              <option value="skipped">Skipped</option>
+            </select>
+          </label>
+          <label>
+            <span>Was your place and state clear?</span>
+            <select id="task-orientation" required>
+              <option value="clear">Clear</option>
+              <option value="mixed">Mixed</option>
+              <option value="unclear">Unclear</option>
+              <option value="not_applicable">Not applicable</option>
+            </select>
+          </label>
+          <label>
+            <span>Compared with the ordinary Diary</span>
+            <select id="relative-value" required>
+              <option value="reception_one_better">Reception One was better</option>
+              <option value="about_same">About the same</option>
+              <option value="ordinary_diary_better">Ordinary Diary was better</option>
+              <option value="not_compared">Not compared</option>
+            </select>
+          </label>
+          <label class="checkbox-field">
+            <input id="ordinary-fallback" type="checkbox">
+            <span>I needed the ordinary Diary as a fallback</span>
+          </label>
+        </div>
+
+        <fieldset class="issue-fieldset">
+          <legend>What got in the way?</legend>
+          <div id="issue-flags" class="issue-grid"></div>
+        </fieldset>
+
+        <label class="notes-field">
+          <span>Optional product note</span>
+          <textarea id="task-note" maxlength="1200" rows="4" placeholder="What should change? Keep this to product criticism; do not include real names or practice details."></textarea>
+          <small><span id="task-note-count">0</span> / 1200</small>
+        </label>
+
+        <div class="form-actions">
+          <button id="save-task" class="button button-primary" type="submit">Save and continue</button>
+          <button id="previous-task" class="button button-secondary" type="button">Previous</button>
+          <p id="task-status" class="status-copy" role="status"></p>
+        </div>
+      </form>
+
+      <form id="final-review-form" class="review-panel final-review-panel">
+        <div class="section-heading">
+          <p class="kicker">After the tasks</p>
+          <h2>Overall direction</h2>
+          <p>This records an internal design judgment only. It does not calculate Stage 3B thresholds.</p>
+        </div>
+
+        <div class="field-grid">
+          <label>
+            <span>Present product value</span>
+            <select id="overall-value" required>
+              <option value="promising_needs_revision">Promising, but needs revision</option>
+              <option value="clear_advance">A clear advance over the ordinary Diary</option>
+              <option value="not_yet_useful">Not yet usefully better</option>
+              <option value="not_assessed">Not assessed</option>
+            </select>
+          </label>
+          <label>
+            <span>Ready for a design-partner receptionist?</span>
+            <select id="design-partner-readiness" required>
+              <option value="not_ready">Not ready</option>
+              <option value="ready_after_revision">Ready after the next revision</option>
+              <option value="ready_now">Ready now</option>
+              <option value="not_assessed">Not assessed</option>
+            </select>
+          </label>
+        </div>
+
+        <fieldset class="direction-fieldset">
+          <legend>Direction check</legend>
+          <div class="direction-grid">
+            <label>
+              <span>Foreground projection over the Diary</span>
+              <select id="foreground-projection-window">
+                <option value="supports">Supports</option>
+                <option value="neutral">Neutral</option>
+                <option value="concern">Concern</option>
+                <option value="not_assessed">Not assessed</option>
+              </select>
+            </label>
+            <label>
+              <span>Diary date turns before projection</span>
+              <select id="date-first-page-turn">
+                <option value="supports">Supports</option>
+                <option value="neutral">Neutral</option>
+                <option value="concern">Concern</option>
+                <option value="not_assessed">Not assessed</option>
+              </select>
+            </label>
+            <label>
+              <span>Agent → proofreader → typesetter Bureau</span>
+              <select id="bureau-workflow">
+                <option value="supports">Supports</option>
+                <option value="neutral">Neutral</option>
+                <option value="concern">Concern</option>
+                <option value="not_assessed">Not assessed</option>
+              </select>
+            </label>
+            <label>
+              <span>Natural-language text before push-to-talk</span>
+              <select id="text-before-push-to-talk">
+                <option value="supports">Supports</option>
+                <option value="neutral">Neutral</option>
+                <option value="concern">Concern</option>
+                <option value="not_assessed">Not assessed</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
+
+        <label class="notes-field">
+          <span>Optional overall note</span>
+          <textarea id="overall-note" maxlength="1200" rows="5" placeholder="What must the next version get right before a receptionist design-partner session?"></textarea>
+          <small><span id="overall-note-count">0</span> / 1200</small>
+        </label>
+
+        <div class="form-actions">
+          <button class="button button-primary" type="submit">Save overall review</button>
+          <p id="final-status" class="status-copy" role="status"></p>
+        </div>
+      </form>
+
+      <section class="finish-panel" aria-labelledby="finish-title">
+        <div>
+          <p class="kicker">When you are finished</p>
+          <h2 id="finish-title">Download your review</h2>
+          <p id="review-summary">No task observations recorded yet.</p>
+        </div>
+        <div class="finish-actions">
+          <button id="download-review" class="button button-primary" type="button">Download review JSON</button>
+          <button id="discard-review" class="button button-quiet" type="button">Discard and restart</button>
+        </div>
+        <p id="download-status" class="status-copy" role="status"></p>
+      </section>
+    </div>
+  </main>
+
+  <noscript>This internal walkthrough requires local JavaScript. It makes no network request.</noscript>
+  <script src="stage3b-data.js"></script>
+  <script src="stage3b-yuri-core.js"></script>
+  <script src="stage3b-yuri.js"></script>
+</body>
+</html>

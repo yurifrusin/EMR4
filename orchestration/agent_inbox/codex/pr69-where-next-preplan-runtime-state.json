@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "sprint_planning",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_pr69_where_next_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "AGENTS.md, its live Current Baton, current authority allocation, protected boundaries, and user decision boundaries were reread before recommending the next tranche.",
+        "The active security-finding governance plan, threat-model delta, closeout, Sol acceptance, and PR 69 security-alert triage were reread.",
+        "PR 69 is open, draft, mergeable, and all six current checks pass at task head 2d63dcef72cfdc9c3a2433c5e876fdfc7ea8d3bd.",
+        "Local and origin master and handoff/current remain aligned at 4974075b31035d599e081d68e3b85e04a897baa1 and were not moved.",
+        "The only untracked worktree paths are user-authorised concurrent Raisa branding assets under docs/branding/; they are preserved unchanged and excluded from PR 69.",
+        "Protected holdouts, provider calls, credentials, real identity, Microsoft federation, product or patient data, deployment, production, release, public rename, artwork adoption, trademark action, and protected-ref movement remain closed."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Antigravity worker or provider lane is selected for this read-only next-step recommendation."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek worker is selected for this read-only next-step recommendation."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude model or Claude Code transport is selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

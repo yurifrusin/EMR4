@@ -1,0 +1,36 @@
+{
+  "schema_version": "ariadne.vertex_sydney_adc_restored_closeout_residue_evidence.v1",
+  "inspected_on": "2026-07-24",
+  "result": "ariadne_vertex_sydney_gemini_25_adc_restored_task_residue_clear",
+  "inspection_scope": "exact_task_scoped_names_process_and_runtime_paths_only",
+  "inspection_methods": {
+    "containers": "docker_ps_exact_task_name_filter",
+    "networks": "docker_network_exact_task_name_filter",
+    "images": "docker_image_exact_task_tag_filter",
+    "processes": "windows_python_process_exact_broker_script_filter_count_only",
+    "temporary_credentials": "exact_task_runtime_directory_token_credential_adc_name_filter_count_only"
+  },
+  "counts": {
+    "task_containers": 0,
+    "task_networks": 0,
+    "task_images": 0,
+    "task_broker_processes": 0,
+    "task_temporary_credential_files": 0
+  },
+  "checks": {
+    "docker_available_for_inspection": true,
+    "no_task_container_residue": true,
+    "no_task_network_residue": true,
+    "no_task_image_residue": true,
+    "no_task_broker_process_residue": true,
+    "no_task_temporary_credential_residue": true
+  },
+  "privacy": {
+    "process_command_lines_recorded": false,
+    "environment_values_recorded": false,
+    "credential_paths_recorded": false,
+    "credential_values_recorded": false,
+    "api_key_information_recorded": false
+  },
+  "limits": "The check covers only the exact task-scoped names, tags, broker script and runtime directories. No broad claim is made about unrelated host resources."
+}

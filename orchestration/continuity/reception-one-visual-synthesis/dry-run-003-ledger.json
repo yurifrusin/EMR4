@@ -1,0 +1,10 @@
+{
+  "attempt_id": "gemini-25-repair-dry-run-visual-003",
+  "fallback_permitted": false,
+  "ledger_id": "gemini-25-repair-dry-run-visual-ledger-003",
+  "maximum_provider_calls": 0,
+  "policy_id": "reception-one-visual-synthesis-vertex-sydney-v1",
+  "provider_calls_consumed": 0,
+  "schema_version": "ariadne.vertex_sydney_single_use_ledger.v1",
+  "status": "consumed"
+}
