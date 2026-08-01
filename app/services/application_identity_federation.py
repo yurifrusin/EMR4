@@ -270,6 +270,17 @@ class FederationReferenceHasher:
 
     def reference(self, *, provider: str, tenant_id: str, object_id: str) -> str:
         canonical = "\x00".join((provider, tenant_id, object_id)).encode("utf-8")
+        return self._digest(canonical)
+
+    def component_reference(self, *, label: str, value: str) -> str:
+        if not re.fullmatch(r"[a-z][a-z0-9_-]{0,31}", label):
+            raise ValueError("HMAC component label is invalid")
+        if not isinstance(value, str) or not value:
+            raise ValueError("HMAC component value is required")
+        canonical = "\x00".join((label, value)).encode("utf-8")
+        return self._digest(canonical)
+
+    def _digest(self, canonical: bytes) -> str:
         digest = hmac.new(self._key, canonical, hashlib.sha256).hexdigest()
         return f"hmac-sha256:{self.key_version}:{digest}"
 

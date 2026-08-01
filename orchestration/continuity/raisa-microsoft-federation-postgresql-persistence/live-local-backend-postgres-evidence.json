@@ -1,0 +1,116 @@
+{
+  "claim_limits": [
+    "Only a uniquely named disposable local authored-synthetic PostgreSQL database was exercised.",
+    "No live Microsoft/OIDC verifier, real identity, route, session, product read, durable runtime role, deployment or production authority is established."
+  ],
+  "cleanup": {
+    "database_absent_after": true,
+    "exact_database_drop_attempted": true,
+    "passed": true
+  },
+  "data_class": "authored_synthetic",
+  "database": {
+    "loopback_only": true,
+    "name_recorded": false,
+    "preexisting": false,
+    "unique_allowlisted_name_used": true
+  },
+  "evidence_label": "live_local_backend_postgres",
+  "migration": {
+    "base_revision": "p5q6r7s8t9u0",
+    "current_head_exact": true,
+    "downgrade_passed": true,
+    "head_revision": "q6r7s8t9u0v1",
+    "initial_upgrade_log_nonempty": true,
+    "migration_log_recorded": false,
+    "orm_migration_drift_absent": true,
+    "reupgrade_passed": true,
+    "upgrade_passed": true
+  },
+  "passed": true,
+  "result": "raisa_microsoft_federation_postgresql_persistence_pass",
+  "runtime": {
+    "audit_atomicity": {
+      "failure_reason": "required_audit_unavailable",
+      "state_and_audit_unchanged": true
+    },
+    "concurrency": {
+      "exactly_one_binding_created": true,
+      "independent_database_sessions": 2,
+      "results": [
+        "binding_conflict",
+        "created"
+      ]
+    },
+    "durability": {
+      "resolution_denied_after_revoke": true,
+      "resolved_after_fresh_repository": true,
+      "resolved_binding_ref": "synthetic-binding-alpha",
+      "revoked_version": 2
+    },
+    "passed": true,
+    "postgres_guards": {
+      "passed": true,
+      "sqlstates": {
+        "audit_delete": "55000",
+        "audit_update": "55000",
+        "binding_reactivation": "55000"
+      }
+    },
+    "raw_identity_scan": {
+      "matched_raw_value_count": 0,
+      "matched_values_recorded": false,
+      "passed": true,
+      "persisted_row_count": 9,
+      "raw_value_count": 7
+    },
+    "rls": {
+      "foreign_binding_rows_visible": 0,
+      "own_context": {
+        "application_identity_federation_audit_events": 4,
+        "application_identity_federation_bindings": 2
+      },
+      "passed": true,
+      "role_absent_after_rollback": true,
+      "role_name_recorded": false,
+      "without_context": {
+        "application_identity_federation_audit_events": 0,
+        "application_identity_federation_bindings": 0
+      }
+    }
+  },
+  "schema_contract": {
+    "forced_rls": {
+      "application_identity_federation_audit_events": true,
+      "application_identity_federation_bindings": true
+    },
+    "model_database_column_matches": {
+      "application_identity_federation_audit_events": true,
+      "application_identity_federation_bindings": true
+    },
+    "passed": true,
+    "policy_count": 3,
+    "table_count": 2,
+    "trigger_names": [
+      "trg_app_id_fed_audit_append_only",
+      "trg_app_id_fed_binding_terminal"
+    ]
+  },
+  "schema_version": "emr4.microsoft-federation-postgresql-persistence-evidence.v1",
+  "side_effect_counts": {
+    "application_sessions_created": 0,
+    "cloud_or_iam_mutations": 0,
+    "database_migrations_disposable": 3,
+    "database_reads_disposable": "performed",
+    "database_writes_disposable": "performed",
+    "deployments": 0,
+    "external_identity_calls": 0,
+    "fastapi_or_graphql_routes_added": 0,
+    "http_or_socket_calls": 0,
+    "microsoft_graph_or_office_identity_calls": 0,
+    "patient_or_clinical_field_reads": 0,
+    "product_data_reads": 0,
+    "production_changes": 0,
+    "provider_calls": 0
+  }
+}
