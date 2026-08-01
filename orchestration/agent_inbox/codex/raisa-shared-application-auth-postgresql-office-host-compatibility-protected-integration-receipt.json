@@ -1,0 +1,80 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "merge_pr71_as_the_single_stacked_protected_integration_vehicle_with_one_user_authorized_pages_rebuild",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "PRs 70 and 71 are the accepted Office compatibility stack; PR 71 is green and mergeable at d46144ac.",
+    "current_authority_allocation": "Yuri explicitly authorized the one public GitHub Pages rebuild required for protected integration; GPT Sol owns the bounded merge and protected-ref alignment.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-shared-application-auth-office-cookie-compatibility-closeout.md",
+      "docs/raisa-shared-application-auth-postgresql-office-host-compatibility-closeout.md",
+      "orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/acceptance-evidence.json",
+      "orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/codeql-pr71-alert-545-readback.json"
+    ],
+    "protected_evidence_boundaries": "Authority covers exactly one Pages rebuild and protected integration of the accepted stacked Office compatibility result. No other deployment, release, real identity, Microsoft federation, product/document/patient/clinical data or production authority opens.",
+    "git_refs_and_worktree": {
+      "HEAD": "d46144ac0ce02adaf37c5bc4aca8a452a99dd8de",
+      "branch": "codex/shared-auth-postgresql-office-host-compatibility",
+      "master": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "handoff/current": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "origin/master": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "origin/handoff/current": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "origin_pr70_head": "0b3fe1f965c1171a436676762d6101818b437bae",
+      "origin_pr71_head": "d46144ac0ce02adaf37c5bc4aca8a452a99dd8de",
+      "pr70_is_ancestor_of_pr71": true,
+      "single_merge_vehicle": 71,
+      "index_empty_before_receipt": true,
+      "concurrent_branding_assets_present_untracked_untouched_and_excluded": true,
+      "protected_refs_unchanged": true
+    }
+  },
+  "integration_outcome": {
+    "result": "raisa_shared_application_auth_office_stack_protected_integration_pass",
+    "strategy": "single_rebase_merge_via_pr71",
+    "pr71": {
+      "state": "merged",
+      "merged_at": "2026-08-01T12:18:56Z",
+      "protected_master_head": "1121c35eacaab2bb80dac796c19f3b7f2af754dc"
+    },
+    "pr70": {
+      "state": "closed_without_merge_as_subsumed",
+      "closed_at": "2026-08-01T12:19:38Z",
+      "patch_equivalent_commit_count": 5
+    },
+    "default_branch_runs": {
+      "github_pages": {
+        "run_id": 30699449315,
+        "conclusion": "success"
+      },
+      "node_and_office_security": {
+        "run_id": 30699449284,
+        "conclusion": "success"
+      },
+      "python_security": {
+        "run_id": 30699449274,
+        "conclusion": "success"
+      },
+      "codeql": {
+        "run_id": 30699449287,
+        "conclusion": "success"
+      }
+    },
+    "github_pages_rebuild_count": 1,
+    "additional_deployments": 0,
+    "protected_handoff_alignment_pending": true,
+    "passed": true
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}
