@@ -24,9 +24,12 @@ def _json(path: Path) -> dict:
 
 def test_continuity_graph_accepts_exact_three_node_sequence() -> None:
     graph = _json(GRAPH)
-    assert graph["graph_revision"] == 191
-    assert [item["id"] for item in graph["nodes"][-3:]] == NODE_IDS
-    assert graph["nodes"][-3]["relationships"] == [
+    assert graph["graph_revision"] >= 191
+    ids = [item["id"] for item in graph["nodes"]]
+    start = ids.index(NODE_IDS[0])
+    sequence = graph["nodes"][start : start + 3]
+    assert [item["id"] for item in sequence] == NODE_IDS
+    assert sequence[0]["relationships"] == [
         {
             "node_id": (
                 "raisa-shared-application-auth-postgresql-office-host-compatibility"
@@ -34,28 +37,29 @@ def test_continuity_graph_accepts_exact_three_node_sequence() -> None:
             "relation": "builds_on",
         }
     ]
-    assert graph["nodes"][-2]["relationships"] == [
+    assert sequence[1]["relationships"] == [
         {"node_id": NODE_IDS[0], "relation": "builds_on"}
     ]
-    assert graph["nodes"][-1]["relationships"] == [
+    assert sequence[2]["relationships"] == [
         {"node_id": NODE_IDS[1], "relation": "builds_on"}
     ]
-    assert all(item["status"] == "accepted" for item in graph["nodes"][-3:])
+    assert all(item["status"] == "accepted" for item in sequence)
     assert ariadne_continuity.validate_graph(graph, repo_root=ROOT) == []
 
 
-def test_compass_current_position_and_report_bind_revision_172() -> None:
+def test_compass_journey_preserves_revision_172_federation_sequence() -> None:
     graph = _json(GRAPH)
     compass = _json(COMPASS)
-    assert compass["map_revision"] == 172
-    assert compass["source_graph_revision"] == 191
-    assert compass["current_position"]["node_id"] == NODE_IDS[-1]
-    assert [item["node_id"] for item in compass["journey"][-3:]] == NODE_IDS
+    assert compass["map_revision"] >= 172
+    assert compass["source_graph_revision"] >= 191
+    journey_ids = [item["node_id"] for item in compass["journey"]]
+    start = journey_ids.index(NODE_IDS[0])
+    assert journey_ids[start : start + 3] == NODE_IDS
     report = ariadne_compass.build_compass_report(compass, graph, repo_root=ROOT)
     assert report["status"] == "passed"
     rendered = REPORT.read_text(encoding="utf-8")
-    assert "Compass map revision 172" in rendered
-    assert "continuity graph revision 191" in rendered
+    assert f"Compass map revision {compass['map_revision']}" in rendered
+    assert f"continuity graph revision {graph['graph_revision']}" in rendered
 
 
 def test_user_decisions_consume_three_tranches_and_leave_next_gate_closed() -> None:
@@ -71,11 +75,13 @@ def test_user_decisions_consume_three_tranches_and_leave_next_gate_closed() -> N
     assert "Satisfied on 2026-08-01" in decisions[
         "authorize-microsoft-federation-postgresql-persistence"
     ]["required_before"]
-    next_gate = decisions[
+    architecture_gate = decisions[
         "authorize-maintained-oidc-verifier-session-bridge-architecture"
     ]
-    assert "Any live Microsoft" in next_gate["required_before"]
-    assert "session issuance" in next_gate["required_before"]
+    assert "Satisfied on 2026-08-02" in architecture_gate["required_before"]
+    next_gate = decisions["authorize-msal-offline-adapter-dependency-tranche"]
+    assert "package/dependency addition" in next_gate["required_before"]
+    assert "Live network" in next_gate["required_before"]
 
 
 def test_graph_evidence_preserves_branding_and_live_identity_exclusions() -> None:
@@ -105,9 +111,9 @@ def test_live_handover_names_results_and_next_authority_gate() -> None:
         "Real-identity and Microsoft-federation three-tranche acceptance",
         "docs/raisa-microsoft-federation-admission-runtime-closeout.md",
         "docs/raisa-microsoft-federation-postgresql-persistence-closeout.md",
-        "Continuity graph revision 191",
-        "Compass map revision 172",
-        "architecture-only maintained OIDC verifier",
+        "Continuity graph revision 192",
+        "Compass map revision 173",
+        "provider-free maintained-verifier dependency and offline adapter-admission",
         "09a661cfa83559b13c438f45734403f33d1e3bbb",
         "No further Pages rebuild is authorised",
     ):

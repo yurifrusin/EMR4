@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/oidc-session-bridge-architecture-decision.v1.json",
+  "title": "EMR4 OIDC session-bridge architecture decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "case_id", "outcome", "reason", "architecture_admitted", "audit_required", "audit_recorded", "admission_grant_released", "session_created", "cookie_issued", "product_data_released", "provider_calls", "database_writes"],
+  "properties": {
+    "schema_version": {"const": "emr4.oidc-session-bridge-architecture-decision.v1"},
+    "case_id": {"type": "string", "pattern": "^[a-z0-9-]{3,80}$"},
+    "outcome": {"enum": ["admit_architecture", "deny_architecture", "error_architecture"]},
+    "reason": {"type": "string", "pattern": "^[a-z0-9_]{3,80}$"},
+    "architecture_admitted": {"type": "boolean"},
+    "audit_required": {"const": true},
+    "audit_recorded": {"type": "boolean"},
+    "admission_grant_released": {"const": false},
+    "session_created": {"const": false},
+    "cookie_issued": {"const": false},
+    "product_data_released": {"const": false},
+    "provider_calls": {"const": 0},
+    "database_writes": {"const": 0}
+  }
+}

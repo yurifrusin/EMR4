@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 now has an accepted tenant-specific real-identity/Microsoft-federation architecture plus default-off synthetic admission and keyed-reference PostgreSQL binding/audit foundations. Continuity 191 / Compass 172 bind the three provider-free results. Protected integration remains paused because it would trigger public GitHub Pages deployment. Live Microsoft, real identity, application sessions, product data, production and release remain closed.
+> EMR4 now has an accepted architecture for MSAL-only tenant-specific OIDC, execute-only HMAC identity bootstrap and one-use original-partition session redemption. Continuity 192 / Compass 173 bind the provider-free result. Dependency admission, live Microsoft, real identity, database capability, application sessions, product reads, protected integration, production and release remain closed.
 
 ## North star
 
@@ -156,34 +156,36 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    A route-free in-memory runtime matches all 22 frozen cases, records keyed-reference audit before a role-free/session-free candidate and has zero external or product side effects. Lineage parent: `raisa-real-identity-microsoft-federation-boundary`.
 70. **Durable keyed-reference federation binding and audit boundary — Raisa Microsoft Federation PostgreSQL Persistence**
    A reversible two-table authored-synthetic PostgreSQL boundary proves unique binding, terminal revocation, transaction-bound append-only audit, exact RLS, raw-value non-leakage and cleanup. Lineage parent: `raisa-microsoft-federation-admission-runtime`.
+71. **Maintained Microsoft OIDC, least-privilege identity bootstrap and partition-safe application-session architecture — Raisa Maintained OIDC Verifier and Session Bridge Architecture**
+   A 33-case provider-free architecture freezes MSAL-only tenant-specific verification, execute-only HMAC bootstrap and one-use original-partition session redemption with fresh internal truth. Lineage parent: `raisa-microsoft-federation-postgresql-persistence`.
 
 ## Current position
 
-**Durable keyed-reference federation binding and audit boundary — Raisa Microsoft Federation PostgreSQL Persistence**
+**Maintained Microsoft OIDC, least-privilege identity bootstrap and partition-safe application-session architecture — Raisa Maintained OIDC Verifier and Session Bridge Architecture**
 
-**Why this proof came next:** The accepted Office-host session stack left real identity and Microsoft federation as the next security boundary; Yuri authorised the architecture and its two smallest provider-free implementation descendants.
+**Why this proof came next:** The protected-integrated federation persistence parent deliberately left maintained cryptographic verification, table-owner-free bootstrap and cross-Office session handoff as the next security boundary.
 
-The three authorised federation descendants pass: tenant-specific architecture, default-off route-free synthetic admission, and disposable PostgreSQL keyed-reference binding/audit persistence. Live Microsoft, real identity, routes, sessions, product reads, deployment and release remain closed.
+The architecture passes 33 exact provider-free cases and freezes one backend-owned path without adding a dependency, provider call, route, database object, session, product read or deployment.
 
 ### What this unlocks
 
-- Publish the task branch for review without moving protected refs or triggering GitHub Pages.
-- Seek fresh authority for an architecture-only maintained OIDC verifier and least-privilege bootstrap/session-bridge design.
-- Separately ask whether protected integration and its GitHub Pages deployment are authorised.
+- Review the architecture in its draft task-branch pull request without moving protected refs.
+- Seek fresh authority for MSAL dependency review/pinning and a provider-free offline adapter-admission implementation.
+- Later seek separate authority for disposable-PostgreSQL resolver/grant capability implementation.
 - Keep Dependabot alert 17 as a separate explicit native-disposition decision.
 
 ### What it does not solve
 
-- Live Microsoft Entra registration, redirect, discovery, token exchange or key rollover.
-- Real identity binding administration, recovery or production key custody.
-- Application-session issuance, current internal role reload or product-data authorization.
-- Distributed abuse resistance, incident paging/SIEM, deployment, production or release.
-- The native disposition or removal of Dependabot alert 17.
+- Live Microsoft Entra registration, discovery, token exchange, key rollover or real identity.
+- Database resolver/grant privilege and concurrency correctness.
+- A live callback, application session, product read or endpoint authorization.
+- Distributed abuse resistance, key custody, incident paging/SIEM, deployment, production or release.
+- Protected integration, another GitHub Pages rebuild or Dependabot alert 17 disposition.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Bounded opening `api-change`: Two authored-synthetic keyed-reference binding/audit tables, one reversible migration and disposable local PostgreSQL proof.
+- Bounded opening `api-change`: Architecture-only maintained OIDC verifier, least-privilege provider-to-practice bootstrap and partition-safe application-session bridge design.
 - All other named boundaries remain closed: `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -395,10 +397,13 @@ Prerequisites:
 - **Should EMR4 persist authored-synthetic external bindings and audit with keyed references in a disposable local PostgreSQL database?**
   Required before: Satisfied on 2026-08-01 for one reversible two-table migration and disposable local proof. No existing database or live identity was used.
 - **Should EMR4 next freeze an architecture-only maintained OIDC verifier, least-privilege provider bootstrap and application-session bridge?**
-  Required before: Any live Microsoft discovery/token verification, real external binding, provider bootstrap role, session issuance or product identity reload.
+  Required before: Satisfied on 2026-08-02 for architecture-only MSAL verifier, execute-only HMAC bootstrap and partition-safe application-session bridge design. Dependencies, live Microsoft, real identity, database objects, routes, sessions, product reads and deployment remain closed.
+- **Should EMR4 review and pin MSAL Python, then implement its provider adapter behind provider-free offline fault fixtures?**
+  Required before: Any package/dependency addition or maintained-verifier adapter implementation. Live network, real identity, routes, database changes and product reads would remain separately closed.
 
 ## Map limits
 
+- The maintained OIDC/bootstrap/session-bridge result is architecture-only. It proves no dependency installation, live provider behavior, real identity, database capability, session, product access or deployment.
 - The federation sequence proves architecture and authored-synthetic route-free runtime/persistence only. It does not establish live Microsoft interoperability, real identity, session issuance, product data, deployment, production or release.
 - The PostgreSQL Office-host descendant proves one independent authored-synthetic lifecycle in each tested host through one exact local role-scoped path. It does not establish real identity, product data, distributed abuse resistance, deployment or production.
 - Post-snapshot Dependabot alert 17 is statically not_actionable for the supported development lint configuration but remains native-open and needs_review pending an explicit user disposition.
@@ -472,6 +477,7 @@ Prerequisites:
 - `deploy/raisa-office-web-dev/manifest-template.xml`
 - `deploy/raisa-office-web-dev/server.mjs`
 - `docs/api-spine/openapi/application-auth-synthetic-transport.yaml`
+- `docs/api-spine/openapi/application-identity-federation-session-bridge.yaml`
 - `docs/ariadne-bounded-agent-admission-design-closeout.md`
 - `docs/ariadne-compass-increment2-plan.md`
 - `docs/ariadne-continuity-engine-increment1-closeout.md`
@@ -605,6 +611,9 @@ Prerequisites:
 - `docs/raisa-cloud-run-public-https-dev-host-readiness-plan.md`
 - `docs/raisa-dual-host-foundation-closeout.md`
 - `docs/raisa-dual-host-foundation-plan.md`
+- `docs/raisa-maintained-oidc-verifier-session-bridge-architecture-closeout.md`
+- `docs/raisa-maintained-oidc-verifier-session-bridge-architecture-design.md`
+- `docs/raisa-maintained-oidc-verifier-session-bridge-architecture-plan.md`
 - `docs/raisa-microsoft-federation-admission-runtime-closeout.md`
 - `docs/raisa-microsoft-federation-admission-runtime-plan.md`
 - `docs/raisa-microsoft-federation-postgresql-persistence-closeout.md`
@@ -651,6 +660,7 @@ Prerequisites:
 - `docs/security/raisa-clinician-one-word-desktop-selection-check-threat-model-delta.md`
 - `docs/security/raisa-cloud-run-public-https-dev-host-readiness-threat-model-delta.md`
 - `docs/security/raisa-dual-host-foundation-threat-model-delta.md`
+- `docs/security/raisa-maintained-oidc-verifier-session-bridge-threat-model-delta.md`
 - `docs/security/raisa-microsoft-federation-admission-runtime-threat-model-delta.md`
 - `docs/security/raisa-microsoft-federation-postgresql-persistence-threat-model-delta.md`
 - `docs/security/raisa-real-identity-microsoft-federation-boundary-threat-model-delta.md`
@@ -877,6 +887,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-dual-host-foundation/feature-inventory.json`
 - `orchestration/continuity/raisa-dual-host-foundation/final-residue-evidence.json`
 - `orchestration/continuity/raisa-dual-host-foundation/host-profile-matrix-evidence.json`
+- `orchestration/continuity/raisa-maintained-oidc-verifier-session-bridge-architecture/architecture-policy.json`
+- `orchestration/continuity/raisa-maintained-oidc-verifier-session-bridge-architecture/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-microsoft-federation-admission-runtime/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-microsoft-federation-postgresql-persistence/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-real-identity-microsoft-federation-boundary/provider-free-acceptance-evidence.json`
@@ -1201,4 +1213,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 172; continuity graph revision 191._
+_Compass map revision 173; continuity graph revision 192._

@@ -1,0 +1,19 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "push_verified_oidc_verifier_session_bridge_architecture_task_branch_and_open_draft_pull_request",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records the architecture pass and closed protected-integration/Pages gates.",
+    "current_authority_allocation": "GPT Sol owns the authorised task-branch push and draft PR only; no worker is dispatched.",
+    "active_plan_and_acceptance": ["docs/raisa-maintained-oidc-verifier-session-bridge-architecture-plan.md", "docs/raisa-maintained-oidc-verifier-session-bridge-architecture-closeout.md", "orchestration/agent_inbox/codex/raisa-maintained-oidc-verifier-session-bridge-architecture-sol-acceptance.md"],
+    "protected_evidence_boundaries": "No dependency, provider/identity, database object, route, session, product, deployment, protected integration or Pages action; docs/branding/raisa remains excluded.",
+    "git_refs_and_worktree": "Accepted task commit is 1e04799e; protected refs remain at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

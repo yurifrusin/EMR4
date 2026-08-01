@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/oidc-session-bridge-architecture-policy.v1.json",
+  "title": "EMR4 maintained OIDC verifier and session-bridge architecture policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "authority_owner",
+    "library_boundary",
+    "protocol",
+    "database_bootstrap",
+    "admission_grant",
+    "redemption",
+    "cookie_contract",
+    "privacy",
+    "non_wiring"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.oidc-session-bridge-architecture-policy.v1"},
+    "status": {"const": "architecture_only_not_wired"},
+    "authority_owner": {"const": "emr4_backend"},
+    "library_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selected_library", "reviewed_baseline", "client_type", "flow_apis", "custom_jwt_verifier", "dependency_added"],
+      "properties": {
+        "selected_library": {"const": "msal_python"},
+        "reviewed_baseline": {"const": "1.37.0"},
+        "client_type": {"const": "confidential_client"},
+        "flow_apis": {
+          "const": [
+            "ConfidentialClientApplication.initiate_auth_code_flow",
+            "ConfidentialClientApplication.acquire_token_by_auth_code_flow"
+          ]
+        },
+        "custom_jwt_verifier": {"const": false},
+        "dependency_added": {"const": false}
+      }
+    },
+    "protocol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authority", "flow", "scopes", "pkce", "attempt_ttl_seconds", "attempt_consumption", "required_verified_facts", "forbidden_authorities", "forbidden_scopes"],
+      "properties": {
+        "authority": {"const": "one_tenant_specific_v2_authority"},
+        "flow": {"const": "authorization_code_oidc"},
+        "scopes": {"const": ["openid", "profile"]},
+        "pkce": {"const": "S256"},
+        "attempt_ttl_seconds": {"type": "integer", "minimum": 60, "maximum": 300},
+        "attempt_consumption": {"const": "atomic_before_single_provider_exchange"},
+        "required_verified_facts": {
+          "const": ["signature", "algorithm", "issuer", "audience", "tenant_id", "object_id", "subject", "nonce", "issued_at", "not_before", "expires_at", "trusted_signing_key"]
+        },
+        "forbidden_authorities": {"const": ["common", "organizations", "consumers", "personal_microsoft_account", "arbitrary_discovery_url"]},
+        "forbidden_scopes": {"const": ["email", "offline_access", "microsoft_graph", "resource_api"]}
+      }
+    },
+    "database_bootstrap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["login_role", "bootstrap_role", "routine_owner", "function_security", "search_path", "public_execute", "direct_table_grants", "rls", "input", "output", "audit_before_return"],
+      "properties": {
+        "login_role": {"const": "LOGIN_NOINHERIT_no_table_grants"},
+        "bootstrap_role": {"const": "NOLOGIN_NOBYPASSRLS_execute_exact_resolver_only"},
+        "routine_owner": {"const": "NOLOGIN_non_table_owner_minimum_select_insert"},
+        "function_security": {"const": "SECURITY_DEFINER_fixed_signature_no_dynamic_sql"},
+        "search_path": {"const": "pg_catalog_only_schema_qualified_application_objects"},
+        "public_execute": {"const": false},
+        "direct_table_grants": {"const": false},
+        "rls": {"const": "forced_exact_transaction_local_hmac_context"},
+        "input": {"const": "fixed_length_versioned_hmac_references_only"},
+        "output": {"const": ["binding_ref", "user_ref", "practice_ref", "binding_version"]},
+        "audit_before_return": {"const": true}
+      }
+    },
+    "admission_grant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entropy_bits", "ttl_seconds", "stored_form", "bound_to", "callback_sets_session_cookie", "transport", "browser_storage"],
+      "properties": {
+        "entropy_bits": {"type": "integer", "minimum": 256},
+        "ttl_seconds": {"type": "integer", "minimum": 1, "maximum": 60},
+        "stored_form": {"const": "digest_only"},
+        "bound_to": {"const": ["binding_version", "surface", "origin", "audience", "return_target", "policy_version"]},
+        "callback_sets_session_cookie": {"const": false},
+        "transport": {"const": "exact_origin_message_body_not_url"},
+        "browser_storage": {"const": false}
+      }
+    },
+    "redemption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["csrf", "repeat_binding_resolution", "fresh_internal_load", "atomic_commit", "cookie_after_commit", "concurrent_success_maximum", "product_reads"],
+      "properties": {
+        "csrf": {"const": "host_cookie_plus_x_emr4_csrf_header"},
+        "repeat_binding_resolution": {"const": true},
+        "fresh_internal_load": {"const": ["user", "practice", "role", "practitioner_relationship"]},
+        "atomic_commit": {"const": ["grant_consumption", "parent_session", "surface_session", "required_audit"]},
+        "cookie_after_commit": {"const": true},
+        "concurrent_success_maximum": {"const": 1},
+        "product_reads": {"const": 0}
+      }
+    },
+    "cookie_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["session_cookie", "csrf_cookie", "secure", "http_only", "path", "domain", "same_site", "partitioned", "raw_parent_in_client"],
+      "properties": {
+        "session_cookie": {"const": "__Host-emr4-application-session"},
+        "csrf_cookie": {"const": "__Host-emr4-application-csrf"},
+        "secure": {"const": true},
+        "http_only": {"const": true},
+        "path": {"const": "/"},
+        "domain": {"const": "absent"},
+        "same_site": {"const": "None"},
+        "partitioned": {"const": true},
+        "raw_parent_in_client": {"const": false}
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["persistent_external_identity", "forbidden_persistence", "external_errors", "return_targets"],
+      "properties": {
+        "persistent_external_identity": {"const": "versioned_keyed_hmac_only"},
+        "forbidden_persistence": {"const": ["authorization_code", "id_token", "access_token", "refresh_token", "state", "nonce", "pkce_verifier", "tenant_id", "object_id", "subject", "email", "name", "admission_grant", "session_bearer", "csrf_bearer"]},
+        "external_errors": {"const": ["authentication_failed", "authentication_temporarily_unavailable"]},
+        "return_targets": {"const": ["clinician_one", "reception_one", "diary"]}
+      }
+    },
+    "non_wiring": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider_calls", "real_identities", "database_migrations", "database_roles_created", "routes_mounted", "product_reads", "sessions_created", "deployments", "protected_ref_movements"],
+      "properties": {
+        "provider_calls": {"const": 0},
+        "real_identities": {"const": 0},
+        "database_migrations": {"const": 0},
+        "database_roles_created": {"const": 0},
+        "routes_mounted": {"const": 0},
+        "product_reads": {"const": 0},
+        "sessions_created": {"const": 0},
+        "deployments": {"const": 0},
+        "protected_ref_movements": {"const": 0}
+      }
+    }
+  }
+}

@@ -1,0 +1,243 @@
+openapi: 3.1.0
+info:
+  title: EMR4 application identity federation session bridge
+  version: 0.1.0-architecture
+  description: >-
+    Architecture-only, non-mounted REST protocol contract for tenant-specific
+    Microsoft Entra authentication, one-use admission-grant handoff and EMR4
+    application-session creation. It grants no route, provider, identity,
+    database, product, deployment, production or release authority.
+servers: []
+tags:
+  - name: Application identity federation
+    description: External protocol and one-use session bridge; not GraphQL.
+x-emr4-authority:
+  status: architecture_only_not_mounted
+  provider_calls: 0
+  identity_records: authored_synthetic_only
+  product_reads: 0
+  session_cookies_issued: 0
+  database_objects_added: 0
+  dependencies_added: 0
+  deployments: 0
+  closed:
+    - live_microsoft_wiring
+    - real_identity
+    - binding_commands
+    - product_access
+    - production
+    - release
+x-emr4-api-spine:
+  graphql_mutation: forbidden
+  start: external_rest_protocol_command
+  callback: provider_rest_protocol_boundary
+  redeem: one_use_rest_session_command
+  binding_status: future_redacted_graphql_read_model_only
+  binding_lifecycle: future_dual_authorised_rest_commands_closed
+x-emr4-maintained-verifier:
+  candidate: msal_python
+  reviewed_baseline: 1.37.0
+  future_api:
+    - ConfidentialClientApplication.initiate_auth_code_flow
+    - ConfidentialClientApplication.acquire_token_by_auth_code_flow
+  tenant_authority: tenant_specific_v2_only
+  scopes: [openid, profile]
+  pkce: S256
+  alternate_or_custom_jwt_verifier: forbidden
+x-emr4-session-cookie-contract:
+  session_cookie: __Host-emr4-application-session
+  csrf_cookie: __Host-emr4-application-csrf
+  attributes:
+    secure: true
+    http_only: true
+    path: /
+    domain: absent
+    same_site: None
+    partitioned: true
+  csrf_header: X-EMR4-CSRF
+  callback_sets_session_cookie: false
+  cookie_after_database_commit_only: true
+paths:
+  /api/v1/application-auth/federation/microsoft/start:
+    post:
+      tags: [Application identity federation]
+      operationId: startMicrosoftFederation
+      summary: Create one bounded tenant-specific authorization attempt.
+      description: >-
+        Future command. Requires exact origin and pre-authentication CSRF. The
+        server, not the request, selects tenant, redirect and return URL.
+      parameters:
+        - $ref: '#/components/parameters/CsrfHeader'
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartRequest'
+      responses:
+        '201':
+          description: One new or idempotently replayed unconsumed attempt.
+          headers:
+            Cache-Control: {$ref: '#/components/headers/NoStore'}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/StartResponse'}
+        '400': {$ref: '#/components/responses/GenericAuthenticationFailure'}
+        '403': {$ref: '#/components/responses/CsrfOrOriginFailure'}
+        '429': {$ref: '#/components/responses/RateLimited'}
+        '503': {$ref: '#/components/responses/AuthenticationUnavailable'}
+  /api/v1/application-auth/federation/microsoft/callback:
+    get:
+      tags: [Application identity federation]
+      operationId: completeMicrosoftFederation
+      summary: Consume one provider callback and emit no session cookie.
+      description: >-
+        Future exact redirect URI. Callback parameters are passed once with the
+        stored MSAL flow record. A no-store bridge page sends a 60-second opaque
+        admission grant to the exact original surface origin; no credential is
+        placed in a URL or browser storage.
+      parameters:
+        - name: code
+          in: query
+          required: false
+          schema: {type: string, minLength: 1, maxLength: 8192}
+        - name: state
+          in: query
+          required: true
+          schema: {type: string, minLength: 43, maxLength: 256}
+        - name: error
+          in: query
+          required: false
+          schema: {type: string, maxLength: 128}
+      responses:
+        '200':
+          description: No-store exact-origin bridge page; never a product page.
+          headers:
+            Cache-Control: {$ref: '#/components/headers/NoStore'}
+            Referrer-Policy:
+              schema: {type: string, const: no-referrer}
+          content:
+            text/html:
+              schema: {type: string, description: Restrictive static bridge page.}
+        '401': {$ref: '#/components/responses/GenericAuthenticationFailure'}
+        '429': {$ref: '#/components/responses/RateLimited'}
+        '503': {$ref: '#/components/responses/AuthenticationUnavailable'}
+  /api/v1/application-auth/federation/session/redeem:
+    post:
+      tags: [Application identity federation]
+      operationId: redeemFederationAdmissionGrant
+      summary: Redeem once in the original cookie partition.
+      description: >-
+        Future one-use command. Locks the grant, re-resolves the binding, loads
+        fresh EMR4 user/practice/role/practitioner truth and atomically commits
+        grant consumption, parent/surface session and audit before Set-Cookie.
+      parameters:
+        - $ref: '#/components/parameters/CsrfHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/RedeemRequest'}
+      responses:
+        '200':
+          description: Session and CSRF cookies set after the transaction commits.
+          headers:
+            Cache-Control: {$ref: '#/components/headers/NoStore'}
+            Set-Cookie:
+              schema: {type: string}
+              description: Separate frozen session and CSRF cookie fields.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/RedeemResponse'}
+        '401': {$ref: '#/components/responses/GenericAuthenticationFailure'}
+        '403': {$ref: '#/components/responses/CsrfOrOriginFailure'}
+        '409':
+          description: Grant already consumed or concurrently superseded; no cookie.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/GenericError'}
+        '429': {$ref: '#/components/responses/RateLimited'}
+        '503': {$ref: '#/components/responses/AuthenticationUnavailable'}
+components:
+  parameters:
+    CsrfHeader:
+      name: X-EMR4-CSRF
+      in: header
+      required: true
+      schema: {type: string, minLength: 32, maxLength: 256}
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema: {type: string, minLength: 16, maxLength: 128}
+  headers:
+    NoStore:
+      schema: {type: string, const: no-store}
+  responses:
+    GenericAuthenticationFailure:
+      description: Non-enumerating protocol, identity, binding or principal failure.
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/GenericError'}
+    CsrfOrOriginFailure:
+      description: CSRF or exact-origin check failed; no authority released.
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/GenericError'}
+    RateLimited:
+      description: Bounded rate admission denied and audited.
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/GenericError'}
+    AuthenticationUnavailable:
+      description: Required verifier, database or audit dependency unavailable.
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/GenericError'}
+  schemas:
+    Surface:
+      type: string
+      enum: [word_desktop, word_online, native_diary]
+    ReturnTarget:
+      type: string
+      enum: [clinician_one, reception_one, diary]
+    StartRequest:
+      type: object
+      additionalProperties: false
+      required: [surface, return_target]
+      properties:
+        surface: {$ref: '#/components/schemas/Surface'}
+        return_target: {$ref: '#/components/schemas/ReturnTarget'}
+    StartResponse:
+      type: object
+      additionalProperties: false
+      required: [status, authorization_uri, attempt_expires_at]
+      properties:
+        status: {type: string, const: authorization_required}
+        authorization_uri: {type: string, format: uri, pattern: '^https://login\\.microsoftonline\\.com/'}
+        attempt_expires_at: {type: string, format: date-time}
+    RedeemRequest:
+      type: object
+      additionalProperties: false
+      required: [admission_grant, surface]
+      properties:
+        admission_grant: {type: string, minLength: 43, maxLength: 256}
+        surface: {$ref: '#/components/schemas/Surface'}
+    RedeemResponse:
+      type: object
+      additionalProperties: false
+      required: [status, surface, session_expires_at, surface_idle_expires_at]
+      properties:
+        status: {type: string, const: authenticated}
+        surface: {$ref: '#/components/schemas/Surface'}
+        session_expires_at: {type: string, format: date-time}
+        surface_idle_expires_at: {type: string, format: date-time}
+    GenericError:
+      type: object
+      additionalProperties: false
+      required: [error]
+      properties:
+        error:
+          type: string
+          enum: [authentication_failed, authentication_temporarily_unavailable]
