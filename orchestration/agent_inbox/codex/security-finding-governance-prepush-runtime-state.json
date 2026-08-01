@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "verify_fetch_and_push_the_single_accepted_cross_checkpoint_commit_to_the_existing_task_branch_then_open_a_draft_pull_request",
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "sol_five_source_security_finding_governance_prepush",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree"
+      ]
+    }]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: security_finding_governance_pass remains accepted at Continuity 186 and Compass 167.",
+        "current_authority_allocation: GPT Sol owns the authorised task-branch push and draft PR; protected integration remains closed.",
+        "active_plan_and_acceptance: commit 8ce53b06 contains the verified 84-file cross-checkpoint publication unit after passing acceptance, security and regression gates.",
+        "protected_evidence_boundaries: no product, identity, provider, cloud, deployment, production, release or protected-ref authority is inferred.",
+        "git_refs_and_worktree: the task branch is one commit ahead of its exact upstream checkpoint and the worktree is clean before adding this receipt pair."
+      ]
+    },
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No subagent ran."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No external worker ran."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Unselected fallback."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude transport ran."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No provider or external reviewer ran."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

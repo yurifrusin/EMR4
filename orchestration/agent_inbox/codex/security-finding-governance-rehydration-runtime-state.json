@@ -1,0 +1,84 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan_and_implement_the_authorised_repository_local_security_finding_governance_descendant_with_a_sanitized_alert_register_scheduled_github_python_and_node_checks_durable_alert_8_to_15_triage_an_approval_previewed_security_md_policy_and_evidence_backed_native_alert_disposition_reconciliation",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_security_finding_governance_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: AGENTS.md was read completely after compaction; raisa_shared_application_auth_operational_hardening_pass at Continuity 185 and Compass 166 is the accepted parent, and Yuri authorised the leading security-finding-governance candidate.",
+        "current_authority_allocation: GPT Sol retains governance architecture and acceptance. GPT-5.6 Luna is not exposed by the current subagent interface, and no Terra substitute, external worker, provider or reviewer is selected because a single-owner tranche is more allowance-efficient.",
+        "active_plan_and_acceptance: the accepted operational-hardening plan, threat delta, closeout, Sol acceptance, tracking review, Bandit validation, Continuity 185 node and Compass 166 security-finding-governance candidate were read; the new work is limited to a sanitized durable register, scheduled GitHub Python/Node checks, ownership/SLA rules, an exact previewed SECURITY.md policy, static triage of Dependabot alerts 8-15 and evidence-backed native alert reconciliation.",
+        "protected_evidence_boundaries: Yuri subsequently granted full authority for SECURITY.md edits and native GitHub alert dismissals. The define-security-policy exact-diff preview gate and finding-specific evidence gates still apply. Protected holdouts and raw historical Diary material remain sealed; dependency force overrides, real identity, product data, providers, cloud/IAM mutation, deployment, production, release and protected-ref movement remain closed.",
+        "git_refs_and_worktree: required branch and HEAD remain exact with upstream divergence 0/0; master, handoff/current and origin protected refs remain aligned; accepted uncommitted work is preserved and unstaged."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Luna is not callable in the current task interface; no substitute subagent was selected."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external worker was selected or dispatched."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected real-TTY fallback."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Claude transport was selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No provider or independent external reviewer was selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

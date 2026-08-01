@@ -15673,3 +15673,109 @@ clarification. A later holdout must be genuinely fresh and separately approved.
 - The required non-PHI Pushover closeout notification was attempted with the
   sprint engine paused for that fresh authority and failed with
   `no active devices to send to`; nothing was delivered.
+
+## Raisa Shared Application Authentication Runtime Role and Secure Transport — 2026-08-01
+
+- Result: `raisa_shared_application_auth_runtime_role_secure_transport_pass`.
+- Added one narrow security-definer SHA-256 reference resolver at Alembic head
+  `p5q6r7s8t9u0` and one parameterised NOLOGIN, non-owner, non-bypass-RLS
+  capability-role contract.
+- The capability role has only the frozen operation matrix over five auth
+  tables, one audit sequence and the exact resolver, with zero privilege hits
+  across 50 observed product tables.
+- Mounted seven application-auth POST routes behind a default-off dependency;
+  no environment switch enables them and the closed application opens no
+  database session.
+- Exact HTTPS origins, independent cookie/header CSRF equality, generic
+  external errors and partitioned Secure HttpOnly `__Host-` cookies govern the
+  authored-synthetic protocol without JSON parent/surface bearers.
+- One-use login, validation, atomic rotation, Word-to-native-Diary exchange and
+  logout pass through the accepted single policy engine and PostgreSQL
+  coordinator. Replays, binding mismatches and old bearers fail generically.
+- Forced audit outage returns generic 503, releases no cookie and preserves all
+  state. Thirty-one raw values match no persisted row or evidence field.
+- The uniquely named disposable database and cluster capability role were
+  dropped and proved absent.
+- All 83 focused, 177 expanded no-`conftest`, and 12 serial legacy database
+  tests pass. Compilation, Ruff, JSON/YAML, API Spine, Alembic and whitespace
+  gates pass.
+- Every provider, external identity, Microsoft/Office identity, cloud/IAM,
+  product/clinical read, command, microphone, document, deployment and
+  production count is zero.
+- Continuity revision 184 and Compass revision 165 bind the accepted result.
+- The frozen Sydney service revision `raisa-office-web-dev-00006-xf9`, digest,
+  zero-authority posture and resource limits are unchanged.
+- The next safe candidate is a separately authorised repository-local,
+  provider-free operational-hardening architecture. Real identity, federation,
+  product reads, deployment, production and release remain closed.
+- The required non-PHI Pushover closeout notification was attempted with the
+  sprint engine paused for that fresh authority and failed with
+  `no active devices to send to`; nothing was delivered.
+
+## Raisa Shared Application Authentication Operational Hardening — 2026-08-01
+
+- Result: `raisa_shared_application_auth_operational_hardening_pass`.
+- Separated the exact finite-connection deployment LOGIN from the accepted
+  NOLOGIN capability role; the login has no direct auth-table grants and the
+  bounded pool executes exact `SET ROLE` on each new physical connection.
+- Added strict one-hop trusted-proxy parsing, finite per-process fixed-window
+  rate admission and required HMAC-only metadata denial audit to all seven
+  still-default-off routes.
+- Disposable PostgreSQL proof establishes distinct `session_user` and
+  `current_user`, direct-login denial, 0.25-second bounded pool exhaustion,
+  forced RLS, append-only denial rows and generic 429/503 behavior.
+- Exactly three denial rows were retained; raw/target scans found zero matches,
+  and the unique database plus both roles were dropped and proved absent.
+- All 151 focused, 193 expanded no-`conftest` and 12 serial legacy database
+  cases pass. Compilation, Ruff, JSON/YAML, Bandit, pip audit, migration and
+  whitespace gates pass with every external/product side-effect count zero.
+- GitHub CodeQL and Dependabot provide laptop-independent detection, but one
+  durable owner/SLA/native-disposition lifecycle is missing. Nine Dependabot
+  alerts and three repository-validated but GitHub-open CodeQL highs remain;
+  no alert or GitHub setting changed.
+- Continuity revision 185 and Compass revision 166 bind the accepted result.
+- The frozen Sydney service revision and digest, zero-authority posture and
+  resource limits are unchanged.
+- Security-finding governance and supervised Office cookie compatibility are
+  fresh candidates. Real identity, federation, product reads, distributed
+  abuse resistance, credential lifecycle, deployment, production and release
+  remain closed.
+- The non-PHI closeout notification was not attempted because this tranche's
+  frozen plan prohibits network egress beyond disposable local PostgreSQL.
+
+## EMR4 Security-Finding Governance — 2026-08-01
+
+- Result: `security_finding_governance_pass`.
+- Added one sanitized, schema-validated register joining nine Dependabot and
+  three CodeQL alert IDs to owner, SLA, evidence, exact native disposition,
+  review, expiry and reopening conditions.
+- Linked the existing 14-row Bandit and 10-row CodeQL instance-preserving
+  validation ledgers so laptop-generated findings cannot disappear into local
+  conversation state.
+- Static tracing preserves Dependabot alerts 8-15 as genuine upstream defects
+  while establishing that every resolution is development-only and the exact
+  supported advisory sink is absent. No package, lockfile, override or force
+  fix changed.
+- Exact GitHub REST readback confirms alerts 5 and 8-15 plus CodeQL 295, 272
+  and 268 are dismissed with the register's evidence comments and zero open
+  alerts remain in the reconciled queues.
+- The approved root `SECURITY.md` names `@yurifrusin`, defines acknowledgement,
+  triage and resolution targets, requires durable ingestion and makes accepted
+  risk expire back to review.
+- Python and Node security workflows preserve their push/PR triggers and
+  blocking dependency gates while defining staggered daily schedules. GitHub
+  activates scheduled workflows from the default branch, so activation and an
+  actual scheduled-run result await protected integration.
+- The deterministic acceptance and all 183 selected serial cross-checkpoint
+  cases pass. Ruff, reviewed Bandit, pip-audit, blocking production npm audit,
+  Office manifest, structured-data and whitespace gates pass.
+- Continuity revision 186 and Compass revision 167 bind the accepted result.
+- No protected evidence, product/patient/clinical data, external identity,
+  provider, cloud/IAM, deployment, production or protected ref was accessed or
+  changed. Native alert disposition is the only external mutation.
+- Luna was not callable in the current subagent interface and no substitute
+  worker ran. Yuri authorised one intentional task-branch commit, push and
+  draft PR; protected integration remains separate.
+- The leading next candidate is supervised authored-synthetic Office cookie
+  compatibility. It requires fresh authority and keeps real identity,
+  Microsoft/Office federation authority and every product read closed.

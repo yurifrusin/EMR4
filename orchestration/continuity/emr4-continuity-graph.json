@@ -59,7 +59,7 @@
       "voice"
     ]
   },
-  "graph_revision": 183,
+  "graph_revision": 186,
   "harvests": [],
   "nodes": [
     {
@@ -9258,9 +9258,403 @@
         "Product-derived, patient, health, clinical and historical reads remain closed.",
         "Appointment or arrival commands, microphone capture, document mutation, organisational deployment, production and release remain closed."
       ]
+    },
+    {
+      "id": "raisa-shared-application-auth-runtime-role-secure-transport",
+      "title": "Raisa Shared Application Authentication Runtime Role and Secure Synthetic Transport",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-01T00:25:13Z",
+      "updated_at": "2026-08-01T00:25:13Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-terra-gemini-comparative-rehearsal",
+        "source_head": "2ae8f2173276147e59be361e0182f6cb4b7453fa",
+        "thread_id": null,
+        "worktree_role": "integration"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-shared-application-auth-postgresql-persistence",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-shared-application-auth-runtime-role-secure-transport-plan.md",
+            "scope": "One database-scoped hash resolver, parameterised NOLOGIN capability-role contract and default-off authored-synthetic session transport exercised only against a uniquely named disposable local database."
+          }
+        ],
+        "notes": [
+          "Yuri explicitly authorised the exact Compass 164 runtime-role and secure synthetic transport candidate.",
+          "The mounted FastAPI surface remains unavailable unless an authored-synthetic transport dependency is explicitly injected; no environment switch enables it.",
+          "External identity, Microsoft/Office federation, product reads, clinical authority, deployment, production and release remained closed.",
+          "No worker, subagent, provider or external control plane ran."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-least-privilege-auth-capability-role-184",
+          "source": "app/services/application_auth_database_role.py",
+          "status": "accepted",
+          "summary": "Accept the exact NOLOGIN, non-owner capability-role grant matrix over only five auth tables, one audit sequence and one bounded token-reference resolver."
+        },
+        {
+          "id": "accept-default-off-cookie-csrf-transport-184",
+          "source": "app/routers/application_auth.py",
+          "status": "accepted",
+          "summary": "Accept seven default-off POST routes with exact-origin and CSRF gates, generic external failures and partitioned Secure HttpOnly __Host- cookies."
+        },
+        {
+          "id": "accept-disposable-role-transport-proof-184",
+          "source": "orchestration/continuity/raisa-shared-application-auth-runtime-role-secure-transport/live-local-backend-postgres-transport-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the live-local disposable PostgreSQL role, resolver, session lifecycle, audit rollback and residue proof."
+        },
+        {
+          "id": "keep-real-identity-product-and-release-closed-184",
+          "source": "docs/raisa-shared-application-auth-runtime-role-secure-transport-closeout.md",
+          "status": "accepted",
+          "summary": "Keep real identity mapping, federation, product data, commands, deployment, production and release outside this pass."
+        }
+      ],
+      "claim_scope": [
+        "A narrow SECURITY DEFINER hash resolver and parameterised capability role bootstrap authored-synthetic principals without broad pre-context table reads or product privileges.",
+        "Seven mounted routes remain closed by default and expose only bounded generic 401, 403, 404 and 503 classes.",
+        "Exact-origin, double-submit CSRF and partitioned Secure HttpOnly __Host- cookies protect login, validate, rotation, Word-to-Diary exchange and logout in the local protocol proof.",
+        "The disposable acceptance proves old-token revocation, one-use bootstrap and exchange, required-audit rollback, practice RLS, zero product privileges, zero raw-secret matches and exact database/role cleanup.",
+        "Focused, expanded no-conftest and serial legacy database gates pass with every recorded external and product side effect zero."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-shared-application-auth-runtime-role-secure-transport-plan.md",
+            "app/routers/application_auth.py",
+            "orchestration/continuity/raisa-shared-application-auth-runtime-role-secure-transport/live-local-backend-postgres-transport-evidence.json"
+          ],
+          "note": "The transport exposes no product read, proposal, confirmation or command path."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/security/raisa-shared-application-auth-runtime-role-secure-transport-threat-model-delta.md",
+            "orchestration/continuity/raisa-shared-application-auth-runtime-role-secure-transport/live-local-backend-postgres-transport-evidence.json",
+            "docs/raisa-shared-application-auth-runtime-role-secure-transport-closeout.md"
+          ],
+          "note": "Only task-created authored-synthetic auth state ran; no Diary truth, committed event or product table was accessed."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-shared-application-auth-runtime-role-secure-transport-plan.md",
+          "docs/security/raisa-shared-application-auth-runtime-role-secure-transport-threat-model-delta.md",
+          "docs/raisa-shared-application-auth-runtime-role-secure-transport-cross-pc-handoff.md",
+          "docs/api-spine/openapi/application-auth-synthetic-transport.yaml"
+        ],
+        "findings": [
+          "alembic/versions/p5q6r7s8t9u0_add_application_auth_runtime_bootstrap.py",
+          "app/services/application_auth_database_role.py",
+          "app/services/application_auth_role_runtime.py",
+          "app/schemas/application_auth_transport.py",
+          "app/services/application_auth_transport.py",
+          "app/routers/application_auth.py",
+          "orchestration/continuity/raisa-shared-application-auth-runtime-role-secure-transport/live-local-backend-postgres-transport-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-shared-application-auth-runtime-role-secure-transport-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-runtime-role-secure-transport-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-runtime-role-secure-transport-cross-pc-resume-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-runtime-role-secure-transport-preacceptance-receipt.json"
+        ],
+        "tests": [
+          "scripts/raisa_shared_application_auth_runtime_role_secure_transport_acceptance.py",
+          "tests/test_raisa_shared_application_auth_transport.py",
+          "tests/test_raisa_shared_application_auth_runtime_role_secure_transport.py"
+        ]
+      },
+      "unresolved_gates": [
+        "No real EMR4 identity-to-practice mapping, external identity provider or Microsoft/Office federation exists.",
+        "Deployment login credential isolation, pooler behavior, proxy trust, rate limiting and retained unauthenticated audit remain unproved operational architecture.",
+        "Real Word desktop/Online third-party-cookie compatibility and browser supply-chain controls remain untested.",
+        "Product-derived, patient, health, clinical and historical reads remain closed.",
+        "Appointment or arrival commands, microphone capture, document mutation, organisational deployment, production and release remain closed."
+      ]
+    },
+    {
+      "id": "raisa-shared-application-auth-operational-hardening",
+      "title": "Raisa Shared Application Authentication Operational Hardening",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-01T04:40:00Z",
+      "updated_at": "2026-08-01T04:40:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-terra-gemini-comparative-rehearsal",
+        "source_head": "2ae8f2173276147e59be361e0182f6cb4b7453fa",
+        "thread_id": null,
+        "worktree_role": "integration"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-shared-application-auth-runtime-role-secure-transport",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-shared-application-auth-operational-hardening-plan.md",
+            "scope": "Repository-local provider-free authored-synthetic deployment-login isolation, strict proxy trust, bounded rate limiting, retained denial audit and finite SQLAlchemy pool behavior only."
+          }
+        ],
+        "notes": [
+          "Yuri explicitly authorised the Compass 165 shared-auth operational-hardening candidate.",
+          "The operational guard may deny only and remains an explicit dependency beside the default-off transport.",
+          "Real identity, Office federation, product reads, cloud/IAM mutation, deployment, production and release remained closed.",
+          "No worker, subagent, provider or external control plane ran."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-deployment-login-capability-isolation-185",
+          "source": "app/services/application_auth_operational_database.py",
+          "status": "accepted",
+          "summary": "Accept an exact NOINHERIT login with no direct table grants, finite connection limit and exact pool SET ROLE to the NOLOGIN capability role."
+        },
+        {
+          "id": "accept-proxy-rate-and-denial-audit-185",
+          "source": "app/services/application_auth_operational_hardening.py",
+          "status": "accepted",
+          "summary": "Accept strict one-hop trusted-proxy resolution, bounded per-process rate admission and required HMAC-only retained denial audit."
+        },
+        {
+          "id": "accept-disposable-operational-proof-185",
+          "source": "orchestration/continuity/raisa-shared-application-auth-operational-hardening/live-local-backend-postgres-operational-evidence.json",
+          "status": "accepted",
+          "summary": "Accept live-local role separation, finite pool timeout, RLS/append-only denial rows, zero raw matches and exact database plus two-role cleanup."
+        },
+        {
+          "id": "record-security-tracking-gap-without-disposition-185",
+          "source": "docs/security/security-finding-tracking-review-2026-08-01.md",
+          "status": "accepted",
+          "summary": "Record laptop-independent GitHub detection and the missing durable owner/SLA/disposition lifecycle without changing any GitHub alert or setting."
+        },
+        {
+          "id": "keep-real-identity-product-and-release-closed-185",
+          "source": "docs/raisa-shared-application-auth-operational-hardening-closeout.md",
+          "status": "accepted",
+          "summary": "Keep real identity, federation, product data, distributed abuse controls, deployment, production and release outside this pass."
+        }
+      ],
+      "claim_scope": [
+        "One exact deployment login authenticates without direct auth-table grants, then enters the existing NOLOGIN capability role on every new bounded-pool connection.",
+        "One-hop trusted-proxy parsing rejects spoofing, duplicate or chained fields, incomplete pairs and non-HTTPS forwarding; its HMAC result is abuse-control identity only.",
+        "All seven routes have bounded fixed-window admission, first-block audit coalescing and generic 429/503 failure behavior.",
+        "Required denial audit retains fixed metadata and an HMAC client reference under forced RLS and append-only guards with no raw network or authentication material.",
+        "The disposable proof, focused/expanded/serial tests and security gates pass with zero raw matches, zero external/product side effects and exact database plus role cleanup."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-shared-application-auth-operational-hardening-plan.md",
+            "app/routers/application_auth.py",
+            "orchestration/continuity/raisa-shared-application-auth-operational-hardening/live-local-backend-postgres-operational-evidence.json"
+          ],
+          "note": "The guard can deny auth transport only and exposes no product read, proposal, confirmation or command path."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/security/raisa-shared-application-auth-operational-hardening-threat-model-delta.md",
+            "orchestration/continuity/raisa-shared-application-auth-operational-hardening/live-local-backend-postgres-operational-evidence.json",
+            "docs/raisa-shared-application-auth-operational-hardening-closeout.md"
+          ],
+          "note": "Only task-created authored-synthetic auth and denial-audit state ran; no Diary truth, event or product table was read."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-shared-application-auth-operational-hardening-plan.md",
+          "docs/security/raisa-shared-application-auth-operational-hardening-threat-model-delta.md",
+          "docs/api-spine/openapi/application-auth-synthetic-transport.yaml"
+        ],
+        "findings": [
+          "app/services/application_auth_database_role.py",
+          "app/services/application_auth_operational_database.py",
+          "app/services/application_auth_operational_hardening.py",
+          "app/routers/application_auth.py",
+          "orchestration/continuity/raisa-shared-application-auth-operational-hardening/live-local-backend-postgres-operational-evidence.json",
+          "docs/security/security-finding-tracking-review-2026-08-01.md",
+          "docs/security/bandit-candidate-validation-2026-08-01.md",
+          "docs/security/bandit-candidate-validation-ledger.jsonl"
+        ],
+        "closeouts": [
+          "docs/raisa-shared-application-auth-operational-hardening-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-operational-hardening-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-operational-hardening-rehydration-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-operational-hardening-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-operational-hardening-preacceptance-receipt.json"
+        ],
+        "tests": [
+          "scripts/raisa_shared_application_auth_operational_hardening_acceptance.py",
+          "tests/test_raisa_shared_application_auth_operational_hardening.py"
+        ]
+      },
+      "unresolved_gates": [
+        "No real identity-to-practice mapping, external identity provider or Microsoft/Office federation exists.",
+        "The limiter is per-process; production ingress, distributed rate limiting, credential lifecycle and operational retention or SIEM remain unproved.",
+        "Security findings lack one durable owner/SLA/native-disposition lifecycle; Python and Node security workflows remain unscheduled.",
+        "Real Word desktop/Online third-party-cookie compatibility and browser supply-chain controls remain untested.",
+        "Product-derived, patient, health, clinical and historical reads, commands, deployment, production and release remain closed."
+      ]
+    },
+    {
+      "id": "security-finding-governance",
+      "title": "EMR4 Security-Finding Governance",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-01T05:30:00Z",
+      "updated_at": "2026-08-01T05:30:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-terra-gemini-comparative-rehearsal",
+        "source_head": "2ae8f2173276147e59be361e0182f6cb4b7453fa",
+        "thread_id": null,
+        "worktree_role": "integration"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-shared-application-auth-operational-hardening",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/security/security-finding-governance-plan.md",
+            "scope": "Exact evidence-backed native GitHub disposition of Dependabot 5 and 8-15 plus CodeQL 295, 272 and 268; repository workflow schedules and SECURITY.md policy."
+          }
+        ],
+        "notes": [
+          "Yuri authorised the leading Compass 166 governance candidate.",
+          "Yuri then granted full SECURITY.md and native-alert disposition authority plus task-branch Git publication.",
+          "No force dependency override, product/provider/cloud change or protected-ref movement occurred.",
+          "GPT-5.6 Luna was not exposed in the current subagent interface; no substitute worker was dispatched."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-durable-security-register-186",
+          "source": "docs/security/security-finding-register.json",
+          "status": "accepted",
+          "summary": "Accept one schema-validated sanitized register joining 12 native alerts to owners, SLAs, evidence, review/expiry and exact native disposition."
+        },
+        {
+          "id": "accept-daily-security-workflow-schedules-186",
+          "source": "orchestration/continuity/security-finding-governance/acceptance-evidence.json",
+          "status": "accepted",
+          "summary": "Accept distinct daily Python and Node schedules while preserving push/PR triggers and blocking dependency gates."
+        },
+        {
+          "id": "accept-native-alert-reconciliation-186",
+          "source": "orchestration/continuity/security-finding-governance/native-alert-disposition-evidence.json",
+          "status": "accepted",
+          "summary": "Accept exact REST readback of nine dismissed Dependabot and three dismissed validated CodeQL highs with zero remaining open alerts in those queues."
+        },
+        {
+          "id": "accept-security-owner-sla-policy-186",
+          "source": "SECURITY.md",
+          "status": "accepted",
+          "summary": "Accept the owner, response targets, laptop-ingestion and time-bounded accepted-risk policy."
+        },
+        {
+          "id": "keep-product-provider-and-protected-refs-closed-186",
+          "source": "docs/security/security-finding-governance-closeout-2026-08-01.md",
+          "status": "accepted",
+          "summary": "Keep product, identity, provider, cloud, deployment, production and protected integration outside this pass."
+        }
+      ],
+      "claim_scope": [
+        "Twelve native security alerts have unique durable rows with owner, SLA, evidence, risk review and exact final GitHub state.",
+        "Dependabot alerts 8-15 are genuine upstream defects but are not actionable at this revision because every instance is development-only and the advisory product boundary is absent.",
+        "The 14 Bandit and 10 CodeQL validated instances remain linked through immutable instance-preserving ledgers.",
+        "Python and Node workflow definitions have staggered daily schedules and preserve their existing blocking gates.",
+        "The accepted policy makes laptop-only output insufficient and requires time-bounded owner disposition."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/security/security-finding-governance-plan.md",
+            "docs/security/security-finding-governance-threat-model-delta.md",
+            "orchestration/continuity/security-finding-governance/acceptance-evidence.json"
+          ],
+          "note": "Governance touches repository metadata and GitHub alerts only; no product context or command path is opened."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "docs/security/security-finding-governance-threat-model-delta.md",
+            "orchestration/continuity/security-finding-governance/native-alert-disposition-evidence.json",
+            "docs/security/security-finding-governance-closeout-2026-08-01.md"
+          ],
+          "note": "No Diary state, event, appointment, patient or clinical data was read or changed."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/security/security-finding-governance-plan.md",
+          "docs/security/security-finding-governance-threat-model-delta.md",
+          "docs/security/security-finding-register.schema.json",
+          "SECURITY.md"
+        ],
+        "findings": [
+          "docs/security/security-finding-register.json",
+          "docs/security/dependabot-alerts-8-15-triage-2026-08-01.md",
+          "orchestration/continuity/security-finding-governance/native-alert-disposition-evidence.json",
+          "orchestration/continuity/security-finding-governance/acceptance-evidence.json"
+        ],
+        "closeouts": [
+          "docs/security/security-finding-governance-closeout-2026-08-01.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/security-finding-governance-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/security-finding-governance-rehydration-receipt.json",
+          "orchestration/agent_inbox/codex/security-finding-governance-preacceptance-receipt.json"
+        ],
+        "tests": [
+          "scripts/security_finding_governance_acceptance.py",
+          "tests/test_security_finding_governance.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Daily schedules become operational on GitHub's default branch only after protected integration; the draft PR does not move it.",
+        "The development dependency defects remain in the lockfile until compatible upstream updates exist; force overrides remain closed.",
+        "No incident paging, SIEM, runner-availability or production monitoring result is established.",
+        "Real identity, product data, providers, deployment, production and release remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-07-31T21:58:00Z"
+  "updated_at": "2026-08-01T05:30:00Z"
 }

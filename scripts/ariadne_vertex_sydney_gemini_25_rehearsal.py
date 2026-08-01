@@ -339,7 +339,7 @@ def verify_cell(container: dict[str, Any]) -> dict[str, Any]:
         "pids_limit": 64,
         "nofile_exact": True,
         "mount_count": 0,
-        "tmpfs": {"/tmp": "rw,noexec,nosuid,size=8m"},
+        "tmpfs": {"/tmp": "rw,noexec,nosuid,size=8m"},  # nosec B108 -- expected container policy
         "port_binding_count": 0,
         "publish_all_ports": False,
     }
@@ -401,7 +401,7 @@ def verify_relay(container: dict[str, Any]) -> dict[str, Any]:
         "nofile_exact": True,
         "mount_count": 1,
         "token_mount_destination_exact": True,
-        "tmpfs": {"/tmp": "rw,noexec,nosuid,size=8m"},
+        "tmpfs": {"/tmp": "rw,noexec,nosuid,size=8m"},  # nosec B108 -- expected container policy
         "port_binding_count": 0,
         "publish_all_ports": False,
     }

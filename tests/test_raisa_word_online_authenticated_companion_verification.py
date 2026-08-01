@@ -127,9 +127,13 @@ def test_cleanup_and_revision_binding_are_terminal() -> None:
     architecture_id = "raisa-shared-application-auth-clinician-role-boundary"
     runtime_id = "raisa-shared-application-auth-runtime-foundation"
     persistence_id = "raisa-shared-application-auth-postgresql-persistence"
+    transport_id = "raisa-shared-application-auth-runtime-role-secure-transport"
+    operational_id = "raisa-shared-application-auth-operational-hardening"
+    governance_id = "security-finding-governance"
     assert journey[architecture_id]["lineage_parent"] == node["id"]
     assert journey[runtime_id]["lineage_parent"] == architecture_id
     assert journey[persistence_id]["lineage_parent"] == runtime_id
-    assert compass["current_position"]["node_id"] == (
-        persistence_id
-    )
+    assert journey[transport_id]["lineage_parent"] == persistence_id
+    assert journey[operational_id]["lineage_parent"] == transport_id
+    assert journey[governance_id]["lineage_parent"] == operational_id
+    assert compass["current_position"]["node_id"] == governance_id

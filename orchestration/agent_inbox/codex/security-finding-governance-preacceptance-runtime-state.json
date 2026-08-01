@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "independently_review_the_security_finding_governance_register_policy_workflows_exact_native_readback_and_deterministic_acceptance_before_continuity_promotion",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_security_finding_governance_preacceptance",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: operational hardening at Continuity 185 and Compass 166 remains the accepted parent until this independent review passes.",
+        "current_authority_allocation: GPT Sol performs acceptance; no worker certifies its own result and no provider or subagent ran.",
+        "active_plan_and_acceptance: the frozen governance plan, threat delta, 12-row schema-validated register, exact native disposition evidence, approved root SECURITY.md and deterministic passing acceptance evidence were reviewed.",
+        "protected_evidence_boundaries: protected evidence and real product, identity, provider, cloud, deployment and production boundaries remain closed; task-branch publication does not authorize protected integration.",
+        "git_refs_and_worktree: required task branch remains at starting HEAD 2ae8f2173276147e59be361e0182f6cb4b7453fa before commit; protected refs remain 4974075b31035d599e081d68e3b85e04a897baa1 and no file is staged."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Luna is not callable; no substitute subagent ran."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker ran."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude transport ran."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No provider or external reviewer ran."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

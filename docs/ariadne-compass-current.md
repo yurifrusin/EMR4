@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Raisa now has an accepted route-free authored-synthetic PostgreSQL transaction boundary beneath its shared application-authentication runtime. Five normalized hash-only tables, a reversible migration, principal-row locking, durable one-use Word-to-Diary exchange, same-transaction required audit, forced practice RLS and immutable database guards pass in a completely removed disposable database. Sixty focused, 156 corrected expanded and 12 serial legacy database cases pass with zero external or product side effects. Continuity 183 / Compass 164 bind the result. Routes, cookies, runtime roles, external identity, product data, deployment, production and release remain closed.
+> EMR4 security finding governance is now repository-owned rather than laptop-dependent: 12 native alerts have owner/SLA/evidence rows and exact GitHub dispositions; validated Bandit and CodeQL ledgers remain linked; and Python/Node workflow definitions have staggered daily schedules. Continuity 186 / Compass 167 bind the repository result. Default-branch schedule activation awaits protected integration; product, identity, provider, deployment, production and release boundaries remain closed.
 
 ## North star
 
@@ -140,49 +140,53 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The frozen backend-owned session architecture now has one explicit unmounted in-memory implementation: hash-only parent and surface sessions, bounded expiry, generation revocation, atomic single-use Word-to-Diary exchange and audit-before-mutation all pass against authored-synthetic metadata. Routes, cookies, persistence, external identity and product reads remain closed. Lineage parent: `raisa-shared-application-auth-clinician-role-boundary`.
 62. **Route-free authored-synthetic shared-auth PostgreSQL transaction boundary — Raisa Shared Application Authentication PostgreSQL Persistence**
    The accepted session foundation now has one reversible PostgreSQL schema and route-free coordinator. Principal-row locking, hash-only state, durable one-use Word-to-Diary exchange, same-transaction required audit, forced practice RLS and database guards pass in a disposable live-local database. Routes, cookies, runtime roles, external identity and product reads remain closed. Lineage parent: `raisa-shared-application-auth-runtime-foundation`.
+63. **Default-off least-privilege authored-synthetic application-auth transport — Raisa Shared Application Authentication Runtime Role and Secure Synthetic Transport**
+   The accepted PostgreSQL shared-auth boundary now has one exact NOLOGIN capability-role contract, a bounded hash resolver and seven default-off FastAPI routes. Exact-origin and CSRF controls, partitioned Secure HttpOnly cookies, rotation, logout and one-use Word-to-Diary exchange pass through the single backend policy engine in a completely removed disposable database and role. Real identity and every product read remain closed. Lineage parent: `raisa-shared-application-auth-postgresql-persistence`.
+64. **Bounded local shared-auth operational posture — Raisa Shared Application Authentication Operational Hardening**
+   The accepted default-off shared-auth transport now separates an exact deployment LOGIN from its NOLOGIN capability role, enters that role through a finite pool, rejects ambiguous proxy identity, rate-limits all seven routes and retains HMAC-only denial audit. Disposable PostgreSQL proof passes with zero raw matches, zero external/product side effects and exact database plus two-role cleanup. Real identity and product data remain closed. Lineage parent: `raisa-shared-application-auth-runtime-role-secure-transport`.
+65. **Durable security-finding governance — EMR4 Security-Finding Governance**
+   EMR4 now has one schema-validated owner/SLA register joining 12 native security alerts to evidence and exact GitHub disposition, with zero open Dependabot or security-high CodeQL alerts in the reconciled queues. The 14 Bandit and 10 CodeQL validation rows remain linked. Python and Node workflow definitions now carry staggered daily schedules; activation on the default branch still awaits protected integration. Lineage parent: `raisa-shared-application-auth-operational-hardening`.
 
 ## Current position
 
-**Route-free authored-synthetic shared-auth PostgreSQL transaction boundary — Raisa Shared Application Authentication PostgreSQL Persistence**
+**Durable security-finding governance — EMR4 Security-Finding Governance**
 
-**Why this proof came next:** The accepted in-memory runtime could not prove restart durability, cross-process single-use or audit crash consistency. Yuri authorised the exact synthetic-only migration and transaction descendant.
+**Why this proof came next:** The accepted operational-hardening inventory proved detection was not laptop-only but exposed an unowned register, schedule and disposition gap.
 
-The accepted session foundation now has one reversible PostgreSQL schema and route-free coordinator. Principal-row locking, hash-only state, durable one-use Word-to-Diary exchange, same-transaction required audit, forced practice RLS and database guards pass in a disposable live-local database. Routes, cookies, runtime roles, external identity and product reads remain closed.
+EMR4 now has one schema-validated owner/SLA register joining 12 native security alerts to evidence and exact GitHub disposition, with zero open Dependabot or security-high CodeQL alerts in the reconciled queues. The 14 Bandit and 10 CodeQL validation rows remain linked. Python and Node workflow definitions now carry staggered daily schedules; activation on the default branch still awaits protected integration.
 
 ### What this unlocks
 
-- Review a separately authorised least-privilege runtime database role and token-to-practice bootstrap architecture.
-- Design provider-free synthetic login and exchange routes with non-enumerating errors, CSRF and opaque Secure HttpOnly cookie or same-origin BFF transport.
-- Keep the same backend-owned policy engine and PostgreSQL unit of work when a later transport is authorised.
+- Seek fresh authority for the supervised authored-synthetic Office cookie-compatibility candidate.
+- Integrate the published draft PR through protected review so the daily schedules become active on the default branch.
+- Reassess accepted development-tool risks when compatible upstream Office dependencies are released.
 
 ### What it does not solve
 
-- Live EMR4 identity establishment, routes, cookies or browser transport.
-- A least-privilege runtime database role, token-to-practice bootstrap or operational retention/backup policy.
-- External identity-provider or Microsoft/Office federation.
-- Safety or authority for product-derived, patient, health, clinical or historical data.
-- Appointment commands, microphone capture, document mutation, deployment, production or release.
+- Default-branch activation before protected integration.
+- Removal of development-only vulnerable dependency resolutions.
+- Incident paging, SIEM, runner availability or production monitoring.
+- Real identity, product data, provider, deployment, production or release.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Bounded opening `api-change`: Five authored-synthetic auth tables, one reversible local migration and uniquely named disposable test writes only.
+- Bounded opening `api-change`: Exact evidence-backed native GitHub disposition of Dependabot 5 and 8-15 plus CodeQL 295, 272 and 268; repository workflow schedules and SECURITY.md policy.
 - All other named boundaries remain closed: `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `stage-3b`, `voice`.
 
 ## Product decision horizon
 
-### Shared auth runtime role and secure synthetic transport — candidate
+### Supervised Office cookie compatibility — candidate
 
-Should EMR4 define the least-privilege runtime database role and secure provider-free synthetic session transport, including token-to-practice bootstrap, non-enumerating routes, CSRF and opaque Secure HttpOnly cookie or same-origin BFF handling, while product reads remain closed?
+Can the accepted default-off authored-synthetic session-cookie transport operate across supervised Word desktop and Word Online host constraints without opening real identity or product data?
 
-Durable state is now proven locally, but a live transport cannot safely use a table owner or expose detailed internal denials.
+The local HTTP contract passes, but real Office host partitioning and third-party-cookie behavior remain intentionally unproved.
 
 Prerequisites:
 
-- Fresh Yuri authority for the exact runtime-role and route/cookie architecture scope.
-- Authored-synthetic identities only; no product or patient data.
-- One backend-owned authorization policy and the accepted PostgreSQL unit of work.
-- No external identity provider, Microsoft/Office authority, product read, deployment or production change.
+- Fresh Yuri authority for an exact supervised authored-synthetic exercise.
+- Real identity and all product-derived data remain closed.
+- No deployment, production or release claim.
 
 ### Reception One representative-staff formative sessions — deferred
 
@@ -371,10 +375,17 @@ Prerequisites:
 - **Should EMR4 implement a PostgreSQL-backed transaction and migration for parent/surface sessions, principal generation, single-use exchange and metadata-only audit using disposable authored-synthetic fixtures while routes, cookies and product reads remain closed?**
   Required before: Satisfied on 2026-08-01 for the reversible authored-synthetic PostgreSQL schema, route-free coordinator and disposable local acceptance only. Runtime roles, routes, cookies, external identity, product reads, deployment, production and release remain new authority decisions.
 - **Should EMR4 define the least-privilege runtime database role and secure provider-free synthetic session transport, including token-to-practice bootstrap, non-enumerating routes, CSRF and opaque Secure HttpOnly cookie or same-origin BFF handling, while product reads remain closed?**
-  Required before: Any runtime database privilege grant, token lookup bootstrap, login or exchange route, cookie/BFF transport, CSRF behavior or browser session wiring.
+  Required before: Satisfied on 2026-08-01 for the exact default-off, provider-free, authored-synthetic runtime-role and transport tranche only. Real identity, product reads, deployment, production and release remain new authority decisions.
+- **Should EMR4 define a repository-local provider-free operational hardening architecture for the synthetic auth transport covering deployment-role isolation, proxy trust, rate limiting, retained denial audit and bounded pool behavior while real identity and product reads remain closed?**
+  Required before: Satisfied on 2026-08-01 for the exact repository-local provider-free authored-synthetic operational-hardening descendant only. Real identity, product reads, deployment, production and release remain fresh authority decisions.
+- **Should EMR4 make security finding tracking independent of the laptop by joining native GitHub alert IDs to a durable owner/SLA register and scheduling Python and Node security workflows in GitHub?**
+  Required before: Satisfied on 2026-08-01 for the exact repository governance, SECURITY.md, named native-alert disposition and task-branch publication scope. Protected integration remains separate.
 
 ## Map limits
 
+- The governance descendant proves a repository schema/register, exact static triage, 12 native GitHub dispositions and daily workflow definitions. Scheduled runs are not active on the default branch until protected integration, and vulnerable dev-only lock entries remain.
+- The accepted shared-auth operational-hardening descendant proves one local authored-synthetic deployment-login/capability split, strict one-hop proxy contract, bounded per-process limiter, HMAC-only denial audit and finite SQLAlchemy pool with exact cleanup. It does not prove real identity, distributed abuse resistance, production ingress, credential lifecycle, monitoring/retention, product-data safety, deployment, production or release.
+- The accepted shared-auth runtime-role/transport descendant proves one local authored-synthetic capability-role and hash-resolver boundary, seven default-off routes, exact-origin/CSRF enforcement, partitioned Secure HttpOnly cookie carriage, atomic rotation/logout, database one-use and exact disposable cleanup. It does not prove real identity, Office cookie compatibility, abuse resistance, product-data safety, deployment, production or release.
 - The accepted PostgreSQL shared-auth descendant proves reversible local schema creation, hash-only authored-synthetic persistence, principal-row serialization, database single-use exchange, same-transaction metadata audit, forced practice RLS and complete cleanup. It does not prove live identity, routes, cookies, a runtime database role, product-data safety, deployment, production or release.
 - The accepted shared-auth runtime foundation proves one unmounted authored-synthetic in-memory implementation with hash-only state, bounded expiry, generation revocation, one-use exchange and audit-before-mutation. It does not prove live routes or cookies, durable/database/distributed atomicity, external identity, product data safety, deployment, production or release.
 - The shared application-authentication descendant proves one provider-free typed backend authorization architecture across desktop Word, Word Online and the native Diary. It does not prove a live session, revocation store, external identity integration, product-derived read, real-data safety, deployment, production or release.
@@ -426,11 +437,17 @@ Prerequisites:
 
 - `alembic/versions/o4p5q6r7s8t9_add_application_auth_persistence.py`
 - `app/models/application_auth.py`
+- `app/routers/application_auth.py`
+- `app/services/application_auth_database_role.py`
+- `app/services/application_auth_operational_database.py`
+- `app/services/application_auth_operational_hardening.py`
 - `app/services/application_auth_persistence.py`
+- `app/services/application_auth_role_runtime.py`
 - `app/services/application_auth_runtime.py`
 - `deploy/raisa-office-web-dev/Dockerfile`
 - `deploy/raisa-office-web-dev/manifest-template.xml`
 - `deploy/raisa-office-web-dev/server.mjs`
+- `docs/api-spine/openapi/application-auth-synthetic-transport.yaml`
 - `docs/ariadne-bounded-agent-admission-design-closeout.md`
 - `docs/ariadne-compass-increment2-plan.md`
 - `docs/ariadne-continuity-engine-increment1-closeout.md`
@@ -567,10 +584,14 @@ Prerequisites:
 - `docs/raisa-shared-application-auth-clinician-role-boundary-closeout.md`
 - `docs/raisa-shared-application-auth-clinician-role-boundary-design.md`
 - `docs/raisa-shared-application-auth-clinician-role-boundary-plan.md`
+- `docs/raisa-shared-application-auth-operational-hardening-closeout.md`
+- `docs/raisa-shared-application-auth-operational-hardening-plan.md`
 - `docs/raisa-shared-application-auth-postgresql-persistence-closeout.md`
 - `docs/raisa-shared-application-auth-postgresql-persistence-plan.md`
 - `docs/raisa-shared-application-auth-runtime-foundation-closeout.md`
 - `docs/raisa-shared-application-auth-runtime-foundation-plan.md`
+- `docs/raisa-shared-application-auth-runtime-role-secure-transport-closeout.md`
+- `docs/raisa-shared-application-auth-runtime-role-secure-transport-plan.md`
 - `docs/raisa-word-online-authenticated-companion-verification-closeout.md`
 - `docs/raisa-word-online-authenticated-companion-verification-plan.md`
 - `docs/security/ariadne-deepseek-in-cell-generated-draft-threat-model-delta.md`
@@ -588,13 +609,20 @@ Prerequisites:
 - `docs/security/bernie-reception-one-receptionist-first-v62-threat-model-delta.md`
 - `docs/security/bernie-reception-one-shared-typed-language-threat-model-delta.md`
 - `docs/security/bernie-reception-one-structured-source-language-threat-model-delta.md`
+- `docs/security/dependabot-alerts-8-15-triage-2026-08-01.md`
 - `docs/security/raisa-clinician-one-readonly-document-context-threat-model-delta.md`
 - `docs/security/raisa-clinician-one-word-desktop-selection-check-threat-model-delta.md`
 - `docs/security/raisa-cloud-run-public-https-dev-host-readiness-threat-model-delta.md`
 - `docs/security/raisa-dual-host-foundation-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-clinician-role-boundary-threat-model-delta.md`
+- `docs/security/raisa-shared-application-auth-operational-hardening-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-postgresql-persistence-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-runtime-foundation-threat-model-delta.md`
+- `docs/security/raisa-shared-application-auth-runtime-role-secure-transport-threat-model-delta.md`
+- `docs/security/security-finding-governance-closeout-2026-08-01.md`
+- `docs/security/security-finding-governance-plan.md`
+- `docs/security/security-finding-governance-threat-model-delta.md`
+- `docs/security/security-finding-register.json`
 - `implementation_plan.md`
 - `orchestration/access_ai_api_design.md`
 - `orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-generated-draft-sol-review.md`
@@ -809,8 +837,10 @@ Prerequisites:
 - `orchestration/continuity/raisa-dual-host-foundation/host-profile-matrix-evidence.json`
 - `orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/auth-boundary-policy.json`
 - `orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/provider-free-acceptance-evidence.json`
+- `orchestration/continuity/raisa-shared-application-auth-operational-hardening/live-local-backend-postgres-operational-evidence.json`
 - `orchestration/continuity/raisa-shared-application-auth-postgresql-persistence/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-shared-application-auth-runtime-foundation/provider-free-acceptance-evidence.json`
+- `orchestration/continuity/raisa-shared-application-auth-runtime-role-secure-transport/live-local-backend-postgres-transport-evidence.json`
 - `orchestration/continuity/raisa-word-online-authenticated-companion-verification/browser-word-online-evidence.json`
 - `orchestration/continuity/raisa-word-online-authenticated-companion-verification/external-audit-analysis.json`
 - `orchestration/continuity/raisa-word-online-authenticated-companion-verification/final-residue-evidence.json`
@@ -1034,6 +1064,8 @@ Prerequisites:
 - `orchestration/continuity/reception-one-word-desktop-authenticated-dialog-check/desktop-acceptance-evidence.json`
 - `orchestration/continuity/reception-one-word-desktop-authenticated-dialog-check/final-residue-evidence.json`
 - `orchestration/continuity/reception-one-word-hybrid-contextual-launch/browser-acceptance-evidence.json`
+- `orchestration/continuity/security-finding-governance/acceptance-evidence.json`
+- `orchestration/continuity/security-finding-governance/native-alert-disposition-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -1116,4 +1148,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 164; continuity graph revision 183._
+_Compass map revision 167; continuity graph revision 186._

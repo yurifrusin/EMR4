@@ -875,16 +875,23 @@ def test_closeout_continuity_and_compass_bind_runtime_foundation_pass() -> None:
     ]
     assert compass["map_revision"] >= 163
     assert compass["source_graph_revision"] == graph["graph_revision"]
-    assert compass["current_position"]["node_id"] == (
-        "raisa-shared-application-auth-postgresql-persistence"
-    )
+    nodes = {item["id"]: item for item in graph["nodes"]}
+    cursor = compass["current_position"]["node_id"]
+    while cursor != node["id"]:
+        parents = [
+            relation["node_id"]
+            for relation in nodes[cursor]["relationships"]
+            if relation["relation"] == "builds_on"
+        ]
+        assert parents, f"{cursor} does not descend from {node['id']}"
+        cursor = parents[0]
     assert "shared-application-auth-runtime-foundation" not in {
         item["id"] for item in compass["decision_horizon"]
     }
     assert "shared-application-auth-postgresql-persistence" not in {
         item["id"] for item in compass["decision_horizon"]
     }
-    assert "shared-application-auth-runtime-role-secure-transport" in {
+    assert "shared-application-auth-runtime-role-secure-transport" not in {
         item["id"] for item in compass["decision_horizon"]
     }
     assert result in CLOSEOUT_PATH.read_text(encoding="utf-8")

@@ -1,0 +1,66 @@
+{
+  "authority_boundary": "receipt_only_repository_local_provider_free_authored_synthetic_operational_hardening_no_external_identity_product_reads_cloud_mutation_deployment_production_release_commit_push_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "review_the_completed_repository_local_provider_free_authored_synthetic_shared_auth_operational_hardening_evidence_before_any_acceptance_or_continuity_update",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "revision_binding": {
+    "continuity_graph_revision_expected": 185,
+    "compass_map_revision_expected": 166,
+    "compass_source_graph_revision_expected": 185,
+    "rendered_compass_exact_validation_required": true
+  },
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. raisa_shared_application_auth_runtime_role_secure_transport_pass at Continuity 184 and Compass 165 remains the accepted parent; Yuri authorised only the exact shared-application-auth-operational-hardening candidate.",
+    "current_authority_allocation": "GPT Sol retained the tightly coupled architecture, implementation, security validation and evidence review. No worker, subagent, provider, external reviewer or cloud control plane was selected or dispatched.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-shared-application-auth-operational-hardening-plan.md",
+      "docs/security/raisa-shared-application-auth-operational-hardening-threat-model-delta.md",
+      "app/services/application_auth_operational_hardening.py",
+      "app/services/application_auth_operational_database.py",
+      "docs/api-spine/openapi/application-auth-synthetic-transport.yaml",
+      "scripts/raisa_shared_application_auth_operational_hardening_acceptance.py",
+      "orchestration/continuity/raisa-shared-application-auth-operational-hardening/live-local-backend-postgres-operational-evidence.json",
+      "tests/test_raisa_shared_application_auth_operational_hardening.py",
+      "docs/security/security-finding-tracking-review-2026-08-01.md",
+      "docs/security/bandit-candidate-validation-2026-08-01.md"
+    ],
+    "protected_evidence_boundaries": "Authored-synthetic repository-local work only. Protected holdouts and raw historical Diary material remain sealed. External identity, Microsoft/Office federation, product-derived/patient/health/clinical/historical data, providers, cloud/IAM mutation, deployment, production and release remain closed.",
+    "git_refs_and_worktree": {
+      "HEAD": "2ae8f2173276147e59be361e0182f6cb4b7453fa",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/codex/ariadne-terra-gemini-comparative-rehearsal": "2ae8f2173276147e59be361e0182f6cb4b7453fa",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "upstream_ahead": 0,
+      "upstream_behind": 0,
+      "accepted_uncommitted_parent_worktree_preserved": true,
+      "staged_files": 0,
+      "protected_refs_unchanged": true
+    }
+  },
+  "verification": {
+    "focused_auth_host_continuity_cases": 151,
+    "expanded_no_conftest_auth_api_security_cases": 193,
+    "serial_legacy_database_cases": 12,
+    "operational_acceptance": "passed_with_cleanup",
+    "accepted_parent_transport_acceptance": "passed_with_cleanup",
+    "repository_fast_profile": "passed",
+    "repository_ci_security_profile": "passed",
+    "pip_audit_requirements": "no_known_vulnerabilities",
+    "empty_database_migration_lifecycle": "passed_with_cleanup"
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

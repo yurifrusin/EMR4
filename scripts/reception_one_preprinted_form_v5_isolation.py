@@ -198,7 +198,7 @@ def _run_turn(
             "--user",
             "65532:65532",
             "--tmpfs",
-            "/tmp:rw,noexec,nosuid,size=8m",
+            "/tmp:rw,noexec,nosuid,size=8m",  # nosec B108 -- container tmpfs
             "--memory",
             "128m",
             "--memory-swap",

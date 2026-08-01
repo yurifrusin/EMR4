@@ -43,6 +43,30 @@ x-emr4-cookie-contract:
   raw_surface_in_json: false
   csrf_header: X-EMR4-CSRF
 
+x-emr4-operational-hardening:
+  status: repository_local_authored_synthetic_only
+  deployment_role:
+    login_role: separate_LOGIN_NOINHERIT_no_direct_table_grants
+    capability_role: exact_NOLOGIN_NOBYPASSRLS
+    credential_in_repository: false
+  proxy:
+    default_trusted_networks: []
+    forwarded_contract: one_allowlisted_hop_and_https_only
+    forwarded_identity_grants_auth_authority: false
+  rate_limit:
+    implementation: bounded_per_process_fixed_window
+    first_blocked_request_per_key_window_requires_audit: true
+    distributed_or_production_proof: false
+  denial_audit:
+    data_class: authored_synthetic
+    raw_network_or_authentication_values: prohibited
+    required_audit_failure: fail_closed_503
+  database_pool:
+    pool_size: 2
+    max_overflow: 1
+    checkout_timeout_seconds: 1
+    production_proof: false
+
 paths:
   /csrf:
     post:
@@ -69,6 +93,8 @@ paths:
                 $ref: "#/components/schemas/CsrfResponse"
         "403":
           $ref: "#/components/responses/RequestNotAdmitted"
+        "429":
+          $ref: "#/components/responses/RequestRateLimited"
         "404":
           $ref: "#/components/responses/TransportUnavailable"
 
@@ -100,6 +126,8 @@ paths:
           $ref: "#/components/responses/AuthenticationFailed"
         "403":
           $ref: "#/components/responses/RequestNotAdmitted"
+        "429":
+          $ref: "#/components/responses/RequestRateLimited"
         "503":
           $ref: "#/components/responses/AuthenticationUnavailable"
 
@@ -128,6 +156,8 @@ paths:
           $ref: "#/components/responses/AuthenticationFailed"
         "403":
           $ref: "#/components/responses/RequestNotAdmitted"
+        "429":
+          $ref: "#/components/responses/RequestRateLimited"
         "503":
           $ref: "#/components/responses/AuthenticationUnavailable"
 
@@ -159,6 +189,8 @@ paths:
           $ref: "#/components/responses/AuthenticationFailed"
         "403":
           $ref: "#/components/responses/RequestNotAdmitted"
+        "429":
+          $ref: "#/components/responses/RequestRateLimited"
         "503":
           $ref: "#/components/responses/AuthenticationUnavailable"
 
@@ -183,6 +215,8 @@ paths:
           $ref: "#/components/responses/AuthenticationFailed"
         "403":
           $ref: "#/components/responses/RequestNotAdmitted"
+        "429":
+          $ref: "#/components/responses/RequestRateLimited"
         "503":
           $ref: "#/components/responses/AuthenticationUnavailable"
 
@@ -211,6 +245,8 @@ paths:
           $ref: "#/components/responses/AuthenticationFailed"
         "403":
           $ref: "#/components/responses/RequestNotAdmitted"
+        "429":
+          $ref: "#/components/responses/RequestRateLimited"
         "503":
           $ref: "#/components/responses/AuthenticationUnavailable"
 
@@ -242,6 +278,8 @@ paths:
           $ref: "#/components/responses/AuthenticationFailed"
         "403":
           $ref: "#/components/responses/RequestNotAdmitted"
+        "429":
+          $ref: "#/components/responses/RequestRateLimited"
         "503":
           $ref: "#/components/responses/AuthenticationUnavailable"
 
@@ -297,6 +335,21 @@ components:
             $ref: "#/components/schemas/ErrorResponse"
           example:
             detail: authentication_temporarily_unavailable
+    RequestRateLimited:
+      description: Bounded per-client transport rate was exceeded.
+      headers:
+        Retry-After:
+          description: Whole seconds until the local fixed window resets.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 3600
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          example:
+            detail: request_rate_limited
     TransportUnavailable:
       description: The default-off transport dependency is not configured.
       content:
@@ -458,4 +511,4 @@ components:
             - request_not_admitted
             - authentication_temporarily_unavailable
             - application_auth_transport_unavailable
-
+            - request_rate_limited

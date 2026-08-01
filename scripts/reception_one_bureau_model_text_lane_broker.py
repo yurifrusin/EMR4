@@ -1690,7 +1690,9 @@ def main() -> int:
             "endpoint_hostname": HOSTNAME,
         },
     )
-    server = ThreadingHTTPServer(("0.0.0.0", args.listen_port), build_handler(state))
+    # nosec B104 -- transient Docker-host relay requires host-interface reachability;
+    # an ephemeral bearer, exact packet contract, size bound and 90s lifetime gate it.
+    server = ThreadingHTTPServer(("0.0.0.0", args.listen_port), build_handler(state))  # nosec B104
     server.timeout = 1
     server.shutdown_requested = False  # type: ignore[attr-defined]
     deadline = time.monotonic() + 90

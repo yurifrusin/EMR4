@@ -37,3 +37,41 @@ systems.
 
 For current engineering controls and known structural work, see
 `docs/security/emr4-secure-sdlc-review-2026-07-17.md`.
+
+## Security ownership and durable tracking
+
+The security maintainer is `@yurifrusin`. Every plausible scanner, dependency,
+CodeQL, laptop-automation or private-report finding must be recorded in
+`docs/security/security-finding-register.json`, an instance-preserving
+validation ledger linked from that register, or a private GitHub vulnerability
+report. A local conversation or machine-only artifact is not a durable
+disposition.
+
+GitHub-hosted Python and Node security workflows run daily as well as on
+relevant pushes and pull requests. A scheduled failure must receive a register
+row or link to an existing row within two business days.
+
+## Response targets
+
+Targets run from first observation, or from 2026-08-01 for findings already
+open when this policy took effect:
+
+| Severity | Acknowledge | Initial triage | Remediate, mitigate or accept risk |
+|---|---:|---:|---:|
+| Critical | 1 calendar day | 2 calendar days | 7 calendar days |
+| High | 2 calendar days | 5 calendar days | 30 calendar days |
+| Medium | 5 calendar days | 14 calendar days | 60 calendar days |
+| Low | 10 calendar days | 30 calendar days | 90 calendar days |
+
+## Finding disposition and accepted risk
+
+Scanner severity is a claim, not a verdict. Disposition requires
+instance-preserving evidence of the source, relevant control, sink,
+reachability and supported product boundary. Native GitHub state must match the
+durable register.
+
+An accepted-risk or not-actionable disposition must name an owner, rationale,
+evidence, review date, expiry or explicit upstream-remediation condition, and
+the condition that reopens review. Expired dispositions return to
+`needs_review`. Dependency force fixes, unsupported overrides and public
+disclosure of sensitive details are not disposition mechanisms.

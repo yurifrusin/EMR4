@@ -214,6 +214,9 @@ class TestOpenAPICommandArtifact:
     OPENAPI_DIRS = ("openapi", "async")
 
     def _find_openapi(self):
+        command_contract = SPINE_DIR / "openapi" / "appointment-commands.yaml"
+        if command_contract.is_file():
+            return command_contract
         for sub in self.OPENAPI_DIRS:
             dirpath = SPINE_DIR / sub
             if dirpath.is_dir():

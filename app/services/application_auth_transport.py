@@ -10,6 +10,8 @@ from dataclasses import dataclass
 from threading import RLock
 from typing import Callable, Mapping
 
+from sqlalchemy.exc import SQLAlchemyError
+
 from app.services.application_auth_role_runtime import (
     RoleScopedPostgresApplicationAuthRuntime,
     RotatedSurfaceSession,
@@ -24,6 +26,7 @@ from app.services.application_auth_runtime import (
     Surface,
     SyntheticPrincipal,
     ValidatedSurfaceContext,
+    RequiredAuditUnavailable,
 )
 
 
@@ -37,6 +40,14 @@ _OPAQUE_VALUE = re.compile(r"^[A-Za-z0-9._~-]{43,128}$")
 
 class TransportRequestDenied(RuntimeError):
     """Origin or CSRF admission failed without exposing supplied values."""
+
+
+class TransportAuthenticationFailed(RuntimeError):
+    """Externally generic authentication-material denial."""
+
+
+class TransportAuthenticationUnavailable(RuntimeError):
+    """Required audit or database work was unavailable."""
 
 
 @dataclass(frozen=True)
@@ -143,8 +154,16 @@ class ApplicationAuthTransport:
     def new_csrf_token(self) -> str:
         value = self._csrf_token_source()
         if not isinstance(value, str) or not _OPAQUE_VALUE.fullmatch(value):
-            raise AuthRuntimeDenied("csrf_token_source_invalid")
+            raise TransportAuthenticationUnavailable()
         return value
+
+    @staticmethod
+    def _raise_transport_error(error: Exception) -> None:
+        if isinstance(error, RequiredAuditUnavailable | SQLAlchemyError):
+            raise TransportAuthenticationUnavailable() from None
+        if isinstance(error, AuthRuntimeDenied):
+            raise TransportAuthenticationFailed() from None
+        raise error
 
     def login(
         self,
@@ -154,8 +173,10 @@ class ApplicationAuthTransport:
         origin: str,
         correlation_id: str | None,
     ) -> tuple[CreatedApplicationSession, str]:
-        reservation = self.bootstrap_registry.reserve(bootstrap_credential)
+        reservation: _BootstrapReservation | None = None
         try:
+            reservation = self.bootstrap_registry.reserve(bootstrap_credential)
+            csrf_token = self.new_csrf_token()
             created = self.runtime.create_session(
                 principal=reservation.principal,
                 surface=surface,
@@ -163,11 +184,13 @@ class ApplicationAuthTransport:
                 audience=SURFACE_AUDIENCE,
                 correlation_id=correlation_id,
             )
-        except Exception:
-            self.bootstrap_registry.release(reservation)
-            raise
-        self.bootstrap_registry.commit(reservation)
-        return created, self.new_csrf_token()
+            self.bootstrap_registry.commit(reservation)
+        except Exception as exc:
+            if reservation is not None:
+                self.bootstrap_registry.release(reservation)
+            self._raise_transport_error(exc)
+            raise AssertionError("transport error translation must raise")
+        return created, csrf_token
 
     def validate(
         self,
@@ -177,13 +200,17 @@ class ApplicationAuthTransport:
         origin: str,
         correlation_id: str | None,
     ) -> ValidatedSurfaceContext:
-        return self.runtime.validate_surface_session(
-            surface_session_value=surface_session_value,
-            surface=surface,
-            origin=origin,
-            audience=SURFACE_AUDIENCE,
-            correlation_id=correlation_id,
-        )
+        try:
+            return self.runtime.validate_surface_session(
+                surface_session_value=surface_session_value,
+                surface=surface,
+                origin=origin,
+                audience=SURFACE_AUDIENCE,
+                correlation_id=correlation_id,
+            )
+        except Exception as exc:
+            self._raise_transport_error(exc)
+            raise AssertionError("transport error translation must raise")
 
     def rotate(
         self,
@@ -193,14 +220,19 @@ class ApplicationAuthTransport:
         origin: str,
         correlation_id: str | None,
     ) -> tuple[RotatedSurfaceSession, str]:
-        rotated = self.runtime.rotate_surface_session(
-            surface_session_value=surface_session_value,
-            surface=surface,
-            origin=origin,
-            audience=SURFACE_AUDIENCE,
-            correlation_id=correlation_id,
-        )
-        return rotated, self.new_csrf_token()
+        try:
+            csrf_token = self.new_csrf_token()
+            rotated = self.runtime.rotate_surface_session(
+                surface_session_value=surface_session_value,
+                surface=surface,
+                origin=origin,
+                audience=SURFACE_AUDIENCE,
+                correlation_id=correlation_id,
+            )
+            return rotated, csrf_token
+        except Exception as exc:
+            self._raise_transport_error(exc)
+            raise AssertionError("transport error translation must raise")
 
     def logout(
         self,
@@ -208,11 +240,14 @@ class ApplicationAuthTransport:
         surface_session_value: str,
         correlation_id: str | None,
     ) -> None:
-        self.runtime.revoke_surface_session(
-            surface_session_value=surface_session_value,
-            correlation_id=correlation_id,
-            reason="security_reset",
-        )
+        try:
+            self.runtime.revoke_surface_session(
+                surface_session_value=surface_session_value,
+                correlation_id=correlation_id,
+                reason="security_reset",
+            )
+        except Exception as exc:
+            self._raise_transport_error(exc)
 
     def issue_exchange(
         self,
@@ -227,18 +262,22 @@ class ApplicationAuthTransport:
         pkce_challenge: str,
         correlation_id: str | None,
     ) -> IssuedExchangeGrant:
-        return self.runtime.issue_exchange(
-            source_surface_session_value=source_surface_session_value,
-            source_surface=source_surface,
-            target_surface=target_surface,
-            source_origin=source_origin,
-            target_origin=target_origin,
-            audience=EXCHANGE_AUDIENCE,
-            state=state,
-            nonce=nonce,
-            pkce_challenge=pkce_challenge,
-            correlation_id=correlation_id,
-        )
+        try:
+            return self.runtime.issue_exchange(
+                source_surface_session_value=source_surface_session_value,
+                source_surface=source_surface,
+                target_surface=target_surface,
+                source_origin=source_origin,
+                target_origin=target_origin,
+                audience=EXCHANGE_AUDIENCE,
+                state=state,
+                nonce=nonce,
+                pkce_challenge=pkce_challenge,
+                correlation_id=correlation_id,
+            )
+        except Exception as exc:
+            self._raise_transport_error(exc)
+            raise AssertionError("transport error translation must raise")
 
     def redeem_exchange(
         self,
@@ -253,19 +292,24 @@ class ApplicationAuthTransport:
         pkce_verifier: str,
         correlation_id: str | None,
     ) -> tuple[RedeemedExchangeGrant, str]:
-        redeemed = self.runtime.redeem_exchange(
-            exchange_code=exchange_code,
-            source_surface=source_surface,
-            target_surface=target_surface,
-            source_origin=source_origin,
-            target_origin=target_origin,
-            audience=EXCHANGE_AUDIENCE,
-            state=state,
-            nonce=nonce,
-            pkce_verifier=pkce_verifier,
-            correlation_id=correlation_id,
-        )
-        return redeemed, self.new_csrf_token()
+        try:
+            csrf_token = self.new_csrf_token()
+            redeemed = self.runtime.redeem_exchange(
+                exchange_code=exchange_code,
+                source_surface=source_surface,
+                target_surface=target_surface,
+                source_origin=source_origin,
+                target_origin=target_origin,
+                audience=EXCHANGE_AUDIENCE,
+                state=state,
+                nonce=nonce,
+                pkce_verifier=pkce_verifier,
+                correlation_id=correlation_id,
+            )
+            return redeemed, csrf_token
+        except Exception as exc:
+            self._raise_transport_error(exc)
+            raise AssertionError("transport error translation must raise")
 
 
 __all__ = [
@@ -275,5 +319,7 @@ __all__ = [
     "OneUseSyntheticBootstrapRegistry",
     "PREAUTH_CSRF_MAX_AGE_SECONDS",
     "SESSION_COOKIE_NAME",
+    "TransportAuthenticationFailed",
+    "TransportAuthenticationUnavailable",
     "TransportRequestDenied",
 ]

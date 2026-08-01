@@ -7,6 +7,12 @@ on:
   pull_request:
     branches:
       - master
+  schedule:
+    # Daily at 04:17 Australia/Brisbane (18:17 UTC).
+    - cron: "17 18 * * *"
+
+permissions:
+  contents: read
 
 jobs:
   security:

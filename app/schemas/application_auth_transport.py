@@ -1,6 +1,7 @@
 """Bounded authored-synthetic schemas for the shared-auth transport."""
 
 from datetime import datetime
+from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -34,8 +35,8 @@ class SyntheticSessionRequest(SurfaceRequest):
 
 
 class ExchangeIssueRequest(_StrictTransportModel):
-    source_surface: Surface
-    target_surface: Surface
+    source_surface: Literal[Surface.WORD_DESKTOP, Surface.WORD_ONLINE]
+    target_surface: Literal[Surface.NATIVE_DIARY]
     target_origin: str = Field(min_length=9, max_length=255)
     state: str = Field(min_length=16, max_length=256)
     nonce: str = Field(min_length=16, max_length=256)
@@ -57,8 +58,8 @@ class ExchangeRedeemRequest(_StrictTransportModel):
         max_length=128,
         pattern=_OPAQUE_PATTERN,
     )
-    source_surface: Surface
-    target_surface: Surface
+    source_surface: Literal[Surface.WORD_DESKTOP, Surface.WORD_ONLINE]
+    target_surface: Literal[Surface.NATIVE_DIARY]
     source_origin: str = Field(min_length=9, max_length=255)
     state: str = Field(min_length=16, max_length=256)
     nonce: str = Field(min_length=16, max_length=256)

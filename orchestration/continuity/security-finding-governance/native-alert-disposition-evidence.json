@@ -1,0 +1,58 @@
+{
+  "schema_version": "emr4.security-finding-governance.native-alert-evidence.v1",
+  "repository": "yurifrusin/emr4",
+  "observed_at": "2026-08-01T02:49:00Z",
+  "authority": "Yuri granted full authority for native GitHub alert dismissals on 2026-08-01.",
+  "authentication": {
+    "source": "authenticated gh session",
+    "token_printed_or_persisted": false
+  },
+  "pre_mutation": {
+    "open_dependabot_ids": [5, 8, 9, 10, 11, 12, 13, 14, 15],
+    "open_codeql_security_high_ids": [295, 272, 268]
+  },
+  "correction_history": [
+    {
+      "step": "dependabot-initial-batch",
+      "outcome": "rejected_without_mutation",
+      "detail": "PowerShell passed the hashtable property expression literally; GitHub rejected all nine requests with HTTP 422 before mutation."
+    },
+    {
+      "step": "codeql-initial-batch",
+      "outcome": "state_and_reason_applied_comment_incorrect",
+      "detail": "All three alerts were dismissed as false positive, but the comment was the literal hashtable property expression."
+    },
+    {
+      "step": "bounded-repair",
+      "outcome": "passed",
+      "detail": "Dependabot interpolation was corrected. Each CodeQL alert was reopened and immediately redismissed with the same verdict and exact evidence comment."
+    }
+  ],
+  "final_dispositions": [
+    {"source": "dependabot", "native_id": 5, "state": "dismissed", "reason": "tolerable_risk", "dismissed_at": "2026-08-01T02:48:06Z"},
+    {"source": "dependabot", "native_id": 8, "state": "dismissed", "reason": "tolerable_risk", "dismissed_at": "2026-08-01T02:48:07Z"},
+    {"source": "dependabot", "native_id": 9, "state": "dismissed", "reason": "not_used", "dismissed_at": "2026-08-01T02:48:08Z"},
+    {"source": "dependabot", "native_id": 10, "state": "dismissed", "reason": "tolerable_risk", "dismissed_at": "2026-08-01T02:48:08Z"},
+    {"source": "dependabot", "native_id": 11, "state": "dismissed", "reason": "not_used", "dismissed_at": "2026-08-01T02:48:09Z"},
+    {"source": "dependabot", "native_id": 12, "state": "dismissed", "reason": "not_used", "dismissed_at": "2026-08-01T02:48:10Z"},
+    {"source": "dependabot", "native_id": 13, "state": "dismissed", "reason": "tolerable_risk", "dismissed_at": "2026-08-01T02:48:10Z"},
+    {"source": "dependabot", "native_id": 14, "state": "dismissed", "reason": "tolerable_risk", "dismissed_at": "2026-08-01T02:48:11Z"},
+    {"source": "dependabot", "native_id": 15, "state": "dismissed", "reason": "tolerable_risk", "dismissed_at": "2026-08-01T02:48:12Z"},
+    {"source": "codeql", "native_id": 295, "state": "dismissed", "reason": "false_positive", "dismissed_at": "2026-08-01T02:48:54Z"},
+    {"source": "codeql", "native_id": 272, "state": "dismissed", "reason": "false_positive", "dismissed_at": "2026-08-01T02:48:56Z"},
+    {"source": "codeql", "native_id": 268, "state": "dismissed", "reason": "false_positive", "dismissed_at": "2026-08-01T02:48:58Z"}
+  ],
+  "post_mutation": {
+    "open_dependabot_count": 0,
+    "open_codeql_security_high_count": 0,
+    "register_matches_final_state": true
+  },
+  "external_side_effects": {
+    "native_alert_dispositions": 12,
+    "dependency_changes": 0,
+    "workflow_setting_changes": 0,
+    "cloud_or_iam_changes": 0,
+    "product_or_data_changes": 0
+  },
+  "passed": true
+}

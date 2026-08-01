@@ -1,0 +1,141 @@
+{
+  "claim_limits": [
+    "No live identity, external federation or product authorization is established.",
+    "Only a uniquely named disposable local authored-synthetic PostgreSQL database and NOLOGIN capability role were exercised.",
+    "Office compatibility, rate limiting, deployment, production and release remain unproved and closed."
+  ],
+  "cleanup": {
+    "database_absent_after": true,
+    "database_drop_attempted": true,
+    "passed": true,
+    "role_absent_after": true,
+    "role_drop_attempted": true
+  },
+  "data_class": "authored_synthetic",
+  "database": {
+    "loopback_only": true,
+    "name_recorded": false,
+    "preexisting": false,
+    "unique_allowlisted_name_used": true
+  },
+  "evidence_label": "live_local_backend_postgres_transport",
+  "migration": {
+    "current_head_exact": true,
+    "downgrade_to_parent_passed": true,
+    "head_revision": "p5q6r7s8t9u0",
+    "orm_migration_drift_absent": true,
+    "parent_revision": "o4p5q6r7s8t9",
+    "parent_to_head_upgrade_passed": true,
+    "passed": true,
+    "reupgrade_passed": true
+  },
+  "passed": true,
+  "privilege_matrix": {
+    "audit_forbidden_all_false": true,
+    "audit_positive_all": true,
+    "passed": true,
+    "product_privilege_hits": 0,
+    "product_table_count": 50,
+    "resolver_execute": true,
+    "role_properties": {
+      "bypass_rls": false,
+      "createdb": false,
+      "createrole": false,
+      "inherit": false,
+      "login": false,
+      "replication": false,
+      "superuser": false
+    },
+    "schema_create": false,
+    "schema_usage": true,
+    "sequence_positive_all": true,
+    "sequence_update": false,
+    "state_table_forbidden_all_false": true,
+    "state_table_positive_all": true
+  },
+  "raw_secret_scan": {
+    "evidence_artifact_match_count": 0,
+    "evidence_artifact_passed": true,
+    "matched_raw_value_count": 0,
+    "passed": true,
+    "raw_value_count": 31,
+    "scanned_row_count": 27,
+    "scanned_table_count": 5
+  },
+  "resolver": {
+    "empty_search_path": true,
+    "fixed_kind_allowlist": true,
+    "hash_bounded": true,
+    "limit_one": true,
+    "passed": true,
+    "public_execute": false,
+    "rows_one": true,
+    "security_definer": true,
+    "stable": true
+  },
+  "result": "raisa_shared_application_auth_runtime_role_secure_transport_pass",
+  "role": {
+    "name_recorded": false,
+    "preexisting": false,
+    "unique_allowlisted_name_used": true
+  },
+  "schema_version": "raisa.shared-auth-runtime-role-secure-transport.evidence.v1",
+  "side_effect_counts": {
+    "appointment_or_arrival_commands": 0,
+    "cloud_or_iam_mutations": 0,
+    "database_migrations_disposable": 4,
+    "database_reads_disposable": "performed",
+    "database_writes_disposable": "performed",
+    "deployments": 0,
+    "document_mutations": 0,
+    "external_identity_calls": 0,
+    "microphone_captures": 0,
+    "microsoft_office_identity_calls": 0,
+    "patient_or_clinical_field_reads": 0,
+    "product_data_reads": 0,
+    "production_changes": 0,
+    "provider_calls": 0
+  },
+  "transport": {
+    "audit_atomicity": {
+      "bootstrap_released": true,
+      "passed": true,
+      "response_generic_503": true,
+      "state_and_audit_unchanged": true
+    },
+    "csrf_matrix": {
+      "missing_or_mismatched_fails_before_runtime": true
+    },
+    "lifecycle": {
+      "binding_denials_generic_401": true,
+      "bootstrap_replay_generic_401": true,
+      "exchange_replay_generic_401": true,
+      "foreign_practice_fixture_created": true,
+      "issue_passed": true,
+      "login_passed": true,
+      "logout_passed": true,
+      "old_surface_denied_after_logout": true,
+      "old_surface_denied_after_rotation": true,
+      "redeem_passed": true,
+      "rotate_passed": true,
+      "validate_passed": true
+    },
+    "origin_matrix": {
+      "all_generic_403": true,
+      "invalid_case_count": 5
+    },
+    "passed": true,
+    "role_scope": {
+      "effective_role_matches": true,
+      "foreign_context_nonzero_tables": 4,
+      "foreign_context_own_rows_all_zero": true,
+      "invalid_hash_result_count": 0,
+      "invalid_kind_result_count": 0,
+      "no_context_all_zero": true,
+      "own_context_nonzero_tables": 5,
+      "passed": true,
+      "valid_reference_practice_matches": true,
+      "valid_reference_result_count": 1
+    }
+  }
+}

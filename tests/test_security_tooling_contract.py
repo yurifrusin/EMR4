@@ -31,4 +31,4 @@ def test_python_security_workflow_runs_bandit_after_other_failures() -> None:
         encoding="utf-8"
     )
     assert "if: ${{ always() }}" in workflow
-    assert "python scripts/security_bandit_gate.py" in workflow
+    assert "python scripts/verify_repository.py --profile ci-bandit" in workflow

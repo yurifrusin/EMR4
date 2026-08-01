@@ -13,6 +13,9 @@ import re
 _ROLE_IDENTIFIER = re.compile(
     r"^emr4_application_auth_runtime_[a-z0-9_]{8,40}$"
 )
+_LOGIN_ROLE_IDENTIFIER = re.compile(
+    r"^emr4_application_auth_login_[a-z0-9_]{8,40}$"
+)
 
 STATE_TABLES = (
     "application_auth_principal_generations",
@@ -31,6 +34,34 @@ def require_runtime_role_identifier(role_name: str) -> str:
     if not isinstance(role_name, str) or not _ROLE_IDENTIFIER.fullmatch(role_name):
         raise ValueError("runtime role name is outside the task-safe allowlist")
     return role_name
+
+
+def require_login_role_identifier(role_name: str) -> str:
+    if not isinstance(role_name, str) or not _LOGIN_ROLE_IDENTIFIER.fullmatch(role_name):
+        raise ValueError("login role name is outside the task-safe allowlist")
+    return role_name
+
+
+def create_deployment_login_role_statements(
+    login_role_name: str,
+    capability_role_name: str,
+    *,
+    connection_limit: int = 4,
+) -> tuple[str, ...]:
+    """Return an inert credential-free login/capability separation contract."""
+
+    login = require_login_role_identifier(login_role_name)
+    capability = require_runtime_role_identifier(capability_role_name)
+    if not 1 <= connection_limit <= 32:
+        raise ValueError("login connection limit outside 1..32")
+    quoted_login = f'"{login}"'
+    quoted_capability = f'"{capability}"'
+    return (
+        f"CREATE ROLE {quoted_login} LOGIN PASSWORD NULL NOSUPERUSER "
+        "NOCREATEDB NOCREATEROLE NOINHERIT NOREPLICATION NOBYPASSRLS "
+        f"CONNECTION LIMIT {connection_limit}",
+        f"GRANT {quoted_capability} TO {quoted_login}",
+    )
 
 
 def create_runtime_role_statements(role_name: str) -> tuple[str, ...]:
@@ -65,12 +96,20 @@ def drop_runtime_role_statement(role_name: str) -> str:
     return f'DROP ROLE "{role}"'
 
 
+def drop_login_role_statement(role_name: str) -> str:
+    role = require_login_role_identifier(role_name)
+    return f'DROP ROLE "{role}"'
+
+
 __all__ = [
     "AUDIT_SEQUENCE",
     "AUDIT_TABLE",
     "RESOLVER_SIGNATURE",
     "STATE_TABLES",
     "create_runtime_role_statements",
+    "create_deployment_login_role_statements",
+    "drop_login_role_statement",
     "drop_runtime_role_statement",
+    "require_login_role_identifier",
     "require_runtime_role_identifier",
 ]

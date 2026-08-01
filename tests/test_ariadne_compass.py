@@ -50,9 +50,7 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     assert report["north_star"]["title"].startswith("A complete AI-native")
     assert report["programme"]["id"] == "reception-one"
     assert report["programme"]["master_plan_phase"].startswith("Phase 2B")
-    assert report["current_position"]["node_id"] == (
-        "raisa-shared-application-auth-postgresql-persistence"
-    )
+    assert report["current_position"]["node_id"] == "security-finding-governance"
     assert report["current_position"]["why_now"]
     assert report["current_position"]["unlocks"]
     assert report["current_position"]["does_not_solve"]
@@ -66,12 +64,12 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     assert horizon_by_id["next-typed-diary-event-family"]["status"] == "candidate"
     assert "shared-application-auth-runtime-foundation" not in horizon_by_id
     assert "shared-application-auth-postgresql-persistence" not in horizon_by_id
-    assert horizon_by_id["shared-application-auth-runtime-role-secure-transport"][
+    assert "shared-application-auth-runtime-role-secure-transport" not in horizon_by_id
+    assert "shared-application-auth-operational-hardening" not in horizon_by_id
+    assert "security-finding-governance" not in horizon_by_id
+    assert horizon_by_id["shared-application-auth-office-cookie-compatibility"][
         "status"
     ] == "candidate"
-    assert horizon_by_id["shared-application-auth-runtime-role-secure-transport"][
-        "boundary_changes"
-    ] == ["api-change"]
     assert "reception-one-word-online-authenticated-dialog-check" not in horizon_by_id
     assert "resume-raisa-word-online-manifest-upload" not in horizon_by_id
     assert not any(
@@ -90,6 +88,14 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     assert any(
         decision["id"]
         == "authorize-shared-application-auth-runtime-role-secure-transport"
+        for decision in report["user_owned_decisions"]
+    )
+    assert any(
+        decision["id"] == "authorize-shared-application-auth-operational-hardening"
+        for decision in report["user_owned_decisions"]
+    )
+    assert any(
+        decision["id"] == "authorize-security-finding-governance"
         for decision in report["user_owned_decisions"]
     )
     assert not any(
@@ -367,7 +373,7 @@ def test_cli_emits_valid_json_and_plain_language(capsys: pytest.CaptureFixture[s
     assert compass.main(["--repo-root", str(REPO_ROOT), "validate"]) == 0
     validation = json.loads(capsys.readouterr().out)
     assert validation["status"] == "passed"
-    assert validation["journey_count"] == 62
+    assert validation["journey_count"] == 65
 
     assert (
         compass.main(

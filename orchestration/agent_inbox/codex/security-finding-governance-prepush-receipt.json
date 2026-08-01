@@ -1,0 +1,41 @@
+{
+  "authority_boundary": "existing_task_branch_push_and_draft_pull_request_only_no_protected_ref_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "verify_fetch_and_push_the_single_accepted_cross_checkpoint_commit_to_the_existing_task_branch_then_open_a_draft_pull_request",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "security_finding_governance_pass remains accepted at Continuity 186 and Compass 167.",
+    "current_authority_allocation": "GPT Sol owns the authorised existing-task-branch push and draft PR; no worker, subagent, provider or external reviewer ran.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-shared-application-auth-runtime-role-secure-transport-closeout.md",
+      "docs/raisa-shared-application-auth-operational-hardening-closeout.md",
+      "docs/security/security-finding-governance-closeout-2026-08-01.md",
+      "orchestration/agent_inbox/codex/security-finding-governance-sol-acceptance.md"
+    ],
+    "protected_evidence_boundaries": "Protected evidence, real identity, product/patient/clinical data, provider, cloud/IAM, deployment, production, release and protected integration remain closed.",
+    "git_refs_and_worktree": {
+      "HEAD_before_receipt_amendment": "8ce53b06",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "upstream_before_push": "2ae8f2173276147e59be361e0182f6cb4b7453fa",
+      "upstream_ahead": 1,
+      "upstream_behind": 0,
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "protected_refs_unchanged": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

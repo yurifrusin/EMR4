@@ -174,9 +174,11 @@ def test_closeout_is_revision_bound_and_external_state_remains_closed():
             REPO_ROOT / "orchestration" / "continuity" / "emr4-compass.json"
         ).read_text(encoding="utf-8")
     )
-    assert graph["graph_revision"] == 180
-    assert compass["map_revision"] == 161
-    assert compass["source_graph_revision"] == 180
+    # This historical node stays accepted as later Continuity/Compass
+    # descendants append; the top-level revisions must advance together.
+    assert graph["graph_revision"] >= 180
+    assert compass["map_revision"] >= 161
+    assert compass["source_graph_revision"] == graph["graph_revision"]
     node = next(
         item
         for item in graph["nodes"]

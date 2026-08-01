@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "stage_and_commit_the_verified_cross_checkpoint_shared_auth_operational_hardening_and_security_finding_governance_result_on_the_existing_task_branch_only",
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "sol_five_source_security_finding_governance_precommit",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": [
+        "live_handover_current_baton",
+        "current_authority_allocation",
+        "active_plan_and_acceptance",
+        "protected_evidence_boundaries",
+        "git_refs_and_worktree"
+      ]
+    }]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: security_finding_governance_pass at Continuity 186 and Compass 167 is accepted for task-branch publication.",
+        "current_authority_allocation: GPT Sol owns the authorised single commit, push and draft PR; no worker or provider ran.",
+        "active_plan_and_acceptance: the complete cross-checkpoint diff, register, policy, native readback, acceptance evidence, closeout and 183-test plus security-gate result were reviewed.",
+        "protected_evidence_boundaries: product, identity, provider, cloud, deployment, production, release and protected integration remain closed.",
+        "git_refs_and_worktree: all current entries belong to the authorised runtime-role, operational-hardening and governance chain; no unrelated user change was identified and nothing is staged before this receipt."
+      ]
+    },
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Luna unavailable; no substitute subagent ran."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No external worker ran."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Unselected fallback."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude transport ran."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No provider or external reviewer ran."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

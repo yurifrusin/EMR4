@@ -81,7 +81,9 @@ class RelayHandler(BaseHTTPRequestHandler):
 
 
 def main() -> None:
-    server = ThreadingHTTPServer(("0.0.0.0", LISTEN_PORT), RelayHandler)
+    # nosec B104 -- container-only listener; no port is published and the
+    # relay is attached only to the exact internal work-cell network.
+    server = ThreadingHTTPServer(("0.0.0.0", LISTEN_PORT), RelayHandler)  # nosec B104
     server.shutdown_requested = False  # type: ignore[attr-defined]
     while not server.shutdown_requested:  # type: ignore[attr-defined]
         server.handle_request()

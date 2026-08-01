@@ -264,7 +264,7 @@ def test_closeout_continuity_and_compass_bind_persistence_pass() -> None:
         for item in graph["nodes"]
         if item["id"] == "raisa-shared-application-auth-postgresql-persistence"
     )
-    assert graph["graph_revision"] == 183
+    assert graph["graph_revision"] >= 183
     assert node["status"] == "accepted"
     assert node["relationships"] == [
         {
@@ -272,17 +272,26 @@ def test_closeout_continuity_and_compass_bind_persistence_pass() -> None:
             "relation": "builds_on",
         }
     ]
-    assert compass["map_revision"] == 164
-    assert compass["source_graph_revision"] == 183
-    assert compass["current_position"]["node_id"] == node["id"]
+    assert compass["map_revision"] >= 164
+    assert compass["source_graph_revision"] == graph["graph_revision"]
+    nodes = {item["id"]: item for item in graph["nodes"]}
+    cursor = compass["current_position"]["node_id"]
+    while cursor != node["id"]:
+        parents = [
+            relation["node_id"]
+            for relation in nodes[cursor]["relationships"]
+            if relation["relation"] == "builds_on"
+        ]
+        assert parents, f"{cursor} does not descend from {node['id']}"
+        cursor = parents[0]
     assert "shared-application-auth-postgresql-persistence" not in {
         item["id"] for item in compass["decision_horizon"]
     }
-    assert "shared-application-auth-runtime-role-secure-transport" in {
+    assert "shared-application-auth-runtime-role-secure-transport" not in {
         item["id"] for item in compass["decision_horizon"]
     }
     assert result in CLOSEOUT_PATH.read_text(encoding="utf-8")
     assert result in ACCEPTANCE_PATH.read_text(encoding="utf-8")
     report = COMPASS_REPORT_PATH.read_text(encoding="utf-8")
-    assert "Compass map revision 164" in report
-    assert "continuity graph revision 183" in report
+    assert f"Compass map revision {compass['map_revision']}" in report
+    assert f"continuity graph revision {graph['graph_revision']}" in report
