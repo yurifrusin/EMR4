@@ -28,6 +28,10 @@ from app.models.application_auth import (
     ApplicationAuthPrincipalGeneration,
     ApplicationAuthSurfaceSession,
 )
+from app.models.application_identity_federation import (
+    ApplicationIdentityFederationAuditEvent,
+    ApplicationIdentityFederationBinding,
+)
 
 __all__ = [
     "Base",
@@ -52,4 +56,6 @@ __all__ = [
     "ApplicationAuthParentSession",
     "ApplicationAuthPrincipalGeneration",
     "ApplicationAuthSurfaceSession",
+    "ApplicationIdentityFederationAuditEvent",
+    "ApplicationIdentityFederationBinding",
 ]
