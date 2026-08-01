@@ -9,6 +9,7 @@ from fastapi.testclient import TestClient
 from app.services.application_auth_runtime import Surface
 from scripts.raisa_shared_application_auth_office_cookie_compatibility import (
     DEVELOPMENT_ORIGIN,
+    OfficeCookieCompatibilityHarnessBase,
     build_app,
 )
 from scripts.raisa_shared_application_auth_postgresql_office_host_compatibility import (
@@ -268,6 +269,11 @@ def test_shared_taskpane_and_postgresql_harness_have_no_forbidden_fallback():
     assert "create_application_auth_engine" in harness
     assert "PostgresTransportDenialAuditSink" in harness
     assert "include_router" not in harness
+    assert issubclass(
+        PostgresOfficeCookieCompatibilityHarness,
+        OfficeCookieCompatibilityHarnessBase,
+    )
+    assert "super().__init__(" in harness
 
 
 def test_live_evidence_residue_and_closeout_are_closed_and_exact():
@@ -346,6 +352,9 @@ def test_live_evidence_residue_and_closeout_are_closed_and_exact():
 def test_two_surface_lifecycles_use_postgresql_capability_role_and_clean_up():
     harness = PostgresOfficeCookieCompatibilityHarness(output_path=None)
     try:
+        assert not hasattr(harness, "store")
+        assert not hasattr(harness, "auth_audit")
+        assert not hasattr(harness, "denial_audit")
         client = TestClient(
             build_app(harness),
             base_url=DEVELOPMENT_ORIGIN,

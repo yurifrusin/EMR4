@@ -39,8 +39,6 @@ from app.services.application_auth_role_runtime import (  # noqa: E402
 )
 from app.services.application_auth_runtime import (  # noqa: E402
     AUTHORED_SYNTHETIC_DATA_CLASS,
-    Surface,
-    SyntheticPrincipal,
 )
 from app.services.application_auth_transport import (  # noqa: E402
     OneUseSyntheticBootstrapRegistry,
@@ -48,9 +46,7 @@ from app.services.application_auth_transport import (  # noqa: E402
 from scripts.raisa_shared_application_auth_office_cookie_compatibility import (  # noqa: E402
     DEVELOPMENT_ORIGIN,
     SURFACES,
-    OfficeCookieCompatibilityHarness,
-    SanitizedCompatibilityResult,
-    _LaunchMaterial,
+    OfficeCookieCompatibilityHarnessBase,
     _SurfaceBoundApplicationAuthTransport,
     build_app,
 )
@@ -333,7 +329,7 @@ class DisposablePostgresOfficeInfrastructure:
         self._password = ""
 
 
-class PostgresOfficeCookieCompatibilityHarness(OfficeCookieCompatibilityHarness):
+class PostgresOfficeCookieCompatibilityHarness(OfficeCookieCompatibilityHarnessBase):
     """The prior real-Office harness with accepted PostgreSQL dependencies."""
 
     def __init__(
@@ -342,53 +338,29 @@ class PostgresOfficeCookieCompatibilityHarness(OfficeCookieCompatibilityHarness)
         origin: str = DEVELOPMENT_ORIGIN,
         output_path: Path | None = EVIDENCE_PATH,
     ) -> None:
-        if origin != DEVELOPMENT_ORIGIN:
-            raise ValueError("the Office compatibility origin is frozen")
-        self.origin = origin
-        self._lock = threading.Lock()
         self._close_lock = threading.Lock()
         self._closed = False
         self._final_evidence: dict[str, object] | None = None
-        self._results: dict[Surface, SanitizedCompatibilityResult] = {}
         self._output_path = output_path
         self._raw_launch_values: list[str] = []
         self._token_source = _RecordingOpaqueSource()
         self._csrf_source = _RecordingOpaqueSource(prefix="csrf.")
-        self.infrastructure = DisposablePostgresOfficeInfrastructure()
-
-        credentials: dict[str, SyntheticPrincipal] = {}
-        bootstrap_surfaces: dict[str, Surface] = {}
-        self._launches: dict[Surface, _LaunchMaterial] = {}
-        for surface in SURFACES:
-            bootstrap = secrets.token_urlsafe(32)
-            nonce = secrets.token_urlsafe(32)
-            self._raw_launch_values.extend((bootstrap, nonce))
-            credentials[bootstrap] = SyntheticPrincipal(
-                user_id=(
-                    f"synthetic-user-office-postgres-"
-                    f"{surface.value.replace('_', '-')}"
-                ),
-                practice_id=(
-                    f"synthetic-practice-office-postgres-"
-                    f"{surface.value.replace('_', '-')}"
-                ),
-                current_backend_role="GP",
-                practitioner_id=(
-                    f"synthetic-practitioner-office-postgres-"
-                    f"{surface.value.replace('_', '-')}"
-                ),
-            )
-            bootstrap_surfaces[bootstrap] = surface
-            self._launches[surface] = _LaunchMaterial(
-                bootstrap_value=bootstrap,
-                evidence_nonce=nonce,
-                evidence_nonce_hash=self._hash(nonce),
-            )
+        super().__init__(
+            origin=origin,
+            principal_namespace="office-postgres",
+            launch_value_sink=self._raw_launch_values.append,
+        )
+        try:
+            self.infrastructure = DisposablePostgresOfficeInfrastructure()
+        except Exception:
+            self._raw_launch_values.clear()
+            raise
+        credentials, bootstrap_surfaces, origins = self._take_initial_auth_material()
 
         if self.infrastructure.session_factory is None:
             self.infrastructure.cleanup()
+            self._raw_launch_values.clear()
             raise HarnessSetupFailure("database_session_factory_unavailable")
-        origins = {surface: origin for surface in Surface}
         runtime = RoleScopedPostgresApplicationAuthRuntime(
             session_factory=self.infrastructure.session_factory,
             surface_origins=origins,

@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit_the_user_approved_codeql_545_structural_ci_repair_on_pr71_task_branch_only",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_pr71_codeql_545_repair_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: PR 71 carries the accepted PostgreSQL Office-host compatibility result at Continuity 188 and Compass 169.",
+        "current_authority_allocation: Yuri explicitly approved the focused CI repair after exact CodeQL alert 545 diagnosis; GPT Sol owns the task-branch change and no worker, subagent or provider ran.",
+        "active_plan_and_acceptance: alert 545 is a correctness/quality error with no security-severity level; the PostgreSQL harness intentionally required a distinct runtime initializer but inherited from the in-memory concrete harness.",
+        "protected_evidence_boundaries: the repair extracts only runtime-independent Office lifecycle initialization; no route, schema, database, identity, product, document, patient/clinical, deployment, production or release boundary changes.",
+        "git_refs_and_worktree: task HEAD is bb0c2f0c, all protected refs remain 1af54ae3, and the user-owned untracked docs/branding/raisa directory is untouched and excluded.",
+        "Seventeen focused tests, the exact 176-test expanded regression, 29 Continuity/Compass/handover tests, compilation, Ruff, canonical lint and reviewed Bandit pass."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent assigned."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external worker ran."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external planning lane ran."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external reviewer ran."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
