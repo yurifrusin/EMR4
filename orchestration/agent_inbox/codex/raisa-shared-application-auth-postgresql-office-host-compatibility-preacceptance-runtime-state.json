@@ -1,0 +1,76 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "raisa_shared_application_auth_postgresql_office_host_compatibility_preacceptance",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker selected or dispatched."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external planning or provider lane was used."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external agent review was selected; Sol performed the bounded evidence review."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Both real Office hosts independently reported the passed-and-logged-out terminal state through the exact reserved HTTPS origin.",
+        "Fresh PostgreSQL readback proved two principals, two parents, four revoked surfaces, zero exchanges, fourteen lifecycle audits and two retained denial audits under the separate LOGIN-to-capability-role path.",
+        "Practice-scoped RLS shapes are exact and no raw generated value or task target matched PostgreSQL or durable evidence.",
+        "The harness exited gracefully; the exact database, LOGIN role and capability role are absent; ports 8001 and 4040 and the task processes are absent; the desktop registration is removed.",
+        "Five focused and 176 expanded tests, both Microsoft manifest validations, compilation, Ruff and diff checks pass.",
+        "No provider, external identity, product/document/patient/clinical path, cloud mutation, deployment, production, release or protected-ref move occurred.",
+        "The user-owned docs/branding/raisa directory remains untouched, untracked and excluded."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,74 @@
+{
+  "schema_version": "emr4.postgresql_office_host_compatibility_acceptance.v1",
+  "result": "raisa_shared_application_auth_postgresql_office_host_compatibility_pass",
+  "evidence_label": "live_local_office_backend_postgres_capability_role",
+  "data_class": "authored_synthetic",
+  "provider_free": true,
+  "gates": {
+    "five_source_rehydration": "passed",
+    "git_and_branding_isolation": "passed",
+    "api_spine_seven_route_boundary": "passed",
+    "fresh_restricted_manifests": "passed",
+    "deterministic_testclient_postgresql_rehearsal": "passed",
+    "installed_word_lifecycle": "passed",
+    "word_online_lifecycle": "passed",
+    "postgresql_login_to_capability_role": "passed",
+    "forced_rls_practice_scope": "passed",
+    "hash_only_and_raw_value_absence": "passed",
+    "database_role_process_listener_cleanup": "passed"
+  },
+  "exact_database_outcome": {
+    "principal_generations": 2,
+    "parent_sessions": 2,
+    "surface_sessions": 4,
+    "revoked_surface_sessions": 4,
+    "exchange_grants": 0,
+    "lifecycle_audit_events": 14,
+    "retained_post_logout_denials": 2,
+    "total_audit_events": 16,
+    "practice_scope_shapes_exact": true,
+    "opaque_reference_shape_violations": 0,
+    "raw_persisted_value_matches": 0,
+    "durable_secret_or_target_matches": 0
+  },
+  "office_outcome": {
+    "word_desktop": "passed_and_logged_out",
+    "word_online": "passed_and_logged_out",
+    "bootstrap_available": 0,
+    "bootstrap_reserved": 0,
+    "bootstrap_consumed": 2
+  },
+  "verification": {
+    "focused_tests": 5,
+    "expanded_tests": 176,
+    "continuity_compass_and_handover_tests": 29,
+    "ruff": "passed",
+    "python_compilation": "passed",
+    "microsoft_office_manifest_validation": "passed_for_both_manifests",
+    "git_diff_check": "passed"
+  },
+  "deviations": [
+    {
+      "boundary": "protected_integration",
+      "disposition": "paused_not_failed",
+      "reason": "A docs change on master automatically invokes the public GitHub Pages deployment workflow, while deployment authority remains closed.",
+      "effect_on_result": "none; the task branch starts from PR 70's exact green head and no protected ref moved"
+    }
+  ],
+  "side_effect_counts": {
+    "provider_calls": 0,
+    "external_identity_calls": 0,
+    "microsoft_or_office_identity_calls": 0,
+    "product_or_source_database_reads": 0,
+    "patient_health_or_clinical_reads": 0,
+    "document_reads": 0,
+    "document_writes": 0,
+    "product_commands": 0,
+    "cloud_or_iam_mutations": 0,
+    "deployments": 0,
+    "production_changes": 0,
+    "protected_ref_moves": 0
+  },
+  "claim_limit": "This proves one provider-free authored-synthetic installed-Word lifecycle and one Word Online lifecycle through the accepted disposable local PostgreSQL, separate LOGIN role, exact capability role, forced-RLS and retained-audit path. It does not prove real identity, Microsoft federation, product-data safety, distributed abuse resistance, organisational deployment, production fitness or release readiness.",
+  "passed": true
+}

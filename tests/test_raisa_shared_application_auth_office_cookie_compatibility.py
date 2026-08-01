@@ -403,10 +403,9 @@ def test_continuity_and_compass_bind_the_terminal_result():
     node_id = "raisa-shared-application-auth-office-cookie-compatibility"
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
-    assert graph["graph_revision"] == 187
-    assert graph["nodes"][-1]["id"] == node_id
-    assert graph["nodes"][-1]["status"] == "accepted"
-    node = graph["nodes"][-1]
+    assert graph["graph_revision"] >= 187
+    node = next(item for item in graph["nodes"] if item["id"] == node_id)
+    assert node["status"] == "accepted"
     alert_decision = next(
         item
         for item in node["decisions"]
@@ -415,9 +414,9 @@ def test_continuity_and_compass_bind_the_terminal_result():
     assert alert_decision["status"] == "accepted"
     assert "dependabot-alert-17-readback.json" in alert_decision["source"]
     assert any("open/needs_review" in gate for gate in node["unresolved_gates"])
-    assert compass["map_revision"] == 168
-    assert compass["source_graph_revision"] == 187
-    assert compass["current_position"]["node_id"] == node_id
+    assert compass["map_revision"] >= 168
+    assert compass["source_graph_revision"] == graph["graph_revision"]
+    assert any(item["node_id"] == node_id for item in compass["journey"])
     assert "shared-application-auth-office-cookie-compatibility" not in {
         item["id"] for item in compass["decision_horizon"]
     }

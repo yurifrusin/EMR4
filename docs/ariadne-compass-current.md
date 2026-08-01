@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 shared application authentication now has a real Office-host cookie compatibility proof in installed Word and Word Online. Continuity 187 / Compass 168 bind the result and the post-snapshot development-only Dependabot alert 17 remains registered open/needs_review without mutation. PR 70 CodeQL instances 543 and 544 are fixed without dismissal. Real identity, Microsoft federation, product data, organisational deployment, production, release and protected integration remain closed.
+> EMR4 shared application authentication now has a real Office-host proof through its accepted local PostgreSQL LOGIN-to-capability-role path. Continuity 188 / Compass 169 bind exact RLS, hash-only audit and cleanup evidence. Protected integration remains paused because it would trigger public GitHub Pages deployment. Real identity, Microsoft federation, product data, production and release remain closed.
 
 ## North star
 
@@ -148,36 +148,38 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    EMR4 now has one schema-validated owner/SLA register joining 12 native security alerts to evidence and exact GitHub disposition, with zero open Dependabot or security-high CodeQL alerts in the reconciled queues. The 14 Bandit and 10 CodeQL validation rows remain linked. Python and Node workflow definitions now carry staggered daily schedules; activation on the default branch still awaits protected integration. Lineage parent: `raisa-shared-application-auth-operational-hardening`.
 66. **Real Office-host cookie compatibility proof — Raisa Shared Application-Auth Office Cookie Compatibility**
    The accepted default-off authored-synthetic session-cookie lifecycle passed once in installed Word and once in Word Online through the exact development origin. Both independent sessions rotated, logged out and then denied validation; no product, identity, document, provider, cloud or deployment path ran, and task listeners and registration are absent. Publication exposed development-only Dependabot alert 17, which is registered open/needs_review without native or dependency mutation. PR 70 warning 543 and high alert 544 were repaired and fresh CodeQL marks both fixed without dismissal. Lineage parent: `raisa-shared-application-auth-operational-hardening`.
+67. **Real Office-host PostgreSQL capability-role compatibility proof — Raisa Shared Application-Auth PostgreSQL Office-Host Compatibility**
+   Installed Word and Word Online each passed one independent authored-synthetic secure-cookie lifecycle through the accepted disposable local PostgreSQL, separate finite LOGIN role, exact NOLOGIN capability role, forced-RLS and retained-audit path. Exact database readback and complete owned cleanup pass with no raw-value match, product/identity/provider path, deployment or protected-ref move. Lineage parent: `raisa-shared-application-auth-office-cookie-compatibility`.
 
 ## Current position
 
-**Real Office-host cookie compatibility proof — Raisa Shared Application-Auth Office Cookie Compatibility**
+**Real Office-host PostgreSQL capability-role compatibility proof — Raisa Shared Application-Auth PostgreSQL Office-Host Compatibility**
 
-**Why this proof came next:** The protected shared-auth and governance foundations were integrated, leaving real Office host cookie carriage as the leading bounded gap.
+**Why this proof came next:** The process-local Office cookie proof passed, leaving the already accepted durable role-scoped persistence path as the next smallest application-auth uncertainty.
 
-The accepted default-off authored-synthetic session-cookie lifecycle passed once in installed Word and once in Word Online through the exact development origin. Both independent sessions rotated, logged out and then denied validation; no product, identity, document, provider, cloud or deployment path ran, and task listeners and registration are absent. Publication exposed development-only Dependabot alert 17, which is registered open/needs_review without native or dependency mutation. PR 70 warning 543 and high alert 544 were repaired and fresh CodeQL marks both fixed without dismissal.
+Installed Word and Word Online each passed one independent authored-synthetic secure-cookie lifecycle through the accepted disposable local PostgreSQL, separate finite LOGIN role, exact NOLOGIN capability role, forced-RLS and retained-audit path. Exact database readback and complete owned cleanup pass with no raw-value match, product/identity/provider path, deployment or protected-ref move.
 
 ### What this unlocks
 
-- Make an explicit user decision whether Dependabot alert 17 should remain open or be dismissed as not_used; do not force a dependency override.
-- Seek fresh authority for a provider-free authored-synthetic Office-host exercise through the accepted local PostgreSQL persistence and capability-role boundary.
-- Separately decide whether to design a real-identity and Microsoft federation boundary without yet wiring product reads.
-- Publish and review this task branch without moving protected refs.
+- Publish and review the task branch without moving protected refs or triggering deployment.
+- Ask Yuri whether the public GitHub Pages rebuild caused by protected integration is authorised.
+- Separately seek fresh authority for an architecture-only real-identity and Microsoft-federation boundary design with no live wiring or product reads.
+- Make the separate explicit native disposition decision for Dependabot alert 17.
 
 ### What it does not solve
 
 - Every Office/WebView/browser/tenant cookie policy.
-- PostgreSQL or multi-instance behavior through a real Office host.
 - Real identity, Microsoft federation or product-data authorization.
-- Organisational deployment, production, release or protected integration.
-- The user-owned native disposition or removal of Dependabot alert 17.
+- Distributed or production abuse resistance.
+- Organisational deployment, production or release.
+- The native disposition or removal of Dependabot alert 17.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
 - Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
 - Contract `committed-reschedule-availability-reconciliation`: **satisfied**
-- Bounded opening `api-change`: One supervised provider-free authored-synthetic exercise of the existing session-cookie transport in installed Word and Word Online through an ephemeral HTTPS relay to a local in-memory harness.
+- Bounded opening `api-change`: One provider-free authored-synthetic installed-Word and Word Online session lifecycle through the accepted disposable local PostgreSQL, separate LOGIN role and exact NOLOGIN capability role.
 - All other named boundaries remain closed: `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -378,9 +380,16 @@ Prerequisites:
   Required before: Satisfied on 2026-08-01 for one provider-free in-memory supervised exercise through the exact development origin. Real identity, product data, organisational deployment, production and release remain closed.
 - **Should development-only Dependabot alert 17 be dismissed as not_used or remain open for upstream remediation?**
   Required before: Any GitHub alert-state mutation. SF-0020 is currently registered not_actionable and native-open/needs_review; no dependency override is authorised.
+- **Should EMR4 exercise the accepted session transport through local PostgreSQL and the exact capability role in both real Office hosts?**
+  Required before: Satisfied on 2026-08-01 for one provider-free authored-synthetic installed-Word and Word Online exercise. Real identity, product data and deployment remain closed.
+- **May the accepted Office authentication branches be protected-integrated when that master docs push will rebuild and publish GitHub Pages?**
+  Required before: Marking the affected PR ready or merging it to master. No deployment or protected-ref movement is currently authorised.
+- **Should EMR4 freeze an architecture-only real-identity and Microsoft-federation boundary next?**
+  Required before: Any identity adapter, Microsoft token exchange, live user or practice mapping, product read or federation wiring.
 
 ## Map limits
 
+- The PostgreSQL Office-host descendant proves one independent authored-synthetic lifecycle in each tested host through one exact local role-scoped path. It does not establish real identity, product data, distributed abuse resistance, deployment or production.
 - Post-snapshot Dependabot alert 17 is statically not_actionable for the supported development lint configuration but remains native-open and needs_review pending an explicit user disposition.
 - The Office cookie descendant proves one independent session lifecycle in installed Word and Word Online through one development origin. It does not cover every policy, PostgreSQL/multi-instance behavior, real identity, product data, organisational deployment or production.
 - The governance descendant proves a repository schema/register, exact static triage, 12 native GitHub dispositions and daily workflow definitions. Scheduled runs are not active on the default branch until protected integration, and vulnerable dev-only lock entries remain.
@@ -435,6 +444,7 @@ Prerequisites:
 
 ## Evidence index
 
+- `.github/workflows/pages.yml`
 - `alembic/versions/o4p5q6r7s8t9_add_application_auth_persistence.py`
 - `app/models/application_auth.py`
 - `app/routers/application_auth.py`
@@ -588,6 +598,8 @@ Prerequisites:
 - `docs/raisa-shared-application-auth-office-cookie-compatibility-plan.md`
 - `docs/raisa-shared-application-auth-operational-hardening-closeout.md`
 - `docs/raisa-shared-application-auth-operational-hardening-plan.md`
+- `docs/raisa-shared-application-auth-postgresql-office-host-compatibility-closeout.md`
+- `docs/raisa-shared-application-auth-postgresql-office-host-compatibility-plan.md`
 - `docs/raisa-shared-application-auth-postgresql-persistence-closeout.md`
 - `docs/raisa-shared-application-auth-postgresql-persistence-plan.md`
 - `docs/raisa-shared-application-auth-runtime-foundation-closeout.md`
@@ -621,6 +633,7 @@ Prerequisites:
 - `docs/security/raisa-shared-application-auth-clinician-role-boundary-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-office-cookie-compatibility-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-operational-hardening-threat-model-delta.md`
+- `docs/security/raisa-shared-application-auth-postgresql-office-host-compatibility-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-postgresql-persistence-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-runtime-foundation-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-runtime-role-secure-transport-threat-model-delta.md`
@@ -1076,6 +1089,9 @@ Prerequisites:
 - `orchestration/continuity/shared-application-auth-office-cookie-compatibility/dependabot-alert-17-readback.json`
 - `orchestration/continuity/shared-application-auth-office-cookie-compatibility/final-residue-evidence.json`
 - `orchestration/continuity/shared-application-auth-office-cookie-compatibility/live-office-host-evidence.json`
+- `orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/acceptance-evidence.json`
+- `orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/final-residue-evidence.json`
+- `orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/live-office-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -1158,4 +1174,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 168; continuity graph revision 187._
+_Compass map revision 169; continuity graph revision 188._

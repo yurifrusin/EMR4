@@ -54,6 +54,17 @@ HARNESS_SCRIPT = (
     / "scripts"
     / "raisa_shared_application_auth_postgresql_office_host_compatibility.py"
 )
+LIVE_EVIDENCE = CONTINUITY / "live-office-backend-postgres-evidence.json"
+RESIDUE_EVIDENCE = CONTINUITY / "final-residue-evidence.json"
+ACCEPTANCE_EVIDENCE = CONTINUITY / "acceptance-evidence.json"
+CLOSEOUT = (
+    ROOT
+    / "docs"
+    / "raisa-shared-application-auth-postgresql-office-host-compatibility-closeout.md"
+)
+GRAPH = ROOT / "orchestration" / "continuity" / "emr4-continuity-graph.json"
+COMPASS = ROOT / "orchestration" / "continuity" / "emr4-compass.json"
+COMPASS_REPORT = ROOT / "docs" / "ariadne-compass-current.md"
 MANIFESTS = {
     Surface.WORD_DESKTOP: CONTINUITY / "word-desktop-manifest.xml",
     Surface.WORD_ONLINE: CONTINUITY / "word-online-manifest.xml",
@@ -257,6 +268,79 @@ def test_shared_taskpane_and_postgresql_harness_have_no_forbidden_fallback():
     assert "create_application_auth_engine" in harness
     assert "PostgresTransportDenialAuditSink" in harness
     assert "include_router" not in harness
+
+
+def test_live_evidence_residue_and_closeout_are_closed_and_exact():
+    live = json.loads(LIVE_EVIDENCE.read_text(encoding="utf-8"))
+    residue = json.loads(RESIDUE_EVIDENCE.read_text(encoding="utf-8"))
+    acceptance = json.loads(ACCEPTANCE_EVIDENCE.read_text(encoding="utf-8"))
+    closeout = CLOSEOUT.read_text(encoding="utf-8")
+    graph = json.loads(GRAPH.read_text(encoding="utf-8"))
+    compass = json.loads(COMPASS.read_text(encoding="utf-8"))
+    report = COMPASS_REPORT.read_text(encoding="utf-8")
+
+    assert live["result"] == RESULT
+    assert live["passed"] is True
+    assert live["database"]["row_counts"] == {
+        "principal_generations": 2,
+        "parent_sessions": 2,
+        "surface_sessions": 4,
+        "exchange_grants": 0,
+        "audit_events": 16,
+    }
+    assert live["database"]["lifecycle_audit_event_count"] == 14
+    assert live["database"]["retained_post_logout_denial_count"] == 2
+    assert live["database"]["revoked_surface_session_count"] == 4
+    assert live["database"]["practice_scope_exact"] is True
+    assert live["database"]["raw_persisted_value_match_count"] == 0
+    assert live["durable_secret_or_target_match_count"] == 0
+    assert live["cleanup"]["passed"] is True
+    assert all(
+        live["results"][surface.value]["terminal_status"] == "passed"
+        for surface in MANIFESTS
+    )
+
+    assert residue["passed"] is True
+    assert set(residue["task_processes"].values()) == {False}
+    assert set(residue["listeners"].values()) == {False}
+    assert residue["postgresql"]["disposable_database_absent"] is True
+    assert residue["postgresql"]["disposable_login_role_absent"] is True
+    assert residue["postgresql"]["disposable_capability_role_absent"] is True
+    assert set(residue["external_side_effects"].values()) == {0}
+
+    assert acceptance["passed"] is True
+    assert acceptance["verification"]["focused_tests"] == 5
+    assert acceptance["verification"]["expanded_tests"] == 176
+    assert acceptance["verification"][
+        "continuity_compass_and_handover_tests"
+    ] == 29
+    assert acceptance["deviations"][0]["disposition"] == "paused_not_failed"
+    assert "PR 70 was not merged" in closeout
+    assert "GitHub Pages" in closeout
+    assert "docs/branding/raisa/" in closeout
+    assert graph["graph_revision"] == 188
+    assert graph["nodes"][-1]["id"] == (
+        "raisa-shared-application-auth-postgresql-office-host-compatibility"
+    )
+    assert compass["map_revision"] == 169
+    assert compass["source_graph_revision"] == 188
+    assert compass["current_position"]["node_id"] == graph["nodes"][-1]["id"]
+    assert "Continuity 188 / Compass 169" in report
+
+    rendered = json.dumps(
+        {"live": live, "residue": residue, "acceptance": acceptance},
+        sort_keys=True,
+    )
+    for forbidden in (
+        "postgresql://",
+        "bootstrap_credential",
+        "evidence_nonce",
+        "Set-Cookie",
+        "emr4_application_auth_login_",
+        "emr4_application_auth_runtime_",
+        "emr4_auth_transport_acceptance_",
+    ):
+        assert forbidden not in rendered
 
 
 def test_two_surface_lifecycles_use_postgresql_capability_role_and_clean_up():

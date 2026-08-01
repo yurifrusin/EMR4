@@ -1,12 +1,12 @@
 {
   "schema_version": "ariadne.orchestrator_runtime_state.v1",
   "continuation_event": "pre_sprint_planning",
-  "planned_action": "commit",
+  "planned_action": "stage_and_commit_the_verified_postgresql_office_host_compatibility_closeout_on_the_existing_task_branch_only",
   "context_health": {
     "agent_contexts": [
       {
         "agent_id": "orchestrator",
-        "measurement_source": "raisa_shared_application_auth_postgresql_office_host_compatibility_precommit",
+        "measurement_source": "sol_five_source_postgresql_office_host_compatibility_precommit",
         "rehydrated_from_receipt": true,
         "rehydration_sources": [
           "live_handover_current_baton",
@@ -20,10 +20,29 @@
   },
   "adapter_observations": [
     {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: the PostgreSQL-backed real-Office result is accepted at Continuity 188 and Compass 169.",
+        "current_authority_allocation: GPT Sol owns the authorised task-branch commit, push and draft PR; no worker, subagent or provider ran.",
+        "active_plan_and_acceptance: both real hosts passed, durable database and audit evidence is exact, and complete owned cleanup is recorded.",
+        "protected_evidence_boundaries: real identity, Microsoft federation, product/document/patient/clinical data, deployment, production, release and protected integration remain closed.",
+        "git_refs_and_worktree: HEAD is the existing task branch, protected refs are unchanged, and the concurrent docs/branding/raisa directory is untracked, untouched and excluded.",
+        "Five focused tests and 29 Continuity, Compass and handover tests pass again from the final bytes; the earlier 176-test regression and all security, dependency and manifest gates remain passed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent assigned."]
+    },
+    {
       "adapter_id": "deepseek_via_claude_code_bare",
       "method": "synthetic_fixture",
       "reachability": "unknown",
-      "evidence": ["No worker selected or dispatched."]
+      "evidence": ["No external worker ran."]
     },
     {
       "adapter_id": "deepcode_cli",
@@ -35,32 +54,13 @@
       "adapter_id": "claude_cli_print",
       "method": "synthetic_fixture",
       "reachability": "unknown",
-      "evidence": ["No external planning or implementation model authorised."]
+      "evidence": ["No external planning lane ran."]
     },
     {
       "adapter_id": "antigravity_cli_print",
       "method": "synthetic_fixture",
       "reachability": "unknown",
-      "evidence": ["No external review lane selected before the provider-free local gates."]
-    },
-    {
-      "adapter_id": "codex_primary_session",
-      "method": "codex_session_observation",
-      "reachability": "reachable",
-      "evidence": [
-        "The five-source rehydration receipt passes with worker dispatch disabled.",
-        "The frozen plan and threat-model delta preserve the seven-route REST API Spine boundary and keep identity, product data, providers, deployment, production and release closed.",
-        "Both fresh Restricted manifests pass Microsoft Office manifest validation.",
-        "Four focused tests and the 175-test shared-auth, Office, API Spine and security-governance regression pass serially.",
-        "The live-local TestClient rehearsal proves the exact disposable PostgreSQL LOGIN-to-capability role path, expected rows/audits, zero raw persistence matches and complete database/role cleanup.",
-        "The user-owned docs/branding/raisa directory remains untracked, untouched and excluded."
-      ]
-    },
-    {
-      "adapter_id": "codex_subagent_spawn",
-      "method": "synthetic_fixture",
-      "reachability": "unknown",
-      "evidence": ["No native subagent assigned."]
+      "evidence": ["No external reviewer ran."]
     }
   ],
   "worker_slots": [
