@@ -1,0 +1,65 @@
+{
+  "schema_version": "emr4.codeql_pr_alert_readback.v1",
+  "recorded_at": "2026-08-01T21:12:59Z",
+  "repository": "yurifrusin/EMR4",
+  "pull_request": 74,
+  "branch": "codex/raisa-real-identity-microsoft-federation",
+  "fixed_head": "eeb39df38f6d7ccda76b0d28a92047ed98816717",
+  "initial_failure": {
+    "rule": "py/ineffectual-statement",
+    "native_severity": "note",
+    "security_severity": null,
+    "alerts": [546, 547, 548]
+  },
+  "fresh_analysis": {
+    "workflow_run_id": 30718544607,
+    "wrapper_check_run_id": 91418376728,
+    "javascript_typescript": "success",
+    "python": "success",
+    "wrapper": "success"
+  },
+  "native_instances": [
+    {
+      "number": 546,
+      "rule": "py/ineffectual-statement",
+      "native_severity": "note",
+      "security_severity": null,
+      "state": "fixed",
+      "path": "app/services/application_identity_federation.py",
+      "start_line": 190,
+      "updated_at": "2026-08-01T21:12:59Z",
+      "dismissed_at": null,
+      "dismissed_by": null
+    },
+    {
+      "number": 547,
+      "rule": "py/ineffectual-statement",
+      "native_severity": "note",
+      "security_severity": null,
+      "state": "fixed",
+      "path": "app/services/application_identity_federation.py",
+      "start_line": 199,
+      "updated_at": "2026-08-01T21:12:59Z",
+      "dismissed_at": null,
+      "dismissed_by": null
+    },
+    {
+      "number": 548,
+      "rule": "py/ineffectual-statement",
+      "native_severity": "note",
+      "security_severity": null,
+      "state": "fixed",
+      "path": "app/services/application_identity_federation.py",
+      "start_line": 203,
+      "updated_at": "2026-08-01T21:12:59Z",
+      "dismissed_at": null,
+      "dismissed_by": null
+    }
+  ],
+  "external_side_effects": {
+    "native_alert_mutations": 0,
+    "code_fixes": 3,
+    "dismissals": 0,
+    "protected_ref_movements": 0
+  }
+}

@@ -42,7 +42,14 @@ vulnerabilities. Each ellipsis is replaced with an explicit
 making accidental direct invocation fail visibly. No authentication decision,
 binding behavior, session state, database path or product boundary changes.
 
-The three native alerts remain undismissed. Fresh CodeQL analysis must report
-each instance fixed before its review conversation is resolved and PR 74 is
-merged. Exact post-repair readback will be recorded without native alert
-dismissal.
+The three native alerts remain undismissed. Fresh CodeQL workflow run
+`30718544607` and wrapper check `91418376728` passed at fixed task-branch HEAD
+`eeb39df38f6d7ccda76b0d28a92047ed98816717`. Exact GitHub REST readback reports
+alerts 546, 547 and 548 `fixed`, with no dismissal and no native alert mutation.
+The durable readback is
+`orchestration/continuity/raisa-real-identity-microsoft-federation-boundary/codeql-pr74-alerts-readback.json`.
+
+The final security disposition remains `not_actionable`: none of the three
+quality instances survives as a product security finding. The source repair is
+verified and their repaired review conversations may now be resolved before
+PR 74 integration.
