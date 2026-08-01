@@ -63,7 +63,8 @@ identifier.
 - Twelve focused harness, manifest, route, failure-closure and durable-evidence
   tests pass.
 - The expanded shared-auth, API Spine and security-governance regression passes
-  176 tests, including the dedicated post-snapshot alert 17 regression.
+  177 tests, including dedicated post-snapshot Dependabot and PR CodeQL
+  regressions.
 - Canonical Ruff, historical Diary leakage and reviewed Bandit gates pass.
 - `pip-audit` reports no known Python dependency vulnerabilities.
 - The blocking production Node audit reports zero vulnerabilities. The full
@@ -74,6 +75,11 @@ identifier.
   not enabled by the supported lint configuration. It is durably registered as
   `SF-0020` with a `not_actionable` verdict but remains native-open and
   `needs_review`; no GitHub alert mutation occurred.
+- The first PR 70 CodeQL wrapper found high alert 544 in an incomplete
+  URL-like substring assertion and warning 543 in an ineffective local-variable
+  wipe. Exact CSP directive equality and removal of the dead assignment are the
+  minimal fixes. Fresh JavaScript/TypeScript and Python CodeQL analyses and the
+  wrapper all pass; both native instances report `fixed` without dismissal.
 - The repository manifest and both task-specific Restricted manifests pass
   Microsoft's Office manifest validator. JavaScript syntax and JSON parsing
   pass.
@@ -94,6 +100,9 @@ command lines were verified. Ports 8001 and 4040 have no listeners. The Office
 developer registration is absent, so the taskpane cannot reload. The
 user-visible blank Word process was left for ordinary user closure; its
 document was neither inspected, changed nor deleted.
+
+Draft PR 70 is mergeable and all five reported checks pass. Protected refs
+remain at the accepted PR 69 integration commit and were not moved.
 
 ## Claim limit and next gate
 

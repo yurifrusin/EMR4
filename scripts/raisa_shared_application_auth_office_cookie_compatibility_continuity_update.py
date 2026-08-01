@@ -17,7 +17,7 @@ NODE_ID = "raisa-shared-application-auth-office-cookie-compatibility"
 PARENT_ID = "raisa-shared-application-auth-operational-hardening"
 PREDECESSOR_ID = "security-finding-governance"
 CREATED_AT = "2026-08-01T07:11:00Z"
-UPDATED_AT = "2026-08-01T07:55:53Z"
+UPDATED_AT = "2026-08-01T09:18:15Z"
 SOURCE_HEAD = "30d5e0116148529da3c41c728504c69d8833f544"
 
 PLAN = "docs/raisa-shared-application-auth-office-cookie-compatibility-plan.md"
@@ -68,6 +68,12 @@ ALERT17_READBACK = (
     "orchestration/continuity/"
     "shared-application-auth-office-cookie-compatibility/"
     "dependabot-alert-17-readback.json"
+)
+CODEQL_TRIAGE = "docs/security/pr70-codeql-alerts-543-544-triage-2026-08-01.md"
+CODEQL_READBACK = (
+    "orchestration/continuity/"
+    "shared-application-auth-office-cookie-compatibility/"
+    "codeql-pr70-alerts-readback.json"
 )
 HARNESS = "scripts/raisa_shared_application_auth_office_cookie_compatibility.py"
 TESTS = "tests/test_raisa_shared_application_auth_office_cookie_compatibility.py"
@@ -136,7 +142,42 @@ def update_graph() -> None:
         if alert_claim not in node["claim_scope"]:
             node["claim_scope"].append(alert_claim)
             changed = True
-        for finding in (ALERT17_TRIAGE, ALERT17_READBACK):
+        codeql_note = (
+            "PR 70 CodeQL alerts 543 and 544 were fixed by narrow source and "
+            "regression changes; fresh language analyses and the wrapper passed "
+            "without dismissal or native alert mutation."
+        )
+        if codeql_note not in node["authority"]["notes"]:
+            node["authority"]["notes"].append(codeql_note)
+            changed = True
+        codeql_decision = {
+            "id": "remediate-pr70-codeql-alerts-543-544-187",
+            "source": CODEQL_READBACK,
+            "status": "accepted",
+            "summary": (
+                "Accept exact CSP directive equality and removal of an ineffective "
+                "local-variable assignment after fresh CodeQL marks both PR "
+                "instances fixed."
+            ),
+        }
+        if not any(
+            item["id"] == codeql_decision["id"] for item in node["decisions"]
+        ):
+            node["decisions"].append(codeql_decision)
+            changed = True
+        codeql_claim = (
+            "Fresh PR 70 CodeQL readback marks warning 543 and high alert 544 "
+            "fixed at head a4262cbc without dismissal; all five PR checks pass."
+        )
+        if codeql_claim not in node["claim_scope"]:
+            node["claim_scope"].append(codeql_claim)
+            changed = True
+        for finding in (
+            ALERT17_TRIAGE,
+            ALERT17_READBACK,
+            CODEQL_TRIAGE,
+            CODEQL_READBACK,
+        ):
             if finding not in node["evidence"]["findings"]:
                 node["evidence"]["findings"].append(finding)
                 changed = True
@@ -215,6 +256,12 @@ def update_graph() -> None:
                         "alert 17; it is registered open/needs_review and neither "
                         "the native alert nor the dependency graph was mutated."
                     ),
+                    (
+                        "PR 70 CodeQL alerts 543 and 544 were fixed by narrow "
+                        "source and regression changes; fresh language analyses "
+                        "and the wrapper passed without dismissal or native "
+                        "alert mutation."
+                    ),
                 ],
             },
             "decisions": [
@@ -266,6 +313,16 @@ def update_graph() -> None:
                         "native-open state pending explicit disposition authority."
                     ),
                 },
+                {
+                    "id": "remediate-pr70-codeql-alerts-543-544-187",
+                    "source": CODEQL_READBACK,
+                    "status": "accepted",
+                    "summary": (
+                        "Accept exact CSP directive equality and removal of an "
+                        "ineffective local-variable assignment after fresh CodeQL "
+                        "marks both PR instances fixed."
+                    ),
+                },
             ],
             "claim_scope": [
                 (
@@ -291,6 +348,11 @@ def update_graph() -> None:
                     "Dependabot alert 17 reaches only an optional development-lint "
                     "project-service/default-project glob matcher absent from the "
                     "supported configuration; SF-0020 remains open/needs_review."
+                ),
+                (
+                    "Fresh PR 70 CodeQL readback marks warning 543 and high alert "
+                    "544 fixed at head a4262cbc without dismissal; all five PR "
+                    "checks pass."
                 ),
             ],
             "contract_evidence": [
@@ -321,6 +383,8 @@ def update_graph() -> None:
                     EVIDENCE,
                     ALERT17_TRIAGE,
                     ALERT17_READBACK,
+                    CODEQL_TRIAGE,
+                    CODEQL_READBACK,
                 ],
                 "closeouts": [CLOSEOUT],
                 "acceptances": [ACCEPTANCE],
@@ -368,6 +432,8 @@ def update_compass() -> None:
         CLOSEOUT,
         ALERT17_TRIAGE,
         ALERT17_READBACK,
+        CODEQL_TRIAGE,
+        CODEQL_READBACK,
     ]
     outcome = (
         "The accepted default-off authored-synthetic session-cookie lifecycle "
@@ -376,7 +442,9 @@ def update_compass() -> None:
         "then denied validation; no product, identity, document, provider, cloud "
         "or deployment path ran, and task listeners and registration are absent. "
         "Publication exposed development-only Dependabot alert 17, which is "
-        "registered open/needs_review without native or dependency mutation."
+        "registered open/needs_review without native or dependency mutation. "
+        "PR 70 warning 543 and high alert 544 were repaired and fresh CodeQL "
+        "marks both fixed without dismissal."
     )
     alert_unlock = (
         "Make an explicit user decision whether Dependabot alert 17 should remain "
@@ -430,7 +498,8 @@ def update_compass() -> None:
             "cookie compatibility proof in installed Word and Word Online. "
             "Continuity 187 / Compass 168 bind the result and the post-snapshot "
             "development-only Dependabot alert 17 remains registered open/"
-            "needs_review without mutation. Real identity, Microsoft federation, "
+            "needs_review without mutation. PR 70 CodeQL instances 543 and 544 "
+            "are fixed without dismissal. Real identity, Microsoft federation, "
             "product data, organisational deployment, production, release and "
             "protected integration remain closed."
         )
@@ -525,7 +594,8 @@ def update_compass() -> None:
         "compatibility proof in installed Word and Word Online. Continuity 187 / "
         "Compass 168 bind the result and the post-snapshot development-only "
         "Dependabot alert 17 remains registered open/needs_review without mutation. "
-        "Real identity, Microsoft federation, product data, organisational "
+        "PR 70 CodeQL instances 543 and 544 are fixed without dismissal. Real "
+        "identity, Microsoft federation, product data, organisational "
         "deployment, production, release and protected integration remain closed."
     )
     compass["map_revision"] = 168

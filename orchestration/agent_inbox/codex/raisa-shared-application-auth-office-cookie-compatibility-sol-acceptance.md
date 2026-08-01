@@ -29,6 +29,13 @@ not configured. The alert is registered as `SF-0020` with owner and SLA but
 remains native-open pending an explicit disposition decision; no alert or
 dependency mutation occurred.
 
+The first PR 70 CodeQL wrapper then reported high alert 544 in the test's
+URL-like CSP substring assertion and warning 543 for an ineffective local
+variable wipe. Exact CSP directive parsing/equality and deletion of the dead
+assignment are narrow complete repairs. Fresh JavaScript/TypeScript and Python
+analyses plus the CodeQL wrapper pass, and both native instances report fixed
+without dismissal or alert-state mutation.
+
 The task-owned harness, tunnel, listeners and Office developer registration
 are absent. The still-visible blank Word process has no registration or live
 taskpane and remains for ordinary user closure; no document was read, written

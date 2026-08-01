@@ -1,0 +1,46 @@
+{
+  "schema_version": "emr4.codeql_pr_alert_readback.v1",
+  "recorded_at": "2026-08-01T09:18:15Z",
+  "repository": "yurifrusin/EMR4",
+  "pull_request": 70,
+  "branch": "codex/shared-auth-office-cookie-compatibility",
+  "fixed_head": "a4262cbc5a251f3213b2453d6906eb83aba21c52",
+  "initial_failure": {
+    "check_run_id": 91350948572,
+    "conclusion": "failure",
+    "new_security_alert_count": 1,
+    "new_other_alert_count": 1,
+    "alerts": [543, 544]
+  },
+  "fresh_analysis": {
+    "workflow_run_id": 30693354428,
+    "wrapper_check_run_id": 91352017011,
+    "javascript_typescript": "success",
+    "python": "success",
+    "wrapper": "success"
+  },
+  "native_instances": [
+    {
+      "number": 543,
+      "rule": "js/useless-assignment-to-local",
+      "security_severity": null,
+      "state": "fixed",
+      "updated_at": "2026-08-01T09:15:36Z",
+      "dismissed_at": null
+    },
+    {
+      "number": 544,
+      "rule": "py/incomplete-url-substring-sanitization",
+      "security_severity": "high",
+      "state": "fixed",
+      "updated_at": "2026-08-01T09:17:35Z",
+      "dismissed_at": null
+    }
+  ],
+  "external_side_effects": {
+    "native_alert_mutations": 0,
+    "code_fixes": 2,
+    "dismissals": 0,
+    "protected_ref_movements": 0
+  }
+}
