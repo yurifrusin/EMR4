@@ -1,8 +1,8 @@
 {
   "schema_version": "emr4.security-finding-register.v1",
-  "register_revision": 2,
+  "register_revision": 3,
   "policy_effective_at": "2026-08-01T00:00:00+10:00",
-  "last_verified_at": "2026-08-01T04:43:23Z",
+  "last_verified_at": "2026-08-01T05:10:51Z",
   "owner": "@yurifrusin",
   "native_findings": [
     {
@@ -331,9 +331,10 @@
       "evidence": ["docs/security/pr69-codeql-alerts-500-507-triage-2026-08-01.md", "scripts/ariadne_comparative_one_use_broker.mjs"],
       "repository_disposition": "The secret file is the explicit broker credential source and is transmitted only as authentication to one of two exact HTTPS provider endpoints in a consumed bounded rehearsal.",
       "native_disposition_reason": "tolerable_risk",
-      "native_disposition_comment": "Accepted bounded provider-auth flow: the broker reads only /run/secrets/provider_key and sends it only to the exact lane HTTPS host, with one-call, timeout, response-size and no-fallback controls. Evidence: docs/security/pr69-codeql-alerts-500-507-triage-2026-08-01.md.",
-      "observed_native_state": "open",
+      "native_disposition_comment": "Accepted bounded provider-auth flow: /run/secrets/provider_key is sent only to the exact lane HTTPS host under one-call, timeout, byte-budget and no-fallback controls. Durable evidence: docs/security/pr69-codeql-alerts-500-507-triage-2026-08-01.md (SF-0013).",
+      "observed_native_state": "dismissed",
       "desired_native_state": "dismissed",
+      "native_disposition_at": "2026-08-01T05:03:40Z",
       "review_at": "2026-08-15T00:00:00+10:00",
       "risk_acceptance": {"accepted_by": "@yurifrusin", "rationale": "The file-to-network flow is the intended bounded credential handoff, not an uncontrolled file disclosure.", "expires_at": "2026-09-01T00:00:00+10:00", "reopen_condition": "The lane host, secret source, call-count gate, network isolation, no-fallback rule or provider authority changes."}
     },
@@ -355,9 +356,10 @@
       "evidence": ["docs/security/pr69-codeql-alerts-500-507-triage-2026-08-01.md", "scripts/ariadne_terra_gemini_comparative_rehearsal.py"],
       "repository_disposition": "The broker requires a file-backed Docker secret; it is mode 0600 in a TemporaryDirectory, mounted read-only only into the broker, excluded from the cell environment and removed at context exit.",
       "native_disposition_reason": "tolerable_risk",
-      "native_disposition_comment": "Accepted transient secret-file boundary: mode 0600, TemporaryDirectory cleanup, read-only broker-only mount, no cell/env exposure, and consumed one-call rehearsal authority. Evidence: docs/security/pr69-codeql-alerts-500-507-triage-2026-08-01.md.",
-      "observed_native_state": "open",
+      "native_disposition_comment": "Accepted transient secret-file boundary: mode 0600, TemporaryDirectory cleanup, read-only broker-only mount, no cell/env exposure, and consumed one-call authority. Durable evidence: docs/security/pr69-codeql-alerts-500-507-triage-2026-08-01.md (SF-0014).",
+      "observed_native_state": "dismissed",
       "desired_native_state": "dismissed",
+      "native_disposition_at": "2026-08-01T05:03:46Z",
       "review_at": "2026-08-15T00:00:00+10:00",
       "risk_acceptance": {"accepted_by": "@yurifrusin", "rationale": "A short-lived mode-0600 host file is required by the current read-only Docker secret mount and remains isolated from the work cell.", "expires_at": "2026-09-01T00:00:00+10:00", "reopen_condition": "The temp-directory cleanup, file mode, read-only mount, broker isolation or provider-call lifecycle changes, or a memory-only supported mount becomes available."}
     },
@@ -380,7 +382,7 @@
       "repository_disposition": "Replaced substring matching with exact membership in a closed provider-host allowlist and added attacker-suffix regression coverage.",
       "native_disposition_reason": "fixed",
       "native_disposition_comment": "Fixed by exact provider-host allowlist membership; attacker-controlled suffix variants are rejected by regression tests. Evidence: docs/security/pr69-codeql-alerts-500-507-triage-2026-08-01.md.",
-      "observed_native_state": "open",
+      "observed_native_state": "fixed",
       "desired_native_state": "fixed",
       "review_at": "2026-08-15T00:00:00+10:00",
       "risk_acceptance": {"accepted_by": "@yurifrusin", "rationale": "No residual risk is accepted; this row remains open only until native CodeQL readback observes the committed fix.", "expires_at": "2026-09-01T00:00:00+10:00", "reopen_condition": "CodeQL does not close the alert, host classification returns to substring/suffix matching, or the allowlist expands without review."}
@@ -404,7 +406,7 @@
       "repository_disposition": "Replaced substring matching with exact membership in a closed provider-host allowlist and added attacker-suffix regression coverage.",
       "native_disposition_reason": "fixed",
       "native_disposition_comment": "Fixed by exact provider-host allowlist membership; attacker-controlled suffix variants are rejected by regression tests. Evidence: docs/security/pr69-codeql-alerts-500-507-triage-2026-08-01.md.",
-      "observed_native_state": "open",
+      "observed_native_state": "fixed",
       "desired_native_state": "fixed",
       "review_at": "2026-08-15T00:00:00+10:00",
       "risk_acceptance": {"accepted_by": "@yurifrusin", "rationale": "No residual risk is accepted; this row remains open only until native CodeQL readback observes the committed fix.", "expires_at": "2026-09-01T00:00:00+10:00", "reopen_condition": "CodeQL does not close the alert, host classification returns to substring/suffix matching, or the allowlist expands without review."}
@@ -428,7 +430,7 @@
       "repository_disposition": "Replaced substring matching with exact membership in a closed provider-host allowlist and added attacker-suffix regression coverage.",
       "native_disposition_reason": "fixed",
       "native_disposition_comment": "Fixed by exact provider-host allowlist membership; attacker-controlled suffix variants are rejected by regression tests. Evidence: docs/security/pr69-codeql-alerts-500-507-triage-2026-08-01.md.",
-      "observed_native_state": "open",
+      "observed_native_state": "fixed",
       "desired_native_state": "fixed",
       "review_at": "2026-08-15T00:00:00+10:00",
       "risk_acceptance": {"accepted_by": "@yurifrusin", "rationale": "No residual risk is accepted; this row remains open only until native CodeQL readback observes the committed fix.", "expires_at": "2026-09-01T00:00:00+10:00", "reopen_condition": "CodeQL does not close the alert, host classification returns to substring/suffix matching, or the allowlist expands without review."}
@@ -452,7 +454,7 @@
       "repository_disposition": "Collapses uncontrolled whitespace once, then uses a compact expression with fixed single-space separators; 100,000-character regression coverage preserves exact/not-before semantics.",
       "native_disposition_reason": "fixed",
       "native_disposition_comment": "Fixed by one-pass whitespace normalization followed by a compact non-overlapping phrase matcher, with 100k-character and separator regressions. Evidence: docs/security/pr69-codeql-alerts-500-507-triage-2026-08-01.md.",
-      "observed_native_state": "open",
+      "observed_native_state": "fixed",
       "desired_native_state": "fixed",
       "review_at": "2026-08-15T00:00:00+10:00",
       "risk_acceptance": {"accepted_by": "@yurifrusin", "rationale": "No residual risk is accepted; this row remains open only until native CodeQL readback observes the committed fix.", "expires_at": "2026-09-01T00:00:00+10:00", "reopen_condition": "CodeQL does not close the alert, uncontrolled whitespace again reaches an overlapping repetition, or the regression contract changes."}
@@ -476,7 +478,7 @@
       "repository_disposition": "Collapses uncontrolled suffix whitespace once and applies a compact target-time grammar without unbounded whitespace quantifiers; 100,000-character and format regressions preserve behavior.",
       "native_disposition_reason": "fixed",
       "native_disposition_comment": "Fixed by one-pass suffix whitespace normalization and a bounded compact target-time grammar, with 100k-character and time-format regressions. Evidence: docs/security/pr69-codeql-alerts-500-507-triage-2026-08-01.md.",
-      "observed_native_state": "open",
+      "observed_native_state": "fixed",
       "desired_native_state": "fixed",
       "review_at": "2026-08-15T00:00:00+10:00",
       "risk_acceptance": {"accepted_by": "@yurifrusin", "rationale": "No residual risk is accepted; this row remains open only until native CodeQL readback observes the committed fix.", "expires_at": "2026-09-01T00:00:00+10:00", "reopen_condition": "CodeQL does not close the alert, uncontrolled whitespace again reaches an overlapping repetition, or the move-time regression contract changes."}

@@ -1,0 +1,183 @@
+{
+  "schema_version": "emr4.pr69-security-ci-repair.native-alert-reconciliation.v1",
+  "result": "pr69_security_ci_repair_pass",
+  "verified_at": "2026-08-01T05:10:51Z",
+  "data_class": "repository_metadata_and_authored_synthetic_only",
+  "pull_request": {
+    "number": 69,
+    "url": "https://github.com/yurifrusin/EMR4/pull/69",
+    "draft": true,
+    "mergeable": true,
+    "base_sha": "4974075b31035d599e081d68e3b85e04a897baa1",
+    "head_sha": "ea6e1dfc41b1fbd1ea7875140492172e46f0e6a3",
+    "task_branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+    "required_starting_head": "4ef4b75a89baafa1cd69636e7160308cbcbd6e14"
+  },
+  "durable_precondition": {
+    "triage_commit": "8625fcc13687edaeee617f0cd310b17259b094ee",
+    "triage_path": "docs/security/pr69-codeql-alerts-500-507-triage-2026-08-01.md",
+    "register_revision_before_mutation": 2,
+    "remote_fast_forward_verified": true
+  },
+  "initial_readback": {
+    "authoritative_state_field": "most_recent_instance.state",
+    "reason": "The top-level state was null for the seven PR-scoped open alerts at initial readback.",
+    "ref": "refs/pull/69/merge",
+    "merge_commit": "236b4bc42a042b4f4d49ad8ab5f5f73defc3a993",
+    "open_security_alert_ids": [500, 501, 503, 504, 505, 506, 507]
+  },
+  "manual_disposition_audit": {
+    "intended_alert_ids": [500, 501],
+    "intended_reason": "won't fix",
+    "other_alerts_manually_disposed": [],
+    "comment_correction": {
+      "required": true,
+      "detected_by_immediate_readback": true,
+      "interim_stored_comment": "System.Collections.Hashtable.comment",
+      "cause": "PowerShell property interpolation passed a literal hashtable representation to gh api.",
+      "repair": "Each alert was reopened and immediately re-dismissed with the already-durable exact rationale.",
+      "successful_native_mutation_requests": 6,
+      "failed_comment_update_requests_with_no_state_change": 1,
+      "final_readback_exact": true
+    }
+  },
+  "final_alerts": [
+    {
+      "number": 500,
+      "rule": "js/file-access-to-http",
+      "security_severity": "medium",
+      "path": "scripts/ariadne_comparative_one_use_broker.mjs",
+      "line": 165,
+      "state": "dismissed",
+      "state_source": "most_recent_instance.state",
+      "top_level_state": "dismissed",
+      "reason": "won't fix",
+      "dismissed_at": "2026-08-01T05:03:40Z",
+      "dismissed_by": "yurifrusin",
+      "comment": "Accepted bounded provider-auth flow: /run/secrets/provider_key is sent only to the exact lane HTTPS host under one-call, timeout, byte-budget and no-fallback controls. Durable evidence: docs/security/pr69-codeql-alerts-500-507-triage-2026-08-01.md (SF-0013).",
+      "ref": "refs/pull/69/merge",
+      "latest_merge_commit": "378742d3995b61a0d82dff92582f253ec6a9e25f"
+    },
+    {
+      "number": 501,
+      "rule": "py/clear-text-storage-sensitive-data",
+      "security_severity": "high",
+      "path": "scripts/ariadne_terra_gemini_comparative_rehearsal.py",
+      "line": 771,
+      "state": "dismissed",
+      "state_source": "most_recent_instance.state",
+      "top_level_state": "dismissed",
+      "reason": "won't fix",
+      "dismissed_at": "2026-08-01T05:03:46Z",
+      "dismissed_by": "yurifrusin",
+      "comment": "Accepted transient secret-file boundary: mode 0600, TemporaryDirectory cleanup, read-only broker-only mount, no cell/env exposure, and consumed one-call authority. Durable evidence: docs/security/pr69-codeql-alerts-500-507-triage-2026-08-01.md (SF-0014).",
+      "ref": "refs/pull/69/merge",
+      "latest_merge_commit": "378742d3995b61a0d82dff92582f253ec6a9e25f"
+    },
+    {
+      "number": 503,
+      "rule": "py/incomplete-url-substring-sanitization",
+      "security_severity": "high",
+      "path": "scripts/reception_one_bureau_post_admission_runtime_hardening.py",
+      "line": 346,
+      "state": "fixed",
+      "state_source": "most_recent_instance.state",
+      "top_level_state": null,
+      "fixed_at": null,
+      "manual_disposition": false
+    },
+    {
+      "number": 504,
+      "rule": "py/incomplete-url-substring-sanitization",
+      "security_severity": "high",
+      "path": "scripts/reception_one_bureau_post_admission_runtime_hardening.py",
+      "line": 347,
+      "state": "fixed",
+      "state_source": "most_recent_instance.state",
+      "top_level_state": null,
+      "fixed_at": null,
+      "manual_disposition": false
+    },
+    {
+      "number": 505,
+      "rule": "py/incomplete-url-substring-sanitization",
+      "security_severity": "high",
+      "path": "scripts/reception_one_bureau_post_admission_runtime_hardening.py",
+      "line": 348,
+      "state": "fixed",
+      "state_source": "most_recent_instance.state",
+      "top_level_state": null,
+      "fixed_at": null,
+      "manual_disposition": false
+    },
+    {
+      "number": 506,
+      "rule": "py/polynomial-redos",
+      "security_severity": "high",
+      "path": "app/services/bernie/semantic_extraction.py",
+      "line": 825,
+      "state": "fixed",
+      "state_source": "most_recent_instance.state",
+      "top_level_state": null,
+      "fixed_at": null,
+      "manual_disposition": false
+    },
+    {
+      "number": 507,
+      "rule": "py/polynomial-redos",
+      "security_severity": "high",
+      "path": "app/services/bernie/semantic_extraction.py",
+      "line": 1622,
+      "state": "fixed",
+      "state_source": "most_recent_instance.state",
+      "top_level_state": null,
+      "fixed_at": null,
+      "manual_disposition": false
+    }
+  ],
+  "final_query": {
+    "ref": "refs/pull/69/merge",
+    "open_security_severity_alert_count": 0,
+    "open_high_security_alert_count": 0,
+    "register_matches_final_state": true
+  },
+  "github_checks": {
+    "codeql": {
+      "check_run_id": 91329658570,
+      "url": "https://github.com/yurifrusin/EMR4/runs/91329658570",
+      "conclusion": "success",
+      "completed_at": "2026-08-01T05:08:38Z",
+      "security_severity_alerts_open": 0
+    },
+    "diary_smoke_review": {
+      "job_id": 91329538292,
+      "url": "https://github.com/yurifrusin/EMR4/actions/runs/30685227661/job/91329538292",
+      "conclusion": "success",
+      "completed_at": "2026-08-01T05:08:47Z"
+    },
+    "all_required_checks_successful": true
+  },
+  "local_verification": {
+    "semantic_extraction_tests": 172,
+    "diary_smoke_tests": 139,
+    "runtime_foundation_tests": 32,
+    "security_governance_and_pr69_tests": 11,
+    "provider_host_runtime_tests_excluding_preexisting_continuity_position_assertion": 7,
+    "ruff_touched_python_files": "passed",
+    "in_app_browser": {
+      "project_view_visible": true,
+      "retired_bernie_button_hidden": true,
+      "reception_one_dialog_visible": true,
+      "safe_clarification_observed": true,
+      "console_warning_or_error_count": 0
+    }
+  },
+  "closed_boundaries": {
+    "provider_calls": 0,
+    "credential_reads": 0,
+    "product_or_patient_data_accesses": 0,
+    "deployments": 0,
+    "protected_ref_movements": 0,
+    "manual_native_dispositions_outside_500_501": 0
+  }
+}

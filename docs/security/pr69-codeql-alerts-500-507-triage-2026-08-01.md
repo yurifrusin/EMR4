@@ -60,3 +60,14 @@ authoritative observed value recorded below.
 No native disposition is evidence of production suitability or authority for
 another provider run. Expiry and reopening conditions remain binding in
 `docs/security/security-finding-register.json`.
+
+## Final reconciliation
+
+At task head `ea6e1dfc41b1fbd1ea7875140492172e46f0e6a3`, GitHub CodeQL and
+Diary smoke review both passed. Alerts 503-507 read back as `fixed`; alerts 500
+and 501 read back as `dismissed` with reason `won't fix` and their exact durable
+comments; the PR merge ref query returned zero open security-severity alerts.
+The immediate mutation readback also detected and repaired one comment-
+interpolation defect through an audited reopen/re-dismiss cycle. Exact states,
+timestamps, checks, mutation counts, and closed boundaries are recorded in
+`orchestration/continuity/pr69-security-ci-repair/native-alert-reconciliation-evidence.json`.
