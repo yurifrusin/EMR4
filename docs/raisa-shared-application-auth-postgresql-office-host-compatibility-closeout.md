@@ -80,6 +80,24 @@ document identifier or unrelated browser state was inspected.
 - The deterministic local rehearsal and both real-host runs produce the same
   exact database/audit outcome.
 - JSON parsing and `git diff --check` pass.
+- PR 71's fresh Python and JavaScript/TypeScript CodeQL analyses, Advanced
+  Security wrapper, Python security and Node/Office security checks pass.
+
+## PR 71 CI repair
+
+The first PR 71 analysis raised CodeQL quality alert 545 because the PostgreSQL
+harness inherited from the concrete in-memory harness without calling its
+initializer. Calling that initializer would have created the wrong in-memory
+runtime and credentials; omitting it nevertheless left a fragile inheritance
+contract.
+
+Yuri approved the focused structural repair. The runtime-independent Office
+launch/result lifecycle now belongs to one shared base initializer, and both
+concrete harnesses call it before constructing only their own runtime-specific
+dependencies. Regression coverage proves the PostgreSQL instance has no
+in-memory store or audit-sink attributes. Fresh analysis at `d005a152` passes
+all five PR checks; alert 545 reports `fixed`, zero PR CodeQL alerts remain
+open, and no suppression, dismissal or other native mutation occurred.
 
 ## Cleanup and residue
 
@@ -96,7 +114,7 @@ and never staged, tested, committed, pushed or included in evidence.
 
 ## Protected integration boundary
 
-PR 70 was not merged. Repository inspection established that any `docs/**`
+PRs 70 and 71 were not merged. Repository inspection established that any `docs/**`
 change pushed to `master` automatically triggers the public GitHub Pages
 deployment workflow. Yuri authorised protected integration but did not broaden
 the still-closed deployment boundary. This task therefore started from PR 70's

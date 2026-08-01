@@ -1,0 +1,53 @@
+{
+  "schema_version": "emr4.codeql_pr_alert_readback.v1",
+  "repository": "yurifrusin/EMR4",
+  "pull_request": 71,
+  "alert": {
+    "native_id": 545,
+    "rule_id": "py/missing-call-to-init",
+    "native_severity": "error",
+    "security_severity": null,
+    "tags": [
+      "correctness",
+      "quality",
+      "reliability"
+    ],
+    "first_observed_at": "2026-08-01T11:29:25Z",
+    "original_instance": {
+      "ref": "refs/pull/71/merge",
+      "commit_sha": "974b20bfb4e2524b12f15726742430f11ea9ae20",
+      "path": "scripts/raisa_shared_application_auth_postgresql_office_host_compatibility.py",
+      "start_line": 336
+    }
+  },
+  "triage": {
+    "verdict": "confirmed_quality",
+    "affected_surface": "task-only PostgreSQL Office compatibility harness initialization",
+    "repair": "Extract the runtime-independent lifecycle initializer into OfficeCookieCompatibilityHarnessBase and make both concrete harnesses call super().__init__, while keeping their runtime-specific stores and audit sinks separate.",
+    "suppressed": false,
+    "dismissed": false
+  },
+  "fresh_analysis": {
+    "head_sha": "d005a1521bd2af7d3ca7a773477567afa3809b71",
+    "workflow_run_id": 30698479139,
+    "python_analysis": "success",
+    "javascript_typescript_analysis": "success",
+    "advanced_security_wrapper": "success",
+    "python_security": "success",
+    "node_and_office_security": "success"
+  },
+  "native_readback": {
+    "state": "fixed",
+    "fixed_at": "2026-08-01T11:53:22Z",
+    "updated_at": "2026-08-01T11:53:23Z",
+    "dismissed_at": null,
+    "dismissed_reason": null,
+    "open_pr_alert_count": 0
+  },
+  "native_mutations": {
+    "dismissals": 0,
+    "reopens": 0,
+    "manual_state_changes": 0
+  },
+  "passed": true
+}

@@ -27,6 +27,13 @@ and security-governance regression, and 29 Continuity/Compass/handover tests
 pass. Python compilation, Ruff, both Microsoft Office manifest validations,
 JSON parsing and diff checks pass.
 
+PR 71's initial CodeQL wrapper found correctness/quality alert 545 with no
+security-severity level. Yuri approved a structural repair: both concrete
+harnesses now call one runtime-independent lifecycle initializer, while the
+PostgreSQL harness constructs no in-memory authority. Fresh analysis at
+`d005a152` passes all five PR checks, the native alert reports `fixed`, zero PR
+CodeQL alerts remain open, and no dismissal or suppression occurred.
+
 ## Authority review
 
 No new REST route, OpenAPI behavior, GraphQL operation, migration, product

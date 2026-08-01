@@ -58,6 +58,16 @@ HARNESS_SCRIPT = (
 LIVE_EVIDENCE = CONTINUITY / "live-office-backend-postgres-evidence.json"
 RESIDUE_EVIDENCE = CONTINUITY / "final-residue-evidence.json"
 ACCEPTANCE_EVIDENCE = CONTINUITY / "acceptance-evidence.json"
+CODEQL_READBACK = CONTINUITY / "codeql-pr71-alert-545-readback.json"
+CODEQL_TRIAGE = (
+    ROOT / "docs" / "security" / "pr71-codeql-alert-545-triage-2026-08-01.md"
+)
+CODEQL_LEDGER = (
+    ROOT
+    / "docs"
+    / "security"
+    / "pr71-codeql-alert-545-validation-ledger.jsonl"
+)
 CLOSEOUT = (
     ROOT
     / "docs"
@@ -280,6 +290,9 @@ def test_live_evidence_residue_and_closeout_are_closed_and_exact():
     live = json.loads(LIVE_EVIDENCE.read_text(encoding="utf-8"))
     residue = json.loads(RESIDUE_EVIDENCE.read_text(encoding="utf-8"))
     acceptance = json.loads(ACCEPTANCE_EVIDENCE.read_text(encoding="utf-8"))
+    codeql = json.loads(CODEQL_READBACK.read_text(encoding="utf-8"))
+    codeql_ledger = json.loads(CODEQL_LEDGER.read_text(encoding="utf-8"))
+    codeql_triage = CODEQL_TRIAGE.read_text(encoding="utf-8")
     closeout = CLOSEOUT.read_text(encoding="utf-8")
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
@@ -321,7 +334,19 @@ def test_live_evidence_residue_and_closeout_are_closed_and_exact():
         "continuity_compass_and_handover_tests"
     ] == 29
     assert acceptance["deviations"][0]["disposition"] == "paused_not_failed"
-    assert "PR 70 was not merged" in closeout
+    assert acceptance["gates"]["pr71_codeql_alert_545_structural_repair"] == (
+        "passed_fixed_without_dismissal"
+    )
+    assert codeql["alert"]["native_id"] == 545
+    assert codeql["alert"]["security_severity"] is None
+    assert codeql["native_readback"]["state"] == "fixed"
+    assert codeql["native_readback"]["dismissed_at"] is None
+    assert codeql["native_readback"]["open_pr_alert_count"] == 0
+    assert set(codeql["native_mutations"].values()) == {0}
+    assert codeql_ledger["verdict"] == "confirmed_quality"
+    assert codeql_ledger["disposition"] == "fixed_by_fresh_codeql_analysis"
+    assert "without a security-severity level" in codeql_triage
+    assert "PRs 70 and 71 were not merged" in closeout
     assert "GitHub Pages" in closeout
     assert "docs/branding/raisa/" in closeout
     assert graph["graph_revision"] == 188

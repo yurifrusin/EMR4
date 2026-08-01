@@ -15,7 +15,8 @@
     "postgresql_login_to_capability_role": "passed",
     "forced_rls_practice_scope": "passed",
     "hash_only_and_raw_value_absence": "passed",
-    "database_role_process_listener_cleanup": "passed"
+    "database_role_process_listener_cleanup": "passed",
+    "pr71_codeql_alert_545_structural_repair": "passed_fixed_without_dismissal"
   },
   "exact_database_outcome": {
     "principal_generations": 2,
@@ -45,7 +46,9 @@
     "ruff": "passed",
     "python_compilation": "passed",
     "microsoft_office_manifest_validation": "passed_for_both_manifests",
-    "git_diff_check": "passed"
+    "git_diff_check": "passed",
+    "github_pr_71_checks": "five_passed",
+    "codeql_alert_545_native_state": "fixed_no_dismissal"
   },
   "deviations": [
     {
