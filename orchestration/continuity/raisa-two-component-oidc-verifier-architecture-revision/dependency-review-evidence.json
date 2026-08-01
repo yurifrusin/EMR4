@@ -1,0 +1,61 @@
+{
+  "schema_version": "emr4.oidc-verifier-dependency-review.v1",
+  "recorded_at": "2026-08-02T00:00:00Z",
+  "result": "pass",
+  "python_runtime": "3.14",
+  "selected": [
+    {
+      "name": "msal",
+      "version": "1.37.0",
+      "role": "microsoft_confidential_client_protocol",
+      "license": "MIT",
+      "requires_python": ">=3.9",
+      "wheel_sha256": "dd17e95a7c71bce75e8108113438ba7c4a086b3bcad4f57a8c09b7af3d753c2d",
+      "sdist_sha256": "1b1672a33ee467c1d70b341bb16cafd51bb3c817147a95b93263794b03971bec"
+    },
+    {
+      "name": "Authlib",
+      "version": "1.7.2",
+      "role": "oidc_id_token_verifier_integration",
+      "license": "BSD-3-Clause",
+      "requires_python": ">=3.10",
+      "wheel_sha256": "3e1faedc9d87e7d56a164eca3ccb6ace0d61b94abe83e92242f8dc8bba9b4a9f",
+      "sdist_sha256": "2cea25fefcd4e7173bdf1372c0afc265c8034b23a8cd5dcb6a9164b826c64231"
+    },
+    {
+      "name": "joserfc",
+      "version": "1.7.4",
+      "role": "directly_pinned_jws_jwk_implementation",
+      "license": "BSD-3-Clause",
+      "requires_python": ">=3.10",
+      "wheel_sha256": "32d46c2cd5e3203c13e87a6c61333cab310b1ba80cd54b4c4f386a848a122463",
+      "sdist_sha256": "b3bc561672ae541b17a9237053b48a03dacddd92d68047b3ecdfb4b5714a88ed"
+    }
+  ],
+  "security_floors": [
+    {"package": "Authlib", "advisory": "CVE-2026-41479", "selected_version_status": "fixed"},
+    {"package": "joserfc", "advisory": "CVE-2025-65015", "selected_version_status": "fixed"}
+  ],
+  "verification": {
+    "pip_check": "no_broken_requirements",
+    "pip_audit_command": "pip-audit -r requirements.txt --desc --progress-spinner off",
+    "pip_audit_result": "no_known_vulnerabilities",
+    "provider_calls": 0
+  },
+  "rejected_candidates": [
+    {"name": "verify-oidc-identity", "version": "0.4.42", "reason": "no_owned_unknown_kid_refresh"},
+    {"name": "auth-jwks", "version": "0.4.0", "reason": "requires_alg_in_each_jwk_but_entra_keys_can_omit_alg"},
+    {"name": "idpyoidc", "version": "5.0.0", "reason": "broad_beta_stack_overlaps_protocol_owner"},
+    {"name": "custom_pyjwt_or_joserfc", "reason": "would_make_emr4_own_discovery_cache_and_rollover"}
+  ],
+  "side_effects": {
+    "requirement_pins_added": 3,
+    "application_imports_added": 0,
+    "mounted_routes": 0,
+    "database_changes": 0,
+    "real_identities": 0,
+    "sessions_created": 0,
+    "product_reads": 0,
+    "deployments": 0
+  }
+}

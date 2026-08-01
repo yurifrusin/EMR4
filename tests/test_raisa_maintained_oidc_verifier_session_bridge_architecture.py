@@ -60,7 +60,7 @@ def test_policy_and_decision_schemas_validate() -> None:
     jsonschema.Draft202012Validator(policy_schema).validate(_json(POLICY_PATH))
 
 
-def test_policy_selects_msal_without_adding_a_dependency() -> None:
+def test_parent_policy_records_its_pre_dependency_architecture_state() -> None:
     policy = _json(POLICY_PATH)
     library = policy["library_boundary"]
     assert library == {
@@ -74,8 +74,10 @@ def test_policy_selects_msal_without_adding_a_dependency() -> None:
         "custom_jwt_verifier": False,
         "dependency_added": False,
     }
-    requirements = (ROOT / "requirements.txt").read_text(encoding="utf-8").lower()
-    assert "msal==" not in requirements
+    requirements = (ROOT / "requirements.txt").read_text(encoding="utf-8").splitlines()
+    assert "msal==1.37.0" in requirements
+    assert "Authlib==1.7.2" in requirements
+    assert "joserfc==1.7.4" in requirements
 
 
 def test_protocol_is_tenant_specific_minimal_and_fail_closed() -> None:

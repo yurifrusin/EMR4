@@ -1,12 +1,13 @@
 openapi: 3.1.0
 info:
   title: EMR4 application identity federation session bridge
-  version: 0.1.0-architecture
+  version: 0.2.0-architecture-revision
   description: >-
     Architecture-only, non-mounted REST protocol contract for tenant-specific
-    Microsoft Entra authentication, one-use admission-grant handoff and EMR4
-    application-session creation. It grants no route, provider, identity,
-    database, product, deployment, production or release authority.
+    Microsoft Entra authentication, separately maintained ID-token verification,
+    one-use admission-grant handoff and EMR4 application-session creation. It
+    grants no route, provider, identity, database, product, deployment,
+    production or release authority.
 servers: []
 tags:
   - name: Application identity federation
@@ -18,7 +19,7 @@ x-emr4-authority:
   product_reads: 0
   session_cookies_issued: 0
   database_objects_added: 0
-  dependencies_added: 0
+  dependencies_added: 3
   deployments: 0
   closed:
     - live_microsoft_wiring
@@ -34,16 +35,32 @@ x-emr4-api-spine:
   redeem: one_use_rest_session_command
   binding_status: future_redacted_graphql_read_model_only
   binding_lifecycle: future_dual_authorised_rest_commands_closed
-x-emr4-maintained-verifier:
-  candidate: msal_python
-  reviewed_baseline: 1.37.0
-  future_api:
+x-emr4-federation-components:
+  protocol_client:
+    package: msal
+    version: 1.37.0
+    future_api:
     - ConfidentialClientApplication.initiate_auth_code_flow
     - ConfidentialClientApplication.acquire_token_by_auth_code_flow
-  tenant_authority: tenant_specific_v2_only
-  scopes: [openid, profile]
-  pkce: S256
-  alternate_or_custom_jwt_verifier: forbidden
+    tenant_authority: tenant_specific_v2_only
+    requested_scopes: []
+    effective_scopes: [openid, profile]
+    excluded_scopes: [offline_access]
+    pkce: S256
+    response_mode: form_post
+    identity_admission_from_msal_claims: forbidden
+  id_token_verifier:
+    package: Authlib
+    version: 1.7.2
+    jose_package: joserfc
+    jose_version: 1.7.4
+    signing_algorithm: RS256
+    discovery: tenant_specific_v2_only
+    unknown_kid_refresh_attempts: 1
+    token_max_bytes: 16384
+    claim_leeway_seconds: 60
+  custom_jwt_or_jwks_verifier: forbidden
+  fallback_verifier: forbidden
 x-emr4-session-cookie-contract:
   session_cookie: __Host-emr4-application-session
   csrf_cookie: __Host-emr4-application-csrf
@@ -88,28 +105,23 @@ paths:
         '429': {$ref: '#/components/responses/RateLimited'}
         '503': {$ref: '#/components/responses/AuthenticationUnavailable'}
   /api/v1/application-auth/federation/microsoft/callback:
-    get:
+    post:
       tags: [Application identity federation]
       operationId: completeMicrosoftFederation
       summary: Consume one provider callback and emit no session cookie.
       description: >-
-        Future exact redirect URI. Callback parameters are passed once with the
-        stored MSAL flow record. A no-store bridge page sends a 60-second opaque
-        admission grant to the exact original surface origin; no credential is
-        placed in a URL or browser storage.
-      parameters:
-        - name: code
-          in: query
-          required: false
-          schema: {type: string, minLength: 1, maxLength: 8192}
-        - name: state
-          in: query
-          required: true
-          schema: {type: string, minLength: 43, maxLength: 256}
-        - name: error
-          in: query
-          required: false
-          schema: {type: string, maxLength: 128}
+        Future exact redirect URI. The provider posts callback parameters using
+        response_mode=form_post. The server passes them once with the stored
+        MSAL flow record, then passes only the transient raw ID token to the
+        independent Authlib verifier. A no-store bridge page sends a 60-second
+        opaque admission grant to the exact original surface origin; no
+        credential is placed in a URL, browser storage, log or response body.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MicrosoftCallbackForm'
       responses:
         '200':
           description: No-store exact-origin bridge page; never a product page.
@@ -217,6 +229,15 @@ components:
         status: {type: string, const: authorization_required}
         authorization_uri: {type: string, format: uri, pattern: '^https://login\\.microsoftonline\\.com/'}
         attempt_expires_at: {type: string, format: date-time}
+    MicrosoftCallbackForm:
+      type: object
+      additionalProperties: false
+      required: [state]
+      properties:
+        code: {type: string, minLength: 1, maxLength: 8192}
+        state: {type: string, minLength: 43, maxLength: 256}
+        error: {type: string, maxLength: 128}
+        error_description: {type: string, maxLength: 1024}
     RedeemRequest:
       type: object
       additionalProperties: false

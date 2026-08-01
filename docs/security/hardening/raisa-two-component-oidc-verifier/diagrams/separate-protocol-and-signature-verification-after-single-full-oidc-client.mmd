@@ -1,0 +1,5 @@
+flowchart LR
+  B["Browser form callback"] --> O["One replacement OIDC client"]
+  D["Tenant discovery + JWKS"] --> O
+  O --> P["Verified external principal"]
+  M["MSAL path"] -. replaced .-> O

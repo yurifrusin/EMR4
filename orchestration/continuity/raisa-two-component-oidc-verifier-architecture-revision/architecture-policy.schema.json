@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/two-component-oidc-policy-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "authority", "protocol_client", "id_token_verifier", "principal_postconditions", "closed"],
+  "properties": {
+    "schema_version": {"const": "emr4.two-component-oidc-policy.v1"},
+    "authority": {"const": "architecture_and_dependency_admission_only"},
+    "protocol_client": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["package", "version", "authority", "requested_scopes", "effective_scopes", "excluded_scopes", "pkce", "response_mode", "claims_authoritative"],
+      "properties": {
+        "package": {"const": "msal"},
+        "version": {"const": "1.37.0"},
+        "authority": {"const": "tenant_specific_v2"},
+        "requested_scopes": {"type": "array", "maxItems": 0},
+        "effective_scopes": {"const": ["openid", "profile"]},
+        "excluded_scopes": {"const": ["offline_access"]},
+        "pkce": {"const": "S256"},
+        "response_mode": {"const": "form_post"},
+        "claims_authoritative": {"const": false}
+      }
+    },
+    "id_token_verifier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["package", "version", "jose_package", "jose_version", "algorithms", "unknown_kid_refresh_attempts", "max_token_bytes", "leeway_seconds", "max_client_lifetime_seconds", "fallback"],
+      "properties": {
+        "package": {"const": "Authlib"},
+        "version": {"const": "1.7.2"},
+        "jose_package": {"const": "joserfc"},
+        "jose_version": {"const": "1.7.4"},
+        "algorithms": {"const": ["RS256"]},
+        "unknown_kid_refresh_attempts": {"const": 1},
+        "max_token_bytes": {"const": 16384},
+        "leeway_seconds": {"const": 60},
+        "max_client_lifetime_seconds": {"const": 86400},
+        "fallback": {"const": "forbidden"}
+      }
+    },
+    "principal_postconditions": {
+      "const": ["exact_tid", "nonempty_oid", "nonempty_sub", "verified_source_only"]
+    },
+    "closed": {
+      "type": "array",
+      "contains": {"const": "runtime_adapter"},
+      "minItems": 10,
+      "uniqueItems": true,
+      "items": {"type": "string"}
+    }
+  }
+}

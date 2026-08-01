@@ -1,0 +1,78 @@
+{
+  "schema_version": "emr4.security-hardening.v1",
+  "collection": {
+    "id": "raisa-two-component-oidc-verifier-2026-08-02",
+    "target_revision": "805b32ef616daf3c904b8de698856ec211b17bec",
+    "artifact_count": 10,
+    "collection_sha256": "be59a6c7d6b6d9c5a60cda59311b4f524913bddb104ae8e72225c524e636960b",
+    "source_drift": "none_observed",
+    "provider_calls": 0
+  },
+  "sourceEvidence": {
+    "collectionId": "raisa-two-component-oidc-verifier-2026-08-02",
+    "targetRevision": "805b32ef616daf3c904b8de698856ec211b17bec",
+    "artifactCount": 10,
+    "collectionSha256": "be59a6c7d6b6d9c5a60cda59311b4f524913bddb104ae8e72225c524e636960b",
+    "sourceDrift": "none_observed",
+    "providerCalls": 0
+  },
+  "opportunities": [
+    {
+      "id": "separate-protocol-and-signature-verification",
+      "title": "Separate Microsoft flow ownership from ID-token identity admission",
+      "evidence": ["E004", "E005", "E008", "E009", "E010"],
+      "problem": "MSAL 1.37.0 decodes ID-token claims but does not independently verify the JWS signature, contradicting the parent ownership contract.",
+      "options": [
+        {
+          "id": "tls-only-msal",
+          "security": "Missing independent signature and rollover admission property.",
+          "performance": "Lowest local CPU and metadata traffic.",
+          "memory": "No second metadata or key cache.",
+          "reliability": "Couples identity evidence to successful token-endpoint transport.",
+          "operability": "Few components, but an unsafe and misleading ownership claim.",
+          "migration": "No migration effort.",
+          "disposition": "rejected"
+        },
+        {
+          "id": "msal-authlib-verifier",
+          "security": "Independent RS256 signature and OIDC claim verification with no fallback.",
+          "performance": "One local verification; metadata and keys are cached and refreshed only as bounded.",
+          "memory": "One bounded Authlib metadata and JWK cache.",
+          "reliability": "One library-owned refresh on unknown kid, then fail closed.",
+          "operability": "Two maintained components with an explicit health and error seam.",
+          "migration": "Small future adapter change while preserving MSAL flow ownership.",
+          "disposition": "selected"
+        },
+        {
+          "id": "single-full-oidc-client",
+          "security": "One coherent OIDC component could own both protocol and verification.",
+          "performance": "Comparable network and cryptographic cost.",
+          "memory": "One component cache.",
+          "reliability": "Mature client behavior, but entirely new flow integration.",
+          "operability": "Simpler component count after migration.",
+          "migration": "Replaces the selected MSAL path and reopens all flow evidence.",
+          "disposition": "deferred"
+        },
+        {
+          "id": "custom-pyjwt-jwks",
+          "security": "Requires bespoke discovery, algorithm, cache and rollover correctness.",
+          "performance": "Could be lean but needs careful concurrency and refresh controls.",
+          "memory": "Custom cache size and lifetime must be implemented.",
+          "reliability": "Highest rollover, outage and stampede edge-case burden.",
+          "operability": "EMR4 permanently owns security-sensitive verifier machinery.",
+          "migration": "Moderate initial code and high ongoing maintenance.",
+          "disposition": "rejected"
+        }
+      ],
+      "recommendation": "msal-authlib-verifier",
+      "evidence_coverage": {
+        "covered": ["protocol ownership", "signature verification", "OIDC claims", "unknown-kid refresh", "packages", "licences", "hashes", "advisory floors"],
+        "not_covered": ["live tenant behavior", "real identity", "production availability", "Office cookies"]
+      },
+      "evidenceCoverage": {
+        "covered": ["protocol ownership", "signature verification", "OIDC claims", "unknown-kid refresh", "packages", "licences", "hashes", "advisory floors"],
+        "notCovered": ["live tenant behavior", "real identity", "production availability", "Office cookies"]
+      }
+    }
+  ]
+}
