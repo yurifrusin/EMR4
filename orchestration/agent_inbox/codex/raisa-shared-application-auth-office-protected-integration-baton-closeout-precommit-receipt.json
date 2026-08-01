@@ -1,0 +1,40 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit_the_no_docs_office_protected_integration_baton_closeout_on_the_dedicated_task_branch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "The accepted Office compatibility stack is protected-integrated through PR 71 at master 1121c35e; PR 70 is closed as subsumed.",
+    "current_authority_allocation": "Yuri authorized exactly one Pages rebuild and protected integration; GPT Sol owns this no-docs baton closeout and the final fast-forward alignment.",
+    "active_plan_and_acceptance": [
+      "AGENTS.md",
+      "orchestration/agent_inbox/codex/raisa-shared-application-auth-postgresql-office-host-compatibility-protected-integration-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-shared-application-auth-postgresql-office-host-compatibility-protected-integration-runtime-state.json"
+    ],
+    "protected_evidence_boundaries": "The closeout changes AGENTS.md and orchestration receipts only. It contains no docs path and authorizes no second Pages rebuild, broader deployment, release, real identity, Microsoft federation or product data.",
+    "git_refs_and_worktree": {
+      "HEAD": "a4d7a1f1886f5d4dff892ebc694c1fce3bd27461",
+      "branch": "codex/shared-auth-office-protected-integration-closeout",
+      "master": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "handoff/current": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "origin/master": "1121c35eacaab2bb80dac796c19f3b7f2af754dc",
+      "origin/handoff/current": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "integration_receipt_cherry_pick": "a4d7a1f1886f5d4dff892ebc694c1fce3bd27461",
+      "staged_files_before_receipt": 0,
+      "concurrent_branding_assets_present_untracked_untouched_and_excluded": true,
+      "protected_handoff_alignment_pending": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}
