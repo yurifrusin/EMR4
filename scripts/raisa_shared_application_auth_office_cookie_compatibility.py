@@ -15,7 +15,7 @@ import sys
 import threading
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Literal
+from typing import Callable, Literal
 
 import uvicorn
 from fastapi import FastAPI, Header, HTTPException, Query, Request, status
@@ -191,10 +191,16 @@ class _SurfaceBoundApplicationAuthTransport(ApplicationAuthTransport):
         )
 
 
-class OfficeCookieCompatibilityHarness:
-    """Owns one process generation of taskpane launch and result state."""
+class OfficeCookieCompatibilityHarnessBase:
+    """Own the runtime-independent Office taskpane and result lifecycle."""
 
-    def __init__(self, *, origin: str = DEVELOPMENT_ORIGIN) -> None:
+    def __init__(
+        self,
+        *,
+        origin: str = DEVELOPMENT_ORIGIN,
+        principal_namespace: Literal["office", "office-postgres"],
+        launch_value_sink: Callable[[str], None] | None = None,
+    ) -> None:
         if origin != DEVELOPMENT_ORIGIN:
             raise ValueError("the Office compatibility origin is frozen")
         self.origin = origin
@@ -207,12 +213,16 @@ class OfficeCookieCompatibilityHarness:
         for surface in SURFACES:
             bootstrap = secrets.token_urlsafe(32)
             nonce = secrets.token_urlsafe(32)
+            if launch_value_sink is not None:
+                launch_value_sink(bootstrap)
+                launch_value_sink(nonce)
+            surface_label = surface.value.replace("_", "-")
             credentials[bootstrap] = SyntheticPrincipal(
-                user_id=f"synthetic-user-office-{surface.value.replace('_', '-')}",
-                practice_id=f"synthetic-practice-office-{surface.value.replace('_', '-')}",
+                user_id=f"synthetic-user-{principal_namespace}-{surface_label}",
+                practice_id=f"synthetic-practice-{principal_namespace}-{surface_label}",
                 current_backend_role="GP",
                 practitioner_id=(
-                    f"synthetic-practitioner-office-{surface.value.replace('_', '-')}"
+                    f"synthetic-practitioner-{principal_namespace}-{surface_label}"
                 ),
             )
             bootstrap_surfaces[bootstrap] = surface
@@ -222,38 +232,24 @@ class OfficeCookieCompatibilityHarness:
                 evidence_nonce_hash=self._hash(nonce),
             )
 
-        origins = {surface: origin for surface in Surface}
-        self.store = InMemoryAuthoredSyntheticStore(
-            data_class=AUTHORED_SYNTHETIC_DATA_CLASS
-        )
-        self.auth_audit = InMemoryAuthAuditSink(
-            data_class=AUTHORED_SYNTHETIC_DATA_CLASS
-        )
-        runtime = ApplicationAuthTransportRuntime(
-            store=self.store,
-            audit_sink=self.auth_audit,
-            surface_origins=origins,
-        )
-        self.bootstrap_registry = OneUseSyntheticBootstrapRegistry(credentials)
-        self.transport = _SurfaceBoundApplicationAuthTransport(
-            runtime=runtime,  # type: ignore[arg-type]
-            bootstrap_registry=self.bootstrap_registry,
-            surface_origins=origins,
-            bootstrap_surfaces=bootstrap_surfaces,
-        )
-        self.denial_audit = _InMemoryDenialSink()
-        self.guard = ApplicationAuthOperationalHardening(
-            proxy_policy=ProxyTrustPolicy.from_cidrs(
-                ["127.0.0.0/8", "::1/128"]
-            ),
-            rate_limiter=BoundedFixedWindowRateLimiter(
-                requests_per_window=64,
-                window_seconds=300,
-                max_keys=64,
-            ),
-            denial_audit_sink=self.denial_audit,
-            client_hmac_key=secrets.token_bytes(32),
-        )
+        self._initial_credentials = credentials
+        self._initial_bootstrap_surfaces = bootstrap_surfaces
+        self._surface_origins = {surface: origin for surface in Surface}
+
+    def _take_initial_auth_material(
+        self,
+    ) -> tuple[
+        dict[str, SyntheticPrincipal],
+        dict[str, Surface],
+        dict[Surface, str],
+    ]:
+        credentials = self._initial_credentials
+        bootstrap_surfaces = self._initial_bootstrap_surfaces
+        origins = self._surface_origins
+        del self._initial_credentials
+        del self._initial_bootstrap_surfaces
+        del self._surface_origins
+        return credentials, bootstrap_surfaces, origins
 
     @staticmethod
     def _hash(value: str) -> str:
@@ -317,37 +313,7 @@ class OfficeCookieCompatibilityHarness:
             return result
 
     def evidence(self) -> dict[str, object]:
-        with self._lock:
-            results = {
-                surface.value: (
-                    self._results[surface].model_dump(mode="json")
-                    if surface in self._results
-                    else {"terminal_status": "pending"}
-                )
-                for surface in SURFACES
-            }
-        registry = self.bootstrap_registry.state_counts()
-        return {
-            "schema_version": "emr4.office_cookie_compatibility_evidence.v1",
-            "data_class": AUTHORED_SYNTHETIC_DATA_CLASS,
-            "runtime_class": "provider_free_process_local_in_memory",
-            "development_origin": self.origin,
-            "results": results,
-            "bootstrap_registry_counts": registry,
-            "auth_audit_event_count": len(self.auth_audit.snapshot()),
-            "denial_audit_event_count": self.denial_audit.count(),
-            "side_effects": {
-                "provider_calls": 0,
-                "external_identity_calls": 0,
-                "product_or_database_reads": 0,
-                "document_reads": 0,
-                "document_writes": 0,
-                "product_commands": 0,
-                "cloud_or_iam_mutations": 0,
-                "deployments": 0,
-                "production_changes": 0,
-            },
-        }
+        raise NotImplementedError
 
     def _taskpane_html(
         self,
@@ -388,8 +354,79 @@ class OfficeCookieCompatibilityHarness:
 </html>"""
 
 
+class OfficeCookieCompatibilityHarness(OfficeCookieCompatibilityHarnessBase):
+    """Own one process-local in-memory Office compatibility generation."""
+
+    def __init__(self, *, origin: str = DEVELOPMENT_ORIGIN) -> None:
+        super().__init__(origin=origin, principal_namespace="office")
+        credentials, bootstrap_surfaces, origins = self._take_initial_auth_material()
+        self.store = InMemoryAuthoredSyntheticStore(
+            data_class=AUTHORED_SYNTHETIC_DATA_CLASS
+        )
+        self.auth_audit = InMemoryAuthAuditSink(
+            data_class=AUTHORED_SYNTHETIC_DATA_CLASS
+        )
+        runtime = ApplicationAuthTransportRuntime(
+            store=self.store,
+            audit_sink=self.auth_audit,
+            surface_origins=origins,
+        )
+        self.bootstrap_registry = OneUseSyntheticBootstrapRegistry(credentials)
+        self.transport = _SurfaceBoundApplicationAuthTransport(
+            runtime=runtime,  # type: ignore[arg-type]
+            bootstrap_registry=self.bootstrap_registry,
+            surface_origins=origins,
+            bootstrap_surfaces=bootstrap_surfaces,
+        )
+        self.denial_audit = _InMemoryDenialSink()
+        self.guard = ApplicationAuthOperationalHardening(
+            proxy_policy=ProxyTrustPolicy.from_cidrs(
+                ["127.0.0.0/8", "::1/128"]
+            ),
+            rate_limiter=BoundedFixedWindowRateLimiter(
+                requests_per_window=64,
+                window_seconds=300,
+                max_keys=64,
+            ),
+            denial_audit_sink=self.denial_audit,
+            client_hmac_key=secrets.token_bytes(32),
+        )
+
+    def evidence(self) -> dict[str, object]:
+        with self._lock:
+            results = {
+                surface.value: (
+                    self._results[surface].model_dump(mode="json")
+                    if surface in self._results
+                    else {"terminal_status": "pending"}
+                )
+                for surface in SURFACES
+            }
+        registry = self.bootstrap_registry.state_counts()
+        return {
+            "schema_version": "emr4.office_cookie_compatibility_evidence.v1",
+            "data_class": AUTHORED_SYNTHETIC_DATA_CLASS,
+            "runtime_class": "provider_free_process_local_in_memory",
+            "development_origin": self.origin,
+            "results": results,
+            "bootstrap_registry_counts": registry,
+            "auth_audit_event_count": len(self.auth_audit.snapshot()),
+            "denial_audit_event_count": self.denial_audit.count(),
+            "side_effects": {
+                "provider_calls": 0,
+                "external_identity_calls": 0,
+                "product_or_database_reads": 0,
+                "document_reads": 0,
+                "document_writes": 0,
+                "product_commands": 0,
+                "cloud_or_iam_mutations": 0,
+                "deployments": 0,
+                "production_changes": 0,
+            },
+        }
+
 def build_app(
-    harness: OfficeCookieCompatibilityHarness | None = None,
+    harness: OfficeCookieCompatibilityHarnessBase | None = None,
 ) -> FastAPI:
     selected = harness or OfficeCookieCompatibilityHarness()
     app = FastAPI(
@@ -522,6 +559,7 @@ __all__ = [
     "CompatibilityResultSubmission",
     "DEVELOPMENT_ORIGIN",
     "OfficeCookieCompatibilityHarness",
+    "OfficeCookieCompatibilityHarnessBase",
     "SanitizedCompatibilityResult",
     "build_app",
 ]

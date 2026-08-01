@@ -1,0 +1,42 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit_the_user_approved_codeql_545_structural_ci_repair_on_pr71_task_branch_only",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "PR 71 carries raisa_shared_application_auth_postgresql_office_host_compatibility_pass at Continuity 188 and Compass 169.",
+    "current_authority_allocation": "Yuri explicitly approved the focused CodeQL 545 CI repair; GPT Sol owns the task-branch commit and no worker, subagent, provider or external reviewer ran.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-shared-application-auth-postgresql-office-host-compatibility-plan.md",
+      "docs/security/raisa-shared-application-auth-postgresql-office-host-compatibility-threat-model-delta.md",
+      "docs/raisa-shared-application-auth-postgresql-office-host-compatibility-closeout.md",
+      "orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/acceptance-evidence.json",
+      "orchestration/agent_inbox/codex/raisa-shared-application-auth-postgresql-office-host-compatibility-sol-acceptance.md"
+    ],
+    "protected_evidence_boundaries": "The repair is limited to runtime-independent harness lifecycle initialization and its regression. Protected refs, routes, schema, database authority, real identity, Microsoft federation, product/document/patient/clinical data, deployment, production and release remain closed.",
+    "git_refs_and_worktree": {
+      "HEAD": "bb0c2f0c9cc64ee9e0f1cb85553c827acfa0590b",
+      "branch": "codex/shared-auth-postgresql-office-host-compatibility",
+      "master": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "handoff/current": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "origin/master": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "origin/handoff/current": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "origin_task_branch": "bb0c2f0c9cc64ee9e0f1cb85553c827acfa0590b",
+      "staged_files_before_receipt": 0,
+      "concurrent_branding_assets_present_untracked_untouched_and_excluded": true,
+      "protected_refs_unchanged": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}
