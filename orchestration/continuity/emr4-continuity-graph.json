@@ -59,7 +59,7 @@
       "voice"
     ]
   },
-  "graph_revision": 188,
+  "graph_revision": 191,
   "harvests": [],
   "nodes": [
     {
@@ -9933,9 +9933,283 @@
         "Protected integration would trigger public GitHub Pages deployment and requires Yuri's explicit deployment decision.",
         "Dependabot alert 17 remains native-open/needs_review pending its separate explicit disposition decision."
       ]
+    },
+    {
+      "id": "raisa-real-identity-microsoft-federation-boundary",
+      "title": "Raisa Real Identity and Microsoft Federation Boundary",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-01T06:00:00Z",
+      "updated_at": "2026-08-01T06:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/raisa-real-identity-microsoft-federation",
+        "source_head": "ed45c098b9e11fcd1000afb58d6d66c5c369a7e4",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-shared-application-auth-postgresql-office-host-compatibility",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-real-identity-microsoft-federation-boundary-plan.md",
+            "scope": "Architecture-only tenant-specific Microsoft Entra boundary, typed policy and deterministic authored-synthetic acceptance."
+          }
+        ],
+        "notes": [
+          "Yuri explicitly authorised the architecture-only real-identity/Microsoft-federation boundary and its next two logical descendants.",
+          "Live Microsoft/provider calls, public routes, real identity data, application sessions and product reads remained closed.",
+          "The user-owned docs/branding/raisa directory remained untracked, unstaged and excluded."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-tenant-specific-prebound-federation-189",
+          "source": "orchestration/continuity/raisa-real-identity-microsoft-federation-boundary/federation-policy.json",
+          "status": "accepted",
+          "summary": "Accept one organisational tenant, code plus OIDC/S256 PKCE, exact claims and immutable tid-plus-oid prebinding."
+        },
+        {
+          "id": "keep-authentication-separate-from-authority-189",
+          "source": "docs/raisa-real-identity-microsoft-federation-boundary-design.md",
+          "status": "accepted",
+          "summary": "Keep Microsoft authentication separate from EMR4 identity, role, clinician, session and product authorization truth."
+        },
+        {
+          "id": "keep-live-federation-and-product-closed-189",
+          "source": "docs/raisa-real-identity-microsoft-federation-boundary-closeout.md",
+          "status": "accepted",
+          "summary": "Keep live Microsoft wiring, real identity, routes, product reads, deployment, production and release outside the pass."
+        }
+      ],
+      "claim_scope": [
+        "One schema-validated tenant-specific Microsoft Entra architecture passes 22 exact authored-synthetic cases.",
+        "Only an exact active pre-provisioned immutable subject binding can release a principal candidate after required audit.",
+        "Email, domain, display name and Office signed-in state confer no EMR4 identity or authority."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-real-identity-microsoft-federation-boundary-plan.md",
+          "docs/raisa-real-identity-microsoft-federation-boundary-design.md",
+          "docs/security/raisa-real-identity-microsoft-federation-boundary-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-real-identity-microsoft-federation-boundary/federation-policy.json",
+          "orchestration/continuity/raisa-real-identity-microsoft-federation-boundary/provider-free-acceptance-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-real-identity-microsoft-federation-boundary-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-real-identity-microsoft-federation-boundary-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-real-identity-microsoft-federation-three-tranche-rehydration-receipt.json"
+        ],
+        "tests": [
+          "scripts/raisa_real_identity_microsoft_federation_boundary_acceptance.py",
+          "tests/test_raisa_real_identity_microsoft_federation_boundary.py"
+        ]
+      },
+      "unresolved_gates": [
+        "No live Microsoft Entra app registration, redirect, discovery, token exchange or cryptographic verification exists.",
+        "No real identity binding, session bridge, product read, deployment, production or release is authorised.",
+        "Protected integration remains separately gated by the GitHub Pages deployment side effect."
+      ]
+    },
+    {
+      "id": "raisa-microsoft-federation-admission-runtime",
+      "title": "Raisa Microsoft Federation Synthetic Admission Runtime",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-01T06:00:00Z",
+      "updated_at": "2026-08-01T06:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/raisa-real-identity-microsoft-federation",
+        "source_head": "e201435a7ff7949c654c3bb5e9b43784659f78ca",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-real-identity-microsoft-federation-boundary",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-microsoft-federation-admission-runtime-plan.md",
+            "scope": "Default-off route-free provider-free in-memory authored-synthetic admission, exact binding and required audit only."
+          }
+        ],
+        "notes": [
+          "Yuri explicitly authorised the architecture-only real-identity/Microsoft-federation boundary and its next two logical descendants.",
+          "Live Microsoft/provider calls, public routes, real identity data, application sessions and product reads remained closed.",
+          "The user-owned docs/branding/raisa directory remained untracked, unstaged and excluded."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-route-free-synthetic-admission-runtime-190",
+          "source": "app/services/application_identity_federation.py",
+          "status": "accepted",
+          "summary": "Accept a default-off route-free policy runtime consuming only explicitly synthetic verifier evidence."
+        },
+        {
+          "id": "accept-audit-before-bounded-candidate-190",
+          "source": "orchestration/continuity/raisa-microsoft-federation-admission-runtime/provider-free-acceptance-evidence.json",
+          "status": "accepted",
+          "summary": "Accept exact binding and keyed-reference audit before a role-free, session-free principal candidate is returned."
+        },
+        {
+          "id": "keep-verifier-session-and-product-closed-190",
+          "source": "docs/raisa-microsoft-federation-admission-runtime-closeout.md",
+          "status": "accepted",
+          "summary": "Keep real token verification, routes, sessions, product reads and deployment outside the runtime pass."
+        }
+      ],
+      "claim_scope": [
+        "The default-off in-memory runtime matches all 22 frozen architecture cases with one exact admission.",
+        "Required audit failure overrides admission and no tested raw external identity value enters audit.",
+        "No router, provider, database, session or product path imports or invokes the runtime."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-microsoft-federation-admission-runtime-plan.md",
+          "docs/security/raisa-microsoft-federation-admission-runtime-threat-model-delta.md"
+        ],
+        "findings": [
+          "app/services/application_identity_federation.py",
+          "orchestration/continuity/raisa-microsoft-federation-admission-runtime/provider-free-acceptance-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-microsoft-federation-admission-runtime-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-microsoft-federation-admission-runtime-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-real-identity-microsoft-federation-three-tranche-rehydration-receipt.json"
+        ],
+        "tests": [
+          "scripts/raisa_microsoft_federation_admission_runtime_acceptance.py",
+          "tests/test_raisa_microsoft_federation_admission_runtime.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Synthetic verifier flags prove no real OIDC cryptography or Microsoft interoperability.",
+        "Durable uniqueness, real principal reload, session creation and product authorization remain closed at this node.",
+        "Deployment, production and release remain separately closed."
+      ]
+    },
+    {
+      "id": "raisa-microsoft-federation-postgresql-persistence",
+      "title": "Raisa Microsoft Federation PostgreSQL Persistence",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-01T06:00:00Z",
+      "updated_at": "2026-08-01T06:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/raisa-real-identity-microsoft-federation",
+        "source_head": "4f4e6105e4f36fd1a541a5232b254da617572de6",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-microsoft-federation-admission-runtime",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-microsoft-federation-postgresql-persistence-plan.md",
+            "scope": "Two authored-synthetic keyed-reference binding/audit tables, one reversible migration and disposable local PostgreSQL proof."
+          }
+        ],
+        "notes": [
+          "Yuri explicitly authorised the architecture-only real-identity/Microsoft-federation boundary and its next two logical descendants.",
+          "Live Microsoft/provider calls, public routes, real identity data, application sessions and product reads remained closed.",
+          "The user-owned docs/branding/raisa directory remained untracked, unstaged and excluded."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-keyed-reference-federation-persistence-191",
+          "source": "alembic/versions/q6r7s8t9u0v1_add_application_identity_federation_persistence.py",
+          "status": "accepted",
+          "summary": "Accept exactly two detached authored-synthetic tables containing HMAC-only external identity references."
+        },
+        {
+          "id": "accept-unique-terminal-audited-binding-191",
+          "source": "orchestration/continuity/raisa-microsoft-federation-postgresql-persistence/live-local-backend-postgres-evidence.json",
+          "status": "accepted",
+          "summary": "Accept database uniqueness, terminal revocation, same-transaction audit, append-only guards and exact RLS proof."
+        },
+        {
+          "id": "accept-disposable-cleanup-191",
+          "source": "docs/raisa-microsoft-federation-postgresql-persistence-closeout.md",
+          "status": "accepted",
+          "summary": "Accept verified removal of the only task-created database with no existing environment migration."
+        },
+        {
+          "id": "keep-live-bootstrap-session-and-product-closed-191",
+          "source": "docs/security/raisa-microsoft-federation-postgresql-persistence-threat-model-delta.md",
+          "status": "accepted",
+          "summary": "Keep live verifier/bootstrap roles, real identities, routes, sessions, product reads and deployment outside this pass."
+        }
+      ],
+      "claim_scope": [
+        "A reversible single-head migration and matching ORM add exactly two keyed-reference authored-synthetic tables.",
+        "Concurrent duplicate binding admits exactly one row; revocation is terminal and required-audit failure rolls back state.",
+        "Forced practice RLS, append-only audit, raw-value non-leakage and complete disposable database cleanup pass."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-microsoft-federation-postgresql-persistence-plan.md",
+          "docs/security/raisa-microsoft-federation-postgresql-persistence-threat-model-delta.md"
+        ],
+        "findings": [
+          "app/models/application_identity_federation.py",
+          "alembic/versions/q6r7s8t9u0v1_add_application_identity_federation_persistence.py",
+          "app/services/application_identity_federation_persistence.py",
+          "orchestration/continuity/raisa-microsoft-federation-postgresql-persistence/live-local-backend-postgres-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-microsoft-federation-postgresql-persistence-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-microsoft-federation-postgresql-persistence-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-real-identity-microsoft-federation-three-tranche-rehydration-receipt.json"
+        ],
+        "tests": [
+          "scripts/raisa_microsoft_federation_postgresql_persistence_acceptance.py",
+          "tests/test_raisa_microsoft_federation_postgresql_persistence.py"
+        ]
+      },
+      "unresolved_gates": [
+        "No maintained live OIDC verifier, least-privilege provider bootstrap or session bridge exists.",
+        "Production HMAC key custody, rotation, retention, recovery, rate limiting and SIEM remain unresolved.",
+        "No real identity, product data, deployment, production or release authority is established.",
+        "Protected integration remains separately gated by the GitHub Pages deployment side effect."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-01T11:05:00Z"
+  "updated_at": "2026-08-01T06:00:00Z"
 }

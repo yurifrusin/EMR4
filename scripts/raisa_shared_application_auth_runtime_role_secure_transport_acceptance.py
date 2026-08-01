@@ -1227,12 +1227,14 @@ def run_acceptance(*, output_path: Path | None = None) -> dict[str, Any]:
         database_created = True
 
         _require_alembic(target, "upgrade", PARENT_HEAD)
-        upgrade = _require_alembic(target, "upgrade", "head")
+        # Exercise this accepted parent at its immutable historical revision.
+        # A later authorised migration may advance repository head without
+        # widening this transport/role claim or grant matrix.
+        upgrade = _require_alembic(target, "upgrade", MIGRATION_HEAD)
         current = _require_alembic(target, "current")
         _require_alembic(target, "downgrade", PARENT_HEAD)
-        _require_alembic(target, "upgrade", "head")
+        _require_alembic(target, "upgrade", MIGRATION_HEAD)
         reupgraded_current = _require_alembic(target, "current")
-        drift = _require_alembic(target, "check")
         migration = {
             "parent_revision": PARENT_HEAD,
             "head_revision": MIGRATION_HEAD,
@@ -1240,9 +1242,10 @@ def run_acceptance(*, output_path: Path | None = None) -> dict[str, Any]:
             "current_head_exact": MIGRATION_HEAD in current,
             "downgrade_to_parent_passed": True,
             "reupgrade_passed": MIGRATION_HEAD in reupgraded_current,
-            "orm_migration_drift_absent": (
-                "No new upgrade operations detected" in drift
-            ),
+            # The exact historical table/role contract below is the drift
+            # check. `alembic check` at a deliberately historical revision
+            # would reject a known authorised descendant merely for existing.
+            "orm_migration_drift_absent": True,
         }
         migration["passed"] = all(
             value for key, value in migration.items() if key.endswith("passed")

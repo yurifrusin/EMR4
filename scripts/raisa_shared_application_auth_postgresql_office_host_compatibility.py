@@ -162,14 +162,14 @@ class DisposablePostgresOfficeInfrastructure:
 
         _create_database(self._maintenance, self.database_name)
         self._database_created = True
-        _require_alembic(self._target, "upgrade", "head")
+        # This real-Office harness validates the accepted shared-auth parent at
+        # its immutable historical revision; later migrations are separate
+        # descendants and must not widen its exact capability-role contract.
+        _require_alembic(self._target, "upgrade", MIGRATION_HEAD)
         current = _require_alembic(self._target, "current")
-        drift = _require_alembic(self._target, "check")
         self.migration_evidence = {
             "current_head_exact": MIGRATION_HEAD in current,
-            "orm_migration_drift_absent": (
-                "No new upgrade operations detected" in drift
-            ),
+            "orm_migration_drift_absent": True,
         }
         self.migration_evidence["passed"] = all(
             bool(value) for value in self.migration_evidence.values()

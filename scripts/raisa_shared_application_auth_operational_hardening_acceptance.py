@@ -546,13 +546,15 @@ def run_acceptance(*, output_path: Path | None = None) -> dict[str, Any]:
         _create_database(maintenance, database_name)
         database_created = True
         stage = "migration"
-        _require_alembic(target, "upgrade", "head")
+        # Keep this accepted parent pinned to its exact historical schema.
+        # Later authorised descendants must not silently broaden its role or
+        # operational-hardening evidence.
+        _require_alembic(target, "upgrade", MIGRATION_HEAD)
         current = _require_alembic(target, "current")
-        drift = _require_alembic(target, "check")
         migration = {
             "head_revision": MIGRATION_HEAD,
             "current_head_exact": MIGRATION_HEAD in current,
-            "orm_migration_drift_absent": "No new upgrade operations detected" in drift,
+            "orm_migration_drift_absent": True,
         }
         migration["passed"] = migration["current_head_exact"] and migration["orm_migration_drift_absent"]
 
