@@ -1,0 +1,42 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "push_the_verified_postgresql_office_host_compatibility_task_branch_without_moving_protected_refs",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "The accepted task-branch terminal result is raisa_shared_application_auth_postgresql_office_host_compatibility_pass at Continuity 188 and Compass 169.",
+    "current_authority_allocation": "GPT Sol owns the user-authorised first task-branch push and draft PR; no worker, subagent, provider or external reviewer ran.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-shared-application-auth-postgresql-office-host-compatibility-plan.md",
+      "docs/raisa-shared-application-auth-postgresql-office-host-compatibility-closeout.md",
+      "orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/acceptance-evidence.json",
+      "orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/final-residue-evidence.json",
+      "orchestration/agent_inbox/codex/raisa-shared-application-auth-postgresql-office-host-compatibility-sol-acceptance.md"
+    ],
+    "protected_evidence_boundaries": "Protected refs, deployment, real identity, Microsoft federation, product/document/patient/clinical data, production and release remain closed.",
+    "git_refs_and_worktree": {
+      "HEAD": "97ce51cb374faafc84961ae8223a5d71d6392e1d",
+      "branch": "codex/shared-auth-postgresql-office-host-compatibility",
+      "master": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "handoff/current": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "origin/master": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "origin/handoff/current": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "origin_task_branch": null,
+      "index_empty_before_receipt": true,
+      "concurrent_branding_assets_present_untracked_untouched_and_excluded": true,
+      "protected_refs_unchanged": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}
