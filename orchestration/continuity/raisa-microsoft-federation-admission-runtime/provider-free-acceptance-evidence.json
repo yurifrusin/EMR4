@@ -1,0 +1,698 @@
+{
+  "schema_version": "emr4.microsoft-federation-admission-runtime-evidence.v1",
+  "recorded_at": "2026-08-01T04:00:00Z",
+  "result": "pass",
+  "mode": "route_free_provider_free_authored_synthetic_in_memory",
+  "data_class": "authored_synthetic_metadata_only",
+  "source_hashes": {
+    "parent_cases": "sha256:b99e877a45b566a49266b6f7809d9135b595de692ec6ba12fb69e4fec016b6ce",
+    "runtime": "sha256:27b5f2ba53070c10674b61e301cfae15ffcb12832205c357cd9cf51802ec3b61"
+  },
+  "case_count": 22,
+  "matched_expected_count": 22,
+  "mismatches": [],
+  "admitted_case_count": 1,
+  "audit_event_count": 21,
+  "audit_raw_value_matches": [],
+  "decisions": [
+    {
+      "case_id": "admit-exact-prebound-organisational-account",
+      "decision": "admit",
+      "http_status": 200,
+      "reason_codes": [
+        "federation_admitted"
+      ],
+      "external_error": null,
+      "audit_recorded": true,
+      "principal_candidate": {
+        "binding_ref": "synthetic-binding-001",
+        "binding_version": 1,
+        "user_ref": "synthetic-user-001",
+        "practice_ref": "synthetic-practice-001",
+        "authentication_method": "microsoft_entra_oidc",
+        "authorization_granted": false,
+        "session_created": false
+      },
+      "provider_calls": 0,
+      "session_created": false,
+      "product_data_released": false
+    },
+    {
+      "case_id": "deny-federation-default-off",
+      "decision": "deny",
+      "http_status": 401,
+      "reason_codes": [
+        "federation_disabled"
+      ],
+      "external_error": "authentication_failed",
+      "audit_recorded": true,
+      "principal_candidate": null,
+      "provider_calls": 0,
+      "session_created": false,
+      "product_data_released": false
+    },
+    {
+      "case_id": "deny-common-authority",
+      "decision": "deny",
+      "http_status": 401,
+      "reason_codes": [
+        "tenant_specific_authority_required"
+      ],
+      "external_error": "authentication_failed",
+      "audit_recorded": true,
+      "principal_candidate": null,
+      "provider_calls": 0,
+      "session_created": false,
+      "product_data_released": false
+    },
+    {
+      "case_id": "deny-personal-microsoft-account",
+      "decision": "deny",
+      "http_status": 401,
+      "reason_codes": [
+        "organisational_account_required"
+      ],
+      "external_error": "authentication_failed",
+      "audit_recorded": true,
+      "principal_candidate": null,
+      "provider_calls": 0,
+      "session_created": false,
+      "product_data_released": false
+    },
+    {
+      "case_id": "deny-attempt-replay",
+      "decision": "deny",
+      "http_status": 401,
+      "reason_codes": [
+        "authorization_attempt_consumed"
+      ],
+      "external_error": "authentication_failed",
+      "audit_recorded": true,
+      "principal_candidate": null,
+      "provider_calls": 0,
+      "session_created": false,
+      "product_data_released": false
+    },
+    {
+      "case_id": "deny-attempt-expired",
+      "decision": "deny",
+      "http_status": 401,
+      "reason_codes": [
+        "authorization_attempt_expired"
+      ],
+      "external_error": "authentication_failed",
+      "audit_recorded": true,
+      "principal_candidate": null,
+      "provider_calls": 0,
+      "session_created": false,
+      "product_data_released": false
+    },
+    {
+      "case_id": "deny-state-mismatch",
+      "decision": "deny",
+      "http_status": 401,
+      "reason_codes": [
+        "state_mismatch"
+      ],
+      "external_error": "authentication_failed",
+      "audit_recorded": true,
+      "principal_candidate": null,
+      "provider_calls": 0,
+      "session_created": false,
+      "product_data_released": false
+    },
+    {
+      "case_id": "deny-nonce-mismatch",
+      "decision": "deny",
+      "http_status": 401,
+      "reason_codes": [
+        "nonce_mismatch"
+      ],
+      "external_error": "authentication_failed",
+      "audit_recorded": true,
+      "principal_candidate": null,
+      "provider_calls": 0,
+      "session_created": false,
+      "product_data_released": false
+    },
+    {
+      "case_id": "deny-pkce-mismatch",
+      "decision": "deny",
+      "http_status": 401,
+      "reason_codes": [
+        "pkce_mismatch"
+      ],
+      "external_error": "authentication_failed",
+      "audit_recorded": true,
+      "principal_candidate": null,
+      "provider_calls": 0,
+      "session_created": false,
+      "product_data_released": false
+    },
+    {
+      "case_id": "deny-invalid-signature",
+      "decision": "deny",
+      "http_status": 401,
+      "reason_codes": [
+        "token_signature_invalid"
+      ],
+      "external_error": "authentication_failed",
+      "audit_recorded": true,
+      "principal_candidate": null,
+      "provider_calls": 0,
+      "session_created": false,
+      "product_data_released": false
+    },
+    {
+      "case_id": "deny-unknown-signing-key-after-refresh",
+      "decision": "deny",
+      "http_status": 401,
+      "reason_codes": [
+        "signing_key_untrusted"
+      ],
+      "external_error": "authentication_failed",
+      "audit_recorded": true,
+      "principal_candidate": null,
+      "provider_calls": 0,
+      "session_created": false,
+      "product_data_released": false
+    },
+    {
+      "case_id": "deny-issuer-mismatch",
+      "decision": "deny",
+      "http_status": 401,
+      "reason_codes": [
+        "issuer_mismatch"
+      ],
+      "external_error": "authentication_failed",
+      "audit_recorded": true,
+      "principal_candidate": null,
+      "provider_calls": 0,
+      "session_created": false,
+      "product_data_released": false
+    },
+    {
+      "case_id": "deny-audience-mismatch",
+      "decision": "deny",
+      "http_status": 401,
+      "reason_codes": [
+        "audience_mismatch"
+      ],
+      "external_error": "authentication_failed",
+      "audit_recorded": true,
+      "principal_candidate": null,
+      "provider_calls": 0,
+      "session_created": false,
+      "product_data_released": false
+    },
+    {
+      "case_id": "deny-tenant-mismatch",
+      "decision": "deny",
+      "http_status": 401,
+      "reason_codes": [
+        "tenant_mismatch"
+      ],
+      "external_error": "authentication_failed",
+      "audit_recorded": true,
+      "principal_candidate": null,
+      "provider_calls": 0,
+      "session_created": false,
+      "product_data_released": false
+    },
+    {
+      "case_id": "deny-expired-id-token",
+      "decision": "deny",
+      "http_status": 401,
+      "reason_codes": [
+        "token_expired"
+      ],
+      "external_error": "authentication_failed",
+      "audit_recorded": true,
+      "principal_candidate": null,
+      "provider_calls": 0,
+      "session_created": false,
+      "product_data_released": false
+    },
+    {
+      "case_id": "deny-not-before-in-future",
+      "decision": "deny",
+      "http_status": 401,
+      "reason_codes": [
+        "token_not_yet_valid"
+      ],
+      "external_error": "authentication_failed",
+      "audit_recorded": true,
+      "principal_candidate": null,
+      "provider_calls": 0,
+      "session_created": false,
+      "product_data_released": false
+    },
+    {
+      "case_id": "deny-email-only-match",
+      "decision": "deny",
+      "http_status": 401,
+      "reason_codes": [
+        "immutable_subject_required"
+      ],
+      "external_error": "authentication_failed",
+      "audit_recorded": true,
+      "principal_candidate": null,
+      "provider_calls": 0,
+      "session_created": false,
+      "product_data_released": false
+    },
+    {
+      "case_id": "deny-missing-binding",
+      "decision": "deny",
+      "http_status": 401,
+      "reason_codes": [
+        "active_binding_required"
+      ],
+      "external_error": "authentication_failed",
+      "audit_recorded": true,
+      "principal_candidate": null,
+      "provider_calls": 0,
+      "session_created": false,
+      "product_data_released": false
+    },
+    {
+      "case_id": "deny-ambiguous-binding",
+      "decision": "deny",
+      "http_status": 401,
+      "reason_codes": [
+        "binding_ambiguous"
+      ],
+      "external_error": "authentication_failed",
+      "audit_recorded": true,
+      "principal_candidate": null,
+      "provider_calls": 0,
+      "session_created": false,
+      "product_data_released": false
+    },
+    {
+      "case_id": "deny-revoked-binding",
+      "decision": "deny",
+      "http_status": 401,
+      "reason_codes": [
+        "active_binding_required"
+      ],
+      "external_error": "authentication_failed",
+      "audit_recorded": true,
+      "principal_candidate": null,
+      "provider_calls": 0,
+      "session_created": false,
+      "product_data_released": false
+    },
+    {
+      "case_id": "deny-inactive-internal-user",
+      "decision": "deny",
+      "http_status": 401,
+      "reason_codes": [
+        "active_internal_principal_required"
+      ],
+      "external_error": "authentication_failed",
+      "audit_recorded": true,
+      "principal_candidate": null,
+      "provider_calls": 0,
+      "session_created": false,
+      "product_data_released": false
+    },
+    {
+      "case_id": "error-required-audit-unavailable",
+      "decision": "error",
+      "http_status": 503,
+      "reason_codes": [
+        "required_audit_unavailable"
+      ],
+      "external_error": "authentication_temporarily_unavailable",
+      "audit_recorded": false,
+      "principal_candidate": null,
+      "provider_calls": 0,
+      "session_created": false,
+      "product_data_released": false
+    }
+  ],
+  "audit_events": [
+    {
+      "occurred_at": "2026-08-01 04:00:00+00:00",
+      "correlation_ref": "synthetic-correlation-admit-exact-prebound-organisational-account",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "provider": "microsoft_entra",
+      "decision": "admit",
+      "reason_code": "federation_admitted",
+      "external_reference_hmac": "hmac-sha256:synthetic-v1:9e50d91c29332f302b8d76e81263845494d678681e7171336de8336ca08faa5d",
+      "binding_ref": "synthetic-binding-001",
+      "user_ref": "synthetic-user-001",
+      "practice_ref": "synthetic-practice-001",
+      "principal_released": true,
+      "session_created": false,
+      "product_data_released": false,
+      "data_class": "authored_synthetic"
+    },
+    {
+      "occurred_at": "2026-08-01 04:00:00+00:00",
+      "correlation_ref": "synthetic-correlation-deny-federation-default-off",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "reason_code": "federation_disabled",
+      "external_reference_hmac": "hmac-sha256:synthetic-v1:9e50d91c29332f302b8d76e81263845494d678681e7171336de8336ca08faa5d",
+      "binding_ref": null,
+      "user_ref": null,
+      "practice_ref": null,
+      "principal_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "data_class": "authored_synthetic"
+    },
+    {
+      "occurred_at": "2026-08-01 04:00:00+00:00",
+      "correlation_ref": "synthetic-correlation-deny-common-authority",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "reason_code": "tenant_specific_authority_required",
+      "external_reference_hmac": "hmac-sha256:synthetic-v1:9e50d91c29332f302b8d76e81263845494d678681e7171336de8336ca08faa5d",
+      "binding_ref": null,
+      "user_ref": null,
+      "practice_ref": null,
+      "principal_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "data_class": "authored_synthetic"
+    },
+    {
+      "occurred_at": "2026-08-01 04:00:00+00:00",
+      "correlation_ref": "synthetic-correlation-deny-personal-microsoft-account",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "reason_code": "organisational_account_required",
+      "external_reference_hmac": "hmac-sha256:synthetic-v1:9e50d91c29332f302b8d76e81263845494d678681e7171336de8336ca08faa5d",
+      "binding_ref": null,
+      "user_ref": null,
+      "practice_ref": null,
+      "principal_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "data_class": "authored_synthetic"
+    },
+    {
+      "occurred_at": "2026-08-01 04:00:00+00:00",
+      "correlation_ref": "synthetic-correlation-deny-attempt-replay",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "reason_code": "authorization_attempt_consumed",
+      "external_reference_hmac": "hmac-sha256:synthetic-v1:9e50d91c29332f302b8d76e81263845494d678681e7171336de8336ca08faa5d",
+      "binding_ref": null,
+      "user_ref": null,
+      "practice_ref": null,
+      "principal_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "data_class": "authored_synthetic"
+    },
+    {
+      "occurred_at": "2026-08-01 04:00:00+00:00",
+      "correlation_ref": "synthetic-correlation-deny-attempt-expired",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "reason_code": "authorization_attempt_expired",
+      "external_reference_hmac": "hmac-sha256:synthetic-v1:9e50d91c29332f302b8d76e81263845494d678681e7171336de8336ca08faa5d",
+      "binding_ref": null,
+      "user_ref": null,
+      "practice_ref": null,
+      "principal_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "data_class": "authored_synthetic"
+    },
+    {
+      "occurred_at": "2026-08-01 04:00:00+00:00",
+      "correlation_ref": "synthetic-correlation-deny-state-mismatch",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "reason_code": "state_mismatch",
+      "external_reference_hmac": "hmac-sha256:synthetic-v1:9e50d91c29332f302b8d76e81263845494d678681e7171336de8336ca08faa5d",
+      "binding_ref": null,
+      "user_ref": null,
+      "practice_ref": null,
+      "principal_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "data_class": "authored_synthetic"
+    },
+    {
+      "occurred_at": "2026-08-01 04:00:00+00:00",
+      "correlation_ref": "synthetic-correlation-deny-nonce-mismatch",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "reason_code": "nonce_mismatch",
+      "external_reference_hmac": "hmac-sha256:synthetic-v1:9e50d91c29332f302b8d76e81263845494d678681e7171336de8336ca08faa5d",
+      "binding_ref": null,
+      "user_ref": null,
+      "practice_ref": null,
+      "principal_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "data_class": "authored_synthetic"
+    },
+    {
+      "occurred_at": "2026-08-01 04:00:00+00:00",
+      "correlation_ref": "synthetic-correlation-deny-pkce-mismatch",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "reason_code": "pkce_mismatch",
+      "external_reference_hmac": "hmac-sha256:synthetic-v1:9e50d91c29332f302b8d76e81263845494d678681e7171336de8336ca08faa5d",
+      "binding_ref": null,
+      "user_ref": null,
+      "practice_ref": null,
+      "principal_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "data_class": "authored_synthetic"
+    },
+    {
+      "occurred_at": "2026-08-01 04:00:00+00:00",
+      "correlation_ref": "synthetic-correlation-deny-invalid-signature",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "reason_code": "token_signature_invalid",
+      "external_reference_hmac": "hmac-sha256:synthetic-v1:9e50d91c29332f302b8d76e81263845494d678681e7171336de8336ca08faa5d",
+      "binding_ref": null,
+      "user_ref": null,
+      "practice_ref": null,
+      "principal_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "data_class": "authored_synthetic"
+    },
+    {
+      "occurred_at": "2026-08-01 04:00:00+00:00",
+      "correlation_ref": "synthetic-correlation-deny-unknown-signing-key-after-refresh",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "reason_code": "signing_key_untrusted",
+      "external_reference_hmac": "hmac-sha256:synthetic-v1:9e50d91c29332f302b8d76e81263845494d678681e7171336de8336ca08faa5d",
+      "binding_ref": null,
+      "user_ref": null,
+      "practice_ref": null,
+      "principal_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "data_class": "authored_synthetic"
+    },
+    {
+      "occurred_at": "2026-08-01 04:00:00+00:00",
+      "correlation_ref": "synthetic-correlation-deny-issuer-mismatch",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "reason_code": "issuer_mismatch",
+      "external_reference_hmac": "hmac-sha256:synthetic-v1:9e50d91c29332f302b8d76e81263845494d678681e7171336de8336ca08faa5d",
+      "binding_ref": null,
+      "user_ref": null,
+      "practice_ref": null,
+      "principal_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "data_class": "authored_synthetic"
+    },
+    {
+      "occurred_at": "2026-08-01 04:00:00+00:00",
+      "correlation_ref": "synthetic-correlation-deny-audience-mismatch",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "reason_code": "audience_mismatch",
+      "external_reference_hmac": "hmac-sha256:synthetic-v1:9e50d91c29332f302b8d76e81263845494d678681e7171336de8336ca08faa5d",
+      "binding_ref": null,
+      "user_ref": null,
+      "practice_ref": null,
+      "principal_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "data_class": "authored_synthetic"
+    },
+    {
+      "occurred_at": "2026-08-01 04:00:00+00:00",
+      "correlation_ref": "synthetic-correlation-deny-tenant-mismatch",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "reason_code": "tenant_mismatch",
+      "external_reference_hmac": "hmac-sha256:synthetic-v1:5a818190d42383dd472d08987b924803579ad873a92055cd30eb710278745f9b",
+      "binding_ref": null,
+      "user_ref": null,
+      "practice_ref": null,
+      "principal_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "data_class": "authored_synthetic"
+    },
+    {
+      "occurred_at": "2026-08-01 04:00:00+00:00",
+      "correlation_ref": "synthetic-correlation-deny-expired-id-token",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "reason_code": "token_expired",
+      "external_reference_hmac": "hmac-sha256:synthetic-v1:9e50d91c29332f302b8d76e81263845494d678681e7171336de8336ca08faa5d",
+      "binding_ref": null,
+      "user_ref": null,
+      "practice_ref": null,
+      "principal_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "data_class": "authored_synthetic"
+    },
+    {
+      "occurred_at": "2026-08-01 04:00:00+00:00",
+      "correlation_ref": "synthetic-correlation-deny-not-before-in-future",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "reason_code": "token_not_yet_valid",
+      "external_reference_hmac": "hmac-sha256:synthetic-v1:9e50d91c29332f302b8d76e81263845494d678681e7171336de8336ca08faa5d",
+      "binding_ref": null,
+      "user_ref": null,
+      "practice_ref": null,
+      "principal_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "data_class": "authored_synthetic"
+    },
+    {
+      "occurred_at": "2026-08-01 04:00:00+00:00",
+      "correlation_ref": "synthetic-correlation-deny-email-only-match",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "reason_code": "immutable_subject_required",
+      "external_reference_hmac": "hmac-sha256:synthetic-v1:0c5aa7402f9b5790315fe36acc9101fa19f7799a2f00e77731be278292554d48",
+      "binding_ref": null,
+      "user_ref": null,
+      "practice_ref": null,
+      "principal_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "data_class": "authored_synthetic"
+    },
+    {
+      "occurred_at": "2026-08-01 04:00:00+00:00",
+      "correlation_ref": "synthetic-correlation-deny-missing-binding",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "reason_code": "active_binding_required",
+      "external_reference_hmac": "hmac-sha256:synthetic-v1:9e50d91c29332f302b8d76e81263845494d678681e7171336de8336ca08faa5d",
+      "binding_ref": null,
+      "user_ref": null,
+      "practice_ref": null,
+      "principal_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "data_class": "authored_synthetic"
+    },
+    {
+      "occurred_at": "2026-08-01 04:00:00+00:00",
+      "correlation_ref": "synthetic-correlation-deny-ambiguous-binding",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "reason_code": "binding_ambiguous",
+      "external_reference_hmac": "hmac-sha256:synthetic-v1:9e50d91c29332f302b8d76e81263845494d678681e7171336de8336ca08faa5d",
+      "binding_ref": null,
+      "user_ref": null,
+      "practice_ref": null,
+      "principal_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "data_class": "authored_synthetic"
+    },
+    {
+      "occurred_at": "2026-08-01 04:00:00+00:00",
+      "correlation_ref": "synthetic-correlation-deny-revoked-binding",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "reason_code": "active_binding_required",
+      "external_reference_hmac": "hmac-sha256:synthetic-v1:9e50d91c29332f302b8d76e81263845494d678681e7171336de8336ca08faa5d",
+      "binding_ref": null,
+      "user_ref": null,
+      "practice_ref": null,
+      "principal_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "data_class": "authored_synthetic"
+    },
+    {
+      "occurred_at": "2026-08-01 04:00:00+00:00",
+      "correlation_ref": "synthetic-correlation-deny-inactive-internal-user",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "reason_code": "active_internal_principal_required",
+      "external_reference_hmac": "hmac-sha256:synthetic-v1:9e50d91c29332f302b8d76e81263845494d678681e7171336de8336ca08faa5d",
+      "binding_ref": "synthetic-binding-001",
+      "user_ref": null,
+      "practice_ref": null,
+      "principal_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "data_class": "authored_synthetic"
+    }
+  ],
+  "authority_and_side_effects": {
+    "provider_calls": 0,
+    "identity_provider_calls": 0,
+    "microsoft_graph_or_office_identity_calls": 0,
+    "http_or_socket_calls": 0,
+    "fastapi_or_graphql_routes_added": 0,
+    "database_reads": 0,
+    "database_writes": 0,
+    "application_sessions_created": 0,
+    "product_data_reads": 0,
+    "patient_or_clinical_data_fields": 0,
+    "cloud_or_iam_mutations": 0,
+    "deployments": 0
+  },
+  "claim_boundary": {
+    "proves": [
+      "One default-off route-free runtime matches all 22 frozen synthetic admission cases.",
+      "Exact mapping returns at most an unauthorised session-free principal candidate after required audit.",
+      "Audit uses a versioned keyed HMAC and contains none of the tested raw external identity values."
+    ],
+    "does_not_prove": [
+      "Live Microsoft/OIDC protocol or cryptographic verification.",
+      "Durable uniqueness, application-session creation, current product identity reload, product authorization, deployment or production fitness."
+    ]
+  }
+}
