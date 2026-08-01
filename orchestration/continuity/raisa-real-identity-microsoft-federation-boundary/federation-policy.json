@@ -1,0 +1,79 @@
+{
+  "schema_version": "emr4.real-identity-microsoft-federation-policy.v1",
+  "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+  "status": "architecture_only_provider_free",
+  "authority_owner": "emr4_backend",
+  "provider": "microsoft_entra",
+  "account_scope": {
+    "tenant_mode": "one_explicit_organisational_tenant",
+    "authority_mode": "tenant_specific_v2",
+    "allowed_account_type": "workforce_or_prebound_tenant_guest",
+    "rejected_authorities": ["common", "organizations", "consumers", "personal_microsoft_account"],
+    "guest_policy": "exact_tenant_local_prebinding_required"
+  },
+  "protocol": {
+    "flow": "authorization_code",
+    "oidc": true,
+    "pkce_method": "S256",
+    "code_redemption": "backend_confidential_boundary_later",
+    "redirects": "exact_allowlisted_https_only",
+    "attempt_ttl_seconds_max": 300,
+    "single_use_state": true,
+    "single_use_nonce": true,
+    "forbidden_flows": ["implicit", "resource_owner_password", "device_code", "client_supplied_token"]
+  },
+  "validation": {
+    "library": "maintained_oidc_library_required",
+    "metadata": "tenant_specific_discovery_and_jwks",
+    "signing_keys": "multiple_current_keys_and_rollover_supported",
+    "required_checks": ["signature", "algorithm", "issuer", "audience", "tenant_id", "object_id", "subject", "state", "nonce", "pkce", "issued_at", "not_before", "expires_at"],
+    "unknown_key": "bounded_metadata_refresh_then_deny",
+    "external_identity_key": "tenant_id_plus_object_id",
+    "non_authority_claims": ["email", "preferred_username", "upn", "name", "domain", "office_signed_in_state"]
+  },
+  "identity_binding": {
+    "mode": "exact_preprovisioned",
+    "cardinality": "one_external_key_to_one_user_and_practice",
+    "requires_active_binding": true,
+    "requires_active_internal_principal": true,
+    "jit_provisioning": false,
+    "email_or_domain_linking": false,
+    "role_mapping": "forbidden",
+    "ambiguity": "deny"
+  },
+  "session_bridge": {
+    "status": "closed_requires_later_authority",
+    "fresh_internal_reload": true,
+    "existing_session_runtime": "application_auth_runtime",
+    "product_authorization": "endpoint_owned_current_backend_policy",
+    "microsoft_claim_is_capability": false
+  },
+  "audit": {
+    "required_before_principal_release": true,
+    "failure": "service_unavailable_no_principal",
+    "external_reference_storage": "versioned_keyed_hmac_sha256",
+    "forbidden_fields": ["authorization_code", "access_token", "id_token", "refresh_token", "raw_state", "raw_nonce", "pkce_verifier", "tenant_id", "object_id", "email", "name", "document", "patient", "clinical"]
+  },
+  "failure_closure": {
+    "external_error": "generic_authentication_failed",
+    "unknown_or_ambiguous": "deny_before_principal_or_session",
+    "fallbacks": []
+  },
+  "closed_authority": [
+    "live_microsoft_call",
+    "entra_application_registration",
+    "public_login_route",
+    "public_callback_route",
+    "real_identity_data",
+    "office_identity_authority",
+    "jit_user_creation",
+    "binding_lifecycle_command",
+    "application_session_creation",
+    "product_read",
+    "patient_or_clinical_data",
+    "cloud_or_iam_mutation",
+    "deployment",
+    "production",
+    "release"
+  ]
+}

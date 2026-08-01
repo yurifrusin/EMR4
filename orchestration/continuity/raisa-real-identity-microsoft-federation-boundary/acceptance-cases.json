@@ -1,0 +1,82 @@
+{
+  "schema_version": "emr4.real-identity-microsoft-federation-acceptance-cases.v1",
+  "data_class": "authored_synthetic_metadata_only",
+  "base_context": {
+    "now": "2026-08-01T04:00:00Z",
+    "configuration": {
+      "enabled": true,
+      "provider": "microsoft_entra",
+      "authority_mode": "tenant_specific_v2",
+      "tenant_id": "synthetic-tenant-001",
+      "issuer": "https://login.microsoftonline.invalid/synthetic-tenant-001/v2.0",
+      "audience": "synthetic-client-001"
+    },
+    "attempt": {
+      "exists": true,
+      "consumed": false,
+      "expires_at": "2026-08-01T04:03:00Z",
+      "state_matches": true,
+      "nonce_matches": true,
+      "pkce_method": "S256",
+      "pkce_matches": true
+    },
+    "assertion": {
+      "data_class": "authored_synthetic",
+      "provider": "microsoft_entra",
+      "authority_mode": "tenant_specific_v2",
+      "account_type": "organisational",
+      "signature_valid": true,
+      "algorithm_allowed": true,
+      "signing_key_trusted": true,
+      "issuer": "https://login.microsoftonline.invalid/synthetic-tenant-001/v2.0",
+      "audience": "synthetic-client-001",
+      "tenant_id": "synthetic-tenant-001",
+      "object_id": "synthetic-object-001",
+      "subject": "synthetic-subject-001",
+      "issued_at": "2026-08-01T03:59:00Z",
+      "not_before": "2026-08-01T03:59:00Z",
+      "expires_at": "2026-08-01T04:05:00Z",
+      "display_email": "not-authority@example.invalid",
+      "office_signed_in": true
+    },
+    "binding": {
+      "match_count": 1,
+      "status": "active",
+      "binding_ref": "synthetic-binding-001",
+      "user_ref": "synthetic-user-001",
+      "practice_ref": "synthetic-practice-001"
+    },
+    "internal_principal": {
+      "user_active": true,
+      "practice_active": true
+    },
+    "audit": {
+      "required": true,
+      "available": true
+    }
+  },
+  "cases": [
+    {"id": "admit-exact-prebound-organisational-account", "overrides": {}, "expected": {"decision": "admit", "http_status": 200, "reason_codes": ["federation_admitted"]}},
+    {"id": "deny-federation-default-off", "overrides": {"configuration": {"enabled": false}}, "expected": {"decision": "deny", "http_status": 401, "reason_codes": ["federation_disabled"]}},
+    {"id": "deny-common-authority", "overrides": {"assertion": {"authority_mode": "common"}}, "expected": {"decision": "deny", "http_status": 401, "reason_codes": ["tenant_specific_authority_required"]}},
+    {"id": "deny-personal-microsoft-account", "overrides": {"assertion": {"account_type": "personal_microsoft_account"}}, "expected": {"decision": "deny", "http_status": 401, "reason_codes": ["organisational_account_required"]}},
+    {"id": "deny-attempt-replay", "overrides": {"attempt": {"consumed": true}}, "expected": {"decision": "deny", "http_status": 401, "reason_codes": ["authorization_attempt_consumed"]}},
+    {"id": "deny-attempt-expired", "overrides": {"attempt": {"expires_at": "2026-08-01T03:59:59Z"}}, "expected": {"decision": "deny", "http_status": 401, "reason_codes": ["authorization_attempt_expired"]}},
+    {"id": "deny-state-mismatch", "overrides": {"attempt": {"state_matches": false}}, "expected": {"decision": "deny", "http_status": 401, "reason_codes": ["state_mismatch"]}},
+    {"id": "deny-nonce-mismatch", "overrides": {"attempt": {"nonce_matches": false}}, "expected": {"decision": "deny", "http_status": 401, "reason_codes": ["nonce_mismatch"]}},
+    {"id": "deny-pkce-mismatch", "overrides": {"attempt": {"pkce_matches": false}}, "expected": {"decision": "deny", "http_status": 401, "reason_codes": ["pkce_mismatch"]}},
+    {"id": "deny-invalid-signature", "overrides": {"assertion": {"signature_valid": false}}, "expected": {"decision": "deny", "http_status": 401, "reason_codes": ["token_signature_invalid"]}},
+    {"id": "deny-unknown-signing-key-after-refresh", "overrides": {"assertion": {"signing_key_trusted": false}}, "expected": {"decision": "deny", "http_status": 401, "reason_codes": ["signing_key_untrusted"]}},
+    {"id": "deny-issuer-mismatch", "overrides": {"assertion": {"issuer": "https://login.microsoftonline.invalid/foreign-tenant/v2.0"}}, "expected": {"decision": "deny", "http_status": 401, "reason_codes": ["issuer_mismatch"]}},
+    {"id": "deny-audience-mismatch", "overrides": {"assertion": {"audience": "synthetic-other-client"}}, "expected": {"decision": "deny", "http_status": 401, "reason_codes": ["audience_mismatch"]}},
+    {"id": "deny-tenant-mismatch", "overrides": {"assertion": {"tenant_id": "synthetic-tenant-foreign"}}, "expected": {"decision": "deny", "http_status": 401, "reason_codes": ["tenant_mismatch"]}},
+    {"id": "deny-expired-id-token", "overrides": {"assertion": {"expires_at": "2026-08-01T03:59:59Z"}}, "expected": {"decision": "deny", "http_status": 401, "reason_codes": ["token_expired"]}},
+    {"id": "deny-not-before-in-future", "overrides": {"assertion": {"not_before": "2026-08-01T04:00:01Z"}}, "expected": {"decision": "deny", "http_status": 401, "reason_codes": ["token_not_yet_valid"]}},
+    {"id": "deny-email-only-match", "overrides": {"assertion": {"object_id": null, "display_email": "gp@example.invalid"}}, "expected": {"decision": "deny", "http_status": 401, "reason_codes": ["immutable_subject_required"]}},
+    {"id": "deny-missing-binding", "overrides": {"binding": {"match_count": 0, "status": "missing", "binding_ref": null, "user_ref": null, "practice_ref": null}}, "expected": {"decision": "deny", "http_status": 401, "reason_codes": ["active_binding_required"]}},
+    {"id": "deny-ambiguous-binding", "overrides": {"binding": {"match_count": 2}}, "expected": {"decision": "deny", "http_status": 401, "reason_codes": ["binding_ambiguous"]}},
+    {"id": "deny-revoked-binding", "overrides": {"binding": {"status": "revoked"}}, "expected": {"decision": "deny", "http_status": 401, "reason_codes": ["active_binding_required"]}},
+    {"id": "deny-inactive-internal-user", "overrides": {"internal_principal": {"user_active": false}}, "expected": {"decision": "deny", "http_status": 401, "reason_codes": ["active_internal_principal_required"]}},
+    {"id": "error-required-audit-unavailable", "overrides": {"audit": {"available": false}}, "expected": {"decision": "error", "http_status": 503, "reason_codes": ["required_audit_unavailable"]}}
+  ]
+}

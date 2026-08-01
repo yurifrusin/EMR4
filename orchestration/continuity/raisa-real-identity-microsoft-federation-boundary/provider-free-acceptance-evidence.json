@@ -1,0 +1,506 @@
+{
+  "schema_version": "emr4.real-identity-microsoft-federation-acceptance-evidence.v1",
+  "recorded_at": "2026-08-01T04:00:00Z",
+  "result": "pass",
+  "mode": "repository_local_provider_free_architecture_acceptance",
+  "data_class": "authored_synthetic_metadata_only",
+  "source_hashes": {
+    "policy": "sha256:c4fdcdfda9cdbc476f05608445f92b23193ebbacbf025e2ecc832fad069e3f48",
+    "policy_schema": "sha256:238ec0f4cd28e0392faf5ae3fc14e76877a177af10c3c7642943e45f5b829db3",
+    "decision_schema": "sha256:cb2391e49f62c7208dcab0f7dd2ba918f87be44b499dcbc1bb63eb50992b8d06",
+    "acceptance_cases": "sha256:b99e877a45b566a49266b6f7809d9135b595de692ec6ba12fb69e4fec016b6ce"
+  },
+  "case_count": 22,
+  "matched_expected_count": 22,
+  "mismatches": [],
+  "admitted_case_count": 1,
+  "decisions": [
+    {
+      "schema_version": "emr4.federation-admission-decision.v1",
+      "case_id": "admit-exact-prebound-organisational-account",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "authority_source": "emr4_backend",
+      "provider": "microsoft_entra",
+      "decision": "admit",
+      "http_status": 200,
+      "external_error": null,
+      "reason_codes": [
+        "federation_admitted"
+      ],
+      "evaluated_at": "2026-08-01T04:00:00Z",
+      "audit_required": true,
+      "audit_recorded": true,
+      "principal_candidate_released": true,
+      "session_created": false,
+      "product_data_released": false,
+      "email_or_office_identity_used": false,
+      "provider_calls": 0
+    },
+    {
+      "schema_version": "emr4.federation-admission-decision.v1",
+      "case_id": "deny-federation-default-off",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "authority_source": "emr4_backend",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "http_status": 401,
+      "external_error": "authentication_failed",
+      "reason_codes": [
+        "federation_disabled"
+      ],
+      "evaluated_at": "2026-08-01T04:00:00Z",
+      "audit_required": true,
+      "audit_recorded": true,
+      "principal_candidate_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "email_or_office_identity_used": false,
+      "provider_calls": 0
+    },
+    {
+      "schema_version": "emr4.federation-admission-decision.v1",
+      "case_id": "deny-common-authority",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "authority_source": "emr4_backend",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "http_status": 401,
+      "external_error": "authentication_failed",
+      "reason_codes": [
+        "tenant_specific_authority_required"
+      ],
+      "evaluated_at": "2026-08-01T04:00:00Z",
+      "audit_required": true,
+      "audit_recorded": true,
+      "principal_candidate_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "email_or_office_identity_used": false,
+      "provider_calls": 0
+    },
+    {
+      "schema_version": "emr4.federation-admission-decision.v1",
+      "case_id": "deny-personal-microsoft-account",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "authority_source": "emr4_backend",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "http_status": 401,
+      "external_error": "authentication_failed",
+      "reason_codes": [
+        "organisational_account_required"
+      ],
+      "evaluated_at": "2026-08-01T04:00:00Z",
+      "audit_required": true,
+      "audit_recorded": true,
+      "principal_candidate_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "email_or_office_identity_used": false,
+      "provider_calls": 0
+    },
+    {
+      "schema_version": "emr4.federation-admission-decision.v1",
+      "case_id": "deny-attempt-replay",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "authority_source": "emr4_backend",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "http_status": 401,
+      "external_error": "authentication_failed",
+      "reason_codes": [
+        "authorization_attempt_consumed"
+      ],
+      "evaluated_at": "2026-08-01T04:00:00Z",
+      "audit_required": true,
+      "audit_recorded": true,
+      "principal_candidate_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "email_or_office_identity_used": false,
+      "provider_calls": 0
+    },
+    {
+      "schema_version": "emr4.federation-admission-decision.v1",
+      "case_id": "deny-attempt-expired",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "authority_source": "emr4_backend",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "http_status": 401,
+      "external_error": "authentication_failed",
+      "reason_codes": [
+        "authorization_attempt_expired"
+      ],
+      "evaluated_at": "2026-08-01T04:00:00Z",
+      "audit_required": true,
+      "audit_recorded": true,
+      "principal_candidate_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "email_or_office_identity_used": false,
+      "provider_calls": 0
+    },
+    {
+      "schema_version": "emr4.federation-admission-decision.v1",
+      "case_id": "deny-state-mismatch",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "authority_source": "emr4_backend",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "http_status": 401,
+      "external_error": "authentication_failed",
+      "reason_codes": [
+        "state_mismatch"
+      ],
+      "evaluated_at": "2026-08-01T04:00:00Z",
+      "audit_required": true,
+      "audit_recorded": true,
+      "principal_candidate_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "email_or_office_identity_used": false,
+      "provider_calls": 0
+    },
+    {
+      "schema_version": "emr4.federation-admission-decision.v1",
+      "case_id": "deny-nonce-mismatch",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "authority_source": "emr4_backend",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "http_status": 401,
+      "external_error": "authentication_failed",
+      "reason_codes": [
+        "nonce_mismatch"
+      ],
+      "evaluated_at": "2026-08-01T04:00:00Z",
+      "audit_required": true,
+      "audit_recorded": true,
+      "principal_candidate_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "email_or_office_identity_used": false,
+      "provider_calls": 0
+    },
+    {
+      "schema_version": "emr4.federation-admission-decision.v1",
+      "case_id": "deny-pkce-mismatch",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "authority_source": "emr4_backend",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "http_status": 401,
+      "external_error": "authentication_failed",
+      "reason_codes": [
+        "pkce_mismatch"
+      ],
+      "evaluated_at": "2026-08-01T04:00:00Z",
+      "audit_required": true,
+      "audit_recorded": true,
+      "principal_candidate_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "email_or_office_identity_used": false,
+      "provider_calls": 0
+    },
+    {
+      "schema_version": "emr4.federation-admission-decision.v1",
+      "case_id": "deny-invalid-signature",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "authority_source": "emr4_backend",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "http_status": 401,
+      "external_error": "authentication_failed",
+      "reason_codes": [
+        "token_signature_invalid"
+      ],
+      "evaluated_at": "2026-08-01T04:00:00Z",
+      "audit_required": true,
+      "audit_recorded": true,
+      "principal_candidate_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "email_or_office_identity_used": false,
+      "provider_calls": 0
+    },
+    {
+      "schema_version": "emr4.federation-admission-decision.v1",
+      "case_id": "deny-unknown-signing-key-after-refresh",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "authority_source": "emr4_backend",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "http_status": 401,
+      "external_error": "authentication_failed",
+      "reason_codes": [
+        "signing_key_untrusted"
+      ],
+      "evaluated_at": "2026-08-01T04:00:00Z",
+      "audit_required": true,
+      "audit_recorded": true,
+      "principal_candidate_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "email_or_office_identity_used": false,
+      "provider_calls": 0
+    },
+    {
+      "schema_version": "emr4.federation-admission-decision.v1",
+      "case_id": "deny-issuer-mismatch",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "authority_source": "emr4_backend",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "http_status": 401,
+      "external_error": "authentication_failed",
+      "reason_codes": [
+        "issuer_mismatch"
+      ],
+      "evaluated_at": "2026-08-01T04:00:00Z",
+      "audit_required": true,
+      "audit_recorded": true,
+      "principal_candidate_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "email_or_office_identity_used": false,
+      "provider_calls": 0
+    },
+    {
+      "schema_version": "emr4.federation-admission-decision.v1",
+      "case_id": "deny-audience-mismatch",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "authority_source": "emr4_backend",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "http_status": 401,
+      "external_error": "authentication_failed",
+      "reason_codes": [
+        "audience_mismatch"
+      ],
+      "evaluated_at": "2026-08-01T04:00:00Z",
+      "audit_required": true,
+      "audit_recorded": true,
+      "principal_candidate_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "email_or_office_identity_used": false,
+      "provider_calls": 0
+    },
+    {
+      "schema_version": "emr4.federation-admission-decision.v1",
+      "case_id": "deny-tenant-mismatch",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "authority_source": "emr4_backend",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "http_status": 401,
+      "external_error": "authentication_failed",
+      "reason_codes": [
+        "tenant_mismatch"
+      ],
+      "evaluated_at": "2026-08-01T04:00:00Z",
+      "audit_required": true,
+      "audit_recorded": true,
+      "principal_candidate_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "email_or_office_identity_used": false,
+      "provider_calls": 0
+    },
+    {
+      "schema_version": "emr4.federation-admission-decision.v1",
+      "case_id": "deny-expired-id-token",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "authority_source": "emr4_backend",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "http_status": 401,
+      "external_error": "authentication_failed",
+      "reason_codes": [
+        "token_expired"
+      ],
+      "evaluated_at": "2026-08-01T04:00:00Z",
+      "audit_required": true,
+      "audit_recorded": true,
+      "principal_candidate_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "email_or_office_identity_used": false,
+      "provider_calls": 0
+    },
+    {
+      "schema_version": "emr4.federation-admission-decision.v1",
+      "case_id": "deny-not-before-in-future",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "authority_source": "emr4_backend",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "http_status": 401,
+      "external_error": "authentication_failed",
+      "reason_codes": [
+        "token_not_yet_valid"
+      ],
+      "evaluated_at": "2026-08-01T04:00:00Z",
+      "audit_required": true,
+      "audit_recorded": true,
+      "principal_candidate_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "email_or_office_identity_used": false,
+      "provider_calls": 0
+    },
+    {
+      "schema_version": "emr4.federation-admission-decision.v1",
+      "case_id": "deny-email-only-match",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "authority_source": "emr4_backend",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "http_status": 401,
+      "external_error": "authentication_failed",
+      "reason_codes": [
+        "immutable_subject_required"
+      ],
+      "evaluated_at": "2026-08-01T04:00:00Z",
+      "audit_required": true,
+      "audit_recorded": true,
+      "principal_candidate_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "email_or_office_identity_used": false,
+      "provider_calls": 0
+    },
+    {
+      "schema_version": "emr4.federation-admission-decision.v1",
+      "case_id": "deny-missing-binding",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "authority_source": "emr4_backend",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "http_status": 401,
+      "external_error": "authentication_failed",
+      "reason_codes": [
+        "active_binding_required"
+      ],
+      "evaluated_at": "2026-08-01T04:00:00Z",
+      "audit_required": true,
+      "audit_recorded": true,
+      "principal_candidate_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "email_or_office_identity_used": false,
+      "provider_calls": 0
+    },
+    {
+      "schema_version": "emr4.federation-admission-decision.v1",
+      "case_id": "deny-ambiguous-binding",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "authority_source": "emr4_backend",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "http_status": 401,
+      "external_error": "authentication_failed",
+      "reason_codes": [
+        "binding_ambiguous"
+      ],
+      "evaluated_at": "2026-08-01T04:00:00Z",
+      "audit_required": true,
+      "audit_recorded": true,
+      "principal_candidate_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "email_or_office_identity_used": false,
+      "provider_calls": 0
+    },
+    {
+      "schema_version": "emr4.federation-admission-decision.v1",
+      "case_id": "deny-revoked-binding",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "authority_source": "emr4_backend",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "http_status": 401,
+      "external_error": "authentication_failed",
+      "reason_codes": [
+        "active_binding_required"
+      ],
+      "evaluated_at": "2026-08-01T04:00:00Z",
+      "audit_required": true,
+      "audit_recorded": true,
+      "principal_candidate_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "email_or_office_identity_used": false,
+      "provider_calls": 0
+    },
+    {
+      "schema_version": "emr4.federation-admission-decision.v1",
+      "case_id": "deny-inactive-internal-user",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "authority_source": "emr4_backend",
+      "provider": "microsoft_entra",
+      "decision": "deny",
+      "http_status": 401,
+      "external_error": "authentication_failed",
+      "reason_codes": [
+        "active_internal_principal_required"
+      ],
+      "evaluated_at": "2026-08-01T04:00:00Z",
+      "audit_required": true,
+      "audit_recorded": true,
+      "principal_candidate_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "email_or_office_identity_used": false,
+      "provider_calls": 0
+    },
+    {
+      "schema_version": "emr4.federation-admission-decision.v1",
+      "case_id": "error-required-audit-unavailable",
+      "policy_version": "microsoft-entra-single-tenant-prebound.v1",
+      "authority_source": "emr4_backend",
+      "provider": "microsoft_entra",
+      "decision": "error",
+      "http_status": 503,
+      "external_error": "authentication_temporarily_unavailable",
+      "reason_codes": [
+        "required_audit_unavailable"
+      ],
+      "evaluated_at": "2026-08-01T04:00:00Z",
+      "audit_required": true,
+      "audit_recorded": false,
+      "principal_candidate_released": false,
+      "session_created": false,
+      "product_data_released": false,
+      "email_or_office_identity_used": false,
+      "provider_calls": 0
+    }
+  ],
+  "authority_and_side_effects": {
+    "provider_calls": 0,
+    "identity_provider_calls": 0,
+    "microsoft_graph_or_office_identity_calls": 0,
+    "backend_calls": 0,
+    "database_reads": 0,
+    "database_writes": 0,
+    "product_data_reads": 0,
+    "patient_or_clinical_data_fields": 0,
+    "application_sessions_created": 0,
+    "cloud_or_iam_mutations": 0,
+    "deployments": 0
+  },
+  "claim_boundary": {
+    "proves": [
+      "One tenant-specific organisational Microsoft Entra architecture requires exact protocol and immutable subject facts.",
+      "Only one active pre-provisioned binding can release a principal candidate after required audit.",
+      "Email, domain and Office signed-in state never participate in admission.",
+      "All unknown, replayed, ambiguous or unauditable states fail before session or product-data release."
+    ],
+    "does_not_prove": [
+      "A live Microsoft request, token signature, discovery document, signing-key rollover or browser callback.",
+      "A real identity binding, EMR4 session, product read, deployment, production fitness or release readiness."
+    ]
+  }
+}
