@@ -1,0 +1,41 @@
+{
+  "authority_boundary": "provider_free_authored_synthetic_office_cookie_compatibility_acceptance_and_task_branch_publication_only_no_real_identity_product_data_document_api_cloud_mutation_deployment_production_release_or_protected_integration",
+  "continuation_event": "pre_acceptance_review",
+  "planned_action": "review_live_office_host_results_closed_evidence_regressions_and_residue_before_continuity_promotion",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "Protected PR 69 is integrated at 1af54ae31895e863b447479aeb3b2bbcf0e684b8. The separately authorised Office cookie-compatibility descendant now has closed passing results from installed Word and Word Online.",
+    "current_authority_allocation": "GPT Sol retained the tightly coupled security, Office-host, evidence and acceptance sequence. No worker, subagent, provider or external reviewer ran.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-shared-application-auth-office-cookie-compatibility-plan.md",
+      "docs/security/raisa-shared-application-auth-office-cookie-compatibility-threat-model-delta.md",
+      "orchestration/continuity/shared-application-auth-office-cookie-compatibility/live-office-host-evidence.json",
+      "orchestration/continuity/shared-application-auth-office-cookie-compatibility/final-residue-evidence.json",
+      "orchestration/continuity/shared-application-auth-office-cookie-compatibility/acceptance-evidence.json",
+      "docs/raisa-shared-application-auth-office-cookie-compatibility-closeout.md"
+    ],
+    "protected_evidence_boundaries": "Protected holdouts and raw historical Diary material remained sealed. No cookie store, browser storage, Office account/profile, document body, product/patient/clinical data, external identity, provider, cloud/IAM, deployment, production, release, public rename, domain or trademark action was opened.",
+    "git_refs_and_worktree": {
+      "HEAD": "30d5e0116148529da3c41c728504c69d8833f544",
+      "branch": "codex/shared-auth-office-cookie-compatibility",
+      "master": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "handoff/current": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "origin/master": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "origin/handoff/current": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "protected_refs_unchanged": true,
+      "concurrent_branding_assets_untouched_and_excluded": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

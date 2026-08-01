@@ -1,0 +1,88 @@
+{
+  "schema_version": "emr4.office_cookie_compatibility_live_host_evidence.v1",
+  "recorded_at": "2026-08-01T17:10:06+10:00",
+  "result": "pass",
+  "data_class": "authored_synthetic",
+  "runtime_class": "provider_free_process_local_in_memory",
+  "development_origin": "https://property-cinch-backfield.ngrok-free.dev",
+  "attempt_sequence": [
+    {
+      "attempt": "word_desktop_preflight",
+      "surface": "word_desktop",
+      "disposition": "fail_closed_before_taskpane_delivery",
+      "failure_code": "direct_developer_debugging_not_enabled",
+      "bootstrap_consumed": false,
+      "session_created": false
+    },
+    {
+      "attempt": "word_online_occupied",
+      "surface": "word_online",
+      "disposition": "pass"
+    },
+    {
+      "attempt": "word_desktop_direct_debug_repair",
+      "surface": "word_desktop",
+      "disposition": "pass",
+      "direct_debugger_enabled": true,
+      "web_debugger_enabled": false,
+      "live_reload_enabled": false
+    }
+  ],
+  "sequence_deviation_disposition": {
+    "successful_surface_order": [
+      "word_online",
+      "word_desktop"
+    ],
+    "requires_rerun": false,
+    "reason_code": "desktop_host_admission_repaired_after_online_pass",
+    "security_effect": "none_independent_principals_bootstraps_and_results"
+  },
+  "results": {
+    "word_desktop": {
+      "surface": "word_desktop",
+      "host_class": "installed_word",
+      "terminal_status": "passed",
+      "csrf_issued": true,
+      "session_created": true,
+      "first_validation_passed": true,
+      "rotation_passed": true,
+      "second_validation_passed": true,
+      "logout_passed": true,
+      "post_logout_denied": true,
+      "result_submitted": true,
+      "failure_code": "none"
+    },
+    "word_online": {
+      "surface": "word_online",
+      "host_class": "word_online",
+      "terminal_status": "passed",
+      "csrf_issued": true,
+      "session_created": true,
+      "first_validation_passed": true,
+      "rotation_passed": true,
+      "second_validation_passed": true,
+      "logout_passed": true,
+      "post_logout_denied": true,
+      "result_submitted": true,
+      "failure_code": "none"
+    }
+  },
+  "bootstrap_registry_counts": {
+    "available": 0,
+    "reserved": 0,
+    "consumed": 2
+  },
+  "auth_audit_event_count": 14,
+  "denial_audit_event_count": 2,
+  "side_effects": {
+    "provider_calls": 0,
+    "external_identity_calls": 0,
+    "product_or_database_reads": 0,
+    "document_reads": 0,
+    "document_writes": 0,
+    "product_commands": 0,
+    "cloud_or_iam_mutations": 0,
+    "deployments": 0,
+    "production_changes": 0
+  }
+}

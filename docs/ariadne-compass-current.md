@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 security finding governance is now repository-owned rather than laptop-dependent: 12 native alerts have owner/SLA/evidence rows and exact GitHub dispositions; validated Bandit and CodeQL ledgers remain linked; and Python/Node workflow definitions have staggered daily schedules. Continuity 186 / Compass 167 bind the repository result. Default-branch schedule activation awaits protected integration; product, identity, provider, deployment, production and release boundaries remain closed.
+> EMR4 shared application authentication now has a real Office-host cookie compatibility proof: independent authored-synthetic sessions passed create, validate, rotate, revalidate, logout and post-logout denial in installed Word and Word Online. Continuity 187 / Compass 168 bind the result. Real identity, Microsoft federation, product data, organisational deployment, production, release and protected integration remain closed.
 
 ## North star
 
@@ -146,47 +146,39 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The accepted default-off shared-auth transport now separates an exact deployment LOGIN from its NOLOGIN capability role, enters that role through a finite pool, rejects ambiguous proxy identity, rate-limits all seven routes and retains HMAC-only denial audit. Disposable PostgreSQL proof passes with zero raw matches, zero external/product side effects and exact database plus two-role cleanup. Real identity and product data remain closed. Lineage parent: `raisa-shared-application-auth-runtime-role-secure-transport`.
 65. **Durable security-finding governance — EMR4 Security-Finding Governance**
    EMR4 now has one schema-validated owner/SLA register joining 12 native security alerts to evidence and exact GitHub disposition, with zero open Dependabot or security-high CodeQL alerts in the reconciled queues. The 14 Bandit and 10 CodeQL validation rows remain linked. Python and Node workflow definitions now carry staggered daily schedules; activation on the default branch still awaits protected integration. Lineage parent: `raisa-shared-application-auth-operational-hardening`.
+66. **Real Office-host cookie compatibility proof — Raisa Shared Application-Auth Office Cookie Compatibility**
+   The accepted default-off authored-synthetic session-cookie lifecycle passed once in installed Word and once in Word Online through the exact development origin. Both independent sessions rotated, logged out and then denied validation; no product, identity, document, provider, cloud or deployment path ran, and task listeners and registration are absent. Lineage parent: `raisa-shared-application-auth-operational-hardening`.
 
 ## Current position
 
-**Durable security-finding governance — EMR4 Security-Finding Governance**
+**Real Office-host cookie compatibility proof — Raisa Shared Application-Auth Office Cookie Compatibility**
 
-**Why this proof came next:** The accepted operational-hardening inventory proved detection was not laptop-only but exposed an unowned register, schedule and disposition gap.
+**Why this proof came next:** The protected shared-auth and governance foundations were integrated, leaving real Office host cookie carriage as the leading bounded gap.
 
-EMR4 now has one schema-validated owner/SLA register joining 12 native security alerts to evidence and exact GitHub disposition, with zero open Dependabot or security-high CodeQL alerts in the reconciled queues. The 14 Bandit and 10 CodeQL validation rows remain linked. Python and Node workflow definitions now carry staggered daily schedules; activation on the default branch still awaits protected integration.
+The accepted default-off authored-synthetic session-cookie lifecycle passed once in installed Word and once in Word Online through the exact development origin. Both independent sessions rotated, logged out and then denied validation; no product, identity, document, provider, cloud or deployment path ran, and task listeners and registration are absent.
 
 ### What this unlocks
 
-- Seek fresh authority for the supervised authored-synthetic Office cookie-compatibility candidate.
-- Integrate the published draft PR through protected review so the daily schedules become active on the default branch.
-- Reassess accepted development-tool risks when compatible upstream Office dependencies are released.
+- Seek fresh authority for a provider-free authored-synthetic Office-host exercise through the accepted local PostgreSQL persistence and capability-role boundary.
+- Separately decide whether to design a real-identity and Microsoft federation boundary without yet wiring product reads.
+- Publish and review this task branch without moving protected refs.
 
 ### What it does not solve
 
-- Default-branch activation before protected integration.
-- Removal of development-only vulnerable dependency resolutions.
-- Incident paging, SIEM, runner availability or production monitoring.
-- Real identity, product data, provider, deployment, production or release.
+- Every Office/WebView/browser/tenant cookie policy.
+- PostgreSQL or multi-instance behavior through a real Office host.
+- Real identity, Microsoft federation or product-data authorization.
+- Organisational deployment, production, release or protected integration.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Bounded opening `api-change`: Exact evidence-backed native GitHub disposition of Dependabot 5 and 8-15 plus CodeQL 295, 272 and 268; repository workflow schedules and SECURITY.md policy.
+- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
+- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
+- Bounded opening `api-change`: One supervised provider-free authored-synthetic exercise of the existing session-cookie transport in installed Word and Word Online through an ephemeral HTTPS relay to a local in-memory harness.
 - All other named boundaries remain closed: `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `stage-3b`, `voice`.
 
 ## Product decision horizon
-
-### Supervised Office cookie compatibility — candidate
-
-Can the accepted default-off authored-synthetic session-cookie transport operate across supervised Word desktop and Word Online host constraints without opening real identity or product data?
-
-The local HTTP contract passes, but real Office host partitioning and third-party-cookie behavior remain intentionally unproved.
-
-Prerequisites:
-
-- Fresh Yuri authority for an exact supervised authored-synthetic exercise.
-- Real identity and all product-derived data remain closed.
-- No deployment, production or release claim.
 
 ### Reception One representative-staff formative sessions — deferred
 
@@ -380,9 +372,12 @@ Prerequisites:
   Required before: Satisfied on 2026-08-01 for the exact repository-local provider-free authored-synthetic operational-hardening descendant only. Real identity, product reads, deployment, production and release remain fresh authority decisions.
 - **Should EMR4 make security finding tracking independent of the laptop by joining native GitHub alert IDs to a durable owner/SLA register and scheduling Python and Node security workflows in GitHub?**
   Required before: Satisfied on 2026-08-01 for the exact repository governance, SECURITY.md, named native-alert disposition and task-branch publication scope. Protected integration remains separate.
+- **Should EMR4 exercise its accepted authored-synthetic session-cookie transport in installed Word and Word Online?**
+  Required before: Satisfied on 2026-08-01 for one provider-free in-memory supervised exercise through the exact development origin. Real identity, product data, organisational deployment, production and release remain closed.
 
 ## Map limits
 
+- The Office cookie descendant proves one independent session lifecycle in installed Word and Word Online through one development origin. It does not cover every policy, PostgreSQL/multi-instance behavior, real identity, product data, organisational deployment or production.
 - The governance descendant proves a repository schema/register, exact static triage, 12 native GitHub dispositions and daily workflow definitions. Scheduled runs are not active on the default branch until protected integration, and vulnerable dev-only lock entries remain.
 - The accepted shared-auth operational-hardening descendant proves one local authored-synthetic deployment-login/capability split, strict one-hop proxy contract, bounded per-process limiter, HMAC-only denial audit and finite SQLAlchemy pool with exact cleanup. It does not prove real identity, distributed abuse resistance, production ingress, credential lifecycle, monitoring/retention, product-data safety, deployment, production or release.
 - The accepted shared-auth runtime-role/transport descendant proves one local authored-synthetic capability-role and hash-resolver boundary, seven default-off routes, exact-origin/CSRF enforcement, partitioned Secure HttpOnly cookie carriage, atomic rotation/logout, database one-use and exact disposable cleanup. It does not prove real identity, Office cookie compatibility, abuse resistance, product-data safety, deployment, production or release.
@@ -584,6 +579,8 @@ Prerequisites:
 - `docs/raisa-shared-application-auth-clinician-role-boundary-closeout.md`
 - `docs/raisa-shared-application-auth-clinician-role-boundary-design.md`
 - `docs/raisa-shared-application-auth-clinician-role-boundary-plan.md`
+- `docs/raisa-shared-application-auth-office-cookie-compatibility-closeout.md`
+- `docs/raisa-shared-application-auth-office-cookie-compatibility-plan.md`
 - `docs/raisa-shared-application-auth-operational-hardening-closeout.md`
 - `docs/raisa-shared-application-auth-operational-hardening-plan.md`
 - `docs/raisa-shared-application-auth-postgresql-persistence-closeout.md`
@@ -615,6 +612,7 @@ Prerequisites:
 - `docs/security/raisa-cloud-run-public-https-dev-host-readiness-threat-model-delta.md`
 - `docs/security/raisa-dual-host-foundation-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-clinician-role-boundary-threat-model-delta.md`
+- `docs/security/raisa-shared-application-auth-office-cookie-compatibility-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-operational-hardening-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-postgresql-persistence-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-runtime-foundation-threat-model-delta.md`
@@ -1066,6 +1064,9 @@ Prerequisites:
 - `orchestration/continuity/reception-one-word-hybrid-contextual-launch/browser-acceptance-evidence.json`
 - `orchestration/continuity/security-finding-governance/acceptance-evidence.json`
 - `orchestration/continuity/security-finding-governance/native-alert-disposition-evidence.json`
+- `orchestration/continuity/shared-application-auth-office-cookie-compatibility/acceptance-evidence.json`
+- `orchestration/continuity/shared-application-auth-office-cookie-compatibility/final-residue-evidence.json`
+- `orchestration/continuity/shared-application-auth-office-cookie-compatibility/live-office-host-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -1148,4 +1149,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 167; continuity graph revision 186._
+_Compass map revision 168; continuity graph revision 187._

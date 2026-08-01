@@ -59,7 +59,7 @@
       "voice"
     ]
   },
-  "graph_revision": 186,
+  "graph_revision": 187,
   "harvests": [],
   "nodes": [
     {
@@ -9652,9 +9652,136 @@
         "No incident paging, SIEM, runner-availability or production monitoring result is established.",
         "Real identity, product data, providers, deployment, production and release remain closed."
       ]
+    },
+    {
+      "id": "raisa-shared-application-auth-office-cookie-compatibility",
+      "title": "Raisa Shared Application-Auth Office Cookie Compatibility",
+      "kind": "integration",
+      "status": "accepted",
+      "created_at": "2026-08-01T07:11:00Z",
+      "updated_at": "2026-08-01T07:11:00Z",
+      "coordinates": {
+        "git_ref": "codex/shared-auth-office-cookie-compatibility",
+        "source_head": "30d5e0116148529da3c41c728504c69d8833f544",
+        "thread_id": null,
+        "worktree_role": "integration"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-shared-application-auth-operational-hardening",
+          "relation": "builds_on"
+        },
+        {
+          "node_id": "raisa-shared-application-auth-runtime-role-secure-transport",
+          "relation": "validates"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-shared-application-auth-office-cookie-compatibility-plan.md",
+            "scope": "One supervised provider-free authored-synthetic exercise of the existing session-cookie transport in installed Word and Word Online through an ephemeral HTTPS relay to a local in-memory harness."
+          }
+        ],
+        "notes": [
+          "Yuri authorised the leading Compass 167 Office cookie-compatibility candidate.",
+          "Yuri separately permitted the supplied Raisa branding direction in future UI renders; the concurrent brand assets remained untouched and excluded.",
+          "No Trust Center, catalogue, tenant, Office policy, cloud/IAM, deployment or protected-ref change occurred."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-real-office-cookie-lifecycle-187",
+          "source": "orchestration/continuity/shared-application-auth-office-cookie-compatibility/live-office-host-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one independent create, validate, rotate, revalidate, logout and post-logout denial result in installed Word and Word Online."
+        },
+        {
+          "id": "accept-direct-developer-sideload-repair-187",
+          "source": "docs/raisa-shared-application-auth-office-cookie-compatibility-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the fail-closed desktop preflight and direct-debug host-admission repair with complete registration cleanup."
+        },
+        {
+          "id": "accept-parent-source-digest-reconciliation-187",
+          "source": "orchestration/continuity/shared-application-auth-office-cookie-compatibility/acceptance-evidence.json",
+          "status": "accepted",
+          "summary": "Reconcile two stale PR 69 source digests to the already accepted source bytes without runtime behavior change."
+        },
+        {
+          "id": "keep-real-identity-product-and-release-closed-187",
+          "source": "docs/security/raisa-shared-application-auth-office-cookie-compatibility-threat-model-delta.md",
+          "status": "accepted",
+          "summary": "Keep real identity, Microsoft federation, product data, database-backed Office behavior, deployment, production and release outside this pass."
+        }
+      ],
+      "claim_scope": [
+        "The existing Secure, HttpOnly, SameSite=None, Partitioned session-cookie lifecycle passed once in each supervised Office host through the exact development origin.",
+        "Each host used an independent authored-synthetic principal, one-use bootstrap and result channel; both logged out and proved the ordinary post-logout denial.",
+        "The desktop admission failure occurred before page delivery; direct developer debugging repaired only host admission and was fully unregistered.",
+        "No document, product, patient, clinical, external identity, provider, cloud, deployment or production path ran."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-shared-application-auth-office-cookie-compatibility-plan.md",
+            "docs/security/raisa-shared-application-auth-office-cookie-compatibility-threat-model-delta.md",
+            "orchestration/continuity/shared-application-auth-office-cookie-compatibility/live-office-host-evidence.json",
+            "tests/test_raisa_shared_application_auth_office_cookie_compatibility.py"
+          ],
+          "note": "The harness contains no product context, appointment proposal or command path."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "orchestration/continuity/shared-application-auth-office-cookie-compatibility/live-office-host-evidence.json",
+            "orchestration/continuity/shared-application-auth-office-cookie-compatibility/final-residue-evidence.json",
+            "docs/raisa-shared-application-auth-office-cookie-compatibility-closeout.md",
+            "tests/test_raisa_shared_application_auth_office_cookie_compatibility.py"
+          ],
+          "note": "No Diary, database, event, availability or appointment state was read or changed."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-shared-application-auth-office-cookie-compatibility-plan.md",
+          "docs/security/raisa-shared-application-auth-office-cookie-compatibility-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/shared-application-auth-office-cookie-compatibility/live-office-host-evidence.json",
+          "orchestration/continuity/shared-application-auth-office-cookie-compatibility/final-residue-evidence.json",
+          "orchestration/continuity/shared-application-auth-office-cookie-compatibility/acceptance-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-shared-application-auth-office-cookie-compatibility-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-office-cookie-compatibility-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-office-cookie-compatibility-rehydration-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-office-cookie-compatibility-preacceptance-receipt.json"
+        ],
+        "tests": [
+          "scripts/raisa_shared_application_auth_office_cookie_compatibility.py",
+          "tests/test_raisa_shared_application_auth_office_cookie_compatibility.py",
+          "orchestration/continuity/shared-application-auth-office-cookie-compatibility/word-desktop-manifest.xml",
+          "orchestration/continuity/shared-application-auth-office-cookie-compatibility/word-online-manifest.xml"
+        ]
+      },
+      "unresolved_gates": [
+        "The pass covers one Office/WebView/browser/tenant posture and one exact development origin, not every enterprise policy.",
+        "PostgreSQL, multi-instance and capability-role behavior was not exercised through either real Office host.",
+        "Real identity mapping, Microsoft federation and product-data authorization remain separately closed.",
+        "Organisational Office deployment, production, release and protected integration require separate authority."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-01T05:30:00Z"
+  "updated_at": "2026-08-01T07:11:00Z"
 }

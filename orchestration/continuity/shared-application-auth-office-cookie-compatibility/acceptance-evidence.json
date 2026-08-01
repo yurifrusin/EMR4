@@ -1,0 +1,61 @@
+{
+  "schema_version": "emr4.office_cookie_compatibility_acceptance.v1",
+  "result": "raisa_shared_application_auth_office_cookie_compatibility_pass",
+  "passed": true,
+  "real_office_hosts": {
+    "word_desktop_passed": true,
+    "word_online_passed": true,
+    "independent_principals": true,
+    "independent_one_use_bootstraps": true,
+    "post_logout_denial_passed_on_both": true,
+    "remaining_application_sessions": 0
+  },
+  "desktop_repair": {
+    "initial_failure_before_taskpane_delivery": true,
+    "direct_debugger_enabled_for_repair": true,
+    "web_debugger_enabled": false,
+    "live_reload_enabled": false,
+    "trusted_catalogue_changed": false,
+    "trust_center_changed": false,
+    "developer_registration_removed": true
+  },
+  "sequence_deviation": {
+    "successful_surface_order": [
+      "word_online",
+      "word_desktop"
+    ],
+    "requires_rerun": false,
+    "reason": "The first desktop host-admission attempt preceded Word Online, consumed no bootstrap and created no session. The repaired desktop run retained an independent principal, bootstrap and result channel, so the successful-run order had no security effect."
+  },
+  "verification": {
+    "focused_test_count": 12,
+    "expanded_regression_test_count": 175,
+    "ruff_passed": true,
+    "bandit_gate_passed": true,
+    "python_dependency_vulnerability_count": 0,
+    "node_production_dependency_vulnerability_count": 0,
+    "node_development_tool_vulnerability_count": 19,
+    "node_development_tool_findings_governed_by_parent_register": true,
+    "javascript_syntax_passed": true,
+    "repository_manifest_valid": true,
+    "word_desktop_manifest_valid": true,
+    "word_online_manifest_valid": true
+  },
+  "parent_ci_reconciliation": {
+    "stored_source_hashes_corrected": 2,
+    "runtime_behavior_changed": false,
+    "reason_code": "protected_pr69_acceptance_evidence_digest_drift"
+  },
+  "closed_side_effects": {
+    "provider_calls": 0,
+    "external_identity_calls": 0,
+    "product_or_database_reads": 0,
+    "document_reads": 0,
+    "document_writes": 0,
+    "product_commands": 0,
+    "cloud_or_iam_mutations": 0,
+    "deployments": 0,
+    "production_changes": 0,
+    "protected_ref_movements": 0
+  }
+}
