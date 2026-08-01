@@ -1,0 +1,58 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "protected_integration_closeout",
+  "planned_action": "record_pr74_protected_integration_and_complete_no_docs_baton_alignment",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "The accepted real-identity/Microsoft-federation architecture, route-free provider-free admission runtime and disposable PostgreSQL persistence were the exact PR 74 integration payload.",
+    "current_authority_allocation": "Yuri explicitly authorised PR 74 protected integration and exactly one consequent GitHub Pages rebuild. GPT Sol performed the check-gated merge; no worker or external provider was used.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-real-identity-microsoft-federation-boundary-plan.md",
+      "docs/raisa-microsoft-federation-admission-runtime-plan.md",
+      "docs/raisa-microsoft-federation-postgresql-persistence-plan.md",
+      "orchestration/continuity/raisa-real-identity-microsoft-federation-boundary/codeql-pr74-alerts-readback.json"
+    ],
+    "protected_evidence_boundaries": "The integration adds no live Microsoft call, real identity, product read, production or release authority. Exactly one Pages rebuild was authorised and consumed. This closeout changes no docs path, so another Pages deployment is neither required nor authorised. User-owned docs/branding/raisa remains untouched and excluded.",
+    "git_refs_and_worktree": {
+      "pr74_head": "744d5464dc097c8439bf6b42ce71e0107552781b",
+      "protected_master_after_merge": "09a661cfa83559b13c438f45734403f33d1e3bbb",
+      "handoff_current_before_closeout": "7c618c336baca6c33a4bedcf7e23b50be1bb9c3e",
+      "closeout_branch": "codex/raisa-federation-integration-closeout",
+      "closeout_changes_docs_paths": false,
+      "index_empty_before_closeout": true,
+      "concurrent_branding_assets_present_untracked_untouched_and_excluded": true
+    }
+  },
+  "integration_outcome": {
+    "result": "raisa_real_identity_microsoft_federation_protected_integration_pass",
+    "strategy": "rebase_merge_via_pr74",
+    "pr74": {
+      "state": "merged",
+      "merged_at": "2026-08-01T21:24:05Z",
+      "protected_master_head": "09a661cfa83559b13c438f45734403f33d1e3bbb"
+    },
+    "default_branch_runs": {
+      "github_pages": {"run_id": 30719055657, "conclusion": "success"},
+      "node_and_office_security": {"run_id": 30719055642, "conclusion": "success"},
+      "python_security": {"run_id": 30719055679, "conclusion": "success"},
+      "codeql": {"run_id": 30719055649, "conclusion": "success"}
+    },
+    "github_pages_rebuild_count": 1,
+    "additional_deployments": 0,
+    "codeql_alerts_fixed_without_dismissal": [546, 547, 548],
+    "protected_handoff_alignment_on_closeout_merge": "required_fast_forward",
+    "passed": true
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

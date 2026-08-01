@@ -107,8 +107,9 @@ def test_live_handover_names_results_and_next_authority_gate() -> None:
         "docs/raisa-microsoft-federation-postgresql-persistence-closeout.md",
         "Continuity graph revision 191",
         "Compass map revision 172",
-        "architecture-only maintained OIDC library verifier",
-        "new public GitHub Pages deployment",
+        "architecture-only maintained OIDC verifier",
+        "09a661cfa83559b13c438f45734403f33d1e3bbb",
+        "No further Pages rebuild is authorised",
     ):
         assert result in handover
     assert "Yuri's branding permission covers future UI renders only" in handover
