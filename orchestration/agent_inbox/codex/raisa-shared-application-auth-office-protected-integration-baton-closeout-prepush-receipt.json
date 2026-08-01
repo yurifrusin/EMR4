@@ -1,0 +1,38 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "push_the_no_docs_office_protected_integration_baton_closeout_branch_and_open_its_protected_pr",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "PR 71 is merged, the one Pages rebuild and all default-branch security runs passed, and PR 70 is closed as subsumed.",
+    "current_authority_allocation": "Yuri authorized protected integration and exactly one Pages rebuild; GPT Sol owns this no-docs baton PR and final fast-forward alignment.",
+    "active_plan_and_acceptance": [
+      "AGENTS.md",
+      "orchestration/agent_inbox/codex/raisa-shared-application-auth-postgresql-office-host-compatibility-protected-integration-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-shared-application-auth-office-protected-integration-baton-closeout-precommit-receipt.json"
+    ],
+    "protected_evidence_boundaries": "The branch contains AGENTS.md and orchestration receipts only. It contains no docs path and grants no second Pages rebuild or broader deployment/release authority.",
+    "git_refs_and_worktree": {
+      "HEAD": "eead887f5fb233cb3813e4105b9cbc9b8a650171",
+      "branch": "codex/shared-auth-office-protected-integration-closeout",
+      "origin/master": "1121c35eacaab2bb80dac796c19f3b7f2af754dc",
+      "origin/handoff/current": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "origin_task_branch": null,
+      "index_empty_before_receipt": true,
+      "concurrent_branding_assets_present_untracked_untouched_and_excluded": true,
+      "protected_handoff_alignment_pending": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}
