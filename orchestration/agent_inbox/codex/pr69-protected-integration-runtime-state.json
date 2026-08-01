@@ -1,0 +1,17 @@
+{
+  "schema_version":"ariadne.orchestrator_runtime_state.v1",
+  "continuation_event":"pre_sprint_planning",
+  "planned_action":"integration",
+  "context_health":{"agent_contexts":[{"agent_id":"orchestrator","measurement_source":"sol_pr69_protected_integration_five_source_rehydration","rehydrated_from_receipt":true,"rehydration_sources":["live_handover_current_baton","current_authority_allocation","active_plan_and_acceptance","protected_evidence_boundaries","git_refs_and_worktree"]}]},
+  "adapter_observations":[
+    {"adapter_id":"codex_primary_session","method":"codex_session_observation","reachability":"reachable","evidence":["Yuri agreed to complete PR 69 protected review/integration before the freshly authorised Office cookie-compatibility tranche.","PR 69 head 572279a4a796dd5c578187575431b3c2baaaec4b is ready, mergeable and CLEAN with six passing checks.","All review threads are resolved, the exact three note-severity follow-up alerts are fixed, and the merge ref has zero open security-severity alerts.","The full PR diff passes whitespace verification. Concurrent branding assets remain untracked, untouched and excluded.","Master and handoff/current, local and origin, remain aligned at 4974075b31035d599e081d68e3b85e04a897baa1 before integration."]},
+    {"adapter_id":"antigravity_cli_print","method":"synthetic_fixture","reachability":"unknown","evidence":["No external worker selected."]},
+    {"adapter_id":"deepseek_via_claude_code_bare","method":"synthetic_fixture","reachability":"unknown","evidence":["No implementation worker selected."]},
+    {"adapter_id":"deepcode_cli","method":"synthetic_fixture","reachability":"unknown","evidence":["Unselected fallback."]},
+    {"adapter_id":"claude_cli_print","method":"synthetic_fixture","reachability":"unknown","evidence":["No Claude transport selected."]},
+    {"adapter_id":"codex_subagent_spawn","method":"synthetic_fixture","reachability":"unknown","evidence":["No native subagent assigned."]}
+  ],
+  "worker_slots":[{"resource_id":"deepseek-flash-workers","active_instance_ids":[],"stale_instance_ids":[]}],
+  "workspace_receipts":[],
+  "assigned_agent_ids":[]
+}

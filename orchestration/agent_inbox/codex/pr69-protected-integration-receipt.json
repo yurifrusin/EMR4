@@ -1,0 +1,20 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "integration",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely; its next implementation requires protected review/integration before the cookie candidate.",
+    "current_authority_allocation": "GPT Sol owns this check-gated protected integration; no worker may move the baton or protected refs.",
+    "active_plan_and_acceptance": ["docs/security/security-finding-governance-plan.md", "docs/security/security-finding-governance-threat-model-delta.md", "docs/security/security-finding-governance-closeout-2026-08-01.md", "orchestration/agent_inbox/codex/security-finding-governance-sol-acceptance.md", "docs/security/pr69-codeql-alerts-500-507-triage-2026-08-01.md"],
+    "protected_evidence_boundaries": "Protected holdouts and raw historical Diary material remain sealed. Provider, credential, real identity, federation, product/patient data, deployment, production, release, public rename, domain and trademark gates remain closed.",
+    "git_refs_and_worktree": {"pr_head":"572279a4a796dd5c578187575431b3c2baaaec4b","master":"4974075b31035d599e081d68e3b85e04a897baa1","handoff/current":"4974075b31035d599e081d68e3b85e04a897baa1","origin/master":"4974075b31035d599e081d68e3b85e04a897baa1","origin/handoff/current":"4974075b31035d599e081d68e3b85e04a897baa1","unresolved_review_threads":0,"open_security_severity_alerts":0,"concurrent_branding_assets":"present_untracked_untouched_and_excluded","protected_refs_unchanged_before_integration":true}
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true,
+  "worker_dispatch_selected": false
+}
