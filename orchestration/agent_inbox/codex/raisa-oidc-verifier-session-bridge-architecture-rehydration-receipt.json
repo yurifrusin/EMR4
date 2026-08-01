@@ -1,0 +1,32 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records the protected-integrated three-tranche Microsoft-federation result and the authorised architecture-only successor.",
+    "current_authority_allocation": "GPT Sol remains architecture and acceptance owner. Yuri authorised the maintained OIDC verifier, least-privilege provider-to-practice bootstrap and application-session bridge architecture only; no worker is dispatched.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-real-identity-microsoft-federation-boundary-plan.md",
+      "docs/raisa-microsoft-federation-admission-runtime-plan.md",
+      "docs/raisa-microsoft-federation-postgresql-persistence-plan.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "docs/api-spine/openapi/application-auth-synthetic-transport.yaml"
+    ],
+    "protected_evidence_boundaries": "No protected holdout or historical PHI access; no live Microsoft/provider call, real identity, product read, migration, package/dependency change, cloud/IAM mutation, deployment, production, release or protected integration. User-owned docs/branding/raisa remains untouched and excluded.",
+    "git_refs_and_worktree": "The architecture branch starts at 2e34bdad732fdab32fbf778280b3d3c70d66d602, where HEAD, local/origin master and local/origin handoff/current aligned. The only pre-tranche worktree item was untracked docs/branding/."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

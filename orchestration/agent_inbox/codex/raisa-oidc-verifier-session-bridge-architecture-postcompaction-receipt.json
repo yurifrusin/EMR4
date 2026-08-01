@@ -1,0 +1,30 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "verify_accept_record_and_publish_the_authorised_architecture_only_maintained_oidc_verifier_least_privilege_bootstrap_and_partition_safe_application_session_bridge_without_moving_protected_refs",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after context restoration; the protected Office stack and three-tranche Microsoft-federation parent remain accepted and protected-integrated.",
+    "current_authority_allocation": "GPT Sol retains architecture, acceptance and task-branch publication ownership. Yuri authorised this architecture-only descendant and no worker is dispatched.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-real-identity-microsoft-federation-boundary-plan.md",
+      "docs/raisa-microsoft-federation-admission-runtime-plan.md",
+      "docs/raisa-microsoft-federation-postgresql-persistence-plan.md",
+      "docs/raisa-maintained-oidc-verifier-session-bridge-architecture-plan.md"
+    ],
+    "protected_evidence_boundaries": "No protected holdout or historical PHI access; no dependency, live Microsoft/provider call, real identity, route, database migration/role, product read, cloud/IAM, deployment, production, release, protected integration or additional Pages rebuild. User-owned docs/branding/raisa remains untouched and excluded.",
+    "git_refs_and_worktree": "Architecture branch HEAD is 2e34bdad732fdab32fbf778280b3d3c70d66d602; local/origin master and handoff/current remain aligned there; only authorised architecture artifacts and preserved untracked docs/branding are present."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 172,
-  "updated_at": "2026-08-01T06:00:00Z",
-  "source_graph_revision": 191,
-  "orientation_statement": "EMR4 now has an accepted tenant-specific real-identity/Microsoft-federation architecture plus default-off synthetic admission and keyed-reference PostgreSQL binding/audit foundations. Continuity 191 / Compass 172 bind the three provider-free results. Protected integration remains paused because it would trigger public GitHub Pages deployment. Live Microsoft, real identity, application sessions, product data, production and release remain closed.",
+  "map_revision": 173,
+  "updated_at": "2026-08-02T00:30:00Z",
+  "source_graph_revision": 192,
+  "orientation_statement": "EMR4 now has an accepted architecture for MSAL-only tenant-specific OIDC, execute-only HMAC identity bootstrap and one-use original-partition session redemption. Continuity 192 / Compass 173 bind the provider-free result. Dependency admission, live Microsoft, real identity, database capability, application sessions, product reads, protected integration, production and release remain closed.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -1240,33 +1240,49 @@
         "orchestration/continuity/raisa-microsoft-federation-postgresql-persistence/live-local-backend-postgres-evidence.json",
         "docs/raisa-microsoft-federation-postgresql-persistence-closeout.md"
       ]
+    },
+    {
+      "node_id": "raisa-maintained-oidc-verifier-session-bridge-architecture",
+      "lineage_parent": "raisa-microsoft-federation-postgresql-persistence",
+      "strategic_role": "Maintained Microsoft OIDC, least-privilege identity bootstrap and partition-safe application-session architecture",
+      "outcome": "A 33-case provider-free architecture freezes MSAL-only tenant-specific verification, execute-only HMAC bootstrap and one-use original-partition session redemption with fresh internal truth.",
+      "evidence": [
+        "docs/raisa-maintained-oidc-verifier-session-bridge-architecture-plan.md",
+        "docs/raisa-maintained-oidc-verifier-session-bridge-architecture-design.md",
+        "docs/security/raisa-maintained-oidc-verifier-session-bridge-threat-model-delta.md",
+        "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+        "orchestration/continuity/raisa-maintained-oidc-verifier-session-bridge-architecture/architecture-policy.json",
+        "orchestration/continuity/raisa-maintained-oidc-verifier-session-bridge-architecture/provider-free-acceptance-evidence.json",
+        "docs/raisa-maintained-oidc-verifier-session-bridge-architecture-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-microsoft-federation-postgresql-persistence",
-    "strategic_role": "Durable keyed-reference federation binding and audit boundary",
-    "why_now": "The accepted Office-host session stack left real identity and Microsoft federation as the next security boundary; Yuri authorised the architecture and its two smallest provider-free implementation descendants.",
-    "outcome": "The three authorised federation descendants pass: tenant-specific architecture, default-off route-free synthetic admission, and disposable PostgreSQL keyed-reference binding/audit persistence. Live Microsoft, real identity, routes, sessions, product reads, deployment and release remain closed.",
+    "node_id": "raisa-maintained-oidc-verifier-session-bridge-architecture",
+    "strategic_role": "Maintained Microsoft OIDC, least-privilege identity bootstrap and partition-safe application-session architecture",
+    "why_now": "The protected-integrated federation persistence parent deliberately left maintained cryptographic verification, table-owner-free bootstrap and cross-Office session handoff as the next security boundary.",
+    "outcome": "The architecture passes 33 exact provider-free cases and freezes one backend-owned path without adding a dependency, provider call, route, database object, session, product read or deployment.",
     "unlocks": [
-      "Publish the task branch for review without moving protected refs or triggering GitHub Pages.",
-      "Seek fresh authority for an architecture-only maintained OIDC verifier and least-privilege bootstrap/session-bridge design.",
-      "Separately ask whether protected integration and its GitHub Pages deployment are authorised.",
+      "Review the architecture in its draft task-branch pull request without moving protected refs.",
+      "Seek fresh authority for MSAL dependency review/pinning and a provider-free offline adapter-admission implementation.",
+      "Later seek separate authority for disposable-PostgreSQL resolver/grant capability implementation.",
       "Keep Dependabot alert 17 as a separate explicit native-disposition decision."
     ],
     "does_not_solve": [
-      "Live Microsoft Entra registration, redirect, discovery, token exchange or key rollover.",
-      "Real identity binding administration, recovery or production key custody.",
-      "Application-session issuance, current internal role reload or product-data authorization.",
-      "Distributed abuse resistance, incident paging/SIEM, deployment, production or release.",
-      "The native disposition or removal of Dependabot alert 17."
+      "Live Microsoft Entra registration, discovery, token exchange, key rollover or real identity.",
+      "Database resolver/grant privilege and concurrency correctness.",
+      "A live callback, application session, product read or endpoint authorization.",
+      "Distributed abuse resistance, key custody, incident paging/SIEM, deployment, production or release.",
+      "Protected integration, another GitHub Pages rebuild or Dependabot alert 17 disposition."
     ],
     "evidence": [
-      "docs/raisa-microsoft-federation-postgresql-persistence-plan.md",
-      "docs/security/raisa-microsoft-federation-postgresql-persistence-threat-model-delta.md",
-      "alembic/versions/q6r7s8t9u0v1_add_application_identity_federation_persistence.py",
-      "app/services/application_identity_federation_persistence.py",
-      "orchestration/continuity/raisa-microsoft-federation-postgresql-persistence/live-local-backend-postgres-evidence.json",
-      "docs/raisa-microsoft-federation-postgresql-persistence-closeout.md"
+      "docs/raisa-maintained-oidc-verifier-session-bridge-architecture-plan.md",
+      "docs/raisa-maintained-oidc-verifier-session-bridge-architecture-design.md",
+      "docs/security/raisa-maintained-oidc-verifier-session-bridge-threat-model-delta.md",
+      "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+      "orchestration/continuity/raisa-maintained-oidc-verifier-session-bridge-architecture/architecture-policy.json",
+      "orchestration/continuity/raisa-maintained-oidc-verifier-session-bridge-architecture/provider-free-acceptance-evidence.json",
+      "docs/raisa-maintained-oidc-verifier-session-bridge-architecture-closeout.md"
     ]
   },
   "decision_horizon": [
@@ -1983,18 +1999,34 @@
     {
       "id": "authorize-maintained-oidc-verifier-session-bridge-architecture",
       "question": "Should EMR4 next freeze an architecture-only maintained OIDC verifier, least-privilege provider bootstrap and application-session bridge?",
-      "required_before": "Any live Microsoft discovery/token verification, real external binding, provider bootstrap role, session issuance or product identity reload.",
+      "required_before": "Satisfied on 2026-08-02 for architecture-only MSAL verifier, execute-only HMAC bootstrap and partition-safe application-session bridge design. Dependencies, live Microsoft, real identity, database objects, routes, sessions, product reads and deployment remain closed.",
       "evidence": [
-        "docs/raisa-microsoft-federation-postgresql-persistence-plan.md",
-        "docs/security/raisa-microsoft-federation-postgresql-persistence-threat-model-delta.md",
-        "alembic/versions/q6r7s8t9u0v1_add_application_identity_federation_persistence.py",
-        "app/services/application_identity_federation_persistence.py",
-        "orchestration/continuity/raisa-microsoft-federation-postgresql-persistence/live-local-backend-postgres-evidence.json",
-        "docs/raisa-microsoft-federation-postgresql-persistence-closeout.md"
+        "docs/raisa-maintained-oidc-verifier-session-bridge-architecture-plan.md",
+        "docs/raisa-maintained-oidc-verifier-session-bridge-architecture-design.md",
+        "docs/security/raisa-maintained-oidc-verifier-session-bridge-threat-model-delta.md",
+        "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+        "orchestration/continuity/raisa-maintained-oidc-verifier-session-bridge-architecture/architecture-policy.json",
+        "orchestration/continuity/raisa-maintained-oidc-verifier-session-bridge-architecture/provider-free-acceptance-evidence.json",
+        "docs/raisa-maintained-oidc-verifier-session-bridge-architecture-closeout.md"
+      ]
+    },
+    {
+      "id": "authorize-msal-offline-adapter-dependency-tranche",
+      "question": "Should EMR4 review and pin MSAL Python, then implement its provider adapter behind provider-free offline fault fixtures?",
+      "required_before": "Any package/dependency addition or maintained-verifier adapter implementation. Live network, real identity, routes, database changes and product reads would remain separately closed.",
+      "evidence": [
+        "docs/raisa-maintained-oidc-verifier-session-bridge-architecture-plan.md",
+        "docs/raisa-maintained-oidc-verifier-session-bridge-architecture-design.md",
+        "docs/security/raisa-maintained-oidc-verifier-session-bridge-threat-model-delta.md",
+        "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+        "orchestration/continuity/raisa-maintained-oidc-verifier-session-bridge-architecture/architecture-policy.json",
+        "orchestration/continuity/raisa-maintained-oidc-verifier-session-bridge-architecture/provider-free-acceptance-evidence.json",
+        "docs/raisa-maintained-oidc-verifier-session-bridge-architecture-closeout.md"
       ]
     }
   ],
   "map_limits": [
+    "The maintained OIDC/bootstrap/session-bridge result is architecture-only. It proves no dependency installation, live provider behavior, real identity, database capability, session, product access or deployment.",
     "The federation sequence proves architecture and authored-synthetic route-free runtime/persistence only. It does not establish live Microsoft interoperability, real identity, session issuance, product data, deployment, production or release.",
     "The PostgreSQL Office-host descendant proves one independent authored-synthetic lifecycle in each tested host through one exact local role-scoped path. It does not establish real identity, product data, distributed abuse resistance, deployment or production.",
     "Post-snapshot Dependabot alert 17 is statically not_actionable for the supported development lint configuration but remains native-open and needs_review pending an explicit user disposition.",
