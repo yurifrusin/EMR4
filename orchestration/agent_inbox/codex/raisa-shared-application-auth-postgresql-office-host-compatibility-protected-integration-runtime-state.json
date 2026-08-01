@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "merge_pr71_as_the_single_stacked_protected_integration_vehicle_with_one_user_authorized_pages_rebuild",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_pr71_protected_integration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: PRs 70 and 71 are the accepted in-memory and PostgreSQL Office-host compatibility stack; PR 71 is green and mergeable at d46144ac.",
+        "current_authority_allocation: Yuri explicitly authorized the public GitHub Pages rebuild required for protected integration; GPT Sol owns the bounded merge and ref alignment.",
+        "active_plan_and_acceptance: PR 70 head 0b3fe1f9 is an ancestor of PR 71 head d46144ac, so PR 71 is the sole non-duplicating merge vehicle and PR 70 must not be merged separately.",
+        "protected_evidence_boundaries: authority covers exactly the resulting Pages rebuild and protected integration; no other deployment, release, real identity, Microsoft federation or product-data authority opens.",
+        "git_refs_and_worktree: local and origin master and handoff/current are 1af54ae3; the task branch and origin match d46144ac; the index is empty and user-owned untracked branding remains untouched.",
+        "Both PRs are draft-open, mergeable and have all five checks green; PR 71 has zero open CodeQL alerts and alert 545 is fixed without dismissal."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent assigned."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external worker ran."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external planning lane ran."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external reviewer ran."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
