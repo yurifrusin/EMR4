@@ -91,6 +91,35 @@ def test_register_schema_inventory_owners_and_slas() -> None:
     assert new_alert["risk_acceptance"] is None
     assert _time(new_alert["triaged_at"]) <= _time(new_alert["triage_due_at"])
 
+    pr70_alert = next(row for row in all_rows if row["finding_id"] == "SF-0021")
+    assert (pr70_alert["source"], pr70_alert["native_id"]) == ("codeql", 544)
+    assert pr70_alert["severity"] == "high"
+    assert pr70_alert["triage_verdict"] == "confirmed"
+    assert pr70_alert["status"] == "open"
+    assert pr70_alert["observed_native_state"] == "open"
+    assert pr70_alert["desired_native_state"] == "fixed"
+    assert pr70_alert["native_disposition_at"] is None
+    assert pr70_alert["risk_acceptance"] is None
+
+
+def test_pr70_codeql_candidates_are_instance_preserving_and_pending_readback() -> None:
+    ledger_path = (
+        ROOT
+        / "docs"
+        / "security"
+        / "pr70-codeql-alerts-543-544-validation-ledger.jsonl"
+    )
+    rows = [json.loads(line) for line in ledger_path.read_text().splitlines()]
+    assert [row["candidate_id"] for row in rows] == ["codeql-543", "codeql-544"]
+    assert len({row["instance_key"] for row in rows}) == 2
+    assert {row["disposition"] for row in rows} == {
+        "patched_pending_codeql_readback"
+    }
+    assert {row["survives"] for row in rows} == {
+        "yes_quality_only",
+        "yes_confirmed_narrow_test_boundary",
+    }
+
 
 def test_post_snapshot_alert_17_triage_and_readback_remain_open_and_zero_mutation() -> None:
     triage_path = (

@@ -169,8 +169,6 @@
     } catch (error) {
       const code = error instanceof FlowFailure ? error.code : "network_unavailable";
       await fail(code, "The compatibility check failed closed. No fallback was used.");
-    } finally {
-      csrfToken = "";
     }
   }
 

@@ -39,6 +39,10 @@ EXPECTED_NATIVE_IDS = {
     "dependabot": {5, 8, 9, 10, 11, 12, 13, 14, 15},
     "codeql": {268, 272, 295},
 }
+EXPECTED_LEDGER_IDS = {
+    "bandit-candidates-2026-08-01",
+    "codeql-high-candidates-2026-07-17",
+}
 EXPECTED_SCHEDULES = {
     "python": 'cron: "17 18 * * *"',
     "node": 'cron: "47 18 * * *"',
@@ -120,6 +124,8 @@ def build_evidence() -> dict[str, Any]:
         actual = _ledger_rows(path)
         if actual != ledger["row_count"]:
             raise ValueError("linked ledger row count drift")
+        if ledger["ledger_id"] not in EXPECTED_LEDGER_IDS:
+            continue
         linked_ledgers.append(
             {
                 "ledger_id": ledger["ledger_id"],

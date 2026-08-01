@@ -93,7 +93,15 @@ def _exercise_surface(
     )
     assert page.status_code == 200
     assert page.headers["cache-control"] == "no-store"
-    assert "appsforoffice.microsoft.com" in page.headers["content-security-policy"]
+    csp_directives = {
+        parts[0]: parts[1:]
+        for directive in page.headers["content-security-policy"].split(";")
+        if (parts := directive.split())
+    }
+    assert csp_directives["script-src"] == [
+        "'self'",
+        "https://appsforoffice.microsoft.com",
+    ]
     bootstrap, evidence_nonce = _taskpane_material(page.text)
     assert len(bootstrap) >= 43
     assert len(evidence_nonce) >= 43

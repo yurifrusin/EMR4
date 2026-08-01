@@ -1,8 +1,8 @@
 {
   "schema_version": "emr4.security-finding-register.v1",
-  "register_revision": 4,
+  "register_revision": 5,
   "policy_effective_at": "2026-08-01T00:00:00+10:00",
-  "last_verified_at": "2026-08-01T09:00:51Z",
+  "last_verified_at": "2026-08-01T09:09:20Z",
   "owner": "@yurifrusin",
   "native_findings": [
     {
@@ -513,6 +513,35 @@
       "native_disposition_at": null,
       "review_at": "2026-08-03T00:00:00+10:00",
       "risk_acceptance": null
+    },
+    {
+      "finding_id": "SF-0021",
+      "source": "codeql",
+      "native_id": 544,
+      "native_url": "https://github.com/yurifrusin/EMR4/security/code-scanning/544",
+      "title": "Incomplete URL substring sanitization in Office CSP regression",
+      "severity": "high",
+      "owner": "@yurifrusin",
+      "first_observed_at": "2026-08-01T09:05:17Z",
+      "acknowledged_at": "2026-08-01T09:09:20Z",
+      "triaged_at": "2026-08-01T09:09:20Z",
+      "triage_due_at": "2026-08-06T09:05:17Z",
+      "triage_verdict": "confirmed",
+      "status": "open",
+      "affected_surface": "Office cookie-compatibility Content-Security-Policy regression test",
+      "evidence": [
+        "docs/security/pr70-codeql-alerts-543-544-triage-2026-08-01.md",
+        "docs/security/pr70-codeql-alerts-543-544-validation-ledger.jsonl",
+        "tests/test_raisa_shared_application_auth_office_cookie_compatibility.py"
+      ],
+      "repository_disposition": "Replace the URL-like substring assertion with exact tokenized script-src directive equality while preserving the legitimate Office.js origin and runtime header.",
+      "native_disposition_reason": "fixed",
+      "native_disposition_comment": "Patched with exact CSP directive parsing and equality; native fixed state awaits fresh CodeQL readback. Evidence: docs/security/pr70-codeql-alerts-543-544-triage-2026-08-01.md.",
+      "observed_native_state": "open",
+      "desired_native_state": "fixed",
+      "native_disposition_at": null,
+      "review_at": "2026-08-03T00:00:00+10:00",
+      "risk_acceptance": null
     }
   ],
   "linked_local_ledgers": [
@@ -531,6 +560,14 @@
       "row_count": 10,
       "disposition": "All instance-preserving rows validated; the three still-open native high alerts are indexed above for reconciliation.",
       "verified_at": "2026-08-01T15:30:00+10:00"
+    },
+    {
+      "ledger_id": "codeql-pr70-candidates-2026-08-01",
+      "scanner": "CodeQL",
+      "path": "docs/security/pr70-codeql-alerts-543-544-validation-ledger.jsonl",
+      "row_count": 2,
+      "disposition": "Both PR 70 instances are patched without dismissal; fresh CodeQL readback is pending before final remediation status.",
+      "verified_at": "2026-08-01T19:09:20+10:00"
     }
   ]
 }
