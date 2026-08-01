@@ -1,0 +1,40 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "verify_the_completed_office_protected_integration_closeout_and_send_the_required_non_phi_notification",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "The accepted stacked Office result is protected-integrated through PR 71; PR 70 is closed as subsumed and PR 72 records the no-docs baton closeout.",
+    "current_authority_allocation": "Yuri authorized exactly one public Pages rebuild plus the necessary protected integration and fast-forward ref alignment; GPT Sol owns final verification and the non-PHI closeout notice.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-shared-application-auth-office-cookie-compatibility-plan.md",
+      "docs/raisa-shared-application-auth-office-cookie-compatibility-closeout.md",
+      "docs/raisa-shared-application-auth-postgresql-office-host-compatibility-plan.md",
+      "docs/raisa-shared-application-auth-postgresql-office-host-compatibility-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-shared-application-auth-postgresql-office-host-compatibility-protected-integration-receipt.json"
+    ],
+    "protected_evidence_boundaries": "All provider, real identity, Microsoft federation, product/document/patient/clinical data, command, production and release gates remain closed; Dependabot alert 17 remains open needs_review without disposition authority.",
+    "git_refs_and_worktree": {
+      "HEAD": "41d04e6ee9bb3b3a98c6fbd4985a6a30d3f508b8",
+      "branch": "master",
+      "master": "41d04e6ee9bb3b3a98c6fbd4985a6a30d3f508b8",
+      "handoff/current": "41d04e6ee9bb3b3a98c6fbd4985a6a30d3f508b8",
+      "origin/master": "41d04e6ee9bb3b3a98c6fbd4985a6a30d3f508b8",
+      "origin/handoff/current": "41d04e6ee9bb3b3a98c6fbd4985a6a30d3f508b8",
+      "index_empty_before_receipt": true,
+      "concurrent_branding_assets_present_untracked_untouched_and_excluded": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}
