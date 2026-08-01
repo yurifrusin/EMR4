@@ -349,14 +349,19 @@ def test_live_evidence_residue_and_closeout_are_closed_and_exact():
     assert "PRs 70 and 71 were not merged" in closeout
     assert "GitHub Pages" in closeout
     assert "docs/branding/raisa/" in closeout
-    assert graph["graph_revision"] == 188
-    assert graph["nodes"][-1]["id"] == (
-        "raisa-shared-application-auth-postgresql-office-host-compatibility"
+    assert graph["graph_revision"] >= 188
+    office_node = next(
+        item
+        for item in graph["nodes"]
+        if item["id"]
+        == "raisa-shared-application-auth-postgresql-office-host-compatibility"
     )
-    assert compass["map_revision"] == 169
-    assert compass["source_graph_revision"] == 188
+    assert office_node["status"] == "accepted"
+    assert compass["map_revision"] >= 169
+    assert compass["source_graph_revision"] == graph["graph_revision"]
     assert compass["current_position"]["node_id"] == graph["nodes"][-1]["id"]
-    assert "Continuity 188 / Compass 169" in report
+    assert f"Compass map revision {compass['map_revision']}" in report
+    assert f"continuity graph revision {graph['graph_revision']}" in report
 
     rendered = json.dumps(
         {"live": live, "residue": residue, "acceptance": acceptance},

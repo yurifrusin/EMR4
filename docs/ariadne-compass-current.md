@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 shared application authentication now has a real Office-host proof through its accepted local PostgreSQL LOGIN-to-capability-role path. Continuity 188 / Compass 169 bind exact RLS, hash-only audit and cleanup evidence. Protected integration remains paused because it would trigger public GitHub Pages deployment. Real identity, Microsoft federation, product data, production and release remain closed.
+> EMR4 now has an accepted tenant-specific real-identity/Microsoft-federation architecture plus default-off synthetic admission and keyed-reference PostgreSQL binding/audit foundations. Continuity 191 / Compass 172 bind the three provider-free results. Protected integration remains paused because it would trigger public GitHub Pages deployment. Live Microsoft, real identity, application sessions, product data, production and release remain closed.
 
 ## North star
 
@@ -150,36 +150,40 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The accepted default-off authored-synthetic session-cookie lifecycle passed once in installed Word and once in Word Online through the exact development origin. Both independent sessions rotated, logged out and then denied validation; no product, identity, document, provider, cloud or deployment path ran, and task listeners and registration are absent. Publication exposed development-only Dependabot alert 17, which is registered open/needs_review without native or dependency mutation. PR 70 warning 543 and high alert 544 were repaired and fresh CodeQL marks both fixed without dismissal. Lineage parent: `raisa-shared-application-auth-operational-hardening`.
 67. **Real Office-host PostgreSQL capability-role compatibility proof — Raisa Shared Application-Auth PostgreSQL Office-Host Compatibility**
    Installed Word and Word Online each passed one independent authored-synthetic secure-cookie lifecycle through the accepted disposable local PostgreSQL, separate finite LOGIN role, exact NOLOGIN capability role, forced-RLS and retained-audit path. Exact database readback and complete owned cleanup pass with no raw-value match, product/identity/provider path, deployment or protected-ref move. Lineage parent: `raisa-shared-application-auth-office-cookie-compatibility`.
+68. **Real-identity and Microsoft-federation trust-boundary architecture — Raisa Real Identity and Microsoft Federation Boundary**
+   One tenant-specific organisational Entra, code/OIDC/S256 PKCE and exact prebinding architecture passes 22 provider-free cases while Microsoft remains authentication input only. Lineage parent: `raisa-shared-application-auth-postgresql-office-host-compatibility`.
+69. **Default-off synthetic federation admission runtime — Raisa Microsoft Federation Synthetic Admission Runtime**
+   A route-free in-memory runtime matches all 22 frozen cases, records keyed-reference audit before a role-free/session-free candidate and has zero external or product side effects. Lineage parent: `raisa-real-identity-microsoft-federation-boundary`.
+70. **Durable keyed-reference federation binding and audit boundary — Raisa Microsoft Federation PostgreSQL Persistence**
+   A reversible two-table authored-synthetic PostgreSQL boundary proves unique binding, terminal revocation, transaction-bound append-only audit, exact RLS, raw-value non-leakage and cleanup. Lineage parent: `raisa-microsoft-federation-admission-runtime`.
 
 ## Current position
 
-**Real Office-host PostgreSQL capability-role compatibility proof — Raisa Shared Application-Auth PostgreSQL Office-Host Compatibility**
+**Durable keyed-reference federation binding and audit boundary — Raisa Microsoft Federation PostgreSQL Persistence**
 
-**Why this proof came next:** The process-local Office cookie proof passed, leaving the already accepted durable role-scoped persistence path as the next smallest application-auth uncertainty.
+**Why this proof came next:** The accepted Office-host session stack left real identity and Microsoft federation as the next security boundary; Yuri authorised the architecture and its two smallest provider-free implementation descendants.
 
-Installed Word and Word Online each passed one independent authored-synthetic secure-cookie lifecycle through the accepted disposable local PostgreSQL, separate finite LOGIN role, exact NOLOGIN capability role, forced-RLS and retained-audit path. Exact database readback and complete owned cleanup pass with no raw-value match, product/identity/provider path, deployment or protected-ref move.
+The three authorised federation descendants pass: tenant-specific architecture, default-off route-free synthetic admission, and disposable PostgreSQL keyed-reference binding/audit persistence. Live Microsoft, real identity, routes, sessions, product reads, deployment and release remain closed.
 
 ### What this unlocks
 
-- Publish and review the task branch without moving protected refs or triggering deployment.
-- Ask Yuri whether the public GitHub Pages rebuild caused by protected integration is authorised.
-- Separately seek fresh authority for an architecture-only real-identity and Microsoft-federation boundary design with no live wiring or product reads.
-- Make the separate explicit native disposition decision for Dependabot alert 17.
+- Publish the task branch for review without moving protected refs or triggering GitHub Pages.
+- Seek fresh authority for an architecture-only maintained OIDC verifier and least-privilege bootstrap/session-bridge design.
+- Separately ask whether protected integration and its GitHub Pages deployment are authorised.
+- Keep Dependabot alert 17 as a separate explicit native-disposition decision.
 
 ### What it does not solve
 
-- Every Office/WebView/browser/tenant cookie policy.
-- Real identity, Microsoft federation or product-data authorization.
-- Distributed or production abuse resistance.
-- Organisational deployment, production or release.
+- Live Microsoft Entra registration, redirect, discovery, token exchange or key rollover.
+- Real identity binding administration, recovery or production key custody.
+- Application-session issuance, current internal role reload or product-data authorization.
+- Distributed abuse resistance, incident paging/SIEM, deployment, production or release.
 - The native disposition or removal of Dependabot alert 17.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
-- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
-- Bounded opening `api-change`: One provider-free authored-synthetic installed-Word and Word Online session lifecycle through the accepted disposable local PostgreSQL, separate LOGIN role and exact NOLOGIN capability role.
+- Bounded opening `api-change`: Two authored-synthetic keyed-reference binding/audit tables, one reversible migration and disposable local PostgreSQL proof.
 - All other named boundaries remain closed: `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -385,10 +389,17 @@ Prerequisites:
 - **May the accepted Office authentication branches be protected-integrated when that master docs push will rebuild and publish GitHub Pages?**
   Required before: Marking the affected PR ready or merging it to master. No deployment or protected-ref movement is currently authorised.
 - **Should EMR4 freeze an architecture-only real-identity and Microsoft-federation boundary next?**
-  Required before: Any identity adapter, Microsoft token exchange, live user or practice mapping, product read or federation wiring.
+  Required before: Satisfied on 2026-08-01 for the architecture-only boundary and its two route-free provider-free authored-synthetic descendants. Live Microsoft, real identity, sessions, product reads and deployment remain closed.
+- **Should EMR4 implement the frozen federation admission policy as a default-off route-free authored-synthetic runtime?**
+  Required before: Satisfied on 2026-08-01 for the provider-free in-memory runtime. Live verification, routes, sessions and product reads remain closed.
+- **Should EMR4 persist authored-synthetic external bindings and audit with keyed references in a disposable local PostgreSQL database?**
+  Required before: Satisfied on 2026-08-01 for one reversible two-table migration and disposable local proof. No existing database or live identity was used.
+- **Should EMR4 next freeze an architecture-only maintained OIDC verifier, least-privilege provider bootstrap and application-session bridge?**
+  Required before: Any live Microsoft discovery/token verification, real external binding, provider bootstrap role, session issuance or product identity reload.
 
 ## Map limits
 
+- The federation sequence proves architecture and authored-synthetic route-free runtime/persistence only. It does not establish live Microsoft interoperability, real identity, session issuance, product data, deployment, production or release.
 - The PostgreSQL Office-host descendant proves one independent authored-synthetic lifecycle in each tested host through one exact local role-scoped path. It does not establish real identity, product data, distributed abuse resistance, deployment or production.
 - Post-snapshot Dependabot alert 17 is statically not_actionable for the supported development lint configuration but remains native-open and needs_review pending an explicit user disposition.
 - The Office cookie descendant proves one independent session lifecycle in installed Word and Word Online through one development origin. It does not cover every policy, PostgreSQL/multi-instance behavior, real identity, product data, organisational deployment or production.
@@ -446,6 +457,7 @@ Prerequisites:
 
 - `.github/workflows/pages.yml`
 - `alembic/versions/o4p5q6r7s8t9_add_application_auth_persistence.py`
+- `alembic/versions/q6r7s8t9u0v1_add_application_identity_federation_persistence.py`
 - `app/models/application_auth.py`
 - `app/routers/application_auth.py`
 - `app/services/application_auth_database_role.py`
@@ -454,6 +466,8 @@ Prerequisites:
 - `app/services/application_auth_persistence.py`
 - `app/services/application_auth_role_runtime.py`
 - `app/services/application_auth_runtime.py`
+- `app/services/application_identity_federation.py`
+- `app/services/application_identity_federation_persistence.py`
 - `deploy/raisa-office-web-dev/Dockerfile`
 - `deploy/raisa-office-web-dev/manifest-template.xml`
 - `deploy/raisa-office-web-dev/server.mjs`
@@ -591,6 +605,13 @@ Prerequisites:
 - `docs/raisa-cloud-run-public-https-dev-host-readiness-plan.md`
 - `docs/raisa-dual-host-foundation-closeout.md`
 - `docs/raisa-dual-host-foundation-plan.md`
+- `docs/raisa-microsoft-federation-admission-runtime-closeout.md`
+- `docs/raisa-microsoft-federation-admission-runtime-plan.md`
+- `docs/raisa-microsoft-federation-postgresql-persistence-closeout.md`
+- `docs/raisa-microsoft-federation-postgresql-persistence-plan.md`
+- `docs/raisa-real-identity-microsoft-federation-boundary-closeout.md`
+- `docs/raisa-real-identity-microsoft-federation-boundary-design.md`
+- `docs/raisa-real-identity-microsoft-federation-boundary-plan.md`
 - `docs/raisa-shared-application-auth-clinician-role-boundary-closeout.md`
 - `docs/raisa-shared-application-auth-clinician-role-boundary-design.md`
 - `docs/raisa-shared-application-auth-clinician-role-boundary-plan.md`
@@ -630,6 +651,9 @@ Prerequisites:
 - `docs/security/raisa-clinician-one-word-desktop-selection-check-threat-model-delta.md`
 - `docs/security/raisa-cloud-run-public-https-dev-host-readiness-threat-model-delta.md`
 - `docs/security/raisa-dual-host-foundation-threat-model-delta.md`
+- `docs/security/raisa-microsoft-federation-admission-runtime-threat-model-delta.md`
+- `docs/security/raisa-microsoft-federation-postgresql-persistence-threat-model-delta.md`
+- `docs/security/raisa-real-identity-microsoft-federation-boundary-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-clinician-role-boundary-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-office-cookie-compatibility-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-operational-hardening-threat-model-delta.md`
@@ -853,6 +877,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-dual-host-foundation/feature-inventory.json`
 - `orchestration/continuity/raisa-dual-host-foundation/final-residue-evidence.json`
 - `orchestration/continuity/raisa-dual-host-foundation/host-profile-matrix-evidence.json`
+- `orchestration/continuity/raisa-microsoft-federation-admission-runtime/provider-free-acceptance-evidence.json`
+- `orchestration/continuity/raisa-microsoft-federation-postgresql-persistence/live-local-backend-postgres-evidence.json`
+- `orchestration/continuity/raisa-real-identity-microsoft-federation-boundary/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/auth-boundary-policy.json`
 - `orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-shared-application-auth-operational-hardening/live-local-backend-postgres-operational-evidence.json`
@@ -1174,4 +1201,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 169; continuity graph revision 188._
+_Compass map revision 172; continuity graph revision 191._
