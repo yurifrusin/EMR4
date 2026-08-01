@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "push_the_codeql_545_fixed_readback_and_closeout_to_pr71_without_moving_protected_refs",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_pr71_codeql_545_closeout_prepush",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: PR 71 retains the accepted PostgreSQL Office-host result at Continuity 188 and Compass 169.",
+        "current_authority_allocation: Yuri explicitly approved the CodeQL 545 repair and task-branch publication; GPT Sol owns this final evidence push.",
+        "active_plan_and_acceptance: commit c5495505 records fixed native readback, zero open PR alerts, no dismissal, exact quality triage and the updated closeout.",
+        "protected_evidence_boundaries: deployment, protected integration, security-register reclassification, identity, product data, production and release remain closed.",
+        "git_refs_and_worktree: origin was fetched; protected refs remain 1af54ae3, origin task branch is d005a152, local HEAD is one evidence commit ahead, the index is empty and only user-owned untracked branding remains.",
+        "The focused evidence and compact-handover regressions, JSON parsing, Ruff and diff checks pass."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent assigned."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external worker ran."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external planning lane ran."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external reviewer ran."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
