@@ -1,0 +1,56 @@
+{
+  "authority_boundary": "pr69_parser_hardening_regression_tests_ui_harness_reconciliation_exact_seven_alert_triage_registering_justified_native_dispositions_and_task_branch_commit_authority_only_no_protected_ref_deploy_provider_product_or_data_authority",
+  "continuation_event": "new_session",
+  "planned_action": "commit",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. The current accepted product result is security_finding_governance_pass; the Terra/Gemini comparison records remain immutable historical results with consumed provider ledgers.",
+    "current_authority_allocation": "GPT Sol retains conductor, security decision, acceptance, recovery and task-branch commit ownership. No external worker or native subagent is selected or authorised to accept, integrate or move protected refs.",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-terra-gemini-comparative-rehearsal-plan.md",
+      "docs/ariadne-terra-gemini-comparative-rehearsal-design.md",
+      "docs/security/ariadne-terra-gemini-comparative-rehearsal-threat-model-delta.md",
+      "docs/ariadne-terra-gemini-comparative-rehearsal-closeout.md",
+      "docs/ariadne-terra-gemini-comparative-rehearsal-attempt2-plan.md",
+      "docs/ariadne-terra-gemini-comparative-rehearsal-attempt2-closeout.md",
+      "docs/ariadne-terra-gemini-provider-contract-diagnostic-hardening-plan.md",
+      "docs/ariadne-terra-gemini-provider-contract-diagnostic-hardening-closeout.md",
+      "docs/ariadne-terra-gemini-diagnostic-hardening-fresh-closeout-plan.md",
+      "docs/ariadne-terra-gemini-diagnostic-hardening-fresh-closeout.md",
+      "docs/ariadne-terra-gemini-comparative-rehearsal-attempt3-audit-plan.md",
+      "docs/ariadne-terra-gemini-comparative-rehearsal-attempt3-audit-closeout.md",
+      "docs/ariadne-gemini-provider-blocked-request-contract-diagnostic-plan.md",
+      "docs/ariadne-gemini-provider-blocked-request-contract-diagnostic-closeout.md",
+      "docs/ariadne-gemini-repaired-request-attempt4-plan.md",
+      "docs/ariadne-gemini-repaired-request-attempt4-closeout.md",
+      "docs/security/security-finding-governance-plan.md",
+      "docs/security/security-finding-governance-threat-model-delta.md",
+      "docs/security/security-finding-governance-closeout-2026-08-01.md",
+      "orchestration/agent_inbox/codex/security-finding-governance-sol-acceptance.md"
+    ],
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 and raw historical Diary material remain sealed. Provider/model calls, credential reads, containers, product/API/database/event/mailbox/command surfaces, patient or clinical data, deployment, production, release and protected-ref movement remain closed. Native alert mutation requires exact current read, durable evidence-backed registration, justified disposition and exact readback.",
+    "git_refs_and_worktree": {
+      "HEAD": "4ef4b75a89baafa1cd69636e7160308cbcbd6e14",
+      "branch": "codex/ariadne-terra-gemini-comparative-rehearsal",
+      "master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/master": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/handoff/current": "4974075b31035d599e081d68e3b85e04a897baa1",
+      "origin/codex/ariadne-terra-gemini-comparative-rehearsal": "4ef4b75a89baafa1cd69636e7160308cbcbd6e14",
+      "initial_worktree_clean": true,
+      "protected_refs_unchanged": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

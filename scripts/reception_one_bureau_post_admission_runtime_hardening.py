@@ -33,6 +33,13 @@ REQUEST = (
     "today morning"
 )
 COMPOSE_PATH = "/api/v1/appointments/proposals/reception-one/compose"
+PROVIDER_HOST_ALLOWLIST = frozenset(
+    {
+        "australia-southeast1-aiplatform.googleapis.com",
+        "generativelanguage.googleapis.com",
+        "api.openai.com",
+    }
+)
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -68,6 +75,17 @@ def canonical_hash(value: Any) -> str:
         sort_keys=True,
     ).encode("utf-8")
     return f"sha256:{hashlib.sha256(rendered).hexdigest()}"
+
+
+def observed_provider_hosts(network: list[dict[str, str]]) -> list[str]:
+    """Return only exact provider endpoints observed by this bounded proof."""
+    return sorted(
+        {
+            item["hostname"]
+            for item in network
+            if item["hostname"] in PROVIDER_HOST_ALLOWLIST
+        }
+    )
 
 
 def admitted_fixture(
@@ -338,17 +356,7 @@ def run() -> dict[str, Any]:
         for item in all_network
         if item["method"] == "POST" and item["path"] == COMPOSE_PATH
     ]
-    provider_hosts = sorted(
-        {
-            item["hostname"]
-            for item in all_network
-            if (
-                "aiplatform.googleapis.com" in item["hostname"]
-                or "generativelanguage.googleapis.com" in item["hostname"]
-                or "api.openai.com" in item["hostname"]
-            )
-        }
-    )
+    provider_hosts = observed_provider_hosts(all_network)
     mismatch_fail_closed = all(
         outcome["projection_state"] == "blocked"
         and outcome["proposal_visible"] is False

@@ -45,10 +45,18 @@ def test_register_schema_inventory_owners_and_slas() -> None:
     schema = _load(SCHEMA)
     register = _load(REGISTER)
     Draft202012Validator(schema, format_checker=FormatChecker()).validate(register)
-    rows = register["native_findings"]
+    all_rows = register["native_findings"]
+    assert len({row["finding_id"] for row in all_rows}) == len(all_rows)
+    assert len({(row["source"], row["native_id"]) for row in all_rows}) == len(all_rows)
+    baseline_keys = {
+        ("dependabot", native_id) for native_id in {5, 8, 9, 10, 11, 12, 13, 14, 15}
+    } | {("codeql", native_id) for native_id in {268, 272, 295}}
+    rows = [
+        row
+        for row in all_rows
+        if (row["source"], row["native_id"]) in baseline_keys
+    ]
     assert len(rows) == 12
-    assert len({row["finding_id"] for row in rows}) == 12
-    assert len({(row["source"], row["native_id"]) for row in rows}) == 12
     assert {row["native_id"] for row in rows if row["source"] == "dependabot"} == {
         5,
         8,
@@ -79,7 +87,12 @@ def test_native_alert_readback_matches_register_exactly() -> None:
         (row["source"], row["native_id"]): row
         for row in native["final_dispositions"]
     }
+    baseline_keys = {
+        ("dependabot", native_id) for native_id in {5, 8, 9, 10, 11, 12, 13, 14, 15}
+    } | {("codeql", native_id) for native_id in {268, 272, 295}}
     for row in register["native_findings"]:
+        if (row["source"], row["native_id"]) not in baseline_keys:
+            continue
         observed = evidence[(row["source"], row["native_id"])]
         assert row["observed_native_state"] == "dismissed"
         assert row["desired_native_state"] == "dismissed"

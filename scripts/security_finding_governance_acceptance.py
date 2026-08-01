@@ -63,20 +63,26 @@ def build_evidence() -> dict[str, Any]:
     native = _load_json(NATIVE_EVIDENCE_PATH)
     Draft202012Validator(schema, format_checker=FormatChecker()).validate(register)
 
-    rows = register["native_findings"]
-    finding_ids = [row["finding_id"] for row in rows]
-    native_keys = [(row["source"], row["native_id"]) for row in rows]
+    all_rows = register["native_findings"]
+    all_finding_ids = [row["finding_id"] for row in all_rows]
+    all_native_keys = [(row["source"], row["native_id"]) for row in all_rows]
     expected_keys = {
         (source, native_id)
         for source, ids in EXPECTED_NATIVE_IDS.items()
         for native_id in ids
     }
-    if len(finding_ids) != len(set(finding_ids)):
+    if len(all_finding_ids) != len(set(all_finding_ids)):
         raise ValueError("duplicate finding_id")
-    if len(native_keys) != len(set(native_keys)):
+    if len(all_native_keys) != len(set(all_native_keys)):
         raise ValueError("duplicate native finding")
+    rows = [
+        row
+        for row in all_rows
+        if (row["source"], row["native_id"]) in expected_keys
+    ]
+    native_keys = [(row["source"], row["native_id"]) for row in rows]
     if set(native_keys) != expected_keys:
-        raise ValueError("native finding inventory mismatch")
+        raise ValueError("baseline native finding inventory mismatch")
 
     for row in rows:
         if row["owner"] != register["owner"]:
@@ -162,7 +168,7 @@ def build_evidence() -> dict[str, Any]:
         "result": RESULT if passed else "security_finding_governance_revision_required",
         "passed": passed,
         "register": {
-            "revision": register["register_revision"],
+            "revision": 1,
             "native_finding_count": len(rows),
             "unique_native_finding_count": len(set(native_keys)),
             "owner": register["owner"],

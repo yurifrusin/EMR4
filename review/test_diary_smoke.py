@@ -113,8 +113,15 @@ def assert_bernie_confirmed_state(page, *, authoritative=True):
     assert page.locator("[data-testid='bernie-review-confirm-button']").count() == 0
 
 
-def route_minimal_diary_api(page):
+def route_minimal_diary_api(
+    page,
+    *,
+    appointments=None,
+    practitioner_id="real-prac-auth",
+):
     """Route enough non-smoke API calls for deterministic diary auth tests."""
+    appointments = list(appointments or [])
+
     def handle_api(route):
         url = route.request.url
         if "/api/v1/auth/me" in url:
@@ -126,14 +133,14 @@ def route_minimal_diary_api(page):
                 "columns": [{
                     "room_label": "Room 1",
                     "assignment": "Dr Alex Shera",
-                    "practitioner_id": "real-prac-auth",
+                    "practitioner_id": practitioner_id,
                     "practitioner_ahpra": "MED0001234567"
                 }]
             }))
         elif "/api/v1/appointments/types" in url:
             route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
         elif "/api/v1/appointments" in url:
-            route.fulfill(status=200, content_type="application/json", body=json.dumps([]))
+            route.fulfill(status=200, content_type="application/json", body=json.dumps(appointments))
         elif "/api/v1/diary/locations" in url:
             route.fulfill(status=200, content_type="application/json", body=json.dumps([
                 {"id": "loc-1", "name": "Main Clinic", "is_active": True}
@@ -153,6 +160,62 @@ def route_minimal_diary_api(page):
             route.fulfill(status=200, content_type="application/json", body=json.dumps({}))
 
     page.route("**/api/v1/**", handle_api)
+
+
+def selected_context_review_appointments():
+    """Return linked and provisional authored-synthetic Diary rows for UI review."""
+    return [
+        {
+            "id": "smoke-appt-1",
+            "appointment_date": "2026-06-27",
+            "start_time_local": "09:00",
+            "start_time": "09:00",
+            "duration_minutes": 30,
+            "status": "Booked",
+            "appointment_type_id": None,
+            "patient_id": "smoke-pat-1",
+            "patient": {
+                "id": "smoke-pat-1",
+                "first_name": "Margaret",
+                "last_name": "Thompson",
+                "date_of_birth": "1952-03-14",
+            },
+            "practitioner_id": "smoke-prac-1",
+            "practitioner": {
+                "id": "smoke-prac-1",
+                "first_name": "Alex",
+                "last_name": "Shera",
+                "ahpra_number": "MED0001234567",
+            },
+            "room_id": None,
+            "location_id": "loc-1",
+            "reason": "Hypertension follow-up",
+            "notes": "",
+        },
+        {
+            "id": "smoke-appt-6",
+            "appointment_date": "2026-06-27",
+            "start_time_local": "10:05",
+            "start_time": "10:05",
+            "duration_minutes": 20,
+            "status": "Booked",
+            "appointment_type_id": None,
+            "patient_id": None,
+            "patient": None,
+            "patient_name_provisional": "Nora Patel",
+            "practitioner_id": "smoke-prac-1",
+            "practitioner": {
+                "id": "smoke-prac-1",
+                "first_name": "Alex",
+                "last_name": "Shera",
+                "ahpra_number": "MED0001234567",
+            },
+            "room_id": None,
+            "location_id": "loc-1",
+            "reason": "Dressing change",
+            "notes": "",
+        },
+    ]
 
 
 def route_practitioner_directory_consumer_api(
@@ -3333,6 +3396,8 @@ def test_bernie_pilot_eligibility_eligible(diary_page):
         "blocks": []
     }
 
+    route_minimal_diary_api(diary_page)
+
     diary_page.route(
         "**/api/v1/appointments/bernie/pilot-eligibility",
         lambda route: route.fulfill(
@@ -3358,7 +3423,8 @@ def test_bernie_pilot_eligibility_eligible(diary_page):
     )
 
     try:
-        diary_page.goto(base_url + "/diary/diary.html?smoke=true")
+        harness.bootstrap_auth(diary_page, REVIEW_AUTH_TOKEN)
+        diary_page.goto(base_url + "/diary/diary.html?reference_date=2026-06-27")
         diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
 
         launch_btn = diary_page.locator("[data-testid='bernie-pilot-launch-button']")
@@ -3388,8 +3454,8 @@ def test_bernie_pilot_eligibility_eligible(diary_page):
         assert "Would you like to confirm?" in headline.text_content()
 
     finally:
-        diary_page.unroute("**/api/v1/appointments/bernie/pilot-eligibility")
-        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
+        harness.clear_auth(diary_page)
+        diary_page.unroute("**/api/v1/**")
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
@@ -3909,6 +3975,8 @@ def test_bernie_pilot_eligibility_confirm_gated(diary_page):
         "blocks": []
     }
 
+    route_minimal_diary_api(diary_page)
+
     confirm_payloads = []
 
     def handle_confirm(route):
@@ -3946,7 +4014,8 @@ def test_bernie_pilot_eligibility_confirm_gated(diary_page):
     )
 
     try:
-        diary_page.goto(base_url + "/diary/diary.html?smoke=true")
+        harness.bootstrap_auth(diary_page, REVIEW_AUTH_TOKEN)
+        diary_page.goto(base_url + "/diary/diary.html?reference_date=2026-06-27")
         diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
 
         diary_page.click("[data-testid='bernie-pilot-launch-button']")
@@ -3973,9 +4042,8 @@ def test_bernie_pilot_eligibility_confirm_gated(diary_page):
         assert confirm_payloads[0]["confirmed"] is True
 
     finally:
-        diary_page.unroute("**/api/v1/appointments/bernie/pilot-eligibility")
-        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
-        diary_page.unroute("**/api/v1/appointments/proposals/create/confirm-bernie")
+        harness.clear_auth(diary_page)
+        diary_page.unroute("**/api/v1/**")
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
@@ -4035,6 +4103,12 @@ def test_bernie_pilot_selected_appointment_context(diary_page):
         "blocks": []
     }
 
+    route_minimal_diary_api(
+        diary_page,
+        appointments=selected_context_review_appointments(),
+        practitioner_id="smoke-prac-1",
+    )
+
     supervised_requests = []
 
     def handle_supervised_booking(route):
@@ -4078,7 +4152,8 @@ def test_bernie_pilot_selected_appointment_context(diary_page):
     )
 
     try:
-        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_context_form=true")
+        harness.bootstrap_auth(diary_page, REVIEW_AUTH_TOKEN)
+        diary_page.goto(base_url + "/diary/diary.html?bernie_context_form=true")
         diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
 
         # Launch Bernie Pilot sidebar
@@ -4128,9 +4203,8 @@ def test_bernie_pilot_selected_appointment_context(diary_page):
         assert supervised_requests[0]["command"]["patient_id"] == "smoke-pat-1"
 
     finally:
-        diary_page.unroute("**/api/v1/appointments/bernie/pilot-eligibility")
-        diary_page.unroute("**/api/v1/appointments/proposals/bernie/supervised-booking")
-        diary_page.unroute("**/api/v1/appointments/proposals/bernie/interpret-booking-instruction")
+        harness.clear_auth(diary_page)
+        diary_page.unroute("**/api/v1/**")
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
@@ -4149,6 +4223,8 @@ def test_bernie_context_readiness_and_summary_flow(diary_page):
         "user_allowed": True
     }
 
+    route_minimal_diary_api(diary_page)
+
     diary_page.route(
         "**/api/v1/appointments/bernie/pilot-eligibility",
         lambda route: route.fulfill(
@@ -4160,7 +4236,8 @@ def test_bernie_context_readiness_and_summary_flow(diary_page):
 
     try:
         # Load with the historical context-form flag; ordinary Bernie now starts instruction-first.
-        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_context_form=true")
+        harness.bootstrap_auth(diary_page, REVIEW_AUTH_TOKEN)
+        diary_page.goto(base_url + "/diary/diary.html?bernie_context_form=true")
         diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
 
         # Launch Bernie Pilot sidebar
@@ -4180,7 +4257,8 @@ def test_bernie_context_readiness_and_summary_flow(diary_page):
         assert diary_page.locator("[data-testid='bernie-context-summary']").count() == 0
 
     finally:
-        diary_page.unroute("**/api/v1/appointments/bernie/pilot-eligibility")
+        harness.clear_auth(diary_page)
+        diary_page.unroute("**/api/v1/**")
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
@@ -4199,6 +4277,12 @@ def test_bernie_context_summary_import_from_selected(diary_page):
         "user_allowed": True
     }
 
+    route_minimal_diary_api(
+        diary_page,
+        appointments=selected_context_review_appointments(),
+        practitioner_id="smoke-prac-1",
+    )
+
     diary_page.route(
         "**/api/v1/appointments/bernie/pilot-eligibility",
         lambda route: route.fulfill(
@@ -4210,7 +4294,8 @@ def test_bernie_context_summary_import_from_selected(diary_page):
 
     try:
         # Load with bernie_context_form=true
-        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_context_form=true")
+        harness.bootstrap_auth(diary_page, REVIEW_AUTH_TOKEN)
+        diary_page.goto(base_url + "/diary/diary.html?bernie_context_form=true")
         diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
 
         # Launch Bernie Pilot sidebar
@@ -4243,7 +4328,8 @@ def test_bernie_context_summary_import_from_selected(diary_page):
         assert "Practitioner: Alex Shera" in details.text_content()
 
     finally:
-        diary_page.unroute("**/api/v1/appointments/bernie/pilot-eligibility")
+        harness.clear_auth(diary_page)
+        diary_page.unroute("**/api/v1/**")
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)
 
@@ -5479,6 +5565,8 @@ def test_bernie_ordinary_mode_readiness_and_diagnostics(diary_page):
         "blocks": []
     }
 
+    route_minimal_diary_api(diary_page)
+
     diary_page.route(
         "**/api/v1/appointments/bernie/pilot-eligibility",
         lambda route: route.fulfill(
@@ -5518,7 +5606,7 @@ def test_bernie_ordinary_mode_readiness_and_diagnostics(diary_page):
     try:
         # 1. Test ordinary mode (stay calm, useful, and show friendly error without diagnostics)
         harness.bootstrap_auth(diary_page, REVIEW_AUTH_TOKEN)
-        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_context_form=true")
+        diary_page.goto(base_url + "/diary/diary.html?bernie_context_form=true")
         diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
 
         # Launch panel
@@ -5622,6 +5710,8 @@ def test_bernie_ordinary_mode_no_raw_codes(diary_page):
         "blocks": []
     }
 
+    route_minimal_diary_api(diary_page)
+
     diary_page.route(
         "**/api/v1/appointments/bernie/pilot-eligibility",
         lambda route: route.fulfill(
@@ -5642,7 +5732,8 @@ def test_bernie_ordinary_mode_no_raw_codes(diary_page):
 
     try:
         # Ordinary mode: no debug parameters
-        diary_page.goto(base_url + "/diary/diary.html?smoke=true&bernie_context_form=true")
+        harness.bootstrap_auth(diary_page, REVIEW_AUTH_TOKEN)
+        diary_page.goto(base_url + "/diary/diary.html?bernie_context_form=true")
         diary_page.wait_for_selector("#diary-grid", state="visible", timeout=5000)
 
         # Launch panel
@@ -5665,6 +5756,7 @@ def test_bernie_ordinary_mode_no_raw_codes(diary_page):
         assert diary_page.locator("[data-testid='bernie-dev-diagnostic']").count() == 0
 
     finally:
+        harness.clear_auth(diary_page)
         diary_page.unroute("**/api/v1/**")
         diary_page.goto(base_url + CHECKS["target"])
         diary_page.wait_for_selector(CHECKS["wait_for"], state="visible", timeout=15000)

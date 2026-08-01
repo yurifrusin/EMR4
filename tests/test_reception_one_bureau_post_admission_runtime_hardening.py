@@ -3,6 +3,10 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from scripts.reception_one_bureau_post_admission_runtime_hardening import (
+    observed_provider_hosts,
+)
+
 
 ROOT = Path(__file__).resolve().parents[1]
 PLAN = (
@@ -34,6 +38,23 @@ COMPASS = ROOT / "orchestration" / "continuity" / "emr4-compass.json"
 
 def _json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def test_provider_host_detection_uses_exact_hostnames() -> None:
+    network = [
+        {"hostname": "australia-southeast1-aiplatform.googleapis.com"},
+        {"hostname": "generativelanguage.googleapis.com"},
+        {"hostname": "api.openai.com"},
+        {"hostname": "aiplatform.googleapis.com.attacker.example"},
+        {"hostname": "generativelanguage.googleapis.com.attacker.example"},
+        {"hostname": "api.openai.com.attacker.example"},
+    ]
+
+    assert observed_provider_hosts(network) == [
+        "api.openai.com",
+        "australia-southeast1-aiplatform.googleapis.com",
+        "generativelanguage.googleapis.com",
+    ]
 
 
 def test_provider_free_browser_acceptance_passes_closed_contract() -> None:
