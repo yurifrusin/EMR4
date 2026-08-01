@@ -37,6 +37,7 @@ its exact result, artifacts, unresolved gates, next tranche, and reasoning level
 
 | Item | Current value |
 |---|---|
+| Current task-branch review and gate | Draft PR 71 is mergeable with all five checks green at `d005a1521bd2af7d3ca7a773477567afa3809b71`. Initial CodeQL correctness/quality alert 545 had no security-severity level; Yuri approved a structural initializer repair, fresh analysis reports it `fixed`, zero PR CodeQL alerts remain open, and no suppression, dismissal or native state mutation occurred. Evidence: `docs/security/pr71-codeql-alert-545-triage-2026-08-01.md`, `docs/security/pr71-codeql-alert-545-validation-ledger.jsonl`, `orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/codeql-pr71-alert-545-readback.json`, and the matching repair precommit/prepush receipts. Protected integration of PRs 70 and 71 remains paused solely pending Yuri's explicit decision on the GitHub Pages rebuild their `docs/**` changes would trigger. After that decision, the smallest separately authorised product candidate remains an architecture-only real-identity and Microsoft-federation boundary design; Dependabot alert 17's native disposition is separately pending. |
 | Mode | Parallel-capable Ariadne workflow; protected single-track integration |
 | Baton ref | `handoff/current` |
 | Integration worktree | `C:\Users\sarashera\emr4` on `master` |
@@ -483,7 +484,6 @@ Topic ledgers:
 - index: `docs/handover-ledgers/README.md`
 - compaction closeout: `docs/handover-compaction-2026-07-15.md`
 Use the ledgers for authoritative closeouts and policy documents. Use the immutable snapshot only for full historical reconstruction, retired workflow details, or provenance not yet represented in a dedicated closeout.
-
 ## 10. Updating This Handover
 
 Update this live file whenever current authority, baton state, protected boundaries, active acceptance, or next work changes. Put chronology in the appropriate topic ledger or sprint closeout rather than expanding this file indefinitely.

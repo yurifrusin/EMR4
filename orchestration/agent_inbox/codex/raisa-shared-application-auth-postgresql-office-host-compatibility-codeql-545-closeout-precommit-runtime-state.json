@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit_the_fixed_native_readback_and_closeout_for_pr71_codeql_alert_545_on_the_task_branch_only",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_pr71_codeql_545_closeout_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: PR 71 retains the accepted PostgreSQL Office-host compatibility result at Continuity 188 and Compass 169.",
+        "current_authority_allocation: Yuri explicitly approved the exact CodeQL 545 repair and ordinary task-branch publication; GPT Sol owns this evidence-only closeout commit.",
+        "active_plan_and_acceptance: fresh run 30698479139 passed both CodeQL languages and the Advanced Security wrapper at d005a152; alert 545 is fixed, zero PR CodeQL alerts remain open and no dismissal occurred.",
+        "protected_evidence_boundaries: alert 545 has no security-severity level and is preserved in a quality validation ledger, not added to the security-severity register; no deployment or protected integration is opened.",
+        "git_refs_and_worktree: protected refs remain 1af54ae3, the task branch is at d005a152, and the concurrent user-owned docs/branding/raisa directory remains untouched, untracked and excluded.",
+        "The updated focused evidence and compact-handover regressions, JSON parsing, Ruff and diff checks pass."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent assigned."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external worker ran."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external planning lane ran."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external reviewer ran."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
