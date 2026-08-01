@@ -155,8 +155,31 @@ def test_pr74_codeql_quality_candidates_are_instance_preserving() -> None:
     assert {row["security_severity"] for row in rows} == {None}
     assert {row["triage_verdict"] for row in rows} == {"not_actionable"}
     assert {row["disposition"] for row in rows} == {
-        "source_repaired_pending_fresh_codeql"
+        "fixed_by_fresh_codeql_analysis"
     }
+    assert {row["survives"] for row in rows} == {"no"}
+    assert {row["fixed_head"] for row in rows} == {
+        "eeb39df38f6d7ccda76b0d28a92047ed98816717"
+    }
+    readback_path = (
+        ROOT
+        / "orchestration"
+        / "continuity"
+        / "raisa-real-identity-microsoft-federation-boundary"
+        / "codeql-pr74-alerts-readback.json"
+    )
+    assert {row["readback"] for row in rows} == {
+        str(readback_path.relative_to(ROOT)).replace("\\", "/")
+    }
+    readback = _load(readback_path)
+    assert readback["fixed_head"] == next(iter({row["fixed_head"] for row in rows}))
+    assert {(item["number"], item["state"]) for item in readback["native_instances"]} == {
+        (546, "fixed"),
+        (547, "fixed"),
+        (548, "fixed"),
+    }
+    assert readback["external_side_effects"]["native_alert_mutations"] == 0
+    assert readback["external_side_effects"]["dismissals"] == 0
 
 
 def test_post_snapshot_alert_17_triage_and_readback_remain_open_and_zero_mutation() -> None:

@@ -1,8 +1,8 @@
 {
   "schema_version": "emr4.security-finding-register.v1",
-  "register_revision": 7,
+  "register_revision": 8,
   "policy_effective_at": "2026-08-01T00:00:00+10:00",
-  "last_verified_at": "2026-08-01T21:07:28Z",
+  "last_verified_at": "2026-08-01T21:12:59Z",
   "owner": "@yurifrusin",
   "native_findings": [
     {
@@ -574,8 +574,8 @@
       "scanner": "CodeQL",
       "path": "docs/security/pr74-codeql-alerts-546-548-validation-ledger.jsonl",
       "row_count": 3,
-      "disposition": "Three note-severity Protocol-stub quality instances are source-repaired pending fresh CodeQL fixed readback; static triage finds no product security boundary crossing.",
-      "verified_at": "2026-08-02T07:07:28+10:00"
+      "disposition": "Three note-severity Protocol-stub quality instances are fixed by fresh CodeQL analysis without dismissal; static triage finds no product security boundary crossing.",
+      "verified_at": "2026-08-02T07:12:59+10:00"
     }
   ]
 }

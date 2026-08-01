@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "integrate",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after context restoration; the baton records the accepted three-tranche real-identity/Microsoft-federation result on PR 74 and the still-closed live identity, provider, product-read, production and release boundaries.",
+    "current_authority_allocation": "GPT Sol remains conductor and protected integrator. Yuri explicitly authorised PR 74 integration with exactly one consequent GitHub Pages rebuild and authorised the architecture-only maintained OIDC verifier, least-privilege provider-to-practice bootstrap and application-session bridge design. No worker is dispatched.",
+    "active_plan_and_acceptance": "The real-identity/Microsoft-federation boundary, route-free provider-free admission runtime and disposable PostgreSQL persistence plans were read completely, together with their accepted artifacts already named in the Current Baton.",
+    "protected_evidence_boundaries": "No protected holdout, historical PHI, live Microsoft/provider call, real identity, product read, cloud/IAM mutation, production or release is authorised. The architecture descendant remains repository-local. User-owned docs/branding/raisa is preserved and excluded from staging, commits, tests and evidence.",
+    "git_refs_and_worktree": "HEAD and origin task branch equal eeb39df38f6d7ccda76b0d28a92047ed98816717; local/origin master and handoff/current equal 7c618c336baca6c33a4bedcf7e23b50be1bb9c3e. Before this receipt the only worktree item was untracked docs/branding/."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}
