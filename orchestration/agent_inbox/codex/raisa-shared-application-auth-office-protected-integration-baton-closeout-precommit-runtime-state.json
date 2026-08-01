@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit_the_no_docs_office_protected_integration_baton_closeout_on_the_dedicated_task_branch",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_office_protected_integration_baton_closeout_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: the accepted Office stack is protected-integrated through PR 71 at master 1121c35e; PR 70 is closed as subsumed.",
+        "current_authority_allocation: Yuri authorized exactly one Pages rebuild and protected integration; GPT Sol owns the no-docs baton closeout and final fast-forward alignment.",
+        "active_plan_and_acceptance: Pages, Node/Office security, Python security and CodeQL passed on 1121c35e; the exact protected-integration receipt is cherry-picked onto this closeout branch.",
+        "protected_evidence_boundaries: this branch changes AGENTS.md and orchestration receipts only, contains no docs path and grants no second Pages rebuild or broader deployment/release authority.",
+        "git_refs_and_worktree: branch starts at origin/master 1121c35e plus the integration receipt commit; origin/handoff/current remains 1af54ae3 pending final fast-forward; user-owned untracked branding remains untouched.",
+        "The compact handover regression and diff check pass; AGENTS.md remains 499 lines."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent assigned."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external worker ran."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external planning lane ran."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external reviewer ran."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
