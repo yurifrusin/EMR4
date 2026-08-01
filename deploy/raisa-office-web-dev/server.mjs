@@ -1,5 +1,5 @@
 import { createServer } from "node:http";
-import { readFile, stat } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import { extname, join, normalize, sep } from "node:path";
 
 const PORT = Number.parseInt(process.env.PORT || "8080", 10);
@@ -218,8 +218,6 @@ const server = createServer(async (request, response) => {
     return;
   }
   try {
-    const fileStat = await stat(candidate);
-    if (!fileStat.isFile()) throw new Error("not a file");
     const body = await readFile(candidate);
     send(
       response,

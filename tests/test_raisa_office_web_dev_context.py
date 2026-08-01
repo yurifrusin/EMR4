@@ -116,6 +116,8 @@ def test_static_server_and_container_preserve_zero_authority_posture():
     assert 'path === "/healthz"' in server
     assert 'path === "/hosting-policy.js"' in server
     assert 'allowedFiles.has(path)' in server
+    assert "readFile(candidate)" in server
+    assert "stat(candidate)" not in server
     assert "Content-Security-Policy" in server
     assert "no-store" in server
     assert "console.log" not in server

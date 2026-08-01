@@ -1,0 +1,43 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit_and_fast_forward_push_the_verified_codeql_file_read_race_repair_and_its_exact_contract_evidence_to_the_existing_task_branch",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_codeql_repair_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: security_finding_governance_pass remains accepted at Continuity 186 and Compass 167.",
+        "current_authority_allocation: Yuri authorised this extra task-branch commit and frozen development-host source edit; GPT Sol owns the exact repair.",
+        "active_plan_and_acceptance: direct readFile of the exact allowlisted normalized candidate removes the redundant stat/read race without changing the zero-authority route boundary; focused host, security-tooling, governance, lint and Bandit gates pass.",
+        "protected_evidence_boundaries: no deployment, cloud/IAM, product data, identity, provider, production, release or protected-ref action occurred.",
+        "git_refs_and_worktree: HEAD and upstream remain 006bd0c816ef6883a276ba0f6fa45e2a6aed135d before this authorised commit; all four protected refs remain 4974075b31035d599e081d68e3b85e04a897baa1."
+      ]
+    },
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No subagent ran."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No external worker ran."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Unselected fallback."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Claude transport ran."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No provider or external reviewer ran."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
