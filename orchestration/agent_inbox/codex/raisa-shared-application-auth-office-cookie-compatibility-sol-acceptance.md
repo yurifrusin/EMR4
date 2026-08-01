@@ -22,6 +22,13 @@ dependency audits, JavaScript syntax and three Office manifest validations all
 pass. The parent runtime-foundation evidence's two stale source digests were
 reconciled exactly without behavior change.
 
+Publication readback exposed new development-only high Dependabot alert 17
+after the parent governance snapshot. Static triage found no supported EMR4
+sink because the affected optional project-service/default-project matcher is
+not configured. The alert is registered as `SF-0020` with owner and SLA but
+remains native-open pending an explicit disposition decision; no alert or
+dependency mutation occurred.
+
 The task-owned harness, tunnel, listeners and Office developer registration
 are absent. The still-visible blank Word process has no registration or live
 taskpane and remains for ordinary user closure; no document was read, written

@@ -398,6 +398,15 @@ def test_continuity_and_compass_bind_the_terminal_result():
     assert graph["graph_revision"] == 187
     assert graph["nodes"][-1]["id"] == node_id
     assert graph["nodes"][-1]["status"] == "accepted"
+    node = graph["nodes"][-1]
+    alert_decision = next(
+        item
+        for item in node["decisions"]
+        if item["id"] == "register-post-snapshot-dependabot-alert-17-open-187"
+    )
+    assert alert_decision["status"] == "accepted"
+    assert "dependabot-alert-17-readback.json" in alert_decision["source"]
+    assert any("open/needs_review" in gate for gate in node["unresolved_gates"])
     assert compass["map_revision"] == 168
     assert compass["source_graph_revision"] == 187
     assert compass["current_position"]["node_id"] == node_id
@@ -411,6 +420,13 @@ def test_continuity_and_compass_bind_the_terminal_result():
         == "authorize-shared-application-auth-office-cookie-compatibility"
     )
     assert "Satisfied on 2026-08-01" in decision["required_before"]
+    alert_disposition = next(
+        item
+        for item in compass["user_owned_decisions"]
+        if item["id"] == "authorize-dependabot-alert-17-native-disposition"
+    )
+    assert "GitHub alert-state mutation" in alert_disposition["required_before"]
+    assert "native-open/needs_review" in alert_disposition["required_before"]
 
 
 def test_both_surface_lifecycles_and_closed_sanitized_evidence_pass():

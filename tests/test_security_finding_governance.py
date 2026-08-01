@@ -79,6 +79,57 @@ def test_register_schema_inventory_owners_and_slas() -> None:
         assert _time(row["triaged_at"]) <= _time(row["triage_due_at"])
         assert _time(row["review_at"]) <= _time(row["risk_acceptance"]["expires_at"])
 
+    new_alert = next(row for row in all_rows if row["finding_id"] == "SF-0020")
+    assert (new_alert["source"], new_alert["native_id"]) == ("dependabot", 17)
+    assert new_alert["severity"] == "high"
+    assert new_alert["owner"] == "@yurifrusin"
+    assert new_alert["triage_verdict"] == "not_actionable"
+    assert new_alert["status"] == "needs_review"
+    assert new_alert["observed_native_state"] == "open"
+    assert new_alert["desired_native_state"] == "open"
+    assert new_alert["native_disposition_at"] is None
+    assert new_alert["risk_acceptance"] is None
+    assert _time(new_alert["triaged_at"]) <= _time(new_alert["triage_due_at"])
+
+
+def test_post_snapshot_alert_17_triage_and_readback_remain_open_and_zero_mutation() -> None:
+    triage_path = (
+        ROOT / "docs" / "security" / "dependabot-alert-17-triage-2026-08-01.json"
+    )
+    readback_path = (
+        ROOT
+        / "orchestration"
+        / "continuity"
+        / "shared-application-auth-office-cookie-compatibility"
+        / "dependabot-alert-17-readback.json"
+    )
+    triage = _load(triage_path)
+    readback = _load(readback_path)
+    finding = triage["findings"][0]
+    assert triage["schema_version"] == "triage-finding/v0"
+    assert finding["input_id"] == "dependabot-alert-17"
+    assert finding["verdict"] == "not_actionable"
+    assert finding["confidence"] == "high"
+    assert finding["boundary_assessment"]["boundary_crossed"] is False
+    assert finding["exploitability_stack_rank"]["rank"] is None
+    assert readback["alert"] == {
+        "number": 17,
+        "state": "open",
+        "package": "brace-expansion",
+        "manifest_path": "EMR4 Sidebar/package-lock.json",
+        "dependency_scope": "development",
+        "relationship": "transitive",
+        "severity": "high",
+        "ghsa_id": "GHSA-3jxr-9vmj-r5cp",
+        "cve_id": "CVE-2026-13149",
+        "vulnerable_version_range": ">= 2.0.0, < 2.1.2",
+        "first_patched_version": "2.1.2",
+        "created_at": "2026-08-01T06:05:44Z",
+    }
+    assert readback["repository_tracking"]["status"] == "needs_review"
+    assert readback["repository_tracking"]["desired_native_state"] == "open"
+    assert set(readback["external_side_effects"].values()) == {0}
+
 
 def test_native_alert_readback_matches_register_exactly() -> None:
     register = _load(REGISTER)

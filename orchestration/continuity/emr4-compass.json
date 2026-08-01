@@ -2,9 +2,9 @@
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
   "map_revision": 168,
-  "updated_at": "2026-08-01T07:11:00Z",
+  "updated_at": "2026-08-01T07:55:53Z",
   "source_graph_revision": 187,
-  "orientation_statement": "EMR4 shared application authentication now has a real Office-host cookie compatibility proof: independent authored-synthetic sessions passed create, validate, rotate, revalidate, logout and post-logout denial in installed Word and Word Online. Continuity 187 / Compass 168 bind the result. Real identity, Microsoft federation, product data, organisational deployment, production, release and protected integration remain closed.",
+  "orientation_statement": "EMR4 shared application authentication now has a real Office-host cookie compatibility proof in installed Word and Word Online. Continuity 187 / Compass 168 bind the result and the post-snapshot development-only Dependabot alert 17 remains registered open/needs_review without mutation. Real identity, Microsoft federation, product data, organisational deployment, production, release and protected integration remain closed.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -1173,14 +1173,16 @@
       "node_id": "raisa-shared-application-auth-office-cookie-compatibility",
       "lineage_parent": "raisa-shared-application-auth-operational-hardening",
       "strategic_role": "Real Office-host cookie compatibility proof",
-      "outcome": "The accepted default-off authored-synthetic session-cookie lifecycle passed once in installed Word and once in Word Online through the exact development origin. Both independent sessions rotated, logged out and then denied validation; no product, identity, document, provider, cloud or deployment path ran, and task listeners and registration are absent.",
+      "outcome": "The accepted default-off authored-synthetic session-cookie lifecycle passed once in installed Word and once in Word Online through the exact development origin. Both independent sessions rotated, logged out and then denied validation; no product, identity, document, provider, cloud or deployment path ran, and task listeners and registration are absent. Publication exposed development-only Dependabot alert 17, which is registered open/needs_review without native or dependency mutation.",
       "evidence": [
         "docs/raisa-shared-application-auth-office-cookie-compatibility-plan.md",
         "docs/security/raisa-shared-application-auth-office-cookie-compatibility-threat-model-delta.md",
         "orchestration/continuity/shared-application-auth-office-cookie-compatibility/live-office-host-evidence.json",
         "orchestration/continuity/shared-application-auth-office-cookie-compatibility/final-residue-evidence.json",
         "orchestration/continuity/shared-application-auth-office-cookie-compatibility/acceptance-evidence.json",
-        "docs/raisa-shared-application-auth-office-cookie-compatibility-closeout.md"
+        "docs/raisa-shared-application-auth-office-cookie-compatibility-closeout.md",
+        "docs/security/dependabot-alert-17-triage-2026-08-01.md",
+        "orchestration/continuity/shared-application-auth-office-cookie-compatibility/dependabot-alert-17-readback.json"
       ]
     }
   ],
@@ -1188,8 +1190,9 @@
     "node_id": "raisa-shared-application-auth-office-cookie-compatibility",
     "strategic_role": "Real Office-host cookie compatibility proof",
     "why_now": "The protected shared-auth and governance foundations were integrated, leaving real Office host cookie carriage as the leading bounded gap.",
-    "outcome": "The accepted default-off authored-synthetic session-cookie lifecycle passed once in installed Word and once in Word Online through the exact development origin. Both independent sessions rotated, logged out and then denied validation; no product, identity, document, provider, cloud or deployment path ran, and task listeners and registration are absent.",
+    "outcome": "The accepted default-off authored-synthetic session-cookie lifecycle passed once in installed Word and once in Word Online through the exact development origin. Both independent sessions rotated, logged out and then denied validation; no product, identity, document, provider, cloud or deployment path ran, and task listeners and registration are absent. Publication exposed development-only Dependabot alert 17, which is registered open/needs_review without native or dependency mutation.",
     "unlocks": [
+      "Make an explicit user decision whether Dependabot alert 17 should remain open or be dismissed as not_used; do not force a dependency override.",
       "Seek fresh authority for a provider-free authored-synthetic Office-host exercise through the accepted local PostgreSQL persistence and capability-role boundary.",
       "Separately decide whether to design a real-identity and Microsoft federation boundary without yet wiring product reads.",
       "Publish and review this task branch without moving protected refs."
@@ -1198,7 +1201,8 @@
       "Every Office/WebView/browser/tenant cookie policy.",
       "PostgreSQL or multi-instance behavior through a real Office host.",
       "Real identity, Microsoft federation or product-data authorization.",
-      "Organisational deployment, production, release or protected integration."
+      "Organisational deployment, production, release or protected integration.",
+      "The user-owned native disposition or removal of Dependabot alert 17."
     ],
     "evidence": [
       "docs/raisa-shared-application-auth-office-cookie-compatibility-plan.md",
@@ -1206,7 +1210,9 @@
       "orchestration/continuity/shared-application-auth-office-cookie-compatibility/live-office-host-evidence.json",
       "orchestration/continuity/shared-application-auth-office-cookie-compatibility/final-residue-evidence.json",
       "orchestration/continuity/shared-application-auth-office-cookie-compatibility/acceptance-evidence.json",
-      "docs/raisa-shared-application-auth-office-cookie-compatibility-closeout.md"
+      "docs/raisa-shared-application-auth-office-cookie-compatibility-closeout.md",
+      "docs/security/dependabot-alert-17-triage-2026-08-01.md",
+      "orchestration/continuity/shared-application-auth-office-cookie-compatibility/dependabot-alert-17-readback.json"
     ]
   },
   "decision_horizon": [
@@ -1840,9 +1846,19 @@
         "orchestration/continuity/shared-application-auth-office-cookie-compatibility/acceptance-evidence.json",
         "docs/raisa-shared-application-auth-office-cookie-compatibility-closeout.md"
       ]
+    },
+    {
+      "id": "authorize-dependabot-alert-17-native-disposition",
+      "question": "Should development-only Dependabot alert 17 be dismissed as not_used or remain open for upstream remediation?",
+      "required_before": "Any GitHub alert-state mutation. SF-0020 is currently registered not_actionable and native-open/needs_review; no dependency override is authorised.",
+      "evidence": [
+        "docs/security/dependabot-alert-17-triage-2026-08-01.md",
+        "orchestration/continuity/shared-application-auth-office-cookie-compatibility/dependabot-alert-17-readback.json"
+      ]
     }
   ],
   "map_limits": [
+    "Post-snapshot Dependabot alert 17 is statically not_actionable for the supported development lint configuration but remains native-open and needs_review pending an explicit user disposition.",
     "The Office cookie descendant proves one independent session lifecycle in installed Word and Word Online through one development origin. It does not cover every policy, PostgreSQL/multi-instance behavior, real identity, product data, organisational deployment or production.",
     "The governance descendant proves a repository schema/register, exact static triage, 12 native GitHub dispositions and daily workflow definitions. Scheduled runs are not active on the default branch until protected integration, and vulnerable dev-only lock entries remain.",
     "The accepted shared-auth operational-hardening descendant proves one local authored-synthetic deployment-login/capability split, strict one-hop proxy contract, bounded per-process limiter, HMAC-only denial audit and finite SQLAlchemy pool with exact cleanup. It does not prove real identity, distributed abuse resistance, production ingress, credential lifecycle, monitoring/retention, product-data safety, deployment, production or release.",

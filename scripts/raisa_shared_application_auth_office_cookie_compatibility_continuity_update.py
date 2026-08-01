@@ -16,7 +16,8 @@ REPORT = ROOT / "docs" / "ariadne-compass-current.md"
 NODE_ID = "raisa-shared-application-auth-office-cookie-compatibility"
 PARENT_ID = "raisa-shared-application-auth-operational-hardening"
 PREDECESSOR_ID = "security-finding-governance"
-UPDATED_AT = "2026-08-01T07:11:00Z"
+CREATED_AT = "2026-08-01T07:11:00Z"
+UPDATED_AT = "2026-08-01T07:55:53Z"
 SOURCE_HEAD = "30d5e0116148529da3c41c728504c69d8833f544"
 
 PLAN = "docs/raisa-shared-application-auth-office-cookie-compatibility-plan.md"
@@ -57,6 +58,17 @@ ACCEPTANCE = (
     "raisa-shared-application-auth-office-cookie-compatibility-"
     "sol-acceptance.md"
 )
+POSTCOMPACTION = (
+    "orchestration/agent_inbox/codex/"
+    "raisa-shared-application-auth-office-cookie-compatibility-"
+    "postcompaction-receipt.json"
+)
+ALERT17_TRIAGE = "docs/security/dependabot-alert-17-triage-2026-08-01.md"
+ALERT17_READBACK = (
+    "orchestration/continuity/"
+    "shared-application-auth-office-cookie-compatibility/"
+    "dependabot-alert-17-readback.json"
+)
 HARNESS = "scripts/raisa_shared_application_auth_office_cookie_compatibility.py"
 TESTS = "tests/test_raisa_shared_application_auth_office_cookie_compatibility.py"
 DESKTOP_MANIFEST = (
@@ -84,6 +96,7 @@ def update_graph() -> None:
         if graph["nodes"][-1]["id"] != NODE_ID:
             raise SystemExit("Revision 187 is missing the Office cookie node.")
         node = graph["nodes"][-1]
+        changed = False
         for contract in node["contract_evidence"]:
             if (
                 contract["contract_id"]
@@ -91,7 +104,57 @@ def update_graph() -> None:
                 and TESTS not in contract["evidence"]
             ):
                 contract["evidence"].append(TESTS)
-                _write(GRAPH, graph)
+                changed = True
+        alert_note = (
+            "Task-branch publication exposed post-snapshot Dependabot alert 17; "
+            "it is registered open/needs_review and neither the native alert nor "
+            "the dependency graph was mutated."
+        )
+        if alert_note not in node["authority"]["notes"]:
+            node["authority"]["notes"].append(alert_note)
+            changed = True
+        alert_decision = {
+            "id": "register-post-snapshot-dependabot-alert-17-open-187",
+            "source": ALERT17_READBACK,
+            "status": "accepted",
+            "summary": (
+                "Register development-only high alert 17 as SF-0020 with a "
+                "not_actionable static verdict while retaining its native-open "
+                "state pending explicit disposition authority."
+            ),
+        }
+        if not any(
+            item["id"] == alert_decision["id"] for item in node["decisions"]
+        ):
+            node["decisions"].append(alert_decision)
+            changed = True
+        alert_claim = (
+            "Dependabot alert 17 reaches only an optional development-lint "
+            "project-service/default-project glob matcher absent from the "
+            "supported configuration; SF-0020 remains open/needs_review."
+        )
+        if alert_claim not in node["claim_scope"]:
+            node["claim_scope"].append(alert_claim)
+            changed = True
+        for finding in (ALERT17_TRIAGE, ALERT17_READBACK):
+            if finding not in node["evidence"]["findings"]:
+                node["evidence"]["findings"].append(finding)
+                changed = True
+        if POSTCOMPACTION not in node["evidence"]["receipts"]:
+            node["evidence"]["receipts"].append(POSTCOMPACTION)
+            changed = True
+        alert_gate = (
+            "The native disposition of Dependabot alert 17 remains an explicit "
+            "user-owned decision; it stays open/needs_review and no forced "
+            "dependency override is authorised."
+        )
+        if alert_gate not in node["unresolved_gates"]:
+            node["unresolved_gates"].append(alert_gate)
+            changed = True
+        if changed:
+            node["updated_at"] = UPDATED_AT
+            graph["updated_at"] = UPDATED_AT
+            _write(GRAPH, graph)
         return
     if (
         graph["graph_revision"] != 186
@@ -105,7 +168,7 @@ def update_graph() -> None:
             "title": "Raisa Shared Application-Auth Office Cookie Compatibility",
             "kind": "integration",
             "status": "accepted",
-            "created_at": UPDATED_AT,
+            "created_at": CREATED_AT,
             "updated_at": UPDATED_AT,
             "coordinates": {
                 "git_ref": "codex/shared-auth-office-cookie-compatibility",
@@ -146,6 +209,11 @@ def update_graph() -> None:
                     (
                         "No Trust Center, catalogue, tenant, Office policy, "
                         "cloud/IAM, deployment or protected-ref change occurred."
+                    ),
+                    (
+                        "Task-branch publication exposed post-snapshot Dependabot "
+                        "alert 17; it is registered open/needs_review and neither "
+                        "the native alert nor the dependency graph was mutated."
                     ),
                 ],
             },
@@ -188,6 +256,16 @@ def update_graph() -> None:
                         "and release outside this pass."
                     ),
                 },
+                {
+                    "id": "register-post-snapshot-dependabot-alert-17-open-187",
+                    "source": ALERT17_READBACK,
+                    "status": "accepted",
+                    "summary": (
+                        "Register development-only high alert 17 as SF-0020 with "
+                        "a not_actionable static verdict while retaining its "
+                        "native-open state pending explicit disposition authority."
+                    ),
+                },
             ],
             "claim_scope": [
                 (
@@ -208,6 +286,11 @@ def update_graph() -> None:
                 (
                     "No document, product, patient, clinical, external identity, "
                     "provider, cloud, deployment or production path ran."
+                ),
+                (
+                    "Dependabot alert 17 reaches only an optional development-lint "
+                    "project-service/default-project glob matcher absent from the "
+                    "supported configuration; SF-0020 remains open/needs_review."
                 ),
             ],
             "contract_evidence": [
@@ -232,10 +315,16 @@ def update_graph() -> None:
             ],
             "evidence": {
                 "plans": [PLAN, THREAT],
-                "findings": [LIVE_EVIDENCE, RESIDUE, EVIDENCE],
+                "findings": [
+                    LIVE_EVIDENCE,
+                    RESIDUE,
+                    EVIDENCE,
+                    ALERT17_TRIAGE,
+                    ALERT17_READBACK,
+                ],
                 "closeouts": [CLOSEOUT],
                 "acceptances": [ACCEPTANCE],
-                "receipts": [REHYDRATION, PREACCEPTANCE],
+                "receipts": [REHYDRATION, PREACCEPTANCE, POSTCOMPACTION],
                 "tests": [HARNESS, TESTS, DESKTOP_MANIFEST, ONLINE_MANIFEST],
             },
             "unresolved_gates": [
@@ -255,6 +344,11 @@ def update_graph() -> None:
                     "Organisational Office deployment, production, release and "
                     "protected integration require separate authority."
                 ),
+                (
+                    "The native disposition of Dependabot alert 17 remains an "
+                    "explicit user-owned decision; it stays open/needs_review and "
+                    "no forced dependency override is authorised."
+                ),
             ],
         }
     )
@@ -265,23 +359,87 @@ def update_graph() -> None:
 
 def update_compass() -> None:
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
-    if (
-        compass["map_revision"] == 168
-        and compass["source_graph_revision"] == 187
-        and compass["current_position"]["node_id"] == NODE_ID
-    ):
-        return
-    if compass["map_revision"] != 167 or compass["source_graph_revision"] != 186:
-        raise SystemExit("Unexpected Office cookie Compass predecessor.")
-
-    evidence = [PLAN, THREAT, LIVE_EVIDENCE, RESIDUE, EVIDENCE, CLOSEOUT]
+    evidence = [
+        PLAN,
+        THREAT,
+        LIVE_EVIDENCE,
+        RESIDUE,
+        EVIDENCE,
+        CLOSEOUT,
+        ALERT17_TRIAGE,
+        ALERT17_READBACK,
+    ]
     outcome = (
         "The accepted default-off authored-synthetic session-cookie lifecycle "
         "passed once in installed Word and once in Word Online through the exact "
         "development origin. Both independent sessions rotated, logged out and "
         "then denied validation; no product, identity, document, provider, cloud "
-        "or deployment path ran, and task listeners and registration are absent."
+        "or deployment path ran, and task listeners and registration are absent. "
+        "Publication exposed development-only Dependabot alert 17, which is "
+        "registered open/needs_review without native or dependency mutation."
     )
+    alert_unlock = (
+        "Make an explicit user decision whether Dependabot alert 17 should remain "
+        "open or be dismissed as not_used; do not force a dependency override."
+    )
+    alert_unsolved = (
+        "The user-owned native disposition or removal of Dependabot alert 17."
+    )
+    alert_decision = {
+        "id": "authorize-dependabot-alert-17-native-disposition",
+        "question": (
+            "Should development-only Dependabot alert 17 be dismissed as not_used "
+            "or remain open for upstream remediation?"
+        ),
+        "required_before": (
+            "Any GitHub alert-state mutation. SF-0020 is currently registered "
+            "not_actionable and native-open/needs_review; no dependency override "
+            "is authorised."
+        ),
+        "evidence": [ALERT17_TRIAGE, ALERT17_READBACK],
+    }
+    alert_limit = (
+        "Post-snapshot Dependabot alert 17 is statically not_actionable for the "
+        "supported development lint configuration but remains native-open and "
+        "needs_review pending an explicit user disposition."
+    )
+    if (
+        compass["map_revision"] == 168
+        and compass["source_graph_revision"] == 187
+        and compass["current_position"]["node_id"] == NODE_ID
+    ):
+        journey = next(item for item in compass["journey"] if item["node_id"] == NODE_ID)
+        journey["outcome"] = outcome
+        journey["evidence"] = evidence
+        position = compass["current_position"]
+        position["outcome"] = outcome
+        position["evidence"] = evidence
+        if alert_unlock not in position["unlocks"]:
+            position["unlocks"].insert(0, alert_unlock)
+        if alert_unsolved not in position["does_not_solve"]:
+            position["does_not_solve"].append(alert_unsolved)
+        if not any(
+            item["id"] == alert_decision["id"]
+            for item in compass["user_owned_decisions"]
+        ):
+            compass["user_owned_decisions"].append(alert_decision)
+        if alert_limit not in compass["map_limits"]:
+            compass["map_limits"].insert(0, alert_limit)
+        compass["orientation_statement"] = (
+            "EMR4 shared application authentication now has a real Office-host "
+            "cookie compatibility proof in installed Word and Word Online. "
+            "Continuity 187 / Compass 168 bind the result and the post-snapshot "
+            "development-only Dependabot alert 17 remains registered open/"
+            "needs_review without mutation. Real identity, Microsoft federation, "
+            "product data, organisational deployment, production, release and "
+            "protected integration remain closed."
+        )
+        compass["updated_at"] = UPDATED_AT
+        _write(COMPASS, compass)
+        return
+    if compass["map_revision"] != 167 or compass["source_graph_revision"] != 186:
+        raise SystemExit("Unexpected Office cookie Compass predecessor.")
+
     compass["journey"].append(
         {
             "node_id": NODE_ID,
@@ -300,6 +458,7 @@ def update_compass() -> None:
         ),
         "outcome": outcome,
         "unlocks": [
+            alert_unlock,
             (
                 "Seek fresh authority for a provider-free authored-synthetic "
                 "Office-host exercise through the accepted local PostgreSQL "
@@ -318,6 +477,7 @@ def update_compass() -> None:
             "PostgreSQL or multi-instance behavior through a real Office host.",
             "Real identity, Microsoft federation or product-data authorization.",
             "Organisational deployment, production, release or protected integration.",
+            alert_unsolved,
         ],
         "evidence": evidence,
     }
@@ -344,7 +504,13 @@ def update_compass() -> None:
                 "evidence": evidence,
             }
         )
+    if not any(
+        item["id"] == alert_decision["id"]
+        for item in compass["user_owned_decisions"]
+    ):
+        compass["user_owned_decisions"].append(alert_decision)
 
+    compass["map_limits"].insert(0, alert_limit)
     compass["map_limits"].insert(
         0,
         (
@@ -356,11 +522,11 @@ def update_compass() -> None:
     )
     compass["orientation_statement"] = (
         "EMR4 shared application authentication now has a real Office-host cookie "
-        "compatibility proof: independent authored-synthetic sessions passed create, "
-        "validate, rotate, revalidate, logout and post-logout denial in installed "
-        "Word and Word Online. Continuity 187 / Compass 168 bind the result. Real "
-        "identity, Microsoft federation, product data, organisational deployment, "
-        "production, release and protected integration remain closed."
+        "compatibility proof in installed Word and Word Online. Continuity 187 / "
+        "Compass 168 bind the result and the post-snapshot development-only "
+        "Dependabot alert 17 remains registered open/needs_review without mutation. "
+        "Real identity, Microsoft federation, product data, organisational "
+        "deployment, production, release and protected integration remain closed."
     )
     compass["map_revision"] = 168
     compass["source_graph_revision"] = 187

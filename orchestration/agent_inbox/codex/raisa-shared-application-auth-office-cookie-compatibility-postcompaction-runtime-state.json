@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "complete_the_accepted_office_cookie_compatibility_task_branch_and_register_post_snapshot_dependabot_alert_17_without_native_mutation",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_office_cookie_compatibility_postcompaction_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: AGENTS.md was read completely after context restoration; the Office cookie-compatibility result is accepted and alert 17 remains native-open pending explicit disposition authority.",
+        "current_authority_allocation: GPT Sol retains this tightly coupled continuity, verification and task-branch closeout; no worker or subagent is selected.",
+        "active_plan_and_acceptance: the frozen Office cookie-compatibility plan, threat-model delta, live-host evidence, residue evidence, closeout and Sol acceptance were read.",
+        "protected_evidence_boundaries: holdouts and historical Diary material remain sealed; real identity, Office federation, product or document access, providers, deployment, production, release and native alert mutation remain closed.",
+        "git_refs_and_worktree: HEAD is c9b157140bfc37af361de6e6527d14f01b0438ea on codex/shared-auth-office-cookie-compatibility; local and origin master and handoff/current remain aligned at 1af54ae31895e863b447479aeb3b2bbcf0e684b8; the intentional untracked branding directory is untouched and excluded."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No worker was selected or dispatched."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected interactive fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude transport was selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No independent provider or reviewer was selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
