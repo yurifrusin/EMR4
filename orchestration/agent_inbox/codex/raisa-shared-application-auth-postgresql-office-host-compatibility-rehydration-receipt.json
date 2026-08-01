@@ -1,0 +1,45 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_and_implement_provider_free_authored_synthetic_postgresql_backed_office_host_compatibility",
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was restored completely. PR 70 is green at 0b3fe1f965c1171a436676762d6101818b437bae and Yuri authorised the exact provider-free authored-synthetic PostgreSQL-backed Office-host compatibility descendant.",
+    "current_authority_allocation": "GPT Sol retains the tightly coupled database, Office-host, security and acceptance sequence. No worker, native subagent, provider or external reviewer is selected or dispatched.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-shared-application-auth-office-cookie-compatibility-plan.md",
+      "docs/raisa-shared-application-auth-office-cookie-compatibility-closeout.md",
+      "docs/raisa-shared-application-auth-postgresql-persistence-plan.md",
+      "docs/raisa-shared-application-auth-runtime-role-secure-transport-plan.md",
+      "docs/raisa-shared-application-auth-operational-hardening-plan.md",
+      "docs/api-spine/openapi/application-auth-synthetic-transport.yaml",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "docs/ariadne-compass-current.md"
+    ],
+    "protected_evidence_boundaries": "Protected holdouts and raw historical Diary material remain sealed. Only provider-free authored-synthetic local PostgreSQL auth state, the accepted capability-role and seven REST auth routes, and supervised blank Office hosts are open. Real identity, Microsoft/Office federation, product/patient/clinical data, document APIs, product reads or commands, providers, cloud/IAM mutation, deployment, production, release, public rename, domain and trademark actions remain closed.",
+    "git_refs_and_worktree": {
+      "HEAD": "0b3fe1f965c1171a436676762d6101818b437bae",
+      "branch": "codex/shared-auth-postgresql-office-host-compatibility",
+      "branch_source": "PR 70 exact green head; protected integration paused because master docs changes trigger GitHub Pages deployment",
+      "master": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "handoff/current": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "origin/master": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "origin/handoff/current": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "concurrent_branding_assets_present_untracked_untouched_and_excluded": true,
+      "staged_files": 0
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_and_implement_provider_free_authored_synthetic_postgresql_backed_office_host_compatibility",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "raisa_shared_application_auth_postgresql_office_host_compatibility_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is selected or authorised for this tightly coupled Office and database security tranche."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected fallback; no worker dispatch is authorised."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external planning model or provider call is authorised for this tranche."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external reviewer, provider call or agent dispatch is authorised or required for pre-plan rehydration."
+      ]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "AGENTS.md and the active Office cookie, PostgreSQL persistence, runtime-role secure transport and operational-hardening acceptance plans were restored with the API Spine security boundary.",
+        "Yuri authorised the provider-free authored-synthetic PostgreSQL-backed Office-host compatibility descendant and ordinary task-branch implementation, tests, commits and push.",
+        "The task branch codex/shared-auth-postgresql-office-host-compatibility starts at PR 70 green head 0b3fe1f965c1171a436676762d6101818b437bae; local and origin master and handoff/current remain at 1af54ae31895e863b447479aeb3b2bbcf0e684b8.",
+        "Protected integration is paused because a master docs change automatically triggers the public GitHub Pages deployment workflow and deployment authority remains closed.",
+        "The concurrent docs/branding/raisa directory is user-owned, untracked, untouched and excluded from this tranche.",
+        "Only provider-free authored-synthetic local PostgreSQL auth state, the accepted capability-role and seven REST auth routes, and supervised blank Office hosts are open; real identity, federation, product or document reads, providers, cloud, deployment, production and release remain closed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is assigned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
