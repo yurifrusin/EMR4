@@ -59,7 +59,7 @@
       "voice"
     ]
   },
-  "graph_revision": 187,
+  "graph_revision": 188,
   "harvests": [],
   "nodes": [
     {
@@ -9801,9 +9801,141 @@
         "Organisational Office deployment, production, release and protected integration require separate authority.",
         "The native disposition of Dependabot alert 17 remains an explicit user-owned decision; it stays open/needs_review and no forced dependency override is authorised."
       ]
+    },
+    {
+      "id": "raisa-shared-application-auth-postgresql-office-host-compatibility",
+      "title": "Raisa Shared Application-Auth PostgreSQL Office-Host Compatibility",
+      "kind": "integration",
+      "status": "accepted",
+      "created_at": "2026-08-01T11:05:00Z",
+      "updated_at": "2026-08-01T11:05:00Z",
+      "coordinates": {
+        "git_ref": "codex/shared-auth-postgresql-office-host-compatibility",
+        "source_head": "4d8f855aa8194b2c9bae396a4ef9f516829c3c8a",
+        "thread_id": null,
+        "worktree_role": "integration"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-shared-application-auth-office-cookie-compatibility",
+          "relation": "builds_on"
+        },
+        {
+          "node_id": "raisa-shared-application-auth-operational-hardening",
+          "relation": "validates"
+        },
+        {
+          "node_id": "raisa-shared-application-auth-runtime-role-secure-transport",
+          "relation": "validates"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-shared-application-auth-postgresql-office-host-compatibility-plan.md",
+            "scope": "One provider-free authored-synthetic installed-Word and Word Online session lifecycle through the accepted disposable local PostgreSQL, separate LOGIN role and exact NOLOGIN capability role."
+          }
+        ],
+        "notes": [
+          "Yuri authorised the exact Compass 168 PostgreSQL-backed Office-host descendant and supplied the two supervised host observations.",
+          "PR 70 integration remained paused because master docs changes automatically trigger public GitHub Pages deployment, which remains separately closed.",
+          "The concurrent user-owned Raisa branding directory was preserved, unstaged and excluded."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-postgresql-office-host-lifecycle-188",
+          "source": "orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/live-office-backend-postgres-evidence.json",
+          "status": "accepted",
+          "summary": "Accept two independent real-Office create, validate, rotate, revalidate, logout and post-logout denial results through the exact PostgreSQL capability-role path."
+        },
+        {
+          "id": "accept-exact-durable-auth-readback-188",
+          "source": "orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/acceptance-evidence.json",
+          "status": "accepted",
+          "summary": "Accept two principals, two parents, four revoked surface rows, fourteen lifecycle audits, two denial audits, exact RLS scope and zero raw-value matches."
+        },
+        {
+          "id": "accept-complete-owned-cleanup-188",
+          "source": "orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/final-residue-evidence.json",
+          "status": "accepted",
+          "summary": "Accept verified absence of the database, both roles, task processes, listeners and desktop registration."
+        },
+        {
+          "id": "keep-deployment-and-real-identity-closed-188",
+          "source": "docs/security/raisa-shared-application-auth-postgresql-office-host-compatibility-threat-model-delta.md",
+          "status": "accepted",
+          "summary": "Keep GitHub Pages deployment, real identity, Microsoft federation, product data, production and release outside this pass."
+        }
+      ],
+      "claim_scope": [
+        "Installed Word and Word Online each completed one independent authored-synthetic secure-cookie lifecycle through the exact local PostgreSQL LOGIN-to-capability-role path.",
+        "Fresh readback proved exact practice RLS shapes, hash-only references, fourteen lifecycle audits, two retained denials and four revoked surface sessions.",
+        "No raw secret or task target entered PostgreSQL or durable evidence, and all owned database/role/process/listener residue was removed.",
+        "No identity provider, Microsoft federation, product or document read, provider, cloud mutation, deployment, production or protected-ref action occurred."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-shared-application-auth-postgresql-office-host-compatibility-plan.md",
+            "docs/security/raisa-shared-application-auth-postgresql-office-host-compatibility-threat-model-delta.md",
+            "orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/live-office-backend-postgres-evidence.json",
+            "tests/test_raisa_shared_application_auth_postgresql_office_host_compatibility.py"
+          ],
+          "note": "The seven-route harness contains no product context, appointment proposal or command path."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/live-office-backend-postgres-evidence.json",
+            "orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/final-residue-evidence.json",
+            "docs/raisa-shared-application-auth-postgresql-office-host-compatibility-closeout.md",
+            "tests/test_raisa_shared_application_auth_postgresql_office_host_compatibility.py"
+          ],
+          "note": "Only authored-synthetic application-auth rows were created; no Diary, event, availability or appointment state was read or changed."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-shared-application-auth-postgresql-office-host-compatibility-plan.md",
+          "docs/security/raisa-shared-application-auth-postgresql-office-host-compatibility-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/live-office-backend-postgres-evidence.json",
+          "orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/final-residue-evidence.json",
+          "orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/acceptance-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-shared-application-auth-postgresql-office-host-compatibility-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-postgresql-office-host-compatibility-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-postgresql-office-host-compatibility-rehydration-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-postgresql-office-host-compatibility-preacceptance-receipt.json"
+        ],
+        "tests": [
+          "scripts/raisa_shared_application_auth_postgresql_office_host_compatibility.py",
+          "tests/test_raisa_shared_application_auth_postgresql_office_host_compatibility.py",
+          "orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/word-desktop-manifest.xml",
+          "orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/word-online-manifest.xml"
+        ]
+      },
+      "unresolved_gates": [
+        "The proof covers one Windows Office installation, one signed-in Word Online environment and one exact development origin, not every browser, WebView, tenant or Office policy.",
+        "Real identity mapping, Microsoft federation and product-data authorization remain separately closed.",
+        "The limiter remains per process and proves no distributed or production abuse resistance.",
+        "Protected integration would trigger public GitHub Pages deployment and requires Yuri's explicit deployment decision.",
+        "Dependabot alert 17 remains native-open/needs_review pending its separate explicit disposition decision."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-01T09:18:15Z"
+  "updated_at": "2026-08-01T11:05:00Z"
 }

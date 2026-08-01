@@ -1,8 +1,10 @@
 {
   "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
   "continuation_event": "pre_sprint_planning",
-  "planned_action": "stage_and_commit_the_verified_postgresql_office_host_compatibility_closeout_on_the_existing_task_branch_only",
+  "planned_action": "verifier_acceptance",
   "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
   "rehydrated_from_receipt": true,
   "rehydration_sources": [
     "live_handover_current_baton",
@@ -11,21 +13,18 @@
     "protected_evidence_boundaries",
     "git_refs_and_worktree"
   ],
-  "schema_version": "ariadne.orchestrator_receipt.v1",
-  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
   "source_evidence": {
-    "live_handover_current_baton": "The PostgreSQL-backed real-Office result is accepted at Continuity 188 and Compass 169 above the accepted in-memory Office-cookie parent.",
-    "current_authority_allocation": "GPT Sol owns the user-authorised task-branch commit, push and draft PR; no worker, subagent, provider or external reviewer ran.",
+    "live_handover_current_baton": "The accepted Office-cookie parent, operational-hardening parent and Yuri's exact PostgreSQL-backed real-Office authority were restored before terminal review.",
+    "current_authority_allocation": "GPT Sol performed the bounded evidence review; no worker, native subagent, provider or external identity lane was selected or dispatched.",
     "active_plan_and_acceptance": [
       "docs/raisa-shared-application-auth-postgresql-office-host-compatibility-plan.md",
       "docs/security/raisa-shared-application-auth-postgresql-office-host-compatibility-threat-model-delta.md",
       "orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/live-office-backend-postgres-evidence.json",
       "orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/final-residue-evidence.json",
       "orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/acceptance-evidence.json",
-      "docs/raisa-shared-application-auth-postgresql-office-host-compatibility-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-shared-application-auth-postgresql-office-host-compatibility-sol-acceptance.md"
+      "docs/raisa-shared-application-auth-postgresql-office-host-compatibility-closeout.md"
     ],
-    "protected_evidence_boundaries": "Real identity, Microsoft federation, product/document/patient/clinical data, cloud/IAM mutation, deployment, production, release and protected integration remain closed.",
+    "protected_evidence_boundaries": "The result is limited to provider-free authored-synthetic local PostgreSQL and two supervised blank Office hosts. Real identity, Microsoft federation, product/document/patient/clinical data, cloud mutation, deployment, production, release and protected integration remain closed.",
     "git_refs_and_worktree": {
       "HEAD": "4d8f855aa8194b2c9bae396a4ef9f516829c3c8a",
       "branch": "codex/shared-auth-postgresql-office-host-compatibility",
@@ -33,9 +32,7 @@
       "handoff/current": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
       "origin/master": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
       "origin/handoff/current": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
-      "staged_files_before_receipt": 0,
-      "concurrent_branding_assets_present_untracked_untouched_and_excluded": true,
-      "protected_refs_unchanged": true
+      "concurrent_branding_assets_present_untracked_untouched_and_excluded": true
     }
   },
   "status": "passed",

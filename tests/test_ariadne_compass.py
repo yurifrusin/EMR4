@@ -50,7 +50,9 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     assert report["north_star"]["title"].startswith("A complete AI-native")
     assert report["programme"]["id"] == "reception-one"
     assert report["programme"]["master_plan_phase"].startswith("Phase 2B")
-    assert report["current_position"]["node_id"] == "security-finding-governance"
+    assert report["current_position"]["node_id"] == (
+        "raisa-shared-application-auth-postgresql-office-host-compatibility"
+    )
     assert report["current_position"]["why_now"]
     assert report["current_position"]["unlocks"]
     assert report["current_position"]["does_not_solve"]
@@ -67,9 +69,11 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     assert "shared-application-auth-runtime-role-secure-transport" not in horizon_by_id
     assert "shared-application-auth-operational-hardening" not in horizon_by_id
     assert "security-finding-governance" not in horizon_by_id
-    assert horizon_by_id["shared-application-auth-office-cookie-compatibility"][
-        "status"
-    ] == "candidate"
+    assert "shared-application-auth-office-cookie-compatibility" not in horizon_by_id
+    assert (
+        "shared-application-auth-postgresql-office-host-compatibility"
+        not in horizon_by_id
+    )
     assert "reception-one-word-online-authenticated-dialog-check" not in horizon_by_id
     assert "resume-raisa-word-online-manifest-upload" not in horizon_by_id
     assert not any(
@@ -373,7 +377,7 @@ def test_cli_emits_valid_json_and_plain_language(capsys: pytest.CaptureFixture[s
     assert compass.main(["--repo-root", str(REPO_ROOT), "validate"]) == 0
     validation = json.loads(capsys.readouterr().out)
     assert validation["status"] == "passed"
-    assert validation["journey_count"] == 65
+    assert validation["journey_count"] == len(load_compass()["journey"])
 
     assert (
         compass.main(

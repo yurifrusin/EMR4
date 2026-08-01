@@ -1,0 +1,49 @@
+{
+  "schema_version": "emr4.postgresql_office_host_compatibility_residue.v1",
+  "result": "raisa_shared_application_auth_postgresql_office_host_compatibility_pass",
+  "checked_at": "2026-08-01T11:03:00Z",
+  "task_processes": {
+    "harness_running": false,
+    "ngrok_running": false,
+    "word_desktop_running": false
+  },
+  "listeners": {
+    "loopback_port_8001_listening": false,
+    "ngrok_inspection_port_4040_listening": false
+  },
+  "office": {
+    "desktop_developer_registration_removed": true,
+    "desktop_blank_task_document_process_absent": true,
+    "word_online_taskpane_unavailable_after_relay_shutdown": true,
+    "trust_center_changed": false,
+    "tenant_catalogue_changed": false,
+    "office_policy_changed": false
+  },
+  "postgresql": {
+    "disposable_database_absent": true,
+    "disposable_login_role_absent": true,
+    "disposable_capability_role_absent": true,
+    "source_database_migrated_or_written": false
+  },
+  "runtime_state": {
+    "bootstrap_available": 0,
+    "bootstrap_reserved": 0,
+    "bootstrap_consumed": 2,
+    "application_session_usable_after_logout": false,
+    "raw_or_target_value_retained_in_evidence": false
+  },
+  "external_side_effects": {
+    "provider_calls": 0,
+    "external_identity_calls": 0,
+    "microsoft_or_office_identity_calls": 0,
+    "product_or_patient_clinical_reads": 0,
+    "document_reads": 0,
+    "document_writes": 0,
+    "product_commands": 0,
+    "cloud_or_iam_mutations": 0,
+    "deployments": 0,
+    "production_changes": 0,
+    "protected_ref_moves": 0
+  },
+  "passed": true
+}

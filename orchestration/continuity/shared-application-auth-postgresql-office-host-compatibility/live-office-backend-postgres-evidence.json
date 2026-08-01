@@ -1,0 +1,126 @@
+{
+  "bootstrap_registry_counts": {
+    "available": 0,
+    "consumed": 2,
+    "reserved": 0
+  },
+  "claim_limits": [
+    "One installed Word and one Word Online authored-synthetic lifecycle only.",
+    "No real identity, Microsoft federation, product data, deployment, production or release is established.",
+    "The rate limiter is process-local and proves no distributed abuse resistance."
+  ],
+  "cleanup": {
+    "capability_role_absent_after": true,
+    "capability_role_drop_attempted": true,
+    "database_absent_after": true,
+    "database_drop_attempted": true,
+    "login_role_absent_after": true,
+    "login_role_drop_attempted": true,
+    "passed": true
+  },
+  "data_class": "authored_synthetic",
+  "database": {
+    "fresh_session_readback": true,
+    "lifecycle_audit_event_count": 14,
+    "migration": {
+      "current_head_exact": true,
+      "orm_migration_drift_absent": true,
+      "passed": true
+    },
+    "opaque_reference_shape_violations": 0,
+    "passed": true,
+    "practice_count": 2,
+    "practice_scope_exact": true,
+    "practice_scope_shapes": [
+      {
+        "audit_events": 7,
+        "exchange_grants": 0,
+        "parent_sessions": 1,
+        "principal_generations": 1,
+        "surface_sessions": 2
+      },
+      {
+        "audit_events": 7,
+        "exchange_grants": 0,
+        "parent_sessions": 1,
+        "principal_generations": 1,
+        "surface_sessions": 2
+      }
+    ],
+    "raw_persisted_value_match_count": 0,
+    "retained_post_logout_denial_count": 2,
+    "revoked_surface_session_count": 4,
+    "role_and_pool": {
+      "current_user_is_capability": true,
+      "identities_separate": true,
+      "login_cannot_bypass_rls": true,
+      "login_connection_limit": 2,
+      "login_direct_audit_select_grant": false,
+      "login_noinherit": true,
+      "login_not_superuser": true,
+      "passed": true,
+      "password_recorded": false,
+      "pool_maximum": 2,
+      "role_names_recorded": false,
+      "session_user_is_login": true
+    },
+    "row_counts": {
+      "audit_events": 16,
+      "exchange_grants": 0,
+      "parent_sessions": 2,
+      "principal_generations": 2,
+      "surface_sessions": 4
+    },
+    "target_names_or_password_recorded": false
+  },
+  "development_origin_class": "exact_reserved_https_development_origin",
+  "durable_secret_or_target_match_count": 0,
+  "evidence_label": "live_local_office_backend_postgres_capability_role",
+  "passed": true,
+  "result": "raisa_shared_application_auth_postgresql_office_host_compatibility_pass",
+  "results": {
+    "word_desktop": {
+      "csrf_issued": true,
+      "failure_code": "none",
+      "first_validation_passed": true,
+      "host_class": "installed_word",
+      "logout_passed": true,
+      "post_logout_denied": true,
+      "result_submitted": true,
+      "rotation_passed": true,
+      "second_validation_passed": true,
+      "session_created": true,
+      "surface": "word_desktop",
+      "terminal_status": "passed"
+    },
+    "word_online": {
+      "csrf_issued": true,
+      "failure_code": "none",
+      "first_validation_passed": true,
+      "host_class": "word_online",
+      "logout_passed": true,
+      "post_logout_denied": true,
+      "result_submitted": true,
+      "rotation_passed": true,
+      "second_validation_passed": true,
+      "session_created": true,
+      "surface": "word_online",
+      "terminal_status": "passed"
+    }
+  },
+  "runtime_class": "provider_free_disposable_postgresql_exact_capability_role",
+  "schema_version": "emr4.postgresql_office_host_compatibility_evidence.v1",
+  "side_effects": {
+    "cloud_or_iam_mutations": 0,
+    "deployments": 0,
+    "document_reads": 0,
+    "document_writes": 0,
+    "external_identity_calls": 0,
+    "microsoft_or_office_identity_calls": 0,
+    "patient_health_or_clinical_reads": 0,
+    "product_commands": 0,
+    "product_or_source_database_reads": 0,
+    "production_changes": 0,
+    "provider_calls": 0
+  }
+}
