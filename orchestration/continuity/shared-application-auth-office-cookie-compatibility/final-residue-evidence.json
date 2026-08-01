@@ -1,0 +1,31 @@
+{
+  "schema_version": "emr4.office_cookie_compatibility_residue.v1",
+  "recorded_at": "2026-08-01T07:11:00Z",
+  "result": "pass_with_user_visible_blank_word_process_retained",
+  "required_task_cleanup": {
+    "harness_process_count": 0,
+    "tunnel_process_count": 0,
+    "port_8001_listener_count": 0,
+    "port_4040_listener_count": 0,
+    "office_developer_registration_count": 0,
+    "raw_bootstrap_value_count": 0,
+    "raw_evidence_nonce_count": 0,
+    "active_application_session_count": 0
+  },
+  "office_host_residue": {
+    "user_visible_blank_word_process_count": 1,
+    "developer_registration_present": false,
+    "taskpane_can_reload": false,
+    "document_content_inspected": false,
+    "document_content_written": false,
+    "document_deletion_attempted": false,
+    "close_requested_from_user": true
+  },
+  "external_residue": {
+    "provider_session_count": 0,
+    "external_identity_session_count": 0,
+    "cloud_or_iam_resource_count": 0,
+    "deployment_count": 0,
+    "production_change_count": 0
+  }
+}

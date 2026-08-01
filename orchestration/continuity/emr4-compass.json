@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 167,
-  "updated_at": "2026-08-01T05:30:00Z",
-  "source_graph_revision": 186,
-  "orientation_statement": "EMR4 security finding governance is now repository-owned rather than laptop-dependent: 12 native alerts have owner/SLA/evidence rows and exact GitHub dispositions; validated Bandit and CodeQL ledgers remain linked; and Python/Node workflow definitions have staggered daily schedules. Continuity 186 / Compass 167 bind the repository result. Default-branch schedule activation awaits protected integration; product, identity, provider, deployment, production and release boundaries remain closed.",
+  "map_revision": 168,
+  "updated_at": "2026-08-01T07:11:00Z",
+  "source_graph_revision": 187,
+  "orientation_statement": "EMR4 shared application authentication now has a real Office-host cookie compatibility proof: independent authored-synthetic sessions passed create, validate, rotate, revalidate, logout and post-logout denial in installed Word and Word Online. Continuity 187 / Compass 168 bind the result. Real identity, Microsoft federation, product data, organisational deployment, production, release and protected integration remain closed.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -1168,54 +1168,48 @@
         "orchestration/continuity/security-finding-governance/acceptance-evidence.json",
         "docs/security/security-finding-governance-closeout-2026-08-01.md"
       ]
+    },
+    {
+      "node_id": "raisa-shared-application-auth-office-cookie-compatibility",
+      "lineage_parent": "raisa-shared-application-auth-operational-hardening",
+      "strategic_role": "Real Office-host cookie compatibility proof",
+      "outcome": "The accepted default-off authored-synthetic session-cookie lifecycle passed once in installed Word and once in Word Online through the exact development origin. Both independent sessions rotated, logged out and then denied validation; no product, identity, document, provider, cloud or deployment path ran, and task listeners and registration are absent.",
+      "evidence": [
+        "docs/raisa-shared-application-auth-office-cookie-compatibility-plan.md",
+        "docs/security/raisa-shared-application-auth-office-cookie-compatibility-threat-model-delta.md",
+        "orchestration/continuity/shared-application-auth-office-cookie-compatibility/live-office-host-evidence.json",
+        "orchestration/continuity/shared-application-auth-office-cookie-compatibility/final-residue-evidence.json",
+        "orchestration/continuity/shared-application-auth-office-cookie-compatibility/acceptance-evidence.json",
+        "docs/raisa-shared-application-auth-office-cookie-compatibility-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "security-finding-governance",
-    "strategic_role": "Durable security-finding governance",
-    "why_now": "The accepted operational-hardening inventory proved detection was not laptop-only but exposed an unowned register, schedule and disposition gap.",
-    "outcome": "EMR4 now has one schema-validated owner/SLA register joining 12 native security alerts to evidence and exact GitHub disposition, with zero open Dependabot or security-high CodeQL alerts in the reconciled queues. The 14 Bandit and 10 CodeQL validation rows remain linked. Python and Node workflow definitions now carry staggered daily schedules; activation on the default branch still awaits protected integration.",
+    "node_id": "raisa-shared-application-auth-office-cookie-compatibility",
+    "strategic_role": "Real Office-host cookie compatibility proof",
+    "why_now": "The protected shared-auth and governance foundations were integrated, leaving real Office host cookie carriage as the leading bounded gap.",
+    "outcome": "The accepted default-off authored-synthetic session-cookie lifecycle passed once in installed Word and once in Word Online through the exact development origin. Both independent sessions rotated, logged out and then denied validation; no product, identity, document, provider, cloud or deployment path ran, and task listeners and registration are absent.",
     "unlocks": [
-      "Seek fresh authority for the supervised authored-synthetic Office cookie-compatibility candidate.",
-      "Integrate the published draft PR through protected review so the daily schedules become active on the default branch.",
-      "Reassess accepted development-tool risks when compatible upstream Office dependencies are released."
+      "Seek fresh authority for a provider-free authored-synthetic Office-host exercise through the accepted local PostgreSQL persistence and capability-role boundary.",
+      "Separately decide whether to design a real-identity and Microsoft federation boundary without yet wiring product reads.",
+      "Publish and review this task branch without moving protected refs."
     ],
     "does_not_solve": [
-      "Default-branch activation before protected integration.",
-      "Removal of development-only vulnerable dependency resolutions.",
-      "Incident paging, SIEM, runner availability or production monitoring.",
-      "Real identity, product data, provider, deployment, production or release."
+      "Every Office/WebView/browser/tenant cookie policy.",
+      "PostgreSQL or multi-instance behavior through a real Office host.",
+      "Real identity, Microsoft federation or product-data authorization.",
+      "Organisational deployment, production, release or protected integration."
     ],
     "evidence": [
-      "docs/security/security-finding-governance-plan.md",
-      "docs/security/security-finding-governance-threat-model-delta.md",
-      "docs/security/security-finding-register.json",
-      "docs/security/dependabot-alerts-8-15-triage-2026-08-01.md",
-      "orchestration/continuity/security-finding-governance/native-alert-disposition-evidence.json",
-      "orchestration/continuity/security-finding-governance/acceptance-evidence.json",
-      "docs/security/security-finding-governance-closeout-2026-08-01.md"
+      "docs/raisa-shared-application-auth-office-cookie-compatibility-plan.md",
+      "docs/security/raisa-shared-application-auth-office-cookie-compatibility-threat-model-delta.md",
+      "orchestration/continuity/shared-application-auth-office-cookie-compatibility/live-office-host-evidence.json",
+      "orchestration/continuity/shared-application-auth-office-cookie-compatibility/final-residue-evidence.json",
+      "orchestration/continuity/shared-application-auth-office-cookie-compatibility/acceptance-evidence.json",
+      "docs/raisa-shared-application-auth-office-cookie-compatibility-closeout.md"
     ]
   },
   "decision_horizon": [
-    {
-      "id": "shared-application-auth-office-cookie-compatibility",
-      "title": "Supervised Office cookie compatibility",
-      "status": "candidate",
-      "strategic_question": "Can the accepted default-off authored-synthetic session-cookie transport operate across supervised Word desktop and Word Online host constraints without opening real identity or product data?",
-      "why_it_matters": "The local HTTP contract passes, but real Office host partitioning and third-party-cookie behavior remain intentionally unproved.",
-      "prerequisites": [
-        "Fresh Yuri authority for an exact supervised authored-synthetic exercise.",
-        "Real identity and all product-derived data remain closed.",
-        "No deployment, production or release claim."
-      ],
-      "boundary_changes": [],
-      "evidence": [
-        "docs/raisa-shared-application-auth-operational-hardening-plan.md",
-        "docs/api-spine/openapi/application-auth-synthetic-transport.yaml",
-        "orchestration/continuity/raisa-shared-application-auth-operational-hardening/live-local-backend-postgres-operational-evidence.json",
-        "docs/raisa-shared-application-auth-operational-hardening-closeout.md"
-      ]
-    },
     {
       "id": "reception-one-stage3b-participant-execution",
       "title": "Reception One representative-staff formative sessions",
@@ -1833,9 +1827,23 @@
         "orchestration/continuity/security-finding-governance/acceptance-evidence.json",
         "docs/security/security-finding-governance-closeout-2026-08-01.md"
       ]
+    },
+    {
+      "id": "authorize-shared-application-auth-office-cookie-compatibility",
+      "question": "Should EMR4 exercise its accepted authored-synthetic session-cookie transport in installed Word and Word Online?",
+      "required_before": "Satisfied on 2026-08-01 for one provider-free in-memory supervised exercise through the exact development origin. Real identity, product data, organisational deployment, production and release remain closed.",
+      "evidence": [
+        "docs/raisa-shared-application-auth-office-cookie-compatibility-plan.md",
+        "docs/security/raisa-shared-application-auth-office-cookie-compatibility-threat-model-delta.md",
+        "orchestration/continuity/shared-application-auth-office-cookie-compatibility/live-office-host-evidence.json",
+        "orchestration/continuity/shared-application-auth-office-cookie-compatibility/final-residue-evidence.json",
+        "orchestration/continuity/shared-application-auth-office-cookie-compatibility/acceptance-evidence.json",
+        "docs/raisa-shared-application-auth-office-cookie-compatibility-closeout.md"
+      ]
     }
   ],
   "map_limits": [
+    "The Office cookie descendant proves one independent session lifecycle in installed Word and Word Online through one development origin. It does not cover every policy, PostgreSQL/multi-instance behavior, real identity, product data, organisational deployment or production.",
     "The governance descendant proves a repository schema/register, exact static triage, 12 native GitHub dispositions and daily workflow definitions. Scheduled runs are not active on the default branch until protected integration, and vulnerable dev-only lock entries remain.",
     "The accepted shared-auth operational-hardening descendant proves one local authored-synthetic deployment-login/capability split, strict one-hop proxy contract, bounded per-process limiter, HMAC-only denial audit and finite SQLAlchemy pool with exact cleanup. It does not prove real identity, distributed abuse resistance, production ingress, credential lifecycle, monitoring/retention, product-data safety, deployment, production or release.",
     "The accepted shared-auth runtime-role/transport descendant proves one local authored-synthetic capability-role and hash-resolver boundary, seven default-off routes, exact-origin/CSRF enforcement, partitioned Secure HttpOnly cookie carriage, atomic rotation/logout, database one-use and exact disposable cleanup. It does not prove real identity, Office cookie compatibility, abuse resistance, product-data safety, deployment, production or release.",

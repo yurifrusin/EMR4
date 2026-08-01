@@ -188,9 +188,13 @@ def test_preacceptance_receipt_and_continuity_closeout() -> None:
 
     graph = _load(GRAPH)
     compass = _load(COMPASS)
-    assert graph["graph_revision"] == 186
-    assert graph["nodes"][-1]["id"] == "security-finding-governance"
-    assert graph["nodes"][-1]["status"] == "accepted"
-    assert compass["map_revision"] == 167
-    assert compass["source_graph_revision"] == 186
-    assert compass["current_position"]["node_id"] == "security-finding-governance"
+    assert graph["graph_revision"] >= 186
+    node = next(
+        item for item in graph["nodes"] if item["id"] == "security-finding-governance"
+    )
+    assert node["status"] == "accepted"
+    assert compass["map_revision"] >= 167
+    assert compass["source_graph_revision"] >= 186
+    assert "security-finding-governance" in {
+        item["node_id"] for item in compass["journey"]
+    }
