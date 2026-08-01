@@ -1,0 +1,43 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "commit_the_no_docs_final_office_protected_integration_baton_correction_with_explicit_path_staging",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "The Office stack and no-docs baton PR are merged; this correction removes three residual pending or paused phrases from the current handover.",
+    "current_authority_allocation": "Yuri authorized the single Pages rebuild, protected integration and necessary task-branch commits; GPT Sol owns this no-docs wording correction.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-shared-application-auth-office-cookie-compatibility-plan.md",
+      "docs/raisa-shared-application-auth-office-cookie-compatibility-closeout.md",
+      "docs/raisa-shared-application-auth-postgresql-office-host-compatibility-plan.md",
+      "docs/raisa-shared-application-auth-postgresql-office-host-compatibility-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-shared-application-auth-postgresql-office-host-compatibility-protected-integration-receipt.json"
+    ],
+    "protected_evidence_boundaries": "No second Pages rebuild, other deployment, identity, federation, product-data, production, release or Dependabot alert 17 disposition authority is opened.",
+    "git_refs_and_worktree": {
+      "source_head": "41d04e6ee9bb3b3a98c6fbd4985a6a30d3f508b8",
+      "branch": "codex/office-protected-integration-final-baton",
+      "intended_paths": [
+        "AGENTS.md",
+        "orchestration/agent_inbox/codex/raisa-shared-application-auth-office-protected-integration-final-postcompaction-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-shared-application-auth-office-protected-integration-final-postcompaction-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-shared-application-auth-office-protected-integration-final-baton-precommit-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-shared-application-auth-office-protected-integration-final-baton-precommit-receipt.json"
+      ],
+      "index_empty_before_staging": true,
+      "concurrent_branding_assets_present_untracked_untouched_and_excluded": true
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}
