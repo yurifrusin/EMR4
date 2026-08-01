@@ -280,7 +280,6 @@ class PostgresApplicationAuthRuntime:
                     )
                     store = self._load_store(db, key, generation_row)
                 else:
-                    generation_row = None
                     store = InMemoryAuthoredSyntheticStore(
                         data_class=AUTHORED_SYNTHETIC_DATA_CLASS
                     )
@@ -294,7 +293,7 @@ class PostgresApplicationAuthRuntime:
 
                 self._persist_audit(db, audit.events)
                 if denial is None:
-                    if key is None or generation_row is None:
+                    if key is None:
                         raise AuthRuntimeDenied("persistence_principal_required")
                     self._persist_state(db, key, generation_row, store)
 

@@ -228,7 +228,8 @@ class TransportDenialEvent:
 
 
 class TransportDenialAuditSink(Protocol):
-    def record(self, event: TransportDenialEvent) -> None: ...
+    def record(self, event: TransportDenialEvent) -> None:
+        pass
 
 
 class PostgresTransportDenialAuditSink:

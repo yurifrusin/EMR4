@@ -182,7 +182,8 @@ class AuthAuditEvent:
 class AuthAuditSink(Protocol):
     """A sink must either admit the complete batch or raise without admission."""
 
-    def record_batch(self, events: Sequence[AuthAuditEvent]) -> None: ...
+    def record_batch(self, events: Sequence[AuthAuditEvent]) -> None:
+        pass
 
 
 class InMemoryAuthAuditSink:

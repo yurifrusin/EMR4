@@ -71,3 +71,19 @@ The immediate mutation readback also detected and repaired one comment-
 interpolation defect through an audited reopen/re-dismiss cycle. Exact states,
 timestamps, checks, mutation counts, and closed boundaries are recorded in
 `orchestration/continuity/pr69-security-ci-repair/native-alert-reconciliation-evidence.json`.
+
+## Protected-review follow-up
+
+The final protected review also inspected three unresolved CodeQL review
+threads outside the security-severity inventory above. Alerts 533, 537 and 538
+are `note`-severity maintainability findings with no `security-severity` tag.
+The task branch removed the unreachable `generation_row = None` assignment and
+replaced two protocol-body ellipses with explicit `pass` bodies. These changes
+do not alter persistence, audit, authorization or transport behavior.
+
+The affected shared-auth suites pass 100 selected tests. The immutable
+`test_provider_free_acceptance_evidence_matches_runtime` historical-report
+equality node was intentionally deselected because its accepted artifact hashes
+the runtime source file; the accepted historical evidence was not regenerated.
+Ruff and `git diff --check` also pass. Alerts 533, 537 and 538 must close as
+fixed on the task-branch CodeQL rerun before protected integration.
