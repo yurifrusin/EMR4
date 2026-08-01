@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "implement_the_frozen_provider_free_authored_synthetic_shared_application_auth_office_cookie_compatibility_exercise",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_office_cookie_compatibility_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: AGENTS.md was read completely; protected PR 69 is integrated and Yuri authorised the exact supervised Office cookie-compatibility candidate.",
+        "current_authority_allocation: GPT Sol retains this tightly coupled security, Office-host and acceptance sequence; no worker or subagent is selected.",
+        "active_plan_and_acceptance: the accepted shared-auth operational-hardening and Word host plans were read together with the API Spine ADR/programme/OpenAPI contract; the new plan and threat delta freeze the exact descendant.",
+        "protected_evidence_boundaries: protected holdouts and historical Diary material remain sealed; only provider-free authored-synthetic in-memory auth state is open, with real identity, Office federation, product data, document APIs, commands, deployment, production and release closed.",
+        "git_refs_and_worktree: the new task branch starts at protected merge 1af54ae31895e863b447479aeb3b2bbcf0e684b8; local and origin master and handoff/current all match; concurrent branding assets are preserved untracked and excluded."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No worker was selected or dispatched."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected interactive fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude transport was selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No independent provider or reviewer was selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
