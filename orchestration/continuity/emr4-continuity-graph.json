@@ -9659,7 +9659,7 @@
       "kind": "integration",
       "status": "accepted",
       "created_at": "2026-08-01T07:11:00Z",
-      "updated_at": "2026-08-01T07:11:00Z",
+      "updated_at": "2026-08-01T07:55:53Z",
       "coordinates": {
         "git_ref": "codex/shared-auth-office-cookie-compatibility",
         "source_head": "30d5e0116148529da3c41c728504c69d8833f544",
@@ -9687,7 +9687,8 @@
         "notes": [
           "Yuri authorised the leading Compass 167 Office cookie-compatibility candidate.",
           "Yuri separately permitted the supplied Raisa branding direction in future UI renders; the concurrent brand assets remained untouched and excluded.",
-          "No Trust Center, catalogue, tenant, Office policy, cloud/IAM, deployment or protected-ref change occurred."
+          "No Trust Center, catalogue, tenant, Office policy, cloud/IAM, deployment or protected-ref change occurred.",
+          "Task-branch publication exposed post-snapshot Dependabot alert 17; it is registered open/needs_review and neither the native alert nor the dependency graph was mutated."
         ]
       },
       "decisions": [
@@ -9714,13 +9715,20 @@
           "source": "docs/security/raisa-shared-application-auth-office-cookie-compatibility-threat-model-delta.md",
           "status": "accepted",
           "summary": "Keep real identity, Microsoft federation, product data, database-backed Office behavior, deployment, production and release outside this pass."
+        },
+        {
+          "id": "register-post-snapshot-dependabot-alert-17-open-187",
+          "source": "orchestration/continuity/shared-application-auth-office-cookie-compatibility/dependabot-alert-17-readback.json",
+          "status": "accepted",
+          "summary": "Register development-only high alert 17 as SF-0020 with a not_actionable static verdict while retaining its native-open state pending explicit disposition authority."
         }
       ],
       "claim_scope": [
         "The existing Secure, HttpOnly, SameSite=None, Partitioned session-cookie lifecycle passed once in each supervised Office host through the exact development origin.",
         "Each host used an independent authored-synthetic principal, one-use bootstrap and result channel; both logged out and proved the ordinary post-logout denial.",
         "The desktop admission failure occurred before page delivery; direct developer debugging repaired only host admission and was fully unregistered.",
-        "No document, product, patient, clinical, external identity, provider, cloud, deployment or production path ran."
+        "No document, product, patient, clinical, external identity, provider, cloud, deployment or production path ran.",
+        "Dependabot alert 17 reaches only an optional development-lint project-service/default-project glob matcher absent from the supported configuration; SF-0020 remains open/needs_review."
       ],
       "contract_evidence": [
         {
@@ -9754,7 +9762,9 @@
         "findings": [
           "orchestration/continuity/shared-application-auth-office-cookie-compatibility/live-office-host-evidence.json",
           "orchestration/continuity/shared-application-auth-office-cookie-compatibility/final-residue-evidence.json",
-          "orchestration/continuity/shared-application-auth-office-cookie-compatibility/acceptance-evidence.json"
+          "orchestration/continuity/shared-application-auth-office-cookie-compatibility/acceptance-evidence.json",
+          "docs/security/dependabot-alert-17-triage-2026-08-01.md",
+          "orchestration/continuity/shared-application-auth-office-cookie-compatibility/dependabot-alert-17-readback.json"
         ],
         "closeouts": [
           "docs/raisa-shared-application-auth-office-cookie-compatibility-closeout.md"
@@ -9764,7 +9774,8 @@
         ],
         "receipts": [
           "orchestration/agent_inbox/codex/raisa-shared-application-auth-office-cookie-compatibility-rehydration-receipt.json",
-          "orchestration/agent_inbox/codex/raisa-shared-application-auth-office-cookie-compatibility-preacceptance-receipt.json"
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-office-cookie-compatibility-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-shared-application-auth-office-cookie-compatibility-postcompaction-receipt.json"
         ],
         "tests": [
           "scripts/raisa_shared_application_auth_office_cookie_compatibility.py",
@@ -9777,11 +9788,12 @@
         "The pass covers one Office/WebView/browser/tenant posture and one exact development origin, not every enterprise policy.",
         "PostgreSQL, multi-instance and capability-role behavior was not exercised through either real Office host.",
         "Real identity mapping, Microsoft federation and product-data authorization remain separately closed.",
-        "Organisational Office deployment, production, release and protected integration require separate authority."
+        "Organisational Office deployment, production, release and protected integration require separate authority.",
+        "The native disposition of Dependabot alert 17 remains an explicit user-owned decision; it stays open/needs_review and no forced dependency override is authorised."
       ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-01T07:11:00Z"
+  "updated_at": "2026-08-01T07:55:53Z"
 }

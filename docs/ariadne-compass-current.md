@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 shared application authentication now has a real Office-host cookie compatibility proof: independent authored-synthetic sessions passed create, validate, rotate, revalidate, logout and post-logout denial in installed Word and Word Online. Continuity 187 / Compass 168 bind the result. Real identity, Microsoft federation, product data, organisational deployment, production, release and protected integration remain closed.
+> EMR4 shared application authentication now has a real Office-host cookie compatibility proof in installed Word and Word Online. Continuity 187 / Compass 168 bind the result and the post-snapshot development-only Dependabot alert 17 remains registered open/needs_review without mutation. Real identity, Microsoft federation, product data, organisational deployment, production, release and protected integration remain closed.
 
 ## North star
 
@@ -147,7 +147,7 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
 65. **Durable security-finding governance — EMR4 Security-Finding Governance**
    EMR4 now has one schema-validated owner/SLA register joining 12 native security alerts to evidence and exact GitHub disposition, with zero open Dependabot or security-high CodeQL alerts in the reconciled queues. The 14 Bandit and 10 CodeQL validation rows remain linked. Python and Node workflow definitions now carry staggered daily schedules; activation on the default branch still awaits protected integration. Lineage parent: `raisa-shared-application-auth-operational-hardening`.
 66. **Real Office-host cookie compatibility proof — Raisa Shared Application-Auth Office Cookie Compatibility**
-   The accepted default-off authored-synthetic session-cookie lifecycle passed once in installed Word and once in Word Online through the exact development origin. Both independent sessions rotated, logged out and then denied validation; no product, identity, document, provider, cloud or deployment path ran, and task listeners and registration are absent. Lineage parent: `raisa-shared-application-auth-operational-hardening`.
+   The accepted default-off authored-synthetic session-cookie lifecycle passed once in installed Word and once in Word Online through the exact development origin. Both independent sessions rotated, logged out and then denied validation; no product, identity, document, provider, cloud or deployment path ran, and task listeners and registration are absent. Publication exposed development-only Dependabot alert 17, which is registered open/needs_review without native or dependency mutation. Lineage parent: `raisa-shared-application-auth-operational-hardening`.
 
 ## Current position
 
@@ -155,10 +155,11 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
 
 **Why this proof came next:** The protected shared-auth and governance foundations were integrated, leaving real Office host cookie carriage as the leading bounded gap.
 
-The accepted default-off authored-synthetic session-cookie lifecycle passed once in installed Word and once in Word Online through the exact development origin. Both independent sessions rotated, logged out and then denied validation; no product, identity, document, provider, cloud or deployment path ran, and task listeners and registration are absent.
+The accepted default-off authored-synthetic session-cookie lifecycle passed once in installed Word and once in Word Online through the exact development origin. Both independent sessions rotated, logged out and then denied validation; no product, identity, document, provider, cloud or deployment path ran, and task listeners and registration are absent. Publication exposed development-only Dependabot alert 17, which is registered open/needs_review without native or dependency mutation.
 
 ### What this unlocks
 
+- Make an explicit user decision whether Dependabot alert 17 should remain open or be dismissed as not_used; do not force a dependency override.
 - Seek fresh authority for a provider-free authored-synthetic Office-host exercise through the accepted local PostgreSQL persistence and capability-role boundary.
 - Separately decide whether to design a real-identity and Microsoft federation boundary without yet wiring product reads.
 - Publish and review this task branch without moving protected refs.
@@ -169,6 +170,7 @@ The accepted default-off authored-synthetic session-cookie lifecycle passed once
 - PostgreSQL or multi-instance behavior through a real Office host.
 - Real identity, Microsoft federation or product-data authorization.
 - Organisational deployment, production, release or protected integration.
+- The user-owned native disposition or removal of Dependabot alert 17.
 
 ## Continuity and authority
 
@@ -374,9 +376,12 @@ Prerequisites:
   Required before: Satisfied on 2026-08-01 for the exact repository governance, SECURITY.md, named native-alert disposition and task-branch publication scope. Protected integration remains separate.
 - **Should EMR4 exercise its accepted authored-synthetic session-cookie transport in installed Word and Word Online?**
   Required before: Satisfied on 2026-08-01 for one provider-free in-memory supervised exercise through the exact development origin. Real identity, product data, organisational deployment, production and release remain closed.
+- **Should development-only Dependabot alert 17 be dismissed as not_used or remain open for upstream remediation?**
+  Required before: Any GitHub alert-state mutation. SF-0020 is currently registered not_actionable and native-open/needs_review; no dependency override is authorised.
 
 ## Map limits
 
+- Post-snapshot Dependabot alert 17 is statically not_actionable for the supported development lint configuration but remains native-open and needs_review pending an explicit user disposition.
 - The Office cookie descendant proves one independent session lifecycle in installed Word and Word Online through one development origin. It does not cover every policy, PostgreSQL/multi-instance behavior, real identity, product data, organisational deployment or production.
 - The governance descendant proves a repository schema/register, exact static triage, 12 native GitHub dispositions and daily workflow definitions. Scheduled runs are not active on the default branch until protected integration, and vulnerable dev-only lock entries remain.
 - The accepted shared-auth operational-hardening descendant proves one local authored-synthetic deployment-login/capability split, strict one-hop proxy contract, bounded per-process limiter, HMAC-only denial audit and finite SQLAlchemy pool with exact cleanup. It does not prove real identity, distributed abuse resistance, production ingress, credential lifecycle, monitoring/retention, product-data safety, deployment, production or release.
@@ -606,6 +611,7 @@ Prerequisites:
 - `docs/security/bernie-reception-one-receptionist-first-v62-threat-model-delta.md`
 - `docs/security/bernie-reception-one-shared-typed-language-threat-model-delta.md`
 - `docs/security/bernie-reception-one-structured-source-language-threat-model-delta.md`
+- `docs/security/dependabot-alert-17-triage-2026-08-01.md`
 - `docs/security/dependabot-alerts-8-15-triage-2026-08-01.md`
 - `docs/security/raisa-clinician-one-readonly-document-context-threat-model-delta.md`
 - `docs/security/raisa-clinician-one-word-desktop-selection-check-threat-model-delta.md`
@@ -1065,6 +1071,7 @@ Prerequisites:
 - `orchestration/continuity/security-finding-governance/acceptance-evidence.json`
 - `orchestration/continuity/security-finding-governance/native-alert-disposition-evidence.json`
 - `orchestration/continuity/shared-application-auth-office-cookie-compatibility/acceptance-evidence.json`
+- `orchestration/continuity/shared-application-auth-office-cookie-compatibility/dependabot-alert-17-readback.json`
 - `orchestration/continuity/shared-application-auth-office-cookie-compatibility/final-residue-evidence.json`
 - `orchestration/continuity/shared-application-auth-office-cookie-compatibility/live-office-host-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`

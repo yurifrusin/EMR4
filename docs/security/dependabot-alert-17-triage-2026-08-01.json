@@ -1,0 +1,78 @@
+{
+  "schema_version": "triage-finding/v0",
+  "repository": {
+    "path": "C:/Users/sarashera/emr4",
+    "revision": "c9b157140bfc37af361de6e6527d14f01b0438ea"
+  },
+  "findings": [
+    {
+      "triage_item_id": "triage-001",
+      "input_id": "dependabot-alert-17",
+      "source_type": "advisory",
+      "title": "brace-expansion exponential-time processing in Office lint tooling",
+      "normalized_input": {
+        "vulnerable_component": "brace-expansion@2.1.1",
+        "claimed_source": "attacker-controlled minimatch/glob brace pattern",
+        "claimed_sink": "exponential CPU consumption in brace-expansion.expand()",
+        "claimed_control": "no input bound or timeout inside the affected package",
+        "affected_version_or_path": "EMR4 Sidebar/package-lock.json nested development dependency >=2.0.0,<2.1.2",
+        "preconditions": [
+          "A caller must pass an attacker-controlled brace pattern to the nested minimatch instance."
+        ],
+        "impact": "denial of service in the calling Node process",
+        "references": [
+          "https://github.com/yurifrusin/EMR4/security/dependabot/17",
+          "https://github.com/advisories/GHSA-3jxr-9vmj-r5cp",
+          "CVE-2026-13149"
+        ]
+      },
+      "verdict": "not_actionable",
+      "confidence": "high",
+      "affected_locations": [
+        {
+          "label": "vulnerable locked instance",
+          "path": "EMR4 Sidebar/package-lock.json",
+          "lines": "5580-5597",
+          "detail": "The exact brace-expansion 2.1.1 and minimatch 9.0.9 instances are marked development-only."
+        },
+        {
+          "label": "development entrypoint",
+          "path": "EMR4 Sidebar/package-lock.json",
+          "lines": "12566-12581",
+          "detail": "office-addin-lint is development-only and introduces the typescript-eslint chain."
+        }
+      ],
+      "reachable_path": [
+        "office-addin-lint development command",
+        "typescript-eslint parser",
+        "optional project-service allowDefaultProject matcher",
+        "nested minimatch and brace-expansion"
+      ],
+      "boundary_assessment": {
+        "product_surface": "local developer UI",
+        "source_trust": "trusted_developer_config",
+        "boundary_crossed": false,
+        "policy_basis": "Root SECURITY.md plus development-only lock metadata and the supported Office lint configuration"
+      },
+      "exploitability_stack_rank": {
+        "rank_queue": null,
+        "rank": null,
+        "rationale": "not actionable",
+        "drivers": []
+      },
+      "evidence": [
+        "The vulnerable package instance is marked dev:true.",
+        "The exact caller uses minimatch only for allowDefaultProject patterns in the optional project-service path.",
+        "The supported lint configuration enables neither projectService nor allowDefaultProject.",
+        "No product or production dependency path includes this instance."
+      ],
+      "counterevidence": [
+        "The upstream package defect is genuine but dependency presence alone does not establish an EMR4 security boundary.",
+        "A trusted developer could deliberately change lint configuration to enable the optional sink."
+      ],
+      "proof_gaps": [],
+      "recommended_next_step": "Register the alert open with owner/SLA, leave native disposition unchanged pending explicit authority, and reassess when the supported dependency graph or lint configuration changes.",
+      "fix_finding_handoff": null
+    }
+  ]
+}

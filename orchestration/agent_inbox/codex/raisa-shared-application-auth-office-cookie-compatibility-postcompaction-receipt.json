@@ -1,0 +1,43 @@
+{
+  "authority_boundary": "receipt_only_provider_free_authored_synthetic_office_cookie_compatibility_no_native_alert_mutation_real_identity_product_data_document_api_cloud_mutation_deployment_production_release_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "complete_the_accepted_office_cookie_compatibility_task_branch_and_register_post_snapshot_dependabot_alert_17_without_native_mutation",
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after context restoration. The Office cookie-compatibility result is accepted; publication exposed Dependabot alert 17, which is registered but remains native-open pending explicit disposition authority.",
+    "current_authority_allocation": "GPT Sol retains this tightly coupled continuity, verification and task-branch closeout. No worker, native subagent, provider or external reviewer was selected or dispatched.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-shared-application-auth-office-cookie-compatibility-plan.md",
+      "docs/security/raisa-shared-application-auth-office-cookie-compatibility-threat-model-delta.md",
+      "orchestration/continuity/shared-application-auth-office-cookie-compatibility/live-office-host-evidence.json",
+      "orchestration/continuity/shared-application-auth-office-cookie-compatibility/final-residue-evidence.json",
+      "orchestration/continuity/shared-application-auth-office-cookie-compatibility/acceptance-evidence.json",
+      "docs/raisa-shared-application-auth-office-cookie-compatibility-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-shared-application-auth-office-cookie-compatibility-sol-acceptance.md"
+    ],
+    "protected_evidence_boundaries": "Protected holdouts and raw historical Diary material remain sealed. Real identity, Microsoft/Office federation, Office credentials, product or document access, providers, cloud/IAM mutation, deployment, production, release and native alert mutation remain closed. Dependabot alert 17 stays open/needs_review. Concurrent docs/branding/raisa assets remain untouched, untested and excluded.",
+    "git_refs_and_worktree": {
+      "HEAD": "c9b157140bfc37af361de6e6527d14f01b0438ea",
+      "branch": "codex/shared-auth-office-cookie-compatibility",
+      "master": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "handoff/current": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "origin/master": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "origin/handoff/current": "1af54ae31895e863b447479aeb3b2bbcf0e684b8",
+      "task_branch_has_only_authorised_uncommitted_follow_up_and_excluded_branding": true,
+      "concurrent_branding_assets_untouched_untracked_and_excluded": true,
+      "staged_files": 0
+    }
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

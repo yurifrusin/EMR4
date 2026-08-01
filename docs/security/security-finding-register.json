@@ -1,8 +1,8 @@
 {
   "schema_version": "emr4.security-finding-register.v1",
-  "register_revision": 3,
+  "register_revision": 4,
   "policy_effective_at": "2026-08-01T00:00:00+10:00",
-  "last_verified_at": "2026-08-01T05:10:51Z",
+  "last_verified_at": "2026-08-01T09:00:51Z",
   "owner": "@yurifrusin",
   "native_findings": [
     {
@@ -482,6 +482,37 @@
       "desired_native_state": "fixed",
       "review_at": "2026-08-15T00:00:00+10:00",
       "risk_acceptance": {"accepted_by": "@yurifrusin", "rationale": "No residual risk is accepted; this row remains open only until native CodeQL readback observes the committed fix.", "expires_at": "2026-09-01T00:00:00+10:00", "reopen_condition": "CodeQL does not close the alert, uncontrolled whitespace again reaches an overlapping repetition, or the move-time regression contract changes."}
+    },
+    {
+      "finding_id": "SF-0020",
+      "source": "dependabot",
+      "native_id": 17,
+      "native_url": "https://github.com/yurifrusin/EMR4/security/dependabot/17",
+      "title": "brace-expansion exponential-time processing in Office lint tooling",
+      "severity": "high",
+      "owner": "@yurifrusin",
+      "first_observed_at": "2026-08-01T06:05:44Z",
+      "acknowledged_at": "2026-08-01T07:55:53Z",
+      "triaged_at": "2026-08-01T07:55:53Z",
+      "triage_due_at": "2026-08-06T06:05:44Z",
+      "triage_verdict": "not_actionable",
+      "status": "needs_review",
+      "affected_surface": "development-only Office lint parser project-service patterns",
+      "evidence": [
+        "docs/security/dependabot-alert-17-triage-2026-08-01.md",
+        "docs/security/dependabot-alert-17-triage-2026-08-01.json",
+        "orchestration/continuity/shared-application-auth-office-cookie-compatibility/dependabot-alert-17-readback.json",
+        "EMR4 Sidebar/package.json",
+        "EMR4 Sidebar/package-lock.json"
+      ],
+      "repository_disposition": "The vulnerable instance is development-only and its minimatch sink requires parserOptions.projectService.allowDefaultProject patterns, which the supported Office lint configuration does not enable; no product or production boundary is crossed.",
+      "native_disposition_reason": "not_used",
+      "native_disposition_comment": "Static triage supports not_used: the dev-only Office lint chain does not configure projectService or allowDefaultProject. Native dismissal remains intentionally pending explicit authority.",
+      "observed_native_state": "open",
+      "desired_native_state": "open",
+      "native_disposition_at": null,
+      "review_at": "2026-08-03T00:00:00+10:00",
+      "risk_acceptance": null
     }
   ],
   "linked_local_ledgers": [

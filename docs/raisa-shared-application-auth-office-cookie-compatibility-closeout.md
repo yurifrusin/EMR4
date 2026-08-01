@@ -63,13 +63,17 @@ identifier.
 - Twelve focused harness, manifest, route, failure-closure and durable-evidence
   tests pass.
 - The expanded shared-auth, API Spine and security-governance regression passes
-  175 tests.
+  176 tests, including the dedicated post-snapshot alert 17 regression.
 - Canonical Ruff, historical Diary leakage and reviewed Bandit gates pass.
 - `pip-audit` reports no known Python dependency vulnerabilities.
 - The blocking production Node audit reports zero vulnerabilities. The full
-  non-blocking development-tool audit reports the existing 19 upstream-only
-  vulnerabilities governed by the protected parent register; no force update
-  was applied.
+  non-blocking development-tool audit reports 19 upstream vulnerabilities; no
+  force update was applied. During publication, GitHub surfaced new high
+  Dependabot alert 17 for one development-only `brace-expansion` instance.
+  Static triage found that its optional `allowDefaultProject` minimatch sink is
+  not enabled by the supported lint configuration. It is durably registered as
+  `SF-0020` with a `not_actionable` verdict but remains native-open and
+  `needs_review`; no GitHub alert mutation occurred.
 - The repository manifest and both task-specific Restricted manifests pass
   Microsoft's Office manifest validator. JavaScript syntax and JSON parsing
   pass.

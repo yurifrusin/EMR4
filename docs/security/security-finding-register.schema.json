@@ -84,15 +84,20 @@
         "native_disposition_at": {"type": ["string", "null"], "format": "date-time"},
         "review_at": {"type": "string", "format": "date-time"},
         "risk_acceptance": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["accepted_by", "rationale", "expires_at", "reopen_condition"],
-          "properties": {
-            "accepted_by": {"type": "string", "pattern": "^@[A-Za-z0-9-]+$"},
-            "rationale": {"type": "string", "minLength": 1},
-            "expires_at": {"type": "string", "format": "date-time"},
-            "reopen_condition": {"type": "string", "minLength": 1}
-          }
+          "oneOf": [
+            {"type": "null"},
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["accepted_by", "rationale", "expires_at", "reopen_condition"],
+              "properties": {
+                "accepted_by": {"type": "string", "pattern": "^@[A-Za-z0-9-]+$"},
+                "rationale": {"type": "string", "minLength": 1},
+                "expires_at": {"type": "string", "format": "date-time"},
+                "reopen_condition": {"type": "string", "minLength": 1}
+              }
+            }
+          ]
         }
       }
     },
