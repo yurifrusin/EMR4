@@ -137,6 +137,28 @@ def test_pr70_codeql_candidates_are_instance_preserving_and_fixed() -> None:
     assert readback["external_side_effects"]["native_alert_mutations"] == 0
 
 
+def test_pr74_codeql_quality_candidates_are_instance_preserving() -> None:
+    ledger_path = (
+        ROOT
+        / "docs"
+        / "security"
+        / "pr74-codeql-alerts-546-548-validation-ledger.jsonl"
+    )
+    rows = [json.loads(line) for line in ledger_path.read_text().splitlines()]
+    assert [row["candidate_id"] for row in rows] == [
+        "codeql-546",
+        "codeql-547",
+        "codeql-548",
+    ]
+    assert len({row["instance_key"] for row in rows}) == 3
+    assert {row["native_severity"] for row in rows} == {"note"}
+    assert {row["security_severity"] for row in rows} == {None}
+    assert {row["triage_verdict"] for row in rows} == {"not_actionable"}
+    assert {row["disposition"] for row in rows} == {
+        "source_repaired_pending_fresh_codeql"
+    }
+
+
 def test_post_snapshot_alert_17_triage_and_readback_remain_open_and_zero_mutation() -> None:
     triage_path = (
         ROOT / "docs" / "security" / "dependabot-alert-17-triage-2026-08-01.json"
