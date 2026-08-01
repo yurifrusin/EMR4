@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/real-identity-microsoft-federation-policy-v1.json",
+  "title": "EMR4 real identity and Microsoft federation policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "policy_version",
+    "status",
+    "authority_owner",
+    "provider",
+    "account_scope",
+    "protocol",
+    "validation",
+    "identity_binding",
+    "session_bridge",
+    "audit",
+    "failure_closure",
+    "closed_authority"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.real-identity-microsoft-federation-policy.v1"},
+    "policy_version": {"const": "microsoft-entra-single-tenant-prebound.v1"},
+    "status": {"const": "architecture_only_provider_free"},
+    "authority_owner": {"const": "emr4_backend"},
+    "provider": {"const": "microsoft_entra"},
+    "account_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tenant_mode", "authority_mode", "allowed_account_type", "rejected_authorities", "guest_policy"],
+      "properties": {
+        "tenant_mode": {"const": "one_explicit_organisational_tenant"},
+        "authority_mode": {"const": "tenant_specific_v2"},
+        "allowed_account_type": {"const": "workforce_or_prebound_tenant_guest"},
+        "rejected_authorities": {
+          "type": "array",
+          "const": ["common", "organizations", "consumers", "personal_microsoft_account"]
+        },
+        "guest_policy": {"const": "exact_tenant_local_prebinding_required"}
+      }
+    },
+    "protocol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["flow", "oidc", "pkce_method", "code_redemption", "redirects", "attempt_ttl_seconds_max", "single_use_state", "single_use_nonce", "forbidden_flows"],
+      "properties": {
+        "flow": {"const": "authorization_code"},
+        "oidc": {"const": true},
+        "pkce_method": {"const": "S256"},
+        "code_redemption": {"const": "backend_confidential_boundary_later"},
+        "redirects": {"const": "exact_allowlisted_https_only"},
+        "attempt_ttl_seconds_max": {"type": "integer", "minimum": 1, "maximum": 300},
+        "single_use_state": {"const": true},
+        "single_use_nonce": {"const": true},
+        "forbidden_flows": {
+          "type": "array",
+          "const": ["implicit", "resource_owner_password", "device_code", "client_supplied_token"]
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["library", "metadata", "signing_keys", "required_checks", "unknown_key", "external_identity_key", "non_authority_claims"],
+      "properties": {
+        "library": {"const": "maintained_oidc_library_required"},
+        "metadata": {"const": "tenant_specific_discovery_and_jwks"},
+        "signing_keys": {"const": "multiple_current_keys_and_rollover_supported"},
+        "required_checks": {
+          "type": "array",
+          "const": ["signature", "algorithm", "issuer", "audience", "tenant_id", "object_id", "subject", "state", "nonce", "pkce", "issued_at", "not_before", "expires_at"]
+        },
+        "unknown_key": {"const": "bounded_metadata_refresh_then_deny"},
+        "external_identity_key": {"const": "tenant_id_plus_object_id"},
+        "non_authority_claims": {
+          "type": "array",
+          "const": ["email", "preferred_username", "upn", "name", "domain", "office_signed_in_state"]
+        }
+      }
+    },
+    "identity_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "cardinality", "requires_active_binding", "requires_active_internal_principal", "jit_provisioning", "email_or_domain_linking", "role_mapping", "ambiguity"],
+      "properties": {
+        "mode": {"const": "exact_preprovisioned"},
+        "cardinality": {"const": "one_external_key_to_one_user_and_practice"},
+        "requires_active_binding": {"const": true},
+        "requires_active_internal_principal": {"const": true},
+        "jit_provisioning": {"const": false},
+        "email_or_domain_linking": {"const": false},
+        "role_mapping": {"const": "forbidden"},
+        "ambiguity": {"const": "deny"}
+      }
+    },
+    "session_bridge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "fresh_internal_reload", "existing_session_runtime", "product_authorization", "microsoft_claim_is_capability"],
+      "properties": {
+        "status": {"const": "closed_requires_later_authority"},
+        "fresh_internal_reload": {"const": true},
+        "existing_session_runtime": {"const": "application_auth_runtime"},
+        "product_authorization": {"const": "endpoint_owned_current_backend_policy"},
+        "microsoft_claim_is_capability": {"const": false}
+      }
+    },
+    "audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_before_principal_release", "failure", "external_reference_storage", "forbidden_fields"],
+      "properties": {
+        "required_before_principal_release": {"const": true},
+        "failure": {"const": "service_unavailable_no_principal"},
+        "external_reference_storage": {"const": "versioned_keyed_hmac_sha256"},
+        "forbidden_fields": {
+          "type": "array",
+          "const": ["authorization_code", "access_token", "id_token", "refresh_token", "raw_state", "raw_nonce", "pkce_verifier", "tenant_id", "object_id", "email", "name", "document", "patient", "clinical"]
+        }
+      }
+    },
+    "failure_closure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["external_error", "unknown_or_ambiguous", "fallbacks"],
+      "properties": {
+        "external_error": {"const": "generic_authentication_failed"},
+        "unknown_or_ambiguous": {"const": "deny_before_principal_or_session"},
+        "fallbacks": {"type": "array", "maxItems": 0}
+      }
+    },
+    "closed_authority": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[a-z0-9_]+$"}
+    }
+  }
+}

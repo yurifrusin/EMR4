@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md Current Baton and the accepted Office cookie lifecycle closeout at protected HEAD 7c618c336baca6c33a4bedcf7e23b50be1bb9c3e.",
+    "current_authority_allocation": "Yuri's explicit authority for the architecture-only real-identity and Microsoft-federation boundary plus its next two logical descendants; GPT Sol remains conductor/integrator and no worker is dispatched.",
+    "active_plan_and_acceptance": "The shared application-authentication boundary, runtime, PostgreSQL persistence, secure-transport and Office PostgreSQL compatibility plans/closeouts, API Spine ADR/programme, root SECURITY.md and current Ariadne Compass.",
+    "protected_evidence_boundaries": "No protected holdout or historical raw data access; live Microsoft/provider calls, real identity data, product reads, public routes, deployment, production, release and protected-ref movement remain closed; docs/branding/raisa remains untouched and excluded.",
+    "git_refs_and_worktree": "HEAD, local/origin master and local/origin handoff/current all equal 7c618c336baca6c33a4bedcf7e23b50be1bb9c3e; the index is empty and the only worktree item is untracked docs/branding/."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}
