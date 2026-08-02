@@ -1,0 +1,82 @@
+{
+  "atomic_redemption_contract": {
+    "application_audit_failure_rolled_back": true,
+    "concurrency_exactly_one": true,
+    "consumed_audit_exact": true,
+    "failed_grants_unconsumed": true,
+    "federation_audit_failure_rolled_back": true,
+    "first_http_authenticated": true,
+    "inactive_principal_rejected": true,
+    "no_failure_cookie": true,
+    "replay_conflict_generic": true,
+    "revoked_binding_rejected": true,
+    "session_audit_exact": true,
+    "surface_mismatch_rejected": true,
+    "two_committed_sessions_only": true,
+    "unknown_generic": true,
+    "wrong_origin_denied": true
+  },
+  "claim_limits": [
+    "This proves only provider-free authored-synthetic atomic grant redemption into the accepted application-session runtime over real loopback HTTP and disposable PostgreSQL.",
+    "It establishes no live Microsoft call, real identity or product truth, product authorization, deployment, production or release authority."
+  ],
+  "cleanup": {
+    "database_absent_after": true,
+    "identifiers_recorded": false,
+    "passed": true,
+    "server_stopped": true,
+    "task_roles_absent_after": true
+  },
+  "cookie_contract": {
+    "csrf_cookie_present": true,
+    "csrf_returned_once": true,
+    "no_store": true,
+    "secure_http_only_partitioned": true,
+    "session_cookie_present": true,
+    "two_cookies": true
+  },
+  "data_class": "authored_synthetic",
+  "default_off": true,
+  "evidence_label": "live_local_http_backend_postgres_redemption",
+  "evidence_sensitive_match_count": 0,
+  "loopback_http": {
+    "ephemeral_port_recorded": false,
+    "host": "127.0.0.1",
+    "real_socket": true,
+    "requests_performed": 4
+  },
+  "migration_head": "t9u0v1w2x3y4",
+  "passed": true,
+  "residue_contract": {
+    "product_reads": 0,
+    "provider_calls": 0,
+    "raw_grant_absent_from_evidence": true,
+    "raw_values_absent_from_database": true,
+    "real_identities": 0
+  },
+  "result": "provider_free_oidc_admission_grant_redemption_bridge_pass",
+  "role_contract": {
+    "all_direct_denials_are_insufficient_privilege": true,
+    "denial_sqlstates": {
+      "call_binding_select": "42501",
+      "call_grant_select": "42501",
+      "call_truth_select": "42501",
+      "login_session_select": "42501",
+      "login_set_owner": "42501",
+      "owner_session_select": "42501"
+    },
+    "login_and_call_are_distinct": true,
+    "role_names_recorded": false
+  },
+  "schema_version": "emr4.provider-free-oidc-admission-grant-redemption-bridge-evidence.v1",
+  "side_effect_counts": {
+    "committed_admission_redemptions": 2,
+    "committed_parent_sessions": 2,
+    "committed_surface_sessions": 2,
+    "deployments": 0,
+    "product_or_clinical_reads": 0,
+    "production_changes": 0,
+    "provider_calls": 0,
+    "real_identities": 0
+  }
+}

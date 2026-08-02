@@ -269,36 +269,68 @@ class PostgresApplicationAuthRuntime:
         result: _ResultT | None = None
         with self._session_factory() as db:
             with db.begin():
-                self._prepare_transaction(db)
-                key = explicit_key if explicit_key is not None else key_lookup(db)
-                if key is not None:
-                    self._bind_practice_context(db, key)
-                    generation_row = self._lock_principal_generation(
-                        db,
-                        key,
-                        create_if_missing=explicit_key is not None,
-                    )
-                    store = self._load_store(db, key, generation_row)
-                else:
-                    store = InMemoryAuthoredSyntheticStore(
-                        data_class=AUTHORED_SYNTHETIC_DATA_CLASS
-                    )
-
-                audit = _TransactionalAuditBuffer()
-                runtime = self._new_runtime(store, audit)
                 try:
-                    result = operation(runtime)
+                    result = self._execute_in_transaction(
+                        db,
+                        operation=operation,
+                        explicit_key=explicit_key,
+                        key_lookup=key_lookup,
+                    )
                 except AuthRuntimeDenied as exc:
                     denial = exc
 
-                self._persist_audit(db, audit.events)
-                if denial is None:
-                    if key is None:
-                        raise AuthRuntimeDenied("persistence_principal_required")
-                    self._persist_state(db, key, generation_row, store)
-
         if denial is not None:
             raise denial
+        return result  # type: ignore[return-value]
+
+    def _execute_in_transaction(
+        self,
+        db: Session,
+        *,
+        operation: Callable[[ApplicationAuthRuntime], _ResultT],
+        explicit_key: _PrincipalKey | None = None,
+        key_lookup: Callable[[Session], _PrincipalKey | None] | None = None,
+    ) -> _ResultT:
+        """Execute one accepted runtime operation inside the caller transaction.
+
+        The ordinary coordinator catches typed denials so their admitted audit
+        can commit. A security bridge may call this step directly; any raised
+        denial then rolls back the enclosing bridge transaction atomically.
+        """
+
+        if (explicit_key is None) == (key_lookup is None):
+            raise ValueError("exactly one principal-key source is required")
+        self._prepare_transaction(db)
+        key = explicit_key if explicit_key is not None else key_lookup(db)
+        if key is not None:
+            self._bind_practice_context(db, key)
+            generation_row = self._lock_principal_generation(
+                db,
+                key,
+                create_if_missing=explicit_key is not None,
+            )
+            store = self._load_store(db, key, generation_row)
+        else:
+            store = InMemoryAuthoredSyntheticStore(
+                data_class=AUTHORED_SYNTHETIC_DATA_CLASS
+            )
+            generation_row = None
+
+        audit = _TransactionalAuditBuffer()
+        runtime = self._new_runtime(store, audit)
+        denial: AuthRuntimeDenied | None = None
+        result: _ResultT | None = None
+        try:
+            result = operation(runtime)
+        except AuthRuntimeDenied as exc:
+            denial = exc
+
+        self._persist_audit(db, audit.events)
+        if denial is not None:
+            raise denial
+        if key is None or generation_row is None:
+            raise AuthRuntimeDenied("persistence_principal_required")
+        self._persist_state(db, key, generation_row, store)
         return result  # type: ignore[return-value]
 
     def _prepare_transaction(self, db: Session) -> None:

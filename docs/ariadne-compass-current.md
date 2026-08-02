@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 now has a provider-free HMAC-only binding resolver and audited 60-second exact-origin admission grant behind the default-off OIDC callback. Continuity 198 / Compass 179 bind four-component HMAC resolution, least-authority PostgreSQL roles, inseparable audit and zero session/product authority. Live Microsoft, real identity, redemption/session/cookies, product access, cloud/IAM, deployment, production and release remain closed.
+> EMR4 now closes the provider-free OIDC bridge at one backend-owned authored-synthetic application session. Continuity 199 / Compass 180 bind atomic grant consumption, active binding/version and fresh principal-truth checks, accepted session-policy reuse, exact post-commit cookies and zero provider/product authority. The next live-identity or product direction is a material Yuri-owned choice; cloud/IAM, deployment, production and release remain closed.
 
 ## North star
 
@@ -170,30 +170,32 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Exact-origin start and strict callback routes now consume one encrypted attempt and release only a fixed no-authority bridge message. Lineage parent: `raisa-postgresql-oidc-operational-connection-boundary`.
 77. **Bridge verified external identity to a tightly bounded, non-session internal admission artifact — Raisa Provider-Free OIDC Binding and Admission-Grant Boundary**
    Exact HMAC-only binding resolution now issues one audited 60-second exact-origin grant while session and product authority remain closed. Lineage parent: `raisa-provider-free-oidc-start-callback-transport-boundary`.
+78. **Close the provider-free external-authentication bridge at an atomic backend-owned application session — Raisa Provider-Free OIDC Admission-Grant Redemption Bridge**
+   One-use grant redemption now rechecks binding and current synthetic principal truth and commits the accepted session/cookies without product authority. Lineage parent: `raisa-provider-free-oidc-binding-admission-grant-boundary`.
 
 ## Current position
 
-**Provider-free HMAC binding and admission-grant boundary — Raisa Provider-Free OIDC Binding and Admission-Grant Boundary**
+**Provider-free atomic admission-grant redemption bridge — Raisa Provider-Free OIDC Admission-Grant Redemption Bridge**
 
-**Why this proof came next:** The accepted callback transport deliberately stopped before binding and session authority; Yuri preauthorised the exact HMAC-only intermediate boundary.
+**Why this proof came next:** The accepted callback deliberately stopped at a 60-second non-session artifact; Yuri preauthorised the final atomic bridge descendant.
 
-Real loopback HTTP and disposable PostgreSQL prove exact four-component HMAC resolution, required audit, least-authority role separation and one 60-second exact-origin grant with complete cleanup.
+Real loopback HTTP and disposable PostgreSQL prove one-use grant consumption, binding/version and fresh authored-synthetic principal checks, accepted session policy reuse, exact post-commit cookies and complete cleanup.
 
 ### What this unlocks
 
-- Review the binding/grant result on its stacked draft pull request.
-- Freshly rehydrate the preauthorised atomic admission-grant redemption descendant.
+- Review the completed three-descendant provider-free bridge sequence on its stacked draft pull requests.
+- Choose the next product/security direction before opening real identity, product authorization or live-provider work.
 
 ### What it does not solve
 
-- Live Microsoft/provider calls or real identities.
-- Grant redemption, fresh internal principal truth, application sessions, cookies or product access.
+- Live Microsoft/provider interoperability or real identities.
+- Real binding administration, real principal truth or product authorization/reads.
 - Production secret custody, hosted connectivity, distributed abuse resistance, monitoring, deployment, production or release.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Bounded opening `api-change`: Resolve one provider-free authored-synthetic Microsoft principal through exact HMAC-only PostgreSQL authority and issue one exact-origin 60-second admission grant without a session or product read.
+- Bounded opening `api-change`: Atomically redeem one provider-free authored-synthetic admission grant into the accepted application-session runtime after exact binding/version and fresh internal security-principal checks.
 - All other named boundaries remain closed: `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -419,10 +421,13 @@ Prerequisites:
 - **Should EMR4 add the provider-free HMAC-only binding resolver and short-lived admission-grant boundary?**
   Required before: Satisfied on 2026-08-02 only for provider-free authored-synthetic HMAC binding resolution and one 60-second admission grant. Redemption, session, cookie and product authority remain closed.
 - **Should EMR4 atomically redeem the provider-free admission grant into the accepted application-session runtime?**
-  Required before: Preauthorised by Yuri on 2026-08-02, but requires a fresh five-source tranche rehydration, exact binding-version recheck and fresh internal principal truth before any session or cookie.
+  Required before: Satisfied on 2026-08-02 only for provider-free authored-synthetic atomic grant redemption and session cookies. Live identity and product authority remain closed.
+- **Should the next tranche pursue live-provider interoperability, real internal principal mapping, or a separately bounded product-authorization path?**
+  Required before: This is a material direction choice after the three authorised provider-free bridge descendants; no option is implied by the current acceptance.
 
 ## Map limits
 
+- The atomic redemption result remains provider-free and authored-synthetic: its session cookies prove the backend transaction shape, not real identity or product authorization.
 - The HMAC binding/admission result is provider-free and authored-synthetic: its 60-second bearer is not an application session and grants no cookie, product, deployment or production authority.
 - The mounted OIDC transport result is default-off and provider-free: it releases only fixed authored-synthetic bridge enums and proves no live Microsoft, real identity, binding, admission grant, application session or product readiness.
 - The PostgreSQL OIDC operational result is provider-free and dormant: its PASSWORD NULL LOGIN contract and key-reference seam prove no persistent credential, secret-manager custody, mounted route, live identity, deployment or production readiness.
@@ -489,6 +494,7 @@ Prerequisites:
 - `alembic/versions/q6r7s8t9u0v1_add_application_identity_federation_persistence.py`
 - `alembic/versions/r7s8t9u0v1w2_add_oidc_authorization_attempt_store.py`
 - `alembic/versions/s8t9u0v1w2x3_add_federation_admission_grants.py`
+- `alembic/versions/t9u0v1w2x3y4_add_oidc_grant_redemption_bridge.py`
 - `app/models/application_auth.py`
 - `app/models/application_identity_oidc_attempt.py`
 - `app/routers/application_auth.py`
@@ -506,6 +512,8 @@ Prerequisites:
 - `app/services/application_identity_oidc_attempt_operational.py`
 - `app/services/application_identity_oidc_attempt_store.py`
 - `app/services/application_identity_oidc_binding_database_role.py`
+- `app/services/application_identity_oidc_redemption.py`
+- `app/services/application_identity_oidc_redemption_database_role.py`
 - `app/services/application_identity_oidc_transport.py`
 - `deploy/raisa-office-web-dev/Dockerfile`
 - `deploy/raisa-office-web-dev/manifest-template.xml`
@@ -658,6 +666,9 @@ Prerequisites:
 - `docs/raisa-postgresql-oidc-operational-connection-boundary-closeout.md`
 - `docs/raisa-postgresql-oidc-operational-connection-boundary-design.md`
 - `docs/raisa-postgresql-oidc-operational-connection-boundary-plan.md`
+- `docs/raisa-provider-free-oidc-admission-grant-redemption-bridge-closeout.md`
+- `docs/raisa-provider-free-oidc-admission-grant-redemption-bridge-design.md`
+- `docs/raisa-provider-free-oidc-admission-grant-redemption-bridge-plan.md`
 - `docs/raisa-provider-free-oidc-binding-admission-grant-boundary-closeout.md`
 - `docs/raisa-provider-free-oidc-binding-admission-grant-boundary-design.md`
 - `docs/raisa-provider-free-oidc-binding-admission-grant-boundary-plan.md`
@@ -719,6 +730,7 @@ Prerequisites:
 - `docs/security/raisa-oidc-verifier-dependency-review-2026-08-02.md`
 - `docs/security/raisa-postgresql-oidc-authorization-attempt-store-threat-model-delta.md`
 - `docs/security/raisa-postgresql-oidc-operational-connection-boundary-threat-model-delta.md`
+- `docs/security/raisa-provider-free-oidc-admission-grant-redemption-bridge-threat-model-delta.md`
 - `docs/security/raisa-provider-free-oidc-binding-admission-grant-boundary-threat-model-delta.md`
 - `docs/security/raisa-provider-free-oidc-start-callback-transport-boundary-threat-model-delta.md`
 - `docs/security/raisa-real-identity-microsoft-federation-boundary-threat-model-delta.md`
@@ -953,6 +965,7 @@ Prerequisites:
 - `orchestration/continuity/raisa-microsoft-federation-postgresql-persistence/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-postgresql-oidc-authorization-attempt-store/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-postgresql-oidc-operational-connection-boundary/live-local-backend-postgres-operational-evidence.json`
+- `orchestration/continuity/raisa-provider-free-oidc-admission-grant-redemption-bridge/live-local-http-backend-postgres-redemption-evidence.json`
 - `orchestration/continuity/raisa-provider-free-oidc-binding-admission-grant-boundary/live-local-http-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-provider-free-oidc-start-callback-transport-boundary/live-local-http-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-real-identity-microsoft-federation-boundary/provider-free-acceptance-evidence.json`
@@ -1280,4 +1293,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 179; continuity graph revision 198._
+_Compass map revision 180; continuity graph revision 199._

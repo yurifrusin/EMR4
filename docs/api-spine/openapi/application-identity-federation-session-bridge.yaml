@@ -1,27 +1,27 @@
 openapi: 3.1.0
 info:
   title: EMR4 application identity federation session bridge
-  version: 0.4.0-provider-free-binding-grant
+  version: 0.5.0-provider-free-redemption
   description: >-
     The start/callback subset is mounted default-off for provider-free
-    authored-synthetic transport verification. An explicitly injected local
-    service may resolve one HMAC-only authored-synthetic binding and return one
-    exact-origin 60-second admission grant. Redemption and application-session
-    creation remain future commands. It grants no live provider, real identity,
-    session, product, deployment, production or release authority.
+    authored-synthetic transport verification. Explicitly injected local
+    services may issue one exact-origin 60-second admission grant and redeem it
+    once into the accepted authored-synthetic application-session runtime in
+    one PostgreSQL transaction. It grants no live provider, real identity,
+    product, deployment, production or release authority.
 servers: []
 tags:
   - name: Application identity federation
     description: External protocol and one-use session bridge; not GraphQL.
 x-emr4-authority:
-  status: provider_free_binding_grant_mounted_default_off
+  status: provider_free_atomic_redemption_mounted_default_off
   provider_calls: 0
   identity_records: authored_synthetic_only
   product_reads: 0
-  session_cookies_issued: 0
-  database_tables_added: 1
-  security_definer_resolvers_added: 1
-  routes_added: 2
+  session_cookies_issued: authored_synthetic_acceptance_only
+  database_tables_added: 2
+  security_definer_resolvers_added: 2
+  routes_added: 3
   admission_grants_issued: authored_synthetic_acceptance_only
   dependencies_added: 3
   deployments: 0
@@ -154,9 +154,11 @@ paths:
       operationId: redeemFederationAdmissionGrant
       summary: Redeem once in the original cookie partition.
       description: >-
-        Future one-use command. Locks the grant, re-resolves the binding, loads
-        fresh EMR4 user/practice/role/practitioner truth and atomically commits
-        grant consumption, parent/surface session and audit before Set-Cookie.
+        Default-off provider-free one-use command. Locks the grant, re-resolves
+        its exact active binding/version, loads fresh authored-synthetic
+        security-principal truth and atomically commits grant consumption,
+        parent/surface session and audit before Set-Cookie. It reads no product
+        identity or clinical table.
       parameters:
         - $ref: '#/components/parameters/CsrfHeader'
       requestBody:
@@ -267,10 +269,15 @@ components:
     RedeemResponse:
       type: object
       additionalProperties: false
-      required: [status, surface, session_expires_at, surface_idle_expires_at]
+      required: [status, surface, csrf_token, session_expires_at, surface_idle_expires_at]
       properties:
         status: {type: string, const: authenticated}
         surface: {$ref: '#/components/schemas/Surface'}
+        csrf_token:
+          type: string
+          minLength: 43
+          maxLength: 128
+          description: Returned once under no-store for same-origin in-memory use.
         session_expires_at: {type: string, format: date-time}
         surface_idle_expires_at: {type: string, format: date-time}
     GenericError:

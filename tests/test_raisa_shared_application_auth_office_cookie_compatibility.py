@@ -280,6 +280,7 @@ def test_harness_exposes_only_the_frozen_auth_and_task_routes():
         ("POST", "/api/v1/application-auth/exchange/redeem"),
         ("POST", "/api/v1/application-auth/federation/microsoft/start"),
         ("POST", "/api/v1/application-auth/federation/microsoft/callback"),
+        ("POST", "/api/v1/application-auth/federation/session/redeem"),
         ("GET", "/office-cookie-compatibility/taskpane"),
         ("GET", "/office-cookie-compatibility/taskpane.js"),
         ("GET", "/office-cookie-compatibility/taskpane.css"),

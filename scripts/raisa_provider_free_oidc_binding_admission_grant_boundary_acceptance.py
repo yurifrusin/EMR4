@@ -105,7 +105,8 @@ EVIDENCE_PATH = (
     / "live-local-http-backend-postgres-evidence.json"
 )
 RESULT = "provider_free_oidc_binding_admission_grant_boundary_pass"
-MIGRATION_HEAD = "s8t9u0v1w2x3"
+PARENT_MIGRATION_HEAD = "s8t9u0v1w2x3"
+MIGRATION_HEAD = "t9u0v1w2x3y4"
 
 _BINDING_LOGIN = re.compile(r"^emr4_oidc_binding_login_[0-9a-f]{12}$")
 _RESOLVER_CALL = re.compile(r"^emr4_oidc_binding_resolver_call_[0-9a-f]{12}$")
@@ -722,6 +723,7 @@ def run_acceptance(*, output_path: Path | None = None) -> dict[str, Any]:
             {
                 "result": RESULT if passed else "revision_required",
                 "migration_head": MIGRATION_HEAD,
+                "accepted_parent_migration_head": PARENT_MIGRATION_HEAD,
                 "loopback_http": {
                     "real_socket": True,
                     "host": "127.0.0.1",

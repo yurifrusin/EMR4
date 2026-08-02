@@ -8,6 +8,7 @@ schema and authority decision.
 from sqlalchemy import (
     ARRAY,
     BigInteger,
+    Boolean,
     CheckConstraint,
     Column,
     DateTime,
@@ -63,6 +64,61 @@ class ApplicationAuthPrincipalGeneration(Base):
         ),
         Index(
             "ix_app_auth_principal_user_practice",
+            "user_ref",
+            "practice_ref",
+        ),
+    )
+
+
+class ApplicationAuthSyntheticPrincipalTruth(Base):
+    """Repository-local current security truth for authored-synthetic evidence."""
+
+    __tablename__ = "application_auth_synthetic_principal_truth"
+
+    practice_ref = Column(String(74), primary_key=True)
+    user_ref = Column(String(74), primary_key=True)
+    current_backend_role = Column(String(32), nullable=False)
+    practitioner_ref = Column(String(74), nullable=True)
+    user_active = Column(Boolean, nullable=False)
+    practice_active = Column(Boolean, nullable=False)
+    membership_active = Column(Boolean, nullable=False)
+    practitioner_link_active = Column(Boolean, nullable=False)
+    truth_version = Column(BigInteger, nullable=False)
+    data_class = Column(String(32), nullable=False)
+    updated_at = Column(DateTime(timezone=True), nullable=False)
+
+    __table_args__ = (
+        CheckConstraint(
+            _SYNTHETIC_REF_CHECK.replace("VALUE", "practice_ref"),
+            name="ck_app_auth_truth_practice_synthetic",
+        ),
+        CheckConstraint(
+            _SYNTHETIC_REF_CHECK.replace("VALUE", "user_ref"),
+            name="ck_app_auth_truth_user_synthetic",
+        ),
+        CheckConstraint(
+            "practitioner_ref IS NULL OR "
+            + _SYNTHETIC_REF_CHECK.replace("VALUE", "practitioner_ref"),
+            name="ck_app_auth_truth_practitioner_synthetic",
+        ),
+        CheckConstraint(
+            f"current_backend_role IN ({_ROLES})",
+            name="ck_app_auth_truth_role",
+        ),
+        CheckConstraint(
+            "(practitioner_ref IS NOT NULL) OR NOT practitioner_link_active",
+            name="ck_app_auth_truth_practitioner_link_shape",
+        ),
+        CheckConstraint(
+            "truth_version > 0",
+            name="ck_app_auth_truth_version",
+        ),
+        CheckConstraint(
+            "data_class = 'authored_synthetic'",
+            name="ck_app_auth_truth_data_class",
+        ),
+        Index(
+            "ix_app_auth_truth_user_practice",
             "user_ref",
             "practice_ref",
         ),
@@ -461,5 +517,6 @@ __all__ = [
     "ApplicationAuthExchangeGrant",
     "ApplicationAuthParentSession",
     "ApplicationAuthPrincipalGeneration",
+    "ApplicationAuthSyntheticPrincipalTruth",
     "ApplicationAuthSurfaceSession",
 ]

@@ -59,7 +59,7 @@
       "voice"
     ]
   },
-  "graph_revision": 198,
+  "graph_revision": 199,
   "harvests": [],
   "nodes": [
     {
@@ -10931,9 +10931,114 @@
         "Production secret custody, hosted connectivity, distributed abuse resistance and monitoring remain closed.",
         "Cloud/IAM, deployment, protected integration, production, release and GitHub Pages remain separately closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-oidc-admission-grant-redemption-bridge",
+      "title": "Raisa Provider-Free OIDC Admission-Grant Redemption Bridge",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-02T13:00:00Z",
+      "updated_at": "2026-08-02T13:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/raisa-provider-free-oidc-admission-grant-redemption-bridge",
+        "source_head": "511fe57965c9f59d233fd521477bc1236f57d046",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-oidc-binding-admission-grant-boundary",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-provider-free-oidc-admission-grant-redemption-bridge-plan.md",
+            "scope": "Atomically redeem one provider-free authored-synthetic admission grant into the accepted application-session runtime after exact binding/version and fresh internal security-principal checks."
+          }
+        ],
+        "notes": [
+          "Yuri preauthorised this final provider-free descendant unless a material direction choice arose.",
+          "No live Microsoft call, real identity, product read, deployment, production or release occurred.",
+          "The user-owned docs/branding directory remained untracked, unstaged and excluded."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "reuse-one-session-policy-transaction-199",
+          "source": "app/services/application_auth_persistence.py",
+          "status": "accepted",
+          "summary": "Reuse ApplicationAuthRuntime inside the grant transaction so consumption, required audits and hash-only session state commit once without a second policy engine."
+        },
+        {
+          "id": "lock-current-binding-and-principal-truth-199",
+          "source": "alembic/versions/t9u0v1w2x3y4_add_oidc_grant_redemption_bridge.py",
+          "status": "accepted",
+          "summary": "Lock the grant, reselect its immutable active binding/version and lock exact authored-synthetic user/practice/role/practitioner-link truth before session creation."
+        },
+        {
+          "id": "cookie-after-known-commit-only-199",
+          "source": "app/routers/application_auth.py",
+          "status": "accepted",
+          "summary": "Return the surface bearer only after known commit and then set the accepted session and CSRF cookies under no-store exact-origin transport."
+        }
+      ],
+      "claim_scope": [
+        "Real loopback HTTP and disposable PostgreSQL prove one-use atomic authored-synthetic redemption, exact cookies, binding/principal freshness, audit rollback and complete seven-role/database/server cleanup.",
+        "Two independent sessions racing one grant admit exactly one session and one generic conflict.",
+        "Provider calls, real identities and product reads remain zero."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-oidc-admission-grant-redemption-bridge-plan.md",
+          "docs/raisa-provider-free-oidc-admission-grant-redemption-bridge-design.md",
+          "docs/security/raisa-provider-free-oidc-admission-grant-redemption-bridge-threat-model-delta.md"
+        ],
+        "findings": [
+          "app/models/application_auth.py",
+          "app/models/application_identity_federation.py",
+          "alembic/versions/t9u0v1w2x3y4_add_oidc_grant_redemption_bridge.py",
+          "app/services/application_identity_oidc_redemption_database_role.py",
+          "app/services/application_identity_oidc_redemption_operational.py",
+          "app/services/application_identity_oidc_redemption.py",
+          "app/services/application_auth_persistence.py",
+          "app/services/application_auth_role_runtime.py",
+          "app/routers/application_auth.py",
+          "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+          "orchestration/continuity/raisa-provider-free-oidc-admission-grant-redemption-bridge/live-local-http-backend-postgres-redemption-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-oidc-admission-grant-redemption-bridge-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-oidc-admission-grant-redemption-bridge-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-oidc-admission-grant-redemption-bridge-rehydration-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-oidc-admission-grant-redemption-bridge-rehydration-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-oidc-admission-grant-redemption-bridge-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-oidc-admission-grant-redemption-bridge-prepush-receipt.json"
+        ],
+        "tests": [
+          "scripts/raisa_provider_free_oidc_admission_grant_redemption_bridge_acceptance.py",
+          "tests/test_raisa_provider_free_oidc_admission_grant_redemption_bridge.py",
+          "scripts/raisa_provider_free_oidc_admission_grant_redemption_bridge_continuity_update.py",
+          "tests/test_raisa_provider_free_oidc_admission_grant_redemption_bridge_continuity.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Live Microsoft interoperability and real identity/principal truth remain closed.",
+        "Real binding administration/recovery and product authorization/read paths remain closed.",
+        "Production secret custody, hosted connectivity, distributed abuse resistance and monitoring remain closed.",
+        "Cloud/IAM, deployment, protected integration, production, release and GitHub Pages remain separately closed.",
+        "The next product/security direction is a material Yuri-owned choice."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-02T12:00:00Z"
+  "updated_at": "2026-08-02T13:00:00Z"
 }

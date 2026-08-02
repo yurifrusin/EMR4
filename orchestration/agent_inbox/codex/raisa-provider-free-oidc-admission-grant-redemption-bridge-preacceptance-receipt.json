@@ -1,0 +1,46 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "verifier_acceptance",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "The accepted parent remains provider_free_oidc_binding_admission_grant_boundary_pass at Continuity 198 / Compass 179; the reviewed descendant result is provider_free_oidc_admission_grant_redemption_bridge_pass.",
+    "current_authority_allocation": "Yuri's final preauthorised provider-free descendant covers atomic redemption into the accepted authored-synthetic application-session runtime and task-branch publication, but no live provider, real identity, product read, deployment, protected integration or release.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-oidc-admission-grant-redemption-bridge-plan.md",
+      "docs/raisa-provider-free-oidc-admission-grant-redemption-bridge-design.md",
+      "docs/security/raisa-provider-free-oidc-admission-grant-redemption-bridge-threat-model-delta.md",
+      "alembic/versions/t9u0v1w2x3y4_add_oidc_grant_redemption_bridge.py",
+      "app/services/application_identity_oidc_redemption_database_role.py",
+      "app/services/application_identity_oidc_redemption_operational.py",
+      "app/services/application_identity_oidc_redemption.py",
+      "app/services/application_auth_persistence.py",
+      "app/services/application_auth_role_runtime.py",
+      "app/routers/application_auth.py",
+      "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+      "scripts/raisa_provider_free_oidc_admission_grant_redemption_bridge_acceptance.py",
+      "orchestration/continuity/raisa-provider-free-oidc-admission-grant-redemption-bridge/live-local-http-backend-postgres-redemption-evidence.json",
+      "tests/test_raisa_provider_free_oidc_admission_grant_redemption_bridge.py"
+    ],
+    "protected_evidence_boundaries": "No protected holdout, historical Diary, real identity, product/patient/clinical data, provider, cloud/IAM, deployment, Pages, Dependabot or branding action occurred.",
+    "git_refs_and_worktree": "Task branch remains based on 511fe57965c9f59d233fd521477bc1236f57d046. Local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. docs/branding remains the sole unrelated untracked directory."
+  },
+  "revision_binding": {
+    "continuity_graph_revision_expected": 199,
+    "compass_map_revision_expected": 180,
+    "compass_source_graph_revision_expected": 199,
+    "rendered_compass_exact_validation_required": true
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -41,6 +41,7 @@ _PATH_ACTIONS = {
     f"{_AUTH_PREFIX}/exchange/redeem": "auth.transport.exchange.redeem",
     f"{_AUTH_PREFIX}/federation/microsoft/start": "auth.oidc.start",
     f"{_AUTH_PREFIX}/federation/microsoft/callback": "auth.oidc.callback",
+    f"{_AUTH_PREFIX}/federation/session/redeem": "auth.oidc.redeem",
 }
 _ALLOWED_DENIAL_REASONS = frozenset(
     {
@@ -51,6 +52,7 @@ _ALLOWED_DENIAL_REASONS = frozenset(
         "oidc_transport_request_invalid",
         "oidc_transport_request_not_admitted",
         "oidc_authentication_failed",
+        "oidc_admission_grant_already_consumed",
     }
 )
 

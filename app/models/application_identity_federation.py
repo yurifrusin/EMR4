@@ -179,7 +179,10 @@ class ApplicationIdentityFederationAuditEvent(Base):
             "'federation.binding_created', "
             "'federation.binding_revoked', "
             "'federation.binding_resolved', "
-            "'federation.binding_rejected')",
+            "'federation.binding_rejected', "
+            "'federation.admission_grant_issued', "
+            "'federation.admission_grant_consumed', "
+            "'federation.admission_grant_rejected')",
             name="ck_app_id_fed_audit_event_type",
         ),
         CheckConstraint(

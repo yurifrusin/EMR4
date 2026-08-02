@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan_implement_verify_and_publish_the_preauthorised_provider_free_atomic_admission_grant_redemption_bridge_into_the_accepted_application_session_runtime_without_live_identity_product_access_or_deployment",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_provider_free_oidc_admission_grant_redemption_bridge_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: current AGENTS.md was reconstructed completely from the immediately prior full read plus the exact sole descendant diff, then its current baton, authority, protected-evidence and user-decision sections were reread at 160805 UTF-8 characters / 499 lines / SHA-256 E5549C2D888197FBB416DA4A59151714400C2A8FE3A0B0EEC1286318650F03E8; provider_free_oidc_binding_admission_grant_boundary_pass is the accepted parent at Continuity 198 / Compass 179.",
+        "current_authority_allocation: Yuri preauthorised this final provider-free atomic redemption descendant unless a material directional choice arises. It may add the default-off redemption REST command, a reversible migration, least-authority database capabilities, authored-synthetic fresh-principal adapter, exact cookies after commit, evidence, documentation, continuity and task-branch publication; it cannot call Microsoft, use real identity, read product data, deploy, move protected refs, rebuild Pages, decide Dependabot alert 17 or include docs/branding.",
+        "active_plan_and_acceptance: the complete accepted binding/grant plan, design, threat delta, closeout, Sol acceptance and live-local HTTP/PostgreSQL evidence were reread, together with the maintained-verifier session-bridge design, versioned federation API Spine contract and accepted shared-auth runtime, PostgreSQL persistence, secure transport and operational-hardening plans plus their relevant model, role, transaction and router implementations.",
+        "protected_evidence_boundaries: no protected holdout or historical Diary access; no live Microsoft/provider call, real identity, product/patient/clinical read, production key custody, cloud/IAM mutation, deployment, production, release, protected-ref, Pages or Dependabot disposition action. docs/branding remains untouched, untracked and excluded.",
+        "git_refs_and_worktree: task branch codex/raisa-provider-free-oidc-admission-grant-redemption-bridge starts at accepted parent 511fe57965c9f59d233fd521477bc1236f57d046; origin parent matches; local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding is the only unrelated untracked content."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker was selected or dispatched."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected interactive fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude transport was selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No independent provider or reviewer was selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No subagent was selected or dispatched; grant locking, binding freshness and session commit are one tightly coupled transaction and the user did not request delegation."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

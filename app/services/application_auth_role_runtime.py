@@ -22,6 +22,8 @@ from app.services.application_auth_runtime import (
     SessionStatus,
     Surface,
     SurfaceSessionRecord,
+    SyntheticPrincipal,
+    CreatedApplicationSession,
 )
 
 
@@ -230,6 +232,30 @@ class RoleScopedPostgresApplicationAuthRuntime(PostgresApplicationAuthRuntime):
             parent_ttl=self._parent_ttl,
             idle_ttl=self._idle_ttl,
             exchange_ttl=self._exchange_ttl,
+        )
+
+    def create_session_in_transaction(
+        self,
+        db: Session,
+        *,
+        principal: SyntheticPrincipal,
+        surface: Surface,
+        origin: str,
+        audience: str = SURFACE_AUDIENCE,
+        correlation_id: str | None = None,
+    ) -> CreatedApplicationSession:
+        """Create one session inside an enclosing security transaction."""
+
+        return self._execute_in_transaction(
+            db,
+            explicit_key=(principal.user_id, principal.practice_id),
+            operation=lambda runtime: runtime.create_session(
+                principal=principal,
+                surface=surface,
+                origin=origin,
+                audience=audience,
+                correlation_id=correlation_id,
+            ),
         )
 
     def rotate_surface_session(
