@@ -1,0 +1,125 @@
+{
+  "schema_version": "emr4.two-component-oidc-offline-acceptance.v1",
+  "recorded_at": "2026-08-02T00:00:00Z",
+  "result": "pass",
+  "data_class": "authored_synthetic",
+  "dependency_versions": {
+    "msal": "1.37.0",
+    "Authlib": "1.7.2",
+    "joserfc": "1.7.4"
+  },
+  "cases": [
+    {
+      "case_id": "msal_form_post_minimal_scope",
+      "expected": "pass",
+      "actual": "pass",
+      "matched": true
+    },
+    {
+      "case_id": "msal_reserved_scope_rejected",
+      "expected": "deny",
+      "actual": "deny",
+      "matched": true
+    },
+    {
+      "case_id": "valid_rs256_identity",
+      "expected": "pass",
+      "actual": "pass",
+      "matched": true
+    },
+    {
+      "case_id": "tampered_signature",
+      "expected": "deny",
+      "actual": "deny",
+      "matched": true
+    },
+    {
+      "case_id": "wrong_algorithm",
+      "expected": "deny",
+      "actual": "deny",
+      "matched": true
+    },
+    {
+      "case_id": "wrong_issuer",
+      "expected": "deny",
+      "actual": "deny",
+      "matched": true
+    },
+    {
+      "case_id": "wrong_audience",
+      "expected": "deny",
+      "actual": "deny",
+      "matched": true
+    },
+    {
+      "case_id": "wrong_nonce",
+      "expected": "deny",
+      "actual": "deny",
+      "matched": true
+    },
+    {
+      "case_id": "expired",
+      "expected": "deny",
+      "actual": "deny",
+      "matched": true
+    },
+    {
+      "case_id": "not_yet_valid",
+      "expected": "deny",
+      "actual": "deny",
+      "matched": true
+    },
+    {
+      "case_id": "wrong_tenant",
+      "expected": "deny",
+      "actual": "deny",
+      "matched": true
+    },
+    {
+      "case_id": "missing_oid",
+      "expected": "deny",
+      "actual": "deny",
+      "matched": true
+    },
+    {
+      "case_id": "rollover_after_one_refresh",
+      "expected": "pass",
+      "actual": "pass",
+      "matched": true
+    },
+    {
+      "case_id": "unknown_kid_after_refresh",
+      "expected": "deny",
+      "actual": "deny",
+      "matched": true
+    },
+    {
+      "case_id": "refresh_outage",
+      "expected": "deny",
+      "actual": "deny",
+      "matched": true
+    },
+    {
+      "case_id": "oversized_token",
+      "expected": "deny",
+      "actual": "deny",
+      "matched": true
+    },
+    {
+      "case_id": "metadata_algorithm_mismatch",
+      "expected": "deny",
+      "actual": "deny",
+      "matched": true
+    }
+  ],
+  "side_effects": {
+    "provider_calls": 0,
+    "real_identities": 0,
+    "mounted_routes": 0,
+    "database_writes": 0,
+    "sessions_created": 0,
+    "product_reads": 0,
+    "deployments": 0
+  },
+  "next_authority_required": "provider_free_runtime_adapter_implementation"
+}

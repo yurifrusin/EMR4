@@ -1,0 +1,5 @@
+flowchart LR
+  B["Browser callback"] --> M["MSAL code redemption"]
+  M --> C["MSAL decoded claims"]
+  C --> A["Identity admission"]
+  K["Independent signature/key verification"] -. missing .-> A

@@ -1,0 +1,24 @@
+{
+  "schema_version": "emr4.two-component-oidc-acceptance-cases.v1",
+  "data_class": "authored_synthetic",
+  "provider_calls_allowed": 0,
+  "cases": [
+    {"id": "msal_form_post_minimal_scope", "expected": "pass"},
+    {"id": "msal_reserved_scope_rejected", "expected": "deny"},
+    {"id": "valid_rs256_identity", "expected": "pass"},
+    {"id": "tampered_signature", "expected": "deny"},
+    {"id": "wrong_algorithm", "expected": "deny"},
+    {"id": "wrong_issuer", "expected": "deny"},
+    {"id": "wrong_audience", "expected": "deny"},
+    {"id": "wrong_nonce", "expected": "deny"},
+    {"id": "expired", "expected": "deny"},
+    {"id": "not_yet_valid", "expected": "deny"},
+    {"id": "wrong_tenant", "expected": "deny"},
+    {"id": "missing_oid", "expected": "deny"},
+    {"id": "rollover_after_one_refresh", "expected": "pass"},
+    {"id": "unknown_kid_after_refresh", "expected": "deny"},
+    {"id": "refresh_outage", "expected": "deny"},
+    {"id": "oversized_token", "expected": "deny"},
+    {"id": "metadata_algorithm_mismatch", "expected": "deny"}
+  ]
+}

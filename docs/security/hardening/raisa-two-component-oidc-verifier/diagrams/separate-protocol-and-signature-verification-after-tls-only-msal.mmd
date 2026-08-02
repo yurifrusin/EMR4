@@ -1,0 +1,5 @@
+flowchart LR
+  B["Browser form callback"] --> M["MSAL code redemption over TLS"]
+  M --> C["MSAL decoded claims"]
+  C --> A["Identity admission"]
+  N["No independent JWS check"] -. residual gap .-> A

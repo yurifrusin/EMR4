@@ -59,7 +59,7 @@
       "voice"
     ]
   },
-  "graph_revision": 192,
+  "graph_revision": 193,
   "harvests": [],
   "nodes": [
     {
@@ -10311,9 +10311,116 @@
         "Live Microsoft, real identity, routes, product reads, organisational deployment, production and release remain closed.",
         "Protected integration and any further GitHub Pages rebuild remain separately closed."
       ]
+    },
+    {
+      "id": "raisa-two-component-oidc-verifier-architecture-revision",
+      "title": "Raisa Two-Component OIDC Verifier Architecture Revision",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-02T02:00:00Z",
+      "updated_at": "2026-08-02T02:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/raisa-two-component-oidc-verifier-architecture",
+        "source_head": "805b32ef616daf3c904b8de698856ec211b17bec",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-maintained-oidc-verifier-session-bridge-architecture",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-two-component-oidc-verifier-architecture-revision-plan.md",
+            "scope": "Correct the verifier ownership contract, admit exact maintained packages and prove the seam provider-free."
+          }
+        ],
+        "notes": [
+          "Yuri explicitly authorised the recommended two-component architecture revision and verifier dependency review.",
+          "No application adapter, route, provider request, real identity, database change, application session, product read, deployment, production or release occurred.",
+          "The user-owned docs/branding directory remained untracked, unstaged and excluded."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "separate-msal-protocol-from-authlib-verification-193",
+          "source": "docs/raisa-two-component-oidc-verifier-architecture-revision-design.md",
+          "status": "accepted",
+          "summary": "MSAL owns the Microsoft code flow; Authlib and JOSE RFC independently own ID-token signature, key and OIDC claim admission."
+        },
+        {
+          "id": "admit-exact-verifier-dependencies-193",
+          "source": "docs/security/raisa-oidc-verifier-dependency-review-2026-08-02.md",
+          "status": "accepted",
+          "summary": "Pin MSAL 1.37.0, Authlib 1.7.2 and JOSE RFC 1.7.4 after licence, maintenance, compatibility, hash and advisory review."
+        },
+        {
+          "id": "use-form-post-callback-193",
+          "source": "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+          "status": "accepted",
+          "summary": "Revise the non-mounted callback to POST form parameters so the authorization code is not carried in a URL."
+        },
+        {
+          "id": "keep-runtime-identity-session-product-closed-193",
+          "source": "docs/raisa-two-component-oidc-verifier-architecture-revision-closeout.md",
+          "status": "accepted",
+          "summary": "Keep adapter wiring, live Microsoft, real identity, bindings, sessions, product access and deployment closed."
+        }
+      ],
+      "claim_scope": [
+        "Seventeen provider-free authored-synthetic cases prove the exact MSAL flow configuration and Authlib signed-token seam.",
+        "Tampering, algorithm/claim/tenant failures, oversized tokens and exhausted key refresh deny admission.",
+        "The architecture and exact package pins are accepted; no runtime adapter or live identity path exists."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-two-component-oidc-verifier-architecture-revision-plan.md",
+          "docs/raisa-two-component-oidc-verifier-architecture-revision-design.md",
+          "docs/security/raisa-two-component-oidc-verifier-architecture-threat-model-delta.md",
+          "docs/security/hardening/raisa-two-component-oidc-verifier/hardening.md"
+        ],
+        "findings": [
+          "docs/security/raisa-msal-offline-adapter-admission-diagnostic-2026-08-02.md",
+          "docs/security/raisa-oidc-verifier-dependency-review-2026-08-02.md",
+          "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+          "orchestration/continuity/raisa-two-component-oidc-verifier-architecture-revision/architecture-policy.json",
+          "orchestration/continuity/raisa-two-component-oidc-verifier-architecture-revision/acceptance-cases.json",
+          "orchestration/continuity/raisa-two-component-oidc-verifier-architecture-revision/dependency-review-evidence.json",
+          "orchestration/continuity/raisa-two-component-oidc-verifier-architecture-revision/provider-free-acceptance-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-two-component-oidc-verifier-architecture-revision-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-two-component-oidc-verifier-architecture-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-msal-offline-adapter-admission-rehydration-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-two-component-oidc-verifier-architecture-rehydration-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-two-component-oidc-verifier-architecture-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-two-component-oidc-verifier-architecture-precommit-receipt.json"
+        ],
+        "tests": [
+          "scripts/raisa_two_component_oidc_verifier_architecture_acceptance.py",
+          "tests/test_raisa_two_component_oidc_verifier_architecture.py",
+          "scripts/raisa_two_component_oidc_verifier_architecture_continuity_update.py",
+          "tests/test_raisa_two_component_oidc_verifier_architecture_continuity.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The provider-free application adapter requires fresh authority.",
+        "Live Microsoft registration, tenant traffic and real identity require later separate authority.",
+        "Identity binding, application sessions, product reads, deployment, production and release remain closed.",
+        "Protected integration and GitHub Pages remain separately closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-02T00:30:00Z"
+  "updated_at": "2026-08-02T02:00:00Z"
 }

@@ -1,0 +1,33 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "accept_two_component_oidc_architecture_dependency_review_and_provider_free_evidence_before_commit",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely and now records the exact two-component architecture result at Continuity 193 and Compass 174.",
+    "current_authority_allocation": "Yuri authorised the recommended architecture revision and dependency review; no runtime adapter, provider, integration or deployment authority was inferred.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-two-component-oidc-verifier-architecture-revision-plan.md",
+      "docs/raisa-two-component-oidc-verifier-architecture-revision-design.md",
+      "docs/security/raisa-two-component-oidc-verifier-architecture-threat-model-delta.md",
+      "docs/security/raisa-oidc-verifier-dependency-review-2026-08-02.md",
+      "docs/security/hardening/raisa-two-component-oidc-verifier/hardening.json",
+      "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+      "orchestration/continuity/raisa-two-component-oidc-verifier-architecture-revision/provider-free-acceptance-evidence.json"
+    ],
+    "protected_evidence_boundaries": "No live Microsoft, real identity, route, database change, application session, product read, deployment, production, release or protected integration occurred. User-owned docs/branding remains excluded.",
+    "git_refs_and_worktree": "Task branch codex/raisa-two-component-oidc-verifier-architecture descends from required parent 805b32e. Protected refs remain untouched and no file was staged when this receipt was generated."
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

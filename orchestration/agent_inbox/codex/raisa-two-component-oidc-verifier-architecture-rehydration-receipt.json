@@ -1,0 +1,36 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "revise_two_component_oidc_architecture_and_review_verifier_dependency",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md sections 1-10 were reread completely after compaction; the Current Baton identifies the accepted architecture parent and the provider-free dependency/admission candidate.",
+    "current_authority_allocation": "Yuri explicitly authorised the recommended two-component architecture revision and verifier dependency review. GPT Sol owns this tightly coupled architecture/security decision; no worker, provider, integration or deployment authority is allocated.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-maintained-oidc-verifier-session-bridge-architecture-plan.md",
+      "docs/raisa-maintained-oidc-verifier-session-bridge-architecture-design.md",
+      "docs/security/raisa-maintained-oidc-verifier-session-bridge-threat-model-delta.md",
+      "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+      "docs/raisa-maintained-oidc-verifier-session-bridge-architecture-closeout.md",
+      "docs/security/raisa-msal-offline-adapter-admission-diagnostic-2026-08-02.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "orchestration/access_ai_api_design.md",
+      "tests/test_api_spine_artifacts.py"
+    ],
+    "protected_evidence_boundaries": "No protected holdout access. Live Microsoft/provider traffic, real identity, routes, database objects, application sessions, product reads, cloud/IAM, protected integration, Pages rebuild, deployment, production and release remain closed. Dependabot alert 17 remains native-open. User-owned docs/branding remains untouched and excluded.",
+    "git_refs_and_worktree": "Task branch codex/raisa-msal-offline-adapter-admission is at accepted parent HEAD 805b32ef616daf3c904b8de698856ec211b17bec. Local/origin master and handoff/current are aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. PR 76 is open, draft and green. Worktree additions are the preserved docs/branding directory and current diagnostic/receipt artifacts only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

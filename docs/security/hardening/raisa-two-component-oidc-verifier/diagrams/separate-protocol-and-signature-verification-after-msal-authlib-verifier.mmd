@@ -1,0 +1,7 @@
+flowchart LR
+  B["Browser form callback"] --> M["MSAL protocol component"]
+  M -->|"transient raw ID token"| V["Authlib + JOSE RFC verifier"]
+  D["Tenant discovery + cached JWKS"] --> V
+  V -->|"verified claims"| P["EMR4 tid/oid/sub postconditions"]
+  P --> E["External principal only"]
+  M -. "decoded claims forbidden" .-> X["Discard"]

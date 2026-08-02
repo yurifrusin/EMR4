@@ -1,0 +1,41 @@
+{
+  "schema_version": "emr4.two-component-oidc-policy.v1",
+  "authority": "architecture_and_dependency_admission_only",
+  "protocol_client": {
+    "package": "msal",
+    "version": "1.37.0",
+    "authority": "tenant_specific_v2",
+    "requested_scopes": [],
+    "effective_scopes": ["openid", "profile"],
+    "excluded_scopes": ["offline_access"],
+    "pkce": "S256",
+    "response_mode": "form_post",
+    "claims_authoritative": false
+  },
+  "id_token_verifier": {
+    "package": "Authlib",
+    "version": "1.7.2",
+    "jose_package": "joserfc",
+    "jose_version": "1.7.4",
+    "algorithms": ["RS256"],
+    "unknown_kid_refresh_attempts": 1,
+    "max_token_bytes": 16384,
+    "leeway_seconds": 60,
+    "max_client_lifetime_seconds": 86400,
+    "fallback": "forbidden"
+  },
+  "principal_postconditions": ["exact_tid", "nonempty_oid", "nonempty_sub", "verified_source_only"],
+  "closed": [
+    "runtime_adapter",
+    "mounted_routes",
+    "provider_calls",
+    "real_identity",
+    "identity_binding",
+    "application_session",
+    "database_changes",
+    "product_reads",
+    "deployment",
+    "production",
+    "release"
+  ]
+}
