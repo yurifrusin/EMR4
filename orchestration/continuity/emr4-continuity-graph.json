@@ -10504,7 +10504,8 @@
         ],
         "receipts": [
           "orchestration/agent_inbox/codex/raisa-two-component-oidc-runtime-adapter-rehydration-receipt.json",
-          "orchestration/agent_inbox/codex/raisa-two-component-oidc-runtime-adapter-preacceptance-receipt.json"
+          "orchestration/agent_inbox/codex/raisa-two-component-oidc-runtime-adapter-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-two-component-oidc-runtime-adapter-prepush-receipt.json"
         ],
         "tests": [
           "scripts/raisa_two_component_oidc_runtime_adapter_acceptance.py",

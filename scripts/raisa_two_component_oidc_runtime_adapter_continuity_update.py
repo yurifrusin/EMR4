@@ -32,6 +32,7 @@ ARTIFACTS = {
     "acceptance": "orchestration/agent_inbox/codex/raisa-two-component-oidc-runtime-adapter-sol-acceptance.md",
     "rehydration": "orchestration/agent_inbox/codex/raisa-two-component-oidc-runtime-adapter-rehydration-receipt.json",
     "preacceptance": "orchestration/agent_inbox/codex/raisa-two-component-oidc-runtime-adapter-preacceptance-receipt.json",
+    "prepush": "orchestration/agent_inbox/codex/raisa-two-component-oidc-runtime-adapter-prepush-receipt.json",
     "runner": "scripts/raisa_two_component_oidc_runtime_adapter_acceptance.py",
     "tests": "tests/test_raisa_two_component_oidc_runtime_adapter.py",
     "continuity_runner": "scripts/raisa_two_component_oidc_runtime_adapter_continuity_update.py",
@@ -52,7 +53,7 @@ def _evidence() -> dict[str, list[str]]:
         "findings": [ARTIFACTS["module"], ARTIFACTS["openapi"], ARTIFACTS["cases"], ARTIFACTS["evidence"]],
         "closeouts": [ARTIFACTS["closeout"]],
         "acceptances": [ARTIFACTS["acceptance"]],
-        "receipts": [ARTIFACTS["rehydration"], ARTIFACTS["preacceptance"]],
+        "receipts": [ARTIFACTS["rehydration"], ARTIFACTS["preacceptance"], ARTIFACTS["prepush"]],
         "tests": [ARTIFACTS["runner"], ARTIFACTS["tests"], ARTIFACTS["continuity_runner"], ARTIFACTS["continuity_tests"]],
     }
 
