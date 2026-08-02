@@ -91,8 +91,12 @@ def test_user_decisions_preserve_consumed_tranches_and_current_next_gate() -> No
     operational_gate = decisions[
         "authorize-postgresql-oidc-attempt-store-operational-connection-boundary"
     ]
-    assert "deployment connection" in operational_gate["required_before"]
+    assert "Satisfied on 2026-08-02" in operational_gate["required_before"]
     assert "live Microsoft" in operational_gate["required_before"]
+    transport_gate = decisions[
+        "authorize-provider-free-oidc-start-callback-transport-boundary"
+    ]
+    assert "mounted OIDC start/callback route" in transport_gate["required_before"]
 
 
 def test_graph_evidence_preserves_branding_and_live_identity_exclusions() -> None:
@@ -126,7 +130,7 @@ def test_live_handover_names_results_and_current_authority_gate() -> None:
         "No further Pages rebuild is authorised",
         "Two-component OIDC runtime adapter acceptance",
         "PostgreSQL OIDC authorization-attempt store acceptance",
-        "provider-free operational connection boundary",
+        "PostgreSQL OIDC operational connection boundary acceptance",
     ):
         assert result in handover
     assert "Yuri's branding permission covers future UI renders only" in handover

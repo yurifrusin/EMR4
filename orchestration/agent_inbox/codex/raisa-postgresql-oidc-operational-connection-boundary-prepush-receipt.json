@@ -1,0 +1,36 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "push",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "The complete AGENTS.md read remains controlling; the PostgreSQL attempt store is the accepted parent at Continuity 195 / Compass 176.",
+    "current_authority_allocation": "Yuri authorised this exact provider-free operational connection tranche and necessary task-branch publication; no protected integration, deployment or release authority exists.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-postgresql-oidc-operational-connection-boundary-plan.md",
+      "docs/raisa-postgresql-oidc-operational-connection-boundary-design.md",
+      "docs/security/raisa-postgresql-oidc-operational-connection-boundary-threat-model-delta.md",
+      "app/services/application_identity_oidc_attempt_database_role.py",
+      "app/services/application_identity_oidc_attempt_operational.py",
+      "scripts/raisa_postgresql_oidc_operational_connection_boundary_acceptance.py",
+      "orchestration/continuity/raisa-postgresql-oidc-operational-connection-boundary/live-local-backend-postgres-operational-evidence.json",
+      "tests/test_raisa_postgresql_oidc_operational_connection_boundary.py",
+      "docs/raisa-postgresql-oidc-operational-connection-boundary-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-postgresql-oidc-operational-connection-boundary-sol-acceptance.md"
+    ],
+    "protected_evidence_boundaries": "No holdout, raw historical Diary, branding, live provider, real identity, mounted route, binding, session, product/patient/clinical read, hosted service, cloud/IAM, deployment, production, release, protected-ref, Pages or Dependabot disposition action.",
+    "git_refs_and_worktree": "Before explicit staging, the task branch remains based on 559ef5de02355effa48676736681ac03323fb8fe; local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding is unrelated and untracked."
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,46 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan_implement_verify_and_publish_the_authorised_provider_free_postgresql_oidc_operational_connection_boundary_without_routes_live_provider_real_identity_product_access_or_deployment",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md SHA-256 768BC74C4C6E6825A4DB881041F36BFB40021FD0FB877E7058B8173DAEAC33B6 was reread completely; the accepted parent is postgresql_oidc_authorization_attempt_store_pass at Continuity 195 and Compass 176.",
+    "current_authority_allocation": "Yuri explicitly authorised the next candidate tranche: the provider-free operational connection boundary for the accepted PostgreSQL OIDC attempt store, limited to a dormant finite LOGIN contract, exact bounded pool-time SET ROLE/reset verification, credential-free runtime key-provider/configuration seam, authored-synthetic disposable acceptance, documentation, continuity and task-branch publication.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-postgresql-oidc-authorization-attempt-store-plan.md",
+      "docs/raisa-postgresql-oidc-authorization-attempt-store-design.md",
+      "docs/security/raisa-postgresql-oidc-authorization-attempt-store-threat-model-delta.md",
+      "docs/raisa-postgresql-oidc-authorization-attempt-store-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-postgresql-oidc-authorization-attempt-store-sol-acceptance.md",
+      "orchestration/continuity/raisa-postgresql-oidc-authorization-attempt-store/live-local-backend-postgres-evidence.json",
+      "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "orchestration/access_ai_api_design.md",
+      "tests/test_api_spine_artifacts.py"
+    ],
+    "protected_evidence_boundaries": "No protected holdout or raw historical Diary access; no live Microsoft/provider call, real identity, mounted route/callback, binding, application session, product/patient/clinical read, cloud/IAM mutation, deployment, production, release, protected-ref or Pages action. User-owned docs/branding remains untouched and excluded from staging, tests and evidence.",
+    "git_refs_and_worktree": {
+      "branch": "codex/raisa-postgresql-oidc-authorization-attempt-store",
+      "HEAD": "559ef5de02355effa48676736681ac03323fb8fe",
+      "origin_task_parent": "559ef5de02355effa48676736681ac03323fb8fe",
+      "master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "unrelated_untracked_content": ["docs/branding/"]
+    }
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
