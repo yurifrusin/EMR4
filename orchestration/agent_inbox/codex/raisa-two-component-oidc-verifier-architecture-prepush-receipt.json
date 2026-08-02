@@ -1,0 +1,19 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "push_two_component_oidc_architecture_task_branch_without_moving_protected_refs",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"],
+  "source_evidence": {
+    "live_handover_current_baton": "The accepted result remains the two-component architecture at Continuity 193 / Compass 174.",
+    "current_authority_allocation": "Authority permits the task-branch push and stacked draft PR; protected refs, deployment and runtime adapter remain closed.",
+    "active_plan_and_acceptance": "Commit 8da4b0da6907ade0d7a1ac5e589d76633b1d4e33 contains the accepted artifacts and passing evidence.",
+    "protected_evidence_boundaries": "No provider, identity, product, deployment or protected integration action; docs/branding remains excluded.",
+    "git_refs_and_worktree": "Origin master and handoff/current are aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602; task commit is 8da4b0da6907ade0d7a1ac5e589d76633b1d4e33."
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}
