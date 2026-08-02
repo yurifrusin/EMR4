@@ -57,6 +57,13 @@ class PracticeGraphQL:
             raise _bad_user_input("offset must be greater than or equal to 0")
 
         try:
+            authorize = info.context.get("authorize_practitioner_directory")
+            if authorize is not None:
+                authorize(
+                    active_only=active_only,
+                    limit=limit,
+                    offset=offset,
+                )
             rows = list_practitioner_directory(
                 db=info.context["db"],
                 current_user=info.context["current_user"],
@@ -69,6 +76,11 @@ class PracticeGraphQL:
                 raise StrawberryGraphQLError(
                     "Forbidden",
                     extensions={"code": "FORBIDDEN"},
+                ) from exc
+            if exc.status_code == status.HTTP_503_SERVICE_UNAVAILABLE:
+                raise StrawberryGraphQLError(
+                    "Service unavailable",
+                    extensions={"code": "SERVICE_UNAVAILABLE"},
                 ) from exc
             raise
         except Exception as exc:

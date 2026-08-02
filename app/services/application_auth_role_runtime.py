@@ -234,6 +234,17 @@ class RoleScopedPostgresApplicationAuthRuntime(PostgresApplicationAuthRuntime):
             exchange_ttl=self._exchange_ttl,
         )
 
+    def is_surface_session_identifiable(
+        self,
+        surface_session_value: str,
+    ) -> bool:
+        """Return only whether the resolver can bind a surface to a principal."""
+
+        surface_hash = _hash_reference(surface_session_value)
+        with self._session_factory() as db, db.begin():
+            self._prepare_transaction(db)
+            return self._key_for_surface(db, surface_hash) is not None
+
     def create_session_in_transaction(
         self,
         db: Session,

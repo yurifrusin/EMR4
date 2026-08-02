@@ -25,6 +25,11 @@ AUTHORED_SYNTHETIC_DATA_CLASS = "authored_synthetic"
 SURFACE_AUDIENCE = "emr4-api"
 EXCHANGE_AUDIENCE = "emr4-session-exchange"
 POLICY_VERSION = "clinician-workspace-read.v1"
+PRACTITIONER_DIRECTORY_POLICY_VERSION = (
+    "practice-practitioner-directory-read.v1"
+)
+PRACTITIONER_DIRECTORY_ACTION = "practice.practitioner-directory.read"
+PRACTITIONER_DIRECTORY_RESOURCE_TYPE = "practitioner_directory"
 MAX_PARENT_TTL = timedelta(hours=8)
 MAX_IDLE_TTL = timedelta(minutes=30)
 MAX_EXCHANGE_TTL = timedelta(seconds=60)
@@ -63,6 +68,7 @@ class AuthAuditEventType(str, Enum):
     EXCHANGE_ISSUED = "auth.exchange_issued"
     EXCHANGE_REDEEMED = "auth.exchange_redeemed"
     EXCHANGE_REJECTED = "auth.exchange_rejected"
+    AUTHORIZATION_ALLOWED = "auth.authorization_allowed"
     AUTHORIZATION_DENIED = "auth.authorization_denied"
 
 
@@ -472,6 +478,111 @@ class ApplicationAuthRuntime:
                         resource_type="surface_session",
                         decision=AuthAuditDecision.ALLOWED,
                         reason="session_current",
+                    ),
+                )
+            )
+            self._store.parent_sessions[
+                parent.session_reference_hash
+            ] = refreshed_parent
+            self._store.surface_sessions[surface_hash] = refreshed_binding
+
+        principal = parent.principal
+        return ValidatedSurfaceContext(
+            user_id=principal.user_id,
+            practice_id=principal.practice_id,
+            current_backend_role=principal.current_backend_role,
+            practitioner_id=principal.practitioner_id,
+            surface=surface,
+            origin=origin,
+            audience=audience,
+            generation=parent.generation,
+            parent_expires_at=parent.expires_at,
+            surface_idle_expires_at=refreshed_binding.idle_expires_at,
+        )
+
+    def authorize_practitioner_directory_read(
+        self,
+        *,
+        surface_session_value: str,
+        surface: Surface,
+        origin: str,
+        fresh_principal: SyntheticPrincipal | None,
+        fresh_user_active: bool,
+        resource_practice_id: str,
+        active_only: bool,
+        audience: str = SURFACE_AUDIENCE,
+        correlation_id: str | None = None,
+    ) -> ValidatedSurfaceContext:
+        """Admit the one fixed active practitioner-directory read policy."""
+
+        now = self._now()
+        surface_hash = _hash_secret(surface_session_value)
+        with self._store.lock:
+            try:
+                self._require_surface_binding(surface, origin, audience)
+                parent, binding = self._active_surface_records(
+                    surface_hash=surface_hash,
+                    expected_surface=surface,
+                    expected_origin=origin,
+                    expected_audience=audience,
+                    now=now,
+                )
+            except AuthRuntimeDenied as exc:
+                self._record_surface_denial(
+                    surface_hash=surface_hash,
+                    requested_surface=surface,
+                    now=now,
+                    correlation_id=correlation_id,
+                    reason=exc.reason_code,
+                )
+                raise
+
+            denial_reason: str | None = None
+            if not fresh_user_active or fresh_principal is None:
+                denial_reason = "fresh_product_user_inactive"
+            elif fresh_principal != parent.principal:
+                denial_reason = "fresh_product_principal_mismatch"
+            elif resource_practice_id != parent.principal.practice_id:
+                denial_reason = "resource_practice_mismatch"
+            elif not active_only:
+                denial_reason = "inactive_practitioner_directory_closed"
+
+            bounded_correlation_id = self._bounded_correlation_id(correlation_id)
+            if denial_reason is not None:
+                self._record_required(
+                    (
+                        self._event(
+                            AuthAuditEventType.AUTHORIZATION_DENIED,
+                            now=now,
+                            correlation_id=bounded_correlation_id,
+                            parent=parent,
+                            surface=surface.value,
+                            action=PRACTITIONER_DIRECTORY_ACTION,
+                            resource_type=PRACTITIONER_DIRECTORY_RESOURCE_TYPE,
+                            policy_version=PRACTITIONER_DIRECTORY_POLICY_VERSION,
+                            decision=AuthAuditDecision.DENIED,
+                            reason=denial_reason,
+                        ),
+                    )
+                )
+                raise AuthRuntimeDenied(denial_reason)
+
+            refreshed_parent, refreshed_binding = self._refreshed_records(
+                parent, binding, now
+            )
+            self._record_required(
+                (
+                    self._event(
+                        AuthAuditEventType.AUTHORIZATION_ALLOWED,
+                        now=now,
+                        correlation_id=bounded_correlation_id,
+                        parent=parent,
+                        surface=surface.value,
+                        action=PRACTITIONER_DIRECTORY_ACTION,
+                        resource_type=PRACTITIONER_DIRECTORY_RESOURCE_TYPE,
+                        policy_version=PRACTITIONER_DIRECTORY_POLICY_VERSION,
+                        decision=AuthAuditDecision.ALLOWED,
+                        reason="active_practitioner_directory_authorized",
                     ),
                 )
             )
@@ -1166,6 +1277,7 @@ class ApplicationAuthRuntime:
         resource_type: str,
         decision: AuthAuditDecision,
         reason: str,
+        policy_version: str = POLICY_VERSION,
         parent: ParentSessionRecord | None = None,
         session_reference_hash: str | None = None,
         grant_reference_hash: str | None = None,
@@ -1192,7 +1304,7 @@ class ApplicationAuthRuntime:
             surface=surface,
             action=action,
             resource_type=resource_type,
-            policy_version=POLICY_VERSION,
+            policy_version=policy_version,
             decision=decision,
             reason_codes=(reason,),
             grant_reference_hash=grant_reference_hash,

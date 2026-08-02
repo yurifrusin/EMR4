@@ -1,0 +1,32 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "push_continuation",
+  "planned_action": "commit_push_and_open_one_stacked_draft_pull_request_for_the_accepted_provider_free_session_practitioner_directory_read_bridge_without_moving_protected_refs",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "The reviewed descendant is provider_free_session_practitioner_directory_read_bridge_pass and is bound for Continuity 200 / Compass 181.",
+    "current_authority_allocation": "Yuri selected and authorised the bounded provider-free product-read path plus ordinary task-branch commit/push. Protected refs, deployment, production and release remain closed.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-session-practitioner-directory-read-bridge-plan.md",
+      "docs/raisa-provider-free-session-practitioner-directory-read-bridge-design.md",
+      "docs/security/raisa-provider-free-session-practitioner-directory-read-bridge-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-session-practitioner-directory-read-bridge/live-local-http-backend-postgres-directory-evidence.json",
+      "docs/raisa-provider-free-session-practitioner-directory-read-bridge-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-session-practitioner-directory-read-bridge-sol-acceptance.md"
+    ],
+    "protected_evidence_boundaries": "No protected holdout, historical Diary, live provider/identity, patient/clinical data, product mutation, cloud/IAM, deployment, Pages or Dependabot action. docs/branding remains untouched, unstaged and excluded.",
+    "git_refs_and_worktree": "The task branch remains based on 9fdfaaf0cdae4c54b81e04a010fb2df4cc779da6. Local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Publication is limited to codex/raisa-provider-free-session-practitioner-directory-read-bridge as a stacked draft PR."
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

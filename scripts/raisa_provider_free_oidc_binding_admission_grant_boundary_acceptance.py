@@ -388,7 +388,9 @@ def run_acceptance(*, output_path: Path | None = None) -> dict[str, Any]:
         stage = "migration"
         _require_alembic(target, "upgrade", MIGRATION_HEAD)
         current = _require_alembic(target, "current")
-        _require_alembic(target, "check")
+        # This historical replay intentionally stops at its frozen revision.
+        # `alembic check` compares against today's descendant metadata and is
+        # therefore no longer a valid assertion once a child migration exists.
         if MIGRATION_HEAD not in current:
             raise AcceptanceFailure("migration_head_mismatch")
         owner = create_engine(target, pool_pre_ping=True)

@@ -448,7 +448,9 @@ def run_acceptance(*, output_path: Path | None = None) -> dict[str, Any]:
         _require_alembic(target, "downgrade", "s8t9u0v1w2x3")
         _require_alembic(target, "upgrade", MIGRATION_HEAD)
         current = _require_alembic(target, "current")
-        _require_alembic(target, "check")
+        # This historical replay intentionally stops at its frozen revision.
+        # `alembic check` compares against today's descendant metadata and is
+        # therefore no longer a valid assertion once a child migration exists.
         if MIGRATION_HEAD not in current:
             raise AcceptanceFailure("migration_head_mismatch")
 
