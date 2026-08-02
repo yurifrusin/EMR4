@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 174,
-  "updated_at": "2026-08-02T02:00:00Z",
-  "source_graph_revision": 193,
-  "orientation_statement": "EMR4 now has a corrected two-component Microsoft federation architecture: MSAL owns code-flow mechanics and Authlib/JOSE RFC owns signed ID-token admission. Continuity 193 / Compass 174 bind the provider-free package and seam evidence. Runtime adapter, live identity, binding, session, product, deployment, production and release remain closed.",
+  "map_revision": 175,
+  "updated_at": "2026-08-02T05:00:00Z",
+  "source_graph_revision": 194,
+  "orientation_statement": "EMR4 now has a dormant two-component Microsoft OIDC runtime foundation: MSAL owns one-use code-flow mechanics and Authlib/JOSE RFC independently owns signed-token admission. Continuity 194 / Compass 175 bind twenty-five provider-free cases. Durable persistence, routes, live identity, bindings, sessions, product access, deployment, production and release remain closed.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -1272,32 +1272,45 @@
         "orchestration/continuity/raisa-two-component-oidc-verifier-architecture-revision/provider-free-acceptance-evidence.json",
         "docs/raisa-two-component-oidc-verifier-architecture-revision-closeout.md"
       ]
+    },
+    {
+      "node_id": "raisa-two-component-oidc-runtime-adapter",
+      "lineage_parent": "raisa-two-component-oidc-verifier-architecture-revision",
+      "strategic_role": "Implement the dormant two-component identity-verification seam without opening identity authority",
+      "outcome": "The default-off route-free adapter now enforces encrypted one-use MSAL flow handling and independent Authlib verification across twenty-five provider-free cases.",
+      "evidence": [
+        "docs/raisa-two-component-oidc-runtime-adapter-plan.md",
+        "docs/raisa-two-component-oidc-runtime-adapter-design.md",
+        "docs/security/raisa-two-component-oidc-runtime-adapter-threat-model-delta.md",
+        "app/services/application_identity_oidc_adapter.py",
+        "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+        "orchestration/continuity/raisa-two-component-oidc-runtime-adapter/provider-free-acceptance-evidence.json",
+        "docs/raisa-two-component-oidc-runtime-adapter-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-two-component-oidc-verifier-architecture-revision",
-    "strategic_role": "Two-component Microsoft federation and signed-token verification architecture",
-    "why_now": "Source inspection proved the parent MSAL-only verifier claim was incorrect and runtime implementation had to stop.",
-    "outcome": "The corrected seam and exact dependencies pass offline without an adapter, provider call, real identity, database change, session, product read or deployment.",
+    "node_id": "raisa-two-component-oidc-runtime-adapter",
+    "strategic_role": "Provider-free Microsoft OIDC protocol and verification runtime foundation",
+    "why_now": "The corrected component ownership and reviewed dependencies were accepted and Yuri authorised their next implementation candidate.",
+    "outcome": "A dormant application service now proves the exact MSAL/Authlib seam, one-use encrypted process-local attempts and normalized failure/audit behavior without a route or provider call.",
     "unlocks": [
-      "Review the architecture/dependency tranche on its stacked draft pull request.",
-      "Seek fresh authority for a provider-free runtime adapter behind the frozen ports and fault matrix."
+      "Review the route-free runtime adapter on its stacked draft pull request.",
+      "Seek fresh authority for a provider-free durable PostgreSQL authorization-attempt store behind the same port."
     ],
     "does_not_solve": [
-      "Live Microsoft behavior, tenant configuration, real identity or key-service availability.",
-      "Identity binding, application-session creation or product authorization.",
-      "Distributed abuse resistance, secrets, deployment, production or release."
+      "Distributed/durable attempt atomicity, callback routes, CSRF/origin edge or browser handoff.",
+      "Live Microsoft behavior, tenant configuration, credential custody or real identity.",
+      "Identity bindings, application sessions, product authorization, deployment, production or release."
     ],
     "evidence": [
-      "docs/raisa-two-component-oidc-verifier-architecture-revision-plan.md",
-      "docs/raisa-two-component-oidc-verifier-architecture-revision-design.md",
-      "docs/security/raisa-two-component-oidc-verifier-architecture-threat-model-delta.md",
-      "docs/security/raisa-oidc-verifier-dependency-review-2026-08-02.md",
-      "docs/security/hardening/raisa-two-component-oidc-verifier/hardening.md",
+      "docs/raisa-two-component-oidc-runtime-adapter-plan.md",
+      "docs/raisa-two-component-oidc-runtime-adapter-design.md",
+      "docs/security/raisa-two-component-oidc-runtime-adapter-threat-model-delta.md",
+      "app/services/application_identity_oidc_adapter.py",
       "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
-      "orchestration/continuity/raisa-two-component-oidc-verifier-architecture-revision/dependency-review-evidence.json",
-      "orchestration/continuity/raisa-two-component-oidc-verifier-architecture-revision/provider-free-acceptance-evidence.json",
-      "docs/raisa-two-component-oidc-verifier-architecture-revision-closeout.md"
+      "orchestration/continuity/raisa-two-component-oidc-runtime-adapter/provider-free-acceptance-evidence.json",
+      "docs/raisa-two-component-oidc-runtime-adapter-closeout.md"
     ]
   },
   "decision_horizon": [
@@ -2044,21 +2057,34 @@
     {
       "id": "authorize-two-component-oidc-runtime-adapter",
       "question": "Should EMR4 implement the provider-free MSAL/Authlib adapter behind the frozen two-component seam?",
-      "required_before": "Any import or use of the admitted packages in application code. Live Microsoft, routes, database changes, real identity, sessions and product reads remain separately closed.",
+      "required_before": "Satisfied on 2026-08-02 only for the default-off route-free provider-free adapter. Routes, live Microsoft, real identity, database changes, sessions and product reads remain closed.",
       "evidence": [
-        "docs/raisa-two-component-oidc-verifier-architecture-revision-plan.md",
-        "docs/raisa-two-component-oidc-verifier-architecture-revision-design.md",
-        "docs/security/raisa-two-component-oidc-verifier-architecture-threat-model-delta.md",
-        "docs/security/raisa-oidc-verifier-dependency-review-2026-08-02.md",
-        "docs/security/hardening/raisa-two-component-oidc-verifier/hardening.md",
+        "docs/raisa-two-component-oidc-runtime-adapter-plan.md",
+        "docs/raisa-two-component-oidc-runtime-adapter-design.md",
+        "docs/security/raisa-two-component-oidc-runtime-adapter-threat-model-delta.md",
+        "app/services/application_identity_oidc_adapter.py",
         "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
-        "orchestration/continuity/raisa-two-component-oidc-verifier-architecture-revision/dependency-review-evidence.json",
-        "orchestration/continuity/raisa-two-component-oidc-verifier-architecture-revision/provider-free-acceptance-evidence.json",
-        "docs/raisa-two-component-oidc-verifier-architecture-revision-closeout.md"
+        "orchestration/continuity/raisa-two-component-oidc-runtime-adapter/provider-free-acceptance-evidence.json",
+        "docs/raisa-two-component-oidc-runtime-adapter-closeout.md"
+      ]
+    },
+    {
+      "id": "authorize-provider-free-postgresql-authorization-attempt-store",
+      "question": "Should EMR4 implement a provider-free PostgreSQL authorization-attempt store behind the accepted OIDC adapter port?",
+      "required_before": "Any database migration, role/function/grant or durable attempt write. Routes, live Microsoft, real identity, bindings, sessions and product reads remain separately closed.",
+      "evidence": [
+        "docs/raisa-two-component-oidc-runtime-adapter-plan.md",
+        "docs/raisa-two-component-oidc-runtime-adapter-design.md",
+        "docs/security/raisa-two-component-oidc-runtime-adapter-threat-model-delta.md",
+        "app/services/application_identity_oidc_adapter.py",
+        "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+        "orchestration/continuity/raisa-two-component-oidc-runtime-adapter/provider-free-acceptance-evidence.json",
+        "docs/raisa-two-component-oidc-runtime-adapter-closeout.md"
       ]
     }
   ],
   "map_limits": [
+    "The OIDC runtime-adapter result is default-off, route-free and provider-free; its encrypted attempt store is process-local and not deployable distributed persistence.",
     "The two-component verifier result is architecture and offline dependency admission only; it proves no application adapter, live provider behavior or real identity.",
     "The maintained OIDC/bootstrap/session-bridge result is architecture-only. It proves no dependency installation, live provider behavior, real identity, database capability, session, product access or deployment.",
     "The federation sequence proves architecture and authored-synthetic route-free runtime/persistence only. It does not establish live Microsoft interoperability, real identity, session issuance, product data, deployment, production or release.",

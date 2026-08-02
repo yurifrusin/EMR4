@@ -20,19 +20,24 @@ def _json(path: Path) -> dict:
 def test_continuity_and_compass_bind_the_revision() -> None:
     graph = _json(GRAPH)
     compass = _json(COMPASS)
-    assert graph["graph_revision"] == 193
-    assert graph["nodes"][-1]["id"] == NODE
-    assert compass["map_revision"] == 174
-    assert compass["source_graph_revision"] == 193
-    assert compass["current_position"]["node_id"] == NODE
-    assert graph["nodes"][-1]["relationships"] == [{"node_id": "raisa-maintained-oidc-verifier-session-bridge-architecture", "relation": "builds_on"}]
+    assert graph["graph_revision"] >= 193
+    nodes = {item["id"]: item for item in graph["nodes"]}
+    assert nodes[NODE]["relationships"] == [
+        {
+            "node_id": "raisa-maintained-oidc-verifier-session-bridge-architecture",
+            "relation": "builds_on",
+        }
+    ]
+    assert compass["map_revision"] >= 174
+    assert compass["source_graph_revision"] == graph["graph_revision"]
+    assert NODE in {item["node_id"] for item in compass["journey"]}
 
 
-def test_rendered_compass_validates_and_keeps_runtime_closed() -> None:
+def test_rendered_compass_validates_and_preserves_runtime_revision() -> None:
     graph = _json(GRAPH)
     compass = _json(COMPASS)
     result = ariadne_compass.build_compass_report(compass, graph, repo_root=ROOT)
     assert result["status"] == "passed", result["reasons"]
     text = REPORT.read_text(encoding="utf-8")
-    assert "Compass map revision 174; continuity graph revision 193" in text
-    assert "provider-free runtime adapter" in json.dumps(compass)
+    assert f"Compass map revision {compass['map_revision']}; continuity graph revision {graph['graph_revision']}" in text
+    assert "two-component" in json.dumps(compass).lower()

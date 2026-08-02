@@ -1,0 +1,30 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "planned_action": "push_only_codex_raisa_two_component_oidc_runtime_adapter_and_open_a_stacked_draft_pull_request",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records two_component_oidc_runtime_adapter_pass at Continuity 194 / Compass 175 and names the provider-free PostgreSQL attempt store as the next separately gated candidate.",
+    "current_authority_allocation": "Yuri authorised necessary task-branch commits and publication for this candidate; protected integration, deployment and release remain closed.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-two-component-oidc-runtime-adapter-plan.md",
+      "docs/raisa-two-component-oidc-runtime-adapter-closeout.md",
+      "orchestration/continuity/raisa-two-component-oidc-runtime-adapter/provider-free-acceptance-evidence.json",
+      "orchestration/agent_inbox/codex/raisa-two-component-oidc-runtime-adapter-sol-acceptance.md"
+    ],
+    "protected_evidence_boundaries": "No provider traffic, real identity, route, database truth, binding, session, product read, protected ref, Pages, deployment, production or release action. docs/branding remains user-owned and excluded.",
+    "git_refs_and_worktree": "Task branch commit 17cae971 contains only the 25 explicitly staged authorised paths. The index is empty and the worktree contains only untracked docs/branding. Origin parent remains d136a8c19be657f6adc5f40cb9d8415d3a9ce2b5; local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": false
+}

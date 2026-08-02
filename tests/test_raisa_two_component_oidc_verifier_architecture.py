@@ -85,14 +85,20 @@ def test_provider_free_signed_token_matrix_passes() -> None:
     assert all(value == 0 for value in evidence["side_effects"].values())
 
 
-def test_no_application_adapter_or_route_wiring_was_added() -> None:
-    app_text = "\n".join(path.read_text(encoding="utf-8") for path in (ROOT / "app").rglob("*.py"))
-    lowered = app_text.lower()
-    assert "import msal" not in lowered
-    assert "from msal" not in lowered
-    assert "import authlib" not in lowered
-    assert "from authlib" not in lowered
-    assert "federation/microsoft/callback" not in app_text
+def test_authorised_application_adapter_remains_route_free() -> None:
+    adapter = ROOT / "app" / "services" / "application_identity_oidc_adapter.py"
+    adapter_text = adapter.read_text(encoding="utf-8")
+    assert "from msal import" in adapter_text
+    assert "from authlib" in adapter_text
+    assert "id_token_claims" not in adapter_text
+    runtime_paths = [ROOT / "main.py", *(ROOT / "app" / "routers").rglob("*.py")]
+    assert all(
+        "application_identity_oidc_adapter" not in path.read_text(encoding="utf-8")
+        for path in runtime_paths
+    )
+    assert "federation/microsoft/callback" not in "\n".join(
+        path.read_text(encoding="utf-8") for path in runtime_paths
+    )
 
 
 def test_hardening_portfolio_is_complete_and_evidence_bound() -> None:

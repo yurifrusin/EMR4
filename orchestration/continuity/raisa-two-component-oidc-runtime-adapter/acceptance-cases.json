@@ -1,0 +1,31 @@
+{
+  "schema_version": "emr4.two-component-oidc-runtime-adapter-cases.v1",
+  "data_class": "authored_synthetic",
+  "cases": [
+    {"id": "default_off_before_protocol", "expected": "deny"},
+    {"id": "msal_minimal_form_post", "expected": "pass"},
+    {"id": "msal_intercepted_single_exchange", "expected": "deny"},
+    {"id": "valid_rs256_external_principal", "expected": "pass"},
+    {"id": "msal_claims_bypass", "expected": "deny"},
+    {"id": "tampered_signature", "expected": "deny"},
+    {"id": "wrong_algorithm", "expected": "deny"},
+    {"id": "wrong_issuer", "expected": "deny"},
+    {"id": "wrong_audience", "expected": "deny"},
+    {"id": "wrong_nonce", "expected": "deny"},
+    {"id": "wrong_tenant", "expected": "deny"},
+    {"id": "missing_identifier", "expected": "deny"},
+    {"id": "expired_token", "expected": "deny"},
+    {"id": "future_token", "expected": "deny"},
+    {"id": "valid_key_rollover", "expected": "pass"},
+    {"id": "unknown_kid_after_one_refresh", "expected": "deny"},
+    {"id": "jwks_refresh_outage", "expected": "unavailable"},
+    {"id": "oversized_raw_token", "expected": "deny"},
+    {"id": "metadata_algorithm_mismatch", "expected": "unavailable"},
+    {"id": "encrypted_attempt_residue", "expected": "pass"},
+    {"id": "wrong_state_no_exchange", "expected": "deny"},
+    {"id": "failed_exchange_consumes_attempt", "expected": "deny"},
+    {"id": "concurrent_callback_single_exchange", "expected": "pass"},
+    {"id": "required_audit_unavailable", "expected": "unavailable"},
+    {"id": "route_free_non_wiring", "expected": "pass"}
+  ]
+}
