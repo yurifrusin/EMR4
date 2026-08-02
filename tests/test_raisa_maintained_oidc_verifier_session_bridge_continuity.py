@@ -77,8 +77,12 @@ def test_completed_architecture_adapter_and_attempt_store_leave_runtime_edges_cl
     operational_gate = decisions[
         "authorize-postgresql-oidc-attempt-store-operational-connection-boundary"
     ]
-    assert "runtime key configuration" in operational_gate["required_before"]
+    assert "Satisfied on 2026-08-02" in operational_gate["required_before"]
     assert "live Microsoft" in operational_gate["required_before"]
+    transport_gate = decisions[
+        "authorize-provider-free-oidc-start-callback-transport-boundary"
+    ]
+    assert "mounted OIDC start/callback route" in transport_gate["required_before"]
 
 
 def test_live_handover_records_exact_result_and_closed_gates() -> None:
@@ -88,10 +92,10 @@ def test_live_handover_records_exact_result_and_closed_gates() -> None:
         "Two-component OIDC verifier architecture revision acceptance",
         "Two-component OIDC runtime adapter acceptance",
         "PostgreSQL OIDC authorization-attempt store acceptance",
-        "postgresql_oidc_authorization_attempt_store_pass",
-        "Continuity graph revision 195",
-        "Compass map revision 176",
-        "provider-free operational connection boundary",
+        "postgresql_oidc_operational_connection_boundary_pass",
+        "Continuity graph revision 196",
+        "Compass map revision 177",
+        "PostgreSQL OIDC operational connection boundary acceptance",
         "any further Pages rebuild remain closed",
     ):
         assert marker in handover

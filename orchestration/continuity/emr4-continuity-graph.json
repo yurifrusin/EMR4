@@ -59,7 +59,7 @@
       "voice"
     ]
   },
-  "graph_revision": 195,
+  "graph_revision": 196,
   "harvests": [],
   "nodes": [
     {
@@ -10626,9 +10626,112 @@
         "Binding resolution, application sessions, product reads, monitoring, deployment, production and release remain closed.",
         "Protected integration and GitHub Pages remain separately closed."
       ]
+    },
+    {
+      "id": "raisa-postgresql-oidc-operational-connection-boundary",
+      "title": "Raisa PostgreSQL OIDC Operational Connection Boundary",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-02T08:00:00Z",
+      "updated_at": "2026-08-02T08:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/raisa-postgresql-oidc-operational-connection-boundary",
+        "source_head": "559ef5de02355effa48676736681ac03323fb8fe",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-postgresql-oidc-authorization-attempt-store",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-postgresql-oidc-operational-connection-boundary-plan.md",
+            "scope": "Implement the provider-free finite LOGIN, exact bounded pool role/reset lifecycle and credential-free runtime key-provider/configuration seam for the accepted dormant PostgreSQL attempt store."
+          }
+        ],
+        "notes": [
+          "Yuri explicitly authorised the next candidate tranche.",
+          "No persistent credential, hosted connection, route, provider call, real identity, binding, application session, product read, deployment, production or release occurred.",
+          "The user-owned docs/branding directory remained untracked, unstaged and excluded."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "separate-login-from-attempt-capability-196",
+          "source": "app/services/application_identity_oidc_attempt_database_role.py",
+          "status": "accepted",
+          "summary": "Use one finite PASSWORD NULL NOINHERIT LOGIN with membership only in the exact NOLOGIN attempt-table capability."
+        },
+        {
+          "id": "verify-pool-checkout-and-return-hygiene-196",
+          "source": "app/services/application_identity_oidc_attempt_operational.py",
+          "status": "accepted",
+          "summary": "Verify capability and timeout setup on checkout, then rollback and verify RESET ROLE/ALL to the LOGIN before physical-connection reuse."
+        },
+        {
+          "id": "resolve-bounded-keys-by-reference-196",
+          "source": "app/services/application_identity_oidc_attempt_operational.py",
+          "status": "accepted",
+          "summary": "Keep raw keys outside configuration and resolve one active plus bounded retained cipher/digest references through one exact provider port without fallback or cross-use."
+        },
+        {
+          "id": "keep-oidc-transport-and-identity-closed-196",
+          "source": "docs/raisa-postgresql-oidc-operational-connection-boundary-closeout.md",
+          "status": "accepted",
+          "summary": "Operational construction remains dormant and adds no mounted route, live provider, real identity, binding, session or product authority."
+        }
+      ],
+      "claim_scope": [
+        "Disposable loopback PostgreSQL proves exact LOGIN/capability separation, direct-LOGIN denial and complete database/two-role cleanup.",
+        "One deliberately contaminated physical connection resets to the LOGIN and restores exact capability/timeouts on reuse; pool exhaustion is bounded.",
+        "A fresh rotated runtime consumes an old encrypted attempt with zero raw flow/key/password/reference residue."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-postgresql-oidc-operational-connection-boundary-plan.md",
+          "docs/raisa-postgresql-oidc-operational-connection-boundary-design.md",
+          "docs/security/raisa-postgresql-oidc-operational-connection-boundary-threat-model-delta.md"
+        ],
+        "findings": [
+          "app/services/application_identity_oidc_attempt_database_role.py",
+          "app/services/application_identity_oidc_attempt_operational.py",
+          "orchestration/continuity/raisa-postgresql-oidc-operational-connection-boundary/live-local-backend-postgres-operational-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-postgresql-oidc-operational-connection-boundary-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-postgresql-oidc-operational-connection-boundary-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-postgresql-oidc-operational-connection-boundary-rehydration-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-postgresql-oidc-operational-connection-boundary-rehydration-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-postgresql-oidc-operational-connection-boundary-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-postgresql-oidc-operational-connection-boundary-prepush-receipt.json"
+        ],
+        "tests": [
+          "scripts/raisa_postgresql_oidc_operational_connection_boundary_acceptance.py",
+          "tests/test_raisa_postgresql_oidc_operational_connection_boundary.py",
+          "scripts/raisa_postgresql_oidc_operational_connection_boundary_continuity_update.py",
+          "tests/test_raisa_postgresql_oidc_operational_connection_boundary_continuity.py"
+        ]
+      },
+      "unresolved_gates": [
+        "A default-off provider-free mounted OIDC start/callback transport boundary requires fresh authority.",
+        "Live Microsoft and real identity require later separate authority.",
+        "Binding resolution, admission-grant/session redeem and product reads remain closed.",
+        "Production credential/key custody, managed pooler/TLS, distributed abuse resistance and monitoring remain closed.",
+        "Cloud/IAM, deployment, protected integration, production, release and GitHub Pages remain separately closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-02T07:00:00Z"
+  "updated_at": "2026-08-02T08:00:00Z"
 }

@@ -1,0 +1,90 @@
+{
+  "claim_limits": [
+    "Only a unique disposable loopback PostgreSQL database, one generated LOGIN credential, one exact NOLOGIN capability role and authored-synthetic attempts were exercised.",
+    "No credential or target is recorded; no hosted database, live provider, real identity, route, binding, session, product read, deployment, production or release is established."
+  ],
+  "cleanup": {
+    "capability_role_absent_after": true,
+    "capability_role_drop_attempted": true,
+    "database_absent_after": true,
+    "database_drop_attempted": true,
+    "login_role_absent_after": true,
+    "login_role_drop_attempted": true,
+    "passed": true,
+    "role_names_recorded": false
+  },
+  "data_class": "authored_synthetic",
+  "database": {
+    "loopback_only": true,
+    "name_recorded": false,
+    "preexisting": false,
+    "unique_allowlisted_name_used": true
+  },
+  "direct_login_denial": {
+    "passed": true,
+    "select_sqlstate": "42501"
+  },
+  "evidence_label": "live_local_backend_postgres",
+  "evidence_sensitive_match_count": 0,
+  "migration": {
+    "current_head_exact": true,
+    "head_revision": "r7s8t9u0v1w2",
+    "migration_log_recorded": false,
+    "orm_migration_drift_absent": true,
+    "upgrade_log_nonempty": true,
+    "upgrade_passed": true
+  },
+  "operational_runtime": {
+    "active_rotated_attempt_persisted": true,
+    "checkin_reset_observed": true,
+    "checkout_timeout_configured_ms": 250,
+    "checkout_timeout_elapsed_ms": 263,
+    "checkout_timeout_observed": true,
+    "checkout_timeout_within_bound": true,
+    "fresh_runtime_consumed_retained_keys": true,
+    "key_provider_resolution_count": 6,
+    "key_resolution_sequence_exact": true,
+    "login_connection_limit": 1,
+    "max_overflow": 0,
+    "passed": true,
+    "physical_connection_reused": true,
+    "pool_size": 1,
+    "session_and_effective_roles_exact": true,
+    "settings_restored_after_committed_contamination": true,
+    "unique_secret_reference_count": 4
+  },
+  "passed": true,
+  "raw_residue_scan": {
+    "active_encrypted_row_present": true,
+    "matched_sensitive_value_count": 0,
+    "matched_values_recorded": false,
+    "passed": true,
+    "scanned_sensitive_value_count": 22
+  },
+  "result": "postgresql_oidc_operational_connection_boundary_pass",
+  "role_contract": {
+    "capability_non_login_non_bypass": true,
+    "login_attributes_exact": true,
+    "login_direct_table_grants": [],
+    "membership_exact": true,
+    "passed": true
+  },
+  "schema_version": "emr4.postgresql-oidc-operational-connection-boundary-evidence.v1",
+  "side_effect_counts": {
+    "application_sessions": 0,
+    "cloud_or_iam_mutations": 0,
+    "deployments": 0,
+    "disposable_cluster_roles": 2,
+    "disposable_database_migrations": 1,
+    "disposable_database_reads": "performed",
+    "disposable_database_writes": "performed",
+    "external_http_or_socket_calls": 0,
+    "identity_bindings": 0,
+    "patient_or_clinical_reads": 0,
+    "product_data_reads": 0,
+    "production_changes": 0,
+    "provider_calls": 0,
+    "real_identities": 0,
+    "routes_added_or_mounted": 0
+  }
+}
