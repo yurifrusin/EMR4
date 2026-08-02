@@ -1,0 +1,37 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan_implement_verify_and_publish_the_preauthorised_provider_free_hmac_only_binding_resolver_and_short_lived_admission_grant_boundary_without_application_session_product_access_live_microsoft_or_deployment",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "All 158643 UTF-8 characters / 499 lines of AGENTS.md at SHA-256 3961F687F004723DB9C19196CF8521F0377DBE689046AB042FB9272244A35133 were reread completely; provider_free_oidc_start_callback_transport_boundary_pass is the accepted parent at Continuity 197 / Compass 178.",
+    "current_authority_allocation": "Yuri preauthorised this provider-free HMAC-only binding resolver and short-lived admission-grant descendant plus the following atomic grant-redemption descendant unless a material directional choice arises. This tranche cannot create an application session, read product data, call Microsoft, deploy or move a protected ref.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-oidc-start-callback-transport-boundary-plan.md",
+      "docs/raisa-provider-free-oidc-start-callback-transport-boundary-design.md",
+      "docs/security/raisa-provider-free-oidc-start-callback-transport-boundary-threat-model-delta.md",
+      "docs/raisa-provider-free-oidc-start-callback-transport-boundary-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-oidc-start-callback-transport-boundary-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-oidc-start-callback-transport-boundary/live-local-http-backend-postgres-evidence.json",
+      "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+      "docs/raisa-real-identity-microsoft-federation-boundary-design.md",
+      "docs/raisa-microsoft-federation-admission-runtime-plan.md",
+      "docs/raisa-microsoft-federation-postgresql-persistence-plan.md",
+      "docs/raisa-maintained-oidc-verifier-session-bridge-architecture-design.md"
+    ],
+    "protected_evidence_boundaries": "No protected holdout or historical Diary access; no live Microsoft/provider call, real identity, application session/cookie, product/patient/clinical read, production key custody, cloud/IAM mutation, deployment, production, release, protected-ref, Pages or Dependabot disposition action. docs/branding remains untouched and excluded.",
+    "git_refs_and_worktree": "Task branch codex/raisa-provider-free-oidc-binding-admission-grant-boundary is at accepted parent 9a562c97b1761e61aa7614517d7ef4de5384703b and the origin parent matches. Local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. docs/branding is the only unrelated untracked content."
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

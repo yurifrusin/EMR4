@@ -215,7 +215,126 @@ class ApplicationIdentityFederationAuditEvent(Base):
     )
 
 
+class ApplicationIdentityFederationAdmissionGrant(Base):
+    __tablename__ = "application_identity_federation_admission_grants"
+
+    grant_reference_hmac = Column(String(128), primary_key=True)
+    operation_ref = Column(String(74), nullable=False)
+    binding_ref = Column(String(74), nullable=False)
+    binding_version = Column(BigInteger, nullable=False)
+    user_ref = Column(String(74), nullable=False)
+    practice_ref = Column(String(74), nullable=False)
+    provider = Column(String(32), nullable=False)
+    external_reference_hmac = Column(String(96), nullable=False)
+    audience_reference_hmac = Column(String(96), nullable=False)
+    correlation_reference_hmac = Column(String(96), nullable=False)
+    surface = Column(String(32), nullable=False)
+    origin = Column(String(512), nullable=False)
+    return_target = Column(String(32), nullable=False)
+    policy_version = Column(String(64), nullable=False)
+    issued_at = Column(DateTime(timezone=True), nullable=False)
+    expires_at = Column(DateTime(timezone=True), nullable=False)
+    status = Column(String(16), nullable=False)
+    version = Column(BigInteger, nullable=False)
+    consumed_at = Column(DateTime(timezone=True), nullable=True)
+    data_class = Column(String(32), nullable=False)
+
+    __table_args__ = (
+        CheckConstraint(
+            "grant_reference_hmac ~ "
+            "'^hmac-sha256:[a-z0-9][a-z0-9_-]{0,31}:[0-9a-f]{64}$'",
+            name="ck_app_id_fed_grant_reference_hmac",
+        ),
+        CheckConstraint(
+            _SYNTHETIC_REF_CHECK.replace("VALUE", "operation_ref"),
+            name="ck_app_id_fed_grant_operation_synthetic",
+        ),
+        CheckConstraint(
+            _SYNTHETIC_REF_CHECK.replace("VALUE", "binding_ref"),
+            name="ck_app_id_fed_grant_binding_synthetic",
+        ),
+        CheckConstraint(
+            "binding_version > 0",
+            name="ck_app_id_fed_grant_binding_version",
+        ),
+        CheckConstraint(
+            _SYNTHETIC_REF_CHECK.replace("VALUE", "user_ref"),
+            name="ck_app_id_fed_grant_user_synthetic",
+        ),
+        CheckConstraint(
+            _SYNTHETIC_REF_CHECK.replace("VALUE", "practice_ref"),
+            name="ck_app_id_fed_grant_practice_synthetic",
+        ),
+        CheckConstraint(
+            "provider = 'microsoft_entra'",
+            name="ck_app_id_fed_grant_provider",
+        ),
+        CheckConstraint(
+            _HMAC_REF_CHECK.replace("VALUE", "external_reference_hmac"),
+            name="ck_app_id_fed_grant_external_hmac",
+        ),
+        CheckConstraint(
+            _HMAC_REF_CHECK.replace("VALUE", "audience_reference_hmac"),
+            name="ck_app_id_fed_grant_audience_hmac",
+        ),
+        CheckConstraint(
+            _HMAC_REF_CHECK.replace("VALUE", "correlation_reference_hmac"),
+            name="ck_app_id_fed_grant_correlation_hmac",
+        ),
+        CheckConstraint(
+            "surface IN ('word_desktop', 'word_online', 'native_diary')",
+            name="ck_app_id_fed_grant_surface",
+        ),
+        CheckConstraint(
+            "origin ~ '^https://[a-z0-9.-]+(:[0-9]{1,5})?$'",
+            name="ck_app_id_fed_grant_origin",
+        ),
+        CheckConstraint(
+            "return_target IN ('clinician_one', 'reception_one', 'diary')",
+            name="ck_app_id_fed_grant_return_target",
+        ),
+        CheckConstraint(
+            "policy_version = 'microsoft-entra-single-tenant-prebound.v1'",
+            name="ck_app_id_fed_grant_policy",
+        ),
+        CheckConstraint(
+            "expires_at = issued_at + INTERVAL '60 seconds'",
+            name="ck_app_id_fed_grant_exact_expiry",
+        ),
+        CheckConstraint(
+            "status IN ('active', 'consumed')",
+            name="ck_app_id_fed_grant_status",
+        ),
+        CheckConstraint(
+            "version > 0 AND "
+            "((status = 'active' AND version = 1 AND consumed_at IS NULL) OR "
+            "(status = 'consumed' AND version = 2 AND consumed_at IS NOT NULL "
+            "AND consumed_at >= issued_at))",
+            name="ck_app_id_fed_grant_state",
+        ),
+        CheckConstraint(
+            "data_class = 'authored_synthetic'",
+            name="ck_app_id_fed_grant_data_class",
+        ),
+        Index(
+            "ix_app_id_fed_grant_practice_expiry",
+            "practice_ref",
+            "expires_at",
+        ),
+        Index(
+            "ix_app_id_fed_grant_binding_status",
+            "binding_ref",
+            "status",
+        ),
+        UniqueConstraint(
+            "operation_ref",
+            name="uq_app_id_fed_grant_operation",
+        ),
+    )
+
+
 __all__ = [
+    "ApplicationIdentityFederationAdmissionGrant",
     "ApplicationIdentityFederationAuditEvent",
     "ApplicationIdentityFederationBinding",
 ]

@@ -121,7 +121,13 @@ def test_migration_is_reversible_forced_rls_single_head_descendant() -> None:
     assert "def downgrade()" in source
     config = Config(str(ROOT / "alembic.ini"))
     script = ScriptDirectory.from_config(config)
-    assert script.get_heads() == ["r7s8t9u0v1w2"]
+    heads = script.get_heads()
+    assert len(heads) == 1
+    lineage = {
+        revision.revision
+        for revision in script.walk_revisions(base="r7s8t9u0v1w2", head=heads[0])
+    }
+    assert "r7s8t9u0v1w2" in lineage
 
 
 def test_capability_role_has_only_exact_attempt_table_privileges() -> None:

@@ -46,7 +46,7 @@ def test_rendered_compass_validates_and_keeps_runtime_edges_closed() -> None:
     serialized = json.dumps(compass)
     assert "finite LOGIN/pool" in serialized
     assert "live Microsoft" in serialized
-    assert "session redeem" in serialized
+    assert "session" in serialized and "redemption" in serialized
 
 
 def test_user_decision_marks_this_tranche_satisfied_and_next_gate_fresh() -> None:
@@ -62,4 +62,5 @@ def test_user_decision_marks_this_tranche_satisfied_and_next_gate_fresh() -> Non
     next_decision = decisions[
         "authorize-provider-free-oidc-start-callback-transport-boundary"
     ]
-    assert "mounted OIDC start/callback route" in next_decision["required_before"]
+    assert "Satisfied on 2026-08-02" in next_decision["required_before"]
+    assert next_decision["evidence"]

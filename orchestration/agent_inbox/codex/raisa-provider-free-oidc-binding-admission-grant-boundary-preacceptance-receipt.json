@@ -1,0 +1,45 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "verifier_acceptance",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "The complete AGENTS.md read remains controlling; provider_free_oidc_start_callback_transport_boundary_pass at Continuity 197 / Compass 178 is the accepted parent.",
+    "current_authority_allocation": "Yuri preauthorised this provider-free HMAC-only binding and 60-second admission-grant descendant plus the following atomic redemption descendant unless a material directional choice arises; this acceptance remains limited to the binding/grant descendant.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-oidc-binding-admission-grant-boundary-plan.md",
+      "docs/raisa-provider-free-oidc-binding-admission-grant-boundary-design.md",
+      "docs/security/raisa-provider-free-oidc-binding-admission-grant-boundary-threat-model-delta.md",
+      "app/models/application_identity_federation.py",
+      "alembic/versions/s8t9u0v1w2x3_add_federation_admission_grants.py",
+      "app/services/application_identity_oidc_binding_database_role.py",
+      "app/services/application_identity_oidc_binding_operational.py",
+      "app/services/application_identity_oidc_admission_grant.py",
+      "app/services/application_identity_oidc_transport.py",
+      "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+      "scripts/raisa_provider_free_oidc_binding_admission_grant_boundary_acceptance.py",
+      "orchestration/continuity/raisa-provider-free-oidc-binding-admission-grant-boundary/live-local-http-backend-postgres-evidence.json",
+      "tests/test_raisa_provider_free_oidc_binding_admission_grant_boundary.py"
+    ],
+    "protected_evidence_boundaries": "No protected holdout or historical Diary access; no live Microsoft/provider call, real identity, application session/cookie, product/patient/clinical read, production key custody, cloud/IAM mutation, deployment, production, release, protected-ref, Pages or Dependabot disposition action. docs/branding remains untouched and excluded.",
+    "git_refs_and_worktree": "Task branch is based on accepted parent 9a562c97b1761e61aa7614517d7ef4de5384703b. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only authorised tranche files are modified/untracked alongside unrelated untracked docs/branding."
+  },
+  "revision_binding": {
+    "continuity_graph_revision_expected": 198,
+    "compass_map_revision_expected": 179,
+    "compass_source_graph_revision_expected": 198,
+    "rendered_compass_exact_validation_required": true
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

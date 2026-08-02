@@ -198,9 +198,9 @@ def test_openapi_mounts_only_default_off_transport_and_retains_future_commit() -
     assert contract["openapi"] == "3.1.0"
     assert contract["servers"] == []
     authority = contract["x-emr4-authority"]
-    assert authority["status"] == "provider_free_start_callback_mounted_default_off"
+    assert authority["status"] == "provider_free_binding_grant_mounted_default_off"
     assert authority["routes_added"] == 2
-    assert authority["admission_grants_issued"] == 0
+    assert authority["admission_grants_issued"] == "authored_synthetic_acceptance_only"
     assert authority["session_cookies_issued"] == 0
     assert contract["x-emr4-api-spine"]["graphql_mutation"] == "forbidden"
     assert set(contract["paths"]) == {
