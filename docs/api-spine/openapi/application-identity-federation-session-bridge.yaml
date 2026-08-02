@@ -235,7 +235,13 @@ components:
       required: [state]
       properties:
         code: {type: string, minLength: 1, maxLength: 8192}
-        state: {type: string, minLength: 43, maxLength: 256}
+        state:
+          type: string
+          minLength: 16
+          maxLength: 256
+          description: >-
+            Exact opaque MSAL-generated state. MSAL 1.37.0 currently emits a
+            22-character value; the server stores only its keyed digest.
         error: {type: string, maxLength: 128}
         error_description: {type: string, maxLength: 1024}
     RedeemRequest:

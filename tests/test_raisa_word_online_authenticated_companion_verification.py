@@ -136,4 +136,5 @@ def test_cleanup_and_revision_binding_are_terminal() -> None:
     assert journey[transport_id]["lineage_parent"] == persistence_id
     assert journey[operational_id]["lineage_parent"] == transport_id
     assert journey[governance_id]["lineage_parent"] == operational_id
-    assert compass["current_position"]["node_id"] == governance_id
+    assert governance_id in journey
+    assert compass["current_position"]["node_id"] == compass["journey"][-1]["node_id"]

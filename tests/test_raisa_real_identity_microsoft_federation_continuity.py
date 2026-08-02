@@ -62,7 +62,7 @@ def test_compass_journey_preserves_revision_172_federation_sequence() -> None:
     assert f"continuity graph revision {graph['graph_revision']}" in rendered
 
 
-def test_user_decisions_consume_three_tranches_and_leave_next_gate_closed() -> None:
+def test_user_decisions_preserve_consumed_tranches_and_current_next_gate() -> None:
     decisions = {
         item["id"]: item for item in _json(COMPASS)["user_owned_decisions"]
     }
@@ -79,9 +79,15 @@ def test_user_decisions_consume_three_tranches_and_leave_next_gate_closed() -> N
         "authorize-maintained-oidc-verifier-session-bridge-architecture"
     ]
     assert "Satisfied on 2026-08-02" in architecture_gate["required_before"]
-    next_gate = decisions["authorize-msal-offline-adapter-dependency-tranche"]
-    assert "package/dependency addition" in next_gate["required_before"]
-    assert "Live network" in next_gate["required_before"]
+    dependency_gate = decisions["authorize-msal-offline-adapter-dependency-tranche"]
+    assert "Satisfied on 2026-08-02" in dependency_gate["required_before"]
+    runtime_gate = decisions["authorize-two-component-oidc-runtime-adapter"]
+    assert "Satisfied on 2026-08-02" in runtime_gate["required_before"]
+    next_gate = decisions[
+        "authorize-provider-free-postgresql-authorization-attempt-store"
+    ]
+    assert "database migration" in next_gate["required_before"]
+    assert "live Microsoft" in next_gate["required_before"]
 
 
 def test_graph_evidence_preserves_branding_and_live_identity_exclusions() -> None:
@@ -105,17 +111,16 @@ def test_graph_evidence_preserves_branding_and_live_identity_exclusions() -> Non
     assert "deployment" in serialized
 
 
-def test_live_handover_names_results_and_next_authority_gate() -> None:
+def test_live_handover_names_results_and_current_authority_gate() -> None:
     handover = AGENTS.read_text(encoding="utf-8")
     for result in (
         "Real-identity and Microsoft-federation three-tranche acceptance",
         "docs/raisa-microsoft-federation-admission-runtime-closeout.md",
         "docs/raisa-microsoft-federation-postgresql-persistence-closeout.md",
-        "Continuity graph revision 192",
-        "Compass map revision 173",
-        "provider-free maintained-verifier dependency and offline adapter-admission",
         "09a661cfa83559b13c438f45734403f33d1e3bbb",
         "No further Pages rebuild is authorised",
+        "Two-component OIDC runtime adapter acceptance",
+        "provider-free PostgreSQL authorization-attempt store",
     ):
         assert result in handover
     assert "Yuri's branding permission covers future UI renders only" in handover

@@ -59,7 +59,7 @@
       "voice"
     ]
   },
-  "graph_revision": 193,
+  "graph_revision": 194,
   "harvests": [],
   "nodes": [
     {
@@ -10418,9 +10418,111 @@
         "Identity binding, application sessions, product reads, deployment, production and release remain closed.",
         "Protected integration and GitHub Pages remain separately closed."
       ]
+    },
+    {
+      "id": "raisa-two-component-oidc-runtime-adapter",
+      "title": "Raisa Two-Component OIDC Runtime Adapter",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-02T05:00:00Z",
+      "updated_at": "2026-08-02T05:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/raisa-two-component-oidc-runtime-adapter",
+        "source_head": "d136a8c19be657f6adc5f40cb9d8415d3a9ce2b5",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-two-component-oidc-verifier-architecture-revision",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-two-component-oidc-runtime-adapter-plan.md",
+            "scope": "Implement the provider-free default-off MSAL/Authlib adapter behind the frozen ports and fault matrix."
+          }
+        ],
+        "notes": [
+          "Yuri explicitly authorised the next candidate after the two-component architecture revision.",
+          "No route, external network, real identity, database truth, binding, role, session, product read, deployment, production or release occurred.",
+          "The user-owned docs/branding directory remained untracked, unstaged and excluded."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "implement-route-free-msal-authlib-adapter-194",
+          "source": "app/services/application_identity_oidc_adapter.py",
+          "status": "accepted",
+          "summary": "Add a default-off application service in which MSAL owns code-flow mechanics and Authlib/JOSE RFC independently owns raw ID-token admission."
+        },
+        {
+          "id": "encrypt-provider-free-authorization-attempt-194",
+          "source": "docs/raisa-two-component-oidc-runtime-adapter-design.md",
+          "status": "accepted",
+          "summary": "Keep the five-minute MSAL flow in a bounded process-local authenticated-encryption envelope keyed by state HMAC and atomically consume it before exchange."
+        },
+        {
+          "id": "reconcile-msal-state-contract-194",
+          "source": "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+          "status": "accepted",
+          "summary": "Accept the selected MSAL version's 22-character state while preserving exact HMAC correlation and a bounded 16-256-character schema."
+        },
+        {
+          "id": "keep-identity-session-product-closed-194",
+          "source": "docs/raisa-two-component-oidc-runtime-adapter-closeout.md",
+          "status": "accepted",
+          "summary": "A verified external principal grants no binding, role, application session or product authority."
+        }
+      ],
+      "claim_scope": [
+        "Twenty-five provider-free authored-synthetic cases pass, including the MSAL-claims bypass, encryption residue, one-use concurrency and Authlib token/JWKS fault matrix.",
+        "MSAL start and one rejected redemption are exercised only over intercepted in-memory HTTP; outbound network and Microsoft provider calls are zero.",
+        "The adapter is default-off and route-free, and releases only verified tid/oid/sub with explicit false authorization/session flags."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-two-component-oidc-runtime-adapter-plan.md",
+          "docs/raisa-two-component-oidc-runtime-adapter-design.md",
+          "docs/security/raisa-two-component-oidc-runtime-adapter-threat-model-delta.md"
+        ],
+        "findings": [
+          "app/services/application_identity_oidc_adapter.py",
+          "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+          "orchestration/continuity/raisa-two-component-oidc-runtime-adapter/acceptance-cases.json",
+          "orchestration/continuity/raisa-two-component-oidc-runtime-adapter/provider-free-acceptance-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-two-component-oidc-runtime-adapter-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-two-component-oidc-runtime-adapter-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-two-component-oidc-runtime-adapter-rehydration-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-two-component-oidc-runtime-adapter-preacceptance-receipt.json"
+        ],
+        "tests": [
+          "scripts/raisa_two_component_oidc_runtime_adapter_acceptance.py",
+          "tests/test_raisa_two_component_oidc_runtime_adapter.py",
+          "scripts/raisa_two_component_oidc_runtime_adapter_continuity_update.py",
+          "tests/test_raisa_two_component_oidc_runtime_adapter_continuity.py"
+        ]
+      },
+      "unresolved_gates": [
+        "A provider-free durable PostgreSQL authorization-attempt store requires fresh authority.",
+        "Any route, callback page, CSRF/origin edge or admission-grant bridge requires later separate authority.",
+        "Live Microsoft registration/traffic and real identity require later separate authority.",
+        "Binding resolution, application sessions, product reads, deployment, production and release remain closed.",
+        "Protected integration and GitHub Pages remain separately closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-02T02:00:00Z"
+  "updated_at": "2026-08-02T05:00:00Z"
 }
