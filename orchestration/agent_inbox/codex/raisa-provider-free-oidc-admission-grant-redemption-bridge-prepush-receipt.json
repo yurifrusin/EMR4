@@ -1,0 +1,50 @@
+{
+  "authority_boundary": "task_branch_commit_and_push_only_no_protected_ref_or_deployment_authority",
+  "branch": "codex/raisa-provider-free-oidc-admission-grant-redemption-bridge",
+  "expected_parent_head": "511fe57965c9f59d233fd521477bc1236f57d046",
+  "result": "provider_free_oidc_admission_grant_redemption_bridge_pass",
+  "verification": {
+    "live_local_http_backend_postgres_redemption": "passed_with_complete_server_database_and_seven_role_cleanup",
+    "focused_redemption_parent_and_continuity_tests": 20,
+    "inherited_oidc_federation_shared_auth_office_api_spine_tests": 324,
+    "continuity_compass_handover_tests": 57,
+    "ruff": "passed",
+    "compileall": "passed",
+    "bandit": "no_findings",
+    "pip_check": "no_broken_requirements",
+    "pip_audit": "no_known_vulnerabilities",
+    "alembic_head": "t9u0v1w2x3y4",
+    "alembic_reversible_disposable_upgrade_and_check": "passed",
+    "git_diff_check": "passed",
+    "repository_collection_barrier": "unchanged_parent_import_of_removed__BERNIE_SESSION_STORE"
+  },
+  "staging": {
+    "explicit_paths_only": true,
+    "cached_paths_before_receipt": 37,
+    "docs_branding_cached_paths": 0,
+    "docs_branding_preserved_untracked": true
+  },
+  "protected_refs": {
+    "master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "handoff_current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "origin_master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "origin_handoff_current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "movement_authorized": false
+  },
+  "closed": [
+    "live_microsoft_or_provider_calls",
+    "real_identity_or_product_truth",
+    "real_binding_administration",
+    "product_patient_or_clinical_reads",
+    "production_secret_custody",
+    "cloud_or_iam_mutation",
+    "deployment",
+    "protected_integration",
+    "production",
+    "release",
+    "pages",
+    "dependabot_alert_17_disposition"
+  ],
+  "schema_version": "ariadne.prepush_receipt.v1",
+  "status": "passed"
+}

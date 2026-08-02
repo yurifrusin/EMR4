@@ -25,6 +25,8 @@ from fastapi.routing import APIRoute
 from app.schemas.application_identity_oidc_transport import (
     MicrosoftOIDCStartRequest,
     MicrosoftOIDCStartResponse,
+    OIDCAdmissionGrantRedeemRequest,
+    OIDCAdmissionGrantRedeemResponse,
 )
 from app.schemas.application_auth_transport import (
     CsrfResponse,
@@ -60,6 +62,10 @@ from app.services.application_identity_oidc_transport import (
     OIDCTransportRequestInvalid,
     OIDCTransportUnavailable,
 )
+from app.services.application_identity_oidc_redemption import (
+    OIDCAdmissionGrantConflict,
+    OIDCAdmissionGrantRedemptionTransport,
+)
 
 
 AUTHENTICATION_FAILED = "application_authentication_failed"
@@ -71,6 +77,8 @@ OIDC_AUTHENTICATION_FAILED = "authentication_failed"
 OIDC_AUTHENTICATION_UNAVAILABLE = "authentication_temporarily_unavailable"
 
 _OIDC_START_PATH = "/api/v1/application-auth/federation/microsoft/start"
+_OIDC_REDEEM_PATH = "/api/v1/application-auth/federation/session/redeem"
+_OIDC_JSON_PATHS = frozenset({_OIDC_START_PATH, _OIDC_REDEEM_PATH})
 
 _NO_STORE_HEADERS = {
     "Cache-Control": "no-store",
@@ -172,7 +180,7 @@ class _ApplicationAuthRoute(APIRoute):
             try:
                 return await original(request)
             except RequestValidationError:
-                if request.url.path == _OIDC_START_PATH:
+                if request.url.path in _OIDC_JSON_PATHS:
                     return _oidc_denied_response(
                         request,
                         status_code=status.HTTP_400_BAD_REQUEST,
@@ -221,6 +229,13 @@ class _ApplicationAuthRoute(APIRoute):
                     error=OIDC_AUTHENTICATION_FAILED,
                     reason_code="oidc_authentication_failed",
                 )
+            except OIDCAdmissionGrantConflict:
+                return _oidc_denied_response(
+                    request,
+                    status_code=status.HTTP_409_CONFLICT,
+                    error=OIDC_AUTHENTICATION_FAILED,
+                    reason_code="oidc_admission_grant_already_consumed",
+                )
             except (OIDCTemporarilyUnavailable, OIDCTransportUnavailable):
                 return _oidc_error_response(
                     status.HTTP_503_SERVICE_UNAVAILABLE,
@@ -264,6 +279,17 @@ def get_application_auth_operational_hardening(
 
 def get_application_identity_oidc_transport() -> OIDCStartCallbackTransport:
     """Fail closed until a task-scoped provider-free transport is injected."""
+
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail=TRANSPORT_UNAVAILABLE,
+        headers=_NO_STORE_HEADERS,
+    )
+
+
+def get_application_identity_oidc_redemption_transport(
+) -> OIDCAdmissionGrantRedemptionTransport:
+    """Fail closed until a task-scoped provider-free redeemer is injected."""
 
     raise HTTPException(
         status_code=status.HTTP_404_NOT_FOUND,
@@ -400,6 +426,46 @@ async def complete_microsoft_federation(
         content=bridge.html,
         status_code=status.HTTP_200_OK,
         headers=dict(bridge.headers),
+    )
+
+
+@router.post(
+    "/federation/session/redeem",
+    response_model=OIDCAdmissionGrantRedeemResponse,
+)
+def redeem_federation_admission_grant(
+    body: OIDCAdmissionGrantRedeemRequest,
+    response: Response,
+    origin: str | None = Header(default=None, alias="Origin"),
+    csrf_header: str | None = Header(default=None, alias=CSRF_HEADER_NAME),
+    csrf_cookie: str | None = Cookie(default=None, alias=CSRF_COOKIE_NAME),
+    transport: OIDCAdmissionGrantRedemptionTransport = Depends(
+        get_application_identity_oidc_redemption_transport
+    ),
+) -> OIDCAdmissionGrantRedeemResponse:
+    admitted_origin = transport.require_origin(body.surface, origin)
+    transport.require_csrf(csrf_cookie, csrf_header)
+    redeemed = transport.redeem(
+        raw_grant=body.admission_grant,
+        surface=body.surface,
+        origin=admitted_origin,
+    )
+    _set_cookie(
+        response,
+        name=SESSION_COOKIE_NAME,
+        value=redeemed.surface_session_value,
+    )
+    _set_cookie(
+        response,
+        name=CSRF_COOKIE_NAME,
+        value=redeemed.csrf_token,
+    )
+    _apply_no_store(response)
+    return OIDCAdmissionGrantRedeemResponse(
+        surface=redeemed.surface,
+        csrf_token=redeemed.csrf_token,
+        session_expires_at=redeemed.parent_expires_at,
+        surface_idle_expires_at=redeemed.surface_idle_expires_at,
     )
 
 
@@ -591,5 +657,6 @@ __all__ = [
     "get_application_auth_operational_hardening",
     "get_application_auth_transport",
     "get_application_identity_oidc_transport",
+    "get_application_identity_oidc_redemption_transport",
     "router",
 ]

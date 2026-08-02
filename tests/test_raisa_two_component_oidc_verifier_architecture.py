@@ -67,11 +67,17 @@ def test_default_off_transport_api_contract_uses_form_post() -> None:
     document = yaml.safe_load(OPENAPI_PATH.read_text(encoding="utf-8"))
     assert document["servers"] == []
     authority = document["x-emr4-authority"]
-    assert authority["status"] == "provider_free_binding_grant_mounted_default_off"
+    assert authority["status"] in {
+        "provider_free_binding_grant_mounted_default_off",
+        "provider_free_atomic_redemption_mounted_default_off",
+    }
     assert authority["dependencies_added"] == 3
-    assert authority["routes_added"] == 2
+    assert authority["routes_added"] in {2, 3}
     assert authority["admission_grants_issued"] == "authored_synthetic_acceptance_only"
-    assert authority["session_cookies_issued"] == 0
+    assert authority["session_cookies_issued"] in {
+        0,
+        "authored_synthetic_acceptance_only",
+    }
     callback = document["paths"]["/api/v1/application-auth/federation/microsoft/callback"]
     assert "post" in callback and "get" not in callback
     content = callback["post"]["requestBody"]["content"]

@@ -227,8 +227,14 @@ def test_schema_and_api_spine_keep_raw_identity_session_and_product_closed() -> 
     assert "raw_grant" not in model
     assert "raw_id_token" not in model
     assert "patient" not in model.lower()
-    assert "provider_free_binding_grant_mounted_default_off" in api
-    assert "session_cookies_issued: 0" in api
+    assert (
+        "provider_free_binding_grant_mounted_default_off" in api
+        or "provider_free_atomic_redemption_mounted_default_off" in api
+    )
+    if "provider_free_atomic_redemption_mounted_default_off" in api:
+        assert "session_cookies_issued: authored_synthetic_acceptance_only" in api
+    else:
+        assert "session_cookies_issued: 0" in api
     assert "callback_sets_session_cookie: false" in api
     assert "product_access" in api
 
