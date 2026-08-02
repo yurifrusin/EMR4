@@ -57,7 +57,7 @@ def test_compass_and_report_preserve_parent_journey_after_revision_192() -> None
     assert f"continuity graph revision {graph['graph_revision']}" in rendered
 
 
-def test_completed_architecture_dependency_and_adapter_leave_database_closed() -> None:
+def test_completed_architecture_adapter_and_attempt_store_leave_runtime_edges_closed() -> None:
     decisions = {
         item["id"]: item for item in _json(COMPASS)["user_owned_decisions"]
     }
@@ -72,8 +72,13 @@ def test_completed_architecture_dependency_and_adapter_leave_database_closed() -
     database_gate = decisions[
         "authorize-provider-free-postgresql-authorization-attempt-store"
     ]
-    assert "database migration" in database_gate["required_before"]
+    assert "Satisfied on 2026-08-02" in database_gate["required_before"]
     assert "live Microsoft" in database_gate["required_before"]
+    operational_gate = decisions[
+        "authorize-postgresql-oidc-attempt-store-operational-connection-boundary"
+    ]
+    assert "runtime key configuration" in operational_gate["required_before"]
+    assert "live Microsoft" in operational_gate["required_before"]
 
 
 def test_live_handover_records_exact_result_and_closed_gates() -> None:
@@ -82,10 +87,11 @@ def test_live_handover_records_exact_result_and_closed_gates() -> None:
         "Maintained OIDC verifier and session-bridge architecture acceptance",
         "Two-component OIDC verifier architecture revision acceptance",
         "Two-component OIDC runtime adapter acceptance",
-        "two_component_oidc_runtime_adapter_pass",
-        "Continuity graph revision 194",
-        "Compass map revision 175",
-        "provider-free PostgreSQL authorization-attempt store",
+        "PostgreSQL OIDC authorization-attempt store acceptance",
+        "postgresql_oidc_authorization_attempt_store_pass",
+        "Continuity graph revision 195",
+        "Compass map revision 176",
+        "provider-free operational connection boundary",
         "any further Pages rebuild remain closed",
     ):
         assert marker in handover

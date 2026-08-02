@@ -1,0 +1,130 @@
+{
+  "claim_limits": [
+    "Only a uniquely named disposable loopback PostgreSQL database, one exact NOLOGIN capability role and authored-synthetic attempts were exercised.",
+    "No live Microsoft/provider call, real identity, route, binding, session, product read, deployment, production or release authority is established."
+  ],
+  "cleanup": {
+    "database_absent_after": true,
+    "database_drop_attempted": true,
+    "passed": true,
+    "role_absent_after": true,
+    "role_drop_attempted": true,
+    "role_name_recorded": false
+  },
+  "data_class": "authored_synthetic",
+  "database": {
+    "loopback_only": true,
+    "name_recorded": false,
+    "preexisting": false,
+    "unique_allowlisted_name_used": true
+  },
+  "evidence_label": "live_local_backend_postgres",
+  "migration": {
+    "base_revision": "q6r7s8t9u0v1",
+    "current_head_exact": true,
+    "downgrade_passed": true,
+    "head_revision": "r7s8t9u0v1w2",
+    "initial_upgrade_log_nonempty": true,
+    "migration_log_recorded": false,
+    "orm_migration_drift_absent": true,
+    "reupgrade_passed": true,
+    "upgrade_passed": true
+  },
+  "passed": true,
+  "raw_residue_scan": {
+    "active_encrypted_row_present": true,
+    "matched_sensitive_value_count": 0,
+    "matched_values_recorded": false,
+    "passed": true,
+    "persisted_row_count": 1,
+    "scanned_sensitive_value_count": 76
+  },
+  "result": "postgresql_oidc_authorization_attempt_store_pass",
+  "rls_and_privilege_probe": {
+    "capability_update_sqlstate": "42501",
+    "outsider_insert_sqlstate": "42501",
+    "outsider_role_absent_after_rollback": true,
+    "outsider_visible_rows": 0,
+    "passed": true
+  },
+  "runtime": {
+    "adapter_concurrency": {
+      "authorization_start_returned": true,
+      "exactly_one_exchange": true,
+      "exactly_one_verification": true,
+      "independent_database_sessions": 2,
+      "replay_reason": "authorization_attempt_required",
+      "results": [
+        "authorization_attempt_required",
+        "synthetic-object-verified"
+      ]
+    },
+    "audit_cleanup": {
+      "attempt_after_failed_start": "authorization_attempt_required",
+      "audit_reason": "required_audit_unavailable",
+      "provider_exchange_count": 0
+    },
+    "capacity_and_discard": {
+      "active_after_discard": 0,
+      "active_after_expiry_purge": 1,
+      "capacity_reason": "authorization_attempt_capacity"
+    },
+    "collision_reason": "authorization_state_collision",
+    "durability": {
+      "fresh_store_instance_consumed": true,
+      "reference_preserved": true
+    },
+    "expiry": {
+      "boundary_reason": "authorization_attempt_expired",
+      "replay_reason": "authorization_attempt_required"
+    },
+    "key_rotation": {
+      "missing_cipher_reason": "authorization_attempt_key_unavailable",
+      "missing_cipher_replay_reason": "authorization_attempt_required",
+      "old_reference_preserved": true,
+      "retained_cipher_and_digest_consumed": true
+    },
+    "passed": true,
+    "tamper": {
+      "reason": "authorization_attempt_unreadable",
+      "replay_reason": "authorization_attempt_required"
+    }
+  },
+  "schema_and_role_contract": {
+    "capability_privileges": [
+      "DELETE",
+      "INSERT",
+      "SELECT"
+    ],
+    "effective_role_allowlisted": true,
+    "forced_rls": true,
+    "model_database_column_match": true,
+    "passed": true,
+    "policies": [
+      "app_id_oidc_attempt_runtime_delete",
+      "app_id_oidc_attempt_runtime_insert",
+      "app_id_oidc_attempt_runtime_select"
+    ],
+    "public_select": false,
+    "role_name_recorded": false,
+    "session_and_effective_role_separated": true
+  },
+  "schema_version": "emr4.postgresql-oidc-authorization-attempt-store-evidence.v1",
+  "side_effect_counts": {
+    "application_sessions": 0,
+    "cloud_or_iam_mutations": 0,
+    "deployments": 0,
+    "disposable_cluster_roles": 1,
+    "disposable_database_migrations": 3,
+    "disposable_database_reads": "performed",
+    "disposable_database_writes": "performed",
+    "external_http_or_socket_calls": 0,
+    "identity_bindings": 0,
+    "patient_or_clinical_reads": 0,
+    "product_data_reads": 0,
+    "production_changes": 0,
+    "provider_calls": 0,
+    "real_identities": 0,
+    "routes_added_or_mounted": 0
+  }
+}

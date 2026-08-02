@@ -32,6 +32,9 @@ from app.models.application_identity_federation import (
     ApplicationIdentityFederationAuditEvent,
     ApplicationIdentityFederationBinding,
 )
+from app.models.application_identity_oidc_attempt import (
+    ApplicationIdentityOIDCAuthorizationAttempt,
+)
 
 __all__ = [
     "Base",
@@ -58,4 +61,5 @@ __all__ = [
     "ApplicationAuthSurfaceSession",
     "ApplicationIdentityFederationAuditEvent",
     "ApplicationIdentityFederationBinding",
+    "ApplicationIdentityOIDCAuthorizationAttempt",
 ]

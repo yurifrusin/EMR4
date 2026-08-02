@@ -1,0 +1,38 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "implement_and_verify_the_authorised_provider_free_postgresql_oidc_authorization_attempt_store_without_routes_or_live_provider_calls",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely; the Current Baton names the provider-free PostgreSQL authorization-attempt store as the next candidate after Continuity 194 / Compass 175.",
+    "current_authority_allocation": "Yuri explicitly authorised the next tranche as described. Authority covers the provider-free PostgreSQL attempt-store port, authenticated-encryption key abstraction, bounded expiry/capacity, exact atomic consume, least-privilege role/RLS, disposable authored-synthetic PostgreSQL acceptance, evidence, continuity and task-branch publication only.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-two-component-oidc-runtime-adapter-plan.md",
+      "docs/raisa-two-component-oidc-runtime-adapter-design.md",
+      "docs/security/raisa-two-component-oidc-runtime-adapter-threat-model-delta.md",
+      "docs/raisa-two-component-oidc-runtime-adapter-closeout.md",
+      "docs/raisa-two-component-oidc-verifier-architecture-revision-plan.md",
+      "docs/raisa-two-component-oidc-verifier-architecture-revision-design.md",
+      "docs/security/raisa-two-component-oidc-verifier-architecture-threat-model-delta.md",
+      "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "orchestration/access_ai_api_design.md",
+      "tests/test_api_spine_artifacts.py"
+    ],
+    "protected_evidence_boundaries": "No protected-holdout access, live Microsoft/provider traffic, real identity, mounted route, identity binding, role or application session, product read, cloud/IAM change, deployment, production, release, protected-ref movement or Pages action. User-owned docs/branding remains untouched and excluded from staging, testing and evidence.",
+    "git_refs_and_worktree": "After fresh origin fetch, task branch HEAD and origin are aligned at e3a0cb7b8259250dd021924df05c70d9f9ab576c. Local/origin master and handoff/current are aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only docs/branding is unrelated and untracked."
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
