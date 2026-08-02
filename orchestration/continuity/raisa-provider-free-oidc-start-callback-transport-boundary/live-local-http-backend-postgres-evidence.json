@@ -1,0 +1,77 @@
+{
+  "claim_limits": [
+    "This proves only a provider-free authored-synthetic start/callback transport over real loopback HTTP and disposable loopback PostgreSQL.",
+    "It establishes no live Microsoft call, real identity, binding, admission grant, application session, product read, deployment, production or release authority."
+  ],
+  "cleanup": {
+    "capability_role_absent_after": true,
+    "database_absent_after": true,
+    "identifiers_recorded": false,
+    "login_role_absent_after": true,
+    "passed": true,
+    "server_stopped": true
+  },
+  "data_class": "authored_synthetic",
+  "default_off": true,
+  "evidence_label": "live_local_http_backend_postgres",
+  "evidence_sensitive_match_count": 0,
+  "execution_contract": {
+    "adapter_audit_events": 3,
+    "admission_grants": 0,
+    "application_sessions": 0,
+    "denial_audit_events": 2,
+    "identity_bindings": 0,
+    "product_reads": 0,
+    "protocol_redeem_calls": 1,
+    "protocol_start_calls": 1,
+    "provider_calls": 0,
+    "real_identities": 0,
+    "verifier_calls": 1
+  },
+  "loopback_http": {
+    "ephemeral_port_recorded": false,
+    "host": "127.0.0.1",
+    "real_socket": true,
+    "requests_performed": 5
+  },
+  "migration_head": "r7s8t9u0v1w2",
+  "passed": true,
+  "persistence_contract": {
+    "attempt_rows_after_callback": 0,
+    "attempt_rows_after_start": 1,
+    "one_use_consumption": true,
+    "runtime_secret_resolutions": 2,
+    "secret_values_recorded": false
+  },
+  "released_sensitive_match_count": 0,
+  "result": "provider_free_oidc_start_callback_transport_boundary_pass",
+  "schema_version": "emr4.provider-free-oidc-start-callback-transport-boundary-evidence.v1",
+  "side_effect_counts": {
+    "admission_grants": 0,
+    "application_sessions": 0,
+    "deployments": 0,
+    "disposable_database_migrations": 1,
+    "disposable_database_writes": "performed",
+    "external_http_or_socket_calls": 0,
+    "identity_bindings": 0,
+    "loopback_http_requests": 5,
+    "product_or_clinical_reads": 0,
+    "production_changes": 0,
+    "provider_calls": 0,
+    "real_identities": 0
+  },
+  "transport_contract": {
+    "callback_replay_status": 401,
+    "callback_status": 200,
+    "fixed_enum_only_bridge": true,
+    "generic_failure_exact": true,
+    "idempotent_replay_exact": true,
+    "malformed_status": 401,
+    "no_cookie_issued": true,
+    "no_referrer": true,
+    "no_store": true,
+    "nosniff": true,
+    "restrictive_csp": true,
+    "start_status": 201
+  }
+}

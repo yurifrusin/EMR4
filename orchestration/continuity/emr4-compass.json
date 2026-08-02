@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 177,
-  "updated_at": "2026-08-02T08:00:00Z",
-  "source_graph_revision": 196,
-  "orientation_statement": "EMR4 now has a dormant provider-free Microsoft OIDC operational foundation: the durable encrypted attempt store sits behind a finite membership-only LOGIN, verified pool checkout/reset lifecycle and bounded credential-free key-reference seam. Continuity 196 / Compass 177 bind the local authored-synthetic result. Mounted transport, live Microsoft, real identity, binding/session/product access, cloud/IAM, deployment, production and release remain closed.",
+  "map_revision": 178,
+  "updated_at": "2026-08-02T10:00:00Z",
+  "source_graph_revision": 197,
+  "orientation_statement": "EMR4 now has a default-off provider-free Microsoft OIDC start/callback transport over the accepted durable attempt runtime. Continuity 197 / Compass 178 bind exact origin/CSRF/idempotency, strict form_post, one-use consumption and a restrictive fixed bridge. Live Microsoft, real identity, binding/grant/session/product access, cloud/IAM, deployment, production and release remain closed.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -1319,30 +1319,47 @@
         "orchestration/continuity/raisa-postgresql-oidc-operational-connection-boundary/live-local-backend-postgres-operational-evidence.json",
         "docs/raisa-postgresql-oidc-operational-connection-boundary-closeout.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-oidc-start-callback-transport-boundary",
+      "lineage_parent": "raisa-postgresql-oidc-operational-connection-boundary",
+      "strategic_role": "Expose the dormant provider-free OIDC adapter through a strict default-off browser transport",
+      "outcome": "Exact-origin start and strict callback routes now consume one encrypted attempt and release only a fixed no-authority bridge message.",
+      "evidence": [
+        "docs/raisa-provider-free-oidc-start-callback-transport-boundary-plan.md",
+        "docs/raisa-provider-free-oidc-start-callback-transport-boundary-design.md",
+        "docs/security/raisa-provider-free-oidc-start-callback-transport-boundary-threat-model-delta.md",
+        "app/services/application_identity_oidc_transport.py",
+        "app/routers/application_auth.py",
+        "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+        "orchestration/continuity/raisa-provider-free-oidc-start-callback-transport-boundary/live-local-http-backend-postgres-evidence.json",
+        "docs/raisa-provider-free-oidc-start-callback-transport-boundary-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-postgresql-oidc-operational-connection-boundary",
-    "strategic_role": "Provider-free operational connection and key-configuration boundary",
-    "why_now": "The accepted durable store still lacked an authenticating principal, reusable pool hygiene and a credential-free key startup seam; Yuri authorised that exact gap.",
-    "outcome": "Disposable PostgreSQL proves membership-only LOGIN isolation, contaminated-session reset, bounded exhaustion, exact capability restoration and fresh-runtime key rotation with complete cleanup.",
+    "node_id": "raisa-provider-free-oidc-start-callback-transport-boundary",
+    "strategic_role": "Provider-free mounted OIDC start/callback transport boundary",
+    "why_now": "The accepted operational attempt store remained route-free; Yuri authorised the exact default-off transport gap and two logical descendants.",
+    "outcome": "Real loopback HTTP and disposable PostgreSQL prove exact origin/CSRF/idempotency, strict form_post, one-use consumption, generic denial and a restrictive fixed bridge with complete cleanup.",
     "unlocks": [
-      "Review the operational connection result on its stacked draft pull request.",
-      "Seek fresh authority for a default-off provider-free mounted OIDC start/callback transport boundary."
+      "Review the transport result on its stacked draft pull request.",
+      "Freshly rehydrate the preauthorised HMAC-only binding resolver and short-lived admission-grant descendant."
     ],
     "does_not_solve": [
-      "Persistent production password/key custody, hosted database connectivity, managed pooler/TLS or monitoring.",
-      "Mounted start/callback routes, CSRF/origin edge, bridge page, live Microsoft or real identity.",
-      "Binding, admission-grant/session redeem, product access, distributed abuse resistance, deployment, production or release."
+      "Live Microsoft/provider calls, real identities or binding resolution.",
+      "Admission-grant persistence, application-session redemption or product access.",
+      "Production secret custody, hosted connectivity, distributed abuse resistance, monitoring, deployment, production or release."
     ],
     "evidence": [
-      "docs/raisa-postgresql-oidc-operational-connection-boundary-plan.md",
-      "docs/raisa-postgresql-oidc-operational-connection-boundary-design.md",
-      "docs/security/raisa-postgresql-oidc-operational-connection-boundary-threat-model-delta.md",
-      "app/services/application_identity_oidc_attempt_database_role.py",
-      "app/services/application_identity_oidc_attempt_operational.py",
-      "orchestration/continuity/raisa-postgresql-oidc-operational-connection-boundary/live-local-backend-postgres-operational-evidence.json",
-      "docs/raisa-postgresql-oidc-operational-connection-boundary-closeout.md"
+      "docs/raisa-provider-free-oidc-start-callback-transport-boundary-plan.md",
+      "docs/raisa-provider-free-oidc-start-callback-transport-boundary-design.md",
+      "docs/security/raisa-provider-free-oidc-start-callback-transport-boundary-threat-model-delta.md",
+      "app/services/application_identity_oidc_transport.py",
+      "app/routers/application_auth.py",
+      "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+      "orchestration/continuity/raisa-provider-free-oidc-start-callback-transport-boundary/live-local-http-backend-postgres-evidence.json",
+      "docs/raisa-provider-free-oidc-start-callback-transport-boundary-closeout.md"
     ]
   },
   "decision_horizon": [
@@ -2133,19 +2150,36 @@
     {
       "id": "authorize-provider-free-oidc-start-callback-transport-boundary",
       "question": "Should EMR4 add a default-off provider-free mounted OIDC start/callback transport boundary with exact origin/CSRF, bounded form_post and a restrictive no-store bridge page?",
-      "required_before": "Any mounted OIDC start/callback route or browser bridge page. Live Microsoft, real identity, binding, session redeem and product reads remain separately closed.",
+      "required_before": "Satisfied on 2026-08-02 only for the default-off provider-free authored-synthetic start/callback transport. Live Microsoft, real identity, binding, admission grant, session and product reads remain closed.",
       "evidence": [
-        "docs/raisa-postgresql-oidc-operational-connection-boundary-plan.md",
-        "docs/raisa-postgresql-oidc-operational-connection-boundary-design.md",
-        "docs/security/raisa-postgresql-oidc-operational-connection-boundary-threat-model-delta.md",
-        "app/services/application_identity_oidc_attempt_database_role.py",
-        "app/services/application_identity_oidc_attempt_operational.py",
-        "orchestration/continuity/raisa-postgresql-oidc-operational-connection-boundary/live-local-backend-postgres-operational-evidence.json",
-        "docs/raisa-postgresql-oidc-operational-connection-boundary-closeout.md"
+        "docs/raisa-provider-free-oidc-start-callback-transport-boundary-plan.md",
+        "docs/raisa-provider-free-oidc-start-callback-transport-boundary-design.md",
+        "docs/security/raisa-provider-free-oidc-start-callback-transport-boundary-threat-model-delta.md",
+        "app/services/application_identity_oidc_transport.py",
+        "app/routers/application_auth.py",
+        "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+        "orchestration/continuity/raisa-provider-free-oidc-start-callback-transport-boundary/live-local-http-backend-postgres-evidence.json",
+        "docs/raisa-provider-free-oidc-start-callback-transport-boundary-closeout.md"
+      ]
+    },
+    {
+      "id": "authorize-provider-free-oidc-binding-admission-grant-boundary",
+      "question": "Should EMR4 add the provider-free HMAC-only binding resolver and short-lived admission-grant boundary?",
+      "required_before": "Preauthorised by Yuri on 2026-08-02, but requires a fresh five-source tranche rehydration before binding resolution or admission-grant persistence. Application-session creation and product reads remain closed.",
+      "evidence": [
+        "docs/raisa-provider-free-oidc-start-callback-transport-boundary-plan.md",
+        "docs/raisa-provider-free-oidc-start-callback-transport-boundary-design.md",
+        "docs/security/raisa-provider-free-oidc-start-callback-transport-boundary-threat-model-delta.md",
+        "app/services/application_identity_oidc_transport.py",
+        "app/routers/application_auth.py",
+        "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+        "orchestration/continuity/raisa-provider-free-oidc-start-callback-transport-boundary/live-local-http-backend-postgres-evidence.json",
+        "docs/raisa-provider-free-oidc-start-callback-transport-boundary-closeout.md"
       ]
     }
   ],
   "map_limits": [
+    "The mounted OIDC transport result is default-off and provider-free: it releases only fixed authored-synthetic bridge enums and proves no live Microsoft, real identity, binding, admission grant, application session or product readiness.",
     "The PostgreSQL OIDC operational result is provider-free and dormant: its PASSWORD NULL LOGIN contract and key-reference seam prove no persistent credential, secret-manager custody, mounted route, live identity, deployment or production readiness.",
     "The two-component verifier result is architecture and offline dependency admission only; it proves no application adapter, live provider behavior or real identity.",
     "The maintained OIDC/bootstrap/session-bridge result is architecture-only. It proves no dependency installation, live provider behavior, real identity, database capability, session, product access or deployment.",

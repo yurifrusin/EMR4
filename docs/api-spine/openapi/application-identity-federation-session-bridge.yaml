@@ -1,24 +1,26 @@
 openapi: 3.1.0
 info:
   title: EMR4 application identity federation session bridge
-  version: 0.2.0-architecture-revision
+  version: 0.3.0-provider-free-start-callback
   description: >-
-    Architecture-only, non-mounted REST protocol contract for tenant-specific
-    Microsoft Entra authentication, separately maintained ID-token verification,
-    one-use admission-grant handoff and EMR4 application-session creation. It
-    grants no route, provider, identity, database, product, deployment,
-    production or release authority.
+    The start/callback subset is mounted default-off for provider-free
+    authored-synthetic transport verification. Admission-grant handoff and
+    application-session creation remain future commands. It grants no live
+    provider, real identity, binding, session, product, deployment, production
+    or release authority.
 servers: []
 tags:
   - name: Application identity federation
     description: External protocol and one-use session bridge; not GraphQL.
 x-emr4-authority:
-  status: architecture_only_not_mounted
+  status: provider_free_start_callback_mounted_default_off
   provider_calls: 0
   identity_records: authored_synthetic_only
   product_reads: 0
   session_cookies_issued: 0
   database_objects_added: 0
+  routes_added: 2
+  admission_grants_issued: 0
   dependencies_added: 3
   deployments: 0
   closed:
@@ -81,7 +83,8 @@ paths:
       operationId: startMicrosoftFederation
       summary: Create one bounded tenant-specific authorization attempt.
       description: >-
-        Future command. Requires exact origin and pre-authentication CSRF. The
+        Default-off provider-free command. Requires exact origin and
+        pre-authentication CSRF. The
         server, not the request, selects tenant, redirect and return URL.
       parameters:
         - $ref: '#/components/parameters/CsrfHeader'
@@ -110,12 +113,14 @@ paths:
       operationId: completeMicrosoftFederation
       summary: Consume one provider callback and emit no session cookie.
       description: >-
-        Future exact redirect URI. The provider posts callback parameters using
+        Default-off provider-free exact redirect URI. The provider-shaped port
+        posts callback parameters using
         response_mode=form_post. The server passes them once with the stored
         MSAL flow record, then passes only the transient raw ID token to the
-        independent Authlib verifier. A no-store bridge page sends a 60-second
-        opaque admission grant to the exact original surface origin; no
-        credential is placed in a URL, browser storage, log or response body.
+        independent Authlib verifier. The current no-store bridge sends only a
+        fixed verification-complete message to the exact original surface
+        origin. The future 60-second admission grant remains closed; no
+        credential is placed in a URL, browser storage, log or HTML.
       requestBody:
         required: true
         content:
@@ -124,7 +129,9 @@ paths:
               $ref: '#/components/schemas/MicrosoftCallbackForm'
       responses:
         '200':
-          description: No-store exact-origin bridge page; never a product page.
+          description: >-
+            No-store exact-origin verification-complete bridge page with no
+            binding, admission grant, session or product authority.
           headers:
             Cache-Control: {$ref: '#/components/headers/NoStore'}
             Referrer-Policy:

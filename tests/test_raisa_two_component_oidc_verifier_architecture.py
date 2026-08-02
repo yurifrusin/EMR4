@@ -63,11 +63,15 @@ def test_exact_reviewed_dependencies_are_pinned() -> None:
     assert [item["name"] for item in evidence["selected"]] == ["msal", "Authlib", "joserfc"]
 
 
-def test_non_mounted_api_contract_uses_form_post() -> None:
+def test_default_off_transport_api_contract_uses_form_post() -> None:
     document = yaml.safe_load(OPENAPI_PATH.read_text(encoding="utf-8"))
     assert document["servers"] == []
-    assert document["x-emr4-authority"]["status"] == "architecture_only_not_mounted"
-    assert document["x-emr4-authority"]["dependencies_added"] == 3
+    authority = document["x-emr4-authority"]
+    assert authority["status"] == "provider_free_start_callback_mounted_default_off"
+    assert authority["dependencies_added"] == 3
+    assert authority["routes_added"] == 2
+    assert authority["admission_grants_issued"] == 0
+    assert authority["session_cookies_issued"] == 0
     callback = document["paths"]["/api/v1/application-auth/federation/microsoft/callback"]
     assert "post" in callback and "get" not in callback
     content = callback["post"]["requestBody"]["content"]
@@ -96,9 +100,12 @@ def test_authorised_application_adapter_remains_route_free() -> None:
         "application_identity_oidc_adapter" not in path.read_text(encoding="utf-8")
         for path in runtime_paths
     )
-    assert "federation/microsoft/callback" not in "\n".join(
-        path.read_text(encoding="utf-8") for path in runtime_paths
+    router_source = (ROOT / "app/routers/application_auth.py").read_text(
+        encoding="utf-8"
     )
+    assert router_source.count('"/federation/microsoft/callback"') == 1
+    assert "get_application_identity_oidc_transport" in router_source
+    assert "HTTP_404_NOT_FOUND" in router_source
 
 
 def test_hardening_portfolio_is_complete_and_evidence_bound() -> None:

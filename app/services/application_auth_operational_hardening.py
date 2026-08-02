@@ -39,6 +39,8 @@ _PATH_ACTIONS = {
     f"{_AUTH_PREFIX}/session/logout": "auth.transport.logout",
     f"{_AUTH_PREFIX}/exchange/issue": "auth.transport.exchange.issue",
     f"{_AUTH_PREFIX}/exchange/redeem": "auth.transport.exchange.redeem",
+    f"{_AUTH_PREFIX}/federation/microsoft/start": "auth.oidc.start",
+    f"{_AUTH_PREFIX}/federation/microsoft/callback": "auth.oidc.callback",
 }
 _ALLOWED_DENIAL_REASONS = frozenset(
     {
@@ -46,6 +48,9 @@ _ALLOWED_DENIAL_REASONS = frozenset(
         "transport_request_not_admitted",
         "transport_authentication_failed",
         "transport_rate_limited",
+        "oidc_transport_request_invalid",
+        "oidc_transport_request_not_admitted",
+        "oidc_authentication_failed",
     }
 )
 
@@ -287,7 +292,7 @@ class _RequestAdmission:
 
 
 class ApplicationAuthOperationalHardening:
-    """Proxy, rate and required-denial-audit guard for the seven routes."""
+    """Proxy, rate and required-denial-audit guard for the bounded routes."""
 
     def __init__(
         self,

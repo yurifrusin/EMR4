@@ -1,0 +1,55 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "publish_accepted_task_branch_after_exact_checks_without_moving_protected_refs_or_deploying",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "The complete AGENTS.md rehydration remains controlling and is being advanced only to the accepted provider_free_oidc_start_callback_transport_boundary_pass at Continuity 197 / Compass 178.",
+    "current_authority_allocation": "Yuri authorised ordinary task-branch implementation, verification, acceptance, explicit commit/push and stacked PR publication for this first descendant; protected refs, deployment, live provider, real identity, binding, grant/session and product authority remain closed.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-oidc-start-callback-transport-boundary-plan.md",
+      "docs/raisa-provider-free-oidc-start-callback-transport-boundary-design.md",
+      "docs/security/raisa-provider-free-oidc-start-callback-transport-boundary-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-oidc-start-callback-transport-boundary/live-local-http-backend-postgres-evidence.json",
+      "docs/raisa-provider-free-oidc-start-callback-transport-boundary-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-oidc-start-callback-transport-boundary-sol-acceptance.md",
+      "scripts/raisa_provider_free_oidc_start_callback_transport_boundary_continuity_update.py",
+      "tests/test_raisa_provider_free_oidc_start_callback_transport_boundary.py",
+      "tests/test_raisa_provider_free_oidc_start_callback_transport_boundary_continuity.py"
+    ],
+    "protected_evidence_boundaries": "No protected evidence access; no live Microsoft/provider call, real identity, binding, admission grant, application session, product/patient/clinical read, protected-ref movement, Pages rebuild, Dependabot disposition, deployment, production or release. docs/branding remains untouched, untracked and excluded from staging/evidence.",
+    "git_refs_and_worktree": "The task branch is based on accepted parent 686b035ec4aab62afa2a5e4df1238f65326f4e1b. Before commit/push, origin will be fetched, protected refs reverified, explicit-path staging used and the cached file list checked for zero docs/branding paths."
+  },
+  "verification": {
+    "live_local_http_backend_postgres_acceptance": "passed_with_complete_cleanup",
+    "focused_transport_tests": 17,
+    "expanded_oidc_federation_shared_auth_api_spine_tests": 275,
+    "ruff": "passed",
+    "bandit": "no_findings",
+    "pip_check": "no_broken_requirements",
+    "pip_audit": "no_known_vulnerabilities",
+    "alembic_head": "r7s8t9u0v1w2",
+    "disposable_alembic_check": "passed",
+    "full_repository_collection": "unchanged_parent_barrier_removed_uppercase_bernie_session_store",
+    "current_continuity_compass_handover_tests": 36,
+    "diff_check": "passed"
+  },
+  "revision_binding": {
+    "continuity_graph_revision_expected": 197,
+    "compass_map_revision_expected": 178,
+    "compass_source_graph_revision_expected": 197,
+    "rendered_compass_exact_validation_required": true
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

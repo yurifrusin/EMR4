@@ -59,7 +59,7 @@
       "voice"
     ]
   },
-  "graph_revision": 196,
+  "graph_revision": 197,
   "harvests": [],
   "nodes": [
     {
@@ -10729,9 +10729,109 @@
         "Production credential/key custody, managed pooler/TLS, distributed abuse resistance and monitoring remain closed.",
         "Cloud/IAM, deployment, protected integration, production, release and GitHub Pages remain separately closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-oidc-start-callback-transport-boundary",
+      "title": "Raisa Provider-Free OIDC Start/Callback Transport Boundary",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-02T10:00:00Z",
+      "updated_at": "2026-08-02T10:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/raisa-provider-free-oidc-start-callback-transport-boundary",
+        "source_head": "686b035ec4aab62afa2a5e4df1238f65326f4e1b",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-postgresql-oidc-operational-connection-boundary",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-provider-free-oidc-start-callback-transport-boundary-plan.md",
+            "scope": "Mount the default-off provider-free Microsoft OIDC start/callback transport with exact origin/CSRF, strict form_post and a no-store exact-origin bridge, without binding, grant, session or product authority."
+          }
+        ],
+        "notes": [
+          "Yuri authorised this fresh-authority gate and its next two logical descendants unless a material directional choice arises.",
+          "No live Microsoft call, real identity, binding, admission grant, application session, product read, deployment, production or release occurred.",
+          "The user-owned docs/branding directory remained untracked, unstaged and excluded."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "mount-provider-free-transport-default-off-197",
+          "source": "app/routers/application_auth.py",
+          "status": "accepted",
+          "summary": "Mount start/callback routes behind a fail-closed default dependency so explicit runtime injection remains required."
+        },
+        {
+          "id": "strict-start-and-form-post-admission-197",
+          "source": "app/services/application_identity_oidc_transport.py",
+          "status": "accepted",
+          "summary": "Bind start to exact origin, pre-authentication CSRF and HMAC idempotency; byte-bound callback before unique allowlisted form parsing."
+        },
+        {
+          "id": "release-fixed-bridge-with-zero-authority-197",
+          "source": "app/services/application_identity_oidc_transport.py",
+          "status": "accepted",
+          "summary": "Discard verified provider identifiers and release only fixed enums through exact-origin postMessage with no grant, session, cookie or product value."
+        }
+      ],
+      "claim_scope": [
+        "Real loopback HTTP plus disposable PostgreSQL proves the mounted provider-free start/callback lifecycle and one-use attempt consumption.",
+        "Generic failure, restrictive bridge headers, zero response residue and complete server/database/two-role cleanup pass.",
+        "Provider, real identity, binding, admission-grant, session and product counts remain zero."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-oidc-start-callback-transport-boundary-plan.md",
+          "docs/raisa-provider-free-oidc-start-callback-transport-boundary-design.md",
+          "docs/security/raisa-provider-free-oidc-start-callback-transport-boundary-threat-model-delta.md"
+        ],
+        "findings": [
+          "app/schemas/application_identity_oidc_transport.py",
+          "app/services/application_identity_oidc_transport.py",
+          "app/routers/application_auth.py",
+          "app/services/application_auth_operational_hardening.py",
+          "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+          "orchestration/continuity/raisa-provider-free-oidc-start-callback-transport-boundary/live-local-http-backend-postgres-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-oidc-start-callback-transport-boundary-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-oidc-start-callback-transport-boundary-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-oidc-start-callback-transport-boundary-rehydration-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-oidc-start-callback-transport-boundary-rehydration-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-oidc-start-callback-transport-boundary-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-oidc-start-callback-transport-boundary-prepush-receipt.json"
+        ],
+        "tests": [
+          "scripts/raisa_provider_free_oidc_start_callback_transport_boundary_acceptance.py",
+          "tests/test_raisa_provider_free_oidc_start_callback_transport_boundary.py",
+          "scripts/raisa_provider_free_oidc_start_callback_transport_boundary_continuity_update.py",
+          "tests/test_raisa_provider_free_oidc_start_callback_transport_boundary_continuity.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The preauthorised provider-free HMAC-only binding resolver and short-lived admission-grant boundary requires a fresh five-source tranche rehydration.",
+        "Atomic admission-grant redemption into the accepted application-session runtime is the following separately rehydrated descendant.",
+        "Live Microsoft, real identity and product reads remain closed.",
+        "Production secret custody, hosted connectivity, distributed abuse resistance and monitoring remain closed.",
+        "Cloud/IAM, deployment, protected integration, production, release and GitHub Pages remain separately closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-02T08:00:00Z"
+  "updated_at": "2026-08-02T10:00:00Z"
 }
