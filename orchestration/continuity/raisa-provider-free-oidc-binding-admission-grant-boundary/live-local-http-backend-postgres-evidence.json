@@ -1,0 +1,99 @@
+{
+  "bridge_contract": {
+    "exact_origin": true,
+    "grant_absent_from_authorization_url": true,
+    "grant_released_once_in_message": true,
+    "grant_status_exact": true,
+    "no_cookie": true,
+    "no_referrer": true,
+    "no_store": true,
+    "status": 200
+  },
+  "claim_limits": [
+    "This proves only provider-free authored-synthetic HMAC binding resolution and one 60-second admission grant over real loopback HTTP and disposable PostgreSQL.",
+    "It establishes no live Microsoft call, real identity, application session, cookie, product read, deployment, production or release authority."
+  ],
+  "cleanup": {
+    "attempt_capability_absent_after": true,
+    "attempt_login_absent_after": true,
+    "binding_roles_absent_after": true,
+    "database_absent_after": true,
+    "identifiers_recorded": false,
+    "passed": true,
+    "server_stopped": true
+  },
+  "data_class": "authored_synthetic",
+  "default_off": true,
+  "evidence_label": "live_local_http_backend_postgres",
+  "evidence_sensitive_match_count": 0,
+  "execution_counts": {
+    "adapter_audit_events": 2,
+    "application_sessions": 0,
+    "denial_audit_events": 0,
+    "product_reads": 0,
+    "protocol_redeem_calls": 1,
+    "protocol_start_calls": 1,
+    "provider_calls": 0,
+    "verifier_calls": 1
+  },
+  "grant_contract": {
+    "active_version_one": true,
+    "authored_synthetic_only": true,
+    "binding_exact": true,
+    "capacity_rolled_back": true,
+    "missing_binding_failed_closed": true,
+    "missing_binding_rejected_audited": true,
+    "one_grant_row": true,
+    "raw_bearer_absent_from_database": true,
+    "raw_grant_hmac_exact": true,
+    "required_audit_failed_closed": true,
+    "resolved_and_issued_audited": true,
+    "surface_origin_target_exact": true,
+    "ttl_exact_seconds": true
+  },
+  "loopback_http": {
+    "ephemeral_port_recorded": false,
+    "host": "127.0.0.1",
+    "real_socket": true,
+    "requests_performed": 2
+  },
+  "migration_head": "s8t9u0v1w2x3",
+  "no_authority_contract": {
+    "application_session_rows": 0,
+    "attempt_rows_after_callback": 0,
+    "product_reads": 0,
+    "provider_calls": 0,
+    "real_identities": 0,
+    "session_cookies": 0
+  },
+  "passed": true,
+  "result": "provider_free_oidc_binding_admission_grant_boundary_pass",
+  "role_contract": {
+    "all_direct_denials_are_insufficient_privilege": true,
+    "denial_sqlstates": {
+      "grant_issuer_binding_select": "42501",
+      "login_binding_select": "42501",
+      "login_set_resolver_owner": "42501",
+      "resolver_call_binding_select": "42501",
+      "resolver_owner_grant_select": "42501"
+    },
+    "issuer_foreign_practice_grants": 0,
+    "issuer_own_practice_grants": 1,
+    "pool_returned_to_login": true,
+    "role_names_recorded": false
+  },
+  "schema_version": "emr4.provider-free-oidc-binding-admission-grant-boundary-evidence.v1",
+  "side_effect_counts": {
+    "admission_grants": 1,
+    "application_sessions": 0,
+    "deployments": 0,
+    "disposable_database_migrations": 1,
+    "disposable_database_writes": "performed",
+    "external_http_or_socket_calls": 0,
+    "loopback_http_requests": 2,
+    "product_or_clinical_reads": 0,
+    "production_changes": 0,
+    "provider_calls": 0,
+    "real_identities": 0
+  }
+}

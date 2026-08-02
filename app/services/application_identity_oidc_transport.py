@@ -10,7 +10,7 @@ import re
 import secrets
 from collections import OrderedDict
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from threading import RLock
 from typing import Callable, Mapping
 from urllib.parse import parse_qsl, parse_qs, urlsplit
@@ -22,6 +22,10 @@ from app.services.application_identity_oidc_adapter import (
     ReturnTarget,
     Surface,
     TwoComponentOIDCAdapter,
+)
+from app.services.application_identity_oidc_admission_grant import (
+    ADMISSION_GRANT_TTL_SECONDS,
+    OIDCAdmissionGrantPort,
 )
 
 
@@ -73,6 +77,7 @@ class OIDCStartCallbackTransport:
         adapter: TwoComponentOIDCAdapter,
         surface_origins: Mapping[Surface, str],
         idempotency_hmac_key: bytes,
+        admission_service: OIDCAdmissionGrantPort | None = None,
         nonce_source: Callable[[], str] | None = None,
         max_start_replays: int = MAX_START_REPLAYS,
     ) -> None:
@@ -90,6 +95,7 @@ class OIDCStartCallbackTransport:
         self._adapter = adapter
         self._surface_origins = origins
         self._idempotency_hmac_key = bytes(idempotency_hmac_key)
+        self._admission_service = admission_service
         self._nonce_source = nonce_source or (lambda: secrets.token_urlsafe(32))
         self._max_start_replays = max_start_replays
         self._replays: OrderedDict[str, _StartReplay] = OrderedDict()
@@ -173,10 +179,11 @@ class OIDCStartCallbackTransport:
     ) -> OIDCBridgePage:
         auth_response = parse_microsoft_callback_form(body, content_type)
         state_reference = self._reference(f"state:{auth_response['state']}")
+        current = _aware_utc(now)
         try:
             completed = self._adapter.complete_authorization_flow(
                 auth_response=auth_response,
-                now=_aware_utc(now),
+                now=current,
             )
         finally:
             self._discard_state_reference(state_reference)
@@ -192,10 +199,32 @@ class OIDCStartCallbackTransport:
             expected_origin,
         ):
             raise OIDCTransportUnavailable()
+        if self._admission_service is None:
+            return self._bridge_page(
+                origin=expected_origin,
+                surface=completed.surface,
+                return_target=completed.return_target,
+                status="authentication_verified",
+                admission_grant=None,
+            )
+        issued = self._admission_service.issue(completed=completed, now=current)
+        if (
+            issued.authorization_granted
+            or issued.session_created
+            or issued.product_data_released
+            or issued.surface is not completed.surface
+            or issued.return_target is not completed.return_target
+            or not hmac.compare_digest(issued.origin, expected_origin)
+            or issued.expires_at
+            != current + timedelta(seconds=ADMISSION_GRANT_TTL_SECONDS)
+        ):
+            raise OIDCTransportUnavailable()
         return self._bridge_page(
             origin=expected_origin,
             surface=completed.surface,
             return_target=completed.return_target,
+            status="admission_grant_issued",
+            admission_grant=issued.raw_grant,
         )
 
     def replay_count(self) -> int:
@@ -234,16 +263,20 @@ class OIDCStartCallbackTransport:
         origin: str,
         surface: Surface,
         return_target: ReturnTarget,
+        status: str,
+        admission_grant: str | None,
     ) -> OIDCBridgePage:
         nonce = self._nonce_source()
         if not isinstance(nonce, str) or not _CSP_NONCE.fullmatch(nonce):
             raise OIDCTransportUnavailable()
         message = {
             "type": "emr4.oidc.callback",
-            "status": "authentication_verified",
+            "status": status,
             "surface": surface.value,
             "return_target": return_target.value,
         }
+        if admission_grant is not None:
+            message["admission_grant"] = admission_grant
         encoded_message = _script_json(message)
         encoded_origin = _script_json(origin)
         escaped_nonce = html.escape(nonce, quote=True)

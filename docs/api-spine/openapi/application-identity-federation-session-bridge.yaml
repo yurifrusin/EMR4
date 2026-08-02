@@ -1,26 +1,28 @@
 openapi: 3.1.0
 info:
   title: EMR4 application identity federation session bridge
-  version: 0.3.0-provider-free-start-callback
+  version: 0.4.0-provider-free-binding-grant
   description: >-
     The start/callback subset is mounted default-off for provider-free
-    authored-synthetic transport verification. Admission-grant handoff and
-    application-session creation remain future commands. It grants no live
-    provider, real identity, binding, session, product, deployment, production
-    or release authority.
+    authored-synthetic transport verification. An explicitly injected local
+    service may resolve one HMAC-only authored-synthetic binding and return one
+    exact-origin 60-second admission grant. Redemption and application-session
+    creation remain future commands. It grants no live provider, real identity,
+    session, product, deployment, production or release authority.
 servers: []
 tags:
   - name: Application identity federation
     description: External protocol and one-use session bridge; not GraphQL.
 x-emr4-authority:
-  status: provider_free_start_callback_mounted_default_off
+  status: provider_free_binding_grant_mounted_default_off
   provider_calls: 0
   identity_records: authored_synthetic_only
   product_reads: 0
   session_cookies_issued: 0
-  database_objects_added: 0
+  database_tables_added: 1
+  security_definer_resolvers_added: 1
   routes_added: 2
-  admission_grants_issued: 0
+  admission_grants_issued: authored_synthetic_acceptance_only
   dependencies_added: 3
   deployments: 0
   closed:
@@ -34,6 +36,7 @@ x-emr4-api-spine:
   graphql_mutation: forbidden
   start: external_rest_protocol_command
   callback: provider_rest_protocol_boundary
+  callback_internal_service: hmac_only_binding_and_admission_grant
   redeem: one_use_rest_session_command
   binding_status: future_redacted_graphql_read_model_only
   binding_lifecycle: future_dual_authorised_rest_commands_closed
@@ -117,10 +120,11 @@ paths:
         posts callback parameters using
         response_mode=form_post. The server passes them once with the stored
         MSAL flow record, then passes only the transient raw ID token to the
-        independent Authlib verifier. The current no-store bridge sends only a
-        fixed verification-complete message to the exact original surface
-        origin. The future 60-second admission grant remains closed; no
-        credential is placed in a URL, browser storage, log or HTML.
+        independent Authlib verifier. When the task-scoped admission service is
+        injected, an exact HMAC-only active binding is resolved with required
+        audit and a 256-bit, 60-second admission grant is issued atomically. The
+        no-store bridge sends the raw grant only in its exact-origin message
+        body. No credential is placed in a URL, cookie, browser storage or log.
       requestBody:
         required: true
         content:
@@ -130,8 +134,10 @@ paths:
       responses:
         '200':
           description: >-
-            No-store exact-origin verification-complete bridge page with no
-            binding, admission grant, session or product authority.
+            No-store exact-origin bridge page containing one 60-second
+            admission grant but no application session, cookie or product
+            authority. A transport instance without the injected service
+            retains the parent verification-only proof mode.
           headers:
             Cache-Control: {$ref: '#/components/headers/NoStore'}
             Referrer-Policy:

@@ -96,7 +96,8 @@ def test_user_decisions_preserve_consumed_tranches_and_current_next_gate() -> No
     transport_gate = decisions[
         "authorize-provider-free-oidc-start-callback-transport-boundary"
     ]
-    assert "mounted OIDC start/callback route" in transport_gate["required_before"]
+    assert "Satisfied on 2026-08-02" in transport_gate["required_before"]
+    assert transport_gate["evidence"]
 
 
 def test_graph_evidence_preserves_branding_and_live_identity_exclusions() -> None:

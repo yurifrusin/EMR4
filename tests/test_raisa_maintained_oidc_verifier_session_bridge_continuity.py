@@ -82,7 +82,8 @@ def test_completed_architecture_adapter_and_attempt_store_leave_runtime_edges_cl
     transport_gate = decisions[
         "authorize-provider-free-oidc-start-callback-transport-boundary"
     ]
-    assert "mounted OIDC start/callback route" in transport_gate["required_before"]
+    assert "Satisfied on 2026-08-02" in transport_gate["required_before"]
+    assert transport_gate["evidence"]
 
 
 def test_live_handover_records_exact_result_and_closed_gates() -> None:
@@ -92,9 +93,9 @@ def test_live_handover_records_exact_result_and_closed_gates() -> None:
         "Two-component OIDC verifier architecture revision acceptance",
         "Two-component OIDC runtime adapter acceptance",
         "PostgreSQL OIDC authorization-attempt store acceptance",
-        "postgresql_oidc_operational_connection_boundary_pass",
-        "Continuity graph revision 196",
-        "Compass map revision 177",
+        "provider_free_oidc_binding_admission_grant_boundary_pass",
+        "Continuity graph revision 198",
+        "Compass map revision 179",
         "PostgreSQL OIDC operational connection boundary acceptance",
         "any further Pages rebuild remain closed",
     ):

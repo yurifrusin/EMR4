@@ -59,7 +59,7 @@
       "voice"
     ]
   },
-  "graph_revision": 197,
+  "graph_revision": 198,
   "harvests": [],
   "nodes": [
     {
@@ -10829,9 +10829,111 @@
         "Production secret custody, hosted connectivity, distributed abuse resistance and monitoring remain closed.",
         "Cloud/IAM, deployment, protected integration, production, release and GitHub Pages remain separately closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-oidc-binding-admission-grant-boundary",
+      "title": "Raisa Provider-Free OIDC Binding and Admission-Grant Boundary",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-02T12:00:00Z",
+      "updated_at": "2026-08-02T12:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/raisa-provider-free-oidc-binding-admission-grant-boundary",
+        "source_head": "9a562c97b1761e61aa7614517d7ef4de5384703b",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-oidc-start-callback-transport-boundary",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-provider-free-oidc-binding-admission-grant-boundary-plan.md",
+            "scope": "Resolve one provider-free authored-synthetic Microsoft principal through exact HMAC-only PostgreSQL authority and issue one exact-origin 60-second admission grant without a session or product read."
+          }
+        ],
+        "notes": [
+          "Yuri preauthorised this descendant and the following atomic redemption descendant unless a material directional choice arises.",
+          "No live Microsoft call, real identity, application session, cookie, product read, deployment, production or release occurred.",
+          "The user-owned docs/branding directory remained untracked, unstaged and excluded."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "split-binding-resolver-and-grant-issuer-198",
+          "source": "app/services/application_identity_oidc_binding_database_role.py",
+          "status": "accepted",
+          "summary": "Separate resolver-call and grant-issuer capabilities behind one finite NOINHERIT login while keeping the security-definer owner ungranted and NOLOGIN."
+        },
+        {
+          "id": "require-hmac-only-exact-subject-binding-198",
+          "source": "alembic/versions/s8t9u0v1w2x3_add_federation_admission_grants.py",
+          "status": "accepted",
+          "summary": "Resolve issuer, tenant, object and subject HMACs under forced RLS and append resolved or rejected audit before returning any internal references."
+        },
+        {
+          "id": "release-60-second-audited-grant-only-198",
+          "source": "app/services/application_identity_oidc_admission_grant.py",
+          "status": "accepted",
+          "summary": "Store only a separately keyed grant HMAC, force issued audit through a database trigger, and release the raw 256-bit bearer once through the exact-origin bridge."
+        }
+      ],
+      "claim_scope": [
+        "Real loopback HTTP and disposable PostgreSQL prove exact HMAC binding resolution, a 60-second authored-synthetic grant, required audit and complete six-role/database/server cleanup.",
+        "Direct login, resolver-call, grant-issuer and resolver-owner privilege probes deny every out-of-scope table edge under forced RLS.",
+        "Provider calls, real identities, application sessions, cookies and product reads remain zero."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-oidc-binding-admission-grant-boundary-plan.md",
+          "docs/raisa-provider-free-oidc-binding-admission-grant-boundary-design.md",
+          "docs/security/raisa-provider-free-oidc-binding-admission-grant-boundary-threat-model-delta.md"
+        ],
+        "findings": [
+          "app/models/application_identity_federation.py",
+          "alembic/versions/s8t9u0v1w2x3_add_federation_admission_grants.py",
+          "app/services/application_identity_oidc_binding_database_role.py",
+          "app/services/application_identity_oidc_binding_operational.py",
+          "app/services/application_identity_oidc_admission_grant.py",
+          "app/services/application_identity_oidc_transport.py",
+          "docs/api-spine/openapi/application-identity-federation-session-bridge.yaml",
+          "orchestration/continuity/raisa-provider-free-oidc-binding-admission-grant-boundary/live-local-http-backend-postgres-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-oidc-binding-admission-grant-boundary-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-oidc-binding-admission-grant-boundary-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-oidc-binding-admission-grant-boundary-rehydration-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-oidc-binding-admission-grant-boundary-rehydration-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-oidc-binding-admission-grant-boundary-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-oidc-binding-admission-grant-boundary-prepush-receipt.json"
+        ],
+        "tests": [
+          "scripts/raisa_provider_free_oidc_binding_admission_grant_boundary_acceptance.py",
+          "tests/test_raisa_provider_free_oidc_binding_admission_grant_boundary.py",
+          "scripts/raisa_provider_free_oidc_binding_admission_grant_boundary_continuity_update.py",
+          "tests/test_raisa_provider_free_oidc_binding_admission_grant_boundary_continuity.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The preauthorised atomic admission-grant redemption bridge requires a fresh five-source tranche rehydration.",
+        "Redemption must re-resolve binding version and load fresh internal principal truth before atomic grant consumption and session commit.",
+        "Live Microsoft, real identity and product reads remain closed.",
+        "Production secret custody, hosted connectivity, distributed abuse resistance and monitoring remain closed.",
+        "Cloud/IAM, deployment, protected integration, production, release and GitHub Pages remain separately closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-02T10:00:00Z"
+  "updated_at": "2026-08-02T12:00:00Z"
 }
