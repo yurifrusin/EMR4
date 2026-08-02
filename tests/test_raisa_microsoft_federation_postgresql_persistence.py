@@ -92,7 +92,11 @@ def test_migration_is_reversible_single_head_descendant() -> None:
     assert "GRANT" not in source
     config = Config(str(ROOT / "alembic.ini"))
     script = ScriptDirectory.from_config(config)
-    assert script.get_heads() == ["q6r7s8t9u0v1"]
+    heads = script.get_heads()
+    assert len(heads) == 1
+    assert "q6r7s8t9u0v1" in {
+        revision.revision for revision in script.walk_revisions()
+    }
 
 
 def test_repository_is_route_free_and_has_no_network_or_product_import() -> None:

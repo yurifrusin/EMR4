@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 now has a dormant two-component Microsoft OIDC runtime foundation: MSAL owns one-use code-flow mechanics and Authlib/JOSE RFC independently owns signed-token admission. Continuity 194 / Compass 175 bind twenty-five provider-free cases. Durable persistence, routes, live identity, bindings, sessions, product access, deployment, production and release remain closed.
+> EMR4 now has a dormant durable Microsoft OIDC attempt foundation: one forced-RLS PostgreSQL table stores only versioned state/nonce HMAC references and an authenticated-encryption envelope, and DELETE RETURNING commits exact one-use consumption before exchange. Continuity 195 / Compass 176 bind the provider-free result. Operational credentials/pool, routes, live identity, bindings, sessions, product access, deployment, production and release remain closed.
 
 ## North star
 
@@ -162,30 +162,32 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The architecture now separates MSAL protocol mechanics from Authlib/JOSE RFC verification, admits exact reviewed pins, uses form_post and passes seventeen offline cases. Lineage parent: `raisa-maintained-oidc-verifier-session-bridge-architecture`.
 73. **Implement the dormant two-component identity-verification seam without opening identity authority — Raisa Two-Component OIDC Runtime Adapter**
    The default-off route-free adapter now enforces encrypted one-use MSAL flow handling and independent Authlib verification across twenty-five provider-free cases. Lineage parent: `raisa-two-component-oidc-verifier-architecture-revision`.
+74. **Make one-use OIDC attempts durable across processes without opening a route or identity authority — Raisa PostgreSQL OIDC Authorization-Attempt Store**
+   A synthetic-only forced-RLS PostgreSQL store now preserves encrypted flow material and exact cross-session consume-before-exchange semantics. Lineage parent: `raisa-two-component-oidc-runtime-adapter`.
 
 ## Current position
 
-**Provider-free Microsoft OIDC protocol and verification runtime foundation — Raisa Two-Component OIDC Runtime Adapter**
+**Provider-free durable Microsoft OIDC authorization-attempt foundation — Raisa PostgreSQL OIDC Authorization-Attempt Store**
 
-**Why this proof came next:** The corrected component ownership and reviewed dependencies were accepted and Yuri authorised their next implementation candidate.
+**Why this proof came next:** The route-free adapter exposed a frozen persistence port and Yuri authorised its durable PostgreSQL descendant.
 
-A dormant application service now proves the exact MSAL/Authlib seam, one-use encrypted process-local attempts and normalized failure/audit behavior without a route or provider call.
+One encrypted authored-synthetic attempt table, versioned keyrings, bounded capacity/expiry and exact NOLOGIN role/RLS pass disposable local PostgreSQL acceptance.
 
 ### What this unlocks
 
-- Review the route-free runtime adapter on its stacked draft pull request.
-- Seek fresh authority for a provider-free durable PostgreSQL authorization-attempt store behind the same port.
+- Review the durable attempt-store result on its stacked draft pull request.
+- Seek fresh authority for a provider-free finite LOGIN/pool and runtime key-provider configuration boundary.
 
 ### What it does not solve
 
-- Distributed/durable attempt atomicity, callback routes, CSRF/origin edge or browser handoff.
-- Live Microsoft behavior, tenant configuration, credential custody or real identity.
-- Identity bindings, application sessions, product authorization, deployment, production or release.
+- Deployment credentials/pool, mounted callback routes, CSRF/origin edge or browser handoff.
+- Live Microsoft behavior, real tenant/identity, binding or application session issuance.
+- Product authorization/read access, distributed abuse resistance, monitoring, deployment, production or release.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Bounded opening `api-change`: Implement the provider-free default-off MSAL/Authlib adapter behind the frozen ports and fault matrix.
+- Bounded opening `api-change`: Implement provider-free durable encrypted authorization attempts with exact atomic consume, bounded expiry/capacity and least-privilege role/RLS.
 - All other named boundaries remain closed: `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -403,10 +405,13 @@ Prerequisites:
 - **Should EMR4 implement the provider-free MSAL/Authlib adapter behind the frozen two-component seam?**
   Required before: Satisfied on 2026-08-02 only for the default-off route-free provider-free adapter. Routes, live Microsoft, real identity, database changes, sessions and product reads remain closed.
 - **Should EMR4 implement a provider-free PostgreSQL authorization-attempt store behind the accepted OIDC adapter port?**
-  Required before: Any database migration, role/function/grant or durable attempt write. Routes, live Microsoft, real identity, bindings, sessions and product reads remain separately closed.
+  Required before: Satisfied on 2026-08-02 only for the provider-free authored-synthetic PostgreSQL attempt store. Operational LOGIN/pool, routes, live Microsoft, real identity, bindings, sessions and product reads remain closed.
+- **Should EMR4 add the provider-free finite LOGIN/pool and runtime key-provider configuration boundary for the accepted PostgreSQL OIDC attempt store?**
+  Required before: Any durable attempt-store deployment connection or runtime key configuration. Routes, live Microsoft, real identity, bindings, sessions and product reads remain separately closed.
 
 ## Map limits
 
+- The PostgreSQL OIDC attempt-store result is provider-free and authored-synthetic only; it has no deployment LOGIN/pool, runtime key custody, route or live identity authority.
 - The OIDC runtime-adapter result is default-off, route-free and provider-free; its encrypted attempt store is process-local and not deployable distributed persistence.
 - The two-component verifier result is architecture and offline dependency admission only; it proves no application adapter, live provider behavior or real identity.
 - The maintained OIDC/bootstrap/session-bridge result is architecture-only. It proves no dependency installation, live provider behavior, real identity, database capability, session, product access or deployment.
@@ -469,7 +474,9 @@ Prerequisites:
 - `.github/workflows/pages.yml`
 - `alembic/versions/o4p5q6r7s8t9_add_application_auth_persistence.py`
 - `alembic/versions/q6r7s8t9u0v1_add_application_identity_federation_persistence.py`
+- `alembic/versions/r7s8t9u0v1w2_add_oidc_authorization_attempt_store.py`
 - `app/models/application_auth.py`
+- `app/models/application_identity_oidc_attempt.py`
 - `app/routers/application_auth.py`
 - `app/services/application_auth_database_role.py`
 - `app/services/application_auth_operational_database.py`
@@ -480,6 +487,8 @@ Prerequisites:
 - `app/services/application_identity_federation.py`
 - `app/services/application_identity_federation_persistence.py`
 - `app/services/application_identity_oidc_adapter.py`
+- `app/services/application_identity_oidc_attempt_database_role.py`
+- `app/services/application_identity_oidc_attempt_store.py`
 - `deploy/raisa-office-web-dev/Dockerfile`
 - `deploy/raisa-office-web-dev/manifest-template.xml`
 - `deploy/raisa-office-web-dev/server.mjs`
@@ -625,6 +634,9 @@ Prerequisites:
 - `docs/raisa-microsoft-federation-admission-runtime-plan.md`
 - `docs/raisa-microsoft-federation-postgresql-persistence-closeout.md`
 - `docs/raisa-microsoft-federation-postgresql-persistence-plan.md`
+- `docs/raisa-postgresql-oidc-authorization-attempt-store-closeout.md`
+- `docs/raisa-postgresql-oidc-authorization-attempt-store-design.md`
+- `docs/raisa-postgresql-oidc-authorization-attempt-store-plan.md`
 - `docs/raisa-real-identity-microsoft-federation-boundary-closeout.md`
 - `docs/raisa-real-identity-microsoft-federation-boundary-design.md`
 - `docs/raisa-real-identity-microsoft-federation-boundary-plan.md`
@@ -678,6 +690,7 @@ Prerequisites:
 - `docs/security/raisa-microsoft-federation-admission-runtime-threat-model-delta.md`
 - `docs/security/raisa-microsoft-federation-postgresql-persistence-threat-model-delta.md`
 - `docs/security/raisa-oidc-verifier-dependency-review-2026-08-02.md`
+- `docs/security/raisa-postgresql-oidc-authorization-attempt-store-threat-model-delta.md`
 - `docs/security/raisa-real-identity-microsoft-federation-boundary-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-clinician-role-boundary-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-office-cookie-compatibility-threat-model-delta.md`
@@ -908,6 +921,7 @@ Prerequisites:
 - `orchestration/continuity/raisa-maintained-oidc-verifier-session-bridge-architecture/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-microsoft-federation-admission-runtime/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-microsoft-federation-postgresql-persistence/live-local-backend-postgres-evidence.json`
+- `orchestration/continuity/raisa-postgresql-oidc-authorization-attempt-store/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-real-identity-microsoft-federation-boundary/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/auth-boundary-policy.json`
 - `orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/provider-free-acceptance-evidence.json`
@@ -1233,4 +1247,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 175; continuity graph revision 194._
+_Compass map revision 176; continuity graph revision 195._

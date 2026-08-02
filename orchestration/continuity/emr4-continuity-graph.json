@@ -59,7 +59,7 @@
       "voice"
     ]
   },
-  "graph_revision": 194,
+  "graph_revision": 195,
   "harvests": [],
   "nodes": [
     {
@@ -10521,9 +10521,114 @@
         "Binding resolution, application sessions, product reads, deployment, production and release remain closed.",
         "Protected integration and GitHub Pages remain separately closed."
       ]
+    },
+    {
+      "id": "raisa-postgresql-oidc-authorization-attempt-store",
+      "title": "Raisa PostgreSQL OIDC Authorization-Attempt Store",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-02T07:00:00Z",
+      "updated_at": "2026-08-02T07:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/raisa-postgresql-oidc-authorization-attempt-store",
+        "source_head": "e3a0cb7b8259250dd021924df05c70d9f9ab576c",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-two-component-oidc-runtime-adapter",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-postgresql-oidc-authorization-attempt-store-plan.md",
+            "scope": "Implement provider-free durable encrypted authorization attempts with exact atomic consume, bounded expiry/capacity and least-privilege role/RLS."
+          }
+        ],
+        "notes": [
+          "Yuri explicitly authorised the next tranche as described after the route-free adapter passed.",
+          "No route, provider call, real identity, binding, application session, product read, deployment, production or release occurred.",
+          "The user-owned docs/branding directory remained untracked, unstaged and excluded."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "persist-encrypted-oidc-attempts-195",
+          "source": "app/services/application_identity_oidc_attempt_store.py",
+          "status": "accepted",
+          "summary": "Persist only state/nonce HMAC references plus a versioned authenticated-encryption envelope and exact five-minute metadata."
+        },
+        {
+          "id": "consume-before-exchange-with-delete-returning-195",
+          "source": "docs/raisa-postgresql-oidc-authorization-attempt-store-design.md",
+          "status": "accepted",
+          "summary": "Commit one DELETE RETURNING before expiry/decrypt checks or provider exchange so replay, corruption and concurrency are terminal."
+        },
+        {
+          "id": "bound-attempt-capability-with-role-and-rls-195",
+          "source": "app/services/application_identity_oidc_attempt_database_role.py",
+          "status": "accepted",
+          "summary": "Give an exact NOLOGIN capability role only select/insert/delete on the forced-RLS attempt table; grant no update or product access."
+        },
+        {
+          "id": "keep-routes-identity-session-product-closed-195",
+          "source": "docs/raisa-postgresql-oidc-authorization-attempt-store-closeout.md",
+          "status": "accepted",
+          "summary": "Durable authored-synthetic attempts add no route, live identity, binding, session or product authority."
+        }
+      ],
+      "claim_scope": [
+        "Disposable loopback PostgreSQL proves migration reversibility, exact grants, forced RLS and complete database/role cleanup.",
+        "Two concurrent callbacks produce one deletion, one synthetic exchange, one verification and one bounded principal release.",
+        "Rotation, expiry, capacity, collision, audit cleanup and tamper cases pass with no raw flow/key residue in an active row."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-postgresql-oidc-authorization-attempt-store-plan.md",
+          "docs/raisa-postgresql-oidc-authorization-attempt-store-design.md",
+          "docs/security/raisa-postgresql-oidc-authorization-attempt-store-threat-model-delta.md"
+        ],
+        "findings": [
+          "app/services/application_identity_oidc_adapter.py",
+          "app/models/application_identity_oidc_attempt.py",
+          "alembic/versions/r7s8t9u0v1w2_add_oidc_authorization_attempt_store.py",
+          "app/services/application_identity_oidc_attempt_database_role.py",
+          "app/services/application_identity_oidc_attempt_store.py",
+          "orchestration/continuity/raisa-postgresql-oidc-authorization-attempt-store/live-local-backend-postgres-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-postgresql-oidc-authorization-attempt-store-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-postgresql-oidc-authorization-attempt-store-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-postgresql-oidc-authorization-attempt-store-rehydration-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-postgresql-oidc-authorization-attempt-store-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-postgresql-oidc-authorization-attempt-store-prepush-receipt.json"
+        ],
+        "tests": [
+          "scripts/raisa_postgresql_oidc_authorization_attempt_store_acceptance.py",
+          "tests/test_raisa_postgresql_oidc_authorization_attempt_store.py",
+          "scripts/raisa_postgresql_oidc_authorization_attempt_store_continuity_update.py",
+          "tests/test_raisa_postgresql_oidc_authorization_attempt_store_continuity.py"
+        ]
+      },
+      "unresolved_gates": [
+        "A finite deployment LOGIN, exact pool SET ROLE and runtime key-provider/configuration seam require fresh authority.",
+        "Any start/callback route, CSRF/origin edge, callback page or admission-grant bridge requires later separate authority.",
+        "Live Microsoft and real identity require later separate authority.",
+        "Binding resolution, application sessions, product reads, monitoring, deployment, production and release remain closed.",
+        "Protected integration and GitHub Pages remain separately closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-02T05:00:00Z"
+  "updated_at": "2026-08-02T07:00:00Z"
 }

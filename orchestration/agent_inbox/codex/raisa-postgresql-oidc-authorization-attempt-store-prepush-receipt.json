@@ -1,0 +1,33 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "push",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "The complete AGENTS.md read and current baton were retained through implementation and verifier acceptance.",
+    "current_authority_allocation": "Yuri authorised this exact provider-free PostgreSQL attempt-store tranche and necessary task-branch publication; protected refs, deployment and release remain closed.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-postgresql-oidc-authorization-attempt-store-plan.md",
+      "docs/raisa-postgresql-oidc-authorization-attempt-store-design.md",
+      "docs/security/raisa-postgresql-oidc-authorization-attempt-store-threat-model-delta.md",
+      "orchestration/continuity/raisa-postgresql-oidc-authorization-attempt-store/live-local-backend-postgres-evidence.json",
+      "docs/raisa-postgresql-oidc-authorization-attempt-store-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-postgresql-oidc-authorization-attempt-store-sol-acceptance.md",
+      "tests/test_raisa_postgresql_oidc_authorization_attempt_store.py"
+    ],
+    "protected_evidence_boundaries": "No protected holdout, live provider, real identity, mounted route, binding, session, product read, cloud/IAM, deployment, production, release, protected-ref or Pages action. docs/branding remains excluded from staging, tests and evidence.",
+    "git_refs_and_worktree": "Task branch remains based on accepted parent e3a0cb7b8259250dd021924df05c70d9f9ab576c. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only authorised tranche files plus unrelated untracked docs/branding are present before explicit staging."
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

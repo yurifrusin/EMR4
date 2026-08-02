@@ -494,6 +494,28 @@ class _StoredAttempt:
     nonce_digest: str
 
 
+class AuthorizationAttemptStore(Protocol):
+    """Persistence port for one-use authorization attempts."""
+
+    def store(
+        self,
+        *,
+        flow: Mapping[str, Any],
+        surface: Surface,
+        origin: str,
+        return_target: ReturnTarget,
+        now: datetime,
+        ttl_seconds: int,
+    ) -> tuple[str, datetime]:
+        raise NotImplementedError
+
+    def consume(self, *, state: str, now: datetime) -> _ConsumedAttempt:
+        raise NotImplementedError
+
+    def discard(self, *, state: str) -> None:
+        raise NotImplementedError
+
+
 class EncryptedAuthorizationAttemptStore:
     """Bounded provider-free store; replaceable by a later authorised port."""
 
@@ -630,7 +652,7 @@ class TwoComponentOIDCAdapter:
         config: MicrosoftOIDCAdapterConfig,
         protocol_client: MSALAuthorizationCodePort,
         verifier: IDTokenVerifierPort,
-        attempt_store: EncryptedAuthorizationAttemptStore,
+        attempt_store: AuthorizationAttemptStore,
         audit_sink: OIDCAdapterAuditSink,
     ) -> None:
         self._config = config
@@ -1090,6 +1112,7 @@ __all__ = [
     "VERIFIED_SOURCE",
     "AuthlibIDTokenVerifier",
     "AuthlibOpenIDClient",
+    "AuthorizationAttemptStore",
     "AuthorizationStart",
     "CompletedAuthorization",
     "EncryptedAuthorizationAttemptStore",
