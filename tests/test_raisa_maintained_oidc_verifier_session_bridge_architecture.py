@@ -193,11 +193,15 @@ def test_acceptance_has_exactly_zero_external_or_runtime_side_effects() -> None:
     assert set(side_effects.values()) == {0}
 
 
-def test_openapi_is_non_mounted_rest_only_and_sets_cookie_after_commit() -> None:
+def test_openapi_mounts_only_default_off_transport_and_retains_future_commit() -> None:
     contract = yaml.safe_load(OPENAPI_PATH.read_text(encoding="utf-8"))
     assert contract["openapi"] == "3.1.0"
     assert contract["servers"] == []
-    assert contract["x-emr4-authority"]["status"] == "architecture_only_not_mounted"
+    authority = contract["x-emr4-authority"]
+    assert authority["status"] == "provider_free_start_callback_mounted_default_off"
+    assert authority["routes_added"] == 2
+    assert authority["admission_grants_issued"] == 0
+    assert authority["session_cookies_issued"] == 0
     assert contract["x-emr4-api-spine"]["graphql_mutation"] == "forbidden"
     assert set(contract["paths"]) == {
         "/api/v1/application-auth/federation/microsoft/start",

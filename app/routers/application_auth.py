@@ -20,8 +20,12 @@ from fastapi import (
     status,
 )
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.routing import APIRoute
+from app.schemas.application_identity_oidc_transport import (
+    MicrosoftOIDCStartRequest,
+    MicrosoftOIDCStartResponse,
+)
 from app.schemas.application_auth_transport import (
     CsrfResponse,
     ExchangeIssueRequest,
@@ -47,6 +51,15 @@ from app.services.application_auth_operational_hardening import (
     RequiredTransportDenialAuditUnavailable,
     TransportRateLimited,
 )
+from app.services.application_identity_oidc_transport import (
+    MAX_CALLBACK_BODY_BYTES,
+    OIDCAuthenticationFailed,
+    OIDCStartCallbackTransport,
+    OIDCTemporarilyUnavailable,
+    OIDCTransportRequestDenied,
+    OIDCTransportRequestInvalid,
+    OIDCTransportUnavailable,
+)
 
 
 AUTHENTICATION_FAILED = "application_authentication_failed"
@@ -54,6 +67,10 @@ REQUEST_NOT_ADMITTED = "request_not_admitted"
 AUTHENTICATION_UNAVAILABLE = "authentication_temporarily_unavailable"
 TRANSPORT_UNAVAILABLE = "application_auth_transport_unavailable"
 REQUEST_RATE_LIMITED = "request_rate_limited"
+OIDC_AUTHENTICATION_FAILED = "authentication_failed"
+OIDC_AUTHENTICATION_UNAVAILABLE = "authentication_temporarily_unavailable"
+
+_OIDC_START_PATH = "/api/v1/application-auth/federation/microsoft/start"
 
 _NO_STORE_HEADERS = {
     "Cache-Control": "no-store",
@@ -75,6 +92,14 @@ def _error_response(
         status_code=status_code,
         content={"detail": detail},
         headers=headers,
+    )
+
+
+def _oidc_error_response(status_code: int, error: str) -> JSONResponse:
+    return JSONResponse(
+        status_code=status_code,
+        content={"error": error},
+        headers=_NO_STORE_HEADERS,
     )
 
 
@@ -110,6 +135,33 @@ def _denied_response(
     )
 
 
+def _oidc_denied_response(
+    request: Request,
+    *,
+    status_code: int,
+    error: str,
+    reason_code: str,
+) -> JSONResponse:
+    guard = getattr(
+        request.state,
+        "application_auth_operational_hardening",
+        None,
+    )
+    if not isinstance(guard, ApplicationAuthOperationalHardening):
+        return _oidc_error_response(
+            status.HTTP_503_SERVICE_UNAVAILABLE,
+            OIDC_AUTHENTICATION_UNAVAILABLE,
+        )
+    try:
+        guard.record_denial(request, reason_code)
+    except RequiredTransportDenialAuditUnavailable:
+        return _oidc_error_response(
+            status.HTTP_503_SERVICE_UNAVAILABLE,
+            OIDC_AUTHENTICATION_UNAVAILABLE,
+        )
+    return _oidc_error_response(status_code, error)
+
+
 class _ApplicationAuthRoute(APIRoute):
     """Collapse route failures without logging or returning supplied values."""
 
@@ -120,6 +172,13 @@ class _ApplicationAuthRoute(APIRoute):
             try:
                 return await original(request)
             except RequestValidationError:
+                if request.url.path == _OIDC_START_PATH:
+                    return _oidc_denied_response(
+                        request,
+                        status_code=status.HTTP_400_BAD_REQUEST,
+                        error=OIDC_AUTHENTICATION_FAILED,
+                        reason_code="oidc_transport_request_invalid",
+                    )
                 return _denied_response(
                     request,
                     status_code=status.HTTP_401_UNAUTHORIZED,
@@ -140,6 +199,32 @@ class _ApplicationAuthRoute(APIRoute):
                     detail=REQUEST_RATE_LIMITED,
                     reason_code="transport_rate_limited",
                     extra_headers={"Retry-After": str(exc.retry_after_seconds)},
+                )
+            except OIDCTransportRequestDenied:
+                return _oidc_denied_response(
+                    request,
+                    status_code=status.HTTP_403_FORBIDDEN,
+                    error=OIDC_AUTHENTICATION_FAILED,
+                    reason_code="oidc_transport_request_not_admitted",
+                )
+            except OIDCTransportRequestInvalid:
+                return _oidc_denied_response(
+                    request,
+                    status_code=status.HTTP_401_UNAUTHORIZED,
+                    error=OIDC_AUTHENTICATION_FAILED,
+                    reason_code="oidc_transport_request_invalid",
+                )
+            except OIDCAuthenticationFailed:
+                return _oidc_denied_response(
+                    request,
+                    status_code=status.HTTP_401_UNAUTHORIZED,
+                    error=OIDC_AUTHENTICATION_FAILED,
+                    reason_code="oidc_authentication_failed",
+                )
+            except (OIDCTemporarilyUnavailable, OIDCTransportUnavailable):
+                return _oidc_error_response(
+                    status.HTTP_503_SERVICE_UNAVAILABLE,
+                    OIDC_AUTHENTICATION_UNAVAILABLE,
                 )
             except TransportAuthenticationUnavailable:
                 return _error_response(
@@ -169,6 +254,16 @@ def get_application_auth_transport() -> ApplicationAuthTransport:
 def get_application_auth_operational_hardening(
 ) -> ApplicationAuthOperationalHardening:
     """Fail closed until the bounded operational guard is explicitly injected."""
+
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail=TRANSPORT_UNAVAILABLE,
+        headers=_NO_STORE_HEADERS,
+    )
+
+
+def get_application_identity_oidc_transport() -> OIDCStartCallbackTransport:
+    """Fail closed until a task-scoped provider-free transport is injected."""
 
     raise HTTPException(
         status_code=status.HTTP_404_NOT_FOUND,
@@ -249,6 +344,63 @@ def issue_csrf(
     )
     _apply_no_store(response)
     return CsrfResponse(csrf_token=csrf_token, surface=body.surface)
+
+
+@router.post(
+    "/federation/microsoft/start",
+    response_model=MicrosoftOIDCStartResponse,
+    status_code=status.HTTP_201_CREATED,
+)
+def start_microsoft_federation(
+    body: MicrosoftOIDCStartRequest,
+    response: Response,
+    origin: str | None = Header(default=None, alias="Origin"),
+    csrf_header: str | None = Header(default=None, alias=CSRF_HEADER_NAME),
+    csrf_cookie: str | None = Cookie(default=None, alias=CSRF_COOKIE_NAME),
+    idempotency_key: str | None = Header(default=None, alias="Idempotency-Key"),
+    transport: OIDCStartCallbackTransport = Depends(
+        get_application_identity_oidc_transport
+    ),
+) -> MicrosoftOIDCStartResponse:
+    started = transport.start(
+        surface=body.surface,
+        return_target=body.return_target,
+        origin=origin,
+        csrf_cookie=csrf_cookie,
+        csrf_header=csrf_header,
+        idempotency_key=idempotency_key,
+    )
+    _apply_no_store(response)
+    return MicrosoftOIDCStartResponse(
+        authorization_uri=started.authorization_uri,
+        attempt_expires_at=started.attempt_expires_at,
+    )
+
+
+@router.post(
+    "/federation/microsoft/callback",
+    response_class=HTMLResponse,
+)
+async def complete_microsoft_federation(
+    request: Request,
+    transport: OIDCStartCallbackTransport = Depends(
+        get_application_identity_oidc_transport
+    ),
+) -> HTMLResponse:
+    body = bytearray()
+    async for chunk in request.stream():
+        if len(body) + len(chunk) > MAX_CALLBACK_BODY_BYTES:
+            raise OIDCTransportRequestInvalid()
+        body.extend(chunk)
+    bridge = transport.complete(
+        body=bytes(body),
+        content_type=request.headers.get("content-type"),
+    )
+    return HTMLResponse(
+        content=bridge.html,
+        status_code=status.HTTP_200_OK,
+        headers=dict(bridge.headers),
+    )
 
 
 @router.post("/synthetic/session", response_model=SessionResponse)
@@ -438,5 +590,6 @@ __all__ = [
     "TRANSPORT_UNAVAILABLE",
     "get_application_auth_operational_hardening",
     "get_application_auth_transport",
+    "get_application_identity_oidc_transport",
     "router",
 ]

@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan_implement_verify_and_publish_the_authorised_default_off_provider_free_oidc_start_callback_transport_boundary_without_live_microsoft_real_identity_binding_session_product_access_or_deployment",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_provider_free_oidc_start_callback_transport_boundary_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: AGENTS.md SHA-256 2DB01CF3CA9DEC828E38CE2FFE9B91231076707379B09B104BE03DF7364EA203 was reread completely; the accepted parent is postgresql_oidc_operational_connection_boundary_pass at Continuity 196 and Compass 177, and the next named candidate is the default-off provider-free mounted OIDC start/callback transport boundary.",
+        "current_authority_allocation: Yuri explicitly authorised that fresh gate and the next two logical descendants unless a material directional choice arises. The current tranche covers exact-origin and pre-authentication CSRF start admission, bounded form_post callback handling, generic failures, a restrictive no-store exact-origin bridge, deterministic authored-synthetic acceptance, documentation, continuity and task-branch publication. Later descendants must be derived and separately rehydrated after each accepted predecessor; any genuine architecture/product choice pauses for Yuri.",
+        "active_plan_and_acceptance: the accepted operational connection plan, design, threat delta, evidence, closeout and Sol acceptance plus the maintained federation OpenAPI contract, API Spine ADR/programme, Access AI provider boundary and API steward checklist were read completely.",
+        "protected_evidence_boundaries: no protected holdout or raw historical Diary access; no live Microsoft/provider call, real identity, binding resolution, admission-grant/session redeem, application cookie, product/patient/clinical read, cloud/IAM mutation, deployment, production, release, protected-ref, Pages or Dependabot disposition action. The user-owned docs/branding directory remains untouched and excluded.",
+        "git_refs_and_worktree: after fetch, HEAD and origin/codex/raisa-postgresql-oidc-operational-connection-boundary are 686b035ec4aab62afa2a5e4df1238f65326f4e1b; local/origin master and handoff/current are aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding is the only unrelated untracked content."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external implementation worker was selected or dispatched."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Unselected interactive fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude transport was selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No independent provider or reviewer was selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No subagent was selected or dispatched; the route, browser bridge and provider-free acceptance path are tightly coupled."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
