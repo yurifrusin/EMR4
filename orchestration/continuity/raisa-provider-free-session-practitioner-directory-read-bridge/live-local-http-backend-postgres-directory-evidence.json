@@ -1,0 +1,76 @@
+{
+  "allowed_read": {
+    "active_practitioner_count": 2,
+    "exact_display_safe_projection": true,
+    "patient_or_clinical_fields": 0,
+    "required_audit_before_release": true,
+    "shared_graphql_service_path": true
+  },
+  "audit_contract": {
+    "allowed_event_committed": true,
+    "audit_contains_no_product_fields": true,
+    "denied_event_committed": true,
+    "raw_session_and_csrf_absent": true
+  },
+  "claim_limits": [
+    "This proves one default-off provider-free authored-synthetic application-session-authorized active practitioner-directory read through real loopback GraphQL and disposable PostgreSQL.",
+    "It does not establish patient or clinical read safety, real principal mapping, general GraphQL mounting, product-table RLS, live Microsoft interoperability, deployment, production or release readiness."
+  ],
+  "cleanup": {
+    "database_absent_after": true,
+    "passed": true,
+    "server_stopped": true,
+    "task_roles_absent_after": true
+  },
+  "data_class": "authored_synthetic",
+  "default_off": true,
+  "evidence_label": "live_local_http_backend_postgres_product_read",
+  "evidence_sensitive_match_count": 0,
+  "failure_contract": {
+    "audit_failure_no_data": true,
+    "cross_practice_no_leak": true,
+    "inactive_enumeration_forbidden": true,
+    "inactive_user_no_data": true,
+    "schema_escape_no_data": true,
+    "stale_role_no_data": true,
+    "unknown_session_no_data": true,
+    "unmapped_session_no_data": true,
+    "wrong_csrf_no_data": true,
+    "wrong_origin_no_data": true
+  },
+  "failure_statuses": {
+    "audit_failure": 503,
+    "inactive_user": 401,
+    "schema_escape": 403,
+    "stale_role": 401,
+    "unknown_session": 401,
+    "unmapped_session": 401,
+    "wrong_csrf": 403,
+    "wrong_origin": 403
+  },
+  "loopback_http": {
+    "ephemeral_port_recorded": false,
+    "host": "127.0.0.1",
+    "real_socket": true,
+    "request_count": 11
+  },
+  "migration_head": "u0v1w2x3y4z5",
+  "passed": true,
+  "result": "provider_free_session_practitioner_directory_read_bridge_pass",
+  "role_contract": {
+    "all_direct_denials_are_insufficient_privilege": true,
+    "role_names_recorded": false,
+    "six_direct_privilege_denials": true
+  },
+  "schema_version": "emr4.provider-free-session-practitioner-directory-read-bridge-evidence.v1",
+  "side_effect_counts": {
+    "deployments": 0,
+    "graphql_mutations": 0,
+    "patient_or_clinical_reads": 0,
+    "product_reads": 1,
+    "product_writes_by_runtime": 0,
+    "production_changes": 0,
+    "provider_calls": 0,
+    "real_identities": 0
+  }
+}

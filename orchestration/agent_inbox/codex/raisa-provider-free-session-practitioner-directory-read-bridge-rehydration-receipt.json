@@ -1,0 +1,42 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan_implement_verify_and_publish_one_default_off_provider_free_application_session_authorized_practitioner_directory_graphql_read_bridge_without_patient_clinical_real_identity_provider_or_deployment_authority",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reconstructed completely from the immediately prior full read plus the exact accepted redemption diff and refreshed at 499 lines / SHA-256 3201CD115DBFA785EEA4FEA370295726A18DE520E338086E0EC7FC8BF3643E54; provider_free_oidc_admission_grant_redemption_bridge_pass is accepted at Continuity 199 / Compass 180.",
+    "current_authority_allocation": "Yuri selected the recommended provider-free product-authorization direction, authorizing one narrowly bounded authored-synthetic product read with endpoint-owned authorization, required audit, evidence, continuity and task-branch publication. Real identity, patient/clinical data, product mutation, providers, deployment, protected refs, production and release remain closed.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-oidc-admission-grant-redemption-bridge-plan.md",
+      "docs/raisa-provider-free-oidc-admission-grant-redemption-bridge-design.md",
+      "docs/security/raisa-provider-free-oidc-admission-grant-redemption-bridge-threat-model-delta.md",
+      "docs/raisa-provider-free-oidc-admission-grant-redemption-bridge-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-oidc-admission-grant-redemption-bridge-sol-acceptance.md",
+      "docs/raisa-shared-application-auth-clinician-role-boundary-design.md",
+      "orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/auth-boundary-policy.json",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "docs/api-spine/graphql/appointment-diary-read.graphql",
+      "docs/api-spine/practitioner-directory-read-shape-design.md",
+      "docs/api-spine/practitioner-directory-graphql-runtime-gate.md",
+      "docs/api-spine/practitioner-directory-graphql-release-boundary.md",
+      "app/graphql/schema.py",
+      "app/services/practice/practitioner_directory_read.py",
+      "tests/test_api_spine_artifacts.py"
+    ],
+    "protected_evidence_boundaries": "No protected holdout, historical Diary, patient/clinical data, live provider, real identity, product mutation, cloud/IAM, deployment, Pages or Dependabot action. docs/branding remains untouched, untracked and excluded.",
+    "git_refs_and_worktree": "Current task head is 9fdfaaf0cdae4c54b81e04a010fb2df4cc779da6. Local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. docs/branding was the sole untracked content before the receipt."
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

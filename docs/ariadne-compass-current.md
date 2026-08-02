@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 now closes the provider-free OIDC bridge at one backend-owned authored-synthetic application session. Continuity 199 / Compass 180 bind atomic grant consumption, active binding/version and fresh principal-truth checks, accepted session-policy reuse, exact post-commit cookies and zero provider/product authority. The next live-identity or product direction is a material Yuri-owned choice; cloud/IAM, deployment, production and release remain closed.
+> EMR4 now extends its provider-free application session to one unmounted, active-only authored-synthetic practitioner-directory read. Continuity 200 / Compass 181 bind exact current-principal checks, required authorization audit, display-safe product columns and zero patient/clinical/provider/write authority. Real identity, broader product access, deployment, production and release remain closed.
 
 ## North star
 
@@ -172,30 +172,32 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Exact HMAC-only binding resolution now issues one audited 60-second exact-origin grant while session and product authority remain closed. Lineage parent: `raisa-provider-free-oidc-start-callback-transport-boundary`.
 78. **Close the provider-free external-authentication bridge at an atomic backend-owned application session — Raisa Provider-Free OIDC Admission-Grant Redemption Bridge**
    One-use grant redemption now rechecks binding and current synthetic principal truth and commits the accepted session/cookies without product authority. Lineage parent: `raisa-provider-free-oidc-binding-admission-grant-boundary`.
+79. **Open the least-sensitive provider-free product read behind the accepted application session — Raisa Provider-Free Session Practitioner-Directory Read Bridge**
+   One unmounted endpoint factory now authorizes and audits an active authored-synthetic practitioner-directory read through exact product columns. Lineage parent: `raisa-provider-free-oidc-admission-grant-redemption-bridge`.
 
 ## Current position
 
-**Provider-free atomic admission-grant redemption bridge — Raisa Provider-Free OIDC Admission-Grant Redemption Bridge**
+**Provider-free active-practitioner-directory authorization bridge — Raisa Provider-Free Session Practitioner-Directory Read Bridge**
 
-**Why this proof came next:** The accepted callback deliberately stopped at a 60-second non-session artifact; Yuri preauthorised the final atomic bridge descendant.
+**Why this proof came next:** Yuri chose the product-authorization direction after the provider-free OIDC bridge closed at an application session.
 
-Real loopback HTTP and disposable PostgreSQL prove one-use grant consumption, binding/version and fresh authored-synthetic principal checks, accepted session policy reuse, exact post-commit cookies and complete cleanup.
+Real loopback HTTP and disposable PostgreSQL prove exact current-principal checks, required authorization audit, display-safe projection, least-privilege product access and complete cleanup.
 
 ### What this unlocks
 
-- Review the completed three-descendant provider-free bridge sequence on its stacked draft pull requests.
-- Choose the next product/security direction before opening real identity, product authorization or live-provider work.
+- Review the result on its stacked draft pull request.
+- A later bounded tranche may connect a supervised authored-synthetic Office consumer to this still-unmounted factory.
 
 ### What it does not solve
 
-- Live Microsoft/provider interoperability or real identities.
-- Real binding administration, real principal truth or product authorization/reads.
-- Production secret custody, hosted connectivity, distributed abuse resistance, monitoring, deployment, production or release.
+- Real identity, live Microsoft/provider interoperability or real principal mapping.
+- Patient/clinical reads, other product resources, commands or writes.
+- General endpoint mounting, Office UI consumption, production security, deployment or release.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Bounded opening `api-change`: Atomically redeem one provider-free authored-synthetic admission grant into the accepted application-session runtime after exact binding/version and fresh internal security-principal checks.
+- Bounded opening `api-change`: Authorize one default-off provider-free authored-synthetic application-session active-practitioner-directory read with exact product columns and required audit.
 - All other named boundaries remain closed: `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -423,10 +425,13 @@ Prerequisites:
 - **Should EMR4 atomically redeem the provider-free admission grant into the accepted application-session runtime?**
   Required before: Satisfied on 2026-08-02 only for provider-free authored-synthetic atomic grant redemption and session cookies. Live identity and product authority remain closed.
 - **Should the next tranche pursue live-provider interoperability, real internal principal mapping, or a separately bounded product-authorization path?**
-  Required before: This is a material direction choice after the three authorised provider-free bridge descendants; no option is implied by the current acceptance.
+  Required before: Satisfied on 2026-08-02: Yuri selected the bounded provider-free product-authorization path; live identity and broader product authority remain closed.
+- **Should a supervised authored-synthetic Office consumer be connected to the default-off practitioner-directory factory?**
+  Required before: Required before adding a taskpane consumer or task-specific mount; real identity, patient/clinical data and production remain separately closed.
 
 ## Map limits
 
+- The practitioner-directory result is provider-free, authored-synthetic, active-only and unmounted; it proves neither real identity nor patient/clinical product access.
 - The atomic redemption result remains provider-free and authored-synthetic: its session cookies prove the backend transaction shape, not real identity or product authorization.
 - The HMAC binding/admission result is provider-free and authored-synthetic: its 60-second bearer is not an application session and grants no cookie, product, deployment or production authority.
 - The mounted OIDC transport result is default-off and provider-free: it releases only fixed authored-synthetic bridge enums and proves no live Microsoft, real identity, binding, admission grant, application session or product readiness.
@@ -495,6 +500,8 @@ Prerequisites:
 - `alembic/versions/r7s8t9u0v1w2_add_oidc_authorization_attempt_store.py`
 - `alembic/versions/s8t9u0v1w2x3_add_federation_admission_grants.py`
 - `alembic/versions/t9u0v1w2x3y4_add_oidc_grant_redemption_bridge.py`
+- `alembic/versions/u0v1w2x3y4z5_extend_auth_audit_for_directory_read.py`
+- `app/graphql/application_auth_product.py`
 - `app/models/application_auth.py`
 - `app/models/application_identity_oidc_attempt.py`
 - `app/routers/application_auth.py`
@@ -502,6 +509,8 @@ Prerequisites:
 - `app/services/application_auth_operational_database.py`
 - `app/services/application_auth_operational_hardening.py`
 - `app/services/application_auth_persistence.py`
+- `app/services/application_auth_product_read.py`
+- `app/services/application_auth_product_read_database_role.py`
 - `app/services/application_auth_role_runtime.py`
 - `app/services/application_auth_runtime.py`
 - `app/services/application_identity_federation.py`
@@ -675,6 +684,9 @@ Prerequisites:
 - `docs/raisa-provider-free-oidc-start-callback-transport-boundary-closeout.md`
 - `docs/raisa-provider-free-oidc-start-callback-transport-boundary-design.md`
 - `docs/raisa-provider-free-oidc-start-callback-transport-boundary-plan.md`
+- `docs/raisa-provider-free-session-practitioner-directory-read-bridge-closeout.md`
+- `docs/raisa-provider-free-session-practitioner-directory-read-bridge-design.md`
+- `docs/raisa-provider-free-session-practitioner-directory-read-bridge-plan.md`
 - `docs/raisa-real-identity-microsoft-federation-boundary-closeout.md`
 - `docs/raisa-real-identity-microsoft-federation-boundary-design.md`
 - `docs/raisa-real-identity-microsoft-federation-boundary-plan.md`
@@ -733,6 +745,7 @@ Prerequisites:
 - `docs/security/raisa-provider-free-oidc-admission-grant-redemption-bridge-threat-model-delta.md`
 - `docs/security/raisa-provider-free-oidc-binding-admission-grant-boundary-threat-model-delta.md`
 - `docs/security/raisa-provider-free-oidc-start-callback-transport-boundary-threat-model-delta.md`
+- `docs/security/raisa-provider-free-session-practitioner-directory-read-bridge-threat-model-delta.md`
 - `docs/security/raisa-real-identity-microsoft-federation-boundary-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-clinician-role-boundary-threat-model-delta.md`
 - `docs/security/raisa-shared-application-auth-office-cookie-compatibility-threat-model-delta.md`
@@ -968,6 +981,7 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-oidc-admission-grant-redemption-bridge/live-local-http-backend-postgres-redemption-evidence.json`
 - `orchestration/continuity/raisa-provider-free-oidc-binding-admission-grant-boundary/live-local-http-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-provider-free-oidc-start-callback-transport-boundary/live-local-http-backend-postgres-evidence.json`
+- `orchestration/continuity/raisa-provider-free-session-practitioner-directory-read-bridge/live-local-http-backend-postgres-directory-evidence.json`
 - `orchestration/continuity/raisa-real-identity-microsoft-federation-boundary/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/auth-boundary-policy.json`
 - `orchestration/continuity/raisa-shared-application-auth-clinician-role-boundary/provider-free-acceptance-evidence.json`
@@ -1293,4 +1307,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 180; continuity graph revision 199._
+_Compass map revision 181; continuity graph revision 200._

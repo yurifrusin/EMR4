@@ -1,0 +1,45 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "verifier_acceptance",
+  "planned_action": "accept_the_provider_free_application_session_authorized_active_practitioner_directory_read_bridge_without_live_identity_patient_clinical_provider_deployment_or_release_authority",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "The accepted parent remains provider_free_oidc_admission_grant_redemption_bridge_pass at Continuity 199 / Compass 180; the reviewed descendant result is provider_free_session_practitioner_directory_read_bridge_pass.",
+    "current_authority_allocation": "Yuri selected the recommended provider-free product-authorization direction, permitting one narrowly bounded authored-synthetic application-session-authorized practitioner-directory read, required audit, exact product database capability, evidence, continuity and task-branch publication. Real identity, patient/clinical data, product mutation, providers, deployment, protected integration and release remain closed.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-session-practitioner-directory-read-bridge-plan.md",
+      "docs/raisa-provider-free-session-practitioner-directory-read-bridge-design.md",
+      "docs/security/raisa-provider-free-session-practitioner-directory-read-bridge-threat-model-delta.md",
+      "alembic/versions/u0v1w2x3y4z5_extend_auth_audit_for_directory_read.py",
+      "app/services/application_auth_product_read.py",
+      "app/services/application_auth_product_read_database_role.py",
+      "app/services/application_auth_product_read_operational.py",
+      "app/graphql/application_auth_product.py",
+      "app/graphql/schema.py",
+      "app/services/practice/practitioner_directory_read.py",
+      "scripts/raisa_provider_free_session_practitioner_directory_read_bridge_acceptance.py",
+      "orchestration/continuity/raisa-provider-free-session-practitioner-directory-read-bridge/live-local-http-backend-postgres-directory-evidence.json",
+      "tests/test_raisa_provider_free_session_practitioner_directory_read_bridge.py"
+    ],
+    "protected_evidence_boundaries": "No protected holdout or historical Diary access; no live Microsoft/provider call, real identity, product mutation, patient/clinical read, cloud/IAM, deployment, Pages or Dependabot action. docs/branding remains untouched and excluded.",
+    "git_refs_and_worktree": "Task branch codex/raisa-provider-free-session-practitioner-directory-read-bridge remains at accepted parent 9fdfaaf0cdae4c54b81e04a010fb2df4cc779da6 before its own commit. Local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. docs/branding is the only unrelated untracked directory."
+  },
+  "revision_binding": {
+    "continuity_graph_revision_expected": 200,
+    "compass_map_revision_expected": 181,
+    "compass_source_graph_revision_expected": 200,
+    "rendered_compass_exact_validation_required": true
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

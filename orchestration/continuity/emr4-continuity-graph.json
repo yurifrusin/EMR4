@@ -59,7 +59,7 @@
       "voice"
     ]
   },
-  "graph_revision": 199,
+  "graph_revision": 200,
   "harvests": [],
   "nodes": [
     {
@@ -11036,9 +11036,115 @@
         "Cloud/IAM, deployment, protected integration, production, release and GitHub Pages remain separately closed.",
         "The next product/security direction is a material Yuri-owned choice."
       ]
+    },
+    {
+      "id": "raisa-provider-free-session-practitioner-directory-read-bridge",
+      "title": "Raisa Provider-Free Session Practitioner-Directory Read Bridge",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-02T11:51:32Z",
+      "updated_at": "2026-08-02T11:51:32Z",
+      "coordinates": {
+        "git_ref": "codex/raisa-provider-free-session-practitioner-directory-read-bridge",
+        "source_head": "9fdfaaf0cdae4c54b81e04a010fb2df4cc779da6",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-oidc-admission-grant-redemption-bridge",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-provider-free-session-practitioner-directory-read-bridge-plan.md",
+            "scope": "Authorize one default-off provider-free authored-synthetic application-session active-practitioner-directory read with exact product columns and required audit."
+          }
+        ],
+        "notes": [
+          "Yuri selected the recommended bounded product-authorization direction.",
+          "No patient/clinical data, live identity/provider, product mutation, deployment, production or release occurred.",
+          "The user-owned docs/branding directory remained untracked, unstaged and excluded."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "reuse-api-spine-practitioner-directory-200",
+          "source": "app/graphql/schema.py",
+          "status": "accepted",
+          "summary": "Keep the existing GraphQL field and shared read service; inject one endpoint-owned authorization callback before the query."
+        },
+        {
+          "id": "exact-column-product-role-200",
+          "source": "app/services/application_auth_product_read_database_role.py",
+          "status": "accepted",
+          "summary": "Use a separate finite NOINHERIT product login/capability with exact display-source SELECT columns and no auth-state or write access."
+        },
+        {
+          "id": "unattributed-session-generic-denial-200",
+          "source": "app/services/application_auth_role_runtime.py",
+          "status": "accepted",
+          "summary": "Classify an unresolvable session with a boolean resolver recheck so it returns generic 401 without fabricating practice-scoped forced-RLS audit data; identifiable audit failures remain 503."
+        }
+      ],
+      "claim_scope": [
+        "Real loopback HTTP and disposable PostgreSQL prove one exact active-practitioner-directory projection, required allow/deny audit and complete server/database/four-role cleanup.",
+        "Six direct least-privilege probes deny product-write, sensitive-column, auth-table and cross-role access with PostgreSQL 42501.",
+        "Provider calls, real identities, patient/clinical reads and product writes remain zero."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-session-practitioner-directory-read-bridge-plan.md",
+          "docs/raisa-provider-free-session-practitioner-directory-read-bridge-design.md",
+          "docs/security/raisa-provider-free-session-practitioner-directory-read-bridge-threat-model-delta.md"
+        ],
+        "findings": [
+          "alembic/versions/u0v1w2x3y4z5_extend_auth_audit_for_directory_read.py",
+          "app/models/application_auth.py",
+          "app/services/application_auth_runtime.py",
+          "app/services/application_auth_persistence.py",
+          "app/services/application_auth_role_runtime.py",
+          "app/services/application_auth_product_read.py",
+          "app/services/application_auth_product_read_database_role.py",
+          "app/services/application_auth_product_read_operational.py",
+          "app/graphql/application_auth_product.py",
+          "app/graphql/schema.py",
+          "app/services/practice/practitioner_directory_read.py",
+          "orchestration/continuity/raisa-provider-free-session-practitioner-directory-read-bridge/live-local-http-backend-postgres-directory-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-session-practitioner-directory-read-bridge-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-session-practitioner-directory-read-bridge-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-session-practitioner-directory-read-bridge-rehydration-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-session-practitioner-directory-read-bridge-rehydration-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-session-practitioner-directory-read-bridge-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-session-practitioner-directory-read-bridge-prepush-receipt.json"
+        ],
+        "tests": [
+          "scripts/raisa_provider_free_session_practitioner_directory_read_bridge_acceptance.py",
+          "tests/test_raisa_provider_free_session_practitioner_directory_read_bridge.py",
+          "scripts/raisa_provider_free_session_practitioner_directory_read_bridge_continuity_update.py",
+          "tests/test_raisa_provider_free_session_practitioner_directory_read_bridge_continuity.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Real identity mapping and live Microsoft/provider interoperability remain closed.",
+        "Patient/clinical reads, other product resources and every command/write remain closed.",
+        "The GraphQL factory is unmounted and no Office UI consumer is established.",
+        "Production secret custody, product-table RLS, distributed abuse resistance and monitoring remain closed.",
+        "Cloud/IAM, deployment, protected integration, production, release and GitHub Pages remain separately closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-02T13:00:00Z"
+  "updated_at": "2026-08-02T11:51:32Z"
 }

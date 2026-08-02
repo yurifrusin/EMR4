@@ -11,21 +11,6 @@ from app.schemas.practice import PractitionerDefaultLocationOut, PractitionerOut
 ADMIN_DIRECTORY_ROLES = {UserRole.Admin, UserRole.PracticeOwner}
 
 
-def _display_name(practitioner: Practitioner) -> str:
-    parts = [
-        str(part).strip()
-        for part in (practitioner.first_name, practitioner.last_name)
-        if part and str(part).strip()
-    ]
-    return " ".join(parts)
-
-
-def _default_location_out(location: PracticeLocation | None) -> PractitionerDefaultLocationOut | None:
-    if location is None:
-        return None
-    return PractitionerDefaultLocationOut(id=location.id, name=location.name)
-
-
 def list_practitioner_directory(
     *,
     db: Session,
@@ -46,7 +31,15 @@ def list_practitioner_directory(
         PracticeLocation.is_active == True,
     )
     query = (
-        db.query(Practitioner, PracticeLocation)
+        db.query(
+            Practitioner.id.label("practitioner_id"),
+            Practitioner.first_name,
+            Practitioner.last_name,
+            Practitioner.specialty,
+            Practitioner.is_active.label("practitioner_active"),
+            PracticeLocation.id.label("location_id"),
+            PracticeLocation.name.label("location_name"),
+        )
         .outerjoin(PracticeLocation, location_join)
         .filter(Practitioner.practice_id == current_user.practice_id)
     )
@@ -66,11 +59,22 @@ def list_practitioner_directory(
 
     return [
         PractitionerOut(
-            id=practitioner.id,
-            displayName=_display_name(practitioner),
-            roleLabel=practitioner.specialty,
-            active=bool(practitioner.is_active),
-            defaultLocation=_default_location_out(location),
+            id=row.practitioner_id,
+            displayName=" ".join(
+                part.strip()
+                for part in (row.first_name, row.last_name)
+                if part and part.strip()
+            ),
+            roleLabel=row.specialty,
+            active=bool(row.practitioner_active),
+            defaultLocation=(
+                PractitionerDefaultLocationOut(
+                    id=row.location_id,
+                    name=row.location_name,
+                )
+                if row.location_id is not None
+                else None
+            ),
         )
-        for practitioner, location in rows
+        for row in rows
     ]

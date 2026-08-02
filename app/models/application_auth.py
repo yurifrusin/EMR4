@@ -33,7 +33,12 @@ _EVENT_TYPES = (
     "'auth.session_created', 'auth.session_refreshed', "
     "'auth.session_revoked', 'auth.surface_bound', "
     "'auth.exchange_issued', 'auth.exchange_redeemed', "
-    "'auth.exchange_rejected', 'auth.authorization_denied'"
+    "'auth.exchange_rejected', 'auth.authorization_denied', "
+    "'auth.authorization_allowed'"
+)
+_POLICY_VERSIONS = (
+    "'clinician-workspace-read.v1', "
+    "'practice-practitioner-directory-read.v1'"
 )
 _DECISIONS = "'allowed', 'denied', 'recorded'"
 
@@ -474,7 +479,7 @@ class ApplicationAuthAuditEvent(Base):
             name="ck_app_auth_audit_target_surface",
         ),
         CheckConstraint(
-            "policy_version = 'clinician-workspace-read.v1'",
+            f"policy_version IN ({_POLICY_VERSIONS})",
             name="ck_app_auth_audit_policy",
         ),
         CheckConstraint(

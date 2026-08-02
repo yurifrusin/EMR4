@@ -1,0 +1,46 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan_implement_verify_and_publish_one_default_off_provider_free_application_session_authorized_practitioner_directory_graphql_read_bridge_without_patient_clinical_real_identity_provider_or_deployment_authority",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_provider_free_session_practitioner_directory_read_bridge_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: current AGENTS.md was reconstructed completely from the immediately prior full read plus the exact accepted redemption diff, then its Current Baton, authority, protected-evidence and decision sections were refreshed at 499 lines / SHA-256 3201CD115DBFA785EEA4FEA370295726A18DE520E338086E0EC7FC8BF3643E54; the accepted parent is provider_free_oidc_admission_grant_redemption_bridge_pass at Continuity 199 / Compass 180.",
+        "current_authority_allocation: Yuri selected the recommended provider-free product-authorization direction. This permits one narrowly bounded authored-synthetic application-session-authorized product read, its endpoint-owned policy and required audit, deterministic local evidence, documentation, continuity and task-branch publication; material identity, patient/clinical, command, provider, deployment, production and release choices remain closed.",
+        "active_plan_and_acceptance: the redemption plan, design, threat delta, closeout and Sol acceptance; the shared-auth clinician-role design and policy; the API Spine ADR/programme/checklist/artifact tests; and the practitioner-directory SDL, shared service, runtime gate and release boundary were reviewed. The least-sensitive existing product truth is the active practitioner directory projection.",
+        "protected_evidence_boundaries: no protected holdout or historical Diary access; no patient/clinical data, live provider, real identity, product mutation, cloud/IAM, deployment, Pages or Dependabot action. docs/branding remains untouched and excluded.",
+        "git_refs_and_worktree: current task head is 9fdfaaf0cdae4c54b81e04a010fb2df4cc779da6; local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding is the sole untracked content before this receipt."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No subagent was selected or dispatched; the user did not request delegation and the session, audit, GraphQL context and disposable database proof form one tightly coupled security boundary."
+      ]
+    }
+  ],
+  "worker_slots": [],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
