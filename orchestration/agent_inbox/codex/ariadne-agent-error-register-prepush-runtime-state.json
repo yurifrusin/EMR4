@@ -1,0 +1,91 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "push",
+  "source_evidence": {
+    "live_handover_current_baton": "Updated AGENTS.md was reread completely at 449 lines and records ariadne_agent_error_correction_register_pass, its active acceptance artifacts, closed boundaries and the already-authorised fifth pair as next work.",
+    "current_authority_allocation": "Yuri authorised autonomous ordinary task-branch commit and push. Sol owns acceptance and integration; no external agent, provider, protected-ref, deployment or release authority is open.",
+    "active_plan_and_acceptance": "Commit 487dec5881096ccda85ca6e074b3483e126f3d8b contains the accepted register tranche after 56 serial tests, independent repair-review pass, Ruff, parser, canonical report, handover-index and diff gates.",
+    "protected_evidence_boundaries": "Only the non-protected task branch may be pushed. docs/branding remains untracked and excluded; no protected evidence, provider call, product/API/database/write, identity/data, cloud/IAM, deployment, production or release action is authorised.",
+    "git_refs_and_worktree": "Task HEAD is 487dec5881096ccda85ca6e074b3483e126f3d8b and is one commit ahead of origin/codex/ariadne-bernie-davida-parallel-seam at 8e79cfc3caa73a9b9527f395edbdfb61e202def9. Local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding is the only residue and the index is empty."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_agent_error_register_prepush",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: Updated AGENTS.md was reread completely at 449 lines and records ariadne_agent_error_correction_register_pass, its active acceptance artifacts, closed boundaries and the already-authorised fifth pair as next work.",
+        "current_authority_allocation: Yuri authorised autonomous ordinary task-branch commit and push. Sol owns acceptance and integration; no external agent, provider, protected-ref, deployment or release authority is open.",
+        "active_plan_and_acceptance: Commit 487dec5881096ccda85ca6e074b3483e126f3d8b contains the accepted register tranche after 56 serial tests, independent repair-review pass, Ruff, parser, canonical report, handover-index and diff gates.",
+        "protected_evidence_boundaries: Only the non-protected task branch may be pushed. docs/branding remains untracked and excluded; no protected evidence, provider call, product/API/database/write, identity/data, cloud/IAM, deployment, production or release action is authorised.",
+        "git_refs_and_worktree: Task HEAD is 487dec5881096ccda85ca6e074b3483e126f3d8b and is one commit ahead of origin/codex/ariadne-bernie-davida-parallel-seam at 8e79cfc3caa73a9b9527f395edbdfb61e202def9. Local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding is the only residue and the index is empty."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Bounded inventory and independent review are complete; no subagent holds push authority."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek dispatch occurred in this tranche."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The real-TTY fallback was not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The leverage-gated Claude lane was not selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external Gemini provider call occurred."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
