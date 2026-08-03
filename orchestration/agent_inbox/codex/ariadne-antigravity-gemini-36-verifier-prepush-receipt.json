@@ -1,0 +1,30 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "push",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md is 497 lines at SHA-256 F8BBFBAFC9C2DA981F0AEF91628828C39783DA97E78BFDA02BD77BDE43DCDD1E and records the accepted Gemini 3.6 Flash/high verifier without changing current product result or next authority gate.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high is the fresh-project, plan-mode, clean-unchanged independent verifier; Sol retains architecture, acceptance, recovery and protected integration.",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-antigravity-gemini-36-high-verifier-allocation.md",
+      "docs/ariadne-antigravity-gemini-36-high-verifier-allocation-closeout.md",
+      "docs/ariadne-antigravity-gemini-36-high-verifier-first-review-analysis.md",
+      "orchestration/agent_inbox/antigravity/ariadne-gemini-36-high-verifier-allocation-repair-review-receipt.json"
+    ],
+    "protected_evidence_boundaries": "No protected evidence, historical Diary, docs/branding, patient/clinical/product-derived data, product mutation, deployment, protected integration, Pages, production or release boundary was opened.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-gemini-36-high-verifier is at accepted closeout 536da1b61ec4963d49faf916fc5b8bcee90ef7da before this receipt-only commit. Local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. docs/branding remains the sole unrelated user-owned untracked directory."
+  },
+  "settings_fingerprint": "sha256:25344b6c673dec2dbc1ded4e5aec41c93afcc16ac536c54951eef45ec3a92e42",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
