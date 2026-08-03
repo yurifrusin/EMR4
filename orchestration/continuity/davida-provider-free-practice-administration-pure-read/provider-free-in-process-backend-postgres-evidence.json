@@ -1,0 +1,108 @@
+{
+  "active_only_behavior": {
+    "inactive_location_excluded": true,
+    "inactive_practitioner_excluded": true,
+    "primary_active_locations": 3,
+    "primary_active_practitioners": 2
+  },
+  "bounds_behavior": {
+    "bound_frame_location_count": 200,
+    "returned_locations": 200,
+    "seeded_active_locations": 205
+  },
+  "claim_limits": [
+    "This proves one default-off provider-free authored-synthetic active practitioner/location pure-read projection and one deterministic minimal context frame through disposable PostgreSQL and the existing finite product-read roles.",
+    "It does not establish patient/clinical read safety, real identity, any route or GraphQL field, proposal/apply authority, provider use, deployment, production or release readiness."
+  ],
+  "cleanup": {
+    "database_absent_after": true,
+    "passed": true,
+    "task_roles_absent_after": true
+  },
+  "context_frame": {
+    "authority_ceiling_all_false": true,
+    "blocked_sources_exact": true,
+    "content_revision": "fa9669a1b99561226545f465585681cd2b7f91b7aa42669cea75f7fdd7e14c24",
+    "data_class": "authored_synthetic",
+    "deterministic_frame": true,
+    "frame_schema_valid": true,
+    "labels_exact": true,
+    "labels_frames_exact": true,
+    "location_frame_count": 3,
+    "no_uuid_emitted": true,
+    "observed_expiry_interval_seconds": 120,
+    "opaque_references": true,
+    "practitioner_frame_count": 2,
+    "revision_recompute_matches": true,
+    "schema_version": "emr4.davida.practice_administration_context.v1"
+  },
+  "data_class": "authored_synthetic",
+  "default_off": true,
+  "empty_behavior": {
+    "empty_frame_counts": [
+      0,
+      0
+    ],
+    "empty_practice_locations": 0,
+    "empty_practice_practitioners": 0
+  },
+  "evidence_label": "provider_free_in_process_backend_postgres",
+  "evidence_sensitive_match_count": 0,
+  "migration_head": "u0v1w2x3y4z5",
+  "ordering": {
+    "ordered_by_name_id": true,
+    "ordered_names_sha256": "21d738e156cf8697cad545c055026f942d9b0091481d6973c4d204dc661e9c30"
+  },
+  "passed": true,
+  "privilege_denials": {
+    "all_insufficient_privilege": true,
+    "probe_count": 6
+  },
+  "projection": {
+    "active_location_max_rows": 200,
+    "active_location_schema_fields": [
+      "id",
+      "name"
+    ],
+    "active_only": true,
+    "location_service_pure": true,
+    "practitioner_service_pure": true,
+    "route_or_graphql_added": false
+  },
+  "result": "provider_free_practice_administration_pure_read_pass",
+  "schema_version": "emr4.davida.provider-free-practice-administration-pure-read.evidence.v1",
+  "select_only": {
+    "captured_statements": 7,
+    "dml_or_ddl_statements": 0,
+    "select_reads_present": true
+  },
+  "session_state": {
+    "deleted": 0,
+    "dirty": 0,
+    "new": 0
+  },
+  "table_integrity": {
+    "tables": {
+      "practice_locations": {
+        "count": 210,
+        "hash": "b4fdcd1b752ad777584c3f8016642d3e"
+      },
+      "practices": {
+        "count": 4,
+        "hash": "7552dd81c57874bfd349eb657d17cfc1"
+      },
+      "practitioners": {
+        "count": 4,
+        "hash": "b77c9f1f77f0ae47d73308ea59f744d3"
+      },
+      "users": {
+        "count": 4,
+        "hash": "0beafd4a581bc1e3d374456987ec2205"
+      }
+    },
+    "unchanged": true
+  },
+  "tenant_isolation": {
+    "foreign_rows_excluded": true
+  }
+}
