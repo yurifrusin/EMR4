@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "architecture_advice_only",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely at 449 lines with SHA-256 af5b7976ab03cd83f1f48678948a46d1d5a780fa658016610ebd82ec164b38c7. The accepted fifth pair is complete in candidate evidence, while actual Davida administrative write implementation remains a material Yuri-owned gate and Rayleen arrival authority remains closed.",
+    "current_authority_allocation": "GPT Sol is conductor and architecture owner. DeepSeek V4 Flash/high is the preferred bounded implementation worker and Gemini 3.6 Flash/high is the fresh independent veto reviewer. No worker dispatch, provider call, implementation, integration, deployment or protected action is planned for this advice-only pass.",
+    "active_plan_and_acceptance": "The exact active fifth-pair plans, closeout and Sol acceptance were reread. Diary route-intercepted browser evidence and the non-executing Davida default-location command boundary pass at candidate f551a91d; the next live-backend and administrative-write pair is explicitly paused. The API Spine ADR/programme, Access AI design, Bernie release gates, agent charters, permission matrix, read graph, async event boundary and command patterns were inspected for the two proposed architecture candidates.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10, historical PHI, docs/branding, providers, memory/RAG, real identity/data, patient/clinical/document data, Rayleen arrival writes, model-to-database writes, autonomous repair, cloud/IAM, deployment, production, release, protected refs and further Pages rebuild remain closed. This pass produces architectural advice only.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at f551a91d861baa65d04fae8f50dfee0a52440035, ahead of origin task ec7af55d58997ed967abce05af5fa5bbe3bbb3dd by two commits. Local/origin master and handoff/current are aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Existing fifth-pair final artifacts and user-owned untracked docs/branding are preserved; no staging or protected ref movement is authorized by this pass."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "rayleen_self_healing_architecture_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol verified the exact branch, HEAD, protected refs, dirty-worktree ownership and material product/write gates before giving architecture advice."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned for this advice-only pass."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Gemini review remains available for a future authorised architecture candidate; no external review call is planned here."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["DeepSeek is not selected because this pass is architectural advice, not bounded implementation."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The real-TTY fallback is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The leverage-gated Claude lane is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {"resource_id": "codex-native-parallel-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

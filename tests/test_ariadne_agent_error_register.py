@@ -36,10 +36,10 @@ def test_committed_register_is_closed_and_semantically_valid() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 5
+    assert register["register_revision"] == 6
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 13)
+        f"AER-{index:04d}" for index in range(1, 14)
     ]
     assert all(row["status"] != "open" for row in register["incidents"])
 
@@ -49,7 +49,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 10
+    assert len(agent_incidents) == 11
     assert len(transport_incidents) == 1
     assert transport_incidents[0]["incident_id"] == "AER-0007"
     assert transport_incidents[0]["category"] == "transport_timeout"
@@ -97,10 +97,10 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_duplicate_decision_is_the_only_seeded_recurring_signature() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 12
+    assert report["incident_count"] == 13
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 10,
+        "agent_behavior": 11,
         "harness": 1,
         "transport": 1,
     }
@@ -108,13 +108,13 @@ def test_duplicate_decision_is_the_only_seeded_recurring_signature() -> None:
         "command_scope_violation": 2,
         "evidence_misreport": 1,
         "harness_failure": 1,
-        "output_contract_violation": 5,
+        "output_contract_violation": 6,
         "read_only_violation": 1,
         "reasoning_claim_error": 1,
         "transport_timeout": 1,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "canonical_unchanged": 10,
+        "canonical_unchanged": 11,
         "untrusted_partial_worktree": 2,
     }
     assert report["recurring_patterns"] == [
@@ -166,6 +166,39 @@ def test_detached_antigravity_preflight_is_orchestrator_not_provider_error() -> 
     assert incident["candidate_state"] == "canonical_unchanged"
     assert incident["correction"]["status"] == "control_added"
     assert incident["status"] == "corrected"
+
+
+def test_unapproved_acceptance_event_failed_closed_before_corrected_receipt() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = incidents["AER-0013"]
+    failed_receipt = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "model-required-bureau-architecture-preacceptance-receipt.json"
+    )
+    corrected_receipt = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "model-required-bureau-architecture-pre-verifier-acceptance-receipt.json"
+    )
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.unapproved_continuation_event"
+    )
+    assert failed_receipt["continuation_event"] == "pre_acceptance"
+    assert failed_receipt["status"] == "revision_required"
+    assert failed_receipt["worker_dispatch_permitted"] is False
+    assert failed_receipt["rehydrated_from_receipt"] is False
+    assert corrected_receipt["continuation_event"] == "pre_verifier_acceptance"
+    assert corrected_receipt["status"] == "passed"
+    assert corrected_receipt["rehydrated_from_receipt"] is True
 
 
 def test_pattern_report_is_byte_deterministic(tmp_path: Path) -> None:

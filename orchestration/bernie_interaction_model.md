@@ -16,11 +16,15 @@ name is intentional: it sets a standard of competence, warmth, and institutional
 knowledge, not a novelty chatbot. Bernie's job is to let reception staff move
 faster than they could alone, not to replace their judgment.
 
-**Rayleen** is a related but distinct concept already in the codebase — the
-auto-arrival daemon that scans upcoming diary pages for unconfirmed names and
-flags not-found ones bright red. Rayleen is purely automated and server-side.
-Bernie is interactive and staff-facing. They are separate components that may
-share tool primitives.
+**Rayleen** is a related but distinct present-tense operational intelligence.
+The earlier auto-arrival daemon remains, at most, one deterministic observation
+source; the description of Rayleen as purely automated and server-side is
+superseded by the 2026-08-04 model-required Bureau architecture. Bernie focuses
+on prospective scheduling. Rayleen focuses on arrivals, waiting states, queue
+flow and intent-projected waiting-room views. Both require an approved provider
+model for intelligent dialogue and candidate formation, and both share the
+same deterministic Diary evidence, policy and command primitives without
+sharing authority.
 
 ---
 
@@ -62,9 +66,10 @@ confirmation request rather than a text worklist.
 
 ---
 
-## The Pipeline: Where LLM Sits vs Where Code Sits
+## The Pipeline: Where Provider Model Sits vs Where Code Sits
 
-The key discipline is that **the LLM is a translator, not an oracle**.
+The key discipline is that **the provider model is mandatory as a translator,
+not authoritative as an oracle**.
 It converts natural language (from any lane) into a typed constraint object.
 Everything after that constraint object is deterministic.
 
@@ -186,15 +191,19 @@ This is the most important discipline: **the LLM must never be in the loop for
 search or availability reasoning**. Availability is a backend fact, not a
 language model inference.
 
-### Stage 3 — Presenting Options (LLM, optional)
+### Stage 3 — Presenting Options (provider model required)
 
-For multi-result queries, the LLM can present options in natural language:
+For multi-result queries, the provider model presents options in natural language:
 "Margaret has 15 minutes free at 10:30 or 2:15, and a 30-minute slot at 4pm."
 This is advisory framing only — it does not change the typed proposal or the
 autonomy tier.
 
-For simple queries ("is there a slot at 11?"), the LLM can be skipped; the
-backend result is surfaced directly.
+For a simple query, the provider model still participates in the intelligent
+interaction and explains the proofreader-admitted backend result. The ordinary
+Diary UI may display the same deterministic fact independently, but that is a
+manual/product control rather than a substitute Bernie intelligence. If the
+provider model is unavailable, Bernie reports unavailable and does not present
+a heuristic or templated response as an equivalent agentic completion.
 
 ### Stage 4 — Staff Confirmation
 
@@ -202,9 +211,10 @@ Any proposal-tier action requires explicit confirmation before writing.
 See `resource_admin_bernie_tool_design.md §Formal Command / Proposal Layer`
 for the confirmation flow and audit requirements.
 
-For `execute_with_report` tier actions (exact-match check-in, deterministic
-provisional linking), Bernie writes immediately and reports the outcome.
-These are low-risk, reversible, operationally routine.
+The historical `execute_with_report` concept does not grant an immediate-write
+shortcut. Every mutating action uses its current typed command and authority
+policy, including human confirmation where required, followed by deterministic
+readback. Model participation neither removes nor supplies confirmation.
 
 ### Stage 5 — Write (API)
 

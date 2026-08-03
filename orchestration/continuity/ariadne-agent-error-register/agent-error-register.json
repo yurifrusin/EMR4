@@ -1,9 +1,9 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 5,
+  "register_revision": 6,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
-    "source_cutoff_on": "2026-08-03",
+    "source_cutoff_on": "2026-08-04",
     "inclusion_rule": "Include only a specific invariant breach or transport failure supported by a preserved repository receipt or analysis and its recorded correction or containment.",
     "exclusions": [
       "Unpreserved anecdotes or reconstructed intent",
@@ -466,6 +466,44 @@
         "evidence_paths": [
           "docs/ariadne-agent-error-correction-register-revision-5.md",
           "orchestration/agent_inbox/codex/bernie-davida-fifth-pair-pre-verifier-receipt-2.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0013",
+      "attempt_id": "model-required-bureau-architecture-preacceptance-001",
+      "observed_on": "2026-08-04",
+      "tranche": "model-required-bureau-architecture-planning",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "acceptance",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every acceptance receipt must use one exact continuation event declared by the active orchestrator requirements before it can claim five-source rehydration.",
+      "observed_error": "Root used the unapproved event pre_acceptance, so the deterministic preflight returned revision_required with continuation_event_missing_or_unapproved, emitted no rehydration sources and prohibited worker dispatch.",
+      "detection_method": "The local orchestrator receipt failed closed before any subagent dispatch, model call, integration, staging, commit or ref movement.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/model-required-bureau-architecture-preacceptance-runtime-state.json",
+        "orchestration/agent_inbox/codex/model-required-bureau-architecture-preacceptance-receipt.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.unapproved_continuation_event",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "The failed receipt was preserved and a distinct runtime state used the exact approved pre_verifier_acceptance event, complete five-source evidence and unchanged no-dispatch authority boundary before validation continued.",
+        "prevention_control": "Receipt construction must select continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml and preserve any fail-closed envelope before issuing a corrected distinct receipt.",
+        "evidence_paths": [
+          "orchestration/harness_settings/orchestrator_requirements.yaml",
+          "orchestration/agent_inbox/codex/model-required-bureau-architecture-pre-verifier-acceptance-runtime-state.json",
+          "orchestration/agent_inbox/codex/model-required-bureau-architecture-pre-verifier-acceptance-receipt.json"
         ]
       },
       "status": "corrected"

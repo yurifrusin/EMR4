@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "verifier_acceptance",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5f082c73228b9cceabb54e84631a93ded3bbd56498dc901a0444d64415841955",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The architecture revision, staged Rayleen/Davida/recovery/update development plan, threat-model delta, implementation blueprint amendments and superseding Bernie/Rayleen interaction text are the active planning artifacts. They require an accepted provider model in every named intelligent cognitive loop and preserve deterministic proof, authority, command and readback. Development gate zero is planned but explicitly not started.",
+    "current_authority_allocation": "GPT Sol remains architecture and acceptance owner; DeepSeek V4 Flash/high remains bounded implementation/test worker and Gemini 3.6 Flash/high remains fresh independent veto reviewer. No subagent packet, worker resumption, provider call, integration or protected action is permitted by this plan-only acceptance.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 remains on codex/ariadne-bernie-davida-parallel-seam at f551a91d861baa65d04fae8f50dfee0a52440035, two commits ahead of origin task ec7af55d58997ed967abce05af5fa5bbe3bbb3dd. Local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Existing fifth-pair final artifacts and user-owned untracked docs/branding are preserved; nothing is staged and no ref has moved.",
+    "live_handover_current_baton": "AGENTS.md now has 453 lines, 72655 bytes and SHA-256 c4359c9579cdf1ff134e2fdbd92bcd467d303dfb5a2c55a26d509e651c542adc. It records the accepted fifth pair, the model-required deterministic-authority doctrine and Yuri's explicit pause before any further subagent development.",
+    "protected_evidence_boundaries": "Protected holdouts, historical PHI, docs/branding, provider calls, external data transmission, patient-facing Rayleen, product reads/writes, administrative or recovery commands, actuators, shell/SQL/cloud/IAM, migrations, external dataset download/import/activation, deployment, production, release, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

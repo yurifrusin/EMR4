@@ -31,6 +31,15 @@ system connected only to committed typed Diary events. Events trigger a fresh
 authorised read and may update a projection or offer a proposal; they never
 grant write authority or bypass staff confirmation.
 
+All named EMR4 intelligences follow the model-required, deterministic-authority
+Bureau architecture in
+[`docs/emr4-model-required-deterministic-authority-bureau-architecture.md`](docs/emr4-model-required-deterministic-authority-bureau-architecture.md).
+An approved provider model is mandatory for natural-language interpretation,
+dialogue and candidate formation. Typed context, deterministic proofreading,
+backend authorization, human gates, commands and post-action verification
+remain independently mandatory. Provider-free tests prove components but do
+not, by themselves, prove an intelligent product path end to end.
+
 ### 1.1 Business & Licensing Model
 
 | Aspect | Decision |
@@ -97,6 +106,12 @@ in the diary/waiting-room surface. Bernie should help reception staff find suita
 appointment times, interpret scheduling constraints, draft admin messages, and prepare
 safe actions for human confirmation.
 
+Bernie's intelligent interaction is provider-model-required. The provider model
+translates natural language and manages clarification; it never supplies live
+availability, authorization, confirmation or write truth. When the accepted
+provider path is unavailable, Bernie reports the intelligent capability as
+unavailable while ordinary deterministic/manual Diary controls continue.
+
 The longer-term interaction goal is not to polish the grid into the primary
 interface indefinitely. It is to let reception staff ask and complete supported
 Diary work conversationally, with the grid available when spatial review is
@@ -148,6 +163,12 @@ serious skill should be setup and onboarding, but her identity is broader:
 Davida should help practice managers, owners, and implementation leads configure,
 operate, audit, and improve the practice-management system over time.
 
+Davida's intelligent interaction is also provider-model-required. Her model
+must operate through a dedicated practice-administration intent grammar and
+closed typed candidates. Deterministic context desks, proofreaders, dry runs,
+authorization and commands remain authoritative; Davida cannot confirm or
+apply her own proposals.
+
 For setup, Davida should be built over the same declarative setup-path YAML
 files, schemas, helper scripts, dry-run output, and verification steps that
 technical operators and external agents can inspect directly.
@@ -194,6 +215,47 @@ human/agent interface over that deterministic substrate. External copilots
 should also be able to ingest the same manifests and dry-run JSON output, so
 practices can bring their own agent or IT workflow without bypassing EMR4's
 safety model.
+
+### 2.9 Rayleen Waiting-Room Intelligence
+
+Rayleen is the distinct present-tense operational intelligence for patient
+arrivals, waiting states, waiting-area placement, queue flow, practitioner flow
+and intent-projected waiting-room views. Bernie remains primarily prospective
+scheduling intelligence; Davida remains institutional and practice-
+administration intelligence.
+
+Rayleen uses an approved provider model for staff or future patient dialogue,
+intent interpretation, ambiguity handling and typed candidate formation. The
+shared deterministic Diary domain calculates queue membership, elapsed time,
+thresholds, state validity, projection contents and command admission. Rayleen
+does not own a parallel arrival database, private action grammar or alternative
+write path.
+
+The historical auto-arrival daemon may survive as one deterministic observation
+source, but it is not the full Rayleen architecture. Every arrival, status or
+waiting-area mutation must use a backend-owned proposal/confirm command with
+current identity and practice scope, human confirmation where required,
+idempotency, atomic audit/outbox behavior and deterministic readback.
+
+### 2.10 Controlled Recovery and Update Intelligence
+
+EMR4 should add a separate technical control-plane Bureau for application and
+database diagnosis, controlled recovery, release assistance and pharmaceutical,
+vaccination, reference-data and policy update planning. Its approved provider
+model is mandatory for operator dialogue, diagnostic synthesis, candidate
+runbook selection and explanation.
+
+The model receives versioned, typed system-anatomy frames and can emit only
+closed diagnosis, recovery or update candidates. A deterministic proofreader,
+risk/authority policy, human or dual-review gate, narrowly privileged actuator
+and deterministic post-action verification remain separate and mandatory. The
+model never receives a generic shell, SQL console, cloud-owner credential or
+authority to certify its own success.
+
+Preconfigured transaction rollback, liveness, timeout, circuit-breaker and
+platform-restart behavior remains deterministic infrastructure rather than
+model-optional intelligence. The staged plan is
+[`docs/emr4-rayleen-davida-controlled-recovery-development-plan.md`](docs/emr4-rayleen-davida-controlled-recovery-development-plan.md).
 
 ---
 
@@ -820,16 +882,18 @@ export mapping canonical.
 
 ---
 
-### PHASE 4 — Rayleen (Auto-Receptionist Kiosk)
-*Touchscreen check-in + waiting room display.*
+### PHASE 4 — Rayleen Waiting-Room Intelligence
+*Model-required arrival dialogue + deterministic waiting-room projections and commands.*
 
 | Item | Details |
 |:---|:---|
-| Kiosk app | Vite SPA; full-screen; 4 identification methods (details, QR, NFC, face) |
-| Azure Face API | 1:1 verification; liveness detection; explicit consent; PIA documentation |
-| Waiting room display | Separate screen mode showing queue (first name + initial only); estimated wait |
-| Arrival SMS | Post-check-in confirmation to patient |
-| Push to taskpane | Internal message to GP + receptionist on patient arrival |
+| Staff intelligence | Provider-model dialogue over a minimal, freshness-bound waiting-room context frame |
+| Intent projections | Deterministic filter, group, threshold, focus and exception views selected through typed model candidates |
+| Arrival commands | Backend proposal/confirm paths for check-in, status and waiting-area movement; Rayleen cannot self-confirm |
+| Kiosk/patient client | Later separate external-identity and privacy gate; deterministic controls remain available alongside intelligent dialogue |
+| Waiting room display | Role- and privacy-scoped projection; no parallel queue truth or model-calculated authoritative wait state |
+| Identity methods | Details, QR, NFC or biometrics require separate identity, consent, liveness and privacy-impact approval |
+| Notifications | Arrival messages and staff cues consume committed backend events and fresh authorized reads only |
 
 ---
 
@@ -1018,7 +1082,7 @@ export mapping canonical.
 | **2B** | Bernie Receptionist Copilot | 2–3 |
 | **3** | Online Booking Portal | 2–3 |
 | **3B** | Patient PWA App | 1–2 |
-| **4** | Rayleen Kiosk + Waiting Room Display | 3–4 |
+| **4** | Rayleen Waiting-Room Intelligence + Patient Arrival Surfaces | 3–4 |
 | **5** | DDx Engine | 2–3 |
 | **5B** | Centaur Brain (Historical Pipeline) | 2–3 |
 | **5C** | Live RAG + Hive Mind | 2–3 |

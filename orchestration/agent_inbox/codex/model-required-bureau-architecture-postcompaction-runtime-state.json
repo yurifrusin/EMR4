@@ -1,0 +1,72 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "sprint_planning",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction at 453 lines, 73702 bytes and SHA-256 ced5f46679695af41e05a31ff246a0909f5e3459cb8d73684d7d3e05c773f6f1. It records the accepted fifth pair, revision 6 agent-error register, model-required deterministic-authority doctrine and Yuri's explicit pause before any further subagent development.",
+    "current_authority_allocation": "GPT Sol remains conductor, architecture and acceptance owner. DeepSeek V4 Flash/high remains the preferred bounded implementation/test worker and Gemini 3.6 Flash/high remains the fresh independent veto reviewer. Yuri's current instruction permits architecture revision and planning but forbids briefing, resuming or dispatching subagents for a further development tranche.",
+    "active_plan_and_acceptance": "The complete implementation_plan.md, orchestration/bernie_interaction_model.md, model-required Bureau architecture, paused Rayleen/Davida/controlled-recovery development plan, threat-model delta and accepted fifth-pair closeout were reread. Gate zero is the planned first successor, but it has not begun; no worker packet, model call, runtime wiring or product successor is authorized by this planning result.",
+    "protected_evidence_boundaries": "Protected holdouts and historical PHI remain closed. docs/branding is user-owned and must be preserved and excluded. Provider/model calls, external data transmission, real identity/data, patient/clinical data, Rayleen product access, arrival or administrative writes, recovery actuators, shell/SQL/cloud/IAM, database migrations, external update ingestion or activation, deployment, production, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 remains on codex/ariadne-bernie-davida-parallel-seam at f551a91d861baa65d04fae8f50dfee0a52440035, two commits ahead of origin task ec7af55d58997ed967abce05af5fa5bbe3bbb3dd. Local and origin master plus handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The intentional fifth-pair and architecture/planning changes are unstaged; user-owned untracked docs/branding is preserved and excluded; no ref has moved."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_required_bureau_architecture_postcompaction_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed the fresh five-source post-compaction rehydration and is validating documentation only."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was briefed, resumed, messaged or dispatched after Yuri's explicit pause."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Gemini remains planned only for the future gate-zero veto after deterministic artifacts; no model call occurs in this plan-only closeout."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["DeepSeek receives no packet while the development pause is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The real-TTY fallback is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The leverage-gated Claude lane is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {"resource_id": "codex-native-parallel-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
