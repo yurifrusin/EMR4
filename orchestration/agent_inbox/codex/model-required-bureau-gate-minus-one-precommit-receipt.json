@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:6136ba8fe73ed91be12c9de811bf4bf6ee7c0243b57fc4c24607025eeeda57b3",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The Gate -1 hardening portfolio, threat-model delta, provider-free evidence, two selected architectural controls, independent corrected receipt, incident corrections, closeout, Sol acceptance and Continuity/Compass node are complete. Root passed 104 serial closeout tests; Gemini independently passed its exact 79-test packet with zero findings on unchanged candidate 2b62f040bcc1c300dca6fb730e0f986d22f3be85.",
+    "current_authority_allocation": "Yuri explicitly authorized Gate -1 only. GPT Sol owns acceptance and task-branch closeout. Gemini 3.6 Flash/high supplied the required fresh independent veto; no implementation worker was selected. Gate zero remains a fresh user-owned decision and no protected integration, deployment or release is authorized.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 remains on codex/ariadne-bernie-davida-parallel-seam at 2b62f040bcc1c300dca6fb730e0f986d22f3be85, two commits ahead of origin task b09739183ddbe1a102086460749a84741a23b11b. Local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Intentional Gate -1 closeout files are modified or untracked; user-owned docs/branding is untracked, preserved and excluded. Explicit-path staging and a cached-name check are required before commit.",
+    "live_handover_current_baton": "AGENTS.md was fully rehydrated after compaction and is now refreshed at 454 lines, 74570 bytes and SHA-256 cfe35697191f408ba7669682244163eb8623d6681a1c41eab39e6ba4cc57ba48. It records the Gate -1 pass at Continuity 207 / Compass 188, register revision 7, the fresh-authority Gate-zero pause and all closed runtime/product boundaries.",
+    "protected_evidence_boundaries": "Protected holdouts, historical PHI, user-owned docs/branding, real identity, patient, clinical, document and product-derived values, provider product runtime, tools, actuators, cloud/IAM, databases, migrations, deployment, production, release, Pages and protected refs remain closed. Only bounded repository source was sent to the independent development reviewer."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,78 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was fully rehydrated after compaction and is now refreshed at 454 lines, 74570 bytes and SHA-256 cfe35697191f408ba7669682244163eb8623d6681a1c41eab39e6ba4cc57ba48. It records the Gate -1 pass at Continuity 207 / Compass 188, register revision 7, the fresh-authority Gate-zero pause and all closed runtime/product boundaries.",
+    "current_authority_allocation": "Yuri explicitly authorized Gate -1 only. GPT Sol owns acceptance and task-branch closeout. Gemini 3.6 Flash/high supplied the required fresh independent veto; no implementation worker was selected. Gate zero remains a fresh user-owned decision and no protected integration, deployment or release is authorized.",
+    "active_plan_and_acceptance": "The Gate -1 hardening portfolio, threat-model delta, provider-free evidence, two selected architectural controls, independent corrected receipt, incident corrections, closeout, Sol acceptance and Continuity/Compass node are complete. Root passed 104 serial closeout tests; Gemini independently passed its exact 79-test packet with zero findings on unchanged candidate 2b62f040bcc1c300dca6fb730e0f986d22f3be85.",
+    "protected_evidence_boundaries": "Protected holdouts, historical PHI, user-owned docs/branding, real identity, patient, clinical, document and product-derived values, provider product runtime, tools, actuators, cloud/IAM, databases, migrations, deployment, production, release, Pages and protected refs remain closed. Only bounded repository source was sent to the independent development reviewer.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 remains on codex/ariadne-bernie-davida-parallel-seam at 2b62f040bcc1c300dca6fb730e0f986d22f3be85, two commits ahead of origin task b09739183ddbe1a102086460749a84741a23b11b. Local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Intentional Gate -1 closeout files are modified or untracked; user-owned docs/branding is untracked, preserved and excluded. Explicit-path staging and a cached-name check are required before commit."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_required_bureau_gate_minus_one_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed architecture acceptance, incident correction, 104 serial tests, Ruff, diff checks and continuity validation."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Fresh Gemini 3.6 Flash/high review-2 passed candidate 2b62f040bcc1c300dca6fb730e0f986d22f3be85 with zero findings, 79 tests, unchanged HEAD, clean status and accurate non-zero review-transport accounting."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was selected."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker was selected."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The real-TTY fallback was not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The leverage-gated Claude lane was not selected."]
+    }
+  ],
+  "worker_slots": [
+    {"resource_id": "codex-native-parallel-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/antigravity/model-required-bureau-gate-minus-one-review-2-receipt.json"
+  ],
+  "assigned_agent_ids": []
+}

@@ -2,8 +2,8 @@
 
 Date: 2026-08-04
 
-Status: Gate -1 architecture review in progress; all Gate-zero and lane dispatch
-remains paused
+Status: Gate -1 passed; Gate zero and all lane dispatch remain paused pending
+fresh Yuri authority
 
 Architecture parent:
 `docs/emr4-model-required-deterministic-authority-bureau-architecture.md`
@@ -46,6 +46,13 @@ Gate -1 passes only after the hardening portfolio, attack paths, comparable
 alternatives, diagrams, threat-model delta and deterministic artifact checks
 pass a fresh independent Gemini 3.6 Flash/high veto. Until then the selections
 are candidates and Gate zero remains closed.
+
+Gate -1 passed on 2026-08-04 as
+`model_required_bureau_gate_minus_one_adversarial_architecture_pass`. The fresh
+Gemini 3.6 Flash/high veto found zero candidate defects on the unchanged exact
+candidate after 79 tests. The selected properties are now mandatory Gate-zero
+inputs, not implemented runtime controls. Gate zero remains closed pending
+fresh Yuri authority.
 
 ## Programme gate zero: shared architecture contract
 

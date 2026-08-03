@@ -571,14 +571,17 @@
       "recurrence_signature": "verifier.review_transport_misreported_as_zero",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "contained_then_escalated",
-        "action": "The raw receipt hash and sanitized conflict were preserved, the decision was not admitted, and a fresh correction packet requires separate candidate-runtime and development-review transport accounting.",
+        "status": "corrected_fresh_attempt",
+        "action": "The raw receipt hash and sanitized conflict were preserved, the first decision was not admitted, and a fresh corrected review on the unchanged Gate -1 architecture explicitly separated zero candidate-runtime side effects from the non-zero Gemini/Antigravity development-review transport.",
         "prevention_control": "Review packets and acceptance must require separate candidate_runtime_side_effects and development_review_transport claims; an unqualified zero-call or zero-transmission statement rejects the review.",
         "evidence_paths": [
-          "docs/ariadne-agent-error-correction-register-revision-7.md"
+          "docs/ariadne-agent-error-correction-register-revision-7.md",
+          "orchestration/agent_inbox/codex/model-required-bureau-gate-minus-one-gemini-review-packet-2.md",
+          "orchestration/agent_inbox/codex/model-required-bureau-gate-minus-one-verifier-worktree-preflight-2.json",
+          "orchestration/agent_inbox/antigravity/model-required-bureau-gate-minus-one-review-2-receipt.json"
         ]
       },
-      "status": "open"
+      "status": "corrected"
     }
   ]
 }

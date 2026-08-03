@@ -50,16 +50,17 @@
       "event-runtime",
       "historical-diary",
       "model-runtime",
+      "pii",
       "production",
       "protected-evidence",
       "provider-call",
       "release",
-      "pii",
+      "security-review",
       "stage-3b",
       "voice"
     ]
   },
-  "graph_revision": 206,
+  "graph_revision": 207,
   "harvests": [],
   "nodes": [
     {
@@ -11765,9 +11766,92 @@
         "Patient/clinical/document access, broader product reads and every product command/write remain closed.",
         "Distributed abuse resistance, monitoring/SIEM, organisational deployment, protected integration, production and release remain closed."
       ]
+    },
+    {
+      "id": "model-required-bureau-gate-minus-one",
+      "title": "Model-Required Bureau Gate -1 Adversarial Architecture Review",
+      "kind": "review",
+      "status": "accepted",
+      "created_at": "2026-08-03T22:15:35Z",
+      "updated_at": "2026-08-03T22:15:35Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "2b62f040bcc1c300dca6fb730e0f986d22f3be85",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-default-off-office-consumer-adapter",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "security-review",
+            "source": "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
+            "scope": "Architecture-only adversarial containment review before the shared model-required Bureau contract"
+          }
+        ],
+        "notes": [
+          "Yuri explicitly authorised Gate -1.",
+          "The external Gemini review received bounded source-only development context and no product data or runtime authority.",
+          "No implementation, product read/write, provider product runtime, actuator, deployment, production, release or protected-ref authority opened.",
+          "The user-owned docs/branding directory remained excluded."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "select-bureau-gate-minus-one-controls",
+          "source": "docs/emr4-model-required-bureau-gate-minus-one-closeout.md",
+          "status": "accepted",
+          "summary": "Require a deterministic labeled capability envelope and one-shot brokered cognitive cell as Gate-zero inputs."
+        }
+      ],
+      "claim_scope": [
+        "The research-backed architecture review and deterministic artifacts passed a fresh Gemini 3.6 Flash/high veto.",
+        "The model remains mandatory for intelligent dialogue but is an untrusted candidate generator with no authority.",
+        "The selected controls are requirements only; no runtime implementation or prompt-injection immunity is established."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/emr4-model-required-deterministic-authority-bureau-architecture.md",
+          "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
+          "docs/security/emr4-model-required-bureaus-controlled-recovery-threat-model-delta.md",
+          "docs/security/emr4-model-required-bureaus-gate-minus-one-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/security/hardening/model-required-bureau-gate-minus-one/hardening.json",
+          "docs/security/hardening/model-required-bureau-gate-minus-one/hardening.md",
+          "orchestration/continuity/model-required-bureau-gate-minus-one/provider-free-acceptance-evidence.json"
+        ],
+        "closeouts": [
+          "docs/emr4-model-required-bureau-gate-minus-one-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/model-required-bureau-gate-minus-one-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/model-required-bureau-gate-minus-one-preplan-receipt.json",
+          "orchestration/agent_inbox/codex/model-required-bureau-gate-minus-one-pre-verifier-receipt-2.json",
+          "orchestration/agent_inbox/codex/model-required-bureau-gate-minus-one-postcompaction-pre-verifier-receipt-2.json",
+          "orchestration/agent_inbox/antigravity/model-required-bureau-gate-minus-one-review-2-receipt.json"
+        ],
+        "tests": [
+          "scripts/model_required_bureau_gate_minus_one_acceptance.py",
+          "tests/test_model_required_bureau_gate_minus_one.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Gate zero requires fresh Yuri authority before architecture/schema/test work begins.",
+        "Every model/provider/data/cost/runtime decision and every product lane remains closed.",
+        "Real identity, patient/clinical/product data, tools, actuators, deployment, production, release, Pages and protected refs remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-03T04:00:00Z"
+  "updated_at": "2026-08-03T22:15:35Z"
 }

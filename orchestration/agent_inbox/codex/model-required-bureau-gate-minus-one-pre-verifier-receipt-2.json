@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "verifier_acceptance",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:6136ba8fe73ed91be12c9de811bf4bf6ee7c0243b57fc4c24607025eeeda57b3",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Corrected candidate 2b62f040bcc1c300dca6fb730e0f986d22f3be85 contains the source-hashed Gate -1 architecture at b3c5208476642517b850dd6160a84869d605ca71 plus register revision 7, the recurring detached-worktree control, sanitized AER-0015 evidence and a tested exact-HEAD/non-protected-branch preflight. AER-0015 remains open until a fresh review accurately separates candidate-runtime zero side effects from the external Antigravity/Gemini review transport.",
+    "current_authority_allocation": "GPT Sol remains conductor, architecture owner and acceptance integrator. Gate -1 requires a fresh Gemini 3.6 Flash/high independent veto after deterministic checks. The first Gemini decision is unadmitted because AER-0015 records its review-transport accounting error; this exact fresh corrected review is authorised without implementation, product runtime, protected-ref or deployment authority.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at 2b62f040bcc1c300dca6fb730e0f986d22f3be85, two commits ahead of origin task b09739183ddbe1a102086460749a84741a23b11b. Local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The new review worktree passed the deterministic pre-receipt check at the exact candidate on codex/review-model-required-bureau-gate-minus-one-2 with clean status; user-owned docs/branding remains untracked and excluded.",
+    "live_handover_current_baton": "AGENTS.md has 453 lines, 73702 bytes and SHA-256 ced5f46679695af41e05a31ff246a0909f5e3459cb8d73684d7d3e05c773f6f1. It records the parallel-capable Ariadne workflow, protected single-track integration, accepted fifth Bernie/Davida parent, model-required deterministic-authority doctrine and closed product/runtime boundaries.",
+    "protected_evidence_boundaries": "Protected holdouts, historical PHI, user-owned docs/branding, real identity, patient/clinical/document/product-derived values, provider product-runtime material, cloud/IAM, databases, tools, actuators, deployment, production, release, Pages and protected refs remain closed. The verifier receives bounded source-only review context in a distinct clean worktree and no implementation capability."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

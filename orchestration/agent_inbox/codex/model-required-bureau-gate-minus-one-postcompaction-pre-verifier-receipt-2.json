@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "verifier_acceptance",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:6136ba8fe73ed91be12c9de811bf4bf6ee7c0243b57fc4c24607025eeeda57b3",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The model-required Bureau architecture, Gate -1-updated development plan and controlled-recovery threat-model delta were reread completely. Corrected candidate 2b62f040bcc1c300dca6fb730e0f986d22f3be85 contains the source-hashed Gate -1 hardening portfolio plus revision-7 verifier controls. AER-0015 stays open until a fresh review accurately distinguishes candidate-runtime zero side effects from the external review transport.",
+    "current_authority_allocation": "Yuri explicitly opened Gate -1. GPT Sol remains conductor, architecture owner and acceptance integrator; the only external action now eligible is one fresh Gemini 3.6 Flash/high read-only review of bounded repository source after deterministic gates. No implementation worker, product runtime, protected integration or deployment is authorized.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at 2b62f040bcc1c300dca6fb730e0f986d22f3be85, two commits ahead of origin task b09739183ddbe1a102086460749a84741a23b11b. Local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The verifier worktree preflight passed at the exact candidate on codex/review-model-required-bureau-gate-minus-one-2 with clean status. User-owned docs/branding remains untracked and excluded.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after context compaction at 453 lines and SHA-256 ced5f46679695af41e05a31ff246a0909f5e3459cb8d73684d7d3e05c773f6f1. It keeps Gemini 3.6 Flash/high as independent veto reviewer, protects single-track integration and leaves all product/runtime boundaries closed.",
+    "protected_evidence_boundaries": "Protected holdouts, historical PHI, user-owned docs/branding, real identity, patient, clinical, document and product-derived values, provider product-runtime material, cloud/IAM, databases, tools, actuators, deployment, production, release, Pages and protected refs remain closed. The verifier receives bounded source-only development review context in an isolated clean non-protected worktree."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

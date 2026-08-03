@@ -41,11 +41,11 @@ def test_committed_register_is_closed_and_semantically_valid() -> None:
     assert [row["incident_id"] for row in register["incidents"]] == [
         f"AER-{index:04d}" for index in range(1, 16)
     ]
-    assert [
+    assert not [
         row["incident_id"]
         for row in register["incidents"]
         if row["status"] == "open"
-    ] == ["AER-0015"]
+    ]
 
 
 def test_seed_separates_agent_behavior_from_transport() -> None:
@@ -102,7 +102,7 @@ def test_pattern_report_detects_both_recurring_control_signals() -> None:
     report = build_pattern_report()
 
     assert report["incident_count"] == 15
-    assert report["open_incident_ids"] == ["AER-0015"]
+    assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 13,
         "harness": 1,
@@ -249,7 +249,7 @@ def test_recurrent_detached_branch_activates_pre_receipt_control() -> None:
     ] == "passed"
 
 
-def test_gate_minus_one_review_transport_claim_is_open_and_unadmitted() -> None:
+def test_gate_minus_one_review_transport_claim_is_corrected_fresh() -> None:
     incident = {
         row["incident_id"]: row for row in _register()["incidents"]
     }["AER-0015"]
@@ -260,18 +260,36 @@ def test_gate_minus_one_review_transport_claim_is_open_and_unadmitted() -> None:
         / "codex"
         / "model-required-bureau-gate-minus-one-review-claim-failure-receipt.json"
     )
+    corrected = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "antigravity"
+        / "model-required-bureau-gate-minus-one-review-2-receipt.json"
+    )
 
     assert incident["category"] == "evidence_misreport"
     assert incident["recurrence_signature"] == (
         "verifier.review_transport_misreported_as_zero"
     )
-    assert incident["status"] == "open"
+    assert incident["status"] == "corrected"
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
     assert failure["raw_receipt_sha256"] == (
         "9a5ed7c38fd21ddd2d9616730fc5fd584684e058c4021e6c3e405abe288e8ec5"
     )
     assert "review itself invoked Gemini" in failure["conflict"]
     assert failure["decision_admitted"] is False
     assert failure["candidate_changed"] is False
+    assert corrected["decision"] == "pass"
+    assert corrected["head_before"] == corrected["head_after"] == (
+        "2b62f040bcc1c300dca6fb730e0f986d22f3be85"
+    )
+    assert corrected["dirty_after"] is False
+    assert "Candidate Product/Runtime Side Effects (Observed): Exactly 0" in (
+        corrected["result"]
+    )
+    assert "Development Review Transport (Observed): Non-Zero" in corrected["result"]
+    assert "invoked `gemini-3.6-flash-high`" in corrected["result"]
 
 
 def test_pattern_report_is_byte_deterministic(tmp_path: Path) -> None:

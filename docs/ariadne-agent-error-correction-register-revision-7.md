@@ -2,8 +2,7 @@
 
 Date: 2026-08-04
 
-Status: one recurring orchestrator error corrected; one verifier claim error
-contained pending a fresh corrected review
+Status: recurring orchestrator error and verifier claim error corrected
 
 ## AER-0014: detached verifier worktree recurred
 
@@ -38,6 +37,13 @@ fresh correction packet must report two separate scopes:
 - development-review transport, model invocation and bounded source
   transmission.
 
-It may not use an unqualified zero-call statement. `AER-0015` remains open
-until a genuinely fresh review returns one accurate decision on the corrected
-candidate. No second attempt is accepted by this revision alone.
+It may not use an unqualified zero-call statement.
+
+The fresh corrected review ran in the exact clean worktree at candidate
+`2b62f040bcc1c300dca6fb730e0f986d22f3be85`. Gemini 3.6 Flash/high returned
+one `pass`, 79 passing tests and zero findings without changing HEAD or the
+worktree. Its accounting explicitly records zero candidate product/runtime
+side effects and the non-zero Antigravity/Gemini development-review invocation
+and bounded source-only transmission. That receipt supplies the missing
+correction evidence, so `AER-0015` is now corrected; the rejected first decision
+remains preserved and unadmitted.

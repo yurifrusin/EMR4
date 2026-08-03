@@ -1,5 +1,5 @@
 {
-  "canonical_register_sha256": "20e06fd089ce4f7ec7b9acb2b183136d5390b1ed7d727919bc4ea8c4528bb1e3",
+  "canonical_register_sha256": "51b2056d97c72c9c830c185b765cb0732b8baeca1aa78a4355b3b90853bbcb84",
   "counts": {
     "by_candidate_state": {
       "canonical_unchanged": 13,
@@ -41,9 +41,7 @@
   "coverage": "bounded_known_preserved_incidents",
   "incident_count": 15,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
-  "open_incident_ids": [
-    "AER-0015"
-  ],
+  "open_incident_ids": [],
   "recurring_patterns": [
     {
       "categories": [

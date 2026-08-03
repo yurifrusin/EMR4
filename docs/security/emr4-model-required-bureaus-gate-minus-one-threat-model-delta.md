@@ -2,7 +2,8 @@
 
 Date: 2026-08-04
 
-Status: architecture-review candidate; no runtime control is implemented
+Status: accepted Gate -1 architecture requirement; no runtime control is
+implemented
 
 Parents:
 

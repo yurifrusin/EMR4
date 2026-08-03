@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4's fixed Office active-practitioner consumer now has explicit inert reload/history behaviour, safe expired/revoked-session reconciliation, cross-surface cookie/CSRF/nonce isolation, identifier-free lifecycle counts and a route-free default-off adapter. Continuity 206 / Compass 187 bind all five results. Fresh authority is required before a native Diary composition review; real identity, broader product reads, every write, deployment, production and release remain closed.
+> EMR4's model-required Bureau programme has passed Gate -1 at Continuity 207 / Compass 188. The next safe candidate is Gate zero only: freeze the shared four-plane contract, label/capability and source/sink schemas, one-attempt cell and deterministic tests after fresh Yuri authority. All product/runtime lanes remain closed.
 
 ## North star
 
@@ -186,33 +186,32 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    A versioned ten-reason ledger contains no identifier, correlation or opaque launch value and routes nothing. Lineage parent: `raisa-provider-free-office-cross-surface-replay-isolation`.
 85. **Extract reusable one-use Office lifecycle decisions without product wiring — Raisa Provider-Free Default-Off Office Consumer Adapter**
    The route-free adapter owns only fixed surface decisions, nonce admission and sanitized counters and remains absent from app.main. Lineage parent: `raisa-provider-free-office-lifecycle-observability`.
+86. **Adversarial containment gate before the shared model-required Bureau contract — Model-Required Bureau Gate -1 Adversarial Architecture Review**
+   Gate -1 selects deterministic information-flow labels and a one-shot brokered cognitive cell while leaving every runtime and product lane closed. Lineage parent: `raisa-provider-free-default-off-office-consumer-adapter`.
 
 ## Current position
 
-**Provider-free default-off Office consumer lifecycle adapter — Raisa Provider-Free Default-Off Office Consumer Adapter**
+**Accepted adversarial architecture gate before Gate zero — Model-Required Bureau Gate -1 Adversarial Architecture Review**
 
-**Why this proof came next:** The supervised two-host read passed, making navigation, session-loss and replay lifecycle hardening the least-sensitive authorised follow-on.
+**Why this proof came next:** Mandatory provider-model participation creates a high-consequence prompt-injection and wrapper-compromise boundary that must be frozen before lane work.
 
-Five provider-free descendants now make repeated delivery inert, reconcile lost sessions, isolate surface authority, expose only sanitized reason counts and extract an unmounted adapter.
+The shared Bureau direction now requires deterministic labeled capability flows and a fresh brokered no-ambient-bridge cell for every attempt.
 
 ### What this unlocks
 
-- Review the five lifecycle results on their stacked draft pull request.
-- With fresh authority, review a default-off native Diary composition for the same active-practitioner read.
+- With fresh Yuri authority, begin Gate zero architecture, closed schemas and deterministic tests only.
 
 ### What it does not solve
 
-- Live Microsoft/provider interoperability or real identity mapping.
-- Patient/clinical/document access, broader product resources or any command/write.
-- Distributed abuse resistance, organisational deployment, protected integration, production or release.
+- Implementation or runtime enforcement of the selected controls.
+- Prompt-injection immunity, sandbox invulnerability or provider trustworthiness.
+- Real identity/data, product reads/writes, patient/clinical use, deployment, production or release.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
-- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
-- Bounded opening `api-change`: Extract reusable one-use Office lifecycle decisions without product wiring
-- All other named boundaries remain closed: `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `stage-3b`, `voice`.
+- Bounded opening `security-review`: Architecture-only adversarial containment review before the shared model-required Bureau contract
+- All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `stage-3b`, `voice`.
 
 ## Product decision horizon
 
@@ -446,9 +445,12 @@ Prerequisites:
   Required before: Satisfied on 2026-08-03 under Yuri's authority for five clear provider-free descendants; all five lifecycle results passed without a material fork.
 - **Should EMR4 review a default-off native Diary composition for the same active-practitioner read?**
   Required before: Fresh Yuri authority is required because the six-tranche Office consumer and lifecycle sequence is now consumed.
+- **Should EMR4 freeze the shared model-required Bureau contract and closed Gate-zero schemas and deterministic tests?**
+  Required before: Fresh Yuri authority is required because Gate -1 is consumed and the earlier pause on further development remains in force.
 
 ## Map limits
 
+- Gate -1 is accepted architecture evidence only; its selected controls are not implemented and establish no model or product runtime, prompt-injection immunity, data access, actuator, deployment, production or release posture.
 - The five Office lifecycle descendants are provider-free, authored-synthetic, active-practitioner-only and task-scoped; they add no real identity, broader product authority or production wiring.
 - The Office practitioner-directory result is provider-free, authored-synthetic, active-only and task-scoped; it proves neither real identity nor patient/clinical/document or product-write safety.
 - The practitioner-directory result is provider-free, authored-synthetic, active-only and unmounted; it proves neither real identity nor patient/clinical product access.
@@ -669,6 +671,8 @@ Prerequisites:
 - `docs/bernie-reception-one-yuri-internal-walkthrough-findings.md`
 - `docs/bernie-reception-one-yuri-internal-walkthrough-plan.md`
 - `docs/bernie-stage1-provider-free-supervised-booking-acceptance-plan.md`
+- `docs/emr4-model-required-bureau-gate-minus-one-closeout.md`
+- `docs/emr4-rayleen-davida-controlled-recovery-development-plan.md`
 - `docs/raisa-clinician-one-readonly-document-context-closeout.md`
 - `docs/raisa-clinician-one-readonly-document-context-plan.md`
 - `docs/raisa-clinician-one-word-desktop-selection-check-closeout.md`
@@ -764,6 +768,8 @@ Prerequisites:
 - `docs/security/bernie-reception-one-structured-source-language-threat-model-delta.md`
 - `docs/security/dependabot-alert-17-triage-2026-08-01.md`
 - `docs/security/dependabot-alerts-8-15-triage-2026-08-01.md`
+- `docs/security/emr4-model-required-bureaus-gate-minus-one-threat-model-delta.md`
+- `docs/security/hardening/model-required-bureau-gate-minus-one/hardening.json`
 - `docs/security/hardening/raisa-two-component-oidc-verifier/hardening.md`
 - `docs/security/pr70-codeql-alerts-543-544-triage-2026-08-01.md`
 - `docs/security/raisa-clinician-one-readonly-document-context-threat-model-delta.md`
@@ -798,6 +804,7 @@ Prerequisites:
 - `docs/security/security-finding-register.json`
 - `implementation_plan.md`
 - `orchestration/access_ai_api_design.md`
+- `orchestration/agent_inbox/antigravity/model-required-bureau-gate-minus-one-review-2-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-generated-draft-sol-review.md`
 - `orchestration/agent_inbox/codex/ariadne-gemini-attempt4-sol-review.md`
 - `orchestration/agent_inbox/codex/ariadne-synaptic-event-router-protocol-sol-acceptance.md`
@@ -832,6 +839,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/bernie-stage1-tranche-d-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/clinician-one-readonly-document-context-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/clinician-one-word-desktop-selection-check-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/model-required-bureau-gate-minus-one-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
@@ -998,6 +1006,7 @@ Prerequisites:
 - `orchestration/continuity/clinician-one-word-desktop-selection-check/desktop-selection-evidence.json`
 - `orchestration/continuity/clinician-one-word-desktop-selection-check/final-residue-evidence.json`
 - `orchestration/continuity/clinician-one-word-desktop-selection-check/manifest.xml`
+- `orchestration/continuity/model-required-bureau-gate-minus-one/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-cloud-run-api-runtime-identity-enablement/evidence.json`
 - `orchestration/continuity/raisa-cloud-run-public-access-word-online-verification/browser-word-online-evidence.json`
 - `orchestration/continuity/raisa-cloud-run-public-access-word-online-verification/interim-residue-evidence.json`
@@ -1348,4 +1357,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 187; continuity graph revision 206._
+_Compass map revision 188; continuity graph revision 207._

@@ -1,0 +1,78 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "verifier_acceptance",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after context compaction at 453 lines and SHA-256 ced5f46679695af41e05a31ff246a0909f5e3459cb8d73684d7d3e05c773f6f1. It keeps Gemini 3.6 Flash/high as independent veto reviewer, protects single-track integration and leaves all product/runtime boundaries closed.",
+    "current_authority_allocation": "Yuri explicitly opened Gate -1. GPT Sol remains conductor, architecture owner and acceptance integrator; the only external action now eligible is one fresh Gemini 3.6 Flash/high read-only review of bounded repository source after deterministic gates. No implementation worker, product runtime, protected integration or deployment is authorized.",
+    "active_plan_and_acceptance": "The model-required Bureau architecture, Gate -1-updated development plan and controlled-recovery threat-model delta were reread completely. Corrected candidate 2b62f040bcc1c300dca6fb730e0f986d22f3be85 contains the source-hashed Gate -1 hardening portfolio plus revision-7 verifier controls. AER-0015 stays open until a fresh review accurately distinguishes candidate-runtime zero side effects from the external review transport.",
+    "protected_evidence_boundaries": "Protected holdouts, historical PHI, user-owned docs/branding, real identity, patient, clinical, document and product-derived values, provider product-runtime material, cloud/IAM, databases, tools, actuators, deployment, production, release, Pages and protected refs remain closed. The verifier receives bounded source-only development review context in an isolated clean non-protected worktree.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at 2b62f040bcc1c300dca6fb730e0f986d22f3be85, two commits ahead of origin task b09739183ddbe1a102086460749a84741a23b11b. Local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The verifier worktree preflight passed at the exact candidate on codex/review-model-required-bureau-gate-minus-one-2 with clean status. User-owned docs/branding remains untracked and excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_required_bureau_gate_minus_one_postcompaction_corrected_pre_verifier_acceptance",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol repeated full five-source rehydration after compaction and preserved the corrected review boundary."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "model-required-bureau-gate-minus-one-verifier-worktree-preflight-2.json passed on exact candidate 2b62f040bcc1c300dca6fb730e0f986d22f3be85 and codex/review-model-required-bureau-gate-minus-one-2."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is selected."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker is selected."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The real-TTY fallback is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The leverage-gated Claude lane is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {"resource_id": "codex-native-parallel-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [
+    "orchestration/agent_inbox/codex/model-required-bureau-gate-minus-one-verifier-worktree-preflight-2.json"
+  ],
+  "assigned_agent_ids": []
+}
