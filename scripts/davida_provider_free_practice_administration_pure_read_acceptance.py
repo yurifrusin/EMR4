@@ -389,6 +389,27 @@ def _sensitive_values(seeded: dict[str, Any]) -> list[str]:
     return values
 
 
+def _select_reads_present(captured_statements: list[str]) -> bool:
+    """Return True only when captured statements prove the two pure table reads.
+
+    Case-consistent SELECT-presence classifier: no captured statement may be a
+    DML/DDL statement and at least one captured statement must read
+    ``practice_locations`` and at least one must read ``practitioners``. The
+    fragments are matched against the upper-cased statement so the mixed-case
+    SQL emitted by SQLAlchemy (upper-case keywords, lower-case identifiers)
+    satisfies the gate.
+    """
+    if any(DML_DDL_RE.match(statement) for statement in captured_statements):
+        return False
+    return any(
+        "FROM PRACTICE_LOCATIONS" in statement.upper()
+        for statement in captured_statements
+    ) and any(
+        "FROM PRACTITIONERS" in statement.upper()
+        for statement in captured_statements
+    )
+
+
 def run_acceptance(*, output_path: Path | None = None) -> dict[str, Any]:
     suffix = secrets.token_hex(6)
     database_name = f"emr4_davida_pure_read_acceptance_{suffix}"
@@ -726,17 +747,7 @@ def run_acceptance(*, output_path: Path | None = None) -> dict[str, Any]:
             for statement in captured_statements
             if DML_DDL_RE.match(statement)
         ]
-        select_only = (
-            not dml_or_ddl_statements
-            and any(
-                "FROM practice_locations" in statement.upper()
-                for statement in captured_statements
-            )
-            and any(
-                "FROM practitioners" in statement.upper()
-                for statement in captured_statements
-            )
-        )
+        select_only = _select_reads_present(captured_statements)
         tables_unchanged = before_snapshot == after_snapshot
         session_state_clean = (
             session_state["new"] == 0

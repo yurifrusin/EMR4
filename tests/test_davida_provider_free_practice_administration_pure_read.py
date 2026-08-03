@@ -2,9 +2,10 @@
 
 Mirrors the accepted Davida boundary test style: reads public docs, contract
 JSON/schema and read-only application sources; composes frames with the pure
-context-desk composer; never opens a database or imports app runtime
-dependencies beyond the composer/schemas. Root holds the serial database/test
-lease; this file is deterministic and provider-free.
+context-desk composer; never opens a database. The SELECT-presence regression
+imports only the pure case-consistent classifier helper from the acceptance
+script, which itself makes no database connection at import time. Root holds
+the serial database/test lease; this file is deterministic and provider-free.
 """
 
 from __future__ import annotations
@@ -27,6 +28,9 @@ from app.services.practice.practice_administration_context_desk import (
     ResourceReferenceBinding,
     ResourceReferenceRegistry,
     compose_practice_administration_context,
+)
+from scripts.davida_provider_free_practice_administration_pure_read_acceptance import (
+    _select_reads_present,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -542,3 +546,57 @@ def test_public_artifacts_state_non_authority_and_branding_exclusion() -> None:
     assert "authority_ceiling" in combined or "authority ceiling" in combined
     assert "fail closed" in combined
     assert "provider_free_in_process_backend_postgres" in combined
+
+
+def test_select_presence_classifier_requires_both_pure_table_reads() -> None:
+    # Mixed-case SQL exactly as SQLAlchemy emits it: upper-case keywords,
+    # lower-case identifiers. The historical classifier upper-cased the
+    # statement and then searched for lower-case fragments, so these never
+    # matched and `select_reads_present` was always false. This assertion is
+    # the deterministic regression for that mixed-case defect.
+    lower_mixed = [
+        "SELECT practice_locations.id, practice_locations.name\n"
+        "FROM practice_locations\n"
+        "WHERE practice_locations.practice_id = $1 "
+        "AND practice_locations.is_active = true",
+        "SELECT practitioners.id\n"
+        "FROM practitioners\n"
+        "WHERE practitioners.practice_id = $1 "
+        "AND practitioners.is_active = true",
+    ]
+    upper_mixed = [
+        "SELECT ID FROM PRACTICE_LOCATIONS WHERE IS_ACTIVE = TRUE",
+        "SELECT ID FROM PRACTITIONERS WHERE IS_ACTIVE = TRUE",
+    ]
+    assert _select_reads_present(lower_mixed) is True
+    assert _select_reads_present(upper_mixed) is True
+
+
+def test_select_presence_classifier_rejects_missing_table_or_dml_ddl() -> None:
+    # Both pure tables must be present: one read alone is insufficient.
+    assert _select_reads_present(["SELECT id FROM practice_locations"]) is False
+    assert _select_reads_present(["SELECT id FROM practitioners"]) is False
+    # No captured statements prove no read.
+    assert _select_reads_present([]) is False
+    # Any DML statement makes the gate fail even when both reads are present.
+    assert (
+        _select_reads_present(
+            [
+                "SELECT id FROM practice_locations",
+                "SELECT id FROM practitioners",
+                "UPDATE practitioners SET is_active = false",
+            ]
+        )
+        is False
+    )
+    # Any DDL statement makes the gate fail even when both reads are present.
+    assert (
+        _select_reads_present(
+            [
+                "SELECT id FROM practice_locations",
+                "SELECT id FROM practitioners",
+                "CREATE TABLE practitioners_tmp (id uuid)",
+            ]
+        )
+        is False
+    )
