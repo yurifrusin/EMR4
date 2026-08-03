@@ -1,4 +1,4 @@
-"""Default-off provider-free native-Diary application-session composition adapter.
+"""Default-off native-Diary application-session composition adapter.
 
 The accepted shared practitioner router (``application_auth_product.py``) is a
 deliberately permissive GraphQL surface: it intentionally accepts a client
@@ -19,7 +19,7 @@ The guard is an ASGI-level admission gate for the exact product path.  It
 buffers/replays at most ``MAX_REQUEST_BYTES`` (8192) bytes, requires POST with
 ``application/json``, the fixed query constant, the exact variables
 ``{activeOnly: true, limit: 200, offset: 0}`` and no ``practiceId``, alias,
-fragment, directive, introspection, mutation, field subset/extra field,
+spread syntax, directive, introspection, mutation, field subset/extra field,
 pagination drift or extra JSON key.  Any deviation is rejected generically with
 403 and ``Cache-Control: no-store`` before the bridge performs any session,
 origin, CSRF or product authentication.
