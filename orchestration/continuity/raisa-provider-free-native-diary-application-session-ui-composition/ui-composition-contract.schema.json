@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/native-diary-ui-composition-contract.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "source_head",
+    "parent",
+    "evidence",
+    "bootstrap",
+    "composition",
+    "legacy",
+    "api_spine",
+    "closed_gates",
+    "claims_not_made"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.raisa.native_diary_ui_composition_contract.v1"},
+    "status": {"const": "default_off_static_ui_composition"},
+    "source_head": {"const": "e7d209e6652106c8f69036460223259a33af19c9"},
+    "parent": {"const": "provider_free_native_diary_application_session_practitioner_reconciliation_pass"},
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "data_class", "browser", "live_backend", "mounted_backend"],
+      "properties": {
+        "label": {"const": "provider_free_default_off_ui_composition_harness"},
+        "data_class": {"const": "authored_synthetic"},
+        "browser": {"const": false},
+        "live_backend": {"const": false},
+        "mounted_backend": {"const": false}
+      }
+    },
+    "bootstrap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["global", "accepted_keys", "strict_true_only", "feature_off_uses_legacy", "enabled_incomplete_fails_before_read", "reader_receives_arguments", "client_selected_authority"],
+      "properties": {
+        "global": {"const": "__EMR4_NATIVE_DIARY_APPLICATION_SESSION_PRACTITIONERS__"},
+        "accepted_keys": {"const": ["enabled", "readFixedPractitionerDirectory", "sessionGeneration"]},
+        "strict_true_only": {"const": true},
+        "feature_off_uses_legacy": {"const": true},
+        "enabled_incomplete_fails_before_read": {"const": true},
+        "reader_receives_arguments": {"const": false},
+        "client_selected_authority": {"const": false}
+      }
+    },
+    "composition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["published_reconciler_lf_parity", "sole_row_egress", "latest_read_wins", "strict_generation_advance", "invalidation_suppresses_outstanding", "replay_suppressed", "malformed_or_authority_response_suppressed", "callback_failure_consumes_ticket", "reader_failure_reason", "lifecycle_controls", "snapshot_contains_reader_or_rows", "snapshot_contains_secret_or_authority"],
+      "properties": {
+        "published_reconciler_lf_parity": {"const": true},
+        "sole_row_egress": {"const": "accepted_reconciler"},
+        "latest_read_wins": {"const": true},
+        "strict_generation_advance": {"const": true},
+        "invalidation_suppresses_outstanding": {"const": true},
+        "replay_suppressed": {"const": true},
+        "malformed_or_authority_response_suppressed": {"const": true},
+        "callback_failure_consumes_ticket": {"const": true},
+        "reader_failure_reason": {"const": "fixed_read_failed"},
+        "lifecycle_controls": {"const": ["invalidateSession", "advanceSessionGeneration", "snapshot"]},
+        "snapshot_contains_reader_or_rows": {"const": false},
+        "snapshot_contains_secret_or_authority": {"const": false}
+      }
+    },
+    "legacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["graphql_function_retained_exact", "rest_function_retained_exact", "rest_fallback_feature_off_only", "enabled_path_fallback"],
+      "properties": {
+        "graphql_function_retained_exact": {"const": "fetchPractitionerDirectoryGraphql"},
+        "rest_function_retained_exact": {"const": "fetchPractitionerDirectoryRest"},
+        "rest_fallback_feature_off_only": {"const": true},
+        "enabled_path_fallback": {"const": false}
+      }
+    },
+    "api_spine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["classification", "graphql_mutation", "command_tunnel", "new_rest_surface", "event_actuator", "manifest_change"],
+      "properties": {
+        "classification": {"const": "scoped_read_consumer"},
+        "graphql_mutation": {"const": false},
+        "command_tunnel": {"const": false},
+        "new_rest_surface": {"const": false},
+        "event_actuator": {"const": false},
+        "manifest_change": {"const": false}
+      }
+    },
+    "closed_gates": {"const": ["providers_models", "memory_rag_graphrag", "real_identity", "patient_clinical_document_data", "new_api_scope", "commands_writes", "app_main_mount", "cloud_iam", "deployment_production_release", "protected_evidence_refs", "docs_branding"]},
+    "claims_not_made": {"const": ["browser", "route_intercepted", "http_backend_postgresql", "usability", "production", "release"]}
+  }
+}

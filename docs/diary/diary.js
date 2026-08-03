@@ -2792,7 +2792,60 @@ async function fetchPractitionerDirectoryGraphql() {
   return { rows, attempted: true, fallback: false, reason: "ok" };
 }
 
+const APPLICATION_SESSION_PRACTITIONER_BOOTSTRAP_GLOBAL =
+  "__EMR4_NATIVE_DIARY_APPLICATION_SESSION_PRACTITIONERS__";
+let applicationSessionPractitionerDirectory = null;
+let applicationSessionPractitionerReader = null;
+
+function getApplicationSessionPractitionerBootstrap() {
+  return window[APPLICATION_SESSION_PRACTITIONER_BOOTSTRAP_GLOBAL];
+}
+
+function isApplicationSessionPractitionerBootstrapEnabled(bootstrap) {
+  return bootstrap !== null &&
+    typeof bootstrap === "object" &&
+    !Array.isArray(bootstrap) &&
+    bootstrap.enabled === true;
+}
+
+async function loadApplicationSessionPractitionerDirectory(bootstrap) {
+  const compositionModule = await import("./application-session-practitioner-directory.mjs?v=1");
+  compositionModule.assertApplicationSessionPractitionerBootstrap(bootstrap);
+  if (applicationSessionPractitionerDirectory === null) {
+    applicationSessionPractitionerDirectory =
+      compositionModule.createApplicationSessionPractitionerDirectory(bootstrap);
+    applicationSessionPractitionerReader = bootstrap.readFixedPractitionerDirectory;
+  } else {
+    if (bootstrap.readFixedPractitionerDirectory !== applicationSessionPractitionerReader) {
+      throw new Error("application_session_practitioner_reader_changed");
+    }
+    const currentGeneration = applicationSessionPractitionerDirectory.snapshot().sessionGeneration;
+    if (bootstrap.sessionGeneration > currentGeneration) {
+      applicationSessionPractitionerDirectory.advanceSessionGeneration(
+        bootstrap.sessionGeneration,
+      );
+    } else if (bootstrap.sessionGeneration !== currentGeneration) {
+      throw new Error("application_session_practitioner_generation_stale");
+    }
+  }
+
+  let rows = null;
+  const result = await applicationSessionPractitionerDirectory.readAndRender(
+    (admittedRows) => {
+      rows = admittedRows;
+    },
+  );
+  if (!result.ok || !Array.isArray(rows)) {
+    throw new Error("application_session_practitioner_read_rejected");
+  }
+  return rows;
+}
+
 async function loadPractitionerDirectory() {
+  const applicationSessionBootstrap = getApplicationSessionPractitionerBootstrap();
+  if (isApplicationSessionPractitionerBootstrapEnabled(applicationSessionBootstrap)) {
+    return loadApplicationSessionPractitionerDirectory(applicationSessionBootstrap);
+  }
   if (!ENABLE_GRAPHQL_PRACTITIONERS) {
     return fetchPractitionerDirectoryRest();
   }
