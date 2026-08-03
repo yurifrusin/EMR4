@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.verifier-preflight-failure.v1",
+  "attempt_id": "gate-minus-one-antigravity-dispatch-001",
+  "observed_on": "2026-08-04",
+  "stage": "local_wrapper_preflight",
+  "candidate_head": "b3c5208476642517b850dd6160a84869d605ca71",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/gate-minus-one-gemini-review",
+  "observed_branch": "",
+  "failure": "Antigravity refuses protected or detached branch: ''",
+  "provider_or_model_call_started": false,
+  "fresh_antigravity_project_created": false,
+  "candidate_changed": false,
+  "candidate_worktree_clean": true,
+  "disposition": "revision_required_before_dispatch",
+  "correction": {
+    "branch": "codex/review-model-required-bureau-gate-minus-one",
+    "head_unchanged": true,
+    "deterministic_pre_receipt_worktree_check_added": true,
+    "same_exact_model_and_no_fallback": true
+  }
+}

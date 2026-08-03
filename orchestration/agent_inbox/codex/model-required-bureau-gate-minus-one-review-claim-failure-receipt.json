@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.verifier-claim-failure.v1",
+  "attempt_id": "gate-minus-one-gemini-review-001",
+  "observed_on": "2026-08-04",
+  "candidate_head": "b3c5208476642517b850dd6160a84869d605ca71",
+  "model": "gemini-3.6-flash-high",
+  "reasoning_level": "high",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "raw_receipt_sha256": "9a5ed7c38fd21ddd2d9616730fc5fd584684e058c4021e6c3e405abe288e8ec5",
+  "terminal_decision": "pass",
+  "candidate_findings": {
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "observed_claim": "No provider API call, model invocation, or external prompt transmission occurred.",
+  "conflict": "The candidate runtime made none of those calls, but this independent review itself invoked Gemini through Antigravity and transmitted the bounded source-only review packet and candidate context.",
+  "candidate_changed": false,
+  "candidate_worktree_clean": true,
+  "decision_admitted": false,
+  "disposition": "fresh_corrected_review_required",
+  "raw_prompt_or_sensitive_value_preserved": false
+}

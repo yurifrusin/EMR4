@@ -36,12 +36,16 @@ def test_committed_register_is_closed_and_semantically_valid() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 6
+    assert register["register_revision"] == 7
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 14)
+        f"AER-{index:04d}" for index in range(1, 16)
     ]
-    assert all(row["status"] != "open" for row in register["incidents"])
+    assert [
+        row["incident_id"]
+        for row in register["incidents"]
+        if row["status"] == "open"
+    ] == ["AER-0015"]
 
 
 def test_seed_separates_agent_behavior_from_transport() -> None:
@@ -49,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 11
+    assert len(agent_incidents) == 13
     assert len(transport_incidents) == 1
     assert transport_incidents[0]["incident_id"] == "AER-0007"
     assert transport_incidents[0]["category"] == "transport_timeout"
@@ -94,30 +98,43 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
     assert rows["AER-0002"]["related_incident_ids"] == ["AER-0001"]
 
 
-def test_duplicate_decision_is_the_only_seeded_recurring_signature() -> None:
+def test_pattern_report_detects_both_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 13
-    assert report["open_incident_ids"] == []
+    assert report["incident_count"] == 15
+    assert report["open_incident_ids"] == ["AER-0015"]
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 11,
+        "agent_behavior": 13,
         "harness": 1,
         "transport": 1,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 2,
-        "evidence_misreport": 1,
+        "evidence_misreport": 2,
         "harness_failure": 1,
-        "output_contract_violation": 6,
+        "output_contract_violation": 7,
         "read_only_violation": 1,
         "reasoning_claim_error": 1,
         "transport_timeout": 1,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "canonical_unchanged": 11,
+        "canonical_unchanged": 13,
         "untrusted_partial_worktree": 2,
     }
     assert report["recurring_patterns"] == [
+        {
+            "recurrence_signature": "orchestrator.detached_verifier_branch",
+            "incident_count": 2,
+            "incident_ids": ["AER-0012", "AER-0014"],
+            "origins": ["agent_behavior"],
+            "categories": ["output_contract_violation"],
+            "roles": ["orchestrator"],
+            "resource_ids": ["codex-primary-orchestrator"],
+            "prevention_controls": [
+                "Verifier setup must validate a non-empty non-protected codex/review branch and exact candidate HEAD before issuing the pre-verifier receipt or invoking Antigravity.",
+                "scripts/ariadne_verifier_worktree_preflight.py must pass on the exact candidate and codex/review branch before a pre-verifier receipt or Antigravity launch; policy ordering and tests enforce the gate."
+            ],
+        },
         {
             "recurrence_signature": "verifier.multiple_terminal_decisions",
             "incident_count": 2,
@@ -201,6 +218,62 @@ def test_unapproved_acceptance_event_failed_closed_before_corrected_receipt() ->
     assert corrected_receipt["rehydrated_from_receipt"] is True
 
 
+def test_recurrent_detached_branch_activates_pre_receipt_control() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    first = incidents["AER-0012"]
+    recurrence = incidents["AER-0014"]
+    preflight = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "model-required-bureau-gate-minus-one-verifier-worktree-preflight.json"
+    )
+    policy = yaml.safe_load(
+        (
+            ROOT
+            / "orchestration"
+            / "harness_settings"
+            / "verifier_execution_policy.yaml"
+        ).read_text(encoding="utf-8")
+    )
+
+    assert first["recurrence_signature"] == recurrence["recurrence_signature"]
+    assert recurrence["correction"]["status"] == "control_added"
+    assert preflight["status"] == "passed"
+    assert preflight["clean"] is True
+    assert preflight["branch"].startswith("codex/review-")
+    assert policy["execution_order"][0] == "verifier_worktree_preflight"
+    assert policy["deterministic_gate"]["required_results"][
+        "verifier_worktree_preflight"
+    ] == "passed"
+
+
+def test_gate_minus_one_review_transport_claim_is_open_and_unadmitted() -> None:
+    incident = {
+        row["incident_id"]: row for row in _register()["incidents"]
+    }["AER-0015"]
+    failure = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "model-required-bureau-gate-minus-one-review-claim-failure-receipt.json"
+    )
+
+    assert incident["category"] == "evidence_misreport"
+    assert incident["recurrence_signature"] == (
+        "verifier.review_transport_misreported_as_zero"
+    )
+    assert incident["status"] == "open"
+    assert failure["raw_receipt_sha256"] == (
+        "9a5ed7c38fd21ddd2d9616730fc5fd584684e058c4021e6c3e405abe288e8ec5"
+    )
+    assert "review itself invoked Gemini" in failure["conflict"]
+    assert failure["decision_admitted"] is False
+    assert failure["candidate_changed"] is False
+
+
 def test_pattern_report_is_byte_deterministic(tmp_path: Path) -> None:
     first = build_pattern_report()
     second = build_pattern_report()
@@ -262,6 +335,7 @@ def test_verifier_policy_requires_incident_learning_before_acceptance() -> None:
         "recurrence_threshold": 2,
         "raw_prompts_secrets_and_sensitive_values": "forbidden",
         "model_provider_or_role_causal_claim_without_separate_evidence": "forbidden",
+        "candidate_runtime_and_review_transport_claims": "separately_required",
     }
     assert set(learning["origin_classes"]) == {
         "agent_behavior",
@@ -345,11 +419,16 @@ def test_same_signature_across_different_dimensions_does_not_merge(
 
     report = build_pattern_report(register_path=register_path)
 
-    assert report["recurring_patterns"][0]["incident_ids"] == [
+    duplicate_decisions = next(
+        item
+        for item in report["recurring_patterns"]
+        if item["recurrence_signature"] == "verifier.multiple_terminal_decisions"
+    )
+    assert duplicate_decisions["incident_ids"] == [
         "AER-0004",
         "AER-0006",
     ]
-    assert report["recurring_patterns"][0]["incident_count"] == 2
+    assert duplicate_decisions["incident_count"] == 2
 
 
 def test_v1_rejects_unproved_causal_claim_level() -> None:

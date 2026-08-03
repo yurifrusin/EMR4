@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 6,
+  "register_revision": 7,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-04",
@@ -507,6 +507,78 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0014",
+      "attempt_id": "gate-minus-one-antigravity-dispatch-001",
+      "observed_on": "2026-08-04",
+      "tranche": "model-required-bureau-gate-minus-one",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "antigravity_local_wrapper_preflight",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The exact clean verifier candidate must be on a named non-protected codex/review branch before the five-source pre-verifier receipt is issued.",
+      "observed_error": "Root again supplied the exact clean candidate as a detached worktree, so the Antigravity wrapper rejected the empty branch before project creation or any provider/model call.",
+      "detection_method": "The deterministic Antigravity launcher returned the exact protected-or-detached-branch refusal and created no review receipt.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/model-required-bureau-gate-minus-one-detached-branch-failure-receipt.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.detached_verifier_branch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "The unchanged candidate was placed on a non-protected codex/review branch, and a deterministic exact-HEAD, clean-status and branch-prefix preflight was added ahead of future pre-verifier receipts.",
+        "prevention_control": "scripts/ariadne_verifier_worktree_preflight.py must pass on the exact candidate and codex/review branch before a pre-verifier receipt or Antigravity launch; policy ordering and tests enforce the gate.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-7.md",
+          "scripts/ariadne_verifier_worktree_preflight.py",
+          "orchestration/agent_inbox/codex/model-required-bureau-gate-minus-one-verifier-worktree-preflight.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0015",
+      "attempt_id": "gate-minus-one-gemini-review-001",
+      "observed_on": "2026-08-04",
+      "tranche": "model-required-bureau-gate-minus-one",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "Separate candidate-runtime side effects from the external development-review transport and never claim zero model calls or source transmission without naming the scope.",
+      "observed_error": "The reviewer correctly found zero candidate-runtime calls but unqualifiedly claimed that no model invocation or external prompt transmission occurred, even though the review itself invoked Gemini through Antigravity with the bounded source-only packet and candidate context.",
+      "detection_method": "Root compared the claims-not-established narrative with the wrapper receipt, selected model and known Antigravity invocation.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/model-required-bureau-gate-minus-one-review-claim-failure-receipt.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "verifier.review_transport_misreported_as_zero",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "The raw receipt hash and sanitized conflict were preserved, the decision was not admitted, and a fresh correction packet requires separate candidate-runtime and development-review transport accounting.",
+        "prevention_control": "Review packets and acceptance must require separate candidate_runtime_side_effects and development_review_transport claims; an unqualified zero-call or zero-transmission statement rejects the review.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-7.md"
+        ]
+      },
+      "status": "open"
     }
   ]
 }

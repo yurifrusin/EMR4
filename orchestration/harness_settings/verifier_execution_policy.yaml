@@ -1,6 +1,7 @@
 schema_version: ariadne.verifier_execution_policy.v1
 purpose: deterministic_first_risk_triggered_independent_verification
 execution_order:
+  - verifier_worktree_preflight
   - five_source_rehydration_receipt
   - exact_authority_and_scope_packet
   - exact_non_protected_candidate_binding
@@ -16,6 +17,7 @@ deterministic_gate:
   required_before_external_model_dispatch: true
   fail_closed_action: no_external_model_call
   required_results:
+    verifier_worktree_preflight: passed
     five_source_rehydration_receipt: passed
     authority_and_scope_packet: complete
     candidate_branch: exact_non_protected
@@ -138,3 +140,4 @@ incident_learning:
     recurrence_threshold: 2
     raw_prompts_secrets_and_sensitive_values: forbidden
     model_provider_or_role_causal_claim_without_separate_evidence: forbidden
+    candidate_runtime_and_review_transport_claims: separately_required
