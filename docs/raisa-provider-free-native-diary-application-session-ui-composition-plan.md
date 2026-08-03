@@ -45,6 +45,14 @@ HTTP, backend, PostgreSQL, usability, production or release evidence.
   reached only after the strict application-session flag is not enabled.
 - The enabled branch never calls bearer GraphQL or REST, including after
   reader rejection, malformed output, stale generation or module failure.
+- One bounded invalidation/reset helper invalidates every outstanding ticket
+  and clears the cached composition/reader when bootstrap becomes disabled or
+  malformed, or before an enabled invalid-bootstrap, reader-change,
+  stale-generation or read failure is rethrown.
+- Enabled-path failures carry one fixed generic marker. The enclosing
+  `Promise.all` practitioner catch rethrows that marker so the Diary load cannot
+  continue with a partial empty directory; feature-off legacy failures retain
+  their established empty-directory swallowing behavior.
 
 ## Deterministic acceptance
 
@@ -63,6 +71,11 @@ HTTP, backend, PostgreSQL, usability, production or release evidence.
    provider/model, command or write implementation in both new modules.
 8. The recursively closed machine contract rejects every scalar or array
    mutation and the focused parent, seam and API Spine tests pass serially.
+9. An outstanding enabled read followed by disable, malformed bootstrap or
+   reader change is invalidated before its result can render.
+10. The enclosing Diary load rethrows every enabled-path failure while the
+    feature-off legacy catch still returns an empty directory on ordinary
+    non-401 legacy failure.
 
 ## API Spine classification
 

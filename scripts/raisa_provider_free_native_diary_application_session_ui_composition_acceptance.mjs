@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import vm from 'node:vm';
 
 import {
   assertApplicationSessionPractitionerBootstrap,
@@ -116,8 +117,11 @@ function canonicalLf(buffer) {
 }
 
 function extractFunction(source, name) {
-  const start = source.indexOf(`async function ${name}(`);
-  assert(start >= 0, `missing_function:${name}`);
+  const functionStart = source.indexOf(`function ${name}(`);
+  assert(functionStart >= 0, `missing_function:${name}`);
+  const start = source.slice(Math.max(0, functionStart - 6), functionStart) === 'async '
+    ? functionStart - 6
+    : functionStart;
   const open = source.indexOf('{', start);
   let depth = 0;
   for (let index = open; index < source.length; index += 1) {
@@ -297,6 +301,109 @@ async function runAcceptance() {
     }
   });
 
+  await record('cached_composition_reset_suppresses_invalid_transitions', async () => {
+    const diarySource = fs.readFileSync(DIARY_JS, 'utf8').replace(/\r\n/g, '\n');
+    const getBootstrap = extractFunction(
+      diarySource,
+      'getApplicationSessionPractitionerBootstrap',
+    );
+    const isEnabled = extractFunction(
+      diarySource,
+      'isApplicationSessionPractitionerBootstrapEnabled',
+    );
+    const resetHelper = extractFunction(
+      diarySource,
+      'invalidateAndResetApplicationSessionPractitionerDirectory',
+    );
+    const createFailure = extractFunction(
+      diarySource,
+      'createApplicationSessionPractitionerFailure',
+    );
+    const loadDirectory = extractFunction(diarySource, 'loadPractitionerDirectory');
+    const originalReader = () => {};
+    const transitions = [
+      { name: 'disabled', bootstrapValue: { enabled: false }, rejects: false },
+      { name: 'malformed', bootstrapValue: { enabled: true }, rejects: true },
+      {
+        name: 'reader_changed',
+        bootstrapValue: bootstrap(() => success()),
+        rejects: true,
+      },
+    ];
+    for (const transition of transitions) {
+      const pending = deferred();
+      const composition = createApplicationSessionPractitionerDirectory(
+        bootstrap(() => pending.promise),
+      );
+      const outstanding = composition.readAndRender(() => {
+        throw new Error(`rendered_after_${transition}`);
+      });
+      const context = {
+        injectedComposition: composition,
+        injectedReader: originalReader,
+        injectedBootstrap: transition.bootstrapValue,
+        APPLICATION_SESSION_PRACTITIONER_BOOTSTRAP_GLOBAL:
+          '__EMR4_NATIVE_DIARY_APPLICATION_SESSION_PRACTITIONERS__',
+        APPLICATION_SESSION_PRACTITIONER_FAILURE:
+          'application_session_practitioner_directory_failure',
+        ENABLE_GRAPHQL_PRACTITIONERS: false,
+        window: {
+          __EMR4_NATIVE_DIARY_APPLICATION_SESSION_PRACTITIONERS__:
+            transition.bootstrapValue,
+        },
+        fetchPractitionerDirectoryRest: async () => [],
+        fetchPractitionerDirectoryGraphql: async () => ({
+          rows: [], attempted: true, fallback: false,
+        }),
+        loadApplicationSessionPractitionerDirectory: async (candidate) => {
+          assertApplicationSessionPractitionerBootstrap(candidate);
+          if (candidate.readFixedPractitionerDirectory !== originalReader) {
+            throw new Error('application_session_practitioner_reader_changed');
+          }
+          return [];
+        },
+        resetState: null,
+        transitionResult: null,
+        transitionError: null,
+      };
+      await vm.runInNewContext(`(async () => {
+        let applicationSessionPractitionerDirectory = injectedComposition;
+        let applicationSessionPractitionerReader = injectedReader;
+        ${getBootstrap}
+        ${isEnabled}
+        ${resetHelper}
+        ${createFailure}
+        ${loadDirectory}
+        try {
+          transitionResult = await loadPractitionerDirectory();
+        } catch (error) {
+          transitionError = error;
+        }
+        resetState = {
+          composition: applicationSessionPractitionerDirectory,
+          reader: applicationSessionPractitionerReader,
+        };
+      })()`, context, { filename: `diary-transition-${transition.name}.mjs` });
+      assert(context.resetState.composition === null, `composition_not_reset:${transition.name}`);
+      assert(context.resetState.reader === null, `reader_not_reset:${transition.name}`);
+      if (transition.rejects) {
+        assert(
+          context.transitionError?.message === 'application_session_practitioner_directory_failure',
+          `transition_not_marked:${transition.name}`,
+        );
+      } else {
+        assert(context.transitionError === null, `feature_off_rejected:${transition.name}`);
+        assert(Array.isArray(context.transitionResult), `feature_off_legacy_not_used:${transition.name}`);
+      }
+      pending.resolve(success());
+      const result = await outstanding;
+      assert(
+        result.ok === false && result.reason === 'session_inactive',
+        `outstanding_not_suppressed:${transition.name}`,
+      );
+    }
+  });
+
   await record('new_modules_have_no_direct_effect_implementation', () => {
     const source = `${fs.readFileSync(COMPOSITION_MODULE, 'utf8')}\n${fs.readFileSync(PUBLISHED_RECONCILER, 'utf8')}`;
     for (const pattern of [
@@ -330,13 +437,55 @@ async function runAcceptance() {
     const source = fs.readFileSync(DIARY_JS, 'utf8').replace(/\r\n/g, '\n');
     const load = extractFunction(source, 'loadPractitionerDirectory');
     const branch = load.indexOf('isApplicationSessionPractitionerBootstrapEnabled');
-    const enabledReturn = load.indexOf('return loadApplicationSessionPractitionerDirectory');
+    const enabledReturn = load.indexOf('return await loadApplicationSessionPractitionerDirectory');
     const legacyGate = load.indexOf('if (!ENABLE_GRAPHQL_PRACTITIONERS)');
     assert(branch >= 0 && enabledReturn > branch && legacyGate > enabledReturn, 'branch_order');
     const helper = extractFunction(source, 'loadApplicationSessionPractitionerDirectory');
     assert(!helper.includes('fetchPractitionerDirectoryGraphql'), 'enabled_graphql_fallback');
     assert(!helper.includes('fetchPractitionerDirectoryRest'), 'enabled_rest_fallback');
     assert(!helper.includes('apiFetch('), 'enabled_bearer_transport');
+  });
+
+  await record('invalid_transitions_reset_and_enabled_failure_rethrows_at_call_site', () => {
+    const source = fs.readFileSync(DIARY_JS, 'utf8').replace(/\r\n/g, '\n');
+    const load = extractFunction(source, 'loadPractitionerDirectory');
+    const resetCalls = load.match(
+      /invalidateAndResetApplicationSessionPractitionerDirectory\(\)/g,
+    ) || [];
+    assert(resetCalls.length === 2, 'transition_reset_call_count');
+    assert(load.includes('return await loadApplicationSessionPractitionerDirectory'), 'enabled_not_awaited');
+    assert(load.includes('throw createApplicationSessionPractitionerFailure()'), 'enabled_not_marked');
+    assert(
+      source.includes('loadPractitionerDirectory().catch(handlePractitionerDirectoryLoadFailure)'),
+      'practitioner_call_site_handler_missing',
+    );
+
+    const isFailure = extractFunction(source, 'isApplicationSessionPractitionerFailure');
+    const createFailure = extractFunction(source, 'createApplicationSessionPractitionerFailure');
+    const handler = extractFunction(source, 'handlePractitionerDirectoryLoadFailure');
+    const context = { rethrownMessage: null, legacyResult: null, console: { warn: () => {} } };
+    vm.runInNewContext(`
+      const APPLICATION_SESSION_PRACTITIONER_FAILURE =
+        'application_session_practitioner_directory_failure';
+      ${isFailure}
+      ${createFailure}
+      ${handler}
+      try {
+        handlePractitionerDirectoryLoadFailure(
+          createApplicationSessionPractitionerFailure(),
+        );
+      } catch (error) {
+        rethrownMessage = error.message;
+      }
+      legacyResult = handlePractitionerDirectoryLoadFailure(
+        new Error('legacy_directory_failure'),
+      );
+    `, context);
+    assert(
+      context.rethrownMessage === 'application_session_practitioner_directory_failure',
+      'enabled_failure_not_rethrown',
+    );
+    assert(Array.isArray(context.legacyResult) && context.legacyResult.length === 0, 'legacy_swallow_not_preserved');
   });
 
   return cases;
@@ -356,6 +505,8 @@ async function main() {
     properties: {
       strict_true_default_off: true,
       enabled_path_has_no_legacy_fallback: true,
+      enabled_failure_rethrown_by_enclosing_load: true,
+      invalid_transition_resets_cached_reconciler: true,
       canonical_reconciler_lf_parity: true,
       latest_read_wins: true,
       stale_generation_and_invalidation_suppressed: true,

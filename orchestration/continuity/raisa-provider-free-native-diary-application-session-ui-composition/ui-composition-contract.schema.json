@@ -50,7 +50,7 @@
     "composition": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["published_reconciler_lf_parity", "sole_row_egress", "latest_read_wins", "strict_generation_advance", "invalidation_suppresses_outstanding", "replay_suppressed", "malformed_or_authority_response_suppressed", "callback_failure_consumes_ticket", "reader_failure_reason", "lifecycle_controls", "snapshot_contains_reader_or_rows", "snapshot_contains_secret_or_authority"],
+      "required": ["published_reconciler_lf_parity", "sole_row_egress", "latest_read_wins", "strict_generation_advance", "invalidation_suppresses_outstanding", "replay_suppressed", "malformed_or_authority_response_suppressed", "callback_failure_consumes_ticket", "reader_failure_reason", "enabled_failure_marker", "enabled_failure_rethrown_by_enclosing_load", "invalid_transition_resets_cached_reconciler", "lifecycle_controls", "snapshot_contains_reader_or_rows", "snapshot_contains_secret_or_authority"],
       "properties": {
         "published_reconciler_lf_parity": {"const": true},
         "sole_row_egress": {"const": "accepted_reconciler"},
@@ -61,6 +61,9 @@
         "malformed_or_authority_response_suppressed": {"const": true},
         "callback_failure_consumes_ticket": {"const": true},
         "reader_failure_reason": {"const": "fixed_read_failed"},
+        "enabled_failure_marker": {"const": "application_session_practitioner_directory_failure"},
+        "enabled_failure_rethrown_by_enclosing_load": {"const": true},
+        "invalid_transition_resets_cached_reconciler": {"const": true},
         "lifecycle_controls": {"const": ["invalidateSession", "advanceSessionGeneration", "snapshot"]},
         "snapshot_contains_reader_or_rows": {"const": false},
         "snapshot_contains_secret_or_authority": {"const": false}
@@ -69,12 +72,13 @@
     "legacy": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["graphql_function_retained_exact", "rest_function_retained_exact", "rest_fallback_feature_off_only", "enabled_path_fallback"],
+      "required": ["graphql_function_retained_exact", "rest_function_retained_exact", "rest_fallback_feature_off_only", "enabled_path_fallback", "feature_off_legacy_error_swallowing_retained"],
       "properties": {
         "graphql_function_retained_exact": {"const": "fetchPractitionerDirectoryGraphql"},
         "rest_function_retained_exact": {"const": "fetchPractitionerDirectoryRest"},
         "rest_fallback_feature_off_only": {"const": true},
-        "enabled_path_fallback": {"const": false}
+        "enabled_path_fallback": {"const": false},
+        "feature_off_legacy_error_swallowing_retained": {"const": true}
       }
     },
     "api_spine": {

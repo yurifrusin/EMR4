@@ -2794,6 +2794,8 @@ async function fetchPractitionerDirectoryGraphql() {
 
 const APPLICATION_SESSION_PRACTITIONER_BOOTSTRAP_GLOBAL =
   "__EMR4_NATIVE_DIARY_APPLICATION_SESSION_PRACTITIONERS__";
+const APPLICATION_SESSION_PRACTITIONER_FAILURE =
+  "application_session_practitioner_directory_failure";
 let applicationSessionPractitionerDirectory = null;
 let applicationSessionPractitionerReader = null;
 
@@ -2802,10 +2804,42 @@ function getApplicationSessionPractitionerBootstrap() {
 }
 
 function isApplicationSessionPractitionerBootstrapEnabled(bootstrap) {
-  return bootstrap !== null &&
-    typeof bootstrap === "object" &&
-    !Array.isArray(bootstrap) &&
-    bootstrap.enabled === true;
+  try {
+    return bootstrap !== null &&
+      typeof bootstrap === "object" &&
+      !Array.isArray(bootstrap) &&
+      bootstrap.enabled === true;
+  } catch (_error) {
+    return false;
+  }
+}
+
+function invalidateAndResetApplicationSessionPractitionerDirectory() {
+  if (applicationSessionPractitionerDirectory !== null) {
+    applicationSessionPractitionerDirectory.invalidateSession();
+  }
+  applicationSessionPractitionerDirectory = null;
+  applicationSessionPractitionerReader = null;
+}
+
+function createApplicationSessionPractitionerFailure() {
+  return new Error(APPLICATION_SESSION_PRACTITIONER_FAILURE);
+}
+
+function isApplicationSessionPractitionerFailure(error) {
+  return error instanceof Error &&
+    error.message === APPLICATION_SESSION_PRACTITIONER_FAILURE;
+}
+
+function handlePractitionerDirectoryLoadFailure(error) {
+  if (
+    (error && error.message === "401 Unauthorized") ||
+    isApplicationSessionPractitionerFailure(error)
+  ) {
+    throw error;
+  }
+  console.warn("Practitioner directory fetch failed:", error);
+  return [];
 }
 
 async function loadApplicationSessionPractitionerDirectory(bootstrap) {
@@ -2844,8 +2878,14 @@ async function loadApplicationSessionPractitionerDirectory(bootstrap) {
 async function loadPractitionerDirectory() {
   const applicationSessionBootstrap = getApplicationSessionPractitionerBootstrap();
   if (isApplicationSessionPractitionerBootstrapEnabled(applicationSessionBootstrap)) {
-    return loadApplicationSessionPractitionerDirectory(applicationSessionBootstrap);
+    try {
+      return await loadApplicationSessionPractitionerDirectory(applicationSessionBootstrap);
+    } catch (_error) {
+      invalidateAndResetApplicationSessionPractitionerDirectory();
+      throw createApplicationSessionPractitionerFailure();
+    }
   }
+  invalidateAndResetApplicationSessionPractitionerDirectory();
   if (!ENABLE_GRAPHQL_PRACTITIONERS) {
     return fetchPractitionerDirectoryRest();
   }
@@ -4665,13 +4705,7 @@ async function loadDiaryData(silent = false, options = {}, smokeMode = false) {
           console.warn("Waiting areas fetch failed:", err);
           return null;
         }),
-        loadPractitionerDirectory().catch(err => {
-          if (err && err.message === "401 Unauthorized") {
-            throw err;
-          }
-          console.warn("Practitioner directory fetch failed:", err);
-          return [];
-        })
+        loadPractitionerDirectory().catch(handlePractitionerDirectoryLoadFailure)
       ]);
       template = templateRes;
       if (!apptRes.ok) throw new Error(`Appointments: ${apptRes.status} ${await apptRes.text()}`);

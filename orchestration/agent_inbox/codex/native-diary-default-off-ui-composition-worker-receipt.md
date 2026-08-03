@@ -75,6 +75,30 @@ At rehydration, local/origin `master` and `handoff/current` were aligned at
 - `git diff --check` and exact path/branding cache checks are required again at
   staging and were not delegated.
 
+## Fail-closed repair after root review
+
+Root required revision of candidate `c18c57947ea56f9546a9be57b82e4bc2fb541bfe`
+before external review for two race/failure gaps. The repair remains inside the
+same owned UI-composition paths and adds no authority:
+
+- one bounded helper invalidates outstanding tickets and clears the cached
+  composition/reader whenever bootstrap becomes disabled or malformed and
+  before enabled invalid-bootstrap, changed-reader, invalid-generation or read
+  failures leave the composition branch;
+- every enabled-path failure is converted to one fixed generic marker and the
+  existing enclosing practitioner-directory catch rethrows it, preventing a
+  partial empty-directory Diary render;
+- feature-off legacy non-401 failure swallowing remains unchanged;
+- Node now drives the actual reset helper against an outstanding read for
+  disabled, malformed and changed-reader transitions, and executes the actual
+  call-site handler for both enabled rethrow and legacy swallowing.
+
+Repair verification passed: Node acceptance 17/17, Ruff, all four Node syntax
+checks, `git diff --check`, and 194 serial focused/parent/practitioner-directory/
+seam/API-Spine pytest cases in 56.8 seconds. The shared PostgreSQL pytest slot
+was explicitly released before the repair commit. The repair is committed
+separately and does not amend or erase the original candidate history.
+
 ## API Spine and claims
 
 This is a scoped read consumer. GraphQL remains read-only; no mutation, command

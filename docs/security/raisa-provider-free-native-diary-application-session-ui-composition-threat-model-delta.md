@@ -16,6 +16,9 @@ authority.
 |---|---|---|
 | Accidental default-on or truthy-string enablement | Only `bootstrap.enabled === true`; missing, false, malformed and non-boolean states stay legacy | Existing bearer GraphQL/REST path runs unchanged |
 | Enabled bootstrap silently falls back after failure | Enabled branch is selected before legacy logic and propagates only generic rejection | No bearer or REST request follows the attempt |
+| Enabled failure is swallowed by the enclosing parallel-load catch | Fixed application-session failure marker is rethrown at the practitioner call site | Entire Diary load fails; no partial empty-directory render |
+| Outstanding enabled response survives a feature-off or malformed transition | One reset helper invalidates outstanding tickets and clears cached composition/reader before legacy | Late result is rejected as inactive before render |
+| Outstanding enabled response survives reader identity or invalid-generation transition | Every enabled transition failure resets and invalidates before emitting the generic marker | Late result and invalid transition both fail closed |
 | Caller injects scope, identity, authority or arbitrary query data | Recursively closed exact three-key bootstrap; no arguments passed to fixed reader | Bootstrap rejected before reader invocation |
 | Trusted reader changes inside one lifecycle | First reader identity is fixed for the long-lived composition | Changed reader fails closed before invocation |
 | Late response overwrites newer directory | Canonical accepted reconciler and latest request revision | Superseded ticket rejected before render |

@@ -71,7 +71,12 @@ def _run_acceptance(output: Path) -> dict[str, Any]:
 
 
 def _extract_async_function(source: str, name: str) -> str:
-    start = source.index(f"async function {name}(")
+    function_start = source.index(f"function {name}(")
+    start = (
+        function_start - 6
+        if source[max(0, function_start - 6) : function_start] == "async "
+        else function_start
+    )
     opening = source.index("{", start)
     depth = 0
     for index in range(opening, len(source)):
@@ -126,6 +131,8 @@ def test_node_acceptance_harness_passes_with_exact_evidence_label(tmp_path: Path
     assert evidence["failed_case_count"] == 0
     assert evidence["properties"]["strict_true_default_off"] is True
     assert evidence["properties"]["enabled_path_has_no_legacy_fallback"] is True
+    assert evidence["properties"]["enabled_failure_rethrown_by_enclosing_load"] is True
+    assert evidence["properties"]["invalid_transition_resets_cached_reconciler"] is True
     assert evidence["properties"]["provider_or_external_effect"] is False
 
 
@@ -202,7 +209,7 @@ def test_diary_wiring_is_strict_true_and_enabled_branch_has_no_fallback() -> Non
     source = DIARY_JS.read_text(encoding="utf-8")
     load = _extract_async_function(source, "loadPractitionerDirectory")
     enabled = load.index("isApplicationSessionPractitionerBootstrapEnabled")
-    enabled_return = load.index("return loadApplicationSessionPractitionerDirectory")
+    enabled_return = load.index("return await loadApplicationSessionPractitionerDirectory")
     legacy = load.index("if (!ENABLE_GRAPHQL_PRACTITIONERS)")
     assert enabled < enabled_return < legacy
     assert "bootstrap.enabled === true" in source
@@ -214,6 +221,33 @@ def test_diary_wiring_is_strict_true_and_enabled_branch_has_no_fallback() -> Non
     assert "fetchPractitionerDirectoryRest" not in application_session
     assert "apiFetch(" not in application_session
     assert 'diary.js?v=195' in DIARY_HTML.read_text(encoding="utf-8")
+
+
+def test_invalid_transitions_reset_and_enabled_failure_is_rethrown() -> None:
+    source = DIARY_JS.read_text(encoding="utf-8")
+    load = _extract_async_function(source, "loadPractitionerDirectory")
+    reset_name = "invalidateAndResetApplicationSessionPractitionerDirectory"
+
+    assert load.count(f"{reset_name}()") == 2
+    assert "return await loadApplicationSessionPractitionerDirectory" in load
+    assert "throw createApplicationSessionPractitionerFailure()" in load
+
+    reset = _extract_async_function(source, reset_name)
+    assert "applicationSessionPractitionerDirectory.invalidateSession()" in reset
+    assert "applicationSessionPractitionerDirectory = null" in reset
+    assert "applicationSessionPractitionerReader = null" in reset
+
+    assert (
+        "loadPractitionerDirectory().catch(handlePractitionerDirectoryLoadFailure)"
+        in source
+    )
+    handler = _extract_async_function(
+        source, "handlePractitionerDirectoryLoadFailure"
+    )
+    marker = handler.index("isApplicationSessionPractitionerFailure(error)")
+    rethrow = handler.index("throw error;", marker)
+    legacy_swallow = handler.index("return [];", rethrow)
+    assert marker < rethrow < legacy_swallow
 
 
 def test_new_modules_have_no_direct_effectful_surface() -> None:

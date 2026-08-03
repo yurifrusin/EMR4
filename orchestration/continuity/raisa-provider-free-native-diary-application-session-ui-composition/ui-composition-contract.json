@@ -33,6 +33,9 @@
     "malformed_or_authority_response_suppressed": true,
     "callback_failure_consumes_ticket": true,
     "reader_failure_reason": "fixed_read_failed",
+    "enabled_failure_marker": "application_session_practitioner_directory_failure",
+    "enabled_failure_rethrown_by_enclosing_load": true,
+    "invalid_transition_resets_cached_reconciler": true,
     "lifecycle_controls": [
       "invalidateSession",
       "advanceSessionGeneration",
@@ -45,7 +48,8 @@
     "graphql_function_retained_exact": "fetchPractitionerDirectoryGraphql",
     "rest_function_retained_exact": "fetchPractitionerDirectoryRest",
     "rest_fallback_feature_off_only": true,
-    "enabled_path_fallback": false
+    "enabled_path_fallback": false,
+    "feature_off_legacy_error_swallowing_retained": true
   },
   "api_spine": {
     "classification": "scoped_read_consumer",
