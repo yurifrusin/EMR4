@@ -1,0 +1,339 @@
+{
+  "documentType": "codex-security.hardening-analysis",
+  "schemaVersion": "1.0",
+  "analysisId": "hardening_20260804_model_required_bureau_gate_minus_one",
+  "sourceEvidence": {
+    "kind": "document_collection",
+    "label": "EMR4 Bureau architecture, isolation evidence and primary prompt-injection research",
+    "collectionSha256": "e3b6721331853ee41598c226139dc09820e308413322abc72b7a0762baa6fc70",
+    "artifactCount": 21,
+    "sourceDrift": "none",
+    "targetRevision": "b09739183ddbe1a102086460749a84741a23b11b"
+  },
+  "assessment": {
+    "outcome": "opportunities_identified",
+    "summary": "Two structural hardening opportunities should become Gate-zero prerequisites: deterministic information-flow confinement and one-attempt compromise containment for every cognitive cell. This analysis does not implement either control."
+  },
+  "constraints": {
+    "profile": "high_assurance_clinical_architecture",
+    "changeHorizons": ["foundational", "medium_term"],
+    "nonNegotiables": [
+      "A provider model participates in every named intelligent dialogue when that capability is available.",
+      "Model output remains a non-authoritative candidate.",
+      "GraphQL and context frames remain read-only and non-authoritative.",
+      "All writes converge on typed REST/OpenAPI commands with backend reauthorization, idempotency, audit and readback.",
+      "No model, cognitive cell or proofreader receives database, shell, cloud, deployment or actuator credentials.",
+      "Real identity, product-derived data, patient or clinical data, provider runtime, deployment, production and release remain closed."
+    ],
+    "assumptions": [
+      "No measured latency, memory or cell-start budget was supplied.",
+      "The provider model and local cognitive wrapper can be compromised and can emit deliberately hostile output.",
+      "Prompt-injection classifiers, provider safeguards and human review are useful defense in depth but are not authority boundaries.",
+      "A later runtime may use OCI containers, microVMs or another isolation platform if it satisfies the same broker contract."
+    ]
+  },
+  "opportunities": [
+    {
+      "opportunityId": "deterministic-information-flow-confinement",
+      "title": "Confine untrusted influence and protected data with a deterministic Bureau envelope",
+      "summary": "Carry provenance, integrity, confidentiality/readers, freshness and authority ceilings through every value and enforce them at each command and egress sink.",
+      "diagnosis": "The current typed proofreader can reject malformed, stale, ungrounded or unauthorized candidates, but it does not yet prove whether low-integrity data influenced a valid action choice or argument, nor whether every derived value may flow to a proposed recipient.",
+      "evidence": [
+        {
+          "claimType": "observed",
+          "sourceKind": "document",
+          "evidenceId": "E001",
+          "path": "docs/emr4-model-required-deterministic-authority-bureau-architecture.md",
+          "claim": "The architecture separates cognition, proof, authority and execution and keeps model output non-authoritative."
+        },
+        {
+          "claimType": "observed",
+          "sourceKind": "threat_model",
+          "evidenceId": "E003",
+          "path": "docs/security/emr4-model-required-bureaus-controlled-recovery-threat-model-delta.md",
+          "claim": "The threat model requires typed candidates, grounding and authority separation but does not define end-to-end integrity and confidentiality label propagation."
+        },
+        {
+          "claimType": "observed",
+          "sourceKind": "document",
+          "evidenceId": "E013",
+          "path": "orchestration/access_ai_api_design.md",
+          "claim": "Access AI is the controlled provider route and agent context frames are typed, minimal and non-authoritative."
+        },
+        {
+          "claimType": "observed",
+          "sourceKind": "document",
+          "evidenceId": "E017",
+          "claim": "CaMeL shows that protecting control flow alone does not prevent attacker-controlled tool arguments and proposes provenance-aware capabilities."
+        },
+        {
+          "claimType": "observed",
+          "sourceKind": "document",
+          "evidenceId": "E018",
+          "claim": "FIDES tracks integrity and confidentiality labels and deterministically checks consequential actions and permitted flows."
+        },
+        {
+          "claimType": "inferred",
+          "sourceKind": "coverage",
+          "evidenceId": "E017",
+          "claim": "A schema-valid and grounded candidate can remain attacker-directed unless the proof plane records and enforces the influence of every contributing value."
+        }
+      ],
+      "desiredInvariants": [
+        "Every source value, transformation, candidate field, command argument and response field has explicit versioned security metadata.",
+        "The model cannot create, raise, remove, endorse or declassify any label, reader set, capability or authority claim.",
+        "Missing labels and unknown transformations fail closed.",
+        "Consequential action selection and every security-relevant argument meet the sink integrity policy.",
+        "Every egress destination is permitted by the joined readers of all contributing values.",
+        "Confirmation, endorsement and declassification are separate signed, scoped and expiring authority acts."
+      ],
+      "proposalPath": "proposals/deterministic-information-flow-confinement.md",
+      "options": [
+        {
+          "optionId": "schema-proofreader-only",
+          "title": "Retain schema, grounding and semantic proofreading only",
+          "kind": "baseline",
+          "summary": "Keep the current proof plane without end-to-end influence labels.",
+          "diagramPaths": {
+            "before": "diagrams/deterministic-information-flow-confinement-before.mmd",
+            "after": "diagrams/deterministic-information-flow-confinement-schema-proofreader-only-after.mmd"
+          },
+          "evidenceCoverage": [
+            {
+              "evidenceId": "E001",
+              "effect": "unaffected",
+              "tacticalFixRequired": true,
+              "rationale": "Existing typing and grounding remain useful, but they do not expose low-integrity influence over an otherwise valid candidate."
+            }
+          ],
+          "tradeoffs": [
+            {"dimension": "security", "direction": "neutral", "confidence": "high", "basis": "source-derived", "assessment": "Malformed and unsupported drafts still reject, while valid attacker-directed drafts remain possible.", "validationPlan": "Run an injection corpus whose malicious cases preserve schema and cite real facts."},
+            {"dimension": "performance", "direction": "neutral", "confidence": "high", "basis": "source-derived", "assessment": "No new deterministic checks or data structures enter the path.", "validationPlan": "Retain the current candidate-to-proofreader latency as the baseline."},
+            {"dimension": "memory", "direction": "neutral", "confidence": "high", "basis": "source-derived", "assessment": "No label graph or dependency trace is retained.", "validationPlan": "Record current peak memory for representative typed candidates."},
+            {"dimension": "reliability", "direction": "neutral", "confidence": "medium", "basis": "source-derived", "assessment": "The component count stays small, but unsafe influence remains silent rather than producing a typed denial.", "validationPlan": "Compare failure observability against malicious schema-valid cases."},
+            {"dimension": "operability", "direction": "neutral", "confidence": "medium", "basis": "source-derived", "assessment": "The mental model is familiar, but incident review lacks a source-to-sink influence trace.", "validationPlan": "Attempt to reconstruct one injected decision from current audit artifacts."},
+            {"dimension": "migration", "direction": "neutral", "confidence": "high", "basis": "source-derived", "assessment": "No migration is required.", "validationPlan": "Not applicable beyond preserving existing tests."}
+          ],
+          "residualRisks": ["A well-formed candidate can encode attacker-selected action choice, parameters or response data."],
+          "implementationReadiness": {
+            "affectedComponents": ["Gate-zero Bureau proof-plane contract"],
+            "workPackages": ["No structural change."],
+            "acceptanceCriteria": ["Not acceptable as the Gate-zero security contract."],
+            "migrationNotes": ["Existing schema and grounding checks remain tactical controls under every other option."],
+            "rollback": "Not applicable."
+          }
+        },
+        {
+          "optionId": "frozen-plan-integrity-guard",
+          "title": "Freeze an action plan before reading untrusted data",
+          "kind": "incremental",
+          "summary": "Protect action sequence selection and apply deterministic parameter allowlists.",
+          "diagramPaths": {
+            "before": "diagrams/deterministic-information-flow-confinement-before.mmd",
+            "after": "diagrams/deterministic-information-flow-confinement-frozen-plan-integrity-guard-after.mmd"
+          },
+          "evidenceCoverage": [
+            {
+              "evidenceId": "E019",
+              "effect": "mitigates",
+              "tacticalFixRequired": true,
+              "rationale": "Plan-then-execute gives control-flow integrity but the cited design-pattern analysis records residual argument and content manipulation."
+            }
+          ],
+          "tradeoffs": [
+            {"dimension": "security", "direction": "improves", "confidence": "high", "basis": "source-derived", "assessment": "Untrusted retrieved data cannot add actions, but it can still redirect allowed arguments and content.", "validationPlan": "Test fixed-plan cases with injected recipient, identifier and free-text fields."},
+            {"dimension": "performance", "direction": "regresses", "confidence": "medium", "basis": "analogous", "assessment": "A separate plan-freeze step and argument checks add bounded work.", "validationPlan": "Measure p50/p95 plan and proof latency against the baseline corpus."},
+            {"dimension": "memory", "direction": "regresses", "confidence": "medium", "basis": "source-derived", "assessment": "One bounded plan and argument trace must survive until completion.", "validationPlan": "Measure peak retained bytes for the largest accepted plan."},
+            {"dimension": "reliability", "direction": "unknown", "confidence": "medium", "basis": "source-derived", "assessment": "Fixed workflows are predictable, while legitimate data-dependent branching may reject or encourage overbroad templates.", "validationPlan": "Run representative dialogue tasks and record false-denial and template-expansion rates."},
+            {"dimension": "operability", "direction": "regresses", "confidence": "medium", "basis": "source-derived", "assessment": "Every action family needs a maintained plan template and parameter policy.", "validationPlan": "Inventory template ownership and simulate a version mismatch."},
+            {"dimension": "migration", "direction": "regresses", "confidence": "medium", "basis": "source-derived", "assessment": "Narrow commands can adopt templates incrementally, but rich Bureau dialogue does not fit one fixed plan.", "validationPlan": "Prototype one read and one write candidate without widening the plan language."}
+          ],
+          "residualRisks": ["Attacker-controlled data can still alter allowed arguments, response content or egress payloads."],
+          "implementationReadiness": {
+            "affectedComponents": ["Gate-zero planner contract", "Per-command parameter policies"],
+            "workPackages": ["Define fixed plan templates for narrow commands.", "Add argument allowlists and injection regression cases."],
+            "acceptanceCriteria": ["Untrusted data cannot add or reorder a tool or command step."],
+            "migrationNotes": ["Use only as defense in depth for commands whose action sequence is truly data-independent."],
+            "rollback": "Disable the template for the affected command and retain schema/grounding checks."
+          }
+        },
+        {
+          "optionId": "bureau-labeled-capability-envelope",
+          "title": "Propagate security labels and enforce capability policy at every sink",
+          "kind": "foundational",
+          "summary": "Make integrity, confidentiality/readers, provenance, freshness, scope and authority ceilings part of the shared typed Bureau contract.",
+          "diagramPaths": {
+            "before": "diagrams/deterministic-information-flow-confinement-before.mmd",
+            "after": "diagrams/deterministic-information-flow-confinement-bureau-labeled-capability-envelope-after.mmd"
+          },
+          "evidenceCoverage": [
+            {"evidenceId": "E017", "effect": "mitigates", "tacticalFixRequired": true, "rationale": "The option adopts provenance-aware capability checks while retaining direct schema and grounding controls."},
+            {"evidenceId": "E018", "effect": "mitigates", "tacticalFixRequired": true, "rationale": "The option adapts deterministic integrity and permitted-flow policies to EMR4's existing proof and authority planes."},
+            {"evidenceId": "E001", "effect": "addresses", "tacticalFixRequired": true, "rationale": "It fills the observed influence-policy gap without replacing the existing typed command boundary."}
+          ],
+          "tradeoffs": [
+            {"dimension": "security", "direction": "improves", "confidence": "high", "basis": "source-derived", "assessment": "Low-integrity influence and incompatible reader flows are denied deterministically at each consequential sink.", "validationPlan": "Use algebraic label tests plus injection cases covering action choice, each argument and each egress field."},
+            {"dimension": "performance", "direction": "regresses", "confidence": "medium", "basis": "analogous", "assessment": "Typed label joins and sink predicates add bounded CPU and serialization work per value.", "validationPlan": "Measure p50/p95 proof latency and label operations for small, typical and maximum frames; require an explicit Gate-zero budget before runtime selection."},
+            {"dimension": "memory", "direction": "regresses", "confidence": "medium", "basis": "analogous", "assessment": "A bounded per-request dependency graph and denial trace add retained metadata.", "validationPlan": "Measure peak graph bytes and node count at maximum schema bounds; reject unbounded lineage."},
+            {"dimension": "reliability", "direction": "improves", "confidence": "medium", "basis": "source-derived", "assessment": "Missing labels, stale evidence and unknown transforms fail explicitly, although policy or wrapper drift can create safe false denials.", "validationPlan": "Property-test joins and simulate wrapper/schema version skew, missing metadata and partial outages."},
+            {"dimension": "operability", "direction": "regresses", "confidence": "medium", "basis": "source-derived", "assessment": "A central source/sink registry, policy vocabulary and explainable denial telemetry require ownership.", "validationPlan": "Exercise policy rollout, rollback, audit reconstruction and an unknown-source incident."},
+            {"dimension": "migration", "direction": "regresses", "confidence": "high", "basis": "source-derived", "assessment": "Gate zero must freeze the shared envelope before each Bureau wraps its sources and sinks; partial unlabeled operation cannot be permitted.", "validationPlan": "Build a source/sink inventory and require 100 percent registered coverage before enabling a path."}
+          ],
+          "residualRisks": ["Incorrect source labels or sink policy can authorize the wrong flow.", "Explicitly permitted outputs may retain subtle covert channels.", "Provider-side use or retention is outside this local information-flow proof."],
+          "implementationReadiness": {
+            "affectedComponents": ["Gate-zero context-frame schemas", "Proofreader envelope", "Source-wrapper registry", "Command and response sink registry", "Authority evidence"],
+            "workPackages": ["Freeze label lattice and join rules.", "Define trusted wrappers and complete source registry.", "Define command/egress sink policies and typed denials.", "Define endorsement, declassification and confirmation semantics.", "Build property and adversarial acceptance corpus."],
+            "acceptanceCriteria": ["Every admitted value and sink is labeled and registered.", "Unknown labels or transforms deny.", "Low-integrity influence cannot trigger a consequential action.", "Reader-incompatible data cannot leave through any response or command sink."],
+            "migrationNotes": ["Introduce at Gate zero before any Lane A-D runtime; retain schema, grounding and fixed-plan guards as tactical layers."],
+            "rollback": "Keep all intelligent paths disabled and return to deterministic/manual PMS controls; never fall back to unlabeled model output."
+          }
+        },
+        {
+          "optionId": "symbolic-vault-plus-envelope",
+          "title": "Add opaque symbolic values to the labeled envelope",
+          "kind": "isolation",
+          "summary": "Hide selected low-integrity or confidential values from the dialogue model and manipulate them through typed handles.",
+          "diagramPaths": {
+            "before": "diagrams/deterministic-information-flow-confinement-before.mmd",
+            "after": "diagrams/deterministic-information-flow-confinement-symbolic-vault-plus-envelope-after.mmd"
+          },
+          "evidenceCoverage": [
+            {"evidenceId": "E018", "effect": "mitigates", "tacticalFixRequired": true, "rationale": "Symbolic memory and quarantined extraction further reduce model exposure but still require deterministic labels and sink policy."}
+          ],
+          "tradeoffs": [
+            {"dimension": "security", "direction": "improves", "confidence": "medium", "basis": "source-derived", "assessment": "Selected values cannot inject the main dialogue model directly, though quarantined extraction output and reveal policy remain attack surfaces.", "validationPlan": "Test handle substitution, confused-deputy reveals, type smuggling and recipient binding."},
+            {"dimension": "performance", "direction": "regresses", "confidence": "medium", "basis": "analogous", "assessment": "Quarantined extraction or additional deterministic transforms add calls, copies and policy checks.", "validationPlan": "Measure end-to-end latency and provider-call count per workflow against the selected base envelope."},
+            {"dimension": "memory", "direction": "regresses", "confidence": "medium", "basis": "analogous", "assessment": "A bounded isolated value vault and handle table must live for the request.", "validationPlan": "Measure encrypted or isolated value storage and handle-table peak size."},
+            {"dimension": "reliability", "direction": "regresses", "confidence": "medium", "basis": "source-derived", "assessment": "Reveal, expiry and handle-resolution failures create more terminal states.", "validationPlan": "Fault-inject stale, missing, duplicated and cross-request handles."},
+            {"dimension": "operability", "direction": "regresses", "confidence": "high", "basis": "source-derived", "assessment": "Debugging becomes harder because operators should not inspect protected values casually.", "validationPlan": "Design a privacy-preserving incident trace and rehearse one failed reveal."},
+            {"dimension": "migration", "direction": "regresses", "confidence": "medium", "basis": "source-derived", "assessment": "Only workflows that can express protected values symbolically can adopt it without losing dialogue utility.", "validationPlan": "Prototype one high-risk field after the base envelope passes and measure task completion."}
+          ],
+          "residualRisks": ["Quarantined extraction remains probabilistic.", "Reveal policy can become a confused deputy.", "Many legitimate explanations require deliberate access to the hidden value."],
+          "implementationReadiness": {
+            "affectedComponents": ["Labeled envelope", "Isolated value vault", "Quarantined extraction", "Reveal policy"],
+            "workPackages": ["Select eligible field classes.", "Define opaque handles and expiry.", "Define extraction and reveal schemas.", "Add cross-handle and covert-output tests."],
+            "acceptanceCriteria": ["The main dialogue model cannot dereference protected handles.", "Only a permitted sink resolves a handle after label policy passes."],
+            "migrationNotes": ["Defer until the selected base envelope is stable; add per field rather than replacing the shared contract."],
+            "rollback": "Disable symbolic handling for the affected workflow and keep that intelligent path closed until the base labeled path is safe."
+          }
+        }
+      ],
+      "recommendedOptionId": "bureau-labeled-capability-envelope",
+      "recommendation": "Adopt the labeled capability envelope as a Gate-zero prerequisite. Retain fixed plans as a narrow supplementary guard and consider symbolic values later for fields whose exposure is both high risk and unnecessary for dialogue."
+    },
+    {
+      "opportunityId": "cognitive-cell-compromise-containment",
+      "title": "Contain a compromised cognitive wrapper and eliminate ambient host bridges",
+      "summary": "Run each Bureau attempt in a fresh broker-mediated cell with one typed input, one typed output and no ambient authority surface.",
+      "diagnosis": "EMR4 has bounded isolation evidence, but the future model runtime lacks a frozen complete bridge inventory and one-attempt lifetime contract. A later parser, file, URL, callback, telemetry or generic tool convenience could therefore convert hostile model output into host compromise or cross-Bureau persistence.",
+      "evidence": [
+        {"claimType": "observed", "sourceKind": "document", "evidenceId": "E009", "path": "docs/ariadne-real-isolation-rehearsal-design.md", "claim": "The earlier rehearsal used a pinned non-root, read-only, mount-free and network-free container profile."},
+        {"claimType": "observed", "sourceKind": "threat_model", "evidenceId": "E010", "path": "docs/security/ariadne-real-isolation-rehearsal-threat-model-delta.md", "claim": "The earlier evidence explicitly did not prove host-kernel, daemon, prompt/tool or adaptive-model safety."},
+        {"claimType": "observed", "sourceKind": "document", "evidenceId": "E011", "path": "docs/ariadne-bounded-agent-admission-design.md", "claim": "Agent admission starts with empty tools, secrets and capabilities and permits draft-only egress."},
+        {"claimType": "observed", "sourceKind": "document", "evidenceId": "E016", "claim": "Microsoft documented model-controlled input reaching evaluation and host file-write bridges in agent frameworks."},
+        {"claimType": "inferred", "sourceKind": "coverage", "evidenceId": "E016", "claim": "If a future cognitive wrapper exposes any unregistered host bridge, compromise before proofreading can bypass the intended typed-candidate boundary."}
+      ],
+      "desiredInvariants": [
+        "Each Bureau attempt has a fresh cell generation, identity, quotas and empty writable state.",
+        "The model-accessible surface is exactly one closed typed input and one closed candidate output.",
+        "Provider transport, credentials, destinations, retry and budgets remain broker-owned and immutable to the model.",
+        "The cell has no ambient shell, code, tool, filesystem, host path, socket, metadata, database, cloud or actuator capability.",
+        "The broker treats model output as hostile bytes and never evaluates or dereferences model-selected code, objects, paths, URLs or callbacks.",
+        "Every bridge is registered, policy-bound, auditable and denied when unknown.",
+        "Every terminal state destroys the cell and produces bounded residue evidence."
+      ],
+      "proposalPath": "proposals/cognitive-cell-compromise-containment.md",
+      "options": [
+        {
+          "optionId": "long-lived-shared-hardened-container",
+          "title": "Use one long-lived hardened container for all Bureaus",
+          "kind": "baseline",
+          "summary": "Keep a warm shared runtime with ordinary container hardening and network policy.",
+          "diagramPaths": {"before": "diagrams/cognitive-cell-compromise-containment-before.mmd", "after": "diagrams/cognitive-cell-compromise-containment-long-lived-shared-hardened-container-after.mmd"},
+          "evidenceCoverage": [
+            {"evidenceId": "E009", "effect": "mitigates", "tacticalFixRequired": true, "rationale": "The existing profile reduces privilege but does not remove cross-request lifetime, shared state or future bridge accumulation."}
+          ],
+          "tradeoffs": [
+            {"dimension": "security", "direction": "improves", "confidence": "medium", "basis": "source-derived", "assessment": "Non-root, read-only and capability restrictions narrow compromise, while one breach can persist across attempts and Bureaus.", "validationPlan": "Test cross-request memory, filesystem, cache and process residue after a simulated compromise."},
+            {"dimension": "performance", "direction": "improves", "confidence": "medium", "basis": "analogous", "assessment": "A warm runtime avoids per-attempt startup and image initialization.", "validationPlan": "Measure warm request latency as the baseline for later isolation options."},
+            {"dimension": "memory", "direction": "improves", "confidence": "medium", "basis": "analogous", "assessment": "One shared process can reuse model-client and parser memory.", "validationPlan": "Measure steady-state RSS and cache growth under a representative concurrent workload."},
+            {"dimension": "reliability", "direction": "unknown", "confidence": "medium", "basis": "analogous", "assessment": "Warm caches reduce startup failures, but persistent corruption can affect later unrelated requests.", "validationPlan": "Fault-inject parser and process corruption and observe subsequent attempts."},
+            {"dimension": "operability", "direction": "improves", "confidence": "medium", "basis": "analogous", "assessment": "Fewer runtime objects simplify ordinary operation, but incident scope and residue analysis are broader.", "validationPlan": "Rehearse containment and attribution of one compromised request."},
+            {"dimension": "migration", "direction": "improves", "confidence": "medium", "basis": "source-derived", "assessment": "It most closely resembles a conventional service and needs the least orchestration work.", "validationPlan": "Inventory all required bridges and compare them to the desired empty-capability contract."}
+          ],
+          "residualRisks": ["Compromise and writable state can span attempts.", "A shared runtime can recreate cross-Bureau memory or capability paths."],
+          "implementationReadiness": {
+            "affectedComponents": ["Future cognitive runtime"],
+            "workPackages": ["Apply conventional container hardening."],
+            "acceptanceCriteria": ["Not acceptable as the shared Gate-zero lifetime contract."],
+            "migrationNotes": ["The same hardening flags remain required under disposable options."],
+            "rollback": "Stop the shared runtime and keep intelligent paths disabled."
+          }
+        },
+        {
+          "optionId": "one-shot-brokered-cell",
+          "title": "Create one sealed brokered cell per Bureau attempt",
+          "kind": "isolation",
+          "summary": "Give one fresh cell one typed request and one candidate response while a deterministic broker owns provider transport and every external sink.",
+          "diagramPaths": {"before": "diagrams/cognitive-cell-compromise-containment-before.mmd", "after": "diagrams/cognitive-cell-compromise-containment-one-shot-brokered-cell-after.mmd"},
+          "evidenceCoverage": [
+            {"evidenceId": "E009", "effect": "addresses", "tacticalFixRequired": true, "rationale": "The option promotes proven isolation properties into a future runtime contract and adds per-attempt lifetime and bridge completeness."},
+            {"evidenceId": "E016", "effect": "mitigates", "tacticalFixRequired": true, "rationale": "Removing model-accessible evaluation, host paths and generic tools blocks the documented structural bridge classes."},
+            {"evidenceId": "E021", "effect": "mitigates", "tacticalFixRequired": true, "rationale": "The broker contract applies least privilege, temporary identity, scope, monitoring and incident-ready receipts."
+            }
+          ],
+          "tradeoffs": [
+            {"dimension": "security", "direction": "improves", "confidence": "high", "basis": "source-derived", "assessment": "Compromise is bounded to one attempt with no ambient host, network, credential or cross-Bureau bridge; the broker remains a new high-trust parser and transport component.", "validationPlan": "Run bridge, parser-smuggling, metadata, socket, file, credential, cross-Bureau and residue attacks against the chosen runtime."},
+            {"dimension": "performance", "direction": "regresses", "confidence": "medium", "basis": "analogous", "assessment": "Cell creation, input copy, provider relay and teardown add hops and cold-start latency.", "validationPlan": "Measure p50/p95/p99 creation-to-teardown latency for the maximum approved concurrent workload and set an explicit Gate-zero threshold."},
+            {"dimension": "memory", "direction": "regresses", "confidence": "medium", "basis": "analogous", "assessment": "Concurrent attempts require separate bounded processes and buffers, though nothing persists after teardown.", "validationPlan": "Measure per-cell and broker peak RSS at the selected concurrency and reject unbounded queues."},
+            {"dimension": "reliability", "direction": "improves", "confidence": "medium", "basis": "source-derived", "assessment": "A failed cell cannot corrupt the next attempt; broker, startup and teardown add explicit failure modes that must fail closed.", "validationPlan": "Fault-inject provider timeout, malformed output, quota kill, broker restart and teardown failure and verify typed terminal receipts."},
+            {"dimension": "operability", "direction": "regresses", "confidence": "medium", "basis": "source-derived", "assessment": "Pinned images, runtime profiles, bridge registry, quotas and residue monitoring need clear ownership.", "validationPlan": "Rehearse image revocation, bridge-version mismatch, quota alert and compromised-cell investigation."},
+            {"dimension": "migration", "direction": "regresses", "confidence": "high", "basis": "source-derived", "assessment": "Gate zero must define a platform-neutral broker contract, followed by a provider-free runtime proof before any occupied model call.", "validationPlan": "Build a source-hashed runtime manifest and prove zero unregistered bridges before enabling an occupied rehearsal."}
+          ],
+          "residualRisks": ["Unknown host, kernel or container-runtime vulnerabilities can escape the cell.", "The broker parser or provider relay can contain implementation defects.", "Provider-side compromise remains outside the cell boundary."],
+          "implementationReadiness": {
+            "affectedComponents": ["Gate-zero cognitive-cell schema", "Provider broker", "Hostile-byte parser", "Runtime profile", "Bridge registry", "Residue evidence"],
+            "workPackages": ["Freeze one-attempt input/output contract.", "Freeze broker-owned provider envelope and immutable binding.", "Define runtime and parser admission profile.", "Define bridge registry, quotas, teardown and residue schemas.", "Build provider-free adversarial runtime acceptance."],
+            "acceptanceCriteria": ["No unregistered bridge is reachable.", "The cell has no ambient authority or cross-attempt state.", "Malformed or hostile output reaches no interpreter or sink.", "Every terminal state destroys the cell and records residue."],
+            "migrationNotes": ["Keep all intelligent paths default-off until a concrete runtime proves the contract; use pre-pulled pinned layers only if they preserve isolation."],
+            "rollback": "Disable the affected intelligent path, revoke its broker binding and return to deterministic/manual PMS controls."
+          }
+        },
+        {
+          "optionId": "one-shot-microvm-cell",
+          "title": "Place each one-shot cell behind a separate kernel",
+          "kind": "isolation",
+          "summary": "Use the same broker contract with a disposable microVM or comparable hardware-isolated runtime.",
+          "diagramPaths": {"before": "diagrams/cognitive-cell-compromise-containment-before.mmd", "after": "diagrams/cognitive-cell-compromise-containment-one-shot-microvm-cell-after.mmd"},
+          "evidenceCoverage": [
+            {"evidenceId": "E009", "effect": "mitigates", "tacticalFixRequired": true, "rationale": "A separate kernel further narrows container escape while preserving the same no-bridge and hostile-output controls."}
+          ],
+          "tradeoffs": [
+            {"dimension": "security", "direction": "improves", "confidence": "medium", "basis": "analogous", "assessment": "A separate kernel narrows shared-kernel escape paths but does not remove broker, hypervisor, provider or policy risk.", "validationPlan": "Review the chosen microVM threat model and run the same bridge and residue suite plus hypervisor-specific tests."},
+            {"dimension": "performance", "direction": "regresses", "confidence": "medium", "basis": "analogous", "assessment": "Boot, device setup and teardown are likely slower than a disposable container.", "validationPlan": "Benchmark p50/p95/p99 end-to-end latency against one-shot containers on the actual host."},
+            {"dimension": "memory", "direction": "regresses", "confidence": "high", "basis": "analogous", "assessment": "Each concurrent attempt carries a guest-kernel and fixed runtime footprint.", "validationPlan": "Measure resident memory and maximum safe concurrency on the target infrastructure."},
+            {"dimension": "reliability", "direction": "unknown", "confidence": "medium", "basis": "analogous", "assessment": "Failure isolation improves while more orchestration and boot components create new failure modes.", "validationPlan": "Fault-inject image, boot, relay, teardown and capacity failures."},
+            {"dimension": "operability", "direction": "regresses", "confidence": "high", "basis": "analogous", "assessment": "Kernel images, hypervisor patching, capacity, telemetry and incident response require a mature platform owner.", "validationPlan": "Produce an ownership and patch-SLA rehearsal before selection."},
+            {"dimension": "migration", "direction": "regresses", "confidence": "medium", "basis": "hypothetical", "assessment": "The stable broker protocol makes runtime replacement possible, but no current platform evidence establishes the practical cost.", "validationPlan": "Prototype the same frozen broker test suite on one candidate microVM runtime."}
+          ],
+          "residualRisks": ["Hypervisor and broker vulnerabilities remain.", "Higher latency or resource pressure may make the intelligent path unavailable.", "It does not change authority or information-flow policy."],
+          "implementationReadiness": {
+            "affectedComponents": ["Runtime implementation beneath the broker contract"],
+            "workPackages": ["Select a supported microVM platform.", "Benchmark resource and reliability behavior.", "Re-run all one-shot cell security acceptance."],
+            "acceptanceCriteria": ["It passes the unchanged broker contract and improves the agreed isolation property within an accepted latency and capacity budget."],
+            "migrationNotes": ["Defer until measurements or a high-risk runtime justify separate-kernel isolation; keep the broker protocol interchangeable."],
+            "rollback": "Return to a previously accepted one-shot runtime profile without changing labels, provider binding or authority semantics."
+          }
+        }
+      ],
+      "recommendedOptionId": "one-shot-brokered-cell",
+      "recommendation": "Adopt the platform-neutral one-shot brokered cell as the Gate-zero minimum. Preserve microVM isolation as a compatible stronger profile if later measurements or recovery-domain risk justify its operating cost."
+    }
+  ],
+  "openQuestions": [
+    "What p95 latency and concurrent-cell memory budgets should Gate zero impose before selecting a concrete runtime?",
+    "Which response fields, if any, justify the deferred symbolic-vault extension?",
+    "Which platform control will enforce outbound provider allowlisting without exposing a general HTTP client to the cell?",
+    "What authorized human roles may endorse or declassify each future data class?"
+  ]
+}

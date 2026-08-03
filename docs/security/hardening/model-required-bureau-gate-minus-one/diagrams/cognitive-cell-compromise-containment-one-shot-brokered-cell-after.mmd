@@ -1,0 +1,12 @@
+flowchart LR
+    A["Authenticated request and labeled frame"] --> B["Trusted deterministic broker"]
+    B -->|"one closed typed input"| C["Fresh one-attempt sealed cell"]
+    C -->|"provider envelope only"| B
+    B --> P["Pinned provider endpoint"]
+    P --> B
+    B -->|"provider result bytes"| C
+    C -->|"one bounded canonical JSON candidate"| B
+    B --> V["Hostile-byte parser, labels and proofreader"]
+    V --> D["Authority gate or typed denial"]
+    K["No mounts, shell, tools, credentials, metadata or ambient network"] -.-> C
+    C --> Z["Deterministic kill, teardown and residue receipt"]

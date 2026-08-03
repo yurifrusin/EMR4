@@ -1,0 +1,144 @@
+{
+  "schema_version": "emr4.security-hardening-evidence.v1",
+  "collection_id": "model-required-bureau-gate-minus-one-2026-08-04",
+  "target_revision": "b09739183ddbe1a102086460749a84741a23b11b",
+  "collected_at": "2026-08-04",
+  "artifact_count": 21,
+  "collection_sha256": "e3b6721331853ee41598c226139dc09820e308413322abc72b7a0762baa6fc70",
+  "hash_rule": "SHA-256 over sorted ID|artifact|identity lines with LF endings and one final LF",
+  "artifacts": [
+    {
+      "id": "E001",
+      "artifact": "Model-required deterministic-authority Bureau architecture",
+      "path": "docs/emr4-model-required-deterministic-authority-bureau-architecture.md",
+      "identity": "sha256:86d43800661ce70a1884a60b0deb62482b3d348427e19de6d39cc82eeacc7271"
+    },
+    {
+      "id": "E002",
+      "artifact": "Rayleen, Davida and controlled-recovery development plan",
+      "path": "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
+      "identity": "sha256:8dab2510b9109dc9ce9778cb3d7798d6a992ed8d8deadd9ee38c5ec48c5ea8f7"
+    },
+    {
+      "id": "E003",
+      "artifact": "Model-required Bureaus threat-model delta",
+      "path": "docs/security/emr4-model-required-bureaus-controlled-recovery-threat-model-delta.md",
+      "identity": "sha256:9db185ab4606cab7d1e82181c356728fcf08daf4726f77245580f6817d5e95c4"
+    },
+    {
+      "id": "E004",
+      "artifact": "Bounded Cognitive Work Cell protocol design",
+      "path": "docs/ariadne-bounded-cognitive-work-cell-protocol-design.md",
+      "identity": "sha256:8c259345cc6334928b342356ecfd66aa9e4c391d2c4bc209509a17a0fb2be278"
+    },
+    {
+      "id": "E005",
+      "artifact": "Bounded Cognitive Work Cell threat-model delta",
+      "path": "docs/security/ariadne-bounded-cognitive-work-cell-threat-model-delta.md",
+      "identity": "sha256:0ed2cfe9cdf42656fe418a1775e816d13343303b51b9fcc6303adfe04eba5940"
+    },
+    {
+      "id": "E006",
+      "artifact": "Sandbox-DAG protocol design",
+      "path": "docs/ariadne-sandbox-dag-protocol-design.md",
+      "identity": "sha256:489220d618a1e62cc4f911579158db823c403e5038151a488b5eac0841ae001d"
+    },
+    {
+      "id": "E007",
+      "artifact": "Bernie-Davida shared-agent boundary",
+      "path": "docs/bernie-davida-shared-agent-boundary.md",
+      "identity": "sha256:ada91c7338fa46745d7a2a62e98431a61af52088cef76ecee9b09ca1ab195081"
+    },
+    {
+      "id": "E008",
+      "artifact": "Bernie-Davida seam threat-model delta",
+      "path": "docs/security/bernie-davida-parallel-seam-threat-model-delta.md",
+      "identity": "sha256:46e9daccd521dd292ffdff860c8faf4178d4fd5abbcda0bed4b7cb1c57dcda09"
+    },
+    {
+      "id": "E009",
+      "artifact": "Real-isolation rehearsal design",
+      "path": "docs/ariadne-real-isolation-rehearsal-design.md",
+      "identity": "sha256:e8d8d7d1683637ff18028ddfe574c9a2802b64dac19cf8dba96795f0f4d1b354"
+    },
+    {
+      "id": "E010",
+      "artifact": "Real-isolation rehearsal threat-model delta",
+      "path": "docs/security/ariadne-real-isolation-rehearsal-threat-model-delta.md",
+      "identity": "sha256:93eb569d570dfd2fd80046be98e8b77061c8180022261ab07e7c5cc8b0754f61"
+    },
+    {
+      "id": "E011",
+      "artifact": "Bounded agent-admission design",
+      "path": "docs/ariadne-bounded-agent-admission-design.md",
+      "identity": "sha256:14db6322cfbaed1c2dd823d1c3d393414644253343100c90830bdb6bb3169cec"
+    },
+    {
+      "id": "E012",
+      "artifact": "Bounded agent-admission threat-model delta",
+      "path": "docs/security/ariadne-bounded-agent-admission-threat-model-delta.md",
+      "identity": "sha256:103c141488d951c6e9800b273e08d5a9d0d38c74063b55ac3b5854b52d2e429f"
+    },
+    {
+      "id": "E013",
+      "artifact": "Access AI API design",
+      "path": "orchestration/access_ai_api_design.md",
+      "identity": "sha256:6befbd638f486291008d972f44c0fc42879aef0c2f4e4c1b4725f9244243a421"
+    },
+    {
+      "id": "E014",
+      "artifact": "API Spine blueprint-first/model-second boundary",
+      "path": "docs/api-spine/blueprint-first-model-second-boundary.md",
+      "identity": "sha256:f76b81b7d86f6e1085dca2dfa672a1caa1f322211a64ed01b86a199f354b29d7"
+    },
+    {
+      "id": "E015",
+      "artifact": "NIST CAISI large-scale AI-agent red teaming",
+      "url": "https://www.nist.gov/blogs/caisi-research-blog/insights-ai-agent-security-large-scale-red-teaming-competition",
+      "published": "2026-03-23",
+      "identity": "https://www.nist.gov/blogs/caisi-research-blog/insights-ai-agent-security-large-scale-red-teaming-competition"
+    },
+    {
+      "id": "E016",
+      "artifact": "Microsoft prompt-to-RCE and host-bridge research",
+      "url": "https://www.microsoft.com/en-us/security/blog/2026/05/07/prompts-become-shells-rce-vulnerabilities-ai-agent-frameworks/",
+      "published": "2026-05-07",
+      "identity": "https://www.microsoft.com/en-us/security/blog/2026/05/07/prompts-become-shells-rce-vulnerabilities-ai-agent-frameworks/"
+    },
+    {
+      "id": "E017",
+      "artifact": "CaMeL: Defeating Prompt Injections by Design",
+      "url": "https://arxiv.org/abs/2503.18813",
+      "published": "2025",
+      "identity": "https://arxiv.org/abs/2503.18813"
+    },
+    {
+      "id": "E018",
+      "artifact": "FIDES: Securing AI Agents with Information-Flow Control",
+      "url": "https://arxiv.org/abs/2505.23643",
+      "published": "2025",
+      "identity": "https://arxiv.org/abs/2505.23643"
+    },
+    {
+      "id": "E019",
+      "artifact": "Design Patterns for Securing LLM Agents against Prompt Injections",
+      "url": "https://arxiv.org/abs/2506.08837",
+      "published": "2025",
+      "identity": "https://arxiv.org/abs/2506.08837"
+    },
+    {
+      "id": "E020",
+      "artifact": "NCSC: Prompt injection is not SQL injection",
+      "url": "https://www.ncsc.gov.uk/blog-post/prompt-injection-is-not-sql-injection",
+      "published": "2025-12-08",
+      "identity": "https://www.ncsc.gov.uk/blog-post/prompt-injection-is-not-sql-injection"
+    },
+    {
+      "id": "E021",
+      "artifact": "NCSC: Thinking carefully before adopting agentic AI",
+      "url": "https://www.ncsc.gov.uk/blogs/thinking-carefully-before-adopting-agentic-ai",
+      "published": "2026-05-15",
+      "identity": "https://www.ncsc.gov.uk/blogs/thinking-carefully-before-adopting-agentic-ai"
+    }
+  ]
+}

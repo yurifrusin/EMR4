@@ -2,7 +2,8 @@
 
 Date: 2026-08-04
 
-Status: plan only; all dispatch and development paused pending Yuri instruction
+Status: Gate -1 architecture review in progress; all Gate-zero and lane dispatch
+remains paused
 
 Architecture parent:
 `docs/emr4-model-required-deterministic-authority-bureau-architecture.md`
@@ -18,6 +19,34 @@ The current fifth Bernie/Davida pair remains the completed candidate parent.
 This plan neither starts its material live-backend/Davida-write successor nor
 dispatches any worker.
 
+## Programme gate -1: adversarial containment review
+
+Before Gate zero, treat every provider model and cognitive wrapper as capable of
+following direct or indirect prompt injection and of emitting deliberately
+hostile output. Gate -1 is architecture and evidence only; it does not run a
+provider, wire a model runtime, open product data or add an actuator.
+
+The evidence-backed Gate -1 candidate selects two required properties:
+
+- one shared deterministic label/capability envelope that propagates
+  provenance, integrity, confidentiality/readers, freshness and authority
+  ceilings across context, candidate fields, transformations, command arguments
+  and response/egress sinks; and
+- one fresh, broker-mediated, deny-by-default cognitive cell per Bureau attempt,
+  with exactly one typed input and one typed candidate output and no ambient
+  shell, code, tool, path, URL, callback, filesystem, database, credential,
+  metadata, network or actuator bridge.
+
+Provider-model participation remains mandatory for the intelligent dialogue.
+The model and cell remain untrusted candidate generators. Model safeguards,
+prompt-injection detection and adversarial evaluation are defense in depth and
+cannot supply authority.
+
+Gate -1 passes only after the hardening portfolio, attack paths, comparable
+alternatives, diagrams, threat-model delta and deterministic artifact checks
+pass a fresh independent Gemini 3.6 Flash/high veto. Until then the selections
+are candidates and Gate zero remains closed.
+
 ## Programme gate zero: shared architecture contract
 
 Before the three lanes diverge, freeze one versioned contract covering:
@@ -26,7 +55,11 @@ Before the three lanes diverge, freeze one versioned contract covering:
 - mandatory provider-model admission and explicit outage semantics;
 - Bernie, Rayleen, Davida and recovery-domain ownership;
 - shared typed-candidate and deterministic-proofreader envelope conventions;
+- the Gate -1 label/capability algebra, trusted source wrappers, complete sink
+  mediation, endorsement/declassification rules and typed denial receipts;
 - context-frame provenance, freshness, minimization and authorization;
+- the Gate -1 one-attempt cell, provider broker, hostile-byte parser, bridge
+  registry, resource quotas, teardown and residue contract;
 - separate cognitive, authority and actuator principals;
 - human and dual-review policy expression;
 - no silent provider fallback; and
@@ -261,7 +294,12 @@ Pause before:
 - accepting cost, data-residency, production or release posture; or
 - touching protected refs, Pages or public branding.
 
-## Planned first action after Yuri releases the pause
+Gate -1 additionally forbids treating a detector, delimiter, model refusal,
+human confirmation or sandbox alone as proof that prompt injection cannot
+affect authority. Any proposed new cognitive-cell bridge is a fresh security
+architecture decision.
+
+## Planned first action after Gate -1 passes
 
 Begin gate zero only: architecture contract, closed schemas, threat model and
 deterministic artifact tests. Do not begin lanes A-D until gate zero passes its

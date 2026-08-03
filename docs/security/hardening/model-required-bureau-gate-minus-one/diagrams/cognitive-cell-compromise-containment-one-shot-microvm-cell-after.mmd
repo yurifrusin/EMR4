@@ -1,0 +1,11 @@
+flowchart LR
+    A["Authenticated request and labeled frame"] --> B["Trusted deterministic broker"]
+    B -->|"closed input channel"| V["Fresh microVM with separate kernel"]
+    V -->|"provider envelope"| B
+    B --> P["Pinned provider endpoint"]
+    P --> B
+    B -->|"provider bytes"| V
+    V -->|"bounded candidate"| B
+    B --> G["Labels, proofreader and authority"]
+    V --> Z["Destroy microVM and prove residue"]
+    K["Same no-tool, no-mount, no-credential contract"] -.-> V

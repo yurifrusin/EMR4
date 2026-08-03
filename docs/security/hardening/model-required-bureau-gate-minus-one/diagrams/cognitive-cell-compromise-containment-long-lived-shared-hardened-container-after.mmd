@@ -1,0 +1,7 @@
+flowchart LR
+    I1["Bernie attempt"] --> C["Long-lived hardened container"]
+    I2["Rayleen attempt"] --> C
+    I3["Davida attempt"] --> C
+    C --> B["Shared broker and caches"]
+    C --> O["Typed candidates"]
+    R["Residual: compromise and state span attempts"] -.-> C

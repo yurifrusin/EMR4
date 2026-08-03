@@ -1,0 +1,6 @@
+flowchart LR
+    U["Untrusted text"] --> M["Provider model"]
+    M --> C["Well-formed candidate"]
+    C --> P["Schema and grounding"]
+    P --> X["Consequential sink"]
+    G["Attacker influence can remain syntactically valid"] -.-> C

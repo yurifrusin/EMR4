@@ -1,0 +1,12 @@
+flowchart LR
+    S["Trusted source wrappers"] --> L["Labeled typed values"]
+    U["Untrusted or confidential sources"] --> L
+    L --> M["Mandatory provider model"]
+    M --> C["Candidate with inherited dependencies"]
+    C --> J["Deterministic label joins and proofreader"]
+    J --> I{"Integrity and capability policy"}
+    I -->|deny| D["Typed denial receipt"]
+    I -->|allow| R{"Readers and egress policy"}
+    R -->|deny| D
+    R -->|allow| A["Independent authority gate"]
+    A --> X["REST/OpenAPI command or bounded response"]

@@ -1,0 +1,72 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "sprint_planning",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely at 453 lines, 73702 bytes and SHA-256 ced5f46679695af41e05a31ff246a0909f5e3459cb8d73684d7d3e05c773f6f1. It records the accepted fifth pair, model-required deterministic-authority doctrine, revision 6 error register and the prior pause before further development.",
+    "current_authority_allocation": "Yuri has now explicitly opened Gate minus one as an architecture-only adversarial containment review. GPT Sol owns scope, evidence synthesis and acceptance; Gemini 3.6 Flash/high remains eligible only for a fresh independent veto after deterministic artifacts pass. No implementation worker, product runtime or actuator is opened.",
+    "active_plan_and_acceptance": "The model-required Bureau architecture, paused Rayleen/Davida/controlled-recovery development plan and threat-model delta were reread completely. Gate minus one may derive a research-backed hardening portfolio, attack paths, alternatives, diagrams and acceptance recommendations before gate zero; it does not implement the selected hardening design or begin lanes A-D.",
+    "protected_evidence_boundaries": "Protected holdouts and historical PHI remain closed. User-owned docs/branding remains preserved and excluded. Product-derived, identity, patient, clinical, operational and secret data may not be sent externally. Provider runtime calls, product reads/writes, actuators, shell/SQL/cloud/IAM capabilities, migrations, external update ingestion, deployment, production, release, Pages and protected refs remain closed.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at b09739183ddbe1a102086460749a84741a23b11b, aligned with its origin task branch. Local and origin master plus handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked worktree and index are clean; only user-owned docs/branding is untracked."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_required_bureau_gate_minus_one_preplan_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol reread the five authoritative sources and the security-hardening proposal contract before Gate minus one planning."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent has been briefed, resumed, messaged or dispatched for Gate minus one."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Gemini is deferred until a deterministic, non-protected, research-backed candidate exists and an exact review packet passes preflight."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["DeepSeek is not selected because Gate minus one is architectural security judgment rather than bounded implementation."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The real-TTY fallback is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The leverage-gated Claude lane is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {"resource_id": "codex-native-parallel-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,8 @@
+flowchart LR
+    U["User or retrieved text"] --> M["Mandatory provider model"]
+    F["Typed context facts"] --> M
+    M --> C["Typed candidate"]
+    C --> P["Schema, grounding and semantic proofreader"]
+    P --> A["Human and deterministic authority"]
+    A --> X["REST/OpenAPI command or response"]
+    N["Gap: influence and reader labels are not joined end to end"] -.-> P

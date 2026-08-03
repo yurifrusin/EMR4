@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "sprint_planning",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5f082c73228b9cceabb54e84631a93ded3bbd56498dc901a0444d64415841955",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The model-required Bureau architecture, paused Rayleen/Davida/controlled-recovery development plan and threat-model delta were reread completely. Gate minus one may derive a research-backed hardening portfolio, attack paths, alternatives, diagrams and acceptance recommendations before gate zero; it does not implement the selected hardening design or begin lanes A-D.",
+    "current_authority_allocation": "Yuri has now explicitly opened Gate minus one as an architecture-only adversarial containment review. GPT Sol owns scope, evidence synthesis and acceptance; Gemini 3.6 Flash/high remains eligible only for a fresh independent veto after deterministic artifacts pass. No implementation worker, product runtime or actuator is opened.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at b09739183ddbe1a102086460749a84741a23b11b, aligned with its origin task branch. Local and origin master plus handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked worktree and index are clean; only user-owned docs/branding is untracked.",
+    "live_handover_current_baton": "AGENTS.md was reread completely at 453 lines, 73702 bytes and SHA-256 ced5f46679695af41e05a31ff246a0909f5e3459cb8d73684d7d3e05c773f6f1. It records the accepted fifth pair, model-required deterministic-authority doctrine, revision 6 error register and the prior pause before further development.",
+    "protected_evidence_boundaries": "Protected holdouts and historical PHI remain closed. User-owned docs/branding remains preserved and excluded. Product-derived, identity, patient, clinical, operational and secret data may not be sent externally. Provider runtime calls, product reads/writes, actuators, shell/SQL/cloud/IAM capabilities, migrations, external update ingestion, deployment, production, release, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

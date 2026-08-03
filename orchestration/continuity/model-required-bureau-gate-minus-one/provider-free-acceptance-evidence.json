@@ -1,0 +1,56 @@
+{
+  "schema_version": "emr4.model-required-bureau-gate-minus-one.acceptance.v1",
+  "result": "model_required_bureau_gate_minus_one_provider_free_acceptance_pass",
+  "passed": true,
+  "mode": "repository_local_provider_free_architecture_acceptance",
+  "evidence_collection": {
+    "artifact_count": 21,
+    "local_artifact_count": 14,
+    "external_primary_source_count": 7,
+    "collection_sha256": "e3b6721331853ee41598c226139dc09820e308413322abc72b7a0762baa6fc70",
+    "target_revision": "b09739183ddbe1a102086460749a84741a23b11b"
+  },
+  "hardening_portfolio": {
+    "opportunity_count": 2,
+    "option_count": 7,
+    "diagram_count": 9,
+    "selected": {
+      "deterministic-information-flow-confinement": "bureau-labeled-capability-envelope",
+      "cognitive-cell-compromise-containment": "one-shot-brokered-cell"
+    }
+  },
+  "documents": {
+    "required_artifact_count": 6,
+    "heading_checked_document_count": 3,
+    "distributable_artifact_count": 14,
+    "checked_local_link_count": 20,
+    "required_phrase_count": 12,
+    "forbidden_claim_count": 0
+  },
+  "authority_and_side_effects": {
+    "provider_calls": 0,
+    "backend_calls": 0,
+    "database_reads": 0,
+    "database_writes": 0,
+    "product_data_reads": 0,
+    "patient_or_clinical_data_fields": 0,
+    "model_runtime_wirings": 0,
+    "new_tool_or_actuator_capabilities": 0,
+    "cloud_or_iam_mutations": 0,
+    "deployments": 0,
+    "protected_ref_movements": 0
+  },
+  "claim_boundary": {
+    "proves": [
+      "A source-hashed, research-backed adversarial architecture review identifies two hardening opportunities and compares meaningful alternatives.",
+      "The selected Gate-zero candidates are a deterministic labeled capability envelope and one-attempt brokered cognitive cells.",
+      "The artifacts preserve mandatory provider-model participation while denying the model authority."
+    ],
+    "does_not_prove": [
+      "Implementation or runtime enforcement of either selected hardening control.",
+      "Prompt-injection immunity, sandbox invulnerability or provider trustworthiness.",
+      "Safety for real identity, product-derived, patient, health or clinical data.",
+      "Deployment, production fitness or release readiness."
+    ]
+  }
+}

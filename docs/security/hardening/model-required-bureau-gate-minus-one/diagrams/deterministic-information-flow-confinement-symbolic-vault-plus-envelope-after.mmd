@@ -1,0 +1,10 @@
+flowchart LR
+    U["Low-integrity or confidential value"] --> Q["Quarantined extraction"]
+    Q --> V["Isolated labeled value vault"]
+    V --> H["Opaque handle"]
+    T["Trusted dialogue context"] --> M["Mandatory provider model"]
+    H --> M
+    M --> C["Typed candidate using handle"]
+    C --> P["Deterministic envelope and reveal policy"]
+    V --> P
+    P --> A["Independent authority or denial"]

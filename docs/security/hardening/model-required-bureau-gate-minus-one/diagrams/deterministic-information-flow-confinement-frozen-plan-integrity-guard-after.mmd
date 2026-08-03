@@ -1,0 +1,8 @@
+flowchart LR
+    T["Trusted user intent"] --> PL["Freeze allowed action plan"]
+    U["Untrusted data"] --> M["Provider model"]
+    PL --> G["Action-sequence guard"]
+    M --> ARGS["Candidate arguments"]
+    ARGS --> G
+    G --> X["Consequential sink"]
+    R["Residual: allowed arguments and content may be redirected"] -.-> ARGS

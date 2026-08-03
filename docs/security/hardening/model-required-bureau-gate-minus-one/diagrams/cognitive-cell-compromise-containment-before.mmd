@@ -1,0 +1,7 @@
+flowchart LR
+    I["Typed context"] --> W["Future cognitive wrapper"]
+    W --> M["Provider model"]
+    M --> W
+    W --> O["Typed candidate"]
+    B["Unfrozen future bridges: parser, files, URLs, callbacks, telemetry"] -.-> W
+    W -. "possible ambient reach" .-> H["Host, network, secrets or other Bureau"]
