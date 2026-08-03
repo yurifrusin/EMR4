@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "planned_action": "push",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5f082c73228b9cceabb54e84631a93ded3bbd56498dc901a0444d64415841955",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Commit 1454aa66fced6e6318cb0682f0dfa84f921b468d preserves the accepted fifth pair plus the model-required Bureau architecture, paused Rayleen/Davida/controlled-recovery development plan, threat-model delta, revision 6 incident evidence and passing deterministic gates. Gate zero is planned but unstarted.",
+    "current_authority_allocation": "GPT Sol may push the accepted task-branch closeout only. No worker, model, protected integration, protected ref, Pages, deployment or release action is included.",
+    "git_refs_and_worktree": "After a fresh origin fetch, C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at 1454aa66fced6e6318cb0682f0dfa84f921b468d, three commits ahead of origin task ec7af55d58997ed967abce05af5fa5bbe3bbb3dd. Local and origin master plus handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked worktree is clean and only user-owned docs/branding is untracked.",
+    "live_handover_current_baton": "Committed AGENTS.md at task-branch HEAD records the accepted fifth pair, revision 6 incident register, model-required deterministic-authority doctrine, completed planning result and explicit pause before further subagent development.",
+    "protected_evidence_boundaries": "Protected holdouts, historical PHI and every provider/product/write/actuator/deployment gate remain closed. User-owned untracked docs/branding remains preserved and excluded. Push is limited to codex/ariadne-bernie-davida-parallel-seam."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
