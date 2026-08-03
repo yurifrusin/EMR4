@@ -1,0 +1,32 @@
+{
+  "schema_version": "emr4.native_diary_practitioner_reconciliation_evidence.v1",
+  "result": "provider_free_native_diary_application_session_practitioner_reconciliation_pass",
+  "evidence_label": "provider_free_unmounted_client_state_machine",
+  "data_class": "authored_synthetic",
+  "case_count": 14,
+  "passed_case_count": 14,
+  "failed_case_count": 0,
+  "rejection_reason_count": 6,
+  "properties": {
+    "latest_read_wins": true,
+    "stale_generation_rejected_before_render": true,
+    "superseded_request_rejected_before_render": true,
+    "invalidated_session_rejected_before_render": true,
+    "foreign_and_replayed_ticket_rejected": true,
+    "strict_fixed_read_shape": true,
+    "response_rows_retained": false,
+    "client_generation_is_server_bound_proof": false,
+    "provider_or_external_effect": false
+  },
+  "claims_not_made": [
+    "live",
+    "browser",
+    "route_intercepted",
+    "http",
+    "backend",
+    "postgresql",
+    "mounted_runtime",
+    "usability"
+  ],
+  "client_reconciler_sha256": "39f7f3655a70624771b3411833699679973fe6025a098c3d0be44b27a296f600"
+}
