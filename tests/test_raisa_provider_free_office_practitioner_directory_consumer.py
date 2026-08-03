@@ -89,14 +89,9 @@ def _exercise_surface(
     csrf = _attribute(page.text, "data-csrf")
     nonce = _attribute(page.text, "data-evidence-nonce")
     endpoint = _attribute(page.text, "data-directory-endpoint")
+    assert _attribute(page.text, "data-delivery-state") == "ready"
     assert csrf.startswith("csrf.")
     assert len(nonce) >= 43
-    reload_page = client.get(
-        "/office-practitioner-directory/taskpane",
-        params={"surface": surface.value},
-    )
-    assert _attribute(reload_page.text, "data-csrf") == ""
-    assert _attribute(reload_page.text, "data-evidence-nonce") == ""
 
     response = client.post(
         endpoint,

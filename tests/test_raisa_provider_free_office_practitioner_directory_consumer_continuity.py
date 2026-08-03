@@ -13,8 +13,8 @@ NODE = "raisa-provider-free-office-practitioner-directory-consumer"
 
 def test_office_consumer_is_terminal_accepted_continuity_node() -> None:
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
-    assert graph["graph_revision"] == 201
-    node = graph["nodes"][-1]
+    assert graph["graph_revision"] >= 201
+    node = next(item for item in graph["nodes"] if item["id"] == NODE)
     assert node["id"] == NODE
     assert node["status"] == "accepted"
     assert node["relationships"] == [
@@ -31,10 +31,11 @@ def test_office_consumer_is_terminal_accepted_continuity_node() -> None:
 
 def test_office_consumer_is_current_compass_position() -> None:
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
-    assert compass["map_revision"] == 182
-    assert compass["source_graph_revision"] == 201
-    assert compass["current_position"]["node_id"] == NODE
-    assert "installed Word and Word Online" in compass["orientation_statement"]
+    assert compass["map_revision"] >= 182
+    assert compass["source_graph_revision"] >= 201
+    assert NODE in {item["node_id"] for item in compass["journey"]}
+    journey = next(item for item in compass["journey"] if item["node_id"] == NODE)
+    assert "installed Word and Word Online" in journey["outcome"]
     decision = next(
         item
         for item in compass["user_owned_decisions"]
@@ -46,6 +47,6 @@ def test_office_consumer_is_current_compass_position() -> None:
 
 def test_rendered_compass_names_the_office_consumer_and_limits() -> None:
     report = REPORT.read_text(encoding="utf-8")
-    assert "Provider-free Office practitioner-directory consumer" in report
+    assert "Raisa Provider-Free Office Practitioner-Directory Consumer" in report
     assert "Real identity" in report
     assert "provider-free" in report

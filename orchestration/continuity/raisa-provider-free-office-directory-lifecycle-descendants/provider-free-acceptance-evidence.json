@@ -1,0 +1,91 @@
+{
+  "claim_limits": [
+    "Lifecycle hardening of the existing authored-synthetic active-practitioner Office consumer only.",
+    "No real identity, broader product read, command, deployment, production or release is established."
+  ],
+  "data_class": "authored_synthetic",
+  "default_off": true,
+  "durable_raw_value_match_count": 0,
+  "evidence_label": "provider_free_in_process_backend_postgres",
+  "passed": true,
+  "result": "provider_free_office_directory_lifecycle_descendants_pass",
+  "schema_version": "emr4.provider-free-office-directory-lifecycle-descendants-evidence.v1",
+  "side_effects": {
+    "deployments": 0,
+    "document_reads": 0,
+    "document_writes": 0,
+    "external_identity_calls": 0,
+    "microsoft_or_office_identity_calls": 0,
+    "patient_health_or_clinical_reads": 0,
+    "product_commands_or_writes": 0,
+    "product_reads": 0,
+    "production_changes": 0,
+    "provider_calls": 0
+  },
+  "tranches": [
+    {
+      "cleanup": {
+        "database_absent_after": true,
+        "four_task_roles_absent_after": true,
+        "passed": true,
+        "pools_disposed": true
+      },
+      "inert_replay_count": 2,
+      "passed": true,
+      "product_reads": 0,
+      "ready_delivery_count": 1,
+      "result": "provider_free_office_reload_terminal_reconciliation_pass",
+      "revocation_count": 1,
+      "revocation_failure_count": 0,
+      "stale_product_request_denied": true
+    },
+    {
+      "cleanup": {
+        "database_absent_after": true,
+        "four_task_roles_absent_after": true,
+        "passed": true,
+        "pools_disposed": true
+      },
+      "expired_session_denied": true,
+      "passed": true,
+      "product_reads": 0,
+      "raw_error_detail_released": false,
+      "result": "provider_free_office_session_loss_reconciliation_pass",
+      "revoked_session_denied": true,
+      "safe_terminal_result_count": 2
+    },
+    {
+      "cleanup": {
+        "database_absent_after": true,
+        "four_task_roles_absent_after": true,
+        "passed": true,
+        "pools_disposed": true
+      },
+      "consumed_nonce_replay_denied": true,
+      "cross_surface_nonce_denied": true,
+      "passed": true,
+      "product_reads": 0,
+      "result": "provider_free_office_cross_surface_replay_isolation_pass",
+      "swapped_csrf_denied": true,
+      "wrong_surface_cookie_denied": true
+    },
+    {
+      "fixed_reason_class_count": 10,
+      "identifier_fields_present": false,
+      "passed": true,
+      "raw_values_present": false,
+      "result": "provider_free_office_lifecycle_observability_pass",
+      "schema_version": "raisa.office_consumer_lifecycle.v1"
+    },
+    {
+      "cookie_owned": false,
+      "database_owned": false,
+      "fixed_surface_and_endpoint": true,
+      "one_use_delivery_and_nonce": true,
+      "passed": true,
+      "provider_or_identity_owned": false,
+      "result": "provider_free_default_off_office_consumer_adapter_pass",
+      "route_mounted": false
+    }
+  ]
+}

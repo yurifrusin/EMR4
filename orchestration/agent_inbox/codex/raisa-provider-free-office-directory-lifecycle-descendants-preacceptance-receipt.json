@@ -1,0 +1,34 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "verifier_acceptance",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was re-read completely after compaction and now records the five lifecycle results at Continuity 206 / Compass 187.",
+    "current_authority_allocation": "Yuri authorised exactly five clear provider-free descendants along Sol's recommended path. All five stayed within the active-practitioner, authored-synthetic, no-command boundary and that authority is now consumed.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-office-reload-terminal-reconciliation-plan.md",
+      "docs/raisa-provider-free-office-session-loss-reconciliation-plan.md",
+      "docs/raisa-provider-free-office-cross-surface-replay-isolation-plan.md",
+      "docs/raisa-provider-free-office-lifecycle-observability-plan.md",
+      "docs/raisa-provider-free-default-off-office-consumer-adapter-plan.md",
+      "docs/security/raisa-provider-free-office-directory-lifecycle-descendants-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md"
+    ],
+    "protected_evidence_boundaries": "No protected holdout, historical Diary, provider call, real identity, patient/clinical/document content, broader product read, product mutation, cloud/IAM, deployment, Pages, protected-ref or Dependabot alert 17 action occurred. docs/branding remained untouched and excluded.",
+    "git_refs_and_worktree": "Task branch codex/raisa-provider-free-office-directory-lifecycle-descendants is based at pushed parent 53d160ec4c7cf7d6a39d068e7fda4e46b592a431. Local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Each fresh lifecycle database, four roles and pools was cleaned up."
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

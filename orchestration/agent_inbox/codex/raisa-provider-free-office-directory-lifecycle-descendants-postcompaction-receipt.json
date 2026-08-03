@@ -1,0 +1,31 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "verify_and_publish_the_accepted_office_practitioner_directory_consumer_then_complete_five_clear_provider_free_lifecycle_descendants_without_real_identity_patient_clinical_command_deployment_protected_integration_or_release_authority",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was re-read completely after compaction at 500 lines and SHA-256 591708D86B8E2E89EF3988A473D4F9605FDEA4FDCB61F6B11D6165625CFC509B; the accepted consumer is bound at Continuity 201 / Compass 182 and reload reconciliation is the first frozen descendant.",
+    "current_authority_allocation": "Yuri authorised five clear provider-free descendants along Sol's recommended path at non-material forks, including ordinary implementation, tests, evidence, task-branch commits and stacked draft PR publication. Live Microsoft identity, real identity, patient or clinical data, broader product reads, commands, deployment, protected integration, production, release and another Pages rebuild remain closed.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-office-practitioner-directory-consumer-plan.md",
+      "docs/raisa-provider-free-office-practitioner-directory-consumer-design.md",
+      "docs/security/raisa-provider-free-office-practitioner-directory-consumer-threat-model-delta.md",
+      "docs/raisa-provider-free-office-practitioner-directory-consumer-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-office-practitioner-directory-consumer-sol-acceptance.md"
+    ],
+    "protected_evidence_boundaries": "No protected holdout or historical Diary access; no provider call, real identity, patient or clinical data, document content, product mutation, cloud or IAM change, deployment, Pages, protected-ref or Dependabot alert 17 action. The user-owned docs/branding directory remains untouched and excluded.",
+    "git_refs_and_worktree": "Current branch codex/raisa-provider-free-office-practitioner-directory-consumer and origin are aligned at 53d160ec4c7cf7d6a39d068e7fda4e46b592a431. Local and origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. docs/branding remains the only unrelated user-owned untracked directory before this receipt."
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

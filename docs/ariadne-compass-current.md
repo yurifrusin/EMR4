@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 now carries one fixed, authorized active-practitioner-directory read through independent supervised installed Word and Word Online sessions. Continuity 201 / Compass 182 bind exact host admission, display-safe projection, authorization audit, logout, post-logout denial and complete disposable cleanup. Real identity, patient/clinical/document access, broader product authority, deployment, production and release remain closed.
+> EMR4's fixed Office active-practitioner consumer now has explicit inert reload/history behaviour, safe expired/revoked-session reconciliation, cross-surface cookie/CSRF/nonce isolation, identifier-free lifecycle counts and a route-free default-off adapter. Continuity 206 / Compass 187 bind all five results. Fresh authority is required before a native Diary composition review; real identity, broader product reads, every write, deployment, production and release remain closed.
 
 ## North star
 
@@ -176,32 +176,42 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One unmounted endpoint factory now authorizes and audits an active authored-synthetic practitioner-directory read through exact product columns. Lineage parent: `raisa-provider-free-oidc-admission-grant-redemption-bridge`.
 80. **Put the first least-sensitive authorized product read into both real Office hosts — Raisa Provider-Free Office Practitioner-Directory Consumer**
    Independent supervised installed Word and Word Online sessions each rendered the fixed active-practitioner directory, logged out and rejected reuse. Lineage parent: `raisa-provider-free-session-practitioner-directory-read-bridge`.
+81. **Make repeated and restored Office taskpane navigation explicitly inert — Raisa Provider-Free Office Reload and Terminal Reconciliation**
+   Repeated delivery revokes surviving session authority once, clears task cookies, omits endpoint and launch material, and denies the stale DOM. Lineage parent: `raisa-provider-free-office-practitioner-directory-consumer`.
+82. **Converge expired and revoked sessions on one safe taskpane state — Raisa Provider-Free Office Session-Loss Reconciliation**
+   Expired and revoked sessions release no rows or raw errors and show one fixed close-and-reopen instruction. Lineage parent: `raisa-provider-free-office-reload-terminal-reconciliation`.
+83. **Prove independent installed Word and Word Online authority partitions — Raisa Provider-Free Office Cross-Surface Replay Isolation**
+   Cookie/surface, CSRF and nonce swaps plus consumed-nonce replay are denied with zero product reads. Lineage parent: `raisa-provider-free-office-session-loss-reconciliation`.
+84. **Expose only bounded identifier-free lifecycle reason counts — Raisa Provider-Free Office Lifecycle Observability**
+   A versioned ten-reason ledger contains no identifier, correlation or opaque launch value and routes nothing. Lineage parent: `raisa-provider-free-office-cross-surface-replay-isolation`.
+85. **Extract reusable one-use Office lifecycle decisions without product wiring — Raisa Provider-Free Default-Off Office Consumer Adapter**
+   The route-free adapter owns only fixed surface decisions, nonce admission and sanitized counters and remains absent from app.main. Lineage parent: `raisa-provider-free-office-lifecycle-observability`.
 
 ## Current position
 
-**Provider-free Office practitioner-directory consumer — Raisa Provider-Free Office Practitioner-Directory Consumer**
+**Provider-free default-off Office consumer lifecycle adapter — Raisa Provider-Free Default-Off Office Consumer Adapter**
 
-**Why this proof came next:** The unmounted session-backed directory factory had passed, making an exact supervised Office consumer the least-sensitive next product proof.
+**Why this proof came next:** The supervised two-host read passed, making navigation, session-loss and replay lifecycle hardening the least-sensitive authorised follow-on.
 
-Two real Office hosts now prove the fixed display-safe GraphQL read, required authorization audit, logout, post-logout denial and complete disposable cleanup.
+Five provider-free descendants now make repeated delivery inert, reconcile lost sessions, isolate surface authority, expose only sanitized reason counts and extract an unmounted adapter.
 
 ### What this unlocks
 
-- Review the result on its stacked draft pull request.
-- The authorised next descendant may make reload, retry and stale taskpane navigation visibly inert without broadening product authority.
+- Review the five lifecycle results on their stacked draft pull request.
+- With fresh authority, review a default-off native Diary composition for the same active-practitioner read.
 
 ### What it does not solve
 
-- Real identity, live Microsoft/provider interoperability or real principal mapping.
-- Patient/clinical/document reads, broader product resources, commands or writes.
-- General endpoint mounting, organisational deployment, production security, deployment or release.
+- Live Microsoft/provider interoperability or real identity mapping.
+- Patient/clinical/document access, broader product resources or any command/write.
+- Distributed abuse resistance, organisational deployment, protected integration, production or release.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
 - Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
 - Contract `committed-reschedule-availability-reconciliation`: **satisfied**
-- Bounded opening `api-change`: Authorize one task-scoped provider-free authored-synthetic Office consumer of the active-practitioner-directory factory in supervised installed Word and Word Online.
+- Bounded opening `api-change`: Extract reusable one-use Office lifecycle decisions without product wiring
 - All other named boundaries remain closed: `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -433,10 +443,13 @@ Prerequisites:
 - **Should a supervised authored-synthetic Office consumer be connected to the default-off practitioner-directory factory?**
   Required before: Satisfied on 2026-08-03: Yuri authorised and supervised the exact authored-synthetic installed Word and Word Online consumer; real identity, broader product authority and production remain closed.
 - **Should reload, retry and stale Office taskpane navigation be reconciled into an explicit inert terminal state?**
-  Required before: Satisfied by Yuri's authority for five clear provider-free descendants; this is the first recommended descendant and grants no new product resource or command authority.
+  Required before: Satisfied on 2026-08-03 under Yuri's authority for five clear provider-free descendants; all five lifecycle results passed without a material fork.
+- **Should EMR4 review a default-off native Diary composition for the same active-practitioner read?**
+  Required before: Fresh Yuri authority is required because the six-tranche Office consumer and lifecycle sequence is now consumed.
 
 ## Map limits
 
+- The five Office lifecycle descendants are provider-free, authored-synthetic, active-practitioner-only and task-scoped; they add no real identity, broader product authority or production wiring.
 - The Office practitioner-directory result is provider-free, authored-synthetic, active-only and task-scoped; it proves neither real identity nor patient/clinical/document or product-write safety.
 - The practitioner-directory result is provider-free, authored-synthetic, active-only and unmounted; it proves neither real identity nor patient/clinical product access.
 - The atomic redemption result remains provider-free and authored-synthetic: its session cookies prove the backend transaction shape, not real identity or product authorization.
@@ -513,6 +526,7 @@ Prerequisites:
 - `app/models/application_identity_oidc_attempt.py`
 - `app/routers/application_auth.py`
 - `app/services/application_auth_database_role.py`
+- `app/services/application_auth_office_consumer.py`
 - `app/services/application_auth_operational_database.py`
 - `app/services/application_auth_operational_hardening.py`
 - `app/services/application_auth_persistence.py`
@@ -682,9 +696,19 @@ Prerequisites:
 - `docs/raisa-postgresql-oidc-operational-connection-boundary-closeout.md`
 - `docs/raisa-postgresql-oidc-operational-connection-boundary-design.md`
 - `docs/raisa-postgresql-oidc-operational-connection-boundary-plan.md`
+- `docs/raisa-provider-free-default-off-office-consumer-adapter-closeout.md`
+- `docs/raisa-provider-free-default-off-office-consumer-adapter-plan.md`
+- `docs/raisa-provider-free-office-cross-surface-replay-isolation-closeout.md`
+- `docs/raisa-provider-free-office-cross-surface-replay-isolation-plan.md`
+- `docs/raisa-provider-free-office-lifecycle-observability-closeout.md`
+- `docs/raisa-provider-free-office-lifecycle-observability-plan.md`
 - `docs/raisa-provider-free-office-practitioner-directory-consumer-closeout.md`
 - `docs/raisa-provider-free-office-practitioner-directory-consumer-design.md`
 - `docs/raisa-provider-free-office-practitioner-directory-consumer-plan.md`
+- `docs/raisa-provider-free-office-reload-terminal-reconciliation-closeout.md`
+- `docs/raisa-provider-free-office-reload-terminal-reconciliation-plan.md`
+- `docs/raisa-provider-free-office-session-loss-reconciliation-closeout.md`
+- `docs/raisa-provider-free-office-session-loss-reconciliation-plan.md`
 - `docs/raisa-provider-free-oidc-admission-grant-redemption-bridge-closeout.md`
 - `docs/raisa-provider-free-oidc-admission-grant-redemption-bridge-design.md`
 - `docs/raisa-provider-free-oidc-admission-grant-redemption-bridge-plan.md`
@@ -752,6 +776,7 @@ Prerequisites:
 - `docs/security/raisa-oidc-verifier-dependency-review-2026-08-02.md`
 - `docs/security/raisa-postgresql-oidc-authorization-attempt-store-threat-model-delta.md`
 - `docs/security/raisa-postgresql-oidc-operational-connection-boundary-threat-model-delta.md`
+- `docs/security/raisa-provider-free-office-directory-lifecycle-descendants-threat-model-delta.md`
 - `docs/security/raisa-provider-free-office-practitioner-directory-consumer-threat-model-delta.md`
 - `docs/security/raisa-provider-free-oidc-admission-grant-redemption-bridge-threat-model-delta.md`
 - `docs/security/raisa-provider-free-oidc-binding-admission-grant-boundary-threat-model-delta.md`
@@ -811,6 +836,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-dual-host-foundation-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-availability-reconciliation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/reception-one-bureau-cost-bounded-occupied-retry-002-preacceptance-receipt.json`
 - `orchestration/agent_inbox/codex/reception-one-bureau-cost-bounded-occupied-retry-002-sol-acceptance.md`
@@ -989,6 +1015,7 @@ Prerequisites:
 - `orchestration/continuity/raisa-microsoft-federation-postgresql-persistence/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-postgresql-oidc-authorization-attempt-store/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-postgresql-oidc-operational-connection-boundary/live-local-backend-postgres-operational-evidence.json`
+- `orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/live-office-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-provider-free-oidc-admission-grant-redemption-bridge/live-local-http-backend-postgres-redemption-evidence.json`
 - `orchestration/continuity/raisa-provider-free-oidc-binding-admission-grant-boundary/live-local-http-backend-postgres-evidence.json`
@@ -1294,6 +1321,7 @@ Prerequisites:
 - `tests/test_clinician_one_word_desktop_selection_check.py`
 - `tests/test_raisa_dual_host_foundation.py`
 - `tests/test_raisa_office_web_dev_context.py`
+- `tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py`
 - `tests/test_reception_one_bureau_explicit_selection_retry_readiness.py`
 - `tests/test_reception_one_bureau_model_text_lane.py`
 - `tests/test_reception_one_bureau_post_admission_runtime_hardening.py`
@@ -1320,4 +1348,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 182; continuity graph revision 201._
+_Compass map revision 187; continuity graph revision 206._

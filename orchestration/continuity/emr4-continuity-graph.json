@@ -59,7 +59,7 @@
       "voice"
     ]
   },
-  "graph_revision": 201,
+  "graph_revision": 206,
   "harvests": [],
   "nodes": [
     {
@@ -11265,9 +11265,509 @@
         "General endpoint mounting, organisational Office deployment and product-table RLS claims remain closed.",
         "Production secret custody, distributed abuse resistance, monitoring/SIEM, deployment, protected integration, production, release and GitHub Pages remain closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-office-reload-terminal-reconciliation",
+      "title": "Raisa Provider-Free Office Reload and Terminal Reconciliation",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-03T04:00:00Z",
+      "updated_at": "2026-08-03T04:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/raisa-provider-free-office-directory-lifecycle-descendants",
+        "source_head": "53d160ec4c7cf7d6a39d068e7fda4e46b592a431",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-office-practitioner-directory-consumer",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-provider-free-office-reload-terminal-reconciliation-plan.md",
+            "scope": "Make repeated and restored Office taskpane navigation explicitly inert"
+          }
+        ],
+        "notes": [
+          "Yuri authorised five clear provider-free descendants along Sol's recommended path.",
+          "No new product resource, write, provider, real identity, deployment, production or release authority opened.",
+          "The user-owned docs/branding directory remained excluded."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "raisa-provider-free-office-reload-terminal-reconciliation-decision",
+          "source": "docs/raisa-provider-free-office-reload-terminal-reconciliation-plan.md",
+          "status": "accepted",
+          "summary": "Repeated delivery revokes surviving session authority once, clears task cookies, omits endpoint and launch material, and denies the stale DOM."
+        }
+      ],
+      "claim_scope": [
+        "Repeated delivery revokes surviving session authority once, clears task cookies, omits endpoint and launch material, and denies the stale DOM.",
+        "Evidence is provider-free, authored-synthetic and limited to the existing active-practitioner Office consumer."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-office-reload-terminal-reconciliation-plan.md",
+            "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json",
+            "tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py"
+          ],
+          "note": "No patient, appointment, availability, proposal, time, duration or command context was introduced."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json",
+            "docs/raisa-provider-free-office-reload-terminal-reconciliation-closeout.md",
+            "tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py"
+          ],
+          "note": "No Diary event, availability, appointment, selection or proposal state was read or changed."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-office-reload-terminal-reconciliation-plan.md",
+          "docs/security/raisa-provider-free-office-directory-lifecycle-descendants-threat-model-delta.md"
+        ],
+        "findings": [
+          "app/services/application_auth_office_consumer.py",
+          "scripts/raisa_provider_free_office_practitioner_directory_consumer.py",
+          "orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/taskpane.js",
+          "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-office-reload-terminal-reconciliation-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-precommit-receipt.json"
+        ],
+        "tests": [
+          "scripts/raisa_provider_free_office_directory_lifecycle_descendants_acceptance.py",
+          "tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Live Microsoft/provider interoperability and real identity mapping remain closed.",
+        "Patient/clinical/document access, broader product reads and every product command/write remain closed.",
+        "Distributed abuse resistance, monitoring/SIEM, organisational deployment, protected integration, production and release remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-office-session-loss-reconciliation",
+      "title": "Raisa Provider-Free Office Session-Loss Reconciliation",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-03T04:00:00Z",
+      "updated_at": "2026-08-03T04:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/raisa-provider-free-office-directory-lifecycle-descendants",
+        "source_head": "53d160ec4c7cf7d6a39d068e7fda4e46b592a431",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-office-reload-terminal-reconciliation",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-provider-free-office-session-loss-reconciliation-plan.md",
+            "scope": "Converge expired and revoked sessions on one safe taskpane state"
+          }
+        ],
+        "notes": [
+          "Yuri authorised five clear provider-free descendants along Sol's recommended path.",
+          "No new product resource, write, provider, real identity, deployment, production or release authority opened.",
+          "The user-owned docs/branding directory remained excluded."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "raisa-provider-free-office-session-loss-reconciliation-decision",
+          "source": "docs/raisa-provider-free-office-session-loss-reconciliation-plan.md",
+          "status": "accepted",
+          "summary": "Expired and revoked sessions release no rows or raw errors and show one fixed close-and-reopen instruction."
+        }
+      ],
+      "claim_scope": [
+        "Expired and revoked sessions release no rows or raw errors and show one fixed close-and-reopen instruction.",
+        "Evidence is provider-free, authored-synthetic and limited to the existing active-practitioner Office consumer."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-office-session-loss-reconciliation-plan.md",
+            "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json",
+            "tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py"
+          ],
+          "note": "No patient, appointment, availability, proposal, time, duration or command context was introduced."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json",
+            "docs/raisa-provider-free-office-session-loss-reconciliation-closeout.md",
+            "tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py"
+          ],
+          "note": "No Diary event, availability, appointment, selection or proposal state was read or changed."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-office-session-loss-reconciliation-plan.md",
+          "docs/security/raisa-provider-free-office-directory-lifecycle-descendants-threat-model-delta.md"
+        ],
+        "findings": [
+          "app/services/application_auth_office_consumer.py",
+          "scripts/raisa_provider_free_office_practitioner_directory_consumer.py",
+          "orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/taskpane.js",
+          "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-office-session-loss-reconciliation-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-precommit-receipt.json"
+        ],
+        "tests": [
+          "scripts/raisa_provider_free_office_directory_lifecycle_descendants_acceptance.py",
+          "tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Live Microsoft/provider interoperability and real identity mapping remain closed.",
+        "Patient/clinical/document access, broader product reads and every product command/write remain closed.",
+        "Distributed abuse resistance, monitoring/SIEM, organisational deployment, protected integration, production and release remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-office-cross-surface-replay-isolation",
+      "title": "Raisa Provider-Free Office Cross-Surface Replay Isolation",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-03T04:00:00Z",
+      "updated_at": "2026-08-03T04:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/raisa-provider-free-office-directory-lifecycle-descendants",
+        "source_head": "53d160ec4c7cf7d6a39d068e7fda4e46b592a431",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-office-session-loss-reconciliation",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-provider-free-office-cross-surface-replay-isolation-plan.md",
+            "scope": "Prove independent installed Word and Word Online authority partitions"
+          }
+        ],
+        "notes": [
+          "Yuri authorised five clear provider-free descendants along Sol's recommended path.",
+          "No new product resource, write, provider, real identity, deployment, production or release authority opened.",
+          "The user-owned docs/branding directory remained excluded."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "raisa-provider-free-office-cross-surface-replay-isolation-decision",
+          "source": "docs/raisa-provider-free-office-cross-surface-replay-isolation-plan.md",
+          "status": "accepted",
+          "summary": "Cookie/surface, CSRF and nonce swaps plus consumed-nonce replay are denied with zero product reads."
+        }
+      ],
+      "claim_scope": [
+        "Cookie/surface, CSRF and nonce swaps plus consumed-nonce replay are denied with zero product reads.",
+        "Evidence is provider-free, authored-synthetic and limited to the existing active-practitioner Office consumer."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-office-cross-surface-replay-isolation-plan.md",
+            "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json",
+            "tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py"
+          ],
+          "note": "No patient, appointment, availability, proposal, time, duration or command context was introduced."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json",
+            "docs/raisa-provider-free-office-cross-surface-replay-isolation-closeout.md",
+            "tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py"
+          ],
+          "note": "No Diary event, availability, appointment, selection or proposal state was read or changed."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-office-cross-surface-replay-isolation-plan.md",
+          "docs/security/raisa-provider-free-office-directory-lifecycle-descendants-threat-model-delta.md"
+        ],
+        "findings": [
+          "app/services/application_auth_office_consumer.py",
+          "scripts/raisa_provider_free_office_practitioner_directory_consumer.py",
+          "orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/taskpane.js",
+          "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-office-cross-surface-replay-isolation-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-precommit-receipt.json"
+        ],
+        "tests": [
+          "scripts/raisa_provider_free_office_directory_lifecycle_descendants_acceptance.py",
+          "tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Live Microsoft/provider interoperability and real identity mapping remain closed.",
+        "Patient/clinical/document access, broader product reads and every product command/write remain closed.",
+        "Distributed abuse resistance, monitoring/SIEM, organisational deployment, protected integration, production and release remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-office-lifecycle-observability",
+      "title": "Raisa Provider-Free Office Lifecycle Observability",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-03T04:00:00Z",
+      "updated_at": "2026-08-03T04:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/raisa-provider-free-office-directory-lifecycle-descendants",
+        "source_head": "53d160ec4c7cf7d6a39d068e7fda4e46b592a431",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-office-cross-surface-replay-isolation",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-provider-free-office-lifecycle-observability-plan.md",
+            "scope": "Expose only bounded identifier-free lifecycle reason counts"
+          }
+        ],
+        "notes": [
+          "Yuri authorised five clear provider-free descendants along Sol's recommended path.",
+          "No new product resource, write, provider, real identity, deployment, production or release authority opened.",
+          "The user-owned docs/branding directory remained excluded."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "raisa-provider-free-office-lifecycle-observability-decision",
+          "source": "docs/raisa-provider-free-office-lifecycle-observability-plan.md",
+          "status": "accepted",
+          "summary": "A versioned ten-reason ledger contains no identifier, correlation or opaque launch value and routes nothing."
+        }
+      ],
+      "claim_scope": [
+        "A versioned ten-reason ledger contains no identifier, correlation or opaque launch value and routes nothing.",
+        "Evidence is provider-free, authored-synthetic and limited to the existing active-practitioner Office consumer."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-office-lifecycle-observability-plan.md",
+            "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json",
+            "tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py"
+          ],
+          "note": "No patient, appointment, availability, proposal, time, duration or command context was introduced."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json",
+            "docs/raisa-provider-free-office-lifecycle-observability-closeout.md",
+            "tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py"
+          ],
+          "note": "No Diary event, availability, appointment, selection or proposal state was read or changed."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-office-lifecycle-observability-plan.md",
+          "docs/security/raisa-provider-free-office-directory-lifecycle-descendants-threat-model-delta.md"
+        ],
+        "findings": [
+          "app/services/application_auth_office_consumer.py",
+          "scripts/raisa_provider_free_office_practitioner_directory_consumer.py",
+          "orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/taskpane.js",
+          "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-office-lifecycle-observability-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-precommit-receipt.json"
+        ],
+        "tests": [
+          "scripts/raisa_provider_free_office_directory_lifecycle_descendants_acceptance.py",
+          "tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Live Microsoft/provider interoperability and real identity mapping remain closed.",
+        "Patient/clinical/document access, broader product reads and every product command/write remain closed.",
+        "Distributed abuse resistance, monitoring/SIEM, organisational deployment, protected integration, production and release remain closed."
+      ]
+    },
+    {
+      "id": "raisa-provider-free-default-off-office-consumer-adapter",
+      "title": "Raisa Provider-Free Default-Off Office Consumer Adapter",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-03T04:00:00Z",
+      "updated_at": "2026-08-03T04:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/raisa-provider-free-office-directory-lifecycle-descendants",
+        "source_head": "53d160ec4c7cf7d6a39d068e7fda4e46b592a431",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-office-lifecycle-observability",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-provider-free-default-off-office-consumer-adapter-plan.md",
+            "scope": "Extract reusable one-use Office lifecycle decisions without product wiring"
+          }
+        ],
+        "notes": [
+          "Yuri authorised five clear provider-free descendants along Sol's recommended path.",
+          "No new product resource, write, provider, real identity, deployment, production or release authority opened.",
+          "The user-owned docs/branding directory remained excluded."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "raisa-provider-free-default-off-office-consumer-adapter-decision",
+          "source": "docs/raisa-provider-free-default-off-office-consumer-adapter-plan.md",
+          "status": "accepted",
+          "summary": "The route-free adapter owns only fixed surface decisions, nonce admission and sanitized counters and remains absent from app.main."
+        }
+      ],
+      "claim_scope": [
+        "The route-free adapter owns only fixed surface decisions, nonce admission and sanitized counters and remains absent from app.main.",
+        "Evidence is provider-free, authored-synthetic and limited to the existing active-practitioner Office consumer."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-default-off-office-consumer-adapter-plan.md",
+            "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json",
+            "tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py"
+          ],
+          "note": "No patient, appointment, availability, proposal, time, duration or command context was introduced."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json",
+            "docs/raisa-provider-free-default-off-office-consumer-adapter-closeout.md",
+            "tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py"
+          ],
+          "note": "No Diary event, availability, appointment, selection or proposal state was read or changed."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-default-off-office-consumer-adapter-plan.md",
+          "docs/security/raisa-provider-free-office-directory-lifecycle-descendants-threat-model-delta.md"
+        ],
+        "findings": [
+          "app/services/application_auth_office_consumer.py",
+          "scripts/raisa_provider_free_office_practitioner_directory_consumer.py",
+          "orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/taskpane.js",
+          "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-default-off-office-consumer-adapter-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-precommit-receipt.json"
+        ],
+        "tests": [
+          "scripts/raisa_provider_free_office_directory_lifecycle_descendants_acceptance.py",
+          "tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Live Microsoft/provider interoperability and real identity mapping remain closed.",
+        "Patient/clinical/document access, broader product reads and every product command/write remain closed.",
+        "Distributed abuse resistance, monitoring/SIEM, organisational deployment, protected integration, production and release remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-03T00:30:00Z"
+  "updated_at": "2026-08-03T04:00:00Z"
 }

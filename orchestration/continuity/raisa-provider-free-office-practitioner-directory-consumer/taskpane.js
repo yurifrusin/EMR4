@@ -9,12 +9,26 @@
   const list = document.getElementById("practitioner-list");
   const surface = root.dataset.surface || "";
   const expectedHost = root.dataset.expectedHost || "";
+  const deliveryState = root.dataset.deliveryState || "";
   const directoryEndpoint = root.dataset.directoryEndpoint || "";
   let csrfToken = root.dataset.csrf || "";
   let evidenceNonce = root.dataset.evidenceNonce || "";
   root.removeAttribute("data-csrf");
   root.removeAttribute("data-evidence-nonce");
   root.removeAttribute("data-directory-endpoint");
+  root.removeAttribute("data-delivery-state");
+
+  if (deliveryState !== "ready") {
+    csrfToken = "";
+    evidenceNonce = "";
+    button.disabled = true;
+    hostLabel.textContent = "Not requested";
+    sessionLabel.textContent = "Launch consumed";
+    status.textContent = "This one-use launch has ended. Close and reopen the taskpane to request a fresh application session.";
+    list.replaceChildren();
+    list.hidden = true;
+    return;
+  }
 
   const DIRECTORY_QUERY = `
     query Directory($activeOnly: Boolean!, $limit: Int!, $offset: Int!) {
@@ -34,6 +48,7 @@
   let hostClass = "";
   let officeReady = false;
   let terminal = false;
+  let inFlight = false;
 
   class FlowFailure extends Error {
     constructor(code) {
@@ -161,11 +176,12 @@
   }
 
   async function run() {
-    if (terminal || !officeReady) return;
+    if (terminal || inFlight || !officeReady) return;
     if (!csrfToken || !directoryEndpoint) {
       await fail("launch_unavailable", "The one-use directory launch is unavailable. Restart the task-owned harness.");
       return;
     }
+    inFlight = true;
     button.disabled = true;
     sessionLabel.textContent = "Authorized read in progress";
     status.textContent = "Loading the active practitioner directory…";
@@ -180,6 +196,9 @@
         },
         csrfToken
       );
+      if (response.status === 401 || response.status === 403) {
+        throw new FlowFailure("session_unavailable");
+      }
       if (!response.ok) throw new FlowFailure("directory_unavailable");
       let body;
       try {
@@ -205,11 +224,36 @@
       status.textContent = "Two active authored-synthetic practitioners were shown. No session remains in this taskpane.";
     } catch (error) {
       const code = error instanceof FlowFailure ? error.code : "network_unavailable";
-      await fail(code, "The directory check failed closed. No fallback or partial result was used.");
+      const message = code === "session_unavailable"
+        ? "This application session has ended. Close and reopen the taskpane to request a fresh session."
+        : "The directory check failed closed. No fallback or partial result was used.";
+      await fail(code, message);
     }
   }
 
   button.addEventListener("click", run, { once: true });
+
+  window.addEventListener("pagehide", () => {
+    terminal = true;
+    inFlight = true;
+    csrfToken = "";
+    evidenceNonce = "";
+    button.disabled = true;
+  }, { once: true });
+
+  window.addEventListener("pageshow", (event) => {
+    if (!event.persisted) return;
+    terminal = true;
+    inFlight = true;
+    csrfToken = "";
+    evidenceNonce = "";
+    button.disabled = true;
+    hostLabel.textContent = "Not requested";
+    sessionLabel.textContent = "Launch consumed";
+    status.textContent = "This restored taskpane is inert. Close and reopen it to request a fresh application session.";
+    list.replaceChildren();
+    list.hidden = true;
+  });
 
   const readyTimeout = window.setTimeout(() => {
     if (!officeReady) {
