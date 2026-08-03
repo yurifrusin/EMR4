@@ -1,0 +1,20 @@
+{
+  "baseline_head": "167618a9806cfb5431f0c55ddaa4dcef5b51e8b6",
+  "comparison": "git diff --exit-code task_candidate..review_projection across AGENTS.md, active plan/threat model, handover ledgers, harness settings, orchestration_harness, compaction script, harness fixture and focused tests",
+  "excluded_blue_artifacts": [
+    "docs/ariadne-handover-verifier-workflow-optimization-blue-review-analysis.md",
+    "orchestration/agent_inbox/codex/ariadne-handover-verifier-workflow-optimization-deepseek-blue-review-packet.md",
+    "orchestration/agent_inbox/codex/ariadne-handover-verifier-workflow-optimization-predispatch-receipt.json",
+    "orchestration/agent_inbox/codex/ariadne-handover-verifier-workflow-optimization-predispatch-runtime-state.json",
+    "orchestration/agent_inbox/codex/ariadne-handover-verifier-workflow-optimization-repair-precommit-receipt.json",
+    "orchestration/agent_inbox/codex/ariadne-handover-verifier-workflow-optimization-repair-precommit-runtime-state.json",
+    "orchestration/agent_inbox/deepseek/ariadne-handover-verifier-workflow-optimization-blue-review-receipt.json"
+  ],
+  "review_projection_branch": "codex/review-ariadne-handover-verifier-red",
+  "review_projection_head": "f5c81243a34b17cd65cc9cb20822aa80e0eaefc8",
+  "reviewed_source_and_control_diff_empty": true,
+  "schema_version": "ariadne.review_projection_equivalence.v1",
+  "settings_fingerprint_review_projection": "sha256:71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9",
+  "settings_fingerprint_task_candidate": "sha256:71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9",
+  "task_candidate_head": "50b11485d73ea8ee6660d1070890302c755af398"
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.6-flash-high",
+  "requested_model": "gemini-3.6-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\ariadne-handover-verifier-red",
+  "branch": "codex/review-ariadne-handover-verifier-red",
+  "head_before": "f5c81243a34b17cd65cc9cb20822aa80e0eaefc8",
+  "head_after": "f5c81243a34b17cd65cc9cb20822aa80e0eaefc8",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "result": "### Findings\n\nNo security defects, policy bypasses, authority ambiguities, unhandled edge cases, or stale/conflicting statements were found. The candidate branch satisfies all requirements and passes verification.\n\n#### Specific Focus Area Analysis:\n1. **Source Evidence Verification (`_source_evidence` & `build_orchestrator_receipt` in `orchestration_harness/orchestrator_preflight.py`):**\n   - Missing, empty, malformed, or ambiguously prefixed sources fail closed (`rehydration_source_evidence_missing` / `rehydration_source_evidence_ambiguous`).\n   - Duplicate source prefixes in primary session observations trigger explicit ambiguity detection (lines 38-40 in `orchestrator_preflight.py`).\n2. **Continuation Events & Enforcement:**\n   - All 10 continuation events in `orchestrator_requirements.yaml` mandate all 5 rehydration sources. Omitting or corrupting any source blocks execution with `status: revision_required` and `worker_dispatch_permitted: false`.\n3. **Baton Acceptance Index Ledger & Manifest Integrity:**\n   - `scripts/compact_agents_acceptance_index.py` and `tests/test_agents_acceptance_index.py` strictly bind the moved historical rows to SHA-256 and byte/line counts. Any unclassified live row addition or ledger edit causes `check_compaction()` to fail.\n4. **Policy Enforcement & Boundaries:**\n   - `verifier_execution_policy.yaml` explicitly enforces deterministic gates before model review, forbids Gemini implementation/self-acceptance/integration/baton moves, mandates serial execution for `conftest.py` / pytest shared schema tests, and forbids silent model fallback.\n5. **Diff & Document Integrity:**\n   - Diff analysis from baseline `167618a9806cfb5431f0c55ddaa4dcef5b51e8b6` to projection HEAD `f5c81243a34b17cd65cc9cb20822aa80e0eaefc8` reveals no branding collisions, stale authority claims, or protected ref violations.\n\n---\n\n### Executed Verification Checks\n- **Git HEAD Verification:** `f5c81243a34b17cd65cc9cb20822aa80e0eaefc8` on branch `codex/review-ariadne-handover-verifier-red`\n- **Worktree Cleanliness Check:** Confirmed clean (`git status` returned code 0, nothing to commit)\n- **Focused Pytest Suite Execution:** Passed all 52 tests across 7 test modules:\n  - `tests/test_agents_acceptance_index.py`\n  - `tests/test_ariadne_allocation_schemas.py`\n  - `tests/test_ariadne_orchestrator_preflight.py`\n  - `tests/test_ariadne_settings_fingerprint.py`\n  - `tests/test_ariadne_verifier_execution_policy.py`\n  - `tests/test_ariadne_antigravity.py`\n  - `tests/test_ariadne_deepseek_claude.py`\n\n---\n\nDECISION: pass"
+}

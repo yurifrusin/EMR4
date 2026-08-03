@@ -1,0 +1,31 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "verifier_acceptance",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/ariadne-handover-verifier-workflow-optimization-plan.md",
+      "docs/security/ariadne-handover-verifier-workflow-optimization-threat-model-delta.md",
+      "docs/ariadne-handover-verifier-workflow-optimization-blue-review-analysis.md",
+      "orchestration/agent_inbox/deepseek/ariadne-handover-verifier-workflow-optimization-blue-repair-review-receipt.json",
+      "orchestration/agent_inbox/antigravity/ariadne-handover-verifier-workflow-optimization-red-review-receipt.json"
+    ],
+    "current_authority_allocation": "DeepSeek final blue repair verification and fresh Gemini red verification both passed without implementation, acceptance or integration authority; Sol retains final evidence reconciliation and acceptance.",
+    "git_refs_and_worktree": "Task source candidate 50b11485d73ea8ee6660d1070890302c755af398 is exact and clean in the blue worktree. Red projection f5c81243a34b17cd65cc9cb20822aa80e0eaefc8 is source/control-identical, omits blue artifacts, passed in a clean unchanged worktree, and protected refs remain 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The compact Baton continues to preserve current authority, the accepted Office lifecycle product result and the separately gated next native Diary candidate; the workflow result is ready for an additive current-orchestration closeout.",
+    "protected_evidence_boundaries": "Review and acceptance used repository code, authored fixture evidence and task metadata only; protected evidence, patient/clinical/product-derived data, docs/branding, deployment, protected integration, production and release remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

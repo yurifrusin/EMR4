@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All checks complete. Here is the bounded repair verification report.\n\n## Findings (severity: none)\n\nNo medium, high, or critical findings. All four adopted low-severity repairs are correctly implemented, fail closed in the core, are covered by meaningful regressions, and do not broaden authority or weaken the original 37 passing tests.\n\n**1. LF/CRLF settings fingerprint \u2014 verified (no issue)**\n- `orchestration_harness/settings_fingerprint.py:17-18` reads YAML as UTF-8 text and normalizes `\\r\\n` then lone `\\r` to `\\n` before hashing.\n- Regression `tests/test_ariadne_settings_fingerprint.py:23-34` proves identical YAML in LF vs CRLF form produces the same fingerprint.\n- Repaired algorithm reproduces the bound receipt fingerprint exactly: recomputed `sha256:71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9` == `orchestration/agent_inbox/codex/ariadne-handover-verifier-workflow-optimization-repair-precommit-receipt.json`.\n\n**2. Hard event with absent/empty source map fails closed \u2014 verified (no issue)**\n- `orchestration_harness/orchestrator_preflight.py:155-157` sets `source_policy_missing = hard_event and not required_rehydration_sources` and appends `rehydration_source_policy_missing:<event>`.\n- `orchestration_harness/orchestrator_preflight.py:161` makes `source_gate_passed = not source_policy_missing`.\n- Guarded (`:146-149`) so an absent/non-dict `required_rehydration_sources_by_event` also yields `[]` \u2192 fail closed.\n- Regression `tests/test_ariadne_orchestrator_preflight.py:242-262`. I additionally forced the whole map to `{}` directly: receipt returned `revision_required` with `rehydration_source_policy_missing:pre_push`. Independent of the YAML test list.\n\n**3. Empty/malformed/duplicate prefixed source evidence cannot pass \u2014 verified (no issue)**\n- `orchestration_harness/orchestrator_preflight.py:184-189` uses `_has_evidence` (lines 8-15) to reject empty strings, empty lists, non-string/non-list, and lists containing empty/non-string items.\n- `orchestration_harness/orchestrator_preflight.py:26,38-40` track duplicate primary-session prefixes not already explicitly supplied; `:190-195` append `rehydration_source_evidence_ambiguous` and fail the gate.\n- Regressions: `tests/test_ariadne_orchestrator_preflight.py:176-191` (parametrized `None, \" \", [], [\"\"], [1]`) and `:218-239` (duplicate prefix). All pass.\n\n**4. Unclassified future live Baton row fails compaction \u2014 verified (no issue)**\n- `scripts/compact_agents_acceptance_index.py:227-234` rejects any live label not in the manifest `active_labels` (excluding `INDEX_LABEL`), requiring a deliberate manifest revision.\n- Regression `tests/test_agents_acceptance_index.py:78-93`. Real manifest still passes: 15 active rows, 90 moved rows.\n\n**Authority/regression confirmation:** all source changes are fail-closed additions; `orchestration_harness/orchestrator_preflight.py:224` still emits `authority_boundary = \"receipt_only_no_worker_control_or_integration_authority\"`. Test diffs are purely additive (no deletions). The six-file suite grew 37 \u2192 45 (only +8 new repair tests) and the settings-fingerprint file has 3; the original 37 all still pass.\n\n## Checks run\n- Seven-file focused suite (48 tests): `tests/test_agents_acceptance_index.py`, `tests/test_agents_handover_archive.py`, `tests/test_ariadne_orchestrator_preflight.py`, `tests/test_ariadne_allocation_schemas.py`, `tests/test_ariadne_verifier_execution_policy.py`, `tests/test_ariadne_antigravity.py`, `tests/test_ariadne_settings_fingerprint.py` \u2192 **48 passed, exit 0**.\n- `git diff <prev> <HEAD> --check` \u2192 clean (exit 0).\n- `py_compile` on all changed Python files \u2192 OK.\n- `ruff check` on all changed source/test files \u2192 all checks passed.\n- YAML parse of all `orchestration/harness_settings/*.yaml` \u2192 OK.\n- Repaired `settings_fingerprint()` recomputation against current settings dir \u2192 matches receipt fingerprint.\n- `check_compaction()` against real manifest \u2192 OK (15 active, 90 moved).\n- Direct core fail-closed probe for empty whole source map \u2192 `revision_required`.\n\n## HEAD / worktree status\n- Branch: `codex/review-ariadne-handover-verifier-blue`\n- HEAD: `50b11485d73ea8ee6660d1070890302c755af398` (exact candidate, matches packet)\n- Working tree: clean (`git status --short` empty; `git diff --quiet` exits 0). No files were created, edited, staged, committed, pushed, or deployed.\n\nDECISION: pass",
+  "usage": {
+    "input_tokens": 25573,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 722176,
+    "output_tokens": 19723,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 0.9919430000000001,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

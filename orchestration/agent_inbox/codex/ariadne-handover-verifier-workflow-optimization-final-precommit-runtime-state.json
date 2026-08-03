@@ -1,0 +1,81 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_native_five_source_final_closeout_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md is 52013 bytes / 431 lines, retains current authority and active Office lifecycle acceptance, and now records ariadne_handover_verifier_workflow_optimization_pass without changing the separately gated next product candidate.",
+    "current_authority_allocation": "Sol accepted the material architecture/security result at Extra High after final independent DeepSeek and Gemini passes; neither reviewer received acceptance, integration or protected-ref authority.",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-handover-verifier-workflow-optimization-plan.md",
+      "docs/security/ariadne-handover-verifier-workflow-optimization-threat-model-delta.md",
+      "docs/ariadne-handover-verifier-workflow-optimization-blue-review-analysis.md",
+      "docs/ariadne-handover-verifier-workflow-optimization-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-handover-verifier-workflow-optimization-sol-acceptance.md"
+    ],
+    "protected_evidence_boundaries": "No protected evidence, patient/clinical/product-derived data, docs/branding, deployment, protected integration, production or release entered the accepted result or staged scope.",
+    "git_refs_and_worktree": "Task branch is at source candidate 50b11485d73ea8ee6660d1070890302c755af398 with only closeout, reviewer and receipt evidence pending; protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Final local gate passed 48 focused tests, Ruff, Python compilation, YAML/JSON parsing, ledger check, review-envelope checks and diff hygiene."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was used."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Final DeepSeek V4 Flash/high blue repair review passed exact candidate 50b11485 with 48 tests and an unchanged worktree."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No TTY fallback was used."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No standalone Claude lane was used."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh Gemini 3.6 Flash/high red review passed source-equivalent projection f5c81243 with 52 tests, one decision and an unchanged clean worktree."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

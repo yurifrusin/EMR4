@@ -1,0 +1,30 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/ariadne-handover-verifier-workflow-optimization-plan.md",
+      "docs/security/ariadne-handover-verifier-workflow-optimization-threat-model-delta.md",
+      "docs/ariadne-handover-verifier-workflow-optimization-blue-review-analysis.md",
+      "orchestration/harness_settings/verifier_execution_policy.yaml"
+    ],
+    "current_authority_allocation": "DeepSeek V4 Flash/high may only verify the bounded adopted repairs; Gemini 3.6 Flash/high may only perform fresh adversarial review; Sol alone accepts and integrates.",
+    "git_refs_and_worktree": "Task candidate 50b11485d73ea8ee6660d1070890302c755af398 is clean in the blue worktree. Source-equivalent red projection f5c81243a34b17cd65cc9cb20822aa80e0eaefc8 is clean, omits blue artifacts and has identical reviewed source/control paths plus stable settings fingerprint 71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9.",
+    "live_handover_current_baton": "The compact live Baton remains authoritative and the task result is still provisional pending final independent blue and red decisions.",
+    "protected_evidence_boundaries": "Both final packets exclude protected evidence, patient/clinical/product-derived data, credentials, docs/branding, deployment, protected refs, production and release; red additionally excludes every blue-review artifact."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
