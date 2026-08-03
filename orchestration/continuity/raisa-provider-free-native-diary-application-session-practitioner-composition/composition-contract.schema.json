@@ -25,19 +25,263 @@
   "properties": {
     "schema_version": {"const": "emr4.raisa.native_diary_composition_contract.v1"},
     "status": {"const": "architecture_only_default_off"},
-    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "source_head": {"const": "bb8a6f554b417df019727345ba91a7d555b0bd41"},
     "parent": {"const": "bernie_davida_parallel_seam_pass"},
-    "surface": {"type": "object"},
-    "authorization_bridge": {"type": "object"},
-    "read_binding": {"type": "object"},
-    "default_off_preservation": {"type": "object"},
-    "forbidden_dependencies": {"type": "array", "minItems": 1, "uniqueItems": true},
-    "failure_behaviour": {"type": "object"},
-    "closed_gates": {"type": "array", "minItems": 1, "uniqueItems": true},
-    "api_spine": {"type": "object"},
-    "deterministic_acceptance_cases": {"type": "array", "minItems": 1, "uniqueItems": true},
-    "residual_risks": {"type": "array", "minItems": 1, "uniqueItems": true},
-    "implementation_handoff": {"type": "object"},
-    "blocked_gates": {"type": "array", "minItems": 8, "uniqueItems": true}
+    "surface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bound_surface",
+        "surface_enum",
+        "surface_value",
+        "long_lived_browser_surface"
+      ],
+      "properties": {
+        "bound_surface": {"const": "native_diary"},
+        "surface_enum": {"const": "Surface.NATIVE_DIARY"},
+        "surface_value": {"const": "native_diary"},
+        "long_lived_browser_surface": {"const": true}
+      }
+    },
+    "authorization_bridge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "shared_bridge",
+        "policy_version",
+        "action",
+        "resource_type",
+        "active_only_only",
+        "inactive_enumeration_closed"
+      ],
+      "properties": {
+        "shared_bridge": {"const": "application_session_product_read_bridge"},
+        "policy_version": {"const": "practice-practitioner-directory-read.v1"},
+        "action": {"const": "practice.practitioner-directory.read"},
+        "resource_type": {"const": "practitioner_directory"},
+        "active_only_only": {"const": true},
+        "inactive_enumeration_closed": {"const": true}
+      }
+    },
+    "read_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "graphql_query",
+        "variables",
+        "projection",
+        "default_location_projection",
+        "fresh_practice_scoped_read",
+        "session_artifacts_are_not_ui_data",
+        "authority_envelopes_are_not_ui_data",
+        "raw_identifiers_are_not_ui_data"
+      ],
+      "properties": {
+        "graphql_query": {"const": "Query.practice.practitioners"},
+        "variables": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["activeOnly", "limit", "offset"],
+          "properties": {
+            "activeOnly": {"const": true},
+            "limit": {"const": 200},
+            "offset": {"const": 0}
+          }
+        },
+        "projection": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "prefixItems": [
+            {"const": "id"},
+            {"const": "displayName"},
+            {"const": "roleLabel"},
+            {"const": "active"}
+          ],
+          "items": false
+        },
+        "default_location_projection": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {"const": "id"},
+            {"const": "name"}
+          ],
+          "items": false
+        },
+        "fresh_practice_scoped_read": {"const": true},
+        "session_artifacts_are_not_ui_data": {"const": true},
+        "authority_envelopes_are_not_ui_data": {"const": true},
+        "raw_identifiers_are_not_ui_data": {"const": true}
+      }
+    },
+    "default_off_preservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "feature_off_default",
+        "unmounted",
+        "existing_bearer_graphql_read_unmodified_when_off",
+        "existing_rest_fallback_unmodified_when_off",
+        "byte_for_byte_unchanged_when_off",
+        "behaviorally_unchanged_when_off"
+      ],
+      "properties": {
+        "feature_off_default": {"const": true},
+        "unmounted": {"const": true},
+        "existing_bearer_graphql_read_unmodified_when_off": {"const": true},
+        "existing_rest_fallback_unmodified_when_off": {"const": true},
+        "byte_for_byte_unchanged_when_off": {"const": true},
+        "behaviorally_unchanged_when_off": {"const": true}
+      }
+    },
+    "forbidden_dependencies": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "uniqueItems": true,
+      "prefixItems": [
+        {"const": "bernie_probabilistic_work_cell"},
+        {"const": "davida_practice_operations"},
+        {"const": "probabilistic_interpretation"},
+        {"const": "agent_proofreader_gate"},
+        {"const": "office_one_use_terminal_reload_logout_lifecycle"},
+        {"const": "microsoft_federation"},
+        {"const": "real_identity"}
+      ],
+      "items": false
+    },
+    "failure_behaviour": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mismatch",
+        "stale_superseded_response",
+        "privacy",
+        "unauthorized_session",
+        "audit_unavailable"
+      ],
+      "properties": {
+        "mismatch": {"const": "fail_closed_no_data_release"},
+        "stale_superseded_response": {"const": "reject_before_ui_update_fresh_read_required"},
+        "privacy": {"const": "session_artifacts_authority_envelopes_and_raw_identifiers_never_ui_data"},
+        "unauthorized_session": {"const": "generic_denial_no_data_release"},
+        "audit_unavailable": {"const": "no_directory_data_release"}
+      }
+    },
+    "closed_gates": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "uniqueItems": true,
+      "prefixItems": [
+        {"const": "providers"},
+        {"const": "probabilistic_interpretation"},
+        {"const": "proofreader_gates"},
+        {"const": "writes"},
+        {"const": "real_identity"},
+        {"const": "microsoft_federation"},
+        {"const": "deployment"},
+        {"const": "production"},
+        {"const": "release"},
+        {"const": "protected_evidence"},
+        {"const": "protected_refs"},
+        {"const": "docs_branding"}
+      ],
+      "items": false
+    },
+    "api_spine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "graphql_scoped_read_only",
+        "mutation",
+        "command_tunnel",
+        "new_rest_surface",
+        "event_actuator",
+        "manifest_declarative_input_runtime_enforced"
+      ],
+      "properties": {
+        "graphql_scoped_read_only": {"const": true},
+        "mutation": {"const": false},
+        "command_tunnel": {"const": false},
+        "new_rest_surface": {"const": false},
+        "event_actuator": {"const": false},
+        "manifest_declarative_input_runtime_enforced": {"const": true}
+      }
+    },
+    "deterministic_acceptance_cases": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "prefixItems": [
+        {"const": "exact_surface_and_policy_binding"},
+        {"const": "exact_read_query_variables_and_projection"},
+        {"const": "off_path_byte_for_byte_preservation"},
+        {"const": "fail_closed_mismatch"},
+        {"const": "stale_superseded_rejection"},
+        {"const": "privacy_no_ui_data"},
+        {"const": "forbidden_dependency_absence"},
+        {"const": "api_spine_scoped_read_only"}
+      ],
+      "items": false
+    },
+    "residual_risks": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "prefixItems": [
+        {"const": "native_diary_ui_wiring_authority_not_claimed"},
+        {"const": "session_revocation_and_stale_reconciliation_unproven"},
+        {"const": "general_application_session_mounting_not_opened"},
+        {"const": "production_identity_not_established"}
+      ],
+      "items": false
+    },
+    "implementation_handoff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "next_step",
+        "diary_asset_edit",
+        "app_runtime_edit",
+        "app_main_mounting",
+        "protected_integration",
+        "runtime_or_usability_claim"
+      ],
+      "properties": {
+        "next_step": {"const": "provider_free_unmounted_composition_contract_plus_direct_http_postgresql_evidence"},
+        "diary_asset_edit": {"const": false},
+        "app_runtime_edit": {"const": false},
+        "app_main_mounting": {"const": false},
+        "protected_integration": {"const": false},
+        "runtime_or_usability_claim": {"const": false}
+      }
+    },
+    "blocked_gates": {
+      "type": "array",
+      "minItems": 13,
+      "maxItems": 13,
+      "uniqueItems": true,
+      "prefixItems": [
+        {"const": "live_provider_runtime"},
+        {"const": "memory_rag_graphrag_runtime"},
+        {"const": "real_identity"},
+        {"const": "patient_clinical_document_data"},
+        {"const": "model_to_database_writes"},
+        {"const": "graphql_mutations"},
+        {"const": "external_identity_writes"},
+        {"const": "cloud_iam_changes"},
+        {"const": "deployment"},
+        {"const": "production"},
+        {"const": "release"},
+        {"const": "protected_evidence_or_holdouts"},
+        {"const": "protected_refs"}
+      ],
+      "items": false
+    }
   }
 }

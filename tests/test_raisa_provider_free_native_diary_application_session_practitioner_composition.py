@@ -3,6 +3,7 @@ practitioner composition static contract (Diary lane step 1, architecture-only).
 
 from __future__ import annotations
 
+import copy
 import json
 import re
 from pathlib import Path
@@ -194,3 +195,138 @@ def test_composition_contract_source_head_is_exact_hex() -> None:
     source_head = _json(CONTRACT)["source_head"]
 
     assert re.fullmatch(r"[0-9a-f]{40}", source_head) is not None
+
+
+def _clone_contract() -> dict:
+    return copy.deepcopy(_json(CONTRACT))
+
+
+def _assert_mutation_invalid(mutator) -> None:
+    jsonschema = pytest.importorskip("jsonschema")
+    payload = _clone_contract()
+    mutator(payload)
+    errors = list(
+        jsonschema.Draft202012Validator(_json(SCHEMA)).iter_errors(payload)
+    )
+    assert errors, "mutated contract unexpectedly passed schema validation"
+
+
+def test_schema_rejects_wrong_surface() -> None:
+    def mutate(payload: dict) -> None:
+        payload["surface"]["bound_surface"] = "word_online"
+        payload["surface"]["surface_enum"] = "Surface.WORD_ONLINE"
+        payload["surface"]["surface_value"] = "word_online"
+
+    _assert_mutation_invalid(mutate)
+
+
+def test_schema_rejects_changed_policy_action_resource() -> None:
+    def mutate(payload: dict) -> None:
+        bridge = payload["authorization_bridge"]
+        bridge["policy_version"] = "practice-practitioner-directory-write.v2"
+        bridge["action"] = "practice.practitioner-directory.write"
+        bridge["resource_type"] = "patient_clinical_record"
+
+    _assert_mutation_invalid(mutate)
+
+
+def test_schema_rejects_inactive_enumeration() -> None:
+    def mutate(payload: dict) -> None:
+        bridge = payload["authorization_bridge"]
+        bridge["active_only_only"] = False
+        bridge["inactive_enumeration_closed"] = False
+
+    _assert_mutation_invalid(mutate)
+
+
+def test_schema_rejects_default_on() -> None:
+    def mutate(payload: dict) -> None:
+        payload["default_off_preservation"]["feature_off_default"] = False
+
+    _assert_mutation_invalid(mutate)
+
+
+def test_schema_rejects_mounted_composition() -> None:
+    def mutate(payload: dict) -> None:
+        payload["default_off_preservation"]["unmounted"] = False
+
+    _assert_mutation_invalid(mutate)
+
+
+def test_schema_rejects_rest_fallback_replacement() -> None:
+    def mutate(payload: dict) -> None:
+        payload["default_off_preservation"][
+            "existing_rest_fallback_unmodified_when_off"
+        ] = False
+
+    _assert_mutation_invalid(mutate)
+
+
+def test_schema_rejects_graphql_mutation() -> None:
+    def mutate(payload: dict) -> None:
+        payload["api_spine"]["mutation"] = True
+
+    _assert_mutation_invalid(mutate)
+
+
+def test_schema_rejects_command_tunnel() -> None:
+    def mutate(payload: dict) -> None:
+        payload["api_spine"]["command_tunnel"] = True
+
+    _assert_mutation_invalid(mutate)
+
+
+def test_schema_rejects_event_actuator() -> None:
+    def mutate(payload: dict) -> None:
+        payload["api_spine"]["event_actuator"] = True
+
+    _assert_mutation_invalid(mutate)
+
+
+def test_schema_rejects_missing_privacy_restriction() -> None:
+    def mutate(payload: dict) -> None:
+        payload["failure_behaviour"].pop("privacy")
+
+    _assert_mutation_invalid(mutate)
+
+
+def test_schema_rejects_unknown_nested_field() -> None:
+    def mutate(payload: dict) -> None:
+        payload["api_spine"]["unrestricted_write"] = True
+
+    _assert_mutation_invalid(mutate)
+
+
+def test_schema_rejects_missing_nested_field() -> None:
+    def mutate(payload: dict) -> None:
+        payload["read_binding"].pop("projection")
+
+    _assert_mutation_invalid(mutate)
+
+
+def test_schema_rejects_missing_contractual_array_item() -> None:
+    def mutate(payload: dict) -> None:
+        payload["blocked_gates"].pop()
+
+    _assert_mutation_invalid(mutate)
+
+
+def test_schema_rejects_reordered_contractual_array() -> None:
+    def mutate(payload: dict) -> None:
+        payload["closed_gates"].reverse()
+
+    _assert_mutation_invalid(mutate)
+
+
+def test_schema_rejects_unknown_contractual_array_item() -> None:
+    def mutate(payload: dict) -> None:
+        payload["closed_gates"][0] = "open_provider_gate"
+
+    _assert_mutation_invalid(mutate)
+
+
+def test_schema_rejects_duplicate_contractual_array_item() -> None:
+    def mutate(payload: dict) -> None:
+        payload["blocked_gates"][1] = payload["blocked_gates"][0]
+
+    _assert_mutation_invalid(mutate)
