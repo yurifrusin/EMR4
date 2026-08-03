@@ -1,0 +1,29 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "source_evidence": {
+    "live_handover_current_baton": "Current Office lifecycle acceptance and the native Diary fresh-authority gate are unchanged; the live handover records Gemini 3.6 Flash/high as the independent verifier.",
+    "current_authority_allocation": "One fresh same-lane review is bounded to the mechanical single-decision-envelope repair; Sol retains acceptance and integration.",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-antigravity-gemini-36-high-verifier-allocation.md",
+      "docs/ariadne-antigravity-gemini-36-high-verifier-first-review-analysis.md",
+      "orchestration/agent_inbox/antigravity/ariadne-gemini-36-high-verifier-allocation-repair-review-packet.md"
+    ],
+    "protected_evidence_boundaries": "The fresh packet forbids protected evidence, historical Diary, docs/branding, patient/clinical/product-derived data, mutation, deployment, production and release activity.",
+    "git_refs_and_worktree": "Clean review worktree is at repaired candidate b439fb5c3bacc20c9b5f664b3af9322cfcdcbd3f on a non-protected review branch; its candidate divergence is recorded and protected refs are unchanged."
+  },
+  "settings_fingerprint": "sha256:25344b6c673dec2dbc1ded4e5aec41c93afcc16ac536c54951eef45ec3a92e42",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

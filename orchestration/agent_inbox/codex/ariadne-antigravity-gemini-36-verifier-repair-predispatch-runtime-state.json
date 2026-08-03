@@ -1,0 +1,79 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_antigravity_gemini_36_repair_predispatch",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["The first raw review is preserved but rejected for duplicate decisions; candidate b439fb5c3bacc20c9b5f664b3af9322cfcdcbd3f adds a deterministic single-decision fail-closed gate and passing focused tests."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is selected."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The DeepSeek lane is not selected for this independent veto."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The real-TTY fallback is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The Claude lane is not selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["gemini-3.6-flash-high remains listed; one fresh same-lane review is authorised for the mechanical envelope repair on the exact clean candidate."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "agent_id": "antigravity-gemini-36-high-verifier",
+      "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\gemini36-high-verifier-review",
+      "branch": "codex/gemini36-high-verifier-review",
+      "clean": true,
+      "at_handoff_current": false,
+      "recorded_divergence": "repaired candidate b439fb5c3bacc20c9b5f664b3af9322cfcdcbd3f based on task parent 4800f4ffab77efb35dc1e3850837b97dfa761091",
+      "recorded_at": "2026-08-03T12:15:56.0744860+10:00"
+    }
+  ],
+  "assigned_agent_ids": []
+}

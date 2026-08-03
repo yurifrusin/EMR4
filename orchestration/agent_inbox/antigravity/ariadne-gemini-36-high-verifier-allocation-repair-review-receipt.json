@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.6-flash-high",
+  "requested_model": "gemini-3.6-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\gemini36-high-verifier-review",
+  "branch": "codex/gemini36-high-verifier-review",
+  "head_before": "b439fb5c3bacc20c9b5f664b3af9322cfcdcbd3f",
+  "head_after": "b439fb5c3bacc20c9b5f664b3af9322cfcdcbd3f",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "result": "Root: C:\\Users\\sarashera\\EMR4-worktrees\\gemini36-high-verifier-review\nBranch: codex/gemini36-high-verifier-review\nCandidate HEAD: b439fb5c3bacc20c9b5f664b3af9322cfcdcbd3f\nBase HEAD: 4800f4ffab77efb35dc1e3850837b97dfa761091\n\nChecks:\n- Mandatory Rehydration: Rehydrated from all five required sources (`live_handover_current_baton`, `current_authority_allocation`, `active_plan_and_acceptance`, `protected_evidence_boundaries`, `git_refs_and_worktree`) in `AGENTS.md`, `docs/ariadne-antigravity-gemini-36-high-verifier-allocation.md`, and `docs/ariadne-antigravity-gemini-36-high-verifier-first-review-analysis.md`.\n- Model & Harness Controls: Confirmed canonical model `gemini-3.6-flash-high`, explicit `--effort high` reasoning level, `--mode plan`, `antigravity-gemini-flash-3-6-high-verifier` resource binding, and strict no-fallback posture across configuration schemas and transport scripts.\n- Verifier Read-Only Boundary: Verified that `inspect_worktree` pre/post execution checks strictly enforce zero modifications to the bound worktree and branch, raising RuntimeError if modified.\n- Decision Egress Bounded Repair: Verified exact regex matching (`(?m)^DECISION: (pass|revision_required)\\s*$`), fail-closed enforcement when decision count != 1, receipt recording, and unit test coverage for zero and duplicate decision outputs.\n- Empirical Verification: Executed 25 focused tests in `tests/test_ariadne_antigravity.py`, `tests/test_ariadne_allocation_schemas.py`, and `tests/test_ariadne_deepseek_claude.py` with 100% pass rate.\n\nFindings:\n- none\n\nResidual Limitations:\n- Independent verifier authority is strictly limited to read-only candidate review, veto evaluation, and local test verification; it holds zero write, push, PR merge, integration, deployment, or release authority.\n\nDECISION: pass"
+}
