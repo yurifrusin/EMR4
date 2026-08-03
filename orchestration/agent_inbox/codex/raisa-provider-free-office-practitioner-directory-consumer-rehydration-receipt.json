@@ -1,0 +1,44 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "plan_implement_verify_and_publish_one_default_off_provider_free_authored_synthetic_office_practitioner_directory_consumer_then_continue_through_five_clear_provider_free_descendants_without_real_identity_patient_clinical_command_deployment_or_release_authority",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely at 499 lines / SHA-256 92EC8B09858A229C903549DA37EF867F583B0CBE700AA7D5D7A78E0CBBBDC0A9; provider_free_session_practitioner_directory_read_bridge_pass is accepted at Continuity 200 / Compass 181 and its supervised authored-synthetic Office consumer is the named next safe candidate.",
+    "current_authority_allocation": "Yuri authorised the next safe tranche and five further clear descendants, selecting Sol's recommended path at decision forks unless an unexpected issue requires direct intervention. The authority covers provider-free authored-synthetic product/UI work, tests, evidence, continuity and task-branch publication; live identity/provider, patient/clinical/document content, commands, deployment, production, release, protected refs and Pages remain closed.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-session-practitioner-directory-read-bridge-plan.md",
+      "docs/raisa-provider-free-session-practitioner-directory-read-bridge-design.md",
+      "docs/security/raisa-provider-free-session-practitioner-directory-read-bridge-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-session-practitioner-directory-read-bridge/live-local-http-backend-postgres-directory-evidence.json",
+      "docs/raisa-provider-free-session-practitioner-directory-read-bridge-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-session-practitioner-directory-read-bridge-sol-acceptance.md",
+      "docs/raisa-shared-application-auth-office-cookie-compatibility-plan.md",
+      "docs/raisa-shared-application-auth-office-cookie-compatibility-closeout.md",
+      "docs/raisa-shared-application-auth-postgresql-office-host-compatibility-plan.md",
+      "docs/raisa-shared-application-auth-postgresql-office-host-compatibility-closeout.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "docs/api-spine/practitioner-directory-office-addin-graphql-consumer-proposal.md",
+      "docs/api-spine/practitioner-directory-office-addin-graphql-fetch-wrapper-test-plan.md",
+      "docs/api-spine/practitioner-directory-office-addin-graphql-switch-runtime.md",
+      "docs/api-spine/practitioner-directory-office-addin-graphql-default-on-runtime.md",
+      "app/graphql/application_auth_product.py",
+      "tests/test_api_spine_artifacts.py"
+    ],
+    "protected_evidence_boundaries": "No protected holdout or historical Diary access; no patient/clinical or document content, live provider, real identity, product mutation, cloud/IAM, deployment, Pages or Dependabot action. docs/branding remains untouched and excluded from reading, testing, evidence, staging and commits.",
+    "git_refs_and_worktree": "After fresh fetch, current task HEAD is 95381fc12da2e6a6bb8301bb7974c53e61c3c096. Local/origin master and handoff/current are aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. docs/branding is the sole untracked content before this receipt."
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

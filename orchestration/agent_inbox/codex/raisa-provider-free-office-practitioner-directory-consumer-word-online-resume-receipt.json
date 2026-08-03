@@ -1,0 +1,29 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "supervised_word_online_resume_after_chrome_file_url_access_enabled",
+  "planned_action": "complete_the_authorised_word_online_authored_synthetic_practitioner_directory_consumer_check_then_clean_up_the_owned_runtime_and_finish_the_bounded_task_branch_evidence",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was re-read after compaction. The accepted parent remains provider_free_session_practitioner_directory_read_bridge_pass at Continuity 200 / Compass 181, and the supervised authored-synthetic Office consumer remains the named active candidate.",
+    "current_authority_allocation": "Yuri authorised this tranche and five further clear provider-free descendants, selecting Sol's recommended path at non-material forks. Yuri has now confirmed the Chrome file-URL access setting is enabled for the already-authorised Word Online manifest upload.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-office-practitioner-directory-consumer-plan.md",
+      "docs/raisa-provider-free-office-practitioner-directory-consumer-design.md",
+      "docs/security/raisa-provider-free-office-practitioner-directory-consumer-threat-model-delta.md"
+    ],
+    "protected_evidence_boundaries": "No protected holdout or historical Diary access; no patient, clinical or document content, live provider, real identity, product mutation, deployment, Pages, protected-ref or Dependabot action. The user-owned docs/branding directory remains untouched and excluded.",
+    "git_refs_and_worktree": "Current branch codex/raisa-provider-free-office-practitioner-directory-consumer remains at 95381fc12da2e6a6bb8301bb7974c53e61c3c096. Local/origin master and handoff/current are aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The task harness is listening on loopback ports 8001 and 4040; its cleanup gate remains pending the Word Online result."
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

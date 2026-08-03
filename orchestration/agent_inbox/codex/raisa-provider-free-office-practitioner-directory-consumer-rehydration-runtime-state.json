@@ -1,0 +1,84 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "plan_implement_verify_and_publish_one_default_off_provider_free_authored_synthetic_office_practitioner_directory_consumer_then_continue_through_five_clear_provider_free_descendants_without_real_identity_patient_clinical_command_deployment_or_release_authority",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_provider_free_office_practitioner_directory_consumer_postcompaction_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: current AGENTS.md was read completely at 499 lines and SHA-256 92EC8B09858A229C903549DA37EF867F583B0CBE700AA7D5D7A78E0CBBBDC0A9; provider_free_session_practitioner_directory_read_bridge_pass is accepted at Continuity 200 / Compass 181 and the next safe candidate is its supervised authored-synthetic Office consumer.",
+        "current_authority_allocation: Yuri authorised that next safe tranche and the next five tranches, selecting Sol's recommended direction at clear forks unless an unexpected issue requires direct intervention. This permits provider-free authored-synthetic product/UI implementation, tests, evidence, continuity and task-branch publication only; live Microsoft identity, patient/clinical data, commands, deployment, production, release, protected refs and further Pages rebuilds remain closed.",
+        "active_plan_and_acceptance: the accepted provider-free session practitioner-directory plan, design, threat delta, evidence, closeout and Sol acceptance; the two accepted Office cookie-host compatibility plans and closeouts; the API Spine ADR, programme, checklist, artifact tests and practitioner-directory Office consumer contracts were reviewed. The next surface is a default-off task-specific Office consumer of the exact active-only display-safe GraphQL projection.",
+        "protected_evidence_boundaries: no protected holdout or historical Diary access; no patient/clinical or document content, live provider, real identity, product mutation, cloud/IAM, deployment, Pages or Dependabot action. docs/branding remains untouched and excluded from reading, testing, evidence, staging and commits.",
+        "git_refs_and_worktree: current branch codex/raisa-provider-free-office-practitioner-directory-consumer remains at 95381fc12da2e6a6bb8301bb7974c53e61c3c096; local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602 after fresh fetch; the untracked consumer tranche files are intentional Sol work and docs/branding remains the only unrelated user-owned untracked content."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No subagent was selected or dispatched; the user did not request delegation and the Office host, session, product-read, UI and disposable-database proof is one tightly coupled serial security boundary."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not probed or selected; the tranche is retained by Sol under the worker-lane economy rule and no external worker is authorised by the current multi-agent mode."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected real-TTY fallback; no external worker action occurred."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected leverage-gated option; no external provider or worker action occurred."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected peer-review lane; no external veto or provider result is claimed."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

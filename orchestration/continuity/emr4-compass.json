@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 181,
-  "updated_at": "2026-08-02T11:51:32Z",
-  "source_graph_revision": 200,
-  "orientation_statement": "EMR4 now extends its provider-free application session to one unmounted, active-only authored-synthetic practitioner-directory read. Continuity 200 / Compass 181 bind exact current-principal checks, required authorization audit, display-safe product columns and zero patient/clinical/provider/write authority. Real identity, broader product access, deployment, production and release remain closed.",
+  "map_revision": 182,
+  "updated_at": "2026-08-03T00:30:00Z",
+  "source_graph_revision": 201,
+  "orientation_statement": "EMR4 now carries one fixed, authorized active-practitioner-directory read through independent supervised installed Word and Word Online sessions. Continuity 201 / Compass 182 bind exact host admission, display-safe projection, authorization audit, logout, post-logout denial and complete disposable cleanup. Real identity, patient/clinical/document access, broader product authority, deployment, production and release remain closed.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -1388,32 +1388,43 @@
         "orchestration/continuity/raisa-provider-free-session-practitioner-directory-read-bridge/live-local-http-backend-postgres-directory-evidence.json",
         "docs/raisa-provider-free-session-practitioner-directory-read-bridge-closeout.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-office-practitioner-directory-consumer",
+      "lineage_parent": "raisa-provider-free-session-practitioner-directory-read-bridge",
+      "strategic_role": "Put the first least-sensitive authorized product read into both real Office hosts",
+      "outcome": "Independent supervised installed Word and Word Online sessions each rendered the fixed active-practitioner directory, logged out and rejected reuse.",
+      "evidence": [
+        "docs/raisa-provider-free-office-practitioner-directory-consumer-plan.md",
+        "docs/raisa-provider-free-office-practitioner-directory-consumer-design.md",
+        "docs/security/raisa-provider-free-office-practitioner-directory-consumer-threat-model-delta.md",
+        "scripts/raisa_provider_free_office_practitioner_directory_consumer.py",
+        "orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/live-office-backend-postgres-evidence.json",
+        "docs/raisa-provider-free-office-practitioner-directory-consumer-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-session-practitioner-directory-read-bridge",
-    "strategic_role": "Provider-free active-practitioner-directory authorization bridge",
-    "why_now": "Yuri chose the product-authorization direction after the provider-free OIDC bridge closed at an application session.",
-    "outcome": "Real loopback HTTP and disposable PostgreSQL prove exact current-principal checks, required authorization audit, display-safe projection, least-privilege product access and complete cleanup.",
+    "node_id": "raisa-provider-free-office-practitioner-directory-consumer",
+    "strategic_role": "Provider-free Office practitioner-directory consumer",
+    "why_now": "The unmounted session-backed directory factory had passed, making an exact supervised Office consumer the least-sensitive next product proof.",
+    "outcome": "Two real Office hosts now prove the fixed display-safe GraphQL read, required authorization audit, logout, post-logout denial and complete disposable cleanup.",
     "unlocks": [
       "Review the result on its stacked draft pull request.",
-      "A later bounded tranche may connect a supervised authored-synthetic Office consumer to this still-unmounted factory."
+      "The authorised next descendant may make reload, retry and stale taskpane navigation visibly inert without broadening product authority."
     ],
     "does_not_solve": [
       "Real identity, live Microsoft/provider interoperability or real principal mapping.",
-      "Patient/clinical reads, other product resources, commands or writes.",
-      "General endpoint mounting, Office UI consumption, production security, deployment or release."
+      "Patient/clinical/document reads, broader product resources, commands or writes.",
+      "General endpoint mounting, organisational deployment, production security, deployment or release."
     ],
     "evidence": [
-      "docs/raisa-provider-free-session-practitioner-directory-read-bridge-plan.md",
-      "docs/raisa-provider-free-session-practitioner-directory-read-bridge-design.md",
-      "docs/security/raisa-provider-free-session-practitioner-directory-read-bridge-threat-model-delta.md",
-      "alembic/versions/u0v1w2x3y4z5_extend_auth_audit_for_directory_read.py",
-      "app/services/application_auth_product_read.py",
-      "app/services/application_auth_product_read_database_role.py",
-      "app/graphql/application_auth_product.py",
-      "orchestration/continuity/raisa-provider-free-session-practitioner-directory-read-bridge/live-local-http-backend-postgres-directory-evidence.json",
-      "docs/raisa-provider-free-session-practitioner-directory-read-bridge-closeout.md"
+      "docs/raisa-provider-free-office-practitioner-directory-consumer-plan.md",
+      "docs/raisa-provider-free-office-practitioner-directory-consumer-design.md",
+      "docs/security/raisa-provider-free-office-practitioner-directory-consumer-threat-model-delta.md",
+      "scripts/raisa_provider_free_office_practitioner_directory_consumer.py",
+      "orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/live-office-backend-postgres-evidence.json",
+      "docs/raisa-provider-free-office-practitioner-directory-consumer-closeout.md"
     ]
   },
   "decision_horizon": [
@@ -2269,21 +2280,32 @@
     {
       "id": "authorize-provider-free-office-directory-consumer",
       "question": "Should a supervised authored-synthetic Office consumer be connected to the default-off practitioner-directory factory?",
-      "required_before": "Required before adding a taskpane consumer or task-specific mount; real identity, patient/clinical data and production remain separately closed.",
+      "required_before": "Satisfied on 2026-08-03: Yuri authorised and supervised the exact authored-synthetic installed Word and Word Online consumer; real identity, broader product authority and production remain closed.",
       "evidence": [
-        "docs/raisa-provider-free-session-practitioner-directory-read-bridge-plan.md",
-        "docs/raisa-provider-free-session-practitioner-directory-read-bridge-design.md",
-        "docs/security/raisa-provider-free-session-practitioner-directory-read-bridge-threat-model-delta.md",
-        "alembic/versions/u0v1w2x3y4z5_extend_auth_audit_for_directory_read.py",
-        "app/services/application_auth_product_read.py",
-        "app/services/application_auth_product_read_database_role.py",
-        "app/graphql/application_auth_product.py",
-        "orchestration/continuity/raisa-provider-free-session-practitioner-directory-read-bridge/live-local-http-backend-postgres-directory-evidence.json",
-        "docs/raisa-provider-free-session-practitioner-directory-read-bridge-closeout.md"
+        "docs/raisa-provider-free-office-practitioner-directory-consumer-plan.md",
+        "docs/raisa-provider-free-office-practitioner-directory-consumer-design.md",
+        "docs/security/raisa-provider-free-office-practitioner-directory-consumer-threat-model-delta.md",
+        "scripts/raisa_provider_free_office_practitioner_directory_consumer.py",
+        "orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/live-office-backend-postgres-evidence.json",
+        "docs/raisa-provider-free-office-practitioner-directory-consumer-closeout.md"
+      ]
+    },
+    {
+      "id": "authorize-provider-free-office-directory-reload-reconciliation",
+      "question": "Should reload, retry and stale Office taskpane navigation be reconciled into an explicit inert terminal state?",
+      "required_before": "Satisfied by Yuri's authority for five clear provider-free descendants; this is the first recommended descendant and grants no new product resource or command authority.",
+      "evidence": [
+        "docs/raisa-provider-free-office-practitioner-directory-consumer-plan.md",
+        "docs/raisa-provider-free-office-practitioner-directory-consumer-design.md",
+        "docs/security/raisa-provider-free-office-practitioner-directory-consumer-threat-model-delta.md",
+        "scripts/raisa_provider_free_office_practitioner_directory_consumer.py",
+        "orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/live-office-backend-postgres-evidence.json",
+        "docs/raisa-provider-free-office-practitioner-directory-consumer-closeout.md"
       ]
     }
   ],
   "map_limits": [
+    "The Office practitioner-directory result is provider-free, authored-synthetic, active-only and task-scoped; it proves neither real identity nor patient/clinical/document or product-write safety.",
     "The practitioner-directory result is provider-free, authored-synthetic, active-only and unmounted; it proves neither real identity nor patient/clinical product access.",
     "The atomic redemption result remains provider-free and authored-synthetic: its session cookies prove the backend transaction shape, not real identity or product authorization.",
     "The HMAC binding/admission result is provider-free and authored-synthetic: its 60-second bearer is not an application session and grants no cookie, product, deployment or production authority.",

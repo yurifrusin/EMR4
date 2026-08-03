@@ -1,0 +1,41 @@
+{
+  "schema_version": "emr4.provider-free-office-practitioner-directory-consumer-repair-evidence.v1",
+  "result": "revision_required",
+  "passed": false,
+  "evidence_label": "live_local_office_backend_postgres_product_read",
+  "data_class": "authored_synthetic",
+  "failure": {
+    "surface": "word_online",
+    "failure_code": "manifest_icon_route_rejected_valid_numeric_path_parameter",
+    "observed_icon_status": 422,
+    "taskpane_reachable": true,
+    "repair": "parse_the_path_parameter_as_a_string_then_apply_an_exact_server_allowlist",
+    "focused_tests_after_repair": "5_passed"
+  },
+  "accepted_partial_result": {
+    "word_desktop_terminal_status": "passed",
+    "word_desktop_active_practitioner_count": 2,
+    "word_desktop_logout_passed": true,
+    "word_desktop_post_logout_session_denied": true,
+    "word_online_terminal_status": "pending",
+    "authorization_allowed_audit_count": 1,
+    "revoked_surface_session_count": 1
+  },
+  "cleanup": {
+    "database_absent_after": true,
+    "four_task_roles_absent_after": true,
+    "pools_disposed": true,
+    "passed": true
+  },
+  "side_effects": {
+    "provider_calls": 0,
+    "microsoft_or_office_identity_calls": 0,
+    "patient_health_or_clinical_reads": 0,
+    "document_reads": 0,
+    "document_writes": 0,
+    "product_commands_or_writes": 0,
+    "deployments": 0,
+    "production_changes": 0
+  },
+  "durable_secret_or_target_match_count": 0
+}

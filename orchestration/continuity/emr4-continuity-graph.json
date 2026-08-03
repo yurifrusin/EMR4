@@ -59,7 +59,7 @@
       "voice"
     ]
   },
-  "graph_revision": 200,
+  "graph_revision": 201,
   "harvests": [],
   "nodes": [
     {
@@ -11142,9 +11142,132 @@
         "Production secret custody, product-table RLS, distributed abuse resistance and monitoring remain closed.",
         "Cloud/IAM, deployment, protected integration, production, release and GitHub Pages remain separately closed."
       ]
+    },
+    {
+      "id": "raisa-provider-free-office-practitioner-directory-consumer",
+      "title": "Raisa Provider-Free Office Practitioner-Directory Consumer",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-03T00:30:00Z",
+      "updated_at": "2026-08-03T00:30:00Z",
+      "coordinates": {
+        "git_ref": "codex/raisa-provider-free-office-practitioner-directory-consumer",
+        "source_head": "95381fc12da2e6a6bb8301bb7974c53e61c3c096",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-session-practitioner-directory-read-bridge",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "api-change",
+            "source": "docs/raisa-provider-free-office-practitioner-directory-consumer-plan.md",
+            "scope": "Authorize one task-scoped provider-free authored-synthetic Office consumer of the active-practitioner-directory factory in supervised installed Word and Word Online."
+          }
+        ],
+        "notes": [
+          "Yuri authorised this tranche and performed the exact supervised host actions.",
+          "No general mount, patient/clinical/document access, provider call, real identity, product write, deployment, production or release occurred.",
+          "The user-owned docs/branding directory remained untracked, unstaged and excluded."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "independent-office-surface-sessions-201",
+          "source": "docs/raisa-provider-free-office-practitioner-directory-consumer-design.md",
+          "status": "accepted",
+          "summary": "Installed Word and Word Online receive independent surface-bound sessions, CSRF values, nonces and synthetic practices."
+        },
+        {
+          "id": "fixed-directory-document-and-projection-201",
+          "source": "scripts/raisa_provider_free_office_practitioner_directory_consumer.py",
+          "status": "accepted",
+          "summary": "The client can issue only one fixed active-directory query and render one closed display-safe projection."
+        },
+        {
+          "id": "application-owned-proxy-and-exact-frame-admission-201",
+          "source": "orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/real-office-word-online-frame-ancestor-repair-evidence.json",
+          "status": "accepted",
+          "summary": "Application code owns strict one-hop proxy interpretation and CSP admits only the observed Office plus personal OneDrive frame chain."
+        }
+      ],
+      "claim_scope": [
+        "Supervised installed Word and Word Online each rendered exactly two active authored-synthetic practitioners, logged out and rejected session reuse.",
+        "Two required authorization-allowed audits and four direct PostgreSQL privilege denials passed before complete database, role, process, listener, relay and desktop-registration cleanup.",
+        "Provider, Microsoft identity, patient/clinical, document and product-write side effects remained zero."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "docs/raisa-provider-free-office-practitioner-directory-consumer-plan.md",
+            "docs/security/raisa-provider-free-office-practitioner-directory-consumer-threat-model-delta.md",
+            "orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/live-office-backend-postgres-evidence.json",
+            "tests/test_raisa_provider_free_office_practitioner_directory_consumer.py"
+          ],
+          "note": "The task consumer contains no patient, appointment, availability, proposal or command context and leaves the accepted combined-intent contract unchanged."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/live-office-backend-postgres-evidence.json",
+            "docs/raisa-provider-free-office-practitioner-directory-consumer-closeout.md",
+            "tests/test_raisa_provider_free_office_practitioner_directory_consumer.py"
+          ],
+          "note": "No Diary event, availability, selection, proposal or appointment state was read or changed."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-office-practitioner-directory-consumer-plan.md",
+          "docs/raisa-provider-free-office-practitioner-directory-consumer-design.md",
+          "docs/security/raisa-provider-free-office-practitioner-directory-consumer-threat-model-delta.md"
+        ],
+        "findings": [
+          "scripts/raisa_provider_free_office_practitioner_directory_consumer.py",
+          "orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/browser-preview-evidence.json",
+          "orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/live-office-backend-postgres-evidence.json",
+          "orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/real-office-pre-repair-evidence.json",
+          "orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/real-office-icon-route-repair-evidence.json",
+          "orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/real-office-word-online-frame-ancestor-repair-evidence.json",
+          "orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/word-desktop-manifest.xml",
+          "orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/word-online-manifest.xml"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-office-practitioner-directory-consumer-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-practitioner-directory-consumer-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-practitioner-directory-consumer-rehydration-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-practitioner-directory-consumer-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-practitioner-directory-consumer-word-online-resume-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-practitioner-directory-consumer-preacceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-office-practitioner-directory-consumer-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_office_practitioner_directory_consumer.py",
+          "scripts/raisa_provider_free_office_practitioner_directory_consumer_continuity_update.py",
+          "tests/test_raisa_provider_free_office_practitioner_directory_consumer_continuity.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Real identity mapping and live Microsoft/provider interoperability remain closed.",
+        "Patient/clinical/document reads, broader product resources and every product command/write remain closed.",
+        "General endpoint mounting, organisational Office deployment and product-table RLS claims remain closed.",
+        "Production secret custody, distributed abuse resistance, monitoring/SIEM, deployment, protected integration, production, release and GitHub Pages remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-02T11:51:32Z"
+  "updated_at": "2026-08-03T00:30:00Z"
 }
