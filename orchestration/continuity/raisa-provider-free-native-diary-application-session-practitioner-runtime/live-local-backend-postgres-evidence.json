@@ -1,0 +1,109 @@
+{
+  "allowed_reads": {
+    "active_practitioner_count": 2,
+    "exact_display_safe_projection": true,
+    "long_lived_native_session_not_consumed": true,
+    "no_store": true,
+    "required_audit_before_release": true,
+    "sequential_read_count": 2,
+    "shared_graphql_service_path": true
+  },
+  "audit_contract": {
+    "allowed_event_count_ge_two": true,
+    "audit_contains_no_product_fields": true,
+    "denied_event_committed": true,
+    "raw_session_and_csrf_absent": true
+  },
+  "claim_limits": [
+    "This proves one default-off provider-free authored-synthetic native-Diary application-session practitioner read through a real loopback HTTP socket and disposable PostgreSQL, twice sequentially on one long-lived NATIVE_DIARY session, with an exact fixed query/variables, exact display-safe projection, no-store, required allow audit before release and complete post-revocation denial.",
+    "Request-time freshness and post-revocation denial do not prove rejection of an already-returned in-flight response before UI render; that remains a later UI reconciliation obligation.",
+    "There is no provider call, no browser automation, no real identity, no patient/clinical data, no product write, no deployment and no production claim."
+  ],
+  "cleanup": {
+    "database_absent_after": true,
+    "passed": true,
+    "server_stopped": true,
+    "task_roles_absent_after": true
+  },
+  "data_class": "authored_synthetic",
+  "default_off": true,
+  "evidence_label": "live_local_backend_postgres",
+  "evidence_sensitive_match_count": 0,
+  "failure_contract": {
+    "audit_outage_no_data": true,
+    "drift_active_only_no_data": true,
+    "drift_limit_no_data": true,
+    "drift_offset_no_data": true,
+    "extra_field_no_data": true,
+    "field_subset_no_data": true,
+    "get_no_data": true,
+    "inactive_user_no_data": true,
+    "introspection_no_data": true,
+    "mismatched_csrf_no_data": true,
+    "missing_csrf_no_data": true,
+    "mutation_no_data": true,
+    "operation_drift_no_data": true,
+    "post_revocation_no_data": true,
+    "practice_id_no_data": true,
+    "stale_role_no_data": true,
+    "unknown_session_no_data": true,
+    "unmapped_session_no_data": true,
+    "word_surface_session_no_data": true,
+    "wrong_origin_no_data": true
+  },
+  "failure_statuses": {
+    "audit_outage": 503,
+    "drift_active_only": 403,
+    "drift_limit": 403,
+    "drift_offset": 403,
+    "extra_field": 403,
+    "field_subset": 403,
+    "get": 403,
+    "inactive_user": 401,
+    "introspection": 403,
+    "mismatched_csrf": 403,
+    "missing_csrf": 403,
+    "mutation": 403,
+    "operation_drift": 403,
+    "post_revocation": 401,
+    "practice_id": 403,
+    "stale_role": 401,
+    "unknown_session": 401,
+    "unmapped_session": 401,
+    "word_surface_session": 401,
+    "wrong_origin": 403
+  },
+  "guard_no_store": true,
+  "loopback_http": {
+    "ephemeral_port_recorded": false,
+    "host": "127.0.0.1",
+    "real_socket": true,
+    "request_count": 22
+  },
+  "migration": {
+    "current_head_exact": true,
+    "head_revision": "u0v1w2x3y4z5",
+    "migration_log_recorded": false,
+    "orm_migration_drift_absent": true
+  },
+  "migration_head": "u0v1w2x3y4z5",
+  "passed": true,
+  "result": "provider_free_native_diary_application_session_practitioner_runtime_pass",
+  "role_contract": {
+    "all_direct_denials_are_insufficient_privilege": true,
+    "role_names_recorded": false,
+    "six_direct_privilege_denials": true
+  },
+  "schema_version": "emr4.provider-free-native-diary-application-session-practitioner-runtime-evidence.v1",
+  "side_effect_counts": {
+    "allowed_product_reads": 2,
+    "browser_runs": 0,
+    "deployments": 0,
+    "graphql_mutations": 0,
+    "patient_or_clinical_reads": 0,
+    "product_writes_by_runtime": 0,
+    "production_changes": 0,
+    "provider_calls": 0,
+    "real_identities": 0
+  }
+}
