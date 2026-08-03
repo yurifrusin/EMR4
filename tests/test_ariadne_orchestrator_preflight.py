@@ -1,5 +1,9 @@
 import json
+import shutil
 from pathlib import Path
+
+import pytest
+import yaml
 
 from scripts.ariadne_orchestrator_preflight import build_receipt
 
@@ -13,18 +17,14 @@ REQUIRED_SOURCES = [
     "protected_evidence_boundaries",
     "git_refs_and_worktree",
 ]
-CONTINUATION_EVENTS = [
-    "new_session",
-    "post_compaction",
-    "model_or_provider_change",
-    "restored_conversation",
-    "pre_sprint_planning",
-    "pre_worker_dispatch",
-    "pre_verifier_acceptance",
-    "pre_integration",
-    "pre_commit",
-    "pre_push",
-]
+CONTINUATION_EVENTS = yaml.safe_load(
+    (
+        ROOT
+        / "orchestration"
+        / "harness_settings"
+        / "orchestrator_requirements.yaml"
+    ).read_text(encoding="utf-8")
+)["continuation_events"]
 
 
 def test_generic_orchestrator_receipt_passes_with_explicit_adapter_slot_and_workspace_evidence():
@@ -173,6 +173,24 @@ def test_named_source_without_evidence_fails_closed(tmp_path: Path):
     ) in receipt["reasons"]
 
 
+@pytest.mark.parametrize("malformed", [None, " ", [], [""], [1]])
+def test_malformed_source_evidence_fails_closed(
+    tmp_path: Path, malformed: object
+):
+    runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
+    runtime_state["source_evidence"]["active_plan_and_acceptance"] = malformed
+    path = tmp_path / "runtime-state.json"
+    path.write_text(json.dumps(runtime_state), encoding="utf-8")
+
+    receipt = build_receipt(runtime_state_path=path)
+
+    assert receipt["status"] == "revision_required"
+    assert (
+        "rehydration_source_evidence_missing:"
+        "orchestrator:active_plan_and_acceptance"
+    ) in receipt["reasons"]
+
+
 def test_primary_session_prefixed_evidence_is_emitted_without_manual_patch(
     tmp_path: Path,
 ):
@@ -195,3 +213,50 @@ def test_primary_session_prefixed_evidence_is_emitted_without_manual_patch(
     assert receipt["rehydrated_from_receipt"] is True
     assert receipt["rehydration_sources"] == REQUIRED_SOURCES
     assert list(receipt["source_evidence"]) == REQUIRED_SOURCES
+
+
+def test_duplicate_primary_session_source_prefix_fails_closed(tmp_path: Path):
+    runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
+    runtime_state.pop("source_evidence")
+    primary = next(
+        item
+        for item in runtime_state["adapter_observations"]
+        if item["adapter_id"] == "codex_primary_session"
+    )
+    primary["evidence"] = [
+        *(f"{source}: authored evidence" for source in REQUIRED_SOURCES),
+        "active_plan_and_acceptance: conflicting duplicate evidence",
+    ]
+    path = tmp_path / "runtime-state.json"
+    path.write_text(json.dumps(runtime_state), encoding="utf-8")
+
+    receipt = build_receipt(runtime_state_path=path)
+
+    assert receipt["status"] == "revision_required"
+    assert (
+        "rehydration_source_evidence_ambiguous:"
+        "orchestrator:active_plan_and_acceptance"
+    ) in receipt["reasons"]
+
+
+def test_hard_event_without_source_policy_fails_closed(tmp_path: Path):
+    settings_dir = tmp_path / "settings"
+    shutil.copytree(ROOT / "orchestration" / "harness_settings", settings_dir)
+    requirements_path = settings_dir / "orchestrator_requirements.yaml"
+    requirements = yaml.safe_load(requirements_path.read_text(encoding="utf-8"))
+    requirements["context_health"]["required_rehydration_sources_by_event"].pop(
+        "pre_push"
+    )
+    requirements_path.write_text(
+        yaml.safe_dump(requirements, sort_keys=False), encoding="utf-8"
+    )
+    runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
+    runtime_state["continuation_event"] = "pre_push"
+    path = tmp_path / "runtime-state.json"
+    path.write_text(json.dumps(runtime_state), encoding="utf-8")
+
+    receipt = build_receipt(runtime_state_path=path, settings_dir=settings_dir)
+
+    assert receipt["status"] == "revision_required"
+    assert receipt["rehydrated_from_receipt"] is False
+    assert "rehydration_source_policy_missing:pre_push" in receipt["reasons"]

@@ -46,6 +46,8 @@ provider, identity, deployment, production, release or protected-ref boundary.
 - Tests prove native five-source receipt emission for every configured event,
   rejection of missing source evidence and compatibility with explicitly
   prefixed primary-session evidence.
+- The settings fingerprint is invariant across LF and CRLF worktree checkouts,
+  so an exact committed settings set reproduces across Windows worktrees.
 - YAML tests prove lane/model/reasoning ownership, deterministic-before-model
   ordering, exact single-decision admission and serial PostgreSQL execution.
 - Focused pytest, Ruff, Python compilation, YAML parsing and `git diff --check`

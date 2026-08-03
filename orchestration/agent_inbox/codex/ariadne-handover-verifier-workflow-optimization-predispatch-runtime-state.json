@@ -1,0 +1,96 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_native_five_source_pre_review_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "The compact live handover, active Office lifecycle acceptance and separately gated next product candidate are unchanged at exact candidate ef9c96e5535dc17b8335609fad23673e0aeddd53.",
+    "current_authority_allocation": "Sol retains acceptance and integration; DeepSeek V4 Flash/high is blue review only and Gemini 3.6 Flash/high is fresh red review only; neither may edit, self-accept, integrate or move protected refs.",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-handover-verifier-workflow-optimization-plan.md",
+      "docs/security/ariadne-handover-verifier-workflow-optimization-threat-model-delta.md",
+      "orchestration/harness_settings/verifier_execution_policy.yaml"
+    ],
+    "protected_evidence_boundaries": "Both packets exclude protected holdouts, historical Diary, patient/clinical/product-derived data, credentials, prior reviewer artifacts and docs/branding; no deployment, production, release or protected integration is allowed.",
+    "git_refs_and_worktree": "Candidate ef9c96e5535dc17b8335609fad23673e0aeddd53 is bound to two clean non-protected disposable worktrees under C:/Users/sarashera/EMR4-worktrees; the root task branch has only excluded untracked docs/branding, and protected refs remain at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol deterministic gates passed before external dispatch."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is assigned."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["One bounded blue-review attempt is eligible after deterministic pass."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No TTY fallback is authorised for this dispatch."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No standalone Claude lane is assigned."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["One fresh exact Gemini 3.6 Flash/high red-review attempt is eligible after deterministic pass."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "agent_id": "deepseek_blue",
+      "worktree": "C:/Users/sarashera/EMR4-worktrees/ariadne-handover-verifier-blue",
+      "branch": "codex/review-ariadne-handover-verifier-blue",
+      "clean": true,
+      "at_handoff_current": false,
+      "recorded_at": "2026-08-03T00:00:00+10:00"
+    },
+    {
+      "agent_id": "antigravity_red",
+      "worktree": "C:/Users/sarashera/EMR4-worktrees/ariadne-handover-verifier-red",
+      "branch": "codex/review-ariadne-handover-verifier-red",
+      "clean": true,
+      "at_handoff_current": false,
+      "recorded_at": "2026-08-03T00:00:00+10:00"
+    }
+  ],
+  "assigned_agent_ids": []
+}

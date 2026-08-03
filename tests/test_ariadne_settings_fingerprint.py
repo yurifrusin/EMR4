@@ -20,3 +20,14 @@ def test_fingerprint_rejects_empty_settings_directory(tmp_path: Path):
         assert "contains no YAML files" in str(error)
     else:
         raise AssertionError("empty settings directory must fail closed")
+
+
+def test_fingerprint_is_stable_across_lf_and_crlf_checkouts(tmp_path: Path):
+    lf = tmp_path / "lf"
+    crlf = tmp_path / "crlf"
+    lf.mkdir()
+    crlf.mkdir()
+    (lf / "worker_pool.yaml").write_bytes(b"workers:\n  - id: one\n")
+    (crlf / "worker_pool.yaml").write_bytes(b"workers:\r\n  - id: one\r\n")
+
+    assert settings_fingerprint(lf) == settings_fingerprint(crlf)

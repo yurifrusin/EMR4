@@ -224,6 +224,14 @@ def check_compaction() -> dict[str, Any]:
     for label in manifest.get("active_labels", []):
         if label not in live_labels:
             raise ValueError(f"active Current Baton row missing: {label}")
+    unexpected_live = sorted(
+        set(live_labels) - set(manifest.get("active_labels", [])) - {INDEX_LABEL}
+    )
+    if unexpected_live:
+        raise ValueError(
+            "unclassified live Current Baton rows require a deliberate manifest "
+            f"revision: {unexpected_live}"
+        )
     overlap = sorted(set(ledger_labels).intersection(live_labels))
     if overlap:
         raise ValueError(f"indexed rows remain duplicated in the live Baton: {overlap}")

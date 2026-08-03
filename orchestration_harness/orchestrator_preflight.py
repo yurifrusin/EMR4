@@ -19,10 +19,13 @@ def _source_evidence(
     *,
     runtime_state: dict[str, Any],
     observation_by_id: dict[Any, dict[str, Any]],
-) -> dict[str, Any]:
+) -> tuple[dict[str, Any], set[str]]:
     """Return explicit evidence, with typed primary-session prefixes as fallback."""
     supplied = runtime_state.get("source_evidence")
     evidence = dict(supplied) if isinstance(supplied, dict) else {}
+    explicit_sources = set(evidence)
+    prefixed_sources: set[str] = set()
+    ambiguous_sources: set[str] = set()
     primary = observation_by_id.get("codex_primary_session", {})
     observations = primary.get("evidence", [])
     if isinstance(observations, list):
@@ -32,9 +35,12 @@ def _source_evidence(
             source, detail = observation.split(":", 1)
             source = source.strip()
             detail = detail.strip()
+            if source in prefixed_sources and source not in explicit_sources:
+                ambiguous_sources.add(source)
+            prefixed_sources.add(source)
             if source and detail and source not in evidence:
                 evidence[source] = detail
-    return evidence
+    return evidence, ambiguous_sources
 
 
 def build_orchestrator_receipt(
@@ -142,14 +148,17 @@ def build_orchestrator_receipt(
         if isinstance(required_sources_by_event, dict)
         else []
     )
-    source_evidence = _source_evidence(
+    source_evidence, ambiguous_source_evidence = _source_evidence(
         runtime_state=runtime_state,
         observation_by_id=observation_by_id,
     )
+    source_policy_missing = hard_event and not required_rehydration_sources
+    if source_policy_missing:
+        reasons.append(f"rehydration_source_policy_missing:{continuation_event}")
     high_authority = planned_action in context_policy.get("high_authority_actions", [])
     mandatory_ratio = context_policy.get("provider_meter", {}).get("mandatory_rehydration_ratio")
     receipt_sources: list[str] = []
-    source_gate_passed = True
+    source_gate_passed = not source_policy_missing
     for agent_id in context_policy.get("required_agent_ids", []):
         context = contexts_by_agent.get(agent_id)
         if context is None:
@@ -175,6 +184,12 @@ def build_orchestrator_receipt(
                 if not _has_evidence(source_evidence.get(required_source)):
                     reasons.append(
                         "rehydration_source_evidence_missing:"
+                        f"{agent_id}:{required_source}"
+                    )
+                    source_gate_passed = False
+                if required_source in ambiguous_source_evidence:
+                    reasons.append(
+                        "rehydration_source_evidence_ambiguous:"
                         f"{agent_id}:{required_source}"
                     )
                     source_gate_passed = False

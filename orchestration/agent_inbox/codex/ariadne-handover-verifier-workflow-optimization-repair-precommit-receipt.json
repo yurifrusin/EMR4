@@ -1,0 +1,30 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/ariadne-handover-verifier-workflow-optimization-plan.md",
+      "docs/security/ariadne-handover-verifier-workflow-optimization-threat-model-delta.md",
+      "docs/ariadne-handover-verifier-workflow-optimization-blue-review-analysis.md",
+      "orchestration/agent_inbox/deepseek/ariadne-handover-verifier-workflow-optimization-blue-review-receipt.json"
+    ],
+    "current_authority_allocation": "Sol owns the adopted repair and acceptance; DeepSeek's blue review at ef9c96e5 passed without implementation authority; Gemini remains reserved for a fresh red veto after the repaired exact candidate is committed.",
+    "git_refs_and_worktree": "The task branch is at reviewed candidate ef9c96e5535dc17b8335609fad23673e0aeddd53 with only the bounded Sol repair and review evidence pending; local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "The compact live Baton remains 431 lines with all current authority and active acceptance live; 90 inactive rows remain exact in the manifest-bound lookup index.",
+    "protected_evidence_boundaries": "The repair uses repository-local policy, code and synthetic tests only; protected evidence, product data, providers beyond the recorded reviewers, docs/branding, deployment, protected integration, production and release remain closed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

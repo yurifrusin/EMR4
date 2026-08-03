@@ -6,6 +6,9 @@ import hashlib
 import json
 from pathlib import Path
 
+import pytest
+
+from scripts import compact_agents_acceptance_index
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_PATH = (
@@ -71,3 +74,21 @@ def test_live_baton_keeps_active_rows_and_routes_every_moved_row_to_index() -> N
     assert not set(manifest["moved_labels"]).intersection(live_labels)
     assert "artifact lookup authority only" in live
     assert "current-baton-acceptance-index.manifest.json" in live
+
+
+def test_compaction_check_rejects_an_unclassified_new_live_row(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    live_path = tmp_path / "AGENTS.md"
+    live = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+    live = live.replace(
+        "### Compact historical evaluation",
+        "| Unexpected future row | unclassified |\n"
+        "### Compact historical evaluation",
+        1,
+    )
+    live_path.write_text(live, encoding="utf-8")
+    monkeypatch.setattr(compact_agents_acceptance_index, "AGENTS_PATH", live_path)
+
+    with pytest.raises(ValueError, match="unclassified live Current Baton rows"):
+        compact_agents_acceptance_index.check_compaction()

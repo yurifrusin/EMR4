@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_native_five_source_blue_repair_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "The compact live Baton remains 431 lines with all current authority and active acceptance live; 90 inactive rows remain exact in the manifest-bound lookup index.",
+    "current_authority_allocation": "Sol owns the adopted repair and acceptance; DeepSeek's blue review at ef9c96e5 passed without implementation authority; Gemini remains reserved for a fresh red veto after the repaired exact candidate is committed.",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-handover-verifier-workflow-optimization-plan.md",
+      "docs/security/ariadne-handover-verifier-workflow-optimization-threat-model-delta.md",
+      "docs/ariadne-handover-verifier-workflow-optimization-blue-review-analysis.md",
+      "orchestration/agent_inbox/deepseek/ariadne-handover-verifier-workflow-optimization-blue-review-receipt.json"
+    ],
+    "protected_evidence_boundaries": "The repair uses repository-local policy, code and synthetic tests only; protected evidence, product data, providers beyond the recorded reviewers, docs/branding, deployment, protected integration, production and release remain closed.",
+    "git_refs_and_worktree": "The task branch is at reviewed candidate ef9c96e5535dc17b8335609fad23673e0aeddd53 with only the bounded Sol repair and review evidence pending; local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Forty-eight focused tests and all local static gates passed after the bounded repair."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was used."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["DeepSeek V4 Flash/high returned one pass with low findings, which Sol adopted without transferring acceptance authority."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No TTY fallback was used."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No standalone Claude lane was used."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fresh Gemini 3.6 Flash/high review has not yet run against the repaired candidate."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
