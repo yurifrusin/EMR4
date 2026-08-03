@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/bernie-davida-parallel-lane-contract.v1.json",
+  "title": "Bernie/Davida parallel lane contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "source_head",
+    "authority",
+    "topology",
+    "state_classes",
+    "active_practitioner_projection",
+    "api_spine",
+    "lanes",
+    "execution_controls",
+    "blocked_gates"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.bernie_davida.parallel_lane_contract.v1"},
+    "status": {"const": "architecture_only_seam_frozen"},
+    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "authority": {"type": "object"},
+    "topology": {"type": "object"},
+    "state_classes": {"type": "array", "minItems": 3, "uniqueItems": true},
+    "active_practitioner_projection": {"type": "object"},
+    "api_spine": {"type": "object"},
+    "lanes": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["lane_id", "effect_ceiling", "owned_surfaces", "forbidden_surfaces", "sequence"],
+        "properties": {
+          "lane_id": {"enum": ["diary_native_consumer", "davida_practice_operations"]},
+          "effect_ceiling": {"type": "string"},
+          "owned_surfaces": {"type": "array", "minItems": 1, "uniqueItems": true},
+          "forbidden_surfaces": {"type": "array", "minItems": 1, "uniqueItems": true},
+          "sequence": {"type": "array", "minItems": 2}
+        },
+        "additionalProperties": true
+      }
+    },
+    "execution_controls": {"type": "object"},
+    "blocked_gates": {"type": "array", "minItems": 8, "uniqueItems": true}
+  }
+}

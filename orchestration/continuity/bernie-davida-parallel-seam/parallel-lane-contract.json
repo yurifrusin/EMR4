@@ -1,0 +1,194 @@
+{
+  "schema_version": "emr4.bernie_davida.parallel_lane_contract.v1",
+  "status": "architecture_only_seam_frozen",
+  "source_head": "f2cacad682fddd6c0db4cfeced77b23fc40d9990",
+  "authority": {
+    "decision_owner": "Yuri",
+    "authorised_on": "2026-08-03",
+    "standing_lane_progression": true,
+    "material_fork_returns_to_yuri": true,
+    "manual_intervention_when_materially_more_economical": true,
+    "root_conductor": "gpt_sol",
+    "root_reasoning_material": "extra_high",
+    "worker_acceptance_authority": false,
+    "reviewer_acceptance_authority": false,
+    "protected_ref_authority": false,
+    "deployment_authority": false
+  },
+  "topology": {
+    "probabilistic_work_cells": ["bernie", "davida"],
+    "combined_probabilistic_container": false,
+    "separate_runtime_identities": true,
+    "shared_base_image_or_sdk_permitted": true,
+    "shared_deterministic_kernel_code": true,
+    "separate_immutable_agent_policies": true,
+    "proofreader_outside_probabilistic_work_cell": true,
+    "native_diary_application_session_composition_is_deterministic": true,
+    "native_diary_depends_on_probabilistic_work_cell": false,
+    "native_diary_uses_agent_proofreader": false,
+    "office_terminal_lifecycle_reused_by_native_diary": false,
+    "existing_native_diary_bearer_path_unchanged_when_feature_off": true,
+    "probabilistic_database_credentials": false,
+    "probabilistic_database_session": false,
+    "model_to_database_path": false,
+    "backend_is_sole_database_and_command_authority": true
+  },
+  "state_classes": [
+    "authoritative_structured_practice_state",
+    "advisory_provenance_bearing_institutional_knowledge",
+    "bounded_expiring_agent_session_state"
+  ],
+  "active_practitioner_projection": {
+    "truth_owner": "backend_practice_domain",
+    "read_contract": "Query.practice.practitioners",
+    "consumers": ["native_diary", "bernie", "office", "davida"],
+    "agent_owned_truth": false,
+    "authoritative_agent_cache": false,
+    "lifecycle_change_requires_rest_command": true,
+    "event_requires_fresh_read": true
+  },
+  "api_spine": {
+    "read_context": "graphql_named_scoped_read_only",
+    "mutation": "rest_openapi_single_purpose_command",
+    "event": "committed_signal_requires_fresh_read_never_command",
+    "manifest": "declarative_input_runtime_enforced",
+    "proofreader_release": "typed_grounded_draft_evidence_only",
+    "davida_emits_confirmation_envelope": false,
+    "davida_emits_writes_authorized_envelope": false,
+    "davida_operation_vocabulary": "closed_enum_required",
+    "davida_location_context_requires_pure_side_effect_free_projection": true,
+    "required_future_command_fields": [
+      "practice_id",
+      "actor_context",
+      "resource_id",
+      "command_schema_version",
+      "correlation_id",
+      "idempotency_key",
+      "expected_aggregate_version_or_etag",
+      "intent_or_proposal_hash",
+      "effective_at",
+      "reason_code",
+      "confirmation_evidence",
+      "source_surface",
+      "delegated_agent_identity",
+      "context_revision_and_freshness_id",
+      "before_state_hash_and_explicit_diff",
+      "warnings_blocks_and_reason_codes",
+      "resulting_revision",
+      "audit_event_id",
+      "outbox_event_id"
+    ]
+  },
+  "lanes": [
+    {
+      "lane_id": "diary_native_consumer",
+      "effect_ceiling": "provider_free_read_only_default_off_application_session_composition",
+      "owned_surfaces": [
+        "native_diary_application_session_consumer_composition",
+        "existing_active_practitioner_read_consumption",
+        "surface_lifecycle_acceptance_tests",
+        "lane_specific_plan_threat_model_and_evidence"
+      ],
+      "forbidden_surfaces": [
+        "davida_practice_operations_contracts",
+        "probabilistic_work_cell_or_agent_proofreader_dependency",
+        "office_terminal_consumer_lifecycle",
+        "existing_native_diary_bearer_path_when_feature_off",
+        "shared_agent_kernel_policy",
+        "shared_handover_and_continuity",
+        "docs_branding",
+        "providers",
+        "writes",
+        "deployment",
+        "protected_refs"
+      ],
+      "sequence": [
+        "architecture_composition_review",
+        "unmounted_provider_free_http_postgresql_contract",
+        "default_off_native_diary_ui_wiring",
+        "non_intercepted_live_local_browser_backend_postgresql_acceptance"
+      ]
+    },
+    {
+      "lane_id": "davida_practice_operations",
+      "effect_ceiling": "architecture_only_then_provider_free_dry_run_proposal",
+      "owned_surfaces": [
+        "practice_administration_bounded_context_design",
+        "davida_context_and_capability_contracts",
+        "authoritative_advisory_session_state_classification",
+        "lane_specific_plan_threat_model_and_contract_tests"
+      ],
+      "forbidden_surfaces": [
+        "diary_native_consumer_composition",
+        "shared_agent_kernel_policy",
+        "shared_handover_and_continuity",
+        "docs_branding",
+        "live_providers",
+        "model_database_access",
+        "apply_commands",
+        "deployment",
+        "protected_refs"
+      ],
+      "sequence": [
+        "architecture_only_boundary",
+        "provider_free_read_and_dry_run_contracts",
+        "reversible_proposal_without_apply",
+        "later_human_confirmed_command_candidate"
+      ]
+    }
+  ],
+  "execution_controls": {
+    "separate_non_protected_worktrees": true,
+    "exact_source_head_binding": true,
+    "exact_owned_path_packets": true,
+    "root_only_shared_paths": [
+      "AGENTS.md",
+      "orchestration/continuity/emr4-continuity-graph.json",
+      "orchestration/continuity/emr4-compass.json",
+      "app/graphql/schema.py",
+      "app/main.py",
+      "app/models/tenancy.py",
+      "alembic",
+      "tests/conftest.py",
+      "SECURITY.md",
+      ".github/workflows",
+      "orchestration/integration_log.md",
+      "orchestration/harness_settings",
+      "docs/branding"
+    ],
+    "repository_conftest_pytest": "serial",
+    "shared_postgresql": "serial",
+    "antigravity_gemini_reviewer": "one_fresh_project_at_a_time",
+    "integration": "root_sol_serial",
+    "parallel_allowed": [
+      "bounded_implementation_in_disjoint_worktrees",
+      "import_free_static_checks",
+      "filesystem_only_checks",
+      "isolated_browser_checks_without_shared_mutable_runtime"
+    ],
+    "deterministic_before_external_review": true,
+    "harness_code_change_required_before_dispatch": false,
+    "explicit_path_staging_only": true,
+    "git_add_all_or_dot_forbidden": true,
+    "agent_worktrees_commit_message_path_forbidden": true,
+    "reviewer_selection_source": "verifier_execution_policy.yaml",
+    "legacy_allocation_plan_reviewer_selection_forbidden": true,
+    "review_decisions": ["pass", "revision_required"],
+    "exact_terminal_review_decision_count": 1
+  },
+  "blocked_gates": [
+    "live_provider_runtime",
+    "memory_rag_graphrag_runtime",
+    "real_identity",
+    "patient_clinical_document_data",
+    "model_to_database_writes",
+    "graphql_mutations",
+    "external_identity_writes",
+    "cloud_iam_changes",
+    "deployment",
+    "production",
+    "release",
+    "protected_evidence_or_holdouts",
+    "protected_refs"
+  ]
+}
