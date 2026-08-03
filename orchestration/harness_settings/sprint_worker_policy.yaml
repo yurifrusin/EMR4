@@ -2,12 +2,13 @@ schema_version: ariadne.sprint_worker_policy.v1
 worker_mix:
   antigravity:
     platform: antigravity
-    default_resource_id: antigravity-gemini-flash-3-5-worker
-    default_model: gemini-flash-3.5
+    default_resource_id: antigravity-gemini-flash-3-6-high-verifier
+    default_model: gemini-3.6-flash-high
+    default_reasoning: high
     future_model_or_instance_expansion_requires_worker_pool_entry: true
     minimum_instances: 0
     maximum_instances: 1
-    use_when: [independent_domain_review, separable_implementation, test_design, adversarial_review]
+    use_when: [independent_domain_review, test_design, adversarial_review]
     stand_down_when: [quota_unavailable, no_distinct_artifact_or_veto_surface, overlapping_ownership]
   deepseek_flash:
     resource_id: deepseek-flash-workers

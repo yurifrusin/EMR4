@@ -1,0 +1,84 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "sprint_planning",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_antigravity_gemini_36_model_change_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: AGENTS.md was read completely at 501 lines; the current accepted result is provider_free_office_directory_lifecycle_descendants_pass at Continuity 206 / Compass 187 and the next native Diary composition review remains a fresh authority gate.",
+        "current_authority_allocation: Yuri explicitly authorised changing the independent Antigravity verification allocation from Gemini 3.5 Flash to Gemini 3.6 Flash at the highest available reasoning level; Sol retains planning, acceptance, integration and protected-ref authority.",
+        "active_plan_and_acceptance: the five current Office lifecycle plans, their threat-model delta and the Sol acceptance were read; the accepted adapter remains default-off, route-free and unmounted and the six-tranche product authority is consumed.",
+        "protected_evidence_boundaries: no protected holdout, historical Diary, provider inference call, patient/clinical data, product mutation, deployment, protected integration, Pages rebuild or Dependabot alert 17 action is authorised; docs/branding remains user-owned and excluded.",
+        "git_refs_and_worktree: task branch codex/raisa-provider-free-office-directory-lifecycle-descendants is at 4800f4ffab77efb35dc1e3850837b97dfa761091; local/origin master and handoff/current are aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding is the only unrelated untracked directory."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent was dispatched; this change governs the separate Antigravity verification lane."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The DeepSeek implementation lane is unchanged and was not probed or dispatched."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The real-TTY DeepSeek fallback is unchanged and was not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The leverage-gated Claude lane is unchanged and was not selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Installed agy.exe reports gemini-3.6-flash-high in `agy models`; `agy --help` exposes reasoning effort low, medium and high, making high the exact highest available setting. No model inference call was made."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

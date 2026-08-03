@@ -1,0 +1,34 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "commit",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely at 501 lines and updated under Yuri's exact allocation authority; the accepted Office lifecycle result and separate native Diary fresh-authority gate remain unchanged.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high is now the single preferred independent Antigravity verifier. It is fresh-project, plan-mode, read-only-postcondition and non-integrating; Sol retains architecture, acceptance, recovery and protected integration.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-office-reload-terminal-reconciliation-plan.md",
+      "docs/raisa-provider-free-office-session-loss-reconciliation-plan.md",
+      "docs/raisa-provider-free-office-cross-surface-replay-isolation-plan.md",
+      "docs/raisa-provider-free-office-lifecycle-observability-plan.md",
+      "docs/raisa-provider-free-default-off-office-consumer-adapter-plan.md",
+      "docs/security/raisa-provider-free-office-directory-lifecycle-descendants-threat-model-delta.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md",
+      "docs/ariadne-antigravity-gemini-36-high-verifier-allocation.md"
+    ],
+    "protected_evidence_boundaries": "No protected holdout or historical Diary access; no patient/clinical/product-derived data, product provider call, mutation, cloud/IAM change, deployment, Pages rebuild, protected-ref or alert-disposition action. docs/branding remains untouched and excluded.",
+    "git_refs_and_worktree": "Branch codex/ariadne-gemini-36-high-verifier is based at 4800f4ffab77efb35dc1e3850837b97dfa761091. Local/origin master and handoff/current are aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. docs/branding is the only unrelated user-owned untracked directory."
+  },
+  "settings_fingerprint": "sha256:25344b6c673dec2dbc1ded4e5aec41c93afcc16ac536c54951eef45ec3a92e42",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

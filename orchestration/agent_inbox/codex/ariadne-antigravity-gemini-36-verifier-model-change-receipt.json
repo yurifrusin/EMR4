@@ -1,0 +1,33 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "sprint_planning",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely at 501 lines; the current accepted result is provider_free_office_directory_lifecycle_descendants_pass at Continuity 206 / Compass 187 and the next native Diary composition review remains a fresh authority gate.",
+    "current_authority_allocation": "Yuri explicitly authorised Gemini 3.6 Flash at the highest available Antigravity reasoning level for the independent verifier. Sol retains planning, acceptance, integration and protected-ref authority; no verifier may certify its own work.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-office-reload-terminal-reconciliation-plan.md",
+      "docs/raisa-provider-free-office-session-loss-reconciliation-plan.md",
+      "docs/raisa-provider-free-office-cross-surface-replay-isolation-plan.md",
+      "docs/raisa-provider-free-office-lifecycle-observability-plan.md",
+      "docs/raisa-provider-free-default-off-office-consumer-adapter-plan.md",
+      "docs/security/raisa-provider-free-office-directory-lifecycle-descendants-threat-model-delta.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md"
+    ],
+    "protected_evidence_boundaries": "No protected holdout or historical Diary access; no model inference call, patient or clinical data, product mutation, cloud/IAM change, deployment, Pages rebuild, protected-ref or Dependabot alert 17 action. User-owned docs/branding remains untouched and excluded.",
+    "git_refs_and_worktree": "Task branch codex/raisa-provider-free-office-directory-lifecycle-descendants is at 4800f4ffab77efb35dc1e3850837b97dfa761091. Local/origin master and handoff/current are aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. docs/branding is the only unrelated untracked directory."
+  },
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

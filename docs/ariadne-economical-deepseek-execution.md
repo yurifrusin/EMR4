@@ -7,9 +7,9 @@ authority. DeepSeek V4 Pro is reserved for compact high-leverage consultation
 at architecture/programme boundaries, material allocation complexity, or
 repeated failure; it is not the default routine coordinator. Bounded
 implementation, tests, review, and handover work prefer DeepSeek V4 Flash.
-Gemini 3.5 Flash through Antigravity
-remains an economical peer worker, especially for independent cross-checks,
-adversarial review, and separable UI or test surfaces. Workers are allocated
+Gemini 3.6 Flash/high through Antigravity is the preferred independent verifier,
+especially for fresh-context cross-checks, adversarial review, and independent
+test design. Workers are allocated
 only where there is a distinct bounded surface; neither provider has a mandatory
 lane quota. Terra is a fallback for unavailable or repeatedly rejected
 economical workers and tightly coupled high-risk integration.
@@ -44,10 +44,13 @@ compact structured receipts are the worker completion source of truth.
 Neither DeepSeek transport may integrate protected master, push, deploy, change
 scope, or grant itself authority. Sol authorizes the exact tranche manifest.
 
-Gemini 3.5 Flash dispatch uses `scripts/ariadne_antigravity.py`. The wrapper
+Gemini 3.6 Flash/high dispatch uses `scripts/ariadne_antigravity.py`. The wrapper
 refuses protected/detached branches and dirty or non-root worktrees, always
 passes `--new-project` and the exact worktree through `--add-dir`, embeds the
 root/branch in the packet, and verifies the root/branch again after execution.
+It passes the stable `gemini-3.6-flash-high` slug plus explicit `--effort high`;
+the CLI must fail rather than silently substitute another model. Verification
+runs use plan mode and fail if the candidate HEAD or worktree changes.
 OS sandboxing is off by default because the S16-S18 Windows runs that used
 `agy --sandbox` coincided with elevation prompts. `--os-sandbox` remains an
 explicit option when hard OS isolation is worth interactive Windows approval.

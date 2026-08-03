@@ -1,4 +1,4 @@
-"""Run a bounded Gemini worker in an explicitly bound Antigravity project."""
+"""Run a bounded Gemini verifier in an explicitly bound Antigravity project."""
 
 from __future__ import annotations
 
@@ -10,11 +10,21 @@ from dataclasses import dataclass
 from pathlib import Path
 
 
-MODELS = {
-    "Gemini 3.5 Flash (Low)",
-    "Gemini 3.5 Flash (Medium)",
-    "Gemini 3.5 Flash (High)",
+DEFAULT_MODEL = "gemini-3.6-flash-high"
+MODEL_EFFORTS = {
+    "gemini-3.5-flash-low": "low",
+    "gemini-3.5-flash-medium": "medium",
+    "gemini-3.5-flash-high": "high",
+    "gemini-3.6-flash-low": "low",
+    "gemini-3.6-flash-medium": "medium",
+    "gemini-3.6-flash-high": "high",
 }
+LEGACY_MODEL_ALIASES = {
+    "Gemini 3.5 Flash (Low)": "gemini-3.5-flash-low",
+    "Gemini 3.5 Flash (Medium)": "gemini-3.5-flash-medium",
+    "Gemini 3.5 Flash (High)": "gemini-3.5-flash-high",
+}
+MODELS = set(MODEL_EFFORTS) | set(LEGACY_MODEL_ALIASES)
 PROTECTED_BRANCHES = {"master", "handoff/current"}
 
 
@@ -61,6 +71,8 @@ def build_command(
 ) -> list[str]:
     if model not in MODELS:
         raise ValueError(f"unsupported Antigravity model: {model}")
+    canonical_model = LEGACY_MODEL_ALIASES.get(model, model)
+    reasoning_effort = MODEL_EFFORTS[canonical_model]
     bound_packet = (
         f"BOUND WORKTREE: {state.root}\n"
         f"BOUND BRANCH: {state.branch}\n"
@@ -76,9 +88,11 @@ def build_command(
         "--add-dir",
         str(state.root),
         "--model",
-        model,
+        canonical_model,
+        "--effort",
+        reasoning_effort,
         "--mode",
-        "accept-edits",
+        "plan",
         "--dangerously-skip-permissions",
         "--print-timeout",
         "30m",
@@ -100,6 +114,10 @@ def run_worker(
     if not packet.strip():
         raise ValueError("worker packet must not be empty")
     before = inspect_worktree(cwd, require_clean=True)
+    canonical_model = LEGACY_MODEL_ALIASES.get(model, model)
+    reasoning_effort = MODEL_EFFORTS.get(canonical_model)
+    if reasoning_effort is None:
+        raise ValueError(f"unsupported Antigravity model: {model}")
     completed = subprocess.run(
         build_command(packet=packet, state=before, model=model, os_sandbox=os_sandbox),
         cwd=before.root,
@@ -115,11 +133,15 @@ def run_worker(
     after = inspect_worktree(before.root, require_clean=False)
     if after.root != before.root or after.branch != before.branch:
         raise RuntimeError("Antigravity changed or escaped its bound worktree/branch")
+    if after.head != before.head or after.dirty:
+        raise RuntimeError("Antigravity verifier modified its read-only candidate worktree")
     receipt = {
         "schema_version": "ariadne.worker_receipt.v1",
         "status": "completed",
-        "transport": "antigravity_new_project_bound_worktree",
-        "model": model,
+        "transport": "antigravity_new_project_bound_readonly_worktree",
+        "model": canonical_model,
+        "requested_model": model,
+        "reasoning_effort": reasoning_effort,
         "worktree": str(before.root),
         "branch": before.branch,
         "head_before": before.head,
@@ -134,11 +156,11 @@ def run_worker(
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Run a worktree-bound Gemini worker.")
+    parser = argparse.ArgumentParser(description="Run a worktree-bound Gemini verifier.")
     parser.add_argument("--packet", type=Path, required=True)
     parser.add_argument("--cwd", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--model", choices=sorted(MODELS), default="Gemini 3.5 Flash (Medium)")
+    parser.add_argument("--model", choices=sorted(MODELS), default=DEFAULT_MODEL)
     parser.add_argument(
         "--os-sandbox",
         action="store_true",
@@ -156,7 +178,14 @@ def main() -> int:
     except (OSError, ValueError, RuntimeError) as error:
         print(f"Antigravity transport failed: {error}", file=sys.stderr)
         return 2
-    print(json.dumps({key: receipt[key] for key in ("status", "transport", "model")}))
+    print(
+        json.dumps(
+            {
+                key: receipt[key]
+                for key in ("status", "transport", "model", "reasoning_effort")
+            }
+        )
+    )
     return 0
 
 

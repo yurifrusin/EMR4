@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "commit",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_antigravity_gemini_36_precommit_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: AGENTS.md was re-read completely and now records the authorised Gemini 3.6 Flash/high independent-verifier allocation; current Office lifecycle acceptance and the separate fresh native Diary authority gate are unchanged.",
+        "current_authority_allocation: the exact Gemini verifier resource is repository review-only, fresh-project, plan-mode, high-effort, non-implementing and unable to accept, integrate or move protected refs.",
+        "active_plan_and_acceptance: the five accepted Office lifecycle plans, threat-model delta and Sol acceptance remain unchanged; the new allocation decision is documented in docs/ariadne-antigravity-gemini-36-high-verifier-allocation.md.",
+        "protected_evidence_boundaries: no protected evidence, historical Diary, patient/clinical/product-derived data, provider product call, deployment, protected integration, Pages or alert-disposition boundary was opened.",
+        "git_refs_and_worktree: branch codex/ariadne-gemini-36-high-verifier is based at 4800f4ffab77efb35dc1e3850837b97dfa761091; local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding remains the only unrelated user-owned untracked directory."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was selected or dispatched."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The unchanged DeepSeek implementation lane was not selected or probed."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The unchanged real-TTY fallback was not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The unchanged leverage-gated Claude lane was not selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["agy models listed gemini-3.6-flash-high and agy --help exposed high as the maximum effort; 31 focused tests, Ruff, py_compile and YAML parsing passed without a model inference call."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

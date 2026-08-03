@@ -102,7 +102,7 @@ economical_execution:
   preferred_routine_planner: openai-primary-orchestrator
   deepseek_pro_planning_role: compact_high_leverage_consultant_not_default_coordinator
   preferred_coding_worker: deepseek-flash-workers
-  preferred_workers: [deepseek-flash-workers, antigravity-gemini-flash-3-5-worker]
+  preferred_workers: [deepseek-flash-workers, antigravity-gemini-flash-3-6-high-verifier]
   deepseek_flash_preferred_for: [stable_bounded_implementation_contract, mechanical_test_generation, deterministic_fixture_regeneration, contained_code_repair]
   sol_retained_surfaces: [cross_sprint_taxonomy, frozen_selection_semantics, acceptance_interpretation, authority_allocation, protected_evidence_policy, historical_evidence_reconciliation]
   rejected_flash_candidate:
@@ -117,6 +117,6 @@ economical_execution:
     fresh_context_gemini_veto_when_risk_triggered: true
     inherit_failed_worker_acceptance_framing: false
   worker_allocation_rule: allocate_only_distinct_bounded_surfaces; no_model_quota_is_mandatory
-  gemini_preferred_for: [independent_cross_check, adversarial_review, separable_ui_or_test_surface]
+  gemini_preferred_for: [independent_cross_check, adversarial_review, independent_test_design]
   openai_terra_use_when: [deepseek_transport_unavailable, repeated_deepseek_acceptance_failure, tightly_coupled_high_risk_integration]
   evidence_policy: compact_tranche_ledger

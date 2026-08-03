@@ -24,13 +24,13 @@ adapters:
     shell_probe_applicable: true
     authority_boundary: transport_only_no_integration_authority
   - adapter_id: antigravity_cli_print
-    resource_ids: [antigravity-gemini-flash-3-5-worker]
+    resource_ids: [antigravity-gemini-flash-3-6-high-verifier]
     platform: antigravity
-    invocation: antigravity_new_project_bound_worktree
+    invocation: antigravity_new_project_bound_readonly_worktree
     prompt_entrypoint: python scripts/ariadne_antigravity.py
     allowed_probe_methods: [synthetic_fixture, agy_cli_observation]
     shell_probe_applicable: true
-    authority_boundary: bound_worktree_transport_only_no_integration_authority
+    authority_boundary: bound_readonly_worktree_transport_only_no_integration_authority
   - adapter_id: codex_primary_session
     resource_ids: [openai-primary-orchestrator]
     platform: codex_desktop
