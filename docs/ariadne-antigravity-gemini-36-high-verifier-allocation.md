@@ -21,6 +21,8 @@ implementation worker or a second conductor.
 - The launcher passes both the stable model slug and explicit `--effort high`.
 - The launcher uses plan mode and requires the candidate HEAD and worktree to
   remain unchanged after review.
+- The verifier must return exactly one terminal `pass` or `revision_required`
+  decision; missing or duplicated decision envelopes fail closed.
 - Print-mode model resolution must fail closed; no silent fallback is allowed.
 - The packet names the exact root, branch, source head, owned review artifact,
   forbidden surfaces, tests and required `pass` or `revision_required` result.

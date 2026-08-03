@@ -103,6 +103,7 @@ def test_run_worker_records_canonical_high_model_and_read_only_result(
 
     assert receipt["model"] == "gemini-3.6-flash-high"
     assert receipt["reasoning_effort"] == "high"
+    assert receipt["decision"] == "pass"
     assert receipt["transport"] == (
         "antigravity_new_project_bound_readonly_worktree"
     )
@@ -142,6 +143,57 @@ def test_run_worker_fails_if_verifier_modifies_candidate(
     )
 
     with pytest.raises(RuntimeError, match="modified its read-only candidate"):
+        ariadne_antigravity.run_worker(
+            packet_path=packet,
+            cwd=tmp_path,
+            output_path=output,
+            model="gemini-3.6-flash-high",
+            os_sandbox=False,
+        )
+
+    assert not output.exists()
+
+
+@pytest.mark.parametrize(
+    "stdout, decision_count",
+    [
+        ("No decision.", 0),
+        ("DECISION: pass\nDECISION: pass", 2),
+    ],
+)
+def test_run_worker_rejects_missing_or_duplicate_terminal_decision(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    stdout: str,
+    decision_count: int,
+):
+    packet = tmp_path / "packet.md"
+    packet.write_text("Review only.", encoding="utf-8")
+    output = tmp_path / "receipt.json"
+    state = WorktreeState(
+        root=tmp_path,
+        branch="codex/verifier-candidate",
+        head="abc123",
+        dirty=False,
+    )
+    states = iter([state, state])
+    monkeypatch.setattr(
+        ariadne_antigravity,
+        "inspect_worktree",
+        lambda *_args, **_kwargs: next(states),
+    )
+    monkeypatch.setattr(
+        ariadne_antigravity.subprocess,
+        "run",
+        lambda *_args, **_kwargs: SimpleNamespace(
+            returncode=0, stdout=stdout, stderr=""
+        ),
+    )
+
+    with pytest.raises(
+        RuntimeError,
+        match=f"exactly one terminal decision; observed {decision_count}",
+    ):
         ariadne_antigravity.run_worker(
             packet_path=packet,
             cwd=tmp_path,

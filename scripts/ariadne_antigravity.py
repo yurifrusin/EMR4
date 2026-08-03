@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import subprocess
 import sys
 from dataclasses import dataclass
@@ -26,6 +27,7 @@ LEGACY_MODEL_ALIASES = {
 }
 MODELS = set(MODEL_EFFORTS) | set(LEGACY_MODEL_ALIASES)
 PROTECTED_BRANCHES = {"master", "handoff/current"}
+DECISION_PATTERN = re.compile(r"(?m)^DECISION: (pass|revision_required)\s*$")
 
 
 @dataclass(frozen=True)
@@ -135,6 +137,12 @@ def run_worker(
         raise RuntimeError("Antigravity changed or escaped its bound worktree/branch")
     if after.head != before.head or after.dirty:
         raise RuntimeError("Antigravity verifier modified its read-only candidate worktree")
+    decisions = DECISION_PATTERN.findall(completed.stdout)
+    if len(decisions) != 1:
+        raise RuntimeError(
+            "Antigravity verifier must return exactly one terminal decision; "
+            f"observed {len(decisions)}"
+        )
     receipt = {
         "schema_version": "ariadne.worker_receipt.v1",
         "status": "completed",
@@ -142,6 +150,7 @@ def run_worker(
         "model": canonical_model,
         "requested_model": model,
         "reasoning_effort": reasoning_effort,
+        "decision": decisions[0],
         "worktree": str(before.root),
         "branch": before.branch,
         "head_before": before.head,
@@ -182,7 +191,13 @@ def main() -> int:
         json.dumps(
             {
                 key: receipt[key]
-                for key in ("status", "transport", "model", "reasoning_effort")
+                for key in (
+                    "status",
+                    "transport",
+                    "model",
+                    "reasoning_effort",
+                    "decision",
+                )
             }
         )
     )

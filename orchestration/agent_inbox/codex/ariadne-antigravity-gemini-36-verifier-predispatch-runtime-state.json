@@ -1,0 +1,78 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_antigravity_gemini_36_predispatch_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Five-source rehydration remains current; candidate 30a7c8f53b2ffea7c45c69b4912e3002db244561 is committed on a non-protected task branch and protected refs remain unchanged."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is selected; the explicitly authorised external Antigravity veto lane is used."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The DeepSeek implementation lane is not selected for this independent veto."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The real-TTY fallback is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The leverage-gated Claude lane is not selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["agy models lists gemini-3.6-flash-high; the exact clean review worktree is bound at candidate 30a7c8f53b2ffea7c45c69b4912e3002db244561 and the packet requires a fresh independent read-only pass/revision_required decision."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "agent_id": "antigravity-gemini-36-high-verifier",
+      "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\gemini36-high-verifier-review",
+      "branch": "codex/gemini36-high-verifier-review",
+      "clean": true,
+      "at_handoff_current": false,
+      "recorded_divergence": "candidate review HEAD 30a7c8f53b2ffea7c45c69b4912e3002db244561 based on task parent 4800f4ffab77efb35dc1e3850837b97dfa761091",
+      "recorded_at": "2026-08-03T12:11:18.9905166+10:00"
+    }
+  ],
+  "assigned_agent_ids": []
+}

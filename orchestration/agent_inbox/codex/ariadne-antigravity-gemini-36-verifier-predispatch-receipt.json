@@ -1,0 +1,29 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "source_evidence": {
+    "live_handover_current_baton": "The fully read live handover records the accepted Office lifecycle result, the separate native Diary fresh-authority gate and the authorised Gemini 3.6 Flash/high independent verifier.",
+    "current_authority_allocation": "The verifier is fresh-project, plan-mode, high-effort and read-only-postcondition; it cannot implement, self-accept, integrate, move the baton or push protected refs.",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-antigravity-gemini-36-high-verifier-allocation.md",
+      "orchestration/agent_inbox/antigravity/ariadne-gemini-36-high-verifier-allocation-review-packet.md",
+      "orchestration/agent_inbox/codex/ariadne-antigravity-gemini-36-verifier-model-change-receipt.json"
+    ],
+    "protected_evidence_boundaries": "The packet forbids protected evidence, historical Diary material, docs/branding, patient/clinical/product-derived data, mutation, deployment, production and release activity.",
+    "git_refs_and_worktree": "Clean review worktree C:\\Users\\sarashera\\EMR4-worktrees\\gemini36-high-verifier-review is on branch codex/gemini36-high-verifier-review at candidate 30a7c8f53b2ffea7c45c69b4912e3002db244561. Its recorded divergence from handoff/current is intentional candidate-review state; protected refs are unchanged."
+  },
+  "settings_fingerprint": "sha256:25344b6c673dec2dbc1ded4e5aec41c93afcc16ac536c54951eef45ec3a92e42",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

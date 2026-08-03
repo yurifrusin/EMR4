@@ -50,7 +50,8 @@ passes `--new-project` and the exact worktree through `--add-dir`, embeds the
 root/branch in the packet, and verifies the root/branch again after execution.
 It passes the stable `gemini-3.6-flash-high` slug plus explicit `--effort high`;
 the CLI must fail rather than silently substitute another model. Verification
-runs use plan mode and fail if the candidate HEAD or worktree changes.
+runs use plan mode and fail if the candidate HEAD or worktree changes or if the
+result does not contain exactly one terminal decision.
 OS sandboxing is off by default because the S16-S18 Windows runs that used
 `agy --sandbox` coincided with elevation prompts. `--os-sandbox` remains an
 explicit option when hard OS isolation is worth interactive Windows approval.
