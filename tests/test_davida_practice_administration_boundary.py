@@ -256,3 +256,159 @@ def test_public_artifacts_state_non_authority_and_branding_exclusion() -> None:
     assert "docs/branding/" in combined
     assert "writes_authorized" in combined
     assert "fail closed" in combined
+
+
+def _mutation_fails(mutator) -> None:
+    """Assert a mutated contract fails Draft202012 schema validation.
+
+    Each mutation loads a fresh copy of the unchanged contract so a passing
+    mutation cannot poison later assertions. A schema-valid mutated contract is
+    a security failure (a malicious or accidental authority-bearing mutation
+    must be rejected).
+    """
+    jsonschema = pytest.importorskip("jsonschema")
+    contract = _json(CONTRACT)
+    mutator(contract)
+    validator = jsonschema.Draft202012Validator(_json(SCHEMA))
+    errors = list(validator.iter_errors(contract))
+    assert errors, "mutated contract unexpectedly passed schema validation"
+
+
+def test_mutation_arbitrary_operation_code_fails() -> None:
+    def mutate(contract: dict) -> None:
+        contract["operation_enum"]["operations"][0]["code"] = (
+            "APPLY_PRACTITIONER_DEACTIVATE"
+        )
+
+    _mutation_fails(mutate)
+
+
+def test_mutation_closed_false_fails() -> None:
+    def mutate(contract: dict) -> None:
+        contract["operation_enum"]["closed"] = False
+
+    _mutation_fails(mutate)
+
+
+def test_mutation_mutable_true_fails() -> None:
+    def mutate(contract: dict) -> None:
+        contract["operation_enum"]["operations"][2]["mutable"] = True
+
+    _mutation_fails(mutate)
+
+
+def test_mutation_database_credential_authority_fails() -> None:
+    def mutate(contract: dict) -> None:
+        contract["forbidden_authorities"]["database_credential"] = True
+
+    _mutation_fails(mutate)
+
+
+def test_mutation_human_confirmation_emission_fails() -> None:
+    def mutate(contract: dict) -> None:
+        contract["emission_ceiling"]["human_confirmation"] = True
+
+    _mutation_fails(mutate)
+
+
+def test_mutation_write_emission_fails() -> None:
+    def mutate(contract: dict) -> None:
+        contract["emission_ceiling"]["writes_authorized_true"] = True
+
+    _mutation_fails(mutate)
+
+
+def test_mutation_event_payload_as_truth_fails() -> None:
+    def mutate(contract: dict) -> None:
+        contract["event_semantics"]["payload_is_truth"] = True
+
+    _mutation_fails(mutate)
+
+
+def test_mutation_missing_human_confirmation_construction_fails() -> None:
+    def mutate(contract: dict) -> None:
+        contract["future_backend_owned_command_envelope"].pop(
+            "constructed_after_explicit_human_confirmation"
+        )
+
+    _mutation_fails(mutate)
+
+
+def test_mutation_missing_optimistic_concurrency_field_fails() -> None:
+    def mutate(contract: dict) -> None:
+        contract["future_backend_owned_command_envelope"]["proposal_fields"].remove(
+            "expected_aggregate_version_or_etag"
+        )
+
+    _mutation_fails(mutate)
+
+
+def test_mutation_altered_tranche_fails() -> None:
+    def mutate(contract: dict) -> None:
+        contract["tranches"][2]["name"] = "apply_practitioner_deactivate"
+
+    _mutation_fails(mutate)
+
+
+def test_mutation_unknown_nested_field_fails() -> None:
+    def mutate(contract: dict) -> None:
+        contract["event_semantics"]["unauthorized_apply"] = True
+
+    _mutation_fails(mutate)
+
+
+def test_mutation_missing_nested_field_fails() -> None:
+    def mutate(contract: dict) -> None:
+        contract["identity_and_topology"].pop("agent_id")
+
+    _mutation_fails(mutate)
+
+
+def test_mutation_changed_source_head_binding_fails() -> None:
+    def mutate(contract: dict) -> None:
+        contract["source_head"] = "0" * 40
+
+    _mutation_fails(mutate)
+
+
+def test_mutation_reordered_state_classes_fails() -> None:
+    def mutate(contract: dict) -> None:
+        contract["state_classes"].reverse()
+
+    _mutation_fails(mutate)
+
+
+def test_mutation_reordered_operations_fails() -> None:
+    def mutate(contract: dict) -> None:
+        ops = contract["operation_enum"]["operations"]
+        ops.insert(0, ops.pop())
+
+    _mutation_fails(mutate)
+
+
+def test_mutation_missing_blocked_gate_fails() -> None:
+    def mutate(contract: dict) -> None:
+        contract["blocked_gates"].pop()
+
+    _mutation_fails(mutate)
+
+
+def test_mutation_missing_forbidden_authority_fails() -> None:
+    def mutate(contract: dict) -> None:
+        contract["forbidden_authorities"].pop("database_credential")
+
+    _mutation_fails(mutate)
+
+
+def test_mutation_runtime_claim_true_fails() -> None:
+    def mutate(contract: dict) -> None:
+        contract["authority"]["runtime_claim"] = True
+
+    _mutation_fails(mutate)
+
+
+def test_mutation_combined_probabilistic_container_fails() -> None:
+    def mutate(contract: dict) -> None:
+        contract["identity_and_topology"]["combined_probabilistic_container"] = True
+
+    _mutation_fails(mutate)

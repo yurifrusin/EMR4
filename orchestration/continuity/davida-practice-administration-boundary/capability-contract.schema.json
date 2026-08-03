@@ -25,47 +25,461 @@
   "properties": {
     "schema_version": {"const": "emr4.davida_practice_administration_boundary.capability_contract.v1"},
     "status": {"const": "architecture_only_provider_free_non_executing"},
-    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
-    "authority": {"type": "object"},
-    "identity_and_topology": {"type": "object"},
+    "source_head": {"const": "bb8a6f554b417df019727345ba91a7d555b0bd41"},
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision_owner",
+        "authorised_on",
+        "parent_seam",
+        "standing_lane_progression",
+        "material_fork_returns_to_yuri",
+        "manual_intervention_when_materially_more_economical",
+        "root_conductor",
+        "worker_acceptance_authority",
+        "reviewer_acceptance_authority",
+        "protected_ref_authority",
+        "deployment_authority",
+        "runtime_claim"
+      ],
+      "properties": {
+        "decision_owner": {"const": "Yuri"},
+        "authorised_on": {"const": "2026-08-03"},
+        "parent_seam": {"const": "bernie_davida_parallel_seam_pass"},
+        "standing_lane_progression": {"const": true},
+        "material_fork_returns_to_yuri": {"const": true},
+        "manual_intervention_when_materially_more_economical": {"const": true},
+        "root_conductor": {"const": "gpt_sol"},
+        "worker_acceptance_authority": {"const": false},
+        "reviewer_acceptance_authority": {"const": false},
+        "protected_ref_authority": {"const": false},
+        "deployment_authority": {"const": false},
+        "runtime_claim": {"const": false}
+      }
+    },
+    "identity_and_topology": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "agent_id",
+        "role",
+        "separate_from_bernie",
+        "separate_runtime_identity",
+        "combined_probabilistic_container",
+        "shared_provider_neutral_mechanical_kernel",
+        "shared_typed_envelopes",
+        "shared_deterministic_proofreader_primitives",
+        "shared_audit_vocabulary",
+        "policies_do_not_cross",
+        "scopes_do_not_cross",
+        "memory_does_not_cross",
+        "credentials_do_not_cross",
+        "proofreader_outside_probabilistic_work_cell",
+        "backend_is_sole_database_and_command_authority"
+      ],
+      "properties": {
+        "agent_id": {"const": "davida"},
+        "role": {"const": "practice_administration_custodian"},
+        "separate_from_bernie": {"const": true},
+        "separate_runtime_identity": {"const": true},
+        "combined_probabilistic_container": {"const": false},
+        "shared_provider_neutral_mechanical_kernel": {"const": true},
+        "shared_typed_envelopes": {"const": true},
+        "shared_deterministic_proofreader_primitives": {"const": true},
+        "shared_audit_vocabulary": {"const": true},
+        "policies_do_not_cross": {"const": true},
+        "scopes_do_not_cross": {"const": true},
+        "memory_does_not_cross": {"const": true},
+        "credentials_do_not_cross": {"const": true},
+        "proofreader_outside_probabilistic_work_cell": {"const": true},
+        "backend_is_sole_database_and_command_authority": {"const": true}
+      }
+    },
     "forbidden_authorities": {
       "type": "object",
-      "additionalProperties": {"type": "boolean"}
+      "additionalProperties": false,
+      "required": [
+        "database_credential",
+        "orm_session",
+        "generic_database_client",
+        "graphql_mutation",
+        "rest_command_credential",
+        "event_actuator",
+        "model_to_database_path",
+        "confirmation_envelope_emission",
+        "writes_authorized_true_emission",
+        "mutating_release_envelope",
+        "signed_command_emission"
+      ],
+      "properties": {
+        "database_credential": {"const": false},
+        "orm_session": {"const": false},
+        "generic_database_client": {"const": false},
+        "graphql_mutation": {"const": false},
+        "rest_command_credential": {"const": false},
+        "event_actuator": {"const": false},
+        "model_to_database_path": {"const": false},
+        "confirmation_envelope_emission": {"const": false},
+        "writes_authorized_true_emission": {"const": false},
+        "mutating_release_envelope": {"const": false},
+        "signed_command_emission": {"const": false}
+      }
     },
-    "state_classes": {"type": "array", "minItems": 4, "uniqueItems": true},
-    "context_desk": {"type": "object"},
+    "state_classes": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "prefixItems": [
+        {"const": "authoritative_structured_practice_state"},
+        {"const": "advisory_provenance_bearing_institutional_knowledge"},
+        {"const": "bounded_expiring_session_context_state"},
+        {"const": "declarative_manifest_policy"}
+      ],
+      "items": false
+    },
+    "context_desk": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pattern",
+        "eligible_active_practitioner_read_contract",
+        "eligible_active_practitioner_service",
+        "eligible_active_practitioner_route",
+        "active_practitioner_projection_pure",
+        "future_location_source_requires_pure_projection",
+        "blocked_room_get_path",
+        "blocked_room_get_reason",
+        "blocked_waiting_area_get_path",
+        "blocked_waiting_area_get_reason",
+        "blocked_waiting_room_get_path",
+        "blocked_waiting_room_get_reason",
+        "context_frames_minimal",
+        "context_frames_non_authoritative"
+      ],
+      "properties": {
+        "pattern": {"const": "read_desk_typed_read_intent_pure_projection_only"},
+        "eligible_active_practitioner_read_contract": {"const": "Query.practice.practitioners"},
+        "eligible_active_practitioner_service": {"const": "list_practitioner_directory"},
+        "eligible_active_practitioner_route": {"const": "GET /api/v1/practice/practitioners"},
+        "active_practitioner_projection_pure": {"const": true},
+        "future_location_source_requires_pure_projection": {"const": true},
+        "blocked_room_get_path": {"const": "GET /api/v1/diary/rooms"},
+        "blocked_room_get_reason": {"const": "normalizes_and_commits_during_nominal_read"},
+        "blocked_waiting_area_get_path": {"const": "GET /api/v1/diary/waiting-areas"},
+        "blocked_waiting_area_get_reason": {"const": "normalizes_and_commits_during_nominal_read"},
+        "blocked_waiting_room_get_path": {"const": "GET /api/v1/appointments/waiting-room"},
+        "blocked_waiting_room_get_reason": {"const": "patient_linked_appointment_queue_closed_data"},
+        "context_frames_minimal": {"const": true},
+        "context_frames_non_authoritative": {"const": true}
+      }
+    },
     "operation_enum": {
       "type": "object",
+      "additionalProperties": false,
       "required": ["domain", "closed", "fail_closed_on_unknown", "operations"],
       "properties": {
-        "domain": {"type": "string"},
-        "closed": {"type": "boolean"},
-        "fail_closed_on_unknown": {"type": "boolean"},
+        "domain": {"const": "practitioner_lifecycle_administration"},
+        "closed": {"const": true},
+        "fail_closed_on_unknown": {"const": true},
         "operations": {
           "type": "array",
-          "minItems": 1,
-          "uniqueItems": true,
-          "items": {
-            "type": "object",
-            "required": ["code", "kind", "risk_tier", "mutable"],
-            "properties": {
-              "code": {"type": "string"},
-              "kind": {"enum": ["advisory", "proposal_candidate"]},
-              "risk_tier": {"type": "string"},
-              "mutable": {"type": "boolean"}
+          "minItems": 6,
+          "maxItems": 6,
+          "prefixItems": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["code", "kind", "risk_tier", "mutable"],
+              "properties": {
+                "code": {"const": "ADVISORY_EXPLAIN_DIRECTORY"},
+                "kind": {"const": "advisory"},
+                "risk_tier": {"const": "read_only"},
+                "mutable": {"const": false}
+              }
             },
-            "additionalProperties": false
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["code", "kind", "risk_tier", "mutable"],
+              "properties": {
+                "code": {"const": "ADVISORY_SUMMARIZE_DIRECTORY"},
+                "kind": {"const": "advisory"},
+                "risk_tier": {"const": "read_only"},
+                "mutable": {"const": false}
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["code", "kind", "risk_tier", "mutable"],
+              "properties": {
+                "code": {"const": "PROPOSE_DEACTIVATE_PRACTITIONER"},
+                "kind": {"const": "proposal_candidate"},
+                "risk_tier": {"const": "admin_proposal"},
+                "mutable": {"const": false}
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["code", "kind", "risk_tier", "mutable"],
+              "properties": {
+                "code": {"const": "PROPOSE_REACTIVATE_PRACTITIONER"},
+                "kind": {"const": "proposal_candidate"},
+                "risk_tier": {"const": "admin_proposal"},
+                "mutable": {"const": false}
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["code", "kind", "risk_tier", "mutable"],
+              "properties": {
+                "code": {"const": "PROPOSE_UPDATE_PRACTITIONER_DEFAULT_LOCATION"},
+                "kind": {"const": "proposal_candidate"},
+                "risk_tier": {"const": "admin_proposal"},
+                "mutable": {"const": false}
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["code", "kind", "risk_tier", "mutable"],
+              "properties": {
+                "code": {"const": "PROPOSE_UPDATE_PRACTITIONER_PROFILE"},
+                "kind": {"const": "proposal_candidate"},
+                "risk_tier": {"const": "admin_proposal"},
+                "mutable": {"const": false}
+              }
+            }
+          ],
+          "items": false
+        }
+      }
+    },
+    "emission_ceiling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "typed_advisory_drafts",
+        "typed_proposal_candidates",
+        "human_confirmation",
+        "signed_command",
+        "writes_authorized_true",
+        "mutating_release_envelope",
+        "proofreader_release"
+      ],
+      "properties": {
+        "typed_advisory_drafts": {"const": true},
+        "typed_proposal_candidates": {"const": true},
+        "human_confirmation": {"const": false},
+        "signed_command": {"const": false},
+        "writes_authorized_true": {"const": false},
+        "mutating_release_envelope": {"const": false},
+        "proofreader_release": {"const": "typed_grounded_draft_evidence_only"}
+      }
+    },
+    "future_backend_owned_command_envelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "owner",
+        "constructed_after_explicit_human_confirmation",
+        "proposal_fields",
+        "confirmation_fields"
+      ],
+      "properties": {
+        "owner": {"const": "trusted_backend_code"},
+        "constructed_after_explicit_human_confirmation": {"const": true},
+        "proposal_fields": {
+          "type": "array",
+          "minItems": 17,
+          "maxItems": 17,
+          "prefixItems": [
+            {"const": "practice_id"},
+            {"const": "actor_context"},
+            {"const": "source_surface"},
+            {"const": "delegated_agent_identity"},
+            {"const": "resource_id"},
+            {"const": "command_schema_version"},
+            {"const": "correlation_id"},
+            {"const": "idempotency_key"},
+            {"const": "intent_or_proposal_hash"},
+            {"const": "expected_aggregate_version_or_etag"},
+            {"const": "context_revision_and_freshness_id"},
+            {"const": "effective_at"},
+            {"const": "expires_at"},
+            {"const": "reason_code"},
+            {"const": "before_state_hash"},
+            {"const": "explicit_diff"},
+            {"const": "warnings_blocks_and_reason_codes"}
+          ],
+          "items": false
+        },
+        "confirmation_fields": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "prefixItems": [
+            {"const": "confirmation_evidence"},
+            {"const": "resulting_revision"},
+            {"const": "audit_event_id"},
+            {"const": "outbox_event_id"}
+          ],
+          "items": false
+        }
+      }
+    },
+    "event_semantics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "payload_is_truth",
+        "payload_is_command",
+        "may_request_fresh_authorized_read",
+        "event_actuator_present"
+      ],
+      "properties": {
+        "role": {"const": "hint"},
+        "payload_is_truth": {"const": false},
+        "payload_is_command": {"const": false},
+        "may_request_fresh_authorized_read": {"const": true},
+        "event_actuator_present": {"const": false}
+      }
+    },
+    "api_spine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "read_context",
+        "mutation",
+        "event",
+        "manifest",
+        "context_frames_minimal",
+        "context_frames_non_authoritative"
+      ],
+      "properties": {
+        "read_context": {"const": "graphql_named_scoped_read_only"},
+        "mutation": {"const": "rest_openapi_single_purpose_command"},
+        "event": {"const": "committed_signal_requires_fresh_read_never_command"},
+        "manifest": {"const": "declarative_input_runtime_enforced"},
+        "context_frames_minimal": {"const": true},
+        "context_frames_non_authoritative": {"const": true}
+      }
+    },
+    "tranches": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "prefixItems": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["tranche", "name", "effect_ceiling"],
+          "properties": {
+            "tranche": {"const": 1},
+            "name": {"const": "pure_read_projections"},
+            "effect_ceiling": {"const": "provider_free_read_only"}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["tranche", "name", "effect_ceiling"],
+          "properties": {
+            "tranche": {"const": 2},
+            "name": {"const": "provider_free_typed_interpretation_proofreading"},
+            "effect_ceiling": {"const": "provider_free_typed_draft"}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["tranche", "name", "effect_ceiling"],
+          "properties": {
+            "tranche": {"const": 3},
+            "name": {"const": "one_bounded_proposal_path"},
+            "effect_ceiling": {"const": "typed_dry_run_proposal_no_apply"}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["tranche", "name", "effect_ceiling"],
+          "properties": {
+            "tranche": {"const": 4},
+            "name": {"const": "separately_authorised_confirmed_write_vertical"},
+            "effect_ceiling": {"const": "human_confirmed_backend_owned_command_candidate"}
           }
         }
-      },
-      "additionalProperties": false
+      ],
+      "items": false
     },
-    "emission_ceiling": {"type": "object"},
-    "future_backend_owned_command_envelope": {"type": "object"},
-    "event_semantics": {"type": "object"},
-    "api_spine": {"type": "object"},
-    "tranches": {"type": "array", "minItems": 4, "maxItems": 4, "uniqueItems": true},
-    "execution_controls": {"type": "object"},
-    "blocked_gates": {"type": "array", "minItems": 8, "uniqueItems": true}
+    "execution_controls": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "separate_non_protected_worktree",
+        "exact_source_head_binding",
+        "exact_owned_path_packet",
+        "explicit_path_staging_only",
+        "git_add_all_or_dot_forbidden",
+        "agent_worktrees_commit_message_path_forbidden",
+        "repository_conftest_pytest",
+        "shared_postgresql",
+        "antigravity_gemini_reviewer",
+        "integration",
+        "deterministic_before_external_review",
+        "review_decisions",
+        "exact_terminal_review_decision_count"
+      ],
+      "properties": {
+        "separate_non_protected_worktree": {"const": true},
+        "exact_source_head_binding": {"const": true},
+        "exact_owned_path_packet": {"const": true},
+        "explicit_path_staging_only": {"const": true},
+        "git_add_all_or_dot_forbidden": {"const": true},
+        "agent_worktrees_commit_message_path_forbidden": {"const": true},
+        "repository_conftest_pytest": {"const": "serial"},
+        "shared_postgresql": {"const": "serial"},
+        "antigravity_gemini_reviewer": {"const": "one_fresh_project_at_a_time"},
+        "integration": {"const": "root_sol_serial"},
+        "deterministic_before_external_review": {"const": true},
+        "review_decisions": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {"const": "pass"},
+            {"const": "revision_required"}
+          ],
+          "items": false
+        },
+        "exact_terminal_review_decision_count": {"const": 1}
+      }
+    },
+    "blocked_gates": {
+      "type": "array",
+      "minItems": 13,
+      "maxItems": 13,
+      "prefixItems": [
+        {"const": "live_provider_runtime"},
+        {"const": "memory_rag_graphrag_runtime"},
+        {"const": "real_identity"},
+        {"const": "patient_clinical_document_data"},
+        {"const": "model_to_database_writes"},
+        {"const": "graphql_mutations"},
+        {"const": "external_identity_writes"},
+        {"const": "autonomous_writes"},
+        {"const": "deployment"},
+        {"const": "production"},
+        {"const": "release"},
+        {"const": "protected_evidence_or_holdouts"},
+        {"const": "protected_refs"}
+      ],
+      "items": false
+    }
   }
 }
