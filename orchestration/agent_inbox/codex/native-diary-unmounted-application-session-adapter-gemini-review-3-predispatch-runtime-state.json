@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "verifier_acceptance",
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "unknown", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. The active Diary candidate remains provider-free, unmounted/default-off and read-only.",
+    "current_authority_allocation": "GPT Sol rejected two verifier narratives for source-value drift. One final fresh Gemini 3.6 Flash/high Antigravity attempt is authorised; no fallback or concurrent review is allowed.",
+    "active_plan_and_acceptance": "Candidate ef38162afbf89f96aacc9f255bdced9a15934bf3 remains deterministically admitted. Final review must reproduce machine-generated model/marker JSON verbatim rather than manually count strings.",
+    "protected_evidence_boundaries": "The final retry is read-only and excludes protected evidence, credentials, prior output, docs/branding, real identity/data, providers, writes, deployment and release.",
+    "git_refs_and_worktree": "Fresh review-3 worktree is clean on codex/review-native-diary-unmounted-application-session-adapter-3 at ef38162afbf89f96aacc9f255bdced9a15934bf3. Root remains 0d8b2985fdae2ca488ae90e2ae1a5842190b296b; all protected refs remain 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["No DeepSeek worker is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No fallback is selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Anthropic-hosted model is selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["A genuinely fresh final project will run exact gemini-3.6-flash-high/high with machine-output attestation."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Root rejected both drifted reports, verified actual values deterministically and froze the final exact-output requirement."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent is active."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [{"agent_id": "gemini_native_diary_runtime_reviewer_3", "worktree": "C:/Users/sarashera/EMR4-worktrees/native-diary-unmounted-application-session-adapter-gemini-review-3", "branch": "codex/review-native-diary-unmounted-application-session-adapter-3", "clean": true, "at_handoff_current": true, "recorded_at": "2026-08-03T18:07:00+10:00"}],
+  "assigned_agent_ids": ["gemini_native_diary_runtime_reviewer_3"]
+}

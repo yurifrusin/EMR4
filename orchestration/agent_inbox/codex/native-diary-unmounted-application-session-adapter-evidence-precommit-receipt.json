@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate bf0d5592c6365684ccb51c28f946567b603f266c passes Ruff, 77 focused tests and the live acceptance result provider_free_native_diary_application_session_practitioner_runtime_pass with complete cleanup. Independent read-only PostgreSQL residue counts are zero.",
+    "current_authority_allocation": "GPT Sol alone performs deterministic acceptance and evidence commit. The DeepSeek implementation and bounded seed repair completed; Gemini review remains gated until this clean evidence commit is admitted.",
+    "git_refs_and_worktree": "The Diary candidate worktree is on codex/native-diary-unmounted-application-session-adapter at bf0d5592c6365684ccb51c28f946567b603f266c with exactly one untracked evidence directory. Root remains at 0d8b2985fdae2ca488ae90e2ae1a5842190b296b; all four protected refs remain at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was read completely. The active Diary runtime descendant remains provider-free, unmounted/default-off and read-only, with real loopback HTTP/PostgreSQL evidence permitted under Yuri's standing bounded authority.",
+    "protected_evidence_boundaries": "The evidence contains only safe counts, booleans, fixed labels/statuses and claim limits; its sensitive-match count is zero. No DSN, database/role name, password, UUID, person/practice name, session/cookie/CSRF value or authority envelope is present. docs/branding remains excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

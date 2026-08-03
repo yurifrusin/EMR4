@@ -1,0 +1,84 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "unknown",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. The active Diary runtime descendant remains provider-free, unmounted/default-off and read-only; its first live acceptance run failed closed at authored-synthetic seed admission with complete cleanup.",
+    "current_authority_allocation": "Yuri's standing bounded diagnose-repair-rerun authority applies. GPT Sol retains acceptance and integration; exact DeepSeek V4 Flash/high through Claude Code --bare may repair the two owned Diary harness files; Gemini 3.6 Flash/high remains reserved until deterministic admission passes.",
+    "active_plan_and_acceptance": "Candidate b2b64eee537eb9e2be23045c9510a1ef5ade219f passed Ruff and 76 tests. The exact repair is bounded to two 21-character authored-synthetic seed identifiers that exceed the model's String(20) columns, plus a regression test for actual column limits.",
+    "protected_evidence_boundaries": "No runtime contract, shared module, evidence claim, patient/clinical/product-derived data, real identity, provider product path, write authority, deployment, protected ref or docs/branding path may change. The failed generated evidence was removed after its complete-cleanup result was recorded.",
+    "git_refs_and_worktree": "The Diary worker worktree is clean on codex/native-diary-unmounted-application-session-adapter at exact candidate b2b64eee537eb9e2be23045c9510a1ef5ade219f. Root remains at 0d8b2985fdae2ca488ae90e2ae1a5842190b296b; protected master, handoff/current, origin/master and origin/handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The exact DeepSeek repair transport completed the parent implementation call and its slot is now empty; one bounded repair instance is selected."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No TTY fallback is authorised or selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code is transport only; no Anthropic-hosted model is selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Gemini 3.6 Flash/high remains reserved for a fresh serial review after deterministic admission."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Root reproduced the failure, verified full cleanup, identified both exact over-length values, removed only generated failed evidence, and restored a clean candidate worktree."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["The completed read-only control audit remains unchanged; no native subagent is active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "agent_id": "deepseek_native_diary_seed_repair",
+      "worktree": "C:/Users/sarashera/EMR4-worktrees/native-diary-unmounted-application-session-adapter",
+      "branch": "codex/native-diary-unmounted-application-session-adapter",
+      "clean": true,
+      "at_handoff_current": true,
+      "recorded_at": "2026-08-03T17:34:51+10:00"
+    }
+  ],
+  "assigned_agent_ids": ["deepseek_native_diary_seed_repair"]
+}

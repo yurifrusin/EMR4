@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "verifier_acceptance",
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "unknown", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. The active Davida candidate is the bounded provider-free, unmounted, pure-read practice-administration projection/context descendant.",
+    "current_authority_allocation": "GPT Sol retains acceptance/integration; exactly Gemini 3.6 Flash/high through a genuinely fresh Antigravity project is the independent serial Davida veto reviewer. The accepted Diary review is complete and no concurrent Gemini review exists.",
+    "active_plan_and_acceptance": "Exact clean candidate 24bdb4f0864c2d0fb515596dd204d6414e4c5f5d passes Ruff, 93 tests and provider_free_practice_administration_pure_read_pass with complete cleanup and independent zero-residue counts.",
+    "protected_evidence_boundaries": "Review is read-only and excludes protected evidence, credentials, prior worker/reviewer output, docs/branding, real identity/data, providers, routes/writes, deployment and release. Rooms and waiting sources remain blocked.",
+    "git_refs_and_worktree": "Fresh Davida review worktree C:/Users/sarashera/EMR4-worktrees/davida-pure-read-context-desk-gemini-review is clean on codex/review-davida-pure-read-context-desk at exact 24bdb4f0864c2d0fb515596dd204d6414e4c5f5d. Root remains 0d8b2985fdae2ca488ae90e2ae1a5842190b296b; all protected refs remain 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["All DeepSeek calls are complete; no worker is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No fallback is selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Anthropic-hosted model is selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["The Diary project is closed; the runner will create a genuinely fresh Davida project at exact gemini-3.6-flash-high/high."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Root froze the exact Davida packet, candidate/baseline, tests, adversarial schema/source checks and unchanged-worktree postcondition."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent is active."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [{"agent_id": "gemini_davida_pure_read_reviewer", "worktree": "C:/Users/sarashera/EMR4-worktrees/davida-pure-read-context-desk-gemini-review", "branch": "codex/review-davida-pure-read-context-desk", "clean": true, "at_handoff_current": true, "recorded_at": "2026-08-03T18:10:00+10:00"}],
+  "assigned_agent_ids": ["gemini_davida_pure_read_reviewer"]
+}

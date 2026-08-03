@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All checks green and the worktree is clean post-commit. Here is the final report.\n\n---\n\n## Five-source rehydration statement\n\n1. **`live_handover_current_baton`** \u2014 `AGENTS.md` read completely (434 lines). Current Baton names the Davida lane as the provider-free pure-read-projection/context-desk tranche, with baton ref `handoff/current`. Candidate source `90781e212ac04a7b58135c9c9d9a202c6682d3f9` is exactly the active head \"Davida provider-free practice-administration pure-read: active-location projection and deterministic context desk\".\n2. **`current_authority_allocation`** \u2014 DeepSeek V4 Flash/high via Claude Code `--bare` is the bounded implementation/test worker; no fallback authorised. This contained mechanical repair fits the frozen-plan/High lane; material forks stay with Yuri.\n3. **`active_plan_and_acceptance`** \u2014 Read the EMR4 API Steward skill and review checklist: `orchestration/api_spine_adr.md` and `orchestration/api_spine_programme.md` (GraphQL read-only, REST command plane, typed context frames, non-authoritative manifests, no mutation tunnel). The two owned files are the current pure-read acceptance artifacts.\n4. **`protected_evidence_boundaries`** \u2014 AGENTS.md sections 5\u20136: no holdout access, no provider calls, no patient/clinical data, no product mutation, no runtime/write/apply/deploy/release claim; `docs/branding/` is user-owned and excluded.\n5. **`git_refs_and_worktree`** \u2014 Branch `codex/davida-pure-read-context-desk`; HEAD = candidate `90781e21\u2026`; local and origin `master`/`handoff/current` aligned at `2e34bdad\u2026`; worktree clean before and after.\n\n## Exact failed gate repaired\nThe classifier applied `.upper()` to captured SQL then searched lowercase `\"FROM practice_locations\"` / `\"FROM practitioners\"`, so `select_reads_present` was always false. Extracted a pure, case-consistent helper `_select_reads_present` in the acceptance script that requires both pure-table reads (matched against upper-cased statements) and still rejects any DML/DDL statement.\n\n## Commit / files\n- Commit: `5678a4a953b9ec7bfed15b9804a38ac218a0959e`\n- `scripts/davida_provider_free_practice_administration_pure_read_acceptance.py`\n- `tests/test_davida_provider_free_practice_administration_pure_read.py`\n- `git diff --cached --name-only` was exact (2 paths); no `docs/branding/`. Staged explicitly; no `git add -A`/`.`; no fetch/merge/rebase/switch/push.\n\n## Checks\n- Ruff (`E9`,`F401`) on both owned files: **passed**\n- `py_compile` on both owned files: **passed**\n- New pure test file run directly without `conftest.py` (`pytest --noconftest`): **40 passed, 0 failed** \u2014 the 2 new regression tests fail on the old mixed-case classifier (proven by simulation)\n- `git diff --check` and `git diff --cached --check`: **clean**\n- Post-commit worktree clean; branch unchanged\n\n## Blockers\nNone.\n\nDECISION: pass",
+  "usage": {
+    "input_tokens": 60829,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 2060800,
+    "output_tokens": 28258,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 2.05097,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

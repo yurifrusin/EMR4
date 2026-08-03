@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "planned_action": "push",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Diary and Davida isolated suites passed 77 and 93 tests. The reconciled branch passed all 170 combined tests, five handover regressions, Ruff and git diff --check. Exact live authored-synthetic PostgreSQL evidence, zero residue and independent fresh Gemini acceptance are recorded.",
+    "current_authority_allocation": "Yuri authorised necessary nonprotected task-branch commits and pushes and standing bounded descendants. Only codex/ariadne-bernie-davida-parallel-seam may be pushed; protected refs, deployment and release remain closed.",
+    "git_refs_and_worktree": "Before the final explicit-path closeout commit, root is codex/ariadne-bernie-davida-parallel-seam at 74ee7f93c9b43a7d34644b58b2584817e7e9cc00. Local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the intentional acceptance/receipt set and AGENTS.md will be staged; docs/branding will remain untracked.",
+    "live_handover_current_baton": "AGENTS.md was read completely and its pending baton update records both accepted runtime descendants, the durable non-PHI Pushover closeout/attention protocol and the next bounded two-lane pair.",
+    "protected_evidence_boundaries": "No protected holdout/evidence, provider/model product call, mounted route/UI, real identity, patient/clinical data, proposal/apply/write, cloud/IAM, deployment, production or release occurred. docs/branding is intentionally untracked and excluded from every stage, commit, test and push."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "integration",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Diary exact candidate ef38162afbf89f96aacc9f255bdced9a15934bf3 passed Ruff, 77 tests, live loopback HTTP/PostgreSQL evidence and zero residue; the first two Gemini narratives were rejected for source-value drift and fresh review 3 passed with exact machine attestation. Davida exact candidate 24bdb4f0864c2d0fb515596dd204d6414e4c5f5d passed Ruff, 93 tests, pure-read PostgreSQL evidence, zero residue and one fresh Gemini pass.",
+    "current_authority_allocation": "Yuri's standing authority permits root-only reconciliation on the nonprotected task branch. GPT Sol retains acceptance/integration; all DeepSeek workers and Gemini projects are complete. Protected refs and deployment remain closed.",
+    "git_refs_and_worktree": "Root is codex/ariadne-bernie-davida-parallel-seam at exact 0d8b2985fdae2ca488ae90e2ae1a5842190b296b with empty index and only intentional branding plus this tranche's untracked receipts/packets. Diary and Davida candidates/review worktrees are clean at their exact accepted heads. master, handoff/current, origin/master and origin/handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was read completely. The two active descendants are the provider-free native-Diary unmounted application-session runtime adapter and Davida provider-free pure-read practice-administration context desk.",
+    "protected_evidence_boundaries": "Integration replays only six exact candidate commits onto the nonprotected root branch. No shared runtime file overlaps, no protected evidence or refs are touched, no patient/clinical/product-derived/real-identity/provider/write/deployment/release authority is added, and intentional untracked docs/branding remains untouched and unstaged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

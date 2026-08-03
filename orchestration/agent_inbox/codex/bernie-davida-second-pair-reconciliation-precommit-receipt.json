@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate path trees were exact after six replay commits. The first combined 170-test run exposed only legacy whole-app/graphql substring false positives in the new adapter docstring; two wording-only changes remove those lexical collisions. The final combined gate passes Ruff and all 170 tests.",
+    "current_authority_allocation": "GPT Sol owns root-only integration and mechanical harness reconciliation. No worker/reviewer is active; protected refs and deployment remain closed.",
+    "git_refs_and_worktree": "Root is codex/ariadne-bernie-davida-parallel-seam at 5c505351a6c95bf388f2463be72deda69b032f30 with exactly app/graphql/native_diary_application_session_practitioner.py modified plus intentional untracked tranche records and docs/branding. The index is empty; all protected refs remain at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was read completely. Both bounded runtime descendants have passed their isolated deterministic and accepted fresh Gemini gates and are reconciled on the nonprotected task branch.",
+    "protected_evidence_boundaries": "The one-file change touches documentation text only, changes no executable token or contract/evidence path, and adds no authority. docs/branding remains untracked and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All work is complete, verified, and committed. Here is the final report.\n\n---\n\n## Five-source rehydration statement\n\nThe exact five rehydration sources from `AGENTS.md` \u00a72 are:\n1. **`live_handover_current_baton`** \u2014 read `AGENTS.md` completely (Current Baton, authority, protected boundaries).\n2. **`current_authority_allocation`** \u2014 `AGENTS.md` \u00a74 (GPT Sol conductor, DeepSeek V4 Flash/high worker, Gemini verifier, worker-lane economy).\n3. **`active_plan_and_acceptance`** \u2014 read the accepted Davida boundary artifacts: `docs/davida-practice-administration-boundary-{plan,design,closeout}.md`, `docs/security/davida-practice-administration-boundary-threat-model-delta.md`, and `orchestration/continuity/davida-practice-administration-boundary/capability-contract.{json,schema.json}`; plus the adjacent seam `bernie-davida-parallel-seam` context in the baton.\n4. **`protected_evidence_boundaries`** \u2014 `AGENTS.md` \u00a75\u2013\u00a76 (sealed holdouts, T3/provider pause, product authority, `docs/branding/` exclusion).\n5. **`git_refs_and_worktree`** \u2014 verified `git status` clean, branch `codex/davida-pure-read-context-desk`, HEAD `0d8b2985fdae2ca488ae90e2ae1a5842190b296b` before editing; committed at `90781e212ac04a7b58135c9c9d9a202c6682d3f9`.\n\n**API Steward skill/checklist:** there is no standalone file named that; the repo's authoritative reference is `docs/handover-ledgers/product-platform-api-and-security.md` (\"Use the `docs/api-spine/` contracts and the EMR4 API steward rules whenever a sprint touches GraphQL/read models, REST/OpenAPI commands, \u2026 context frames, manifests, async contracts, audit, security, or idempotency\"). I read that ledger fully and the relevant `docs/api-spine/` contracts (directory-read-shape-design, permission-matrix location) plus the boundary's API-Spine conformance, and applied those rules (read-only GraphQL stays untouched, no new REST/GraphQL surface, declarative manifest enforced by typed code, context frames minimal/non-authoritative, manifest contracts strict).\n\n**Permitted-reads verification:** read `app/models/tenancy.py` (practice/location/practitioner/user fields only), `app/schemas/practice.py` (`PractitionerOut`), `app/services/practice/practitioner_directory_read.py`, `app/routers/diary.py` (proved rooms/waiting-areas normalize+commit), the `GET /api/v1/appointments/waiting-room` boundary, the product-read role/operational modules, the product-read acceptance script precedent, and the focused Davida/practitioner-read tests. No other files were edited.\n\n## Commit / changed files (exactly 10, all committed)\n\n`90781e21` \u2014 \"Davida provider-free practice-administration pure-read: active-location projection and deterministic context desk\"\n1. `app/schemas/practice_administration.py`\n2. `app/services/practice/active_location_directory_read.py`\n3. `app/services/practice/practice_administration_context_desk.py`\n4. `docs/davida-provider-free-practice-administration-pure-read-plan.md`\n5. `docs/davida-provider-free-practice-administration-pure-read-design.md`\n6. `docs/security/davida-provider-free-practice-administration-pure-read-threat-model-delta.md`\n7. `orchestration/continuity/davida-provider-free-practice-administration-pure-read/context-contract.json`\n8. `orchestration/continuity/davida-provider-free-practice-administration-pure-read/context-contract.schema.json`\n9. `scripts/davida_provider_free_practice_administration_pure_read_acceptance.py`\n10. `tests/test_davida_provider_free_practice_administration_pure_read.py`\n\nStaged/cached index verified exact (10 files), `docs/branding/` absent, worktree clean after commit. No `git add -A`/`.`, no fetch/merge/rebase/switch/push. The evidence file (`provider-free-in-process-backend-postgres-evidence.json`) was **not** created.\n\n## Checks run (root's serial DB/pytest lease respected)\n\n- **py_compile** \u2014 all five owned Python files OK.\n- **Ruff** (`E9`, `F401`) \u2014 all owned Python files pass.\n- **JSON/schema** \u2014 `context-contract.json` validates against `context-contract.schema.json` (Draft 2020-12); its `content_revision` recomputes consistently.\n- **Pure-function checks** (38 test functions, run directly \u2014 **not** via pytest, so `conftest.py` was never loaded): all pass, covering strict extra-forbid schema, service purity (no commit/flush/add/delete/normalize, `db.no_autoflush`, `limit(MAX_ACTIVE_LOCATION_DIRECTORY_ROWS)=200`, exact `id`/`name`), composer determinism + recomputable SHA-256 revision, observed/expires exactly 2 minutes apart, two fixed `live_api_fact` frames with exact source/projection/active-only labels, exact blocked sources, all-false authority ceiling, opaque-reference replacement with no UUID emitted, fail-closed on naive time / missing / duplicate / wrong-kind / cross-practice / inactive / unsupported values, no DB/network/provider/clock-read in the composer, and 21 adversarial contract-mutation rejections.\n- **Acceptance script** \u2014 imports cleanly; pure helpers (`_build_registry`, `_sensitive_values`, regexes, evidence path) verified; **not executed** against PostgreSQL.\n- **Git hygiene** \u2014 `git diff --cached --check` clean; post-commit `git status` clean.\n\n## Blockers\n\nNone. The bounded packet is fully implemented, verified within the allowed deterministic/static checks, and committed as exactly the ten owned files.\n\nDECISION: pass",
+  "usage": {
+    "input_tokens": 108182,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 9291136,
+    "output_tokens": 119476,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 8.188082999999997,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

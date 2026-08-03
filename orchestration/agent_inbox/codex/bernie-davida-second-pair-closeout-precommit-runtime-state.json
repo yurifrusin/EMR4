@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "unknown",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. Its pending update binds both accepted runtime descendants, the exact next two-lane work and the general non-PHI Pushover closeout/user-attention protocol.",
+    "current_authority_allocation": "Yuri authorised the bounded descendants, necessary task-branch commits and nonprotected push. Sol alone may write the closeout/acceptance records. Protected refs, deployment and release remain closed.",
+    "active_plan_and_acceptance": "The final root gate passes 170 combined runtime/boundary tests plus five AGENTS archive tests, Ruff and git diff --check. Both live PostgreSQL proofs, zero-residue checks and exact fresh independent review receipts are complete.",
+    "protected_evidence_boundaries": "The pending closeout commit adds only intentional tranche packets/receipts/closeouts/acceptances and updates AGENTS.md. docs/branding remains user-owned, untracked and excluded. No protected evidence, provider/model product runtime, real data/identity, write, deployment or release is touched.",
+    "git_refs_and_worktree": "Root is codex/ariadne-bernie-davida-parallel-seam at 74ee7f93c9b43a7d34644b58b2584817e7e9cc00. Local/origin master and handoff/current all remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging and a cached-name branding audit are required immediately before commit."
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Accepted workers and repairs are complete; no instance is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No fallback is selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Anthropic-hosted model is selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Acceptance-bearing fresh Gemini reviews are complete; no reviewer is active."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol verified exact closeout claims and the saved Pushover protocol against the tested branch state."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["All three native subagents are complete; none remains active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

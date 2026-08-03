@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The final root gate passes 170 combined runtime/boundary tests plus five AGENTS archive tests, Ruff and git diff --check. Both live PostgreSQL proofs, zero-residue checks and exact fresh independent review receipts are complete.",
+    "current_authority_allocation": "Yuri authorised the bounded descendants, necessary task-branch commits and nonprotected push. Sol alone may write the closeout/acceptance records. Protected refs, deployment and release remain closed.",
+    "git_refs_and_worktree": "Root is codex/ariadne-bernie-davida-parallel-seam at 74ee7f93c9b43a7d34644b58b2584817e7e9cc00. Local/origin master and handoff/current all remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging and a cached-name branding audit are required immediately before commit.",
+    "live_handover_current_baton": "AGENTS.md was read completely. Its pending update binds both accepted runtime descendants, the exact next two-lane work and the general non-PHI Pushover closeout/user-attention protocol.",
+    "protected_evidence_boundaries": "The pending closeout commit adds only intentional tranche packets/receipts/closeouts/acceptances and updates AGENTS.md. docs/branding remains user-owned, untracked and excluded. No protected evidence, provider/model product runtime, real data/identity, write, deployment or release is touched."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

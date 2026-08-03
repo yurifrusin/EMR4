@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "verifier_acceptance",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact clean candidate ef38162afbf89f96aacc9f255bdced9a15934bf3 passes Ruff, 77 tests and live_local_backend_postgres acceptance with complete cleanup and independent zero-residue counts.",
+    "current_authority_allocation": "GPT Sol retains acceptance/integration; exactly Gemini 3.6 Flash/high through a genuinely fresh Antigravity project is the independent serial veto reviewer. No fallback or concurrent Gemini review is authorised.",
+    "git_refs_and_worktree": "Fresh review worktree C:/Users/sarashera/EMR4-worktrees/native-diary-unmounted-application-session-adapter-gemini-review is clean on nonprotected branch codex/review-native-diary-unmounted-application-session-adapter at exact ef38162afbf89f96aacc9f255bdced9a15934bf3. Root remains 0d8b2985fdae2ca488ae90e2ae1a5842190b296b and all protected refs remain 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was read completely. The active Diary candidate is the bounded provider-free unmounted/default-off application-session practitioner runtime descendant.",
+    "protected_evidence_boundaries": "Review is read-only and excludes protected evidence, credentials, prior worker/reviewer output, docs/branding, real identity/data, providers, writes, deployment and release. The committed evidence is safe authored-synthetic acceptance evidence within the candidate diff."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "unknown",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. The active Davida descendant remains provider-free, unmounted, pure-read, authored-synthetic and non-authoritative, with rooms and waiting sources blocked.",
+    "current_authority_allocation": "GPT Sol alone performs deterministic acceptance and evidence commit. DeepSeek implementation and bounded SQL-capture repair completed; Gemini review remains gated until the clean evidence commit is admitted.",
+    "active_plan_and_acceptance": "Candidate 5678a4a953b9ec7bfed15b9804a38ac218a0959e passes Ruff, 93 focused tests and provider_free_practice_administration_pure_read_pass over disposable PostgreSQL with all substantive projection, isolation, context, role and integrity gates true. Independent residue counts are zero.",
+    "protected_evidence_boundaries": "The evidence contains safe counts, booleans, hashes and fixed claim labels only; sensitive-match count and independent sensitive-pattern scan are zero. It contains no DSN, role/database names, password, UUID, person/practice name or raw authority material. docs/branding remains excluded.",
+    "git_refs_and_worktree": "The Davida candidate worktree is on codex/davida-pure-read-context-desk at 5678a4a953b9ec7bfed15b9804a38ac218a0959e with exactly one untracked evidence file. Root remains at 0d8b2985fdae2ca488ae90e2ae1a5842190b296b; all four protected refs remain at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["Implementation and repair receipts are complete; no worker remains active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No fallback is selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Anthropic-hosted model is selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini 3.6 Flash/high remains reserved for fresh review after commit admission."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Root reproduced all deterministic checks, ran the PostgreSQL acceptance, inspected evidence and independently verified zero disposable databases, roles and task Python processes."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent is active."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

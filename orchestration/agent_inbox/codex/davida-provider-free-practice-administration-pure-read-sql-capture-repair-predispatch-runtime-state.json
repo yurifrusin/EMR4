@@ -1,0 +1,48 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "unknown",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. The active Davida descendant remains provider-free, unmounted, pure-read and authored-synthetic, with rooms and waiting sources blocked.",
+    "current_authority_allocation": "Yuri's standing bounded diagnose-repair-rerun authority applies. GPT Sol retains acceptance and integration; exact DeepSeek V4 Flash/high through Claude Code --bare may repair the two owned Davida harness files; Gemini 3.6 Flash/high remains gated.",
+    "active_plan_and_acceptance": "Candidate 90781e212ac04a7b58135c9c9d9a202c6682d3f9 passes Ruff and 91 focused tests. Its live acceptance passed every substantive data, security and cleanup gate but exposed an exact mixed-case SQL classifier defect: uppercase statements were searched with lowercase fragments.",
+    "protected_evidence_boundaries": "No service/context/contract/role/privacy authority may change. No patient/clinical/product-derived data, real identity, provider, route, GraphQL field, write, deployment, protected ref or docs/branding path may be touched. Failed generated evidence was removed after its cleanup result was recorded.",
+    "git_refs_and_worktree": "The Davida worker worktree is clean on codex/davida-pure-read-context-desk at exact candidate 90781e212ac04a7b58135c9c9d9a202c6682d3f9. Root remains at 0d8b2985fdae2ca488ae90e2ae1a5842190b296b; protected master, handoff/current, origin/master and origin/handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["The parent implementation slot is empty and one bounded Davida repair instance is selected."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No TTY fallback is authorised."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Claude Code is transport only; no Anthropic-hosted model is selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini 3.6 Flash/high remains reserved for fresh serial review after deterministic admission."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Root reproduced the failure, inspected all passed gates, verified complete cleanup, identified the exact mixed-case bug and restored a clean worktree."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent is active."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [
+    {
+      "agent_id": "deepseek_davida_sql_capture_repair",
+      "worktree": "C:/Users/sarashera/EMR4-worktrees/davida-pure-read-context-desk",
+      "branch": "codex/davida-pure-read-context-desk",
+      "clean": true,
+      "at_handoff_current": true,
+      "recorded_at": "2026-08-03T17:46:42+10:00"
+    }
+  ],
+  "assigned_agent_ids": ["deepseek_davida_sql_capture_repair"]
+}

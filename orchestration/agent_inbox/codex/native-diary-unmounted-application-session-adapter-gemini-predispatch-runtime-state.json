@@ -1,0 +1,48 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "unknown",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. The active Diary candidate is the bounded provider-free unmounted/default-off application-session practitioner runtime descendant.",
+    "current_authority_allocation": "GPT Sol retains acceptance/integration; exactly Gemini 3.6 Flash/high through a genuinely fresh Antigravity project is the independent serial veto reviewer. No fallback or concurrent Gemini review is authorised.",
+    "active_plan_and_acceptance": "Exact clean candidate ef38162afbf89f96aacc9f255bdced9a15934bf3 passes Ruff, 77 tests and live_local_backend_postgres acceptance with complete cleanup and independent zero-residue counts.",
+    "protected_evidence_boundaries": "Review is read-only and excludes protected evidence, credentials, prior worker/reviewer output, docs/branding, real identity/data, providers, writes, deployment and release. The committed evidence is safe authored-synthetic acceptance evidence within the candidate diff.",
+    "git_refs_and_worktree": "Fresh review worktree C:/Users/sarashera/EMR4-worktrees/native-diary-unmounted-application-session-adapter-gemini-review is clean on nonprotected branch codex/review-native-diary-unmounted-application-session-adapter at exact ef38162afbf89f96aacc9f255bdced9a15934bf3. Root remains 0d8b2985fdae2ca488ae90e2ae1a5842190b296b and all protected refs remain 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["All DeepSeek implementation/repair calls are complete; no worker is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No fallback is selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Anthropic-hosted model is selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["The repository-pinned fresh-project worktree-bound Antigravity runner is selected for exact gemini-3.6-flash-high/high."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Root froze the exact review packet, candidate, baseline, tests, boundaries and unchanged-worktree postcondition."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent is active."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [
+    {
+      "agent_id": "gemini_native_diary_runtime_reviewer",
+      "worktree": "C:/Users/sarashera/EMR4-worktrees/native-diary-unmounted-application-session-adapter-gemini-review",
+      "branch": "codex/review-native-diary-unmounted-application-session-adapter",
+      "clean": true,
+      "at_handoff_current": true,
+      "recorded_at": "2026-08-03T18:00:00+10:00"
+    }
+  ],
+  "assigned_agent_ids": ["gemini_native_diary_runtime_reviewer"]
+}

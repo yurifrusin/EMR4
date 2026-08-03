@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "verifier_acceptance",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The native-Diary default-off application-session runtime passed 77 focused tests, real loopback HTTP/PostgreSQL evidence and fresh accurate Gemini review 3. The Davida pure-read context desk passed 93 focused tests, PostgreSQL SELECT-only evidence and fresh Gemini review. Root then passed the 170-test combined gate, five handover regressions, Ruff and git diff --check.",
+    "current_authority_allocation": "Yuri's standing bounded two-lane authority permits Sol to accept these provider-free descendants and push only the nonprotected task branch. Protected refs, deployment and release remain closed.",
+    "git_refs_and_worktree": "Root is codex/ariadne-bernie-davida-parallel-seam at 74ee7f93c9b43a7d34644b58b2584817e7e9cc00 with only intentional closeout/receipt records plus AGENTS.md pending and docs/branding untracked. Local and origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Independent residue checks found zero owned disposable databases, roles, listeners or task Python processes.",
+    "live_handover_current_baton": "AGENTS.md was read completely and now records both bounded runtime descendants, their exact accepted artifacts, current result and the next two-lane implementation pair.",
+    "protected_evidence_boundaries": "No mounted product route or UI, provider/model execution, real identity, patient or clinical data, proposal/apply/write, deployment, production, release or protected action occurred. docs/branding remains user-owned, untracked and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

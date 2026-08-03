@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All verification is complete. Let me provide the final report.\n\n---\n\n## Five-source rehydration statement\n\nFreshly produced from a complete read of `AGENTS.md` (435 lines) and the exact accepted composition architecture, not a compacted/inherited summary:\n\n1. **`live_handover_current_baton`** \u2014 `AGENTS.md` \u00a73 Current Baton. Current result includes `provider_free_native_diary_application_session_practitioner_composition_architecture_pass` at Continuity 206 / Compass 187; \"Next implementation\" grants Yuri's standing authority for the Diary lane's provider-free unmounted deterministic composition adapter plus direct HTTP/PostgreSQL evidence.\n2. **`current_authority_allocation`** \u2014 `AGENTS.md` \u00a74 (DeepSeek V4 Flash/high via Claude Code `--bare` is the bounded implementation/test worker; GPT Sol is conductor/integrator; Gemini 3.6 Flash/high is the sole independent veto reviewer; DeepSeek Pro forbidden; worker holds no acceptance/integration/baton/protected-ref authority).\n3. **`active_plan_and_acceptance`** \u2014 the accepted composition plan/design/threat/contract/schema/closeout (Diary lane step 1) whose `implementation_handoff.next_step` is exactly `provider_free_unmounted_composition_contract_plus_direct_http_postgresql_evidence`, plus the shared application-session product-read bridge precedent.\n4. **`protected_evidence_boundaries`** \u2014 `AGENTS.md` \u00a75\u20136: holdouts v1\u2013v10 sealed; T3/provider lane paused; historical trove H15-gated/local-only; `docs/branding/` user-owned and excluded; no further Pages rebuild; protected `master`/`handoff/current` and protected integration remain closed.\n5. **`git_refs_and_worktree`** \u2014 worktree `C:\\Users\\sarashera\\EMR4-worktrees\\native-diary-unmounted-application-session-adapter`, branch `codex/native-diary-unmounted-application-session-adapter`, source HEAD `0d8b2985fdae2ca488ae90e2ae1a5842190b296b`; initially clean; protected refs aligned (`master` = `handoff/current` = `origin/master` = `origin/handoff/current` = `2e34bdad\u2026`).\n\n## Mandatory source pass\n\n- `AGENTS.md` read completely. EMR4 API Steward `SKILL.md` and `references/review-checklist.md` read in full.\n- Accepted native-Diary composition plan/design/threat/contract/schema/closeout read completely.\n- Shared runtime sources read within the permitted limits: `application_auth_product.py`, `application_auth_product_read.py`, `application_auth_runtime.py`, `application_auth_transport.py` (cookie/header names), `application_auth_role_runtime.py`, `application_auth_persistence.py`, `application_auth_database_role.py`, `application_auth_product_read_database_role.py`, `application_auth_operational_database.py`, `application_auth_product_read_operational.py`, `practitioner_directory_read.py`, `schema.py` (practitioner resolver), `models/tenancy.py`, the two precedent acceptance scripts, and `_start_server` from the grant-redemption harness.\n\n## Changed files (committed, exactly the five owned paths)\n\n- `app/graphql/native_diary_application_session_practitioner.py`\n- `docs/raisa-provider-free-native-diary-application-session-practitioner-runtime-plan.md`\n- `docs/security/raisa-provider-free-native-diary-application-session-practitioner-runtime-threat-model-delta.md`\n- `scripts/raisa_provider_free_native_diary_application_session_practitioner_runtime_acceptance.py`\n- `tests/test_raisa_provider_free_native_diary_application_session_practitioner_runtime.py`\n\nNo other file changed; `git status --porcelain` is clean; the evidence directory `orchestration/continuity/\u2026/raisa-provider-free-native-diary-application-session-practitioner-runtime/` does **not** exist (nothing created or committed).\n\n## Exact commit\n\n`b2b64eee537eb9e2be23045c9510a1ef5ade219f` \u2014 \"Implement default-off native-Diary application-session practitioner runtime adapter\" (5 files, +1806).\n\n## Static check results\n\n- **py_compile** \u2014 PASS on all three owned Python files.\n- **Ruff** (`ruff 0.15.22`, repo `E9,F401`) \u2014 All checks passed after removing two unused imports.\n- **AST/static checks** \u2014 PASS; the fixed query parses as a single named `query` operation with exact variables; the adapter's guard was exercised in-memory (via `fastapi.testclient`, no conftest/PostgreSQL) against 14 rejection classes (GET, wrong content-type, malformed JSON, extra JSON key, practiceId, 5 pagination drifts, 7 query drifts, alias, oversized body) \u2014 all 403 with `Cache-Control: no-store` and `bridge.open_calls == []` \u2014 and the one exact request reaches the bridge with 200/no-store.\n- **Owned test logic** \u2014 29 test invocations executed directly via importlib (not the pytest runner, no `conftest.py`/PostgreSQL touched): **ALL PASS**.\n- **`git diff --check`** and **`git diff --cached --check`** \u2014 clean.\n- **Staged/commit verification** \u2014 cached and committed name lists are exactly the five owned paths; zero `docs/branding/` paths; no `git add -A`/`.`; no fetch/merge/rebase/switch/push performed.\n- **pytest, PostgreSQL, and the acceptance script** \u2014 intentionally **not** run, per packet (root holds the serial database/test lease).\n\n## Unresolved blockers / observations\n\n- None. The evidence file is written only when root later runs the acceptance script to the exact `live-local-backend-postgres-evidence.json` path.\n\n**DECISION: pass**",
+  "usage": {
+    "input_tokens": 129606,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 15334912,
+    "output_tokens": 118871,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 11.299391000000004,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

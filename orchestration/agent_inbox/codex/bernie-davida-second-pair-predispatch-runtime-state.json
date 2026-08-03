@@ -1,0 +1,98 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "unknown",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. The accepted Diary architecture next step is a provider-free, unmounted deterministic application-session composition adapter; the accepted Davida architecture next step is a provider-free pure-read practice-administration projection/context desk.",
+    "current_authority_allocation": "Yuri granted standing bounded progression in both lanes. GPT Sol retains orchestration, acceptance and integration; DeepSeek V4 Flash/high through Claude Code --bare is the implementation worker; Gemini 3.6 Flash/high through a fresh Antigravity project is the serial independent verifier.",
+    "active_plan_and_acceptance": "The accepted architecture pair at root HEAD 0d8b2985fdae2ca488ae90e2ae1a5842190b296b freezes exact lane boundaries. The two bounded packets assign disjoint implementation artifacts; shared auth, product-read, practitioner, GraphQL, app main, models, migrations, API Spine, Diary UI and branding remain read-only.",
+    "protected_evidence_boundaries": "Protected evidence, patient/clinical/product-derived data, real identity, providers, autonomous or model-to-database writes, deployments, releases, protected refs and the intentional untracked docs/branding directory remain closed and untouched. Each worker has explicit-path commit authority only for its listed files.",
+    "git_refs_and_worktree": "Root task branch is codex/ariadne-bernie-davida-parallel-seam at 0d8b2985fdae2ca488ae90e2ae1a5842190b296b. Both isolated worker worktrees are clean on their exact named branches at that authorized task source. master, handoff/current, origin/master and origin/handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The at_handoff_current receipt flag records exact authorized task-source alignment, not equality with the protected handoff/current ref."
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The repository-pinned DeepSeek-through-Claude-Code runner and API key are available for two concurrent bounded implementation workers within the configured maximum of three.",
+        "Each worker is confined to a clean disjoint worktree, exact owned artifacts, explicit-path staging and no push authority."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No TTY fallback is authorised or selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Anthropic-hosted Claude model is selected; Claude Code is transport only."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The exact Gemini 3.6 Flash/high policy is reserved for serial fresh-project independent review after deterministic admission."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Root Sol performed the five-source rehydration, verified protected refs and both clean worker worktrees, and authored exact bounded packets."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["Three completed read-only Sol audits informed the Diary boundary, Davida boundary and parallel control schedule; no native subagent remains active."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "agent_id": "deepseek_native_diary_adapter",
+      "worktree": "C:/Users/sarashera/EMR4-worktrees/native-diary-unmounted-application-session-adapter",
+      "branch": "codex/native-diary-unmounted-application-session-adapter",
+      "clean": true,
+      "at_handoff_current": true,
+      "recorded_at": "2026-08-03T17:11:13+10:00"
+    },
+    {
+      "agent_id": "deepseek_davida_context_desk",
+      "worktree": "C:/Users/sarashera/EMR4-worktrees/davida-pure-read-context-desk",
+      "branch": "codex/davida-pure-read-context-desk",
+      "clean": true,
+      "at_handoff_current": true,
+      "recorded_at": "2026-08-03T17:11:13+10:00"
+    }
+  ],
+  "assigned_agent_ids": [
+    "deepseek_native_diary_adapter",
+    "deepseek_davida_context_desk"
+  ]
+}

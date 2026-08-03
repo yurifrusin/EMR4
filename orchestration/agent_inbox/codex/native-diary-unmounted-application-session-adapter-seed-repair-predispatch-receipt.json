@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate b2b64eee537eb9e2be23045c9510a1ef5ade219f passed Ruff and 76 tests. The exact repair is bounded to two 21-character authored-synthetic seed identifiers that exceed the model's String(20) columns, plus a regression test for actual column limits.",
+    "current_authority_allocation": "Yuri's standing bounded diagnose-repair-rerun authority applies. GPT Sol retains acceptance and integration; exact DeepSeek V4 Flash/high through Claude Code --bare may repair the two owned Diary harness files; Gemini 3.6 Flash/high remains reserved until deterministic admission passes.",
+    "git_refs_and_worktree": "The Diary worker worktree is clean on codex/native-diary-unmounted-application-session-adapter at exact candidate b2b64eee537eb9e2be23045c9510a1ef5ade219f. Root remains at 0d8b2985fdae2ca488ae90e2ae1a5842190b296b; protected master, handoff/current, origin/master and origin/handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was read completely. The active Diary runtime descendant remains provider-free, unmounted/default-off and read-only; its first live acceptance run failed closed at authored-synthetic seed admission with complete cleanup.",
+    "protected_evidence_boundaries": "No runtime contract, shared module, evidence claim, patient/clinical/product-derived data, real identity, provider product path, write authority, deployment, protected ref or docs/branding path may change. The failed generated evidence was removed after its complete-cleanup result was recorded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
