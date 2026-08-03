@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "integration",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted Bernie/Davida seam and shared boundary, native-Diary parent runtime plan/closeout and current reconciliation plan, Davida parent pure-read plan/closeout and current advisory plan, plus the API Spine ADR/programme and steward checklist were reread. The two candidate commits are already replayed at root HEAD and still claim only unmounted browserless client reconciliation and unoccupied deterministic advisory proofreading.",
+    "current_authority_allocation": "GPT Sol remains conductor, recovery and acceptance owner and task-branch integrator. DeepSeek V4 Flash/high remains the preferred bounded worker and Gemini 3.6 Flash/high the serial fresh independent veto; the exact third-pair timeout, recovery and review substitutions are already preserved.",
+    "git_refs_and_worktree": "Root task branch codex/ariadne-bernie-davida-parallel-seam is at 9cf94fcac1d3b68cadc5ae3b30f3087c19aa254e after replaying Diary commit e883aa0b5ce1ae73c3fd0412a574ed41e544a539 and Davida commit 9cf94fcac1d3b68cadc5ae3b30f3087c19aa254e. Local/origin master and handoff/current remain aligned at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty; root residue is the authorised AGENTS.md edit, explicit tranche receipts/packets and user-owned untracked docs/branding. No evidence-reproduction temp file remains.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after this compaction in four bounded numbered chunks. Current result remains the accepted native-Diary unmounted application-session runtime and Davida pure-read context desk; Next implementation names the now-integrated unmounted reconciliation and unoccupied advisory-proofreader descendants.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 were restored. Protected holdouts, historical PHI, provider/model execution, memory/RAG, real identity, patient/clinical/document data, arbitrary GraphQL, proposal/apply/write and command authority, cloud/IAM, deployment, production, release, protected refs/evidence and native-alert disposition remain closed. User-owned docs/branding remains untracked, untouched and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

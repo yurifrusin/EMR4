@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "failed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.6-flash-high",
+  "requested_model": "gemini-3.6-flash-high",
+  "reasoning_effort": "high",
+  "decision": "revision_required",
+  "failure_class": "duplicate_terminal_decision",
+  "observed_terminal_decision_count": 2,
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\native-diary-stale-response-reconciliation-gemini-review-2",
+  "branch": "codex/review-native-diary-stale-response-reconciliation-2",
+  "head_before": "903bedaba7dda4f09c0ace8514ff65d3f8705c6f",
+  "head_after": "903bedaba7dda4f09c0ace8514ff65d3f8705c6f",
+  "dirty_after": false,
+  "review_receipt_returned": false,
+  "accepted": false,
+  "same_lane_gemini_correction_exhausted": true,
+  "next_independent_resource": "fresh_gpt_sol_coding_reviewer_xhigh",
+  "candidate_source_changed": false
+}

@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "integration",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "unknown",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "The post-compaction AGENTS.md source pass remains current. The baton names exactly the two third-pair descendants and root-only protected integration posture.",
+    "current_authority_allocation": "GPT Sol owns recovery, acceptance and task-branch integration. Diary received an admissible independent Extra-High fresh Sol coding review after both Gemini envelope attempts failed and were preserved. Davida received an exact corrected Gemini 3.6 Flash/high pass after its first inaccurate narrative was rejected. No external reviewer has acceptance or integration authority.",
+    "active_plan_and_acceptance": "Diary candidate 903bedaba7dda4f09c0ace8514ff65d3f8705c6f is clean and independently passed with 113 tests, Ruff, Node syntax and diff checks. Davida candidate 0238e675e791ba53527c99297b00e61e673a3577 is clean and independently passed with 129 tests, Ruff, 143 contract-leaf mutations and exact reason precedence. Both recovery leases and negative review evidence are preserved.",
+    "protected_evidence_boundaries": "No provider/model product execution, memory/RAG, real identity, patient/clinical/document data, arbitrary GraphQL, proposal/apply/write or command authority, cloud/IAM, deployment, production, release, protected ref/evidence or native-alert disposition is opened. docs/branding remains user-owned, untouched, untested and excluded.",
+    "git_refs_and_worktree": "Root task branch remains at b957ed7623310206cf5f4970e1eb91241c73ef6f before replay. Protected local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Both source candidates and their review worktrees are exact and tracked-clean; root has no staged path."
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "unreachable",
+      "evidence": ["Timed-out worker failure remains preserved; recovery provenance is Sol-owned."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No fallback selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Anthropic-hosted model selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Davida corrected review returned one exact pass; Diary Gemini failures remain negative evidence and no retry remains."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol verified reviewer accuracy and owns serial replay and combined acceptance."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh Extra-High Diary reviewer returned pass and has completed; no subagent retains write or integration ownership."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

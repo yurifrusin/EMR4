@@ -283,7 +283,10 @@ function main() {
       'mounted_runtime',
       'usability',
     ],
-    client_reconciler_sha256: crypto.createHash('sha256').update(source).digest('hex'),
+    client_reconciler_sha256: crypto
+      .createHash('sha256')
+      .update(source.toString('utf8').replace(/\r\n/g, '\n'), 'utf8')
+      .digest('hex'),
   };
   const serialized = `${JSON.stringify(evidence, null, 2)}\n`;
   for (const forbidden of ['Avery', 'Synthetic Clinic', 'practitioner-authored', 'location-authored']) {

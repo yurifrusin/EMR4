@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import ast
+import hashlib
 import json
 import re
 import subprocess
@@ -68,6 +69,16 @@ def test_acceptance_harness_requires_one_explicit_output() -> None:
     )
     assert missing.returncode != 0
     assert "explicit_output_path_required" in missing.stderr
+
+
+def test_evidence_source_hash_is_checkout_line_ending_independent(
+    tmp_path: Path,
+) -> None:
+    evidence = _run_acceptance(tmp_path / "canonical-evidence.json")
+    canonical_source = RECONCILER.read_bytes().replace(b"\r\n", b"\n")
+    assert evidence["client_reconciler_sha256"] == hashlib.sha256(
+        canonical_source
+    ).hexdigest()
 
 
 def test_reconciler_exports_exact_closed_rejection_reasons() -> None:

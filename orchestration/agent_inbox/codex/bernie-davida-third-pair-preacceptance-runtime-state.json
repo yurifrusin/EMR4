@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "third_pair_final_combined_acceptance",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md has been refreshed with both exact third-pair results, acceptance indexes, bounded claims, preserved failure/recovery history and the next two frozen lane steps.",
+    "current_authority_allocation": "Sol owns final acceptance and task-branch integration. The accepted Diary independent decision is the genuinely different Extra-High Sol coding review after two preserved Gemini envelope failures. Davida has one corrected fresh Gemini 3.6 Flash/high pass after the first inaccurate narrative was rejected.",
+    "active_plan_and_acceptance": "Both frozen plans, closeouts and Sol acceptances match the implemented paths. Diary's 14-case authored-synthetic client-state evidence and Davida's 57-case unoccupied advisory evidence reproduce byte-for-byte after two root-owned cross-platform newline repairs. The combined parent/seam/API-Spine gate passed 198 tests serially; the handover archive passed five tests; Ruff, Node syntax and diff checks passed.",
+    "protected_evidence_boundaries": "No mounted route or UI result, live/browser evidence, provider/model execution, memory/RAG, real identity, patient/clinical/document data, proposal/apply/write or command authority, cloud/IAM, deployment, production, release, protected refs/evidence or alert disposition is claimed. docs/branding remains user-owned, untracked, untouched and excluded.",
+    "git_refs_and_worktree": "Root task branch is at 9cf94fcac1d3b68cadc5ae3b30f3087c19aa254e before the closeout commit. Protected local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty; the only user-owned residue is docs/branding and no generated temp evidence remains."
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "unreachable",
+      "evidence": ["Both timeouts are preserved and their exact processes are absent; Sol recovery is complete."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No fallback selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Anthropic-hosted model selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Davida corrected review passed exactly; Diary's two rejected envelopes remain negative evidence and no same-lane retry followed."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol reproduced both evidence artifacts, the final deterministic gate and the exact claims before acceptance."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["The bounded Diary independent reviewer completed with pass and no retained authority; no subagent is active on integration."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

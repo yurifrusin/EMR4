@@ -610,7 +610,8 @@ def main() -> int:
             raise AcceptanceFailure("sensitive_value_in_evidence")
     output = args.output.resolve()
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(serialized, encoding="utf-8")
+    with output.open("w", encoding="utf-8", newline="\n") as stream:
+        stream.write(serialized)
     print(json.dumps(evidence, sort_keys=True))
     return 0
 

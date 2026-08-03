@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.failed_worker_dispatch.v1",
+  "recorded_at": "2026-08-03T19:39:01+10:00",
+  "source_head": "b957ed7623310206cf5f4970e1eb91241c73ef6f",
+  "transport": "deepseek_v4_flash_high_via_claude_code_bare",
+  "timeout_milliseconds": 604045,
+  "decision": "revision_required",
+  "failure_class": "transport_timeout_missing_nontransferable_worker_closeout",
+  "lanes": [
+    {
+      "lane": "native_diary_stale_response_reconciliation",
+      "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\native-diary-stale-response-reconciliation",
+      "branch": "codex/native-diary-stale-response-reconciliation",
+      "worker_receipt": "orchestration/agent_inbox/deepseek/native-diary-stale-response-reconciliation-worker-receipt.json",
+      "worker_receipt_present": false,
+      "commit_present": false,
+      "untrusted_partial_output_present": true
+    },
+    {
+      "lane": "davida_advisory_proofreader_envelope",
+      "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\davida-advisory-proofreader-envelope",
+      "branch": "codex/davida-advisory-proofreader-envelope",
+      "worker_receipt": "orchestration/agent_inbox/deepseek/davida-advisory-proofreader-envelope-worker-receipt.json",
+      "worker_receipt_present": false,
+      "commit_present": false,
+      "untrusted_partial_output_present": true
+    }
+  ],
+  "containment": {
+    "validated_process_ids": [2764, 33364, 35692, 51460, 54040, 67532],
+    "command_lines_bound_to_exact_task_packets_and_worktrees": true,
+    "all_task_processes_absent_after_cleanup": true,
+    "unrelated_processes_terminated": false
+  },
+  "provenance": {
+    "worker_closeout_transferable": false,
+    "partial_source_trusted": false,
+    "recovery_authority": "openai-primary-orchestrator",
+    "recovery_lease": "docs/ariadne-orchestrator-recovery-lease.md",
+    "same_lane_redispatch_selected": false
+  }
+}

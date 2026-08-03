@@ -1,0 +1,98 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "unknown",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. Current result accepts the native-Diary unmounted application-session runtime and Davida pure-read context desk. Next implementation names the exact stale-response reconciliation and two-operation advisory-proofreader descendants now dispatched.",
+    "current_authority_allocation": "Yuri's standing two-lane authority and continuous-closeout clarification apply. GPT Sol retains planning, acceptance and integration. Two DeepSeek V4 Flash/high Claude-Code-bare workers receive disjoint bounded implementation packets; Gemini 3.6 Flash/high remains serialized until deterministic gates pass.",
+    "active_plan_and_acceptance": "Three independent read-only Sol audits froze disjoint implementations from b957ed7623310206cf5f4970e1eb91241c73ef6f. Diary owns only a browserless task-local latest-read-wins JavaScript reconciler and harness. Davida owns only strict selector schemas and a provider-free unoccupied deterministic advisory proofreader over the accepted context. API Spine remains read-only/context-only with no command surface.",
+    "protected_evidence_boundaries": "No holdout, historical PHI, provider/model call, real identity/data, patient/clinical/document data, arbitrary GraphQL, proposal/apply/write, memory/RAG, DB/network in Davida, browser/mount in Diary, cloud/IAM, deployment, production, release, protected ref/evidence or Dependabot disposition is authorised. docs/branding remains user-owned and excluded.",
+    "git_refs_and_worktree": "Root and origin task branch are aligned at b957ed7623310206cf5f4970e1eb91241c73ef6f; protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Both exact worker worktrees are clean on their assigned branches at b957ed7623310206cf5f4970e1eb91241c73ef6f. Root has only its intentional AGENTS protocol edit, current receipts/packets and untracked docs/branding. The at_handoff_current receipt flag records exact authorised task-source alignment, not equality with the protected handoff/current ref."
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The repository runner and configured DeepSeek API transport are available for two concurrent Flash/high workers within the maximum of three.",
+        "Each packet binds one clean worktree, exact source, disjoint owned paths, static-only worker checks, explicit-path commit and no push authority."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No TTY fallback is authorised or selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Claude Code is transport only; no Anthropic-hosted Claude model is selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["One exact Gemini 3.6 Flash/high slot is reserved for serialized fresh-project reviews after each deterministic gate."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Root Sol completed the five-source/API-Spine pass, inspected both existing implementations and authored the exact packets."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["Diary, Davida and cross-lane read-only audits completed and made no repository changes."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "agent_id": "deepseek_native_diary_reconciliation",
+      "worktree": "C:/Users/sarashera/EMR4-worktrees/native-diary-stale-response-reconciliation",
+      "branch": "codex/native-diary-stale-response-reconciliation",
+      "clean": true,
+      "at_handoff_current": true,
+      "recorded_at": "2026-08-03T19:23:32+10:00"
+    },
+    {
+      "agent_id": "deepseek_davida_advisory_proofreader",
+      "worktree": "C:/Users/sarashera/EMR4-worktrees/davida-advisory-proofreader-envelope",
+      "branch": "codex/davida-advisory-proofreader-envelope",
+      "clean": true,
+      "at_handoff_current": true,
+      "recorded_at": "2026-08-03T19:23:32+10:00"
+    }
+  ],
+  "assigned_agent_ids": [
+    "deepseek_native_diary_reconciliation",
+    "deepseek_davida_advisory_proofreader"
+  ]
+}

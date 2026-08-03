@@ -273,6 +273,7 @@ def test_acceptance_script_passes_and_persists_only_sanitized_evidence(tmp_path:
     assert evidence["case_count"] == evidence["passed_case_count"] == 57
     assert evidence["failed_case_count"] == 0
     assert evidence["verdict_counts"] == {"released": 5, "rejected": 49}
+    assert b"\r\n" not in output.read_bytes()
     serialized = output.read_text(encoding="utf-8")
     for forbidden in (
         "Avery",

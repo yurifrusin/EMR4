@@ -1,0 +1,34 @@
+{
+  "schema_version": "ariadne.orchestrator_recovery_lease.v1",
+  "lane": "davida_advisory_proofreader_envelope",
+  "source_head": "b957ed7623310206cf5f4970e1eb91241c73ef6f",
+  "recovered_candidate_head": "0238e675e791ba53527c99297b00e61e673a3577",
+  "failed_worker_receipt": "orchestration/agent_inbox/deepseek/bernie-davida-third-pair-timeout-receipt.json",
+  "worker_closeout_adopted": false,
+  "untrusted_worker_source_adopted": [
+    "app/schemas/practice_administration_advisory.py",
+    "app/services/practice/practice_administration_advisory_proofreader.py",
+    "orchestration/continuity/davida-provider-free-practice-administration-advisory/advisory-contract.json",
+    "orchestration/continuity/davida-provider-free-practice-administration-advisory/advisory-contract.schema.json"
+  ],
+  "sol_amendments": [
+    "froze every new Pydantic envelope and tightened rejected context-revision shape",
+    "rejected type-coercible candidate and context representations by canonical JSON digest equality",
+    "revalidated exact two-minute lifetime, row counts, global opaque-reference uniqueness and default-location resolution",
+    "bound grounding digest to context revision, exact source paths and released payload",
+    "authored the plan, design, threat delta, 57-case provider-free acceptance harness, adversarial regression suite and sanitized evidence"
+  ],
+  "deterministic_checks": {
+    "direct_unoccupied_cases": 57,
+    "released_cases": 5,
+    "rejected_cases": 49,
+    "serial_focused_parent_and_api_spine_tests": 129,
+    "contract_leaf_mutations_rejected": 143,
+    "ruff": "passed",
+    "diff_check": "passed",
+    "worktree_clean_after_commit": true
+  },
+  "independent_review_required": true,
+  "same_lane_redispatch": false,
+  "recovery_owner": "openai-primary-orchestrator"
+}

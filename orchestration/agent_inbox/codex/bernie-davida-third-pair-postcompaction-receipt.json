@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "worker_recovery",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted Bernie/Davida seam, native-Diary composition/runtime plans, designs and closeouts, Davida boundary/pure-read plans, designs and closeouts, both frozen third-pair worker packets, the API Spine ADR/programme/GraphQL/manifests/tests, the EMR4 API Steward skill/checklist and the Ariadne recovery lease were reread. Diary remains limited to an unmounted browserless trusted-client generation/revision reconciliation gate. Davida remains limited to an unoccupied provider-free deterministic proofreader for exactly the two advisory operation codes.",
+    "current_authority_allocation": "GPT Sol is conductor, recovery owner and integrator; DeepSeek V4 Flash/high through Claude Code --bare remains the preferred bounded worker; Gemini 3.6 Flash/high through a fresh Antigravity project remains the serial independent veto reviewer. The timed-out DeepSeek processes have no continuing authority and were terminated after exact command-line validation.",
+    "git_refs_and_worktree": "Root task branch codex/ariadne-bernie-davida-parallel-seam remains at b957ed7623310206cf5f4970e1eb91241c73ef6f. Local/origin master and handoff/current remain aligned at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. Root has only the authorised AGENTS.md continuity edit, explicit third-pair receipts/packets and user-owned docs/branding residue. Both disposable workers remain based at b957ed7 with only untrusted untracked partial output and no worker commit or receipt.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction in five bounded numbered chunks. The Current result remains the accepted unmounted native-Diary application-session runtime and Davida pure-read context desk; Next implementation names the two bounded reconciliation and advisory-proofreader descendants now under recovery.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 were restored. Protected holdouts, historical PHI, providers/models, memory/RAG, real identity, patient/clinical/document data, arbitrary GraphQL, proposal/apply/write and command authority, cloud/IAM, deployment, production, release, protected refs/evidence and native-alert disposition remain closed. User-owned docs/branding remains untracked, untouched and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

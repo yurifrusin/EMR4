@@ -1,0 +1,28 @@
+{
+  "schema_version": "ariadne.orchestrator_recovery_lease.v1",
+  "lane": "native_diary_stale_response_reconciliation",
+  "source_head": "b957ed7623310206cf5f4970e1eb91241c73ef6f",
+  "recovered_candidate_head": "903bedaba7dda4f09c0ace8514ff65d3f8705c6f",
+  "failed_worker_receipt": "orchestration/agent_inbox/deepseek/bernie-davida-third-pair-timeout-receipt.json",
+  "worker_closeout_adopted": false,
+  "untrusted_worker_source_adopted": [
+    "orchestration/continuity/raisa-provider-free-native-diary-application-session-practitioner-reconciliation/client-reconciler.mjs"
+  ],
+  "sol_amendments": [
+    "aligned nullable roleLabel with the accepted GraphQL projection",
+    "required active=true for the fixed active-only result",
+    "replaced strong ticket retention with instance-bound WeakMap identity",
+    "bounded outstanding-ticket accounting while preserving exact stale and replay reasons",
+    "authored the plan, threat delta, 14-case Node acceptance harness, Python regression wrapper and sanitized evidence"
+  ],
+  "deterministic_checks": {
+    "direct_node_cases": 14,
+    "serial_focused_parent_and_api_spine_tests": 113,
+    "ruff": "passed",
+    "diff_check": "passed",
+    "worktree_clean_after_commit": true
+  },
+  "independent_review_required": true,
+  "same_lane_redispatch": false,
+  "recovery_owner": "openai-primary-orchestrator"
+}

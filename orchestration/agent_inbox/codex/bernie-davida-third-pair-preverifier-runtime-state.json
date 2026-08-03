@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "unknown",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "Post-compaction AGENTS.md was read completely. Current result and Next implementation still authorize exactly the two bounded third-pair descendants, and the continuous-closeout rule does not broaden their authority.",
+    "current_authority_allocation": "GPT Sol owns recovery and acceptance. The timed-out DeepSeek worker closeouts remain non-transferable. Gemini 3.6 Flash/high through two serial genuinely fresh Antigravity projects receives independent veto-review authority only, with no implementation, integration or protected-ref authority.",
+    "active_plan_and_acceptance": "The accepted seam and parent Diary/Davida plans/designs/contracts/closeouts, both frozen third-pair packets, API Spine sources and the recovery lease were read. Sol recovered two exact task candidates: Diary 903bedaba7dda4f09c0ace8514ff65d3f8705c6f passed 14 direct cases and 113 serial tests; Davida 0238e675e791ba53527c99297b00e61e673a3577 passed 57 direct cases, 143 contract-leaf mutations and 129 serial tests. Both are clean exact commits in fresh review worktrees.",
+    "protected_evidence_boundaries": "Holdouts, historical PHI, providers/models, memory/RAG, real identity, patient/clinical/document data, arbitrary GraphQL, proposal/apply/write and command authority, cloud/IAM, deployment, production, release, protected refs/evidence and native-alert disposition remain closed. docs/branding remains user-owned, untouched and outside every packet.",
+    "git_refs_and_worktree": "Root task branch remains at b957ed7623310206cf5f4970e1eb91241c73ef6f with only intentional root continuity/recovery artifacts and docs/branding residue. Protected local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Review worktrees are tracked-clean at exact candidate commits 903bedab and 0238e675."
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "unreachable",
+      "evidence": ["The timed-out dispatch is preserved; no same-lane redispatch is selected."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No fallback is selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Anthropic-hosted model is selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Two exact clean review worktrees and packets are ready; reviews will run serially with exact gemini-3.6-flash-high and no fallback."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol reproduced all deterministic gates and retains sole acceptance authority."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent owns acceptance or the external review decisions."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

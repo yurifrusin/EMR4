@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "third_pair_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "The refreshed AGENTS.md names both exact pass results, their accepted artifact indexes, bounded claims and the next default-off Diary composition plus Davida default-location dry-run proposal steps.",
+    "current_authority_allocation": "Sol owns this non-protected task-branch commit. External workers and reviewers have no integration, baton or protected-ref authority.",
+    "active_plan_and_acceptance": "Both evidence artifacts reproduce byte-for-byte. Combined acceptance passed 198 serial tests, handover validation passed five tests, and Ruff, Node syntax and diff/path checks passed. Closeouts and Sol acceptances record timeout, recovery, reviewer and newline-portability history exactly.",
+    "protected_evidence_boundaries": "The commit will exclude user-owned docs/branding and every protected evidence, provider/model, real identity/data, command/write, deployment, production, release and protected-ref action.",
+    "git_refs_and_worktree": "The root task branch is at 9cf94fcac1d3b68cadc5ae3b30f3087c19aa254e before the explicit-path closeout commit. Protected local/origin master and handoff/current remain at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty before explicit staging and no temp evidence remains."
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "unreachable",
+      "evidence": ["Timed-out implementation attempts remain preserved; no worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No fallback selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Anthropic-hosted model selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Accepted and rejected reviewer artifacts are finalized and immutable for this closeout."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed final acceptance and is eligible for an explicit-path task-branch commit."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No subagent retains write, acceptance or integration authority."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

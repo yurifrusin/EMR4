@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Three independent read-only Sol audits froze disjoint implementations from b957ed7623310206cf5f4970e1eb91241c73ef6f. Diary owns only a browserless task-local latest-read-wins JavaScript reconciler and harness. Davida owns only strict selector schemas and a provider-free unoccupied deterministic advisory proofreader over the accepted context. API Spine remains read-only/context-only with no command surface.",
+    "current_authority_allocation": "Yuri's standing two-lane authority and continuous-closeout clarification apply. GPT Sol retains planning, acceptance and integration. Two DeepSeek V4 Flash/high Claude-Code-bare workers receive disjoint bounded implementation packets; Gemini 3.6 Flash/high remains serialized until deterministic gates pass.",
+    "git_refs_and_worktree": "Root and origin task branch are aligned at b957ed7623310206cf5f4970e1eb91241c73ef6f; protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Both exact worker worktrees are clean on their assigned branches at b957ed7623310206cf5f4970e1eb91241c73ef6f. Root has only its intentional AGENTS protocol edit, current receipts/packets and untracked docs/branding. The at_handoff_current receipt flag records exact authorised task-source alignment, not equality with the protected handoff/current ref.",
+    "live_handover_current_baton": "AGENTS.md was read completely. Current result accepts the native-Diary unmounted application-session runtime and Davida pure-read context desk. Next implementation names the exact stale-response reconciliation and two-operation advisory-proofreader descendants now dispatched.",
+    "protected_evidence_boundaries": "No holdout, historical PHI, provider/model call, real identity/data, patient/clinical/document data, arbitrary GraphQL, proposal/apply/write, memory/RAG, DB/network in Davida, browser/mount in Diary, cloud/IAM, deployment, production, release, protected ref/evidence or Dependabot disposition is authorised. docs/branding remains user-owned and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
