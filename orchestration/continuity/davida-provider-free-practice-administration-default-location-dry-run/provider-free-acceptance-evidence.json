@@ -1,0 +1,28 @@
+{
+  "case_count": 60,
+  "closed_rejection_reason_count": 14,
+  "data_class": "authored_synthetic",
+  "evidence_label": "provider_free_unoccupied_default_location_dry_run",
+  "failed_case_count": 0,
+  "hashes": {
+    "contract_sha256": "c70522df8422132342e0645049ec3079072dac87fe0ec9253e78363c5248e272",
+    "schema_sha256": "3a2ab97b33c9af6acfa7a895e5a993aa9dab5f4179100f88ed8d939760e36d19",
+    "service_sha256": "d0e8c0cfb6587c23bea92cf997661cc4d5c91b33a4a2734cf44f36574e165c77"
+  },
+  "passed_case_count": 60,
+  "properties": {
+    "clock_read": false,
+    "confirmation_apply_write_authority": false,
+    "database_or_network_used": false,
+    "human_confirmation_required": true,
+    "partial_proposal_on_rejection": false,
+    "proposal_candidate_non_authoritative": true,
+    "provider_or_model_executed": false
+  },
+  "result": "provider_free_practice_administration_default_location_dry_run_pass",
+  "schema_version": "emr4.davida_default_location_dry_run_evidence.v1",
+  "verdict_counts": {
+    "rejected": 54,
+    "released": 2
+  }
+}
