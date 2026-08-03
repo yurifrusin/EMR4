@@ -1,0 +1,642 @@
+openapi: 3.1.0
+info:
+  title: EMR4 Practice Administration Default-Location Command Boundary
+  version: 0.1.0
+  summary: Documentation-only proposal-to-confirm boundary for one future administrative change.
+  description: >
+    Architecture-only, provider-free and non-executing. This artifact freezes a
+    future backend-owned proposal and human-confirmation contract. It adds no
+    route, application mount, migration, database access, provider call or write
+    authority. Davida may contribute a non-authoritative proposal only and can
+    never confirm or apply the change.
+servers:
+  - url: https://api.example.invalid/api/v1
+    description: Documentation placeholder; no live endpoint exists.
+tags:
+  - name: PracticeAdministrationDefaultLocation
+    description: Future single-purpose practitioner default-location proposal and confirmation.
+
+x-emr4-boundary:
+  classification: architecture_only_backend_owned_default_location_command_boundary
+  status: documentation_only_no_runtime_route
+  provider_free: true
+  data_class: authored_synthetic_contract_only
+  graphql_mutation: false
+  davida_can_propose: true
+  davida_can_confirm: false
+  davida_can_apply: false
+  actual_command_implementation_authorized: false
+  actual_write_authority: false
+  decision_owner_for_implementation: Yuri
+x-emr4-authorization-order:
+  - authenticate_application_session
+  - authorize_practice_action_before_resource_disclosure
+  - load_exact_practice_scoped_resource
+  - reauthorize_exact_action_resource_inside_transaction_immediately_before_write
+x-emr4-session-binding:
+  authority_source: authenticated_application_session
+  request_body_role: non_authoritative_exact_match_assertion
+  practice_actor_and_role_derived_from_session: true
+  mismatch: reject_before_resource_disclosure
+x-emr4-confirmation-evidence:
+  request_shape: opaque_backend_issued_server_held_one_use_reference_only
+  structured_client_claims_can_mint_evidence: false
+  unique_consumption_guard: future_confirmation_transaction
+x-emr4-confirmation-transaction:
+  atomic_members:
+    - idempotency_claim
+    - single_use_confirmation_evidence_nonce_claim
+    - practitioner_default_location_change
+    - aggregate_version_increment
+    - immutable_audit_append
+    - transactional_outbox_append
+    - idempotency_receipt_completion
+  rollback_on_any_failure: true
+  publication_after_commit_only: true
+  event_is_truth: false
+  event_is_command_authority: false
+
+paths:
+  /practice-administration/practitioners/default-location/proposals:
+    post:
+      tags: [PracticeAdministrationDefaultLocation]
+      operationId: proposePractitionerDefaultLocationChange
+      summary: Recompute one non-mutating backend-owned default-location proposal.
+      description: >
+        Authenticates and authorizes a human practice manager or owner before
+        resource disclosure, resolves exact current practice state, verifies the
+        accepted dry-run binding and returns a deterministic expiring proposal.
+        It does not reserve, confirm, audit a mutation or change database truth.
+      x-emr4-effect: none
+      x-emr4-proposal-idempotency:
+        header_required: true
+        validation: syntactic_nonblank_and_bounded
+        replay_model: deterministic_re_evaluation
+        durable_proposal_ledger: false
+        proposal_reference: backend_issued_signed_self_contained_no_proposal_store
+        command_claim: false
+      security:
+        - ApplicationSession: []
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/CorrelationId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DefaultLocationProposalRequest"
+      responses:
+        "200":
+          description: Deterministic proposal prepared without changing state.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultLocationProposalEnvelope"
+        "401":
+          $ref: "#/components/responses/Unauthenticated"
+        "403":
+          $ref: "#/components/responses/NotAuthorized"
+        "409":
+          $ref: "#/components/responses/ProposalConflict"
+        "422":
+          $ref: "#/components/responses/InvalidEnvelope"
+
+  /practice-administration/practitioners/default-location/proposals/{proposal_id}/confirm:
+    post:
+      tags: [PracticeAdministrationDefaultLocation]
+      operationId: confirmPractitionerDefaultLocationChange
+      summary: Confirm one backend-owned proposal as an authorized human.
+      description: >
+        Future single-purpose command. The backend performs fresh authorization,
+        locks and revalidates current truth, then would commit exactly one
+        aggregate change, audit event, outbox event and durable idempotency
+        receipt atomically. This documentation artifact does not implement that
+        command or grant write authority.
+      x-emr4-effect: future_single_practitioner_default_location_mutation
+      x-emr4-implementation-status: closed_material_yuri_gate
+      x-emr4-durable-idempotency:
+        scope_fields: [practice_ref, operation, authenticated_actor_ref, idempotency_key]
+        fingerprint_fields: [canonical_request_hash, proposal_hash]
+        same_key_same_fingerprint: return_stored_bounded_receipt_without_new_effect
+        same_key_different_fingerprint: idempotency_conflict
+        different_key_consumed_confirmation_evidence: confirmation_replay_rejected
+        in_progress: idempotency_in_progress
+      x-emr4-role-policy: proposed_future_contract_not_current_permission_matrix_runtime_grant
+      security:
+        - ApplicationSession: []
+      parameters:
+        - $ref: "#/components/parameters/ProposalId"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/CorrelationId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DefaultLocationConfirmationCommand"
+      responses:
+        "200":
+          description: First committed result or the exact stored bounded receipt on an identical retry.
+          headers:
+            Idempotent-Replayed:
+              description: Transport marker only; the stored domain receipt is unchanged.
+              schema:
+                type: boolean
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DefaultLocationConfirmationResult"
+        "401":
+          $ref: "#/components/responses/Unauthenticated"
+        "403":
+          $ref: "#/components/responses/NotAuthorized"
+        "409":
+          $ref: "#/components/responses/ConfirmationConflict"
+        "410":
+          $ref: "#/components/responses/ProposalExpired"
+        "422":
+          $ref: "#/components/responses/InvalidEnvelope"
+        "500":
+          $ref: "#/components/responses/AtomicFailure"
+
+components:
+  securitySchemes:
+    ApplicationSession:
+      type: http
+      scheme: bearer
+      bearerFormat: EMR4_APPLICATION_SESSION
+      description: >
+        Existing EMR4 application-session authentication. External identity or
+        client claims never confer command authority.
+
+  parameters:
+    ProposalId:
+      name: proposal_id
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/SignedProposalRef"
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      description: >
+        Client-generated bounded key. Confirmation binds it durably to exact
+        practice, operation, authenticated human actor and canonical request.
+      schema:
+        type: string
+        minLength: 8
+        maxLength: 128
+        pattern: "^[A-Za-z0-9][A-Za-z0-9._:-]{7,127}$"
+    CorrelationId:
+      name: X-Correlation-Id
+      in: header
+      required: true
+      schema:
+        type: string
+        minLength: 8
+        maxLength: 128
+        pattern: "^[A-Za-z0-9][A-Za-z0-9._:-]{7,127}$"
+
+  schemas:
+    OpaqueRef:
+      type: string
+      minLength: 8
+      maxLength: 128
+      pattern: "^[a-z][a-z0-9_]*_[A-Za-z0-9_-]+$"
+
+    SignedProposalRef:
+      type: string
+      minLength: 24
+      maxLength: 1024
+      pattern: "^dlp1\\.[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+$"
+      description: >
+        Backend-issued signed opaque self-contained proposal reference. It
+        carries signed practice/resource/version/hash/expiry bindings and is
+        verified without a proposal store, durable proposal row or reservation.
+
+    Sha256Hex:
+      type: string
+      pattern: "^[0-9a-f]{64}$"
+
+    DateTime:
+      type: string
+      format: date-time
+
+    SessionActorBindingAssertion:
+      type: object
+      additionalProperties: false
+      description: >
+        Non-authoritative assertion only. Actor and role are derived from the
+        authenticated application session and every field must exact-match it.
+      required: [actor_ref, actor_type, role]
+      properties:
+        actor_ref:
+          $ref: "#/components/schemas/OpaqueRef"
+        actor_type:
+          const: human_user
+        role:
+          type: string
+          enum: [practice_manager, practice_owner]
+    SessionBindingAssertion:
+      type: object
+      additionalProperties: false
+      description: >
+        Non-authoritative body binding. Practice, actor and role authority come
+        only from the authenticated application session. Any mismatch rejects.
+      required:
+        - practice_ref
+        - actor
+        - source_surface
+        - correlation_id
+        - requested_at
+      properties:
+        practice_ref:
+          $ref: "#/components/schemas/OpaqueRef"
+        actor:
+          $ref: "#/components/schemas/SessionActorBindingAssertion"
+        source_surface:
+          type: string
+          enum: [practice_administration_console, command_centre]
+        correlation_id:
+          type: string
+          minLength: 8
+          maxLength: 128
+        requested_at:
+          $ref: "#/components/schemas/DateTime"
+        delegated_agent:
+          type: string
+          enum: [davida]
+
+    DefaultLocationProposalRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - schema_version
+        - operation
+        - binding
+        - practitioner_ref
+        - requested_default_location_ref
+        - expected_aggregate_version
+        - dry_run_proposal_hash
+        - dry_run_context_revision
+        - dry_run_expires_at
+      properties:
+        schema_version:
+          const: emr4.practice_administration.default_location.proposal_request.v1
+        operation:
+          const: PROPOSE_UPDATE_PRACTITIONER_DEFAULT_LOCATION
+        binding:
+          $ref: "#/components/schemas/SessionBindingAssertion"
+        practitioner_ref:
+          $ref: "#/components/schemas/OpaqueRef"
+        requested_default_location_ref:
+          $ref: "#/components/schemas/OpaqueRef"
+        expected_aggregate_version:
+          type: integer
+          minimum: 0
+        dry_run_proposal_hash:
+          $ref: "#/components/schemas/Sha256Hex"
+        dry_run_context_revision:
+          $ref: "#/components/schemas/Sha256Hex"
+        dry_run_expires_at:
+          $ref: "#/components/schemas/DateTime"
+
+    DefaultLocationChange:
+      type: object
+      additionalProperties: false
+      required: [changed_path, before_location_ref, after_location_ref]
+      properties:
+        changed_path:
+          const: practitioner.default_location_ref
+        before_location_ref:
+          oneOf:
+            - $ref: "#/components/schemas/OpaqueRef"
+            - type: "null"
+        after_location_ref:
+          $ref: "#/components/schemas/OpaqueRef"
+
+    DefaultLocationProposalEnvelope:
+      type: object
+      additionalProperties: false
+      required:
+        - schema_version
+        - status
+        - proposal_id
+        - practice_ref
+        - practitioner_ref
+        - operation
+        - expected_aggregate_version
+        - change
+        - before_state_hash
+        - dry_run_proposal_hash
+        - proposal_hash
+        - generated_at
+        - expires_at
+        - maximum_lifetime_seconds
+        - human_confirmation_required
+        - permitted_confirmer_roles
+        - applies_change
+        - davida_can_confirm
+        - warnings
+        - blocks
+      properties:
+        schema_version:
+          const: emr4.practice_administration.default_location.proposal_envelope.v1
+        status:
+          const: proposal_only
+        proposal_id:
+          $ref: "#/components/schemas/SignedProposalRef"
+        practice_ref:
+          $ref: "#/components/schemas/OpaqueRef"
+        practitioner_ref:
+          $ref: "#/components/schemas/OpaqueRef"
+        operation:
+          const: UPDATE_PRACTITIONER_DEFAULT_LOCATION
+        expected_aggregate_version:
+          type: integer
+          minimum: 0
+        change:
+          $ref: "#/components/schemas/DefaultLocationChange"
+        before_state_hash:
+          $ref: "#/components/schemas/Sha256Hex"
+        dry_run_proposal_hash:
+          $ref: "#/components/schemas/Sha256Hex"
+        proposal_hash:
+          $ref: "#/components/schemas/Sha256Hex"
+        generated_at:
+          $ref: "#/components/schemas/DateTime"
+        expires_at:
+          $ref: "#/components/schemas/DateTime"
+        maximum_lifetime_seconds:
+          const: 120
+        human_confirmation_required:
+          const: true
+        permitted_confirmer_roles:
+          type: array
+          minItems: 2
+          maxItems: 2
+          prefixItems:
+            - const: practice_manager
+            - const: practice_owner
+          items: false
+        applies_change:
+          const: false
+        davida_can_confirm:
+          const: false
+        warnings:
+          type: array
+          items:
+            $ref: "#/components/schemas/Issue"
+        blocks:
+          type: array
+          items:
+            $ref: "#/components/schemas/Issue"
+
+    BackendConfirmationEvidenceRef:
+      allOf:
+        - $ref: "#/components/schemas/OpaqueRef"
+      description: >
+        Opaque backend-issued server-held one-use evidence reference. The
+        trusted server record owns proposal/payload hashes, issue/expiry times
+        and the single-use nonce. Client structure, hashes or signatures cannot
+        mint confirmation evidence.
+
+    DefaultLocationConfirmationCommand:
+      type: object
+      additionalProperties: false
+      required:
+        - schema_version
+        - operation
+        - confirmed
+        - binding
+        - proposal_id
+        - proposal_hash
+        - proposal_expires_at
+        - practitioner_ref
+        - requested_default_location_ref
+        - expected_aggregate_version
+        - confirmation_evidence_ref
+      properties:
+        schema_version:
+          const: emr4.practice_administration.default_location.confirmation_command.v1
+        operation:
+          const: CONFIRM_UPDATE_PRACTITIONER_DEFAULT_LOCATION
+        confirmed:
+          const: true
+        binding:
+          $ref: "#/components/schemas/SessionBindingAssertion"
+        proposal_id:
+          $ref: "#/components/schemas/SignedProposalRef"
+        proposal_hash:
+          $ref: "#/components/schemas/Sha256Hex"
+        proposal_expires_at:
+          $ref: "#/components/schemas/DateTime"
+        practitioner_ref:
+          $ref: "#/components/schemas/OpaqueRef"
+        requested_default_location_ref:
+          $ref: "#/components/schemas/OpaqueRef"
+        expected_aggregate_version:
+          type: integer
+          minimum: 0
+        confirmation_evidence_ref:
+          $ref: "#/components/schemas/BackendConfirmationEvidenceRef"
+
+    ConfirmationVerification:
+      type: object
+      additionalProperties: false
+      required:
+        - application_session_authenticated
+        - practice_scope_authorized
+        - role_authorized
+        - resource_scope_authorized
+        - proposal_revalidated
+        - aggregate_version_matched
+        - confirmation_evidence_verified
+        - idempotency_verified
+        - audit_appended
+        - outbox_appended
+        - publication_after_commit_only
+      properties:
+        application_session_authenticated: {const: true}
+        practice_scope_authorized: {const: true}
+        role_authorized: {const: true}
+        resource_scope_authorized: {const: true}
+        proposal_revalidated: {const: true}
+        aggregate_version_matched: {const: true}
+        confirmation_evidence_verified: {const: true}
+        idempotency_verified: {const: true}
+        audit_appended: {const: true}
+        outbox_appended: {const: true}
+        publication_after_commit_only: {const: true}
+
+    DefaultLocationCommitReceipt:
+      type: object
+      additionalProperties: false
+      required:
+        - schema_version
+        - outcome
+        - receipt_id
+        - practice_ref
+        - practitioner_ref
+        - before_location_ref
+        - after_location_ref
+        - proposal_hash
+        - canonical_request_hash
+        - idempotency_key_hash
+        - correlation_id
+        - expected_aggregate_version
+        - resulting_aggregate_version
+        - confirmed_by_actor_ref
+        - confirmed_by_role
+        - audit_event_id
+        - outbox_event_id
+        - committed_at
+        - verification
+      properties:
+        schema_version:
+          const: emr4.practice_administration.default_location.commit_receipt.v1
+        outcome:
+          const: practitioner_default_location_updated
+        receipt_id:
+          $ref: "#/components/schemas/OpaqueRef"
+        practice_ref:
+          $ref: "#/components/schemas/OpaqueRef"
+        practitioner_ref:
+          $ref: "#/components/schemas/OpaqueRef"
+        before_location_ref:
+          oneOf:
+            - $ref: "#/components/schemas/OpaqueRef"
+            - type: "null"
+        after_location_ref:
+          $ref: "#/components/schemas/OpaqueRef"
+        proposal_hash:
+          $ref: "#/components/schemas/Sha256Hex"
+        canonical_request_hash:
+          $ref: "#/components/schemas/Sha256Hex"
+        idempotency_key_hash:
+          $ref: "#/components/schemas/Sha256Hex"
+        correlation_id:
+          type: string
+          minLength: 8
+          maxLength: 128
+        expected_aggregate_version:
+          type: integer
+          minimum: 0
+        resulting_aggregate_version:
+          type: integer
+          minimum: 1
+        confirmed_by_actor_ref:
+          $ref: "#/components/schemas/OpaqueRef"
+        confirmed_by_role:
+          type: string
+          enum: [practice_manager, practice_owner]
+        audit_event_id:
+          $ref: "#/components/schemas/OpaqueRef"
+        outbox_event_id:
+          $ref: "#/components/schemas/OpaqueRef"
+        committed_at:
+          $ref: "#/components/schemas/DateTime"
+        verification:
+          $ref: "#/components/schemas/ConfirmationVerification"
+
+    DefaultLocationConfirmationResult:
+      type: object
+      additionalProperties: false
+      required: [schema_version, status, receipt]
+      properties:
+        schema_version:
+          const: emr4.practice_administration.default_location.confirmation_result.v1
+        status:
+          const: committed
+        receipt:
+          $ref: "#/components/schemas/DefaultLocationCommitReceipt"
+
+    Issue:
+      type: object
+      additionalProperties: false
+      required: [code, severity]
+      properties:
+        code:
+          type: string
+          minLength: 1
+          maxLength: 64
+        severity:
+          type: string
+          enum: [warning, blocked]
+
+    Rejection:
+      type: object
+      additionalProperties: false
+      required: [schema_version, status, reason_code, correlation_id, retryable]
+      properties:
+        schema_version:
+          const: emr4.practice_administration.default_location.rejection.v1
+        status:
+          const: rejected
+        reason_code:
+          type: string
+          enum:
+            - unauthenticated
+            - not_authorized
+            - confirmer_not_authorized
+            - practice_scope_mismatch
+            - resource_scope_mismatch
+            - location_not_active
+            - no_change
+            - proposal_stale
+            - proposal_expired
+            - proposal_hash_mismatch
+            - aggregate_version_mismatch
+            - before_state_conflict
+            - confirmation_evidence_invalid
+            - confirmation_evidence_expired
+            - idempotency_conflict
+            - idempotency_in_progress
+            - confirmation_replay_rejected
+            - atomic_transaction_failed
+            - invalid_envelope
+        correlation_id:
+          type: string
+          minLength: 8
+          maxLength: 128
+        retryable:
+          type: boolean
+
+  responses:
+    Unauthenticated:
+      description: Application session missing or invalid; no resource lookup occurs.
+      content:
+        application/json:
+          schema: {$ref: "#/components/schemas/Rejection"}
+    NotAuthorized:
+      description: Uniform anti-enumerating authorization rejection.
+      content:
+        application/json:
+          schema: {$ref: "#/components/schemas/Rejection"}
+    ProposalConflict:
+      description: Proposal input is stale, scoped incorrectly or no longer applicable.
+      content:
+        application/json:
+          schema: {$ref: "#/components/schemas/Rejection"}
+    ConfirmationConflict:
+      description: Version, state, idempotency or replay conflict; no partial effect.
+      content:
+        application/json:
+          schema: {$ref: "#/components/schemas/Rejection"}
+    ProposalExpired:
+      description: Proposal or confirmation evidence expired before the backend-owned command.
+      content:
+        application/json:
+          schema: {$ref: "#/components/schemas/Rejection"}
+    InvalidEnvelope:
+      description: Canonical closed-schema admission failed.
+      content:
+        application/json:
+          schema: {$ref: "#/components/schemas/Rejection"}
+    AtomicFailure:
+      description: Entire transaction rolled back; no receipt or publishable event exists.
+      content:
+        application/json:
+          schema: {$ref: "#/components/schemas/Rejection"}

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "sprint_planning",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:3e8cdd9b3a411cf1b97e04912835efc6275fbf61b75d56df4259b659646989f4",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The native Diary application-session UI composition plan, threat delta, closeout and Sol acceptance, the Davida default-location dry-run plan, design, threat delta, closeout and Sol acceptance, the API Spine ADR/programme, capability charters, permission matrix, idempotency/audit preflight, proposal-idempotency tranche and relevant appointment command patterns/tests were read. This fifth pair proves route-intercepted browser composition and freezes a non-executing future command boundary only.",
+    "current_authority_allocation": "Yuri's standing two-lane authority permits ordinary tranche-to-tranche continuation and parallel agents. Sol retains planning, acceptance, integration, recovery and protected-boundary decisions; implementation and review workers receive only their exact lane scopes and no protected-ref, provider, deployment, production, release or actual administrative write authority.",
+    "git_refs_and_worktree": "HEAD and origin/codex/ariadne-bernie-davida-parallel-seam are aligned at ec7af55d58997ed967abce05af5fa5bbe3bbb3dd; local/origin master and local/origin handoff/current are aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602; the index is empty and docs/branding is the only pre-existing worktree residue.",
+    "live_handover_current_baton": "AGENTS.md was reread completely at 449 lines / 67954 bytes / SHA-256 af5b7976ab03cd83f1f48678948a46d1d5a780fa658016610ebd82ec164b38c7. It records ariadne_agent_error_correction_register_pass and names the provider-free route-intercepted Diary rehearsal plus architecture-only Davida proposal-to-confirm boundary as the authorised fifth pair.",
+    "protected_evidence_boundaries": "Diary evidence must be labelled route_intercepted_browser, stay authored-synthetic, provider-free and default-off, avoid app.main and real identity/data, and prove no partial render on enabled failure plus legacy preservation when off. Davida may define proposal/confirm schemas and deterministic acceptance only; it may not mount a route, add a migration, call a provider, access product data, grant Davida confirm/apply authority, or implement a write. docs/branding remains user-owned, unmodified, untested, unstaged and excluded. No protected refs, deployment, production or release actions are authorised."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

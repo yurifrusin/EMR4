@@ -58,6 +58,11 @@ def test_three_lane_models_reasoning_and_ownership_are_exact() -> None:
     assert lanes["gemini_flash"]["transport"] == "antigravity_fresh_project"
     assert "implementation" in lanes["gemini_flash"]["may_not"]
     assert "self_acceptance" in lanes["gemini_flash"]["may_not"]
+    assert policy["external_verifier"]["environment_boundary"] == {
+        "exact_existing_interpreter_required": True,
+        "package_or_environment_bootstrap": "forbidden",
+        "missing_dependency_action": "stop_and_report",
+    }
 
 
 def test_lane_policy_is_cross_referenced_and_dispatch_is_optional() -> None:
@@ -91,6 +96,21 @@ def test_postgresql_tests_stay_serial_and_only_independent_checks_parallelize() 
     assert policy["repository_conftest_pytest"] == "serial"
     assert policy["shared_postgresql_schema"] == "serial"
     assert sprint["shared_postgresql_schema"]["concurrency"] == "serial"
+    assert policy["required_pytest_launcher"] == (
+        "../../scripts/ariadne_serial_pytest.py"
+    )
+    assert sprint["shared_postgresql_schema"]["required_launcher"] == (
+        "../../scripts/ariadne_serial_pytest.py"
+    )
+    assert sprint["shared_postgresql_schema"]["instruction_only_serialization"] is False
+    assert policy["conftest_enforcement"] == "../../tests/conftest.py"
+    assert policy["direct_pytest_bypass"] == "serialized_by_repository_conftest"
+    assert sprint["shared_postgresql_schema"]["conftest_enforcement"] == (
+        "../../tests/conftest.py"
+    )
+    assert sprint["shared_postgresql_schema"]["direct_pytest_bypass"] == (
+        "serialized_by_repository_conftest"
+    )
     assert policy["parallel_allowed_only_for"] == [
         "import_free_static_checks",
         "filesystem_only_checks",

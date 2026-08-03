@@ -1,0 +1,201 @@
+{
+  "authority": {
+    "app_main_mounted": false,
+    "backend": false,
+    "command": false,
+    "database": false,
+    "default_on": false,
+    "deployment": false,
+    "model": false,
+    "production": false,
+    "provider": false,
+    "real_identity": false,
+    "real_or_product_data": false,
+    "release": false,
+    "write": false
+  },
+  "browser": {
+    "engine": "chromium",
+    "fixture_control_actions": [
+      "install_bootstrap_before_document_script",
+      "hold_and_release_fixed_reader_result",
+      "disable_bootstrap_before_visible_refresh"
+    ],
+    "headless": true,
+    "ordinary_ui_actions": [
+      "open_booking_gap",
+      "close_booking_modal",
+      "refresh_diary"
+    ],
+    "static_route_fixture_paths": [
+      "/hosting-policy.js"
+    ]
+  },
+  "browser_skill_path": {
+    "availability": "available",
+    "baseline_console_health": "passed",
+    "baseline_page_identity": "EMR — Diary",
+    "baseline_refresh_interaction": "passed",
+    "baseline_smoke_render": "passed",
+    "fallback": "repository_playwright",
+    "fallback_reason": "The Browser runtime exposes page inspection and interaction but no request-routing or pre-document init-script API; the frozen rehearsal requires both to establish the closed route-intercepted bootstrap boundary."
+  },
+  "candidate_result": "candidate_ready",
+  "cases": [
+    {
+      "api_request_tuples": [
+        "GET /api/v1/appointments",
+        "GET /api/v1/appointments/bernie/pilot-eligibility",
+        "GET /api/v1/appointments/types",
+        "GET /api/v1/diary/locations",
+        "GET /api/v1/diary/roster",
+        "GET /api/v1/diary/template",
+        "GET /api/v1/diary/waiting-areas",
+        "POST /api/v1/graphql"
+      ],
+      "blocked_external_hosts": [],
+      "case_id": "enabled_success_and_disable_transition",
+      "console_errors": [],
+      "fixed_reader_call_count": 2,
+      "fixed_reader_options": [
+        "Avery Browser Synthetic (Browser Synthetic Clinic)",
+        "Morgan Browser Synthetic"
+      ],
+      "graphql_request_count": 2,
+      "late_stale_failure_marker_observed": true,
+      "legacy_options_after_recovery": [
+        "Legacy Browser Synthetic (Browser Synthetic Clinic)"
+      ],
+      "legacy_options_before_stale_resolution": [
+        "Legacy Browser Synthetic (Browser Synthetic Clinic)"
+      ],
+      "legacy_rest_practitioner_request_count": 0,
+      "local_paths": [
+        "/diary/application-session-practitioner-directory.mjs",
+        "/diary/application-session-practitioner-reconciler.mjs",
+        "/diary/diary.css",
+        "/diary/diary.html",
+        "/diary/diary.js",
+        "/diary/meta-grid.css",
+        "/diary/meta-grid.js",
+        "/diary/office-bootstrap.js",
+        "/hosting-policy.js",
+        "/images/emr_cube1.png"
+      ],
+      "module_paths_loaded": [
+        "/diary/application-session-practitioner-directory.mjs",
+        "/diary/application-session-practitioner-reconciler.mjs"
+      ],
+      "post_disable_graphql_request_count": 1,
+      "post_disable_legacy_rest_practitioner_request_count": 0,
+      "pre_transition_graphql_request_count": 0,
+      "pre_transition_legacy_rest_practitioner_request_count": 0,
+      "stale_row_visible_count": 0,
+      "unexpected_api_requests": [],
+      "unknown_api_paths": []
+    },
+    {
+      "api_request_tuples": [
+        "GET /api/v1/appointments",
+        "GET /api/v1/appointments/bernie/pilot-eligibility",
+        "GET /api/v1/appointments/types",
+        "GET /api/v1/diary/locations",
+        "GET /api/v1/diary/roster",
+        "GET /api/v1/diary/template",
+        "GET /api/v1/diary/waiting-areas"
+      ],
+      "blocked_external_hosts": [],
+      "case_id": "enabled_reader_failure",
+      "console_errors": [],
+      "error_text": "Failed to load diary: application_session_practitioner_directory_failure",
+      "fixed_reader_call_count": 1,
+      "graphql_request_count": 0,
+      "grid_child_count": 0,
+      "grid_container_hidden": true,
+      "legacy_rest_practitioner_request_count": 0,
+      "local_paths": [
+        "/diary/application-session-practitioner-directory.mjs",
+        "/diary/application-session-practitioner-reconciler.mjs",
+        "/diary/diary.css",
+        "/diary/diary.html",
+        "/diary/diary.js",
+        "/diary/meta-grid.css",
+        "/diary/meta-grid.js",
+        "/diary/office-bootstrap.js",
+        "/hosting-policy.js",
+        "/images/emr_cube1.png"
+      ],
+      "module_paths_loaded": [
+        "/diary/application-session-practitioner-directory.mjs",
+        "/diary/application-session-practitioner-reconciler.mjs"
+      ],
+      "unexpected_api_requests": [],
+      "unknown_api_paths": []
+    },
+    {
+      "api_request_tuples": [
+        "GET /api/v1/appointments",
+        "GET /api/v1/appointments/bernie/pilot-eligibility",
+        "GET /api/v1/appointments/types",
+        "GET /api/v1/diary/locations",
+        "GET /api/v1/diary/roster",
+        "GET /api/v1/diary/template",
+        "GET /api/v1/diary/waiting-areas",
+        "POST /api/v1/graphql"
+      ],
+      "blocked_external_hosts": [],
+      "bootstrap_present": false,
+      "case_id": "feature_off_legacy_graphql",
+      "console_errors": [],
+      "graphql_request_count": 1,
+      "legacy_options": [
+        "Legacy Browser Synthetic (Browser Synthetic Clinic)"
+      ],
+      "legacy_rest_practitioner_request_count": 0,
+      "local_paths": [
+        "/diary/diary.css",
+        "/diary/diary.html",
+        "/diary/diary.js",
+        "/diary/meta-grid.css",
+        "/diary/meta-grid.js",
+        "/diary/office-bootstrap.js",
+        "/hosting-policy.js",
+        "/images/emr_cube1.png"
+      ],
+      "module_paths_loaded": [],
+      "unexpected_api_requests": [],
+      "unknown_api_paths": []
+    }
+  ],
+  "checks": {
+    "closed_api_fixture_allowlist": true,
+    "disable_transition_invalidated_late_result": true,
+    "enabled_failure_had_no_partial_grid_render": true,
+    "enabled_failure_released_no_raw_reader_error": true,
+    "enabled_path_never_used_legacy_graphql_or_rest": true,
+    "feature_off_preserved_legacy_graphql": true,
+    "fixed_reader_rendered_authored_synthetic_directory": true,
+    "no_browser_console_errors": true,
+    "no_unexpected_external_or_provider_hosts": true,
+    "real_es_modules_loaded_in_enabled_cases": true
+  },
+  "claims_not_made": [
+    "live_browser_backend_postgres",
+    "real_application_session_injection",
+    "cross_tab_lifecycle_delivery",
+    "browser_matrix",
+    "usability",
+    "default_on",
+    "production_or_release"
+  ],
+  "data_class": "authored_synthetic",
+  "evidence_mode": "route_intercepted_browser",
+  "schema_version": "raisa.native-diary-application-session-route-intercepted-browser-evidence.v1",
+  "source_hashes": {
+    "docs/diary/application-session-practitioner-directory.mjs": "sha256:69f898a994b4ce957232209f79338d84115252a87780623e4b79cbced8ec566a",
+    "docs/diary/application-session-practitioner-reconciler.mjs": "sha256:4e16e78343ab0fcaa9e55f76579cef1ab65ac2fba5b37c5c2edf1d5198b516f0",
+    "docs/diary/diary.html": "sha256:8b744f3512d7a82e6f1f04ede2dd1aa15bc5014248a4058ac7ecb188eac50167",
+    "docs/diary/diary.js": "sha256:42cb7ccaaf8506eeed285ffd37c1f2a1456299c470080a45f09850e5a45d09fc",
+    "docs/taskpane/hosting-policy.js": "sha256:de33f77d43fbff21e7b4007d89e0016c74d27524f7b0dc302c7ae2f4fd192353"
+  }
+}

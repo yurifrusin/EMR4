@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/davida-default-location-command-boundary.v1.json",
+  "title": "Davida default-location command-boundary architecture contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "source_head",
+    "result_candidate",
+    "artifact_bindings",
+    "authority",
+    "proposal_phase",
+    "confirmation_phase",
+    "durable_idempotency",
+    "atomic_transaction",
+    "rejection_codes",
+    "bounded_receipt",
+    "event_boundary",
+    "api_spine",
+    "blocked_gates"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.davida_default_location_command_boundary.v1"},
+    "status": {"const": "architecture_only_provider_free_non_executing"},
+    "source_head": {"const": "ec7af55d58997ed967abce05af5fa5bbe3bbb3dd"},
+    "result_candidate": {"const": "davida_practice_administration_default_location_command_boundary_pass"},
+    "artifact_bindings": {
+      "const": {
+        "openapi": "docs/api-spine/openapi/practice-administration-default-location-commands.yaml",
+        "parent_dry_run": "provider_free_practice_administration_default_location_dry_run_pass",
+        "operation": "UPDATE_PRACTITIONER_DEFAULT_LOCATION",
+        "changed_path": "practitioner.default_location_ref"
+      }
+    },
+    "authority": {
+      "const": {
+        "decision_owner": "Yuri",
+        "root_acceptance_owner": "gpt_sol",
+        "architecture_only": true,
+        "provider_free": true,
+        "runtime_route_present": false,
+        "actual_command_implementation_authorized": false,
+        "actual_write_authority": false,
+        "davida_can_propose": true,
+        "davida_can_confirm": false,
+        "davida_can_apply": false,
+        "davida_command_credential": false,
+        "practice_actor_role_authority_source": "authenticated_application_session",
+        "request_body_binding_authority": false,
+        "request_body_binding_rule": "exact_match_session_derived_practice_actor_role_or_reject",
+        "worker_acceptance_authority": false,
+        "protected_ref_authority": false,
+        "deployment_authority": false
+      }
+    },
+    "proposal_phase": {
+      "const": {
+        "path": "/practice-administration/practitioners/default-location/proposals",
+        "method": "POST",
+        "classification": "non_mutating_command_style_read",
+        "effect": "none",
+        "actor_type": "human_user",
+        "permitted_roles": ["practice_manager", "practice_owner"],
+        "role_policy_status": "proposed_future_contract_not_current_permission_matrix_runtime_grant",
+        "delegated_agent_provenance_allowed": "davida",
+        "proposal_reference": "backend_issued_signed_opaque_self_contained",
+        "proposal_store_required": false,
+        "bindings": ["application_session", "practice_ref", "actor_ref", "practitioner_ref", "requested_default_location_ref", "expected_aggregate_version", "dry_run_proposal_hash", "dry_run_context_revision", "dry_run_expires_at", "correlation_id"],
+        "deterministic_hash_fields": ["schema_version", "operation", "practice_ref", "practitioner_ref", "before_location_ref", "after_location_ref", "expected_aggregate_version", "before_state_hash", "dry_run_proposal_hash", "dry_run_context_revision", "generated_at", "expires_at"],
+        "expiry_rule": "min_dry_run_expiry_and_backend_generated_at_plus_120_seconds",
+        "maximum_lifetime_seconds": 120,
+        "idempotency_header_required": true,
+        "idempotency_semantics": "syntactic_deterministic_reevaluation_no_proposal_ledger",
+        "reservation_created": false,
+        "database_mutation": false,
+        "human_confirmation_required": true,
+        "applies_change": false
+      }
+    },
+    "confirmation_phase": {
+      "const": {
+        "path": "/practice-administration/practitioners/default-location/proposals/{proposal_id}/confirm",
+        "method": "POST",
+        "classification": "future_backend_owned_single_purpose_rest_command",
+        "implementation_status": "closed_material_yuri_gate",
+        "actor_type": "human_user",
+        "permitted_roles": ["practice_manager", "practice_owner"],
+        "role_policy_status": "proposed_future_contract_not_current_permission_matrix_runtime_grant",
+        "agent_confirmer_allowed": false,
+        "davida_confirmer_allowed": false,
+        "authorization_order": ["authenticate_application_session", "authorize_practice_action_before_resource_disclosure", "load_exact_practice_scoped_resource", "begin_command_transaction_and_claim_idempotency", "lock_practitioner_aggregate", "reauthorize_exact_action_resource_inside_transaction_immediately_before_write", "revalidate_proposal_version_state_location_and_confirmation_evidence"],
+        "required_bindings": ["application_session", "practice_ref", "authenticated_actor_ref", "human_role", "proposal_id", "proposal_hash", "proposal_expires_at", "practitioner_ref", "requested_default_location_ref", "expected_aggregate_version", "backend_confirmation_evidence_ref", "correlation_id", "idempotency_key"],
+        "backend_revalidation_from_current_truth": true,
+        "confirmation_evidence_backend_issued": true,
+        "confirmation_evidence_shape": "opaque_server_held_one_use_reference_only",
+        "structured_client_claims_can_mint_confirmation_evidence": false,
+        "confirmation_evidence_short_lived": true,
+        "confirmation_evidence_single_use": true,
+        "anti_enumerating_authorization_failure": true
+      }
+    },
+    "durable_idempotency": {
+      "const": {
+        "applies_to": "confirmation_only",
+        "scope": ["practice_ref", "operation", "authenticated_actor_ref", "idempotency_key"],
+        "fingerprint": ["canonical_request_hash", "proposal_hash"],
+        "same_key_same_fingerprint": "return_exact_stored_domain_receipt_no_new_effect",
+        "same_key_different_fingerprint": "idempotency_conflict",
+        "different_key_consumed_confirmation_evidence": "confirmation_replay_rejected",
+        "in_progress": "idempotency_in_progress",
+        "failed_transaction_completes_key": false,
+        "raw_key_in_receipt": false,
+        "key_hash_in_receipt": true
+      }
+    },
+    "atomic_transaction": {
+      "const": {
+        "future_only_not_implemented": true,
+        "isolation": "serializable_or_equivalent_lock_and_version_guard",
+        "members": ["idempotency_claim", "single_use_confirmation_evidence_nonce_claim", "one_practitioner_default_location_change", "aggregate_version_increment_exactly_once", "one_immutable_audit_event_append", "one_transactional_outbox_event_append", "idempotency_receipt_completion"],
+        "rollback_on_any_failure": true,
+        "partial_aggregate_change": false,
+        "partial_audit_event": false,
+        "partial_outbox_event": false,
+        "partial_idempotency_completion": false,
+        "receipt_before_commit": false,
+        "publication_after_commit_only": true
+      }
+    },
+    "rejection_codes": {
+      "const": ["unauthenticated", "not_authorized", "confirmer_not_authorized", "practice_scope_mismatch", "resource_scope_mismatch", "location_not_active", "no_change", "proposal_stale", "proposal_expired", "proposal_hash_mismatch", "aggregate_version_mismatch", "before_state_conflict", "confirmation_evidence_invalid", "confirmation_evidence_expired", "idempotency_conflict", "idempotency_in_progress", "confirmation_replay_rejected", "atomic_transaction_failed", "invalid_envelope"]
+    },
+    "bounded_receipt": {
+      "const": {
+        "schema_version": "emr4.practice_administration.default_location.commit_receipt.v1",
+        "success_only": true,
+        "fields": ["receipt_id", "practice_ref", "practitioner_ref", "before_location_ref", "after_location_ref", "proposal_hash", "canonical_request_hash", "idempotency_key_hash", "correlation_id", "expected_aggregate_version", "resulting_aggregate_version", "confirmed_by_actor_ref", "confirmed_by_role", "audit_event_id", "outbox_event_id", "committed_at", "verification"],
+        "free_text": false,
+        "display_names": false,
+        "raw_session_credential": false,
+        "raw_idempotency_key": false,
+        "patient_clinical_document_data": false
+      }
+    },
+    "event_boundary": {
+      "const": {
+        "event_type": "practice.practitioner_default_location_changed",
+        "transactional_outbox_required": true,
+        "publish_after_commit_only": true,
+        "payload_is_truth": false,
+        "payload_is_command": false,
+        "fresh_authorized_read_required_for_consumers": true,
+        "davida_event_actuator": false
+      }
+    },
+    "api_spine": {
+      "const": {
+        "graphql": "read_only_unchanged",
+        "rest_openapi": "single_purpose_proposal_and_future_confirmation",
+        "events": "committed_signal_only",
+        "manifests": "declarative_only",
+        "appointment_command_contract_changed": false,
+        "separate_openapi_artifact": true
+      }
+    },
+    "blocked_gates": {
+      "const": ["fastapi_route_or_app_main_mount", "database_migration_model_or_write_service", "actual_administrative_command_implementation", "actual_apply_or_write_authority", "provider_or_model_call", "memory_rag_graphrag", "real_identity_or_real_data", "patient_clinical_document_data", "arbitrary_api_access", "graphql_mutation", "cloud_or_iam_change", "deployment", "production", "release", "protected_evidence_or_refs", "docs_branding"]
+    }
+  }
+}

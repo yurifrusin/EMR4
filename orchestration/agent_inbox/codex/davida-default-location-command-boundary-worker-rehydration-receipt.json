@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:3e8cdd9b3a411cf1b97e04912835efc6275fbf61b75d56df4259b659646989f4",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted Davida default-location dry-run plan, design, threat delta and closeout; the broader Davida administration boundary design; API Spine ADR and programme; capability charters; permission matrix; idempotency/audit preflight; proposal-idempotency tranche and closeout; relevant appointment command patterns; API Spine artifact tests; and the API-steward checklist were read. The successor must freeze a non-executing proposal-to-confirm contract only.",
+    "current_authority_allocation": "GPT Sol remains conductor, architecture and acceptance owner, recovery owner and protected integrator. This native worker owns only the fifth-pair Davida plan, design, threat model, documentation-only OpenAPI/schema, deterministic tests, closeout and worker receipt; it receives no acceptance, integration, commit, push, protected-ref or runtime authority.",
+    "git_refs_and_worktree": "At rehydration, HEAD and origin/codex/ariadne-bernie-davida-parallel-seam are ec7af55d58997ed967abce05af5fa5bbe3bbb3dd; local/origin master and local/origin handoff/current are 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty. Existing register-revision edits, pair and Diary worker rehydration artifacts, and user-owned docs/branding are concurrent residue outside this lane and will be preserved.",
+    "live_handover_current_baton": "AGENTS.md was independently read in full at 449 lines. Its Current Baton preserves the accepted provider-free Davida default-location dry run and authorises exactly one architecture-only backend-owned REST proposal-to-confirm boundary as the active fifth-pair Davida lane.",
+    "protected_evidence_boundaries": "Davida can emit only a non-authoritative dry-run proposal and can never confirm or apply. This lane must not mount a route, import app.main, add a migration/model/service write, access a database/provider/network/real identity or real/product/patient/clinical/document data, open arbitrary API access, edit docs/branding, deploy, release, update AGENTS.md or shared continuity maps. Actual command implementation remains a material Yuri-owned gate."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

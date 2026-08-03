@@ -1,0 +1,76 @@
+{
+  "schema_version": "emr4.davida_default_location_command_boundary.architecture_acceptance.v1",
+  "recorded_at": "2026-08-03T00:00:00Z",
+  "result": "candidate_ready_for_sol_acceptance",
+  "mode": "repository_local_provider_free_architecture_acceptance",
+  "data_class": "authored_synthetic_contract_only",
+  "source_head": "ec7af55d58997ed967abce05af5fa5bbe3bbb3dd",
+  "source_hashes": {
+    "plan": "sha256:84f020690cf1ef97b202b2e7bc1ae8987c647213ebfd5599a7afb9ca3769bf00",
+    "design": "sha256:d4ebee3933fa119f82206cf9175beedccf059300f9eda805530b8d1b607eaa44",
+    "threat_model_delta": "sha256:4ec91dd5340970956718700fc05bd7965d8f975203da5c84e27fa9b6a66f90c5",
+    "openapi": "sha256:491978f28e07c569bb19410edf0f811533960aca3081b108a84c135a6a8404e8",
+    "contract": "sha256:7dd69acea94447b69fd2c96c798ff03b28fb9f188cc1e44a39c3d69d181643a4",
+    "contract_schema": "sha256:db278b93d0b74d1abb8a31237ca058d6f209af130faabd5b72969125a101f4ce",
+    "focused_tests": "sha256:eeeb3d43c93f7cad2f6e96c623940880556fdb2d1e26486eb520a134fe6904fc"
+  },
+  "deterministic_results": {
+    "focused_test_cases": 31,
+    "focused_test_cases_passed": 31,
+    "api_spine_test_cases": 36,
+    "api_spine_test_cases_passed": 36,
+    "total_test_cases": 67,
+    "total_test_cases_passed": 67,
+    "ruff": "passed",
+    "json_yaml_parse": "passed",
+    "git_diff_check": "passed"
+  },
+  "api_steward_checklist": {
+    "boundary_classification": "rest_openapi_proposal_and_future_single_purpose_command",
+    "graphql_read_only_unchanged": true,
+    "practice_scoped": true,
+    "session_derived_actor_practice_role": true,
+    "body_bindings_non_authoritative": true,
+    "human_confirmation_required": true,
+    "davida_confirmation_authority": false,
+    "expected_aggregate_version_required": true,
+    "durable_confirmation_idempotency_defined": true,
+    "atomic_audit_outbox_idempotency_defined": true,
+    "publication_after_commit_only": true,
+    "closed_gate_broadening": false,
+    "blocking_findings": []
+  },
+  "collision_history": {
+    "receipt": "orchestration/agent_inbox/codex/davida-default-location-command-boundary-pytest-collision-receipt.json",
+    "concurrent_result_admitted": false,
+    "serialized_replacement_complete": true
+  },
+  "authority_and_side_effects": {
+    "routes_mounted": 0,
+    "app_main_imports": 0,
+    "database_reads": 0,
+    "database_writes": 0,
+    "database_migrations": 0,
+    "runtime_models_or_services_added": 0,
+    "provider_or_model_calls": 0,
+    "real_identity_values": 0,
+    "product_data_reads": 0,
+    "patient_clinical_document_fields": 0,
+    "events_published": 0,
+    "deployments": 0,
+    "protected_ref_movements": 0,
+    "branding_paths_modified": 0
+  },
+  "claim_boundary": {
+    "proves": [
+      "A separate REST/OpenAPI artifact can preserve the non-mutating Davida dry run while freezing a future human-confirm boundary.",
+      "Authenticated application-session context, not body actor/practice/role claims, owns command authority.",
+      "A signed self-contained proposal reference needs no proposal store, while a server-held one-use confirmation-evidence reference supports cross-key replay rejection.",
+      "The future confirmation contract can bind aggregate version, durable idempotency, atomic aggregate/audit/outbox completion and after-commit publication."
+    ],
+    "does_not_prove": [
+      "A mounted route, database schema, idempotency/evidence store, signing-key lifecycle, authorization runtime, aggregate mutation, audit/outbox publisher or receipt implementation.",
+      "A current permission-matrix runtime grant for practice managers or owners, actual administrative apply authority, real identity/data, provider/model use, deployment, production fitness or release."
+    ]
+  }
+}

@@ -81,6 +81,10 @@ test_execution:
   shared_postgresql_schema:
     concurrency: serial
     applies_to: all_pytest_processes_using_repository_conftest
+    required_launcher: ../../scripts/ariadne_serial_pytest.py
+    instruction_only_serialization: false
+    conftest_enforcement: ../../tests/conftest.py
+    direct_pytest_bypass: serialized_by_repository_conftest
     preflight:
       - audit_existing_workspace_pytest_processes
       - classify_current_or_stale_before_schema_owning_run

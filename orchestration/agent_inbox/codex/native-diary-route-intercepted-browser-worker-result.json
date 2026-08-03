@@ -1,0 +1,90 @@
+{
+  "schema_version": "ariadne.worker_result.v1",
+  "date": "2026-08-03",
+  "lane": "native_diary_route_intercepted_browser",
+  "source_head": "ec7af55d58997ed967abce05af5fa5bbe3bbb3dd",
+  "reasoning_level": "high",
+  "rehydration": {
+    "passing_receipt": "orchestration/agent_inbox/codex/native-diary-route-intercepted-browser-worker-rehydration-receipt-2.json",
+    "rehydrated_from_receipt": true,
+    "rehydration_sources": [
+      "live_handover_current_baton",
+      "current_authority_allocation",
+      "active_plan_and_acceptance",
+      "protected_evidence_boundaries",
+      "git_refs_and_worktree"
+    ],
+    "preserved_failed_receipt": {
+      "path": "orchestration/agent_inbox/codex/native-diary-route-intercepted-browser-worker-rehydration-receipt.json",
+      "reasons": [
+        "continuation_event_missing_or_unapproved",
+        "adapter_probe_method_invalid:codex_subagent_spawn",
+        "workspace_receipt_missing:native_diary_route_intercepted_browser_worker",
+        "context_observation_missing:orchestrator"
+      ],
+      "task_action_before_passing_receipt": false,
+      "correction": "Changed the continuation event to pre_worker_dispatch, used the configured synthetic adapter observation, bound the context observation to orchestrator, and removed the premature active and assigned worker claim."
+    }
+  },
+  "browser_execution": {
+    "evidence_mode": "route_intercepted_browser",
+    "data_class": "authored_synthetic",
+    "in_app_browser_baseline": "passed",
+    "repository_playwright_fallback": "passed",
+    "fallback_reason": "The Browser runtime has no request-routing or pre-document init-script API required by the frozen test.",
+    "evidence_sha256": "5427e11182d4031dce962ce5bcba64f9bf1771eac6bc1af5e2bde3a2f3c6a6e7",
+    "screenshots_generated": false,
+    "temporary_browser_and_static_server_cleaned_up": true
+  },
+  "checks": {
+    "acceptance_generation": "passed",
+    "acceptance_exact_reproduction": "passed",
+    "focused_pytest": "9 passed",
+    "ruff": "passed",
+    "node_syntax": "three files passed",
+    "git_diff_check": "passed",
+    "unexpected_api_paths": 0,
+    "unexpected_external_hosts": 0,
+    "console_errors": 0
+  },
+  "preserved_collision": {
+    "receipt": "orchestration/agent_inbox/codex/native-diary-route-intercepted-browser-shared-pytest-collision-receipt.json",
+    "inadmissible_run": "1 passed and 8 setup errors after the shared practices table disappeared",
+    "resolved_run": "Root restored and exclusively serialized the test slot; acceptance generation, exact reproduction and all 9 focused tests then passed once.",
+    "central_register_modified_by_worker": false
+  },
+  "owned_files": [
+    "docs/raisa-provider-free-native-diary-application-session-route-intercepted-browser-plan.md",
+    "docs/security/raisa-provider-free-native-diary-application-session-route-intercepted-browser-threat-model-delta.md",
+    "docs/raisa-provider-free-native-diary-application-session-route-intercepted-browser-closeout.md",
+    "scripts/raisa_provider_free_native_diary_application_session_route_intercepted_browser_acceptance.py",
+    "tests/test_raisa_provider_free_native_diary_application_session_route_intercepted_browser.py",
+    "orchestration/continuity/raisa-provider-free-native-diary-application-session-route-intercepted-browser/route-intercepted-browser-evidence.json",
+    "orchestration/agent_inbox/codex/native-diary-route-intercepted-browser-worker-rehydration-runtime-state.json",
+    "orchestration/agent_inbox/codex/native-diary-route-intercepted-browser-worker-rehydration-receipt.json",
+    "orchestration/agent_inbox/codex/native-diary-route-intercepted-browser-worker-rehydration-receipt-2.json",
+    "orchestration/agent_inbox/codex/native-diary-route-intercepted-browser-shared-pytest-collision-receipt.json",
+    "orchestration/agent_inbox/codex/native-diary-route-intercepted-browser-worker-result.json"
+  ],
+  "closed_boundaries": [
+    "app_main",
+    "live_backend_or_database",
+    "real_identity_or_data",
+    "provider_or_model",
+    "command_or_write",
+    "default_on",
+    "deployment_production_release",
+    "protected_evidence_or_refs",
+    "docs_branding"
+  ],
+  "residual_risks": [
+    "No real cookie or application-session injection is proven.",
+    "No backend authorization, audit or PostgreSQL behavior is proven.",
+    "Only Chromium is exercised; cross-browser and cross-tab behavior remain untested.",
+    "Accessibility, usability, XSS and supply-chain controls are not established.",
+    "Default-on, deployment, production and release remain closed."
+  ],
+  "acceptance_owner": "gpt_sol",
+  "integration_owner": "gpt_sol",
+  "terminal_decision": "candidate_ready"
+}

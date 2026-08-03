@@ -40,6 +40,10 @@ external_verifier:
   postcondition:
     candidate_head: unchanged
     candidate_worktree: clean
+  environment_boundary:
+    exact_existing_interpreter_required: true
+    package_or_environment_bootstrap: forbidden
+    missing_dependency_action: stop_and_report
   triggers:
     - security_control_change
     - new_security_write_deployment_or_release_authority
@@ -102,6 +106,9 @@ dispatch_economy:
 test_execution:
   repository_conftest_pytest: serial
   shared_postgresql_schema: serial
+  required_pytest_launcher: ../../scripts/ariadne_serial_pytest.py
+  conftest_enforcement: ../../tests/conftest.py
+  direct_pytest_bypass: serialized_by_repository_conftest
   parallel_allowed_only_for:
     - import_free_static_checks
     - filesystem_only_checks
@@ -117,6 +124,8 @@ incident_learning:
     - exact_command_scope_failed
     - evidence_narrative_conflicted_with_preserved_evidence
     - worker_transport_failed_without_nontransferable_closeout
+    - shared_postgresql_pytest_serialization_collision
+    - reviewer_environment_or_dependency_mutation
   origin_classes:
     - agent_behavior
     - transport

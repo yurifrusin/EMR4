@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "verifier_acceptance",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:6097cbd3b168e4260cfe3dfaa68993d30047a2a65647706c16b9b08e4b4ac6d5",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The Diary route-intercepted browser plan, Davida default-location command-boundary plan, agent-error register plan, current revision-3 register and changed verifier and sprint-worker policies were read completely. The candidates remain provider-free, authored-synthetic or architecture-only, and the new cross-process pytest lock is the deterministic correction for AER-0010.",
+    "current_authority_allocation": "Yuri's standing two-lane authority permits ordinary development, bounded parallel agents, deterministic verification and risk-triggered independent review. Sol retains architecture, acceptance, recovery, integration and protected-boundary decisions. Gemini 3.6 Flash/high is independent review only and no worker may move protected refs.",
+    "git_refs_and_worktree": "HEAD and origin/codex/ariadne-bernie-davida-parallel-seam are aligned at ec7af55d58997ed967abce05af5fa5bbe3bbb3dd. Local/origin master and local/origin handoff/current are aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty. The worktree contains only the intentional fifth-pair and error-framework candidate plus the separately owned untracked docs/branding directory. No pytest or Playwright process is active.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction at 449 lines / 67954 bytes / SHA-256 af5b7976ab03cd83f1f48678948a46d1d5a780fa658016610ebd82ec164b38c7. It retains the fifth-pair Diary route-intercepted browser and Davida non-executing command-boundary authority and the revision-1 agent-error framework.",
+    "protected_evidence_boundaries": "Protected holdouts and historical PHI remain unopened. Diary remains route_intercepted_browser, default-off and without app.main, real identity/data or product writes. Davida remains non-executing with no mounted route, migration or apply authority. Providers, memory/RAG, arbitrary API access, cloud/IAM, deployment, production, release and protected refs remain closed. docs/branding is user-owned and must remain unmodified, untested, unstaged and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

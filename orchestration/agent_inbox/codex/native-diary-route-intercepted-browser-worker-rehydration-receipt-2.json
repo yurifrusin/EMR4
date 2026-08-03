@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:3e8cdd9b3a411cf1b97e04912835efc6275fbf61b75d56df4259b659646989f4",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted native-Diary default-off application-session UI composition plan, threat-model delta, closeout and Sol acceptance were read completely. They freeze the exact boolean-true, closed three-key, injected no-argument fixed reader, canonical reconciler, fail-closed enabled path, transition invalidation and unchanged feature-off legacy behavior that this browser rehearsal must exercise.",
+    "current_authority_allocation": "GPT Sol remains conductor, acceptance owner and integrator. This native worker owns only the bounded Diary browser implementation/evidence artifacts and receives no acceptance, integration, commit, push, protected-ref, deployment, production or release authority. High reasoning is sufficient for deterministic Playwright work under the frozen acceptance boundary.",
+    "git_refs_and_worktree": "At dispatch, HEAD and origin/codex/ariadne-bernie-davida-parallel-seam are ec7af55d58997ed967abce05af5fa5bbe3bbb3dd; local/origin master and local/origin handoff/current are 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty. User-owned docs/branding and three root-owned fifth-pair rehydration files are the only observed concurrent untracked residue and are excluded from this lane.",
+    "live_handover_current_baton": "The 449-line, 67954-byte AGENTS.md at SHA-256 af5b7976ab03cd83f1f48678948a46d1d5a780fa658016610ebd82ec164b38c7 was read completely. The Current Baton names the bounded provider-free authored-synthetic route-intercepted native-Diary browser rehearsal as the active Diary lane.",
+    "protected_evidence_boundaries": "Evidence is exactly route_intercepted_browser over authored-synthetic fixtures. The worker must not import or mount app.main, access a backend/database/provider/real identity or data, enable the feature by default, touch docs/branding, inspect protected evidence, add commands or writes, deploy, release, update AGENTS.md or shared continuity maps."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

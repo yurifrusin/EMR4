@@ -1,0 +1,96 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "sprint_planning",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely at 449 lines / 67954 bytes / SHA-256 af5b7976ab03cd83f1f48678948a46d1d5a780fa658016610ebd82ec164b38c7. It records ariadne_agent_error_correction_register_pass and names the provider-free route-intercepted Diary rehearsal plus architecture-only Davida proposal-to-confirm boundary as the authorised fifth pair.",
+    "current_authority_allocation": "Yuri's standing two-lane authority permits ordinary tranche-to-tranche continuation and parallel agents. Sol retains planning, acceptance, integration, recovery and protected-boundary decisions; implementation and review workers receive only their exact lane scopes and no protected-ref, provider, deployment, production, release or actual administrative write authority.",
+    "active_plan_and_acceptance": "The native Diary application-session UI composition plan, threat delta, closeout and Sol acceptance, the Davida default-location dry-run plan, design, threat delta, closeout and Sol acceptance, the API Spine ADR/programme, capability charters, permission matrix, idempotency/audit preflight, proposal-idempotency tranche and relevant appointment command patterns/tests were read. This fifth pair proves route-intercepted browser composition and freezes a non-executing future command boundary only.",
+    "protected_evidence_boundaries": "Diary evidence must be labelled route_intercepted_browser, stay authored-synthetic, provider-free and default-off, avoid app.main and real identity/data, and prove no partial render on enabled failure plus legacy preservation when off. Davida may define proposal/confirm schemas and deterministic acceptance only; it may not mount a route, add a migration, call a provider, access product data, grant Davida confirm/apply authority, or implement a write. docs/branding remains user-owned, unmodified, untested, unstaged and excluded. No protected refs, deployment, production or release actions are authorised.",
+    "git_refs_and_worktree": "HEAD and origin/codex/ariadne-bernie-davida-parallel-seam are aligned at ec7af55d58997ed967abce05af5fa5bbe3bbb3dd; local/origin master and local/origin handoff/current are aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602; the index is empty and docs/branding is the only pre-existing worktree residue."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_bernie_davida_fifth_pair_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: AGENTS.md fully reread and exact fifth pair restored.",
+        "current_authority_allocation: bounded parallel implementation and independent review permitted; Sol alone accepts and integrates.",
+        "active_plan_and_acceptance: fourth-pair acceptance and API Spine command patterns fully restored.",
+        "protected_evidence_boundaries: provider-free, authored-synthetic, non-executing, no app.main, no branding, no protected refs or deployment.",
+        "git_refs_and_worktree: exact task/protected refs verified; only docs/branding residue present."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Two bounded workers may be dispatched only after this receipt passes; each must repeat the five named sources in its result packet."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Gemini 3.6 Flash/high remains risk-triggered, independent, review-only and unable to accept or integrate; no provider call is authorised by this receipt."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The configured external implementation transport is not selected; bounded native workers are used for this repository-local pair."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The real-TTY fallback is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The leverage-gated Claude lane is not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "codex-native-parallel-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

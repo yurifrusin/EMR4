@@ -10,6 +10,7 @@ The conftest handles schema creation/drop around the test session and
 truncates practice-scoped data before every test so tests are isolated.
 """
 
+import json
 import os
 import time as _time
 from datetime import date, time
@@ -27,11 +28,52 @@ from app.models.base import Base
 from app.models.patients import Patient
 from app.models.tenancy import Practice, Practitioner, User, UserRole
 from app.services.auth_service import create_access_token, hash_password
+from scripts.ariadne_serial_pytest import (
+    LOCK_TIMEOUT_ENV,
+    SerialPytestLockTimeout,
+    serial_pytest_lock,
+)
 
 TEST_DB_URL = os.getenv(
     "TEST_DATABASE_URL",
     "postgresql://postgres:postgres@127.0.0.1:5434/gp_pms_test",
 )
+_SERIAL_PYTEST_LOCK_CONTEXT = None
+
+
+def pytest_sessionstart(session):
+    """Serialize every repository pytest entry before shared-schema setup."""
+    del session
+    global _SERIAL_PYTEST_LOCK_CONTEXT
+    raw_timeout = os.getenv(LOCK_TIMEOUT_ENV, "900")
+    try:
+        timeout_seconds = float(raw_timeout)
+        context = serial_pytest_lock(timeout_seconds=timeout_seconds)
+        waited = context.__enter__()
+    except (SerialPytestLockTimeout, ValueError) as error:
+        raise pytest.UsageError(str(error)) from error
+    _SERIAL_PYTEST_LOCK_CONTEXT = context
+    print(
+        json.dumps(
+            {
+                "lock_scope": "repository_conftest_shared_postgresql_schema",
+                "schema_version": "ariadne.serial-pytest-lock.v1",
+                "status": "acquired",
+                "waited_seconds": round(waited, 3),
+            },
+            sort_keys=True,
+        ),
+        flush=True,
+    )
+
+
+def pytest_sessionfinish(session, exitstatus):
+    """Release the shared-schema lock after every repository pytest session."""
+    del session, exitstatus
+    global _SERIAL_PYTEST_LOCK_CONTEXT
+    if _SERIAL_PYTEST_LOCK_CONTEXT is not None:
+        _SERIAL_PYTEST_LOCK_CONTEXT.__exit__(None, None, None)
+        _SERIAL_PYTEST_LOCK_CONTEXT = None
 
 
 # ─── Engine (session-scoped: create tables once, drop at end) ─────────────────

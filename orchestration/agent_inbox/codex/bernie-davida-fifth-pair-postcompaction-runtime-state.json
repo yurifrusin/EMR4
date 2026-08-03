@@ -1,0 +1,93 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "verifier_acceptance",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction at 449 lines / 67954 bytes / SHA-256 af5b7976ab03cd83f1f48678948a46d1d5a780fa658016610ebd82ec164b38c7. It retains the fifth-pair Diary route-intercepted browser and Davida non-executing command-boundary authority and the revision-1 agent-error framework.",
+    "current_authority_allocation": "Yuri's standing two-lane authority permits ordinary development, bounded parallel agents, deterministic verification and risk-triggered independent review. Sol retains architecture, acceptance, recovery, integration and protected-boundary decisions. Gemini 3.6 Flash/high is independent review only and no worker may move protected refs.",
+    "active_plan_and_acceptance": "The Diary route-intercepted browser plan, Davida default-location command-boundary plan, agent-error register plan, current revision-3 register and changed verifier and sprint-worker policies were read completely. The candidates remain provider-free, authored-synthetic or architecture-only, and the new cross-process pytest lock is the deterministic correction for AER-0010.",
+    "protected_evidence_boundaries": "Protected holdouts and historical PHI remain unopened. Diary remains route_intercepted_browser, default-off and without app.main, real identity/data or product writes. Davida remains non-executing with no mounted route, migration or apply authority. Providers, memory/RAG, arbitrary API access, cloud/IAM, deployment, production, release and protected refs remain closed. docs/branding is user-owned and must remain unmodified, untested, unstaged and excluded.",
+    "git_refs_and_worktree": "HEAD and origin/codex/ariadne-bernie-davida-parallel-seam are aligned at ec7af55d58997ed967abce05af5fa5bbe3bbb3dd. Local/origin master and local/origin handoff/current are aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty. The worktree contains only the intentional fifth-pair and error-framework candidate plus the separately owned untracked docs/branding directory. No pytest or Playwright process is active."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_postcompaction_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The primary session completed the post-compaction five-source reconstruction and observed the exact dirty-worktree classification.",
+        "The lost yielded check cell is treated as unknown and its tests will be rerun through the enforced serial launcher."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "The two bounded native implementation workers returned preserved result artifacts and are no longer active."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Gemini 3.6 Flash/high remains eligible only after a fresh deterministic pass and exact clean candidate binding; no review call is authorised by this receipt alone."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The configured external implementation transport is not selected for the remaining integrated verification."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The real-TTY fallback is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The leverage-gated Claude lane is not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "codex-native-parallel-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

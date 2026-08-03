@@ -1,0 +1,18 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_dispatch",
+  "planned_action": "worker_dispatch",
+  "reasons": [
+    "continuation_event_missing_or_unapproved",
+    "adapter_probe_method_invalid:codex_subagent_spawn",
+    "workspace_receipt_missing:native_diary_route_intercepted_browser_worker",
+    "context_observation_missing:orchestrator"
+  ],
+  "rehydrated_from_receipt": false,
+  "rehydration_sources": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:3e8cdd9b3a411cf1b97e04912835efc6275fbf61b75d56df4259b659646989f4",
+  "source_evidence": {},
+  "status": "revision_required",
+  "worker_dispatch_permitted": false
+}

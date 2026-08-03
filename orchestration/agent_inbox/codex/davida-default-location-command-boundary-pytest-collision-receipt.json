@@ -1,0 +1,27 @@
+{
+  "schema_version": "emr4.davida_default_location_command_boundary.pytest_collision.v1",
+  "recorded_on": "2026-08-03",
+  "classification": "shared_postgresql_pytest_serialization_collision",
+  "lane": "davida_default_location_command_boundary_architecture",
+  "first_command": ".\\.venv\\Scripts\\python.exe -m pytest tests\\test_davida_practice_administration_default_location_command_boundary.py -q",
+  "first_result": {
+    "tests_collected": 31,
+    "passed": 30,
+    "failed": 1,
+    "failure": "local documentation whitespace assertion only",
+    "candidate_effect": "assertion repaired mechanically before the collided rerun"
+  },
+  "collided_command": ".\\.venv\\Scripts\\python.exe -m pytest tests\\test_davida_practice_administration_default_location_command_boundary.py -q; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; .\\.venv\\Scripts\\python.exe -m ruff check tests\\test_davida_practice_administration_default_location_command_boundary.py",
+  "observed_symptom": "tests/conftest.py clean_db setup encountered psycopg2 UndefinedTable for relation practices while truncating the shared schema; 26 tests errored after three early passes",
+  "cause_boundary": "concurrent repository pytest schema setup_or_teardown; not admissible as a candidate defect or acceptance result",
+  "candidate_state": "mechanical local assertion repaired; deterministic pytest acceptance pending a root-granted serialized slot",
+  "evidence_admissibility": {
+    "first_run_is_final_acceptance": false,
+    "collided_run_is_final_acceptance": false,
+    "concurrent_results_admissible": false,
+    "rerun_required_under_serial_slot": true
+  },
+  "central_agent_error_register_modified": false,
+  "pytest_or_playwright_paused_until_root_grant": true,
+  "terminal_decision": "revision_required"
+}

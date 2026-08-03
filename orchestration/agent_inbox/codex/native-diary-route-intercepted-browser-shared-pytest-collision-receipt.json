@@ -1,0 +1,28 @@
+{
+  "schema_version": "ariadne.worker_execution_collision.v1",
+  "date": "2026-08-03",
+  "lane": "native_diary_route_intercepted_browser",
+  "command": ".\\.venv\\Scripts\\python.exe -m pytest -q tests\\test_raisa_provider_free_native_diary_application_session_route_intercepted_browser.py",
+  "observed_result": {
+    "first_test_completed": true,
+    "remaining_tests_admitted": false,
+    "symptom": "tests/conftest.py clean_db failed while executing TRUNCATE practices RESTART IDENTITY CASCADE because PostgreSQL reported relation practices does not exist",
+    "pytest_summary": "1 passed, 8 setup errors",
+    "classification": "shared_postgresql_test_schema_collision",
+    "candidate_result": "inadmissible_test_run"
+  },
+  "candidate_state": {
+    "browser_acceptance_generation": "passed_before_collision",
+    "browser_acceptance_reproduction": "passed_before_collision",
+    "ruff": "passed",
+    "node_syntax": "passed",
+    "git_diff_check": "passed",
+    "focused_pytest": "not_established_by_this_run"
+  },
+  "control": {
+    "further_pytest_or_playwright_stopped": true,
+    "central_agent_error_register_modified_by_worker": false,
+    "next_action": "wait_for_root_serial_test_slot_and_restored_shared_schema"
+  },
+  "terminal_decision": "revision_required"
+}

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "verifier_acceptance",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:6097cbd3b168e4260cfe3dfaa68993d30047a2a65647706c16b9b08e4b4ac6d5",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The complete Diary route-intercepted browser plan, Davida default-location command-boundary plan, agent-error register plan and current revision-3 register were reread. Diary is restricted to authored-synthetic provider-free route interception with no app.main or product authority; Davida is documentation-only and non-executing; AER-0008 through AER-0010 and their deterministic serial-pytest correction are in review scope.",
+    "current_authority_allocation": "GPT Sol retains architecture, acceptance, recovery, integration and protected-ref authority. This Codex native independent reviewer has read-only code/security/acceptance review authority only and may create only this receipt/runtime state plus one review report; no candidate edits, tests, browser, database, providers, external systems, staging, commit, push or protected actions are authorized.",
+    "git_refs_and_worktree": "Current branch codex/ariadne-bernie-davida-parallel-seam, HEAD and its upstream are aligned at ec7af55d58997ed967abce05af5fa5bbe3bbb3dd. Local/origin master and local/origin handoff/current are all aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty. The worktree contains the intentional fifth-pair and error-framework candidate plus separately owned untracked docs/branding, which remains excluded. Exact pre-review git status and all five required refs were inspected read-only.",
+    "live_handover_current_baton": "AGENTS.md was reread completely at 449 lines / 67954 bytes / SHA-256 af5b7976ab03cd83f1f48678948a46d1d5a780fa658016610ebd82ec164b38c7. The active baton authorizes only the fifth-pair Diary route-intercepted browser rehearsal and Davida non-executing default-location command-boundary architecture, alongside the revision-3 agent-error correction candidate.",
+    "protected_evidence_boundaries": "Sections 5 and 6 were restored. Protected holdouts v1-v10, historical PHI, provider/model calls, memory/RAG, cloud/IAM, production, deployment, release, new product writes, protected refs and user-owned docs/branding remain closed and untouched. No protected fixture, support module, manifest, seal, receipt or case report was opened, listed, searched, run or inferred."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 1,
+  "register_revision": 4,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-03",
@@ -279,6 +279,160 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0008",
+      "attempt_id": "bernie-davida-fifth-pair-rehydration-001",
+      "observed_on": "2026-08-03",
+      "tranche": "bernie-davida-fifth-pair-rehydration",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": null,
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A fresh five-source runtime packet must enumerate every configured adapter and required worker-slot inventory entry, including explicitly unselected resources, before worker dispatch.",
+      "observed_error": "The first fifth-pair runtime packet omitted three unselected adapter entries and the configured deepseek-flash worker-slot inventory, so the preflight returned revision_required and prohibited dispatch.",
+      "detection_method": "The deterministic orchestrator preflight reported the exact four missing inventory entries and set worker_dispatch_permitted to false.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/bernie-davida-fifth-pair-rehydration-receipt.json",
+        "orchestration/agent_inbox/codex/bernie-davida-fifth-pair-rehydration-runtime-state.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.incomplete_adapter_inventory",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "The runtime packet explicitly recorded every configured but unselected adapter and both native and configured worker-slot inventories; a distinct second receipt passed before any worker dispatch.",
+        "prevention_control": "Pre-dispatch packet construction must copy the complete configured adapter and worker-slot inventory and mark unused resources unknown or inactive rather than omitting them.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/bernie-davida-fifth-pair-rehydration-receipt-2.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0009",
+      "attempt_id": "native-diary-route-browser-worker-rehydration-001",
+      "observed_on": "2026-08-03",
+      "tranche": "native-diary-route-intercepted-browser",
+      "origin": "agent_behavior",
+      "role": "implementer",
+      "resource_id": "codex-native-parallel-worker",
+      "model": null,
+      "reasoning_level": null,
+      "transport": "codex_subagent",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A worker must obtain a passed five-source receipt using an approved continuation event, configured adapter observation, bound workspace receipt and orchestrator context before any task action.",
+      "observed_error": "The first Diary worker packet used an unapproved continuation event, an invalid adapter probe method, a missing workspace receipt and a missing orchestrator context observation, so dispatch failed closed for four exact reasons.",
+      "detection_method": "The deterministic orchestrator preflight returned revision_required, rehydrated_from_receipt false and worker_dispatch_permitted false before any implementation or browser action.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/native-diary-route-intercepted-browser-worker-rehydration-receipt.json",
+        "orchestration/agent_inbox/codex/native-diary-route-intercepted-browser-worker-rehydration-runtime-state.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "worker.invalid_rehydration_contract",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "The worker used pre_worker_dispatch, the configured synthetic adapter observation, an orchestrator context observation and no premature assigned-worker claim; a distinct receipt passed before task action.",
+        "prevention_control": "Worker packets must use settings-approved continuation, adapter, workspace and context values and remain blocked until the deterministic receipt explicitly permits dispatch.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/native-diary-route-intercepted-browser-worker-rehydration-receipt-2.json",
+          "orchestration/agent_inbox/codex/native-diary-route-intercepted-browser-worker-result.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0010",
+      "attempt_id": "bernie-davida-fifth-pair-parallel-pytest-001",
+      "observed_on": "2026-08-03",
+      "tranche": "bernie-davida-fifth-pair",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "shared-postgresql-pytest-gate",
+      "model": null,
+      "reasoning_level": null,
+      "transport": "local_parallel_pytest_processes",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "material",
+      "expected_invariant": "Every pytest process loading repository tests/conftest.py must execute serially against the one disposable PostgreSQL test schema.",
+      "observed_error": "The two parallel lanes entered pytest concurrently; one schema lifecycle removed the practices relation while the other process was truncating it, producing one inadmissible 1-pass/8-error run and one inadmissible 3-pass/26-error run.",
+      "detection_method": "Both workers independently reported psycopg2 UndefinedTable for practices during tests/conftest.py clean_db setup, stopped further tests and preserved exact collision receipts.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/native-diary-route-intercepted-browser-shared-pytest-collision-receipt.json",
+        "orchestration/agent_inbox/codex/davida-default-location-command-boundary-pytest-collision-receipt.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.shared_postgresql_pytest_collision",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Root granted exclusive test slots; the Diary lane passed nine focused tests and the Davida lane passed 31 focused plus 36 API Spine tests. The first wrapper-only repair was rejected because direct pytest could bypass it; repository tests/conftest.py now acquires the OS lock for every normal pytest entry point, while the wrapper supplies the bounded timeout.",
+        "prevention_control": "Every repository pytest process is serialized by tests/conftest.py before shared-schema setup, including direct python -m pytest entry; scripts/ariadne_serial_pytest.py remains the required shell-free launcher and supplies the bounded wait. Cross-process tests prove contention failure and recovery.",
+        "evidence_paths": [
+          "scripts/ariadne_serial_pytest.py",
+          "tests/conftest.py",
+          "tests/test_ariadne_serial_pytest.py",
+          "orchestration/harness_settings/sprint_worker_policy.yaml",
+          "orchestration/agent_inbox/codex/native-diary-route-intercepted-browser-worker-result.json",
+          "orchestration/agent_inbox/codex/davida-default-location-command-boundary-worker-receipt.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0011",
+      "attempt_id": "fifth-pair-native-independent-review-001",
+      "observed_on": "2026-08-03",
+      "tranche": "bernie-davida-fifth-pair",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "codex-native-independent-reviewer",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_subagent",
+      "stage": "independent_review",
+      "category": "command_scope_violation",
+      "process_severity": "material",
+      "expected_invariant": "The bounded read-only reviewer must use an already-installed interpreter and must not invoke package or environment bootstrap commands or change the integration environment.",
+      "observed_error": "Before candidate inspection, the reviewer invoked uv run with Python 3.12; uv replaced the ignored repository .venv, temporarily changed uv.lock and then failed because PyYAML was absent. The tracked lockfile was restored, but root confirmed the verification environment had lost its installed tools.",
+      "detection_method": "The reviewer disclosed the command and side effects in its rejected report; root then verified uv.lock was clean, found the replacement Python 3.12 environment without pytest or Ruff, and rebuilt the exact repository environment before further verification.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/fifth-pair-independent-review.md",
+        "orchestration/agent_inbox/codex/fifth-pair-independent-review-runtime-state.json",
+        "orchestration/agent_inbox/codex/fifth-pair-independent-review-rehydration-receipt.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "verifier.unapproved_environment_bootstrap",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "The reviewer stopped package actions, restored uv.lock byte-for-byte and returned revision_required. Root rebuilt the repository .venv from the exact pinned runtime/development requirements plus the existing verification versions, then resumed deterministic checks; final independent veto review transfers to a fresh exact Antigravity worktree.",
+        "prevention_control": "Reviewer packets must name one exact already-installed interpreter, forbid uv/pip/package/environment bootstrap, and require stop-and-report on a missing dependency; independent review runs in a disposable exact worktree with clean-HEAD postconditions.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-4.md",
+          "requirements.txt",
+          "requirements-dev.txt",
+          "orchestration/agent_inbox/codex/fifth-pair-independent-review.md"
+        ]
+      },
+      "status": "contained"
     }
   ]
 }
