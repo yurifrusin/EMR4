@@ -1,0 +1,30 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "verifier_acceptance",
+  "planned_action": "accept_and_publish_the_bounded_provider_free_office_practitioner_directory_consumer_then_continue_to_the_authorised_provider_free_descendants",
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "source_evidence": {
+    "live_handover_current_baton": "The accepted parent remains provider_free_session_practitioner_directory_read_bridge_pass at Continuity 200 / Compass 181; this consumer is its authorised Office descendant.",
+    "current_authority_allocation": "Yuri authorised this tranche plus five clear provider-free descendants and performed the two requested supervised real-Office actions. No worker received acceptance or integration authority.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-office-practitioner-directory-consumer-plan.md",
+      "docs/raisa-provider-free-office-practitioner-directory-consumer-design.md",
+      "docs/security/raisa-provider-free-office-practitioner-directory-consumer-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/live-office-backend-postgres-evidence.json"
+    ],
+    "protected_evidence_boundaries": "No protected holdout, historical Diary, patient, clinical or document content, live provider, real identity, product mutation, deployment, Pages, protected-ref or Dependabot action occurred. docs/branding remained untouched and excluded.",
+    "git_refs_and_worktree": "Task branch codex/raisa-provider-free-office-practitioner-directory-consumer remains based at 95381fc12da2e6a6bb8301bb7974c53e61c3c096. Local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The final disposable database, four roles, pools, harness, relay, ports and desktop debugging session are cleaned up."
+  },
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

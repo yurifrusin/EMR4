@@ -1,0 +1,84 @@
+{
+  "claim_limits": [
+    "Two supervised authored-synthetic Office active-practitioner renders only.",
+    "No real identity, patient or clinical data, document access, general product mount, deployment, production or release is established."
+  ],
+  "cleanup": {
+    "database_absent_after": true,
+    "four_task_roles_absent_after": true,
+    "passed": true,
+    "pools_disposed": true
+  },
+  "data_class": "authored_synthetic",
+  "database": {
+    "authorization_allowed_audit_count": 2,
+    "fresh_owner_readback": true,
+    "passed": true,
+    "raw_session_or_csrf_match_count": 0,
+    "revoked_surface_session_count": 2,
+    "target_or_product_identifier_recorded": false
+  },
+  "default_off": true,
+  "development_origin_class": "loopback_browser_preview_origin",
+  "durable_secret_or_target_match_count": 0,
+  "evidence_label": "route_intercepted_browser",
+  "migration": {
+    "current_head_exact": true,
+    "orm_migration_drift_absent": true,
+    "passed": true
+  },
+  "passed": true,
+  "result": "provider_free_office_practitioner_directory_consumer_pass",
+  "results": {
+    "word_desktop": {
+      "active_practitioner_count": 2,
+      "directory_read_passed": true,
+      "exact_projection_passed": true,
+      "failure_code": "none",
+      "host_class": "installed_word",
+      "logout_passed": true,
+      "post_logout_session_denied": true,
+      "result_submitted": true,
+      "surface": "word_desktop",
+      "terminal_status": "passed"
+    },
+    "word_online": {
+      "active_practitioner_count": 2,
+      "directory_read_passed": true,
+      "exact_projection_passed": true,
+      "failure_code": "none",
+      "host_class": "word_online",
+      "logout_passed": true,
+      "post_logout_session_denied": true,
+      "result_submitted": true,
+      "surface": "word_online",
+      "terminal_status": "passed"
+    }
+  },
+  "role_and_pool": {
+    "auth_identity_split": true,
+    "passed": true,
+    "pool_maximum_each": 2,
+    "product_identity_split": true,
+    "separate_capabilities": true
+  },
+  "role_probes": {
+    "all_denials_insufficient_privilege": true,
+    "four_direct_privilege_denials": true,
+    "passed": true,
+    "role_names_recorded": false
+  },
+  "schema_version": "emr4.provider-free-office-practitioner-directory-consumer-evidence.v1",
+  "side_effects": {
+    "deployments": 0,
+    "document_reads": 0,
+    "document_writes": 0,
+    "external_identity_calls": 0,
+    "microsoft_or_office_identity_calls": 0,
+    "patient_health_or_clinical_reads": 0,
+    "product_commands_or_writes": 0,
+    "product_reads": 2,
+    "production_changes": 0,
+    "provider_calls": 0
+  }
+}

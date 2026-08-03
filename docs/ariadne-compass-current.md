@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 now extends its provider-free application session to one unmounted, active-only authored-synthetic practitioner-directory read. Continuity 200 / Compass 181 bind exact current-principal checks, required authorization audit, display-safe product columns and zero patient/clinical/provider/write authority. Real identity, broader product access, deployment, production and release remain closed.
+> EMR4 now carries one fixed, authorized active-practitioner-directory read through independent supervised installed Word and Word Online sessions. Continuity 201 / Compass 182 bind exact host admission, display-safe projection, authorization audit, logout, post-logout denial and complete disposable cleanup. Real identity, patient/clinical/document access, broader product authority, deployment, production and release remain closed.
 
 ## North star
 
@@ -174,30 +174,34 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One-use grant redemption now rechecks binding and current synthetic principal truth and commits the accepted session/cookies without product authority. Lineage parent: `raisa-provider-free-oidc-binding-admission-grant-boundary`.
 79. **Open the least-sensitive provider-free product read behind the accepted application session — Raisa Provider-Free Session Practitioner-Directory Read Bridge**
    One unmounted endpoint factory now authorizes and audits an active authored-synthetic practitioner-directory read through exact product columns. Lineage parent: `raisa-provider-free-oidc-admission-grant-redemption-bridge`.
+80. **Put the first least-sensitive authorized product read into both real Office hosts — Raisa Provider-Free Office Practitioner-Directory Consumer**
+   Independent supervised installed Word and Word Online sessions each rendered the fixed active-practitioner directory, logged out and rejected reuse. Lineage parent: `raisa-provider-free-session-practitioner-directory-read-bridge`.
 
 ## Current position
 
-**Provider-free active-practitioner-directory authorization bridge — Raisa Provider-Free Session Practitioner-Directory Read Bridge**
+**Provider-free Office practitioner-directory consumer — Raisa Provider-Free Office Practitioner-Directory Consumer**
 
-**Why this proof came next:** Yuri chose the product-authorization direction after the provider-free OIDC bridge closed at an application session.
+**Why this proof came next:** The unmounted session-backed directory factory had passed, making an exact supervised Office consumer the least-sensitive next product proof.
 
-Real loopback HTTP and disposable PostgreSQL prove exact current-principal checks, required authorization audit, display-safe projection, least-privilege product access and complete cleanup.
+Two real Office hosts now prove the fixed display-safe GraphQL read, required authorization audit, logout, post-logout denial and complete disposable cleanup.
 
 ### What this unlocks
 
 - Review the result on its stacked draft pull request.
-- A later bounded tranche may connect a supervised authored-synthetic Office consumer to this still-unmounted factory.
+- The authorised next descendant may make reload, retry and stale taskpane navigation visibly inert without broadening product authority.
 
 ### What it does not solve
 
 - Real identity, live Microsoft/provider interoperability or real principal mapping.
-- Patient/clinical reads, other product resources, commands or writes.
-- General endpoint mounting, Office UI consumption, production security, deployment or release.
+- Patient/clinical/document reads, broader product resources, commands or writes.
+- General endpoint mounting, organisational deployment, production security, deployment or release.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Bounded opening `api-change`: Authorize one default-off provider-free authored-synthetic application-session active-practitioner-directory read with exact product columns and required audit.
+- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
+- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
+- Bounded opening `api-change`: Authorize one task-scoped provider-free authored-synthetic Office consumer of the active-practitioner-directory factory in supervised installed Word and Word Online.
 - All other named boundaries remain closed: `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -427,10 +431,13 @@ Prerequisites:
 - **Should the next tranche pursue live-provider interoperability, real internal principal mapping, or a separately bounded product-authorization path?**
   Required before: Satisfied on 2026-08-02: Yuri selected the bounded provider-free product-authorization path; live identity and broader product authority remain closed.
 - **Should a supervised authored-synthetic Office consumer be connected to the default-off practitioner-directory factory?**
-  Required before: Required before adding a taskpane consumer or task-specific mount; real identity, patient/clinical data and production remain separately closed.
+  Required before: Satisfied on 2026-08-03: Yuri authorised and supervised the exact authored-synthetic installed Word and Word Online consumer; real identity, broader product authority and production remain closed.
+- **Should reload, retry and stale Office taskpane navigation be reconciled into an explicit inert terminal state?**
+  Required before: Satisfied by Yuri's authority for five clear provider-free descendants; this is the first recommended descendant and grants no new product resource or command authority.
 
 ## Map limits
 
+- The Office practitioner-directory result is provider-free, authored-synthetic, active-only and task-scoped; it proves neither real identity nor patient/clinical/document or product-write safety.
 - The practitioner-directory result is provider-free, authored-synthetic, active-only and unmounted; it proves neither real identity nor patient/clinical product access.
 - The atomic redemption result remains provider-free and authored-synthetic: its session cookies prove the backend transaction shape, not real identity or product authorization.
 - The HMAC binding/admission result is provider-free and authored-synthetic: its 60-second bearer is not an application session and grants no cookie, product, deployment or production authority.
@@ -675,6 +682,9 @@ Prerequisites:
 - `docs/raisa-postgresql-oidc-operational-connection-boundary-closeout.md`
 - `docs/raisa-postgresql-oidc-operational-connection-boundary-design.md`
 - `docs/raisa-postgresql-oidc-operational-connection-boundary-plan.md`
+- `docs/raisa-provider-free-office-practitioner-directory-consumer-closeout.md`
+- `docs/raisa-provider-free-office-practitioner-directory-consumer-design.md`
+- `docs/raisa-provider-free-office-practitioner-directory-consumer-plan.md`
 - `docs/raisa-provider-free-oidc-admission-grant-redemption-bridge-closeout.md`
 - `docs/raisa-provider-free-oidc-admission-grant-redemption-bridge-design.md`
 - `docs/raisa-provider-free-oidc-admission-grant-redemption-bridge-plan.md`
@@ -742,6 +752,7 @@ Prerequisites:
 - `docs/security/raisa-oidc-verifier-dependency-review-2026-08-02.md`
 - `docs/security/raisa-postgresql-oidc-authorization-attempt-store-threat-model-delta.md`
 - `docs/security/raisa-postgresql-oidc-operational-connection-boundary-threat-model-delta.md`
+- `docs/security/raisa-provider-free-office-practitioner-directory-consumer-threat-model-delta.md`
 - `docs/security/raisa-provider-free-oidc-admission-grant-redemption-bridge-threat-model-delta.md`
 - `docs/security/raisa-provider-free-oidc-binding-admission-grant-boundary-threat-model-delta.md`
 - `docs/security/raisa-provider-free-oidc-start-callback-transport-boundary-threat-model-delta.md`
@@ -978,6 +989,7 @@ Prerequisites:
 - `orchestration/continuity/raisa-microsoft-federation-postgresql-persistence/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-postgresql-oidc-authorization-attempt-store/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-postgresql-oidc-operational-connection-boundary/live-local-backend-postgres-operational-evidence.json`
+- `orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/live-office-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-provider-free-oidc-admission-grant-redemption-bridge/live-local-http-backend-postgres-redemption-evidence.json`
 - `orchestration/continuity/raisa-provider-free-oidc-binding-admission-grant-boundary/live-local-http-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-provider-free-oidc-start-callback-transport-boundary/live-local-http-backend-postgres-evidence.json`
@@ -1237,6 +1249,7 @@ Prerequisites:
 - `scripts/ariadne_vertex_sydney_gemini_25_preflight.py`
 - `scripts/ariadne_vertex_sydney_gemini_25_relay.py`
 - `scripts/prepare_raisa_office_web_dev_context.py`
+- `scripts/raisa_provider_free_office_practitioner_directory_consumer.py`
 - `scripts/reception_one_bureau_model_text_lane_audit.py`
 - `scripts/reception_one_bureau_model_text_lane_live.py`
 - `scripts/reception_one_preprinted_form_v5.py`
@@ -1307,4 +1320,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 181; continuity graph revision 200._
+_Compass map revision 182; continuity graph revision 201._

@@ -1,0 +1,41 @@
+{
+  "schema_version": "emr4.provider-free-office-practitioner-directory-consumer-repair-evidence.v1",
+  "result": "revision_required",
+  "passed": false,
+  "evidence_label": "live_local_office_backend_postgres_product_read",
+  "data_class": "authored_synthetic",
+  "failure": {
+    "surface": "word_online",
+    "failure_code": "outer_onedrive_frame_ancestor_not_admitted",
+    "relay_reached_backend": true,
+    "taskpane_response_status": 200,
+    "observed_request_referer_class": "word_edit_officeapps_live",
+    "observed_outer_host_class": "personal_onedrive_live",
+    "repair": "add_exact_https_onedrive_live_com_to_frame_ancestors_without_broadening_script_connect_or_form_authority",
+    "focused_tests_after_repair": "5_passed"
+  },
+  "accepted_partial_result": {
+    "word_desktop_terminal_status": "pending",
+    "word_online_terminal_status": "pending",
+    "product_reads": 0,
+    "authorization_allowed_audit_count": 0,
+    "revoked_surface_session_count": 0
+  },
+  "cleanup": {
+    "database_absent_after": true,
+    "four_task_roles_absent_after": true,
+    "pools_disposed": true,
+    "passed": true
+  },
+  "side_effects": {
+    "provider_calls": 0,
+    "microsoft_or_office_identity_calls": 0,
+    "patient_health_or_clinical_reads": 0,
+    "document_reads": 0,
+    "document_writes": 0,
+    "product_commands_or_writes": 0,
+    "deployments": 0,
+    "production_changes": 0
+  },
+  "durable_secret_or_target_match_count": 0
+}

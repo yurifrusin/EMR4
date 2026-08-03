@@ -1,0 +1,10 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "plan_implement_verify_and_publish_one_default_off_provider_free_authored_synthetic_office_practitioner_directory_consumer_then_continue_through_five_clear_provider_free_descendants_without_real_identity_patient_clinical_command_deployment_or_release_authority",
+  "reasons": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:0d54e6b6f493b7955970c922cac66ca522b25d036521d89d3639b6be04ebc08f",
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
