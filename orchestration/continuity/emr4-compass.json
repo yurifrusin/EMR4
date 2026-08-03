@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 182,
-  "updated_at": "2026-08-03T00:30:00Z",
-  "source_graph_revision": 201,
-  "orientation_statement": "EMR4 now carries one fixed, authorized active-practitioner-directory read through independent supervised installed Word and Word Online sessions. Continuity 201 / Compass 182 bind exact host admission, display-safe projection, authorization audit, logout, post-logout denial and complete disposable cleanup. Real identity, patient/clinical/document access, broader product authority, deployment, production and release remain closed.",
+  "map_revision": 187,
+  "updated_at": "2026-08-03T04:00:00Z",
+  "source_graph_revision": 206,
+  "orientation_statement": "EMR4's fixed Office active-practitioner consumer now has explicit inert reload/history behaviour, safe expired/revoked-session reconciliation, cross-surface cookie/CSRF/nonce isolation, identifier-free lifecycle counts and a route-free default-off adapter. Continuity 206 / Compass 187 bind all five results. Fresh authority is required before a native Diary composition review; real identity, broader product reads, every write, deployment, production and release remain closed.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -1402,29 +1402,94 @@
         "orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/live-office-backend-postgres-evidence.json",
         "docs/raisa-provider-free-office-practitioner-directory-consumer-closeout.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-office-reload-terminal-reconciliation",
+      "lineage_parent": "raisa-provider-free-office-practitioner-directory-consumer",
+      "strategic_role": "Make repeated and restored Office taskpane navigation explicitly inert",
+      "outcome": "Repeated delivery revokes surviving session authority once, clears task cookies, omits endpoint and launch material, and denies the stale DOM.",
+      "evidence": [
+        "docs/raisa-provider-free-office-reload-terminal-reconciliation-plan.md",
+        "docs/security/raisa-provider-free-office-directory-lifecycle-descendants-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json",
+        "docs/raisa-provider-free-office-reload-terminal-reconciliation-closeout.md",
+        "tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py"
+      ]
+    },
+    {
+      "node_id": "raisa-provider-free-office-session-loss-reconciliation",
+      "lineage_parent": "raisa-provider-free-office-reload-terminal-reconciliation",
+      "strategic_role": "Converge expired and revoked sessions on one safe taskpane state",
+      "outcome": "Expired and revoked sessions release no rows or raw errors and show one fixed close-and-reopen instruction.",
+      "evidence": [
+        "docs/raisa-provider-free-office-session-loss-reconciliation-plan.md",
+        "docs/security/raisa-provider-free-office-directory-lifecycle-descendants-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json",
+        "docs/raisa-provider-free-office-session-loss-reconciliation-closeout.md",
+        "tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py"
+      ]
+    },
+    {
+      "node_id": "raisa-provider-free-office-cross-surface-replay-isolation",
+      "lineage_parent": "raisa-provider-free-office-session-loss-reconciliation",
+      "strategic_role": "Prove independent installed Word and Word Online authority partitions",
+      "outcome": "Cookie/surface, CSRF and nonce swaps plus consumed-nonce replay are denied with zero product reads.",
+      "evidence": [
+        "docs/raisa-provider-free-office-cross-surface-replay-isolation-plan.md",
+        "docs/security/raisa-provider-free-office-directory-lifecycle-descendants-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json",
+        "docs/raisa-provider-free-office-cross-surface-replay-isolation-closeout.md",
+        "tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py"
+      ]
+    },
+    {
+      "node_id": "raisa-provider-free-office-lifecycle-observability",
+      "lineage_parent": "raisa-provider-free-office-cross-surface-replay-isolation",
+      "strategic_role": "Expose only bounded identifier-free lifecycle reason counts",
+      "outcome": "A versioned ten-reason ledger contains no identifier, correlation or opaque launch value and routes nothing.",
+      "evidence": [
+        "docs/raisa-provider-free-office-lifecycle-observability-plan.md",
+        "docs/security/raisa-provider-free-office-directory-lifecycle-descendants-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json",
+        "docs/raisa-provider-free-office-lifecycle-observability-closeout.md",
+        "tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py"
+      ]
+    },
+    {
+      "node_id": "raisa-provider-free-default-off-office-consumer-adapter",
+      "lineage_parent": "raisa-provider-free-office-lifecycle-observability",
+      "strategic_role": "Extract reusable one-use Office lifecycle decisions without product wiring",
+      "outcome": "The route-free adapter owns only fixed surface decisions, nonce admission and sanitized counters and remains absent from app.main.",
+      "evidence": [
+        "docs/raisa-provider-free-default-off-office-consumer-adapter-plan.md",
+        "docs/security/raisa-provider-free-office-directory-lifecycle-descendants-threat-model-delta.md",
+        "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json",
+        "docs/raisa-provider-free-default-off-office-consumer-adapter-closeout.md",
+        "tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-office-practitioner-directory-consumer",
-    "strategic_role": "Provider-free Office practitioner-directory consumer",
-    "why_now": "The unmounted session-backed directory factory had passed, making an exact supervised Office consumer the least-sensitive next product proof.",
-    "outcome": "Two real Office hosts now prove the fixed display-safe GraphQL read, required authorization audit, logout, post-logout denial and complete disposable cleanup.",
+    "node_id": "raisa-provider-free-default-off-office-consumer-adapter",
+    "strategic_role": "Provider-free default-off Office consumer lifecycle adapter",
+    "why_now": "The supervised two-host read passed, making navigation, session-loss and replay lifecycle hardening the least-sensitive authorised follow-on.",
+    "outcome": "Five provider-free descendants now make repeated delivery inert, reconcile lost sessions, isolate surface authority, expose only sanitized reason counts and extract an unmounted adapter.",
     "unlocks": [
-      "Review the result on its stacked draft pull request.",
-      "The authorised next descendant may make reload, retry and stale taskpane navigation visibly inert without broadening product authority."
+      "Review the five lifecycle results on their stacked draft pull request.",
+      "With fresh authority, review a default-off native Diary composition for the same active-practitioner read."
     ],
     "does_not_solve": [
-      "Real identity, live Microsoft/provider interoperability or real principal mapping.",
-      "Patient/clinical/document reads, broader product resources, commands or writes.",
-      "General endpoint mounting, organisational deployment, production security, deployment or release."
+      "Live Microsoft/provider interoperability or real identity mapping.",
+      "Patient/clinical/document access, broader product resources or any command/write.",
+      "Distributed abuse resistance, organisational deployment, protected integration, production or release."
     ],
     "evidence": [
-      "docs/raisa-provider-free-office-practitioner-directory-consumer-plan.md",
-      "docs/raisa-provider-free-office-practitioner-directory-consumer-design.md",
-      "docs/security/raisa-provider-free-office-practitioner-directory-consumer-threat-model-delta.md",
-      "scripts/raisa_provider_free_office_practitioner_directory_consumer.py",
-      "orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/live-office-backend-postgres-evidence.json",
-      "docs/raisa-provider-free-office-practitioner-directory-consumer-closeout.md"
+      "docs/raisa-provider-free-default-off-office-consumer-adapter-plan.md",
+      "docs/security/raisa-provider-free-office-directory-lifecycle-descendants-threat-model-delta.md",
+      "app/services/application_auth_office_consumer.py",
+      "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json",
+      "docs/raisa-provider-free-default-off-office-consumer-adapter-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md"
     ]
   },
   "decision_horizon": [
@@ -2293,18 +2358,32 @@
     {
       "id": "authorize-provider-free-office-directory-reload-reconciliation",
       "question": "Should reload, retry and stale Office taskpane navigation be reconciled into an explicit inert terminal state?",
-      "required_before": "Satisfied by Yuri's authority for five clear provider-free descendants; this is the first recommended descendant and grants no new product resource or command authority.",
+      "required_before": "Satisfied on 2026-08-03 under Yuri's authority for five clear provider-free descendants; all five lifecycle results passed without a material fork.",
       "evidence": [
-        "docs/raisa-provider-free-office-practitioner-directory-consumer-plan.md",
-        "docs/raisa-provider-free-office-practitioner-directory-consumer-design.md",
-        "docs/security/raisa-provider-free-office-practitioner-directory-consumer-threat-model-delta.md",
-        "scripts/raisa_provider_free_office_practitioner_directory_consumer.py",
-        "orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/live-office-backend-postgres-evidence.json",
-        "docs/raisa-provider-free-office-practitioner-directory-consumer-closeout.md"
+        "docs/raisa-provider-free-default-off-office-consumer-adapter-plan.md",
+        "docs/security/raisa-provider-free-office-directory-lifecycle-descendants-threat-model-delta.md",
+        "app/services/application_auth_office_consumer.py",
+        "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json",
+        "docs/raisa-provider-free-default-off-office-consumer-adapter-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md"
+      ]
+    },
+    {
+      "id": "authorize-provider-free-native-diary-directory-composition-review",
+      "question": "Should EMR4 review a default-off native Diary composition for the same active-practitioner read?",
+      "required_before": "Fresh Yuri authority is required because the six-tranche Office consumer and lifecycle sequence is now consumed.",
+      "evidence": [
+        "docs/raisa-provider-free-default-off-office-consumer-adapter-plan.md",
+        "docs/security/raisa-provider-free-office-directory-lifecycle-descendants-threat-model-delta.md",
+        "app/services/application_auth_office_consumer.py",
+        "orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json",
+        "docs/raisa-provider-free-default-off-office-consumer-adapter-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md"
       ]
     }
   ],
   "map_limits": [
+    "The five Office lifecycle descendants are provider-free, authored-synthetic, active-practitioner-only and task-scoped; they add no real identity, broader product authority or production wiring.",
     "The Office practitioner-directory result is provider-free, authored-synthetic, active-only and task-scoped; it proves neither real identity nor patient/clinical/document or product-write safety.",
     "The practitioner-directory result is provider-free, authored-synthetic, active-only and unmounted; it proves neither real identity nor patient/clinical product access.",
     "The atomic redemption result remains provider-free and authored-synthetic: its session cookies prove the backend transaction shape, not real identity or product authorization.",

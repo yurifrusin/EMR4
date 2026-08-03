@@ -8,16 +8,15 @@ surface-bound instances of the accepted GraphQL factory.
 from __future__ import annotations
 
 import argparse
-import hashlib
 import html
 import json
 import re
 import secrets
 import sys
 import threading
-from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
-from typing import Literal
+from typing import Callable, Literal
 
 import uvicorn
 from fastapi import FastAPI, Header, HTTPException, Query, Request, status
@@ -62,6 +61,13 @@ from app.services.application_auth_operational_hardening import (  # noqa: E402
     BoundedFixedWindowRateLimiter,
     PostgresTransportDenialAuditSink,
     ProxyTrustPolicy,
+)
+from app.services.application_auth_office_consumer import (  # noqa: E402
+    DefaultOffOfficeConsumerAdapter,
+    OfficeConsumerDeliveryState,
+    OfficeConsumerLifecycleReason,
+    OfficeConsumerNonceRejected,
+    OfficeConsumerNonceReplayed,
 )
 from app.services.application_auth_product_read import (  # noqa: E402
     ApplicationSessionPractitionerDirectoryBridge,
@@ -166,6 +172,7 @@ class DirectoryResultSubmission(BaseModel):
         "office_unavailable",
         "office_host_mismatch",
         "launch_unavailable",
+        "session_unavailable",
         "directory_unavailable",
         "directory_count_invalid",
         "projection_invalid",
@@ -192,15 +199,6 @@ class SanitizedDirectoryResult(BaseModel):
     failure_code: str
 
 
-@dataclass
-class _SurfaceLaunch:
-    session_value: str
-    csrf_value: str | None
-    evidence_nonce: str | None
-    evidence_nonce_hash: str
-    page_delivered: bool = False
-
-
 class OfficePractitionerDirectoryHarness:
     """Own the exact temporary auth, product-read and Office UI boundary."""
 
@@ -210,6 +208,7 @@ class OfficePractitionerDirectoryHarness:
         origin: str = DEVELOPMENT_ORIGIN,
         output_path: Path | None = EVIDENCE_PATH,
         allow_local_browser_preview: bool = False,
+        clock: Callable[[], datetime] | None = None,
     ) -> None:
         if origin != DEVELOPMENT_ORIGIN and not (
             allow_local_browser_preview and origin == LOCAL_BROWSER_PREVIEW_ORIGIN
@@ -217,12 +216,25 @@ class OfficePractitionerDirectoryHarness:
             raise ValueError("the Office directory origin is frozen")
         self.origin = origin
         self.allow_local_browser_preview = allow_local_browser_preview
+        self._clock = clock
         self._output_path = output_path
         self._lock = threading.Lock()
         self._close_lock = threading.Lock()
         self._closed = False
         self._results: dict[Surface, SanitizedDirectoryResult] = {}
-        self._launches: dict[Surface, _SurfaceLaunch] = {}
+        self.lifecycle = DefaultOffOfficeConsumerAdapter(
+            expected_hosts={
+                Surface.WORD_DESKTOP: "installed_word",
+                Surface.WORD_ONLINE: "word_online",
+            },
+            directory_endpoints={
+                surface: (
+                    f"/office-practitioner-directory/{surface.value}"
+                    "/api/v1/application-auth/product/graphql"
+                )
+                for surface in SURFACES
+            },
+        )
         self._raw_values: list[str] = []
         self._sensitive_targets: list[str] = []
         self._created_roles: list[tuple[str, str]] = []
@@ -252,10 +264,6 @@ class OfficePractitionerDirectoryHarness:
             if isinstance(exc, HarnessSetupFailure):
                 raise
             raise HarnessSetupFailure("office_directory_setup_failed") from exc
-
-    @staticmethod
-    def _hash(value: str) -> str:
-        return f"sha256:{hashlib.sha256(value.encode('utf-8')).hexdigest()}"
 
     @staticmethod
     def _expected_host(surface: Surface) -> str:
@@ -388,6 +396,7 @@ class OfficePractitionerDirectoryHarness:
         self.auth_runtime = RoleScopedPostgresApplicationAuthRuntime(
             session_factory=auth_factory,
             surface_origins=origins,
+            clock=self._clock,
         )
         self.transport = ApplicationAuthTransport(
             runtime=self.auth_runtime,
@@ -469,11 +478,11 @@ class OfficePractitionerDirectoryHarness:
                     nonce,
                 )
             )
-            self._launches[surface] = _SurfaceLaunch(
+            self.lifecycle.register_launch(
+                surface=surface,
                 session_value=created.surface_session_value,
                 csrf_value=csrf_value,
                 evidence_nonce=nonce,
-                evidence_nonce_hash=self._hash(nonce),
             )
 
     def _seed_products(
@@ -549,25 +558,50 @@ class OfficePractitionerDirectoryHarness:
     def deliver_taskpane(
         self,
         surface: Surface,
-    ) -> tuple[str, str, str]:
-        with self._lock:
-            launch = self._launches[surface]
-            if launch.page_delivered:
-                csrf_value = ""
-                nonce = ""
-                session_value = ""
-            else:
-                csrf_value = launch.csrf_value or ""
-                nonce = launch.evidence_nonce or ""
-                session_value = launch.session_value
-                launch.csrf_value = None
-                launch.evidence_nonce = None
-                launch.page_delivered = True
-        endpoint = (
-            f"/office-practitioner-directory/{surface.value}"
-            "/api/v1/application-auth/product/graphql"
+    ) -> tuple[str, str, str, OfficeConsumerDeliveryState]:
+        delivery = self.lifecycle.deliver(surface)
+        if delivery.revoke_session_value:
+            if self.transport is None:
+                raise HTTPException(status_code=503, detail="launch_not_available")
+            try:
+                self.transport.logout(
+                    surface_session_value=delivery.revoke_session_value,
+                    correlation_id=(
+                        "correlation-directory-reload-"
+                        f"{surface.value.replace('_', '-')}"
+                    ),
+                )
+            except TransportAuthenticationFailed:
+                # An already expired or revoked session is also safely inert.
+                pass
+            except RuntimeError as cleanup_error:
+                _ = cleanup_error
+                self.lifecycle.complete_replay_revocation(
+                    surface=surface,
+                    succeeded=False,
+                )
+                raise HTTPException(
+                    status_code=503,
+                    detail="launch_not_available",
+                ) from None
+            self.lifecycle.complete_replay_revocation(
+                surface=surface,
+                succeeded=True,
+            )
+        ready = delivery.state is OfficeConsumerDeliveryState.READY
+        session_label = "Ready for one read" if ready else "Launch consumed"
+        host_label = "Waiting for Office" if ready else "Not requested"
+        status_copy = (
+            "Confirming the Office host…"
+            if ready
+            else (
+                "This one-use launch has ended. Close and reopen the taskpane "
+                "to request a fresh application session."
+            )
         )
-        expected_host = self._expected_host(surface)
+        button_label = (
+            "Show active practitioners" if ready else "Launch unavailable"
+        )
         page = f"""<!doctype html>
 <html lang="en-AU">
 <head>
@@ -579,20 +613,21 @@ class OfficePractitionerDirectoryHarness:
 <body>
   <main id="directory-root"
         data-surface="{html.escape(surface.value, quote=True)}"
-        data-expected-host="{html.escape(expected_host, quote=True)}"
-        data-directory-endpoint="{html.escape(endpoint, quote=True)}"
-        data-csrf="{html.escape(csrf_value, quote=True)}"
-        data-evidence-nonce="{html.escape(nonce, quote=True)}">
+        data-expected-host="{html.escape(delivery.expected_host, quote=True)}"
+        data-delivery-state="{delivery.state.value}"
+        data-directory-endpoint="{html.escape(delivery.directory_endpoint, quote=True)}"
+        data-csrf="{html.escape(delivery.csrf_value, quote=True)}"
+        data-evidence-nonce="{html.escape(delivery.evidence_nonce, quote=True)}">
     <p class="eyebrow">Authored-synthetic · development only</p>
     <h1><strong>Raisa</strong><i aria-hidden="true"></i> medical office</h1>
     <p class="lede">Show the active practitioners your current application session is allowed to see.</p>
     <dl>
       <div><dt>Expected surface</dt><dd>{html.escape(surface.value)}</dd></div>
-      <div><dt>Office host</dt><dd id="host-label">Waiting for Office</dd></div>
-      <div><dt>Session</dt><dd id="session-label">Ready for one read</dd></div>
+      <div><dt>Office host</dt><dd id="host-label">{host_label}</dd></div>
+      <div><dt>Session</dt><dd id="session-label">{session_label}</dd></div>
     </dl>
-    <button id="load-directory" type="button" disabled>Show active practitioners</button>
-    <p id="status" role="status" aria-live="polite">Confirming the Office host…</p>
+    <button id="load-directory" type="button" disabled>{button_label}</button>
+    <p id="status" role="status" aria-live="polite">{status_copy}</p>
     <ul id="practitioner-list" aria-label="Active practitioners" hidden></ul>
     <p class="boundary">No document, patient, clinical, provider or real identity data is used.</p>
   </main>
@@ -600,7 +635,12 @@ class OfficePractitionerDirectoryHarness:
   <script src="/office-practitioner-directory/taskpane.js"></script>
 </body>
 </html>"""
-        return page, session_value, csrf_value
+        return (
+            page,
+            delivery.session_value,
+            delivery.csrf_value,
+            delivery.state,
+        )
 
     def record_result(
         self,
@@ -611,21 +651,27 @@ class OfficePractitionerDirectoryHarness:
         surface = Surface(submission.surface)
         if submission.host_class != self._expected_host(surface):
             raise HTTPException(status_code=400, detail="result_not_admitted")
-        supplied_hash = self._hash(submission.evidence_nonce)
-        with self._lock:
-            launch = self._launches[surface]
-            if not secrets.compare_digest(
-                supplied_hash,
-                launch.evidence_nonce_hash,
-            ):
-                raise HTTPException(status_code=400, detail="result_not_admitted")
-            if surface in self._results:
-                raise HTTPException(status_code=409, detail="result_already_recorded")
+        try:
+            self.lifecycle.admit_result_nonce(
+                surface=surface,
+                supplied_nonce=submission.evidence_nonce,
+            )
+        except OfficeConsumerNonceRejected:
+            raise HTTPException(
+                status_code=400,
+                detail="result_not_admitted",
+            ) from None
+        except OfficeConsumerNonceReplayed:
+            raise HTTPException(
+                status_code=409,
+                detail="result_already_recorded",
+            ) from None
+        session_value = self.lifecycle.session_value(surface)
 
         if submission.terminal_status == "failed":
             try:
                 self.transport.logout(
-                    surface_session_value=launch.session_value,
+                    surface_session_value=session_value,
                     correlation_id=(
                         "correlation-directory-failure-"
                         f"{surface.value.replace('_', '-')}"
@@ -640,7 +686,7 @@ class OfficePractitionerDirectoryHarness:
         post_logout_denied = False
         try:
             self.transport.validate(
-                surface_session_value=launch.session_value,
+                surface_session_value=session_value,
                 surface=surface,
                 origin=self.origin,
                 correlation_id=(
@@ -671,6 +717,18 @@ class OfficePractitionerDirectoryHarness:
         )
         with self._lock:
             self._results[surface] = result
+        if passed_shape:
+            self.lifecycle.record_reason(
+                OfficeConsumerLifecycleReason.TERMINAL_SUCCESS
+            )
+        else:
+            self.lifecycle.record_reason(
+                OfficeConsumerLifecycleReason.TERMINAL_FAIL
+            )
+            if submission.failure_code == "session_unavailable":
+                self.lifecycle.record_reason(
+                    OfficeConsumerLifecycleReason.SESSION_LOSS_RECONCILED
+                )
         self._write_evidence(self.evidence())
         return result
 
@@ -813,6 +871,7 @@ class OfficePractitionerDirectoryHarness:
             ),
             "migration": dict(self.migration_evidence),
             "role_and_pool": dict(self.role_evidence),
+            "lifecycle": self.lifecycle.sanitized_snapshot(),
             "results": results,
             "database": database,
             "role_probes": role_probes,
@@ -866,11 +925,11 @@ class OfficePractitionerDirectoryHarness:
         )
 
     def _cleanup_resources(self) -> dict[str, object]:
-        for launch in self._launches.values():
+        for surface in SURFACES:
             if self.transport is not None:
                 try:
                     self.transport.logout(
-                        surface_session_value=launch.session_value,
+                        surface_session_value=self.lifecycle.session_value(surface),
                         correlation_id="correlation-office-directory-closeout",
                     )
                 except RuntimeError as cleanup_error:
@@ -951,6 +1010,20 @@ def _set_task_cookie(response: Response, *, name: str, value: str) -> None:
     )
 
 
+def _expire_task_cookie(response: Response, *, name: str) -> None:
+    response.set_cookie(
+        key=name,
+        value="",
+        path="/",
+        max_age=0,
+        expires=0,
+        secure=True,
+        httponly=True,
+        samesite="none",
+        partitioned=True,
+    )
+
+
 def build_app(
     harness: OfficePractitionerDirectoryHarness | None = None,
 ) -> FastAPI:
@@ -973,6 +1046,16 @@ def build_app(
     )
     for surface in SURFACES:
         surface_app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
+
+        @surface_app.middleware("http")
+        async def observe_product_denial(request: Request, call_next):
+            response = await call_next(request)
+            if response.status_code in {401, 403}:
+                selected.lifecycle.record_reason(
+                    OfficeConsumerLifecycleReason.PRODUCT_READ_DENIED
+                )
+            return response
+
         surface_app.include_router(
             create_application_session_practitioner_directory_router(
                 bridge=selected.bridge,
@@ -985,7 +1068,9 @@ def build_app(
         )
 
     def taskpane_response(surface: Surface, *, office_host_stub: bool) -> HTMLResponse:
-        page, session_value, csrf_value = selected.deliver_taskpane(surface)
+        page, session_value, csrf_value, delivery_state = selected.deliver_taskpane(
+            surface
+        )
         if office_host_stub:
             page = page.replace(
                 '<script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>',
@@ -998,6 +1083,9 @@ def build_app(
         if session_value and csrf_value:
             _set_task_cookie(response, name=SESSION_COOKIE_NAME, value=session_value)
             _set_task_cookie(response, name=CSRF_COOKIE_NAME, value=csrf_value)
+        elif delivery_state is OfficeConsumerDeliveryState.INERT:
+            _expire_task_cookie(response, name=SESSION_COOKIE_NAME)
+            _expire_task_cookie(response, name=CSRF_COOKIE_NAME)
         return response
 
     @application.get(

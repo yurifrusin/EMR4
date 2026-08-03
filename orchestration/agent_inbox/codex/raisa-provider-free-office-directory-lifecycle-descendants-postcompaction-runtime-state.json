@@ -1,0 +1,84 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "commit",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_office_directory_lifecycle_precommit_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: current AGENTS.md was re-read completely at 500 lines and now records provider_free_office_directory_lifecycle_descendants_pass at Continuity 206 / Compass 187; SHA-256 is 537C2907DA00897479587E9F7C8C149819839597C686F3C4D09E3D0E3AE2BBC2.",
+        "current_authority_allocation: Yuri authorised five clear provider-free descendants along Sol's recommended path at non-material forks. All five stayed inside authored-synthetic lifecycle implementation, tests, evidence, continuity and task-branch publication; live Microsoft identity, patient or clinical data, broader product access, commands, deployment, protected integration, production, release and another Pages rebuild remain closed.",
+        "active_plan_and_acceptance: five separate plans and closeouts now bind reload/terminal reconciliation, session-loss reconciliation, cross-surface replay isolation, sanitized lifecycle observability and the default-off unmounted Office consumer adapter. Fresh in-process/PostgreSQL evidence passes all five with zero product reads and complete cleanup; the final inherited API Spine/shared-auth/continuity suite passes 154 tests, with Ruff, Bandit, py_compile, Node syntax and diff checks also passing.",
+        "protected_evidence_boundaries: no protected holdout or historical Diary access; no provider call, real identity, patient or clinical data, document content, product mutation, cloud or IAM change, deployment, Pages, protected-ref or Dependabot alert 17 action. The user-owned docs/branding directory remains untouched and excluded from reading, testing, evidence, staging and commits.",
+        "git_refs_and_worktree: task branch codex/raisa-provider-free-office-directory-lifecycle-descendants remains based at pushed parent 53d160ec4c7cf7d6a39d068e7fda4e46b592a431; local and origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602; lifecycle changes are intentional and docs/branding remains the sole unrelated user-owned content."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No subagent was selected or dispatched; the user did not request delegation and the lifecycle descendants are a tightly coupled serial security boundary."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not probed or selected; the work is retained by Sol under the worker-lane economy rule and current multi-agent mode."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected real-TTY fallback; no external worker action occurred."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected leverage-gated option; no external provider or worker action occurred."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Unselected peer-review lane; no external veto or provider result is claimed."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
