@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "verifier_acceptance",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Seam candidate 9b4d7dcce2d18182fb0b5f31f010496a1ef983dd passed 49 deterministic tests and one fresh exact Gemini 3.6 Flash/high review with no findings.",
+    "current_authority_allocation": "Yuri authorised standing bounded progression across the Diary and Davida lanes; root Sol retains architecture, acceptance, recovery and integration authority; material forks return to Yuri.",
+    "git_refs_and_worktree": "Exact clean review worktree C:/Users/sarashera/EMR4-worktrees/bernie-davida-parallel-seam-gemini-review remained on codex/review-bernie-davida-parallel-seam at 9b4d7dcce2d18182fb0b5f31f010496a1ef983dd before and after review; protected refs remain unchanged.",
+    "live_handover_current_baton": "AGENTS.md complete current Baton restored before seam acceptance; accepted Office and harness results remain unchanged.",
+    "protected_evidence_boundaries": "No provider product path, real identity/data, protected evidence, writes, deployment or protected refs opened; docs/branding remained excluded and untouched."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
