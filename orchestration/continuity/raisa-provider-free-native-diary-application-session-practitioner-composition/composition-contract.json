@@ -1,0 +1,127 @@
+{
+  "schema_version": "emr4.raisa.native_diary_composition_contract.v1",
+  "status": "architecture_only_default_off",
+  "source_head": "bb8a6f554b417df019727345ba91a7d555b0bd41",
+  "parent": "bernie_davida_parallel_seam_pass",
+  "surface": {
+    "bound_surface": "native_diary",
+    "surface_enum": "Surface.NATIVE_DIARY",
+    "surface_value": "native_diary",
+    "long_lived_browser_surface": true
+  },
+  "authorization_bridge": {
+    "shared_bridge": "application_session_product_read_bridge",
+    "policy_version": "practice-practitioner-directory-read.v1",
+    "action": "practice.practitioner-directory.read",
+    "resource_type": "practitioner_directory",
+    "active_only_only": true,
+    "inactive_enumeration_closed": true
+  },
+  "read_binding": {
+    "graphql_query": "Query.practice.practitioners",
+    "variables": {
+      "activeOnly": true,
+      "limit": 200,
+      "offset": 0
+    },
+    "projection": [
+      "id",
+      "displayName",
+      "roleLabel",
+      "active"
+    ],
+    "default_location_projection": [
+      "id",
+      "name"
+    ],
+    "fresh_practice_scoped_read": true,
+    "session_artifacts_are_not_ui_data": true,
+    "authority_envelopes_are_not_ui_data": true,
+    "raw_identifiers_are_not_ui_data": true
+  },
+  "default_off_preservation": {
+    "feature_off_default": true,
+    "unmounted": true,
+    "existing_bearer_graphql_read_unmodified_when_off": true,
+    "existing_rest_fallback_unmodified_when_off": true,
+    "byte_for_byte_unchanged_when_off": true,
+    "behaviorally_unchanged_when_off": true
+  },
+  "forbidden_dependencies": [
+    "bernie_probabilistic_work_cell",
+    "davida_practice_operations",
+    "probabilistic_interpretation",
+    "agent_proofreader_gate",
+    "office_one_use_terminal_reload_logout_lifecycle",
+    "microsoft_federation",
+    "real_identity"
+  ],
+  "failure_behaviour": {
+    "mismatch": "fail_closed_no_data_release",
+    "stale_superseded_response": "reject_before_ui_update_fresh_read_required",
+    "privacy": "session_artifacts_authority_envelopes_and_raw_identifiers_never_ui_data",
+    "unauthorized_session": "generic_denial_no_data_release",
+    "audit_unavailable": "no_directory_data_release"
+  },
+  "closed_gates": [
+    "providers",
+    "probabilistic_interpretation",
+    "proofreader_gates",
+    "writes",
+    "real_identity",
+    "microsoft_federation",
+    "deployment",
+    "production",
+    "release",
+    "protected_evidence",
+    "protected_refs",
+    "docs_branding"
+  ],
+  "api_spine": {
+    "graphql_scoped_read_only": true,
+    "mutation": false,
+    "command_tunnel": false,
+    "new_rest_surface": false,
+    "event_actuator": false,
+    "manifest_declarative_input_runtime_enforced": true
+  },
+  "deterministic_acceptance_cases": [
+    "exact_surface_and_policy_binding",
+    "exact_read_query_variables_and_projection",
+    "off_path_byte_for_byte_preservation",
+    "fail_closed_mismatch",
+    "stale_superseded_rejection",
+    "privacy_no_ui_data",
+    "forbidden_dependency_absence",
+    "api_spine_scoped_read_only"
+  ],
+  "residual_risks": [
+    "native_diary_ui_wiring_authority_not_claimed",
+    "session_revocation_and_stale_reconciliation_unproven",
+    "general_application_session_mounting_not_opened",
+    "production_identity_not_established"
+  ],
+  "implementation_handoff": {
+    "next_step": "provider_free_unmounted_composition_contract_plus_direct_http_postgresql_evidence",
+    "diary_asset_edit": false,
+    "app_runtime_edit": false,
+    "app_main_mounting": false,
+    "protected_integration": false,
+    "runtime_or_usability_claim": false
+  },
+  "blocked_gates": [
+    "live_provider_runtime",
+    "memory_rag_graphrag_runtime",
+    "real_identity",
+    "patient_clinical_document_data",
+    "model_to_database_writes",
+    "graphql_mutations",
+    "external_identity_writes",
+    "cloud_iam_changes",
+    "deployment",
+    "production",
+    "release",
+    "protected_evidence_or_holdouts",
+    "protected_refs"
+  ]
+}

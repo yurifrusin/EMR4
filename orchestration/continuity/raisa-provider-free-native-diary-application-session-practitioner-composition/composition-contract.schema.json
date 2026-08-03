@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/raisa-native-diary-composition-contract.v1.json",
+  "title": "Raisa provider-free native-Diary application-session practitioner composition contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "source_head",
+    "parent",
+    "surface",
+    "authorization_bridge",
+    "read_binding",
+    "default_off_preservation",
+    "forbidden_dependencies",
+    "failure_behaviour",
+    "closed_gates",
+    "api_spine",
+    "deterministic_acceptance_cases",
+    "residual_risks",
+    "implementation_handoff",
+    "blocked_gates"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.raisa.native_diary_composition_contract.v1"},
+    "status": {"const": "architecture_only_default_off"},
+    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "parent": {"const": "bernie_davida_parallel_seam_pass"},
+    "surface": {"type": "object"},
+    "authorization_bridge": {"type": "object"},
+    "read_binding": {"type": "object"},
+    "default_off_preservation": {"type": "object"},
+    "forbidden_dependencies": {"type": "array", "minItems": 1, "uniqueItems": true},
+    "failure_behaviour": {"type": "object"},
+    "closed_gates": {"type": "array", "minItems": 1, "uniqueItems": true},
+    "api_spine": {"type": "object"},
+    "deterministic_acceptance_cases": {"type": "array", "minItems": 1, "uniqueItems": true},
+    "residual_risks": {"type": "array", "minItems": 1, "uniqueItems": true},
+    "implementation_handoff": {"type": "object"},
+    "blocked_gates": {"type": "array", "minItems": 8, "uniqueItems": true}
+  }
+}
