@@ -1,0 +1,215 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/davida-provider-free-practice-administration-context.v1.json",
+  "title": "Davida practice-administration pure-read context frame",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "data_class",
+    "practice_ref",
+    "principal_ref",
+    "correlation_id",
+    "observed_at",
+    "expires_at",
+    "content_revision",
+    "frames",
+    "blocked_sources",
+    "authority_ceiling",
+    "labels"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.davida.practice_administration_context.v1"},
+    "data_class": {"const": "authored_synthetic"},
+    "practice_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9._~-]+$"
+    },
+    "principal_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9._~-]+$"
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^correlation-[A-Za-z0-9._~-]+$"
+    },
+    "observed_at": {"type": "string", "format": "date-time"},
+    "expires_at": {"type": "string", "format": "date-time"},
+    "content_revision": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "frames": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["practitioners", "locations"],
+      "properties": {
+        "practitioners": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["label", "source", "projection", "active_only", "count", "rows"],
+          "properties": {
+            "label": {"const": "live_api_fact"},
+            "source": {
+              "const": "app.services.practice.practitioner_directory_read.list_practitioner_directory"
+            },
+            "projection": {"const": "pure"},
+            "active_only": {"const": true},
+            "count": {"type": "integer", "minimum": 0, "maximum": 200},
+            "rows": {
+              "type": "array",
+              "maxItems": 200,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "resource_ref",
+                  "display_name",
+                  "role_label",
+                  "active",
+                  "default_location_ref"
+                ],
+                "properties": {
+                  "resource_ref": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 64,
+                    "pattern": "^[A-Za-z0-9._~-]+$"
+                  },
+                  "display_name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 255
+                  },
+                  "role_label": {
+                    "type": ["string", "null"],
+                    "maxLength": 255
+                  },
+                  "active": {"const": true},
+                  "default_location_ref": {
+                    "type": ["string", "null"],
+                    "minLength": 8,
+                    "maxLength": 64,
+                    "pattern": "^[A-Za-z0-9._~-]+$"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "locations": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["label", "source", "projection", "active_only", "count", "rows"],
+          "properties": {
+            "label": {"const": "live_api_fact"},
+            "source": {
+              "const": "app.services.practice.active_location_directory_read.list_active_location_directory"
+            },
+            "projection": {"const": "pure"},
+            "active_only": {"const": true},
+            "count": {"type": "integer", "minimum": 0, "maximum": 200},
+            "rows": {
+              "type": "array",
+              "maxItems": 200,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["resource_ref", "name"],
+                "properties": {
+                  "resource_ref": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 64,
+                    "pattern": "^[A-Za-z0-9._~-]+$"
+                  },
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 255
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "blocked_sources": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "prefixItems": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "path", "reason"],
+          "properties": {
+            "name": {"const": "diary_rooms"},
+            "path": {"const": "GET /api/v1/diary/rooms"},
+            "reason": {"const": "normalizes_and_commits_during_nominal_read"}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "path", "reason"],
+          "properties": {
+            "name": {"const": "diary_waiting_areas"},
+            "path": {"const": "GET /api/v1/diary/waiting-areas"},
+            "reason": {"const": "normalizes_and_commits_during_nominal_read"}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "path", "reason"],
+          "properties": {
+            "name": {"const": "appointment_waiting_room_queue"},
+            "path": {"const": "GET /api/v1/appointments/waiting-room"},
+            "reason": {"const": "patient_linked_appointment_queue_closed_data"}
+          }
+        }
+      ],
+      "items": false
+    },
+    "authority_ceiling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "command",
+        "confirmation",
+        "write",
+        "proposal_apply",
+        "provider",
+        "event_actuator",
+        "model_to_database"
+      ],
+      "properties": {
+        "command": {"const": false},
+        "confirmation": {"const": false},
+        "write": {"const": false},
+        "proposal_apply": {"const": false},
+        "provider": {"const": false},
+        "event_actuator": {"const": false},
+        "model_to_database": {"const": false}
+      }
+    },
+    "labels": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimal", "non_authoritative", "database_truth_authoritative"],
+      "properties": {
+        "minimal": {"const": true},
+        "non_authoritative": {"const": true},
+        "database_truth_authoritative": {"const": true}
+      }
+    }
+  }
+}

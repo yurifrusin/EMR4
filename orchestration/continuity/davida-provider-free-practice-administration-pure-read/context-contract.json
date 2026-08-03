@@ -1,0 +1,72 @@
+{
+  "authority_ceiling": {
+    "command": false,
+    "confirmation": false,
+    "event_actuator": false,
+    "model_to_database": false,
+    "proposal_apply": false,
+    "provider": false,
+    "write": false
+  },
+  "blocked_sources": [
+    {
+      "name": "diary_rooms",
+      "path": "GET /api/v1/diary/rooms",
+      "reason": "normalizes_and_commits_during_nominal_read"
+    },
+    {
+      "name": "diary_waiting_areas",
+      "path": "GET /api/v1/diary/waiting-areas",
+      "reason": "normalizes_and_commits_during_nominal_read"
+    },
+    {
+      "name": "appointment_waiting_room_queue",
+      "path": "GET /api/v1/appointments/waiting-room",
+      "reason": "patient_linked_appointment_queue_closed_data"
+    }
+  ],
+  "content_revision": "5b0bec5f726f4231a2acb163a792ebf476e8cadbd6b03b0d2a92df95f7c25a66",
+  "correlation_id": "correlation-davida-pure-read-primary",
+  "data_class": "authored_synthetic",
+  "expires_at": "2026-08-03T12:02:00Z",
+  "frames": {
+    "locations": {
+      "active_only": true,
+      "count": 1,
+      "label": "live_api_fact",
+      "projection": "pure",
+      "rows": [
+        {
+          "name": "Alpha Clinic",
+          "resource_ref": "loc_synth_0001"
+        }
+      ],
+      "source": "app.services.practice.active_location_directory_read.list_active_location_directory"
+    },
+    "practitioners": {
+      "active_only": true,
+      "count": 1,
+      "label": "live_api_fact",
+      "projection": "pure",
+      "rows": [
+        {
+          "active": true,
+          "default_location_ref": "loc_synth_0001",
+          "display_name": "Alpha Synthetic",
+          "resource_ref": "prac_synth_0001",
+          "role_label": "GP"
+        }
+      ],
+      "source": "app.services.practice.practitioner_directory_read.list_practitioner_directory"
+    }
+  },
+  "labels": {
+    "database_truth_authoritative": true,
+    "minimal": true,
+    "non_authoritative": true
+  },
+  "observed_at": "2026-08-03T12:00:00Z",
+  "practice_ref": "practice_synth_primary",
+  "principal_ref": "principal_synth_primary",
+  "schema_version": "emr4.davida.practice_administration_context.v1"
+}
