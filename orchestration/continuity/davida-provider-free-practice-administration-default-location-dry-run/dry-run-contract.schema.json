@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/contracts/davida-default-location-dry-run-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "result", "boundary", "candidate", "release", "authority_ceiling", "excluded_fields", "rejection"],
+  "properties": {
+    "schema_version": {"const": "emr4.davida.practice_administration_default_location.contract.v1"},
+    "result": {"const": "provider_free_practice_administration_default_location_dry_run_pass"},
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mounted", "provider_free", "unoccupied", "database_free", "network_free", "clock_free"],
+      "properties": {
+        "mounted": {"const": false},
+        "provider_free": {"const": true},
+        "unoccupied": {"const": true},
+        "database_free": {"const": true},
+        "network_free": {"const": true},
+        "clock_free": {"const": true}
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operation", "reason_code", "risk_tier", "strict_extra_forbid", "canonical_input_equality_required", "context_revision_bound", "scope_bound"],
+      "properties": {
+        "operation": {"const": "PROPOSE_UPDATE_PRACTITIONER_DEFAULT_LOCATION"},
+        "reason_code": {"const": "PRACTICE_ASSIGNMENT_UPDATE"},
+        "risk_tier": {"const": "admin_proposal"},
+        "strict_extra_forbid": {"const": true},
+        "canonical_input_equality_required": {"const": true},
+        "context_revision_bound": {"const": true},
+        "scope_bound": {"const": true}
+      }
+    },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact_type", "status", "evidence_mode", "data_class", "human_confirmation_required", "changed_path", "before_copied_from_context", "after_differs_only_at_changed_path", "expires_no_later_than_context", "proposal_hash_bound", "grounding_hash_bound"],
+      "properties": {
+        "artifact_type": {"const": "proposal_candidate"},
+        "status": {"const": "dry_run_only"},
+        "evidence_mode": {"const": "provider_free_unoccupied_default_location_dry_run"},
+        "data_class": {"const": "authored_synthetic"},
+        "human_confirmation_required": {"const": true},
+        "changed_path": {"const": "practitioner.default_location_ref"},
+        "before_copied_from_context": {"const": true},
+        "after_differs_only_at_changed_path": {"const": true},
+        "expires_no_later_than_context": {"const": true},
+        "proposal_hash_bound": {"const": true},
+        "grounding_hash_bound": {"const": true}
+      }
+    },
+    "authority_ceiling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["command_ready", "confirmation_authorized", "apply_authorized", "writes_authorized", "provider_executed", "model_executed", "database_used", "network_used", "model_to_database"],
+      "properties": {
+        "command_ready": {"const": false},
+        "confirmation_authorized": {"const": false},
+        "apply_authorized": {"const": false},
+        "writes_authorized": {"const": false},
+        "provider_executed": {"const": false},
+        "model_executed": {"const": false},
+        "database_used": {"const": false},
+        "network_used": {"const": false},
+        "model_to_database": {"const": false}
+      }
+    },
+    "excluded_fields": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["confirmation_envelope", "confirmation_evidence", "command_route_or_payload", "idempotency_key", "aggregate_version", "audit_or_outbox_event", "apply_affordance"],
+      "properties": {
+        "confirmation_envelope": {"const": false},
+        "confirmation_evidence": {"const": false},
+        "command_route_or_payload": {"const": false},
+        "idempotency_key": {"const": false},
+        "aggregate_version": {"const": false},
+        "audit_or_outbox_event": {"const": false},
+        "apply_affordance": {"const": false}
+      }
+    },
+    "rejection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["closed_union", "partial_proposal", "repair_performed", "retry_authorized", "same_location_reason"],
+      "properties": {
+        "closed_union": {"const": true},
+        "partial_proposal": {"const": false},
+        "repair_performed": {"const": false},
+        "retry_authorized": {"const": false},
+        "same_location_reason": {"const": "no_change"}
+      }
+    }
+  }
+}

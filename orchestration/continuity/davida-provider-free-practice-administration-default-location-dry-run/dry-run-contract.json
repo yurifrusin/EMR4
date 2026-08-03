@@ -1,0 +1,61 @@
+{
+  "schema_version": "emr4.davida.practice_administration_default_location.contract.v1",
+  "result": "provider_free_practice_administration_default_location_dry_run_pass",
+  "boundary": {
+    "mounted": false,
+    "provider_free": true,
+    "unoccupied": true,
+    "database_free": true,
+    "network_free": true,
+    "clock_free": true
+  },
+  "candidate": {
+    "operation": "PROPOSE_UPDATE_PRACTITIONER_DEFAULT_LOCATION",
+    "reason_code": "PRACTICE_ASSIGNMENT_UPDATE",
+    "risk_tier": "admin_proposal",
+    "strict_extra_forbid": true,
+    "canonical_input_equality_required": true,
+    "context_revision_bound": true,
+    "scope_bound": true
+  },
+  "release": {
+    "artifact_type": "proposal_candidate",
+    "status": "dry_run_only",
+    "evidence_mode": "provider_free_unoccupied_default_location_dry_run",
+    "data_class": "authored_synthetic",
+    "human_confirmation_required": true,
+    "changed_path": "practitioner.default_location_ref",
+    "before_copied_from_context": true,
+    "after_differs_only_at_changed_path": true,
+    "expires_no_later_than_context": true,
+    "proposal_hash_bound": true,
+    "grounding_hash_bound": true
+  },
+  "authority_ceiling": {
+    "command_ready": false,
+    "confirmation_authorized": false,
+    "apply_authorized": false,
+    "writes_authorized": false,
+    "provider_executed": false,
+    "model_executed": false,
+    "database_used": false,
+    "network_used": false,
+    "model_to_database": false
+  },
+  "excluded_fields": {
+    "confirmation_envelope": false,
+    "confirmation_evidence": false,
+    "command_route_or_payload": false,
+    "idempotency_key": false,
+    "aggregate_version": false,
+    "audit_or_outbox_event": false,
+    "apply_affordance": false
+  },
+  "rejection": {
+    "closed_union": true,
+    "partial_proposal": false,
+    "repair_performed": false,
+    "retry_authorized": false,
+    "same_location_reason": "no_change"
+  }
+}
