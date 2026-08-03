@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "unknown", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md now records both accepted first architecture descendants, their exact artifact indexes, calibrated current result and the next bounded steps under standing authority.",
+    "current_authority_allocation": "Root Sol alone is committing accepted reconciled results; worker/reviewer decisions remain evidence only and protected integration remains closed.",
+    "active_plan_and_acceptance": "The root task branch contains the exact reconciled Diary and Davida heads, hardened schemas, closeouts, worker/reviewer receipts and Sol acceptance. The final focused plus handover gate passed 138 tests, Ruff and diff hygiene.",
+    "protected_evidence_boundaries": "Explicit-path staging excludes intentional user-owned docs/branding and every provider, real-data, protected-evidence, deployment, release and protected-ref surface.",
+    "git_refs_and_worktree": "Nonprotected root branch codex/ariadne-bernie-davida-parallel-seam is at a3ddd0d519e1e0d36d9fa949d651bf47f998c27f before the acceptance commit; master, handoff/current, origin/master and origin/handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["Implementation and schema-repair receipts are complete and consumed."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No fallback selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Anthropic-hosted model selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Final exact hardened-head reviews returned one pass each and left clean worktrees."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Root performed rejection, repair direction, deterministic validation, reconciliation, closeout and acceptance."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No subagent has commit or integration authority."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

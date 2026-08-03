@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "integration",
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "unknown", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "source_evidence": {
+    "live_handover_current_baton": "The accepted parallel seam authorises the first bounded architecture descendants in both lanes; both candidates remain provisional until root reconciliation and acceptance.",
+    "current_authority_allocation": "DeepSeek V4 Flash/high implemented and repaired; fresh Gemini 3.6 Flash/high independently passed each hardened exact candidate; GPT Sol alone owns serial reconciliation and acceptance on the nonprotected task branch.",
+    "active_plan_and_acceptance": "Diary exact head aac099e8981063807da7534048d6249c5ab7bfdc passed 61 root and Gemini-reproduced tests. Davida exact head 2c9fe167af22c01660b55407f115daf50c7fa30f passed 78 root and Gemini-reproduced tests. Both schemas reject explicit authority-bearing mutations.",
+    "protected_evidence_boundaries": "Reconciliation is limited to the disjoint architecture docs/contracts/schemas/tests and their bounded harness receipts. Providers, product/patient/clinical/identity data, runtime, writes, protected evidence, docs/branding, deployment, release and protected refs stay closed.",
+    "git_refs_and_worktree": "Root task branch codex/ariadne-bernie-davida-parallel-seam is tracked-clean apart from intentional user-owned docs/branding and new bounded orchestration artifacts, at accepted seam bb8a6f554b417df019727345ba91a7d555b0bd41. Protected refs master, handoff/current, origin/master and origin/handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["Both bounded implementation and schema-repair sequences completed with exact owned paths and clean candidate branches."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No fallback selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Anthropic-hosted model selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Two serialized fresh-project hardened-candidate reviews returned exact pass decisions and left exact heads clean."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Root rejected the first false schema-rigor review claim, directed both repairs, reproduced all gates and now performs protected-single-track reconciliation."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Three completed read-only audits informed the seam and lane controls; no subagent has integration authority."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

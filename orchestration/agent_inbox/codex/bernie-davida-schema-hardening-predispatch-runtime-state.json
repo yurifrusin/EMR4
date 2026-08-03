@@ -1,0 +1,27 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "unknown", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "source_evidence": {
+    "live_handover_current_baton": "The two architecture candidates remain provisional descendants of the accepted seam; neither has root acceptance or integration authority.",
+    "current_authority_allocation": "Root Sol identified a common deterministic-schema enforcement defect and authorised two bounded DeepSeek V4 Flash/high repair cells under Yuri's standing lane authority; fresh Gemini review remains required after repair.",
+    "active_plan_and_acceptance": "The supplied JSON instances and root test suites pass, but both schemas accept security-critical authority reversals and incomplete structures. Repairs are confined to each schema and its focused mutation tests.",
+    "protected_evidence_boundaries": "No provider, product-derived/patient/clinical/identity data, runtime, write, protected evidence, docs/branding, deployment, release or protected ref is opened by schema hardening.",
+    "git_refs_and_worktree": "Diary worktree is clean at 2d8ffecd796461ee3987c16c56e3c290cb731923; Davida worktree is clean at 19444399778dbd07b62223ca9b8a118a03d92d5b; both descend from seam bb8a6f554b417df019727345ba91a7d555b0bd41; protected refs remain 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["Two concurrent bounded schema-hardening repairs are selected within the configured capacity of three."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No fallback selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Anthropic-hosted model selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["The first Davida review pass was rejected by root for a demonstrably false schema-rigor claim; fresh reviews will follow repaired candidates."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Root reproduced all deterministic tests and directly mutation-audited both schemas before repair dispatch."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent is assigned to these two-file repairs."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [
+    {"agent_id": "deepseek_diary_repair", "worktree": "C:/Users/sarashera/EMR4-worktrees/diary-application-session-architecture", "branch": "codex/diary-application-session-architecture", "clean": true, "at_handoff_current": true, "recorded_at": "2026-08-03T00:00:00+10:00"},
+    {"agent_id": "deepseek_davida_repair", "worktree": "C:/Users/sarashera/EMR4-worktrees/davida-practice-administration-architecture", "branch": "codex/davida-practice-administration-architecture", "clean": true, "at_handoff_current": true, "recorded_at": "2026-08-03T00:00:00+10:00"}
+  ],
+  "assigned_agent_ids": ["deepseek_diary_repair", "deepseek_davida_repair"]
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All verifications pass. Let me produce the final report.\n\n## Rehydration sources (AGENTS.md \u00a72, five exact sources)\n\nBefore editing I read `AGENTS.md` completely. The five mandatory rehydration sources are:\n\n1. `live_handover_current_baton` \u2014 \u00a73 Current Baton\n2. `current_authority_allocation` \u2014 \u00a74 Authority Allocation\n3. `active_plan_and_acceptance` \u2014 the native-Diary plan/design/threat docs named in the Baton and read in full\n4. `protected_evidence_boundaries` \u2014 \u00a75 Protected Evidence and Closed Gates\n5. `git_refs_and_worktree` \u2014 verified `HEAD=2d8ffecd\u2026`, branch `codex/diary-application-session-architecture`, clean tree, `bb8a6f55\u2026` confirmed as the contract source head\n\n## Repair performed (owned files only)\n\n**Schema hardened** (`composition-contract.schema.json`): every nested object now has `required`, exact `const` values (surface, policy/action/resource, query, variables `{activeOnly:true, limit:200, offset:0}`, projection, default-off/unmounted booleans, fail-closed strings, API Spine booleans, implementation handoff booleans), exact types and `additionalProperties: false`. All contractual arrays use Draft 2020-12 `prefixItems` + `items: false` + `minItems`/`maxItems` + `uniqueItems` to reject missing/reordered/unknown/duplicate values. `source_head` pinned to exact const `bb8a6f554b417df019727345ba91a7d555b0bd41` and `parent` to `bernie_davida_parallel_seam_pass`.\n\n**Tests hardened** (`tests/test_raisa_provider_free_native_diary_application_session_practitioner_composition.py`): added 16 adversarial mutation tests using `Draft202012Validator` \u2014 the 12 required (wrong surface; changed policy/action/resource; inactive enumeration; default-on; mounted; REST-fallback replacement; GraphQL mutation; command tunnel; event actuator; missing privacy restriction; unknown nested field; missing nested field) plus 4 array mutation tests (missing, reordered, unknown, duplicate). Existing 12 tests untouched.\n\n## Checks (pytest NOT run per packet)\n\n- **Ruff 0.15.22**: `All checks passed!` (installed temporarily into `.ruff_tool/` under the worktree, then removed)\n- **py_compile**: OK\n- **Contract parse + validation** against hardened schema: `contract validates: OK`\n- **16/16 mutation scenarios rejected** (run directly, no `conftest.py` loaded)\n- **Actual test functions run via importlib** (no pytest/conftest): 1 existing + 16 mutation tests all passed\n- **git diff --check**: OK\n- **Contract byte-for-byte unchanged**: SHA-256 `3ded77acbb09eb952b20c7b6700b2d0e70dd1bfec180fe3609a29ea5cae811e3` identical at HEAD and worktree\n\n## Commit\n\n- `aac099e8981063807da7534048d6249c5ab7bfdc` \u2014 `Schema-harden default-off native Diary composition contract and add adversarial mutation tests`\n- Files: exactly the two owned files (schema +270/\u221213, test +136)\n- Staged list verified: no `docs/branding/` (grep count 0)\n- Working tree clean; no fetch/merge/rebase/switch/push performed; no other files touched\n\n## Blockers\n\nNone.\n\nDECISION: pass",
+  "usage": {
+    "input_tokens": 35357,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 1148288,
+    "output_tokens": 34627,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 1.6237289999999998,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

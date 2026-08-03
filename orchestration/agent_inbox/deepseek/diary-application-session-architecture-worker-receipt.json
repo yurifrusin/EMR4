@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All verifications pass. Final state confirmed: 6 files committed, clean tree, correct branch, no branding.\n\n## Five-source rehydration statement\n\n1. **live_handover_current_baton** \u2014 `AGENTS.md` \u00a71\u20133: protected integration result (PR 74/75 merged at protected master `2e34bdad\u2026`, one authorised Pages rebuild `30719055657` consumed); baton ref `handoff/current`; active product track records the accepted Bernie/Davida parallel seam (`bernie_davida_parallel_seam_pass`) and Yuri's standing authority for bounded logical descendants, including the Diary lane step 1 \"architecture/composition review of a default-off application-session native Diary consumer of the existing active-practitioner read.\"\n2. **current_authority_allocation** \u2014 `AGENTS.md` \u00a74: GPT Sol is Conductor/acceptance/integration owner; DeepSeek V4 Flash/high via Claude Code `--bare` is the bounded implementation/test worker (this packet); Gemini 3.6 Flash/high via Antigravity is the fresh independent veto reviewer; DeepSeek Pro is not the conductor. Worker holds no acceptance, integration, baton, or protected-ref authority.\n3. **active_plan_and_acceptance** \u2014 The frozen seam (`docs/bernie-davida-parallel-seam-plan.md`, `docs/bernie-davida-shared-agent-boundary.md`, `docs/security/bernie-davida-parallel-seam-threat-model-delta.md`, `parallel-lane-contract.json/.schema.json`), the accepted session practitioner-directory read bridge plan, and the Office consumer plan jointly define the Diary lane's first bounded step, which this tranche implements as architecture-only.\n4. **protected_evidence_boundaries** \u2014 `AGENTS.md` \u00a75\u20136: holdouts v1\u2013v10 sealed; T3 provider lane paused; historical trove H15-gated/local-only; `docs/branding/` user-owned and excluded; no further Pages rebuild authorised; protected `master`/`handoff/current` and protected integration remain closed.\n5. **git_refs_and_worktree** \u2014 Worktree `C:\\Users\\sarashera\\EMR4-worktrees\\diary-application-session-architecture`, branch `codex/diary-application-session-architecture`, source head `bb8a6f554b417df019727345ba91a7d555b0bd41`; local/origin `master` and `handoff/current` all aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`; tree clean before/after; `docs/branding/` absent. The EMR4 API Steward skill (`SKILL.md`) and its review checklist (`references/review-checklist.md`) were read in full.\n\n## Changed files (committed, exactly the six owned paths)\n\n- `docs/raisa-provider-free-native-diary-application-session-practitioner-composition-plan.md`\n- `docs/raisa-provider-free-native-diary-application-session-practitioner-composition-design.md`\n- `docs/security/raisa-provider-free-native-diary-application-session-practitioner-composition-threat-model-delta.md`\n- `orchestration/continuity/raisa-provider-free-native-diary-application-session-practitioner-composition/composition-contract.json`\n- `orchestration/continuity/raisa-provider-free-native-diary-application-session-practitioner-composition/composition-contract.schema.json`\n- `tests/test_raisa_provider_free_native_diary_application_session_practitioner_composition.py`\n\n## Candidate commit hash\n\n`2d8ffecd796461ee3987c16c56e3c290cb731923` \u2014 \"Freeze default-off native Diary application-session practitioner composition architecture\" (6 files, +612).\n\n## Static check results\n\n- `py_compile` on the owned test: **pass**\n- Ruff (`uvx ruff 0.16.1`, repo config `E9,F401`): **All checks passed**\n- JSON parse + Draft 2020-12 schema validation of `composition-contract.json` vs `composition-contract.schema.json`: **pass**\n- Exact-binding assertions vs real auth bridge: `Surface.NATIVE_DIARY == \"native_diary\"`, policy `practice-practitioner-directory-read.v1`, action `practice.practitioner-directory.read`, resource `practitioner_directory` \u2014 **pass**\n- diary.js off-path preservation substrings (GraphQL query, `activeOnly:true,limit:200,offset:0`, REST fallback path, `Bearer ${token}` header, the three read/auth/fallback functions): **pass**\n- Public artifact phrase assertions (`default-off`, `docs/branding/`, no runtime/usability claim, no data boundary opens): **pass**\n- `git diff --check` and `git diff --cached --check`: **clean**\n- Staged set exactly 6 paths, zero `docs/branding/` paths, tree clean post-commit\n\n## Unresolved blockers\n\n- Two packet-named sources do not exist at their exact paths: `docs/api-spine/graphql/schema.graphql` and `docs/api-spine/manifests/application-auth-policies.yaml`. I bound the contract from the actual adjacent sources that define the same content within the packet's stated limits: the api-spine SDL `docs/api-spine/graphql/appointment-diary-read.graphql` (`Query.practice.practitioners` + `Practitioner`/`PracticeLocationBrief` display-safe types) and the shared application-auth runtime module holding the exact accepted policy/action/resource identifiers and `Surface.NATIVE_DIARY`.\n- pytest was **not** run, per packet instruction (root conductor serializes shared-PostgreSQL pytest runs). No runtime or usability claim is made.\n\n**DECISION: pass**",
+  "usage": {
+    "input_tokens": 65463,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 3678464,
+    "output_tokens": 34206,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 3.0352619999999995,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

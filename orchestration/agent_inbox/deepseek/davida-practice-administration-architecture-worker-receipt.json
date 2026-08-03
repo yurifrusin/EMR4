@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "claude_code_bare_deepseek",
+  "model": "deepseek-v4-flash",
+  "effort": "high",
+  "result": "All verification is complete. Here is the final report.\n\n---\n\n## 1. Five-source rehydration statement\n\nFreshly produced from a complete read of `AGENTS.md` (432 lines) and the exact seam acceptance, not a compacted/inherited summary:\n\n1. **`live_handover_current_baton`** \u2014 `AGENTS.md` \u00a73 Current Baton. Current result is `bernie_davida_parallel_seam_pass` at Continuity 206 / Compass 187; \"Next implementation\" grants standing authority for the Davida Practice Administration architecture lane (architecture/static contract first, apply authority later and only after acceptance).\n2. **`current_authority_allocation`** \u2014 `AGENTS.md` \u00a74 (DeepSeek V4 Flash/high via Claude Code `--bare` is the bounded implementation/test worker; GPT Sol is conductor/integrator; Gemini 3.6 Flash/high is the sole independent veto reviewer; DeepSeek Pro forbidden) plus the seam `parallel-lane-contract.json` `authority` block (`standing_lane_progression: true`, `worker_acceptance_authority: false`, `protected_ref_authority: false`).\n3. **`active_plan_and_acceptance`** \u2014 `docs/bernie-davida-parallel-seam-plan.md` (Davida lane sequence step 1 `architecture_only_boundary`) and the `davida_practice_operations` lane contract (`effect_ceiling: architecture_only_then_provider_free_dry_run_proposal`).\n4. **`protected_evidence_boundaries`** \u2014 `AGENTS.md` \u00a75/\u00a76 (protected holdouts v1\u2013v10 sealed, T3/provider lane paused, historical diary trove local-only, product-authority rules, `docs/branding/` user-owned and excluded) and the seam `blocked_gates` list.\n5. **`git_refs_and_worktree`** \u2014 worktree `C:\\Users\\sarashera\\EMR4-worktrees\\davida-practice-administration-architecture`, branch `codex/davida-practice-administration-architecture`, source HEAD `bb8a6f554b417df019727345ba91a7d555b0bd41`, initially clean; protected refs aligned: `master` = `handoff/current` = `origin/master` = `origin/handoff/current` = `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n## 2. Changed files (six owned files only, committed)\n\n- `docs/davida-practice-administration-boundary-plan.md`\n- `docs/davida-practice-administration-boundary-design.md`\n- `docs/security/davida-practice-administration-boundary-threat-model-delta.md`\n- `orchestration/continuity/davida-practice-administration-boundary/capability-contract.json`\n- `orchestration/continuity/davida-practice-administration-boundary/capability-contract.schema.json`\n- `tests/test_davida_practice_administration_boundary.py`\n\nNo other file changed; `git status --porcelain` is clean; no `docs/branding/` path in the staged index or the commit.\n\n## 3. Candidate commit hash\n\n`19444399778dbd07b62223ca9b8a118a03d92d5b`\n\n## 4. Static check results\n\n- **`py_compile`** (via `py -m py_compile`): PASS on the owned test.\n- **JSON parsing**: PASS for both contract and schema.\n- **JSON Schema validation** (Draft 2020-12): PASS \u2014 `capability-contract.json` validates against `capability-contract.schema.json`; parent seam contract also revalidates (no regression).\n- **Owned test logic** (14 test functions executed directly via `importlib`, i.e. not via the pytest runner, no `conftest.py`/PostgreSQL touched): ALL PASS, including source-inspection proofs that `get_rooms`/`get_waiting_areas` call `_normalize_resource_order` + `db.commit()` and that `list_practitioner_directory` contains no `db.commit/flush/add/delete`.\n- **Ruff**: unavailable in this worktree (not on PATH, no `.venv` present). Not run.\n- **pytest**: intentionally not run per packet instruction (root conductor serializes all pytest runs due to shared PostgreSQL test state).\n- **`git diff --check` / `git diff --cached --check`**: PASS.\n- **Index/commit verification**: staged every path explicitly; `git diff --cached --name-only` = exactly the six owned files; no `docs/branding/`; no fetch/merge/rebase/push performed.\n\n## 5. Unresolved blockers / observations\n\n- The **EMR4 API Steward skill and its review checklist** could not be located anywhere in this worktree (searched `.claude/skills`, `~/.claude/skills`, and repo-wide for skill/steward/checklist files). I derived the API Spine constraints from the permitted adjacent sources instead: `AGENTS.md` \u00a78, the seam contract `api_spine` block, `agent-capability-charters.yaml`, the GraphQL read surface, and `docs/api-spine/security/permission-matrix.yaml`.\n- Several packet-named permitted reads exist under adjacent names (no change made): `docs/ariadne-bounded-cognitive-work-cell-proofreader-gate-plan.md` \u2192 `docs/ariadne-bounded-cognitive-work-cell-protocol-plan.md` \u00a74.3 (proofreader gate); `docs/api-spine/manifests/application-auth-policies.yaml` \u2192 `docs/api-spine/security/permission-matrix.yaml`; `docs/api-spine/graphql/schema.graphql` \u2192 `docs/api-spine/graphql/appointment-diary-read.graphql`. Each adjacent equivalent was read and used.\n\nThese observations did not affect deliverable completeness; all required contract elements, deterministic tests, and static checks passed.\n\nDECISION: pass",
+  "usage": {
+    "input_tokens": 56574,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 3701504,
+    "output_tokens": 52519,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard"
+  },
+  "adapter_cost_estimate_usd": 3.4609870000000007,
+  "adapter_cost_estimate_authoritative": false,
+  "authoritative_billing_source": "deepseek_provider_usage",
+  "provider_billed_cost_usd": null,
+  "permission_denials": [],
+  "terminal_reason": "completed"
+}

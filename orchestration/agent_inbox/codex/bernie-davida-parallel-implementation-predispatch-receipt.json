@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The accepted seam at bb8a6f554b417df019727345ba91a7d555b0bd41 freezes isolated lanes, a shared mechanical kernel only, separate immutable policies and no cross-lane authority; the two exact worker packets own disjoint architecture-only artifacts.",
+    "current_authority_allocation": "Yuri granted standing bounded progression in both lanes; GPT Sol retains orchestration, acceptance and integration; DeepSeek V4 Flash/high through Claude Code --bare is the implementation worker; Gemini 3.6 Flash/high through a fresh Antigravity project is the serial independent verifier.",
+    "git_refs_and_worktree": "Root task branch is bb8a6f554b417df019727345ba91a7d555b0bd41. Both isolated worker worktrees are clean on their exact named branches at that source. master, handoff/current, origin/master and origin/handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was read completely; the current result is the accepted Bernie/Davida parallel seam and the next starts are the bounded native-Diary application-session composition and Davida practice-administration architecture tranches.",
+    "protected_evidence_boundaries": "Protected evidence, patient/clinical/product-derived data, real identity, providers, autonomous or model-to-database writes, deployments, releases, protected refs and the intentional untracked docs/branding directory remain closed and untouched."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

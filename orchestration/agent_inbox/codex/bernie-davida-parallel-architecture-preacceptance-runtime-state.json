@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "verifier_acceptance",
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "unknown", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "source_evidence": {
+    "live_handover_current_baton": "The accepted seam remains the parent. Both first architecture descendants are reconciled on the nonprotected task branch and await root acceptance only.",
+    "current_authority_allocation": "DeepSeek V4 Flash/high implemented and repaired; final fresh Gemini 3.6 Flash/high reviews passed exact hardened heads; root Sol independently reproduced the combined gate and alone owns acceptance.",
+    "active_plan_and_acceptance": "Integrated task head a3ddd0d519e1e0d36d9fa949d651bf47f998c27f contains the exact Diary and Davida candidate content. A combined serial gate passed 130 tests, Ruff and diff hygiene. Diary rejected 16 supplied mutation families and Gemini independently exercised 49; Davida rejected 19 and Gemini reproduced them.",
+    "protected_evidence_boundaries": "Both results are architecture-only/provider-free/nonexecuting. No runtime mount, product or patient/clinical/identity data, provider, model-to-database path, write/apply authority, protected evidence, docs/branding, cloud/IAM, deployment, production, release or protected ref opened.",
+    "git_refs_and_worktree": "Root branch codex/ariadne-bernie-davida-parallel-seam is at a3ddd0d519e1e0d36d9fa949d651bf47f998c27f with only bounded acceptance artifacts plus intentional user-owned docs/branding untracked. Exact final reviewer heads remained clean. master, handoff/current, origin/master and origin/handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["Four bounded worker commits produced disjoint architecture artifacts and schema hardening with explicit-path staging."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No fallback selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Anthropic-hosted model selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["The initial Davida pass was rejected by root for an unsupported schema claim. Fresh hardened Davida and Diary projects then each returned one exact pass and left exact heads clean."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Root completed five-source rehydration, rejected the weak schemas, directed repairs, independently tested both lanes and performed serial reconciliation."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Three completed read-only Sol audits supplied initial architecture and control analysis without acceptance authority."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

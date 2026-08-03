@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "unknown", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "source_evidence": {
+    "live_handover_current_baton": "The first bounded native-Diary application-session architecture remains provisional; hardened candidate review is its current acceptance gate.",
+    "current_authority_allocation": "Exact Gemini 3.6 Flash/high in a new project is the serialized independent veto reviewer; root Sol alone may accept or integrate.",
+    "active_plan_and_acceptance": "Candidate aac099e8981063807da7534048d6249c5ab7bfdc adds deterministic schema hardening and 16 adversarial mutations; root reproduced 61 tests plus Ruff and diff hygiene.",
+    "protected_evidence_boundaries": "Review remains architecture-only/default-off/unmounted and excludes providers, product/patient/clinical/identity data, writes, protected evidence, historical Diary material, docs/branding, deployment, release and protected refs.",
+    "git_refs_and_worktree": "Fresh clean review worktree C:/Users/sarashera/EMR4-worktrees/diary-application-session-gemini-review-2 is at exact candidate aac099e8981063807da7534048d6249c5ab7bfdc on its named nonprotected review branch; baseline is bb8a6f554b417df019727345ba91a7d555b0bd41; protected refs remain 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["Bounded schema repair completed and remains non-authoritative."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No fallback selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Anthropic-hosted model selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Davida's serialized hardened review has completed; a new exact Gemini project is ready for the Diary lane."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Root independently identified the shared schema defect and reproduced the hardened Diary mutation suite."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent is assigned to this review."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [{"agent_id": "antigravity_red", "worktree": "C:/Users/sarashera/EMR4-worktrees/diary-application-session-gemini-review-2", "branch": "codex/review-diary-application-session-architecture-2", "clean": true, "at_handoff_current": true, "recorded_at": "2026-08-03T00:00:00+10:00"}],
+  "assigned_agent_ids": ["antigravity_red"]
+}
