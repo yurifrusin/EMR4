@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "planned_action": "push",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Exact closeouts and Sol acceptances bind the 17/17 Diary and 60/60 Davida evidence, 289 integrated serial tests, 15 handover/Compass tests, Ruff, four Node syntax checks, diff/path checks and admissible fresh independent passes. Both evidence files reproduce byte-for-byte.",
+    "current_authority_allocation": "Sol has accepted and committed the non-protected task result. Only a fast-forward push of codex/ariadne-bernie-davida-parallel-seam and the non-PHI continuing Pushover closeout are authorised; protected refs remain closed.",
+    "git_refs_and_worktree": "Task HEAD is e499174b04120c18240ecfdeb87f2fea6c135a80 and origin task is e7d209e6652106c8f69036460223259a33af19c9 with verified fast-forward ancestry. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty and the only worktree residue is excluded user-owned docs/branding.",
+    "live_handover_current_baton": "Committed AGENTS.md at e499174b records both fourth-pair passes, exact acceptance paths, unchanged 206/187 map, closed gates and the already-authorised next pair.",
+    "protected_evidence_boundaries": "No protected evidence/ref, docs/branding, provider/model, memory/RAG, real identity/data, patient/clinical/document data, live/default-on Diary, command/apply/write, deployment, production or release scope is included."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

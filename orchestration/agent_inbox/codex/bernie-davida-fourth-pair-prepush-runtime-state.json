@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "push",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fourth_pair_committed_closeout",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "Committed AGENTS.md at e499174b records both fourth-pair passes, exact acceptance paths, unchanged 206/187 map, closed gates and the already-authorised next pair.",
+    "current_authority_allocation": "Sol has accepted and committed the non-protected task result. Only a fast-forward push of codex/ariadne-bernie-davida-parallel-seam and the non-PHI continuing Pushover closeout are authorised; protected refs remain closed.",
+    "active_plan_and_acceptance": "Exact closeouts and Sol acceptances bind the 17/17 Diary and 60/60 Davida evidence, 289 integrated serial tests, 15 handover/Compass tests, Ruff, four Node syntax checks, diff/path checks and admissible fresh independent passes. Both evidence files reproduce byte-for-byte.",
+    "protected_evidence_boundaries": "No protected evidence/ref, docs/branding, provider/model, memory/RAG, real identity/data, patient/clinical/document data, live/default-on Diary, command/apply/write, deployment, production or release scope is included.",
+    "git_refs_and_worktree": "Task HEAD is e499174b04120c18240ecfdeb87f2fea6c135a80 and origin task is e7d209e6652106c8f69036460223259a33af19c9 with verified fast-forward ancestry. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty and the only worktree residue is excluded user-owned docs/branding."
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No worker active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No fallback selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Anthropic-hosted model selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Accepted review receipts are committed; no verifier remains active."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol owns the task push, notification and immediate next-pair rehydration."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Implementation agents are complete and own no push authority."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
