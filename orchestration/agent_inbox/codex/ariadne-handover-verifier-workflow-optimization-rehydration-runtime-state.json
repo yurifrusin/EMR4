@@ -1,0 +1,84 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "sprint_planning",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_handover_verifier_workflow_optimization_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: AGENTS.md was read completely at 497 lines; the current accepted product result remains provider_free_office_directory_lifecycle_descendants_pass at Continuity 206 / Compass 187, while the next native Diary composition review remains a separate fresh-authority gate.",
+        "current_authority_allocation: Sol owns architecture, acceptance, recovery and integration; DeepSeek V4 Flash/high is the bounded implementation lane; Gemini 3.6 Flash/high in a fresh Antigravity project is the independent verifier and cannot implement, self-accept or move protected refs.",
+        "active_plan_and_acceptance: the Gemini 3.6 verifier allocation plan, closeout and rejected-first-review analysis plus all five Office lifecycle plans, their threat-model delta and Sol acceptance were read completely; this tranche changes only repository-local orchestration and handover controls.",
+        "protected_evidence_boundaries: no protected holdout or historical Diary access, patient/clinical/product-derived data, provider call, cloud/IAM change, deployment, protected integration, Pages rebuild, production or release is authorised; the user-owned docs/branding directory is excluded and must remain untouched.",
+        "git_refs_and_worktree: the tranche branch codex/ariadne-handover-verifier-workflow-optimization was created at HEAD 167618a9806cfb5431f0c55ddaa4dcef5b51e8b6; local/origin master and handoff/current are aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding is the only unrelated untracked directory."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is dispatched for the initial serial architecture and policy work."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The DeepSeek implementation lane is being codified but is not dispatched for this tightly coupled control change."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The real-TTY fallback is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The leverage-gated Claude lane is not selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Gemini 3.6 Flash/high remains reserved for a fresh independent review after deterministic gates pass."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

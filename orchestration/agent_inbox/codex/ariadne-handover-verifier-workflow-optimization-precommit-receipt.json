@@ -1,0 +1,31 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:944b18051164d26193296d47cdc36bba1039d7005a7fbc6a1077bad9b6ce6981",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/ariadne-handover-verifier-workflow-optimization-plan.md",
+      "docs/security/ariadne-handover-verifier-workflow-optimization-threat-model-delta.md",
+      "docs/ariadne-antigravity-gemini-36-high-verifier-allocation.md",
+      "docs/ariadne-antigravity-gemini-36-high-verifier-allocation-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md"
+    ],
+    "current_authority_allocation": "The new policy fixes Sol High for routine and Extra High for material decisions, DeepSeek V4 Flash/high for bounded separable implementation/test artifacts and Gemini 3.6 Flash/high for fresh independent review only.",
+    "git_refs_and_worktree": "The exact task branch codex/ariadne-handover-verifier-workflow-optimization remains at source HEAD 167618a9806cfb5431f0c55ddaa4dcef5b51e8b6 before its first commit; local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "Compacted AGENTS.md was read and checked at 431 lines and 51573 bytes; its active authority, Office lifecycle result and separately gated native Diary candidate remain unchanged, while 90 inactive lookup rows are preserved in the hash-bound acceptance index.",
+    "protected_evidence_boundaries": "No protected holdout, historical Diary, patient/clinical/product-derived data, product mutation, provider call, deployment, protected integration, production or release was opened; docs/branding remains user-owned, untracked and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

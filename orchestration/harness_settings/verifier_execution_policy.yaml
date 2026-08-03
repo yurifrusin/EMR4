@@ -1,0 +1,108 @@
+schema_version: ariadne.verifier_execution_policy.v1
+purpose: deterministic_first_risk_triggered_independent_verification
+execution_order:
+  - five_source_rehydration_receipt
+  - exact_authority_and_scope_packet
+  - exact_non_protected_candidate_binding
+  - settings_fingerprint_match
+  - focused_tests
+  - static_and_filesystem_checks
+  - clean_candidate_precondition
+  - risk_trigger_decision
+  - independent_model_review_when_triggered
+  - exact_single_decision_admission
+  - clean_unchanged_candidate_postcondition
+deterministic_gate:
+  required_before_external_model_dispatch: true
+  fail_closed_action: no_external_model_call
+  required_results:
+    five_source_rehydration_receipt: passed
+    authority_and_scope_packet: complete
+    candidate_branch: exact_non_protected
+    candidate_head: exact
+    settings_fingerprint: exact
+    focused_tests: passed
+    static_and_filesystem_checks: passed
+    candidate_worktree: clean
+external_verifier:
+  mode: risk_triggered_optional
+  preferred_resource_id: antigravity-gemini-flash-3-6-high-verifier
+  model: gemini-3.6-flash-high
+  reasoning: high
+  project_context: fresh
+  worktree_access: exact_bound_read_only
+  candidate_prior_review_artifacts: excluded
+  silent_model_fallback: forbidden
+  implementation_capability: forbidden
+  decision_contract:
+    allowed: [pass, revision_required]
+    exact_terminal_decision_count: 1
+  postcondition:
+    candidate_head: unchanged
+    candidate_worktree: clean
+  triggers:
+    - security_control_change
+    - new_security_write_deployment_or_release_authority
+    - recovered_material_change
+    - conductor_orchestrator_material_disagreement
+    - ambiguous_mandate_or_scope_boundary
+    - resource_limit_exception
+    - authority_or_ownership_drift_signal
+lane_profile:
+  sol:
+    resource_id: openai-primary-orchestrator
+    routine_reasoning: high
+    material_reasoning: extra_high
+    owns:
+      - architecture
+      - authority_and_scope
+      - acceptance
+      - recovery
+      - integration
+    material_triggers:
+      - architecture_or_acceptance_meaning
+      - authority_or_product_policy
+      - privacy_or_security_boundary
+      - provider_cloud_production_or_release
+      - contradictory_or_incomplete_evidence
+  deepseek_flash:
+    resource_id: deepseek-flash-workers
+    model: deepseek-v4-flash
+    reasoning: high
+    transport: claude_code_bare
+    owns:
+      - bounded_separable_implementation
+      - mechanical_test_artifact
+      - deterministic_fixture_regeneration
+      - contained_repair
+    may_not:
+      - architecture
+      - acceptance
+      - integration
+      - protected_refs
+  gemini_flash:
+    resource_id: antigravity-gemini-flash-3-6-high-verifier
+    model: gemini-3.6-flash-high
+    reasoning: high
+    transport: antigravity_fresh_project
+    owns:
+      - fresh_independent_code_review
+      - adversarial_security_review
+      - independent_test_design
+    may_not:
+      - implementation
+      - self_acceptance
+      - integration
+      - baton
+      - protected_refs
+dispatch_economy:
+  dispatch_is_optional: true
+  require_leverage_greater_than_packet_monitoring_and_recovery_cost: true
+  keep_serial_tightly_coupled_or_small_work_sol_owned: true
+test_execution:
+  repository_conftest_pytest: serial
+  shared_postgresql_schema: serial
+  parallel_allowed_only_for:
+    - import_free_static_checks
+    - filesystem_only_checks
+    - isolated_browser_checks_without_shared_mutable_runtime

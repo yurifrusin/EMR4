@@ -1,0 +1,83 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_native_five_source_precommit_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "Compacted AGENTS.md was read and checked at 431 lines and 51573 bytes; its active authority, Office lifecycle result and separately gated native Diary candidate remain unchanged, while 90 inactive lookup rows are preserved in the hash-bound acceptance index.",
+    "current_authority_allocation": "The new policy fixes Sol High for routine and Extra High for material decisions, DeepSeek V4 Flash/high for bounded separable implementation/test artifacts and Gemini 3.6 Flash/high for fresh independent review only.",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-handover-verifier-workflow-optimization-plan.md",
+      "docs/security/ariadne-handover-verifier-workflow-optimization-threat-model-delta.md",
+      "docs/ariadne-antigravity-gemini-36-high-verifier-allocation.md",
+      "docs/ariadne-antigravity-gemini-36-high-verifier-allocation-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-office-directory-lifecycle-descendants-sol-acceptance.md"
+    ],
+    "protected_evidence_boundaries": "No protected holdout, historical Diary, patient/clinical/product-derived data, product mutation, provider call, deployment, protected integration, production or release was opened; docs/branding remains user-owned, untracked and excluded.",
+    "git_refs_and_worktree": "The exact task branch codex/ariadne-handover-verifier-workflow-optimization remains at source HEAD 167618a9806cfb5431f0c55ddaa4dcef5b51e8b6 before its first commit; local/origin master and handoff/current remain aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The native source_evidence object contains all five required sources and needs no manual receipt patch."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was used."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["DeepSeek remains reserved for an independent defensive review after deterministic gates."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The real-TTY fallback was not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The leverage-gated Claude lane was not selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Gemini remains reserved for fresh independent red review after the exact candidate commit."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

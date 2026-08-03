@@ -6,6 +6,25 @@ from scripts.ariadne_orchestrator_preflight import build_receipt
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNTIME_STATE = ROOT / "tests" / "fixtures" / "ariadne_harness" / "orchestrator_runtime_state.json"
+REQUIRED_SOURCES = [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree",
+]
+CONTINUATION_EVENTS = [
+    "new_session",
+    "post_compaction",
+    "model_or_provider_change",
+    "restored_conversation",
+    "pre_sprint_planning",
+    "pre_worker_dispatch",
+    "pre_verifier_acceptance",
+    "pre_integration",
+    "pre_commit",
+    "pre_push",
+]
 
 
 def test_generic_orchestrator_receipt_passes_with_explicit_adapter_slot_and_workspace_evidence():
@@ -14,6 +33,9 @@ def test_generic_orchestrator_receipt_passes_with_explicit_adapter_slot_and_work
     assert receipt["status"] == "passed"
     assert receipt["worker_dispatch_permitted"] is True
     assert receipt["authority_boundary"] == "receipt_only_no_worker_control_or_integration_authority"
+    assert receipt["rehydrated_from_receipt"] is True
+    assert receipt["rehydration_sources"] == REQUIRED_SOURCES
+    assert list(receipt["source_evidence"]) == REQUIRED_SOURCES
 
 
 def test_generic_orchestrator_receipt_fails_closed_for_stale_worker_slots(tmp_path: Path):
@@ -118,15 +140,58 @@ def test_post_compaction_requires_named_live_rehydration_sources(tmp_path: Path)
     )
 
 
-def test_named_rehydration_sources_are_specific_to_the_configured_event(tmp_path: Path):
+def test_every_configured_continuation_event_requires_and_emits_five_sources(
+    tmp_path: Path,
+):
     runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
-    runtime_state["continuation_event"] = "pre_sprint_planning"
-    runtime_state["context_health"]["agent_contexts"][0].pop(
-        "rehydration_sources", None
+    for event in CONTINUATION_EVENTS:
+        runtime_state["continuation_event"] = event
+        path = tmp_path / f"{event}.json"
+        path.write_text(json.dumps(runtime_state), encoding="utf-8")
+
+        receipt = build_receipt(runtime_state_path=path)
+
+        assert receipt["status"] == "passed"
+        assert receipt["rehydrated_from_receipt"] is True
+        assert receipt["rehydration_sources"] == REQUIRED_SOURCES
+        assert list(receipt["source_evidence"]) == REQUIRED_SOURCES
+
+
+def test_named_source_without_evidence_fails_closed(tmp_path: Path):
+    runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
+    runtime_state["source_evidence"]["active_plan_and_acceptance"] = []
+    path = tmp_path / "runtime-state.json"
+    path.write_text(json.dumps(runtime_state), encoding="utf-8")
+
+    receipt = build_receipt(runtime_state_path=path)
+
+    assert receipt["status"] == "revision_required"
+    assert receipt["rehydrated_from_receipt"] is False
+    assert (
+        "rehydration_source_evidence_missing:"
+        "orchestrator:active_plan_and_acceptance"
+    ) in receipt["reasons"]
+
+
+def test_primary_session_prefixed_evidence_is_emitted_without_manual_patch(
+    tmp_path: Path,
+):
+    runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
+    runtime_state.pop("source_evidence")
+    primary = next(
+        item
+        for item in runtime_state["adapter_observations"]
+        if item["adapter_id"] == "codex_primary_session"
     )
+    primary["evidence"] = [
+        f"{source}: authored evidence for {source}" for source in REQUIRED_SOURCES
+    ]
     path = tmp_path / "runtime-state.json"
     path.write_text(json.dumps(runtime_state), encoding="utf-8")
 
     receipt = build_receipt(runtime_state_path=path)
 
     assert receipt["status"] == "passed"
+    assert receipt["rehydrated_from_receipt"] is True
+    assert receipt["rehydration_sources"] == REQUIRED_SOURCES
+    assert list(receipt["source_evidence"]) == REQUIRED_SOURCES

@@ -7,6 +7,7 @@ The immutable pre-compaction snapshot preserves every earlier handover byte.
 
 | Topic | Current ledger | Primary authority |
 |---|---|---|
+| Current Baton historical/inactive acceptance lookup | `current-baton-acceptance-index.md` with `current-baton-acceptance-index.manifest.json` | Live `AGENTS.md` for authority; hash-bound ledger for artifact lookup only |
 | Bernie language coverage and evaluation | `bernie-language-evaluation.md` | Current LC acceptance and reports |
 | Ariadne, workers, receipts, and recovery | `orchestration-and-agent-runtime.md` | Live `AGENTS.md` authority table and Ariadne contracts |
 | Historical diary trove and interpretation harness | `historical-diary-and-interpretation.md` | Approved H-series gate payloads and blocked runtime gates |

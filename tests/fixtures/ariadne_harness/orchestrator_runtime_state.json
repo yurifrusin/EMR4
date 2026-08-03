@@ -18,6 +18,16 @@
       }
     ]
   },
+  "source_evidence": {
+    "live_handover_current_baton": "authored fixture current baton",
+    "current_authority_allocation": "authored fixture authority allocation",
+    "active_plan_and_acceptance": [
+      "authored fixture plan",
+      "authored fixture acceptance"
+    ],
+    "protected_evidence_boundaries": "authored fixture protected boundaries",
+    "git_refs_and_worktree": "authored fixture refs and clean worktree"
+  },
   "adapter_observations": [
     {"adapter_id": "deepseek_via_claude_code_bare", "method": "deepseek_claude_cli_observation", "reachability": "reachable", "evidence": ["authored_fixture"]},
     {"adapter_id": "deepcode_cli", "method": "deepcode_cli_observation", "reachability": "reachable", "evidence": ["authored_fixture"]},

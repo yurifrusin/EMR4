@@ -88,7 +88,7 @@ def test_sprint_worker_policy_defines_bounded_antigravity_and_deepseek_lanes():
     assert policy["worker_mix"]["antigravity"]["default_model"] == "gemini-3.6-flash-high"
     assert policy["worker_mix"]["antigravity"]["default_reasoning"] == "high"
     assert policy["worker_mix"]["antigravity"]["maximum_instances"] == 1
-    assert policy["worker_mix"]["deepseek_flash"]["minimum_instances"] == 1
+    assert policy["worker_mix"]["deepseek_flash"]["minimum_instances"] == 0
     assert policy["worker_mix"]["deepseek_flash"]["maximum_instances"] == 3
     assert "no_orchestrator_substitution" in policy["deterministic_plan_checks"]
     assert policy["workspace_preflight"]["failure_posture"] == "revision_required_before_packet_dispatch"

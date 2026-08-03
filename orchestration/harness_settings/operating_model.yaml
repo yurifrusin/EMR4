@@ -44,7 +44,10 @@ within_sprint:
     - removal_or_extension_of_inactive_time_limits
 verifier:
   mode: risk_triggered_optional
+  execution_policy_file: verifier_execution_policy.yaml
   deterministic_plan_checks_always_run: true
+  external_dispatch_only_after_deterministic_pass: true
+  deterministic_failure_action: no_external_model_call
   independent_llm_required_when:
     - new_security_write_deployment_or_release_authority
     - conductor_orchestrator_material_disagreement

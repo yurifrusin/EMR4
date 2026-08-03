@@ -5,6 +5,38 @@ from __future__ import annotations
 from typing import Any
 
 
+def _has_evidence(value: Any) -> bool:
+    if isinstance(value, str):
+        return bool(value.strip())
+    if isinstance(value, list):
+        return bool(value) and all(
+            isinstance(item, str) and bool(item.strip()) for item in value
+        )
+    return False
+
+
+def _source_evidence(
+    *,
+    runtime_state: dict[str, Any],
+    observation_by_id: dict[Any, dict[str, Any]],
+) -> dict[str, Any]:
+    """Return explicit evidence, with typed primary-session prefixes as fallback."""
+    supplied = runtime_state.get("source_evidence")
+    evidence = dict(supplied) if isinstance(supplied, dict) else {}
+    primary = observation_by_id.get("codex_primary_session", {})
+    observations = primary.get("evidence", [])
+    if isinstance(observations, list):
+        for observation in observations:
+            if not isinstance(observation, str) or ":" not in observation:
+                continue
+            source, detail = observation.split(":", 1)
+            source = source.strip()
+            detail = detail.strip()
+            if source and detail and source not in evidence:
+                evidence[source] = detail
+    return evidence
+
+
 def build_orchestrator_receipt(
     *,
     requirements: dict[str, Any],
@@ -110,15 +142,23 @@ def build_orchestrator_receipt(
         if isinstance(required_sources_by_event, dict)
         else []
     )
+    source_evidence = _source_evidence(
+        runtime_state=runtime_state,
+        observation_by_id=observation_by_id,
+    )
     high_authority = planned_action in context_policy.get("high_authority_actions", [])
     mandatory_ratio = context_policy.get("provider_meter", {}).get("mandatory_rehydration_ratio")
+    receipt_sources: list[str] = []
+    source_gate_passed = True
     for agent_id in context_policy.get("required_agent_ids", []):
         context = contexts_by_agent.get(agent_id)
         if context is None:
             reasons.append(f"context_observation_missing:{agent_id}")
+            source_gate_passed = False
             continue
         if hard_event and context.get("rehydrated_from_receipt") is not True:
             reasons.append(f"context_rehydration_required:{agent_id}")
+            source_gate_passed = False
         if required_rehydration_sources:
             observed_sources = context.get("rehydration_sources")
             if not isinstance(observed_sources, list):
@@ -128,6 +168,16 @@ def build_orchestrator_receipt(
                     reasons.append(
                         f"rehydration_source_missing:{agent_id}:{required_source}"
                     )
+                    source_gate_passed = False
+                    continue
+                if required_source not in receipt_sources:
+                    receipt_sources.append(required_source)
+                if not _has_evidence(source_evidence.get(required_source)):
+                    reasons.append(
+                        "rehydration_source_evidence_missing:"
+                        f"{agent_id}:{required_source}"
+                    )
+                    source_gate_passed = False
         source = context.get("measurement_source")
         if source == "provider_reported":
             input_tokens = context.get("input_tokens")
@@ -139,6 +189,11 @@ def build_orchestrator_receipt(
         elif source == "unknown" and high_authority and context.get("rehydrated_from_receipt") is not True:
             reasons.append(f"context_rehydration_required:{agent_id}")
 
+    receipt_evidence = {
+        source: source_evidence[source]
+        for source in receipt_sources
+        if _has_evidence(source_evidence.get(source))
+    }
     return {
         "schema_version": "ariadne.orchestrator_receipt.v1",
         "status": "passed" if not reasons else "revision_required",
@@ -146,6 +201,10 @@ def build_orchestrator_receipt(
         "continuation_event": runtime_state.get("continuation_event"),
         "planned_action": planned_action,
         "reasons": reasons,
+        "rehydrated_from_receipt": source_gate_passed
+        and bool(required_rehydration_sources),
+        "rehydration_sources": receipt_sources,
+        "source_evidence": receipt_evidence,
         "worker_dispatch_permitted": not reasons,
         "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
     }

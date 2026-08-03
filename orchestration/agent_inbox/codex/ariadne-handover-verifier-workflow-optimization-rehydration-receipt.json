@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "sprint_planning",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:944b18051164d26193296d47cdc36bba1039d7005a7fbc6a1077bad9b6ce6981",
+  "source_evidence": {
+    "active_plan_and_acceptance": "the Gemini 3.6 verifier allocation plan, closeout and rejected-first-review analysis plus all five Office lifecycle plans, their threat-model delta and Sol acceptance were read completely; this tranche changes only repository-local orchestration and handover controls.",
+    "current_authority_allocation": "Sol owns architecture, acceptance, recovery and integration; DeepSeek V4 Flash/high is the bounded implementation lane; Gemini 3.6 Flash/high in a fresh Antigravity project is the independent verifier and cannot implement, self-accept or move protected refs.",
+    "git_refs_and_worktree": "the tranche branch codex/ariadne-handover-verifier-workflow-optimization was created at HEAD 167618a9806cfb5431f0c55ddaa4dcef5b51e8b6; local/origin master and handoff/current are aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding is the only unrelated untracked directory.",
+    "live_handover_current_baton": "AGENTS.md was read completely at 497 lines; the current accepted product result remains provider_free_office_directory_lifecycle_descendants_pass at Continuity 206 / Compass 187, while the next native Diary composition review remains a separate fresh-authority gate.",
+    "protected_evidence_boundaries": "no protected holdout or historical Diary access, patient/clinical/product-derived data, provider call, cloud/IAM change, deployment, protected integration, Pages rebuild, production or release is authorised; the user-owned docs/branding directory is excluded and must remain untouched."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
