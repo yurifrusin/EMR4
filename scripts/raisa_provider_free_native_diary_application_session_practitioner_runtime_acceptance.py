@@ -109,6 +109,19 @@ _PRODUCT_CAPABILITY = re.compile(
     r"^emr4_product_read_runtime_[0-9a-f]{12}$"
 )
 
+# Authored-synthetic seed markers for the bounded practitioner identifiers on
+# ``app.models.tenancy.Practitioner``. Each marker must stay at or below the
+# actual model ``String(20)`` column length so the live-local PostgreSQL
+# ``synthetic_product_seed`` gate cannot fail with a DataError. They are kept
+# in one place so the seed, the sensitive-column non-release proof and the
+# deterministic regression test all observe the same exact values.
+PRACTITIONER_SEED_MARKERS: dict[str, str] = {
+    "provider_number": "SYNTH-ND-PROVIDER-01",
+    "prescriber_number": "SYNTH-ND-PRESCRIBE-1",
+    "ahpra_number": "SYNTH-ND-AHPRA-001",
+    "hpi_i": "SYNTH-ND-HPII-001",
+}
+
 
 class AcceptanceFailure(RuntimeError):
     pass
@@ -181,10 +194,7 @@ def _seed_product(owner_factory: sessionmaker[Session]) -> dict[str, Any]:
             specialty="GP",
             default_location_id=location.id,
             is_active=True,
-            provider_number="SYNTH-ND-PROVIDER-001",
-            prescriber_number="SYNTH-ND-PRESCRIBE-01",
-            ahpra_number="SYNTH-ND-AHPRA-001",
-            hpi_i="SYNTH-ND-HPII-001",
+            **PRACTITIONER_SEED_MARKERS,
         )
         second = Practitioner(
             practice_id=practice.id,
@@ -742,10 +752,7 @@ def run_acceptance(*, output_path: Path | None = None) -> dict[str, Any]:
         }
 
         product_markers = (
-            "SYNTH-ND-PROVIDER-001",
-            "SYNTH-ND-PRESCRIBE-01",
-            "SYNTH-ND-AHPRA-001",
-            "SYNTH-ND-HPII-001",
+            *PRACTITIONER_SEED_MARKERS.values(),
             "native-diary-gp@authored-synthetic.invalid",
             "Native Diary Synthetic Practice",
             "Native Diary Foreign Practice",

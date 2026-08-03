@@ -25,11 +25,15 @@ from app.graphql.native_diary_application_session_practitioner import (
     PRODUCT_PATH,
     create_native_diary_application_session_app,
 )
+from app.models.tenancy import Practitioner
 from app.schemas.practice import (
     PractitionerDefaultLocationOut,
     PractitionerOut,
 )
 from app.services.application_auth_runtime import Surface
+from scripts.raisa_provider_free_native_diary_application_session_practitioner_runtime_acceptance import (
+    PRACTITIONER_SEED_MARKERS,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -79,6 +83,25 @@ def _enabled_pair() -> tuple[FastAPI, _FakeBridge]:
         create_native_diary_application_session_app(enabled=True, bridge=bridge),
         bridge,
     )
+
+
+def test_practitioner_seed_markers_stay_within_model_limits() -> None:
+    bounded_columns = {
+        "provider_number",
+        "prescriber_number",
+        "ahpra_number",
+        "hpi_i",
+    }
+    assert set(PRACTITIONER_SEED_MARKERS) == bounded_columns
+    for column_name, marker in PRACTITIONER_SEED_MARKERS.items():
+        column = Practitioner.__table__.c[column_name]
+        limit = column.type.length
+        assert isinstance(limit, int) and limit > 0
+        assert marker.startswith("SYNTH-ND-")
+        assert len(marker) <= limit, (
+            f"{column_name} seed marker {marker!r} length {len(marker)} "
+            f"exceeds the model String({limit}) column limit"
+        )
 
 
 def test_fixed_request_constants_are_exact() -> None:
