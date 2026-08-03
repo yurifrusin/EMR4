@@ -1,26 +1,26 @@
 {
-  "canonical_register_sha256": "7fdb5b028b1ade9050fb0a072afc16266a8af4009c9b8e77d0d112870ac8843f",
+  "canonical_register_sha256": "3a0a5931c2c3efe9965f5e0ea5534d5c6502485439077ba63ae3e9b30fc7900b",
   "counts": {
     "by_candidate_state": {
-      "canonical_unchanged": 9,
+      "canonical_unchanged": 10,
       "untrusted_partial_worktree": 2
     },
     "by_category": {
       "command_scope_violation": 2,
       "evidence_misreport": 1,
       "harness_failure": 1,
-      "output_contract_violation": 4,
+      "output_contract_violation": 5,
       "read_only_violation": 1,
       "reasoning_claim_error": 1,
       "transport_timeout": 1
     },
     "by_origin": {
-      "agent_behavior": 9,
+      "agent_behavior": 10,
       "harness": 1,
       "transport": 1
     },
     "by_process_severity": {
-      "low": 2,
+      "low": 3,
       "material": 4,
       "moderate": 5
     },
@@ -28,18 +28,18 @@
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 6,
       "codex-native-independent-reviewer::verifier": 1,
       "codex-native-parallel-worker::implementer": 1,
-      "codex-primary-orchestrator::orchestrator": 1,
+      "codex-primary-orchestrator::orchestrator": 2,
       "deepseek-flash-workers::implementer": 1,
       "shared-postgresql-pytest-gate::orchestrator": 1
     },
     "by_role": {
       "implementer": 2,
-      "orchestrator": 2,
+      "orchestrator": 3,
       "verifier": 7
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 11,
+  "incident_count": 12,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -68,7 +68,7 @@
       ]
     }
   ],
-  "register_revision": 4,
+  "register_revision": 5,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-03"
 }

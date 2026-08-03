@@ -1,0 +1,92 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "verifier_acceptance",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction at 449 lines / 67954 bytes / SHA-256 af5b7976ab03cd83f1f48678948a46d1d5a780fa658016610ebd82ec164b38c7. The fifth-pair authority and exact Gemini 3.6 Flash/high verifier allocation remain active; no accepted-result claim is made before the veto.",
+    "current_authority_allocation": "Yuri selected Gemini 3.6 Flash/high for independent verification. The verifier is review-only with no implementation, acceptance, integration, baton, protected-ref, fallback, provider expansion, deployment, production or release authority.",
+    "active_plan_and_acceptance": "Candidate bcf89c6b contains the repaired Diary method-plus-path browser evidence, architecture-only Davida command boundary, revision-5 incident register and conftest-enforced pytest lock. Root passed exact evidence, 133 integrated serial tests, direct-entry locking, Ruff, Node, format, boundary, process and diff gates. The first local Antigravity launch made no provider call because its wrapper rejected the detached branch; AER-0012 preserves that miss and the named-branch correction.",
+    "protected_evidence_boundaries": "Review remains limited to the exact non-protected candidate diff, named parents and authored-synthetic evidence. Protected holdouts, historical PHI, docs/branding, credentials, real identity/data, patient/clinical/document/product-derived data, provider material, arbitrary API access, cloud/IAM, deployment, production, release and protected refs are forbidden.",
+    "git_refs_and_worktree": "Candidate bcf89c6b is clean at C:/Users/sarashera/EMR4-worktrees/fifth-pair-gemini-review on disposable non-protected branch codex/review-bernie-davida-fifth-pair. Integration HEAD is the same candidate on codex/ariadne-bernie-davida-parallel-seam; origin task remains ec7af55d58997ed967abce05af5fa5bbe3bbb3dd. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. No provider/model call or candidate change followed the rejected detached preflight."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_fifth_pair_named_branch_pre_verifier_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol preserved the failed detached-branch preflight, verified zero provider call and rebound the unchanged candidate to a named non-protected review branch."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "No native worker is active; earlier worker/reviewer results remain preserved."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The exact fresh Gemini 3.6 Flash/high Antigravity call remains selected; the prior local preflight did not establish provider reachability."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "DeepSeek is not selected."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The real-TTY fallback is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The leverage-gated Claude lane is not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "codex-native-parallel-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

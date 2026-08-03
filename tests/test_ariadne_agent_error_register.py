@@ -36,10 +36,10 @@ def test_committed_register_is_closed_and_semantically_valid() -> None:
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 4
+    assert register["register_revision"] == 5
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 12)
+        f"AER-{index:04d}" for index in range(1, 13)
     ]
     assert all(row["status"] != "open" for row in register["incidents"])
 
@@ -49,7 +49,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 9
+    assert len(agent_incidents) == 10
     assert len(transport_incidents) == 1
     assert transport_incidents[0]["incident_id"] == "AER-0007"
     assert transport_incidents[0]["category"] == "transport_timeout"
@@ -97,10 +97,10 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_duplicate_decision_is_the_only_seeded_recurring_signature() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 11
+    assert report["incident_count"] == 12
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 9,
+        "agent_behavior": 10,
         "harness": 1,
         "transport": 1,
     }
@@ -108,13 +108,13 @@ def test_duplicate_decision_is_the_only_seeded_recurring_signature() -> None:
         "command_scope_violation": 2,
         "evidence_misreport": 1,
         "harness_failure": 1,
-        "output_contract_violation": 4,
+        "output_contract_violation": 5,
         "read_only_violation": 1,
         "reasoning_claim_error": 1,
         "transport_timeout": 1,
     }
     assert report["counts"]["by_candidate_state"] == {
-        "canonical_unchanged": 9,
+        "canonical_unchanged": 10,
         "untrusted_partial_worktree": 2,
     }
     assert report["recurring_patterns"] == [
@@ -149,6 +149,23 @@ def test_native_reviewer_environment_bootstrap_is_separate_and_contained() -> No
     assert incident["candidate_state"] == "canonical_unchanged"
     assert incident["correction"]["status"] == "contained_then_escalated"
     assert incident["status"] == "contained"
+
+
+def test_detached_antigravity_preflight_is_orchestrator_not_provider_error() -> None:
+    incidents = {row["incident_id"]: row for row in _register()["incidents"]}
+    incident = incidents["AER-0012"]
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["role"] == "orchestrator"
+    assert incident["resource_id"] == "codex-primary-orchestrator"
+    assert incident["model"] is None
+    assert incident["category"] == "output_contract_violation"
+    assert incident["recurrence_signature"] == (
+        "orchestrator.detached_verifier_branch"
+    )
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["correction"]["status"] == "control_added"
+    assert incident["status"] == "corrected"
 
 
 def test_pattern_report_is_byte_deterministic(tmp_path: Path) -> None:

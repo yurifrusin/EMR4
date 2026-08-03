@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 4,
+  "register_revision": 5,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-03",
@@ -433,6 +433,42 @@
         ]
       },
       "status": "contained"
+    },
+    {
+      "incident_id": "AER-0012",
+      "attempt_id": "bernie-davida-fifth-pair-antigravity-001",
+      "observed_on": "2026-08-03",
+      "tranche": "bernie-davida-fifth-pair",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "antigravity_local_wrapper_preflight",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "An Antigravity verifier worktree must bind the exact candidate commit on a named non-protected review branch before local wrapper preflight.",
+      "observed_error": "Root supplied the exact clean candidate as a detached worktree, so the Antigravity wrapper rejected the empty branch before project creation or any provider/model call.",
+      "detection_method": "The deterministic Antigravity launcher returned the exact protected-or-detached-branch refusal and no review receipt was created.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/bernie-davida-fifth-pair-antigravity-detached-branch-failure-receipt.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.detached_verifier_branch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "The same candidate commit was placed on a disposable codex/review branch and a distinct fresh five-source receipt was required before retrying the exact reviewer lane.",
+        "prevention_control": "Verifier setup must validate a non-empty non-protected codex/review branch and exact candidate HEAD before issuing the pre-verifier receipt or invoking Antigravity.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-5.md",
+          "orchestration/agent_inbox/codex/bernie-davida-fifth-pair-pre-verifier-receipt-2.json"
+        ]
+      },
+      "status": "corrected"
     }
   ]
 }

@@ -1,0 +1,72 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction at 449 lines / 67954 bytes / SHA-256 af5b7976ab03cd83f1f48678948a46d1d5a780fa658016610ebd82ec164b38c7. The fifth-pair task-branch and Gemini review authority remains active without protected integration.",
+    "current_authority_allocation": "Sol may preserve the failed verifier preflight, commit its bounded correction and dispatch the same exact Gemini 3.6 Flash/high reviewer. No fallback, protected ref, deployment, production, release or product-authority expansion is allowed.",
+    "active_plan_and_acceptance": "Candidate bcf89c6b passed its product and harness gates. The Antigravity wrapper then rejected the detached review branch before any model call. AER-0012, revision 5, the immutable failure receipt and named codex/review branch correction now pass 26 focused incident/policy tests and leave the product candidate unchanged.",
+    "protected_evidence_boundaries": "No protected evidence, docs/branding, real identity/data, patient/clinical/document data, provider prompt, arbitrary API, cloud/IAM, deployment, production, release or protected ref is touched. This commit is verifier-preflight bookkeeping and control evidence only.",
+    "git_refs_and_worktree": "Integration HEAD is bcf89c6b on codex/ariadne-bernie-davida-parallel-seam; origin task remains ec7af55d58997ed967abce05af5fa5bbe3bbb3dd. The exact review commit is clean on codex/review-bernie-davida-fifth-pair. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty before explicit staging and docs/branding remains the only unrelated residue."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_verifier_preflight_correction_precommit_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol observed and preserved the local preflight failure and verified the unchanged candidate and named-branch correction."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["No native worker is active."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The wrapper preflight was reachable, but no Antigravity project or provider call started; model reachability remains unknown."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["DeepSeek is not selected."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The real-TTY fallback is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The leverage-gated Claude lane is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {"resource_id": "codex-native-parallel-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

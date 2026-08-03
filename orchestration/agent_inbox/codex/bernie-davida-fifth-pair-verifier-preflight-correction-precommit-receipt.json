@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5f082c73228b9cceabb54e84631a93ded3bbd56498dc901a0444d64415841955",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate bcf89c6b passed its product and harness gates. The Antigravity wrapper then rejected the detached review branch before any model call. AER-0012, revision 5, the immutable failure receipt and named codex/review branch correction now pass 26 focused incident/policy tests and leave the product candidate unchanged.",
+    "current_authority_allocation": "Sol may preserve the failed verifier preflight, commit its bounded correction and dispatch the same exact Gemini 3.6 Flash/high reviewer. No fallback, protected ref, deployment, production, release or product-authority expansion is allowed.",
+    "git_refs_and_worktree": "Integration HEAD is bcf89c6b on codex/ariadne-bernie-davida-parallel-seam; origin task remains ec7af55d58997ed967abce05af5fa5bbe3bbb3dd. The exact review commit is clean on codex/review-bernie-davida-fifth-pair. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty before explicit staging and docs/branding remains the only unrelated residue.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after compaction at 449 lines / 67954 bytes / SHA-256 af5b7976ab03cd83f1f48678948a46d1d5a780fa658016610ebd82ec164b38c7. The fifth-pair task-branch and Gemini review authority remains active without protected integration.",
+    "protected_evidence_boundaries": "No protected evidence, docs/branding, real identity/data, patient/clinical/document data, provider prompt, arbitrary API, cloud/IAM, deployment, production, release or protected ref is touched. This commit is verifier-preflight bookkeeping and control evidence only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

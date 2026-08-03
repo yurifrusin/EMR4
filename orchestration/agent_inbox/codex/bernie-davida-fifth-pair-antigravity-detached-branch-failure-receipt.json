@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.verifier-preflight-failure.v1",
+  "attempt_id": "bernie-davida-fifth-pair-antigravity-001",
+  "observed_on": "2026-08-03",
+  "stage": "local_wrapper_preflight",
+  "candidate_head": "bcf89c6b27e056cbd626bdb39d77489caaa54f33",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/fifth-pair-gemini-review",
+  "observed_branch": "",
+  "failure": "Antigravity refuses protected or detached branch: ''",
+  "provider_or_model_call_started": false,
+  "fresh_antigravity_project_created": false,
+  "candidate_changed": false,
+  "candidate_worktree_clean": true,
+  "disposition": "revision_required_before_dispatch",
+  "correction": {
+    "branch": "codex/review-bernie-davida-fifth-pair",
+    "head_unchanged": true,
+    "fresh_five_source_receipt_required": true,
+    "same_exact_model_and_no_fallback": true
+  }
+}
