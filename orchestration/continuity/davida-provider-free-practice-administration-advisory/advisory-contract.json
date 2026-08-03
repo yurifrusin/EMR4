@@ -1,0 +1,169 @@
+{
+  "schema_version": "emr4.davida_provider_free_practice_administration_advisory.contract.v1",
+  "status": "provider_free_unmounted_unoccupied_non_executing",
+  "data_class": "authored_synthetic",
+  "source_head": "b957ed7623310206cf5f4970e1eb91241c73ef6f",
+  "parent_acceptance": "provider_free_practice_administration_pure_read_pass",
+  "authority": {
+    "decision_owner": "Yuri",
+    "authorised_on": "2026-08-03",
+    "parent_seam": "bernie_davida_parallel_seam_pass",
+    "root_conductor": "gpt_sol",
+    "worker_acceptance_authority": false,
+    "reviewer_acceptance_authority": false,
+    "protected_ref_authority": false,
+    "deployment_authority": false,
+    "runtime_claim": false,
+    "mount_or_charter_alignment": "later_decision"
+  },
+  "consumes": {
+    "context_schema_version": "emr4.davida.practice_administration_context.v1",
+    "context_data_class": "authored_synthetic",
+    "context_frames": ["practitioners", "locations"],
+    "frame_labels": "live_api_fact",
+    "projection": "pure",
+    "active_only": true,
+    "opaque_references_only": true,
+    "blocked_sources": [
+      {
+        "name": "diary_rooms",
+        "path": "GET /api/v1/diary/rooms",
+        "reason": "normalizes_and_commits_during_nominal_read"
+      },
+      {
+        "name": "diary_waiting_areas",
+        "path": "GET /api/v1/diary/waiting-areas",
+        "reason": "normalizes_and_commits_during_nominal_read"
+      },
+      {
+        "name": "appointment_waiting_room_queue",
+        "path": "GET /api/v1/appointments/waiting-room",
+        "reason": "patient_linked_appointment_queue_closed_data"
+      }
+    ]
+  },
+  "operation_enum": {
+    "domain": "practice_administration_advisory_interpretation",
+    "closed": true,
+    "fail_closed_on_unknown": true,
+    "admitted_operations": [
+      {
+        "code": "ADVISORY_EXPLAIN_DIRECTORY",
+        "kind": "advisory",
+        "target": "exactly_one_opaque_subject_ref",
+        "risk_tier": "read_only",
+        "mutable": false
+      },
+      {
+        "code": "ADVISORY_SUMMARIZE_DIRECTORY",
+        "kind": "advisory",
+        "target": "none",
+        "risk_tier": "read_only",
+        "mutable": false
+      }
+    ],
+    "excluded_operations": [
+      "PROPOSE_DEACTIVATE_PRACTITIONER",
+      "PROPOSE_REACTIVATE_PRACTITIONER",
+      "PROPOSE_UPDATE_PRACTITIONER_DEFAULT_LOCATION",
+      "PROPOSE_UPDATE_PRACTITIONER_PROFILE",
+      "APPLY_PRACTITIONER_DEACTIVATE",
+      "APPLY_PRACTITIONER_REACTIVATE",
+      "APPLY_PRACTITIONER_UPDATE_DEFAULT_LOCATION",
+      "APPLY_PRACTITIONER_UPDATE_PROFILE",
+      "CONFIRM_PRACTITIONER_DEACTIVATE",
+      "WRITE_PRACTITIONER_PROFILE"
+    ]
+  },
+  "candidate_envelope": {
+    "schema_version": "emr4.davida.practice_administration_advisory.candidate.v1",
+    "strict_extra_forbid": true,
+    "selectors_only": true,
+    "authority_class": "advisory",
+    "required_binding": ["practice_ref", "principal_ref", "correlation_id", "content_revision"],
+    "authority_fields": {
+      "writes_authorized": false,
+      "proposal_authorized": false,
+      "confirmation_authorized": false
+    },
+    "evaluated_at": "caller_supplied_timezone_aware_half_open_range",
+    "explain_target": {
+      "subject_kind": ["practitioner", "location"],
+      "subject_ref": "opaque_bounded_reference",
+      "exactly_one": true
+    },
+    "summary_target": "none"
+  },
+  "draft_release": {
+    "schema_version": "emr4.davida.practice_administration_advisory.draft.v1",
+    "authority_label": "model_interpretation",
+    "evidence_mode": "provider_free_unoccupied_authored_synthetic",
+    "status": "advisory_only",
+    "presentation": "structured_fields_only_no_html_or_markdown",
+    "template_code": "davida_directory_advisory_v1",
+    "payload_source": "copied_or_derived_from_exact_context_rows",
+    "grounding": ["grounding_paths", "grounding_digest"],
+    "context_binding": ["context_schema_version", "practice_ref", "principal_ref", "correlation_id", "content_revision"]
+  },
+  "released_authority_ceiling": {
+    "command": false,
+    "confirmation": false,
+    "proposal": false,
+    "apply": false,
+    "write": false,
+    "provider": false,
+    "memory": false,
+    "database": false,
+    "network": false,
+    "event": false,
+    "model_to_database": false
+  },
+  "result_union": {
+    "discriminator": "verdict",
+    "released": "released",
+    "rejected": "rejected",
+    "both_carry": ["candidate_hash", "context_revision", "reason"],
+    "repair_performed": false,
+    "retry_authorized": false,
+    "released_draft_present_on_exact_pass_only": true,
+    "rejection_has_no_partial_payload": true
+  },
+  "proofreader_order": [
+    "bounded_canonical_raw_candidate_and_operation_allowlist",
+    "strict_candidate_schema_and_extra_field_admission",
+    "context_frame_blocked_sources_authority_ceiling_labels_and_revision_recompute",
+    "exact_practice_principal_correlation_revision_equality",
+    "caller_supplied_timezone_aware_evaluated_at_half_open_range",
+    "literal_false_candidate_authority_ceiling",
+    "explain_subject_resolution_or_summary_row_derivation",
+    "canonical_candidate_and_grounding_hashes_atomic_release"
+  ],
+  "evidence": {
+    "label": "provider_free_unoccupied_authored_synthetic",
+    "terminal_result": "provider_free_practice_administration_advisory_proofreader_pass",
+    "persists_only": ["exact_label", "case_counts", "verdict_counts", "booleans", "hashes"],
+    "no_names_refs_rows_prompts_dsn_or_raw_candidates": true
+  },
+  "blocked_gates": [
+    "live_provider_runtime",
+    "model_execution",
+    "memory_rag_graphrag_runtime",
+    "database_connection",
+    "network",
+    "clock_read",
+    "route_mount",
+    "graphql_field",
+    "proposal_authority",
+    "apply_authority",
+    "confirmation_authority",
+    "write_authority",
+    "real_identity",
+    "patient_clinical_document_data",
+    "deployment",
+    "production",
+    "release",
+    "protected_evidence_or_holdouts",
+    "protected_refs",
+    "docs_branding"
+  ]
+}

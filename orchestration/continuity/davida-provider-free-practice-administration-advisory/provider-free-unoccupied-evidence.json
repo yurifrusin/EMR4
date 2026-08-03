@@ -1,0 +1,29 @@
+{
+  "case_count": 57,
+  "closed_rejection_reason_count": 15,
+  "data_class": "authored_synthetic",
+  "evidence_label": "provider_free_unoccupied_authored_synthetic",
+  "failed_case_count": 0,
+  "hashes": {
+    "contract_sha256": "d532e579b15c1d68351c4e130513b557e927a62ede2c0f572ef019f221703459",
+    "proofreader_sha256": "198b3b6d41cad42030dbb64156f8b262ed450abc682f165afaa80774331ef2c6",
+    "schema_sha256": "b3b642962e4feffe31c4e7f73dc10d14196d420d65ee530f3fe6984fae5570cc"
+  },
+  "passed_case_count": 57,
+  "properties": {
+    "clock_read": false,
+    "database_or_network_used": false,
+    "proposal_apply_confirmation_write_authority": false,
+    "provider_or_model_executed": false,
+    "rejection_partial_payload": false,
+    "released_fields_context_derived": true,
+    "repair_performed": false,
+    "retry_authorized": false
+  },
+  "result": "provider_free_practice_administration_advisory_proofreader_pass",
+  "schema_version": "emr4.davida_practice_administration_advisory_evidence.v1",
+  "verdict_counts": {
+    "rejected": 49,
+    "released": 5
+  }
+}

@@ -1,0 +1,438 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/davida-provider-free-practice-administration-advisory.v1.json",
+  "title": "Davida provider-free practice-administration advisory proofreader contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "data_class",
+    "source_head",
+    "parent_acceptance",
+    "authority",
+    "consumes",
+    "operation_enum",
+    "candidate_envelope",
+    "draft_release",
+    "released_authority_ceiling",
+    "result_union",
+    "proofreader_order",
+    "evidence",
+    "blocked_gates"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "emr4.davida_provider_free_practice_administration_advisory.contract.v1"
+    },
+    "status": {"const": "provider_free_unmounted_unoccupied_non_executing"},
+    "data_class": {"const": "authored_synthetic"},
+    "source_head": {"const": "b957ed7623310206cf5f4970e1eb91241c73ef6f"},
+    "parent_acceptance": {"const": "provider_free_practice_administration_pure_read_pass"},
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision_owner",
+        "authorised_on",
+        "parent_seam",
+        "root_conductor",
+        "worker_acceptance_authority",
+        "reviewer_acceptance_authority",
+        "protected_ref_authority",
+        "deployment_authority",
+        "runtime_claim",
+        "mount_or_charter_alignment"
+      ],
+      "properties": {
+        "decision_owner": {"const": "Yuri"},
+        "authorised_on": {"const": "2026-08-03"},
+        "parent_seam": {"const": "bernie_davida_parallel_seam_pass"},
+        "root_conductor": {"const": "gpt_sol"},
+        "worker_acceptance_authority": {"const": false},
+        "reviewer_acceptance_authority": {"const": false},
+        "protected_ref_authority": {"const": false},
+        "deployment_authority": {"const": false},
+        "runtime_claim": {"const": false},
+        "mount_or_charter_alignment": {"const": "later_decision"}
+      }
+    },
+    "consumes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "context_schema_version",
+        "context_data_class",
+        "context_frames",
+        "frame_labels",
+        "projection",
+        "active_only",
+        "opaque_references_only",
+        "blocked_sources"
+      ],
+      "properties": {
+        "context_schema_version": {"const": "emr4.davida.practice_administration_context.v1"},
+        "context_data_class": {"const": "authored_synthetic"},
+        "context_frames": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {"const": "practitioners"},
+            {"const": "locations"}
+          ],
+          "items": false
+        },
+        "frame_labels": {"const": "live_api_fact"},
+        "projection": {"const": "pure"},
+        "active_only": {"const": true},
+        "opaque_references_only": {"const": true},
+        "blocked_sources": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "prefixItems": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["name", "path", "reason"],
+              "properties": {
+                "name": {"const": "diary_rooms"},
+                "path": {"const": "GET /api/v1/diary/rooms"},
+                "reason": {"const": "normalizes_and_commits_during_nominal_read"}
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["name", "path", "reason"],
+              "properties": {
+                "name": {"const": "diary_waiting_areas"},
+                "path": {"const": "GET /api/v1/diary/waiting-areas"},
+                "reason": {"const": "normalizes_and_commits_during_nominal_read"}
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["name", "path", "reason"],
+              "properties": {
+                "name": {"const": "appointment_waiting_room_queue"},
+                "path": {"const": "GET /api/v1/appointments/waiting-room"},
+                "reason": {"const": "patient_linked_appointment_queue_closed_data"}
+              }
+            }
+          ],
+          "items": false
+        }
+      }
+    },
+    "operation_enum": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["domain", "closed", "fail_closed_on_unknown", "admitted_operations", "excluded_operations"],
+      "properties": {
+        "domain": {"const": "practice_administration_advisory_interpretation"},
+        "closed": {"const": true},
+        "fail_closed_on_unknown": {"const": true},
+        "admitted_operations": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["code", "kind", "target", "risk_tier", "mutable"],
+              "properties": {
+                "code": {"const": "ADVISORY_EXPLAIN_DIRECTORY"},
+                "kind": {"const": "advisory"},
+                "target": {"const": "exactly_one_opaque_subject_ref"},
+                "risk_tier": {"const": "read_only"},
+                "mutable": {"const": false}
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["code", "kind", "target", "risk_tier", "mutable"],
+              "properties": {
+                "code": {"const": "ADVISORY_SUMMARIZE_DIRECTORY"},
+                "kind": {"const": "advisory"},
+                "target": {"const": "none"},
+                "risk_tier": {"const": "read_only"},
+                "mutable": {"const": false}
+              }
+            }
+          ],
+          "items": false
+        },
+        "excluded_operations": {
+          "type": "array",
+          "minItems": 10,
+          "maxItems": 10,
+          "prefixItems": [
+            {"const": "PROPOSE_DEACTIVATE_PRACTITIONER"},
+            {"const": "PROPOSE_REACTIVATE_PRACTITIONER"},
+            {"const": "PROPOSE_UPDATE_PRACTITIONER_DEFAULT_LOCATION"},
+            {"const": "PROPOSE_UPDATE_PRACTITIONER_PROFILE"},
+            {"const": "APPLY_PRACTITIONER_DEACTIVATE"},
+            {"const": "APPLY_PRACTITIONER_REACTIVATE"},
+            {"const": "APPLY_PRACTITIONER_UPDATE_DEFAULT_LOCATION"},
+            {"const": "APPLY_PRACTITIONER_UPDATE_PROFILE"},
+            {"const": "CONFIRM_PRACTITIONER_DEACTIVATE"},
+            {"const": "WRITE_PRACTITIONER_PROFILE"}
+          ],
+          "items": false
+        }
+      }
+    },
+    "candidate_envelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "strict_extra_forbid",
+        "selectors_only",
+        "authority_class",
+        "required_binding",
+        "authority_fields",
+        "evaluated_at",
+        "explain_target",
+        "summary_target"
+      ],
+      "properties": {
+        "schema_version": {"const": "emr4.davida.practice_administration_advisory.candidate.v1"},
+        "strict_extra_forbid": {"const": true},
+        "selectors_only": {"const": true},
+        "authority_class": {"const": "advisory"},
+        "required_binding": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "prefixItems": [
+            {"const": "practice_ref"},
+            {"const": "principal_ref"},
+            {"const": "correlation_id"},
+            {"const": "content_revision"}
+          ],
+          "items": false
+        },
+        "authority_fields": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["writes_authorized", "proposal_authorized", "confirmation_authorized"],
+          "properties": {
+            "writes_authorized": {"const": false},
+            "proposal_authorized": {"const": false},
+            "confirmation_authorized": {"const": false}
+          }
+        },
+        "evaluated_at": {"const": "caller_supplied_timezone_aware_half_open_range"},
+        "explain_target": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["subject_kind", "subject_ref", "exactly_one"],
+          "properties": {
+            "subject_kind": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "prefixItems": [
+                {"const": "practitioner"},
+                {"const": "location"}
+              ],
+              "items": false
+            },
+            "subject_ref": {"const": "opaque_bounded_reference"},
+            "exactly_one": {"const": true}
+          }
+        },
+        "summary_target": {"const": "none"}
+      }
+    },
+    "draft_release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "authority_label",
+        "evidence_mode",
+        "status",
+        "presentation",
+        "template_code",
+        "payload_source",
+        "grounding",
+        "context_binding"
+      ],
+      "properties": {
+        "schema_version": {"const": "emr4.davida.practice_administration_advisory.draft.v1"},
+        "authority_label": {"const": "model_interpretation"},
+        "evidence_mode": {"const": "provider_free_unoccupied_authored_synthetic"},
+        "status": {"const": "advisory_only"},
+        "presentation": {"const": "structured_fields_only_no_html_or_markdown"},
+        "template_code": {"const": "davida_directory_advisory_v1"},
+        "payload_source": {"const": "copied_or_derived_from_exact_context_rows"},
+        "grounding": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {"const": "grounding_paths"},
+            {"const": "grounding_digest"}
+          ],
+          "items": false
+        },
+        "context_binding": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "prefixItems": [
+            {"const": "context_schema_version"},
+            {"const": "practice_ref"},
+            {"const": "principal_ref"},
+            {"const": "correlation_id"},
+            {"const": "content_revision"}
+          ],
+          "items": false
+        }
+      }
+    },
+    "released_authority_ceiling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "command",
+        "confirmation",
+        "proposal",
+        "apply",
+        "write",
+        "provider",
+        "memory",
+        "database",
+        "network",
+        "event",
+        "model_to_database"
+      ],
+      "properties": {
+        "command": {"const": false},
+        "confirmation": {"const": false},
+        "proposal": {"const": false},
+        "apply": {"const": false},
+        "write": {"const": false},
+        "provider": {"const": false},
+        "memory": {"const": false},
+        "database": {"const": false},
+        "network": {"const": false},
+        "event": {"const": false},
+        "model_to_database": {"const": false}
+      }
+    },
+    "result_union": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "discriminator",
+        "released",
+        "rejected",
+        "both_carry",
+        "repair_performed",
+        "retry_authorized",
+        "released_draft_present_on_exact_pass_only",
+        "rejection_has_no_partial_payload"
+      ],
+      "properties": {
+        "discriminator": {"const": "verdict"},
+        "released": {"const": "released"},
+        "rejected": {"const": "rejected"},
+        "both_carry": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "prefixItems": [
+            {"const": "candidate_hash"},
+            {"const": "context_revision"},
+            {"const": "reason"}
+          ],
+          "items": false
+        },
+        "repair_performed": {"const": false},
+        "retry_authorized": {"const": false},
+        "released_draft_present_on_exact_pass_only": {"const": true},
+        "rejection_has_no_partial_payload": {"const": true}
+      }
+    },
+    "proofreader_order": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "prefixItems": [
+        {"const": "bounded_canonical_raw_candidate_and_operation_allowlist"},
+        {"const": "strict_candidate_schema_and_extra_field_admission"},
+        {"const": "context_frame_blocked_sources_authority_ceiling_labels_and_revision_recompute"},
+        {"const": "exact_practice_principal_correlation_revision_equality"},
+        {"const": "caller_supplied_timezone_aware_evaluated_at_half_open_range"},
+        {"const": "literal_false_candidate_authority_ceiling"},
+        {"const": "explain_subject_resolution_or_summary_row_derivation"},
+        {"const": "canonical_candidate_and_grounding_hashes_atomic_release"}
+      ],
+      "items": false
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "terminal_result",
+        "persists_only",
+        "no_names_refs_rows_prompts_dsn_or_raw_candidates"
+      ],
+      "properties": {
+        "label": {"const": "provider_free_unoccupied_authored_synthetic"},
+        "terminal_result": {"const": "provider_free_practice_administration_advisory_proofreader_pass"},
+        "persists_only": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "prefixItems": [
+            {"const": "exact_label"},
+            {"const": "case_counts"},
+            {"const": "verdict_counts"},
+            {"const": "booleans"},
+            {"const": "hashes"}
+          ],
+          "items": false
+        },
+        "no_names_refs_rows_prompts_dsn_or_raw_candidates": {"const": true}
+      }
+    },
+    "blocked_gates": {
+      "type": "array",
+      "minItems": 20,
+      "maxItems": 20,
+      "prefixItems": [
+        {"const": "live_provider_runtime"},
+        {"const": "model_execution"},
+        {"const": "memory_rag_graphrag_runtime"},
+        {"const": "database_connection"},
+        {"const": "network"},
+        {"const": "clock_read"},
+        {"const": "route_mount"},
+        {"const": "graphql_field"},
+        {"const": "proposal_authority"},
+        {"const": "apply_authority"},
+        {"const": "confirmation_authority"},
+        {"const": "write_authority"},
+        {"const": "real_identity"},
+        {"const": "patient_clinical_document_data"},
+        {"const": "deployment"},
+        {"const": "production"},
+        {"const": "release"},
+        {"const": "protected_evidence_or_holdouts"},
+        {"const": "protected_refs"},
+        {"const": "docs_branding"}
+      ],
+      "items": false
+    }
+  }
+}
