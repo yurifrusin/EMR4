@@ -1,0 +1,35 @@
+{
+  "schema_version": "emr4.native_diary_ui_composition_evidence.v1",
+  "result": "provider_free_native_diary_application_session_ui_composition_pass",
+  "evidence_label": "provider_free_default_off_ui_composition_harness",
+  "data_class": "authored_synthetic",
+  "case_count": 17,
+  "passed_case_count": 17,
+  "failed_case_count": 0,
+  "properties": {
+    "strict_true_default_off": true,
+    "enabled_path_has_no_legacy_fallback": true,
+    "enabled_failure_rethrown_by_enclosing_load": true,
+    "invalid_transition_resets_cached_reconciler": true,
+    "canonical_reconciler_lf_parity": true,
+    "latest_read_wins": true,
+    "stale_generation_and_invalidation_suppressed": true,
+    "strict_response_admission": true,
+    "sanitized_snapshot": true,
+    "provider_or_external_effect": false
+  },
+  "claims_not_made": [
+    "browser",
+    "route_intercepted",
+    "http",
+    "backend",
+    "postgresql",
+    "usability",
+    "production",
+    "release"
+  ],
+  "hashes": {
+    "published_reconciler_sha256": "39f7f3655a70624771b3411833699679973fe6025a098c3d0be44b27a296f600",
+    "composition_module_sha256": "7e308af5ff89f549119e6552d6b3a6341a132493cdc22ff8d2f631af3aa73d73"
+  }
+}
