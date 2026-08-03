@@ -1,0 +1,25 @@
+{
+  "deployment_or_release_performed": false,
+  "protected_refs": {
+    "handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+  },
+  "review_branches_removed": [
+    "codex/review-ariadne-handover-verifier-blue",
+    "codex/review-ariadne-handover-verifier-red"
+  ],
+  "review_worktrees_removed": [
+    "C:/Users/sarashera/EMR4-worktrees/ariadne-handover-verifier-blue",
+    "C:/Users/sarashera/EMR4-worktrees/ariadne-handover-verifier-red"
+  ],
+  "root_untracked_paths": [
+    "docs/branding/"
+  ],
+  "schema_version": "ariadne.final_residue_evidence.v1",
+  "task_branch": "codex/ariadne-handover-verifier-workflow-optimization",
+  "task_head_before_residue_commit": "623bef89240328b8fa89afdb6bbdcaad78fa5bfd",
+  "tracked_root_clean": true,
+  "user_owned_branding_preserved": true
+}

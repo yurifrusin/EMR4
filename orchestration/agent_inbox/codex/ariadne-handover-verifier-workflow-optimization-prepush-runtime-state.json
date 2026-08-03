@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "push",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_native_five_source_final_prepush",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records ariadne_handover_verifier_workflow_optimization_pass, preserves the provider-free Office product result and leaves the native Diary composition review as a separate fresh-authority product gate.",
+    "current_authority_allocation": "Sol accepted and owns the task-branch push; DeepSeek and Gemini review authority is consumed, their clean disposable worktrees and branches are removed, and neither can move protected refs.",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-handover-verifier-workflow-optimization-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-handover-verifier-workflow-optimization-sol-acceptance.md",
+      "orchestration/agent_inbox/codex/ariadne-handover-verifier-workflow-optimization-final-residue-evidence.json"
+    ],
+    "protected_evidence_boundaries": "The push contains repository-local orchestration, tests and sanitized evidence only; docs/branding is excluded, and product, provider, deployment, protected integration, production and release remain closed.",
+    "git_refs_and_worktree": "After fresh origin fetch, task HEAD is 623bef89240328b8fa89afdb6bbdcaad78fa5bfd before the residue/prepush commit; local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; root tracked state is clean with only user-owned untracked docs/branding."
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Task closeout is accepted and only the non-protected task branch is eligible to push."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was used."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "unknown",
+      "evidence": ["The exact disposable DeepSeek review worktree and branch were removed after clean final pass."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No TTY fallback was used."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No standalone Claude lane was used."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "unknown",
+      "evidence": ["The exact disposable Antigravity review worktree and branch were removed after clean final pass."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
