@@ -1,0 +1,173 @@
+{
+  "schema_version": "emr4.davida_practice_administration_boundary.capability_contract.v1",
+  "status": "architecture_only_provider_free_non_executing",
+  "source_head": "bb8a6f554b417df019727345ba91a7d555b0bd41",
+  "authority": {
+    "decision_owner": "Yuri",
+    "authorised_on": "2026-08-03",
+    "parent_seam": "bernie_davida_parallel_seam_pass",
+    "standing_lane_progression": true,
+    "material_fork_returns_to_yuri": true,
+    "manual_intervention_when_materially_more_economical": true,
+    "root_conductor": "gpt_sol",
+    "worker_acceptance_authority": false,
+    "reviewer_acceptance_authority": false,
+    "protected_ref_authority": false,
+    "deployment_authority": false,
+    "runtime_claim": false
+  },
+  "identity_and_topology": {
+    "agent_id": "davida",
+    "role": "practice_administration_custodian",
+    "separate_from_bernie": true,
+    "separate_runtime_identity": true,
+    "combined_probabilistic_container": false,
+    "shared_provider_neutral_mechanical_kernel": true,
+    "shared_typed_envelopes": true,
+    "shared_deterministic_proofreader_primitives": true,
+    "shared_audit_vocabulary": true,
+    "policies_do_not_cross": true,
+    "scopes_do_not_cross": true,
+    "memory_does_not_cross": true,
+    "credentials_do_not_cross": true,
+    "proofreader_outside_probabilistic_work_cell": true,
+    "backend_is_sole_database_and_command_authority": true
+  },
+  "forbidden_authorities": {
+    "database_credential": false,
+    "orm_session": false,
+    "generic_database_client": false,
+    "graphql_mutation": false,
+    "rest_command_credential": false,
+    "event_actuator": false,
+    "model_to_database_path": false,
+    "confirmation_envelope_emission": false,
+    "writes_authorized_true_emission": false,
+    "mutating_release_envelope": false,
+    "signed_command_emission": false
+  },
+  "state_classes": [
+    "authoritative_structured_practice_state",
+    "advisory_provenance_bearing_institutional_knowledge",
+    "bounded_expiring_session_context_state",
+    "declarative_manifest_policy"
+  ],
+  "context_desk": {
+    "pattern": "read_desk_typed_read_intent_pure_projection_only",
+    "eligible_active_practitioner_read_contract": "Query.practice.practitioners",
+    "eligible_active_practitioner_service": "list_practitioner_directory",
+    "eligible_active_practitioner_route": "GET /api/v1/practice/practitioners",
+    "active_practitioner_projection_pure": true,
+    "future_location_source_requires_pure_projection": true,
+    "blocked_room_get_path": "GET /api/v1/diary/rooms",
+    "blocked_room_get_reason": "normalizes_and_commits_during_nominal_read",
+    "blocked_waiting_area_get_path": "GET /api/v1/diary/waiting-areas",
+    "blocked_waiting_area_get_reason": "normalizes_and_commits_during_nominal_read",
+    "blocked_waiting_room_get_path": "GET /api/v1/appointments/waiting-room",
+    "blocked_waiting_room_get_reason": "patient_linked_appointment_queue_closed_data",
+    "context_frames_minimal": true,
+    "context_frames_non_authoritative": true
+  },
+  "operation_enum": {
+    "domain": "practitioner_lifecycle_administration",
+    "closed": true,
+    "fail_closed_on_unknown": true,
+    "operations": [
+      {"code": "ADVISORY_EXPLAIN_DIRECTORY", "kind": "advisory", "risk_tier": "read_only", "mutable": false},
+      {"code": "ADVISORY_SUMMARIZE_DIRECTORY", "kind": "advisory", "risk_tier": "read_only", "mutable": false},
+      {"code": "PROPOSE_DEACTIVATE_PRACTITIONER", "kind": "proposal_candidate", "risk_tier": "admin_proposal", "mutable": false},
+      {"code": "PROPOSE_REACTIVATE_PRACTITIONER", "kind": "proposal_candidate", "risk_tier": "admin_proposal", "mutable": false},
+      {"code": "PROPOSE_UPDATE_PRACTITIONER_DEFAULT_LOCATION", "kind": "proposal_candidate", "risk_tier": "admin_proposal", "mutable": false},
+      {"code": "PROPOSE_UPDATE_PRACTITIONER_PROFILE", "kind": "proposal_candidate", "risk_tier": "admin_proposal", "mutable": false}
+    ]
+  },
+  "emission_ceiling": {
+    "typed_advisory_drafts": true,
+    "typed_proposal_candidates": true,
+    "human_confirmation": false,
+    "signed_command": false,
+    "writes_authorized_true": false,
+    "mutating_release_envelope": false,
+    "proofreader_release": "typed_grounded_draft_evidence_only"
+  },
+  "future_backend_owned_command_envelope": {
+    "owner": "trusted_backend_code",
+    "constructed_after_explicit_human_confirmation": true,
+    "proposal_fields": [
+      "practice_id",
+      "actor_context",
+      "source_surface",
+      "delegated_agent_identity",
+      "resource_id",
+      "command_schema_version",
+      "correlation_id",
+      "idempotency_key",
+      "intent_or_proposal_hash",
+      "expected_aggregate_version_or_etag",
+      "context_revision_and_freshness_id",
+      "effective_at",
+      "expires_at",
+      "reason_code",
+      "before_state_hash",
+      "explicit_diff",
+      "warnings_blocks_and_reason_codes"
+    ],
+    "confirmation_fields": [
+      "confirmation_evidence",
+      "resulting_revision",
+      "audit_event_id",
+      "outbox_event_id"
+    ]
+  },
+  "event_semantics": {
+    "role": "hint",
+    "payload_is_truth": false,
+    "payload_is_command": false,
+    "may_request_fresh_authorized_read": true,
+    "event_actuator_present": false
+  },
+  "api_spine": {
+    "read_context": "graphql_named_scoped_read_only",
+    "mutation": "rest_openapi_single_purpose_command",
+    "event": "committed_signal_requires_fresh_read_never_command",
+    "manifest": "declarative_input_runtime_enforced",
+    "context_frames_minimal": true,
+    "context_frames_non_authoritative": true
+  },
+  "tranches": [
+    {"tranche": 1, "name": "pure_read_projections", "effect_ceiling": "provider_free_read_only"},
+    {"tranche": 2, "name": "provider_free_typed_interpretation_proofreading", "effect_ceiling": "provider_free_typed_draft"},
+    {"tranche": 3, "name": "one_bounded_proposal_path", "effect_ceiling": "typed_dry_run_proposal_no_apply"},
+    {"tranche": 4, "name": "separately_authorised_confirmed_write_vertical", "effect_ceiling": "human_confirmed_backend_owned_command_candidate"}
+  ],
+  "execution_controls": {
+    "separate_non_protected_worktree": true,
+    "exact_source_head_binding": true,
+    "exact_owned_path_packet": true,
+    "explicit_path_staging_only": true,
+    "git_add_all_or_dot_forbidden": true,
+    "agent_worktrees_commit_message_path_forbidden": true,
+    "repository_conftest_pytest": "serial",
+    "shared_postgresql": "serial",
+    "antigravity_gemini_reviewer": "one_fresh_project_at_a_time",
+    "integration": "root_sol_serial",
+    "deterministic_before_external_review": true,
+    "review_decisions": ["pass", "revision_required"],
+    "exact_terminal_review_decision_count": 1
+  },
+  "blocked_gates": [
+    "live_provider_runtime",
+    "memory_rag_graphrag_runtime",
+    "real_identity",
+    "patient_clinical_document_data",
+    "model_to_database_writes",
+    "graphql_mutations",
+    "external_identity_writes",
+    "autonomous_writes",
+    "deployment",
+    "production",
+    "release",
+    "protected_evidence_or_holdouts",
+    "protected_refs"
+  ]
+}

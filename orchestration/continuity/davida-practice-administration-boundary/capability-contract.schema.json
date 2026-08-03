@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/davida-practice-administration-capability-contract.v1.json",
+  "title": "Davida practice-administration capability contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "source_head",
+    "authority",
+    "identity_and_topology",
+    "forbidden_authorities",
+    "state_classes",
+    "context_desk",
+    "operation_enum",
+    "emission_ceiling",
+    "future_backend_owned_command_envelope",
+    "event_semantics",
+    "api_spine",
+    "tranches",
+    "execution_controls",
+    "blocked_gates"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.davida_practice_administration_boundary.capability_contract.v1"},
+    "status": {"const": "architecture_only_provider_free_non_executing"},
+    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "authority": {"type": "object"},
+    "identity_and_topology": {"type": "object"},
+    "forbidden_authorities": {
+      "type": "object",
+      "additionalProperties": {"type": "boolean"}
+    },
+    "state_classes": {"type": "array", "minItems": 4, "uniqueItems": true},
+    "context_desk": {"type": "object"},
+    "operation_enum": {
+      "type": "object",
+      "required": ["domain", "closed", "fail_closed_on_unknown", "operations"],
+      "properties": {
+        "domain": {"type": "string"},
+        "closed": {"type": "boolean"},
+        "fail_closed_on_unknown": {"type": "boolean"},
+        "operations": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "required": ["code", "kind", "risk_tier", "mutable"],
+            "properties": {
+              "code": {"type": "string"},
+              "kind": {"enum": ["advisory", "proposal_candidate"]},
+              "risk_tier": {"type": "string"},
+              "mutable": {"type": "boolean"}
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "emission_ceiling": {"type": "object"},
+    "future_backend_owned_command_envelope": {"type": "object"},
+    "event_semantics": {"type": "object"},
+    "api_spine": {"type": "object"},
+    "tranches": {"type": "array", "minItems": 4, "maxItems": 4, "uniqueItems": true},
+    "execution_controls": {"type": "object"},
+    "blocked_gates": {"type": "array", "minItems": 8, "uniqueItems": true}
+  }
+}
