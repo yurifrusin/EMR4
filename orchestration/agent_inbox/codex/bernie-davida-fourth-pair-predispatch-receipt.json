@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Diary packet freezes strict-true default-off injection, canonical published reconciler parity, no enabled-path bearer fallback and no live claim. Davida packet freezes exactly PROPOSE_UPDATE_PRACTITIONER_DEFAULT_LOCATION, context-derived before/after dry run, no apply/confirmation/command envelope and no database/route. Both include exact owned and forbidden paths and deterministic tests.",
+    "current_authority_allocation": "Sol has frozen exact packets. Two fresh native GPT Sol coding agents may implement in isolated non-protected worktrees; they receive no acceptance, integration, baton, push, provider, product-write or protected authority. Root retains all material design and acceptance decisions.",
+    "git_refs_and_worktree": "Root and origin task remain e7d209e6652106c8f69036460223259a33af19c9; protected refs remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Both isolated worktrees and branches were created clean from exact e7d209e6. Root has only two preplan files, two worker packets, two predispatch files and user-owned docs/branding; the index is empty.",
+    "live_handover_current_baton": "The fresh fourth-pair pre-plan receipt passed. Current Baton authorises exactly the default-off UI composition and one default-location dry-run proposal as bounded descendants.",
+    "protected_evidence_boundaries": "Protected evidence/holdouts, historical PHI, provider/model execution, memory/RAG, real identity/data, arbitrary GraphQL, command/apply/write, cloud/IAM, deployment, production, release, protected refs and docs/branding remain closed and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

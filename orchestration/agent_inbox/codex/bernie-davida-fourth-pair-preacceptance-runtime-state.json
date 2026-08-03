@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fourth_pair_integrated_gate_and_closeouts",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md now records the exact fourth-pair results, acceptance paths, residual boundaries and the next two bounded candidates while leaving Continuity/Compass at 206/187.",
+    "current_authority_allocation": "GPT Sol alone accepts the root-replayed candidates. Native implementation agents are complete. Diary has one admissible fresh Gemini pass; Davida has one preserved rejected narrative and one admissible corrected fresh Gemini pass.",
+    "active_plan_and_acceptance": "Root replayed Diary as 1eae1023, 2b4da653 and 2ce689f6, and Davida as a3b23bc9, 3e2f9247 and 8692d100. The integrated union passes 289 serial tests. Diary evidence reproduces at 072943cb0cf88fb50577dfe172a97806f337961ceddb9930733f85e44f4e31c2 and Davida evidence at 6a997f496108ef78d09369a7d0838ee3ba8c2116e14c6cf99da08d47792ce6b1. Ruff, four Node syntax checks and diff/path checks pass. Exact individual closeouts and Sol acceptances are drafted.",
+    "protected_evidence_boundaries": "No protected evidence/ref, docs/branding, provider/model, memory/RAG, real identity/data, patient/clinical/document data, live/default-on Diary, command/apply/write, cloud/IAM, deployment, production or release authority was opened.",
+    "git_refs_and_worktree": "Root task is 8692d100 and six commits ahead of unchanged origin e7d209e6. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. The root index is empty; only intended fourth-pair closeout/coordination artifacts and user-owned docs/branding are untracked or modified."
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No implementation worker remains active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No fallback selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Anthropic-hosted model selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Exact accepted independent review receipts preserve one Diary pass, one rejected Davida narrative and one corrected Davida pass."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol reproduced the integrated deterministic gate and owns acceptance."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Implementation subagents are complete and hold no acceptance authority."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

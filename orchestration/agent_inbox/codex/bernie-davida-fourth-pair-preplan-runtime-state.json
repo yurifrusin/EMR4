@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "planning",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fourth_pair_fresh_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "After the successful continuing Pushover, AGENTS.md was reread completely in four bounded chunks. The Current result is the accepted third pair; Next implementation names default-off native-Diary UI composition and one Davida default-location dry-run proposal.",
+    "current_authority_allocation": "GPT Sol remains conductor, material design and acceptance owner and integrator. DeepSeek V4 Flash/high remains preferred for stable bounded implementation and Gemini 3.6 Flash/high for serialized fresh independent veto. Native Sol agents may own bounded separable work when leverage exceeds dispatch overhead; none receives acceptance, baton, protected-ref or release authority.",
+    "active_plan_and_acceptance": "The accepted parallel seam and shared boundary, both third-pair closeouts, the Davida boundary design's exact closed operation enum and proposal ceiling, the current native-Diary fetch/load surfaces, API Spine read graph, command pattern and Davida manifest posture were reread. Diary step 3 is a default-off UI composition only; Davida step 3 is an unmounted deterministic before/after proposal for PROPOSE_UPDATE_PRACTITIONER_DEFAULT_LOCATION with no apply or confirmation envelope.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 were restored. Protected holdouts and historical PHI; provider/model execution; memory/RAG; real identity or patient/clinical/document/product-derived data; arbitrary GraphQL; apply/confirmation/write or model-to-database authority; cloud/IAM; deployment; production; release; protected refs/evidence and native-alert dispositions remain closed. docs/branding remains user-owned, untracked and excluded, though its separately authorised hierarchy may inform future UI renders.",
+    "git_refs_and_worktree": "Root task branch codex/ariadne-bernie-davida-parallel-seam and its origin are aligned at e7d209e6652106c8f69036460223259a33af19c9. Local/origin master and handoff/current remain aligned at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty and the only worktree residue before this receipt is user-owned untracked docs/branding."
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "deepseek_claude_cli_observation",
+      "reachability": "unknown",
+      "evidence": ["The prior pair's two timeouts are closed; any fourth-pair use must be a new exact bounded dispatch after deterministic preflight."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No fallback selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Anthropic-hosted model selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "unknown",
+      "evidence": ["Reserved for fresh serialized review only after each candidate passes deterministic gates."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed the new pair's five-source restoration and began read-only architecture inspection immediately after the closeout notification."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh bounded native implementation workers are eligible only after root freezes exact paths and acceptance packets."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fourth_pair_davida_review_correction",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "The fully restored Current Baton still authorises the unchanged provider-free Davida dry-run candidate and one bounded independent-review correction; no product scope is broadened.",
+    "current_authority_allocation": "GPT Sol rejected the first verifier narrative and retains acceptance/integration. One fresh exact Gemini 3.6 Flash/high project receives only corrected read-only veto authority and no edit, acceptance, integration or protected-ref authority.",
+    "active_plan_and_acceptance": "Candidate 21e11b33e2c873be0ee2b12db0e57b599e24c8a1 remains clean and unchanged. Its committed evidence records 60 cases, 60 passed, zero failed, 2 released and 54 rejected. The first review is preserved but inadmissible because it invented 25/25 and ran an unlisted evidence-writing command. The corrected packet permits only the exact 140-test, Ruff, diff, status and HEAD checks.",
+    "protected_evidence_boundaries": "The correction remains read-only, authored-synthetic and provider-free. All protected evidence/data/provider/write/deployment/release/ref and docs/branding boundaries remain closed.",
+    "git_refs_and_worktree": "Root/origin task remain e7d209e6652106c8f69036460223259a33af19c9; protected refs remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. The fresh correction worktree is clean at exact 21e11b33e2c873be0ee2b12db0e57b599e24c8a1."
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No implementation worker is active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No fallback is selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Anthropic-hosted model is selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["One fresh corrected exact Gemini 3.6 Flash/high review is ready on an unchanged clean projection."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol rejected the inaccurate first narrative and owns final acceptance."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent owns the correction or acceptance."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [
+    {
+      "agent_id": "davida-default-location-dry-run-gemini-review-2",
+      "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\davida-default-location-dry-run-gemini-review-2",
+      "branch": "codex/review-davida-default-location-dry-run-2",
+      "head": "21e11b33e2c873be0ee2b12db0e57b599e24c8a1",
+      "status": "clean"
+    }
+  ],
+  "assigned_agent_ids": []
+}

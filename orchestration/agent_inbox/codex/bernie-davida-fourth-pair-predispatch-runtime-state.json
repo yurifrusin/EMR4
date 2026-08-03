@@ -1,0 +1,90 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fourth_pair_exact_worker_packets",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "The fresh fourth-pair pre-plan receipt passed. Current Baton authorises exactly the default-off UI composition and one default-location dry-run proposal as bounded descendants.",
+    "current_authority_allocation": "Sol has frozen exact packets. Two fresh native GPT Sol coding agents may implement in isolated non-protected worktrees; they receive no acceptance, integration, baton, push, provider, product-write or protected authority. Root retains all material design and acceptance decisions.",
+    "active_plan_and_acceptance": "Diary packet freezes strict-true default-off injection, canonical published reconciler parity, no enabled-path bearer fallback and no live claim. Davida packet freezes exactly PROPOSE_UPDATE_PRACTITIONER_DEFAULT_LOCATION, context-derived before/after dry run, no apply/confirmation/command envelope and no database/route. Both include exact owned and forbidden paths and deterministic tests.",
+    "protected_evidence_boundaries": "Protected evidence/holdouts, historical PHI, provider/model execution, memory/RAG, real identity/data, arbitrary GraphQL, command/apply/write, cloud/IAM, deployment, production, release, protected refs and docs/branding remain closed and excluded.",
+    "git_refs_and_worktree": "Root and origin task remain e7d209e6652106c8f69036460223259a33af19c9; protected refs remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Both isolated worktrees and branches were created clean from exact e7d209e6. Root has only two preplan files, two worker packets, two predispatch files and user-owned docs/branding; the index is empty."
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected for this pair after prior transport timeouts; fresh native workers offer lower recovery overhead for these bounded changes."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No fallback selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Anthropic-hosted model selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Reserved for later fresh serialized review after deterministic candidate gates."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol owns orchestration, independent verification decisions and integration."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["Two fresh bounded implementation agents are ready for the exact isolated worktrees."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "agent_id": "native-diary-default-off-ui-composition",
+      "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\native-diary-default-off-ui-composition",
+      "branch": "codex/native-diary-default-off-ui-composition",
+      "head": "e7d209e6652106c8f69036460223259a33af19c9",
+      "status": "clean"
+    },
+    {
+      "agent_id": "davida-default-location-dry-run",
+      "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\davida-default-location-dry-run",
+      "branch": "codex/davida-default-location-dry-run",
+      "head": "e7d209e6652106c8f69036460223259a33af19c9",
+      "status": "clean"
+    }
+  ],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,90 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "verifier_acceptance",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fourth_pair_exact_candidates_and_review_packets",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "The fully reread Current Baton authorises this exact default-off Diary UI composition and Davida default-location dry-run pair as bounded provider-free descendants; the accepted parents remain unchanged.",
+    "current_authority_allocation": "GPT Sol owns recovery, acceptance and task-branch integration. Gemini 3.6 Flash/high through two serial genuinely fresh Antigravity projects receives independent veto-review authority only, with no implementation, integration or protected-ref authority.",
+    "active_plan_and_acceptance": "Diary candidate 1578ef693c733a7ce63953d37048793575891f1d passed 17 deterministic evidence cases byte-exact plus 194 serial parent/seam/API Spine tests after root-required fail-closed race repair. Davida candidate 21e11b33e2c873be0ee2b12db0e57b599e24c8a1 passed 60 deterministic evidence cases byte-exact plus 140 serial parent/seam/API Spine tests after narrowing its public union to fourteen reachable reasons. Ruff, Node syntax, diff and exact-path gates pass.",
+    "protected_evidence_boundaries": "Both reviews remain read-only, authored-synthetic and provider-free. Protected evidence/holdouts, historical PHI, model/provider calls, memory/RAG, real identity/data, patient/clinical/document/product-derived data, arbitrary API access, commands/apply/write, cloud/IAM, deployment, production, release, protected refs and docs/branding remain closed.",
+    "git_refs_and_worktree": "Root and origin task are e7d209e6652106c8f69036460223259a33af19c9. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Fresh clean review worktrees bind exact Diary 1578ef693c733a7ce63953d37048793575891f1d and Davida 21e11b33e2c873be0ee2b12db0e57b599e24c8a1 candidates. Root index is empty and user-owned docs/branding is excluded."
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Implementation is complete; no external worker is active."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No fallback is authorised or selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Anthropic-hosted review is selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Two exact clean review worktrees and packets are ready; exact Gemini 3.6 Flash/high reviews will run serially with one decision each and no fallback."]
+    },
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol retains all acceptance, recovery and integration authority."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["Bounded implementation subagents are complete; none owns acceptance or the external review decisions."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "agent_id": "native-diary-default-off-ui-composition-gemini-review",
+      "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\native-diary-default-off-ui-composition-gemini-review",
+      "branch": "codex/review-native-diary-default-off-ui-composition",
+      "head": "1578ef693c733a7ce63953d37048793575891f1d",
+      "status": "clean"
+    },
+    {
+      "agent_id": "davida-default-location-dry-run-gemini-review",
+      "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\davida-default-location-dry-run-gemini-review",
+      "branch": "codex/review-davida-default-location-dry-run",
+      "head": "21e11b33e2c873be0ee2b12db0e57b599e24c8a1",
+      "status": "clean"
+    }
+  ],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_integration",
+  "planned_action": "integration",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fourth_pair_accepted_exact_reviews",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "The Current Baton and standing continuous two-lane authority remain restored. This integration is limited to the exact fourth-pair candidates and root coordination evidence.",
+    "current_authority_allocation": "GPT Sol alone owns candidate acceptance and non-protected task-branch integration. Implementation workers are complete. The Diary fresh Gemini review passed; the first Davida narrative was rejected, and a second genuinely fresh corrected Gemini review passed without changing the candidate.",
+    "active_plan_and_acceptance": "Diary exact candidate 1578ef693c733a7ce63953d37048793575891f1d passed byte-exact 17-case evidence, 194 serial tests, Ruff/Node/diff and one admissible fresh Gemini pass. Davida exact candidate 21e11b33e2c873be0ee2b12db0e57b599e24c8a1 passed byte-exact 60-case evidence, 140 serial tests, Ruff/diff and one admissible corrected fresh Gemini pass. The rejected first Davida review remains preserved and non-authoritative.",
+    "protected_evidence_boundaries": "Integration excludes providers/models, memory/RAG, real identity/data, patient/clinical/document/product-derived data, arbitrary API access, command/apply/write, cloud/IAM, deployment, production, release, protected refs/evidence and docs/branding.",
+    "git_refs_and_worktree": "Root and origin task remain e7d209e6652106c8f69036460223259a33af19c9 with empty index and only fourth-pair root artifacts plus user-owned docs/branding untracked. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Both accepted candidate and review worktrees are clean at their exact heads."
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No implementation worker remains active."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No fallback selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Anthropic-hosted model selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Accepted clean read-only receipts bind exact unchanged candidates; one inaccurate first Davida narrative is preserved and rejected."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol reproduced deterministic gates and owns integration."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Bounded implementation agents are complete and own no integration authority."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [
+    {"agent_id": "native-diary-default-off-ui-composition", "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\native-diary-default-off-ui-composition", "branch": "codex/native-diary-default-off-ui-composition", "head": "1578ef693c733a7ce63953d37048793575891f1d", "status": "clean"},
+    {"agent_id": "davida-default-location-dry-run", "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\davida-default-location-dry-run", "branch": "codex/davida-default-location-dry-run", "head": "21e11b33e2c873be0ee2b12db0e57b599e24c8a1", "status": "clean"}
+  ],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_integration",
+  "planned_action": "integration",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Diary exact candidate 1578ef693c733a7ce63953d37048793575891f1d passed byte-exact 17-case evidence, 194 serial tests, Ruff/Node/diff and one admissible fresh Gemini pass. Davida exact candidate 21e11b33e2c873be0ee2b12db0e57b599e24c8a1 passed byte-exact 60-case evidence, 140 serial tests, Ruff/diff and one admissible corrected fresh Gemini pass. The rejected first Davida review remains preserved and non-authoritative.",
+    "current_authority_allocation": "GPT Sol alone owns candidate acceptance and non-protected task-branch integration. Implementation workers are complete. The Diary fresh Gemini review passed; the first Davida narrative was rejected, and a second genuinely fresh corrected Gemini review passed without changing the candidate.",
+    "git_refs_and_worktree": "Root and origin task remain e7d209e6652106c8f69036460223259a33af19c9 with empty index and only fourth-pair root artifacts plus user-owned docs/branding untracked. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Both accepted candidate and review worktrees are clean at their exact heads.",
+    "live_handover_current_baton": "The Current Baton and standing continuous two-lane authority remain restored. This integration is limited to the exact fourth-pair candidates and root coordination evidence.",
+    "protected_evidence_boundaries": "Integration excludes providers/models, memory/RAG, real identity/data, patient/clinical/document/product-derived data, arbitrary API access, command/apply/write, cloud/IAM, deployment, production, release, protected refs/evidence and docs/branding."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
