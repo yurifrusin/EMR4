@@ -210,20 +210,6 @@ def dry_run_default_location_proposal(
         < parsed_context.expires_at
     ):
         return _reject(candidate, context_frame, "evaluated_at_out_of_range")
-    authority_values = (
-        parsed_candidate.confirmation_authorized,
-        parsed_candidate.apply_authorized,
-        parsed_candidate.writes_authorized,
-        parsed_candidate.command_authorized,
-        parsed_candidate.provider_executed,
-        parsed_candidate.model_executed,
-        parsed_candidate.database_used,
-        parsed_candidate.network_used,
-        parsed_candidate.model_to_database,
-    )
-    if any(value is not False for value in authority_values):
-        return _reject(candidate, context_frame, "authority_ceiling_invalid")
-
     practitioner_rows = parsed_context.frames.practitioners.rows
     location_rows = parsed_context.frames.locations.rows
     practitioner_matches = [
@@ -238,8 +224,6 @@ def dry_run_default_location_proposal(
         ):
             return _reject(candidate, context_frame, "wrong_resource_kind")
         return _reject(candidate, context_frame, "practitioner_not_resolved")
-    if len(practitioner_matches) != 1:
-        return _reject(candidate, context_frame, "duplicate_resource_ref")
     location_matches = [
         row for row in location_rows if row.resource_ref == parsed_candidate.location_ref
     ]
@@ -250,9 +234,6 @@ def dry_run_default_location_proposal(
         ):
             return _reject(candidate, context_frame, "wrong_resource_kind")
         return _reject(candidate, context_frame, "location_not_resolved")
-    if len(location_matches) != 1:
-        return _reject(candidate, context_frame, "duplicate_resource_ref")
-
     practitioner = practitioner_matches[0]
     if practitioner.default_location_ref == parsed_candidate.location_ref:
         return _reject(candidate, context_frame, "no_change")

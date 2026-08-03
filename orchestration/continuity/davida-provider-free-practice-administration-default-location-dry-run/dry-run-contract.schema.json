@@ -85,9 +85,32 @@
     "rejection": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["closed_union", "partial_proposal", "repair_performed", "retry_authorized", "same_location_reason"],
+      "required": ["closed_union", "reachable_reason_count", "reachable_reasons", "partial_proposal", "repair_performed", "retry_authorized", "same_location_reason"],
       "properties": {
         "closed_union": {"const": true},
+        "reachable_reason_count": {"const": 14},
+        "reachable_reasons": {
+          "type": "array",
+          "minItems": 14,
+          "maxItems": 14,
+          "prefixItems": [
+            {"const": "operation_not_allowed"},
+            {"const": "candidate_noncanonical"},
+            {"const": "candidate_schema_invalid"},
+            {"const": "input_over_bounded"},
+            {"const": "context_frame_invalid"},
+            {"const": "context_revision_mismatch"},
+            {"const": "context_boundary_invalid"},
+            {"const": "scope_mismatch"},
+            {"const": "evaluated_at_naive"},
+            {"const": "evaluated_at_out_of_range"},
+            {"const": "practitioner_not_resolved"},
+            {"const": "location_not_resolved"},
+            {"const": "wrong_resource_kind"},
+            {"const": "no_change"}
+          ],
+          "items": false
+        },
         "partial_proposal": {"const": false},
         "repair_performed": {"const": false},
         "retry_authorized": {"const": false},

@@ -34,6 +34,11 @@ references reject. The current default location is copied exactly from the
 practitioner context row, including `null`; the requested active location is
 copied into the after state. A same-location request is `no_change`.
 
+The rejection vocabulary mirrors executable producer paths. Duplicate and
+dangling context references are rejected by context-boundary validation, while
+authority reversal is rejected by the literal-false candidate schema or
+canonical-equality gate; no unreachable reason is exported for those cases.
+
 ## Released artifact
 
 The released `proposal_candidate` / `dry_run_only` artifact changes only

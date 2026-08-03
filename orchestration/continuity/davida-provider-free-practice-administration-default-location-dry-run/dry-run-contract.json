@@ -53,6 +53,23 @@
   },
   "rejection": {
     "closed_union": true,
+    "reachable_reason_count": 14,
+    "reachable_reasons": [
+      "operation_not_allowed",
+      "candidate_noncanonical",
+      "candidate_schema_invalid",
+      "input_over_bounded",
+      "context_frame_invalid",
+      "context_revision_mismatch",
+      "context_boundary_invalid",
+      "scope_mismatch",
+      "evaluated_at_naive",
+      "evaluated_at_out_of_range",
+      "practitioner_not_resolved",
+      "location_not_resolved",
+      "wrong_resource_kind",
+      "no_change"
+    ],
     "partial_proposal": false,
     "repair_performed": false,
     "retry_authorized": false,

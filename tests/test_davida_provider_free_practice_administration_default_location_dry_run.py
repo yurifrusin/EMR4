@@ -17,6 +17,7 @@ from app.schemas.practice_administration_default_location_proposal import (
     DefaultLocationProposalCandidate,
     DefaultLocationProposalResultAdapter,
     OPERATION,
+    REJECTION_REASONS,
 )
 from app.services.practice.practice_administration_default_location_dry_run import (
     PROPOSAL_AUTHORITY_CEILING,
@@ -211,6 +212,27 @@ def test_duplicate_dangling_scope_and_revision_tampering_fail_closed() -> None:
 
 def test_unknown_effectful_and_other_operations_fail_before_release() -> None:
     assert ALLOWED_OPERATIONS == {OPERATION}
+    assert REJECTION_REASONS == (
+        "operation_not_allowed",
+        "candidate_noncanonical",
+        "candidate_schema_invalid",
+        "input_over_bounded",
+        "context_frame_invalid",
+        "context_revision_mismatch",
+        "context_boundary_invalid",
+        "scope_mismatch",
+        "evaluated_at_naive",
+        "evaluated_at_out_of_range",
+        "practitioner_not_resolved",
+        "location_not_resolved",
+        "wrong_resource_kind",
+        "no_change",
+    )
+    assert {
+        "authority_ceiling_invalid",
+        "duplicate_resource_ref",
+        "dangling_default_location",
+    }.isdisjoint(REJECTION_REASONS)
     context = _sample_context()
     for operation in (
         "ADVISORY_EXPLAIN_DIRECTORY",

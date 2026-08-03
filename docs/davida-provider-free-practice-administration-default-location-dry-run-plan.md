@@ -38,6 +38,11 @@ Same-location input rejects as `no_change`. Missing, duplicate, wrong-kind,
 dangling, cross-scope, stale, malformed, noncanonical and authority-bearing
 inputs fail closed with no partial proposal, repair or retry.
 
+The public rejection union contains only producer-reachable outcomes. Duplicate
+or dangling context references collapse to `context_boundary_invalid` before
+target resolution; literal-false authority reversal fails candidate schema or
+canonical admission rather than exposing an unreachable later reason.
+
 ## API Spine and authority
 
 This is a route-free command-style dry-run artifact, not a command. GraphQL

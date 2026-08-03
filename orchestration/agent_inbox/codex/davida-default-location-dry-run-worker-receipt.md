@@ -96,4 +96,20 @@ protected evidence/refs and `docs/branding/` remain closed and untouched.
 Next work is root-owned candidate review and acceptance. No unresolved worker
 implementation gate remains.
 
+## Reachable-reason repair
+
+Root review correctly identified three producer-unreachable public reasons.
+`authority_ceiling_invalid` was precluded by literal-false candidate schema
+admission plus canonical equality; `duplicate_resource_ref` was precluded by
+context-boundary uniqueness; and `dangling_default_location` had no producer
+branch because the same defect terminates as `context_boundary_invalid`.
+
+The repair removes those three reasons and unreachable service branches while
+preserving their earlier fail-closed gates. The public union and machine
+contract now enumerate exactly 14 producer-reachable reasons. In-memory
+acceptance remains 60/60 with two releases and 54 expected rejections, now
+reporting `closed_rejection_reason_count=14`. Ruff and diff checks pass; the
+same 140-test focused/parent/seam/API-Spine suite passed serially and its shared
+PostgreSQL slot was explicitly released before repair staging.
+
 candidate_ready

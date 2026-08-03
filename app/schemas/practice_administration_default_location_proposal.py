@@ -46,12 +46,9 @@ REJECTION_REASONS = (
     "scope_mismatch",
     "evaluated_at_naive",
     "evaluated_at_out_of_range",
-    "authority_ceiling_invalid",
     "practitioner_not_resolved",
     "location_not_resolved",
     "wrong_resource_kind",
-    "duplicate_resource_ref",
-    "dangling_default_location",
     "no_change",
 )
 RejectionReason = Literal[
@@ -65,12 +62,9 @@ RejectionReason = Literal[
     "scope_mismatch",
     "evaluated_at_naive",
     "evaluated_at_out_of_range",
-    "authority_ceiling_invalid",
     "practitioner_not_resolved",
     "location_not_resolved",
     "wrong_resource_kind",
-    "duplicate_resource_ref",
-    "dangling_default_location",
     "no_change",
 ]
 
