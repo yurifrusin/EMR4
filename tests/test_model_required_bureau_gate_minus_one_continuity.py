@@ -58,4 +58,3 @@ def test_rendered_compass_names_gate_and_claim_limit() -> None:
     assert "Accepted adversarial architecture gate before Gate zero" in report
     assert "Continuity 207 / Compass 188" in report
     assert "not implemented" in report
-
