@@ -106,3 +106,26 @@ test_execution:
     - import_free_static_checks
     - filesystem_only_checks
     - isolated_browser_checks_without_shared_mutable_runtime
+incident_learning:
+  register: ../continuity/ariadne-agent-error-register/agent-error-register.json
+  schema: ../continuity/ariadne-agent-error-register/agent-error-register.schema.json
+  deterministic_report: ../../scripts/ariadne_agent_error_register.py
+  register_before_corrected_attempt_acceptance: true
+  record_when:
+    - independent_review_rejected_for_agent_behavior
+    - candidate_worktree_postcondition_failed
+    - exact_command_scope_failed
+    - evidence_narrative_conflicted_with_preserved_evidence
+    - worker_transport_failed_without_nontransferable_closeout
+  origin_classes:
+    - agent_behavior
+    - transport
+    - harness
+    - repository
+    - operator
+  controls:
+    immutable_failure_evidence: required
+    correction_linkage: required
+    recurrence_threshold: 2
+    raw_prompts_secrets_and_sensitive_values: forbidden
+    model_provider_or_role_causal_claim_without_separate_evidence: forbidden

@@ -1,0 +1,66 @@
+{
+  "canonical_register_sha256": "6153c7b63653081b3507c7dbbd02df1d7dd4645997f4d1812ff319162f300c02",
+  "counts": {
+    "by_candidate_state": {
+      "canonical_unchanged": 5,
+      "untrusted_partial_worktree": 2
+    },
+    "by_category": {
+      "command_scope_violation": 1,
+      "evidence_misreport": 1,
+      "output_contract_violation": 2,
+      "read_only_violation": 1,
+      "reasoning_claim_error": 1,
+      "transport_timeout": 1
+    },
+    "by_origin": {
+      "agent_behavior": 6,
+      "transport": 1
+    },
+    "by_process_severity": {
+      "material": 2,
+      "moderate": 5
+    },
+    "by_resource_and_role": {
+      "antigravity-gemini-flash-3-6-high-verifier::verifier": 6,
+      "deepseek-flash-workers::implementer": 1
+    },
+    "by_role": {
+      "implementer": 1,
+      "verifier": 6
+    }
+  },
+  "coverage": "bounded_known_preserved_incidents",
+  "incident_count": 7,
+  "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
+  "open_incident_ids": [],
+  "recurring_patterns": [
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0004",
+        "AER-0006"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "The verifier wrapper admits exactly one terminal decision and rejects zero or duplicate terminal envelopes before acceptance.",
+        "The wrapper regex counts terminal decisions and rejects any count other than one; tests cover missing and duplicate decisions."
+      ],
+      "recurrence_signature": "verifier.multiple_terminal_decisions",
+      "resource_ids": [
+        "antigravity-gemini-flash-3-6-high-verifier"
+      ],
+      "roles": [
+        "verifier"
+      ]
+    }
+  ],
+  "register_revision": 1,
+  "schema_version": "ariadne.agent-error-pattern-report.v1",
+  "source_cutoff_on": "2026-08-03"
+}

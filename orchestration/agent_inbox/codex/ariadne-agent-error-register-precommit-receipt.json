@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:3e8cdd9b3a411cf1b97e04912835efc6275fbf61b75d56df4259b659646989f4",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The plan, schema, seven-row register, deterministic report, verifier-policy linkage, independent pass, closeout and Sol acceptance are complete. The final serial gate passes 56 tests; Ruff, JSON/YAML, acceptance-index check, canonical report and diff hygiene pass.",
+    "current_authority_allocation": "Yuri authorised the durable register and ordinary task-branch closeout. Sol owns acceptance/integration; the two native subagents supplied bounded inventory and independent review only. No protected-ref, provider, deployment or release authority is open.",
+    "git_refs_and_worktree": "HEAD and origin task branch remain 8e79cfc3caa73a9b9527f395edbdfb61e202def9; local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty; only explicit register-tranche paths and user-owned docs/branding residue are present.",
+    "live_handover_current_baton": "Updated AGENTS.md was reread completely at 449 lines / 67954 bytes / SHA-256 af5b7976ab03cd83f1f48678948a46d1d5a780fa658016610ebd82ec164b38c7; it records ariadne_agent_error_correction_register_pass and keeps the authorised fifth product pair next.",
+    "protected_evidence_boundaries": "No protected holdout/history, patient/clinical/document/product-derived value, raw prompt, secret, provider call, product runtime, API, database/write, cloud/IAM, deployment, production or release is touched. docs/branding is case-insensitively excluded from evidence and remains untracked and untouched."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

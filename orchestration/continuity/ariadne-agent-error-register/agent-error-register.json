@@ -1,0 +1,284 @@
+{
+  "schema_version": "ariadne.agent-error-register.v1",
+  "register_revision": 1,
+  "scope": {
+    "coverage": "bounded_known_preserved_incidents",
+    "source_cutoff_on": "2026-08-03",
+    "inclusion_rule": "Include only a specific invariant breach or transport failure supported by a preserved repository receipt or analysis and its recorded correction or containment.",
+    "exclusions": [
+      "Unpreserved anecdotes or reconstructed intent",
+      "Ordinary candidate defects found during expected code review",
+      "Provider or model quality comparisons",
+      "Raw prompts, secrets, credentials, patient, clinical, document or product-derived values"
+    ],
+    "causal_use_boundary": "Counts and recurrence signatures are workflow-improvement signals only; they do not establish that a model, provider, transport or role caused an incident unless separate evidence confirms that process cause."
+  },
+  "incidents": [
+    {
+      "incident_id": "AER-0001",
+      "attempt_id": "davida-default-location-review-001",
+      "observed_on": "2026-08-03",
+      "tranche": "davida-default-location-dry-run",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Run only the five commands explicitly listed in the review packet and perform no write-capable evidence generation.",
+      "observed_error": "The review ran an unlisted acceptance command with an output path, even though the exact candidate remained byte-clean afterward.",
+      "detection_method": "The orchestrator compared the command list reported in the first review receipt with the packet's exact allowlist.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/davida-default-location-dry-run-gemini-review-packet.md",
+        "orchestration/agent_inbox/codex/davida-default-location-dry-run-gemini-review-receipt.json",
+        "docs/davida-provider-free-practice-administration-default-location-dry-run-closeout.md"
+      ],
+      "related_incident_ids": [
+        "AER-0002"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "verifier.unlisted_write_capable_command",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "A genuinely fresh review was constrained to the exact five commands and left the candidate clean and unchanged.",
+        "prevention_control": "Review packets state run-only command allowlists; acceptance compares reported commands to the allowlist before admitting the decision.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/davida-default-location-dry-run-gemini-review-packet-2.md",
+          "orchestration/agent_inbox/codex/davida-default-location-dry-run-gemini-review-receipt-2.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0002",
+      "attempt_id": "davida-default-location-review-001",
+      "observed_on": "2026-08-03",
+      "tranche": "davida-default-location-dry-run",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "Report deterministic evidence accounting exactly as recorded by the committed acceptance evidence.",
+      "observed_error": "The first review claimed 25 of 25 acceptance cases although the committed evidence records 60 of 60: 2 released, 54 rejected and 4 static or contract checks.",
+      "detection_method": "The orchestrator compared the receipt narrative with the committed evidence and acceptance harness accounting.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/davida-default-location-dry-run-gemini-review-receipt.json",
+        "orchestration/continuity/davida-provider-free-practice-administration-default-location-dry-run/provider-free-acceptance-evidence.json",
+        "docs/davida-provider-free-practice-administration-default-location-dry-run-closeout.md"
+      ],
+      "related_incident_ids": [
+        "AER-0001"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "verifier.case_accounting_misreport",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The corrected fresh review reported the exact 60-case accounting and distinguished verdict invocations from static contract checks.",
+        "prevention_control": "Review packets require exact evidence totals and subcounts; acceptance cross-checks them against the committed evidence object.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/davida-default-location-dry-run-gemini-review-packet-2.md",
+          "orchestration/agent_inbox/codex/davida-default-location-dry-run-gemini-review-receipt-2.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0003",
+      "attempt_id": "native-diary-stale-review-001",
+      "observed_on": "2026-08-03",
+      "tranche": "native-diary-stale-response-reconciliation",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "read_only_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A verifier bound to a read-only worktree must create no tracked or untracked artifact inside that worktree.",
+      "observed_error": "A literal percent-TEMP-percent/test_evidence.json artifact appeared inside the bound review worktree; the wrapper classified the read-only postcondition as failed while source and HEAD remained unchanged.",
+      "detection_method": "The wrapper's postflight worktree inspection found the untracked artifact before a review receipt could be accepted.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/native-diary-stale-response-reconciliation-write-boundary-failure-receipt.json",
+        "orchestration/agent_inbox/codex/native-diary-stale-response-reconciliation-gemini-review-packet-2.md",
+        "docs/raisa-provider-free-native-diary-application-session-practitioner-reconciliation-closeout.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "verifier.read_only_temp_artifact",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "The exact generated file was removed, cleanliness was re-established, and the subsequent same-lane attempt was independently gated.",
+        "prevention_control": "Packets prohibit worktree temp output and Windows reviews use explicit external base-temp paths plus preflight and postflight status checks.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/antigravity/native-diary-stale-response-reconciliation-write-boundary-failure-receipt.json",
+          "orchestration/agent_inbox/codex/native-diary-stale-response-reconciliation-independent-sol-review.md"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0004",
+      "attempt_id": "native-diary-stale-review-002",
+      "observed_on": "2026-08-03",
+      "tranche": "native-diary-stale-response-reconciliation",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "material",
+      "expected_invariant": "Return exactly one terminal decision line with either pass or revision_required.",
+      "observed_error": "The corrected review emitted two terminal decision lines, so no reviewer decision was admitted.",
+      "detection_method": "Deterministic terminal-envelope counting observed two decisions and failed closed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/native-diary-stale-response-reconciliation-duplicate-decision-failure-receipt.json",
+        "docs/raisa-provider-free-native-diary-application-session-practitioner-reconciliation-closeout.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "verifier.multiple_terminal_decisions",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "No further same-lane retry followed; a genuinely different fresh GPT Sol reviewer returned one admissible decision on the unchanged candidate.",
+        "prevention_control": "The verifier wrapper admits exactly one terminal decision and rejects zero or duplicate terminal envelopes before acceptance.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/native-diary-stale-response-reconciliation-independent-sol-review.md",
+          "docs/raisa-provider-free-native-diary-application-session-practitioner-reconciliation-closeout.md"
+        ]
+      },
+      "status": "contained"
+    },
+    {
+      "incident_id": "AER-0005",
+      "attempt_id": "davida-advisory-review-001",
+      "observed_on": "2026-08-03",
+      "tranche": "davida-advisory-proofreader-envelope",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "reasoning_claim_error",
+      "process_severity": "moderate",
+      "expected_invariant": "Describe observable rejection precedence accurately and distinguish reachable behavior from defensive unreachable branches.",
+      "observed_error": "The first review claimed dangling default-location context returned dangling_default_location, although boundary validation returns context_boundary_invalid first; the later reason is only a defensive unreachable branch under the current admitted context.",
+      "detection_method": "The orchestrator traced the validation order and compared the narrative with the implementation and focused cases.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/davida-advisory-proofreader-envelope-review-receipt.json",
+        "docs/davida-advisory-proofreader-envelope-first-review-analysis.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "verifier.rejection_precedence_misstatement",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "A fresh corrected review stated the exact boundary-first precedence and classified both downstream reasons as defensive guards.",
+        "prevention_control": "Correction packets name expected reason precedence explicitly and require observed behavior to be separated from inference.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/davida-advisory-proofreader-envelope-gemini-review-packet-2.md",
+          "orchestration/agent_inbox/antigravity/davida-advisory-proofreader-envelope-review-2-receipt.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0006",
+      "attempt_id": "gemini-36-allocation-review-001",
+      "observed_on": "2026-08-03",
+      "tranche": "ariadne-gemini-36-high-verifier-allocation",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Return exactly one terminal decision line and internally consistent test-count evidence.",
+      "observed_error": "The raw review output contained two pass decisions and conflicting trailing test-count prose, despite leaving the candidate unchanged.",
+      "detection_method": "The orchestrator counted exact terminal lines and compared the trailing prose with the concrete focused test output.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/ariadne-gemini-36-high-verifier-allocation-review-receipt.json",
+        "docs/ariadne-antigravity-gemini-36-high-verifier-first-review-analysis.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "verifier.multiple_terminal_decisions",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "The launcher added fail-closed exact-single-decision admission and the fresh repair review returned one exact pass.",
+        "prevention_control": "The wrapper regex counts terminal decisions and rejects any count other than one; tests cover missing and duplicate decisions.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/antigravity/ariadne-gemini-36-high-verifier-allocation-repair-review-receipt.json",
+          "docs/ariadne-antigravity-gemini-36-high-verifier-allocation-closeout.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0007",
+      "attempt_id": "bernie-davida-third-pair-dispatch-001",
+      "observed_on": "2026-08-03",
+      "tranche": "bernie-davida-third-pair",
+      "origin": "transport",
+      "role": "implementer",
+      "resource_id": "deepseek-flash-workers",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "deepseek_v4_flash_high_via_claude_code_bare",
+      "stage": "implementation",
+      "category": "transport_timeout",
+      "process_severity": "material",
+      "expected_invariant": "Each bounded worker dispatch must return its non-transferable closeout or fail with explicit bounded containment.",
+      "observed_error": "The two-lane dispatch timed out after 604045 milliseconds with no worker receipt or commit; partial output was preserved as untrusted.",
+      "detection_method": "The orchestrator observed the transport timeout, verified both worker receipts and commits were absent, bound the exact task processes and completed owned cleanup.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/deepseek/bernie-davida-third-pair-timeout-receipt.json",
+        "docs/ariadne-orchestrator-recovery-lease.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "transport.timeout_without_closeout",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "recovery_lease_applied",
+        "action": "Sol adopted only the partial source as untrusted, amended and verified it under separate provenance, and produced independent accepted candidates.",
+        "prevention_control": "Timeouts preserve non-transferable worker failure provenance; source recovery requires an explicit orchestrator recovery lease and separate verification.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/native-diary-stale-response-reconciliation-recovery-receipt.json",
+          "orchestration/agent_inbox/codex/davida-advisory-proofreader-envelope-recovery-receipt.json"
+        ]
+      },
+      "status": "corrected"
+    }
+  ]
+}

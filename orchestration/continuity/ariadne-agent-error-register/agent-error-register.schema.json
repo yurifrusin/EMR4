@@ -1,0 +1,295 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.dev/schemas/ariadne-agent-error-register.schema.json",
+  "title": "Ariadne agent error and correction register",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "register_revision",
+    "scope",
+    "incidents"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "ariadne.agent-error-register.v1"
+    },
+    "register_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "scope": {
+      "$ref": "#/$defs/scope"
+    },
+    "incidents": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/incident"
+      }
+    }
+  },
+  "$defs": {
+    "repositoryPath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 320,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?![dD][oO][cC][sS]/[bB][rR][aA][nN][dD][iI][nN][gG]/)(?!.*(?:^|/)\\.\\.(?:/|$)).+"
+    },
+    "nonEmptyText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "coverage",
+        "source_cutoff_on",
+        "inclusion_rule",
+        "exclusions",
+        "causal_use_boundary"
+      ],
+      "properties": {
+        "coverage": {
+          "const": "bounded_known_preserved_incidents"
+        },
+        "source_cutoff_on": {
+          "type": "string",
+          "format": "date"
+        },
+        "inclusion_rule": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "exclusions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/nonEmptyText"
+          }
+        },
+        "causal_use_boundary": {
+          "$ref": "#/$defs/nonEmptyText"
+        }
+      }
+    },
+    "correction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "action",
+        "prevention_control",
+        "evidence_paths"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "corrected_fresh_attempt",
+            "contained_then_escalated",
+            "recovery_lease_applied",
+            "control_added"
+          ]
+        },
+        "action": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "prevention_control": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "evidence_paths": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/repositoryPath"
+          }
+        }
+      }
+    },
+    "incident": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "incident_id",
+        "attempt_id",
+        "observed_on",
+        "tranche",
+        "origin",
+        "role",
+        "resource_id",
+        "model",
+        "reasoning_level",
+        "transport",
+        "stage",
+        "category",
+        "process_severity",
+        "expected_invariant",
+        "observed_error",
+        "detection_method",
+        "evidence_paths",
+        "related_incident_ids",
+        "candidate_state",
+        "workflow_disposition",
+        "recurrence_signature",
+        "causal_claim_level",
+        "correction",
+        "status"
+      ],
+      "properties": {
+        "incident_id": {
+          "type": "string",
+          "pattern": "^AER-[0-9]{4}$"
+        },
+        "attempt_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9.-]*$",
+          "maxLength": 160
+        },
+        "observed_on": {
+          "type": "string",
+          "format": "date"
+        },
+        "tranche": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "maxLength": 120
+        },
+        "origin": {
+          "enum": [
+            "agent_behavior",
+            "transport",
+            "harness",
+            "repository",
+            "operator"
+          ]
+        },
+        "role": {
+          "enum": [
+            "orchestrator",
+            "implementer",
+            "verifier",
+            "integration_reviewer"
+          ]
+        },
+        "resource_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "maxLength": 120
+        },
+        "model": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "reasoning_level": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "transport": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9_-]*$",
+          "maxLength": 120
+        },
+        "stage": {
+          "enum": [
+            "dispatch",
+            "implementation",
+            "deterministic_verification",
+            "independent_review",
+            "acceptance",
+            "integration",
+            "closeout"
+          ]
+        },
+        "category": {
+          "enum": [
+            "command_scope_violation",
+            "evidence_misreport",
+            "read_only_violation",
+            "output_contract_violation",
+            "reasoning_claim_error",
+            "transport_timeout",
+            "harness_failure",
+            "repository_defect",
+            "operator_error"
+          ]
+        },
+        "process_severity": {
+          "enum": [
+            "low",
+            "moderate",
+            "material"
+          ]
+        },
+        "expected_invariant": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "observed_error": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "detection_method": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "evidence_paths": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/repositoryPath"
+          }
+        },
+        "related_incident_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^AER-[0-9]{4}$"
+          }
+        },
+        "candidate_state": {
+          "enum": [
+            "canonical_unchanged",
+            "untrusted_partial_worktree",
+            "accepted_candidate_changed"
+          ]
+        },
+        "workflow_disposition": {
+          "enum": [
+            "review_rejected",
+            "revision_required",
+            "attempt_rejected_and_escalated",
+            "recovery_lease_invoked"
+          ]
+        },
+        "recurrence_signature": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9_.-]*$",
+          "maxLength": 120
+        },
+        "causal_claim_level": {
+          "const": "observation_only"
+        },
+        "correction": {
+          "$ref": "#/$defs/correction"
+        },
+        "status": {
+          "enum": [
+            "corrected",
+            "contained",
+            "open"
+          ]
+        }
+      }
+    }
+  }
+}

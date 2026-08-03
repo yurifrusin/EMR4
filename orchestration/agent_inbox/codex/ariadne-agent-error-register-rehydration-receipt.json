@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "sprint_planning",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:71b4cdb0e461a900b76517a1744dd5ef45a59b2b44a478d1fb245842dc7786b9",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The fourth-pair closeouts and Sol acceptances, Ariadne verifier workflow plan and closeout, recovery lease, and verifier execution policy were read completely; the active bounded tranche is a repository-local schema-validated agent-error and correction register seeded only from preserved evidence.",
+    "current_authority_allocation": "Yuri explicitly authorised a durable agent-error register and previously authorised parallel agents; Sol retains architecture, acceptance, recovery and integration, while external workers and reviewers receive no acceptance, integration or protected-ref authority.",
+    "git_refs_and_worktree": "HEAD and origin/codex/ariadne-bernie-davida-parallel-seam are aligned at 8e79cfc3caa73a9b9527f395edbdfb61e202def9; local/origin master and handoff/current are aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602; the index is empty and docs/branding is the only worktree residue.",
+    "live_handover_current_baton": "AGENTS.md was read completely at 440 lines with SHA-256 4e81473fdb280c02495025841925cae3b182579365bf17c62158af55343d1595; the fourth Diary and Davida pair passes and the route-intercepted Diary rehearsal plus architecture-only Davida proposal-to-confirm boundary remain queued.",
+    "protected_evidence_boundaries": "The register may reference preserved receipts but must not alter them, infer unsupported model-quality causation, store secrets or patient/clinical/product-derived data, touch docs/branding, call a provider, deploy, release, move protected refs or open product write authority."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

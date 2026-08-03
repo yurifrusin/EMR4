@@ -1,0 +1,91 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "verifier_acceptance",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely at 440 lines before this bounded tranche; the fourth product pair remains accepted and the two fifth-pair product candidates remain queued behind this governance insertion.",
+    "current_authority_allocation": "Yuri explicitly authorised the agent-error register. Sol retains acceptance and integration; the inventory and independent native reviewer received only bounded read-only evidence/review authority and no acceptance, integration or protected-ref authority.",
+    "active_plan_and_acceptance": "The authorised plan, closed schema, seven-row evidence-backed register, verifier incident-learning policy, deterministic validator/report and focused tests are complete. One independent review found six closure gaps; all six were repaired and the fresh repair review returned pass with 20 focused tests.",
+    "protected_evidence_boundaries": "The tranche references preserved receipts without altering them, stores no raw prompt, secret or sensitive value, excludes docs/branding case-insensitively, calls no provider, changes no product/API/identity/runtime, and grants no deployment, release, write or protected-ref authority.",
+    "git_refs_and_worktree": "HEAD and origin/codex/ariadne-bernie-davida-parallel-seam remain 8e79cfc3caa73a9b9527f395edbdfb61e202def9; local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicit register-tranche paths plus user-owned untracked docs/branding are present; the index is empty."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_agent_error_register_preacceptance",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: AGENTS.md was read completely at 440 lines before this bounded tranche; the fourth product pair remains accepted and the two fifth-pair product candidates remain queued behind this governance insertion.",
+        "current_authority_allocation: Yuri explicitly authorised the agent-error register. Sol retains acceptance and integration; the inventory and independent native reviewer received only bounded read-only evidence/review authority and no acceptance, integration or protected-ref authority.",
+        "active_plan_and_acceptance: The authorised plan, closed schema, seven-row evidence-backed register, verifier incident-learning policy, deterministic validator/report and focused tests are complete. One independent review found six closure gaps; all six were repaired and the fresh repair review returned pass with 20 focused tests.",
+        "protected_evidence_boundaries: The tranche references preserved receipts without altering them, stores no raw prompt, secret or sensitive value, excludes docs/branding case-insensitively, calls no provider, changes no product/API/identity/runtime, and grants no deployment, release, write or protected-ref authority.",
+        "git_refs_and_worktree: HEAD and origin/codex/ariadne-bernie-davida-parallel-seam remain 8e79cfc3caa73a9b9527f395edbdfb61e202def9; local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicit register-tranche paths plus user-owned untracked docs/branding are present; the index is empty."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "One bounded inventory returned evidence classifications without edits; one independent read-only reviewer found six issues and returned a clean repair-review pass."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek implementation dispatch occurred in this tightly coupled governance tranche."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The real-TTY fallback was not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The leverage-gated Claude lane was not selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external Gemini provider review was triggered; preserved Gemini receipts were read-only source evidence."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

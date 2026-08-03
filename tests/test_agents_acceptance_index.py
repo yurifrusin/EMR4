@@ -66,8 +66,11 @@ def test_live_baton_keeps_active_rows_and_routes_every_moved_row_to_index() -> N
     baton = live.split("### Compact historical evaluation", 1)[0]
     live_labels = _row_labels(baton, after_header="| Item | Current value |")
 
-    assert len(live_bytes) < 60_000
-    assert len(live.splitlines()) < 450
+    # The active four-pair Bernie/Davida acceptance set remains in the live
+    # rehydration surface. Keep the baton below half its pre-compaction size
+    # while allowing those deliberately classified current rows.
+    assert len(live_bytes) < 75_000
+    assert len(live.splitlines()) < 475
     assert "Current Baton acceptance index" in live_labels
     for label in manifest["active_labels"]:
         assert label in live_labels

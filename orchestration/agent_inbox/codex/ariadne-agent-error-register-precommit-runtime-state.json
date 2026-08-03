@@ -1,0 +1,91 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "source_evidence": {
+    "live_handover_current_baton": "Updated AGENTS.md was reread completely at 449 lines / 67954 bytes / SHA-256 af5b7976ab03cd83f1f48678948a46d1d5a780fa658016610ebd82ec164b38c7; it records ariadne_agent_error_correction_register_pass and keeps the authorised fifth product pair next.",
+    "current_authority_allocation": "Yuri authorised the durable register and ordinary task-branch closeout. Sol owns acceptance/integration; the two native subagents supplied bounded inventory and independent review only. No protected-ref, provider, deployment or release authority is open.",
+    "active_plan_and_acceptance": "The plan, schema, seven-row register, deterministic report, verifier-policy linkage, independent pass, closeout and Sol acceptance are complete. The final serial gate passes 56 tests; Ruff, JSON/YAML, acceptance-index check, canonical report and diff hygiene pass.",
+    "protected_evidence_boundaries": "No protected holdout/history, patient/clinical/document/product-derived value, raw prompt, secret, provider call, product runtime, API, database/write, cloud/IAM, deployment, production or release is touched. docs/branding is case-insensitively excluded from evidence and remains untracked and untouched.",
+    "git_refs_and_worktree": "HEAD and origin task branch remain 8e79cfc3caa73a9b9527f395edbdfb61e202def9; local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty; only explicit register-tranche paths and user-owned docs/branding residue are present."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "sol_five_source_agent_error_register_precommit",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "live_handover_current_baton: Updated AGENTS.md was reread completely at 449 lines / 67954 bytes / SHA-256 af5b7976ab03cd83f1f48678948a46d1d5a780fa658016610ebd82ec164b38c7; it records ariadne_agent_error_correction_register_pass and keeps the authorised fifth product pair next.",
+        "current_authority_allocation: Yuri authorised the durable register and ordinary task-branch closeout. Sol owns acceptance/integration; the two native subagents supplied bounded inventory and independent review only. No protected-ref, provider, deployment or release authority is open.",
+        "active_plan_and_acceptance: The plan, schema, seven-row register, deterministic report, verifier-policy linkage, independent pass, closeout and Sol acceptance are complete. The final serial gate passes 56 tests; Ruff, JSON/YAML, acceptance-index check, canonical report and diff hygiene pass.",
+        "protected_evidence_boundaries: No protected holdout/history, patient/clinical/document/product-derived value, raw prompt, secret, provider call, product runtime, API, database/write, cloud/IAM, deployment, production or release is touched. docs/branding is case-insensitively excluded from evidence and remains untracked and untouched.",
+        "git_refs_and_worktree: HEAD and origin task branch remain 8e79cfc3caa73a9b9527f395edbdfb61e202def9; local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty; only explicit register-tranche paths and user-owned docs/branding residue are present."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The evidence inventory completed without edits; the independent reviewer preserved its own pass receipt after verifying all six repairs."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek dispatch occurred in this tranche."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The real-TTY fallback was not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The leverage-gated Claude lane was not selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external Gemini provider call occurred; preserved receipts were evidence sources only."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
