@@ -3,7 +3,8 @@
 Date: 2026-08-04
 
 Status: Gate -1, Gate zero and provider-free A1/A2, B1/B2, C1/C2, D1/D2 and
-C3/D3 passed; next material lane requires an exact user-owned boundary decision
+C3/D3 passed; exact A3/B3 boundary active but occupied execution is blocked at
+the existing Bernie impersonated-ADC refresh gate with zero provider calls
 
 Architecture parent:
 `docs/emr4-model-required-deterministic-authority-bureau-architecture.md`
@@ -148,6 +149,28 @@ an unresolved provider, product-read/write, actuator or activation boundary.
 The recommended next fork is paired A3/B3 authored-synthetic occupied advisory
 rehearsal, but its exact provider/model/region/identity/data/cost/call boundary
 is a genuine Yuri-owned decision under the standing policy.
+
+## Active A3/B3 occupied-preflight checkpoint
+
+Yuri selected and froze the recommended A3/B3 boundary as Google Vertex AI
+`gemini-2.5-flash` through project `bernie-emr4-dev`, the exact Bernie service
+account, existing keyless impersonated ADC and the `australia-southeast1`
+regional endpoint, with authored-synthetic data only, no fallback, at most two
+calls per lane/four cumulatively and USD 1 cumulatively.
+
+The provider-free implementation and exact source controls passed their
+deterministic gates. The first occupied launch then stopped at the read-only
+`impersonated_adc_refresh_failed` preflight before a prompt, provider call,
+model inference, attempt ledger or cognitive cell. AER-0016 preserves the one
+open Rayleen USD 0.25 reservation and corrects the harness so a later
+continuation can reuse only that same hash-bound reservation without resetting
+or double-counting the budget.
+
+The remaining user-only action is restoration of the already approved Bernie
+keyless impersonated ADC outside the occupied runtime. Codex must not revoke,
+replace, interactively recreate or reconfigure it. After restoration, the
+unchanged reviewed recovery source runs a fresh exact read-only preflight and,
+only if every control passes, continues the serial A3 then B3 occupied turns.
 
 ## Lane A: Rayleen waiting-room intelligence
 

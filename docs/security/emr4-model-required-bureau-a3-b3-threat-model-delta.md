@@ -250,9 +250,18 @@ cannot be reused. Admission atomically closes the lane before release. Treat
 unknown transport outcome as consumed unless exact evidence proves no send;
 never issue an unchanged duplicate call.
 
+An exact read-only preflight failure is the sole pre-send continuation case:
+the unchanged parent reservation may remain open only with a closed sanitized
+failure receipt bound to its file hash, zero provider calls, zero attempt
+artifacts and zero runtime residue. After the existing ADC is restored, a
+freshly reviewed continuation may reuse that same reservation once; it cannot
+create a replacement reservation or silently reset the parent budget.
+
 **Required proof.** Concurrent reserve, replay, timeout/unknown-outcome,
 duplicate response and post-admission call attempts result in at most one send
-and one release, with every ledger terminal.
+and one release. Preflight-blocked resume additionally proves the prior hash,
+zero-call evidence and exact Rayleen reservation are unchanged and that a
+successful two-primary continuation ends with two reservations, not three.
 
 ### T9: Retry or cost ceiling bypass
 

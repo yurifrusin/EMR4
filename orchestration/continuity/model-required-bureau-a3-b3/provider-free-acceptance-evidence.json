@@ -11,6 +11,7 @@
     "draft_2020_12_schemas_valid": true,
     "model_authority_forgery_rejected": true,
     "no_product_or_database_imports": true,
+    "occupied_preflight_blocked_evidence_exact": true,
     "provider_free_audit_chains_valid_and_zero_call": true,
     "provider_free_broker_cell_dry_run_passed": true,
     "rayleen_a3_provider_request_closed": true,

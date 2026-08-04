@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 7,
+  "register_revision": 8,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-04",
@@ -579,6 +579,45 @@
           "orchestration/agent_inbox/codex/model-required-bureau-gate-minus-one-gemini-review-packet-2.md",
           "orchestration/agent_inbox/codex/model-required-bureau-gate-minus-one-verifier-worktree-preflight-2.json",
           "orchestration/agent_inbox/antigravity/model-required-bureau-gate-minus-one-review-2-receipt.json"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0016",
+      "attempt_id": "model-required-bureau-a3-b3-live-preflight-001",
+      "observed_on": "2026-08-04",
+      "tranche": "model-required-bureau-a3-b3",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "model-required-bureau-a3-b3-live-harness",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_live_harness_preflight",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "A read-only provider preflight that blocks before prompt transmission must preserve zero-call evidence and must not orphan or double-count the parent cost reservation needed for a later exact continuation.",
+      "observed_error": "The first occupied A3/B3 launch reserved USD 0.25 for the Rayleen primary and then stopped at impersonated_adc_refresh_failed before any prompt or provider call, leaving an exact open cost ledger that the original harness could neither safely resume nor replace without losing evidence or double-reserving budget.",
+      "detection_method": "Sol inspected the sanitized preflight reason, exact open cost ledger, absent attempt/preflight artifacts, zero provider-call count and the run_tranche output-exists guard after the fail-closed launch.",
+      "evidence_paths": [
+        "orchestration/continuity/model-required-bureau-a3-b3/occupied-preflight-blocked-evidence.json",
+        "orchestration/continuity/model-required-bureau-a3-b3/occupied-rehearsal-cost-ledger.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.preflight_blocked_cost_reservation_orphaned",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "The blocked event and original ledger hash are preserved. The harness now admits only a same-tranche resume whose closed evidence, exact canonical ledger path/hash, one Rayleen reservation, zero calls and absent attempt artifacts all match, then reuses that reservation instead of allocating another.",
+        "prevention_control": "Every provider preflight failure after parent reservation must either close before reservation or preserve an exact hash-bound resumable reservation; a corrected continuation must prove no attempt artifact exists and regression-test that two successful primaries finish with two total reservations rather than three.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-8.md",
+          "orchestration/continuity/model-required-bureau-a3-b3/occupied-preflight-blocked.schema.json",
+          "scripts/model_required_bureau_a3_b3_live.py",
+          "tests/test_model_required_bureau_a3_b3.py"
         ]
       },
       "status": "corrected"

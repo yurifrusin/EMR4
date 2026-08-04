@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:bc5df9a9c4f15adb517e176880dde00321d3ae20208ab44fadeb5fab24ebcc7f",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The A3/B3 plan and threat delta now preserve an exact hash-bound preflight-blocked parent reservation and permit only same-tranche/same-reservation resume. AER-0016 records the original orphaned-reservation harness failure and its control. Provider-free acceptance, the focused and inherited serial suite, register validation, Ruff and diff checks pass with zero candidate-runtime provider calls.",
+    "current_authority_allocation": "Sol owns the A3/B3 harness recovery, evidence, acceptance and task-branch commit. A fresh Gemini 3.6 Flash/high source-only veto must review the recovery commit. Candidate runtime remains exactly Vertex gemini-2.5-flash in the Bernie Sydney envelope, but no further candidate call or credential action is permitted until Yuri restores the existing ADC and a fresh read-only preflight passes.",
+    "git_refs_and_worktree": "Task HEAD remains c95a0ee1a235843fe8498a8979e43151f7f4277e while the bounded recovery patch is uncommitted. Local/origin master and local/origin handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. The worktree contains only intentional A3/B3 recovery, review-control, blocked-evidence and handover files plus the five preserved untracked boundaries.",
+    "live_handover_current_baton": "AGENTS.md was reread after restoration and now records the exact A3/B3 preflight-blocked checkpoint. Standing continuation carried the bounded harness correction to deterministic completion; the one remaining human-only action is restoration of the existing approved Bernie impersonated ADC.",
+    "protected_evidence_boundaries": "The blocked event contains only sanitized reason/count/hash metadata. Patient, clinical, historical, participant, product-derived, protected and production data; credentials; product/database reads; commands/writes; actuators; cloud/IAM mutation; deployment; release; Pages; protected refs and protected evidence remain closed. docs/branding/ and the four Consultant/Gate-minus-one pre-push files remain preserved and excluded; staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

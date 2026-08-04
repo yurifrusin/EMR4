@@ -1,0 +1,42 @@
+{
+  "schema_version": "emr4.model_required_bureau_a3_b3.occupied_preflight_blocked.v1",
+  "recorded_at": "2026-08-04T10:37:43.1212861Z",
+  "result": "model_required_bureau_a3_b3_adc_preflight_blocked",
+  "gate": "existing_bernie_impersonated_adc_noninteractive_refresh",
+  "reason_code": "impersonated_adc_refresh_failed",
+  "source_head": "c95a0ee1a235843fe8498a8979e43151f7f4277e",
+  "source_review_head": "c95a0ee1a235843fe8498a8979e43151f7f4277e",
+  "cost_ledger_path": "orchestration/continuity/model-required-bureau-a3-b3/occupied-rehearsal-cost-ledger.json",
+  "cost_ledger_sha256": "sha256:303088b2a840bc162ba4f3270bf4a8ec5e09f5ec7469cf3114ae816a795d24f1",
+  "cost_reservation": {
+    "status": "open",
+    "provider_calls_reserved": 1,
+    "provider_calls_consumed": 0,
+    "reserved_cost_usd": 0.25,
+    "lane_calls": {
+      "rayleen_a3": 1,
+      "davida_b3": 0
+    }
+  },
+  "provider_call_count": 0,
+  "model_inference_called": false,
+  "provider_prompt_transmitted": false,
+  "credential_reconfiguration_attempted": false,
+  "interactive_login_attempted": false,
+  "fallback_attempted": false,
+  "external_state_changed": false,
+  "occupied_attempt_ledgers_opened": 0,
+  "occupied_cells_started": 0,
+  "runtime_residue_absent": true,
+  "source_review_transport_nonzero": true,
+  "authority_disposition": "yuri_intervention_required",
+  "required_intervention": "restore_the_existing_bernie_keyless_impersonated_adc_outside_the_occupied_runtime_then_request_a_fresh_read_only_preflight",
+  "resume_authority": "same_tranche_same_reservation_only",
+  "resume_condition": "exact_blocked_evidence_and_cost_ledger_hash_match_after_adc_restoration_and_fresh_source_veto",
+  "sensitive_exclusions": {
+    "credential_or_token_recorded": false,
+    "raw_authentication_response_recorded": false,
+    "human_account_identifier_recorded": false,
+    "api_key_information_recorded": false
+  }
+}

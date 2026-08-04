@@ -1,0 +1,36 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread after restoration and now records the exact A3/B3 preflight-blocked checkpoint. Standing continuation carried the bounded harness correction to deterministic completion; the one remaining human-only action is restoration of the existing approved Bernie impersonated ADC.",
+    "current_authority_allocation": "Sol owns the A3/B3 harness recovery, evidence, acceptance and task-branch commit. A fresh Gemini 3.6 Flash/high source-only veto must review the recovery commit. Candidate runtime remains exactly Vertex gemini-2.5-flash in the Bernie Sydney envelope, but no further candidate call or credential action is permitted until Yuri restores the existing ADC and a fresh read-only preflight passes.",
+    "active_plan_and_acceptance": "The A3/B3 plan and threat delta now preserve an exact hash-bound preflight-blocked parent reservation and permit only same-tranche/same-reservation resume. AER-0016 records the original orphaned-reservation harness failure and its control. Provider-free acceptance, the focused and inherited serial suite, register validation, Ruff and diff checks pass with zero candidate-runtime provider calls.",
+    "protected_evidence_boundaries": "The blocked event contains only sanitized reason/count/hash metadata. Patient, clinical, historical, participant, product-derived, protected and production data; credentials; product/database reads; commands/writes; actuators; cloud/IAM mutation; deployment; release; Pages; protected refs and protected evidence remain closed. docs/branding/ and the four Consultant/Gate-minus-one pre-push files remain preserved and excluded; staging is explicit-path only.",
+    "git_refs_and_worktree": "Task HEAD remains c95a0ee1a235843fe8498a8979e43151f7f4277e while the bounded recovery patch is uncommitted. Local/origin master and local/origin handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. The worktree contains only intentional A3/B3 recovery, review-control, blocked-evidence and handover files plus the five preserved untracked boundaries."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_required_bureau_a3_b3_recovery_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol preserved the zero-call failure, added the exact resume control and passed the deterministic gates."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["A fresh exact-HEAD Gemini 3.6 Flash/high source-only veto is required after this commit."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No implementation worker is selected for this tightly coupled recovery."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native worker owns acceptance or commit authority."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "antigravity-gemini-flash-3-6-high-verifier", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

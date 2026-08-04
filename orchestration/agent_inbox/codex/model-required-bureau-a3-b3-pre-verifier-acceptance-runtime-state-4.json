@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "verifier_acceptance",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md and the live baton were reread after restoration. Standing continuation remains active, and exact A3/B3 execution requires a passing source-only independent veto before occupied calls.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high was used only as the fresh independent source verifier in a new Antigravity project. Sol retains verifier acceptance and occupied-execution admission. The separate candidate runtime remains exactly Vertex gemini-2.5-flash in bernie-emr4-dev through the approved Bernie service account and Sydney regional endpoint.",
+    "active_plan_and_acceptance": "The source veto receipt records completed/pass on exact c95a0ee1a235843fe8498a8979e43151f7f4277e with unchanged HEAD, clean worktree, full provider-free suite/Ruff/diff checks and no findings. It directly reviewed exact modelVersion enforcement, authored-synthetic fixed-clock half-open freshness, regenerated hashes, disjoint evidence and zero candidate-runtime calls.",
+    "protected_evidence_boundaries": "Only committed source and authored-synthetic evidence entered source review. No patient, clinical, historical, participant, product-derived, protected or production data, credentials, candidate-runtime provider call, product/database access, command/write, actuator, cloud/IAM mutation, deployment, release, Pages or protected-ref action occurred. docs/branding/ and the four preserved pre-push files remain excluded.",
+    "git_refs_and_worktree": "Verifier worktree C:/Users/sarashera/EMR4-worktrees/model-required-bureau-a3-b3-gemini-review-4 remains clean on codex/review-model-required-bureau-a3-b3-4 with head_before=head_after=c95a0ee1a235843fe8498a8979e43151f7f4277e. The main task worktree remains at the same HEAD with only review-control artifacts plus the five preserved untracked boundaries. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_required_bureau_a3_b3_verifier_acceptance_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol read and validated the exact-head source-veto receipt and postconditions before accepting it."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh Gemini 3.6 Flash/high source-only review completed with exactly one pass decision and no findings."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected for verifier acceptance."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fallback not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native worker owns or certifies this verifier result."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

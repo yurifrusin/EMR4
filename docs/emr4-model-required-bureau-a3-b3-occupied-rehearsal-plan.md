@@ -90,6 +90,12 @@ attempt before the provider call and identifies any human-only recovery.
   cumulative including reservation for every conditionally eligible call.
 - A consumed ledger cannot be reused. Every admitted call requires a fresh
   single-use ledger and pre-call cost reservation.
+- If the read-only cloud preflight blocks after the parent ledger has reserved
+  but before any prompt or provider call, preserve the exact open ledger and a
+  sanitized hash-bound blocked receipt. A continuation may reuse only that
+  same reservation, only after the existing ADC is restored and the recovery
+  source receives a fresh exact-HEAD veto; it must not reserve the Rayleen
+  primary twice or discard the blocked evidence.
 
 ## Isolation and authority structure
 

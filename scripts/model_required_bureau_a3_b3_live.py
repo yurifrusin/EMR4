@@ -32,6 +32,7 @@ PREFLIGHT_SCRIPT = ROOT / "scripts/ariadne_vertex_sydney_gemini_25_preflight.py"
 CELL_REQUEST_SCHEMA = ARTIFACT_ROOT / "cell-request.schema.json"
 ATTEMPT_LEDGER_SCHEMA = ARTIFACT_ROOT / "single-use-ledger.schema.json"
 COST_LEDGER_SCHEMA = ARTIFACT_ROOT / "cost-ledger.schema.json"
+BLOCKED_PREFLIGHT_SCHEMA = ARTIFACT_ROOT / "occupied-preflight-blocked.schema.json"
 BASE_IMAGE = (
     "docker.io/library/python@sha256:"
     "a190708a2dec1bd18b1decb539f8e8f5407abaa9bf39cacda583f7f8c11db322"
@@ -254,6 +255,41 @@ def _reserve_cost(
     updated["reserved_cost_usd"] = next_cost
     contracts.validate_instance(COST_LEDGER_SCHEMA, updated)
     return updated
+
+
+def _resume_preflight_blocked_cost_ledger(
+    *,
+    cost_ledger_path: Path,
+    blocked_evidence_path: Path,
+) -> dict[str, Any]:
+    if not cost_ledger_path.exists() or not blocked_evidence_path.exists():
+        raise LiveError("preflight_resume_evidence_missing")
+    ledger = contracts.load_object(cost_ledger_path)
+    blocked = contracts.load_object(blocked_evidence_path)
+    contracts.validate_instance(COST_LEDGER_SCHEMA, ledger)
+    contracts.validate_instance(BLOCKED_PREFLIGHT_SCHEMA, blocked)
+    expected = _reserve_cost(
+        _initial_cost_ledger(), contracts.LANE_RAYLEEN, mode="live"
+    )
+    expected_ledger_path = (
+        "orchestration/continuity/model-required-bureau-a3-b3/"
+        "occupied-rehearsal-cost-ledger.json"
+    )
+    if (
+        ledger != expected
+        or blocked["cost_ledger_path"] != expected_ledger_path
+        or cost_ledger_path.resolve()
+        != (ROOT / expected_ledger_path).resolve()
+        or blocked["cost_ledger_sha256"] != _file_hash(cost_ledger_path)
+        or blocked["source_head"] != blocked["source_review_head"]
+    ):
+        raise LiveError("preflight_resume_binding_invalid")
+    occupied_paths = _attempt_paths(
+        contracts.LANE_RAYLEEN, 1, mode="live"
+    )
+    if any(path.exists() for path in occupied_paths.values()):
+        raise LiveError("preflight_resume_attempt_artifact_present")
+    return ledger
 
 
 def _read_events(path: Path) -> list[dict[str, Any]]:
@@ -660,17 +696,32 @@ def _run_attempt(
 def run_tranche(
     *, mode: str, output_path: Path, cost_ledger_path: Path,
     source_review_path: Path | None,
+    resume_preflight_blocked_evidence_path: Path | None = None,
 ) -> dict[str, Any]:
-    if output_path.exists() or cost_ledger_path.exists():
+    if output_path.exists():
         raise LiveError("tranche_output_already_exists")
+    if resume_preflight_blocked_evidence_path is not None and mode != "live":
+        raise LiveError("preflight_resume_live_only")
     lock_path = cost_ledger_path.with_suffix(cost_ledger_path.suffix + ".run.lock")
     try:
         lock_descriptor = os.open(lock_path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
     except FileExistsError as error:
         raise LiveError("tranche_run_already_active") from error
     try:
-        ledger = _initial_cost_ledger()
-        _write_json(cost_ledger_path, ledger)
+        if cost_ledger_path.exists():
+            if resume_preflight_blocked_evidence_path is None:
+                raise LiveError("tranche_output_already_exists")
+            ledger = _resume_preflight_blocked_cost_ledger(
+                cost_ledger_path=cost_ledger_path,
+                blocked_evidence_path=resume_preflight_blocked_evidence_path,
+            )
+            reserved_rayleen_primary = True
+        else:
+            if resume_preflight_blocked_evidence_path is not None:
+                raise LiveError("preflight_resume_cost_ledger_missing")
+            ledger = _initial_cost_ledger()
+            _write_json(cost_ledger_path, ledger)
+            reserved_rayleen_primary = False
         review = (
             _validate_source_review(source_review_path)
             if mode == "live" and source_review_path
@@ -685,8 +736,15 @@ def run_tranche(
             for attempt_number in (1, 2):
                 if attempt_number == 2 and correction_reason != "schema_invalid":
                     break
-                ledger = _reserve_cost(ledger, lane, mode=mode)
-                _write_json(cost_ledger_path, ledger)
+                if (
+                    reserved_rayleen_primary
+                    and lane == contracts.LANE_RAYLEEN
+                    and attempt_number == 1
+                ):
+                    reserved_rayleen_primary = False
+                else:
+                    ledger = _reserve_cost(ledger, lane, mode=mode)
+                    _write_json(cost_ledger_path, ledger)
                 preflight = None
                 if mode == "live":
                     preflight = _run_preflight(
@@ -759,6 +817,7 @@ def main() -> int:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--cost-ledger", type=Path, required=True)
     parser.add_argument("--source-review", type=Path)
+    parser.add_argument("--resume-preflight-blocked-evidence", type=Path)
     args = parser.parse_args()
     try:
         evidence = run_tranche(
@@ -766,6 +825,9 @@ def main() -> int:
             output_path=args.output,
             cost_ledger_path=args.cost_ledger,
             source_review_path=args.source_review,
+            resume_preflight_blocked_evidence_path=(
+                args.resume_preflight_blocked_evidence
+            ),
         )
     except (LiveError, OSError, subprocess.SubprocessError) as error:
         print(json.dumps({"result": "model_required_bureau_a3_b3_tranche_blocked", "reason_code": str(error).split(":", 1)[0]}, sort_keys=True))

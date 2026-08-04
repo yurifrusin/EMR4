@@ -86,6 +86,10 @@ def _assert_schema_objects_closed(value: object, path: str = "$") -> None:
     (
         ("a3-b3-contract.schema.json", "a3-b3-contract.json"),
         ("occupied-authority.schema.json", "occupied-authority.json"),
+        (
+            "occupied-preflight-blocked.schema.json",
+            "occupied-preflight-blocked-evidence.json",
+        ),
         ("rayleen-a3-context.schema.json", "rayleen-a3-context.example.json"),
         (
             "rayleen-a3-candidate.schema.json",
@@ -119,6 +123,7 @@ def test_contract_and_examples_validate(
         "davida-b3-model-body.schema.json",
         "rayleen-a3-release.schema.json",
         "davida-b3-release.schema.json",
+        "occupied-preflight-blocked.schema.json",
         "cell-request.schema.json",
         "single-use-ledger.schema.json",
         "cost-ledger.schema.json",
@@ -842,6 +847,115 @@ def test_provider_free_cost_reservation_consumes_no_call_or_budget() -> None:
     )
     assert observed == ledger
     assert observed is not ledger
+
+
+def test_blocked_preflight_evidence_binds_exact_open_reservation() -> None:
+    cost_ledger_path = ARTIFACT_ROOT / "occupied-rehearsal-cost-ledger.json"
+    blocked_evidence_path = (
+        ARTIFACT_ROOT / "occupied-preflight-blocked-evidence.json"
+    )
+    observed = live._resume_preflight_blocked_cost_ledger(
+        cost_ledger_path=cost_ledger_path,
+        blocked_evidence_path=blocked_evidence_path,
+    )
+    assert observed == _load("occupied-rehearsal-cost-ledger.json")
+    assert observed["provider_calls_reserved"] == 1
+    assert observed["provider_calls_consumed"] == 0
+    assert observed["lane_calls"] == {
+        contracts.LANE_RAYLEEN: 1,
+        contracts.LANE_DAVIDA: 0,
+    }
+
+
+def test_blocked_preflight_resume_rejects_ledger_hash_drift(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(live, "ROOT", tmp_path)
+    relative = Path(
+        "orchestration/continuity/model-required-bureau-a3-b3/"
+        "occupied-rehearsal-cost-ledger.json"
+    )
+    cost_ledger_path = tmp_path / relative
+    cost_ledger_path.parent.mkdir(parents=True)
+    ledger = live._reserve_cost(
+        live._initial_cost_ledger(), contracts.LANE_RAYLEEN, mode="live"
+    )
+    cost_ledger_path.write_text(json.dumps(ledger), encoding="utf-8")
+    blocked = _load("occupied-preflight-blocked-evidence.json")
+    blocked["cost_ledger_sha256"] = live._file_hash(cost_ledger_path)
+    blocked_evidence_path = tmp_path / "blocked.json"
+    blocked_evidence_path.write_text(json.dumps(blocked), encoding="utf-8")
+
+    admitted = live._resume_preflight_blocked_cost_ledger(
+        cost_ledger_path=cost_ledger_path,
+        blocked_evidence_path=blocked_evidence_path,
+    )
+    assert admitted == ledger
+
+    ledger["provider_calls_consumed"] = 1
+    cost_ledger_path.write_text(json.dumps(ledger), encoding="utf-8")
+    with pytest.raises(live.LiveError, match="preflight_resume_binding_invalid"):
+        live._resume_preflight_blocked_cost_ledger(
+            cost_ledger_path=cost_ledger_path,
+            blocked_evidence_path=blocked_evidence_path,
+        )
+
+
+def test_resume_reuses_rayleen_reservation_without_double_counting(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    output_path = tmp_path / "occupied-evidence.json"
+    cost_ledger_path = tmp_path / "occupied-cost-ledger.json"
+    blocked_evidence_path = tmp_path / "blocked.json"
+    source_review_path = tmp_path / "review.json"
+    initial = live._reserve_cost(
+        live._initial_cost_ledger(), contracts.LANE_RAYLEEN, mode="live"
+    )
+    cost_ledger_path.write_text(json.dumps(initial), encoding="utf-8")
+
+    monkeypatch.setattr(
+        live,
+        "_resume_preflight_blocked_cost_ledger",
+        lambda **_kwargs: deepcopy(initial),
+    )
+    monkeypatch.setattr(
+        live,
+        "_validate_source_review",
+        lambda _path: {"model": "gemini-3.6-flash-high"},
+    )
+    monkeypatch.setattr(
+        live,
+        "_run_preflight",
+        lambda _path: {"result": "preflight_pass"},
+    )
+    monkeypatch.setattr(
+        live,
+        "_run_attempt",
+        lambda **kwargs: {
+            "lane": kwargs["lane"],
+            "proofreader_verdict": "admitted",
+        },
+    )
+
+    result = live.run_tranche(
+        mode="live",
+        output_path=output_path,
+        cost_ledger_path=cost_ledger_path,
+        source_review_path=source_review_path,
+        resume_preflight_blocked_evidence_path=blocked_evidence_path,
+    )
+    ledger = json.loads(cost_ledger_path.read_text(encoding="utf-8"))
+    assert result["candidate_runtime_provider_call_count"] == 2
+    assert ledger["provider_calls_reserved"] == 2
+    assert ledger["provider_calls_consumed"] == 2
+    assert ledger["reserved_cost_usd"] == 0.5
+    assert ledger["lane_calls"] == {
+        contracts.LANE_RAYLEEN: 1,
+        contracts.LANE_DAVIDA: 1,
+    }
+    assert ledger["status"] == "consumed"
 
 
 @pytest.mark.parametrize(

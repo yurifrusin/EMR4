@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after restoration. C3/D3 is the accepted parent, standing uninterrupted continuation is active, and the exact-authorized A3/B3 occupied advisory rehearsal is the current tranche. A fresh independent source veto is mandatory before any occupied call.",
+    "current_authority_allocation": "This dispatch is only Gemini 3.6 Flash/high through a genuinely fresh Antigravity project on a clean read-only non-protected worktree. It may inspect committed source and authored-synthetic evidence but cannot implement, self-accept, integrate, move refs, inspect credentials or invoke the A3/B3 candidate runtime. Sol retains all execution and acceptance authority; the later candidate runtime is separately fixed to Vertex gemini-2.5-flash in the Bernie Sydney envelope.",
+    "active_plan_and_acceptance": "The exact A3/B3 plan and threat delta require deterministic provider-free admission before source review and source review before occupied execution. Commit c95a0ee1a235843fe8498a8979e43151f7f4277e binds explicit fixed-clock half-open freshness and exact observed modelVersion admission on top of disjoint provider-free/occupied evidence. The serial inherited suite, acceptance, Ruff and diff checks pass; candidate-runtime calls remain zero.",
+    "protected_evidence_boundaries": "The verifier receives only repository source and authored-synthetic fixtures. Patient, clinical, historical, product-derived, participant, protected and production data; credentials; candidate-runtime calls; product/database access; commands; writes; actuators; shell/SQL/cloud/IAM mutation; deployment; release; Pages and protected refs remain closed. docs/branding/ and four preserved pre-push files remain excluded.",
+    "git_refs_and_worktree": "The verifier worktree C:/Users/sarashera/EMR4-worktrees/model-required-bureau-a3-b3-gemini-review-4 is clean on codex/review-model-required-bureau-a3-b3-4 at exact HEAD c95a0ee1a235843fe8498a8979e43151f7f4277e; deterministic preflight passed with zero provider/model calls. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Main task worktree has only the new untracked review-control artifacts plus the five preserved paths."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_required_bureau_a3_b3_exact_head_pre_verifier_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol bound the packet and verifier preflight to exact clean commit c95a0ee1a235843fe8498a8979e43151f7f4277e."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh-project source-only transport is available for Gemini 3.6 Flash/high with no silent fallback."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected for this independent veto."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fallback not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native worker is selected for the independent source veto."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "receipt_id": "model-required-bureau-a3-b3-verifier-worktree-preflight-4",
+      "path": "orchestration/agent_inbox/codex/model-required-bureau-a3-b3-verifier-worktree-preflight-4.json",
+      "status": "passed"
+    }
+  ],
+  "assigned_agent_ids": []
+}

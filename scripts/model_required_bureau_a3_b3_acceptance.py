@@ -77,6 +77,9 @@ def run_acceptance(*, require_dry_run: bool) -> dict[str, object]:
         ARTIFACT_ROOT / "cell-request.schema.json",
         ARTIFACT_ROOT / "single-use-ledger.schema.json",
         ARTIFACT_ROOT / "cost-ledger.schema.json",
+        ARTIFACT_ROOT / "occupied-preflight-blocked.schema.json",
+        ARTIFACT_ROOT / "occupied-preflight-blocked-evidence.json",
+        ARTIFACT_ROOT / "occupied-rehearsal-cost-ledger.json",
         ARTIFACT_ROOT / "Dockerfile",
         ROOT / "scripts/model_required_bureau_a3_b3_broker.py",
         ROOT / "scripts/model_required_bureau_a3_b3_live.py",
@@ -98,6 +101,7 @@ def run_acceptance(*, require_dry_run: bool) -> dict[str, object]:
         ARTIFACT_ROOT / "cell-request.schema.json",
         ARTIFACT_ROOT / "single-use-ledger.schema.json",
         ARTIFACT_ROOT / "cost-ledger.schema.json",
+        ARTIFACT_ROOT / "occupied-preflight-blocked.schema.json",
     ):
         Draft202012Validator.check_schema(contracts.load_object(schema_path))
     _check(True, "draft_2020_12_schemas_valid", checks)
@@ -109,6 +113,29 @@ def run_acceptance(*, require_dry_run: bool) -> dict[str, object]:
     )
     contracts.validate_instance(
         ARTIFACT_ROOT / "occupied-authority.schema.json", authority
+    )
+    blocked_preflight = contracts.load_object(
+        ARTIFACT_ROOT / "occupied-preflight-blocked-evidence.json"
+    )
+    blocked_cost_ledger_path = (
+        ARTIFACT_ROOT / "occupied-rehearsal-cost-ledger.json"
+    )
+    contracts.validate_instance(
+        ARTIFACT_ROOT / "occupied-preflight-blocked.schema.json",
+        blocked_preflight,
+    )
+    contracts.validate_instance(
+        ARTIFACT_ROOT / "cost-ledger.schema.json",
+        contracts.load_object(blocked_cost_ledger_path),
+    )
+    _check(
+        blocked_preflight["cost_ledger_sha256"]
+        == live._file_hash(blocked_cost_ledger_path)
+        and blocked_preflight["provider_call_count"] == 0
+        and blocked_preflight["provider_prompt_transmitted"] is False
+        and blocked_preflight["runtime_residue_absent"] is True,
+        "occupied_preflight_blocked_evidence_exact",
+        checks,
     )
     _check(
         authority["exact_boundary"]["model"] == contracts.MODEL
