@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 210,
+  "graph_revision": 211,
   "harvests": [],
   "nodes": [
     {
@@ -12082,9 +12082,81 @@
         "A4 product read, A5/B4 writes, C4 actuator rehearsal and actual update/migration activation remain closed.",
         "Deployment, production, release, Pages, protected refs and protected evidence remain closed."
       ]
+    },
+    {
+      "id": "model-required-bureau-c3-d3",
+      "title": "Provider-Free Recovery and Update Authority Architecture",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-04T11:00:00Z",
+      "updated_at": "2026-08-04T11:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "07ab07ed5e5e9d6cae5445de8538f428d6697d52",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "model-required-bureau-provider-free-successor-lanes",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "C3 and D3 passed provider-free deterministic and independent review.",
+          "Two bounded native workers supplied non-accepting advisory analysis.",
+          "Candidate-runtime side effects were zero; source-only Gemini review transport was non-zero.",
+          "No further dependency-satisfied provider-free implementation gate remains in the active sequence."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-provider-free-c3-d3",
+          "source": "docs/emr4-model-required-bureau-c3-d3-closeout.md",
+          "status": "accepted",
+          "summary": "Accept deterministic recovery risk/authority and staged promotion/rollback architecture without an executor."
+        }
+      ],
+      "claim_scope": [
+        "Four closed schemas and three examples pass.",
+        "Fresh Gemini source review passed 194 tests with no findings.",
+        "No provider, live observer, reviewer runtime, effect or release is established."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
+          "docs/emr4-model-required-bureau-c3-d3-provider-free-architecture.md",
+          "docs/security/emr4-model-required-bureau-c3-d3-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/model-required-bureau-c3-d3/provider-free-acceptance-evidence.json"
+        ],
+        "closeouts": [
+          "docs/emr4-model-required-bureau-c3-d3-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/model-required-bureau-c3-d3-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/antigravity/model-required-bureau-c3-d3-review-receipt.json"
+        ],
+        "tests": [
+          "scripts/model_required_bureau_c3_d3_acceptance.py",
+          "tests/test_model_required_bureau_c3_d3.py"
+        ]
+      },
+      "unresolved_gates": [
+        "A3/B3 occupied advisory rehearsals require an exact provider/model/region/identity/authored-synthetic-data/cost/call boundary.",
+        "A4 live product read, A5/B4 writes and C4 actuator simulation require separate material authority.",
+        "Actual downloads, licence acceptance, imports, migrations, activation, deployment, production and release remain closed.",
+        "Pages, protected refs and protected evidence remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-04T09:00:00Z"
+  "updated_at": "2026-08-04T11:00:00Z"
 }

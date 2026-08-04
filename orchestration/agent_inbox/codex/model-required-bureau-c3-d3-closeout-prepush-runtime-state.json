@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "push",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md now records model_required_bureau_c3_d3_provider_free_architecture_pass at Continuity 211 / Compass 192 and accurately states that no dependency-satisfied provider-free gate remains. Its compact size and standing-authority tests pass.",
+    "current_authority_allocation": "Sol owns acceptance and explicit-path task-branch publication. Two native advisory lanes and fresh Gemini source veto are complete and have no integration or authority-expansion rights. The standing policy requires a handback only now because the next choices are material closed boundaries.",
+    "active_plan_and_acceptance": "C3/D3 acceptance binds exact candidate 07ab07ed5e5e9d6cae5445de8538f428d6697d52. Four schemas, three examples, 194 independent-review tests, 57 closeout/continuity tests, Ruff, evidence and diff checks pass. Closeout, Sol acceptance, Continuity 211 and Compass 192 record the genuine next material gate and recommend paired A3/B3 without opening it.",
+    "protected_evidence_boundaries": "No provider/product runtime, patient/product data, live read, reviewer runtime, command/write, actuator, shell/SQL/cloud/IAM, download/import/migration/activation, deployment, production, release, Pages, protected ref or protected evidence is authorized. docs/branding/ and the four prior Consultant/Gate-minus-one pre-push files remain preserved and unstaged.",
+    "git_refs_and_worktree": "Task HEAD is 07ab07ed5e5e9d6cae5445de8538f428d6697d52 before the closeout commit; origin task is 3008cdb4d7b5801c45024f7361fb4294aa76fc48. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicitly enumerated closeout, verifier, continuity, plan and test paths may be staged and the task branch alone may be pushed."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "model_required_bureau_c3_d3_closeout_prepush_five_source_rehydration", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol acceptance and continuity gates pass."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fresh Gemini 3.6 Flash/high returned one pass and the disposable worktree was clean and removed."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Two bounded native advisory lanes completed without acceptance authority."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

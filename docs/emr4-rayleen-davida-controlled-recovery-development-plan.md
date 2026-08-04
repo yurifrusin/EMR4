@@ -2,8 +2,8 @@
 
 Date: 2026-08-04
 
-Status: Gate -1, Gate zero and provider-free A1/A2, B1/B2, C1/C2 and D1/D2
-passed; provider-free C3/D3 architecture lanes active under standing continuation
+Status: Gate -1, Gate zero and provider-free A1/A2, B1/B2, C1/C2, D1/D2 and
+C3/D3 passed; next material lane requires an exact user-owned boundary decision
 
 Architecture parent:
 `docs/emr4-model-required-deterministic-authority-bureau-architecture.md`
@@ -128,6 +128,26 @@ with no findings. C1's technical observation/provenance vocabulary is frozen,
 so D1/D2 are consumed and C3/D3 are now the next dependency-satisfied
 provider-free architecture lanes. No product/provider runtime or material
 side-effect boundary opened.
+
+## Provider-free C3/D3 result
+
+C3 and D3 passed on 2026-08-04 as
+`model_required_bureau_c3_d3_provider_free_architecture_pass`. Four closed
+schemas, three canonical examples, deterministic risk/promotion/denial evidence
+and the focused inherited suite passed; fresh Gemini 3.6 Flash/high passed the
+unchanged clean candidate after 194 tests with zero findings. C3 now freezes
+five monotone risk/authority tiers, canonical plan/expiry/review binding and a
+closed actuator gate. D3 freezes four class-specific promotion, canary,
+review, activation-barrier and rollback designs with current provenance/LKG
+eligibility and independent readback requirements. No material side-effect
+boundary opened.
+
+No further dependency-satisfied provider-free implementation gate remains in
+this sequence. A3/B3, A4/A5/B4, C4 and actual update/migration work each require
+an unresolved provider, product-read/write, actuator or activation boundary.
+The recommended next fork is paired A3/B3 authored-synthetic occupied advisory
+rehearsal, but its exact provider/model/region/identity/data/cost/call boundary
+is a genuine Yuri-owned decision under the standing policy.
 
 ## Lane A: Rayleen waiting-room intelligence
 

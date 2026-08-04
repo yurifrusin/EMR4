@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "verifier_acceptance",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:bc5df9a9c4f15adb517e176880dde00321d3ae20208ab44fadeb5fab24ebcc7f",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Four closed schemas, three examples, five C3 tiers, four D3 class mappings, denial cases, 182 focused/inherited tests, Ruff, evidence staleness and diff checks pass. Sol review returns pass_for_fresh_independent_veto. The reviewer must adversarially verify the exact committed candidate and return one terminal decision.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through a fresh Antigravity project has independent source-review veto only. Sol retains architecture, recovery, acceptance, publication and all authority decisions. No fallback model or self-acceptance is allowed.",
+    "git_refs_and_worktree": "Verifier worktree C:\\Users\\sarashera\\EMR4-worktrees\\bureau-c3-d3-gemini-review is clean on codex/review-model-required-bureau-c3-d3 at exact candidate 07ab07ed5e5e9d6cae5445de8538f428d6697d52; the executable preflight passed. Baseline is 3008cdb4d7b5801c45024f7361fb4294aa76fc48. Local/origin protected master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was read completely and the live next tranche is the provider-free, non-executing C3/D3 architecture now frozen at exact candidate 07ab07ed5e5e9d6cae5445de8538f428d6697d52.",
+    "protected_evidence_boundaries": "The verifier receives ordinary repository source only. No protected evidence, docs/branding/, patient/product data, historical PHI, credentials, provider-product runtime, database, cloud/IAM, command, actuator, update ingestion/activation, deployment, production or release access. Candidate-runtime side effects must remain zero while the development source-review transport is reported separately as non-zero."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

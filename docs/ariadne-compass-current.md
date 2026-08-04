@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 210 / Compass 191. Provider-free A1/A2, B1/B2, C1/C2 and D1/D2 pass; C3/D3 proceed under standing authority. Occupied models, live reads, writes/actuators and deployment/release remain closed.
+> EMR4 is at Continuity 211 / Compass 192. Provider-free C3/D3 pass and complete the dependency-satisfied provider-free Bureau sequence. The next lane is a genuine material choice; paired A3/B3 is recommended but no provider or effect boundary is open.
 
 ## North star
 
@@ -194,31 +194,32 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Gate zero passes and activates the exact provider-free A1/A2, B1/B2 and C1/C2 architecture/test lanes. Lineage parent: `model-required-bureau-standing-programme-authority`.
 89. **Provider-free Bureau-specific foundations — Provider-Free Bureau Successor Lanes**
    A1/A2, B1/B2, C1/C2 and D1/D2 pass; C3/D3 are active. Lineage parent: `model-required-bureau-gate-zero`.
+90. **Provider-free recovery/update authority foundation — Provider-Free Recovery and Update Authority Architecture**
+   C3/D3 pass; the next lanes require a selected material boundary. Lineage parent: `model-required-bureau-provider-free-successor-lanes`.
 
 ## Current position
 
-**Provider-free successor foundations accepted; C3/D3 active — Provider-Free Bureau Successor Lanes**
+**Provider-free recovery/update architecture accepted; material fork pending — Provider-Free Recovery and Update Authority Architecture**
 
-**Why this proof came next:** Gate zero allowed Bureau-specific contracts and C1 supplied D-lane provenance vocabulary.
+**Why this proof came next:** C1/C2 and D1/D2 supplied the exact evidence vocabulary and C3/D3 completed the remaining provider-free planned architecture.
 
-Deterministic and independent review pass with zero candidate-runtime side effects.
+Deterministic, Sol and independent review pass with zero candidate-runtime side effects.
 
 ### What this unlocks
 
-- C3 deterministic recovery risk and authority policy.
-- D3 staged promotion and rollback architecture.
+- A decision-ready paired A3/B3 authored-synthetic provider rehearsal boundary.
+- Separately decidable C4 actuator-simulator or live product read/write gates.
 
 ### What it does not solve
 
-- Occupied models or intelligent end-to-end behavior.
-- Live product reads, commands, writes, actuators or update activation.
-- Deployment, production, release, Pages or protected actions.
+- Occupied model intelligence or provider admission.
+- Live product/technical reads, reviewer runtime, commands, writes or actuators.
+- Update ingestion/activation, deployment, production, release or protected actions.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Bounded opening `autonomous-action`: Provider-free C3 recovery risk/authority policy and D3 staged-promotion/rollback architecture
-- All other named boundaries remain closed: `api-change`, `appointment-write`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
+- All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
 
@@ -456,9 +457,12 @@ Prerequisites:
   Required before: Satisfied and consumed on 2026-08-04: Gate zero passes at Continuity 209 / Compass 190.
 - **May EMR4 move without repeat permission pauses through every fully specified dependency-satisfied gate?**
   Required before: Satisfied on 2026-08-04 by Yuri's standing programme authority.
+- **Which material Bureau lane should open next, with the recommended first option being a paired A3/B3 authored-synthetic occupied advisory rehearsal?**
+  Required before: Yuri must select and freeze the exact provider/model/region/identity/data/cost/call boundary, or choose a different material lane.
 
 ## Map limits
 
+- C3/D3 prove provider-free risk, authority, staged-promotion and rollback contracts only; they do not prove a provider, observer, reviewer, command, actuator, updater, migration or activation runtime.
 - Provider-free language fixtures prove schemas, grounding and policy only; they do not prove model NLU or an intelligent end-to-end path.
 - Gate-zero schemas specify required containment and authority behavior; they do not prove an operating cell, provider or product runtime.
 - Standing programme authority removes repeat permission pauses only for fully specified dependency-satisfied gates; it does not infer or erase an unresolved material boundary.
@@ -685,6 +689,8 @@ Prerequisites:
 - `docs/bernie-reception-one-yuri-internal-walkthrough-findings.md`
 - `docs/bernie-reception-one-yuri-internal-walkthrough-plan.md`
 - `docs/bernie-stage1-provider-free-supervised-booking-acceptance-plan.md`
+- `docs/emr4-model-required-bureau-c3-d3-closeout.md`
+- `docs/emr4-model-required-bureau-c3-d3-provider-free-architecture.md`
 - `docs/emr4-model-required-bureau-gate-minus-one-closeout.md`
 - `docs/emr4-model-required-bureau-gate-zero-closeout.md`
 - `docs/emr4-model-required-bureau-gate-zero-shared-contract.md`
@@ -786,6 +792,7 @@ Prerequisites:
 - `docs/security/bernie-reception-one-structured-source-language-threat-model-delta.md`
 - `docs/security/dependabot-alert-17-triage-2026-08-01.md`
 - `docs/security/dependabot-alerts-8-15-triage-2026-08-01.md`
+- `docs/security/emr4-model-required-bureau-c3-d3-threat-model-delta.md`
 - `docs/security/emr4-model-required-bureau-gate-zero-threat-model-delta.md`
 - `docs/security/emr4-model-required-bureau-provider-free-successor-lanes-threat-model-delta.md`
 - `docs/security/emr4-model-required-bureaus-gate-minus-one-threat-model-delta.md`
@@ -824,6 +831,7 @@ Prerequisites:
 - `docs/security/security-finding-register.json`
 - `implementation_plan.md`
 - `orchestration/access_ai_api_design.md`
+- `orchestration/agent_inbox/antigravity/model-required-bureau-c3-d3-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-gate-minus-one-review-2-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-gate-zero-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-successor-lanes-review-receipt.json`
@@ -861,6 +869,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/bernie-stage1-tranche-d-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/clinician-one-readonly-document-context-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/clinician-one-word-desktop-selection-check-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/model-required-bureau-c3-d3-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-gate-minus-one-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-gate-zero-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-provider-free-successor-lanes-sol-acceptance.md`
@@ -1031,6 +1040,7 @@ Prerequisites:
 - `orchestration/continuity/clinician-one-word-desktop-selection-check/desktop-selection-evidence.json`
 - `orchestration/continuity/clinician-one-word-desktop-selection-check/final-residue-evidence.json`
 - `orchestration/continuity/clinician-one-word-desktop-selection-check/manifest.xml`
+- `orchestration/continuity/model-required-bureau-c3-d3/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-gate-minus-one/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-gate-zero/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-gate-zero/shared-contract.json`
@@ -1359,6 +1369,7 @@ Prerequisites:
 - `tests/test_ariadne_vertex_sydney_gemini_25_rehearsal.py`
 - `tests/test_clinician_one_readonly_document_context.py`
 - `tests/test_clinician_one_word_desktop_selection_check.py`
+- `tests/test_model_required_bureau_c3_d3.py`
 - `tests/test_model_required_bureau_gate_zero.py`
 - `tests/test_model_required_bureau_successor_lanes.py`
 - `tests/test_raisa_dual_host_foundation.py`
@@ -1390,4 +1401,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 191; continuity graph revision 210._
+_Compass map revision 192; continuity graph revision 211._

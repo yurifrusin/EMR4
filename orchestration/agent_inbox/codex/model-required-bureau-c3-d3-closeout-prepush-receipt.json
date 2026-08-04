@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "planned_action": "push",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:bc5df9a9c4f15adb517e176880dde00321d3ae20208ab44fadeb5fab24ebcc7f",
+  "source_evidence": {
+    "active_plan_and_acceptance": "C3/D3 acceptance binds exact candidate 07ab07ed5e5e9d6cae5445de8538f428d6697d52. Four schemas, three examples, 194 independent-review tests, 57 closeout/continuity tests, Ruff, evidence and diff checks pass. Closeout, Sol acceptance, Continuity 211 and Compass 192 record the genuine next material gate and recommend paired A3/B3 without opening it.",
+    "current_authority_allocation": "Sol owns acceptance and explicit-path task-branch publication. Two native advisory lanes and fresh Gemini source veto are complete and have no integration or authority-expansion rights. The standing policy requires a handback only now because the next choices are material closed boundaries.",
+    "git_refs_and_worktree": "Task HEAD is 07ab07ed5e5e9d6cae5445de8538f428d6697d52 before the closeout commit; origin task is 3008cdb4d7b5801c45024f7361fb4294aa76fc48. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicitly enumerated closeout, verifier, continuity, plan and test paths may be staged and the task branch alone may be pushed.",
+    "live_handover_current_baton": "AGENTS.md now records model_required_bureau_c3_d3_provider_free_architecture_pass at Continuity 211 / Compass 192 and accurately states that no dependency-satisfied provider-free gate remains. Its compact size and standing-authority tests pass.",
+    "protected_evidence_boundaries": "No provider/product runtime, patient/product data, live read, reviewer runtime, command/write, actuator, shell/SQL/cloud/IAM, download/import/migration/activation, deployment, production, release, Pages, protected ref or protected evidence is authorized. docs/branding/ and the four prior Consultant/Gate-minus-one pre-push files remain preserved and unstaged."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
