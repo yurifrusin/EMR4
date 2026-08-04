@@ -97,5 +97,5 @@ def test_live_handover_and_active_plan_record_the_standing_policy() -> None:
         assert "dependency-satisfied" in text
         assert "generic future" in text.lower()
 
-    assert "Do not request its authority again" in agents
-    assert "Begin Gate zero now" in plan
+    assert "without another permission request" in agents
+    assert "Begin A1/A2" in plan

@@ -2,8 +2,8 @@
 
 Date: 2026-08-04
 
-Status: Gate -1 passed; Gate zero authorised; standing programme continuation
-active under the exact boundaries below
+Status: Gate -1 and Gate zero passed; provider-free successor architecture/test
+lanes active under standing programme continuation and the exact boundaries below
 
 Architecture parent:
 `docs/emr4-model-required-deterministic-authority-bureau-architecture.md`
@@ -107,6 +107,16 @@ part of gate zero.
 
 Gate-zero acceptance requires Sol Extra High architectural review and one fresh
 Gemini 3.6 Flash/high independent veto after all deterministic checks pass.
+
+Gate zero passed on 2026-08-04 as
+`model_required_bureau_gate_zero_shared_contract_pass` at Continuity 209 /
+Compass 190. Six closed Draft 2020-12 schemas, five canonical authored-synthetic
+examples, the four-plane/domain/label/sink/outage/cell/API/human/evidence
+contract and 122 integrated deterministic tests passed. Fresh Gemini 3.6
+Flash/high then passed the unchanged clean candidate after 137 tests with zero
+findings. Development review transport was non-zero and source-only; candidate
+product/runtime provider calls and every other candidate-runtime side effect
+were zero.
 
 ## Lane A: Rayleen waiting-room intelligence
 
@@ -299,10 +309,31 @@ production change is a separate material gate.
 
 ## Parallelization after gate zero
 
-After Gate zero passes its full acceptance, the standing programme authority
+Gate zero has passed its full acceptance. The standing programme authority now
 opens A1/A2, B1/B2 and C1/C2 as separable architecture/test lanes without a new
 permission pause. D1/D2 may begin alongside C1 after the shared technical
 context and provenance vocabulary is frozen.
+
+### Frozen successor-lane execution boundary
+
+For A1/A2, B1/B2 and C1/C2, inputs are the accepted Gate-zero contract,
+repository source and existing accepted provider-free boundaries. Outputs are
+repository-local architecture/design documents, closed schema or grammar
+prototypes, authored-synthetic fixtures, deterministic scripts/tests, evidence
+and closeout/acceptance artifacts. No provider call, external prompt, patient or
+product-derived data, live product read, runtime wiring, command/write,
+actuator, shell/SQL/cloud/IAM, migration, external update activation,
+deployment, production, release, Pages, protected-ref or protected-evidence
+action is permitted. Cost and licence posture is zero/new-none.
+
+Each lane must bind its source HEAD, inherit Gate-zero domain and label/sink
+rules, stay API-Spine-aligned, keep evidence labels exact, run deterministic
+tests before any risk-triggered independent source review, receive Sol
+acceptance, and publish only explicit paths to the task branch. Recovery may
+repair deterministic or verifier findings while the exact boundary is
+unchanged; scope expansion or exhausted materially distinct recovery is a
+genuine attention gate. A passing lane automatically opens its planned
+dependency-satisfied successor.
 
 The integration path remains single-track:
 
@@ -346,9 +377,12 @@ human confirmation or sandbox alone as proof that prompt injection cannot
 affect authority. Any proposed new cognitive-cell bridge is a fresh security
 architecture decision.
 
-## Active first action after Gate -1
+## Active first action after Gate zero
 
-Begin Gate zero now: architecture contract, closed schemas, threat model and
-deterministic artifact tests. Do not begin lanes A-D until Gate zero passes its
-fresh Gemini veto and Sol Extra High acceptance; then continue automatically
-into the dependency-satisfied planned lanes under the standing policy.
+Begin A1/A2, B1/B2 and C1/C2 under the frozen provider-free boundary above.
+Freeze C1's shared technical context/provenance vocabulary early enough to open
+D1/D2. Continue automatically through deterministic checks, applicable fresh
+independent veto, Sol acceptance and the next dependency-satisfied lane. Do not
+open A3/B3, live product reads, any command/write, actuator or deployment/
+release surface without an active accepted plan that makes the material
+boundary exact.

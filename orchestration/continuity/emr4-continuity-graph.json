@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 208,
+  "graph_revision": 209,
   "harvests": [],
   "nodes": [
     {
@@ -11923,9 +11923,91 @@
         "A generic future candidate remains closed until an active accepted plan freezes its complete material boundary.",
         "User attention remains required for an unplanned fork, missing user-only input, conflicting evidence that changes acceptance meaning, exhausted bounded recovery or explicit user pause."
       ]
+    },
+    {
+      "id": "model-required-bureau-gate-zero",
+      "title": "Model-Required Bureau Gate Zero Shared Contract",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-04T08:45:00Z",
+      "updated_at": "2026-08-04T08:45:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "3727ee83d03d310bbb2f0d52c2ce70d0430ab65d",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "model-required-bureau-standing-programme-authority",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "autonomous-action",
+            "source": "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
+            "scope": "Provider-free A1/A2, B1/B2 and C1/C2 architecture/test lanes within the frozen successor boundary"
+          }
+        ],
+        "notes": [
+          "Yuri explicitly authorised Gate zero and standing planned-gate continuation.",
+          "Fresh Gemini 3.6 Flash/high source review passed the exact unchanged clean candidate with zero findings.",
+          "The review transport was non-zero; candidate product/runtime provider calls and side effects were zero.",
+          "No live product, patient/clinical data, write, actuator, deployment, release, Pages or protected-ref boundary opened.",
+          "The user-owned docs/branding directory remained excluded."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "freeze-model-required-bureau-shared-contract",
+          "source": "docs/emr4-model-required-bureau-gate-zero-closeout.md",
+          "status": "accepted",
+          "summary": "Freeze the four-plane, domain, label/sink, outage, one-attempt cell, API Spine, human-authority and evidence contract as the mandatory parent for provider-free successor lanes."
+        }
+      ],
+      "claim_scope": [
+        "Six closed schemas and five authored-synthetic examples pass deterministic and independent review.",
+        "Provider-free A1/A2, B1/B2 and C1/C2 architecture/test lanes are now active under standing authority.",
+        "No operating isolation runtime, occupied Bureau model, live product path, command, actuator or release is established."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
+          "docs/emr4-model-required-bureau-gate-zero-shared-contract.md",
+          "docs/security/emr4-model-required-bureau-gate-zero-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/model-required-bureau-gate-zero/shared-contract.json",
+          "orchestration/continuity/model-required-bureau-gate-zero/provider-free-acceptance-evidence.json"
+        ],
+        "closeouts": [
+          "docs/emr4-model-required-bureau-gate-zero-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/model-required-bureau-gate-zero-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/model-required-bureau-gate-zero-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/codex/model-required-bureau-gate-zero-verifier-worktree-preflight.json",
+          "orchestration/agent_inbox/antigravity/model-required-bureau-gate-zero-review-receipt.json"
+        ],
+        "tests": [
+          "scripts/model_required_bureau_gate_zero_acceptance.py",
+          "tests/test_model_required_bureau_gate_zero.py",
+          "tests/test_api_spine_artifacts.py"
+        ]
+      },
+      "unresolved_gates": [
+        "D1/D2 waits until C1 freezes the shared technical context and provenance vocabulary it requires.",
+        "A3/B3 and every occupied model path require an exact accepted provider/data/region/identity/cost call boundary.",
+        "Live product reads, patient-facing Rayleen, writes, actuators, migrations/update activation, deployment, production, release, Pages, protected refs and protected evidence remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-04T07:05:15Z"
+  "updated_at": "2026-08-04T08:45:00Z"
 }

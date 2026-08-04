@@ -53,6 +53,7 @@ ACTIVE_LABELS = (
     "Bernie/Davida fifth-pair acceptance",
     "Model-required Bureau architecture and paused development plan",
     "Model-required Bureau Gate -1 acceptance",
+    "Model-required Bureau Gate zero acceptance",
     "Current result",
     "Next implementation",
 )

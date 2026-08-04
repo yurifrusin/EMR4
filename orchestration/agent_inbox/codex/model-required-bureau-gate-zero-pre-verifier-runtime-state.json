@@ -1,0 +1,92 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "independent_verifier_review",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely during this active session and remains the live handover. Its Current result, Next implementation and section 6 bind Gate zero to Yuri's standing uninterrupted-development authority while retaining exact material and protected closures.",
+    "current_authority_allocation": "Sol owns architecture and acceptance. The currently allocated independent reviewer is Gemini 3.6 Flash/high through one fresh Antigravity project, source-only, read-only and exact-worktree bound. It has no implementation, self-acceptance, integration, baton, product-runtime, patient/product-data, deployment, production, release or protected-ref authority and no fallback model is allowed.",
+    "active_plan_and_acceptance": "Gate zero is architecture/schema/test only. Candidate 3727ee83d03d310bbb2f0d52c2ce70d0430ab65d freezes the four planes, domain ownership, labels and sink mediation, provider outage, one-attempt cell/broker/bridge/quota/residue rules, API Spine, human authority and evidence labels. Provider-free deterministic acceptance passes, Sol Extra High review returns pass_for_fresh_independent_veto, and 122 integrated focused/API/Gate-minus-one/continuation tests plus Ruff and diff checks pass.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10, historical PHI, the provenance-blocked appointment corpus and docs/branding/ remain closed and were not accessed. Candidate product/runtime provider calls, patient or product data, runtime wiring, commands/writes, actuators, cloud/IAM, migration, deployment, production, release, Pages and protected refs remain closed. The independent review may receive only this bounded source packet and the exact repository candidate under its separately recorded verifier allocation.",
+    "git_refs_and_worktree": "The integration worktree C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at 3727ee83d03d310bbb2f0d52c2ce70d0430ab65d and aligned with origin before review artifacts. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The dedicated review worktree C:/Users/sarashera/EMR4-worktrees/gate-zero-gemini-review is tracked-clean on non-protected codex/review-model-required-bureau-gate-zero at the exact candidate HEAD, as proven by the mandatory preflight."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_required_bureau_gate_zero_pre_verifier_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed Gate-zero deterministic and API Spine review on the exact candidate."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The exact clean non-protected review worktree passed preflight; no external review transport has yet occurred in this attempt."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker was needed for the tightly coupled Gate-zero architecture contract."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The DeepCode TTY fallback is outside this independent-review allocation and was not probed."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The leverage-gated Claude lane is outside this independent-review allocation and was not probed."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Codex subagent is authorized or required for the configured external veto review."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
