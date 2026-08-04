@@ -1,0 +1,98 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records the exact one-call Rayleen provider_content_invalid result, completed provider-free terminal reconciliation, passing deterministic acceptance, open AER-0017 and fresh exact-HEAD veto as the next action.",
+    "current_authority_allocation": "GPT Sol owns reconciliation, acceptance and task-branch publication. Standing authority permits this evidence-only commit and fresh independent veto. No provider call, Rayleen correction, Davida start, request-contract change, protected integration, deployment or release is authorised.",
+    "active_plan_and_acceptance": "The committed source at b5d08bf5f2fda7eec00eef47cc8903e791fa70d0 produced a provider-free terminal result: parent consumed exactly one reserved call at USD 0.25, no release, no Davida, exact current runtime absence, and zero reconciliation or acceptance provider calls. Final acceptance, focused tests, the full inherited serial suite, Ruff and diff checks pass.",
+    "protected_evidence_boundaries": "Only sanitized A3/B3 failure evidence and repository-local provider-free reconciliation artifacts are staged. Patient, clinical, protected, product-derived and production data; new provider calls; product/database access; commands, writes, actuators, cloud/IAM mutation, deployment, release, Pages and protected refs remain closed. docs/branding and the four Consultant/Gate-minus-one pre-push files remain preserved and excluded.",
+    "git_refs_and_worktree": "HEAD is b5d08bf5f2fda7eec00eef47cc8903e791fa70d0 and origin task remains 61ca38545ad01d2470f8b5b668dd746b88d113a2. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty before explicit-path staging; only the reconciled ledger, terminal attempt/tranche evidence, acceptance evidence and this receipt pair are task changes, while named user-owned untracked files remain excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_required_bureau_a3_b3_terminal_evidence_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The evidence-only finalizer and acceptance completed with zero new provider calls."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "A fresh exact-HEAD Gemini 3.6 Flash/high veto will follow the evidence commit."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external implementation worker was selected for the evidence-only finalizer."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback was not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Leverage-gated lane was not selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "The bounded read-only review lanes have completed; the final broker recheck passed."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "receipt_id": "model-required-bureau-a3-b3-review-6",
+      "path": "orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-review-6-receipt.json",
+      "status": "completed"
+    }
+  ],
+  "assigned_agent_ids": []
+}

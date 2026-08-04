@@ -11,12 +11,16 @@
     "draft_2020_12_schemas_valid": true,
     "model_authority_forgery_rejected": true,
     "no_product_or_database_imports": true,
+    "no_rayleen_correction_or_davida_attempt": true,
     "occupied_preflight_blocked_evidence_exact": true,
+    "occupied_terminal_interruption_exact": true,
     "provider_free_audit_chains_valid_and_zero_call": true,
     "provider_free_broker_cell_dry_run_passed": true,
     "rayleen_a3_provider_request_closed": true,
     "rayleen_a3_selector_wrapper_exact": true,
-    "rayleen_wrong_focus_rejected": true
+    "rayleen_wrong_focus_rejected": true,
+    "terminal_reconciliation_artifacts_present": true,
+    "terminal_reconciliation_exact": true
   },
   "command_count": 0,
   "database_access_count": 0,
@@ -24,6 +28,14 @@
   "dry_run": {
     "evidence_hash": "sha256:af1b3ef331d7d6da3b88efe0ce9a7c18fe652005b3ee738319644195b7b9c1c0",
     "provider_call_count": 0
+  },
+  "occupied_terminal_state": {
+    "attempt_evidence_hash": "sha256:b340e088a7db33217a53df6d1b67a00d789cdf973d70c53ca9664cc1dcecb375",
+    "candidate_runtime_provider_call_count": 1,
+    "reconciliation_was_provider_free": true,
+    "state": "terminal_reconciled",
+    "terminal_reason_code": "provider_content_invalid",
+    "tranche_evidence_hash": "sha256:56396f8a234f9eb8c2d780d7c75587447defb74046b687aa181e4822930c2b14"
   },
   "patient_or_clinical_data_count": 0,
   "product_read_count": 0,

@@ -6,10 +6,10 @@
   },
   "maximum_cost_usd": 1.0,
   "maximum_provider_calls": 4,
-  "provider_calls_consumed": 0,
+  "provider_calls_consumed": 1,
   "provider_calls_reserved": 1,
   "reserved_cost_usd": 0.25,
   "schema_version": "emr4.model_required_bureau_a3_b3.cost_ledger.v1",
-  "status": "open",
+  "status": "consumed",
   "tranche_id": "model-required-bureau-a3-b3-occupied-001"
 }
