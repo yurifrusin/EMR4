@@ -761,3 +761,22 @@ def test_provider_free_cost_reservation_consumes_no_call_or_budget() -> None:
     )
     assert observed == ledger
     assert observed is not ledger
+
+
+@pytest.mark.parametrize(
+    "lane", (contracts.LANE_RAYLEEN, contracts.LANE_DAVIDA)
+)
+def test_provider_free_and_occupied_attempt_artifacts_are_disjoint(
+    lane: str,
+) -> None:
+    dry = live._attempt_paths(lane, 1, mode="dry-run")
+    occupied = live._attempt_paths(lane, 1, mode="live")
+
+    assert set(dry) == {"ledger", "audit", "evidence", "preflight"}
+    assert set(occupied) == set(dry)
+    assert dry["ledger"] != occupied["ledger"]
+    assert dry["audit"] != occupied["audit"]
+    assert dry["evidence"] != occupied["evidence"]
+    assert dry["preflight"] == occupied["preflight"]
+    assert "occupied" not in dry["ledger"].name
+    assert "occupied" in occupied["ledger"].name

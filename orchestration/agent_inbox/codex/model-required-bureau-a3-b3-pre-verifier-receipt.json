@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:bc5df9a9c4f15adb517e176880dde00321d3ae20208ab44fadeb5fab24ebcc7f",
+  "source_evidence": {
+    "active_plan_and_acceptance": "docs/emr4-model-required-bureau-a3-b3-occupied-rehearsal-plan.md, the exact contract/authority/schemas, and docs/security/emr4-model-required-bureau-a3-b3-threat-model-delta.md bind two authored-synthetic selector-only lanes, broker-owned authority, exact request hashes, one-use ledgers, four-call/USD-1 ceilings, deterministic proofreading and task-scoped cleanup. Provider-free evidence and the 231-test regression run pass at candidate 09218f638d31d7b8241c6e4c3bea54d25b0f2b76.",
+    "current_authority_allocation": "Yuri authorised the exact Google Vertex AI gemini-2.5-flash candidate-runtime envelope in bernie-emr4-dev through existing keyless impersonated ADC and australia-southeast1. Sol retains execution admission and acceptance. The present dispatch is instead the independent Gemini 3.6 Flash/high Antigravity source reviewer in a clean read-only worktree; it has no candidate-runtime, implementation, acceptance, integration or protected-ref authority.",
+    "git_refs_and_worktree": "Candidate HEAD is 09218f638d31d7b8241c6e4c3bea54d25b0f2b76. The dedicated clean verifier worktree is C:/Users/sarashera/EMR4-worktrees/model-required-bureau-a3-b3-gemini-review on codex/review-model-required-bureau-a3-b3 at that exact HEAD; deterministic verifier preflight passed. Main task branch is ahead only by the candidate commit plus untracked review-control artifacts and the five preserved paths. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was read completely. The current baton records C3/D3 accepted and the standing-authority successor sequence; this A3/B3 exact-boundary descendant has passed its provider-free deterministic gate and now requires the recorded fresh Gemini 3.6 Flash/high source-only veto before any occupied call.",
+    "protected_evidence_boundaries": "Only committed repository source and authored-synthetic fixtures enter the source review. Patient, clinical, historical, product-derived, participant, protected and production data; credentials; candidate-runtime calls; product/database reads or writes; commands; actuators; cloud/IAM mutation; deployment; release; Pages and protected refs remain closed. docs/branding/ and the four preserved Consultant/Gate-minus-one pre-push files remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

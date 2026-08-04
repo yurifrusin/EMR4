@@ -143,6 +143,30 @@ def _names(lane: str, attempt_number: int) -> dict[str, str]:
     }
 
 
+def _attempt_paths(
+    lane: str,
+    attempt_number: int,
+    *,
+    mode: str,
+) -> dict[str, Path]:
+    lane_stem = lane.replace("_", "-")
+    attempt_stem = f"{lane_stem}-attempt-{attempt_number}"
+    execution_stem = (
+        attempt_stem if mode == "dry-run" else attempt_stem + "-occupied"
+    )
+    return {
+        "ledger": ARTIFACT_ROOT / f"{execution_stem}-ledger.json",
+        "audit": ARTIFACT_ROOT / f"{execution_stem}-audit.jsonl",
+        "evidence": ARTIFACT_ROOT
+        / (
+            f"{attempt_stem}-dry-run-evidence.json"
+            if mode == "dry-run"
+            else f"{execution_stem}-evidence.json"
+        ),
+        "preflight": ARTIFACT_ROOT / f"{attempt_stem}-preflight.json",
+    }
+
+
 def _request_packet(
     lane: str,
     context: dict[str, Any],
@@ -452,11 +476,10 @@ def _run_attempt(
         docker.run(["pull", BASE_IMAGE], timeout=300)
         if not docker.exists("image", BASE_IMAGE):
             raise LiveError("pinned_base_image_unavailable")
-    lane_stem = lane.replace("_", "-")
-    attempt_stem = f"{lane_stem}-attempt-{attempt_number}"
-    ledger_path = ARTIFACT_ROOT / f"{attempt_stem}-ledger.json"
-    audit_path = ARTIFACT_ROOT / f"{attempt_stem}-audit.jsonl"
-    evidence_path = ARTIFACT_ROOT / f"{attempt_stem}-{mode}-evidence.json"
+    paths = _attempt_paths(lane, attempt_number, mode=mode)
+    ledger_path = paths["ledger"]
+    audit_path = paths["audit"]
+    evidence_path = paths["evidence"]
     if any(path.exists() for path in (ledger_path, audit_path, evidence_path)):
         raise LiveError("attempt_output_already_exists")
     temporary_root = Path(tempfile.mkdtemp(prefix="emr4-a3-b3-"))
@@ -600,7 +623,7 @@ def _run_attempt(
         "provider_contacted": mode == "live",
         "provider_call_count": 1 if mode == "live" else 0,
         "request_binding": {key: packet[key] for key in ("policy_id", "context_hash", "provider_request_hash")},
-        "preflight_hash": _file_hash(ARTIFACT_ROOT / f"{attempt_stem}-preflight.json") if preflight is not None else None,
+        "preflight_hash": _file_hash(paths["preflight"]) if preflight is not None else None,
         "proofreader_verdict": verdict,
         "proofreader_reason_code": proofreader.get("reason_code") if isinstance(proofreader, dict) else None,
         "correction_eligible": proofreader.get("correction_eligible") if isinstance(proofreader, dict) else False,
@@ -664,10 +687,13 @@ def run_tranche(
                     break
                 ledger = _reserve_cost(ledger, lane, mode=mode)
                 _write_json(cost_ledger_path, ledger)
-                lane_stem = lane.replace("_", "-")
                 preflight = None
                 if mode == "live":
-                    preflight = _run_preflight(ARTIFACT_ROOT / f"{lane_stem}-attempt-{attempt_number}-preflight.json")
+                    preflight = _run_preflight(
+                        _attempt_paths(
+                            lane, attempt_number, mode=mode
+                        )["preflight"]
+                    )
                 attempt = _run_attempt(
                     lane=lane, mode=mode, attempt_number=attempt_number,
                     correction_of=correction_of,
