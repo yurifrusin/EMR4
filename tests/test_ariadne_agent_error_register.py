@@ -30,16 +30,16 @@ def _schema() -> dict:
     return _json(SCHEMA_PATH)
 
 
-def test_committed_register_is_semantically_valid_with_pending_aer_0017() -> None:
+def test_committed_register_is_semantically_valid_with_contained_review_7() -> None:
     register = _register()
 
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 9
+    assert register["register_revision"] == 10
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 18)
+        f"AER-{index:04d}" for index in range(1, 19)
     ]
     assert [
         row["incident_id"]
@@ -53,7 +53,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 13
+    assert len(agent_incidents) == 14
     assert len(transport_incidents) == 1
     assert transport_incidents[0]["incident_id"] == "AER-0007"
     assert transport_incidents[0]["category"] == "transport_timeout"
@@ -101,10 +101,10 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_both_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 17
+    assert report["incident_count"] == 18
     assert report["open_incident_ids"] == ["AER-0017"]
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 13,
+        "agent_behavior": 14,
         "harness": 3,
         "transport": 1,
     }
@@ -112,14 +112,14 @@ def test_pattern_report_detects_both_recurring_control_signals() -> None:
         "command_scope_violation": 2,
         "evidence_misreport": 2,
         "harness_failure": 3,
-        "output_contract_violation": 7,
+        "output_contract_violation": 8,
         "read_only_violation": 1,
         "reasoning_claim_error": 1,
         "transport_timeout": 1,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 1,
-        "canonical_unchanged": 14,
+        "canonical_unchanged": 15,
         "untrusted_partial_worktree": 2,
     }
     assert report["recurring_patterns"] == [
@@ -138,14 +138,15 @@ def test_pattern_report_detects_both_recurring_control_signals() -> None:
         },
         {
             "recurrence_signature": "verifier.multiple_terminal_decisions",
-            "incident_count": 2,
-            "incident_ids": ["AER-0004", "AER-0006"],
+            "incident_count": 3,
+            "incident_ids": ["AER-0004", "AER-0006", "AER-0018"],
             "origins": ["agent_behavior"],
             "categories": ["output_contract_violation"],
             "roles": ["verifier"],
             "resource_ids": ["antigravity-gemini-flash-3-6-high-verifier"],
             "prevention_controls": [
                 "The verifier wrapper admits exactly one terminal decision and rejects zero or duplicate terminal envelopes before acceptance.",
+                "The verifier wrapper must continue exact-single-decision admission; duplicate output never becomes a verdict, and bounded recovery uses a fresh project/worktree without changing candidate scope.",
                 "The wrapper regex counts terminal decisions and rejects any count other than one; tests cover missing and duplicate decisions."
             ],
         }
@@ -349,6 +350,34 @@ def test_a3_b3_terminal_broker_failure_has_evidence_only_recovery() -> None:
     assert interruption["cause_beyond_structural_failure_established"] is False
 
 
+def test_a3_b3_review_7_duplicate_decision_is_contained() -> None:
+    incident = {
+        row["incident_id"]: row for row in _register()["incidents"]
+    }["AER-0018"]
+    failure = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "model-required-bureau-a3-b3-review-7-transport-failure.json"
+    )
+
+    assert incident["origin"] == "agent_behavior"
+    assert incident["category"] == "output_contract_violation"
+    assert incident["recurrence_signature"] == (
+        "verifier.multiple_terminal_decisions"
+    )
+    assert incident["candidate_state"] == "canonical_unchanged"
+    assert incident["status"] == "contained"
+    assert incident["correction"]["status"] == "contained_then_escalated"
+    assert failure["observed_terminal_decision_count"] == 2
+    assert failure["candidate_finding_established"] is False
+    assert failure["candidate_runtime_provider_calls"] == 0
+    assert failure["worktree_clean_after"] is True
+    assert failure["worktree_head_after"] == failure["candidate_head"]
+    assert failure["raw_verifier_output_retained"] is False
+
+
 def test_pattern_report_is_byte_deterministic(tmp_path: Path) -> None:
     first = build_pattern_report()
     second = build_pattern_report()
@@ -502,8 +531,9 @@ def test_same_signature_across_different_dimensions_does_not_merge(
     assert duplicate_decisions["incident_ids"] == [
         "AER-0004",
         "AER-0006",
+        "AER-0018",
     ]
-    assert duplicate_decisions["incident_count"] == 2
+    assert duplicate_decisions["incident_count"] == 3
 
 
 def test_v1_rejects_unproved_causal_claim_level() -> None:

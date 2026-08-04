@@ -1,32 +1,32 @@
 {
-  "canonical_register_sha256": "71b34375628dff903b62e37cf2026dcf0c21cd225e0eafc976a33e34b912297b",
+  "canonical_register_sha256": "86049afca5157ef9a381d1ccf1d22194538df832cad30581700980bbe45f7c2a",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 1,
-      "canonical_unchanged": 14,
+      "canonical_unchanged": 15,
       "untrusted_partial_worktree": 2
     },
     "by_category": {
       "command_scope_violation": 2,
       "evidence_misreport": 2,
       "harness_failure": 3,
-      "output_contract_violation": 7,
+      "output_contract_violation": 8,
       "read_only_violation": 1,
       "reasoning_claim_error": 1,
       "transport_timeout": 1
     },
     "by_origin": {
-      "agent_behavior": 13,
+      "agent_behavior": 14,
       "harness": 3,
       "transport": 1
     },
     "by_process_severity": {
       "low": 5,
       "material": 4,
-      "moderate": 8
+      "moderate": 9
     },
     "by_resource_and_role": {
-      "antigravity-gemini-flash-3-6-high-verifier::verifier": 7,
+      "antigravity-gemini-flash-3-6-high-verifier::verifier": 8,
       "codex-native-independent-reviewer::verifier": 1,
       "codex-native-parallel-worker::implementer": 1,
       "codex-primary-orchestrator::orchestrator": 4,
@@ -37,11 +37,11 @@
     "by_role": {
       "implementer": 2,
       "orchestrator": 7,
-      "verifier": 8
+      "verifier": 9
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 17,
+  "incident_count": 18,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [
     "AER-0017"
@@ -75,16 +75,18 @@
       "categories": [
         "output_contract_violation"
       ],
-      "incident_count": 2,
+      "incident_count": 3,
       "incident_ids": [
         "AER-0004",
-        "AER-0006"
+        "AER-0006",
+        "AER-0018"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
         "The verifier wrapper admits exactly one terminal decision and rejects zero or duplicate terminal envelopes before acceptance.",
+        "The verifier wrapper must continue exact-single-decision admission; duplicate output never becomes a verdict, and bounded recovery uses a fresh project/worktree without changing candidate scope.",
         "The wrapper regex counts terminal decisions and rejects any count other than one; tests cover missing and duplicate decisions."
       ],
       "recurrence_signature": "verifier.multiple_terminal_decisions",
@@ -96,7 +98,7 @@
       ]
     }
   ],
-  "register_revision": 9,
+  "register_revision": 10,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-04"
 }

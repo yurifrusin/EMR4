@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:bc5df9a9c4f15adb517e176880dde00321d3ae20208ab44fadeb5fab24ebcc7f",
+  "source_evidence": {
+    "active_plan_and_acceptance": "AER revision 10 preserves Review 7's exact duplicate-decision cardinality and unchanged candidate state. Provider-free acceptance, focused recovery tests, the full inherited serial suite, Ruff and diff checks pass; AER-0017 remains open pending an admissible fresh veto.",
+    "current_authority_allocation": "GPT Sol owns containment, acceptance and task-branch publication. Standing authority permits registration of AER-0018 and a fresh read-only verifier recovery. No provider call, Rayleen correction, Davida start, request change, protected integration, deployment or release is authorised.",
+    "git_refs_and_worktree": "HEAD remains e22c7991495e8c1301c803d919ad6711d1b3afc7; Review 7 worktree remains clean at that exact HEAD. Local/origin protected master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty before explicit-path staging; only named AER-0018 containment, packet/preflight/receipt, policy/test and this receipt pair are task changes.",
+    "live_handover_current_baton": "AGENTS.md records the reconciled one-call A3 terminal result and Review 7's contained duplicate-decision envelope. No verdict or candidate finding was admitted; fresh exact-HEAD recovery veto is next.",
+    "protected_evidence_boundaries": "Only committed source, sanitized A3/B3 evidence and the sanitized Review 7 failure record are in scope. Raw verifier output, credentials, patient/clinical/protected/product-derived/production data, candidate-runtime provider calls, product/database access, commands, writes, actuators, Docker, cloud/IAM, deployment, release, Pages and protected refs remain closed. User-owned untracked files remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

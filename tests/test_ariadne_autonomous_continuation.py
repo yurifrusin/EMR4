@@ -98,5 +98,9 @@ def test_live_handover_and_active_plan_record_the_standing_policy() -> None:
         assert "generic future" in text.lower()
 
     assert "without another permission request" in agents
-    assert "Run the fresh exact-HEAD Gemini 3.6 Flash/high veto" in plan
-    assert "material Yuri decision" in " ".join(plan.split())
+    normalized_plan = " ".join(plan.split())
+    assert (
+        "Run the bounded fresh-project/fresh-worktree exact-HEAD Gemini 3.6 "
+        "Flash/high recovery veto"
+    ) in normalized_plan
+    assert "material Yuri decision" in normalized_plan

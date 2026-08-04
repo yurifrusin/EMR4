@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 9,
+  "register_revision": 10,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-04",
@@ -661,6 +661,44 @@
         ]
       },
       "status": "open"
+    },
+    {
+      "incident_id": "AER-0018",
+      "attempt_id": "model-required-bureau-a3-b3-review-007",
+      "observed_on": "2026-08-04",
+      "tranche": "model-required-bureau-a3-b3",
+      "origin": "agent_behavior",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Return exactly one terminal decision line with either pass or revision_required so the deterministic wrapper can admit one unambiguous veto result.",
+      "observed_error": "Review 7 emitted two terminal decision markers; the wrapper rejected the entire response and wrote no worker receipt while the exact candidate remained clean and unchanged.",
+      "detection_method": "The Antigravity wrapper counted exact terminal markers, observed cardinality two, failed closed and postflight verification confirmed the bound worktree stayed clean at the exact candidate HEAD.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/model-required-bureau-a3-b3-review-7-transport-failure.json",
+        "orchestration/agent_inbox/codex/model-required-bureau-a3-b3-gemini-review-packet-7.md",
+        "orchestration/agent_inbox/codex/model-required-bureau-a3-b3-verifier-worktree-preflight-7.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "verifier.multiple_terminal_decisions",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "The fail-closed wrapper admitted no decision and preserved the unchanged candidate. Any later independent veto must use a fresh project and fresh exact clean non-protected worktree with a shorter non-echo terminal contract.",
+        "prevention_control": "The verifier wrapper must continue exact-single-decision admission; duplicate output never becomes a verdict, and bounded recovery uses a fresh project/worktree without changing candidate scope.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-10.md",
+          "orchestration/agent_inbox/codex/model-required-bureau-a3-b3-review-7-transport-failure.json"
+        ]
+      },
+      "status": "contained"
     }
   ]
 }

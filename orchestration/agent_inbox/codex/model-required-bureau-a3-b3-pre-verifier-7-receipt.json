@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:bc5df9a9c4f15adb517e176880dde00321d3ae20208ab44fadeb5fab24ebcc7f",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The occupied plan, threat delta, controlled-recovery plan, terminal checkpoint, API Spine boundaries and Review 7 packet are active. Final provider-free acceptance, focused tests, full inherited serial tests, Ruff and diff checks pass. AER-0017 remains open pending this veto.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high receives independent read-only veto authority over exact candidate HEAD e22c7991495e8c1301c803d919ad6711d1b3afc7. It receives no implementation, acceptance, integration, provider, credential, product, runtime, deployment, release or protected-ref authority.",
+    "git_refs_and_worktree": "Fresh worktree C:/Users/sarashera/EMR4-worktrees/model-required-bureau-a3-b3-gemini-review-7 is clean on codex/review-model-required-bureau-a3-b3-7 at exact HEAD e22c7991495e8c1301c803d919ad6711d1b3afc7; executable preflight passed. Local/origin protected master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Main-worktree user-owned untracked files remain excluded.",
+    "live_handover_current_baton": "AGENTS.md records the exact one-call Rayleen terminal rejection, provider-free reconciled evidence and fresh exact-HEAD Gemini 3.6 Flash/high veto as the current next action.",
+    "protected_evidence_boundaries": "Review is limited to committed source plus authored-synthetic or sanitized evidence. No credentials, provider/cloud controls, patient/clinical/protected/product-derived/production data, product/database access, runtime, Docker, commands, writes, actuators, deployment, release, Pages or protected refs are permitted."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

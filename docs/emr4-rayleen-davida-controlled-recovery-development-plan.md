@@ -178,8 +178,12 @@ to one reserved and one consumed call at USD 0.25, emitted exact no-release
 attempt/tranche evidence, proved current exact runtime absence and stopped
 before Rayleen correction or Davida. It made zero provider calls, and the
 deterministic acceptance suite passes with one historical candidate-runtime
-call and zero acceptance-runtime calls. Fresh exact-HEAD independent source
-review remains pending. The current authority does not permit repeating
+call and zero acceptance-runtime calls. Review 7's exact-HEAD worktree remained
+clean and unchanged, but its Gemini transport emitted two terminal decision
+markers. The wrapper rejected the whole response; AER-0018 contains the
+failure and no verdict or candidate finding was admitted. Fresh exact-HEAD
+independent source review remains pending through the bounded fresh-project/
+fresh-worktree recovery. The current authority does not permit repeating
 Rayleen primary, treating the failure as `schema_invalid`, opening correction
 turn 2, starting Davida or changing the request contract. Any further call or
 request change is a new material fork.
@@ -445,9 +449,10 @@ architecture decision.
 
 ## Current next action
 
-Run the fresh exact-HEAD Gemini 3.6 Flash/high veto over the committed
-provider-free AER-0017 correction, reconciled terminal evidence and passing
-deterministic acceptance. On pass, record Sol acceptance, publish only the
+Run the bounded fresh-project/fresh-worktree exact-HEAD Gemini 3.6 Flash/high
+recovery veto over the committed provider-free AER-0017 correction, reconciled
+terminal evidence and passing deterministic acceptance, using a shorter
+non-echo terminal contract. On pass, record Sol acceptance, publish only the
 explicit task paths and close at the material fork. Do not rerun prior
 provider-free lanes, repeat Rayleen, open its correction turn or start Davida.
 Any later request-contract or provider-call descendant remains a material Yuri

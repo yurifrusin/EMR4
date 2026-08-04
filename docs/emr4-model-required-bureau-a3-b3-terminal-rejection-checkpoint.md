@@ -3,8 +3,8 @@
 Date: 2026-08-04
 
 Status: evidence-only terminal reconciliation and deterministic acceptance
-pass; fresh exact-HEAD independent veto pending; no further provider-call
-authority
+pass; Review 7 duplicate-decision envelope contained; fresh exact-HEAD
+independent veto pending; no further provider-call authority
 
 ## Exact occupied result
 
@@ -44,6 +44,13 @@ before Rayleen correction or Davida. The finalizer itself made zero provider
 calls. Deterministic acceptance now passes with one historical candidate-
 runtime call and zero acceptance-runtime calls. A fresh exact-HEAD Gemini 3.6
 Flash/high veto remains mandatory before Sol acceptance.
+
+Review 7 ran in a fresh clean exact-HEAD worktree but emitted two terminal
+decision markers. The deterministic wrapper rejected the whole response, wrote
+no worker receipt and admitted no verdict or candidate finding. AER-0018
+preserves the sanitized transport failure; the candidate remained clean and
+unchanged. The bounded recovery is another fresh project and fresh exact clean
+worktree with a shorter non-echo terminal contract.
 
 ## Closed next fork
 

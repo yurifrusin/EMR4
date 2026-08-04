@@ -1,0 +1,98 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records the exact one-call Rayleen terminal rejection, provider-free reconciled evidence and fresh exact-HEAD Gemini 3.6 Flash/high veto as the current next action.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high receives independent read-only veto authority over exact candidate HEAD e22c7991495e8c1301c803d919ad6711d1b3afc7. It receives no implementation, acceptance, integration, provider, credential, product, runtime, deployment, release or protected-ref authority.",
+    "active_plan_and_acceptance": "The occupied plan, threat delta, controlled-recovery plan, terminal checkpoint, API Spine boundaries and Review 7 packet are active. Final provider-free acceptance, focused tests, full inherited serial tests, Ruff and diff checks pass. AER-0017 remains open pending this veto.",
+    "protected_evidence_boundaries": "Review is limited to committed source plus authored-synthetic or sanitized evidence. No credentials, provider/cloud controls, patient/clinical/protected/product-derived/production data, product/database access, runtime, Docker, commands, writes, actuators, deployment, release, Pages or protected refs are permitted.",
+    "git_refs_and_worktree": "Fresh worktree C:/Users/sarashera/EMR4-worktrees/model-required-bureau-a3-b3-gemini-review-7 is clean on codex/review-model-required-bureau-a3-b3-7 at exact HEAD e22c7991495e8c1301c803d919ad6711d1b3afc7; executable preflight passed. Local/origin protected master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Main-worktree user-owned untracked files remain excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_required_bureau_a3_b3_pre_verifier_7_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol prepared the exact source/evidence-only Review 7 packet and retained acceptance authority."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Fresh Gemini 3.6 Flash/high Review 7 dispatch is selected for the clean exact-HEAD worktree."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is active for the verifier gate."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Leverage-gated lane is not selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Native read-only review lanes are complete and no subagent has acceptance authority."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "receipt_id": "model-required-bureau-a3-b3-verifier-worktree-preflight-7",
+      "path": "orchestration/agent_inbox/codex/model-required-bureau-a3-b3-verifier-worktree-preflight-7.json",
+      "status": "passed"
+    }
+  ],
+  "assigned_agent_ids": []
+}
