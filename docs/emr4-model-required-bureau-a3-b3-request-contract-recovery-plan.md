@@ -2,8 +2,8 @@
 
 Date: 2026-08-04
 
-Status: authorised bounded recovery descendant; no product, patient-data,
-write, deployment, release or protected-ref authority
+Status: accepted bounded recovery descendant; no product, patient-data, write,
+deployment, release or protected-ref authority
 
 Source HEAD: `9782c14740ad52cc8ddea6c9fd372b5aaabbcab2`
 
@@ -137,14 +137,25 @@ success.
    this source-review transport is distinct from candidate-runtime evidence.
 6. Run the existing read-only identity/project/model/region/cache/audit
    preflight and then the new Rayleen primary.
-7. Start Davida only after Rayleen admission. Apply the same thinking-off
-   request contract and deterministic proofreader boundary.
+7. Start Davida only after Rayleen admission. Apply the same positive bounded-
+   reasoning request contract and deterministic proofreader boundary.
 8. Stop only at both-lane admission, bounded-option exhaustion or a genuine
    out-of-scope/user-only fork. Record and publish every attempt truthfully.
 
 The target result is
 `model_required_bureau_a3_b3_request_contract_recovery_pass`. A partial or
 terminal result cannot be promoted.
+
+## Accepted result
+
+The target result passed from exact exercised source HEAD
+`a70d06fd047733bac9a72921d0fd2f81e1b946db`. Rayleen and Davida each consumed
+one single-use call and released one deterministic-proofreader-admitted
+authored-synthetic advisory, in that order, with no correction or retry. The
+parent ledger consumed two calls and USD 0.50 reservation. Provider-reported
+thinking tokens were non-zero in both lanes; no raw provider or thought content
+was retained. Full evidence and claim limits are in
+`docs/emr4-model-required-bureau-a3-b3-request-contract-recovery-closeout.md`.
 
 ## Closed surfaces
 

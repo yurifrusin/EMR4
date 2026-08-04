@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after AER-0020 registration. The active A3/B3 recovery remains provider-free passed with no occupied recovery call; its new candidate HEAD a70d06fd includes the preserved rejected review, revision-13 register and asynchronous-finalization control. The immutable parent remains a no-release one-call Rayleen terminal rejection.",
+    "current_authority_allocation": "Sol owns architecture/acceptance. A fresh Gemini 3.6 Flash/high project receives read-only source veto authority only. Standing recovery authority continues through source correction and occupancy without a routine pause. The occupied boundary remains exact Vertex gemini-2.5-flash, Bernie project/identity, Sydney region, authored-synthetic, no fallback, four calls/USD 1 and positive bounded reasoning.",
+    "active_plan_and_acceptance": "The recovery plan, threat delta, diagnosis, provider-free evidence and deterministic tests remain accepted candidate inputs. AER-0020 records that Review 1's two-marker envelope admitted no verdict. Revision 13 adds only the control requiring all asynchronous notifications before one final response. The corrected review must cover the exact recovery plus incident-register delta at a70d06fd.",
+    "protected_evidence_boundaries": "The verifier receives committed source and authored-synthetic/provider-free evidence only. Patient/clinical/product/protected data, credentials, A3/B3 provider calls, product/database access, commands/writes, cloud/IAM, deployment, release, Pages and protected refs remain closed. Preserved branding/prepush files are absent from the fresh review worktree.",
+    "git_refs_and_worktree": "Fresh worktree C:/Users/sarashera/EMR4-worktrees/model-required-bureau-a3-b3-recovery-review-2 is clean on codex/review-model-required-bureau-a3-b3-recovery-2 at exact a70d06fd047733bac9a72921d0fd2f81e1b946db. Local/origin master and handoff/current remain protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "a3_b3_recovery_pre_verifier_2_five_source_rehydration", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol committed AER-0020 preservation/control and created the fresh exact-HEAD clean review worktree."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini 3.6 Flash/high is reachable; prior envelope was rejected and a new project is required with the corrected terminal protocol."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["DeepSeek transport is not selected for corrected independent review."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Real-TTY fallback is not selected for corrected independent review."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Leverage-gated Claude is not selected for corrected independent review."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is selected for corrected independent review."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

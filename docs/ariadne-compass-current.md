@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 211 / Compass 192. Provider-free C3/D3 pass and complete the dependency-satisfied provider-free Bureau sequence. The next lane is a genuine material choice; paired A3/B3 is recommended but no provider or effect boundary is open.
+> EMR4 is at Continuity 212 / Compass 193. The positive-bounded-reasoning A3/B3 recovery passes with one proofreader-admitted occupied authored-synthetic advisory per lane. The current planned block is complete; the next implementation lane requires a separately frozen material boundary.
 
 ## North star
 
@@ -196,25 +196,27 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    A1/A2, B1/B2, C1/C2 and D1/D2 pass; C3/D3 are active. Lineage parent: `model-required-bureau-gate-zero`.
 90. **Provider-free recovery/update authority foundation — Provider-Free Recovery and Update Authority Architecture**
    C3/D3 pass; the next lanes require a selected material boundary. Lineage parent: `model-required-bureau-provider-free-successor-lanes`.
+91. **Occupied provider-model advisory proof for Rayleen and Davida — Occupied Rayleen and Davida Advisory Recovery**
+   A3/B3 pass; no dependency-satisfied non-material successor remains. Lineage parent: `model-required-bureau-c3-d3`.
 
 ## Current position
 
-**Provider-free recovery/update architecture accepted; material fork pending — Provider-Free Recovery and Update Authority Architecture**
+**Occupied Rayleen/Davida advisory rehearsal accepted — Occupied Rayleen and Davida Advisory Recovery**
 
-**Why this proof came next:** C1/C2 and D1/D2 supplied the exact evidence vocabulary and C3/D3 completed the remaining provider-free planned architecture.
+**Why this proof came next:** The previous Rayleen response-shape rejection required a distinct positive-bounded-reasoning request-contract recovery.
 
-Deterministic, Sol and independent review pass with zero candidate-runtime side effects.
+Rayleen and Davida each admitted one authored-synthetic advisory with deterministic proofreading and zero product authority.
 
 ### What this unlocks
 
-- A decision-ready paired A3/B3 authored-synthetic provider rehearsal boundary.
-- Separately decidable C4 actuator-simulator or live product read/write gates.
+- A decision-ready A4 product-read/UI-projection boundary.
+- Separately decidable A5/B4 write, C4 actuator or update/import boundaries.
 
 ### What it does not solve
 
-- Occupied model intelligence or provider admission.
-- Live product/technical reads, reviewer runtime, commands, writes or actuators.
-- Update ingestion/activation, deployment, production, release or protected actions.
+- Product or real-data model runtime.
+- Commands, confirmations, writes, actuators or clinical decisions.
+- Deployment, production, release, Pages or protected actions.
 
 ## Continuity and authority
 
@@ -457,11 +459,12 @@ Prerequisites:
   Required before: Satisfied and consumed on 2026-08-04: Gate zero passes at Continuity 209 / Compass 190.
 - **May EMR4 move without repeat permission pauses through every fully specified dependency-satisfied gate?**
   Required before: Satisfied on 2026-08-04 by Yuri's standing programme authority.
-- **Which material Bureau lane should open next, with the recommended first option being a paired A3/B3 authored-synthetic occupied advisory rehearsal?**
-  Required before: Yuri must select and freeze the exact provider/model/region/identity/data/cost/call boundary, or choose a different material lane.
+- **Which material Bureau boundary, if any, should be frozen next: A4 product read/UI projection, A5/B4 write commands, C4 actuator rehearsal, or a separately scoped update/import lane?**
+  Required before: Yuri must select and freeze the exact data, product/runtime, write/actuator, cost, side-effect and acceptance boundary before execution.
 
 ## Map limits
 
+- A3/B3 prove bounded authored-synthetic occupied advisory formation only; they do not prove product data, commands, writes, actuators, clinical decisions, production suitability or sovereign processing.
 - C3/D3 prove provider-free risk, authority, staged-promotion and rollback contracts only; they do not prove a provider, observer, reviewer, command, actuator, updater, migration or activation runtime.
 - Provider-free language fixtures prove schemas, grounding and policy only; they do not prove model NLU or an intelligent end-to-end path.
 - Gate-zero schemas specify required containment and authority behavior; they do not prove an operating cell, provider or product runtime.
@@ -689,6 +692,8 @@ Prerequisites:
 - `docs/bernie-reception-one-yuri-internal-walkthrough-findings.md`
 - `docs/bernie-reception-one-yuri-internal-walkthrough-plan.md`
 - `docs/bernie-stage1-provider-free-supervised-booking-acceptance-plan.md`
+- `docs/emr4-model-required-bureau-a3-b3-request-contract-recovery-closeout.md`
+- `docs/emr4-model-required-bureau-a3-b3-request-contract-recovery-plan.md`
 - `docs/emr4-model-required-bureau-c3-d3-closeout.md`
 - `docs/emr4-model-required-bureau-c3-d3-provider-free-architecture.md`
 - `docs/emr4-model-required-bureau-gate-minus-one-closeout.md`
@@ -792,6 +797,7 @@ Prerequisites:
 - `docs/security/bernie-reception-one-structured-source-language-threat-model-delta.md`
 - `docs/security/dependabot-alert-17-triage-2026-08-01.md`
 - `docs/security/dependabot-alerts-8-15-triage-2026-08-01.md`
+- `docs/security/emr4-model-required-bureau-a3-b3-request-contract-recovery-threat-model-delta.md`
 - `docs/security/emr4-model-required-bureau-c3-d3-threat-model-delta.md`
 - `docs/security/emr4-model-required-bureau-gate-zero-threat-model-delta.md`
 - `docs/security/emr4-model-required-bureau-provider-free-successor-lanes-threat-model-delta.md`
@@ -831,6 +837,7 @@ Prerequisites:
 - `docs/security/security-finding-register.json`
 - `implementation_plan.md`
 - `orchestration/access_ai_api_design.md`
+- `orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-request-contract-recovery-review-2-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-c3-d3-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-gate-minus-one-review-2-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-gate-zero-review-receipt.json`
@@ -869,6 +876,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/bernie-stage1-tranche-d-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/clinician-one-readonly-document-context-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/clinician-one-word-desktop-selection-check-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/model-required-bureau-a3-b3-request-contract-recovery-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-c3-d3-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-gate-minus-one-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-gate-zero-sol-acceptance.md`
@@ -1040,6 +1048,9 @@ Prerequisites:
 - `orchestration/continuity/clinician-one-word-desktop-selection-check/desktop-selection-evidence.json`
 - `orchestration/continuity/clinician-one-word-desktop-selection-check/final-residue-evidence.json`
 - `orchestration/continuity/clinician-one-word-desktop-selection-check/manifest.xml`
+- `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-acceptance-evidence.json`
+- `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-cost-ledger.json`
+- `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-evidence.json`
 - `orchestration/continuity/model-required-bureau-c3-d3/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-gate-minus-one/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-gate-zero/provider-free-acceptance-evidence.json`
@@ -1369,6 +1380,7 @@ Prerequisites:
 - `tests/test_ariadne_vertex_sydney_gemini_25_rehearsal.py`
 - `tests/test_clinician_one_readonly_document_context.py`
 - `tests/test_clinician_one_word_desktop_selection_check.py`
+- `tests/test_model_required_bureau_a3_b3_request_contract_recovery.py`
 - `tests/test_model_required_bureau_c3_d3.py`
 - `tests/test_model_required_bureau_gate_zero.py`
 - `tests/test_model_required_bureau_successor_lanes.py`
@@ -1401,4 +1413,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 192; continuity graph revision 211._
+_Compass map revision 193; continuity graph revision 212._

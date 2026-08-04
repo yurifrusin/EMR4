@@ -13,16 +13,18 @@ def load(path):
 def test_c3_d3_continuity_and_compass_are_current():
     graph = load("orchestration/continuity/emr4-continuity-graph.json")
     compass = load("orchestration/continuity/emr4-compass.json")
-    assert graph["graph_revision"] == 211
-    assert graph["nodes"][-1]["id"] == NODE_ID
-    assert compass["map_revision"] == 192
-    assert compass["source_graph_revision"] == 211
-    assert compass["current_position"]["node_id"] == NODE_ID
-    assert "genuine material choice" in compass["orientation_statement"]
+    assert graph["graph_revision"] >= 211
+    assert any(node["id"] == NODE_ID for node in graph["nodes"])
+    assert compass["map_revision"] >= 192
+    assert any(item["node_id"] == NODE_ID for item in compass["journey"])
 
 
 def test_c3_d3_node_preserves_every_material_gate():
-    node = load("orchestration/continuity/emr4-continuity-graph.json")["nodes"][-1]
+    node = next(
+        item
+        for item in load("orchestration/continuity/emr4-continuity-graph.json")["nodes"]
+        if item["id"] == NODE_ID
+    )
     unresolved = " ".join(node["unresolved_gates"]).lower()
     for phrase in (
         "provider/model",
@@ -40,15 +42,7 @@ def test_c3_d3_node_preserves_every_material_gate():
         assert phrase in unresolved
 
 
-def test_compass_records_the_real_next_user_decision_without_opening_it():
+def test_compass_preserves_c3_d3_material_boundary_history():
     compass = load("orchestration/continuity/emr4-compass.json")
-    decision = next(
-        item
-        for item in compass["user_owned_decisions"]
-        if item["id"] == "select-model-required-bureau-next-material-gate"
-    )
-    assert "paired A3/B3" in decision["question"]
-    assert "Yuri must select" in decision["required_before"]
-    current = " ".join(compass["current_position"]["does_not_solve"]).lower()
-    assert "provider" in current
-    assert "actuator" in current
+    journey = next(item for item in compass["journey"] if item["node_id"] == NODE_ID)
+    assert "C3/D3 pass" in journey["outcome"]

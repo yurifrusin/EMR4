@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 211,
+  "graph_revision": 212,
   "harvests": [],
   "nodes": [
     {
@@ -12154,9 +12154,86 @@
         "Actual downloads, licence acceptance, imports, migrations, activation, deployment, production and release remain closed.",
         "Pages, protected refs and protected evidence remain closed."
       ]
+    },
+    {
+      "id": "model-required-bureau-a3-b3-request-contract-recovery",
+      "title": "Occupied Rayleen and Davida Advisory Recovery",
+      "kind": "review",
+      "status": "accepted",
+      "created_at": "2026-08-04T14:00:00Z",
+      "updated_at": "2026-08-04T14:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "a70d06fd047733bac9a72921d0fd2f81e1b946db",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "model-required-bureau-c3-d3",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The exact Gemini 2.5 Flash Sydney authored-synthetic call boundary is consumed.",
+          "Rayleen admitted before Davida; each lane used exactly one single-use call.",
+          "Positive bounded reasoning and deterministic proofreading both remained active.",
+          "No product read, command, write, actuator or release authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-a3-b3-request-contract-recovery",
+          "source": "docs/emr4-model-required-bureau-a3-b3-request-contract-recovery-closeout.md",
+          "status": "accepted",
+          "summary": "Accept one proofreader-admitted authored-synthetic occupied advisory result for Rayleen and Davida in strict sequence."
+        }
+      ],
+      "claim_scope": [
+        "Two occupied candidate-runtime calls produced two advisory-only releases.",
+        "Provider-reported thinking tokens were non-zero in both lanes.",
+        "The configured and observed Sydney request path does not prove sovereign processing.",
+        "Zero patient, clinical, product, database, command, write, actuator, deployment or protected-ref effect occurred."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/emr4-model-required-bureau-a3-b3-request-contract-recovery-plan.md",
+          "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
+          "docs/security/emr4-model-required-bureau-a3-b3-request-contract-recovery-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-evidence.json",
+          "orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-cost-ledger.json",
+          "orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-acceptance-evidence.json"
+        ],
+        "closeouts": [
+          "docs/emr4-model-required-bureau-a3-b3-request-contract-recovery-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/model-required-bureau-a3-b3-request-contract-recovery-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-request-contract-recovery-review-2-receipt.json"
+        ],
+        "tests": [
+          "scripts/model_required_bureau_a3_b3_recovery_acceptance.py",
+          "tests/test_model_required_bureau_a3_b3_request_contract_recovery.py"
+        ]
+      },
+      "unresolved_gates": [
+        "A4 live product read and UI projection require a separate exact material boundary.",
+        "A5 and B4 commands and writes require separate exact material boundaries.",
+        "C4 actuator rehearsal and any live recovery action require separate exact authority.",
+        "External update ingestion, licence acceptance, import, migration and activation remain closed.",
+        "Patient, clinical, product-derived and production data remain closed.",
+        "Deployment, production, release, Pages, protected refs and protected evidence remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-04T11:00:00Z"
+  "updated_at": "2026-08-04T14:00:00Z"
 }

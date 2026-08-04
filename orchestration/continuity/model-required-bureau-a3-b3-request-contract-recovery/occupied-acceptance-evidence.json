@@ -1,0 +1,32 @@
+{
+  "schema_version": "emr4.model_required_bureau_a3_b3.recovery_acceptance.v1",
+  "result": "model_required_bureau_a3_b3_request_contract_recovery_acceptance_pass",
+  "passed": true,
+  "checks": {
+    "artifact_manifest_complete": true,
+    "draft_2020_12_schemas_valid": true,
+    "davida_b3_bounded_reasoning_request_change": true,
+    "davida_b3_request_semantics_preserved": true,
+    "rayleen_a3_bounded_reasoning_request_change": true,
+    "rayleen_a3_request_semantics_preserved": true,
+    "diagnosis_is_truthful_and_provider_free": true,
+    "provider_free_tranche_exact": true,
+    "provider_free_cost_zero": true,
+    "rayleen_a3_provider_free_attempt_exact": true,
+    "davida_b3_provider_free_attempt_exact": true,
+    "occupied_source_review_exact": true,
+    "occupied_tranche_exact": true,
+    "occupied_cost_consumed_once_per_lane": true,
+    "rayleen_release_precedes_davida": true,
+    "rayleen_a3_occupied_attempt_exact": true,
+    "rayleen_a3_positive_reasoning_safe_metadata": true,
+    "rayleen_a3_read_only_preflight_exact": true,
+    "rayleen_a3_single_use_ledger_consumed": true,
+    "rayleen_a3_occupied_audit_sequence_exact": true,
+    "davida_b3_occupied_attempt_exact": true,
+    "davida_b3_positive_reasoning_safe_metadata": true,
+    "davida_b3_read_only_preflight_exact": true,
+    "davida_b3_single_use_ledger_consumed": true,
+    "davida_b3_occupied_audit_sequence_exact": true
+  }
+}

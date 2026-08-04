@@ -3,7 +3,7 @@
     "Current protected-integration result",
     "Mode",
     "Baton ref",
-    "Integration worktree",
+    "Active development worktree",
     "Worker worktree root",
     "Required Git relation",
     "Conductor/integrator",
@@ -29,6 +29,8 @@
     "Model-required Bureau architecture and paused development plan",
     "Model-required Bureau Gate -1 acceptance",
     "Model-required Bureau Gate zero acceptance",
+    "Model-required Bureau A3/B3 terminal-reconciliation acceptance",
+    "Model-required Bureau A3/B3 request-contract recovery acceptance",
     "Current result",
     "Next implementation"
   ],

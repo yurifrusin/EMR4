@@ -14,10 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 AGENTS_PATH = ROOT / "AGENTS.md"
 LEDGER_PATH = ROOT / "docs" / "handover-ledgers" / "current-baton-acceptance-index.md"
 MANIFEST_PATH = (
-    ROOT
-    / "docs"
-    / "handover-ledgers"
-    / "current-baton-acceptance-index.manifest.json"
+    ROOT / "docs" / "handover-ledgers" / "current-baton-acceptance-index.manifest.json"
 )
 
 TABLE_HEADING = "## 3. Current Baton"
@@ -28,7 +25,7 @@ ACTIVE_LABELS = (
     "Current protected-integration result",
     "Mode",
     "Baton ref",
-    "Integration worktree",
+    "Active development worktree",
     "Worker worktree root",
     "Required Git relation",
     "Conductor/integrator",
@@ -54,6 +51,8 @@ ACTIVE_LABELS = (
     "Model-required Bureau architecture and paused development plan",
     "Model-required Bureau Gate -1 acceptance",
     "Model-required Bureau Gate zero acceptance",
+    "Model-required Bureau A3/B3 terminal-reconciliation acceptance",
+    "Model-required Bureau A3/B3 request-contract recovery acceptance",
     "Current result",
     "Next implementation",
 )
@@ -76,16 +75,16 @@ def _row_label(line: str) -> str:
 
 def _table_bounds(lines: list[str]) -> tuple[int, int]:
     try:
-        section = next(i for i, line in enumerate(lines) if line.rstrip() == TABLE_HEADING)
+        section = next(
+            i for i, line in enumerate(lines) if line.rstrip() == TABLE_HEADING
+        )
         header = next(
             i
             for i in range(section + 1, len(lines))
             if lines[i].rstrip() == TABLE_HEADER
         )
         end = next(
-            i
-            for i in range(header + 2, len(lines))
-            if lines[i].rstrip() == TABLE_END
+            i for i in range(header + 2, len(lines)) if lines[i].rstrip() == TABLE_END
         )
     except StopIteration as error:
         raise ValueError("Current Baton table markers are incomplete") from error
@@ -116,7 +115,9 @@ def _canonical_json(payload: dict[str, Any]) -> bytes:
     return (json.dumps(payload, indent=2, sort_keys=True) + "\n").encode("utf-8")
 
 
-def _build_ledger(*, moved_rows: list[str], source_head: str, source_hash: str) -> bytes:
+def _build_ledger(
+    *, moved_rows: list[str], source_head: str, source_hash: str
+) -> bytes:
     intro = [
         "# Current Baton acceptance index\n",
         "\n",
@@ -192,11 +193,14 @@ def write_compaction() -> dict[str, Any]:
         "source_git_head": source_head,
     }
 
-    insertion = next(
-        i
-        for i, row in enumerate(kept_rows)
-        if _row_label(row) == "Antigravity independent-verifier allocation"
-    ) + 1
+    insertion = (
+        next(
+            i
+            for i, row in enumerate(kept_rows)
+            if _row_label(row) == "Antigravity independent-verifier allocation"
+        )
+        + 1
+    )
     kept_rows.insert(insertion, _pointer_row())
     replacement = [lines[header], lines[header + 1], *kept_rows]
     compacted_lines = [*lines[:header], *replacement, *lines[end:]]
@@ -209,13 +213,18 @@ def write_compaction() -> dict[str, Any]:
 
 def check_compaction() -> dict[str, Any]:
     manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
-    if manifest.get("schema_version") != "emr4.current_baton_acceptance_index_manifest.v1":
+    if (
+        manifest.get("schema_version")
+        != "emr4.current_baton_acceptance_index_manifest.v1"
+    ):
         raise ValueError("acceptance-index manifest schema is invalid")
 
     ledger_bytes = LEDGER_PATH.read_bytes()
     if len(ledger_bytes) != manifest.get("ledger_byte_count"):
         raise ValueError("acceptance-index byte count differs from manifest")
-    if len(ledger_bytes.decode("utf-8").splitlines()) != manifest.get("ledger_line_count"):
+    if len(ledger_bytes.decode("utf-8").splitlines()) != manifest.get(
+        "ledger_line_count"
+    ):
         raise ValueError("acceptance-index line count differs from manifest")
     if _sha256(ledger_bytes) != manifest.get("ledger_sha256"):
         raise ValueError("acceptance-index SHA-256 differs from manifest")
@@ -224,7 +233,9 @@ def check_compaction() -> dict[str, Any]:
     ledger_header = next(
         i for i, line in enumerate(ledger_lines) if line.startswith("| Item |")
     )
-    ledger_rows = [line for line in ledger_lines[ledger_header + 2 :] if line.startswith("| ")]
+    ledger_rows = [
+        line for line in ledger_lines[ledger_header + 2 :] if line.startswith("| ")
+    ]
     ledger_labels = [_row_label(row) for row in ledger_rows]
     if ledger_labels != manifest.get("moved_labels"):
         raise ValueError("acceptance-index labels differ from manifest")
@@ -262,7 +273,12 @@ def main() -> int:
     args = parser.parse_args()
     try:
         manifest = write_compaction() if args.write else check_compaction()
-    except (OSError, ValueError, subprocess.CalledProcessError, json.JSONDecodeError) as error:
+    except (
+        OSError,
+        ValueError,
+        subprocess.CalledProcessError,
+        json.JSONDecodeError,
+    ) as error:
         print(f"Current Baton acceptance-index compaction failed: {error}")
         return 2
     print(json.dumps(manifest, indent=2, sort_keys=True))

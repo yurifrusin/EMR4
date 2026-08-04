@@ -8,7 +8,9 @@ ROOT = SETTINGS.parents[1]
 
 
 def load_policy() -> dict:
-    return yaml.safe_load((SETTINGS / "autonomous_continuation.yaml").read_text(encoding="utf-8"))
+    return yaml.safe_load(
+        (SETTINGS / "autonomous_continuation.yaml").read_text(encoding="utf-8")
+    )
 
 
 def test_continuation_is_default_without_active_execution_limits() -> None:
@@ -29,16 +31,17 @@ def test_failure_does_not_transfer_allocation_authority() -> None:
 
 def test_user_pause_surface_is_narrow() -> None:
     policy = load_policy()
-    assert "dependency_satisfied_transition_to_next_planned_gate" in policy[
-        "must_not_pause_for"
-    ]
-    assert "fresh_authority_request_for_already_planned_gate" in policy[
-        "must_not_pause_for"
-    ]
+    assert (
+        "dependency_satisfied_transition_to_next_planned_gate"
+        in policy["must_not_pause_for"]
+    )
+    assert (
+        "fresh_authority_request_for_already_planned_gate"
+        in policy["must_not_pause_for"]
+    )
     assert (
         "unplanned_material_product_clinical_privacy_security_regulatory_"
-        "architecture_authority_or_economic_fork"
-        in policy["pause_for_user_only_when"]
+        "architecture_authority_or_economic_fork" in policy["pause_for_user_only_when"]
     )
     assert "ordinary_worker_timeout" in policy["must_not_pause_for"]
     assert "verifier_requested_plan_revision" in policy["must_not_pause_for"]
@@ -48,16 +51,16 @@ def test_user_pause_surface_is_narrow() -> None:
 def test_internal_checkpoint_cannot_end_the_task() -> None:
     policy = load_policy()
     lifecycle = policy["task_lifecycle"]
-    assert lifecycle["terminal_handback_prohibited_when_no_user_decision_required"] is True
+    assert (
+        lifecycle["terminal_handback_prohibited_when_no_user_decision_required"] is True
+    )
     assert lifecycle["continue_tools_in_same_task"] is True
     assert lifecycle["awaiting_worker_or_verifier_is_not_terminal"] is True
     assert lifecycle["committed_internal_plan_is_not_terminal"] is True
     assert lifecycle["next_step_known_is_not_terminal"] is True
     assert lifecycle["single_gate_closeout_is_not_terminal"] is True
     assert (
-        lifecycle[
-            "accepted_gate_with_dependency_satisfied_successor_is_not_terminal"
-        ]
+        lifecycle["accepted_gate_with_dependency_satisfied_successor_is_not_terminal"]
         is True
     )
 
@@ -75,9 +78,10 @@ def test_standing_programme_authority_is_exact_and_not_self_authorizing() -> Non
         == "continue_without_additional_user_message"
     )
     assert "accepted_descendant_plans" in standing["applies_to"]
-    assert "no_explicit_closure_or_user_owned_choice_remains_unresolved" in standing[
-        "gate_is_executable_only_when_all"
-    ]
+    assert (
+        "no_explicit_closure_or_user_owned_choice_remains_unresolved"
+        in standing["gate_is_executable_only_when_all"]
+    )
     assert "immediate_transition_to_next_qualifying_gate" in standing["authorizes"]
     assert "generic_future_candidate" in standing["does_not_self_authorize"]
     assert "protected_evidence_access" in standing["does_not_self_authorize"]
@@ -99,11 +103,11 @@ def test_live_handover_and_active_plan_record_the_standing_policy() -> None:
 
     assert "without another permission request" in agents
     normalized_plan = " ".join(plan.split())
-    assert (
-        "Commit the provider-free passed request-contract recovery candidate, "
-        "obtain its fresh exact-HEAD independent source veto"
-    ) in normalized_plan
-    assert "four-call/USD 1 recovery boundary is exhausted" in normalized_plan
+    assert "A3/B3 request-contract recovery result" in normalized_plan
+    assert "No retry or correction call followed either admission" in normalized_plan
+    assert "No dependency-satisfied planned implementation gate remains" in (
+        normalized_plan
+    )
 
 
 def test_architecture_strengthening_prefers_bounded_model_reasoning() -> None:

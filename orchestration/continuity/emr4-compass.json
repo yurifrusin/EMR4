@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 192,
-  "updated_at": "2026-08-04T11:00:00Z",
-  "source_graph_revision": 211,
-  "orientation_statement": "EMR4 is at Continuity 211 / Compass 192. Provider-free C3/D3 pass and complete the dependency-satisfied provider-free Bureau sequence. The next lane is a genuine material choice; paired A3/B3 is recommended but no provider or effect boundary is open.",
+  "map_revision": 193,
+  "updated_at": "2026-08-04T14:00:00Z",
+  "source_graph_revision": 212,
+  "orientation_statement": "EMR4 is at Continuity 212 / Compass 193. The positive-bounded-reasoning A3/B3 recovery passes with one proofreader-admitted occupied authored-synthetic advisory per lane. The current planned block is complete; the next implementation lane requires a separately frozen material boundary.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -1545,31 +1545,51 @@
         "orchestration/agent_inbox/antigravity/model-required-bureau-c3-d3-review-receipt.json",
         "tests/test_model_required_bureau_c3_d3.py"
       ]
+    },
+    {
+      "node_id": "model-required-bureau-a3-b3-request-contract-recovery",
+      "lineage_parent": "model-required-bureau-c3-d3",
+      "strategic_role": "Occupied provider-model advisory proof for Rayleen and Davida",
+      "outcome": "A3/B3 pass; no dependency-satisfied non-material successor remains.",
+      "evidence": [
+        "docs/emr4-model-required-bureau-a3-b3-request-contract-recovery-plan.md",
+        "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
+        "docs/security/emr4-model-required-bureau-a3-b3-request-contract-recovery-threat-model-delta.md",
+        "orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-evidence.json",
+        "orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-cost-ledger.json",
+        "orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-acceptance-evidence.json",
+        "docs/emr4-model-required-bureau-a3-b3-request-contract-recovery-closeout.md",
+        "orchestration/agent_inbox/codex/model-required-bureau-a3-b3-request-contract-recovery-sol-acceptance.md",
+        "orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-request-contract-recovery-review-2-receipt.json",
+        "tests/test_model_required_bureau_a3_b3_request_contract_recovery.py"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "model-required-bureau-c3-d3",
-    "strategic_role": "Provider-free recovery/update architecture accepted; material fork pending",
-    "why_now": "C1/C2 and D1/D2 supplied the exact evidence vocabulary and C3/D3 completed the remaining provider-free planned architecture.",
-    "outcome": "Deterministic, Sol and independent review pass with zero candidate-runtime side effects.",
+    "node_id": "model-required-bureau-a3-b3-request-contract-recovery",
+    "strategic_role": "Occupied Rayleen/Davida advisory rehearsal accepted",
+    "why_now": "The previous Rayleen response-shape rejection required a distinct positive-bounded-reasoning request-contract recovery.",
+    "outcome": "Rayleen and Davida each admitted one authored-synthetic advisory with deterministic proofreading and zero product authority.",
     "unlocks": [
-      "A decision-ready paired A3/B3 authored-synthetic provider rehearsal boundary.",
-      "Separately decidable C4 actuator-simulator or live product read/write gates."
+      "A decision-ready A4 product-read/UI-projection boundary.",
+      "Separately decidable A5/B4 write, C4 actuator or update/import boundaries."
     ],
     "does_not_solve": [
-      "Occupied model intelligence or provider admission.",
-      "Live product/technical reads, reviewer runtime, commands, writes or actuators.",
-      "Update ingestion/activation, deployment, production, release or protected actions."
+      "Product or real-data model runtime.",
+      "Commands, confirmations, writes, actuators or clinical decisions.",
+      "Deployment, production, release, Pages or protected actions."
     ],
     "evidence": [
+      "docs/emr4-model-required-bureau-a3-b3-request-contract-recovery-plan.md",
       "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
-      "docs/emr4-model-required-bureau-c3-d3-provider-free-architecture.md",
-      "docs/security/emr4-model-required-bureau-c3-d3-threat-model-delta.md",
-      "orchestration/continuity/model-required-bureau-c3-d3/provider-free-acceptance-evidence.json",
-      "docs/emr4-model-required-bureau-c3-d3-closeout.md",
-      "orchestration/agent_inbox/codex/model-required-bureau-c3-d3-sol-acceptance.md",
-      "orchestration/agent_inbox/antigravity/model-required-bureau-c3-d3-review-receipt.json",
-      "tests/test_model_required_bureau_c3_d3.py"
+      "docs/security/emr4-model-required-bureau-a3-b3-request-contract-recovery-threat-model-delta.md",
+      "orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-evidence.json",
+      "orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-cost-ledger.json",
+      "orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-acceptance-evidence.json",
+      "docs/emr4-model-required-bureau-a3-b3-request-contract-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/model-required-bureau-a3-b3-request-contract-recovery-sol-acceptance.md",
+      "orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-request-contract-recovery-review-2-receipt.json",
+      "tests/test_model_required_bureau_a3_b3_request_contract_recovery.py"
     ]
   },
   "decision_horizon": [
@@ -2499,21 +2519,23 @@
       ]
     },
     {
-      "id": "select-model-required-bureau-next-material-gate",
-      "question": "Which material Bureau lane should open next, with the recommended first option being a paired A3/B3 authored-synthetic occupied advisory rehearsal?",
-      "required_before": "Yuri must select and freeze the exact provider/model/region/identity/data/cost/call boundary, or choose a different material lane.",
+      "id": "select-model-required-bureau-post-a3-b3-material-gate",
+      "question": "Which material Bureau boundary, if any, should be frozen next: A4 product read/UI projection, A5/B4 write commands, C4 actuator rehearsal, or a separately scoped update/import lane?",
+      "required_before": "Yuri must select and freeze the exact data, product/runtime, write/actuator, cost, side-effect and acceptance boundary before execution.",
       "evidence": [
+        "docs/emr4-model-required-bureau-a3-b3-request-contract-recovery-plan.md",
         "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
-        "docs/emr4-model-required-bureau-c3-d3-provider-free-architecture.md",
-        "docs/security/emr4-model-required-bureau-c3-d3-threat-model-delta.md",
-        "orchestration/continuity/model-required-bureau-c3-d3/provider-free-acceptance-evidence.json",
-        "docs/emr4-model-required-bureau-c3-d3-closeout.md",
-        "orchestration/agent_inbox/codex/model-required-bureau-c3-d3-sol-acceptance.md",
-        "orchestration/agent_inbox/antigravity/model-required-bureau-c3-d3-review-receipt.json"
+        "docs/security/emr4-model-required-bureau-a3-b3-request-contract-recovery-threat-model-delta.md",
+        "orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-evidence.json",
+        "orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-cost-ledger.json",
+        "orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-acceptance-evidence.json",
+        "docs/emr4-model-required-bureau-a3-b3-request-contract-recovery-closeout.md",
+        "orchestration/agent_inbox/codex/model-required-bureau-a3-b3-request-contract-recovery-sol-acceptance.md"
       ]
     }
   ],
   "map_limits": [
+    "A3/B3 prove bounded authored-synthetic occupied advisory formation only; they do not prove product data, commands, writes, actuators, clinical decisions, production suitability or sovereign processing.",
     "C3/D3 prove provider-free risk, authority, staged-promotion and rollback contracts only; they do not prove a provider, observer, reviewer, command, actuator, updater, migration or activation runtime.",
     "Provider-free language fixtures prove schemas, grounding and policy only; they do not prove model NLU or an intelligent end-to-end path.",
     "Gate-zero schemas specify required containment and authority behavior; they do not prove an operating cell, provider or product runtime.",

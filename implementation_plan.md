@@ -40,6 +40,12 @@ backend authorization, human gates, commands and post-action verification
 remain independently mandatory. Provider-free tests prove components but do
 not, by themselves, prove an intelligent product path end to end.
 
+The first paired Rayleen A3 / Davida B3 occupied authored-synthetic rehearsal
+now passes through the exact Sydney Vertex `gemini-2.5-flash` development lane.
+Both lanes used explicit positive bounded reasoning, deterministic proofreading
+and advisory-only release; this establishes neither product data access nor a
+read, command, write, actuator, production or clinical authority.
+
 ### 1.1 Business & Licensing Model
 
 | Aspect | Decision |

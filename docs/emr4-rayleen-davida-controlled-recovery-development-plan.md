@@ -2,9 +2,9 @@
 
 Date: 2026-08-04
 
-Status: Gate -1, Gate zero and provider-free A1/A2, B1/B2, C1/C2, D1/D2 and
-C3/D3 passed; exact A3/B3 occupied execution terminated in Rayleen A3 after one
-provider-content-invalid call with no candidate release and no Davida start
+Status: Gate -1, Gate zero, provider-free A1/A2, B1/B2, C1/C2, D1/D2 and
+C3/D3 passed; the bounded positive-reasoning A3/B3 request-contract recovery
+also passes with one admitted occupied advisory result per lane
 
 Architecture parent:
 `docs/emr4-model-required-deterministic-authority-bureau-architecture.md`
@@ -206,6 +206,28 @@ the new descendant has distinct accounting and a positive bounded reasoning/
 output envelope, runs Rayleen before Davida and continues only to admitted
 release or bounded-option exhaustion. The historical attempt and ledger remain
 immutable.
+
+## A3/B3 request-contract recovery result
+
+The authorised descendant in
+`docs/emr4-model-required-bureau-a3-b3-request-contract-recovery-plan.md`
+passes as `model_required_bureau_a3_b3_request_contract_recovery_pass`.
+Fresh Gemini 3.6 Flash/high source review passed the unchanged exact candidate.
+The read-only Vertex preflight then passed separately for each lane. Rayleen ran
+first and released one deterministically proofread authored-synthetic advisory;
+only that admission unlocked Davida, which released one deterministically
+proofread authored-synthetic dry-run advisory.
+
+The two single-use provider ledgers and their USD 0.50 parent reservation are
+consumed. No retry or correction call followed either admission. Provider-
+reported safe usage metadata included non-zero thinking tokens for both lanes,
+which confirms that this accepted path retained model reasoning rather than
+using the superseded zero-thinking diagnostic. Raw prompts, provider text,
+thought content, headers, tokens and credentials were not retained.
+
+This is occupied authored-synthetic Access AI rehearsal evidence only. It opens
+no A4 product read, A5/B4 write, C4 actuator, update/import, deployment,
+production, release, Pages or protected-ref authority.
 
 ## Lane A: Rayleen waiting-room intelligence
 
@@ -468,9 +490,8 @@ architecture decision.
 
 ## Current next action
 
-Commit the provider-free passed request-contract recovery candidate, obtain its
-fresh exact-HEAD independent source veto, run the exact read-only Bernie Vertex
-preflight and then execute Rayleen before Davida under the new single-use
-ledgers. Continue without a routine permission pause until both lanes admit or
-the exact four-call/USD 1 recovery boundary is exhausted. Product/runtime/data/
+Close out and task-branch publish the accepted A3/B3 recovery evidence. No
+dependency-satisfied planned implementation gate remains inside the current
+material boundary. A4 product read, A5/B4 writes, C4 actuator rehearsal and
+actual update/import work are separate material choices; product/runtime/data/
 write, deployment, release, Pages and protected refs remain closed.

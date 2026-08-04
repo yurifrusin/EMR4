@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 13,
+  "register_revision": 14,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-04",
@@ -768,15 +768,17 @@
       "recurrence_signature": "verifier.multiple_terminal_decisions",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "control_implemented_pending_acceptance",
-        "action": "The failed envelope and exact clean postcondition are preserved. The corrected packet forbids intermediate terminal markers, requires every pending background notification to be consumed before one final response, and forbids a post-decision follow-up; a fresh project and fresh exact-HEAD worktree must prove the control.",
+        "status": "corrected_fresh_attempt",
+        "action": "The failed envelope and exact clean postcondition remain preserved. The corrected packet forbade intermediate terminal markers, required every pending background notification to be consumed before one final response, and forbade a post-decision follow-up. A fresh project and fresh exact-HEAD worktree then returned one admissible pass and remained unchanged and clean.",
         "prevention_control": "Verifier packets for potentially asynchronous checks must require all background notifications to complete before one final terminal response and forbid any later follow-up; exact-single-decision wrapper admission remains mandatory.",
         "evidence_paths": [
           "docs/ariadne-agent-error-correction-register-revision-13.md",
-          "orchestration/agent_inbox/codex/model-required-bureau-a3-b3-request-contract-recovery-review-1-transport-failure.json"
+          "docs/ariadne-agent-error-correction-register-revision-14.md",
+          "orchestration/agent_inbox/codex/model-required-bureau-a3-b3-request-contract-recovery-review-1-transport-failure.json",
+          "orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-request-contract-recovery-review-2-receipt.json"
         ]
       },
-      "status": "contained"
+      "status": "corrected"
     }
   ]
 }

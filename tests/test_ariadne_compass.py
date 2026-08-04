@@ -51,7 +51,7 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     assert report["programme"]["id"] == "reception-one"
     assert report["programme"]["master_plan_phase"].startswith("Phase 2B")
     assert report["current_position"]["node_id"] == (
-        "model-required-bureau-c3-d3"
+        "model-required-bureau-a3-b3-request-contract-recovery"
     )
     assert report["current_position"]["why_now"]
     assert report["current_position"]["unlocks"]
@@ -85,8 +85,7 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
         for decision in report["user_owned_decisions"]
     )
     assert any(
-        decision["id"]
-        == "authorize-shared-application-auth-postgresql-persistence"
+        decision["id"] == "authorize-shared-application-auth-postgresql-persistence"
         for decision in report["user_owned_decisions"]
     )
     assert any(
@@ -110,14 +109,8 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     assert "ariadne-synaptic-event-router" in support_ids
     assert "ariadne-first-generated-draft-rehearsal" in support_ids
     assert "ariadne-vertex-sydney-bounded-work-cell-rehearsal" in support_ids
-    assert (
-        "ariadne-vertex-sydney-gemini-25-bounded-work-cell-rehearsal"
-        in support_ids
-    )
-    assert (
-        "ariadne-vertex-sydney-gemini-25-adc-restored-continuation"
-        in support_ids
-    )
+    assert "ariadne-vertex-sydney-gemini-25-bounded-work-cell-rehearsal" in support_ids
+    assert "ariadne-vertex-sydney-gemini-25-adc-restored-continuation" in support_ids
     router = next(
         item
         for item in report["programme_support_horizon"]
@@ -157,8 +150,7 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     vertex_25 = next(
         item
         for item in report["programme_support_horizon"]
-        if item["id"]
-        == "ariadne-vertex-sydney-gemini-25-bounded-work-cell-rehearsal"
+        if item["id"] == "ariadne-vertex-sydney-gemini-25-bounded-work-cell-rehearsal"
     )
     assert vertex_25["status"] == "blocked"
     assert vertex_25["boundary_changes"] == [
@@ -171,8 +163,7 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     vertex_25_continuation = next(
         item
         for item in report["programme_support_horizon"]
-        if item["id"]
-        == "ariadne-vertex-sydney-gemini-25-adc-restored-continuation"
+        if item["id"] == "ariadne-vertex-sydney-gemini-25-adc-restored-continuation"
     )
     assert vertex_25_continuation["status"] == "blocked"
     assert vertex_25_continuation["boundary_changes"] == [
@@ -180,20 +171,20 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
         "model-runtime",
         "provider-call",
     ]
-    assert "external cache-control action" in (
-        vertex_25_continuation["strategic_question"]
+    assert (
+        "external cache-control action"
+        in (vertex_25_continuation["strategic_question"])
     )
-    assert "in-memory caching was not verified disabled" in (
-        vertex_25_continuation["why_it_matters"]
+    assert (
+        "in-memory caching was not verified disabled"
+        in (vertex_25_continuation["why_it_matters"])
     )
     continuation_node = find_node(
         load_graph(),
         "ariadne-vertex-sydney-gemini-25-adc-restored-continuation",
     )
     assert continuation_node["relationships"][0] == {
-        "node_id": (
-            "ariadne-vertex-sydney-gemini-25-bounded-work-cell-rehearsal"
-        ),
+        "node_id": ("ariadne-vertex-sydney-gemini-25-bounded-work-cell-rehearsal"),
         "relation": "builds_on",
     }
     vertex_decision = next(
@@ -214,8 +205,7 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     runtime_decision = next(
         decision
         for decision in report["user_owned_decisions"]
-        if decision["id"]
-        == "authorize-reception-one-product-context-proposal-runtime"
+        if decision["id"] == "authorize-reception-one-product-context-proposal-runtime"
     )
     assert runtime_decision["required_before"].startswith("Satisfied on 2026-07-29")
 
@@ -253,10 +243,7 @@ def test_current_position_must_be_terminal_accepted_and_continuity_clean() -> No
     errors = compass.validate_compass(
         not_accepted, graph, repo_root=REPO_ROOT, require_evidence_files=False
     )
-    assert (
-        "current_position_not_accepted:"
-        f"{current_id}:active" in errors
-    )
+    assert f"current_position_not_accepted:{current_id}:active" in errors
 
     current_audit = continuity.audit_graph(
         load_graph(),
@@ -373,16 +360,16 @@ def test_json_and_markdown_reports_are_deterministic_and_read_only() -> None:
     )
 
 
-def test_cli_emits_valid_json_and_plain_language(capsys: pytest.CaptureFixture[str]) -> None:
+def test_cli_emits_valid_json_and_plain_language(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
     assert compass.main(["--repo-root", str(REPO_ROOT), "validate"]) == 0
     validation = json.loads(capsys.readouterr().out)
     assert validation["status"] == "passed"
     assert validation["journey_count"] == len(load_compass()["journey"])
 
     assert (
-        compass.main(
-            ["--repo-root", str(REPO_ROOT), "show", "--format", "markdown"]
-        )
+        compass.main(["--repo-root", str(REPO_ROOT), "show", "--format", "markdown"])
         == 0
     )
     rendered = capsys.readouterr().out

@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "worker_dispatch",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after the 2026-08-04 conversation compaction. The exact current baton is the model-required Bureau A3/B3 request-contract recovery descendant: the immutable parent remains one no-release Rayleen terminal rejection, the positive-bounded-reasoning provider-free descendant passes, corrected Review 2 has returned, and no occupied recovery call has yet occurred.",
+    "current_authority_allocation": "GPT Sol owns architecture, recovery and acceptance; Gemini 3.6 Flash/high owns fresh source-only veto review. Yuri's standing programme authority requires uninterrupted in-scope recovery. Candidate execution remains exact Vertex gemini-2.5-flash through the Bernie project and named service account with existing keyless ADC in australia-southeast1, authored-synthetic only, no fallback, four calls/USD 1 cumulative, Rayleen before Davida, and positive bounded reasoning.",
+    "active_plan_and_acceptance": "The active recovery plan and threat delta freeze a new single-use namespace, thinkingBudget 1024, maxOutputTokens 2048, unchanged prompt/schema/provider boundary, raw-free response-shape telemetry, exact deterministic proofreading, provider-free proof, fresh exact-HEAD Gemini source veto, read-only preflight, and continuation to both-lane admission or bounded-option exhaustion. The controlled-recovery plan and autonomous-continuation policy preserve the same stop and attention conditions.",
+    "protected_evidence_boundaries": "Protected holdouts and historical Diary material remain closed. Patient, clinical, product-derived and production data; raw provider content; product/API/UI/database runtime; commands/writes/actuators; cloud/IAM/credential mutation; deployment, release, Pages and protected refs remain closed. docs/branding/ and the four Consultant/Gate-minus-one pre-push receipt/state files remain preserved and excluded; Git staging is explicit-path only.",
+    "git_refs_and_worktree": "After fresh origin fetch, C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at a70d06fd047733bac9a72921d0fd2f81e1b946db, two commits ahead of origin task branch. Local/origin master and handoff/current are all unchanged at protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree is clean; only preserved exclusions and fresh recovery review evidence are untracked."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "a3_b3_recovery_postcompaction_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol restored the five authoritative sources and verified the exact local/origin refs and worktree."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Fresh Gemini 3.6 Flash/high Review 2 completed through Antigravity; its exact receipt awaits Sol admission."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "DeepSeek transport is not selected for this serial occupied recovery."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Real-TTY fallback is not selected for this serial occupied recovery."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Leverage-gated Claude is not selected for this serial occupied recovery."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No native subagent is selected for the stateful Rayleen-before-Davida occupied sequence."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

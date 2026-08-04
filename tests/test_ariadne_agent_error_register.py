@@ -32,21 +32,19 @@ def _schema() -> dict:
     return _json(SCHEMA_PATH)
 
 
-def test_committed_register_is_semantically_valid_after_recovery_review_1() -> None:
+def test_committed_register_is_semantically_valid_after_recovery_review_2() -> None:
     register = _register()
 
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 13
+    assert register["register_revision"] == 14
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
         f"AER-{index:04d}" for index in range(1, 21)
     ]
     assert [
-        row["incident_id"]
-        for row in register["incidents"]
-        if row["status"] == "open"
+        row["incident_id"] for row in register["incidents"] if row["status"] == "open"
     ] == []
 
 
@@ -137,7 +135,7 @@ def test_pattern_report_detects_both_recurring_control_signals() -> None:
             "resource_ids": ["codex-primary-orchestrator"],
             "prevention_controls": [
                 "Verifier setup must validate a non-empty non-protected codex/review branch and exact candidate HEAD before issuing the pre-verifier receipt or invoking Antigravity.",
-                "scripts/ariadne_verifier_worktree_preflight.py must pass on the exact candidate and codex/review branch before a pre-verifier receipt or Antigravity launch; policy ordering and tests enforce the gate."
+                "scripts/ariadne_verifier_worktree_preflight.py must pass on the exact candidate and codex/review branch before a pre-verifier receipt or Antigravity launch; policy ordering and tests enforce the gate.",
             ],
         },
         {
@@ -152,9 +150,9 @@ def test_pattern_report_detects_both_recurring_control_signals() -> None:
                 "The verifier wrapper admits exactly one terminal decision and rejects zero or duplicate terminal envelopes before acceptance.",
                 "The verifier wrapper must continue exact-single-decision admission; duplicate output never becomes a verdict, and bounded recovery uses a fresh project/worktree without changing candidate scope.",
                 "The wrapper regex counts terminal decisions and rejects any count other than one; tests cover missing and duplicate decisions.",
-                "Verifier packets for potentially asynchronous checks must require all background notifications to complete before one final terminal response and forbid any later follow-up; exact-single-decision wrapper admission remains mandatory."
+                "Verifier packets for potentially asynchronous checks must require all background notifications to complete before one final terminal response and forbid any later follow-up; exact-single-decision wrapper admission remains mandatory.",
             ],
-        }
+        },
     ]
     assert "do not prove model" in report["interpretation_boundary"]
 
@@ -184,9 +182,7 @@ def test_detached_antigravity_preflight_is_orchestrator_not_provider_error() -> 
     assert incident["resource_id"] == "codex-primary-orchestrator"
     assert incident["model"] is None
     assert incident["category"] == "output_contract_violation"
-    assert incident["recurrence_signature"] == (
-        "orchestrator.detached_verifier_branch"
-    )
+    assert incident["recurrence_signature"] == ("orchestrator.detached_verifier_branch")
     assert incident["candidate_state"] == "canonical_unchanged"
     assert incident["correction"]["status"] == "control_added"
     assert incident["status"] == "corrected"
@@ -251,15 +247,14 @@ def test_recurrent_detached_branch_activates_pre_receipt_control() -> None:
     assert preflight["clean"] is True
     assert preflight["branch"].startswith("codex/review-")
     assert policy["execution_order"][0] == "verifier_worktree_preflight"
-    assert policy["deterministic_gate"]["required_results"][
-        "verifier_worktree_preflight"
-    ] == "passed"
+    assert (
+        policy["deterministic_gate"]["required_results"]["verifier_worktree_preflight"]
+        == "passed"
+    )
 
 
 def test_gate_minus_one_review_transport_claim_is_corrected_fresh() -> None:
-    incident = {
-        row["incident_id"]: row for row in _register()["incidents"]
-    }["AER-0015"]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0015"]
     failure = _json(
         ROOT
         / "orchestration"
@@ -288,21 +283,22 @@ def test_gate_minus_one_review_transport_claim_is_corrected_fresh() -> None:
     assert failure["decision_admitted"] is False
     assert failure["candidate_changed"] is False
     assert corrected["decision"] == "pass"
-    assert corrected["head_before"] == corrected["head_after"] == (
-        "2b62f040bcc1c300dca6fb730e0f986d22f3be85"
+    assert (
+        corrected["head_before"]
+        == corrected["head_after"]
+        == ("2b62f040bcc1c300dca6fb730e0f986d22f3be85")
     )
     assert corrected["dirty_after"] is False
-    assert "Candidate Product/Runtime Side Effects (Observed): Exactly 0" in (
-        corrected["result"]
+    assert (
+        "Candidate Product/Runtime Side Effects (Observed): Exactly 0"
+        in (corrected["result"])
     )
     assert "Development Review Transport (Observed): Non-Zero" in corrected["result"]
     assert "invoked `gemini-3.6-flash-high`" in corrected["result"]
 
 
 def test_a3_b3_preflight_reservation_failure_has_hash_bound_resume_control() -> None:
-    incident = {
-        row["incident_id"]: row for row in _register()["incidents"]
-    }["AER-0016"]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0016"]
     blocked = _json(
         ROOT
         / "orchestration"
@@ -325,9 +321,7 @@ def test_a3_b3_preflight_reservation_failure_has_hash_bound_resume_control() -> 
 
 
 def test_a3_b3_terminal_broker_failure_has_evidence_only_recovery() -> None:
-    incident = {
-        row["incident_id"]: row for row in _register()["incidents"]
-    }["AER-0017"]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0017"]
     interruption = _json(
         ROOT
         / "orchestration"
@@ -354,9 +348,7 @@ def test_a3_b3_terminal_broker_failure_has_evidence_only_recovery() -> None:
 
 
 def test_a3_b3_review_7_duplicate_decision_is_contained() -> None:
-    incident = {
-        row["incident_id"]: row for row in _register()["incidents"]
-    }["AER-0018"]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0018"]
     failure = _json(
         ROOT
         / "orchestration"
@@ -367,9 +359,7 @@ def test_a3_b3_review_7_duplicate_decision_is_contained() -> None:
 
     assert incident["origin"] == "agent_behavior"
     assert incident["category"] == "output_contract_violation"
-    assert incident["recurrence_signature"] == (
-        "verifier.multiple_terminal_decisions"
-    )
+    assert incident["recurrence_signature"] == ("verifier.multiple_terminal_decisions")
     assert incident["candidate_state"] == "canonical_unchanged"
     assert incident["status"] == "contained"
     assert incident["correction"]["status"] == "contained_then_escalated"
@@ -379,6 +369,25 @@ def test_a3_b3_review_7_duplicate_decision_is_contained() -> None:
     assert failure["worktree_clean_after"] is True
     assert failure["worktree_head_after"] == failure["candidate_head"]
     assert failure["raw_verifier_output_retained"] is False
+
+
+def test_a3_b3_recovery_review_duplicate_decision_is_corrected() -> None:
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0020"]
+    review = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "antigravity"
+        / "model-required-bureau-a3-b3-request-contract-recovery-review-2-receipt.json"
+    )
+
+    assert incident["status"] == "corrected"
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert review["decision"] == "pass"
+    assert review["result"].count("DECISION: pass") == 1
+    assert "DECISION: revision_required" not in review["result"]
+    assert review["head_before"] == review["head_after"]
+    assert review["dirty_after"] is False
 
 
 def test_a3_b3_hashed_audit_checkout_is_lf_pinned() -> None:
@@ -406,15 +415,14 @@ def test_a3_b3_hashed_audit_checkout_is_lf_pinned() -> None:
 
     assert attribute.stdout.strip().endswith(": eol: lf")
     assert b"\r\n" not in audit_bytes
-    assert "sha256:" + hashlib.sha256(audit_bytes).hexdigest() == (
-        interruption["source_artifact_hashes"]["audit_chain"]
+    assert (
+        "sha256:" + hashlib.sha256(audit_bytes).hexdigest()
+        == (interruption["source_artifact_hashes"]["audit_chain"])
     )
 
 
 def test_a3_b3_review_8_checkout_defect_is_registered() -> None:
-    incident = {
-        row["incident_id"]: row for row in _register()["incidents"]
-    }["AER-0019"]
+    incident = {row["incident_id"]: row for row in _register()["incidents"]}["AER-0019"]
     review = _json(
         ROOT
         / "orchestration"
@@ -455,7 +463,9 @@ def test_register_hash_is_invariant_across_checkout_line_endings(
 ) -> None:
     original = REGISTER_PATH.read_text(encoding="utf-8")
     crlf_path = tmp_path / "register-crlf.json"
-    crlf_path.write_bytes(original.replace("\r\n", "\n").replace("\n", "\r\n").encode("utf-8"))
+    crlf_path.write_bytes(
+        original.replace("\r\n", "\n").replace("\n", "\r\n").encode("utf-8")
+    )
 
     original_report = build_pattern_report()
     crlf_report = build_pattern_report(register_path=crlf_path)

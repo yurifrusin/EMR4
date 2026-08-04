@@ -38,9 +38,10 @@ def test_first_request_uses_bounded_positive_reasoning_and_headroom(
     assert new == expected
     assert new["generationConfig"]["maxOutputTokens"] == 2048
     assert new["generationConfig"]["thinkingConfig"] == {"thinkingBudget": 1024}
-    assert new["generationConfig"]["responseSchema"] == old[
-        "generationConfig"
-    ]["responseSchema"]
+    assert (
+        new["generationConfig"]["responseSchema"]
+        == old["generationConfig"]["responseSchema"]
+    )
     assert new["contents"] == old["contents"]
     assert recovery.prefixed_sha256(new) != recovery.prefixed_sha256(old)
 
@@ -144,6 +145,16 @@ def test_committed_provider_free_recovery_evidence_passes_acceptance() -> None:
     result = acceptance.run_acceptance(require_dry_run=True)
     assert result["passed"] is True
     assert result["result"].endswith("recovery_acceptance_pass")
+
+
+def test_occupied_recovery_evidence_passes_acceptance() -> None:
+    result = acceptance.run_acceptance(
+        require_dry_run=True,
+        require_occupied=True,
+    )
+    assert result["passed"] is True
+    assert result["checks"]["occupied_tranche_exact"] is True
+    assert result["checks"]["rayleen_release_precedes_davida"] is True
 
 
 def test_recovery_audit_namespace_is_lf_stable_in_fresh_windows_worktrees() -> None:
