@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "independent_verifier_review",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:bc5df9a9c4f15adb517e176880dde00321d3ae20208ab44fadeb5fab24ebcc7f",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate fc25d30b contains provider-free A1/A2, B1/B2, C1/C2 and dependency-open D1/D2 closed contracts, fixtures, proof code and evidence. Deterministic/API/Diary/Davida regressions and Sol review pass; exact claim is provider_free_successor_lane_architecture_and_proof.",
+    "current_authority_allocation": "Sol owns architecture and acceptance. Gemini 3.6 Flash/high through one fresh Antigravity project owns source-only read-only veto at exact HEAD, with no implementation, self-acceptance, integration, baton, product/runtime, protected, deployment or release authority and no fallback model.",
+    "git_refs_and_worktree": "Task branch and origin are fc25d30b698944e9c8a792fb0a0a3467cf080c39. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Dedicated worktree C:/Users/sarashera/EMR4-worktrees/bureau-successor-lanes-gemini-review is clean on codex/review-model-required-bureau-successor-lanes at exact fc25d30b, proven by mandatory preflight.",
+    "live_handover_current_baton": "AGENTS.md was read completely and its standing authority plus Gate-zero Current Baton open the exact provider-free successor lanes without repeat permission.",
+    "protected_evidence_boundaries": "Protected holdouts, historical PHI, H15/H-series, docs/branding/, patient/product data, product providers, live reads, runtime, writes, actuators, cloud/IAM, update activation, deployment, production, release, Pages and protected refs/evidence are forbidden. Only bounded source-review transport is allowed."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

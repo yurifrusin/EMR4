@@ -2,8 +2,8 @@
 
 Date: 2026-08-04
 
-Status: Gate -1 and Gate zero passed; provider-free successor architecture/test
-lanes active under standing programme continuation and the exact boundaries below
+Status: Gate -1, Gate zero and provider-free A1/A2, B1/B2, C1/C2 and D1/D2
+passed; provider-free C3/D3 architecture lanes active under standing continuation
 
 Architecture parent:
 `docs/emr4-model-required-deterministic-authority-bureau-architecture.md`
@@ -117,6 +117,17 @@ Flash/high then passed the unchanged clean candidate after 137 tests with zero
 findings. Development review transport was non-zero and source-only; candidate
 product/runtime provider calls and every other candidate-runtime side effect
 were zero.
+
+## Provider-free successor-lane result
+
+A1/A2, B1/B2, C1/C2 and D1/D2 passed on 2026-08-04 as
+`model_required_bureau_provider_free_successor_lanes_pass`. Five closed schemas,
+four canonical examples and 22 authored cases passed deterministic acceptance;
+fresh Gemini 3.6 Flash/high passed the unchanged clean candidate after 261 tests
+with no findings. C1's technical observation/provenance vocabulary is frozen,
+so D1/D2 are consumed and C3/D3 are now the next dependency-satisfied
+provider-free architecture lanes. No product/provider runtime or material
+side-effect boundary opened.
 
 ## Lane A: Rayleen waiting-room intelligence
 

@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "push",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction and now records the accepted provider-free A1/A2, B1/B2, C1/C2 and D1/D2 result at Continuity 210 / Compass 191, with C3/D3 as the next safe implementation and standing continuation requiring progress without another permission request.",
+    "current_authority_allocation": "Yuri's active standing programme authority permits deterministic implementation, risk-triggered review, acceptance, explicit-path task-branch commit/push and immediate movement into dependency-satisfied planned gates. Sol owns coupled acceptance; the fresh Gemini 3.6 Flash/high review had source-only veto authority and returned pass with no findings.",
+    "active_plan_and_acceptance": "The active controlled-recovery plan freezes the exact provider-free successor-lane scope. Deterministic acceptance, broader regressions, API/security review, fresh independent review and continuity checks pass for candidate fc25d30b698944e9c8a792fb0a0a3467cf080c39; the closeout and Sol acceptance preserve the non-runtime claim boundary and open only provider-free C3/D3.",
+    "protected_evidence_boundaries": "No provider/product runtime, patient or product-derived data, live read, command/write, actuator, migration/update activation, deployment, production, release, Pages, protected evidence or protected-ref movement is permitted. docs/branding/ and the four existing Consultant/Gate-minus-one pre-push files remain preserved, unstaged and excluded.",
+    "git_refs_and_worktree": "HEAD and origin/codex/ariadne-bernie-davida-parallel-seam are fc25d30b698944e9c8a792fb0a0a3467cf080c39 before the closeout commit. Local/origin master and handoff/current are all protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the explicitly enumerated closeout, receipt, continuity, plan and test paths may be staged and the task branch alone may be pushed."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_required_bureau_successor_lanes_closeout_prepush_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed deterministic acceptance and the exact closeout candidate is ready for explicit-path publication."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fresh Gemini 3.6 Flash/high returned pass on the exact clean candidate with zero findings."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek worker was required for this coupled closeout slice."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fallback not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Leverage-gated lane not selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Native subagent dispatch was unnecessary for this exact closeout slice."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

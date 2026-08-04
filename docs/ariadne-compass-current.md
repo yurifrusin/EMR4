@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 209 / Compass 190. Gate zero passes. Under the standing programme authority, A1/A2, B1/B2 and C1/C2 are active now; D1/D2 follows the C1 technical-context/provenance freeze. Occupied model, live product, write/actuator and deployment/release boundaries remain closed.
+> EMR4 is at Continuity 210 / Compass 191. Provider-free A1/A2, B1/B2, C1/C2 and D1/D2 pass; C3/D3 proceed under standing authority. Occupied models, live reads, writes/actuators and deployment/release remain closed.
 
 ## North star
 
@@ -192,32 +192,32 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Gate zero is active and every later exact dependency-satisfied gate may follow without a repeat permission pause. Lineage parent: `model-required-bureau-gate-minus-one`.
 88. **Shared foundation for the model-required Bureau lanes — Model-Required Bureau Gate Zero Shared Contract**
    Gate zero passes and activates the exact provider-free A1/A2, B1/B2 and C1/C2 architecture/test lanes. Lineage parent: `model-required-bureau-standing-programme-authority`.
+89. **Provider-free Bureau-specific foundations — Provider-Free Bureau Successor Lanes**
+   A1/A2, B1/B2, C1/C2 and D1/D2 pass; C3/D3 are active. Lineage parent: `model-required-bureau-gate-zero`.
 
 ## Current position
 
-**Gate zero accepted; provider-free successor lanes active — Model-Required Bureau Gate Zero Shared Contract**
+**Provider-free successor foundations accepted; C3/D3 active — Provider-Free Bureau Successor Lanes**
 
-**Why this proof came next:** The common four-plane, label/sink, one-attempt cell and API Spine contract had to be frozen before Bureau-specific lanes diverged.
+**Why this proof came next:** Gate zero allowed Bureau-specific contracts and C1 supplied D-lane provenance vocabulary.
 
-Deterministic and fresh independent review pass the exact architecture candidate with no product/runtime side effects.
+Deterministic and independent review pass with zero candidate-runtime side effects.
 
 ### What this unlocks
 
-- A1/A2 Rayleen provider-free read/projection and language foundations.
-- B1/B2 Davida practice-administration grammar and authored-synthetic evaluator.
-- C1/C2 controlled-recovery anatomy, observation, diagnosis and proofreader contracts.
-- D1/D2 after C1 freezes the shared technical context/provenance vocabulary.
+- C3 deterministic recovery risk and authority policy.
+- D3 staged promotion and rollback architecture.
 
 ### What it does not solve
 
-- An occupied provider-model path or proof that a cell isolation runtime now exists.
-- A live product read, patient-facing surface, command/write, actuator or update activation.
-- Deployment, production, release, Pages, protected refs or protected evidence.
+- Occupied models or intelligent end-to-end behavior.
+- Live product reads, commands, writes, actuators or update activation.
+- Deployment, production, release, Pages or protected actions.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Bounded opening `autonomous-action`: Provider-free A1/A2, B1/B2 and C1/C2 architecture/test lanes within the frozen successor boundary
+- Bounded opening `autonomous-action`: Provider-free C3 recovery risk/authority policy and D3 staged-promotion/rollback architecture
 - All other named boundaries remain closed: `api-change`, `appointment-write`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -459,6 +459,7 @@ Prerequisites:
 
 ## Map limits
 
+- Provider-free language fixtures prove schemas, grounding and policy only; they do not prove model NLU or an intelligent end-to-end path.
 - Gate-zero schemas specify required containment and authority behavior; they do not prove an operating cell, provider or product runtime.
 - Standing programme authority removes repeat permission pauses only for fully specified dependency-satisfied gates; it does not infer or erase an unresolved material boundary.
 - Gate -1 is accepted architecture evidence only; its selected controls are not implemented and establish no model or product runtime, prompt-injection immunity, data access, actuator, deployment, production or release posture.
@@ -687,6 +688,8 @@ Prerequisites:
 - `docs/emr4-model-required-bureau-gate-minus-one-closeout.md`
 - `docs/emr4-model-required-bureau-gate-zero-closeout.md`
 - `docs/emr4-model-required-bureau-gate-zero-shared-contract.md`
+- `docs/emr4-model-required-bureau-provider-free-successor-lanes-closeout.md`
+- `docs/emr4-model-required-bureau-provider-free-successor-lanes.md`
 - `docs/emr4-rayleen-davida-controlled-recovery-development-plan.md`
 - `docs/raisa-clinician-one-readonly-document-context-closeout.md`
 - `docs/raisa-clinician-one-readonly-document-context-plan.md`
@@ -784,6 +787,7 @@ Prerequisites:
 - `docs/security/dependabot-alert-17-triage-2026-08-01.md`
 - `docs/security/dependabot-alerts-8-15-triage-2026-08-01.md`
 - `docs/security/emr4-model-required-bureau-gate-zero-threat-model-delta.md`
+- `docs/security/emr4-model-required-bureau-provider-free-successor-lanes-threat-model-delta.md`
 - `docs/security/emr4-model-required-bureaus-gate-minus-one-threat-model-delta.md`
 - `docs/security/hardening/model-required-bureau-gate-minus-one/hardening.json`
 - `docs/security/hardening/raisa-two-component-oidc-verifier/hardening.md`
@@ -822,6 +826,7 @@ Prerequisites:
 - `orchestration/access_ai_api_design.md`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-gate-minus-one-review-2-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-gate-zero-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/model-required-bureau-successor-lanes-review-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-generated-draft-sol-review.md`
 - `orchestration/agent_inbox/codex/ariadne-gemini-attempt4-sol-review.md`
 - `orchestration/agent_inbox/codex/ariadne-synaptic-event-router-protocol-sol-acceptance.md`
@@ -858,6 +863,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/clinician-one-word-desktop-selection-check-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-gate-minus-one-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-gate-zero-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/model-required-bureau-provider-free-successor-lanes-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-standing-programme-authority-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
@@ -1028,6 +1034,7 @@ Prerequisites:
 - `orchestration/continuity/model-required-bureau-gate-minus-one/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-gate-zero/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-gate-zero/shared-contract.json`
+- `orchestration/continuity/model-required-bureau-provider-free-successor-lanes/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-cloud-run-api-runtime-identity-enablement/evidence.json`
 - `orchestration/continuity/raisa-cloud-run-public-access-word-online-verification/browser-word-online-evidence.json`
 - `orchestration/continuity/raisa-cloud-run-public-access-word-online-verification/interim-residue-evidence.json`
@@ -1353,6 +1360,7 @@ Prerequisites:
 - `tests/test_clinician_one_readonly_document_context.py`
 - `tests/test_clinician_one_word_desktop_selection_check.py`
 - `tests/test_model_required_bureau_gate_zero.py`
+- `tests/test_model_required_bureau_successor_lanes.py`
 - `tests/test_raisa_dual_host_foundation.py`
 - `tests/test_raisa_office_web_dev_context.py`
 - `tests/test_raisa_provider_free_office_directory_lifecycle_descendants.py`
@@ -1382,4 +1390,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 190; continuity graph revision 209._
+_Compass map revision 191; continuity graph revision 210._

@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 209,
+  "graph_revision": 210,
   "harvests": [],
   "nodes": [
     {
@@ -12005,9 +12005,86 @@
         "A3/B3 and every occupied model path require an exact accepted provider/data/region/identity/cost call boundary.",
         "Live product reads, patient-facing Rayleen, writes, actuators, migrations/update activation, deployment, production, release, Pages, protected refs and protected evidence remain closed."
       ]
+    },
+    {
+      "id": "model-required-bureau-provider-free-successor-lanes",
+      "title": "Provider-Free Bureau Successor Lanes",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-04T09:00:00Z",
+      "updated_at": "2026-08-04T09:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "fc25d30b698944e9c8a792fb0a0a3467cf080c39",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "model-required-bureau-gate-zero",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "autonomous-action",
+            "source": "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
+            "scope": "Provider-free C3 recovery risk/authority policy and D3 staged-promotion/rollback architecture"
+          }
+        ],
+        "notes": [
+          "A1/A2, B1/B2, C1/C2 and D1/D2 passed provider-free deterministic and independent review.",
+          "C1 froze the technical observation/provenance vocabulary required by D1/D2.",
+          "Candidate-runtime side effects were zero; source-only Gemini review transport was non-zero.",
+          "No provider, live read, write, actuator, deployment, release, Pages or protected boundary opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-provider-free-successor-lanes",
+          "source": "docs/emr4-model-required-bureau-provider-free-successor-lanes-closeout.md",
+          "status": "accepted",
+          "summary": "Accept Rayleen and Davida language/context foundations, technical anatomy/diagnosis proof, and separated update provenance/delta contracts."
+        }
+      ],
+      "claim_scope": [
+        "Five closed schemas, four examples and 22 authored cases pass.",
+        "Fresh Gemini source review passed 261 tests with no findings.",
+        "No intelligent end-to-end model path, live read, effect or release is established."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
+          "docs/emr4-model-required-bureau-provider-free-successor-lanes.md",
+          "docs/security/emr4-model-required-bureau-provider-free-successor-lanes-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/model-required-bureau-provider-free-successor-lanes/provider-free-acceptance-evidence.json"
+        ],
+        "closeouts": [
+          "docs/emr4-model-required-bureau-provider-free-successor-lanes-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/model-required-bureau-provider-free-successor-lanes-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/antigravity/model-required-bureau-successor-lanes-review-receipt.json"
+        ],
+        "tests": [
+          "scripts/model_required_bureau_successor_lanes_acceptance.py",
+          "tests/test_model_required_bureau_successor_lanes.py"
+        ]
+      },
+      "unresolved_gates": [
+        "A3/B3 occupied model paths require exact provider/data/identity/region/cost authority.",
+        "A4 product read, A5/B4 writes, C4 actuator rehearsal and actual update/migration activation remain closed.",
+        "Deployment, production, release, Pages, protected refs and protected evidence remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-04T08:45:00Z"
+  "updated_at": "2026-08-04T09:00:00Z"
 }

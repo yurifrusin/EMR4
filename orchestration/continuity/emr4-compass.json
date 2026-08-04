@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 190,
-  "updated_at": "2026-08-04T08:45:00Z",
-  "source_graph_revision": 209,
-  "orientation_statement": "EMR4 is at Continuity 209 / Compass 190. Gate zero passes. Under the standing programme authority, A1/A2, B1/B2 and C1/C2 are active now; D1/D2 follows the C1 technical-context/provenance freeze. Occupied model, live product, write/actuator and deployment/release boundaries remain closed.",
+  "map_revision": 191,
+  "updated_at": "2026-08-04T09:00:00Z",
+  "source_graph_revision": 210,
+  "orientation_statement": "EMR4 is at Continuity 210 / Compass 191. Provider-free A1/A2, B1/B2, C1/C2 and D1/D2 pass; C3/D3 proceed under standing authority. Occupied models, live reads, writes/actuators and deployment/release remain closed.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -1513,34 +1513,47 @@
         "orchestration/agent_inbox/antigravity/model-required-bureau-gate-zero-review-receipt.json",
         "tests/test_model_required_bureau_gate_zero.py"
       ]
+    },
+    {
+      "node_id": "model-required-bureau-provider-free-successor-lanes",
+      "lineage_parent": "model-required-bureau-gate-zero",
+      "strategic_role": "Provider-free Bureau-specific foundations",
+      "outcome": "A1/A2, B1/B2, C1/C2 and D1/D2 pass; C3/D3 are active.",
+      "evidence": [
+        "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
+        "docs/emr4-model-required-bureau-provider-free-successor-lanes.md",
+        "docs/security/emr4-model-required-bureau-provider-free-successor-lanes-threat-model-delta.md",
+        "orchestration/continuity/model-required-bureau-provider-free-successor-lanes/provider-free-acceptance-evidence.json",
+        "docs/emr4-model-required-bureau-provider-free-successor-lanes-closeout.md",
+        "orchestration/agent_inbox/codex/model-required-bureau-provider-free-successor-lanes-sol-acceptance.md",
+        "orchestration/agent_inbox/antigravity/model-required-bureau-successor-lanes-review-receipt.json",
+        "tests/test_model_required_bureau_successor_lanes.py"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "model-required-bureau-gate-zero",
-    "strategic_role": "Gate zero accepted; provider-free successor lanes active",
-    "why_now": "The common four-plane, label/sink, one-attempt cell and API Spine contract had to be frozen before Bureau-specific lanes diverged.",
-    "outcome": "Deterministic and fresh independent review pass the exact architecture candidate with no product/runtime side effects.",
+    "node_id": "model-required-bureau-provider-free-successor-lanes",
+    "strategic_role": "Provider-free successor foundations accepted; C3/D3 active",
+    "why_now": "Gate zero allowed Bureau-specific contracts and C1 supplied D-lane provenance vocabulary.",
+    "outcome": "Deterministic and independent review pass with zero candidate-runtime side effects.",
     "unlocks": [
-      "A1/A2 Rayleen provider-free read/projection and language foundations.",
-      "B1/B2 Davida practice-administration grammar and authored-synthetic evaluator.",
-      "C1/C2 controlled-recovery anatomy, observation, diagnosis and proofreader contracts.",
-      "D1/D2 after C1 freezes the shared technical context/provenance vocabulary."
+      "C3 deterministic recovery risk and authority policy.",
+      "D3 staged promotion and rollback architecture."
     ],
     "does_not_solve": [
-      "An occupied provider-model path or proof that a cell isolation runtime now exists.",
-      "A live product read, patient-facing surface, command/write, actuator or update activation.",
-      "Deployment, production, release, Pages, protected refs or protected evidence."
+      "Occupied models or intelligent end-to-end behavior.",
+      "Live product reads, commands, writes, actuators or update activation.",
+      "Deployment, production, release, Pages or protected actions."
     ],
     "evidence": [
       "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
-      "docs/emr4-model-required-bureau-gate-zero-shared-contract.md",
-      "docs/security/emr4-model-required-bureau-gate-zero-threat-model-delta.md",
-      "orchestration/continuity/model-required-bureau-gate-zero/shared-contract.json",
-      "orchestration/continuity/model-required-bureau-gate-zero/provider-free-acceptance-evidence.json",
-      "docs/emr4-model-required-bureau-gate-zero-closeout.md",
-      "orchestration/agent_inbox/codex/model-required-bureau-gate-zero-sol-acceptance.md",
-      "orchestration/agent_inbox/antigravity/model-required-bureau-gate-zero-review-receipt.json",
-      "tests/test_model_required_bureau_gate_zero.py"
+      "docs/emr4-model-required-bureau-provider-free-successor-lanes.md",
+      "docs/security/emr4-model-required-bureau-provider-free-successor-lanes-threat-model-delta.md",
+      "orchestration/continuity/model-required-bureau-provider-free-successor-lanes/provider-free-acceptance-evidence.json",
+      "docs/emr4-model-required-bureau-provider-free-successor-lanes-closeout.md",
+      "orchestration/agent_inbox/codex/model-required-bureau-provider-free-successor-lanes-sol-acceptance.md",
+      "orchestration/agent_inbox/antigravity/model-required-bureau-successor-lanes-review-receipt.json",
+      "tests/test_model_required_bureau_successor_lanes.py"
     ]
   },
   "decision_horizon": [
@@ -2471,6 +2484,7 @@
     }
   ],
   "map_limits": [
+    "Provider-free language fixtures prove schemas, grounding and policy only; they do not prove model NLU or an intelligent end-to-end path.",
     "Gate-zero schemas specify required containment and authority behavior; they do not prove an operating cell, provider or product runtime.",
     "Standing programme authority removes repeat permission pauses only for fully specified dependency-satisfied gates; it does not infer or erase an unresolved material boundary.",
     "Gate -1 is accepted architecture evidence only; its selected controls are not implemented and establish no model or product runtime, prompt-injection immunity, data access, actuator, deployment, production or release posture.",
