@@ -114,8 +114,9 @@ def _parse_time(value: str) -> datetime:
 def validate_rayleen_context(context: dict[str, Any]) -> None:
     validate_instance(RAYLEEN_CONTEXT_SCHEMA_PATH, context)
     generated = _parse_time(context["generated_at"])
+    evaluation = _parse_time(context["evaluation_time"])
     expires = _parse_time(context["expires_at"])
-    if expires <= generated:
+    if not generated <= evaluation < expires:
         raise ContractError("context_expiry_invalid")
     facts = {item["appointment_id"]: item for item in context["facts"]}
     signals = {item["appointment_id"]: item for item in context["derived_signals"]}
@@ -136,7 +137,10 @@ def validate_davida_context(context: dict[str, Any]) -> None:
     }
     if canonical_sha256(material) != context["content_revision"]:
         raise ContractError("context_revision_invalid")
-    if _parse_time(context["expires_at"]) <= _parse_time(context["observed_at"]):
+    observed = _parse_time(context["observed_at"])
+    evaluation = _parse_time(context["evaluation_time"])
+    expires = _parse_time(context["expires_at"])
+    if not observed <= evaluation < expires:
         raise ContractError("context_expiry_invalid")
     practitioner_refs = [item["resource_ref"] for item in context["practitioners"]]
     location_refs = [item["resource_ref"] for item in context["locations"]]
@@ -225,6 +229,8 @@ def proofread_rayleen(
             "practice_id": context["practice_id"],
             "location_id": context["location_id"],
             "context_revision": context["context_revision"],
+            "evaluation_time": context["evaluation_time"],
+            "evaluation_mode": context["evaluation_mode"],
             "expires_at": context["expires_at"],
         },
         "projection": {
@@ -291,6 +297,8 @@ def proofread_davida(
             "principal_ref": context["principal_ref"],
             "correlation_id": context["correlation_id"],
             "content_revision": context["content_revision"],
+            "evaluation_time": context["evaluation_time"],
+            "evaluation_mode": context["evaluation_mode"],
             "expires_at": context["expires_at"],
         },
         "proposal": {

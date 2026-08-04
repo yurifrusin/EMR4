@@ -5,7 +5,7 @@
   "command_count": 0,
   "database_access_count": 0,
   "deployment_count": 0,
-  "evidence_hash": "sha256:c602cca7509e07c2c35eb7b3888568529ea1e1ddd60c0d62b1e208763c1aabdb",
+  "evidence_hash": "sha256:af1b3ef331d7d6da3b88efe0ce9a7c18fe652005b3ee738319644195b7b9c1c0",
   "lane_results": [
     {
       "actuator_count": 0,
@@ -16,7 +16,7 @@
         "pinned_base_image": "docker.io/library/python@sha256:a190708a2dec1bd18b1decb539f8e8f5407abaa9bf39cacda583f7f8c11db322",
         "repository_root_used": false,
         "source_hashes": {
-          "generated:cell-request.json": "sha256:555784e2473a00e76406ee2a64465ae6ea206731939fa93dbadc1f8c898bd836",
+          "generated:cell-request.json": "sha256:e7568f4d93c2261eda6ce1079287ab5d5f77556a10fec2fd2c122f1e1b4544fb",
           "orchestration/continuity/model-required-bureau-a3-b3/Dockerfile": "sha256:3d47934e293dcecb182e10c64ebfabcbedbcec67c1998166a3fee2dbf495481e",
           "scripts/ariadne_vertex_sydney_gemini_25_cell.py": "sha256:530d6f91e841aa41dd4fd87f07f45c360c728e7ca5847586bab5d19b604a6a71",
           "scripts/ariadne_vertex_sydney_gemini_25_relay.py": "sha256:9f4a86f4d82223d7cc2f8f5be21d8d3ec152e2eb0c57e0ac70e1c27d5020ef66"
@@ -60,7 +60,7 @@
       "correction_eligible": false,
       "credential_or_token_retained": false,
       "database_access_count": 0,
-      "evidence_hash": "sha256:bf3334aa474c11bed791a54fd0dfe9dce74a10cb09b0f691b7773172201f8db6",
+      "evidence_hash": "sha256:bf563943eed731b49836975987248cc1f54617e0323a4fe6a8bd5e59d6a9557e",
       "lane": "rayleen_a3",
       "mode": "dry-run",
       "network": {
@@ -117,6 +117,8 @@
         "case_id": "rayleen-a3-synthetic-001",
         "context_binding": {
           "context_revision": 11,
+          "evaluation_mode": "authored_synthetic_fixed_clock",
+          "evaluation_time": "2026-08-04T09:01:00Z",
           "expires_at": "2026-08-04T09:02:00Z",
           "frame_id": "31000000-0000-4000-8000-000000000001",
           "location_id": "31000000-0000-4000-8000-000000000003",
@@ -140,9 +142,9 @@
         "status": "advisory_only"
       },
       "request_binding": {
-        "context_hash": "sha256:370f12e489123bddd9ddca5f14fb20d19275f661306136580a2b841c3ad6efa7",
+        "context_hash": "sha256:5301cdb5a965df1e00d250ced5f896ca7930d647766afa8a14143f61f4869a30",
         "policy_id": "emr4-model-required-bureau-a3-b3-sydney-v1",
-        "provider_request_hash": "sha256:6db2a2f5c4c9aa264fd2757e72ec2bd50fb8768a1f8f152e830ee55628aa67cd"
+        "provider_request_hash": "sha256:1ad73d849e21493efd2a36d25f295e18e62d957f675fef96a651eddea4fdd501"
       },
       "result": "attempt_pass",
       "schema_version": "emr4.model_required_bureau_a3_b3.attempt_evidence.v1",
@@ -157,7 +159,7 @@
         "pinned_base_image": "docker.io/library/python@sha256:a190708a2dec1bd18b1decb539f8e8f5407abaa9bf39cacda583f7f8c11db322",
         "repository_root_used": false,
         "source_hashes": {
-          "generated:cell-request.json": "sha256:59b5f9992cd7dce2ca69e02bcad4c1df541d759ed2166ecbf716299fb9d7b13c",
+          "generated:cell-request.json": "sha256:fc6cbeaca43bd05cbdcfb871bf9d22e3b688b4febdba4489366aab98642df3d2",
           "orchestration/continuity/model-required-bureau-a3-b3/Dockerfile": "sha256:3d47934e293dcecb182e10c64ebfabcbedbcec67c1998166a3fee2dbf495481e",
           "scripts/ariadne_vertex_sydney_gemini_25_cell.py": "sha256:530d6f91e841aa41dd4fd87f07f45c360c728e7ca5847586bab5d19b604a6a71",
           "scripts/ariadne_vertex_sydney_gemini_25_relay.py": "sha256:9f4a86f4d82223d7cc2f8f5be21d8d3ec152e2eb0c57e0ac70e1c27d5020ef66"
@@ -201,7 +203,7 @@
       "correction_eligible": false,
       "credential_or_token_retained": false,
       "database_access_count": 0,
-      "evidence_hash": "sha256:3bcdaf9961eb83c06ee5efd917cd5f81cde5daa0c9a7b8ffd3425415c9340330",
+      "evidence_hash": "sha256:0c876e0706fbe7713aca76e06f42a69e607e849794d914539a64c6d36c2bc25e",
       "lane": "davida_b3",
       "mode": "dry-run",
       "network": {
@@ -257,8 +259,10 @@
         "candidate_provenance": "untrusted_model",
         "case_id": "davida-b3-synthetic-001",
         "context_binding": {
-          "content_revision": "65c36cea04a1c7ffd6f379b8d554a855e9452d5388fef22c3801f6c843c13b19",
+          "content_revision": "241ff0d44353451b467e2352f7826a899476ea9cc3143a6ff24df1d57c09ccfa",
           "correlation_id": "correlation-davida-b3-001",
+          "evaluation_mode": "authored_synthetic_fixed_clock",
+          "evaluation_time": "2026-08-04T09:01:00Z",
           "expires_at": "2026-08-04T09:02:00Z",
           "practice_ref": "practice-synthetic-north",
           "principal_ref": "principal-synthetic-manager"
@@ -296,9 +300,9 @@
         "status": "dry_run_advisory_only"
       },
       "request_binding": {
-        "context_hash": "sha256:b47a612aaf7fb9383075bb9c76fda4ffa1ad75a91e3ac6645f4836834473001b",
+        "context_hash": "sha256:d98d66f3b522865ccd9bc3d8dca16d55b879dc35b6a2f951accff795f23dc544",
         "policy_id": "emr4-model-required-bureau-a3-b3-sydney-v1",
-        "provider_request_hash": "sha256:a35072a087f3c22ea6226b96c6fd449a27651659cdffdc2d91d7b8c776cfb9f1"
+        "provider_request_hash": "sha256:0790ec857c948408031440ed52fed840c5e9aec71e51d5b360b67dba0cdf9603"
       },
       "result": "attempt_pass",
       "schema_version": "emr4.model_required_bureau_a3_b3.attempt_evidence.v1",

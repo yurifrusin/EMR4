@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "commit",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely in bounded segments after context restoration. The live baton records C3/D3 accepted at Continuity 211 / Compass 192, the standing uninterrupted-development policy active at Continuity 208 / Compass 189, and A3/B3 as the selected exact-boundary occupied advisory rehearsal now in progress.",
+    "current_authority_allocation": "Yuri selected Google Cloud Vertex AI gemini-2.5-flash through project bernie-emr4-dev, service account emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com, existing keyless impersonated ADC and australia-southeast1. Sol retains architecture, execution admission, acceptance and task-branch publication; Gemini 3.6 Flash/high has source-only independent-veto authority and no worker, verifier or model receives integration or protected-ref authority.",
+    "active_plan_and_acceptance": "The controlled-recovery development plan, C3/D3 closeout and acceptance, autonomous-continuation policy, and exact A3/B3 occupied-rehearsal plan were reread. The active A3/B3 boundary permits only authored-synthetic selector generation, deterministic grounding/proofreading, one primary plus at most one schema-only correction per lane, four calls and USD 1 cumulatively, strict model/region/identity admission, and complete cleanup; no occupied call has yet occurred.",
+    "protected_evidence_boundaries": "Protected holdouts, historical PHI, patient, clinical, participant, product-derived and production data remain closed. Product reads, routes, UI/runtime wiring, database access, commands, writes, actuators, shell/SQL, cloud/IAM mutation, update/import/migration, deployment, release, Pages, protected refs and protected evidence remain closed. docs/branding/ and the four Consultant/Gate-minus-one pre-push receipt/state files remain preserved and excluded; explicit-path staging only.",
+    "git_refs_and_worktree": "After a fresh origin fetch, local/origin master and local/origin handoff/current are all 2e34bdad732fdab32fbf778280b3d3c70d66d602. The task branch codex/ariadne-bernie-davida-parallel-seam is at ae94cee0b694f1a130fcf1671b3b411db258db5e, two commits ahead of origin task HEAD 2de467e23ce44574395ad6115e7205ca27c96fb2, with intentional A3/B3 safety/evidence modifications and review-control artifacts pending explicit-path commit plus the five preserved untracked boundaries. Protected refs have not moved."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_required_bureau_a3_b3_postcompaction_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the restored-context five-source rehydration and exact ref/worktree verification before continuing A3/B3."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "A fresh exact-HEAD Gemini 3.6 Flash/high source veto remains required after the pending safety-control commit."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No further DeepSeek implementation dispatch is selected for the serial pre-call closeout path."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The completed bounded native analysis lanes supplied advisory artifacts only and hold no acceptance or execution authority."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

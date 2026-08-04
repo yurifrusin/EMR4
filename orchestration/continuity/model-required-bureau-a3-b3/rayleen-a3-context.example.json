@@ -6,6 +6,8 @@
   "location_id": "31000000-0000-4000-8000-000000000003",
   "context_revision": 11,
   "generated_at": "2026-08-04T09:00:00Z",
+  "evaluation_time": "2026-08-04T09:01:00Z",
+  "evaluation_mode": "authored_synthetic_fixed_clock",
   "expires_at": "2026-08-04T09:02:00Z",
   "utterance": "Only show people waiting for Dr Patel and highlight whoever has waited longest.",
   "facts": [

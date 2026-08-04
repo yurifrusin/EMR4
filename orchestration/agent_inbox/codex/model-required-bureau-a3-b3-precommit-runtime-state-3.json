@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after context restoration. The live baton and standing-continuation policy require uninterrupted completion of the exact A3/B3 tranche while its closed provider/data/cost/call boundary remains unchanged.",
+    "current_authority_allocation": "Sol owns architecture, admission, recovery, acceptance and task-branch publication. The later occupied candidate runtime is exactly Google Vertex AI gemini-2.5-flash in bernie-emr4-dev through the named Bernie service account, existing keyless impersonated ADC and australia-southeast1. Gemini 3.6 Flash/high owns a fresh source-only veto after this commit; no worker or verifier may integrate or move protected refs.",
+    "active_plan_and_acceptance": "The exact A3/B3 plan admits only authored-synthetic selector candidates through broker-owned bindings, deterministic proofreading, one-use ledgers, a maximum of two calls per lane/four total and USD 1 cumulative. The pending patch adds explicit authored-synthetic fixed-clock half-open freshness, exact observed modelVersion admission and regenerated provider-free evidence. The focused inherited serial suite and Ruff pass; no occupied A3/B3 call has occurred.",
+    "protected_evidence_boundaries": "Patient, clinical, historical Diary, protected, participant, product-derived and production data; product reads; routes/UI/runtime wiring; database; commands/writes; actuators; shell/SQL; cloud/IAM mutation; update/import/migration; deployment; release; Pages; protected refs and protected evidence remain closed. docs/branding/ and the four existing Consultant/Gate-minus-one pre-push receipt/state files remain preserved and excluded. Staging is explicit-path only.",
+    "git_refs_and_worktree": "Freshly fetched local/origin master and local/origin handoff/current all remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Task HEAD is ae94cee0b694f1a130fcf1671b3b411db258db5e and origin task remains 2de467e23ce44574395ad6115e7205ca27c96fb2. Only intentional A3/B3 source/evidence/review-control/rehydration artifacts plus the five preserved untracked boundaries are present; the next commit will stage only enumerated A3/B3 paths."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_required_bureau_a3_b3_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol reviewed the safety-control diff and the deterministic serial suite, Ruff and diff checks pass."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["A fresh clean exact-HEAD source-only veto will follow this explicit-path commit."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No additional implementation worker is selected for this tightly coupled pre-call correction."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fallback not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Completed native analysis lanes remain advisory-only and inactive for commit authority."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

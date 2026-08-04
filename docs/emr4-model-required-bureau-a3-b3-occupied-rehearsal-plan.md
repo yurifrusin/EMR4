@@ -58,6 +58,11 @@ attempt before the provider call and identifies any human-only recovery.
 - Each prompt contains only its own lane's minimal typed frame, closed output
   contract and task instruction. Cross-lane context and conversational memory
   are absent.
+- Freshness is evaluated against a typed, timezone-aware
+  `authored_synthetic_fixed_clock` instant inside each scenario. The
+  proofreader requires the half-open interval `observed/generated <=
+  evaluation < expires`; this is reproducible scenario freshness and does not
+  claim that the committed fixture is fresh against execution wall-clock time.
 - Raw prompts and raw provider responses are transient inside the one-attempt
   boundary and are not committed, logged or retained. Durable evidence keeps
   hashes, allowlisted provider metadata, usage counts, proofreader decisions
@@ -66,6 +71,8 @@ attempt before the provider call and identifies any human-only recovery.
   database, callback and arbitrary network access are absent.
 - Provider-managed caching must remain explicitly disabled; no cached-content
   resource is supplied or created.
+- A live HTTP 200 response is still rejected before parsing or release unless
+  its observed `modelVersion` equals exactly `gemini-2.5-flash`.
 
 ## Call, retry and cost boundary
 

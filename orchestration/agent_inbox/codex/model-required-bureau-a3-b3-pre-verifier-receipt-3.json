@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:bc5df9a9c4f15adb517e176880dde00321d3ae20208ab44fadeb5fab24ebcc7f",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The A3/B3 plan/threat/authority/contracts still require selector-only model bodies, broker-owned bindings, exact request hashes, one-use/cost ledgers, deterministic proofreading and cleanup. Commit ae94cee0b694f1a130fcf1671b3b411db258db5e separates provider-free and occupied attempt artifacts and adds a regression test; 52 focused tests, acceptance and Ruff pass after the repair.",
+    "current_authority_allocation": "Yuri's exact candidate-runtime authority remains Google Vertex AI gemini-2.5-flash in bernie-emr4-dev through existing keyless impersonated ADC and australia-southeast1. This dispatch is solely Gemini 3.6 Flash/high via a fresh Antigravity project on a clean read-only worktree. Sol retains execution and acceptance; the verifier has no provider-runtime, implementation, integration or protected-ref authority.",
+    "git_refs_and_worktree": "Corrected candidate HEAD is ae94cee0b694f1a130fcf1671b3b411db258db5e. The clean verifier worktree C:/Users/sarashera/EMR4-worktrees/model-required-bureau-a3-b3-gemini-review-2 is on codex/review-model-required-bureau-a3-b3-2 at that exact HEAD and its deterministic preflight passed. Main task branch has only untracked review-control artifacts plus the five preserved paths. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md remains the completely read live authority. The A3/B3 provider-free candidate received a source-veto pass, then Sol found and repaired a pre-call evidence-name collision with zero candidate-runtime calls. The corrected exact HEAD now requires a fresh independent veto before occupied execution.",
+    "protected_evidence_boundaries": "The review receives only committed source and authored-synthetic fixtures. Patient, clinical, historical, product-derived, participant, protected and production data; credentials; candidate-runtime calls; product/database access; commands; writes; actuators; cloud/IAM mutation; deployment; release; Pages and protected refs remain closed. docs/branding/ and four preserved pre-push files remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

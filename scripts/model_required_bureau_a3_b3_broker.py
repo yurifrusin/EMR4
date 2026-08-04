@@ -208,6 +208,16 @@ def _safe_model_version(value: Any) -> str | None:
     return value
 
 
+def _validate_observed_model_version(*, mode: str, value: str | None) -> None:
+    expected = (
+        "provider-free-selector-fixture"
+        if mode == "dry-run"
+        else contracts.MODEL
+    )
+    if value != expected:
+        raise BrokerError("provider_model_version_mismatch")
+
+
 def _provider_binding() -> dict[str, Any]:
     return {
         "provider": "google_cloud_vertex_ai",
@@ -642,6 +652,21 @@ class BrokerState:
 
         bounded_metadata = contracts.bounded_provider_metadata(provider_packet)
         model_version = _safe_model_version(provider_packet.get("modelVersion"))
+        try:
+            _validate_observed_model_version(
+                mode=self.mode,
+                value=model_version,
+            )
+        except BrokerError:
+            provider_packet.clear()
+            raise BrokerError(
+                "provider_model_version_mismatch",
+                metadata={
+                    **call_metadata,
+                    "provider_metadata": bounded_metadata,
+                    "model_version": model_version,
+                },
+            ) from None
         try:
             selector_body = contracts.extract_provider_candidate(provider_packet)
         except contracts.ContractError as error:

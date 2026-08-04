@@ -3,7 +3,7 @@
   "$id": "https://emr4.invalid/schemas/davida-b3-context.v1.json",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "case_id", "practice_ref", "principal_ref", "correlation_id", "content_revision", "observed_at", "expires_at", "utterance", "practitioners", "locations", "dry_run", "authority_ceiling"],
+  "required": ["schema_version", "case_id", "practice_ref", "principal_ref", "correlation_id", "content_revision", "observed_at", "evaluation_time", "evaluation_mode", "expires_at", "utterance", "practitioners", "locations", "dry_run", "authority_ceiling"],
   "properties": {
     "schema_version": {"const": "emr4.davida.b3.context.v1"},
     "case_id": {"const": "davida-b3-synthetic-001"},
@@ -12,6 +12,8 @@
     "correlation_id": {"type": "string", "pattern": "^correlation-[A-Za-z0-9._~-]{1,64}$"},
     "content_revision": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "observed_at": {"type": "string", "format": "date-time"},
+    "evaluation_time": {"type": "string", "format": "date-time"},
+    "evaluation_mode": {"const": "authored_synthetic_fixed_clock"},
     "expires_at": {"type": "string", "format": "date-time"},
     "utterance": {"type": "string", "minLength": 1, "maxLength": 220},
     "practitioners": {

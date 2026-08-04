@@ -179,6 +179,9 @@ are hashed/audited as rejected and never reach a release sink.
 
 **Required proof.** Boundary-time, stale revision, superseded generation,
 wrong task hash, wrong context hash and late-response races release nothing.
+For this authored-synthetic rehearsal, the caller-supplied evaluation instant
+is explicitly labelled `authored_synthetic_fixed_clock`; passing it proves
+scenario-relative half-open freshness only, never wall-clock freshness.
 
 ### T5: Provider request differs from the deterministically approved dry run
 

@@ -4,8 +4,10 @@
   "practice_ref": "practice-synthetic-north",
   "principal_ref": "principal-synthetic-manager",
   "correlation_id": "correlation-davida-b3-001",
-  "content_revision": "65c36cea04a1c7ffd6f379b8d554a855e9452d5388fef22c3801f6c843c13b19",
+  "content_revision": "241ff0d44353451b467e2352f7826a899476ea9cc3143a6ff24df1d57c09ccfa",
   "observed_at": "2026-08-04T09:00:00Z",
+  "evaluation_time": "2026-08-04T09:01:00Z",
+  "evaluation_mode": "authored_synthetic_fixed_clock",
   "expires_at": "2026-08-04T09:02:00Z",
   "utterance": "Dry-run setting Dr Patel's default location to North Clinic and explain why a human still has to approve it.",
   "practitioners": [

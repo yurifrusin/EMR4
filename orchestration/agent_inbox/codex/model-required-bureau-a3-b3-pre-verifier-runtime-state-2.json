@@ -1,0 +1,34 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md remains the completely read live authority. The A3/B3 provider-free candidate received a source-veto pass, then Sol found and repaired a pre-call evidence-name collision with zero candidate-runtime calls. The corrected exact HEAD now requires a fresh independent veto before occupied execution.",
+    "current_authority_allocation": "Yuri's exact candidate-runtime authority remains Google Vertex AI gemini-2.5-flash in bernie-emr4-dev through existing keyless impersonated ADC and australia-southeast1. This dispatch is solely Gemini 3.6 Flash/high via a fresh Antigravity project on a clean read-only worktree. Sol retains execution and acceptance; the verifier has no provider-runtime, implementation, integration or protected-ref authority.",
+    "active_plan_and_acceptance": "The A3/B3 plan/threat/authority/contracts still require selector-only model bodies, broker-owned bindings, exact request hashes, one-use/cost ledgers, deterministic proofreading and cleanup. Commit ae94cee0b694f1a130fcf1671b3b411db258db5e separates provider-free and occupied attempt artifacts and adds a regression test; 52 focused tests, acceptance and Ruff pass after the repair.",
+    "protected_evidence_boundaries": "The review receives only committed source and authored-synthetic fixtures. Patient, clinical, historical, product-derived, participant, protected and production data; credentials; candidate-runtime calls; product/database access; commands; writes; actuators; cloud/IAM mutation; deployment; release; Pages and protected refs remain closed. docs/branding/ and four preserved pre-push files remain excluded.",
+    "git_refs_and_worktree": "Corrected candidate HEAD is ae94cee0b694f1a130fcf1671b3b411db258db5e. The clean verifier worktree C:/Users/sarashera/EMR4-worktrees/model-required-bureau-a3-b3-gemini-review-2 is on codex/review-model-required-bureau-a3-b3-2 at that exact HEAD and its deterministic preflight passed. Main task branch has only untracked review-control artifacts plus the five preserved paths. Protected local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "model_required_bureau_a3_b3_corrected_candidate_and_five_source_rehydration",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol diagnosed and tested the pre-call namespace repair and retains acceptance authority."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Fresh-project transport is available and corrected candidate verifier-worktree preflight passed at ae94cee0b694f1a130fcf1671b3b411db258db5e."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Native analysis lanes are closed."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "antigravity-gemini-flash-3-6-high-verifier", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [{"receipt_id": "model-required-bureau-a3-b3-verifier-worktree-preflight-2", "path": "orchestration/agent_inbox/codex/model-required-bureau-a3-b3-verifier-worktree-preflight-2.json", "status": "passed"}],
+  "assigned_agent_ids": []
+}

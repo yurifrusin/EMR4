@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:bc5df9a9c4f15adb517e176880dde00321d3ae20208ab44fadeb5fab24ebcc7f",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The exact A3/B3 plan admits only authored-synthetic selector candidates through broker-owned bindings, deterministic proofreading, one-use ledgers, a maximum of two calls per lane/four total and USD 1 cumulative. The pending patch adds explicit authored-synthetic fixed-clock half-open freshness, exact observed modelVersion admission and regenerated provider-free evidence. The focused inherited serial suite and Ruff pass; no occupied A3/B3 call has occurred.",
+    "current_authority_allocation": "Sol owns architecture, admission, recovery, acceptance and task-branch publication. The later occupied candidate runtime is exactly Google Vertex AI gemini-2.5-flash in bernie-emr4-dev through the named Bernie service account, existing keyless impersonated ADC and australia-southeast1. Gemini 3.6 Flash/high owns a fresh source-only veto after this commit; no worker or verifier may integrate or move protected refs.",
+    "git_refs_and_worktree": "Freshly fetched local/origin master and local/origin handoff/current all remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Task HEAD is ae94cee0b694f1a130fcf1671b3b411db258db5e and origin task remains 2de467e23ce44574395ad6115e7205ca27c96fb2. Only intentional A3/B3 source/evidence/review-control/rehydration artifacts plus the five preserved untracked boundaries are present; the next commit will stage only enumerated A3/B3 paths.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after context restoration. The live baton and standing-continuation policy require uninterrupted completion of the exact A3/B3 tranche while its closed provider/data/cost/call boundary remains unchanged.",
+    "protected_evidence_boundaries": "Patient, clinical, historical Diary, protected, participant, product-derived and production data; product reads; routes/UI/runtime wiring; database; commands/writes; actuators; shell/SQL; cloud/IAM mutation; update/import/migration; deployment; release; Pages; protected refs and protected evidence remain closed. docs/branding/ and the four existing Consultant/Gate-minus-one pre-push receipt/state files remain preserved and excluded. Staging is explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

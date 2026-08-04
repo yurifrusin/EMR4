@@ -14,6 +14,7 @@ from pathlib import Path
 import pytest
 
 from scripts import model_required_bureau_a3_b3_contracts as contracts
+from scripts import model_required_bureau_a3_b3_broker as broker
 from scripts import model_required_bureau_a3_b3_live as live
 
 
@@ -146,6 +147,8 @@ def test_rayleen_happy_path_releases_exact_grounded_projection() -> None:
         "practice_id": context["practice_id"],
         "location_id": context["location_id"],
         "context_revision": context["context_revision"],
+        "evaluation_time": context["evaluation_time"],
+        "evaluation_mode": context["evaluation_mode"],
         "expires_at": context["expires_at"],
     }
     assert release["projection"]["focus_appointment_id"] == (
@@ -291,6 +294,84 @@ def test_invalid_context_expiry_is_terminal_for_both_lanes() -> None:
     result = contracts.proofread_davida(davida_candidate, davida_context)
     assert result["reason_code"] == "context_expiry_invalid"
     assert result["correction_eligible"] is False
+
+
+@pytest.mark.parametrize(
+    ("context_factory", "candidate_factory", "lane", "boundary"),
+    (
+        (
+            _rayleen_context,
+            _rayleen_candidate,
+            contracts.LANE_RAYLEEN,
+            "generated_at",
+        ),
+        (
+            _rayleen_context,
+            _rayleen_candidate,
+            contracts.LANE_RAYLEEN,
+            "expires_at",
+        ),
+        (
+            _davida_context,
+            _davida_candidate,
+            contracts.LANE_DAVIDA,
+            "observed_at",
+        ),
+        (
+            _davida_context,
+            _davida_candidate,
+            contracts.LANE_DAVIDA,
+            "expires_at",
+        ),
+    ),
+)
+def test_authored_synthetic_evaluation_time_is_half_open(
+    context_factory,
+    candidate_factory,
+    lane: str,
+    boundary: str,
+) -> None:
+    context = context_factory()
+    context["evaluation_time"] = context[boundary]
+    candidate = candidate_factory()
+    if lane == contracts.LANE_DAVIDA:
+        _rehash_davida_context(context)
+        candidate["content_revision"] = context["content_revision"]
+    result = contracts.proofread(lane, candidate, context)
+    if boundary in {"generated_at", "observed_at"}:
+        assert result["verdict"] == "admitted"
+    else:
+        assert result["reason_code"] == "context_expiry_invalid"
+
+
+@pytest.mark.parametrize(
+    ("mode", "value"),
+    (
+        ("live", None),
+        ("live", "gemini-2.5-flash-002"),
+        ("live", "gemini-2.0-flash"),
+        ("dry-run", "gemini-2.5-flash"),
+    ),
+)
+def test_unexpected_observed_model_version_fails_closed(
+    mode: str, value: str | None
+) -> None:
+    with pytest.raises(
+        broker.BrokerError,
+        match="provider_model_version_mismatch",
+    ):
+        broker._validate_observed_model_version(mode=mode, value=value)
+
+
+def test_exact_observed_model_versions_are_admitted() -> None:
+    broker._validate_observed_model_version(
+        mode="live",
+        value=contracts.MODEL,
+    )
+    broker._validate_observed_model_version(
+        mode="dry-run",
+        value="provider-free-selector-fixture",
+    )
 
 
 @pytest.mark.parametrize(
