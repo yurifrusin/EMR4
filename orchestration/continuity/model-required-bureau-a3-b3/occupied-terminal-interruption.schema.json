@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/model-required-bureau-a3-b3-occupied-terminal-interruption.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "recorded_at", "result", "provider_call_source_head",
+    "lane", "attempt_id", "reason_code", "provider_contacted",
+    "provider_call_count", "attempt_ledger_consumed", "proofreader_reached",
+    "correction_eligible", "release_created", "davida_b3_started",
+    "parent_ledger_split_observed", "source_artifact_hashes",
+    "provider_metadata_status", "raw_prompt_retained",
+    "raw_provider_response_retained", "credential_or_token_retained",
+    "runtime_residue_absent", "product_read_count", "database_access_count",
+    "command_count", "write_count", "actuator_count",
+    "cloud_or_iam_mutation_count", "deployment_count",
+    "protected_ref_movement_count", "cause_beyond_structural_failure_established",
+    "authority_disposition"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.model_required_bureau_a3_b3.occupied_terminal_interruption.v1"},
+    "recorded_at": {"type": "string", "format": "date-time"},
+    "result": {"const": "model_required_bureau_a3_b3_rayleen_terminal_interruption"},
+    "provider_call_source_head": {"const": "61ca38545ad01d2470f8b5b668dd746b88d113a2"},
+    "lane": {"const": "rayleen_a3"},
+    "attempt_id": {"const": "a3-b3-rayleen-a3-primary-001"},
+    "reason_code": {"const": "provider_content_invalid"},
+    "provider_contacted": {"const": true},
+    "provider_call_count": {"const": 1},
+    "attempt_ledger_consumed": {"const": true},
+    "proofreader_reached": {"const": false},
+    "correction_eligible": {"const": false},
+    "release_created": {"const": false},
+    "davida_b3_started": {"const": false},
+    "parent_ledger_split_observed": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "provider_calls_reserved", "provider_calls_consumed", "reserved_cost_usd"],
+      "properties": {
+        "status": {"const": "open"},
+        "provider_calls_reserved": {"const": 1},
+        "provider_calls_consumed": {"const": 0},
+        "reserved_cost_usd": {"const": 0.25}
+      }
+    },
+    "source_artifact_hashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["parent_cost_ledger", "read_only_preflight", "attempt_ledger", "audit_chain"],
+      "properties": {
+        "parent_cost_ledger": {"const": "sha256:303088b2a840bc162ba4f3270bf4a8ec5e09f5ec7469cf3114ae816a795d24f1"},
+        "read_only_preflight": {"const": "sha256:2f91757cf1722cfd4e2acf89b74f414823e3d50f59f782e7cac4861b7165249a"},
+        "attempt_ledger": {"const": "sha256:92a289f22e242a87354036e14455800bc57b33da8cff35896721ae14b7d178b2"},
+        "audit_chain": {"const": "sha256:27d665f162ead5ee70d9db9cb39500bbe621e63b5bc0168b91ec6fb43d82bcad"}
+      }
+    },
+    "provider_metadata_status": {"const": "not_durably_recorded"},
+    "raw_prompt_retained": {"const": false},
+    "raw_provider_response_retained": {"const": false},
+    "credential_or_token_retained": {"const": false},
+    "runtime_residue_absent": {"const": true},
+    "product_read_count": {"const": 0},
+    "database_access_count": {"const": 0},
+    "command_count": {"const": 0},
+    "write_count": {"const": 0},
+    "actuator_count": {"const": 0},
+    "cloud_or_iam_mutation_count": {"const": 0},
+    "deployment_count": {"const": 0},
+    "protected_ref_movement_count": {"const": 0},
+    "cause_beyond_structural_failure_established": {"const": false},
+    "authority_disposition": {"const": "evidence_only_reconciliation_required_no_further_provider_call"}
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:bc5df9a9c4f15adb517e176880dde00321d3ae20208ab44fadeb5fab24ebcc7f",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Commit 61ca38545ad01d2470f8b5b668dd746b88d113a2 preserves the exact zero-call blocked receipt/open ledger and adds hash-bound same-reservation resume, lock ordering, absent-attempt checks, AER-0016 and deterministic regression evidence. Provider-free acceptance, the expanded inherited suite, register report, Ruff and diff checks pass.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high receives source-only independent-veto authority in a fresh Antigravity project and exact clean non-protected worktree. It cannot inspect or restore ADC, run the candidate runtime, implement, accept, integrate or move refs. Sol retains all authority; Vertex gemini-2.5-flash remains separately closed until user ADC restoration and preflight pass.",
+    "git_refs_and_worktree": "Verifier worktree C:/Users/sarashera/EMR4-worktrees/model-required-bureau-a3-b3-gemini-review-5 is clean on codex/review-model-required-bureau-a3-b3-5 at exact HEAD 61ca38545ad01d2470f8b5b668dd746b88d113a2 and its deterministic preflight passed. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602; main has only packet/preflight artifacts plus the five preserved paths.",
+    "live_handover_current_baton": "AGENTS.md now records the A3/B3 ADC-preflight block, zero candidate-runtime calls, AER-0016 recovery control and the existing-ADC restoration gate. A fresh independent veto is the last non-user action before that gate.",
+    "protected_evidence_boundaries": "Review receives only committed source and authored-synthetic/sanitized evidence. Credentials, provider/cloud preflight, candidate-runtime calls, patient/clinical/product/protected/participant/production data, product/database commands or writes, actuators, deployment, release, Pages and protected refs remain closed. docs/branding/ and four preserved pre-push files remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

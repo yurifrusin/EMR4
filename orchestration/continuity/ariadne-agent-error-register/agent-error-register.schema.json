@@ -90,7 +90,8 @@
             "corrected_fresh_attempt",
             "contained_then_escalated",
             "recovery_lease_applied",
-            "control_added"
+            "control_added",
+            "control_implemented_pending_acceptance"
           ]
         },
         "action": {

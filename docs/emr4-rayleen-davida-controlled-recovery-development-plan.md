@@ -3,8 +3,8 @@
 Date: 2026-08-04
 
 Status: Gate -1, Gate zero and provider-free A1/A2, B1/B2, C1/C2, D1/D2 and
-C3/D3 passed; exact A3/B3 boundary active but occupied execution is blocked at
-the existing Bernie impersonated-ADC refresh gate with zero provider calls
+C3/D3 passed; exact A3/B3 occupied execution terminated in Rayleen A3 after one
+provider-content-invalid call with no candidate release and no Davida start
 
 Architecture parent:
 `docs/emr4-model-required-deterministic-authority-bureau-architecture.md`
@@ -150,7 +150,7 @@ The recommended next fork is paired A3/B3 authored-synthetic occupied advisory
 rehearsal, but its exact provider/model/region/identity/data/cost/call boundary
 is a genuine Yuri-owned decision under the standing policy.
 
-## Active A3/B3 occupied-preflight checkpoint
+## A3/B3 occupied terminal-rejection checkpoint
 
 Yuri selected and froze the recommended A3/B3 boundary as Google Vertex AI
 `gemini-2.5-flash` through project `bernie-emr4-dev`, the exact Bernie service
@@ -166,11 +166,19 @@ open Rayleen USD 0.25 reservation and corrects the harness so a later
 continuation can reuse only that same hash-bound reservation without resetting
 or double-counting the budget.
 
-The remaining user-only action is restoration of the already approved Bernie
-keyless impersonated ADC outside the occupied runtime. Codex must not revoke,
-replace, interactively recreate or reconfigure it. After restoration, the
-unchanged reviewed recovery source runs a fresh exact read-only preflight and,
-only if every control passes, continues the serial A3 then B3 occupied turns.
+Yuri restored the already approved Bernie keyless impersonated ADC outside the
+occupied runtime. The unchanged reviewed recovery source passed a fresh exact
+read-only preflight, then Rayleen primary consumed one provider call and ended
+at `provider_content_invalid` before candidate extraction or proofreading.
+Nothing was released, no correction ticket exists and Davida did not start.
+
+AER-0017 preserves the split child/parent accounting failure and adds a
+provider-free terminal finalizer. The current authority permits only immutable
+failure preservation, parent-ledger reconciliation to one consumed call,
+no-release cleanup evidence, deterministic checks and fresh source review. It
+does not permit repeating Rayleen primary, treating the failure as
+`schema_invalid`, opening correction turn 2, starting Davida or changing the
+request contract. Any further call or request change is a new material fork.
 
 ## Lane A: Rayleen waiting-room intelligence
 
@@ -431,12 +439,10 @@ human confirmation or sandbox alone as proof that prompt injection cannot
 affect authority. Any proposed new cognitive-cell bridge is a fresh security
 architecture decision.
 
-## Active first action after Gate zero
+## Current next action
 
-Begin A1/A2, B1/B2 and C1/C2 under the frozen provider-free boundary above.
-Freeze C1's shared technical context/provenance vocabulary early enough to open
-D1/D2. Continue automatically through deterministic checks, applicable fresh
-independent veto, Sol acceptance and the next dependency-satisfied lane. Do not
-open A3/B3, live product reads, any command/write, actuator or deployment/
-release surface without an active accepted plan that makes the material
-boundary exact.
+Complete the provider-free AER-0017 evidence-only terminal reconciliation
+described above, then deterministic acceptance and a fresh exact-HEAD veto. Do
+not rerun prior provider-free lanes, repeat Rayleen, open its correction turn or
+start Davida. Any later request-contract or provider-call descendant remains a
+material Yuri decision.

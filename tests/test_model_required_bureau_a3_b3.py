@@ -10,6 +10,8 @@ from __future__ import annotations
 from copy import deepcopy
 import json
 from pathlib import Path
+import shutil
+from types import SimpleNamespace
 
 import pytest
 
@@ -90,6 +92,10 @@ def _assert_schema_objects_closed(value: object, path: str = "$") -> None:
             "occupied-preflight-blocked.schema.json",
             "occupied-preflight-blocked-evidence.json",
         ),
+        (
+            "occupied-terminal-interruption.schema.json",
+            "occupied-terminal-interruption-evidence.json",
+        ),
         ("rayleen-a3-context.schema.json", "rayleen-a3-context.example.json"),
         (
             "rayleen-a3-candidate.schema.json",
@@ -124,6 +130,7 @@ def test_contract_and_examples_validate(
         "rayleen-a3-release.schema.json",
         "davida-b3-release.schema.json",
         "occupied-preflight-blocked.schema.json",
+        "occupied-terminal-interruption.schema.json",
         "cell-request.schema.json",
         "single-use-ledger.schema.json",
         "cost-ledger.schema.json",
@@ -750,6 +757,80 @@ def test_provider_candidate_extraction_is_one_object_only() -> None:
 
 
 @pytest.mark.parametrize(
+    "parts",
+    (None, [], [{"text": "{}"}, {"text": "{}"}]),
+)
+def test_provider_content_shape_failure_is_exact_and_not_a_correction(
+    parts: object,
+) -> None:
+    candidate: dict[str, object] = {}
+    if parts is not None:
+        candidate["content"] = {"parts": parts}
+    packet = {"candidates": [candidate]}
+
+    with pytest.raises(contracts.ContractError, match="provider_content_invalid"):
+        contracts.extract_provider_candidate(packet)
+    with pytest.raises(contracts.ContractError, match="correction_not_eligible"):
+        contracts.correction_request(
+            contracts.LANE_RAYLEEN,
+            _rayleen_context(),
+            "provider_content_invalid",
+            attempt_number=2,
+        )
+
+
+def test_broker_rejection_preserves_exact_terminal_reason_and_safe_metadata() -> None:
+    packet = live._request_packet(
+        contracts.LANE_RAYLEEN,
+        _rayleen_context(),
+        attempt_number=1,
+        correction_of=None,
+        correction_reason_code=None,
+    )
+    state = SimpleNamespace(mode="live", expected_request=packet)
+    safe_provider = {
+        "provider_contacted": True,
+        "http_status": 200,
+        "candidate_count": 1,
+        "finish_reason": "MAX_TOKENS",
+        "raw_provider_response_retained": False,
+        "unapproved_raw_field": "must not survive",
+    }
+    error = broker.BrokerError(
+        "provider_content_invalid",
+        metadata={
+            "provider_contacted": True,
+            "provider_metadata": safe_provider,
+        },
+    )
+
+    event, response = broker._safe_rejection_records(state, error)
+
+    expected_provider = {
+        key: value
+        for key, value in safe_provider.items()
+        if key != "unapproved_raw_field"
+    }
+    assert event == {
+        "reason_code": "provider_content_invalid",
+        "provider_retry": False,
+        "correction_eligible": False,
+        "provider_contacted": True,
+        "provider_metadata": expected_provider,
+    }
+    assert response["reason_code"] == "provider_content_invalid"
+    assert response["correction_eligible"] is False
+    assert response["release"] is None
+    assert response["proofreader"] == {
+        "verdict": "not_reached",
+        "reason_code": "provider_content_invalid",
+        "correction_eligible": False,
+    }
+    assert response["provider_metadata"] == expected_provider
+    assert "unapproved_raw_field" not in response["metadata"]
+
+
+@pytest.mark.parametrize(
     ("lane", "context_factory"),
     (
         (contracts.LANE_RAYLEEN, _rayleen_context),
@@ -849,11 +930,26 @@ def test_provider_free_cost_reservation_consumes_no_call_or_budget() -> None:
     assert observed is not ledger
 
 
-def test_blocked_preflight_evidence_binds_exact_open_reservation() -> None:
-    cost_ledger_path = ARTIFACT_ROOT / "occupied-rehearsal-cost-ledger.json"
-    blocked_evidence_path = (
-        ARTIFACT_ROOT / "occupied-preflight-blocked-evidence.json"
+def test_blocked_preflight_evidence_binds_exact_open_reservation(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    relative_root = Path(
+        "orchestration/continuity/model-required-bureau-a3-b3"
     )
+    isolated_root = tmp_path / relative_root
+    isolated_root.mkdir(parents=True)
+    cost_ledger_path = isolated_root / "occupied-rehearsal-cost-ledger.json"
+    blocked_evidence_path = isolated_root / "occupied-preflight-blocked-evidence.json"
+    shutil.copyfile(
+        ARTIFACT_ROOT / "occupied-rehearsal-cost-ledger.json", cost_ledger_path
+    )
+    shutil.copyfile(
+        ARTIFACT_ROOT / "occupied-preflight-blocked-evidence.json",
+        blocked_evidence_path,
+    )
+    monkeypatch.setattr(live, "ROOT", tmp_path)
+    monkeypatch.setattr(live, "ARTIFACT_ROOT", isolated_root)
     observed = live._resume_preflight_blocked_cost_ledger(
         cost_ledger_path=cost_ledger_path,
         blocked_evidence_path=blocked_evidence_path,
@@ -878,6 +974,7 @@ def test_blocked_preflight_resume_rejects_ledger_hash_drift(
     )
     cost_ledger_path = tmp_path / relative
     cost_ledger_path.parent.mkdir(parents=True)
+    monkeypatch.setattr(live, "ARTIFACT_ROOT", cost_ledger_path.parent)
     ledger = live._reserve_cost(
         live._initial_cost_ledger(), contracts.LANE_RAYLEEN, mode="live"
     )
@@ -936,6 +1033,7 @@ def test_resume_reuses_rayleen_reservation_without_double_counting(
         lambda **kwargs: {
             "lane": kwargs["lane"],
             "proofreader_verdict": "admitted",
+            "provider_call_count": 1,
         },
     )
 
@@ -975,3 +1073,241 @@ def test_provider_free_and_occupied_attempt_artifacts_are_disjoint(
     assert dry["preflight"] == occupied["preflight"]
     assert "occupied" not in dry["ledger"].name
     assert "occupied" in occupied["ledger"].name
+
+
+def test_current_terminal_audit_is_preproof_and_non_correction_eligible() -> None:
+    events = live._read_events(
+        ARTIFACT_ROOT / "rayleen-a3-attempt-1-occupied-audit.jsonl"
+    )
+
+    result = live._classify_attempt_events(events, mode="live")
+
+    assert result == {
+        "terminal_preproof_rejection": True,
+        "reason_code": "provider_content_invalid",
+        "correction_eligible": False,
+        "provider_metadata": None,
+    }
+    tampered = deepcopy(events)
+    tampered[-1]["fields"]["provider_contacted"] = False
+    with pytest.raises(live.LiveError, match="broker_rejection_evidence_invalid"):
+        live._classify_attempt_events(tampered, mode="live")
+
+
+def test_terminal_rayleen_attempt_closes_parent_and_never_starts_davida(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    output_path = tmp_path / "occupied-evidence.json"
+    cost_ledger_path = tmp_path / "occupied-cost-ledger.json"
+    blocked_evidence_path = tmp_path / "blocked.json"
+    source_review_path = tmp_path / "review.json"
+    initial = live._reserve_cost(
+        live._initial_cost_ledger(), contracts.LANE_RAYLEEN, mode="live"
+    )
+    cost_ledger_path.write_text(json.dumps(initial), encoding="utf-8")
+    calls: list[tuple[str, int]] = []
+
+    monkeypatch.setattr(
+        live,
+        "_resume_preflight_blocked_cost_ledger",
+        lambda **_kwargs: deepcopy(initial),
+    )
+    monkeypatch.setattr(
+        live,
+        "_validate_source_review",
+        lambda _path: {"model": "gemini-3.6-flash-high"},
+    )
+    monkeypatch.setattr(
+        live,
+        "_run_preflight",
+        lambda _path: {"result": "preflight_pass"},
+    )
+
+    def terminal_attempt(**kwargs: object) -> dict:
+        lane = str(kwargs["lane"])
+        attempt_number = int(kwargs["attempt_number"])
+        calls.append((lane, attempt_number))
+        return {
+            "lane": lane,
+            "attempt_number": attempt_number,
+            "proofreader_verdict": "not_reached",
+            "proofreader_reason_code": "provider_content_invalid",
+            "correction_eligible": False,
+            "provider_call_count": 1,
+            "release": None,
+        }
+
+    monkeypatch.setattr(live, "_run_attempt", terminal_attempt)
+
+    result = live.run_tranche(
+        mode="live",
+        output_path=output_path,
+        cost_ledger_path=cost_ledger_path,
+        source_review_path=source_review_path,
+        resume_preflight_blocked_evidence_path=blocked_evidence_path,
+    )
+    ledger = json.loads(cost_ledger_path.read_text(encoding="utf-8"))
+
+    assert calls == [(contracts.LANE_RAYLEEN, 1)]
+    assert result["result"] == (
+        "model_required_bureau_a3_b3_occupied_terminal_rejection"
+    )
+    assert result["combined_pass"] is False
+    assert result["davida_b3_started"] is False
+    assert result["candidate_runtime_provider_call_count"] == 1
+    assert ledger["status"] == "consumed"
+    assert ledger["provider_calls_reserved"] == 1
+    assert ledger["provider_calls_consumed"] == 1
+
+
+def test_interrupted_terminal_reconciliation_is_provider_free_and_idempotent(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    artifact_root = (
+        tmp_path / "orchestration/continuity/model-required-bureau-a3-b3"
+    )
+    artifact_root.mkdir(parents=True)
+    for name in (
+        "occupied-preflight-blocked-evidence.json",
+        "occupied-terminal-interruption-evidence.json",
+        "occupied-rehearsal-cost-ledger.json",
+        "rayleen-a3-attempt-1-preflight.json",
+        "rayleen-a3-attempt-1-occupied-ledger.json",
+        "rayleen-a3-attempt-1-occupied-audit.jsonl",
+    ):
+        shutil.copyfile(ARTIFACT_ROOT / name, artifact_root / name)
+    monkeypatch.setattr(live, "ARTIFACT_ROOT", artifact_root)
+    monkeypatch.setattr(
+        live, "SOURCE_REVIEW_RECEIPT", tmp_path / "review.json"
+    )
+    monkeypatch.setattr(live, "_git_head", lambda: "reconciliation-head")
+    monkeypatch.setattr(live, "_tracked_worktree_clean", lambda: True)
+    monkeypatch.setattr(live, "_paths_match_head", lambda _paths: True)
+    monkeypatch.setattr(
+        live,
+        "_historical_source_review",
+        lambda _path, current_head: {
+            "model": "gemini-3.6-flash-high",
+            "head_before": (
+                "61ca38545ad01d2470f8b5b668dd746b88d113a2"
+            ),
+        },
+    )
+    monkeypatch.setattr(
+        live,
+        "_exact_runtime_absence",
+        lambda _lane, _attempt: {
+            "cell_container_absent": True,
+            "relay_container_absent": True,
+            "internal_network_absent": True,
+            "cell_image_absent": True,
+            "relay_image_absent": True,
+        },
+    )
+    output_path = artifact_root / "occupied-rehearsal-evidence.json"
+    cost_path = artifact_root / "occupied-rehearsal-cost-ledger.json"
+
+    first = live.reconcile_terminal_failure(
+        output_path=output_path,
+        cost_ledger_path=cost_path,
+        source_review_path=tmp_path / "review.json",
+    )
+    second = live.reconcile_terminal_failure(
+        output_path=output_path,
+        cost_ledger_path=cost_path,
+        source_review_path=tmp_path / "review.json",
+    )
+    ledger = json.loads(cost_path.read_text(encoding="utf-8"))
+    attempt = json.loads(
+        (
+            artifact_root
+            / "rayleen-a3-attempt-1-occupied-evidence.json"
+        ).read_text(encoding="utf-8")
+    )
+
+    assert first == second
+    assert first["reconciliation_was_provider_free"] is True
+    assert first["candidate_runtime_provider_call_count"] == 1
+    assert first["terminal_reason_code"] == "provider_content_invalid"
+    assert first["correction_eligible"] is False
+    assert first["davida_b3_started"] is False
+    assert ledger["status"] == "consumed"
+    assert ledger["provider_calls_consumed"] == 1
+    assert attempt["result"] == "attempt_terminal_rejection"
+    assert attempt["provider_metadata_status"] == "not_durably_recorded"
+    assert attempt["current_runtime_residue_absent"] is True
+    assert attempt["original_attempt_cleanup_evidence_status"] == (
+        "not_durably_recorded_beyond_immutable_interruption_assertion"
+    )
+
+    monkeypatch.setattr(
+        live,
+        "_historical_source_review",
+        lambda _path, current_head: {
+            "model": "gemini-3.6-flash-high",
+            "head_before": "stale-review-head",
+        },
+    )
+    with pytest.raises(
+        live.LiveError, match="historical_source_review_head_not_exact"
+    ):
+        live.reconcile_terminal_failure(
+            output_path=output_path,
+            cost_ledger_path=cost_path,
+            source_review_path=tmp_path / "review.json",
+        )
+    monkeypatch.setattr(
+        live,
+        "_historical_source_review",
+        lambda _path, current_head: {
+            "model": "gemini-3.6-flash-high",
+            "head_before": (
+                "61ca38545ad01d2470f8b5b668dd746b88d113a2"
+            ),
+        },
+    )
+
+    unexpected = artifact_root / "rayleen-a3-attempt-3-occupied-ledger.json"
+    unexpected.write_text("{}\n", encoding="utf-8")
+    with pytest.raises(
+        live.LiveError, match="terminal_reconciliation_later_attempt_present"
+    ):
+        live.reconcile_terminal_failure(
+            output_path=output_path,
+            cost_ledger_path=cost_path,
+            source_review_path=tmp_path / "review.json",
+        )
+
+
+def test_terminal_reconciliation_requires_canonical_paths(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    artifact_root = tmp_path / "canonical"
+    monkeypatch.setattr(live, "ARTIFACT_ROOT", artifact_root)
+    monkeypatch.setattr(
+        live, "SOURCE_REVIEW_RECEIPT", tmp_path / "review.json"
+    )
+
+    with pytest.raises(
+        live.LiveError, match="terminal_reconciliation_path_binding_invalid"
+    ):
+        live.reconcile_terminal_failure(
+            output_path=tmp_path / "other-output.json",
+            cost_ledger_path=artifact_root
+            / "occupied-rehearsal-cost-ledger.json",
+            source_review_path=tmp_path / "review.json",
+        )
+
+
+def test_terminal_reconciliation_requires_head_exact_tracked_inputs(
+    tmp_path: Path,
+) -> None:
+    assert live._paths_match_head(
+        [ROOT / "scripts/model_required_bureau_a3_b3_contracts.py"]
+    )
+    outside = tmp_path / "untracked.json"
+    outside.write_text("{}\n", encoding="utf-8")
+    assert live._paths_match_head([outside]) is False

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 8,
+  "register_revision": 9,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-04",
@@ -621,6 +621,46 @@
         ]
       },
       "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0017",
+      "attempt_id": "model-required-bureau-a3-b3-rayleen-occupied-001",
+      "observed_on": "2026-08-04",
+      "tranche": "model-required-bureau-a3-b3",
+      "origin": "harness",
+      "role": "orchestrator",
+      "resource_id": "model-required-bureau-a3-b3-live-harness",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_live_harness_occupied",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "A provider-contacted terminal broker rejection must consume the parent cost ledger exactly once, preserve sanitized terminal and cleanup evidence, release nothing, and stop later calls without being obscured by a proofreader-event assertion.",
+      "observed_error": "Rayleen primary consumed one provider call and the broker recorded provider_content_invalid before proofreading, but the outer harness required proofreader_completed, reported audit_event_cardinality_invalid, wrote no attempt or tranche evidence and left the parent ledger at zero consumed calls.",
+      "detection_method": "Sol compared the consumed child ledger and hash-chained provider_call_started/broker_rejected audit with the unchanged open parent cost ledger and absent occupied attempt/tranche evidence after the fail-closed run.",
+      "evidence_paths": [
+        "orchestration/continuity/model-required-bureau-a3-b3/occupied-terminal-interruption-evidence.json",
+        "orchestration/continuity/model-required-bureau-a3-b3/rayleen-a3-attempt-1-occupied-ledger.json",
+        "orchestration/continuity/model-required-bureau-a3-b3/rayleen-a3-attempt-1-occupied-audit.jsonl"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "harness.postcall_terminal_evidence_and_parent_consumption_split",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "The immutable interruption evidence preserves the exact split state. The broker now durably emits sanitized provider completion and the exact non-correction terminal reason; the harness admits that pre-proof terminal path, writes no-release cleanup evidence, reconciles parent consumption from the child artifacts and closes before Davida. A separate evidence-only finalizer repairs the already consumed attempt without a provider call.",
+        "prevention_control": "Every provider-contacted broker terminal path must preserve exact sanitized reason and metadata availability, reconcile parent consumption from a validated consumed child ledger before lane termination, write durable cleanup/no-release evidence and regression-prove that no correction or later lane starts.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-9.md",
+          "scripts/model_required_bureau_a3_b3_broker.py",
+          "scripts/model_required_bureau_a3_b3_live.py",
+          "tests/test_model_required_bureau_a3_b3.py"
+        ]
+      },
+      "status": "open"
     }
   ]
 }

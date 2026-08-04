@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "commit",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:bc5df9a9c4f15adb517e176880dde00321d3ae20208ab44fadeb5fab24ebcc7f",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The occupied A3/B3 plan, its threat-model delta, the controlled-recovery plan, autonomous-continuation policy, terminal-rejection checkpoint and implementation plan were reread. They permit only preservation of the original sanitized evidence, reconciliation of the parent ledger to one consumed call, truthful no-release attempt/tranche evidence, residue proof, deterministic checks, exact-HEAD independent review and task-branch closeout.",
+    "current_authority_allocation": "Yuri's standing uninterrupted-development authority remains active for dependency-satisfied planned work. GPT Sol owns architecture, recovery, acceptance and task-branch publication. The selected Vertex gemini-2.5-flash occupied authority has stopped at its explicit terminal condition: no Rayleen repeat or correction, no Davida call and no request-contract change is authorised. Gemini 3.6 Flash/high remains the independent source-only veto reviewer after deterministic gates.",
+    "git_refs_and_worktree": "After a fresh origin fetch, HEAD and local/origin codex/ariadne-bernie-davida-parallel-seam are exactly 61ca38545ad01d2470f8b5b668dd746b88d113a2. Local/origin master and handoff/current are exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked worktree contains only the in-progress bounded AER-0017 recovery changes; all pre-existing untracked user files remain present and unstaged.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after conversation compaction. The exact current baton is the A3/B3 provider-contacted terminal rejection: Rayleen primary consumed one call and ended at provider_content_invalid before extraction or proofreading; nothing was released and Davida did not start. The next implementation is the bounded provider-free AER-0017 terminal reconciliation, deterministic acceptance and fresh exact-HEAD independent veto.",
+    "protected_evidence_boundaries": "Patient, clinical, historical Diary, participant, protected, product-derived and production data; product or database reads/writes; commands, confirmation, actuators, provider calls, request changes, cloud or IAM mutation, deployment, release, Pages and protected-ref movement remain closed. docs/branding and the four Consultant/Gate-minus-one pre-push receipt/state files remain preserved and excluded; staging must use explicit paths only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

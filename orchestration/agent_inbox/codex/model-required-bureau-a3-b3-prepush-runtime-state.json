@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "push",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records the exact A3/B3 ADC-preflight block: the occupied rehearsal made zero candidate-runtime provider calls, the open Rayleen reservation is preserved, AER-0016 adds same-reservation recovery, and user restoration of the existing approved Bernie ADC is the next human-only gate.",
+    "current_authority_allocation": "Yuri's standing authorization permits uninterrupted planned gate work and task-branch publication. GPT Sol may push only codex/ariadne-bernie-davida-parallel-seam. No protected ref, integration, Pages, deployment, production or release authority is granted. The selected occupied envelope remains Vertex gemini-2.5-flash in australia-southeast1 through bernie-emr4-dev, separately closed pending ADC restoration.",
+    "active_plan_and_acceptance": "Commit 61ca38545ad01d2470f8b5b668dd746b88d113a2 contains the exact zero-call blocked evidence and hash-bound same-reservation recovery. Provider-free acceptance, 294 focused/inherited tests, Ruff and diff checks passed. Fresh Gemini 3.6 Flash/high review 6 passed this exact clean source with no blocking findings; review 5's duplicate terminal envelope failed closed and established no candidate verdict.",
+    "protected_evidence_boundaries": "Credentials, provider/cloud preflight, candidate-runtime calls, patient/clinical/product/protected/participant/production data, product/database commands or writes, actuators, deployment, release, Pages and protected refs remain closed. docs/branding/ and all existing Gate -1, Consultant and A3/B3 local receipt/state files remain untracked and excluded from the push.",
+    "git_refs_and_worktree": "After a fresh origin fetch, local/origin master and handoff/current are exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The task branch is at 61ca38545ad01d2470f8b5b668dd746b88d113a2, four commits ahead of origin task 2de467e23ce44574395ad6115e7205ca27c96fb2. The index and tracked worktree are clean; only deliberately preserved untracked paths are present and none will be staged."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_required_bureau_a3_b3_prepush_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol verified exact protected refs, the clean tracked task branch and the bounded task-branch-only push target."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh review 6 passed exact candidate 61ca38545ad01d2470f8b5b668dd746b88d113a2 with no blocking findings and a clean review worktree."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent is active for the push."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker is active for the push."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fallback not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Leverage-gated lane not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "codex-native-parallel-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "receipt_id": "model-required-bureau-a3-b3-review-6",
+      "path": "orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-review-6-receipt.json",
+      "status": "completed"
+    }
+  ],
+  "assigned_agent_ids": []
+}

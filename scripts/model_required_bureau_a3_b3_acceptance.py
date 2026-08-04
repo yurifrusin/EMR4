@@ -7,6 +7,7 @@ import argparse
 from copy import deepcopy
 import json
 from pathlib import Path
+import subprocess
 import sys
 
 from jsonschema import Draft202012Validator
@@ -21,6 +22,19 @@ from scripts import model_required_bureau_a3_b3_live as live
 
 ARTIFACT_ROOT = contracts.ARTIFACT_ROOT
 DRY_RUN_EVIDENCE = ARTIFACT_ROOT / "provider-free-dry-run-evidence.json"
+TERMINAL_INTERRUPTION_SCHEMA = (
+    ARTIFACT_ROOT / "occupied-terminal-interruption.schema.json"
+)
+TERMINAL_INTERRUPTION_EVIDENCE = (
+    ARTIFACT_ROOT / "occupied-terminal-interruption-evidence.json"
+)
+OCCUPIED_COST_LEDGER = ARTIFACT_ROOT / "occupied-rehearsal-cost-ledger.json"
+OCCUPIED_TRANCHE_EVIDENCE = ARTIFACT_ROOT / "occupied-rehearsal-evidence.json"
+SOURCE_REVIEW_RECEIPT = (
+    ROOT
+    / "orchestration/agent_inbox/antigravity/"
+    "model-required-bureau-a3-b3-review-6-receipt.json"
+)
 
 
 def _check(condition: bool, name: str, checks: dict[str, bool]) -> None:
@@ -79,7 +93,13 @@ def run_acceptance(*, require_dry_run: bool) -> dict[str, object]:
         ARTIFACT_ROOT / "cost-ledger.schema.json",
         ARTIFACT_ROOT / "occupied-preflight-blocked.schema.json",
         ARTIFACT_ROOT / "occupied-preflight-blocked-evidence.json",
-        ARTIFACT_ROOT / "occupied-rehearsal-cost-ledger.json",
+        TERMINAL_INTERRUPTION_SCHEMA,
+        TERMINAL_INTERRUPTION_EVIDENCE,
+        OCCUPIED_COST_LEDGER,
+        SOURCE_REVIEW_RECEIPT,
+        ARTIFACT_ROOT / "rayleen-a3-attempt-1-preflight.json",
+        ARTIFACT_ROOT / "rayleen-a3-attempt-1-occupied-ledger.json",
+        ARTIFACT_ROOT / "rayleen-a3-attempt-1-occupied-audit.jsonl",
         ARTIFACT_ROOT / "Dockerfile",
         ROOT / "scripts/model_required_bureau_a3_b3_broker.py",
         ROOT / "scripts/model_required_bureau_a3_b3_live.py",
@@ -102,6 +122,7 @@ def run_acceptance(*, require_dry_run: bool) -> dict[str, object]:
         ARTIFACT_ROOT / "single-use-ledger.schema.json",
         ARTIFACT_ROOT / "cost-ledger.schema.json",
         ARTIFACT_ROOT / "occupied-preflight-blocked.schema.json",
+        TERMINAL_INTERRUPTION_SCHEMA,
     ):
         Draft202012Validator.check_schema(contracts.load_object(schema_path))
     _check(True, "draft_2020_12_schemas_valid", checks)
@@ -118,22 +139,49 @@ def run_acceptance(*, require_dry_run: bool) -> dict[str, object]:
         ARTIFACT_ROOT / "occupied-preflight-blocked-evidence.json"
     )
     blocked_cost_ledger_path = (
-        ARTIFACT_ROOT / "occupied-rehearsal-cost-ledger.json"
+        OCCUPIED_COST_LEDGER
     )
     contracts.validate_instance(
         ARTIFACT_ROOT / "occupied-preflight-blocked.schema.json",
         blocked_preflight,
     )
+    current_cost_ledger = contracts.load_object(blocked_cost_ledger_path)
     contracts.validate_instance(
-        ARTIFACT_ROOT / "cost-ledger.schema.json",
-        contracts.load_object(blocked_cost_ledger_path),
+        ARTIFACT_ROOT / "cost-ledger.schema.json", current_cost_ledger
+    )
+    terminal_interruption = contracts.load_object(
+        TERMINAL_INTERRUPTION_EVIDENCE
+    )
+    contracts.validate_instance(
+        TERMINAL_INTERRUPTION_SCHEMA, terminal_interruption
+    )
+    original_parent_hash = terminal_interruption["source_artifact_hashes"][
+        "parent_cost_ledger"
+    ]
+    initial_reserved = live._reserve_cost(
+        live._initial_cost_ledger(), contracts.LANE_RAYLEEN, mode="live"
+    )
+    terminal_consumed = deepcopy(initial_reserved)
+    terminal_consumed["provider_calls_consumed"] = 1
+    terminal_consumed["status"] = "consumed"
+    parent_state = (
+        "interruption_preserved"
+        if current_cost_ledger == initial_reserved
+        else "terminal_reconciled"
+        if current_cost_ledger == terminal_consumed
+        else "invalid"
     )
     _check(
         blocked_preflight["cost_ledger_sha256"]
-        == live._file_hash(blocked_cost_ledger_path)
+        == original_parent_hash
         and blocked_preflight["provider_call_count"] == 0
         and blocked_preflight["provider_prompt_transmitted"] is False
-        and blocked_preflight["runtime_residue_absent"] is True,
+        and blocked_preflight["runtime_residue_absent"] is True
+        and parent_state != "invalid"
+        and (
+            parent_state == "terminal_reconciled"
+            or live._file_hash(blocked_cost_ledger_path) == original_parent_hash
+        ),
         "occupied_preflight_blocked_evidence_exact",
         checks,
     )
@@ -153,6 +201,271 @@ def run_acceptance(*, require_dry_run: bool) -> dict[str, object]:
     davida_candidate = contracts.load_object(contracts.DAVIDA_CANDIDATE_PATH)
     contracts.validate_rayleen_context(ray_context)
     contracts.validate_davida_context(davida_context)
+
+    rayleen_packet = live._request_packet(
+        contracts.LANE_RAYLEEN,
+        ray_context,
+        attempt_number=1,
+        correction_of=None,
+        correction_reason_code=None,
+    )
+    occupied_preflight_path = (
+        ARTIFACT_ROOT / "rayleen-a3-attempt-1-preflight.json"
+    )
+    occupied_attempt_ledger_path = (
+        ARTIFACT_ROOT / "rayleen-a3-attempt-1-occupied-ledger.json"
+    )
+    occupied_audit_path = (
+        ARTIFACT_ROOT / "rayleen-a3-attempt-1-occupied-audit.jsonl"
+    )
+    occupied_attempt_evidence_path = (
+        ARTIFACT_ROOT / "rayleen-a3-attempt-1-occupied-evidence.json"
+    )
+    occupied_attempt_ledger = contracts.load_object(
+        occupied_attempt_ledger_path
+    )
+    contracts.validate_instance(
+        ARTIFACT_ROOT / "single-use-ledger.schema.json",
+        occupied_attempt_ledger,
+    )
+    expected_attempt_ledger = live._attempt_ledger(
+        rayleen_packet, mode="live"
+    )
+    expected_attempt_ledger["status"] = "consumed"
+    expected_attempt_ledger["provider_calls_consumed"] = 1
+    occupied_events = live._read_events(occupied_audit_path)
+    occupied_classification = live._classify_attempt_events(
+        occupied_events, mode="live"
+    )
+    admitted_event = next(
+        event
+        for event in occupied_events
+        if event.get("event_type") == "request_admitted"
+    )
+    admitted_fields = admitted_event.get("fields")
+    _check(
+        occupied_attempt_ledger == expected_attempt_ledger
+        and occupied_classification
+        == {
+            "terminal_preproof_rejection": True,
+            "reason_code": "provider_content_invalid",
+            "correction_eligible": False,
+            "provider_metadata": None,
+        }
+        and isinstance(admitted_fields, dict)
+        and all(
+            admitted_fields.get(key) == rayleen_packet[key]
+            for key in (
+                "lane",
+                "attempt_id",
+                "ledger_id",
+                "policy_id",
+                "context_hash",
+                "provider_request_hash",
+            )
+        )
+        and terminal_interruption["source_artifact_hashes"]
+        == {
+            "parent_cost_ledger": original_parent_hash,
+            "read_only_preflight": live._file_hash(occupied_preflight_path),
+            "attempt_ledger": live._file_hash(occupied_attempt_ledger_path),
+            "audit_chain": live._file_hash(occupied_audit_path),
+        }
+        and terminal_interruption["provider_call_count"] == 1
+        and terminal_interruption["proofreader_reached"] is False
+        and terminal_interruption["correction_eligible"] is False
+        and terminal_interruption["release_created"] is False
+        and terminal_interruption["davida_b3_started"] is False,
+        "occupied_terminal_interruption_exact",
+        checks,
+    )
+
+    permitted_occupied_attempt_paths = {
+        occupied_preflight_path,
+        occupied_attempt_ledger_path,
+        occupied_audit_path,
+        occupied_attempt_evidence_path,
+    }
+    observed_occupied_attempt_paths = {
+        *ARTIFACT_ROOT.glob("*-attempt-*-occupied-*"),
+        *ARTIFACT_ROOT.glob("*-attempt-*-preflight.json"),
+    }
+    _check(
+        not (
+            observed_occupied_attempt_paths
+            - permitted_occupied_attempt_paths
+        )
+        and not OCCUPIED_COST_LEDGER.with_suffix(
+            OCCUPIED_COST_LEDGER.suffix + ".run.lock"
+        ).exists(),
+        "no_rayleen_correction_or_davida_attempt",
+        checks,
+    )
+
+    terminal_summary: dict[str, object]
+    if parent_state == "interruption_preserved":
+        _check(
+            not occupied_attempt_evidence_path.exists()
+            and not OCCUPIED_TRANCHE_EVIDENCE.exists(),
+            "terminal_reconciliation_not_partially_written",
+            checks,
+        )
+        terminal_summary = {
+            "state": parent_state,
+            "candidate_runtime_provider_call_count": 1,
+            "terminal_reason_code": "provider_content_invalid",
+            "reconciliation_was_provider_free": None,
+        }
+    else:
+        _check(
+            occupied_attempt_evidence_path.is_file()
+            and OCCUPIED_TRANCHE_EVIDENCE.is_file(),
+            "terminal_reconciliation_artifacts_present",
+            checks,
+        )
+        occupied_attempt_evidence = contracts.load_object(
+            occupied_attempt_evidence_path
+        )
+        occupied_tranche_evidence = contracts.load_object(
+            OCCUPIED_TRANCHE_EVIDENCE
+        )
+        runtime_absence = live._exact_runtime_absence(
+            contracts.LANE_RAYLEEN, 1
+        )
+        source_artifact_hashes = {
+            "preflight": live._file_hash(occupied_preflight_path),
+            "attempt_ledger": live._file_hash(
+                occupied_attempt_ledger_path
+            ),
+            "audit": live._file_hash(occupied_audit_path),
+            "prior_parent_cost_ledger": original_parent_hash,
+            "blocked_preflight_evidence": live._file_hash(
+                ARTIFACT_ROOT / "occupied-preflight-blocked-evidence.json"
+            ),
+            "terminal_interruption_evidence": live._file_hash(
+                TERMINAL_INTERRUPTION_EVIDENCE
+            ),
+        }
+        expected_attempt_evidence = {
+            "schema_version": (
+                "emr4.model_required_bureau_a3_b3.attempt_evidence.v1"
+            ),
+            "result": "attempt_terminal_rejection",
+            "mode": "live",
+            "lane": contracts.LANE_RAYLEEN,
+            "attempt_id": rayleen_packet["attempt_id"],
+            "attempt_number": 1,
+            "provider_contacted": True,
+            "provider_call_count": 1,
+            "request_binding": {
+                key: rayleen_packet[key]
+                for key in (
+                    "policy_id",
+                    "context_hash",
+                    "provider_request_hash",
+                )
+            },
+            "preflight_hash": source_artifact_hashes["preflight"],
+            "proofreader_verdict": "not_reached",
+            "proofreader_reason_code": "provider_content_invalid",
+            "correction_eligible": False,
+            "release": None,
+            "provider_metadata": None,
+            "provider_metadata_status": "not_durably_recorded",
+            "current_runtime_absence": {
+                **runtime_absence,
+                "daemon_wide_prune_performed": False,
+            },
+            "current_runtime_residue_absent": True,
+            "original_attempt_cleanup_evidence_status": (
+                "not_durably_recorded_beyond_immutable_interruption_assertion"
+            ),
+            "reconciled_after_interrupted_harness": True,
+            "source_artifact_hashes": source_artifact_hashes,
+            "raw_prompt_retained": False,
+            "raw_provider_response_retained": False,
+            "credential_or_token_retained": False,
+            "product_read_count": 0,
+            "database_access_count": 0,
+            "command_count": 0,
+            "write_count": 0,
+            "actuator_count": 0,
+        }
+        expected_attempt_evidence["evidence_hash"] = (
+            contracts.prefixed_sha256(expected_attempt_evidence)
+        )
+        current_head = live._git_head()
+        review = live._historical_source_review(
+            SOURCE_REVIEW_RECEIPT, current_head=current_head
+        )
+        reconciliation_source_head = occupied_tranche_evidence.get(
+            "reconciliation_source_head"
+        )
+        reconciliation_source_is_ancestor = False
+        if isinstance(reconciliation_source_head, str):
+            ancestry = subprocess.run(
+                [
+                    "git",
+                    "merge-base",
+                    "--is-ancestor",
+                    reconciliation_source_head,
+                    current_head,
+                ],
+                cwd=ROOT,
+                check=False,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                shell=False,
+            )
+            reconciliation_source_is_ancestor = ancestry.returncode == 0
+        expected_tranche_evidence = live._tranche_evidence(
+            mode="live",
+            result_name=(
+                "model_required_bureau_a3_b3_occupied_terminal_rejection"
+            ),
+            lane_results=[expected_attempt_evidence],
+            ledger=terminal_consumed,
+            review=review,
+            combined_pass=False,
+        )
+        expected_tranche_evidence.update(
+            {
+                "terminal_lane": contracts.LANE_RAYLEEN,
+                "terminal_reason_code": "provider_content_invalid",
+                "correction_eligible": False,
+                "provider_call_source_head": review["head_before"],
+                "reconciliation_source_head": reconciliation_source_head,
+                "reconciliation_was_provider_free": True,
+                "source_artifact_hashes": source_artifact_hashes,
+                "reconciliation_source_hashes": (
+                    live._reconciliation_source_hashes()
+                ),
+            }
+        )
+        expected_tranche_evidence.pop("evidence_hash")
+        expected_tranche_evidence["evidence_hash"] = (
+            contracts.prefixed_sha256(expected_tranche_evidence)
+        )
+        _check(
+            reconciliation_source_is_ancestor
+            and occupied_attempt_evidence == expected_attempt_evidence
+            and occupied_tranche_evidence == expected_tranche_evidence,
+            "terminal_reconciliation_exact",
+            checks,
+        )
+        terminal_summary = {
+            "state": parent_state,
+            "candidate_runtime_provider_call_count": 1,
+            "terminal_reason_code": "provider_content_invalid",
+            "reconciliation_was_provider_free": True,
+            "attempt_evidence_hash": occupied_attempt_evidence[
+                "evidence_hash"
+            ],
+            "tranche_evidence_hash": occupied_tranche_evidence[
+                "evidence_hash"
+            ],
+        }
     _check(
         contracts.proofread_rayleen(ray_candidate, ray_context)["verdict"] == "admitted"
         and contracts.proofread_davida(davida_candidate, davida_context)["verdict"] == "admitted",
@@ -286,6 +599,7 @@ def run_acceptance(*, require_dry_run: bool) -> dict[str, object]:
         "deployment_count": 0,
         "protected_ref_movement_count": 0,
         "dry_run": dry_run_summary,
+        "occupied_terminal_state": terminal_summary,
     }
 
 

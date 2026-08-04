@@ -1,0 +1,15 @@
+{
+  "schema_version": "emr4.model_required_bureau_a3_b3.review_transport_failure.v1",
+  "recorded_at": "2026-08-04",
+  "candidate_head": "61ca38545ad01d2470f8b5b668dd746b88d113a2",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.6-flash-high",
+  "reason_code": "terminal_decision_cardinality_invalid",
+  "observed_terminal_decision_count": 2,
+  "candidate_finding_established": false,
+  "candidate_runtime_provider_calls": 0,
+  "worktree_clean_after": true,
+  "worktree_head_after": "61ca38545ad01d2470f8b5b668dd746b88d113a2",
+  "raw_verifier_output_retained": false,
+  "recovery": "fresh_project_and_fresh_exact_clean_worktree_with_minimal_non_echo_terminal_contract"
+}

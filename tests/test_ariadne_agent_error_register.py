@@ -30,22 +30,22 @@ def _schema() -> dict:
     return _json(SCHEMA_PATH)
 
 
-def test_committed_register_is_closed_and_semantically_valid() -> None:
+def test_committed_register_is_semantically_valid_with_pending_aer_0017() -> None:
     register = _register()
 
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 8
+    assert register["register_revision"] == 9
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 17)
+        f"AER-{index:04d}" for index in range(1, 18)
     ]
-    assert not [
+    assert [
         row["incident_id"]
         for row in register["incidents"]
         if row["status"] == "open"
-    ]
+    ] == ["AER-0017"]
 
 
 def test_seed_separates_agent_behavior_from_transport() -> None:
@@ -101,23 +101,24 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_both_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 16
-    assert report["open_incident_ids"] == []
+    assert report["incident_count"] == 17
+    assert report["open_incident_ids"] == ["AER-0017"]
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 13,
-        "harness": 2,
+        "harness": 3,
         "transport": 1,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 2,
         "evidence_misreport": 2,
-        "harness_failure": 2,
+        "harness_failure": 3,
         "output_contract_violation": 7,
         "read_only_violation": 1,
         "reasoning_claim_error": 1,
         "transport_timeout": 1,
     }
     assert report["counts"]["by_candidate_state"] == {
+        "accepted_candidate_changed": 1,
         "canonical_unchanged": 14,
         "untrusted_partial_worktree": 2,
     }
@@ -315,6 +316,37 @@ def test_a3_b3_preflight_reservation_failure_has_hash_bound_resume_control() -> 
     assert blocked["provider_call_count"] == 0
     assert blocked["cost_reservation"]["provider_calls_reserved"] == 1
     assert blocked["cost_reservation"]["provider_calls_consumed"] == 0
+
+
+def test_a3_b3_terminal_broker_failure_has_evidence_only_recovery() -> None:
+    incident = {
+        row["incident_id"]: row for row in _register()["incidents"]
+    }["AER-0017"]
+    interruption = _json(
+        ROOT
+        / "orchestration"
+        / "continuity"
+        / "model-required-bureau-a3-b3"
+        / "occupied-terminal-interruption-evidence.json"
+    )
+
+    assert incident["origin"] == "harness"
+    assert incident["model"] is None
+    assert incident["category"] == "harness_failure"
+    assert incident["recurrence_signature"] == (
+        "harness.postcall_terminal_evidence_and_parent_consumption_split"
+    )
+    assert incident["status"] == "open"
+    assert incident["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
+    assert interruption["reason_code"] == "provider_content_invalid"
+    assert interruption["provider_call_count"] == 1
+    assert interruption["proofreader_reached"] is False
+    assert interruption["correction_eligible"] is False
+    assert interruption["release_created"] is False
+    assert interruption["davida_b3_started"] is False
+    assert interruption["cause_beyond_structural_failure_established"] is False
 
 
 def test_pattern_report_is_byte_deterministic(tmp_path: Path) -> None:

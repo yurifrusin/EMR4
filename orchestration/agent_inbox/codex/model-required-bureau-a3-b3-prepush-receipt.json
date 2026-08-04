@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "planned_action": "push",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:bc5df9a9c4f15adb517e176880dde00321d3ae20208ab44fadeb5fab24ebcc7f",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Commit 61ca38545ad01d2470f8b5b668dd746b88d113a2 contains the exact zero-call blocked evidence and hash-bound same-reservation recovery. Provider-free acceptance, 294 focused/inherited tests, Ruff and diff checks passed. Fresh Gemini 3.6 Flash/high review 6 passed this exact clean source with no blocking findings; review 5's duplicate terminal envelope failed closed and established no candidate verdict.",
+    "current_authority_allocation": "Yuri's standing authorization permits uninterrupted planned gate work and task-branch publication. GPT Sol may push only codex/ariadne-bernie-davida-parallel-seam. No protected ref, integration, Pages, deployment, production or release authority is granted. The selected occupied envelope remains Vertex gemini-2.5-flash in australia-southeast1 through bernie-emr4-dev, separately closed pending ADC restoration.",
+    "git_refs_and_worktree": "After a fresh origin fetch, local/origin master and handoff/current are exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The task branch is at 61ca38545ad01d2470f8b5b668dd746b88d113a2, four commits ahead of origin task 2de467e23ce44574395ad6115e7205ca27c96fb2. The index and tracked worktree are clean; only deliberately preserved untracked paths are present and none will be staged.",
+    "live_handover_current_baton": "AGENTS.md records the exact A3/B3 ADC-preflight block: the occupied rehearsal made zero candidate-runtime provider calls, the open Rayleen reservation is preserved, AER-0016 adds same-reservation recovery, and user restoration of the existing approved Bernie ADC is the next human-only gate.",
+    "protected_evidence_boundaries": "Credentials, provider/cloud preflight, candidate-runtime calls, patient/clinical/product/protected/participant/production data, product/database commands or writes, actuators, deployment, release, Pages and protected refs remain closed. docs/branding/ and all existing Gate -1, Consultant and A3/B3 local receipt/state files remain untracked and excluded from the push."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

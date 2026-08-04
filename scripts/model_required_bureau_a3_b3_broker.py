@@ -263,6 +263,156 @@ def _base_metadata(state: "BrokerState") -> dict[str, Any]:
     }
 
 
+def _safe_provider_metadata(value: Any) -> dict[str, Any]:
+    if not isinstance(value, dict):
+        return {}
+    safe: dict[str, Any] = {}
+    boolean_keys = {
+        "provider_contacted",
+        "raw_provider_response_retained",
+        "fixture_used",
+        "provider_text_retained",
+        "raw_prompt_retained",
+        "raw_response_retained",
+        "error_stream_oversized",
+        "provider_error_text_retained",
+    }
+    integer_keys = {
+        "http_status",
+        "latency_ms",
+        "provider_response_bytes",
+        "candidate_count",
+        "provider_error_code",
+        "observed_error_bytes",
+    }
+    hash_keys = {
+        "discarded_provider_response_sha256",
+        "discarded_error_sha256",
+    }
+    for key in boolean_keys:
+        if type(value.get(key)) is bool:
+            safe[key] = value[key]
+    for key in integer_keys:
+        item = value.get(key)
+        if (
+            key in value
+            and item is None
+            and key in {"http_status", "provider_error_code"}
+        ):
+            safe[key] = None
+        elif type(item) is int and item >= 0:
+            safe[key] = item
+    for key in hash_keys:
+        item = value.get(key)
+        if (
+            key in value
+            and item is None
+            and key == "discarded_provider_response_sha256"
+        ) or (
+            isinstance(item, str)
+            and len(item) == 71
+            and item.startswith("sha256:")
+            and all(character in "0123456789abcdef" for character in item[7:])
+        ):
+            safe[key] = item
+    finish_reason = value.get("finish_reason")
+    if finish_reason in {
+        "STOP",
+        "MAX_TOKENS",
+        "SAFETY",
+        "RECITATION",
+        "OTHER",
+        "BLOCKLIST",
+        "PROHIBITED_CONTENT",
+        "SPII",
+        "MALFORMED_FUNCTION_CALL",
+        "MODEL_ARMOR",
+        "UNRECOGNIZED",
+    }:
+        safe["finish_reason"] = finish_reason
+    model_version = _safe_model_version(value.get("model_version"))
+    if model_version is not None:
+        safe["model_version"] = model_version
+    normalized_status = value.get("normalized_status")
+    if "normalized_status" in value and (
+        normalized_status is None
+        or isinstance(normalized_status, str)
+        and 1 <= len(normalized_status) <= 64
+        and all(
+            character == "_" or character.isupper()
+            for character in normalized_status
+        )
+    ):
+        safe["normalized_status"] = normalized_status
+    field_paths = value.get("field_violation_paths")
+    if isinstance(field_paths, list):
+        selected_paths = [
+            field
+            for field in field_paths[:100]
+            if isinstance(field, str)
+            and 1 <= len(field) <= 160
+            and all(
+                character.isalnum() or character in "_.[]-"
+                for character in field
+            )
+        ]
+        safe["field_violation_paths"] = sorted(set(selected_paths))
+    usage = value.get("usage")
+    if isinstance(usage, dict):
+        safe["usage"] = {
+            key: item
+            for key in (
+                "promptTokenCount",
+                "candidatesTokenCount",
+                "thoughtsTokenCount",
+                "totalTokenCount",
+            )
+            if type(item := usage.get(key)) is int and item >= 0
+        }
+    return safe
+
+
+def _safe_rejection_records(
+    state: "BrokerState", error: BrokerError
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    provider_source = error.metadata.get("provider_metadata")
+    if not isinstance(provider_source, dict):
+        provider_source = error.metadata
+    provider_metadata = _safe_provider_metadata(provider_source)
+    proofreader = {
+        "verdict": "not_reached",
+        "reason_code": error.reason_code,
+        "correction_eligible": False,
+    }
+    safe_metadata = {
+        **_base_metadata(state),
+        "reason_code": error.reason_code,
+        "provider_contacted": error.metadata.get(
+            "provider_contacted", False
+        )
+        is True,
+        "provider_metadata": provider_metadata,
+        "proofreader": proofreader,
+    }
+    event_fields = {
+        "reason_code": error.reason_code,
+        "provider_retry": False,
+        "correction_eligible": False,
+        "provider_contacted": error.metadata.get("provider_contacted", False),
+        "provider_metadata": provider_metadata,
+    }
+    response = {
+        "status": "rejected",
+        "reason_code": error.reason_code,
+        "correction_eligible": False,
+        "release": None,
+        "proofreader": proofreader,
+        "provider_metadata": provider_metadata,
+        "metadata": safe_metadata,
+    }
+    return event_fields, response
+
+
 class BrokerState:
     """Own one exact request and one terminal execution claim."""
 
@@ -652,6 +802,22 @@ class BrokerState:
 
         bounded_metadata = contracts.bounded_provider_metadata(provider_packet)
         model_version = _safe_model_version(provider_packet.get("modelVersion"))
+        sanitized_provider = {
+            **call_metadata,
+            **bounded_metadata,
+            "model_version": model_version,
+            "provider_text_retained": False,
+            "raw_prompt_retained": False,
+            "raw_response_retained": False,
+        }
+        self.append_event(
+            (
+                "provider_call_completed"
+                if self.mode == "live"
+                else "provider_fixture_completed"
+            ),
+            sanitized_provider,
+        )
         try:
             _validate_observed_model_version(
                 mode=self.mode,
@@ -663,7 +829,7 @@ class BrokerState:
                 "provider_model_version_mismatch",
                 metadata={
                     **call_metadata,
-                    "provider_metadata": bounded_metadata,
+                    "provider_metadata": sanitized_provider,
                     "model_version": model_version,
                 },
             ) from None
@@ -675,7 +841,7 @@ class BrokerState:
                 str(error).split(":", 1)[0],
                 metadata={
                     **call_metadata,
-                    "provider_metadata": bounded_metadata,
+                    "provider_metadata": sanitized_provider,
                     "model_version": model_version,
                 },
             ) from None
@@ -707,14 +873,6 @@ class BrokerState:
             candidate.clear()
         selector_body.clear()
 
-        sanitized_provider = {
-            **call_metadata,
-            **bounded_metadata,
-            "model_version": model_version,
-            "provider_text_retained": False,
-            "raw_prompt_retained": False,
-            "raw_response_retained": False,
-        }
         proof_metadata = {
             "verdict": proof["verdict"],
             "reason_code": proof["reason_code"],
@@ -722,14 +880,6 @@ class BrokerState:
             "correction_eligible": proof["correction_eligible"],
             "model_authored_field_labels": model_authored_field_labels,
         }
-        self.append_event(
-            (
-                "provider_call_completed"
-                if self.mode == "live"
-                else "provider_fixture_completed"
-            ),
-            sanitized_provider,
-        )
         self.append_event("proofreader_completed", proof_metadata)
 
         release = proof["released"] if proof["verdict"] == "admitted" else None
@@ -825,45 +975,9 @@ def build_handler(state: BrokerState) -> type[BaseHTTPRequestHandler]:
                 )
                 result = state.execute(packet)
             except BrokerError as error:
-                provider_metadata = error.metadata.get("provider_metadata")
-                if not isinstance(provider_metadata, dict):
-                    provider_metadata = {
-                        key: value
-                        for key, value in error.metadata.items()
-                        if key != "proofreader"
-                    }
-                proofreader = error.metadata.get("proofreader")
-                if not isinstance(proofreader, dict):
-                    proofreader = {
-                        "verdict": "not_reached",
-                        "reason_code": error.reason_code,
-                        "correction_eligible": False,
-                    }
-                safe_metadata = {
-                    **_base_metadata(state),
-                    **error.metadata,
-                    "reason_code": error.reason_code,
-                }
-                state.append_event(
-                    "broker_rejected",
-                    {
-                        "reason_code": error.reason_code,
-                        "provider_retry": False,
-                        "provider_contacted": error.metadata.get(
-                            "provider_contacted", False
-                        ),
-                    },
-                )
-                self._json(
-                    409,
-                    {
-                        "status": "rejected",
-                        "release": None,
-                        "proofreader": proofreader,
-                        "provider_metadata": provider_metadata,
-                        "metadata": safe_metadata,
-                    },
-                )
+                event_fields, response = _safe_rejection_records(state, error)
+                state.append_event("broker_rejected", event_fields)
+                self._json(409, response)
                 self.server.shutdown_requested = True  # type: ignore[attr-defined]
                 return
             self._json(200, result)

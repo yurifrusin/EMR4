@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:bc5df9a9c4f15adb517e176880dde00321d3ae20208ab44fadeb5fab24ebcc7f",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The occupied rehearsal plan, threat-model delta, controlled-recovery plan, autonomous-continuation policy, blocked checkpoint and exact Review 6 receipt were reread. Review 6 passed unchanged source 61ca38545ad01d2470f8b5b668dd746b88d113a2 after 294 tests. The canonical open ledger remains hash sha256:303088b2a840bc162ba4f3270bf4a8ec5e09f5ec7469cf3114ae816a795d24f1 with one Rayleen USD 0.25 reservation and zero consumed calls.",
+    "current_authority_allocation": "Yuri restored the existing approved Bernie keyless impersonated ADC. Standing authority now permits the already frozen A3/B3 continuation: Vertex gemini-2.5-flash in bernie-emr4-dev through the named service account and australia-southeast1, authored-synthetic only, no fallback, maximum four calls and USD 1. Sol retains acceptance and recovery authority; the model receives candidate-generation authority only.",
+    "git_refs_and_worktree": "After a fresh origin fetch, HEAD and local/origin task branch are exactly 61ca38545ad01d2470f8b5b668dd746b88d113a2. Local/origin master and handoff/current are exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree and index are clean. Review 6 worktree is clean at the same HEAD. Exact occupied attempt, output and run-lock paths are absent and no exact A3/B3 container, network or image residue exists.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after Yuri reported restoration. It identifies model_required_bureau_a3_b3_adc_preflight_blocked as the live checkpoint, records zero candidate-runtime calls, and directs an exact read-only preflight followed by serial A3 then B3 only if every frozen control passes.",
+    "protected_evidence_boundaries": "Only newly authored synthetic A3/B3 frames may leave through the exact brokered regional endpoint. Patient, clinical, historical Diary, participant, protected, product-derived and production data; product/database reads or writes; commands, confirmation, actuators, tools, grounding, fallback, raw retention, cloud/IAM mutation, deployment, release, Pages and protected refs remain closed. All existing untracked paths including docs/branding and Consultant/Gate-minus-one receipt/state files remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

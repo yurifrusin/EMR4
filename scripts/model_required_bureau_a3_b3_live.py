@@ -33,6 +33,14 @@ CELL_REQUEST_SCHEMA = ARTIFACT_ROOT / "cell-request.schema.json"
 ATTEMPT_LEDGER_SCHEMA = ARTIFACT_ROOT / "single-use-ledger.schema.json"
 COST_LEDGER_SCHEMA = ARTIFACT_ROOT / "cost-ledger.schema.json"
 BLOCKED_PREFLIGHT_SCHEMA = ARTIFACT_ROOT / "occupied-preflight-blocked.schema.json"
+TERMINAL_INTERRUPTION_SCHEMA = (
+    ARTIFACT_ROOT / "occupied-terminal-interruption.schema.json"
+)
+SOURCE_REVIEW_RECEIPT = (
+    ROOT
+    / "orchestration/agent_inbox/antigravity/"
+    "model-required-bureau-a3-b3-review-6-receipt.json"
+)
 BASE_IMAGE = (
     "docker.io/library/python@sha256:"
     "a190708a2dec1bd18b1decb539f8e8f5407abaa9bf39cacda583f7f8c11db322"
@@ -47,6 +55,15 @@ CREDENTIAL_ENV_NAMES = {
     "OPENAI_API_KEY", "CLOUDSDK_CONFIG",
 }
 ZERO_HASH = "sha256:" + "0" * 64
+PREPROOF_TERMINAL_REASON_CODES = frozenset(
+    {
+        "provider_candidate_count_invalid",
+        "provider_content_invalid",
+        "provider_text_invalid",
+        "provider_candidate_not_json",
+        "provider_candidate_not_object",
+    }
+)
 
 
 class LiveError(RuntimeError):
@@ -257,6 +274,21 @@ def _reserve_cost(
     return updated
 
 
+def _reconcile_parent_consumption(
+    ledger: dict[str, Any], lane_results: list[dict[str, Any]]
+) -> dict[str, Any]:
+    updated = json.loads(json.dumps(ledger))
+    consumed_values = [item.get("provider_call_count") for item in lane_results]
+    if not all(type(value) is int and value in {0, 1} for value in consumed_values):
+        raise LiveError("attempt_provider_call_count_invalid")
+    consumed = sum(consumed_values)
+    if consumed > updated["provider_calls_reserved"]:
+        raise LiveError("parent_cost_consumption_exceeds_reservation")
+    updated["provider_calls_consumed"] = consumed
+    contracts.validate_instance(COST_LEDGER_SCHEMA, updated)
+    return updated
+
+
 def _resume_preflight_blocked_cost_ledger(
     *,
     cost_ledger_path: Path,
@@ -311,6 +343,80 @@ def _read_events(path: Path) -> list[dict[str, Any]]:
             raise LiveError("audit_hash_chain_invalid")
         previous_hash = observed_hash
     return events
+
+
+def _classify_attempt_events(
+    events: list[dict[str, Any]], *, mode: str
+) -> dict[str, Any]:
+    event_types = [event.get("event_type") for event in events]
+    if event_types.count("request_admitted") != 1:
+        raise LiveError("audit_event_cardinality_invalid")
+    expected_calls = 1 if mode == "live" else 0
+    if event_types.count("provider_call_started") != expected_calls:
+        raise LiveError("provider_call_cardinality_invalid")
+    if mode == "dry-run" and "broker_rejected" in event_types:
+        raise LiveError("provider_free_broker_rejected")
+
+    proofreader_count = event_types.count("proofreader_completed")
+    rejection_events = [
+        event for event in events if event.get("event_type") == "broker_rejected"
+    ]
+    if proofreader_count == 1 and not rejection_events:
+        return {
+            "terminal_preproof_rejection": False,
+            "reason_code": None,
+            "correction_eligible": None,
+            "provider_metadata": None,
+        }
+    if proofreader_count != 0 or len(rejection_events) != 1 or mode != "live":
+        raise LiveError("audit_event_cardinality_invalid")
+
+    fields = rejection_events[0].get("fields")
+    if not isinstance(fields, dict):
+        raise LiveError("broker_rejection_evidence_invalid")
+    reason_code = fields.get("reason_code")
+    if (
+        reason_code not in PREPROOF_TERMINAL_REASON_CODES
+        or fields.get("provider_contacted") is not True
+        or fields.get("provider_retry") is not False
+        or fields.get("correction_eligible", False) is not False
+        or "release_committed" in event_types
+    ):
+        raise LiveError("broker_rejection_evidence_invalid")
+    completed = [
+        event for event in events if event.get("event_type") == "provider_call_completed"
+    ]
+    if len(completed) > 1:
+        raise LiveError("provider_completion_cardinality_invalid")
+    provider_metadata = None
+    if completed:
+        provider_metadata = completed[0].get("fields")
+    elif isinstance(fields.get("provider_metadata"), dict):
+        provider_metadata = fields["provider_metadata"]
+    return {
+        "terminal_preproof_rejection": True,
+        "reason_code": reason_code,
+        "correction_eligible": False,
+        "provider_metadata": provider_metadata,
+    }
+
+
+def _exact_runtime_absence(lane: str, attempt_number: int) -> dict[str, bool]:
+    docker = Docker()
+    names = _names(lane, attempt_number)
+    return {
+        "cell_container_absent": not docker.exists(
+            "container", names["cell_container"]
+        ),
+        "relay_container_absent": not docker.exists(
+            "container", names["relay_container"]
+        ),
+        "internal_network_absent": not docker.exists(
+            "network", names["network"]
+        ),
+        "cell_image_absent": not docker.exists("image", names["cell_image"]),
+        "relay_image_absent": not docker.exists("image", names["relay_image"]),
+    }
 
 
 def _wait_broker(process: subprocess.Popen[bytes], audit_path: Path) -> None:
@@ -602,13 +708,15 @@ def _run_attempt(
         if ledger.get("status") != "consumed" or ledger.get("provider_calls_consumed") != expected_calls:
             raise LiveError("attempt_ledger_not_consumed")
         events = _read_events(audit_path)
-        event_types = [event.get("event_type") for event in events]
-        if event_types.count("request_admitted") != 1 or event_types.count("proofreader_completed") != 1:
-            raise LiveError("audit_event_cardinality_invalid")
-        if mode == "live" and event_types.count("provider_call_started") != 1:
-            raise LiveError("provider_call_cardinality_invalid")
-        if mode == "dry-run" and "provider_call_started" in event_types:
-            raise LiveError("provider_contacted_in_dry_run")
+        event_classification = _classify_attempt_events(events, mode=mode)
+        if event_classification["terminal_preproof_rejection"]:
+            if (
+                result_packet.get("status") != "edge_aborted"
+                or result_packet.get("reason")
+                != event_classification["reason_code"]
+                or result_packet.get("broker_status") != 409
+            ):
+                raise LiveError("cell_terminal_rejection_mismatch")
     finally:
         broker_absent = _terminate(process)
         for enabled, arguments, label in (
@@ -646,12 +754,42 @@ def _run_attempt(
     cleanup_passed = not cleanup_errors and all(value for key, value in cleanup.items() if key != "daemon_wide_prune_performed")
     if result_packet is None:
         raise LiveError("attempt_result_missing")
-    proofreader = result_packet.get("proofreader") if isinstance(result_packet, dict) else None
-    verdict = proofreader.get("verdict") if isinstance(proofreader, dict) else None
+    terminal_preproof = event_classification["terminal_preproof_rejection"]
+    proofreader = (
+        result_packet.get("proofreader")
+        if isinstance(result_packet, dict) and not terminal_preproof
+        else None
+    )
+    verdict = (
+        "not_reached"
+        if terminal_preproof
+        else proofreader.get("verdict") if isinstance(proofreader, dict) else None
+    )
+    reason_code = (
+        event_classification["reason_code"]
+        if terminal_preproof
+        else proofreader.get("reason_code")
+        if isinstance(proofreader, dict)
+        else None
+    )
+    correction_eligible = (
+        False
+        if terminal_preproof
+        else proofreader.get("correction_eligible")
+        if isinstance(proofreader, dict)
+        else False
+    )
     admitted = result_packet.get("status") == "completed" and verdict == "admitted"
+    attempt_result = (
+        "attempt_pass"
+        if admitted and cleanup_passed
+        else "attempt_terminal_rejection"
+        if terminal_preproof and cleanup_passed
+        else "attempt_revision_required"
+    )
     evidence = {
         "schema_version": "emr4.model_required_bureau_a3_b3.attempt_evidence.v1",
-        "result": "attempt_pass" if admitted and cleanup_passed else "attempt_revision_required",
+        "result": attempt_result,
         "mode": mode,
         "lane": lane,
         "attempt_id": packet["attempt_id"],
@@ -661,10 +799,24 @@ def _run_attempt(
         "request_binding": {key: packet[key] for key in ("policy_id", "context_hash", "provider_request_hash")},
         "preflight_hash": _file_hash(paths["preflight"]) if preflight is not None else None,
         "proofreader_verdict": verdict,
-        "proofreader_reason_code": proofreader.get("reason_code") if isinstance(proofreader, dict) else None,
-        "correction_eligible": proofreader.get("correction_eligible") if isinstance(proofreader, dict) else False,
+        "proofreader_reason_code": reason_code,
+        "correction_eligible": correction_eligible,
         "release": result_packet.get("release") if admitted else None,
-        "provider_metadata": result_packet.get("provider_metadata") if mode == "live" else None,
+        "provider_metadata": (
+            event_classification["provider_metadata"]
+            if terminal_preproof
+            else result_packet.get("provider_metadata")
+            if mode == "live"
+            else None
+        ),
+        "provider_metadata_status": (
+            "not_durably_recorded"
+            if terminal_preproof
+            and event_classification["provider_metadata"] is None
+            else "sanitized_allowlist"
+            if mode == "live"
+            else "provider_free_fixture"
+        ),
         "build_context": {
             "repository_root_used": False,
             "temporary_exact_allowlist": True,
@@ -690,6 +842,55 @@ def _run_attempt(
     _write_json(evidence_path, evidence)
     if not cleanup_passed:
         raise LiveError("attempt_cleanup_failed")
+    return evidence
+
+
+def _tranche_evidence(
+    *,
+    mode: str,
+    result_name: str,
+    lane_results: list[dict[str, Any]],
+    ledger: dict[str, Any],
+    review: dict[str, Any] | None,
+    combined_pass: bool,
+) -> dict[str, Any]:
+    evidence = {
+        "schema_version": "emr4.model_required_bureau_a3_b3.tranche_evidence.v1",
+        "result": result_name,
+        "mode": mode,
+        "combined_pass": combined_pass,
+        "lane_results": lane_results,
+        "rayleen_a3_admitted": any(
+            item.get("lane") == contracts.LANE_RAYLEEN
+            and item.get("proofreader_verdict") == "admitted"
+            for item in lane_results
+        ),
+        "davida_b3_admitted": any(
+            item.get("lane") == contracts.LANE_DAVIDA
+            and item.get("proofreader_verdict") == "admitted"
+            for item in lane_results
+        ),
+        "davida_b3_started": any(
+            item.get("lane") == contracts.LANE_DAVIDA for item in lane_results
+        ),
+        "candidate_runtime_provider_call_count": ledger[
+            "provider_calls_consumed"
+        ],
+        "source_review_transport_nonzero": mode == "live",
+        "source_review_model": review.get("model") if review else None,
+        "maximum_cost_usd": contracts.MAX_COST_USD,
+        "reserved_cost_usd": ledger["reserved_cost_usd"],
+        "patient_or_clinical_data_count": 0,
+        "product_read_count": 0,
+        "database_access_count": 0,
+        "command_count": 0,
+        "write_count": 0,
+        "actuator_count": 0,
+        "cloud_or_iam_mutation_count": 0,
+        "deployment_count": 0,
+        "protected_ref_movement_count": 0,
+    }
+    evidence["evidence_hash"] = contracts.prefixed_sha256(evidence)
     return evidence
 
 
@@ -760,8 +961,7 @@ def run_tranche(
                 )
                 lane_results.append(attempt)
                 if mode == "live":
-                    ledger["provider_calls_consumed"] += 1
-                    contracts.validate_instance(COST_LEDGER_SCHEMA, ledger)
+                    ledger = _reconcile_parent_consumption(ledger, lane_results)
                     _write_json(cost_ledger_path, ledger)
                 if attempt["proofreader_verdict"] == "admitted":
                     break
@@ -770,8 +970,28 @@ def run_tranche(
                     correction_reason = "schema_invalid"
                     continue
                 break
-            if not lane_results or lane_results[-1].get("lane") != lane or lane_results[-1].get("proofreader_verdict") != "admitted":
-                raise LiveError("lane_not_admitted")
+            if (
+                not lane_results
+                or lane_results[-1].get("lane") != lane
+                or lane_results[-1].get("proofreader_verdict") != "admitted"
+            ):
+                if mode != "live":
+                    raise LiveError("lane_not_admitted")
+                ledger["status"] = "consumed"
+                contracts.validate_instance(COST_LEDGER_SCHEMA, ledger)
+                _write_json(cost_ledger_path, ledger)
+                evidence = _tranche_evidence(
+                    mode=mode,
+                    result_name=(
+                        "model_required_bureau_a3_b3_occupied_terminal_rejection"
+                    ),
+                    lane_results=lane_results,
+                    ledger=ledger,
+                    review=review,
+                    combined_pass=False,
+                )
+                _write_json(output_path, evidence)
+                return evidence
         ledger["status"] = "consumed"
         contracts.validate_instance(COST_LEDGER_SCHEMA, ledger)
         _write_json(cost_ledger_path, ledger)
@@ -780,28 +1000,414 @@ def run_tranche(
             if mode == "dry-run"
             else "model_required_bureau_a3_b3_occupied_advisory_rehearsal_pass"
         )
-        evidence = {
-            "schema_version": "emr4.model_required_bureau_a3_b3.tranche_evidence.v1",
-            "result": result_name,
-            "mode": mode,
-            "lane_results": lane_results,
-            "candidate_runtime_provider_call_count": ledger["provider_calls_consumed"],
-            "source_review_transport_nonzero": mode == "live",
-            "source_review_model": review.get("model") if review else None,
-            "maximum_cost_usd": contracts.MAX_COST_USD,
-            "reserved_cost_usd": ledger["reserved_cost_usd"],
-            "patient_or_clinical_data_count": 0,
+        evidence = _tranche_evidence(
+            mode=mode,
+            result_name=result_name,
+            lane_results=lane_results,
+            ledger=ledger,
+            review=review,
+            combined_pass=True,
+        )
+        _write_json(output_path, evidence)
+        return evidence
+    finally:
+        os.close(lock_descriptor)
+        try:
+            lock_path.unlink()
+        except FileNotFoundError:
+            pass
+
+
+def _git_head() -> str:
+    return subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        shell=False,
+    ).stdout.strip()
+
+
+def _tracked_worktree_clean() -> bool:
+    status = subprocess.run(
+        ["git", "status", "--porcelain", "--untracked-files=no"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        shell=False,
+    )
+    return not status.stdout.strip()
+
+
+def _paths_match_head(paths: Sequence[Path]) -> bool:
+    for path in paths:
+        try:
+            relative = path.resolve().relative_to(ROOT.resolve()).as_posix()
+        except ValueError:
+            return False
+        if not path.is_file():
+            return False
+        tracked = subprocess.run(
+            ["git", "ls-files", "--error-unmatch", "--", relative],
+            cwd=ROOT,
+            check=False,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            shell=False,
+        )
+        if tracked.returncode != 0:
+            return False
+        head_blob = subprocess.run(
+            ["git", "rev-parse", f"HEAD:{relative}"],
+            cwd=ROOT,
+            check=False,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            shell=False,
+        )
+        working_blob = subprocess.run(
+            ["git", "hash-object", f"--path={relative}", str(path)],
+            cwd=ROOT,
+            check=False,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            shell=False,
+        )
+        if (
+            head_blob.returncode != 0
+            or working_blob.returncode != 0
+            or head_blob.stdout.strip() != working_blob.stdout.strip()
+        ):
+            return False
+    return True
+
+
+def _reconciliation_source_hashes() -> dict[str, str]:
+    paths = (
+        ROOT / "scripts/model_required_bureau_a3_b3_contracts.py",
+        ROOT / "scripts/model_required_bureau_a3_b3_broker.py",
+        ROOT / "scripts/model_required_bureau_a3_b3_live.py",
+        ROOT / "scripts/model_required_bureau_a3_b3_acceptance.py",
+        ROOT / "tests/test_model_required_bureau_a3_b3.py",
+        COST_LEDGER_SCHEMA,
+        TERMINAL_INTERRUPTION_SCHEMA,
+    )
+    return {
+        path.relative_to(ROOT).as_posix(): _file_hash(path)
+        for path in paths
+    }
+
+
+def _historical_source_review(path: Path, *, current_head: str) -> dict[str, Any]:
+    review = contracts.load_object(path)
+    review_head = review.get("head_before")
+    if (
+        review.get("status") != "completed"
+        or review.get("transport")
+        != "antigravity_new_project_bound_readonly_worktree"
+        or review.get("model") != "gemini-3.6-flash-high"
+        or review.get("reasoning_effort") != "high"
+        or review.get("decision") != "pass"
+        or not isinstance(review_head, str)
+        or review.get("head_after") != review_head
+        or review.get("dirty_after") is not False
+    ):
+        raise LiveError("historical_source_review_not_exact")
+    ancestry = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", review_head, current_head],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        shell=False,
+    )
+    if ancestry.returncode != 0:
+        raise LiveError("historical_source_review_not_ancestor")
+    return review
+
+
+def _exact_preflight_evidence(path: Path) -> dict[str, Any]:
+    evidence = contracts.load_object(path)
+    if (
+        evidence.get("result")
+        != "ariadne_vertex_sydney_gemini_25_adc_preflight_pass"
+        or evidence.get("project") != contracts.PROJECT
+        or evidence.get("service_account") != contracts.SERVICE_ACCOUNT
+        or evidence.get("location") != contracts.LOCATION
+        or evidence.get("endpoint_hostname") != contracts.HOSTNAME
+        or evidence.get("model_id") != contracts.MODEL
+        or evidence.get("provider_prompt_transmitted") is not False
+        or evidence.get("model_inference_called") is not False
+        or evidence.get("external_state_changed") is not False
+        or not isinstance(evidence.get("checks"), dict)
+        or not all(evidence["checks"].values())
+    ):
+        raise LiveError("terminal_reconciliation_preflight_invalid")
+    return evidence
+
+
+def reconcile_terminal_failure(
+    *,
+    output_path: Path,
+    cost_ledger_path: Path,
+    source_review_path: Path,
+) -> dict[str, Any]:
+    canonical_output_path = ARTIFACT_ROOT / "occupied-rehearsal-evidence.json"
+    canonical_cost_ledger_path = (
+        ARTIFACT_ROOT / "occupied-rehearsal-cost-ledger.json"
+    )
+    if (
+        output_path.resolve() != canonical_output_path.resolve()
+        or cost_ledger_path.resolve() != canonical_cost_ledger_path.resolve()
+        or source_review_path.resolve() != SOURCE_REVIEW_RECEIPT.resolve()
+    ):
+        raise LiveError("terminal_reconciliation_path_binding_invalid")
+    lock_path = cost_ledger_path.with_suffix(cost_ledger_path.suffix + ".run.lock")
+    try:
+        lock_descriptor = os.open(lock_path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+    except FileExistsError as error:
+        raise LiveError("tranche_run_already_active") from error
+    try:
+        current_head = _git_head()
+        if not _tracked_worktree_clean():
+            raise LiveError("terminal_reconciliation_source_not_committed_clean")
+        interruption_path = (
+            ARTIFACT_ROOT / "occupied-terminal-interruption-evidence.json"
+        )
+        paths = _attempt_paths(contracts.LANE_RAYLEEN, 1, mode="live")
+        authoritative_paths = (
+            SOURCE_REVIEW_RECEIPT,
+            contracts.RAYLEEN_CONTEXT_PATH,
+            CELL_REQUEST_SCHEMA,
+            ATTEMPT_LEDGER_SCHEMA,
+            COST_LEDGER_SCHEMA,
+            BLOCKED_PREFLIGHT_SCHEMA,
+            TERMINAL_INTERRUPTION_SCHEMA,
+            ARTIFACT_ROOT / "occupied-preflight-blocked-evidence.json",
+            interruption_path,
+            cost_ledger_path,
+            paths["preflight"],
+            paths["ledger"],
+            paths["audit"],
+            ROOT / "scripts/model_required_bureau_a3_b3_contracts.py",
+            ROOT / "scripts/model_required_bureau_a3_b3_broker.py",
+            ROOT / "scripts/model_required_bureau_a3_b3_live.py",
+            ROOT / "scripts/model_required_bureau_a3_b3_acceptance.py",
+            ROOT / "tests/test_model_required_bureau_a3_b3.py",
+        )
+        if not _paths_match_head(authoritative_paths):
+            raise LiveError("terminal_reconciliation_inputs_not_exact_head")
+        interruption = contracts.load_object(interruption_path)
+        contracts.validate_instance(
+            TERMINAL_INTERRUPTION_SCHEMA, interruption
+        )
+        review = _historical_source_review(
+            source_review_path, current_head=current_head
+        )
+        review_head = review["head_before"]
+        if review_head != interruption.get("provider_call_source_head"):
+            raise LiveError("historical_source_review_head_not_exact")
+        context = contracts.load_object(contracts.RAYLEEN_CONTEXT_PATH)
+        packet = _request_packet(
+            contracts.LANE_RAYLEEN,
+            context,
+            attempt_number=1,
+            correction_of=None,
+            correction_reason_code=None,
+        )
+        for required in (paths["preflight"], paths["ledger"], paths["audit"]):
+            if not required.is_file():
+                raise LiveError("terminal_reconciliation_artifact_missing")
+        _exact_preflight_evidence(paths["preflight"])
+        attempt_ledger = contracts.load_object(paths["ledger"])
+        contracts.validate_instance(ATTEMPT_LEDGER_SCHEMA, attempt_ledger)
+        expected_attempt_ledger = _attempt_ledger(packet, mode="live")
+        expected_attempt_ledger["status"] = "consumed"
+        expected_attempt_ledger["provider_calls_consumed"] = 1
+        if attempt_ledger != expected_attempt_ledger:
+            raise LiveError("terminal_reconciliation_attempt_ledger_invalid")
+        events = _read_events(paths["audit"])
+        classification = _classify_attempt_events(events, mode="live")
+        if (
+            not classification["terminal_preproof_rejection"]
+            or classification["reason_code"] != "provider_content_invalid"
+        ):
+            raise LiveError("terminal_reconciliation_reason_invalid")
+        admitted_event = next(
+            event for event in events if event.get("event_type") == "request_admitted"
+        )
+        admitted_fields = admitted_event.get("fields")
+        if not isinstance(admitted_fields, dict) or any(
+            admitted_fields.get(key) != packet[key]
+            for key in (
+                "lane",
+                "attempt_id",
+                "ledger_id",
+                "policy_id",
+                "context_hash",
+                "provider_request_hash",
+            )
+        ):
+            raise LiveError("terminal_reconciliation_request_binding_invalid")
+        permitted_occupied_attempt_paths = {
+            paths["preflight"],
+            paths["ledger"],
+            paths["audit"],
+            paths["evidence"],
+        }
+        observed_occupied_attempt_paths = {
+            *ARTIFACT_ROOT.glob("*-attempt-*-occupied-*"),
+            *ARTIFACT_ROOT.glob("*-attempt-*-preflight.json"),
+        }
+        if (
+            observed_occupied_attempt_paths
+            - permitted_occupied_attempt_paths
+        ):
+            raise LiveError("terminal_reconciliation_later_attempt_present")
+
+        ledger = contracts.load_object(cost_ledger_path)
+        contracts.validate_instance(COST_LEDGER_SCHEMA, ledger)
+        initial_reserved = _reserve_cost(
+            _initial_cost_ledger(), contracts.LANE_RAYLEEN, mode="live"
+        )
+        final_ledger = json.loads(json.dumps(initial_reserved))
+        final_ledger["provider_calls_consumed"] = 1
+        final_ledger["status"] = "consumed"
+        contracts.validate_instance(COST_LEDGER_SCHEMA, final_ledger)
+        if ledger not in (initial_reserved, final_ledger):
+            raise LiveError("terminal_reconciliation_parent_ledger_invalid")
+        blocked_path = ARTIFACT_ROOT / "occupied-preflight-blocked-evidence.json"
+        blocked = contracts.load_object(blocked_path)
+        contracts.validate_instance(BLOCKED_PREFLIGHT_SCHEMA, blocked)
+        if (
+            blocked.get("cost_ledger_sha256")
+            != "sha256:303088b2a840bc162ba4f3270bf4a8ec5e09f5ec7469cf3114ae816a795d24f1"
+            or (
+                ledger == initial_reserved
+                and _file_hash(cost_ledger_path) != blocked["cost_ledger_sha256"]
+            )
+        ):
+            raise LiveError("terminal_reconciliation_original_ledger_hash_invalid")
+
+        runtime_absence = _exact_runtime_absence(contracts.LANE_RAYLEEN, 1)
+        if not all(runtime_absence.values()):
+            raise LiveError("terminal_reconciliation_runtime_residue_present")
+        source_hashes = {
+            "preflight": _file_hash(paths["preflight"]),
+            "attempt_ledger": _file_hash(paths["ledger"]),
+            "audit": _file_hash(paths["audit"]),
+            "prior_parent_cost_ledger": blocked["cost_ledger_sha256"],
+            "blocked_preflight_evidence": _file_hash(blocked_path),
+            "terminal_interruption_evidence": _file_hash(interruption_path),
+        }
+        reconciliation_source_hashes = _reconciliation_source_hashes()
+        if (
+            interruption.get("reason_code") != "provider_content_invalid"
+            or interruption.get("provider_call_count") != 1
+            or interruption.get("proofreader_reached") is not False
+            or interruption.get("correction_eligible") is not False
+            or interruption.get("release_created") is not False
+            or interruption.get("davida_b3_started") is not False
+            or interruption.get("source_artifact_hashes")
+            != {
+                "parent_cost_ledger": source_hashes[
+                    "prior_parent_cost_ledger"
+                ],
+                "read_only_preflight": source_hashes["preflight"],
+                "attempt_ledger": source_hashes["attempt_ledger"],
+                "audit_chain": source_hashes["audit"],
+            }
+        ):
+            raise LiveError("terminal_reconciliation_interruption_invalid")
+        attempt_evidence = {
+            "schema_version": "emr4.model_required_bureau_a3_b3.attempt_evidence.v1",
+            "result": "attempt_terminal_rejection",
+            "mode": "live",
+            "lane": contracts.LANE_RAYLEEN,
+            "attempt_id": packet["attempt_id"],
+            "attempt_number": 1,
+            "provider_contacted": True,
+            "provider_call_count": 1,
+            "request_binding": {
+                key: packet[key]
+                for key in (
+                    "policy_id",
+                    "context_hash",
+                    "provider_request_hash",
+                )
+            },
+            "preflight_hash": source_hashes["preflight"],
+            "proofreader_verdict": "not_reached",
+            "proofreader_reason_code": "provider_content_invalid",
+            "correction_eligible": False,
+            "release": None,
+            "provider_metadata": None,
+            "provider_metadata_status": "not_durably_recorded",
+            "current_runtime_absence": {
+                **runtime_absence,
+                "daemon_wide_prune_performed": False,
+            },
+            "current_runtime_residue_absent": True,
+            "original_attempt_cleanup_evidence_status": (
+                "not_durably_recorded_beyond_immutable_interruption_assertion"
+            ),
+            "reconciled_after_interrupted_harness": True,
+            "source_artifact_hashes": source_hashes,
+            "raw_prompt_retained": False,
+            "raw_provider_response_retained": False,
+            "credential_or_token_retained": False,
             "product_read_count": 0,
             "database_access_count": 0,
             "command_count": 0,
             "write_count": 0,
             "actuator_count": 0,
-            "cloud_or_iam_mutation_count": 0,
-            "deployment_count": 0,
-            "protected_ref_movement_count": 0,
         }
+        attempt_evidence["evidence_hash"] = contracts.prefixed_sha256(
+            attempt_evidence
+        )
+        if paths["evidence"].exists():
+            if contracts.load_object(paths["evidence"]) != attempt_evidence:
+                raise LiveError("terminal_reconciliation_attempt_evidence_drift")
+        else:
+            _write_json(paths["evidence"], attempt_evidence)
+
+        if ledger == initial_reserved:
+            _write_json(cost_ledger_path, final_ledger)
+        evidence = _tranche_evidence(
+            mode="live",
+            result_name="model_required_bureau_a3_b3_occupied_terminal_rejection",
+            lane_results=[attempt_evidence],
+            ledger=final_ledger,
+            review=review,
+            combined_pass=False,
+        )
+        evidence.update(
+            {
+                "terminal_lane": contracts.LANE_RAYLEEN,
+                "terminal_reason_code": "provider_content_invalid",
+                "correction_eligible": False,
+                "provider_call_source_head": review_head,
+                "reconciliation_source_head": current_head,
+                "reconciliation_was_provider_free": True,
+                "source_artifact_hashes": source_hashes,
+                "reconciliation_source_hashes": reconciliation_source_hashes,
+            }
+        )
+        evidence.pop("evidence_hash")
         evidence["evidence_hash"] = contracts.prefixed_sha256(evidence)
-        _write_json(output_path, evidence)
+        if output_path.exists():
+            if contracts.load_object(output_path) != evidence:
+                raise LiveError("terminal_reconciliation_output_drift")
+        else:
+            _write_json(output_path, evidence)
         return evidence
     finally:
         os.close(lock_descriptor)
@@ -813,22 +1419,33 @@ def run_tranche(
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--mode", choices=("dry-run", "live"), required=True)
+    parser.add_argument(
+        "--mode", choices=("dry-run", "live", "reconcile-terminal"), required=True
+    )
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--cost-ledger", type=Path, required=True)
     parser.add_argument("--source-review", type=Path)
     parser.add_argument("--resume-preflight-blocked-evidence", type=Path)
     args = parser.parse_args()
     try:
-        evidence = run_tranche(
-            mode=args.mode,
-            output_path=args.output,
-            cost_ledger_path=args.cost_ledger,
-            source_review_path=args.source_review,
-            resume_preflight_blocked_evidence_path=(
-                args.resume_preflight_blocked_evidence
-            ),
-        )
+        if args.mode == "reconcile-terminal":
+            if args.source_review is None or args.resume_preflight_blocked_evidence:
+                raise LiveError("terminal_reconciliation_arguments_invalid")
+            evidence = reconcile_terminal_failure(
+                output_path=args.output,
+                cost_ledger_path=args.cost_ledger,
+                source_review_path=args.source_review,
+            )
+        else:
+            evidence = run_tranche(
+                mode=args.mode,
+                output_path=args.output,
+                cost_ledger_path=args.cost_ledger,
+                source_review_path=args.source_review,
+                resume_preflight_blocked_evidence_path=(
+                    args.resume_preflight_blocked_evidence
+                ),
+            )
     except (LiveError, OSError, subprocess.SubprocessError) as error:
         print(json.dumps({"result": "model_required_bureau_a3_b3_tranche_blocked", "reason_code": str(error).split(":", 1)[0]}, sort_keys=True))
         return 2

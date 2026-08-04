@@ -98,4 +98,5 @@ def test_live_handover_and_active_plan_record_the_standing_policy() -> None:
         assert "generic future" in text.lower()
 
     assert "without another permission request" in agents
-    assert "Begin A1/A2" in plan
+    assert "Complete the provider-free AER-0017" in plan
+    assert "material Yuri decision" in plan

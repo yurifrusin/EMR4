@@ -1,0 +1,86 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after Yuri reported restoration. It identifies model_required_bureau_a3_b3_adc_preflight_blocked as the live checkpoint, records zero candidate-runtime calls, and directs an exact read-only preflight followed by serial A3 then B3 only if every frozen control passes.",
+    "current_authority_allocation": "Yuri restored the existing approved Bernie keyless impersonated ADC. Standing authority now permits the already frozen A3/B3 continuation: Vertex gemini-2.5-flash in bernie-emr4-dev through the named service account and australia-southeast1, authored-synthetic only, no fallback, maximum four calls and USD 1. Sol retains acceptance and recovery authority; the model receives candidate-generation authority only.",
+    "active_plan_and_acceptance": "The occupied rehearsal plan, threat-model delta, controlled-recovery plan, autonomous-continuation policy, blocked checkpoint and exact Review 6 receipt were reread. Review 6 passed unchanged source 61ca38545ad01d2470f8b5b668dd746b88d113a2 after 294 tests. The canonical open ledger remains hash sha256:303088b2a840bc162ba4f3270bf4a8ec5e09f5ec7469cf3114ae816a795d24f1 with one Rayleen USD 0.25 reservation and zero consumed calls.",
+    "protected_evidence_boundaries": "Only newly authored synthetic A3/B3 frames may leave through the exact brokered regional endpoint. Patient, clinical, historical Diary, participant, protected, product-derived and production data; product/database reads or writes; commands, confirmation, actuators, tools, grounding, fallback, raw retention, cloud/IAM mutation, deployment, release, Pages and protected refs remain closed. All existing untracked paths including docs/branding and Consultant/Gate-minus-one receipt/state files remain preserved and excluded.",
+    "git_refs_and_worktree": "After a fresh origin fetch, HEAD and local/origin task branch are exactly 61ca38545ad01d2470f8b5b668dd746b88d113a2. Local/origin master and handoff/current are exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree and index are clean. Review 6 worktree is clean at the same HEAD. Exact occupied attempt, output and run-lock paths are absent and no exact A3/B3 container, network or image residue exists."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_required_bureau_a3_b3_postrestore_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed the post-restoration five-source rehydration and exact local/ref/reservation/residue checks."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh Gemini 3.6 Flash/high Review 6 passed the exact current source with no blocking finding and no worktree mutation."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No implementation worker is selected for this serial stateful occupied run."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fallback not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Leverage-gated lane not selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native worker is selected for this tightly coupled serial occupied run."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "receipt_id": "model-required-bureau-a3-b3-review-6",
+      "path": "orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-review-6-receipt.json",
+      "status": "completed"
+    }
+  ],
+  "assigned_agent_ids": []
+}
