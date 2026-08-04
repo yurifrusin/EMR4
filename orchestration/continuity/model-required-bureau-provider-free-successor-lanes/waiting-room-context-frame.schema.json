@@ -1,0 +1,29 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://emr4.local/schemas/waiting-room-context-frame.v1.json",
+  "type":"object","additionalProperties":false,
+  "required":["schema_version","frame_id","practice_id","location_id","context_revision","generated_at","expires_at","reader","backend_facts","derived_signals","excluded_field_classes"],
+  "properties":{
+    "schema_version":{"const":"emr4.waiting_room_context_frame.v1"},
+    "frame_id":{"type":"string","format":"uuid"},"practice_id":{"type":"string","format":"uuid"},"location_id":{"type":"string","format":"uuid"},
+    "context_revision":{"type":"integer","minimum":1},"generated_at":{"type":"string","format":"date-time"},"expires_at":{"type":"string","format":"date-time"},
+    "reader":{"const":"authorized_reception_surface"},
+    "backend_facts":{"type":"array","maxItems":32,"items":{"$ref":"#/$defs/fact"}},
+    "derived_signals":{"type":"array","maxItems":64,"items":{"$ref":"#/$defs/signal"}},
+    "excluded_field_classes":{"const":["contact_details","national_identifiers","clinical_text","appointment_notes","unrestricted_history","credentials","raw_provider_data"]}
+  },
+  "$defs":{
+    "label":{"type":"object","additionalProperties":false,"required":["source_ids","integrity_principals","confidentiality_readers","observed_at","expires_at","freshness_state","authority_ceiling"],"properties":{
+      "source_ids":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string"}},
+      "integrity_principals":{"const":["backend_truth"]},"confidentiality_readers":{"const":["authorized_reception_surface"]},
+      "observed_at":{"type":"string","format":"date-time"},"expires_at":{"type":"string","format":"date-time"},"freshness_state":{"const":"fresh"},"authority_ceiling":{"const":"data_only"}
+    }},
+    "fact":{"type":"object","additionalProperties":false,"required":["appointment_id","patient_display_token","practitioner_id","status","scheduled_at","waiting_area_id","arrived_at","label"],"properties":{
+      "appointment_id":{"type":"string","format":"uuid"},"patient_display_token":{"type":"string","pattern":"^synthetic:[a-z0-9-]+$"},"practitioner_id":{"type":"string","format":"uuid"},
+      "status":{"enum":["booked","confirmed","arrived","in_consult"]},"scheduled_at":{"type":"string","format":"date-time"},"waiting_area_id":{"type":["string","null"],"format":"uuid"},"arrived_at":{"type":["string","null"],"format":"date-time"},"label":{"$ref":"#/$defs/label"}
+    }},
+    "signal":{"type":"object","additionalProperties":false,"required":["kind","appointment_id","value","derived_by","label"],"properties":{
+      "kind":{"enum":["elapsed_wait_minutes","threshold_band","longest_wait_rank","flow_exception"]},"appointment_id":{"type":"string","format":"uuid"},"value":{"type":["integer","string","boolean"]},"derived_by":{"const":"deterministic_projection_engine"},"label":{"$ref":"#/$defs/label"}
+    }}
+  }
+}

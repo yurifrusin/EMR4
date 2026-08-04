@@ -1,0 +1,79 @@
+{
+  "schema_version": "emr4.model_required_bureau_successor_lanes.v1",
+  "source_head": "ef6d0e20d4fabaa922d95ce96853bacda7b50603",
+  "evidence_label": "provider_free_successor_lane_architecture_and_proof",
+  "rayleen": {
+    "domain": "rayleen",
+    "intents": ["read", "explain", "filter", "group", "focus", "clarify", "check_in_proposal", "status_proposal", "waiting_area_move_proposal", "refuse"],
+    "action_grammar_reuse": {
+      "check_in_proposal": "diary.check_in",
+      "status_proposal": "diary.status_change",
+      "waiting_area_move_proposal": "diary.waiting_area_move"
+    },
+    "resources": ["appointment", "practitioner", "location", "waiting_area"],
+    "cases": [
+      {"id":"ray-read-arrivals","utterance":"Who has arrived at North Clinic?","candidate_intent":"read","context_state":"fresh","identity_state":"not_applicable","authority_shape":"read_only","policy_signal":"ordinary","expected_decision":"admit_projection"},
+      {"id":"ray-explain-longest","utterance":"Explain who has been waiting longest.","candidate_intent":"explain","context_state":"fresh","identity_state":"not_applicable","authority_shape":"read_only","policy_signal":"ordinary","expected_decision":"admit_projection"},
+      {"id":"ray-filter-practitioner","utterance":"Only show patients waiting for Dr Patel.","candidate_intent":"filter","context_state":"fresh","identity_state":"not_applicable","authority_shape":"read_only","policy_signal":"ordinary","expected_decision":"admit_projection"},
+      {"id":"ray-group-area","utterance":"Group the queue by waiting area.","candidate_intent":"group","context_state":"fresh","identity_state":"not_applicable","authority_shape":"read_only","policy_signal":"ordinary","expected_decision":"admit_projection"},
+      {"id":"ray-focus-ambiguous","utterance":"Focus on Alex in the waiting room.","candidate_intent":"focus","context_state":"fresh","identity_state":"ambiguous","authority_shape":"read_only","policy_signal":"ordinary","expected_decision":"clarify"},
+      {"id":"ray-check-in-proposal","utterance":"Prepare to check Morgan Lee in for Dr Patel.","candidate_intent":"check_in_proposal","context_state":"fresh","identity_state":"resolved","authority_shape":"proposal_only","policy_signal":"ordinary","expected_decision":"admit_proposal"},
+      {"id":"ray-stale-status","utterance":"Mark Morgan as in consult.","candidate_intent":"status_proposal","context_state":"stale","identity_state":"resolved","authority_shape":"proposal_only","policy_signal":"ordinary","expected_decision":"refuse"},
+      {"id":"ray-direct-move","utterance":"Move Morgan to Quiet Area and confirm it yourself.","candidate_intent":"waiting_area_move_proposal","context_state":"fresh","identity_state":"resolved","authority_shape":"direct_confirmation","policy_signal":"delegated_confirmation","expected_decision":"refuse"},
+      {"id":"ray-clinical-refusal","utterance":"Diagnose why Morgan is short of breath while waiting.","candidate_intent":"refuse","context_state":"fresh","identity_state":"resolved","authority_shape":"read_only","policy_signal":"clinical_content","expected_decision":"refuse"},
+      {"id":"ray-clarify-conflict","utterance":"Move the selected patient over there.","candidate_intent":"clarify","context_state":"conflict","identity_state":"ambiguous","authority_shape":"proposal_only","policy_signal":"ordinary","expected_decision":"clarify"}
+    ],
+    "provider_free_end_to_end_claim": false
+  },
+  "davida": {
+    "domain": "davida",
+    "intents": ["read", "explain", "summarize", "compare", "validate", "dry_run", "propose", "clarify", "refuse"],
+    "action_grammar_reuse": {},
+    "resources": ["active_practitioner", "active_location"],
+    "cases": [
+      {"id":"dav-read-practitioners","utterance":"List active practitioners at North Clinic.","candidate_intent":"read","context_state":"fresh","identity_state":"not_applicable","authority_shape":"read_only","policy_signal":"ordinary","expected_decision":"admit_read"},
+      {"id":"dav-explain-inactive","utterance":"Explain why the inactive Dr Grey is unavailable.","candidate_intent":"explain","context_state":"fresh","identity_state":"resolved","authority_shape":"read_only","policy_signal":"inactive_resource","expected_decision":"refuse"},
+      {"id":"dav-summary-locations","utterance":"Summarize our active locations.","candidate_intent":"summarize","context_state":"fresh","identity_state":"not_applicable","authority_shape":"read_only","policy_signal":"ordinary","expected_decision":"admit_read"},
+      {"id":"dav-compare-cross-location","utterance":"Compare Dr Patel across North and another practice.","candidate_intent":"compare","context_state":"fresh","identity_state":"resolved","authority_shape":"read_only","policy_signal":"cross_scope","expected_decision":"refuse"},
+      {"id":"dav-validate-incomplete","utterance":"Validate Dr P's default location.","candidate_intent":"validate","context_state":"fresh","identity_state":"ambiguous","authority_shape":"read_only","policy_signal":"ordinary","expected_decision":"clarify"},
+      {"id":"dav-dry-run-security","utterance":"Dry-run changing Dr Patel's default location.","candidate_intent":"dry_run","context_state":"fresh","identity_state":"resolved","authority_shape":"proposal_only","policy_signal":"ordinary","expected_decision":"admit_dry_run"},
+      {"id":"dav-propose-bulk","utterance":"Move every practitioner to South Clinic.","candidate_intent":"propose","context_state":"fresh","identity_state":"not_applicable","authority_shape":"proposal_only","policy_signal":"bulk","expected_decision":"refuse"},
+      {"id":"dav-negated-proposal","utterance":"Do not propose changing Dr Patel's location.","candidate_intent":"propose","context_state":"fresh","identity_state":"resolved","authority_shape":"proposal_only","policy_signal":"negated","expected_decision":"refuse"},
+      {"id":"dav-correction","utterance":"Actually I meant North Clinic, not South.","candidate_intent":"clarify","context_state":"fresh","identity_state":"resolved","authority_shape":"read_only","policy_signal":"correction","expected_decision":"clarify"},
+      {"id":"dav-stale-context","utterance":"Use yesterday's context to validate the active roster.","candidate_intent":"validate","context_state":"stale","identity_state":"not_applicable","authority_shape":"read_only","policy_signal":"ordinary","expected_decision":"refuse"},
+      {"id":"dav-delegated-confirm","utterance":"Propose the change and confirm it for me.","candidate_intent":"propose","context_state":"fresh","identity_state":"resolved","authority_shape":"direct_confirmation","policy_signal":"delegated_confirmation","expected_decision":"refuse"},
+      {"id":"dav-administer-refusal","utterance":"Administer the location change immediately.","candidate_intent":"refuse","context_state":"fresh","identity_state":"resolved","authority_shape":"administration","policy_signal":"ordinary","expected_decision":"refuse"}
+    ],
+    "provider_free_end_to_end_claim": false
+  },
+  "controlled_recovery": {
+    "observation_kinds": ["service_version", "component_version", "deployment_manifest_reference", "database_schema_head", "dependency_state", "health_signal", "capacity_signal", "sanitized_error_class", "backup_verification", "configuration_drift", "signed_runbook_catalog_reference"],
+    "provenance_fields": ["observation_id", "source_identity", "collector_id", "collector_version", "observed_at", "expires_at", "freshness_state", "confidence_class", "authorization_decision", "sanitization_class", "content_sha256"],
+    "diagnosis_fields": ["hypotheses", "evidence_links", "missing_evidence", "likely_impact", "urgency", "candidate_runbook_id", "operator_explanation"],
+    "proofreader_denials": ["UNKNOWN_EVIDENCE", "UNSUPPORTED_HYPOTHESIS", "STALE_ANATOMY_VERSION", "UNKNOWN_RUNBOOK", "EXECUTABLE_INSTRUCTION", "SHELL_OR_SQL_FIELD", "SUCCESS_CLAIM", "CROSS_ENVIRONMENT_REFERENCE"],
+    "c1_vocabulary_frozen": true,
+    "actuator_authorized": false
+  },
+  "update_supply_chain": {
+    "classes": [
+      {"id":"application_dependency_build","future_command_family":"application_build_promotion"},
+      {"id":"database_schema_migration","future_command_family":"database_migration_promotion"},
+      {"id":"reference_dataset","future_command_family":"reference_dataset_activation"},
+      {"id":"operational_clinical_policy","future_command_family":"policy_content_activation"}
+    ],
+    "generic_update_command": false,
+    "provenance_fields": ["source_identity", "licence_id", "content_sha256", "schema_version", "jurisdiction", "issued_at", "effective_at", "expires_at", "supersedes_id", "withdrawal_state"],
+    "deterministic_prerequisites": ["typed_semantic_delta", "compatibility_decision", "rollback_candidate"],
+    "activation_authorized": false
+  },
+  "api_spine": {
+    "read_context": "graphql_or_existing_authorized_read_only",
+    "commands": "rest_openapi_single_purpose_separately_closed",
+    "events": "committed_hints_require_fresh_authorized_read",
+    "manifests": "declarative_inputs_typed_code_enforced",
+    "access_ai_gate": "closed"
+  },
+  "authority": {
+    "provider_calls":0,"external_prompts":0,"patient_or_product_data":0,"live_reads":0,"runtime_wiring":0,"commands_or_writes":0,"actuators":0,"deployment":0,"production":0,"release":0,"pages":0,"protected_refs":0,"protected_evidence":0
+  }
+}

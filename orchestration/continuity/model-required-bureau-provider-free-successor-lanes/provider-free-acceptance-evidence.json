@@ -1,0 +1,76 @@
+{
+  "artifact_hashes": {
+    "docs/emr4-model-required-bureau-provider-free-successor-lanes.md": "203688ea23a499f2d2f3c0cac9bb4e00514000a938abfd50b89ea230374f185a",
+    "docs/security/emr4-model-required-bureau-provider-free-successor-lanes-threat-model-delta.md": "7502a62deb03c55043ebe6cd98a95853d935e4ed6ee95c1251ce51ca18bd3339",
+    "orchestration/continuity/model-required-bureau-provider-free-successor-lanes/successor-lanes-contract.json": "5d4d13d431872f509b9f6583ddf97dc7a1c6be3c22bfc79162d723aebb858292",
+    "orchestration/continuity/model-required-bureau-provider-free-successor-lanes/successor-lanes-contract.schema.json": "06f475a07dd4b39a78a1afca7e4d65871776beeecc9500f8d499acddd60982c5",
+    "orchestration/continuity/model-required-bureau-provider-free-successor-lanes/technical-anatomy-frame.example.json": "2b40dd637039d7ec354b92e87b562e1b36b13e5f5de5084bb9130660b4d87ece",
+    "orchestration/continuity/model-required-bureau-provider-free-successor-lanes/technical-anatomy-frame.schema.json": "32c53792250db261662c74e639a72b5274e7ff3e11c782f3f10c6fa5879dc45c",
+    "orchestration/continuity/model-required-bureau-provider-free-successor-lanes/technical-diagnosis-candidate.example.json": "c218656853749a80d28833de110ab87cef93afc375ceb2d7f09f53d4ab63ab99",
+    "orchestration/continuity/model-required-bureau-provider-free-successor-lanes/technical-diagnosis-candidate.schema.json": "2af084d8ac22679358f5f781c5f084c3f631684756413e76a1fb9910e22a0c18",
+    "orchestration/continuity/model-required-bureau-provider-free-successor-lanes/update-provenance-delta.example.json": "4c79c490c318fe8414cbc1a2fd9e5938be2169e926857f802a39d6de151770a9",
+    "orchestration/continuity/model-required-bureau-provider-free-successor-lanes/update-provenance-delta.schema.json": "260514ccb1d71a3c0865c80eb2e761628f72dc94879c2042b6622ac880d1b10f",
+    "orchestration/continuity/model-required-bureau-provider-free-successor-lanes/waiting-room-context-frame.example.json": "ad000902269e6def90ecab8ea144f5790749efdd3e297d2b385fb8613cd6cbb4",
+    "orchestration/continuity/model-required-bureau-provider-free-successor-lanes/waiting-room-context-frame.schema.json": "bdf64a92c6470f0458352e8a0d7ed2d9925f5e6351c805ba942621408c0054f2"
+  },
+  "authority_and_side_effects": {
+    "actuators": 0,
+    "commands_or_writes": 0,
+    "deployment": 0,
+    "external_prompts": 0,
+    "live_reads": 0,
+    "pages": 0,
+    "patient_or_product_data": 0,
+    "production": 0,
+    "protected_evidence": 0,
+    "protected_refs": 0,
+    "provider_calls": 0,
+    "release": 0,
+    "runtime_wiring": 0
+  },
+  "contract": {
+    "c1_observation_kind_count": 11,
+    "c1_vocabulary_frozen": true,
+    "d1_update_class_count": 4,
+    "davida_case_count": 12,
+    "distinct_future_command_family_count": 4,
+    "language_decisions": {
+      "davida": {
+        "admit_dry_run": 1,
+        "admit_read": 2,
+        "clarify": 2,
+        "refuse": 7
+      },
+      "rayleen": {
+        "admit_projection": 4,
+        "admit_proposal": 1,
+        "clarify": 2,
+        "refuse": 3
+      }
+    },
+    "rayleen_case_count": 10
+  },
+  "diagnosis_denials": {
+    "executable": "EXECUTABLE_INSTRUCTION",
+    "expired": "STALE_ANATOMY_VERSION",
+    "stale_version": "STALE_ANATOMY_VERSION",
+    "unknown_evidence": "UNKNOWN_EVIDENCE",
+    "unknown_runbook": "UNKNOWN_RUNBOOK"
+  },
+  "documents": {
+    "document_count": 2,
+    "required_boundary_count": 7
+  },
+  "passed": true,
+  "result": "model_required_bureau_provider_free_successor_lanes_pass",
+  "schema_version": "emr4.model_required_bureau_successor_lanes_acceptance.v1",
+  "schemas_and_examples": {
+    "canonical_example_count": 4,
+    "closed_schema_count": 5,
+    "deterministic_elapsed_wait_minutes": 10,
+    "diagnosis_proofreader_nominal": "admit_read_only_candidate",
+    "update_activation_count": 0,
+    "waiting_room_fact_count": 1
+  },
+  "source_head": "ef6d0e20d4fabaa922d95ce96853bacda7b50603"
+}

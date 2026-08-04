@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/model-required-bureau-provider-free-successor-lanes.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_head",
+    "evidence_label",
+    "rayleen",
+    "davida",
+    "controlled_recovery",
+    "update_supply_chain",
+    "api_spine",
+    "authority"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.model_required_bureau_successor_lanes.v1"},
+    "source_head": {"const": "ef6d0e20d4fabaa922d95ce96853bacda7b50603"},
+    "evidence_label": {"const": "provider_free_successor_lane_architecture_and_proof"},
+    "rayleen": {"$ref": "#/$defs/languageLane"},
+    "davida": {"$ref": "#/$defs/languageLane"},
+    "controlled_recovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["observation_kinds", "provenance_fields", "diagnosis_fields", "proofreader_denials", "c1_vocabulary_frozen", "actuator_authorized"],
+      "properties": {
+        "observation_kinds": {"type": "array", "minItems": 10, "uniqueItems": true, "items": {"type": "string"}},
+        "provenance_fields": {"type": "array", "minItems": 10, "uniqueItems": true, "items": {"type": "string"}},
+        "diagnosis_fields": {"type": "array", "minItems": 6, "uniqueItems": true, "items": {"type": "string"}},
+        "proofreader_denials": {"type": "array", "minItems": 7, "uniqueItems": true, "items": {"type": "string"}},
+        "c1_vocabulary_frozen": {"const": true},
+        "actuator_authorized": {"const": false}
+      }
+    },
+    "update_supply_chain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["classes", "generic_update_command", "provenance_fields", "deterministic_prerequisites", "activation_authorized"],
+      "properties": {
+        "classes": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "future_command_family"],
+            "properties": {"id": {"type": "string"}, "future_command_family": {"type": "string"}}
+          }
+        },
+        "generic_update_command": {"const": false},
+        "provenance_fields": {"type": "array", "minItems": 10, "uniqueItems": true, "items": {"type": "string"}},
+        "deterministic_prerequisites": {"type": "array", "minItems": 3, "uniqueItems": true, "items": {"type": "string"}},
+        "activation_authorized": {"const": false}
+      }
+    },
+    "api_spine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["read_context", "commands", "events", "manifests", "access_ai_gate"],
+      "properties": {
+        "read_context": {"const": "graphql_or_existing_authorized_read_only"},
+        "commands": {"const": "rest_openapi_single_purpose_separately_closed"},
+        "events": {"const": "committed_hints_require_fresh_authorized_read"},
+        "manifests": {"const": "declarative_inputs_typed_code_enforced"},
+        "access_ai_gate": {"const": "closed"}
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider_calls", "external_prompts", "patient_or_product_data", "live_reads", "runtime_wiring", "commands_or_writes", "actuators", "deployment", "production", "release", "pages", "protected_refs", "protected_evidence"],
+      "properties": {
+        "provider_calls": {"const": 0}, "external_prompts": {"const": 0},
+        "patient_or_product_data": {"const": 0}, "live_reads": {"const": 0},
+        "runtime_wiring": {"const": 0}, "commands_or_writes": {"const": 0},
+        "actuators": {"const": 0}, "deployment": {"const": 0},
+        "production": {"const": 0}, "release": {"const": 0},
+        "pages": {"const": 0}, "protected_refs": {"const": 0},
+        "protected_evidence": {"const": 0}
+      }
+    }
+  },
+  "$defs": {
+    "languageLane": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["domain", "intents", "action_grammar_reuse", "resources", "cases", "provider_free_end_to_end_claim"],
+      "properties": {
+        "domain": {"enum": ["rayleen", "davida"]},
+        "intents": {"type": "array", "minItems": 9, "uniqueItems": true, "items": {"type": "string"}},
+        "action_grammar_reuse": {"type": "object"},
+        "resources": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "cases": {
+          "type": "array", "minItems": 9,
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["id", "utterance", "candidate_intent", "context_state", "identity_state", "authority_shape", "policy_signal", "expected_decision"],
+            "properties": {
+              "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+              "utterance": {"type": "string", "minLength": 3, "maxLength": 240},
+              "candidate_intent": {"type": "string"},
+              "context_state": {"enum": ["fresh", "stale", "conflict"]},
+              "identity_state": {"enum": ["resolved", "ambiguous", "not_applicable"]},
+              "authority_shape": {"enum": ["read_only", "proposal_only", "direct_confirmation", "administration"]},
+              "policy_signal": {"enum": ["ordinary", "clinical_content", "cross_scope", "inactive_resource", "bulk", "negated", "correction", "delegated_confirmation"]},
+              "expected_decision": {"enum": ["admit_projection", "admit_read", "admit_dry_run", "admit_proposal", "clarify", "refuse"]}
+            }
+          }
+        },
+        "provider_free_end_to_end_claim": {"const": false}
+      }
+    }
+  }
+}

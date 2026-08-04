@@ -1,0 +1,4 @@
+{
+  "schema_version":"emr4.technical_diagnosis_candidate.v1","candidate_id":"23000000-0000-4000-8000-000000000001","anatomy_frame_id":"22000000-0000-4000-8000-000000000001","anatomy_version":"synthetic-anatomy-1","context_sha256":"4444444444444444444444444444444444444444444444444444444444444444","candidate_integrity":"untrusted_model_fixture",
+  "hypotheses":[{"hypothesis_id":"api-degraded","statement":"The synthetic API health observation is degraded.","evidence_links":["api-health"],"support_state":"supported"}],"missing_evidence":["No synthetic capacity observation is present."],"likely_impact":"degraded_service","urgency":"soon","candidate_runbook_id":"restart-api-synthetic","operator_explanation":"The evidence supports a degraded synthetic API state; execution remains separately forbidden.","authority_ceiling":"diagnosis_candidate"
+}

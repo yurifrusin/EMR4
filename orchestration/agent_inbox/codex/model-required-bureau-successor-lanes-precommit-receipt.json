@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "repository_documentation",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:bc5df9a9c4f15adb517e176880dde00321d3ae20208ab44fadeb5fab24ebcc7f",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The candidate implements the active plan's frozen provider-free A1/A2, B1/B2 and C1/C2 outputs and the dependency-open D1/D2 outputs as documents, five closed schemas, authored-synthetic examples/cases, deterministic proof code, tests and evidence. Focused and broader deterministic/API regressions pass; Sol architecture/API review returns pass_for_fresh_independent_veto.",
+    "current_authority_allocation": "Yuri's standing programme authority permits implementation, bounded recovery, acceptance, explicit-path task-branch commit/push and immediate continuation. Sol owns the coupled architecture and acceptance. A fresh Gemini 3.6 Flash/high source-only veto follows deterministic passage; it receives no implementation, integration, protected or product authority.",
+    "git_refs_and_worktree": "The task branch parent is ef6d0e20d4fabaa922d95ce96853bacda7b50603 and origin-aligned before this candidate commit. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicitly named successor-lane artifacts and receipts are eligible for staging; broad staging remains forbidden.",
+    "live_handover_current_baton": "AGENTS.md was read completely in this active continuation at SHA-256 c0d0d27336174f63cee4f683ebbf730d3aa1bddd60026c07960b083f8ecbc13b. Gate zero remains the accepted parent at Continuity 209 / Compass 190 and the live Next implementation explicitly opens provider-free A1/A2, B1/B2 and C1/C2 plus D1/D2 after the now-satisfied C1 vocabulary dependency.",
+    "protected_evidence_boundaries": "No provider call, external prompt, patient or product-derived data, live product read, runtime wiring, command/write, actuator, shell/SQL/cloud/IAM, migration/update activation, deployment, production, release, Pages, protected ref or protected evidence occurs. Protected holdouts, historical PHI, H15/H-series, docs/branding/ and four existing Consultant/Gate-minus-one pre-push files remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,14 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"https://emr4.local/schemas/technical-anatomy-frame.v1.json","type":"object","additionalProperties":false,
+  "required":["schema_version","frame_id","environment_class","anatomy_version","generated_at","expires_at","observations","signed_runbook_catalog","forbidden_content"],
+  "properties":{
+    "schema_version":{"const":"emr4.technical_anatomy_frame.v1"},"frame_id":{"type":"string","format":"uuid"},"environment_class":{"const":"isolated_authored_synthetic"},"anatomy_version":{"type":"string","pattern":"^[a-z0-9.-]+$"},"generated_at":{"type":"string","format":"date-time"},"expires_at":{"type":"string","format":"date-time"},
+    "observations":{"type":"array","minItems":1,"maxItems":64,"items":{"$ref":"#/$defs/observation"}},
+    "signed_runbook_catalog":{"type":"array","maxItems":16,"items":{"type":"object","additionalProperties":false,"required":["runbook_id","version","manifest_sha256","signature_state"],"properties":{"runbook_id":{"type":"string","pattern":"^[a-z0-9.-]+$"},"version":{"type":"string"},"manifest_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},"signature_state":{"const":"authored_synthetic_valid"}}}},
+    "forbidden_content":{"const":["credentials","secrets","unrestricted_logs","raw_patient_data","raw_clinical_data","generic_database_introspection","shell","sql","cloud_owner_access"]}
+  },
+  "$defs":{"observation":{"type":"object","additionalProperties":false,"required":["observation_id","kind","value","source_identity","collector_id","collector_version","observed_at","expires_at","freshness_state","confidence_class","authorization_decision","sanitization_class","content_sha256"],"properties":{
+    "observation_id":{"type":"string","pattern":"^[a-z0-9.-]+$"},"kind":{"enum":["service_version","component_version","deployment_manifest_reference","database_schema_head","dependency_state","health_signal","capacity_signal","sanitized_error_class","backup_verification","configuration_drift","signed_runbook_catalog_reference"]},
+    "value":{"type":["string","number","integer","boolean"],"maxLength":160},"source_identity":{"type":"string","pattern":"^synthetic:[a-z0-9.-]+$"},"collector_id":{"type":"string","pattern":"^[a-z0-9.-]+$"},"collector_version":{"type":"string"},"observed_at":{"type":"string","format":"date-time"},"expires_at":{"type":"string","format":"date-time"},"freshness_state":{"const":"fresh"},"confidence_class":{"enum":["direct_signed","direct_unsigned","derived_deterministic","unknown"]},"authorization_decision":{"const":"authorized_synthetic_read"},"sanitization_class":{"enum":["not_sensitive","structured_redacted","identifier_only"]},"content_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"}
+  }}}
+}
