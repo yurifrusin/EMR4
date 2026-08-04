@@ -1,0 +1,98 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "push",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records model_required_bureau_a3_b3_occupied_terminal_rejection as the accepted exact result and names the next action as the genuine Yuri-owned request-contract/provider-call fork after task-branch publication.",
+    "current_authority_allocation": "GPT Sol is authorised to publish the accepted closeout to the existing non-protected task branch only. No protected integration, provider call, Rayleen correction, Davida start, request change, deployment, release, Pages or protected-ref action is authorised.",
+    "active_plan_and_acceptance": "Task HEAD d8e17da81b3b46fc877fa336e319c6dfb72cd279 contains the accepted terminal closeout. Fresh Review 9 passed exact correction HEAD after 305 tests; final acceptance, focused/full inherited tests, Ruff and diff checks pass; AER revision 12 has no open incident.",
+    "protected_evidence_boundaries": "Push is limited to codex/ariadne-bernie-davida-parallel-seam. Credentials, raw provider/verifier output, patient/clinical/protected/product-derived/production data, new provider calls, product/database/runtime/write/actuator surfaces, cloud/IAM, deployment, release, Pages and protected refs remain closed. docs/branding and the four existing Consultant/Gate-minus-one pre-push files remain preserved and excluded.",
+    "git_refs_and_worktree": "After a fresh origin fetch, HEAD is d8e17da81b3b46fc877fa336e319c6dfb72cd279 and is six commits ahead/zero behind origin task at 61ca38545ad01d2470f8b5b668dd746b88d113a2. Local/origin master and handoff/current are all exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty and only the five named user-owned untracked paths remain."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_required_bureau_a3_b3_final_prepush_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol accepted the exact terminal outcome and verified explicit-path publication scope."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Review 9 passed the exact fresh-worktree correction with no findings."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker is active."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Leverage-gated lane is not selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Native review lanes are complete and no subagent has publication or protected-ref authority."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "receipt_id": "model-required-bureau-a3-b3-review-9",
+      "path": "orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-review-9-receipt.json",
+      "status": "completed"
+    }
+  ],
+  "assigned_agent_ids": []
+}
