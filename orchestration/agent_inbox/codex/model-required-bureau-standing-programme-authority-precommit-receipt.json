@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "repository_documentation",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:bc5df9a9c4f15adb517e176880dde00321d3ae20208ab44fadeb5fab24ebcc7f",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The active model-required Bureau development plan, human continuation policy, autonomous_continuation.v2 machine policy and operating model now align. Gate zero is active; after its deterministic checks, fresh Gemini 3.6 Flash/high veto and Sol Extra High acceptance pass, the dependency-satisfied planned lanes continue automatically. The decision is accepted at Continuity 208 / Compass 189 with focused policy and continuity tests passing.",
+    "current_authority_allocation": "Yuri explicitly authorised uninterrupted movement through the planned gate sequence unless an unplanned decision fork, user-only input or another genuine attention condition requires intervention. Sol retains architecture, acceptance and integration authority; exact bounded workers and the configured fresh Gemini veto may be used only within frozen plans. A generic future candidate or unresolved explicit closure remains non-executable.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 remains on codex/ariadne-bernie-davida-parallel-seam at ba6a96d55002ee7713c3a12867e57b41ce972150, aligned with origin before this policy commit. Local master, local handoff/current, origin/master and origin/handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only the explicit standing-policy, Continuity/Compass, acceptance, receipt and test artifacts are intended for staging; all pre-existing user-owned untracked paths remain untouched and broad Git staging is forbidden.",
+    "live_handover_current_baton": "AGENTS.md remains fully rehydrated in this session and is now updated at 468 lines, 74993 bytes and SHA-256 d2c27cc48f48974f514eeb94bb3d457a868eb2567243a6dc4adf73abcace4b75. Its Current result and Next implementation record Gate zero as active, and section 6 records Yuri's standing authority to continue through every fully specified dependency-satisfied gate without repeat permission pauses.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10, historical PHI and the provenance-blocked appointment corpus remain closed and were not accessed. Generic provider/model/data/cost/licence, clinical/product access, command/write, actuator, deployment/release, Pages, protected-ref and protected-evidence candidates remain closed until an active accepted plan freezes their exact boundary. User-owned docs/branding/ and the existing Gate -1 and Consultant pre-push receipt/state files remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

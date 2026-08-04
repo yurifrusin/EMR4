@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 207,
+  "graph_revision": 208,
   "harvests": [],
   "nodes": [
     {
@@ -11849,9 +11849,83 @@
         "Every model/provider/data/cost/runtime decision and every product lane remains closed.",
         "Real identity, patient/clinical/product data, tools, actuators, deployment, production, release, Pages and protected refs remain closed."
       ]
+    },
+    {
+      "id": "model-required-bureau-standing-programme-authority",
+      "title": "Standing Programme Continuation Authority",
+      "kind": "maintenance",
+      "status": "accepted",
+      "created_at": "2026-08-04T07:05:15Z",
+      "updated_at": "2026-08-04T07:05:15Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "ba6a96d55002ee7713c3a12867e57b41ce972150",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "model-required-bureau-gate-minus-one",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "autonomous-action",
+            "source": "AGENTS.md",
+            "scope": "Automatic movement through dependency-satisfied gates whose complete material boundaries are frozen in the live Current Baton or an accepted descendant plan"
+          }
+        ],
+        "notes": [
+          "Yuri established the standing authority on 2026-08-04.",
+          "Gate zero is authorised and is the active next gate.",
+          "Generic future candidates and unresolved explicit closures are not self-authorising.",
+          "No provider call, product or patient data, runtime wiring, write, deployment, release, Pages or protected-ref action occurred.",
+          "The user-owned docs/branding directory and prior untracked receipts remained excluded."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "activate-standing-programme-continuation",
+          "source": "AGENTS.md",
+          "status": "accepted",
+          "summary": "Proceed automatically across exact dependency-satisfied gates and pause only for a genuine user-attention condition."
+        }
+      ],
+      "claim_scope": [
+        "Routine fresh-authority pauses between fully specified planned gates are superseded.",
+        "The policy covers planning, bounded dispatch, implementation, testing, review, recovery, acceptance and task-branch publication inside the frozen plan.",
+        "The policy cannot infer missing provider, data, clinical, write, deployment, release, protected or human-only authority."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "AGENTS.md",
+          "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
+          "docs/ariadne-autonomous-continuation.md"
+        ],
+        "findings": [
+          "orchestration/harness_settings/autonomous_continuation.yaml",
+          "orchestration/harness_settings/operating_model.yaml"
+        ],
+        "closeouts": [],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/model-required-bureau-standing-programme-authority-sol-acceptance.md"
+        ],
+        "receipts": [],
+        "tests": [
+          "tests/test_ariadne_autonomous_continuation.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Gate zero must pass deterministic checks, a fresh Gemini 3.6 Flash/high veto and Sol Extra High acceptance before lanes A-D begin.",
+        "A generic future candidate remains closed until an active accepted plan freezes its complete material boundary.",
+        "User attention remains required for an unplanned fork, missing user-only input, conflicting evidence that changes acceptance meaning, exhausted bounded recovery or explicit user pause."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-03T22:15:35Z"
+  "updated_at": "2026-08-04T07:05:15Z"
 }

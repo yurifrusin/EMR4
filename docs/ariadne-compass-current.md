@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4's model-required Bureau programme has passed Gate -1 at Continuity 207 / Compass 188. The next safe candidate is Gate zero only: freeze the shared four-plane contract, label/capability and source/sink schemas, one-attempt cell and deterministic tests after fresh Yuri authority. All product/runtime lanes remain closed.
+> EMR4's standing programme authority is active at Continuity 208 / Compass 189. Gate zero is the active next gate. After each gate passes its exact acceptance, Ariadne continues automatically into the next fully specified dependency-satisfied gate; only a genuine user-attention condition pauses the sequence.
 
 ## North star
 
@@ -188,30 +188,32 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The route-free adapter owns only fixed surface decisions, nonce admission and sanitized counters and remains absent from app.main. Lineage parent: `raisa-provider-free-office-lifecycle-observability`.
 86. **Adversarial containment gate before the shared model-required Bureau contract — Model-Required Bureau Gate -1 Adversarial Architecture Review**
    Gate -1 selects deterministic information-flow labels and a one-shot brokered cognitive cell while leaving every runtime and product lane closed. Lineage parent: `raisa-provider-free-default-off-office-consumer-adapter`.
+87. **Durable authority for uninterrupted planned gate progression — Standing Programme Continuation Authority**
+   Gate zero is active and every later exact dependency-satisfied gate may follow without a repeat permission pause. Lineage parent: `model-required-bureau-gate-minus-one`.
 
 ## Current position
 
-**Accepted adversarial architecture gate before Gate zero — Model-Required Bureau Gate -1 Adversarial Architecture Review**
+**Standing programme authority with Gate zero active — Standing Programme Continuation Authority**
 
-**Why this proof came next:** Mandatory provider-model participation creates a high-consequence prompt-injection and wrapper-compromise boundary that must be frozen before lane work.
+**Why this proof came next:** The earlier sprint-local continuation rule and newer gate-specific fresh-authority clauses conflicted and caused unnecessary pauses.
 
-The shared Bureau direction now requires deterministic labeled capability flows and a fresh brokered no-ambient-bridge cell for every attempt.
+The live handover, active plan and machine policy now require automatic movement across fully specified dependency-satisfied gates.
 
 ### What this unlocks
 
-- With fresh Yuri authority, begin Gate zero architecture, closed schemas and deterministic tests only.
+- Begin Gate zero now, then continue into each qualifying successor after its acceptance gates pass.
 
 ### What it does not solve
 
-- Implementation or runtime enforcement of the selected controls.
-- Prompt-injection immunity, sandbox invulnerability or provider trustworthiness.
-- Real identity/data, product reads/writes, patient/clinical use, deployment, production or release.
+- A generic future candidate or unresolved explicit closure.
+- A missing provider, model, data, clinical, cost, licence, write, deployment, release or protected-boundary choice.
+- Any user-only credential, identity, participant, console or external-coordination action.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Bounded opening `security-review`: Architecture-only adversarial containment review before the shared model-required Bureau contract
-- All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `stage-3b`, `voice`.
+- Bounded opening `autonomous-action`: Automatic movement through dependency-satisfied gates whose complete material boundaries are frozen in the live Current Baton or an accepted descendant plan
+- All other named boundaries remain closed: `api-change`, `appointment-write`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
 
@@ -446,10 +448,13 @@ Prerequisites:
 - **Should EMR4 review a default-off native Diary composition for the same active-practitioner read?**
   Required before: Fresh Yuri authority is required because the six-tranche Office consumer and lifecycle sequence is now consumed.
 - **Should EMR4 freeze the shared model-required Bureau contract and closed Gate-zero schemas and deterministic tests?**
-  Required before: Fresh Yuri authority is required because Gate -1 is consumed and the earlier pause on further development remains in force.
+  Required before: Satisfied on 2026-08-04: Yuri authorised Gate zero and standing continuation through later fully specified dependency-satisfied gates.
+- **May EMR4 move without repeat permission pauses through every fully specified dependency-satisfied gate?**
+  Required before: Satisfied on 2026-08-04 by Yuri's standing programme authority.
 
 ## Map limits
 
+- Standing programme authority removes repeat permission pauses only for fully specified dependency-satisfied gates; it does not infer or erase an unresolved material boundary.
 - Gate -1 is accepted architecture evidence only; its selected controls are not implemented and establish no model or product runtime, prompt-injection immunity, data access, actuator, deployment, production or release posture.
 - The five Office lifecycle descendants are provider-free, authored-synthetic, active-practitioner-only and task-scoped; they add no real identity, broader product authority or production wiring.
 - The Office practitioner-directory result is provider-free, authored-synthetic, active-only and task-scoped; it proves neither real identity nor patient/clinical/document or product-write safety.
@@ -517,6 +522,7 @@ Prerequisites:
 ## Evidence index
 
 - `.github/workflows/pages.yml`
+- `AGENTS.md`
 - `alembic/versions/o4p5q6r7s8t9_add_application_auth_persistence.py`
 - `alembic/versions/q6r7s8t9u0v1_add_application_identity_federation_persistence.py`
 - `alembic/versions/r7s8t9u0v1w2_add_oidc_authorization_attempt_store.py`
@@ -552,6 +558,7 @@ Prerequisites:
 - `deploy/raisa-office-web-dev/server.mjs`
 - `docs/api-spine/openapi/application-auth-synthetic-transport.yaml`
 - `docs/api-spine/openapi/application-identity-federation-session-bridge.yaml`
+- `docs/ariadne-autonomous-continuation.md`
 - `docs/ariadne-bounded-agent-admission-design-closeout.md`
 - `docs/ariadne-compass-increment2-plan.md`
 - `docs/ariadne-continuity-engine-increment1-closeout.md`
@@ -840,6 +847,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/clinician-one-readonly-document-context-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/clinician-one-word-desktop-selection-check-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-gate-minus-one-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/model-required-bureau-standing-programme-authority-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
@@ -1273,6 +1281,8 @@ Prerequisites:
 - `orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/acceptance-evidence.json`
 - `orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/final-residue-evidence.json`
 - `orchestration/continuity/shared-application-auth-postgresql-office-host-compatibility/live-office-backend-postgres-evidence.json`
+- `orchestration/harness_settings/autonomous_continuation.yaml`
+- `orchestration/harness_settings/operating_model.yaml`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -1325,6 +1335,7 @@ Prerequisites:
 - `scripts/reception_one_receptionist_first_v6_cohort.py`
 - `scripts/reception_one_receptionist_first_v6_isolation.py`
 - `scripts/reception_one_structured_source_plan_language.py`
+- `tests/test_ariadne_autonomous_continuation.py`
 - `tests/test_ariadne_vertex_sydney_gemini_25_rehearsal.py`
 - `tests/test_clinician_one_readonly_document_context.py`
 - `tests/test_clinician_one_word_desktop_selection_check.py`
@@ -1357,4 +1368,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 188; continuity graph revision 207._
+_Compass map revision 189; continuity graph revision 208._

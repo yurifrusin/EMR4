@@ -2,8 +2,8 @@
 
 Date: 2026-08-04
 
-Status: Gate -1 passed; Gate zero and all lane dispatch remain paused pending
-fresh Yuri authority
+Status: Gate -1 passed; Gate zero authorised; standing programme continuation
+active under the exact boundaries below
 
 Architecture parent:
 `docs/emr4-model-required-deterministic-authority-bureau-architecture.md`
@@ -16,8 +16,35 @@ proofreading, deterministic authority, human gates, commands and post-action
 verification independent and mandatory.
 
 The current fifth Bernie/Davida pair remains the completed candidate parent.
-This plan neither starts its material live-backend/Davida-write successor nor
-dispatches any worker.
+This plan opens Gate zero and authorises uninterrupted movement through later
+dependency-satisfied gates whose complete material boundaries are frozen here
+or in an accepted descendant plan. It does not by itself open a material live-
+backend/Davida-write successor, provider call or other generic future gate.
+
+## Standing programme continuation authority
+
+Yuri's 2026-08-04 standing decision removes routine gate-by-gate permission
+pauses. Sol must continue from an accepted gate into the next dependency-
+satisfied planned gate without asking Yuri to repeat authority when the active
+plan already specifies the exact scope, inputs, outputs, data/provider/cost
+posture, side effects, forbidden surfaces, acceptance evidence and stop
+conditions.
+
+This standing authority covers planning, bounded worker packets, architecture
+and implementation artifacts, deterministic tests, risk-triggered independent
+review, bounded recovery, acceptance, task-branch commit/push and immediate
+continuation. It does not allow Sol or a worker to convert a generic future
+candidate into self-authority. A provider/model/region, data class, clinical or
+product access, write/actuator, licence/cost, deployment/release, protected ref
+or protected-evidence action remains non-executable whenever its exact boundary
+is absent or explicitly closed in the active plan.
+
+Return to Yuri only for an unplanned material fork, an unresolved user-owned
+choice or human-only input, conflicting evidence that changes acceptance
+meaning, exhausted bounded recovery, scope beyond the accepted plan, or an
+explicit user pause/redirect. A passing gate, known next gate, fresh-context
+rehydration, worker/verifier wait, test failure or ordinary recovery is not a
+permission gate.
 
 ## Programme gate -1: adversarial containment review
 
@@ -51,8 +78,9 @@ Gate -1 passed on 2026-08-04 as
 `model_required_bureau_gate_minus_one_adversarial_architecture_pass`. The fresh
 Gemini 3.6 Flash/high veto found zero candidate defects on the unchanged exact
 candidate after 79 tests. The selected properties are now mandatory Gate-zero
-inputs, not implemented runtime controls. Gate zero remains closed pending
-fresh Yuri authority.
+inputs, not implemented runtime controls. Yuri has now authorised Gate zero;
+the standing programme policy governs its execution and later qualifying gate
+transitions.
 
 ## Programme gate zero: shared architecture contract
 
@@ -271,9 +299,10 @@ production change is a separate material gate.
 
 ## Parallelization after gate zero
 
-After explicit instruction to begin, A1/A2, B1/B2 and C1/C2 are separable
-architecture/test lanes and can proceed concurrently. D1/D2 may begin alongside
-C1 after the shared technical context and provenance vocabulary is frozen.
+After Gate zero passes its full acceptance, the standing programme authority
+opens A1/A2, B1/B2 and C1/C2 as separable architecture/test lanes without a new
+permission pause. D1/D2 may begin alongside C1 after the shared technical
+context and provenance vocabulary is frozen.
 
 The integration path remains single-track:
 
@@ -283,31 +312,43 @@ The integration path remains single-track:
    deterministic gates.
 4. No worker accepts its own output or moves protected refs.
 
-No worker packet is authorized or issued by this plan.
+Sol may issue exact worker packets for these dependency-satisfied planned lanes.
+Each packet must retain the ownership, isolation, evidence and forbidden-surface
+requirements in `AGENTS.md`; no packet receives acceptance, integration or
+authority-expansion rights.
 
-## Stop and return to Yuri
+## Genuine Yuri-attention gates
 
-Pause before:
+Pause only when the next step needs a material boundary or input that the active
+accepted plan has not already made exact, including:
 
-- selecting or calling a provider/model;
-- transmitting authored-synthetic, product-derived, identity, patient,
-  clinical, operational or technical data externally;
-- opening a patient-facing Rayleen surface;
-- mounting a product read or model runtime;
-- implementing any arrival, waiting-area, administrative or recovery write;
-- adding an actuator, shell, SQL, cloud, IAM or deployment capability;
-- downloading, licensing, importing or activating an external dataset;
-- running a database migration or backup restore;
-- accepting cost, data-residency, production or release posture; or
-- touching protected refs, Pages or public branding.
+- an unselected provider/model/region/identity/data class, external
+  transmission, cost, licence, retention or residency posture;
+- an unfrozen patient-facing Rayleen surface, product read/model runtime,
+  arrival/waiting-area/administrative/recovery write, actuator, shell, SQL,
+  cloud, IAM, migration, backup restore or external-data activation;
+- an unfrozen deployment, production, release, protected-ref, Pages or public-
+  branding action;
+- a participant nomination, credential restoration, console action, external
+  coordination or other human-only step;
+- an unplanned clinical, product, privacy, security, regulatory, architecture
+  or economic fork; or
+- conflicting evidence or exhausted bounded recovery that requires acceptance
+  meaning or scope to change.
+
+Mentioning one of these as a future candidate does not make it exact. If a later
+active accepted plan freezes and authorises the complete boundary, the standing
+policy permits its execution and subsequent planned transitions without a
+repeat permission request.
 
 Gate -1 additionally forbids treating a detector, delimiter, model refusal,
 human confirmation or sandbox alone as proof that prompt injection cannot
 affect authority. Any proposed new cognitive-cell bridge is a fresh security
 architecture decision.
 
-## Planned first action after Gate -1 passes
+## Active first action after Gate -1
 
-Begin gate zero only: architecture contract, closed schemas, threat model and
-deterministic artifact tests. Do not begin lanes A-D until gate zero passes its
-fresh Gemini veto and Sol acceptance.
+Begin Gate zero now: architecture contract, closed schemas, threat model and
+deterministic artifact tests. Do not begin lanes A-D until Gate zero passes its
+fresh Gemini veto and Sol Extra High acceptance; then continue automatically
+into the dependency-satisfied planned lanes under the standing policy.

@@ -1,6 +1,35 @@
-schema_version: ariadne.autonomous_continuation.v1
+schema_version: ariadne.autonomous_continuation.v2
 default_posture: continue_without_user_permission
 applies_when: [verified_sprint_is_active, failure_is_inside_existing_mandate, no_user_owned_decision_is_required]
+policy_decision:
+  owner: Yuri
+  recorded_date: "2026-08-04"
+  status: active
+standing_programme_authority:
+  gate_transition_permission: continue_without_additional_user_message
+  applies_to:
+    - live_current_baton_plan
+    - accepted_descendant_plans
+    - dependency_satisfied_successor_gates
+  gate_is_executable_only_when_all:
+    - objective_inputs_outputs_are_exact
+    - data_provider_identity_region_cost_and_licence_are_exact_where_applicable
+    - allowed_side_effects_and_forbidden_surfaces_are_exact
+    - evidence_labels_acceptance_and_stop_conditions_are_exact
+    - no_explicit_closure_or_user_owned_choice_remains_unresolved
+  authorizes:
+    - planning_and_exact_worker_dispatch
+    - implementation_and_deterministic_tests
+    - risk_triggered_independent_review
+    - bounded_recovery_and_acceptance
+    - explicit_path_staging_and_task_branch_commit_push
+    - immediate_transition_to_next_qualifying_gate
+  does_not_self_authorize:
+    - generic_future_candidate
+    - unresolved_provider_model_data_cost_or_licence_boundary
+    - unresolved_clinical_product_write_deployment_release_or_protected_boundary
+    - protected_evidence_access
+    - scope_outside_active_accepted_plan
 failure_loop:
   - orchestrator_records_observable_failure
   - orchestrator_recovers_execution_inside_existing_assignment
@@ -17,13 +46,17 @@ execution_limits:
   wall_clock_deadlines: inactive
   progress_observation_preferred: true
 pause_for_user_only_when:
-  - mandate_or_scope_expansion
-  - material_product_choice
-  - new_security_write_deployment_or_release_authority
-  - conflicting_valid_evidence
-  - conductor_and_orchestrator_cannot_resolve_a_material_boundary_disagreement
+  - explicit_user_stop_pause_or_redirect
+  - unplanned_material_product_clinical_privacy_security_regulatory_architecture_authority_or_economic_fork
+  - next_gate_has_unresolved_user_owned_choice_or_material_boundary
+  - conflicting_valid_evidence_changes_acceptance_meaning
+  - bounded_in_scope_recovery_is_exhausted
   - required_external_credential_or_human_only_action
+  - action_would_expand_beyond_active_accepted_plan_or_access_protected_evidence
 must_not_pause_for:
+  - dependency_satisfied_transition_to_next_planned_gate
+  - fresh_authority_request_for_already_planned_gate
+  - successful_gate_closeout_with_known_executable_successor
   - ordinary_worker_timeout
   - worker_unavailability_with_configured_fallback
   - recoverable_transport_failure
@@ -40,12 +73,14 @@ task_lifecycle:
   terminal_handback_prohibited_when_no_user_decision_required: true
   continue_tools_in_same_task: true
   terminal_handback_allowed_only_when:
-    - verified_sprint_or_requested_block_complete
+    - entire_current_planned_sequence_or_explicit_requested_block_complete
     - pause_for_user_condition_is_true
     - unrecoverable_platform_interruption_with_durable_resume_checkpoint
   awaiting_worker_or_verifier_is_not_terminal: true
   committed_internal_plan_is_not_terminal: true
   next_step_known_is_not_terminal: true
+  single_gate_closeout_is_not_terminal: true
+  accepted_gate_with_dependency_satisfied_successor_is_not_terminal: true
 resume_checkpoint:
   required_for_platform_interruption: true
   must_name: [active_sprint, completed_stage, next_executable_stage, retry_counters, settings_fingerprint]

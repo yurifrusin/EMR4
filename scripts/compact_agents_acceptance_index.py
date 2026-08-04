@@ -48,6 +48,11 @@ ACTIVE_LABELS = (
     "Davida practice-administration advisory acceptance",
     "Native-Diary default-off application-session UI composition acceptance",
     "Davida default-location dry-run proposal acceptance",
+    "Native-Diary route-intercepted browser acceptance",
+    "Davida default-location command-boundary acceptance",
+    "Bernie/Davida fifth-pair acceptance",
+    "Model-required Bureau architecture and paused development plan",
+    "Model-required Bureau Gate -1 acceptance",
     "Current result",
     "Next implementation",
 )

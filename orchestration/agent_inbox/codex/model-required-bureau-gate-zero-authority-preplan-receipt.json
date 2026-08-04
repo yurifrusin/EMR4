@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "sprint_planning",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:6136ba8fe73ed91be12c9de811bf4bf6ee7c0243b57fc4c24607025eeeda57b3",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The active model-required Bureau architecture, Gate-zero development plan, parent and Gate -1 threat-model deltas, Gate -1 hardening summary, provider-free evidence, closeout and Sol acceptance, implementation_plan.md, Bernie interaction model, Consultant doctrine and Consultant/triage roadmap were reread. Gate zero may freeze only the shared four-plane architecture contract, closed label/capability/candidate and denial schemas, trusted source and complete sink policies, one-attempt cell/broker/parser/bridge/quota/teardown/residue contracts, explicit outage semantics, evidence labels, threat-model delta and deterministic artifact tests. Lanes A-D remain closed until Gate zero passes Sol Extra High acceptance and a fresh Gemini 3.6 Flash/high veto.",
+    "current_authority_allocation": "Yuri has now explicitly opened Gate zero exactly within the scope and closed boundaries of docs/emr4-rayleen-davida-controlled-recovery-development-plan.md. GPT Sol owns the shared architecture freeze, scope, acceptance and protected integration decisions; bounded mechanical artifacts may later be assigned only under an exact packet, and a fresh Gemini 3.6 Flash/high independent veto remains required after deterministic checks. No provider call, patient or product data, runtime wiring, product command or write, deployment, production, release, Pages rebuild or protected-ref movement is authorized.",
+    "git_refs_and_worktree": "C:/Users/sarashera/emr4 is on codex/ariadne-bernie-davida-parallel-seam at required HEAD ba6a96d55002ee7713c3a12867e57b41ce972150, aligned with both the local task ref and origin task ref. Local master, local handoff/current, origin/master and origin/handoff/current are all 2e34bdad732fdab32fbf778280b3d3c70d66d602; a read-only git ls-remote confirmed the same three remote heads. The tracked worktree and index are clean. Existing untracked docs/branding/ plus the Gate -1 and Consultant pre-push receipt/state pairs remain present and untouched; any later staging must use explicit paths only and must exclude docs/branding/.",
+    "live_handover_current_baton": "AGENTS.md was reread completely at 454 lines, 74570 bytes and SHA-256 cfe35697191f408ba7669682244163eb8623d6681a1c41eab39e6ba4cc57ba48. It records Gate -1 as accepted and consumed at Continuity 207 / Compass 188, with the deterministic bureau-labeled-capability-envelope and fresh one-shot-brokered-cell mandatory inputs for Gate zero. The prior Gate-zero pause is superseded only by Yuri's fresh authority in this session.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10, historical PHI and the provenance-blocked appointment corpus remain closed and were not accessed. User-owned docs/branding/ and all existing untracked Gate -1 and Consultant pre-push receipt/state files are preserved and excluded. No product-derived, identity, patient, clinical, operational or secret data may be accessed or transmitted; no provider/model call, product read/write, runtime bridge, tool, actuator, shell, SQL, cloud/IAM, migration, external update ingestion, deployment, production, release, Pages or protected-ref action is permitted."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

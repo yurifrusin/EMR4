@@ -74,7 +74,8 @@ execution_controls:
   worker_may_continue_while_progress_is_observable: true
   stalled_worker_intervention_is_orchestrator_judgment: true
 user_pause:
-  only_for: [undelegated_material_product_choice, mandate_expansion, explicit_user_stop, required_human_only_action]
+  standing_programme_authority_file: autonomous_continuation.yaml
+  only_for: [unplanned_material_fork, unresolved_user_owned_choice_or_material_boundary, conflicting_evidence_changes_acceptance_meaning, exhausted_bounded_recovery, mandate_expansion, explicit_user_stop, required_human_only_action]
 continuous_sprint_engine:
   enabled: true
   cycle:
@@ -87,6 +88,7 @@ continuous_sprint_engine:
     - orchestrator_authorizes_exact_integration_manifest
     - selected_executor_integrates_protected_master_or_stops_on_variance
   conversational_handback_between_sprints: false
+  conversational_handback_between_dependency_satisfied_gates: false
   stop_only_for: [user_pause_condition, explicit_user_stop]
 integration_checkpoints:
   authorization_owner: orchestrator

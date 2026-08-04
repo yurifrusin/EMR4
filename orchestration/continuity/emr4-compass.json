@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 188,
-  "updated_at": "2026-08-03T22:15:35Z",
-  "source_graph_revision": 207,
-  "orientation_statement": "EMR4's model-required Bureau programme has passed Gate -1 at Continuity 207 / Compass 188. The next safe candidate is Gate zero only: freeze the shared four-plane contract, label/capability and source/sink schemas, one-attempt cell and deterministic tests after fresh Yuri authority. All product/runtime lanes remain closed.",
+  "map_revision": 189,
+  "updated_at": "2026-08-04T07:05:15Z",
+  "source_graph_revision": 208,
+  "orientation_statement": "EMR4's standing programme authority is active at Continuity 208 / Compass 189. Gate zero is the active next gate. After each gate passes its exact acceptance, Ariadne continues automatically into the next fully specified dependency-satisfied gate; only a genuine user-attention condition pauses the sequence.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -1481,29 +1481,44 @@
         "docs/emr4-model-required-bureau-gate-minus-one-closeout.md",
         "orchestration/agent_inbox/antigravity/model-required-bureau-gate-minus-one-review-2-receipt.json"
       ]
+    },
+    {
+      "node_id": "model-required-bureau-standing-programme-authority",
+      "lineage_parent": "model-required-bureau-gate-minus-one",
+      "strategic_role": "Durable authority for uninterrupted planned gate progression",
+      "outcome": "Gate zero is active and every later exact dependency-satisfied gate may follow without a repeat permission pause.",
+      "evidence": [
+        "AGENTS.md",
+        "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
+        "docs/ariadne-autonomous-continuation.md",
+        "orchestration/harness_settings/autonomous_continuation.yaml",
+        "orchestration/harness_settings/operating_model.yaml",
+        "orchestration/agent_inbox/codex/model-required-bureau-standing-programme-authority-sol-acceptance.md",
+        "tests/test_ariadne_autonomous_continuation.py"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "model-required-bureau-gate-minus-one",
-    "strategic_role": "Accepted adversarial architecture gate before Gate zero",
-    "why_now": "Mandatory provider-model participation creates a high-consequence prompt-injection and wrapper-compromise boundary that must be frozen before lane work.",
-    "outcome": "The shared Bureau direction now requires deterministic labeled capability flows and a fresh brokered no-ambient-bridge cell for every attempt.",
+    "node_id": "model-required-bureau-standing-programme-authority",
+    "strategic_role": "Standing programme authority with Gate zero active",
+    "why_now": "The earlier sprint-local continuation rule and newer gate-specific fresh-authority clauses conflicted and caused unnecessary pauses.",
+    "outcome": "The live handover, active plan and machine policy now require automatic movement across fully specified dependency-satisfied gates.",
     "unlocks": [
-      "With fresh Yuri authority, begin Gate zero architecture, closed schemas and deterministic tests only."
+      "Begin Gate zero now, then continue into each qualifying successor after its acceptance gates pass."
     ],
     "does_not_solve": [
-      "Implementation or runtime enforcement of the selected controls.",
-      "Prompt-injection immunity, sandbox invulnerability or provider trustworthiness.",
-      "Real identity/data, product reads/writes, patient/clinical use, deployment, production or release."
+      "A generic future candidate or unresolved explicit closure.",
+      "A missing provider, model, data, clinical, cost, licence, write, deployment, release or protected-boundary choice.",
+      "Any user-only credential, identity, participant, console or external-coordination action."
     ],
     "evidence": [
+      "AGENTS.md",
       "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
-      "docs/security/emr4-model-required-bureaus-gate-minus-one-threat-model-delta.md",
-      "docs/security/hardening/model-required-bureau-gate-minus-one/hardening.json",
-      "orchestration/continuity/model-required-bureau-gate-minus-one/provider-free-acceptance-evidence.json",
-      "docs/emr4-model-required-bureau-gate-minus-one-closeout.md",
-      "orchestration/agent_inbox/codex/model-required-bureau-gate-minus-one-sol-acceptance.md",
-      "orchestration/agent_inbox/antigravity/model-required-bureau-gate-minus-one-review-2-receipt.json"
+      "docs/ariadne-autonomous-continuation.md",
+      "orchestration/harness_settings/autonomous_continuation.yaml",
+      "orchestration/harness_settings/operating_model.yaml",
+      "orchestration/agent_inbox/codex/model-required-bureau-standing-programme-authority-sol-acceptance.md",
+      "tests/test_ariadne_autonomous_continuation.py"
     ]
   },
   "decision_horizon": [
@@ -2398,7 +2413,7 @@
     {
       "id": "authorize-model-required-bureau-gate-zero",
       "question": "Should EMR4 freeze the shared model-required Bureau contract and closed Gate-zero schemas and deterministic tests?",
-      "required_before": "Fresh Yuri authority is required because Gate -1 is consumed and the earlier pause on further development remains in force.",
+      "required_before": "Satisfied on 2026-08-04: Yuri authorised Gate zero and standing continuation through later fully specified dependency-satisfied gates.",
       "evidence": [
         "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
         "docs/security/emr4-model-required-bureaus-gate-minus-one-threat-model-delta.md",
@@ -2406,11 +2421,29 @@
         "orchestration/continuity/model-required-bureau-gate-minus-one/provider-free-acceptance-evidence.json",
         "docs/emr4-model-required-bureau-gate-minus-one-closeout.md",
         "orchestration/agent_inbox/codex/model-required-bureau-gate-minus-one-sol-acceptance.md",
-        "orchestration/agent_inbox/antigravity/model-required-bureau-gate-minus-one-review-2-receipt.json"
+        "orchestration/agent_inbox/antigravity/model-required-bureau-gate-minus-one-review-2-receipt.json",
+        "AGENTS.md",
+        "docs/ariadne-autonomous-continuation.md",
+        "orchestration/harness_settings/autonomous_continuation.yaml"
+      ]
+    },
+    {
+      "id": "authorize-standing-programme-continuation",
+      "question": "May EMR4 move without repeat permission pauses through every fully specified dependency-satisfied gate?",
+      "required_before": "Satisfied on 2026-08-04 by Yuri's standing programme authority.",
+      "evidence": [
+        "AGENTS.md",
+        "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
+        "docs/ariadne-autonomous-continuation.md",
+        "orchestration/harness_settings/autonomous_continuation.yaml",
+        "orchestration/harness_settings/operating_model.yaml",
+        "orchestration/agent_inbox/codex/model-required-bureau-standing-programme-authority-sol-acceptance.md",
+        "tests/test_ariadne_autonomous_continuation.py"
       ]
     }
   ],
   "map_limits": [
+    "Standing programme authority removes repeat permission pauses only for fully specified dependency-satisfied gates; it does not infer or erase an unresolved material boundary.",
     "Gate -1 is accepted architecture evidence only; its selected controls are not implemented and establish no model or product runtime, prompt-injection immunity, data access, actuator, deployment, production or release posture.",
     "The five Office lifecycle descendants are provider-free, authored-synthetic, active-practitioner-only and task-scoped; they add no real identity, broader product authority or production wiring.",
     "The Office practitioner-directory result is provider-free, authored-synthetic, active-only and task-scoped; it proves neither real identity nor patient/clinical/document or product-write safety.",
