@@ -1,0 +1,46 @@
+{
+  "schema_version": "emr4.bureau.one_attempt_cell_manifest.v1",
+  "attempt_id": "attempt_gate_zero_example",
+  "cell_generation_id": "cell_gate_zero_example",
+  "domain": "davida",
+  "candidate_schema": "emr4.bureau.typed_candidate.v1",
+  "runtime_profile": "architecture_only_unoccupied",
+  "started": false,
+  "broker_policy": {
+    "fresh_identity_per_attempt": true,
+    "one_use_token": true,
+    "owns_provider_request": true,
+    "provider_endpoint_visible_to_cell": false,
+    "request_count_max": 1,
+    "candidate_response_count_max": 1
+  },
+  "cell_visible_bridges": ["typed_input_once", "typed_output_once"],
+  "forbidden_bridges": ["shell", "code_execution", "generic_tool", "host_path", "url_fetch", "callback", "filesystem", "database", "credential", "metadata_endpoint", "ambient_network", "actuator"],
+  "parser_policy": {
+    "encoding": "utf-8",
+    "format": "canonical_json_object",
+    "duplicate_keys": "reject",
+    "unknown_properties": "reject",
+    "trailing_bytes": "reject",
+    "strings_are_data_only": true,
+    "evaluation_or_interpolation": false
+  },
+  "quotas": {
+    "input_bytes_max": 65536,
+    "output_bytes_max": 65536,
+    "wall_time_ms_max": 30000,
+    "cpu_time_ms_max": 10000,
+    "memory_bytes_max": 536870912,
+    "processes_max": 16,
+    "file_descriptors_max": 64
+  },
+  "authority": {
+    "product_read": false,
+    "product_write": false,
+    "database": false,
+    "command": false,
+    "actuator": false,
+    "deployment": false,
+    "credential": false
+  }
+}

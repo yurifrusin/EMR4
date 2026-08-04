@@ -1,0 +1,431 @@
+{
+  "schema_version": "emr4.model_required_bureau.shared_contract.v1",
+  "contract_version": "1.0.0",
+  "source_head": "50dab5d66fc1401344fc47d7aa5ebd336b75e960",
+  "authority": {
+    "artifact_class": "architecture_schema_prototype",
+    "execution": "non_executing",
+    "evidence_label": "provider_free_gate_zero_architecture_contract",
+    "provider_calls_authorized": false,
+    "runtime_wiring_authorized": false,
+    "product_data_authorized": false,
+    "patient_or_clinical_data_authorized": false,
+    "product_reads_authorized": false,
+    "commands_or_writes_authorized": false,
+    "actuators_authorized": false,
+    "deployment_authorized": false,
+    "production_authorized": false,
+    "release_authorized": false,
+    "pages_rebuild_authorized": false,
+    "protected_ref_movement_authorized": false
+  },
+  "planes": [
+    {
+      "order": 1,
+      "id": "cognitive",
+      "principal": "cognitive_cell_generation",
+      "input": "labeled_context_frame",
+      "output": "typed_candidate_bytes_unadmitted",
+      "authority_ceiling": "candidate_only",
+      "effect_authority": false
+    },
+    {
+      "order": 2,
+      "id": "proof",
+      "principal": "deterministic_proofreader",
+      "input": "parsed_typed_candidate_and_current_context",
+      "output": "admitted_candidate_or_typed_denial_receipt",
+      "authority_ceiling": "admitted_candidate_only",
+      "effect_authority": false
+    },
+    {
+      "order": 3,
+      "id": "authority",
+      "principal": "backend_authority_service",
+      "input": "admitted_candidate_current_actor_scope_and_policy",
+      "output": "rejection_or_backend_owned_authority_decision",
+      "authority_ceiling": "policy_classified_command_eligibility",
+      "effect_authority": false
+    },
+    {
+      "order": 4,
+      "id": "execution_verification",
+      "principal": "single_purpose_command_handler",
+      "input": "separately_authorized_backend_owned_command",
+      "output": "transaction_audit_outbox_and_deterministic_readback",
+      "authority_ceiling": "exact_command_contract_only",
+      "effect_authority": true
+    }
+  ],
+  "transport_principal": {
+    "id": "provider_broker",
+    "role": "bounded_transport_not_authority_plane",
+    "owns_provider_request": true,
+    "owns_product_authority": false,
+    "owns_command_authority": false
+  },
+  "domains": [
+    {
+      "id": "bernie",
+      "ownership": "prospective_scheduling_intelligence",
+      "candidate_kinds": ["appointment_projection", "appointment_proposal"],
+      "live_read_gate": "closed",
+      "command_gate": "closed"
+    },
+    {
+      "id": "rayleen",
+      "ownership": "present_waiting_room_intelligence",
+      "candidate_kinds": ["waiting_room_projection", "arrival_status_or_area_proposal"],
+      "live_read_gate": "closed",
+      "command_gate": "closed"
+    },
+    {
+      "id": "davida",
+      "ownership": "institutional_practice_administration_intelligence",
+      "candidate_kinds": ["practice_administration_advisory", "practice_administration_proposal"],
+      "live_read_gate": "closed",
+      "command_gate": "closed"
+    },
+    {
+      "id": "controlled_recovery_update",
+      "ownership": "technical_diagnosis_recovery_and_update_intelligence",
+      "candidate_kinds": ["technical_diagnosis", "recovery_plan", "update_proposal"],
+      "live_read_gate": "closed",
+      "command_gate": "closed"
+    }
+  ],
+  "domain_isolation": {
+    "shared_schema_primitives": true,
+    "shared_proofreader_primitives": true,
+    "cross_domain_context": false,
+    "cross_domain_memory": false,
+    "cross_domain_policy": false,
+    "cross_domain_credentials": false,
+    "cross_domain_commands": false
+  },
+  "provider_admission": {
+    "model_required_for_agentic_claim": true,
+    "gate_zero_provider_call_authorized": false,
+    "no_silent_provider_fallback": true,
+    "no_silent_model_fallback": true,
+    "no_equivalent_heuristic_fallback": true,
+    "outage_receipt_code": "PROVIDER_REQUIRED_UNAVAILABLE",
+    "outage_release": "no_candidate_no_agentic_completion_claim",
+    "independent_deterministic_safety_continues_under_own_authority": true,
+    "ordinary_manual_pms_workflows_continue_under_own_authority": true
+  },
+  "label_algebra": {
+    "dimensions": [
+      "provenance",
+      "integrity_principals",
+      "confidentiality_readers",
+      "freshness",
+      "authority_ceiling"
+    ],
+    "join": {
+      "provenance": "set_union_with_transform_trace",
+      "integrity_principals": "set_intersection",
+      "confidentiality_readers": "set_intersection",
+      "expires_at": "earliest",
+      "freshness": "stale_if_any_input_stale",
+      "authority_ceiling": "minimum_ordered_ceiling"
+    },
+    "ordinary_transform_may_raise_dimension": false,
+    "endorsement": {
+      "named_trusted_principal_required": true,
+      "field_specific": true,
+      "evidence_bound": true,
+      "audited": true,
+      "erases_provenance": false,
+      "widens_readers": false
+    },
+    "declassification": {
+      "named_policy_required": true,
+      "field_and_sink_specific": true,
+      "purpose_bound": true,
+      "expiry_bound": true,
+      "audited": true,
+      "may_add_integrity": false,
+      "may_refresh_stale_data": false,
+      "may_raise_authority_ceiling": false
+    },
+    "authority_ceiling_order": [
+      "data_only",
+      "projection_candidate",
+      "proposal_candidate",
+      "diagnosis_candidate",
+      "recovery_plan_candidate",
+      "command_argument",
+      "effect"
+    ]
+  },
+  "source_registry": [
+    {
+      "id": "authorized_backend_read",
+      "integrity_principal": "backend_truth",
+      "requires_current_authorization": true,
+      "event_payload_is_truth": false
+    },
+    {
+      "id": "committed_event_hint",
+      "integrity_principal": "event_hint_only",
+      "requires_current_authorization": true,
+      "event_payload_is_truth": false
+    },
+    {
+      "id": "authored_synthetic_fixture",
+      "integrity_principal": "authored_synthetic",
+      "requires_current_authorization": false,
+      "event_payload_is_truth": false
+    },
+    {
+      "id": "provider_model_candidate",
+      "integrity_principal": "untrusted_model",
+      "requires_current_authorization": true,
+      "event_payload_is_truth": false
+    }
+  ],
+  "sink_registry": [
+    {
+      "id": "provider_input",
+      "maximum_authority_ceiling": "data_only",
+      "required_integrity_any": ["backend_truth", "authored_synthetic"],
+      "required_reader": "admitted_provider_request",
+      "freshness_required": true,
+      "separate_material_gate": true
+    },
+    {
+      "id": "projection_release",
+      "maximum_authority_ceiling": "projection_candidate",
+      "required_integrity_any": ["deterministic_proofreader"],
+      "required_reader": "authorized_surface",
+      "freshness_required": true,
+      "separate_material_gate": false
+    },
+    {
+      "id": "proposal_release",
+      "maximum_authority_ceiling": "proposal_candidate",
+      "required_integrity_any": ["deterministic_proofreader"],
+      "required_reader": "authorized_surface",
+      "freshness_required": true,
+      "separate_material_gate": false
+    },
+    {
+      "id": "diagnosis_release",
+      "maximum_authority_ceiling": "diagnosis_candidate",
+      "required_integrity_any": ["deterministic_proofreader"],
+      "required_reader": "authorized_operator",
+      "freshness_required": true,
+      "separate_material_gate": false
+    },
+    {
+      "id": "recovery_plan_release",
+      "maximum_authority_ceiling": "recovery_plan_candidate",
+      "required_integrity_any": ["deterministic_proofreader"],
+      "required_reader": "authorized_operator",
+      "freshness_required": true,
+      "separate_material_gate": false
+    },
+    {
+      "id": "command_argument",
+      "maximum_authority_ceiling": "command_argument",
+      "required_integrity_any": ["backend_authority_service"],
+      "required_reader": "single_purpose_command_handler",
+      "freshness_required": true,
+      "separate_material_gate": true
+    },
+    {
+      "id": "effect",
+      "maximum_authority_ceiling": "effect",
+      "required_integrity_any": ["single_purpose_command_handler"],
+      "required_reader": "deterministic_readback",
+      "freshness_required": true,
+      "separate_material_gate": true
+    }
+  ],
+  "envelope_registry": {
+    "labeled_context_frame": "labeled-context-frame.schema.json",
+    "typed_candidate": "typed-candidate.schema.json",
+    "typed_denial_receipt": "typed-denial-receipt.schema.json",
+    "one_attempt_cell_manifest": "one-attempt-cell-manifest.schema.json",
+    "teardown_residue_receipt": "teardown-residue-receipt.schema.json"
+  },
+  "cell_contract": {
+    "generation_scope": "one_bureau_attempt",
+    "fresh_identity_per_attempt": true,
+    "one_use_broker_token": true,
+    "input_count": 1,
+    "candidate_output_count": 1,
+    "cell_visible_bridges": ["typed_input_once", "typed_output_once"],
+    "forbidden_bridges": [
+      "shell",
+      "code_execution",
+      "generic_tool",
+      "host_path",
+      "url_fetch",
+      "callback",
+      "filesystem",
+      "database",
+      "credential",
+      "metadata_endpoint",
+      "ambient_network",
+      "actuator"
+    ],
+    "parser": {
+      "encoding": "utf-8",
+      "format": "canonical_json_object",
+      "duplicate_keys": "reject",
+      "unknown_properties": "reject",
+      "trailing_bytes": "reject",
+      "strings_are_data_only": true,
+      "evaluation_or_interpolation": false
+    },
+    "quotas": {
+      "input_bytes_max": 65536,
+      "output_bytes_max": 65536,
+      "wall_time_ms_max": 30000,
+      "cpu_time_ms_max": 10000,
+      "memory_bytes_max": 536870912,
+      "processes_max": 16,
+      "file_descriptors_max": 64
+    },
+    "kill_conditions": [
+      "expiry",
+      "quota_breach",
+      "parse_failure",
+      "broker_failure",
+      "supersession",
+      "second_input_or_output_attempt"
+    ],
+    "teardown_steps": [
+      "revoke_broker_token",
+      "close_channels",
+      "kill_generation_processes",
+      "remove_owned_ephemeral_storage",
+      "emit_residue_receipt"
+    ]
+  },
+  "human_authority_policy": {
+    "risk_tiers": [
+      "observe_only",
+      "ordinary_confirmation",
+      "manager_confirmation",
+      "dual_review",
+      "maintenance_release_authority",
+      "forbidden"
+    ],
+    "backend_policy_selects_tier": true,
+    "model_may_only_propose_tier": true,
+    "reviewers_authenticated_by_backend": true,
+    "review_scope_and_expiry_required": true,
+    "dual_review_requires_distinct_authorized_principals": true,
+    "model_cell_broker_or_proofreader_may_satisfy_review": false
+  },
+  "api_spine": {
+    "read_context": "graphql_named_scoped_read_only",
+    "mutation": "rest_openapi_single_purpose_backend_owned_command",
+    "event": "committed_hint_requires_fresh_authorized_read",
+    "manifest": "declarative_input_runtime_enforced",
+    "context_frames_non_authoritative": true,
+    "provider_candidate_non_authoritative": true
+  },
+  "future_command_boundary": {
+    "current_gate": "closed",
+    "transport": "rest_openapi_single_purpose",
+    "owner": "trusted_backend_code",
+    "required_fields": [
+      "command_type",
+      "practice_scope",
+      "actor_id",
+      "correlation_id",
+      "idempotency_key",
+      "target_id",
+      "expected_revision_or_etag",
+      "context_hash",
+      "freshness_id",
+      "expires_at",
+      "warnings",
+      "blocks",
+      "required_risk_tier",
+      "confirmation_or_dual_review_evidence",
+      "audit_contract",
+      "readback_contract"
+    ],
+    "backend_reauthorization_before_write": true,
+    "backend_revalidation_before_write": true,
+    "model_cell_broker_or_proofreader_may_construct": false
+  },
+  "provider_invocation_boundary": {
+    "current_gate": "closed",
+    "transport": "rest_access_ai_command_only",
+    "required_bindings": [
+      "capability",
+      "method",
+      "actor_id",
+      "practice_scope",
+      "entitlement_decision",
+      "context_hash",
+      "data_class",
+      "provider",
+      "model",
+      "region",
+      "cost_budget",
+      "correlation_id",
+      "audit_policy"
+    ],
+    "graphql_invocation": false,
+    "raw_prompt_graphql_field": false,
+    "raw_response_graphql_field": false,
+    "raw_prompt_persistence": false,
+    "raw_response_persistence": false
+  },
+  "evidence_classes": [
+    {
+      "id": "provider_free_component",
+      "proves": "schemas_proofreaders_policies_failure_semantics_only"
+    },
+    {
+      "id": "occupied_model_authored_synthetic",
+      "proves": "one_exact_provider_model_data_region_cost_path_only"
+    },
+    {
+      "id": "live_product_read",
+      "proves": "one_exact_authorized_product_read_path_only"
+    },
+    {
+      "id": "live_product_write",
+      "proves": "one_exact_authorized_backend_command_and_readback_only"
+    },
+    {
+      "id": "live_actuator",
+      "proves": "one_exact_authorized_actuator_and_readback_only"
+    },
+    {
+      "id": "deployment",
+      "proves": "one_exact_authorized_deployment_only"
+    },
+    {
+      "id": "production",
+      "proves": "one_exact_authorized_production_path_only"
+    },
+    {
+      "id": "release",
+      "proves": "one_exact_authorized_release_only"
+    }
+  ],
+  "blocked_boundaries": [
+    "provider_or_model_product_runtime",
+    "external_product_data_transmission",
+    "patient_or_clinical_data",
+    "live_product_read",
+    "command_or_write",
+    "actuator_shell_sql_cloud_or_iam",
+    "migration_or_external_update_activation",
+    "deployment",
+    "production",
+    "release",
+    "pages_rebuild",
+    "protected_ref_movement",
+    "protected_evidence"
+  ]
+}

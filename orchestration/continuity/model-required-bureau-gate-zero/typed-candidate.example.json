@@ -1,0 +1,25 @@
+{
+  "schema_version": "emr4.bureau.typed_candidate.v1",
+  "attempt_id": "attempt_gate_zero_example",
+  "cell_generation_id": "cell_gate_zero_example",
+  "domain": "davida",
+  "candidate_kind": "practice_administration_advisory",
+  "practice_scope": "practice_authored_synthetic",
+  "source_context_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+  "emitted_at": "2026-08-04T02:00:01Z",
+  "payload": {
+    "summary": {
+      "value": "Three active authored-synthetic practitioners are present.",
+      "label": {
+        "source_ids": ["provider_model_candidate:gate_zero_example"],
+        "transformation_trace": ["provider_broker:one_attempt.v1"],
+        "integrity_principals": ["untrusted_model"],
+        "confidentiality_readers": ["deterministic_proofreader"],
+        "observed_at": "2026-08-04T02:00:00Z",
+        "expires_at": "2026-08-04T02:05:00Z",
+        "freshness_state": "fresh",
+        "authority_ceiling": "projection_candidate"
+      }
+    }
+  }
+}

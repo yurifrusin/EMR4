@@ -1,0 +1,90 @@
+{
+  "artifact_hashes": {
+    "docs/emr4-model-required-bureau-gate-zero-shared-contract.md": "sha256:0641cfd736904f340f659e4c75e36928e36e7818e7429c16e19e90d27c5c0442",
+    "docs/security/emr4-model-required-bureau-gate-zero-threat-model-delta.md": "sha256:81d4b0113daef4e72cb3a4cad01f77a401fb9a6d367b4001654a6f95bc9242e5",
+    "orchestration/continuity/model-required-bureau-gate-zero/labeled-context-frame.example.json": "sha256:f042e3fbb1847893b9789450cfe787e1b0b2af4a2d6dbcd4e296518b8f08af66",
+    "orchestration/continuity/model-required-bureau-gate-zero/labeled-context-frame.schema.json": "sha256:9be303fdca0422abc4e01790190e59a6f24cb52d9da4f1daa9c6291e6f11bfd0",
+    "orchestration/continuity/model-required-bureau-gate-zero/one-attempt-cell-manifest.example.json": "sha256:68702a0dc65c4643b9ee941270114059908b1ab793059caaa35a2257360a8aab",
+    "orchestration/continuity/model-required-bureau-gate-zero/one-attempt-cell-manifest.schema.json": "sha256:5dde30f84d47f7ce9056944a1b2621f75d224b381ed324a0f6cc51660cb2b8eb",
+    "orchestration/continuity/model-required-bureau-gate-zero/shared-contract.json": "sha256:9642404b7755420f932eca76656eb4861eca408fc458798405e0482459bb36d5",
+    "orchestration/continuity/model-required-bureau-gate-zero/shared-contract.schema.json": "sha256:a04ff8ea9cb0f17efa06c33a878aed818ee8c974b4feccf3df961dd3eb46feb7",
+    "orchestration/continuity/model-required-bureau-gate-zero/teardown-residue-receipt.example.json": "sha256:850bcaf6392a5401c5c83a12284b34e7dedfd849741a5ba0a5970980e4b2f723",
+    "orchestration/continuity/model-required-bureau-gate-zero/teardown-residue-receipt.schema.json": "sha256:4ff1516acf7b38ecbe3e52a605007ce09d1b28b50ce3fe7afdd7f4909db2e3ef",
+    "orchestration/continuity/model-required-bureau-gate-zero/typed-candidate.example.json": "sha256:0f3905ba9073378dbe10a166c53442b639373fb8932f021bf3e911ff6c2257ab",
+    "orchestration/continuity/model-required-bureau-gate-zero/typed-candidate.schema.json": "sha256:adf1a372cae6478a84780ae4dcd0a94cd9bcf6bf2f235fb2bbd9b9c1a968edf9",
+    "orchestration/continuity/model-required-bureau-gate-zero/typed-denial-receipt.example.json": "sha256:19f02c3ea73c64d485c08bc930f3f652870a8db5689c4b65767e1821d16cd9f6",
+    "orchestration/continuity/model-required-bureau-gate-zero/typed-denial-receipt.schema.json": "sha256:c00051d6bfa96ee584b5f8354e6384fe46d571c44950b0f9c92f02b6e28f58eb"
+  },
+  "authority_and_side_effects": {
+    "actuator_calls": 0,
+    "commands_or_writes": 0,
+    "deployments": 0,
+    "external_prompt_transmissions": 0,
+    "pages_rebuilds": 0,
+    "patient_or_clinical_data_accesses": 0,
+    "product_data_reads": 0,
+    "production_changes": 0,
+    "protected_evidence_accesses": 0,
+    "protected_ref_movements": 0,
+    "provider_calls": 0,
+    "releases": 0,
+    "runtime_wirings": 0
+  },
+  "claim_boundary": "Architecture, closed schema prototypes and provider-free deterministic failure evidence only; no occupied model, live product or runtime claim.",
+  "contract": {
+    "blocked_boundary_count": 13,
+    "candidate_kind_count": 9,
+    "distinct_plane_principal_count": 4,
+    "domain_count": 4,
+    "forbidden_bridge_count": 12,
+    "plane_count": 4,
+    "sink_rule_count": 7,
+    "source_head": "50dab5d66fc1401344fc47d7aa5ebd336b75e960",
+    "source_rule_count": 4
+  },
+  "documents": {
+    "document_count": 2,
+    "overclaim_count": 0,
+    "required_claim_count": 9
+  },
+  "hostile_parser": {
+    "byte_budget_reason": "BYTE_BUDGET_EXCEEDED",
+    "duplicate_key_reason": "DUPLICATE_KEY",
+    "hostile_cases": 4,
+    "invalid_utf8_reason": "INVALID_UTF8",
+    "nominal_candidate_admitted_to_schema_validation": true,
+    "trailing_bytes_reason": "SCHEMA_REJECTED"
+  },
+  "label_and_sink_mediation": {
+    "join_dimensions_checked": 5,
+    "nominal_sink_admissions": 1,
+    "typed_sink_denials": {
+      "ceiling": "AUTHORITY_CEILING_EXCEEDED",
+      "integrity": "INTEGRITY_INSUFFICIENT",
+      "reader": "READER_NOT_AUTHORIZED",
+      "stale": "CONTEXT_STALE"
+    }
+  },
+  "passed": true,
+  "provider_outage": {
+    "agentic_completion_claim_count": 0,
+    "candidate_release_count": 0,
+    "model_required_for_agentic_claim": true,
+    "provider_call_count": 0,
+    "reason_code": "PROVIDER_REQUIRED_UNAVAILABLE"
+  },
+  "result": "model_required_bureau_gate_zero_provider_free_deterministic_acceptance_pass",
+  "schema_version": "emr4.model_required_bureau_gate_zero_acceptance.v1",
+  "schemas": {
+    "canonical_example_count": 5,
+    "closed_schema_count": 6,
+    "schema_ids": {
+      "labeled_context_frame": "https://emr4.dev/schemas/model-required-bureau/labeled-context-frame.v1.json",
+      "one_attempt_cell_manifest": "https://emr4.dev/schemas/model-required-bureau/one-attempt-cell-manifest.v1.json",
+      "teardown_residue_receipt": "https://emr4.dev/schemas/model-required-bureau/teardown-residue-receipt.v1.json",
+      "typed_candidate": "https://emr4.dev/schemas/model-required-bureau/typed-candidate.v1.json",
+      "typed_denial_receipt": "https://emr4.dev/schemas/model-required-bureau/typed-denial-receipt.v1.json"
+    }
+  },
+  "source_head": "50dab5d66fc1401344fc47d7aa5ebd336b75e960"
+}

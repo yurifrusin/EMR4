@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.dev/schemas/model-required-bureau/typed-candidate.v1.json",
+  "title": "EMR4 unadmitted Bureau typed candidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "attempt_id",
+    "cell_generation_id",
+    "domain",
+    "candidate_kind",
+    "practice_scope",
+    "source_context_hash",
+    "emitted_at",
+    "payload"
+  ],
+  "allOf": [
+    {"if": {"properties": {"domain": {"const": "bernie"}}, "required": ["domain"]}, "then": {"properties": {"candidate_kind": {"enum": ["appointment_projection", "appointment_proposal"]}}}},
+    {"if": {"properties": {"domain": {"const": "rayleen"}}, "required": ["domain"]}, "then": {"properties": {"candidate_kind": {"enum": ["waiting_room_projection", "arrival_status_or_area_proposal"]}}}},
+    {"if": {"properties": {"domain": {"const": "davida"}}, "required": ["domain"]}, "then": {"properties": {"candidate_kind": {"enum": ["practice_administration_advisory", "practice_administration_proposal"]}}}},
+    {"if": {"properties": {"domain": {"const": "controlled_recovery_update"}}, "required": ["domain"]}, "then": {"properties": {"candidate_kind": {"enum": ["technical_diagnosis", "recovery_plan", "update_proposal"]}}}}
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.bureau.typed_candidate.v1"},
+    "attempt_id": {"type": "string", "pattern": "^attempt_[a-z0-9_-]{8,64}$"},
+    "cell_generation_id": {"type": "string", "pattern": "^cell_[a-z0-9_-]{8,64}$"},
+    "domain": {"$ref": "#/$defs/domain"},
+    "candidate_kind": {"$ref": "#/$defs/candidate_kind"},
+    "practice_scope": {"type": "string", "pattern": "^practice_[a-z0-9_-]{4,64}$"},
+    "source_context_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "emitted_at": {"type": "string", "format": "date-time"},
+    "payload": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 64,
+      "propertyNames": {
+        "allOf": [
+          {"pattern": "^[a-z][a-z0-9_]{0,63}$"},
+          {"not": {"enum": ["command", "command_envelope", "confirmation", "confirmation_evidence", "writes_authorized", "actuator", "shell", "sql"]}}
+        ]
+      },
+      "additionalProperties": {"$ref": "#/$defs/labeled_value"}
+    }
+  },
+  "$defs": {
+    "domain": {"enum": ["bernie", "rayleen", "davida", "controlled_recovery_update"]},
+    "candidate_kind": {"enum": ["appointment_projection", "appointment_proposal", "waiting_room_projection", "arrival_status_or_area_proposal", "practice_administration_advisory", "practice_administration_proposal", "technical_diagnosis", "recovery_plan", "update_proposal"]},
+    "json_scalar": {"type": ["string", "number", "integer", "boolean", "null"]},
+    "labeled_value": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "label"],
+      "properties": {
+        "value": {"$ref": "#/$defs/json_scalar"},
+        "label": {"$ref": "#/$defs/label"}
+      }
+    },
+    "label": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_ids", "transformation_trace", "integrity_principals", "confidentiality_readers", "observed_at", "expires_at", "freshness_state", "authority_ceiling"],
+      "properties": {
+        "source_ids": {"type": "array", "minItems": 1, "maxItems": 16, "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z][a-z0-9_.:-]{2,100}$"}},
+        "transformation_trace": {"type": "array", "minItems": 1, "maxItems": 16, "items": {"type": "string", "pattern": "^[a-z][a-z0-9_.:-]{2,100}$"}},
+        "integrity_principals": {"const": ["untrusted_model"]},
+        "confidentiality_readers": {"const": ["deterministic_proofreader"]},
+        "observed_at": {"type": "string", "format": "date-time"},
+        "expires_at": {"type": "string", "format": "date-time"},
+        "freshness_state": {"enum": ["fresh", "stale"]},
+        "authority_ceiling": {"enum": ["data_only", "projection_candidate", "proposal_candidate", "diagnosis_candidate", "recovery_plan_candidate"]}
+      }
+    }
+  }
+}

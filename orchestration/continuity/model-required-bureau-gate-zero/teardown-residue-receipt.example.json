@@ -1,0 +1,21 @@
+{
+  "schema_version": "emr4.bureau.teardown_residue_receipt.v1",
+  "attempt_id": "attempt_gate_zero_example",
+  "cell_generation_id": "cell_gate_zero_example",
+  "status": "closed_zero_residue",
+  "closed_at": "2026-08-04T02:00:03Z",
+  "broker_token_revoked": true,
+  "input_channel_closed": true,
+  "output_channel_closed": true,
+  "live_process_count": 0,
+  "live_listener_count": 0,
+  "live_mount_count": 0,
+  "live_credential_count": 0,
+  "owned_ephemeral_artifact_count": 0,
+  "provider_call_count": 0,
+  "candidate_output_sha256": null,
+  "raw_provider_bytes_persisted": false,
+  "provider_response_persisted": false,
+  "product_access_occurred": false,
+  "command_attempted": false
+}

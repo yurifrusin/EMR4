@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.dev/schemas/model-required-bureau/one-attempt-cell-manifest.v1.json",
+  "title": "EMR4 one-attempt cognitive-cell manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "attempt_id",
+    "cell_generation_id",
+    "domain",
+    "candidate_schema",
+    "runtime_profile",
+    "started",
+    "broker_policy",
+    "cell_visible_bridges",
+    "forbidden_bridges",
+    "parser_policy",
+    "quotas",
+    "authority"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.bureau.one_attempt_cell_manifest.v1"},
+    "attempt_id": {"type": "string", "pattern": "^attempt_[a-z0-9_-]{8,64}$"},
+    "cell_generation_id": {"type": "string", "pattern": "^cell_[a-z0-9_-]{8,64}$"},
+    "domain": {"enum": ["bernie", "rayleen", "davida", "controlled_recovery_update"]},
+    "candidate_schema": {"const": "emr4.bureau.typed_candidate.v1"},
+    "runtime_profile": {"const": "architecture_only_unoccupied"},
+    "started": {"const": false},
+    "broker_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fresh_identity_per_attempt", "one_use_token", "owns_provider_request", "provider_endpoint_visible_to_cell", "request_count_max", "candidate_response_count_max"],
+      "properties": {
+        "fresh_identity_per_attempt": {"const": true},
+        "one_use_token": {"const": true},
+        "owns_provider_request": {"const": true},
+        "provider_endpoint_visible_to_cell": {"const": false},
+        "request_count_max": {"const": 1},
+        "candidate_response_count_max": {"const": 1}
+      }
+    },
+    "cell_visible_bridges": {"const": ["typed_input_once", "typed_output_once"]},
+    "forbidden_bridges": {"const": ["shell", "code_execution", "generic_tool", "host_path", "url_fetch", "callback", "filesystem", "database", "credential", "metadata_endpoint", "ambient_network", "actuator"]},
+    "parser_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["encoding", "format", "duplicate_keys", "unknown_properties", "trailing_bytes", "strings_are_data_only", "evaluation_or_interpolation"],
+      "properties": {
+        "encoding": {"const": "utf-8"},
+        "format": {"const": "canonical_json_object"},
+        "duplicate_keys": {"const": "reject"},
+        "unknown_properties": {"const": "reject"},
+        "trailing_bytes": {"const": "reject"},
+        "strings_are_data_only": {"const": true},
+        "evaluation_or_interpolation": {"const": false}
+      }
+    },
+    "quotas": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["input_bytes_max", "output_bytes_max", "wall_time_ms_max", "cpu_time_ms_max", "memory_bytes_max", "processes_max", "file_descriptors_max"],
+      "properties": {
+        "input_bytes_max": {"const": 65536},
+        "output_bytes_max": {"const": 65536},
+        "wall_time_ms_max": {"const": 30000},
+        "cpu_time_ms_max": {"const": 10000},
+        "memory_bytes_max": {"const": 536870912},
+        "processes_max": {"const": 16},
+        "file_descriptors_max": {"const": 64}
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["product_read", "product_write", "database", "command", "actuator", "deployment", "credential"],
+      "properties": {
+        "product_read": {"const": false},
+        "product_write": {"const": false},
+        "database": {"const": false},
+        "command": {"const": false},
+        "actuator": {"const": false},
+        "deployment": {"const": false},
+        "credential": {"const": false}
+      }
+    }
+  }
+}

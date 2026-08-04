@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.dev/schemas/model-required-bureau/typed-denial-receipt.v1.json",
+  "title": "EMR4 Bureau typed denial receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "attempt_id",
+    "domain",
+    "status",
+    "reason_code",
+    "failed_sink",
+    "field_path",
+    "source_ids",
+    "failed_rules",
+    "issued_at",
+    "sanitized_evidence_hash",
+    "provider_call_count",
+    "candidate_released",
+    "raw_provider_bytes_persisted",
+    "command_attempted"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.bureau.typed_denial_receipt.v1"},
+    "attempt_id": {"type": "string", "pattern": "^attempt_[a-z0-9_-]{8,64}$"},
+    "domain": {"enum": ["bernie", "rayleen", "davida", "controlled_recovery_update"]},
+    "status": {"const": "denied"},
+    "reason_code": {
+      "enum": [
+        "INVALID_UTF8",
+        "BYTE_BUDGET_EXCEEDED",
+        "DUPLICATE_KEY",
+        "SCHEMA_REJECTED",
+        "SOURCE_UNAUTHORIZED",
+        "CONTEXT_STALE",
+        "CONTEXT_SUPERSEDED",
+        "DOMAIN_SCOPE_MISMATCH",
+        "INTEGRITY_INSUFFICIENT",
+        "READER_NOT_AUTHORIZED",
+        "AUTHORITY_CEILING_EXCEEDED",
+        "PROVIDER_REQUIRED_UNAVAILABLE",
+        "BROKER_FAILURE",
+        "QUOTA_BREACH",
+        "RESIDUE_INCOMPLETE"
+      ]
+    },
+    "failed_sink": {"enum": ["parser", "provider_input", "projection_release", "proposal_release", "diagnosis_release", "recovery_plan_release", "command_argument", "effect", "cell_teardown"]},
+    "field_path": {"type": "string", "pattern": "^\\$([.][a-z][a-z0-9_]{0,63})*$", "maxLength": 256},
+    "source_ids": {"type": "array", "maxItems": 16, "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z][a-z0-9_.:-]{2,100}$"}},
+    "failed_rules": {"type": "array", "minItems": 1, "maxItems": 8, "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,80}$"}},
+    "issued_at": {"type": "string", "format": "date-time"},
+    "sanitized_evidence_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "provider_call_count": {"type": "integer", "minimum": 0, "maximum": 1},
+    "candidate_released": {"const": false},
+    "raw_provider_bytes_persisted": {"const": false},
+    "command_attempted": {"const": false}
+  }
+}

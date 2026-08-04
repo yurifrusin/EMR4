@@ -1,0 +1,17 @@
+{
+  "schema_version": "emr4.bureau.typed_denial_receipt.v1",
+  "attempt_id": "attempt_gate_zero_example",
+  "domain": "davida",
+  "status": "denied",
+  "reason_code": "INTEGRITY_INSUFFICIENT",
+  "failed_sink": "proposal_release",
+  "field_path": "$.payload.summary",
+  "source_ids": ["provider_model_candidate:gate_zero_example"],
+  "failed_rules": ["SINK_REQUIRED_INTEGRITY_MISSING"],
+  "issued_at": "2026-08-04T02:00:02Z",
+  "sanitized_evidence_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+  "provider_call_count": 0,
+  "candidate_released": false,
+  "raw_provider_bytes_persisted": false,
+  "command_attempted": false
+}

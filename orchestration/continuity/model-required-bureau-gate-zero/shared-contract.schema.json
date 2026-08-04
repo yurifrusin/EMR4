@@ -1,0 +1,433 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.dev/schemas/model-required-bureau/shared-contract.v1.json",
+  "title": "EMR4 model-required Bureau shared contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "contract_version",
+    "source_head",
+    "authority",
+    "planes",
+    "transport_principal",
+    "domains",
+    "domain_isolation",
+    "provider_admission",
+    "label_algebra",
+    "source_registry",
+    "sink_registry",
+    "envelope_registry",
+    "cell_contract",
+    "human_authority_policy",
+    "api_spine",
+    "future_command_boundary",
+    "provider_invocation_boundary",
+    "evidence_classes",
+    "blocked_boundaries"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.model_required_bureau.shared_contract.v1"},
+    "contract_version": {"const": "1.0.0"},
+    "source_head": {"const": "50dab5d66fc1401344fc47d7aa5ebd336b75e960"},
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_class",
+        "execution",
+        "evidence_label",
+        "provider_calls_authorized",
+        "runtime_wiring_authorized",
+        "product_data_authorized",
+        "patient_or_clinical_data_authorized",
+        "product_reads_authorized",
+        "commands_or_writes_authorized",
+        "actuators_authorized",
+        "deployment_authorized",
+        "production_authorized",
+        "release_authorized",
+        "pages_rebuild_authorized",
+        "protected_ref_movement_authorized"
+      ],
+      "properties": {
+        "artifact_class": {"const": "architecture_schema_prototype"},
+        "execution": {"const": "non_executing"},
+        "evidence_label": {"const": "provider_free_gate_zero_architecture_contract"},
+        "provider_calls_authorized": {"const": false},
+        "runtime_wiring_authorized": {"const": false},
+        "product_data_authorized": {"const": false},
+        "patient_or_clinical_data_authorized": {"const": false},
+        "product_reads_authorized": {"const": false},
+        "commands_or_writes_authorized": {"const": false},
+        "actuators_authorized": {"const": false},
+        "deployment_authorized": {"const": false},
+        "production_authorized": {"const": false},
+        "release_authorized": {"const": false},
+        "pages_rebuild_authorized": {"const": false},
+        "protected_ref_movement_authorized": {"const": false}
+      }
+    },
+    "planes": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/plane"}
+    },
+    "transport_principal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "role", "owns_provider_request", "owns_product_authority", "owns_command_authority"],
+      "properties": {
+        "id": {"const": "provider_broker"},
+        "role": {"const": "bounded_transport_not_authority_plane"},
+        "owns_provider_request": {"const": true},
+        "owns_product_authority": {"const": false},
+        "owns_command_authority": {"const": false}
+      }
+    },
+    "domains": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/domain"}
+    },
+    "domain_isolation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "shared_schema_primitives",
+        "shared_proofreader_primitives",
+        "cross_domain_context",
+        "cross_domain_memory",
+        "cross_domain_policy",
+        "cross_domain_credentials",
+        "cross_domain_commands"
+      ],
+      "properties": {
+        "shared_schema_primitives": {"const": true},
+        "shared_proofreader_primitives": {"const": true},
+        "cross_domain_context": {"const": false},
+        "cross_domain_memory": {"const": false},
+        "cross_domain_policy": {"const": false},
+        "cross_domain_credentials": {"const": false},
+        "cross_domain_commands": {"const": false}
+      }
+    },
+    "provider_admission": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model_required_for_agentic_claim",
+        "gate_zero_provider_call_authorized",
+        "no_silent_provider_fallback",
+        "no_silent_model_fallback",
+        "no_equivalent_heuristic_fallback",
+        "outage_receipt_code",
+        "outage_release",
+        "independent_deterministic_safety_continues_under_own_authority",
+        "ordinary_manual_pms_workflows_continue_under_own_authority"
+      ],
+      "properties": {
+        "model_required_for_agentic_claim": {"const": true},
+        "gate_zero_provider_call_authorized": {"const": false},
+        "no_silent_provider_fallback": {"const": true},
+        "no_silent_model_fallback": {"const": true},
+        "no_equivalent_heuristic_fallback": {"const": true},
+        "outage_receipt_code": {"const": "PROVIDER_REQUIRED_UNAVAILABLE"},
+        "outage_release": {"const": "no_candidate_no_agentic_completion_claim"},
+        "independent_deterministic_safety_continues_under_own_authority": {"const": true},
+        "ordinary_manual_pms_workflows_continue_under_own_authority": {"const": true}
+      }
+    },
+    "label_algebra": {"$ref": "#/$defs/label_algebra"},
+    "source_registry": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/source"}
+    },
+    "sink_registry": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {"$ref": "#/$defs/sink"}
+    },
+    "envelope_registry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "labeled_context_frame",
+        "typed_candidate",
+        "typed_denial_receipt",
+        "one_attempt_cell_manifest",
+        "teardown_residue_receipt"
+      ],
+      "properties": {
+        "labeled_context_frame": {"const": "labeled-context-frame.schema.json"},
+        "typed_candidate": {"const": "typed-candidate.schema.json"},
+        "typed_denial_receipt": {"const": "typed-denial-receipt.schema.json"},
+        "one_attempt_cell_manifest": {"const": "one-attempt-cell-manifest.schema.json"},
+        "teardown_residue_receipt": {"const": "teardown-residue-receipt.schema.json"}
+      }
+    },
+    "cell_contract": {"$ref": "#/$defs/cell_contract"},
+    "human_authority_policy": {"$ref": "#/$defs/human_authority_policy"},
+    "api_spine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["read_context", "mutation", "event", "manifest", "context_frames_non_authoritative", "provider_candidate_non_authoritative"],
+      "properties": {
+        "read_context": {"const": "graphql_named_scoped_read_only"},
+        "mutation": {"const": "rest_openapi_single_purpose_backend_owned_command"},
+        "event": {"const": "committed_hint_requires_fresh_authorized_read"},
+        "manifest": {"const": "declarative_input_runtime_enforced"},
+        "context_frames_non_authoritative": {"const": true},
+        "provider_candidate_non_authoritative": {"const": true}
+      }
+    },
+    "future_command_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["current_gate", "transport", "owner", "required_fields", "backend_reauthorization_before_write", "backend_revalidation_before_write", "model_cell_broker_or_proofreader_may_construct"],
+      "properties": {
+        "current_gate": {"const": "closed"},
+        "transport": {"const": "rest_openapi_single_purpose"},
+        "owner": {"const": "trusted_backend_code"},
+        "required_fields": {"const": ["command_type", "practice_scope", "actor_id", "correlation_id", "idempotency_key", "target_id", "expected_revision_or_etag", "context_hash", "freshness_id", "expires_at", "warnings", "blocks", "required_risk_tier", "confirmation_or_dual_review_evidence", "audit_contract", "readback_contract"]},
+        "backend_reauthorization_before_write": {"const": true},
+        "backend_revalidation_before_write": {"const": true},
+        "model_cell_broker_or_proofreader_may_construct": {"const": false}
+      }
+    },
+    "provider_invocation_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["current_gate", "transport", "required_bindings", "graphql_invocation", "raw_prompt_graphql_field", "raw_response_graphql_field", "raw_prompt_persistence", "raw_response_persistence"],
+      "properties": {
+        "current_gate": {"const": "closed"},
+        "transport": {"const": "rest_access_ai_command_only"},
+        "required_bindings": {"const": ["capability", "method", "actor_id", "practice_scope", "entitlement_decision", "context_hash", "data_class", "provider", "model", "region", "cost_budget", "correlation_id", "audit_policy"]},
+        "graphql_invocation": {"const": false},
+        "raw_prompt_graphql_field": {"const": false},
+        "raw_response_graphql_field": {"const": false},
+        "raw_prompt_persistence": {"const": false},
+        "raw_response_persistence": {"const": false}
+      }
+    },
+    "evidence_classes": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {"$ref": "#/$defs/evidence_class"}
+    },
+    "blocked_boundaries": {
+      "type": "array",
+      "minItems": 13,
+      "maxItems": 13,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "provider_or_model_product_runtime",
+          "external_product_data_transmission",
+          "patient_or_clinical_data",
+          "live_product_read",
+          "command_or_write",
+          "actuator_shell_sql_cloud_or_iam",
+          "migration_or_external_update_activation",
+          "deployment",
+          "production",
+          "release",
+          "pages_rebuild",
+          "protected_ref_movement",
+          "protected_evidence"
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "plane": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["order", "id", "principal", "input", "output", "authority_ceiling", "effect_authority"],
+      "properties": {
+        "order": {"type": "integer", "minimum": 1, "maximum": 4},
+        "id": {"enum": ["cognitive", "proof", "authority", "execution_verification"]},
+        "principal": {"enum": ["cognitive_cell_generation", "deterministic_proofreader", "backend_authority_service", "single_purpose_command_handler"]},
+        "input": {"type": "string", "minLength": 1, "maxLength": 100},
+        "output": {"type": "string", "minLength": 1, "maxLength": 100},
+        "authority_ceiling": {"enum": ["candidate_only", "admitted_candidate_only", "policy_classified_command_eligibility", "exact_command_contract_only"]},
+        "effect_authority": {"type": "boolean"}
+      }
+    },
+    "domain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "ownership", "candidate_kinds", "live_read_gate", "command_gate"],
+      "properties": {
+        "id": {"enum": ["bernie", "rayleen", "davida", "controlled_recovery_update"]},
+        "ownership": {"type": "string", "minLength": 1, "maxLength": 100},
+        "candidate_kinds": {"type": "array", "minItems": 2, "maxItems": 3, "uniqueItems": true, "items": {"$ref": "#/$defs/candidate_kind"}},
+        "live_read_gate": {"const": "closed"},
+        "command_gate": {"const": "closed"}
+      }
+    },
+    "candidate_kind": {
+      "enum": [
+        "appointment_projection",
+        "appointment_proposal",
+        "waiting_room_projection",
+        "arrival_status_or_area_proposal",
+        "practice_administration_advisory",
+        "practice_administration_proposal",
+        "technical_diagnosis",
+        "recovery_plan",
+        "update_proposal"
+      ]
+    },
+    "label_algebra": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dimensions", "join", "ordinary_transform_may_raise_dimension", "endorsement", "declassification", "authority_ceiling_order"],
+      "properties": {
+        "dimensions": {"const": ["provenance", "integrity_principals", "confidentiality_readers", "freshness", "authority_ceiling"]},
+        "join": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["provenance", "integrity_principals", "confidentiality_readers", "expires_at", "freshness", "authority_ceiling"],
+          "properties": {
+            "provenance": {"const": "set_union_with_transform_trace"},
+            "integrity_principals": {"const": "set_intersection"},
+            "confidentiality_readers": {"const": "set_intersection"},
+            "expires_at": {"const": "earliest"},
+            "freshness": {"const": "stale_if_any_input_stale"},
+            "authority_ceiling": {"const": "minimum_ordered_ceiling"}
+          }
+        },
+        "ordinary_transform_may_raise_dimension": {"const": false},
+        "endorsement": {"$ref": "#/$defs/endorsement"},
+        "declassification": {"$ref": "#/$defs/declassification"},
+        "authority_ceiling_order": {"const": ["data_only", "projection_candidate", "proposal_candidate", "diagnosis_candidate", "recovery_plan_candidate", "command_argument", "effect"]}
+      }
+    },
+    "endorsement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["named_trusted_principal_required", "field_specific", "evidence_bound", "audited", "erases_provenance", "widens_readers"],
+      "properties": {
+        "named_trusted_principal_required": {"const": true},
+        "field_specific": {"const": true},
+        "evidence_bound": {"const": true},
+        "audited": {"const": true},
+        "erases_provenance": {"const": false},
+        "widens_readers": {"const": false}
+      }
+    },
+    "declassification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["named_policy_required", "field_and_sink_specific", "purpose_bound", "expiry_bound", "audited", "may_add_integrity", "may_refresh_stale_data", "may_raise_authority_ceiling"],
+      "properties": {
+        "named_policy_required": {"const": true},
+        "field_and_sink_specific": {"const": true},
+        "purpose_bound": {"const": true},
+        "expiry_bound": {"const": true},
+        "audited": {"const": true},
+        "may_add_integrity": {"const": false},
+        "may_refresh_stale_data": {"const": false},
+        "may_raise_authority_ceiling": {"const": false}
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "integrity_principal", "requires_current_authorization", "event_payload_is_truth"],
+      "properties": {
+        "id": {"enum": ["authorized_backend_read", "committed_event_hint", "authored_synthetic_fixture", "provider_model_candidate"]},
+        "integrity_principal": {"enum": ["backend_truth", "event_hint_only", "authored_synthetic", "untrusted_model"]},
+        "requires_current_authorization": {"type": "boolean"},
+        "event_payload_is_truth": {"const": false}
+      }
+    },
+    "sink": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "maximum_authority_ceiling", "required_integrity_any", "required_reader", "freshness_required", "separate_material_gate"],
+      "properties": {
+        "id": {"enum": ["provider_input", "projection_release", "proposal_release", "diagnosis_release", "recovery_plan_release", "command_argument", "effect"]},
+        "maximum_authority_ceiling": {"enum": ["data_only", "projection_candidate", "proposal_candidate", "diagnosis_candidate", "recovery_plan_candidate", "command_argument", "effect"]},
+        "required_integrity_any": {"type": "array", "minItems": 1, "maxItems": 2, "uniqueItems": true, "items": {"enum": ["backend_truth", "authored_synthetic", "deterministic_proofreader", "backend_authority_service", "single_purpose_command_handler"]}},
+        "required_reader": {"enum": ["admitted_provider_request", "authorized_surface", "authorized_operator", "single_purpose_command_handler", "deterministic_readback"]},
+        "freshness_required": {"const": true},
+        "separate_material_gate": {"type": "boolean"}
+      }
+    },
+    "cell_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["generation_scope", "fresh_identity_per_attempt", "one_use_broker_token", "input_count", "candidate_output_count", "cell_visible_bridges", "forbidden_bridges", "parser", "quotas", "kill_conditions", "teardown_steps"],
+      "properties": {
+        "generation_scope": {"const": "one_bureau_attempt"},
+        "fresh_identity_per_attempt": {"const": true},
+        "one_use_broker_token": {"const": true},
+        "input_count": {"const": 1},
+        "candidate_output_count": {"const": 1},
+        "cell_visible_bridges": {"const": ["typed_input_once", "typed_output_once"]},
+        "forbidden_bridges": {"const": ["shell", "code_execution", "generic_tool", "host_path", "url_fetch", "callback", "filesystem", "database", "credential", "metadata_endpoint", "ambient_network", "actuator"]},
+        "parser": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["encoding", "format", "duplicate_keys", "unknown_properties", "trailing_bytes", "strings_are_data_only", "evaluation_or_interpolation"],
+          "properties": {
+            "encoding": {"const": "utf-8"},
+            "format": {"const": "canonical_json_object"},
+            "duplicate_keys": {"const": "reject"},
+            "unknown_properties": {"const": "reject"},
+            "trailing_bytes": {"const": "reject"},
+            "strings_are_data_only": {"const": true},
+            "evaluation_or_interpolation": {"const": false}
+          }
+        },
+        "quotas": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["input_bytes_max", "output_bytes_max", "wall_time_ms_max", "cpu_time_ms_max", "memory_bytes_max", "processes_max", "file_descriptors_max"],
+          "properties": {
+            "input_bytes_max": {"const": 65536},
+            "output_bytes_max": {"const": 65536},
+            "wall_time_ms_max": {"const": 30000},
+            "cpu_time_ms_max": {"const": 10000},
+            "memory_bytes_max": {"const": 536870912},
+            "processes_max": {"const": 16},
+            "file_descriptors_max": {"const": 64}
+          }
+        },
+        "kill_conditions": {"const": ["expiry", "quota_breach", "parse_failure", "broker_failure", "supersession", "second_input_or_output_attempt"]},
+        "teardown_steps": {"const": ["revoke_broker_token", "close_channels", "kill_generation_processes", "remove_owned_ephemeral_storage", "emit_residue_receipt"]}
+      }
+    },
+    "human_authority_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["risk_tiers", "backend_policy_selects_tier", "model_may_only_propose_tier", "reviewers_authenticated_by_backend", "review_scope_and_expiry_required", "dual_review_requires_distinct_authorized_principals", "model_cell_broker_or_proofreader_may_satisfy_review"],
+      "properties": {
+        "risk_tiers": {"const": ["observe_only", "ordinary_confirmation", "manager_confirmation", "dual_review", "maintenance_release_authority", "forbidden"]},
+        "backend_policy_selects_tier": {"const": true},
+        "model_may_only_propose_tier": {"const": true},
+        "reviewers_authenticated_by_backend": {"const": true},
+        "review_scope_and_expiry_required": {"const": true},
+        "dual_review_requires_distinct_authorized_principals": {"const": true},
+        "model_cell_broker_or_proofreader_may_satisfy_review": {"const": false}
+      }
+    },
+    "evidence_class": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "proves"],
+      "properties": {
+        "id": {"enum": ["provider_free_component", "occupied_model_authored_synthetic", "live_product_read", "live_product_write", "live_actuator", "deployment", "production", "release"]},
+        "proves": {"type": "string", "minLength": 10, "maxLength": 100}
+      }
+    }
+  }
+}
