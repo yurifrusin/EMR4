@@ -229,15 +229,31 @@ patient-specific live consultant output.
 Outcome: a GP can ask a bounded clinical question and receive a structured,
 cited advisory response that cannot diagnose, prescribe, or write the record.
 
+Clinical direction:
+[`consultant-safety-first-differential-diagnosis-doctrine.md`](consultant-safety-first-differential-diagnosis-doctrine.md).
+The future contract must support a safety-weighted differential rather than a
+single probability ranking: plausible must-not-miss conditions, most-supported
+hypotheses, discriminating evidence, outstanding follow-up and safety-netting
+remain separately visible and clinician controlled. A backend-owned
+Diagnostic Thread must carry that reasoning and its unresolved obligations
+across encounters without becoming provider-model memory.
+
 Candidate slices:
 
 - `consultant` charter and least-authority Access AI capability;
 - curated patient-context frame with provenance, omissions, freshness, and
   clinician-controlled inclusion;
+- versioned hypothesis and evidence ledgers that keep patient report,
+  clinician observation, results, specialist opinion, retrieved guidance and
+  model inference distinct;
+- a longitudinal Diagnostic Thread and typed FollowUp Obligations that bridge
+  to reminders and recalls while keeping delivery, attendance, evidence review
+  and clinical completion distinct;
 - evidence retrieval contract and licensed-source adapters;
 - advisory schema containing question understood, source citations and dates,
   evidence summary, uncertainty, contradictions, missing information, suggested
-  questions, red flags for clinician attention, and explicit limitations;
+  questions, red flags for clinician attention, candidate discriminators,
+  outstanding follow-up, safety-netting and explicit limitations;
 - injection-resistant separation of patient text, retrieved evidence, policy,
   and instructions; and
 - immutable invocation metadata without routine raw-PHI logging.

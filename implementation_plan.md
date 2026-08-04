@@ -900,11 +900,22 @@ export mapping canonical.
 ### PHASE 5 — AI Differential Diagnosis Engine
 *Clinical decision support; drug interaction checking; red-flag scanning.*
 
+The controlling clinical direction for future Consultant architecture is
+[`docs/consultant-safety-first-differential-diagnosis-doctrine.md`](docs/consultant-safety-first-differential-diagnosis-doctrine.md).
+Consultant should maintain a safety-weighted, evidence-linked differential:
+plausible must-not-miss diagnoses remain visible according to preventable harm
+and time to harm, while patient-specific plausibility, test limitations,
+investigation harms, specialist input, follow-up and safety-netting prevent a
+scattergun approach. A durable backend-owned Diagnostic Thread should connect
+past reasoning, present uncertainty and future results, referrals, reminders,
+recalls and safety-net obligations across encounters. It is not model memory
+and Consultant is not a top-one diagnosis engine.
+
 | Item | Details |
 |:---|:---|
-| DDx tab | `[ DDx ]` tab in Patient Mode |
+| DDx tab | `[ DDx ]` tab in Patient Mode with separate Act now, Must not miss, Most likely, Discriminators, Outstanding evidence, and Safety net projections |
 | Mode 1 — Passive | Always-on red-flag scanner (PE, meningitis, ectopic, etc.) → urgent banner |
-| Mode 2 — Active | On-demand ranked differential with evidence + suggested investigations |
+| Mode 2 — Active | On-demand safety-weighted differential with source-linked evidence, uncertainty, discriminators and suggested next steps |
 | Mode 3 — Interrogative | Clinical chat grounded in patient's full record |
 | Drug interactions | Cross-reference new Rx against allergies + current meds + active diagnoses |
 

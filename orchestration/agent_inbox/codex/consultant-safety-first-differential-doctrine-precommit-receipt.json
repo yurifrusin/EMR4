@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:6136ba8fe73ed91be12c9de811bf4bf6ee7c0243b57fc4c24607025eeeda57b3",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The candidate adds one referenced future Consultant doctrine, links it from implementation_plan.md and the existing Consultant/triage roadmap, and records the backend-owned Diagnostic Thread/reminder-recall seam. It remains design input rather than a frozen schema or runtime. The API Spine pattern stays read-only context plus explicit clinician-confirmed REST/OpenAPI commands.",
+    "current_authority_allocation": "Yuri explicitly asked to document the agreed safety-first Consultant insights and references, then added the longitudinal diagnostic-memory requirement. Sol completed only bounded documentation and may commit/push ordinary task-branch work. No implementation worker, verifier, protected integration or product/runtime authority is involved.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam remains at d78589d39132fe8c825619a14e4b4c2795b95263 and aligned with origin before commit. Local and origin master plus handoff/current remain at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Candidate paths are the Consultant doctrine, implementation plan link, Consultant/triage roadmap link and this tranche's exact receipt files. User-owned docs/branding/ and prior Gate -1 prepush artifacts remain untracked and must be excluded by explicit-path staging. Focused API-spine/current-programme tests passed 39/39 and git diff --check passed; one broader historical checkpoint failure was proven pre-existing because its required phrase is absent from HEAD AGENTS.md.",
+    "live_handover_current_baton": "AGENTS.md was reread completely at 454 lines, 74570 bytes and SHA-256 cfe35697191f408ba7669682244163eb8623d6681a1c41eab39e6ba4cc57ba48. Gate -1 remains accepted and Gate zero plus all Consultant runtime/product work remain paused.",
+    "protected_evidence_boundaries": "Protected holdouts, historical PHI and provenance-blocked material were not accessed. User-owned docs/branding/raisa is preserved and excluded. No provider, patient/product data, model runtime, product read/write, actuator, migration, cloud/IAM, deployment, production, release, Pages or protected-ref action occurred."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

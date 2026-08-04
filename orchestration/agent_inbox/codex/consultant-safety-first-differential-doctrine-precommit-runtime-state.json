@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely at 454 lines, 74570 bytes and SHA-256 cfe35697191f408ba7669682244163eb8623d6681a1c41eab39e6ba4cc57ba48. Gate -1 remains accepted and Gate zero plus all Consultant runtime/product work remain paused.",
+    "current_authority_allocation": "Yuri explicitly asked to document the agreed safety-first Consultant insights and references, then added the longitudinal diagnostic-memory requirement. Sol completed only bounded documentation and may commit/push ordinary task-branch work. No implementation worker, verifier, protected integration or product/runtime authority is involved.",
+    "active_plan_and_acceptance": "The candidate adds one referenced future Consultant doctrine, links it from implementation_plan.md and the existing Consultant/triage roadmap, and records the backend-owned Diagnostic Thread/reminder-recall seam. It remains design input rather than a frozen schema or runtime. The API Spine pattern stays read-only context plus explicit clinician-confirmed REST/OpenAPI commands.",
+    "protected_evidence_boundaries": "Protected holdouts, historical PHI and provenance-blocked material were not accessed. User-owned docs/branding/raisa is preserved and excluded. No provider, patient/product data, model runtime, product read/write, actuator, migration, cloud/IAM, deployment, production, release, Pages or protected-ref action occurred.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam remains at d78589d39132fe8c825619a14e4b4c2795b95263 and aligned with origin before commit. Local and origin master plus handoff/current remain at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Candidate paths are the Consultant doctrine, implementation plan link, Consultant/triage roadmap link and this tranche's exact receipt files. User-owned docs/branding/ and prior Gate -1 prepush artifacts remain untracked and must be excluded by explicit-path staging. Focused API-spine/current-programme tests passed 39/39 and git diff --check passed; one broader historical checkpoint failure was proven pre-existing because its required phrase is absent from HEAD AGENTS.md."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "consultant_safety_first_differential_doctrine_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol authored and reviewed the bounded Consultant doctrine and its two plan links locally."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No native subagent was dispatched."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No external verifier was selected for this explicit user-approved documentation-only change."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["DeepSeek was not selected for the small architecture-documentation change."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The real-TTY fallback was not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The leverage-gated Claude lane was not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "codex-native-parallel-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
