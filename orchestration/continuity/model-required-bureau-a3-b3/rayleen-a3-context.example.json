@@ -1,0 +1,52 @@
+{
+  "schema_version": "emr4.rayleen.a3.context.v1",
+  "case_id": "rayleen-a3-synthetic-001",
+  "frame_id": "31000000-0000-4000-8000-000000000001",
+  "practice_id": "31000000-0000-4000-8000-000000000002",
+  "location_id": "31000000-0000-4000-8000-000000000003",
+  "context_revision": 11,
+  "generated_at": "2026-08-04T09:00:00Z",
+  "expires_at": "2026-08-04T09:02:00Z",
+  "utterance": "Only show people waiting for Dr Patel and highlight whoever has waited longest.",
+  "facts": [
+    {
+      "appointment_id": "31000000-0000-4000-8000-000000000011",
+      "patient_display_token": "synthetic:queue-alpha",
+      "practitioner_id": "31000000-0000-4000-8000-000000000021",
+      "status": "arrived",
+      "scheduled_at": "2026-08-04T08:25:00Z",
+      "arrived_at": "2026-08-04T08:30:00Z",
+      "waiting_area_id": "31000000-0000-4000-8000-000000000031",
+      "source_id": "authored_synthetic_fixture:rayleen-a3-001",
+      "authority_ceiling": "data_only"
+    },
+    {
+      "appointment_id": "31000000-0000-4000-8000-000000000012",
+      "patient_display_token": "synthetic:queue-beta",
+      "practitioner_id": "31000000-0000-4000-8000-000000000021",
+      "status": "waiting",
+      "scheduled_at": "2026-08-04T08:35:00Z",
+      "arrived_at": "2026-08-04T08:42:00Z",
+      "waiting_area_id": "31000000-0000-4000-8000-000000000031",
+      "source_id": "authored_synthetic_fixture:rayleen-a3-002",
+      "authority_ceiling": "data_only"
+    },
+    {
+      "appointment_id": "31000000-0000-4000-8000-000000000013",
+      "patient_display_token": "synthetic:queue-gamma",
+      "practitioner_id": "31000000-0000-4000-8000-000000000022",
+      "status": "arrived",
+      "scheduled_at": "2026-08-04T08:20:00Z",
+      "arrived_at": "2026-08-04T08:28:00Z",
+      "waiting_area_id": "31000000-0000-4000-8000-000000000032",
+      "source_id": "authored_synthetic_fixture:rayleen-a3-003",
+      "authority_ceiling": "data_only"
+    }
+  ],
+  "derived_signals": [
+    {"appointment_id": "31000000-0000-4000-8000-000000000011", "kind": "elapsed_wait_minutes", "value": 30, "derived_by": "deterministic_projection_engine"},
+    {"appointment_id": "31000000-0000-4000-8000-000000000012", "kind": "elapsed_wait_minutes", "value": 18, "derived_by": "deterministic_projection_engine"},
+    {"appointment_id": "31000000-0000-4000-8000-000000000013", "kind": "elapsed_wait_minutes", "value": 32, "derived_by": "deterministic_projection_engine"}
+  ],
+  "excluded_field_classes": ["contact_details", "national_identifiers", "clinical_text", "appointment_notes", "unrestricted_history", "credentials", "raw_provider_data"]
+}

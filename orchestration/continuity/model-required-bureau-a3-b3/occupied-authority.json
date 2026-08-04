@@ -1,0 +1,27 @@
+{
+  "schema_version": "emr4.model_required_bureau_a3_b3.occupied_authority.v1",
+  "decision": "authorised_by_yuri",
+  "authority_granted": true,
+  "recorded_at": "2026-08-04",
+  "exact_boundary": {
+    "provider": "google_cloud_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "existing_keyless_impersonated_service_account_adc",
+    "scope": "https://www.googleapis.com/auth/cloud-platform",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "authored_synthetic_only": true,
+    "maximum_calls_per_lane": 2,
+    "maximum_calls_total": 4,
+    "maximum_cost_usd": 1,
+    "provider_tools": false,
+    "fallback": false,
+    "product_read": false,
+    "product_write": false,
+    "runtime_wiring": false,
+    "deployment": false,
+    "protected_ref_movement": false
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "sprint_planning",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely in bounded segments. The current result is model_required_bureau_c3_d3_provider_free_architecture_pass at Continuity 211 / Compass 192 and the exact recommended next material lane is paired A3/B3 authored-synthetic occupied advisory rehearsal.",
+    "current_authority_allocation": "Yuri's standing uninterrupted-development authority remains active and Yuri has now selected the recorded usual Sydney Vertex boundary for A3/B3: Google Vertex AI gemini-2.5-flash through project bernie-emr4-dev, the exact Bernie service account and existing keyless impersonated ADC in australia-southeast1. Sol owns architecture, execution admission, acceptance and task-branch publication; bounded workers may advise or implement separable artifacts and Gemini 3.6 Flash/high may independently review source only, but none receives authority expansion, self-acceptance, integration or protected-ref rights.",
+    "active_plan_and_acceptance": "The controlled-recovery development plan, parent Bureau architecture, C3/D3 closeout and Sol acceptance, implementation_plan.md, Access AI design and API Spine sources were read completely. A3 requires typed authored-synthetic WaitingRoomContextFrame input and a closed Rayleen candidate; B3 requires typed authored-synthetic practice-administration input and one closed advisory candidate. Deterministic proofreaders may admit, request at most one contract-only correction per lane or reject; no product read or administrative write is included.",
+    "protected_evidence_boundaries": "Protected holdouts, historical PHI, H15/H-series sources, docs/branding/, patient/clinical/product-derived data, live product read, product or database command/write, shell/SQL/cloud/IAM mutation, actuator, update/import/migration/activation, deployment, production, release, Pages and protected refs/evidence remain closed. Provider transmission is newly exact only for bounded authored-synthetic A3/B3 inputs. The four pre-existing Consultant/Gate-minus-one pre-push receipt/state files remain preserved and excluded.",
+    "git_refs_and_worktree": "HEAD and origin/codex/ariadne-bernie-davida-parallel-seam are 2de467e23ce44574395ad6115e7205ca27c96fb2. Local and origin master plus handoff/current are all 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree is clean; only docs/branding/ and the four preserved receipt/state files are untracked. Explicit-path staging is mandatory and protected refs must not move."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_required_bureau_a3_b3_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed full rehydration, API Spine review and exact-boundary reconstruction before A3/B3 planning."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fresh source-only independent review is eligible only after deterministic admission and an exact clean candidate commit."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "A bounded mechanical worker lane may be opened only if packet overhead is lower than direct completion."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Leverage-gated lane not selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Native worker count is adaptive; bounded read-only A3/B3 security and contract analysis may be assigned after predispatch admission."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/davida-b3-model-body.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["intent", "operation", "practitioner_ref", "location_ref", "dry_run_proposal_hash", "reason_code", "response_code"],
+  "properties": {
+    "intent": {"const": "dry_run"},
+    "operation": {"const": "PROPOSE_UPDATE_PRACTITIONER_DEFAULT_LOCATION"},
+    "practitioner_ref": {"type": "string", "pattern": "^[A-Za-z0-9._~-]{8,64}$"},
+    "location_ref": {"type": "string", "pattern": "^[A-Za-z0-9._~-]{8,64}$"},
+    "dry_run_proposal_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "reason_code": {"const": "PRACTICE_ASSIGNMENT_UPDATE"},
+    "response_code": {"const": "DRY_RUN_REQUIRES_HUMAN_CONFIRMATION"}
+  }
+}

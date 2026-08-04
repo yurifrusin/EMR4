@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/model-required-bureau-a3-b3-contract.v1.json",
+  "title": "EMR4 model-required Bureau A3/B3 occupied rehearsal contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_head",
+    "evidence_label",
+    "provider_binding",
+    "data_boundary",
+    "call_boundary",
+    "lanes",
+    "api_spine",
+    "closed_surfaces"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.model_required_bureau_a3_b3.contract.v1"},
+    "source_head": {"const": "2de467e23ce44574395ad6115e7205ca27c96fb2"},
+    "evidence_label": {"const": "authored_synthetic_occupied_provider_advisory_rehearsal"},
+    "provider_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider", "model", "project", "service_account", "authentication", "scope", "location", "endpoint_hostname", "api_path", "automatic_fallback", "global_endpoint", "provider_tools", "grounding", "cached_content", "provider_managed_cache_disabled_required"],
+      "properties": {
+        "provider": {"const": "google_cloud_vertex_ai"},
+        "model": {"const": "gemini-2.5-flash"},
+        "project": {"const": "bernie-emr4-dev"},
+        "service_account": {"const": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"},
+        "authentication": {"const": "existing_keyless_impersonated_service_account_adc"},
+        "scope": {"const": "https://www.googleapis.com/auth/cloud-platform"},
+        "location": {"const": "australia-southeast1"},
+        "endpoint_hostname": {"const": "australia-southeast1-aiplatform.googleapis.com"},
+        "api_path": {"const": "/v1/projects/bernie-emr4-dev/locations/australia-southeast1/publishers/google/models/gemini-2.5-flash:generateContent"},
+        "automatic_fallback": {"const": false},
+        "global_endpoint": {"const": false},
+        "provider_tools": {"const": false},
+        "grounding": {"const": false},
+        "cached_content": {"const": false},
+        "provider_managed_cache_disabled_required": {"const": true}
+      }
+    },
+    "data_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["classification", "patient", "clinical", "product_derived", "historical_diary", "protected", "participant", "raw_prompt_retained", "raw_response_retained", "model_memory"],
+      "properties": {
+        "classification": {"const": "newly_authored_synthetic_only"},
+        "patient": {"const": false},
+        "clinical": {"const": false},
+        "product_derived": {"const": false},
+        "historical_diary": {"const": false},
+        "protected": {"const": false},
+        "participant": {"const": false},
+        "raw_prompt_retained": {"const": false},
+        "raw_response_retained": {"const": false},
+        "model_memory": {"const": false}
+      }
+    },
+    "call_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lane_count", "primary_calls_per_lane", "conditional_corrections_per_lane", "maximum_calls_per_lane", "maximum_calls_total", "maximum_cost_usd", "serial", "stop_after_first_admission", "unchanged_duplicate", "semantic_retry"],
+      "properties": {
+        "lane_count": {"const": 2},
+        "primary_calls_per_lane": {"const": 1},
+        "conditional_corrections_per_lane": {"const": 1},
+        "maximum_calls_per_lane": {"const": 2},
+        "maximum_calls_total": {"const": 4},
+        "maximum_cost_usd": {"const": 1},
+        "serial": {"const": true},
+        "stop_after_first_admission": {"const": true},
+        "unchanged_duplicate": {"const": false},
+        "semantic_retry": {"const": false}
+      }
+    },
+    "lanes": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["lane", "domain", "case_id", "context_schema", "candidate_schema", "release", "product_read", "write"],
+        "properties": {
+          "lane": {"enum": ["A3", "B3"]},
+          "domain": {"enum": ["rayleen", "davida"]},
+          "case_id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+          "context_schema": {"type": "string", "pattern": "^emr4\\."},
+          "candidate_schema": {"type": "string", "pattern": "^emr4\\."},
+          "release": {"const": "proofreader_admitted_typed_advisory_only"},
+          "product_read": {"const": false},
+          "write": {"const": false}
+        }
+      }
+    },
+    "api_spine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["classification", "graphql", "future_mounted_invocation", "events", "manifests"],
+      "properties": {
+        "classification": {"const": "repository_local_access_ai_external_command_rehearsal"},
+        "graphql": {"const": "read_only_no_provider_invocation"},
+        "future_mounted_invocation": {"const": "separately_authorized_single_purpose_rest_openapi_command"},
+        "events": {"const": "non_authoritative_hints"},
+        "manifests": {"const": "declarative_only"}
+      }
+    },
+    "closed_surfaces": {
+      "type": "object",
+      "minProperties": 12,
+      "additionalProperties": {"const": false}
+    }
+  }
+}

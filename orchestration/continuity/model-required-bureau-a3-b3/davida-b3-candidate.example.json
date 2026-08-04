@@ -1,0 +1,19 @@
+{
+  "schema_version": "emr4.davida.b3.candidate.v1",
+  "case_id": "davida-b3-synthetic-001",
+  "candidate_provenance": "untrusted_model",
+  "intent": "dry_run",
+  "operation": "PROPOSE_UPDATE_PRACTITIONER_DEFAULT_LOCATION",
+  "content_revision": "65c36cea04a1c7ffd6f379b8d554a855e9452d5388fef22c3801f6c843c13b19",
+  "practitioner_ref": "practitioner-patel",
+  "location_ref": "location-north",
+  "dry_run_proposal_hash": "0ff669489dfe35156b3e64bc9c925a97b4f4dc05686bff1c0164cc8b38ea677e",
+  "reason_code": "PRACTICE_ASSIGNMENT_UPDATE",
+  "risk_tier": "admin_proposal",
+  "response_code": "DRY_RUN_REQUIRES_HUMAN_CONFIRMATION",
+  "human_confirmation_required": true,
+  "confirmation_authorized": false,
+  "apply_authorized": false,
+  "writes_authorized": false,
+  "success_claimed": false
+}

@@ -1,0 +1,141 @@
+{
+  "actuator_count": 0,
+  "attempt_id": "a3-b3-rayleen-a3-primary-001",
+  "attempt_number": 1,
+  "build_context": {
+    "base_image_pulled_for_attempt": true,
+    "pinned_base_image": "docker.io/library/python@sha256:a190708a2dec1bd18b1decb539f8e8f5407abaa9bf39cacda583f7f8c11db322",
+    "repository_root_used": false,
+    "source_hashes": {
+      "generated:cell-request.json": "sha256:555784e2473a00e76406ee2a64465ae6ea206731939fa93dbadc1f8c898bd836",
+      "orchestration/continuity/model-required-bureau-a3-b3/Dockerfile": "sha256:3d47934e293dcecb182e10c64ebfabcbedbcec67c1998166a3fee2dbf495481e",
+      "scripts/ariadne_vertex_sydney_gemini_25_cell.py": "sha256:530d6f91e841aa41dd4fd87f07f45c360c728e7ca5847586bab5d19b604a6a71",
+      "scripts/ariadne_vertex_sydney_gemini_25_relay.py": "sha256:9f4a86f4d82223d7cc2f8f5be21d8d3ec152e2eb0c57e0ac70e1c27d5020ef66"
+    },
+    "temporary_exact_allowlist": true
+  },
+  "cell_policy": {
+    "cap_drop": [
+      "ALL"
+    ],
+    "credential_environment_present": false,
+    "memory_bytes": 134217728,
+    "memory_swap_bytes": 134217728,
+    "mount_count": 0,
+    "nano_cpus": 500000000,
+    "network_names": [
+      "emr4-a3-b3-rayleen-1-internal"
+    ],
+    "pids_limit": 64,
+    "port_binding_count": 0,
+    "privileged": false,
+    "read_only_rootfs": true,
+    "security_opt": [
+      "no-new-privileges=true"
+    ],
+    "user": "65532:65532"
+  },
+  "cleanup": {
+    "base_image_state_preserved": true,
+    "broker_process_absent": true,
+    "cell_container_absent": true,
+    "cell_image_absent": true,
+    "daemon_wide_prune_performed": false,
+    "internal_network_absent": true,
+    "relay_container_absent": true,
+    "relay_image_absent": true,
+    "temporary_context_absent": true
+  },
+  "cleanup_passed": true,
+  "command_count": 0,
+  "correction_eligible": false,
+  "credential_or_token_retained": false,
+  "database_access_count": 0,
+  "evidence_hash": "sha256:bf3334aa474c11bed791a54fd0dfe9dce74a10cb09b0f691b7773172201f8db6",
+  "lane": "rayleen_a3",
+  "mode": "dry-run",
+  "network": {
+    "attachable": false,
+    "driver": "bridge",
+    "ingress": false,
+    "internal": true,
+    "name": "emr4-a3-b3-rayleen-1-internal"
+  },
+  "preflight_hash": null,
+  "product_read_count": 0,
+  "proofreader_reason_code": "proofreader_admitted",
+  "proofreader_verdict": "admitted",
+  "provider_call_count": 0,
+  "provider_contacted": false,
+  "provider_metadata": null,
+  "raw_prompt_retained": false,
+  "raw_provider_response_retained": false,
+  "relay_policy": {
+    "broker_alias_present": true,
+    "cap_drop": [
+      "ALL"
+    ],
+    "memory_bytes": 67108864,
+    "memory_swap_bytes": 67108864,
+    "mount_count": 1,
+    "nano_cpus": 250000000,
+    "network_names": [
+      "bridge",
+      "emr4-a3-b3-rayleen-1-internal"
+    ],
+    "pids_limit": 32,
+    "port_binding_count": 0,
+    "privileged": false,
+    "read_only_rootfs": true,
+    "security_opt": [
+      "no-new-privileges=true"
+    ],
+    "token_mount_exact": true,
+    "user": "65532:65532"
+  },
+  "release": {
+    "authority_ceiling": {
+      "actuator": false,
+      "apply": false,
+      "command": false,
+      "confirmation": false,
+      "database": false,
+      "product_read": false,
+      "success": false,
+      "write": false
+    },
+    "candidate_provenance": "untrusted_model",
+    "case_id": "rayleen-a3-synthetic-001",
+    "context_binding": {
+      "context_revision": 11,
+      "expires_at": "2026-08-04T09:02:00Z",
+      "frame_id": "31000000-0000-4000-8000-000000000001",
+      "location_id": "31000000-0000-4000-8000-000000000003",
+      "practice_id": "31000000-0000-4000-8000-000000000002"
+    },
+    "evidence_mode": "authored_synthetic_occupied_provider_advisory_rehearsal",
+    "lane": "rayleen_a3",
+    "projection": {
+      "evidence_appointment_ids": [
+        "31000000-0000-4000-8000-000000000011",
+        "31000000-0000-4000-8000-000000000012"
+      ],
+      "focus_appointment_id": "31000000-0000-4000-8000-000000000011",
+      "intent": "filter",
+      "practitioner_id": "31000000-0000-4000-8000-000000000021",
+      "projection_kind": "practitioner_group",
+      "response_code": "FILTERED_PRACTITIONER_LONGEST_WAIT",
+      "secondary_projection": "longest_wait"
+    },
+    "schema_version": "emr4.rayleen.a3.release.v1",
+    "status": "advisory_only"
+  },
+  "request_binding": {
+    "context_hash": "sha256:370f12e489123bddd9ddca5f14fb20d19275f661306136580a2b841c3ad6efa7",
+    "policy_id": "emr4-model-required-bureau-a3-b3-sydney-v1",
+    "provider_request_hash": "sha256:6db2a2f5c4c9aa264fd2757e72ec2bd50fb8768a1f8f152e830ee55628aa67cd"
+  },
+  "result": "attempt_pass",
+  "schema_version": "emr4.model_required_bureau_a3_b3.attempt_evidence.v1",
+  "write_count": 0
+}

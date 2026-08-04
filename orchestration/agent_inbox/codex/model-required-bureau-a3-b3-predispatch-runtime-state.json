@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. C3/D3 is the accepted current result and paired A3/B3 is the selected next material tranche after Yuri chose the recorded Sydney Vertex envelope.",
+    "current_authority_allocation": "Yuri authorises the usual exact Google Vertex AI gemini-2.5-flash lane in bernie-emr4-dev through the existing Bernie keyless impersonated ADC and australia-southeast1. Sol owns the plan, authority, implementation synthesis, execution admission and acceptance. Native workers are advisory or bounded implementation resources only; Gemini 3.6 Flash/high is source-veto only. No worker may invoke the A3/B3 product model, accept output, integrate or move protected refs.",
+    "active_plan_and_acceptance": "docs/emr4-model-required-bureau-a3-b3-occupied-rehearsal-plan.md freezes two authored-synthetic lanes, exact provider/model/project/service-account/ADC/region/endpoint identity, transient raw material, no tools/cache/fallback, one primary plus at most one closed contract correction per lane, absolute four-call and USD 1 cumulative ceilings, deterministic proofreading, serial execution and residue cleanup. The accepted A1/A2 and B1/B2 contracts remain the grammar and grounding dependencies.",
+    "protected_evidence_boundaries": "Only newly authored synthetic A3/B3 frames and utterances may cross the provider boundary. Protected holdouts/evidence, historical PHI, H15/H-series, patient/clinical/product/participant data, live product reads, product/database commands or writes, actuator, shell/SQL/cloud/IAM mutation, update/import/migration/activation, deployment, production, release, Pages and protected refs remain closed. docs/branding/ and four preserved Consultant/Gate-minus-one files remain excluded.",
+    "git_refs_and_worktree": "The tranche starts from task HEAD 2de467e23ce44574395ad6115e7205ca27c96fb2; origin task matches. Local and origin master plus handoff/current are 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked changes are limited to the new explicit A3/B3 plan and receipt/state artifacts; the five protected untracked paths are unchanged. Explicit-path staging only; protected refs must not move."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_required_bureau_a3_b3_exact_plan_and_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol froze the exact A3/B3 authority and will retain coupled contract, broker, execution and acceptance ownership."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fresh Gemini 3.6 Flash/high source review is deferred until deterministic gates and an exact clean candidate commit pass."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No external implementation worker is selected before native reuse and proofreader analyses return."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Leverage-gated lane not selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Two bounded read-only native lanes may analyze existing Sydney broker/isolation reuse and A3/B3 schema/proofreader threats."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

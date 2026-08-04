@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/davida-b3-release.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "lane", "case_id", "evidence_mode", "status", "candidate_provenance", "context_binding", "proposal", "authority_ceiling"],
+  "properties": {
+    "schema_version": {"const": "emr4.davida.b3.release.v1"},
+    "lane": {"const": "davida_b3"},
+    "case_id": {"const": "davida-b3-synthetic-001"},
+    "evidence_mode": {"const": "authored_synthetic_occupied_provider_advisory_rehearsal"},
+    "status": {"const": "dry_run_advisory_only"},
+    "candidate_provenance": {"const": "untrusted_model"},
+    "context_binding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["practice_ref", "principal_ref", "correlation_id", "content_revision", "expires_at"],
+      "properties": {
+        "practice_ref": {"type": "string"}, "principal_ref": {"type": "string"},
+        "correlation_id": {"type": "string"}, "content_revision": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "expires_at": {"type": "string", "format": "date-time"}
+      }
+    },
+    "proposal": {
+      "type": "object", "additionalProperties": false,
+      "required": ["intent", "operation", "practitioner_ref", "location_ref", "reason_code", "risk_tier", "response_code", "human_confirmation_required", "dry_run_proposal_hash", "changed_paths", "before_state", "after_state", "source_paths", "source_label"],
+      "properties": {
+        "intent": {"const": "dry_run"},
+        "operation": {"const": "PROPOSE_UPDATE_PRACTITIONER_DEFAULT_LOCATION"},
+        "practitioner_ref": {"type": "string"}, "location_ref": {"type": "string"},
+        "reason_code": {"const": "PRACTICE_ASSIGNMENT_UPDATE"}, "risk_tier": {"const": "admin_proposal"},
+        "response_code": {"const": "DRY_RUN_REQUIRES_HUMAN_CONFIRMATION"},
+        "human_confirmation_required": {"const": true},
+        "dry_run_proposal_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "changed_paths": {"type": "array", "items": {"const": "practitioner.default_location_ref"}, "minItems": 1, "maxItems": 1},
+        "before_state": {"$ref": "#/$defs/locationState"}, "after_state": {"$ref": "#/$defs/locationState"},
+        "source_paths": {"const": ["practice.active_practitioners", "practice.active_locations"]},
+        "source_label": {"const": "authored_synthetic_fixture"}
+      }
+    },
+    "authority_ceiling": {"$ref": "#/$defs/deniedAuthority"}
+  },
+  "$defs": {
+    "locationState": {
+      "type": "object", "additionalProperties": false,
+      "required": ["practitioner_ref", "default_location_ref"],
+      "properties": {"practitioner_ref": {"type": "string"}, "default_location_ref": {"type": "string"}}
+    },
+    "deniedAuthority": {
+      "type": "object", "additionalProperties": false,
+      "required": ["confirmation", "apply", "write", "database", "product_read", "command", "actuator", "success"],
+      "properties": {
+        "confirmation": {"const": false}, "apply": {"const": false}, "write": {"const": false},
+        "database": {"const": false}, "product_read": {"const": false}, "command": {"const": false},
+        "actuator": {"const": false}, "success": {"const": false}
+      }
+    }
+  }
+}

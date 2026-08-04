@@ -1,0 +1,93 @@
+{
+  "schema_version": "emr4.model_required_bureau_a3_b3.contract.v1",
+  "source_head": "2de467e23ce44574395ad6115e7205ca27c96fb2",
+  "evidence_label": "authored_synthetic_occupied_provider_advisory_rehearsal",
+  "provider_binding": {
+    "provider": "google_cloud_vertex_ai",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "existing_keyless_impersonated_service_account_adc",
+    "scope": "https://www.googleapis.com/auth/cloud-platform",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "api_path": "/v1/projects/bernie-emr4-dev/locations/australia-southeast1/publishers/google/models/gemini-2.5-flash:generateContent",
+    "automatic_fallback": false,
+    "global_endpoint": false,
+    "provider_tools": false,
+    "grounding": false,
+    "cached_content": false,
+    "provider_managed_cache_disabled_required": true
+  },
+  "data_boundary": {
+    "classification": "newly_authored_synthetic_only",
+    "patient": false,
+    "clinical": false,
+    "product_derived": false,
+    "historical_diary": false,
+    "protected": false,
+    "participant": false,
+    "raw_prompt_retained": false,
+    "raw_response_retained": false,
+    "model_memory": false
+  },
+  "call_boundary": {
+    "lane_count": 2,
+    "primary_calls_per_lane": 1,
+    "conditional_corrections_per_lane": 1,
+    "maximum_calls_per_lane": 2,
+    "maximum_calls_total": 4,
+    "maximum_cost_usd": 1,
+    "serial": true,
+    "stop_after_first_admission": true,
+    "unchanged_duplicate": false,
+    "semantic_retry": false
+  },
+  "lanes": [
+    {
+      "lane": "A3",
+      "domain": "rayleen",
+      "case_id": "rayleen-a3-synthetic-001",
+      "context_schema": "emr4.rayleen.a3.context.v1",
+      "candidate_schema": "emr4.rayleen.a3.candidate.v1",
+      "release": "proofreader_admitted_typed_advisory_only",
+      "product_read": false,
+      "write": false
+    },
+    {
+      "lane": "B3",
+      "domain": "davida",
+      "case_id": "davida-b3-synthetic-001",
+      "context_schema": "emr4.davida.b3.context.v1",
+      "candidate_schema": "emr4.davida.b3.candidate.v1",
+      "release": "proofreader_admitted_typed_advisory_only",
+      "product_read": false,
+      "write": false
+    }
+  ],
+  "api_spine": {
+    "classification": "repository_local_access_ai_external_command_rehearsal",
+    "graphql": "read_only_no_provider_invocation",
+    "future_mounted_invocation": "separately_authorized_single_purpose_rest_openapi_command",
+    "events": "non_authoritative_hints",
+    "manifests": "declarative_only"
+  },
+  "closed_surfaces": {
+    "product_read": false,
+    "route_mount": false,
+    "ui_wiring": false,
+    "database_access": false,
+    "command": false,
+    "write": false,
+    "actuator": false,
+    "shell_or_sql": false,
+    "cloud_or_iam_mutation": false,
+    "update_import_migration_activation": false,
+    "deployment": false,
+    "production": false,
+    "release": false,
+    "pages": false,
+    "protected_refs": false,
+    "protected_evidence": false
+  }
+}

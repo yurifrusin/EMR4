@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/davida-b3-context.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "case_id", "practice_ref", "principal_ref", "correlation_id", "content_revision", "observed_at", "expires_at", "utterance", "practitioners", "locations", "dry_run", "authority_ceiling"],
+  "properties": {
+    "schema_version": {"const": "emr4.davida.b3.context.v1"},
+    "case_id": {"const": "davida-b3-synthetic-001"},
+    "practice_ref": {"type": "string", "pattern": "^[A-Za-z0-9._~-]{1,64}$"},
+    "principal_ref": {"type": "string", "pattern": "^[A-Za-z0-9._~-]{1,64}$"},
+    "correlation_id": {"type": "string", "pattern": "^correlation-[A-Za-z0-9._~-]{1,64}$"},
+    "content_revision": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "observed_at": {"type": "string", "format": "date-time"},
+    "expires_at": {"type": "string", "format": "date-time"},
+    "utterance": {"type": "string", "minLength": 1, "maxLength": 220},
+    "practitioners": {
+      "type": "array", "minItems": 1, "maxItems": 8,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["resource_ref", "display_name", "active", "default_location_ref", "source_path", "source_label"],
+        "properties": {
+          "resource_ref": {"type": "string", "pattern": "^[A-Za-z0-9._~-]{8,64}$"},
+          "display_name": {"type": "string", "minLength": 1, "maxLength": 100},
+          "active": {"const": true},
+          "default_location_ref": {"type": "string", "pattern": "^[A-Za-z0-9._~-]{8,64}$"},
+          "source_path": {"const": "practice.active_practitioners"},
+          "source_label": {"const": "authored_synthetic_fixture"}
+        }
+      }
+    },
+    "locations": {
+      "type": "array", "minItems": 2, "maxItems": 8,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["resource_ref", "name", "active", "source_path", "source_label"],
+        "properties": {
+          "resource_ref": {"type": "string", "pattern": "^[A-Za-z0-9._~-]{8,64}$"},
+          "name": {"type": "string", "minLength": 1, "maxLength": 100},
+          "active": {"const": true},
+          "source_path": {"const": "practice.active_locations"},
+          "source_label": {"const": "authored_synthetic_fixture"}
+        }
+      }
+    },
+    "dry_run": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "status", "practitioner_ref", "requested_location_ref", "changed_paths", "before_state", "after_state", "human_confirmation_required", "authority_ceiling", "dry_run_hash"],
+      "properties": {
+        "schema_version": {"const": "emr4.davida.b3.dry_run.v1"},
+        "status": {"const": "dry_run_only"},
+        "practitioner_ref": {"type": "string", "pattern": "^[A-Za-z0-9._~-]{8,64}$"},
+        "requested_location_ref": {"type": "string", "pattern": "^[A-Za-z0-9._~-]{8,64}$"},
+        "changed_paths": {"type": "array", "minItems": 1, "maxItems": 1, "items": {"const": "practitioner.default_location_ref"}},
+        "before_state": {
+          "type": "object", "additionalProperties": false,
+          "required": ["practitioner_ref", "default_location_ref"],
+          "properties": {
+            "practitioner_ref": {"type": "string"},
+            "default_location_ref": {"type": "string"}
+          }
+        },
+        "after_state": {
+          "type": "object", "additionalProperties": false,
+          "required": ["practitioner_ref", "default_location_ref"],
+          "properties": {
+            "practitioner_ref": {"type": "string"},
+            "default_location_ref": {"type": "string"}
+          }
+        },
+        "human_confirmation_required": {"const": true},
+        "authority_ceiling": {
+          "type": "object", "additionalProperties": false,
+          "required": ["command", "confirmation", "apply", "write", "database", "network", "success"],
+          "properties": {
+            "command": {"const": false},
+            "confirmation": {"const": false},
+            "apply": {"const": false},
+            "write": {"const": false},
+            "database": {"const": false},
+            "network": {"const": false},
+            "success": {"const": false}
+          }
+        },
+        "dry_run_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "authority_ceiling": {
+      "type": "object", "additionalProperties": false,
+      "required": ["advisory", "proposal", "confirmation", "apply", "write", "database", "product_read"],
+      "properties": {
+        "advisory": {"const": true},
+        "proposal": {"const": true},
+        "confirmation": {"const": false},
+        "apply": {"const": false},
+        "write": {"const": false},
+        "database": {"const": false},
+        "product_read": {"const": false}
+      }
+    }
+  }
+}

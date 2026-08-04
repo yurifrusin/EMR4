@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/davida-b3-candidate.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "case_id", "candidate_provenance", "intent", "operation", "content_revision", "practitioner_ref", "location_ref", "dry_run_proposal_hash", "reason_code", "risk_tier", "response_code", "human_confirmation_required", "confirmation_authorized", "apply_authorized", "writes_authorized", "success_claimed"],
+  "properties": {
+    "schema_version": {"const": "emr4.davida.b3.candidate.v1"},
+    "case_id": {"const": "davida-b3-synthetic-001"},
+    "candidate_provenance": {"const": "untrusted_model"},
+    "intent": {"const": "dry_run"},
+    "operation": {"const": "PROPOSE_UPDATE_PRACTITIONER_DEFAULT_LOCATION"},
+    "content_revision": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "practitioner_ref": {"type": "string", "pattern": "^[A-Za-z0-9._~-]{8,64}$"},
+    "location_ref": {"type": "string", "pattern": "^[A-Za-z0-9._~-]{8,64}$"},
+    "dry_run_proposal_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "reason_code": {"const": "PRACTICE_ASSIGNMENT_UPDATE"},
+    "risk_tier": {"const": "admin_proposal"},
+    "response_code": {"const": "DRY_RUN_REQUIRES_HUMAN_CONFIRMATION"},
+    "human_confirmation_required": {"const": true},
+    "confirmation_authorized": {"const": false},
+    "apply_authorized": {"const": false},
+    "writes_authorized": {"const": false},
+    "success_claimed": {"const": false}
+  }
+}

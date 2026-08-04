@@ -1,0 +1,16 @@
+{
+  "schema_version": "emr4.rayleen.a3.candidate.v1",
+  "case_id": "rayleen-a3-synthetic-001",
+  "candidate_provenance": "untrusted_model",
+  "intent": "filter",
+  "projection_kind": "practitioner_group",
+  "secondary_projection": "longest_wait",
+  "context_revision": 11,
+  "practitioner_id": "31000000-0000-4000-8000-000000000021",
+  "focus_appointment_id": "31000000-0000-4000-8000-000000000011",
+  "evidence_appointment_ids": ["31000000-0000-4000-8000-000000000011", "31000000-0000-4000-8000-000000000012"],
+  "response_code": "FILTERED_PRACTITIONER_LONGEST_WAIT",
+  "confirmation_authorized": false,
+  "writes_authorized": false,
+  "success_claimed": false
+}

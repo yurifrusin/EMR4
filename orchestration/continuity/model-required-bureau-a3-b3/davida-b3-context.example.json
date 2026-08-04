@@ -1,0 +1,54 @@
+{
+  "schema_version": "emr4.davida.b3.context.v1",
+  "case_id": "davida-b3-synthetic-001",
+  "practice_ref": "practice-synthetic-north",
+  "principal_ref": "principal-synthetic-manager",
+  "correlation_id": "correlation-davida-b3-001",
+  "content_revision": "65c36cea04a1c7ffd6f379b8d554a855e9452d5388fef22c3801f6c843c13b19",
+  "observed_at": "2026-08-04T09:00:00Z",
+  "expires_at": "2026-08-04T09:02:00Z",
+  "utterance": "Dry-run setting Dr Patel's default location to North Clinic and explain why a human still has to approve it.",
+  "practitioners": [
+    {
+      "resource_ref": "practitioner-patel",
+      "display_name": "Dr Patel",
+      "active": true,
+      "default_location_ref": "location-south",
+      "source_path": "practice.active_practitioners",
+      "source_label": "authored_synthetic_fixture"
+    }
+  ],
+  "locations": [
+    {"resource_ref": "location-north", "name": "North Clinic", "active": true, "source_path": "practice.active_locations", "source_label": "authored_synthetic_fixture"},
+    {"resource_ref": "location-south", "name": "South Clinic", "active": true, "source_path": "practice.active_locations", "source_label": "authored_synthetic_fixture"}
+  ],
+  "dry_run": {
+    "schema_version": "emr4.davida.b3.dry_run.v1",
+    "status": "dry_run_only",
+    "practitioner_ref": "practitioner-patel",
+    "requested_location_ref": "location-north",
+    "changed_paths": ["practitioner.default_location_ref"],
+    "before_state": {"practitioner_ref": "practitioner-patel", "default_location_ref": "location-south"},
+    "after_state": {"practitioner_ref": "practitioner-patel", "default_location_ref": "location-north"},
+    "human_confirmation_required": true,
+    "authority_ceiling": {
+      "command": false,
+      "confirmation": false,
+      "apply": false,
+      "write": false,
+      "database": false,
+      "network": false,
+      "success": false
+    },
+    "dry_run_hash": "0ff669489dfe35156b3e64bc9c925a97b4f4dc05686bff1c0164cc8b38ea677e"
+  },
+  "authority_ceiling": {
+    "advisory": true,
+    "proposal": true,
+    "confirmation": false,
+    "apply": false,
+    "write": false,
+    "database": false,
+    "product_read": false
+  }
+}

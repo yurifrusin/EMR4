@@ -1,0 +1,34 @@
+{
+  "actuator_count": 0,
+  "checks": {
+    "artifact_manifest_complete": true,
+    "authority_exact_provider_binding": true,
+    "canonical_candidates_admitted": true,
+    "davida_b3_provider_request_closed": true,
+    "davida_b3_selector_wrapper_exact": true,
+    "davida_cross_kind_rejected": true,
+    "davida_dry_run_forgery_rejected": true,
+    "draft_2020_12_schemas_valid": true,
+    "model_authority_forgery_rejected": true,
+    "no_product_or_database_imports": true,
+    "provider_free_audit_chains_valid_and_zero_call": true,
+    "provider_free_broker_cell_dry_run_passed": true,
+    "rayleen_a3_provider_request_closed": true,
+    "rayleen_a3_selector_wrapper_exact": true,
+    "rayleen_wrong_focus_rejected": true
+  },
+  "command_count": 0,
+  "database_access_count": 0,
+  "deployment_count": 0,
+  "dry_run": {
+    "evidence_hash": "sha256:c602cca7509e07c2c35eb7b3888568529ea1e1ddd60c0d62b1e208763c1aabdb",
+    "provider_call_count": 0
+  },
+  "patient_or_clinical_data_count": 0,
+  "product_read_count": 0,
+  "protected_ref_movement_count": 0,
+  "provider_call_count": 0,
+  "result": "model_required_bureau_a3_b3_provider_free_acceptance_pass",
+  "schema_version": "emr4.model_required_bureau_a3_b3.provider_free_acceptance.v1",
+  "write_count": 0
+}

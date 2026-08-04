@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/rayleen-a3-context.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "case_id", "frame_id", "practice_id", "location_id", "context_revision", "generated_at", "expires_at", "utterance", "facts", "derived_signals", "excluded_field_classes"],
+  "properties": {
+    "schema_version": {"const": "emr4.rayleen.a3.context.v1"},
+    "case_id": {"const": "rayleen-a3-synthetic-001"},
+    "frame_id": {"type": "string", "format": "uuid"},
+    "practice_id": {"type": "string", "format": "uuid"},
+    "location_id": {"type": "string", "format": "uuid"},
+    "context_revision": {"type": "integer", "minimum": 1},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "expires_at": {"type": "string", "format": "date-time"},
+    "utterance": {"type": "string", "minLength": 1, "maxLength": 180},
+    "facts": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["appointment_id", "patient_display_token", "practitioner_id", "status", "scheduled_at", "arrived_at", "waiting_area_id", "source_id", "authority_ceiling"],
+        "properties": {
+          "appointment_id": {"type": "string", "format": "uuid"},
+          "patient_display_token": {"type": "string", "pattern": "^synthetic:[a-z0-9-]+$"},
+          "practitioner_id": {"type": "string", "format": "uuid"},
+          "status": {"enum": ["arrived", "waiting"]},
+          "scheduled_at": {"type": "string", "format": "date-time"},
+          "arrived_at": {"type": "string", "format": "date-time"},
+          "waiting_area_id": {"type": "string", "format": "uuid"},
+          "source_id": {"type": "string", "pattern": "^authored_synthetic_fixture:"},
+          "authority_ceiling": {"const": "data_only"}
+        }
+      }
+    },
+    "derived_signals": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["appointment_id", "kind", "value", "derived_by"],
+        "properties": {
+          "appointment_id": {"type": "string", "format": "uuid"},
+          "kind": {"const": "elapsed_wait_minutes"},
+          "value": {"type": "integer", "minimum": 0, "maximum": 720},
+          "derived_by": {"const": "deterministic_projection_engine"}
+        }
+      }
+    },
+    "excluded_field_classes": {
+      "type": "array",
+      "contains": {"const": "clinical_text"},
+      "minItems": 7,
+      "uniqueItems": true,
+      "items": {"enum": ["contact_details", "national_identifiers", "clinical_text", "appointment_notes", "unrestricted_history", "credentials", "raw_provider_data"]}
+    }
+  }
+}
