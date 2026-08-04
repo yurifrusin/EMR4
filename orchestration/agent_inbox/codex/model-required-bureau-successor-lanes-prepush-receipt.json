@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "planned_action": "task_branch_publication",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:bc5df9a9c4f15adb517e176880dde00321d3ae20208ab44fadeb5fab24ebcc7f",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Candidate commit 666dbf98 implements provider-free A1/A2, B1/B2, C1/C2 and dependency-open D1/D2. Deterministic acceptance, broader API/Diary/Davida regressions, Ruff and diff checks pass; Sol returns pass_for_fresh_independent_veto.",
+    "current_authority_allocation": "Sol owns candidate publication and later acceptance; fresh Gemini 3.6 Flash/high owns source-only veto review after exact clean worktree preflight. No worker has protected-ref, integration, product, provider-runtime or release authority.",
+    "git_refs_and_worktree": "Task branch candidate is 666dbf98. Immediately before push, local/origin master and handoff/current must remain at 2e34bdad732fdab32fbf778280b3d3c70d66d602; only codex/ariadne-bernie-davida-parallel-seam may move and force push is forbidden.",
+    "live_handover_current_baton": "AGENTS.md was fully rehydrated at SHA-256 c0d0d27336174f63cee4f683ebbf730d3aa1bddd60026c07960b083f8ecbc13b. Its accepted Gate-zero parent and standing continuation explicitly authorize this provider-free successor candidate and task-branch publication.",
+    "protected_evidence_boundaries": "Candidate side effects are zero for providers, external prompts, patient/product data, live reads, runtime, commands/writes, actuators, deployment, production, release, Pages, protected refs/evidence. docs/branding/ and the four pre-existing Consultant/Gate-minus-one files remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
