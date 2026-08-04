@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "model_required_bureau_a3_b3_recovery_review_failure_register_commit",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:fcd851495e2619fc4d743162e960958e3a0bb685fbe1162ac95544b48e8822a2",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The recovery plan and provider-free acceptance remain unchanged. Revision 13 adds only the preserved duplicate-decision transport failure, AER-0020 classification, deterministic pattern report and narrow asynchronous-finalization control. Register tests and recovery/autonomous policy tests pass; no candidate finding from the rejected envelope is admitted.",
+    "current_authority_allocation": "Standing authority continues the bounded recovery without a user pause. Sol owns this incident classification and candidate commit. Gemini has read-only fresh-worktree veto authority only. The A3/B3 occupied boundary remains exact Vertex gemini-2.5-flash, Bernie project/identity, australia-southeast1, authored-synthetic, no fallback, four calls/USD 1; positive bounded reasoning remains the architectural default.",
+    "git_refs_and_worktree": "Main task HEAD is ec1eb702b778a0ebf6c969d8967bb52708f2be79 with only the exact incident/register paths modified or added plus preserved untracked exclusions. The failed review worktree remains clean at exact ec1eb702 on its non-protected branch. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was re-read after the rejected independent review. The active recovery candidate remains provider-free passed at ec1eb702 with zero occupied recovery calls. The first Gemini source review emitted two terminal markers and no decision was admitted; AER-0020 now records the contained recurrence and required fresh review control.",
+    "protected_evidence_boundaries": "Patient/clinical/product/protected data, credentials, product/database access, commands/writes, cloud/IAM, deployment, production, release, Pages and protected refs remain closed. docs/branding/ and four existing Consultant/Gate-minus-one pre-push files remain preserved and excluded. Explicit-path staging only is mandatory."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

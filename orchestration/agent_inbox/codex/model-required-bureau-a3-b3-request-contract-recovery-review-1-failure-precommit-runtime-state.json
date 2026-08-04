@@ -1,0 +1,31 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "model_required_bureau_a3_b3_recovery_review_failure_register_commit",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was re-read after the rejected independent review. The active recovery candidate remains provider-free passed at ec1eb702 with zero occupied recovery calls. The first Gemini source review emitted two terminal markers and no decision was admitted; AER-0020 now records the contained recurrence and required fresh review control.",
+    "current_authority_allocation": "Standing authority continues the bounded recovery without a user pause. Sol owns this incident classification and candidate commit. Gemini has read-only fresh-worktree veto authority only. The A3/B3 occupied boundary remains exact Vertex gemini-2.5-flash, Bernie project/identity, australia-southeast1, authored-synthetic, no fallback, four calls/USD 1; positive bounded reasoning remains the architectural default.",
+    "active_plan_and_acceptance": "The recovery plan and provider-free acceptance remain unchanged. Revision 13 adds only the preserved duplicate-decision transport failure, AER-0020 classification, deterministic pattern report and narrow asynchronous-finalization control. Register tests and recovery/autonomous policy tests pass; no candidate finding from the rejected envelope is admitted.",
+    "protected_evidence_boundaries": "Patient/clinical/product/protected data, credentials, product/database access, commands/writes, cloud/IAM, deployment, production, release, Pages and protected refs remain closed. docs/branding/ and four existing Consultant/Gate-minus-one pre-push files remain preserved and excluded. Explicit-path staging only is mandatory.",
+    "git_refs_and_worktree": "Main task HEAD is ec1eb702b778a0ebf6c969d8967bb52708f2be79 with only the exact incident/register paths modified or added plus preserved untracked exclusions. The failed review worktree remains clean at exact ec1eb702 on its non-protected branch. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "a3_b3_recovery_review_failure_precommit_five_source_rehydration",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol preserved and classified the failed verifier envelope before corrected acceptance."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["One Gemini 3.6 Flash/high source-review transport was rejected at exact terminal-decision cardinality two; worktree clean and no receipt written."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["DeepSeek transport is not selected for the incident-register commit."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Real-TTY fallback is not selected for the incident-register commit."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Leverage-gated Claude is not selected for the incident-register commit."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No native subagent is selected for this incident-register commit."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

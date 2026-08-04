@@ -32,16 +32,16 @@ def _schema() -> dict:
     return _json(SCHEMA_PATH)
 
 
-def test_committed_register_is_semantically_valid_after_review_9() -> None:
+def test_committed_register_is_semantically_valid_after_recovery_review_1() -> None:
     register = _register()
 
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 12
+    assert register["register_revision"] == 13
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 20)
+        f"AER-{index:04d}" for index in range(1, 21)
     ]
     assert [
         row["incident_id"]
@@ -55,7 +55,7 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     agent_incidents = [row for row in incidents if row["origin"] == "agent_behavior"]
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
-    assert len(agent_incidents) == 14
+    assert len(agent_incidents) == 15
     assert len(transport_incidents) == 1
     assert transport_incidents[0]["incident_id"] == "AER-0007"
     assert transport_incidents[0]["category"] == "transport_timeout"
@@ -103,10 +103,10 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_both_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 19
+    assert report["incident_count"] == 20
     assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
-        "agent_behavior": 14,
+        "agent_behavior": 15,
         "harness": 3,
         "repository": 1,
         "transport": 1,
@@ -115,7 +115,7 @@ def test_pattern_report_detects_both_recurring_control_signals() -> None:
         "command_scope_violation": 2,
         "evidence_misreport": 2,
         "harness_failure": 3,
-        "output_contract_violation": 8,
+        "output_contract_violation": 9,
         "read_only_violation": 1,
         "reasoning_claim_error": 1,
         "repository_defect": 1,
@@ -123,7 +123,7 @@ def test_pattern_report_detects_both_recurring_control_signals() -> None:
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 1,
-        "canonical_unchanged": 16,
+        "canonical_unchanged": 17,
         "untrusted_partial_worktree": 2,
     }
     assert report["recurring_patterns"] == [
@@ -142,8 +142,8 @@ def test_pattern_report_detects_both_recurring_control_signals() -> None:
         },
         {
             "recurrence_signature": "verifier.multiple_terminal_decisions",
-            "incident_count": 3,
-            "incident_ids": ["AER-0004", "AER-0006", "AER-0018"],
+            "incident_count": 4,
+            "incident_ids": ["AER-0004", "AER-0006", "AER-0018", "AER-0020"],
             "origins": ["agent_behavior"],
             "categories": ["output_contract_violation"],
             "roles": ["verifier"],
@@ -151,7 +151,8 @@ def test_pattern_report_detects_both_recurring_control_signals() -> None:
             "prevention_controls": [
                 "The verifier wrapper admits exactly one terminal decision and rejects zero or duplicate terminal envelopes before acceptance.",
                 "The verifier wrapper must continue exact-single-decision admission; duplicate output never becomes a verdict, and bounded recovery uses a fresh project/worktree without changing candidate scope.",
-                "The wrapper regex counts terminal decisions and rejects any count other than one; tests cover missing and duplicate decisions."
+                "The wrapper regex counts terminal decisions and rejects any count other than one; tests cover missing and duplicate decisions.",
+                "Verifier packets for potentially asynchronous checks must require all background notifications to complete before one final terminal response and forbid any later follow-up; exact-single-decision wrapper admission remains mandatory."
             ],
         }
     ]
@@ -588,8 +589,9 @@ def test_same_signature_across_different_dimensions_does_not_merge(
         "AER-0004",
         "AER-0006",
         "AER-0018",
+        "AER-0020",
     ]
-    assert duplicate_decisions["incident_count"] == 3
+    assert duplicate_decisions["incident_count"] == 4
 
 
 def test_v1_rejects_unproved_causal_claim_level() -> None:

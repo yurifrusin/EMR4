@@ -1,0 +1,15 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_independent_verification",
+  "planned_action": "model_required_bureau_a3_b3_request_contract_recovery_gemini_source_veto",
+  "reasons": [
+    "continuation_event_missing_or_unapproved"
+  ],
+  "rehydrated_from_receipt": false,
+  "rehydration_sources": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:fcd851495e2619fc4d743162e960958e3a0bb685fbe1162ac95544b48e8822a2",
+  "source_evidence": {},
+  "status": "revision_required",
+  "worker_dispatch_permitted": false
+}

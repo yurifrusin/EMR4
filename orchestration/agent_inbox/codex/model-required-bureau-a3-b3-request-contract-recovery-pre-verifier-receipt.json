@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:fcd851495e2619fc4d743162e960958e3a0bb685fbe1162ac95544b48e8822a2",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The recovery plan, threat delta, diagnosis, provider-free evidence, distinct schemas/adapters/tests, autonomous-continuation policy and accepted parent/API Spine sources are active. The candidate uses thinkingBudget 1024 and maxOutputTokens 2048, preserves the old prompt/schema/proofreader, records safe shape telemetry, and cannot start Davida before Rayleen admission. Deterministic acceptance and focused tests pass at the exact candidate commit.",
+    "current_authority_allocation": "Sol owns architecture/acceptance/integration. Gemini 3.6 Flash/high receives only fresh-worktree read-only source veto authority, no implementation or self-acceptance. The future occupied lane remains exact Vertex gemini-2.5-flash, bernie-emr4-dev, Bernie impersonated ADC, australia-southeast1, authored-synthetic, no fallback and USD 1/four-call bounded. Positive bounded model reasoning is the in-scope architecture default.",
+    "git_refs_and_worktree": "Fresh worktree C:/Users/sarashera/EMR4-worktrees/model-required-bureau-a3-b3-recovery-review is clean on codex/review-model-required-bureau-a3-b3-recovery at exact HEAD ec1eb702b778a0ebf6c969d8967bb52708f2be79. The main task worktree has only the preserved five untracked user/prepush paths after the candidate commit. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was read completely for the verifier transition. The active baton is the provider-free-passed A3/B3 request-contract recovery at exact candidate HEAD ec1eb702b778a0ebf6c969d8967bb52708f2be79; the immutable parent remains a one-call Rayleen provider_content_invalid terminal rejection with no release and no Davida call.",
+    "protected_evidence_boundaries": "The verifier may inspect only committed repository code, plans, authored-synthetic fixtures and provider-free evidence. Patient/clinical/product-derived/protected/participant/production data, credentials, provider calls, product/database access, commands/writes, cloud/IAM changes, deployment, release, Pages and protected refs remain closed. docs/branding/ and the four existing Consultant/Gate-minus-one files are absent from and irrelevant to the clean verifier worktree."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
