@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:bc5df9a9c4f15adb517e176880dde00321d3ae20208ab44fadeb5fab24ebcc7f",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Review 8 returned one exact revision_required verdict after fresh-worktree SHA-256 drift. AER revision 11, the scoped .gitattributes rule and byte/hash regression implement the bounded correction. Active-worktree provider-free acceptance, focused tests, full inherited tests, Ruff and diff checks pass; AER-0017 and AER-0019 remain open pending fresh-worktree and independent acceptance.",
+    "current_authority_allocation": "GPT Sol owns repair, acceptance and task-branch publication. Standing authority permits the repository-only LF pin, deterministic fresh-worktree proof and later independent veto. No provider call, Rayleen correction, Davida start, request change, protected integration, deployment or release is authorised.",
+    "git_refs_and_worktree": "HEAD is 794748c06b9a7c0d990ea5197d24e7cb859ae1e8; Review 8 worktree is clean at that exact HEAD. Local/origin protected master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty before explicit staging; only the LF correction, AER/docs/tests, Review 8 packet/preflight/receipt and this receipt pair are task changes.",
+    "live_handover_current_baton": "AGENTS.md records the reconciled one-call terminal result, contained Review 7 envelope, Review 8 checkout-stability finding and the bounded AER-0019 LF correction as the current work.",
+    "protected_evidence_boundaries": "Only committed/sanitized A3/B3 evidence, Review 8 receipt and repository checkout policy are in scope. Credentials, new provider calls, patient/clinical/protected/product-derived/production data, product/database access, runtime, commands, writes, actuators, Docker, cloud/IAM, deployment, release, Pages and protected refs remain closed. User-owned untracked files remain excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

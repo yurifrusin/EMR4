@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 from pathlib import Path
+import subprocess
 
 import pytest
 import yaml
@@ -30,22 +32,22 @@ def _schema() -> dict:
     return _json(SCHEMA_PATH)
 
 
-def test_committed_register_is_semantically_valid_with_contained_review_7() -> None:
+def test_committed_register_is_semantically_valid_with_pending_checkout_fix() -> None:
     register = _register()
 
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 10
+    assert register["register_revision"] == 11
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 19)
+        f"AER-{index:04d}" for index in range(1, 20)
     ]
     assert [
         row["incident_id"]
         for row in register["incidents"]
         if row["status"] == "open"
-    ] == ["AER-0017"]
+    ] == ["AER-0017", "AER-0019"]
 
 
 def test_seed_separates_agent_behavior_from_transport() -> None:
@@ -101,11 +103,12 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_both_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 18
-    assert report["open_incident_ids"] == ["AER-0017"]
+    assert report["incident_count"] == 19
+    assert report["open_incident_ids"] == ["AER-0017", "AER-0019"]
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 14,
         "harness": 3,
+        "repository": 1,
         "transport": 1,
     }
     assert report["counts"]["by_category"] == {
@@ -115,11 +118,12 @@ def test_pattern_report_detects_both_recurring_control_signals() -> None:
         "output_contract_violation": 8,
         "read_only_violation": 1,
         "reasoning_claim_error": 1,
+        "repository_defect": 1,
         "transport_timeout": 1,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 1,
-        "canonical_unchanged": 15,
+        "canonical_unchanged": 16,
         "untrusted_partial_worktree": 2,
     }
     assert report["recurring_patterns"] == [
@@ -376,6 +380,62 @@ def test_a3_b3_review_7_duplicate_decision_is_contained() -> None:
     assert failure["worktree_clean_after"] is True
     assert failure["worktree_head_after"] == failure["candidate_head"]
     assert failure["raw_verifier_output_retained"] is False
+
+
+def test_a3_b3_hashed_audit_checkout_is_lf_pinned() -> None:
+    relative = (
+        "orchestration/continuity/model-required-bureau-a3-b3/"
+        "rayleen-a3-attempt-1-occupied-audit.jsonl"
+    )
+    audit_bytes = (ROOT / relative).read_bytes()
+    interruption = _json(
+        ROOT
+        / "orchestration"
+        / "continuity"
+        / "model-required-bureau-a3-b3"
+        / "occupied-terminal-interruption-evidence.json"
+    )
+    attribute = subprocess.run(
+        ["git", "check-attr", "eol", "--", relative],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        shell=False,
+    )
+
+    assert attribute.stdout.strip().endswith(": eol: lf")
+    assert b"\r\n" not in audit_bytes
+    assert "sha256:" + hashlib.sha256(audit_bytes).hexdigest() == (
+        interruption["source_artifact_hashes"]["audit_chain"]
+    )
+
+
+def test_a3_b3_review_8_checkout_defect_is_registered() -> None:
+    incident = {
+        row["incident_id"]: row for row in _register()["incidents"]
+    }["AER-0019"]
+    review = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "antigravity"
+        / "model-required-bureau-a3-b3-review-8-receipt.json"
+    )
+
+    assert incident["origin"] == "repository"
+    assert incident["category"] == "repository_defect"
+    assert incident["recurrence_signature"] == (
+        "repository.hash_bound_jsonl_checkout_line_ending_drift"
+    )
+    assert incident["status"] == "open"
+    assert incident["correction"]["status"] == (
+        "control_implemented_pending_acceptance"
+    )
+    assert review["decision"] == "revision_required"
+    assert review["head_before"] == review["head_after"]
+    assert review["dirty_after"] is False
 
 
 def test_pattern_report_is_byte_deterministic(tmp_path: Path) -> None:

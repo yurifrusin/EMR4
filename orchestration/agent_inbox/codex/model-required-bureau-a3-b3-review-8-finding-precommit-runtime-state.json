@@ -1,0 +1,98 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records the reconciled one-call terminal result, contained Review 7 envelope, Review 8 checkout-stability finding and the bounded AER-0019 LF correction as the current work.",
+    "current_authority_allocation": "GPT Sol owns repair, acceptance and task-branch publication. Standing authority permits the repository-only LF pin, deterministic fresh-worktree proof and later independent veto. No provider call, Rayleen correction, Davida start, request change, protected integration, deployment or release is authorised.",
+    "active_plan_and_acceptance": "Review 8 returned one exact revision_required verdict after fresh-worktree SHA-256 drift. AER revision 11, the scoped .gitattributes rule and byte/hash regression implement the bounded correction. Active-worktree provider-free acceptance, focused tests, full inherited tests, Ruff and diff checks pass; AER-0017 and AER-0019 remain open pending fresh-worktree and independent acceptance.",
+    "protected_evidence_boundaries": "Only committed/sanitized A3/B3 evidence, Review 8 receipt and repository checkout policy are in scope. Credentials, new provider calls, patient/clinical/protected/product-derived/production data, product/database access, runtime, commands, writes, actuators, Docker, cloud/IAM, deployment, release, Pages and protected refs remain closed. User-owned untracked files remain excluded.",
+    "git_refs_and_worktree": "HEAD is 794748c06b9a7c0d990ea5197d24e7cb859ae1e8; Review 8 worktree is clean at that exact HEAD. Local/origin protected master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty before explicit staging; only the LF correction, AER/docs/tests, Review 8 packet/preflight/receipt and this receipt pair are task changes."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_required_bureau_a3_b3_review_8_finding_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol reproduced Review 8's fresh-worktree byte drift and implemented the scoped LF correction with deterministic regression."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Review 8 returned one admissible revision_required verdict and left the exact candidate worktree clean."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No implementation worker was selected for the scoped checkout-policy repair."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback was not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Leverage-gated lane was not selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Native review lanes are complete; no subagent has acceptance authority."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [
+    {
+      "receipt_id": "model-required-bureau-a3-b3-review-8",
+      "path": "orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-review-8-receipt.json",
+      "status": "completed"
+    }
+  ],
+  "assigned_agent_ids": []
+}

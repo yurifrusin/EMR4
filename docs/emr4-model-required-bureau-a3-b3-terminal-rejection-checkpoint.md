@@ -2,9 +2,9 @@
 
 Date: 2026-08-04
 
-Status: evidence-only terminal reconciliation and deterministic acceptance
-pass; Review 7 duplicate-decision envelope contained; fresh exact-HEAD
-independent veto pending; no further provider-call authority
+Status: evidence-only terminal reconciliation complete; Review 7 envelope
+contained; Review 8 checkout-stability finding under bounded correction; no
+further provider-call authority
 
 ## Exact occupied result
 
@@ -51,6 +51,15 @@ no worker receipt and admitted no verdict or candidate finding. AER-0018
 preserves the sanitized transport failure; the candidate remained clean and
 unchanged. The bounded recovery is another fresh project and fresh exact clean
 worktree with a shorter non-echo terminal contract.
+
+Review 8 returned one admissible `revision_required`. In its genuinely fresh
+Windows worktree, Git converted the hash-bound occupied audit JSONL from LF to
+CRLF because `.gitattributes` had no JSONL eol rule. The file remained clean in
+Git terms but its checked-out SHA-256 changed, so acceptance and the
+reconciliation regression failed closed. AER-0019 records this repository
+checkout-stability defect. The bounded correction pins the A3/B3 JSONL
+namespace to LF and mechanically checks the attribute, bytes and preserved
+hash before another fresh-worktree veto.
 
 ## Closed next fork
 

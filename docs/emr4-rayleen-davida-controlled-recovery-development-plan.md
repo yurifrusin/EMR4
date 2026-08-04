@@ -182,11 +182,16 @@ call and zero acceptance-runtime calls. Review 7's exact-HEAD worktree remained
 clean and unchanged, but its Gemini transport emitted two terminal decision
 markers. The wrapper rejected the whole response; AER-0018 contains the
 failure and no verdict or candidate finding was admitted. Fresh exact-HEAD
-independent source review remains pending through the bounded fresh-project/
-fresh-worktree recovery. The current authority does not permit repeating
-Rayleen primary, treating the failure as `schema_invalid`, opening correction
-turn 2, starting Davida or changing the request contract. Any further call or
-request change is a new material fork.
+Review 8 then returned one admissible `revision_required`: a genuinely fresh
+Windows worktree converted the hash-bound audit JSONL to CRLF because its eol
+policy was not pinned, so exact acceptance failed closed. AER-0019 records the
+repository defect. The bounded correction pins the A3/B3 JSONL namespace to LF
+and mechanically checks the attribute, bytes and immutable hash. Fresh exact-
+HEAD independent source review remains pending after a fresh-worktree
+deterministic pass. The current authority does not permit repeating Rayleen
+primary, treating the failure as `schema_invalid`, opening correction turn 2,
+starting Davida or changing the request contract. Any further call or request
+change is a new material fork.
 
 ## Lane A: Rayleen waiting-room intelligence
 
@@ -449,11 +454,10 @@ architecture decision.
 
 ## Current next action
 
-Run the bounded fresh-project/fresh-worktree exact-HEAD Gemini 3.6 Flash/high
-recovery veto over the committed provider-free AER-0017 correction, reconciled
-terminal evidence and passing deterministic acceptance, using a shorter
-non-echo terminal contract. On pass, record Sol acceptance, publish only the
-explicit task paths and close at the material fork. Do not rerun prior
-provider-free lanes, repeat Rayleen, open its correction turn or start Davida.
-Any later request-contract or provider-call descendant remains a material Yuri
-decision.
+Commit the bounded AER-0019 LF checkout-stability correction and prove the full
+provider-free acceptance from a genuinely fresh Windows worktree. Then run a
+fresh exact-HEAD Gemini 3.6 Flash/high veto. On pass, close AER-0017 and
+AER-0019, record Sol acceptance, publish only the explicit task paths and close
+at the material fork. Do not rerun prior provider-free lanes, repeat Rayleen,
+open its correction turn or start Davida. Any later request-contract or
+provider-call descendant remains a material Yuri decision.

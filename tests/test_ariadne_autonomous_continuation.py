@@ -100,7 +100,8 @@ def test_live_handover_and_active_plan_record_the_standing_policy() -> None:
     assert "without another permission request" in agents
     normalized_plan = " ".join(plan.split())
     assert (
-        "Run the bounded fresh-project/fresh-worktree exact-HEAD Gemini 3.6 "
-        "Flash/high recovery veto"
+        "Commit the bounded AER-0019 LF checkout-stability correction and "
+        "prove the full provider-free acceptance from a genuinely fresh "
+        "Windows worktree"
     ) in normalized_plan
     assert "material Yuri decision" in normalized_plan

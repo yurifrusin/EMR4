@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 10,
+  "register_revision": 11,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-04",
@@ -699,6 +699,45 @@
         ]
       },
       "status": "contained"
+    },
+    {
+      "incident_id": "AER-0019",
+      "attempt_id": "model-required-bureau-a3-b3-review-008",
+      "observed_on": "2026-08-04",
+      "tranche": "model-required-bureau-a3-b3",
+      "origin": "repository",
+      "role": "orchestrator",
+      "resource_id": "model-required-bureau-a3-b3-evidence-checkout",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "git_windows_fresh_worktree",
+      "stage": "independent_review",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "Every hash-bound committed evidence artifact must check out with byte-identical content in a fresh supported worktree so deterministic acceptance does not depend on one pre-existing working-copy line-ending state.",
+      "observed_error": "The A3/B3 occupied audit JSONL retained LF bytes and the preserved hash in the active worktree, but a fresh Windows worktree with core.autocrlf=true checked it out as CRLF because no JSONL eol rule existed, causing an exact SHA-256 mismatch and fail-closed acceptance.",
+      "detection_method": "Review 8 ran acceptance in a fresh clean worktree, reported the mismatch, and Sol reproduced distinct active/fresh byte counts and SHA-256 values while git check-attr showed only text=auto for the JSONL path.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-review-8-receipt.json",
+        "orchestration/continuity/model-required-bureau-a3-b3/occupied-terminal-interruption-evidence.json",
+        "orchestration/continuity/model-required-bureau-a3-b3/rayleen-a3-attempt-1-occupied-audit.jsonl"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.hash_bound_jsonl_checkout_line_ending_drift",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Pin the exact A3/B3 JSONL evidence namespace to LF in .gitattributes and mechanically verify the Git eol attribute, checked-out bytes and preserved SHA-256 before a fresh-worktree veto.",
+        "prevention_control": "Hash-bound JSONL evidence must declare an explicit checkout eol policy and acceptance must be proven from a genuinely fresh supported worktree, not only the generating worktree.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-11.md",
+          ".gitattributes",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "status": "open"
     }
   ]
 }
