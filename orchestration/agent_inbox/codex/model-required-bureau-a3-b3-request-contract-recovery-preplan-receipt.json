@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "model_required_bureau_a3_b3_request_contract_recovery_descendant_planning",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:bc5df9a9c4f15adb517e176880dde00321d3ae20208ab44fadeb5fab24ebcc7f",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The controlled-recovery development plan, A3/B3 occupied plan and threat-model delta, terminal-rejection checkpoint, terminal-reconciliation closeout, Sol acceptance, occupied attempt/tranche/cost evidence, autonomous-continuation policy and relevant API Spine/Access AI sources were read. The prior descendant and ledger are terminal and immutable. The new plan must diagnose the surviving request/response contract provider-free, select one evidence-backed change at a time, use wholly new one-use accounting, preserve exact hostile-byte parsing/proofreading/cleanup controls and forbid unchanged retries or promoted partial results.",
+    "current_authority_allocation": "Yuri has explicitly authorised the recommended new descendant and uninterrupted evidence-backed diagnosis/recovery until Rayleen succeeds or materially distinct bounded options are exhausted. The unchanged outer envelope is Vertex AI gemini-2.5-flash, project bernie-emr4-dev, the exact Bernie service account and existing keyless impersonated ADC, australia-southeast1, newly authored synthetic data, no fallback and no product/runtime/data/write authority. Sol owns architecture, recovery, acceptance and publication; deterministic gates and fresh Gemini 3.6 Flash/high veto precede occupied use; Davida remains closed until Rayleen releases an admitted result.",
+    "git_refs_and_worktree": "After git fetch, HEAD, local task branch and origin/codex/ariadne-bernie-davida-parallel-seam are 9782c14740ad52cc8ddea6c9fd372b5aaabbcab2. Local/origin master and local/origin handoff/current are all 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree is clean. Untracked paths are exactly docs/branding/ plus the four preserved Consultant/Gate-minus-one pre-push receipt/state files before creation of this receipt pair. Protected refs must not move.",
+    "live_handover_current_baton": "AGENTS.md was read completely in bounded segments after restoration. The exact current baton is model_required_bureau_a3_b3_occupied_terminal_rejection at task HEAD 9782c14740ad52cc8ddea6c9fd372b5aaabbcab2: one Rayleen A3 Vertex call ended provider_content_invalid before extraction or proofreading, nothing was released, no correction ticket exists and Davida B3 never started.",
+    "protected_evidence_boundaries": "Protected holdouts and protected evidence, historical PHI and H15/H-series material, docs/branding/, patient/clinical/product-derived/participant/production data, live product or database reads, routes/UI wiring, commands, writes, actuators, shell/SQL, credential/IAM/cloud mutation, updates/migrations, deployment, production, release, Pages and protected-ref movement remain closed. The four existing Consultant/Gate-minus-one pre-push receipt/state files remain preserved and excluded; explicit-path staging only is mandatory."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

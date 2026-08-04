@@ -1,0 +1,12 @@
+{
+  "attempt_id": "a3-b3-recovery-davida-b3-primary-001",
+  "fallback_permitted": false,
+  "lane": "davida_b3",
+  "ledger_id": "ledger-a3-b3-recovery-davida-b3-primary-001",
+  "maximum_provider_calls": 0,
+  "policy_id": "emr4-model-required-bureau-a3-b3-sydney-recovery-v1",
+  "provider_calls_consumed": 0,
+  "reserved_cost_usd": 0,
+  "schema_version": "emr4.model_required_bureau_a3_b3.single_use_ledger.v1",
+  "status": "consumed"
+}

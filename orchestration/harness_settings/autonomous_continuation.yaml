@@ -30,6 +30,15 @@ standing_programme_authority:
     - unresolved_clinical_product_write_deployment_release_or_protected_boundary
     - protected_evidence_access
     - scope_outside_active_accepted_plan
+architecture_strengthening_choice_policy:
+  owner: conductor
+  applies_only_inside_frozen_material_boundary: true
+  choose_without_user_pause: path_that_strengthens_required_architecture_and_occupied_capability
+  model_required_cognitive_cell_default:
+    reasoning_posture: explicit_positive_bounded_reasoning_budget
+    typed_output_headroom_required: true
+    thinking_off_is: evidence_backed_task_specific_exception
+  cannot_expand: [authority, data_class, provider_model_region, cost_ceiling, runtime_or_write_surface, deployment_release_or_protected_scope]
 failure_loop:
   - orchestrator_records_observable_failure
   - orchestrator_recovers_execution_inside_existing_assignment

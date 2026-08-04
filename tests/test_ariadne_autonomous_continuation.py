@@ -100,7 +100,24 @@ def test_live_handover_and_active_plan_record_the_standing_policy() -> None:
     assert "without another permission request" in agents
     normalized_plan = " ".join(plan.split())
     assert (
-        "Publish the accepted terminal reconciliation and its exact closeout "
-        "artifacts to the non-protected task branch"
+        "Commit the provider-free passed request-contract recovery candidate, "
+        "obtain its fresh exact-HEAD independent source veto"
     ) in normalized_plan
-    assert "material Yuri decision" in normalized_plan
+    assert "four-call/USD 1 recovery boundary is exhausted" in normalized_plan
+
+
+def test_architecture_strengthening_prefers_bounded_model_reasoning() -> None:
+    policy = load_policy()["architecture_strengthening_choice_policy"]
+    assert policy["applies_only_inside_frozen_material_boundary"] is True
+    assert (
+        policy["choose_without_user_pause"]
+        == "path_that_strengthens_required_architecture_and_occupied_capability"
+    )
+    model_default = policy["model_required_cognitive_cell_default"]
+    assert model_default["reasoning_posture"] == (
+        "explicit_positive_bounded_reasoning_budget"
+    )
+    assert model_default["typed_output_headroom_required"] is True
+    assert model_default["thinking_off_is"] == (
+        "evidence_backed_task_specific_exception"
+    )

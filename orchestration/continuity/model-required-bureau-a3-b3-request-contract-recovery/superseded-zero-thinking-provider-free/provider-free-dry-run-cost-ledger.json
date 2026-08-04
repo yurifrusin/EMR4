@@ -1,0 +1,15 @@
+{
+  "fallback_permitted": false,
+  "lane_calls": {
+    "davida_b3": 0,
+    "rayleen_a3": 0
+  },
+  "maximum_cost_usd": 1.0,
+  "maximum_provider_calls": 4,
+  "provider_calls_consumed": 0,
+  "provider_calls_reserved": 0,
+  "reserved_cost_usd": 0,
+  "schema_version": "emr4.model_required_bureau_a3_b3.cost_ledger.v1",
+  "status": "consumed",
+  "tranche_id": "model-required-bureau-a3-b3-request-contract-recovery-001"
+}

@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "model_required_bureau_a3_b3_request_contract_recovery_descendant_planning",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely in bounded segments after restoration. The exact current baton is model_required_bureau_a3_b3_occupied_terminal_rejection at task HEAD 9782c14740ad52cc8ddea6c9fd372b5aaabbcab2: one Rayleen A3 Vertex call ended provider_content_invalid before extraction or proofreading, nothing was released, no correction ticket exists and Davida B3 never started.",
+    "current_authority_allocation": "Yuri has explicitly authorised the recommended new descendant and uninterrupted evidence-backed diagnosis/recovery until Rayleen succeeds or materially distinct bounded options are exhausted. The unchanged outer envelope is Vertex AI gemini-2.5-flash, project bernie-emr4-dev, the exact Bernie service account and existing keyless impersonated ADC, australia-southeast1, newly authored synthetic data, no fallback and no product/runtime/data/write authority. Sol owns architecture, recovery, acceptance and publication; deterministic gates and fresh Gemini 3.6 Flash/high veto precede occupied use; Davida remains closed until Rayleen releases an admitted result.",
+    "active_plan_and_acceptance": "The controlled-recovery development plan, A3/B3 occupied plan and threat-model delta, terminal-rejection checkpoint, terminal-reconciliation closeout, Sol acceptance, occupied attempt/tranche/cost evidence, autonomous-continuation policy and relevant API Spine/Access AI sources were read. The prior descendant and ledger are terminal and immutable. The new plan must diagnose the surviving request/response contract provider-free, select one evidence-backed change at a time, use wholly new one-use accounting, preserve exact hostile-byte parsing/proofreading/cleanup controls and forbid unchanged retries or promoted partial results.",
+    "protected_evidence_boundaries": "Protected holdouts and protected evidence, historical PHI and H15/H-series material, docs/branding/, patient/clinical/product-derived/participant/production data, live product or database reads, routes/UI wiring, commands, writes, actuators, shell/SQL, credential/IAM/cloud mutation, updates/migrations, deployment, production, release, Pages and protected-ref movement remain closed. The four existing Consultant/Gate-minus-one pre-push receipt/state files remain preserved and excluded; explicit-path staging only is mandatory.",
+    "git_refs_and_worktree": "After git fetch, HEAD, local task branch and origin/codex/ariadne-bernie-davida-parallel-seam are 9782c14740ad52cc8ddea6c9fd372b5aaabbcab2. Local/origin master and local/origin handoff/current are all 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree is clean. Untracked paths are exactly docs/branding/ plus the four preserved Consultant/Gate-minus-one pre-push receipt/state files before creation of this receipt pair. Protected refs must not move."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_required_bureau_a3_b3_request_contract_recovery_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the full five-source rehydration and API Spine provider-boundary pass before descendant planning."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fresh Gemini 3.6 Flash/high source-only veto is eligible only after deterministic admission of an exact clean candidate."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Bounded separable implementation/test work may be dispatched after the new plan freezes the exact recovery contract."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Real-TTY fallback is not selected for this planning event."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Leverage-gated Claude lane is not selected for this planning event."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Native agents may perform bounded parallel read-only diagnosis or separable test work; no agent receives acceptance, integration or authority expansion."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

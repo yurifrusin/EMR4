@@ -1,0 +1,73 @@
+{
+  "schema_version": "emr4.model_required_bureau_a3_b3.request_contract_diagnosis.v1",
+  "result": "request_contract_recovery_candidate_selected",
+  "source_head": "9782c14740ad52cc8ddea6c9fd372b5aaabbcab2",
+  "historical_result": "model_required_bureau_a3_b3_occupied_terminal_rejection",
+  "historical_reason_code": "provider_content_invalid",
+  "historical_request_hash": "sha256:1ad73d849e21493efd2a36d25f295e18e62d957f675fef96a651eddea4fdd501",
+  "historical_response_schema_hash": "sha256:5854e2b309b5049ed95ae85c380c1d3eac0862d83814a04f2725feadead47287",
+  "observed": {
+    "candidate_count_admitted_by_parser": 1,
+    "content_parts_shape_not_admitted": true,
+    "exact_content_parts_shape_preserved": false,
+    "http_status_preserved": false,
+    "finish_reason_preserved": false,
+    "usage_preserved": false,
+    "proofreader_reached": false,
+    "release_count": 0,
+    "davida_provider_call_count": 0
+  },
+  "inference": {
+    "hypothesis": "default_thinking_competed_with_small_visible_output_budget",
+    "proven_cause": false,
+    "confidence": "strongest_current_evidence_not_conclusive"
+  },
+  "selected_first_change": {
+    "policy": "bounded_positive_reasoning_with_visible_answer_headroom",
+    "changes": [
+      {
+        "path": "$.generationConfig.thinkingConfig.thinkingBudget",
+        "before": "omitted_dynamic_default",
+        "after": 1024
+      },
+      {
+        "path": "$.generationConfig.maxOutputTokens",
+        "before": 512,
+        "after": 2048
+      }
+    ],
+    "all_other_provider_request_material_unchanged": true,
+    "reasoning_default_minimized": false
+  },
+  "outer_boundary": {
+    "provider": "Google Cloud Vertex AI",
+    "model": "gemini-2.5-flash",
+    "project": "bernie-emr4-dev",
+    "service_account": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com",
+    "authentication": "existing_keyless_impersonated_adc_only",
+    "location": "australia-southeast1",
+    "endpoint_hostname": "australia-southeast1-aiplatform.googleapis.com",
+    "data_class": "newly_authored_synthetic_only",
+    "fallback_permitted": false,
+    "maximum_provider_calls": 4,
+    "maximum_calls_per_lane": 2,
+    "maximum_cost_usd": 1
+  },
+  "official_sources": [
+    "https://cloud.google.com/vertex-ai/generative-ai/docs/thinking",
+    "https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/control-generated-output",
+    "https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/2-5-flash",
+    "https://cloud.google.com/vertex-ai/generative-ai/docs/reference/rest/v1/GenerateContentResponse",
+    "https://cloud.google.com/vertex-ai/generative-ai/docs/reference/rest/v1/Content"
+  ],
+  "side_effects": {
+    "provider_calls": 0,
+    "product_reads": 0,
+    "database_accesses": 0,
+    "commands": 0,
+    "writes": 0,
+    "cloud_or_iam_mutations": 0,
+    "deployments": 0,
+    "protected_ref_movements": 0
+  }
+}

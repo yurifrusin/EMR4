@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/model-required-bureau-a3-b3-recovery-cell-request.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "lane", "attempt_id", "ledger_id", "policy_id", "context_hash", "provider_request_hash", "attempt_number", "correction_of", "correction_reason_code"],
+  "properties": {
+    "schema_version": {"const": "emr4.model_required_bureau_a3_b3.cell_request.v1"},
+    "lane": {"enum": ["rayleen_a3", "davida_b3"]},
+    "attempt_id": {"type": "string", "pattern": "^a3-b3-recovery-(rayleen-a3|davida-b3)-(primary|correction)-[0-9]{3}$"},
+    "ledger_id": {"type": "string", "pattern": "^ledger-a3-b3-recovery-(rayleen-a3|davida-b3)-(primary|correction)-[0-9]{3}$"},
+    "policy_id": {"const": "emr4-model-required-bureau-a3-b3-sydney-recovery-v1"},
+    "context_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "provider_request_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "attempt_number": {"enum": [1, 2]},
+    "correction_of": {"type": ["string", "null"]},
+    "correction_reason_code": {"enum": [null, "schema_invalid"]}
+  },
+  "allOf": [
+    {"if": {"properties": {"attempt_number": {"const": 1}}}, "then": {"properties": {"correction_of": {"const": null}, "correction_reason_code": {"const": null}}}},
+    {"if": {"properties": {"attempt_number": {"const": 2}}}, "then": {"properties": {"correction_of": {"type": "string", "minLength": 1}, "correction_reason_code": {"const": "schema_invalid"}}}}
+  ]
+}

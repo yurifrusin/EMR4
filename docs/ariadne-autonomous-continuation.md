@@ -33,6 +33,17 @@ authorised by the active accepted plan.
 The machine-readable policy is
 `orchestration/harness_settings/autonomous_continuation.yaml`.
 
+## Architecture-strengthening choice policy
+
+When two already-authorised in-scope paths are otherwise safe, the Conductor
+selects the path that strengthens the required architecture and occupied
+capability without returning for a routine choice. For model-required
+cognitive cells, the default is an explicit positive bounded reasoning budget
+with sufficient typed-output headroom. Thinking-off is a task-specific
+diagnostic or efficiency exception that requires evidence; it is not the
+general EMR4 intelligence policy. Deterministic authority, proofreading,
+cost/data boundaries and stop conditions remain unchanged by this preference.
+
 ## Task Lifecycle
 
 Autonomous authority is ineffective if the orchestrator ends its task at every

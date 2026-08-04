@@ -47,6 +47,14 @@ explicit user pause/redirect. A passing gate, known next gate, fresh-context
 rehydration, worker/verifier wait, test failure or ordinary recovery is not a
 permission gate.
 
+When an already-authorised in-scope choice exists, Sol selects the path that
+strengthens the required architecture and occupied Rayleen/Davida capability
+without a routine user pause. Model-required cognitive cells default to a
+positive explicit bounded reasoning budget with sufficient typed-output
+headroom; thinking-off is an evidence-backed task-specific exception, not the
+general intelligence posture. This preference cannot broaden provider, data,
+cost, authority, runtime, write, deployment, release or protected scope.
+
 ## Programme gate -1: adversarial containment review
 
 Before Gate zero, treat every provider model and cognitive wrapper as capable of
@@ -190,10 +198,14 @@ and mechanically checks the attribute, bytes and immutable hash. In a genuinely
 fresh Windows worktree, the corrected audit reproduced the preserved SHA-256,
 provider-free acceptance passed and Review 9 passed the exact candidate after
 305 tests with no findings. AER-0017 and AER-0019 are corrected; AER-0018
-remains contained. The current authority does not permit repeating Rayleen
-primary, treating the failure as `schema_invalid`, opening correction turn 2,
-starting Davida or changing the request contract. Any further call or request
-change is a new material fork.
+remains contained. That historical authority did not permit repeating Rayleen
+or changing the request contract. Yuri's later exact recovery decision now
+supersedes that pause only through
+`docs/emr4-model-required-bureau-a3-b3-request-contract-recovery-plan.md`:
+the new descendant has distinct accounting and a positive bounded reasoning/
+output envelope, runs Rayleen before Davida and continues only to admitted
+release or bounded-option exhaustion. The historical attempt and ledger remain
+immutable.
 
 ## Lane A: Rayleen waiting-room intelligence
 
@@ -456,8 +468,9 @@ architecture decision.
 
 ## Current next action
 
-Publish the accepted terminal reconciliation and its exact closeout artifacts
-to the non-protected task branch, then stop at the material fork. Do not rerun
-prior provider-free lanes, repeat Rayleen, open its correction turn or start
-Davida. Any later request-contract or provider-call descendant remains a
-material Yuri decision.
+Commit the provider-free passed request-contract recovery candidate, obtain its
+fresh exact-HEAD independent source veto, run the exact read-only Bernie Vertex
+preflight and then execute Rayleen before Davida under the new single-use
+ledgers. Continue without a routine permission pause until both lanes admit or
+the exact four-call/USD 1 recovery boundary is exhausted. Product/runtime/data/
+write, deployment, release, Pages and protected refs remain closed.

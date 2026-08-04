@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/model-required-bureau-a3-b3-recovery-cost-ledger.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "tranche_id", "status", "maximum_provider_calls", "maximum_cost_usd", "provider_calls_reserved", "provider_calls_consumed", "reserved_cost_usd", "lane_calls", "fallback_permitted"],
+  "properties": {
+    "schema_version": {"const": "emr4.model_required_bureau_a3_b3.cost_ledger.v1"},
+    "tranche_id": {"const": "model-required-bureau-a3-b3-request-contract-recovery-001"},
+    "status": {"enum": ["open", "consumed"]},
+    "maximum_provider_calls": {"const": 4},
+    "maximum_cost_usd": {"const": 1},
+    "provider_calls_reserved": {"type": "integer", "minimum": 0, "maximum": 4},
+    "provider_calls_consumed": {"type": "integer", "minimum": 0, "maximum": 4},
+    "reserved_cost_usd": {"type": "number", "minimum": 0, "maximum": 1, "multipleOf": 0.25},
+    "lane_calls": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rayleen_a3", "davida_b3"],
+      "properties": {
+        "rayleen_a3": {"type": "integer", "minimum": 0, "maximum": 2},
+        "davida_b3": {"type": "integer", "minimum": 0, "maximum": 2}
+      }
+    },
+    "fallback_permitted": {"const": false}
+  }
+}

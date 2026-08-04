@@ -1,0 +1,159 @@
+{
+  "actuator_count": 0,
+  "attempt_id": "a3-b3-recovery-davida-b3-primary-001",
+  "attempt_number": 1,
+  "build_context": {
+    "base_image_pulled_for_attempt": true,
+    "pinned_base_image": "docker.io/library/python@sha256:a190708a2dec1bd18b1decb539f8e8f5407abaa9bf39cacda583f7f8c11db322",
+    "repository_root_used": false,
+    "source_hashes": {
+      "generated:cell-request.json": "sha256:88bf5e12c4da8d696c061a02b9854ab46c4d3b5e37aaaf64f480bfdc04e7f2d5",
+      "orchestration/continuity/model-required-bureau-a3-b3/Dockerfile": "sha256:3d47934e293dcecb182e10c64ebfabcbedbcec67c1998166a3fee2dbf495481e",
+      "scripts/ariadne_vertex_sydney_gemini_25_cell.py": "sha256:530d6f91e841aa41dd4fd87f07f45c360c728e7ca5847586bab5d19b604a6a71",
+      "scripts/ariadne_vertex_sydney_gemini_25_relay.py": "sha256:9f4a86f4d82223d7cc2f8f5be21d8d3ec152e2eb0c57e0ac70e1c27d5020ef66"
+    },
+    "temporary_exact_allowlist": true
+  },
+  "cell_policy": {
+    "cap_drop": [
+      "ALL"
+    ],
+    "credential_environment_present": false,
+    "memory_bytes": 134217728,
+    "memory_swap_bytes": 134217728,
+    "mount_count": 0,
+    "nano_cpus": 500000000,
+    "network_names": [
+      "emr4-a3-b3-recovery-davida-1-internal"
+    ],
+    "pids_limit": 64,
+    "port_binding_count": 0,
+    "privileged": false,
+    "read_only_rootfs": true,
+    "security_opt": [
+      "no-new-privileges=true"
+    ],
+    "user": "65532:65532"
+  },
+  "cleanup": {
+    "base_image_state_preserved": true,
+    "broker_process_absent": true,
+    "cell_container_absent": true,
+    "cell_image_absent": true,
+    "daemon_wide_prune_performed": false,
+    "internal_network_absent": true,
+    "relay_container_absent": true,
+    "relay_image_absent": true,
+    "temporary_context_absent": true
+  },
+  "cleanup_passed": true,
+  "command_count": 0,
+  "correction_eligible": false,
+  "credential_or_token_retained": false,
+  "database_access_count": 0,
+  "evidence_hash": "sha256:c6438b7bc0afe69865464c55b96e416e03b1721d527a97c9a66023eb5db7f50c",
+  "lane": "davida_b3",
+  "mode": "dry-run",
+  "network": {
+    "attachable": false,
+    "driver": "bridge",
+    "ingress": false,
+    "internal": true,
+    "name": "emr4-a3-b3-recovery-davida-1-internal"
+  },
+  "preflight_hash": null,
+  "product_read_count": 0,
+  "proofreader_reason_code": "proofreader_admitted",
+  "proofreader_verdict": "admitted",
+  "provider_call_count": 0,
+  "provider_contacted": false,
+  "provider_metadata": null,
+  "provider_metadata_status": "provider_free_fixture",
+  "raw_prompt_retained": false,
+  "raw_provider_response_retained": false,
+  "relay_policy": {
+    "broker_alias_present": true,
+    "cap_drop": [
+      "ALL"
+    ],
+    "memory_bytes": 67108864,
+    "memory_swap_bytes": 67108864,
+    "mount_count": 1,
+    "nano_cpus": 250000000,
+    "network_names": [
+      "bridge",
+      "emr4-a3-b3-recovery-davida-1-internal"
+    ],
+    "pids_limit": 32,
+    "port_binding_count": 0,
+    "privileged": false,
+    "read_only_rootfs": true,
+    "security_opt": [
+      "no-new-privileges=true"
+    ],
+    "token_mount_exact": true,
+    "user": "65532:65532"
+  },
+  "release": {
+    "authority_ceiling": {
+      "actuator": false,
+      "apply": false,
+      "command": false,
+      "confirmation": false,
+      "database": false,
+      "product_read": false,
+      "success": false,
+      "write": false
+    },
+    "candidate_provenance": "untrusted_model",
+    "case_id": "davida-b3-synthetic-001",
+    "context_binding": {
+      "content_revision": "241ff0d44353451b467e2352f7826a899476ea9cc3143a6ff24df1d57c09ccfa",
+      "correlation_id": "correlation-davida-b3-001",
+      "evaluation_mode": "authored_synthetic_fixed_clock",
+      "evaluation_time": "2026-08-04T09:01:00Z",
+      "expires_at": "2026-08-04T09:02:00Z",
+      "practice_ref": "practice-synthetic-north",
+      "principal_ref": "principal-synthetic-manager"
+    },
+    "evidence_mode": "authored_synthetic_occupied_provider_advisory_rehearsal",
+    "lane": "davida_b3",
+    "proposal": {
+      "after_state": {
+        "default_location_ref": "location-north",
+        "practitioner_ref": "practitioner-patel"
+      },
+      "before_state": {
+        "default_location_ref": "location-south",
+        "practitioner_ref": "practitioner-patel"
+      },
+      "changed_paths": [
+        "practitioner.default_location_ref"
+      ],
+      "dry_run_proposal_hash": "0ff669489dfe35156b3e64bc9c925a97b4f4dc05686bff1c0164cc8b38ea677e",
+      "human_confirmation_required": true,
+      "intent": "dry_run",
+      "location_ref": "location-north",
+      "operation": "PROPOSE_UPDATE_PRACTITIONER_DEFAULT_LOCATION",
+      "practitioner_ref": "practitioner-patel",
+      "reason_code": "PRACTICE_ASSIGNMENT_UPDATE",
+      "response_code": "DRY_RUN_REQUIRES_HUMAN_CONFIRMATION",
+      "risk_tier": "admin_proposal",
+      "source_label": "authored_synthetic_fixture",
+      "source_paths": [
+        "practice.active_practitioners",
+        "practice.active_locations"
+      ]
+    },
+    "schema_version": "emr4.davida.b3.release.v1",
+    "status": "dry_run_advisory_only"
+  },
+  "request_binding": {
+    "context_hash": "sha256:d98d66f3b522865ccd9bc3d8dca16d55b879dc35b6a2f951accff795f23dc544",
+    "policy_id": "emr4-model-required-bureau-a3-b3-sydney-recovery-v1",
+    "provider_request_hash": "sha256:b7ab2aef8a8a09e0d5498794d537482c137dcff59be21affe4a9294ae620722d"
+  },
+  "result": "attempt_pass",
+  "schema_version": "emr4.model_required_bureau_a3_b3.attempt_evidence.v1",
+  "write_count": 0
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schemas/model-required-bureau-a3-b3-recovery-single-use-ledger.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "ledger_id", "attempt_id", "lane", "policy_id", "status", "maximum_provider_calls", "provider_calls_consumed", "reserved_cost_usd", "fallback_permitted"],
+  "properties": {
+    "schema_version": {"const": "emr4.model_required_bureau_a3_b3.single_use_ledger.v1"},
+    "ledger_id": {"type": "string", "pattern": "^ledger-a3-b3-recovery-"},
+    "attempt_id": {"type": "string", "pattern": "^a3-b3-recovery-"},
+    "lane": {"enum": ["rayleen_a3", "davida_b3"]},
+    "policy_id": {"const": "emr4-model-required-bureau-a3-b3-sydney-recovery-v1"},
+    "status": {"enum": ["open", "consumed"]},
+    "maximum_provider_calls": {"enum": [0, 1]},
+    "provider_calls_consumed": {"enum": [0, 1]},
+    "reserved_cost_usd": {"enum": [0, 0.25]},
+    "fallback_permitted": {"const": false}
+  }
+}
