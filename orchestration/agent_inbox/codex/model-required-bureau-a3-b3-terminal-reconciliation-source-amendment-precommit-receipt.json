@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:bc5df9a9c4f15adb517e176880dde00321d3ae20208ab44fadeb5fab24ebcc7f",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The occupied A3/B3 plan, threat delta, controlled-recovery plan, terminal checkpoint and API Spine boundaries remain active. Pre-final acceptance, focused tests, the full inherited serial suite, Ruff and diff checks pass; AER-0017 remains open until fresh independent acceptance.",
+    "current_authority_allocation": "GPT Sol owns reconciliation, acceptance and task-branch publication. Standing authority permits the bounded provider-free source amendment and later independent veto; no further provider call, Rayleen correction, Davida start, request-contract change, protected integration, deployment or release is authorised.",
+    "git_refs_and_worktree": "HEAD is eef1e085868e0f61ffe4bf5905c7739410cf63c7 and origin task remains 61ca38545ad01d2470f8b5b668dd746b88d113a2. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty before explicit-path staging; exactly six source/document paths are modified plus this receipt pair, while the named user-owned untracked files remain excluded.",
+    "live_handover_current_baton": "AGENTS.md was reread and records the exact one-call Rayleen provider_content_invalid terminal result, completed provider-free reconciliation, passing deterministic acceptance, open AER-0017 and fresh exact-HEAD veto as the next action.",
+    "protected_evidence_boundaries": "Only sanitized A3/B3 failure evidence and repository-local provider-free correction artifacts are in scope. Patient, clinical, protected, product-derived and production data; provider calls; product/database access; commands, writes, actuators, cloud/IAM mutation, deployment, release, Pages and protected refs remain closed. docs/branding and the four Consultant/Gate-minus-one pre-push files remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

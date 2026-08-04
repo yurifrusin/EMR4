@@ -173,12 +173,16 @@ at `provider_content_invalid` before candidate extraction or proofreading.
 Nothing was released, no correction ticket exists and Davida did not start.
 
 AER-0017 preserves the split child/parent accounting failure and adds a
-provider-free terminal finalizer. The current authority permits only immutable
-failure preservation, parent-ledger reconciliation to one consumed call,
-no-release cleanup evidence, deterministic checks and fresh source review. It
-does not permit repeating Rayleen primary, treating the failure as
-`schema_invalid`, opening correction turn 2, starting Davida or changing the
-request contract. Any further call or request change is a new material fork.
+provider-free terminal finalizer. That finalizer has now reconciled the parent
+to one reserved and one consumed call at USD 0.25, emitted exact no-release
+attempt/tranche evidence, proved current exact runtime absence and stopped
+before Rayleen correction or Davida. It made zero provider calls, and the
+deterministic acceptance suite passes with one historical candidate-runtime
+call and zero acceptance-runtime calls. Fresh exact-HEAD independent source
+review remains pending. The current authority does not permit repeating
+Rayleen primary, treating the failure as `schema_invalid`, opening correction
+turn 2, starting Davida or changing the request contract. Any further call or
+request change is a new material fork.
 
 ## Lane A: Rayleen waiting-room intelligence
 
@@ -441,8 +445,10 @@ architecture decision.
 
 ## Current next action
 
-Complete the provider-free AER-0017 evidence-only terminal reconciliation
-described above, then deterministic acceptance and a fresh exact-HEAD veto. Do
-not rerun prior provider-free lanes, repeat Rayleen, open its correction turn or
-start Davida. Any later request-contract or provider-call descendant remains a
-material Yuri decision.
+Run the fresh exact-HEAD Gemini 3.6 Flash/high veto over the committed
+provider-free AER-0017 correction, reconciled terminal evidence and passing
+deterministic acceptance. On pass, record Sol acceptance, publish only the
+explicit task paths and close at the material fork. Do not rerun prior
+provider-free lanes, repeat Rayleen, open its correction turn or start Davida.
+Any later request-contract or provider-call descendant remains a material Yuri
+decision.

@@ -2,7 +2,8 @@
 
 Date: 2026-08-04
 
-Status: evidence-only reconciliation in progress; no further provider-call
+Status: evidence-only terminal reconciliation and deterministic acceptance
+pass; fresh exact-HEAD independent veto pending; no further provider-call
 authority
 
 ## Exact occupied result
@@ -35,12 +36,14 @@ the parent cost ledger at zero consumed calls while the child ledger recorded
 one. AER-0017 and
 `occupied-terminal-interruption-evidence.json` preserve that exact split.
 
-The bounded correction is provider-free: preserve the original sanitized preflight,
-child ledger and hash-chained audit; reconcile the parent to one reserved and
-one consumed call; emit a terminal no-release attempt and tranche result; prove
-exact runtime residue is absent; and stop before Rayleen correction or Davida.
-The corrected source and evidence require deterministic acceptance and a fresh
-exact-HEAD Gemini 3.6 Flash/high veto.
+The bounded provider-free correction preserved the original sanitized
+preflight, child ledger and hash-chained audit; reconciled the parent to one
+reserved and one consumed call at USD 0.25; emitted a terminal no-release
+attempt and tranche result; proved exact runtime residue is absent; and stopped
+before Rayleen correction or Davida. The finalizer itself made zero provider
+calls. Deterministic acceptance now passes with one historical candidate-
+runtime call and zero acceptance-runtime calls. A fresh exact-HEAD Gemini 3.6
+Flash/high veto remains mandatory before Sol acceptance.
 
 ## Closed next fork
 

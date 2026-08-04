@@ -941,9 +941,10 @@ def test_blocked_preflight_evidence_binds_exact_open_reservation(
     isolated_root.mkdir(parents=True)
     cost_ledger_path = isolated_root / "occupied-rehearsal-cost-ledger.json"
     blocked_evidence_path = isolated_root / "occupied-preflight-blocked-evidence.json"
-    shutil.copyfile(
-        ARTIFACT_ROOT / "occupied-rehearsal-cost-ledger.json", cost_ledger_path
+    historical_open_ledger = live._reserve_cost(
+        live._initial_cost_ledger(), contracts.LANE_RAYLEEN, mode="live"
     )
+    live._write_json(cost_ledger_path, historical_open_ledger)
     shutil.copyfile(
         ARTIFACT_ROOT / "occupied-preflight-blocked-evidence.json",
         blocked_evidence_path,
@@ -954,7 +955,7 @@ def test_blocked_preflight_evidence_binds_exact_open_reservation(
         cost_ledger_path=cost_ledger_path,
         blocked_evidence_path=blocked_evidence_path,
     )
-    assert observed == _load("occupied-rehearsal-cost-ledger.json")
+    assert observed == historical_open_ledger
     assert observed["provider_calls_reserved"] == 1
     assert observed["provider_calls_consumed"] == 0
     assert observed["lane_calls"] == {

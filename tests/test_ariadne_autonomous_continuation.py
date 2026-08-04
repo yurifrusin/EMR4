@@ -98,5 +98,5 @@ def test_live_handover_and_active_plan_record_the_standing_policy() -> None:
         assert "generic future" in text.lower()
 
     assert "without another permission request" in agents
-    assert "Complete the provider-free AER-0017" in plan
-    assert "material Yuri decision" in plan
+    assert "Run the fresh exact-HEAD Gemini 3.6 Flash/high veto" in plan
+    assert "material Yuri decision" in " ".join(plan.split())

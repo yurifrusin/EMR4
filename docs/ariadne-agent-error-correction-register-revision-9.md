@@ -2,8 +2,8 @@
 
 Date: 2026-08-04
 
-Status: A3/B3 terminal-accounting correction implemented; evidence-only
-reconciliation and acceptance pending
+Status: A3/B3 terminal-accounting correction, evidence-only reconciliation and
+deterministic acceptance complete; fresh independent acceptance pending
 
 ## AER-0017: terminal broker rejection split child and parent accounting
 
@@ -28,6 +28,13 @@ reconciles parent consumption from the validated child attempt and closes the
 tranche before any later lane. A separate evidence-only finalizer repairs the
 already consumed attempt without touching credentials, sending another prompt
 or starting Davida.
+
+That finalizer has now closed the parent ledger at exactly one reserved and one
+consumed call at USD 0.25, emitted terminal no-release attempt and tranche
+evidence, and proved current exact runtime absence. The finalizer and acceptance
+made zero provider calls; the acceptance evidence separately records the one
+historical candidate-runtime provider call. AER-0017 remains open until the
+fresh exact-HEAD independent veto passes.
 
 No surviving evidence identifies the underlying provider-response subshape or
 cause. In particular, a possible default-thinking/output-budget interaction is
