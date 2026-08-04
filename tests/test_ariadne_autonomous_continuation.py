@@ -100,8 +100,7 @@ def test_live_handover_and_active_plan_record_the_standing_policy() -> None:
     assert "without another permission request" in agents
     normalized_plan = " ".join(plan.split())
     assert (
-        "Commit the bounded AER-0019 LF checkout-stability correction and "
-        "prove the full provider-free acceptance from a genuinely fresh "
-        "Windows worktree"
+        "Publish the accepted terminal reconciliation and its exact closeout "
+        "artifacts to the non-protected task branch"
     ) in normalized_plan
     assert "material Yuri decision" in normalized_plan

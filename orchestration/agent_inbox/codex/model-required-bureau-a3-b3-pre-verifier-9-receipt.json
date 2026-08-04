@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:bc5df9a9c4f15adb517e176880dde00321d3ae20208ab44fadeb5fab24ebcc7f",
+  "source_evidence": {
+    "active_plan_and_acceptance": "A genuinely fresh Windows worktree now reports eol=lf, exact preserved audit SHA-256, passing provider-free acceptance and passing focused A3/AER tests. The active plan, threat delta, checkpoint, API Spine boundaries, Review 9 packet and AER revision 11 remain exact; AER-0017/AER-0019 await this veto.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high receives source/evidence-only independent veto authority over exact candidate HEAD 063153b9a799b32d125084fb77134588c9a6ac76. It receives no implementation, acceptance, integration, credential, provider-runtime, product, deployment, release or protected-ref authority.",
+    "git_refs_and_worktree": "Fresh worktree C:/Users/sarashera/EMR4-worktrees/model-required-bureau-a3-b3-gemini-review-9 is clean on codex/review-model-required-bureau-a3-b3-9 at exact HEAD 063153b9a799b32d125084fb77134588c9a6ac76; executable preflight 9 and fresh-worktree acceptance passed. Local/origin protected master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Main user-owned untracked files remain excluded.",
+    "live_handover_current_baton": "AGENTS.md records completed A3 terminal reconciliation, contained Review 7, Review 8's checkout defect and the bounded LF correction awaiting fresh exact-HEAD veto.",
+    "protected_evidence_boundaries": "Review is limited to committed source and authored-synthetic or sanitized evidence. No credentials, provider/cloud controls, patient/clinical/protected/product-derived/production data, product/database access, runtime, Docker, commands, writes, actuators, deployment, release, Pages or protected refs are permitted."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

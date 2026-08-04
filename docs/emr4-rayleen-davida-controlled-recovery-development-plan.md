@@ -186,9 +186,11 @@ Review 8 then returned one admissible `revision_required`: a genuinely fresh
 Windows worktree converted the hash-bound audit JSONL to CRLF because its eol
 policy was not pinned, so exact acceptance failed closed. AER-0019 records the
 repository defect. The bounded correction pins the A3/B3 JSONL namespace to LF
-and mechanically checks the attribute, bytes and immutable hash. Fresh exact-
-HEAD independent source review remains pending after a fresh-worktree
-deterministic pass. The current authority does not permit repeating Rayleen
+and mechanically checks the attribute, bytes and immutable hash. In a genuinely
+fresh Windows worktree, the corrected audit reproduced the preserved SHA-256,
+provider-free acceptance passed and Review 9 passed the exact candidate after
+305 tests with no findings. AER-0017 and AER-0019 are corrected; AER-0018
+remains contained. The current authority does not permit repeating Rayleen
 primary, treating the failure as `schema_invalid`, opening correction turn 2,
 starting Davida or changing the request contract. Any further call or request
 change is a new material fork.
@@ -454,10 +456,8 @@ architecture decision.
 
 ## Current next action
 
-Commit the bounded AER-0019 LF checkout-stability correction and prove the full
-provider-free acceptance from a genuinely fresh Windows worktree. Then run a
-fresh exact-HEAD Gemini 3.6 Flash/high veto. On pass, close AER-0017 and
-AER-0019, record Sol acceptance, publish only the explicit task paths and close
-at the material fork. Do not rerun prior provider-free lanes, repeat Rayleen,
-open its correction turn or start Davida. Any later request-contract or
-provider-call descendant remains a material Yuri decision.
+Publish the accepted terminal reconciliation and its exact closeout artifacts
+to the non-protected task branch, then stop at the material fork. Do not rerun
+prior provider-free lanes, repeat Rayleen, open its correction turn or start
+Davida. Any later request-contract or provider-call descendant remains a
+material Yuri decision.

@@ -2,9 +2,8 @@
 
 Date: 2026-08-04
 
-Status: evidence-only terminal reconciliation complete; Review 7 envelope
-contained; Review 8 checkout-stability finding under bounded correction; no
-further provider-call authority
+Status: accepted terminal reconciliation; fresh Review 9 pass; no further
+provider-call authority
 
 ## Exact occupied result
 
@@ -60,6 +59,14 @@ reconciliation regression failed closed. AER-0019 records this repository
 checkout-stability defect. The bounded correction pins the A3/B3 JSONL
 namespace to LF and mechanically checks the attribute, bytes and preserved
 hash before another fresh-worktree veto.
+
+The correction is accepted. In a new Windows worktree, the audit checked out
+with `eol: lf` and the exact preserved SHA-256. Provider-free acceptance and
+all 305 Review 9 tests passed; Ruff and both diff checks passed; the worktree
+remained clean at exact candidate HEAD
+`063153b9a799b32d125084fb77134588c9a6ac76`; and fresh Gemini 3.6 Flash/high
+returned one exact `pass` with no findings. AER-0017 and AER-0019 are corrected,
+while AER-0018 remains contained.
 
 ## Closed next fork
 

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 11,
+  "register_revision": 12,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-04",
@@ -650,17 +650,18 @@
       "recurrence_signature": "harness.postcall_terminal_evidence_and_parent_consumption_split",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "control_implemented_pending_acceptance",
-        "action": "The immutable interruption evidence preserves the exact split state. The broker now durably emits sanitized provider completion and the exact non-correction terminal reason; the harness admits that pre-proof terminal path, writes no-release cleanup evidence, reconciles parent consumption from the child artifacts and closes before Davida. A separate evidence-only finalizer repairs the already consumed attempt without a provider call.",
+        "status": "control_added",
+        "action": "The immutable interruption evidence preserves the exact split state. The broker now durably emits sanitized provider completion and the exact non-correction terminal reason; the harness admits that pre-proof terminal path, writes no-release cleanup evidence, reconciles parent consumption from the child artifacts and closes before Davida. The evidence-only finalizer repaired the consumed attempt with zero new calls, deterministic acceptance passed, and fresh Review 9 accepted the exact corrected candidate.",
         "prevention_control": "Every provider-contacted broker terminal path must preserve exact sanitized reason and metadata availability, reconcile parent consumption from a validated consumed child ledger before lane termination, write durable cleanup/no-release evidence and regression-prove that no correction or later lane starts.",
         "evidence_paths": [
           "docs/ariadne-agent-error-correction-register-revision-9.md",
           "scripts/model_required_bureau_a3_b3_broker.py",
           "scripts/model_required_bureau_a3_b3_live.py",
-          "tests/test_model_required_bureau_a3_b3.py"
+          "tests/test_model_required_bureau_a3_b3.py",
+          "orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-review-9-receipt.json"
         ]
       },
-      "status": "open"
+      "status": "corrected"
     },
     {
       "incident_id": "AER-0018",
@@ -728,16 +729,17 @@
       "recurrence_signature": "repository.hash_bound_jsonl_checkout_line_ending_drift",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "control_implemented_pending_acceptance",
-        "action": "Pin the exact A3/B3 JSONL evidence namespace to LF in .gitattributes and mechanically verify the Git eol attribute, checked-out bytes and preserved SHA-256 before a fresh-worktree veto.",
+        "status": "control_added",
+        "action": "The exact A3/B3 JSONL evidence namespace is pinned to LF in .gitattributes. A genuinely fresh Windows worktree then reproduced the preserved SHA-256, passed exact provider-free acceptance and 305 independent-review tests, and remained clean through Review 9.",
         "prevention_control": "Hash-bound JSONL evidence must declare an explicit checkout eol policy and acceptance must be proven from a genuinely fresh supported worktree, not only the generating worktree.",
         "evidence_paths": [
           "docs/ariadne-agent-error-correction-register-revision-11.md",
           ".gitattributes",
-          "tests/test_ariadne_agent_error_register.py"
+          "tests/test_ariadne_agent_error_register.py",
+          "orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-review-9-receipt.json"
         ]
       },
-      "status": "open"
+      "status": "corrected"
     }
   ]
 }

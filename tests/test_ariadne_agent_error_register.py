@@ -32,13 +32,13 @@ def _schema() -> dict:
     return _json(SCHEMA_PATH)
 
 
-def test_committed_register_is_semantically_valid_with_pending_checkout_fix() -> None:
+def test_committed_register_is_semantically_valid_after_review_9() -> None:
     register = _register()
 
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 11
+    assert register["register_revision"] == 12
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
         f"AER-{index:04d}" for index in range(1, 20)
@@ -47,7 +47,7 @@ def test_committed_register_is_semantically_valid_with_pending_checkout_fix() ->
         row["incident_id"]
         for row in register["incidents"]
         if row["status"] == "open"
-    ] == ["AER-0017", "AER-0019"]
+    ] == []
 
 
 def test_seed_separates_agent_behavior_from_transport() -> None:
@@ -104,7 +104,7 @@ def test_pattern_report_detects_both_recurring_control_signals() -> None:
     report = build_pattern_report()
 
     assert report["incident_count"] == 19
-    assert report["open_incident_ids"] == ["AER-0017", "AER-0019"]
+    assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 14,
         "harness": 3,
@@ -341,10 +341,8 @@ def test_a3_b3_terminal_broker_failure_has_evidence_only_recovery() -> None:
     assert incident["recurrence_signature"] == (
         "harness.postcall_terminal_evidence_and_parent_consumption_split"
     )
-    assert incident["status"] == "open"
-    assert incident["correction"]["status"] == (
-        "control_implemented_pending_acceptance"
-    )
+    assert incident["status"] == "corrected"
+    assert incident["correction"]["status"] == "control_added"
     assert interruption["reason_code"] == "provider_content_invalid"
     assert interruption["provider_call_count"] == 1
     assert interruption["proofreader_reached"] is False
@@ -429,10 +427,8 @@ def test_a3_b3_review_8_checkout_defect_is_registered() -> None:
     assert incident["recurrence_signature"] == (
         "repository.hash_bound_jsonl_checkout_line_ending_drift"
     )
-    assert incident["status"] == "open"
-    assert incident["correction"]["status"] == (
-        "control_implemented_pending_acceptance"
-    )
+    assert incident["status"] == "corrected"
+    assert incident["correction"]["status"] == "control_added"
     assert review["decision"] == "revision_required"
     assert review["head_before"] == review["head_after"]
     assert review["dirty_after"] is False

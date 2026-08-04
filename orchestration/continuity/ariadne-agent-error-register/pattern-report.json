@@ -1,5 +1,5 @@
 {
-  "canonical_register_sha256": "46b8f7772d60867ac307083bf7507918504095e26771f938874ac266f07a0443",
+  "canonical_register_sha256": "2ea78faec661efe69f7da4880170a6653461d80c766410d7a3cb8107efe42c33",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 1,
@@ -46,10 +46,7 @@
   "coverage": "bounded_known_preserved_incidents",
   "incident_count": 19,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
-  "open_incident_ids": [
-    "AER-0017",
-    "AER-0019"
-  ],
+  "open_incident_ids": [],
   "recurring_patterns": [
     {
       "categories": [
@@ -102,7 +99,7 @@
       ]
     }
   ],
-  "register_revision": 11,
+  "register_revision": 12,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-04"
 }

@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:bc5df9a9c4f15adb517e176880dde00321d3ae20208ab44fadeb5fab24ebcc7f",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Fresh Review 9 passed exact HEAD 063153b9a799b32d125084fb77134588c9a6ac76 after 305 tests, exact LF/hash proof, provider-free acceptance, Ruff and diff checks. Final closeout and Sol acceptance bind the terminal rejection; AER revision 12 has no open incident.",
+    "current_authority_allocation": "GPT Sol owns final acceptance and non-protected task-branch publication. Gemini 3.6 Flash/high supplied the independent veto only. No repeat/correction/Davida/provider request, protected integration, deployment, release, Pages or protected-ref action is authorised.",
+    "git_refs_and_worktree": "HEAD is 063153b9a799b32d125084fb77134588c9a6ac76; Review 9 worktree is clean at that exact HEAD. Local/origin protected master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is empty before explicit staging; only named Review 9, AER revision 12, closeout, Sol acceptance, baton/test updates and this receipt pair are task changes.",
+    "live_handover_current_baton": "AGENTS.md records model_required_bureau_a3_b3_occupied_terminal_rejection as accepted, the one historical Rayleen call/no release/no Davida result, Review 9 pass and the remaining Yuri-owned material fork.",
+    "protected_evidence_boundaries": "Only committed/sanitized A3/B3 evidence and source-review receipts are in scope. Credentials, raw provider/verifier output, patient/clinical/protected/product-derived/production data, new provider calls, product/database access, runtime, commands, writes, actuators, Docker, cloud/IAM, deployment, release, Pages and protected refs remain closed. User-owned untracked files remain preserved and excluded."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
