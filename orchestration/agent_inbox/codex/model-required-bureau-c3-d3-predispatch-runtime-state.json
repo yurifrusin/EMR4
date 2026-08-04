@@ -1,0 +1,39 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after closeout. The exact next baton is provider-free, non-executing C3 recovery risk/authority policy and D3 staged-promotion/rollback architecture at task source 3008cdb4d7b5801c45024f7361fb4294aa76fc48.",
+    "current_authority_allocation": "Sol retains architecture, security, acceptance and publication. Two native read-only analysis workers may independently inspect one bounded lane each; they receive no editing, acceptance, integration, baton, provider, runtime, product-data or protected authority.",
+    "active_plan_and_acceptance": "C1/C2 and D1/D2 are accepted dependencies. C3 requires closed deterministic risk tiers and exact plan/authority fields. D3 requires a non-executing staged promotion and last-known-good rollback design. Worker outputs are advisory findings only; Sol reconciles the shared authority model.",
+    "protected_evidence_boundaries": "Workers may read only ordinary repository source named in their packets. Protected holdouts/evidence, historical PHI, local data, docs/branding/, patient/product data, provider calls, external prompts, live reads, commands/writes, actuators, update ingestion/activation, deployment, release, Pages and protected refs remain forbidden.",
+    "git_refs_and_worktree": "Shared read-only analysis occurs in C:\\Users\\sarashera\\emr4 on codex/ariadne-bernie-davida-parallel-seam at 3008cdb4d7b5801c45024f7361fb4294aa76fc48. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Workers must make no filesystem or Git changes."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_required_bureau_c3_d3_predispatch_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol is active and owns coupled architecture and acceptance."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Independent veto remains post-deterministic only."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["External implementation transport is not selected for these read-only analyses."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Leverage-gated lane not selected."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Two bounded read-only analysis packets are ready for C3 and D3."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

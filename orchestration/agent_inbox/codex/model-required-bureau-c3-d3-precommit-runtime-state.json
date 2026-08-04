@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely and names provider-free, non-executing C3/D3 as the exact next tranche after the accepted successor lanes. The candidate remains inside that baton and claims only architecture/schema/proof evidence.",
+    "current_authority_allocation": "Sol owns architecture, recovery, acceptance and task-branch publication. Two native workers produced bounded read-only advisory artifacts only. Fresh Gemini 3.6 Flash/high receives source-only independent veto authority after this exact candidate commit and no implementation, acceptance, product, runtime, integration or protected authority.",
+    "active_plan_and_acceptance": "C3 now freezes five deterministic recovery risk/authority tiers, canonical plan/expiry/idempotency/audit/readback bindings and a closed actuator gate. D3 freezes four class-specific promotion/canary/review/atomicity/rollback designs with current provenance and LKG eligibility. Four schemas, three examples, 182 focused/inherited tests, Ruff, evidence staleness and diff checks pass; Sol review returns pass_for_fresh_independent_veto.",
+    "protected_evidence_boundaries": "Candidate side effects are all zero: no provider/external prompt, patient/product data, live read, runtime, command/write, actuator, shell/SQL/cloud/IAM, external download, licence acceptance, import, migration, activation, deployment, production, release, Pages, protected ref or protected evidence. docs/branding/ and the four prior Consultant/Gate-minus-one receipt/state files remain excluded.",
+    "git_refs_and_worktree": "Candidate parent, HEAD and origin/codex/ariadne-bernie-davida-parallel-seam are 3008cdb4d7b5801c45024f7361fb4294aa76fc48. Local/origin master and handoff/current are all protected at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Only explicitly named C3/D3 artifacts and receipts may be staged; broad staging is forbidden."
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "model_required_bureau_c3_d3_precommit_five_source_rehydration", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol completed coupled architecture and deterministic review."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fresh source-only veto becomes eligible only after exact candidate commit and clean worktree preflight."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["External mechanical implementation transport was not selected."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Leverage-gated lane not selected."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Two bounded native advisory lanes returned source-bound reports and no authority claims."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

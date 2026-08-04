@@ -1,0 +1,80 @@
+{
+  "schema_version": "emr4.update_promotion_rollback_plan.v1",
+  "promotion_plan_id": "80000000-0000-4000-8000-000000000001",
+  "update_class": "reference_dataset",
+  "future_command_family": "reference_dataset_activation",
+  "provenance_delta_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "source_artifact_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  "provenance_admission": {
+    "attestation_scheme": "synthetic_signature_fixture",
+    "signer_id": "synthetic:reference-source-signer",
+    "trust_anchor_set_version": "synthetic-trust-v1",
+    "verified_at": "2026-08-04T08:00:00Z",
+    "licence_decision": "synthetic_admitted_for_schema_test",
+    "source_lifecycle": "active",
+    "admission_sha256": "abababababababababababababababababababababababababababababababab"
+  },
+  "target_expected_revision": "dataset-rev-41",
+  "expires_at": "2026-08-04T09:00:00Z",
+  "shadow": {
+    "namespace": "synthetic:reference-shadow-1",
+    "quarantined": true,
+    "authoritative_reads": false,
+    "import_performed": false
+  },
+  "validation": {
+    "required_checks": ["source_identity", "licence", "checksum", "schema", "jurisdiction", "lifecycle", "semantic_delta", "compatibility", "withdrawal", "rollback_feasibility"],
+    "validation_performed": false
+  },
+  "canary": {
+    "kind": "synthetic_dataset_namespace",
+    "scope_id": "synthetic:reference-canary-1",
+    "maximum_targets": 1,
+    "performed": false
+  },
+  "review": {
+    "required_authority": "dual_review",
+    "minimum_reviewer_count": 2,
+    "required_roles": ["data_steward", "clinical_governance_reviewer"],
+    "authenticated_evidence_required": true,
+    "distinct_reviewers_required": true,
+    "candidate_generator_may_review": false,
+    "provider_may_review": false,
+    "pre_canary_review_required": true,
+    "post_canary_pre_activation_review_required": true,
+    "approvals_collected": 0
+  },
+  "activation": {
+    "future_command_family": "reference_dataset_activation",
+    "class_specific_barrier": "immutable_dataset_pointer_compare_and_swap",
+    "atomicity": "single_class_specific_transaction_or_pointer_swap",
+    "expected_target_revision": "dataset-rev-41",
+    "immediate_revalidation_required": true,
+    "performed": false
+  },
+  "audit": {
+    "immutable": true,
+    "required_fields": ["promotion_plan_id", "update_class", "source_artifact_sha256", "provenance_delta_sha256", "before_revision", "after_revision", "review_evidence", "actor", "correlation_id", "idempotency_key", "activation_receipt", "readback_receipt", "rollback_receipt"],
+    "append_performed": false
+  },
+  "readback": {
+    "source": "fresh_authoritative_read",
+    "postconditions": ["active_digest_matches", "target_revision_matches", "source_lifecycle_active"],
+    "performed": false,
+    "success_claimed": false
+  },
+  "last_known_good_rollback": {
+    "kind": "restore_previous_dataset",
+    "target_sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "currently_eligible": true,
+    "source_lifecycle": "active",
+    "compatibility_verified": true,
+    "separate_authority_required": true,
+    "atomic": true,
+    "fresh_readback_required": true,
+    "performed": false
+  },
+  "current_state": "architecture_only_not_executable",
+  "activation_authorized": false,
+  "rollback_authorized": false
+}

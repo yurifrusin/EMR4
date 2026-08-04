@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "sprint_planning",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely in bounded segments after the successor-lane closeout. The current result is model_required_bureau_provider_free_successor_lanes_pass at Continuity 210 / Compass 191 and the exact next implementation is provider-free, non-executing C3 recovery risk/authority policy plus D3 staged-promotion/rollback architecture.",
+    "current_authority_allocation": "Yuri's 2026-08-04 standing uninterrupted-development authority is active and now explicitly supports as many bounded implementation/evidence/review lanes as each stage needs. Sol owns planning, architecture, acceptance and task-branch publication; DeepSeek Flash may own bounded separable mechanics and Gemini 3.6 Flash/high may perform a fresh independent veto, but neither receives authority expansion, acceptance, integration or protected-ref rights.",
+    "active_plan_and_acceptance": "The controlled-recovery development plan, accepted successor-lane closeout and Sol acceptance were read completely. C1/C2 and D1/D2 are accepted dependencies; C3 freezes deterministic recovery risk tiers and exact authority-plan fields, while D3 freezes shadow import, validation, canary, human/dual review, atomic activation design, immutable audit, readback and last-known-good rollback. Both lanes are architecture/schema/test evidence only and open no executor or updater.",
+    "protected_evidence_boundaries": "Protected holdouts, historical PHI, H15/H-series sources, docs/branding/, provider/product runtime, external prompt, patient or product-derived data, live read, command/write, shell/SQL/cloud/IAM, actuator, download/import/migration/activation, deployment, production, release, Pages and protected refs/evidence remain closed. The four pre-existing Consultant/Gate-minus-one pre-push receipt/state files remain preserved and excluded.",
+    "git_refs_and_worktree": "HEAD and origin/codex/ariadne-bernie-davida-parallel-seam are 3008cdb4d7b5801c45024f7361fb4294aa76fc48. Local and origin master plus handoff/current are all 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked tree is clean; only docs/branding/ and the four preserved receipt/state files are untracked. Explicit-path staging is mandatory and protected refs must not move."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "model_required_bureau_c3_d3_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed full rehydration and owns the coupled C3/D3 architecture boundary."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fresh independent review is eligible only after deterministic admission and an exact clean candidate commit."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["A bounded mechanical worker lane may be opened only if packet overhead is lower than direct completion."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fallback not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Leverage-gated lane not selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Native worker count remains adaptive; no native worker has yet been assigned for this coupled architecture slice."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

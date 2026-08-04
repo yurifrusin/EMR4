@@ -1,0 +1,22 @@
+{
+  "schema_version": "emr4.recovery_authority_decision.v1",
+  "decision_id": "71000000-0000-4000-8000-000000000001",
+  "plan_id": "70000000-0000-4000-8000-000000000001",
+  "plan_revision": 1,
+  "plan_sha256": "f09bf9cf0b9f2bf5a9382fc7722a0e46043d7a798c7e43b3307b68c7b250206a",
+  "policy_version": "emr4.recovery_risk_policy.v1",
+  "computed_risk_tier": "reversible_scoped_service_recovery",
+  "required_authority": "ordinary_confirmation",
+  "minimum_reviewer_count": 1,
+  "required_roles": ["authorized_technical_operator"],
+  "separation_of_duties": false,
+  "candidate_risk_overridden": true,
+  "future_one_use_execution_evidence": true,
+  "effective_expiry": "2026-08-04T08:01:00Z",
+  "plan_change_invalidates_reviews": true,
+  "current_state": "review_required",
+  "denial_codes": [],
+  "command_envelope_issued": false,
+  "actuator_gate": "closed",
+  "execution_authorized": false
+}

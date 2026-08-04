@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:bc5df9a9c4f15adb517e176880dde00321d3ae20208ab44fadeb5fab24ebcc7f",
+  "source_evidence": {
+    "active_plan_and_acceptance": "C1/C2 and D1/D2 are accepted dependencies. C3 requires closed deterministic risk tiers and exact plan/authority fields. D3 requires a non-executing staged promotion and last-known-good rollback design. Worker outputs are advisory findings only; Sol reconciles the shared authority model.",
+    "current_authority_allocation": "Sol retains architecture, security, acceptance and publication. Two native read-only analysis workers may independently inspect one bounded lane each; they receive no editing, acceptance, integration, baton, provider, runtime, product-data or protected authority.",
+    "git_refs_and_worktree": "Shared read-only analysis occurs in C:\\Users\\sarashera\\emr4 on codex/ariadne-bernie-davida-parallel-seam at 3008cdb4d7b5801c45024f7361fb4294aa76fc48. Local/origin master and handoff/current remain 2e34bdad732fdab32fbf778280b3d3c70d66d602. Workers must make no filesystem or Git changes.",
+    "live_handover_current_baton": "AGENTS.md was read completely after closeout. The exact next baton is provider-free, non-executing C3 recovery risk/authority policy and D3 staged-promotion/rollback architecture at task source 3008cdb4d7b5801c45024f7361fb4294aa76fc48.",
+    "protected_evidence_boundaries": "Workers may read only ordinary repository source named in their packets. Protected holdouts/evidence, historical PHI, local data, docs/branding/, patient/product data, provider calls, external prompts, live reads, commands/writes, actuators, update ingestion/activation, deployment, release, Pages and protected refs remain forbidden."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

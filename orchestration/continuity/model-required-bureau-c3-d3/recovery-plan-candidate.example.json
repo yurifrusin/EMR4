@@ -1,0 +1,54 @@
+{
+  "schema_version": "emr4.recovery_plan_candidate.v1",
+  "plan_id": "70000000-0000-4000-8000-000000000001",
+  "diagnosis_candidate_id": "23000000-0000-4000-8000-000000000001",
+  "anatomy_frame_id": "22000000-0000-4000-8000-000000000001",
+  "anatomy_version": "synthetic-anatomy-1",
+  "context_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+  "runbook_id": "restart-api-synthetic",
+  "candidate_integrity": "untrusted_model_fixture",
+  "proposed_risk_tier": "observe_explain_only",
+  "preconditions": [
+    {
+      "observation_id": "api-health",
+      "expected_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "must_be_fresh": true
+    }
+  ],
+  "environment": "isolated_authored_synthetic",
+  "target": {
+    "kind": "service",
+    "target_id": "synthetic:api-service",
+    "expected_revision": "api-synthetic-1.2.3"
+  },
+  "operation_class": "scoped_service_recovery",
+  "expected_effect": "Restore the bounded synthetic service health state",
+  "maximum_blast_radius": "single_service",
+  "reversibility": "deterministic_rollback_proven",
+  "rollback": {
+    "kind": "last_known_good",
+    "runbook_id": null,
+    "target_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+  },
+  "expires_at": "2026-08-04T08:05:00Z",
+  "supersession_key": "synthetic.api-service.recovery",
+  "idempotency": {
+    "scope": "recovery_plan_candidate",
+    "binding_fields": ["plan_sha256", "operation_class", "environment", "target_expected_revision", "runbook_id", "context_sha256", "authority_decision_id", "correlation_id"],
+    "effective_key_issued": false
+  },
+  "audit": {
+    "correlation_id": "70000000-0000-4000-8000-000000000003",
+    "immutable": true,
+    "required_fields": ["plan_id", "plan_sha256", "diagnosis_candidate_id", "anatomy_version", "context_sha256", "runbook_id", "computed_risk_tier", "authority_decision_id", "target_revision", "effective_idempotency_key", "postcondition_receipt"]
+  },
+  "postconditions": [
+    {
+      "observation_kind": "health_signal",
+      "expected_state": "synthetic healthy state observed",
+      "fresh_authoritative_read_required": true
+    }
+  ],
+  "authority_ceiling": "recovery_plan_candidate",
+  "execution_authorized": false
+}

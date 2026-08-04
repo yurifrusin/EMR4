@@ -1,0 +1,83 @@
+{
+  "artifact_hashes": {
+    "docs/emr4-model-required-bureau-c3-d3-provider-free-architecture.md": "a331b9eaae848d223b1ac422bb07eef059b169cd2b0550101317732afb60e780",
+    "docs/security/emr4-model-required-bureau-c3-d3-threat-model-delta.md": "c4ca2809346fee0040498d63a27cab2463766b656cec4dbc0b16b64f2b2ead53",
+    "orchestration/agent_inbox/codex/model-required-bureau-c3-native-analysis.md": "b1187adf09c7a7d0b372f51eb9569e7a11c3a90eddba52071a42b2f99b18b3aa",
+    "orchestration/agent_inbox/codex/model-required-bureau-d3-native-analysis.md": "27dc68f961dee302a5f32d329076a5bb95ef2c4445689a72822577db3ac57a99",
+    "orchestration/continuity/model-required-bureau-c3-d3/c3-d3-contract.json": "5044f40d2535f50d0f9f950d941cae8ed3030d74dbaba0d3e66bba0aeaebd917",
+    "orchestration/continuity/model-required-bureau-c3-d3/c3-d3-contract.schema.json": "516f743026a72bccc4756b84ffa635e88585efd5ff694fd2046eac51571c454e",
+    "orchestration/continuity/model-required-bureau-c3-d3/recovery-authority-decision.example.json": "c086c86ed26b92151cb6819e1593bda568cd66d56f9fd2dcb94b60802ebf8c43",
+    "orchestration/continuity/model-required-bureau-c3-d3/recovery-authority-decision.schema.json": "34898a8b272653c5b0e58bc37a448d6a2bddd2717360c72cb385d59c34611cb7",
+    "orchestration/continuity/model-required-bureau-c3-d3/recovery-plan-candidate.example.json": "9d05adb44dee684a9dca79d783d85db44f6575af056b18a4f00c1ce5762cd0f2",
+    "orchestration/continuity/model-required-bureau-c3-d3/recovery-plan-candidate.schema.json": "dd10fdaadffb4f618bdfb67c7b20e1e43bedb897e435c2150c5d0eaa551cc5a6",
+    "orchestration/continuity/model-required-bureau-c3-d3/update-promotion-rollback-plan.example.json": "f53760c3add178b011f9d5ad922f1991b7162d28624786f43b2832fecdcfca80",
+    "orchestration/continuity/model-required-bureau-c3-d3/update-promotion-rollback-plan.schema.json": "84653971eb43db4531886edba190dfbb5dc5eb8d90bbaa44e858ea4acda2157b"
+  },
+  "authority_and_side_effects": {
+    "activations": 0,
+    "actuators": 0,
+    "command_routes": 0,
+    "deployments": 0,
+    "external_downloads": 0,
+    "external_prompts": 0,
+    "imports": 0,
+    "licence_acceptances": 0,
+    "migrations": 0,
+    "pages_rebuilds": 0,
+    "patient_records": 0,
+    "product_reads": 0,
+    "protected_evidence_accesses": 0,
+    "protected_ref_movements": 0,
+    "provider_calls": 0,
+    "releases": 0,
+    "runtime_wiring": 0,
+    "shell_sql_cloud_operations": 0,
+    "writes": 0
+  },
+  "contract_and_examples": {
+    "candidate_risk_overridden": true,
+    "canonical_example_count": 3,
+    "class_specific_command_families": {
+      "application_dependency_build": "application_build_promotion",
+      "database_schema_migration": "database_migration_promotion",
+      "operational_clinical_policy": "policy_content_activation",
+      "reference_dataset": "reference_dataset_activation"
+    },
+    "closed_schema_count": 4,
+    "computed_nominal_risk": "reversible_scoped_service_recovery",
+    "effective_expiry": "2026-08-04T08:01:00Z",
+    "risk_tier_count": 5,
+    "update_class_count": 4
+  },
+  "documents": {
+    "document_count": 4,
+    "required_boundary_count": 7
+  },
+  "passed": true,
+  "promotion_denials": {
+    "cross_class_canary": "SCHEMA_REJECTED",
+    "cross_class_command": "SCHEMA_REJECTED",
+    "review_downgrade": "SCHEMA_REJECTED",
+    "shadow_serving": "SCHEMA_REJECTED",
+    "unread_success": "SCHEMA_REJECTED",
+    "withdrawn_lkg": "SCHEMA_REJECTED"
+  },
+  "recovery_policy": {
+    "denials": {
+      "executable_content": "EXECUTABLE_CONTENT",
+      "expired": "STALE_OR_SUPERSEDED",
+      "unknown_evidence": "UNKNOWN_EVIDENCE",
+      "unknown_runbook": "UNKNOWN_RUNBOOK"
+    },
+    "risk_cases": {
+      "database": "dual_review_database_security_or_data_supply",
+      "forbidden": "forbidden_autonomous_action",
+      "observe": "observe_explain_only",
+      "rollback": "human_approved_rollback_or_failover",
+      "scoped": "reversible_scoped_service_recovery"
+    }
+  },
+  "result": "model_required_bureau_c3_d3_provider_free_architecture_pass",
+  "schema_version": "emr4.model_required_bureau_c3_d3_acceptance.v1",
+  "source_head": "3008cdb4d7b5801c45024f7361fb4294aa76fc48"
+}

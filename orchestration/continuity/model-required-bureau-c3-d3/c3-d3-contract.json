@@ -1,0 +1,162 @@
+{
+  "schema_version": "emr4.model_required_bureau_c3_d3_contract.v1",
+  "source_head": "3008cdb4d7b5801c45024f7361fb4294aa76fc48",
+  "result": "model_required_bureau_c3_d3_provider_free_architecture_pass",
+  "evidence_label": "provider_free_c3_d3_architecture_and_proof",
+  "provider_required_for_intelligent_runtime": true,
+  "provider_free_end_to_end_claim": false,
+  "c3": {
+    "risk_policy_version": "emr4.recovery_risk_policy.v1",
+    "candidate_may_set_final_risk": false,
+    "risk_is_monotone": true,
+    "tiers": [
+      {
+        "id": "observe_explain_only",
+        "required_authority": "observe_only",
+        "minimum_reviewer_count": 0,
+        "required_roles": [],
+        "separation_of_duties": false,
+        "future_one_use_execution_evidence": false,
+        "actuator_eligible": false
+      },
+      {
+        "id": "reversible_scoped_service_recovery",
+        "required_authority": "ordinary_confirmation",
+        "minimum_reviewer_count": 1,
+        "required_roles": ["authorized_technical_operator"],
+        "separation_of_duties": false,
+        "future_one_use_execution_evidence": true,
+        "actuator_eligible": true
+      },
+      {
+        "id": "human_approved_rollback_or_failover",
+        "required_authority": "maintenance_release_authority",
+        "minimum_reviewer_count": 1,
+        "required_roles": ["maintenance_authority"],
+        "separation_of_duties": true,
+        "future_one_use_execution_evidence": true,
+        "actuator_eligible": true
+      },
+      {
+        "id": "dual_review_database_security_or_data_supply",
+        "required_authority": "dual_review",
+        "minimum_reviewer_count": 2,
+        "required_roles": ["domain_custodian", "maintenance_authority"],
+        "separation_of_duties": true,
+        "future_one_use_execution_evidence": true,
+        "actuator_eligible": true
+      },
+      {
+        "id": "forbidden_autonomous_action",
+        "required_authority": "forbidden",
+        "minimum_reviewer_count": 0,
+        "required_roles": [],
+        "separation_of_duties": false,
+        "future_one_use_execution_evidence": false,
+        "actuator_eligible": false
+      }
+    ],
+    "forbidden_operation_classes": [
+      "generic_shell",
+      "generic_sql",
+      "generic_cloud",
+      "credential_change",
+      "authority_policy_change",
+      "unallowlisted_operation"
+    ],
+    "execution_authorized": false
+  },
+  "d3": {
+    "generic_update_command": false,
+    "stage_sequence": [
+      "bind_provenance_delta",
+      "quarantined_shadow_import",
+      "class_specific_validation",
+      "bounded_canary",
+      "human_or_dual_review",
+      "immediate_pre_activation_revalidation",
+      "future_atomic_class_specific_activation",
+      "immutable_audit_append",
+      "fresh_authoritative_readback",
+      "separately_authorized_lkg_rollback"
+    ],
+    "fail_closed_states": [
+      "rejected",
+      "quarantined",
+      "expired",
+      "superseded",
+      "activation_unverified",
+      "rollback_unverified",
+      "incident_locked"
+    ],
+    "classes": [
+      {
+        "update_class": "application_dependency_build",
+        "future_command_family": "application_build_promotion",
+        "canary_kind": "single_disposable_instance",
+        "required_authority": "maintenance_release_authority",
+        "minimum_reviewer_count": 1,
+        "required_roles": ["release_authority"],
+        "rollback_kind": "restore_previous_artifact"
+      },
+      {
+        "update_class": "database_schema_migration",
+        "future_command_family": "database_migration_promotion",
+        "canary_kind": "empty_schema_clone",
+        "required_authority": "dual_review",
+        "minimum_reviewer_count": 2,
+        "required_roles": ["database_custodian", "release_authority"],
+        "rollback_kind": "down_migration_or_restore_candidate"
+      },
+      {
+        "update_class": "reference_dataset",
+        "future_command_family": "reference_dataset_activation",
+        "canary_kind": "synthetic_dataset_namespace",
+        "required_authority": "dual_review",
+        "minimum_reviewer_count": 2,
+        "required_roles": ["data_steward", "clinical_governance_reviewer"],
+        "rollback_kind": "restore_previous_dataset"
+      },
+      {
+        "update_class": "operational_clinical_policy",
+        "future_command_family": "policy_content_activation",
+        "canary_kind": "draft_policy_audience",
+        "required_authority": "dual_review",
+        "minimum_reviewer_count": 2,
+        "required_roles": ["policy_owner", "clinical_governance_reviewer"],
+        "rollback_kind": "restore_previous_policy"
+      }
+    ],
+    "shadow_reads_authoritative": false,
+    "activation_authorized": false,
+    "rollback_authorized": false
+  },
+  "api_spine": {
+    "reads": "graphql_authorized_read_only_plan_status_and_readback",
+    "commands": "rest_openapi_class_specific_separately_closed",
+    "events": "committed_hints_require_fresh_authorized_read",
+    "manifests": "declarative_evidence_never_command_authority",
+    "access_ai": "closed"
+  },
+  "authority_and_side_effects": {
+    "provider_calls": 0,
+    "external_prompts": 0,
+    "patient_records": 0,
+    "product_reads": 0,
+    "runtime_wiring": 0,
+    "command_routes": 0,
+    "writes": 0,
+    "actuators": 0,
+    "shell_sql_cloud_operations": 0,
+    "external_downloads": 0,
+    "licence_acceptances": 0,
+    "imports": 0,
+    "migrations": 0,
+    "activations": 0,
+    "deployments": 0,
+    "releases": 0,
+    "pages_rebuilds": 0,
+    "protected_ref_movements": 0,
+    "protected_evidence_accesses": 0
+  }
+}
