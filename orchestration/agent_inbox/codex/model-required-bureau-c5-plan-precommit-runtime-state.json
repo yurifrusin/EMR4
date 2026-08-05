@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_c5_disposable_live_development_recovery_plan_for_fresh_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "C4 is accepted and published at task HEAD 8bd1b315392378cfd7b0e67ec9cc66f5ad7e7a6f. The exact next descendant is C5's narrowest disposable non-PHI live-development-recovery plan; the Context Fabric remains a separate staged horizon and no implementation or runtime authority is borrowed from it.",
+    "current_authority_allocation": "Sol owns C5 architecture, recovery, integration and acceptance. Gemini 3.6 Flash/high receives one fresh read-only architecture/security veto after the plan commit. DeepSeek V4 Flash/high remains held until that pass and may then implement only a frozen bounded provider-free packet. No worker or reviewer starts a target, calls the candidate provider, accepts its own output, integrates or moves protected refs.",
+    "active_plan_and_acceptance": "The C5 plan SHA-256 is 9f23396e8facadc5f8f1baa3294ebbcdcaeca0bf71b29f95a7743ac80220ac15; its threat-model delta SHA-256 is baa1723f3fa174d8fc0932ddee8fca1ece356f147ee09a90746fa8742f51002c; and its plan-test SHA-256 is d8da7dbc0c570713301fbe103abdfe8fd2477ef3b9647f1bfb94049ad57f1d66. It freezes one task-owned loopback process, one termination fault, exact Sydney Gemini 2.5 Flash positive-reasoning and USD 0.50/two-call ceilings, deterministic proofreading, plan-bound standing human approval, one-use execution evidence, a fixed start/stop actuator, distinct fresh readback and complete cleanup. Forty-two focused and inherited tests, Ruff and git diff checks pass.",
+    "protected_evidence_boundaries": "This commit contains planning, threat modelling, deterministic plan tests and the exact C5 receipts only. No target process, socket, temporary runtime, provider call, patient/product/protected data, database, ordinary service, cloud/IAM action, Context Fabric implementation, deployment, production, release, Pages or protected-ref action is permitted. docs/branding/ and all unrelated untracked receipt/state files remain preserved and excluded by explicit-path staging.",
+    "git_refs_and_worktree": "Before explicit staging, HEAD and origin/codex/ariadne-bernie-davida-parallel-seam align at 8bd1b315392378cfd7b0e67ec9cc66f5ad7e7a6f. Local/origin master and handoff/current remain protected and aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is clean; only the bounded C5 plan candidate and preserved unrelated untracked paths are present."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "c5_plan_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol froze the C5 plan candidate after complete rehydration and deterministic checks."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent is assigned C5 implementation, live execution or veto authority."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The fresh Gemini 3.6 Flash/high review is held until the exact plan commit and worktree preflight."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["The preferred implementation lane is held pending plan-veto admission."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare remains only the future DeepSeek transport wrapper."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
