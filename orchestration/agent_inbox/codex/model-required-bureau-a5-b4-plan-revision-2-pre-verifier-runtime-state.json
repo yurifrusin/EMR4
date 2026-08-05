@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "dispatch_fresh_gemini_a5_b4_plan_revision_2_veto",
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton requires the paired provider-free A5.1 Rayleen check-in and B4.1 Davida default-location command descendant. Revision 2 is the corrected next safe candidate after the first plan veto.",
+    "current_authority_allocation": "Sol owns architecture, acceptance, recovery and integration. A fresh Gemini 3.6 Flash/high Antigravity project has read-only veto authority on exact revision 2 and may return only pass or revision_required. DeepSeek implementation remains held until pass. No verifier or worker has protected-ref, provider-runtime, product-data, deployment or release authority.",
+    "active_plan_and_acceptance": "Candidate 37c22d7d076af7913c2fca4d65f8c9d63e38195f closes all seven local and independent first-candidate findings with a dedicated one-use Receptionist check-in command, event-feed isolation, explicit event constraint migration, explicit Davida attestation OpenAPI and exact role normalization. Focused Ariadne tests passed 33 of 33 and git diff --check passed. The fresh verifier worktree preflight passed at the exact candidate head, clean=true, provider_or_model_calls=0.",
+    "protected_evidence_boundaries": "The fresh review excludes all prior A5/B4 review, analysis, packet, receipt and preflight artifacts. Holdouts v1-v10, docs/branding, patient/clinical/product-derived/participant/protected/production data, product-provider runtime, autonomous action, deployment, release, Pages and protected refs remain closed. The reviewer is read-only and may inspect only current authority, active plan and relevant source/API contracts.",
+    "git_refs_and_worktree": "Primary task HEAD is 37c22d7d076af7913c2fca4d65f8c9d63e38195f. Fresh clean review worktree C:/Users/sarashera/EMR4-worktrees/model-required-bureau-a5-b4-plan-gemini-review-2 is on non-protected branch codex/review-model-required-bureau-a5-b4-plan-2 at the same exact head. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. Preserved primary untracked files remain outside the candidate and index."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "a5_b4_revision_2_pre_verifier_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol committed exact revision 2 and verified the clean fresh review worktree."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["The local Rayleen lane is completed and has no active assignment or authority."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Gemini 3.6 Flash/high adapter is reachable; the revision 2 worktree passed exact deterministic preflight."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["DeepSeek is held until revision 2 receives a fresh pass."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected or used."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude model lane is assigned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

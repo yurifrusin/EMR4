@@ -7,6 +7,7 @@ Parent: `docs/security/emr4-model-required-bureaus-controlled-recovery-threat-mo
 |---|---|---|
 | Rayleen or Davida is treated as command actor | Authenticated current human user is the only actor/confirmer; agent identity is bounded provenance only | Reject or acceptance failure; zero mutation |
 | A4 read capability is reused as write authority | Command routes use the ordinary authenticated staff session and exact role checks; A4 token is never admitted | `401/403`; no disclosure or effect |
+| Local synthetic command route reaches an ordinary practice | Separate default-off A5.1/B4.1 flags and exact authored-synthetic practice allowlists checked before resource lookup | Closed-gate rejection; zero disclosure/effect |
 | Client asserts another practice, actor or role | Session-derived values are authoritative; body assertions must exactly match before resource disclosure | Uniform scope/authorization rejection |
 | Runtime role strings drift from architectural role assertions | Exact server mapping `Admin -> practice_manager`, `PracticeOwner -> practice_owner` before equality; no aliases/fallbacks | Assertion mismatch rejection |
 | Stale appointment check-in overwrites current state | Dedicated operation, durable claim, appointment row lock, signed-current-state freshness and final revalidation | Blocked confirmation; full rollback |

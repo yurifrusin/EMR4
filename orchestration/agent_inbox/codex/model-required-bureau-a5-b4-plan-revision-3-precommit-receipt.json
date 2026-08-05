@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_a5_1_b4_1_plan_revision_3_for_final_fresh_veto",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "Revision 3 plan SHA-256 is 81f5a60e45e6b272f186f032e8e1339a0cde18db8f0480789303c34ed219813c and threat delta SHA-256 is 9132b35fc8fe3cd2af7ed4fffa52aa14e786175b9333bdc2960977a420bddc67. Revision 2 Gemini receipt SHA-256 538c4bf853d034eaccaf3c5fbc7b057283f6a5aed95b7d0001fcd938fb38f582 returned pass with no material findings. Revision 3 additionally freezes no-change semantics for omitted/null check-in waiting area, default-off B4 feature/practice admission, dedicated server-only signing configuration, exact correlation equality, and exact B4 outbox type/schema/payload. Focused Ariadne tests passed 33 of 33 and git diff --check passed.",
+    "current_authority_allocation": "Sol owns the clarifications, acceptance and integration. Gemini 3.6 Flash/high independently passed exact revision 2 and will receive one final fresh read-only exact-head veto for revision 3. DeepSeek implementation remains held until that pass. No worker or reviewer has product-provider, product-data, protected-ref, deployment or release authority.",
+    "git_refs_and_worktree": "Primary HEAD is exact revision 2 commit 37c22d7d076af7913c2fca4d65f8c9d63e38195f before revision 3 staging. The revision 2 verifier worktree remains clean and unchanged at that head. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602. The index is clean before explicit staging and all unrelated untracked files remain preserved.",
+    "live_handover_current_baton": "The live baton requires paired provider-free A5.1 Rayleen check-in and B4.1 Davida default-location command runtime. Revision 2 passed independent veto; revision 3 adds narrower boundary clarifications before worker dispatch.",
+    "protected_evidence_boundaries": "Revision 3 remains local, product-runtime-provider-free and authored-synthetic only. Holdouts v1-v10, docs/branding, patient/clinical/product-derived/participant/protected/production data, autonomous action, GraphQL mutation, external event delivery, deployment, release, Pages and protected refs remain closed. Existing unrelated pre-push files remain untracked and untouched; staging is limited to revision 3 and exact revision 2 review lineage."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

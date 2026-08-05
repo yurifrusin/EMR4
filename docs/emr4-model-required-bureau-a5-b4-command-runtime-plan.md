@@ -1,7 +1,7 @@
 # EMR4 Model-Required Bureaus — Paired A5.1/B4.1 Command Runtime Plan
 
 Date: 2026-08-05
-Status: revision 2 candidate for independent architecture veto before implementation
+Status: revision 3 candidate for independent architecture veto before implementation
 Parent authority: `docs/emr4-rayleen-davida-controlled-recovery-development-plan.md`
 API authority: `orchestration/api_spine_adr.md`
 
@@ -130,6 +130,12 @@ expired, tampered, wrong-purpose, wrong-actor, wrong-practice, cross-practice,
 inactive/incompatible-area and role/session mismatch paths produce no truth,
 audit, idempotency completion, evidence consumption or event effect.
 
+The optional `waiting_area_id` means assignment when a UUID is supplied and no
+waiting-area change when omitted or null; A5.1 cannot remove or move an already
+assigned waiting area. Any existing area is also revalidated as active,
+same-practice and location-compatible before it is preserved. Waiting-area move
+or removal remains a later separately frozen A5 descendant.
+
 ### 4.3 Atomic unit and event
 
 Within the dedicated check-in transaction, using the existing durable
@@ -207,6 +213,12 @@ Mount one practice-administration router under `/api/v1`:
 - `POST /practice-administration/practitioners/default-location/proposals/{proposal_id}/confirm`
   consumes the evidence and commits the single administrative command.
 
+All three routes are default-off and admitted only when both the exact B4.1
+feature flag is enabled and the authenticated practice is in a separate
+authored-synthetic practice allowlist. Gate rejection occurs before practitioner
+or location lookup. This descendant proves local synthetic command semantics;
+it does not open the route for ordinary, product or production practices.
+
 The explicit attestation route closes the historical contract gap between a
 read-only proposal and a confirmation command that must carry pre-existing
 server-held evidence. It does not authorize the domain mutation; the later
@@ -251,6 +263,14 @@ practice/actor/proposal-hash record. A concurrent exact retry may return the
 same still-live unconsumed reference; a changed payload conflicts. An expired
 or consumed record cannot be renewed from the old proposal.
 
+Every B4 route requires bounded nonblank `Idempotency-Key` and correlation
+headers. The correlation header, body session-binding assertion and signed
+proposal correlation value must be equal; mismatch rejects before domain
+effect. Raw idempotency keys and session credentials are never persisted.
+Proposal signing uses a dedicated server-only B4 command secret obtained from
+configuration, never a client field, provider response, database row, log or
+receipt. Missing/invalid configuration fails the feature closed.
+
 ### 5.4 Confirmation transaction
 
 The confirm route, in order:
@@ -268,8 +288,11 @@ The confirm route, in order:
 8. marks the evidence consumed by this command;
 9. appends one immutable practice-administration audit row;
 10. appends one unpublished transactional outbox row for exact event type
-    `practice.practitioner_default_location_changed.v1` with an allowlisted,
-    patient-free payload;
+    `practice.practitioner_default_location_changed`, schema version
+    `practice.practitioner_default_location_changed.v1`, and exact patient-free
+    payload fields `practitioner_id`, `before_location_id`,
+    `after_location_id`, `aggregate_version` and `reason_codes`, with reason
+    codes exactly `["practitioner_default_location_changed"]`;
 11. stores the exact bounded commit receipt on the idempotency row;
 12. commits once, freshly reloads deterministic practitioner state and returns
     the receipt/readback.
@@ -355,6 +378,8 @@ provider configuration, deployment files or `docs/branding/`.
 ### B4.1 deterministic acceptance
 
 - unauthorized roles reject before resource disclosure;
+- default-off feature/practice admission rejects ordinary practices before
+  resource disclosure;
 - proposal performs zero database writes and is bounded to 120 seconds;
 - attestation returns only a server-held opaque reference and changes no
   practitioner truth;
