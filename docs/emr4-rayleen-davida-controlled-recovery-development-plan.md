@@ -2,9 +2,9 @@
 
 Date: 2026-08-04
 
-Status: Gate -1, Gate zero, provider-free A1/A2, B1/B2, C1/C2, D1/D2 and
-C3/D3 passed; the bounded positive-reasoning A3/B3 request-contract recovery
-also passes with one admitted occupied advisory result per lane
+Status: Gate -1, Gate zero, provider-free A1/A2, B1/B2, C1/C2, D1/D2,
+C3/D3, the bounded positive-reasoning A3/B3 request-contract recovery, A4 and
+the paired A5.1/B4.1 command runtimes pass
 
 Architecture parent:
 `docs/emr4-model-required-deterministic-authority-bureau-architecture.md`
@@ -409,6 +409,11 @@ scope expansion, stale plans, replay and partial verification.
 
 No production deployment or real database is part of C4.
 
+C4 is now the dependency-satisfied successor after A5.1/B4.1. Standing
+programme authority opens planning and provider-free deterministic
+implementation of the narrowest exact simulator boundary; it does not open C5
+or any live target.
+
 ### C5. Live development recovery
 
 Any live development action requires separate exact target and authority. Begin
@@ -520,12 +525,11 @@ architecture decision.
 
 ## Current next action
 
-Publish the accepted A4 candidate to the task branch, then perform a fresh
-five-source rehydration and freeze the paired A5.1/B4.1 command descendant. A5.1
-begins with the narrowest Rayleen check-in/status proposal-confirm path; B4.1
-begins with the already designed Davida practitioner default-location command
-runtime. Both must retain backend-owned human confirmation, current identity and
-scope, idempotency, atomic truth/audit/outbox behavior, replay rejection and
-deterministic readback. Planning and provider-free deterministic implementation
-begin without a repeat permission handback. Provider calls, patient data,
-production, deployment, release, Pages and protected-ref movement remain closed.
+Close and publish the accepted paired A5.1/B4.1 command runtimes, perform the
+fresh five-source rehydration, then freeze and implement Bureau C4's narrowest
+provider-free authored-synthetic allowlisted-actuator simulator. C4 accepts only
+typed one-use execution evidence for exact runbooks and must reject model-
+supplied shell/SQL, unknown parameters, scope expansion, stale plans, replay and
+partial verification. No provider call, real database, live target, C5 action,
+patient/product data, production, deployment, release, Pages or protected-ref
+movement is opened.

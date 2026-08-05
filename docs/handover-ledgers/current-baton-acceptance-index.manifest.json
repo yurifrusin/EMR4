@@ -31,8 +31,11 @@
     "Model-required Bureau Gate zero acceptance",
     "Model-required Bureau A3/B3 terminal-reconciliation acceptance",
     "Model-required Bureau A3/B3 request-contract recovery acceptance",
+    "Model-required Bureau A4 product-read/UI acceptance",
+    "Model-required Bureau A5.1/B4.1 command runtime acceptance",
     "Current result",
-    "Next implementation"
+    "Next implementation",
+    "Future Consultant clinical direction"
   ],
   "generated_date": "2026-08-03",
   "ledger_byte_count": 121744,

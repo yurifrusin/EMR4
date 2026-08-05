@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 212 / Compass 193. The positive-bounded-reasoning A3/B3 recovery passes with one proofreader-admitted occupied authored-synthetic advisory per lane. The current planned block is complete; the next implementation lane requires a separately frozen material boundary.
+> EMR4 is at Continuity 213 / Compass 194. A5.1 Rayleen check-in and B4.1 Davida default-location command runtimes pass at default-off authored-synthetic boundaries. Standing authority opens the provider-free C4 allowlisted-actuator simulator next.
 
 ## North star
 
@@ -198,29 +198,33 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    C3/D3 pass; the next lanes require a selected material boundary. Lineage parent: `model-required-bureau-provider-free-successor-lanes`.
 91. **Occupied provider-model advisory proof for Rayleen and Davida — Occupied Rayleen and Davida Advisory Recovery**
    A3/B3 pass; no dependency-satisfied non-material successor remains. Lineage parent: `model-required-bureau-c3-d3`.
+92. **Backend-owned Rayleen and Davida command foundations — Rayleen Check-In and Davida Default-Location Commands**
+   A5.1/B4.1 pass; provider-free C4 planning is next. Lineage parent: `model-required-bureau-a3-b3-request-contract-recovery`.
 
 ## Current position
 
-**Occupied Rayleen/Davida advisory rehearsal accepted — Occupied Rayleen and Davida Advisory Recovery**
+**Rayleen and Davida bounded command runtimes accepted — Rayleen Check-In and Davida Default-Location Commands**
 
-**Why this proof came next:** The previous Rayleen response-shape rejection required a distinct positive-bounded-reasoning request-contract recovery.
+**Why this proof came next:** A4 product read and the prior Davida command design supplied the dependency-complete boundaries for the first two human-confirmed commands.
 
-Rayleen and Davida each admitted one authored-synthetic advisory with deterministic proofreading and zero product authority.
+Two separate default-off authored-synthetic command paths pass deterministic, migration and independent review.
 
 ### What this unlocks
 
-- A decision-ready A4 product-read/UI-projection boundary.
-- Separately decidable A5/B4 write, C4 actuator or update/import boundaries.
+- Immediate provider-free C4 allowlisted-actuator simulator planning.
+- Later separately frozen A5/B4 command descendants.
 
 ### What it does not solve
 
-- Product or real-data model runtime.
-- Commands, confirmations, writes, actuators or clinical decisions.
+- Ordinary-practice, patient-facing or clinical product use.
+- Live recovery, real-database or external actuator execution.
 - Deployment, production, release, Pages or protected actions.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
+- Contract `combined-patient-practitioner-time-duration-intent`: **satisfied**
+- Contract `committed-reschedule-availability-reconciliation`: **satisfied**
 - All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
@@ -459,11 +463,10 @@ Prerequisites:
   Required before: Satisfied and consumed on 2026-08-04: Gate zero passes at Continuity 209 / Compass 190.
 - **May EMR4 move without repeat permission pauses through every fully specified dependency-satisfied gate?**
   Required before: Satisfied on 2026-08-04 by Yuri's standing programme authority.
-- **Which material Bureau boundary, if any, should be frozen next: A4 product read/UI projection, A5/B4 write commands, C4 actuator rehearsal, or a separately scoped update/import lane?**
-  Required before: Yuri must select and freeze the exact data, product/runtime, write/actuator, cost, side-effect and acceptance boundary before execution.
 
 ## Map limits
 
+- A5.1/B4.1 prove bounded authored-synthetic command semantics only; they do not prove ordinary-practice, patient-facing, live-recovery, production, deployment or release suitability.
 - A3/B3 prove bounded authored-synthetic occupied advisory formation only; they do not prove product data, commands, writes, actuators, clinical decisions, production suitability or sovereign processing.
 - C3/D3 prove provider-free risk, authority, staged-promotion and rollback contracts only; they do not prove a provider, observer, reviewer, command, actuator, updater, migration or activation runtime.
 - Provider-free language fixtures prove schemas, grounding and policy only; they do not prove model NLU or an intelligent end-to-end path.
@@ -694,6 +697,8 @@ Prerequisites:
 - `docs/bernie-stage1-provider-free-supervised-booking-acceptance-plan.md`
 - `docs/emr4-model-required-bureau-a3-b3-request-contract-recovery-closeout.md`
 - `docs/emr4-model-required-bureau-a3-b3-request-contract-recovery-plan.md`
+- `docs/emr4-model-required-bureau-a5-b4-command-runtime-closeout.md`
+- `docs/emr4-model-required-bureau-a5-b4-command-runtime-plan.md`
 - `docs/emr4-model-required-bureau-c3-d3-closeout.md`
 - `docs/emr4-model-required-bureau-c3-d3-provider-free-architecture.md`
 - `docs/emr4-model-required-bureau-gate-minus-one-closeout.md`
@@ -702,6 +707,7 @@ Prerequisites:
 - `docs/emr4-model-required-bureau-provider-free-successor-lanes-closeout.md`
 - `docs/emr4-model-required-bureau-provider-free-successor-lanes.md`
 - `docs/emr4-rayleen-davida-controlled-recovery-development-plan.md`
+- `docs/model-required-bureau-a5-b4-a5-worker-recovery-lease.md`
 - `docs/raisa-clinician-one-readonly-document-context-closeout.md`
 - `docs/raisa-clinician-one-readonly-document-context-plan.md`
 - `docs/raisa-clinician-one-word-desktop-selection-check-closeout.md`
@@ -798,6 +804,7 @@ Prerequisites:
 - `docs/security/dependabot-alert-17-triage-2026-08-01.md`
 - `docs/security/dependabot-alerts-8-15-triage-2026-08-01.md`
 - `docs/security/emr4-model-required-bureau-a3-b3-request-contract-recovery-threat-model-delta.md`
+- `docs/security/emr4-model-required-bureau-a5-b4-command-runtime-threat-model-delta.md`
 - `docs/security/emr4-model-required-bureau-c3-d3-threat-model-delta.md`
 - `docs/security/emr4-model-required-bureau-gate-zero-threat-model-delta.md`
 - `docs/security/emr4-model-required-bureau-provider-free-successor-lanes-threat-model-delta.md`
@@ -838,6 +845,7 @@ Prerequisites:
 - `implementation_plan.md`
 - `orchestration/access_ai_api_design.md`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-request-contract-recovery-review-2-receipt.json`
+- `orchestration/agent_inbox/antigravity/model-required-bureau-a5-b4-code-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-c3-d3-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-gate-minus-one-review-2-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-gate-zero-review-receipt.json`
@@ -877,6 +885,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/clinician-one-readonly-document-context-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/clinician-one-word-desktop-selection-check-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-a3-b3-request-contract-recovery-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/model-required-bureau-a5-b4-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-c3-d3-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-gate-minus-one-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-gate-zero-sol-acceptance.md`
@@ -1413,4 +1422,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 193; continuity graph revision 212._
+_Compass map revision 194; continuity graph revision 213._

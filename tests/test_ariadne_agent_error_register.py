@@ -32,20 +32,20 @@ def _schema() -> dict:
     return _json(SCHEMA_PATH)
 
 
-def test_committed_register_is_semantically_valid_after_recovery_review_2() -> None:
+def test_committed_register_is_semantically_valid_after_a5_b4_code_veto() -> None:
     register = _register()
 
     validate_register(register, _schema())
 
     assert register["schema_version"] == "ariadne.agent-error-register.v1"
-    assert register["register_revision"] == 15
+    assert register["register_revision"] == 16
     assert register["scope"]["coverage"] == "bounded_known_preserved_incidents"
     assert [row["incident_id"] for row in register["incidents"]] == [
-        f"AER-{index:04d}" for index in range(1, 22)
+        f"AER-{index:04d}" for index in range(1, 23)
     ]
     assert [
         row["incident_id"] for row in register["incidents"] if row["status"] == "open"
-    ] == ["AER-0021"]
+    ] == []
 
 
 def test_seed_separates_agent_behavior_from_transport() -> None:
@@ -54,12 +54,67 @@ def test_seed_separates_agent_behavior_from_transport() -> None:
     transport_incidents = [row for row in incidents if row["origin"] == "transport"]
 
     assert len(agent_incidents) == 16
-    assert len(transport_incidents) == 1
-    assert transport_incidents[0]["incident_id"] == "AER-0007"
-    assert transport_incidents[0]["category"] == "transport_timeout"
-    assert transport_incidents[0]["role"] == "implementer"
-    assert transport_incidents[0]["causal_claim_level"] == "observation_only"
-    assert transport_incidents[0]["candidate_state"] == "untrusted_partial_worktree"
+    assert len(transport_incidents) == 2
+    assert [row["incident_id"] for row in transport_incidents] == [
+        "AER-0007",
+        "AER-0022",
+    ]
+    assert {row["category"] for row in transport_incidents} == {"transport_timeout"}
+    assert {row["causal_claim_level"] for row in transport_incidents} == {
+        "observation_only"
+    }
+
+
+def test_a5_worker_scope_breach_closes_only_through_recovery_lease() -> None:
+    incident = next(
+        row for row in _register()["incidents"] if row["incident_id"] == "AER-0021"
+    )
+    review = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "antigravity"
+        / "model-required-bureau-a5-b4-code-review-receipt.json"
+    )
+
+    assert incident["status"] == "corrected"
+    assert incident["correction"]["status"] == "recovery_lease_applied"
+    assert incident["candidate_state"] == "untrusted_partial_worktree"
+    assert review["decision"] == "pass"
+    assert review["head_before"] == review["head_after"]
+    assert review["dirty_after"] is False
+
+
+def test_antigravity_auth_timeout_retains_no_oauth_material_or_fake_decision() -> None:
+    incident = next(
+        row for row in _register()["incidents"] if row["incident_id"] == "AER-0022"
+    )
+    failure = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "model-required-bureau-a5-b4-code-review-1-auth-transport-failure.json"
+    )
+    review = _json(
+        ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "antigravity"
+        / "model-required-bureau-a5-b4-code-review-receipt.json"
+    )
+
+    assert incident["origin"] == "transport"
+    assert incident["status"] == "corrected"
+    assert incident["correction"]["status"] == "corrected_fresh_attempt"
+    assert failure["review_prompt_transmitted"] is False
+    assert failure["reviewer_decision_produced"] is False
+    assert failure["raw_authorization_url_retained"] is False
+    assert failure["authorization_code_or_credential_retained"] is False
+    assert review["decision"] == "pass"
+    assert review["head_before"] == failure["candidate_head"]
+    assert review["head_after"] == failure["candidate_head"]
+    assert review["dirty_after"] is False
 
 
 def test_davida_review_errors_match_preserved_evidence() -> None:
@@ -101,13 +156,13 @@ def test_davida_review_errors_match_preserved_evidence() -> None:
 def test_pattern_report_detects_both_recurring_control_signals() -> None:
     report = build_pattern_report()
 
-    assert report["incident_count"] == 21
-    assert report["open_incident_ids"] == ["AER-0021"]
+    assert report["incident_count"] == 22
+    assert report["open_incident_ids"] == []
     assert report["counts"]["by_origin"] == {
         "agent_behavior": 16,
         "harness": 3,
         "repository": 1,
-        "transport": 1,
+        "transport": 2,
     }
     assert report["counts"]["by_category"] == {
         "command_scope_violation": 3,
@@ -117,11 +172,11 @@ def test_pattern_report_detects_both_recurring_control_signals() -> None:
         "read_only_violation": 1,
         "reasoning_claim_error": 1,
         "repository_defect": 1,
-        "transport_timeout": 1,
+        "transport_timeout": 2,
     }
     assert report["counts"]["by_candidate_state"] == {
         "accepted_candidate_changed": 1,
-        "canonical_unchanged": 17,
+        "canonical_unchanged": 18,
         "untrusted_partial_worktree": 3,
     }
     assert report["recurring_patterns"] == [

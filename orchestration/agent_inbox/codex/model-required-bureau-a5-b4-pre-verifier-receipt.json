@@ -1,0 +1,27 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "launch_fresh_gemini_36_flash_high_read_only_a5_b4_code_veto",
+  "reasons": [
+    "worker_slot_inventory_missing:deepseek-flash-workers"
+  ],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "docs/emr4-model-required-bureau-a5-b4-command-runtime-plan.md revision 3, its threat-model delta, passing plan veto and the A5.1 Sol recovery lease control the review. Deterministic integration gates pass, including the 389-test widened command/event suite, 80 related maintenance/A3 tests, canonical fast and Bandit profiles, Ruff, compilation, whitespace and the disposable one-head migration lifecycle. The exact review question and exclusions are frozen in model-required-bureau-a5-b4-code-veto-packet.md.",
+    "current_authority_allocation": "Gemini 3.6 Flash/high through a fresh Antigravity project receives read-only independent veto authority over repository code, tests and authored-synthetic evidence only. GPT Sol retains acceptance and integration. The reviewer receives no implementation, self-acceptance, provider/runtime, patient/product-data, deployment, release, Pages or protected-ref authority.",
+    "git_refs_and_worktree": "The active task branch and candidate HEAD are exactly c93bbfa7e656a97a85c5b4532525caa362c6c781. The main worktree is tracked-clean with preserved untracked user/evidence files. Local/origin master and handoff/current remain protected and aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. A new codex/review- prefixed detached worktree will be created at the exact candidate HEAD and must pass the executable clean/exact-head preflight before launch.",
+    "live_handover_current_baton": "The live baton requires a fresh independent code veto after Sol integrates and deterministically verifies the paired Bureau A5.1 Rayleen check-in and Bureau B4.1 Davida default-location command runtime. The integrated candidate is committed but remains unaccepted pending this veto.",
+    "protected_evidence_boundaries": "The review is repository-code-only and provider-free. Protected holdouts, historical PHI, patient/clinical/participant/product-derived/protected/production data, provider configuration or calls, docs/branding, external event delivery, deployment, release, Pages and protected refs are excluded. The reviewer must not enumerate protected fixtures and must leave the exact worktree unchanged."
+  },
+  "status": "revision_required",
+  "worker_dispatch_permitted": false
+}

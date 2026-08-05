@@ -53,8 +53,11 @@ ACTIVE_LABELS = (
     "Model-required Bureau Gate zero acceptance",
     "Model-required Bureau A3/B3 terminal-reconciliation acceptance",
     "Model-required Bureau A3/B3 request-contract recovery acceptance",
+    "Model-required Bureau A4 product-read/UI acceptance",
+    "Model-required Bureau A5.1/B4.1 command runtime acceptance",
     "Current result",
     "Next implementation",
+    "Future Consultant clinical direction",
 )
 
 

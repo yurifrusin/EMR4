@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 212,
+  "graph_revision": 213,
   "harvests": [],
   "nodes": [
     {
@@ -12231,9 +12231,106 @@
         "Patient, clinical, product-derived and production data remain closed.",
         "Deployment, production, release, Pages, protected refs and protected evidence remain closed."
       ]
+    },
+    {
+      "id": "model-required-bureau-a5-b4-command-runtime",
+      "title": "Rayleen Check-In and Davida Default-Location Commands",
+      "kind": "implementation",
+      "status": "accepted",
+      "created_at": "2026-08-05T10:00:00Z",
+      "updated_at": "2026-08-05T10:00:00Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "c93bbfa7e656a97a85c5b4532525caa362c6c781",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "model-required-bureau-a3-b3-request-contract-recovery",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "A5.1 and B4.1 pass only for default-off authored-synthetic practices.",
+          "Backend-owned human confirmation, idempotency and atomic audit/event-or-outbox remain mandatory.",
+          "AER-0021 closed through the named recovery lease; AER-0022 preserves the corrected auth transport timeout.",
+          "Standing programme authority opens provider-free C4 planning, not a live actuator."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-model-required-bureau-a5-b4-command-runtime",
+          "source": "docs/emr4-model-required-bureau-a5-b4-command-runtime-closeout.md",
+          "status": "accepted",
+          "summary": "Accept one Rayleen check-in and one Davida default-location command runtime at their separate default-off synthetic boundaries."
+        }
+      ],
+      "claim_scope": [
+        "A5.1 Receptionist check-in truth, audit and patient-free event commit atomically.",
+        "B4.1 human-confirmed default-location truth, audit and unpublished patient-free outbox commit atomically.",
+        "Fresh Gemini code veto passed 261 tests on the exact unchanged clean candidate.",
+        "No product-runtime provider, patient/product data, autonomous or external effect is established."
+      ],
+      "contract_evidence": [
+        {
+          "contract_id": "combined-patient-practitioner-time-duration-intent",
+          "status": "satisfied",
+          "evidence": [
+            "tests/test_bernie_reception_one_combined_scope.py",
+            "tests/test_model_required_bureau_a5_1_check_in_runtime.py"
+          ],
+          "note": "The dedicated check-in command adds no private intent grammar and preserves the inherited combined-scope Diary contract."
+        },
+        {
+          "contract_id": "committed-reschedule-availability-reconciliation",
+          "status": "satisfied",
+          "evidence": [
+            "tests/test_reception_one_availability_reconciliation.py",
+            "tests/test_model_required_bureau_a5_1_check_in_runtime.py",
+            "docs/emr4-model-required-bureau-a5-b4-command-runtime-closeout.md"
+          ],
+          "note": "The new event family is isolated by exact event type; the existing reschedule feed and availability reconciliation remain green."
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/emr4-model-required-bureau-a5-b4-command-runtime-plan.md",
+          "docs/emr4-rayleen-davida-controlled-recovery-development-plan.md",
+          "docs/security/emr4-model-required-bureau-a5-b4-command-runtime-threat-model-delta.md",
+          "docs/model-required-bureau-a5-b4-a5-worker-recovery-lease.md"
+        ],
+        "findings": [
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json"
+        ],
+        "closeouts": [
+          "docs/emr4-model-required-bureau-a5-b4-command-runtime-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/model-required-bureau-a5-b4-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/antigravity/model-required-bureau-a5-b4-code-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_bernie_reception_one_combined_scope.py",
+          "tests/test_reception_one_availability_reconciliation.py",
+          "tests/test_model_required_bureau_a5_1_check_in_runtime.py",
+          "tests/test_model_required_bureau_b4_1_default_location_runtime.py"
+        ]
+      },
+      "unresolved_gates": [
+        "C4 remains provider-free authored-synthetic simulation with no real target or external actuator.",
+        "C5 live development recovery requires a separately exact target and authority.",
+        "Patient-facing Rayleen, product/clinical data and ordinary-practice enablement remain closed.",
+        "External event delivery, further command families and update activation remain closed.",
+        "Production, deployment, release, Pages, protected refs and protected evidence remain closed."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-04T14:00:00Z"
+  "updated_at": "2026-08-05T10:00:00Z"
 }

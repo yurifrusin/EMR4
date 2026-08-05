@@ -1,0 +1,27 @@
+{
+  "schema_version": "emr4.antigravity_auth_transport_failure.v1",
+  "attempt_id": "model-required-bureau-a5-b4-code-review-auth-001",
+  "observed_on": "2026-08-05",
+  "candidate_head": "c93bbfa7e656a97a85c5b4532525caa362c6c781",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/model-required-bureau-a5-b4-code-review",
+  "branch": "codex/review-model-required-bureau-a5-b4-code",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "requested_model": "gemini-3.6-flash-high",
+  "reasoning_effort": "high",
+  "reason_code": "antigravity_authentication_timeout",
+  "review_prompt_transmitted": false,
+  "reviewer_decision_produced": false,
+  "worker_receipt_written": false,
+  "candidate_head_after": "c93bbfa7e656a97a85c5b4532525caa362c6c781",
+  "candidate_worktree_clean_after": true,
+  "raw_authorization_url_retained": false,
+  "authorization_code_or_credential_retained": false,
+  "corrected_attempt": {
+    "fresh_process": true,
+    "same_exact_candidate": true,
+    "authentication_restored_by_human": true,
+    "receipt": "orchestration/agent_inbox/antigravity/model-required-bureau-a5-b4-code-review-receipt.json",
+    "decision": "pass"
+  },
+  "claim_boundary": "This records an Antigravity OAuth transport timeout before review admission, not a model reasoning failure or a candidate defect."
+}

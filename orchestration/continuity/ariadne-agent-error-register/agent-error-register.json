@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 15,
+  "register_revision": 16,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-05",
@@ -808,16 +808,54 @@
       "recurrence_signature": "implementer.out_of_packet_owned_path",
       "causal_claim_level": "observation_only",
       "correction": {
-        "status": "control_implemented_pending_acceptance",
-        "action": "Sol preserves the worker receipt and commit as untrusted, explicitly assumes ownership of the necessary closed diary-event schema change through a recovery lease, and will reconcile inventory tests and the cross-lane migration chain before deterministic and fresh independent verification.",
+        "status": "recovery_lease_applied",
+        "action": "Sol preserved the worker receipt and commit as untrusted, explicitly assumed ownership of the necessary closed diary-event schema through the named recovery lease, repaired the integrated runtime and migration/API-spine seams, passed deterministic acceptance, and obtained a fresh exact-HEAD Gemini 3.6 Flash/high code veto with one pass and a clean unchanged worktree.",
         "prevention_control": "Before worker acceptance, compare the exact committed path set mechanically with the packet-owned path set; any extra path rejects worker self-closeout and requires either removal or a named Sol recovery lease with risk-proportional independent review.",
         "evidence_paths": [
           "docs/ariadne-agent-error-correction-register-revision-15.md",
+          "docs/ariadne-agent-error-correction-register-revision-16.md",
           "docs/model-required-bureau-a5-b4-a5-worker-recovery-lease.md",
-          "tests/test_ariadne_agent_error_register.py"
+          "orchestration/agent_inbox/antigravity/model-required-bureau-a5-b4-code-review-receipt.json"
         ]
       },
-      "status": "open"
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0022",
+      "attempt_id": "model-required-bureau-a5-b4-code-review-auth-001",
+      "observed_on": "2026-08-05",
+      "tranche": "model-required-bureau-a5-b4-command-runtime",
+      "origin": "transport",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-6-high-verifier",
+      "model": "gemini-3.6-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "transport_timeout",
+      "process_severity": "moderate",
+      "expected_invariant": "A fresh exact-HEAD Antigravity verifier transport must authenticate, return one non-transferable review receipt or fail with sanitized explicit containment while leaving the candidate unchanged.",
+      "observed_error": "The first final-code-veto process required Google OAuth restoration and timed out after 60 seconds before review admission, producing no reviewer decision and no worker receipt while the exact candidate remained clean and unchanged.",
+      "detection_method": "The launcher returned authentication_required then authentication timed out; Sol verified the requested receipt was absent and re-ran the exact-head/clean postcondition before admitting any corrected review.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/model-required-bureau-a5-b4-code-review-1-auth-transport-failure.json",
+        "orchestration/agent_inbox/codex/model-required-bureau-a5-b4-verifier-worktree-preflight.json"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "transport.antigravity_oauth_timeout_without_closeout",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "The failed transport was preserved without raw OAuth material. After human authentication restoration, a fresh Antigravity process reviewed the same exact clean candidate, returned exactly one pass and left HEAD and the worktree unchanged.",
+        "prevention_control": "Authentication failures remain transport incidents with no inferred reviewer decision; preserve a sanitized failure, require human credential restoration, then use a fresh process and reverify exact HEAD, clean status and single-decision admission.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-16.md",
+          "orchestration/agent_inbox/antigravity/model-required-bureau-a5-b4-code-review-receipt.json"
+        ]
+      },
+      "status": "corrected"
     }
   ]
 }

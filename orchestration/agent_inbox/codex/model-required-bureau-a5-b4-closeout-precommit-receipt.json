@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_a5_b4_acceptance_closeout_on_non_protected_task_branch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "A5.1/B4.1 plan revision 3, its threat-model delta, the A5 recovery lease, deterministic acceptance, register revision 16, fresh Gemini receipt, closeout and Sol acceptance control this commit. The 389-test widened regression suite, 69-test canonical fast profile, canonical Bandit profile, migration lifecycle and focused continuity/error/Compass tests pass.",
+    "current_authority_allocation": "GPT Sol owns acceptance, explicit-path task-branch commit/push and immediate continuation. DeepSeek V4 Flash/high worker results remain provenance; Gemini 3.6 Flash/high supplied the fresh read-only exact-HEAD veto. No protected integration, provider product-runtime, live actuator, deployment, release or Pages authority is allocated.",
+    "git_refs_and_worktree": "The active task branch is codex/ariadne-bernie-davida-parallel-seam at c93bbfa7e656a97a85c5b4532525caa362c6c781 before the closeout commit. Local/origin master and handoff/current remain protected and aligned at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Explicit-path staging will include only the A5/B4 closeout, continuity, register revision 16, sanitized review transport evidence and their tests/receipts.",
+    "live_handover_current_baton": "The live baton now records model_required_bureau_a5_b4_command_runtime_pass at accepted source HEAD c93bbfa7e656a97a85c5b4532525caa362c6c781 and names the provider-free C4 allowlisted-actuator simulator as the next planned lane under standing authority.",
+    "protected_evidence_boundaries": "No protected holdout, historical PHI, patient/clinical/participant/product-derived/protected/production data, provider product-runtime call, live actuator, external event delivery, deployment, release, Pages or protected-ref movement occurred. docs/branding and unrelated existing pre-push/postrestoration receipt-state files remain untracked and excluded. No raw OAuth URL, authorization code or credential is retained."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}
