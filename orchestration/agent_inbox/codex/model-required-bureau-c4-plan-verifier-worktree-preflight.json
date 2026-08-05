@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/model-required-bureau-c4-plan-review",
+  "branch": "codex/review-model-required-bureau-c4-plan",
+  "head": "febe4c47094e626ae58f1a84514fc86a43fa9b26",
+  "expected_head": "febe4c47094e626ae58f1a84514fc86a43fa9b26",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

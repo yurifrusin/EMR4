@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_c4_plan_review_lineage_before_worker_dispatch",
+  "source_evidence": {
+    "live_handover_current_baton": "C4 is the exact next descendant after accepted A5.1/B4.1. Its provider-free authored-synthetic allowlisted-actuator simulator plan is frozen and has now passed the mandatory independent architecture/security veto.",
+    "current_authority_allocation": "Sol owns acceptance, integration and recovery. Gemini 3.6 Flash/high completed its read-only veto and has no further authority. After review lineage is committed, one DeepSeek V4 Flash/high worker may implement only the frozen C4 packet in a distinct non-protected worktree. No lane has live target, product-runtime, protected-ref, deployment or release authority.",
+    "active_plan_and_acceptance": "Fresh Antigravity receipt SHA-256 22da7d1b76944126e24488dc9fc974b4a2b128f15e033806b1b0c16c8a17e744 records exactly one pass at candidate febe4c47094e626ae58f1a84514fc86a43fa9b26. Gemini found no material issue, passed 193 serial tests, confirmed zero candidate-runtime side effects and non-zero development source-review transport, and left the exact review worktree clean and unchanged. The pre-verifier receipt SHA-256 is a6c34cc2ec6180a2baa3b923c1816eeaee6f48ab275d5735330284b3684c369b.",
+    "protected_evidence_boundaries": "The passed result establishes only implementation-dispatch readiness for one local in-memory authored-synthetic simulator. Holdouts v1-v10, docs/branding, patient/clinical/product-derived/participant/protected/production data, real targets and credentials, product/provider runtime, external effects, C5, deployment, release, Pages and protected refs remain closed. Only the exact review packet, preflight, receipts and runtime states are eligible for explicit staging.",
+    "git_refs_and_worktree": "Primary task HEAD remains exact reviewed candidate febe4c47094e626ae58f1a84514fc86a43fa9b26. Review worktree C:/Users/sarashera/EMR4-worktrees/model-required-bureau-c4-plan-review remains clean on codex/review-model-required-bureau-c4-plan at that exact head. Local/origin master and handoff/current remain exact protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. All unrelated untracked files remain preserved and excluded."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "c4_plan_review_precommit_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol verified the reviewer receipt, exact unchanged head and clean isolated worktree."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent has C4 authority."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["Fresh Gemini 3.6 Flash/high returned one pass and closed its read-only plan veto."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["One bounded implementation lane becomes eligible only after this review lineage commit and a fresh pre-dispatch receipt."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code is not selected or used."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Claude model lane is assigned; Claude Code bare is only the future DeepSeek transport wrapper."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
