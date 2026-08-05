@@ -912,14 +912,35 @@ class C5SharedStore:
             self.provider_attempts[correlation_id] = state
             return state
 
-    def record_provider_failure(self, correlation_id: str, failure_kind: str) -> None:
+    def record_provider_failure(
+        self,
+        correlation_id: str,
+        failure_kind: str,
+        *,
+        correction_ticket: Optional[dict[str, Any]] = None,
+    ) -> None:
         if failure_kind not in {"schema", "transport", "admission"}:
             raise ValueError("invalid provider failure kind")
         with self.transaction_lock:
             state = self.provider_attempts.get(correlation_id)
-            if state is None or state.state != "reserved" or state.call_count != 0:
+            if state is None:
                 raise ValueError("provider failure is not eligible")
-            state.call_count = 1
+            if state.state == "reserved" and state.call_count == 0:
+                if correction_ticket is not None:
+                    raise ValueError("primary failure cannot consume a correction ticket")
+                state.call_count = 1
+            elif state.state == "correction_eligible" and state.call_count == 1:
+                if (
+                    not isinstance(correction_ticket, dict)
+                    or correction_ticket.get("ticket_id")
+                    != state.correction_ticket_id
+                    or canonical_sha256(correction_ticket)
+                    != state.correction_ticket_digest
+                ):
+                    raise ValueError("correction failure ticket mismatch")
+                state.call_count = 2
+            else:
+                raise ValueError("provider failure is not eligible")
             state.state = "closed_failed"
 
     def record_provider_candidate(

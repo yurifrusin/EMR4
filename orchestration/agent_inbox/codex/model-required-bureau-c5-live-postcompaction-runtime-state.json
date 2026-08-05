@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "prepare_the_distinct_exact_head_c5_live_preexecution_boundary_and_frozen_serial_rehearsal",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records model_required_bureau_c5_provider_free_implementation_readiness_pass as the current result. The task branch acceptance commit is 5c17c429bde1c44b80bfb8d4e76aafdb48bc8c81, the accepted implementation source is d82de54ba59071d231adbf45a3aae1bbc0642ff4, no C5 live candidate-runtime effect has occurred, and the immediate successor is the distinct exact-head pre-execution boundary followed by the frozen serial C5 rehearsal. Practice Context Fabric is the permanent provider-free successor after accepted C5 live completion, with implementation still unstarted.",
+    "current_authority_allocation": "GPT Sol owns the frozen serial C5 live sequence, exact boundary derivation, evidence interpretation, recovery, acceptance and task-branch integration. The live sequence remains Sol-owned because its provider ledger, target process, inherited socket, port, task directory and one-use authority state are serial and shared. Gemini 3.6 Flash/high remains eligible only for a fresh deterministic-gated read-only veto if new material live-runner source is required. No worker, reviewer or provider receives approval, actuator, acceptance, integration, deployment or protected-ref authority.",
+    "active_plan_and_acceptance": "The controlling frozen C5 plan, threat-model delta, provider-free implementation-readiness closeout, Sol acceptance and fresh Gemini exact-head pass bind one authored-synthetic loopback target, one exact termination fault, the Sydney Vertex gemini-2.5-flash positive-thinking envelope, strict proofreader and deterministic authority, one-use allowlisted actuator, generation-2 fresh readback, rollback and complete cleanup. Readiness does not itself claim a live result. The next safe action is to inspect the accepted provider transport and C5 controller interfaces, implement only any missing source-bound live orchestration under that frozen envelope, run provider-free gates and any required fresh veto, then create the distinct pre-execution receipt before live action.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10, historical PHI, patient, clinical, participant, product-derived, protected and production data; real databases; ordinary product services and runtime; provider tools or retrieval; raw prompts, responses or thoughts; credential and IAM mutation; deployment; production; release; Pages; protected evidence and protected-ref movement remain closed. No provider or C5 target capability is opened by this receipt. docs/branding/ and every unrelated untracked receipt/state file remain preserved and excluded; Git staging remains explicit-path only.",
+    "git_refs_and_worktree": "After a fresh origin fetch, the primary worktree is on codex/ariadne-bernie-davida-parallel-seam at exact HEAD 5c17c429bde1c44b80bfb8d4e76aafdb48bc8c81, seven commits ahead of origin task ref 8bd1b315392378cfd7b0e67ec9cc66f5ad7e7a6f, with a clean tracked tree and only preserved untracked paths. Local/origin master and local/origin handoff/current are all exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. No protected ref will move in this tranche."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "c5_live_postcompaction_five_source_rehydration",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed the fresh post-compaction five-source rehydration and is continuing into the C5 live-preexecution tranche without a ceremonial pause."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The accepted exact-head source veto is complete; any newly added material live-runner source will require its own fresh deterministic-gated review before live execution."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["The historical C5 worker remains rejected provenance; the serial live orchestration is retained by Sol under the accepted worker-economy rule."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Deep Code remains an unused real-TTY fallback."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Claude Code bare carried only the historical rejected worker transport and is not selected for the tightly coupled serial live tranche."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No new native subagent is assigned because the next action is serial, stateful and tightly coupled to one live provider ledger and disposable target."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

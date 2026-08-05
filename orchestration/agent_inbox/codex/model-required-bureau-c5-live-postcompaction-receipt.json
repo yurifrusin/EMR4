@@ -1,0 +1,25 @@
+{
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "planned_action": "prepare_the_distinct_exact_head_c5_live_preexecution_boundary_and_frozen_serial_rehearsal",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:a782dd86ae9efaafad3969aec2f4a9e3b2f2a7d01151f56b43a1eecfda996045",
+  "source_evidence": {
+    "active_plan_and_acceptance": "The controlling frozen C5 plan, threat-model delta, provider-free implementation-readiness closeout, Sol acceptance and fresh Gemini exact-head pass bind one authored-synthetic loopback target, one exact termination fault, the Sydney Vertex gemini-2.5-flash positive-thinking envelope, strict proofreader and deterministic authority, one-use allowlisted actuator, generation-2 fresh readback, rollback and complete cleanup. Readiness does not itself claim a live result. The next safe action is to inspect the accepted provider transport and C5 controller interfaces, implement only any missing source-bound live orchestration under that frozen envelope, run provider-free gates and any required fresh veto, then create the distinct pre-execution receipt before live action.",
+    "current_authority_allocation": "GPT Sol owns the frozen serial C5 live sequence, exact boundary derivation, evidence interpretation, recovery, acceptance and task-branch integration. The live sequence remains Sol-owned because its provider ledger, target process, inherited socket, port, task directory and one-use authority state are serial and shared. Gemini 3.6 Flash/high remains eligible only for a fresh deterministic-gated read-only veto if new material live-runner source is required. No worker, reviewer or provider receives approval, actuator, acceptance, integration, deployment or protected-ref authority.",
+    "git_refs_and_worktree": "After a fresh origin fetch, the primary worktree is on codex/ariadne-bernie-davida-parallel-seam at exact HEAD 5c17c429bde1c44b80bfb8d4e76aafdb48bc8c81, seven commits ahead of origin task ref 8bd1b315392378cfd7b0e67ec9cc66f5ad7e7a6f, with a clean tracked tree and only preserved untracked paths. Local/origin master and local/origin handoff/current are all exactly protected 2e34bdad732fdab32fbf778280b3d3c70d66d602. No protected ref will move in this tranche.",
+    "live_handover_current_baton": "AGENTS.md records model_required_bureau_c5_provider_free_implementation_readiness_pass as the current result. The task branch acceptance commit is 5c17c429bde1c44b80bfb8d4e76aafdb48bc8c81, the accepted implementation source is d82de54ba59071d231adbf45a3aae1bbc0642ff4, no C5 live candidate-runtime effect has occurred, and the immediate successor is the distinct exact-head pre-execution boundary followed by the frozen serial C5 rehearsal. Practice Context Fabric is the permanent provider-free successor after accepted C5 live completion, with implementation still unstarted.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10, historical PHI, patient, clinical, participant, product-derived, protected and production data; real databases; ordinary product services and runtime; provider tools or retrieval; raw prompts, responses or thoughts; credential and IAM mutation; deployment; production; release; Pages; protected evidence and protected-ref movement remain closed. No provider or C5 target capability is opened by this receipt. docs/branding/ and every unrelated untracked receipt/state file remain preserved and excluded; Git staging remains explicit-path only."
+  },
+  "status": "passed",
+  "worker_dispatch_permitted": true
+}

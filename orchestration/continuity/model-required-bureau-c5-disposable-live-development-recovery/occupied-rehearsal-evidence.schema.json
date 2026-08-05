@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/c5-occupied-rehearsal-evidence.v1.json",
+  "title": "Sanitized C5 occupied rehearsal evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "terminal_reason_code",
+    "evidence_label",
+    "source_head",
+    "preexecution_receipt_sha256",
+    "provider_preflight",
+    "provider_ledger",
+    "frame_digest",
+    "candidate_digest",
+    "proofreader",
+    "approval_sha256",
+    "execution_evidence_sha256",
+    "attempt_receipt",
+    "cleanup_receipt",
+    "operation_counters",
+    "retention",
+    "claim_boundary",
+    "completed_at"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.c5_occupied_rehearsal_evidence.v1"},
+    "result": {"enum": ["model_required_bureau_c5_disposable_live_development_recovery_pass", "model_required_bureau_c5_disposable_live_development_recovery_terminal_failure"]},
+    "terminal_reason_code": {"type": ["string", "null"], "pattern": "^[a-z0-9_]+$"},
+    "evidence_label": {"const": "occupied_authored_synthetic_disposable_live_development_recovery"},
+    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "preexecution_receipt_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "provider_preflight": {"type": "object"},
+    "provider_ledger": {"type": "object"},
+    "frame_digest": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "candidate_digest": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "proofreader": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["admitted", "reason_codes", "correction_ticket_used"],
+      "properties": {
+        "admitted": {"type": "boolean"},
+        "reason_codes": {"type": "array", "maxItems": 8, "items": {"type": "string", "pattern": "^[A-Z0-9_]+$"}},
+        "correction_ticket_used": {"type": "boolean"}
+      }
+    },
+    "approval_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "execution_evidence_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "attempt_receipt": {"type": ["object", "null"]},
+    "cleanup_receipt": {"type": "object"},
+    "operation_counters": {"type": "object"},
+    "retention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["raw_prompt_retained", "raw_response_retained", "provider_text_retained", "thought_content_retained", "credential_or_token_retained", "patient_or_product_data_retained"],
+      "properties": {
+        "raw_prompt_retained": {"const": false},
+        "raw_response_retained": {"const": false},
+        "provider_text_retained": {"const": false},
+        "thought_content_retained": {"const": false},
+        "credential_or_token_retained": {"const": false},
+        "patient_or_product_data_retained": {"const": false}
+      }
+    },
+    "claim_boundary": {
+      "const": "disposable_authored_synthetic_live_development_recovery_only_not_product_database_deployment_production_release_or_sovereignty_evidence"
+    },
+    "completed_at": {"type": "string", "format": "date-time"}
+  }
+}

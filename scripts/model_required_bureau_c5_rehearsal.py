@@ -2,10 +2,11 @@
 
 This module implements the real capability adapters and controller logic for
 the frozen C5 disposable live-development-recovery foundation.  The capability
-adapters are implemented but **never invoked** in this worker tranche: no
-process is started, no socket is bound/connected, no port is allocated, no
-directory is created/removed and no provider is called.  All worker tests and
-acceptance generation use provider-free fakes and exact operation counters.
+adapters are implemented but remain inert in provider-free readiness and test
+tranches.  The separately source-gated live runner may invoke them only after
+the frozen deterministic and independent pre-execution gates pass.  All
+ordinary tests and acceptance generation use provider-free fakes and exact
+operation counters.
 
 The real process adapter uses only an argument-array process API with
 ``shell=False`` semantics.  It resolves and hashes the exact repository
@@ -27,6 +28,7 @@ import re
 import secrets
 import subprocess  # nosec B404  # real adapter; never invoked in this tranche
 import tempfile
+import time
 from dataclasses import dataclass, replace
 from datetime import datetime, timezone
 from pathlib import Path
@@ -422,6 +424,31 @@ class HttpReadbackProbe:
         finally:
             conn.close()
 
+    def probe_until_healthy(
+        self,
+        host: str,
+        port: int,
+        path: str,
+        *,
+        deadline_seconds: float = 2.0,
+    ) -> dict[str, Any]:
+        """Retry only connection-refused while an exact owned child starts.
+
+        Any response, scope error or other transport error returns or raises
+        immediately.  The bounded wait never changes the target, port or
+        request and is not used for post-fault absence or cleanup proofs.
+        """
+        if deadline_seconds <= 0 or deadline_seconds > 5:
+            raise ValueError("health readiness deadline drift")
+        deadline = time.monotonic() + deadline_seconds
+        while True:
+            observation = self.probe(host, port, path)
+            if observation.get("status") != "connection_refused":
+                return observation
+            if time.monotonic() >= deadline:
+                return observation
+            time.sleep(0.025)
+
     def any_listener(self, *, port: int) -> bool:
         return self.probe(HOST, port, HEALTH_PATH).get("status") != "connection_refused"
 
@@ -804,7 +831,12 @@ class LiveRecoveryController:
             self._last_port = port
             self._record_operation(self.process, "process_starts", "started")
             proc_disposition = self.process.observe_process(handle).get("disposition")
-            http_observation = self.http.probe(HOST, port, HEALTH_PATH)
+            readiness_probe = getattr(self.http, "probe_until_healthy", None)
+            http_observation = (
+                readiness_probe(HOST, port, HEALTH_PATH)
+                if callable(readiness_probe)
+                else self.http.probe(HOST, port, HEALTH_PATH)
+            )
             self._record_operation(
                 self.http, "socket_connects", str(http_observation.get("status"))
             )
@@ -870,12 +902,21 @@ class LiveRecoveryController:
             raise ValueError("baseline handle is absent")
         if self.process.observe_process(self._last_handle).get("disposition") != "absent":
             raise ValueError("baseline process is not absent")
+        baseline_handle = self._last_handle
         reservation = self.port_allocator.reserve_exact(self._last_port)
         self._record_operation(self.port_allocator, "socket_binds", "bound_exact")
         self._record_operation(self.port_allocator, "port_allocations", "allocated_exact")
         if reservation.host != HOST or reservation.port != self._last_port:
             reservation.close()
             raise ValueError("recovery port reservation drift")
+        close = getattr(self.process, "close", None)
+        if callable(close):
+            try:
+                close(baseline_handle)
+            except Exception:
+                reservation.close()
+                raise
+        self._last_handle = None
         self._last_reservation = reservation
         self.store.launch_state = "recovery_port_reserved"
         return reservation.port
@@ -1164,7 +1205,12 @@ class LiveRecoveryController:
                     or not _OBSERVATION_ID_RE.match(process_observation["observation_id"])
                 ):
                     raise RuntimeError("fresh process readback mismatch")
-                http_observation = self.http.probe(HOST, port, HEALTH_PATH)
+                readiness_probe = getattr(self.http, "probe_until_healthy", None)
+                http_observation = (
+                    readiness_probe(HOST, port, HEALTH_PATH)
+                    if callable(readiness_probe)
+                    else self.http.probe(HOST, port, HEALTH_PATH)
+                )
                 self._record_operation(self.http, "socket_connects", str(http_observation.get("status")))
                 if fault == "readback_failed":
                     http_observation = {"status": 503, "body": "{}"}

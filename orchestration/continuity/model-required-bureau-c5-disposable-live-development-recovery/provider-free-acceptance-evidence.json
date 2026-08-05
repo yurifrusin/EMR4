@@ -50,8 +50,8 @@
     "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/system-anatomy-frame-set.example.json": "7ce28953eb1b48531b452ab9f084668653896864aace65fc1ccf36a09d110a2b",
     "orchestration/continuity/model-required-bureau-c5-disposable-live-development-recovery/system-anatomy-frame-set.schema.json": "d1478c372f61ba6e34d51891fe44932310814653556128fdae35150959ead525",
     "scripts/model_required_bureau_c5_acceptance.py": "430996fe0f6b3735d1e0343b7f5fcb3cd5919dd8f7f71a68c23aeae9af594884",
-    "scripts/model_required_bureau_c5_contract.py": "262c2183ed74cc45be5b191699981457e1ac0d19600744b46c744a9e35fd7d4c",
-    "scripts/model_required_bureau_c5_rehearsal.py": "0b2ecfa9e483f8f891cff66a8499f8137d66726c36347aec7712c094164abcaf",
+    "scripts/model_required_bureau_c5_contract.py": "bda1ef03cf3db4749eaa370f7baf72e9a331dc44ace0d4540ecbab137b969547",
+    "scripts/model_required_bureau_c5_rehearsal.py": "4d0ef3e1d9c0f6e8c5ef5335db8dc83f026452530425cf734c1effb633c49a54",
     "scripts/model_required_bureau_c5_target.py": "a45dd29f2b1bdd4fc70b5bce0a22d6893b295b4001cf22949cd2d2d2927dbd4b"
   },
   "candidate_parsing_and_proofreading": {
@@ -75,7 +75,7 @@
   },
   "candidate_source_binding": {
     "artifact_count": 24,
-    "artifact_set_sha256": "d9a74f27da56b1b57914f5e70a8602a002079cfd342ec5e51b760b052be64e8f",
+    "artifact_set_sha256": "02d584037707e5ef01db9a6b4cdedb7ff11a87e13d406cf3cacefe3c489dcd02",
     "binding_kind": "repository_relative_artifact_sha256_set",
     "embedded_git_head": false,
     "exact_git_head_bound_by_external_review_receipt": true
@@ -330,6 +330,7 @@
         "socket",
         "subprocess",
         "tempfile",
+        "time",
         "typing"
       ],
       "target": [

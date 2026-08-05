@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/c5-live-preexecution-receipt.v1.json",
+  "title": "C5 exact-head live pre-execution receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "source_head",
+    "branch",
+    "tracked_clean",
+    "protected_refs",
+    "plan_sha256",
+    "policy_digest",
+    "catalog_digest",
+    "source_review",
+    "ariadne_receipt",
+    "provider",
+    "target",
+    "artifact_hashes",
+    "artifact_set_sha256",
+    "created_at",
+    "expires_at"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.c5_live_preexecution_receipt.v1"},
+    "status": {"const": "passed"},
+    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "branch": {"const": "codex/ariadne-bernie-davida-parallel-seam"},
+    "tracked_clean": {"const": true},
+    "protected_refs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["master", "handoff_current", "origin_master", "origin_handoff_current"],
+      "properties": {
+        "master": {"const": "2e34bdad732fdab32fbf778280b3d3c70d66d602"},
+        "handoff_current": {"const": "2e34bdad732fdab32fbf778280b3d3c70d66d602"},
+        "origin_master": {"const": "2e34bdad732fdab32fbf778280b3d3c70d66d602"},
+        "origin_handoff_current": {"const": "2e34bdad732fdab32fbf778280b3d3c70d66d602"}
+      }
+    },
+    "plan_sha256": {"const": "9f23396e8facadc5f8f1baa3294ebbcdcaeca0bf71b29f95a7743ac80220ac15"},
+    "policy_digest": {"const": "3c876f12269878f3e36ad6a91c7c014f7dc31da593bc4fc1da34f49a22551450"},
+    "catalog_digest": {"const": "610aa502251720dcc779efc5ceb5cbbf7e2e565970ae9dd811d5c0def64f348a"},
+    "source_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["receipt_path", "receipt_sha256", "status", "transport", "decision", "head_before", "head_after", "dirty_after", "model", "reasoning_effort"],
+      "properties": {
+        "receipt_path": {"type": "string", "pattern": "^repository://orchestration/agent_inbox/antigravity/[a-z0-9._/-]+\\.json$"},
+        "receipt_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "status": {"const": "completed"},
+        "transport": {"const": "antigravity_new_project_bound_readonly_worktree"},
+        "decision": {"const": "pass"},
+        "head_before": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "head_after": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "dirty_after": {"const": false},
+        "model": {"const": "gemini-3.6-flash-high"},
+        "reasoning_effort": {"const": "high"}
+      }
+    },
+    "ariadne_receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["receipt_path", "receipt_sha256", "status", "continuation_event", "planned_action", "rehydration_sources"],
+      "properties": {
+        "receipt_path": {"type": "string", "pattern": "^repository://orchestration/agent_inbox/codex/[a-z0-9._/-]+\\.json$"},
+        "receipt_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "status": {"const": "passed"},
+        "continuation_event": {"const": "pre_sprint_planning"},
+        "planned_action": {"const": "execute_frozen_serial_c5_live_rehearsal"},
+        "rehydration_sources": {
+          "const": [
+            "live_handover_current_baton",
+            "current_authority_allocation",
+            "active_plan_and_acceptance",
+            "protected_evidence_boundaries",
+            "git_refs_and_worktree"
+          ]
+        }
+      }
+    },
+    "provider": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider", "model", "project", "identity", "region", "endpoint", "thinking_budget", "max_output_tokens", "candidate_count", "temperature", "call_limit", "cost_ceiling_usd", "reserved_cost_per_call_usd", "fallback_enabled", "tools_enabled", "retrieval_enabled", "data_class"],
+      "properties": {
+        "provider": {"const": "google_vertex_ai"},
+        "model": {"const": "gemini-2.5-flash"},
+        "project": {"const": "bernie-emr4-dev"},
+        "identity": {"const": "emr4-bernie-ai-dev@bernie-emr4-dev.iam.gserviceaccount.com"},
+        "region": {"const": "australia-southeast1"},
+        "endpoint": {"const": "australia-southeast1-aiplatform.googleapis.com"},
+        "thinking_budget": {"const": 1024},
+        "max_output_tokens": {"const": 2048},
+        "candidate_count": {"const": 1},
+        "temperature": {"const": 0},
+        "call_limit": {"const": 2},
+        "cost_ceiling_usd": {"const": 0.5},
+        "reserved_cost_per_call_usd": {"const": 0.25},
+        "fallback_enabled": {"const": false},
+        "tools_enabled": {"const": false},
+        "retrieval_enabled": {"const": false},
+        "data_class": {"const": "newly_authored_patient_free_c5_technical_frames"}
+      }
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["environment", "kind", "target_id", "host", "fault", "forward_runbook", "rollback_runbook"],
+      "properties": {
+        "environment": {"const": "c5_disposable_authored_synthetic"},
+        "kind": {"const": "task_owned_loopback_http_service"},
+        "target_id": {"const": "synthetic:c5-recovery-target"},
+        "host": {"const": "127.0.0.1"},
+        "fault": {"const": "controller_terminates_owned_child"},
+        "forward_runbook": {"const": "start-c5-disposable-service.v1"},
+        "rollback_runbook": {"const": "stop-c5-disposable-service.v1"}
+      }
+    },
+    "artifact_hashes": {
+      "type": "object",
+      "minProperties": 6,
+      "maxProperties": 32,
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+      "propertyNames": {"pattern": "^[a-zA-Z0-9_./-]+$"}
+    },
+    "artifact_set_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "expires_at": {"type": "string", "format": "date-time"}
+  }
+}
