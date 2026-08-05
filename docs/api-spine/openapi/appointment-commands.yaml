@@ -273,6 +273,66 @@ paths:
               schema:
                 $ref: "#/components/schemas/AppointmentConfirmResultEnvelope"
 
+  /appointments/proposals/check-in/{appointment_id}:
+    post:
+      tags: [AppointmentCommands]
+      operationId: proposeAppointmentCheckIn
+      summary: >
+        Prepare a dedicated A5.1 Rayleen check-in proposal for the exact
+        Booked|Confirmed -> Arrived transition with an optional compatible active
+        waiting area.
+      description: >
+        Default-off, authored-synthetic-practice-only, Receptionist-confirmed
+        command proposal. Non-mutating. Returns one opaque HMAC-signed,
+        maximum-120-second, random-nonce, purpose-bound,
+        actor/practice/appointment/state/waiting-area/freshness-bound evidence
+        token. Does not widen the generic status-confirm route.
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/CorrelationId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AppointmentCheckInProposalCommand"
+      responses:
+        "200":
+          description: Check-in proposal prepared or blocked.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppointmentCheckInProposalEnvelope"
+
+  /appointments/proposals/check-in/confirm:
+    post:
+      tags: [AppointmentCommands]
+      operationId: confirmAppointmentCheckInProposal
+      summary: Confirm one backend-prepared A5.1 Rayleen check-in proposal.
+      description: >
+        Receptionist-confirmed atomic check-in. One transaction updates status to
+        Arrived with the optional assigned area, appends one command-bound audit
+        and one patient-free diary.appointment_checked_in committed event, and
+        completes one bounded idempotency receipt. Same-key replay resolves from
+        the stored receipt before evidence consumption; different-key reuse of
+        the same evidence hash returns confirmation_replay_rejected.
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/CorrelationId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AppointmentCheckInConfirmationCommand"
+      responses:
+        "200":
+          description: Confirmed check-in result, or a blocked confirmation result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppointmentConfirmCheckInResult"
+
   /appointments/proposals/delete:
     post:
       tags: [AppointmentCommands]
@@ -938,6 +998,147 @@ components:
           $ref: "#/components/schemas/SignedConfirmationEvidence"
         signed_confirmation_evidence_required:
           type: boolean
+
+    AppointmentCheckInProposalCommand:
+      type: object
+      required: [meta, appointment_id]
+      additionalProperties: false
+      properties:
+        meta:
+          $ref: "#/components/schemas/CommandMeta"
+        appointment_id:
+          $ref: "#/components/schemas/Uuid"
+        waiting_area_id:
+          $ref: "#/components/schemas/Uuid"
+          description: >
+            Assign only when no waiting area is currently set; omitted/null
+            preserves an existing area and never removes or moves it.
+
+    AppointmentCheckInProposalEnvelope:
+      allOf:
+        - $ref: "#/components/schemas/ProposalEnvelopeBase"
+        - type: object
+          properties:
+            intent:
+              const: check_in_appointment
+            command:
+              type: object
+              additionalProperties: false
+              required: [appointment_id]
+              properties:
+                appointment_id:
+                  $ref: "#/components/schemas/Uuid"
+                waiting_area_id:
+                  $ref: "#/components/schemas/Uuid"
+                waiting_area_id_supplied:
+                  type: boolean
+            check_in_proposal_freshness_id:
+              type: string
+            signed_confirmation_evidence:
+              type: string
+              format: token
+              description: >
+                One opaque patient-free base64url HMAC-signed evidence token with
+                a random nonce, exact purpose and maximum 120-second lifetime.
+                Client-visible structured claims cannot be submitted as a
+                substitute.
+            signed_confirmation_evidence_required:
+              type: boolean
+            evidence_expires_at:
+              type: string
+              format: date-time
+
+    AppointmentCheckInConfirmationCommand:
+      type: object
+      required: [meta, confirmer, confirmed, check_in_proposal, confirmed_warnings, freshness]
+      additionalProperties: false
+      properties:
+        meta:
+          $ref: "#/components/schemas/CommandMeta"
+        confirmer:
+          $ref: "#/components/schemas/ConfirmerRef"
+        confirmed:
+          const: true
+        check_in_proposal:
+          $ref: "#/components/schemas/AppointmentCheckInProposalEnvelope"
+        confirmed_warnings:
+          type: array
+          items:
+            type: string
+        freshness:
+          $ref: "#/components/schemas/FreshnessRef"
+        signed_confirmation_evidence:
+          type: string
+          format: token
+        signed_confirmation_evidence_required:
+          type: boolean
+
+    AppointmentConfirmCheckInResult:
+      type: object
+      required: [intent, safe, requires_confirmation, autonomy_tier, summary, warnings, blocks, audit_evidence]
+      additionalProperties: false
+      properties:
+        intent:
+          const: confirm_check_in_appointment
+        safe:
+          type: boolean
+        requires_confirmation:
+          type: boolean
+        autonomy_tier:
+          type: string
+          enum: [confirmed_write, blocked]
+        summary:
+          type: string
+        receipt:
+          $ref: "#/components/schemas/AppointmentCheckInReceipt"
+        warnings:
+          type: array
+          items:
+            $ref: "#/components/schemas/Issue"
+        blocks:
+          type: array
+          items:
+            $ref: "#/components/schemas/Issue"
+        audit_evidence:
+          type: array
+          items:
+            type: string
+
+    AppointmentCheckInReceipt:
+      type: object
+      additionalProperties: false
+      required:
+        - schema_version
+        - appointment_id
+        - status
+        - waiting_area_id
+        - audit_log_id
+        - event_id
+        - command_id
+        - commit_time
+      properties:
+        schema_version:
+          const: appointment.check_in_receipt.v1
+        appointment_id:
+          $ref: "#/components/schemas/Uuid"
+        status:
+          type: string
+          const: Arrived
+        waiting_area_id:
+          $ref: "#/components/schemas/Uuid"
+        audit_log_id:
+          $ref: "#/components/schemas/Uuid"
+        event_id:
+          $ref: "#/components/schemas/Uuid"
+        command_id:
+          $ref: "#/components/schemas/Uuid"
+        commit_time:
+          type: string
+          format: date-time
+      description: >
+        Bounded, patient-free A5.1 confirmation receipt containing only
+        appointment id, resulting status, resulting waiting-area id, audit id,
+        event id, command id and commit time.
 
     AppointmentDeleteConfirmationCommand:
       type: object

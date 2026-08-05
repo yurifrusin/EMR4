@@ -24,6 +24,12 @@ router = APIRouter(prefix="/api/v1/diary/events", tags=["diary-events"])
 
 _CURSOR_MAX_AGE = timedelta(hours=24)
 _CURSOR_CLOCK_SKEW = timedelta(minutes=5)
+# The committed-event feed is the reschedule-only delivery surface. The A5.1
+# check-in committed event shares the table but is never delivered by this feed.
+# Requiring the exact event type during cursor validation and row selection keeps
+# an interleaved check-in row out of reschedule payload parsing and cursor
+# semantics.
+_RESCHEDULE_EVENT_TYPE = "diary.appointment_rescheduled"
 
 
 def _encode_cursor(
@@ -120,6 +126,7 @@ def read_committed_diary_events(
             db.query(DiaryCommittedEvent.id)
             .filter(
                 DiaryCommittedEvent.practice_id == current_user.practice_id,
+                DiaryCommittedEvent.event_type == _RESCHEDULE_EVENT_TYPE,
                 DiaryCommittedEvent.id == cursor_event_id,
                 DiaryCommittedEvent.occurred_at == cursor_time,
                 DiaryCommittedEvent.expires_at > now,
@@ -147,6 +154,7 @@ def read_committed_diary_events(
         db.query(DiaryCommittedEvent)
         .filter(
             DiaryCommittedEvent.practice_id == current_user.practice_id,
+            DiaryCommittedEvent.event_type == _RESCHEDULE_EVENT_TYPE,
             DiaryCommittedEvent.expires_at > now,
             later_than_cursor,
         )

@@ -5,6 +5,24 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
+class AppointmentCheckedInEventPayload(BaseModel):
+    """Exact patient-free committed payload for diary.appointment_checked_in.v1."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    appointment_id: uuid.UUID
+    practitioner_id: uuid.UUID
+    location_id: uuid.UUID | None = None
+    status_before: Literal["Booked", "Confirmed"]
+    status_after: Literal["Arrived"] = "Arrived"
+    waiting_area_id_before: uuid.UUID | None = None
+    waiting_area_id_after: uuid.UUID | None = None
+    reason_codes: list[Literal["appointment_checked_in"]] = Field(
+        min_length=1,
+        max_length=1,
+    )
+
+
 class AppointmentRescheduledEventPayload(BaseModel):
     model_config = ConfigDict(extra="forbid")
 

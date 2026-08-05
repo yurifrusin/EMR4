@@ -571,6 +571,75 @@ class AppointmentConfirmStatusProposalOut(BaseModel):
     audit_evidence: list[str] = Field(default_factory=list)
 
 
+class AppointmentCheckInProposalIn(BaseModel):
+    """A5.1 dedicated check-in proposal input.
+
+    waiting_area_id may assign only when no waiting area is currently set;
+    omitted/null preserves an existing area and never removes or moves it.
+    """
+
+    waiting_area_id: Optional[uuid.UUID] = None
+
+
+class AppointmentCheckInCommand(BaseModel):
+    appointment_id: uuid.UUID
+    waiting_area_id: Optional[uuid.UUID] = None
+    waiting_area_id_supplied: bool = False
+
+
+class AppointmentCheckInProposalOut(BaseModel):
+    intent: Literal["check_in_appointment"] = "check_in_appointment"
+    safe: bool
+    requires_confirmation: bool
+    autonomy_tier: Literal["execute_with_report", "proposal", "blocked"]
+    summary: str
+    command: AppointmentCheckInCommand
+    warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
+    blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+    confirm_endpoint: Optional[str] = None
+    confirm_payload: Optional[dict[str, Any]] = None
+    check_in_proposal_freshness_id: Optional[str] = None
+    signed_confirmation_evidence: Optional[str] = None
+    signed_confirmation_evidence_required: bool = False
+    evidence_expires_at: Optional[datetime] = None
+
+
+class AppointmentCheckInProposalConfirmationIn(BaseModel):
+    confirmed: bool = False
+    check_in_proposal: AppointmentCheckInProposalOut
+    confirmed_warnings: list[str] = Field(default_factory=list)
+    check_in_proposal_freshness_id: Optional[str] = None
+    signed_confirmation_evidence: Optional[str] = None
+    signed_confirmation_evidence_required: bool = False
+
+
+class AppointmentCheckInReceipt(BaseModel):
+    """Bounded, patient-free A5.1 confirmation receipt serialization."""
+
+    schema_version: Literal["appointment.check_in_receipt.v1"] = (
+        "appointment.check_in_receipt.v1"
+    )
+    appointment_id: uuid.UUID
+    status: AppointmentStatus
+    waiting_area_id: Optional[uuid.UUID] = None
+    audit_log_id: uuid.UUID
+    event_id: uuid.UUID
+    command_id: uuid.UUID
+    commit_time: datetime
+
+
+class AppointmentConfirmCheckInProposalOut(BaseModel):
+    intent: Literal["confirm_check_in_appointment"] = "confirm_check_in_appointment"
+    safe: bool
+    requires_confirmation: bool
+    autonomy_tier: Literal["confirmed_write", "blocked"]
+    summary: str
+    receipt: Optional[AppointmentCheckInReceipt] = None
+    warnings: list[AppointmentProposalIssue] = Field(default_factory=list)
+    blocks: list[AppointmentProposalIssue] = Field(default_factory=list)
+    audit_evidence: list[str] = Field(default_factory=list)
+
+
 class AppointmentDeleteIn(BaseModel):
     cancellation_reason: Optional[str] = Field(None, max_length=500)
     status_reason_code: Optional[str] = Field(default=None, max_length=50)

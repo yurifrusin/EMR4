@@ -119,3 +119,59 @@ components:
           prefixItems:
             - const: appointment_time_changed
           items: false
+    AppointmentCheckedInEvent:
+      type: object
+      additionalProperties: false
+      description: >
+        Declarative patient-free committed event for the A5.1 check-in command.
+        The committed-event feed remains reschedule-only; this event is recorded
+        in the same committed table but is never delivered by this feed and has
+        no consumer, publisher or worker.
+      required:
+        - event_id
+        - event_type
+        - schema_version
+        - source_system
+        - aggregate_id
+        - aggregate_revision
+        - occurred_at
+        - evidence_mode
+        - payload
+      properties:
+        event_id: {type: string, format: uuid}
+        event_type: {const: diary.appointment_checked_in}
+        schema_version: {const: diary.appointment_checked_in.v1}
+        source_system: {const: emr4-diary}
+        aggregate_id: {type: string, format: uuid}
+        aggregate_revision: {type: integer, minimum: 1}
+        occurred_at: {type: string, format: date-time}
+        evidence_mode: {const: authored_synthetic_local}
+        payload:
+          $ref: "#/components/schemas/AppointmentCheckedInPayload"
+    AppointmentCheckedInPayload:
+      type: object
+      additionalProperties: false
+      required:
+        - appointment_id
+        - practitioner_id
+        - location_id
+        - status_before
+        - status_after
+        - waiting_area_id_before
+        - waiting_area_id_after
+        - reason_codes
+      properties:
+        appointment_id: {type: string, format: uuid}
+        practitioner_id: {type: string, format: uuid}
+        location_id: {type: [string, "null"], format: uuid}
+        status_before: {type: string, enum: [Booked, Confirmed]}
+        status_after: {type: string, const: Arrived}
+        waiting_area_id_before: {type: [string, "null"], format: uuid}
+        waiting_area_id_after: {type: [string, "null"], format: uuid}
+        reason_codes:
+          type: array
+          minItems: 1
+          maxItems: 1
+          prefixItems:
+            - const: appointment_checked_in
+          items: false

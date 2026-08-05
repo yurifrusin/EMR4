@@ -109,6 +109,13 @@ class Settings(BaseSettings):
     reception_one_product_context_vertex_evidence_dir: str = ""
     rayleen_a4_product_read_enabled: bool = False
     rayleen_a4_synthetic_practice_ids: str = ""
+    # Default-off A5.1 Rayleen check-in command runtime. This is a dedicated
+    # Receptionist-confirmed Booked|Confirmed -> Arrived command path scoped to
+    # exactly the authored-synthetic practices in the allowlist below. It never
+    # opens the generic status-confirm route, GraphQL mutations, providers,
+    # product data, deployment or release.
+    rayleen_a5_check_in_enabled: bool = False
+    rayleen_a5_check_in_synthetic_practice_ids: str = ""
     rayleen_a4_vertex_selector_enabled: bool = False
     rayleen_a4_vertex_authority_path: str = ""
     rayleen_a4_vertex_preflight_path: str = ""

@@ -40,11 +40,15 @@ class DiaryCommittedEvent(Base):
 
     __table_args__ = (
         CheckConstraint(
-            "event_type = 'diary.appointment_rescheduled'",
+            "event_type IN ('diary.appointment_rescheduled', "
+            "'diary.appointment_checked_in')",
             name="ck_diary_committed_events_type",
         ),
         CheckConstraint(
-            "schema_version = 'diary.appointment_rescheduled.v1'",
+            "(event_type = 'diary.appointment_rescheduled' AND "
+            "schema_version = 'diary.appointment_rescheduled.v1') OR "
+            "(event_type = 'diary.appointment_checked_in' AND "
+            "schema_version = 'diary.appointment_checked_in.v1')",
             name="ck_diary_committed_events_schema",
         ),
         CheckConstraint(
@@ -68,12 +72,25 @@ class DiaryCommittedEvent(Base):
             name="ck_diary_committed_events_correlation",
         ),
         CheckConstraint(
+            "(event_type = 'diary.appointment_rescheduled' AND "
             "jsonb_typeof(payload) = 'object' AND "
             "payload ?& ARRAY['appointment_id', 'practitioner_id', 'location_id', "
             "'start_time', 'end_time', 'reason_codes'] AND "
             "payload - ARRAY['appointment_id', 'practitioner_id', 'location_id', "
             "'start_time', 'end_time', 'reason_codes'] = '{}'::jsonb AND "
-            "payload->'reason_codes' = '[\"appointment_time_changed\"]'::jsonb",
+            "payload->'reason_codes' = '[\"appointment_time_changed\"]'::jsonb) "
+            "OR "
+            "(event_type = 'diary.appointment_checked_in' AND "
+            "jsonb_typeof(payload) = 'object' AND "
+            "payload ?& ARRAY['appointment_id', 'practitioner_id', 'location_id', "
+            "'status_before', 'status_after', 'waiting_area_id_before', "
+            "'waiting_area_id_after', 'reason_codes'] AND "
+            "payload - ARRAY['appointment_id', 'practitioner_id', 'location_id', "
+            "'status_before', 'status_after', 'waiting_area_id_before', "
+            "'waiting_area_id_after', 'reason_codes'] = '{}'::jsonb AND "
+            "payload->'reason_codes' = '[\"appointment_checked_in\"]'::jsonb AND "
+            "payload->>'status_before' IN ('Booked', 'Confirmed') AND "
+            "payload->>'status_after' = 'Arrived')",
             name="ck_diary_committed_events_payload_allowlist",
         ),
         UniqueConstraint(

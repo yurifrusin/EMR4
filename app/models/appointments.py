@@ -214,6 +214,11 @@ class AppointmentCommandIdempotency(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)
     expires_at = Column(DateTime(timezone=True), nullable=True)
+    # A5.1 dedicated check-in command claim. The operation
+    # confirmAppointmentCheckInProposal requires both values; all other existing
+    # operations preserve NULL.
+    confirmation_evidence_hash = Column(String(128), nullable=True)
+    confirmation_evidence_consumed_at = Column(DateTime(timezone=True), nullable=True)
 
     __table_args__ = (
         UniqueConstraint(
@@ -240,10 +245,19 @@ class AppointmentCommandIdempotency(Base):
         ),
         CheckConstraint(
             "NOT (state = 'completed' AND "
-            "operation_id = 'confirmAppointmentCreateProposal' AND "
+            "operation_id IN ('confirmAppointmentCreateProposal', "
+            "'confirmAppointmentCheckInProposal') AND "
             "result_kind = 'confirmed_write') OR "
             "(target_appointment_id IS NOT NULL AND audit_log_id IS NOT NULL)",
             name="ck_appt_cmd_idem_completed_create_correlation",
+        ),
+        CheckConstraint(
+            "NOT (state = 'completed' AND "
+            "operation_id = 'confirmAppointmentCheckInProposal' AND "
+            "result_kind = 'confirmed_write') OR "
+            "(confirmation_evidence_hash IS NOT NULL AND "
+            "confirmation_evidence_consumed_at IS NOT NULL)",
+            name="ck_appt_cmd_idem_completed_check_in_evidence",
         ),
         ForeignKeyConstraint(
             ["practice_id", "target_appointment_id"],
@@ -264,6 +278,14 @@ class AppointmentCommandIdempotency(Base):
             "audit_log_id",
             unique=True,
             postgresql_where=audit_log_id.isnot(None),
+        ),
+        Index(
+            "uq_appt_cmd_idem_evidence_hash",
+            "practice_id",
+            "operation_id",
+            "confirmation_evidence_hash",
+            unique=True,
+            postgresql_where=confirmation_evidence_hash.isnot(None),
         ),
         Index("ix_appt_cmd_idem_practice_session", "practice_id", "bernie_session_id"),
     )

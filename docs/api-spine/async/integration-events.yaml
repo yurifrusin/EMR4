@@ -66,6 +66,7 @@ event_families:
     event_types:
       - diary.appointment_created
       - diary.appointment_rescheduled
+      - diary.appointment_checked_in
       - diary.appointment_cancelled
       - diary.appointment_status_changed
       - diary.proposal_staged
@@ -137,6 +138,43 @@ event_families:
       automatic_proposal_from_event: false
       appointment_mutation_requires_rest_command: true
       staff_confirmation_required_for_mutation: true
+    check_in_committed_event:
+      event_type: diary.appointment_checked_in
+      schema_version: diary.appointment_checked_in.v1
+      producer: dedicated_receptionist_confirmed_check_in_command_only
+      write_transaction: appointment_plus_audit_plus_idempotency_plus_event
+      delivery: none
+      read_route: none
+      consumer: none
+      publisher: none
+      worker: none
+      event_payload_phi: none
+      local_authored_synthetic_only: true
+      enabled_by_default: false
+      reason_codes: [appointment_checked_in]
+      payload_fields:
+        - appointment_id
+        - practitioner_id
+        - location_id
+        - status_before
+        - status_after
+        - waiting_area_id_before
+        - waiting_area_id_after
+        - reason_codes
+      prohibited_payload_fields:
+        - patient_name
+        - phone_number
+        - date_of_birth
+        - medicare_number
+        - appointment_reason_text
+        - appointment_note
+        - free_text_transcript
+        - provider_output
+        - credential
+      command_boundary:
+        event_is_command_authority: false
+        no_consumer_no_publisher_no_worker: true
+        reschedule_feed_remains_event_type_filtered: true
 
   - family_id: caller_id
     research_status: placeholder
